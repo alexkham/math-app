@@ -1132,6 +1132,101 @@
           "status": "pending"
         }
       ]
+    },
+    "functions-domain": {
+      "slug": "domain",
+      "name": "Function Domain Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/domain/index.jsx",
+      "diagramsModule": "app/components/functions/domain/functionDomainDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "quadratic",
+        "cubic",
+        "exponential",
+        "sine",
+        "cosine",
+        "absolute",
+        "logarithmic",
+        "sqrt",
+        "reciprocal"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 11,
+        "sections": 23,
+        "anchors": 58,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "range",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "open interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "closed interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "excluded value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "interval notation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logarithmic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square root function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-sided limit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
     }
   },
   "$stubTemplate": {

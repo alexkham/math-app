@@ -7,11 +7,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// Canonical per-family explanations live in getStaticProps below (SSR/SEO-visible);
-// the component renders them as the info panel's "Family" tab.
 import FunctionDomain from '../../../../app/components/functions/domain/FunctionDomain'
-import domainDiagrams from '../../../../app/components/functions/domain/functionDomainDiagrams'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -52,8 +48,8 @@ The page launches with the logarithmic family. Its domain is $x > 0$ — the fun
       title: `Picking a Function`,
       content: `The picker groups eleven base functions by the **shape of their domain**:
 
-• [Unrestricted](!#functions-defined-on-all-of-the-reals) ($\\mathbb{R}$) — [Identity](!#the-identity-function), [Linear (2x)](!#the-scaled-linear-function), [Quadratic](!#the-quadratic-function), [Cubic](!#the-cubic-function), [Exponential](!#the-exponential-function), [Sine](!#the-sine-function), [Cosine](!#the-cosine-function), [Absolute](!#the-absolute-value-function). All accept every real number as input.
-• [Restricted](!#the-restricted-families) — [Logarithmic](!#the-logarithm-and-its-open-boundary) (domain $x > 0$), [Square root](!#the-square-root-and-its-closed-boundary) (domain $x \\geq 0$), [Reciprocal](!#the-reciprocal-and-its-excluded-point) (domain $x \\neq 0$). Each has a built-in restriction baked into its definition.
+• **Unrestricted** ($\\mathbb{R}$) — Identity, Linear (2x), Quadratic, Cubic, Exponential, Sine, Cosine, Absolute. All accept every real number as input.
+• **Restricted** — Logarithmic (domain $x > 0$), Square root (domain $x \\geq 0$), Reciprocal (domain $x \\neq 0$). Each has a built-in restriction baked into its definition.
 
 The grouping is the pedagogical point. Most functions you encounter in pre-calculus accept any input; the three families that don't are the canonical cases worth studying — and the ones where transformations actually move the domain boundary around. Picking an unrestricted family is useful for contrast: the colored band on the x-axis just extends from $-\\infty$ to $+\\infty$, and changing parameters doesn't move it.
 
@@ -194,125 +190,11 @@ The distinction between open and closed endpoints matters for continuity, limits
       link: '',
     },
 
-    obj11: {
-      title: `Functions Defined on All of the Reals`,
-      content: `Eight of the picker's eleven functions accept every real input: the [identity](!#the-identity-function), the [scaled linear](!#the-scaled-linear-function), the [quadratic](!#the-quadratic-function), the [cubic](!#the-cubic-function), the [exponential](!#the-exponential-function), [sine](!#the-sine-function), [cosine](!#the-cosine-function), and the [absolute value](!#the-absolute-value-function). Their domain bar is one unbroken green band from edge to edge.
-
-For these families the domain story is deliberately boring — and that is worth seeing. Whatever $b$ and $h$ you dial in, an all-of-$\\mathbb{R}$ domain maps onto all of $\\mathbb{R}$ again: shifting or rescaling the whole real line gives back the whole real line. The interesting cases live in the [restricted group](!#the-restricted-families).`,
-      before: ``, after: ``, link: '',
-    },
-    obj12: {
-      title: `The Identity Function`,
-      content: `The identity $f(x) = x$ accepts everything and changes nothing — the baseline case for every domain question.`,
-      before: ``,
-      after: `Its green band spans the axis with no endpoints to mark, and no slider can break it: transformed, the identity just becomes another line, and [lines](!#the-scaled-linear-function) are domain-proof.
-
-Its real use in this tool is as a control: switch here after a restricted family and watch every red mark vanish — the difference you just saw was the function's doing, not the sliders'.`,
-      link: '',
-    },
-    obj13: {
-      title: `The Scaled Linear Function`,
-      content: `The line $f(x) = 2x$ doubles its input — and doubling is something every real number tolerates.`,
-      before: ``,
-      after: `Like the [identity](!#the-identity-function), its domain is all of $\\mathbb{R}$ under every parameter setting. What the scaling *does* move is the range and the steepness — a reminder that domain (allowed inputs) and range (produced outputs) are independent questions.
-
-Every polynomial shares this immunity: addition and multiplication never refuse an input. Division and even roots are where refusals start — the theme of the [restricted families](!#the-restricted-families).`,
-      link: '',
-    },
-    obj14: {
-      title: `The Quadratic Function`,
-      content: `Squaring accepts every real number — negative inputs included — so the parabola's domain bar is solid green.`,
-      before: ``,
-      after: `The quadratic is the classic place where students first confuse domain with range: the outputs never dip below zero, but the *inputs* are unrestricted. The visualizer separates the two visually — the green band on the x-axis is about inputs only, and it never shrinks however the parabola moves.
-
-Note the contrast with its inverse: undoing a square means taking a [square root](!#the-square-root-and-its-closed-boundary), and *that* function pays for the parabola's generosity with a halved domain.`,
-      link: '',
-    },
-    obj15: {
-      title: `The Cubic Function`,
-      content: `Cubing accepts every real input and — unlike squaring — returns every real output too.`,
-      before: ``,
-      after: `Domain $\\mathbb{R}$, range $\\mathbb{R}$: the cubic is unrestricted in both directions, which is why its inverse (the cube root) is also defined everywhere, needing none of the caution the square root demands. Odd powers never refuse an input and never repeat an output.
-
-In the tool this makes the cubic the cleanest demonstration that $a$, $k$, $b$, $h$ all leave the green band alone — there is simply nothing to break.`,
-      link: '',
-    },
-    obj16: {
-      title: `The Exponential Function`,
-      content: `The exponential $e^x$ takes any real exponent — its domain is the whole line, even though its outputs never leave positive territory.`,
-      before: ``,
-      after: `That mismatch is the exponential's signature: domain $\\mathbb{R}$, range $(0, \\infty)$. Feed it $-1000$ and it answers with a very small positive number, not a refusal.
-
-The refusals belong to its inverse: the [logarithm](!#the-logarithm-and-its-open-boundary) inherits the exponential's *range* as its domain — positive inputs only. Inverting a function swaps domain and range, and this pair is the tool's best illustration of the swap.`,
-      link: '',
-    },
-    obj17: {
-      title: `The Sine Function`,
-      content: `Sine accepts any angle — wind around the circle as many times as you like — so its domain is all of $\\mathbb{R}$.`,
-      before: ``,
-      after: `Periodicity and full domain go together: the wave repeats forever in both directions with no boundary to mark. The bounded part of sine's story is its *range*, locked inside $[-1, 1]$.
-
-Contrast this with tangent — periodic but riddled with excluded points at every half-period. Periodicity alone tells you nothing about domain; it is the division inside tangent that punches the holes, the same mechanism as the [reciprocal's excluded point](!#the-reciprocal-and-its-excluded-point).`,
-      link: '',
-    },
-    obj18: {
-      title: `The Cosine Function`,
-      content: `Cosine, like [sine](!#the-sine-function), accepts every real input — the same endless wave, shifted a quarter period.`,
-      before: ``,
-      after: `Everything said about sine's domain transfers verbatim: unbroken green band, immunity to all four sliders, range trapped in $[-1, 1]$.
-
-The pair is useful in this tool for a subtler point: two different functions can have *identical* domain behavior. Domain is a coarse fingerprint — it distinguishes the logarithm from the sine instantly, but cannot tell sine from cosine at all.`,
-      link: '',
-    },
-    obj19: {
-      title: `The Absolute Value Function`,
-      content: `The absolute value $|x|$ happily accepts negatives — it just strips their sign — so its domain runs the whole axis.`,
-      before: ``,
-      after: `The V-shape has a corner, and a corner is a *differentiability* problem, not a domain problem: the function is defined and continuous everywhere, including at $x = 0$. The green band takes no notice of the kink.
-
-That distinction — defined everywhere versus smooth everywhere — is worth one deliberate look here, because the domain bar and the curve tell different stories at the corner point.`,
-      link: '',
-    },
-    obj20: {
-      title: `The Restricted Families`,
-      content: `Three functions in the picker refuse some inputs, one for each classic reason: the [logarithm](!#the-logarithm-and-its-open-boundary) needs strictly positive input (an open boundary), the [square root](!#the-square-root-and-its-closed-boundary) needs non-negative input (a closed boundary), and the [reciprocal](!#the-reciprocal-and-its-excluded-point) refuses exactly one value (an excluded point).
-
-Open half-line, closed half-line, punctured line — these three shapes, moved and scaled by $b$ and $h$, cover nearly every domain you will meet before calculus. The [endpoint distinction](!#open-vs-closed-endpoints-and-excluded-values) between them is exactly what the visualizer's markers encode.`,
-      before: ``, after: ``, link: '',
-    },
-    obj21: {
-      title: `The Logarithm and Its Open Boundary`,
-      content: `The logarithm demands strictly positive input: its domain is $(0, \\infty)$, and the boundary point itself is **not** included.`,
-      before: ``,
-      after: `The open circle at $x = 0$ is the whole story: $\\ln(0)$ does not exist — the curve dives toward $-\\infty$ as the input approaches zero, but zero itself is refused. Red band left of the marker, green strictly right of it.
-
-Drag $h$ and the wall slides to $x = h$, open circle and all; flip $b$ negative and the inequality reverses — the domain becomes $(-\\infty, h)$, the green and red bands trading sides. This is the [parameter rule](!#why-only-b-and-h-change-the-domain) acting on a boundary you can watch.
-
-Compare the [square root's closed dot](!#the-square-root-and-its-closed-boundary): one pixel of difference on screen, a real mathematical distinction underneath.`,
-      link: '',
-    },
-    obj22: {
-      title: `The Square Root and Its Closed Boundary`,
-      content: `The square root accepts zero — $\\sqrt{0} = 0$ is a perfectly good value — so its domain $[0, \\infty)$ **includes** its boundary.`,
-      before: ``,
-      after: `That inclusion is the filled green dot at the origin: the curve genuinely starts there, at an actual point, rather than falling away toward a wall it can never touch. Everything left of the dot is red; the dot itself is green.
-
-The contrast with the [logarithm](!#the-logarithm-and-its-open-boundary) is the cleanest open-versus-closed lesson in the tool: both domains are half-lines with boundary zero, and the single question "is the boundary point itself allowed?" separates $[0, \\infty)$ from $(0, \\infty)$.
-
-Interval notation mirrors the markers exactly: square bracket = filled dot, round parenthesis = open circle.`,
-      link: '',
-    },
-    obj23: {
-      title: `The Reciprocal and Its Excluded Point`,
-      content: `The reciprocal $1/x$ accepts everything except a single number: its domain is all of $\\mathbb{R}$ with the one point $x = 0$ punched out.`,
-      before: ``,
-      after: `The domain bar shows green in both directions with a lone open circle at the origin — a puncture, not a wall. Unlike the half-line restrictions, almost nothing is lost: one input out of infinitely many.
-
-But that one point carries consequences: the vertical asymptote, the split into two branches, the sign flip from $-\\infty$ to $+\\infty$. A single excluded input can dominate a function's entire geometry.
-
-Shift $h$ and the puncture follows to $x = h$. Every rational function's domain is built this way — the real line minus the zeros of its denominator, one open circle per zero.`,
-      link: '',
-    },
+    obj11: { title:``, content:``, before:``, after:``, link:'' },
+    obj12: { title:``, content:``, before:``, after:``, link:'' },
+    obj13: { title:``, content:``, before:``, after:``, link:'' },
+    obj14: { title:``, content:``, before:``, after:``, link:'' },
+    obj15: { title:``, content:``, before:``, after:``, link:'' },
   }
 
 
@@ -430,77 +312,12 @@ Shift $h$ and the puncture follows to $x = h$. Every rational function's domain 
   }
 
 
-  // Framed illustration units for the per-state sections (Line 1 v5): frozen
-  // domain view + attached picture-reading panel, no link (own page).
-  const R_TEXT = {
-    identity: 'The identity line over one unbroken green band: every real input accepted, none changed.',
-    linearScale: 'The doubled line f(x) = 2x over a full green band &#8212; scaling an input is never a reason to refuse it.',
-    quadratic: 'The parabola over a solid green band: inputs unrestricted, even though outputs never go negative.',
-    cubic: 'The cubic over a full green band &#8212; unrestricted in domain and range alike.',
-    exponential: 'e&#739; over a full green band: any exponent is welcome, however negative, and the answer is just very small.',
-    sine: 'The endless wave over an endless green band &#8212; any angle, wound any number of times.',
-    cosine: 'The same full-domain picture as sine, shifted a quarter period.',
-    absolute: 'The V over a solid green band: the corner at zero is a smoothness issue, not a domain one.',
-  };
-  const stateUnits = {};
-  for (const k of Object.keys(R_TEXT)) {
-    const caps = { identity: 'f(x) = x', linearScale: 'f(x) = 2x', quadratic: 'f(x) = x&#178;', cubic: 'f(x) = x&#179;',
-      exponential: 'f(x) = e&#739;', sine: 'f(x) = sin(x)', cosine: 'f(x) = cos(x)', absolute: 'f(x) = |x|' };
-    stateUnits[k] = demoUnitFrame({ svg: domainDiagrams[k], caption: caps[k] + ', domain frozen', text: R_TEXT[k] });
-  }
-  stateUnits.logarithmic = demoUnitFrame({ svg: domainDiagrams.logarithmic, caption: 'ln(x), domain frozen',
-    text: 'Red band to the left, green strictly to the right, and the open circle at x = 0 recording the refusal: the boundary point itself is not allowed.' });
-  stateUnits.sqrt = demoUnitFrame({ svg: domainDiagrams.sqrt, caption: '&#8730;x, domain frozen',
-    text: 'The filled green dot at the origin is the difference: zero is accepted, the curve genuinely starts there. Domain [0, &#8734;).' });
-  stateUnits.reciprocal = demoUnitFrame({ svg: domainDiagrams.reciprocal, caption: '1/x, domain frozen',
-    text: 'Green in both directions with one puncture: a lone open circle at x = 0, the single refused input that shapes the whole graph.' });
-
-  // Canonical per-family explanations for the info panel's Family tab
-  // (SSR/SEO-visible; the component has no built-in per-family texts).
-  const explanations = {
-    identity:
-      '**Identity** $f(x) = x$ — domain $\\mathbb{R}$: every input accepted, none changed. The control case for every domain question.\n\n' +
-      '[Learn more about the identity function](!#the-identity-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    linearScale:
-      '**Linear** $f(x) = 2x$ — domain $\\mathbb{R}$: doubling never refuses an input. Polynomials are domain-proof.\n\n' +
-      '[Learn more about the scaled linear function](!#the-scaled-linear-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    quadratic:
-      '**Quadratic** $x^2$ — domain $\\mathbb{R}$, range $[0, \\infty)$: the classic reminder that inputs and outputs are separate questions.\n\n' +
-      '[Learn more about the quadratic function](!#the-quadratic-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    cubic:
-      '**Cubic** $x^3$ — domain $\\mathbb{R}$ and range $\\mathbb{R}$: unrestricted both ways, which is why the cube root needs no caution either.\n\n' +
-      '[Learn more about the cubic function](!#the-cubic-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    exponential:
-      '**Exponential** $e^x$ — domain $\\mathbb{R}$, range $(0, \\infty)$: its inverse, the logarithm, inherits that range as a restricted domain.\n\n' +
-      '[Learn more about the exponential function](!#the-exponential-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    sine:
-      '**Sine** — domain $\\mathbb{R}$: any angle, wound any number of times. The bounded part of its story is the range $[-1, 1]$.\n\n' +
-      '[Learn more about the sine function](!#the-sine-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    cosine:
-      '**Cosine** — domain $\\mathbb{R}$, identical domain behavior to sine: domain is a coarse fingerprint that cannot tell the two apart.\n\n' +
-      '[Learn more about the cosine function](!#the-cosine-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    absolute:
-      '**Absolute value** $|x|$ — domain $\\mathbb{R}$: the corner at zero is a differentiability problem, not a domain problem.\n\n' +
-      '[Learn more about the absolute value function](!#the-absolute-value-function) · [All-of-R families](!#functions-defined-on-all-of-the-reals)',
-    logarithmic:
-      '**Logarithm** $\\ln(x)$ — domain $(0, \\infty)$, an **open** boundary: zero itself is refused, marked by the open circle.\n\n' +
-      '[Learn more about the logarithm](!#the-logarithm-and-its-open-boundary) · [Restricted families](!#the-restricted-families)',
-    sqrt:
-      '**Square root** $\\sqrt{x}$ — domain $[0, \\infty)$, a **closed** boundary: zero is accepted, marked by the filled dot.\n\n' +
-      '[Learn more about the square root](!#the-square-root-and-its-closed-boundary) · [Restricted families](!#the-restricted-families)',
-    reciprocal:
-      '**Reciprocal** $1/x$ — domain $\\mathbb{R} \\setminus \\{0\\}$: one **excluded point**, and an entire geometry shaped by it.\n\n' +
-      '[Learn more about the reciprocal](!#the-reciprocal-and-its-excluded-point) · [Restricted families](!#the-restricted-families)',
-  };
-
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
-      explanations,
-      stateUnits,
       seoData: {
         title: "Domain of a Function Visualizer | Legal Inputs on the X-Axis",
         description: "Visualize the domain of any transformed function on the x-axis. Drag a test point to check membership and see why only b and h change the domain.",
@@ -516,34 +333,19 @@ Shift $h$ and the puncture follows to $x = h$. Every rational function's domain 
 }
 
 
-export default function DomainOfFunctionPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
-
-  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
+export default function DomainOfFunctionPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
   const genericSections = [
-    { id:'getting-started-with-the-visualizer',         title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'picking-a-function',                          title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'why-only-b-and-h-change-the-domain',          title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'reading-the-x-axis-highlight-and-domain-bar', title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'probing-with-the-test-point-slider',          title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'the-domain-card-and-applied-chips',           title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'customizing-the-highlight-color',             title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'what-is-the-domain-of-a-function',            title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'open-vs-closed-endpoints-and-excluded-values', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'functions-defined-on-all-of-the-reals',       title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },
-    { id:'the-identity-function',                       title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('identity'), sectionsContent.obj12.after] },
-    { id:'the-scaled-linear-function',                  title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('linearScale'), sectionsContent.obj13.after] },
-    { id:'the-quadratic-function',                      title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('quadratic'), sectionsContent.obj14.after] },
-    { id:'the-cubic-function',                          title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('cubic'), sectionsContent.obj15.after] },
-    { id:'the-exponential-function',                    title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content, unit('exponential'), sectionsContent.obj16.after] },
-    { id:'the-sine-function',                           title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content, unit('sine'), sectionsContent.obj17.after] },
-    { id:'the-cosine-function',                         title:sectionsContent.obj18.title, link:sectionsContent.obj18.link, content:[sectionsContent.obj18.content, unit('cosine'), sectionsContent.obj18.after] },
-    { id:'the-absolute-value-function',                 title:sectionsContent.obj19.title, link:sectionsContent.obj19.link, content:[sectionsContent.obj19.content, unit('absolute'), sectionsContent.obj19.after] },
-    { id:'the-restricted-families',                     title:sectionsContent.obj20.title, link:sectionsContent.obj20.link, content:[sectionsContent.obj20.content] },
-    { id:'the-logarithm-and-its-open-boundary',         title:sectionsContent.obj21.title, link:sectionsContent.obj21.link, content:[sectionsContent.obj21.content, unit('logarithmic'), sectionsContent.obj21.after] },
-    { id:'the-square-root-and-its-closed-boundary',     title:sectionsContent.obj22.title, link:sectionsContent.obj22.link, content:[sectionsContent.obj22.content, unit('sqrt'), sectionsContent.obj22.after] },
-    { id:'the-reciprocal-and-its-excluded-point',       title:sectionsContent.obj23.title, link:sectionsContent.obj23.link, content:[sectionsContent.obj23.content, unit('reciprocal'), sectionsContent.obj23.after] },
-    { id:'related-concepts-and-tools',                  title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
+    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
+    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
+    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
+    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
+    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
+    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
+    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
+    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -600,7 +402,7 @@ export default function DomainOfFunctionPage({seoData, sectionsContent, introCon
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Domain of a Function</h1>
       <br/>
-      <FunctionDomain explanations={explanations}/>
+      <FunctionDomain/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}
