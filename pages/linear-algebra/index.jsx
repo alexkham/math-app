@@ -1,111 +1,151 @@
 
-import React from 'react'
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import '../pages.css'
-import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import Sections from '@/app/components/page-components/section/Sections'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Head from 'next/head'
-import MyList from '@/app/components/page-components/lists/MyList'
-import ToolsSlider from '@/app/components/sliders/ToolsSlider'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
-export async function getStaticProps() {
-  const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas');
-  const { default: linearAlgebraTermsList } = await import('@/app/api/db/definitions/linear-algebra/linearAlgebraDefinitions')
-  
-  const tools=[
-     
-     {
-      title: "Determinant Visual Calculator with Steps",
-      description: "Use visualinteractive Determinant Calculator with step-by-step explanations",
-      image: "/tools/determinant-calculator.jpg",
-      link: "/visual-tools/determinant-calculator"
-    },
+/**
+ * /pages/linear-algebra/index.jsx
+ *
+ * Section hub page on the buildSectionData / SectionFrontPage pattern
+ * (same as /pages/algebra, /pages/trigonometry, /pages/set-theory).
+ * Sections are auto-discovered from the child directories on disk; the
+ * old hand-authored hub content was migrated as follows (2026-07-31):
+ *
+ *   - formulas / definitions / matrices articles -> `hubDescription` in
+ *     the corresponding child page (formulas / definitions / matrix),
+ *     re-surfaced here automatically via buildSectionData extraction
+ *   - matrices 5-item anchor list  -> augment on the matrix section
+ *   - Symbols blurb                -> prose-only section (links outside
+ *                                     the section, to /math-symbols);
+ *                                     stray "RetryClaude can make
+ *                                     mistakes" artifact stripped
+ *   - Tools slider (5 tools)       -> prose-only section (cross-section
+ *                                     /visual-tools links)
+ *   - Introduction to Linear Algebra -> `article` prop of SectionFrontPage
+ *   - formulas/definitions scrolling widgets -> dropped; the auto
+ *     formulas/definitions sections render the same DB modules
+ *
+ * The old SEO <Head> block is kept verbatim (duplicate canonical link
+ * removed). Child pages formulas / definitions / matrix / calculators
+ * received `hubMeta` (name + hubDescription) for card extraction.
+ */
 
-     {
-      title: "Gaussian Elimination Visualizer with explanations",
-      description: "Learn the principles of Gaussian Elimination with our interactive visual tool",
-      image: "/tools/gaussian-elimination.jpg",
-      link: "/visual-tools/gauss-elimination"
-    },
-
-     {
-      title: "Matrix Multiplication Animated",
-      description: "Check our interactive widget to learn the process of matrix multiplication explained step after step",
-      image: "/tools/matrix-multiplication-animation.jpg",
-      link: "/visual-tools/matrix-multiplication"
-    },
-
-      {
-      title: "Matrix Transposition Visualizer",
-      description: "Learn the principles of matrix transposition using this interactive visual tool",
-      image: "/tools/matrix-transposition.jpg",
-      link: "/visual-tools/matrix-transposition"
-    },
-
-     {
-      title: "Matrix Types Generator",
-      description: "Learn different types of square matrices and their special features with this interactive visual tool",
-      image: "/tools/matrix-types.jpg",
-      link: "/visual-tools/matrix-types"
-    },
+import Head from 'next/head';
+import SectionFrontPage from '../../app/components/page-components/front-page/SectionFrontPage';
+import { buildSectionData } from '../../app/components/page-components/front-page/buildSectionData';
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 
 
-    
-     // {
-    //   title: "Unit Circle2",
-    //   description: "2Interactive trigonometry tool",
-    //   image: "/images/calculus.jpg",
-    //   link: "/tools/unit-circle1"
-    // },
-     // {
-    //   title: "Unit Circle2",
-    //   description: "2Interactive trigonometry tool",
-    //   image: "/images/calculus.jpg",
-    //   link: "/tools/unit-circle1"
-    // },
+const pageMeta = {
+  title: 'Linear Algebra',
+  subtitle: 'Vectors, matrices, and transformations — from systems of equations to eigenvalues, decompositions, and orthogonality.',
+  breadcrumbUrl: '/linear-algebra',
+};
 
-  ]
-  
-  // Static content that can be used for SEO
-  const sectionContent = {
-    formulas: {
-      title: 'Linear Algebra Formulas',
-     
-      description: 'Navigate through an essential collection of linear algebra formulas that power mathematical analysis and transformations. This guide presents key formulas across vector operations, matrix calculations, eigenvalues, and linear transformations - each equipped with clear notation, detailed explanations, and practical examples. You will find precise mathematical representations, component breakdowns, and specific use cases for over 15 fundamental formula categories. The organized structure helps you quickly locate and understand the tools you need, whether for solving equations, analyzing transformations, or applying linear algebra concepts in real-world scenarios. Perfect for students needing formula clarification, researchers requiring quick mathematical reference, or practitioners applying linear algebra in their work.'
-    },
-    definitions: {
-      title: 'Linear Algebra Terms and Definitions',
-      description: `Discover essential linear algebra definitions that form the mathematical foundation for understanding vectors, matrices, and their relationships. This guide breaks down key terms from basic vector concepts like magnitude and direction to advanced matrix classifications and properties. Each definition includes precise mathematical notation, clear explanations, and visual examples to help grasp the concept. Whether you're learning about vector spaces, exploring matrix types like triangular and symmetric matrices, or studying transformations, this organized reference makes complex linear algebra terminology accessible. The page serves as both a learning tool and a quick reference for students and practitioners, featuring interactive mathematical notation and practical examples throughout.`,
-    },
-    matrices: {
-      title: 'Matrices',
-      description: `Explore matrices in linear algebra through our detailed guide.Starting with matrix definitions and notations, the page explains matrix structure, elements, and indexing. You will learn to distinguish between different matrix types - from basic row and column matrices to more complex square matrices. The guide also covers essential matrix properties and dives into special cases of square matrices like diagonal and triangular forms. Each topic features clear mathematical notation and visual examples to reinforce your understanding of these fundamental concepts.`,
-      list:[`[Definitions and Notations](!/linear-algebra/matrix#definition) - Explains how matrices are written using different types of brackets (square, parentheses, vertical bars) and introduces basic matrix notation conventions.
-      `,
-      `[Elements, Structure and Indexing](!/linear-algebra/matrix#indexing) - Covers how matrix elements are organized in rows and columns, explains the 1-based indexing system, and demonstrates how to reference specific elements using row and column indices.`,
-      `[Types of Matrices](!/linear-algebra/matrix#classification) - Describes different classifications of matrices based on their shape (column, row, rectangular, and square matrices) and content type (numeric, variable/symbolic, mixed, and zero matrices).`,
-      `[Matrix Properties](!/linear-algebra/matrix#properties) - Introduces essential characteristics like size/dimension, rank, determinant, eigenvalues/eigenvectors, and trace, explaining their importance in matrix operations and transformations.`,
-      `[Square Matrices and Special Cases](!/linear-algebra/matrix#special) - Focuses on unique types of square matrices, including those with special diagonal patterns (diagonal, upper triangular, lower triangular) and element relationships (symmetric, skew-symmetric, identity, scalar).`,
-    
-    ]
-    },
-    symbols:{
-      title:'Linear Algebra Symbols Reference',
-      description:`Our [Linear Algebra Symbols page](!/math-symbols/linear-algebra) presents a well-organized collection of notation fundamental to matrix theory and vector spaces. This reference serves as a valuable resource for students and practitioners working with linear systems.
-The page features symbols categorized by their mathematical applications, including matrix operations (A⊤, det(A), tr(A)), vector spaces (ℝⁿ, ⟨v,w⟩, ∥v∥), and eigenvalue concepts (Av=λv). It covers advanced topics like matrix decompositions (LU, QR, SVD) and linear transformations, alongside practical notation for representing matrices and vectors in LaTeX.
-Every symbol includes its proper mathematical notation, corresponding LaTeX code for typesetting, and a brief explanation of its mathematical significance—making this an indispensable reference for anyone working with linear algebra in academic research or applications.RetryClaude can make mistakes. Please double-check responses.`,
-link:'/math-symbols/linear-algebra'
-    }
-  }
 
-  const introContent = {
-    id: "intro",
-    title: "Introduction to Linear Algebra",
-    content: `Linear algebra is a field of mathematics that focuses on studying vectors, matrices, and the relationships between them, forming the mathematical framework for analyzing structures and transformations in multidimensional spaces. It introduces powerful tools to understand and solve problems where quantities interact linearly, making it fundamental to numerous disciplines.
+/* ================================================================
+   CUSTOM SECTIONS
+   ================================================================ */
+
+const customSections = {
+
+  // The old hub's curated anchor list into the Matrix Theory guide,
+  // rendered as a compact card under the auto-extracted matrix intro.
+  'matrix': {
+    mode: 'augment',
+    position: 'after',
+    body: `
+      <style>
+        .lmc-mx-card { font-family: 'DM Sans', system-ui, sans-serif; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px 10px; margin-top: 14px; }
+        .lmc-mx-head { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #f1f5f9; }
+        .lmc-mx-item { padding: 4px 0; font-size: 13.5px; line-height: 1.5; }
+        .lmc-mx-item a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .lmc-mx-item a:hover { text-decoration: underline; }
+        .lmc-mx-item span { color: #6b7280; }
+      </style>
+      <div class="lmc-mx-card">
+        <div class="lmc-mx-head">Inside the Matrix Guide</div>
+        <div class="lmc-mx-item"><a href="/linear-algebra/matrix#definition">Definitions and Notations</a> <span>&mdash; how matrices are written using different types of brackets (square, parentheses, vertical bars) and basic matrix notation conventions</span></div>
+        <div class="lmc-mx-item"><a href="/linear-algebra/matrix#indexing">Elements, Structure and Indexing</a> <span>&mdash; how matrix elements are organized in rows and columns, the 1-based indexing system, and referencing specific elements by row and column indices</span></div>
+        <div class="lmc-mx-item"><a href="/linear-algebra/matrix#classification">Types of Matrices</a> <span>&mdash; classifications based on shape (column, row, rectangular, square) and content type (numeric, variable/symbolic, mixed, zero)</span></div>
+        <div class="lmc-mx-item"><a href="/linear-algebra/matrix#properties">Matrix Properties</a> <span>&mdash; size/dimension, rank, determinant, eigenvalues/eigenvectors, and trace, and their importance in matrix operations and transformations</span></div>
+        <div class="lmc-mx-item"><a href="/linear-algebra/matrix#special">Square Matrices and Special Cases</a> <span>&mdash; special diagonal patterns (diagonal, upper and lower triangular) and element relationships (symmetric, skew-symmetric, identity, scalar)</span></div>
+      </div>
+    `,
+  },
+
+  // Cross-section interactive tools the old hub promoted in its slider,
+  // rendered as card tiles matching the auto-generated tool cards.
+  'tools': {
+    mode: 'prose-only',
+    title: 'Interactive Tools',
+    body: `
+      <style>
+        .lmc-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; font-family: 'DM Sans', system-ui, sans-serif; }
+        .lmc-tool-card { display: block; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px 18px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .lmc-tool-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-color: #2563eb; }
+        .lmc-tool-badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; background: #eff6ff; color: #2563eb; margin-bottom: 10px; }
+        .lmc-tool-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+        .lmc-tool-desc { font-size: 13.5px; color: #64748b; line-height: 1.5; }
+        .lmc-tool-open { display: inline-block; font-size: 13px; font-weight: 700; color: #2563eb; margin-top: 12px; }
+      </style>
+      <div class="lmc-tools-grid">
+        <a class="lmc-tool-card" href="/visual-tools/determinant-calculator">
+          <span class="lmc-tool-badge">Calculator</span>
+          <div class="lmc-tool-title">Determinant Visual Calculator with Steps</div>
+          <div class="lmc-tool-desc">Visual, interactive determinant calculator with step-by-step explanations.</div>
+          <span class="lmc-tool-open">Open tool &rarr;</span>
+        </a>
+        <a class="lmc-tool-card" href="/visual-tools/gauss-elimination">
+          <span class="lmc-tool-badge">Visual Tool</span>
+          <div class="lmc-tool-title">Gaussian Elimination Visualizer</div>
+          <div class="lmc-tool-desc">Learn the principles of Gaussian elimination with our interactive visual tool.</div>
+          <span class="lmc-tool-open">Open tool &rarr;</span>
+        </a>
+        <a class="lmc-tool-card" href="/visual-tools/matrix-multiplication">
+          <span class="lmc-tool-badge">Visual Tool</span>
+          <div class="lmc-tool-title">Matrix Multiplication Animated</div>
+          <div class="lmc-tool-desc">Learn the process of matrix multiplication explained step after step with our interactive widget.</div>
+          <span class="lmc-tool-open">Open tool &rarr;</span>
+        </a>
+        <a class="lmc-tool-card" href="/visual-tools/matrix-transposition">
+          <span class="lmc-tool-badge">Visual Tool</span>
+          <div class="lmc-tool-title">Matrix Transposition Visualizer</div>
+          <div class="lmc-tool-desc">Learn the principles of matrix transposition using this interactive visual tool.</div>
+          <span class="lmc-tool-open">Open tool &rarr;</span>
+        </a>
+        <a class="lmc-tool-card" href="/visual-tools/matrix-types">
+          <span class="lmc-tool-badge">Visual Tool</span>
+          <div class="lmc-tool-title">Matrix Types Generator</div>
+          <div class="lmc-tool-desc">Learn different types of square matrices and their special features with this interactive visual tool.</div>
+          <span class="lmc-tool-open">Open tool &rarr;</span>
+        </a>
+      </div>
+    `,
+  },
+
+  // Pointer to the symbols reference, which lives outside this section.
+  'symbols': {
+    mode: 'prose-only',
+    title: 'Linear Algebra Symbols Reference',
+    link: '/math-symbols/linear-algebra',
+    linkText: 'View Linear Algebra Symbols',
+    body: `
+      <p>Our <a href="/math-symbols/linear-algebra">Linear Algebra Symbols page</a> presents a well-organized collection of notation fundamental to matrix theory and vector spaces. This reference serves as a valuable resource for students and practitioners working with linear systems.</p>
+
+      <p>The page features symbols categorized by their mathematical applications, including matrix operations (A&#8868;, det(A), tr(A)), vector spaces (&#8477;&#8319;, &#10216;v,w&#10217;, &#8741;v&#8741;), and eigenvalue concepts (Av&nbsp;=&nbsp;&lambda;v). It covers advanced topics like matrix decompositions (LU, QR, SVD) and linear transformations, alongside practical notation for representing matrices and vectors in LaTeX.</p>
+
+      <p>Every symbol includes its proper mathematical notation, corresponding LaTeX code for typesetting, and a brief explanation of its mathematical significance &mdash; making this an indispensable reference for anyone working with linear algebra in academic research or applications.</p>
+    `,
+  },
+
+};
+
+
+/* ================================================================
+   INTRO ARTICLE (rendered by SectionFrontPage's ArticleBlock)
+   ================================================================ */
+
+const introArticle = {
+  title: 'Introduction to Linear Algebra',
+  content: `Linear algebra is a field of mathematics that focuses on studying vectors, matrices, and the relationships between them, forming the mathematical framework for analyzing structures and transformations in multidimensional spaces. It introduces powerful tools to understand and solve problems where quantities interact linearly, making it fundamental to numerous disciplines.
 
 This field begins with vectors—quantities that have both magnitude and direction—and their operations, such as addition and scaling. It extends to matrices, which are grid-like arrangements of numbers used to represent systems of equations or transformations. Learning how to manipulate matrices and understand their properties is a key part of linear algebra.
 
@@ -115,8 +155,12 @@ To help students navigate these foundational concepts, we created a dedicated Ma
 
 Eigenvalues and eigenvectors, pivotal concepts in linear algebra, allow students to uncover hidden properties of transformations. Techniques like solving systems of equations, matrix decomposition, and understanding projections or orthogonality are practical outcomes of this study.
 
-Ultimately, linear algebra provides a foundation for solving abstract and applied problems, developing skills to think logically, recognize patterns, and simplify complex systems. It equips students with a versatile toolkit for further studies in mathematics, sciences, engineering, and beyond.`
-  }
+Ultimately, linear algebra provides a foundation for solving abstract and applied problems, developing skills to think logically, recognize patterns, and simplify complex systems. It equips students with a versatile toolkit for further studies in mathematics, sciences, engineering, and beyond.`,
+};
+
+
+export async function getStaticProps() {
+  const { sections, sectionData } = await buildSectionData('/linear-algebra', { customSections });
 
   const keyWords = [
     'linear algebra',
@@ -127,127 +171,23 @@ Ultimately, linear algebra provides a foundation for solving abstract and applie
     'linear transformations',
     'vector spaces',
     'matrices and vectors'
-  ]
+  ];
 
-  const canonicalUrl = 'https://www.learnmathclass.com/linear-algebra'
-  const lastModified = new Date().toISOString()
-  
   return {
     props: {
-      sectionContent,
-      introContent,
+      pageMeta,
+      sections,
+      sectionData,
+      introArticle,
       keyWords,
-      canonicalUrl,
-      lastModified,
-      linearAlgebraFormulasList,
-      linearAlgebraTermsList,
-      tools
-    }
-  }
+      canonicalUrl: 'https://www.learnmathclass.com/linear-algebra',
+      lastModified: new Date().toISOString(),
+    },
+  };
 }
 
-export default function LinearAlgebraPage({ 
-  sectionContent, 
-  introContent, 
-  keyWords,
-  canonicalUrl,
-  lastModified,
-  linearAlgebraFormulasList,
-  linearAlgebraTermsList,
-  tools
-}) {
-  // Reconstruct sections with React components
-  const linearAlgebraSections = [
-    {
-      id: 'formulas',
-      title: sectionContent.formulas.title,
-      link:'/linear-algebra/formulas',
-      content: [
-        sectionContent.formulas.description,
-       `
-       
-       `,
-        <VerticalScrollingFormulaWidget 
-          key="formula-widget"
-          formulaData={linearAlgebraFormulasList}
-          moreFormulasLink='/linear-algebra/formulas'
-          panelWidth={'600px'}
-          width='600px'
-          // backgroundColor='orange'
-        />
-      ]
-    },
-    {
-      id: 'definitions',
-      title: sectionContent.definitions.title,
-      link:'/linear-algebra/definitions',
-      content: [
-        {
-          content: sectionContent.definitions.description,
-          layout: 'horizontal',
-          position: 'left', 
-          width: 1
-        },
-      
-        {
-          content: <VerticalScrollingFormulaWidget
-            key="definitions-widget"
-            formulaData={linearAlgebraTermsList}
-            moreFormulasLink='/linear-algebra/definitions'
-            type='definition'
-          />,
-          layout: 'horizontal',
-          position: 'right',
-          width: 1
-        }
-      ]
-     },
-    {
-      id: 'matrix',
-      title: sectionContent.matrices.title,
-      link:'/linear-algebra/matrix',
-      content: [
-        sectionContent.matrices.description,
-       <MyList data={sectionContent.matrices.list}
-       key={249}/>,
-       
-      ]
-    },
-    {
-      id: 'symbols',
-      title: sectionContent.symbols.title, // Give it a proper title
-      link: sectionContent.symbols.link, // Optional
-      content: [
-        {
-          content:sectionContent.symbols.description,
-          layout: 'horizontal',
-          position: 'center', // or 'left' if you prefer
-          width: 8 // full width
-        }
-      ]
-    },   
 
-      {
-        id: 'tools',
-        title: 'Tools', // Give it a proper title
-        link: '', // Optional
-        content: [
-                 {
-                   content: 
-                    
-                     <ToolsSlider tools={tools} key={'slider'}/>
-                   ,
-                   layout: 'horizontal',
-                   position: 'center', // or 'left' if you prefer
-                   width: 8 // full width
-                 }
-               ]
-      },
-  
-
-     
-    
-  ]
+export default function LinearAlgebraPage({ pageMeta, sections, sectionData, introArticle, keyWords, canonicalUrl, lastModified }) {
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -267,25 +207,22 @@ export default function LinearAlgebraPage({
         "name": "Learn Math Class"
       }
     }
-  }
+  };
 
-  const pageTitle = "Linear Algebra - Vectors, Matrices & Transformations | Learn Math Class"
-  const pageDescription = "Master linear algebra with our comprehensive guide covering vectors, matrices, transformations, and core concepts. Perfect for students and educators."
+  const pageTitle = "Linear Algebra - Vectors, Matrices & Transformations | Learn Math Class";
+  const pageDescription = "Master linear algebra with our comprehensive guide covering vectors, matrices, transformations, and core concepts. Perfect for students and educators.";
 
   return (
     <>
+      {/* Legacy hub SEO block, kept verbatim (duplicate canonical removed) */}
       <Head>
-        {/* Essential Meta Tags */}
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <meta name="keywords" content={keyWords.join(", ")} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        
-        {/* Canonical URL */}
+
         <link rel="canonical" href={canonicalUrl} />
-        <link rel="canonical" href="https://www.learnmathclass.com/linear-algebra" />
-        
-        {/* Open Graph Tags */}
+
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:type" content="article" />
@@ -293,74 +230,35 @@ export default function LinearAlgebraPage({
         <meta property="og:site_name" content="Learn Math Class" />
         <meta property="og:locale" content="en_US" />
         <meta property="article:modified_time" content={lastModified} />
-        
-        {/* Twitter Card Tags */}
+
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
-        
-        {/* Additional Meta Tags */}
+
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta name="revisit-after" content="7 days" />
-        
-        {/* Structured Data */}
-        <script 
+
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
 
-      {/* <GenericNavbar/> */}
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <OperaSidebar 
+      <OperaSidebar
         side='right'
-        topOffset='55px' 
         sidebarWidth='45px'
         panelWidth='300px'
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
-      /> 
-      <Breadcrumb/>
-     
-      <main>
-        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
-          Linear Algebra
-        </h1>
-        <SectionTableOfContents sections={linearAlgebraSections}
-         showSecondaryNav={true}
-         secondaryNavMode="children"  // or "siblings"
-         secondaryNavTitle="More in this Section" 
-         numbered={true}
-        
-         />
-        <br/>
-        
-        <br/>
-        
-        <IntroSection 
-          id={introContent.id}
-          title={introContent.title}
-          content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
-        />
-        
-        <Sections sections={linearAlgebraSections}
-        showSecondaryNav={true}
-        secondaryNavMode="children"
-        secondaryNavTitle="Similar Pages"/>
-        <br/>
-        <br/>
-        
-        <br/>
-        {/* <ScrollUpButton/> */}
-      </main>
+      />
+
+      <SectionFrontPage
+        meta={pageMeta}
+        sections={sections}
+        sectionData={sectionData}
+        article={introArticle}
+      />
     </>
-  )
+  );
 }
-
-

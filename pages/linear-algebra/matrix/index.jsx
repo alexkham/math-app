@@ -670,6 +670,11 @@ import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
 
+ // Surfaced on the /linear-algebra hub via buildSectionData extraction.
+ const hubMeta = {
+   hubDescription: 'Explore matrices in linear algebra through our detailed guide. Starting with matrix definitions and notations, the page explains matrix structure, elements, and indexing. You will learn to distinguish between different matrix types — from basic row and column matrices to more complex square matrices. The guide also covers essential matrix properties and dives into special cases of square matrices like diagonal and triangular forms. Each topic features clear mathematical notation and visual examples to reinforce your understanding of these fundamental concepts.',
+ }
+
  const keyWords = [
   'matrix',
   'matrix definition',

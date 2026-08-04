@@ -1420,6 +1420,94 @@ const FormulaChip = ({ label, tex }) => {
   );
 };
 
+/* ---- Accordion category group + clickable item cards ----
+   Used by FormulasSection / DefinitionsSection. Collapsed panels stay in
+   the DOM (display:none) so SSR/SEO keeps the full item text. All colors
+   come from the active theme. */
+
+const excerptOf = (text, max = 150) => {
+  if (!text) return '';
+  // strip markdown link syntax — cards are <a> elements, nested links are invalid
+  let s = String(text).trim()
+    .replace(/\[([^\]]+)\]\(![^)]*\)/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
+  if (s.length <= max) return s;
+  s = s.slice(0, max);
+  // never cut inside an inline KaTeX span
+  if ((s.match(/\$/g) || []).length % 2 === 1) s = s.slice(0, s.lastIndexOf('$'));
+  const sp = s.lastIndexOf(' ');
+  if (sp > max * 0.6) s = s.slice(0, sp);
+  return s + '…';
+};
+
+const AccordionGroup = ({ title, count, intro, defaultOpen, children }) => {
+  const t = useTheme();
+  const [open, setOpen] = useState(!!defaultOpen);
+  const [hover, setHover] = useState(false);
+  const toggle = () => setOpen((o) => !o);
+  return (
+    <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, marginBottom: 10, overflow: 'hidden', background: '#fff' }}>
+      <div
+        role="button" tabIndex={0} aria-expanded={open}
+        onClick={toggle}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } }}
+        onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+          padding: '13px 18px', cursor: 'pointer', userSelect: 'none',
+          background: hover || open ? t.stripActiveBg : '#fafbfc', transition: 'background 0.15s',
+        }}
+      >
+        <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.15rem', fontWeight: 700, color: t.headingColor }}>{title}</span>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+          <span style={{ background: t.badgeBg, color: t.badgeColor, fontSize: 11.5, fontWeight: 700, padding: '2px 10px', borderRadius: 10 }}>{count}</span>
+          <span aria-hidden="true" style={{ display: 'inline-block', transition: 'transform 0.2s', transform: open ? 'rotate(180deg)' : 'none', color: t.textSecondary, fontSize: 12, lineHeight: 1 }}>&#9660;</span>
+        </span>
+      </div>
+      <div style={{
+        display: open ? 'grid' : 'none',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 10,
+        padding: '12px 14px', borderTop: '1px solid #eef0f3',
+      }}>
+        {intro && <div style={{ gridColumn: '1 / -1', fontSize: 13.5, color: t.textSecondary, lineHeight: 1.55, padding: '2px 2px 4px' }}>{intro}</div>}
+        {children}
+      </div>
+    </div>
+  );
+};
+
+const ItemLinkCard = ({ title, tex, excerpt, href }) => {
+  const t = useTheme();
+  const [hover, setHover] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current && tex && typeof window !== 'undefined' && window.katex) {
+      try { window.katex.render(tex, ref.current, { displayMode: false, throwOnError: false }); }
+      catch (e) { ref.current.textContent = tex; }
+    }
+  }, [tex]);
+  return (
+    <a
+      href={href}
+      style={{
+        display: 'flex', flexDirection: 'column', gap: 5,
+        background: hover ? t.stripActiveBg : '#fff',
+        border: '1px solid #e5e7eb',
+        borderLeft: `3px solid ${hover ? t.cardAccentHover : t.cardAccent}`,
+        borderRadius: '0 6px 6px 0', padding: '11px 14px',
+        textDecoration: 'none', transition: 'all 0.15s',
+      }}
+      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+    >
+      <span style={{ fontSize: 14.5, fontWeight: 700, color: t.termColor }}>{title}</span>
+      {tex
+        ? <span ref={ref} style={{ fontSize: 16.5, color: t.textPrimary, overflowX: 'auto', paddingBottom: 2 }} />
+        : (excerpt ? <span style={{ fontSize: 13.5, color: t.textSecondary, lineHeight: 1.55 }}>{typeof excerpt === 'string' ? processContent(excerpt) : excerpt}</span> : null)}
+      <span style={{ fontSize: 12, fontWeight: 700, color: hover ? t.buttonBgHover : t.buttonBg, marginTop: 'auto' }}>Read more &rarr;</span>
+    </a>
+  );
+};
+
 const DefinitionItem = ({ term, definition }) => {
   const t = useTheme();
   return (
@@ -1593,29 +1681,29 @@ const CalculatorsSection = ({ section, sections, currentIndex, data }) => {
 
 const FormulasSection = ({ section, sections, currentIndex, data, categoryExplanations }) => {
   const { categories, items, totalCount } = data;
-  const scrollCat = (key) => { const el = document.getElementById(`formula-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 20, behavior: 'smooth' }); };
   return (
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
       <SectionIntro section={section} contentKey="introContent" />
       <AugmentSlot section={section} position="before" />
-      {categories.length > 0 && (
-        <EqualGrid>
-          {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
-        </EqualGrid>
-      )}
-      {categories.map((c) => {
-        const ci = items.filter((i) => i.category === c.key);
-        if (!ci.length) return null;
-        return (
-          <div key={c.key} id={`formula-cat-${c.key}`} style={catGroup}>
-            <CatSubHeading>{c.name}</CatSubHeading>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
-              {ci.map((item, i) => <FormulaChip key={`${c.key}-${i}`} label={item.title} tex={item.formula} />)}
-            </div>
-          </div>
-        );
-      })}
+      <div style={{ margin: '24px 0 8px' }}>
+        {categories.map((c, idx) => {
+          const ci = items.filter((i) => i.category === c.key);
+          if (!ci.length) return null;
+          return (
+            <AccordionGroup key={c.key} title={c.name} count={ci.length} intro={categoryExplanations?.[c.name]} defaultOpen={idx === 0}>
+              {ci.map((item, i) => (
+                <ItemLinkCard
+                  key={`${c.key}-${i}`}
+                  title={item.title}
+                  tex={item.formula}
+                  href={item.anchor && section.link ? `${section.link}#${item.anchor}` : section.link}
+                />
+              ))}
+            </AccordionGroup>
+          );
+        })}
+      </div>
       <AugmentSlot section={section} position="after" />
       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
       <SectionNav sections={sections} currentIndex={currentIndex} />
@@ -1625,29 +1713,29 @@ const FormulasSection = ({ section, sections, currentIndex, data, categoryExplan
 
 const DefinitionsSection = ({ section, sections, currentIndex, data, categoryExplanations }) => {
   const { categories, items, totalCount } = data;
-  const scrollCat = (key) => { const el = document.getElementById(`def-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 20, behavior: 'smooth' }); };
   return (
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
       <SectionIntro section={section} contentKey="introContent" />
       <AugmentSlot section={section} position="before" />
-      {categories.length > 0 && (
-        <EqualGrid>
-          {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
-        </EqualGrid>
-      )}
-      {categories.map((c) => {
-        const ci = items.filter((i) => i.category === c.key);
-        if (!ci.length) return null;
-        return (
-          <div key={c.key} id={`def-cat-${c.key}`} style={catGroup}>
-            <CatSubHeading>{c.name}</CatSubHeading>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              {ci.map((item, i) => <DefinitionItem key={`${c.key}-${i}`} term={item.title} definition={item.description} />)}
-            </div>
-          </div>
-        );
-      })}
+      <div style={{ margin: '24px 0 8px' }}>
+        {categories.map((c, idx) => {
+          const ci = items.filter((i) => i.category === c.key);
+          if (!ci.length) return null;
+          return (
+            <AccordionGroup key={c.key} title={c.name} count={ci.length} intro={categoryExplanations?.[c.name]} defaultOpen={idx === 0}>
+              {ci.map((item, i) => (
+                <ItemLinkCard
+                  key={`${c.key}-${i}`}
+                  title={item.title}
+                  excerpt={excerptOf(item.description)}
+                  href={item.anchor && section.link ? `${section.link}#${item.anchor}` : section.link}
+                />
+              ))}
+            </AccordionGroup>
+          );
+        })}
+      </div>
       <AugmentSlot section={section} position="after" />
       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
       <SectionNav sections={sections} currentIndex={currentIndex} />

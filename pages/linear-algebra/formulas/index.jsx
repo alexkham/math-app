@@ -10,7 +10,13 @@ import Head from 'next/head'
 
 export async function getStaticProps() {
   const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas')
-  
+
+  // Surfaced on the /linear-algebra hub via buildSectionData extraction.
+  const hubMeta = {
+    name: 'Linear Algebra Formulas',
+    hubDescription: 'Navigate through an essential collection of linear algebra formulas that power mathematical analysis and transformations. This guide presents key formulas across vector operations, matrix calculations, eigenvalues, and linear transformations — each equipped with clear notation, detailed explanations, and practical examples. You will find precise mathematical representations, component breakdowns, and specific use cases for over 15 fundamental formula categories. The organized structure helps you quickly locate and understand the tools you need, whether for solving equations, analyzing transformations, or applying linear algebra concepts in real-world scenarios. Perfect for students needing formula clarification, researchers requiring quick mathematical reference, or practitioners applying linear algebra in their work.',
+  }
+
   const keyWords = [
     'linear algebra formulas',
     'linear algebra equations',

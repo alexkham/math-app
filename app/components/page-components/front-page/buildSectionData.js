@@ -571,6 +571,13 @@ function extractVisualProps(seo) {
    TYPE-SPECIFIC PROCESSORS
    ================================================================ */
 
+// Anchor ids on the formulas/definitions child pages are generated from
+// item.name via this exact transform (see DefinitionsGlossary.jsx and
+// FormulaAccordionWrapper.jsx) — keep them in sync.
+function toAnchorId(name) {
+  return String(name || '').toLowerCase().replace(/\s+/g, '_');
+}
+
 async function processFormulas(parentSlug) {
   // The template literal must be inline in import() — webpack needs the
   // static path prefix to build a module context; a fully dynamic
@@ -588,9 +595,14 @@ async function processFormulas(parentSlug) {
   formulasList.forEach((item) => {
     const catKey = item.category || 'uncategorized';
     const catName = item.categoryName || slugToTitle(catKey);
-    if (!categoryMap[catKey]) categoryMap[catKey] = { key: catKey, name: catName, count: 0 };
+    if (!categoryMap[catKey]) categoryMap[catKey] = { key: catKey, name: catName, count: 0, anchor: `category_${toAnchorId(catName)}` };
     categoryMap[catKey].count++;
-    items.push({ title: item.title || item.name || '', formula: item.formula || item.latex || item.tex || '', category: catKey });
+    items.push({
+      title: item.title || item.name || '',
+      formula: item.formula || item.latex || item.tex || '',
+      category: catKey,
+      anchor: toAnchorId(item.name || item.title || ''),
+    });
   });
   return { categories: Object.values(categoryMap), items, totalCount: items.length };
 }
@@ -611,9 +623,17 @@ async function processDefinitions(parentSlug) {
   defsList.forEach((item) => {
     const catKey = item.category || 'uncategorized';
     const catName = item.categoryName || slugToTitle(catKey);
-    if (!categoryMap[catKey]) categoryMap[catKey] = { key: catKey, name: catName, count: 0 };
+    if (!categoryMap[catKey]) categoryMap[catKey] = { key: catKey, name: catName, count: 0, anchor: `category_${toAnchorId(catName)}` };
     categoryMap[catKey].count++;
-    items.push({ title: item.title || item.term || item.name || '', description: item.description || item.definition || '', category: catKey });
+    items.push({
+      title: item.title || item.term || item.name || '',
+      // Fallback chain: DB schemas differ per section — some carry prose in
+      // description/definition, others (e.g. set-theory) put the one-liner
+      // in `formula` and the prose in fields.intuition.
+      description: item.description || item.definition || item.formula || (item.fields && item.fields.intuition) || '',
+      category: catKey,
+      anchor: toAnchorId(item.name || item.title || item.term || ''),
+    });
   });
   return { categories: Object.values(categoryMap), items, totalCount: items.length };
 }

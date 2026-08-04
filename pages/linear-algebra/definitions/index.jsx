@@ -12,7 +12,13 @@ import DefinitionGlossary from '@/app/components/examples/DefinitionsGlossary'
 
 export async function getStaticProps() {
   const { default: linearAlgebraTermsList } = await import('@/app/api/db/definitions/linear-algebra/linearAlgebraDefinitions')
-  
+
+  // Surfaced on the /linear-algebra hub via buildSectionData extraction.
+  const hubMeta = {
+    name: 'Linear Algebra Terms and Definitions',
+    hubDescription: 'Discover essential linear algebra definitions that form the mathematical foundation for understanding vectors, matrices, and their relationships. This guide breaks down key terms from basic vector concepts like magnitude and direction to advanced matrix classifications and properties. Each definition includes precise mathematical notation, clear explanations, and visual examples to help grasp the concept. Whether you’re learning about vector spaces, exploring matrix types like triangular and symmetric matrices, or studying transformations, this organized reference makes complex linear algebra terminology accessible. The page serves as both a learning tool and a quick reference for students and practitioners, featuring interactive mathematical notation and practical examples throughout.',
+  }
+
   const keyWords = [
     'linear algebra terminology',
     'linear algebra terms',

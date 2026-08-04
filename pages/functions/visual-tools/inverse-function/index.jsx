@@ -6,7 +6,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-family explanations live in getStaticProps below (SSR/SEO-visible);
+// the component renders them as the info panel's "Family" tab.
 import FunctionInverse from '../../../../app/components/functions/inverse/FunctionInverse'
+import inverseDiagrams from '../../../../app/components/functions/inverse/functionInverseDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -47,10 +51,10 @@ Two header badges flag the current state. A yellow "**domain restricted**" badge
       title: `Picking a Base Function`,
       content: `The picker lists eleven families, with sine and cosine grouped under "Trigonometric":
 
-• Polynomial: **Identity** ($x$), **Linear (2x)**, **Cubic** ($x^3$), **Quadratic** ($x^2$)
-• Algebraic: **Reciprocal** ($1/x$), **Square root** ($\\sqrt{x}$), **Absolute** ($|x|$)
-• Transcendental: **Exponential** ($e^x$), **Logarithmic** ($\\ln x$)
-• Trigonometric: **Sine**, **Cosine**
+• Polynomial: [Identity](!#the-identity-and-its-inverse) ($x$), [Linear (2x)](!#the-scaled-linear-function-and-its-inverse), [Cubic](!#the-cubic-and-the-cube-root) ($x^3$), [Quadratic](!#the-quadratic-and-the-square-root) ($x^2$)
+• Algebraic: [Reciprocal](!#the-reciprocal-and-its-inverse) ($1/x$), [Square root](!#the-square-root-and-its-inverse) ($\\sqrt{x}$), [Absolute](!#the-absolute-value-and-its-inverse) ($|x|$)
+• Transcendental: [Exponential](!#the-exponential-and-the-logarithm) ($e^x$), [Logarithmic](!#the-logarithm-and-the-exponential) ($\\ln x$)
+• Trigonometric: [Sine](!#sine-and-the-arcsine), [Cosine](!#cosine-and-the-arccosine)
 
 Functions marked with a small **R** badge in the picker are **restricted** — they fail the horizontal line test in their natural domain and need to be restricted to an invertible branch before the inverse can be defined. The visualizer shows both the full curve (faded) and the chosen branch (bold) for restricted families. The bottom of the picker spells out what R means.
 
@@ -194,11 +198,118 @@ This is the same as the geometric fact that reflecting across $y = x$ swaps hori
       link: '',
     },
 
-    obj11: { title:``, content:``, before:``, after:``, link:'' },
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
-    obj15: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `Functions That Are Their Own Inverse`,
+      content: `Two picker families answer the inversion question with "already done": the [identity](!#the-identity-and-its-inverse) and the [reciprocal](!#the-reciprocal-and-its-inverse) are **self-inverse** — applying them twice returns the input, so $f^{-1} = f$.
+
+Geometrically, self-inverse means the graph is its own mirror image across $y = x$. The identity lies *on* the mirror; the reciprocal straddles it symmetrically. In the plots for both, the amber inverse curve lands exactly on the blue one — the visualizer dashes the amber so the coincidence stays visible.`,
+      before: ``, after: ``, link: '',
+    },
+    obj12: {
+      title: `The Identity and Its Inverse`,
+      content: `The identity $f(x) = x$ is the fixed point of inversion itself: its graph is the mirror line, so reflecting changes nothing at all.`,
+      before: ``,
+      after: `Blue curve, amber inverse, and gray mirror all coincide in one line — the degenerate case that makes the reflection rule legible everywhere else. Undoing "do nothing" is doing nothing.
+
+Every [self-inverse function](!#functions-that-are-their-own-inverse) has a graph symmetric across this line; the identity is simply the extreme case where the graph and the line are the same object.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Scaled Linear Function and Its Inverse`,
+      content: `Doubling is undone by halving: $f(x) = 2x$ has the inverse $f^{-1}(x) = x/2$, the cleanest nontrivial inverse pair in the picker.`,
+      before: ``,
+      after: `The two lines reflect across the mirror with slopes $2$ and $\\tfrac{1}{2}$ — reciprocal slopes, which is the general rule for linear inverses: reflection across $y = x$ swaps rise with run.
+
+Every nonzero linear function is invertible with no restriction: one-to-one is automatic when a graph climbs (or falls) steadily. The lesson generalizes as monotonicity — the property the [horizontal line test](!#the-horizontal-line-test-and-restricted-branches) checks for.`,
+      link: '',
+    },
+    obj14: {
+      title: `The Cubic and the Cube Root`,
+      content: `Cubing is fully undone by the cube root: both functions are defined on all of $\\mathbb{R}$, so this pair needs no restriction anywhere.`,
+      before: ``,
+      after: `The cubic passes the horizontal line test despite its flat spot at the origin — it never actually turns around, so every output is hit exactly once. That is why $\\sqrt[3]{x}$, unlike $\\sqrt{x}$, accepts negative inputs without complaint.
+
+Compare the [quadratic](!#the-quadratic-and-the-square-root), one degree lower: the even power folds, fails the test, and pays with a restricted branch. Odd degree grants full invertibility; even degree costs half the domain.`,
+      link: '',
+    },
+    obj15: {
+      title: `The Reciprocal and Its Inverse`,
+      content: `The reciprocal undoes itself: if $y = 1/x$, then $x = 1/y$ — the same formula read backwards, making $1/x$ the picker's second [self-inverse](!#functions-that-are-their-own-inverse) function.`,
+      before: ``,
+      after: `Both hyperbola branches are symmetric across the mirror line, each mapping onto itself under reflection. The dashed amber curve traces the blue one exactly.
+
+Self-inversion here has an arithmetic reading: flipping a fraction twice restores it. The excluded point at $x = 0$ survives inversion — the inverse (being the same function) excludes it too, in both domain and range.`,
+      link: '',
+    },
+    obj16: {
+      title: `The Exponential and the Logarithm`,
+      content: `The exponential's inverse is the natural logarithm: $e^x$ and $\\ln(x)$ reflect into each other across $y = x$ with no restriction needed — the exponential is strictly increasing everywhere.`,
+      before: ``,
+      after: `The reflection swaps their asymptotes along with everything else: the exponential's horizontal floor at $y = 0$ becomes the logarithm's vertical wall at $x = 0$; domain $\\mathbb{R}$ and range $(0, \\infty)$ trade places exactly.
+
+This is the pair to study for the domain-range swap rule: whatever holds for $f$ on one axis holds for $f^{-1}$ on the other. The [logarithmic entry](!#the-logarithm-and-the-exponential) shows the same picture from the other side.`,
+      link: '',
+    },
+    obj17: {
+      title: `The Logarithm and the Exponential`,
+      content: `Choosing the logarithm as the base function shows the same inverse pair from the other direction: now $\\ln(x)$ is blue and $e^x$ is amber.`,
+      before: ``,
+      after: `Nothing mathematical changes — inversion is symmetric, $(f^{-1})^{-1} = f$ — but the visual swap is worth one deliberate look: the blue curve now owns the vertical asymptote and the restricted domain, the amber one the horizontal floor.
+
+That interchangeability is the point: an inverse pair is one relationship viewed from two ends, not two separate facts. The [exponential entry](!#the-exponential-and-the-logarithm) is this section's mirror twin, in every sense.`,
+      link: '',
+    },
+    obj18: {
+      title: `The Quadratic and the Square Root`,
+      content: `The parabola fails the horizontal line test — every positive output comes from two inputs — so inverting it requires surgery: keep only the branch $x \\geq 0$, shown bold over the faded full curve.`,
+      before: ``,
+      after: `The kept right half is one-to-one, and its reflection is exactly $\\sqrt{x}$ — the amber curve. The discarded left half is why $\\sqrt{x}$ returns only the non-negative root: the branch choice made here *is* the definition of the square root function.
+
+Choosing the other branch ($x \\leq 0$) would have produced $-\\sqrt{x}$ instead. Branch choice is a genuine convention, standardized so that everyone's square root agrees.
+
+This is the template for every restricted family: fold detected by the [horizontal line test](!#the-horizontal-line-test-and-restricted-branches), branch kept, reflection taken.`,
+      link: '',
+    },
+    obj19: {
+      title: `The Square Root and Its Inverse`,
+      content: `Starting from $\\sqrt{x}$ and inverting lands back on the parabola — but only its right half: $f^{-1}(x) = x^2$ restricted to $x \\geq 0$.`,
+      before: ``,
+      after: `The restriction is inherited, not imposed: the square root's range is $[0, \\infty)$, so its inverse's domain can be no larger. Inverting never recovers what a restriction already discarded — the left half of the parabola is gone for good.
+
+Together with the [quadratic entry](!#the-quadratic-and-the-square-root), this pair shows both directions of the same relationship, and why $(\\sqrt{x})^2 = x$ holds on $x \\geq 0$ while $\\sqrt{x^2} = |x|$ does not reduce to $x$ — the asymmetry the composition tool demonstrates as its star example.`,
+      link: '',
+    },
+    obj20: {
+      title: `The Absolute Value and Its Inverse`,
+      content: `The V fails the horizontal line test as badly as a function can — every positive output has exactly two preimages — so only the branch $x \\geq 0$ survives, where $|x|$ is simply $x$.`,
+      before: ``,
+      after: `The kept branch coincides with the identity on the half-line, so its inverse does too: blue branch, amber inverse, and mirror line all overlap for $x \\geq 0$. The faded left arm is the discarded half.
+
+The absolute value makes the restriction lesson stark: what remains after cutting to a branch can be almost trivial. The interesting content was in the fold itself — and the fold is exactly what one-to-one functions are forbidden to have.`,
+      link: '',
+    },
+    obj21: {
+      title: `Sine and the Arcsine`,
+      content: `A periodic wave hits every output infinitely often — the worst possible horizontal line test failure — so sine is restricted to one increasing sweep, $[-\\pi/2, \\pi/2]$, before inverting.`,
+      before: ``,
+      after: `That single bold arch, rising from $-1$ to $1$, reflects into $\\arcsin(x)$: a curve living on the domain $[-1, 1]$ (sine's range, swapped into position) and producing angles in $[-\\pi/2, \\pi/2]$ — the *principal values*.
+
+Every other period of the faded wave could have been chosen; the standardized branch is the one crossing the origin. Calculators answer $\\arcsin(0.5) = 30°$ rather than $150°$ because of exactly this convention.
+
+[Cosine's branch](!#cosine-and-the-arccosine) solves the same problem with a different cut — comparing the two shows how branch choice adapts to each function's shape.`,
+      link: '',
+    },
+    obj22: {
+      title: `Cosine and the Arccosine`,
+      content: `Cosine's restriction cannot copy sine's: on $[-\\pi/2, \\pi/2]$ cosine rises and falls, failing the test inside the window. The invertible sweep is $[0, \\pi]$ instead — one full descent from $1$ to $-1$.`,
+      before: ``,
+      after: `Reflecting that falling branch produces $\\arccos(x)$: defined on $[-1, 1]$, returning angles in $[0, \\pi]$, and *decreasing* — the visible signature that distinguishes it from arcsine at a glance.
+
+The two arc functions are tied by $\\arccos(x) = \\pi/2 - \\arcsin(x)$: complementary branches of complementary functions.
+
+Together with [sine](!#sine-and-the-arcsine), this closes the picker's tour of restriction strategies: same disease (periodicity), same cure (one monotone sweep), different incision points.`,
+      link: '',
+    },
   }
 
 
@@ -315,12 +426,79 @@ This is the same as the geometric fact that reflecting across $y = x$ swaps hori
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // pair view + attached picture-reading panel, no link (own page).
+  const stateUnits = {
+    identity: demoUnitFrame({ svg: inverseDiagrams.identity, caption: 'f(x) = x, frozen',
+      text: 'Curve, inverse, and mirror in one line: the identity is the fixed point of reflection itself.' }),
+    linearScale: demoUnitFrame({ svg: inverseDiagrams.linearScale, caption: '2x and x/2, frozen',
+      text: 'Two lines with reciprocal slopes, reflecting into each other across the dashed mirror.' }),
+    cubic: demoUnitFrame({ svg: inverseDiagrams.cubic, caption: 'x&#179; and &#8731;x, frozen',
+      text: 'A full inverse pair with no restriction anywhere: the cubic never turns around, so the cube root accepts every real input.' }),
+    reciprocal: demoUnitFrame({ svg: inverseDiagrams.reciprocal, caption: '1/x, self-inverse, frozen',
+      text: 'The dashed amber curve retraces the blue hyperbola exactly: flipping a fraction twice restores it.' }),
+    exponential: demoUnitFrame({ svg: inverseDiagrams.exponential, caption: 'e&#739; and ln(x), frozen',
+      text: 'The reflection swaps the asymptotes: horizontal floor becomes vertical wall, domain and range trade axes.' }),
+    logarithmic: demoUnitFrame({ svg: inverseDiagrams.logarithmic, caption: 'ln(x) and e&#739;, frozen',
+      text: 'The same pair viewed from the other end &#8212; now the blue curve owns the wall and the amber one the floor.' }),
+    quadratic: demoUnitFrame({ svg: inverseDiagrams.quadratic, caption: 'x&#178; restricted, and &#8730;x, frozen',
+      text: 'The faded left arm is the price of invertibility: only the bold right branch reflects into the square root.' }),
+    sqrt: demoUnitFrame({ svg: inverseDiagrams.sqrt, caption: '&#8730;x and its inverse, frozen',
+      text: 'Inverting the root lands on the parabola&#8217;s right half only &#8212; the restriction is inherited from the root&#8217;s range.' }),
+    absolute: demoUnitFrame({ svg: inverseDiagrams.absolute, caption: '|x| restricted, frozen',
+      text: 'The kept branch of the V is just y = x, so branch, inverse, and mirror coincide; the faded arm is the discarded half.' }),
+    sine: demoUnitFrame({ svg: inverseDiagrams.sine, caption: 'sin(x) on [&#8722;&#960;/2, &#960;/2], and arcsin, frozen',
+      text: 'One bold rising arch of the faded wave reflects into arcsine: domain [&#8722;1, 1], principal values on the y-axis.' }),
+    cosine: demoUnitFrame({ svg: inverseDiagrams.cosine, caption: 'cos(x) on [0, &#960;], and arccos, frozen',
+      text: 'Cosine&#8217;s cut is one falling sweep, so arccosine falls too &#8212; from &#960; down to 0 across its [&#8722;1, 1] domain.' }),
+  };
+
+  // Canonical per-family explanations for the info panel's Family tab
+  // (SSR/SEO-visible; the component has no built-in per-family texts).
+  const explanations = {
+    identity:
+      '**Identity** $f(x) = x$ — self-inverse: its graph *is* the mirror line, so reflection changes nothing.\n\n' +
+      '[Learn more about the identity](!#the-identity-and-its-inverse) · [Self-inverse functions](!#functions-that-are-their-own-inverse)',
+    linearScale:
+      '**Linear** $f(x) = 2x$, $f^{-1}(x) = x/2$ — reciprocal slopes: reflection across $y = x$ swaps rise with run.\n\n' +
+      '[Learn more about the linear pair](!#the-scaled-linear-function-and-its-inverse)',
+    cubic:
+      '**Cubic** $x^3$, inverse $\\sqrt[3]{x}$ — odd degree passes the horizontal line test everywhere: no restriction, full-line inverse.\n\n' +
+      '[Learn more about the cubic pair](!#the-cubic-and-the-cube-root)',
+    reciprocal:
+      '**Reciprocal** $1/x$ — self-inverse: flipping a fraction twice restores it, and each hyperbola branch mirrors onto itself.\n\n' +
+      '[Learn more about the reciprocal](!#the-reciprocal-and-its-inverse) · [Self-inverse functions](!#functions-that-are-their-own-inverse)',
+    exponential:
+      '**Exponential** $e^x$, inverse $\\ln(x)$ — the reflection swaps asymptotes and trades domain $\\mathbb{R}$ for range $(0, \\infty)$.\n\n' +
+      '[Learn more about this pair](!#the-exponential-and-the-logarithm)',
+    logarithmic:
+      '**Logarithm** $\\ln(x)$, inverse $e^x$ — the same pair from the other end: $(f^{-1})^{-1} = f$.\n\n' +
+      '[Learn more about this pair](!#the-logarithm-and-the-exponential)',
+    quadratic:
+      '**Quadratic** $x^2$ restricted to $x \\geq 0$ — the branch choice that *defines* the square root; the discarded arm is why $\\sqrt{x}$ is never negative.\n\n' +
+      '[Learn more about the quadratic pair](!#the-quadratic-and-the-square-root) · [Restricted branches](!#the-horizontal-line-test-and-restricted-branches)',
+    sqrt:
+      '**Square root** $\\sqrt{x}$, inverse $x^2$ on $x \\geq 0$ — the restriction is inherited: inversion cannot recover what a branch cut discarded.\n\n' +
+      '[Learn more about the square root pair](!#the-square-root-and-its-inverse)',
+    absolute:
+      '**Absolute value** $|x|$ restricted to $x \\geq 0$ — the kept branch is the identity on a half-line; the fold was the whole obstruction.\n\n' +
+      '[Learn more about the absolute value](!#the-absolute-value-and-its-inverse) · [Restricted branches](!#the-horizontal-line-test-and-restricted-branches)',
+    sine:
+      '**Sine** on $[-\\pi/2, \\pi/2]$, inverse $\\arcsin(x)$ — one monotone sweep of the wave, reflected into the principal-value branch.\n\n' +
+      '[Learn more about sine and arcsine](!#sine-and-the-arcsine) · [Restricted branches](!#the-horizontal-line-test-and-restricted-branches)',
+    cosine:
+      '**Cosine** on $[0, \\pi]$, inverse $\\arccos(x)$ — a falling branch, so arccosine falls too; tied to arcsine by $\\arccos(x) = \\pi/2 - \\arcsin(x)$.\n\n' +
+      '[Learn more about cosine and arccosine](!#cosine-and-the-arccosine) · [Restricted branches](!#the-horizontal-line-test-and-restricted-branches)',
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      explanations,
+      stateUnits,
       seoData: {
         title: "Inverse Function Visualizer | Reflect Across y = x",
         description: "Visualize any function and its inverse as reflections across y = x. Transform the base function and watch the inverse re-derived live, with restricted branches highlighted.",
@@ -336,19 +514,33 @@ This is the same as the geometric fact that reflecting across $y = x$ swaps hori
 }
 
 
-export default function InverseFunctionVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function InverseFunctionVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    { id:'getting-started-with-the-visualizer',               title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
+    { id:'picking-a-base-function',                           title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
+    { id:'transforming-the-function',                         title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'reading-the-plot',                                  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
+    { id:'the-applied-chip-strip-and-show-toggles',           title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
+    { id:'the-info-panel-three-tabs',                         title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
+    { id:'what-is-an-inverse-function',                       title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
+    { id:'the-horizontal-line-test-and-restricted-branches',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
+    { id:'how-transformations-of-f-become-transformations-of-f-1', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
+    { id:'functions-that-are-their-own-inverse',              title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },
+    { id:'the-identity-and-its-inverse',                      title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('identity'), sectionsContent.obj12.after] },
+    { id:'the-scaled-linear-function-and-its-inverse',        title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('linearScale'), sectionsContent.obj13.after] },
+    { id:'the-cubic-and-the-cube-root',                       title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('cubic'), sectionsContent.obj14.after] },
+    { id:'the-reciprocal-and-its-inverse',                    title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('reciprocal'), sectionsContent.obj15.after] },
+    { id:'the-exponential-and-the-logarithm',                 title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content, unit('exponential'), sectionsContent.obj16.after] },
+    { id:'the-logarithm-and-the-exponential',                 title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content, unit('logarithmic'), sectionsContent.obj17.after] },
+    { id:'the-quadratic-and-the-square-root',                 title:sectionsContent.obj18.title, link:sectionsContent.obj18.link, content:[sectionsContent.obj18.content, unit('quadratic'), sectionsContent.obj18.after] },
+    { id:'the-square-root-and-its-inverse',                   title:sectionsContent.obj19.title, link:sectionsContent.obj19.link, content:[sectionsContent.obj19.content, unit('sqrt'), sectionsContent.obj19.after] },
+    { id:'the-absolute-value-and-its-inverse',                title:sectionsContent.obj20.title, link:sectionsContent.obj20.link, content:[sectionsContent.obj20.content, unit('absolute'), sectionsContent.obj20.after] },
+    { id:'sine-and-the-arcsine',                              title:sectionsContent.obj21.title, link:sectionsContent.obj21.link, content:[sectionsContent.obj21.content, unit('sine'), sectionsContent.obj21.after] },
+    { id:'cosine-and-the-arccosine',                          title:sectionsContent.obj22.title, link:sectionsContent.obj22.link, content:[sectionsContent.obj22.content, unit('cosine'), sectionsContent.obj22.after] },
+    { id:'related-concepts-and-tools',                        title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -405,7 +597,7 @@ export default function InverseFunctionVisualizerPage({seoData, sectionsContent,
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Inverse Functions Visualizer/Explorer</h1>
       <br/>
-      <FunctionInverse/>
+      <FunctionInverse explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

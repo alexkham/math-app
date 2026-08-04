@@ -8,7 +8,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-family explanations live in getStaticProps below (SSR/SEO-visible);
+// the component renders them as the info panel's "Family" tab.
 import FunctionRange from '../../../../app/components/functions/range/FunctionRange'
+import rangeDiagrams from '../../../../app/components/functions/range/functionRangeDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -49,10 +53,10 @@ The page launches with the quadratic family. Its range is $y \\geq 0$ — the pa
       title: `Picking a Function`,
       content: `The picker groups eleven base functions by the **shape of their range** rather than by algebraic type — a deliberate choice that makes the visualizer act as a reference for range classification:
 
-• **Unrestricted** ($\\mathbb{R}$) — Identity, Linear (2x), Cubic, Logarithmic. All reach every real number as an output.
-• **Bounded below** — Quadratic, Absolute, Square root (range $[0, \\infty)$), Exponential (range $(0, \\infty)$). Their outputs have a floor.
-• **Bounded** $[-1, 1]$ — Sine, Cosine. Periodic functions with a hard ceiling and floor.
-• **Excluded point** — Reciprocal. Reaches every real number except $0$ — its horizontal asymptote.
+• [Unrestricted](!#ranges-covering-all-of-the-reals) ($\\mathbb{R}$) — [Identity](!#the-identity-function), [Linear (2x)](!#the-scaled-linear-function), [Cubic](!#the-cubic-function), [Logarithmic](!#the-logarithmic-function). All reach every real number as an output.
+• [Bounded below](!#ranges-bounded-below) — [Quadratic](!#the-quadratic-function), [Absolute](!#the-absolute-value-function), [Square root](!#the-square-root-function) (range $[0, \\infty)$), [Exponential](!#the-exponential-function) (range $(0, \\infty)$). Their outputs have a floor.
+• [Bounded](!#ranges-bounded-on-both-sides) $[-1, 1]$ — [Sine](!#the-sine-function), [Cosine](!#the-cosine-function). Periodic functions with a hard ceiling and floor.
+• **Excluded point** — [Reciprocal](!#the-reciprocal-and-its-missing-output). Reaches every real number except $0$ — its horizontal asymptote.
 
 Notice that logarithmic appears here under "Unrestricted" even though its *domain* is restricted to positive numbers. Domain and range are independent: a function can have a restricted domain and still produce every real number as output.
 
@@ -195,11 +199,132 @@ The distinction between open and closed endpoints is genuinely important in calc
       link: '',
     },
 
-    obj11: { title:``, content:``, before:``, after:``, link:'' },
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
-    obj15: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `Ranges Covering All of the Reals`,
+      content: `Four functions in the picker produce every real number as an output: the [identity](!#the-identity-function), the [scaled linear](!#the-scaled-linear-function), the [cubic](!#the-cubic-function), and — the surprise of the group — the [logarithm](!#the-logarithmic-function). Their range bar is one unbroken green band up the whole y-axis.
+
+The logarithm's membership is the teaching moment: a function with a heavily *restricted domain* can still have a *complete range*. Domain and range restrictions are independent, and this group proves it in one glance.`,
+      before: ``, after: ``, link: '',
+    },
+    obj12: {
+      title: `The Identity Function`,
+      content: `The identity outputs exactly what it receives, so its range is all of $\\mathbb{R}$ — every height on the y-axis gets hit exactly once.`,
+      before: ``,
+      after: `The green band runs the whole axis with nothing to mark. As with the domain tool, the identity is the control case: switch here and every red stripe vanishes.
+
+One nuance worth a look: the identity hits each output exactly once. The [cubic](!#the-cubic-function) also covers everything, but with a different rhythm — the comparison shows that "range = ℝ" says nothing about *how often* each value is reached.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Scaled Linear Function`,
+      content: `Doubling still reaches every height: $f(x) = 2x$ has range $\\mathbb{R}$, just traversed twice as fast.`,
+      before: ``,
+      after: `Every nonzero linear function is onto the reals — steepness changes the pace, never the coverage. Only the degenerate $a = 0$ collapses the range to a single value, which you can watch happen by dragging the vertical-scale slider through zero.
+
+That collapse is the range tool's most dramatic slider moment: an entire axis of outputs shrinking to one green dot at $y = k$.`,
+      link: '',
+    },
+    obj14: {
+      title: `The Cubic Function`,
+      content: `Odd powers are onto: $x^3$ produces every real output, from arbitrarily negative to arbitrarily positive.`,
+      before: ``,
+      after: `The cubic pairs with the [quadratic](!#the-quadratic-function) as the parity lesson of this page: an odd power covers the whole y-axis, an even power only half of it. One sign change in the exponent, half the range gone.
+
+Full range plus full domain also makes the cubic invertible everywhere — the cube root needs no restriction, unlike the square root story on the domain page.`,
+      link: '',
+    },
+    obj15: {
+      title: `The Logarithmic Function`,
+      content: `The logarithm climbs without bound and dives without bound: its range is all of $\\mathbb{R}$, despite a domain of only half the line.`,
+      before: ``,
+      after: `Slow growth is still unbounded growth — $\\ln(x)$ eventually exceeds any height, and near zero it plunges below any depth. The green band covers the entire y-axis while the curve itself lives only on the right half-plane.
+
+This is the mirror image of its inverse: the [exponential](!#the-exponential-function) has full domain and restricted range; the logarithm has restricted domain and full range. Inversion swaps the two restrictions — the cleanest statement of the domain-range duality this pair of tools is built around.`,
+      link: '',
+    },
+    obj16: {
+      title: `Ranges Bounded Below`,
+      content: `Four functions never output anything below a floor: the [quadratic](!#the-quadratic-function), the [absolute value](!#the-absolute-value-function), and the [square root](!#the-square-root-function) all bottom out at $0$ and include it — while the [exponential](!#the-exponential-function) presses toward $0$ forever without ever reaching it.
+
+Same floor, two different relationships with it: three closed dots and one open circle. Whether the boundary output is *attained* is exactly the open-versus-closed distinction, now on the y-axis.`,
+      before: ``, after: ``, link: '',
+    },
+    obj17: {
+      title: `The Quadratic Function`,
+      content: `Squares are never negative: the parabola's outputs fill $[0, \\infty)$, with the floor value $0$ genuinely attained at the vertex.`,
+      before: ``,
+      after: `The filled green dot at $y = 0$ records the attainment: $f(0) = 0$ is a real output, produced by a real input. Everything below the floor is red — no input, however clever, squares to a negative.
+
+Every output above the floor is hit **twice** ($x$ and $-x$), the vertex value once. That double-covering is why inverting the parabola requires choosing a branch.
+
+Drag $a$ negative and the whole picture flips: range $(-\\infty, 0]$, the floor becoming a ceiling — the range rule $y = aL + k$ acting live.`,
+      link: '',
+    },
+    obj18: {
+      title: `The Absolute Value Function`,
+      content: `The V outputs distances, and distances start at zero: range $[0, \\infty)$, floor attained at the corner.`,
+      before: ``,
+      after: `Identical range to the [quadratic](!#the-quadratic-function) — same closed floor, same double-covering of positive outputs — from a completely different shape. Range, like domain, is a coarse fingerprint: it cannot tell the parabola from the V.
+
+What distinguishes them is *how* the floor is touched: the parabola kisses it smoothly, the V hits it at a corner. The range bar sees only the same green dot.`,
+      link: '',
+    },
+    obj19: {
+      title: `The Square Root Function`,
+      content: `The square root returns the non-negative root only: range $[0, \\infty)$, starting from the attained output $\\sqrt{0} = 0$.`,
+      before: ``,
+      after: `Here range and domain have the same shape — $[0, \\infty)$ both ways — a coincidence peculiar to this function among the picker's eleven. The curve starts at the origin and covers each output exactly once, making it invertible without any branch-picking.
+
+The single-covering is the point of contrast with its siblings in the bounded-below group: same green half-axis, but reached once per value rather than twice.`,
+      link: '',
+    },
+    obj20: {
+      title: `The Exponential Function`,
+      content: `The exponential outputs only positive values — and the boundary $0$ is approached forever but never produced: range $(0, \\infty)$, **open** at the floor.`,
+      before: ``,
+      after: `The open circle at $y = 0$ is the range-side signature of a horizontal asymptote: the curve flattens toward the floor as $x \\to -\\infty$, yet $e^x = 0$ has no solution. An asymptote is precisely an output the function approaches but never attains.
+
+Compare the [quadratic's](!#the-quadratic-function) filled dot: same-looking floor, opposite answer to "is the floor a real output?" — the whole open/closed lesson in two markers.
+
+Shift $k$ upward and the excluded floor rides with it: range $(k, \\infty)$, the asymptote always exactly at the open circle.`,
+      link: '',
+    },
+    obj21: {
+      title: `Ranges Bounded on Both Sides`,
+      content: `[Sine](!#the-sine-function) and [cosine](!#the-cosine-function) are the picker's only two-sided prisoners: every output lands in $[-1, 1]$, with both walls included. Green band from $-1$ to $1$, closed dots at both ends, red everywhere else.
+
+A bounded range is what makes amplitude a meaningful idea — and it is why these two functions model oscillation: outputs that can neither escape upward nor downward have nowhere to go but back and forth.`,
+      before: ``, after: ``, link: '',
+    },
+    obj22: {
+      title: `The Sine Function`,
+      content: `Sine's outputs sweep $[-1, 1]$ and touch both walls: $\\sin(\\pi/2) = 1$ and $\\sin(-\\pi/2) = -1$ are attained exactly, infinitely often.`,
+      before: ``,
+      after: `Both endpoint dots are filled — the extremes are genuine outputs, hit once per period — and every interior value is hit twice per period. Nothing outside the band is ever produced, however far $x$ travels.
+
+Under the transformation $a \\sin(x) + k$ the band becomes $[k - |a|, k + |a|]$: amplitude is nothing more than the half-width of the range. Watching the green band stretch as you drag $a$ is the best definition of amplitude the tool can offer.`,
+      link: '',
+    },
+    obj23: {
+      title: `The Cosine Function`,
+      content: `Cosine shares sine's prison exactly: range $[-1, 1]$, both walls attained — only the *inputs* achieving each output differ.`,
+      before: ``,
+      after: `The range bar cannot distinguish [sine](!#the-sine-function) from cosine at all — identical green band, identical closed dots. The phase shift between them lives entirely on the x-axis, invisible to any output-side measurement.
+
+That invisibility is the deeper point: range collapses a function to the *set* of its outputs, forgetting when and how often each occurs. Two functions can be output-identical yet nowhere equal.`,
+      link: '',
+    },
+    obj24: {
+      title: `The Reciprocal and Its Missing Output`,
+      content: `The reciprocal produces every real output except one: $1/x = 0$ has no solution, so the range is $\\mathbb{R} \\setminus \\{0\\}$ — a green axis with a single puncture.`,
+      before: ``,
+      after: `The open circle at $y = 0$ is the output-side twin of the reciprocal's excluded input: this function misses exactly one value in each direction, and both misses trace back to the same fraction $1/x$ never being zero and never accepting zero.
+
+The missing output is again a horizontal asymptote wearing range clothing: both branches flatten toward $y = 0$ without arriving, just like the [exponential's](!#the-exponential-function) floor — but here the asymptote is approached from *both* sides, puncturing the middle of the range rather than capping its end.
+
+Shift $k$ and the puncture rides to $y = k$: every transformed reciprocal misses exactly one output, always at its horizontal asymptote.`,
+      link: '',
+    },
   }
 
 
@@ -317,12 +442,79 @@ The distinction between open and closed endpoints is genuinely important in calc
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // range view + attached picture-reading panel, no link (own page).
+  const stateUnits = {
+    identity: demoUnitFrame({ svg: rangeDiagrams.identity, caption: 'f(x) = x, range frozen',
+      text: 'One unbroken green band up the y-axis: every height is an output, each hit exactly once.' }),
+    linearScale: demoUnitFrame({ svg: rangeDiagrams.linearScale, caption: 'f(x) = 2x, range frozen',
+      text: 'Full green band: doubling covers every output, just twice as fast.' }),
+    cubic: demoUnitFrame({ svg: rangeDiagrams.cubic, caption: 'f(x) = x&#179;, range frozen',
+      text: 'Odd power, full coverage: from arbitrarily deep to arbitrarily high, nothing on the y-axis is missed.' }),
+    logarithmic: demoUnitFrame({ svg: rangeDiagrams.logarithmic, caption: 'f(x) = ln(x), range frozen',
+      text: 'The curve lives only on the right half-plane, yet the green band covers the entire y-axis &#8212; restricted domain, complete range.' }),
+    quadratic: demoUnitFrame({ svg: rangeDiagrams.quadratic, caption: 'f(x) = x&#178;, range frozen',
+      text: 'Green from zero upward with a filled dot at the floor: 0 is genuinely attained at the vertex; below it, red.' }),
+    absolute: demoUnitFrame({ svg: rangeDiagrams.absolute, caption: 'f(x) = |x|, range frozen',
+      text: 'The same range as the parabola &#8212; [0, &#8734;), floor attained at the corner &#8212; from a different shape.' }),
+    sqrt: demoUnitFrame({ svg: rangeDiagrams.sqrt, caption: 'f(x) = &#8730;x, range frozen',
+      text: 'Range [0, &#8734;), floor attained at the origin &#8212; and each output reached exactly once.' }),
+    exponential: demoUnitFrame({ svg: rangeDiagrams.exponential, caption: 'f(x) = e&#739;, range frozen',
+      text: 'Green above zero with an OPEN circle at the floor: the curve presses toward y = 0 forever without producing it.' }),
+    sine: demoUnitFrame({ svg: rangeDiagrams.sine, caption: 'f(x) = sin(x), range frozen',
+      text: 'A green band from &#8722;1 to 1 with filled dots at both walls &#8212; the extremes are real outputs, hit once per period.' }),
+    cosine: demoUnitFrame({ svg: rangeDiagrams.cosine, caption: 'f(x) = cos(x), range frozen',
+      text: 'The identical band to sine&#8202;: range cannot tell the two apart &#8212; the phase difference lives on the x-axis.' }),
+    reciprocal: demoUnitFrame({ svg: rangeDiagrams.reciprocal, caption: 'f(x) = 1/x, range frozen',
+      text: 'Green in both directions with one puncture at y = 0: the single output no input can produce.' }),
+  };
+
+  // Canonical per-family explanations for the info panel's Family tab
+  // (SSR/SEO-visible; the component has no built-in per-family texts).
+  const explanations = {
+    identity:
+      '**Identity** $f(x) = x$ — range $\\mathbb{R}$: every output attained, each exactly once.\n\n' +
+      '[Learn more about the identity function](!#the-identity-function) · [Full-range families](!#ranges-covering-all-of-the-reals)',
+    linearScale:
+      '**Linear** $f(x) = 2x$ — range $\\mathbb{R}$: every nonzero linear function is onto the reals; only $a = 0$ collapses the range.\n\n' +
+      '[Learn more about the scaled linear function](!#the-scaled-linear-function) · [Full-range families](!#ranges-covering-all-of-the-reals)',
+    cubic:
+      '**Cubic** $x^3$ — range $\\mathbb{R}$: odd powers cover the whole axis, where even powers cover half.\n\n' +
+      '[Learn more about the cubic function](!#the-cubic-function) · [Full-range families](!#ranges-covering-all-of-the-reals)',
+    logarithmic:
+      '**Logarithm** $\\ln(x)$ — range $\\mathbb{R}$ despite the restricted domain: slow growth is still unbounded growth.\n\n' +
+      '[Learn more about the logarithmic function](!#the-logarithmic-function) · [Full-range families](!#ranges-covering-all-of-the-reals)',
+    quadratic:
+      '**Quadratic** $x^2$ — range $[0, \\infty)$, **closed** at the floor: $0$ is attained at the vertex; interior outputs are hit twice.\n\n' +
+      '[Learn more about the quadratic function](!#the-quadratic-function) · [Bounded-below families](!#ranges-bounded-below)',
+    absolute:
+      '**Absolute value** $|x|$ — range $[0, \\infty)$, floor attained at the corner: output-identical to the parabola.\n\n' +
+      '[Learn more about the absolute value function](!#the-absolute-value-function) · [Bounded-below families](!#ranges-bounded-below)',
+    sqrt:
+      '**Square root** $\\sqrt{x}$ — range $[0, \\infty)$, attained and single-covered: the only picker family with matching domain and range shapes.\n\n' +
+      '[Learn more about the square root function](!#the-square-root-function) · [Bounded-below families](!#ranges-bounded-below)',
+    exponential:
+      '**Exponential** $e^x$ — range $(0, \\infty)$, **open** at the floor: the horizontal asymptote is an output approached but never produced.\n\n' +
+      '[Learn more about the exponential function](!#the-exponential-function) · [Bounded-below families](!#ranges-bounded-below)',
+    sine:
+      '**Sine** — range $[-1, 1]$, both walls attained: amplitude is the half-width of this band.\n\n' +
+      '[Learn more about the sine function](!#the-sine-function) · [Bounded families](!#ranges-bounded-on-both-sides)',
+    cosine:
+      '**Cosine** — range $[-1, 1]$, identical to sine: the phase shift is invisible to any output-side measurement.\n\n' +
+      '[Learn more about the cosine function](!#the-cosine-function) · [Bounded families](!#ranges-bounded-on-both-sides)',
+    reciprocal:
+      '**Reciprocal** $1/x$ — range $\\mathbb{R} \\setminus \\{0\\}$: one missing output, at the horizontal asymptote.\n\n' +
+      '[Learn more about the reciprocal](!#the-reciprocal-and-its-missing-output)',
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      explanations,
+      stateUnits,
       seoData: {
         title: "Range of a Function Visualizer | Achievable Outputs",
         description: "Visualize the range of any transformed function on the y-axis. Drag a test point to check achievability and see why only a and k change the range.",
@@ -338,19 +530,35 @@ The distinction between open and closed endpoints is genuinely important in calc
 }
 
 
-export default function RangeOfFunctionPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function RangeOfFunctionPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    { id:'getting-started-with-the-visualizer',          title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
+    { id:'picking-a-function',                           title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
+    { id:'why-only-a-and-k-change-the-range',            title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'reading-the-y-axis-highlight-and-range-bar',   title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
+    { id:'probing-with-the-test-point-slider',           title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
+    { id:'the-range-card-and-applied-chips',             title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
+    { id:'customizing-the-highlight-color',              title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
+    { id:'what-is-the-range-of-a-function',              title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
+    { id:'open-vs-closed-endpoints-and-excluded-values', title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
+    { id:'ranges-covering-all-of-the-reals',             title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },
+    { id:'the-identity-function',                        title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('identity'), sectionsContent.obj12.after] },
+    { id:'the-scaled-linear-function',                   title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('linearScale'), sectionsContent.obj13.after] },
+    { id:'the-cubic-function',                           title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('cubic'), sectionsContent.obj14.after] },
+    { id:'the-logarithmic-function',                     title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('logarithmic'), sectionsContent.obj15.after] },
+    { id:'ranges-bounded-below',                         title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content] },
+    { id:'the-quadratic-function',                       title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content, unit('quadratic'), sectionsContent.obj17.after] },
+    { id:'the-absolute-value-function',                  title:sectionsContent.obj18.title, link:sectionsContent.obj18.link, content:[sectionsContent.obj18.content, unit('absolute'), sectionsContent.obj18.after] },
+    { id:'the-square-root-function',                     title:sectionsContent.obj19.title, link:sectionsContent.obj19.link, content:[sectionsContent.obj19.content, unit('sqrt'), sectionsContent.obj19.after] },
+    { id:'the-exponential-function',                     title:sectionsContent.obj20.title, link:sectionsContent.obj20.link, content:[sectionsContent.obj20.content, unit('exponential'), sectionsContent.obj20.after] },
+    { id:'ranges-bounded-on-both-sides',                 title:sectionsContent.obj21.title, link:sectionsContent.obj21.link, content:[sectionsContent.obj21.content] },
+    { id:'the-sine-function',                            title:sectionsContent.obj22.title, link:sectionsContent.obj22.link, content:[sectionsContent.obj22.content, unit('sine'), sectionsContent.obj22.after] },
+    { id:'the-cosine-function',                          title:sectionsContent.obj23.title, link:sectionsContent.obj23.link, content:[sectionsContent.obj23.content, unit('cosine'), sectionsContent.obj23.after] },
+    { id:'the-reciprocal-and-its-missing-output',        title:sectionsContent.obj24.title, link:sectionsContent.obj24.link, content:[sectionsContent.obj24.content, unit('reciprocal'), sectionsContent.obj24.after] },
+    { id:'related-concepts-and-tools',                   title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -407,7 +615,7 @@ export default function RangeOfFunctionPage({seoData, sectionsContent, introCont
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Range of a Function</h1>
       <br/>
-      <FunctionRange/>
+      <FunctionRange explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

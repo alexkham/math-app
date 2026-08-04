@@ -1227,6 +1227,202 @@
           "status": "pending"
         }
       ]
+    },
+    "functions-range": {
+      "slug": "range",
+      "name": "Function Range Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/range/index.jsx",
+      "diagramsModule": "app/components/functions/range/functionRangeDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "cubic",
+        "logarithmic",
+        "quadratic",
+        "absolute",
+        "sqrt",
+        "exponential",
+        "sine",
+        "cosine",
+        "reciprocal"
+      ],
+      "line1": {
+        "done": "2026-08-01",
+        "states": 11,
+        "sections": 24,
+        "anchors": 52,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "range",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "bounded function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "amplitude",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "onto function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "attained value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "open interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "closed interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "excluded value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertex",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-inverse": {
+      "slug": "inverse-function",
+      "name": "Inverse Function Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/inverse-function/index.jsx",
+      "diagramsModule": "app/components/functions/inverse/functionInverseDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "cubic",
+        "reciprocal",
+        "exponential",
+        "logarithmic",
+        "quadratic",
+        "sqrt",
+        "absolute",
+        "sine",
+        "cosine"
+      ],
+      "line1": {
+        "done": "2026-08-01",
+        "states": 11,
+        "sections": 22,
+        "anchors": 40,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "inverse function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal line test",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-to-one function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "restricted branch",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "principal value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "arcsine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "arccosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "self-inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "mirror line",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "range",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "monotonic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
     }
   },
   "$stubTemplate": {

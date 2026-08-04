@@ -2818,7 +2818,6 @@ const IDENTITY_FN = x => x;
 export default function FunctionInverse({
   initialFamily = 'quadratic',
   families = DEFAULT_FAMILIES,
-  explanations = {},
   visualizerProps = {},
   infoPanelProps = {},
   darkMode = false,
@@ -2985,19 +2984,11 @@ export default function FunctionInverse({
     return body;
   }, [params]);
 
-  const infoTabs = useMemo(() => {
-    const tabs = [
-      { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
-      { key: 'parameters',  label: 'Parameters',  order: 5, content: parametersContent },
-      { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
-    ];
-    // Per-family explanation supplied by the page (canonical copy lives in
-    // getStaticProps of each page that renders this component).
-    if (explanations[current] != null) {
-      tabs.push({ key: 'family', label: 'Family', order: 7, content: explanations[current] });
-    }
-    return tabs;
-  }, [explanationContent, parametersContent, explanations, current]);
+  const infoTabs = useMemo(() => ([
+    { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
+    { key: 'parameters',  label: 'Parameters',  order: 5, content: parametersContent },
+    { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
+  ]), [explanationContent, parametersContent]);
 
   /* ---- Styling ---- */
   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';

@@ -6,6 +6,14 @@ import buildSectionData from '@/app/components/page-components/front-page/buildS
 
 export async function getStaticProps() {
 
+  // Surfaced on the /linear-algebra hub via buildSectionData extraction.
+  // First-match-wins: placed before the placeholder seoData below
+  // ("Tool Section Title"), which still needs its own cleanup pass.
+  const hubMeta = {
+    name: 'Linear Algebra Calculators',
+    hubDescription: 'Step-by-step calculators for the core computations of linear algebra: solve systems of linear equations, carry out matrix operations, and work with vectors — every calculator shows its full working, one operation at a time.',
+  }
+
   const keyWords = ['', '', '', '', ''];
 
   // Build parent section data — e.g. '/algebra'
