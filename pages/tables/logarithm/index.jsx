@@ -1,163 +1,3 @@
-// import dynamic from 'next/dynamic'
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import '../../../pages.css'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-
-// // Dynamically import the client component with no SSR
-// const LogarithmTable = dynamic(
-//   () => import('@/app/components/logarithm-table/LogarithmTable'),
-//   { ssr: false }
-// )
-
-
-//  export async function getStaticProps(){
-
-//   const keyWords=[
-//     'logarithm table','logarithm','log calculator','logarithm calculator','logarithmic calculator',
-//     'calculator of log','log log calculator'
-//   ]
-
-  
-//   const sectionsContent={
-
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-
-
-//     obj5:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     }
-  
-//   }
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//            seoData: {
-//       title: "Logarithm Table & Calculator - Log Values | Learn Math Class",
-//       description: "Interactive logarithm table with calculator. Find log values, natural logarithms, and common logarithms with step-by-step calculations.",
-//       keywords: keyWords.join(", "),
-//       url: "/tables/logarithm",
-//       name: "Logarithm Table"
-//     },
-//     keyWords
-        
-//        }
-//     }
-//    }
-  
-
-
-
-// export default function LogarithmTablePage({sectionsContent,seoData,keyWords}) {
-//   return (
-//     <div className='tables-main'>
-//       <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head>
-//       {/* <GenericNavbar/> */}
-//       <br />
-//       <br />
-//       <br />
-     
-//         <OperaSidebar 
-//              side='right'
-//              topOffset='55px' 
-//              sidebarWidth='45px'
-//              panelWidth='200px'
-//              iconColor='white'
-//              panelBackgroundColor='#f2f2f2'
-//            /> 
-//      <Breadcrumb />
-//       <div style={{position:'absolute', top:'100px', width:'95%', left:'0', right:'0'}}>
-      
-//         <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Logarithm Table</h1>
-//         <LogarithmTable />
-//       </div>
-//       {/* <ScrollUpButton /> */}
-//     </div>
-//   )
-// }
-
-
 import dynamic from 'next/dynamic'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import '../../pages.css'
@@ -196,14 +36,14 @@ const LogarithmTable = dynamic(
   
   const sectionsContent={
 
-    obj1:{
+   obj1:{
       title:`Getting Started with the Table`,
       content:`The table covers common (base-10) logarithms for values from $10$ to $99.99$, organized as a four-decimal mantissa table. To find a log, you read two table sections: the main grid for the first decimal digit, then a mean-difference column for the second.
 
 Quick orientation:
 - Column **N** shows the integer base from $10$ to $99$
 - Columns $0$ through $9$ give the mantissa for the first decimal digit
-- Columns **Mean Diff $1$** through **Mean Diff $9$** give the correction for the second decimal digit
+- Columns **Mean Diff 1** through **Mean Diff 9** give the correction for the second decimal digit
 - The calculator above the table accepts any positive value and returns the four-decimal log value
 - The column header row and the input area stay sticky as you scroll`,
       before:``,
@@ -260,12 +100,12 @@ The sticky column header stays visible while you scroll through the $90$-row tab
       link:'',
     },
 
-    obj5:{
+ obj5:{
       title:`Looking Up a Value by Hand`,
       content:`For $\\log_{10}(23.47)$ using the table alone:
 - Locate row $23$
 - Read column $4$ — that gives the mantissa for $23.4$
-- Read **Mean Diff $7$** on the same row — that adds the contribution from the second decimal
+- Read **Mean Diff 7** on the same row — that adds the contribution from the second decimal
 - Sum the two values to get the mantissa for $23.47$
 
 The result is the mantissa only. The **characteristic** (integer part of the log) is determined by the number of digits before the decimal point in your original value, not from the table. For $23.47$ the characteristic is $1$ because there are two digits before the decimal point, so $\\log_{10}(23.47) \\approx 1 + \\text{(mantissa)}$.

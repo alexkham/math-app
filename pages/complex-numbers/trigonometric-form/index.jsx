@@ -700,7 +700,7 @@ The modulus represents the "size" of a complex number without regard to its dire
   title: `Argument (Angle)`,
   content: `The argument of a complex number $z$ is the angle $\\theta$ measured from the positive real axis to the line segment connecting the origin to $z$. By convention, angles measured counterclockwise are positive, and angles measured clockwise are negative.
 
-The notation $\\arg(z) = \\theta$ denotes the argument of $z$. Arguments are typically expressed in radians, though degrees appear in elementary contexts.
+The notation $\\arg(z) = \\theta$ denotes the argument of $z$ — one of the standard [complex number symbols](!/math-symbols/complex-numbers). Arguments are typically expressed in radians, though degrees appear in elementary contexts.
 
 ## Finding the Argument
 

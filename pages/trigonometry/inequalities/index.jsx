@@ -361,20 +361,20 @@ Set side by side, the two methods differ less in what they yield than in what th
     after: ``,
     link: ``,
   },
-  obj4: {
+ obj4: {
     title: `Solving Sine Inequalities`,
     content: `The full procedure for solving $\\sin(x) > a$ (or $\\geq$, $<$, $\\leq$) combines the boundary equation with interval determination.
 
-**Case $|a| < 1$:** The equation $\\sin(x) = a$ has two solutions per period: $x_1$ and $x_2 = \\pi - x_1$ (where $x_1 = \\arcsin(a)$). The sign of $a$ determines the quadrants. Within one period $[0, 2\\pi)$:
+**Case** $|a| < 1$: The equation $\\sin(x) = a$ has two solutions per period: $x_1$ and $x_2 = \\pi - x_1$ (where $x_1 = \\arcsin(a)$). The sign of $a$ determines the quadrants. Within one period $[0, 2\\pi)$:
 
 - $\\sin(x) > a$ when $a > 0$: the solution is $(x_1, x_2)$ — the arc where sine exceeds $a$, passing through the maximum.
 - $\\sin(x) > a$ when $a < 0$: the solution is $[0, x_2) \\cup (x_1, 2\\pi)$ where $x_1 = \\pi - \\arcsin(a)$ and $x_2 = \\arcsin(a) + 2\\pi$ — the larger arc that includes the maximum. More carefully: the two boundary angles are $\\pi + |\\arcsin(a)|$ and $2\\pi - |\\arcsin(a)|$ (in Quadrants III and IV), and sine exceeds $a$ on the arc that does not pass through the minimum.
 
-**Case $a = 1$:** $\\sin(x) \\geq 1$ is satisfied only at $x = \\frac{\\pi}{2} + 2n\\pi$ (a single point per period). $\\sin(x) > 1$ has no solution.
+**Case** $a = 1$: $\\sin(x) \\geq 1$ is satisfied only at $x = \\frac{\\pi}{2} + 2n\\pi$ (a single point per period). $\\sin(x) > 1$ has no solution.
 
-**Case $a = -1$:** $\\sin(x) \\leq -1$ is satisfied only at $x = \\frac{3\\pi}{2} + 2n\\pi$. $\\sin(x) < -1$ has no solution.
+**Case** $a = -1$: $\\sin(x) \\leq -1$ is satisfied only at $x = \\frac{3\\pi}{2} + 2n\\pi$. $\\sin(x) < -1$ has no solution.
 
-**Case $|a| > 1$:** $\\sin(x) > a$ when $a > 1$: no solution (sine never exceeds 1). $\\sin(x) > a$ when $a < -1$: all real numbers (sine is always greater than any value below $-1$).
+**Case** $|a| > 1$: $\\sin(x) > a$ when $a > 1$: no solution (sine never exceeds 1). $\\sin(x) > a$ when $a < -1$: all real numbers (sine is always greater than any value below $-1$).
 
 These cases follow directly from the [boundedness](!/trigonometry/properties) of sine. Checking whether $a$ falls within $[-1, 1]$ before proceeding prevents unnecessary computation.
 
@@ -431,7 +431,7 @@ The unit circle interpretation is equally clear: identify the arcs satisfying ea
     after: ``,
     link: ``,
   },
-  obj7: {
+obj7: {
     title: `Inequalities Involving Transformed Functions`,
     content: `When the trigonometric function is transformed — $2\\sin(3x) - 1 > 0$, for instance — the inequality must be handled in stages.
 
@@ -443,7 +443,7 @@ $$2\\sin(3x) > 1 \\quad \\Rightarrow \\quad \\sin(3x) > \\frac{1}{2}$$
 
 $$u \\in \\left(\\frac{\\pi}{6} + 2n\\pi, \\quad \\frac{5\\pi}{6} + 2n\\pi\\right)$$
 
-**Step 3: Recover $x$.** Divide by 3:
+**Step 3: Recover the variable.** Divide by 3:
 
 $$x \\in \\left(\\frac{\\pi}{18} + \\frac{2n\\pi}{3}, \\quad \\frac{5\\pi}{18} + \\frac{2n\\pi}{3}\\right)$$
 

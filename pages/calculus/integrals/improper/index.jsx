@@ -156,179 +156,6 @@ const summaryTable = `
 // const sectionsContent = {
 //   // ─── /calculus/integrals/improper ─────────────────────────────────────────
 
-//   obj0: {
-//     title: `Key Terms`,
-//     content: `
-// - [Improper Integral](!/calculus/definitions#improper_integral) — infinite interval or unbounded integrand, evaluated as a limit
-// - [Definite Integral](!/calculus/definitions#definite_integral) — improper integrals extend the definite integral framework
-// - [Bounds of Integration](!/calculus/definitions#bounds_of_integration) — one or both bounds may be $\\pm\\infty$
-// - [Limit](!/calculus/definitions#limit) — convergence or divergence determined by whether the limit exists`,
-//     before: ``,
-//     after: `
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
-//     link: '',
-//   },
-
-//   obj1: {
-//     title: `What Makes an Integral Improper?`,
-//     content: `
-// An integral is improper if it involves:
-
-// **Infinite limits of integration:** The interval extends to $\\infty$ or $-\\infty$
-
-// $$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx$$
-
-// **Unbounded integrand:** The function has a vertical asymptote within or at the boundary of the interval
-
-// $$\\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx$$
-
-// Both conditions can occur simultaneously. The integral
-
-// $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$
-
-// has an infinite upper limit and an unbounded integrand at $x = 0$.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj2: {
-//     title: `Infinite Limits of Integration`,
-//     content: `
-// Replace the infinite limit with a finite variable and take a limit.
-
-// **Type 1:** Upper limit infinite
-
-// $$\\int_a^{\\infty} f(x)\\, dx = \\lim_{b \\to \\infty} \\int_a^b f(x)\\, dx$$
-
-// **Type 2:** Lower limit infinite
-
-// $$\\int_{-\\infty}^b f(x)\\, dx = \\lim_{a \\to -\\infty} \\int_a^b f(x)\\, dx$$
-
-// **Type 3:** Both limits infinite
-
-// $$\\int_{-\\infty}^{\\infty} f(x)\\, dx = \\int_{-\\infty}^c f(x)\\, dx + \\int_c^{\\infty} f(x)\\, dx$$
-
-// Both integrals must converge independently. The choice of $c$ is arbitrary—any finite value works.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj3: {
-//     title: `Discontinuous Integrands`,
-//     content: `
-// When $f$ has a vertical asymptote at $c$ within $[a, b]$, split the integral and use limits.
-
-// **Asymptote at left endpoint:**
-
-// $$\\int_a^b f(x)\\, dx = \\lim_{t \\to a^+} \\int_t^b f(x)\\, dx$$
-
-// **Asymptote at right endpoint:**
-
-// $$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx$$
-
-// **Asymptote at interior point $c$:**
-
-// $$\\int_a^b f(x)\\, dx = \\lim_{t \\to c^-} \\int_a^t f(x)\\, dx + \\lim_{s \\to c^+} \\int_s^b f(x)\\, dx$$
-
-// Both limits must exist independently.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj4: {
-//     title: `Convergence vs Divergence`,
-//     content: `
-// An improper integral **converges** if the defining limit exists and is finite. It **diverges** if the limit is infinite or fails to exist.
-
-// **Convergent example:**
-
-// $$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx = \\lim_{b \\to \\infty} \\left[-\\frac{1}{x}\\right]_1^b = \\lim_{b \\to \\infty} \\left(-\\frac{1}{b} + 1\\right) = 1$$
-
-// **Divergent example:**
-
-// $$\\int_1^{\\infty} \\frac{1}{x}\\, dx = \\lim_{b \\to \\infty} [\\ln x]_1^b = \\lim_{b \\to \\infty} \\ln b = \\infty$$
-
-// Convergence depends on how fast the integrand decays. The $1/x^2$ decays fast enough; $1/x$ does not.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj5: {
-//     title: `The p-Test`,
-//     content: `
-// The integrals of $1/x^p$ serve as benchmarks.
-
-// **At infinity:**
-
-// $$\\int_1^{\\infty} \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p > 1 \\\\ \\text{diverges} & p \\leq 1 \\end{cases}$$
-
-// **At zero:**
-
-// $$\\int_0^1 \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p < 1 \\\\ \\text{diverges} & p \\geq 1 \\end{cases}$$
-
-// The boundary case $p = 1$ always diverges—$\\int 1/x\\, dx = \\ln|x|$, which is unbounded both as $x \\to \\infty$ and as $x \\to 0^+$.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj6: {
-//     title: `Comparison Test`,
-//     content: `
-// Compare an unknown integral to one with known behavior.
-
-// **Direct comparison:** For $f(x) \\geq 0$ and $g(x) \\geq 0$:
-
-// If $f(x) \\leq g(x)$ and $\\int g$ converges, then $\\int f$ converges.
-
-// If $f(x) \\geq g(x)$ and $\\int g$ diverges, then $\\int f$ diverges.
-
-// **Example:** Does $\\int_1^{\\infty} \\frac{1}{x^2 + 1}\\, dx$ converge?
-
-// Since $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{x^2}\\, dx$ converges, the given integral converges by comparison.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj7: {
-//     title: `Limit Comparison Test`,
-//     content: `
-// When direct comparison is awkward, use limits.
-
-// For $f(x) > 0$ and $g(x) > 0$, if:
-
-// $$\\lim_{x \\to \\infty} \\frac{f(x)}{g(x)} = L \\quad \\text{where } 0 < L < \\infty$$
-
-// then $\\int f$ and $\\int g$ both converge or both diverge.
-
-// **Example:** Does $\\int_1^{\\infty} \\frac{x}{x^3 + 5}\\, dx$ converge?
-
-// Compare to $g(x) = 1/x^2$:
-
-// $$\\lim_{x \\to \\infty} \\frac{x/(x^3 + 5)}{1/x^2} = \\lim_{x \\to \\infty} \\frac{x^3}{x^3 + 5} = 1$$
-
-// Since $\\int_1^{\\infty} 1/x^2\\, dx$ converges, so does the given integral.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj8: {
-//     title: `Summary: Tests for Improper Integral Convergence`,
-//     content: `
-// Determining whether an improper integral converges or diverges typically uses one of a small set of standard tests. The table below collects them in one place, pairing each test with the kind of integrand it suits, the conclusion it produces, and a worked benchmark from the sections above. Read the &quot;When to use&quot; column first when scanning an unfamiliar integral; the right row points directly to the test that settles convergence.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   }
-// };
-
  
 // formulas-optimized: v1 | 2026-06-09 | 3 callouts (obj2, obj3, obj5)
 const sectionsContent = {
@@ -400,7 +227,7 @@ Both integrals must converge independently. The choice of $c$ is arbitrary—any
     after: ``,
     link: ``
   },
-  obj3: {
+ obj3: {
     title: `Discontinuous Integrands`,
     content: `
 When $f$ has a vertical asymptote at $c$ within $[a, b]$, split the integral and use limits.
@@ -413,7 +240,7 @@ $$\\int_a^b f(x)\\, dx = \\lim_{t \\to a^+} \\int_t^b f(x)\\, dx$$
 
 $$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx$$
 
-**Asymptote at interior point $c$:**
+**Asymptote at interior point:**
 
 $$\\int_a^b f(x)\\, dx = \\lim_{t \\to c^-} \\int_a^t f(x)\\, dx + \\lim_{s \\to c^+} \\int_s^b f(x)\\, dx$$
 

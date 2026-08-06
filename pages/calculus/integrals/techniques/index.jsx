@@ -148,177 +148,6 @@ const summaryTable = `
 // const sectionsContent = {
 //   // ─── /calculus/integrals/techniques ───────────────────────────────────────
 
-//   obj0: {
-//     title: `Key Terms`,
-//     content: `
-// - [Integrand](!/calculus/definitions#integrand) — the expression being transformed into a recognizable form
-// - [Indefinite Integral](!/calculus/definitions#indefinite_integral) — the target: find the antiderivative family
-// - [Definite Integral](!/calculus/definitions#definite_integral) — substitution in definite integrals requires converting bounds`,
-//     before: ``,
-//     after: `
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
-//     link: '',
-//   },
-
-//   obj1: {
-//     title: `Why Techniques Are Needed`,
-//     content: `
-// Differentiation follows mechanical rules: the derivative of any elementary function can be computed by applying chain, product, and quotient rules systematically.
-
-// Integration has no such universal algorithm. Some elementary functions have no elementary antiderivative. Others have antiderivatives that are difficult to find without insight.
-
-// Techniques bridge this gap. They transform integrands into forms matching [known formulas](!/calculus/integrals/special). The transformation might involve changing variables, splitting products, or decomposing fractions—whatever reveals the underlying structure.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj2: {
-//     title: `Substitution (u-Substitution)`,
-//     content: `
-// Substitution reverses the chain rule. If the integrand contains a function and its derivative, substitution simplifies.
-
-// **Method:** Let $u = g(x)$, so $du = g'(x)\\, dx$. Replace all $x$-expressions with $u$-expressions and integrate.
-
-// **Example:**
-
-// $$\\int 2x \\cos(x^2)\\, dx$$
-
-// Let $u = x^2$, so $du = 2x\\, dx$:
-
-// $$= \\int \\cos u\\, du = \\sin u + C = \\sin(x^2) + C$$
-
-// For definite integrals, convert the limits: when $x = a$, $u = g(a)$; when $x = b$, $u = g(b)$.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj3: {
-//     title: `Integration by Parts`,
-//     content: `
-// Integration by parts reverses the product rule:
-
-// $$\\int u\\, dv = uv - \\int v\\, du$$
-
-// **Method:** Identify factors $u$ and $dv$ in the integrand. Differentiate $u$ to get $du$; integrate $dv$ to get $v$. Apply the formula.
-
-// **Example:**
-
-// $$\\int x e^x\\, dx$$
-
-// Let $u = x$ and $dv = e^x\\, dx$. Then $du = dx$ and $v = e^x$:
-
-// $$= xe^x - \\int e^x\\, dx = xe^x - e^x + C = e^x(x - 1) + C$$
-
-// **Choosing $u$:** LIATE guides selection—Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential. Earlier types typically make better choices for $u$.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj4: {
-//     title: `Trigonometric Integrals`,
-//     content: `
-// Integrals involving powers of sine and cosine require strategic use of identities.
-
-// **Odd power of sine:** Save one $\\sin x$, convert remaining $\\sin^2 x = 1 - \\cos^2 x$, substitute $u = \\cos x$.
-
-// **Odd power of cosine:** Save one $\\cos x$, convert remaining $\\cos^2 x = 1 - \\sin^2 x$, substitute $u = \\sin x$.
-
-// **Both powers even:** Use half-angle identities:
-
-// $$\\sin^2 x = \\frac{1 - \\cos 2x}{2} \\qquad \\cos^2 x = \\frac{1 + \\cos 2x}{2}$$
-
-// **Example:**
-
-// $$\\int \\sin^3 x\\, dx = \\int \\sin x (1 - \\cos^2 x)\\, dx$$
-
-// Let $u = \\cos x$:
-
-// $$= -\\int (1 - u^2)\\, du = -u + \\frac{u^3}{3} + C = -\\cos x + \\frac{\\cos^3 x}{3} + C$$
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj5: {
-//     title: `Trigonometric Substitution`,
-//     content: `
-// Square roots of quadratics suggest trigonometric substitutions.
-
-// **For $\\sqrt{a^2 - x^2}$:** Let $x = a\\sin\\theta$, so $\\sqrt{a^2 - x^2} = a\\cos\\theta$
-
-// **For $\\sqrt{a^2 + x^2}$:** Let $x = a\\tan\\theta$, so $\\sqrt{a^2 + x^2} = a\\sec\\theta$
-
-// **For $\\sqrt{x^2 - a^2}$:** Let $x = a\\sec\\theta$, so $\\sqrt{x^2 - a^2} = a\\tan\\theta$
-
-// **Example:**
-
-// $$\\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx$$
-
-// Let $x = \\sin\\theta$, so $dx = \\cos\\theta\\, d\\theta$ and $\\sqrt{1 - x^2} = \\cos\\theta$:
-
-// $$= \\int \\frac{\\cos\\theta}{\\cos\\theta}\\, d\\theta = \\int d\\theta = \\theta + C = \\arcsin x + C$$
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj6: {
-//     title: `Partial Fractions`,
-//     content: `
-// Rational functions—polynomials divided by polynomials—decompose into simpler fractions.
-
-// **Method:** Factor the denominator. Write the fraction as a sum of terms with linear or irreducible quadratic denominators. Solve for coefficients. Integrate each term.
-
-// **Example:**
-
-// $$\\int \\frac{1}{x^2 - 1}\\, dx = \\int \\frac{1}{(x-1)(x+1)}\\, dx$$
-
-// Decompose:
-
-// $$\\frac{1}{(x-1)(x+1)} = \\frac{A}{x-1} + \\frac{B}{x+1}$$
-
-// Solving gives $A = 1/2$, $B = -1/2$:
-
-// $$= \\frac{1}{2}\\int \\frac{1}{x-1}\\, dx - \\frac{1}{2}\\int \\frac{1}{x+1}\\, dx = \\frac{1}{2}\\ln|x-1| - \\frac{1}{2}\\ln|x+1| + C$$
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj7: {
-//     title: `Choosing the Right Technique`,
-//     content: `
-// Pattern recognition guides technique selection.
-
-// **Substitution:** Look for a function paired with its derivative. Expressions like $f(g(x)) \\cdot g'(x)$ signal substitution with $u = g(x)$.
-
-// **Parts:** Products of different function types—polynomial times exponential, polynomial times trigonometric, logarithm times polynomial.
-
-// **Trigonometric integrals:** Powers of $\\sin x$ and $\\cos x$, products of trigonometric functions.
-
-// **Trigonometric substitution:** Square roots of $a^2 - x^2$, $a^2 + x^2$, or $x^2 - a^2$.
-
-// **Partial fractions:** Rational functions with factorable denominators.
-
-// Multiple techniques often combine. A problem might require substitution followed by parts, or partial fractions followed by a trigonometric integral.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   },
-//   obj8: {
-//     title: `Summary: The Techniques at a Glance`,
-//     content: `
-// The techniques covered above all share the same goal—reshape the integrand until it matches a [known formula](!/calculus/integrals/special)—but each one reverses a different differentiation rule and is triggered by a different signal in the integrand. The table below collects all five in one place, pairing each technique with what it reverses, the pattern that signals it, the standard setup, and a canonical example. Read the &quot;Recognize when…&quot; column first when scanning an unfamiliar integral; read across the row once a match is found.
-// `,
-//     before: ``,
-//     after: ``,
-//     link: ``
-//   }
-// };
 
 // formulas-optimized: v1 | 2026-06-09 | 2 callouts (obj2, obj3)
 const sectionsContent = {
@@ -377,7 +206,7 @@ For definite integrals, convert the limits: when $x = a$, $u = g(a)$; when $x = 
     after: ``,
     link: ``
   },
-  obj3: {
+obj3: {
     title: `Integration by Parts`,
     content: `
 Integration by parts reverses the product rule:
@@ -399,7 +228,7 @@ Let $u = x$ and $dv = e^x\\, dx$. Then $du = dx$ and $v = e^x$:
 
 $$= xe^x - \\int e^x\\, dx = xe^x - e^x + C = e^x(x - 1) + C$$
 
-**Choosing $u$:** LIATE guides selection—Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential. Earlier types typically make better choices for $u$.
+**Choosing the first factor:** LIATE guides selection—Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential. Earlier types typically make better choices for $u$.
 `,
     before: ``,
     after: ``,
@@ -430,16 +259,16 @@ $$= -\\int (1 - u^2)\\, du = -u + \\frac{u^3}{3} + C = -\\cos x + \\frac{\\cos^3
     after: ``,
     link: ``
   },
-  obj5: {
+obj5: {
     title: `Trigonometric Substitution`,
     content: `
 Square roots of quadratics suggest trigonometric substitutions.
 
-**For $\\sqrt{a^2 - x^2}$:** Let $x = a\\sin\\theta$, so $\\sqrt{a^2 - x^2} = a\\cos\\theta$
+**For** $\\sqrt{a^2 - x^2}$**:** Let $x = a\\sin\\theta$, so $\\sqrt{a^2 - x^2} = a\\cos\\theta$
 
-**For $\\sqrt{a^2 + x^2}$:** Let $x = a\\tan\\theta$, so $\\sqrt{a^2 + x^2} = a\\sec\\theta$
+**For** $\\sqrt{a^2 + x^2}$**:** Let $x = a\\tan\\theta$, so $\\sqrt{a^2 + x^2} = a\\sec\\theta$
 
-**For $\\sqrt{x^2 - a^2}$:** Let $x = a\\sec\\theta$, so $\\sqrt{x^2 - a^2} = a\\tan\\theta$
+**For** $\\sqrt{x^2 - a^2}$**:** Let $x = a\\sec\\theta$, so $\\sqrt{x^2 - a^2} = a\\tan\\theta$
 
 **Example:**
 

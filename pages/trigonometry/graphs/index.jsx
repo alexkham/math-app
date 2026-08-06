@@ -568,17 +568,17 @@ These two readings — midline and amplitude — are usually the first step in d
     after: ``,
     link: ``,
   },
-  obj10: {
+ obj10: {
     title: `Determining the Equation from a Graph`,
     content: `Writing the equation of a sinusoidal function from its graph requires extracting the four parameters $A$, $B$, $C$, $D$ and deciding whether to use sine or cosine as the base function.
 
-**Step 1 — Find the midline ($D$).** Identify the maximum and minimum values from the graph. The midline is their average: $D = \\frac{\\text{max} + \\text{min}}{2}$.
+**Step 1 — Find the midline.** Identify the maximum and minimum values from the graph. The midline is their average: $D = \\frac{\\text{max} + \\text{min}}{2}$.
 
-**Step 2 — Find the amplitude ($|A|$).** The amplitude is the distance from the midline to either extreme: $|A| = \\frac{\\text{max} - \\text{min}}{2}$. Determine the sign of $A$: if the graph starts by rising from the midline (for sine) or starts at a maximum (for cosine), $A > 0$. If the behavior is inverted, $A < 0$.
+**Step 2 — Find the amplitude.** The amplitude is the distance from the midline to either extreme: $|A| = \\frac{\\text{max} - \\text{min}}{2}$. Determine the sign of $A$: if the graph starts by rising from the midline (for sine) or starts at a maximum (for cosine), $A > 0$. If the behavior is inverted, $A < 0$.
 
-**Step 3 — Find the period and compute $B$.** Identify the horizontal distance for one complete cycle. Then $B = \\frac{2\\pi}{\\text{period}}$ (for sine/cosine) or $B = \\frac{\\pi}{\\text{period}}$ (for tangent/cotangent).
+**Step 3 — Find the period and compute the frequency factor.** Identify the horizontal distance for one complete cycle. Then $B = \\frac{2\\pi}{\\text{period}}$ (for sine/cosine) or $B = \\frac{\\pi}{\\text{period}}$ (for tangent/cotangent).
 
-**Step 4 — Find the phase shift and compute $C$.** Determine where the "standard" cycle begins. For sine, this is a zero crossing where the function is rising. For cosine, this is a maximum. The $x$-coordinate of this starting point is the phase shift $\\frac{C}{B}$, so $C = B \\times \\text{phase shift}$.
+**Step 4 — Find the phase shift and compute the phase constant.** Determine where the "standard" cycle begins. For sine, this is a zero crossing where the function is rising. For cosine, this is a maximum. The $x$-coordinate of this starting point is the phase shift $\\frac{C}{B}$, so $C = B \\times \\text{phase shift}$.
 
 **Step 5 — Choose sine or cosine.** If the graph starts at a midline crossing, sine is more natural. If it starts at a peak or valley, cosine is more natural. Both choices produce correct equations — the phase shift adjusts accordingly.
 

@@ -222,332 +222,6 @@ export async function getStaticProps(){
 
   // ---------- SECTIONS (original prose unchanged; obj11 added) ----------
 
-//     const sectionsContent={
-
-//    obj0: {
-//   title: `Key Terms`,
-//   content: `
-// - [Trigonometric Form](!/complex-numbers/definitions#trigonometric_form) — the representation De Moivre's theorem operates on
-// - [Modulus](!/complex-numbers/definitions#modulus) — raised to the $n$th power
-// - [Argument](!/complex-numbers/definitions#argument) — multiplied by $n$
-// - [Roots of Unity](!/complex-numbers/definitions#roots_of_unity) — found using the theorem's inverse`,
-//   before: ``,
-//   after: `
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
-//   link: '',
-// },
-
-//     obj1: {
-//   title: `Introduction to De Moivre's Theorem`,
-//   before: ``,
-//   content: `Raising complex numbers to powers in [algebraic form](!/complex-numbers/algebraic-form) quickly becomes unmanageable. Squaring $z = a + bi$ requires expanding $(a + bi)^2 = a^2 + 2abi + b^2i^2 = (a^2 - b^2) + 2abi$. Cubing demands multiplying this result by $a + bi$ again. By the time we reach $z^{10}$ or $z^{100}$, the algebraic approach drowns in computation.
-
-// The [trigonometric form](!/complex-numbers/trigonometric-form) offers rescue. When $z = r\\text{cis}\\theta$, multiplication becomes elegant: multiply moduli, add arguments. Squaring gives $z^2 = r^2\\text{cis}(2\\theta)$. Cubing gives $z^3 = r^3\\text{cis}(3\\theta)$. The pattern suggests a general rule — and De Moivre's theorem confirms it.
-
-// Abraham de Moivre, a French mathematician living in England, discovered this relationship in the early eighteenth century. Though he never stated the theorem in its modern form, his work on probability and trigonometric identities laid the foundation. The theorem bearing his name connects complex exponentiation to the simple operation of multiplying an angle by an integer.
-
-// De Moivre's theorem stands among the most useful results in complex analysis. It reduces high powers to trivial calculations, enables extraction of roots, derives trigonometric identities, and appears throughout physics and engineering wherever oscillations and rotations arise.`,
-//   after: ``,
-//   link: '',
-// },
-  
-
-//     obj2: {
-//   title: `De Moivre's Formula`,
-//   before: ``,
-//   content: `The theorem states a precise relationship between powers and angles. For any integer $n$:
-
-// $$(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$$
-
-// Raise $\\text{cis}\\theta$ to the $n$-th power, and the result is $\\text{cis}(n\\theta)$. The angle simply multiplies by $n$. No expansion, no collecting terms, no tracking powers of $i$ — just multiply the argument.
-
-// In the condensed notation: $(\\text{cis}\\theta)^n = \\text{cis}(n\\theta)$.
-
-// The formula extends naturally to complex numbers with arbitrary [modulus](!/complex-numbers/absolute-value). If $z = r\\text{cis}\\theta$, then:
-
-// $$z^n = (r\\text{cis}\\theta)^n = r^n\\text{cis}(n\\theta)$$
-
-// The modulus raises to the $n$-th power while the argument multiplies by $n$. Both operations are elementary. The number $2\\text{cis}(30°)$ raised to the sixth power becomes $2^6\\text{cis}(180°) = 64\\text{cis}(180°) = -64$. What would require extensive algebra in rectangular form reduces to mental arithmetic in trigonometric form.
-
-// The formula works for negative integers as well. Since $z^{-n} = 1/z^n$, we have:
-
-// $$z^{-n} = r^{-n}\\text{cis}(-n\\theta)$$
-
-// Negative exponents invert the modulus and negate the angle multiplier, maintaining the same structural simplicity.`,
-//   after: ``,
-//   link: '',
-// },
-
-
-   
-
-//     obj3: {
-//   title: `Proof of De Moivre's Theorem`,
-//   before: ``,
-//   content: `Mathematical induction establishes De Moivre's theorem for positive integers. The proof builds from the multiplication rule for trigonometric form: when two complex numbers multiply, their moduli multiply and their arguments add.
-
-// The base case $n = 1$ holds trivially: $(\\cos\\theta + i\\sin\\theta)^1 = \\cos(1 \\cdot \\theta) + i\\sin(1 \\cdot \\theta)$.
-
-// For the inductive step, assume the formula holds for $n = k$:
-
-// $$(\\cos\\theta + i\\sin\\theta)^k = \\cos(k\\theta) + i\\sin(k\\theta)$$
-
-// We must prove it holds for $n = k + 1$. Multiply both sides by $\\cos\\theta + i\\sin\\theta$:
-
-// $$(\\cos\\theta + i\\sin\\theta)^{k+1} = (\\cos(k\\theta) + i\\sin(k\\theta))(\\cos\\theta + i\\sin\\theta)$$
-
-// The right side is a product of two numbers in trigonometric form. By the multiplication rule, we add arguments:
-
-// $$= \\cos(k\\theta + \\theta) + i\\sin(k\\theta + \\theta) = \\cos((k+1)\\theta) + i\\sin((k+1)\\theta)$$
-
-// This completes the induction. The theorem holds for all positive integers.
-
-// Extension to negative integers follows from the reciprocal. For $n > 0$:
-
-// $$z^{-n} = \\frac{1}{z^n} = \\frac{1}{r^n\\text{cis}(n\\theta)} = \\frac{1}{r^n} \\cdot \\text{cis}(-n\\theta) = r^{-n}\\text{cis}(-n\\theta)$$
-
-// The formula $z^n = r^n\\text{cis}(n\\theta)$ thus holds for all integers $n$, positive, negative, or zero.`,
-//   after: ``,
-//   link: '',
-// },
-
-
-    
-
-//     obj4: {
-//   title: `Applying De Moivre's Theorem to Powers`,
-//   before: ``,
-//   content: `Computing high powers follows a three-step procedure. First convert to trigonometric form, then apply De Moivre's formula, finally convert back to algebraic form if required.
-
-// Consider $(1 + i)^{10}$. 
-
-// Step 1: Convert $1 + i$ to trigonometric form. The modulus is $|1 + i| = \\sqrt{1^2 + 1^2} = \\sqrt{2}$. The argument satisfies $\\tan\\theta = 1/1 = 1$ with the point in the first quadrant, giving $\\theta = 45° = \\pi/4$. Thus $1 + i = \\sqrt{2}\\text{cis}(45°)$.
-
-// Step 2: Apply De Moivre's theorem.
-
-// $$(1 + i)^{10} = (\\sqrt{2})^{10}\\text{cis}(10 \\times 45°) = 2^5\\text{cis}(450°) = 32\\text{cis}(450°)$$
-
-// Since $450° = 360° + 90°$, the angle reduces to $90°$:
-
-// $$= 32\\text{cis}(90°) = 32(\\cos 90° + i\\sin 90°) = 32(0 + i) = 32i$$
-
-// Step 3: The answer $32i$ is already in algebraic form.
-
-// Verification through direct calculation would require multiplying $1 + i$ by itself ten times — tedious and error-prone. De Moivre's theorem completes the same computation in a few lines.
-
-// Another example: find $(\\sqrt{3} - i)^6$. The modulus is $\\sqrt{3 + 1} = 2$. The argument, with $a = \\sqrt{3} > 0$ and $b = -1 < 0$, lies in the fourth quadrant: $\\theta = -30°$. So $\\sqrt{3} - i = 2\\text{cis}(-30°)$, and:
-
-// $$(\\sqrt{3} - i)^6 = 2^6\\text{cis}(-180°) = 64\\text{cis}(-180°) = 64(-1) = -64$$`,
-//   after: ``,
-//   link: '',
-// },
-
-   
-//     obj5: {
-//   title: `Introduction to $n$-th Roots`,
-//   before: ``,
-//   content: `De Moivre's theorem runs in reverse to solve equations of the form $z^n = w$. Given a complex number $w$, what values of $z$ satisfy this equation? The answer reveals surprising multiplicity: every nonzero complex number has exactly $n$ distinct $n$-th roots.
-
-// Real number experience suggests uniqueness. The equation $x^3 = 8$ has one real solution: $x = 2$. But in $\\mathbb{C}$, the equation $z^3 = 8$ has three solutions. The cube root of $8$ is not just $2$ but three different complex numbers, each of which cubes to $8$.
-
-// Where do these extra roots come from? The key lies in angle periodicity. Adding $360°$ (or $2\\pi$ radians) to any argument produces the same complex number: $\\text{cis}(\\theta) = \\text{cis}(\\theta + 360°)$. When we write $w = R\\text{cis}\\phi$, we could equally write $w = R\\text{cis}(\\phi + 360°)$ or $w = R\\text{cis}(\\phi + 720°)$.
-
-// Now suppose $z^n = w$ with $z = r\\text{cis}\\alpha$. By De Moivre's theorem, $r^n\\text{cis}(n\\alpha) = R\\text{cis}\\phi$. Matching moduli gives $r = R^{1/n}$. Matching arguments gives $n\\alpha = \\phi + 360°k$ for some integer $k$, so $\\alpha = \\frac{\\phi + 360°k}{n}$.
-
-// Different values of $k$ yield different angles $\\alpha$. As $k$ runs from $0$ to $n-1$, we obtain $n$ distinct arguments. Beyond $k = n-1$, the angles repeat modulo $360°$. Exactly $n$ roots exist, no more, no fewer.`,
-//   after: ``,
-//   link: '',
-// },
-
-  
-
-//     obj6: {
-//   title: `The Formula for $n$-th Roots`,
-//   before: ``,
-//   content: `Let $w = R\\text{cis}\\phi$ be any nonzero complex number. The $n$-th roots of $w$ — all solutions to $z^n = w$ — are given by:
-
-// $$z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 2\\pi k}{n}\\right) \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$
-
-// In degree measure:
-
-// $$z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right) \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$
-
-// Each root has the same modulus: $|z_k| = R^{1/n}$, the positive real $n$-th root of the original modulus. The roots differ only in their arguments.
-
-// The first root ($k = 0$) has argument $\\phi/n$, the original angle divided by $n$. Each subsequent root adds $360°/n$ to the argument. The $n$ roots space themselves evenly around the circle of radius $R^{1/n}$.
-
-// Consider finding the cube roots of $8$. Write $8 = 8\\text{cis}(0°)$, so $R = 8$ and $\\phi = 0°$. The formula gives:
-
-// $$z_k = 8^{1/3}\\text{cis}\\left(\\frac{0° + 360°k}{3}\\right) = 2\\text{cis}(120°k)$$
-
-// For $k = 0$: $z_0 = 2\\text{cis}(0°) = 2$.
-// For $k = 1$: $z_1 = 2\\text{cis}(120°) = 2(-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i) = -1 + \\sqrt{3}i$.
-// For $k = 2$: $z_2 = 2\\text{cis}(240°) = 2(-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i) = -1 - \\sqrt{3}i$.
-
-// Three roots: $2$, $-1 + \\sqrt{3}i$, and $-1 - \\sqrt{3}i$. Each cubes to $8$.`,
-//   after: ``,
-//   link: '',
-// },
-
-  
-
-//     obj7: {
-//   title: `Geometric Interpretation of Roots`,
-//   before: ``,
-//   content: `The $n$-th roots of any complex number arrange themselves with perfect geometric regularity. Plotting them on the [complex plane](!/complex-numbers/geometric-representation) reveals a pattern of elegant symmetry.
-
-// All $n$ roots share the same modulus $R^{1/n}$, placing them on a circle centered at the origin with that radius. They do not cluster or scatter randomly — they distribute themselves at equal angular intervals around this circle.
-
-// The angular separation between consecutive roots is exactly $\\frac{360°}{n}$ (or $\\frac{2\\pi}{n}$ radians). The cube roots of any number sit $120°$ apart. Fourth roots sit $90°$ apart. Fifth roots sit $72°$ apart. This uniform spacing holds regardless of which number we take roots of — only the radius and starting angle vary.
-
-// The roots form vertices of a regular $n$-gon inscribed in the circle. Cube roots give an equilateral triangle. Fourth roots give a square. Fifth roots give a regular pentagon. The polygon may appear rotated depending on the argument of the original number, but its shape is always perfectly regular.
-
-// This geometric picture aids computation and verification. If one root is known, the others follow by rotating $360°/n$ around the origin. If roots fail to form a regular polygon, an error has occurred. The visual pattern provides both a computational shortcut and a consistency check.
-
-// The [conjugate](!/complex-numbers/complex-conjugate) relationship appears when the original number $w$ is real and positive. In that case $\\phi = 0°$, and the roots distribute symmetrically about the real axis. Complex roots come in conjugate pairs, with the real axis serving as a line of mirror symmetry.`,
-//   after: ``,
-//   link: '',
-// },
-  
-
-//     obj8: {
-//   title: `Roots of Unity`,
-//   before: ``,
-//   content: `The $n$-th roots of unity — solutions to $z^n = 1$ — form a special case of fundamental importance. Since $1 = 1\\text{cis}(0°)$, the formula simplifies:
-
-// $$z_k = \\text{cis}\\left(\\frac{360°k}{n}\\right) = \\text{cis}\\left(\\frac{2\\pi k}{n}\\right) \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$
-
-// All roots of unity have modulus $1$ — they lie on the unit circle. Their arguments are multiples of $\\frac{360°}{n}$, dividing the circle into $n$ equal arcs.
-
-// The root $z_0 = \\text{cis}(0°) = 1$ always appears. Every integer power of $1$ equals $1$, making $1$ an $n$-th root of unity for every $n$.
-
-// The fourth roots of unity illustrate the pattern: $z_0 = 1$, $z_1 = i$, $z_2 = -1$, $z_3 = -i$. These four points mark the cardinal directions on the unit circle, forming a square. Each satisfies $z^4 = 1$.
-
-// The sixth roots of unity are $1$, $\\text{cis}(60°)$, $\\text{cis}(120°)$, $-1$, $\\text{cis}(240°)$, $\\text{cis}(300°)$. In algebraic form: $1$, $\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, $-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, $-1$, $-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$, $\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$. They form a regular hexagon on the unit circle.
-
-// The primitive $n$-th root of unity, denoted $\\omega = \\text{cis}\\left(\\frac{2\\pi}{n}\\right)$, generates all others through its powers. Since $z_k = \\omega^k$, the complete set of $n$-th roots of unity is $\\{1, \\omega, \\omega^2, \\ldots, \\omega^{n-1}\\}$. This generator perspective connects roots of unity to group theory and number theory.`,
-//   after: ``,
-//   link: '',
-// },
-  
-//     obj9: {
-//   title: `Properties of Roots of Unity`,
-//   before: ``,
-//   content: `The $n$-th roots of unity satisfy algebraic identities that reflect their geometric symmetry. These properties appear throughout mathematics, from polynomial factorization to Fourier analysis.
-
-// The sum of all $n$-th roots of unity equals zero:
-
-// $$\\sum_{k=0}^{n-1} z_k = 1 + \\omega + \\omega^2 + \\cdots + \\omega^{n-1} = 0$$
-
-// Geometrically, the roots form a regular polygon centered at the origin. Their vector sum — placing all arrows tip to tail — returns to the starting point, yielding zero. Algebraically, this is the sum of a geometric series with ratio $\\omega \\neq 1$: $\\frac{1 - \\omega^n}{1 - \\omega} = \\frac{1 - 1}{1 - \\omega} = 0$.
-
-// The product of all $n$-th roots of unity follows a pattern:
-
-// $$\\prod_{k=0}^{n-1} z_k = (-1)^{n+1}$$
-
-// For odd $n$, the product is $1$. For even $n$, the product is $-1$. This connects to the constant term in the polynomial $z^n - 1$, which factors as $(z - z_0)(z - z_1)\\cdots(z - z_{n-1})$.
-
-// When $n \\geq 2$, complex roots of unity come in [conjugate](!/complex-numbers/complex-conjugate) pairs. If $\\omega^k$ is a root, so is $\\overline{\\omega^k} = \\omega^{n-k}$. The roots $\\omega$ and $\\omega^{n-1}$ are conjugates; $\\omega^2$ and $\\omega^{n-2}$ are conjugates; and so on. Only $z = 1$ (always) and $z = -1$ (when $n$ is even) sit on the real axis without conjugate partners among the roots.
-
-// These symmetries constrain the algebraic behavior of expressions involving roots of unity and simplify many calculations.`,
-//   after: ``,
-//   link: '',
-// },
-  
-
-//     obj10: {
-//   title: `Worked Examples`,
-//   before: ``,
-//   content: `Concrete examples consolidate the root-finding technique. Each follows the same pattern: express the target in trigonometric form, apply the formula, enumerate all $n$ roots.
-
-// **Square roots of $i$:** Solve $z^2 = i$.
-
-// Write $i = 1\\text{cis}(90°)$. The roots are $z_k = 1^{1/2}\\text{cis}\\left(\\frac{90° + 360°k}{2}\\right)$ for $k = 0, 1$.
-
-// $z_0 = \\text{cis}(45°) = \\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2}i$
-
-// $z_1 = \\text{cis}(225°) = -\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i$
-
-// Two roots, opposite each other on the unit circle.
-
-// **Cube roots of $-8$:** Solve $z^3 = -8$.
-
-// Write $-8 = 8\\text{cis}(180°)$. The roots are $z_k = 2\\text{cis}\\left(\\frac{180° + 360°k}{3}\\right)$ for $k = 0, 1, 2$.
-
-// $z_0 = 2\\text{cis}(60°) = 1 + \\sqrt{3}i$
-
-// $z_1 = 2\\text{cis}(180°) = -2$
-
-// $z_2 = 2\\text{cis}(300°) = 1 - \\sqrt{3}i$
-
-// Three roots forming an equilateral triangle with radius $2$.
-
-// **Fourth roots of unity:** Solve $z^4 = 1$.
-
-// Write $1 = 1\\text{cis}(0°)$. The roots are $z_k = \\text{cis}(90°k)$ for $k = 0, 1, 2, 3$.
-
-// $z_0 = 1$, $z_1 = i$, $z_2 = -1$, $z_3 = -i$
-
-// A square on the unit circle at the four cardinal points.
-
-// **Fifth roots of $32$:** Solve $z^5 = 32$.
-
-// Write $32 = 32\\text{cis}(0°)$. The roots are $z_k = 2\\text{cis}(72°k)$ for $k = 0, 1, 2, 3, 4$.
-
-// $z_0 = 2$, $z_1 = 2\\text{cis}(72°)$, $z_2 = 2\\text{cis}(144°)$, $z_3 = 2\\text{cis}(216°)$, $z_4 = 2\\text{cis}(288°)$
-
-// A regular pentagon with radius $2$, one vertex on the positive real axis.`,
-//   after: ``,
-//   link: '',
-// },
-//     obj11:{
-//       title:`Summary: Forward and Reverse Directions of De Moivre's Theorem`,
-//       content:`De Moivre's theorem operates in two directions. Run forward, it turns a complex number into its $n$th power — a single answer obtained by raising the [modulus](!/complex-numbers/absolute-value) and multiplying the [argument](!/complex-numbers/trigonometric-form). Run in reverse, it produces every $n$th root of a given number — $n$ distinct values arranged as a regular polygon. The table below collects both directions side by side: formula, what happens to modulus and argument, how many results to expect, and the geometric picture each direction draws on the complex plane.`,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
-
 
 // formulas-optimized: v1 | 2026-06-11 | 4 callouts (obj2, obj6, obj8, obj9)
 const sectionsContent={
@@ -802,13 +476,12 @@ These symmetries constrain the algebraic behavior of expressions involving roots
   link: '',
 },
   
-
-    obj10: {
+obj10: {
   title: `Worked Examples`,
   before: ``,
   content: `Concrete examples consolidate the root-finding technique. Each follows the same pattern: express the target in trigonometric form, apply the formula, enumerate all $n$ roots.
 
-**Square roots of $i$:** Solve $z^2 = i$.
+**Square roots of the imaginary unit:** Solve $z^2 = i$.
 
 Write $i = 1\\text{cis}(90°)$. The roots are $z_k = 1^{1/2}\\text{cis}\\left(\\frac{90° + 360°k}{2}\\right)$ for $k = 0, 1$.
 
@@ -818,7 +491,7 @@ $z_1 = \\text{cis}(225°) = -\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i$
 
 Two roots, opposite each other on the unit circle.
 
-**Cube roots of $-8$:** Solve $z^3 = -8$.
+**Cube roots of negative eight:** Solve $z^3 = -8$.
 
 Write $-8 = 8\\text{cis}(180°)$. The roots are $z_k = 2\\text{cis}\\left(\\frac{180° + 360°k}{3}\\right)$ for $k = 0, 1, 2$.
 
@@ -838,11 +511,11 @@ $z_0 = 1$, $z_1 = i$, $z_2 = -1$, $z_3 = -i$
 
 A square on the unit circle at the four cardinal points.
 
-**Fifth roots of $32$:** Solve $z^5 = 32$.
+**Fifth roots of thirty-two:** Solve $z^5 = 32$.
 
 Write $32 = 32\\text{cis}(0°)$. The roots are $z_k = 2\\text{cis}(72°k)$ for $k = 0, 1, 2, 3, 4$.
 
-$z_0 = 2$, $z_1 = 2\\text{cis}(72°)$, $z_2 = 2\\text{cis}(144°)$, $z_3 = 2\\text{cis}(216°)$, $z_4 = 2\\text{cis}(288°)$
+$z_0 = 2$, $z_1 = 2\\text{cis}(72°)$, $z_2 = 2\\text{cis}(144°)$, $z_3 = 2\\text{cis}(288°)$, $z_4 = 2\\text{cis}(288°)$
 
 A regular pentagon with radius $2$, one vertex on the positive real axis.`,
   after: ``,

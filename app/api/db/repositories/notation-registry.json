@@ -1560,6 +1560,107 @@
       "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "recommended-note", "status": "recommended", "why": "pages WITHOUT any symbols link or notation section: cdf (F(x) convention unglossed), central-limit-theorem, combinatorics, indicators, inequalities + markov + chebyshev, large-numbers-law, models + coin-toss + dice-roll, rules (P(A∪B) etc. used cold), tree-diagrams, formulas, definitions. Candidates for future notation notes/links.", "stage2": null}],
       "notes": "Aggregate gap entry; axioms and events were in this group until the 2026-08-06 pass linked them.",
       "externalNotationLinks": []
+    },
+    "complex-numbers": {
+      "pagePath": "pages/complex-numbers/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "externalNotationLinks": []
+    },
+    "complex-numbers/basics": {
+      "pagePath": "pages/complex-numbers/basics/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-10; incl. 'Algebraic Representation and the Complex Conjugate', Euler/exponential and De Moivre survey sections; a table with a 'Notation' row (line ~164)"],
+      "spots": [
+        {"sectionId": "(algebraic)", "sectionTitle": "Algebraic Representation and the Complex Conjugate", "field": "content (line ~255)", "kind": "inline-intro", "status": "existing", "quote": "The letters $a$ and $b$ are conventional choices — using $x$ and $y$ or any other symbols works equally well", "stage2": {"mathSymbols": {"page": "/math-symbols/complex-numbers", "category": null, "anchorText": "complex number symbols"}, "latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-06", "placement": "trio sentence appended to the conventional-letters sentence"}},
+        {"sectionId": "(euler/demoivre)", "sectionTitle": "—", "field": "content (lines ~345, 357)", "kind": "mention", "status": "existing", "quote": "cis / exponential notation equivalences: $z = re^{i\\theta}$ … In compact notation, $(\\text{cis}\\theta)^n = \\text{cis}(n\\theta)$", "stage2": null}
+      ],
+      "externalNotationLinks": []
+    },
+    "complex-numbers/imaginary-numbers": {
+      "pagePath": "pages/complex-numbers/imaginary-numbers/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-8"],
+      "spots": [
+        {"sectionId": "(unit)", "sectionTitle": "(imaginary unit intro)", "field": "content (lines ~433-435)", "kind": "inline-intro", "status": "existing", "quote": "the imaginary unit, denoted $i$, defined by the single property $i^2 = -1$; An equivalent notation writes $i = \\sqrt{-1}$", "stage2": {"mathSymbols": {"page": "/math-symbols/complex-numbers", "category": null, "anchorText": "complex number symbols"}, "added": "2026-08-06", "placement": "clause woven into the i = √−1 sentence"}},
+        {"sectionId": "(re-im)", "sectionTitle": "—", "field": "content (line ~493)", "kind": "inline-intro", "status": "existing", "quote": "Notation formalizes this distinction … $Re(z) = a$ … $Im(z) = b$", "stage2": null}
+      ],
+      "externalNotationLinks": []
+    },
+    "complex-numbers/algebraic-form": {
+      "pagePath": "pages/complex-numbers/algebraic-form/index.jsx",
+      "template": "untitled",
+      "sections": ["incl. 'Real and Imaginary Parts: Formal Notation' (line ~536)"],
+      "spots": [
+        {"sectionId": "(formal-notation)", "sectionTitle": "Real and Imaginary Parts: Formal Notation", "field": "content (lines ~536-548)", "kind": "dedicated-section", "status": "existing", "quote": "we write $Re(z) = a$ to denote the real part … $Re(z)$ reads as 'the real part of $z$'", "stage2": null}
+      ],
+      "notes": "Pre-existing live chip (typo 'Nunbers' fixed 2026-08-06).",
+      "externalNotationLinks": [{"target": "/math-symbols/complex-numbers", "state": "live", "note": "chip in the Formal Notation section"}]
+    },
+    "complex-numbers/trigonometric-form": {
+      "pagePath": "pages/complex-numbers/trigonometric-form/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-11"],
+      "spots": [
+        {"sectionId": "(argument)", "sectionTitle": "(argument section)", "field": "content (line ~703)", "kind": "inline-intro", "status": "existing", "quote": "The notation $\\arg(z) = \\theta$ denotes the argument of $z$", "stage2": {"mathSymbols": {"page": "/math-symbols/complex-numbers", "category": null, "anchorText": "complex number symbols"}, "added": "2026-08-06", "placement": "clause woven into the arg(z) sentence"}},
+        {"sectionId": "(principal)", "sectionTitle": "(principal argument section)", "field": "content (lines ~728-730)", "kind": "inline-intro", "status": "existing", "quote": "the principal argument … denoted $\\text{Arg}(z)$ with a capital A … Two conventions exist", "stage2": null}
+      ],
+      "externalNotationLinks": []
+    },
+    "complex-numbers/exponential-form": {
+      "pagePath": "pages/complex-numbers/exponential-form/index.jsx",
+      "template": "untitled",
+      "sections": [],
+      "spots": [
+        {"sectionId": "(forms)", "sectionTitle": "—", "field": "content (lines ~666, 779)", "kind": "mention", "status": "existing", "quote": "Exponential form achieves the same emphasis with more economical notation; De Moivre expressed in exponential notation", "stage2": null}
+      ],
+      "externalNotationLinks": []
+    },
+    "complex-numbers/complex-conjugate": {
+      "pagePath": "pages/complex-numbers/complex-conjugate/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-9"],
+      "spots": [
+        {"sectionId": "(notations)", "sectionTitle": "(conjugate notation paragraph)", "field": "content (line ~516)", "kind": "inline-intro", "status": "existing", "quote": "The overline $\\bar{z}$ dominates pure mathematics … The asterisk $z^*$ appears frequently in physics and engineering … readers should recognize both forms as equivalent", "stage2": {"mathSymbols": {"page": "/math-symbols/complex-numbers", "category": null, "anchorText": "complex number symbols"}, "added": "2026-08-06", "placement": "clause appended to the equivalence sentence"}}
+      ],
+      "externalNotationLinks": []
+    },
+    "complex-numbers/absolute-value": {
+      "pagePath": "pages/complex-numbers/absolute-value/index.jsx",
+      "template": "untitled",
+      "sections": [],
+      "spots": [
+        {"sectionId": "(modulus)", "sectionTitle": "—", "field": "content (line ~526)", "kind": "mention", "status": "existing", "quote": "The notation mirrors real number absolute value … modulus generalizes the familiar concept", "stage2": null}
+      ],
+      "externalNotationLinks": []
+    },
+    "complex-numbers/additive-inverse": {
+      "pagePath": "pages/complex-numbers/additive-inverse/index.jsx",
+      "template": "untitled",
+      "sections": ["incl. 'Notation' section (line ~614)"],
+      "spots": [
+        {"sectionId": "(notation)", "sectionTitle": "Notation", "field": "content (lines ~614-626)", "kind": "dedicated-section", "status": "existing", "quote": "dedicated Notation section with live symbols chip", "stage2": null}
+      ],
+      "notes": "Chip typo 'Nunbers' fixed 2026-08-06.",
+      "externalNotationLinks": [{"target": "/math-symbols/complex-numbers", "state": "live", "note": "chip in Notation section"}]
+    },
+    "complex-numbers/multiplicative-inverse": {
+      "pagePath": "pages/complex-numbers/multiplicative-inverse/index.jsx",
+      "template": "untitled",
+      "sections": ["incl. 'Notation' section (line ~683)"],
+      "spots": [
+        {"sectionId": "(notation)", "sectionTitle": "Notation", "field": "content (lines ~683-694)", "kind": "dedicated-section", "status": "existing", "quote": "dedicated Notation section with live symbols chip", "stage2": null}
+      ],
+      "notes": "Chip typo 'Nunbers' fixed 2026-08-06.",
+      "externalNotationLinks": [{"target": "/math-symbols/complex-numbers", "state": "live", "note": "chip in Notation section"}]
+    },
+    "complex-numbers/$quietPages": {
+      "pagePath": "(summary)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "pages with no or negligible notation content: geometric-representation, operations, properties, demoivre-theorem, equations-polynomials, cheat-sheets, formulas, definitions", "stage2": null}],
+      "externalNotationLinks": []
     }
   },
   "$crossSectionFindings": {
@@ -1604,6 +1705,12 @@
       "2026-08-06 pass added 3 complements: probability-function#notation got the LaTeX + keyboard typesetting sentence (first /latex + /keyboard links in the section); axioms overview got an in-text /math-symbols/probability link (was chip-less); events got a cross-topic /math-symbols/set-theory link on 'set notation'.",
       "Remaining chip-less pages (registered as aggregate recommendation): cdf, central-limit-theorem, combinatorics, indicators, inequalities/markov/chebyshev, large-numbers-law, models/coin-toss/dice-roll, rules, tree-diagrams, formulas, definitions.",
       "Registry note: probability recorded with two aggregate entries ($notationPatternPages, $chiplessPages) instead of ~30 identical per-page entries — split them out if a page gets individual treatment."
+    ],
+    "complex-numbers": [
+      "Three pre-existing live chips to /math-symbols/complex-numbers (algebraic-form Formal Notation section, additive-inverse Notation section, multiplicative-inverse Notation section) — all carried the typo 'Complex Nunbers Symbols', fixed 2026-08-06.",
+      "2026-08-06 pass planted 4 spots (6 links): basics trio (complex number symbols + LaTeX + keyboard at the a+bi conventional-letters sentence), imaginary-numbers i/√−1 clause, trigonometric-form arg(z) clause, complex-conjugate z̄-vs-z* clause.",
+      "Notation strengths: the forms family is notation-rich prose — algebraic-form 'Real and Imaginary Parts: Formal Notation' (dedicated, read-as phrasing), conjugate z̄ vs z* convention paragraph (math vs physics/engineering), trigonometric-form arg vs Arg capital-A convention with two interval conventions, exponential/cis equivalences.",
+      "Quiet pages (no notation content): geometric-representation, operations, properties, demoivre-theorem, equations-polynomials, cheat-sheets, formulas, definitions."
     ]
   }
 }

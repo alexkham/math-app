@@ -513,7 +513,7 @@ The operation preserves the real part $a$ exactly while reversing the sign of th
 
 Concrete examples illustrate the pattern. The conjugate of $3 + 2i$ is $3 - 2i$. The conjugate of $-1 - 4i$ is $-1 + 4i$ — the negative imaginary part becomes positive. The conjugate of $5$ (a real number, written as $5 + 0i$) is simply $5$ — with no imaginary part to flip, nothing changes. The conjugate of $7i$ (pure imaginary, written as $0 + 7i$) is $-7i$ — the entire number negates because the real part contributes nothing.
 
-Two notations appear in mathematical literature. The overline $\\bar{z}$ dominates pure mathematics and most textbooks. The asterisk $z^*$ appears frequently in physics and engineering, particularly in quantum mechanics and signal processing. Both symbols denote the identical operation. This text uses the overline convention, but readers should recognize both forms as equivalent.
+Two notations appear in mathematical literature. The overline $\\bar{z}$ dominates pure mathematics and most textbooks. The asterisk $z^*$ appears frequently in physics and engineering, particularly in quantum mechanics and signal processing. Both symbols denote the identical operation. This text uses the overline convention, but readers should recognize both forms as equivalent — both are listed among the [complex number symbols](!/math-symbols/complex-numbers).
 
 The conjugate is not the same as negation. The negative of $3 + 2i$ is $-3 - 2i$, changing both signs. The conjugate $3 - 2i$ changes only the imaginary sign. Confusing these operations leads to errors, particularly when manipulating equations involving both.`,
   after: ``,
