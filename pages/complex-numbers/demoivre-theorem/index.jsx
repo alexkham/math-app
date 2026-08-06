@@ -13,6 +13,11 @@ import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
 
+ // Surfaced on the /complex-numbers hub via buildSectionData extraction.
+ const hubMeta = {
+   name: 'De Moivre Theorem',
+ }
+
  const keyWords = [
   "De Moivre's theorem",
   "De Moivre's formula",

@@ -1048,6 +1048,8 @@ $(X)$ — this is the random variable. Think of it as the "thing that can happen
 
 This is the "language" we use to describe how probabilities behave, whether the outcomes are separate points or part of a continuous range.
 
+To typeset these symbols, the [LaTeX](!/latex) reference lists the command behind each one — $\\int$ is \\int, for instance — and the [mathematical keyboard](!/keyboard) inserts them without any code.
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
       
 `,

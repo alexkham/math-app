@@ -493,7 +493,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-reflection explanations live in getStaticProps below (SSR/SEO-visible);
+// the component's built-in REFLECTIONS bodies remain only as a legacy fallback.
 import FunctionReflections from '../../../../app/components/functions/reflections/FunctionReflections'
+import reflectionsDiagrams from '../../../../app/components/functions/reflections/functionReflectionsDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -567,13 +571,13 @@ Some families have **symmetry properties** that make certain reflections trivial
       title: `The Seven Reflection Tabs`,
       content: `Seven tabs on the right control which reflection applies to the current base.
 
-- **x-axis** ($g(x) = -f(x)$) — flips the curve upside down through the x-axis
-- **y-axis** ($g(x) = f(-x)$) — mirrors the curve left to right across the y-axis
-- **y = x** — swaps $x$ and $y$ coordinates; produces the inverse function, or all branches if $f$ is not one-to-one
-- **y = c** ($g(x) = 2c - f(x)$) — mirrors across a horizontal line; the slider controls $c$
-- **x = c** ($g(x) = f(2c - x)$) — mirrors across a vertical line; the slider controls $c$
-- **|f|** ($g(x) = |f(x)|$) — partial reflection: flips only the parts of $f$ below the x-axis
-- **f(|x|)** ($g(x) = f(|x|)$) — replaces the left half of $f$ with a mirror of the right half
+- [x-axis](!#reflection-across-the-x-axis) ($g(x) = -f(x)$) — flips the curve upside down through the x-axis
+- [y-axis](!#reflection-across-the-y-axis) ($g(x) = f(-x)$) — mirrors the curve left to right across the y-axis
+- [y = x](!#reflection-across-the-line-y-x) — swaps $x$ and $y$ coordinates; produces the inverse function, or all branches if $f$ is not one-to-one
+- [y = c](!#reflection-across-a-horizontal-line) ($g(x) = 2c - f(x)$) — mirrors across a horizontal line; the slider controls $c$
+- [x = c](!#reflection-across-a-vertical-line) ($g(x) = f(2c - x)$) — mirrors across a vertical line; the slider controls $c$
+- [|f|](!#output-reflection-fx) ($g(x) = |f(x)|$) — partial reflection: flips only the parts of $f$ below the x-axis
+- [f(|x|)](!#input-reflection-fx) ($g(x) = f(|x|)$) — replaces the left half of $f$ with a mirror of the right half
 
 Hover any tab to see its formula and a one-line description in a tooltip.`,
       before: ``,
@@ -696,12 +700,83 @@ These symmetries are encoded in the visualizer&apos;s explanation panel, which r
       link: '',
     },
 
-    // obj11–obj15 left for future expansion
-    // obj11: { title:``, content:``, before:``, after:``, link:'' },
-    // obj12: { title:``, content:``, before:``, after:``, link:'' },
-    // obj13: { title:``, content:``, before:``, after:``, link:'' },
-    // obj14: { title:``, content:``, before:``, after:``, link:'' },
-    // obj15: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `Reflection Across the X-Axis`,
+      content: `The simplest flip: $g(x) = -f(x)$ negates every output, turning the whole curve upside down through the x-axis.`,
+      before: ``,
+      after: `Everything on the axis stays put — roots of $f$ are fixed points of this reflection, which is why the frozen parabola and its flipped twin pinch together exactly at the origin. Above and below simply trade places: maxima become minima, valleys become peaks.
+
+For odd functions the x-axis flip coincides with the [y-axis flip](!#reflection-across-the-y-axis) — one of the identities the [symmetry section](!#reflections-symmetry-and-function-types) collects.
+
+This reflection is also the $c = 0$ special case of the [horizontal-line family](!#reflection-across-a-horizontal-line), the first rung of a whole ladder of mirrors.`,
+      link: '',
+    },
+    obj12: {
+      title: `Reflection Across the Y-Axis`,
+      content: `The left-right mirror: $g(x) = f(-x)$ negates every input, so the curve's left and right halves swap sides.`,
+      before: ``,
+      after: `The frozen square root makes the move unmistakable: $\\sqrt{x}$ lives on the right half-line, and $\\sqrt{-x}$ lives entirely on the left — the reflection relocated the *domain* itself, not just the shape.
+
+Even functions are invisible to this mirror: $x^2$, $|x|$, and $\\cos x$ map onto themselves, which is precisely what "even" means. Odd functions land on their own [x-axis reflection](!#reflection-across-the-x-axis) instead.
+
+Input-side and output-side negation are the two atoms of reflection; every other tab combines or restricts them.`,
+      link: '',
+    },
+    obj13: {
+      title: `Reflection Across the Line y = x`,
+      content: `The diagonal mirror swaps coordinates outright: every point $(x, y)$ of $f$ becomes $(y, x)$ — the reflection that manufactures inverse functions.`,
+      before: ``,
+      after: `The frozen parabola shows the catch: reflecting $x^2$ produces the sideways parabola $x = y^2$, whose two branches $\\pm\\sqrt{x}$ stack two outputs over each input. The reflection of a graph is always a *set* of points — it is a *function* only when $f$ was one-to-one.
+
+That is the [horizontal line test](!#the-y-x-reflection-and-multivalued-inverses) seen geometrically: horizontal lines through $f$ become vertical lines through the reflection, and multiple crossings become multiple branches.
+
+Points on the diagonal itself — where $f(x) = x$ — do not move: fixed points of the mirror, and the pivots around which function and inverse rotate into each other.`,
+      link: '',
+    },
+    obj14: {
+      title: `Reflection Across a Horizontal Line`,
+      content: `Raising the mirror off the axis: $g(x) = 2c - f(x)$ reflects the curve across $y = c$, with the slider (or the animation) moving the mirror in real time.`,
+      before: ``,
+      after: `The algebra reads as a recipe: flip across the x-axis ($-f$), then shift up by twice the mirror height ($+2c$). At the frozen $c = 1$, the parabola $x^2$ becomes the downward $2 - x^2$, and the two curves cross exactly on the amber line — the fixed points where $f(x) = c$.
+
+Animating $c$ is this tab's best trick: the reflected curve slides while the original stands still, making the mirror's role kinetic instead of static.
+
+Setting $c = 0$ collapses this family back to the plain [x-axis reflection](!#reflection-across-the-x-axis) — the whole tab is that one move, parametrized.`,
+      link: '',
+    },
+    obj15: {
+      title: `Reflection Across a Vertical Line`,
+      content: `The vertical counterpart: $g(x) = f(2c - x)$ mirrors the curve across $x = c$, moving the y-axis mirror to any position.`,
+      before: ``,
+      after: `The frozen square root tells the story: $\\sqrt{x}$ opens rightward from the origin, and $\\sqrt{2 - x}$ opens leftward from $x = 2$ — the two curves meeting on the amber mirror at $x = 1$, where $2c - x = x$.
+
+The composition reading — shift, [y-axis flip](!#reflection-across-the-y-axis), shift back — is the standard trick for moving any axis-based operation to an arbitrary line, and it reappears throughout transformation theory.
+
+Together with the [horizontal-line tab](!#reflection-across-a-horizontal-line), this completes the free-mirror pair: any horizontal or vertical line in the plane can now serve as an axis of symmetry.`,
+      link: '',
+    },
+    obj16: {
+      title: `Output Reflection: |f(x)|`,
+      content: `The first partial reflection: $g(x) = |f(x)|$ flips **only** the parts of the curve below the x-axis, leaving everything non-negative untouched.`,
+      before: ``,
+      after: `The frozen sine wave becomes the rectified $|\\sin x|$: every dip bounces upward, the period halves to $\\pi$, and the roots of $f$ turn into **corners** — the curve touches the axis and rebounds instead of crossing.
+
+Those corners are the visible cost of the operation: wherever $f$ crossed zero transversally, $|f|$ is continuous but not differentiable.
+
+Unlike the full [x-axis reflection](!#reflection-across-the-x-axis), which moves the whole curve, this one is conditional — a reflection applied pointwise only where the output is negative. Its input-side sibling is [f(|x|)](!#input-reflection-fx).`,
+      link: '',
+    },
+    obj17: {
+      title: `Input Reflection: f(|x|)`,
+      content: `The second partial reflection works on inputs: $g(x) = f(|x|)$ evaluates $f$ only at non-negative arguments, so the right half of the graph is duplicated leftward as a mirror image.`,
+      before: ``,
+      after: `The frozen square root is the dramatic case: $\\sqrt{x}$ has no left half at all, yet $\\sqrt{|x|}$ conjures one — a full symmetric curve manufactured from half a function. Whatever $f$ does for $x < 0$ is discarded, sight unseen.
+
+The output is **always even**, regardless of what $f$ was: $g(-x) = f(|-x|) = f(|x|) = g(x)$ by construction. This tab is a machine for forcing y-axis symmetry.
+
+Together with [|f(x)|](!#output-reflection-fx), it completes the partial-reflection pair the [tabs overview](!#the-seven-reflection-tabs) groups at the end: one folds outputs, one folds inputs.`,
+      link: '',
+    },
 
   }
 
@@ -818,6 +893,71 @@ These symmetries are encoded in the visualizer&apos;s explanation panel, which r
     }
   }
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // reflection scene + attached picture-reading panel, no link (own page).
+  const stateUnits = {
+    xAxis: demoUnitFrame({ svg: reflectionsDiagrams.xAxis, caption: 'x-axis flip, frozen',
+      text: 'The parabola and its upside-down twin pinching together at the origin &#8212; roots are the fixed points of this mirror.' }),
+    yAxis: demoUnitFrame({ svg: reflectionsDiagrams.yAxis, caption: 'y-axis flip, frozen',
+      text: '&#8730;x lives on the right; &#8730;(&#8722;x) lives entirely on the left &#8212; the mirror relocated the domain itself.' }),
+    yEqX: demoUnitFrame({ svg: reflectionsDiagrams.yEqX, caption: 'Diagonal mirror, frozen',
+      text: 'Reflecting x&#178; across the amber diagonal stacks two branches over each input &#8212; a multivalued inverse, both branches drawn.' }),
+    yLine: demoUnitFrame({ svg: reflectionsDiagrams.yLine, caption: 'Mirror at y = 1, frozen',
+      text: 'The parabola and its reflection 2 &#8722; x&#178; crossing exactly on the amber line &#8212; the fixed points where f(x) = c.' }),
+    xLine: demoUnitFrame({ svg: reflectionsDiagrams.xLine, caption: 'Mirror at x = 1, frozen',
+      text: 'Two square roots opening toward each other, meeting on the vertical amber mirror.' }),
+    absF: demoUnitFrame({ svg: reflectionsDiagrams.absF, caption: '|f(x)|, frozen',
+      text: 'The rectified sine: every dip bounced upward, corners where the wave used to cross zero.' }),
+    fAbs: demoUnitFrame({ svg: reflectionsDiagrams.fAbs, caption: 'f(|x|), frozen',
+      text: 'A left half conjured from nothing: &#8730;|x| mirrors the right branch of &#8730;x into a fully even curve.' }),
+  };
+
+  // Canonical per-reflection explanations for the info panel (SSR/SEO-visible),
+  // hoisted from the component's built-in REFLECTIONS bodies + anchors added.
+  const explanations = {
+    xAxis:
+      'Negates every output. The whole curve flips upside down.\n' +
+      '- Roots of $f$ stay roots of $g$ — they’re on the x-axis already.\n' +
+      '- Local maxima become local minima, and vice versa.\n' +
+      '- For **odd functions**, this gives the same result as reflecting across the y-axis.\n\n' +
+      '[Learn more about the x-axis reflection](!#reflection-across-the-x-axis) · [All seven reflections](!#the-seven-reflection-tabs)',
+    yAxis:
+      'Replaces every input by its negative. Left and right swap.\n' +
+      '- For **even functions** like $x^2$, $|x|$, $\\cos x$, the curve maps onto itself.\n' +
+      '- For **odd functions** like $x$, $x^3$, $\\sin x$, the result equals the x-axis reflection.\n' +
+      '- For one-sided functions like $\\sqrt{x}$ and $\\ln x$, the domain itself moves to the opposite side.\n\n' +
+      '[Learn more about the y-axis reflection](!#reflection-across-the-y-axis) · [All seven reflections](!#the-seven-reflection-tabs)',
+    yEqX:
+      'Every point $(x, y)$ on $f$ becomes $(y, x)$ on $g$. The reflected set is the **graph of $f$ rotated 90° across the diagonal**.\n' +
+      '- For **one-to-one** functions, the reflection is itself a function — the **inverse** $f^{-1}$.\n' +
+      '- For **non-one-to-one** functions (like $x^2$, $|x|$, $\\sin x$, $\\cos x$), the reflection is **multivalued** — multiple $y$ values for the same $x$. All branches are drawn.\n' +
+      '- Points on the line $y = x$ (where $f(x) = x$) are fixed.\n\n' +
+      '[Learn more about the diagonal mirror](!#reflection-across-the-line-y-x) · [All seven reflections](!#the-seven-reflection-tabs)',
+    yLine:
+      'The horizontal line $y = c$ becomes the axis of symmetry. Every point of $f$ has a mirror partner on $g$, the same vertical distance from the line but on the opposite side.\n' +
+      '- Equivalent to **reflecting across the x-axis, then shifting up by $2c$**.\n' +
+      '- When $c = 0$, this reduces to the x-axis reflection.\n' +
+      '- Points where $f(x) = c$ are **fixed points** — they sit on the line and don’t move.\n\n' +
+      '[Learn more about horizontal-line mirrors](!#reflection-across-a-horizontal-line) · [All seven reflections](!#the-seven-reflection-tabs)',
+    xLine:
+      'The vertical line $x = c$ becomes the axis of symmetry. Every point of $f$ ends up at the same height on the other side of the line.\n' +
+      '- Equivalent to **shifting left by $c$, reflecting across the y-axis, then shifting right by $c$**.\n' +
+      '- When $c = 0$, this reduces to the y-axis reflection.\n' +
+      '- Points where $x = c$ are fixed.\n\n' +
+      '[Learn more about vertical-line mirrors](!#reflection-across-a-vertical-line) · [All seven reflections](!#the-seven-reflection-tabs)',
+    absF:
+      'A **partial reflection**: only the pieces of $f$ that dip below the x-axis get flipped up. Non-negative pieces are unchanged.\n' +
+      '- Where $f(x) \\geq 0$, $g(x) = f(x)$.\n' +
+      '- Where $f(x) < 0$, $g(x) = -f(x)$.\n' +
+      '- The roots of $f$ become **corners** of $g$ — the curve touches the x-axis and bounces.\n\n' +
+      '[Learn more about |f(x)|](!#output-reflection-fx) · [All seven reflections](!#the-seven-reflection-tabs)',
+    fAbs:
+      'For each input $x$, evaluate $f$ at $|x|$ instead. The right half of $f$ (for $x \\geq 0$) is used for **both** sides.\n' +
+      '- For $x \\geq 0$, $g(x) = f(x)$ (unchanged).\n' +
+      '- For $x < 0$, $g(x) = f(-x)$ — the right half mirrored over.\n' +
+      '- The result is **always an even function**, regardless of what $f$ is.\n\n' +
+      '[Learn more about f(|x|)](!#input-reflection-fx) · [All seven reflections](!#the-seven-reflection-tabs)',
+  };
 
    return {
       props:{
@@ -825,6 +965,8 @@ These symmetries are encoded in the visualizer&apos;s explanation panel, which r
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
          seoData: {
            title: "Function Reflections Across Axes & Lines | Learn Math Class",
            description: "Visualize 7 reflection types: x-axis, y-axis, y = x, y = c, x = c, |f(x)|, and f(|x|). Apply each to 10 base function families with side-by-side plots.",
@@ -839,141 +981,31 @@ These symmetries are encoded in the visualizer&apos;s explanation panel, which r
     }
    }
 
-export default function FunctionReflectionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function FunctionReflectionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // obj11–obj15 slots reserved for future expansion
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    { id:'key-terms', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
+    { id:'getting-started', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
+    { id:'choosing-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
+    { id:'the-seven-reflection-tabs', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
+    { id:'the-parameter-tabs-y-c-and-x-c', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'manual-vs-auto-mode', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
+    { id:'the-y-x-reflection-and-multivalued-inverses', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+    { id:'partial-reflections-fx-and-fx2', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+    { id:'what-is-a-reflection', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
+    { id:'reflections-symmetry-and-function-types', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
+    { id:'reflection-across-the-x-axis', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content, unit('xAxis'), sectionsContent.obj11.after] },
+    { id:'reflection-across-the-y-axis', title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('yAxis'), sectionsContent.obj12.after] },
+    { id:'reflection-across-the-line-y-x', title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('yEqX'), sectionsContent.obj13.after] },
+    { id:'reflection-across-a-horizontal-line', title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('yLine'), sectionsContent.obj14.after] },
+    { id:'reflection-across-a-vertical-line', title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('xLine'), sectionsContent.obj15.after] },
+    { id:'output-reflection-fx', title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content, unit('absF'), sectionsContent.obj16.after] },
+    { id:'input-reflection-fx', title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content, unit('fAbs'), sectionsContent.obj17.after] },
+    { id:'related-concepts', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+  ]
 
   return (
    <>
@@ -1036,7 +1068,7 @@ export default function FunctionReflectionsPage({seoData, sectionsContent, intro
    <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Function Reflections</h1>
    <br/>
    <div style={{transform:'scale(1.1)'}}>
-  <FunctionReflections/>
+  <FunctionReflections explanations={explanations}/>
   </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

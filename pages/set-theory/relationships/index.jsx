@@ -459,6 +459,8 @@ Two sets $A$ and $B$ are equal if they contain exactly the same elements:
 
 $$A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$$
 
+The two [logic symbols](!/math-symbols/math-logic) in this criterion read naturally: $\\forall$ means 'for all' and $\\iff$ means 'if and only if'.
+
 Order does not matter: $\\{1, 2, 3\\} = \\{3, 1, 2\\}$. Repetition does not matter: $\\{1, 2, 2, 3\\} = \\{1, 2, 3\\}$. Only membership determines equality.
 
 The standard method for proving two sets are equal is to show mutual [subset](!/set-theory/subsets) containment:

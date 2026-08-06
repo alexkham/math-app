@@ -719,6 +719,8 @@ For example, $\\sin(x) = \\frac{1}{2}$ has two solutions per period of $2\\pi$: 
 
 $$x = \\frac{\\pi}{6} + 2n\\pi \\quad \\text{or} \\quad x = \\frac{5\\pi}{6} + 2n\\pi, \\quad n \\in \\mathbb{Z}$$
 
+The condition $n \\in \\mathbb{Z}$ reads '$n$ ranges over the integers' — $\\mathbb{Z}$ is one of the standard [set symbols](!/math-symbols/set-theory) that appears in every general solution.
+
 For tangent, which has period $\\pi$ and only one solution per period, the general solution is more compact. If $\\tan(x) = 1$, the principal solution is $x = \\frac{\\pi}{4}$, and the general solution is:
 
 $$x = \\frac{\\pi}{4} + n\\pi, \\quad n \\in \\mathbb{Z}$$

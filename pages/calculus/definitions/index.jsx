@@ -166,6 +166,11 @@ import DefinitionGlossary from '@/app/components/examples/DefinitionsGlossary'
 export async function getStaticProps() {
   const { default: calculusTermsList } = await import('@/app/api/db/definitions/calculus/calculusDefinitions')
 
+  // Surfaced on the /calculus hub via buildSectionData extraction.
+  const hubMeta = {
+    hubDescription: 'The Calculus Terms and Definitions page provides a comprehensive collection of essential calculus concepts organized across multiple categories including Functions, Differentiation, Integration, Geometry, Motion and Dynamics, and Vector Calculus. From fundamental concepts like derivatives and integrals to advanced topics in vector analysis and differential equations, each term is clearly defined to support understanding of calculus principles and their applications.',
+  }
+
   const keyWords = [
     'calculus definitions',
     'calculus terms',

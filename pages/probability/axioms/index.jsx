@@ -1053,7 +1053,7 @@ The event that represents "something happens" — the entire sample space — is
 **Additivity for Disjoint Events**  
 When two events cannot occur together, the probability that one or the other occurs is the sum of their probabilities. Disjoint situations contribute independently to the total.
 
-Together, these axioms define what it means for a probability assignment to be valid. All further probability rules are consequences of these basic constraints. The table below collects them in compact form — the formal statement and the meaning behind each.
+Together, these axioms define what it means for a probability assignment to be valid. All further probability rules are consequences of these basic constraints. The table below collects them in compact form — the formal statement, in standard [probability notation](!/math-symbols/probability), and the meaning behind each.
 `,
       before:``,
       after:``,

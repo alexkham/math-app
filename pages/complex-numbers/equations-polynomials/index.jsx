@@ -10,6 +10,15 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
 
+// Surfaced on the /complex-numbers hub via buildSectionData extraction.
+// Kept at module top (first match wins). NOTE: do not use apostrophes in
+// comments in this file — the extraction stashes string literals before
+// stripping comments, so a stray apostrophe mis-pairs every quote after it.
+const hubMeta = {
+  name: 'Complex Polynomial Equations',
+  hubDescription: 'Every polynomial finds its roots in the complex numbers: the Fundamental Theorem of Algebra, complete factorization into linear terms, Vieta formulas linking roots to coefficients, conjugate-pair symmetry of real polynomials, and equation-solving techniques that combine algebra with the geometry of the complex plane.',
+}
+
 export async function getStaticProps(){
 
  const keyWords = [

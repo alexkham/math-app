@@ -1,0 +1,1609 @@
+{
+  "$meta": {
+    "version": "0.1.0",
+    "description": "Notation registry: every spot across the app where mathematical notation is introduced, explained, or referenced — plus recommended spots where a notation note should exist but does not. Stage 1 records the spots (exact page + section id). Stage 2 maps each spot to its best /math-symbols target (creating topic pages where missing) and adds contextual (non-structural) links to /keyboard and /latex (+ LaTeX editor).",
+    "generated": "2026-08-05",
+    "conventions": {
+      "pageKey": "route-qualified key '<section>/<slug>' (e.g. 'set-theory/basics'); hub pages use the bare section name (e.g. 'set-theory')",
+      "template": "titled (slug section ids) | untitled (numeric section ids) | hub (buildSectionData, no authored sections) | tool (visual-tool page) | other (glossary/formulas/table page)",
+      "spotKind": "dedicated-section (whole section about notation) | inline-intro (symbol introduced with explanation in passing) | table (notation summary table or symbol/meaning list) | mention (notation referenced but not explained)",
+      "spotStatus": "existing (notation content already on page) | recommended (gap: notation used but never introduced; a note should be planted) | resolved (recommended gap addressed in a later pass)",
+      "spotAddress": "pageKey + sectionId (+ field: which sectionsContent field holds the text — content, content2, …). sectionId is the DOM anchor rendered by Sections/SectionTOC.",
+      "stage2": "per spot, filled during mapping: mathSymbols {page, category} | keyboard {planned} | latex {planned}. Links must be contextual — woven into the sentence that discusses the notation, never appended as structural link rows (see inline-link-style rule).",
+      "symbolsPages": "$symbolsPages tracks /math-symbols coverage: which topic pages exist, which are missing and proposed for creation. math-symbols topic pages currently have NO addressable anchors (DataWrapper category filter is client-state only) — deep links can target page level only until an additive category-preselect mechanism exists.",
+      "populationRule": "Universal registry rule: any pass touching a page updates its registry entry as a by-product, whatever the operation."
+    }
+  },
+  "$symbolsPages": {
+    "existing": {
+      "set-theory": "/math-symbols/set-theory",
+      "trigonometry": "/math-symbols/trigonometry",
+      "calculus": "/math-symbols/calculus",
+      "combinatorics": "/math-symbols/combinatorics",
+      "probability": "/math-symbols/probability",
+      "complex-numbers": "/math-symbols/complex-numbers",
+      "linear-algebra": "/math-symbols/linear-algebra",
+      "logic": "/math-symbols/math-logic"
+    },
+    "missing": {
+      "algebra": {
+        "proposed": "/math-symbols/algebra",
+        "status": "to-evaluate"
+      },
+      "arithmetic": {
+        "proposed": "/math-symbols/arithmetic",
+        "status": "to-evaluate"
+      },
+      "functions": {
+        "proposed": "/math-symbols/functions",
+        "status": "to-evaluate"
+      }
+    },
+    "anchorLimitation": "DataWrapper (app/components/generic-table/DataWrapper.jsx) filters categories via client state; no URL params, no section anchors. Stage 2 option: additive query-param preselect (e.g. ?category=basic_set_operations) via a new wrapper, without editing existing components."
+  },
+  "pages": {
+    "set-theory": {
+      "pagePath": "pages/set-theory/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "notes": "Old hub Notation section migrated to /set-theory/basics. No notation content on hub itself.",
+      "externalNotationLinks": []
+    },
+    "set-theory/basics": {
+      "pagePath": "pages/set-theory/basics/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 What Is a Set? The Definition", "2 Notation Used in Set Theory", "3 Cardinality and Types of Sets", "4 Relationships Between Sets", "5 Operations on Sets"],
+      "spots": [
+        {
+          "sectionId": "2",
+          "sectionTitle": "Notation Used in Set Theory",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "It is a widespread convention to denote mathematical sets by capital English letters",
+          "covers": ["enumerative notation", "set-builder notation (4 building blocks, vertical bar)", "empty set ∅", "∈", "∉", "forward list ⊆ ⊂ ⊇ ⊃"],
+          "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "set theory symbols"}, "latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-06", "placement": "closing sentence appended to obj2 content"}
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "Notation Used in Set Theory",
+          "field": "notationTable (summaries[0].table)",
+          "kind": "table",
+          "status": "existing",
+          "quote": "shared set-theory notation summary table (app/api/db/tables/set-theory/summaries)",
+          "stage2": null
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Cardinality and Types of Sets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "most often denoted by the symbol |A| or card(A)",
+          "covers": ["|A|", "card(A)", "#A", "n(A)", "‖A‖", "U / ξ universal set", "∅"],
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Relationships Between Sets",
+          "field": "content, content2, content4",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Notation: x ∈ A means that x is an element of set A",
+          "covers": ["∈", "∉", "=", "≠", "A^c"],
+          "stage2": null
+        },
+        {
+          "sectionId": "5",
+          "sectionTitle": "Operations on Sets",
+          "field": "content..content4",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "the intersection of two sets A and B, denoted A ∩ B",
+          "covers": ["∩", "∪", "−", "Δ"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "set-theory/definitions": {
+      "pagePath": "pages/set-theory/definitions/index.jsx",
+      "template": "other",
+      "sections": ["glossary anchors from setTheoryDefinitions DB (#set, #union, ...)"],
+      "spots": [
+        {
+          "sectionId": "faq",
+          "sectionTitle": "FAQ",
+          "field": "faqQuestions.obj1.answer",
+          "kind": "mention",
+          "status": "existing",
+          "quote": "denoted by capital letters and their elements are listed inside curly braces",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "set-theory/operations": {
+      "pagePath": "pages/set-theory/operations/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Union", "2 Intersection", "3 Complement", "4 Set Difference", "5 Symmetric Difference", "6 Summary: All Five Operations at a Glance"],
+      "spots": [
+        {
+          "sectionId": "3",
+          "sectionTitle": "Complement",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Alternative notations include $A'$ and $\\overline{A}$",
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Set Difference",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The set difference $A \\setminus B$ (also written $A - B$)",
+          "stage2": null
+        },
+        {
+          "sectionId": "6",
+          "sectionTitle": "Summary: All Five Operations at a Glance",
+          "field": "summaryTable",
+          "kind": "table",
+          "status": "existing",
+          "quote": "summary table with dedicated Notation column; complement row lists A^c (also A', Ā, or U \\ A)",
+          "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "notation"}, "added": "2026-08-06", "placement": "in-text on 'notation' in obj6 intro sentence"}
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Union",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "∪ appears in formulas without a one-line denoted/read-as gloss (complement and difference get one); first-use notation note or symbols link would help",
+          "stage2": null
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "Intersection",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "same gap as Union: ∩ introduced only via displayed set-builder definition",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [
+        {
+          "target": "/math-symbols/probability",
+          "state": "commented-out",
+          "line": 47,
+          "note": "template snippet '[See All Probability Symbols and Notations](!/math-symbols/probability)' — intended pattern, wrong section, never rendered"
+        }
+      ]
+    },
+    "set-theory/subsets": {
+      "pagePath": "pages/set-theory/subsets/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Subsets", "2 Proper Subsets", "3 Superset", "4 Number of Subsets", "5 Power Set", "6 Summary: Subset and Superset Notation"],
+      "spots": [
+        {
+          "sectionId": "6",
+          "sectionTitle": "Summary: Subset and Superset Notation",
+          "field": "content + summaryTable",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Four containment symbols cover every subset/superset relationship",
+          "covers": ["⊆", "⊂", "⊇", "⊃", "table columns Symbol/Read as/Meaning/Example"],
+          "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "containment symbols"}, "added": "2026-08-06", "placement": "in-text on 'containment symbols' in obj6 opening sentence"}
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Subsets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "This relationship is written: $A \\subseteq B$",
+          "stage2": null
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "Proper Subsets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "This is written: $A \\subset B$",
+          "stage2": null
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Superset",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "written: $B \\supseteq A$ … This is read as '$B$ contains $A$'",
+          "stage2": null
+        },
+        {
+          "sectionId": "5",
+          "sectionTitle": "Power Set",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "denoted $\\mathcal{P}(A)$ or $2^A$",
+          "stage2": null
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Superset",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "blackboard-bold ℕ ℤ ℚ ℝ ℂ used without glossing the letter convention; symbol note or link to special-sets symbols would help",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [
+        {
+          "target": "/math-symbols/probability",
+          "state": "commented-out",
+          "line": 46
+        }
+      ]
+    },
+    "set-theory/cardinality": {
+      "pagePath": "pages/set-theory/cardinality/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Definition of Cardinality", "2 Finite Sets", "3 Infinite Sets", "4 Countable Sets", "5 Uncountable Sets", "6 Comparing Cardinalities", "7 Summary: A Hierarchy of Cardinalities"],
+      "spots": [
+        {
+          "sectionId": "1",
+          "sectionTitle": "Definition of Cardinality",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The cardinality of a set $A$, denoted $|A|$",
+          "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "cardinality symbols"}, "added": "2026-08-06", "placement": "new short sentence after the obj1 opening sentence: 'This bar notation is one of several cardinality symbols in standard use.'"}
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Infinite Sets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "$\\mathbb{N}$ … — the natural numbers (ℕ ℤ ℚ ℝ each named)",
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Countable Sets",
+          "field": "content",
+          "kind": "mention",
+          "status": "existing",
+          "quote": "Some authors reserve 'countable' for countably infinite sets only — context determines the convention",
+          "stage2": null
+        },
+        {
+          "sectionId": "5",
+          "sectionTitle": "Uncountable Sets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$",
+          "stage2": null
+        },
+        {
+          "sectionId": "6",
+          "sectionTitle": "Comparing Cardinalities",
+          "field": "content + obj6Table",
+          "kind": "table",
+          "status": "existing",
+          "quote": "notation reference card: |A| = |B|, |A| ≤ |B|, |A| < |B| (Relation / Meaning / Witnessed by)",
+          "stage2": null
+        },
+        {
+          "sectionId": "7",
+          "sectionTitle": "Summary: A Hierarchy of Cardinalities",
+          "field": "summaryTable",
+          "kind": "table",
+          "status": "existing",
+          "quote": "hierarchy rows include ℵ₀ (aleph-null), 𝔠 = 2^ℵ₀ (continuum)",
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Countable Sets",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "ℵ₀ first appears in id 7 summary table without prose introduction of aleph notation; a one-liner here ('aleph-null, symbol for the smallest infinite cardinal') would bridge it",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [
+        {
+          "target": "/math-symbols/probability",
+          "state": "commented-out",
+          "line": 46
+        }
+      ]
+    },
+    "set-theory/relationships": {
+      "pagePath": "pages/set-theory/relationships/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Equal Sets", "2 Equivalent Sets", "3 Disjoint Sets", "4 Overlapping Sets", "5 Partitions", "6 Summary: How Sets Relate"],
+      "spots": [
+        {
+          "sectionId": "6",
+          "sectionTitle": "Summary: How Sets Relate",
+          "field": "summaryTable",
+          "kind": "table",
+          "status": "existing",
+          "quote": "Defining condition column is symbolic: ∀x (x ∈ A ⇔ x ∈ B), A ∩ B = ∅; tilde row {a,b,c} ~ {1,2,3}",
+          "stage2": null
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Equal Sets",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "resolved",
+          "why": "$\\iff$ and $\\forall$ appear in the formal equality criterion with no gloss of the logic symbols; short read-as note needed (also id 5 cases-brace formula)",
+          "resolution": "2026-08-06: one-line gloss added after the equality criterion formula ($\\forall$ = 'for all', $\\iff$ = 'if and only if') with in-text link. Id 5 cases-brace formula still unglossed.",
+          "stage2": {"mathSymbols": {"page": "/math-symbols/math-logic", "category": null, "anchorText": "logic symbols"}, "added": "2026-08-06", "placement": "gloss sentence after the set-equality criterion formula in obj1 content"}
+        },
+        {
+          "sectionId": "6",
+          "sectionTitle": "Summary: How Sets Relate",
+          "field": "summaryTable",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "the ~ equivalence notation appears only in the table and is never introduced on the page; one line defining $A \\sim B$ needed",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "notes": "Rendered h1 is placeholder 'Page Title'.",
+      "externalNotationLinks": [
+        {
+          "target": "/math-symbols/probability",
+          "state": "commented-out",
+          "line": 46
+        }
+      ]
+    },
+    "set-theory/venn-diagrams": {
+      "pagePath": "pages/set-theory/venn-diagrams/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 What Are Venn Diagrams", "2 Two-Set Venn Diagrams", "3 Three-Set Venn Diagrams", "4 Shading Regions", "5 Using Venn Diagrams to Verify Set Identities"],
+      "spots": [
+        {
+          "sectionId": "2",
+          "sectionTitle": "Two-Set Venn Diagrams",
+          "field": "obj2Table",
+          "kind": "table",
+          "status": "existing",
+          "quote": "columns Operation / Notation / What to shade (A ∪ B, A ∩ B, A^c, A \\ B, A Δ B)",
+          "stage2": null
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Three-Set Venn Diagrams",
+          "field": "obj3Table",
+          "kind": "table",
+          "status": "existing",
+          "quote": "all 8 regions in formal notation (A ∩ B ∩ C^c etc.) mapped to plain descriptions",
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Shading Regions",
+          "field": "content",
+          "kind": "mention",
+          "status": "existing",
+          "quote": "then express the result using set notation",
+          "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "set notation"}, "added": "2026-08-06", "placement": "in-text on 'set notation' in obj4 closing paragraph"}
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [
+        {
+          "target": "/math-symbols/probability",
+          "state": "commented-out",
+          "line": 45
+        }
+      ]
+    },
+    "set-theory/rules": {
+      "pagePath": "pages/set-theory/rules/index.jsx",
+      "template": "titled",
+      "sections": [" idempotent (leading space!) Idempotent Laws", "associative", "commutative", "distributive", "identity", "complement", "de_morgan De Morgan's Laws"],
+      "spots": [
+        {
+          "sectionId": "(page top / intro)",
+          "sectionTitle": "—",
+          "field": "intro (currently empty)",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "page throws ∅, U, A^c at the reader with zero introduction (all sectionsContent prose empty, empty IntroSection); a brief notation legend before the first laws table needed",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "notes": "Laws rendered via ExpandableTable from setTheoryRulesSections; formula+explanation pairs but no notation gloss anywhere.",
+      "externalNotationLinks": []
+    },
+    "set-theory/formulas": {
+      "pagePath": "pages/set-theory/formulas/index.jsx",
+      "template": "other",
+      "sections": ["FormulasTOC over setTheoryFormulas DB"],
+      "spots": [
+        {
+          "sectionId": "faq",
+          "sectionTitle": "FAQ",
+          "field": "faqQuestions",
+          "kind": "mention",
+          "status": "existing",
+          "quote": "FAQ answers spell symbols in words ('A triangle B', 'A intersection B')",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "set-theory/venn-generator": {
+      "pagePath": "pages/set-theory/venn-generator/index.jsx",
+      "template": "tool",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "set-theory/visual-tools": {
+      "pagePath": "pages/set-theory/visual-tools/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "notes": "SEO/schemas/intro/FAQ carry leftover linear-algebra copy from template source.",
+      "externalNotationLinks": []
+    },
+    "set-theory/visual-tools/two-sets-basic-venn": {
+      "pagePath": "pages/set-theory/visual-tools/two-sets-basic-venn/index.jsx",
+      "template": "tool",
+      "sections": ["0 Key Terms", "1 Getting Started with the Explorer", "2 Navigating Category Tabs", "3 Selecting an Identity", "4 Reading the Shaded Venn Diagram", "5 Customizing Color and Opacity", "6 Previous and Next Navigation", "7 What is a Two-Set Venn Diagram?", "8 Set Operations on Two Sets", "9 De Morgan's Laws for Two Sets", "10 Related Concepts and Tools"],
+      "spots": [
+        {
+          "sectionId": "0",
+          "sectionTitle": "Key Terms",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "**Union** — $A \\cup B$, elements in $A$, in $B$, or in both (symbol/meaning list incl. A', \\setminus, △, ⊆, ∅, De Morgan)",
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Reading the Shaded Venn Diagram",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "each region given 'formally $A' \\cap B'$', 'formally $A \\setminus B$' pairings",
+          "stage2": null
+        },
+        {
+          "sectionId": "8",
+          "sectionTitle": "Set Operations on Two Sets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Set-builder form: $\\{x : x \\in A \\text{ or } x \\in B\\}$",
+          "stage2": null
+        },
+        {
+          "sectionId": "9",
+          "sectionTitle": "De Morgan's Laws for Two Sets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "De Morgan formulas displayed and named",
+          "stage2": null
+        },
+        {
+          "sectionId": "0",
+          "sectionTitle": "Key Terms",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "tool pages use $A'$ for complement while theory pages use $A^c$; one line 'also written $A^c$' would reconcile conventions for learners moving between pages",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "set-theory/visual-tools/two-sets-laws-venn": {
+      "pagePath": "pages/set-theory/visual-tools/two-sets-laws-venn/index.jsx",
+      "template": "tool",
+      "sections": ["0 Key Terms", "1 Getting Started with the Explorer", "2 Navigating Category Tabs", "3 Selecting an Identity", "4 Reading the Side-by-Side Proof", "5 The Match Indicator", "6 Theme Controls and Navigation", "7 What is a Set Identity?", "8 Why Do Visual Proofs Work?", "9 De Morgan's Laws and Their Mirrors", "10 Related Concepts and Tools"],
+      "spots": [
+        {
+          "sectionId": "0",
+          "sectionTitle": "Key Terms",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "**Idempotent law** — $A \\cup A = A$… (law/formula list incl. identity elements ∅/U, double complement, absorption)",
+          "stage2": null
+        },
+        {
+          "sectionId": "9",
+          "sectionTitle": "De Morgan's Laws and Their Mirrors",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "$(A \\cap B')' = A' \\cup B$ — corresponds to the implication $A \\to B$",
+          "stage2": null
+        },
+        {
+          "sectionId": "9",
+          "sectionTitle": "De Morgan's Laws and Their Mirrors",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "logic arrow $A \\to B$ introduced without gloss ('read as: A implies B'); minor",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "set-theory/visual-tools/three-sets-basic-venn": {
+      "pagePath": "pages/set-theory/visual-tools/three-sets-basic-venn/index.jsx",
+      "template": "tool",
+      "sections": ["0 Key Terms", "1 Getting Started", "2 Navigating Category Tabs", "3 Selecting an Identity", "4 Reading the Shaded Venn Diagram", "5 Customizing Color and Opacity", "6 Previous and Next Navigation", "7 What is a Three-Set Venn Diagram?", "8 Three-Set Operations", "9 De Morgan's Laws for Three Sets", "10 Counting Identities Unique to Three Sets", "11 Related Concepts and Tools"],
+      "spots": [
+        {
+          "sectionId": "0",
+          "sectionTitle": "Key Terms",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "$A \\triangle B \\triangle C$, elements in an odd number of $A$, $B$, $C$ (symbol/meaning list + three-set De Morgan)",
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Reading the Shaded Venn Diagram",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "all 8 regions with 'formally $A' \\cap B' \\cap C'$' pairings",
+          "stage2": null
+        },
+        {
+          "sectionId": "8",
+          "sectionTitle": "Three-Set Operations",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "each three-set operation with symbol and region reading",
+          "stage2": null
+        },
+        {
+          "sectionId": "9",
+          "sectionTitle": "De Morgan's Laws for Three Sets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "displayed three-set De Morgan formulas",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "set-theory/visual-tools/three-sets-laws-venn": {
+      "pagePath": "pages/set-theory/visual-tools/three-sets-laws-venn/index.jsx",
+      "template": "tool",
+      "sections": ["0 Key Terms", "1 Getting Started", "2 Navigating Category Tabs", "3 Selecting an Identity", "4 Reading the Side-by-Side Proof", "5 The Match Indicator", "6 Theme Controls and Navigation", "7 What is a Three-Set Identity?", "8 Why Do Visual Proofs Work?", "9 Associative and Distributive Laws", "10 Difference Identities in Three Sets", "11 Related Concepts and Tools"],
+      "spots": [
+        {
+          "sectionId": "0",
+          "sectionTitle": "Key Terms",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "law/formula list (associative for ∪ ∩ △, distributive, difference distribution, nested difference)",
+          "stage2": null
+        },
+        {
+          "sectionId": "9",
+          "sectionTitle": "Associative and Distributive Laws",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "displayed associative/distributive formulas",
+          "stage2": null
+        },
+        {
+          "sectionId": "10",
+          "sectionTitle": "Difference Identities in Three Sets",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "five difference identities … notes 'since $A \\setminus B = A \\cap B''$'",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic": {
+      "pagePath": "pages/arithmetic/index.jsx",
+      "template": "hub",
+      "sections": ["LandingPage contentCards; anchors are card htmlIds: divisibility, factors, gcd, lcm, divisibility-rules, fractions, adding-subtracting, multiplying, dividing, comparing, equivalent, mixed-numbers, complex-fractions, modulo, modular-operations, negative-modulo, + calculator/tool cards"],
+      "spots": [
+        {"sectionId": "divisibility (card)", "sectionTitle": "Divisibility", "field": "card content (line 128)", "kind": "inline-intro", "status": "existing", "quote": "The notation $a \\mid b$ is a statement — true or false — not an operation", "stage2": null},
+        {"sectionId": "modulo (card)", "sectionTitle": "Modulo", "field": "card content (line 309)", "kind": "mention", "status": "existing", "quote": "$17 \\bmod 5 = 2$; congruent modulo $n$: $17 \\equiv 5 \\pmod{12}$", "stage2": null},
+        {"sectionId": "negative-modulo (card)", "sectionTitle": "Negative Modulo", "field": "card content (line 337)", "kind": "mention", "status": "existing", "quote": "Two conventions… truncated division… floored division", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/definitions": {
+      "pagePath": "pages/arithmetic/definitions/index.jsx",
+      "template": "other",
+      "sections": ["glossary anchors: #category_divisibility, #category_fractions, #category_modular_arithmetic + per-term ids"],
+      "spots": [
+        {"sectionId": "faq", "sectionTitle": "FAQ", "field": "faqQuestions.obj5 (line 312)", "kind": "mention", "status": "existing", "quote": "written a is congruent to b mod m", "stage2": null},
+        {"sectionId": "intro", "sectionTitle": "—", "field": "intro article", "kind": "recommended-note", "status": "recommended", "why": "glossary defines terms but page prose never shows the symbols ($\\mid$, $\\bmod$, $\\equiv$, $\\frac{a}{b}$); compact symbol legend near intro would fit", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Lines 1-250 are a dead commented-out algebra-flavored version.",
+      "externalNotationLinks": []
+    },
+    "arithmetic/divisibility": {
+      "pagePath": "pages/arithmetic/divisibility/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "1 What is Divisibility?", "2 Terminology and Notation", "3 Basic Properties", "4 Divisibility and Remainders", "5 Divisibility Rules", "6 Factors and Multiples", "7 Prime Numbers", "8 Prime Factorization", "9 GCD and LCM", "10 Related Concepts", "11 Summary: A Map of the Divisibility Subtree"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Terminology and Notation", "field": "content (line 282) + obj2Table (lines 42-79)", "kind": "dedicated-section", "status": "existing", "quote": "The vertical bar in $a \\mid b$ is the standard notation for divisibility", "covers": ["$a \\mid b$", "$5 \\nmid 12$", "contrast with ÷", "table: five phrasings of $3 \\mid 12$"], "stage2": null},
+        {"sectionId": "1", "sectionTitle": "What is Divisibility?", "field": "content (line 268)", "kind": "inline-intro", "status": "existing", "quote": "$a \\mid b$ means $b = a \\cdot k$", "stage2": null},
+        {"sectionId": "4", "sectionTitle": "Divisibility and Remainders", "field": "content (line 323)", "kind": "inline-intro", "status": "existing", "quote": "$a \\bmod n = 0$ is the computational form of $n \\mid a$", "stage2": null},
+        {"sectionId": "faq", "sectionTitle": "FAQ", "field": "obj3 (line 507)", "kind": "mention", "status": "existing", "quote": "What does the notation a | b mean?", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Model page for notation handling in the arithmetic section.",
+      "externalNotationLinks": []
+    },
+    "arithmetic/divisibility/factors": {
+      "pagePath": "pages/arithmetic/divisibility/factors/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "1 Factors (Divisors)", "2 Finding All Factors", "3 Factor Pairs", "4 Proper Divisors", "5 Multiples", "6 Factors vs Multiples", "7 Common Factors", "8 Common Multiples", "9 Counting Factors", "10 Sum of Factors", "11 Worked Examples", "12 Summary: A Toolkit for Divisor Structure"],
+      "spots": [
+        {"sectionId": "10", "sectionTitle": "Sum of Factors", "field": "content (line 456) + table header 'In σ-notation' (line 85)", "kind": "inline-intro", "status": "existing", "quote": "sum of all positive divisors of $n$ is denoted $\\sigma(n)$", "stage2": null},
+        {"sectionId": "9", "sectionTitle": "Counting Factors", "field": "content (line 437)", "kind": "recommended-note", "status": "recommended", "why": "divisor-count formula presented anonymously while id 10 names σ(n); one line naming d(n)/τ(n) would parallel the σ treatment", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/divisibility/gcd": {
+      "pagePath": "pages/arithmetic/divisibility/gcd/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "1 What is GCD?", "2 Basic Properties", "3 Method 1: Listing Factors", "4 Method 2: Prime Factorization", "5 Method 3: Euclidean Algorithm", "6 Euclidean Algorithm Step by Step", "7 Coprime (Relatively Prime) Numbers", "8 Properties of Coprime Numbers", "9 GCD of More Than Two Numbers", "10 Applications of GCD", "11 Worked Examples", "12 Summary: Three Methods for GCD"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What is GCD?", "field": "content (line 300) + afterFigure (line 307)", "kind": "inline-intro", "status": "existing", "quote": "written $\\gcd(a, b)$, is the largest positive integer that divides both; GCD/HCF/GCF synonymous conventions", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/divisibility/lcm": {
+      "pagePath": "pages/arithmetic/divisibility/lcm/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "1 What is LCM?", "2 Basic Properties", "3-5 Methods", "6 The GCD-LCM Relationship", "7 When a and b Are Coprime", "8 When One Divides the Other", "9 LCM of More Than Two Numbers", "10 Applications", "11 Worked Examples", "12 Summary"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What is LCM?", "field": "content (line 256)", "kind": "inline-intro", "status": "existing", "quote": "written $\\text{lcm}(a, b)$, is the smallest positive integer divisible by both", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/divisibility/rules": {
+      "pagePath": "pages/arithmetic/divisibility/rules/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "1 What Are Divisibility Rules?", "2-10 by 2/3/4/5/6/8/9/10/11", "11 Combining Rules", "12 Worked Examples", "13 Why These Rules Work", "14 Summary: Master Rules Reference"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Are Divisibility Rules?", "field": "content (lines 316-320)", "kind": "inline-intro", "status": "existing", "quote": "$a \\mid b$ when $b = a \\cdot k$ … equivalently $b \\bmod a = 0$ (recap + place-value shorthand)", "stage2": null},
+        {"sectionId": "13", "sectionTitle": "Why These Rules Work", "field": "content (lines 639-653)", "kind": "mention", "status": "existing", "quote": "each rule is a human-readable compression of a modular identity ($10 \\equiv 1$, $100 \\equiv 0 \\pmod 4$)", "stage2": null},
+        {"sectionId": "13", "sectionTitle": "Why These Rules Work", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "≡ (mod n) used intensively but never glossed on this page; one-line read-as note or link to /arithmetic/modulo#5 would help direct arrivals", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/modulo": {
+      "pagePath": "pages/arithmetic/modulo/index.jsx",
+      "template": "titled",
+      "sections": ["NON-SEQUENTIAL ids: 0 Key Terms", "1 What is Modulo?", "2 Notation", "3 Modulo and Divisibility", "4 The Range of Remainders", "51 How to Compute a Remainder", "61 Edge Cases", "71 Negative Dividends", "5 Congruence", "6 Properties of Congruence", "7 The Clock Analogy", "8 Why Modulo Matters", "9 Section Roadmap", "10 Related Sections", "11 Summary"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Notation", "field": "content (lines 1024-1028)", "kind": "dedicated-section", "status": "existing", "quote": "Mathematical notation writes the operation as $a \\bmod n$ … read 'a modulo n'; most programming languages use the percent symbol", "covers": ["$a \\bmod n$", "% operator", "operation vs statement distinction ($a \\bmod n$ vs $a \\equiv b \\pmod n$)"], "stage2": null},
+        {"sectionId": "3", "sectionTitle": "Modulo and Divisibility", "field": "content (line 1038)", "kind": "inline-intro", "status": "existing", "quote": "In divisibility notation, $n \\mid a$", "stage2": null},
+        {"sectionId": "5", "sectionTitle": "Congruence", "field": "content (lines 1112-1116)", "kind": "inline-intro", "status": "existing", "quote": "The notation is: … This reads 'a is congruent to b modulo n'", "stage2": null},
+        {"sectionId": "71", "sectionTitle": "Negative Dividends", "field": "content (lines 1098-1104)", "kind": "mention", "status": "existing", "quote": "two-convention split for $(-7) \\bmod 3$", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Best notation prose in the arithmetic tree. Non-sequential section ids (51, 61, 71 interleaved) matter for anchor linking.",
+      "externalNotationLinks": []
+    },
+    "arithmetic/modulo/operations": {
+      "pagePath": "pages/arithmetic/modulo/operations/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "1 Operating Within a Modulus", "2 The Core Principle", "3 Addition", "4 Subtraction", "5 Multiplication", "6 Powers", "7 Detecting Cycles in Powers", "8 Why Division Is Different", "9 Last Digit Problems", "10 Clock Problems", "11 Day of Week Problems", "12 Why Divisibility Rules Work", "13 Worked Examples", "14 Summary"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "The Core Principle", "field": "content (lines 1048-1058)", "kind": "mention", "status": "existing", "quote": "$a + b \\equiv a' + b' \\pmod n$ (heavy use, assumes ≡ known from parent page)", "stage2": null},
+        {"sectionId": "2", "sectionTitle": "The Core Principle", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "first heavy ≡ user on page; parenthetical link back to /arithmetic/modulo#5 (Congruence) would cover direct arrivals", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/modulo/negative-numbers": {
+      "pagePath": "pages/arithmetic/modulo/negative-numbers/index.jsx",
+      "template": "titled",
+      "sections": ["ids 0-5 then 7-12 (id 6 skipped, commented-out section): 0 Key Terms", "1 The Problem", "2 Two Conventions", "3 Truncated Division", "4 Floored Division", "5 Which Convention Is Correct?", "7 Converting Between Conventions", "8 Congruence Perspective", "9 Negative Divisor", "10 Common Pitfalls", "11 Worked Examples", "12 Summary"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Two Conventions", "field": "content (line 951)", "kind": "inline-intro", "status": "existing", "quote": "Both conventions start from the same equation ($a = n \\cdot q + r$)", "stage2": null},
+        {"sectionId": "7", "sectionTitle": "Converting Between Conventions", "field": "content (lines 1019-1025)", "kind": "mention", "status": "existing", "quote": "universal idiom ((a % n) + n) % n regardless of which convention its % operator uses", "stage2": null},
+        {"sectionId": "8", "sectionTitle": "Congruence Perspective", "field": "content (lines 1037-1039)", "kind": "mention", "status": "existing", "quote": "$-7 \\equiv 2 \\pmod 3$; representatives of a congruence class", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Whole page is semantics-of-the-symbol material (convention coverage is its purpose).",
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions": {
+      "pagePath": "pages/arithmetic/fractions/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "1 What Is a Fraction", "2 Numerator and Denominator", "3 Types of Fractions", "4 Proper and Improper Fractions", "5 Unit Fractions", "6 Operations with Fractions", "7 Visualizing Fractions", "8 Fractions at a Glance"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Is a Fraction", "field": "content (lines 948-950)", "kind": "inline-intro", "status": "existing", "quote": "The horizontal line separating them is called the fraction bar or vinculum; $\\frac{a}{b}$ is equivalent to $a \\div b$", "stage2": null},
+        {"sectionId": "2", "sectionTitle": "Numerator and Denominator", "field": "content (lines 960-964)", "kind": "inline-intro", "status": "existing", "quote": "denominator… names the type of parts (roles + etymology)", "stage2": null},
+        {"sectionId": "1", "sectionTitle": "What Is a Fraction", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "slash form a/b (and when inline slash vs stacked bar is used) never addressed in the body — only in FAQ; one sentence would close the gap", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions/adding-subtracting": {
+      "pagePath": "pages/arithmetic/fractions/adding-subtracting/index.jsx",
+      "template": "titled",
+      "sections": ["0-9: Key Terms, Same Denominator, Why Common Denominators, Finding, Converting, Adding Mixed, Subtracting Mixed, With Whole Numbers, Common Mistakes, Summary"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions/multiplying": {
+      "pagePath": "pages/arithmetic/fractions/multiplying/index.jsx",
+      "template": "titled",
+      "sections": ["0-8: Key Terms, Basic Rule, By Whole Numbers, Cross-Canceling, Mixed Numbers, More Than Two, The Word 'Of' Means Multiply, Special Cases, At a Glance"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Multiplying Fractions by Whole Numbers", "field": "content (line 842)", "kind": "mention", "status": "existing", "quote": "A whole number can be written as a fraction with denominator 1", "stage2": null},
+        {"sectionId": "6", "sectionTitle": "The Word 'Of' Means Multiply", "field": "content", "kind": "mention", "status": "existing", "quote": "language-to-symbol convention section ('the of convention')", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions/dividing": {
+      "pagePath": "pages/arithmetic/fractions/dividing/index.jsx",
+      "template": "titled",
+      "sections": ["0-9: Key Terms, Reciprocals, Basic Rule, Why Multiply by Reciprocal, By Whole Numbers, Whole by Fractions, Mixed Numbers, Simplifying, Word Problems, Summary"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Reciprocals", "field": "content (line 840)", "kind": "inline-intro", "status": "existing", "quote": "reciprocal … obtained by swapping its numerator and denominator", "stage2": null},
+        {"sectionId": "2", "sectionTitle": "Dividing Fractions — Basic Rule", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "÷ symbol carries the whole page but never remarked upon; equivalent complex-fraction form (at /arithmetic/fractions/complex id 1) not cross-referenced", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions/comparing": {
+      "pagePath": "pages/arithmetic/fractions/comparing/index.jsx",
+      "template": "titled",
+      "sections": ["0-10: Key Terms, Same Denominator, Same Numerator, Common Denominator Method, Cross-Multiplication, Benchmark Fractions, Decimal Conversion, Mixed Numbers, Ordering Multiple, Number Line, At a Glance"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Same Denominator", "field": "content (line 902)", "kind": "recommended-note", "status": "recommended", "why": "inequality symbols > < are the page's core output but never read aloud ('read > as is greater than'); one-line note at first use would serve younger readers", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions/equivalent": {
+      "pagePath": "pages/arithmetic/fractions/equivalent/index.jsx",
+      "template": "titled",
+      "sections": ["0-8: Key Terms, What Are Equivalent Fractions, Creating, Simplifying, Simplest Form, Testing for Equivalence, Number Line, Common Denominators, Summary"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions/mixed-numbers": {
+      "pagePath": "pages/arithmetic/fractions/mixed-numbers/index.jsx",
+      "template": "titled",
+      "sections": ["0-8: Key Terms, What Is a Mixed Number, Improper Fractions, Improper→Mixed, Mixed→Improper, Comparing, Operations, Number Line, At a Glance"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Is a Mixed Number", "field": "content (lines 896-900)", "kind": "inline-intro", "status": "existing", "quote": "mixed number notation … communicates quantity more intuitively; non-standard form $3\\frac{5}{4}$ flagged", "stage2": null},
+        {"sectionId": "1", "sectionTitle": "What Is a Mixed Number", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "juxtaposition pitfall never stated: in $2\\frac{3}{4}$ adjacency means ADDITION, in algebra $2x$ it means multiplication; one warning sentence would preempt the classic error", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/fractions/complex": {
+      "pagePath": "pages/arithmetic/fractions/complex/index.jsx",
+      "template": "titled",
+      "sections": ["0-8: Key Terms, What Is a Complex Fraction, Method 1 Division, Method 2 LCD, With Sums/Differences, With Mixed Numbers, Nested, Common Mistakes, At a Glance"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Is a Complex Fraction", "field": "content (line 876)", "kind": "inline-intro", "status": "existing", "quote": "The main fraction bar separates the overall numerator from the overall denominator", "stage2": null},
+        {"sectionId": "2", "sectionTitle": "Simplifying — Method 1: Division", "field": "content (line 892)", "kind": "inline-intro", "status": "existing", "quote": "The main fraction bar represents division", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Bar-length convention well handled.",
+      "externalNotationLinks": []
+    },
+    "arithmetic/properties": {
+      "pagePath": "pages/arithmetic/properties/index.jsx",
+      "template": "titled",
+      "sections": ["0-14: Key Terms, What Are Properties, Two Main Operations, Commutative, Associative, Distributive, Identity Elements, Inverse Elements, Zero Property, Sign Rules, Subtraction as Inverse Addition, Division as Inverse Multiplication, Why They Matter, Related, At a Glance"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Are Properties of Operations?", "field": "content (line 1014)", "kind": "mention", "status": "existing", "quote": "The order of operations … is a convention agreed upon to disambiguate notation", "stage2": null},
+        {"sectionId": "2", "sectionTitle": "Two Main Operations", "field": "content (line 1027)", "kind": "inline-intro", "status": "existing", "quote": "$a - b$ is shorthand for $a + (-b)$ … $\\frac{a}{b}$ is shorthand for $a \\cdot \\frac{1}{b}$", "stage2": null},
+        {"sectionId": "3", "sectionTitle": "Commutative Property", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "page silently switches to $\\cdot$ for multiplication (tools use ×); a one-liner that ×, ·, and juxtaposition all denote multiplication fits this page's charter better than any other page in the tree", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Lines ~60-360 are a dead commented-out draft.",
+      "externalNotationLinks": []
+    },
+    "arithmetic/calculators": {
+      "pagePath": "pages/arithmetic/calculators/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/calculators/gcf-calculator": {
+      "pagePath": "pages/arithmetic/calculators/gcf-calculator/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10 (Getting Started … Related)"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/calculators/lcm-calculator": {
+      "pagePath": "pages/arithmetic/calculators/lcm-calculator/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/calculators/divisibility-calculator": {
+      "pagePath": "pages/arithmetic/calculators/divisibility-calculator/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10: Getting Started, Single Divisor Mode, Common Divisors Mode, 4 Understanding Divisibility, Rules and Patterns, Reading Results, Fraction Simplification, Prime Testing, Divisibility and Modular Arithmetic, Related"],
+      "spots": [
+        {"sectionId": "4", "sectionTitle": "Understanding Divisibility", "field": "content (line 106)", "kind": "inline-intro", "status": "existing", "quote": "In mathematical notation: $a \\div b = q$ with $a = b × q$ (does not use $\\mid$ at all)", "stage2": null},
+        {"sectionId": "4", "sectionTitle": "Understanding Divisibility", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "aligning with site-standard $b \\mid a$ notation (and linking /arithmetic/divisibility#2) would unify the tool with the lessons", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/calculators/prime-calculator": {
+      "pagePath": "pages/arithmetic/calculators/prime-calculator/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10"],
+      "spots": [
+        {"sectionId": "9", "sectionTitle": "(prime conventions)", "field": "content (line 184)", "kind": "mention", "status": "existing", "quote": "the conventional definition restricts primes to numbers greater than 1", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/visual-tools": {
+      "pagePath": "pages/arithmetic/visual-tools/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "notes": "Cards list only 3 tools; euclidean-algorithm, modular-wheel, eratosthenes-sieve pages exist but are NOT carded here.",
+      "externalNotationLinks": []
+    },
+    "arithmetic/visual-tools/divisibility-table": {
+      "pagePath": "pages/arithmetic/visual-tools/divisibility-table/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-15: Selecting Divisors, Hovering, Grid Layout, 4-12 Rules for 2/3/4/5/6/9/10/11/12, 13 What is Divisibility?, 14 Why Divisibility Rules Work, 15 Related Concepts"],
+      "spots": [
+        {"sectionId": "13", "sectionTitle": "What is Divisibility?", "field": "content (line 705)", "kind": "inline-intro", "status": "existing", "quote": "We say 'a is divisible by b' (written a | b or b divides a) — NOTATION STATED BACKWARDS", "bug": "Reversed definition: site-standard (and universal) usage is $b \\mid a$ for 'b divides a'; contradicts /arithmetic/divisibility id 2 and divisibility-tiles id 6. Correctness fix needed, not just style.", "stage2": null},
+        {"sectionId": "14", "sectionTitle": "Why Divisibility Rules Work", "field": "content (lines 717-723)", "kind": "mention", "status": "existing", "quote": "base-10 expansion + 10 ≡ 1 (mod 9)", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/visual-tools/divisibility-tree": {
+      "pagePath": "pages/arithmetic/visual-tools/divisibility-tree/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10: How to Use, Tree Structure, Tooltips, Even/Odd Split, Digit Sum Rules 3&9, Last Digit Rules 5&10, Alternating Sum Rule 11, Derived 6/10/12, 9 Why Divisibility Rules Work, 10 Related"],
+      "spots": [
+        {"sectionId": "9", "sectionTitle": "Why Divisibility Rules Work", "field": "content (lines 623-629)", "kind": "mention", "status": "existing", "quote": "$10 \\equiv 1 \\pmod 3$ etc.", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/visual-tools/divisibility-tiles": {
+      "pagePath": "pages/arithmetic/visual-tools/divisibility-tiles/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10: How to Use, Tiles Display, Result Banner, Explanation Panel, Nearby Divisible Numbers, 6 What is Divisibility?, 7 Division Quotients and Remainders, 8 Common Divisibility Rules, 9 Divisibility and Factors, 10 Related"],
+      "spots": [
+        {"sectionId": "6", "sectionTitle": "What is Divisibility?", "field": "content (line 587)", "kind": "inline-intro", "status": "existing", "quote": "The notation $b | a$ means 'b divides a' (correct orientation; contrast with divisibility-table)", "stage2": null},
+        {"sectionId": "7", "sectionTitle": "Division, Quotients, and Remainders", "field": "content (lines 597-603)", "kind": "inline-intro", "status": "existing", "quote": "The modulo operation extracts just the remainder: $a \\mod b = r$", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/visual-tools/eratosthenes-sieve": {
+      "pagePath": "pages/arithmetic/visual-tools/eratosthenes-sieve/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-11: How to Use, Grid Display, Status Bar, Step-by-Step Panel, Statistics, 6 What is the Sieve?, 7 Why Start at p²?, 8 Prime Numbers and Properties, 9 Algorithm Complexity, 10 Patterns in Prime Distribution, 11 Related"],
+      "spots": [
+        {"sectionId": "9", "sectionTitle": "Algorithm Complexity", "field": "content (line 618)", "kind": "mention", "status": "existing", "quote": "big-O ($O(n \\log\\log n)$) unintroduced", "stage2": null},
+        {"sectionId": "9", "sectionTitle": "Algorithm Complexity", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "big-O appears cold on an otherwise elementary page; parenthetical gloss would help", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/visual-tools/euclidean-algorithm": {
+      "pagePath": "pages/arithmetic/visual-tools/euclidean-algorithm/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10: Getting Started, Entering Numbers/Presets, 3 Reading a Division Row, 4 Substitution Arrows, 5 Hovering, 6 Result Banner, 7 What Is the GCD?, 8 Why the Algorithm Works, 9 Special Cases, 10 Related. Key Terms obj0 exists but commented out of render."],
+      "spots": [
+        {"sectionId": "3", "sectionTitle": "Reading a Division Row", "field": "content (lines 556-558)", "kind": "inline-intro", "status": "existing", "quote": "dividend = divisor · quotient + remainder, each term defined", "stage2": null},
+        {"sectionId": "7", "sectionTitle": "What Is the GCD?", "field": "content (line 624)", "kind": "recommended-note", "status": "recommended", "why": "$\\gcd(\\cdot)$ used without a 'written as' phrase; one clause would match the gcd lesson page's introduction pattern", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "arithmetic/visual-tools/modular-wheel": {
+      "pagePath": "pages/arithmetic/visual-tools/modular-wheel/index.jsx",
+      "template": "tool",
+      "sections": ["ids 0-10: 0 Key Terms, 1 Getting Started, 2 The Wheel and Slices, 3 Run Controls, 4 Hovering/Pinning, 5 The Zero Class, 6 Adjusting Divisor/Count, 7 Right Panel Context, 8 What Is Modular Arithmetic, 9 Equivalence Classes and Their Structure, 10 Related Concepts"],
+      "spots": [
+        {"sectionId": "8", "sectionTitle": "What Is Modular Arithmetic", "field": "content (lines 695-715)", "kind": "inline-intro", "status": "existing", "quote": "The fundamental notation is congruence: $a \\equiv b \\pmod n \\iff n \\mid (a-b)$; also $\\mathbb{Z}/n\\mathbb{Z}$", "stage2": null},
+        {"sectionId": "9", "sectionTitle": "Equivalence Classes and Their Structure", "field": "content (lines 725-747)", "kind": "inline-intro", "status": "existing", "quote": "$[r]$ is the set $\\{r + kn\\}$; $\\mathbb{Z} = [0] \\sqcup [1] \\sqcup \\dots$", "stage2": null},
+        {"sectionId": "10", "sectionTitle": "Related Concepts", "field": "content (line 759)", "kind": "inline-intro", "status": "existing", "quote": "Euler's totient $\\varphi(n)$", "stage2": null},
+        {"sectionId": "9", "sectionTitle": "Equivalence Classes and Their Structure", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "$\\sqcup$ (disjoint union) appears with no gloss anywhere on the site; parenthetical would keep the page self-contained (notation here is notably more advanced than the rest of the tree)", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic": {
+      "pagePath": "pages/logic/index.jsx",
+      "template": "hub",
+      "sections": ["custom: introduction 'Introduction to Mathematical Logic' (insertBefore formulas)", "tools 'Interactive Tools'", "symbols 'Logic Symbols Reference'", "+ auto children (formulas, definitions, propositional-logic, truth-tables) + guest article 'Propositional Logic'"],
+      "spots": [
+        {"sectionId": "symbols", "sectionTitle": "Logic Symbols Reference", "field": "body", "kind": "dedicated-section", "status": "existing", "quote": "logical operations (¬, ∧, ∨), quantifiers (∀, ∃), set operations… corresponding LaTeX code", "stage2": null},
+        {"sectionId": "article", "sectionTitle": "Propositional Logic (guest article)", "field": "Syntax bullet", "kind": "mention", "status": "existing", "quote": "propositions (typically represented by variables like p, q, r) and logical connectives", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [
+        {"target": "/math-symbols/math-logic", "state": "live", "line": 116, "note": "symbols section link field — the ONLY live /math-symbols link found in the app so far"},
+        {"target": "/math-symbols/math-logic", "state": "live", "line": 119, "note": "inline <a> in symbols section body"}
+      ]
+    },
+    "logic/definitions": {
+      "pagePath": "pages/logic/definitions/index.jsx",
+      "template": "other",
+      "sections": ["glossary anchors: #category_syntax, #category_semantics + per-term ids"],
+      "spots": [
+        {"sectionId": "introArticle", "sectionTitle": "About This Glossary", "field": "introArticle", "kind": "mention", "status": "existing", "quote": "the five standard logical connectives (negation, conjunction, disjunction…)", "stage2": null},
+        {"sectionId": "introArticle", "sectionTitle": "About This Glossary", "field": "introArticle", "kind": "recommended-note", "status": "resolved", "why": "connectives named verbally but symbols never shown; one-line symbol list or /math-symbols link would be a natural fit", "resolution": "2026-08-06: in-text link woven on 'logical connectives' in the Syntax category paragraph", "stage2": {"mathSymbols": {"page": "/math-symbols/math-logic", "category": null, "anchorText": "logical connectives"}, "added": "2026-08-06", "placement": "in-text, introArticle Syntax paragraph (line ~198)"}}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/formulas": {
+      "pagePath": "pages/logic/formulas/index.jsx",
+      "template": "other",
+      "sections": ["FormulasTOC over logicFormulasList (32 laws)"],
+      "spots": [
+        {"sectionId": "(page)", "sectionTitle": "—", "field": "seoData.hubDescription", "kind": "mention", "status": "existing", "quote": "Each entry shows the formula in LaTeX", "stage2": null},
+        {"sectionId": "(page top)", "sectionTitle": "—", "field": "near H1", "kind": "recommended-note", "status": "recommended", "why": "32 symbol-dense laws (∧ ∨ ¬ → ↔ ≡ T F) with zero on-page notation intro; short note or /math-symbols/math-logic link near H1", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic": {
+      "pagePath": "pages/logic/propositional-logic/index.jsx",
+      "template": "titled",
+      "sections": ["intro Propositional Logic: An Overview", "laws Basic laws of Propositional Logic", "syntax Syntax", "semantics Semantics", "properties Properties of Propositions", "proofs Proof System"],
+      "spots": [
+        {"sectionId": "syntax", "sectionTitle": "Syntax", "field": "content[1] (line 118)", "kind": "inline-intro", "status": "existing", "quote": "combined using logical connectives such as '¬', '∧', '∨', '→', and '↔'", "stage2": null},
+        {"sectionId": "semantics", "sectionTitle": "Semantics", "field": "content[1] (lines 149-155)", "kind": "inline-intro", "status": "existing", "quote": "Truth values: T (true), F (false)… Semantic equivalence: e.g., P → Q ≡ ¬P ∨ Q", "stage2": null},
+        {"sectionId": "properties", "sectionTitle": "Properties of Propositions", "field": "content (lines 173, 187)", "kind": "inline-intro", "status": "existing", "quote": "logically equivalent (denoted $P≡Q$); logical consequence of $P$ (denoted $P⊨Q$)", "notes": "⊨ introduced here and nowhere else in the section outside a table on the tautology page", "stage2": null},
+        {"sectionId": "properties", "sectionTitle": "Properties of Propositions", "field": "content", "kind": "recommended-note", "status": "resolved", "why": "section's only turnstile (⊨) explanation; a symbols-reference link here would anchor it", "resolution": "2026-08-06: parenthetical extended to '— the double turnstile, one of the standard logic symbols' with in-text link", "stage2": {"mathSymbols": {"page": "/math-symbols/math-logic", "category": null, "anchorText": "logic symbols"}, "added": "2026-08-06", "placement": "inside the (denoted 𝑃⊨𝑄 …) parenthetical in the Logical Consequence item"}}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/laws": {
+      "pagePath": "pages/logic/propositional-logic/laws/index.jsx",
+      "template": "other",
+      "sections": ["DataWrapper2 over logicLawsData — no sections, no intro prose"],
+      "spots": [
+        {"sectionId": "(table)", "sectionTitle": "—", "field": "logicLawsData", "kind": "table", "status": "existing", "quote": "34 formulas using ∧ ∨ ¬ → ↔ ⊕ ≡ ≢ ⊢ T F, each with plain-language explanation", "stage2": null},
+        {"sectionId": "(page top)", "sectionTitle": "—", "field": "near H1", "kind": "recommended-note", "status": "resolved", "why": "HIGHEST-VALUE SPOT IN SECTION: pure symbol table, zero legend (H1 straight into table); ⊕, ≢, ⊢ never introduced anywhere near; 'symbols used on this page' note or /math-symbols/math-logic link", "resolution": "2026-08-06: JSX legend paragraph inserted between H1 and DataWrapper2 listing the connectives with links (plain <a> tags — page is outside the markdown content pipeline)", "stage2": {"mathSymbols": {"page": "/math-symbols/math-logic", "category": null, "anchorText": "logic symbols reference"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-06", "placement": "JSX <p> legend under the H1"}}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/syntax": {
+      "pagePath": "pages/logic/propositional-logic/syntax/index.jsx",
+      "template": "titled",
+      "sections": ["intro Introduction to Propositional Logic Syntax", "definitions Syntax Definition", "alphabet Propositional Logic Alphabet", "formation Formation Rules", "wff Well Formed Formulas (WFF)", "normal_forms Normal Forms"],
+      "spots": [
+        {"sectionId": "alphabet", "sectionTitle": "Propositional Logic Alphabet", "field": "description (lines 382-388)", "kind": "dedicated-section", "status": "existing", "quote": "The standard set of connectives includes negation (¬), conjunction (∧), disjunction (∨), implication (→), and biconditional (↔)", "covers": ["atomic props P, Q, R, P₁, P₂", "connectives", "parentheses"], "notes": "Strong in-section anchor other pages could link to.", "stage2": null},
+        {"sectionId": "formation", "sectionTitle": "Formation Rules", "field": "description (lines 405-419)", "kind": "inline-intro", "status": "existing", "quote": "(φ ∧ ψ) etc.; precedence and associativity conventions introduced only later… auxiliary syntactic conventions", "stage2": null},
+        {"sectionId": "wff", "sectionTitle": "Well Formed Formulas (WFF)", "field": "table", "kind": "table", "status": "existing", "quote": "validation rules with symbol examples (¬(P & Q) invalid vs ¬(P ∧ Q) valid)", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "100KB file, large inline SVGs, huge commented-out draft above live code.",
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/syntax/normal-forms": {
+      "pagePath": "pages/logic/propositional-logic/syntax/normal-forms/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10: Getting Started, Converting and Reading Results, Input Controls, Step-by-Step Panel, DNF Conversion, CNF Conversion, DNF vs CNF, Minterms and Maxterms, 9 What Are Normal Forms in Logic?, 10 Related"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Getting Started with the Converter", "field": "obj1 content", "kind": "inline-intro", "status": "existing", "quote": "five connectives: ∧ (AND), ∨ (OR), ¬ (NOT), → (IMPLIES), ↔ (IFF); shorthand -> <-> !", "stage2": null},
+        {"sectionId": "9", "sectionTitle": "What Are Normal Forms in Logic?", "field": "obj9 content", "kind": "inline-intro", "status": "existing", "quote": "only three connectives: AND (∧), OR (∨), and NOT (¬)", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/syntax/tree-builder": {
+      "pagePath": "pages/logic/propositional-logic/syntax/tree-builder/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10: Getting Started, On-Screen Keyboard, Syntax Tree Display, Truth Table, Tautologies Contradictions Contingencies, Input Controls, 7 What Is a Syntax Tree?, 8 Logical Connectives and Operator Precedence, 9 Common Errors, 10 Related"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Using the On-Screen Keyboard", "field": "obj2", "kind": "inline-intro", "status": "existing", "quote": "∧ (AND)… ↔ (EQUIVALENT)… ⊕ (XOR) is true when exactly one operand is true", "stage2": null},
+        {"sectionId": "8", "sectionTitle": "Logical Connectives and Operator Precedence", "field": "obj8", "kind": "inline-intro", "status": "existing", "quote": "Negation (¬) binds most tightly… (precedence hierarchy)", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/semantics": {
+      "pagePath": "pages/logic/propositional-logic/semantics/index.jsx",
+      "template": "titled",
+      "sections": ["intro Introduction to Semantics", "equivalences Logical Equivalences", "contigency 'Contigency, Tautology or Contradiction' (id typo in source)", "implication Logical Implication"],
+      "spots": [
+        {"sectionId": "equivalences", "sectionTitle": "Logical Equivalences", "field": "content (line 165)", "kind": "inline-intro", "status": "existing", "quote": "If two propositions $A$ and $B$ are logically equivalent, we write: $A≡B$", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Unresolved {{PLACEHOLDER}} strings in rendered <title>/meta. Dormant commented-out 'symbols' section skeleton (lines 312-324) with {{SYMBOLS_SECTION_LINK}} placeholder — a pre-built hook for a symbols link.",
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/semantics/equivalences": {
+      "pagePath": "pages/logic/propositional-logic/semantics/equivalences/index.jsx",
+      "template": "titled",
+      "sections": ["definition 'Definition and Notation'", "verify How to Verify Logical Equivalence?", "laws Fundamental Equivalences (Laws)", "conditional Equivalences with Implications", "biconditional Equivalences with Biconditionals"],
+      "spots": [
+        {"sectionId": "definition", "sectionTitle": "Definition and Notation", "field": "content (lines 181-196)", "kind": "dedicated-section", "status": "existing", "quote": "## Notation … $P≡Q$ … Sometimes notation like this is used: $P⇔Q$ … In boolean algebra also used this notation: $P=Q$", "covers": ["≡", "⇔", "=", "≡ vs ↔ disambiguation"], "notes": "Fullest equivalence-notation treatment in the section; model page.", "stage2": {"latex": {"page": "/latex", "anchorText": "LaTeX"}, "added": "2026-08-06", "placement": "sentence inserted after the $P=Q$ boolean-algebra form: 'In LaTeX source, ≡ is produced by \\\\equiv and ⇔ by \\\\Leftrightarrow.'"}},
+        {"sectionId": "conditional", "sectionTitle": "Equivalences with Implications", "field": "before (line 228)", "kind": "inline-intro", "status": "existing", "quote": "a conditional statement (implication) is written as: $P→Q$", "stage2": null},
+        {"sectionId": "biconditional", "sectionTitle": "Equivalences with Biconditionals", "field": "before (line 244)", "kind": "inline-intro", "status": "existing", "quote": "biconditional statements ($p↔q$)… means 'p if and only if q'", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/semantics/implication": {
+      "pagePath": "pages/logic/propositional-logic/semantics/implication/index.jsx",
+      "template": "titled",
+      "sections": ["definition 'Definition and Notation'", "truth_table Truth Table for Logical Implication", "properties Properties of Implication", "misconceptions Common Misconceptions", "proofs Implication in Mathematical Proofs", "implication_laws Implication in Logic Laws"],
+      "spots": [
+        {"sectionId": "definition", "sectionTitle": "Definition and Notation", "field": "content + notation list prop (lines 115-120)", "kind": "dedicated-section", "status": "existing", "quote": "$p→q$ (standard notation); $p⇒q$ (sometimes used in formal logic); two verbal readings", "stage2": null},
+        {"sectionId": "truth_table", "sectionTitle": "Truth Table for Logical Implication", "field": "content", "kind": "table", "status": "existing", "quote": "full HTML truth tables with T/F conventions, vacuous truth", "stage2": null},
+        {"sectionId": "implication_laws", "sectionTitle": "Implication in Logic Laws", "field": "ExpandableTable", "kind": "recommended-note", "status": "recommended", "why": "Resolution row uses ⊢ never glossed on this page", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/semantics/tautology": {
+      "pagePath": "pages/logic/propositional-logic/semantics/tautology/index.jsx",
+      "template": "titled",
+      "sections": ["definition 'Definition and Notation'", "tautology_vs_equivalence", "laws_as-tautologies (mixed hyphen/underscore id)", "other Tautologies that are not laws", "tautology_vs_contradiction"],
+      "spots": [
+        {"sectionId": "definition", "sectionTitle": "Definition and Notation", "field": "content (lines 186-202)", "kind": "dedicated-section", "status": "existing", "quote": "The notation commonly used for tautology in logic is: $\\top$ (the top symbol, also called 'verum') … $\\vdash P$ which means 'P is provable' … $P \\equiv \\top$", "covers": ["⊤", "⊢"], "stage2": null},
+        {"sectionId": "tautology_vs_contradiction", "sectionTitle": "Tautology vs Contradiction", "field": "table", "kind": "recommended-note", "status": "recommended", "why": "table's 'Symbolic Trait: ⊨ φ (φ is valid)' is the only ⊨ appearance on page, unglossed beyond the cell; could link to symbols reference", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/semantics/contradiction": {
+      "pagePath": "pages/logic/propositional-logic/semantics/contradiction/index.jsx",
+      "template": "titled",
+      "sections": ["definition 'Definition and Notation'", "contradictions_as_laws", "other_contradictions", "contradiction_vs_tautology"],
+      "spots": [
+        {"sectionId": "definition", "sectionTitle": "Definition and Notation", "field": "description (lines 192-208)", "kind": "dedicated-section", "status": "existing", "quote": "The notation commonly used for contradiction in logic is: $\\bot$ (the bottom symbol, also called 'falsum') … $\\vdash ¬P$ … $P \\equiv \\bot$", "covers": ["⊥", "⊢"], "stage2": null},
+        {"sectionId": "other_contradictions", "sectionTitle": "Contradictions that are not laws", "field": "ExpandableTable", "kind": "table", "status": "existing", "quote": "24 expressions with ⊕ ↔ → ∧ ∨ ¬", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/propositional-logic/semantics/equivalence-validator": {
+      "pagePath": "pages/logic/propositional-logic/semantics/equivalence-validator/index.jsx",
+      "template": "tool",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "notes": "H1 + EquivalenceChecker component only; zero page prose (component text not surveyed).",
+      "externalNotationLinks": []
+    },
+    "logic/truth-tables": {
+      "pagePath": "pages/logic/truth-tables/index.jsx",
+      "template": "tool",
+      "sections": ["per-operator sections; anchors are the raw symbol (e.g. #∧); prose lives in app/components/logic-calculator/operatorDescriptions.js"],
+      "spots": [
+        {"sectionId": "¬", "sectionTitle": "Negation", "field": "operatorDescriptions.js (lines 158-169)", "kind": "dedicated-section", "status": "existing", "quote": "## Notation — Negation can be denoted in various ways, depending on the context", "stage2": null},
+        {"sectionId": "⊕", "sectionTitle": "XOR", "field": "operatorDescriptions.js (lines 191, 241-243)", "kind": "dedicated-section", "status": "existing", "quote": "symbolized as XOR, EOR, EXOR, ⊻, or ⊕ + ## Alternative Symbols", "stage2": null},
+        {"sectionId": "∧", "sectionTitle": "Conjunction", "field": "operatorDescriptions.js (line 8)", "kind": "inline-intro", "status": "existing", "quote": "represented by symbols such as '∧', '&&', or 'AND', depending on the context", "stage2": null},
+        {"sectionId": "∨ → ↔ ( ) ↑ ↓", "sectionTitle": "other operators", "field": "operatorDescriptions.js (lines 60, 272, 339, 414-448, 482-486, 559-563)", "kind": "inline-intro", "status": "existing", "quote": "each 'denoted by the symbol …'; NAND ↑ reads as 'P NAND Q'; NOR ↓ reads as 'P NOR Q'", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Richest notation coverage in the logic section. Commented-out link to /tables/truth-tables (line 124).",
+      "externalNotationLinks": []
+    },
+    "logic/truth-tables/implications": {
+      "pagePath": "pages/logic/truth-tables/implications/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-8: 1 What Is a Logical Implication?, 2 Converse Inverse Contrapositive, 3 P→Q Material Implication, 4 Q→P Converse, 5 ¬P→Q, 6 P→¬Q, 7 ¬P→¬Q Inverse, 8 ¬Q→¬P Contrapositive"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Is a Logical Implication?", "field": "obj1", "kind": "inline-intro", "status": "existing", "quote": "of the form P → Q, read 'if P then Q.' The proposition P is the antecedent… Q is the consequent", "stage2": null},
+        {"sectionId": "(interactive table)", "sectionTitle": "—", "field": "implicationExplanations", "kind": "table", "status": "existing", "quote": "P→Q ≡ ¬P∨Q etc.", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/truth-tables/biconditionals": {
+      "pagePath": "pages/logic/truth-tables/biconditionals/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-10: 1 What Is a Biconditional?, 2 Biconditionals and Logical Equivalence, 3 P↔Q Basic, 4 Negation Preservation, 5 Mutual Implication, 6 Transitivity, 7 Decomposition, 8 Contrapositive Equivalence, 9 Double Negation, 10 De Morgan's Law"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Is a Biconditional?", "field": "obj1 (lines 349-351)", "kind": "inline-intro", "status": "existing", "quote": "The biconditional P ↔ Q (read 'P if and only if Q')… abbreviated iff", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/truth-tables/tautologies": {
+      "pagePath": "pages/logic/truth-tables/tautologies/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-11: 1 What Is a Tautology?, 2 Key Tautological Patterns, 3 Law of Excluded Middle, 4 Implication Comparability, 5 Conjunction Elimination, 6 Hypothetical Syllogism, 7 Modus Ponens, 8 Positive Antecedent, 9 Implication Over Disjunction, 10 Disjunctive Syllogism, 11 Biconditional Decomposition"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "What Is a Tautology?", "field": "obj1", "kind": "recommended-note", "status": "recommended", "why": "page never mentions ⊤/⊢ though sibling /logic/propositional-logic/semantics/tautology#definition has a full notation section; one-line note or cross-link would tie them together", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "logic/truth-tables/contradictions": {
+      "pagePath": "pages/logic/truth-tables/contradictions/index.jsx",
+      "template": "tool",
+      "sections": ["ids 1-12: 1 What Is a Contradiction?, 2 In Proofs and Reasoning, 3 Law of Non-Contradiction, 4 Inconsistent Implications, 5 Denied Disjunction, 6 Self-Contradictory Equivalence, 7 Conjunction Meets De Morgan, 8 Broken Implication Chain, 9 Reordered Chain, 10 Conflicting Equivalences, 11 Asserting Q and ¬Q, 12 Negated Implication Conflict"],
+      "spots": [
+        {"sectionId": "11", "sectionTitle": "Asserting Q and ¬Q", "field": "obj10 area (line 519)", "kind": "mention", "status": "existing", "quote": "reduces to … P ∧ ⊥ = ⊥ (⊥ used without any on-page introduction)", "stage2": null},
+        {"sectionId": "11", "sectionTitle": "Asserting Q and ¬Q", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "gloss ⊥ on first use or link to the contradiction semantics page's notation section", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "combinatorics": {
+      "pagePath": "pages/combinatorics/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "notes": "buildSectionData hub (migrated 2026-08-05); old teaching article moved verbatim to /combinatorics/basics.",
+      "externalNotationLinks": []
+    },
+    "combinatorics/basics": {
+      "pagePath": "pages/combinatorics/basics/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Counting Principles", "2 When Counts Overlap: Inclusion–Exclusion", "3 Permutations and Combinations", "4 Standard Scenarios", "5 The Binomial Coefficient", "6 The Binomial Theorem", "7 Related Concepts"],
+      "spots": [
+        {"sectionId": "3", "sectionTitle": "Permutations and Combinations", "field": "content", "kind": "mention", "status": "existing", "quote": "Arranging $n$ distinct items in a row gives $n!$ permutations (first use of n!, P(n,r), binom — fluent, no read-as gloss in body; FAQ has 'read n choose k')", "stage2": {"mathSymbols": {"page": "/math-symbols/combinatorics", "category": null, "anchorText": "combinatorial symbols"}, "latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-06", "placement": "closing sentence appended to obj3 content"}},
+        {"sectionId": "4", "sectionTitle": "Standard Scenarios", "field": "content", "kind": "table", "status": "existing", "quote": "ten scenario bullets each pairing a formula with its symbolic form ($n!$, $n^r$, $\\binom{n+r-1}{r-1}$, …)", "stage2": null},
+        {"sectionId": "5", "sectionTitle": "The Binomial Coefficient", "field": "content", "kind": "mention", "status": "existing", "quote": "The combination formula $\\binom{n}{r}$ counts how many $r$-element subsets exist", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "combinatorics/binomial-coefficient": {
+      "pagePath": "pages/combinatorics/binomial-coefficient/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Definition and Notation", "2 Identities", "3 Pascal's Triangle", "4 The Multinomial Coefficient", "5 Related Concepts", "6 Binomial Coefficient at a Glance", "intro The Object Behind Combinations"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Definition and Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "The expression is read aloud as '$n$ choose $k$' + ## Notation Variants ($\\binom{n}{k}$, C(n,k), C_n^k, ${}_nC_k$) + generalized real-upper-index form", "stage2": {"latex": {"page": "/latex", "anchorText": "LaTeX"}, "added": "2026-08-06", "placement": "sentence after Notation Variants bullets: 'In LaTeX source, the standard stacked form is produced by the command \\binom{n}{k}.'"}}
+      ],
+      "recommendations": [],
+      "notes": "Model page. Pre-existing live chip '[See All Combinatorics Symbols and Notations](!/math-symbols/combinatorics)' inside obj1 content.",
+      "externalNotationLinks": [
+        {"target": "/math-symbols/combinatorics", "state": "live", "note": "pre-existing @span chip in obj1 (Definition and Notation)"}
+      ]
+    },
+    "combinatorics/binomial-theorem": {
+      "pagePath": "pages/combinatorics/binomial-theorem/index.jsx",
+      "template": "untitled",
+      "sections": ["1 The Theorem", "2 The General Term", "3 Special Cases", "4 The Multinomial Theorem", "5 Worked Expansions", "6 Related Concepts", "7 Binomial Theorem at a Glance", "intro Where Counting Meets Algebra"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "The Theorem", "field": "content", "kind": "mention", "status": "existing", "quote": "$(a+b)^n = \\sum \\binom{n}{k} a^{n-k}b^k$ — Σ used cold before this pass", "stage2": {"mathSymbols": {"page": "/math-symbols/combinatorics", "category": null, "anchorText": "combinatorics symbols"}, "added": "2026-08-06", "placement": "sentence appended to the Pascal's-triangle paragraph in obj1 content"}},
+        {"sectionId": "2", "sectionTitle": "The General Term", "field": "content", "kind": "inline-intro", "status": "existing", "quote": "## Index Convention — terms numbered starting from $T_1$; the term containing $b^k$ is $T_{k+1}$, not $T_k$", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "combinatorics/combinations": {
+      "pagePath": "pages/combinatorics/combinations/index.jsx",
+      "template": "titled",
+      "sections": ["types Types of Combinations", "combinations Simple Combinations", "partition Partition into Groups", "weak Weak Composition", "strong Strong Composition", "distribution Distribution into Cells"],
+      "spots": [
+        {"sectionId": "combinations", "sectionTitle": "Simple Combinations", "field": "after (line ~488)", "kind": "inline-intro", "status": "existing", "quote": "Common notations: $\\binom{n}{r}$ most widely used; C(n,r) in introductory texts; $_nC_r$ on calculators", "stage2": null},
+        {"sectionId": "partition", "sectionTitle": "Partition into Groups", "field": "after (line ~527)", "kind": "inline-intro", "status": "existing", "quote": "Partition into Groups doesn't have a standard symbolic notation like $\\binom{n}{r}$ — described in words or with set notation", "stage2": null},
+        {"sectionId": "weak", "sectionTitle": "Weak Composition", "field": "after (line ~607)", "kind": "inline-intro", "status": "existing", "quote": "double parentheses $\\left(\\left(\\binom{n}{r}\\right)\\right)$ specifically indicates weak compositions", "stage2": null},
+        {"sectionId": "strong", "sectionTitle": "Strong Composition", "field": "after (line ~649)", "kind": "inline-intro", "status": "existing", "quote": "angle brackets notation specifically indicates strong compositions", "stage2": null},
+        {"sectionId": "distribution", "sectionTitle": "Distribution into Cells", "field": "after (line ~570)", "kind": "inline-intro", "status": "existing", "quote": "no compact symbol specifically for this concept", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Every scenario Notation block carries a pre-existing live chip '[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics)'.",
+      "externalNotationLinks": [
+        {"target": "/math-symbols/combinatorics", "state": "live", "note": "pre-existing @span chips in combinations/partition/weak/strong/distribution Notation blocks (5×)"}
+      ]
+    },
+    "combinatorics/counting-principles": {
+      "pagePath": "pages/combinatorics/counting-principles/index.jsx",
+      "template": "untitled",
+      "sections": ["1 The Addition Rule", "2 The Multiplication Rule", "3 Complementary Counting", "4 Double Counting", "5 The Pigeonhole Principle", "6 Putting the Principles Together", "7 Related Concepts", "8 Counting Principles at a Glance", "intro The Logic Beneath the Formulas"],
+      "spots": [
+        {"sectionId": "3", "sectionTitle": "Complementary Counting", "field": "content (## Structural Note)", "kind": "inline-intro", "status": "existing", "quote": "In set-theoretic notation, complementary counting expresses $|A| = |U| - |A^c|$", "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "set-theoretic notation"}, "added": "2026-08-06", "placement": "in-text on 'set-theoretic notation' (cross-topic link)"}}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "combinatorics/definitions": {
+      "pagePath": "pages/combinatorics/definitions/index.jsx",
+      "template": "other",
+      "sections": ["glossary via CategoriesList + DefinitionGlossary"],
+      "spots": [
+        {"sectionId": "intro", "sectionTitle": "—", "field": "intro article (line 299)", "kind": "mention", "status": "existing", "quote": "Each definition includes a precise formal statement, notation conventions, key properties", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "combinatorics/formulas": {
+      "pagePath": "pages/combinatorics/formulas/index.jsx",
+      "template": "other",
+      "sections": ["FormulasTOC over combinatorics formulas DB"],
+      "spots": [
+        {"sectionId": "faq", "sectionTitle": "FAQ", "field": "faqQuestions (line 152)", "kind": "mention", "status": "existing", "quote": "C(n, r) = n! divided by r! times (n minus r)! … also written as n choose r", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "combinatorics/inclusion-exclusion": {
+      "pagePath": "pages/combinatorics/inclusion-exclusion/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Two Sets", "2 Three Sets", "3 The General Formula", "4 The Complementary Form", "5 Application: Counting Derangements", "6 Worked Examples", "7 Related Concepts", "8 Inclusion–Exclusion at a Glance", "intro The Overlap Problem"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Two Sets", "field": "content", "kind": "mention", "status": "existing", "quote": "$|A \\cup B| = |A| + |B| - |A \\cap B|$ — set symbols were used cold before this pass", "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "set symbols"}, "added": "2026-08-06", "placement": "gloss sentence inserted after the two-set formula callout: ∪ union, ∩ intersection, |A| element count (cross-topic link)"}},
+        {"sectionId": "3", "sectionTitle": "The General Formula", "field": "content", "kind": "mention", "status": "existing", "quote": "general formula with alternating Σ over intersections", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "combinatorics/permutations": {
+      "pagePath": "pages/combinatorics/permutations/index.jsx",
+      "template": "titled",
+      "sections": ["logic The Logic behind permutations", "types Types of Permutations", "full Permutation (Full)", "identical Permutation with Identical Items", "without Partial Permutation without Repetition", "with Permutation with Repetition", "circular Circular Permutation", "8 Derangement"],
+      "spots": [
+        {"sectionId": "logic", "sectionTitle": "The Logic behind permutations", "field": "before (line ~875)", "kind": "inline-intro", "status": "existing", "quote": "$n \\times (n-1) \\times \\dots \\times 1$, which is the definition of a factorial; $n! = …$", "stage2": null},
+        {"sectionId": "full", "sectionTitle": "Permutation (Full)", "field": "after (Notation block, lines 673-679)", "kind": "inline-intro", "status": "existing", "quote": "the standard notation is $P(n,r)$ or $_nP_r$ … turns into $P(n,n)$ or $_nP_n$ or simply $P(n)$", "stage2": null},
+        {"sectionId": "identical", "sectionTitle": "Permutation with Identical Items", "field": "after (Notation block, line ~707)", "kind": "inline-intro", "status": "existing", "quote": "$\\binom{n}{n_1, n_2, \\ldots, n_k}$ or $P(n; n_1, \\ldots)$ or $P_n^{n_1, \\ldots}$", "stage2": null},
+        {"sectionId": "without", "sectionTitle": "Partial Permutation without Repetition", "field": "after (Notation block, line ~738)", "kind": "inline-intro", "status": "existing", "quote": "Most common: $P(n,r)$; alternatives ${}^nP_r$, $A_n^r$, nPr", "stage2": null},
+        {"sectionId": "with", "sectionTitle": "Permutation with Repetition", "field": "after (Notation block, line ~809)", "kind": "inline-intro", "status": "existing", "quote": "$P_{\\text{rep}}(n,r)$; alternatives $\\overline{P}(n,r)$, $P^{(r)}(n)$, ${}^nP^{(r)}_r$", "stage2": null},
+        {"sectionId": "circular", "sectionTitle": "Circular Permutation", "field": "after (Notation block, line ~773)", "kind": "inline-intro", "status": "existing", "quote": "$P_{\\text{circ}}(n)$; alternatives $C_n$, $P_{\\text{cyclic}}(n)$, $\\frac{n!}{n}$", "stage2": null},
+        {"sectionId": "8", "sectionTitle": "Derangement", "field": "content (## Notation, lines 909-917)", "kind": "dedicated-section", "status": "existing", "quote": "• $!n$ — the subfactorial, the modern standard … • $D_n$ — common in older texts. The two are interchangeable.", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Every scenario Notation block carries a pre-existing live chip to /math-symbols/combinatorics (full/identical/without/with/circular).",
+      "externalNotationLinks": [
+        {"target": "/math-symbols/combinatorics", "state": "live", "note": "pre-existing @span chips in the five scenario Notation blocks"}
+      ]
+    },
+    "trigonometry": {
+      "pagePath": "pages/trigonometry/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "notes": "buildSectionData hub (first migrated hub).",
+      "externalNotationLinks": []
+    },
+    "trigonometry/definitions": {
+      "pagePath": "pages/trigonometry/definitions/index.jsx",
+      "template": "other",
+      "sections": ["glossary"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/formulas": {
+      "pagePath": "pages/trigonometry/formulas/index.jsx",
+      "template": "other",
+      "sections": ["FormulasTOC"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/right-triangle": {
+      "pagePath": "pages/trigonometry/right-triangle/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Naming the Sides: Opposite, Adjacent, Hypotenuse", "2 Defining Sine, Cosine, and Tangent", "3 The Reciprocal Functions: Cosecant, Secant, Cotangent", "4 Finding Missing Sides", "5 Finding Missing Angles", "6 The 45-45-90 Triangle", "7 The 30-60-90 Triangle", "8 Cofunction Relationships", "9 Angles of Elevation and Depression", "10 Limitations and Extensions", "intro Where Trigonometry Begins"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Defining Sine, Cosine, and Tangent", "field": "content", "kind": "inline-intro", "status": "existing", "quote": "SOH-CAH-TOA mnemonic + sin/cos/tan ratio definitions — the section's de-facto first introduction of the function abbreviations", "stage2": {"mathSymbols": {"page": "/math-symbols/trigonometry", "category": null, "anchorText": "trigonometry symbols"}, "latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-06", "placement": "closing sentence appended to obj2 content"}},
+        {"sectionId": "3", "sectionTitle": "The Reciprocal Functions", "field": "content", "kind": "inline-intro", "status": "existing", "quote": "csc/sec/cot introduced as reciprocals with symbols", "stage2": null},
+        {"sectionId": "8", "sectionTitle": "Cofunction Relationships", "field": "content (line ~802)", "kind": "mention", "status": "existing", "quote": "The prefix 'co-' in cosine, cotangent, and cosecant is not accidental — it stands for 'complement'", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/functions": {
+      "pagePath": "pages/trigonometry/functions/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Sine Function", "2 The Cosine Function", "3 The Tangent Function", "4 The Cosecant Function", "5 The Secant Function", "6 The Cotangent Function", "7 Reciprocal and Quotient Relationships", "8 Domain and Range Summary", "9 Evaluating Trigonometric Functions at Any Angle", "10 Finding All Function Values from One Known Value", "intro From Geometric Ratios to Functions of a Real Variable"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "The Sine Function", "field": "content", "kind": "mention", "status": "existing", "quote": "$\\sin\\theta$ written parenthesis-free throughout (implicit convention); formula callouts per function", "stage2": null},
+        {"sectionId": "8", "sectionTitle": "Domain and Range Summary", "field": "table", "kind": "table", "status": "existing", "quote": "per-function domain/range in interval notation", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/unit-circle": {
+      "pagePath": "pages/trigonometry/unit-circle/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Definition and Equation", "2 Coordinates as Trigonometric Values", "3 Standard Position and the Terminal Side", "4 The Four Quadrants and Sign Patterns", "5 Reference Angles", "6 Exact Values for the Standard Angles", "7 The Pythagorean Identity", "8 Angles Beyond One Rotation and Negative Angles", "9 From Circular Motion to Waves", "intro Extending Trigonometry Beyond the Right Triangle"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Coordinates as Trigonometric Values", "field": "content", "kind": "inline-intro", "status": "existing", "quote": "The coordinates of that point define cosine and sine: $(\\cos\\theta, \\sin\\theta)$ … This is the definition", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/degrees-radians": {
+      "pagePath": "pages/trigonometry/degrees-radians/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Degree Measurement", "2 Radian Measurement", "3 Converting Between Degrees and Radians", "4 Arc Length", "5 Sector Area", "6 Standard Position of an Angle", "7 Coterminal Angles", "8 Complementary and Supplementary Angles", "intro Two Systems for Measuring Rotation"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Degree Measurement", "field": "content (line ~663)", "kind": "inline-intro", "status": "existing", "quote": "two conventions exist… minutes and seconds of arc: $1° = 60'$ … $41°24'36''$ … decimal degrees", "stage2": null},
+        {"sectionId": "6", "sectionTitle": "Standard Position of an Angle", "field": "content (line ~777)", "kind": "mention", "status": "existing", "quote": "This convention fixes a reference frame for all trigonometric evaluation", "stage2": null},
+        {"sectionId": "intro", "sectionTitle": "Two Systems for Measuring Rotation", "field": "intro (lines ~924-926)", "kind": "mention", "status": "existing", "quote": "the conversion between the two systems rests on the identity $180° = \\pi$ radians; The distinction matters far beyond notation", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/equations": {
+      "pagePath": "pages/trigonometry/equations/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 General Solutions vs Restricted Solutions", "2 Solving Basic Sine Equations", "3 Solving Basic Cosine Equations", "4 Solving Basic Tangent Equations", "5 Equations Requiring Algebraic Manipulation", "6 Equations Requiring Identity Substitution", "7 Quadratic-Type Trigonometric Equations", "8 Equations with Multiple Angles", "9 Extraneous Solutions", "10 (summary)", "intro Solving for Unknown Angles"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "General Solutions vs Restricted Solutions", "field": "content", "kind": "inline-intro", "status": "existing", "quote": "general solution … parameterized by an integer $n$ … $n \\in \\mathbb{Z}$ (was used cold before this pass)", "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "set symbols"}, "added": "2026-08-06", "placement": "gloss sentence after the first general-solution formula: 'n ∈ ℤ reads n ranges over the integers' (cross-topic link)"}},
+        {"sectionId": "3", "sectionTitle": "Solving Basic Cosine Equations", "field": "content (line ~793)", "kind": "mention", "status": "existing", "quote": "A cleaner notation is available for cosine because of its even symmetry", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/identities": {
+      "pagePath": "pages/trigonometry/identities/index.jsx",
+      "template": "titled",
+      "sections": ["intro", "0 Key Terms", "definition", "reciprocal", "pythagorean", "triangle", "even-odd", "co-function", "periodicity", "shift", "sum", "difference", "half", "double", "triple", "power-reducing", "product-sum", "sum-product", "summary"],
+      "spots": [
+        {"sectionId": "pythagorean", "sectionTitle": "Pythagorean Identities", "field": "before", "kind": "inline-intro", "status": "existing", "quote": "The core identity sin²(θ) + cos²(θ) = 1 — first sin² use in section; squared-function shorthand was unglossed before this pass", "stage2": {"internal": {"page": "/trigonometry/inverse-functions", "section": "6", "anchorText": "inverse-function notation note"}, "added": "2026-08-06", "placement": "gloss sentence appended to pythagorean.before: sin²(θ) means (sin(θ))², cross-linked to the sin⁻¹ notation section"}},
+        {"sectionId": "summary", "sectionTitle": "Summary", "field": "table", "kind": "table", "status": "existing", "quote": "identity family summary table (f(a)·f(b) rewritten as …)", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "Section already in content-pages-registry (Operation A) with full relatedTerms records.",
+      "externalNotationLinks": []
+    },
+    "trigonometry/inverse-functions": {
+      "pagePath": "pages/trigonometry/inverse-functions/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Why Restriction Is Necessary", "2 The Arcsine Function", "3 The Arccosine Function", "4 The Arctangent Function", "5 Inverse Reciprocal Functions", "6 Notation: sin⁻¹(x) vs 1/sin(x)", "7 Evaluating Inverse Trigonometric Functions", "8 Compositions", "9 Graphs of Inverse Trigonometric Functions", "10 (summary)", "intro Recovering Angles from Known Ratios"],
+      "spots": [
+        {"sectionId": "6", "sectionTitle": "Notation: sin⁻¹(x) vs 1/sin(x)", "field": "content (lines ~826-845)", "kind": "dedicated-section", "status": "existing", "quote": "the notation is hijacked to mean the inverse function rather than the reciprocal … This is an inconsistency in mathematical notation, not a logical rule", "covers": ["sin⁻¹ vs csc ambiguity", "arcsin/arccos/arctan alternative", "disambiguation list", "side-by-side table"], "stage2": {"mathSymbols": {"page": "/math-symbols/trigonometry", "category": null, "anchorText": "trigonometry symbols"}, "added": "2026-08-06", "placement": "closing sentence of the arc-notation paragraph"}},
+        {"sectionId": "5", "sectionTitle": "Inverse Reciprocal Functions", "field": "content (line ~791)", "kind": "mention", "status": "existing", "quote": "their conventions vary more across textbooks", "stage2": null},
+        {"sectionId": "1", "sectionTitle": "Why Restriction Is Necessary", "field": "content (line ~666)", "kind": "mention", "status": "existing", "quote": "The choice of restriction interval is a convention, universally agreed upon", "stage2": null}
+      ],
+      "recommendations": [],
+      "notes": "FLAGSHIP notation section of trigonometry. /math-symbols/trigonometry already backlinks INTO this page (#2-#5 anchors in its inverse-functions symbol explanations) — first bidirectional content↔symbols pair in the app.",
+      "externalNotationLinks": []
+    },
+    "trigonometry/graphs": {
+      "pagePath": "pages/trigonometry/graphs/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Graph of the Sine Function", "2 Graph of the Cosine Function", "3 Graph of the Tangent Function", "4 Graphs of Cosecant, Secant, and Cotangent", "5 The General Sinusoidal Form", "6 Amplitude", "7 Period", "8 Phase Shift", "9 Vertical Shift and Midline", "10 Determining the Equation from a Graph", "11 Graphing by Hand: The Key-Point Method", "intro Visualizing Periodic Behavior"],
+      "spots": [
+        {"sectionId": "5", "sectionTitle": "The General Sinusoidal Form", "field": "content", "kind": "mention", "status": "existing", "quote": "y = A sin(B(x − C)) + D parameter convention", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/inequalities": {
+      "pagePath": "pages/trigonometry/inequalities/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Solutions as Intervals", "2 The Graphical Method", "3 The Unit Circle Method", "4 Solving Sine Inequalities", "5 Solving Cosine and Tangent Inequalities", "6 Compound Inequalities", "7 Inequalities Involving Transformed Functions", "8 Domain Considerations for Reciprocal and Quotient Functions", "intro Finding Intervals Where Trigonometric Conditions Hold"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Solutions as Intervals", "field": "content", "kind": "inline-intro", "status": "existing", "quote": "Strict inequalities (>, <) produce open intervals … Non-strict (≥, ≤) produce closed intervals; $[0, 2\\pi)$ used throughout", "stage2": null},
+        {"sectionId": "1", "sectionTitle": "Solutions as Intervals", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "interval notation semantics explained in words but bracket symbolism ([a,b] vs (a,b)) has no symbols-page target yet — natural link once /math-symbols/functions or /math-symbols/algebra exists", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/properties": {
+      "pagePath": "pages/trigonometry/properties/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Periodicity", "2 Even and Odd Symmetry", "3 Boundedness", "4 Zeros", "5 Continuity and Discontinuities", "6 Monotonicity on Principal Intervals", "7 Extrema", "8-9 (closing)", "intro The Structural Behavior of Sine, Cosine, and Their Companions"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Periodicity", "field": "content", "kind": "mention", "status": "existing", "quote": "period notation $f(x+T) = f(x)$", "stage2": null},
+        {"sectionId": "2", "sectionTitle": "Even and Odd Symmetry", "field": "content", "kind": "mention", "status": "existing", "quote": "$f(-x)$ function-notation used for symmetry definitions", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "trigonometry/sines-cosines-law": {
+      "pagePath": "pages/trigonometry/sines-cosines-law/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Triangle Notation", "2 The Law of Sines", "3 When to Use the Law of Sines", "4 The Ambiguous Case (SSA)", "5 The Law of Cosines", "6 When to Use the Law of Cosines", "7 Choosing Between the Two Laws", "8 Area of a Triangle Using Trigonometry", "9 Heron's Formula", "10 Applications", "intro Solving Triangles Without a Right Angle"],
+      "spots": [
+        {"sectionId": "1", "sectionTitle": "Triangle Notation", "field": "content (lines ~563-566)", "kind": "dedicated-section", "status": "existing", "quote": "A standard labeling convention is used throughout triangle-solving problems. The three vertices are labeled $A$, $B$, $C$ … side-angle pair — $(a, A)$", "stage2": null}
+      ],
+      "recommendations": [],
+      "externalNotationLinks": []
+    },
+    "probability": {
+      "pagePath": "pages/probability/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "externalNotationLinks": []
+    },
+    "probability/basics": {
+      "pagePath": "pages/probability/basics/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "Set Theory & Event Algebra", "Basic Axioms of Probability", "Rules of Probability", "Random Variables and Distributions", "Conditional Probability & Independence"],
+      "spots": [
+        {"sectionId": "(resources)", "sectionTitle": "—", "field": "description (line ~554)", "kind": "mention", "status": "existing", "quote": "Our [Probability Symbols page](!/math-symbols/probability) delivers a systematic reference for notation — in-prose live link, the only one of its kind pre-dating this project", "stage2": null}
+      ],
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "in-prose description link (line ~554)"}]
+    },
+    "probability/axioms": {
+      "pagePath": "pages/probability/axioms/index.jsx",
+      "template": "titled",
+      "sections": ["0 Key Terms", "why What Are Axioms", "axioms The Probability Axioms (Overview)", "axiom1 Non-Negativity", "axiom2 Normalization", "axiom3 Additivity for Disjoint Events", "consequences", "assume What the Axioms Do Not Assume", "practice", "connections", "overview"],
+      "spots": [
+        {"sectionId": "axioms", "sectionTitle": "The Probability Axioms (Overview)", "field": "content", "kind": "mention", "status": "existing", "quote": "formal statements table (P(A) ≥ 0, P(Ω) = 1, additivity) — was chip-less before this pass", "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "probability notation"}, "added": "2026-08-06", "placement": "woven into the table-intro sentence"}}
+      ],
+      "externalNotationLinks": []
+    },
+    "probability/events": {
+      "pagePath": "pages/probability/events/index.jsx",
+      "template": "untitled",
+      "sections": ["(inventory not extracted; table with 'Notation / example' column at line ~594)"],
+      "spots": [
+        {"sectionId": "(forms)", "sectionTitle": "(event forms section)", "field": "content (line ~896)", "kind": "table", "status": "existing", "quote": "The forms above can be lined up with what each one represents and the set notation that captures it", "stage2": {"mathSymbols": {"page": "/math-symbols/set-theory", "category": null, "anchorText": "set notation"}, "added": "2026-08-06", "placement": "in-text on 'set notation' (cross-topic link)"}}
+      ],
+      "externalNotationLinks": []
+    },
+    "probability/probability-function": {
+      "pagePath": "pages/probability/probability-function/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Notation and Symbols' … ways …"],
+      "spots": [
+        {"sectionId": "notation", "sectionTitle": "Notation and Symbols", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "X, x, p(x), f(x), P(·), ∫f(x)dx each explained in everyday language + live symbols chip", "stage2": {"latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-06", "placement": "typesetting sentence inserted before the pre-existing chip"}}
+      ],
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2 (pattern)"}]
+    },
+    "probability/sample-space": {
+      "pagePath": "pages/probability/sample-space/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Useful Notation' …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Useful Notation", "field": "content + after-chip", "kind": "dedicated-section", "status": "existing", "quote": "house-pattern notation section (Ω, outcomes)", "stage2": null}],
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+    },
+    "probability/random-variables": {
+      "pagePath": "pages/probability/random-variables/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Notation & Naming Conventions' …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Notation & Naming Conventions", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "capital X vs lowercase x conventions", "stage2": null}],
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+    },
+    "probability/sets": {
+      "pagePath": "pages/probability/sets/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Notation Used for Sets in Probability' …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Notation Used for Sets in Probability", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "set symbols as used in probability", "stage2": null}],
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+    },
+    "probability/expected-value": {
+      "pagePath": "pages/probability/expected-value/index.jsx",
+      "template": "titled",
+      "sections": ["… notation '**Notation We Use for Expected Value**' (title carries stray markdown bold) …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Notation We Use for Expected Value", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "E[X] / E(X) / μ conventions", "stage2": null}],
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+    },
+    "probability/variance": {
+      "pagePath": "pages/probability/variance/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Useful Notation' …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Useful Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "Var(X) / σ² conventions", "stage2": null}],
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+    },
+    "probability/$notationPatternPages": {
+      "pagePath": "(pattern summary — see individual files)",
+      "template": "titled",
+      "sections": ["each page carries a dedicated notation section (id 'notation' where verified) + live '[See All Probability Symbols and Notations](!/math-symbols/probability)' chip(s)"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Useful Notation / Notation Used / Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "house pattern replicated across: conditional-probability, bayes-theorem, joint-probability, independence, total-probability, covariance ('Notation & Naming Conventions'), median, mode, probability-function/pdf, probability-function/pmf, distributions (hub, id 'notation'), distributions/discrete (hub, 6 chips), distributions/continuous (hub, 3 chips), discrete/{uniform,binomial,geometric,hypergeometric,negative-binomial,poisson} ('Notation Used'), continuous/{uniform,normal,exponential} ('Notation')", "stage2": null}],
+      "notes": "Aggregate entry for 24 pages sharing the identical pattern; individual ids beyond the verified 'notation' slug not extracted. Split into per-page entries if any page gets individual treatment.",
+      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "~50 chips across the family"}]
+    },
+    "probability/$chiplessPages": {
+      "pagePath": "(gap summary)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "recommended-note", "status": "recommended", "why": "pages WITHOUT any symbols link or notation section: cdf (F(x) convention unglossed), central-limit-theorem, combinatorics, indicators, inequalities + markov + chebyshev, large-numbers-law, models + coin-toss + dice-roll, rules (P(A∪B) etc. used cold), tree-diagrams, formulas, definitions. Candidates for future notation notes/links.", "stage2": null}],
+      "notes": "Aggregate gap entry; axioms and events were in this group until the 2026-08-06 pass linked them.",
+      "externalNotationLinks": []
+    }
+  },
+  "$crossSectionFindings": {
+    "set-theory": [
+      "Zero live links to /math-symbols, /keyboard, or /latex anywhere in the section; five identical commented-out '[See All Probability Symbols and Notations](!/math-symbols/probability)' template snippets (operations:47, subsets:46, cardinality:46, relationships:46, venn-diagrams:45).",
+      "Dedicated notation content: basics id 2 (section + table), subsets id 6 (section + table), operations id 6 (table with Notation column); cardinality id 6 table is a de-facto notation reference card.",
+      "Convention split: theory pages use $A^c$ for complement, all four visual-tools explorers use $A'$; only the operations summary table reconciles them.",
+      "Weakest coverage: /set-theory/rules (symbols with zero introduction, empty intro) and /set-theory/relationships (⇔/∀ and ~ unglossed, placeholder h1)."
+    ],
+    "arithmetic": [
+      "Zero live links to /math-symbols, /keyboard, /latex. Commented-out boilerplate chip '[See All Probability Symbols and Notations](!/math-symbols/probability)' (wrong topic even in comment) in 14 files: modular-wheel:31, divisibility-table:32, divisibility-tree:32, eratosthenes-sieve:32, divisibility-tiles:32, euclidean-algorithm:31, properties:45+796, fractions:44+730, fractions/{dividing,equivalent,complex,mixed-numbers,adding-subtracting,comparing,multiplying}, modulo:46, modulo/{operations,negative-numbers}:46. Live 'after' chips point to /arithmetic/definitions instead.",
+      "Dedicated notation sections on exactly two pages: /arithmetic/divisibility id 2 'Terminology and Notation' (five-phrasings table) and /arithmetic/modulo id 2 'Notation' (mod vs %, operation vs statement). Both strong anchor targets for notation-mesh linking.",
+      "BUG: divisibility-table id 13 defines a | b as 'a is divisible by b' — reversed vs /arithmetic/divisibility id 2 and divisibility-tiles id 6. Tool/calculator pages use × and a ÷ b = q while lesson pages use \\cdot, \\mid, \\bmod.",
+      "Congruence ≡ (mod n) formally introduced in three places (modulo id 5, modular-wheel id 8, modulo/operations id 2 implicitly) but used cold on rules id 13, divisibility-table id 14, divisibility-tree id 9 — natural cross-link targets.",
+      "Fraction notation anchored at fractions id 1 (vinculum, a/b = a ÷ b); genuine gaps: slash form a/b and mixed-number juxtaposition-means-addition convention.",
+      "House pattern: function-style notation (gcd, lcm, σ) consistently introduced with 'written…/denoted…' on lesson pages; strays: divisor-count function (factors id 9), euclidean tool id 7.",
+      "Anchor hazards: modulo hub non-sequential ids (51/61/71), negative-numbers skipped id 6, dead commented-out drafts in definitions and properties."
+    ],
+    "logic": [
+      "The ONLY live /math-symbols link in the app so far: /logic hub symbols section → /math-symbols/math-logic (twice: link field line 116, inline <a> line 119). No /keyboard or /latex links anywhere under pages/logic. Semantics hub has a dormant commented-out symbols section skeleton with {{SYMBOLS_SECTION_LINK}} placeholder.",
+      "Four dedicated 'Definition and Notation' sections, all under semantics: equivalences#definition (≡ ⇔ = vs ↔), implication#definition (→ ⇒), tautology#definition (⊤ ⊢), contradiction#definition (⊥ ⊢). Plus syntax#alphabet (¬ ∧ ∨ → ↔, atomic props, parentheses) and truth-tables operator descriptions (per-symbol incl. NAND ↑, NOR ↓, XOR variants) — the section's notation anchors.",
+      "Un-introduced symbol gaps (best candidates for notes/links): ⊢ (used in laws + implication_laws tables, defined only in passing on tautology/contradiction definitions), ⊨ (introduced once at propositional-logic#properties, unglossed in tautology table), ⊕ and ≢ (laws table, no intro), ⊥ (bare on truth-tables/contradictions id 11).",
+      "Weakest pages: /logic/propositional-logic/laws (pure symbol table, zero legend — top recommendation), /logic/formulas (symbol-dense, no intro), /logic/truth-tables/tautologies (no notation at all).",
+      "Anchor hazards: semantics-family pages use slug ids with quirks (typo id 'contigency', mixed 'laws_as-tautologies'); truth-tables subpages and syntax tools use numeric ids; truth-tables generator anchors are raw symbols (#∧) with prose in app/components/logic-calculator/operatorDescriptions.js; semantics hub renders unresolved {{PLACEHOLDER}} in <title>/meta."
+    ],
+    "combinatorics": [
+      "The only section with widespread PRE-EXISTING live /math-symbols chips (@span style, ~11 total): every scenario Notation block on /combinatorics/permutations (full/identical/without/with/circular) and /combinatorics/combinations (combinations/partition/weak/strong/distribution), plus binomial-coefficient obj1. These predate this project — the commented-out chips found in set-theory/arithmetic are the shelved copies of this same pattern.",
+      "2026-08-06 pass planted 5 additions: basics obj3 trio (combinatorial symbols + LaTeX + keyboard), binomial-coefficient LaTeX-command sentence, binomial-theorem Σ link, and TWO cross-topic links to /math-symbols/set-theory (counting-principles obj3 'set-theoretic notation', inclusion-exclusion obj1 set-symbols gloss).",
+      "Notation strengths: binomial-coefficient id 1 'Definition and Notation' (read-aloud form + Notation Variants + generalized form) and permutations id 8 Derangement '## Notation' (!n vs D_n) are dedicated sections; every permutation/combination scenario has a structured **Notation:** block listing standard + alternative forms.",
+      "Remaining gaps: basics uses n!, P(n,r), binom fluently with no read-as gloss in body (partially mitigated by planted sentence); inclusion-exclusion general formula's alternating-sign Σ over intersections has no gloss; binomial-theorem obj2 index convention T_{k+1} is a convention note worth a future anchor.",
+      "Anchor notes: combinations/permutations use slug ids (types, weak, strong, full, without, with, circular) except permutations' Derangement which is numeric id '8'; basics is numeric 1-7."
+    ],
+    "trigonometry": [
+      "First BIDIRECTIONAL content↔symbols pairing in the app: /math-symbols/trigonometry was already modernized with in-explanation backlinks into /trigonometry/inverse-functions#2-#5; this pass added the forward links (inverse-functions#6 → symbols page).",
+      "Dedicated notation sections: inverse-functions id 6 'Notation: sin⁻¹(x) vs 1/sin(x)' (the flagship — explains the -1 superscript convention collision) and sines-cosines-law id 1 'Triangle Notation' (vertex/side labeling convention).",
+      "2026-08-06 pass planted 4 spots (6 links): right-triangle obj2 trio (trigonometry symbols + LaTeX + keyboard, at the sin/cos/tan first introduction), inverse-functions obj6 → symbols page, identities pythagorean sin²-shorthand gloss with INTERNAL cross-link to inverse-functions#6 (first content→content notation link), equations obj1 n ∈ ℤ gloss → /math-symbols/set-theory (cross-topic).",
+      "Remaining gap: inequalities id 1 interval-notation brackets have no symbols-page target until /math-symbols/functions or /math-symbols/algebra exists (registered as recommended).",
+      "No pre-existing content→symbols links anywhere in the trig section (the mesh existed only on the symbols side). Pages are Line-1 quality prose; no commented-chip boilerplate found."
+    ],
+    "probability": [
+      "THE PROTOTYPE SECTION: ~29 content pages already carried live '[See All Probability Symbols and Notations](!/math-symbols/probability)' chips and ~24 pages have dedicated notation sections (house pattern: sectionsContent key 'notation', section id 'notation', titles 'Useful Notation'/'Notation Used'/'Notation & Naming Conventions'). This is the origin of the chip boilerplate found commented-out in set-theory/arithmetic. basics also has an in-prose symbols-page link.",
+      "2026-08-06 pass added 3 complements: probability-function#notation got the LaTeX + keyboard typesetting sentence (first /latex + /keyboard links in the section); axioms overview got an in-text /math-symbols/probability link (was chip-less); events got a cross-topic /math-symbols/set-theory link on 'set notation'.",
+      "Remaining chip-less pages (registered as aggregate recommendation): cdf, central-limit-theorem, combinatorics, indicators, inequalities/markov/chebyshev, large-numbers-law, models/coin-toss/dice-roll, rules, tree-diagrams, formulas, definitions.",
+      "Registry note: probability recorded with two aggregate entries ($notationPatternPages, $chiplessPages) instead of ~30 identical per-page entries — split them out if a page gets individual treatment."
+    ]
+  }
+}

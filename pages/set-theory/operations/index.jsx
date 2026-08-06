@@ -481,7 +481,7 @@ The symmetric difference with the empty set leaves a set unchanged: $A \\triangl
   obj6: {
     title: `Summary: All Five Operations at a Glance`,
     content: `
-The five operations introduced above share a uniform structure: each consumes one or two sets and returns a new set, defined by a precise membership condition. The capstone table below collects them all in one place — every operation with its notation, its membership rule, the result on a single worked example ($A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$, $U = \\{1, 2, 3, 4, 5\\}$), and its key algebraic properties.
+The five operations introduced above share a uniform structure: each consumes one or two sets and returns a new set, defined by a precise membership condition. The capstone table below collects them all in one place — every operation with its [notation](!/math-symbols/set-theory), its membership rule, the result on a single worked example ($A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$, $U = \\{1, 2, 3, 4, 5\\}$), and its key algebraic properties.
     `,
     before: ``,
     after: ``,

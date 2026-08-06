@@ -10,6 +10,13 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  hubDescription: 'Solve two- and three-event probability problems on interactive Venn diagrams: enter marginal and intersection constraints and see every region of the sample space computed step by step.',
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="44" r="24" fill="#b8d4f0" fill-opacity="0.65" stroke="#1565c0" stroke-width="2"/><circle cx="72" cy="44" r="24" fill="#3498db" fill-opacity="0.35" stroke="#1565c0" stroke-width="2"/><text x="38" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#1565c0" stroke="none">A</text><text x="82" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#1565c0" stroke="none">B</text></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

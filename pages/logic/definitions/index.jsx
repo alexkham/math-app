@@ -169,6 +169,11 @@ import DefinitionGlossary from '@/app/components/examples/DefinitionsGlossary'
 export async function getStaticProps() {
   const { default: logicTermsList } = await import('@/app/api/db/definitions/logic/logicDefinitions')
 
+  // Surfaced on the /logic hub via buildSectionData extraction.
+  const hubMeta = {
+    hubDescription: 'The Logic Terms and Definitions page presents key concepts and terminology organized in multiple categories including Logic Basics, Reasoning, Formal Logic, Proof Methods, Logical Principles, and Structures. It covers fundamental concepts like propositions and predicates, reasoning methods, formal systems, and proof techniques. Each term is clearly defined to help understand the building blocks of mathematical logic and logical reasoning.',
+  }
+
   const keyWords = [
     'logic definitions',
     'logic terms',
@@ -190,7 +195,7 @@ export async function getStaticProps() {
     heading: "About This Glossary",
     content: `This glossary organizes 28 propositional logic terms into two categories that cover the building blocks of logical reasoning and their meaning.
 
-[Syntax](#category_syntax) defines the structural side of propositional logic across 11 entries: propositions (elementary and compound), well-formed formulas, literals, the five standard logical connectives (negation, conjunction, disjunction, and their roles in building expressions), and the two canonical normal forms -- Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF). These terms describe how valid logical expressions are constructed from symbols.
+[Syntax](#category_syntax) defines the structural side of propositional logic across 11 entries: propositions (elementary and compound), well-formed formulas, literals, the five standard [logical connectives](!/math-symbols/math-logic) (negation, conjunction, disjunction, and their roles in building expressions), and the two canonical normal forms -- Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF). These terms describe how valid logical expressions are constructed from symbols.
 
 [Semantics](#category_semantics) addresses meaning and truth across 17 entries: the conditional and biconditional connectives, the anatomy of implications (antecedent, consequent, converse, contrapositive, inverse), logical equivalence, the three truth-value classifications (tautology, contradiction, contingency), satisfiability, truth tables, assignments, absorption, and the foundational laws of excluded middle and non-contradiction. These terms describe how logical expressions are evaluated and what their truth values reveal.
 

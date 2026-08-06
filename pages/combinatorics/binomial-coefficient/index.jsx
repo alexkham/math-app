@@ -441,6 +441,8 @@ Several notations are in use for the same object:
 • $C_n^k$ or $C_k^n$ — used in some European traditions; the position of the subscript and superscript varies by source
 • \${}_nC_k$ — the form most calculator displays use
 
+In [LaTeX](!/latex) source, the standard stacked form is produced by the command \\binom{n}{k}.
+
 ## Generalization to Real Upper Index
 
 The definition extends beyond non-negative integers by rewriting the numerator as a descending product:

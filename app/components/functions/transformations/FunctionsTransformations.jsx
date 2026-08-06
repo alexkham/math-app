@@ -1039,6 +1039,7 @@ function FamilyGlyph({ d, active, darkMode }) {
 export default function FunctionTransformations({
   initialFamily = 'quadratic',
   families = DEFAULT_BASES,
+  explanations = {},
   visualizerProps = {},
   infoPanelProps = {},
   extraTabs = [],
@@ -1188,9 +1189,14 @@ export default function FunctionTransformations({
     }
     return [
       { key: 'explanation', label: 'Explanation', order: 0, content },
+      // Per-tab explanation supplied by the page (canonical copy lives in
+      // getStaticProps of each page that renders this component).
+      ...(explanations[activeTab] != null
+        ? [{ key: 'about', label: 'About', order: 5, content: explanations[activeTab] }]
+        : []),
       ...extraTabs,
     ];
-  }, [activeTab, params, fam, extraTabs]);
+  }, [activeTab, params, fam, extraTabs, explanations]);
 
   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
   const monoStack = 'ui-monospace, "SF Mono", Menlo, monospace';

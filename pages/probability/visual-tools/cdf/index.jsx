@@ -11,6 +11,12 @@ import Head from 'next/head'
 import StaticCards from '@/app/components/cards/static-cards/StaticCards'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="72" x2="104" y2="72" stroke="#1565c0" stroke-width="2"/><line x1="16" y1="72" x2="16" y2="12" stroke="#1565c0" stroke-width="2"/><path d="M 16 70 H 32 V 58 H 48 V 42 H 64 V 28 H 80 V 18 H 100" stroke="#3498db" stroke-width="2.5" fill="none"/><circle cx="32" cy="58" r="3" fill="#3498db"/><circle cx="48" cy="42" r="3" fill="#3498db"/><circle cx="64" cy="28" r="3" fill="#3498db"/><circle cx="80" cy="18" r="3" fill="#3498db"/></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

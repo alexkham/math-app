@@ -262,6 +262,13 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  hubDescription: 'See how probabilities pull the expected value toward heavier outcomes with a weight-and-force visualization, or adjust discrete distributions with sliders and watch E(X) shift in real time.',
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="24" y1="34" x2="96" y2="42" stroke="#1565c0" stroke-width="2.5"/><path d="M 54 40 L 66 40 L 60 56 Z" fill="#b8d4f0" stroke="#1565c0" stroke-width="2" transform="translate(0,-1)"/><line x1="45" y1="56" x2="75" y2="56" stroke="#1565c0" stroke-width="2"/><circle cx="30" cy="26" r="12" fill="#3498db" fill-opacity="0.5" stroke="#1565c0" stroke-width="2"/><circle cx="92" cy="36" r="7" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

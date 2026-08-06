@@ -293,7 +293,7 @@ For $(A \\cup B) \\cap C$:
 
 - The intersection keeps only the shaded region that falls within $C$
 
-Reading a shaded diagram requires the reverse process: examine which basic regions are shaded, then express the result using set notation. Complex shadings may require expressing the result as a union of disjoint regions.
+Reading a shaded diagram requires the reverse process: examine which basic regions are shaded, then express the result using [set notation](!/math-symbols/set-theory). Complex shadings may require expressing the result as a union of disjoint regions.
     `,
     before: ``,
     after: ``,

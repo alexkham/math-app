@@ -65,6 +65,12 @@ export default function PropositionalLogicPage({ keyWords, introContent, proposi
 
 // This function gets called at build time to make the page statically generated
 export async function getStaticProps() {
+  // Surfaced on the /logic hub via buildSectionData extraction.
+  const hubMeta = {
+    name: 'Propositional Logic',
+    hubDescription: 'The formal system for statements that are either true or false: syntax and connectives, truth-table semantics with tautologies and contradictions, logical laws and equivalences, inference rules, normal forms, and proof techniques — the foundation every richer logical system builds on.',
+  }
+
   const keyWords = ['propositional logic', 'propositional calculus', 'sentential logic'];
 
   const introContent = {
@@ -178,7 +184,7 @@ The set {"It is raining", "It is not raining"} is inconsistent.
 The set {"It is raining", "The ground is wet"} is consistent.
 ## 3.Implication (Entailment / Logical Consequence):
 
-A proposition $𝑄$ is a logical consequence of $𝑃$ (denoted $𝑃⊨𝑄$) if whenever $𝑃$ is true, $𝑄$ must also be true.
+A proposition $𝑄$ is a logical consequence of $𝑃$ (denoted $𝑃⊨𝑄$ — the double turnstile, one of the standard [logic symbols](!/math-symbols/math-logic)) if whenever $𝑃$ is true, $𝑄$ must also be true.
 **Example**:
 \t\t\t\t\t\t$𝑃=$ "It is raining."
 \t\t\t\t\t\t$𝑄=$ "The ground is wet."

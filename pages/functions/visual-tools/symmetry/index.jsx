@@ -7,7 +7,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-family explanations live in getStaticProps below (SSR/SEO-visible);
+// the component renders them as the info panel's "Family" tab.
 import FunctionSymmetry from '../../../../app/components/functions/symmetry/FunctionSymmetry'
+import symmetryDiagrams from '../../../../app/components/functions/symmetry/functionSymmetryDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -52,9 +56,9 @@ The page launches with quadratic. Blue and amber overlap exactly: the dashes pun
       title: `Picking a Function`,
       content: `The picker groups eleven base functions by their natural symmetry — a deliberate teaching layout:
 
-• **Even** ($f(-x) = f(x)$, y-axis mirror) — Quadratic $x^2$, Absolute $|x|$, Cosine
-• **Odd** ($f(-x) = -f(x)$, origin rotation) — Identity $x$, Cubic $x^3$, Sine, Reciprocal $1/x$
-• **Neither** — Square root, Exponential, Logarithmic, $x^2 + x$
+• [Even](!#even-functions) ($f(-x) = f(x)$, y-axis mirror) — [Quadratic](!#symmetry-of-the-quadratic) $x^2$, [Absolute](!#symmetry-of-the-absolute-value) $|x|$, [Cosine](!#symmetry-of-cosine)
+• [Odd](!#odd-functions) ($f(-x) = -f(x)$, origin rotation) — [Identity](!#symmetry-of-the-identity) $x$, [Cubic](!#symmetry-of-the-cubic) $x^3$, [Sine](!#symmetry-of-sine), [Reciprocal](!#symmetry-of-the-reciprocal) $1/x$
+• [Neither](!#functions-with-neither-symmetry) — [Square root](!#symmetry-of-the-square-root), [Exponential](!#symmetry-of-the-exponential), [Logarithmic](!#symmetry-of-the-logarithm), [the mixed polynomial](!#symmetry-of-the-mixed-polynomial) $x^2 + x$
 
 The Neither group is instructive on its own. Square root and logarithm fail the comparison because they are not defined for negative inputs; exponential because $e^{-x} = 1/e^x$ is neither equal to $e^x$ nor to $-e^x$; and $x^2 + x$ is the classic example of a polynomial with mixed-parity terms.
 
@@ -197,11 +201,142 @@ The runtime verdict captures all of this automatically. You can use the sliders 
       link: '',
     },
 
-    obj11: { title:``, content:``, before:``, after:``, link:'' },
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
-    obj15: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `Even Functions`,
+      content: `Three picker families satisfy $f(-x) = f(x)$ for every input: the [quadratic](!#symmetry-of-the-quadratic), the [absolute value](!#symmetry-of-the-absolute-value), and [cosine](!#symmetry-of-cosine). Their graphs are mirror-symmetric across the y-axis — fold the plane along the vertical axis and each curve lands on itself.
+
+In the three-curve view this reads as a coincidence: the amber $f(-x)$ curve disappears underneath the blue $f$, while the teal $-f(x)$ hangs separate below. One overlap, one outsider — the even signature.`,
+      before: ``, after: ``, link: '',
+    },
+    obj12: {
+      title: `Symmetry of the Quadratic`,
+      content: `The parabola is evenness at its most familiar: $(-x)^2 = x^2$, so negating the input changes nothing at all.`,
+      before: ``,
+      after: `The frozen scene shows the even signature exactly: amber hides under blue (the mirror image IS the curve), while the teal $-f(x)$ opens downward on its own. The derivation is one line — squaring destroys the sign before it can matter.
+
+Every even power behaves identically, which is where the name "even" comes from: $x^2$, $x^4$, $x^6$ all fold onto themselves across the y-axis.
+
+But evenness is fragile: nudge the parabola sideways with $h$ and the mirror match breaks instantly — the experiment [Transforming and Breaking Symmetry](!#transforming-and-breaking-symmetry) runs live.`,
+      link: '',
+    },
+    obj13: {
+      title: `Symmetry of the Absolute Value`,
+      content: `The V-shape wears its evenness openly: $|-x| = |x|$ is practically the definition of the absolute value.`,
+      before: ``,
+      after: `Both arms of the V are each other's mirror image, meeting at the corner on the axis of symmetry itself. Amber under blue, teal inverted below — the same overlap pattern as the [quadratic](!#symmetry-of-the-quadratic), delivered by a piecewise function instead of a power.
+
+The absolute value is the evenness *machine*: composing any function with $|x|$ on the input side manufactures an even result, which is exactly what the reflections tool demonstrates with $f(|x|)$.`,
+      link: '',
+    },
+    obj14: {
+      title: `Symmetry of Cosine`,
+      content: `Cosine is the transcendental member of the even group: $\\cos(-x) = \\cos(x)$, a mirror symmetry the unit circle explains in one glance — angles $\\theta$ and $-\\theta$ share the same x-coordinate.`,
+      before: ``,
+      after: `The frozen wave shows amber vanished under blue along the entire axis — not just near the origin — and the teal flip riding exactly half a period out of phase.
+
+Cosine's evenness is why it starts at a maximum: the curve must approach the y-axis identically from both sides, so the axis crossing is a turning point, never a slope.
+
+Its partner [sine](!#symmetry-of-sine) carries the opposite parity — together they split every function on the circle into even and odd parts.`,
+      link: '',
+    },
+    obj15: {
+      title: `Odd Functions`,
+      content: `Four families satisfy $f(-x) = -f(x)$: the [identity](!#symmetry-of-the-identity), the [cubic](!#symmetry-of-the-cubic), [sine](!#symmetry-of-sine), and the [reciprocal](!#symmetry-of-the-reciprocal). Their symmetry is rotational — spin the graph $180°$ about the origin and it lands on itself.
+
+The three-curve view shows the odd signature: amber $f(-x)$ and teal $-f(x)$ coincide with *each other*, leaving the blue curve to match them as a rotated copy of itself. A different overlap than the even case — and the tool's verdict card reads the difference automatically.`,
+      before: ``, after: ``, link: '',
+    },
+    obj16: {
+      title: `Symmetry of the Identity`,
+      content: `The line $y = x$ is the smallest odd function: $-x$ is both $f(-x)$ and $-f(x)$, so the two comparison curves collapse into one.`,
+      before: ``,
+      after: `All the structure is visible at the origin: the line passes straight through it, as every odd function defined there must — $f(0) = -f(0)$ forces $f(0) = 0$.
+
+The frozen scene shows amber and teal fused into a single line mirroring the blue one across the y-axis; rotating the picture half a turn about the origin swaps them back onto themselves.
+
+Odd powers generalize the pattern: $x$, $x^3$, $x^5$ all rotate onto themselves, which is where "odd" gets its name — the [cubic](!#symmetry-of-the-cubic) is the next rung.`,
+      link: '',
+    },
+    obj17: {
+      title: `Symmetry of the Cubic`,
+      content: `The cubic curls through the origin with point symmetry: $(-x)^3 = -x^3$, the sign passing cleanly through the odd power.`,
+      before: ``,
+      after: `Rotate the S-curve half a turn about the origin and it lands on itself — the rising right arm becomes the falling left arm. In the three-curve view, amber and teal trace one shared curve, the blue original's $180°$ twin.
+
+The cubic also shows why odd functions have no choice at zero: the curve must pass through the origin, and its inflection sits exactly there.
+
+Sums preserve the pattern: $x^3 + x$ stays odd, but add an even term — as in [the mixed polynomial](!#symmetry-of-the-mixed-polynomial) — and the parity shatters.`,
+      link: '',
+    },
+    obj18: {
+      title: `Symmetry of Sine`,
+      content: `Sine is the wave with rotational symmetry: $\\sin(-x) = -\\sin(x)$, each crest on the right matched by a trough on the left.`,
+      before: ``,
+      after: `On the unit circle the identity is geometric: angles $\\theta$ and $-\\theta$ have opposite y-coordinates. On the graph it is the odd overlap — amber and teal sharing one curve, the blue wave rotating onto itself about the origin.
+
+Sine and [cosine](!#symmetry-of-cosine) make the canonical even/odd pair, and their parities drive the trigonometric even-odd identities: every negative-angle formula in trigonometry is one of these two symmetries restated.`,
+      link: '',
+    },
+    obj19: {
+      title: `Symmetry of the Reciprocal`,
+      content: `The hyperbola $1/x$ is odd around its own singularity: $1/(-x) = -1/x$, the two branches trading places under a half-turn.`,
+      before: ``,
+      after: `The first-quadrant branch rotates exactly onto the third-quadrant branch — origin symmetry that survives even though the function is not defined *at* the origin. Oddness never required $f(0)$ to exist; it only constrains the points that do.
+
+The frozen view shows the familiar coincidence of amber and teal, here split across two disconnected pieces — a reminder that symmetry is a property of the whole point set, not of a connected curve.`,
+      link: '',
+    },
+    obj20: {
+      title: `Functions with Neither Symmetry`,
+      content: `Four families answer "neither": the [square root](!#symmetry-of-the-square-root), the [exponential](!#symmetry-of-the-exponential), the [logarithm](!#symmetry-of-the-logarithm), and [the mixed polynomial](!#symmetry-of-the-mixed-polynomial) $x^2 + x$ — and they fail for three *different* reasons.
+
+The root and the logarithm never get to take the test: their domains exclude the negative inputs the comparison needs. The exponential takes it and fails both halves. The mixed polynomial fails because its terms disagree — one even, one odd, no shared verdict. Three failure modes, all visible as three genuinely different curves in the frozen scenes.`,
+      before: ``, after: ``, link: '',
+    },
+    obj21: {
+      title: `Symmetry of the Square Root`,
+      content: `The square root cannot be even or odd for the simplest reason: $\\sqrt{-x}$ does not exist where $\\sqrt{x}$ does — the comparison has nowhere to happen.`,
+      before: ``,
+      after: `The frozen scene shows the disqualification visually: blue lives on the right, amber entirely on the left, teal below-right — three curves with almost no common ground. Symmetry questions need a domain symmetric about zero, and $[0, \\infty)$ is anything but.
+
+This is the "domain blocks the comparison" verdict in the tool — a third answer distinct from failing the test, because the test itself never runs.
+
+The [logarithm](!#symmetry-of-the-logarithm) fails identically; one-sided domains and parity are simply incompatible.`,
+      link: '',
+    },
+    obj22: {
+      title: `Symmetry of the Exponential`,
+      content: `The exponential takes the symmetry test on a full domain and fails both halves: $e^{-x} = 1/e^x$, which is neither $e^x$ nor $-e^x$.`,
+      before: ``,
+      after: `The three curves are three genuinely different objects: blue growth, amber decay (its y-axis mirror), and teal negative growth (its flip). No overlaps anywhere — the visual definition of "neither".
+
+Yet the failure is structured: $e^{-x}$ is the *reciprocal* of $e^x$, a multiplicative symmetry the additive even/odd test cannot see. Some functions are asymmetric; the exponential is symmetric in a different currency.
+
+Its even and odd parts have names — $\\cosh$ and $\\sinh$ — the standard decomposition applied to the most famous "neither" function.`,
+      link: '',
+    },
+    obj23: {
+      title: `Symmetry of the Logarithm`,
+      content: `The logarithm shares the square root's disqualification: defined only for $x > 0$, it has no mirror-side values to compare.`,
+      before: ``,
+      after: `The frozen picture makes "neither" look like territory: blue climbs on the right, amber (the mirror $\\ln(-x)$) occupies the left half-plane, teal dives on the right — no two curves share a domain, let alone coincide.
+
+The derivation block simply reports "undefined for $x > 0$" — the honest verdict when the comparison cannot be evaluated.
+
+Interestingly, the amber curve $\\ln(-x)$ *is* a legitimate function — it is the [y-axis reflection](!#symmetry-of-the-square-root) of the logarithm — it just is not equal to the original, which is what evenness would demand.`,
+      link: '',
+    },
+    obj24: {
+      title: `Symmetry of the Mixed Polynomial`,
+      content: `The sum $x^2 + x$ is the textbook parity-breaker: an even term plus an odd term, whose symmetries cancel rather than combine.`,
+      before: ``,
+      after: `Compute the test: $f(-x) = x^2 - x$. That matches neither $f(x) = x^2 + x$ nor $-f(x) = -x^2 - x$ — the even term keeps its sign, the odd term flips, and the mixture agrees with nothing.
+
+The frozen scene shows three distinct parabolas, the amber one being the blue's mirror — a *shifted-looking* twin, not a coincident one.
+
+The example generalizes into the decomposition theorem: every function splits uniquely as even part plus odd part — here literally $x^2$ plus $x$, the two terms this polynomial was built from.`,
+      link: '',
+    },
   }
 
 
@@ -319,12 +454,79 @@ The runtime verdict captures all of this automatically. You can use the sliders 
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // three-curve scene + attached picture-reading panel, no link (own page).
+  const EVEN_TEXT = 'Amber f(&#8722;x) hides under the blue curve &#8212; the mirror image IS the function &#8212; while teal &#8722;f(x) hangs separate.';
+  const ODD_TEXT = 'Amber f(&#8722;x) and teal &#8722;f(x) trace one shared curve: the blue original&#8217;s half-turn twin.';
+  const stateUnits = {
+    quadratic: demoUnitFrame({ svg: symmetryDiagrams.quadratic, caption: 'x&#178;: even, frozen', text: EVEN_TEXT }),
+    absolute: demoUnitFrame({ svg: symmetryDiagrams.absolute, caption: '|x|: even, frozen',
+      text: 'Both arms mirror across the y-axis; amber under blue, the teal flip pointing down. The corner sits on the axis of symmetry itself.' }),
+    cosine: demoUnitFrame({ svg: symmetryDiagrams.cosine, caption: 'cos(x): even, frozen',
+      text: 'Amber vanished under blue along the whole wave; the teal flip rides half a period out of phase.' }),
+    identity: demoUnitFrame({ svg: symmetryDiagrams.identity, caption: 'x: odd, frozen',
+      text: 'Amber and teal fuse into one line &#8212; f(&#8722;x) and &#8722;f(x) are literally the same &#8212; mirroring the blue identity.' }),
+    cubic: demoUnitFrame({ svg: symmetryDiagrams.cubic, caption: 'x&#179;: odd, frozen', text: ODD_TEXT }),
+    sine: demoUnitFrame({ svg: symmetryDiagrams.sine, caption: 'sin(x): odd, frozen',
+      text: 'Every right-side crest matched by a left-side trough; amber and teal share one curve.' }),
+    reciprocal: demoUnitFrame({ svg: symmetryDiagrams.reciprocal, caption: '1/x: odd, frozen',
+      text: 'The two branches rotate onto each other about the origin &#8212; symmetry surviving a hole at its own center.' }),
+    sqrt: demoUnitFrame({ svg: symmetryDiagrams.sqrt, caption: '&#8730;x: neither, frozen',
+      text: 'Blue on the right, amber marooned on the left, teal below: three curves with no common ground &#8212; the domain never allowed the test.' }),
+    exponential: demoUnitFrame({ svg: symmetryDiagrams.exponential, caption: 'e&#739;: neither, frozen',
+      text: 'Growth, decay, and negative growth &#8212; three genuinely different curves, no overlap anywhere.' }),
+    logarithmic: demoUnitFrame({ svg: symmetryDiagrams.logarithmic, caption: 'ln(x): neither, frozen',
+      text: 'Blue right, amber left, teal diving &#8212; no two curves even share a domain.' }),
+    quadraticPlusLinear: demoUnitFrame({ svg: symmetryDiagrams.quadraticPlusLinear, caption: 'x&#178; + x: neither, frozen',
+      text: 'Three distinct parabolas: the even term keeps its sign, the odd term flips, and the mixture agrees with nothing.' }),
+  };
+
+  // Canonical per-family explanations for the info panel's Family tab
+  // (SSR/SEO-visible; the component has no built-in per-family texts).
+  const explanations = {
+    quadratic:
+      '**Quadratic** $x^2$ — even: $(-x)^2 = x^2$, the sign destroyed before it can matter. Amber coincides with blue.\n\n' +
+      '[Learn more about the quadratic](!#symmetry-of-the-quadratic) · [Even functions](!#even-functions)',
+    absolute:
+      '**Absolute value** $|x|$ — even by definition: $|-x| = |x|$. The evenness machine of the whole library.\n\n' +
+      '[Learn more about the absolute value](!#symmetry-of-the-absolute-value) · [Even functions](!#even-functions)',
+    cosine:
+      '**Cosine** — even: angles $\\theta$ and $-\\theta$ share an x-coordinate on the unit circle, so $\\cos(-x) = \\cos(x)$.\n\n' +
+      '[Learn more about cosine](!#symmetry-of-cosine) · [Even functions](!#even-functions)',
+    identity:
+      '**Identity** $x$ — odd, minimally: $f(-x)$ and $-f(x)$ are the same expression, $-x$.\n\n' +
+      '[Learn more about the identity](!#symmetry-of-the-identity) · [Odd functions](!#odd-functions)',
+    cubic:
+      '**Cubic** $x^3$ — odd: the sign passes through the odd power, and the S-curve rotates onto itself about the origin.\n\n' +
+      '[Learn more about the cubic](!#symmetry-of-the-cubic) · [Odd functions](!#odd-functions)',
+    sine:
+      '**Sine** — odd: $\\sin(-x) = -\\sin(x)$, opposite y-coordinates for opposite angles.\n\n' +
+      '[Learn more about sine](!#symmetry-of-sine) · [Odd functions](!#odd-functions)',
+    reciprocal:
+      '**Reciprocal** $1/x$ — odd around its own singularity: the branches trade places under a half-turn.\n\n' +
+      '[Learn more about the reciprocal](!#symmetry-of-the-reciprocal) · [Odd functions](!#odd-functions)',
+    sqrt:
+      '**Square root** $\\sqrt{x}$ — neither: the one-sided domain never lets the comparison run.\n\n' +
+      '[Learn more about the square root](!#symmetry-of-the-square-root) · [Neither group](!#functions-with-neither-symmetry)',
+    exponential:
+      '**Exponential** $e^x$ — neither: $e^{-x} = 1/e^x$ fails both halves of the test; its even and odd parts are cosh and sinh.\n\n' +
+      '[Learn more about the exponential](!#symmetry-of-the-exponential) · [Neither group](!#functions-with-neither-symmetry)',
+    logarithmic:
+      '**Logarithm** $\\ln(x)$ — neither: defined only for $x > 0$, so parity has no mirror side to check.\n\n' +
+      '[Learn more about the logarithm](!#symmetry-of-the-logarithm) · [Neither group](!#functions-with-neither-symmetry)',
+    quadraticPlusLinear:
+      '**Mixed polynomial** $x^2 + x$ — neither: even term plus odd term, whose parities cancel rather than combine.\n\n' +
+      '[Learn more about the mixed polynomial](!#symmetry-of-the-mixed-polynomial) · [Neither group](!#functions-with-neither-symmetry)',
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      explanations,
+      stateUnits,
       seoData: {
         title: "Function Symmetry Visualizer | Even, Odd, or Neither",
         description: "Plot f(x), f(-x), and -f(-x) together to see whether a function is even, odd, or neither. Watch transformations break symmetry in real time.",
@@ -340,19 +542,35 @@ The runtime verdict captures all of this automatically. You can use the sliders 
 }
 
 
-export default function FunctionSymmetryPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function FunctionSymmetryPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    { id:'getting-started-with-the-visualizer', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
+    { id:'picking-a-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
+    { id:'the-three-curves-and-what-overlaps-mean', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
+    { id:'the-verdict-card', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'the-derivation-block', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
+    { id:'intersection-markers', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+    { id:'transforming-and-breaking-symmetry', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+    { id:'what-even-and-odd-mean', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
+    { id:'why-transformations-break-symmetry', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
+    { id:'even-functions', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },
+    { id:'symmetry-of-the-quadratic', title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('quadratic'), sectionsContent.obj12.after] },
+    { id:'symmetry-of-the-absolute-value', title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('absolute'), sectionsContent.obj13.after] },
+    { id:'symmetry-of-cosine', title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('cosine'), sectionsContent.obj14.after] },
+    { id:'odd-functions', title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content] },
+    { id:'symmetry-of-the-identity', title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content, unit('identity'), sectionsContent.obj16.after] },
+    { id:'symmetry-of-the-cubic', title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content, unit('cubic'), sectionsContent.obj17.after] },
+    { id:'symmetry-of-sine', title:sectionsContent.obj18.title, link:sectionsContent.obj18.link, content:[sectionsContent.obj18.content, unit('sine'), sectionsContent.obj18.after] },
+    { id:'symmetry-of-the-reciprocal', title:sectionsContent.obj19.title, link:sectionsContent.obj19.link, content:[sectionsContent.obj19.content, unit('reciprocal'), sectionsContent.obj19.after] },
+    { id:'functions-with-neither-symmetry', title:sectionsContent.obj20.title, link:sectionsContent.obj20.link, content:[sectionsContent.obj20.content] },
+    { id:'symmetry-of-the-square-root', title:sectionsContent.obj21.title, link:sectionsContent.obj21.link, content:[sectionsContent.obj21.content, unit('sqrt'), sectionsContent.obj21.after] },
+    { id:'symmetry-of-the-exponential', title:sectionsContent.obj22.title, link:sectionsContent.obj22.link, content:[sectionsContent.obj22.content, unit('exponential'), sectionsContent.obj22.after] },
+    { id:'symmetry-of-the-logarithm', title:sectionsContent.obj23.title, link:sectionsContent.obj23.link, content:[sectionsContent.obj23.content, unit('logarithmic'), sectionsContent.obj23.after] },
+    { id:'symmetry-of-the-mixed-polynomial', title:sectionsContent.obj24.title, link:sectionsContent.obj24.link, content:[sectionsContent.obj24.content, unit('quadraticPlusLinear'), sectionsContent.obj24.after] },
+    { id:'related-concepts-and-tools', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -409,7 +627,7 @@ export default function FunctionSymmetryPage({seoData, sectionsContent, introCon
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Function Symmetry</h1>
       <br/>
-      <FunctionSymmetry/>
+      <FunctionSymmetry explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

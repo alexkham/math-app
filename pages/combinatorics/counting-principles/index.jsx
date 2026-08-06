@@ -456,7 +456,7 @@ The number of arrangements of $n$ distinct items in which at least one item ends
  
 ## Structural Note
  
-In set-theoretic notation, complementary counting expresses $|A| = |U| - |A^c|$, where $A^c$ is the complement of $A$ in the universe. This is the addition rule applied to the partition $A \\cup A^c = U$ — complementary counting is a strategic application of the addition rule rather than an independent principle.
+In [set-theoretic notation](!/math-symbols/set-theory), complementary counting expresses $|A| = |U| - |A^c|$, where $A^c$ is the complement of $A$ in the universe. This is the addition rule applied to the partition $A \\cup A^c = U$ — complementary counting is a strategic application of the addition rule rather than an independent principle.
 `,
     before: ``,
     between: ``,

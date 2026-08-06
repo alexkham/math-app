@@ -1,3 +1,11 @@
+// Surfaced on the /probability hub via buildSectionData extraction.
+// Kept at the very top: first match wins, and commented-out code below
+// contains apostrophes that corrupt extraction further down the file.
+const hubMeta = {
+  name: 'Rules of Probability',
+  hubDescription: 'The working toolkit of probability: axiomatic bounds, complement and difference rules, addition and inclusion-exclusion, multiplication and chain rules, the law of total probability, and the Bayes theorem — each stated formally and illustrated.',
+}
+
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 // import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';

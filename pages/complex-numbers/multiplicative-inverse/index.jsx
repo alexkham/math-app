@@ -370,7 +370,7 @@ const keyWords = [
 
 // Similarly, $\\frac{1}{3 + 2i}$ is unambiguous, but inline expressions require care. Writing $1/3 + 2i$ means $\\frac{1}{3} + 2i$, not $\\frac{1}{3 + 2i}$. Use $1/(3 + 2i)$ or $(3 + 2i)^{-1}$ instead.
 
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Nunbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
 
 // `,
 //   before: ``,
@@ -691,7 +691,7 @@ Parentheses prevent ambiguity when the base is an expression. The inverse of $3 
 
 Similarly, $\\frac{1}{3 + 2i}$ is unambiguous, but inline expressions require care. Writing $1/3 + 2i$ means $\\frac{1}{3} + 2i$, not $\\frac{1}{3 + 2i}$. Use $1/(3 + 2i)$ or $(3 + 2i)^{-1}$ instead.
 
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Nunbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
 
 `,
   before: ``,

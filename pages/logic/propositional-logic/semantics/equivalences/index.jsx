@@ -191,6 +191,8 @@ In boolean algebra also used this notation:
 
 \t\t\t\t\t\t\t\t  $P=Q$
 
+In [LaTeX](!/latex) source, $≡$ is produced by the command \\equiv and $⇔$ by \\Leftrightarrow.
+
 The notations for logical equivalence and **biconditional** ($P↔Q$ or $𝑃⟺𝑄$) can sometimes look similar, but they have different meanings, and they are not always interchangeable.
 $P≡Q$ means $𝑃$ and $𝑄$  are logically equivalent in all possible cases.
 $𝑃↔𝑄$ is just a statement that says $𝑃$ and $𝑄$ happen to be true or false together in a specific context - it can be true or false, depending on $𝑃$ and $𝑄$.          `,

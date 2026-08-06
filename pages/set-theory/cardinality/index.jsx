@@ -356,7 +356,7 @@ const sectionsContent = {
   obj1: {
     title: `Definition of Cardinality`,
     content: `
-The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$.
+The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$. This bar notation is one of several [cardinality symbols](!/math-symbols/set-theory) in standard use.
 
 For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, then $|A| = 3$. If $B = \\{1, 2, 3, 4, 5\\}$, then $|B| = 5$.
 

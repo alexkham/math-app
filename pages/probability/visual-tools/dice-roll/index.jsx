@@ -11,6 +11,13 @@ import DiceRollSimulator from '@/app/components/probability/dice-roll/DiceRollSi
 import DiceSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/DiceSampleSpaceVisualizer'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  hubDescription: 'Roll up to six dice and watch frequency distributions converge to theoretical patterns, or explore the complete sample space and filter by conditions like sum equals 7 to compute exact probabilities.',
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="24" width="42" height="42" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/><circle cx="31" cy="35" r="3.4" fill="#1565c0"/><circle cx="51" cy="35" r="3.4" fill="#1565c0"/><circle cx="41" cy="45" r="3.4" fill="#1565c0"/><circle cx="31" cy="55" r="3.4" fill="#1565c0"/><circle cx="51" cy="55" r="3.4" fill="#1565c0"/><rect x="70" y="30" width="32" height="32" rx="6" fill="#b8d4f0" stroke="#1565c0" stroke-width="2" transform="rotate(12 86 46)"/><circle cx="86" cy="46" r="3" fill="#1565c0" transform="rotate(12 86 46)"/></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

@@ -454,7 +454,7 @@ $$(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k.$$
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
-The expansion has exactly $n+1$ terms, indexed by $k$ from $0$ through $n$. The coefficients $\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}$ are precisely the entries of row $n$ of Pascal's triangle — so the row of the triangle reads as the row of coefficients in the expansion.
+The expansion has exactly $n+1$ terms, indexed by $k$ from $0$ through $n$. The coefficients $\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}$ are precisely the entries of row $n$ of Pascal's triangle — so the row of the triangle reads as the row of coefficients in the expansion. The $\\sum$ summation sign and the rest of the theorem's notation are collected among the [combinatorics symbols](!/math-symbols/combinatorics).
 
 ## Combinatorial Proof
 

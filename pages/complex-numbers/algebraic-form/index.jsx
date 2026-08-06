@@ -274,7 +274,7 @@ export async function getStaticProps(){
 
 // Both $Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$. They accept a complex number as input and return a real number as output. No complex number emerges from either function — even when applied to the most elaborate complex expression, the result always belongs to the real number line. This property makes $Re$ and $Im$ essential tools for decomposing complex problems into real-valued components that standard techniques can address.
 
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Nunbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
 
 // `,
 //   after: ``,
@@ -545,7 +545,7 @@ Negative imaginary parts require careful handling. Consider $z = 5 - 3i$. Writin
 
 Both $Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$. They accept a complex number as input and return a real number as output. No complex number emerges from either function — even when applied to the most elaborate complex expression, the result always belongs to the real number line. This property makes $Re$ and $Im$ essential tools for decomposing complex problems into real-valued components that standard techniques can address.
 
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Nunbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
 
 `,
   after: ``,

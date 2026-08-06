@@ -14,6 +14,13 @@ import { buildToolIndexData } from '../../../app/components/page-components/visu
 
 export async function getStaticProps(){
 
+  // Surfaced on the /combinatorics hub via buildSectionData extraction.
+  // First-match-wins: placed before the placeholder seoData below.
+  const hubMeta = {
+    name: 'Combinatorics Visual Tools',
+    hubDescription: 'Interactive explorers for every standard counting scenario: full, partial, circular and repetition permutations, combinations, partitions, distributions, weak and strong compositions, and the Pascal triangle — each one animated and adjustable so the formula and the arrangement it counts stay visibly connected.',
+  }
+
   const keyWords=['','','','','']
 
   // •

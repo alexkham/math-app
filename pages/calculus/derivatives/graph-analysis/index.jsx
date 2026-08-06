@@ -62,7 +62,10 @@ const keyWords = [
 </table>
 `
 
-  // obj7 — comparison: 4 sign combinations of f' and f''
+  // obj7 — comparison: 4 sign combinations of f-prime and f-double-prime
+  // (no apostrophes in comments in this file: hub-card extraction stashes
+  // string literals before stripping comments, and a stray apostrophe
+  // mis-pairs every quote after it)
   const obj7Table = `
 <table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>

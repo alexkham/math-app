@@ -10,6 +10,13 @@ import Head from 'next/head'
 import VarianceVisualizer from '@/app/components/probability/variance/VarianceVisualizer'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  hubDescription: 'Drag data points and watch variance update in real time as deviations from the mean become visually tangible through interactive bars and step-by-step calculations.',
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="70" x2="102" y2="70" stroke="#1565c0" stroke-width="2"/><line x1="18" y1="40" x2="102" y2="40" stroke="#3498db" stroke-width="1.5" stroke-dasharray="5 4"/><rect x="26" y="52" width="10" height="18" fill="#b8d4f0" stroke="#1565c0" stroke-width="1.5"/><rect x="42" y="24" width="10" height="46" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/><rect x="58" y="44" width="10" height="26" fill="#b8d4f0" stroke="#1565c0" stroke-width="1.5"/><rect x="74" y="18" width="10" height="52" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/><rect x="90" y="58" width="10" height="12" fill="#b8d4f0" stroke="#1565c0" stroke-width="1.5"/></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

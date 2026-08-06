@@ -261,6 +261,13 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  hubDescription: 'Visualize the Markov and Chebyshev inequalities across nine distributions: adjust thresholds, compare actual tail probabilities to the theoretical bounds, and learn when each bound is tight.',
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="68" x2="104" y2="68" stroke="#1565c0" stroke-width="2"/><path d="M 20 68 Q 60 2 100 68" stroke="#3498db" stroke-width="2.5" fill="none"/><path d="M 82 68 Q 91 45 100 68 Z" fill="#3498db" fill-opacity="0.4" stroke="none"/><line x1="82" y1="20" x2="82" y2="68" stroke="#1565c0" stroke-width="2" stroke-dasharray="5 4"/><text x="90" y="16" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#1565c0" stroke="none">a</text></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

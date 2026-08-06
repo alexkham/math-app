@@ -350,6 +350,7 @@ function clonePreset(key) {
 
 export default function FunctionPiecewise({
   initialPreset = 'absvalue',
+  explanations = {},
   visualizerProps = {},
   infoPanelProps = {},
   darkMode = false,
@@ -360,6 +361,8 @@ export default function FunctionPiecewise({
   maxWidth = '80vw',
 }) {
   const [pieces, setPieces] = useState(() => clonePreset(initialPreset));
+  // Last-loaded preset key - drives the page-supplied "Preset" info tab.
+  const [presetKey, setPresetKey] = useState(initialPreset);
   const [highlightColor, setHighlightColor] = useState(defaultHighlightColor);
 
   const panelTones = useMemo(() => {
@@ -423,6 +426,7 @@ export default function FunctionPiecewise({
   };
   const loadPreset = (key) => {
     setPieces(clonePreset(key));
+    setPresetKey(key);
   };
 
   const [addExpr, setAddExpr] = useState('x');
@@ -462,10 +466,18 @@ export default function FunctionPiecewise({
     );
   }, [pieces, verdict]);
 
-  const infoTabs = useMemo(() => ([
-    { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
-    { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
-  ]), [explanationContent]);
+  const infoTabs = useMemo(() => {
+    const tabs = [
+      { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
+      { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
+    ];
+    // Per-preset explanation supplied by the page (canonical copy lives in
+    // getStaticProps of each page that renders this component).
+    if (explanations[presetKey] != null) {
+      tabs.push({ key: 'preset', label: 'Preset', order: 5, content: explanations[presetKey] });
+    }
+    return tabs;
+  }, [explanationContent, explanations, presetKey]);
 
   /* ---- Styling ---- */
   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';

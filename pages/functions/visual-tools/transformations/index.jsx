@@ -9,7 +9,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-tab explanations live in getStaticProps below (SSR/SEO-visible);
+// the component renders them as the info panel's "About" tab.
 import FunctionTransformations from '../../../../app/components/functions/transformations/FunctionsTransformations'
+import transformDiagrams from '../../../../app/components/functions/transformations/functionTransformationsDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -62,11 +66,11 @@ Switching base functions resets parameters but preserves the active tab, so you 
       title: `The Four Tabs and the Custom Tab`,
       content: `Five tabs sit below the plot, controlling which transformation you study:
 
-• **Vertical scale** — isolates $a$. Only the slider for $a$ appears; $k$, $b$, $h$ stay at their defaults
-• **Vertical shift** — isolates $k$
-• **Horizontal scale** — isolates $b$
-• **Horizontal shift** — isolates $h$
-• **Custom** — shows all four sliders at once for combined transformations
+• [Vertical scale](!#the-vertical-scale) — isolates $a$. Only the slider for $a$ appears; $k$, $b$, $h$ stay at their defaults
+• [Vertical shift](!#the-vertical-shift) — isolates $k$
+• [Horizontal scale](!#the-horizontal-scale) — isolates $b$
+• [Horizontal shift](!#the-horizontal-shift) — isolates $h$
+• [Custom](!#combining-all-four-transformations) — shows all four sliders at once for combined transformations
 
 When a single transformation has a non-default value, its tab badge shows that value in monospace. Switching tabs does not reset parameters — values you set in one tab persist when you move to another, so you can build up multiple transformations even from the single-parameter tabs.
 
@@ -183,11 +187,61 @@ The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide r
       link: '',
     },
 
-    obj11: { title:``, content:``, before:``, after:``, link:'' },
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
-    obj15: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `The Vertical Scale`,
+      content: `The parameter $a$ multiplies every output: $g(x) = a \\cdot f(x)$, stretching the curve away from the x-axis or squashing it toward it.`,
+      before: ``,
+      after: `The frozen $a = 2$ doubles every height of the parabola: same vertex, same axis crossings, twice the climb. Values between $0$ and $1$ flatten instead; negative values add a flip across the x-axis on top of the scaling.
+
+Two things never move under $a$: the roots (heights of zero stay zero) and the x-positions of every feature. Vertical scaling is a pure output operation — the curve's horizontal anatomy is untouchable.
+
+The animation mode makes the special values legible: watch the curve pass through the flatline at $a = 0$ and emerge inverted on the other side.`,
+      link: '',
+    },
+    obj12: {
+      title: `The Vertical Shift`,
+      content: `The parameter $k$ adds a constant to every output: $g(x) = f(x) + k$, sliding the whole curve up or down as a rigid body.`,
+      before: ``,
+      after: `The frozen $k = 3$ lifts the parabola's vertex from the origin to $(0, 3)$ — and every other point by exactly the same amount. Nothing about the shape changes: distances, slopes, and widths all survive.
+
+What does change is the curve's relationship to the x-axis: roots appear, merge, and vanish as the curve rises past it. Sliding $k$ on the parabola is watching the discriminant change sign in real time.
+
+Together with the [horizontal shift](!#the-horizontal-shift), this pair forms the rigid motions; the two scales are the shape-changers.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Horizontal Scale`,
+      content: `The parameter $b$ multiplies the input before the function sees it: $g(x) = f(bx)$ — and the effect runs opposite to intuition.`,
+      before: ``,
+      after: `The frozen $b = 2$ makes the parabola **narrower**, not wider: with the input doubled, the curve reaches each height at half the distance. Compression by $b$, not expansion — the "backwards" behavior examined in [Why Horizontal Transformations Are "Backwards"](!#why-horizontal-transformations-are-backwards).
+
+Fractional $b$ stretches; negative $b$ adds a y-axis flip. Heights are untouched — this is the exact mirror of the [vertical scale](!#the-vertical-scale), acting on the other axis.
+
+On the parabola, $f(2x) = 4x^2$ happens to equal a vertical scaling by $4$ — a coincidence of the quadratic worth testing against sine, where no such disguise exists.`,
+      link: '',
+    },
+    obj14: {
+      title: `The Horizontal Shift`,
+      content: `The parameter $h$ shifts inputs: $g(x) = f(x - h)$, sliding the curve along the x-axis — with the sign convention that trips everyone once.`,
+      before: ``,
+      after: `The frozen $h = 3$ moves the vertex to $x = 3$: *subtracting* $3$ inside the parentheses moves the curve to the *right*. The rule reads backwards until you see it from the input's side — the point that used to happen at $0$ now happens at $3$, because $3 - 3 = 0$.
+
+Like the [vertical shift](!#the-vertical-shift), this is a rigid motion: shape perfectly preserved, position changed. Every feature — vertex, roots, extrema — translates by exactly $h$.
+
+The badge convention in the tool keeps the sign honest: the chip shows $h = 3$, and the equation card writes $f(x - 3)$, letting you watch the notation and the geometry agree.`,
+      link: '',
+    },
+    obj15: {
+      title: `Combining All Four Transformations`,
+      content: `The Custom tab opens all four sliders at once, assembling the full form $g(x) = a \\cdot f(b(x - h)) + k$ — the template every transformed function in this course fits.`,
+      before: ``,
+      after: `The frozen combination $0.5 \\cdot f(1.5(x - 2)) + 1$ shows all four at work: widened by the vertical scale, narrowed by the horizontal one, and carried to a new vertex at $(2, 1)$ by the two shifts.
+
+Order matters inside the formula but not on the sliders: the expression applies $h$, then $b$, then $a$, then $k$ — input operations inside-out, output operations outside-in. The tool computes the composition correctly whatever order you drag in.
+
+Reading a transformed formula backwards into its four moves is the skill this tab drills — and it is precisely the skill needed for [tangent lines under transformation](!#the-four-transformations-mathematically), for graph sketching, and for every "describe the transformation" exam question ever set.`,
+      link: '',
+    },
   }
 
 
@@ -304,12 +358,49 @@ The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide r
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // two-curve scene + attached picture-reading panel, no link (own page).
+  const stateUnits = {
+    a: demoUnitFrame({ svg: transformDiagrams.a, caption: 'a = 2, frozen',
+      text: 'Every height doubled: same vertex, same roots, twice the climb. The gray original shows what the blue curve left behind.' }),
+    k: demoUnitFrame({ svg: transformDiagrams.k, caption: 'k = 3, frozen',
+      text: 'The whole parabola lifted rigidly by 3 &#8212; shape untouched, vertex now at (0, 3), roots gone above the axis.' }),
+    b: demoUnitFrame({ svg: transformDiagrams.b, caption: 'b = 2, frozen',
+      text: 'Input doubled means the curve narrows: each height reached at half the distance &#8212; the famous backwards behavior.' }),
+    h: demoUnitFrame({ svg: transformDiagrams.h, caption: 'h = 3, frozen',
+      text: 'Subtracting 3 inside the parentheses slides the curve right: the vertex now lives at x = 3.' }),
+    custom: demoUnitFrame({ svg: transformDiagrams.custom, caption: 'All four at once, frozen',
+      text: 'Widened by a = 0.5, narrowed by b = 1.5, carried to (2, 1) by the shifts &#8212; the full template in one picture.' }),
+  };
+
+  // Canonical per-tab explanations for the info panel's About tab
+  // (SSR/SEO-visible; keyed by the tool's tab keys).
+  const explanations = {
+    a:
+      '**Vertical scale** $g(x) = a \\cdot f(x)$ — a pure output operation: heights scale, roots and x-positions never move.\n\n' +
+      '[Learn more about the vertical scale](!#the-vertical-scale) · [All five tabs](!#the-four-tabs-and-the-custom-tab)',
+    k:
+      '**Vertical shift** $g(x) = f(x) + k$ — a rigid slide up or down: shape preserved, axis crossings changing as the curve passes the x-axis.\n\n' +
+      '[Learn more about the vertical shift](!#the-vertical-shift) · [All five tabs](!#the-four-tabs-and-the-custom-tab)',
+    b:
+      '**Horizontal scale** $g(x) = f(bx)$ — the backwards one: $b > 1$ compresses, fractions stretch, negatives flip across the y-axis.\n\n' +
+      '[Learn more about the horizontal scale](!#the-horizontal-scale) · [All five tabs](!#the-four-tabs-and-the-custom-tab)',
+    h:
+      '**Horizontal shift** $g(x) = f(x - h)$ — minus inside means motion right: the input that used to happen at 0 now happens at $h$.\n\n' +
+      '[Learn more about the horizontal shift](!#the-horizontal-shift) · [All five tabs](!#the-four-tabs-and-the-custom-tab)',
+    custom:
+      '**Custom** $g(x) = a \\cdot f(b(x - h)) + k$ — all four moves composed: input operations inside-out, output operations outside-in.\n\n' +
+      '[Learn more about combining transformations](!#combining-all-four-transformations) · [All five tabs](!#the-four-tabs-and-the-custom-tab)',
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      explanations,
+      stateUnits,
       seoData: {
         title: "Function Transformations Visualizer | Shift, Scale, Reflect",
         description: "Visualize the four affine transformations on ten base function families. Isolate vertical/horizontal shifts and scales or combine them, with live base + transformed plots.",
@@ -325,19 +416,26 @@ The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide r
 }
 
 
-export default function FunctionTransformationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function FunctionTransformationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    { id:'getting-started-with-the-visualizer', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
+    { id:'picking-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
+    { id:'the-four-tabs-and-the-custom-tab', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
+    { id:'manual-vs-auto-mode', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'reading-the-two-curves', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
+    { id:'the-applied-chip-strip', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+    { id:'the-side-info-panel', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+    { id:'the-four-transformations-mathematically', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
+    { id:'why-horizontal-transformations-are-backwards', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
+    { id:'the-vertical-scale', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content, unit('a'), sectionsContent.obj11.after] },
+    { id:'the-vertical-shift', title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('k'), sectionsContent.obj12.after] },
+    { id:'the-horizontal-scale', title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('b'), sectionsContent.obj13.after] },
+    { id:'the-horizontal-shift', title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('h'), sectionsContent.obj14.after] },
+    { id:'combining-all-four-transformations', title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('custom'), sectionsContent.obj15.after] },
+    { id:'related-concepts-and-tools', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -395,7 +493,7 @@ export default function FunctionTransformationsPage({seoData, sectionsContent, i
       <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Transformations of Functions</h1>
       <br/>
       <div style={{transform:'scale(1.1)'}}>
-      <FunctionTransformations/>
+      <FunctionTransformations explanations={explanations}/>
       </div>
       <br/>
       <SectionTableOfContents sections={genericSections}

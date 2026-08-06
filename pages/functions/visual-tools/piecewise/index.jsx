@@ -492,7 +492,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-preset explanations live in getStaticProps below (SSR/SEO-visible);
+// the component renders them as the info panel's "Preset" tab.
 import FunctionPiecewise from '../../../../app/components/functions/piecewise/FunctionPiecewise'
+import piecewiseDiagrams from '../../../../app/components/functions/piecewise/functionPiecewiseDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -677,15 +681,15 @@ For the full theory of limits and continuity, see the **continuity** page.`,
       title: `Common Piecewise Patterns`,
       content: `Several standard functions are defined piecewise even when their name suggests a single formula. The presets in this tool walk through the canonical examples:
 
-• **Absolute value** $|x|$ — two linear pieces meeting at the origin, $-x$ on the left and $x$ on the right. Continuous everywhere, not differentiable at $0$.
+• [Absolute value](!#the-absolute-value-preset) $|x|$ — two linear pieces meeting at the origin, $-x$ on the left and $x$ on the right. Continuous everywhere, not differentiable at $0$.
 
-• **Heaviside step** — constant $0$ (or $-1$) on the left of $0$ and constant $1$ on the right. The simplest jump discontinuity, used as a building block in signal analysis.
+• [Heaviside step](!#the-heaviside-step) — constant $0$ (or $-1$) on the left of $0$ and constant $1$ on the right. The simplest [jump discontinuity](!#the-jump-discontinuity), used as a building block in signal analysis.
 
-• **Sign function** — $-1$, $0$, $+1$ on three pieces, with the middle piece being a single-point closed interval at the origin.
+• [Sign function](!#the-sign-function) — $-1$, $0$, $+1$ on three pieces, with the middle piece being a single-point closed interval at the origin.
 
-• **Sawtooth** — linear pieces that reset at fixed intervals, producing a series of jumps.
+• [Sawtooth](!#the-sawtooth) — linear pieces that reset at fixed intervals, producing a series of jumps.
 
-• **Removable hole** — two pieces that agree on the limit at the seam but assign different values, isolating the removable case.`,
+• [Removable hole](!#the-removable-hole) — two pieces that agree on the limit at the seam but assign different values, isolating the removable case.`,
       before: ``,
       after: ``,
       link: '',
@@ -712,38 +716,69 @@ For the full theory of limits and continuity, see the **continuity** page.`,
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `The Absolute Value Preset`,
+      content: `The gallery's opening preset builds $|x|$ from two linear pieces: $-x$ on $[-5, 0)$ and $x$ on $[0, 5]$ — the standard first example of a piecewise definition.`,
       before: ``,
-      after: ``,
+      after: `The seam at $x = 0$ is where the [verdict panel](!#the-verdict-panel) earns its keep: the left piece approaches $0$, the right piece starts at $0$, and the value belongs to the right piece — left limit, right limit, and value all agree, so the verdict is **continuous**. A filled dot swallows the open circle at the joint.
+
+The result is a function smoother in definition than in geometry: perfectly continuous, yet with a corner where the slope snaps from $-1$ to $+1$. Continuity and differentiability part ways exactly here.
+
+Rebuilding a familiar function from pieces is the preset's real lesson: many "single" functions are piecewise underneath.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `The Heaviside Step`,
+      content: `The Heaviside preset is the minimal jump: $-1$ on $[-5, 0)$, then $1$ on $[0, 5]$ — one boundary, two constant pieces, and no way to bridge them.`,
       before: ``,
-      after: ``,
+      after: `At $x = 0$ the left limit is $-1$, the right limit (and value) is $1$: a **jump discontinuity**, flagged by the verdict panel with both one-sided limits spelled out. The open circle at $(0, -1)$ against the filled dot at $(0, 1)$ is the whole story in two markers.
+
+No repair is possible — redefining the value at one point cannot close a gap between two different limits. Contrast the [removable hole](!#the-removable-hole), where a one-point fix genuinely works.
+
+The step function is the atom of switching: signal processing, control theory, and probability all build on it.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `The Sign Function`,
+      content: `The sign preset needs three pieces, one of them extreme: $-1$ on $[-5, 0)$, the single point $\\{0\\}$ mapped to $0$, and $1$ on $(0, 5]$.`,
       before: ``,
-      after: ``,
+      after: `The middle piece is a **degenerate closed interval** — one point of domain, drawn as a lone filled dot at the origin between two open circles. The builder accepts it because a single-point interval $[0, 0]$ with both ends closed is a perfectly legal piece.
+
+The verdict is a double jump: left limit $-1$, right limit $1$, value $0$ — three different numbers meeting at one $x$. Neither one-sided limit matches the value, so this is a jump, not a removable point.
+
+The [Heaviside step](!#the-heaviside-step) is sign's two-piece sibling; sign adds the honest middle value that makes the function odd.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `The Sawtooth`,
+      content: `The sawtooth chains three parallel lines — $x + 2$, $x$, $x - 2$ — each resetting where the previous one leaves off, producing the repeating ramp of signal generators.`,
       before: ``,
-      after: ``,
+      after: `Every seam is the same event: the outgoing piece climbs to an open circle, the incoming piece restarts $2$ lower with a filled dot. Two jump discontinuities in one window, each reported separately in the [boundary report](!#reading-the-boundary-report).
+
+All three pieces share slope $1$ — the discontinuity is entirely in the values, not the direction. A sawtooth is a linear function that keeps getting interrupted.
+
+Periodic resets like this are how oscilloscopes sweep and how modular arithmetic looks when graphed — the fractional-part function $x - \\lfloor x \\rfloor$ is an infinite sawtooth.`,
       link: '',
     },
     obj15: {
-      title: ``,
-      content: ``,
+      title: `The Removable Hole`,
+      content: `The hole preset splits the line $y = x$ at $x = 1$ into $[-5, 1)$ and $(1, 5]$ — both pieces open at the seam, so the point $x = 1$ belongs to no piece at all.`,
       before: ``,
-      after: ``,
+      after: `Both one-sided limits equal $1$; only the value is missing. The verdict panel classifies the seam as a **gap** — the function is simply undefined there — and the plot shows the cleanest possible puncture: one open circle on an otherwise unbroken line.
+
+The fix is one click: close either endpoint and the hole fills, the verdict flipping to continuous. That repairability is what "removable" means — and precisely what the [jump](!#the-jump-discontinuity) lacks, where no single value can reconcile two different limits.
+
+Removable singularities are the piecewise picture of the rational-function situation $\\frac{(x-1)(x+2)}{x-1}$: identical to a simpler function everywhere except one missing point.`,
+      link: '',
+    },
+    obj16: {
+      title: `The Jump Discontinuity`,
+      content: `The jump preset runs $x + 1$ into $x - 1$ at $x = 0$: two parallel lines offset by $2$, meeting at a seam they cannot share.`,
+      before: ``,
+      after: `Left limit $1$, right limit $-1$, value $-1$: the verdict reads **well-defined, with jumps** — every input has exactly one output, so this is a legitimate function; it just is not continuous. Well-definedness and continuity are separate certificates, and this preset holds one without the other.
+
+The jump height ($2$ here) is the gap between the one-sided limits — the quantity the [boundary report](!#reading-the-boundary-report) states as "left = 1, right = −1".
+
+Together with the [hole](!#the-removable-hole), this preset completes the discontinuity taxonomy the tool can produce: value missing (gap), value wrong (removable), limits disagreeing (jump).`,
       link: '',
     }
 
@@ -857,12 +892,54 @@ For the full theory of limits and continuity, see the **continuity** page.`,
   }
 
 
+  // Framed illustration units for the per-preset sections (Line 1 v5): frozen
+  // builder state + attached picture-reading panel, no link (own page).
+  const stateUnits = {
+    absvalue: demoUnitFrame({ svg: piecewiseDiagrams.absvalue, caption: 'Absolute value, frozen',
+      text: 'Two linear pieces meeting at the origin, the filled dot swallowing the open circle: left limit, right limit, and value agree.' }),
+    heaviside: demoUnitFrame({ svg: piecewiseDiagrams.heaviside, caption: 'Heaviside step, frozen',
+      text: 'One boundary, two constants: the open circle at (0, &#8722;1) against the filled dot at (0, 1) is the minimal jump.' }),
+    sign: demoUnitFrame({ svg: piecewiseDiagrams.sign, caption: 'Sign function, frozen',
+      text: 'Three pieces including a single-point interval: the lone filled dot at the origin between two open circles.' }),
+    sawtooth: demoUnitFrame({ svg: piecewiseDiagrams.sawtooth, caption: 'Sawtooth, frozen',
+      text: 'Three parallel ramps, each restarting two units lower &#8212; two identical jump events in one window.' }),
+    hole: demoUnitFrame({ svg: piecewiseDiagrams.hole, caption: 'Removable hole, frozen',
+      text: 'An unbroken line except for one open circle at x = 1: both limits agree, only the value is missing.' }),
+    jump: demoUnitFrame({ svg: piecewiseDiagrams.jump, caption: 'Jump discontinuity, frozen',
+      text: 'Two parallel lines offset by 2: the gap between the one-sided limits is the jump height itself.' }),
+  };
+
+  // Canonical per-preset explanations for the info panel's Preset tab
+  // (SSR/SEO-visible; the component has no built-in per-preset texts).
+  const explanations = {
+    absvalue:
+      '**Absolute value** — two linear pieces, $-x$ then $x$, meeting continuously at the origin: a corner, but no break.\n\n' +
+      '[Learn more about this preset](!#the-absolute-value-preset) · [All patterns](!#common-piecewise-patterns)',
+    heaviside:
+      '**Heaviside step** — the minimal jump: constant $-1$, then constant $1$, with no way to bridge the boundary.\n\n' +
+      '[Learn more about this preset](!#the-heaviside-step) · [All patterns](!#common-piecewise-patterns)',
+    sign:
+      '**Sign function** — three pieces including a legal single-point interval $[0,0]$: left limit $-1$, value $0$, right limit $1$.\n\n' +
+      '[Learn more about this preset](!#the-sign-function) · [All patterns](!#common-piecewise-patterns)',
+    sawtooth:
+      '**Sawtooth** — parallel ramps resetting at fixed seams: all the discontinuity is in the values, none in the slope.\n\n' +
+      '[Learn more about this preset](!#the-sawtooth) · [All patterns](!#common-piecewise-patterns)',
+    hole:
+      '**Removable hole** — both one-sided limits agree at $x = 1$; only the value is missing. One closed endpoint repairs it.\n\n' +
+      '[Learn more about this preset](!#the-removable-hole) · [All patterns](!#common-piecewise-patterns)',
+    jump:
+      '**Jump discontinuity** — a well-defined function that is not continuous: the limits disagree by exactly the jump height.\n\n' +
+      '[Learn more about this preset](!#the-jump-discontinuity) · [All patterns](!#common-piecewise-patterns)',
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      explanations,
+      stateUnits,
       seoData: {
         title: "Piecewise Function Builder & Visualizer | Learn Math Class",
         description: "Build piecewise functions with custom intervals and endpoints. Visualize continuity, detect jumps, gaps, and overlaps with real-time boundary analysis.",
@@ -876,139 +953,29 @@ For the full theory of limits and continuity, see the **continuity** page.`,
   }
 }
 
-export default function PiecewiseFunctionBuilder({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PiecewiseFunctionBuilder({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
+
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    { id:'key-terms', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
+    { id:'getting-started', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
+    { id:'editing-individual-pieces', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
+    { id:'adding-new-pieces', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
+    { id:'open-vs-closed-endpoints', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'the-verdict-panel', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
+    { id:'reading-the-boundary-report', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+    { id:'what-is-a-piecewise-function', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+    { id:'continuity-at-a-boundary', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
+    { id:'common-piecewise-patterns', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
+    { id:'the-absolute-value-preset', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content, unit('absvalue'), sectionsContent.obj11.after] },
+    { id:'the-heaviside-step', title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('heaviside'), sectionsContent.obj12.after] },
+    { id:'the-sign-function', title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('sign'), sectionsContent.obj13.after] },
+    { id:'the-sawtooth', title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('sawtooth'), sectionsContent.obj14.after] },
+    { id:'the-removable-hole', title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('hole'), sectionsContent.obj15.after] },
+    { id:'the-jump-discontinuity', title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content, unit('jump'), sectionsContent.obj16.after] },
+    { id:'related-concepts', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -1065,7 +1032,7 @@ export default function PiecewiseFunctionBuilder({seoData, sectionsContent, intr
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Piecewise Function Builder & Visualizer</h1>
       <br/>
-      <FunctionPiecewise/>
+      <FunctionPiecewise explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

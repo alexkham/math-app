@@ -307,7 +307,7 @@ export async function getStaticProps(){
 // When working with the [algebraic form](!/complex-numbers/algebraic-form), writing the inverse as $-a - bi$ often proves clearest. When working abstractly or with named variables, $-z$ is more compact. Context determines which notation communicates most effectively.
 
 
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Nunbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
 
 // `,
 //   before: ``,
@@ -623,7 +623,7 @@ In equations, the statement $z + w = 0$ implies $w = -z$. If two complex numbers
 When working with the [algebraic form](!/complex-numbers/algebraic-form), writing the inverse as $-a - bi$ often proves clearest. When working abstractly or with named variables, $-z$ is more compact. Context determines which notation communicates most effectively.
 
 
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Nunbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
 
 `,
   before: ``,

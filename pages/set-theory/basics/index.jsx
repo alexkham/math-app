@@ -163,6 +163,8 @@ You can think of descriptive set notation as comprising four main building block
 - **Proper superset (⊃)**
 
 These relations are discussed in the Relationships Between Sets section below.
+
+Every symbol on this page belongs to a larger family — the full chart of [set theory symbols](!/math-symbols/set-theory) lists each one together with the [LaTeX](!/latex) code that produces it, and the interactive [mathematical keyboard](!/keyboard) lets you type the symbols directly, no codes required.
     `,
     before: ``,
     after: ``,

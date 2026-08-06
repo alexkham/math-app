@@ -1005,8 +1005,12 @@ import Image from 'next/image';
 import { processContent } from '@/app/utils/contentProcessor';
 import { getTheme } from './sectionFrontPageThemes';
 import MindMapHero from './MindMapHero';
+import { getAnchorScrollOffset, useNavbarHeight, TOPIC_STRIP_ID } from './scrollOffset';
 
-const NAVBAR_HEIGHT = 55;
+// SSR fallback only — live layout and anchor scrolling measure the real
+// navbar/strip heights via ./scrollOffset; both vary with viewport and
+// menu state. 60 matches the height MyNavbar3 declares.
+const NAVBAR_HEIGHT = 60;
 // Height of the sticky TopicStrip — anchor scrolls must clear it too,
 // or targets land hidden behind the strip. The strip can wrap to two
 // rows on wide sections, hence the generous value.
@@ -1337,7 +1341,7 @@ const SectionNav = ({ sections, currentIndex }) => {
     onMouseEnter: (e) => Object.assign(e.target.style, { borderColor: t.buttonBg, color: t.buttonBgHover, background: t.stripActiveBg }),
     onMouseLeave: (e) => Object.assign(e.target.style, { borderColor: '#e0e0e0', color: t.textSecondary, background: 'none' }),
   };
-  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 10, behavior: 'smooth' }); };
+  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - getAnchorScrollOffset(10), behavior: 'smooth' }); };
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', marginTop: 10, borderTop: '1px solid #ebebeb' }}>
       {hasPrev ? <button style={btn} {...hover} onClick={() => scrollTo(sections[currentIndex - 1].id)}>&larr; Prev: {sections[currentIndex - 1].title}</button> : <span />}
@@ -1876,11 +1880,12 @@ const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle, sid
     document.addEventListener('click', handler);
     return () => document.removeEventListener('click', handler);
   }, [open, onToggle]);
-  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 10, behavior: 'smooth' }); onToggle(false); };
+  const navH = useNavbarHeight();
+  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - getAnchorScrollOffset(10), behavior: 'smooth' }); onToggle(false); };
   const heading = { fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.2, color: 'rgba(255,255,255,0.3)', padding: '12px 20px 8px' };
 
   return (
-    <aside ref={ref} style={{ position: 'fixed', left: 0, top: NAVBAR_HEIGHT, width: open ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED, height: `calc(100vh - ${NAVBAR_HEIGHT}px)`, background: t.sidebarBg, zIndex: 90, display: 'flex', flexDirection: 'column', transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1)', overflow: 'hidden', boxShadow: open ? '4px 0 24px rgba(0,0,0,0.15)' : 'none' }}>
+    <aside ref={ref} style={{ position: 'fixed', left: 0, top: navH, width: open ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED, height: `calc(100vh - ${navH}px)`, background: t.sidebarBg, zIndex: 90, display: 'flex', flexDirection: 'column', transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1)', overflow: 'hidden', boxShadow: open ? '4px 0 24px rgba(0,0,0,0.15)' : 'none' }}>
       <style dangerouslySetInnerHTML={{ __html: `.sfp-sidebar-nav::-webkit-scrollbar{display:none}.markdown-link{color:#2563eb;text-decoration:none;font-weight:600}` }} />
       <button style={{ width: '100%', height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', flexShrink: 0, borderBottom: '1px solid rgba(255,255,255,0.08)' }}
         onClick={() => onToggle(!open)} aria-label="Toggle sidebar"
@@ -1932,9 +1937,10 @@ const StripLink = ({ id, icon, label, onClick }) => {
 };
 
 const TopicStrip = ({ sections }) => {
-  const scrollTo = (e, id) => { e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 10, behavior: 'smooth' }); };
+  const navH = useNavbarHeight();
+  const scrollTo = (e, id) => { e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - getAnchorScrollOffset(10), behavior: 'smooth' }); };
   return (
-    <nav style={{ background: '#fff', borderBottom: '1px solid #e0e0e0', padding: '0 48px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 0, position: 'sticky', top: NAVBAR_HEIGHT, zIndex: 50, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+    <nav id={TOPIC_STRIP_ID} style={{ background: '#fff', borderBottom: '1px solid #e0e0e0', padding: '0 48px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 0, position: 'sticky', top: navH, zIndex: 50, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
       {sections.map((sec) => <StripLink key={sec.id} id={sec.id} icon={sec.navIcon} label={sec.title} onClick={scrollTo} />)}
     </nav>
   );
@@ -1956,6 +1962,7 @@ const SectionFrontPage = ({
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const t = getTheme(theme);
+  const navH = useNavbarHeight();
 
   const subtopics = useMemo(() => {
     const all = [];
@@ -1973,7 +1980,7 @@ const SectionFrontPage = ({
   return (
     <ThemeContext.Provider value={t}>
       <Sidebar sections={sections} subtopics={subtopics} brandName={meta.title} brandSub="Learn Math Class" open={sidebarOpen} onToggle={setSidebarOpen} />
-      <div style={{ marginLeft: contentMargin, marginRight: rightOffset, marginTop: NAVBAR_HEIGHT, minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`, transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)' }}>
+      <div style={{ marginLeft: contentMargin, marginRight: rightOffset, marginTop: navH, minHeight: `calc(100vh - ${navH}px)`, transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)' }}>
         <MindMapHero
           theme={theme}
           meta={meta}

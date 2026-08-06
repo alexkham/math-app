@@ -487,7 +487,7 @@ The power set transforms subset relationships into membership relationships: $B 
   obj6: {
     title: `Summary: Subset and Superset Notation`,
     content: `
-Four containment symbols cover every subset/superset relationship encountered above. The capstone reference card below collects all four — with how each is read, what it means, and a representative example — so the right notation is always one glance away.
+Four [containment symbols](!/math-symbols/set-theory) cover every subset/superset relationship encountered above. The capstone reference card below collects all four — with how each is read, what it means, and a representative example — so the right notation is always one glance away.
     `,
     before: ``,
     after: ``,

@@ -675,7 +675,9 @@ Each ratio captures a different geometric relationship. Sine measures how much o
 
 Because the hypotenuse is always the longest side of a right triangle, both $\\sin(\\theta)$ and $\\cos(\\theta)$ are always between 0 and 1 for acute angles. Tangent has no such restriction — it can take any positive value, approaching infinity as $\\theta$ nears $90°$.
 
-A fundamental observation: these ratios do not depend on the size of the triangle. If two right triangles share the same acute angle $\\theta$, they are similar, and all corresponding side ratios are equal. A right triangle with legs 3 and 4 and hypotenuse 5 gives $\\sin(\\theta) = \\frac{3}{5}$ for the angle opposite the side of length 3 — and any similar triangle, no matter how large or small, produces the same value. The trigonometric functions are properties of the angle alone.`,
+A fundamental observation: these ratios do not depend on the size of the triangle. If two right triangles share the same acute angle $\\theta$, they are similar, and all corresponding side ratios are equal. A right triangle with legs 3 and 4 and hypotenuse 5 gives $\\sin(\\theta) = \\frac{3}{5}$ for the angle opposite the side of length 3 — and any similar triangle, no matter how large or small, produces the same value. The trigonometric functions are properties of the angle alone.
+
+The function names themselves are standardized abbreviations — sin, cos, tan and their companions are catalogued among the [trigonometry symbols](!/math-symbols/trigonometry) together with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
     before: ``,
     after: ``,
     link: ``,

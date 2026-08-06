@@ -286,6 +286,9 @@ export default function PropositionalLogicLawsPage({ seoData, config, logicLawsD
             />
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Basic Propositional Logic Laws</h1>
+    <p style={{textAlign:'center', maxWidth:'820px', margin:'0 auto 6px', fontFamily:'Arial, sans-serif', fontSize:'15px', color:'#06357a'}}>
+      Every law below is written with the standard connectives — ∧, ∨, ¬, →, ↔, ⊕, ≡, ⊢. Each symbol is catalogued with its LaTeX code in the <a href="/math-symbols/math-logic">logic symbols reference</a>, and the <a href="/keyboard">mathematical keyboard</a> lets you type them directly.
+    </p>
     <div style={{transform:'scale(0.87)',marginTop:'-100px'}}>
     <DataWrapper2 data={logicLawsData}
     config={config}/>

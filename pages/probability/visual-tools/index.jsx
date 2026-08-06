@@ -12,6 +12,12 @@ import ToolsPageHeader from '@/app/components/cards/ToolsPageHeader'
 
 export async function getStaticProps(){
 
+  // Surfaced on the /probability hub via buildSectionData extraction.
+  const hubMeta = {
+    name: 'Probability Visual Tools',
+    hubDescription: 'Visual probability tools transform abstract mathematical concepts into interactive experiences that build intuitive understanding. By manipulating parameters and observing real-time changes in distributions, sample spaces, and probability outcomes, you develop the kind of deep, geometric intuition that makes probability theory truly click — moving beyond memorized formulas to genuine comprehension of how randomness behaves.',
+  }
+
   const keyWords = [
     'probability visualization tools',
     'interactive probability tools',

@@ -6,7 +6,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-family explanations live in getStaticProps below (SSR/SEO-visible);
+// the component renders them as the info panel's "Family" tab.
 import TangentLine from '../../../../app/components/functions/tangent/TangentLine'
+import tangentDiagrams from '../../../../app/components/functions/tangent/tangentLineDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 export async function getStaticProps(){
 
@@ -46,10 +50,10 @@ The page launches with the quadratic family and $x_0 = 1$. Drag the $x_0$ slider
       title: `Picking a Base Function`,
       content: `The picker on the left lists ten base functions, with sine and cosine grouped under "Trigonometric". Each entry shows a small shape glyph and the family name:
 
-• Polynomial: **Identity** ($x$), **Linear (2x)**, **Quadratic** ($x^2$), **Cubic** ($x^3$)
-• Algebraic: **Reciprocal** ($1/x$), **Square root** ($\\sqrt{x}$), **Absolute** ($|x|$)
-• Transcendental: **Exponential** ($e^x$), **Logarithmic** ($\\ln x$)
-• Trigonometric: **Sine**, **Cosine**
+• Polynomial: [Identity](!#tangent-to-the-identity) ($x$), [Linear (2x)](!#tangent-to-the-scaled-linear), [Quadratic](!#tangent-to-the-quadratic) ($x^2$), [Cubic](!#tangent-to-the-cubic) ($x^3$)
+• Algebraic: [Reciprocal](!#tangent-to-the-reciprocal) ($1/x$), [Square root](!#tangent-to-the-square-root) ($\\sqrt{x}$), [Absolute](!#tangent-to-the-absolute-value) ($|x|$)
+• Transcendental: [Exponential](!#tangent-to-the-exponential) ($e^x$), [Logarithmic](!#tangent-to-the-logarithm) ($\\ln x$)
+• Trigonometric: [Sine](!#tangent-to-sine), [Cosine](!#tangent-to-cosine)
 
 Click any entry to switch. The transformation parameters $a$, $k$, $b$, $h$ reset to defaults and $x_0$ returns to its default value, so you always start each family from a clean slate. The picker covers the most pedagogically important functions for studying derivatives — including deliberately tricky ones (absolute value's corner, square root's vertical tangent) that demonstrate when the tangent fails to exist.`,
       before: ``,
@@ -187,11 +191,121 @@ In all three cases the derivative does not exist at the affected point. Sliding 
       link: '',
     },
 
-    obj11: { title:``, content:``, before:``, after:``, link:'' },
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
-    obj15: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `Tangent to the Identity`,
+      content: `The line $y = x$ is its own tangent everywhere: slope $1$ at every point, so the tangent construction returns the function itself.`,
+      before: ``,
+      after: `The frozen scene dashes the amber tangent so the coincidence stays visible — it lies exactly on the blue line, whatever $x_0$ you drag to. A constant derivative means one tangent serves all points.
+
+Self-tangency is the degenerate case that calibrates all the others: the tangent line is the *best linear approximation*, and a line's best linear approximation is itself, error zero everywhere.
+
+The [scaled linear function](!#tangent-to-the-scaled-linear) repeats the story at slope $2$; the first genuinely moving tangent belongs to the [quadratic](!#tangent-to-the-quadratic).`,
+      link: '',
+    },
+    obj12: {
+      title: `Tangent to the Scaled Linear`,
+      content: `The line $f(x) = 2x$ has derivative $2$ everywhere — a constant slope read directly off the function, no limit needed.`,
+      before: ``,
+      after: `As with the [identity](!#tangent-to-the-identity), the tangent coincides with the curve at every point; the dashed amber overlay is the only way to see it at all. Drag $x_0$ and nothing about the line changes — only the marked point slides.
+
+The pair of line families anchors the derivative scale: slope $1$ and slope $2$, the two reference speeds against which every curved tangent below can be compared.`,
+      link: '',
+    },
+    obj13: {
+      title: `Tangent to the Quadratic`,
+      content: `The parabola is where the tangent starts to move: $f'(x) = 2x$, so the slope at the frozen $x_0 = 1.5$ is exactly $3$.`,
+      before: ``,
+      after: `Drag the point and watch the slope track twice its position: negative on the left arm, zero at the vertex, positive on the right. The vertex is the tangent's resting place — the horizontal tangent that marks every smooth extremum.
+
+The parabola also keeps a geometric secret: the tangent at $x_0$ crosses the x-axis exactly at $x_0/2$, halfway to the origin — a fact worth verifying with the draggable point.
+
+The tangent equation card assembles $y = f(x_0) + f'(x_0)(x - x_0)$ live; the quadratic is the cleanest place to watch each ingredient move.`,
+      link: '',
+    },
+    obj14: {
+      title: `Tangent to the Cubic`,
+      content: `The cubic's derivative $3x^2$ is never negative — every tangent points weakly uphill, even through the flat moment at the origin.`,
+      before: ``,
+      after: `The frozen $x_0 = 1$ gives slope $3$. Drag toward zero and the tangent flattens into the horizontal — but unlike the parabola's vertex, this is **not** an extremum: the curve pauses and continues upward. A horizontal tangent marks a critical point; only the surrounding slopes decide what kind.
+
+That distinction — extremum versus inflection with zero slope — is the classic first-derivative-test lesson, and the cubic is its canonical exhibit.
+
+Symmetric positions give equal slopes: $f'(-x_0) = f'(x_0)$, the derivative of an odd function being even.`,
+      link: '',
+    },
+    obj15: {
+      title: `Tangent to the Reciprocal`,
+      content: `Every tangent to $1/x$ points downhill: $f'(x) = -1/x^2$ is negative on both branches, steepening without bound near the wall at $x = 0$.`,
+      before: ``,
+      after: `At the frozen $x_0 = 1$ the slope is exactly $-1$, and the tangent $y = 2 - x$ encloses a triangle with the axes of area $2$ — remarkably, the *same* area for every choice of $x_0$, one of the reciprocal's classic invariants.
+
+Approach the singularity and the tangent tilts toward vertical while sliding off to infinity; there is no tangent *at* $x = 0$ because there is no point there at all — the domain hole, not a differentiability failure.`,
+      link: '',
+    },
+    obj16: {
+      title: `Tangent to the Exponential`,
+      content: `The exponential's defining property becomes visible geometry: $f'(x) = e^x = f(x)$, so the tangent's slope always equals the curve's height.`,
+      before: ``,
+      after: `At the frozen $x_0 = 1$: height $e$, slope $e$. Drag anywhere and the equality holds — the only function (up to scaling) whose steepness is its own value.
+
+A consequence worth checking with the equation card: every tangent to $e^x$ crosses the x-axis exactly at $x_0 - 1$, one unit to the left of the tangent point, at every position. The subtangent has constant length $1$.
+
+Its inverse partner the [logarithm](!#tangent-to-the-logarithm) flips the relationship: slope equal to the reciprocal of position.`,
+      link: '',
+    },
+    obj17: {
+      title: `Tangent to the Logarithm`,
+      content: `The logarithm's tangent flattens as it climbs: $f'(x) = 1/x$, steep against the wall, nearly horizontal far out.`,
+      before: ``,
+      after: `At the frozen $x_0 = 2$ the slope is $\\tfrac{1}{2}$. Drag toward zero and the tangent rears toward vertical as $1/x$ blows up — the graphical version of the logarithm's unbounded steepness at its domain edge.
+
+The mirror fact to the exponential's constant subtangent: every tangent to $\\ln(x)$ crosses the y-axis at $\\ln(x_0) - 1$, one unit below the tangent point's height.
+
+Only positive $x_0$ is available — the slider simply cannot cross into territory where the function does not exist.`,
+      link: '',
+    },
+    obj18: {
+      title: `Tangent to the Square Root`,
+      content: `The square root's tangents flatten with distance — $f'(x) = \\tfrac{1}{2\\sqrt{x}}$ — but the interesting drama is at the start of the curve.`,
+      before: ``,
+      after: `At the frozen $x_0 = 4$: height $2$, slope $\\tfrac{1}{4}$. Drag the point toward zero and the tangent tilts up and up, approaching **vertical** — infinite slope at the endpoint. The tangent at $x = 0$ exists geometrically (the y-axis itself) but not as a $y = mx + b$ equation, which is why the tool reports it as undefined.
+
+This is one of the two failure modes cataloged in [When the Tangent Fails to Exist](!#when-the-tangent-fails-to-exist): a vertical tangent — direction defined, slope not.
+
+Everywhere else the root behaves: half the reciprocal of its own height, the chain rule's first classic exercise.`,
+      link: '',
+    },
+    obj19: {
+      title: `Tangent to the Absolute Value`,
+      content: `Away from the corner, $|x|$ is just a line in disguise: slope $+1$ on the right arm, $-1$ on the left, the tangent coinciding with whichever arm holds the point.`,
+      before: ``,
+      after: `The frozen $x_0 = 2$ shows the coincidence — the dashed amber tangent lies along the right arm exactly, as on the [identity](!#tangent-to-the-identity). Drag across to negative territory and the tangent snaps to the other arm; slope jumps from $+1$ to $-1$ with nothing in between.
+
+At $x = 0$ itself there is no tangent at all: the left and right slopes disagree, so no single line fits. This is the **corner** failure mode — the second entry in [When the Tangent Fails to Exist](!#when-the-tangent-fails-to-exist), and the standard first example of continuity without differentiability.`,
+      link: '',
+    },
+    obj20: {
+      title: `Tangent to Sine`,
+      content: `Sine's tangents cycle with the wave itself: $f'(x) = \\cos(x)$, the slope at every point read off the *other* wave.`,
+      before: ``,
+      after: `The frozen $x_0 = 0$ shows the most celebrated tangent in trigonometry: slope $\\cos(0) = 1$, giving the line $y = x$ — the small-angle approximation $\\sin(x) \\approx x$ drawn as geometry.
+
+Drag to the crest at $\\pi/2$ and the tangent goes horizontal; every peak and trough of the wave is a resting point. Between them the slope oscillates through the full $[-1, 1]$ range, peaking exactly at the zero crossings.
+
+[Cosine](!#tangent-to-cosine) tells the same story a quarter period out of phase — with a sign flip in its derivative.`,
+      link: '',
+    },
+    obj21: {
+      title: `Tangent to Cosine`,
+      content: `Cosine's slopes are sine's values negated: $f'(x) = -\\sin(x)$ — downhill through the first half period, uphill through the second.`,
+      before: ``,
+      after: `The frozen $x_0 = \\pi/2$ catches cosine at its descent through zero: slope $-\\sin(\\pi/2) = -1$, the steepest the wave ever gets. At the crests ($x = 0$, $2\\pi$) the tangent rests horizontal.
+
+The derivative pair closes into a cycle — sine to cosine to negative sine to negative cosine and back — which the tangent point makes tactile: four drags of a quarter period each return the slope pattern to its start.
+
+Together with [sine](!#tangent-to-sine), this pair is the reason simple harmonic motion never escapes trigonometry.`,
+      link: '',
+    },
   }
 
 
@@ -309,12 +423,79 @@ In all three cases the derivative does not exist at the affected point. Sliding 
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // tangent scene + attached picture-reading panel, no link (own page).
+  const stateUnits = {
+    identity: demoUnitFrame({ svg: tangentDiagrams.identity, caption: 'y = x, tangent at x&#8320; = 2',
+      text: 'The dashed amber tangent lies exactly on the blue line: a line is its own best linear approximation, everywhere.' }),
+    linearScale: demoUnitFrame({ svg: tangentDiagrams.linearScale, caption: 'y = 2x, tangent at x&#8320; = 1',
+      text: 'Constant slope 2: one tangent serves every point, coinciding with the curve itself.' }),
+    quadratic: demoUnitFrame({ svg: tangentDiagrams.quadratic, caption: 'x&#178;, tangent at x&#8320; = 1.5',
+      text: 'Slope 2x&#8320; = 3 at the frozen point; drag left and the tangent tilts down through the horizontal rest at the vertex.' }),
+    cubic: demoUnitFrame({ svg: tangentDiagrams.cubic, caption: 'x&#179;, tangent at x&#8320; = 1',
+      text: 'Slope 3x&#8320;&#178; = 3 &#8212; and never negative anywhere: every cubic tangent points weakly uphill.' }),
+    reciprocal: demoUnitFrame({ svg: tangentDiagrams.reciprocal, caption: '1/x, tangent at x&#8320; = 1',
+      text: 'Slope &#8722;1 at (1, 1); the tangent and the axes enclose a triangle of area 2 &#8212; the same area from every tangent point.' }),
+    exponential: demoUnitFrame({ svg: tangentDiagrams.exponential, caption: 'e&#739;, tangent at x&#8320; = 1',
+      text: 'Height e, slope e: the tangent&#8217;s steepness equals the curve&#8217;s value at every point.' }),
+    logarithmic: demoUnitFrame({ svg: tangentDiagrams.logarithmic, caption: 'ln(x), tangent at x&#8320; = 2',
+      text: 'Slope 1/x&#8320; = &#189;: gentle out here, rearing toward vertical as the point approaches the wall at zero.' }),
+    sqrt: demoUnitFrame({ svg: tangentDiagrams.sqrt, caption: '&#8730;x, tangent at x&#8320; = 4',
+      text: 'Slope &#188; at (4, 2) &#8212; and an endpoint drama off-screen left: the tangent turns vertical at x = 0.' }),
+    absolute: demoUnitFrame({ svg: tangentDiagrams.absolute, caption: '|x|, tangent at x&#8320; = 2',
+      text: 'The dashed tangent coincides with the right arm; at the corner itself, no single line fits and the tangent fails.' }),
+    sine: demoUnitFrame({ svg: tangentDiagrams.sine, caption: 'sin(x), tangent at x&#8320; = 0',
+      text: 'Slope cos(0) = 1: the tangent is y = x &#8212; the small-angle approximation drawn as geometry.' }),
+    cosine: demoUnitFrame({ svg: tangentDiagrams.cosine, caption: 'cos(x), tangent at x&#8320; = &#960;/2',
+      text: 'Caught at its steepest descent: slope &#8722;sin(&#960;/2) = &#8722;1 as the wave crosses zero.' }),
+  };
+
+  // Canonical per-family explanations for the info panel's Family tab
+  // (SSR/SEO-visible; the component has no built-in per-family texts).
+  const explanations = {
+    identity:
+      '**Identity** $x$ — derivative $1$ everywhere: the tangent coincides with the line at every point.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-identity)',
+    linearScale:
+      '**Linear** $2x$ — derivative $2$: constant slope, one tangent for all points.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-scaled-linear)',
+    quadratic:
+      '**Quadratic** $x^2$ — derivative $2x$: slope proportional to position, horizontal rest at the vertex.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-quadratic)',
+    cubic:
+      '**Cubic** $x^3$ — derivative $3x^2 \\geq 0$: a horizontal tangent at the origin that is an inflection, not an extremum.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-cubic)',
+    reciprocal:
+      '**Reciprocal** $1/x$ — derivative $-1/x^2$: every tangent points downhill, and each cuts a triangle of constant area 2 with the axes.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-reciprocal)',
+    exponential:
+      '**Exponential** $e^x$ — its own derivative: slope equals height everywhere, subtangent of constant length 1.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-exponential)',
+    logarithmic:
+      '**Logarithm** $\\ln(x)$ — derivative $1/x$: unboundedly steep at the domain wall, ever flatter far out.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-logarithm)',
+    sqrt:
+      '**Square root** $\\sqrt{x}$ — derivative $1/(2\\sqrt{x})$: a vertical tangent at the endpoint $x = 0$, slope undefined there.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-square-root) · [When the tangent fails](!#when-the-tangent-fails-to-exist)',
+    absolute:
+      '**Absolute value** $|x|$ — slope $\\pm 1$ on the arms, no tangent at the corner: left and right slopes disagree.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-the-absolute-value) · [When the tangent fails](!#when-the-tangent-fails-to-exist)',
+    sine:
+      '**Sine** — derivative $\\cos(x)$: slope read off the other wave, with $y = x$ as the tangent at the origin.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-sine)',
+    cosine:
+      '**Cosine** — derivative $-\\sin(x)$: steepest at the zero crossings, resting at every crest and trough.\n\n' +
+      '[Learn more about this tangent](!#tangent-to-cosine)',
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      explanations,
+      stateUnits,
       seoData: {
         title: "Tangent Line Visualizer | Derivative & Slope at a Point",
         description: "Visualize the tangent line to any function at any x₀. Drag the tangent point, transform the function, and read both forms of the tangent equation in real time.",
@@ -330,19 +511,32 @@ In all three cases the derivative does not exist at the affected point. Sliding 
 }
 
 
-export default function TangentLineVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function TangentLineVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    { id:'getting-started-with-the-visualizer', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
+    { id:'picking-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
+    { id:'transforming-the-base-function', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
+    { id:'dragging-x0-the-tangent-point', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'reading-the-tangent-equation-card', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
+    { id:'the-applied-chip-strip-and-visibility-toggles', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+    { id:'the-info-panel', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+    { id:'what-the-tangent-line-is', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
+    { id:'when-the-tangent-fails-to-exist', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
+    { id:'tangent-to-the-identity', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content, unit('identity'), sectionsContent.obj11.after] },
+    { id:'tangent-to-the-scaled-linear', title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('linearScale'), sectionsContent.obj12.after] },
+    { id:'tangent-to-the-quadratic', title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('quadratic'), sectionsContent.obj13.after] },
+    { id:'tangent-to-the-cubic', title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content, unit('cubic'), sectionsContent.obj14.after] },
+    { id:'tangent-to-the-reciprocal', title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('reciprocal'), sectionsContent.obj15.after] },
+    { id:'tangent-to-the-exponential', title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content, unit('exponential'), sectionsContent.obj16.after] },
+    { id:'tangent-to-the-logarithm', title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content, unit('logarithmic'), sectionsContent.obj17.after] },
+    { id:'tangent-to-the-square-root', title:sectionsContent.obj18.title, link:sectionsContent.obj18.link, content:[sectionsContent.obj18.content, unit('sqrt'), sectionsContent.obj18.after] },
+    { id:'tangent-to-the-absolute-value', title:sectionsContent.obj19.title, link:sectionsContent.obj19.link, content:[sectionsContent.obj19.content, unit('absolute'), sectionsContent.obj19.after] },
+    { id:'tangent-to-sine', title:sectionsContent.obj20.title, link:sectionsContent.obj20.link, content:[sectionsContent.obj20.content, unit('sine'), sectionsContent.obj20.after] },
+    { id:'tangent-to-cosine', title:sectionsContent.obj21.title, link:sectionsContent.obj21.link, content:[sectionsContent.obj21.content, unit('cosine'), sectionsContent.obj21.after] },
+    { id:'related-concepts-and-tools', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -399,7 +593,7 @@ export default function TangentLineVisualizerPage({seoData, sectionsContent, int
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Tangent Line Visualizer</h1>
       <br/>
-      <TangentLine/>
+      <TangentLine explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

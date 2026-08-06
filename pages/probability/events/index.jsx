@@ -893,7 +893,7 @@ Events can take many forms depending on how outcomes are grouped together. Some 
 
 These forms reflect how we describe possibilities in real situations. Some events are narrow and precise; others are broad and flexible. All of them help us organize uncertainty in a structured way.
 
-The forms above can be lined up with what each one represents and the set notation that captures it.
+The forms above can be lined up with what each one represents and the [set notation](!/math-symbols/set-theory) that captures it.
 `,
       before:``,
       after:``,

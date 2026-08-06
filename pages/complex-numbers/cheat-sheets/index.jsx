@@ -8,6 +8,13 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
+
+// Surfaced on the /complex-numbers hub via buildSectionData extraction.
+const hubMeta = {
+  name: 'Complex Numbers Cheat Sheets',
+  hubDescription: 'Compact reference sheets for complex numbers: the key definitions, the three forms, operation rules, conjugate and modulus identities, and the De Moivre machinery — everything condensed for quick lookup during homework and exams.',
+}
+
 const keyWords = [
   "complex numbers cheat sheet",
   "complex numbers formulas",

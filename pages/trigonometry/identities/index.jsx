@@ -257,8 +257,8 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
     pythagorean:{
       title:'Pythagorean Identities',
       before:`Pythagorean Identities are based on the Pythagorean theorem applied to the [unit circle](!/visual-tools/unit-circle). 
-      They express fundamental relationships that always equal 1 or have the form "1 + something²". The core identity sin²(θ) + cos²(θ) = 1 comes directly from the unit circle where any point (cos θ, sin θ) satisfies x² + y² = 1. The other two identities are derived by dividing this fundamental relationship by cos² or sin². 
-      
+      They express fundamental relationships that always equal 1 or have the form "1 + something²". The core identity sin²(θ) + cos²(θ) = 1 comes directly from the unit circle where any point (cos θ, sin θ) satisfies x² + y² = 1. The other two identities are derived by dividing this fundamental relationship by cos² or sin². The squared-function shorthand — sin²(θ) means (sin(θ))² — is the same superscript convention whose −1 exception is untangled in the [inverse-function notation note](!/trigonometry/inverse-functions#6).
+
       `,
       after:`
       

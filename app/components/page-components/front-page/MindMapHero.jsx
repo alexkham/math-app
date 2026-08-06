@@ -1227,6 +1227,7 @@
 
 import React, { useMemo, useState } from 'react';
 import { getTheme } from './sectionFrontPageThemes';
+import { getAnchorScrollOffset } from './scrollOffset';
 
 const NAVBAR_HEIGHT = 55;
 const VIEWBOX_W = 1400;
@@ -1268,10 +1269,11 @@ const scrollToSection = (id) => {
   if (typeof document === 'undefined') return;
   const el = document.getElementById(id);
   if (!el) return;
-  // 110 clears the sticky TopicStrip below the navbar (matches
-  // STICKY_STRIP_H in SectionFrontPage).
+  // Navbar + sticky TopicStrip heights are measured live — both vary
+  // (menu states, strip wrapping), so hardcoded offsets land targets
+  // hidden behind the menu.
   window.scrollTo({
-    top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 110 - 10,
+    top: el.getBoundingClientRect().top + window.pageYOffset - getAnchorScrollOffset(10),
     behavior: 'smooth',
   });
 };

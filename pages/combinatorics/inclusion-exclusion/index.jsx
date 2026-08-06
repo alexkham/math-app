@@ -371,6 +371,8 @@ $$|A \\cup B| = |A| + |B| - |A \\cap B|.$$
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
+The [set symbols](!/math-symbols/set-theory) in the formula read naturally: $\\cup$ is union, $\\cap$ is intersection, and $|A|$ is the number of elements in $A$.
+
 Every element of $A \\cup B$ should be counted once on the left side. On the right, an element belonging to only $A$ is counted once (by $|A|$), an element belonging to only $B$ is counted once (by $|B|$), and an element in both is counted twice — once by $|A|$ and once by $|B|$. Subtracting $|A \\cap B|$ removes that extra count, restoring the correct total.
 
 ## Example

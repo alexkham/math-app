@@ -400,6 +400,7 @@ const VERDICT_META = {
 export default function FunctionSymmetry({
   initialFamily = 'quadratic',
   families = DEFAULT_FAMILIES,
+  explanations = {},
   visualizerProps = {},
   infoPanelProps = {},
   darkMode = false,
@@ -481,10 +482,18 @@ export default function FunctionSymmetry({
     );
   }, [fam, params, forwardEq, verdict, meta]);
 
-  const infoTabs = useMemo(() => ([
-    { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
-    { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
-  ]), [explanationContent]);
+  const infoTabs = useMemo(() => {
+    const tabs = [
+      { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
+      { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
+    ];
+    // Per-family explanation supplied by the page (canonical copy lives in
+    // getStaticProps of each page that renders this component).
+    if (explanations[current] != null) {
+      tabs.push({ key: 'family', label: 'Family', order: 5, content: explanations[current] });
+    }
+    return tabs;
+  }, [explanationContent, explanations, current]);
 
   /* ---- Styling ---- */
   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';

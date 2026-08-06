@@ -13,6 +13,13 @@ import { buildToolIndexData } from '../../../app/components/page-components/visu
 
 export async function getStaticProps(){
 
+  // Surfaced on the /functions hub via buildSectionData extraction.
+  // First-match-wins: placed before the placeholder seoData below.
+  const hubMeta = {
+    name: 'Functions Visual Tools',
+    hubDescription: 'Interactive explorers for how functions behave: domain and range, graphs and asymptotes, symmetry and reflections, transformations, composition, inverse functions, piecewise definitions, tangent lines, and function types — each tool animated and adjustable so the algebra and the picture stay connected.',
+  }
+
   const keyWords=['','','','','']
 
   // •

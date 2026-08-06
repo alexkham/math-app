@@ -2061,6 +2061,7 @@ export default function FunctionReflections({
   initialFamily = 'quadratic',
   initialReflection = 'xAxis',
   families = DEFAULT_BASES,
+  explanations = {},
   visualizerProps = {},
   infoPanelProps = {},
   extraTabs = [],
@@ -2234,16 +2235,19 @@ export default function FunctionReflections({
   }, [activeRef, params.cX]);
 
   const infoTabs = useMemo(() => {
+    // Per-reflection body supplied by the page when available (canonical copy
+    // lives in getStaticProps of each page); built-in refl.body is the fallback.
+    const generalBody = explanations[activeRef] != null ? explanations[activeRef] : refl.body;
     const content =
       `## ${refl.title}\n` +
       `\`${refl.formulaPattern}\`\n\n` +
-      `### General\n${refl.body}\n\n` +
+      `### General\n${generalBody}\n\n` +
       `### Applied to ${fam.name.toLowerCase()}\n${notesFor(activeRef, fam, params)}`;
     return [
       { key: 'explanation', label: 'Explanation', order: 0, content },
       ...extraTabs,
     ];
-  }, [activeRef, refl, fam, params, extraTabs]);
+  }, [activeRef, refl, fam, params, extraTabs, explanations]);
 
   /* ===== styles ===== */
   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';

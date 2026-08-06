@@ -17,6 +17,12 @@ import explanations2x4 from '@/app/components/probability/conditional-probabilit
 import explanations3x3 from '@/app/components/probability/conditional-probability-demo/3x3explanations'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="14" width="64" height="60" rx="3" fill="#fff" stroke="#1565c0" stroke-width="2"/><rect x="28" y="14" width="64" height="16" rx="3" fill="#b8d4f0" stroke="#1565c0" stroke-width="2"/><line x1="28" y1="52" x2="92" y2="52" stroke="#1565c0" stroke-width="1.5"/><line x1="49" y1="14" x2="49" y2="74" stroke="#1565c0" stroke-width="1.5"/><line x1="70" y1="14" x2="70" y2="74" stroke="#1565c0" stroke-width="1.5"/></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

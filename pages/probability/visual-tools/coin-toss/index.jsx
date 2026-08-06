@@ -12,6 +12,13 @@ import CoinFlipperSimulator from '@/app/components/probability/coin-toss/CoinTos
 import CoinSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/CoinSampleSpaceVisualizer'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  hubDescription: 'Flip a fair or biased coin thousands of times and watch the Law of Large Numbers pull results toward theory, or map the complete sample space for up to six flips and calculate the probability of any pattern you highlight.',
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="82" cy="30" r="16" fill="#b8d4f0" stroke="#1565c0" stroke-width="2"/><circle cx="52" cy="48" r="26" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/><circle cx="52" cy="48" r="19" fill="none" stroke="#3498db" stroke-width="1.5" stroke-dasharray="4 3"/><text x="52" y="56" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#1565c0" stroke="none">H</text><text x="82" y="36" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#1565c0" stroke="none">T</text></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

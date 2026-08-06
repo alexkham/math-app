@@ -11,6 +11,12 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="14" width="80" height="60" rx="4" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/><circle cx="52" cy="44" r="19" fill="#b8d4f0" fill-opacity="0.8" stroke="#1565c0" stroke-width="2"/><circle cx="72" cy="44" r="19" fill="#3498db" fill-opacity="0.35" stroke="#1565c0" stroke-width="2"/><path d="M 62 28.5 A 19 19 0 0 1 62 59.5 A 19 19 0 0 1 62 28.5 Z" fill="#1565c0" fill-opacity="0.55" stroke="none"/></svg>`,
+}
+
 export async function getStaticProps(){
 
   const keyWords = [

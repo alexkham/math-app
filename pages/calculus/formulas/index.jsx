@@ -11,7 +11,13 @@ import '../../../pages/pages.css'
 
 export async function getStaticProps() {
   const { default: calculusFormulasList } = await import('@/app/api/db/formulas/calculus/calculusFormulasList')
-  
+
+  // Surfaced on the /calculus hub via buildSectionData extraction.
+  const hubMeta = {
+    name: 'Calculus Formulas',
+    hubDescription: 'The Calculus Formulas page features fundamental laws and theorems across Limits, Derivatives, Integrals, and Integration Techniques. Each entry includes step-by-step explanations, key variables, worked examples, and real-world applications — from basic limit laws and differentiation rules to advanced integration methods and improper integrals.',
+  }
+
   const keyWords = [
     'calculus formulas',
     'derivative formulas',

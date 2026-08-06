@@ -1423,6 +1423,454 @@
           "status": "pending"
         }
       ]
+    },
+    "functions-piecewise": {
+      "slug": "piecewise",
+      "name": "Piecewise Function Builder",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/piecewise/index.jsx",
+      "diagramsModule": "app/components/functions/piecewise/functionPiecewiseDiagrams.js",
+      "diagramStates": [
+        "absvalue",
+        "heaviside",
+        "sign",
+        "sawtooth",
+        "hole",
+        "jump"
+      ],
+      "line1": {
+        "done": "2026-08-01",
+        "states": 6,
+        "sections": 17,
+        "anchors": 25,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "piecewise function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "jump discontinuity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "removable discontinuity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "continuity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-sided limit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "open interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "closed interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Heaviside step",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sign function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sawtooth",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-reflections": {
+      "slug": "reflections",
+      "name": "Function Reflections Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/reflections/index.jsx",
+      "diagramsModule": "app/components/functions/reflections/functionReflectionsDiagrams.js",
+      "diagramStates": [
+        "xAxis",
+        "yAxis",
+        "yEqX",
+        "yLine",
+        "xLine",
+        "absF",
+        "fAbs"
+      ],
+      "line1": {
+        "done": "2026-08-02",
+        "states": 7,
+        "sections": 18,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "axis of symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inverse function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "mirror line",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multivalued",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "fixed point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal line test",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-symmetry": {
+      "slug": "symmetry",
+      "name": "Function Symmetry Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/symmetry/index.jsx",
+      "diagramsModule": "app/components/functions/symmetry/functionSymmetryDiagrams.js",
+      "diagramStates": [
+        "quadratic",
+        "absolute",
+        "cosine",
+        "identity",
+        "cubic",
+        "sine",
+        "reciprocal",
+        "sqrt",
+        "exponential",
+        "logarithmic",
+        "quadraticPlusLinear"
+      ],
+      "line1": {
+        "done": "2026-08-05",
+        "states": 11,
+        "sections": 24,
+        "anchors": 55,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "y-axis symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "origin symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even-odd decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "hyperbolic functions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "point symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-tangent-line": {
+      "slug": "tangent-line",
+      "name": "Tangent Line Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/tangent-line/index.jsx",
+      "diagramsModule": "app/components/functions/tangent/tangentLineDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "quadratic",
+        "cubic",
+        "reciprocal",
+        "exponential",
+        "logarithmic",
+        "sqrt",
+        "absolute",
+        "sine",
+        "cosine"
+      ],
+      "line1": {
+        "done": "2026-08-05",
+        "states": 11,
+        "sections": 21,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "tangent line",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "derivative",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "slope",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "instantaneous rate of change",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "point-slope form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "critical point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "corner",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "differentiability",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "small-angle approximation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "chain rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-transformations": {
+      "slug": "transformations",
+      "name": "Function Transformations Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/transformations/index.jsx",
+      "diagramsModule": "app/components/functions/transformations/functionTransformationsDiagrams.js",
+      "diagramStates": [
+        "a",
+        "k",
+        "b",
+        "h",
+        "custom"
+      ],
+      "line1": {
+        "done": "2026-08-05",
+        "states": 5,
+        "sections": 15,
+        "anchors": 20,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "function transformation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical scale",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical shift",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal scale",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal shift",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "stretch",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "compression",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rigid motion",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parent function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "composition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
     }
   },
   "$stubTemplate": {

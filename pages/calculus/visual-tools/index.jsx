@@ -14,6 +14,13 @@ import { buildToolIndexData } from '../../../app/components/page-components/visu
 
 export async function getStaticProps(){
 
+  // Surfaced on the /calculus hub via buildSectionData extraction.
+  // First-match-wins: placed before the placeholder seoData below.
+  const hubMeta = {
+    name: 'Calculus Visual Tools',
+    hubDescription: 'Eleven interactive explorers for the core ideas of calculus: limits and continuity, the derivative and tangent lines, average rate of change, Riemann sums, the Fundamental Theorem, the Mean Value Theorem, inflection points, optimization, and the Newton method — each one animated, adjustable, and built to make the definitions visible.',
+  }
+
   const keyWords=['','','','','']
 
   // •

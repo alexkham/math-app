@@ -1965,6 +1965,138 @@
         "Operations on Sets"
       ],
       "relatedTerms": []
+    },
+    "complex-numbers/basics": {
+      "slug": "basics",
+      "name": "Complex Numbers Basics",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/basics/index.jsx",
+      "template": "titled",
+      "templateNote": "Created 2026-07-31 verbatim from the old /complex-numbers hub (hub migration prep). Numeric section ids '0'-'10'. Operation A related-terms mapping not yet performed.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "sectionTitles": [
+        "Key Terms",
+        "The Imaginary Unit (i) and Pure Imaginary Numbers",
+        "Algebraic Representation and the Complex Conjugate",
+        "Arithmetic Operations: Calculating in C",
+        "Geometric Representation: The Complex Plane",
+        "The Mathematical Theory: Complex Numbers as a Field",
+        "Trigonometric Representation: Radius and Argument",
+        "Exponential Form and Euler Formula",
+        "De Moivre Theorem and n-th Order Roots",
+        "Complex Equations and Polynomial Theory",
+        "The Three Forms at a Glance"
+      ],
+      "relatedTerms": []
+    },
+    "probability/basics": {
+      "slug": "basics",
+      "name": "Probability Basics",
+      "section": "probability",
+      "pagePath": "pages/probability/basics/index.jsx",
+      "template": "titled",
+      "templateNote": "Created 2026-07-31 from the old /probability hub (hub migration): full copy minus the visual-tools section. Mixed ids (named slugs + '0' for Key Terms). Operation A related-terms mapping not yet performed.",
+      "sections": [
+        "0",
+        "concepts",
+        "set",
+        "axioms",
+        "rules",
+        "combinatorial",
+        "distributions",
+        "conditional",
+        "function",
+        "symbols"
+      ],
+      "sectionTitles": [
+        "Key Terms",
+        "Main Concepts",
+        "Set Theory & Event Algebra",
+        "Basic Axioms of Probability",
+        "Rules of Probability",
+        "Combinatorial Probability",
+        "Random Variables and Distributions",
+        "Conditional Probability & Independence",
+        "Probability Function",
+        "Probability Symbols Reference"
+      ],
+      "relatedTerms": []
+    },
+    "combinatorics/basics": {
+      "slug": "basics",
+      "name": "Combinatorics Basics",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/basics/index.jsx",
+      "template": "titled",
+      "templateNote": "Created 2026-08-05 verbatim from the old /combinatorics hub (hub migration). Numeric section ids '1'-'7'. Operation A related-terms mapping not yet performed.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "sectionTitles": [
+        "Counting Principles",
+        "When Counts Overlap: Inclusion-Exclusion",
+        "Permutations and Combinations",
+        "Standard Scenarios",
+        "The Binomial Coefficient",
+        "The Binomial Theorem",
+        "Related Concepts"
+      ],
+      "relatedTerms": []
+    },
+    "functions/basics": {
+      "slug": "basics",
+      "name": "Functions Basics",
+      "section": "functions",
+      "pagePath": "pages/functions/basics/index.jsx",
+      "template": "titled",
+      "templateNote": "Created 2026-08-05 verbatim from the old /functions hub (hub migration). Numeric section ids '0'-'11'. Operation A related-terms mapping not yet performed.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "sectionTitles": [
+        "Key Terms",
+        "What is a Function",
+        "Functions vs Relations",
+        "The Vertical Line Test",
+        "Representing Functions",
+        "Function Notation",
+        "Evaluating Functions",
+        "Input, Output, and Variables",
+        "Determining Whether a Relationship is a Function",
+        "Special Values",
+        "Functions in Context",
+        "The Landscape of Function Topics"
+      ],
+      "relatedTerms": []
     }
   },
   "$stubTemplate": {

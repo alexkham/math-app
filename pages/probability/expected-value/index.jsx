@@ -1,3 +1,11 @@
+// Surfaced on the /probability hub via buildSectionData extraction.
+// Kept at the very top: first match wins, and commented-out code below
+// contains apostrophes that corrupt extraction further down the file.
+const hubMeta = {
+  name: 'Expected Value',
+  hubDescription: 'The expected value E(X) as a weighted average of outcomes: definition, computation for discrete and continuous random variables, linearity properties, and worked examples building from simple bets to full distributions.',
+}
+
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 // import IntroSection from '@/app/components/page-components/section/IntroContentSection'

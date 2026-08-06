@@ -836,7 +836,7 @@ To avoid ambiguity:
 - $(\\sin(x))^{-1}$ or $\\csc(x)$ = the reciprocal (returns a number)
 - $\\frac{1}{\\sin(x)}$ = the reciprocal, written unambiguously
 
-The $\\arcsin$ / $\\arccos$ / $\\arctan$ notation eliminates the confusion entirely and is preferred in any context where the $-1$ superscript might be misread. Many textbooks and scientific publications use the "arc" notation exclusively for this reason.
+The $\\arcsin$ / $\\arccos$ / $\\arctan$ notation eliminates the confusion entirely and is preferred in any context where the $-1$ superscript might be misread. Many textbooks and scientific publications use the "arc" notation exclusively for this reason. Both conventions, with the LaTeX code for each, are catalogued among the [trigonometry symbols](!/math-symbols/trigonometry).
 
 The two interpretations of the −1 superscript — inverse function vs. reciprocal — contrast cleanly in the side-by-side table below.`,
     before: ``,
