@@ -287,7 +287,9 @@ $3$ divides $12$. Or: $12$ is divisible by $3$. Or: $3$ is a divisor of $12$. Or
 
 Each phrasing shifts the emphasis — "divides" foregrounds $3$, "is divisible by" foregrounds $12$, "factor" and "multiple" name the roles — but the underlying fact is identical in every case: $12 = 3 \\cdot 4$ for an integer $4$.
 
-The negation uses a slashed bar: $5 \\nmid 12$ means $5$ does not divide $12$.`,
+The negation uses a slashed bar: $5 \\nmid 12$ means $5$ does not divide $12$.
+
+Both bars, along with every other symbol this subtree relies on, are catalogued among the [arithmetic symbols](!/math-symbols/arithmetic) with the [LaTeX](!/latex) code for each — and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
   before: ``,
   after: ``,
   link: '',

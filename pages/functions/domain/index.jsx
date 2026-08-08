@@ -268,7 +268,7 @@ The domain is distinct from the [range](!/functions/range), which describes outp
 
   obj2: {
     title: `Expressing Domain`,
-    content: `Domain can be expressed in several equivalent notations, each suited to different contexts.
+    content: `Domain can be expressed in several equivalent notations, each suited to different contexts — all of them collected among the [function symbols](!/math-symbols/functions).
 
 Interval notation uses parentheses and brackets to describe continuous sets. A parenthesis excludes the endpoint; a bracket includes it. The interval $[2, 5)$ contains all numbers from $2$ to $5$, including $2$ but excluding $5$. The interval $(-\\infty, 3]$ contains all numbers up to and including $3$. Infinity always takes a parenthesis because infinity is not a number that can be reached.
 

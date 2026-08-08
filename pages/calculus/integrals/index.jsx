@@ -318,7 +318,7 @@ $$\\int_a^b f(x)\\, dx$$
 
 The lower limit $a$ appears at the bottom of the integral sign, the upper limit $b$ at the top.
 
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
 
 `,
     before: ``,

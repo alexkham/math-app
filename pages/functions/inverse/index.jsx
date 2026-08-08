@@ -655,7 +655,7 @@ The superscript $-1$ in $f^{-1}$ is not an exponent indicating a power. It is a 
 
 When writing the reciprocal of a function, use $\\dfrac{1}{f(x)}$ or $(f(x))^{-1}$ with parentheses to clarify. Reserve $f^{-1}(x)$ exclusively for the inverse function.
 
-For trigonometric functions, the same notational hazard exists. The inverse sine is $\\sin^{-1}(x)$ or $\\arcsin(x)$ — not the reciprocal $\\csc(x) = 1/\\sin(x)$.
+For trigonometric functions, the [same notational hazard](!/trigonometry/inverse-functions#6) exists. The inverse sine is $\\sin^{-1}(x)$ or $\\arcsin(x)$ — not the reciprocal $\\csc(x) = 1/\\sin(x)$. Both conventions are catalogued among the [function symbols](!/math-symbols/functions).
 
 The table below shows both notations side by side and what each one computes for the same example function.`,
     before: ``,

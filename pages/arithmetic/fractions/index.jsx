@@ -945,7 +945,7 @@ const keyWords = [
     
   obj1: {
     title: `What Is a Fraction`,
-    content: `A fraction expresses a quantity as a ratio of two integers. The general form is $\\frac{a}{b}$, where $a$ is the numerator and $b$ is the denominator. The horizontal line separating them is called the fraction bar or vinculum.
+    content: `A fraction expresses a quantity as a ratio of two integers. The general form is $\\frac{a}{b}$, where $a$ is the numerator and $b$ is the denominator. The horizontal line separating them is called the fraction bar or vinculum. In running text the same fraction may be written with a slash, $a/b$ — both forms appear among the [arithmetic symbols](!/math-symbols/arithmetic).
 
 Every fraction represents a division operation. The expression $\\frac{a}{b}$ is equivalent to $a \\div b$, meaning the numerator divided by the denominator. For example, $\\frac{3}{4}$ equals $3 \\div 4 = 0.75$.
 

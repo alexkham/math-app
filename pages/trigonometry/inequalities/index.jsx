@@ -304,7 +304,7 @@ This shift from points to intervals is a consequence of continuity. Since sine i
 
 On a restricted interval like $[0, 2\\pi)$, the solution is a finite union of intervals. In general solution form, the pattern repeats: each interval shifts by $2\\pi$ (for sine, cosine, cosecant, secant) or $\\pi$ (for tangent, cotangent) to produce the complete solution set.
 
-Strict inequalities ($>$, $<$) produce open intervals at the boundary points — the boundary is not included. Non-strict inequalities ($\\geq$, $\\leq$) produce closed intervals at boundary points — the boundary is included (provided the function is defined there). At vertical asymptotes, the interval is always open, since the function is undefined.
+Strict inequalities ($>$, $<$) produce open intervals at the boundary points — the boundary is not included. Non-strict inequalities ($\\geq$, $\\leq$) produce closed intervals at boundary points — the boundary is included (provided the function is defined there). At vertical asymptotes, the interval is always open, since the function is undefined. Open and closed endpoints are exactly what the brackets and parentheses of [interval notation](!/math-symbols/functions) record.
 
 The two regimes — equation and inequality — contrast on every structural attribute that matters for how the solution is built and written, as the comparison below makes explicit.`,
     before: ``,

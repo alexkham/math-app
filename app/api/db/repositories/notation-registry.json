@@ -23,20 +23,25 @@
       "probability": "/math-symbols/probability",
       "complex-numbers": "/math-symbols/complex-numbers",
       "linear-algebra": "/math-symbols/linear-algebra",
-      "logic": "/math-symbols/math-logic"
+      "logic": "/math-symbols/math-logic",
+      "functions": "/math-symbols/functions"
     },
     "missing": {
       "algebra": {
         "proposed": "/math-symbols/algebra",
         "status": "to-evaluate"
-      },
+      }
+    },
+    "created": {
       "arithmetic": {
-        "proposed": "/math-symbols/arithmetic",
-        "status": "to-evaluate"
+        "page": "/math-symbols/arithmetic",
+        "created": "2026-08-08",
+        "note": "Built during the arithmetic link pass. Categories: basic_operations, comparison_symbols, divisibility, modular_arithmetic, fractions, percent_and_decimals. Explanations backlink into /arithmetic/divisibility#2, modulo#2, modulo#5, fractions, fractions/{comparing,mixed-numbers,dividing,complex}, divisibility/{gcd,lcm,factors}, properties. Not yet in other symbols pages' menuItems (its own menu lists all siblings incl. Functions) or the /math-symbols hub."
       },
       "functions": {
-        "proposed": "/math-symbols/functions",
-        "status": "to-evaluate"
+        "page": "/math-symbols/functions",
+        "created": "2026-08-07",
+        "note": "Built during the functions section pass; modeled on the set-theory symbols page (DataWrapper pattern). Categories: basic_function_notation, domain_and_range, interval_notation, composition, inverse_functions, arithmetic_of_functions, piecewise_functions, symmetry_and_periodicity. Explanations carry backlinks into /functions/basics#5, domain#2, range, composition#2, inverse#2, piecewise#2, arithmetic — bidirectional from birth. NOT yet listed in the other symbols pages' menuItems or the /math-symbols hub (structural change, user to decide)."
       }
     },
     "anchorLimitation": "DataWrapper (app/components/generic-table/DataWrapper.jsx) filters categories via client state; no URL params, no section anchors. Stage 2 option: additive query-param preselect (e.g. ?category=basic_set_operations) via a new wrapper, without editing existing components."
@@ -675,7 +680,7 @@
       "template": "titled",
       "sections": ["0 Key Terms", "1 What is Divisibility?", "2 Terminology and Notation", "3 Basic Properties", "4 Divisibility and Remainders", "5 Divisibility Rules", "6 Factors and Multiples", "7 Prime Numbers", "8 Prime Factorization", "9 GCD and LCM", "10 Related Concepts", "11 Summary: A Map of the Divisibility Subtree"],
       "spots": [
-        {"sectionId": "2", "sectionTitle": "Terminology and Notation", "field": "content (line 282) + obj2Table (lines 42-79)", "kind": "dedicated-section", "status": "existing", "quote": "The vertical bar in $a \\mid b$ is the standard notation for divisibility", "covers": ["$a \\mid b$", "$5 \\nmid 12$", "contrast with ÷", "table: five phrasings of $3 \\mid 12$"], "stage2": null},
+        {"sectionId": "2", "sectionTitle": "Terminology and Notation", "field": "content (line 282) + obj2Table (lines 42-79)", "kind": "dedicated-section", "status": "existing", "quote": "The vertical bar in $a \\mid b$ is the standard notation for divisibility", "covers": ["$a \\mid b$", "$5 \\nmid 12$", "contrast with ÷", "table: five phrasings of $3 \\mid 12$"], "stage2": {"mathSymbols": {"page": "/math-symbols/arithmetic", "category": "divisibility", "anchorText": "arithmetic symbols"}, "latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-08", "placement": "trio sentence appended to obj2 content"}},
         {"sectionId": "1", "sectionTitle": "What is Divisibility?", "field": "content (line 268)", "kind": "inline-intro", "status": "existing", "quote": "$a \\mid b$ means $b = a \\cdot k$", "stage2": null},
         {"sectionId": "4", "sectionTitle": "Divisibility and Remainders", "field": "content (line 323)", "kind": "inline-intro", "status": "existing", "quote": "$a \\bmod n = 0$ is the computational form of $n \\mid a$", "stage2": null},
         {"sectionId": "faq", "sectionTitle": "FAQ", "field": "obj3 (line 507)", "kind": "mention", "status": "existing", "quote": "What does the notation a | b mean?", "stage2": null}
@@ -722,7 +727,7 @@
       "spots": [
         {"sectionId": "1", "sectionTitle": "What Are Divisibility Rules?", "field": "content (lines 316-320)", "kind": "inline-intro", "status": "existing", "quote": "$a \\mid b$ when $b = a \\cdot k$ … equivalently $b \\bmod a = 0$ (recap + place-value shorthand)", "stage2": null},
         {"sectionId": "13", "sectionTitle": "Why These Rules Work", "field": "content (lines 639-653)", "kind": "mention", "status": "existing", "quote": "each rule is a human-readable compression of a modular identity ($10 \\equiv 1$, $100 \\equiv 0 \\pmod 4$)", "stage2": null},
-        {"sectionId": "13", "sectionTitle": "Why These Rules Work", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "≡ (mod n) used intensively but never glossed on this page; one-line read-as note or link to /arithmetic/modulo#5 would help direct arrivals", "stage2": null}
+        {"sectionId": "13", "sectionTitle": "Why These Rules Work", "field": "content", "kind": "recommended-note", "status": "resolved", "why": "≡ (mod n) used intensively but never glossed on this page; one-line read-as note or link to /arithmetic/modulo#5 would help direct arrivals", "resolution": "2026-08-08: read-as gloss + link added after the base-10 expansion paragraph", "stage2": {"internal": {"page": "/arithmetic/modulo", "section": "5", "anchorText": "congruence section"}, "added": "2026-08-08", "placement": "gloss sentence in obj13 content"}}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -732,7 +737,7 @@
       "template": "titled",
       "sections": ["NON-SEQUENTIAL ids: 0 Key Terms", "1 What is Modulo?", "2 Notation", "3 Modulo and Divisibility", "4 The Range of Remainders", "51 How to Compute a Remainder", "61 Edge Cases", "71 Negative Dividends", "5 Congruence", "6 Properties of Congruence", "7 The Clock Analogy", "8 Why Modulo Matters", "9 Section Roadmap", "10 Related Sections", "11 Summary"],
       "spots": [
-        {"sectionId": "2", "sectionTitle": "Notation", "field": "content (lines 1024-1028)", "kind": "dedicated-section", "status": "existing", "quote": "Mathematical notation writes the operation as $a \\bmod n$ … read 'a modulo n'; most programming languages use the percent symbol", "covers": ["$a \\bmod n$", "% operator", "operation vs statement distinction ($a \\bmod n$ vs $a \\equiv b \\pmod n$)"], "stage2": null},
+        {"sectionId": "2", "sectionTitle": "Notation", "field": "content (lines 1024-1028)", "kind": "dedicated-section", "status": "existing", "quote": "Mathematical notation writes the operation as $a \\bmod n$ … read 'a modulo n'; most programming languages use the percent symbol", "covers": ["$a \\bmod n$", "% operator", "operation vs statement distinction ($a \\bmod n$ vs $a \\equiv b \\pmod n$)"], "stage2": {"mathSymbols": {"page": "/math-symbols/arithmetic", "category": "modular_arithmetic", "anchorText": "arithmetic symbols"}, "latex": {"page": "/latex", "anchorText": "LaTeX"}, "added": "2026-08-08", "placement": "\\bmod/\\pmod sentence appended to obj2 content"}},
         {"sectionId": "3", "sectionTitle": "Modulo and Divisibility", "field": "content (line 1038)", "kind": "inline-intro", "status": "existing", "quote": "In divisibility notation, $n \\mid a$", "stage2": null},
         {"sectionId": "5", "sectionTitle": "Congruence", "field": "content (lines 1112-1116)", "kind": "inline-intro", "status": "existing", "quote": "The notation is: … This reads 'a is congruent to b modulo n'", "stage2": null},
         {"sectionId": "71", "sectionTitle": "Negative Dividends", "field": "content (lines 1098-1104)", "kind": "mention", "status": "existing", "quote": "two-convention split for $(-7) \\bmod 3$", "stage2": null}
@@ -747,7 +752,7 @@
       "sections": ["0 Key Terms", "1 Operating Within a Modulus", "2 The Core Principle", "3 Addition", "4 Subtraction", "5 Multiplication", "6 Powers", "7 Detecting Cycles in Powers", "8 Why Division Is Different", "9 Last Digit Problems", "10 Clock Problems", "11 Day of Week Problems", "12 Why Divisibility Rules Work", "13 Worked Examples", "14 Summary"],
       "spots": [
         {"sectionId": "2", "sectionTitle": "The Core Principle", "field": "content (lines 1048-1058)", "kind": "mention", "status": "existing", "quote": "$a + b \\equiv a' + b' \\pmod n$ (heavy use, assumes ≡ known from parent page)", "stage2": null},
-        {"sectionId": "2", "sectionTitle": "The Core Principle", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "first heavy ≡ user on page; parenthetical link back to /arithmetic/modulo#5 (Congruence) would cover direct arrivals", "stage2": null}
+        {"sectionId": "2", "sectionTitle": "The Core Principle", "field": "content", "kind": "recommended-note", "status": "resolved", "why": "first heavy ≡ user on page; parenthetical link back to /arithmetic/modulo#5 (Congruence) would cover direct arrivals", "resolution": "2026-08-08: 'The formal statement, in the congruence notation of the parent page' — link woven in", "stage2": {"internal": {"page": "/arithmetic/modulo", "section": "5", "anchorText": "congruence notation"}, "added": "2026-08-08", "placement": "woven into the formal-statement sentence in obj2"}}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -772,7 +777,7 @@
       "spots": [
         {"sectionId": "1", "sectionTitle": "What Is a Fraction", "field": "content (lines 948-950)", "kind": "inline-intro", "status": "existing", "quote": "The horizontal line separating them is called the fraction bar or vinculum; $\\frac{a}{b}$ is equivalent to $a \\div b$", "stage2": null},
         {"sectionId": "2", "sectionTitle": "Numerator and Denominator", "field": "content (lines 960-964)", "kind": "inline-intro", "status": "existing", "quote": "denominator… names the type of parts (roles + etymology)", "stage2": null},
-        {"sectionId": "1", "sectionTitle": "What Is a Fraction", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "slash form a/b (and when inline slash vs stacked bar is used) never addressed in the body — only in FAQ; one sentence would close the gap", "stage2": null}
+        {"sectionId": "1", "sectionTitle": "What Is a Fraction", "field": "content", "kind": "recommended-note", "status": "resolved", "why": "slash form a/b (and when inline slash vs stacked bar is used) never addressed in the body — only in FAQ; one sentence would close the gap", "resolution": "2026-08-08: slash-form sentence added after the vinculum sentence with symbols link", "stage2": {"mathSymbols": {"page": "/math-symbols/arithmetic", "category": "fractions", "anchorText": "arithmetic symbols"}, "added": "2026-08-08", "placement": "sentence woven into obj1 opening paragraph"}}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -812,7 +817,7 @@
       "template": "titled",
       "sections": ["0-10: Key Terms, Same Denominator, Same Numerator, Common Denominator Method, Cross-Multiplication, Benchmark Fractions, Decimal Conversion, Mixed Numbers, Ordering Multiple, Number Line, At a Glance"],
       "spots": [
-        {"sectionId": "1", "sectionTitle": "Same Denominator", "field": "content (line 902)", "kind": "recommended-note", "status": "recommended", "why": "inequality symbols > < are the page's core output but never read aloud ('read > as is greater than'); one-line note at first use would serve younger readers", "stage2": null}
+        {"sectionId": "1", "sectionTitle": "Same Denominator", "field": "content (line 902)", "kind": "recommended-note", "status": "resolved", "why": "inequality symbols > < are the page's core output but never read aloud ('read > as is greater than'); one-line note at first use would serve younger readers", "resolution": "2026-08-08: read-aloud gloss inserted after the first comparison display with symbols link", "stage2": {"mathSymbols": {"page": "/math-symbols/arithmetic", "category": "comparison_symbols", "anchorText": "comparison symbols"}, "added": "2026-08-08", "placement": "gloss sentence after the 5/8 > 3/8 display in obj1"}}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -855,7 +860,7 @@
       "spots": [
         {"sectionId": "1", "sectionTitle": "What Are Properties of Operations?", "field": "content (line 1014)", "kind": "mention", "status": "existing", "quote": "The order of operations … is a convention agreed upon to disambiguate notation", "stage2": null},
         {"sectionId": "2", "sectionTitle": "Two Main Operations", "field": "content (line 1027)", "kind": "inline-intro", "status": "existing", "quote": "$a - b$ is shorthand for $a + (-b)$ … $\\frac{a}{b}$ is shorthand for $a \\cdot \\frac{1}{b}$", "stage2": null},
-        {"sectionId": "3", "sectionTitle": "Commutative Property", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "page silently switches to $\\cdot$ for multiplication (tools use ×); a one-liner that ×, ·, and juxtaposition all denote multiplication fits this page's charter better than any other page in the tree", "stage2": null}
+        {"sectionId": "3", "sectionTitle": "Commutative Property", "field": "content", "kind": "recommended-note", "status": "resolved", "why": "page silently switches to $\\cdot$ for multiplication (tools use ×); a one-liner that ×, ·, and juxtaposition all denote multiplication fits this page's charter better than any other page in the tree", "resolution": "2026-08-08: ×/·/juxtaposition sentence added to the For Multiplication block with symbols link", "stage2": {"mathSymbols": {"page": "/math-symbols/arithmetic", "category": "basic_operations", "anchorText": "arithmetic symbols"}, "added": "2026-08-08", "placement": "sentence appended after the commutative multiplication example"}}
       ],
       "recommendations": [],
       "notes": "Lines ~60-360 are a dead commented-out draft.",
@@ -1441,7 +1446,7 @@
       "sections": ["0 Key Terms", "1 Solutions as Intervals", "2 The Graphical Method", "3 The Unit Circle Method", "4 Solving Sine Inequalities", "5 Solving Cosine and Tangent Inequalities", "6 Compound Inequalities", "7 Inequalities Involving Transformed Functions", "8 Domain Considerations for Reciprocal and Quotient Functions", "intro Finding Intervals Where Trigonometric Conditions Hold"],
       "spots": [
         {"sectionId": "1", "sectionTitle": "Solutions as Intervals", "field": "content", "kind": "inline-intro", "status": "existing", "quote": "Strict inequalities (>, <) produce open intervals … Non-strict (≥, ≤) produce closed intervals; $[0, 2\\pi)$ used throughout", "stage2": null},
-        {"sectionId": "1", "sectionTitle": "Solutions as Intervals", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "interval notation semantics explained in words but bracket symbolism ([a,b] vs (a,b)) has no symbols-page target yet — natural link once /math-symbols/functions or /math-symbols/algebra exists", "stage2": null}
+        {"sectionId": "1", "sectionTitle": "Solutions as Intervals", "field": "content", "kind": "recommended-note", "status": "resolved", "why": "interval notation semantics explained in words but bracket symbolism ([a,b] vs (a,b)) has no symbols-page target yet — natural link once /math-symbols/functions or /math-symbols/algebra exists", "resolution": "2026-08-07: /math-symbols/functions created (interval_notation category); sentence appended to the strict/non-strict paragraph with in-text link", "stage2": {"mathSymbols": {"page": "/math-symbols/functions", "category": "interval_notation", "anchorText": "interval notation"}, "added": "2026-08-07", "placement": "closing sentence of the strict/non-strict inequalities paragraph"}}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -1661,6 +1666,84 @@
       "sections": [],
       "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "pages with no or negligible notation content: geometric-representation, operations, properties, demoivre-theorem, equations-polynomials, cheat-sheets, formulas, definitions", "stage2": null}],
       "externalNotationLinks": []
+    },
+    "functions": {
+      "pagePath": "pages/functions/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "externalNotationLinks": []
+    },
+    "functions/basics": {
+      "pagePath": "pages/functions/basics/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-11; obj5 = id 5 'Function Notation'"],
+      "spots": [
+        {"sectionId": "5", "sectionTitle": "Function Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "The notation $f(x)$ names a function and its output simultaneously … Reading $f(x)$ as 'f of x' … The parentheses do not indicate multiplication", "covers": ["f(x)", "g(t)/P(n) letter conventions", "f(a), f(x+1) evaluation", "named vs anonymous expressions"], "stage2": {"mathSymbols": {"page": "/math-symbols/functions", "category": null, "anchorText": "function symbols"}, "latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-07", "placement": "trio sentence appended to obj5 content"}}
+      ],
+      "externalNotationLinks": []
+    },
+    "functions/domain": {
+      "pagePath": "pages/functions/domain/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-11; obj2 = id 2 'Expressing Domain'; notation table (line ~43)"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Expressing Domain", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "Domain can be expressed in several equivalent notations … interval, set-builder, inequality, graphical, union", "stage2": {"mathSymbols": {"page": "/math-symbols/functions", "category": null, "anchorText": "function symbols"}, "added": "2026-08-07", "placement": "clause woven into the opening sentence"}}
+      ],
+      "externalNotationLinks": []
+    },
+    "functions/range": {
+      "pagePath": "pages/functions/range/index.jsx",
+      "template": "untitled",
+      "sections": ["mirror of domain page; notation section at line ~274"],
+      "spots": [
+        {"sectionId": "(expressing)", "sectionTitle": "(Expressing Range)", "field": "content (line ~274)", "kind": "dedicated-section", "status": "existing", "quote": "Range is expressed using the same notations that describe domain", "stage2": null}
+      ],
+      "externalNotationLinks": []
+    },
+    "functions/composition": {
+      "pagePath": "pages/functions/composition/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-11; obj2 = id 2 'Notation for Composition'"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Notation for Composition", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "The symbol $\\circ$ denotes composition … Some texts write $fg(x)$ … risks confusion and is best avoided … right-to-left reading", "stage2": {"mathSymbols": {"page": "/math-symbols/functions", "category": "composition", "anchorText": "function symbols"}, "added": "2026-08-07", "placement": "sentence appended to obj2 content"}}
+      ],
+      "externalNotationLinks": []
+    },
+    "functions/inverse": {
+      "pagePath": "pages/functions/inverse/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-11; obj2 = id 2 'Notation: f⁻¹(x) vs 1/f(x)'; notation table (line ~42)"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Notation: f⁻¹(x) vs 1/f(x)", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "The superscript $-1$ in $f^{-1}$ is not an exponent indicating a power. It is a label indicating the inverse relationship", "covers": ["f⁻¹ vs 1/f", "(f(x))⁻¹ disambiguation", "trig mirror (sin⁻¹/arcsin)"], "stage2": {"mathSymbols": {"page": "/math-symbols/functions", "category": "inverse_functions", "anchorText": "function symbols"}, "internal": {"page": "/trigonometry/inverse-functions", "section": "6", "anchorText": "same notational hazard"}, "added": "2026-08-07", "placement": "cross-link woven into the trig sentence + symbols sentence appended"}}
+      ],
+      "notes": "The general -1-superscript notation note; now cross-linked both ways with the trigonometry flagship (trig identities → trig inverse#6 ← functions inverse#2).",
+      "externalNotationLinks": []
+    },
+    "functions/piecewise": {
+      "pagePath": "pages/functions/piecewise/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-11; obj2 = id 2 'Notation'"],
+      "spots": [
+        {"sectionId": "2", "sectionTitle": "Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "Piecewise functions use brace notation to display all pieces together", "stage2": {"latex": {"page": "/latex", "anchorText": "LaTeX"}, "added": "2026-08-07", "placement": "cases-environment sentence appended after the conditions paragraph"}}
+      ],
+      "externalNotationLinks": []
+    },
+    "functions/arithmetic": {
+      "pagePath": "pages/functions/arithmetic/index.jsx",
+      "template": "untitled",
+      "sections": ["incl. 'Notation and Evaluation at a Point' (line ~625); notation table (line ~71)"],
+      "spots": [
+        {"sectionId": "(notation)", "sectionTitle": "Notation and Evaluation at a Point", "field": "content (line ~625)", "kind": "dedicated-section", "status": "existing", "quote": "The notations $(f + g)(x)$ and $f(x) + g(x)$ mean the same thing", "stage2": null}
+      ],
+      "externalNotationLinks": []
+    },
+    "functions/$quietPages": {
+      "pagePath": "(summary)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "little or no notation content: analyzing, families, graphs, properties, transformations, definitions, formulas", "stage2": null}],
+      "externalNotationLinks": []
     }
   },
   "$crossSectionFindings": {
@@ -1677,7 +1760,8 @@
       "Congruence ≡ (mod n) formally introduced in three places (modulo id 5, modular-wheel id 8, modulo/operations id 2 implicitly) but used cold on rules id 13, divisibility-table id 14, divisibility-tree id 9 — natural cross-link targets.",
       "Fraction notation anchored at fractions id 1 (vinculum, a/b = a ÷ b); genuine gaps: slash form a/b and mixed-number juxtaposition-means-addition convention.",
       "House pattern: function-style notation (gcd, lcm, σ) consistently introduced with 'written…/denoted…' on lesson pages; strays: divisor-count function (factors id 9), euclidean tool id 7.",
-      "Anchor hazards: modulo hub non-sequential ids (51/61/71), negative-numbers skipped id 6, dead commented-out drafts in definitions and properties."
+      "Anchor hazards: modulo hub non-sequential ids (51/61/71), negative-numbers skipped id 6, dead commented-out drafts in definitions and properties.",
+      "2026-08-08 LINK PASS: created /math-symbols/arithmetic (6 categories, backlinked into arithmetic anchors). Planted 7 spots (10 links): divisibility#2 trio; modulo#2 \\bmod/\\pmod sentence (symbols + latex); rules#13 ≡ read-as gloss → modulo#5 (content→content); modulo/operations#2 congruence-notation weave → modulo#5; properties ×/·/juxtaposition sentence; fractions#1 slash-form sentence; fractions/comparing#1 >/< read-aloud gloss. Five stage-1 recommendations resolved. Remaining recommendations: definitions symbol legend, factors d(n)/τ(n) naming, dividing ÷ note, mixed-numbers juxtaposition warning."
     ],
     "logic": [
       "The ONLY live /math-symbols link in the app so far: /logic hub symbols section → /math-symbols/math-logic (twice: link field line 116, inline <a> line 119). No /keyboard or /latex links anywhere under pages/logic. Semantics hub has a dormant commented-out symbols section skeleton with {{SYMBOLS_SECTION_LINK}} placeholder.",
@@ -1711,6 +1795,12 @@
       "2026-08-06 pass planted 4 spots (6 links): basics trio (complex number symbols + LaTeX + keyboard at the a+bi conventional-letters sentence), imaginary-numbers i/√−1 clause, trigonometric-form arg(z) clause, complex-conjugate z̄-vs-z* clause.",
       "Notation strengths: the forms family is notation-rich prose — algebraic-form 'Real and Imaginary Parts: Formal Notation' (dedicated, read-as phrasing), conjugate z̄ vs z* convention paragraph (math vs physics/engineering), trigonometric-form arg vs Arg capital-A convention with two interval conventions, exponential/cis equivalences.",
       "Quiet pages (no notation content): geometric-representation, operations, properties, demoivre-theorem, equations-polynomials, cheat-sheets, formulas, definitions."
+    ],
+    "functions": [
+      "CREATED /math-symbols/functions (2026-08-07) — the first missing topic page built by this project. 8 categories incl. interval_notation; explanations backlink into the functions section anchors (bidirectional from birth). Not yet added to other symbols pages' menuItems or the /math-symbols hub — structural decision left to the user.",
+      "Six dedicated notation sections found: basics#5 'Function Notation', composition#2 'Notation for Composition' (∘, f(g(x)), fg(x) caution), inverse#2 'Notation: f⁻¹(x) vs 1/f(x)' (the general −1-superscript note, mirrors the trig flagship and mentions sin⁻¹/arcsin), piecewise#2 'Notation' (cases brace), arithmetic 'Notation and Evaluation at a Point', domain#2/range 'Expressing Domain/Range' (interval + set-builder + inequality + union notations).",
+      "2026-08-07 pass planted 6 spots (9 links): basics#5 trio; composition#2, domain#2 → new symbols page; inverse#2 double link (symbols page + content→content cross-link to /trigonometry/inverse-functions#6 — the ⁻¹ hazard now links both ways across sections); piecewise#2 → /latex (cases environment); trigonometry/inequalities#1 revisited → /math-symbols/functions interval notation (resolving the deferred recommendation).",
+      "Quiet pages: analyzing, families, graphs, properties, transformations, definitions, formulas."
     ]
   }
 }

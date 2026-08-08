@@ -1025,7 +1025,7 @@ obj2: {
 
 Most programming languages use the percent symbol instead: $a \\% \\; n$. In C, Java, Python, JavaScript, and nearly every other language, the $\\%$ operator computes remainders. The syntax differs from the mathematical form, but the underlying operation is the same.
 
-One notational subtlety deserves attention early. The expression $a \\bmod n$ denotes an operation that produces a number — a remainder. The expression $a \\equiv b \\pmod{n}$, which appears later on this page, denotes a relationship between two numbers. The first is a computation; the second is a statement. Both use "mod," but they play different grammatical roles.`,
+One notational subtlety deserves attention early. The expression $a \\bmod n$ denotes an operation that produces a number — a remainder. The expression $a \\equiv b \\pmod{n}$, which appears later on this page, denotes a relationship between two numbers. The first is a computation; the second is a statement. Both use "mod," but they play different grammatical roles. In [LaTeX](!/latex) source the two are produced by \\bmod and \\pmod, and both are catalogued among the [arithmetic symbols](!/math-symbols/arithmetic).`,
   before: ``,
   after: ``,
   link: '',

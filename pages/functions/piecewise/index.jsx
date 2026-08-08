@@ -260,7 +260,7 @@ Each piece can be any type of function — linear, quadratic, constant, radical,
 
 $$f(x) = \\begin{cases} \\text{formula}_1 & \\text{if condition}_1 \\\\ \\text{formula}_2 & \\text{if condition}_2 \\\\ \\text{formula}_3 & \\text{if condition}_3 \\end{cases}$$
 
-The conditions specify which inputs use which formula. They typically involve inequalities: $x < 0$, $x \\geq 3$, $1 \\leq x < 4$.
+The conditions specify which inputs use which formula. They typically involve inequalities: $x < 0$, $x \\geq 3$, $1 \\leq x < 4$. In [LaTeX](!/latex) source, the brace layout is produced by the cases environment.
 
 The conditions must be mutually exclusive — no input should satisfy more than one condition. Otherwise, the function would have two outputs for some inputs, violating the definition of a function.
 

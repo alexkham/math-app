@@ -924,7 +924,7 @@ Some texts write $fg(x)$ without the composition symbol, relying on context to d
 
 The order in the notation matters critically. In $f \\circ g$, the function $g$ appears on the right but acts first. The function $f$ appears on the left but acts second. This right-to-left reading matches the nested parentheses in $f(g(x))$: evaluate from the inside out.
 
-When speaking aloud, "$f$ of $g$ of $x$" follows the written order while preserving the evaluation sequence: start with $x$, apply $g$, then apply $f$.`,
+When speaking aloud, "$f$ of $g$ of $x$" follows the written order while preserving the evaluation sequence: start with $x$, apply $g$, then apply $f$. All three forms appear among the [function symbols](!/math-symbols/functions).`,
     before: ``,
     after: ``,
     link: '',

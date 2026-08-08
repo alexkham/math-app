@@ -1047,7 +1047,7 @@ The expressions $7 + 4$ and $4 + 7$ both equal $11$. The order of the two addend
  
 $$a \\cdot b = b \\cdot a$$
  
-The expressions $7 \\cdot 4$ and $4 \\cdot 7$ both equal $28$. Reversing the factors does not affect the product.
+The expressions $7 \\cdot 4$ and $4 \\cdot 7$ both equal $28$. Reversing the factors does not affect the product. The dot $\\cdot$, the cross $\\times$, and plain juxtaposition ($ab$) all denote the same multiplication — the three forms are listed among the [arithmetic symbols](!/math-symbols/arithmetic).
  
 ## Subtraction and Division Are Not Commutative
  

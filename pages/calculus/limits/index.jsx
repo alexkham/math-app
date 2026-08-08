@@ -277,6 +277,8 @@ $$\\lim_{x \\to a^-} f(x) = L \\quad \\text{and} \\quad \\lim_{x \\to a^+} f(x) 
 then the two-sided limit equals $L$. If the one-sided limits differ, or if either fails to exist, the two-sided limit does not exist.
 
 This requirement unifies behavior from both directions into a single value.
+
+The limit symbol and its one-sided variants are catalogued among the [calculus symbols](!/math-symbols/calculus) together with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.
 `,
     before: ``,
     after: ``,

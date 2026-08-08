@@ -1047,7 +1047,7 @@ obj2: {
   title: `The Core Principle`,
   content: `The power of modular arithmetic comes from one fact: reducing numbers before, during, or after an operation all produce the same final remainder.
 
-This means large numbers can be replaced by their remainders at any stage of a calculation without affecting the outcome. The formal statement: if $a \\equiv a' \\pmod{n}$ and $b \\equiv b' \\pmod{n}$, then:
+This means large numbers can be replaced by their remainders at any stage of a calculation without affecting the outcome. The formal statement, in the [congruence notation](!/arithmetic/modulo#5) of the parent page: if $a \\equiv a' \\pmod{n}$ and $b \\equiv b' \\pmod{n}$, then:
 
 $$a + b \\equiv a' + b' \\pmod{n}$$
 

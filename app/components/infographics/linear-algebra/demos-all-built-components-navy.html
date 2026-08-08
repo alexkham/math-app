@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Built Components — All Variants (navy)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap');
+
+body{margin:0;padding:30px 20px 100px;background:#e4e9f2;font-family:'Inter',system-ui,sans-serif;}
+.wrap{max-width:1080px;margin:0 auto;}
+h1.page{font-family:'Bricolage Grotesque',sans-serif;font-size:30px;letter-spacing:-.03em;margin:0 0 6px;color:#0f1a2e;}
+p.page{color:#5a6478;font-size:14px;margin:0 0 12px;}
+.toc{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px;}
+.toc a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+padding:6px 11px;border:1px solid #c6cfdf;background:#fff;color:#0f1a2e;text-decoration:none;}
+h2.sec{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;letter-spacing:-.02em;margin:54px 0 4px;color:#0f1a2e;}
+p.sec{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#7a839a;margin:0 0 16px;}
+.vlabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7a839a;margin:28px 0 10px;}
+
+/* ===================== shared navy tokens ===================== */
+.c-root{
+--paper:#f4f6fa;--ink:#0f1a2e;--muted:#5a6478;--line:#d6dce8;--accent:#1f4e8c;--soft:#e8edf5;
+--pivot:#1f4e8c;--pivotText:#fff;--oninkBg:#0f1a2e;--oninkText:#f4f6fa;--oninkDim:#c9d4e6;--oninkPivot:#e8b93a;
+--neutralFill:#eef1f7;--neutralStroke:#c6cfdf;
+--rowAFill:#1f4e8c;--rowAStroke:#1f4e8c;--colBFill:#8c3a1f;--colBStroke:#8c3a1f;
+--outFill:#c98a1f;--outStroke:#a06c12;
+color:var(--ink);background:var(--paper);font-family:'Inter',system-ui,sans-serif;line-height:1.5;}
+.c-root,.c-root *,.c-root *::before,.c-root *::after{box-sizing:border-box;}
+.c-root a{color:var(--accent);text-underline-offset:2px;}
+
+/* masthead — shared house pattern */
+.mast{background:var(--ink);color:var(--paper);padding:24px 30px 22px;position:relative;}
+.mast::after{content:'';position:absolute;left:30px;right:30px;bottom:0;height:3px;background:var(--accent);}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:.6;}
+.mtitle{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;letter-spacing:-.03em;margin:8px 0 0;line-height:1.06;}
+.mintro{font-size:13.5px;margin:10px 0 0;max-width:570px;opacity:.74;}
+.tally{position:absolute;right:30px;top:22px;text-align:right;font-family:'JetBrains Mono',monospace;}
+.tally b{display:block;font-size:32px;font-weight:800;line-height:1;letter-spacing:-.04em;}
+.tally span{font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.55;}
+.tally.gap b{color:var(--accent);}
+
+/* svg matrix */
+.mxs{width:100%;height:auto;display:block;overflow:visible;}
+.mxs text{font-family:'JetBrains Mono',monospace;}
+
+/* badges */
+.badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;display:inline-block;white-space:nowrap;}
+.badge.holds{background:var(--ink);color:var(--paper);}
+.badge.fails{background:var(--accent);color:var(--paper);}
+.badge.conditional{background:transparent;color:var(--ink);border:1px solid var(--ink);}
+.badge.undefined{background:var(--soft);color:var(--accent);border:1px dashed var(--accent);}
+.badge.partial{background:var(--soft);color:var(--ink);border:1px solid var(--accent);}
+.badge.vacuous{background:transparent;color:var(--muted);border:1px solid var(--line);}
+.badge.unstated{background:var(--soft);color:var(--accent);border:1px dashed var(--accent);}
+
+/* ============ PLC: PropertyLawCard ============ */
+.plc-plates{border:1px solid var(--line);border-top:none;}
+.plc-plate{display:grid;grid-template-columns:74px 1fr 262px;border-bottom:1px solid var(--line);}
+.plc-plate:last-child{border-bottom:none;}
+.plc-idx{border-right:1px solid var(--line);background:var(--soft);display:flex;flex-direction:column;align-items:center;padding-top:24px;gap:10px;}
+.plc-idx-n{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:800;color:var(--accent);letter-spacing:-.04em;line-height:1;}
+.plc-idx-r{writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.plc-plate.brk .plc-idx{background:var(--accent);}
+.plc-plate.brk .plc-idx-n,.plc-plate.brk .plc-idx-r{color:var(--paper);}
+.plc-face{padding:24px 28px;display:flex;flex-direction:column;gap:15px;}
+.plc-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-.015em;}
+.plc-stmt{font-size:19px;padding:18px 0 18px 20px;border-left:3px solid var(--accent);}
+.plc-plate.brk .plc-stmt{border-left-style:double;border-left-width:6px;}
+.plc-prose{font-size:13.5px;color:var(--muted);max-width:510px;}
+.plc-aside{border-left:1px solid var(--line);background:var(--soft);padding:22px 20px;display:flex;flex-direction:column;gap:16px;}
+.plc-aside .badge{align-self:flex-start;}
+.plc-meta{display:grid;gap:12px;margin:0;}
+.plc-meta dt{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.plc-meta dd{margin:0;font-size:13px;}
+.plc-wit{margin-top:auto;border-top:2px solid var(--accent);padding-top:13px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.7;}
+.plc-wit b{display:block;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;font-weight:800;}
+
+.plc-docket{border:1px solid var(--line);border-top:none;padding:0 30px 26px;}
+.plc-group{padding-top:24px;margin-top:24px;border-top:1px solid var(--line);}
+.plc-group:first-child{border-top:none;margin-top:0;}
+.plc-group-h{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:14px;}
+.plc-group-h::after{content:'';flex:1;height:1px;background:var(--line);}
+.plc-entry{display:grid;grid-template-columns:38px 1fr;gap:18px;padding:13px 0;border-bottom:1px dotted var(--line);align-items:baseline;}
+.plc-entry:last-child{border-bottom:none;}
+.plc-hang{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:var(--muted);text-align:right;}
+.plc-entry.brk .plc-hang{color:var(--accent);}
+.plc-body{display:grid;grid-template-columns:1fr 176px;gap:20px;align-items:baseline;}
+.plc-line{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;}
+.plc-nm{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:14.5px;min-width:132px;}
+.plc-fx{font-size:16px;}
+.plc-cond{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-align:right;line-height:1.5;}
+.plc-cond.hot{color:var(--accent);font-weight:700;}
+.plc-drop{grid-column:2;margin-top:10px;padding:12px 15px;background:var(--soft);border-left:3px solid var(--accent);font-size:12.5px;}
+
+.plc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(256px,1fr));gap:14px;padding:20px 24px 24px;border:1px solid var(--line);border-top:none;}
+.plc-card{border:1px solid var(--line);display:flex;flex-direction:column;background:var(--paper);}
+.plc-card.brk{border-color:var(--accent);}
+.plc-card-h{display:flex;align-items:baseline;gap:9px;padding:13px 17px 11px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+.plc-card-nm{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:15px;}
+.plc-card-fx{padding:20px 17px;flex:1;display:flex;align-items:center;justify-content:center;background:var(--soft);font-size:15px;text-align:center;min-height:74px;}
+.plc-card.brk .plc-card-fx{background:var(--paper);}
+.plc-strip{padding:11px 17px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:6px 11px;align-items:baseline;margin:0;}
+.plc-strip dt{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.plc-strip dd{margin:0;font-size:13px;}
+.plc-card-wit{font-family:'JetBrains Mono',monospace;font-size:11px;padding:10px 17px;border-top:1px dashed var(--accent);background:var(--soft);line-height:1.6;}
+.plc-card-wit b{display:block;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:800;}
+
+.plc-rows{border:1px solid var(--line);border-top:none;padding:0 28px 22px;}
+.plc-row{display:grid;grid-template-columns:176px 1fr 136px;gap:18px;padding:15px 0;border-bottom:1px solid var(--line);align-items:center;}
+.plc-row:last-child{border-bottom:none;}
+.plc-row.brk{background:var(--soft);}
+.plc-row-nm{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:15px;}
+.plc-row-fx{font-size:15px;}
+.plc-row-vd{text-align:right;}
+.plc-foot{border:1px solid var(--line);border-top:none;padding:14px 30px;font-size:13px;color:var(--muted);}
+
+/* ============ THM: TheoremCard ============ */
+.thm-grid{display:grid;gap:16px;}
+.thm-grid.pair{grid-template-columns:repeat(auto-fit,minmax(325px,1fr));}
+.thm-card{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--ink);}
+.thm-card.open{border-top-color:var(--accent);}
+.thm-head{padding:20px 26px 16px;}
+.thm-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:23px;letter-spacing:-.025em;margin:6px 0 0;line-height:1.1;}
+.thm-kick{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+.thm-fwd{padding:0 26px 22px;}
+.thm-sub{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.thm-hyps{list-style:none;margin:0 0 18px;padding:0;counter-reset:h;}
+.thm-hyps li{counter-increment:h;position:relative;padding:9px 0 9px 34px;border-bottom:1px solid var(--line);font-size:14px;}
+.thm-hyps li:last-child{border-bottom:none;}
+.thm-hyps li::before{content:'H' counter(h);position:absolute;left:0;top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;color:var(--muted);}
+.thm-hyps li.load::before{color:var(--accent);}
+.thm-concl{background:var(--soft);border-left:3px solid var(--accent);padding:16px 18px;font-size:16px;text-align:center;}
+.thm-rule{position:relative;height:0;border-top:2px solid var(--ink);margin:0 26px;}
+.thm-rule span{position:absolute;left:50%;top:-9px;transform:translateX(-50%);background:var(--paper);padding:0 14px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;}
+.thm-conv{padding:26px;}
+.thm-conv-h{display:flex;align-items:center;gap:11px;margin-bottom:13px;flex-wrap:wrap;}
+.thm-conv-s{font-size:14px;margin:0 0 16px;}
+.thm-counter{border:1px dashed var(--accent);padding:15px 17px;background:var(--soft);}
+.thm-counter b{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.thm-counter p{margin:0 0 8px;font-size:13px;}.thm-counter p:last-child{margin-bottom:0;}
+.thm-extra{margin-top:13px;font-size:13px;color:var(--muted);padding-left:13px;border-left:2px solid var(--line);}
+.thm-card.compact .thm-head{padding:15px 19px 11px;}
+.thm-card.compact .thm-name{font-size:18px;}
+.thm-card.compact .thm-fwd{padding:0 19px 16px;}
+.thm-card.compact .thm-hyps li{font-size:13px;padding:7px 0 7px 31px;}
+.thm-card.compact .thm-concl{font-size:14px;padding:13px 15px;}
+.thm-card.compact .thm-rule{margin:0 19px;}
+.thm-card.compact .thm-conv{padding:19px;}
+.thm-brief-body{padding:0 20px 17px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;}
+.thm-brief-body .thm-concl{text-align:left;font-size:14px;padding:13px 15px;}
+.thm-hypline{font-size:12.5px;color:var(--muted);margin-top:9px;}
+
+/* ============ OTP: ObjectTypeProfile ============ */
+.otp-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(252px,1fr));gap:14px;padding:20px 24px 24px;border:1px solid var(--line);border-top:none;}
+.otp-card{border:1px solid var(--line);display:flex;flex-direction:column;background:var(--paper);}
+.otp-card-h{padding:13px 17px 10px;border-bottom:1px solid var(--line);}
+.otp-nm{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:16px;}
+.otp-cond{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);margin-top:5px;}
+.otp-ex{padding:10px;background:var(--soft);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;min-height:78px;}
+.otp-slots{padding:12px 17px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:baseline;margin:0;}
+.otp-slots dt{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.otp-slots dd{margin:0;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;}
+.otp-slots dd.gap{color:var(--accent);font-weight:800;}
+.otp-slots dd.gap::after{content:' — not stated';font-weight:400;font-size:10px;font-family:'Inter',sans-serif;}
+.otp-scroll{overflow-x:auto;border:1px solid var(--line);border-top:none;}
+.otp-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:700px;}
+.otp-tbl thead th{background:var(--ink);color:var(--paper);text-align:left;padding:11px 13px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;}
+.otp-tbl thead th:first-child{background:var(--accent);}
+.otp-tbl tbody th{text-align:left;padding:11px 13px;background:var(--soft);border-bottom:1px solid var(--line);font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:13px;white-space:nowrap;}
+.otp-tbl tbody td{padding:11px 13px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:12px;}
+.otp-tbl tbody td.gap{color:var(--accent);font-weight:800;background:var(--soft);}
+.otp-stack{border:1px solid var(--line);border-top:none;}
+.otp-row{display:grid;grid-template-columns:190px 170px 1fr;gap:18px;border-bottom:1px solid var(--line);align-items:center;padding:14px 24px;}
+.otp-row:last-child{border-bottom:none;}
+.otp-rslots{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:11px;margin:0;}
+.otp-rslots dt{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.otp-rslots dd{margin:0;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;}
+.otp-rslots dd.gap{color:var(--accent);}
+.legend{border:1px solid var(--line);border-top:none;padding:13px 30px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.legend span{display:flex;align-items:center;gap:8px;}
+.sw{width:14px;height:14px;display:inline-block;}
+.sw.gapsw{background:var(--soft);border:1px solid var(--accent);}
+.sw.piv{background:var(--accent);}
+.sw.gold{background:var(--oninkPivot);}
+.sw.chg{border-bottom:3px solid var(--accent);height:11px;}
+
+/* ============ CSP: CaseSplitPanel ============ */
+.csp-panels{display:grid;grid-auto-columns:1fr;grid-auto-flow:column;border:1px solid var(--line);border-top:none;}
+.csp-panel{border-right:1px solid var(--line);display:flex;flex-direction:column;}
+.csp-panel:last-child{border-right:none;}
+.csp-cond{padding:13px 15px;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;text-align:center;min-height:56px;display:flex;align-items:center;justify-content:center;line-height:1.5;}
+.csp-panel.flag .csp-cond{background:var(--accent);}
+.csp-fig{padding:14px;background:var(--soft);display:flex;justify-content:center;align-items:center;border-bottom:1px solid var(--line);min-height:92px;}
+.csp-fig svg{width:100%;max-width:168px;height:auto;}
+.csp-fig .ax{stroke:var(--muted);stroke-width:1;}
+.csp-fig .ln{stroke:var(--ink);stroke-width:2.2;fill:none;}
+.csp-fig .ln2{stroke:var(--accent);stroke-width:2.2;fill:none;}
+.csp-fig .pt{fill:var(--accent);}
+.csp-fig .lb{font-family:'JetBrains Mono',monospace;font-size:9px;fill:var(--muted);}
+.csp-out{padding:14px 15px;text-align:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:16px;border-bottom:1px solid var(--line);}
+.csp-body{padding:14px 15px;flex:1;margin:0;}
+.csp-body dt{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:12px;}
+.csp-body dt:first-child{margin-top:0;}
+.csp-body dd{margin:5px 0 0;font-size:13px;}
+.csp-body dd.mono{font-family:'JetBrains Mono',monospace;font-size:12px;}
+.csp-inst{border-top:1px dashed var(--accent);padding:12px 15px;background:var(--soft);font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.65;}
+.csp-inst b{display:block;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:800;}
+.csp-rows{border:1px solid var(--line);border-top:none;}
+.csp-row{display:grid;grid-template-columns:200px 140px 1fr 190px;gap:18px;padding:16px 24px;border-bottom:1px solid var(--line);align-items:center;}
+.csp-row:last-child{border-bottom:none;}
+.csp-row.flag{background:var(--soft);}
+.csp-rcond{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:var(--accent);line-height:1.5;}
+.csp-rout{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:15px;}
+.csp-rcons{font-size:13px;color:var(--muted);}
+.csp-rinst{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.6;padding-left:15px;border-left:2px solid var(--line);}
+.csp-ex{border:1px solid var(--line);border-top:none;padding:15px 30px;font-size:13.5px;}
+.csp-ex-in{border-left:3px solid var(--accent);background:var(--soft);padding:13px 16px;}
+.csp-ex b{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:7px;font-weight:800;}
+
+/* ============ MSC: MisconceptionCard ============ */
+.msc-stack{display:grid;gap:16px;}
+.msc-stack.grid{grid-template-columns:repeat(auto-fit,minmax(325px,1fr));}
+.msc-card{background:var(--paper);border:1px solid var(--line);}
+.msc-card.strip{border-left:4px solid var(--accent);}
+.msc-claim{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.msc-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:var(--accent);color:var(--paper);padding:4px 9px;}
+.msc-topic{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);}
+.msc-split{display:grid;grid-template-columns:1fr 1fr;}
+.msc-split.one{grid-template-columns:1fr;}
+.msc-side{padding:18px 20px;}
+.msc-side.wrong{border-right:1px solid var(--line);background:var(--soft);}
+.msc-split.one .msc-side.wrong{border-right:none;border-bottom:1px solid var(--line);}
+.msc-sl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.msc-side.wrong .msc-sl{color:var(--accent);}
+.msc-side.right .msc-sl{color:var(--muted);}
+.msc-mark{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+.msc-side.wrong .msc-mark{background:var(--accent);color:var(--paper);}
+.msc-side.right .msc-mark{background:var(--ink);color:var(--paper);}
+.msc-stmt{font-size:15px;}
+.msc-side.wrong .msc-stmt{text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;}
+.msc-why{padding:18px 20px;border-top:2px solid var(--ink);}
+.msc-wl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;}
+.msc-wb{font-size:14px;}
+.msc-why.missing .msc-wb{color:var(--muted);font-style:italic;}
+.msc-counter{margin:15px 20px 18px;padding:13px 16px;border:1px dashed var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;}
+.msc-counter b{display:block;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;font-weight:800;}
+
+/* ============ ROT: RowOperationTrace ============ */
+.rot-steps{border:1px solid var(--line);border-top:none;}
+.rot-step{display:grid;grid-template-columns:92px 232px 1fr;border-bottom:1px solid var(--line);}
+.rot-step:last-child{border-bottom:none;}
+.rot-num{background:var(--soft);border-right:1px solid var(--line);display:flex;align-items:flex-start;justify-content:center;padding-top:22px;}
+.rot-num span{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:800;color:var(--line);letter-spacing:-.05em;line-height:1;}
+.rot-step.fin .rot-num{background:var(--accent);}
+.rot-step.fin .rot-num span{color:var(--paper);}
+.rot-mxwrap{padding:18px 14px;display:flex;justify-content:center;align-items:flex-start;border-right:1px solid var(--line);}
+.rot-detail{padding:20px 24px;}
+.rot-op{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;color:var(--accent);margin-bottom:10px;}
+.rot-op span{display:inline-block;border:1px solid var(--accent);padding:4px 9px;margin:0 5px 5px 0;}
+.rot-why{font-size:13.5px;color:var(--muted);max-width:430px;}
+.rot-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px;}
+.chip{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;background:var(--soft);border:1px solid var(--line);}
+.chip.hot{background:var(--accent);color:var(--paper);border-color:var(--accent);}
+
+.rot-band{background:var(--oninkBg);color:var(--oninkDim);padding:28px 0 24px;overflow-x:auto;}
+.rot-flow{display:flex;align-items:flex-start;padding:0 30px;}
+.rot-frame{flex:0 0 auto;text-align:center;}
+.rot-fn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:10px;}
+.rot-ftag{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:15px;color:var(--oninkText);margin-bottom:11px;}
+.rot-fnote{font-size:11.5px;opacity:.62;max-width:182px;margin:12px auto 0;line-height:1.45;}
+.rot-gap{flex:0 0 auto;padding:0 10px;margin-top:66px;text-align:center;min-width:94px;}
+.rot-gap .rot-op{color:var(--oninkPivot);margin-bottom:8px;line-height:1.5;white-space:nowrap;}
+.rot-rail{height:2px;background:var(--oninkDim);position:relative;opacity:.5;}
+.rot-rail::after{content:'';position:absolute;right:-1px;top:-4px;border-left:9px solid var(--oninkDim);border-top:5px solid transparent;border-bottom:5px solid transparent;}
+
+.rot-eqstep{border-bottom:1px solid var(--line);}
+.rot-eqstep:last-child{border-bottom:none;}
+.rot-eqh{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 24px;background:var(--soft);border-bottom:1px solid var(--line);}
+.rot-eqn{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;background:var(--ink);color:var(--paper);padding:4px 9px;}
+.rot-eqwhy{font-size:12.5px;color:var(--muted);margin-left:auto;max-width:330px;text-align:right;}
+.rot-eqwrap{padding:18px 14px;overflow-x:auto;}
+
+.rot-tri{display:grid;grid-template-columns:1fr 166px 1fr;border:1px solid var(--line);border-top:none;}
+.rot-side{padding:22px 18px;display:flex;flex-direction:column;align-items:center;}
+.rot-side.after{background:var(--soft);}
+.rot-scap{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
+.rot-smeta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:9px;}
+.rot-mid{background:var(--ink);color:var(--oninkDim);padding:22px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.rot-mtag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;opacity:.55;}
+.rot-mop{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;color:var(--oninkPivot);text-align:center;line-height:1.6;}
+.rot-marrow{font-size:26px;opacity:.6;}
+.rot-delta{border:1px solid var(--line);border-top:none;padding:17px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:15px;margin:0;}
+.rot-delta dt{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.rot-delta dd{margin:0;font-family:'JetBrains Mono',monospace;font-size:12.5px;}
+.rot-delta dd.hot{color:var(--accent);font-weight:700;}
+
+.rot-sheet{border:1px solid var(--line);border-top:none;padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));}
+.rot-sheet .rot-frame{border-right:1px dotted var(--line);padding:0 13px;display:flex;flex-direction:column;align-items:center;}
+.rot-sheet .rot-frame:last-child{border-right:none;}
+.rot-sheet .rot-fn{color:var(--muted);opacity:1;}
+.rot-sheet .rot-frame.fin .rot-fn{color:var(--accent);}
+.rot-fop{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);margin-top:9px;line-height:1.5;}
+.rot-pills{border:1px solid var(--line);border-top:none;padding:15px 24px;display:flex;gap:10px;flex-wrap:wrap;}
+
+.rot-spine{border:1px solid var(--line);border-top:none;padding:28px 28px 22px;}
+.rot-railwrap{position:relative;padding-left:206px;}
+.rot-railwrap::before{content:'';position:absolute;left:202px;top:14px;bottom:14px;width:2px;background:var(--line);}
+.rot-node{position:relative;padding-bottom:20px;}
+.rot-nodemx{position:absolute;left:-206px;top:0;width:184px;display:flex;justify-content:flex-end;}
+.rot-dot{position:absolute;left:-11px;top:16px;width:16px;height:16px;background:var(--paper);border:3px solid var(--accent);border-radius:50%;}
+.rot-node.fin .rot-dot{background:var(--accent);}
+.rot-nodebody{padding:8px 0 0 22px;}
+
+.rot-read{display:grid;grid-template-columns:1fr 290px;border:1px solid var(--line);border-top:none;}
+.rot-readmain{padding:24px 30px;}
+.rot-readtag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:11px;}
+.rot-readbody{font-size:14.5px;}
+.rot-stats{border-left:1px solid var(--line);background:var(--soft);padding:22px 24px;display:grid;gap:17px;align-content:start;margin:0;}
+.rot-stat dt{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.rot-stat dd{margin:0;font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1;}
+.rot-stat dd small{font-family:'Inter',sans-serif;font-size:11px;font-weight:400;color:var(--muted);display:block;margin-top:6px;}
+.rot-stat.hot dd{color:var(--accent);}
+
+/* ============ MOP: MatrixOperation ============ */
+.mop-stage{border:1px solid var(--line);border-top:none;padding:22px 24px;}
+.mop-rail{border:1px solid var(--line);border-top:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(176px,1fr));margin:0;}
+.mop-cf{padding:15px 19px;border-right:1px solid var(--line);}
+.mop-cf:last-child{border-right:none;}
+.mop-cf dt{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.mop-cf dd{margin:0;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:800;}
+.mop-cf dd small{display:block;font-family:'Inter',sans-serif;font-size:11px;font-weight:400;color:var(--muted);margin-top:6px;}
+.mop-cf.hot dd{color:var(--accent);}
+.mop-cf.fail{background:var(--soft);}
+.mop-cf.fail dd{color:var(--accent);}
+.mop-verdict{border:1px solid var(--line);border-top:none;padding:14px 30px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.mop-vt{font-size:13px;color:var(--muted);}
+.mop-note{border:1px solid var(--line);border-top:none;padding:15px 30px;font-size:13.5px;}
+.mop-note-in{border-left:3px solid var(--accent);background:var(--soft);padding:13px 16px;}
+.mop-note b{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:7px;font-weight:800;}
+
+@media (max-width:900px){
+.rot-read{grid-template-columns:1fr;}
+.rot-stats{border-left:none;border-top:1px solid var(--line);grid-template-columns:repeat(2,1fr);}
+.rot-step{grid-template-columns:60px 1fr;}
+.rot-detail{grid-column:2;border-top:1px solid var(--line);}
+.rot-tri{grid-template-columns:1fr;}
+.rot-railwrap{padding-left:0;}.rot-railwrap::before{display:none;}
+.rot-nodemx{position:static;width:auto;justify-content:center;margin-bottom:10px;}
+.rot-dot{display:none;}.rot-nodebody{padding-left:0;text-align:center;}
+.csp-panels{grid-auto-flow:row;}
+.csp-panel{border-right:none;border-bottom:1px solid var(--line);}
+.csp-row,.otp-row{grid-template-columns:1fr;gap:12px;}
+.plc-plate{grid-template-columns:52px 1fr;}
+.plc-aside{grid-column:2;border-left:none;border-top:1px solid var(--line);}
+.plc-body{grid-template-columns:1fr;}.plc-cond{text-align:left;}.plc-drop{grid-column:1;}
+.plc-row{grid-template-columns:1fr;}.plc-row-vd{text-align:left;}
+.msc-split{grid-template-columns:1fr;}
+.msc-side.wrong{border-right:none;border-bottom:1px solid var(--line);}
+}
+@media (max-width:640px){
+.mast{padding:20px 16px 18px;}.mast::after{left:16px;right:16px;}
+.mtitle{font-size:21px;}
+.tally{position:static;text-align:left;margin-top:12px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="page">Built components &mdash; all variants</h1>
+  <p class="page">Seven components, twenty variants, navy. Every block below is rendered from a flat data object by a single template function &mdash; the same contract the React versions use.</p>
+  <div class="toc">
+    <a href="#plc">PropertyLawCard</a><a href="#thm">TheoremCard</a><a href="#otp">ObjectTypeProfile</a>
+    <a href="#csp">CaseSplitPanel</a><a href="#msc">MisconceptionCard</a><a href="#rot">RowOperationTrace</a>
+    <a href="#mop">MatrixOperation</a>
+  </div>
+  <div id="mount"></div>
+</div>
+
+<script>
+/* ==========================================================================
+ * MatrixScene — SVG renderer (navy)
+ * ========================================================================*/
+var CELL={lg:{w:54,h:38,fs:16,rx:4},md:{w:46,h:32,fs:14,rx:3},sm:{w:36,h:26,fs:12,rx:3},xs:{w:28,h:21,fs:10,rx:2}};
+var TK={brk:{stroke:2,hook:7,padX:5,over:4},lbl:{nameFs:11,nameGap:9,dimFs:10,dimGap:8},
+op:{fs:18,subFs:10,gapX:20},sc:{fs:17,gapX:18},scene:{padX:22,padY:16,arc:46,capFs:11,capGap:14},
+conn:{stroke:1.4,op:.85,dash:'4 3'},div:{stroke:1.6,dash:'4 3'}};
+
+function pickCell(req,mr,mc){if(req&&req!=='auto'&&CELL[req])return CELL[req];
+var d=Math.max(mr,mc);return d<=3?CELL.md:(d<=5?CELL.sm:CELL.xs);}
+
+function layoutM(m,cs){var r=m.data.length,c=m.data[0].length;
+var cx=TK.brk.padX+TK.brk.stroke, cy=m.name?TK.lbl.nameFs+TK.lbl.nameGap:0;
+var dh=m.showDim?TK.lbl.dimGap+TK.lbl.dimFs:0;
+return{rows:r,cols:c,gw:c*cs.w,gh:r*cs.h,cx:cx,cy:cy,w:c*cs.w+2*cx,h:cy+r*cs.h+TK.brk.over*2+dh};}
+
+function anchorOf(e,L,P,cs){var ox=P[e.matrix].x+L[e.matrix].cx, oy=P[e.matrix].y+L[e.matrix].cy+TK.brk.over;
+if(e.cell)return{x:ox+e.cell[1]*cs.w+cs.w/2,y:oy+e.cell[0]*cs.h};
+if(typeof e.row==='number')return{x:ox+L[e.matrix].gw,y:oy+e.row*cs.h+cs.h/2};
+if(typeof e.col==='number')return{x:ox+e.col*cs.w+cs.w/2,y:oy};
+return{x:ox+L[e.matrix].gw/2,y:oy};}
+
+function arc(f,t){var lift=Math.max(24,Math.abs(t.x-f.x)*.28);
+return 'M '+f.x+' '+f.y+' C '+f.x+' '+(f.y-lift)+', '+t.x+' '+(t.y-lift)+', '+t.x+' '+t.y;}
+
+function hasIn(list,r,k){for(var i=0;i<(list||[]).length;i++){if(list[i][0]===r&&list[i][1]===k)return true;}return false;}
+
+function roleAt(m,r,k){var hs=m.highlights||[];
+for(var i=0;i<hs.length;i++){var t=hs[i].target;
+if(t.kind==='cell'&&t.row===r&&t.col===k)return hs[i].role;
+if(t.kind==='row'&&t.index===r)return hs[i].role;
+if(t.kind==='col'&&t.index===k)return hs[i].role;
+if(t.kind==='diagonal'&&r===k-(t.offset||0))return hs[i].role;
+if(t.kind==='upper-triangle'&&(t.strict?k>r:k>=r))return hs[i].role;
+if(t.kind==='lower-triangle'&&(t.strict?k<r:k<=r))return hs[i].role;}
+return 'neutral';}
+
+function brkPath(style,side,x,y1,y2,hook){
+if(style==='pipes')return 'M '+x+' '+y1+' L '+x+' '+y2;
+var d=side==='left'?hook:-hook;
+return 'M '+(x+d)+' '+y1+' L '+x+' '+y1+' L '+x+' '+y2+' L '+(x+d)+' '+y2;}
+
+function matrixScene(spec,opt){
+opt=opt||{};var onInk=!!opt.onInk;
+var ms=spec.matrices, ops=spec.operators||[], cns=spec.connectors||[];
+var mr=0,mc=0;ms.forEach(function(m){mr=Math.max(mr,m.data.length);mc=Math.max(mc,m.data[0].length);});
+var cs=pickCell(opt.cellSize,mr,mc);
+var L=ms.map(function(m){return layoutM(m,cs);});
+var maxH=0;L.forEach(function(l){maxH=Math.max(maxH,l.h);});
+var top=TK.scene.padY+(cns.length?TK.scene.arc:0);
+var P=[],cur=TK.scene.padX;
+if(spec.leadingScalar!=null)cur+=TK.sc.gapX*2;
+L.forEach(function(l,i){P.push({x:cur,y:top+(maxH-l.h)/2});cur+=l.w;if(i<L.length-1)cur+=TK.op.gapX*2;});
+var W=cur+TK.scene.padX; if(spec.scalarResult)W+=TK.sc.gapX*3;
+var capH=spec.caption?TK.scene.capGap+TK.scene.capFs:0;
+var H=top+maxH+TK.scene.padY+capH, midY=top+maxH/2;
+
+var INK=onInk?'var(--oninkText)':'var(--ink)';
+var MUT=onInk?'var(--oninkDim)':'var(--muted)';
+var PIV=onInk?'var(--oninkPivot)':'var(--pivot)';
+var PIVT=onInk?'var(--oninkBg)':'var(--pivotText)';
+var NF=onInk?'transparent':'var(--neutralFill)';
+var NS=onInk?'var(--oninkDim)':'var(--neutralStroke)';
+var NT=onInk?'var(--oninkText)':'var(--ink)';
+var RF={neutral:NF,rowA:'var(--rowAFill)',colB:'var(--colBFill)',out:'var(--outFill)'};
+var RS={neutral:NS,rowA:'var(--rowAStroke)',colB:'var(--colBStroke)',out:'var(--outStroke)'};
+var RT={neutral:NT,rowA:'#0b2a52',colB:'#5a2412',out:'#5c3d05'};
+
+var o='<defs>';
+['rowA','colB','out'].forEach(function(r){
+o+='<marker id="ah-'+r+'" markerWidth="9" markerHeight="9" refX="7.5" refY="3.2" orient="auto">'
+ +'<path d="M0,0 L8,3.2 L0,6.4 z" fill="'+RS[r]+'"/></marker>';});
+o+='</defs>';
+
+if(spec.leadingScalar!=null)
+o+='<text x="'+(TK.scene.padX+TK.sc.gapX)+'" y="'+(midY+6)+'" text-anchor="middle" font-size="'+TK.sc.fs+'" font-weight="700" fill="'+INK+'">'+spec.leadingScalar+'</text>';
+
+ms.forEach(function(m,mi){
+var l=L[mi],p=P[mi],ox=p.x+l.cx,oy=p.y+l.cy+TK.brk.over;
+if(m.name)o+='<text x="'+(p.x+l.w/2)+'" y="'+(p.y+TK.lbl.nameFs)+'" text-anchor="middle" font-size="'+TK.lbl.nameFs+'" font-weight="700" letter-spacing="1.3" fill="'+MUT+'">'+m.name+'</text>';
+for(var r=0;r<l.rows;r++)for(var k=0;k<l.cols;k++){
+var piv=hasIn(m.pivots,r,k), chg=hasIn(m.changed,r,k), role=roleAt(m,r,k);
+var raw=m.data[r][k], zero=m.dimZero&&(raw===0||raw==='0');
+var cx=ox+k*cs.w, cy=oy+r*cs.h;
+var fill=piv?PIV:RF[role], stroke=piv?PIV:RS[role], tx=piv?PIVT:RT[role];
+var fop=1; if(!piv&&role!=='neutral')fop=.28; if(!piv&&zero&&role==='neutral')fop=.35;
+o+='<rect x="'+(cx+1)+'" y="'+(cy+1)+'" width="'+(cs.w-2)+'" height="'+(cs.h-2)+'" rx="'+cs.rx+'" fill="'+fill+'" fill-opacity="'+fop+'" stroke="'+stroke+'" stroke-width="1"/>';
+o+='<text x="'+(cx+cs.w/2)+'" y="'+(cy+cs.h/2+cs.fs*.35)+'" text-anchor="middle" font-size="'+cs.fs+'" font-weight="'+((piv||role!=='neutral')?700:500)+'" fill-opacity="'+((zero&&!piv)?.3:1)+'" fill="'+tx+'">'+raw+'</text>';
+if(chg)o+='<line x1="'+(cx+5)+'" y1="'+(cy+cs.h-3)+'" x2="'+(cx+cs.w-5)+'" y2="'+(cy+cs.h-3)+'" stroke="var(--accent)" stroke-width="2"/>';
+}
+(m.dividers||[]).forEach(function(d){var dx=ox+(d.afterCol+1)*cs.w;
+o+='<line x1="'+dx+'" y1="'+oy+'" x2="'+dx+'" y2="'+(oy+l.gh)+'" stroke="'+INK+'" stroke-width="'+TK.div.stroke+'" stroke-dasharray="'+TK.div.dash+'"/>';});
+var st=m.bracketStyle||'square', b1=p.x+TK.brk.stroke/2, b2=p.x+l.w-TK.brk.stroke/2;
+var y1=oy-TK.brk.over, y2=oy+l.gh+TK.brk.over;
+o+='<path d="'+brkPath(st,'left',b1,y1,y2,TK.brk.hook)+'" stroke="'+INK+'" stroke-width="'+TK.brk.stroke+'" fill="none"/>';
+o+='<path d="'+brkPath(st,'right',b2,y1,y2,TK.brk.hook)+'" stroke="'+INK+'" stroke-width="'+TK.brk.stroke+'" fill="none"/>';
+if(m.showDim)o+='<text x="'+(p.x+l.w/2)+'" y="'+(y2+TK.lbl.dimGap+TK.lbl.dimFs-2)+'" text-anchor="middle" font-size="'+TK.lbl.dimFs+'" fill="'+MUT+'">'+l.rows+'&#215;'+l.cols+'</text>';
+});
+
+ops.forEach(function(op,i){if(!op)return;
+var sym=typeof op==='string'?op:op.symbol, sub=typeof op==='string'?null:op.sublabel;
+var gx=P[i].x+L[i].w+TK.op.gapX;
+o+='<text x="'+gx+'" y="'+(midY+6)+'" text-anchor="middle" font-size="'+TK.op.fs+'" fill="'+MUT+'">'+sym+'</text>';
+if(sub)o+='<text x="'+gx+'" y="'+(midY+6+TK.op.subFs+6)+'" text-anchor="middle" font-size="'+TK.op.subFs+'" font-weight="700" fill="var(--accent)">'+sub+'</text>';});
+
+if(spec.scalarResult){var li=P.length-1, sx=P[li].x+L[li].w+TK.sc.gapX;
+o+='<text x="'+sx+'" y="'+(midY+6)+'" text-anchor="start" font-size="'+TK.sc.fs+'" font-weight="700" fill="'+INK+'">'+(spec.scalarResult.pre||'=')+' '+spec.scalarResult.value+'</text>';}
+
+cns.forEach(function(c,i){var f=anchorOf(c.from,L,P,cs), t=anchorOf(c.to,L,P,cs), r=c.role||'out';
+o+='<path d="'+arc(f,t)+'" fill="none" stroke="'+RS[r]+'" stroke-width="'+TK.conn.stroke+'" stroke-opacity="'+TK.conn.op+'" stroke-dasharray="'+TK.conn.dash+'" marker-end="url(#ah-'+r+')"/>';});
+
+if(spec.caption)o+='<text x="'+(W-TK.scene.padX)+'" y="'+(H-TK.scene.padY+4)+'" text-anchor="end" font-size="'+TK.scene.capFs+'" fill="'+MUT+'">'+spec.caption+'</text>';
+
+return '<svg class="mxs" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'+o+'</svg>';}
+
+/* ==========================================================================
+ * shared bits
+ * ========================================================================*/
+function pad2(n){return n<10?'0'+n:''+n;}
+function rom(n){var m=[[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']],o='',r=n;
+for(var i=0;i<m.length;i++){while(r>=m[i][0]){o+=m[i][1];r-=m[i][0];}}return o;}
+function mast(d,tally){
+return '<div class="mast">'
++(d.kicker?'<div class="kicker">'+d.kicker+'</div>':'')
++'<h3 class="mtitle">'+(d.title||d.question)+'</h3>'
++(d.intro||d.goal?'<p class="mintro">'+(d.intro||d.goal)+'</p>':'')
++(tally?'<div class="tally'+(tally.gap?' gap':'')+'"><b>'+tally.n+'</b><span>'+tally.label+'</span></div>':'')
++'</div>';}
+function sec(id,title,sub){return '<h2 class="sec" id="'+id+'">'+title+'</h2><p class="sec">'+sub+'</p>';}
+function vl(t){return '<p class="vlabel">variant: '+t+'</p>';}
+
+/* ==========================================================================
+ * PropertyLawCard
+ * ========================================================================*/
+function plcVerdict(l){if(l.verdict)return l.verdict;
+if(l.failsWhen||l.witness)return 'fails'; if(l.holdsWhen||l.requires)return 'conditional'; return 'holds';}
+var VLAB={holds:'Unconditional',conditional:'Conditional',fails:'Fails',undefined:'Undefined'};
+
+function propertyLawCard(data,variant){
+var laws=data.laws.map(function(l,i){var v=plcVerdict(l);
+var meta=[];
+if(l.requires)meta.push(['Requires',l.requires]);
+if(l.holdsWhen)meta.push(['Holds when',l.holdsWhen]);
+if(l.failsWhen)meta.push(['Fails when',l.failsWhen]);
+if(l.commonError)meta.push(['Common error',l.commonError]);
+return{raw:l,i:i+1,v:v,brk:(v==='fails'||v==='undefined'),lab:l.verdictLabel||VLAB[v],meta:meta,
+wit:l.witness?(typeof l.witness==='string'?{label:'Witness',lines:[l.witness]}:l.witness):null};});
+
+var body='';
+if(variant==='plate'){
+body='<div class="plc-plates">'+laws.map(function(l){
+return '<div class="plc-plate'+(l.brk?' brk':'')+'">'
++'<div class="plc-idx"><span class="plc-idx-n">'+pad2(l.i)+'</span><span class="plc-idx-r">'+l.v+'</span></div>'
++'<div class="plc-face"><div class="plc-name">'+l.raw.name+'</div>'
++'<div class="plc-stmt">'+l.raw.statement+'</div>'
++(l.raw.note?'<div class="plc-prose">'+l.raw.note+'</div>':'')+'</div>'
++'<div class="plc-aside"><span class="badge '+l.v+'">'+l.lab+'</span>'
++(l.meta.length?'<dl class="plc-meta">'+l.meta.map(function(m){return '<div><dt>'+m[0]+'</dt><dd>'+m[1]+'</dd></div>';}).join('')+'</dl>':'')
++(l.wit?'<div class="plc-wit"><b>'+l.wit.label+'</b>'+l.wit.lines.join('<br>')+'</div>':'')
++'</div></div>';}).join('')+'</div>';
+}
+else if(variant==='docket'){
+var g={holds:[],conditional:[],fails:[],undefined:[]};
+laws.forEach(function(l){g[l.v].push(l);});
+var groups=[['holds','Unconditional'],['conditional','Conditional'],['fails','Fails — and why the failure is instructive'],['undefined','Undefined']];
+body='<div class="plc-docket">'+groups.filter(function(x){return g[x[0]].length;}).map(function(x){
+return '<div class="plc-group"><div class="plc-group-h">'+x[1]+'</div>'+g[x[0]].map(function(l){
+var cond=l.raw.failsWhen||l.raw.holdsWhen||l.raw.requires||l.lab;
+return '<div class="plc-entry'+(l.brk?' brk':'')+'"><span class="plc-hang">'+rom(l.i)+'</span>'
++'<div class="plc-body"><div class="plc-line"><span class="plc-nm">'+l.raw.name+'</span><span class="plc-fx">'+l.raw.statement+'</span></div>'
++'<div class="plc-cond'+(l.brk?' hot':'')+'">'+cond+'</div>'
++((l.raw.note||l.wit)?'<div class="plc-drop">'+(l.raw.note||'')+(l.wit?'<p>'+l.wit.lines.join('<br>')+'</p>':'')+'</div>':'')
++'</div></div>';}).join('')+'</div>';}).join('')+'</div>';
+}
+else if(variant==='grid'){
+body='<div class="plc-cards">'+laws.map(function(l){
+return '<div class="plc-card'+(l.brk?' brk':'')+'">'
++'<div class="plc-card-h"><span class="plc-card-nm">'+l.raw.name+'</span><span class="badge '+l.v+'">'+l.lab+'</span></div>'
++'<div class="plc-card-fx">'+l.raw.statement+'</div>'
++(l.meta.length?'<dl class="plc-strip">'+l.meta.map(function(m){return '<dt>'+m[0]+'</dt><dd>'+m[1]+'</dd>';}).join('')+'</dl>':'')
++(l.wit?'<div class="plc-card-wit"><b>'+l.wit.label+'</b>'+l.wit.lines.join('<br>')+'</div>':'')
++'</div>';}).join('')+'</div>';
+}
+else{
+body='<div class="plc-rows">'+laws.map(function(l){
+return '<div class="plc-row'+(l.brk?' brk':'')+'">'
++'<div class="plc-row-nm">'+l.raw.name+'</div>'
++'<div class="plc-row-fx">'+l.raw.statement+'</div>'
++'<div class="plc-row-vd"><span class="badge '+l.v+'">'+l.lab+'</span></div></div>';}).join('')+'</div>';
+}
+return '<div class="c-root">'+mast(data,{n:pad2(laws.length),label:data.tallyLabel||'laws'})+body
++(data.footnote?'<div class="plc-foot">'+data.footnote+'</div>':'')+'</div>';}
+
+/* ==========================================================================
+ * TheoremCard
+ * ========================================================================*/
+var CLAB={holds:'Holds',fails:'Does not hold',partial:'Holds under extra hypothesis',vacuous:'Vacuous',unstated:'Not addressed'};
+function theoremCard(data,variant){
+var list=Array.isArray(data.theorems)?data.theorems:[data];
+var cards=list.map(function(t){
+var c=t.converse||{verdict:'unstated'};
+var v=c.verdict||'unstated';
+var conv={v:v,lab:c.verdictLabel||CLAB[v],stmt:c.statement,sum:c.summary,
+counter:c.counterexample?(Array.isArray(c.counterexample)?c.counterexample:[c.counterexample]):null,
+extra:c.extraHypothesis,gap:v==='unstated'};
+var hyps=(t.hypotheses||[]).map(function(h){return typeof h==='string'?{text:h,load:false}:{text:h.text,load:!!h.loadBearing};});
+return{raw:t,hyps:hyps,conv:conv};});
+
+var cls=variant==='compact'||variant==='pair'?' compact':'';
+var inner=cards.map(function(c){
+if(variant==='brief'){
+return '<div class="thm-card'+(c.conv.gap?' open':'')+'">'
++'<div class="thm-head">'+(c.raw.kicker?'<div class="thm-kick">'+c.raw.kicker+'</div>':'')+'<h3 class="thm-name">'+c.raw.name+'</h3></div>'
++'<div class="thm-brief-body"><div><div class="thm-concl">'+c.raw.conclusion+'</div>'
++(c.hyps.length?'<div class="thm-hypline">Requires: '+c.hyps.map(function(h){return h.text;}).join('; ')+'</div>':'')+'</div>'
++'<span class="badge '+c.conv.v+'">converse &middot; '+c.conv.lab+'</span></div></div>';}
+return '<div class="thm-card'+cls+(c.conv.gap?' open':'')+'">'
++'<div class="thm-head">'+(c.raw.kicker?'<div class="thm-kick">'+c.raw.kicker+'</div>':'')+'<h3 class="thm-name">'+c.raw.name+'</h3></div>'
++'<div class="thm-fwd">'
++(c.hyps.length?'<div class="thm-sub">Hypotheses</div><ul class="thm-hyps">'+c.hyps.map(function(h){return '<li'+(h.load?' class="load"':'')+'>'+h.text+'</li>';}).join('')+'</ul>':'')
++'<div class="thm-sub">Conclusion</div><div class="thm-concl">'+c.raw.conclusion+'</div></div>'
++'<div class="thm-rule"><span>Converse</span></div>'
++'<div class="thm-conv"><div class="thm-conv-h"><span class="badge '+c.conv.v+'">'+c.conv.lab+'</span>'
++(c.conv.sum?'<span class="thm-sub" style="margin:0">'+c.conv.sum+'</span>':'')+'</div>'
++(c.conv.stmt?'<div class="thm-conv-s">'+c.conv.stmt+'</div>':'')
++(c.conv.counter?'<div class="thm-counter"><b>Counterexample</b>'+c.conv.counter.map(function(x){return '<p>'+x+'</p>';}).join('')+'</div>':'')
++(c.conv.extra?'<div class="thm-extra">'+c.conv.extra+'</div>':'')
++'</div></div>';}).join('');
+return '<div class="c-root" style="background:transparent"><div class="thm-grid'+(variant==='pair'?' pair':'')+'">'+inner+'</div></div>';}
+
+/* ==========================================================================
+ * ObjectTypeProfile
+ * ========================================================================*/
+var GAPS=['','-','—','n/a','N/A',null,undefined];
+function objectTypeProfile(data,variant){
+var slots=data.slots||[{key:'det',label:'det'},{key:'rank',label:'rank'},{key:'eigenvalues',label:'eigen'},
+{key:'inverse',label:'inverse'},{key:'transpose',label:'transpose'},{key:'trace',label:'trace'}];
+var types=data.types.map(function(t){
+var cells=slots.map(function(s){var raw=t.properties?t.properties[s.key]:undefined;
+var gap=GAPS.indexOf(raw)!==-1;return{key:s.key,label:s.label,value:gap?'—':raw,gap:gap};});
+return{raw:t,cells:cells,gaps:cells.filter(function(c){return c.gap;}).length};});
+var total=types.reduce(function(a,t){return a+t.gaps;},0);
+
+function fig(t,size){if(!t.raw.example)return '';
+return matrixScene({matrices:[{data:t.raw.example,dimZero:!!t.raw.dimZero,
+highlights:t.raw.highlight?[{target:t.raw.highlight,role:'rowA'}]:[]}]},{cellSize:size||'sm'});}
+
+var body='';
+if(variant==='cards'){
+body='<div class="otp-cards">'+types.map(function(t){
+return '<div class="otp-card"><div class="otp-card-h"><div class="otp-nm">'+t.raw.name+'</div>'
++(t.raw.condition?'<div class="otp-cond">'+t.raw.condition+'</div>':'')+'</div>'
++(t.raw.example?'<div class="otp-ex">'+fig(t,'sm')+'</div>':'')
++'<dl class="otp-slots">'+t.cells.map(function(c){return '<dt>'+c.label+'</dt><dd'+(c.gap?' class="gap"':'')+'>'+c.value+'</dd>';}).join('')+'</dl>'
++'</div>';}).join('')+'</div>';
+}
+else if(variant==='matrix'){
+body='<div class="otp-scroll"><table class="otp-tbl"><thead><tr><th>Type</th>'
++slots.map(function(s){return '<th>'+s.label+'</th>';}).join('')+'</tr></thead><tbody>'
++types.map(function(t){return '<tr><th>'+t.raw.name+'</th>'
++t.cells.map(function(c){return '<td'+(c.gap?' class="gap"':'')+'>'+c.value+'</td>';}).join('')+'</tr>';}).join('')
++'</tbody></table></div>';
+}
+else{
+body='<div class="otp-stack">'+types.map(function(t){
+return '<div class="otp-row"><div><div class="otp-nm">'+t.raw.name+'</div>'
++(t.raw.condition?'<div class="otp-cond">'+t.raw.condition+'</div>':'')+'</div>'
++'<div>'+fig(t,'xs')+'</div>'
++'<dl class="otp-rslots">'+t.cells.map(function(c){return '<div><dt>'+c.label+'</dt><dd'+(c.gap?' class="gap"':'')+'>'+c.value+'</dd></div>';}).join('')+'</dl>'
++'</div>';}).join('')+'</div>';
+}
+return '<div class="c-root">'+mast(data,{n:total>0?total:types.length,label:total>0?'unfilled slots':'types',gap:total>0})+body
++(total>0?'<div class="legend"><span><i class="sw gapsw"></i> slot the page never filled</span></div>':'')+'</div>';}
+
+/* ==========================================================================
+ * CaseSplitPanel
+ * ========================================================================*/
+var FIGS={
+'parallel':'<svg viewBox="0 0 170 120"><line class="ax" x1="14" y1="106" x2="158" y2="106"/><line class="ax" x1="20" y1="10" x2="20" y2="112"/><line class="ln" x1="26" y1="94" x2="150" y2="30"/><line class="ln2" x1="26" y1="70" x2="150" y2="6"/><text class="lb" x="104" y="52">parallel</text></svg>',
+'crossing':'<svg viewBox="0 0 170 120"><line class="ax" x1="14" y1="106" x2="158" y2="106"/><line class="ax" x1="20" y1="10" x2="20" y2="112"/><line class="ln" x1="26" y1="94" x2="150" y2="24"/><line class="ln2" x1="26" y1="20" x2="150" y2="96"/><circle class="pt" cx="88" cy="59" r="5"/><text class="lb" x="96" y="52">one point</text></svg>',
+'coincident':'<svg viewBox="0 0 170 120"><line class="ax" x1="14" y1="106" x2="158" y2="106"/><line class="ax" x1="20" y1="10" x2="20" y2="112"/><line class="ln" x1="26" y1="94" x2="150" y2="24"/><line class="ln2" x1="30" y1="91.7" x2="146" y2="26.3" stroke-dasharray="6 4"/><text class="lb" x="76" y="86">same line twice</text></svg>'};
+
+function caseSplitPanel(data,variant){
+var cs=data.cases.map(function(c){
+var inst=c.instance?(Array.isArray(c.instance)?c.instance:[c.instance]):null;
+var meta=[];
+if(c.name)meta.push(['Name',c.name,false]);
+if(c.signal)meta.push(['Signal',c.signal,true]);
+if(c.consequence)meta.push(['Why',c.consequence,false]);
+return{raw:c,inst:inst,meta:meta,flag:!!c.flagged};});
+
+var body='';
+if(variant==='panels'){
+body='<div class="csp-panels">'+cs.map(function(c){
+return '<div class="csp-panel'+(c.flag?' flag':'')+'">'
++'<div class="csp-cond">'+c.raw.condition+'</div>'
++(c.raw.figure&&FIGS[c.raw.figure]?'<div class="csp-fig">'+FIGS[c.raw.figure]+'</div>':'')
++(c.raw.outcome?'<div class="csp-out">'+c.raw.outcome+'</div>':'')
++(c.meta.length?'<dl class="csp-body">'+c.meta.map(function(m){return '<dt>'+m[0]+'</dt><dd'+(m[2]?' class="mono"':'')+'>'+m[1]+'</dd>';}).join('')+'</dl>':'')
++(c.inst?'<div class="csp-inst"><b>Instance</b>'+c.inst.join('<br>')+'</div>':'')
++'</div>';}).join('')+'</div>';
+}else{
+body='<div class="csp-rows">'+cs.map(function(c){
+return '<div class="csp-row'+(c.flag?' flag':'')+'">'
++'<div class="csp-rcond">'+c.raw.condition+'</div>'
++'<div class="csp-rout">'+c.raw.outcome+'</div>'
++'<div class="csp-rcons">'+(c.raw.consequence||'')+'</div>'
++'<div class="csp-rinst">'+(c.inst?c.inst.join('<br>'):'')+'</div></div>';}).join('')+'</div>';
+}
+var ex=data.exhaustiveness;
+return '<div class="c-root">'+mast(data,{n:cs.length,label:data.tallyLabel||'cases'})+body
++'<div class="csp-ex"><div class="csp-ex-in"><b>Why these and no others</b>'
++(ex||'<em>Not stated. A case split claims the cases are exhaustive and mutually exclusive — that claim needs an argument, or the panel is a list rather than a partition.</em>')
++'</div></div></div>';}
+
+/* ==========================================================================
+ * MisconceptionCard
+ * ========================================================================*/
+function misconceptionCard(data,variant){
+var items=data.items.map(function(it){
+return{raw:it,counter:it.counterexample?(Array.isArray(it.counterexample)?it.counterexample:[it.counterexample]):null,
+missing:!it.whyTempting};});
+var one=variant==='grid';
+return '<div class="c-root" style="background:transparent"><div class="msc-stack'+(one?' grid':'')+'">'
++items.map(function(it){
+return '<div class="msc-card'+(variant==='strip'?' strip':'')+'">'
++'<div class="msc-claim"><span class="msc-tag">'+(it.raw.tag||'Misconception')+'</span>'
++(it.raw.topic?'<span class="msc-topic">'+it.raw.topic+'</span>':'')+'</div>'
++'<div class="msc-split'+(one?' one':'')+'">'
++'<div class="msc-side wrong"><div class="msc-sl"><i class="msc-mark">&#215;</i>What people write</div><div class="msc-stmt">'+it.raw.wrong+'</div></div>'
++'<div class="msc-side right"><div class="msc-sl"><i class="msc-mark">&#10003;</i>What is true</div><div class="msc-stmt">'+it.raw.right+'</div></div>'
++'</div>'
++'<div class="msc-why'+(it.missing?' missing':'')+'"><div class="msc-wl">Why the wrong version is tempting</div>'
++'<div class="msc-wb">'+(it.missing?'Not stated. Marking an error without naming the reasoning that leads to it tells the reader what to avoid but not how to notice they are doing it.':it.raw.whyTempting)+'</div></div>'
++(it.counter?'<div class="msc-counter"><b>Counterexample</b>'+it.counter.join('<br>')+'</div>':'')
++'</div>';}).join('')+'</div></div>';}
+
+/* ==========================================================================
+ * RowOperationTrace
+ * ========================================================================*/
+function rowOperationTrace(data,variant){
+var steps=data.steps.map(function(s,i){
+return{raw:s,n:i,fin:s.final!=null?!!s.final:(i===data.steps.length-1),
+ops:s.operation?(Array.isArray(s.operation)?s.operation:[s.operation]):null,chips:s.chips||[]};});
+
+function sc(s,opt){
+if(variant==='equation'&&s.raw.elementary){
+return matrixScene({matrices:[
+{name:s.raw.elementaryName||'E',data:s.raw.elementary,dimZero:true,
+ highlights:s.raw.multiplierCell?[{target:{kind:'cell',row:s.raw.multiplierCell[0],col:s.raw.multiplierCell[1]},role:'colB'}]:[]},
+{name:s.raw.beforeName||'A',data:s.raw.before,pivots:s.raw.pivotsBefore},
+{name:s.raw.label||"A'",data:s.raw.matrix,pivots:s.raw.pivots,changed:s.raw.changed}],
+operators:['\u00B7','=']},opt);}
+return matrixScene({matrices:[{name:s.raw.label,data:s.raw.matrix,pivots:s.raw.pivots,changed:s.raw.changed,
+dividers:s.raw.augAfter!=null?[{afterCol:s.raw.augAfter}]:undefined}]},opt);}
+
+var body='';
+if(variant==='ledger'){
+body='<div class="rot-steps">'+steps.map(function(s){
+return '<div class="rot-step'+(s.fin?' fin':'')+'"><div class="rot-num"><span>'+pad2(s.n+1)+'</span></div>'
++'<div class="rot-mxwrap">'+sc(s,{})+'</div><div class="rot-detail">'
++(s.ops?'<div class="rot-op">'+s.ops.map(function(o){return '<span>'+o+'</span>';}).join('')+'</div>':'')
++(s.raw.why?'<div class="rot-why">'+s.raw.why+'</div>':'')
++(s.chips.length?'<div class="rot-chips">'+s.chips.map(function(c){return '<span class="chip'+(c.hot?' hot':'')+'">'+c.text+'</span>';}).join('')+'</div>':'')
++'</div></div>';}).join('')+'</div>';
+}
+else if(variant==='filmstrip'){
+var flow='';
+steps.forEach(function(s,i){
+flow+='<div class="rot-frame"><div class="rot-fn">frame '+pad2(i+1)+'</div>'
++(s.raw.label?'<div class="rot-ftag">'+s.raw.label+'</div>':'')+sc(s,{onInk:true})
++(s.raw.note?'<p class="rot-fnote">'+s.raw.note+'</p>':'')+'</div>';
+var nx=steps[i+1];
+if(nx&&nx.ops)flow+='<div class="rot-gap"><div class="rot-op">'+nx.ops.join('<br>')+'</div><div class="rot-rail"></div></div>';});
+body='<div class="rot-band"><div class="rot-flow">'+flow+'</div></div>';
+}
+else if(variant==='equation'){
+body='<div class="rot-steps">'+steps.filter(function(s){return s.raw.elementary;}).map(function(s){
+return '<div class="rot-eqstep"><div class="rot-eqh"><span class="rot-eqn">'+pad2(s.n+1)+'</span>'
++(s.ops?'<span class="rot-op" style="margin:0">'+s.ops.join('  ')+'</span>':'')
++(s.raw.why?'<span class="rot-eqwhy">'+s.raw.why+'</span>':'')+'</div>'
++'<div class="rot-eqwrap">'+sc(s,{cellSize:'sm'})+'</div></div>';}).join('')+'</div>';
+}
+else if(variant==='diptych'){
+var f=steps[0],l=steps[steps.length-1];
+body='<div class="rot-tri">'
++'<div class="rot-side"><div class="rot-scap">'+(f.raw.label||'before')+'</div>'+sc(f,{})
++(f.raw.note?'<div class="rot-smeta">'+f.raw.note+'</div>':'')+'</div>'
++'<div class="rot-mid"><div class="rot-mtag">operation</div><div class="rot-mop">'+(l.ops?l.ops.join('<br>'):'')+'</div><div class="rot-marrow">&rarr;</div></div>'
++'<div class="rot-side after"><div class="rot-scap">'+(l.raw.label||'after')+'</div>'+sc(l,{})
++(l.raw.note?'<div class="rot-smeta">'+l.raw.note+'</div>':'')+'</div></div>'
++(data.delta?'<dl class="rot-delta">'+data.delta.map(function(d){return '<div><dt>'+d.label+'</dt><dd'+(d.hot?' class="hot"':'')+'>'+d.value+'</dd></div>';}).join('')+'</dl>':'');
+}
+else if(variant==='contact'){
+body='<div class="rot-sheet">'+steps.map(function(s){
+return '<div class="rot-frame'+(s.fin?' fin':'')+'"><div class="rot-fn">'+pad2(s.n)+(s.fin&&s.raw.label?' &middot; '+s.raw.label:'')+'</div>'
++sc(s,{cellSize:'xs'})+(s.ops?'<div class="rot-fop">'+s.ops.join(', ')+'</div>':'')+'</div>';}).join('')+'</div>'
++(data.stats?'<div class="rot-pills">'+data.stats.map(function(st){return '<span class="chip'+(st.hot?' hot':'')+'">'+st.label+' '+st.value+'</span>';}).join('')+'</div>':'');
+}
+else{
+body='<div class="rot-spine"><div class="rot-railwrap">'+steps.map(function(s){
+return '<div class="rot-node'+(s.fin?' fin':'')+'"><div class="rot-nodemx">'+sc(s,{cellSize:'sm'})+'</div>'
++'<span class="rot-dot"></span><div class="rot-nodebody">'
++(s.ops?'<div class="rot-op">'+s.ops.join(', ')+'</div>':'')
++(s.raw.why?'<div class="rot-why">'+s.raw.why+'</div>':'')+'</div></div>';}).join('')+'</div></div>';
+}
+
+var read='';
+if(variant!=='contact'&&variant!=='diptych'&&(data.reading||data.stats)){
+read='<div class="rot-read"><div class="rot-readmain"><div class="rot-readtag">Reading</div>'
++'<div class="rot-readbody">'+(data.reading||'<em>Not stated.</em>')+'</div></div>'
++(data.stats?'<div class="rot-stats">'+data.stats.map(function(st){
+return '<dl class="rot-stat'+(st.hot?' hot':'')+'"><dt>'+st.label+'</dt><dd>'+st.value+(st.note?'<small>'+st.note+'</small>':'')+'</dd></dl>';}).join('')+'</div>':'')
++'</div>';}
+
+var leg='<div class="legend"><span><i class="sw '+(variant==='filmstrip'?'gold':'piv')+'"></i> pivot</span>'
++'<span><i class="sw chg"></i> altered this step</span></div>';
+
+return '<div class="c-root">'+mast(data,null)+body+read+leg+'</div>';}
+
+/* ==========================================================================
+ * MatrixOperation
+ * ========================================================================*/
+function dimsOf(m){return m&&m.length?{r:m.length,c:m[0].length}:null;}
+function fmtD(d){return d?d.r+'\u00D7'+d.c:'—';}
+function analyse(op,A,B){var a=dimsOf(A),b=dimsOf(B);
+if(op==='multiply'){var ok=!!(a&&b&&a.c===b.r);
+return{ok:ok,cells:[
+{l:'Outer dimensions',v:(a&&b)?a.r+'\u00D7'+b.c:'—',n:'survive into the result'},
+{l:'Inner dimensions',v:(a&&b)?a.c+(ok?' = ':' \u2260 ')+b.r:'—',n:ok?'match, then disappear':'do not match — undefined',hot:true,fail:!ok},
+{l:'Reverse product',v:(a&&b&&b.c===a.r)?b.r+'\u00D7'+a.c:'undefined',n:'BA is a different size, or undefined',hot:true}],
+verdict:ok?'Conformable — the product is defined.':'Not conformable — columns of A must equal rows of B.'};}
+if(op==='add'){var ok2=!!(a&&b&&a.r===b.r&&a.c===b.c);
+return{ok:ok2,cells:[{l:'Shape of A',v:fmtD(a)},{l:'Shape of B',v:fmtD(b),fail:!ok2},
+{l:'Requirement',v:ok2?'identical':'mismatch',hot:true,fail:!ok2,n:'entrywise operations need the same shape'}],
+verdict:ok2?'Same shape — the sum is defined entrywise.':'Shapes differ — undefined. There is no broadcasting here.'};}
+return{ok:true,cells:[],verdict:null};}
+
+function matrixOperation(data,variant){
+var rep=analyse(data.operation,data.A,data.B);
+var spec;
+if(data.operation==='multiply'){
+var hi=data.highlight;
+var ms=[{name:'A',data:data.A,showDim:true,highlights:[]},{name:'B',data:data.B,showDim:true,highlights:[]},
+{name:'C',data:data.result,showDim:true,highlights:[]}];
+var cn=[];
+if(hi){ms[0].highlights.push({target:{kind:'row',index:hi.rowOfA},role:'rowA'});
+ms[1].highlights.push({target:{kind:'col',index:hi.colOfB},role:'colB'});
+ms[2].highlights.push({target:{kind:'cell',row:hi.rowOfA,col:hi.colOfB},role:'out'});
+cn.push({from:{matrix:0,row:hi.rowOfA},to:{matrix:2,cell:[hi.rowOfA,hi.colOfB]},role:'rowA'});
+cn.push({from:{matrix:1,col:hi.colOfB},to:{matrix:2,cell:[hi.rowOfA,hi.colOfB]},role:'colB'});}
+spec={matrices:ms,operators:['\u00D7','='],connectors:cn,caption:hi?hi.caption:null};
+}else{
+spec={matrices:[{name:'A',data:data.A,showDim:true},{name:'B',data:data.B,showDim:true},
+{name:'C',data:data.result,showDim:true}],operators:['+','=']};}
+
+return '<div class="c-root'+(variant==='compact'?' compact':'')+'">'+mast(data,null)
++'<div class="mop-stage">'+matrixScene(spec,{})+'</div>'
++(rep.cells.length?'<dl class="mop-rail">'+rep.cells.map(function(c){
+return '<div class="mop-cf'+(c.hot?' hot':'')+(c.fail?' fail':'')+'"><dt>'+c.l+'</dt><dd>'+c.v+(c.n?'<small>'+c.n+'</small>':'')+'</dd></div>';}).join('')+'</dl>':'')
++(rep.verdict?'<div class="mop-verdict"><span class="badge '+(rep.ok?'holds':'fails')+'">'+(rep.ok?'Defined':'Undefined')+'</span><span class="mop-vt">'+rep.verdict+'</span></div>':'')
++(data.note?'<div class="mop-note"><div class="mop-note-in"><b>What the dimension rail shows</b>'+data.note+'</div></div>':'')
++'</div>';}
+
+/* ==========================================================================
+ * DATA
+ * ========================================================================*/
+var LAWS={kicker:'Matrix &middot; operations',title:'Which laws survive<br>the matrix product',
+intro:'Every entry states its condition. Every failure exhibits the pair that breaks it.',
+footnote:'Three of six fail — which is why <a href="#">similarity</a> rather than equality is the working notion of &quot;same transformation&quot;.',
+laws:[
+{name:'Associativity',statement:'\\((AB)C = A(BC)\\)',verdict:'holds',requires:'shapes conformable',
+ note:'Lets you drop parentheses in a chain of products — the reason <a href="#">matrix powers</a> are well defined.'},
+{name:'Commutativity',statement:'\\(AB \\neq BA\\)',verdict:'fails',holdsWhen:'both diagonal, or \\(B=A^{-1}\\)',
+ note:'The most consequential failure in the subject. It is why <a href="#">cancellation</a> breaks.',
+ witness:{label:'Witness',lines:['A = [[0,1],[0,0]],  B = [[0,0],[1,0]]','AB = [[1,0],[0,0]]','BA = [[0,0],[0,1]]']}},
+{name:'Distributivity',statement:'\\(A(B+C) = AB + AC\\)',verdict:'holds',requires:'\\(B,C\\) same shape',
+ note:'Left and right distributivity are different statements — each must be checked separately.'},
+{name:'Transpose of a product',statement:'\\((AB)^{\\mathsf{T}} = B^{\\mathsf{T}}A^{\\mathsf{T}}\\)',
+ verdict:'conditional',verdictLabel:'Order reverses',requires:'\\(AB\\) defined',commonError:'writing \\(A^{\\mathsf{T}}B^{\\mathsf{T}}\\)',
+ witness:{label:'Why it flips',lines:['A is m&times;n, B is n&times;p','A&#7488;B&#7488; = (n&times;m)(p&times;n)','not conformable unless m = p']}},
+{name:'Cancellation',statement:'\\(AB = AC \\nRightarrow B = C\\)',verdict:'fails',holdsWhen:'\\(A\\) invertible',failsWhen:'\\(A\\) singular',
+ witness:{label:'Witness',lines:['A = [[1,0],[0,0]]','B = [[1,1],[1,1]], C = [[1,1],[2,2]]','AB = AC but B &ne; C']}},
+{name:'Zero divisors',statement:'\\(AB = O \\nRightarrow A = O\\)',verdict:'fails',holdsWhen:'either factor invertible',
+ note:'Matrices are not an integral domain — two nonzero matrices can annihilate each other.',
+ witness:{label:'Witness',lines:['A = [[1,0],[0,0]], B = [[0,0],[0,1]]','AB = O with both nonzero']}}]};
+
+var THEOREMS={theorems:[
+{name:'The Wronskian Test',kicker:'Function spaces &middot; independence',
+ hypotheses:[{text:'\\(f_1,\\dots,f_n\\) real-valued on an interval \\(I\\)'},
+ {text:'each differentiable at least \\(n-1\\) times'},
+ {text:'\\(W(x_0) \\neq 0\\) for some \\(x_0 \\in I\\)',loadBearing:true}],
+ conclusion:'\\(\\{f_1,\\dots,f_n\\}\\) is linearly independent on \\(I\\)',
+ converse:{verdict:'fails',summary:'independent &rArr; W nonzero somewhere',
+ statement:'A vanishing Wronskian does <em>not</em> imply dependence.',
+ counterexample:['\\(f_1(x)=x^2,\\quad f_2(x)=x|x|\\) on \\(\\mathbb{R}\\)',
+ 'Both differentiable everywhere, \\(W \\equiv 0\\), yet no nontrivial \\(c_1,c_2\\) satisfy \\(c_1x^2 + c_2x|x| = 0\\) for all \\(x\\).'],
+ extraHypothesis:'<strong>Recovering it.</strong> If the \\(f_i\\) solve one \\(n\\)-th order linear ODE with continuous coefficients, \\(W \\equiv 0\\) does imply dependence — Abel&apos;s identity forces W to be everywhere or nowhere zero.'}},
+{name:'Rank&ndash;Nullity',kicker:'Dimension &middot; maps',
+ hypotheses:[{text:'\\(T : V \\to W\\) is linear'},{text:'\\(V\\) is finite-dimensional',loadBearing:true}],
+ conclusion:'\\(\\dim(\\ker T) + \\dim(\\operatorname{im} T) = \\dim V\\)',
+ converse:{verdict:'vacuous',statement:'The identity holds for <em>every</em> linear map, so it carries no distinguishing information.',
+ extraHypothesis:'<strong>The hypothesis that matters.</strong> On \\(\\mathbb{R}^\\infty\\) the shift operator is injective but not surjective — the accounting breaks.'}},
+{name:'Cayley&ndash;Hamilton',kicker:'Eigenvalues',
+ hypotheses:[{text:'\\(A\\) is square over a commutative ring'}],
+ conclusion:'\\(A\\) satisfies its own characteristic polynomial',
+ converse:null}]};
+
+var TYPES={kicker:'Special forms',title:'Matrix types',
+intro:'Six fixed slots in the same order on every card. A slot the page never addressed is marked, not dropped.',
+types:[
+{name:'Identity',condition:'\\(I_{ij}=\\delta_{ij}\\)',example:[[1,0,0],[0,1,0],[0,0,1]],dimZero:true,
+ highlight:{kind:'diagonal',offset:0},
+ properties:{det:'1',rank:'n',eigenvalues:'1 (mult. n)',inverse:'I',transpose:'I',trace:'n'}},
+{name:'Symmetric',condition:'\\(A^{\\mathsf{T}}=A\\)',example:[[2,1,3],[1,5,0],[3,0,4]],
+ properties:{det:'\u220F\u03BB',rank:'count \u03BB \u2260 0',eigenvalues:'all real',inverse:'symmetric',transpose:'A',trace:'\u2211\u03BB'}},
+{name:'Orthogonal',condition:'\\(Q^{\\mathsf{T}}Q=I\\)',example:[['c','\u2212s'],['s','c']],
+ properties:{det:'\u00B11',rank:'n',eigenvalues:'|\u03BB| = 1',inverse:'Q\u1D40',transpose:'Q\u207B\u00B9',trace:''}},
+{name:'Nilpotent',condition:'\\(A^k=O\\)',example:[[0,1,0],[0,0,1],[0,0,0]],dimZero:true,
+ properties:{det:'0',rank:'< n',eigenvalues:'0 (mult. n)',inverse:'none',transpose:'',trace:'0'}},
+{name:'Idempotent',condition:'\\(A^2=A\\)',example:[[1,0],[0,0]],dimZero:true,
+ properties:{det:'0 or 1',rank:'= trace',eigenvalues:'0 and 1',inverse:'iff A = I',transpose:'',trace:'= rank'}},
+{name:'Skew-symmetric',condition:'\\(A^{\\mathsf{T}}=-A\\)',example:[[0,2,-1],[-2,0,3],[1,-3,0]],
+ properties:{det:'0 if n odd',rank:'always even',eigenvalues:'0 or imaginary',inverse:'',transpose:'\u2212A',trace:'0'}}]};
+
+var CASES={kicker:'Linear systems &middot; solvability',question:'How many solutions<br>does Ax = b have?',
+intro:'Exactly three answers are possible — never two, never four.',
+exhaustiveness:'If two distinct solutions <em>u</em> and <em>v</em> exist, then <em>u</em> &minus; <em>v</em> is a nonzero null-space vector, so <em>u</em> + t(<em>u</em> &minus; <em>v</em>) solves the system for every real t. Two solutions immediately generate infinitely many — which is what rules out a fourth panel.',
+cases:[
+{condition:'rank A &lt; rank [A | b]',outcome:'No solution',figure:'parallel',name:'Inconsistent',
+ signal:'a row [0 0 … 0 | c], c \u2260 0',consequence:'b lies outside the column space of A.',
+ instance:['x + 2y = 3','2x + 4y = 7','\u2192 0 = 1'],flagged:true},
+{condition:'rank A = rank [A | b] = n',outcome:'Exactly one',figure:'crossing',name:'Determined',
+ signal:'pivot in every column',consequence:'b is reachable and the columns are independent.',
+ instance:['x + 2y = 5','3x \u2212 y = 1','\u2192 (1, 2)']},
+{condition:'rank A = rank [A | b] &lt; n',outcome:'Infinitely many',figure:'coincident',name:'Underdetermined',
+ signal:'at least one free column',consequence:'The null space translates one solution into a family.',
+ instance:['x + 2y = 4','2x + 4y = 8','\u2192 (4 \u2212 2t, t)']}]};
+
+var MISCONCEPTIONS={items:[
+{topic:'Matrix &middot; inverse',wrong:'\\((AB)^{-1} = A^{-1}B^{-1}\\)',right:'\\((AB)^{-1} = B^{-1}A^{-1}\\) — the order reverses, exactly as for the transpose.',
+ whyTempting:'Every scalar habit points the wrong way. \\((ab)^{-1} = a^{-1}b^{-1}\\) is true for numbers and the notation is identical, so the fingers write it before reasoning intervenes. The reversal has a physical reading the algebra alone does not supply: undoing A-then-B means undoing B first.',
+ counterexample:['A = [[1,1],[0,1]],  B = [[1,0],[1,1]]','(AB)\u207B\u00B9 = [[1,\u22121],[\u22121,2]]','A\u207B\u00B9B\u207B\u00B9 = [[2,\u22121],[\u22121,1]]  \u2014 wrong','B\u207B\u00B9A\u207B\u00B9 = [[1,\u22121],[\u22121,2]]  \u2014 correct']},
+{topic:'Vector spaces &middot; subspaces',wrong:'The union of two subspaces is a subspace.',
+ right:'Only when one contains the other. Otherwise the union fails closure under addition.',
+ whyTempting:'Intersection of subspaces <em>is</em> a subspace, and set operations feel like they should behave uniformly. But closure is about combining elements, and union permits combining across two directions neither space contains.',
+ counterexample:['U = x-axis, W = y-axis in \u211D\u00B2','(1,0) and (0,1) both in U \u222A W','(1,1) \u2209 U \u222A W']},
+{topic:'Eigenvalues &middot; multiplicity',wrong:'A repeated eigenvalue means the matrix is not diagonalizable.',
+ right:'Repetition is harmless if the eigenspace is large enough. Failure requires geometric multiplicity strictly below algebraic.',
+ counterexample:['I\u2082 has \u03BB = 1 with algebraic multiplicity 2','and a two-dimensional eigenspace — already diagonal.']}]};
+
+var TRACE={kicker:'Vector spaces &middot; independence',title:'Testing (1, 2, \u22121), (0, 1, 3), (2, 0, 1)',
+goal:'Vectors as columns. Every column that earns a pivot is a vector no combination of the others can build.',
+reading:'Every column carries a pivot, so \\(A\\mathbf{c}=\\mathbf{0}\\) has no free variables and only the trivial solution survives. <strong>The set is linearly independent.</strong> Three independent vectors in a three-dimensional space also form a <a href="#">basis</a> for \u211D\u00B3.',
+stats:[{label:'Pivots',value:'3'},{label:'Free columns',value:'0'},{label:'Rank',value:'3',note:'full column rank',hot:true}],
+steps:[
+{label:'A',matrix:[[1,0,2],[2,1,0],[-1,3,1]],pivots:[[0,0]],
+ note:'First pivot already in place at (1,\u20091).',
+ why:'Arrange the three vectors as columns of a 3\u00D73 matrix. Nothing yet distinguishes them.',
+ chips:[{text:'3 \u00D7 3'},{text:'1 pivot'}]},
+{label:"A\u2032",matrix:[[1,0,2],[0,1,-4],[0,3,3]],pivots:[[0,0],[1,1]],changed:[[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],
+ operation:['R\u2082 \u2212 2R\u2081','R\u2083 + R\u2081'],
+ note:'Column 1 cleared below the pivot. Second pivot surfaces at (2,\u20092).',
+ why:'Clear the first column below the pivot. Both operations act on the original first row, so they can be applied in either order.',
+ chips:[{text:'2 pivots'}]},
+{label:"A\u2033 \u2014 REF",matrix:[[1,0,2],[0,1,-4],[0,0,15]],pivots:[[0,0],[1,1],[2,2]],changed:[[2,1],[2,2]],
+ operation:'R\u2083 \u2212 3R\u2082',final:true,
+ note:'Three pivots across three columns. No column left free.',
+ why:'The last operation clears the second column and exposes the third pivot. Row echelon form reached.',
+ chips:[{text:'3 pivots'},{text:'rank 3',hot:true}]}]};
+
+var TRACE_EQ={kicker:'Elementary matrices',title:'Every row operation is<br>a left multiplication',
+goal:'The same reduction written as products. Each step shows the elementary matrix that performs it.',
+reading:'Composing the elementary matrices gives \\(E_2E_1A = U\\), so \\(A = E_1^{-1}E_2^{-1}U = LU\\). The <a href="#">LU decomposition</a> falls out of the process rather than needing separate proof.',
+steps:[
+{label:"A\u2032",matrix:[[1,2,-1],[0,0,3],[3,6,-2]],pivots:[[0,0]],changed:[[1,0],[1,1],[1,2]],
+ before:[[1,2,-1],[2,4,1],[3,6,-2]],pivotsBefore:[[0,0]],
+ elementary:[[1,0,0],[-2,1,0],[0,0,1]],elementaryName:'E\u2081',multiplierCell:[1,0],
+ operation:'R\u2082 \u2212 2R\u2081',why:'E\u2081 differs from the identity in exactly one entry — the multiplier, negated.'},
+{label:"A\u2033",matrix:[[1,2,-1],[0,0,3],[0,0,1]],pivots:[[0,0],[1,2]],changed:[[2,0],[2,1],[2,2]],
+ before:[[1,2,-1],[0,0,3],[3,6,-2]],pivotsBefore:[[0,0],[1,2]],
+ elementary:[[1,0,0],[0,1,0],[-3,0,1]],elementaryName:'E\u2082',multiplierCell:[2,0],
+ operation:'R\u2083 \u2212 3R\u2081',final:true,why:'Operating on the previous result, not the original. The composite is E\u2082E\u2081A.'}]};
+
+var TRACE_DIP={kicker:'Determinants &middot; row operations',title:'One swap, one sign',
+goal:'The single-step case, where a full trace is overkill but the change still needs to be visible.',
+delta:[{label:'Rows touched',value:'1, 2'},{label:'Rank',value:'unchanged \u2014 3'},
+{label:'Determinant',value:'sign flipped',hot:true},{label:'Null space',value:'unchanged'},
+{label:'Column space',value:'changed',hot:true}],
+steps:[
+{label:'A',matrix:[[0,1,2],[3,4,5],[6,7,9]],note:'det = \u22123'},
+{label:"A\u2032",matrix:[[3,4,5],[0,1,2],[6,7,9]],pivots:[[0,0]],changed:[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]],
+ operation:'R\u2081 \u2194 R\u2082',note:'det = +3',final:true}]};
+
+var TRACE_CONTACT={kicker:'Gaussian elimination &middot; 4\u00D74',title:'Four states, one row',
+goal:'For reductions too long to narrate. Detail is sacrificed for the shape of the whole process.',
+stats:[{label:'pivots',value:'4'},{label:'free columns',value:'0'},{label:'rank',value:'4',hot:true},{label:'det',value:'6'}],
+steps:[
+{label:'start',matrix:[[2,1,3,1],[4,3,8,2],[6,7,18,5],[2,5,11,4]],pivots:[[0,0]]},
+{matrix:[[2,1,3,1],[0,1,2,0],[0,4,9,2],[0,4,8,3]],pivots:[[0,0],[1,1]],
+ changed:[[1,0],[1,1],[1,2],[1,3],[2,0],[3,0]],operation:'clear col 1'},
+{matrix:[[2,1,3,1],[0,1,2,0],[0,0,1,2],[0,0,0,3]],pivots:[[0,0],[1,1],[2,2]],
+ changed:[[2,1],[2,2],[2,3],[3,1],[3,2]],operation:'clear col 2'},
+{label:'REF',matrix:[[2,1,3,1],[0,1,2,0],[0,0,1,2],[0,0,0,3]],pivots:[[0,0],[1,1],[2,2],[3,3]],
+ changed:[[3,3]],operation:'upper triangular',final:true}]};
+
+var TRACE_SPINE={kicker:'Matrix &middot; inverse',title:'Reducing [A | I]<br>to [I | A\u207B\u00B9]',
+goal:'When each step needs a paragraph rather than a label. The rail keeps the matrix column narrow so the prose gets the width.',
+reading:'The left half is now I, so the right half is \\(A^{-1}\\). Had a zero row appeared on the left, the process would have halted and the matrix would be <a href="#">singular</a> — the method detects non-invertibility as a side effect.',
+steps:[
+{matrix:[[2,1,1,0],[1,1,0,1]],pivots:[[0,0]],augAfter:1,operation:'augment with I',
+ why:'Place the identity beside A. Every operation applied to the left half is applied to the right half simultaneously — the right half becomes a running record of the elementary matrices used.'},
+{matrix:[[1,1,0,1],[2,1,1,0]],pivots:[[0,0]],changed:[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[1,3]],augAfter:1,
+ operation:'R\u2081 \u2194 R\u2082',
+ why:'Swap to put a 1 in the pivot position, avoiding fractions for the next few steps. This is <a href="#">partial pivoting</a> done for convenience rather than stability — by hand the two motivations coincide, in floating point they do not.'},
+{matrix:[[1,0,1,-1],[0,1,-1,2]],pivots:[[0,0],[1,1]],changed:[[0,2],[0,3],[1,2],[1,3]],augAfter:1,
+ operation:'R\u2082 \u2212 2R\u2081, normalise',final:true,
+ why:'The left half is the identity, so the right half is the inverse. Verify by multiplying: \\(AA^{-1} = I\\).'}]};
+
+var MULT={kicker:'Matrix &middot; operations',title:'A &middot; B \u2014 where the<br>inner dimensions vanish',
+intro:'The highlighted cells trace one entry: row 1 of A against column 2 of B produces the marked entry of C.',
+operation:'multiply',A:[[1,2],[3,4]],B:[[5,6],[7,8]],result:[[19,22],[43,50]],
+highlight:{rowOfA:0,colOfB:1,caption:'1\u00B76 + 2\u00B78 = 22'},
+note:'AB is 2&times;2 and BA is 2&times;2 here only because both are square. For a 2&times;3 times 3&times;5, AB is 2&times;5 while BA is undefined — non-commutativity becomes a shape fact, not an algebra fact.'};
+
+var MULT_BAD={kicker:'Matrix &middot; operations',title:'When the product<br>does not exist',
+intro:'Same component, non-conformable operands. The rail is computed from the shapes, not supplied.',
+operation:'multiply',A:[[1,2,3],[4,5,6]],B:[[1,2],[3,4]],result:[[0,0],[0,0]]};
+
+/* ==========================================================================
+ * MOUNT
+ * ========================================================================*/
+var html='';
+
+html+=sec('plc','PropertyLawCard','4 variants &middot; plate, docket, grid, ledger');
+html+=vl('plate')+propertyLawCard(LAWS,'plate');
+html+=vl('docket')+propertyLawCard(LAWS,'docket');
+html+=vl('grid')+propertyLawCard(LAWS,'grid');
+html+=vl('ledger')+propertyLawCard(LAWS,'ledger');
+
+html+=sec('thm','TheoremCard','4 variants &middot; split, compact, pair, brief');
+html+=vl('split — note the third card has no converse, so it renders the unstated badge')+theoremCard(THEOREMS,'split');
+html+=vl('pair')+theoremCard(THEOREMS,'pair');
+html+=vl('brief')+theoremCard(THEOREMS,'brief');
+
+html+=sec('otp','ObjectTypeProfile','3 variants &middot; cards, matrix, stack');
+html+=vl('cards')+objectTypeProfile(TYPES,'cards');
+html+=vl('matrix — the audit view, gaps visible at once')+objectTypeProfile(TYPES,'matrix');
+html+=vl('stack')+objectTypeProfile(TYPES,'stack');
+
+html+=sec('csp','CaseSplitPanel','2 variants &middot; panels, rows');
+html+=vl('panels')+caseSplitPanel(CASES,'panels');
+html+=vl('rows')+caseSplitPanel(CASES,'rows');
+
+html+=sec('msc','MisconceptionCard','3 variants &middot; split, grid, strip');
+html+=vl('split — third item has no whyTempting, so the placeholder fires')+misconceptionCard(MISCONCEPTIONS,'split');
+html+=vl('grid')+misconceptionCard(MISCONCEPTIONS,'grid');
+html+=vl('strip')+misconceptionCard(MISCONCEPTIONS,'strip');
+
+html+=sec('rot','RowOperationTrace','6 variants &middot; ledger, filmstrip, equation, diptych, contact, spine');
+html+=vl('ledger')+rowOperationTrace(TRACE,'ledger');
+html+=vl('filmstrip — onInk, gold pivots')+rowOperationTrace(TRACE,'filmstrip');
+html+=vl('equation — three matrices per line, E &middot; A = A\u2032')+rowOperationTrace(TRACE_EQ,'equation');
+html+=vl('diptych')+rowOperationTrace(TRACE_DIP,'diptych');
+html+=vl('contact')+rowOperationTrace(TRACE_CONTACT,'contact');
+html+=vl('spine')+rowOperationTrace(TRACE_SPINE,'spine');
+
+html+=sec('mop','MatrixOperation','2 variants &middot; full, compact');
+html+=vl('full — conformable')+matrixOperation(MULT,'full');
+html+=vl('full — non-conformable, rail computes the failure')+matrixOperation(MULT_BAD,'full');
+
+document.getElementById('mount').innerHTML=html;
+
+window.addEventListener('load',function(){
+if(window.renderMathInElement){
+renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true}],throwOnError:false});}
+});
+</script>
+</body>
+</html>

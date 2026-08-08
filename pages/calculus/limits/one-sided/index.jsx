@@ -367,7 +367,7 @@ $$\\lim_{x \\to a^-} f(x)$$
 
 This notation means $x$ approaches $a$ through values strictly less than $a$. You move along the $x$-axis from the left, getting closer to $a$ but never reaching or passing it.
 
-Alternative notations include $\\lim_{x \\to a-} f(x)$ and $\\lim_{x \\uparrow a} f(x)$. Some texts describe this as approaching "from below" since smaller $x$-values lie below $a$ on the number line.
+Alternative notations include $\\lim_{x \\to a-} f(x)$ and $\\lim_{x \\uparrow a} f(x)$. Some texts describe this as approaching "from below" since smaller $x$-values lie below $a$ on the number line. All the variants appear among the [calculus symbols](!/math-symbols/calculus).
 
 The left-hand limit asks: as $x$ increases toward $a$, what value does $f(x)$ approach?
 `,

@@ -349,7 +349,9 @@ Other letters serve the same purpose. The notation $g(t)$ names a function $g$ w
 
 Specific values replace the variable to indicate particular outputs. If $f(x) = x^2 + 1$, then $f(3)$ means the output when $x = 3$, which equals $10$. The notation $f(a)$ means the output at some unspecified value $a$. The notation $f(x + 1)$ means: take $x + 1$ as the input, apply the rule.
 
-Named functions like $f$ and $g$ are distinguished from anonymous expressions like $x^2 + 1$ written without a function name. Both describe the same rule, but naming allows reference to the function as an object in its own right.`,
+Named functions like $f$ and $g$ are distinguished from anonymous expressions like $x^2 + 1$ written without a function name. Both describe the same rule, but naming allows reference to the function as an object in its own right.
+
+Every notation in this section — and the interval, composition, and inverse symbols met later — is catalogued among the [function symbols](!/math-symbols/functions) with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
     before: ``,
     after: ``,
     link: '',

@@ -638,7 +638,7 @@ obj13: {
   title: `Why These Rules Work`,
   content: `Every divisibility rule is a consequence of how the base $10$ behaves under [modular arithmetic](!/arithmetic/modulo).
 
-A number written in decimal is $d_k \\cdot 10^k + d_{k-1} \\cdot 10^{k-1} + \\cdots + d_1 \\cdot 10 + d_0$. Reducing this expression [modulo](!/arithmetic/modulo) a divisor $n$ replaces each $10^j$ with its remainder modulo $n$, and the pattern of those remainders determines the rule.
+A number written in decimal is $d_k \\cdot 10^k + d_{k-1} \\cdot 10^{k-1} + \\cdots + d_1 \\cdot 10 + d_0$. Reducing this expression [modulo](!/arithmetic/modulo) a divisor $n$ replaces each $10^j$ with its remainder modulo $n$, and the pattern of those remainders determines the rule. The symbol $\\equiv$ below reads "is congruent to" — the notation is introduced in the [congruence section](!/arithmetic/modulo#5) of the modulo page.
 
 For $n = 2$ or $n = 5$: $10 \\equiv 0$, so all terms except $d_0$ vanish. Only the last digit matters.
 

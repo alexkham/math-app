@@ -901,6 +901,8 @@ const keyWords = [
 
 $$\\frac{5}{8} > \\frac{3}{8}$$
 
+The symbol $>$ reads "is greater than" and $<$ reads "is less than" — both belong to the [comparison symbols](!/math-symbols/arithmetic) of arithmetic.
+
 Both fractions represent eighths. Five eighths is more than three eighths because five pieces exceed three pieces of the same size.
 
 This principle extends to any number of fractions with a common denominator. Arranging $\\frac{2}{9}$, $\\frac{7}{9}$, and $\\frac{4}{9}$ in order requires only sorting the numerators: $\\frac{2}{9} < \\frac{4}{9} < \\frac{7}{9}$.`,

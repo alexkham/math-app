@@ -271,6 +271,8 @@ The operator $D$ or $D_x$ applied to a function: $Df(x)$ means the same as $f'(x
 
 A dot above the variable: $\\dot{y}$ for the first derivative, $\\ddot{y}$ for the second. Used almost exclusively where the independent variable is time. The notation signals that differentiation is with respect to $t$.
 
+In [LaTeX](!/latex) source, the Leibniz form is produced by \\frac{dy}{dx}, the primes by f' directly, and the Newton dots by \\dot{y} and \\ddot{y}.
+
 The table below collects the four systems side by side with their first-derivative and higher-derivative forms and the contexts where each one is most commonly used.
 
 
