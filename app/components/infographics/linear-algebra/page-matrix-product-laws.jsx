@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import PropertyLawCard from '@/app/components/infographics/property-law-card/PropertyLawCard';
-
+import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard';
 /* ============================================================================
  * getStaticProps — all content is built here and handed down as props.
  * The page never constructs data; the component never reaches for it.

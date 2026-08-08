@@ -1,7 +1,6 @@
 import React from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
-import MatrixScene from '../matrix-scene/MatrixScene';
-
+import MatrixScene from './MatrixScene';
 /* ============================================================================
  * THEMES — six base tokens plus the pivot pair and the onInk block.
  * ==========================================================================*/
