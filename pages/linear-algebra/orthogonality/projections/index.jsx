@@ -1,3 +1,878 @@
+// // tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj5 aggregation, obj9 summary capstone)
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import { tableHeaders } from '@/app/styles/theme'
+
+
+// export async function getStaticProps(){
+// const keyWords = [
+//   "orthogonal projection",
+//   "projection onto subspace",
+//   "projection matrix",
+//   "projection formula linear algebra",
+//   "proj vector formula",
+//   "orthogonal decomposition",
+//   "projection orthogonal basis",
+//   "projection matrix properties",
+//   "idempotent symmetric matrix",
+//   "closest point subspace",
+//   "projection least squares",
+//   "normal equations projection",
+//   "projection onto vector",
+//   "A(ATA)^-1 AT formula"
+// ]
+
+// const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// // ---------- TABLES ----------
+
+// // obj4 — aggregation: projection formulas by basis type (consolidates obj1, obj3, obj4)
+// const obj4Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Project onto…</th>
+//       <th style="${tableHeaders.aggregation}">Formula for the projection</th>
+//       <th style="${tableHeaders.aggregation}">Requirements on the basis</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a single nonzero vector a</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>a</sub>(b) = (a · b) / (a · a) · a</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≠ 0</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a subspace W with an <em>orthogonal</em> basis {u<sub>1</sub>, …, u<sub>k</sub>}</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>W</sub>(b) = Σᵢ (u<sub>i</sub> · b) / (u<sub>i</sub> · u<sub>i</sub>) · u<sub>i</sub></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basis pairwise orthogonal: u<sub>i</sub> · u<sub>j</sub> = 0 for i ≠ j</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a subspace W with an <em>orthonormal</em> basis {q<sub>1</sub>, …, q<sub>k</sub>}</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>W</sub>(b) = Σᵢ (q<sub>i</sub> · b) · q<sub>i</sub></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">pairwise orthogonal + each ‖q<sub>i</sub>‖ = 1</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">a subspace W with an arbitrary basis (columns of A)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">proj<sub>W</sub>(b) = A (AᵀA)⁻¹ Aᵀ b</td>
+//       <td style="padding: 12px 15px; color: #34495e;">columns of A linearly independent (so AᵀA is invertible)</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // obj5 — aggregation: properties of the projection matrix P = A(AᵀA)⁻¹Aᵀ
+// const obj5Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Property of P</th>
+//       <th style="${tableHeaders.aggregation}">Statement</th>
+//       <th style="${tableHeaders.aggregation}">Why it holds / what it means</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Idempotent</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P² = P</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">projecting a second time changes nothing; vectors already in W are fixed</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Pᵀ = P</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">makes the projection orthogonal (residual ⊥ W); distinguishes from oblique projections, which satisfy P² = P but Pᵀ ≠ P</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Complementary projection</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I − P projects onto W<sup>⊥</sup></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I − P is also symmetric and idempotent</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Decomposition of every b</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">b = Pb + (I − P) b</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique split into a W-component and a W<sup>⊥</sup>-component</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/eigen" style="${linkStyle}">Eigenvalues</a></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only 0 and 1</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vectors in W are eigenvectors for λ = 1; vectors in W<sup>⊥</sup> for λ = 0</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(P) = dim(W)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of independent directions preserved</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/trace" style="${linkStyle}">Trace</a></td>
+//       <td style="padding: 12px 15px; color: #34495e;">tr(P) = dim(W)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">trace = sum of eigenvalues = number of eigenvalues equal to 1</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthonormal basis simplification</td>
+//       <td style="padding: 12px 15px; color: #34495e;">P = QQᵀ when A = Q has Qᵀ Q = I</td>
+//       <td style="padding: 12px 15px; color: #34495e;">the (AᵀA)⁻¹ factor disappears because QᵀQ = I</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // obj9 — summary capstone: where projections appear across linear algebra
+// const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Where projection appears</th>
+//       <th style="${tableHeaders.summary}">What is being projected</th>
+//       <th style="${tableHeaders.summary}">What the projection gives</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Component along an axis</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector b onto a single direction q</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(q · b) q — the part of b along q</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Best approximation in a subspace</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector b onto subspace W</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the w ∈ W minimizing ‖b − w‖</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Orthogonal decomposition of ℝⁿ</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every b onto W and onto W<sup>⊥</sup></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique b = Pb + (I − P) b</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality/least-squares" style="${linkStyle}">Least squares</a></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">b onto Col(A) when A x = b is inconsistent</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A x̂ = Pb; residual ⊥ Col(A); normal equations AᵀA x̂ = Aᵀ b</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram–Schmidt</a> orthogonalization</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each new basis vector onto the span of previous ones</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">perpendicular remainder becomes the next orthogonal basis vector</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR decomposition</a></td>
+//       <td style="padding: 12px 15px; color: #34495e;">columns of A successively onto previous orthonormal q&apos;s</td>
+//       <td style="padding: 12px 15px; color: #34495e;">A = QR with Q orthonormal columns and R upper triangular</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+
+// // const sectionsContent = {
+// //   obj1: {
+// //     title: `Projection onto a Vector`,
+// //     content: `The orthogonal projection of $\\mathbf{b}$ onto a nonzero vector $\\mathbf{a}$ is the point on the line through $\\mathbf{a}$ nearest to $\\mathbf{b}$:
+
+// // $$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$$
+
+// // The scalar $\\hat{c} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}$ is the component of $\\mathbf{b}$ in the direction of $\\mathbf{a}$. The projection $\\hat{c}\\,\\mathbf{a}$ lies on the line through $\\mathbf{a}$, and the residual $\\mathbf{b} - \\hat{c}\\,\\mathbf{a}$ is [orthogonal](!/linear-algebra/orthogonality) to $\\mathbf{a}$:
+
+// // $$(\\mathbf{b} - \\hat{c}\\,\\mathbf{a}) \\cdot \\mathbf{a} = \\mathbf{b} \\cdot \\mathbf{a} - \\hat{c}(\\mathbf{a} \\cdot \\mathbf{a}) = \\mathbf{b} \\cdot \\mathbf{a} - \\mathbf{b} \\cdot \\mathbf{a} = 0$$
+
+// // ## Worked Example
+
+// // Project $\\mathbf{b} = (3, 4, 0)$ onto $\\mathbf{a} = (1, 1, 1)$:
+
+// // $$\\hat{c} = \\frac{3 + 4 + 0}{1 + 1 + 1} = \\frac{7}{3}, \\quad \\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{7}{3}(1, 1, 1) = \\left(\\frac{7}{3}, \\frac{7}{3}, \\frac{7}{3}\\right)$$
+
+// // Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, \\frac{5}{3}, -\\frac{7}{3})$. Check: $(\\frac{2}{3})(1) + (\\frac{5}{3})(1) + (-\\frac{7}{3})(1) = 0$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj2: {
+// //     title: `The Orthogonal Decomposition`,
+// //     content: `Every vector $\\mathbf{b} \\in \\mathbb{R}^n$ decomposes uniquely with respect to a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ as
+
+// // $$\\mathbf{b} = \\hat{\\mathbf{b}} + \\mathbf{z}$$
+
+// // where $\\hat{\\mathbf{b}} \\in W$ and $\\mathbf{z} \\in W^\\perp$. The component $\\hat{\\mathbf{b}}$ is the orthogonal projection of $\\mathbf{b}$ onto $W$, and $\\mathbf{z} = \\mathbf{b} - \\hat{\\mathbf{b}}$ is the perpendicular residual.
+
+// // The projection $\\hat{\\mathbf{b}}$ is the closest point in $W$ to $\\mathbf{b}$. For any other vector $\\mathbf{w} \\in W$:
+
+// // $$\\|\\mathbf{b} - \\mathbf{w}\\|^2 = \\|\\mathbf{z}\\|^2 + \\|\\hat{\\mathbf{b}} - \\mathbf{w}\\|^2 \\geq \\|\\mathbf{z}\\|^2 = \\|\\mathbf{b} - \\hat{\\mathbf{b}}\\|^2$$
+
+// // The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product): $\\mathbf{z}$ is orthogonal to $\\hat{\\mathbf{b}} - \\mathbf{w}$ (both $\\hat{\\mathbf{b}}$ and $\\mathbf{w}$ are in $W$, so their difference is in $W$, and $\\mathbf{z} \\in W^\\perp$). The minimum distance $\\|\\mathbf{z}\\|$ is achieved uniquely at $\\mathbf{w} = \\hat{\\mathbf{b}}$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj3: {
+// //     title: `Projection with an Orthogonal Basis`,
+// //     content: `When $W = \\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ and the [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ is orthogonal, the projection of $\\mathbf{b}$ onto $W$ decomposes into independent vector projections:
+
+// // $$\\text{proj}_W \\mathbf{b} = \\frac{\\mathbf{u}_1 \\cdot \\mathbf{b}}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1 + \\frac{\\mathbf{u}_2 \\cdot \\mathbf{b}}{\\mathbf{u}_2 \\cdot \\mathbf{u}_2}\\,\\mathbf{u}_2 + \\cdots + \\frac{\\mathbf{u}_k \\cdot \\mathbf{b}}{\\mathbf{u}_k \\cdot \\mathbf{u}_k}\\,\\mathbf{u}_k$$
+
+// // Each term is the projection of $\\mathbf{b}$ onto one basis vector. Orthogonality prevents interference: projecting onto $\\mathbf{u}_1$ does not affect the component along $\\mathbf{u}_2$, because $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0$.
+
+// // When the basis is [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets), the denominators are all $1$:
+
+// // $$\\text{proj}_W \\mathbf{b} = (\\mathbf{q}_1 \\cdot \\mathbf{b})\\,\\mathbf{q}_1 + (\\mathbf{q}_2 \\cdot \\mathbf{b})\\,\\mathbf{q}_2 + \\cdots + (\\mathbf{q}_k \\cdot \\mathbf{b})\\,\\mathbf{q}_k$$
+
+// // This is the cleanest formula in all of linear algebra — $k$ dot products and $k$ scalar multiplications.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj4: {
+// //     title: `Projection with an Arbitrary Basis`,
+// //     content: `When the basis for $W$ is not orthogonal, the individual vector projection formula does not apply — projecting onto one basis vector interferes with the others. Instead, the projection requires solving a system.
+
+// // If the columns of the $m \\times k$ [matrix](!/linear-algebra/matrix) $A$ form a basis for $W$, the projection of $\\mathbf{b}$ onto $W$ is
+
+// // $$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$$
+
+// // This formula requires $A^TA$ to be [invertible](!/linear-algebra/matrix/inverse), which holds whenever the columns of $A$ are [linearly independent](!/linear-algebra/vector-spaces/linear-independence).
+
+// // The derivation comes from the orthogonality condition. The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$: $A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$. Solving for $\\hat{\\mathbf{x}}$ gives $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$, so $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$, and $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
+
+// // The alternative is to first orthogonalize the basis using [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt), then use the simpler orthogonal formula. Both approaches give the same projection.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj5: {
+// //     title: `The Projection Matrix`,
+// //     content: `The matrix $P = A(A^TA)^{-1}A^T$ maps any vector $\\mathbf{b}$ to its projection onto $\\text{Col}(A)$: $\\hat{\\mathbf{b}} = P\\mathbf{b}$.
+
+// // When the basis is orthonormal ($A = Q$ with $Q^TQ = I$), the formula simplifies to $P = QQ^T$.
+
+// // The projection matrix satisfies two algebraic conditions. It is [symmetric](!/linear-algebra/matrix/types): $P^T = P$. And it is [idempotent](!/linear-algebra/matrix/types): $P^2 = P$ — projecting twice gives the same result as projecting once, because vectors already in $W$ are fixed by $P$.
+
+// // The complementary matrix $I - P$ projects onto $W^\\perp$. It satisfies $(I - P)^T = I - P$ and $(I - P)^2 = I - P$, and for every $\\mathbf{b}$: $P\\mathbf{b} + (I - P)\\mathbf{b} = \\mathbf{b}$, decomposing $\\mathbf{b}$ into its $W$-component and its $W^\\perp$-component.
+
+// // The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$ map to themselves (eigenvalue $1$) and vectors in $W^\\perp$ map to zero (eigenvalue $0$). The rank of $P$ equals the [trace](!/linear-algebra/matrix/trace) of $P$, which equals $\\dim(W)$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj6: {
+// //     title: `Properties of Orthogonal Projections`,
+// //     content: `Orthogonal projections are characterized by two properties acting together.
+
+// // Idempotence ($P^2 = P$): once a vector has been projected, projecting again changes nothing. Every vector in $W$ is a fixed point of $P$. This distinguishes projections from other [linear transformations](!/linear-algebra/transformations) — most transformations continue to change vectors on repeated application.
+
+// // Symmetry ($P^T = P$): the projection is self-adjoint with respect to the dot product. This means $P\\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{u} \\cdot P\\mathbf{v}$ for all $\\mathbf{u}, \\mathbf{v}$. The symmetry condition is what makes the projection orthogonal rather than oblique — it ensures the residual is perpendicular to $W$, not merely non-parallel.
+
+// // A matrix satisfying $P^2 = P$ and $P^T = P$ is an orthogonal projection. A matrix satisfying $P^2 = P$ but $P^T \\neq P$ is an oblique projection — it projects onto the same subspace but along a different direction, not the perpendicular one.
+
+// // The error $\\|\\mathbf{b} - P\\mathbf{b}\\|$ is the distance from $\\mathbf{b}$ to $W$. It is the smallest possible value of $\\|\\mathbf{b} - \\mathbf{w}\\|$ over all $\\mathbf{w} \\in W$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj7: {
+// //     title: `Projection and Least Squares`,
+// //     content: `When the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ has no solution — when $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — the [least-squares](!/linear-algebra/orthogonality/least-squares) solution $\\hat{\\mathbf{x}}$ produces the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$:
+
+// // $$A\\hat{\\mathbf{x}} = \\hat{\\mathbf{b}} = P\\mathbf{b}$$
+
+// // The least-squares solution does not solve $A\\mathbf{x} = \\mathbf{b}$. It solves $A\\mathbf{x} = \\hat{\\mathbf{b}}$, where $\\hat{\\mathbf{b}}$ is the closest reachable vector to $\\mathbf{b}$.
+
+// // The residual $\\mathbf{r} = \\mathbf{b} - A\\hat{\\mathbf{x}}$ lies in $\\text{Col}(A)^\\perp = \\text{Null}(A^T)$ — it is orthogonal to every column of $A$. The condition $A^T\\mathbf{r} = \\mathbf{0}$ is exactly the normal equation $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$.
+
+// // Every least-squares problem is a projection problem. Solving least squares means projecting the target $\\mathbf{b}$ onto the column space and finding the input $\\hat{\\mathbf{x}}$ that produces the projected output.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj8: {
+// //     title: `Worked Example: Full Projection Computation`,
+// //     content: `Project $\\mathbf{b} = (1, 2, 3)$ onto the subspace $W = \\text{Span}\\{(1, 0, 1), (0, 1, 1)\\}$ in $\\mathbb{R}^3$.
+
+// // The basis is not orthogonal: $(1, 0, 1) \\cdot (0, 1, 1) = 0 + 0 + 1 = 1 \\neq 0$. Use the general formula. Set $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
+
+// // $$A^TA = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$$
+
+// // $$(A^TA)^{-1} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$$
+
+// // $$A^T\\mathbf{b} = \\begin{pmatrix} 1 + 0 + 3 \\\\ 0 + 2 + 3 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix}$$
+
+// // $$\\hat{\\mathbf{x}} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix} = \\frac{1}{3}\\begin{pmatrix} 3 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$$
+
+// // $$\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = 1\\begin{pmatrix} 1 \\\\ 0 \\\\ 1 \\end{pmatrix} + 2\\begin{pmatrix} 0 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$$
+
+// // The projection equals $\\mathbf{b}$ itself — meaning $\\mathbf{b}$ was already in $W$. The residual is $\\mathbf{0}$, confirming $\\mathbf{b} \\in \\text{Span}\\{(1, 0, 1), (0, 1, 1)\\}$. Indeed: $(1, 2, 3) = 1 \\cdot (1, 0, 1) + 2 \\cdot (0, 1, 1)$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj9: {
+// //     title: `Summary: Where Projections Appear`,
+// //     content: `Projection is not a single isolated construction — it threads through least squares, Gram&ndash;Schmidt, QR decomposition, the orthogonal decomposition of ℝⁿ, and every &quot;closest point&quot; or &quot;best approximation&quot; problem in linear algebra. The table below collects each context in which projection plays a role, alongside what is being projected and what the projection produces.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// // }
+
+
+// // formulas-injected: v1 | 2026-06-16 | 6 callouts (obj2 orthogonal_decomposition direct, obj3 projection_onto_orthonormal_basis direct, obj4 projection_onto_subspace direct, obj5 orthonormal_columns_projection inline-promote + complementary_projection prose-insert, obj6 projection_matrix_properties prose-insert)
+
+// const sectionsContent = {
+//   obj1: {
+//     title: `Projection onto a Vector`,
+//     content: `The orthogonal projection of $\\mathbf{b}$ onto a nonzero vector $\\mathbf{a}$ is the point on the line through $\\mathbf{a}$ nearest to $\\mathbf{b}$:
+
+// $$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$$
+
+// The scalar $\\hat{c} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}$ is the component of $\\mathbf{b}$ in the direction of $\\mathbf{a}$. The projection $\\hat{c}\\,\\mathbf{a}$ lies on the line through $\\mathbf{a}$, and the residual $\\mathbf{b} - \\hat{c}\\,\\mathbf{a}$ is [orthogonal](!/linear-algebra/orthogonality) to $\\mathbf{a}$:
+
+// $$(\\mathbf{b} - \\hat{c}\\,\\mathbf{a}) \\cdot \\mathbf{a} = \\mathbf{b} \\cdot \\mathbf{a} - \\hat{c}(\\mathbf{a} \\cdot \\mathbf{a}) = \\mathbf{b} \\cdot \\mathbf{a} - \\mathbf{b} \\cdot \\mathbf{a} = 0$$
+
+// ## Worked Example
+
+// Project $\\mathbf{b} = (3, 4, 0)$ onto $\\mathbf{a} = (1, 1, 1)$:
+
+// $$\\hat{c} = \\frac{3 + 4 + 0}{1 + 1 + 1} = \\frac{7}{3}, \\quad \\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{7}{3}(1, 1, 1) = \\left(\\frac{7}{3}, \\frac{7}{3}, \\frac{7}{3}\\right)$$
+
+// Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, \\frac{5}{3}, -\\frac{7}{3})$. Check: $(\\frac{2}{3})(1) + (\\frac{5}{3})(1) + (-\\frac{7}{3})(1) = 0$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj2: {
+//     title: `The Orthogonal Decomposition`,
+//     content: `Every vector $\\mathbf{b} \\in \\mathbb{R}^n$ decomposes uniquely with respect to a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ as
+
+// @academic[formula_callout:orthogonal_decomposition|Orthogonal Decomposition|$$\\mathbf{b} = \\hat{\\mathbf{b}} + \\mathbf{z}, \\quad \\hat{\\mathbf{b}} \\in W, \\ \\mathbf{z} \\in W^\\perp$$]@
+// @academic[formulas_link:/linear-algebra/formulas#orthogonal_decomposition]@
+
+// The component $\\hat{\\mathbf{b}}$ is the orthogonal projection of $\\mathbf{b}$ onto $W$, and $\\mathbf{z} = \\mathbf{b} - \\hat{\\mathbf{b}}$ is the perpendicular residual.
+
+// The projection $\\hat{\\mathbf{b}}$ is the closest point in $W$ to $\\mathbf{b}$. For any other vector $\\mathbf{w} \\in W$:
+
+// $$\\|\\mathbf{b} - \\mathbf{w}\\|^2 = \\|\\mathbf{z}\\|^2 + \\|\\hat{\\mathbf{b}} - \\mathbf{w}\\|^2 \\geq \\|\\mathbf{z}\\|^2 = \\|\\mathbf{b} - \\hat{\\mathbf{b}}\\|^2$$
+
+// The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product): $\\mathbf{z}$ is orthogonal to $\\hat{\\mathbf{b}} - \\mathbf{w}$ (both $\\hat{\\mathbf{b}}$ and $\\mathbf{w}$ are in $W$, so their difference is in $W$, and $\\mathbf{z} \\in W^\\perp$). The minimum distance $\\|\\mathbf{z}\\|$ is achieved uniquely at $\\mathbf{w} = \\hat{\\mathbf{b}}$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj3: {
+//     title: `Projection with an Orthogonal Basis`,
+//     content: `When $W = \\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ and the [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ is orthogonal, the projection of $\\mathbf{b}$ onto $W$ decomposes into independent vector projections:
+
+// $$\\text{proj}_W \\mathbf{b} = \\frac{\\mathbf{u}_1 \\cdot \\mathbf{b}}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1 + \\frac{\\mathbf{u}_2 \\cdot \\mathbf{b}}{\\mathbf{u}_2 \\cdot \\mathbf{u}_2}\\,\\mathbf{u}_2 + \\cdots + \\frac{\\mathbf{u}_k \\cdot \\mathbf{b}}{\\mathbf{u}_k \\cdot \\mathbf{u}_k}\\,\\mathbf{u}_k$$
+
+// Each term is the projection of $\\mathbf{b}$ onto one basis vector. Orthogonality prevents interference: projecting onto $\\mathbf{u}_1$ does not affect the component along $\\mathbf{u}_2$, because $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0$.
+
+// When the basis is [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets), the denominators are all $1$:
+
+// @academic[formula_callout:projection_onto_orthonormal_basis|Projection onto Orthonormal Basis|$$\\text{proj}_W \\mathbf{b} = \\sum_{i=1}^{k} (\\mathbf{q}_i \\cdot \\mathbf{b})\\,\\mathbf{q}_i$$]@
+// @academic[formulas_link:/linear-algebra/formulas#projection_onto_orthonormal_basis]@
+
+// This is the cleanest formula in all of linear algebra — $k$ dot products and $k$ scalar multiplications.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj4: {
+//     title: `Projection with an Arbitrary Basis`,
+//     content: `When the basis for $W$ is not orthogonal, the individual vector projection formula does not apply — projecting onto one basis vector interferes with the others. Instead, the projection requires solving a system.
+
+// If the columns of the $m \\times k$ [matrix](!/linear-algebra/matrix) $A$ form a basis for $W$, the projection of $\\mathbf{b}$ onto $W$ is
+
+// @academic[formula_callout:projection_onto_subspace|Projection onto Subspace|$$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$$]@
+// @academic[formulas_link:/linear-algebra/formulas#projection_onto_subspace]@
+
+// This formula requires $A^TA$ to be [invertible](!/linear-algebra/matrix/inverse), which holds whenever the columns of $A$ are [linearly independent](!/linear-algebra/vector-spaces/linear-independence).
+
+// The derivation comes from the orthogonality condition. The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$: $A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$. Solving for $\\hat{\\mathbf{x}}$ gives $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$, so $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$, and $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
+
+// The alternative is to first orthogonalize the basis using [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt), then use the simpler orthogonal formula. Both approaches give the same projection.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj5: {
+//     title: `The Projection Matrix`,
+//     content: `The matrix $P = A(A^TA)^{-1}A^T$ maps any vector $\\mathbf{b}$ to its projection onto $\\text{Col}(A)$: $\\hat{\\mathbf{b}} = P\\mathbf{b}$.
+
+// When the basis is orthonormal ($A = Q$ with $Q^TQ = I$), the formula simplifies:
+
+// @academic[formula_callout:orthonormal_columns_projection|Orthonormal Columns Projection|$$P = QQ^T$$]@
+// @academic[formulas_link:/linear-algebra/formulas#orthonormal_columns_projection]@
+
+// The projection matrix satisfies two algebraic conditions. It is [symmetric](!/linear-algebra/matrix/types): $P^T = P$. And it is [idempotent](!/linear-algebra/matrix/types): $P^2 = P$ — projecting twice gives the same result as projecting once, because vectors already in $W$ are fixed by $P$.
+
+// The complementary matrix $I - P$ projects onto the orthogonal complement $W^\\perp$:
+
+// @academic[formula_callout:complementary_projection|Complementary Projection|$$I - P \\text{ projects onto } W^\\perp$$]@
+// @academic[formulas_link:/linear-algebra/formulas#complementary_projection]@
+
+// It satisfies $(I - P)^T = I - P$ and $(I - P)^2 = I - P$, and for every $\\mathbf{b}$: $P\\mathbf{b} + (I - P)\\mathbf{b} = \\mathbf{b}$, decomposing $\\mathbf{b}$ into its $W$-component and its $W^\\perp$-component.
+
+// The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$ map to themselves (eigenvalue $1$) and vectors in $W^\\perp$ map to zero (eigenvalue $0$). The rank of $P$ equals the [trace](!/linear-algebra/matrix/trace) of $P$, which equals $\\dim(W)$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj6: {
+//     title: `Properties of Orthogonal Projections`,
+//     content: `Orthogonal projections are characterized by two properties acting together:
+
+// @academic[formula_callout:projection_matrix_properties|Projection Matrix Properties|$$P^2 = P, \\quad P^T = P$$]@
+// @academic[formulas_link:/linear-algebra/formulas#projection_matrix_properties]@
+
+// Idempotence ($P^2 = P$): once a vector has been projected, projecting again changes nothing. Every vector in $W$ is a fixed point of $P$. This distinguishes projections from other [linear transformations](!/linear-algebra/transformations) — most transformations continue to change vectors on repeated application.
+
+// Symmetry ($P^T = P$): the projection is self-adjoint with respect to the dot product. This means $P\\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{u} \\cdot P\\mathbf{v}$ for all $\\mathbf{u}, \\mathbf{v}$. The symmetry condition is what makes the projection orthogonal rather than oblique — it ensures the residual is perpendicular to $W$, not merely non-parallel.
+
+// A matrix satisfying $P^2 = P$ and $P^T = P$ is an orthogonal projection. A matrix satisfying $P^2 = P$ but $P^T \\neq P$ is an oblique projection — it projects onto the same subspace but along a different direction, not the perpendicular one.
+
+// The error $\\|\\mathbf{b} - P\\mathbf{b}\\|$ is the distance from $\\mathbf{b}$ to $W$. It is the smallest possible value of $\\|\\mathbf{b} - \\mathbf{w}\\|$ over all $\\mathbf{w} \\in W$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj7: {
+//     title: `Projection and Least Squares`,
+//     content: `When the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ has no solution — when $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — the [least-squares](!/linear-algebra/orthogonality/least-squares) solution $\\hat{\\mathbf{x}}$ produces the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$:
+
+// $$A\\hat{\\mathbf{x}} = \\hat{\\mathbf{b}} = P\\mathbf{b}$$
+
+// The least-squares solution does not solve $A\\mathbf{x} = \\mathbf{b}$. It solves $A\\mathbf{x} = \\hat{\\mathbf{b}}$, where $\\hat{\\mathbf{b}}$ is the closest reachable vector to $\\mathbf{b}$.
+
+// The residual $\\mathbf{r} = \\mathbf{b} - A\\hat{\\mathbf{x}}$ lies in $\\text{Col}(A)^\\perp = \\text{Null}(A^T)$ — it is orthogonal to every column of $A$. The condition $A^T\\mathbf{r} = \\mathbf{0}$ is exactly the normal equation $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$.
+
+// Every least-squares problem is a projection problem. Solving least squares means projecting the target $\\mathbf{b}$ onto the column space and finding the input $\\hat{\\mathbf{x}}$ that produces the projected output.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj8: {
+//     title: `Worked Example: Full Projection Computation`,
+//     content: `Project $\\mathbf{b} = (1, 2, 3)$ onto the subspace $W = \\text{Span}\\{(1, 0, 1), (0, 1, 1)\\}$ in $\\mathbb{R}^3$.
+
+// The basis is not orthogonal: $(1, 0, 1) \\cdot (0, 1, 1) = 0 + 0 + 1 = 1 \\neq 0$. Use the general formula. Set $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
+
+// $$A^TA = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$$
+
+// $$(A^TA)^{-1} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$$
+
+// $$A^T\\mathbf{b} = \\begin{pmatrix} 1 + 0 + 3 \\\\ 0 + 2 + 3 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix}$$
+
+// $$\\hat{\\mathbf{x}} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix} = \\frac{1}{3}\\begin{pmatrix} 3 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$$
+
+// $$\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = 1\\begin{pmatrix} 1 \\\\ 0 \\\\ 1 \\end{pmatrix} + 2\\begin{pmatrix} 0 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$$
+
+// The projection equals $\\mathbf{b}$ itself — meaning $\\mathbf{b}$ was already in $W$. The residual is $\\mathbf{0}$, confirming $\\mathbf{b} \\in \\text{Span}\\{(1, 0, 1), (0, 1, 1)\\}$. Indeed: $(1, 2, 3) = 1 \\cdot (1, 0, 1) + 2 \\cdot (0, 1, 1)$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj9: {
+//     title: `Summary: Where Projections Appear`,
+//     content: `Projection is not a single isolated construction — it threads through least squares, Gram&ndash;Schmidt, QR decomposition, the orthogonal decomposition of ℝⁿ, and every &quot;closest point&quot; or &quot;best approximation&quot; problem in linear algebra. The table below collects each context in which projection plays a role, alongside what is being projected and what the projection produces.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+// }
+
+
+// const introContent = {
+//   title: `The Closest Point in a Subspace`,
+//   content: `The orthogonal projection of a vector onto a subspace is the point in the subspace closest to the original vector. The residual — the difference between the vector and its projection — is perpendicular to the subspace. This orthogonal decomposition is the geometric engine behind least squares, the QR decomposition, and every approximation problem in linear algebra.`,
+// }
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is the formula for projecting a vector onto another vector?",
+//     answer: "The projection of b onto a nonzero vector a is proj_a(b) = (a·b / a·a) · a. The scalar a·b / a·a gives the component of b in the direction of a, and the residual b minus the projection is orthogonal to a.",
+//     sectionId: "1"
+//   },
+//   obj2: {
+//     question: "What is the orthogonal decomposition of a vector?",
+//     answer: "Every vector b in Rⁿ decomposes uniquely as b = b̂ + z, where b̂ is the orthogonal projection onto a subspace W and z is the perpendicular residual in W⊥. The projection b̂ is the closest point in W to b.",
+//     sectionId: "2"
+//   },
+//   obj3: {
+//     question: "How do you project onto a subspace with a non-orthogonal basis?",
+//     answer: "If the columns of matrix A form a basis for W, the projection of b onto W is b̂ = A(AᵀA)⁻¹Aᵀb. This formula comes from requiring the residual b − Ab̂ to be orthogonal to every column of A, which yields the normal equations AᵀAx̂ = Aᵀb.",
+//     sectionId: "4"
+//   },
+//   obj4: {
+//     question: "What are the properties of a projection matrix?",
+//     answer: "An orthogonal projection matrix P satisfies two conditions: it is symmetric (Pᵀ = P) and idempotent (P² = P). Symmetry ensures the projection is orthogonal rather than oblique. Idempotence means projecting twice gives the same result as projecting once.",
+//     sectionId: "5"
+//   },
+//   obj5: {
+//     question: "How is projection related to least squares?",
+//     answer: "When Ax = b has no exact solution, the least-squares solution x̂ produces the projection of b onto the column space of A. The residual b − Ax̂ is orthogonal to the column space, and x̂ satisfies the normal equations AᵀAx̂ = Aᵀb.",
+//     sectionId: "7"
+//   }
+// }
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Orthogonal Projections",
+//     "description": "Orthogonal projections in linear algebra: projection onto vectors and subspaces, projection matrix P = A(AᵀA)⁻¹Aᵀ, orthogonal decomposition, and connection to least squares.",
+//     "url": "https://www.learnmathclass.com/linear-algebra/orthogonality/projections",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Orthogonal Projections"
+//     },
+//     "teaches": [
+//       "Projection of a vector onto another vector",
+//       "Orthogonal decomposition into subspace and complement",
+//       "Projection using orthogonal and orthonormal bases",
+//       "General projection formula A(AᵀA)⁻¹Aᵀ",
+//       "Projection matrix properties: symmetry and idempotence",
+//       "Connection between projection and least squares"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Orthogonality",
+//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Projections",
+//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality/projections"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+// //    return {
+// //       props:{
+// //          sectionsContent,
+// //          introContent,
+// //           seoData: {
+// //         title: "Projections | Learn Math Class",
+// //         description: "Metadescription",
+// //         keywords: keyWords.join(", "),
+// //         url: "/linear-algebra/orthogonality/projections",
+// //          name: "name"
+// //       },
+        
+// //        }
+// //     }
+
+// return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     obj4Table,
+//     obj5Table,
+//     summaryTable,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Projections: Formulas & Matrix Properties | Learn Math Class",
+//       description: "Orthogonal projections in linear algebra: projection onto vectors and subspaces, projection matrix P = A(AᵀA)⁻¹Aᵀ, orthogonal decomposition, and connection to least squares.",
+//       keywords: keyWords.join(", "),
+//       url: "/linear-algebra/orthogonality/projections",
+//       name: "Orthogonal Projections"
+//     },
+//   }
+// }
+//    }
+
+// // export default function ProjectionsPage({seoData,sectionsContent , introContent}) {
+// export default function ProjectionsPage({
+//   seoData,
+//   sectionsContent,
+//   introContent,
+//   obj4Table,
+//   obj5Table,
+//   summaryTable,
+//   faqQuestions,
+//   schemas,
+// }) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+//   const genericSections=[
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//           <div
+//             key={'obj4-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj4Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//           <div
+//             key={'obj5-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj5Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//           <div
+//             key={'summary-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: summaryTable }}
+//           />,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+//    {/* <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify({
+//         "@context": "https://schema.org",
+//         "@type": "WebPage",
+//         "name": seoData.name,
+//         "description": seoData.description,
+//         "keywords": seoData.keywords,
+//         "url": `https://www.learnmathclass.com${seoData.url}`,
+//         "dateModified": new Date().toISOString(),
+//         "inLanguage": "en-US",
+//         "mainEntity": {
+//           "@type": "Article",
+//           "name": seoData.name,
+//           "dateModified": new Date().toISOString(),
+//           "author": {
+//             "@type": "Organization",
+//             "name": "Learn Math Class"
+//           }
+//         }
+//       })
+//     }}
+//   />
+// </Head> */}
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Orthogonal Projections</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "children"
+//          secondaryNavTitle="More in this Section"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//    <br/>
+//    <Sections sections={genericSections}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj5 aggregation, obj9 summary capstone)
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -9,6 +884,8 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 export async function getStaticProps(){
@@ -124,6 +1001,84 @@ const obj5Table = `
 `
 
 // obj9 — summary capstone: where projections appear across linear algebra
+// obj6 — what characterises an orthogonal projection, and what follows from it
+const projectionProperties = {
+  kicker: 'Orthogonality \u00B7 projections',
+  title: 'Properties of orthogonal projections',
+  tallyLabel: 'properties',
+  intro: 'Two conditions define the whole object, and everything below them is a consequence. Idempotence alone gives a projection; symmetry is what makes it the perpendicular one.',
+  footnote: 'Drop symmetry and $P$ still projects onto $W$, but along some other direction \u2014 an oblique projection. The residual is then no longer perpendicular, the distance is no longer minimal, and [least squares](#7) loses its justification entirely. That is how much rests on the second condition.',
+  laws: [
+    {
+      name: 'Idempotence',
+      anchor: '#6',
+      statement: '$P^2 = P$',
+      verdict: 'holds',
+      requires: 'defining condition',
+      note: 'Projecting twice changes nothing \u2014 once a vector is in $W$ it stays put, so every vector of $W$ is a fixed point of $P$. This is unusual among [linear transformations](!/linear-algebra/transformations), most of which keep changing a vector on repeated application.',
+    },
+    {
+      name: 'Symmetry',
+      anchor: '#6',
+      statement: '$P^{\\mathsf{T}} = P$',
+      verdict: 'holds',
+      requires: 'defining condition',
+      note: 'Self-adjoint with respect to the [dot product](!/linear-algebra/vectors/dot-product), meaning $P\\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{u} \\cdot P\\mathbf{v}$ for every pair. This is the condition that makes the projection **orthogonal** rather than merely a projection \u2014 it forces the residual to be perpendicular to $W$, not just outside it.',
+    },
+    {
+      name: 'Oblique projection',
+      anchor: '#6',
+      statement: '$P^2 = P$ but $P^{\\mathsf{T}} \\neq P$',
+      verdict: 'fails',
+      verdictLabel: 'Not orthogonal',
+      failsWhen: 'symmetry is dropped',
+      commonError: 'treating idempotence alone as the definition of a projection onto $W$',
+      note: 'Still a projection, and still onto the same subspace \u2014 but along a slanted direction rather than the perpendicular one. The two conditions are independent, and this entry exists to show that the second is not implied by the first.',
+      witness: {
+        label: 'Witness',
+        lines: [
+          'P = [[1, 1], [0, 0]]',
+          'P\u00B2 = P, so it projects \u2014 onto the x-axis',
+          'P\u1D40 \u2260 P, so it projects along the line y = \u2212x, not perpendicular',
+        ],
+      },
+    },
+    {
+      name: 'Orthogonal decomposition',
+      anchor: '#2',
+      statement: '$\\mathbf{b} = P\\mathbf{b} + (\\mathbf{b} - P\\mathbf{b})$',
+      verdict: 'conditional',
+      holdsWhen: '$P$ orthogonal \u2014 both conditions',
+      note: 'Every vector splits uniquely into a part in $W$ and a part perpendicular to it. Uniqueness is what makes this a decomposition rather than merely one way of writing $\\mathbf{b}$, and it is the reason $W$ and $W^\\perp$ intersect only at the origin.',
+    },
+    {
+      name: 'Complementary projection',
+      anchor: '#2',
+      statement: '$I - P$ projects onto $W^{\\perp}$',
+      verdict: 'holds',
+      requires: '$P$ orthogonal',
+      note: 'The residual is itself a projection, onto the orthogonal complement. Check: $(I-P)^2 = I - 2P + P^2 = I - P$ by idempotence, and $(I-P)^{\\mathsf{T}} = I - P$ by symmetry \u2014 so it satisfies both defining conditions.',
+    },
+    {
+      name: 'Minimal distance',
+      anchor: '#7',
+      statement: '$\\|\\mathbf{b} - P\\mathbf{b}\\| \\leq \\|\\mathbf{b} - \\mathbf{w}\\|$ for all $\\mathbf{w} \\in W$',
+      verdict: 'conditional',
+      holdsWhen: 'equality iff $\\mathbf{w} = P\\mathbf{b}$',
+      note: 'The projection is the closest point of $W$ to $\\mathbf{b}$, and the only one achieving the minimum. This is the entire content of [least squares](#7) \u2014 the best approximation is a projection, and the perpendicularity of the residual is why no other point can do better.',
+    },
+    {
+      name: 'Eigenvalues',
+      anchor: '#5',
+      statement: '$\\lambda \\in \\{0, 1\\}$',
+      verdict: 'holds',
+      requires: 'follows from $P^2 = P$',
+      note: 'From $P\\mathbf{v} = \\lambda\\mathbf{v}$ and idempotence, $\\lambda^2 = \\lambda$, so $\\lambda$ is $0$ or $1$. The eigenvectors for $1$ span $W$, those for $0$ span $W^\\perp$, and $\\operatorname{rank}(P) = \\operatorname{tr}(P) = \\dim W$ \u2014 the trace counts the ones. See [spectral properties](!/linear-algebra/eigen/properties).',
+    },
+  ],
+}
+
+
 const summaryTable = `
 <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -623,6 +1578,7 @@ return {
     obj4Table,
     obj5Table,
     summaryTable,
+    projectionProperties,
     faqQuestions,
     schemas,
     seoData: {
@@ -644,6 +1600,7 @@ export default function ProjectionsPage({
   obj4Table,
   obj5Table,
   summaryTable,
+  projectionProperties,
   faqQuestions,
   schemas,
 }) {
@@ -707,6 +1664,14 @@ export default function ProjectionsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="projection-properties"
+            title="Properties of orthogonal projections"
+            source="/linear-algebra/orthogonality/projections"
+          >
+            <PropertyLawCard data={projectionProperties} theme="navy" />
+          </DiagramFrame>,
         ]
     },
     {

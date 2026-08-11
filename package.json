@@ -9,7 +9,9 @@
     "generate-nav": "node generateNavFromSitemap.js",
     "lint": "next lint",
     "generate-sitemap": "next build && node generate-sitemap.mjs",
-    "build-with-sitemap": "npm run build && npm run generate-sitemap --/test"
+    "build-with-sitemap": "npm run build && npm run generate-sitemap --/test",
+    "diagrams": "node scripts/generate-diagrams.mjs",
+  "diagrams:clean": "node scripts/generate-diagrams.mjs --clean"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",

@@ -1,0 +1,136 @@
+[
+  {
+    "id": "cross-product-laws",
+    "title": "Properties of the cross product",
+    "source": "/linear-algebra/vectors/cross-product",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1412,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "determinant-invertibility-ring",
+    "title": "One question, twelve answers",
+    "source": "/linear-algebra/determinants/properties",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1308,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "determinant-properties",
+    "title": "What each operation does to the determinant",
+    "source": "/linear-algebra/determinants/properties",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1767,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "dot-product-laws",
+    "title": "Properties of the dot product",
+    "source": "/linear-algebra/vectors/dot-product",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1366,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "inverse-properties",
+    "title": "Properties of the inverse",
+    "source": "/linear-algebra/matrix/inverse",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1518,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "invertibility-equivalence",
+    "title": "The invertibility equivalence",
+    "source": "/linear-algebra/matrix/inverse",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1308,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "linear-map-combinations",
+    "title": "How linear maps combine",
+    "source": "/linear-algebra/transformations/properties",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1389,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "matrix-product-laws",
+    "title": "Which laws survive the product",
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1620,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rank-properties",
+    "title": "Properties of rank",
+    "source": "/linear-algebra/matrix/rank",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1711,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "trace-properties",
+    "title": "Trace properties at a glance",
+    "source": "/linear-algebra/matrix/trace",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1560,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vector-properties",
+    "title": "Properties at a glance",
+    "source": "/linear-algebra/vectors/properties",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1343,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  }
+]
