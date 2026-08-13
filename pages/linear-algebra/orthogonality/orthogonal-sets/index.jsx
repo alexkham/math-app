@@ -1,3 +1,847 @@
+// // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj7 comparison, obj9 summary capstone)
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import { tableHeaders } from '@/app/styles/theme'
+
+
+// export async function getStaticProps(){
+// const keyWords = [
+//   "orthogonal sets",
+//   "orthonormal sets",
+//   "orthogonal basis",
+//   "orthonormal basis",
+//   "orthogonal matrix",
+//   "coordinates dot product",
+//   "Kronecker delta orthonormal",
+//   "orthogonal vectors independent",
+//   "Parseval's identity",
+//   "Bessel's inequality",
+//   "QR decomposition orthonormal columns",
+//   "orthogonal matrix properties",
+//   "unit vectors basis",
+//   "pairwise perpendicular vectors"
+// ]
+
+// const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// // ---------- TABLES ----------
+
+// // obj3 — comparison: orthogonal set vs orthonormal set across the distinguishing features
+// const obj3Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.comparison}">Aspect</th>
+//       <th style="${tableHeaders.comparison}">Orthogonal set</th>
+//       <th style="${tableHeaders.comparison}">Orthonormal set</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pairwise dot products</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 for i ≠ j</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 for i ≠ j</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vector lengths</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any nonzero value</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each ‖v<sub>i</sub>‖ = 1</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Compact condition</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 (i ≠ j) plus each v<sub>i</sub> ≠ 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = δ<sub>ij</sub> (the Kronecker delta)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coordinate of x along v<sub>i</sub></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = (v<sub>i</sub> · x) / (v<sub>i</sub> · v<sub>i</sub>)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = q<sub>i</sub> · x</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear independence</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">automatic (nonzero vectors)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">automatic (unit vectors are nonzero)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Going between the two</td>
+//       <td style="padding: 12px 15px; color: #34495e;">divide each v<sub>i</sub> by ‖v<sub>i</sub>‖ → orthonormal</td>
+//       <td style="padding: 12px 15px; color: #34495e;">already orthogonal as a special case</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // obj7 — comparison: square orthogonal matrix vs rectangular matrix with orthonormal columns
+// const obj7Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.comparison}">Property</th>
+//       <th style="${tableHeaders.comparison}">Square orthogonal matrix Q (n × n)</th>
+//       <th style="${tableHeaders.comparison}">Rectangular Q with orthonormal columns (m × n, m &gt; n)</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Qᵀ Q</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Q Qᵀ</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT the identity; equals the <a href="/linear-algebra/orthogonality/projections" style="${linkStyle}">projection</a> matrix onto Col(Q)</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Q⁻¹ = Qᵀ</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no two-sided inverse (Q is not square)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(Q)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">±1</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">undefined (Q is not square)</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rows</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">also form an orthonormal set</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rows are not orthonormal in general</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Preserves dot product?</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes for all u, v ∈ ℝⁿ — full isometry of ℝⁿ</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes from source to image: (Q u) · (Q v) = u · v for u, v ∈ ℝⁿ</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Geometric role</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rotation (det +1) or rotation composed with reflection (det −1)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">embedding ℝⁿ into ℝᵐ as an n-dimensional subspace</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Typical source</td>
+//       <td style="padding: 12px 15px; color: #34495e;">stored basis change, rotation matrix, Householder/Givens factor</td>
+//       <td style="padding: 12px 15px; color: #34495e;">output of <a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram–Schmidt</a>; the Q in thin <a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR decomposition</a> A = Q R</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // obj9 — summary capstone: operations made simple by an orthonormal basis
+// const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Operation</th>
+//       <th style="${tableHeaders.summary}">Formula in an orthonormal basis {q<sub>1</sub>, …, q<sub>k</sub>}</th>
+//       <th style="${tableHeaders.summary}">Why it&apos;s simple</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coordinate of x along q<sub>i</sub></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = q<sub>i</sub> · x</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one dot product replaces solving a system</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reconstruction of x from its coordinates</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub> &nbsp;(if {q<sub>i</sub>} spans the space)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of k dot-product-weighted basis vectors</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Squared length ‖x‖²</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² &nbsp;(Parseval, when {q<sub>i</sub>} spans)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">squared length = sum of squared coordinates</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inner product x · y</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)(q<sub>i</sub> · y)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inner product = ordinary dot product of coordinate vectors</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Projection onto Span{q<sub>1</sub>, …, q<sub>k</sub>}</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no (AᵀA)⁻¹ needed; independent dot products</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Squared length of that projection</td>
+//       <td style="padding: 12px 15px; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² ≤ ‖x‖² &nbsp;(Bessel; equality iff x ∈ span)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">truncated Parseval; deficit measures distance to span</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+
+// // const sectionsContent = {
+// //   obj1: {
+// //     title: `Orthogonal Sets`,
+// //     content: `A set of vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ is orthogonal if every pair has [dot product](!/linear-algebra/vectors/dot-product) zero:
+
+// // $$\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0 \\quad \\text{for all } i \\neq j$$
+
+// // The vectors in an orthogonal set must all be nonzero — the zero vector is excluded because including it would trivialize the structure (every vector is orthogonal to $\\mathbf{0}$, so $\\mathbf{0}$ carries no directional information).
+
+// // For example, $\\{(1, 0, 0), (0, 2, 0), (0, 0, -3)\\}$ is orthogonal in $\\mathbb{R}^3$: every pair of distinct vectors has dot product zero. The vectors need not have the same length, and their lengths can be anything nonzero.
+
+// // A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1)(1) + (1)(-2) + (1)(1) = 0$, $(1)(1) + (1)(0) + (1)(-1) = 0$, $(1)(1) + (-2)(0) + (1)(-1) = 0$. All three pairwise products vanish — the set is orthogonal despite none of the vectors being aligned with the coordinate axes.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj2: {
+// //     title: `Orthogonal Sets Are Independent`,
+// //     content: `Every orthogonal set of nonzero vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence). The proof is short and reveals exactly why orthogonality is so powerful.
+
+// // Suppose $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$. Dot both sides with $\\mathbf{v}_j$:
+
+// // $$c_1(\\mathbf{v}_1 \\cdot \\mathbf{v}_j) + c_2(\\mathbf{v}_2 \\cdot \\mathbf{v}_j) + \\cdots + c_k(\\mathbf{v}_k \\cdot \\mathbf{v}_j) = 0$$
+
+// // Every term with $i \\neq j$ vanishes because $\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0$. Only the $j$-th term survives: $c_j \\|\\mathbf{v}_j\\|^2 = 0$. Since $\\mathbf{v}_j \\neq \\mathbf{0}$, $\\|\\mathbf{v}_j\\|^2 > 0$, so $c_j = 0$. This works for every $j$, so all coefficients are zero.
+
+// // The key mechanism is that orthogonality isolates each coefficient. Dotting with $\\mathbf{v}_j$ kills every other term, leaving $c_j$ alone. This is why orthogonal bases make coordinates computable by individual dot products — the same isolation principle that proves independence also extracts coordinates.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj3: {
+// //     title: `Orthonormal Sets`,
+// //     content: `An orthonormal set is an orthogonal set where every vector additionally has unit length: $\\|\\mathbf{v}_i\\| = 1$ for all $i$. The two conditions together can be written compactly using the Kronecker delta:
+
+// // $$\\mathbf{v}_i \\cdot \\mathbf{v}_j = \\delta_{ij} = \\begin{cases} 1 & \\text{if } i = j \\\\ 0 & \\text{if } i \\neq j \\end{cases}$$
+
+// // Any orthogonal set can be made orthonormal by normalizing each vector: $\\hat{\\mathbf{v}}_i = \\mathbf{v}_i / \\|\\mathbf{v}_i\\|$. The directions are preserved, only the lengths change to $1$.
+
+// // The standard [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n\\}$ for $\\mathbb{R}^n$ is orthonormal: $\\mathbf{e}_i \\cdot \\mathbf{e}_j = \\delta_{ij}$ because each basis vector has a single $1$ in a different position. It is the simplest orthonormal set, but far from the only one.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj4: {
+// //     title: `Orthogonal and Orthonormal Bases`,
+// //     content: `An orthogonal basis is an orthogonal set that [spans](!/linear-algebra/vector-spaces/span) the space. An orthonormal basis is an orthonormal set that spans the space.
+
+// // In $\\mathbb{R}^n$, an orthogonal set of $n$ nonzero vectors is automatically a basis — independence is guaranteed by orthogonality, and $n$ independent vectors in an $n$-dimensional space automatically span. So the only check needed is: do I have $n$ pairwise-orthogonal nonzero vectors? If yes, they form a basis.
+
+// // Orthonormal bases exist for every finite-dimensional [inner product](!/linear-algebra/orthogonality/inner-product) space. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) constructs one from any given basis. This means the computational advantages of orthonormal bases are always available — any space that has a basis at all has an orthonormal one.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj5: {
+// //     title: `Coordinates via Dot Products`,
+// //     content: `The defining computational advantage of orthogonal bases is that coordinates are extracted by individual dot products.
+
+// // For an orthogonal basis $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$, the coordinate of $\\mathbf{x}$ along $\\mathbf{v}_i$ is
+
+// // $$c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v}_i}$$
+
+// // For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$, the denominator is $1$, and the formula simplifies to
+
+// // $$c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$$
+
+// // No [linear system](!/linear-algebra/linear-systems) needs to be solved. No [matrix](!/linear-algebra/matrix) needs to be inverted. Each coordinate is computed independently by a single dot product.
+
+// // ## Worked Example
+
+// // Let $\\{\\mathbf{q}_1, \\mathbf{q}_2, \\mathbf{q}_3\\}$ be an orthonormal basis for $\\mathbb{R}^3$ with $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 0)$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, -1, 2)$, $\\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-1, 1, 1)$.
+
+// // For $\\mathbf{x} = (3, 1, 2)$: $c_1 = \\mathbf{x} \\cdot \\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(3 + 1 + 0) = \\frac{4}{\\sqrt{2}} = 2\\sqrt{2}$, $c_2 = \\mathbf{x} \\cdot \\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(3 - 1 + 4) = \\frac{6}{\\sqrt{6}} = \\sqrt{6}$, $c_3 = \\mathbf{x} \\cdot \\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-3 + 1 + 2) = 0$.
+
+// // So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\cdot \\mathbf{q}_3$. The zero third coordinate means $\\mathbf{x}$ has no component in the $\\mathbf{q}_3$ direction — it is orthogonal to $\\mathbf{q}_3$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj6: {
+// //     title: `Orthogonal Matrices`,
+// //     content: `An $n \\times n$ [matrix](!/linear-algebra/matrix) $Q$ is [orthogonal](!/linear-algebra/matrix/types) if its columns form an orthonormal set. This is equivalent to $Q^TQ = QQ^T = I$, which is equivalent to $Q^{-1} = Q^T$.
+
+// // The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.
+
+// // The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/transformations/geometric). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
+
+// // The defining geometric property is that orthogonal matrices preserve the dot product: $(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v}) = \\mathbf{u}^TQ^TQ\\mathbf{v} = \\mathbf{u}^T\\mathbf{v} = \\mathbf{u} \\cdot \\mathbf{v}$. Preserving the dot product automatically preserves lengths ($\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$), angles, and distances. An orthogonal matrix is a rigid motion of $\\mathbb{R}^n$ — it rearranges vectors without distorting any geometric relationship.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj7: {
+// //     title: `Matrices with Orthonormal Columns`,
+// //     content: `An $m \\times n$ matrix $Q$ with $m > n$ can have orthonormal columns without being square. Such a matrix satisfies $Q^TQ = I_n$ but $QQ^T \\neq I_m$ (the product $QQ^T$ is $m \\times m$ and has [rank](!/linear-algebra/matrix/rank) $n < m$).
+
+// // The matrix $QQ^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto the column space of $Q$. For any $\\mathbf{b} \\in \\mathbb{R}^m$, the vector $QQ^T\\mathbf{b}$ is the orthogonal projection of $\\mathbf{b}$ onto the $n$-dimensional subspace spanned by the columns of $Q$.
+
+// // These rectangular matrices with orthonormal columns are the natural output of the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) applied to the columns of a matrix. If $A$ is $m \\times n$ with independent columns, Gram-Schmidt produces an $m \\times n$ matrix $Q$ with orthonormal columns and an $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) matrix $R$ such that $A = QR$. This is the thin [QR decomposition](!/linear-algebra/decompositions/qr).`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj8: {
+// //     title: `Parseval's Identity and Bessel's Inequality`,
+// //     content: `For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$ of $\\mathbb{R}^n$ and any vector $\\mathbf{x}$, the coordinates $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$ satisfy Parseval's identity:
+
+// // $$\\|\\mathbf{x}\\|^2 = c_1^2 + c_2^2 + \\cdots + c_n^2 = \\sum_{i=1}^{n} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2$$
+
+// // The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordinates. This is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product) applied to the orthonormal decomposition $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.
+
+// // When the orthonormal set does not span — when $k < n$ — the sum accounts for only part of the length:
+
+// // $$\\sum_{i=1}^{k} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2 \\leq \\|\\mathbf{x}\\|^2$$
+
+// // This is Bessel's inequality. The left side is the squared length of the projection of $\\mathbf{x}$ onto $\\text{Span}\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$. The deficit $\\|\\mathbf{x}\\|^2 - \\sum(\\mathbf{x} \\cdot \\mathbf{q}_i)^2$ is the squared length of the component orthogonal to the span. Equality holds if and only if $\\mathbf{x}$ is already in the span, leaving no perpendicular remainder.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj9: {
+// //     title: `Summary: Operations in an Orthonormal Basis`,
+// //     content: `An orthonormal basis converts every routine vector operation into something that uses only dot products — no system solving, no matrix inversion, no (AᵀA)⁻¹ factor. The table below collects each operation alongside its formula in an orthonormal basis and a brief note on why orthonormality makes it simple, including Parseval&apos;s identity for length and Bessel&apos;s inequality for partial projections.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// // }
+
+// // formulas-injected: v1 | 2026-06-16 | 4 callouts (obj2 orthogonal_set_independence prose-insert, obj3 orthonormal_set direct, obj5 coordinates_via_orthonormal_basis direct, obj8 parseval_identity direct)
+
+// const sectionsContent = {
+//   obj1: {
+//     title: `Orthogonal Sets`,
+//     content: `A set of vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ is orthogonal if every pair has [dot product](!/linear-algebra/vectors/dot-product) zero:
+
+// $$\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0 \\quad \\text{for all } i \\neq j$$
+
+// The vectors in an orthogonal set must all be nonzero — the zero vector is excluded because including it would trivialize the structure (every vector is orthogonal to $\\mathbf{0}$, so $\\mathbf{0}$ carries no directional information).
+
+// For example, $\\{(1, 0, 0), (0, 2, 0), (0, 0, -3)\\}$ is orthogonal in $\\mathbb{R}^3$: every pair of distinct vectors has dot product zero. The vectors need not have the same length, and their lengths can be anything nonzero.
+
+// A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1)(1) + (1)(-2) + (1)(1) = 0$, $(1)(1) + (1)(0) + (1)(-1) = 0$, $(1)(1) + (-2)(0) + (1)(-1) = 0$. All three pairwise products vanish — the set is orthogonal despite none of the vectors being aligned with the coordinate axes.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj2: {
+//     title: `Orthogonal Sets Are Independent`,
+//     content: `Every orthogonal set of nonzero vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence):
+
+// @academic[formula_callout:orthogonal_set_independence|Orthogonal Set Independence|$$\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} \\text{ orthogonal, all nonzero} \\implies \\text{linearly independent}$$]@
+// @academic[formulas_link:/linear-algebra/formulas#orthogonal_set_independence]@
+
+// The proof is short and reveals exactly why orthogonality is so powerful.
+
+// Suppose $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$. Dot both sides with $\\mathbf{v}_j$:
+
+// $$c_1(\\mathbf{v}_1 \\cdot \\mathbf{v}_j) + c_2(\\mathbf{v}_2 \\cdot \\mathbf{v}_j) + \\cdots + c_k(\\mathbf{v}_k \\cdot \\mathbf{v}_j) = 0$$
+
+// Every term with $i \\neq j$ vanishes because $\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0$. Only the $j$-th term survives: $c_j \\|\\mathbf{v}_j\\|^2 = 0$. Since $\\mathbf{v}_j \\neq \\mathbf{0}$, $\\|\\mathbf{v}_j\\|^2 > 0$, so $c_j = 0$. This works for every $j$, so all coefficients are zero.
+
+// The key mechanism is that orthogonality isolates each coefficient. Dotting with $\\mathbf{v}_j$ kills every other term, leaving $c_j$ alone. This is why orthogonal bases make coordinates computable by individual dot products — the same isolation principle that proves independence also extracts coordinates.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj3: {
+//     title: `Orthonormal Sets`,
+//     content: `An orthonormal set is an orthogonal set where every vector additionally has unit length: $\\|\\mathbf{v}_i\\| = 1$ for all $i$. The two conditions together can be written compactly using the Kronecker delta:
+
+// @academic[formula_callout:orthonormal_set|Orthonormal Set|$$\\mathbf{v}_i \\cdot \\mathbf{v}_j = \\delta_{ij} = \\begin{cases} 1 & \\text{if } i = j \\\\ 0 & \\text{if } i \\neq j \\end{cases}$$]@
+// @academic[formulas_link:/linear-algebra/formulas#orthonormal_set]@
+
+// Any orthogonal set can be made orthonormal by normalizing each vector: $\\hat{\\mathbf{v}}_i = \\mathbf{v}_i / \\|\\mathbf{v}_i\\|$. The directions are preserved, only the lengths change to $1$.
+
+// The standard [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n\\}$ for $\\mathbb{R}^n$ is orthonormal: $\\mathbf{e}_i \\cdot \\mathbf{e}_j = \\delta_{ij}$ because each basis vector has a single $1$ in a different position. It is the simplest orthonormal set, but far from the only one.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj4: {
+//     title: `Orthogonal and Orthonormal Bases`,
+//     content: `An orthogonal basis is an orthogonal set that [spans](!/linear-algebra/vector-spaces/span) the space. An orthonormal basis is an orthonormal set that spans the space.
+
+// In $\\mathbb{R}^n$, an orthogonal set of $n$ nonzero vectors is automatically a basis — independence is guaranteed by orthogonality, and $n$ independent vectors in an $n$-dimensional space automatically span. So the only check needed is: do I have $n$ pairwise-orthogonal nonzero vectors? If yes, they form a basis.
+
+// Orthonormal bases exist for every finite-dimensional [inner product](!/linear-algebra/orthogonality/inner-product) space. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) constructs one from any given basis. This means the computational advantages of orthonormal bases are always available — any space that has a basis at all has an orthonormal one.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj5: {
+//     title: `Coordinates via Dot Products`,
+//     content: `The defining computational advantage of orthogonal bases is that coordinates are extracted by individual dot products.
+
+// For an orthogonal basis $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$, the coordinate of $\\mathbf{x}$ along $\\mathbf{v}_i$ is
+
+// $$c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v}_i}$$
+
+// For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$, the denominator is $1$, and the formula simplifies to
+
+// @academic[formula_callout:coordinates_via_orthonormal_basis|Coordinates via Orthonormal Basis|$$c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$$]@
+// @academic[formulas_link:/linear-algebra/formulas#coordinates_via_orthonormal_basis]@
+
+// No [linear system](!/linear-algebra/linear-systems) needs to be solved. No [matrix](!/linear-algebra/matrix) needs to be inverted. Each coordinate is computed independently by a single dot product.
+
+// ## Worked Example
+
+// Let $\\{\\mathbf{q}_1, \\mathbf{q}_2, \\mathbf{q}_3\\}$ be an orthonormal basis for $\\mathbb{R}^3$ with $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 0)$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, -1, 2)$, $\\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-1, 1, 1)$.
+
+// For $\\mathbf{x} = (3, 1, 2)$: $c_1 = \\mathbf{x} \\cdot \\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(3 + 1 + 0) = \\frac{4}{\\sqrt{2}} = 2\\sqrt{2}$, $c_2 = \\mathbf{x} \\cdot \\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(3 - 1 + 4) = \\frac{6}{\\sqrt{6}} = \\sqrt{6}$, $c_3 = \\mathbf{x} \\cdot \\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-3 + 1 + 2) = 0$.
+
+// So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\cdot \\mathbf{q}_3$. The zero third coordinate means $\\mathbf{x}$ has no component in the $\\mathbf{q}_3$ direction — it is orthogonal to $\\mathbf{q}_3$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj6: {
+//     title: `Orthogonal Matrices`,
+//     content: `An $n \\times n$ [matrix](!/linear-algebra/matrix) $Q$ is [orthogonal](!/linear-algebra/matrix/types) if its columns form an orthonormal set. This is equivalent to $Q^TQ = QQ^T = I$, which is equivalent to $Q^{-1} = Q^T$.
+
+// The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.
+
+// The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/transformations/geometric). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
+
+// The defining geometric property is that orthogonal matrices preserve the dot product: $(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v}) = \\mathbf{u}^TQ^TQ\\mathbf{v} = \\mathbf{u}^T\\mathbf{v} = \\mathbf{u} \\cdot \\mathbf{v}$. Preserving the dot product automatically preserves lengths ($\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$), angles, and distances. An orthogonal matrix is a rigid motion of $\\mathbb{R}^n$ — it rearranges vectors without distorting any geometric relationship.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj7: {
+//     title: `Matrices with Orthonormal Columns`,
+//     content: `An $m \\times n$ matrix $Q$ with $m > n$ can have orthonormal columns without being square. Such a matrix satisfies $Q^TQ = I_n$ but $QQ^T \\neq I_m$ (the product $QQ^T$ is $m \\times m$ and has [rank](!/linear-algebra/matrix/rank) $n < m$).
+
+// The matrix $QQ^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto the column space of $Q$. For any $\\mathbf{b} \\in \\mathbb{R}^m$, the vector $QQ^T\\mathbf{b}$ is the orthogonal projection of $\\mathbf{b}$ onto the $n$-dimensional subspace spanned by the columns of $Q$.
+
+// These rectangular matrices with orthonormal columns are the natural output of the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) applied to the columns of a matrix. If $A$ is $m \\times n$ with independent columns, Gram-Schmidt produces an $m \\times n$ matrix $Q$ with orthonormal columns and an $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) matrix $R$ such that $A = QR$. This is the thin [QR decomposition](!/linear-algebra/decompositions/qr).`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj8: {
+//     title: `Parseval&apos;s Identity and Bessel&apos;s Inequality`,
+//     content: `For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$ of $\\mathbb{R}^n$ and any vector $\\mathbf{x}$, the coordinates $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$ satisfy Parseval&apos;s identity:
+
+// @academic[formula_callout:parseval_identity|Parseval Identity|$$\\|\\mathbf{x}\\|^2 = \\sum_{i=1}^{n} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2$$]@
+// @academic[formulas_link:/linear-algebra/formulas#parseval_identity]@
+
+// The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordinates. This is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product) applied to the orthonormal decomposition $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.
+
+// When the orthonormal set does not span — when $k < n$ — the sum accounts for only part of the length:
+
+// $$\\sum_{i=1}^{k} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2 \\leq \\|\\mathbf{x}\\|^2$$
+
+// This is Bessel&apos;s inequality. The left side is the squared length of the projection of $\\mathbf{x}$ onto $\\text{Span}\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$. The deficit $\\|\\mathbf{x}\\|^2 - \\sum(\\mathbf{x} \\cdot \\mathbf{q}_i)^2$ is the squared length of the component orthogonal to the span. Equality holds if and only if $\\mathbf{x}$ is already in the span, leaving no perpendicular remainder.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj9: {
+//     title: `Summary: Operations in an Orthonormal Basis`,
+//     content: `An orthonormal basis converts every routine vector operation into something that uses only dot products — no system solving, no matrix inversion, no (AᵀA)⁻¹ factor. The table below collects each operation alongside its formula in an orthonormal basis and a brief note on why orthonormality makes it simple, including Parseval&apos;s identity for length and Bessel&apos;s inequality for partial projections.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+// }
+
+// const introContent = {
+//   title: `Bases Where Coordinates Come Free`,
+//   content: `An orthogonal set consists of vectors that are pairwise perpendicular. An orthonormal set adds the requirement that each vector has unit length. These sets are automatically linearly independent, and when they form a basis, coordinates are computed by dot products alone — no system solving, no row reduction, no matrix inversion.`,
+// }
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is an orthogonal set of vectors?",
+//     answer: "An orthogonal set is a collection of nonzero vectors that are pairwise perpendicular — every pair has dot product zero. Orthogonal sets are automatically linearly independent, so no separate independence check is needed.",
+//     sectionId: "1"
+//   },
+//   obj2: {
+//     question: "What is the difference between orthogonal and orthonormal?",
+//     answer: "An orthogonal set requires all pairs to have dot product zero. An orthonormal set additionally requires each vector to have unit length. Any orthogonal set can be made orthonormal by dividing each vector by its length.",
+//     sectionId: "3"
+//   },
+//   obj3: {
+//     question: "How do you find coordinates with an orthonormal basis?",
+//     answer: "For an orthonormal basis, the coordinate of x along basis vector qᵢ is simply the dot product x · qᵢ. No system of equations or matrix inversion is needed — each coordinate is computed independently by a single dot product.",
+//     sectionId: "5"
+//   },
+//   obj4: {
+//     question: "What is an orthogonal matrix?",
+//     answer: "An orthogonal matrix Q has orthonormal columns, satisfying QᵀQ = I and Q⁻¹ = Qᵀ. It preserves dot products, lengths, angles, and distances. Its determinant is ±1, representing a rotation (det +1) or a rotation with reflection (det −1).",
+//     sectionId: "6"
+//   },
+//   obj5: {
+//     question: "What is Parseval's identity?",
+//     answer: "Parseval's identity states that for an orthonormal basis, the squared length of any vector equals the sum of the squares of its coordinates: ‖x‖² = Σ(x · qᵢ)². It is the Pythagorean theorem applied to the orthonormal decomposition.",
+//     sectionId: "8"
+//   }
+// }
+
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Orthogonal and Orthonormal Sets",
+//     "description": "Orthogonal and orthonormal sets and bases in linear algebra. Coordinates via dot products, orthogonal matrices, Parseval's identity, Bessel's inequality, and QR decomposition.",
+//     "url": "https://www.learnmathclass.com/linear-algebra/orthogonality/orthogonal-sets",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Orthogonal and Orthonormal Sets"
+//     },
+//     "teaches": [
+//       "Orthogonal sets and automatic linear independence",
+//       "Orthonormal sets and the Kronecker delta condition",
+//       "Orthogonal and orthonormal bases",
+//       "Computing coordinates via dot products",
+//       "Orthogonal matrices and length preservation",
+//       "Rectangular matrices with orthonormal columns",
+//       "Parseval's identity and Bessel's inequality"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Orthogonality",
+//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Orthogonal Sets",
+//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality/orthogonal-sets"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+// //    return {
+// //       props:{
+// //          sectionsContent,
+// //          introContent,
+// //           seoData: {
+// //         title: "Orthogonal Sets | Learn Math Class",
+// //         description: "Metadescription",
+// //         keywords: keyWords.join(", "),
+// //         url: "/linear-algebra/orthogonality/orthogonal-sets",
+// //          name: "name"
+// //       },
+        
+// //        }
+// //     }
+
+// return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     obj3Table,
+//     obj7Table,
+//     summaryTable,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Orthogonal & Orthonormal Sets and Bases | Learn Math Class",
+//       description: "Orthogonal and orthonormal sets and bases in linear algebra. Coordinates via dot products, orthogonal matrices, Parseval's identity, Bessel's inequality, and QR decomposition.",
+//       keywords: keyWords.join(", "),
+//       url: "/linear-algebra/orthogonality/orthogonal-sets",
+//       name: "Orthogonal and Orthonormal Sets"
+//     },
+//   }
+// }
+//    }
+
+// // export default function OrthogonalSetsPage({seoData,sectionsContent , introContent}) {
+
+// export default function OrthogonalSetsPage({
+//   seoData,
+//   sectionsContent,
+//   introContent,
+//   obj3Table,
+//   obj7Table,
+//   summaryTable,
+//   faqQuestions,
+//   schemas,
+// }) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+//   const genericSections=[
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//           <div
+//             key={'obj3-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj3Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//           <div
+//             key={'obj7-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj7Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//           <div
+//             key={'summary-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: summaryTable }}
+//           />,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+//    {/* <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify({
+//         "@context": "https://schema.org",
+//         "@type": "WebPage",
+//         "name": seoData.name,
+//         "description": seoData.description,
+//         "keywords": seoData.keywords,
+//         "url": `https://www.learnmathclass.com${seoData.url}`,
+//         "dateModified": new Date().toISOString(),
+//         "inLanguage": "en-US",
+//         "mainEntity": {
+//           "@type": "Article",
+//           "name": seoData.name,
+//           "dateModified": new Date().toISOString(),
+//           "author": {
+//             "@type": "Organization",
+//             "name": "Learn Math Class"
+//           }
+//         }
+//       })
+//     }}
+//   />
+// </Head> */}
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Orthogonal Sets</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "children"
+//          secondaryNavTitle="More in this Section"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//    <br/>
+//    <Sections sections={genericSections}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj7 comparison, obj9 summary capstone)
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -9,6 +853,8 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 export async function getStaticProps(){
@@ -134,49 +980,77 @@ const obj7Table = `
 `
 
 // obj9 — summary capstone: operations made simple by an orthonormal basis
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Operation</th>
-      <th style="${tableHeaders.summary}">Formula in an orthonormal basis {q<sub>1</sub>, …, q<sub>k</sub>}</th>
-      <th style="${tableHeaders.summary}">Why it&apos;s simple</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coordinate of x along q<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = q<sub>i</sub> · x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one dot product replaces solving a system</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reconstruction of x from its coordinates</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub> &nbsp;(if {q<sub>i</sub>} spans the space)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of k dot-product-weighted basis vectors</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Squared length ‖x‖²</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² &nbsp;(Parseval, when {q<sub>i</sub>} spans)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">squared length = sum of squared coordinates</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inner product x · y</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)(q<sub>i</sub> · y)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inner product = ordinary dot product of coordinate vectors</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Projection onto Span{q<sub>1</sub>, …, q<sub>k</sub>}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no (AᵀA)⁻¹ needed; independent dot products</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Squared length of that projection</td>
-      <td style="padding: 12px 15px; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² ≤ ‖x‖² &nbsp;(Bessel; equality iff x ∈ span)</td>
-      <td style="padding: 12px 15px; color: #34495e;">truncated Parseval; deficit measures distance to span</td>
-    </tr>
-  </tbody>
-</table>
-`
+// obj9 — what an orthonormal basis does to each standard operation
+const orthonormalOperations = {
+  kicker: 'Orthogonality \u00B7 orthonormal bases',
+  title: 'Operations in an orthonormal basis',
+  tallyLabel: 'operations',
+  intro: 'Each row is an operation that costs a linear system in a general basis and costs a dot product here. The saving is not incremental \u2014 the system disappears entirely, because orthogonality makes the coordinates independent of each other.',
+  footnote: 'One fact produces all of them: $\\mathbf{q}_i \\cdot \\mathbf{q}_j$ is $1$ when $i = j$ and $0$ otherwise, so every cross term in every expansion vanishes. That is why an orthonormal basis is worth the [Gram\u2013Schmidt](!/linear-algebra/orthogonality/gram-schmidt) cost of constructing one \u2014 the expense is paid once and every operation afterwards is cheaper.',
+  groups: [
+    {
+      heading: 'Coordinates',
+      identities: [
+        {
+          name: 'Finding a coordinate',
+          anchor: '#5',
+          formula: '$c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$',
+          condition: 'one dot product per coordinate',
+          key: true,
+          note: 'In a general basis this means solving $B\\mathbf{c} = \\mathbf{x}$ \u2014 all coordinates at once, none available before the rest. Here each is an independent dot product, so any single coordinate can be computed without the others. This is the entry the rest depend on.',
+        },
+        {
+          name: 'Reconstruction',
+          anchor: '#5',
+          formula: '$\\mathbf{x} = \\sum (\\mathbf{x} \\cdot \\mathbf{q}_i)\\,\\mathbf{q}_i$',
+          condition: 'over a full orthonormal basis',
+          note: 'The expansion written out. Each term is the component of $\\mathbf{x}$ along one basis direction, so the sum is a decomposition into perpendicular pieces rather than an arbitrary combination that happens to work.',
+        },
+      ],
+    },
+    {
+      heading: 'Lengths and angles',
+      identities: [
+        {
+          name: 'Squared length',
+          anchor: '#8',
+          formula: '$\\|\\mathbf{x}\\|^2 = \\sum c_i^2$',
+          condition: 'Parseval\u2019s identity',
+          key: true,
+          note: 'Pythagoras in $n$ dimensions. The length of a vector is recoverable from its coordinates alone \u2014 which fails in a general basis, where the coordinates say nothing about length without the Gram matrix to weight them.',
+        },
+        {
+          name: 'Inner product',
+          anchor: '#8',
+          formula: '$\\mathbf{x} \\cdot \\mathbf{y} = \\sum c_i d_i$',
+          condition: 'coordinates in the same basis',
+          note: 'The inner product of the vectors is the ordinary dot product of their coordinate vectors. Geometry is preserved exactly under the change of coordinates, which is what makes an orthonormal basis a rigid motion rather than a distortion.',
+        },
+      ],
+    },
+    {
+      heading: 'Projection onto a subspace',
+      identities: [
+        {
+          name: 'Projection',
+          anchor: '#4',
+          formula: '$\\operatorname{proj}_W \\mathbf{x} = \\sum_{i=1}^{k} (\\mathbf{x} \\cdot \\mathbf{q}_i)\\,\\mathbf{q}_i$',
+          condition: '$\\{\\mathbf{q}_i\\}$ orthonormal basis for $W$',
+          key: true,
+          note: 'No $(A^{\\mathsf{T}}A)^{-1}$ anywhere \u2014 compare the [general projection formula](!/linear-algebra/orthogonality/projections), which needs a matrix inverse. Orthonormality makes $A^{\\mathsf{T}}A = I$, so the inverse is the identity and the formula collapses to a sum of independent terms.',
+        },
+        {
+          name: 'Bessel\u2019s inequality',
+          anchor: '#8',
+          formula: '$\\sum_{i=1}^{k} c_i^2 \\leq \\|\\mathbf{x}\\|^2$',
+          condition: 'equality iff $\\mathbf{x} \\in W$',
+          strict: true,
+          note: 'A truncated sum can only lose length. The deficit is exactly the squared distance from $\\mathbf{x}$ to $W$, so the inequality measures how much of the vector the subspace fails to capture \u2014 which is the least-squares error before any least-squares problem is posed.',
+        },
+      ],
+    },
+  ],
+}
 
 
 // const sectionsContent = {
@@ -590,7 +1464,7 @@ return {
     introContent,
     obj3Table,
     obj7Table,
-    summaryTable,
+    orthonormalOperations,
     faqQuestions,
     schemas,
     seoData: {
@@ -612,7 +1486,7 @@ export default function OrthogonalSetsPage({
   introContent,
   obj3Table,
   obj7Table,
-  summaryTable,
+  orthonormalOperations,
   faqQuestions,
   schemas,
 }) {
@@ -700,11 +1574,17 @@ export default function OrthogonalSetsPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          `Every row below is an operation that becomes simpler in an orthonormal basis, and the simplification is always the same one: a linear system turns into a dot product. Reading them together shows that these are not six separate conveniences but six consequences of a single fact about the basis vectors.`,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="orthonormal-operations"
+            title="Operations in an orthonormal basis"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+          >
+            <IdentitySheet data={orthonormalOperations} theme="navy" variant="ledger" />
+          </DiagramFrame>,
+          `What changes is that the coordinates stop depending on each other. In a general basis, finding one coordinate of $\\mathbf{x}$ means solving for all of them at once — the system $B\\mathbf{c} = \\mathbf{x}$ couples every unknown to every other. With an orthonormal basis each coordinate is an independent dot product, so a single one can be computed alone, and adding a new basis vector does not change the coordinates already found.`,
+          `The projection row is where this pays off most visibly. The general formula requires $(A^{\\mathsf{T}}A)^{-1}$, a matrix inverse computed before anything can be projected. When the columns are orthonormal, $A^{\\mathsf{T}}A$ is the identity, the inverse disappears, and the projection is a sum of independent terms — which is precisely why [Gram–Schmidt](!/linear-algebra/orthogonality/gram-schmidt) is worth running before a projection-heavy computation rather than after.`,
         ]
     },
 ]

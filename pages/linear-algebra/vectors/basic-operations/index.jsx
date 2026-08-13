@@ -1604,6 +1604,7 @@ export default function BasicVectorOperationsPage({
         />
    <br/>
    <br/>
+   <br/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

@@ -1,3 +1,758 @@
+// // tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj8 aggregation, obj9 summary capstone)
+
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import { tableHeaders } from '@/app/styles/theme'
+
+
+// export async function getStaticProps(){
+// const keyWords = [
+//   "matrix representation linear transformation",
+//   "standard matrix transformation",
+//   "linear map matrix",
+//   "transformation matrix columns",
+//   "composition matrix multiplication",
+//   "matrix for abstract vector spaces",
+//   "differentiation matrix polynomial",
+//   "standard matrix basis vectors",
+//   "linear transformation to matrix",
+//   "matrix encodes transformation",
+//   "coordinate representation linear map",
+//   "matrix representation basis",
+//   "invertible transformation matrix",
+//   "linear operator matrix"
+// ]
+
+// const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// // ---------- TABLES ----------
+
+// // obj3 — aggregation: matrix shape ↔ transformation type
+// const obj3Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Shape of A (m × n)</th>
+//       <th style="${tableHeaders.aggregation}">Transformation type</th>
+//       <th style="${tableHeaders.aggregation}">Geometric action</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">m &gt; n (more rows than columns)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T: ℝⁿ → ℝᵐ, embedding</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">embeds a smaller-dimensional space into a larger one (e.g. 3 × 2 lifts ℝ² into ℝ³)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">m = n (square)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T: ℝⁿ → ℝⁿ, linear operator</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">maps a space to itself — only operators carry <a href="/linear-algebra/determinants" style="${linkStyle}">determinant</a>, <a href="/linear-algebra/eigen" style="${linkStyle}">eigenvalues</a>, and <a href="/linear-algebra/matrix/trace" style="${linkStyle}">trace</a></td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">m &lt; n (more columns than rows)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">T: ℝⁿ → ℝᵐ, compression</td>
+//       <td style="padding: 12px 15px; color: #34495e;">compresses a larger-dimensional space into a smaller one (e.g. 2 × 3 flattens ℝ³ into ℝ²)</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // obj8 — aggregation: matrix invariants and what they reveal about T
+// const obj8Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Matrix invariant</th>
+//       <th style="${tableHeaders.aggregation}">What it reveals about T</th>
+//       <th style="${tableHeaders.aggregation}">Requires</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/rank" style="${linkStyle}">rank</a>(A)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim of the <a href="/linear-algebra/transformations/image-kernel" style="${linkStyle}">image</a> of T (how many output directions T can reach)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any A</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nullity(A)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim of the kernel of T (how many input directions T collapses to zero)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any A</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(A)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">invertibility (det ≠ 0); volume scaling factor |det(A)|; orientation by sign</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">eigenvalues</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scaling factors along the invariant directions (eigenvectors)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">tr(A)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of the eigenvalues</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/svd" style="${linkStyle}">singular values</a></td>
+//       <td style="padding: 12px 15px; color: #34495e;">maximum stretching along each orthogonal input direction</td>
+//       <td style="padding: 12px 15px; color: #34495e;">any A</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // obj9 — summary capstone: transformation ↔ matrix dictionary
+// const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Transformation-side concept</th>
+//       <th style="${tableHeaders.summary}">Matrix-side counterpart</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear T: ℝⁿ → ℝᵐ</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique m × n matrix A</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T(eⱼ) — image of j-th basis vector</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">j-th column of A</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(domain) = n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of columns of A</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(codomain) = m</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of rows of A</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear operator (V = W)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square matrix</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity transformation I</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">identity matrix</a> Iₙ</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Composition S ∘ T</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matrix product BA</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse T⁻¹</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/inverse" style="${linkStyle}">inverse matrix</a> A⁻¹</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T is invertible (bijective)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is invertible (det(A) ≠ 0 for square A)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Image of T</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column space of A</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Kernel of T</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">null space of A</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Isomorphism between V and W</td>
+//       <td style="padding: 12px 15px; color: #34495e;">invertible square matrix relating the two coordinate systems</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // ---------- SECTIONS ----------
+
+// // const sectionsContent = {
+// //   obj1: {
+// //     title: `Every Linear Map from Rⁿ to Rᵐ Is Matrix Multiplication`,
+// //     content: `If $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ is linear, there exists a unique $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ such that
+
+// // $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mathbb{R}^n$$
+
+// // This is not an optional representation — it is forced by linearity. Any vector $\\mathbf{x} = x_1\\mathbf{e}_1 + \\cdots + x_n\\mathbf{e}_n$ maps to $T(\\mathbf{x}) = x_1T(\\mathbf{e}_1) + \\cdots + x_nT(\\mathbf{e}_n)$, and this is exactly the matrix-vector product $A\\mathbf{x}$ with $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.
+
+// // The converse is equally immediate: every $m \\times n$ matrix $A$ defines a linear transformation $\\mathbf{x} \\mapsto A\\mathbf{x}$. The correspondence is one-to-one — different matrices define different transformations, and different transformations produce different matrices. Linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices are the same objects viewed from two perspectives.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj2: {
+// //     title: `Constructing the Standard Matrix`,
+// //     content: `The recipe is direct: apply $T$ to each standard basis vector $\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n$ and arrange the results as columns:
+
+// // $$A = \\begin{pmatrix} | & | & & | \\\\ T(\\mathbf{e}_1) & T(\\mathbf{e}_2) & \\cdots & T(\\mathbf{e}_n) \\\\ | & | & & | \\end{pmatrix}$$
+
+// // ## Worked Example
+
+// // Let $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ be defined by $T(x, y, z) = (2x - y + 3z, \\; 4x + 5z)$.
+
+// // $T(\\mathbf{e}_1) = T(1, 0, 0) = (2, 4)$
+
+// // $T(\\mathbf{e}_2) = T(0, 1, 0) = (-1, 0)$
+
+// // $T(\\mathbf{e}_3) = T(0, 0, 1) = (3, 5)$
+
+// // $$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$$
+
+// // Verification: $A\\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatrix} 2x - y + 3z \\\\ 4x + 5z \\end{pmatrix} = T(x, y, z)$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj3: {
+// //     title: `Reading the Matrix`,
+// //     content: `Every piece of information about a linear transformation is encoded in its matrix.
+
+// // Column $j$ tells you where $\\mathbf{e}_j$ goes. If the first column of a $2 \\times 2$ matrix is $(3, -1)^T$, then $(1, 0)$ maps to $(3, -1)$. The matrix is a complete lookup table: the image of any vector is computed by multiplication.
+
+// // The size $m \\times n$ records the dimensions of codomain ($m$ rows) and domain ($n$ columns). A $3 \\times 2$ matrix represents a map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ — it embeds a plane into three-dimensional space. A $2 \\times 3$ matrix represents a map from $\\mathbb{R}^3$ to $\\mathbb{R}^2$ — it compresses three dimensions down to two.
+
+// // A square matrix ($m = n$) represents a transformation from a space to itself — a linear operator. Only operators can have [eigenvalues](!/linear-algebra/eigen), [determinants](!/linear-algebra/determinants), and [traces](!/linear-algebra/matrix/trace).`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj4: {
+// //     title: `Matrices for Abstract Vector Spaces`,
+// //     content: `For a linear transformation $T: V \\to W$ between abstract [vector spaces](!/linear-algebra/vector-spaces), the matrix depends on a choice of [basis](!/linear-algebra/vector-spaces) for both $V$ and $W$.
+
+// // Fix a basis $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ for $V$ and a basis $\\mathcal{C} = \\{\\mathbf{w}_1, \\dots, \\mathbf{w}_m\\}$ for $W$. Column $j$ of the matrix $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the $\\mathcal{C}$-coordinate vector of $T(\\mathbf{v}_j)$ — the scalars needed to express $T(\\mathbf{v}_j)$ as a linear combination of $\\mathbf{w}_1, \\dots, \\mathbf{w}_m$.
+
+// // Different bases give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces a different but equally valid matrix representation.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj5: {
+// //     title: `Worked Example: Differentiation`,
+// //     content: `Let $T: \\mathcal{P}_2 \\to \\mathcal{P}_1$ be defined by $T(p) = p'$ (differentiation). Choose the monomial basis $\\{1, x, x^2\\}$ for $\\mathcal{P}_2$ and $\\{1, x\\}$ for $\\mathcal{P}_1$.
+
+// // $T(1) = 0 = 0 \\cdot 1 + 0 \\cdot x$, so column $1$ is $(0, 0)^T$.
+
+// // $T(x) = 1 = 1 \\cdot 1 + 0 \\cdot x$, so column $2$ is $(1, 0)^T$.
+
+// // $T(x^2) = 2x = 0 \\cdot 1 + 2 \\cdot x$, so column $3$ is $(0, 2)^T$.
+
+// // $$[T] = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$
+
+// // The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The [rank](!/linear-algebra/matrix/rank) is $2$ — differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$. The [null space](!/linear-algebra/vector-spaces/fundamental-spaces) is one-dimensional, spanned by the constant polynomial $1$ — the only polynomials whose derivative is zero.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj6: {
+// //     title: `Composition Corresponds to Matrix Multiplication`,
+// //     content: `If $T: U \\to V$ has matrix $A$ (relative to appropriate bases) and $S: V \\to W$ has matrix $B$, then the composition $S \\circ T: U \\to W$ has matrix $BA$.
+
+// // The order matches the composition: $S$ acts after $T$, and $B$ multiplies from the left. This is why [matrix multiplication](!/linear-algebra/matrix/operations) is defined as it is — the row-times-column rule encodes function composition.
+
+// // Associativity of matrix multiplication $(BC)A = B(CA)$ mirrors associativity of composition $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. Non-commutativity of multiplication $AB \\neq BA$ mirrors non-commutativity of composition $S \\circ T \\neq T \\circ S$.
+
+// // The identity transformation $I: V \\to V$ has the [identity matrix](!/linear-algebra/matrix/types) $I_n$ in any basis, and $I_n A = AI_n = A$ — the identity matrix is the multiplicative identity precisely because the identity transformation is the compositional identity.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj7: {
+// //     title: `The Identity and the Inverse`,
+// //     content: `The identity transformation $I: V \\to V$ sends every vector to itself. In any basis, its matrix is $I_n$.
+
+// // If $T$ has matrix $A$ and $T$ is invertible, then $T^{-1}$ has matrix $A^{-1}$. The transformation $T$ is invertible if and only if $A$ is [invertible](!/linear-algebra/matrix/inverse) — the geometric and algebraic conditions coincide exactly. Composing $T$ with $T^{-1}$ gives the identity, and multiplying $A$ by $A^{-1}$ gives $I$. The [determinant](!/linear-algebra/determinants) test ($\\det(A) \\neq 0$) simultaneously answers whether the transformation is bijective and whether the matrix has an inverse.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj8: {
+// //     title: `The Matrix Encodes Everything`,
+// //     content: `Once a linear transformation is represented by a matrix, every property of the transformation becomes a matrix computation.
+
+// // The [rank](!/linear-algebra/matrix/rank) of $A$ equals the dimension of the [image](!/linear-algebra/transformations/image-kernel) of $T$. The nullity equals the dimension of the kernel. The [determinant](!/linear-algebra/determinants) (for square matrices) tells whether $T$ is invertible and how it scales volumes. The [eigenvalues](!/linear-algebra/eigen) reveal the scaling factors along invariant directions. The [trace](!/linear-algebra/matrix/trace) equals the sum of the eigenvalues. The [singular values](!/linear-algebra/decompositions/svd) measure the maximum stretching in each orthogonal direction.
+
+// // This is why matrices dominate computational linear algebra. Abstract transformations are conceptually powerful, but matrices are what computers operate on. The matrix representation converts every question about a linear map into a question about an array of numbers — and arrays of numbers are what algorithms are designed to handle.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj9: {
+// //     title: `Summary: The Transformation ↔ Matrix Dictionary`,
+// //     content: `The recipe and examples above all serve a single end: each linear transformation between finite-dimensional spaces corresponds to a unique matrix, and every concept on the transformation side has a matching object on the matrix side. The table below collects the dictionary in one place — what to look at on the matrix when you want to know something about the transformation, and vice versa. It is a recap of the whole page and a reference for moving between the two languages.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// // }
+
+
+// // tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj8 aggregation, obj9 summary capstone)
+
+// // ---------- SECTIONS ----------
+
+// const sectionsContent = {
+//   obj1: {
+//     title: `Every Linear Map from Rⁿ to Rᵐ Is Matrix Multiplication`,
+//     content: `If $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ is linear, there exists a unique $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ such that
+
+// @academic[formula_callout:Linear Map as Matrix Multiplication
+// $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mathbb{R}^n$$
+// /linear-algebra/formulas#linear_map_as_matrix_multiplication]@
+
+// @academic[formulas_link:Browse all linear algebra formulas
+// /linear-algebra/formulas]@
+
+// This is not an optional representation — it is forced by linearity. Any vector $\\mathbf{x} = x_1\\mathbf{e}_1 + \\cdots + x_n\\mathbf{e}_n$ maps to $T(\\mathbf{x}) = x_1T(\\mathbf{e}_1) + \\cdots + x_nT(\\mathbf{e}_n)$, and this is exactly the matrix-vector product $A\\mathbf{x}$ with $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.
+
+// The converse is equally immediate: every $m \\times n$ matrix $A$ defines a linear transformation $\\mathbf{x} \\mapsto A\\mathbf{x}$. The correspondence is one-to-one — different matrices define different transformations, and different transformations produce different matrices. Linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices are the same objects viewed from two perspectives.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj2: {
+//     title: `Constructing the Standard Matrix`,
+//     content: `The recipe is direct: apply $T$ to each standard basis vector $\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n$ and arrange the results as columns:
+
+// @academic[formula_callout:Standard Matrix
+// $$A = \\bigl[\\,T(\\mathbf{e}_1) \\;\\; T(\\mathbf{e}_2) \\;\\; \\cdots \\;\\; T(\\mathbf{e}_n)\\,\\bigr]$$
+// /linear-algebra/formulas#standard_matrix]@
+
+// @academic[formulas_link:Browse all linear algebra formulas
+// /linear-algebra/formulas]@
+
+// ## Worked Example
+
+// Let $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ be defined by $T(x, y, z) = (2x - y + 3z, \\; 4x + 5z)$.
+
+// $T(\\mathbf{e}_1) = T(1, 0, 0) = (2, 4)$
+
+// $T(\\mathbf{e}_2) = T(0, 1, 0) = (-1, 0)$
+
+// $T(\\mathbf{e}_3) = T(0, 0, 1) = (3, 5)$
+
+// $$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$$
+
+// Verification: $A\\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatrix} 2x - y + 3z \\\\ 4x + 5z \\end{pmatrix} = T(x, y, z)$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj3: {
+//     title: `Reading the Matrix`,
+//     content: `Every piece of information about a linear transformation is encoded in its matrix.
+
+// Column $j$ tells you where $\\mathbf{e}_j$ goes. If the first column of a $2 \\times 2$ matrix is $(3, -1)^T$, then $(1, 0)$ maps to $(3, -1)$. The matrix is a complete lookup table: the image of any vector is computed by multiplication.
+
+// The size $m \\times n$ records the dimensions of codomain ($m$ rows) and domain ($n$ columns). A $3 \\times 2$ matrix represents a map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ — it embeds a plane into three-dimensional space. A $2 \\times 3$ matrix represents a map from $\\mathbb{R}^3$ to $\\mathbb{R}^2$ — it compresses three dimensions down to two.
+
+// A square matrix ($m = n$) represents a transformation from a space to itself — a linear operator. Only operators can have [eigenvalues](!/linear-algebra/eigen), [determinants](!/linear-algebra/determinants), and [traces](!/linear-algebra/matrix/trace).`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj4: {
+//     title: `Matrices for Abstract Vector Spaces`,
+//     content: `For a linear transformation $T: V \\to W$ between abstract [vector spaces](!/linear-algebra/vector-spaces), the matrix depends on a choice of [basis](!/linear-algebra/vector-spaces) for both $V$ and $W$.
+
+// Fix a basis $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ for $V$ and a basis $\\mathcal{C} = \\{\\mathbf{w}_1, \\dots, \\mathbf{w}_m\\}$ for $W$. Column $j$ of the matrix $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the $\\mathcal{C}$-coordinate vector of $T(\\mathbf{v}_j)$ — the scalars needed to express $T(\\mathbf{v}_j)$ as a linear combination of $\\mathbf{w}_1, \\dots, \\mathbf{w}_m$. In compact form:
+
+// @academic[formula_callout:Matrix Representation Abstract Bases
+// $$[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\bigl[\\,[T(\\mathbf{v}_1)]_{\\mathcal{C}} \\;\\; \\cdots \\;\\; [T(\\mathbf{v}_n)]_{\\mathcal{C}}\\,\\bigr]$$
+// /linear-algebra/formulas#matrix_representation_abstract_bases]@
+
+// @academic[formulas_link:Browse all linear algebra formulas
+// /linear-algebra/formulas]@
+
+// Different bases give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces a different but equally valid matrix representation.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj5: {
+//     title: `Worked Example: Differentiation`,
+//     content: `Let $T: \\mathcal{P}_2 \\to \\mathcal{P}_1$ be defined by $T(p) = p'$ (differentiation). Choose the monomial basis $\\{1, x, x^2\\}$ for $\\mathcal{P}_2$ and $\\{1, x\\}$ for $\\mathcal{P}_1$.
+
+// $T(1) = 0 = 0 \\cdot 1 + 0 \\cdot x$, so column $1$ is $(0, 0)^T$.
+
+// $T(x) = 1 = 1 \\cdot 1 + 0 \\cdot x$, so column $2$ is $(1, 0)^T$.
+
+// $T(x^2) = 2x = 0 \\cdot 1 + 2 \\cdot x$, so column $3$ is $(0, 2)^T$.
+
+// $$[T] = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$
+
+// The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The [rank](!/linear-algebra/matrix/rank) is $2$ — differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$. The [null space](!/linear-algebra/vector-spaces/fundamental-spaces) is one-dimensional, spanned by the constant polynomial $1$ — the only polynomials whose derivative is zero.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj6: {
+//     title: `Composition Corresponds to Matrix Multiplication`,
+//     content: `If $T: U \\to V$ has matrix $A$ (relative to appropriate bases) and $S: V \\to W$ has matrix $B$, then the composition $S \\circ T: U \\to W$ has matrix $BA$.
+
+// The order matches the composition: $S$ acts after $T$, and $B$ multiplies from the left. This is why [matrix multiplication](!/linear-algebra/matrix/operations) is defined as it is — the row-times-column rule encodes function composition.
+
+// Associativity of matrix multiplication $(BC)A = B(CA)$ mirrors associativity of composition $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. Non-commutativity of multiplication $AB \\neq BA$ mirrors non-commutativity of composition $S \\circ T \\neq T \\circ S$.
+
+// The identity transformation $I: V \\to V$ has the [identity matrix](!/linear-algebra/matrix/types) $I_n$ in any basis, and $I_n A = AI_n = A$ — the identity matrix is the multiplicative identity precisely because the identity transformation is the compositional identity.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj7: {
+//     title: `The Identity and the Inverse`,
+//     content: `The identity transformation $I: V \\to V$ sends every vector to itself. In any basis, its matrix is $I_n$.
+
+// If $T$ has matrix $A$ and $T$ is invertible, then $T^{-1}$ has matrix $A^{-1}$. The transformation $T$ is invertible if and only if $A$ is [invertible](!/linear-algebra/matrix/inverse) — the geometric and algebraic conditions coincide exactly. Composing $T$ with $T^{-1}$ gives the identity, and multiplying $A$ by $A^{-1}$ gives $I$. The [determinant](!/linear-algebra/determinants) test ($\\det(A) \\neq 0$) simultaneously answers whether the transformation is bijective and whether the matrix has an inverse.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj8: {
+//     title: `The Matrix Encodes Everything`,
+//     content: `Once a linear transformation is represented by a matrix, every property of the transformation becomes a matrix computation.
+
+// The [rank](!/linear-algebra/matrix/rank) of $A$ equals the dimension of the [image](!/linear-algebra/transformations/image-kernel) of $T$. The nullity equals the dimension of the kernel. The [determinant](!/linear-algebra/determinants) (for square matrices) tells whether $T$ is invertible and how it scales volumes. The [eigenvalues](!/linear-algebra/eigen) reveal the scaling factors along invariant directions. The [trace](!/linear-algebra/matrix/trace) equals the sum of the eigenvalues. The [singular values](!/linear-algebra/decompositions/svd) measure the maximum stretching in each orthogonal direction.
+
+// This is why matrices dominate computational linear algebra. Abstract transformations are conceptually powerful, but matrices are what computers operate on. The matrix representation converts every question about a linear map into a question about an array of numbers — and arrays of numbers are what algorithms are designed to handle.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj9: {
+//     title: `Summary: The Transformation ↔ Matrix Dictionary`,
+//     content: `The recipe and examples above all serve a single end: each linear transformation between finite-dimensional spaces corresponds to a unique matrix, and every concept on the transformation side has a matching object on the matrix side. The table below collects the dictionary in one place — what to look at on the matrix when you want to know something about the transformation, and vice versa. It is a recap of the whole page and a reference for moving between the two languages.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+// }
+
+
+//   const introContent = {
+//   title: `Encoding a Transformation as a Matrix`,
+//   content: `Every linear transformation between finite-dimensional spaces can be represented by a matrix, and every matrix defines a linear transformation. The columns of the matrix are the images of the basis vectors — this single recipe converts an abstract function into a concrete array of numbers from which every property of the transformation can be extracted.`,
+// }
+
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "How do you find the matrix of a linear transformation?",
+//     answer: "Apply the transformation to each standard basis vector e₁, e₂, …, eₙ and arrange the results as columns. For abstract vector spaces, apply T to each basis vector of V and express the results as coordinate vectors in the basis of W. The resulting matrix satisfies T(x) = Ax for all x.",
+//     sectionId: "2"
+//   },
+//   obj2: {
+//     question: "Why does every linear transformation have a matrix?",
+//     answer: "Linearity forces T(x) = x₁T(e₁) + ⋯ + xₙT(eₙ) for any vector x. This is exactly the matrix-vector product Ax where column j of A is T(eⱼ). The correspondence is one-to-one: different matrices define different transformations, and vice versa.",
+//     sectionId: "1"
+//   },
+//   obj3: {
+//     question: "How does matrix multiplication relate to composition?",
+//     answer: "If T has matrix A and S has matrix B, then the composition S ∘ T has matrix BA. The left-to-right order of matrix multiplication matches the outer-to-inner order of composition. This is why matrix multiplication is defined by the row-times-column rule.",
+//     sectionId: "6"
+//   },
+//   obj4: {
+//     question: "What does the matrix of the differentiation operator look like?",
+//     answer: "For differentiation T: P₂ → P₁ with monomial bases, the matrix is [[0, 1, 0], [0, 0, 2]]. Column j records the coefficients of T applied to the j-th basis polynomial. The rank is 2 (differentiation maps onto all of P₁) and the kernel is the constant polynomials.",
+//     sectionId: "5"
+//   },
+//   obj5: {
+//     question: "Does the matrix of a transformation depend on the basis?",
+//     answer: "Yes. Different bases produce different matrices for the same transformation. The standard matrix uses the standard basis for both domain and codomain. For abstract spaces like polynomial spaces, every basis choice gives a different but equally valid matrix representation.",
+//     sectionId: "4"
+//   }
+// }
+
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Matrix Representation of Linear Transformations",
+//     "description": "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
+//     "url": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Matrix Representation of Linear Transformations"
+//     },
+//     "teaches": [
+//       "Every linear map Rⁿ → Rᵐ is matrix multiplication",
+//       "Constructing the standard matrix from basis images",
+//       "Reading transformation properties from the matrix",
+//       "Matrix representation in abstract vector spaces",
+//       "Differentiation as a matrix operation",
+//       "Composition corresponds to matrix multiplication",
+//       "Invertibility of transformations and matrices"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Transformations",
+//         "item": "https://www.learnmathclass.com/linear-algebra/transformations"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Matrix Representations",
+//         "item": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+
+// return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     obj3Table,
+//     obj8Table,
+//     summaryTable,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Matrix Representation of Transformations | Learn Math Class",
+//       description: "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
+//       keywords: keyWords.join(", "),
+//       url: "/linear-algebra/transformations/matrix-representations",
+//       name: "Matrix Representation of Linear Transformations"
+//     },
+//   }
+// }
+//    }
+
+// export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+//   const genericSections=[
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//           <div key={'obj3-table'} style={tableWrapStyle}
+//                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//           <div key={'obj8-table'} style={tableWrapStyle}
+//                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//           <div key={'summary-table'} style={tableWrapStyle}
+//                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Matric Representation of Linear Transformation</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "children"
+//          secondaryNavTitle="More in this Section"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//    <br/>
+//    <Sections sections={genericSections}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj8 aggregation, obj9 summary capstone)
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
@@ -10,6 +765,8 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 export async function getStaticProps(){
@@ -110,66 +867,83 @@ const obj8Table = `
 `
 
 // obj9 — summary capstone: transformation ↔ matrix dictionary
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Transformation-side concept</th>
-      <th style="${tableHeaders.summary}">Matrix-side counterpart</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear T: ℝⁿ → ℝᵐ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique m × n matrix A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T(eⱼ) — image of j-th basis vector</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">j-th column of A</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(domain) = n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of columns of A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(codomain) = m</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of rows of A</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear operator (V = W)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square matrix</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity transformation I</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">identity matrix</a> Iₙ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Composition S ∘ T</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matrix product BA</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse T⁻¹</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/inverse" style="${linkStyle}">inverse matrix</a> A⁻¹</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T is invertible (bijective)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is invertible (det(A) ≠ 0 for square A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Image of T</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column space of A</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Kernel of T</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">null space of A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Isomorphism between V and W</td>
-      <td style="padding: 12px 15px; color: #34495e;">invertible square matrix relating the two coordinate systems</td>
-    </tr>
-  </tbody>
-</table>
-`
+// obj9 — the dictionary, grouped by what kind of thing is being translated
+const transformationDictionary = {
+  kicker: 'Transformations \u00B7 dictionary',
+  title: 'Transformation \u2194 matrix',
+  tallyLabel: 'entries',
+  intro: 'Once a basis is fixed the two languages are interchangeable, and every statement about a map has a matrix statement beside it. The point of reading them in parallel is to notice that neither side is primary \u2014 the matrix is not an approximation to the transformation, it is the transformation written in coordinates.',
+  footnote: 'The dictionary is exact and it is one-to-one, but only once a basis is chosen. Change the basis and the same transformation gets a different matrix \u2014 which is what makes [similarity](!/linear-algebra/transformations/basis-change) the right notion of sameness for matrices, and why properties surviving a basis change are the ones worth naming.',
+  groups: [
+    {
+      heading: 'The correspondence itself',
+      identities: [
+        {
+          name: 'The map and its matrix',
+          anchor: '#1',
+          formula: '$T(\\mathbf{x}) = A\\mathbf{x}$',
+          condition: 'unique $m \\times n$ matrix per linear $T$',
+          key: true,
+          note: 'Every linear map from $\\mathbb{R}^n$ to $\\mathbb{R}^m$ is matrix multiplication and nothing else \u2014 there is no more general kind of linear map hiding elsewhere. The uniqueness matters as much as the existence: two different matrices cannot represent the same map in the same basis.',
+        },
+        {
+          name: 'Columns are images of basis vectors',
+          anchor: '#2',
+          formula: '$T(\\mathbf{e}_j) = j$-th column of $A$',
+          condition: 'how the matrix is built',
+          key: true,
+          note: 'The whole construction in one line. Feed the map each basis vector in turn and record what comes back \u2014 the results are the columns. This is why knowing a linear map on a basis is knowing it everywhere.',
+        },
+        {
+          name: 'Dimensions',
+          anchor: '#2',
+          formula: '$n$ columns, $m$ rows',
+          condition: 'domain $\\mathbb{R}^n$, codomain $\\mathbb{R}^m$',
+          note: 'Columns count inputs, rows count outputs. A linear operator has $V = W$, so its matrix is square \u2014 which is the only case where eigenvalues, determinants and inverses are even defined.',
+        },
+      ],
+    },
+    {
+      heading: 'Operations translate',
+      identities: [
+        {
+          name: 'Composition',
+          anchor: '#6',
+          formula: '$S \\circ T \\leftrightarrow BA$',
+          condition: 'note the order',
+          strict: true,
+          note: 'Applying $T$ then $S$ corresponds to the product $BA$, not $AB$ \u2014 the matrix acting first stands on the right, because it meets the vector first. This is the reason [matrix multiplication](!/linear-algebra/matrix/operations) is defined the way it is rather than entry by entry.',
+        },
+        {
+          name: 'Identity and inverse',
+          anchor: '#7',
+          formula: '$I \\leftrightarrow I_n$, $T^{-1} \\leftrightarrow A^{-1}$',
+          condition: '$T$ bijective $\\iff$ $A$ invertible',
+          note: 'The identity transformation is the identity matrix in every basis \u2014 the one matrix a change of basis cannot alter. Invertibility transfers exactly, which is what makes the [invertibility equivalence](!/linear-algebra/matrix/inverse) a statement about transformations too.',
+        },
+      ],
+    },
+    {
+      heading: 'Subspaces translate',
+      identities: [
+        {
+          name: 'Image and kernel',
+          anchor: '#8',
+          formula: '$\\operatorname{im}(T) \\leftrightarrow \\operatorname{Col}(A)$, $\\ker(T) \\leftrightarrow \\operatorname{Null}(A)$',
+          condition: 'always',
+          note: 'The reachable outputs are the column space; the collapsed inputs are the null space. So rank-nullity is a statement about transformations that happens to be provable by [row reduction](!/linear-algebra/linear-systems/echelon-form).',
+        },
+        {
+          name: 'Isomorphism',
+          anchor: '#4',
+          formula: 'invertible square matrix',
+          condition: '$\\dim V = \\dim W$, both finite',
+          note: 'Two spaces of the same finite dimension are isomorphic, and the isomorphism is a change of coordinates. This is why $\\mathcal{P}_3$ and $\\mathbb{R}^{2\\times 2}$ are the same object twice \u2014 both four-dimensional, so both are $\\mathbb{R}^4$ in disguise.',
+        },
+      ],
+    },
+  ],
+}
 
 // ---------- SECTIONS ----------
 
@@ -564,7 +1338,7 @@ return {
     introContent,
     obj3Table,
     obj8Table,
-    summaryTable,
+    transformationDictionary,
     faqQuestions,
     schemas,
     seoData: {
@@ -578,7 +1352,7 @@ return {
 }
    }
 
-export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -657,8 +1431,17 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          `Read the entries below in both directions. Each line is a fact about transformations and a fact about matrices at the same time, and which one is the definition depends only on where you started. The grouping separates the correspondence itself from what it does to operations and to subspaces — three kinds of translation rather than one long glossary.`,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="transformation-dictionary"
+            title="Transformation ↔ matrix"
+            source="/linear-algebra/transformations/matrix-representation"
+          >
+            <IdentitySheet data={transformationDictionary} theme="navy" variant="ledger" />
+          </DiagramFrame>,
+          `The composition row is where the dictionary explains something rather than merely recording it. Applying $T$ and then $S$ corresponds to the product $BA$ — the matrix acting first written on the right, because it is the one the vector meets first. Matrix multiplication is defined as it is precisely so that this correspondence holds; the row-by-column rule is a consequence of wanting composition to translate, not an arbitrary convention.`,
+          `The dictionary is exact, and it is also basis-dependent. Fix a basis and the correspondence is one-to-one; change the basis and the same transformation acquires a different matrix. That is the whole reason [similarity](!/linear-algebra/transformations/basis-change) exists as a notion — two matrices related by $P^{-1}AP$ are the same map seen from two places, which is why the properties worth naming are the ones that survive the change.`,
         ]
     },
 ]

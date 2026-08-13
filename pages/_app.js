@@ -1,4 +1,11 @@
+
+
 // import Script from "next/script";
+
+// import ScrollUpButton from "@/app/components/scroll-up-button/ScrollUpButton";
+// import ScrollToBottom from "@/app/components/scroll-up-button/ScrollToBottom";
+// import Footer from "@/app/components/page-components/footer/Footer";
+// import MyNavbar3 from "@/app/components/nav-bar3/MyNavbar3";
 
 // export default function App({ Component, pageProps }) {
 //   return (
@@ -17,8 +24,18 @@
 //         `}
 //       </Script>
 
+//       {/* Navigation */}
+//       <MyNavbar3 themeName="dark"/>
+//       {/* <MyNavbar3 themeName="dark" /> */}
+//         {/* <ScrollToTop right='60px' /> */}
+//   <ScrollToBottom center={true}
+//   bottom={null}/>
+
 //       {/* Your actual page */}
 //       <Component {...pageProps} />
+
+//       <ScrollUpButton/>
+//       <Footer/>
 //     </>
 //   );
 // }
@@ -30,10 +47,13 @@ import ScrollUpButton from "@/app/components/scroll-up-button/ScrollUpButton";
 import ScrollToBottom from "@/app/components/scroll-up-button/ScrollToBottom";
 import Footer from "@/app/components/page-components/footer/Footer";
 import MyNavbar3 from "@/app/components/nav-bar3/MyNavbar3";
+import RouteSync from "../app/components/dev/RouteSync";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
+      <RouteSync />
+
       {/* Google Analytics 4 */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-WGZ7YFQGM6"

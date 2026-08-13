@@ -1,11 +1,47 @@
 [
   {
+    "id": "cholesky-outcomes",
+    "title": "What the algorithm does with each matrix",
+    "source": "/linear-algebra/decompositions/cholesky",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 939,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "cross-product-laws",
     "title": "Properties of the cross product",
     "source": "/linear-algebra/vectors/cross-product",
     "section": "linear-algebra",
     "width": 840,
     "height": 1412,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "determinant-applications",
+    "title": "Six places a determinant does the work",
+    "source": "/linear-algebra/determinants/applications",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1122,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "determinant-geometry",
+    "title": "What the determinant measures, by dimension",
+    "source": "/linear-algebra/determinants/geometry",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 989,
     "formats": [
       "png",
       "pdf"
@@ -37,12 +73,84 @@
     ]
   },
   {
+    "id": "diagonalizability-cases",
+    "title": "Which matrices diagonalize",
+    "source": "/linear-algebra/eigen/diagonalization",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1108,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "dot-product-laws",
     "title": "Properties of the dot product",
     "source": "/linear-algebra/vectors/dot-product",
     "section": "linear-algebra",
     "width": 840,
     "height": 1366,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "four-subspace-card",
+    "title": "The four fundamental subspaces",
+    "source": "/linear-algebra/vector-spaces/fundamental-spaces",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1108,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "gram-schmidt-settings",
+    "title": "The same algorithm across settings",
+    "source": "/linear-algebra/orthogonality/gram-schmidt",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1102,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "homogeneous-appearances",
+    "title": "Where Ax = 0 turns up",
+    "source": "/linear-algebra/linear-systems/homogeneous",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1072,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "independence-properties",
+    "title": "What operations do to an independent set",
+    "source": "/linear-algebra/vector-spaces/linear-independence",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1454,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "inner-product-axioms",
+    "title": "The three axioms",
+    "source": "/linear-algebra/orthogonality/inner-product",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1287,
     "formats": [
       "png",
       "pdf"
@@ -86,12 +194,60 @@
     ]
   },
   {
+    "id": "lu-readings",
+    "title": "What LU computes, and at what cost",
+    "source": "/linear-algebra/decompositions/lower-upper",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 851,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "matrix-product-laws",
     "title": "Which laws survive the product",
     "source": "/linear-algebra/matrix/operations",
     "section": "linear-algebra",
     "width": 840,
     "height": 1620,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "norm-properties",
+    "title": "Properties of the norm",
+    "source": "/linear-algebra/vectors/magnitude",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1389,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "projection-properties",
+    "title": "Properties of orthogonal projections",
+    "source": "/linear-algebra/orthogonality/projections",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1531,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "qr-routes",
+    "title": "Four routes to the same factorization",
+    "source": "/linear-algebra/decompositions/qr",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 900,
     "formats": [
       "png",
       "pdf"
@@ -110,6 +266,102 @@
     ]
   },
   {
+    "id": "rref-readings",
+    "title": "Everything readable from the RREF",
+    "source": "/linear-algebra/linear-systems/echelon-form",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1230,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "solvability-questions",
+    "title": "Every solvability question, answered by rank",
+    "source": "/linear-algebra/linear-systems/solvability",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1061,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "span-diagnostics",
+    "title": "Four questions, one reduction",
+    "source": "/linear-algebra/vector-spaces/span",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 829,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "spectral-properties",
+    "title": "Spectral properties at a glance",
+    "source": "/linear-algebra/eigen/properties",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1821,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "spectral-readings",
+    "title": "What the decomposition gives you",
+    "source": "/linear-algebra/decompositions/spectral",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1153,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "standard-bases",
+    "title": "The default basis of each space",
+    "source": "/linear-algebra/vector-spaces/basis",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 893,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "standard-dimensions",
+    "title": "Dimensions of the standard spaces",
+    "source": "/linear-algebra/vector-spaces/dimension",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1168,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "svd-readings",
+    "title": "What the SVD reveals",
+    "source": "/linear-algebra/decompositions/svd",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1234,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "trace-properties",
     "title": "Trace properties at a glance",
     "source": "/linear-algebra/matrix/trace",
@@ -122,12 +374,48 @@
     ]
   },
   {
+    "id": "transformation-signatures",
+    "title": "Recognising a family from its matrix",
+    "source": "/linear-algebra/transformations/geometric",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 983,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vector-operation-laws",
+    "title": "The eight laws the operations obey",
+    "source": "/linear-algebra/vectors/basic-operations",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1516,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "vector-properties",
     "title": "Properties at a glance",
     "source": "/linear-algebra/vectors/properties",
     "section": "linear-algebra",
     "width": 840,
     "height": 1343,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vector-space-axioms",
+    "title": "The ten axioms",
+    "source": "/linear-algebra/vector-spaces/axioms",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1781,
     "formats": [
       "png",
       "pdf"

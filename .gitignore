@@ -69,3 +69,8 @@ automations/*
 
 #scripts
 scripts/
+
+
+
+# .gitignore
+.route-sync-profile

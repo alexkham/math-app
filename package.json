@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:sync": "concurrently -n next,sync -c cyan,magenta \"next dev\" \"node scripts/route-sync.js\"",
+    "dev:sync2": "concurrently -n next,sync -c cyan,magenta \"next dev\" \"node scripts/route-sync-ws.js\"",
     "build": "next build && node generate-sitemap.mjs",
     "start": "next start --port 3007 ",
     "generate-nav": "node generateNavFromSitemap.js",
@@ -11,7 +13,7 @@
     "generate-sitemap": "next build && node generate-sitemap.mjs",
     "build-with-sitemap": "npm run build && npm run generate-sitemap --/test",
     "diagrams": "node scripts/generate-diagrams.mjs",
-  "diagrams:clean": "node scripts/generate-diagrams.mjs --clean"
+    "diagrams:clean": "node scripts/generate-diagrams.mjs --clean"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",
@@ -32,7 +34,6 @@
     "mermaid": "^11.12.2",
     "next": "^15.3.3",
     "p5": "^1.11.2",
-    "playwright": "^1.57.0",
     "plotly.js": "^2.35.2",
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
@@ -58,9 +59,12 @@
   "devDependencies": {
     "@types/node": "22.15.19",
     "@types/react-beautiful-dnd": "^13.1.8",
+    "concurrently": "^10.0.4",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-unused-imports": "^3.2.0",
-    "typescript": "5.8.3"
+    "playwright": "^1.62.1",
+    "typescript": "5.8.3",
+    "ws": "^8.21.3"
   }
 }
