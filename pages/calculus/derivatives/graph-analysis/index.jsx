@@ -10,6 +10,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -509,6 +510,44 @@ $$y - f(a) = -\\frac{1}{f'(a)}(x - a)$$
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Notation of Graph Analysis`,
+    lead: `Three working conventions the tests below lean on: the reserved letter $c$, the sign-change arrow, and inequalities written on whole functions.`,
+    inherited: `$f'$ and $f'(a)$ — [the derivative function](!/calculus/derivatives/function#notation); $f''$ — [higher-order derivatives](!/calculus/derivatives/higher-order#notation); the $\\implies$ arrow — [logical implication](!/logic/propositional-logic/semantics/implication).`,
+    entries: [
+      {
+        id: 'critical-c',
+        tex: `$c$`,
+        read: `The critical number c`,
+        means: `A witness letter: a specific but unnamed point. $x$ ranges, $a$ is a chosen anchor, $c$ is *found* — by solving $f'(c) = 0$, by spotting where $f'$ fails to exist (**Critical Points** below), or handed over by the Mean Value Theorem.`,
+        cases: `$f'(c) = 0$ and “$f'(c)$ does not exist” are both critical — forgetting the second loses corner extrema like $|x|$ at $0$.`,
+        alsoWritten: `$x_0$ — the subscript-zero convention, standard in Russian and European texts for the same distinguished point.`,
+        confusedWith: `The capital $+C$ of the [indefinite integral](!/calculus/integrals/indefinite) — an arbitrary constant, free to be anything; this $c$ is the opposite, one fixed point.`,
+      },
+      {
+        id: 'sign-change-arrow',
+        tex: `$f': \\; + \\to -$`,
+        read: `f prime changes from positive to negative`,
+        means: `Sign immediately left of $c$, then immediately right. The arrow is spatial — crossing $c$ — not the limit arrow of [two-sided limits](!/calculus/limits/two-sided#notation), which shares the glyph.`,
+        cases: `$+ \\to -$ — local max; $- \\to +$ — local min; no change — neither, as in **The First Derivative Test** below.`,
+        alsoWritten: `Sign charts: intervals in a row, signs beneath. French texts draw the *tableau de variations*, with ↗ and ↘ arrows carrying the same information pictorially.`,
+        confusedWith: `A statement about $f'(c)$ itself. The test reads the sign *around* $c$, never at it — $f'(c)$ may be zero or fail to exist and the test still runs.`,
+      },
+      {
+        id: 'function-inequality',
+        tex: `$f' > 0$ on $(a,b)$`,
+        read: `f prime is positive on the interval`,
+        means: `An inequality on a whole function: $f'(x) > 0$ for *every* $x$ in $(a,b)$, argument suppressed. The quantifier is hidden in the word “on”.`,
+        cases: `At a single point — $f''(c) > 0$, the second-derivative test's hypothesis. On an interval — monotonicity and concavity claims. The two read alike and assert very different amounts.`,
+        alsoWritten: `Spelled out: $\\forall x \\in (a,b),\\; f'(x) > 0$ — the [universal quantifier](!/logic) made visible.`,
+        confusedWith: `“$f'$ is positive somewhere.” The suppressed quantifier is *every*, not *some* — one sign check per interval only suffices after the zeros of $f'$ have been found, which is what makes critical points the required first step.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/derivatives`,
+    parentLabel: `Derivatives`,
+  },
   obj3: {
     title: `Increasing and Decreasing Functions`,
     content: `
@@ -922,6 +961,25 @@ export default function PageTemplate({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

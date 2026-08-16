@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -464,6 +465,45 @@ encapsulates all three: the right side requires $f(a)$ to exist, the left side r
     after: ``,
     link: ``
   },
+  notation: {
+    title: `Continuity Notation`,
+    lead: `What the single equation packs in, its one-sided halves, and the class mark that turns “continuous on” into set membership.`,
+    inherited: `Base $\\lim$ and DNE — [two-sided limits](!/calculus/limits/two-sided); the superscripts — [one-sided limits](!/calculus/limits/one-sided); $\\pm\\infty$ — [limits at infinity](!/calculus/limits/infinity).`,
+    entries: [
+      {
+        id: 'continuity-equation',
+        tex: `$\\lim\\limits_{x \\to a} f(x) = f(a)$`,
+        read: `The limit of f at a equals f of a`,
+        means: `Three claims in one equation — $f(a)$ exists, the [two-sided limit](!/calculus/limits/two-sided) exists, they match. Fail any one and the equation is false or meaningless.`,
+        cases: `Interior point — as written. Open interval $(a,b)$ — the equation at every point. Closed $[a,b]$ — endpoints switch to the one-sided form below.`,
+        alsoWritten: `Epsilon-delta: $|x - a| < \\delta \\Rightarrow |f(x) - f(a)| < \\varepsilon$. Note the missing $0 <$ — unlike a limit's punctured $0 < |x - a|$, continuity lets $x = a$ in.`,
+        confusedWith: `A computation rule. “Evaluate by substitution” is what continuity *licenses*, not what defines it — quoting substitution to prove continuity runs in a circle.`,
+      },
+      {
+        id: 'one-sided-continuity',
+        tex: `$\\lim\\limits_{x \\to a^{+}} f(x) = f(a)$`,
+        read: `f is right-continuous at a`,
+        means: `The continuity equation restricted to one side. The superscript machinery belongs to [one-sided limits](!/calculus/limits/one-sided); this page adds the equality with $f(a)$.`,
+        cases: `Left endpoint of $[a,b]$ — right-continuity is all that is asked; the right endpoint mirrors it with $b^{-}$. Every cumulative [distribution function](!/probability/distributions) is right-continuous by convention — this equation is its defining property.`,
+        alsoWritten: `$f(a^{+}) = f(a)$, in the one-sided value shorthand.`,
+        confusedWith: `Full continuity. At an interior point one-sided continuity is strictly weaker — the floor function is right-continuous everywhere yet jumps at every integer, as in **Jump Discontinuity** below.`,
+      },
+      {
+        id: 'c-class',
+        tex: `$f \\in C[a,b]$`,
+        read: `f is in C of a, b`,
+        means: `Class membership: $C[a,b]$ is the set of all functions continuous on $[a,b]$, $C(I)$ on an interval $I$. Theorem hypotheses shrink to $f \\in C[a,b]$ instead of a sentence.`,
+        cases: `$C^0$ — the same class with its ladder rung showing; the ladder $C^1, C^2, \\ldots, C^\\infty$ counts continuous derivatives and is climbed on [higher-order derivatives](!/calculus/derivatives/higher-order#9).`,
+        alsoWritten: `$C^0[a,b]$; $C(X)$ in topology, for continuous functions on a space $X$.`,
+        confusedWith: `Function arguments. The brackets are the interval's own — $C[a,b]$ is not $C$ evaluated at $a$ and $b$.`,
+        sameGlyphElsewhere: `Roman $C$ also counts [combinations](!/combinatorics/combinations) $C(n,r)$, and blackboard $\\mathbb{C}$ names the [complex numbers](!/complex-numbers/basics) — unrelated jobs for one letter.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/limits`,
+    parentLabel: `Limits`,
+  },
   obj3: {
     title: `Continuity on Intervals`,
     content: `
@@ -869,6 +909,25 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

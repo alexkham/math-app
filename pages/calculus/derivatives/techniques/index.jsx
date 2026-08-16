@@ -10,6 +10,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -361,6 +362,44 @@ The technique works because the equation defines $y$ as a function of $x$ locall
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Notation in the Techniques`,
+    lead: `Three marks that make or break these methods: the hidden $y(x)$ dependence, the parenthesised inverse-prime, and the parametric ratio with its false second-derivative twin.`,
+    inherited: `$\\frac{dy}{dx}$ and its quotient reading — [differentials](!/calculus/derivatives/differentials#notation); $f^{-1}$ itself — [inverse functions](!/functions/inverse); $\\dot{y}$ and the operator $\\frac{d}{dx}$ — [higher-order derivatives](!/calculus/derivatives/higher-order#notation).`,
+    entries: [
+      {
+        id: 'implicit-y',
+        tex: `$2y\\,\\frac{dy}{dx}$`,
+        read: `Two y, times d y d x`,
+        means: `The implicit convention: inside an equation being differentiated, every $y$ silently means $y(x)$. So $\\frac{d}{dx}[y^2] = 2y\\,\\frac{dy}{dx}$ — the chain-rule factor appears wherever $y$ does, as in **Implicit Differentiation** above.`,
+        cases: `In related rates the hidden variable is time: every quantity carries $\\frac{d\\cdot}{dt}$ instead. In logarithmic differentiation the same convention produces $\\frac{1}{y}\\frac{dy}{dx}$ from $\\ln y$.`,
+        alsoWritten: `$2y\\,y'$ — prime shorthand, compact in long computations but silent about the variable of differentiation.`,
+        confusedWith: `Treating $y$ as an independent symbol: $\\frac{d}{dx}[y^2] = 2y$, dropping the factor. The single most common implicit-differentiation error — the missing $\\frac{dy}{dx}$ cannot be recovered later.`,
+      },
+      {
+        id: 'inverse-prime',
+        tex: `$(f^{-1})'(b)$`,
+        read: `The derivative of f inverse, at b`,
+        means: `Parentheses first, prime second: invert the function, *then* differentiate. The bracketing is load-bearing — three different objects live one keystroke apart.`,
+        cases: `$(f^{-1})'$ — derivative of the inverse, this page. $(f')^{-1}$ — could be reciprocal or the inverse function of $f'$; context must decide. $\\frac{1}{f'}$ — the pointwise reciprocal, unambiguous.`,
+        alsoWritten: `$\\frac{dx}{dy}$ — Leibniz form, where inverting the function literally flips the fraction: $\\frac{dx}{dy} = 1\\big/\\frac{dy}{dx}$.`,
+        confusedWith: `Reading $(f^{-1})'(b) = \\frac{1}{f'(a)}$ as a pointwise identity at one input. The two sides are evaluated at *different* points — $b$ on the left, $a = f^{-1}(b)$ on the right; the $-1$ superscript hazard itself is mapped on [inverse functions](!/functions/inverse).`,
+      },
+      {
+        id: 'parametric-ratio',
+        tex: `$\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}$`,
+        read: `d y d x equals d y d t over d x d t`,
+        means: `The parametric slope: differentiate each coordinate with respect to the parameter, then divide. A literal fraction manipulation — the cancellation of $dt$ is licensed by [differentials](!/calculus/derivatives/differentials#notation).`,
+        cases: `Valid while $\\frac{dx}{dt} \\neq 0$; where it vanishes the tangent turns vertical. Physics writes the same ratio with Newton dots: $\\frac{\\dot{y}}{\\dot{x}}$.`,
+        alsoWritten: `$\\frac{y'(t)}{x'(t)}$ — prime-with-argument, safe because the argument names the variable.`,
+        confusedWith: `The false twin $\\frac{d^2y}{dx^2} = \\frac{d^2y/dt^2}{d^2x/dt^2}$. Second derivatives do **not** divide — the correct chain is in **Parametric Differentiation** below, and [second-order differentials](!/calculus/derivatives/higher-order) explain why the cancellation stops working past first order.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/derivatives`,
+    parentLabel: `Derivatives`,
+  },
   obj2: {
     title: `Applications of Implicit Differentiation`,
     content: `
@@ -668,6 +707,25 @@ export default function PageTemplate({
         ]
     },
     {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
+    {
         id:'2',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
@@ -904,7 +962,7 @@ export default function PageTemplate({
   variant="light"
 />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

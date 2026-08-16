@@ -11,6 +11,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -308,28 +309,52 @@ The choice of sample points—left endpoints, right endpoints, midpoints—affec
     after: ``,
     link: ``
   },
-  obj2: {
-    title: `Notation and Meaning`,
-    content: `
-The definite integral
-
-$$\\int_a^b f(x)\\, dx$$
-
-consists of several components. The lower limit $a$ and upper limit $b$ bound the interval of integration. The integrand $f(x)$ specifies what is being accumulated. The differential $dx$ indicates the variable of integration.
-
-The result is a number, not a function. The variable $x$ is a dummy variable—a placeholder that disappears after integration. The expressions
-
-$$\\int_0^1 t^2\\, dt \\qquad \\int_0^1 u^2\\, du \\qquad \\int_0^1 x^2\\, dx$$
-
-all represent the same value: $1/3$.
-
-
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
-
-`,
-    before: ``,
-    after: ``,
-    link: ``
+  notation: {
+    title: `Definite Integral Notation`,
+    lead: `What the bounds add to the sign, which letters are disposable, and the bracket that closes every FTC computation.`,
+    inherited: `The bare sign and $dx$ — [indefinite integrals](!/calculus/integrals/indefinite#3); $\\Delta x$ — [differentials](!/calculus/derivatives/differentials#notation); $\\lim$ — [two-sided limits](!/calculus/limits/two-sided#notation).`,
+    entries: [
+      {
+        id: 'bounded-sign',
+        tex: `$\\int_a^b f(x)\\, dx$`,
+        read: `The integral from a to b of f of x, d x`,
+        means: `The [indefinite sign](!/calculus/integrals/indefinite#3) with bounds welded on — and the output changes species: a number, not a family. Lower limit $a$ below, upper limit $b$ above; sign and bounds act as one operator on the integrand.`,
+        cases: `$b < a$ is legal — reversing the bounds flips the sign, **Properties of Definite Integrals** below. $a = b$ gives $0$. A bound of $\\pm\\infty$, or an integrand blowing up inside $[a,b]$, hands the symbol to [improper integrals](!/calculus/integrals/improper).`,
+        alsoWritten: `$\\int_{[a,b]} f$ — over-the-set style in analysis and measure theory, where orientation is deliberately absent.`,
+        confusedWith: `The indefinite family. No $+C$ appears here — any antiderivative gives the same $F(b) - F(a)$; the constant cancels.`,
+      },
+      {
+        id: 'dummy-variable',
+        tex: `$\\int_0^1 t^2\\, dt = \\int_0^1 x^2\\, dx$`,
+        read: `The variable of integration is a dummy`,
+        means: `Inside a definite integral the letter is a bound placeholder — it vanishes with the $dx$ when the number comes out. Both spellings above name the same value, $\\tfrac{1}{3}$; so would $u$, $\\tau$, or anything else.`,
+        cases: `The letter turns load-bearing in accumulation functions: $\\int_a^x f(t)\\,dt$ *needs* $t$ inside because $x$ is busy in the bound — $\\int_a^x f(x)\\,dx$ collides the two roles. Engineering writes $\\tau$ under the sign when $t$ is real time outside it.`,
+        alsoWritten: `$\\xi$ as the standing dummy in Russian analysis texts.`,
+        confusedWith: `The [indefinite integral's](!/calculus/integrals/indefinite#3) variable — *not* a dummy there: the answer $F(x) + C$ keeps it alive.`,
+      },
+      {
+        id: 'evaluation-bracket',
+        tex: `$F(x)\\,\\Big|_a^b$ · $\\left[F(x)\\right]_a^b$`,
+        read: `F of x, evaluated from a to b`,
+        means: `Shorthand for $F(b) - F(a)$ — the closing move of every FTC computation, **Computing Definite Integrals** below. Upper value minus lower, always that order.`,
+        cases: `Bar and bracket forms are interchangeable; the bracket survives long expressions better in print. Reversing the bounds flips its sign along with the integral's.`,
+        alsoWritten: `$F\\big|_a^b$ with the argument suppressed.`,
+        confusedWith: `The one-point [evaluation bar](!/calculus/derivatives/function#notation) $\\big|_{x=a}$ — same glyph, different arithmetic: substitution there, subtraction of two substitutions here.`,
+      },
+      {
+        id: 'riemann-metamorphosis',
+        tex: `$\\sum_{i=1}^{n} f(x_i^*)\\,\\Delta x \\;\\longrightarrow\\; \\int_a^b f(x)\\, dx$`,
+        read: `The Riemann sum becomes the integral`,
+        means: `The notation records its own limit, from **The Riemann Sum Construction** above: $\\Sigma$ stretches into the elongated S, $\\Delta x$ shrinks to $dx$, the sampled $x_i^*$ relaxes into a continuous $x$. Leibniz designed the symbol as exactly this metamorphosis.`,
+        cases: `The star in $x_i^*$ marks a *chosen* sample point — left endpoint, right endpoint, midpoint all legal; the limit forgets the choice.`,
+        alsoWritten: `$S_n$ for the $n$-th Riemann sum, as above.`,
+        sameGlyphElsewhere: `The same superscript star marks the [complex conjugate](!/complex-numbers/complex-conjugate) $z^*$ — an unrelated job in the same corner of the symbol.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/integrals`,
+    parentLabel: `Integrals`,
   },
   obj3: {
     title: `Signed Area Interpretation`,
@@ -632,10 +657,21 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
@@ -778,7 +814,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
   variant="light"
 />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

@@ -1744,6 +1744,623 @@
       "sections": [],
       "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "little or no notation content: analyzing, families, graphs, properties, transformations, definitions, formulas", "stage2": null}],
       "externalNotationLinks": []
+    },
+    "calculus/limits/two-sided": {
+      "pagePath": "pages/calculus/limits/two-sided/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 What is a Two-Sided Limit? (NOT RENDERED — slice(1))", "2 The Existence Condition", "notation The Default Limit Notation", "3 Visualizing Two-Sided Approach", "4 When Two-Sided Limits Fail to Exist", "5 Continuous Functions and Two-Sided Limits", "6 Evaluating Two-Sided Limits", "7 Two-Sided Limits at Boundary Points", "8 Relationship to Derivatives", "9 Summary: Where Two-Sided Limits Appear in Calculus"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "The Default Limit Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The base marks every later limit page decorates.",
+          "covers": ["x → a (arrow, both-sided approach)", "lim_{x→a} f(x) = L (operator, bound variable, = form asserts existence)", "arrow form f(x) → L", "DNE"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "latex": {"page": "/latex", "anchorText": "LaTeX reference"},
+            "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"},
+            "added": "2026-08-15",
+            "placement": "keyboard in arrow means (\\rightarrow present in dataset; \\lim and \\to absent — no keyboard link on lim entry); latex in lim means; cross-links: one-sided (inherited + cases), infinity (cases ×2), derivatives, continuity, functions/basics, logic implication (sameGlyphElsewhere)"
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "What is a Two-Sided Limit?",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "No superscript appears on the a—this absence signals the two-sided requirement",
+          "covers": ["lim_{x→a} f(x) = L"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Sections rendered via genericSections.slice(1): section id 1 appears in TOC and FAQ (sectionId 1) but never renders; introContent 'Both Directions at Once' duplicates obj1's substance, so slice left alone per procedure and recorded here. Notation section placed after id 2 (concept completed by existence condition; also avoids rendering first under the slice). No epsilon-delta definition anywhere on the page (ASK-4 candidate). One-sided's inherited strip credits lim/→ to the /calculus/limits hub page-level; canonical dedicated-section owner is now this page."
+    },
+    "calculus/limits/one-sided": {
+      "pagePath": "pages/calculus/limits/one-sided/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Left-Hand Limits", "2 Right-Hand Limits", "3 The Connection to Two-Sided Limits", "4 Reading the One-Sided Notation (NotationSection)", "5 Piecewise Functions", "6 Jump Discontinuities", "7 One-Sided Limits at Vertical Asymptotes", "8 One-Sided Limits and Square Roots", "9 Evaluating One-Sided Limits", "10 One-Sided Continuity", "11 Applications of One-Sided Limits", "12 Summary: Where One-Sided Limits Are Essential"],
+      "spots": [
+        {
+          "sectionId": "4",
+          "sectionTitle": "Reading the One-Sided Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "This section is about the marks themselves: the three competing traditions",
+          "covers": ["lim_{x→a⁻} (superscript minus, + a−0 / x↑a / explicit-condition variants)", "lim_{x→a⁺} (superscript plus, + a+0 / x↓a variants)", "f(a⁻) / f(a⁺) one-sided value shorthand"],
+          "bug": "Inserted with numeric id 4, shifting old ids 4-11 to 5-12. FAQ sectionIds were updated in the same session, but two inbound anchors were NOT: '/calculus/limits/one-sided#9' (label 'One-Sided Continuity') at app/api/db/formulas/calculus/calculusFormulasList.js:250 and app/api/db/repositories/formulasRepository.js:2304 now land on 'Evaluating One-Sided Limits' (id 9); correct target is id 10. Retroactive HALT-4 — operator to decide: update the two anchors, or migrate the page to a slug id.",
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "latex": {"page": "/latex", "anchorText": "LaTeX reference"},
+            "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard (↑/↓ arrow set)"},
+            "added": "2026-08-15",
+            "placement": "backfilled record; section written in prior session. Cross-links: two-sided, continuity, functions/piecewise, functions/inverse, probability/distributions, calculus/limits (inherited)"
+          }
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Entry backfilled 2026-08-15 (page was written in a prior session that did not record it). Renumbering hazard: see bug on spot 4."
+    },
+    "calculus/derivatives/differentials": {
+      "pagePath": "pages/calculus/derivatives/differentials/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Differential dx", "2 The Differential dy", "3 dy Versus Δy", "notation The Differential Symbols (NotationSection)", "4 Linear Approximation", "5 Error Estimation", "6 Differentials of Multiple Variables", "7 Differentials and Leibniz Notation", "8 Higher-Order Differentials", "9 Summary: What Differentials Are Good For"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "The Differential Symbols",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Four marks, and the whole subject turns on telling two pairs apart",
+          "covers": ["Δx / Δy (actual change; h variant)", "dx (differential of independent variable; ∂x variant)", "dy (tangent-line response; df variant)", "dy/dx as a genuine quotient (local licence)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "keyboard": {"page": "/keyboard", "anchorText": "keyboard (Δ under Greek letters)"},
+            "added": "2026-08-15",
+            "placement": "backfilled record; section written in prior session. Cross-links: limits, integrals ×2, derivatives/rules, derivatives/higher-order ×2, derivatives (inherited + parent)"
+          }
+        },
+        {
+          "sectionId": "7",
+          "sectionTitle": "Differentials and Leibniz Notation",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Differentials retroactively justify the algebraic behavior of Leibniz notation.",
+          "covers": ["du cancellation", "∫ f(x) dx substitution", "separation of variables"],
+          "stage2": null
+        },
+        {
+          "sectionId": "8",
+          "sectionTitle": "Higher-Order Differentials",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The superscript on d²y counts the number of times the differential operator d has been applied",
+          "covers": ["d²y", "dx²", "d²y/dx²"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [
+        {"target": "/math-symbols/calculus", "state": "live", "note": "pre-existing @span chip at end of obj7 content ('See All Calculus Symbols and Notations')"}
+      ],
+      "notes": "Entry backfilled 2026-08-15 (page was written in a prior session that did not record it). Slug id 'notation' used — no renumbering; FAQ sectionIds 1-7 untouched."
+    },
+    "calculus/derivatives/higher-order": {
+      "pagePath": "pages/calculus/derivatives/higher-order/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Definition", "notation Notation for Higher-Order Derivatives (NotationSection + obj1Table)", "2 The Second Derivative", "3 Physical Interpretation", "4 Patterns — Polynomials", "5 Patterns — Exponentials", "6 Patterns — Sine and Cosine", "7 The nth Derivative of Specific Forms", "8 Higher-Order Derivatives and Taylor Series", "9 Existence and Smoothness Classes", "overview nth Derivatives at a Glance"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation for Higher-Order Derivatives",
+          "field": "notation (NotationSection component) + obj1Table (Lagrange/Leibniz/read-aloud per order)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Four systems, all still in use.",
+          "covers": ["f' f'' f^{(n)} (Lagrange; roman-numeral and y' variants)", "d^n y/dx^n (Leibniz; operator form; ∂ variant)", "ẏ ÿ (Newton dots, time only)", "D^n f (Euler operator; D_x^n)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "keyboard": {"page": "/keyboard", "anchorText": "keyboard (∂)"},
+            "added": "2026-08-15",
+            "placement": "backfilled record; section written in prior session. Cross-links: higher-order#8 Taylor, functions/composition, functions/inverse, derivatives/differentials, derivatives/rules, calculus/limits, derivatives (inherited + parent)"
+          }
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Entry backfilled 2026-08-15. Original section 1 'Definition and Notation' was SPLIT per procedure: definition half renamed 'Definition' (id 1 kept), notation half became the NotationSection at slug id 'notation' immediately after, obj1Table moved into the notation section's content array; the obj1 symbols chip was removed with the split (notation section footer pill replaces it). FAQ obj1 sectionId updated to 'notation'. No renumbering."
+    },
+    "calculus/limits/infinity": {
+      "pagePath": "pages/calculus/limits/infinity/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Two Distinct Concepts (NOT RENDERED — slice(1))", "2 Limits at Infinity — Horizontal Behavior", "3 Horizontal Asymptotes", "4 Evaluating Limits at Infinity — Rational Functions", "5 Dominant Term Analysis", "6 Growth Rates — The Hierarchy", "7 Infinite Limits — Vertical Behavior", "8 Vertical Asymptotes", "9 Sign Analysis for Infinite Limits", "10 One-Sided Infinite Limits", "notation The Two Roles of the Infinity Symbol", "11 Limits of Exponentials at Infinity", "12 Limits of Logarithms Toward Zero and Infinity", "13 Summary: Master Diagnostic for Limits and Asymptotes"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "The Two Roles of the Infinity Symbol",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "One glyph, opposite jobs: under the lim as a direction for x, after the equals sign as a verdict about f.",
+          "covers": ["∞ (not a number; +∞/−∞; signed tradition)", "x → ∞ / x → −∞ (limits at infinity; n → ∞)", "lim = ∞ (infinite limit; equals-sign abuse; extended real line)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard (∞ verified in dataset)"},
+            "added": "2026-08-15",
+            "placement": "keyboard in ∞ means; cross-links: limits/special (indeterminate forms), set-theory/cardinality (sameGlyphElsewhere), one-sided ×2 + two-sided (inherited); same-page sections referenced in bold per house style"
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Two Distinct Concepts",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Both use the infinity symbol, but in opposite roles.",
+          "covers": ["x → ±∞", "lim = ±∞"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Same slice(1) situation as two-sided: section id 1 is in TOC/FAQ but never renders; introContent 'Beyond All Bounds' duplicates its substance — slice left alone, recorded. Notation placed after id 10 (both roles of ∞ and one-sided infinite forms all established; inserting earlier would split the 7-10 vertical-behavior arc). Placement is late-page but semantic. No renumbering (slug id)."
+    },
+    "calculus/limits/continuity": {
+      "pagePath": "pages/calculus/limits/continuity/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Intuitive Idea (NOT RENDERED — slice(1))", "2 The Formal Definition", "notation Continuity Notation", "3 Continuity on Intervals", "4 Types of Discontinuities", "5 Removable Discontinuity", "6 Jump Discontinuity", "7 Infinite Discontinuity", "8 Oscillating Discontinuity", "9 Continuous Functions — The Standard Library", "10 Combinations of Continuous Functions", "11 The Intermediate Value Theorem (IVT)", "12 Using IVT to Locate Roots", "13 Summary: Where Continuity Is the Hypothesis"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Continuity Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "What the single equation packs in, its one-sided halves, and the class mark",
+          "covers": ["lim_{x→a} f(x) = f(a) (three-in-one; unpunctured ε-δ variant)", "lim_{x→a⁺} f(x) = f(a) right/left-continuity (OWN-CASE over one-sided's superscripts)", "f ∈ C[a,b] / C(I) / C⁰ class membership"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "added": "2026-08-15",
+            "placement": "first page under the new house rules: title contains 'Notation', placed immediately after the definition section (id 2). Cross-links: two-sided ×2, one-sided ×3, infinity (inherited), probability/distributions (CDF right-continuity), derivatives/higher-order#9 (Cⁿ ladder), combinatorics/combinations + complex-numbers/basics (sameGlyphElsewhere). No keyboard/latex links — no command on this page is non-obvious and central."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "The Formal Definition",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The single equation … encapsulates all three",
+          "covers": ["lim_{x→a} f(x) = f(a)"],
+          "stage2": null
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Continuity on Intervals",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Right-continuous at a: lim_{x→a⁺} f(x) = f(a)",
+          "covers": ["one-sided continuity equations"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "slice(1) again: id 1 'The Intuitive Idea' in TOC/FAQ, never renders; intro 'Where Limits Meet Function Values' duplicates it — left alone, recorded. C[a,b] does not appear in the page body (section introduces it; body could adopt it in IVT hypotheses — minor recommendation). C⁰/C[a,b] owned here, scoped away from higher-order's Cⁿ (n≥1) ladder."
+    },
+    "calculus/limits/evaluating": {
+      "pagePath": "pages/calculus/limits/evaluating/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Direct Substitution — Try This First (NOT RENDERED — slice(1))", "2 When Direct Substitution Fails", "3 Indeterminate Forms", "notation Notation of Indeterminate Forms", "4 Factoring and Canceling", "5 Rationalizing — Conjugate Multiplication", "6 Expanding and Simplifying", "7 Combining Fractions", "8 Multiplying by Strategic Forms of 1", "9 Using Known Limits", "10 One-Sided Evaluation", "11 Sign Analysis Near the Point", "12 Worked Examples", "13 Summary: The Limit Evaluation Playbook"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation of Indeterminate Forms",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The seven form-labels, the lookalikes that are not on the list",
+          "covers": ["0/0 and ∞/∞ (quotient form-labels)", "0·∞, ∞−∞, 0⁰, 1^∞, ∞⁰ (product/difference/power forms)", "determinate lookalikes 1/0, 0/∞, ∞+∞", "carried-lim evaluation chain convention"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "added": "2026-08-15",
+            "placement": "title contains 'Notation'; placed after id 3 (the forms' definition section) per house rule. Cross-links: infinity ×2 (inherited + 1/0), derivatives/rules (L'Hôpital), special (1^∞ → e), two-sided ×2 (inherited + punctured condition); same-page bold refs to Factoring and Sign Analysis."
+          }
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Indeterminate Forms",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Several forms signal that limit rules cannot be applied directly",
+          "covers": ["all seven forms displayed"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Ownership of the indeterminate-form labels claimed HERE (special is the named-limits catalog and has no forms section — checked before claiming). Corrected infinity's ∞-entry confusedWith link from limits/special to evaluating#notation in the same pass. slice(1) again: id 1 'Direct Substitution' in TOC/FAQ, never renders; intro 'When Substitution Fails' duplicates it — left alone, recorded."
+    },
+    "calculus/limits/rules": {
+      "pagePath": "pages/calculus/limits/rules/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Why Limit Rules Matter", "2 Limit of a Constant", "3 Limit of the Identity Function", "4 Sum and Difference Rules", "5 Constant Multiple Rule", "6 Product Rule", "7 Quotient Rule", "8 Power Rule", "9 Root Rule", "10 Absolute Value Rule", "11 Limits of Polynomials", "12 Limits of Rational Functions", "13 Composition Rule", "14 The Squeeze Theorem", "15 When Rules Fail", "16 Summary: Master Reference of Limit Rules"],
+      "spots": [
+        {
+          "sectionId": "4",
+          "sectionTitle": "Sum and Difference Rules (and obj5-14 siblings)",
+          "field": "content (formula callouts)",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "If lim f(x) = L and lim g(x) = M, then:",
+          "covers": ["hypothesis-baptism convention (L, M assert finite existence)", "distribution shape of the laws", "squeeze inequality chain (obj14)"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED BY OPERATOR DIRECTIVE (2026-08-15): user classifies this as a reference/skeleton pillar page (law catalog), not a theoretical concept page — no NotationSection. Survey retained: candidate entries were the L/M hypothesis convention, the distribution shape, lim-through-f composition swap, and the squeeze chain; available to any future pass if the decision changes."
+    },
+    "calculus/limits/special": {
+      "pagePath": "pages/calculus/limits/special/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Why Memorize Special Limits?", "2 The Fundamental Trigonometric Limit", "3 Related Trigonometric Limits", "4 Deriving (1 − cos x)/x = 0", "5 The Natural Exponential Limit", "6 Related Exponential Limits", "7 The Definition of e", "8 Limits Involving Logarithms", "9 Growth Rate Comparisons", "10 Using Special Limits", "11 Summary: Master Reference of Special Limits"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, operator reference-page principle): named-limits catalog; introduces no notation not already owned (lim/arrow → two-sided, ∞ → infinity, 1^∞ form → evaluating). Also below the 3-entry floor on its own merits."
+    },
+    "calculus/limits": {
+      "pagePath": "pages/calculus/limits/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, operator directive): hubs get no notation section under the current scope — 'regular theoretical pages only'. Procedure doc's hub-pointer-section design shelved for this pass; child pages' inherited strips already link this hub page-level (allowed: parent link without fragment). Family ownership map: two-sided = base lim/→/DNE, one-sided = superscripts + f(a±), infinity = ∞ marks, continuity = continuity equations + C[a,b], evaluating = indeterminate forms + carried-lim."
+    },
+    "calculus/derivatives/function": {
+      "pagePath": "pages/calculus/derivatives/function/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Derivative Function Defined (NOT RENDERED — slice(1))", "2 Computing the Derivative Function from the Definition", "notation Derivative Notation: Function vs Point", "3 Graphing f' from f", "4 Graphing f from f'", "5 The Relationship Between f and f'", "6 The Derivative as Rate of Change", "7 Continuity of the Derivative", "8 Summary: How f and f' Correspond"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Derivative Notation: Function vs Point",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The prime mark, the quotient it is built from, and the two ways to say now evaluate at a",
+          "covers": ["difference quotient (h-form, t-form, symmetric form, Δy/Δx)", "f'(x) base prime notation (binding order; f'(a) case)", "evaluation bar dy/dx|_{x=a}"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "latex": {"page": "/latex", "anchorText": "LaTeX reference (evaluation-bar construction)"},
+            "added": "2026-08-15",
+            "placement": "title contains 'Notation'; after id 2 (id 1 is slice(1)-dropped, so after-definition = after the definition demonstration to avoid rendering first). Cross-links: two-sided, higher-order#notation ×2, differentials#notation ×2, differentiability, evaluating#notation (0/0), set-theory/operations (prime sameGlyphElsewhere)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "The Derivative Function Defined",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "f'(x) = lim_{h→0} [f(x+h)−f(x)]/h = lim_{t→x} [f(t)−f(x)]/(t−x)",
+          "covers": ["limit definition, both forms"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "BASE PRIME OWNERSHIP: f'(x) as the base mark is owned here; higher-order#notation owns the order-counting systems (its inherited strip credits the hub page-level — allowed). slice(1): id 1 in TOC/FAQ never renders; intro 'From a Single Slope to an Entire Function' overlaps it — left alone, recorded."
+    },
+    "calculus/derivatives/differentiability": {
+      "pagePath": "pages/calculus/derivatives/differentiability/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Definition of Differentiability", "notation Differentiability Notation", "2 Differentiability Implies Continuity", "3 Corners", "4 Cusps", "5 Vertical Tangents", "6 Discontinuities", "7 One-Sided Derivatives", "8 Differentiability on Intervals", "9 Pathological Examples", "10 Summary: A Typology of Differentiability Failure"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Differentiability Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The one-sided derivative marks, the infinite-slope verdict, and what differentiable on [a,b] actually promises",
+          "covers": ["f'₋(a) / f'₊(a) one-sided derivatives (subscript-on-prime; f'(a±) variant; vs one-sided limit of f')", "f'(a) = ±∞ verdict (vertical tangent / cusp / corner typology)", "differentiable on [a,b] closed-interval convention"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "added": "2026-08-15",
+            "placement": "title contains 'Notation'; directly after id 1 (the definition — rendered again after the un-slice, see notes). Cross-links: function#notation (inherited), function#7 (limit-of-derivative confusion), one-sided (inherited), infinity#notation (=∞ abuse), continuity#notation (closed-interval mirror), higher-order#9 (C¹)."
+          }
+        },
+        {
+          "sectionId": "7",
+          "sectionTitle": "One-Sided Derivatives",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The left-hand derivative of f at a is f'₋(a) = lim_{h→0⁻} …",
+          "covers": ["f'₋(a), f'₊(a) definitions"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "UN-SLICED per H5a (2026-08-15): page rendered genericSections.slice(1), dropping id 1 'The Definition of Differentiability' — the intro does NOT duplicate it (intro previews failure modes; obj1 holds the formal definition), so the definition was authored-but-never-rendered. Changed to sections={genericSections}; TOC and FAQ sectionId 1 now resolve. First page in the pass where the un-slice branch (not the leave-alone branch) applied."
+    },
+    "calculus/derivatives/graph-analysis": {
+      "pagePath": "pages/calculus/derivatives/graph-analysis/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Derivative at a Point (NOT RENDERED — slice(1))", "2 Tangent Lines", "notation Notation of Graph Analysis", "3 Increasing and Decreasing Functions", "4 Critical Points", "5 The First Derivative Test", "6 The Second Derivative Test", "7 Concavity", "8 Inflection Points", "9 Curve Sketching", "10 Optimization", "11 Related Rates", "overview The Full Derivative Toolkit at a Glance"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation of Graph Analysis",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "the reserved letter c, the sign-change arrow, and inequalities written on whole functions",
+          "covers": ["c critical-number witness letter (x₀ variant)", "sign-change arrow + → − (sign charts; tableau de variations ↗↘)", "suppressed-argument function inequality f' > 0 on (a,b)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "added": "2026-08-15",
+            "placement": "title contains 'Notation'; after id 2 (id 1 slice(1)-dropped; earliest non-first slot). Cross-links: function#notation + higher-order#notation + logic implication (inherited), integrals/indefinite (+C confusion), two-sided#notation (arrow glyph), logic hub (∀)."
+          }
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Critical Points",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "A critical point of f is a value x = c … where either f'(c) = 0 or f'(c) does not exist",
+          "covers": ["critical point condition"],
+          "stage2": null
+        },
+        {
+          "sectionId": "5",
+          "sectionTitle": "The First Derivative Test",
+          "field": "content (formula callout)",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "f'(x) changes + → − at c ⟹ c is a local max",
+          "covers": ["sign-change arrow notation"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "slice(1): id 1 'The Derivative at a Point' in TOC/FAQ never renders; intro 'Reading Functions Through Their Derivatives' overlaps it — left alone, recorded."
+    },
+    "calculus/derivatives/techniques": {
+      "pagePath": "pages/calculus/derivatives/techniques/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Implicit Differentiation", "notation Notation in the Techniques", "2 Applications of Implicit Differentiation", "3 Logarithmic Differentiation", "4 Differentiating Inverse Functions", "5 Deriving Inverse Trigonometric Derivatives", "6 Parametric Differentiation", "7 When to Use Which Technique", "overview All Four Techniques as the Chain Rule"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation in the Techniques",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "the hidden y(x) dependence, the parenthesised inverse-prime, and the parametric ratio with its false second-derivative twin",
+          "covers": ["implicit convention 2y·dy/dx (hidden y(x); y' shorthand; related-rates d/dt case)", "(f⁻¹)'(b) parenthesization (vs (f')⁻¹ vs 1/f'; dx/dy Leibniz flip; evaluation-point trap)", "parametric ratio dy/dx = (dy/dt)/(dx/dt) (ẏ/ẋ variant; false second-derivative twin)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "added": "2026-08-15",
+            "placement": "title contains 'Notation'; directly after id 1 (Implicit Differentiation, the first technique's definition — rendered again after un-slice). Cross-links: differentials#notation ×2 (inherited + dt cancellation), functions/inverse ×2 (inherited + ⁻¹ hazard), higher-order#notation (inherited) + higher-order (second-order differentials)."
+          }
+        },
+        {
+          "sectionId": "6",
+          "sectionTitle": "Parametric Differentiation",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The second derivative of a parametric curve is not d²y/dt² / d²x/dt²",
+          "covers": ["parametric first/second derivative notation + the common error"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "UN-SLICED per H5a (2026-08-15): intro 'Beyond Explicit Formulas' is a one-line-per-technique overview and does NOT duplicate id 1's full implicit-differentiation teaching — the page's primary technique was authored but never rendered. Changed to sections={genericSections}. Logarithmic derivative y'/y NOT claimed here — taught in depth at differentials#5 (collision rule)."
+    },
+    "calculus/derivatives/rules": {
+      "pagePath": "pages/calculus/derivatives/rules/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Constant Rule", "2 Power Rule", "3 Constant Multiple Rule", "4 Sum and Difference Rules", "5 Product Rule", "6 Quotient Rule", "7 Chain Rule", "8 Mean Value Theorem", "9 Rolle's Theorem", "10 L'Hôpital's Rule", "overview All Rules and Theorems at a Glance"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, reference-page principle): rule/theorem catalog."
+    },
+    "calculus/derivatives/common": {
+      "pagePath": "pages/calculus/derivatives/common/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Constant Functions", "2 Power Functions", "3 Polynomials", "4 Trig — Sine and Cosine", "5 Trig — Tangent, Cotangent, Secant, Cosecant", "6 Exponential Functions", "7 Logarithmic Functions", "8 Summary of Common Derivatives"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, reference-page principle): derivative-formula catalog per function family."
+    },
+    "calculus/derivatives/special": {
+      "pagePath": "pages/calculus/derivatives/special/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Inverse Trig — Arcsine and Arccosine", "2 Inverse Trig — Arctangent and Arccotangent", "3 Inverse Trig — Arcsecant and Arccosecant", "4 Patterns in Inverse Trigonometric Derivatives", "5 Hyperbolic Functions", "6 Inverse Hyperbolic Functions", "7 Piecewise Functions", "8 Summary of Special Derivatives"],
+      "spots": [
+        {
+          "sectionId": "5",
+          "sectionTitle": "Hyperbolic Functions",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "recommended",
+          "why": "sinh/cosh notation and especially sinh⁻¹ vs arsinh vs arcsinh naming (obj6) is a genuine notation minefield with no owner anywhere in the app; if this page is ever reclassified or a hyperbolic topic page is built, this is the candidate",
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, reference-page principle): derivative-formula catalog (inverse trig, hyperbolic, piecewise)."
+    },
+    "calculus/integrals/indefinite": {
+      "pagePath": "pages/calculus/integrals/indefinite/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Antiderivatives (NOT RENDERED — slice(1))", "2 The Constant of Integration", "3 Indefinite Integral Notation (NotationSection, in place of old 'Notation' section)", "4 Basic Antiderivative Formulas", "5 Linearity of Indefinite Integrals", "6 Verifying Antiderivatives", "7 Connection to Definite Integrals", "8 Summary: The Indefinite-Integration Workflow"],
+      "spots": [
+        {
+          "sectionId": "3",
+          "sectionTitle": "Indefinite Integral Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The three-part symbol, the constant that is not optional, and the case convention",
+          "covers": ["∫ f(x) dx trio (elongated S / summa; physics ∫dx f(x) ordering; dx-as-decoration trap)", "F(x) + C constant of integration (single-C merging; ln|x| two-branch honesty; K/c₁ variants)", "F/f capital-case pairing convention"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill — replaces the old in-section chip)"},
+            "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard (∫ verified in dataset)"},
+            "added": "2026-08-15",
+            "placement": "REPLACED the page's existing bare-titled 'Notation' body section IN PLACE at id 3 — no renumbering, inbound #3 anchors and FAQ sectionId 3 stay valid. All prose absorbed into entries (∫ sign, integrand, dx role, function-not-number contrast, FTC mirror). Cross-links: definite ×3, differentials#notation ×2, function#notation, graph-analysis#notation (c vs C, now bidirectional)."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "The Constant of Integration",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The \"+ C\" in indefinite integrals is not optional notation—it represents the complete answer.",
+          "covers": ["+C"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "ASK-5 record: old id-3 'Notation' section removed whole — its prose (∫ parts, dx role, function-vs-number contrast, FTC mirror sentence) fully absorbed into the entries; its live '[See All Calculus Symbols and Notations]' @span chip replaced by the NotationSection footer pill. slice(1): id 1 'Antiderivatives' in TOC/FAQ never renders; intro 'Reversing Differentiation' duplicates it — left alone, recorded."
+    },
+    "calculus/integrals/definite": {
+      "pagePath": "pages/calculus/integrals/definite/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Riemann Sum Construction", "2 Definite Integral Notation (NotationSection, in place of old 'Notation and Meaning')", "3 Signed Area Interpretation", "4 Properties of Definite Integrals", "5 Linearity", "6 Computing Definite Integrals", "7 Average Value of a Function", "8 Summary: Three Lenses on the Definite Integral"],
+      "spots": [
+        {
+          "sectionId": "2",
+          "sectionTitle": "Definite Integral Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "What the bounds add to the sign, which letters are disposable, and the bracket that closes every FTC computation",
+          "covers": ["∫ₐᵇ bounded sign (OWN-CASE over indefinite; orientation; measure-theory ∫_{[a,b]} variant)", "dummy variable (accumulation-function clash ∫ₐˣ f(t)dt; τ/ξ traditions)", "evaluation bracket F(x)|ₐᵇ / [F(x)]ₐᵇ", "Riemann metamorphosis Σ→∫, Δx→dx, xᵢ*→x (sample-point star)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill — replaces the old in-section chip)"},
+            "added": "2026-08-15",
+            "placement": "REPLACED old 'Notation and Meaning' body section IN PLACE at id 2 (no renumbering; prose + dummy-variable example absorbed; chip → footer pill). After id 1 Riemann construction = the definition. Cross-links: indefinite#3 ×3, improper, differentials#notation + two-sided#notation (inherited), function#notation (one-point bar contrast), complex-numbers/complex-conjugate (star sameGlyphElsewhere)."
+          }
+        },
+        {
+          "sectionId": "6",
+          "sectionTitle": "Computing Definite Integrals",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The notation F(x) |ₐᵇ or [F(x)]ₐᵇ denotes the evaluation F(b) − F(a).",
+          "covers": ["evaluation bracket, in passing"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "UN-SLICED per H5a (third occurrence): intro 'From Sums to Areas' sketches Riemann sums in prose but id 1 holds the actual construction and defining limit — authored, never rendered. Changed to sections={genericSections}. ASK-5: old 'Notation and Meaning' absorbed whole; chip replaced by footer pill."
+    },
+    "calculus/integrals/techniques": {
+      "pagePath": "pages/calculus/integrals/techniques/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Why Techniques Are Needed (NOT RENDERED — slice(1))", "2 Substitution (u-Substitution)", "notation Notation Inside the Techniques", "3 Integration by Parts", "4 Trigonometric Integrals", "5 Trigonometric Substitution", "6 Partial Fractions", "7 Choosing the Right Technique", "8 Summary: The Techniques at a Glance"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation Inside the Techniques",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Substitution's paired equations, the four-slot ledger of parts, and the substitution that runs backwards",
+          "covers": ["u = g(x) / du = g'(x)dx pair (bound-labelling ∫_{x=a}^{x=b}; two definite workflows; partial-conversion trap)", "∫u dv = uv − ∫v du ledger (dv swallows dx; LIATE; European prime form; u-of-parts vs u-of-substitution)", "x = a sinθ reverse-direction substitution (three radical patterns; hyperbolic variants)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "added": "2026-08-15",
+            "placement": "title contains 'Notation'; after id 2 (u-substitution — first technique; id 1 slice(1)-dropped). Cross-links: indefinite#3 + definite#2 + differentials#notation ×2 (inherited + du algebra), functions/inverse (θ inversion)."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "Substitution (u-Substitution)",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Let u = g(x), so du = g'(x) dx.",
+          "covers": ["substitution pair"],
+          "stage2": null
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Integration by Parts",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Identify factors u and dv in the integrand.",
+          "covers": ["u/dv split, LIATE"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "slice(1): id 1 'Why Techniques Are Needed' in TOC/FAQ never renders; intro 'Beyond Direct Formulas' duplicates it — left alone, recorded."
+    },
+    "calculus/integrals/improper": {
+      "pagePath": "pages/calculus/integrals/improper/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 What Makes an Integral Improper? (NOT RENDERED — slice(1))", "2 Infinite Limits of Integration", "notation Improper Integral Notation", "3 Discontinuous Integrands", "4 Convergence vs Divergence", "5 The p-Test", "6 Comparison Test", "7 Limit Comparison Test", "8 Summary: Tests for Improper Integral Convergence"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Improper Integral Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "A symbol that quietly means a limit, the scaffold that makes the limit visible, and the verdict vocabulary",
+          "covers": ["∫ₐ^∞ as defined-limit (signed +∞ variant; Cauchy principal value PV∫ confusion)", "limit scaffold lim_{t→b⁻}∫ₐᵗ (independent t/s letters; ε-excision variant)", "converges/diverges verdicts (= ∞ vs oscillation; ∫|f| < ∞ analyst shorthand)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
+            "added": "2026-08-15",
+            "placement": "title contains 'Notation'; after id 2 (the limit-scaffold definition; id 1 slice(1)-dropped). Cross-links: definite#2 + infinity#notation ×3 + one-sided ×2 (inherited + scaffold direction)."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "Infinite Limits of Integration",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "∫ₐ^∞ f(x) dx = lim_{b→∞} ∫ₐᵇ f(x) dx",
+          "covers": ["Type 1/2/3 scaffolds"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "slice(1): id 1 'What Makes an Integral Improper?' in TOC/FAQ never renders; intro 'Integrating Beyond Bounds' duplicates it — left alone, recorded."
     }
   },
   "$crossSectionFindings": {
@@ -1795,6 +2412,28 @@
       "2026-08-06 pass planted 4 spots (6 links): basics trio (complex number symbols + LaTeX + keyboard at the a+bi conventional-letters sentence), imaginary-numbers i/√−1 clause, trigonometric-form arg(z) clause, complex-conjugate z̄-vs-z* clause.",
       "Notation strengths: the forms family is notation-rich prose — algebraic-form 'Real and Imaginary Parts: Formal Notation' (dedicated, read-as phrasing), conjugate z̄ vs z* convention paragraph (math vs physics/engineering), trigonometric-form arg vs Arg capital-A convention with two interval conventions, exponential/cis equivalences.",
       "Quiet pages (no notation content): geometric-representation, operations, properties, demoivre-theorem, equations-polynomials, cheat-sheets, formulas, definitions."
+    ],
+    "calculus": [
+      "2026-08-15 NOTATION PASS (in progress): two-sided limits got the section's base-symbol notation section (dedicated NotationSection, 3 entries: arrow, lim operator, DNE) at slug id 'notation' after id 2. Ownership: two-sided owns bare lim/→; one-sided owns the a⁻/a⁺ superscripts and f(a⁻)/f(a⁺) (its section predates this registry entry); differentials owns dx/dy/Δ and the quotient reading of dy/dx; higher-order owns the four order-notation systems (primes, dⁿy/dxⁿ, dots, Dⁿ).",
+      "STATE GAP: differentials, higher-order, and one-sided received NotationSection sections in a prior session that never wrote their registry entries — pages touched but unrecorded; entries to backfill.",
+      "2026-08-15 BACKFILL: registry entries written for all three. Audit found a retroactive HALT-4 on one-sided: the prior session inserted the notation section as numeric id 4 and renumbered 4-11 → 5-12; FAQ sectionIds were fixed but two inbound anchors '/calculus/limits/one-sided#9' (calculusFormulasList.js:250, formulasRepository.js:2304, label 'One-Sided Continuity') now point one section short — correct target is #10. Operator decision pending.",
+      "2026-08-15: limits/infinity written — 'The Two Roles of the Infinity Symbol' (3 entries: ∞, x→∞, lim=∞) after id 10, slug id, telegraph register. ∞ ownership now here; two-sided's DNE entry and one-sided's asymptote cases already pointed at this page. slice(1)+intro-duplication recorded (same pattern as two-sided). Limits family notation now: two-sided (base), one-sided (directions), infinity (∞). Remaining limits nodes: hub, continuity, evaluating, rules, special.",
+      "NEW HOUSE RULES (user, 2026-08-15, from limits/continuity onward): notation section title must contain the word 'Notation'; section sits immediately after the definition section (usually the first authored section) — overrides semantic placement as the default. Earlier titles ('The Differential Symbols', 'The Two Roles of the Infinity Symbol') predate the rule; rename only if the user asks.",
+      "2026-08-15: limits/continuity written — 'Continuity Notation' (3 entries: the three-in-one equation, one-sided continuity, C[a,b] class) after id 2 per the new placement rule. C⁰/C[a,b] owned here; Cⁿ ladder stays with derivatives/higher-order#9. Remaining limits nodes: hub, evaluating, rules, special.",
+      "2026-08-15: limits/evaluating written — 'Notation of Indeterminate Forms' (4 entries: quotient forms, product/difference/power forms, determinate lookalikes, carried-lim chain) after id 3. Forms ownership here, not special (checked). Fixed infinity's forms link to point at evaluating#notation. Remaining limits nodes: hub, rules, special.",
+      "SCOPE NARROWED (user, 2026-08-15): regular theoretical pages ONLY. Reference/pillar pages (limits/rules, limits/special) and ALL hubs skipped — recorded with surveys. Limits family CLOSED: 5 sections written, 3 nodes skipped.",
+      "2026-08-15: derivatives/function written — 'Derivative Notation: Function vs Point' (3 entries: difference quotient, f'(x) base prime, evaluation bar) after id 2. Base prime ownership lands here (hub skipped; higher-order keeps the order systems). Derivatives family remaining theoretical candidates: differentiability, graph-analysis, techniques(?); likely reference-skips: rules, common, special(?); done: differentials, higher-order, function.",
+      "2026-08-15: derivatives/differentiability written — 'Differentiability Notation' (3 entries: f'±(a) subscripts, f'(a)=±∞ verdict, differentiable-on-[a,b] convention) directly after id 1. UN-SLICED the page (first leave-alone exception: intro did not duplicate the dropped definition section). Remaining derivatives candidates: graph-analysis, techniques; then integrals family.",
+      "2026-08-15: derivatives/graph-analysis written — 'Notation of Graph Analysis' (3 entries: critical-number c, sign-change arrow / tableau de variations, suppressed-argument inequality) after id 2. Remaining derivatives candidates: techniques (borderline), rules/common/special to classify; then integrals family.",
+      "2026-08-15: derivatives/techniques written — 'Notation in the Techniques' (3 entries: implicit 2y·dy/dx convention, (f⁻¹)' parenthesization, parametric ratio + false twin) after id 1. UN-SLICED (second un-slice: intro did not duplicate the dropped implicit-differentiation section). Derivatives family theoretical pages COMPLETE (differentials, higher-order, function, differentiability, graph-analysis, techniques). rules/common/special to classify as probable reference-skips; then integrals family.",
+      "2026-08-15: derivatives rules/common/special recorded as reference-skips (special carries a recommended-note: sinh⁻¹/arsinh naming minefield has no owner).",
+      "2026-08-15: integrals/indefinite written — 'Indefinite Integral Notation' (3 entries: ∫ f(x) dx trio, F(x)+C, F/f case pairing) REPLACING the page's pre-existing bare-titled 'Notation' body section in place at id 3 (first in-place replacement of the pass; chip → footer pill; prose fully absorbed). Integrals family remaining: definite, evaluating, techniques, improper (theoretical candidates); rules, special to classify; hub skip.",
+      "2026-08-15: integrals/definite written — 'Definite Integral Notation' (4 entries: bounded sign, dummy variable, evaluation bracket, Riemann metamorphosis) replacing 'Notation and Meaning' in place at id 2; UN-SLICED (3rd). Integrals remaining: evaluating(?), techniques, improper; rules/special probable skips.",
+      "2026-08-15: integrals/techniques written — 'Notation Inside the Techniques' (3 entries: u/du pair with bound-labelling, parts ledger with European prime form, reverse-direction trig substitution) after id 2. Integrals remaining: improper (theoretical), evaluating (classify), rules/special (probable skips), hub (skip).",
+      "OPERATOR RULE REITERATED (2026-08-15): no hub pages, no front/index pages, at any level.",
+      "2026-08-15: integrals/improper written — 'Improper Integral Notation' (3 entries: ∞-bound as defined limit + PV confusion, limit scaffold with independent letters, convergence verdicts + ∫|f|<∞ shorthand) after id 2. Integrals remaining: evaluating (classify), rules/special (probable skips)."
+      "Keyboard dataset gaps (ASK-1): \\lim and \\to absent from math_symbols_data.json; \\rightarrow and \\infty present.",
+      "two-sided renders with slice(1): TOC/FAQ list section 1 which never renders; intro duplicates it, slice left alone and recorded on the page entry."
     ],
     "functions": [
       "CREATED /math-symbols/functions (2026-08-07) — the first missing topic page built by this project. 8 categories incl. interval_notation; explanations backlink into the functions section anchors (bidirectional from birth). Not yet added to other symbols pages' menuItems or the /math-symbols hub — structural decision left to the user.",

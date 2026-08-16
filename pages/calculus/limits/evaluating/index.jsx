@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -250,6 +251,51 @@ Indeterminate forms require transformation. The goal is to rewrite the expressio
     before: ``,
     after: ``,
     link: ``
+  },
+  notation: {
+    title: `Notation of Indeterminate Forms`,
+    lead: `The seven form-labels, the lookalikes that are not on the list, and the one piece of working notation every evaluation chain depends on.`,
+    inherited: `$\\lim$ and DNE — [two-sided limits](!/calculus/limits/two-sided); $\\infty$ and its signs — [limits at infinity](!/calculus/limits/infinity).`,
+    entries: [
+      {
+        id: 'quotient-forms',
+        tex: `$\\frac{0}{0}$ · $\\frac{\\infty}{\\infty}$`,
+        read: `Zero over zero; infinity over infinity`,
+        means: `Diagnoses, not fractions. Each records what substitution reported and announces that the contest between numerator and denominator is still undecided. No arithmetic is being performed.`,
+        cases: `$0/0$ at a finite point — a shared factor is hiding, removed in **Factoring and Canceling** below. $\\infty/\\infty$ — a growth-rate contest, settled by dominant terms on [limits at infinity](!/calculus/limits/infinity) or by L'Hôpital once [derivative rules](!/calculus/derivatives/rules) are available.`,
+        alsoWritten: `Quoted — “the form $0/0$” — in careful texts, stressing label over value.`,
+        confusedWith: `An answer. $0/0$ does not mean the limit is $0$, undefined, or nonexistent — it means undetermined, and any of those outcomes is still possible.`,
+      },
+      {
+        id: 'other-forms',
+        tex: `$0 \\cdot \\infty$ · $\\infty - \\infty$ · $0^0$ · $1^{\\infty}$ · $\\infty^0$`,
+        read: `The product, difference, and power indeterminate forms`,
+        means: `The same undecided-contest idea in three more shapes: a vanishing factor against an exploding one, two explosions subtracted, and exponentials pulling in opposite directions.`,
+        cases: `$0 \\cdot \\infty$ — rewrite as a quotient to join the entry above. $\\infty - \\infty$ — combine into one fraction. The power trio — take logarithms, which turns each into $0 \\cdot \\infty$.`,
+        alsoWritten: `$\\infty \\cdot 0$, order immaterial.`,
+        confusedWith: `$1^{\\infty}$ with plain powers of one. The base is not exactly $1$ — it *approaches* $1$ while the exponent explodes, which is how $\\left(1 + \\frac{1}{n}\\right)^n$ reaches $e$ on [special limits](!/calculus/limits/special).`,
+      },
+      {
+        id: 'determinate-lookalikes',
+        tex: `$\\frac{1}{0}$ · $\\frac{0}{\\infty}$ · $\\infty + \\infty$`,
+        read: `The determinate lookalikes`,
+        means: `Not on the list. In each, one tendency wins outright: $1/0$ forces unboundedness, $0/\\infty$ forces $0$, $\\infty + \\infty$ forces $\\infty$. No contest, no further work — only sign analysis remains.`,
+        cases: `$1/0$ resolves to an [infinite limit](!/calculus/limits/infinity) once the sign is read off each side, as in **Sign Analysis Near the Point** below.`,
+        confusedWith: `Membership in the indeterminate list. Students promote $1/0$ to indeterminate because it fails substitution — but failing substitution and being undecided are different events; $1/0$ has a verdict.`,
+      },
+      {
+        id: 'carried-lim',
+        tex: `$\\lim \\cdots = \\lim \\cdots = L$`,
+        read: `The evaluation chain`,
+        means: `Working notation: every intermediate line keeps its own $\\lim$. The algebra rewrites the expression *inside* the operator; $\\lim$ drops only at the substitution step, when a number finally appears.`,
+        cases: `The cancellations along the chain are legal because $x \\neq a$ throughout — the punctured $0 < |x - a|$ carried by every [limit](!/calculus/limits/two-sided).`,
+        confusedWith: `Dropping $\\lim$ after the first line. The naked middle lines then assert that $\\frac{x^2 - 4}{x - 2}$ *equals* $x + 2$ — false at $x = 2$; only their limits agree. The commonest written error in submitted work.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/limits`,
+    parentLabel: `Limits`,
   },
   obj4: {
     title: `Factoring and Canceling`,
@@ -670,6 +716,25 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

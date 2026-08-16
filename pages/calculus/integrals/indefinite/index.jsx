@@ -11,6 +11,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -332,25 +333,43 @@ Initial conditions pin down $C$. If you know that $F(0) = 3$, for instance, you 
     after: ``,
     link: ``
   },
-  obj3: {
-    title: `Notation`,
-    content: `
-The indefinite integral is written:
-
-$$\\int f(x)\\, dx = F(x) + C$$
-
-The integral sign $\\int$ without limits indicates an indefinite integral. The integrand $f(x)$ is the function being integrated. The differential $dx$ specifies the variable.
-
-The result is a function (or family of functions), not a number. This contrasts with the [definite integral](!/calculus/integrals/definite), which produces a numerical value.
-
-The notation mirrors the definite integral deliberately. The Fundamental Theorem of Calculus connects them: indefinite integrals provide the antiderivatives that definite integrals evaluate.
-
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
-
-`,
-    before: ``,
-    after: ``,
-    link: ``
+  notation: {
+    title: `Indefinite Integral Notation`,
+    lead: `The three-part symbol, the constant that is not optional, and the case convention that carries the whole subject.`,
+    inherited: `$dx$ as a differential — [differentials](!/calculus/derivatives/differentials#notation); the prime — [the derivative function](!/calculus/derivatives/function#notation).`,
+    entries: [
+      {
+        id: 'integral-sign',
+        tex: `$\\int f(x)\\, dx$`,
+        read: `The indefinite integral of f of x, d x`,
+        means: `Leibniz's elongated S, for *summa*. No limits on the sign — indefinite: the output is a family of functions, not a number. $f(x)$ is the integrand; $dx$ names the variable and closes it off. The [mathematical keyboard](!/keyboard) carries $\\int$.`,
+        cases: `With limits attached it becomes the [definite integral](!/calculus/integrals/definite) — a number, a different object, same glyph. Under substitution the $dx$ is a live [differential](!/calculus/derivatives/differentials#notation): $du = g'(x)\\,dx$ is real algebra, not bookkeeping.`,
+        alsoWritten: `$\\int dx\\, f(x)$ — differential first, standard in physics texts, where the variable announces itself before a long integrand.`,
+        confusedWith: `$dx$ as decoration. Dropping it leaves the variable unnamed — $\\int 2t\\,dx$ and $\\int 2t\\,dt$ are different answers.`,
+      },
+      {
+        id: 'plus-c',
+        tex: `$F(x) + C$`,
+        read: `F of x, plus C`,
+        means: `The general antiderivative. “$+C$” is part of the answer, not a garnish — **The Constant of Integration** above insists on it. One symbol, ranging over all reals, carries the entire family.`,
+        cases: `Sums take a single $C$ — the pieces' constants merge on arrival. For $\\int \\frac{1}{x}\\,dx = \\ln|x| + C$ the honest version has a separate constant on each side of $0$; the single $C$ is the standard abbreviation.`,
+        alsoWritten: `$K$, or $c_1$, when $C$ is spoken for — any letter declared arbitrary.`,
+        confusedWith: `The critical number $c$ of [graph analysis](!/calculus/derivatives/graph-analysis#notation) — one fixed, found point; this $C$ is deliberately free. In [definite integrals](!/calculus/integrals/definite) it cancels, which is why it never appears there.`,
+      },
+      {
+        id: 'capital-pairing',
+        tex: `$F'(x) = f(x)$`,
+        read: `F prime equals f`,
+        means: `The case convention: a capital letter names an antiderivative of its own lowercase. The letter case *is* the claim — writing $F$ asserts $F' = f$ with no further words.`,
+        cases: `$G/g$, $H/h$ work identically. The pairing carries into the Fundamental Theorem, $\\int_a^b f(x)\\,dx = F(b) - F(a)$ — **Connection to Definite Integrals** below.`,
+        alsoWritten: `$F = \\int f$ — operator shorthand, bare sign and no variables, common on blackboards.`,
+        confusedWith: `“$F$ is *the* antiderivative.” $F$ is one member — the family is $F + C$, and uniqueness fails by exactly a constant.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/integrals`,
+    parentLabel: `Integrals`,
   },
   obj4: {
     title: `Basic Antiderivative Formulas`,
@@ -632,10 +651,21 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     },
     {
         id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj3.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

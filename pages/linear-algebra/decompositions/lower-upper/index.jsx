@@ -1,4 +1,921 @@
 
+// // // // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj10 comparison, obj11 summary capstone)
+// // // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// // // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+
+// // // import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// // // import Sections from '@/app/components/page-components/section/Sections'
+// // // import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+
+// // // import React from 'react'
+// // // import '../../../pages.css'
+// // // import Head from 'next/head'
+// // // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// // // import { tableHeaders } from '@/app/styles/theme'
+
+
+// // // export async function getStaticProps(){
+// // // const keyWords = [
+// // //   "LU decomposition",
+// // //   "LU factorization",
+// // //   "Gaussian elimination matrix",
+// // //   "lower upper triangular",
+// // //   "PA = LU pivoting",
+// // //   "partial pivoting",
+// // //   "forward back substitution",
+// // //   "LU solve linear system",
+// // //   "LU determinant",
+// // //   "elimination multipliers",
+// // //   "triangular factorization",
+// // //   "LU computational cost",
+// // //   "matrix factorization",
+// // //   "LU vs Cholesky"
+// // // ]
+
+// // //   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// // //   // ---------- TABLES ----------
+
+// // //   // obj3 — aggregation: structure of L vs U
+// // //   const obj3Table = `
+// // // <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// // //   <thead>
+// // //     <tr>
+// // //       <th style="${tableHeaders.aggregation}">Factor</th>
+// // //       <th style="${tableHeaders.aggregation}">Diagonal</th>
+// // //       <th style="${tableHeaders.aggregation}">Below diagonal</th>
+// // //       <th style="${tableHeaders.aggregation}">Above diagonal</th>
+// // //       <th style="${tableHeaders.aggregation}">Role</th>
+// // //     </tr>
+// // //   </thead>
+// // //   <tbody>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">L (unit lower triangular)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all ones (not stored)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">elimination multipliers l<sub>ij</sub> = m<sub>ij</sub></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">records how A was reduced</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">U (upper triangular)</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">pivots (product = det A up to sign)</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">zeros</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">remaining echelon-form entries</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">the row echelon form of A</td>
+// // //     </tr>
+// // //   </tbody>
+// // // </table>
+// // // `
+
+// // //   // obj10 — comparison: cost of direct solver methods
+// // //   const obj10Table = `
+// // // <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// // //   <thead>
+// // //     <tr>
+// // //       <th style="${tableHeaders.comparison}">Method</th>
+// // //       <th style="${tableHeaders.comparison}">Cost for one system</th>
+// // //       <th style="${tableHeaders.comparison}">Cost for k systems (same A)</th>
+// // //       <th style="${tableHeaders.comparison}">Restrictions</th>
+// // //     </tr>
+// // //   </thead>
+// // //   <tbody>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">LU with partial pivoting</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ 2n<sup>3</sup>/3 + O(n<sup>2</sup>)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A square and invertible</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/cholesky" style="${linkStyle}">Cholesky</a></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ n<sup>3</sup>/3 + O(n<sup>2</sup>)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A symmetric positive definite</td>
+// // //     </tr>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Explicit <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">inverse</a> A<sup>−1</sup>b</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ 8n<sup>3</sup>/3 to form A<sup>−1</sup>, then 2n<sup>2</sup> per multiply</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerically less stable; rarely the right choice</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/determinants/applications" style="${linkStyle}">Cramer&apos;s rule</a></td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">O(n · n!) — impractical beyond n ≈ 4</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">k × O(n · n!)</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">theoretical only; not used in computation</td>
+// // //     </tr>
+// // //   </tbody>
+// // // </table>
+// // // `
+
+// // //   // obj11 — summary capstone: three tasks LU accelerates
+// // //   const summaryTable = `
+// // // <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// // //   <thead>
+// // //     <tr>
+// // //       <th style="${tableHeaders.summary}">Task</th>
+// // //       <th style="${tableHeaders.summary}">Procedure once PA = LU is in hand</th>
+// // //       <th style="${tableHeaders.summary}">Cost given LU</th>
+// // //       <th style="${tableHeaders.summary}">Cost without LU (per task)</th>
+// // //     </tr>
+// // //   </thead>
+// // //   <tbody>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#6" style="${linkStyle}">Solve Ax = b</a></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward solve Ly = Pb, then back solve Ux = y</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>2</sup></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 (a full Gaussian elimination)</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#7" style="${linkStyle}">Determinant det(A)</a></td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>s</sup> · u<sub>11</sub>u<sub>22</sub>···u<sub>nn</sub> (s = number of row swaps)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">O(n) — multiply the diagonal of U</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 by elimination; O(n!) by cofactor expansion</td>
+// // //     </tr>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="#8" style="${linkStyle}">Inverse A<sup>−1</sup></a></td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">solve Ax<sub>j</sub> = e<sub>j</sub> for j = 1, ..., n; columns assemble A<sup>−1</sup></td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">2n<sup>3</sup>/3 (factor) + 2n<sup>3</sup> (n solves) ≈ 8n<sup>3</sup>/3</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">≈ 2n<sup>3</sup>/3 per column = 2n<sup>4</sup>/3 without re-use</td>
+// // //     </tr>
+// // //   </tbody>
+// // // </table>
+// // // `
+
+// // // // const sectionsContent = {
+// // // //   obj1: {
+// // // //     title: `What LU Decomposition Is`,
+// // // //     content: `The LU decomposition writes an $n \\times n$ [matrix](!/linear-algebra/matrix) $A$ as
+
+// // // // $$A = LU$$
+
+// // // // where $L$ is lower [triangular](!/linear-algebra/matrix/types) with ones on the diagonal (unit lower triangular) and $U$ is upper triangular. The matrix $U$ is the [row echelon form](!/linear-algebra/linear-systems/echelon-form) of $A$, and $L$ stores the multipliers that [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) used to produce it.
+
+// // // // The factorization captures the entire elimination process in a reusable form. Instead of performing elimination from scratch for every new right-hand side $\\mathbf{b}$, the work is done once (producing $L$ and $U$) and reused cheaply for each solve.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj2: {
+// // // //     title: `Construction from Gaussian Elimination`,
+// // // //     content: `Forward elimination on $A$ applies a sequence of row-addition [operations](!/linear-algebra/matrix/operations), each represented by an [elementary matrix](!/linear-algebra/matrix/operations) $E_i$. The product $E_k \\cdots E_2 E_1 A = U$ reduces $A$ to upper triangular form.
+
+// // // // Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower triangular matrix that adds a multiple of one row to a row below. Its inverse simply negates the multiplier. The product $L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$ is lower triangular, with the multipliers sitting in the sub-diagonal positions.
+
+// // // // ## Worked Example
+
+// // // // $$A = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix}$$
+
+// // // // Subtract $2$ times row $1$ from row $2$ (multiplier $m_{21} = 2$) and add row $1$ to row $3$ (multiplier $m_{31} = -1$):
+
+// // // // $$\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 6 & 2 \\end{pmatrix}$$
+
+// // // // Add $3$ times row $2$ to row $3$ (multiplier $m_{32} = -3$):
+
+// // // // $$U = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix}$$
+
+// // // // The multipliers fill $L$: $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & -3 & 1 \\end{pmatrix}$.
+
+// // // // Verification: $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj3: {
+// // // //     title: `The Structure of L and U`,
+// // // //     content: `The lower factor $L$ is unit lower triangular: ones on the diagonal and multipliers below. Entry $l_{ij}$ (with $i > j$) is the multiplier used to eliminate position $(i, j)$ during forward elimination. The diagonal is always ones because no row scaling is performed — only row additions.
+
+// // // // The upper factor $U$ is the echelon form: pivots on the diagonal, zeros below, and the result of all elimination steps. The diagonal entries of $U$ are the pivots, and their product gives the [determinant](!/linear-algebra/determinants): $\\det(A) = \\det(L)\\det(U) = 1 \\cdot u_{11}u_{22}\\cdots u_{nn}$.
+
+// // // // The factorization stores $L$ and $U$ compactly. Since $L$ has ones on the diagonal (which need not be stored) and $U$ has zeros below the diagonal (which need not be stored), both factors fit in a single $n \\times n$ array: the lower triangle holds the multipliers and the upper triangle holds $U$.
+
+// // // // The two factors compare cleanly on the same set of attributes — diagonal, below diagonal, above diagonal, role — as the table below shows.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj4: {
+// // // //     title: `When LU Exists Without Pivoting`,
+// // // //     content: `The factorization $A = LU$ without row swaps exists if and only if every leading principal submatrix of $A$ is nonsingular. The $k$-th leading principal submatrix is the upper-left $k \\times k$ block of $A$, and its [determinant](!/linear-algebra/determinants) must be nonzero for $k = 1, 2, \\dots, n$.
+
+// // // // When a zero appears in a pivot position during elimination, no row-addition operation can produce a nonzero pivot — a row swap is required. The simple $A = LU$ factorization breaks down, and the pivoted version $PA = LU$ is needed.
+
+// // // // For example, $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has no $LU$ factorization without pivoting: the $(1,1)$ entry is zero, and no multiple of row $1$ can create a nonzero pivot. But after swapping the two rows, elimination proceeds immediately.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj5: {
+// // // //     title: `Partial Pivoting: PA = LU`,
+// // // //     content: `Partial pivoting modifies the elimination process: at each step, the row with the largest absolute value in the current pivot column (among rows at or below the pivot position) is swapped into the pivot position. All row swaps are recorded in a permutation matrix $P$.
+
+// // // // The factorization becomes $PA = LU$, where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra/matrix/types). This factorization exists for every [invertible](!/linear-algebra/matrix/inverse) matrix — partial pivoting eliminates the restriction on leading principal submatrices.
+
+// // // // Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and selecting the largest available pivot keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
+
+// // // // In numerical software, LU with partial pivoting is the default — the unpivoted version $A = LU$ is a theoretical simplification that is rarely used in practice.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj6: {
+// // // //     title: `Solving Systems with LU`,
+// // // //     content: `Given $PA = LU$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is solved in two steps.
+
+// // // // Forward substitution: solve $L\\mathbf{y} = P\\mathbf{b}$ for $\\mathbf{y}$. Since $L$ is lower triangular, this starts at the top and works downward — each equation involves one new unknown plus previously solved values. Cost: $O(n^2)$.
+
+// // // // Back substitution: solve $U\\mathbf{x} = \\mathbf{y}$ for $\\mathbf{x}$. Since $U$ is upper triangular, this starts at the bottom and works upward. Cost: $O(n^2)$.
+
+// // // // The factorization itself costs $\\frac{2}{3}n^3$ operations. Each subsequent solve costs $O(n^2)$. For $k$ systems with the same coefficient matrix but different right-hand sides $\\mathbf{b}_1, \\dots, \\mathbf{b}_k$: factor once at cost $\\frac{2}{3}n^3$, then solve $k$ times at cost $kn^2$. When $k$ is large, the per-system cost drops to essentially $O(n^2)$ — far cheaper than $k$ independent eliminations at $\\frac{2}{3}n^3$ each.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj7: {
+// // // //     title: `LU and the Determinant`,
+// // // //     content: `The [determinant](!/linear-algebra/determinants) of $A$ is a free byproduct of the LU factorization. Since $\\det(L) = 1$ (the diagonal is all ones) and $\\det(U) = u_{11}u_{22}\\cdots u_{nn}$ (the product of the diagonal for a [triangular](!/linear-algebra/matrix/types) matrix):
+
+// // // // $$\\det(A) = \\det(L)\\det(U) = u_{11}u_{22}\\cdots u_{nn}$$
+
+// // // // With pivoting, each row swap flips the sign: $\\det(A) = (-1)^s u_{11}u_{22}\\cdots u_{nn}$, where $s$ is the number of row swaps recorded in $P$.
+
+// // // // This makes determinant computation essentially free once LU is available — just multiply the diagonal of $U$ and account for the sign. It is far more efficient than cofactor expansion, and it is the method every numerical library uses.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj8: {
+// // // //     title: `LU and the Inverse`,
+// // // //     content: `To compute $A^{-1}$, solve $A\\mathbf{x}_j = \\mathbf{e}_j$ for each standard basis vector $\\mathbf{e}_j$, $j = 1, \\dots, n$. The solutions $\\mathbf{x}_1, \\dots, \\mathbf{x}_n$ are the columns of $A^{-1}$.
+
+// // // // With LU: factor $A$ once ($\\frac{2}{3}n^3$), then solve $n$ systems ($n \\times O(n^2) = O(n^3)$). Total cost: roughly $\\frac{8}{3}n^3$ — cheaper than $n$ independent eliminations.
+
+// // // // In practice, computing $A^{-1}$ explicitly is rarely the right approach. Solving $A\\mathbf{x} = \\mathbf{b}$ via LU is faster than multiplying $A^{-1}\\mathbf{b}$, and more numerically stable. The [inverse](!/linear-algebra/matrix/inverse) formula is primarily a theoretical tool; for computation, LU solves are preferred.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj9: {
+// // // //     title: `Worked Example: 4×4 with Pivoting`,
+// // // //     content: `$$A = \\begin{pmatrix} 0 & 2 & 1 & 3 \\\\ 1 & 0 & 3 & -1 \\\\ 3 & 1 & 0 & 2 \\\\ 2 & 3 & 1 & 0 \\end{pmatrix}$$
+
+// // // // The $(1,1)$ entry is zero — a row swap is needed. The largest entry in column $1$ is $3$ in row $3$. Swap rows $1$ and $3$:
+
+// // // // $$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 1 & 0 & 3 & -1 \\\\ 0 & 2 & 1 & 3 \\\\ 2 & 3 & 1 & 0 \\end{pmatrix}$$
+
+// // // // Eliminate below the $(1,1)$ pivot. Multipliers: $m_{21} = 1/3$, $m_{31} = 0$, $m_{41} = 2/3$:
+
+// // // // $$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 0 & -1/3 & 3 & -5/3 \\\\ 0 & 2 & 1 & 3 \\\\ 0 & 7/3 & 1 & -4/3 \\end{pmatrix}$$
+
+// // // // The largest entry in column $2$ below position $(2,2)$ is $7/3$ in row $4$. Swap rows $2$ and $4$. Continue elimination on columns $2$ and $3$ with the appropriate multipliers.
+
+// // // // After completing all steps, the factorization $PA = LU$ is assembled with $P$ recording both row swaps, $L$ storing all multipliers, and $U$ storing the final upper triangular result. Verification: $LU = PA$.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   obj10: {
+// // // //     title: `Computational Cost`,
+// // // //     content: `The LU factorization of an $n \\times n$ matrix requires roughly $\\frac{2}{3}n^3$ arithmetic operations (multiplications and additions). Each triangular solve (forward or back substitution) requires roughly $n^2$ operations.
+
+// // // // For a single system $A\\mathbf{x} = \\mathbf{b}$, LU costs about the same as [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) applied directly. The advantage appears with multiple right-hand sides: $k$ systems sharing the same $A$ cost $\\frac{2}{3}n^3 + 2kn^2$, versus $\\frac{2}{3}kn^3$ for $k$ independent eliminations.
+
+// // // // Compared to alternatives: [Cramer's rule](!/linear-algebra/determinants/applications) costs $O(n \\cdot n!)$ — absurdly expensive. Explicit [inverse](!/linear-algebra/matrix/inverse) computation costs roughly $2n^3$. The [Cholesky](!/linear-algebra/decompositions/cholesky) factorization costs $\\frac{1}{3}n^3$ but requires symmetry and positive definiteness. LU is the general-purpose baseline — the standard direct solver for dense [linear systems](!/linear-algebra/linear-systems) in scientific computing.
+
+// // // // These options can be set side by side on cost per system, cost amortized over many systems, and the matrix conditions each requires.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // //   // NEW capstone section: obj11
+// // // //   obj11: {
+// // // //     title: `Summary: What LU Computes`,
+// // // //     content: `Once $PA = LU$ is in hand, three of the most common matrix-level computations — solving a system, taking the determinant, and forming the inverse — collapse to cheap operations on the factors. The table below collects each task with the procedure it reduces to, the cost given the factorization, and the cost of doing the same task from scratch for comparison.`,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: ``,
+// // // //   },
+// // // // }
+
+
+
+// // // // linear-algebra/decompositions/lower-upper — sectionsContent with formula callouts (v1)
+// // // // 4 callouts injected:
+// // // //   obj1 (LU Decomposition) — direct $$ replacement
+// // // //   obj5 (PA LU Partial Pivoting) — inline promote
+// // // //   obj6 (LU Solve Steps) — prose-only insertion (cases-block formula not on page)
+// // // //   obj7 (Determinant via LU) — direct $$ replacement (canonical general form)
+// // // // obj2 worked-example matrix displays preserved (derivation steps)
+
+// // // const sectionsContent = {
+// // //   obj1: {
+// // //     title: `What LU Decomposition Is`,
+// // //     content: `The LU decomposition writes an $n \\times n$ [matrix](!/linear-algebra/matrix) $A$ as
+
+// // // @academic[formula_callout:lu_decomposition|LU Decomposition|$$A = LU$$]@
+// // // @academic[formulas_link:/linear-algebra/formulas#lu_decomposition]@
+
+// // // where $L$ is lower [triangular](!/linear-algebra/matrix/types) with ones on the diagonal (unit lower triangular) and $U$ is upper triangular. The matrix $U$ is the [row echelon form](!/linear-algebra/linear-systems/echelon-form) of $A$, and $L$ stores the multipliers that [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) used to produce it.
+
+// // // The factorization captures the entire elimination process in a reusable form. Instead of performing elimination from scratch for every new right-hand side $\\mathbf{b}$, the work is done once (producing $L$ and $U$) and reused cheaply for each solve.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj2: {
+// // //     title: `Construction from Gaussian Elimination`,
+// // //     content: `Forward elimination on $A$ applies a sequence of row-addition [operations](!/linear-algebra/matrix/operations), each represented by an [elementary matrix](!/linear-algebra/matrix/operations) $E_i$. The product $E_k \\cdots E_2 E_1 A = U$ reduces $A$ to upper triangular form.
+
+// // // Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower triangular matrix that adds a multiple of one row to a row below. Its inverse simply negates the multiplier. The product $L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$ is lower triangular, with the multipliers sitting in the sub-diagonal positions.
+
+// // // ## Worked Example
+
+// // // $$A = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix}$$
+
+// // // Subtract $2$ times row $1$ from row $2$ (multiplier $m_{21} = 2$) and add row $1$ to row $3$ (multiplier $m_{31} = -1$):
+
+// // // $$\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 6 & 2 \\end{pmatrix}$$
+
+// // // Add $3$ times row $2$ to row $3$ (multiplier $m_{32} = -3$):
+
+// // // $$U = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix}$$
+
+// // // The multipliers fill $L$: $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & -3 & 1 \\end{pmatrix}$.
+
+// // // Verification: $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj3: {
+// // //     title: `The Structure of L and U`,
+// // //     content: `The lower factor $L$ is unit lower triangular: ones on the diagonal and multipliers below. Entry $l_{ij}$ (with $i > j$) is the multiplier used to eliminate position $(i, j)$ during forward elimination. The diagonal is always ones because no row scaling is performed — only row additions.
+
+// // // The upper factor $U$ is the echelon form: pivots on the diagonal, zeros below, and the result of all elimination steps. The diagonal entries of $U$ are the pivots, and their product gives the [determinant](!/linear-algebra/determinants): $\\det(A) = \\det(L)\\det(U) = 1 \\cdot u_{11}u_{22}\\cdots u_{nn}$.
+
+// // // The factorization stores $L$ and $U$ compactly. Since $L$ has ones on the diagonal (which need not be stored) and $U$ has zeros below the diagonal (which need not be stored), both factors fit in a single $n \\times n$ array: the lower triangle holds the multipliers and the upper triangle holds $U$.
+
+// // // The two factors compare cleanly on the same set of attributes — diagonal, below diagonal, above diagonal, role — as the table below shows.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj4: {
+// // //     title: `When LU Exists Without Pivoting`,
+// // //     content: `The factorization $A = LU$ without row swaps exists if and only if every leading principal submatrix of $A$ is nonsingular. The $k$-th leading principal submatrix is the upper-left $k \\times k$ block of $A$, and its [determinant](!/linear-algebra/determinants) must be nonzero for $k = 1, 2, \\dots, n$.
+
+// // // When a zero appears in a pivot position during elimination, no row-addition operation can produce a nonzero pivot — a row swap is required. The simple $A = LU$ factorization breaks down, and the pivoted version $PA = LU$ is needed.
+
+// // // For example, $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has no $LU$ factorization without pivoting: the $(1,1)$ entry is zero, and no multiple of row $1$ can create a nonzero pivot. But after swapping the two rows, elimination proceeds immediately.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj5: {
+// // //     title: `Partial Pivoting: PA = LU`,
+// // //     content: `Partial pivoting modifies the elimination process: at each step, the row with the largest absolute value in the current pivot column (among rows at or below the pivot position) is swapped into the pivot position. All row swaps are recorded in a permutation matrix $P$.
+
+// // // The factorization becomes:
+
+// // // @academic[formula_callout:pa_lu_partial_pivoting|PA LU Partial Pivoting|$$PA = LU$$]@
+// // // @academic[formulas_link:/linear-algebra/formulas#pa_lu_partial_pivoting]@
+
+// // // where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra/matrix/types). This factorization exists for every [invertible](!/linear-algebra/matrix/inverse) matrix — partial pivoting eliminates the restriction on leading principal submatrices.
+
+// // // Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and selecting the largest available pivot keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
+
+// // // In numerical software, LU with partial pivoting is the default — the unpivoted version $A = LU$ is a theoretical simplification that is rarely used in practice.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj6: {
+// // //     title: `Solving Systems with LU`,
+// // //     content: `Given $PA = LU$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is solved in two steps:
+
+// // // @academic[formula_callout:lu_solve_steps|LU Solve Steps|$$A\\mathbf{x} = \\mathbf{b} \\;\\Longleftrightarrow\\; \\begin{cases} L\\mathbf{y} = P\\mathbf{b} & (\\text{forward sub}) \\\\ U\\mathbf{x} = \\mathbf{y} & (\\text{back sub}) \\end{cases}$$]@
+// // // @academic[formulas_link:/linear-algebra/formulas#lu_solve_steps]@
+
+// // // Forward substitution: solve $L\\mathbf{y} = P\\mathbf{b}$ for $\\mathbf{y}$. Since $L$ is lower triangular, this starts at the top and works downward — each equation involves one new unknown plus previously solved values. Cost: $O(n^2)$.
+
+// // // Back substitution: solve $U\\mathbf{x} = \\mathbf{y}$ for $\\mathbf{x}$. Since $U$ is upper triangular, this starts at the bottom and works upward. Cost: $O(n^2)$.
+
+// // // The factorization itself costs $\\frac{2}{3}n^3$ operations. Each subsequent solve costs $O(n^2)$. For $k$ systems with the same coefficient matrix but different right-hand sides $\\mathbf{b}_1, \\dots, \\mathbf{b}_k$: factor once at cost $\\frac{2}{3}n^3$, then solve $k$ times at cost $kn^2$. When $k$ is large, the per-system cost drops to essentially $O(n^2)$ — far cheaper than $k$ independent eliminations at $\\frac{2}{3}n^3$ each.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj7: {
+// // //     title: `LU and the Determinant`,
+// // //     content: `The [determinant](!/linear-algebra/determinants) of $A$ is a free byproduct of the LU factorization. Since $\\det(L) = 1$ (the diagonal is all ones) and $\\det(U) = u_{11}u_{22}\\cdots u_{nn}$ (the product of the diagonal for a [triangular](!/linear-algebra/matrix/types) matrix), with pivoting each row swap flips the sign:
+
+// // // @academic[formula_callout:determinant_via_lu|Determinant via LU|$$\\det(A) = (-1)^s \\prod_{i=1}^{n} u_{ii}$$]@
+// // // @academic[formulas_link:/linear-algebra/formulas#determinant_via_lu]@
+
+// // // where $s$ is the number of row swaps recorded in $P$. Without pivoting ($s = 0$), the sign factor drops and $\\det(A) = u_{11}u_{22}\\cdots u_{nn}$.
+
+// // // This makes determinant computation essentially free once LU is available — just multiply the diagonal of $U$ and account for the sign. It is far more efficient than cofactor expansion, and it is the method every numerical library uses.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj8: {
+// // //     title: `LU and the Inverse`,
+// // //     content: `To compute $A^{-1}$, solve $A\\mathbf{x}_j = \\mathbf{e}_j$ for each standard basis vector $\\mathbf{e}_j$, $j = 1, \\dots, n$. The solutions $\\mathbf{x}_1, \\dots, \\mathbf{x}_n$ are the columns of $A^{-1}$.
+
+// // // With LU: factor $A$ once ($\\frac{2}{3}n^3$), then solve $n$ systems ($n \\times O(n^2) = O(n^3)$). Total cost: roughly $\\frac{8}{3}n^3$ — cheaper than $n$ independent eliminations.
+
+// // // In practice, computing $A^{-1}$ explicitly is rarely the right approach. Solving $A\\mathbf{x} = \\mathbf{b}$ via LU is faster than multiplying $A^{-1}\\mathbf{b}$, and more numerically stable. The [inverse](!/linear-algebra/matrix/inverse) formula is primarily a theoretical tool; for computation, LU solves are preferred.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj9: {
+// // //     title: `Worked Example: 4×4 with Pivoting`,
+// // //     content: `$$A = \\begin{pmatrix} 0 & 2 & 1 & 3 \\\\ 1 & 0 & 3 & -1 \\\\ 3 & 1 & 0 & 2 \\\\ 2 & 3 & 1 & 0 \\end{pmatrix}$$
+
+// // // The $(1,1)$ entry is zero — a row swap is needed. The largest entry in column $1$ is $3$ in row $3$. Swap rows $1$ and $3$:
+
+// // // $$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 1 & 0 & 3 & -1 \\\\ 0 & 2 & 1 & 3 \\\\ 2 & 3 & 1 & 0 \\end{pmatrix}$$
+
+// // // Eliminate below the $(1,1)$ pivot. Multipliers: $m_{21} = 1/3$, $m_{31} = 0$, $m_{41} = 2/3$:
+
+// // // $$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 0 & -1/3 & 3 & -5/3 \\\\ 0 & 2 & 1 & 3 \\\\ 0 & 7/3 & 1 & -4/3 \\end{pmatrix}$$
+
+// // // The largest entry in column $2$ below position $(2,2)$ is $7/3$ in row $4$. Swap rows $2$ and $4$. Continue elimination on columns $2$ and $3$ with the appropriate multipliers.
+
+// // // After completing all steps, the factorization $PA = LU$ is assembled with $P$ recording both row swaps, $L$ storing all multipliers, and $U$ storing the final upper triangular result. Verification: $LU = PA$.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj10: {
+// // //     title: `Computational Cost`,
+// // //     content: `The LU factorization of an $n \\times n$ matrix requires roughly $\\frac{2}{3}n^3$ arithmetic operations (multiplications and additions). Each triangular solve (forward or back substitution) requires roughly $n^2$ operations.
+
+// // // For a single system $A\\mathbf{x} = \\mathbf{b}$, LU costs about the same as [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) applied directly. The advantage appears with multiple right-hand sides: $k$ systems sharing the same $A$ cost $\\frac{2}{3}n^3 + 2kn^2$, versus $\\frac{2}{3}kn^3$ for $k$ independent eliminations.
+
+// // // Compared to alternatives: [Cramer's rule](!/linear-algebra/determinants/applications) costs $O(n \\cdot n!)$ — absurdly expensive. Explicit [inverse](!/linear-algebra/matrix/inverse) computation costs roughly $2n^3$. The [Cholesky](!/linear-algebra/decompositions/cholesky) factorization costs $\\frac{1}{3}n^3$ but requires symmetry and positive definiteness. LU is the general-purpose baseline — the standard direct solver for dense [linear systems](!/linear-algebra/linear-systems) in scientific computing.
+
+// // // These options can be set side by side on cost per system, cost amortized over many systems, and the matrix conditions each requires.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj11: {
+// // //     title: `Summary: What LU Computes`,
+// // //     content: `Once $PA = LU$ is in hand, three of the most common matrix-level computations — solving a system, taking the determinant, and forming the inverse — collapse to cheap operations on the factors. The table below collects each task with the procedure it reduces to, the cost given the factorization, and the cost of doing the same task from scratch for comparison.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // // }
+
+
+
+// // //  const introContent = {
+// // //   title: `Gaussian Elimination as a Matrix Factorization`,
+// // //   content: `The LU decomposition factors a square matrix into a lower triangular factor L and an upper triangular factor U. The upper factor is the row echelon form; the lower factor stores the multipliers used to get there. Once computed, the factorization converts every subsequent system solve into two cheap triangular substitutions — making LU the workhorse of direct linear system solvers.`,
+// // // }
+
+
+// // // const faqQuestions = {
+// // //   obj1: {
+// // //     question: "What is LU decomposition?",
+// // //     answer: "LU decomposition writes a square matrix A as A = LU, where L is unit lower triangular (ones on the diagonal, multipliers below) and U is upper triangular (the row echelon form). It captures the entire Gaussian elimination process in reusable matrix form.",
+// // //     sectionId: "1"
+// // //   },
+// // //   obj2: {
+// // //     question: "When does LU decomposition exist without pivoting?",
+// // //     answer: "The factorization A = LU without row swaps exists if and only if every leading principal submatrix of A is nonsingular. When a zero pivot appears, row swaps are needed, giving the pivoted form PA = LU which exists for every invertible matrix.",
+// // //     sectionId: "4"
+// // //   },
+// // //   obj3: {
+// // //     question: "How do you solve a linear system using LU?",
+// // //     answer: "Given PA = LU, solve Ax = b in two steps: forward substitution to solve Ly = Pb, then back substitution to solve Ux = y. The factorization costs about 2n³/3 operations, but each subsequent solve costs only O(n²), making LU efficient for multiple right-hand sides.",
+// // //     sectionId: "6"
+// // //   },
+// // //   obj4: {
+// // //     question: "What is partial pivoting in LU decomposition?",
+// // //     answer: "Partial pivoting selects the largest entry in the current pivot column (at or below the pivot row) and swaps it into the pivot position. This keeps all multipliers in L bounded by 1 in absolute value, limiting rounding error accumulation. The result is PA = LU with P recording the row swaps.",
+// // //     sectionId: "5"
+// // //   },
+// // //   obj5: {
+// // //     question: "How does LU compute the determinant?",
+// // //     answer: "The determinant of A equals the product of the diagonal entries of U, times (−1)^s where s is the number of row swaps. Since det(L) = 1 for unit lower triangular L, det(A) = (−1)^s · u₁₁u₂₂···uₙₙ. This is essentially free once LU is available.",
+// // //     sectionId: "7"
+// // //   }
+// // // }
+
+// // // const schemas = {
+// // //   learningResource: {
+// // //     "@context": "https://schema.org",
+// // //     "@type": "LearningResource",
+// // //     "name": "LU Decomposition",
+// // //     "description": "LU decomposition: factoring matrices into lower and upper triangular forms via Gaussian elimination. Partial pivoting, system solving, determinants, inverse computation, and cost analysis.",
+// // //     "url": "https://www.learnmathclass.com/linear-algebra/decompositions/lower-upper",
+// // //     "inLanguage": "en-US",
+// // //     "learningResourceType": "Explanation",
+// // //     "educationalLevel": "College",
+// // //     "educationalUse": "Learning",
+// // //     "audience": {
+// // //       "@type": "EducationalAudience",
+// // //       "educationalRole": "student"
+// // //     },
+// // //     "about": {
+// // //       "@type": "Thing",
+// // //       "name": "LU Decomposition"
+// // //     },
+// // //     "teaches": [
+// // //       "LU factorization from Gaussian elimination",
+// // //       "Structure of L (multipliers) and U (echelon form)",
+// // //       "Existence conditions and partial pivoting PA = LU",
+// // //       "Forward and back substitution for system solving",
+// // //       "Determinant and inverse via LU",
+// // //       "Computational cost comparison with alternatives",
+// // //       "Side-by-side view of the three tasks LU accelerates: system solving, determinant, and inverse"
+// // //     ],
+// // //     "keywords": keyWords.join(", "),
+// // //     "author": {
+// // //       "@type": "Organization",
+// // //       "name": "Learn Math Class"
+// // //     },
+// // //     "publisher": {
+// // //       "@type": "Organization",
+// // //       "name": "Learn Math Class"
+// // //     },
+// // //     "datePublished": "2024-01-15",
+// // //     "dateModified": new Date().toISOString()
+// // //   },
+
+// // //   breadcrumb: {
+// // //     "@context": "https://schema.org",
+// // //     "@type": "BreadcrumbList",
+// // //     "itemListElement": [
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 1,
+// // //         "name": "Home",
+// // //         "item": "https://www.learnmathclass.com"
+// // //       },
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 2,
+// // //         "name": "Linear Algebra",
+// // //         "item": "https://www.learnmathclass.com/linear-algebra"
+// // //       },
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 3,
+// // //         "name": "Decompositions",
+// // //         "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
+// // //       },
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 4,
+// // //         "name": "LU Decomposition",
+// // //         "item": "https://www.learnmathclass.com/linear-algebra/decompositions/lower-upper"
+// // //       }
+// // //     ]
+// // //   },
+
+// // //   faq: {
+// // //     "@context": "https://schema.org",
+// // //     "@type": "FAQPage",
+// // //     "mainEntity": Object.keys(faqQuestions).map(key => ({
+// // //       "@type": "Question",
+// // //       "name": faqQuestions[key].question,
+// // //       "acceptedAnswer": {
+// // //         "@type": "Answer",
+// // //         "text": faqQuestions[key].answer
+// // //       }
+// // //     }))
+// // //   }
+// // // }
+
+ 
+
+// // //   return {
+// // //   props:{
+// // //     sectionsContent,
+// // //     introContent,
+// // //     obj3Table,
+// // //     obj10Table,
+// // //     summaryTable,
+// // //     faqQuestions,
+// // //     schemas,
+// // //     seoData: {
+// // //       title: "LU Decomposition: Factorization & Solving | Learn Math Class",
+// // //       description: "LU decomposition: factoring matrices into lower and upper triangular forms via Gaussian elimination. Partial pivoting, system solving, determinants, inverse computation, and cost analysis.",
+// // //       keywords: keyWords.join(", "),
+// // //       url: "/linear-algebra/decompositions/lower-upper",
+// // //       name: "LU Decomposition"
+// // //     },
+// // //   }
+// // // }
+// // //    }
+
+// // // // export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// // // export default function LUDecompositionPage({
+// // //   seoData,
+// // //   sectionsContent,
+// // //   introContent,
+// // //   obj3Table,
+// // //   obj10Table,
+// // //   summaryTable,
+// // //   faqQuestions,
+// // //   schemas,
+// // // }) {
+
+// // //   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+// // //   const genericSections=[
+// // //     {
+// // //         id:'1',
+// // //         title:sectionsContent.obj1.title,
+// // //         link:sectionsContent.obj1.link,
+// // //         content:[
+// // //           sectionsContent.obj1.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'2',
+// // //         title:sectionsContent.obj2.title,
+// // //         link:sectionsContent.obj2.link,
+// // //         content:[
+// // //           sectionsContent.obj2.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'3',
+// // //         title:sectionsContent.obj3.title,
+// // //         link:sectionsContent.obj3.link,
+// // //         content:[
+// // //           sectionsContent.obj3.content,
+// // //           <div key={'obj3-table'} style={tableWrapStyle}
+// // //                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'4',
+// // //         title:sectionsContent.obj4.title,
+// // //         link:sectionsContent.obj4.link,
+// // //         content:[
+// // //           sectionsContent.obj4.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'5',
+// // //         title:sectionsContent.obj5.title,
+// // //         link:sectionsContent.obj5.link,
+// // //         content:[
+// // //           sectionsContent.obj5.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'6',
+// // //         title:sectionsContent.obj6.title,
+// // //         link:sectionsContent.obj6.link,
+// // //         content:[
+// // //           sectionsContent.obj6.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'7',
+// // //         title:sectionsContent.obj7.title,
+// // //         link:sectionsContent.obj7.link,
+// // //         content:[
+// // //           sectionsContent.obj7.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'8',
+// // //         title:sectionsContent.obj8.title,
+// // //         link:sectionsContent.obj8.link,
+// // //         content:[
+// // //           sectionsContent.obj8.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'9',
+// // //         title:sectionsContent.obj9.title,
+// // //         link:sectionsContent.obj9.link,
+// // //         content:[
+// // //           sectionsContent.obj9.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'10',
+// // //         title:sectionsContent.obj10.title,
+// // //         link:sectionsContent.obj10.link,
+// // //         content:[
+// // //           sectionsContent.obj10.content,
+// // //           <div key={'obj10-table'} style={tableWrapStyle}
+// // //                dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+// // //         ]
+// // //     },
+// // //     // NEW capstone section: obj11
+// // //     {
+// // //         id:'11',
+// // //         title:sectionsContent.obj11.title,
+// // //         link:sectionsContent.obj11.link,
+// // //         content:[
+// // //           sectionsContent.obj11.content,
+// // //           <div key={'summary-table'} style={tableWrapStyle}
+// // //                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+// // //         ]
+// // //     },
+// // //     // {
+// // //     //     id:'12',
+// // //     //     title:sectionsContent.obj12.title,
+// // //     //     link:sectionsContent.obj12.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj12.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'13',
+// // //     //     title:sectionsContent.obj13.title,
+// // //     //     link:sectionsContent.obj13.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj13.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'14',
+// // //     //     title:sectionsContent.obj14.title,
+// // //     //     link:sectionsContent.obj14.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj14.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'15',
+// // //     //     title:sectionsContent.obj15.title,
+// // //     //     link:sectionsContent.obj15.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj15.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'1',
+// // //     //     title:sectionsContent.obj1.title,
+// // //     //     link:sectionsContent.obj1.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj1.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'1',
+// // //     //     title:sectionsContent.obj1.title,
+// // //     //     link:sectionsContent.obj1.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj1.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'1',
+// // //     //     title:sectionsContent.obj1.title,
+// // //     //     link:sectionsContent.obj1.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj1.content,
+// // //     //     ]
+// // //     // },
+
+// // // ]
+
+// // //   return (
+// // //    <>
+// // //    {/* <Head>
+// // //   <title>{seoData.title}</title>
+// // //   <meta name="description" content={seoData.description} />
+// // //   <meta name="keywords" content={seoData.keywords} />
+// // //   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+
+// // //   <meta property="og:title" content={seoData.title} />
+// // //   <meta property="og:description" content={seoData.description} />
+// // //   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+// // //   <meta property="og:type" content="article" />
+// // //   <meta property="og:site_name" content="Learn Math Class" />
+
+// // //   <meta name="twitter:card" content="summary" />
+// // //   <meta name="twitter:title" content={seoData.title} />
+// // //   <meta name="twitter:description" content={seoData.description} />
+
+// // //   <meta name="robots" content="index, follow" />
+
+// // //   <script
+// // //     type="application/ld+json"
+// // //     dangerouslySetInnerHTML={{
+// // //       __html: JSON.stringify({
+// // //         "@context": "https://schema.org",
+// // //         "@type": "WebPage",
+// // //         "name": seoData.name,
+// // //         "description": seoData.description,
+// // //         "keywords": seoData.keywords,
+// // //         "url": `https://www.learnmathclass.com${seoData.url}`,
+// // //         "dateModified": new Date().toISOString(),
+// // //         "inLanguage": "en-US",
+// // //         "mainEntity": {
+// // //           "@type": "Article",
+// // //           "name": seoData.name,
+// // //           "dateModified": new Date().toISOString(),
+// // //           "author": {
+// // //             "@type": "Organization",
+// // //             "name": "Learn Math Class"
+// // //           }
+// // //         }
+// // //       })
+// // //     }}
+// // //   />
+// // // </Head> */}
+
+// // // <Head>
+// // //   <title>{seoData.title}</title>
+// // //   <meta name="description" content={seoData.description} />
+// // //   <meta name="keywords" content={seoData.keywords} />
+// // //   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+
+// // //   <meta property="og:title" content={seoData.title} />
+// // //   <meta property="og:description" content={seoData.description} />
+// // //   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+// // //   <meta property="og:type" content="article" />
+// // //   <meta property="og:site_name" content="Learn Math Class" />
+
+// // //   <meta name="twitter:card" content="summary" />
+// // //   <meta name="twitter:title" content={seoData.title} />
+// // //   <meta name="twitter:description" content={seoData.description} />
+
+// // //   <meta name="robots" content="index, follow" />
+
+// // //   <script
+// // //     type="application/ld+json"
+// // //     dangerouslySetInnerHTML={{
+// // //       __html: JSON.stringify(schemas.learningResource)
+// // //     }}
+// // //   />
+
+// // //   <script
+// // //     type="application/ld+json"
+// // //     dangerouslySetInnerHTML={{
+// // //       __html: JSON.stringify(schemas.breadcrumb)
+// // //     }}
+// // //   />
+
+// // //   <script
+// // //     type="application/ld+json"
+// // //     dangerouslySetInnerHTML={{
+// // //       __html: JSON.stringify(schemas.faq)
+// // //     }}
+// // //   />
+// // // </Head>
+// // //    {/* <GenericNavbar/> */}
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //     <OperaSidebar
+// // //            side='right'
+// // //            // topOffset='65px'
+// // //            sidebarWidth='45px'
+// // //            panelWidth='200px'
+// // //            iconColor='white'
+// // //            panelBackgroundColor='#f2f2f2'
+// // //          />
+// // //    <Breadcrumb/>
+// // //    <br/>
+// // //    <br/>
+// // //    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Lower-Upper Decomposition</h1>
+// // //    <br/>
+// // //    <br/>
+// // //    <SectionTableOfContents sections={genericSections}
+// // //     showSecondaryNav={true}
+// // //          secondaryNavMode="siblings"  // or "children"
+// // //          secondaryNavTitle="More in this Section"
+
+// // //    />
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //     <IntroSection
+// // //           id={introContent.id}
+// // //           title={introContent.title}
+// // //           content={introContent.content}
+// // //            backgroundColor='#f9fafb'
+// // //           //  "#f2f2f2"
+// // //           textColor="#06357a"
+// // //         />
+// // //    <br/>
+// // //    <br/>
+// // //    <Sections sections={genericSections}/>
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //    {/* <ScrollUpButton/> */}
+// // //    </>
+// // //   )
+// // // }
+
+
 // // // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj10 comparison, obj11 summary capstone)
 // // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 // // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -12,6 +929,8 @@
 // // import Head from 'next/head'
 // // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 // // import { tableHeaders } from '@/app/styles/theme'
+// // import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
+// // import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 // // export async function getStaticProps(){
@@ -108,38 +1027,57 @@
 // // `
 
 // //   // obj11 — summary capstone: three tasks LU accelerates
-// //   const summaryTable = `
-// // <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-// //   <thead>
-// //     <tr>
-// //       <th style="${tableHeaders.summary}">Task</th>
-// //       <th style="${tableHeaders.summary}">Procedure once PA = LU is in hand</th>
-// //       <th style="${tableHeaders.summary}">Cost given LU</th>
-// //       <th style="${tableHeaders.summary}">Cost without LU (per task)</th>
-// //     </tr>
-// //   </thead>
-// //   <tbody>
-// //     <tr style="background: #f8f9fa;">
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#6" style="${linkStyle}">Solve Ax = b</a></td>
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward solve Ly = Pb, then back solve Ux = y</td>
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>2</sup></td>
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 (a full Gaussian elimination)</td>
-// //     </tr>
-// //     <tr>
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#7" style="${linkStyle}">Determinant det(A)</a></td>
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>s</sup> · u<sub>11</sub>u<sub>22</sub>···u<sub>nn</sub> (s = number of row swaps)</td>
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">O(n) — multiply the diagonal of U</td>
-// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 by elimination; O(n!) by cofactor expansion</td>
-// //     </tr>
-// //     <tr style="background: #f8f9fa;">
-// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="#8" style="${linkStyle}">Inverse A<sup>−1</sup></a></td>
-// //       <td style="padding: 12px 15px; color: #34495e;">solve Ax<sub>j</sub> = e<sub>j</sub> for j = 1, ..., n; columns assemble A<sup>−1</sup></td>
-// //       <td style="padding: 12px 15px; color: #34495e;">2n<sup>3</sup>/3 (factor) + 2n<sup>3</sup> (n solves) ≈ 8n<sup>3</sup>/3</td>
-// //       <td style="padding: 12px 15px; color: #34495e;">≈ 2n<sup>3</sup>/3 per column = 2n<sup>4</sup>/3 without re-use</td>
-// //     </tr>
-// //   </tbody>
-// // </table>
-// // `
+// //   // obj11 — what one factorization buys, split by whether it is reused
+// //   const luReadings = {
+// //     kicker: 'Decompositions \u00B7 LU',
+// //     title: 'What LU computes, and at what cost',
+// //     tallyLabel: 'tasks',
+// //     intro: 'The factorization costs $\\tfrac{2}{3}n^3$ once. Everything below reuses it, and the cost column is the reason the decomposition exists at all \u2014 each task afterwards is cheaper than redoing the elimination.',
+// //     footnote: 'The economics are the whole argument. One elimination at $\\tfrac{2}{3}n^3$, then $n^2$ per right-hand side \u2014 so ten systems sharing a matrix cost barely more than one. Compare recomputing from scratch each time, and the saving is a factor of $n$; compare [inverting](!/linear-algebra/matrix/inverse), and LU is three times cheaper and more accurate besides.',
+// //     groups: [
+// //       {
+// //         heading: 'The factorization itself',
+// //         identities: [
+// //           {
+// //             name: 'Compute PA = LU',
+// //             anchor: '#5',
+// //             formula: '$\\tfrac{2}{3}n^3$ flops',
+// //             condition: 'once per matrix',
+// //             key: true,
+// //             note: 'Gaussian elimination with the multipliers kept rather than discarded \u2014 $L$ holds what was subtracted, $U$ holds what remained, $P$ records the row swaps. The elimination was being done anyway; LU is the observation that its byproducts are worth storing.',
+// //           },
+// //         ],
+// //       },
+// //       {
+// //         heading: 'Reusing it \u2014 cost per use',
+// //         identities: [
+// //           {
+// //             name: 'Solve a system',
+// //             anchor: '#6',
+// //             formula: '$2n^2$ per right-hand side',
+// //             condition: 'forward solve $L\\mathbf{y} = P\\mathbf{b}$, then back solve $U\\mathbf{x} = \\mathbf{y}$',
+// //             key: true,
+// //             note: 'Two triangular solves, each $n^2$. The saving arrives on the second right-hand side: a fresh elimination would cost $\\tfrac{2}{3}n^3$ again, while reusing the factors costs $n^2$ \u2014 which is why LU is what a solver stores when the matrix is fixed and $\\mathbf{b}$ varies.',
+// //           },
+// //           {
+// //             name: 'Determinant',
+// //             anchor: '#7',
+// //             formula: '$\\det A = (-1)^{s} \\prod u_{ii}$',
+// //             condition: '$s$ = number of row swaps in $P$',
+// //             note: 'Multiply the diagonal of $U$ and correct the sign for the swaps \u2014 $O(n)$ once the factorization exists. Cofactor expansion is $O(n!)$ for the same number, which is the gap between a definition and a method.',
+// //           },
+// //           {
+// //             name: 'Inverse',
+// //             anchor: '#8',
+// //             formula: '$2n^3$ total',
+// //             condition: 'solve $A\\mathbf{x}_i = \\mathbf{e}_i$ for each $i$',
+// //             strict: true,
+// //             note: '$n$ solves at $2n^2$ each. Worth doing only when the inverse is genuinely wanted as an object \u2014 if the goal is solving systems, the triangular solves above are three times cheaper and numerically better behaved.',
+// //           },
+// //         ],
+// //       },
+// //     ],
+// //   }
 
 // // // const sectionsContent = {
 // // //   obj1: {
@@ -600,7 +1538,7 @@
 // //     introContent,
 // //     obj3Table,
 // //     obj10Table,
-// //     summaryTable,
+// //     luReadings,
 // //     faqQuestions,
 // //     schemas,
 // //     seoData: {
@@ -621,7 +1559,7 @@
 // //   introContent,
 // //   obj3Table,
 // //   obj10Table,
-// //   summaryTable,
+// //   luReadings,
 // //   faqQuestions,
 // //   schemas,
 // // }) {
@@ -720,8 +1658,17 @@
 // //         link:sectionsContent.obj11.link,
 // //         content:[
 // //           sectionsContent.obj11.content,
-// //           <div key={'summary-table'} style={tableWrapStyle}
-// //                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+// //           `The split below is between paying once and paying per use. The factorization is the expensive step and happens a single time; everything after it is a triangular solve or a product along a diagonal. Reading the cost column downward shows why the decomposition is stored rather than recomputed — the first row is cubic, the rest are quadratic or less.`,
+// //           <DiagramFrame
+// //             key={'obj11-diagram'}
+// //             id="lu-readings"
+// //             title="What LU computes, and at what cost"
+// //             source="/linear-algebra/decompositions/lower-upper"
+// //           >
+// //             <IdentitySheet data={luReadings} theme="navy" variant="ledger" />
+// //           </DiagramFrame>,
+// //           `The break-even point arrives immediately. Solving one system by elimination costs $\\tfrac{2}{3}n^3$ whether or not the factors are kept, so keeping them is free; the second right-hand side then costs $2n^2$ instead of another $\\tfrac{2}{3}n^3$. For a $1000 \\times 1000$ matrix that is two million operations against roughly seven hundred million — a factor of several hundred, on the same matrix, for a different $\\mathbf{b}$.`,
+// //           `The last row is the one to read as a warning. Computing $A^{-1}$ through LU is perfectly possible and rarely the right thing to do: it costs three times a single solve, and using the inverse afterwards is both slower and less accurate than the two triangular solves it replaced. The inverse is worth forming when it is the answer, not when it is a step toward one.`,
 // //         ]
 // //     },
 // //     // {
@@ -898,7 +1845,7 @@
 // //    <br/>
 // //     <IntroSection
 // //           id={introContent.id}
-// //           title={introContent.title}
+// //           title={introContent.title}Fident
 // //           content={introContent.content}
 // //            backgroundColor='#f9fafb'
 // //           //  "#f2f2f2"
@@ -907,6 +1854,8 @@
 // //    <br/>
 // //    <br/>
 // //    <Sections sections={genericSections}/>
+// //    <br/>
+// //    <br/>
 // //    <br/>
 // //    <br/>
 // //    <br/>
@@ -1845,7 +2794,7 @@
 //    <br/>
 //     <IntroSection
 //           id={introContent.id}
-//           title={introContent.title}Fident
+//           title={introContent.title}
 //           content={introContent.content}
 //            backgroundColor='#f9fafb'
 //           //  "#f2f2f2"
@@ -1857,12 +2806,11 @@
 //    <br/>
 //    <br/>
 //    <br/>
-//    <br/>
-//    <br/>
 //    {/* <ScrollUpButton/> */}
 //    </>
 //   )
 // }
+
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj10 comparison, obj11 summary capstone)
@@ -1879,6 +2827,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
+import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
@@ -1905,35 +2854,72 @@ const keyWords = [
   // ---------- TABLES ----------
 
   // obj3 — aggregation: structure of L vs U
-  const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Factor</th>
-      <th style="${tableHeaders.aggregation}">Diagonal</th>
-      <th style="${tableHeaders.aggregation}">Below diagonal</th>
-      <th style="${tableHeaders.aggregation}">Above diagonal</th>
-      <th style="${tableHeaders.aggregation}">Role</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">L (unit lower triangular)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all ones (not stored)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">elimination multipliers l<sub>ij</sub> = m<sub>ij</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">records how A was reduced</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">U (upper triangular)</td>
-      <td style="padding: 12px 15px; color: #34495e;">pivots (product = det A up to sign)</td>
-      <td style="padding: 12px 15px; color: #34495e;">zeros</td>
-      <td style="padding: 12px 15px; color: #34495e;">remaining echelon-form entries</td>
-      <td style="padding: 12px 15px; color: #34495e;">the row echelon form of A</td>
-    </tr>
-  </tbody>
-</table>
-`
+  // obj3 — what each factor holds, region by region
+  const luFactors = {
+    kicker: 'Decompositions \u00B7 LU',
+    title: 'What each factor holds',
+    tallyLabel: 'factors',
+    intro: 'Between them $L$ and $U$ store the whole elimination \u2014 $U$ is what was left, $L$ is what was done. Read region by region, neither factor wastes a position.',
+    footnote: 'The two triangles are complementary, so both fit in one $n \\times n$ array with nothing overlapping: $U$ on and above the diagonal, $L$ strictly below, and the unit diagonal of $L$ left implicit because it is known. Storing a factorization therefore costs no more memory than storing $A$ did.',
+    slots: [
+      { key: 'diagonal', label: 'on the diagonal' },
+      { key: 'below',    label: 'below it' },
+      { key: 'above',    label: 'above it' },
+    ],
+    groups: [
+      {
+        heading: 'What the elimination produced',
+        types: [
+          {
+            name: 'U \u2014 upper triangular',
+            anchor: '#3',
+            shape: 'upper',
+            condition: 'the echelon form of $A$',
+            properties: {
+              diagonal: 'the pivots \u2014 $\\prod u_{ii} = \\pm\\det A$',
+              below: 'zeros \u2014 what elimination removed',
+              above: 'the surviving entries',
+            },
+            note: 'Exactly the row echelon form, kept rather than discarded. The diagonal carries the [determinant](#7) up to the sign of the permutation, and a zero there is where the factorization without pivoting fails.',
+          },
+        ],
+      },
+      {
+        heading: 'What the elimination did',
+        types: [
+          {
+            name: 'L \u2014 unit lower triangular',
+            anchor: '#3',
+            shape: 'lower',
+            condition: 'the multipliers, in position',
+            properties: {
+              diagonal: 'all ones \u2014 not stored',
+              below: 'the multiplier $\\ell_{ij} = m_{ij}$',
+              above: 'zeros',
+            },
+            note: 'Each entry is the multiple of one row subtracted from another, filed at the position where the subtraction happened. The unit diagonal is a convention, not a result \u2014 it is what makes the factorization unique once $P$ is fixed.',
+          },
+        ],
+      },
+      {
+        heading: 'What the pivoting recorded',
+        types: [
+          {
+            name: 'P \u2014 permutation',
+            anchor: '#5',
+            shape: 'permutation',
+            condition: 'the row swaps, if any',
+            properties: {
+              diagonal: 'ones where no swap occurred',
+              below: 'a single one per row',
+              above: 'a single one per row',
+            },
+            note: 'Present only when [partial pivoting](#5) is used, which in practice is always. $\\det P = \\pm 1$ according to the parity of the swaps \u2014 the sign correction the determinant formula needs.',
+          },
+        ],
+      },
+    ],
+  }
 
   // obj10 — comparison: cost of direct solver methods
   const obj10Table = `
@@ -2485,7 +3471,7 @@ const schemas = {
   props:{
     sectionsContent,
     introContent,
-    obj3Table,
+    luFactors,
     obj10Table,
     luReadings,
     faqQuestions,
@@ -2506,7 +3492,7 @@ export default function LUDecompositionPage({
   seoData,
   sectionsContent,
   introContent,
-  obj3Table,
+  luFactors,
   obj10Table,
   luReadings,
   faqQuestions,
@@ -2538,8 +3524,15 @@ export default function LUDecompositionPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="lu-factors"
+            title="What each factor holds"
+            source="/linear-algebra/decompositions/lower-upper"
+          >
+            <ObjectTypeProfile data={luFactors} theme="navy" variant="grid" />
+          </DiagramFrame>,
+          `The two triangles occupy complementary regions, which is not a coincidence but the reason the factorization is cheap to store. $U$ owns the diagonal and everything above it; $L$ owns everything strictly below; and the unit diagonal of $L$ need not be written down because it is known in advance. Both factors therefore fit into the same $n \\times n$ array the original matrix occupied, with no position used twice and none left empty.`,
         ]
     },
     {

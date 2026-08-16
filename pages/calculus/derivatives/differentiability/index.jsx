@@ -11,6 +11,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -338,6 +339,44 @@ If the limit does not exist, or if it equals $\\pm\\infty$, or if $f(a)$ itself 
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Differentiability Notation`,
+    lead: `The one-sided derivative marks, the infinite-slope verdict, and what “differentiable on $[a,b]$” actually promises.`,
+    inherited: `The base $f'$ and the difference quotient — [the derivative function](!/calculus/derivatives/function#notation); the superscript directions on limits — [one-sided limits](!/calculus/limits/one-sided).`,
+    entries: [
+      {
+        id: 'one-sided-derivatives',
+        tex: `$f'_{-}(a)$ · $f'_{+}(a)$`,
+        read: `f prime minus at a; f prime plus at a`,
+        means: `Left- and right-hand derivatives — the difference quotient limited from one side, defined in **One-Sided Derivatives** below. Watch where the sign sits: *subscript on the prime*, not superscript on the point — here the direction belongs to the operation, not to $a$.`,
+        cases: `Differentiable at $a$ iff both exist, finite, and equal. Endpoints of $[a,b]$ get one apiece. Piecewise boundaries need two checks: continuity, then $f'_{-} = f'_{+}$.`,
+        alsoWritten: `$f'(a^{-})$, $f'(a^{+})$ — the superscript variant, riskier because of the collision below.`,
+        confusedWith: `$\\lim_{x \\to a^{+}} f'(x)$ — the one-sided limit *of the derivative*, a different object. For $x^2\\sin(1/x)$ at $0$ the right-hand derivative exists (it is $0$) while the limit of $f'$ does not — see [Continuity of the Derivative](!/calculus/derivatives/function#7).`,
+      },
+      {
+        id: 'infinite-derivative',
+        tex: `$f'(a) = \\pm\\infty$`,
+        read: `The derivative is infinite`,
+        means: `The equals-sign abuse imported from [infinite limits](!/calculus/limits/infinity#notation): a verdict, not a value. Differentiability demands a *finite* limit, so this equation announces failure — but the cleanest kind, a vertical tangent.`,
+        cases: `Both sides infinite, same sign — vertical tangent, **Vertical Tangents** below. Opposite signs — cusp. Finite but unequal — corner: no infinity involved, the failure is disagreement.`,
+        alsoWritten: `$|f'(x)| \\to \\infty$ as $x \\to a$ — the form careful texts use to avoid the abuse.`,
+        confusedWith: `A derivative that “exists and is infinite”. In the definition, existence *means* finite — $= \\infty$ is one of the ways existence fails, not a value of it.`,
+      },
+      {
+        id: 'differentiable-on-interval',
+        tex: `$f$ differentiable on $[a,b]$`,
+        read: `f is differentiable on the closed interval from a to b`,
+        means: `A convention, not just a quantifier: two-sided derivatives throughout $(a,b)$, plus $f'_{+}(a)$ and $f'_{-}(b)$ at the ends — mirroring [continuity on a closed interval](!/calculus/limits/continuity#notation).`,
+        cases: `Open $(a,b)$ — two-sided everywhere, no endpoint clause. The closed-interval convention is what lets Rolle and the Mean Value Theorem state their hypotheses on $[a,b]$ at all.`,
+        alsoWritten: `$f \\in C^1[a,b]$ when $f'$ is moreover continuous — one rung up the [smoothness ladder](!/calculus/derivatives/higher-order#9).`,
+        confusedWith: `Two-sided differentiability at every point of $[a,b]$ — impossible at the endpoints, where one side of the quotient has nothing to stand on.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/derivatives`,
+    parentLabel: `Derivatives`,
+  },
   obj2: {
     title: `Differentiability Implies Continuity`,
     content: `
@@ -655,6 +694,25 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         ]
     },
     {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
+    {
         id:'2',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
@@ -821,7 +879,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
   variant="light"
 />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

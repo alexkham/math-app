@@ -1,6 +1,944 @@
 
 
 
+// // // tables-optimized: v4 | 2026-05-20 | 4 tables (obj5 comparison, obj8 aggregation, obj9 aggregation, obj10 summary capstone)
+
+// // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// // import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// // import Sections from '@/app/components/page-components/section/Sections'
+// // import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// // import '../../../pages.css'
+// // import Head from 'next/head'
+// // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// // import { tableHeaders } from '@/app/styles/theme'
+
+
+// // export async function getStaticProps(){
+// // const keyWords = [
+// //   'matrix rank',
+// //   'rank of a matrix',
+// //   'how to find matrix rank',
+// //   'column rank row rank',
+// //   'rank nullity theorem',
+// //   'full rank matrix',
+// //   'rank deficient matrix',
+// //   'rank and linear systems',
+// //   'rank row reduction',
+// //   'matrix rank properties',
+// //   'four fundamental subspaces',
+// //   'rank and invertibility',
+// //   'Sylvester rank inequality',
+// //   'rank special matrices',
+// //   'column space dimension'
+// // ]
+
+// //   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// //   // ---------- TABLES ----------
+
+// //   // obj5 — comparison/decision: three outcomes of Ax = b
+// //   const obj5Table = `
+// // <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// //   <thead>
+// //     <tr>
+// //       <th style="${tableHeaders.comparison}">Outcome</th>
+// //       <th style="${tableHeaders.comparison}">Rank condition</th>
+// //       <th style="${tableHeaders.comparison}">Number of solutions</th>
+// //     </tr>
+// //   </thead>
+// //   <tbody>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inconsistent</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) &lt; rank([A | b])</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 (no solution)</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Unique solution</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) = rank([A | b]) = n</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly 1</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Infinite solutions</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">rank(A) = rank([A | b]) &lt; n; &nbsp;n − rank(A) free variables</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">∞ (parametrized family)</td>
+// //     </tr>
+// //   </tbody>
+// // </table>
+// // `
+
+// //   // obj8 — aggregation: rank of special matrices
+// //   const obj8Table = `
+// // <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// //   <thead>
+// //     <tr>
+// //       <th style="${tableHeaders.aggregation}">Matrix</th>
+// //       <th style="${tableHeaders.aggregation}">Structure</th>
+// //       <th style="${tableHeaders.aggregation}">Rank</th>
+// //     </tr>
+// //   </thead>
+// //   <tbody>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity Iₙ</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns are the standard basis of ℝⁿ</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">Diagonal</a> diag(d₁,…,dₙ)</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero entries only on the main diagonal</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank-1 outer product</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A = uvᵀ with u, v nonzero</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric positive definite</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xᵀAx &gt; 0 for every nonzero x</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Nilpotent (n &gt; 1)</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Aᵏ = O for some k ≥ 1</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">strictly less than n</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Gram matrix AᵀA</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">A is any m × n matrix</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">rank(A)</td>
+// //     </tr>
+// //   </tbody>
+// // </table>
+// // `
+
+// //   // obj9 — aggregation: four fundamental subspaces
+// //   const obj9Table = `
+// // <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// //   <thead>
+// //     <tr>
+// //       <th style="${tableHeaders.aggregation}">Subspace</th>
+// //       <th style="${tableHeaders.aggregation}">Lives in</th>
+// //       <th style="${tableHeaders.aggregation}">Description</th>
+// //       <th style="${tableHeaders.aggregation}">Dimension</th>
+// //     </tr>
+// //   </thead>
+// //   <tbody>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column space of A</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝᵐ</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the columns of A</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A)</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row space of A</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the rows of A</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A)</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space of A</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{x : Ax = 0}; <a href="/linear-algebra/orthogonality" style="${linkStyle}">orthogonal</a> complement of the row space</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n − rank(A)</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Left null space of A</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">ℝᵐ</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">{y : Aᵀy = 0}; orthogonal complement of the column space</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">m − rank(A)</td>
+// //     </tr>
+// //   </tbody>
+// // </table>
+// // `
+
+// //   // obj10 — summary capstone: what rank governs
+// //   const summaryTable = `
+// // <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// //   <thead>
+// //     <tr>
+// //       <th style="${tableHeaders.summary}">Aspect of A</th>
+// //       <th style="${tableHeaders.summary}">What rank(A) = r determines</th>
+// //       <th style="${tableHeaders.summary}">Reference</th>
+// //     </tr>
+// //   </thead>
+// //   <tbody>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Effective dimensionality</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r truly independent rows (= r independent columns); min(m, n) − r redundant directions</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column rank = row rank</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column &amp; row space dimension</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim(col(A)) = dim(row(A)) = r</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">four fundamental subspaces</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space dimension</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nullity(A) = n − r</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank-nullity theorem</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Solvability of Ax = b</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">consistent iff rank(A) = rank([A | b]); unique iff r = n; infinite iff r &lt; n</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">three outcomes</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/inverse" style="${linkStyle}">Invertibility</a> (square A)</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A invertible iff r = n; equivalently <a href="/linear-algebra/determinants" style="${linkStyle}">det</a>(A) ≠ 0</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">full rank condition</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/transformations" style="${linkStyle}">Linear transformation</a> T(x) = Ax</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">dim(image(T)) = r; dim(kernel(T)) = n − r</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">dimension theorem</td>
+// //     </tr>
+// //   </tbody>
+// // </table>
+// // `
+
+// //   // ---------- SECTIONS (original prose preserved verbatim) ----------
+
+// // // const sectionsContent = {
+// // //   obj1: {
+// // //     title: `What Rank Measures`,
+// // //     content: `The rank of an $m \\times n$ matrix $A$ is a single non-negative integer $r$ that captures how much of the matrix's potential dimensionality is actually used. It satisfies
+
+// // // $$0 \\leq \\text{rank}(A) \\leq \\min(m, n)$$
+
+// // // When $\\text{rank}(A) = \\min(m, n)$, the matrix has full rank — every row and every column contributes something that no combination of the others can reproduce. When $\\text{rank}(A) < \\min(m, n)$, the matrix is rank-deficient, meaning at least one row or column is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others.
+
+// // // A $5 \\times 3$ matrix with rank $3$ uses all three of its column directions. A $5 \\times 3$ matrix with rank $2$ has one column that is redundant — it lies in the [span](!/linear-algebra/vector-spaces/span) of the other two. The rank does not say which column is redundant (often more than one subset works), only that the effective column count is $2$.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj2: {
+// // //     title: `Column Rank and Row Rank`,
+// // //     content: `The column rank of $A$ is the dimension of its column space — the subspace of $\\mathbb{R}^m$ spanned by the columns of $A$. It counts the maximum number of [linearly independent](!/linear-algebra/vector-spaces/linear-independence) columns.
+
+// // // The row rank is the dimension of the row space — the subspace of $\\mathbb{R}^n$ spanned by the rows. It counts the maximum number of linearly independent rows.
+
+// // // A fundamental theorem states that these two numbers are always equal:
+
+// // // $$\\text{column rank of } A = \\text{row rank of } A$$
+
+// // // This common value is called the rank of $A$, written $\\text{rank}(A)$ or $\\text{rk}(A)$.
+
+// // // The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: elementary row operations do not change the row space, and in [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj3: {
+// // //     title: `Computing Rank via Row Reduction`,
+// // //     content: `The standard method for finding the rank of a matrix is to reduce it to row echelon form and count the pivot positions.
+
+// // // ## Worked Example
+
+// // // $$A = \\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 2 & 4 & 1 & 0 & 5 \\\\ -1 & -2 & 3 & 4 & 1 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$
+
+// // // Subtract $2$ times row $1$ from row $2$, and add row $1$ to row $3$:
+
+// // // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 3 & 3 & 4 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$
+
+// // // Subtract $3$ times row $2$ from row $3$, and subtract $2$ times row $2$ from row $4$:
+
+// // // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -3 & 7 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$
+
+// // // Subtract $3$ times row $4$ from row $3$:
+
+// // // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & 0 & 4 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$
+
+// // // Swap rows $3$ and $4$ to place the pivot:
+
+// // // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -1 & 1 \\\\ 0 & 0 & 0 & 0 & 4 \\end{pmatrix}$$
+
+// // // There are four pivots, in columns $1$, $3$, $4$, and $5$. So $\\text{rank}(A) = 4$. Column $2$ is the only non-pivot column, corresponding to the single free variable if this matrix were the coefficient matrix of a system.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj4: {
+// // //     title: `Rank and Dimension`,
+// // //     content: `For an $m \\times n$ matrix $A$, the rank can be at most $\\min(m, n)$. Whether it reaches this maximum depends on the matrix's entries, not just its shape.
+
+// // // Full column rank means $\\text{rank}(A) = n$ — all $n$ columns are independent. When $A$ has full column rank, the system $Ax = \\mathbf{b}$ has at most one solution for any $\\mathbf{b}$, because no free variables exist. The null space is $\\{\\mathbf{0}\\}$.
+
+// // // Full row rank means $\\text{rank}(A) = m$ — all $m$ rows are independent. When $A$ has full row rank, the system $Ax = \\mathbf{b}$ has at least one solution for every $\\mathbf{b}$, because the column space is all of $\\mathbb{R}^m$.
+
+// // // When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simultaneously: the system has exactly one solution for every right-hand side, and $A$ is [invertible](!/linear-algebra/matrix/inverse).`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj5: {
+// // //     title: `Rank and Linear Systems`,
+// // //     content: `The solvability of a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ is determined entirely by comparing the rank of the coefficient matrix $A$ with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$.
+
+// // // A solution exists if and only if $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$. This condition means that $\\mathbf{b}$ lies in the column space of $A$ — it can be expressed as a linear combination of the columns.
+
+// // // When solutions exist, uniqueness depends on whether the rank equals the number of unknowns $n$. If $\\text{rank}(A) = n$, there are no free variables and the solution is unique. If $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables, and the solution set is an infinite family parametrized by those free variables.
+
+// // // The three possible outcomes are: $\\text{rank}(A) < \\text{rank}([A \\mid \\mathbf{b}])$ means the system is inconsistent and has no solution. $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = n$ means there is exactly one solution. $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) < n$ means there are infinitely many solutions.
+
+// // // There is no scenario with a finite number of solutions greater than one. A linear system either has zero, one, or infinitely many solutions.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj6: {
+// // //     title: `The Rank-Nullity Theorem`,
+// // //     content: `For an $m \\times n$ matrix $A$, the rank and the nullity — the dimension of the null space $\\{\\mathbf{x} : A\\mathbf{x} = \\mathbf{0}\\}$ — satisfy
+
+// // // $$\\text{rank}(A) + \\text{nullity}(A) = n$$
+
+// // // The $n$ columns of $A$ partition into two groups: the pivot columns, which contribute to the column space and drive the rank, and the free columns, which contribute to the null space and drive the nullity. Every column does exactly one of these things.
+
+// // // For a $3 \\times 5$ matrix with rank $2$, the nullity is $3$. The column space is a two-dimensional subspace of $\\mathbb{R}^3$ (a plane through the origin), and the null space is a three-dimensional subspace of $\\mathbb{R}^5$.
+
+// // // For a square $n \\times n$ matrix, the theorem says $\\text{rank}(A) + \\text{nullity}(A) = n$. If the rank is $n$ (full rank), the nullity is $0$ — the null space contains only $\\mathbf{0}$, and $A$ is invertible. If the rank is less than $n$, the null space is nontrivial, the [determinant](!/linear-algebra/determinants) is zero, and $A$ is singular.
+
+// // // The rank-nullity theorem is sometimes called the dimension theorem for linear maps. If $A$ defines a [linear transformation](!/linear-algebra/transformations) $T: \\mathbb{R}^n \\to \\mathbb{R}^m$, then the rank is the dimension of the image (range) of $T$, and the nullity is the dimension of the kernel. Their sum equals the dimension of the domain.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj7: {
+// // //     title: `Properties of Rank`,
+// // //     content: `The rank function obeys several inequalities and identities that constrain how matrix operations affect it.
+
+// // // The rank of the zero matrix is $0$, and this is the only matrix with rank zero. For any nonzero scalar $c$, $\\text{rank}(cA) = \\text{rank}(A)$ — scaling does not create or destroy independence.
+
+// // // Transposition preserves rank: $\\text{rank}(A^T) = \\text{rank}(A)$. This is a restatement of the equality of row rank and column rank.
+
+// // // The rank of a product can only decrease:
+
+// // // $$\\text{rank}(AB) \\leq \\min(\\text{rank}(A), \\text{rank}(B))$$
+
+// // // Multiplying by a matrix can collapse dimensions but cannot create new independent directions. There is also a lower bound due to Sylvester's inequality:
+
+// // // $$\\text{rank}(A) + \\text{rank}(B) - n \\leq \\text{rank}(AB)$$
+
+// // // for $A$ of size $m \\times n$ and $B$ of size $n \\times p$. This says the rank of the product cannot drop too far below the ranks of the factors.
+
+// // // The rank of a sum satisfies $\\text{rank}(A + B) \\leq \\text{rank}(A) + \\text{rank}(B)$. Equality holds when the column spaces of $A$ and $B$ are disjoint (intersect only at $\\mathbf{0}$).
+
+// // // Multiplying by an invertible matrix preserves rank exactly: if $P$ and $Q$ are invertible, then $\\text{rank}(PAQ) = \\text{rank}(A)$. This is because invertible matrices neither collapse nor create dimensions.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj8: {
+// // //     title: `Rank of Special Matrices`,
+// // //     content: `Several [matrix types](!/linear-algebra/matrix/types) have rank that can be read off directly from their structure.
+
+// // // The identity matrix $I_n$ has rank $n$ — all columns are standard basis vectors, which are linearly independent. Every invertible matrix has full rank by definition.
+
+// // // A [diagonal](!/linear-algebra/matrix/types) matrix has rank equal to the number of nonzero diagonal entries. The zero entries correspond to collapsed coordinate directions.
+
+// // // A rank-$1$ matrix has the form $A = \\mathbf{u}\\mathbf{v}^T$, an outer product of two nonzero vectors. Every column of $A$ is a scalar multiple of $\\mathbf{u}$, so the column space is the one-dimensional line through $\\mathbf{u}$. Equivalently, every row is a scalar multiple of $\\mathbf{v}^T$. Rank-$1$ matrices are the building blocks of the outer product decomposition of matrix multiplication.
+
+// // // A [symmetric](!/linear-algebra/matrix/types) positive definite matrix always has full rank — all its eigenvalues are strictly positive, so no dimension is collapsed. A [nilpotent](!/linear-algebra/matrix/types) matrix of order $n > 1$ always has rank strictly less than $n$, since its determinant is zero.
+
+// // // The rank of $A^T A$ equals the rank of $A$. This follows from the fact that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj9: {
+// // //     title: `Rank and the Four Fundamental Subspaces`,
+// // //     content: `Every $m \\times n$ matrix $A$ gives rise to four [subspaces](!/linear-algebra/vector-spaces/fundamental-spaces), and the rank governs all of their dimensions.
+
+// // // The column space of $A$ is the span of the columns, a subspace of $\\mathbb{R}^m$ with dimension equal to $\\text{rank}(A)$. The row space of $A$ is the span of the rows, a subspace of $\\mathbb{R}^n$ also with dimension $\\text{rank}(A)$. The null space of $A$ consists of all solutions to $A\\mathbf{x} = \\mathbf{0}$, a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The left null space consists of all solutions to $A^T\\mathbf{y} = \\mathbf{0}$, a subspace of $\\mathbb{R}^m$ with dimension $m - \\text{rank}(A)$.
+
+// // // These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements. In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements: every vector in $\\mathbb{R}^n$ can be uniquely decomposed into a row-space component and a null-space component, and the two are perpendicular. In $\\mathbb{R}^m$, the column space and the left null space form the analogous pair.
+
+// // // The four dimensions add up correctly on both sides: $\\text{rank}(A) + (n - \\text{rank}(A)) = n$ in $\\mathbb{R}^n$, and $\\text{rank}(A) + (m - \\text{rank}(A)) = m$ in $\\mathbb{R}^m$. The rank is the single number that controls the entire structural decomposition.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // //   obj10: {
+// // //     title: `What Rank Governs`,
+// // //     content: `The rank shows up in nearly every structural fact about a matrix — solvability of systems, invertibility, the dimensions of the four fundamental subspaces, the image of the associated linear transformation. The table below collects these roles in one place: each row pairs an aspect of the matrix with what the single integer $r = \\text{rank}(A)$ pins down.`,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: ``,
+// // //   },
+// // // }
+
+
+// // // formulas-injected: v1 | 2026-06-16 | 8 callouts (obj1 rank_bounds direct, obj7 rank_of_transpose inline-promote + rank_product_inequality direct + sylvester_rank_inequality direct + rank_sum_inequality inline-promote + rank_invariance_invertible inline-promote, obj8 gram_rank_identity prose-insert + rank_one_outer_product inline-promote)
+
+// // const sectionsContent = {
+// //   obj1: {
+// //     title: `What Rank Measures`,
+// //     content: `The rank of an $m \\times n$ matrix $A$ is a single non-negative integer $r$ that captures how much of the matrix's potential dimensionality is actually used. It satisfies
+
+// // @academic[formula_callout:rank_bounds|Rank Bounds|$$0 \\leq \\text{rank}(A) \\leq \\min(m, n)$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#rank_bounds]@
+
+// // When $\\text{rank}(A) = \\min(m, n)$, the matrix has full rank — every row and every column contributes something that no combination of the others can reproduce. When $\\text{rank}(A) < \\min(m, n)$, the matrix is rank-deficient, meaning at least one row or column is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others.
+
+// // A $5 \\times 3$ matrix with rank $3$ uses all three of its column directions. A $5 \\times 3$ matrix with rank $2$ has one column that is redundant — it lies in the [span](!/linear-algebra/vector-spaces/span) of the other two. The rank does not say which column is redundant (often more than one subset works), only that the effective column count is $2$.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj2: {
+// //     title: `Column Rank and Row Rank`,
+// //     content: `The column rank of $A$ is the dimension of its column space — the subspace of $\\mathbb{R}^m$ spanned by the columns of $A$. It counts the maximum number of [linearly independent](!/linear-algebra/vector-spaces/linear-independence) columns.
+
+// // The row rank is the dimension of the row space — the subspace of $\\mathbb{R}^n$ spanned by the rows. It counts the maximum number of linearly independent rows.
+
+// // A fundamental theorem states that these two numbers are always equal:
+
+// // $$\\text{column rank of } A = \\text{row rank of } A$$
+
+// // This common value is called the rank of $A$, written $\\text{rank}(A)$ or $\\text{rk}(A)$.
+
+// // The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: elementary row operations do not change the row space, and in [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj3: {
+// //     title: `Computing Rank via Row Reduction`,
+// //     content: `The standard method for finding the rank of a matrix is to reduce it to row echelon form and count the pivot positions.
+
+// // ## Worked Example
+
+// // $$A = \\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 2 & 4 & 1 & 0 & 5 \\\\ -1 & -2 & 3 & 4 & 1 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$
+
+// // Subtract $2$ times row $1$ from row $2$, and add row $1$ to row $3$:
+
+// // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 3 & 3 & 4 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$
+
+// // Subtract $3$ times row $2$ from row $3$, and subtract $2$ times row $2$ from row $4$:
+
+// // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -3 & 7 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$
+
+// // Subtract $3$ times row $4$ from row $3$:
+
+// // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & 0 & 4 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$
+
+// // Swap rows $3$ and $4$ to place the pivot:
+
+// // $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -1 & 1 \\\\ 0 & 0 & 0 & 0 & 4 \\end{pmatrix}$$
+
+// // There are four pivots, in columns $1$, $3$, $4$, and $5$. So $\\text{rank}(A) = 4$. Column $2$ is the only non-pivot column, corresponding to the single free variable if this matrix were the coefficient matrix of a system.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj4: {
+// //     title: `Rank and Dimension`,
+// //     content: `For an $m \\times n$ matrix $A$, the rank can be at most $\\min(m, n)$. Whether it reaches this maximum depends on the matrix's entries, not just its shape.
+
+// // Full column rank means $\\text{rank}(A) = n$ — all $n$ columns are independent. When $A$ has full column rank, the system $Ax = \\mathbf{b}$ has at most one solution for any $\\mathbf{b}$, because no free variables exist. The null space is $\\{\\mathbf{0}\\}$.
+
+// // Full row rank means $\\text{rank}(A) = m$ — all $m$ rows are independent. When $A$ has full row rank, the system $Ax = \\mathbf{b}$ has at least one solution for every $\\mathbf{b}$, because the column space is all of $\\mathbb{R}^m$.
+
+// // When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simultaneously: the system has exactly one solution for every right-hand side, and $A$ is [invertible](!/linear-algebra/matrix/inverse).`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj5: {
+// //     title: `Rank and Linear Systems`,
+// //     content: `The solvability of a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ is determined entirely by comparing the rank of the coefficient matrix $A$ with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$.
+
+// // A solution exists if and only if $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$. This condition means that $\\mathbf{b}$ lies in the column space of $A$ — it can be expressed as a linear combination of the columns.
+
+// // When solutions exist, uniqueness depends on whether the rank equals the number of unknowns $n$. If $\\text{rank}(A) = n$, there are no free variables and the solution is unique. If $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables, and the solution set is an infinite family parametrized by those free variables.
+
+// // The three possible outcomes are: $\\text{rank}(A) < \\text{rank}([A \\mid \\mathbf{b}])$ means the system is inconsistent and has no solution. $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = n$ means there is exactly one solution. $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) < n$ means there are infinitely many solutions.
+
+// // There is no scenario with a finite number of solutions greater than one. A linear system either has zero, one, or infinitely many solutions.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj6: {
+// //     title: `The Rank-Nullity Theorem`,
+// //     content: `For an $m \\times n$ matrix $A$, the rank and the nullity — the dimension of the null space $\\{\\mathbf{x} : A\\mathbf{x} = \\mathbf{0}\\}$ — satisfy
+
+// // $$\\text{rank}(A) + \\text{nullity}(A) = n$$
+
+// // The $n$ columns of $A$ partition into two groups: the pivot columns, which contribute to the column space and drive the rank, and the free columns, which contribute to the null space and drive the nullity. Every column does exactly one of these things.
+
+// // For a $3 \\times 5$ matrix with rank $2$, the nullity is $3$. The column space is a two-dimensional subspace of $\\mathbb{R}^3$ (a plane through the origin), and the null space is a three-dimensional subspace of $\\mathbb{R}^5$.
+
+// // For a square $n \\times n$ matrix, the theorem says $\\text{rank}(A) + \\text{nullity}(A) = n$. If the rank is $n$ (full rank), the nullity is $0$ — the null space contains only $\\mathbf{0}$, and $A$ is invertible. If the rank is less than $n$, the null space is nontrivial, the [determinant](!/linear-algebra/determinants) is zero, and $A$ is singular.
+
+// // The rank-nullity theorem is sometimes called the dimension theorem for linear maps. If $A$ defines a [linear transformation](!/linear-algebra/transformations) $T: \\mathbb{R}^n \\to \\mathbb{R}^m$, then the rank is the dimension of the image (range) of $T$, and the nullity is the dimension of the kernel. Their sum equals the dimension of the domain.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj7: {
+// //     title: `Properties of Rank`,
+// //     content: `The rank function obeys several inequalities and identities that constrain how matrix operations affect it.
+
+// // The rank of the zero matrix is $0$, and this is the only matrix with rank zero. For any nonzero scalar $c$, $\\text{rank}(cA) = \\text{rank}(A)$ — scaling does not create or destroy independence.
+
+// // Transposition preserves rank:
+
+// // @academic[formula_callout:rank_of_transpose|Rank of Transpose|$$\\text{rank}(A^T) = \\text{rank}(A)$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#rank_of_transpose]@
+
+// // This is a restatement of the equality of row rank and column rank.
+
+// // The rank of a product can only decrease:
+
+// // @academic[formula_callout:rank_product_inequality|Rank Product Inequality|$$\\text{rank}(AB) \\leq \\min(\\text{rank}(A), \\text{rank}(B))$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#rank_product_inequality]@
+
+// // Multiplying by a matrix can collapse dimensions but cannot create new independent directions. There is also a lower bound due to Sylvester's inequality:
+
+// // @academic[formula_callout:sylvester_rank_inequality|Sylvester Rank Inequality|$$\\text{rank}(A) + \\text{rank}(B) - n \\leq \\text{rank}(AB)$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#sylvester_rank_inequality]@
+
+// // for $A$ of size $m \\times n$ and $B$ of size $n \\times p$. This says the rank of the product cannot drop too far below the ranks of the factors.
+
+// // The rank of a sum is bounded by the sum of the ranks:
+
+// // @academic[formula_callout:rank_sum_inequality|Rank Sum Inequality|$$\\text{rank}(A + B) \\leq \\text{rank}(A) + \\text{rank}(B)$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#rank_sum_inequality]@
+
+// // Equality holds when the column spaces of $A$ and $B$ are disjoint (intersect only at $\\mathbf{0}$).
+
+// // Multiplying by an invertible matrix preserves rank exactly:
+
+// // @academic[formula_callout:rank_invariance_invertible|Rank Invariance Invertible|$$\\text{rank}(PAQ) = \\text{rank}(A)$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#rank_invariance_invertible]@
+
+// // for invertible $P$ and $Q$. This is because invertible matrices neither collapse nor create dimensions.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj8: {
+// //     title: `Rank of Special Matrices`,
+// //     content: `Several [matrix types](!/linear-algebra/matrix/types) have rank that can be read off directly from their structure.
+
+// // The identity matrix $I_n$ has rank $n$ — all columns are standard basis vectors, which are linearly independent. Every invertible matrix has full rank by definition.
+
+// // A [diagonal](!/linear-algebra/matrix/types) matrix has rank equal to the number of nonzero diagonal entries. The zero entries correspond to collapsed coordinate directions.
+
+// // A rank-$1$ matrix has the form of an outer product of two nonzero vectors:
+
+// // @academic[formula_callout:rank_one_outer_product|Rank-One Outer Product|$$A = \\mathbf{u}\\mathbf{v}^T, \\quad \\text{rank}(A) = 1$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#rank_one_outer_product]@
+
+// // Every column of $A$ is a scalar multiple of $\\mathbf{u}$, so the column space is the one-dimensional line through $\\mathbf{u}$. Equivalently, every row is a scalar multiple of $\\mathbf{v}^T$. Rank-$1$ matrices are the building blocks of the outer product decomposition of matrix multiplication.
+
+// // A [symmetric](!/linear-algebra/matrix/types) positive definite matrix always has full rank — all its eigenvalues are strictly positive, so no dimension is collapsed. A [nilpotent](!/linear-algebra/matrix/types) matrix of order $n > 1$ always has rank strictly less than $n$, since its determinant is zero.
+
+// // The rank of $A^T A$ equals the rank of $A$:
+
+// // @academic[formula_callout:gram_rank_identity|Gram Rank Identity|$$\\text{rank}(A^T A) = \\text{rank}(A)$$]@
+// // @academic[formulas_link:/linear-algebra/formulas#gram_rank_identity]@
+
+// // This follows from the fact that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj9: {
+// //     title: `Rank and the Four Fundamental Subspaces`,
+// //     content: `Every $m \\times n$ matrix $A$ gives rise to four [subspaces](!/linear-algebra/vector-spaces/fundamental-spaces), and the rank governs all of their dimensions.
+
+// // The column space of $A$ is the span of the columns, a subspace of $\\mathbb{R}^m$ with dimension equal to $\\text{rank}(A)$. The row space of $A$ is the span of the rows, a subspace of $\\mathbb{R}^n$ also with dimension $\\text{rank}(A)$. The null space of $A$ consists of all solutions to $A\\mathbf{x} = \\mathbf{0}$, a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The left null space consists of all solutions to $A^T\\mathbf{y} = \\mathbf{0}$, a subspace of $\\mathbb{R}^m$ with dimension $m - \\text{rank}(A)$.
+
+// // These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements. In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements: every vector in $\\mathbb{R}^n$ can be uniquely decomposed into a row-space component and a null-space component, and the two are perpendicular. In $\\mathbb{R}^m$, the column space and the left null space form the analogous pair.
+
+// // The four dimensions add up correctly on both sides: $\\text{rank}(A) + (n - \\text{rank}(A)) = n$ in $\\mathbb{R}^n$, and $\\text{rank}(A) + (m - \\text{rank}(A)) = m$ in $\\mathbb{R}^m$. The rank is the single number that controls the entire structural decomposition.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// //   obj10: {
+// //     title: `What Rank Governs`,
+// //     content: `The rank shows up in nearly every structural fact about a matrix — solvability of systems, invertibility, the dimensions of the four fundamental subspaces, the image of the associated linear transformation. The table below collects these roles in one place: each row pairs an aspect of the matrix with what the single integer $r = \\text{rank}(A)$ pins down.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: ``,
+// //   },
+// // }
+
+
+// // const introContent = {
+// //     id: "intro",
+// //   title: `Measuring the Effective Size of a Matrix`,
+// //   content: `A matrix may have many rows and columns, but some of them may carry redundant information — expressible as combinations of others. The rank strips away this redundancy and counts the number of truly independent directions the matrix uses, revealing its effective dimensionality and governing the solvability of every linear system it defines.`,
+// // }
+
+
+
+// // const faqQuestions = {
+// //   obj1: {
+// //     question: "What is the rank of a matrix?",
+// //     answer: "The rank of a matrix is the number of linearly independent rows, which always equals the number of linearly independent columns. It measures the effective dimensionality of the matrix and satisfies 0 ≤ rank(A) ≤ min(m, n) for an m × n matrix. A matrix with rank equal to min(m, n) is said to have full rank.",
+// //     sectionId: "1"
+// //   },
+// //   obj2: {
+// //     question: "How do you find the rank of a matrix?",
+// //     answer: "Reduce the matrix to row echelon form using elementary row operations and count the number of pivot positions. Each pivot corresponds to one independent row and one independent column. The number of pivots is the rank.",
+// //     sectionId: "3"
+// //   },
+// //   obj3: {
+// //     question: "What is the rank-nullity theorem?",
+// //     answer: "For an m × n matrix A, the rank plus the nullity equals n, the number of columns. The rank counts the pivot columns (dimensions in the column space) and the nullity counts the free columns (dimensions in the null space). Every column contributes to exactly one of these two counts.",
+// //     sectionId: "6"
+// //   },
+// //   obj4: {
+// //     question: "How does rank determine the solutions of a linear system?",
+// //     answer: "A system Ax = b has a solution if and only if rank(A) equals rank([A|b]). When solutions exist, the system has a unique solution if rank(A) equals the number of unknowns, and infinitely many solutions if the rank is less. A linear system can never have exactly two or any other finite number greater than one.",
+// //     sectionId: "5"
+// //   },
+// //   obj5: {
+// //     question: "What are the four fundamental subspaces of a matrix?",
+// //     answer: "Every m × n matrix defines four subspaces: the column space and left null space in Rᵐ, and the row space and null space in Rⁿ. The rank determines all four dimensions — the column space and row space both have dimension equal to the rank, while the null space has dimension n − rank and the left null space has dimension m − rank.",
+// //     sectionId: "9"
+// //   }
+// // }
+
+
+// // const schemas = {
+// //   learningResource: {
+// //     "@context": "https://schema.org",
+// //     "@type": "LearningResource",
+// //     "name": "Rank of a Matrix",
+// //     "description": "Learn matrix rank — how to compute it by row reduction, the rank-nullity theorem, rank conditions for linear systems, properties of rank, and the four fundamental subspaces.",
+// //     "url": "https://www.learnmathclass.com/linear-algebra/matrix/rank",
+// //     "inLanguage": "en-US",
+// //     "learningResourceType": "Explanation",
+// //     "educationalLevel": "High School, College",
+// //     "educationalUse": "Learning",
+// //     "audience": {
+// //       "@type": "EducationalAudience",
+// //       "educationalRole": "student"
+// //     },
+// //     "about": {
+// //       "@type": "Thing",
+// //       "name": "Matrix Rank"
+// //     },
+// //     "teaches": [
+// //       "Definition of rank and the equality of column rank and row rank",
+// //       "Computing rank via row reduction and pivot counting",
+// //       "Full rank, rank deficiency, and their implications",
+// //       "The rank-nullity theorem and dimension counting",
+// //       "Rank conditions for solvability of linear systems",
+// //       "The four fundamental subspaces and their dimensions"
+// //     ],
+// //     "keywords": keyWords.join(", "),
+// //     "author": {
+// //       "@type": "Organization",
+// //       "name": "Learn Math Class"
+// //     },
+// //     "publisher": {
+// //       "@type": "Organization",
+// //       "name": "Learn Math Class"
+// //     },
+// //     "datePublished": "2024-01-15",
+// //     "dateModified": new Date().toISOString()
+// //   },
+
+// //   breadcrumb: {
+// //     "@context": "https://schema.org",
+// //     "@type": "BreadcrumbList",
+// //     "itemListElement": [
+// //       {
+// //         "@type": "ListItem",
+// //         "position": 1,
+// //         "name": "Home",
+// //         "item": "https://www.learnmathclass.com"
+// //       },
+// //       {
+// //         "@type": "ListItem",
+// //         "position": 2,
+// //         "name": "Linear Algebra",
+// //         "item": "https://www.learnmathclass.com/linear-algebra"
+// //       },
+// //       {
+// //         "@type": "ListItem",
+// //         "position": 3,
+// //         "name": "Matrices",
+// //         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
+// //       },
+// //       {
+// //         "@type": "ListItem",
+// //         "position": 4,
+// //         "name": "Rank of a Matrix",
+// //         "item": "https://www.learnmathclass.com/linear-algebra/matrix/rank"
+// //       }
+// //     ]
+// //   },
+
+// //   faq: {
+// //     "@context": "https://schema.org",
+// //     "@type": "FAQPage",
+// //     "mainEntity": Object.keys(faqQuestions).map(key => ({
+// //       "@type": "Question",
+// //       "name": faqQuestions[key].question,
+// //       "acceptedAnswer": {
+// //         "@type": "Answer",
+// //         "text": faqQuestions[key].answer
+// //       }
+// //     }))
+// //   }
+// // }
+
+
+// //    return {
+// //   props: {
+// //     sectionsContent,
+// //     introContent,
+// //     obj5Table,
+// //     obj8Table,
+// //     obj9Table,
+// //     summaryTable,
+// //     faqQuestions,
+// //     schemas,
+// //     seoData: {
+// //       title: "Matrix Rank: Definition & Computation | Learn Math Class",
+// //       description: "Learn matrix rank — how to compute it by row reduction, the rank-nullity theorem, rank conditions for linear systems, properties of rank, and the four fundamental subspaces.",
+// //       keywords: keyWords.join(", "),
+// //       url: "/linear-algebra/matrix/rank",
+// //       name: "Rank of a Matrix"
+// //     },
+// //   }
+// // }
+// //    }
+
+// // export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+
+// //   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+// //   const genericSections=[
+// //     {
+// //         id:'1',
+// //         title:sectionsContent.obj1.title,
+// //         link:sectionsContent.obj1.link,
+// //         content:[
+// //           sectionsContent.obj1.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'2',
+// //         title:sectionsContent.obj2.title,
+// //         link:sectionsContent.obj2.link,
+// //         content:[
+// //           sectionsContent.obj2.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'3',
+// //         title:sectionsContent.obj3.title,
+// //         link:sectionsContent.obj3.link,
+// //         content:[
+// //           sectionsContent.obj3.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'4',
+// //         title:sectionsContent.obj4.title,
+// //         link:sectionsContent.obj4.link,
+// //         content:[
+// //           sectionsContent.obj4.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'5',
+// //         title:sectionsContent.obj5.title,
+// //         link:sectionsContent.obj5.link,
+// //         content:[
+// //           sectionsContent.obj5.content,
+// //           <div key={'obj5-table'} style={tableWrapStyle}
+// //                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+// //         ]
+// //     },
+// //     {
+// //         id:'6',
+// //         title:sectionsContent.obj6.title,
+// //         link:sectionsContent.obj6.link,
+// //         content:[
+// //           sectionsContent.obj6.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'7',
+// //         title:sectionsContent.obj7.title,
+// //         link:sectionsContent.obj7.link,
+// //         content:[
+// //           sectionsContent.obj7.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'8',
+// //         title:sectionsContent.obj8.title,
+// //         link:sectionsContent.obj8.link,
+// //         content:[
+// //           sectionsContent.obj8.content,
+// //           <div key={'obj8-table'} style={tableWrapStyle}
+// //                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+// //         ]
+// //     },
+// //     {
+// //         id:'9',
+// //         title:sectionsContent.obj9.title,
+// //         link:sectionsContent.obj9.link,
+// //         content:[
+// //           sectionsContent.obj9.content,
+// //           <div key={'obj9-table'} style={tableWrapStyle}
+// //                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+// //         ]
+// //     },
+// //     {
+// //         id:'10',
+// //         title:sectionsContent.obj10.title,
+// //         link:sectionsContent.obj10.link,
+// //         content:[
+// //           sectionsContent.obj10.content,
+// //           <div key={'summary-table'} style={tableWrapStyle}
+// //                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+// //         ]
+// //     },
+// //     // {
+// //     //     id:'11',
+// //     //     title:sectionsContent.obj11.title,
+// //     //     link:sectionsContent.obj11.link,
+// //     //     content:[
+// //     //       sectionsContent.obj11.content,
+// //     //     ]
+// //     // },
+// //     // {
+// //     //     id:'12',
+// //     //     title:sectionsContent.obj12.title,
+// //     //     link:sectionsContent.obj12.link,
+// //     //     content:[
+// //     //       sectionsContent.obj12.content,
+// //     //     ]
+// //     // },
+// //     // {
+// //     //     id:'13',
+// //     //     title:sectionsContent.obj13.title,
+// //     //     link:sectionsContent.obj13.link,
+// //     //     content:[
+// //     //       sectionsContent.obj13.content,
+// //     //     ]
+// //     // },
+// //     // {
+// //     //     id:'14',
+// //     //     title:sectionsContent.obj14.title,
+// //     //     link:sectionsContent.obj14.link,
+// //     //     content:[
+// //     //       sectionsContent.obj14.content,
+// //     //     ]
+// //     // },
+// //     // {
+// //     //     id:'15',
+// //     //     title:sectionsContent.obj15.title,
+// //     //     link:sectionsContent.obj15.link,
+// //     //     content:[
+// //     //       sectionsContent.obj15.content,
+// //     //     ]
+// //     // },
+
+// // ]
+
+// //   return (
+// //    <>
+// // <Head>
+// //   <title>{seoData.title}</title>
+// //   <meta name="description" content={seoData.description} />
+// //   <meta name="keywords" content={seoData.keywords} />
+// //   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+
+// //   <meta property="og:title" content={seoData.title} />
+// //   <meta property="og:description" content={seoData.description} />
+// //   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+// //   <meta property="og:type" content="article" />
+// //   <meta property="og:site_name" content="Learn Math Class" />
+
+// //   <meta name="twitter:card" content="summary" />
+// //   <meta name="twitter:title" content={seoData.title} />
+// //   <meta name="twitter:description" content={seoData.description} />
+
+// //   <meta name="robots" content="index, follow" />
+
+// //   <script
+// //     type="application/ld+json"
+// //     dangerouslySetInnerHTML={{
+// //       __html: JSON.stringify(schemas.learningResource)
+// //     }}
+// //   />
+
+// //   <script
+// //     type="application/ld+json"
+// //     dangerouslySetInnerHTML={{
+// //       __html: JSON.stringify(schemas.breadcrumb)
+// //     }}
+// //   />
+
+// //   <script
+// //     type="application/ld+json"
+// //     dangerouslySetInnerHTML={{
+// //       __html: JSON.stringify(schemas.faq)
+// //     }}
+// //   />
+// // </Head>
+// //    {/* <GenericNavbar/> */}
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //     <OperaSidebar
+// //            side='right'
+// //            // topOffset='65px'
+// //            sidebarWidth='45px'
+// //            panelWidth='200px'
+// //            iconColor='white'
+// //            panelBackgroundColor='#f2f2f2'
+// //          />
+// //    <Breadcrumb/>
+// //    <br/>
+// //    <br/>
+// //    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Rank of a Matrix</h1>
+// //    <br/>
+// //    <br/>
+// //    <SectionTableOfContents sections={genericSections}
+// //     showSecondaryNav={true}
+// //          secondaryNavMode="siblings"  // or "children"
+// //          secondaryNavTitle="More in this Section"
+
+// //    />
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //     <IntroSection
+// //           id={introContent.id}
+// //           title={introContent.title}
+// //           content={introContent.content}
+// //            backgroundColor='#f9fafb'
+// //           //  "#f2f2f2"
+// //           textColor="#06357a"
+// //         />
+// //    <br/>
+// //    <br/>
+// //    <Sections sections={genericSections}/>
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //    {/* <ScrollUpButton/> */}
+// //    </>
+// //   )
+// // }
+
+
+
 // // tables-optimized: v4 | 2026-05-20 | 4 tables (obj5 comparison, obj8 aggregation, obj9 aggregation, obj10 summary capstone)
 
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
@@ -12,6 +950,8 @@
 // import Head from 'next/head'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 // import { tableHeaders } from '@/app/styles/theme'
+// import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
+// import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 // export async function getStaticProps(){
@@ -153,6 +1093,99 @@
 // `
 
 //   // obj10 — summary capstone: what rank governs
+//   // obj7 — the inequalities and identities rank obeys
+//   const rankProperties = {
+//     kicker: 'Matrix · rank',
+//     title: 'Properties of rank',
+//     tallyLabel: 'properties',
+//     intro: 'Rank is constrained rather than computed by these rules — most are inequalities, not identities. That asymmetry is the point: operations can destroy independence but never create it.',
+//     footnote: 'The one-directional pattern runs through every entry. Multiplication can only lose rank, addition can only be bounded above, and the sole exact identities are the ones where nothing is lost at all \u2014 transposition, scaling, and multiplication by an [invertible](!/linear-algebra/matrix/inverse) matrix.',
+//     laws: [
+//       {
+//         name: 'Rank bounds',
+//         anchor: '#1',
+//         statement: '$0 \\leq \\operatorname{rank}(A) \\leq \\min(m, n)$',
+//         verdict: 'holds',
+//         requires: '$A$ is $m \\times n$',
+//         note: 'Rank cannot exceed either dimension, because it counts independent rows and independent columns simultaneously and those counts agree. A matrix reaching this bound has full rank; anything less is rank-deficient, meaning some row or column is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others.',
+//       },
+//       {
+//         name: 'Zero matrix',
+//         anchor: '#7',
+//         statement: '$\\operatorname{rank}(A) = 0 \\iff A = O$',
+//         verdict: 'holds',
+//         note: 'The only matrix of rank zero. Any nonzero entry gives at least one independent row, so rank zero and the zero matrix are the same condition stated two ways.',
+//       },
+//       {
+//         name: 'Scalar multiple',
+//         anchor: '#7',
+//         statement: '$\\operatorname{rank}(cA) = \\operatorname{rank}(A)$',
+//         verdict: 'conditional',
+//         holdsWhen: '$c \\neq 0$',
+//         note: 'Scaling neither creates nor destroys independence. At $c = 0$ the statement collapses \u2014 every rank drops to zero at once \u2014 which is why the condition is not decoration.',
+//       },
+//       {
+//         name: 'Transpose invariance',
+//         anchor: '#2',
+//         statement: '$\\operatorname{rank}(A^{\\mathsf{T}}) = \\operatorname{rank}(A)$',
+//         verdict: 'holds',
+//         requires: 'any $A$',
+//         note: 'A restatement of row rank equalling column rank. It is the reason rank can be defined without saying which of the two is meant, and why a wide matrix and its tall transpose describe the same amount of structure.',
+//       },
+//       {
+//         name: 'Rank of a product',
+//         anchor: '#7',
+//         statement: '$\\operatorname{rank}(AB) \\leq \\min\\bigl(\\operatorname{rank}(A), \\operatorname{rank}(B)\\bigr)$',
+//         verdict: 'conditional',
+//         verdictLabel: 'Upper bound only',
+//         holdsWhen: 'product defined',
+//         note: 'Multiplication can collapse directions but never create independent ones \u2014 the image of $AB$ sits inside the image of $A$, and its rank is capped by whatever $B$ passes through first. Equality is common but not guaranteed, so this bounds rather than determines.',
+//         witness: {
+//           label: 'Strict inequality',
+//           lines: [
+//             'A = [[1, 0], [0, 0]],  B = [[0, 0], [0, 1]]',
+//             'rank(A) = rank(B) = 1,  but AB = O with rank 0',
+//           ],
+//         },
+//       },
+//       {
+//         name: 'Sylvester\u2019s inequality',
+//         anchor: '#7',
+//         statement: '$\\operatorname{rank}(A) + \\operatorname{rank}(B) - n \\leq \\operatorname{rank}(AB)$',
+//         verdict: 'conditional',
+//         verdictLabel: 'Lower bound',
+//         holdsWhen: '$A$ is $m \\times n$ and $B$ is $n \\times p$',
+//         note: 'The companion to the bound above: rank cannot drop arbitrarily far. If both factors have full rank $n$, the inequality forces $\\operatorname{rank}(AB) \\geq n$, so the product has full rank too \u2014 which is how the invertibility of a product of invertible matrices follows.',
+//       },
+//       {
+//         name: 'Rank of a sum',
+//         anchor: '#7',
+//         statement: '$\\operatorname{rank}(A + B) \\leq \\operatorname{rank}(A) + \\operatorname{rank}(B)$',
+//         verdict: 'conditional',
+//         verdictLabel: 'Upper bound only',
+//         holdsWhen: '$A, B$ same shape',
+//         commonError: 'reading it as an equality \u2014 the sum can have lower rank than either factor',
+//         note: 'Adding matrices cannot produce more independent directions than the two contribute between them, but it can produce fewer. Unlike the determinant, which has no sum rule at all, rank has a bound \u2014 just not an identity.',
+//         witness: {
+//           label: 'Witness',
+//           lines: [
+//             'A = I\u2082,  B = \u2212I\u2082,  both rank 2',
+//             'A + B = O with rank 0, far below either',
+//           ],
+//         },
+//       },
+//       {
+//         name: 'Multiplication by an invertible matrix',
+//         anchor: '#7',
+//         statement: '$\\operatorname{rank}(PAQ) = \\operatorname{rank}(A)$',
+//         verdict: 'conditional',
+//         holdsWhen: '$P$ and $Q$ [invertible](!/linear-algebra/matrix/inverse)',
+//         note: 'An invertible matrix loses nothing, so it cannot change the rank of what it multiplies. This is why [row reduction](#3) computes rank correctly \u2014 every elementary operation is multiplication by an invertible matrix, and the echelon form has the same rank as the original.',
+//       },
+//     ],
+//   }
+
+
 //   const summaryTable = `
 // <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
 //   <thead>
@@ -700,6 +1733,7 @@
 //     obj8Table,
 //     obj9Table,
 //     summaryTable,
+//       rankProperties,
 //     faqQuestions,
 //     schemas,
 //     seoData: {
@@ -713,7 +1747,7 @@
 // }
 //    }
 
-// export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+// export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, obj8Table, obj9Table, summaryTable, rankProperties, faqQuestions, schemas}) {
 
 //   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -774,6 +1808,14 @@
 //         link:sectionsContent.obj7.link,
 //         content:[
 //           sectionsContent.obj7.content,
+//           <DiagramFrame
+//             key={'obj7-diagram'}
+//             id="rank-properties"
+//             title="Properties of rank"
+//             source="/linear-algebra/matrix/rank"
+//           >
+//             <PropertyLawCard data={rankProperties} theme="navy" />
+//           </DiagramFrame>,
 //         ]
 //     },
 //     {
@@ -951,6 +1993,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
+import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
@@ -1008,49 +2051,96 @@ const keyWords = [
 `
 
   // obj8 — aggregation: rank of special matrices
-  const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Matrix</th>
-      <th style="${tableHeaders.aggregation}">Structure</th>
-      <th style="${tableHeaders.aggregation}">Rank</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity Iₙ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns are the standard basis of ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">Diagonal</a> diag(d₁,…,dₙ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero entries only on the main diagonal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank-1 outer product</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A = uvᵀ with u, v nonzero</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric positive definite</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xᵀAx &gt; 0 for every nonzero x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Nilpotent (n &gt; 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Aᵏ = O for some k ≥ 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">strictly less than n</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Gram matrix AᵀA</td>
-      <td style="padding: 12px 15px; color: #34495e;">A is any m × n matrix</td>
-      <td style="padding: 12px 15px; color: #34495e;">rank(A)</td>
-    </tr>
-  </tbody>
-</table>
-`
+  // obj8 — types whose structure fixes the rank without any reduction
+  const specialRanks = {
+    kicker: 'Matrix \u00B7 rank',
+    title: 'Ranks readable from structure',
+    tallyLabel: 'types',
+    intro: 'For these types the rank follows from the defining condition, so no reduction is needed. Grouped by whether the structure pins the rank exactly or only bounds it.',
+    footnote: 'What the reducible cases have in common is a definition that already says how many independent directions there are. A [rank-one outer product](!/linear-algebra/decompositions/svd) has one because every column is a multiple of $\\mathbf{u}$; a diagonal matrix has as many as it has nonzero entries. Where the definition is silent about independence \u2014 as with nilpotence \u2014 only a bound survives.',
+    slots: [
+      { key: 'rank',   label: 'rank' },
+      { key: 'why',    label: 'why' },
+      { key: 'nullity',label: 'nullity' },
+    ],
+    groups: [
+      {
+        heading: 'Full rank, guaranteed',
+        types: [
+          {
+            name: 'Identity',
+            anchor: '#8',
+            shape: 'identity',
+            condition: '$I_n$',
+            properties: {
+              rank: '$n$',
+              why: 'columns are the standard basis',
+              nullity: '$0$',
+            },
+            note: 'The columns are independent by construction. Trivially the maximum, and the case every other row is measured against.',
+          },
+          {
+            name: 'Symmetric positive definite',
+            anchor: '#8',
+            shape: 'symmetric',
+            condition: '$\\mathbf{x}^{\\mathsf{T}}A\\mathbf{x} > 0$ for $\\mathbf{x} \\neq \\mathbf{0}$',
+            properties: {
+              rank: '$n$',
+              why: 'no nonzero vector maps to zero',
+              nullity: '$0$',
+            },
+            note: 'If $A\\mathbf{x} = \\mathbf{0}$ then $\\mathbf{x}^{\\mathsf{T}}A\\mathbf{x} = 0$, which the condition forbids unless $\\mathbf{x} = \\mathbf{0}$. So the null space is trivial and the rank is full \u2014 an argument that never mentions rows or columns.',
+          },
+        ],
+      },
+      {
+        heading: 'Rank fixed by a count',
+        types: [
+          {
+            name: 'Diagonal',
+            anchor: '#8',
+            shape: 'diagonal',
+            condition: '$\\operatorname{diag}(d_1, \\ldots, d_n)$',
+            properties: {
+              rank: 'count of $d_i \\neq 0$',
+              why: 'each nonzero entry is one pivot',
+              nullity: 'count of $d_i = 0$',
+            },
+            note: 'Already in echelon form, so the pivots are the nonzero diagonal entries and no reduction happens. Rank and nullity are read off the same list.',
+          },
+          {
+            name: 'Rank-one outer product',
+            anchor: '#8',
+            shape: 'dense',
+            condition: '$A = \\mathbf{u}\\mathbf{v}^{\\mathsf{T}}$, both nonzero',
+            properties: {
+              rank: '$1$',
+              why: 'every column is a multiple of $\\mathbf{u}$',
+              nullity: '$n - 1$',
+            },
+            note: 'Column $j$ is $v_j\\mathbf{u}$, so the column space is the single line through $\\mathbf{u}$ however large the matrix is. These are the building blocks the [SVD](!/linear-algebra/decompositions/svd) sums, and truncating that sum is low-rank approximation.',
+          },
+        ],
+      },
+      {
+        heading: 'Only a bound',
+        types: [
+          {
+            name: 'Nilpotent',
+            anchor: '#8',
+            shape: 'strictUpper',
+            condition: '$A^k = O$, $A \\neq O$',
+            properties: {
+              rank: '$< n$ \u2014 strictly deficient',
+              why: 'a full-rank matrix has a full-rank power',
+              nullity: '$\\geq 1$',
+            },
+            note: 'The condition forces deficiency but does not say by how much: a $3 \\times 3$ nilpotent matrix may have rank $1$ or $2$. This is the row where structure narrows the answer without determining it, and the reduction still has to be done.',
+          },
+        ],
+      },
+    ],
+  }
 
   // obj9 — aggregation: four fundamental subspaces
   const obj9Table = `
@@ -1730,7 +2820,7 @@ const schemas = {
     sectionsContent,
     introContent,
     obj5Table,
-    obj8Table,
+    specialRanks,
     obj9Table,
     summaryTable,
       rankProperties,
@@ -1747,7 +2837,7 @@ const schemas = {
 }
    }
 
-export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, obj8Table, obj9Table, summaryTable, rankProperties, faqQuestions, schemas}) {
+export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1824,8 +2914,15 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="special-ranks"
+            title="Ranks readable from structure"
+            source="/linear-algebra/matrix/rank"
+          >
+            <ObjectTypeProfile data={specialRanks} theme="navy" variant="stack" />
+          </DiagramFrame>,
+          `The last row is the instructive one because it does not behave like the others. Nilpotence forces the rank below $n$ and stops there — a $3 \\times 3$ nilpotent matrix may have rank one or rank two, and nothing in the definition distinguishes them. Every other row here has a definition that already counts the independent directions; nilpotence only says that some direction collapses, which is a bound rather than a value.`,
         ]
     },
     {

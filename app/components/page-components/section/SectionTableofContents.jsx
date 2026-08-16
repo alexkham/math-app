@@ -87,12 +87,25 @@ const SectionTableOfContents = ({
   }, [navLinks, pathname]);
 
   useEffect(() => {
+    // Hysteresis gap: un-stick lower than we stick, so a layout shift at the
+    // threshold can't push the scroll position back across it and oscillate.
+    const HYSTERESIS = 150;
+
     const handleScroll = () => {
       if (boxRef.current) {
         const currentScrollPos = window.pageYOffset;
-        const shouldBeSticky = currentScrollPos > stickyThreshold.current;
-        
+        const shouldBeSticky = isSticky
+          ? currentScrollPos > stickyThreshold.current - HYSTERESIS
+          : currentScrollPos > stickyThreshold.current;
+
         if (shouldBeSticky !== isSticky) {
+          if (shouldBeSticky) {
+            // Measure at the moment of sticking: the spacer must match the
+            // box's live height (KaTeX titles change it after mount).
+            const height = boxRef.current.offsetHeight;
+            setTocHeight(height);
+            setPrevHeight(height);
+          }
           setIsSticky(shouldBeSticky);
         }
       }

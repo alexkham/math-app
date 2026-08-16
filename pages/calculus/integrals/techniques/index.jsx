@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -205,6 +206,44 @@ For definite integrals, convert the limits: when $x = a$, $u = g(a)$; when $x = 
     before: ``,
     after: ``,
     link: ``
+  },
+  notation: {
+    title: `Notation Inside the Techniques`,
+    lead: `Substitution's paired equations, the four-slot ledger of parts, and the substitution that runs backwards — the bookkeeping is the technique.`,
+    inherited: `The integral signs — [indefinite](!/calculus/integrals/indefinite#3) and [definite](!/calculus/integrals/definite#2); the algebra of $du$ — [differentials](!/calculus/derivatives/differentials#notation).`,
+    entries: [
+      {
+        id: 'u-substitution-pair',
+        tex: `$u = g(x)$, $\\; du = g'(x)\\,dx$`,
+        read: `Let u equal g of x, so d u equals g prime of x, d x`,
+        means: `A change of name recorded as two equations — and the second is real [differential](!/calculus/derivatives/differentials#notation) algebra, not ritual. Everything must convert: integrand, $dx$, all of it, as in **Substitution** above.`,
+        cases: `In a definite integral the bounds convert too, and the transition is often labelled on the sign itself: $\\int_{x=a}^{x=b}$ becomes $\\int_{u=g(a)}^{u=g(b)}$ — after which there is no going back to $x$. The alternative workflow keeps the $x$-bounds and back-substitutes $u = g(x)$ before evaluating; both are legal, mixing them is not.`,
+        alsoWritten: `$w$ or $t$ when $u$ is spoken for; the final return to $x$ is the “back-substitution” step.`,
+        confusedWith: `A partial conversion. $\\int \\cos u \\,dx$ — one variable in the integrand, another in the differential — is meaningless; a leftover $x$ under a $du$ means the substitution was not completed.`,
+      },
+      {
+        id: 'parts-ledger',
+        tex: `$\\int u\\, dv = uv - \\int v\\, du$`,
+        read: `The integral of u d v equals u v minus the integral of v d u`,
+        means: `Parts *factors* the integrand into two slots: $u$, destined for differentiation, and $dv$, destined for integration — and $dv$ swallows the $dx$. The four-slot ledger $u, du, dv, v$ organises the whole computation in **Integration by Parts** below.`,
+        cases: `Choosing $u$ follows LIATE — logarithmic, inverse trig, algebraic, trigonometric, exponential — a classroom mnemonic, not a theorem; it fails often enough to keep judgment in the loop.`,
+        alsoWritten: `$\\int u\\,v'\\,dx = uv - \\int u'\\,v\\,dx$ — the prime form, standard in European texts, where the differential never appears bare.`,
+        confusedWith: `Substitution's $u$. Same letter, different job: substitution's $u$ *renames the variable*; parts' $u$ *labels a factor* and $x$ remains the variable throughout. Writing $dv$ without its $dx$ is the commonest ledger slip.`,
+      },
+      {
+        id: 'reverse-substitution',
+        tex: `$x = a\\sin\\theta$`,
+        read: `Let x equal a sine theta`,
+        means: `Substitution running backwards: the *old* variable is expressed through the new one, opposite in direction to $u = g(x)$. The radical collapses through a Pythagorean identity, as in **Trigonometric Substitution** below.`,
+        cases: `Three radical shapes, three choices: $\\sqrt{a^2 - x^2} \\to x = a\\sin\\theta$; $\\sqrt{a^2 + x^2} \\to x = a\\tan\\theta$; $\\sqrt{x^2 - a^2} \\to x = a\\sec\\theta$. The answer returns to $x$ through $\\theta = \\arcsin\\frac{x}{a}$ and a reference triangle.`,
+        alsoWritten: `Hyperbolic versions — $x = a\\sinh t$ — in analysis and European texts, trading the identity $1 - \\sin^2 = \\cos^2$ for $\\cosh^2 - \\sinh^2 = 1$.`,
+        confusedWith: `The $u$-direction. Here the new variable is *not* a function of $x$ you can read off — inverting requires the [inverse trig functions](!/functions/inverse), and the domain restriction on $\\theta$ is what makes the inversion legal.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/integrals`,
+    parentLabel: `Integrals`,
   },
 obj3: {
     title: `Integration by Parts`,
@@ -517,6 +556,25 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

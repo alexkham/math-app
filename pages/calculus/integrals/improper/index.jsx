@@ -10,6 +10,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -226,6 +227,44 @@ Both integrals must converge independently. The choice of $c$ is arbitrary—any
     before: ``,
     after: ``,
     link: ``
+  },
+  notation: {
+    title: `Improper Integral Notation`,
+    lead: `A symbol that quietly means a limit, the scaffold that makes the limit visible, and the verdict vocabulary that comes with it.`,
+    inherited: `$\\int_a^b$ and its parts — [definite integrals](!/calculus/integrals/definite#2); $\\infty$ and $\\lim = \\infty$ — [limits at infinity](!/calculus/limits/infinity#notation); one-sided arrows — [one-sided limits](!/calculus/limits/one-sided).`,
+    entries: [
+      {
+        id: 'infinity-bound',
+        tex: `$\\int_a^{\\infty} f(x)\\, dx$`,
+        read: `The integral from a to infinity`,
+        means: `$\\infty$ in the bound is not a point — the whole symbol is *defined* as $\\lim_{b \\to \\infty} \\int_a^b f(x)\\,dx$, the scaffold of **Infinite Limits of Integration** above. The compact form hides the limit; the definition is the limit.`,
+        cases: `Lower bound $-\\infty$ mirrors it. Both bounds infinite — split at an arbitrary $c$, and *each half must converge on its own*.`,
+        alsoWritten: `$\\int_a^{+\\infty}$, with the sign spelled out — matching the signed-infinity tradition of [limits at infinity](!/calculus/limits/infinity#notation).`,
+        confusedWith: `The symmetric limit $\\lim_{R \\to \\infty} \\int_{-R}^{R}$ — Cauchy's principal value, written $\\mathrm{PV}\\!\\int$. Not the same object: $\\int_{-\\infty}^{\\infty} x\\,dx$ diverges, while its principal value is $0$. Tying the two ends to one variable changes the definition.`,
+      },
+      {
+        id: 'limit-scaffold',
+        tex: `$\\lim\\limits_{t \\to b^{-}} \\int_a^t f(x)\\, dx$`,
+        read: `The limit, as t approaches b from below, of the integral from a to t`,
+        means: `The scaffold for an unbounded integrand: the bad endpoint is replaced by a variable that approaches it *from inside the interval* — the [one-sided](!/calculus/limits/one-sided) superscript carries the direction. Nothing in $\\int_0^1 \\frac{1}{\\sqrt{x}}\\,dx$ announces impropriety; the integrand has to be inspected, then the scaffold written.`,
+        cases: `Asymptote at the left endpoint — $t \\to a^{+}$; at the right — $t \\to b^{-}$; at an interior $c$ — two scaffolds with *independent* letters $t$ and $s$, as in **Discontinuous Integrands** below.`,
+        alsoWritten: `$\\varepsilon$-style: $\\lim_{\\varepsilon \\to 0^{+}} \\int_a^{b-\\varepsilon}$, common in analysis texts, where the small excision is named directly.`,
+        confusedWith: `One letter for both halves of an interior split. That ties the two limits together — a hidden principal value again — and can declare a divergent integral finite.`,
+      },
+      {
+        id: 'convergence-verdicts',
+        tex: `converges · diverges · $\\int < \\infty$`,
+        read: `The integral converges; the integral diverges`,
+        means: `Verdicts about the defining limit, as in **Convergence vs Divergence** below. Only after “converges” is the equation form $\\int_1^{\\infty} \\frac{1}{x^2}\\,dx = 1$ legitimate — the value *is* the limit.`,
+        cases: `Divergence comes in two species: $= \\infty$, borrowing the equals-abuse of [infinite limits](!/calculus/limits/infinity#notation), or by oscillation — $\\int_0^{\\infty} \\sin x\\,dx$ — where no verdict value exists at all.`,
+        alsoWritten: `$\\int_a^{\\infty} |f| < \\infty$ — the analyst's shorthand for “converges absolutely”, an inequality doing the work of a sentence.`,
+        confusedWith: `“Diverges” with “equals infinity”. Every $= \\infty$ diverges; not every divergence is an $\\infty$ — the oscillating case fails without ever growing.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/integrals`,
+    parentLabel: `Integrals`,
   },
  obj3: {
     title: `Discontinuous Integrands`,
@@ -535,6 +574,25 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -445,6 +446,45 @@ Both sides agree, so we write $\\lim_{x \\to 2} f(x) = +\\infty$.
     after: ``,
     link: ``
   },
+  notation: {
+    title: `The Two Roles of the Infinity Symbol`,
+    lead: `One glyph, opposite jobs: under the lim as a direction for $x$, after the equals sign as a verdict about $f$. The entries keep them apart.`,
+    inherited: `$\\lim$, the bare arrow and DNE belong to [two-sided limits](!/calculus/limits/two-sided); the superscripts $a^{-}$, $a^{+}$ to [one-sided limits](!/calculus/limits/one-sided).`,
+    entries: [
+      {
+        id: 'infinity-symbol',
+        tex: `$\\infty$`,
+        read: `Infinity`,
+        means: `Not a number — a name for unboundedness. It never enters arithmetic and appears only inside limit statements. LaTeX @[\\infty]@; the [mathematical keyboard](!/keyboard) carries $\\infty$.`,
+        cases: `$+\\infty$ and $-\\infty$ — the two ends of the real line. Bare $\\infty$ conventionally means $+\\infty$ in real calculus.`,
+        alsoWritten: `$+\\infty$ spelled with its sign in French and Eastern European texts, which reserve the bare glyph for the unsigned point of projective geometry.`,
+        confusedWith: `A number that obeys arithmetic. $\\infty - \\infty$ and $\\infty/\\infty$ have no fixed value — they are the [indeterminate forms](!/calculus/limits/evaluating#notation) of limit evaluation.`,
+        sameGlyphElsewhere: `In [set theory](!/set-theory/cardinality) infinite sizes are ℵ₀, 𝔠 — provably different infinities, a distinction the calculus symbol never makes.`,
+      },
+      {
+        id: 'x-to-infinity',
+        tex: `$x \\to \\infty$`,
+        read: `As x approaches infinity`,
+        means: `The input escapes: eventually beyond every bound. No point is being approached — shorthand, not location.`,
+        cases: `$x \\to -\\infty$ — the other end; the two directions are independent, which is how a function earns two different asymptotes in **Horizontal Asymptotes** above. With an integer index, $n \\to \\infty$, the same notation runs through sequences and series.`,
+        alsoWritten: `$x \\to +\\infty$, matching the signed tradition above.`,
+        confusedWith: `“Plug in a huge number.” Nothing is substituted — $\\infty$ never enters $f$; the limit describes the trend, in **Limits at Infinity — Horizontal Behavior** above.`,
+      },
+      {
+        id: 'equals-infinity',
+        tex: `$\\lim\\limits_{x \\to a} f(x) = \\infty$`,
+        read: `The limit is infinity`,
+        means: `An abuse of the equals sign that stuck. The limit **does not exist** — but fails in the most informative way, unbounded growth, so the $=$ records behavior rather than a value.`,
+        cases: `One-sided versions carry the [superscripts](!/calculus/limits/one-sided) and diagnose the lines in **Vertical Asymptotes** above, sign determined as in **Sign Analysis** above. The two-sided form is only legal when both sides agree on the same signed infinity — **One-Sided Infinite Limits** above.`,
+        alsoWritten: `$f(x) \\to \\infty$ as $x \\to a$ — arrow form. Stricter analysis texts refuse the $=$ entirely and write “increases without bound”.`,
+        confusedWith: `“Exists, and its value is infinity.” In real-valued calculus it does not exist; only on the extended real line is the equation literal — which is why the abuse survives.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/limits`,
+    parentLabel: `Limits`,
+  },
   obj11: {
     title: `Limits of Exponentials at Infinity`,
     content: `
@@ -779,6 +819,25 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
           sectionsContent.obj10.content,
           <div key={'obj10-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

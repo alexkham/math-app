@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -319,6 +320,45 @@ If the one-sided limits differ, the two-sided limit does not exist. If either on
     after: ``,
     link: ``
   },
+  notation: {
+    title: `The Default Limit Notation`,
+    lead: `The base marks every later limit page decorates. What the bare, superscript-free form asserts — and the shorthand for when it asserts nothing.`,
+    inherited: `The superscripts $a^{-}$ and $a^{+}$ in the existence criterion above belong to [one-sided limits](!/calculus/limits/one-sided).`,
+    entries: [
+      {
+        id: 'arrow-approaches',
+        tex: `$x \\to a$`,
+        read: `x approaches a`,
+        means: `Approach from **both sides at once** — no superscript, no preferred direction, and $x$ never equals $a$. LaTeX @[\\to]@; the [mathematical keyboard](!/keyboard) carries $\\rightarrow$ in its arrow set.`,
+        cases: `Superscript added — directional, owned by [one-sided limits](!/calculus/limits/one-sided). $\\infty$ in place of $a$ — the approach never arrives, [limits at infinity](!/calculus/limits/infinity). In the [derivative](!/calculus/derivatives) definition the moving variable is renamed: $h \\to 0$.`,
+        alsoWritten: `“Tends to” in British texts, “approaches” in American ones. The arrow itself dates to Hardy's *A Course of Pure Mathematics* (1908); before it, texts put $x = a$ under the lim.`,
+        confusedWith: `Not an equality in motion. $0 < |x - a|$ holds the whole way — reading the arrow as “set $x = a$” is the substitution error the limit concept exists to avoid.`,
+        sameGlyphElsewhere: `The same arrow writes [function mapping](!/functions/basics) $f: A \\to B$ and [logical implication](!/logic/propositional-logic/semantics/implication) $p \\to q$ — unrelated jobs.`,
+      },
+      {
+        id: 'lim-operator',
+        tex: `$\\lim\\limits_{x \\to a} f(x) = L$`,
+        read: `The limit of f of x, as x approaches a, equals L`,
+        means: `One indivisible operator — nothing is multiplied. $x$ is a bound variable: $L$ depends on $f$ and $a$, never on $x$. The [LaTeX reference](!/latex) writes it @[\\lim_{x \\to a}]@.`,
+        cases: `Displayed, the condition sits under the operator; inline it slides to a subscript — same command. The $= L$ form asserts existence, so it may only be written once the criterion in **The Existence Condition** above is met.`,
+        alsoWritten: `$f(x) \\to L$ as $x \\to a$ — the arrow form, standard in running prose where a displayed operator would be heavy.`,
+        confusedWith: `$L$ is not $f(a)$. Hole at $a$, displaced point, undefined value — the limit ignores all three; [continuity](!/calculus/limits/continuity) is precisely the claim that $L$ and $f(a)$ coincide.`,
+      },
+      {
+        id: 'dne',
+        tex: `$\\lim\\limits_{x \\to a} f(x)$ DNE`,
+        read: `The limit does not exist — D N E`,
+        means: `A verdict, not a value. DNE cannot be computed with or set equal to anything — once it holds, the $= L$ form is unavailable.`,
+        cases: `The three routes — jump, opposite infinities, oscillation — are catalogued in **When Two-Sided Limits Fail to Exist** below. A limit that is $\\infty$ is its own case: the $= \\infty$ notation describes *how* existence fails and belongs to [infinite limits](!/calculus/limits/infinity).`,
+        alsoWritten: `Spelled out “does not exist” in analysis texts; DNE is classroom and exam shorthand, rarely printed.`,
+        confusedWith: `Not the same as $f(a)$ undefined. $\\frac{\\sin x}{x}$ at $0$: no value, limit exists. The floor function at an integer: value exists, limit DNE. Independent questions.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/limits`,
+    parentLabel: `Limits`,
+  },
   obj3: {
     title: `Visualizing Two-Sided Approach`,
     content: `
@@ -624,6 +664,25 @@ return {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -375,6 +376,45 @@ Once [differentiation rules](!/calculus/derivatives/rules) are established, this
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Derivative Notation: Function vs Point`,
+    lead: `The prime mark, the quotient it is built from, and the two ways to say “now evaluate at $a$” — the distinction this whole page turns on.`,
+    inherited: `$\\lim$ and its arrow — [two-sided limits](!/calculus/limits/two-sided); the four systems for higher orders — [higher-order derivatives](!/calculus/derivatives/higher-order#notation); the quotient reading of $\\frac{dy}{dx}$ — [differentials](!/calculus/derivatives/differentials#notation).`,
+    entries: [
+      {
+        id: 'difference-quotient',
+        tex: `$\\frac{f(x+h) - f(x)}{h}$`,
+        read: `The difference quotient`,
+        means: `Average slope over the step from $x$ to $x+h$ — the object whose limit *is* the derivative. $h$ is a free increment, the same role $\\Delta x$ plays on [differentials](!/calculus/derivatives/differentials#notation).`,
+        cases: `The $h$-form for computation; the $t$-form $\\frac{f(t)-f(x)}{t-x}$ in proofs, where the moving point has a name. Numerical work adds the symmetric form $\\frac{f(x+h)-f(x-h)}{2h}$, accurate to one order higher.`,
+        alsoWritten: `$\\frac{\\Delta y}{\\Delta x}$ — the increment form, standard in physics-flavoured texts.`,
+        confusedWith: `A fraction you can evaluate at $h = 0$. There it is the [indeterminate form](!/calculus/limits/evaluating#notation) $0/0$ — the limit is the entire content of the definition.`,
+      },
+      {
+        id: 'prime-function',
+        tex: `$f'(x)$`,
+        read: `f prime of x`,
+        means: `One mark turns a function into its slope function. Binding order matters: $f'(x)$ is $(f')(x)$ — differentiate first, then feed in $x$.`,
+        cases: `$f'(a)$ — the same function evaluated at a point: one number, one slope. The domain shrinks where [differentiability](!/calculus/derivatives/differentiability) fails — $f(x) = |x|$ loses $x = 0$ on the way from $f$ to $f'$.`,
+        alsoWritten: `$\\frac{dy}{dx}$, $\\dot{y}$, $Df$ — Leibniz, Newton, Euler; all four systems compared on [higher-order derivatives](!/calculus/derivatives/higher-order#notation).`,
+        confusedWith: `“$f'(a)$ = differentiate $f(a)$.” Substituting first leaves a constant, and its derivative is $0$ — evaluation always comes *after* the prime.`,
+        sameGlyphElsewhere: `The prime marks a [set complement](!/set-theory/operations) $A'$ and a transformed point in geometry — labels, not rates.`,
+      },
+      {
+        id: 'evaluation-bar',
+        tex: `$\\left.\\frac{dy}{dx}\\right|_{x=a}$`,
+        read: `d y by d x, evaluated at x equals a`,
+        means: `The evaluation bar. Prime notation evaluates by ordinary substitution — $f'(a)$ — but $\\frac{dy}{dx}$ names no input slot, so Leibniz notation needs an explicit “now substitute” mark. The [LaTeX reference](!/latex) builds it with @[\\left.\\frac{dy}{dx}\\right|_{x=a}]@.`,
+        cases: `Attaches to any operator expression, not only $\\frac{dy}{dx}$. When the function has a name, $f'(a)$ says the same thing shorter — the bar earns its keep when the derivative exists only as an expression.`,
+        alsoWritten: `$\\frac{dy}{dx}(a)$ in some texts — compact but easy to misread as multiplication.`,
+        confusedWith: `An absolute value or a divider. The bar is an instruction, not an operation — and it must sit outside a *finished* derivative; substituting $a$ before differentiating repeats the constant-trap above.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/calculus`,
+    symbolsLabel: `All calculus symbols`,
+    parentHref: `/calculus/derivatives`,
+    parentLabel: `Derivatives`,
+  },
   obj3: {
     title: `Graphing f' from f`,
     content: `
@@ -642,6 +682,25 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
