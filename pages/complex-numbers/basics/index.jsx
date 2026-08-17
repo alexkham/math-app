@@ -11,6 +11,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -270,7 +271,47 @@ The conjugate operation carries deep significance throughout complex mathematics
   after: ``,
   link: '/complex-numbers/algebraic-form',
 },
-  
+
+notation: {
+  title: `Complex Number Notation`,
+  lead: `Three marks every complex-numbers page assumes before its own specialized notation begins: the letter that names the number, the two-part form that writes it, and the blackboard-bold symbol for the set holding all of them. The specialized marks live with their owning pages — the strip below says where.`,
+  inherited: `$i$ itself is defined in **The Imaginary Unit** above and owned by [its dedicated page](!/complex-numbers/imaginary-numbers); the derived marks — $Re(z)$, $Im(z)$, $\\bar{z}$, $|z|$, $\\arg(z)$ — belong to the [algebraic form](!/complex-numbers/algebraic-form), [conjugate](!/complex-numbers/complex-conjugate), [modulus](!/complex-numbers/absolute-value) and [trigonometric form](!/complex-numbers/trigonometric-form) pages.`,
+  entries: [
+    {
+      id: 'z-letter',
+      tex: `$z$ · $w$`,
+      read: `z — a complex number`,
+      means: `The standing letter for a complex number, as $x$ stands for a real unknown. The letter itself is a signal: seeing $z$ announces that $a + bi$ arithmetic applies before any equation is read. A second number takes $w$.`,
+      cases: `Enumeration falls to subscripts — the $z_1, z_2$ of **Arithmetic Operations** below; the same labeling job as the roots $x_1, x_2$ of [quadratic equations](!/algebra/equations/quadratic#notation), not the position-in-a-list job of [sequences](!/algebra/sequences/arithmetic#notation).`,
+      alsoWritten: `$w = f(z)$ reserves $w$ for outputs in complex analysis; engineering's Laplace domain writes its complex variable $s = \\sigma + i\\omega$.`,
+      confusedWith: `A real variable. Habits imported from the reals fail silently: $z^2 \\geq 0$ is false for $z = i$, and $z_1 < z_2$ is meaningless — complex numbers cannot be ordered, as **Geometric Representation** below shows.`,
+    },
+    {
+      id: 'a-plus-bi',
+      tex: `$a + bi$`,
+      read: `a plus b i`,
+      means: `The algebraic form as a mark: $a$ the real part, $b$ the coefficient of $i$ — two real numbers carrying one complex one. The plus is honest addition, yet nothing evaluates: the expression *is* the finished number.`,
+      cases: `General work uses $a + bi$; concrete numbers go literal — $3 + 2i$, $-i$ (coefficient $1$ suppressed), bare $7$ ($b = 0$ unwritten). The padded spellings $1 + 0i$ and $0 + 0i$ of **The Mathematical Theory** below appear only where the classification itself is the point.`,
+      alsoWritten: `$a + ib$ — the $i$-first order, obligatory once the coefficient grows: $\\cos\\theta + i\\sin\\theta$, never $\\cos\\theta + \\sin\\theta\\, i$. Complex analysis prefers $x + iy$, matching the plane's coordinates; electrical engineering swaps the [unit's letter](!/complex-numbers/imaginary-numbers) entirely, writing $a + jb$.`,
+      confusedWith: `An unfinished sum. $3 + 2i$ reads like an addition awaiting an answer; it is the answer — the two parts never merge, and the “simplification” $(a + b)i$ is the standard first-week error.`,
+    },
+    {
+      id: 'c-blackboard',
+      tex: `$\\mathbb{C}$`,
+      read: `C — the set of complex numbers`,
+      means: `Blackboard bold for the set of every complex number: $\\mathbb{C} = \\{a + bi : a, b \\in \\mathbb{R}\\}$, the final link in the intro's chain $\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R} \\subset \\mathbb{C}$. The whole double-struck family is catalogued with the [set-theory symbols](!/math-symbols/set-theory), and the [mathematical keyboard](!/keyboard) carries $\\mathbb{C}$ directly.`,
+      cases: `Membership declares domain: $z \\in \\mathbb{C}$ opens a statement the way $\\mathbf{v} \\in \\mathbb{R}^n$ does for [vectors](!/linear-algebra/vectors/basic-operations#notation); superscripted, $\\mathbb{C}^n$ names the space of complex $n$-tuples.`,
+      alsoWritten: `Bold upright $\\mathbf{C}$ in older print — blackboard's double stroke began as chalk imitating bold type, then migrated back into books.`,
+      confusedWith: `$\\mathbb{R}^2$. The complex plane and the real plane share their points, but $\\mathbb{R}^2$ has no multiplication of points — writing $\\mathbb{C}$ asserts the field structure of **The Mathematical Theory** below.`,
+      sameGlyphElsewhere: `Italic $C$ is the integration constant of [indefinite integrals](!/calculus/integrals/indefinite#notation) and the combination count $C(n, k)$ of [combinatorics](!/combinatorics/combinations) — unrelated jobs; the typeface is the only separator.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
+},
+
     obj3: {
   title: `Arithmetic Operations: Calculating in $\\mathbb{C}$`,
   before: ``,
@@ -640,6 +681,25 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

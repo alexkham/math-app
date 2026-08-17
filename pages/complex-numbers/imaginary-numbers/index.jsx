@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -220,7 +221,7 @@ export async function getStaticProps(){
 
 // Rather than abandon such equations as meaningless, mathematicians introduced a new object: the imaginary unit, denoted $i$, defined by the single property $i^2 = -1$. This definition creates exactly what the equation demands — a number whose square is negative one. The symbol $i$ does not represent any point on the traditional number line; it exists perpendicular to all real numbers, opening an entirely new dimension for mathematical exploration.
 
-// An equivalent notation writes $i = \\sqrt{-1}$, interpreting $i$ as the principal square root of negative one. This form emphasizes the connection to familiar radical expressions, though it requires caution. The usual rules for manipulating square roots do not always extend safely to negative radicands, a subtlety explored in the [next section](!/complex-numbers/imaginary-numbers#simplifying-square-roots). Despite its name, nothing about the imaginary unit is fictitious or unreal — it is simply a different kind of number, as legitimate as any other, governed by consistent rules that extend arithmetic into new territory.`,
+// An equivalent notation writes $i = \\sqrt{-1}$, interpreting $i$ as the principal square root of negative one. This form emphasizes the connection to familiar radical expressions, though it requires caution. The usual rules for manipulating square roots do not always extend safely to negative radicands, a subtlety explored in the [next section](!/complex-numbers/imaginary-numbers#2). Despite its name, nothing about the imaginary unit is fictitious or unreal — it is simply a different kind of number, as legitimate as any other, governed by consistent rules that extend arithmetic into new territory.`,
 //   after: ``,
 //   link: '',
 // },
@@ -432,7 +433,7 @@ The equation $x^2 + 1 = 0$ poses exactly this challenge to the real number syste
 
 Rather than abandon such equations as meaningless, mathematicians introduced a new object: the imaginary unit, denoted $i$, defined by the single property $i^2 = -1$. This definition creates exactly what the equation demands — a number whose square is negative one. The symbol $i$ does not represent any point on the traditional number line; it exists perpendicular to all real numbers, opening an entirely new dimension for mathematical exploration.
 
-An equivalent notation writes $i = \\sqrt{-1}$, interpreting $i$ as the principal square root of negative one — both ways of writing the unit appear among the [complex number symbols](!/math-symbols/complex-numbers). This form emphasizes the connection to familiar radical expressions, though it requires caution. The usual rules for manipulating square roots do not always extend safely to negative radicands, a subtlety explored in the [next section](!/complex-numbers/imaginary-numbers#simplifying-square-roots). Despite its name, nothing about the imaginary unit is fictitious or unreal — it is simply a different kind of number, as legitimate as any other, governed by consistent rules that extend arithmetic into new territory.`,
+An equivalent notation writes $i = \\sqrt{-1}$, interpreting $i$ as the principal square root of negative one — both ways of writing the unit appear among the [complex number symbols](!/math-symbols/complex-numbers). This form emphasizes the connection to familiar radical expressions, though it requires caution. The usual rules for manipulating square roots do not always extend safely to negative radicands, a subtlety explored in the [next section](!/complex-numbers/imaginary-numbers#2). Despite its name, nothing about the imaginary unit is fictitious or unreal — it is simply a different kind of number, as legitimate as any other, governed by consistent rules that extend arithmetic into new territory.`,
   after: ``,
   link: '',
 },
@@ -478,6 +479,45 @@ Examples span a wide range of appearances. Simple cases include $3i$, $-7i$, and
 The number zero occupies a unique position in this classification. Written as $0 = 0 + 0i$, it satisfies the condition for being real (the imaginary part equals zero) and simultaneously satisfies the condition for being pure imaginary (the real part equals zero). No other number achieves this dual membership. Zero stands alone at the intersection of the real and imaginary worlds, belonging fully to both categories. On the [complex plane](!/complex-numbers/geometric-representation), this corresponds to the single point where the horizontal real axis and the vertical imaginary axis cross — the origin itself.`,
   after: ``,
   link: '',
+},
+
+notation: {
+  title: `Imaginary Unit Notation`,
+  lead: `[Basics](!/complex-numbers/basics#notation) named the number; this page owns the unit itself — the letter, its radical alias, and the coefficient conventions around it. Engineering's dissent and the index-$i$ collision live here too.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ are owned by [complex numbers basics](!/complex-numbers/basics#notation); the extraction marks $Re(z)$, $Im(z)$ that **Critical Distinction** below leans on belong to the [algebraic form page](!/complex-numbers/algebraic-form).`,
+  entries: [
+    {
+      id: 'i-unit',
+      tex: `$i$`,
+      read: `i — the imaginary unit`,
+      means: `One letter defines the whole system: $i$ is the number whose square is $-1$. Typography carries meaning here — ISO and physics style guides set the constant upright ($\\mathrm{i}$) to separate it from italic variables, though most textbooks, this site included, keep the italic.`,
+      cases: `Coefficient $1$ is never written — $i$, not $1i$ — and parenthesization decides what a square hits: $(2i)^2 = -4$, while $2i^2 = -2$.`,
+      alsoWritten: `$j$ — electrical engineering's replacement, with $i$ reserved for current: circuit texts write $a + jb$, and Python's complex literals are @[3+2j]@.`,
+      confusedWith: `The index $i$ of sums and matrix entries — $a_i$, $\\sum_i$, $a_{ij}$ — a pure counter with no square rule; texts mixing both switch the counter to $k$, and the [sequence subscript](!/algebra/sequences/arithmetic#notation) page owns that job.`,
+      sameGlyphElsewhere: `The unit vector $\\mathbf{i}$ of [cross products](!/linear-algebra/vectors/cross-product#notation) — bold, and no accident: Hamilton's quaternion units $i, j, k$ fathered both notations.`,
+    },
+    {
+      id: 'sqrt-minus-one',
+      tex: `$\\sqrt{-1}$`,
+      read: `the square root of minus one`,
+      means: `The radical spelling of the unit: $i = \\sqrt{-1}$, read as the *principal* root. A definition by picture rather than by property — rigorous treatments start from $i^2 = -1$ instead, because the [radical sign](!/algebra/roots/properties#notation) imports rules that do not all survive the trip.`,
+      cases: `Safe as a name, dangerous as an operand: $\\sqrt{-a} = i\\sqrt{a}$ converts once, then all arithmetic happens in $i$-form — the working rule of **Simplifying Square Roots of Negative Numbers** above.`,
+      alsoWritten: `$(-1)^{1/2}$ — the fractional-exponent spelling, native wherever [rational exponents](!/algebra/powers/rational-exponents) do the writing.`,
+      confusedWith: `A license to multiply radicals. $\\sqrt{-1} \\cdot \\sqrt{-1} = \\sqrt{1} = 1$ looks legal and is false — the product rule $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$ demands non-negative radicands, and the true value is $i \\cdot i = -1$.`,
+    },
+    {
+      id: 'bi-form',
+      tex: `$bi$`,
+      read: `b i — a pure imaginary number`,
+      means: `The pure-imaginary spelling of the [general form](!/complex-numbers/basics#notation): real part gone, coefficient before unit — $2i$, never $i2$. **Defining Pure Imaginary Numbers** below fixes when the name applies.`,
+      cases: `Radical coefficients flip the order: $i\\sqrt{7}$ is preferred to $\\sqrt{7}i$, keeping the unit visibly outside the radicand; the same $i$-first instinct writes $\\cos\\theta + i\\sin\\theta$.`,
+      confusedWith: `The imaginary *part*. $Im(2 - 7i)$ is $-7$, the bare coefficient — not $-7i$; **Critical Distinction** below exists for exactly this error.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
 },
 
 
@@ -867,6 +907,25 @@ export default function ImaginaryNumbersPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
