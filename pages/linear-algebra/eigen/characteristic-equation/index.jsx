@@ -842,6 +842,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
@@ -1194,6 +1195,44 @@ The characteristic equation transforms the geometric question "which directions 
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Eigenvalue Notation`,
+    lead: `The Greek letter no one dares rename, the identity matrix that must not be dropped, and the subscript that names a space after a number.`,
+    inherited: `$\\det$ and its bars — [determinant notation](!/linear-algebra/determinants/properties#notation); $I$ and matrix algebra — [matrix notation](!/linear-algebra/matrix/operations#notation); $\\text{Null}$ — [the four subspaces](!/linear-algebra/vector-spaces/fundamental-spaces#notation).`,
+    entries: [
+      {
+        id: 'lambda-reserved',
+        tex: `$A\\mathbf{v} = \\lambda\\mathbf{v}$`,
+        read: `A v equals lambda v`,
+        means: `$\\lambda$ is the subject's reserved letter — eigenvalues are $\\lambda$ in every textbook on earth, enumerated $\\lambda_1, \\lambda_2, \\ldots$ when there are several. The defining equation reads as a balance: matrix action on the left, plain scaling on the right, same vector both sides.`,
+        cases: `The full set of eigenvalues has its own mark in advanced texts: the spectrum $\\sigma(A)$ — a set-valued operator, sibling to $\\text{Col}$ and $\\text{Null}$.`,
+        alsoWritten: `$\\mu$ when $\\lambda$ is spoken for, in perturbation and two-matrix arguments; German texts historically used $\\lambda$ from the start — the letter is Hilbert-era and stuck.`,
+        confusedWith: `A matrix. $\\lambda$ is a *scalar* — which is exactly why $A - \\lambda$ is illegal and the next entry's $I$ exists.`,
+      },
+      {
+        id: 'lambda-i-object',
+        tex: `$\\det(A - \\lambda I) = 0$`,
+        read: `The determinant of A minus lambda I, set to zero`,
+        means: `The $I$ is load-bearing: a scalar cannot be subtracted from a matrix, so $\\lambda$ must first become $\\lambda I$ — a scaling of the identity. Writing $A - \\lambda$ is the classic species error; the notation $A - \\lambda I$ is its permanent correction. The equation itself is derived in **From Eigenvectors to the Determinant Condition** above.`,
+        cases: `Two sign conventions circulate: $\\det(A - \\lambda I)$ — this site's, keeping $A$ first — and $\\det(\\lambda I - A)$, which makes the polynomial monic. They differ by $(-1)^n$; the roots, being what matters, agree.`,
+        alsoWritten: `$p(\\lambda)$, or $p_A(\\lambda)$ with the matrix as subscript — the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation) named as a function, per **The Characteristic Polynomial** below.`,
+        confusedWith: `An equation to solve for $A$. The unknown is $\\lambda$ — the matrix is data, the scalar is the variable, an inversion of the usual roles that the notation quietly performs.`,
+      },
+      {
+        id: 'eigenspace-subscript',
+        tex: `$E_{\\lambda} = \\text{Null}(A - \\lambda I)$`,
+        read: `The eigenspace for lambda`,
+        means: `A space named after a number: the subscript on $E_{\\lambda}$ is the eigenvalue whose eigenvectors (plus $\\mathbf{0}$) fill it. One subscripted letter per eigenvalue — $E_3$ is the eigenspace for $\\lambda = 3$, not a third eigenspace.`,
+        cases: `Each $\\lambda$ carries two counted quantities: algebraic multiplicity — its exponent as a root of $p(\\lambda)$, the [multiplicity notation](!/algebra/polynomials/roots#notation) of polynomials — and geometric multiplicity, $\\dim E_{\\lambda}$. The pair drives **Algebraic Multiplicity** below and the whole of diagonalization.`,
+        alsoWritten: `$\\ker(A - \\lambda I)$ — the map-dialect spelling, per [kernel notation](!/linear-algebra/transformations/image-kernel#notation).`,
+        confusedWith: `The standard-basis letter. $\\mathbf{e}_i$ is a basis vector, $E_{ij}$ a matrix unit, $E_{\\lambda}$ an eigenspace — one letter, three species, separated by bold, double subscripts, and a Greek subscript respectively.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/eigen`,
+    parentLabel: `Eigenvalues and Eigenvectors`,
+  },
   obj2: {
     title: `The Characteristic Polynomial`,
     content: `The characteristic polynomial of $A$ is the determinant of $A - \\lambda I$ viewed as a function of $\\lambda$:
@@ -1519,6 +1558,25 @@ export default function CharacteristicEquationPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

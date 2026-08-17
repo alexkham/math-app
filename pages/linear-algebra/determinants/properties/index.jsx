@@ -209,7 +209,7 @@
 
 // // // An immediate consequence is that any matrix with two identical rows has determinant zero. Swapping those two rows changes the sign of the determinant, yet the matrix itself is unchanged — the only number equal to its own negative is zero.
 
-// // // The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#transpose), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
+// // // The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
 
 // // // Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
 // // //     before: ``,
@@ -403,7 +403,7 @@
 
 // // An immediate consequence is that any matrix with two identical rows has determinant zero. Swapping those two rows changes the sign of the determinant, yet the matrix itself is unchanged — the only number equal to its own negative is zero.
 
-// // The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#transpose), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
+// // The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
 
 // // Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
 // //     before: ``,
@@ -1148,7 +1148,7 @@
 
 // // An immediate consequence is that any matrix with two identical rows has determinant zero. Swapping those two rows changes the sign of the determinant, yet the matrix itself is unchanged — the only number equal to its own negative is zero.
 
-// // The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#transpose), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
+// // The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
 
 // // Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
 // //     before: ``,
@@ -1342,7 +1342,7 @@
 
 // An immediate consequence is that any matrix with two identical rows has determinant zero. Swapping those two rows changes the sign of the determinant, yet the matrix itself is unchanged — the only number equal to its own negative is zero.
 
-// The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#transpose), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
+// The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
 
 // Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
 //     before: ``,
@@ -1903,6 +1903,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import EquivalenceRing from '@/app/components/infographics/linear-algebra/EquivalenceRing'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
@@ -2097,7 +2098,7 @@ const determinantProperties = {
 
 // An immediate consequence is that any matrix with two identical rows has determinant zero. Swapping those two rows changes the sign of the determinant, yet the matrix itself is unchanged — the only number equal to its own negative is zero.
 
-// The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#transpose), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
+// The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
 
 // Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
 //     before: ``,
@@ -2291,12 +2292,50 @@ const sectionsContent = {
 
 An immediate consequence is that any matrix with two identical rows has determinant zero. Swapping those two rows changes the sign of the determinant, yet the matrix itself is unchanged — the only number equal to its own negative is zero.
 
-The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#transpose), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
+The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
 
 Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
     before: ``,
     after: ``,
     link: ``,
+  },
+  notation: {
+    title: `Determinant Notation`,
+    lead: `An operator with three spellings — a function name, a pair of bars, and a letter borrowed by three different jobs.`,
+    inherited: `$A$, $(a_{ij})$ and $A^{T}$ — [matrix notation](!/linear-algebra/matrix/operations#notation); the other bar species — [absolute value](!/algebra/equations/absolute-value#notation) and [norms](!/linear-algebra/vectors/magnitude#notation).`,
+    entries: [
+      {
+        id: 'det-operator',
+        tex: `$\\det(A)$`,
+        read: `The determinant of A; det A`,
+        means: `The operator spelling — parentheses optional, like $\\sin x$: $\\det A$ and $\\det(A)$ are the same statement. Defined for square matrices only; the output is one scalar, sign included.`,
+        cases: `Parentheses turn mandatory on expressions: $\\det(AB)$, $\\det(A + B)$ — and the notation is where the algebra shows its asymmetry: $\\det(AB)$ splits into a product in **The Multiplicative Property** below, while $\\det(A+B)$ splits into nothing at all.`,
+        alsoWritten: `$\\operatorname{det} A$ upright in careful typesetting — an operator name, never italic letters $d \\cdot e \\cdot t$.`,
+        confusedWith: `A matrix-valued operation. $\\det$ collapses the whole array to one number — writing matrix brackets around a determinant's result is a species error in reverse.`,
+      },
+      {
+        id: 'bars-form',
+        tex: `$|A|$ · $\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}$`,
+        read: `The determinant of A, written with bars`,
+        means: `The delimiter spelling: single bars around a matrix name, or straight bars replacing the matrix's own brackets — the one operator in elementary mathematics written as a pure *delimiter*. Between the bars sits the array; the bars themselves say “take its determinant”.`,
+        cases: `The bar family completes here: $|x|$ on a scalar, $\\|\\mathbf{v}\\|$ on a vector, $|A|$ on a matrix — and only this last one **can be negative**. The bars promise no non-negativity; a row swap above flips the sign inside them.`,
+        alsoWritten: `$|A| = \\det(A)$, freely interchangeable; the bars win inside computations, $\\det$ wins in prose and wherever $|{\\cdot}|$ is already busy with absolute values.`,
+        confusedWith: `Absolute value. $|\\det(A)|$ is a legitimate double-decker — the outer bars are the scalar [absolute value](!/algebra/equations/absolute-value#notation) of the possibly-negative number the inner operation produced; volume formulas use exactly this stack.`,
+      },
+      {
+        id: 'delta-tradition',
+        tex: `$\\Delta = \\det(A)$`,
+        read: `Delta — the determinant, in the school tradition`,
+        means: `Russian and European school texts reserve $\\Delta$ for the determinant of a system's coefficient matrix, with $\\Delta_1, \\Delta_2$ (or $\\Delta_x, \\Delta_y$) for the numerator determinants of Cramer's rule: $x = \\Delta_x / \\Delta$.`,
+        cases: `The letter now holds three unrelated jobs across this site: the [increment](!/calculus/derivatives/differentials#notation) $\\Delta x$, the [discriminant](!/algebra/equations/quadratic#notation) $\\Delta = b^2 - 4ac$, and this determinant. Field and context are the only disambiguators.`,
+        alsoWritten: `$D$ — the same tradition's other letter, colliding with the discriminant's $D$ in the same texts; context carries the load twice over.`,
+        confusedWith: `“Change in”. A student meeting $\\Delta_x$ in Cramer's rule after calculus reads “change in $x$” — here it is a fixed determinant with $x$'s column replaced, no motion anywhere.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/determinants`,
+    parentLabel: `Determinants`,
   },
   obj2: {
     title: `Effect of Row Scaling`,
@@ -2664,6 +2703,25 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

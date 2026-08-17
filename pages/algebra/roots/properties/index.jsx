@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -492,6 +493,44 @@ This restriction affects the domain of [radical functions](!/algebra/roots/funct
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Radical Notation`,
+    lead: `The three parts of the radical, the bar that is secretly a parenthesis, and the sign that says two things at once.`,
+    inherited: `The exponent spelling $a^{1/n}$ and the bridge between the notations — [rational exponents](!/algebra/powers/rational-exponents#notation).`,
+    entries: [
+      {
+        id: 'radical-anatomy',
+        tex: `$\\sqrt[n]{a}$`,
+        read: `The n-th root of a; root a, for the square root`,
+        means: `Three parts: the index $n$ in the crook, the radicand $a$ under the bar, and the hook joining them. The index $2$ is never written — a bare $\\sqrt{a}$ is the square root. The [LaTeX reference](!/latex) puts the index in brackets: @[\\sqrt[n]{a}]@.`,
+        cases: `Index parity is the whole story on this page — even in **Even Index Radicals** above, odd in **Odd Index Radicals** below; domain, sign, and convention all key off it.`,
+        alsoWritten: `$a^{1/n}$ — the exponent spelling, bridged at [rational exponents](!/algebra/powers/rational-exponents#notation). Older British texts call an irrational root a “surd”.`,
+        confusedWith: `A both-roots symbol. The glyph returns one number only — the non-negative one for even indices, per **Principal Root Convention** below; the other root needs the sign written explicitly.`,
+      },
+      {
+        id: 'vinculum',
+        tex: `$\\sqrt{9 + 16}$`,
+        read: `The root of the whole quantity, nine plus sixteen`,
+        means: `The overbar — the vinculum — is a grouping symbol: an invisible pair of parentheses. Everything beneath it is rooted as one block, so $\\sqrt{9+16} = \\sqrt{25} = 5$.`,
+        cases: `In print the bar's reach is exact; in handwriting an under-extended bar silently shrinks the radicand — the sloppiest common source of radical errors.`,
+        alsoWritten: `Descartes fused the hook with the vinculum in *La Géométrie* (1637); before that, radicals grouped with dots or not at all.`,
+        confusedWith: `A distributable operation. $\\sqrt{9+16} = 5$ while $\\sqrt{9} + \\sqrt{16} = 7$ — the root does not distribute over sums, and the bar is precisely what marks the difference.`,
+      },
+      {
+        id: 'plus-minus',
+        tex: `$\\pm$ · $\\mp$`,
+        read: `Plus or minus; minus or plus`,
+        means: `Two statements on one line: $x = \\pm 4$ unpacks to $x = 4$ or $x = -4$ — unpack before computing. It appears the moment an even root meets an equation, as in **Principal Root Convention** below. The [mathematical keyboard](!/keyboard) carries both marks.`,
+        cases: `$\\mp$ tracks the opposite choice inside the same formula — $\\cos(A \\pm B) = \\cos A \\cos B \\mp \\sin A \\sin B$: top sign goes with top sign. The mark's most famous job is the quadratic formula on [quadratic equations](!/algebra/equations/quadratic).`,
+        alsoWritten: `The solution-set form $x \\in \\{-4, 4\\}$, when the compression is unwanted.`,
+        confusedWith: `Measurement uncertainty. In the sciences $5.0 \\pm 0.1$ names an interval, not two values — same glyph, unrelated job.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/roots`,
+    parentLabel: `Roots`,
+  },
 
   obj2: {
     title: `Odd Index Radicals`,
@@ -902,6 +941,25 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

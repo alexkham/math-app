@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -260,6 +261,44 @@ Not every linear inequality arrives in standard form. The inequality $3x - 7 > 2
     before: ``,
     after: ``,
     link: '',
+  },
+  notation: {
+    title: `Inequality Notation`,
+    lead: `What the little bar under the sign promises, which chains are legal, and the bracket rules every interval answer obeys.`,
+    inherited: `Interval glyphs and their set-builder translations — [expressing domains](!/functions/domain); $\\cup$ for joined rays — [set operations](!/set-theory/operations).`,
+    entries: [
+      {
+        id: 'four-marks',
+        tex: `$<$ · $\\leq$ · $>$ · $\\geq$`,
+        read: `Less than; less than or equal to; greater than; greater than or equal to`,
+        means: `Two strict marks and their two closed cousins — the bar underneath is a one-stroke “or equal”. The open end always faces the larger side, so $a < b$ and $b > a$ are the same statement written from opposite ends.`,
+        cases: `Strict versus inclusive decides everything downstream: whether the boundary point belongs, whether the dot is open or solid, whether the interval bracket is round or square — the full correspondence runs through **Graphing the Solution** below.`,
+        alsoWritten: `$\\leqslant$ and $\\geqslant$ — the slanted-bar forms, standard in British, French, and Russian typesetting; identical in meaning.`,
+        confusedWith: `$\\neq$. “Not equal” refuses equality but says nothing about order — it is not a fifth member of this family, and it cannot be graphed as a ray.`,
+      },
+      {
+        id: 'chained-inequality',
+        tex: `$-3 < 2x + 1 \\leq 7$`,
+        read: `Two x plus one is greater than minus three and at most seven`,
+        means: `A three-part chain is a compressed AND: both outer conditions hold at once, and every operation must be applied to all three parts, as in **Compound Linear Inequalities** below.`,
+        cases: `Legal chains point one way only — both signs $<$/$\\leq$, or both $>$/$\\geq$. A mixed chain like $5 > x < 8$ is malformed: it compresses no single statement, and every style guide bans it.`,
+        alsoWritten: `The uncompressed pair — $-3 < 2x+1$ and $2x+1 \\leq 7$ — which is also the only legal way to write an OR: disjunctions never chain.`,
+        confusedWith: `A chain of separate comparisons read pairwise. The chain asserts *simultaneity* — it is one condition on one number, not a running commentary.`,
+      },
+      {
+        id: 'interval-endpoints',
+        tex: `$(-\\infty, 9]$`,
+        read: `From minus infinity to nine, inclusive`,
+        means: `Solution rays and intervals obey two bracket rules: square means the endpoint belongs, round means it does not — and $\\infty$ *always* takes a round bracket, because an unreachable end cannot belong to anything.`,
+        cases: `Strict inequality → round, inclusive → square, matching the marks above. Two rays joined by OR write their union: $(-\\infty, -4) \\cup (2, \\infty)$.`,
+        alsoWritten: `Reversed brackets — $\\left]-2, 3\\right]$ — the Bourbaki convention, standard in French and some European texts, where an outward-turned bracket marks the excluded end.`,
+        confusedWith: `The coordinate pair $(4, \\infty)$ versus the point $(4, 7)$ — identical glyphs. Context decides, which is exactly why the Bourbaki school switched to reversed brackets.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/inequalities`,
+    parentLabel: `Inequalities`,
   },
 
   obj2: {
@@ -575,6 +614,25 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
 

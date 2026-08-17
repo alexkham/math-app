@@ -2301,7 +2301,7 @@ const formulasRepository = [
     formula: "$$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a)$$\n$$f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$",
     link: {
           "label": "One-Sided Continuity",
-          "url": "/calculus/limits/one-sided#9"
+          "url": "/calculus/limits/one-sided#10"
         },
     relatedTools: [],
     usedOnPages: [],

@@ -826,6 +826,7 @@ import Head from 'next/head'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -1090,6 +1091,44 @@ Independence means no vector in the basis is wasted. Spanning means no vector in
     before: ``,
     after: ``,
     link: ``,
+  },
+  notation: {
+    title: `Basis and Coordinate Notation`,
+    lead: `A script letter for the collection, brackets that ask “in which coordinates?”, and a subscript arrow engineered to cancel like dominoes.`,
+    inherited: `$\\text{Span}$ and $\\{\\ldots\\}$ — [span notation](!/linear-algebra/vector-spaces/span#notation); $\\mathbf{e}_i$ — [norm notation](!/linear-algebra/vectors/magnitude#notation); matrices and $B^{-1}$ — [matrix](!/linear-algebra/matrix/operations#notation) and [inverse notation](!/linear-algebra/matrix/inverse#notation).`,
+    entries: [
+      {
+        id: 'script-basis',
+        tex: `$\\mathcal{B}$ vs $B$`,
+        read: `Script B, the basis; roman B, the matrix`,
+        means: `Calligraphic letters name *collections*: $\\mathcal{B}$ is the set of basis vectors, while roman $B$ is the matrix whose columns they become — and the **Coordinates** section below legitimately uses both in one computation ($\\mathbf{c} = B^{-1}\\mathbf{v}$ for coordinates relative to $\\mathcal{B}$).`,
+        cases: `The script convention extends across the subject: $\\mathcal{P}_n$ for the polynomial space, $\\mathcal{C}$ for a second basis — collections and spaces get the fancy typeface, their matrix incarnations the plain one.`,
+        alsoWritten: `Plain $B = \\{\\mathbf{v}_1, \\ldots\\}$ in texts without calligraphic fonts — workable until a basis and its matrix share a page, which is exactly when the distinction earns its ink.`,
+        confusedWith: `One object. The set and the matrix carry the same data but different species — a set has members, a matrix has products; conflating them writes $\\mathcal{B}\\mathbf{c}$, which multiplies nothing.`,
+      },
+      {
+        id: 'coordinate-brackets',
+        tex: `$[\\mathbf{v}]_{\\mathcal{B}}$`,
+        read: `The coordinate vector of v, relative to B`,
+        means: `The brackets ask “in which coordinates?” and the subscript answers. Defined in **Coordinates** below: the column of scalars expressing $\\mathbf{v}$ in the basis $\\mathcal{B}$. Same vector, different subscript, different numbers — the notation makes basis-dependence impossible to forget.`,
+        cases: `In the standard basis the machinery collapses: $[\\mathbf{v}]_{\\mathcal{E}} = \\mathbf{v}$ — the coordinates *are* the components, which is why the subscript is usually dropped there and only there.`,
+        alsoWritten: `$(\\mathbf{v})_{\\mathcal{B}}$ with parentheses, or $\\mathbf{v}_{\\mathcal{B}}$ bare in terse texts — the bracket form dominates because it survives expressions: $[T(\\mathbf{v})]_{\\mathcal{B}}$ parses cleanly.`,
+        confusedWith: `The vector itself. $\\mathbf{v}$ lives in $V$; $[\\mathbf{v}]_{\\mathcal{B}}$ lives in $\\mathbb{R}^n$ — a *description* of $\\mathbf{v}$, not $\\mathbf{v}$. The gap between object and description is the entire content of coordinate isomorphism.`,
+      },
+      {
+        id: 'backward-arrow-subscript',
+        tex: `$P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$`,
+        read: `The change-of-basis matrix, from B to C`,
+        means: `The subscript reads right to left — *from* $\\mathcal{B}$, *toward* $\\mathcal{C}$ — because the notation is engineered for the equation it lives in: in $[\\mathbf{v}]_{\\mathcal{C}} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}[\\mathbf{v}]_{\\mathcal{B}}$ of **Change of Basis** below, adjacent basis letters touch and match.`,
+        cases: `The design pays off in chains: $P_{\\mathcal{D} \\leftarrow \\mathcal{C}}\\,P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = P_{\\mathcal{D} \\leftarrow \\mathcal{B}}$ — inner letters cancel like dominoes — and reversal is the [inverse](!/linear-algebra/matrix/inverse#notation): $P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}^{-1}$.`,
+        alsoWritten: `$P_{\\mathcal{B} \\to \\mathcal{C}}$ with a forward arrow in some texts — same matrix, arrow flipped; check each book's convention before trusting the direction.`,
+        confusedWith: `Reading left to right. The arrow's tail names the *input* coordinates — reading it as “from $\\mathcal{C}$” applies the matrix backwards, and the mistake is self-concealing because the product still computes.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vector-spaces`,
+    parentLabel: `Vector Spaces`,
   },
   obj3: {
     title: `Unique Representation`,
@@ -1466,6 +1505,25 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

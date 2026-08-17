@@ -913,6 +913,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
@@ -1383,6 +1384,44 @@ The standard dot product on $\\mathbb{R}^n$ is one inner product. But the defini
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Inner Product Notation`,
+    lead: `The angle brackets' third and final job, the dots that mark empty argument slots, and the perpendicularity mark that grew a superscript.`,
+    inherited: `The concrete dot — [dot product notation](!/linear-algebra/vectors/dot-product#notation); $\\|\\cdot\\|$ — [norm notation](!/linear-algebra/vectors/magnitude#notation); the other two angle-bracket jobs — [span notation](!/linear-algebra/vector-spaces/span#notation).`,
+    entries: [
+      {
+        id: 'angle-bracket-product',
+        tex: `$\\langle \\mathbf{u}, \\mathbf{v} \\rangle$`,
+        read: `The inner product of u and v`,
+        means: `Angle brackets with a comma: two vectors in, one scalar out, by whatever rule the space has declared — the axioms of **General Inner Products** above. The [dot product](!/linear-algebra/vectors/dot-product#notation) is the $\\mathbb{R}^n$ instance; the brackets are the abstraction that lets Fourier series and polynomial spaces borrow its geometry.`,
+        cases: `This closes the angle-bracket ledger: components in some calculus texts, [generated subspaces](!/linear-algebra/vector-spaces/span#notation) in algebra, and inner products here — three jobs, and only context or a comma count separates them.`,
+        alsoWritten: `$(\\mathbf{u}, \\mathbf{v})$ — plain parentheses, the standard in Russian and much European literature; economical but colliding with points, tuples, and open intervals all at once.`,
+        confusedWith: `Dirac's bra-ket. Physics writes $\\langle u \\mid v \\rangle$ with a *bar*, not a comma — the same brackets split into freestanding halves $\\langle u \\mid$ and $\\mid v \\rangle$; comma means mathematics, bar means quantum mechanics.`,
+      },
+      {
+        id: 'slot-dots',
+        tex: `$\\langle \\cdot, \\cdot \\rangle: V \\times V \\to \\mathbb{R}$`,
+        read: `The inner product, as a function of two slots`,
+        means: `The centered dots are *placeholders*: they mark empty argument slots, letting the operation be named without feeding it. The signature above — from the definition in **General Inner Products** — declares the machine: two vectors go in the slots, a real number comes out.`,
+        cases: `The same device names any operation slot-wise: $\\|\\cdot\\|$ for the norm, $d(\\cdot, \\cdot)$ for distance, $f(\\cdot)$ for a function whose argument is momentarily none of your business.`,
+        alsoWritten: `Dashes or boxes in some texts ($\\langle -, - \\rangle$ is common in category-flavoured writing) — same placeholder idea, different filler.`,
+        confusedWith: `The multiplication dot. Identical glyph, opposite role: $c \\cdot \\mathbf{v}$ operates, $\\langle \\cdot, \\cdot \\rangle$ leaves a blank — one is a verb, the other an empty chair.`,
+      },
+      {
+        id: 'perp-mark',
+        tex: `$\\mathbf{u} \\perp \\mathbf{v}$ · $W^{\\perp}$`,
+        read: `u is orthogonal to v; W perp`,
+        means: `The up-tack asserts $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 0$ — geometry's perpendicularity sign, generalized to any inner product space. As a *superscript* it becomes an operator: $W^{\\perp}$ is the set of everything orthogonal to $W$, the orthogonal complement.`,
+        cases: `The mark scales across species: $\\mathbf{u} \\perp \\mathbf{v}$ between vectors, $\\mathbf{v} \\perp W$ vector-to-subspace, $W^{\\perp}$ as a whole subspace — the [four-subspace](!/linear-algebra/vector-spaces/fundamental-spaces#notation) complement pairs are written exactly this way.`,
+        alsoWritten: `“Orthogonal” spelled out where the symbol is unavailable; $\\perp$ itself is LaTeX @[\\perp]@, distinct from the up-tack $\\bot$ of logic typography.`,
+        confusedWith: `A superscript exponent or transpose. $W^{\\perp}$ joins $A^{T}$ and $A^{-1}$ in the crowded superscript corner — like them, it is a label naming an operation, and like them it reverses nothing about $W$ itself.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/orthogonality`,
+    parentLabel: `Orthogonality`,
+  },
   obj9: {
     title: `Examples of Inner Products`,
     content: `The weighted inner product on $\\mathbb{R}^n$ is $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$, where $W$ is a [symmetric](!/linear-algebra/matrix/types) positive definite [matrix](!/linear-algebra/matrix). This distorts the standard geometry — unit circles become ellipses, and &quot;perpendicular&quot; directions depend on $W$. When $W = I$, it reduces to the standard dot product.
@@ -1669,6 +1708,25 @@ export default function InnerProductPage({
           >
             <PropertyLawCard data={innerProductAxioms} theme="navy" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

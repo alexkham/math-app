@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -248,6 +249,44 @@ When the base is itself a fraction, the reciprocal interpretation applies in ful
   after: ``,
   link: '',
 },
+  notation: {
+    title: `Negative Exponent Notation`,
+    lead: `What the minus in the exponent does and does not touch, the one place the $-1$ superscript is real arithmetic, and where these exponents live outside algebra.`,
+    inherited: `The base symbol $a^n$, its binding and its towers — [natural exponents](!/algebra/powers/natural-exponents#notation).`,
+    entries: [
+      {
+        id: 'minus-in-exponent',
+        tex: `$a^{-n}$`,
+        read: `a to the minus n`,
+        means: `The minus is an instruction — flip to the reciprocal — not a sign. The mechanics are in the **Definition** above; the mark itself promises $\\frac{1}{a^n}$ and nothing about being negative.`,
+        cases: `On a fraction it inverts before raising; across a fraction bar it changes sign — both worked through in **Double Negatives and Reciprocals** below.`,
+        alsoWritten: `$\\frac{1}{a^n}$ — same object; the exponent form wins inside products, where the [laws of exponents](!/algebra/powers/exponent-rules) can act on it.`,
+        confusedWith: `A negative result. $2^{-3} = \\frac{1}{8}$, not $-8$ — for a positive base the output is always positive; the exponent's sign never reaches the answer's sign.`,
+      },
+      {
+        id: 'reciprocal-superscript',
+        tex: `$a^{-1}$`,
+        read: `a inverse; a to the minus one`,
+        means: `The multiplicative inverse $\\frac{1}{a}$ — and the *only* habitat where the $-1$ superscript is genuine arithmetic, an actual exponent obeying the laws.`,
+        cases: `Everywhere else the same mark is a label, not a power: $f^{-1}$ names the [inverse function](!/functions/inverse), $\\sin^{-1}$ the [arcsine](!/trigonometry/inverse-functions), $A^{-1}$ the [matrix inverse](!/linear-algebra/matrix/inverse). None of those mean “one over”.`,
+        alsoWritten: `$1/a$, and $a^{-1}$ interchangeably — on numbers the two readings agree, which is exactly what fails for functions and matrices.`,
+        confusedWith: `Reading $f^{-1}(x)$ as $\\frac{1}{f(x)}$ by analogy with this entry. The analogy is the trap — the number habit does not transfer.`,
+      },
+      {
+        id: 'in-the-wild',
+        tex: `$10^{-n}$ · $\\mathrm{m\\,s^{-2}}$`,
+        read: `Ten to the minus n; metres per second squared`,
+        means: `The two conventions that carry negative exponents outside algebra: powers of ten for small magnitudes — $10^{-4} = 0.0001$, as in the **Definition** above — and unit notation, where $\\mathrm{s^{-2}}$ replaces “per second squared”.`,
+        cases: `Scientific notation writes every small number as $a \\times 10^{-n}$ with $1 \\leq a < 10$. SI unit style prefers negative exponents over slashes — $\\mathrm{m\\,s^{-1}}$, not $\\mathrm{m/s}$ — because slashes stack ambiguously.`,
+        alsoWritten: `@[2.5e-4]@ — calculator and programming E-notation for $2.5 \\times 10^{-4}$.`,
+        confusedWith: `The count of zeros. $10^{-4}$ has three zeros after the decimal point, not four — the exponent counts decimal *places*, and the leading digit occupies one.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/powers`,
+    parentLabel: `Powers`,
+  },
 
 obj4: {
   title: `Double Negatives and Reciprocals`,
@@ -593,6 +632,25 @@ export default function NegativeExponentsPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

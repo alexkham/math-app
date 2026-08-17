@@ -3175,6 +3175,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
@@ -3687,6 +3688,44 @@ Addition is commutative ($A + B = B + A$) and associative ($(A + B) + C = A + (B
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Matrix Notation`,
+    lead: `Capital letters, double subscripts in a fixed order, multiplication with no symbol at all — and the two reserved letters every matrix equation leans on.`,
+    inherited: `Bold vectors and their components — [vector notation](!/linear-algebra/vectors/basic-operations#notation); $A^{T}$ in row-times-column form — [dot product notation](!/linear-algebra/vectors/dot-product#notation).`,
+    entries: [
+      {
+        id: 'matrix-anatomy',
+        tex: `$A = (a_{ij})$, an $m \\times n$ matrix`,
+        read: `The matrix A with entries a-i-j; m by n`,
+        means: `Capital letter for the whole array, lowercase with a *double subscript* for one entry — row first, column second, always: $a_{23}$ sits in row $2$, column $3$. The size $m \\times n$ reads “$m$ by $n$” and obeys the same order: rows, then columns.`,
+        cases: `Subscripts extract from any matrix expression: $(A + B)_{ij}$ names one entry of the sum, the device the definitions on this page are written in. The $\\times$ in $m \\times n$ is a dimension separator — a third job for the glyph, after arithmetic and the [cross product](!/linear-algebra/vectors/cross-product#notation), and this one multiplies nothing.`,
+        alsoWritten: `$[a_{ij}]$ with square brackets — many American texts; this site sets matrices in parentheses. The two bracket styles are pure typography.`,
+        confusedWith: `Reversed subscripts. $a_{ij}$ and $a_{ji}$ name different entries unless the matrix is symmetric — and the transpose is exactly the operation that swaps them.`,
+      },
+      {
+        id: 'juxtaposition-product',
+        tex: `$AB$`,
+        read: `A times B — written with no symbol`,
+        means: `Matrix multiplication is written by juxtaposition — no dot, no cross. The bare notation hides a shape contract: $(m \\times n)(n \\times p)$ works only because the inner dimensions agree, and delivers $m \\times p$.`,
+        cases: `Order is load-bearing: $AB \\neq BA$ in general, so the language splits into *pre*multiplying and *post*multiplying. Powers stack the juxtaposition: $A^n$ for square $A$, with $A^0 = I$ by convention — the identity $I$ (subscripted $I_n$ when size matters) is the matrix world's $1$, and $O$ its $0$, as in **Matrix Addition** above.`,
+        alsoWritten: `$A \\cdot B$ with an explicit dot, in some European school texts — never with $\\times$, which would collide with dimensions and cross products.`,
+        confusedWith: `Scalar habits. From $AB = AC$ nothing cancels; $(A+B)^2$ is $A^2 + AB + BA + B^2$, four terms — the notation looks like ordinary algebra and refuses to behave like it.`,
+      },
+      {
+        id: 'transpose-mark',
+        tex: `$A^{T}$`,
+        read: `A transpose`,
+        means: `The superscript $T$ is a label, not an exponent: flip rows and columns, so $(A^{T})_{ij} = a_{ji}$. The operation itself is **The Transpose** below.`,
+        cases: `It reverses products — $(AB)^{T} = B^{T}A^{T}$, order flipped — and characterizes whole [matrix types](!/linear-algebra/matrix/types) in one equation: $A = A^{T}$ is symmetry, $A^{T} = -A$ skew-symmetry, $Q^{T}Q = I$ orthogonality.`,
+        alsoWritten: `$A^{\\top}$ with the sans-serif glyph; $A'$ in econometrics and older texts — the prime again, moonlighting far from [derivatives](!/calculus/derivatives/function#notation).`,
+        confusedWith: `A power. $A^{T}$ multiplies nothing $T$ times; the same corner of the symbol carries $A^{n}$ (a genuine power), $A^{-1}$ (the [inverse](!/linear-algebra/matrix/inverse)) and $A^{T}$ (a flip) — three superscripts, three unrelated jobs.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/matrix`,
+    parentLabel: `Matrices`,
+  },
   obj2: {
     title: `Matrix Subtraction`,
     content: `Subtraction is defined as addition of the negative:
@@ -4056,6 +4095,25 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

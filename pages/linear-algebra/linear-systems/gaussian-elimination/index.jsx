@@ -936,6 +936,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
@@ -1307,6 +1308,44 @@ Each operation is reversible: swapping the same pair undoes the swap, scaling by
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Elimination Notation`,
+    lead: `The bar that keeps a system from being just a matrix, the arrow that must point at the right row, and the tilde that says “same solutions, different entries.”`,
+    inherited: `Matrices and their entries — [matrix notation](!/linear-algebra/matrix/operations#notation); bold $\\mathbf{x}$, $\\mathbf{b}$ — [vector notation](!/linear-algebra/vectors/basic-operations#notation); $R_i \\leftrightarrow R_j$, $kR_i \\to R_i$, $R_i + cR_j \\to R_i$ are defined in **The Three Elementary Row Operations** above.`,
+    entries: [
+      {
+        id: 'augmented-bar',
+        tex: `$[A \\mid \\mathbf{b}]$`,
+        read: `The augmented matrix — A, bar, b`,
+        means: `The vertical bar is punctuation, not an operation: left of it, coefficient columns; right of it, the constants. The bar records where the $=$ signs of the original system stood, and it rides along unchanged through every row operation.`,
+        cases: `Erase the bar and the object changes species — from a record of a *system* to a plain $m \\times (n{+}1)$ matrix. Multiple right-hand sides stack more columns behind the bar: $[A \\mid \\mathbf{b}_1 \\; \\mathbf{b}_2]$, the device that computes an [inverse](!/linear-algebra/matrix/inverse) via $[A \\mid I]$.`,
+        alsoWritten: `$(A \\mid \\mathbf{b})$ with parentheses, matching this site's matrix brackets; some texts drop the bar entirely and trust the reader's memory — the bar exists so nobody has to.`,
+        confusedWith: `A determinant or divisibility bar. The single upright stroke has many jobs; between matrix columns inside brackets it only ever separates.`,
+      },
+      {
+        id: 'replacement-direction',
+        tex: `$R_i + cR_j \\to R_i$`,
+        read: `Row i plus c times row j, replacing row i`,
+        means: `The arrow points at the row being *replaced* — that is the entire convention, and the entire hazard. In every legal addition step, the row that survives unscaled is the one being written over; row $j$ is only read, never changed.`,
+        cases: `Texts disagree on the spelling: $R_i \\to R_i + cR_j$ (arrow first), $R_i := R_i + cR_j$ (assignment), $R_i' = R_i + cR_j$ (primes). Same operation throughout — but the illegal move $cR_j \\to R_i$, overwriting a row with a multiple of *another*, destroys information and no notation makes it legal.`,
+        alsoWritten: `Annotations over a long arrow between displayed matrices — $\\xrightarrow{R_2 - 3R_1}$ — the compact form worked examples use.`,
+        confusedWith: `The limit arrow. Same glyph as [approach](!/calculus/limits/two-sided#notation); here it means “becomes” — an update, not a tendency.`,
+      },
+      {
+        id: 'row-equivalence-tilde',
+        tex: `$A \\sim B$`,
+        read: `A is row-equivalent to B`,
+        means: `The tilde asserts that a chain of row operations connects $A$ to $B$ — entries differ, solution sets agree. It is precisely *not* equality: writing $=$ between elimination steps is the classic false statement, because the matrices are genuinely different.`,
+        cases: `Every elimination chain is a chain of tildes ending in [echelon form](!/linear-algebra/linear-systems/echelon-form); the tilde is what licenses reading the final matrix's solutions as the first matrix's.`,
+        alsoWritten: `$\\rightarrow$ between displayed matrices, arrow standing in for the tilde in worked examples — including this page's.`,
+        confusedWith: `The tilde's other lives: [equivalent sets](!/set-theory/relationships) in set theory, “is distributed as” in statistics, $\\approx$'s single-stroke cousin for approximation. One squiggle, four fields, four meanings.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/linear-systems`,
+    parentLabel: `Linear Systems`,
+  },
   obj3: {
     title: `Forward Elimination`,
     content: `Forward elimination is the first phase of the algorithm. It sweeps through the augmented matrix from left to right, top to bottom, creating zeros below each pivot.
@@ -1645,6 +1684,25 @@ export default function GaussianEliminationPage({
             key={'obj2-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },

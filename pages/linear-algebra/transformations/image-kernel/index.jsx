@@ -828,6 +828,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
@@ -1203,6 +1204,44 @@ The kernel measures the information lost by $T$. Vectors in the kernel are colla
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Kernel and Image Notation`,
+    lead: `A lowercase German survivor next to a capitalized rival with a double life, the colon that declares a map, and the dictionary between map-speak and matrix-speak.`,
+    inherited: `$\\to$ and $\\mapsto$ — [the four-subspace notation](!/linear-algebra/vector-spaces/fundamental-spaces#notation); bold vectors — [vector notation](!/linear-algebra/vectors/basic-operations#notation).`,
+    entries: [
+      {
+        id: 'ker-im-marks',
+        tex: `$\\ker(T)$ · $\\text{Im}(T)$`,
+        read: `The kernel and image of T`,
+        means: `Both defined above — the notational quirk is the mismatched capitalization, faithfully mirroring the literature: lowercase $\\ker$, from the German *Kern* of Emmy Noether's school, against a usually-capitalized $\\text{Im}$.`,
+        cases: `The capital on $\\text{Im}$ is partly self-defense: lowercase $\\operatorname{im}$ exists, but $\\text{Im}$ has a double life — $\\text{Im}(z)$ is the [imaginary part](!/complex-numbers/algebraic-form) of a complex number, and in complex vector spaces both readings can occur in one paragraph.`,
+        alsoWritten: `$\\operatorname{im}(T)$, $\\operatorname{ran}(T)$, or the word “range” — with range itself ambiguous, as the $R(A)$ wars at the [four subspaces](!/linear-algebra/vector-spaces/fundamental-spaces#notation) attest.`,
+        confusedWith: `Each other's habitat. $\\ker(T) \\subseteq V$ lives in the *domain*, $\\text{Im}(T) \\subseteq W$ in the *codomain* — swapping the homes is the commonest conceptual slip the notation guards against.`,
+      },
+      {
+        id: 'map-signature',
+        tex: `$T: V \\to W$`,
+        read: `T, from V to W`,
+        means: `The signature: colon binds the name to its spaces, the arrow points from domain to codomain. It declares *where* the map operates before any formula says *what* it does.`,
+        cases: `Linear maps inherit a matrix privilege: $T\\mathbf{v}$ without parentheses, written like the product $A\\mathbf{x}$ it secretly is. General functions keep their parentheses; linearity is what licenses the juxtaposition.`,
+        alsoWritten: `$V \\xrightarrow{\\;T\\;} W$ — the name riding on the arrow, standard in diagram-heavy texts.`,
+        confusedWith: `The such-that colon. In $\\{\\mathbf{v} : T(\\mathbf{v}) = \\mathbf{0}\\}$ the colon means “such that” — the kernel's own definition above uses it — while in $T: V \\to W$ it binds a name. Same mark, adjacent lines, different grammar.`,
+      },
+      {
+        id: 'two-languages',
+        tex: `$\\text{Im}(T) = \\text{Col}(A)$, $\\; \\ker(T) = \\text{Null}(A)$`,
+        read: `Image is column space; kernel is null space`,
+        means: `The dictionary between the two dialects: map-speak ($\\ker$, $\\text{Im}$) and matrix-speak ($\\text{Null}$, $\\text{Col}$) name identical subspaces whenever $T(\\mathbf{x}) = A\\mathbf{x}$ — the translation both definitions above perform in their closing paragraphs.`,
+        cases: `The dimensions translate too: rank–nullity reads $\\dim \\text{Im}(T) + \\dim \\ker(T) = \\dim V$ in map dialect and $\\text{rank}(A) + \\text{nullity}(A) = n$ in matrix dialect — as in **The Rank-Nullity Theorem for Maps** below. One theorem, two vocabularies.`,
+        alsoWritten: `“Nullity” — the named dimension of the kernel; the rare case where a *dimension* got its own word instead of a $\\dim$ expression.`,
+        confusedWith: `Two different theories. Nothing differs but vocabulary — a reader fluent in one dialect and not the other misses that every fact transfers verbatim.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/transformations`,
+    parentLabel: `Transformations`,
+  },
   obj3: {
     title: `Injectivity`,
     content: `A linear transformation $T$ is injective (one-to-one) if different inputs always produce different outputs: $T(\\mathbf{u}) = T(\\mathbf{v})$ implies $\\mathbf{u} = \\mathbf{v}$.
@@ -1492,6 +1531,25 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -240,6 +241,43 @@ A note on convention: whether the natural numbers include $0$ varies by source. 
   after: ``,
   link: '',
 },
+  notation: {
+    title: `Exponent Notation`,
+    lead: `The two-slot symbol, what the superscript binds to, and which way a stack of exponents reads.`,
+    entries: [
+      {
+        id: 'power-anatomy',
+        tex: `$a^n$`,
+        read: `a to the n; a squared, a cubed for n = 2, 3`,
+        means: `Two slots: base below, count above — the raised position *is* the operator, as the **Definition** above spells out. The exponent $1$ is never written: $a^1 = a$.`,
+        cases: `$n = 2$ reads “squared”, $n = 3$ “cubed” — geometry's area and volume speaking; from $n = 4$ it is plain “to the fourth”.`,
+        alsoWritten: `@[a^n]@ with a caret in plain text and on calculators, @[a**n]@ in most programming languages — ASCII stand-ins for the superscript.`,
+        confusedWith: `Multiplication. $2^3 = 8$, not $6$ — the exponent counts factors; it never multiplies the base.`,
+      },
+      {
+        id: 'superscript-binding',
+        tex: `$-2^4 \\neq (-2)^4$`,
+        read: `Minus, two-to-the-fourth — versus minus-two, to the fourth`,
+        means: `The superscript binds tighter than the minus sign: $-2^4 = -(2^4) = -16$. Parentheses are the only way to pull the sign into the base; the resulting even/odd sign analysis is in **Sign Behavior** below.`,
+        cases: `The same binding beats multiplication: $ab^n$ is $a \\cdot (b^n)$, never $(ab)^n$.`,
+        alsoWritten: `$-(2^4)$, parenthesised explicitly, where the audience might stumble.`,
+        confusedWith: `Software precedence. The written convention is universal, but spreadsheets break it — Excel evaluates @[-2^2]@ as $4$, minus first. Checking algebra against a spreadsheet is a real source of sign errors.`,
+      },
+      {
+        id: 'tower',
+        tex: `$a^{b^c}$`,
+        read: `a to the b-to-the-c — read from the top down`,
+        means: `Stacked exponents nest from the top: $2^{3^2} = 2^9 = 512$, not $8^2 = 64$.`,
+        cases: `The bottom-up reading already has its own notation — $(a^m)^n$ collapses to $a^{mn}$ by **Power of a Power** below — which is exactly why the bare tower is reserved for the top-down reading: the other one never needs it.`,
+        alsoWritten: `$a^{(b^c)}$ with explicit parentheses, when the convention cannot be assumed.`,
+        confusedWith: `Left-to-right evaluation — the order every other arithmetic chain follows. The tower is the standing exception.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/powers`,
+    parentLabel: `Powers`,
+  },
     // obj2:{
     //   title:``,
     //   content:``,
@@ -667,6 +705,24 @@ export default function NaturalExponentsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
 

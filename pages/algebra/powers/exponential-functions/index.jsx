@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -274,6 +275,44 @@ The shift from "evaluate $a^n$ for a specific $n$" to "study $a^x$ as $x$ ranges
   after: ``,
   link: '',
 },
+  notation: {
+    title: `Exponential Notation Conventions`,
+    lead: `The letter no one is allowed to solve for, the spelling that saves tall exponents, and the parameter dress code of every growth model.`,
+    inherited: `The superscript machinery — [natural](!/algebra/powers/natural-exponents#notation), [negative](!/algebra/powers/negative-exponents#notation) and [rational exponents](!/algebra/powers/rational-exponents#notation); the $a^x$-versus-$x^n$ distinction is the body's own **Exponential vs Power Functions** below.`,
+    entries: [
+      {
+        id: 'euler-e',
+        tex: `$e \\approx 2.71828\\ldots$`,
+        read: `e — Euler's number`,
+        means: `A reserved letter: $e$ is a fixed irrational constant, never an unknown. The property that earns it the reservation is in **Euler's Number e** below. The letter itself is Euler's, from his 1727 papers, and mathematics has kept it ever since.`,
+        cases: `In $e^x$ it is a base like any other — every law of exponents applies unchanged; only its calculus behavior is special.`,
+        alsoWritten: `Nothing — $e$ has no variant, which is the point. Renaming it breaks the one convention every text shares.`,
+        confusedWith: `A variable to solve for — the classic student move of “dividing by e”. Also the calculator keys: the constant lives on @[e^x]@ or @[e]@, while the @[E]@ of @[2E3]@ means $2 \\times 10^3$ — same letter on the keypad, unrelated meaning.`,
+      },
+      {
+        id: 'exp-notation',
+        tex: `$\\exp(x) = e^x$`,
+        read: `exp of x`,
+        means: `The functional spelling of $e^x$. Same object, different typography — $\\exp$ puts the exponent on the line, at full size, inside parentheses.`,
+        cases: `It earns its keep when the exponent is an expression: $\\exp\\!\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right)$ stays readable where a stacked superscript shrinks to illegibility. Standard in analysis, statistics, and as the function name in every programming language.`,
+        alsoWritten: `$\\exp_a(x)$ for a general base $a^x$, in texts that want the functional form throughout.`,
+        confusedWith: `A new function. $\\exp$ computes nothing $e^x$ does not — choosing between them is pure typesetting, not mathematics.`,
+      },
+      {
+        id: 'growth-model',
+        tex: `$P(t) = P_0\\, e^{kt}$`,
+        read: `P of t equals P-naught, e to the k t`,
+        means: `The dress code of exponential models. The subscript zero marks the initial value — $P_0 = P(0)$, read “P-naught” — and $k$ is the growth constant, with the sign carrying the verdict: $k > 0$ growth, $k < 0$ decay.`,
+        cases: `The discrete cousin $a \\cdot b^x$ wears the same roles differently: $a$ is the initial value, $b$ the per-step factor, with $b > 1$ versus $0 < b < 1$ replacing the sign of $k$.`,
+        alsoWritten: `$N_0$, $y_0$, $A_0$ — the naught-subscript convention travels with whatever letter names the quantity; physics reads all of them as “initial”.`,
+        confusedWith: `$P_0$ as “P times zero” or a power. The subscript is a label — it evaluates nothing and multiplies nothing; it names the $t = 0$ snapshot.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/powers`,
+    parentLabel: `Powers`,
+  },
 
 obj2: {
   title: `Basic Shape`,
@@ -621,6 +660,25 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
 

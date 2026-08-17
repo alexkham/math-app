@@ -772,6 +772,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
@@ -1167,6 +1168,43 @@ Geometrically, vector addition has two equivalent visualizations. In the tip-to-
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Vector Notation`,
+    lead: `How print and blackboard mark a vector differently, what the components and brackets are doing, and the superscript that names a whole space.`,
+    entries: [
+      {
+        id: 'bold-vs-arrow',
+        tex: `$\\mathbf{v}$ · $\\vec{v}$`,
+        read: `The vector v`,
+        means: `The marking exists to separate vectors from scalars at a glance. Print uses bold — this site's convention; handwriting cannot bold, so blackboards and physics texts draw the arrow. Same object, one glyph per medium.`,
+        cases: `The zero vector inherits the mark: $\\mathbf{0}$ in **Properties of Addition** below is a vector, while plain $0$ is a number — one equation can legally hold both, and only the typeface tells them apart.`,
+        alsoWritten: `Underlined $\\underline{v}$ — the older typescript convention, a typist's instruction to the printer to set bold; still seen in some European texts.`,
+        confusedWith: `A scalar. Dropping the mark mid-computation is the commonest linear-algebra writing error — $v$ and $\\mathbf{v}$ answer to different algebra, and $\\frac{\\mathbf{a}}{\\mathbf{b}}$ is meaningless: vectors do not divide.`,
+      },
+      {
+        id: 'components-and-columns',
+        tex: `$\\mathbf{v} = (v_1, \\ldots, v_n)$`,
+        read: `v with components v-one through v-n`,
+        means: `The subscript names a *coordinate slot* — $v_2$ is the second component of one vector, a scalar. Another job for the subscript, alongside the [sequence position](!/algebra/sequences/arithmetic#notation) and [root enumeration](!/algebra/equations/quadratic#notation) uses.`,
+        cases: `The tuple $(v_1, \\ldots, v_n)$ and the column $\\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix}$ carry the same data; the column form becomes obligatory once matrices enter, because matrix multiplication reads shapes. Row versus column is a real distinction there, not typography.`,
+        alsoWritten: `$\\langle v_1, v_2 \\rangle$ — angle-bracket components in some American calculus texts; risky, since the same brackets later mean the inner product.`,
+        confusedWith: `A point. $(3, 4)$ names both the point and the vector from the origin to it — same glyphs, and only context says whether it is a location or a displacement.`,
+      },
+      {
+        id: 'rn-space',
+        tex: `$\\mathbb{R}^n$`,
+        read: `R n — real n-space`,
+        means: `Blackboard-bold $\\mathbb{R}$ for the real numbers, superscript $n$ for how many coordinates: $\\mathbb{R}^n$ is the space of all $n$-component real vectors. The membership statement $\\mathbf{v} \\in \\mathbb{R}^3$ is the standard way to declare a vector's size.`,
+        cases: `$\\mathbb{R}^2$ is the plane, $\\mathbb{R}^3$ ordinary space. Operations require matching spaces — the same-dimension rule in **Vector Addition** above is written as “both in $\\mathbb{R}^n$”.`,
+        alsoWritten: `$\\mathbb{C}^n$ for complex components; the blackboard-bold letter family itself ($\\mathbb{N}, \\mathbb{Z}, \\mathbb{Q}, \\mathbb{R}, \\mathbb{C}$) is catalogued with the [set-theory symbols](!/math-symbols/set-theory).`,
+        confusedWith: `A power of a number. The superscript is a Cartesian power — $n$ copies of $\\mathbb{R}$ glued into tuples — not $\\mathbb{R}$ multiplied by itself; there is nothing to multiply.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vectors`,
+    parentLabel: `Vectors`,
+  },
   obj2: {
     title: `Properties of Addition`,
     content: `Vector addition obeys four algebraic rules that govern how sums behave. Each has a geometric counterpart that can be verified by drawing the vectors involved.
@@ -1457,6 +1495,24 @@ export default function BasicVectorOperationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

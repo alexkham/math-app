@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -260,6 +261,44 @@ Roots answer a precise question: for which values of $x$ does $P(x) = 0$? This q
   after: ``,
   link: '',
 },
+  notation: {
+    title: `Polynomial Notation`,
+    lead: `Subscripts that name coefficients by their job, the degree mark and its strange zero case, and the exponent that counts roots.`,
+    inherited: `$P(x)$ as function notation — [functions](!/functions/basics); the enumeration subscripts $x_1, x_2$ — [quadratic notation](!/algebra/equations/quadratic#notation); $i$ — [complex numbers](!/complex-numbers/basics).`,
+    entries: [
+      {
+        id: 'coefficient-subscripts',
+        tex: `$a_n x^n + \\cdots + a_1 x + a_0$`,
+        read: `a-n x to the n, down to a-one x, plus a-zero`,
+        means: `Each coefficient's subscript names the power it multiplies — $a_3$ rides $x^3$, $a_0$ rides $x^0 = 1$. The pairing is the whole convention: any polynomial of any degree can be discussed with one line of symbols.`,
+        cases: `Standard form runs the powers downward, $a_n \\neq 0$ in front — the leading coefficient. A missing term is a *zero* coefficient, not a missing slot: $x^3 + 1$ silently carries $a_2 = 0$ and $a_1 = 0$, which matters the moment long or synthetic division lines terms up by degree.`,
+        alsoWritten: `$a, b, c$ for low degrees — the [quadratic's](!/algebra/equations/quadratic#notation) lettering; the subscript machinery takes over when the degree outgrows the alphabet.`,
+        confusedWith: `Enumeration. These subscripts index *positions in the polynomial*, not a list of separate unknowns — $a_2$ is one number with a job title, not the second of several answers.`,
+      },
+      {
+        id: 'degree-mark',
+        tex: `$\\deg P = n$`,
+        read: `The degree of P is n`,
+        means: `The degree operator: the highest power carrying a nonzero coefficient. Written $\\deg$ in formal work; spelled out as “degree” in this page's prose — same content.`,
+        cases: `A nonzero constant has $\\deg P = 0$. The zero polynomial is the strange case: its degree is left *undefined* — or set to $-\\infty$ in texts that want $\\deg(PQ) = \\deg P + \\deg Q$ to survive every product. Both conventions circulate; neither calls it degree zero.`,
+        alsoWritten: `$\\partial P$ in some older algebra texts — long displaced because the symbol now belongs to partial derivatives.`,
+        confusedWith: `The number of terms. $x^{100} + 1$ has two terms and degree $100$ — degree reads the top exponent, not the length.`,
+      },
+      {
+        id: 'multiplicity-exponent',
+        tex: `$(x - r)^m$`,
+        read: `The factor x minus r, to the multiplicity m`,
+        means: `On a factor, the exponent is a *root-counter*: it says the root $r$ is hit $m$ times. The concept and its geometry live in **Multiplicity** below — the notation's job is bookkeeping.`,
+        cases: `The phrase “counted with multiplicity” activates the convention: only under it does a degree-$n$ polynomial have *exactly* $n$ roots, as in **Number of Roots** below. Without it, $(x-2)^3(x+1)$ reports two roots; with it, four.`,
+        alsoWritten: `“Double root”, “triple root” — the spoken forms of $m = 2, 3$.`,
+        confusedWith: `An ordinary power to expand. Expanding $(x - 2)^3$ destroys exactly the information the exponent was displaying — factored form is the readable form, and the multiplicity is only visible there.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/polynomials`,
+    parentLabel: `Polynomials`,
+  },
   
 
     obj2: {
@@ -666,6 +705,25 @@ export default function RootsPage({seoData, sectionsContent, introContent, obj4T
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

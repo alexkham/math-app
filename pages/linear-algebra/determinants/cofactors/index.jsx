@@ -931,6 +931,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
@@ -1352,6 +1353,44 @@ For a $4 \\times 4$ matrix, each minor is a $3 \\times 3$ determinant. For a $5 
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Cofactor Notation`,
+    lead: `Capital letters that secretly name numbers, a superscript that deletes instead of multiplying, and an operator with a dangerous old name.`,
+    inherited: `$\\det$ and its bars — [determinant notation](!/linear-algebra/determinants/properties#notation); $(a_{ij})$ and $A^{T}$ — [matrix notation](!/linear-algebra/matrix/operations#notation); $\\Sigma$ — [sequence notation](!/algebra/sequences/arithmetic#notation).`,
+    entries: [
+      {
+        id: 'capital-scalars',
+        tex: `$M_{ij}$ · $C_{ij}$`,
+        read: `The minor and cofactor at position i, j`,
+        means: `A convention wrinkle: capitals usually name matrices, but $M_{ij}$ and $C_{ij}$ are *numbers* — determinants of submatrices, defined in **Minors** and **Cofactors and the Sign Pattern** above and below. The double subscript locates which entry they belong to; the capital honours their determinant ancestry.`,
+        cases: `The letters regroup into genuine matrices one level up: the cofactor matrix $C = (C_{ij})$ collects all $n^2$ cofactors — a matrix whose entries are the capital-named scalars.`,
+        alsoWritten: `$A_{ij}$ for the cofactor in many Russian and older texts — colliding head-on with the entry notation $a_{ij}$, which is why $C_{ij}$ won.`,
+        confusedWith: `Submatrices. $M_{ij}$ is not the deleted-row-and-column *matrix* — it is that matrix's determinant; the matrix itself needs its own mark, next entry.`,
+      },
+      {
+        id: 'deletion-superscript',
+        tex: `$A^{(i,j)}$`,
+        read: `A with row i and column j removed`,
+        means: `A parenthesized superscript that *deletes*: the $(n-1) \\times (n-1)$ submatrix left after striking row $i$ and column $j$. The parentheses are load-bearing — they fence the indices off from the exponent reading.`,
+        cases: `The same fencing device appears wherever a superscript must not mean a power: the $n$-th [derivative](!/calculus/derivatives/higher-order#notation) $f^{(n)}$ uses identical armor. Un-parenthesized, $A^{ij}$ would collide with powers and tensor conventions at once.`,
+        alsoWritten: `$A_{\\hat{i}\\hat{j}}$ with deletion hats, or verbal “the $(i,j)$ submatrix” — no universal standard exists; every text declares its own mark.`,
+        confusedWith: `A power or an entry. Three decorations, three meanings: $a_{ij}$ selects an entry, $A^n$ multiplies, $A^{(i,j)}$ deletes — subscript, superscript, and fenced superscript all working different jobs on one letter.`,
+      },
+      {
+        id: 'adjugate-mark',
+        tex: `$\\operatorname{adj}(A) = C^{T}$`,
+        read: `The adjugate of A — the transpose of the cofactor matrix`,
+        means: `The transpose inside the definition is the notation trap: the adjugate is *not* the cofactor matrix but its transpose, and forgetting the flip is the classic error in the inverse formula of **The Adjugate** below.`,
+        cases: `Its one starring role: $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$ — the closed-form [inverse](!/linear-algebra/matrix/inverse), where the adjugate carries all the cofactor bookkeeping.`,
+        alsoWritten: `$\\operatorname{adj} A$ without parentheses; older texts say “classical adjoint” and write $\\operatorname{adj}$ the same way.`,
+        confusedWith: `The modern adjoint. In advanced linear algebra “adjoint” means the conjugate transpose $A^{*}$ — an unrelated operation. The name migrated; the word “adjugate” exists precisely to escape the collision, and careful reading of older texts must check which one “adjoint” means.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/determinants`,
+    parentLabel: `Determinants`,
+  },
   obj2: {
     title: `Cofactors and the Sign Pattern`,
     content: `The cofactor $C_{ij}$ attaches a prescribed sign to the minor:
@@ -1697,6 +1736,25 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

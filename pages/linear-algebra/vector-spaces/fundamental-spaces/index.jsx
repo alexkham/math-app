@@ -3020,6 +3020,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
@@ -3469,6 +3470,44 @@ The four subspaces are not independent of each other. They pair off into [orthog
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Notation for the Four Subspaces`,
+    lead: `Operator names that vary by author, one subspace that never got a mark of its own, and the barred arrow that points at elements instead of spaces.`,
+    inherited: `$\\text{Span}$ and its braces — [span notation](!/linear-algebra/vector-spaces/span#notation); $A^{T}$ and $(a_{ij})$ — [matrix notation](!/linear-algebra/matrix/operations#notation); $\\dim$ — the [dimension](!/linear-algebra/vector-spaces/dimension) page.`,
+    entries: [
+      {
+        id: 'subspace-operator-names',
+        tex: `$\\text{Col}(A)$ · $\\text{Row}(A)$ · $\\text{Null}(A)$`,
+        read: `The column space, row space, and null space of A`,
+        means: `Word-fragment operators, each defined in its own section below. The names vary by author more than almost any notation on this site: Strang writes $C(A)$, $N(A)$; others $\\operatorname{col} A$, $\\operatorname{null} A$; the transformations tribe says $\\operatorname{im}$ and $\\ker$ for the same two spaces.`,
+        cases: `$\\ker A = \\text{Null}(A)$ and $\\operatorname{im} A = \\text{Col}(A)$ exactly — the [kernel and image](!/linear-algebra/transformations/image-kernel) vocabulary, one concept wearing map-clothing instead of matrix-clothing.`,
+        alsoWritten: `$R(A)$ — and here the naming wars draw blood: some texts mean the *range* (column space), others the *row* space. Same letter, two of the four subspaces; only the surrounding text decides.`,
+        confusedWith: `Functions of $A$. $\\text{Col}(A)$ returns a subspace, not a number or matrix — these operators change species, like $\\det$ but landing on sets.`,
+      },
+      {
+        id: 'markless-left-null',
+        tex: `$\\text{Null}(A^{T})$`,
+        read: `The left null space — written through the transpose`,
+        means: `The one fundamental subspace that never received a mark of its own: it is always spelled via another space's notation. The name “left” comes from its other spelling — solutions of $\\mathbf{y}^{T}A = \\mathbf{0}^{T}$, where $\\mathbf{y}$ multiplies $A$ from the *left*.`,
+        cases: `Both spellings appear in **The Left Null Space** below; the transpose form wins in computations (reuse the null-space algorithm on $A^{T}$), the left-multiplication form explains the name.`,
+        alsoWritten: `$\\operatorname{coker} A$ — the cokernel, in advanced texts; the everyday literature simply lives with the compound notation.`,
+        confusedWith: `A new operation. Nothing new is happening — it is the ordinary null space of the ordinary transpose; the compound name is bookkeeping, not machinery.`,
+      },
+      {
+        id: 'mapsto-arrow',
+        tex: `$\\mathbf{x} \\mapsto A\\mathbf{x}$`,
+        read: `x maps to A x`,
+        means: `The barred arrow acts on *elements*: it shows what happens to one input. Its bare cousin acts on *spaces*: $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ declares domain and codomain. One sentence can legally use both — $T: \\mathbb{R}^n \\to \\mathbb{R}^m$, $\\mathbf{x} \\mapsto A\\mathbf{x}$ — and the bar is the entire difference.`,
+        cases: `The device defines a map without naming it — the **Overview** above uses exactly this to describe what $A$ does. Standard throughout [function notation](!/functions/basics), where $x \\mapsto x^2$ builds a function with no letter spent.`,
+        alsoWritten: `$T(\\mathbf{x}) = A\\mathbf{x}$ — the named, equation-style spelling; bulkier, but survives being referenced later.`,
+        confusedWith: `The plain arrow. Writing $\\mathbf{x} \\to A\\mathbf{x}$ misuses the space-level arrow on elements — and collides with the [limit arrow](!/calculus/limits/two-sided#notation) on top; the bar exists to keep all three apart.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vector-spaces`,
+    parentLabel: `Vector Spaces`,
+  },
   obj2: {
     title: `The Column Space`,
     content: `The column space of $A$ is the [span](!/linear-algebra/vector-spaces/span) of the columns of $A$:
@@ -3788,6 +3827,25 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

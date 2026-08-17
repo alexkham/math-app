@@ -247,7 +247,7 @@ $$\\text{then } \\lim_{x \\to a} f(x) = L.$$`,
     category: 'Continuity',
     formula: `$$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a)$$
 $$f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$`,
-    link: { label: 'One-Sided Continuity', url: '/calculus/limits/one-sided#9' },
+    link: { label: 'One-Sided Continuity', url: '/calculus/limits/one-sided#10' },
     fields: {
       explanation: `Continuity from a single direction. A function continuous on a closed interval $[a, b]$ must be continuous on $(a, b)$, right-continuous at $a$, and left-continuous at $b$ — full continuity is unavailable at endpoints because only one direction of approach exists.`,
       related_formulas: `- [Continuity at a Point](!/calculus/limits/formulas#continuity_at_a_point)

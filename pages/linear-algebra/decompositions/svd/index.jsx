@@ -8329,6 +8329,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
@@ -8714,6 +8715,44 @@ Even the most complex-looking matrix is geometrically just two rotations sandwic
     before: ``,
     after: ``,
     link: ``,
+  },
+  notation: {
+    title: `SVD Notation`,
+    lead: `Letters that are contracts, a summation sign moonlighting as a matrix, and the lowercase sigma with a set-valued cousin one chapter away.`,
+    inherited: `$A^{T}$ and matrix products — [matrix notation](!/linear-algebra/matrix/operations#notation); $\\lambda$ and $\\sigma(A)$ — [eigenvalue notation](!/linear-algebra/eigen/characteristic-equation#notation); $\\|\\cdot\\|$ — [norm notation](!/linear-algebra/vectors/magnitude#notation).`,
+    entries: [
+      {
+        id: 'letter-contracts',
+        tex: `$A = U\\Sigma V^{T}$`,
+        read: `A equals U, Sigma, V-transpose`,
+        means: `In decomposition notation the letters *are* the theorem: writing $U\\Sigma V^{T}$ asserts $U$ and $V$ orthogonal and $\\Sigma$ diagonal — three contracts in three glyphs. The whole family works this way: $LU$ promises triangles, $QR$ promises orthogonal-times-triangular, $PDP^{-1}$ promises a diagonal $D$.`,
+        cases: `The contracts extend to the derived marks: the pseudoinverse of **The Pseudoinverse** below inverts the letters that can be inverted — $A^{+} = V\\Sigma^{+}U^{T}$ — with the superscript $+$ joining $n$, $-1$, $T$ and $\\perp$ in the crowded label corner.`,
+        alsoWritten: `$U\\Sigma V^{*}$ over the complex numbers, the star being the conjugate transpose — the modern adjoint of the [adjugate's naming hazard](!/linear-algebra/determinants/cofactors#notation).`,
+        confusedWith: `The family's own letters. $LU$'s $U$ is *upper triangular*; SVD's $U$ is *orthogonal* — the same letter signs two different contracts two pages apart, and only the decomposition's name says which is in force.`,
+      },
+      {
+        id: 'sigma-matrix',
+        tex: `$\\Sigma$`,
+        read: `Sigma — here, a diagonal matrix`,
+        means: `Capital sigma as an *object*, not an operator: the rectangular diagonal matrix carrying the singular values, doing the scaling step of **The Geometric Interpretation** above. Maximum-contrast glyph reuse — everywhere else on this site, $\\Sigma$ [sums things](!/algebra/sequences/arithmetic#notation).`,
+        cases: `Shape bookkeeping: for an $m \\times n$ matrix $A$, $\\Sigma$ is $m \\times n$ — diagonal entries $\\sigma_1, \\ldots, \\sigma_r$, then zeros padding to the rectangle. The compact form of **Compact and Thin Forms** below trims the padding.`,
+        alsoWritten: `$\\operatorname{diag}(\\sigma_1, \\ldots, \\sigma_r)$ — the constructor spelling, with the shape stated alongside; $D$ or $S$ in software documentation, where sigma is hard to type.`,
+        confusedWith: `The summation sign. No bounds above or below, no summand after — a bare $\\Sigma$ between two matrix letters is a factor, not an instruction to add.`,
+      },
+      {
+        id: 'sigma-values',
+        tex: `$\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$`,
+        read: `The singular values, in decreasing order`,
+        means: `Lowercase sigma with an index — and the ordering is part of the notation: writing $\\sigma_1$ *means* the largest, by the standing convention of **Singular Values** below. No other subscripted family on this site carries a built-in sort.`,
+        cases: `The extremes have second names: $\\sigma_1 = \\|A\\|_2$, the operator norm, and $\\sigma_1/\\sigma_r = \\kappa(A)$, the condition number — kappa being numerical analysis's own reserved letter.`,
+        alsoWritten: `$s_i$ in some numerical texts and most software output, freeing sigma for statistics.`,
+        confusedWith: `The set-valued cousin: $\\sigma(A)$ with no subscript is the *spectrum* — the set of [eigenvalues](!/linear-algebra/eigen/characteristic-equation#notation). Subscripted sigma is a singular value, bare sigma-of is a set; eigenvalues and singular values agree only for special matrices, so the two sigmas rarely even hold the same numbers.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/decompositions`,
+    parentLabel: `Decompositions`,
   },
   obj3: {
     title: `Singular Values`,
@@ -9167,6 +9206,25 @@ export default function SVDPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

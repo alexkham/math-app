@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -179,6 +180,44 @@ Historically, common logarithms enabled calculation before electronic computers.
     before: ``,
     after: ``,
     link: '',
+  },
+  notation: {
+    title: `Logarithm Notation`,
+    lead: `The subscript that names the base, the three-way war over what a bare log means, and the two Latin letters everyone reads differently.`,
+    inherited: `$e$ and $\\exp$ — [exponential functions](!/algebra/powers/exponential-functions#notation); the defining equivalence $\\log_b x = y \\iff b^y = x$ — the [logarithms](!/algebra/logarithms) family page.`,
+    entries: [
+      {
+        id: 'log-anatomy',
+        tex: `$\\log_b x$`,
+        read: `Log base b of x`,
+        means: `Three slots: the base as a *subscript*, the argument on the line, and the output — which is an exponent: the power $b$ needs to reach $x$. Like $\\sin x$, the argument often goes unparenthesised: $\\log x$ and $\\log(x)$ are the same statement.`,
+        cases: `Subscript present — unambiguous, any base. Subscript dropped — a dialect question, next entry. Two-argument software form — @[LOG(x, base)]@, argument first, base second, as in **Calculator Conventions** below.`,
+        alsoWritten: `$\\log_b(x)$ with full parentheses, obligatory once the argument is a sum: $\\log_b(x+1)$, never $\\log_b x + 1$.`,
+        confusedWith: `A product. $\\log x$ is one operator applied to $x$ — not $l \\cdot o \\cdot g \\cdot x$, and the subscript multiplies nothing.`,
+      },
+      {
+        id: 'bare-log-wars',
+        tex: `$\\log x$`,
+        read: `Log of x — base depends on who is writing`,
+        means: `The unsubscripted log is a dialect. School texts, engineering, and this page read base $10$; advanced mathematics — analysis, number theory — reads base $e$; computer science reads base $2$. The software side of the split is mapped in **Calculator Conventions** below.`,
+        cases: `Within one document the convention is fixed and usually silent — the danger is *crossing* documents: a formula lifted from an analysis text into an engineering context silently changes by the constant factor $\\ln 10$.`,
+        alsoWritten: `$\\lg x$ — base 10 in Russian and European texts (the form this site's calculus pages may meet in imported formulas); $\\operatorname{lb} x$ — the ISO mark for base 2; $\\operatorname{ld} x$ — the older German *logarithmus dualis*.`,
+        confusedWith: `A portable symbol. The three readings differ by constant factors, so graphs, slopes, and constants shift with the dialect — the formula looks identical and is not.`,
+      },
+      {
+        id: 'ln-letters',
+        tex: `$\\ln x$`,
+        read: `Ell-en of x; natural log of x`,
+        means: `Latin, not English: *logarithmus naturalis* — which is why the letters run “ln” and not “nl”. The mark is credited to Irving Stringham, 1893. Base $e$ always, no dialect, no exceptions — the one logarithm symbol that means the same thing everywhere.`,
+        cases: `Powers attach to the operator the way trigonometry writes them: $\\ln^2 x$ means $(\\ln x)^2$, borrowing the [squared-function convention](!/trigonometry/identities) — while the iterate is spelled out as $\\ln \\ln x$.`,
+        alsoWritten: `$\\log_e x$, on the rare occasions the base is spelled; $\\log x$ itself, in the analysis dialect above.`,
+        confusedWith: `$\\ln^2 x$ with $\\ln(x^2)$. The first squares the output, the second doubles it — $\\ln(x^2) = 2\\ln x$ by the [logarithm rules](!/algebra/logarithms/rules) — and the two agree only at $x = 1$ and $x = e^2$.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/logarithms`,
+    parentLabel: `Logarithms`,
   },
   obj2: {
     title: `The Natural Logarithm`,
@@ -485,6 +524,25 @@ export default function PageTemplate({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

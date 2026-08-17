@@ -329,7 +329,7 @@ But the function $g(x) = 0^x$ equals $0$ for every positive $x$ and approaches $
 
 Other paths yield still other values. The expression $f(x, y) = x^y$ can be guided toward $0^0$ along curves that produce any non-negative limit. The destination depends on the route — the hallmark of an indeterminate form.
 
-This places $0^0$ alongside $\\frac{0}{0}$, $\\infty - \\infty$, and $1^\\infty$ in the catalog of expressions that resist a universal value. In this context, assigning $0^0 = 1$ would mask genuinely different limiting behaviors, so analysis leaves it undefined and evaluates each occurrence through limits on a case-by-case basis.`,
+This places $0^0$ alongside $\\frac{0}{0}$, $\\infty - \\infty$, and $1^\\infty$ in the catalog of [indeterminate forms](!/calculus/limits/evaluating#notation) that resist a universal value. In this context, assigning $0^0 = 1$ would mask genuinely different limiting behaviors, so analysis leaves it undefined and evaluates each occurrence through limits on a case-by-case basis.`,
   before: ``,
   after: ``,
   link: '',

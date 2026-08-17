@@ -3021,6 +3021,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import EquivalenceRing from '@/app/components/infographics/linear-algebra/EquivalenceRing'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
@@ -3536,6 +3537,44 @@ The inverse is defined only for square matrices. A rectangular matrix cannot sat
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Inverse Notation`,
+    lead: `The last stop of the −1 superscript, the division sign that deliberately does not exist, and what happens when inverse meets transpose.`,
+    inherited: `$A$, juxtaposition and $I$ — [matrix notation](!/linear-algebra/matrix/operations#notation); the arithmetic $a^{-1}$ the label imitates — [negative exponents](!/algebra/powers/negative-exponents#notation).`,
+    entries: [
+      {
+        id: 'inverse-label',
+        tex: `$A^{-1}$`,
+        read: `A inverse`,
+        means: `The $-1$ superscript's fourth habitat — and like $f^{-1}$ and $\\sin^{-1}$, a *label*: $A^{-1}$ is defined by $AA^{-1} = A^{-1}A = I$ in the **Definition** above, not by any division. Only on plain [numbers](!/algebra/powers/negative-exponents#notation) does the superscript mean a genuine reciprocal.`,
+        cases: `Exists only for square, nonsingular matrices — writing $A^{-1}$ silently asserts both. The vocabulary pair travels with the mark: *invertible/nonsingular* when it exists, *singular* when it does not.`,
+        alsoWritten: `$\\operatorname{inv}(A)$ — the functional spelling in software (MATLAB, NumPy), rarely in print.`,
+        confusedWith: `$\\frac{1}{A}$. There is no matrix fraction — the reciprocal habit has nothing to grab, because “over $A$” cannot say on *which side* $A^{-1}$ multiplies.`,
+      },
+      {
+        id: 'no-division',
+        tex: `$A/B$ — does not exist`,
+        read: `Matrix division — a notation deliberately never defined`,
+        means: `The missing sign is itself a convention: since $AB^{-1} \\neq B^{-1}A$ in general, a fraction bar cannot record which side the inverse acts on. Every “division” must be spelled out as a one-sided product.`,
+        cases: `From $AX = B$: *pre*multiply to get $X = A^{-1}B$. From $XA = B$: *post*multiply to get $X = BA^{-1}$. Different sides, different answers — the fraction bar would erase the distinction that decides the result.`,
+        alsoWritten: `@[A\\B]@ and @[B/A]@ do exist in MATLAB — as *solver* commands, precisely because the machine tracks the side for you.`,
+        confusedWith: `Scalar division. Writing $\\frac{B}{A}$ in a matrix computation is not shorthand — it is ambiguous between two generally different matrices, which is why no textbook defines it.`,
+      },
+      {
+        id: 'inverse-combinations',
+        tex: `$(AB)^{-1} = B^{-1}A^{-1}$`,
+        read: `The inverse of a product reverses the order`,
+        means: `Same reversal the transpose performs — undoing a sequence means undoing the *last* step first. The proof is one line of the **Properties** below; the notation habit it breaks is the scalar one, where order never mattered.`,
+        cases: `The superscripts compose and commute with each other: $A^{-n} = (A^{-1})^n$ extends matrix powers downward, and $(A^{-1})^{T} = (A^{T})^{-1}$ — written $A^{-T}$ in advanced and numerical texts, one compact mark for the pair.`,
+        alsoWritten: `$A^{-T}$, as above — worth recognizing on sight in optimization and statistics writing.`,
+        confusedWith: `$(AB)^{-1} = A^{-1}B^{-1}$ — the scalar-habit version, false for matrices whenever $AB \\neq BA$; the same trap as $(AB)^T$, and the same cure: reverse.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/matrix`,
+    parentLabel: `Matrices`,
+  },
   obj2: {
     title: `The 2×2 Inverse Formula`,
     content: `For a $2 \\times 2$ matrix $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$ with $ad - bc \\neq 0$, the inverse is
@@ -3902,6 +3941,25 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

@@ -26,13 +26,13 @@
       "logic": "/math-symbols/math-logic",
       "functions": "/math-symbols/functions"
     },
-    "missing": {
-      "algebra": {
-        "proposed": "/math-symbols/algebra",
-        "status": "to-evaluate"
-      }
-    },
+    "missing": {},
     "created": {
+      "algebra": {
+        "page": "/math-symbols/algebra",
+        "created": "2026-08-16",
+        "note": "Built at the start of the algebra notation pass, resolving HALT-1 (operator chose option 1: build the index first). Modeled on the functions symbols page (DataWrapper pattern, VerticalButtonGroup menu listing all 10 siblings). Categories: exponents_and_powers, roots_and_radicals, logarithms, polynomials, equations_and_solution_sets, inequalities_and_intervals, sequences_and_series. Backlinks are PAGE-LEVEL only (algebra pages unsurveyed at creation; tighten to #notation anchors as the pass writes sections). NOT yet in other symbols pages' menuItems or the /math-symbols hub (ASK-2, operator decides)."
+      },
       "arithmetic": {
         "page": "/math-symbols/arithmetic",
         "created": "2026-08-08",
@@ -1794,7 +1794,7 @@
           "status": "existing",
           "quote": "This section is about the marks themselves: the three competing traditions",
           "covers": ["lim_{x→a⁻} (superscript minus, + a−0 / x↑a / explicit-condition variants)", "lim_{x→a⁺} (superscript plus, + a+0 / x↓a variants)", "f(a⁻) / f(a⁺) one-sided value shorthand"],
-          "bug": "Inserted with numeric id 4, shifting old ids 4-11 to 5-12. FAQ sectionIds were updated in the same session, but two inbound anchors were NOT: '/calculus/limits/one-sided#9' (label 'One-Sided Continuity') at app/api/db/formulas/calculus/calculusFormulasList.js:250 and app/api/db/repositories/formulasRepository.js:2304 now land on 'Evaluating One-Sided Limits' (id 9); correct target is id 10. Retroactive HALT-4 — operator to decide: update the two anchors, or migrate the page to a slug id.",
+          "bug": "RESOLVED 2026-08-16: Inserted with numeric id 4, shifting old ids 4-11 to 5-12. FAQ sectionIds were updated in the same session, but two inbound anchors were not: '/calculus/limits/one-sided#9' (label 'One-Sided Continuity') at calculusFormulasList.js:250 and formulasRepository.js:2304 landed on 'Evaluating One-Sided Limits'. Operator chose option 1: both anchors updated #9 → #10. No other inbound numeric anchors exist (#1 hits are unshifted and correct).",
           "stage2": {
             "mathSymbols": {"page": "/math-symbols/calculus", "category": null, "anchorText": "All calculus symbols (footer pill)"},
             "latex": {"page": "/latex", "anchorText": "LaTeX reference"},
@@ -2361,9 +2361,1291 @@
       "recommendations": [],
       "externalNotationLinks": [],
       "notes": "slice(1): id 1 'What Makes an Integral Improper?' in TOC/FAQ never renders; intro 'Integrating Beyond Bounds' duplicates it — left alone, recorded."
+    },
+    "calculus/integrals/evaluating": {
+      "pagePath": "pages/calculus/integrals/evaluating/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Direct Antidifferentiation", "2 Recognizing Standard Forms", "3 Setting Up Definite Integrals", "4 Handling Absolute Values", "5 Piecewise Functions", "6 Symmetry Shortcuts", "7 Common Pitfalls", "8 Checking Your Answer", "9 Summary: The Evaluation Strategy Ladder"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15): workflow/practice page; introduces no marks not already owned (unlike limits/evaluating, which defined the indeterminate forms). Even/odd symmetry shortcuts are properties, not notation."
+    },
+    "calculus/integrals/rules": {
+      "pagePath": "pages/calculus/integrals/rules/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Sum and Difference Rules", "2 Constant Multiple Rule", "3 Additivity Over Intervals", "4 Reversing Limits of Integration", "5 FTC Part 1", "6 FTC Part 2", "7 Why Differentiation and Integration Are Inverses", "8 Comparison Properties", "9 Summary: All Integration Rules at a Glance"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, reference-page principle): law catalog + FTC. The FTC-1 accumulation function ∫ₐˣ f(t)dt notation angle is covered by definite#2's dummy-variable entry."
+    },
+    "calculus/integrals/special": {
+      "pagePath": "pages/calculus/integrals/special/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Why Memorize Special Integrals?", "2 Power Functions", "3 Exponential Functions", "4 Trigonometric Functions", "5 Inverse Trigonometric Forms", "6 Logarithmic Integrals", "7 Integrals Leading to Logarithms", "8 Master Reference: All Special Integrals at a Glance"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, reference-page principle): antiderivative formula library."
+    },
+    "calculus/integrals": {
+      "pagePath": "pages/calculus/integrals/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, operator no-hubs rule). Family ownership: indefinite = ∫/dx/+C/F-f pairing, definite = bounds/dummy/eval-bracket/Riemann map, techniques = u-du/parts-ledger/reverse substitution, improper = ∞-bound/scaffold/verdicts."
+    },
+    "calculus/derivatives": {
+      "pagePath": "pages/calculus/derivatives/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, operator no-hubs rule). Family ownership: function = base f'/difference quotient/evaluation bar, higher-order = the four order systems, differentials = dx/dy/Δ/quotient reading, differentiability = f'±/f'=∞/interval convention, graph-analysis = c/sign-arrow/function inequality, techniques = implicit convention/(f⁻¹)'/parametric ratio."
+    },
+    "calculus": {
+      "pagePath": "pages/calculus/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, operator no-front-pages rule)."
+    },
+    "calculus/definitions": {
+      "pagePath": "pages/calculus/definitions/index.jsx",
+      "template": "other",
+      "sections": ["glossary anchors from calculusDefinitions DB"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, reference-page principle): glossary."
+    },
+    "calculus/formulas": {
+      "pagePath": "pages/calculus/formulas/index.jsx",
+      "template": "other",
+      "sections": ["FormulasTOC over calculus formulas DB"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "SKIPPED (2026-08-15, reference-page principle): formula index."
+    },
+    "algebra/powers/natural-exponents": {
+      "pagePath": "pages/algebra/powers/natural-exponents/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (array id 0, slice(1)-dropped by design — KeyTermsCard renders it)", "1 Definition", "notation Exponent Notation", "2 Sign Behavior", "3 The Product Rule", "4 The Quotient Rule", "5 Power of a Power", "6-9 (further sections incl. summary)"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Exponent Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The two-slot symbol, what the superscript binds to, and which way a stack of exponents reads.",
+          "covers": ["a^n anatomy (a¹ unwritten; squared/cubed readings; caret and ** ASCII variants)", "superscript binding −2⁴ ≠ (−2)⁴ (ab^n; Excel precedence divergence)", "exponent tower a^{b^c} top-down convention"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill — first use of the new index)"},
+            "added": "2026-08-16",
+            "placement": "directly after id 1 Definition (slice(1) here is by design: id 0 = Key Terms duplicated by KeyTermsCard). No inherited strip — this is the base of the powers family. OVERLAP resolved: Sign Behavior (id 2) already teaches (−3)² vs −3² sign analysis; entry 2 defers to it in bold and adds only binding order + software divergence + tower."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "Sign Behavior",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The expression (−3)² squares the entire quantity −3 … The expression −3² squares 3 first and then negates",
+          "covers": ["parenthesization of negative bases"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "BASE EXPONENT OWNERSHIP: a^n owned here; siblings own their extensions (zero-powers: a⁰; negative-exponents: a⁻ⁿ; rational-exponents: a^{m/n}; exponential-functions: aˣ). First algebra page; first footer pill pointing at the new /math-symbols/algebra."
+    },
+    "algebra/powers/zero-powers": {
+      "pagePath": "pages/algebra/powers/zero-powers/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 Zero as a Base — Positive Exponents", "2 Zero as a Base — Negative Exponents", "3 Zero as an Exponent — Why a⁰ = 1", "4 Where Both Directions Collide — 0⁰", "5 0⁰ in Discrete Mathematics", "6 0⁰ in Analysis", "7 How Zero Gets Excluded — The Full Picture", "(8, 9 further sections)"],
+      "spots": [
+        {
+          "sectionId": "3",
+          "sectionTitle": "Zero as an Exponent — Why a⁰ = 1",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "By convention, the product of no factors is the multiplicative identity, 1",
+          "covers": ["a⁰ = 1 (three arguments incl. empty-product convention)"],
+          "stage2": null
+        },
+        {
+          "sectionId": "5",
+          "sectionTitle": "0⁰ in Discrete Mathematics",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "In combinatorics, algebra, and number theory, 0⁰ = 1 is standard convention",
+          "covers": ["0⁰ = 1 convention (binomial theorem, power series, empty function count)"],
+          "stage2": null
+        },
+        {
+          "sectionId": "6",
+          "sectionTitle": "0⁰ in Analysis",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "In analysis, it is classified as an indeterminate form",
+          "covers": ["0⁰ indeterminate-form treatment"],
+          "stage2": null
+        },
+        {
+          "sectionId": "6",
+          "sectionTitle": "0⁰ in Analysis",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "resolved",
+          "why": "the sentence placing 0⁰ 'alongside 0/0, ∞ − ∞, and 1^∞ in the catalog of expressions' is a natural contextual-link site → /calculus/limits/evaluating#notation (the indeterminate-form owner)",
+          "resolution": "2026-08-16: 'catalog of [indeterminate forms](!/calculus/limits/evaluating#notation)' woven in-text into obj6's closing paragraph — first algebra→calculus cross-section notation link.",
+          "stage2": {"internal": {"page": "/calculus/limits/evaluating", "section": "notation", "anchorText": "indeterminate forms"}, "added": "2026-08-16", "placement": "in-text on 'indeterminate forms' in obj6 closing paragraph"}
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO NOTATION SECTION — below floor by the OVERLAP rule (2026-08-16): the page body IS the notation-convention discussion (a⁰ three ways in id 3; 0⁰ across ids 4-6 with the discrete-vs-analysis convention split fully taught). Every candidate entry demoted to INHERIT against the page's own sections; zero survivors. One recommended-note planted (cross-link to the indeterminate-forms owner)."
+    },
+    "algebra/powers/negative-exponents": {
+      "pagePath": "pages/algebra/powers/negative-exponents/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 Motivation: Extending the Pattern", "2 The Zero Exponent", "3 Definition of Negative Exponents", "notation Negative Exponent Notation", "4 Double Negatives and Reciprocals", "5 Verifying the Laws Still Hold", "6 Worked Examples", "7 (capstone)"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Negative Exponent Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "the one place the −1 superscript is real arithmetic",
+          "covers": ["a⁻ⁿ (minus-as-instruction; 2⁻³ ≠ −8 trap)", "a⁻¹ reciprocal — the only arithmetic habitat of the −1 superscript (vs f⁻¹ / sin⁻¹ / A⁻¹ labels)", "10⁻ⁿ scientific notation + m·s⁻² SI unit convention + E-notation"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 3 Definition. Cross-links: natural-exponents#notation (inherited), powers/exponent-rules, functions/inverse, trigonometry/inverse-functions, linear-algebra/matrix/inverse — the −1-superscript mesh now spans four sections."
+          }
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Definition of Negative Exponents",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "a⁻ⁿ = 1/aⁿ",
+          "covers": ["reciprocal definition + fraction flip"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Entries scoped around the body per the semantic-need gate: body owns the mechanics (definition, fraction flip, cross-the-bar in ids 3-5); section adds only the sign-of-result misreading, the −1-superscript collision map, and the scientific/SI conventions."
+    },
+    "algebra/powers/rational-exponents": {
+      "pagePath": "pages/algebra/powers/rational-exponents/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 The Question", "2 Roots as Powers", "3 Fractional Exponents", "notation Rational Exponent Notation", "4 Negative Rational Exponents", "5 Domain Considerations", "6 Verifying the Laws Still Hold", "7 Simplifying Expressions", "8 (further)"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Rational Exponent Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "One fraction doing two jobs, the single context where equal fractions can disagree",
+          "covers": ["a^{m/n} anatomy (denominator = index; radical spellings)", "lowest-terms hazard (−8)^{2/6} vs (−8)^{1/3} (careful-texts a>0 restriction)", "linear/caret form 8^(1/3) vs 8^1/3 (integer-division layer; decimal dodge)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 3 (a^{m/n} fully defined by ids 2-3). HALT-2 RESOLVED by operator: powers/rational-exponents OWNS a^{m/n}; roots/rational-exponents gets no section. Cross-links: natural-exponents#notation + negative-exponents#notation + /algebra/roots hub (inherited)."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "Roots as Powers",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "a^{1/n} = ⁿ√a … Root notation and exponent notation are two ways of writing the same thing.",
+          "covers": ["the bridge, both directions"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Owner of a^{m/n} per HALT-2 resolution (operator, 2026-08-16)."
+    },
+    "algebra/roots/rational-exponents": {
+      "pagePath": "pages/algebra/roots/rational-exponents/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "Unit Fraction Exponents", "General Rational Exponents", "Negative Rational Exponents", "Converting Between Forms", "Domain Restrictions", "Laws of Exponents with Rationals", "Simplifying with Rational Exponents", "Combining Radicals via Exponents", "When to Use Which Form", "Summary of Rational Exponent Forms"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — HALT-2 twin (2026-08-16): near-identical territory to powers/rational-exponents; operator assigned ownership of a^{m/n} to the powers node (it sits in the extension ladder where the notation is defined; this page is the conversion/practice view). Semantic-need gate: nothing left to own here. TREE NOTE for the operator: the two pages themselves overlap heavily as content — a future consolidation question, outside this pass."
+    },
+    "algebra/powers/irrational-exponents": {
+      "pagePath": "pages/algebra/powers/irrational-exponents/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms", "1 The Problem", "2 Intuition Through Approximation", "3 Why This Works", "4 Domain Restriction: a > 0", "5 The Laws Still Hold", "6 Completing the Picture"],
+      "spots": [
+        {
+          "sectionId": "3",
+          "sectionTitle": "Why This Works",
+          "field": "content",
+          "kind": "recommended-note",
+          "status": "resolved",
+          "why": "'the limit of 2^{r_n} for a sequence of rationals r_n → π' used the limit concept cold; natural contextual-link site to the limits mesh",
+          "resolution": "2026-08-16: 'limit' linked in-text to /calculus/limits/two-sided (page-level; its #notation section owns lim and the arrow).",
+          "stage2": {"internal": {"page": "/calculus/limits/two-sided", "section": null, "anchorText": "limit"}, "added": "2026-08-16", "placement": "in-text on 'limit' in obj3"}
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — semantic-need gate fail (2026-08-16): zero new marks. 2^π reuses the owned superscript with an irrational occupant; the page is a construction story (approximation, continuous extension, a > 0 restriction) told in prose. All candidate notation owned elsewhere: a^n (natural-exponents), a^{m/n} (rational-exponents), a^x (exponential-functions, upcoming), lim/arrow (calculus two-sided)."
+    },
+    "algebra/powers/exponential-functions": {
+      "pagePath": "pages/algebra/powers/exponential-functions/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 The Conceptual Shift", "notation Exponential Notation Conventions", "2 Basic Shape", "3 Key Properties", "4 Exponential vs Power Functions", "5 Euler's Number e", "6 Where to Go Next", "7 Summary of Cases"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Exponential Notation Conventions",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The letter no one is allowed to solve for, the spelling that saves tall exponents, and the parameter dress code",
+          "covers": ["e reserved constant (Euler 1727; calculator e vs E collision; solving-for-e trap)", "exp(x) functional spelling (tall-exponent use; exp_a variant)", "P₀ e^{kt} model conventions (naught subscript; k sign verdict; a·bˣ discrete cousin)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1 (The Conceptual Shift = the aˣ definition). Gate-shaped: body owns aˣ-vs-xⁿ (ids 1, 4) and e's defining property (id 5) — entries cover only the conventions the body skips. Cross-links: three powers #notation anchors (inherited)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "The Conceptual Shift",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "a constant base raised to a variable exponent … f(x) = a^x, with a > 0 and a ≠ 1",
+          "covers": ["aˣ definition + base conditions"],
+          "stage2": null
+        },
+        {
+          "sectionId": "5",
+          "sectionTitle": "Euler's Number e",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "the irrational number e ≈ 2.71828 … called the natural exponential function",
+          "covers": ["e, e^x naming"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Powers family COMPLETE: natural ✓, zero ✗ (OVERLAP), negative ✓, rational ✓ (HALT-2 owner), irrational ✗ (gate), exponential-functions ✓; exponential-equations/-inequalities to classify (likely gate-fail)."
+    },
+    "algebra/powers/exponential-equations": {
+      "pagePath": "pages/algebra/powers/exponential-equations/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "What is an Exponential Equation", "Forms", "Preparing", "Solving Methods Overview", "Matching Bases", "Using Exponent Laws", "Using Logarithms", "Substitution", "Rational and Negative Exponents", "Checking Solutions", "Summary"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — gate fail (2026-08-16): method playbook; every mark used (aˣ, logs, substitution t = aˣ) is owned elsewhere."
+    },
+    "algebra/powers/exponential-inequalities": {
+      "pagePath": "pages/algebra/powers/exponential-inequalities/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "Key Principle: Base Determines Direction", "Solving Basic", "Requiring Simplification", "Domain and Sign", "Compound Inequalities"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — gate fail (2026-08-16): method playbook; the flip-the-sign-when-0<a<1 principle is content, not notation."
+    },
+    "algebra/roots/properties": {
+      "pagePath": "pages/algebra/roots/properties/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 Even Index Radicals", "notation Radical Notation", "2 Odd Index Radicals", "3 Principal Root Convention", "4 The Identity for Even Roots", "5 The Identity for Odd Roots", "6 Domain and Range by Index", "7 Sign Behavior Summary", "8 Connection to Rational Exponents", "9 Even vs Odd at a Glance"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Radical Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The three parts of the radical, the bar that is secretly a parenthesis, and the sign that says two things at once",
+          "covers": ["√[n]{a} anatomy (index in crook, unwritten 2, radicand; surd; LaTeX bracket-index)", "vinculum as grouping (Descartes 1637; non-distribution √(9+16) ≠ √9+√16)", "± / ∓ (unpack-before-computing; ∓ opposite-tracking; uncertainty sameGlyph)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "latex": {"page": "/latex", "anchorText": "LaTeX reference (\\sqrt[n]{a} bracket-index)"},
+            "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard (± and ∓ verified; \\sqrt ABSENT from dataset — ASK-1)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. RADICAL OWNERSHIP: √ owned here (the family's conventions page; hub is skipped). Body owns principal-root convention (id 3) and √(x²)=|x| (id 4) — entries defer to both in bold. Cross-links: rational-exponents#notation ×2 (inherited + bridge), equations/quadratic (± flagship)."
+          }
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Principal Root Convention",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "the radical symbol denotes the non-negative root … The ± symbol signals that both positive and negative roots apply",
+          "covers": ["principal root convention; ± introduced in passing"],
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "The Identity for Even Roots",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "√(x²) = |x| — This is not x.",
+          "covers": ["even-root absolute-value identity"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "ASK-1 addition: \\sqrt is absent from math_symbols_data.json — a central command for the whole roots family; keyboard never nameable on radical entries until the dataset is extended."
+    },
+    "algebra/roots/operations": {
+      "pagePath": "pages/algebra/roots/operations/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "Like Radicals", "Adding and Subtracting", "Multiplying Same Index", "Multiplying Different Indices", "Dividing", "Conjugates", "Expanding Products", "Squaring", "Strategy"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — gate fail (2026-08-16): technique page; 'conjugate' here is a method term (a+b√c pairs), the conjugate bar notation belongs to complex-numbers."
+    },
+    "algebra/roots/simplifying": {
+      "pagePath": "pages/algebra/roots/simplifying/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "What Simplest Form Means", "Factoring Out Perfect Powers", "Variables", "Combined", "Rationalizing ×3", "Reducing the Index", "Strategy", "At a Glance"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — gate fail (2026-08-16): technique page ('simplest form' is a style standard, not notation)."
+    },
+    "algebra/roots/functions": {
+      "pagePath": "pages/algebra/roots/functions/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "Square Root Function", "Graph", "Cube Root Function", "Graph", "General Nth Root", "Domain", "Transformations", "Inverse Relationship", "Finding Inverses", "Graphing Strategy", "Parent Functions"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — gate fail (2026-08-16): graph/transformation page; reuses √ (roots/properties) and function notation (functions section)."
+    },
+    "algebra/roots/equations": {
+      "pagePath": "pages/algebra/roots/equations/index.jsx",
+      "template": "untitled",
+      "sections": ["Key Terms", "What is a Radical Equation", "Basic Strategy", "Why Isolation Comes First", "Extraneous Solutions", "Why Extraneous Solutions Appear", "Two Radicals", "Both Sides", "Cube Roots and Higher", "Radical Inequalities", "Verification Process", "Configurations"],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTION — gate fail (2026-08-16): method page; extraneous-solution checking is procedure. The ± that squaring introduces is owned at roots/properties#notation."
+    },
+    "algebra/logarithms/common-natural": {
+      "pagePath": "pages/algebra/logarithms/common-natural/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 The Common Logarithm", "notation Logarithm Notation", "2 The Natural Logarithm", "3 The Number e", "4 Calculator Conventions", "5 When to Use Which", "6 Converting Between Bases", "7 Comparing Graphs", "8 Side-by-Side Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Logarithm Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The subscript that names the base, the three-way war over what a bare log means",
+          "covers": ["log_b x anatomy (subscript base; parenthesis-free operator style; two-argument software form)", "bare-log dialect wars (school b=10 / analysis b=e / CS b=2; lg, lb, ld European-ISO marks)", "ln letterform (logarithmus naturalis, Stringham 1893; ln² x squared-function convention vs ln(x²))"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. LOG NOTATION OWNERSHIP: log_b/log/ln/lg owned here (family hub is skipped; body owns the calculator/software split at id 4 — deferred in bold twice). Cross-links: exponential-functions#notation (inherited e/exp), logarithms hub (defining equivalence, page-level), trigonometry/identities (squared-function convention), logarithms/rules (ln(x²) identity)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "The Common Logarithm",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "It is written log(x) without a subscript, or log_10(x) when clarity is needed.",
+          "covers": ["log / log_10"],
+          "stage2": null
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Calculator Conventions",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "In Python, math.log(x) computes the natural logarithm by default, not the common logarithm.",
+          "covers": ["calculator/programming log conventions"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Gate pass with OVERLAP handled: body owns software conventions (id 4) and when-to-use (id 5); entries add the anatomy, the field-dialect map with lg/lb/ld, and the ln letterform + ln²x convention — none taught by the body."
+    },
+    "algebra/logarithms/$gateFails": {
+      "pagePath": "(summary: properties, graphs, equations, inequalities, rules)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "properties = function-properties page (domain/range/monotonicity); graphs = transformation catalog; equations + inequalities = method playbooks (direction-flip principle is content, not notation); rules = law catalog. All marks used (log_b, ln, <, intervals) owned elsewhere.", "stage2": null}],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTIONS — gate fails recorded in aggregate (2026-08-16); split into per-page entries if any page gets individual treatment later. Logarithms family total: 1 section (common-natural), 5 skips."
+    },
+    "algebra/equations/quadratic": {
+      "pagePath": "pages/algebra/equations/quadratic/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 Definition and Standard Form", "notation Quadratic Notation", "2 Solving by Factoring", "3 Solving by Completing the Square", "4 The Quadratic Formula", "5 The Discriminant", "6 Vieta's Formulas", "7 Reducible Equations", "8 Connection to Graphing", "9 Summary of Solving Methods"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Quadratic Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The contract behind a, b, c, the two letters that both mean discriminant, and what a lowered index does",
+          "covers": ["standard-form contract (a,b,c well-defined; sign-reading trap; equation vs function; monic form)", "Δ vs D discriminant letter traditions (Δ-increment collision)", "x₁/x₂ enumeration subscripts (raised-vs-lowered semantics; primes-enumeration history)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. Body owns the formula (id 4), Δ case analysis (id 5), Vieta (id 6) — deferred in bold. ± INHERITED from roots/properties#notation (closing that page's forward link). Cross-links: complex-numbers/basics + roots/properties#notation ×2 (inherited), differentials#notation (Δ collision), function#notation (primes collision), sequences (subscript contrast)."
+          }
+        },
+        {
+          "sectionId": "5",
+          "sectionTitle": "The Discriminant",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Δ = b² − 4ac … The discriminant is a diagnostic tool",
+          "covers": ["Δ definition + three cases"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Equations family: quadratic ✓; linear, polynomial, rational, absolute-value to classify."
+    },
+    "algebra/equations/absolute-value": {
+      "pagePath": "pages/algebra/equations/absolute-value/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 Definition of Absolute Value", "notation Absolute Value Notation", "2 The Basic Equation", "3 Solving |f(x)| = k", "4 Both Sides", "5 Multiple Terms", "6 Extraneous Solutions", "7 Geometric Interpretation", "8 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Absolute Value Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The bars as a bracket pair, the most overloaded glyph in mathematics, and the algebraic alias",
+          "covers": ["|a+b| bars-as-brackets (nesting; abs(); triangle-inequality non-distribution)", "overloaded pipes map: |z| same meaning (complex), ‖v‖ doubled, |A| cardinality / |M| determinant unrelated (determinant-can-be-negative trap)", "|x| = √(x²) alias (squaring route; max(x,−x); missing-bars trap → roots/properties)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. |x| OWNERSHIP established here (was unowned app-wide despite use in continuity, radicals, quadratic). Cross-links: roots/properties#notation ×2 (inherited ± + even-root identity, now bidirectional), functions/piecewise (cases brace), complex-numbers/basics, set-theory/basics, linear-algebra/determinants."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Definition of Absolute Value",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "written |x|, is defined piecewise … distance from x to the origin",
+          "covers": ["|x| piecewise definition + distance meaning"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Body owns the definition (id 1), case-splits (ids 2-3), and distance interpretation (id 7) — entries add the bracket behavior, the glyph-overload map, and the algebraic alias."
+    },
+    "algebra/equations/$gateFails": {
+      "pagePath": "(summary: linear, polynomial, rational)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "linear: solving playbook; its Special Cases verdicts use owned marks (∅/ℝ set-theory, ⟺ logic). polynomial: theorem/method survey; root-multiplicity notation (x−r)^m flagged as a candidate for algebra/polynomials/roots instead. rational: method page; the x ≠ a restriction-clause convention is too thin to carry a section.", "stage2": null}],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTIONS — gate fails in aggregate (2026-08-16). Equations family CLOSED: 2 sections (quadratic, absolute-value), 3 fails, hub skipped."
+    },
+    "algebra/inequalities/linear": {
+      "pagePath": "pages/algebra/inequalities/linear/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 Definition and Standard Form", "notation Inequality Notation", "2 Solving with the Properties of Inequality", "3 Worked Examples", "4 Graphing the Solution", "5 Compound Linear Inequalities", "6 Fractions and Decimals", "7 Special Cases", "8 Literal Inequalities", "9 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Inequality Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "What the little bar under the sign promises, which chains are legal, and the bracket rules",
+          "covers": ["< ≤ > ≥ system (bar = or-equal; ⩽/⩾ slanted European variants; ≠ not-a-member)", "chained inequality well-formedness (hidden AND; one-direction rule; malformed 5 > x < 8; OR never chains)", "interval-endpoint conventions (∞ always round; Bourbaki reversed brackets ]a,b]; coordinate-pair glyph collision)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. INEQUALITY-MARK OWNERSHIP for algebra established here (family base page; hub skipped; arithmetic's comparing#1 has only an inline >/< gloss). Body owns the flip rule (id 2) and dot/bracket correspondence (id 4) — deferred in bold. Cross-links: functions/domain + set-theory/operations (inherited)."
+          }
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Graphing the Solution",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "open dot at 4 (excluded because the inequality is strict) … The interval is (4, ∞)",
+          "covers": ["dot/bracket/strictness correspondence"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Inequalities family: linear ✓ (the base owner); quadratic, polynomial, rational, absolute-value to classify — absolute-value inequality bands (|x|<a) are partly owned by continuity/absolute-value-equation pages already; expect fails."
+    },
+    "algebra/inequalities/$gateFails": {
+      "pagePath": "(summary: quadratic, polynomial, rational, absolute-value)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "All four are sign-chart/method playbooks (discriminant cases, critical points, band/rays forms). Marks owned elsewhere: sign charts → derivatives/graph-analysis#notation, < ≤ family + intervals → inequalities/linear#notation, |x| bands → equations/absolute-value#notation, Δ → equations/quadratic#notation.", "stage2": null}],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTIONS — aggregate gate-fails (2026-08-16). Inequalities family CLOSED: 1 section (linear), 4 fails, hub skipped."
+    },
+    "algebra/polynomials/roots": {
+      "pagePath": "pages/algebra/polynomials/roots/index.jsx",
+      "template": "untitled",
+      "sections": ["0 Key Terms (KeyTermsCard duplicate, slice-dropped by design)", "1 What is a Root?", "notation Polynomial Notation", "2 Roots and Factors", "3 Number of Roots", "4 Multiplicity", "5-13 Finding-Roots methods, Real vs Complex, Graphs, Sum and Product, Common Mistakes"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Polynomial Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Subscripts that name coefficients by their job, the degree mark and its strange zero case, and the exponent that counts roots",
+          "covers": ["aₙxⁿ + … + a₀ coefficient-subscript convention (missing term = zero coefficient)", "deg P mark (zero-polynomial undefined/−∞ conventions; ∂P historical variant)", "(x−r)^m multiplicity root-counter ('counted with multiplicity' convention)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. General-form + deg + multiplicity ownership here (hub skipped; resolves the candidate flagged at equations/$gateFails). Body owns root/factor/multiplicity concepts (ids 1, 2, 4) — deferred in bold. Cross-links: functions/basics + equations/quadratic#notation ×2 + complex-numbers/basics (inherited)."
+          }
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Multiplicity",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "In P(x) = (x − 2)³(x + 1), the root x = 2 appears three times — it has multiplicity 3.",
+          "covers": ["multiplicity concept + geometric meaning"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Polynomials family: roots ✓ (owner); operations gate-fail (technique page; synthetic-division tableau judged a layout, not a symbol system); factoring, graphing to classify (expect fails); rules = catalog."
+    },
+    "algebra/sequences/arithmetic": {
+      "pagePath": "pages/algebra/sequences/arithmetic/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Definition", "notation Sequence Notation", "2 Identifying Arithmetic Sequences", "3 Finding Terms", "4 Recursive Formula", "5 Arithmetic Series", "6 Arithmetic Mean", "7 Arithmetic Sequences at a Glance"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Sequence Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The subscript that means position, the recurrence written in two index frames, and the two compressions",
+          "covers": ["aₙ position subscript (a₁ vs a₀ start conventions; a(n) functional variant)", "recurrence index frames a_{n+1} = a_n + d ≡ a_n = a_{n-1} + d (anchor requirement)", "{aₙ} braces + Σ anatomy (dummy index; (aₙ) analysis variant; set-braces collision)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/algebra", "category": null, "anchorText": "All algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1 (no slice on this page — full render). SEQUENCE-NOTATION OWNERSHIP for the family. The three-subscript-jobs map completes: position (here) vs coefficient job-title (polynomials/roots#notation) vs enumeration (equations/quadratic#notation) — all three cross-linked. Σ dummy index linked to integrals/definite#2 dummy variable. Cross-links: set-theory/basics (braces collision)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Definition",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "a_{n+1} − a_n = d … a_n = a_1 + (n − 1)d",
+          "covers": ["arithmetic-sequence formulas in sequence notation"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Sequences family: arithmetic ✓ (base owner). Named-sequence pages (geometric, harmonic, fibonacci, prime, square, triangular) expect gate-fails — geometric's r and fibonacci's Fₙ are single symbols each, already on the symbols page."
+    },
+    "algebra/polynomials/$gateFails": {
+      "pagePath": "(summary: factoring, graphing)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTIONS — factoring (technique catalog: GCF, grouping, special products) and graphing (graph-features page) gate-fail (2026-08-16). Polynomials family CLOSED: 1 section (roots), 3 fails, rules catalog, hub skipped."
+    },
+    "algebra/sequences/$gateFails": {
+      "pagePath": "(summary: geometric, harmonic, fibonacci, prime-numbers, square-numbers, triangular-numbers)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "geometric: mirrors arithmetic's structure; own marks r and S∞ are one-symbol candidates, below floor (S∞ = ∞-subscript sum noted for the symbols page if ever extended). fibonacci: Fₙ and φ (golden ratio) taught in its own body sections (Definition, The Golden Ratio, Binet) — OVERLAP demotes everything. harmonic/prime/square/triangular: named-sequence catalog pages, all marks inherited from sequences/arithmetic#notation.", "stage2": null}],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTIONS — aggregate gate-fails (2026-08-16). Sequences family CLOSED: 1 section (arithmetic), 6 fails, hub skipped. ALGEBRA PASS COMPLETE."
+    },
+    "linear-algebra/vectors/basic-operations": {
+      "pagePath": "pages/linear-algebra/vectors/basic-operations/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Vector Addition", "notation Vector Notation", "2 Properties of Addition", "3 Vector Subtraction", "4 Scalar Multiplication", "5 Properties of Scalar Multiplication", "6 The Algebraic Foundation", "7 Operations at a Glance"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Vector Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "How print and blackboard mark a vector differently, what the components and brackets are doing, and the superscript that names a whole space",
+          "covers": ["bold v vs arrow v⃗ (medium-driven marking; underline typescript variant; two zeros 𝟎 vs 0; vectors-don't-divide)", "components + tuple/column forms (coordinate-slot subscript job; angle-bracket American-calculus variant; point-vs-vector ambiguity)", "ℝⁿ (blackboard bold; Cartesian power; ℂⁿ)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "LINEAR-ALGEBRA PASS OPENED (no HALT-1: symbols page exists). Base vector-mark ownership here (vectors family front skipped). After id 1. Cross-links: sequences/arithmetic#notation + equations/quadratic#notation (subscript-jobs map now four-way), math-symbols/set-theory (blackboard-bold family)."
+          }
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "First LA page. Site house style: bold vectors, tuples in prose, ℝⁿ. Upcoming collision to adjudicate: vectors/dot-product vs orthogonality/inner-product over ⟨a,b⟩ (HALT-2 candidate)."
+    },
+    "linear-algebra/vectors/magnitude": {
+      "pagePath": "pages/linear-algebra/vectors/magnitude/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Magnitude in Two and Three Dimensions", "notation Norm Notation", "2 The General Norm", "3 Properties of the Norm", "4 Distance Between Vectors", "5 Unit Vectors", "6 Normalization", "7 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Norm Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Why the bars come in pairs, the subscripts that name a whole family of lengths, and the hat that promises length one",
+          "covers": ["‖v‖ bar-count story (|v| physics variant; ‖cv‖=|c|‖v‖ mixed-bars line)", "norm-family subscripts ‖v‖₁/₂/∞ + ℓᵖ script-ell (Lebesgue; l/1/I glyph soup)", "hat û unit promise (î ĵ k̂ vs e₁ e₂ e₃ traditions; statistics-estimator sameGlyph)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. Body owns single-vs-double distinction (id 2) and the norms named verbally — entries add the MARKS the body never shows (subscripted norms, ℓᵖ, hat gloss, physics variants). Cross-links: basic-operations#notation + absolute-value#notation ×2 (inherited + bar-count, now tri-directional with determinants), determinants (bars collision)."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "The General Norm",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The double-bar notation ‖v‖ is standard for the norm. Single bars |x| are reserved for the absolute value of a scalar.",
+          "covers": ["‖·‖ vs |·| distinction; ℓ¹/ℓ²/ℓ∞ named verbally"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "‖·‖ ownership here. Vectors family remaining: dot-product (HALT-2 survey vs inner-product), cross-product, linear-combinations, properties."
+    },
+    "linear-algebra/vectors/dot-product": {
+      "pagePath": "pages/linear-algebra/vectors/dot-product/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Algebraic Definition", "notation Dot Product Notation", "2 Geometric Definition", "3 Properties", "4 Connection to Magnitude", "5 The Angle Between Vectors", "6 Sign of the Dot Product", "7 Orthogonality", "8 Cauchy–Schwarz", "9 Orthogonal Projection", "10 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Dot Product Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The one dot that is never optional, the matrix spelling of the same number, and how to read a line that mixes every kind of bar",
+          "covers": ["a·b mandatory dot (three dot habitats; · vs × species contrast)", "aᵀb matrix spelling (outer-product reversal; ⊤ glyph; econometrics prime variant)", "mixed-bars Cauchy–Schwarz reading (|scalar| vs ‖vector‖; θ reservation; species-error ‖a·b‖)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. HALT-2 candidate DISSOLVED on survey: territories split cleanly — this page owns the · mark (concrete ℝⁿ); orthogonality/inner-product owns ⟨u,v⟩ (abstract generalization, forward-linked in alsoWritten). Cross-links: basic-operations#notation + magnitude#notation + sequences#notation (inherited), cross-product, inner-product, matrix/operations (forward), function#notation (econometrics prime), absolute-value#notation (bar species)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Algebraic Definition",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The notation uses a centered dot between the two vectors. Other names … are the inner product and the scalar product",
+          "covers": ["dot mark + naming"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "· ownership here; ⟨,⟩ reserved for orthogonality/inner-product (no halt needed — tree splits concrete vs abstract)."
+    },
+    "linear-algebra/vectors/cross-product": {
+      "pagePath": "pages/linear-algebra/vectors/cross-product/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Algebraic Definition", "notation Cross Product Notation", "2 Standard Basis Cross Products", "3 Geometric Interpretation", "4 Right-Hand Rule", "5 Properties", "6 Parallel Vectors", "7 Scalar Triple Product", "8 Dot vs Cross", "9 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Cross Product Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The multiplication sign that finally became order-sensitive, the triple product with only one legal parse, and the three ways to spell one basis",
+          "covers": ["a × b (order-sensitive; ∧ French variant + differential-geometry caveat; species contrast with ·)", "a·(b×c) forced parse + [a,b,c] box-product bracket (Russian/European mixed product)", "i j k spellings trio (bold / hatted / e-subscript; Hamilton quaternion ancestry; imaginary-unit collision)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. Body owns the symbolic-determinant device (id 1, explicitly framed as notational) — inherited strip credits it. Cross-links: basic-operations#notation + dot-product#notation ×2 (inherited + species), magnitude#notation (hatted spelling), complex-numbers/basics (i collision + Hamilton)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Algebraic Definition",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Placing vectors rather than numbers in the top row makes this a notational device rather than a genuine determinant.",
+          "covers": ["symbolic-determinant mnemonic form"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "× ownership here. Vectors family remaining: linear-combinations, properties (classify — expect fails: c₁v₁+⋯ combination notation is a candidate but likely taught in body; span belongs to vector-spaces/span)."
+    },
+    "linear-algebra/vectors/$gateFails": {
+      "pagePath": "(summary: linear-combinations, properties)",
+      "template": "untitled",
+      "sections": [],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "mention", "status": "existing", "quote": "linear-combinations: c₁v₁+⋯+cₙvₙ is compositional (owned marks); its Span section defers ownership of span{} to vector-spaces/span (the dedicated page). properties: recap page (magnitude/direction/orthogonality summaries).", "stage2": null}],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "NO SECTIONS (2026-08-16). Vectors family CLOSED: 4 sections (basic-operations, magnitude, dot-product, cross-product), 2 fails, hub skipped."
+    },
+    "linear-algebra/matrix/operations": {
+      "pagePath": "pages/linear-algebra/matrix/operations/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Matrix Addition", "notation Matrix Notation", "2 Matrix Subtraction", "3 Scalar Multiplication", "4 Linear Combinations of Matrices", "5 Matrix Multiplication — Definition", "6 — Properties", "7 — Column and Row Interpretations", "8 The Transpose", "9 Matrix Powers", "10 Elementary Matrices", "11 Decompositions", "12 Dimension Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Matrix Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Capital letters, double subscripts in a fixed order, multiplication with no symbol at all",
+          "covers": ["A = (aᵢⱼ) + m×n anatomy (row-first order; entry-extraction (A+B)ᵢⱼ; ×'s third job; [aᵢⱼ] US-brackets vs this site's parentheses)", "AB juxtaposition (shape contract; pre/post-multiply; Aⁿ, A⁰ = I; I/Iₙ and O reserved letters; scalar-habit traps)", "Aᵀ label-not-exponent ((AB)ᵀ reversal; type characterizations; ⊤ and econometrics-prime variants; three-superscript-jobs A^n/A^{-1}/A^T)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. BASE MATRIX ANATOMY owned here (matrix front page skipped — same pattern as f' at derivatives/function). matrix/types gate-fail folded in: I/O reserved letters live in entry 2, type characterizations in entry 3. Cross-links: basic-operations#notation + dot-product#notation ×2 (inherited), cross-product#notation (× jobs), matrix/types, matrix/inverse, function#notation (prime)."
+          }
+        },
+        {
+          "sectionId": "8",
+          "sectionTitle": "The Transpose",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "(the transpose operation, taught in body)",
+          "covers": ["Aᵀ operation"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "matrix/types recorded as gate-fail (taxonomy catalog; its I/O marks folded into this section). Matrix family remaining: inverse (A⁻¹ — already back-linked from algebra negative-exponents), rank, trace (tr/rank operator marks — classify; likely one thin pass each or fold)."
+    },
+    "linear-algebra/matrix/inverse": {
+      "pagePath": "pages/linear-algebra/matrix/inverse/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Definition of the Inverse", "notation Inverse Notation", "2 The 2×2 Inverse Formula", "3 When Does the Inverse Exist?", "4 Row Reduction", "5 Adjugate", "6 Properties", "7 Solving Systems", "8 Special Types", "9 Common Errors", "10 When Not to Compute", "11 Methods Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Inverse Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The last stop of the −1 superscript, the division sign that deliberately does not exist",
+          "covers": ["A⁻¹ label (fourth habitat of the −1 superscript; invertible/singular vocabulary; inv() software form)", "A/B non-notation (side-ambiguity rationale; pre/post-multiply solutions; MATLAB \\ and / solver commands)", "(AB)⁻¹ reversal + A⁻ⁿ and A⁻ᵀ combinations"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. The −1-superscript mesh COMPLETE: numbers (negative-exponents, real exponent) → f⁻¹ (functions) → sin⁻¹ (trig) → A⁻¹ (here, label) — all cross-linked. Cross-links: operations#notation + negative-exponents#notation ×2 (inherited + label contrast)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Definition of the Inverse",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "the unique matrix A⁻¹ satisfying AA⁻¹ = A⁻¹A = I … invertible or nonsingular … singular",
+          "covers": ["A⁻¹ definition + vocabulary"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Matrix family: operations ✓, inverse ✓; types/rank/trace gate-fails (rank(A) and tr(A) are single operator marks taught in their own bodies — OVERLAP; both already on the symbols page). Family CLOSED: 2 sections, 3 fails, hub skipped."
+    },
+    "linear-algebra/determinants/properties": {
+      "pagePath": "pages/linear-algebra/determinants/properties/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Effect of Row Swaps", "notation Determinant Notation", "2 Row Scaling", "3 Row Addition", "4 Row Reduction", "5 Multiplicative Property", "6 Transpose Invariance", "7 Triangular and Diagonal", "8 Block Triangular", "9 Invertibility Equivalence", "10 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Determinant Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "An operator with three spellings — a function name, a pair of bars, and a letter borrowed by three different jobs",
+          "covers": ["det(A) operator spelling (optional parens; det(AB) vs det(A+B) asymmetry)", "|A| + vmatrix delimiter-operator (bar-family completion; can-be-negative; |det(A)| double-decker)", "Δ Cramer school tradition (Δₓ/Δ; Δ's three jobs — increment/discriminant/determinant; D collision)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1 (det defined on the skipped family front; properties is the det-central leaf). BAR FAMILY COMPLETE: |x| ↔ ‖v‖ ↔ |A|, all cross-linked. Δ TRIPLE-JOB COMPLETE: differentials ↔ quadratic ↔ here. Also FIXED pre-existing broken self-anchor #transpose → #6 (all copies incl. commented drafts)."
+          }
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "det/|A|/Δ ownership here. Determinants family remaining: cofactors (pass candidate: Mᵢⱼ/Cᵢⱼ/adj/checkerboard), geometry + applications (classify — likely fails)."
+    },
+    "linear-algebra/determinants/cofactors": {
+      "pagePath": "pages/linear-algebra/determinants/cofactors/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Minors", "notation Cofactor Notation", "2 Cofactors and the Sign Pattern", "3 Laplace Expansion Along a Row", "4 Along a Column", "5 The Cofactor Matrix", "6 The Adjugate", "7 Computational Cost", "8 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Cofactor Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Capital letters that secretly name numbers, a superscript that deletes instead of multiplying, and an operator with a dangerous old name",
+          "covers": ["Mᵢⱼ/Cᵢⱼ capital-scalar wrinkle (Russian Aᵢⱼ cofactor variant; cofactor-matrix regrouping)", "A^{(i,j)} deletion superscript (parenthesis fencing shared with f^{(n)}; no universal standard)", "adj(A) = Cᵀ (transpose trap; classical-adjoint vs modern A* naming hazard)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. Cross-links: determinants/properties#notation + matrix/operations#notation + sequences#notation (inherited), higher-order#notation (parenthesized-superscript fencing device — LA↔calculus mesh), matrix/inverse (adjugate's starring role)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Minors",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "the (i,j) minor Mᵢⱼ is the determinant of the (n−1)×(n−1) submatrix … A^{(i,j)} denotes the submatrix",
+          "covers": ["Mᵢⱼ, A^{(i,j)} definitions"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Determinants family: properties ✓, cofactors ✓; geometry + applications to classify (expect fails: geometric-meaning and Cramer-application pages reusing owned marks)."
+    },
+    "linear-algebra/linear-systems/gaussian-elimination": {
+      "pagePath": "pages/linear-algebra/linear-systems/gaussian-elimination/index.jsx",
+      "template": "untitled",
+      "sections": ["1 The Goal", "2 The Three Elementary Row Operations", "notation Elimination Notation", "3 Forward Elimination", "4 Pivots", "5 Back Substitution", "6 Gauss-Jordan", "7-9 Worked Examples", "10 Computational Cost", "11 Partial Pivoting", "12 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Elimination Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The bar that keeps a system from being just a matrix, the arrow that must point at the right row, and the tilde",
+          "covers": ["[A|b] augmented bar (punctuation-not-operation; [A|I] inverse device; parenthesis variant)", "replacement-direction convention (arrow points at replaced row; :=/prime spellings; illegal cRⱼ→Rᵢ; \\xrightarrow annotation form)", "A ~ B row equivalence (not-equality; tilde's four fields)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 2 (the row-op marks are DEFINED in id 2's callout — body owns them, inherited strip credits them). geometry + applications gate-failed same round. Cross-links: matrix/operations#notation + basic-operations#notation (inherited), matrix/inverse ([A|I]), echelon-form, two-sided#notation (arrow glyph), set-theory/relationships (tilde)."
+          }
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "The Three Elementary Row Operations",
+          "field": "content (formula callout)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Rᵢ ↔ Rⱼ (swap), kRᵢ → Rᵢ (scaling), Rᵢ + cRⱼ → Rᵢ (addition)",
+          "covers": ["row-operation notation, defined"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Determinants family CLOSED (2 sections; geometry/applications fails). Linear-systems remaining: echelon-form (REF/RREF marks — likely fold: named forms, body-taught), homogeneous (Ax=0, trivial solution — thin), solvability (classify)."
+    },
+    "linear-algebra/vector-spaces/span": {
+      "pagePath": "pages/linear-algebra/vector-spaces/span/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Definition", "notation Span Notation", "2 Geometric Interpretation", "3 Spanning Sets", "4 Testing Vector Membership", "5 Testing Whether a Set Spans Rⁿ", "6 Span and Column Space", "7 Redundancy and Reduction", "8 Abstract Vector Spaces", "9 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Span Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Braces or parentheses after the operator, the angle-bracket rival from algebra, and the hollow letter",
+          "covers": ["Span{list} vs Span(K) delimiter habits (case variation; empty-span payoff)", "⟨v₁,…⟩ generated-subspace variant (group-theory import; inner-product ambiguity; angle-bracket triple-job)", "𝔽 placeholder field (Körper K/k; 𝔽ₚ; variable-in-blackboard-typeface)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. Body USES all three silently (mixed delimiters, c ∈ 𝔽 unglossed). Angle-bracket triple-job map: components (basic-operations) / span (here) / inner product (orthogonality). Cross-links: basic-operations#notation ×2 + set-theory/basics (inherited), orthogonality/inner-product."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Definition",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "Span{v₁,…,vₖ} = {c₁v₁ + … + cₖvₖ | cᵢ ∈ 𝔽} … Span(K)",
+          "covers": ["span set-builder definition, both delimiter styles"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Linear-systems CLOSED same round (echelon-form/homogeneous/solvability fails: named forms, vocabulary, theorem pages). Vector-spaces remaining: axioms, basis, dimension, fundamental-spaces, linear-independence, subspaces."
+    },
+    "linear-algebra/vector-spaces/fundamental-spaces": {
+      "pagePath": "pages/linear-algebra/vector-spaces/fundamental-spaces/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Overview", "notation Notation for the Four Subspaces", "2 The Column Space", "3 The Row Space", "4 The Null Space", "5 The Left Null Space", "6 Dimension Accounting", "7 Orthogonal Complements", "8 The Big Picture", "9 Examples Across Matrix Types", "10 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation for the Four Subspaces",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Operator names that vary by author, one subspace that never got a mark of its own, and the barred arrow",
+          "covers": ["Col/Row/Null operator names (Strang C/N variants; R(A) range-vs-row ambiguity; ker/im synonyms)", "Null(Aᵀ) markless left null space (yᵀA = 0ᵀ spelling; coker)", "↦ vs → element-vs-space arrows (anonymous-map device; limit-arrow triple collision)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. ↦ ownership here (used unglossed by body twice; functions symbols page lists it but no dedicated-section owner existed). Cross-links: span#notation + matrix/operations#notation + dimension (inherited), transformations/image-kernel (ker/im synonyms, forward), functions/basics (anonymous-map device), two-sided#notation (arrow collision)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Overview",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "The column space Col(A) and the left null space Null(Aᵀ) live in ℝᵐ … the map x ↦ Ax",
+          "covers": ["all four space marks + mapsto, in use"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Vector-spaces: span ✓, fundamental-spaces ✓; remaining: dimension (dim mark — pass candidate), basis (B letter, [v]_B coordinates — check whether basis-change owns coordinates), axioms (V/𝔽 tuple — 𝔽 partly owned at span now), linear-independence + subspaces (classify)."
+    },
+    "linear-algebra/vector-spaces/basis": {
+      "pagePath": "pages/linear-algebra/vector-spaces/basis/index.jsx",
+      "template": "untitled",
+      "sections": ["1 What a Vector Space Is", "2 Basis: Definition", "notation Basis and Coordinate Notation", "3 Unique Representation", "4 Coordinates", "5 The Standard Basis for Rⁿ", "6 Other Standard Bases", "7 Finding a Basis for a Subspace", "8 Extending and Reducing", "9 Change of Basis", "10 Coordinates and Isomorphism", "11 Independence and Span", "12 Subspaces and the Fundamental Subspaces"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Basis and Coordinate Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "A script letter for the collection, brackets that ask in which coordinates, and a subscript arrow engineered to cancel like dominoes",
+          "covers": ["ℬ vs B script/roman pairing (calligraphic-collection convention; 𝒫ₙ family)", "[v]_ℬ coordinate brackets ([v]_ℰ = v collapse; (v)_ℬ variants; object-vs-description)", "P_{𝒞←ℬ} backward-arrow subscript (domino cancellation; forward-arrow rival convention; self-concealing misread)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 2 (Basis: Definition; id 1 is a recap). Body defines [v]_ℬ (id 4) and P_{𝒞←ℬ} (id 9) — entries add the reading conventions, variants, and design rationale. Cross-links: span#notation + magnitude#notation + matrix/operations#notation + inverse#notation ×2 (inherited + reversal)."
+          }
+        },
+        {
+          "sectionId": "4",
+          "sectionTitle": "Coordinates",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "[v]_ℬ = (c₁ … cₙ)ᵀ where v = c₁v₁ + … + cₙvₙ",
+          "covers": ["coordinate-vector definition"],
+          "stage2": null
+        },
+        {
+          "sectionId": "9",
+          "sectionTitle": "Change of Basis",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "the change-of-basis matrix P_{𝒞←ℬ} satisfies [v]_𝒞 = P_{𝒞←ℬ}[v]_ℬ",
+          "covers": ["backward-arrow subscript, defined"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Vector-spaces family CLOSED: 3 sections (span, fundamental-spaces, basis); dimension/linear-independence/axioms/subspaces gate-fails (dim = single operator per rank/trace precedent; others vocabulary/axiom/taxonomy pages)."
+    },
+    "linear-algebra/transformations/image-kernel": {
+      "pagePath": "pages/linear-algebra/transformations/image-kernel/index.jsx",
+      "template": "untitled",
+      "sections": ["1 The Image", "2 The Kernel", "notation Kernel and Image Notation", "3 Injectivity", "4 Surjectivity", "5 Bijectivity and Isomorphisms", "6 Rank-Nullity for Maps", "7 Dimension Constraints", "8 Computing", "9 Fundamental Decomposition", "10 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Kernel and Image Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "A lowercase German survivor next to a capitalized rival with a double life, the colon that declares a map, and the dictionary",
+          "covers": ["ker/Im capitalization asymmetry (Noether Kern; Im(z) complex collision; ran/range)", "T: V → W signature (Tv juxtaposition privilege; name-on-arrow; colon's two grammars)", "map↔matrix dictionary (Im=Col, ker=Null; rank–nullity in both dialects; nullity as named dimension)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 2 (both marks defined by then). Completes the forward link from fundamental-spaces#notation (ker/im synonyms mentioned there, owned here — bidirectional). Cross-links: fundamental-spaces#notation ×2 (inherited + R(A) wars), basic-operations#notation (inherited), complex-numbers/algebraic-form (Im collision)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "The Image",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Im(T) = {T(v) : v ∈ V} ⊆ W",
+          "covers": ["Im definition"],
+          "stage2": null
+        },
+        {
+          "sectionId": "2",
+          "sectionTitle": "The Kernel",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "ker(T) = {v ∈ V : T(v) = 0} ⊆ V",
+          "covers": ["ker definition"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "ker/Im ownership here. Transformations family remaining: matrix-representation ([T]_ℬ — partly covered by basis#notation's bracket entry; classify), basis-change, geometric, properties (classify — expect fails)."
+    },
+    "linear-algebra/eigen/characteristic-equation": {
+      "pagePath": "pages/linear-algebra/eigen/characteristic-equation/index.jsx",
+      "template": "untitled",
+      "sections": ["1 From Eigenvectors to the Determinant Condition", "notation Eigenvalue Notation", "2 The Characteristic Polynomial", "3 Computing 2×2", "4 Computing 3×3", "5 Larger Matrices", "6 Algebraic Multiplicity", "7 Finding Eigenvectors", "8 Cayley-Hamilton", "9 Similarity", "10 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Eigenvalue Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The Greek letter no one dares rename, the identity matrix that must not be dropped, and the subscript that names a space after a number",
+          "covers": ["λ reserved letter (λᵢ enumeration; σ(A) spectrum; μ fallback; Hilbert-era attribution)", "det(A − λI) with load-bearing I (A − λ species error; two sign conventions differing by (−1)ⁿ; p_A(λ))", "E_λ eigenspace subscript (AM/GM multiplicity pair; ker-dialect spelling; e/E letter species trio)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1 (Av = λv and the determinant condition derived there; eigen family front skipped). Cross-links: determinants/properties#notation + matrix/operations#notation + fundamental-spaces#notation (inherited), polynomials/roots#notation (algebraic multiplicity), image-kernel#notation (ker dialect)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "From Eigenvectors to the Determinant Condition",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Av = λv rearranges to (A − λI)v = 0 … det(A − λI) = 0",
+          "covers": ["defining equation + characteristic equation"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "λ/E_λ/char-poly ownership here. Transformations CLOSED same round (matrix-representation/basis-change/geometric/properties fails — dictionary and catalog pages; [T]_ℬ brackets owned at basis#notation). Eigen remaining: properties, complex, diagonalization (classify — expect fails; diagonalization's A = PDP⁻¹ letter convention is a candidate but likely body-taught)."
+    },
+    "linear-algebra/orthogonality/inner-product": {
+      "pagePath": "pages/linear-algebra/orthogonality/inner-product/index.jsx",
+      "template": "untitled",
+      "sections": ["1 The Dot Product", "2 Properties", "3 Length", "4 Distance", "5 Angle", "6 Cauchy-Schwarz", "7 Triangle Inequality", "8 General Inner Products", "notation Inner Product Notation", "9 Examples of Inner Products", "10 Pythagorean Theorem", "11 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Inner Product Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "The angle brackets' third and final job, the dots that mark empty argument slots, and the perpendicularity mark that grew a superscript",
+          "covers": ["⟨u,v⟩ (Russian (u,v) parentheses tradition; Dirac bra-ket bar-vs-comma)", "⟨·,·⟩ slot-dot placeholders (‖·‖/d(·,·)/f(·) family; category dashes; verb-vs-empty-chair)", "⊥ and W^⊥ (species scaling; superscript-operator corner; \\perp vs logic ⊥)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 8 (General Inner Products — where ⟨,⟩ is defined; ids 1-7 are the dot-product recap). ANGLE-BRACKET LEDGER CLOSED: components/span/inner-product all owned. ⟨,⟩ ownership honors the dot-product page's forward link. Cross-links: dot-product#notation + magnitude#notation + span#notation ×2 (inherited + ledger), fundamental-spaces#notation (complement pairs)."
+          }
+        },
+        {
+          "sectionId": "8",
+          "sectionTitle": "General Inner Products",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "a function ⟨·,·⟩: V × V → ℝ satisfying three axioms",
+          "covers": ["⟨,⟩ definition + slot signature"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Eigen CLOSED same round (properties/complex/diagonalization fails — spectral-behavior, extension, and application pages). Orthogonality remaining: orthogonal-sets, projections, gram-schmidt, least-squares (classify — proj_W mark is a candidate at projections; expect the rest fail)."
+    },
+    "linear-algebra/orthogonality/projections": {
+      "pagePath": "pages/linear-algebra/orthogonality/projections/index.jsx",
+      "template": "untitled",
+      "sections": ["1 Projection onto a Vector", "notation Projection Notation", "2 The Orthogonal Decomposition", "3 Orthogonal Basis", "4 Arbitrary Basis", "5 The Projection Matrix", "6 Properties", "7 Least Squares", "8 Worked Example", "9 Summary"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Projection Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "A subscript that names the target, the hat's second job in this subject, and the letter P moonlighting for the third time",
+          "covers": ["proj_a/proj_W target subscript (P_W and hat shorthands; naming-not-counting subscripts)", "estimate hat b̂/x̂ (two-hats disambiguation vs unit hat; statistics estimator honest-share; b_∥ variants)", "P projection matrix (third P job; P² = P idempotence-as-notation; P² = P = Pᵀ characterization; singularity)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 1. Hat-jobs thread completes (unit @ magnitude, estimate here, statistics acknowledged as shared-not-collided). Cross-links: dot-product#notation + inner-product#notation + magnitude#notation ×2 (inherited + two-hats), basis#notation ×2 (naming subscripts + P collision), least-squares, inverse#notation (unrecoverable discard)."
+          }
+        },
+        {
+          "sectionId": "1",
+          "sectionTitle": "Projection onto a Vector",
+          "field": "content",
+          "kind": "inline-intro",
+          "status": "existing",
+          "quote": "proj_a b = (a·b)/(a·a) a … ĉ",
+          "covers": ["proj mark + estimate hat, in use"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Orthogonality: inner-product ✓, projections ✓; orthogonal-sets/gram-schmidt/least-squares gate-fails (orthonormal-set vocabulary, algorithm page, application page — marks owned here and at inner-product). Family CLOSED: 2 sections, 3 fails."
+    },
+    "linear-algebra/decompositions/svd": {
+      "pagePath": "pages/linear-algebra/decompositions/svd/index.jsx",
+      "template": "untitled",
+      "sections": ["1 What the SVD Is (empty content — diagram-rendered)", "2 The Geometric Interpretation", "notation SVD Notation", "3 Singular Values", "4 Computing", "5 Compact and Thin Forms", "6 SVD and the Four Subspaces", "7 The Pseudoinverse", "8 Low-Rank Approximation", "9 SVD and Norms", "10 Spectral Decomposition", "11 Outer Product Form"],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "SVD Notation",
+          "field": "notation (NotationSection component)",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "Letters that are contracts, a summation sign moonlighting as a matrix, and the lowercase sigma with a set-valued cousin",
+          "covers": ["A = UΣVᵀ letter contracts (LU/QR/PDP⁻¹ family pattern; U double-booking upper-vs-orthogonal; A⁺ = VΣ⁺Uᵀ; V* complex form)", "Σ diagonal-matrix object vs summation operator (shape bookkeeping; diag() constructor; software D/S)", "σᵢ built-in ordering (‖A‖₂ and κ(A) second names; sᵢ software variant; σ(A) spectrum contrast)"],
+          "stage2": {
+            "mathSymbols": {"page": "/math-symbols/linear-algebra", "category": null, "anchorText": "All linear algebra symbols (footer pill)"},
+            "added": "2026-08-16",
+            "placement": "after id 2 (id 1 is an empty-content diagram slot). Decompositions family owner (cholesky/lower-upper/qr/spectral gate-fail as named-formula pages whose letter contracts are covered by entry 1's family pattern). Cross-links: matrix/operations#notation + eigen#notation ×2 (inherited + σ contrast), magnitude#notation (inherited), cofactors#notation (adjoint/star), sequences#notation (Σ operator)."
+          }
+        },
+        {
+          "sectionId": "3",
+          "sectionTitle": "Singular Values",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "existing",
+          "quote": "σᵢ = √λᵢ(AᵀA) … ordered σ₁ ≥ σ₂ ≥ ⋯ ≥ 0",
+          "covers": ["σᵢ definition + ordering"],
+          "stage2": null
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "Decompositions CLOSED: 1 section (svd), 4 fails (cholesky, lower-upper, qr, spectral — named-formula pages; their letter contracts are covered by svd's entry 1). LINEAR-ALGEBRA PASS COMPLETE."
     }
   },
   "$crossSectionFindings": {
+    "linear-algebra": [
+      "2026-08-16 PASS OPENED. /math-symbols/linear-algebra exists — no HALT-1. Tree: ~40 theoretical leaves across 9 families (vectors, matrix, determinants, linear-systems, vector-spaces, transformations, eigen, orthogonality, decompositions); excluded: visual-tools ×16, calculators ×4, hubs/fronts ×10, definitions, formulas. Notation-dense section — expected owners: vectors/basic-operations (base marks), magnitude (‖·‖), dot-product or inner-product (⟨,⟩ — HALT-2 candidate), cross-product (×), matrix/operations or types ([aᵢⱼ], m×n, Aᵀ), inverse (A⁻¹ — already linked from algebra), trace/rank (tr, rank), determinants (det vs |A| — already linked from algebra), eigen (λ), image-kernel (ker/im), fundamental-spaces (Col/Nul/Row), orthogonality (⊥), decompositions (letter conventions).",
+      "2026-08-16: vectors/basic-operations written — 'Vector Notation' (3 entries: bold-vs-arrow marking, components + tuple/column anatomy, ℝⁿ) after id 1. Base vector marks owned. Vectors family next: magnitude (gate: pass, ‖·‖), dot-product (survey with inner-product twin), cross-product (gate: pass, ×), linear-combinations/properties (classify).",
+      "2026-08-16: vectors/magnitude written — 'Norm Notation' (3 entries: bar-count + physics |v| variant, ‖·‖ₚ/ℓᵖ family marks, hat convention + î ĵ k̂ vs eᵢ) after id 1. Bars story now tri-directional: |x| (algebra) ↔ ‖v‖ (here) ↔ |M| (determinants). Next: dot-product + inner-product joint survey for the ⟨,⟩ HALT-2 candidate.",
+      "2026-08-16: HALT-2 candidate dissolved — dot-product/inner-product territories split cleanly (concrete · in ℝⁿ vs abstract ⟨u,v⟩). vectors/dot-product written — 'Dot Product Notation' (3 entries: mandatory dot + three habitats, aᵀb matrix spelling + outer-product reversal, mixed-bars Cauchy–Schwarz reading) after id 1. Vectors family remaining: cross-product (pass expected: ×/determinant mnemonic), linear-combinations + properties (classify).",
+      "2026-08-16: vectors/cross-product written — 'Cross Product Notation' (3 entries: order-sensitive × + wedge variant, triple-product forced parse + box bracket, basis-spelling trio + Hamilton ancestry) after id 1. Vectors family remaining: linear-combinations, properties (classify next).",
+      "2026-08-16: vectors CLOSED (4 sections, 2 fails). matrix/operations written — 'Matrix Notation' (3 entries: (aᵢⱼ)/m×n anatomy, AB juxtaposition + I/O reserved letters, Aᵀ three-superscript-jobs) after id 1; base matrix anatomy owned here (front skipped); types gate-failed with I/O folded in. Matrix family remaining: inverse, rank, trace (classify).",
+      "2026-08-16: matrix/inverse written — 'Inverse Notation' (3 entries: A⁻¹ fourth habitat, A/B non-notation + MATLAB solvers, reversal + A⁻ᵀ) after id 1. The −1-superscript mesh is COMPLETE across four sections. rank/trace gate-failed (single operator marks, body-taught, symbols-page-catalogued). Matrix family CLOSED: 2 sections, 3 fails. Next: determinants family (det vs |A| — the det notation owner; likely determinants/properties or the cofactors page; determinants front is skipped).",
+      "2026-08-16: determinants/properties written — 'Determinant Notation' (3 entries: det operator, |A|/vmatrix delimiter-operator + bar-family completion, Δ Cramer tradition + triple-job completion) after id 1; fixed pre-existing broken #transpose self-anchor → #6. Determinants remaining: cofactors (Mᵢⱼ/Cᵢⱼ/adj candidate), geometry, applications.",
+      "2026-08-16: determinants/cofactors written — 'Cofactor Notation' (3 entries: capital-scalar wrinkle, A^{(i,j)} deletion superscript + f^{(n)} fencing parallel, adj = Cᵀ + adjoint naming hazard) after id 1. Determinants remaining: geometry, applications (classify).",
+      "2026-08-16: determinants CLOSED (geometry/applications fails). linear-systems/gaussian-elimination written — 'Elimination Notation' (3 entries: augmented bar, replacement-direction hazard, ~ row equivalence) after id 2 (row-op marks defined in body's id 2). Linear-systems remaining: echelon-form, homogeneous, solvability (classify).",
+      "2026-08-16: linear-systems CLOSED (3 fails). vector-spaces/span written — 'Span Notation' (3 entries: Span{}/Span() delimiters, ⟨⟩ generated-subspace + angle-bracket triple-job, 𝔽 placeholder field) after id 1. Vector-spaces remaining: fundamental-spaces (Col/Nul/Row — strong pass candidate), dimension (dim), basis ([v]_B coordinates?), axioms/linear-independence/subspaces (classify).",
+      "2026-08-16: vector-spaces/fundamental-spaces written — 'Notation for the Four Subspaces' (3 entries: Col/Row/Null naming wars + R(A) ambiguity, markless left null space, ↦ vs →) after id 1. ↦ ownership established. Remaining vector-spaces: dimension, basis, axioms, linear-independence, subspaces (classify next round).",
+      "2026-08-16: vector-spaces/basis written — 'Basis and Coordinate Notation' (3 entries: ℬ vs B script pairing, [v]_ℬ brackets, P_{𝒞←ℬ} domino subscript) after id 2. Vector-spaces CLOSED: 3 sections, 4 fails (dimension per rank/trace precedent; linear-independence, axioms, subspaces vocabulary/taxonomy). Remaining LA families: transformations (image-kernel = ker/im owner), eigen (λ), orthogonality (⊥/⟨,⟩/W^⊥), decompositions (classify).",
+      "2026-08-16: transformations/image-kernel written — 'Kernel and Image Notation' (3 entries: ker/Im asymmetry + Noether Kern + Im(z) collision, T: V→W signature + Tv privilege, map↔matrix dictionary) after id 2. Transformations remaining: matrix-representation, basis-change, geometric, properties (classify — [T]_ℬ largely covered at basis#notation).",
+      "2026-08-16: transformations CLOSED (4 fails). eigen/characteristic-equation written — 'Eigenvalue Notation' (3 entries: λ reserved + σ(A) spectrum, load-bearing I + sign conventions, E_λ subscript + multiplicity pair) after id 1. Eigen remaining: properties, complex, diagonalization (classify). Then orthogonality (inner-product owns ⟨,⟩ as promised; orthogonal-sets/projections for ⊥/W^⊥/proj) and decompositions.",
+      "2026-08-16: eigen CLOSED (3 fails). orthogonality/inner-product written — 'Inner Product Notation' (3 entries: ⟨u,v⟩ + Russian parentheses + bra-ket, slot-dots, ⊥/W^⊥) after id 8 (where ⟨,⟩ is defined). Angle-bracket ledger closed across three pages. Remaining: orthogonality tail (projections' proj mark candidate), decompositions — pass nearly closed.",
+      "2026-08-17 LINEAR-ALGEBRA PASS CLOSED. Written: 17 sections (vectors: basic-operations, magnitude, dot-product, cross-product; matrix: operations, inverse; determinants: properties, cofactors; linear-systems: gaussian-elimination; vector-spaces: span, fundamental-spaces, basis; transformations: image-kernel; eigen: characteristic-equation; orthogonality: inner-product, projections; decompositions: svd). Gate-skips: ~23 leaves + 10 hubs/fronts + definitions/formulas + visual-tools ×16 + calculators ×4 excluded. One HALT-2 candidate dissolved (dot/inner split), zero halts pending. Completed cross-page threads: −1-superscript (4 pages), bar family |x|/‖v‖/|A|, Δ triple-job, angle-bracket triple-job, subscript-jobs (4 kinds), hat jobs (unit/estimate/statistics), superscript-corner census (n/−1/T/⊥/+/(i,j)), Σ operator-vs-object, σ set-vs-values, arrow family (→/↦/↔/⟵). Pre-existing broken anchor fixed (determinants/properties #transpose→#6). ASK-1 unchanged (\\lim, \\to, \\sqrt missing from keyboard dataset). Backlink-tightening opportunity: /math-symbols/linear-algebra explanations can now point at 17 #notation anchors."
+    ],
+    "algebra": [
+      "2026-08-16 PASS OPENED. HALT-1 fired first (only section with no /math-symbols index); operator chose option 1 — /math-symbols/algebra CREATED before any page work (7 categories, page-level backlinks, menu/hub wiring left as ASK-2). Tree: ~40 theoretical leaves across 7 families (equations, inequalities, logarithms, polynomials, powers, roots, sequences); excluded per operator rules: visual-tools ×7, calculators ×3, hubs/fronts ×9, definitions, formulas, identities, and the rules-style catalogs (polynomials/rules, roots/radical-rules, powers/exponent-rules, logarithms/rules).",
+      "2026-08-16: powers/natural-exponents written — 'Exponent Notation' (3 entries: a^n anatomy, superscript binding + Excel divergence, tower convention) after id 1. Base exponent ownership established; NOTE: this section's slice(1) pattern is BY DESIGN (id 0 = Key Terms duplicated by KeyTermsCard) — different from the calculus slice bug. Powers family next: zero-powers, negative-exponents, rational-exponents, irrational-exponents, exponential-functions, exponential-equations, exponential-inequalities.",
+      "2026-08-16: powers/zero-powers — NO SECTION (below floor via OVERLAP: the body IS the a⁰/0⁰ convention discussion across ids 3-6). Recorded three existing dedicated-section spots; planted + resolved one contextual link: obj6 'indeterminate forms' → /calculus/limits/evaluating#notation — first algebra→calculus notation cross-link.",
+      "SEMANTIC-NEED GATE added by operator (2026-08-16): a page gets a section only if its topic owns special notation; candidate-entries-all-INHERIT means record-and-skip. Forecast: ~10-14 sections expected across algebra's ~35 theoretical leaves.",
+      "2026-08-16: powers/negative-exponents written — 'Negative Exponent Notation' (3 entries: minus-as-instruction, a⁻¹ the only arithmetic −1 superscript + collision map to f⁻¹/sin⁻¹/A⁻¹, scientific + SI unit conventions) after id 3. Powers family remaining: rational-exponents (gate: pass, a^{m/n}), irrational-exponents (gate: likely fail — no new marks), exponential-functions (gate: pass, aˣ vs xⁿ), exponential-equations/-inequalities (gate: likely fail).",
+      "2026-08-16: HALT-2 fired and resolved — powers/rational-exponents vs roots/rational-exponents both claim a^{m/n}; operator assigned ownership to POWERS (extension-ladder home). powers/rational-exponents written — 'Rational Exponent Notation' (3 entries: fraction anatomy, lowest-terms hazard, caret/linear form) after id 3; roots twin recorded as no-section with a tree-consolidation note for the operator.",
+      "2026-08-16: powers/irrational-exponents — NO SECTION (gate fail: construction story, zero new marks). One link woven: obj3 'limit' → /calculus/limits/two-sided. Next: exponential-functions (gate: pass).",
+      "2026-08-16: powers/exponential-functions written — 'Exponential Notation Conventions' (3 entries: reserved e + calculator E collision, exp(x) spelling, P₀e^{kt} parameter conventions) after id 1. e/exp ownership established here. Powers family done except exponential-equations/-inequalities (classify next).",
+      "2026-08-16: powers CLOSED — exponential-equations and exponential-inequalities recorded as gate-fails (method playbooks). Family total: 4 sections, 4 principled skips.",
+      "2026-08-16: roots/properties written — 'Radical Notation' (3 entries: anatomy + surd, vinculum grouping + Descartes 1637, ±/∓) after id 1. √ ownership here. ASK-1: \\sqrt absent from keyboard dataset (joins \\lim, \\to). Roots family remaining: operations, simplifying, functions, equations (classify each), radical-rules (catalog skip), rational-exponents (already recorded no-section).",
+      "2026-08-16: roots CLOSED — operations, simplifying, functions, equations all gate-fails (technique/graph/method pages); radical-rules is a catalog (skip on sight if ever surveyed). Family total: 1 section (properties), 6 skips. Next family: logarithms — common-natural is the notation-dense candidate (ln/log/lg + calculator conventions; OVERLAP risk to assess), properties looks like a function-properties gate-fail, graphs/equations/inequalities likely fail, rules is a catalog.",
+      "2026-08-16: logarithms/common-natural written — 'Logarithm Notation' (3 entries: log_b anatomy + parenthesis-free style, bare-log dialect wars + lg/lb/ld, ln letterform + Stringham 1893 + ln²x convention) after id 1. log/ln/lg ownership here. Logarithms remaining: properties, graphs, equations, inequalities (classify — likely fails), rules (catalog).",
+      "2026-08-16: logarithms CLOSED — properties/graphs/equations/inequalities/rules recorded as aggregate gate-fails. Family: 1 section, 5 skips.",
+      "2026-08-16: equations/quadratic written — 'Quadratic Notation' (3 entries: standard-form contract + sign trap, Δ vs D traditions, x₁/x₂ enumeration subscripts) after id 1. Equations remaining: linear, polynomial, rational, absolute-value (absolute-value is the likely second pass; |x| has no owner yet).",
+      "2026-08-16: equations/absolute-value written — 'Absolute Value Notation' (3 entries: bars-as-brackets + triangle inequality, overloaded-pipes map with determinant trap, √(x²) alias) after id 1. |x| ownership established app-wide. Equations remaining: linear, polynomial, rational (classify — likely fails).",
+      "2026-08-16: equations CLOSED (linear/polynomial/rational aggregate gate-fails; multiplicity notation flagged as polynomials/roots candidate). inequalities/linear written — 'Inequality Notation' (3 entries: the four marks + slanted variants, chain well-formedness, interval-endpoint rules + Bourbaki brackets) after id 1 — the family's base owner. Inequalities remaining: quadratic, polynomial, rational, absolute-value (classify).",
+      "2026-08-16: inequalities CLOSED (4 aggregate gate-fails). polynomials/roots written — 'Polynomial Notation' (3 entries: coefficient subscripts, deg + zero-polynomial conventions, multiplicity root-counter) after id 1, resolving the flagged candidate. Polynomials remaining: factoring, graphing (classify — expect fails), operations already failed, rules catalog. Then sequences (last family): arithmetic or the hub-adjacent core page owns aₙ/{aₙ}/Σ/recurrences; named-sequence pages expect fails.",
+      "2026-08-16: polynomials CLOSED (factoring + graphing fails). sequences/arithmetic written — 'Sequence Notation' (3 entries: aₙ position subscript + start-index conventions, recurrence index frames, {aₙ}/Σ compressions with dummy-index link to definite integrals) after id 1. The three-subscript-jobs map (position/job-title/enumeration) is complete across three pages. Sequences remaining: 6 named-sequence pages to classify (expect fails) — then ALGEBRA PASS CLOSES.",
+      "2026-08-16 ALGEBRA PASS CLOSED. Created /math-symbols/algebra first (HALT-1 → option 1). Written: 11 sections (powers: natural-exponents, negative-exponents, rational-exponents, exponential-functions; roots: properties; logarithms: common-natural; equations: quadratic, absolute-value; inequalities: linear; polynomials: roots; sequences: arithmetic). Gate-skips with records: ~28 nodes (zero-powers + irrational-exponents by OVERLAP/gate, exponential drills, roots twin + 4 technique pages + radical-rules, logarithms ×5, equations ×3, inequalities ×4, polynomials ×3 + rules, sequences ×6, plus hubs/fronts/definitions/formulas/identities/calculators/visual-tools excluded by standing rules). One HALT-2 resolved (a^{m/n} → powers). New ownerships of app-wide gaps: |x|, e/exp, log/ln/lg, √/vinculum/±, inequality marks + intervals, sequence subscripts + Σ. ASK-1 keyboard dataset gaps now: \\lim, \\to, \\sqrt. Cross-section mesh: algebra ↔ calculus (indeterminate forms, limits, differentials Δ, sign charts, dummy index), ↔ functions, ↔ set-theory, ↔ complex-numbers, ↔ linear-algebra, ↔ trigonometry. Backlink-tightening opportunity: /math-symbols/algebra page-level backlinks can now point at #notation anchors on the 11 written pages (future micro-pass)."
     "set-theory": [
       "Zero live links to /math-symbols, /keyboard, or /latex anywhere in the section; five identical commented-out '[See All Probability Symbols and Notations](!/math-symbols/probability)' template snippets (operations:47, subsets:46, cardinality:46, relationships:46, venn-diagrams:45).",
       "Dedicated notation content: basics id 2 (section + table), subsets id 6 (section + table), operations id 6 (table with Notation column); cardinality id 6 table is a de-facto notation reference card.",
@@ -2431,7 +3713,8 @@
       "2026-08-15: integrals/definite written — 'Definite Integral Notation' (4 entries: bounded sign, dummy variable, evaluation bracket, Riemann metamorphosis) replacing 'Notation and Meaning' in place at id 2; UN-SLICED (3rd). Integrals remaining: evaluating(?), techniques, improper; rules/special probable skips.",
       "2026-08-15: integrals/techniques written — 'Notation Inside the Techniques' (3 entries: u/du pair with bound-labelling, parts ledger with European prime form, reverse-direction trig substitution) after id 2. Integrals remaining: improper (theoretical), evaluating (classify), rules/special (probable skips), hub (skip).",
       "OPERATOR RULE REITERATED (2026-08-15): no hub pages, no front/index pages, at any level.",
-      "2026-08-15: integrals/improper written — 'Improper Integral Notation' (3 entries: ∞-bound as defined limit + PV confusion, limit scaffold with independent letters, convergence verdicts + ∫|f|<∞ shorthand) after id 2. Integrals remaining: evaluating (classify), rules/special (probable skips)."
+      "2026-08-15: integrals/improper written — 'Improper Integral Notation' (3 entries: ∞-bound as defined limit + PV confusion, limit scaffold with independent letters, convergence verdicts + ∫|f|<∞ shorthand) after id 2. Integrals remaining: evaluating (classify), rules/special (probable skips).",
+      "2026-08-16 CALCULUS PASS CLOSED. Written: 15 notation sections (limits: two-sided, one-sided*, infinity, continuity, evaluating; derivatives: differentials*, higher-order*, function, differentiability, graph-analysis, techniques; integrals: indefinite, definite, techniques, improper — * = prior session). Skipped with records: 13 nodes (3 hubs + front page, limits rules/special, derivatives rules/common/special, integrals evaluating/rules/special, definitions, formulas). Un-sliced 3 pages (differentiability, derivatives/techniques, definite); replaced 2 pre-existing notation body sections in place (indefinite id 3, definite id 2); left 8 slice(1)+intro-duplication cases recorded. OPEN ITEMS: HALT-4 one-sided anchors RESOLVED 2026-08-16 (#9→#10 in calculusFormulasList.js + formulasRepository.js, operator option 1); ASK-1 \\lim and \\to missing from keyboard dataset; ASK-4 no epsilon-delta definition anywhere in limits family; recommended-note sinh⁻¹/arsinh (derivatives/special); recommended C[a,b] adoption in continuity body. Visual-tools untouched per project rule."
       "Keyboard dataset gaps (ASK-1): \\lim and \\to absent from math_symbols_data.json; \\rightarrow and \\infty present.",
       "two-sided renders with slice(1): TOC/FAQ list section 1 which never renders; intro duplicates it, slice left alone and recorded on the page entry."
     ],

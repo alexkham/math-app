@@ -1105,6 +1105,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '../../../../app/components/infographics/DiagramsFrame'
 
@@ -1586,6 +1587,44 @@ The dot product differs fundamentally from [vector addition](!/linear-algebra/ve
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Dot Product Notation`,
+    lead: `The one dot that is never optional, the matrix spelling of the same number, and how to read a line that mixes every kind of bar.`,
+    inherited: `Bold vectors and components — [vector notation](!/linear-algebra/vectors/basic-operations#notation); $\\|\\cdot\\|$ — [norm notation](!/linear-algebra/vectors/magnitude#notation); $\\Sigma$ — [sequence notation](!/algebra/sequences/arithmetic#notation).`,
+    entries: [
+      {
+        id: 'mandatory-dot',
+        tex: `$\\mathbf{a} \\cdot \\mathbf{b}$`,
+        read: `a dot b`,
+        means: `Between two vectors the centered dot *is* the operation — juxtaposition $\\mathbf{a}\\mathbf{b}$ means nothing here, unlike scalars where $ab$ and $a \\cdot b$ agree. The output is a scalar; the names, per the **Algebraic Definition** above, are dot, inner, or scalar product.`,
+        cases: `Three habitats for one glyph: between scalars, optional; in $c \\cdot \\mathbf{v}$, optional decoration for scalar multiplication; between vectors, load-bearing. Only the last one changes the species of the result.`,
+        alsoWritten: `$\\langle \\mathbf{a}, \\mathbf{b} \\rangle$ — angle brackets, the [general inner product's](!/linear-algebra/orthogonality/inner-product) mark, of which the dot is the $\\mathbb{R}^n$ special case.`,
+        confusedWith: `$\\mathbf{a} \\times \\mathbf{b}$ — the [cross product](!/linear-algebra/vectors/cross-product): different operation, different output species (a vector, and only in $\\mathbb{R}^3$). The two multiplication signs of arithmetic become two *different operations* on vectors.`,
+      },
+      {
+        id: 'transpose-spelling',
+        tex: `$\\mathbf{a}^{T}\\mathbf{b}$`,
+        read: `a transpose b`,
+        means: `The [matrix](!/linear-algebra/matrix/operations) spelling of the same number: a row ($1 \\times n$) times a column ($n \\times 1$) is a $1 \\times 1$ matrix — the dot product wearing matrix clothes.`,
+        cases: `Standard wherever vectors are columns by default — advanced texts, statistics, machine learning. The reversed order $\\mathbf{a}\\mathbf{b}^{T}$ is a different object entirely: an $n \\times n$ matrix, the outer product.`,
+        alsoWritten: `$\\mathbf{a}^{\\top}\\mathbf{b}$, with the sans-serif top glyph; $\\mathbf{a}'\\mathbf{b}$ in econometrics, where the prime means transpose — colliding with every other job the [prime](!/calculus/derivatives/function#notation) holds.`,
+        confusedWith: `A power. The $T$ is a label — transpose — not an exponent; nothing is being raised.`,
+      },
+      {
+        id: 'mixed-bars-line',
+        tex: `$|\\mathbf{a} \\cdot \\mathbf{b}| \\leq \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|$`,
+        read: `The absolute value of a dot b is at most the product of the norms`,
+        means: `Cauchy–Schwarz as a bar-reading exercise: single bars on the left because $\\mathbf{a} \\cdot \\mathbf{b}$ is a *scalar* — ordinary [absolute value](!/algebra/equations/absolute-value#notation) — and double bars on the right because norms measure vectors. The bar count tracks the species on every line of this page.`,
+        cases: `The geometric form $\\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\cos\\theta$ reserves $\\theta$ for the angle between the vectors — the sign verdicts it produces are read off in **Sign of the Dot Product** below.`,
+        alsoWritten: `$(\\mathbf{a} \\cdot \\mathbf{b})^2 \\leq (\\mathbf{a} \\cdot \\mathbf{a})(\\mathbf{b} \\cdot \\mathbf{b})$ — the squared form, bar-free, common in proofs.`,
+        confusedWith: `Norm bars on a scalar. Writing $\\|\\mathbf{a} \\cdot \\mathbf{b}\\|$ is a species error — the operation already collapsed the vectors; only $|\\cdot|$ applies to what remains.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vectors`,
+    parentLabel: `Vectors`,
+  },
   obj2: {
     title: `Geometric Definition`,
     content: `There is a second way to compute the dot product that bypasses components entirely and works directly with lengths and angles. If $\\mathbf{a}$ and $\\mathbf{b}$ are both nonzero and $\\theta$ denotes the angle they form when drawn from a common point, then:
@@ -1964,6 +2003,25 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

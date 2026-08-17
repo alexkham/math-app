@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -430,6 +431,44 @@ The equation $x^2 = 5x - 6$, for instance, is not in standard form but is still 
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Quadratic Notation`,
+    lead: `The contract behind $a$, $b$, $c$, the two letters that both mean discriminant, and what a lowered index does that a raised one does not.`,
+    inherited: `The $\\pm$ — [radical notation](!/algebra/roots/properties#notation); $i$ and the conjugate pair — [complex numbers](!/complex-numbers/basics); $\\sqrt{\\ }$ — [roots](!/algebra/roots/properties#notation).`,
+    entries: [
+      {
+        id: 'standard-form-contract',
+        tex: `$ax^2 + bx + c = 0$`,
+        read: `Standard form — descending powers, everything on the left`,
+        means: `A notational contract, not just a tidy habit: $a$, $b$, $c$ have meaning *only relative to this form*. The formula and the discriminant read their inputs from it — feed them coefficients from an unrearranged equation and every sign is suspect.`,
+        cases: `From $x^2 = 5x - 6$ the contract reads $b = -5$, not $5$ — the sign travels with the term during the rearrangement in **Definition and Standard Form** above. The function $f(x) = ax^2 + bx + c$ is a different object: a parabola; the $= 0$ asks only where it crosses.`,
+        alsoWritten: `Monic form $x^2 + px + q = 0$ — after dividing by $a$; Vieta's formulas are cleanest there, as p and q pick up the sum and product directly.`,
+        confusedWith: `A claim about $x$. Standard form asserts nothing by itself — it is a *position* for the pieces, the notational equivalent of lining up digits before long division.`,
+      },
+      {
+        id: 'discriminant-letters',
+        tex: `$\\Delta = b^2 - 4ac$`,
+        read: `Delta — the discriminant`,
+        means: `One number, two letter traditions: $\\Delta$ in most international and university texts — this page's choice, in **The Discriminant** below — and capital $D$ in Russian, German, and much school-level writing. Same definition, same verdicts.`,
+        cases: `The sign is the whole message: $\\Delta > 0$ two real roots, $\\Delta = 0$ a double root, $\\Delta < 0$ a conjugate pair. Nothing else about $\\Delta$ is ever used at this level.`,
+        alsoWritten: `$D = b^2 - 4ac$ — interchangeable; pick whichever your course uses and stay with it.`,
+        confusedWith: `The other deltas. $\\Delta x$ is an [increment](!/calculus/derivatives/differentials#notation) and $\\Delta$ alone often means “change in” — the discriminant $\\Delta$ is a single fixed number computed from coefficients, related to neither.`,
+      },
+      {
+        id: 'root-subscripts',
+        tex: `$x_1, \\; x_2$`,
+        read: `x one and x two — the two roots`,
+        means: `Lowered indices *enumerate*: $x_1$ and $x_2$ are two different numbers sharing a letter. Position is everything — lowered counts, raised operates: $x_2$ is the second root, $x^2$ is a square.`,
+        cases: `A double root is written $x_1 = x_2$ — two labels, one value. Vieta's formulas in **Vieta's Formulas** below treat the pair symmetrically, which is why the labels never need to say which root is which.`,
+        alsoWritten: `$x'$, $x''$ in some older European texts — a prime-based enumeration that collides with [derivative notation](!/calculus/derivatives/function#notation) and has largely died out for exactly that reason.`,
+        confusedWith: `Sequence indexing. In [sequences](!/algebra/sequences) the subscript $a_n$ runs over infinitely many positions; here it is a finite enumeration — two names, fixed in advance, nothing running.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/equations`,
+    parentLabel: `Equations`,
+  },
 
   obj2: {
     title: `Solving by Factoring`,
@@ -786,6 +825,25 @@ export default function QuadraticEquationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

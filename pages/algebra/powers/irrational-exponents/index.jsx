@@ -206,7 +206,7 @@ obj3: {
 
 Between any two rational numbers there are infinitely many more. The rational values of $2^x$ fill the curve so densely that only isolated points — corresponding to irrational exponents — are missing.
 
-Defining $2^\\pi$ as the limit of $2^{r_n}$ for a sequence of rationals $r_n \\to \\pi$ fills in exactly those missing points. The process is called continuous extension — the smooth behavior of $a^x$ at rational points guarantees that the extension to irrational points is unique and well-defined.
+Defining $2^\\pi$ as the [limit](!/calculus/limits/two-sided) of $2^{r_n}$ for a sequence of rationals $r_n \\to \\pi$ fills in exactly those missing points. The process is called continuous extension — the smooth behavior of $a^x$ at rational points guarantees that the extension to irrational points is unique and well-defined.
 
 The result is a complete curve: $a^x$ is now defined for every real number $x$, with no holes remaining on the number line.`,
   before: ``,

@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -242,6 +243,44 @@ The general strategy is to take the root first whenever the base has a clean $n$
   after: ``,
   link: '',
 },
+  notation: {
+    title: `Rational Exponent Notation`,
+    lead: `One fraction doing two jobs, the single context where equal fractions can disagree, and the parentheses that keep calculators honest.`,
+    inherited: `$a^n$ and its binding — [natural exponents](!/algebra/powers/natural-exponents#notation); the minus in the exponent — [negative exponents](!/algebra/powers/negative-exponents#notation); the radical mark — [roots](!/algebra/roots).`,
+    entries: [
+      {
+        id: 'fractional-superscript',
+        tex: `$a^{m/n}$`,
+        read: `a to the m over n`,
+        means: `The fraction splits its jobs: the denominator is the root's index, the numerator an ordinary power — bottom of the fraction, bottom job. The two evaluation routes are worked in **Fractional Exponents** above.`,
+        cases: `Numerator $1$ — a pure root, $a^{1/n} = \\sqrt[n]{a}$, the bridge of **Roots as Powers** above. Negative numerator — the reciprocal joins in, **Negative Rational Exponents** below.`,
+        alsoWritten: `$\\sqrt[n]{a^m}$ and $\\left(\\sqrt[n]{a}\\right)^m$ — the radical spellings; exponent form for algebra, radical form for final answers.`,
+        confusedWith: `Division. $8^{2/3}$ is not $\\frac{8^2}{3}$ — the fraction lives in the exponent slot and divides nothing.`,
+      },
+      {
+        id: 'lowest-terms',
+        tex: `$(-8)^{2/6} \\overset{?}{=} (-8)^{1/3}$`,
+        read: `The exponent fraction is read in lowest terms`,
+        means: `For a negative base the unreduced fraction changes the answer: $(-8)^{1/3} = -2$, but $\\sqrt[6]{(-8)^2} = \\sqrt[6]{64} = 2$. Convention resolves it: the exponent means its lowest-terms form, and **Domain Considerations** below keys the domain to that reduced denominator.`,
+        cases: `Positive bases are immune — every equivalent fraction agrees. The hazard lives only at $a < 0$ with an odd reduced denominator.`,
+        alsoWritten: `Careful texts sidestep it entirely, defining $a^{m/n}$ only for $a > 0$ and keeping radical notation for negative bases.`,
+        confusedWith: `Ordinary fraction equality. $\\frac{2}{6} = \\frac{1}{3}$ everywhere else in mathematics — the exponent slot on a negative base is the one elementary context where substituting an equal fraction can flip the result.`,
+      },
+      {
+        id: 'linear-form',
+        tex: `@[8^(1/3)]@ vs @[8^1/3]@`,
+        read: `Eight to the one-third — only if the parentheses are there`,
+        means: `Linear text has no raised slot, so the grouping must be spelled out: @[8^1/3]@ parses as $\\frac{8^1}{3} = \\frac{8}{3}$, not $2$ — the caret binds tighter than the slash.`,
+        cases: `Same rule in spreadsheets and code (@[8**(1/3)]@). Languages with integer division add a second layer: @[1/3]@ evaluating to $0$ turns the whole expression into $8^0 = 1$.`,
+        alsoWritten: `@[8^(0.333…)]@ — the decimal dodge; exact only when the decimal is exact.`,
+        confusedWith: `The typeset form, where the raised fraction *is* the grouping. On paper the notation protects you; in a formula bar nothing does.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/powers`,
+    parentLabel: `Powers`,
+  },
 
 obj4: {
   title: `Negative Rational Exponents`,
@@ -589,6 +628,25 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
             key={'obj3-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },

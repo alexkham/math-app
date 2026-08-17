@@ -7,6 +7,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -395,6 +396,43 @@ This non-negativity has an immediate consequence for equations: if $|f(x)| = k$ 
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Absolute Value Notation`,
+    lead: `The bars as a bracket pair, the most overloaded glyph in mathematics, and the algebraic alias that lets the bars be squared away.`,
+    inherited: `The $\\pm$ behind every case split — [radical notation](!/algebra/roots/properties#notation); the cases brace in the definition — [piecewise functions](!/functions/piecewise).`,
+    entries: [
+      {
+        id: 'bars-as-brackets',
+        tex: `$|a + b|$`,
+        read: `The absolute value of the whole quantity a plus b`,
+        means: `The bars are a bracket pair: everything between them is one block, evaluated first — like the radical's vinculum, an invisible parenthesis with a built-in operation.`,
+        cases: `Nested bars are legal but hard on the eye: $\\left||x| - 1\\right|$ resolves inside-out. Print sizes the outer pair taller; handwriting has no such mercy, which is why worked solutions relabel the inner block instead.`,
+        alsoWritten: `$\\operatorname{abs}(x)$ — the functional spelling, universal in programming, rare in print.`,
+        confusedWith: `A distributable mark. $|a + b| \\neq |a| + |b|$ in general — the gap between them is the triangle inequality $|a+b| \\leq |a| + |b|$, and treating the bars like a factor erases it.`,
+      },
+      {
+        id: 'overloaded-pipes',
+        tex: `$|x|$ · $|z|$ · $|A|$ · $|M|$`,
+        read: `The same two bars, four different jobs`,
+        means: `The vertical pair is the most overloaded bracket in mathematics. Here it means distance to zero, per the **Definition** above — and only some of its other jobs keep that meaning.`,
+        cases: `$|z|$ on a [complex number](!/complex-numbers/basics) is the *same* idea — distance to the origin, plane instead of line. $\\|v\\|$ doubles the bars for vector length. Both generalize this page's bars honestly.`,
+        confusedWith: `The unrelated jobs. $|A|$ on a set is [cardinality](!/set-theory/basics) — a count; $|M|$ on a matrix is the [determinant](!/linear-algebra/determinants) — which can be *negative*: the one place the bars carry no non-negativity promise at all.`,
+      },
+      {
+        id: 'sqrt-alias',
+        tex: `$|x| = \\sqrt{x^2}$`,
+        read: `The absolute value is the square root of the square`,
+        means: `The bars have an algebraic alias: squaring erases the sign, the principal root keeps the result non-negative. One identity, two directions — it defines $|x|$ without cases, and it lets equations shed their bars by squaring.`,
+        cases: `$|A| = |B|$ is equivalent to $A^2 = B^2$ — the squaring route for **Equations with Absolute Value on Both Sides** below. Calculus leans on the alias too: $\\sqrt{x^2}$ differentiates where the piecewise form needs case-work.`,
+        alsoWritten: `$\\max(x, -x)$ — the order-theoretic spelling, common in analysis.`,
+        confusedWith: `$\\sqrt{x^2} = x$, with the bars dropped. That identity is false for negative $x$ — the whole story is told at [the even-root identity](!/algebra/roots/properties#notation), whose answer is exactly these bars.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/equations`,
+    parentLabel: `Equations`,
+  },
 
   obj2: {
     title: `The Basic Equation`,
@@ -699,6 +737,25 @@ export default function AbsoluteValueEquationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

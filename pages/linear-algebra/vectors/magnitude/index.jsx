@@ -807,6 +807,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
@@ -1122,6 +1123,44 @@ The geometric intuition is the same in both cases: the magnitude is the straight
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Norm Notation`,
+    lead: `Why the bars come in pairs, the subscripts that name a whole family of lengths, and the hat that promises length one.`,
+    inherited: `Bold marking and $\\mathbb{R}^n$ — [vector notation](!/linear-algebra/vectors/basic-operations#notation); single bars on scalars — [absolute value](!/algebra/equations/absolute-value#notation).`,
+    entries: [
+      {
+        id: 'bar-count',
+        tex: `$\\|\\mathbf{v}\\|$`,
+        read: `The norm of v; the magnitude of v`,
+        means: `Double bars for vector length — the bar count is doing real work: one pair for a scalar's [absolute value](!/algebra/equations/absolute-value#notation), two for a vector's norm, and the scalar-vector split is spelled out in **The General Norm** below.`,
+        cases: `The scaling law mixes both in one line: $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$ — single bars on the scalar, double on the vector, each pair applying its own operation.`,
+        alsoWritten: `$|\\mathbf{v}|$ — single bars for magnitude, standard in physics and engineering texts; unambiguous there because bold already marks the vector, but it collides with the [determinant's](!/linear-algebra/determinants) bars once matrices arrive.`,
+        confusedWith: `Parallel lines or “evaluated at” bars. The paired-delimiter reading is the only one — and nothing here is a fraction: $\\|\\mathbf{v}\\|$ wraps, it never divides.`,
+      },
+      {
+        id: 'norm-family',
+        tex: `$\\|\\mathbf{v}\\|_1 \\; \\|\\mathbf{v}\\|_2 \\; \\|\\mathbf{v}\\|_{\\infty}$`,
+        read: `The one-norm, two-norm, and infinity-norm of v`,
+        means: `The subscript selects a member of the norm family that **The General Norm** below names in words: $1$ sums absolute values, $2$ is the Euclidean default, $\\infty$ takes the largest component. An unsubscripted $\\|\\mathbf{v}\\|$ means the $2$-norm.`,
+        cases: `The same family carries the script-ell names $\\ell^1, \\ell^2, \\ell^{\\infty}$ — the letter honours Lebesgue, and the script form exists because a plain $l$ drowns among $1$ and $I$ in print.`,
+        alsoWritten: `$\\|\\mathbf{v}\\|_p$ — the general member, exponent $p$ inside the sum, $p$-th root outside.`,
+        confusedWith: `A component index. $\\|\\mathbf{v}\\|_2$ is not “the norm of the second component” — on a norm, the subscript picks the *measuring rule*, not a slot.`,
+      },
+      {
+        id: 'unit-hat',
+        tex: `$\\hat{\\mathbf{u}}$`,
+        read: `u hat`,
+        means: `The hat is a promise: whatever wears it has norm exactly $1$. Writing $\\hat{\\mathbf{u}}$ asserts $\\|\\hat{\\mathbf{u}}\\| = 1$ with no further words — the convention behind **Unit Vectors** below.`,
+        cases: `The coordinate directions carry two naming traditions: mathematics writes $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$; physics writes $\\hat{\\imath}, \\hat{\\jmath}, \\hat{k}$ — dotless letters under the hats, same three vectors.`,
+        alsoWritten: `$\\mathbf{u}/\\|\\mathbf{u}\\|$ — the normalization recipe spelled out, as in **Normalization** below; the hat names its result.`,
+        confusedWith: `An estimator. In statistics the same hat means “estimate of” — $\\hat{p}$ has nothing to do with unit length; the glyph changes fields and changes jobs.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vectors`,
+    parentLabel: `Vectors`,
+  },
   obj2: {
     title: `The General Norm`,
     content: `The pattern from $\\mathbb{R}^2$ and $\\mathbb{R}^3$ extends without modification to any $\\mathbb{R}^n$. For a vector $\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$:
@@ -1394,6 +1433,25 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

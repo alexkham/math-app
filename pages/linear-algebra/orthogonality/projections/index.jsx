@@ -1850,6 +1850,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
@@ -2161,6 +2162,44 @@ Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, 
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Projection Notation`,
+    lead: `A subscript that names the target, the hat's second job in this subject, and the letter P moonlighting for the third time.`,
+    inherited: `The dot and its bars — [dot product notation](!/linear-algebra/vectors/dot-product#notation); $W^{\\perp}$ — [inner product notation](!/linear-algebra/orthogonality/inner-product#notation); the hat's first job — [norm notation](!/linear-algebra/vectors/magnitude#notation).`,
+    entries: [
+      {
+        id: 'proj-subscript',
+        tex: `$\\text{proj}_{\\mathbf{a}}\\mathbf{b}$ · $\\text{proj}_{W}\\mathbf{b}$`,
+        read: `The projection of b onto a; onto W`,
+        means: `The subscript names the *target* — onto what — and the argument is the vector being projected. Onto a vector in **Projection onto a Vector** above; onto a whole subspace as the sections below build up.`,
+        cases: `The subscript's species matters: $\\text{proj}_{\\mathbf{a}}$ lands on a line, $\\text{proj}_{W}$ on a subspace of any dimension — same word-operator, widening target.`,
+        alsoWritten: `$P_W\\mathbf{b}$ — the matrix form, once **The Projection Matrix** below is built; $\\hat{\\mathbf{b}}$ — the hat shorthand of the next entry.`,
+        confusedWith: `A component index. $\\text{proj}_{\\mathbf{a}}$ is not the “$\\mathbf{a}$-th” anything — the subscript is a destination, joining the basis-labels of [coordinate notation](!/linear-algebra/vector-spaces/basis#notation) in the family of subscripts that name rather than count.`,
+      },
+      {
+        id: 'estimate-hat',
+        tex: `$\\hat{\\mathbf{b}}$ · $\\hat{\\mathbf{x}}$`,
+        read: `b hat — the projection; x hat — the least-squares solution`,
+        means: `The hat's second job in linear algebra: *best approximation of*. $\\hat{\\mathbf{b}}$ is the closest point to $\\mathbf{b}$ inside $W$ — the decomposition $\\mathbf{b} = \\hat{\\mathbf{b}} + \\mathbf{z}$ of **The Orthogonal Decomposition** below — and $\\hat{\\mathbf{x}}$ the closest-fit solution in [least squares](!/linear-algebra/orthogonality/least-squares).`,
+        cases: `Two hats now live in this subject: the [unit-vector hat](!/linear-algebra/vectors/magnitude#notation) promises norm one; this one promises nearness. Bold-letter context usually decides — $\\hat{\\mathbf{u}}$ tends to be unit, $\\hat{\\mathbf{b}}$, $\\hat{\\mathbf{x}}$ tend to be estimates.`,
+        alsoWritten: `$\\mathbf{b}_{W}$ or $\\mathbf{b}_{\\parallel}$ in some texts — subscript-flavoured alternatives that free the hat for unit vectors.`,
+        confusedWith: `Statistics arrived here first: the estimator hat $\\hat{p}$, $\\hat{\\beta}$ *is* this hat — least squares is where the two fields share one convention honestly, not a collision at all.`,
+      },
+      {
+        id: 'projection-matrix-p',
+        tex: `$P = A(A^{T}A)^{-1}A^{T}$, $\\quad P^2 = P$`,
+        read: `The projection matrix; applying it twice changes nothing`,
+        means: `The letter $P$'s third job on this site: [change-of-basis](!/linear-algebra/vector-spaces/basis#notation) matrix, permutation matrix, and now projection — built in **The Projection Matrix** below. The equation $P^2 = P$ is idempotence written as notation: project twice, land in the same place.`,
+        cases: `Orthogonal projections add symmetry: $P^{T} = P$. The pair $P^2 = P = P^{T}$ *characterizes* orthogonal projection matrices — two equations serving as a definition.`,
+        alsoWritten: `$P_W$ with the target as subscript, matching $\\text{proj}_{W}$; $\\Pi$ in texts that need $P$ elsewhere.`,
+        confusedWith: `Invertibility. $P^2 = P$ makes $P$ singular whenever $W \\neq \\mathbb{R}^n$ — projection *discards* the $W^{\\perp}$ component, and discarded information is exactly what an [inverse](!/linear-algebra/matrix/inverse#notation) cannot recover.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/orthogonality`,
+    parentLabel: `Orthogonality`,
+  },
   obj2: {
     title: `The Orthogonal Decomposition`,
     content: `Every vector $\\mathbf{b} \\in \\mathbb{R}^n$ decomposes uniquely with respect to a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ as
@@ -2464,6 +2503,25 @@ export default function ProjectionsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

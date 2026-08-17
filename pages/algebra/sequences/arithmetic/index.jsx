@@ -7,6 +7,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -329,6 +330,43 @@ The explicit formula $a_n = a_1 + (n-1)d$ has the same structure as a linear fun
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Sequence Notation`,
+    lead: `The subscript that means position, the recurrence written in two index frames, and the two compressions — braces for the whole sequence, sigma for its sum.`,
+    entries: [
+      {
+        id: 'position-subscript',
+        tex: `$a_n$`,
+        read: `a sub n — the n-th term`,
+        means: `The subscript is a *position*: $a_7$ is whatever sits in seventh place. One letter plus a counter names infinitely many values — the counter $n$ ranges, unlike the fixed job-title subscripts of [polynomial coefficients](!/algebra/polynomials/roots#notation) or the two-name enumeration of [quadratic roots](!/algebra/equations/quadratic#notation).`,
+        cases: `Where counting starts is a convention: this page and most school texts begin at $a_1$; computer science and many analysis texts begin at $a_0$, which shifts every formula — the general term becomes $a_0 + nd$, not $a_1 + (n-1)d$.`,
+        alsoWritten: `$a(n)$ — function notation, honest about what a sequence is (a function on the integers) but rare in print.`,
+        confusedWith: `An exponent's job. $a_n$ selects, $a^n$ multiplies — the raised/lowered distinction carries the entire meaning.`,
+      },
+      {
+        id: 'recurrence-frames',
+        tex: `$a_{n+1} = a_n + d \\;\\equiv\\; a_n = a_{n-1} + d$`,
+        read: `Each term is the previous term plus d — written from either end`,
+        means: `One rule, two index frames: stepping forward from $n$, or looking back from $n$. The **Definition** above uses the first; the **Recursive Formula** below uses the second. They differ by nothing but where the window sits.`,
+        cases: `A recurrence is incomplete without its anchor: $a_1 = c$ must ride along, or the rule generates no particular sequence at all — every choice of first term satisfies it.`,
+        alsoWritten: `$a_{n+1} - a_n = d$ — the difference form, stating the same rule as a property rather than a recipe.`,
+        confusedWith: `Two different rules. Shifting every index by one changes no content — but mixing frames mid-computation, reading $a_{n-1}$ in one line as the $a_n$ of the next, silently shifts the whole sequence by a step.`,
+      },
+      {
+        id: 'braces-and-sigma',
+        tex: `$\\{a_n\\}$ · $\\sum_{k=1}^{n} a_k$`,
+        read: `The sequence a-n; the sum of a-k, for k from one to n`,
+        means: `Two compressions. Braces promote the terms to a single object — the whole sequence. Sigma compresses the sum $S_n$ of **Arithmetic Series** below: the index $k$ starts at the lower bound, walks to the upper, and contributes one term per step.`,
+        cases: `The summation index is a dummy — $\\sum a_k$ and $\\sum a_j$ are the same number, and $k$ vanishes from the answer, exactly like the [definite integral's](!/calculus/integrals/definite#2) variable of integration.`,
+        alsoWritten: `$a_1 + a_2 + \\cdots + a_n$ — the dotted form the body uses; sigma is its exact abbreviation. $(a_n)$ — parentheses instead of braces, common in analysis.`,
+        confusedWith: `Set braces. $\\{a_n\\}$ is ordered and repeats freely; a [set](!/set-theory/basics) $\\{2, 4, 6\\}$ is unordered with duplicates erased — same glyphs, incompatible objects, which is why analysis texts prefer $(a_n)$.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/sequences`,
+    parentLabel: `Sequences`,
+  },
   obj2: {
     title: `Identifying Arithmetic Sequences`,
     content: `To determine whether a given sequence is arithmetic, compute the differences between consecutive terms. If every difference equals the same value, the sequence is arithmetic and that value is $d$.
@@ -604,6 +642,24 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
