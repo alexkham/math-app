@@ -432,6 +432,7 @@ import ExpandableTable from '@/app/components/data-wrapper/generic-table/Expanda
 import Head from 'next/head'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 export async function getStaticProps(){
 
@@ -598,32 +599,49 @@ const logicalEquivalences = [
 const sectionsContent={
 
   definition:{
-    title:'Definition and Notation',
-    content:`## Definition
-          Two logical statements (or propositions) are logically equivalent if they **always** have the same truth value, regardless of the truth values of their individual components. This means that no matter what, both expressions will evaluate to either true or false together in every possible case.
-          
-## Notation
-          Logical equivalence is usually written as:   
-
-\t\t\t\t\t\t\t\t $P≡Q$
-   Sometimes notation like this is used :
-
-\t\t\t\t\t\t\t\t  $P⇔Q$
-
-Both of those forms are legitimate and acceptable to notate equivalence.Both notations indicate that $𝑃$ and $𝑄$ always produce the same truth values.
-In boolean algebra also used this notation:
-
-\t\t\t\t\t\t\t\t  $P=Q$
-
-In [LaTeX](!/latex) source, $≡$ is produced by the command \\equiv and $⇔$ by \\Leftrightarrow.
-
-The notations for logical equivalence and **biconditional** ($P↔Q$ or $𝑃⟺𝑄$) can sometimes look similar, but they have different meanings, and they are not always interchangeable.
-$P≡Q$ means $𝑃$ and $𝑄$  are logically equivalent in all possible cases.
-$𝑃↔𝑄$ is just a statement that says $𝑃$ and $𝑄$ happen to be true or false together in a specific context - it can be true or false, depending on $𝑃$ and $𝑄$.          `,
+    title:'Definition',
+    content:`Two logical statements (or propositions) are logically equivalent if they **always** have the same truth value, regardless of the truth values of their individual components. This means that no matter what, both expressions will evaluate to either true or false together in every possible case.`,
     before:``,
     after:``,
 
 
+  },
+
+  notation: {
+    title: `Equivalence Notation`,
+    lead: `Three legitimate spellings for one meta-claim — and a lookalike connective that is not one of them. The ≡-versus-↔ boundary is the working distinction of this whole page.`,
+    inherited: `The letters $P$, $Q$ and the connectives inside every law come from [propositional logic notation](!/logic/propositional-logic/syntax#notation); the biconditional $\\leftrightarrow$ itself is one of those five connectives.`,
+    entries: [
+      {
+        id: 'triple-bar',
+        tex: `$P \\equiv Q$`,
+        read: `P is logically equivalent to Q`,
+        means: `The triple bar makes a claim **about** formulas: $P$ and $Q$ agree in every possible case. It is a statement in the metalanguage — always simply true or false — produced in [LaTeX](!/latex) by @[\\equiv]@.`,
+        cases: `Laws are equivalences promoted to principles — every row of the [laws table](!/logic/propositional-logic/laws) is an $\\equiv$ claim; **How to Verify Logical Equivalence?** below gives the checking methods.`,
+        confusedWith: `The biconditional. $P \\leftrightarrow Q$ is a formula **inside** the language whose truth varies with $P$ and $Q$; $P \\equiv Q$ is a verdict about all cases at once. The bridge: $P \\equiv Q$ exactly when $P \\leftrightarrow Q$ is a tautology.`,
+        sameGlyphElsewhere: `The same triple bar states [congruence](!/arithmetic/modulo#2) in number theory — with a trailing modulus — and "identically equal" in algebra; three jobs, one stroke.`,
+      },
+      {
+        id: 'double-arrow',
+        tex: `$P \\Leftrightarrow Q$`,
+        read: `P if and only if Q — in the meta sense`,
+        means: `The double-shafted arrow, an equally accepted spelling of the same meta-claim — @[\\Leftrightarrow]@ in LaTeX. The double shaft is the meta-marker: $\\Leftrightarrow$ stands above the language the single-shafted $\\leftrightarrow$ lives inside.`,
+        cases: `The shaft convention runs in parallel one level down: $\\Rightarrow$ versus $\\to$ on the [implication page](!/logic/propositional-logic/semantics/implication) — double shafts talk about formulas, single shafts build them.`,
+        confusedWith: `A stronger biconditional. $\\Leftrightarrow$ is not "very iff" — it is $\\equiv$ in arrow costume; treating it as a connective puts a meta-mark inside a formula, which the formation rules never generate.`,
+      },
+      {
+        id: 'boolean-equals',
+        tex: `$P = Q$`,
+        read: `P equals Q — Boolean algebra's spelling`,
+        means: `Boolean algebra writes equivalence with the plain equals sign — there, formulas denote values in $\\{0, 1\\}$ and equality of values is exactly agreement in all cases. Same claim, an algebraist's dialect.`,
+        cases: `The dialect travels with the algebra: simplification chains in circuit design and Boolean identities read $P = Q$ throughout; logic texts keep $\\equiv$ to avoid overloading their own equals.`,
+        confusedWith: `Numeric equality. $P = Q$ asserts nothing about numbers — the letters still hold truth values; importing arithmetic habits (adding to both sides) produces nonsense.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/math-logic`,
+    symbolsLabel: `All logic symbols`,
+    parentHref: `/logic/propositional-logic/semantics`,
+    parentLabel: `Semantics`,
   },
   verify:{
     title:'How to Verify Logical Equivalence?',
@@ -705,8 +723,26 @@ export default function EquivalencesPage({verify ,biconditionalEquivalences ,log
         {
           id:'definition',
           title:sectionsContent.definition.title,
-         
+
           content:sectionsContent.definition.content,
+        },
+        {
+          id:'notation',
+          title:sectionsContent.notation.title,
+          content:[
+            <NotationSection
+              key={'notation'}
+              title={sectionsContent.notation.title}
+              lead={sectionsContent.notation.lead}
+              inherited={sectionsContent.notation.inherited}
+              entries={sectionsContent.notation.entries}
+              symbolsHref={sectionsContent.notation.symbolsHref}
+              symbolsLabel={sectionsContent.notation.symbolsLabel}
+              parentHref={sectionsContent.notation.parentHref}
+              parentLabel={sectionsContent.notation.parentLabel}
+              theme={'navy'}
+            />,
+          ]
         },
         {
             id:'verify',

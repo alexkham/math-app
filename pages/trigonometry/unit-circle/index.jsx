@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -721,6 +722,42 @@ The sign distribution across all four quadrants, with the ASTC letter for each, 
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Unit Circle Notation`,
+    lead: `The circle's own marks: the coordinate pair that defines the functions, the Roman numerals the sign rules hang on, and the full-turn idiom behind every coterminal statement.`,
+    inherited: `$\\sin$, $\\cos$, $\\tan$ come from the [right triangle page](!/trigonometry/right-triangle#notation), $\\theta$, $°$ and bare-number radians from [angle measure](!/trigonometry/degrees-radians#notation); the squared shorthand $\\sin^2\\theta$ of **The Pythagorean Identity** below is taken up with the [function pages](!/trigonometry/functions).`,
+    entries: [
+      {
+        id: 'cos-sin-pair',
+        tex: `$(\\cos\\theta, \\sin\\theta)$`,
+        read: `the point cosine theta, sine theta`,
+        means: `A coordinate pair doing definitional work: the terminal side meets the circle at exactly this point, and the coordinates are the function values — **Coordinates as Trigonometric Values** above. Cosine sits first because it is the $x$-coordinate.`,
+        cases: `Named points abbreviate to $P = (\\cos\\theta, \\sin\\theta)$; on a circle of radius $r$ the pair scales to $(r\\cos\\theta, r\\sin\\theta)$ — the bridge to [polar description](!/complex-numbers/trigonometric-form#notation).`,
+        confusedWith: `Order. Sine feels first — alphabet, SOH-CAH-TOA habit — but is the second coordinate; reading $(\\sin\\theta, \\cos\\theta)$ into the pair flips every point across the diagonal.`,
+      },
+      {
+        id: 'quadrant-numerals',
+        tex: `$\\text{I, II, III, IV}$`,
+        read: `quadrants one through four`,
+        means: `Roman numerals, counterclockwise from the upper right — the labels every sign rule hangs on, as **The Four Quadrants and Sign Patterns** above lays out; working notes abbreviate to QI–QIV.`,
+        cases: `ASTC compresses the whole sign table into four letters — All, Sine, Tangent, Cosine positive, one per quadrant in order; the mnemonic phrases vary, the letter sequence never does.`,
+        confusedWith: `Reading order. Quadrant II sits to the left of I — the numerals follow the positive rotation direction, not left-to-right reading; misreading the direction swaps II with IV.`,
+      },
+      {
+        id: 'coterminal-wrap',
+        tex: `$\\theta + 360°$ · $\\theta + 2\\pi$`,
+        read: `theta plus a full turn`,
+        means: `Adding a full turn changes the label, not the point: $45°$ and $405°$ name one position — the pairs of **Standard Position and the Terminal Side** above, the periodicity $\\sin(\\theta + 2\\pi) = \\sin\\theta$ of **Angles Beyond One Rotation** below.`,
+        cases: `Solving [equations](!/trigonometry/equations) upgrades the idiom to a parameter — all coterminal labels at once, indexed by an integer $n$; the same wrap runs the complex exponential's [periodic exponent](!/complex-numbers/exponential-form#notation).`,
+        confusedWith: `Equal angles. As rotations, $45°$ and $405°$ are different motions — they collapse only as positions, and therefore as inputs to the trigonometric functions.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
+  },
   obj5: {
     title: `Reference Angles`,
     content: `The reference angle for a given angle $\\theta$ is the acute angle formed between the terminal side of $\\theta$ and the $x$-axis. It is always positive and always lies between $0°$ and $90°$ (or between $0$ and $\\frac{\\pi}{2}$). The reference angle captures the "magnitude" component of the trigonometric evaluation, while the quadrant determines the sign.
@@ -996,6 +1033,25 @@ export default function UnitCirclePage({
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

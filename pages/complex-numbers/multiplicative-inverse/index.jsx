@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -679,24 +680,41 @@ The product of $z$ and $\\overline{z}$ in the numerator equals $|z|^2$, cancelin
   link: '',
 },
 
-obj4: {
-  title: `Notation`,
-  content: `The multiplicative inverse of $z$ appears in three equivalent notations: $z^{-1}$, $\\frac{1}{z}$, and $1/z$. All three denote the same complex number — the one satisfying $z \\cdot z^{-1} = 1$.
-
-The exponent notation $z^{-1}$ emphasizes the algebraic role of the inverse. It parallels the notation for powers: $z^2$ means $z \\cdot z$, and $z^{-1}$ means the number that "undoes" multiplication by $z$. This notation extends naturally to negative integer exponents, where $z^{-n} = (z^{-1})^n = (z^n)^{-1}$.
-
-The fraction notation $\\frac{1}{z}$ emphasizes division. It reads as "one divided by $z$" and connects to the broader concept of dividing complex numbers.
-
-Parentheses prevent ambiguity when the base is an expression. The inverse of $3 + 2i$ should be written $(3 + 2i)^{-1}$, not $3 + 2i^{-1}$. The latter means $3 + \\frac{1}{2}i = 3 + \\frac{1}{2}i$, something entirely different. Without parentheses, the exponent binds only to $i$.
-
-Similarly, $\\frac{1}{3 + 2i}$ is unambiguous, but inline expressions require care. Writing $1/3 + 2i$ means $\\frac{1}{3} + 2i$, not $\\frac{1}{3 + 2i}$. Use $1/(3 + 2i)$ or $(3 + 2i)^{-1}$ instead.
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
-
-`,
-  before: ``,
-  after: ``,
-  link: '',
+notation: {
+  title: `Multiplicative Inverse Notation`,
+  lead: `The corner exponent, its fraction twin, and the parentheses that keep both honest. The $-1$ superscript here joins a mark that crosses four topics — numbers, functions, trigonometry, matrices — each with its own meaning.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation); the conjugate bar and the modulus in the formula $z^{-1} = \\bar{z}/|z|^2$ belong to [their](!/complex-numbers/complex-conjugate#notation) [pages](!/complex-numbers/absolute-value#notation).`,
+  entries: [
+    {
+      id: 'z-inverse',
+      tex: `$z^{-1}$`,
+      read: `z to the minus one; z inverse`,
+      means: `The $-1$ superscript as an exponent in earnest: $z^{-1}$ is the number with $z \\cdot z^{-1} = 1$, computed by $\\bar{z}/|z|^2$ — **Multiplicative Inverse of a Complex Number** above. The same corner mark [negative powers](!/algebra/powers/negative#notation) put on real numbers, now paid for by a conjugate.`,
+      cases: `Extends along the exponent ladder — $z^{-n} = (z^{-1})^n = (z^n)^{-1}$; in polar dress the corner distributes: $z^{-1} = r^{-1}e^{-i\\theta}$, modulus inverted, [argument negated](!/complex-numbers/exponential-form#notation).`,
+      confusedWith: `The conjugate. $z^{-1} = \\bar{z}/|z|^2$ makes them parallel, and on the unit circle equal — $|z| = 1$ forces $z^{-1} = \\bar{z}$; off the circle they differ in length, and **Multiplicative Inverse vs. Complex Conjugate** below separates them.`,
+      sameGlyphElsewhere: `The corner changes job by base: undo-the-map on functions ($f^{-1}$), [matrix inversion](!/linear-algebra/matrix/inverse#notation) on $A^{-1}$ — on numbers alone it is honest arithmetic.`,
+    },
+    {
+      id: 'one-over-z',
+      tex: `$\\frac{1}{z}$`,
+      read: `one over z`,
+      means: `The division spelling of the same number, wearing the fraction bar — the notation of choice when the next step is [division](!/complex-numbers/operations), since $\\frac{w}{z} = w \\cdot \\frac{1}{z}$.`,
+      cases: `Displayed fractions scope themselves — $\\frac{1}{3+2i}$ is unambiguous; inline, the slash binds tight: $1/3 + 2i$ means $\\frac{1}{3} + 2i$, so inline work writes $1/(3 + 2i)$.`,
+      confusedWith: `A finished answer. $\\frac{1}{z}$ is a division still owed — evaluating it **requires** the conjugate trick of **Why the Formula Works** above; the bar promises the operation, not the result.`,
+    },
+    {
+      id: 'inverse-parentheses',
+      tex: `$(3 + 2i)^{-1}$`,
+      read: `the inverse of three plus two i`,
+      means: `Parentheses decide what the corner grips. $(3 + 2i)^{-1}$ inverts the whole number; unparenthesized, the exponent binds only to the nearest symbol — $3 + 2i^{-1} = 3 + 2(-i) = 3 - 2i$, a different number entirely.`,
+      cases: `Named variables carry no ambiguity — $z^{-1}$ grips all of $z$; the hazard lives where literals are inverted inline, the same place the slash trap above strikes.`,
+      confusedWith: `A decoration. The $-1$ is an operative exponent, not a label — dropping the parentheses does not roughly invert the number, it silently computes something else.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
 },
 
 
@@ -1134,14 +1152,20 @@ export default function MultiplicativeInversePage({
     },
     {
         id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },

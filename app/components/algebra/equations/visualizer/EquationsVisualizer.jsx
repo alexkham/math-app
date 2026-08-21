@@ -207,13 +207,35 @@ function TypeTabs({ iq }) {
   );
 }
 
+// Line 1 (additive): maps the live state onto the page's per-state explanation
+// keys — the special constant-line state first, then exact template matches.
+const TEMPLATE_KEYS = {
+  linear: ['lin-basic', 'lin-steep', 'lin-negative'],
+  quadratic: ['quad-two', 'quad-one', 'quad-none', 'quad-high'],
+  cubic: ['cubic-three', 'cubic-one', 'cubic-shifted'],
+  abs: ['abs-two', 'abs-one', 'abs-none'],
+};
+function stateKeyOf(state) {
+  if (state.typeId === 'linear' && state.p.a === 0) return 'lin-constant';
+  const tpls = TYPES[state.typeId]?.templates || [];
+  const idx = tpls.findIndex(t =>
+    Object.keys(t.vals).every(k => t.vals[k] === state.p[k]));
+  return idx >= 0 ? (TEMPLATE_KEYS[state.typeId] || [])[idx] || null : null;
+}
+
 export default function EquationVisualizer({
   initialType,
   initialParams,
+  explanations = null,
 }) {
   const iq = useEquation(TYPES, {
     initial: { typeId: initialType, p: initialParams },
   });
+
+  // Line 1 (additive): matched per-state entry appended in the Explanation
+  // panel; null (no prop passed, or no template match) renders nothing extra.
+  const stateKey = stateKeyOf(iq.state);
+  const extraExplanation = (explanations && stateKey && explanations[stateKey]) || null;
 
   // keyboard shortcuts
   useEffect(() => {
@@ -280,7 +302,7 @@ export default function EquationVisualizer({
               <SignChart iq={iq} />
             </div>
             <div className="card pad">
-              <Explanation iq={iq} />
+              <Explanation iq={iq} extra={extraExplanation} />
             </div>
           </div>
         </div>

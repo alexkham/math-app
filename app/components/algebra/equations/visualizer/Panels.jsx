@@ -8,6 +8,7 @@ import {
   G, X, Xinv, Y_at, Y_clip,
   fmt, formatTick, niceTickStep, signSymOf, signClassOf, sel,
 } from './logic.js';
+import { processContent } from '../../../../utils/contentProcessor';
 
 // ============================================================
 // PRIMITIVES
@@ -642,7 +643,7 @@ function renderSignCell(v, key, onClick) {
 // ============================================================
 // EXPLANATION (tabs: live / strategy)
 // ============================================================
-export function Explanation({ iq }) {
+export function Explanation({ iq, extra = null }) {
   const { state, dispatch } = iq;
   const x = state.marble;
   const liveLabel = `at x = ${fmt(x)}`;
@@ -662,6 +663,12 @@ export function Explanation({ iq }) {
         </span>
       </div>
       {state.explainTab === 'live' ? <LiveTab iq={iq} /> : <StrategyTab iq={iq} />}
+      {extra && (
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid #e2e8f0',
+                      fontSize: '13.5px', lineHeight: 1.55, color: '#334155' }}>
+          {processContent(extra)}
+        </div>
+      )}
     </>
   );
 }

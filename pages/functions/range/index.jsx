@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -269,24 +270,40 @@ Range answers the question: what values can this function actually produce? It i
     link: '',
   },
 
-  obj2: {
-    title: `Expressing Range`,
-    content: `Range is expressed using the same notations that describe domain — the difference is that range describes vertical extent (outputs) rather than horizontal extent (inputs).
-
-Interval notation captures continuous ranges. The range $[0, \\infty)$ means all non-negative real numbers. The range $(-1, 1)$ means all numbers strictly between $-1$ and $1$. Brackets include endpoints; parentheses exclude them.
-
-Set-builder notation describes the range by a property. The set $\\{y \\mid y \\geq 0\\}$ is equivalent to $[0, \\infty)$. This notation handles complex conditions: $\\{y \\mid y \\neq 0\\}$ describes all nonzero real numbers.
-
-Inequality notation states the condition directly: $y \\geq -3$ or $0 < y \\leq 5$.
-
-Union notation handles disconnected ranges. The range $(-\\infty, -1] \\cup [1, \\infty)$ consists of all numbers at most $-1$ together with all numbers at least $1$, excluding everything strictly between.
-
-For functions with finitely many outputs, the range is a discrete set listed explicitly. If a function takes only the values $2$, $5$, and $7$, the range is $\\{2, 5, 7\\}$.
-
-The table below collects each notation form with what it represents and a concrete example — useful as a quick reference when writing or reading range descriptions.`,
-    before: ``,
-    after: ``,
-    link: '',
+  notation: {
+    title: `Range Notation`,
+    lead: `Range borrows every mark [domain notation](!/functions/domain#2) owns — intervals, set-builder, unions — and adds three twists of its own: the output letter, the arrow signature that declares both sets at once, and the braces that list a finite range outright. The table below compares the forms side by side.`,
+    inherited: `The interval brackets, set-builder bar and $\\cup$ are owned by [domain notation](!/functions/domain#2); the inequality signs by [inequality notation](!/algebra/inequalities/linear#notation); $f(x)$ by [function notation](!/functions/basics#5).`,
+    entries: [
+      {
+        id: 'y-switch',
+        tex: `$\\{y \\mid y \\geq 0\\}$`,
+        read: `the set of all y such that y is at least zero`,
+        means: `The letter announces the axis: domains speak in $x$, ranges in $y$ — the same set-builder grammar, output side. On a graph the identical interval marks now measure vertical extent, not horizontal.`,
+        cases: `Inequality form follows the switch — $y \\geq -3$, $0 < y \\leq 5$; a range like $[0, \\infty)$ carries no letter at all, and only context (or the axis it describes) says whether it lists inputs or outputs.`,
+        confusedWith: `A domain statement. $\\{x \\mid x \\geq 0\\}$ and $\\{y \\mid y \\geq 0\\}$ name the same set of numbers — the letter is bookkeeping, not mathematics; what differs is which question the set answers.`,
+      },
+      {
+        id: 'arrow-signature',
+        tex: `$f: \\mathbb{R} \\to \\mathbb{R}$`,
+        read: `f from R to R`,
+        means: `The signature: source set before the arrow, declared target after it — domain and codomain in one line, before any formula appears. **Range vs Codomain** below leans on it: the range lives inside the set the arrow points at, equal to it only for onto functions.`,
+        cases: `The general shape $f: A \\to B$ scales to any sets; linear algebra writes transformations the same way, $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ — the [image](!/linear-algebra/transformations/image-kernel#notation) playing the range's role.`,
+        sameGlyphElsewhere: `The same arrow means approach in [limit notation](!/calculus/limits/two-sided#notation) — $x \\to a$ is motion toward a value, $f: A \\to B$ a static declaration; nothing approaches anything in a signature.`,
+      },
+      {
+        id: 'roster-braces',
+        tex: `$\\{2, 5, 7\\}$`,
+        read: `the set containing two, five, and seven`,
+        means: `The roster spelling for finite ranges: braces list the outputs outright — exactly these values, nothing between them. The braces are [set-theory marks](!/set-theory/basics); a step function's range is written this way.`,
+        cases: `Discreteness is the trigger — a function taking only the values $2$, $5$, $7$ gets the roster, never an interval; mixed cases splice the two: $\\{0\\} \\cup (1, \\infty)$.`,
+        confusedWith: `Interval brackets. Three bracket shapes, three species: $\\{2, 7\\}$ is two numbers, $[2, 7]$ every number between, $(2, 7)$ the same minus the endpoints — swapping brace for bracket silently adds infinitely many values.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/functions`,
+    symbolsLabel: `All function symbols`,
+    parentHref: `/functions`,
+    parentLabel: `Functions`,
   },
 
   obj3: {
@@ -642,10 +659,21 @@ export default function RangePage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div
             key={'obj2-table'}
             style={tableWrapStyle}

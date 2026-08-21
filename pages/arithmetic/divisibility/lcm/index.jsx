@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 // import { renderMultiplesLine } from '../../../../app/utils/illustrations/multiplesLine'
 import {renderMultiplesLine} from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
@@ -262,6 +263,42 @@ At the other extreme, $\\text{lcm}(a, b) \\leq a \\cdot b$. The product $a \\cdo
   before: ``,
   after: ``,
   link: '',
+},
+
+notation: {
+  title: `LCM Notation`,
+  lead: `The mirror twin of the GCD marks: the same function grammar pointed the other way, a square-bracket shorthand completing number theory's pair, and an acronym that changes name when it moves into fraction work.`,
+  inherited: `$\\gcd(a, b)$ and its spellings are owned by [GCD notation](!/arithmetic/divisibility/gcd#notation); the divides bar inside every definition by [divisibility notation](!/arithmetic/divisibility#2).`,
+  entries: [
+    {
+      id: 'lcm-function',
+      tex: `$\\operatorname{lcm}(a, b)$`,
+      read: `the l-c-m of a and b`,
+      means: `The mirror twin: lowercase upright operator, arguments in parentheses — smallest common multiple where $\\gcd$ takes largest common divisor, as **What is LCM?** above defines. The pair is chained by $\\gcd(a,b) \\cdot \\operatorname{lcm}(a,b) = a \\cdot b$ — **The GCD-LCM Relationship** below.`,
+      cases: `More arguments extend associatively — $\\operatorname{lcm}(a, b, c)$, per **LCM of More Than Two Numbers** below; print keeps the operator upright, like $\\gcd$ and the [trig names](!/trigonometry/right-triangle#notation).`,
+      confusedWith: `The GCD bounds, flipped. $\\operatorname{lcm}(a,b) \\geq \\max(a,b)$ while $\\gcd(a,b) \\leq \\min(a,b)$ — swapping the two inequalities is the standard slip when both operators share a problem.`,
+    },
+    {
+      id: 'bracket-shorthand',
+      tex: `$[a, b]$`,
+      read: `bracket a, b — the lcm in number-theory shorthand`,
+      means: `Number theory's compact spelling: where $\\gcd$ compresses to bare parentheses $(a, b)$, $\\operatorname{lcm}$ compresses to square brackets — $[4, 6] = 12$ in that dialect. The [GCD page](!/arithmetic/divisibility/gcd#notation) records its half of the pair.`,
+      cases: `Strictly a research-literature convention — school texts and this site keep the full names; meeting $[a, b] = ab/(a, b)$ in a paper is the identity $\\operatorname{lcm} = ab/\\gcd$ in costume.`,
+      confusedWith: `A closed interval. $[4, 6]$ is every real from four to six in [interval notation](!/functions/domain#2) and the single integer $12$ in number-theory shorthand — same glyphs, incompatible readings, resolved only by context.`,
+    },
+    {
+      id: 'lcm-vs-lcd',
+      tex: `$\\text{LCM vs LCD}$`,
+      read: `least common multiple; least common denominator`,
+      means: `One computation, two names by job: the LCD of a set of fractions is the LCM of their denominators — the acronym changes when the inputs are denominators; the arithmetic does not.`,
+      cases: `The LCD name lives where fractions are combined — the common-denominator step of [adding fractions](!/arithmetic/fractions/adding-subtracting) is an LCM computation wearing its application name.`,
+      confusedWith: `A separate technique. LCD and LCM are often learned as unrelated procedures — computing "the LCD of $\\frac{1}{4}$ and $\\frac{1}{6}$" and "the LCM of $4$ and $6$" is the same twelve.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/arithmetic`,
+  symbolsLabel: `All arithmetic symbols`,
+  parentHref: `/arithmetic/divisibility`,
+  parentLabel: `Divisibility`,
 },
 
 obj2: {
@@ -777,6 +814,25 @@ obj10SvgBuses,pfLcmObj4,}) {
       sectionsContent.obj1.afterFigure,
     ]
 },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
     {
         id:'2',
         title:sectionsContent.obj2.title,

@@ -435,7 +435,7 @@ The principle also has a complementary form, counting elements that belong to no
   obj3: {
     title: `Permutations and Combinations`,
     content: `
-A **permutation** is an ordered arrangement of items. Arranging $n$ distinct items in a row gives $n!$ permutations. Selecting and arranging $r$ items from $n$ gives
+A **permutation** is an ordered arrangement of items. Arranging $n$ distinct items in a row gives $n!$ permutations — the factorial and arrangement marks are unpacked in [permutation notation](!/combinatorics/permutations#notation). Selecting and arranging $r$ items from $n$ gives
 
 $$P(n,r) = \\frac{n!}{(n-r)!}.$$
 

@@ -8,6 +8,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -430,6 +431,42 @@ On $[0, 2\\pi)$: $x = -\\frac{\\pi}{4} + \\pi = \\frac{3\\pi}{4}$ and $x = -\\fr
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Solution Set Notation`,
+    lead: `Three devices carry every answer on this page: the integer-parameterized family, the sign that marches with the counter, and the plus-minus that cosine alone has earned.`,
+    inherited: `$\\arcsin$, $\\arccos$, $\\arctan$ and the $\\sin^{-1}$ collision belong to [inverse functions](!/trigonometry/inverse-functions#6); the qualifier $n \\in \\mathbb{Z}$ and the step families come from [function notation](!/trigonometry/functions#notation).`,
+    entries: [
+      {
+        id: 'general-solution',
+        tex: `$x = \\frac{\\pi}{6} + 2n\\pi$`,
+        read: `x equals pi over six, plus two n pi`,
+        means: `Solution-listing by parameter: one formula names infinitely many answers, one per integer $n$ — the [family notation](!/trigonometry/functions#notation) pointed at solutions instead of exclusions. Two branches join with "or", as **General Solutions vs Restricted Solutions** above sets up.`,
+        cases: `The step matches the period — $+\\,2n\\pi$ for sine and cosine, $+\\,n\\pi$ for tangent's shorter cycle; a restricted answer trades the parameter for an interval, "on $[0, 2\\pi)$", and lists members instead.`,
+        confusedWith: `A single answer plus decoration. $n$ runs over all of $\\mathbb{Z}$, negatives included — expanding only $n = 0, 1, 2, \\ldots$ silently loses half the family.`,
+      },
+      {
+        id: 'alternating-sign',
+        tex: `$(-1)^n \\arcsin k + n\\pi$`,
+        read: `minus one to the n, arcsine k, plus n pi`,
+        means: `A sign that marches with the counter: even $n$ keeps $+\\alpha$, odd $n$ flips to $-\\alpha$ — collapsing sine's two branches per period into one formula, the callout of **Solving Basic Sine Equations** above.`,
+        cases: `The alternating device is general-purpose in sequences and series; here it is welded to $n\\pi$, so the sign flip and the half-turn step travel together — one counter drives both.`,
+        confusedWith: `$-1^n$. Without parentheses the exponent grips only the $1$, and $-1^n = -1$ for every $n$ — the parentheses are the entire mechanism.`,
+      },
+      {
+        id: 'plus-minus-branches',
+        tex: `$\\pm\\arccos k + 2n\\pi$`,
+        read: `plus or minus arccos k, plus two n pi`,
+        means: `Two branches in one glyph: $+\\alpha$ and $-\\alpha$, legal for cosine because of its even symmetry — the cleaner form of **Solving Basic Cosine Equations** above. The mark itself belongs to [roots and radicals](!/algebra/roots/properties#notation); here it enumerates angle branches.`,
+        cases: `Expanding comes before restricting: on $[0, 2\\pi)$ the $-\\alpha$ branch surfaces as $2\\pi - \\alpha$, its coterminal representative — the [wrap idiom](!/trigonometry/unit-circle#notation) doing the bookkeeping.`,
+        confusedWith: `A sine option. $\\pm$ does not transfer to sine — its branches sit at $\\alpha$ and $\\pi - \\alpha$, not $\\pm\\alpha$; that asymmetry is exactly why sine needs the $(-1)^n$ device instead.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
+  },
   obj5: {
     title: `Equations Requiring Algebraic Manipulation`,
     content: `Many trigonometric equations cannot be solved by direct inversion — they require algebraic manipulation first. The goal is to reduce the equation to one or more basic equations of the form $\\sin(x) = a$, $\\cos(x) = a$, or $\\tan(x) = a$.
@@ -714,6 +751,25 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
             key={'obj4-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },

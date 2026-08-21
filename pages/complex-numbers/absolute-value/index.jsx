@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -532,6 +533,43 @@ The geometric picture makes modulus tangible. Draw the point, draw the line segm
   link: '',
 },
 
+notation: {
+  title: `Modulus Notation`,
+  lead: `Three inherited strips promised the bars would be explained here. This section owns the mark on a complex number, its root-free square, and the locus idiom that writes circles as single equations.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation), the conjugate bar from [its page](!/complex-numbers/complex-conjugate#notation); the polar letter $r$ lives with the [trigonometric form](!/complex-numbers/trigonometric-form#notation).`,
+  entries: [
+    {
+      id: 'mod-z',
+      tex: `$|z|$`,
+      read: `the modulus of z; mod z`,
+      means: `The same bars as the real [absolute value](!/algebra/equations/absolute-value#notation), promoted to two dimensions: $|z| = \\sqrt{a^2 + b^2}$, the distance from the origin — **Definition of Modulus** above. "Modulus" is the traditional name; "absolute value" and the spoken "mod $z$" are equally current.`,
+      cases: `On the axes it collapses to the real mark: $|a|$ for reals, $|b|$ for pure imaginaries — **Special Cases** below. In polar work it answers to the letter $r$ of the [trigonometric form](!/complex-numbers/trigonometric-form#notation).`,
+      confusedWith: `The arithmetic "mod". Spoken aloud, "mod $z$" collides with [modular arithmetic](!/arithmetic/modulo)'s remainder operation — unrelated; the bars never mean remainder.`,
+      sameGlyphElsewhere: `The bar family scales by tenant: $\\|\\mathbf{v}\\|$ for [vector length](!/linear-algebra/vectors/magnitude#notation), $|A|$ for [determinants](!/linear-algebra/determinants/properties#notation), $|S|$ for set cardinality — same fence each time.`,
+    },
+    {
+      id: 'mod-z-squared',
+      tex: `$|z|^2$`,
+      read: `mod z squared`,
+      means: `The root-free spelling: $|z|^2 = a^2 + b^2 = z\\bar{z}$ — **Modulus and the Conjugate** below. Analysis reaches for the square precisely to avoid dragging $\\sqrt{\\phantom{x}}$ through a calculation.`,
+      cases: `Division writes it in the denominator — $\\frac{w}{z} = \\frac{w\\bar{z}}{|z|^2}$; quantum mechanics reads $|\\psi|^2$ as a probability density, the same mark on a wavefunction.`,
+      confusedWith: `$z^2$. For real numbers $|x|^2 = x^2$; for complex ones $|i|^2 = 1$ while $i^2 = -1$ — dropping the bars changes the mathematics, not just the typography.`,
+    },
+    {
+      id: 'locus',
+      tex: `$|z - c| = R$`,
+      read: `mod z minus c equals R`,
+      means: `Geometry written in modulus: $|z - c|$ is the distance between $z$ and $c$, so the equation names the circle of radius $R$ centered at $c$ — one mark replacing two coordinate equations.`,
+      cases: `Inequalities trade the circle for regions: $|z - c| < R$ is the open disk, $|z - c| > R$ its outside, and $|z - z_1| = |z - z_2|$ the perpendicular bisector — the locus dialect of complex analysis.`,
+      confusedWith: `A directed quantity. $|z_1 - z_2| = |z_2 - z_1|$ always — distance forgets direction, though the difference $z_1 - z_2$ itself does not.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
+},
+
 
   
 
@@ -1018,6 +1056,25 @@ export default function AbsoluteValuePage({
             key={'obj1-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },

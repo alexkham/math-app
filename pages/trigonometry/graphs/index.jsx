@@ -8,6 +8,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -568,6 +569,42 @@ These two readings — midline and amplitude — are usually the first step in d
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Sinusoidal Graph Notation`,
+    lead: `Graphing changes the notation twice: the input letter swaps costume, and a four-letter parameter alphabet takes over the equation. The period gets a reserved capital of its own.`,
+    inherited: `$\\sin$ through $\\cot$ come from the [right triangle page](!/trigonometry/right-triangle#notation), $\\theta$ and radians from [angle measure](!/trigonometry/degrees-radians#notation), the exclusion families $n\\pi$, $\\frac{\\pi}{2} + n\\pi$ behind every asymptote from [function notation](!/trigonometry/functions#notation).`,
+    entries: [
+      {
+        id: 'theta-to-x',
+        tex: `$y = \\sin x$`,
+        read: `y equals sine x`,
+        means: `The letter costume changes at the graphing boundary: the angle $\\theta$ of the [unit circle](!/trigonometry/unit-circle#notation) becomes the generic input $x$ once sine is plotted as an ordinary function — same function, Cartesian dress, with $x$ in [bare-number radians](!/trigonometry/degrees-radians#notation) always.`,
+        cases: `$y =$ names the output for graphing; the spelling $f(x) = \\sin x$ appears when the machinery of [functions](!/functions/basics#5) — composition, transformation — is about to be used.`,
+        confusedWith: `A new meaning. The $x$ here is still an angle in radians — the same number that was $\\theta$ — not a coordinate on the unit circle; the relabeling changes bookkeeping, not meaning.`,
+      },
+      {
+        id: 'parameter-alphabet',
+        tex: `$y = A\\sin(Bx - C) + D$`,
+        read: `y equals A sine of B x minus C, plus D`,
+        means: `A reserved alphabet: capitals are the tunable knobs, lowercase $x, y$ the variables. Position encodes the job — $B$ and $C$ live inside the brackets and bend the horizontal axis, $A$ and $D$ stay outside and stretch the vertical one, as **The General Sinusoidal Form** above unpacks.`,
+        cases: `Textbooks split between $A\\sin(Bx - C) + D$ and the factored $A\\sin(B(x - C)) + D$ — in the first the shift is $C/B$, in the second $C$ itself; **Phase Shift** above works the trap in full.`,
+        confusedWith: `A unique fingerprint. One graph admits many spellings — $3\\sin(2x - \\frac{\\pi}{2}) + 1$ and $3\\cos(2x - \\pi) + 1$ coincide; matching graph to equation tests the four parameters, not the letters, as **Determining the Equation from a Graph** below closes.`,
+      },
+      {
+        id: 'period-t',
+        tex: `$T = \\frac{2\\pi}{|B|}$`,
+        read: `capital T — the period`,
+        means: `$T$ is the reserved letter for the period, defined by the repetition statement $f(x + T) = f(x)$ of **Period** above — the smallest positive shift that changes nothing.`,
+        cases: `Applications flip it: frequency $1/T$ counts cycles per unit, and physics writes the pair into $\\omega = 2\\pi/T$ — the angular frequency of the [engineering costume](!/complex-numbers/exponential-form#notation) $Ae^{i\\omega t}$.`,
+        confusedWith: `One formula for all six. Sine's family runs $T = \\frac{2\\pi}{|B|}$, but tangent and cotangent repeat twice as fast — $T = \\frac{\\pi}{|B|}$; the wrong numerator halves or doubles every cycle count.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
+  },
  obj10: {
     title: `Determining the Equation from a Graph`,
     content: `Writing the equation of a sinusoidal function from its graph requires extracting the four parameters $A$, $B$, $C$, $D$ and deciding whether to use sine or cosine as the base function.
@@ -786,6 +823,25 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
     },
 
     // obj10: prose + equation-from-graph procedure table
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
     {
         id:'10',
         title:sectionsContent.obj10.title,

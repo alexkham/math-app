@@ -470,6 +470,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import ComplexDistanceMidpoint from '../../../../app/components/calculators/complex-numbers/ComplexDistanceMidpoint'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import distanceMidpointDiagrams from '../../../../app/components/calculators/complex-numbers/distanceMidpointDiagrams'
 
 export async function getStaticProps(){
 
@@ -497,7 +499,7 @@ export async function getStaticProps(){
       title:`Getting Started — Drag Two Points`,
       content:`Two draggable points sit on the complex plane: $z_1$ (navy) and $z_2$ (orange). Grab either one and move it to see the orange distance segment, the purple midpoint, and both step-by-step panels update in real time.
 
-Type precise values into the input fields on the right — each point has separate real and imaginary inputs accepting $-5$ to $5$ in steps of $0.1$. Five presets are available: a general pair $(-2+i)$ & $(3+3i)$, an origin-based pair $0$ & $(3+4i)$, a symmetric pair, a vertical pair, and a horizontal pair. Click **Random** to generate two arbitrary points.
+Type precise values into the input fields on the right — each point has separate real and imaginary inputs accepting $-5$ to $5$ in steps of $0.1$. Five presets are available: a [general pair](!#the-right-triangle-and-distance-segment) $(-2+i)$ & $(3+3i)$, an [origin-based pair](!#distance-from-the-origin-modulus-as-a-special-case) $0$ & $(3+4i)$, a [symmetric pair](!#symmetric-points-and-midpoint-at-the-origin), a [vertical pair](!#the-vertical-pair), and a [horizontal pair](!#the-horizontal-pair). Click **Random** to generate two arbitrary points.
 
 The **Show circle** checkbox toggles a dashed blue circle centered at $z_1$ that passes through $z_2$. Every point on this circle is the same distance from $z_1$ as $z_2$ is. Toggle it off for a cleaner view of the triangle and midpoint.`,
       before:``,
@@ -512,15 +514,17 @@ A small right-angle marker appears at the corner where the two legs meet. The tr
 
 Click the default preset $(-2+i)$ & $(3+3i)$ to see a triangle with $\\Delta a = 5$ and $\\Delta b = 2$, giving distance $\\sqrt{25 + 4} = \\sqrt{29} \\approx 5.39$. The triangle makes the Pythagorean relationship visible — the distance is always the hypotenuse.`,
       before:``,
-      after:``,
+      after:`In the frozen frame the whole apparatus is on duty at once: both legs labeled, the right-angle marker tucked at the corner, the rotated $d = 5.39$ riding the hypotenuse, the purple midpoint at $0.5 + 2i$, and the dashed [locus circle](!#the-dashed-circle-and-locus-interpretation) sweeping through $z_2$.
+
+Note the two faint vectors from the origin — the tool keeps them deliberately dim, because for distance and midpoint the origin does not matter. The whole construction is translation-invariant: slide both points by the same amount and $d$, the triangle, and $M$'s position between the points all come along unchanged. That independence from the origin is exactly what separates distance from [the modulus special case](!#distance-from-the-origin-modulus-as-a-special-case).`,
       link:'',
     },
 
     obj3:{
       title:`Vertical and Horizontal Degenerate Cases`,
-      content:`Click **Vertical** to load $z_1 = 1 + 4i$ and $z_2 = 1 - 2i$. Both points share the same real part ($a = 1$), so $\\Delta a = 0$. The right triangle collapses — the green horizontal leg vanishes and only the red vertical segment remains. The distance simplifies to $|b_1 - b_2| = |4 - (-2)| = 6$.
+      content:`Click **Vertical** to load $z_1 = 1 + 4i$ and $z_2 = 1 - 2i$. Both points share the same real part ($a = 1$), so $\\Delta a = 0$. The right triangle collapses — the green horizontal leg vanishes and only the red vertical segment remains. The distance simplifies to $|b_1 - b_2| = |4 - (-2)| = 6$ — see [the vertical pair](!#the-vertical-pair).
 
-Click **Horizontal** to load $z_1 = -4$ and $z_2 = 4$. Both are real numbers with the same imaginary part ($b = 0$), so $\\Delta b = 0$. The red vertical leg disappears and only the green horizontal segment remains. The distance is $|a_1 - a_2| = |-4 - 4| = 8$.
+Click **Horizontal** to load $z_1 = -4$ and $z_2 = 4$. Both are real numbers with the same imaginary part ($b = 0$), so $\\Delta b = 0$. The red vertical leg disappears and only the green horizontal segment remains. The distance is $|a_1 - a_2| = |-4 - 4| = 8$ — see [the horizontal pair](!#the-horizontal-pair).
 
 In both cases the right-angle marker also disappears because there is no corner — just a single straight line. These are the simplest distance illustrations: purely horizontal or purely vertical segments with the distance equal to the absolute difference along one axis.`,
       before:``,
@@ -538,7 +542,9 @@ This is the only preset where the midpoint coincides with the origin. It produce
 
 You can create other symmetric configurations by setting $z_2 = -z_1$ for any $z_1$. The midpoint will always land at the origin because the two points cancel when averaged.`,
       before:``,
-      after:``,
+      after:`The frozen frame shows the coincidence directly: the purple $M$ swallows the gray origin dot, and the two faint origin vectors lie exactly along the orange distance segment — because for opposite points, the segment between them *is* the line through the origin.
+
+Algebraically this preset freezes the statement $z + (-z) = 0$: additive inverses average to zero. It is the midpoint counterpart of what [the coincident state](!#coincident-points-distance-zero) does for distance — one collapses the average, the other collapses the difference.`,
       link:'',
     },
 
@@ -552,7 +558,9 @@ The midpoint is $M = (0 + 3 + 4i)/2 = 1.5 + 2i$, which lies halfway along the se
 
 This demonstrates that distance between complex numbers is a generalization of the modulus. The modulus $|z|$ measures distance from the origin; $|z_1 - z_2|$ measures distance between any two points. Every modulus calculation is a distance calculation with $z_2 = 0$.`,
       before:``,
-      after:``,
+      after:`In the frozen frame, $z_1$ sits directly on the origin — its navy point covers the gray origin dot, and the faint $z_1$ vector has nothing to draw. What remains is the picture every modulus definition uses: the 3-4-5 [right triangle](!#the-right-triangle-and-distance-segment) with one vertex pinned at zero.
+
+The dashed locus circle in this state is special too: centered on the origin with radius 5, it is precisely the set of complex numbers with modulus 5 — the circle $|z| = 5$. Every other preset draws the general circle $|z - z_1| = r$; this one draws the textbook one.`,
       link:'',
     },
 
@@ -626,7 +634,9 @@ The dashed circle also collapses to a single point (radius $0$). The step-by-ste
 
 This is the only configuration where $|z_1 - z_2| = 0$. By definition, $|w| = 0$ if and only if $w = 0$, so $|z_1 - z_2| = 0$ if and only if $z_1 = z_2$. This property is one of the axioms of a metric — the distance between two points is zero precisely when the points coincide.`,
       before:``,
-      after:``,
+      after:`The frozen frame is the tool with everything switched off by mathematics rather than by settings: no triangle, no circle, no distance label — just two stacked markers and the midpoint hiding beneath them at the same spot. Both step-by-step panels still run; they simply compute zeros all the way down.
+
+Degenerate as it looks, this state carries real content: it is the *definiteness* half of what makes $|z_1 - z_2|$ a genuine distance. Zero output happens for exactly one input configuration — compare [the symmetric preset](!#symmetric-points-and-midpoint-at-the-origin), where it is the midpoint, not the distance, that collapses to zero.`,
       link:'',
     },
 
@@ -665,6 +675,26 @@ Finally, the [Complex Number Explorer](!/complex-numbers/visual-tools/complex-ex
   after:``,
   link:'',
 },
+
+    obj12:{
+      title:`The Vertical Pair`,
+      content:`The **Vertical** preset stacks the two points on one vertical line: $z_1 = 1 + 4i$ directly above $z_2 = 1 - 2i$, sharing the real part $a = 1$.`,
+      before:``,
+      after:`With $\\Delta a = 0$ the Pythagorean machinery goes quiet: no triangle, no corner marker, and the distance formula collapses to a plain subtraction of imaginary parts, $|4 - (-2)| = 6$. One axis carries all the information.
+
+The midpoint keeps the shared real part and averages the heights: $M = 1 + i$. Any pair with equal real parts behaves this way — vertical segments are where complex distance quietly turns back into the number-line distance of the imaginary components. The mirror case is [the horizontal pair](!#the-horizontal-pair); both live under the [degenerate cases](!#vertical-and-horizontal-degenerate-cases) umbrella.`,
+      link:'',
+    },
+
+    obj13:{
+      title:`The Horizontal Pair`,
+      content:`The **Horizontal** preset lays both points on the real axis: $z_1 = -4$ and $z_2 = 4$, two ordinary real numbers eight units apart.`,
+      before:``,
+      after:`This frame is complex distance at its most familiar: $|{-4} - 4| = 8$ is exactly the number-line distance between $-4$ and $4$. The orange segment lies flat along the axis, and the red $\\Delta b$ leg has nothing to measure.
+
+Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so the purple $M$ lands on the origin — this preset is *also* a symmetric pair, kin to [the symmetric preset](!#symmetric-points-and-midpoint-at-the-origin). And the dashed [locus circle](!#the-dashed-circle-and-locus-interpretation), centered at $-4$ with radius $8$, is the largest circle any preset draws — it exits the window on three sides.`,
+      link:'',
+    },
 
   }
 
@@ -779,12 +809,42 @@ Finally, the [Complex Number Explorer](!/complex-numbers/visual-tools/complex-ex
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plane + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    general: demoUnitFrame({ svg: distanceMidpointDiagrams.general, caption: '(&#8722;2+i) &amp; (3+3i), frozen',
+      text: 'The full apparatus: legs &#916;a = 5 and &#916;b = 2, the rotated d = 5.39 riding the hypotenuse, the purple midpoint at 0.5 + 2i, and the dashed locus circle sweeping through z&#x2082;.' }),
+    originPair: demoUnitFrame({ svg: distanceMidpointDiagrams.originPair, caption: '0 &amp; (3+4i), frozen',
+      text: 'z&#x2081; pinned to the origin turns distance into modulus: the 3-4-5 triangle of |3+4i| = 5, with the locus circle becoming the textbook circle |z| = 5.' }),
+    symmetric: demoUnitFrame({ svg: distanceMidpointDiagrams.symmetric, caption: '(&#8722;3&#8722;2i) &amp; (3+2i), frozen',
+      text: 'Opposite points: the purple M swallows the origin dot, and the faint origin vectors lie exactly along the distance segment — additive inverses averaging to zero.' }),
+    vertical: demoUnitFrame({ svg: distanceMidpointDiagrams.vertical, caption: '(1+4i) &amp; (1&#8722;2i), frozen',
+      text: 'Equal real parts silence the triangle: a single vertical drop of 6 units, with the midpoint keeping a = 1 and averaging the heights to 1 + i.' }),
+    horizontal: demoUnitFrame({ svg: distanceMidpointDiagrams.horizontal, caption: '&#8722;4 &amp; 4, frozen',
+      text: 'Number-line distance on the complex plane: d = 8 flat along the real axis, midpoint at the origin, and the largest locus circle any preset draws.' }),
+    coincident: demoUnitFrame({ svg: distanceMidpointDiagrams.coincident, caption: 'z&#x2081; = z&#x2082; = 2 + i, frozen',
+      text: 'Distance zero: no triangle, no circle, no d label — two stacked markers with the midpoint hiding beneath them. The only input that produces output zero.' }),
+  };
+
+  // Per-state additions for the tool's Key Ideas panel, keyed by the preset
+  // pair the current points match (see ComplexDistanceMidpoint).
+  const explanations = {
+    general: 'Everything at once: legs 5 and 2, hypotenuse √29, midpoint at 0.5 + 2i. [Learn more about the triangle](!#the-right-triangle-and-distance-segment) · [Getting started](!#getting-started-drag-two-points)',
+    originPair: 'One point on the origin turns distance into plain modulus: the 3-4-5 triangle of |3+4i| = 5. [Learn more about modulus as distance](!#distance-from-the-origin-modulus-as-a-special-case) · [Getting started](!#getting-started-drag-two-points)',
+    symmetric: 'Opposite points average to zero: the midpoint lands exactly on the origin. [Learn more about symmetric pairs](!#symmetric-points-and-midpoint-at-the-origin) · [Getting started](!#getting-started-drag-two-points)',
+    vertical: 'Equal real parts collapse the triangle: distance is just the imaginary-part difference, 6. [Learn more about the vertical pair](!#the-vertical-pair) · [All degenerate cases](!#vertical-and-horizontal-degenerate-cases)',
+    horizontal: 'Two real numbers, number-line distance 8 — and the midpoint lands on the origin. [Learn more about the horizontal pair](!#the-horizontal-pair) · [All degenerate cases](!#vertical-and-horizontal-degenerate-cases)',
+    coincident: 'Distance zero happens for exactly one configuration: z₁ = z₂. [Learn more about coincident points](!#coincident-points-distance-zero) · [Getting started](!#getting-started-drag-two-points)',
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "Complex Distance & Midpoint | Learn Math Class",
         description: "Calculate distance and midpoint between complex numbers visually. Drag points, see the Pythagorean triangle, distance circle, and step-by-step formulas in real time.",
@@ -797,12 +857,12 @@ Finally, the [Complex Number Explorer](!/complex-numbers/visual-tools/complex-ex
     }
    }
 
-export default function DistanceMidpointPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function DistanceMidpointPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
     {
-        id:'1',
+        id:'getting-started-drag-two-points',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -810,15 +870,17 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
         ]
     },
     {
-        id:'2',
+        id:'the-right-triangle-and-distance-segment',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key='u-general' dangerouslySetInnerHTML={{ __html: stateUnits.general }} />,
+          sectionsContent.obj2.after,
         ]
     },
     {
-        id:'3',
+        id:'vertical-and-horizontal-degenerate-cases',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -826,23 +888,47 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
         ]
     },
     {
-        id:'4',
+        id:'the-vertical-pair',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-vertical' dangerouslySetInnerHTML={{ __html: stateUnits.vertical }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'the-horizontal-pair',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-horizontal' dangerouslySetInnerHTML={{ __html: stateUnits.horizontal }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'symmetric-points-and-midpoint-at-the-origin',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key='u-symmetric' dangerouslySetInnerHTML={{ __html: stateUnits.symmetric }} />,
+          sectionsContent.obj4.after,
         ]
     },
     {
-        id:'5',
+        id:'distance-from-the-origin-modulus-as-a-special-case',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key='u-originPair' dangerouslySetInnerHTML={{ __html: stateUnits.originPair }} />,
+          sectionsContent.obj5.after,
         ]
     },
     {
-        id:'6',
+        id:'the-dashed-circle-and-locus-interpretation',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -850,7 +936,7 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
         ]
     },
     {
-        id:'7',
+        id:'reading-the-step-by-step-panels',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -858,7 +944,7 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
         ]
     },
     {
-        id:'8',
+        id:'the-distance-formula-for-complex-numbers',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -866,7 +952,7 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
         ]
     },
     {
-        id:'9',
+        id:'the-midpoint-formula-for-complex-numbers',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -874,15 +960,17 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
         ]
     },
     {
-        id:'10',
+        id:'coincident-points-distance-zero',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key='u-coincident' dangerouslySetInnerHTML={{ __html: stateUnits.coincident }} />,
+          sectionsContent.obj10.after,
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
@@ -950,8 +1038,8 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Distance and Midpoint between Complex Numbers</h1>
    <br/>
-   <SiblingsNav>
-   <ComplexDistanceMidpoint/>
+   <SiblingsNav maxWidth='100%'>
+   <ComplexDistanceMidpoint explanations={explanations}/>
    </SiblingsNav>
    <br/>
    <SectionTableOfContents sections={genericSections}

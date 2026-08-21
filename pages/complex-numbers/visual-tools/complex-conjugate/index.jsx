@@ -9,6 +9,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import ConjugateModulusVisualizer from '../../../../app/components/calculators/complex-numbers/ConjugateModulusVisualizer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import conjugateModulusDiagrams from '../../../../app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 
 export async function getStaticProps(){
 
@@ -118,17 +120,17 @@ Both calculations yield the same result, confirming z · z̄ = |z|². The checkm
     },
     obj5:{
       title:`Exploring Presets and Special Cases`,
-      content:`The preset buttons offer carefully chosen examples that highlight different behaviors:
+      content:`The preset buttons offer carefully chosen examples that highlight different behaviors — each preset has a dedicated section below with the tool frozen on it:
 
-**3+2i**: A standard complex number in the first quadrant — good starting point for understanding the basics.
+[3+2i](!#the-starting-point-3-2i): A standard complex number in the first quadrant — good starting point for understanding the basics.
 
-**−1+4i**: Second quadrant example where the real part is negative. Notice z̄ appears in the third quadrant.
+[−1+4i](!#negative-real-part-1-4i): Second quadrant example where the real part is negative. Notice z̄ appears in the third quadrant.
 
-**3i**: A purely imaginary number lying on the imaginary axis. Here z and z̄ are symmetric about the origin, and both have the same distance from it.
+[3i](!#purely-imaginary-3i): A purely imaginary number lying on the imaginary axis. Here z and z̄ are symmetric about the origin, and both have the same distance from it.
 
-**4**: A purely real number. The conjugate equals the original: $\\bar{4} = 4$. Both points overlap on the real axis.
+[4](!#purely-real-4): A purely real number. The conjugate equals the original: $\\bar{4} = 4$. Both points overlap on the real axis.
 
-**−2−3i**: Third quadrant example. The conjugate z̄ appears in the second quadrant.
+[−2−3i](!#third-quadrant-2-3i): Third quadrant example. The conjugate z̄ appears in the second quadrant.
 
 **Random**: Generates arbitrary values to test that the z · z̄ = |z|² identity holds universally.`,
       before:``,
@@ -141,15 +143,15 @@ Both calculations yield the same result, confirming z · z̄ = |z|². The checkm
 
 **Purely real numbers (Im = 0):**
 
-Set z = 4 + 0i. The conjugate equals the original number. Both points overlap on the real axis. Real numbers are their own conjugates.
+Set [z = 4 + 0i](!#purely-real-4). The conjugate equals the original number. Both points overlap on the real axis. Real numbers are their own conjugates.
 
 **Purely imaginary numbers (Re = 0):**
 
-Set z = 0 + 3i. The conjugate is z̄ = −3i. Points appear on opposite sides of the origin along the imaginary axis.
+Set [z = 0 + 3i](!#purely-imaginary-3i). The conjugate is z̄ = −3i. Points appear on opposite sides of the origin along the imaginary axis.
 
 **Origin (z = 0):**
 
-Both z and z̄ collapse to the origin. Modulus is zero, and z · z̄ = 0.
+Both z and z̄ collapse to [the origin](!#the-origin-z-0). Modulus is zero, and z · z̄ = 0.
 
 **Unit circle:**
 
@@ -271,6 +273,78 @@ obj10:{
   after:``,
   link:'',
 },
+
+    obj11: {
+      title: `The Starting Point: 3 + 2i`,
+      content: `The tool opens at $z = 3 + 2i$ — a first-quadrant number with nothing special about it, which is exactly the point: every element of the visualizer is visible at once from an ordinary example.`,
+      before: ``,
+      after: `Read the picture: the navy vector reaches $z = 3 + 2i$, the dashed orange vector reaches $\\bar{z} = 3 - 2i$, and the purple dashed line between them crosses the real axis at $3$ — their shared real part. The two vectors are mirror images across the highlighted real axis.
+
+The [proof box](!#the-proof-box-explained) computes $z \\cdot \\bar{z} = 3^2 + 2^2 = 13$ for this value, and $|z|^2 = (\\sqrt{13})^2 = 13$ — the identity in its most concrete form.
+
+The other presets each break one thing at a time: [−1 + 4i](!#negative-real-part-1-4i) makes the real part negative, [4](!#purely-real-4) and [3i](!#purely-imaginary-3i) drop the number onto an axis, and [−2 − 3i](!#third-quadrant-2-3i) negates both parts.`,
+      link: '',
+    },
+
+    obj12: {
+      title: `Negative Real Part: −1 + 4i`,
+      content: `The preset $z = -1 + 4i$ moves the number into the second quadrant: real part negative, imaginary part positive.`,
+      before: ``,
+      after: `Conjugation never touches the real part, so $\\bar{z} = -1 - 4i$ keeps the same horizontal position and simply drops below the axis — from the second quadrant into the third. Compare this with [the starting preset](!#the-starting-point-3-2i), whose conjugate stays on the right half of the plane.
+
+The modulus ignores both signs: $|-1 + 4i| = \\sqrt{(-1)^2 + 4^2} = \\sqrt{17}$. The proof box still lands on a positive real product, $z \\cdot \\bar{z} = 1 + 16 = 17$ — a negative real part cannot break the identity, because every term gets squared.
+
+Notice the right-triangle guides: the vertical leg now hangs left of the imaginary axis, but its length $4$ and the horizontal leg's length $1$ still assemble the same Pythagorean picture that defines the [modulus](!#the-modulus-of-a-complex-number).`,
+      link: '',
+    },
+
+    obj13: {
+      title: `Purely Imaginary: 3i`,
+      content: `The preset $z = 3i$ places the number directly on the imaginary axis: real part zero.`,
+      before: ``,
+      after: `With no real part, reflection across the real axis is the same as reflection through the origin: $\\overline{3i} = -3i = -(3i)$. The purple symmetry line runs straight down the imaginary axis, and the two vectors point in exactly opposite directions.
+
+The product is still real and positive: $z \\cdot \\bar{z} = (3i)(-3i) = -9i^2 = 9 = |z|^2$. This is $i^2 = -1$ doing its signature work — squaring a purely imaginary number gives a negative real number, and the conjugate's second sign flip makes it positive.
+
+The mirror case is the [purely real preset](!#purely-real-4), where conjugation does nothing at all; between the two axes live the generic examples like [3 + 2i](!#the-starting-point-3-2i).`,
+      link: '',
+    },
+
+    obj14: {
+      title: `Purely Real: 4`,
+      content: `The preset $z = 4$ is an ordinary real number viewed inside the complex plane — imaginary part zero.`,
+      before: ``,
+      after: `Here $\\bar{z} = z$: reflecting a point that already lies on the mirror leaves it fixed. The visualizer draws both points and both vectors, but they coincide — drag z slightly off the axis and watch them split apart.
+
+The identity collapses to ordinary squaring: $z \\cdot \\bar{z} = 4 \\cdot 4 = 16 = |4|^2$. For real numbers the modulus is just the absolute value, so nothing new happens — which is precisely the sense in which complex conjugation extends real arithmetic without disturbing it.
+
+This is one of the two axis cases; the other is the [purely imaginary preset](!#purely-imaginary-3i), where conjugation flips the number to its negative instead of fixing it.`,
+      link: '',
+    },
+
+    obj15: {
+      title: `Third Quadrant: −2 − 3i`,
+      content: `The preset $z = -2 - 3i$ has both parts negative, putting the number in the third quadrant — and its conjugate above the axis in the second.`,
+      before: ``,
+      after: `Conjugation is direction-blind: whichever side of the real axis $z$ occupies, $\\bar{z}$ takes the other. Here that sends the third quadrant to the second — the mirror image of what happens with [−1 + 4i](!#negative-real-part-1-4i).
+
+By a small coincidence of arithmetic, this preset shares its modulus with [the starting preset](!#the-starting-point-3-2i): $|-2 - 3i| = \\sqrt{4 + 9} = \\sqrt{13}$. Load the two presets in turn and the dashed circle does not move — several different numbers live on that one circle, and the proof box computes the same product $13$ for each.
+
+The identity $z \\cdot \\bar{z} = |z|^2$ is quadrant-proof: $(-2)^2 + (-3)^2 = 4 + 9$, every sign erased by squaring.`,
+      link: '',
+    },
+
+    obj16: {
+      title: `The Origin: z = 0`,
+      content: `Set both inputs to zero — or drag the point home — and the whole construction collapses: $z = 0$ is its own conjugate and its own negative at once.`,
+      before: ``,
+      after: `Zero is the degenerate case of everything this tool shows: $\\bar{0} = 0$, $|0| = 0$, and $z \\cdot \\bar{z} = 0 = |0|^2$ — the identity holds with every quantity vanishing. It is the only complex number with modulus zero.
+
+The proof box's checkmark still appears, and it should: the identity is universal, boundary case included. What disappears is the geometry — no vectors, no circle, no triangles — because all of it was built from a nonzero distance.
+
+The [special cases section](!#special-cases-to-investigate) lists the other boundary configurations worth loading: the axes, the unit circle, and the 45° diagonal.`,
+      link: '',
+    },
   }
 
   const faqQuestions = {
@@ -382,12 +456,43 @@ obj10:{
     content: ``
   }
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plane + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    start: demoUnitFrame({ svg: conjugateModulusDiagrams.start, caption: 'z = 3 + 2i, frozen',
+      text: 'Solid navy vector to z, dashed orange vector to z&#x305; = 3 &#8722; 2i below the axis, and both points pinned to one dashed modulus circle of radius &#8730;13.' }),
+    negativeReal: demoUnitFrame({ svg: conjugateModulusDiagrams.negativeReal, caption: 'z = &#8722;1 + 4i, frozen',
+      text: 'z sits upper-left, z&#x305; = &#8722;1 &#8722; 4i lower-left: conjugation reflects across the real axis, so a second-quadrant number always has a third-quadrant conjugate.' }),
+    pureImaginary: demoUnitFrame({ svg: conjugateModulusDiagrams.pureImaginary, caption: 'z = 3i, frozen',
+      text: 'z at 3i and z&#x305; at &#8722;3i sit symmetric about the origin: for a purely imaginary number, the conjugate coincides with the negative.' }),
+    purelyReal: demoUnitFrame({ svg: conjugateModulusDiagrams.purelyReal, caption: 'z = 4, frozen',
+      text: 'The orange conjugate point hides exactly underneath the navy z: a real number is its own conjugate, and both vectors lie flat on the real axis.' }),
+    thirdQuadrant: demoUnitFrame({ svg: conjugateModulusDiagrams.thirdQuadrant, caption: 'z = &#8722;2 &#8722; 3i, frozen',
+      text: 'The reflection now goes upward: z&#x305; = &#8722;2 + 3i floats above the real axis while z hangs below. Same modulus circle, radius &#8730;13.' }),
+    origin: demoUnitFrame({ svg: conjugateModulusDiagrams.origin, caption: 'z = 0, frozen',
+      text: 'Both points, both vectors and the modulus circle have collapsed into the origin dot: at z = 0 there is no direction and no distance left to draw.' }),
+  };
+
+  // Per-state additions for the tool's Key Ideas panel, keyed by the preset
+  // value z currently matches (see ConjugateModulusVisualizer). Each anchors
+  // down to the state's dedicated section.
+  const explanations = {
+    start: 'This starting value is the tool’s generic example — nothing vanishes, so every element is visible. [Learn more about 3 + 2i](!#the-starting-point-3-2i) · [All presets](!#exploring-presets-and-special-cases)',
+    negativeReal: 'A negative real part sends the conjugate from the second quadrant to the third — reflection only ever crosses the real axis. [Learn more about −1 + 4i](!#negative-real-part-1-4i) · [All presets](!#exploring-presets-and-special-cases)',
+    pureImaginary: 'On the imaginary axis the conjugate equals the negative: z̄ = −z. [Learn more about 3i](!#purely-imaginary-3i) · [All presets](!#exploring-presets-and-special-cases)',
+    purelyReal: 'Real numbers are their own conjugates — the two points coincide on the axis. [Learn more about z = 4](!#purely-real-4) · [All presets](!#exploring-presets-and-special-cases)',
+    thirdQuadrant: 'Both parts negative, and the conjugate rises into the second quadrant — same modulus circle as 3 + 2i. [Learn more about −2 − 3i](!#third-quadrant-2-3i) · [All presets](!#exploring-presets-and-special-cases)',
+    origin: 'At zero the identity still holds — with every quantity equal to 0. [Learn more about the origin](!#the-origin-z-0) · [All special cases](!#special-cases-to-investigate)',
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "Complex Conjugate Visualizer - Interactive Tool | Learn Math Class",
         description: "Interactive complex conjugate and modulus visualizer. Explore z, z̄, and |z| by dragging points on the Argand plane with live calculations and proof.",
@@ -405,13 +510,15 @@ export default function ComplexConjugateVisualizerPage({
   sectionsContent,
   introContent,
   faqQuestions,
-  schemas
+  schemas,
+  explanations,
+  stateUnits
 }) {
 
     
   const genericSections=[
     {
-        id:'1',
+        id:'how-to-use-the-visualizer',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -419,7 +526,7 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'2',
+        id:'understanding-the-display',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -427,7 +534,7 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'3',
+        id:'using-the-values-panel',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -435,7 +542,7 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'4',
+        id:'the-proof-box-explained',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
@@ -443,7 +550,7 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'5',
+        id:'exploring-presets-and-special-cases',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -451,7 +558,57 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'6',
+        id:'the-starting-point-3-2i',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+          <div key='u-start' dangerouslySetInnerHTML={{ __html: stateUnits.start }} />,
+          sectionsContent.obj11.after,
+        ]
+    },
+    {
+        id:'negative-real-part-1-4i',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-negativeReal' dangerouslySetInnerHTML={{ __html: stateUnits.negativeReal }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'purely-imaginary-3i',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-pureImaginary' dangerouslySetInnerHTML={{ __html: stateUnits.pureImaginary }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'purely-real-4',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div key='u-purelyReal' dangerouslySetInnerHTML={{ __html: stateUnits.purelyReal }} />,
+          sectionsContent.obj14.after,
+        ]
+    },
+    {
+        id:'third-quadrant-2-3i',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+          <div key='u-thirdQuadrant' dangerouslySetInnerHTML={{ __html: stateUnits.thirdQuadrant }} />,
+          sectionsContent.obj15.after,
+        ]
+    },
+    {
+        id:'special-cases-to-investigate',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -459,7 +616,17 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'7',
+        id:'the-origin-z-0',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+          <div key='u-origin' dangerouslySetInnerHTML={{ __html: stateUnits.origin }} />,
+          sectionsContent.obj16.after,
+        ]
+    },
+    {
+        id:'what-is-a-complex-conjugate',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -467,7 +634,7 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'8',
+        id:'the-modulus-of-a-complex-number',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -475,7 +642,7 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'9',
+        id:'why-z-times-conjugate-equals-modulus-squared',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -483,7 +650,7 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
-        id:'10',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -550,8 +717,8 @@ export default function ComplexConjugateVisualizerPage({
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Conjugate Visualizer</h1>
    <br/>
-   <SiblingsNav>
-   <ConjugateModulusVisualizer/>
+   <SiblingsNav maxWidth='100%'>
+   <ConjugateModulusVisualizer explanations={explanations}/>
    </SiblingsNav>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -245,11 +245,31 @@ function TypeTabs({ iq }) {
     </div>
   );
 }
+// Line 1 (additive): maps the live state onto the page's per-state explanation
+// keys — one key for the matched template, one for the comparison operator.
+const TEMPLATE_KEYS = {
+  poly: ['poly-three', 'poly-double', 'poly-cluster'],
+  quad: ['quad-two', 'quad-none', 'quad-down'],
+  abs: ['abs-centered', 'abs-shifted', 'abs-zero'],
+  rational: ['rat-simple', 'rat-crossed', 'rat-adjacent'],
+  radical: ['rad-basic', 'rad-shifted', 'rad-high'],
+};
+function templateKeyOf(state) {
+  const tpls = TYPES[state.typeId]?.templates || [];
+  const idx = tpls.findIndex(t =>
+    Object.keys(t.vals).every(k => t.vals[k] === state.p[k]));
+  return idx >= 0 ? (TEMPLATE_KEYS[state.typeId] || [])[idx] || null : null;
+}
+const opKeyOf = (state) =>
+  state.dir === 'lt' ? (state.strict ? 'op-lt' : 'op-le')
+                     : (state.strict ? 'op-gt' : 'op-ge');
+
 export default function InequalityVisualizer({
   initialType,
   initialParams,
   initialStrict,
   initialDirection,
+  explanations = null,
 }) {
   const iqRaw = useInequality(TYPES, {
     initial: {
@@ -261,6 +281,12 @@ export default function InequalityVisualizer({
   });
   const [hoveredFactor, setHoveredFactor] = useState(null);
   const iq = { ...iqRaw, hoveredFactor, setHoveredFactor };
+
+  // Line 1 (additive): up to two matched entries (template + operator) are
+  // appended in the Explanation panel; nothing renders without the prop.
+  const extraExplanations = explanations
+    ? [explanations[templateKeyOf(iqRaw.state)], explanations[opKeyOf(iqRaw.state)]].filter(Boolean)
+    : null;
   useEffect(() => {
     const onKey = (e) => {
       if (e.target.tagName === 'INPUT') return;
@@ -324,8 +350,8 @@ export default function InequalityVisualizer({
               <SignChart iq={iq} />
             </div>
             <div className="card pad">
-            
-              <Explanation iq={iq} />
+
+              <Explanation iq={iq} extra={extraExplanations} />
             </div>
           </div>
         </div>

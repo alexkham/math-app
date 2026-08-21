@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -339,22 +340,40 @@ Each representation captures the same underlying relationship. Converting betwee
     link: '',
   },
 
-  obj5: {
+  notation: {
     title: `Function Notation`,
-    content: `The notation $f(x)$ names a function and its output simultaneously. The letter $f$ identifies the function — the rule itself — while $f(x)$ denotes the output when the input is $x$.
-
-Reading $f(x)$ as "f of x" emphasizes the relationship: the value of $f$ at $x$. The parentheses do not indicate multiplication. The expression $f(x)$ is a single object, not $f$ times $x$.
-
-Other letters serve the same purpose. The notation $g(t)$ names a function $g$ with input variable $t$. The notation $P(n)$ might represent a function $P$ that takes integers $n$ as input. The choice of letters often reflects context: $t$ for time, $n$ for counting numbers, $x$ for a generic variable.
-
-Specific values replace the variable to indicate particular outputs. If $f(x) = x^2 + 1$, then $f(3)$ means the output when $x = 3$, which equals $10$. The notation $f(a)$ means the output at some unspecified value $a$. The notation $f(x + 1)$ means: take $x + 1$ as the input, apply the rule.
-
-Named functions like $f$ and $g$ are distinguished from anonymous expressions like $x^2 + 1$ written without a function name. Both describe the same rule, but naming allows reference to the function as an object in its own right.
-
-Every notation in this section — and the interval, composition, and inverse symbols met later — is catalogued among the [function symbols](!/math-symbols/functions) with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
-    before: ``,
-    after: ``,
-    link: '',
+    lead: `The grammar of the whole subject in one mark: what $f(x)$ names, which letters take its place, and how substitution reads. Everything here — and the interval, composition, and inverse marks met later — is catalogued among the [function symbols](!/math-symbols/functions), with [LaTeX](!/latex) code for each; the [mathematical keyboard](!/keyboard) types them directly.`,
+    inherited: `The domain and interval marks are owned by [expressing domains](!/functions/domain#2), the circle $\\circ$ by [composition](!/functions/composition#2), and the $f^{-1}$ superscript by [inverse functions](!/functions/inverse#2).`,
+    entries: [
+      {
+        id: 'f-of-x',
+        tex: `$f(x)$`,
+        read: `f of x`,
+        means: `One mark, two jobs: $f$ names the rule, $f(x)$ its output at $x$ — "f of x", never "f times x". The parentheses are application, not multiplication, and $f(x)$ is a single object.`,
+        cases: `Named versus anonymous: $f(x) = x^2 + 1$ can be referenced later by name; the bare expression $x^2 + 1$ cannot — naming turns a rule into an object.`,
+        confusedWith: `A product. Reading $f(x)$ as $f \\cdot x$ makes $\\frac{f(x)}{f(y)}$ "cancel" to $\\frac{x}{y}$ — the same cancellation error the [trig abbreviations](!/trigonometry/right-triangle#notation) suffer.`,
+      },
+      {
+        id: 'letter-wardrobe',
+        tex: `$g(t)$ · $P(n)$`,
+        read: `g of t; P of n`,
+        means: `The letter wardrobe: $f, g, h$ queue up as function names, and the input letter signals context — $t$ for time, $n$ for counting numbers, $x$ for a generic real. Same grammar, different costume.`,
+        cases: `Two functions in one problem take consecutive names — the $f$ and $g$ that feed [composition](!/functions/composition); capitals mark context-laden rules ($P$ for population, $A$ for area), and subscripted names $f_1, f_2$ enumerate families.`,
+        confusedWith: `New mathematics. $g(t) = 3t - 7$ and $f(x) = 3x - 7$ are the same rule — renaming letters changes nothing, and treating each letter set as a new species multiplies the subject needlessly.`,
+      },
+      {
+        id: 'evaluation-at',
+        tex: `$f(a)$ · $f(x+1)$`,
+        read: `f at a; f of x plus one`,
+        means: `Substitution notation: whatever sits in the parentheses replaces the variable wholesale. $f(3)$ is a number, $f(a)$ a value at an unspecified point, $f(x+1)$ a new expression — **Evaluating Functions** below runs the mechanics.`,
+        cases: `Compound inputs keep their parentheses through the substitution — $f(a+2) = (a+2)^2 + 1$, brackets intact; dropping them is the order-of-operations error **Evaluating Functions** below warns about.`,
+        confusedWith: `Distribution. $f(x+1) \\neq f(x) + 1$ and $f(x+1) \\neq f(x) + f(1)$ — the input shifts, the output does whatever the rule says; linearity is a property some functions have, not a notation rule.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/functions`,
+    symbolsLabel: `All function symbols`,
+    parentHref: `/functions`,
+    parentLabel: `Functions`,
   },
 
   obj6: {
@@ -685,10 +704,21 @@ export default function FunctionsBasicsPage({
     },
     {
         id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj5.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

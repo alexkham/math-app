@@ -10,6 +10,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import angleDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -682,6 +683,43 @@ The radian is not an arbitrary alternative to degrees. It is the angle measure t
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Angle Measure Notation`,
+    lead: `Two unit systems, three kinds of marks: the Greek letters angles answer to, the degree circle with its base-60 primes, and the convention that radians are written by writing nothing at all.`,
+    inherited: `The function abbreviations $\\sin$, $\\cos$, $\\tan$ are owned by the [right triangle page](!/trigonometry/right-triangle#notation); $\\pi$ needs no introduction — the identity $180° = \\pi$ of **Converting Between Degrees and Radians** below does the work.`,
+    entries: [
+      {
+        id: 'greek-letters',
+        tex: `$\\theta$ · $\\alpha$ · $\\beta$`,
+        read: `theta; alpha, beta`,
+        means: `Greek letters are the angle dress code: $\\theta$ is the default unknown angle, $\\alpha$ and $\\beta$ take over when two angles share a figure, $\\phi$ steps in once $\\theta$ is spoken for. Latin letters stay on lengths — the split keeps sides and angles visually apart.`,
+        cases: `In [triangle solving](!/trigonometry/sines-cosines-law) the convention sharpens: capital $A$, $B$, $C$ for angles, lowercase $a$, $b$, $c$ for the sides facing them.`,
+        confusedWith: `A zero. Handwritten $\\theta$ with a weak crossbar collapses into $0$ — and an equation like $\\theta = 0$ contains both, one Greek, one digit.`,
+        sameGlyphElsewhere: `$\\theta$ is also the standing name for the [argument of a complex number](!/complex-numbers/trigonometric-form#notation) — the same letter exported with the same angle job.`,
+      },
+      {
+        id: 'degree-dms',
+        tex: `$41°24'36''$`,
+        read: `forty-one degrees, twenty-four minutes, thirty-six seconds`,
+        means: `The degree circle with its base-60 subdivisions: $1° = 60'$, $1' = 60''$ — **Degree Measurement** above. Two spellings compete for precision: DMS in navigation, cartography and astronomy; decimal degrees ($41.41°$) wherever computation rules.`,
+        cases: `The mark binds to the number, not the variable — $\\theta = 45°$, never $\\theta° = 45$; coordinates read DMS by tradition (latitude $41°24'$ N) while software wants the decimal form.`,
+        confusedWith: `Calculus primes. The minute stroke is the same mark as the [derivative prime](!/calculus/derivatives/function#notation) $f'$, and $''$ doubles as the second derivative — what stands before it (a number vs a function) is the only separator; feet and inches borrow the same two strokes.`,
+      },
+      {
+        id: 'bare-radians',
+        tex: `$\\sin 2$ vs $\\sin 2°$`,
+        read: `sine of two — radians implied`,
+        means: `The invisible unit: a bare number means radians — dimensionless by construction, as **Radian Measurement** above shows, so nothing needs writing. $\\sin 2$ and $\\sin 2°$ are different numbers ($0.909$ versus $0.035$).`,
+        cases: `Exact work speaks in $\\pi$-multiples — $\\frac{\\pi}{6}$, $\\frac{3\\pi}{4}$, the dialect of the [unit circle](!/trigonometry/unit-circle); an explicit "rad" appears mainly in physics ($\\omega = 3$ rad/s), where dimensional bookkeeping demands it.`,
+        confusedWith: `Calculator state. On paper the notation carries the unit; in the machine only the mode setting does — a degree-mode $\\sin 2$ is silently wrong, with no error message to catch it.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
+  },
   obj3: {
     title: `Converting Between Degrees and Radians`,
     content: `The two systems are linked by a single relationship: a half rotation is simultaneously $180°$ and $\\pi$ radians. Every conversion follows from this.
@@ -983,6 +1021,25 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
     },
 
     // obj3: prose + standard-angles aggregation table
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
     {
         id:'3',
         title:sectionsContent.obj3.title,

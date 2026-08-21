@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -986,6 +987,42 @@ Cotangent equals zero where cosine equals zero: at $\\theta = \\frac{\\pi}{2} + 
     link: ``,
   },
 
+  notation: {
+    title: `Trigonometric Function Notation`,
+    lead: `Three conventions the six function pages lean on without pausing: the exponent that rides on the function name, the integer qualifier that turns one formula into a family, and the two step-sizes those families come in.`,
+    inherited: `The abbreviations $\\sin$ through $\\cot$ are owned by the [right triangle page](!/trigonometry/right-triangle#notation), $\\theta$ and bare-number radians by [angle measure](!/trigonometry/degrees-radians#notation); the interval and union marks of **Domain and Range Summary** below belong to [expressing domains](!/functions/domain#2).`,
+    entries: [
+      {
+        id: 'sin-squared',
+        tex: `$\\sin^2\\theta$`,
+        read: `sine squared theta`,
+        means: `Power-position shorthand: $\\sin^2\\theta$ means $(\\sin\\theta)^2$ — square the value, never the angle. The exponent rides on the function name to spare a pair of brackets, a habit born in identity-heavy work.`,
+        cases: `Any positive power works the same — $\\sin^3\\theta$, $\\sec^2\\theta$; squaring the angle needs explicit brackets, $\\sin(\\theta^2)$; calculus texts often revert to $(\\sin x)^2$ where the compact form gets risky.`,
+        confusedWith: `$\\sin^{-1}$. The one exponent the convention does not cover: $\\sin^{-1}x$ is the inverse function, not a reciprocal — the collision [inverse functions](!/trigonometry/inverse-functions#6) untangles.`,
+      },
+      {
+        id: 'n-in-z',
+        tex: `$n \\in \\mathbb{Z}$`,
+        read: `n an integer`,
+        means: `The standing qualifier that turns one formula into an infinite family: whatever precedes it holds for every integer value of $n$ at once. The membership sign and $\\mathbb{Z}$ are [set-theory marks](!/math-symbols/set-theory) on loan.`,
+        cases: `Attached after a comma to domain exclusions here — $\\theta \\neq \\frac{\\pi}{2} + n\\pi$, $n \\in \\mathbb{Z}$; the same device enumerates the general solutions of [equations](!/trigonometry/equations). "For every integer $n$", written in words, is the same statement.`,
+        confusedWith: `An unknown to solve for. Each choice of $n$ names one member of the family — dropping the qualifier silently collapses infinitely many angles into one.`,
+      },
+      {
+        id: 'pi-families',
+        tex: `$n\\pi$ · $\\frac{\\pi}{2} + n\\pi$`,
+        read: `integer multiples of pi; odd multiples of pi over two`,
+        means: `The two exclusion families of the quotient and reciprocal functions: $\\sin\\theta = 0$ exactly at $n\\pi$, $\\cos\\theta = 0$ exactly at $\\frac{\\pi}{2} + n\\pi$ — the asymptote lists running through **The Tangent Function** to **The Cotangent Function** above.`,
+        cases: `The coefficient on $n$ is the message: $+\\, n\\pi$ steps by half turns, $+\\, 2n\\pi$ by full turns — tangent's period-$\\pi$ facts use the first, sine's period-$2\\pi$ facts the second.`,
+        confusedWith: `Each other. $\\frac{\\pi}{2} + 2n\\pi$ (tops of the circle only) and $\\frac{\\pi}{2} + n\\pi$ (every vertical crossing) differ by half their points — misreading the step size names the wrong set.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
+  },
+
 
 
   obj7: {
@@ -1279,6 +1316,25 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
     },
 
     // obj7: prose + reciprocal/quotient identity aggregation table
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
     {
         id:'7',
         title:sectionsContent.obj7.title,

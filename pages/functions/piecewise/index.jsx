@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -254,26 +255,40 @@ Each piece can be any type of function — linear, quadratic, constant, radical,
     link: '',
   },
 
-  obj2: {
-    title: `Notation`,
-    content: `Piecewise functions use brace notation to display all pieces together. Each line shows a formula paired with its condition:
-
-$$f(x) = \\begin{cases} \\text{formula}_1 & \\text{if condition}_1 \\\\ \\text{formula}_2 & \\text{if condition}_2 \\\\ \\text{formula}_3 & \\text{if condition}_3 \\end{cases}$$
-
-The conditions specify which inputs use which formula. They typically involve inequalities: $x < 0$, $x \\geq 3$, $1 \\leq x < 4$. In [LaTeX](!/latex) source, the brace layout is produced by the cases environment.
-
-The conditions must be mutually exclusive — no input should satisfy more than one condition. Otherwise, the function would have two outputs for some inputs, violating the definition of a function.
-
-The conditions should cover the entire intended domain — every input should satisfy exactly one condition. Gaps in coverage leave the function undefined at some points.
-
-At boundary points, one condition includes the boundary (with $\\leq$ or $\\geq$) and the adjacent condition excludes it (with $<$ or $>$). This ensures the boundary belongs to exactly one piece.
-
-Example with three pieces:
-
-$$g(x) = \\begin{cases} 2x & \\text{if } x < -1 \\\\ x^2 + 1 & \\text{if } -1 \\leq x \\leq 2 \\\\ 5 & \\text{if } x > 2 \\end{cases}$$`,
-    before: ``,
-    after: ``,
-    link: '',
+  notation: {
+    title: `Piecewise Notation`,
+    lead: `One function, several formulas — held together by a single brace, split apart by a boundary handshake, and drawn with a two-dot code. The grammar rules (each input matches exactly one row) are what make the stack a function at all.`,
+    inherited: `$f(x)$ and evaluation come from [function notation](!/functions/basics#5); the inequality signs and chains in the conditions from [inequality notation](!/algebra/inequalities/linear#notation); the intervals they encode from [domain notation](!/functions/domain#2).`,
+    entries: [
+      {
+        id: 'cases-brace',
+        tex: `$\\begin{cases} 2x & x < 0 \\\\ 5 & x \\geq 0 \\end{cases}$`,
+        read: `f defined by cases`,
+        means: `The single left brace stacks formula–condition rows and means "use the row whose condition holds". No right brace ever closes it — the layout itself, produced by the @[cases]@ environment in [LaTeX](!/latex), is the notation.`,
+        cases: `Rows read "formula, if condition" — two rows or ten, the grammar is identical; the conditions must be mutually exclusive and cover the whole domain, or the stack stops defining a function.`,
+        confusedWith: `Set braces. The same glyph collects members in $\\{2, 5, 7\\}$ — there a brace pair encloses a [finite set](!/functions/range#2); here one unpaired brace selects a row. Twins in shape, strangers in meaning.`,
+      },
+      {
+        id: 'boundary-handshake',
+        tex: `$x < 1$ · $x \\geq 1$`,
+        read: `x below one; x at least one`,
+        means: `The boundary handshake: adjacent conditions split each cut point so it belongs to exactly one row — strict on one side, or-equal on the other. Which row owns the boundary is a decision the inequality symbols record.`,
+        cases: `Compound conditions chain — $1 \\leq x < 4$, the [chained inequality](!/algebra/inequalities/linear#notation) doing interval work inline; at evaluation time the handshake picks the piece, the drill of **Evaluating Piecewise Functions** below.`,
+        confusedWith: `Symmetric inclusion. Writing $x \\leq 1$ and $x \\geq 1$ on adjacent rows double-books the boundary — legal only when both formulas agree there, a silent contradiction when they do not.`,
+      },
+      {
+        id: 'dot-code',
+        tex: `$\\bullet$ · $\\circ$`,
+        read: `solid dot in, open dot out`,
+        means: `The graphical half of the handshake: a solid dot marks an included endpoint, an open circle an excluded one — the number-line code of [domain notation](!/functions/domain#2), promoted to curve endpoints in **Graphing Piecewise Functions** below.`,
+        cases: `At each jump of a discontinuous graph, one solid and one open dot share a vertical line — the picture of exactly-one-row membership; two solid dots stacked vertically draw something that fails to be a function.`,
+        confusedWith: `The composition ring. The open dot on a graph is a hole, not the $\\circ$ of [composition](!/functions/composition#2) — position separates them: one sits on a curve, the other between function names.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/functions`,
+    symbolsLabel: `All function symbols`,
+    parentHref: `/functions`,
+    parentLabel: `Functions`,
   },
 
   obj3: {
@@ -725,10 +740,21 @@ export default function PiecewisePage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

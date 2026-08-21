@@ -9,6 +9,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -703,6 +704,44 @@ The six ratios — three primary and three reciprocal — collect into one defin
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Trigonometric Ratio Notation`,
+    lead: `The subject's working marks are born on this page: three side labels that move with the angle, and six three-letter operator names. What they are **not** — products, cancellable factors — matters as much as what they are.`,
+    inherited: `The angle letter $\\theta$, the degree mark and radians are covered with [degrees and radians](!/trigonometry/degrees-radians); the inverse marks ($\\sin^{-1}$, arcsin) belong to [inverse functions](!/trigonometry/inverse-functions#6).`,
+    entries: [
+      {
+        id: 'side-labels',
+        tex: `$\\text{opp}$ · $\\text{adj}$ · $\\text{hyp}$`,
+        read: `opposite, adjacent, hypotenuse`,
+        means: `Labels, not names: opp and adj are assigned **relative to the chosen angle** and swap the moment you switch to the other acute angle — **Naming the Sides** above. Only hyp is absolute, fixed by the right angle.`,
+        cases: `Definitions abbreviate freely — $\\frac{\\text{opp}}{\\text{hyp}}$ in the ratio formulas; once general triangle-solving starts, single letters take over under the [triangle-labeling convention](!/trigonometry/sines-cosines-law) of side $a$ facing angle $A$.`,
+        confusedWith: `Fixed properties of the drawing. Reading "adjacent" as one particular leg of the figure is the classic setup error — the labels must be reassigned every time the reference angle changes.`,
+      },
+      {
+        id: 'sin-cos-tan',
+        tex: `$\\sin$ · $\\cos$ · $\\tan$`,
+        read: `sine, cosine, tangent`,
+        means: `Three-letter operator names, not products: $\\sin\\theta$ applies a function to $\\theta$ the way $f(x)$ does in [function notation](!/functions/basics#5) — nothing here multiplies. Print sets them upright (@[\\sin]@ in LaTeX); italic $sin$ is a typesetting error.`,
+        cases: `Parentheses are optional while the argument is a single symbol — $\\sin\\theta$ and $\\sin(\\theta)$ say the same thing; they return the moment the argument compounds: $\\sin(\\theta + \\phi)$, never $\\sin\\theta + \\phi$.`,
+        alsoWritten: `$\\operatorname{sen}$ — Spanish, Portuguese and Italian texts, from **seno**; $\\operatorname{tg}$ for tangent in Russian and Eastern European convention.`,
+        confusedWith: `A factor named sin. "Cancelling" $\\sin$ from $\\frac{\\sin\\alpha}{\\sin\\beta}$ to get $\\frac{\\alpha}{\\beta}$ is the subject's signature error — an operator without its argument is not a quantity, and $\\sin$ alone means nothing.`,
+      },
+      {
+        id: 'csc-sec-cot',
+        tex: `$\\csc$ · $\\sec$ · $\\cot$`,
+        read: `cosecant, secant, cotangent`,
+        means: `The reciprocal trio's abbreviations — **The Reciprocal Functions** above. The pairing is deliberately crosswise: $\\csc$ inverts $\\sin$ and $\\sec$ inverts $\\cos$ — the c-word goes with the s-word each time.`,
+        cases: `Squares attach to the abbreviation itself — the $\\sec^2\\theta$ and $\\csc^2\\theta$ of the [identities](!/trigonometry/identities), shorthand for $(\\sec\\theta)^2$.`,
+        alsoWritten: `$\\operatorname{cosec}$ — the British and Indian-curriculum spelling of cosecant; $\\operatorname{ctg}$ for cotangent in the same Eastern European texts that write $\\operatorname{tg}$.`,
+        confusedWith: `The wrong partner. "Sec pairs with sine" reads naturally and is false — the reciprocal of $\\sin$ is $\\csc$, never $\\sec$; the crosswise rule catches everyone exactly once.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
+  },
   obj4: {
     title: `Finding Missing Sides`,
     content: `When one acute angle and one side of a right triangle are known, the remaining two sides can be found using the trigonometric ratios. The strategy is to choose the ratio that connects the known side, the unknown side, and the given angle.
@@ -997,6 +1036,25 @@ export default function RightTrianglePage({
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

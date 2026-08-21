@@ -2,8 +2,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function ComplexMultiplicationVisualizer() {
+export default function ComplexMultiplicationVisualizer({ explanations }) {
   const [z1, setZ1] = useState({ re: 2, im: 1 });
   const [z2, setZ2] = useState({ re: -1, im: 2 });
   const [warning, setWarning] = useState(false);
@@ -52,6 +53,18 @@ export default function ComplexMultiplicationVisualizer() {
   const originSvg = toSvg(0, 0);
 
   const productVisible = Math.abs(product.re) <= range && Math.abs(product.im) <= range;
+
+  // Line 1: page-supplied per-state explanations, keyed by the preset pair the
+  // current factors match. Nothing renders when no explanations prop is passed.
+  const stateKey =
+    z1.re === 2 && z1.im === 1 && z2.re === -1 && z2.im === 2 ? 'general'
+    : z1.re === 1 && z1.im === 1 && z2.re === 1 && z2.im === -1 ? 'conjugateProduct'
+    : z1.re === 3 && z1.im === 0 && z2.re === 0 && z2.im === 2 ? 'realTimesImaginary'
+    : z1.re === 0 && z1.im === 1 && z2.re === 0 && z2.im === 1 ? 'iTimesI'
+    : z1.re === 2 && z1.im === 0 && z2.re === -3 && z2.im === 4 ? 'realScaling'
+    : null;
+  const stateExplanation =
+    explanations && stateKey ? explanations[stateKey] : null;
 
   const handlePointerDown = useCallback((which) => (e) => {
     setDragging(which);
@@ -433,6 +446,12 @@ export default function ComplexMultiplicationVisualizer() {
                 <strong>Multiplying by a real number</strong> just scales (stretches or compresses) without rotating. Try &ldquo;2(&minus;3+4i)&rdquo; &mdash; the angle stays the same, only the length doubles.
               </span>
             </div>
+            {stateExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.teal }}></span>
+                <span>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -462,7 +481,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1180px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -485,7 +506,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '624px 1fr',
+    gridTemplateColumns: 'minmax(560px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

@@ -418,14 +418,87 @@
           "entity": null,
           "sections": [],
           "status": "pending"
+        },
+        {
+          "term": "inclusion-exclusion principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Morgan's laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distributive laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
         }
       ],
       "diagramsModule": "app/components/venn-diagrams/3-sets/threeSetsVennDiagrams.js",
       "diagramStates": [
         "plain",
         "tripleIntersection",
-        "aUnionBintC"
-      ]
+        "aUnionBintC",
+        "states.set-a",
+        "states.set-b",
+        "states.set-c",
+        "states.universe",
+        "states.empty",
+        "states.a-comp",
+        "states.b-comp",
+        "states.c-comp",
+        "states.inter-abc",
+        "states.inter-ab",
+        "states.inter-ac",
+        "states.inter-bc",
+        "states.union-abc",
+        "states.union-ab",
+        "states.union-ac",
+        "states.union-bc",
+        "states.a-minus-b",
+        "states.a-minus-c",
+        "states.b-minus-a",
+        "states.b-minus-c",
+        "states.c-minus-a",
+        "states.c-minus-b",
+        "states.a-only-only",
+        "states.b-only-only",
+        "states.c-only-only",
+        "states.ab-minus-c",
+        "states.symdiff-ab",
+        "states.symdiff-abc",
+        "states.ab-not-c",
+        "states.ac-not-b",
+        "states.bc-not-a",
+        "states.a-and-bORc",
+        "states.aORb-and-c",
+        "states.a-or-bANDc",
+        "states.exactly-one",
+        "states.exactly-two",
+        "states.at-least-two",
+        "states.at-most-one",
+        "states.dm-union",
+        "states.dm-inter"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 40,
+        "sections": 57,
+        "anchors": 178,
+        "orphans": 0,
+        "notes": "Case A wiring (explanations prop into shared ExplanationsPanel of VennCoreEnhanced); 40-scenario catalog (page count correct); diagrams module extended with a generic 8-region painter (freeze) keyed by scenario id under 'states'; 5 new group sections, De Morgan group = existing section; counting-identities section bolds converted to member links."
+      }
     },
     "basic-identities": {
       "slug": "basic-identities",
@@ -698,6 +771,18 @@
           "entity": null,
           "sections": [],
           "status": "pending"
+        },
+        {
+          "term": "inclusion-exclusion principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "double complement",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
         }
       ],
       "diagramsModule": "app/components/venn-diagrams/twoSetsVennDiagrams.js",
@@ -712,8 +797,26 @@
         "subsetAinB",
         "plain",
         "regions",
-        "complementUnion"
-      ]
+        "complementUnion",
+        "setA",
+        "setB",
+        "universeAll",
+        "complementB",
+        "differenceBA",
+        "aUnionBcomp",
+        "acompUnionB",
+        "complementIntersection",
+        "subsetBinA"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-20",
+        "states": 19,
+        "sections": 36,
+        "anchors": 94,
+        "orphans": 0,
+        "notes": "Case A wiring (component already accepted explanations via ExplanationsPanel); 19 scenario states, 6 new group sections, De Morgan group = existing section; page prose count corrected 22 to 19 (FAQ/schema untouched)."
+      }
     },
     "two-sets-laws-venn": {
       "slug": "two-sets-laws-venn",
@@ -744,8 +847,76 @@
           "entity": null,
           "sections": [],
           "status": "pending"
+        },
+        {
+          "term": "idempotent laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commutative laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complement laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "material implication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
         }
-      ]
+      ],
+      "diagramsModule": "app/components/venn-diagrams/twoSetsLawsVennDiagrams.js",
+      "diagramStates": [
+        "idem-u",
+        "idem-i",
+        "comm-u",
+        "comm-i",
+        "id-u-e",
+        "id-i-u",
+        "ann-i",
+        "ann-u",
+        "cmp-u",
+        "cmp-i",
+        "dcmp",
+        "cmp-U",
+        "cmp-e",
+        "dm-u",
+        "dm-i",
+        "abs-u",
+        "abs-i",
+        "diff",
+        "diff-r",
+        "sd-1",
+        "sd-2",
+        "sd-c",
+        "cc-1",
+        "cc-2",
+        "cc-3",
+        "cc-4"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-20",
+        "states": 26,
+        "sections": 44,
+        "anchors": 118,
+        "orphans": 0,
+        "notes": "Case A wiring (explanations prop into shared ExplanationsPanel); 26-law catalog (page prose claimed 27 — corrected to 26, FAQ/schema untouched); new pair-diagram module renders LHS=RHS minis with match badge; 7 new group sections, De Morgan group = existing section."
+      }
     },
     "three-sets-laws-venn": {
       "slug": "three-sets-laws-venn",
@@ -776,8 +947,50 @@
           "entity": null,
           "sections": [],
           "status": "pending"
+        },
+        {
+          "term": "symmetric difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "set difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "lattice",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
         }
-      ]
+      ],
+      "diagramsModule": "app/components/venn-diagrams/3-sets/threeSetsLawsVennDiagrams.js",
+      "diagramStates": [
+        "assoc-u",
+        "assoc-i",
+        "assoc-sd",
+        "dist-i-over-u",
+        "dist-u-over-i",
+        "dm-u-3",
+        "dm-i-3",
+        "diff-over-u",
+        "diff-over-i",
+        "union-minus-c",
+        "inter-minus-c",
+        "nested-diff"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 12,
+        "sections": 25,
+        "anchors": 52,
+        "orphans": 0,
+        "notes": "Case A wiring; 12-law catalog (page count correct); new pair-diagram module with generic 8-region painter at mini scale (LHS=RHS + match badge); 1 new group section (De Morgan) — associative/distributive and difference groups served by existing sections whose lists became member links; page file carries a commented template head, all edits live-region-scoped."
+      }
     },
     "functions-types": {
       "slug": "types",
@@ -1871,6 +2084,1750 @@
           "status": "pending"
         }
       ]
+    },
+    "complex-explorer": {
+      "slug": "complex-explorer",
+      "name": "Complex Number Explorer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/complex-explorer/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexExplorerDiagrams.js",
+      "diagramStates": [
+        "origin",
+        "purelyReal",
+        "pureImaginary",
+        "quadrantI",
+        "quadrantII",
+        "quadrantIII",
+        "quadrantIV"
+      ],
+      "line1": {
+        "done": "2026-08-18",
+        "states": 7,
+        "sections": 18,
+        "anchors": 38,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Argand diagram",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadrant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pure imaginary number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "complex-conjugate": {
+      "slug": "complex-conjugate",
+      "name": "Complex Conjugate and Modulus Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/complex-conjugate/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/conjugateModulusDiagrams.js",
+      "diagramStates": [
+        "start",
+        "negativeReal",
+        "pureImaginary",
+        "purelyReal",
+        "thirdQuadrant",
+        "origin"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 6,
+        "sections": 16,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Argand diagram",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rationalizing complex denominators",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "purely imaginary number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "addition-subtraction": {
+      "slug": "addition-subtraction",
+      "name": "Complex Addition & Subtraction Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/addition-subtraction/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexAddSubDiagrams.js",
+      "diagramStates": [
+        "add",
+        "sub",
+        "both",
+        "mirror",
+        "axes",
+        "conjugatePair",
+        "mixed"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 7,
+        "sections": 14,
+        "anchors": 35,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex number addition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex number subtraction",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parallelogram rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vector addition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "triangle inequality",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distance between complex numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commutative property",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "multiplication": {
+      "slug": "multiplication",
+      "name": "Complex Multiplication Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/multiplication/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexMultiplicationDiagrams.js",
+      "diagramStates": [
+        "general",
+        "conjugateProduct",
+        "realTimesImaginary",
+        "iTimesI",
+        "realScaling"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 5,
+        "sections": 11,
+        "anchors": 23,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex multiplication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "FOIL",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distributive property",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "powers of i",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "scaling",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rationalizing complex denominators",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "division": {
+      "slug": "division",
+      "name": "Complex Division Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/division/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexDivisionDiagrams.js",
+      "diagramStates": [
+        "general",
+        "realDivision",
+        "imaginaryDivision",
+        "oneOverI",
+        "conjugateQuotient",
+        "mixed",
+        "divideByZero"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 7,
+        "sections": 12,
+        "anchors": 28,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rationalizing complex denominators",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "division by zero",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean triple",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex multiplication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "polar-rectangular": {
+      "slug": "polar-rectangular",
+      "name": "Polar-Rectangular Converter",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/polar-rectangular/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/polarRectangularDiagrams.js",
+      "diagramStates": [
+        "qi",
+        "qii",
+        "qiii",
+        "qiv",
+        "posImaginary",
+        "negReal"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 6,
+        "sections": 16,
+        "anchors": 38,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rectangular form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "atan2",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reference angle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "special angles",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadrant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "radian",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "euler-formula": {
+      "slug": "euler-formula",
+      "name": "Euler's Formula Explorer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/euler-formula/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/eulerFormulaDiagrams.js",
+      "diagramStates": [
+        "theta0",
+        "theta30",
+        "theta45",
+        "theta60",
+        "theta90",
+        "theta180",
+        "theta270",
+        "scaled"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 8,
+        "sections": 16,
+        "anchors": 40,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "radian",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "special angles",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cofunction identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Taylor series",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "roots of unity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "i-powers": {
+      "slug": "i-powers",
+      "name": "Powers of i Calculator",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/i-powers/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/iPowersDiagrams.js",
+      "diagramStates": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 4,
+        "sections": 14,
+        "anchors": 17,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "powers of i",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "remainder",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cyclic group",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiplicative inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "negative exponent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "zero exponent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "demoivre-visualizer": {
+      "slug": "demoivre-visualizer",
+      "name": "De Moivre's Theorem Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/demoivre-visualizer/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/deMoivreDiagrams.js",
+      "diagramStates": [
+        "squared",
+        "fourth",
+        "iCubed",
+        "eighth",
+        "inverse",
+        "twoTen",
+        "inward"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 7,
+        "sections": 13,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "roots of unity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "powers of i",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "negative exponent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential growth",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential decay",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trigonometric identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "distance-midpoint": {
+      "slug": "distance-midpoint",
+      "name": "Complex Distance & Midpoint Tool",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/distance-midpoint/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/distanceMidpointDiagrams.js",
+      "diagramStates": [
+        "general",
+        "originPair",
+        "symmetric",
+        "vertical",
+        "horizontal",
+        "coincident"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 6,
+        "sections": 13,
+        "anchors": 28,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "distance between complex numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "midpoint",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euclidean distance",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "locus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "circle equation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "metric",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex subtraction",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "section formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Argand plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "algebra-equation": {
+      "slug": "equation",
+      "name": "Equation Visual Explorer",
+      "section": "algebra",
+      "pagePath": "pages/algebra/visual-tools/equation/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "linear equation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadratic equation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cubic equation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "discriminant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sign chart",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiplicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "intermediate value theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "solution set",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadratic formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/algebra/equations/visualizer/equationVisualizerDiagrams.js",
+      "diagramStates": [
+        "lin-basic",
+        "lin-steep",
+        "lin-negative",
+        "lin-constant",
+        "quad-two",
+        "quad-one",
+        "quad-none",
+        "quad-high",
+        "cubic-three",
+        "cubic-one",
+        "cubic-shifted",
+        "abs-two",
+        "abs-one",
+        "abs-none"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 14,
+        "sections": 29,
+        "anchors": 65,
+        "orphans": 0,
+        "notes": "Case C wiring: additive explanations prop, stateKey by exact template value-match (special lin-constant a=0 state checked first), matched entry appended inside the Explanation card via processContent (Panels.jsx additive edit). Diagrams module ports the NumberLine pipeline (G frame, yRange, numeric root finder, marble at fresh-load x=0). 13 templates + 1 special state; 4 type-group sections."
+      }
+    },
+    "algebra-inequality": {
+      "slug": "inequality",
+      "name": "Inequality Visual Explorer",
+      "section": "algebra",
+      "pagePath": "pages/algebra/visual-tools/inequality/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "inequality",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sign chart",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polynomial inequality",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rational inequality",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pole",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiplicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "discriminant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "interval notation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams.js",
+      "diagramStates": [
+        "poly-three",
+        "poly-double",
+        "poly-cluster",
+        "quad-two",
+        "quad-none",
+        "quad-down",
+        "abs-centered",
+        "abs-shifted",
+        "abs-zero",
+        "rat-simple",
+        "rat-crossed",
+        "rat-adjacent",
+        "rad-basic",
+        "rad-shifted",
+        "rad-high",
+        "op-lt",
+        "op-le",
+        "op-gt",
+        "op-ge"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 19,
+        "sections": 35,
+        "anchors": 70,
+        "orphans": 0,
+        "notes": "Case C wiring, two-dimensional state (template + comparison operator, both panel entries can be active — addition-subtraction pattern). 15 templates + 4 operator states frozen on the default polynomial; operator group = existing Direction and Strictness section. Diagrams module ports the inequality NumberLine pipeline (crit-driven view range, percentile-clamped symmetric y-range, domain shading, open/closed endpoint circles, pole styling, marble at crit[0]-2). Family list in prose corrected (was linear/quadratic/polynomial/rational; actual tabs: polynomial/quadratic/absolute value/rational/radical)."
+      }
+    },
+    "algebra-completing-square": {
+      "slug": "completing-square",
+      "name": "Completing the Square Visualizer",
+      "section": "algebra",
+      "pagePath": "pages/algebra/visual-tools/completing-square/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "completing the square",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertex form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadratic formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "discriminant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "monic polynomial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "perfect square trinomial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertex",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "axis of symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "area model",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/algebra/visualizers/equations/completeTheSquareDiagrams.js",
+      "diagramStates": [
+        "step-start",
+        "step-factor",
+        "step-square",
+        "step-split",
+        "step-corner",
+        "step-gap",
+        "step-vertex",
+        "step-solve",
+        "ps-basic",
+        "ps-factored",
+        "ps-negative-b",
+        "ps-odd-b",
+        "ps-triple"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 13,
+        "sections": 24,
+        "anchors": 43,
+        "orphans": 0,
+        "notes": "Case C wiring, two-dimensional state (proof step + preset, both panel entries can be active; entries render under the diagram caption). 8 step states (factor-out step frozen on the a=2 preset, the rest on the default) + 5 preset states frozen at the gap stage. ZERO new group sections — existing Presets and The Geometric Diagram sections serve as groups, their bold lists converted to member links. Diagrams module ports the stage renderer verbatim (area-model palette, dashed corner, leader line, dimension bars); the live gap pulse animation renders static."
+      }
+    },
+    "algebra-polynomial-multiplication": {
+      "slug": "polynomial-multiplication",
+      "name": "Polynomial Multiplication Visualizer",
+      "section": "algebra",
+      "pagePath": "pages/algebra/visual-tools/polynomial-multiplication/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "polynomial multiplication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "FOIL",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "like terms",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distributive law",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sum of cubes",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "difference of squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "degree of a polynomial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "convolution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "factoring identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams.js",
+      "diagramStates": [
+        "ps-foil",
+        "ps-signs",
+        "ps-3x2",
+        "ps-cubes",
+        "ps-3x3"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 5,
+        "sections": 16,
+        "anchors": 15,
+        "orphans": 0,
+        "notes": "Case C wiring keyed by activePresetIdx (the component already nulls it on any manual edit, so custom polynomials render no extra entry); entry appended under the tool's explain box. 5 preset states frozen at completion (grid fully delivered + buckets + result). Existing Presets section = group (bold list converted to member links); zero new group sections. Diagrams module recomputes cells/buckets/result with the component's own pure logic; exponents render as unicode superscripts."
+      }
+    },
+    "algebra-binomial-coefficient": {
+      "slug": "binomial-coefficient",
+      "name": "Binomial Coefficient Visualizer",
+      "section": "algebra",
+      "pagePath": "pages/algebra/visual-tools/binomial-coefficient/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "binomial coefficient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pascal's triangle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "binomial theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pascal's rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "combinations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "factorial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "binary choice tree",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "lattice paths",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "induction",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams.js",
+      "diagramStates": [
+        "view-tree",
+        "view-distribution",
+        "view-pascal",
+        "tree-n1",
+        "pascal-n5"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 5,
+        "sections": 13,
+        "anchors": 21,
+        "orphans": 0,
+        "notes": "Case C wiring keyed by view + n (n-boundary states take precedence: tree at n=1, Pascal at n=5); entry appended under the active view. The 3 view states mapped onto EXISTING dedicated sections (Decision Tree View / Distribution View / Pascal Paths View) — new after-texts authored, units inserted; 2 new sections for the n-boundaries. Groups: existing The Three Views + Adjusting n sections. Diagrams module ports buildTree/pascal layouts and palette; the distribution frame freezes the completed run (last combo locked, pellets sorted); pascal frames freeze the hover engaged with the component's per-path 1.5px fan-out."
+      }
+    },
+    "algebra-powers-table": {
+      "slug": "powers-table",
+      "name": "Powers Table",
+      "section": "algebra",
+      "pagePath": "pages/algebra/visual-tools/powers-table/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "exponents",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential growth",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "zero power rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "place value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "scientific notation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pigeonhole principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "binary representation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logarithms",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/visualizations/algebra/powers/powersTableDiagrams.js",
+      "diagramStates": [
+        "b2-default",
+        "b2-deep",
+        "b5-cap",
+        "b7",
+        "b10"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 5,
+        "sections": 12,
+        "anchors": 19,
+        "orphans": 0,
+        "notes": "Case C wiring keyed by exact (base, maxPower) match on five named configurations; entry renders below the tool's pattern note. 2 states mapped onto EXISTING sections (Pushing to Maximum Powers = base-2 depth-16; Spotting Last-Digit Patterns = base 7), 3 new sections (base-2 default, base 10, base 5 at the cap). Group = existing Exploring Different Bases. Page's numeric-id auto-map (Object.keys) replaced with explicit slug rows. Diagrams module recomputes BigInt values with thousand separators and ports the table chrome (blue header band, zebra rows, abbreviated expressions past exponent 10)."
+      }
+    },
+    "algebra-identities": {
+      "slug": "identities",
+      "name": "Algebraic Identities Visualizers (4 views)",
+      "section": "algebra",
+      "pagePath": "pages/algebra/visual-tools/identities/[view].jsx",
+      "relatedTerms": [
+        {
+          "term": "algebraic identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square of a sum",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square of a difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square of a trinomial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "difference of squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "perfect square trinomial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inclusion-exclusion principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "FOIL",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "factoring",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "area model",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commutativity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/algebra/identities/identityDiagrams.js",
+      "diagramStates": [
+        "sum-1", "sum-2", "sum-3", "sum-4",
+        "diff-1", "diff-2", "diff-3", "diff-4",
+        "tri-1", "tri-2", "tri-3", "tri-4",
+        "dos-1", "dos-2", "dos-3", "dos-4"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-22",
+        "states": 16,
+        "sections": 32,
+        "anchors": 60,
+        "orphans": 0,
+        "notes": "STRUCTURAL SPECIAL CASE: one dynamic [view].jsx serving 4 routes (square-of-sum, square-of-difference, square-of-trinomial, difference-of-squares), each with its own 4-step visualizer component. States = 4 proof steps x 4 views, ALL mapped onto existing per-step sections (obj2..obj5 of each view) — zero new sections; obj1 identity-at-a-glance = per-view group. Case C wiring in each of the 4 components (explanations keyed step-1..4 by stepNumber, entry under the Steps list); per-view units/explanations selected by params.view in getStaticProps. Shared numeric-id section builder replaced with a per-view slug map (slugs repeat across views — separate URLs). One diagrams module ports all four renderers; oscillating stages (diff/tri step 4) frozen at full separation, dos step 4 frozen settled with the shifted layout. Companion hub page identities/index.jsx untouched (no tool on it). Pre-edit backups pending Bash recovery via git show HEAD (files verified clean at session start)."
+      }
     }
   },
   "$stubTemplate": {

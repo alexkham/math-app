@@ -470,6 +470,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import ComplexDivisionVisualizer from '../../../../app/components/calculators/complex-numbers/ComplexDivisionVisualizer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import complexDivisionDiagrams from '../../../../app/components/calculators/complex-numbers/complexDivisionDiagrams'
 
 export async function getStaticProps(){
 
@@ -497,7 +499,7 @@ export async function getStaticProps(){
       title:`Getting Started — Set Numerator and Denominator`,
       content:`Two draggable points represent $z_1$ (navy, the numerator) and $z_2$ (orange, the denominator). Drag either point on the complex plane and the green quotient vector $z_1 / z_2$ updates instantly, along with both step-by-step solution panels.
 
-You can also type values directly into the input fields — each has separate real and imaginary inputs accepting $-10$ to $10$. Six presets are available below the plane: $(4+2i)/(1-i)$, $6/3$, $4i/2i$, $1/i$, $(3+4i)/(3-4i)$, and $(-2+6i)/(1+2i)$. Click **Random** to generate a random pair (the denominator is guaranteed non-zero).
+You can also type values directly into the input fields — each has separate real and imaginary inputs accepting $-10$ to $10$. Six presets are available below the plane: $(4+2i)/(1-i)$, $6/3$, $4i/2i$, $1/i$, $(3+4i)/(3-4i)$, and $(-2+6i)/(1+2i)$. Click **Random** to generate a random pair (the denominator is guaranteed non-zero). Each preset has a dedicated section below with the tool frozen on it: the [general case](!#the-three-angle-arcs-subtraction-in-action), [real division](!#division-of-pure-real-numbers), [imaginary division](!#division-of-pure-imaginary-numbers), [1/i](!#dividing-by-i-the-90-rotation), the [conjugate quotient](!#conjugate-pair-division), and the [clean-division pair](!#the-clean-division-preset).
 
 Each input panel displays the complex number in rectangular form alongside its modulus and argument, so you can follow both the algebraic and geometric methods simultaneously.`,
       before:``,
@@ -512,7 +514,9 @@ Division **subtracts** angles — the opposite of multiplication, which adds the
 
 Click $1/i$ for the most striking case. The numerator $z_1 = 1$ has angle $0°$ and the denominator $z_2 = i$ has angle $90°$. The quotient angle is $0° - 90° = -90°$, placing the result at $-i$ on the negative imaginary axis. Dividing by $i$ rotates $90°$ clockwise — the reverse of multiplying by $i$.`,
       before:``,
-      after:``,
+      after:`The frozen frame completes the numbers: $(4+2i)/(1-i) = 1+3i$, with modulus $\\sqrt{20}/\\sqrt{2} = \\sqrt{10}$. Both halves of the [polar method](!#the-polar-geometric-method) are visible at once — the teal vector is shorter than the navy numerator by the denominator's length, and higher than it by the denominator's (negative) angle.
+
+The arc picture rewards attention: because the orange arc dips below the axis, the teal arc reaches *above* the navy one. Subtraction of angles, like subtraction of numbers, gets bigger when what you subtract is negative.`,
       link:'',
     },
 
@@ -526,7 +530,9 @@ Now change $z_2$ to $-3$. The denominator angle becomes $180°$, so the quotient
 
 These real-only cases produce the cleanest SVG snapshots: all vectors collinear along the real axis, with the quotient either shorter or longer than the numerator depending on whether $|z_2| > 1$ or $|z_2| < 1$.`,
       before:``,
-      after:``,
+      after:`Note what the frozen frame does *not* contain: not a single angle arc. All three arguments are $0°$, so the entire [angle-subtraction machinery](!#the-three-angle-arcs-subtraction-in-action) sits idle — complex division restricted to the positive real axis is just the division you learned in school, and the picture honestly shows nothing more.
+
+That makes this preset the baseline for every other one on this page: each of the others changes exactly one thing about this frame — an angle here, an axis there — and the arcs light up accordingly.`,
       link:'',
     },
 
@@ -538,7 +544,9 @@ The result is $4i / 2i = 2$ — a real number. The imaginary units cancel, leavi
 
 This is a general rule: dividing two pure imaginary numbers always yields a real result because both arguments are $\\pm 90°$ and their difference is $0°$ or $180°$. Try $4i / (-2i)$: the angles are $90°$ and $-90°$, giving a quotient angle of $180°$, so the result is $-2$ — a negative real number.`,
       before:``,
-      after:``,
+      after:`The frozen frame is [real division](!#division-of-pure-real-numbers)'s picture rotated a quarter turn — and then un-rotated by the division itself. Both inputs stand on the imaginary axis, their $90°$ arcs coincide, and the cancellation drops the quotient back onto the real axis.
+
+Algebraically the same event reads $\\frac{4i}{2i} = \\frac{4}{2} \\cdot \\frac{i}{i} = 2$: the imaginary units divide out. Whenever numerator and denominator share a direction, that shared direction cancels — direction is a factor, and division removes common factors.`,
       link:'',
     },
 
@@ -552,7 +560,9 @@ Dividing by $i$ is the inverse of multiplying by $i$. Multiplication by $i$ rota
 
 Try changing $z_1$ to other values while keeping $z_2 = i$. Every quotient is the numerator rotated $90°$ clockwise. Setting $z_1 = 1 + i$ gives $(1+i)/i = 1 - i$, confirmed by the green vector appearing in Quadrant IV.`,
       before:``,
-      after:``,
+      after:`In the frozen frame the teal arc is the only one sweeping *below* the axis — the visual signature of a negative quotient angle. No navy arc exists (the numerator $1$ has angle zero), so the entire event is the orange $90°$ being subtracted.
+
+Every modulus in the frame is $1$, which makes this the division counterpart of the multiplication fact $i^2 = -1$: pure rotation, no scaling. One quarter-turn forward, one quarter-turn back — $(z \\cdot i)/i$ returns home, which is exactly what division being the inverse operation means. The full arc anatomy is described in [the three angle arcs](!#the-three-angle-arcs-subtraction-in-action).`,
       link:'',
     },
 
@@ -566,7 +576,9 @@ In the visualizer, the green quotient point sits at distance $1$ from the origin
 
 This property is used in signal processing to extract phase information. Dividing a complex number by its conjugate strips away the magnitude and doubles the phase angle.`,
       before:``,
-      after:``,
+      after:`Worked through the [conjugate multiplication method](!#the-conjugate-multiplication-method), the frozen values give $\\frac{(3+4i)(3+4i)}{25} = \\frac{-7+24i}{25}$ — and $\\left(\\frac{7}{25}\\right)^2 + \\left(\\frac{24}{25}\\right)^2 = 1$ exactly. The $7$–$24$–$25$ Pythagorean triple keeps the quotient pinned to the unit circle.
+
+The frame shows the tool at its most compressed: the quotient point sits just one unit from the origin, inside its own angle arcs, while the two input points tower above and below it at distance $5$. Big inputs, small output — but the small output carries all the angular information doubled.`,
       link:'',
     },
 
@@ -580,7 +592,9 @@ The Random button deliberately prevents this by ensuring $z_2$ has at least one 
 
 This is the only configuration where the tool cannot display a result. Every other combination of $z_1$ and $z_2$ (including $z_1 = 0$, which gives quotient $0$) produces a valid output.`,
       before:``,
-      after:``,
+      after:`The frozen frame shows the geometry of the impossibility: the orange denominator point has collapsed onto the origin, its vector has no length and no direction — and division needs both. The polar recipe "divide by $|z_2|$, subtract $\\theta_2$" fails twice over: division by zero on the modulus, and no angle to subtract.
+
+Contrast this with the numerator: $0/z_2 = 0$ is perfectly fine, because scaling any direction by zero is unambiguous. The asymmetry between numerator and denominator zero is the same one real arithmetic has — inherited, not new. Everything else about the plane still works, as the [getting started](!#getting-started-set-numerator-and-denominator) controls show: drag $z_2$ anywhere off the origin and the quotient snaps back into existence.`,
       link:'',
     },
 
@@ -667,6 +681,18 @@ Finally, the "dividing conjugates" preset here — $(3+4i)/(3-4i)$ — always la
   after:``,
   link:'',
 },
+
+    obj12:{
+      title:`The Clean-Division Preset`,
+      content:`The preset $(-2+6i)/(1+2i)$ is the page's showcase of a division that comes out exact: complex integers in, complex integers out — the quotient is precisely $2 + 2i$.`,
+      before:``,
+      after:`Run it through the [conjugate multiplication method](!#the-conjugate-multiplication-method): multiplying by $\\frac{1-2i}{1-2i}$ gives denominator $|1+2i|^2 = 5$ and numerator $(-2+6i)(1-2i) = -2+4i+6i+12 = 10+10i$. The fraction $\\frac{10+10i}{5}$ reduces without remainder.
+
+The polar check is just as clean: moduli $\\sqrt{40} \\div \\sqrt{5} = \\sqrt{8} = 2\\sqrt{2}$, and angles $108.4° - 63.4° = 45°$ — exactly the diagonal direction of $2+2i$. In the frozen frame the teal [quotient arc](!#the-three-angle-arcs-subtraction-in-action) stops at the perfect eighth-turn.
+
+Divisions this tidy are the exception, not the rule — nudge either input by $0.1$ and the quotient sprouts decimals immediately. That fragility is worth seeing once: complex divisibility is exactly as delicate as integer divisibility.`,
+      link:'',
+    },
 
   }
 
@@ -782,12 +808,45 @@ Finally, the "dividing conjugates" preset here — $(3+4i)/(3-4i)$ — always la
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plane + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    general: demoUnitFrame({ svg: complexDivisionDiagrams.general, caption: '(4+2i)/(1&#8722;i), frozen',
+      text: 'Subtracting the &#8722;45° denominator angle swings the quotient up to 71.6°: the teal 1 + 3i sits higher than either input. Dividing by a downward-pointing number rotates the result upward.' }),
+    realDivision: demoUnitFrame({ svg: complexDivisionDiagrams.realDivision, caption: '6/3, frozen',
+      text: 'Ordinary division rendered on the complex plane: all three vectors flat on the real axis, no angle arcs anywhere, and the quotient 2 simply shorter than the numerator.' }),
+    imaginaryDivision: demoUnitFrame({ svg: complexDivisionDiagrams.imaginaryDivision, caption: '4i/2i, frozen',
+      text: 'Two vertical inputs, one horizontal output: the 90° angles cancel, the imaginary units divide out, and the real number 2 remains.' }),
+    oneOverI: demoUnitFrame({ svg: complexDivisionDiagrams.oneOverI, caption: '1/i, frozen',
+      text: 'The teal arc sweeps 90° clockwise below the axis — dividing by i is the inverse quarter-turn, landing 1 on &#8722;i with every modulus equal to 1.' }),
+    conjugateQuotient: demoUnitFrame({ svg: complexDivisionDiagrams.conjugateQuotient, caption: '(3+4i)/(3&#8722;4i), frozen',
+      text: 'Equal moduli cancel to exactly 1, so the quotient rides the unit circle close to the origin while the inputs tower at distance 5; the angle doubles to 106.3° — pure rotation, no scaling.' }),
+    mixed: demoUnitFrame({ svg: complexDivisionDiagrams.mixed, caption: '(&#8722;2+6i)/(1+2i), frozen',
+      text: 'A clean division: 108.4° &#8722; 63.4° = 45° and &#8730;40 &#247; &#8730;5 = 2&#8730;2, landing exactly on 2 + 2i — integers in, integers out.' }),
+    divideByZero: demoUnitFrame({ svg: complexDivisionDiagrams.divideByZero, caption: 'z&#x2082; = 0, frozen',
+      text: 'The orange denominator point has collapsed onto the origin: no quotient vector, no teal arc — the one configuration of this tool with no answer to draw.' }),
+  };
+
+  // Per-state additions for the tool's Key Ideas panel, keyed by the preset
+  // pair currently loaded (see ComplexDivisionVisualizer).
+  const explanations = {
+    general: 'Subtracting a negative angle adds: the −45° denominator swings this quotient up to 71.6°. [Learn more about the angle arcs](!#the-three-angle-arcs-subtraction-in-action) · [Getting started](!#getting-started-set-numerator-and-denominator)',
+    realDivision: 'With every angle zero, this is the division you learned in school, drawn on the plane. [Learn more about real division](!#division-of-pure-real-numbers) · [Getting started](!#getting-started-set-numerator-and-denominator)',
+    imaginaryDivision: 'The imaginary units cancel: two vertical inputs make a horizontal output. [Learn more about imaginary division](!#division-of-pure-imaginary-numbers) · [Getting started](!#getting-started-set-numerator-and-denominator)',
+    oneOverI: 'Dividing by i is the clockwise quarter-turn: 1/i = −i. [Learn more about dividing by i](!#dividing-by-i-the-90-rotation) · [Getting started](!#getting-started-set-numerator-and-denominator)',
+    conjugateQuotient: 'Moduli cancel to 1 and the angle doubles — conjugate quotients live on the unit circle. [Learn more about conjugate quotients](!#conjugate-pair-division) · [Getting started](!#getting-started-set-numerator-and-denominator)',
+    mixed: 'A division that comes out exact: 2 + 2i, with the 45° quotient arc to prove it. [Learn more about this preset](!#the-clean-division-preset) · [Getting started](!#getting-started-set-numerator-and-denominator)',
+    divideByZero: 'The single undefined point of complex division — every other z₂ works. [Learn more about dividing by zero](!#the-divide-by-zero-state) · [Getting started](!#getting-started-set-numerator-and-denominator)',
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "Complex Division Visualizer | Learn Math Class",
         description: "Divide complex numbers visually with draggable vectors. See conjugate multiplication, polar angle subtraction, and step-by-step solutions on the complex plane.",
@@ -800,12 +859,12 @@ Finally, the "dividing conjugates" preset here — $(3+4i)/(3-4i)$ — always la
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
     {
-        id:'1',
+        id:'getting-started-set-numerator-and-denominator',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -813,55 +872,77 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'2',
+        id:'the-three-angle-arcs-subtraction-in-action',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key='u-general' dangerouslySetInnerHTML={{ __html: stateUnits.general }} />,
+          sectionsContent.obj2.after,
         ]
     },
     {
-        id:'3',
+        id:'division-of-pure-real-numbers',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key='u-realDivision' dangerouslySetInnerHTML={{ __html: stateUnits.realDivision }} />,
+          sectionsContent.obj3.after,
         ]
     },
     {
-        id:'4',
+        id:'division-of-pure-imaginary-numbers',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key='u-imaginaryDivision' dangerouslySetInnerHTML={{ __html: stateUnits.imaginaryDivision }} />,
+          sectionsContent.obj4.after,
         ]
     },
     {
-        id:'5',
+        id:'dividing-by-i-the-90-rotation',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key='u-oneOverI' dangerouslySetInnerHTML={{ __html: stateUnits.oneOverI }} />,
+          sectionsContent.obj5.after,
         ]
     },
     {
-        id:'6',
+        id:'conjugate-pair-division',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key='u-conjugateQuotient' dangerouslySetInnerHTML={{ __html: stateUnits.conjugateQuotient }} />,
+          sectionsContent.obj6.after,
         ]
     },
     {
-        id:'7',
+        id:'the-clean-division-preset',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-mixed' dangerouslySetInnerHTML={{ __html: stateUnits.mixed }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'the-divide-by-zero-state',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key='u-divideByZero' dangerouslySetInnerHTML={{ __html: stateUnits.divideByZero }} />,
+          sectionsContent.obj7.after,
         ]
     },
     {
-        id:'8',
+        id:'off-screen-quotients-and-the-zoom-inset',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -869,7 +950,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'9',
+        id:'the-conjugate-multiplication-method',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -877,7 +958,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'10',
+        id:'the-polar-geometric-method',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -885,7 +966,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
@@ -953,8 +1034,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Division</h1>
    <br/>
-   <SiblingsNav>
-   <ComplexDivisionVisualizer/>
+   <SiblingsNav maxWidth='100%'>
+   <ComplexDivisionVisualizer explanations={explanations}/>
    </SiblingsNav>
    <br/>
    <SectionTableOfContents sections={genericSections}

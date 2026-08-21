@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -502,26 +503,41 @@ In practice, these are rarely evaluated directly. When an expression involves $\
     after: ``,
     link: ``,
   },
-  obj6: {
-    title: `Notation: $\\sin^{-1}(x)$ vs $\\frac{1}{\\sin(x)}$`,
-    content: `The notation $\\sin^{-1}(x)$ is standard for the inverse sine function — it means the same thing as $\\arcsin(x)$. This is a potential source of serious confusion because of how the superscript $-1$ is used elsewhere in trigonometry.
-
-When we write $\\sin^2(x)$, the exponent 2 means squaring: $\\sin^2(x) = (\\sin(x))^2$. By this pattern, $\\sin^{-1}(x)$ should mean $(\\sin(x))^{-1} = \\frac{1}{\\sin(x)} = \\csc(x)$. But it does not. In the specific case of the exponent $-1$, the notation is hijacked to mean the inverse function rather than the reciprocal.
-
-This is an inconsistency in mathematical notation, not a logical rule. The exponent $-1$ on a function name means "inverse function" by convention, overriding the algebraic meaning of raising to the power $-1$. It applies to all six trigonometric functions: $\\cos^{-1}(x) = \\arccos(x)$, $\\tan^{-1}(x) = \\arctan(x)$, and so on.
-
-To avoid ambiguity:
-
-- $\\sin^{-1}(x)$ or $\\arcsin(x)$ = the inverse function (returns an angle)
-- $(\\sin(x))^{-1}$ or $\\csc(x)$ = the reciprocal (returns a number)
-- $\\frac{1}{\\sin(x)}$ = the reciprocal, written unambiguously
-
-The $\\arcsin$ / $\\arccos$ / $\\arctan$ notation eliminates the confusion entirely and is preferred in any context where the $-1$ superscript might be misread. Many textbooks and scientific publications use the "arc" notation exclusively for this reason. Both conventions, with the LaTeX code for each, are catalogued among the [trigonometry symbols](!/math-symbols/trigonometry).
-
-The two interpretations of the −1 superscript — inverse function vs. reciprocal — contrast cleanly in the side-by-side table below.`,
-    before: ``,
-    after: ``,
-    link: ``,
+  notation: {
+    title: `Inverse Function Notation`,
+    lead: `The most collided superscript in the subject, the arc-names that dodge it, and the spellings machines use. The table below the entries settles every form side by side.`,
+    inherited: `$\\sin$ through $\\cot$ come from the [right triangle page](!/trigonometry/right-triangle#notation); the honest power $\\sin^2\\theta$ that makes $\\sin^{-1}$ treacherous is owned by [function notation](!/trigonometry/functions#notation); the interval marks of the ranges by [expressing domains](!/functions/domain#2).`,
+    entries: [
+      {
+        id: 'sin-inverse',
+        tex: `$\\sin^{-1}(x)$`,
+        read: `inverse sine of x; sine inverse`,
+        means: `An inconsistency by convention: every other exponent on a function name is a power — $\\sin^2 x = (\\sin x)^2$ — but $-1$ alone means the inverse function. $\\sin^{-1}(x) = \\arcsin(x)$, an angle out, never $\\frac{1}{\\sin x}$; the override applies to all six functions.`,
+        cases: `The corner mark's fourth career: reciprocals on [numbers](!/algebra/powers/negative#notation), inversion on [complex numbers](!/complex-numbers/multiplicative-inverse#notation) and [matrices](!/linear-algebra/matrix/inverse#notation) — on functions it flips the map, and only the base tells you which reading applies.`,
+        confusedWith: `$\\csc x$. By the power pattern, $\\sin^{-1}$ "should" be the reciprocal — writing the reciprocal safely takes brackets, $(\\sin x)^{-1}$, or the honest $\\frac{1}{\\sin x}$; exactly the split the table below works through.`,
+      },
+      {
+        id: 'arc-names',
+        tex: `$\\arcsin$ · $\\arccos$ · $\\arctan$`,
+        read: `arcsine, arccosine, arctangent`,
+        means: `The collision-free spelling: "the arc whose sine is $x$" — on the unit circle the answer-angle is literally an arc length, so the prefix means what it says. Publications wanting zero ambiguity use the arc-names exclusively; both conventions are catalogued among the [trigonometry symbols](!/math-symbols/trigonometry).`,
+        cases: `The reciprocal trio extends the pattern — $\\operatorname{arcsec}$, $\\operatorname{arccsc}$, $\\operatorname{arccot}$ — with conventions that vary by textbook, as **Inverse Reciprocal Functions** above warns.`,
+        alsoWritten: `$\\operatorname{Arcsin}$ — capital-A for the principal branch in older texts, the same capitalization trick complex analysis still uses for its principal argument.`,
+        confusedWith: `An arc times a sine. The prefix is part of one operator name — reading "arc · sin" as a product repeats the cancellation error that function abbreviations always invite.`,
+      },
+      {
+        id: 'machine-spellings',
+        tex: `$\\operatorname{asin}$ · $\\operatorname{atan2}$`,
+        read: `a-sine; a-tan-two`,
+        means: `The machine spellings: programming languages shorten the arc-names to @[asin]@, @[acos]@, @[atan]@, while calculator buttons keep $\\sin^{-1}$ — two devices, two conventions, one function.`,
+        cases: `$\\operatorname{atan2}(y, x)$ is the special one: two arguments, full-quadrant answer — the programming spelling of the [principal argument](!/complex-numbers/trigonometric-form#notation), with $y$ before $x$ in the argument list.`,
+        confusedWith: `$\\arctan(y/x)$. The single-argument version cannot tell opposite quadrants apart — $\\operatorname{atan2}(1, -1)$ and $\\arctan(-1)$ differ by $\\pi$; the two-argument form exists precisely to fix that.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
   },
   obj7: {
     title: `Evaluating Inverse Trigonometric Functions`,
@@ -775,10 +791,21 @@ export default function InverseFunctionsPage({
     },
     {
         id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj6.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,
         ]

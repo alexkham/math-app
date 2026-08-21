@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
+import { processContent } from "../../../utils/contentProcessor";
 
-export default function SquareOfSum() {
+export default function SquareOfSum({ explanations = null }) {
   const [stage, setStage] = useState(0);
   const [subT, setSubT] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -537,6 +538,13 @@ export default function SquareOfSum() {
                 );
               })}
             </ol>
+            {explanations && explanations[`step-${stepNumber}`] && (
+              <div style={{ marginTop: 14, paddingTop: 12, borderTop: "1px solid #ddd",
+                            fontSize: 15, lineHeight: 1.55, color: "#444",
+                            fontFamily: "system-ui, sans-serif" }}>
+                {processContent(explanations[`step-${stepNumber}`])}
+              </div>
+            )}
           </aside>
         </div>
       </div>

@@ -2,8 +2,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function ComplexDivisionVisualizer() {
+export default function ComplexDivisionVisualizer({ explanations }) {
   const [z1, setZ1] = useState({ re: 4, im: 2 });
   const [z2, setZ2] = useState({ re: 1, im: -1 });
   const [warning, setWarning] = useState(false);
@@ -60,6 +61,21 @@ export default function ComplexDivisionVisualizer() {
   const originSvg = toSvg(0, 0);
 
   const quotientVisible = !divideByZero && Math.abs(quotient.re) <= range && Math.abs(quotient.im) <= range;
+
+  // Line 1: page-supplied per-state explanations, keyed by the preset pair
+  // the current values match (or the divide-by-zero configuration). Nothing
+  // renders when no explanations prop is passed — defaults stay intact.
+  const stateKey =
+    divideByZero ? 'divideByZero'
+    : z1.re === 4 && z1.im === 2 && z2.re === 1 && z2.im === -1 ? 'general'
+    : z1.re === 6 && z1.im === 0 && z2.re === 3 && z2.im === 0 ? 'realDivision'
+    : z1.re === 0 && z1.im === 4 && z2.re === 0 && z2.im === 2 ? 'imaginaryDivision'
+    : z1.re === 1 && z1.im === 0 && z2.re === 0 && z2.im === 1 ? 'oneOverI'
+    : z1.re === 3 && z1.im === 4 && z2.re === 3 && z2.im === -4 ? 'conjugateQuotient'
+    : z1.re === -2 && z1.im === 6 && z2.re === 1 && z2.im === 2 ? 'mixed'
+    : null;
+  const stateExplanation =
+    explanations && stateKey ? explanations[stateKey] : null;
 
   const handlePointerDown = useCallback((which) => (e) => {
     setDragging(which);
@@ -474,6 +490,12 @@ export default function ComplexDivisionVisualizer() {
                 <strong>Dividing conjugates</strong> always gives a result on the unit circle. Try &ldquo;(3+4i)/(3&minus;4i)&rdquo; &mdash; since |z| = |z&#x305;|, the magnitudes cancel to 1, and only the angle doubles.
               </span>
             </div>
+            {stateExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.teal }}></span>
+                <span>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -503,7 +525,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1180px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -526,7 +550,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '624px 1fr',
+    gridTemplateColumns: 'minmax(560px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

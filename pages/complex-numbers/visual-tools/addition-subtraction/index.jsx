@@ -8,6 +8,8 @@ import Head from 'next/head'
 
 import ComplexAdditionSubtractionVisualizer from '@/app/components/calculators/complex-numbers/ComplexAdditionSubtractionVisualizer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import complexAddSubDiagrams from '../../../../app/components/calculators/complex-numbers/complexAddSubDiagrams'
 
 
 
@@ -40,9 +42,9 @@ export async function getStaticProps(){
       title:`Getting Started — Drag Two Points`,
       content:`Two draggable points sit on the complex plane: $z_1$ (navy) and $z_2$ (orange). Grab either point and move it anywhere within the $\\pm 5$ grid to see the addition and subtraction results update instantly.
 
-Alternatively, type precise values into the input fields on the right panel — each point has separate real and imaginary inputs accepting values from $-5$ to $5$ in steps of $0.1$. Five preset configurations are available below the plane: $(3+i)$ & $(1+3i)$, $(2+2i)$ & $(-2+2i)$, $4$ & $3i$, a conjugate pair, and $(-1+3i)$ & $(2-i)$. Click **Random** to generate two arbitrary points.
+Alternatively, type precise values into the input fields on the right panel — each point has separate real and imaginary inputs accepting values from $-5$ to $5$ in steps of $0.1$. Five preset configurations are available below the plane: $(3+i)$ & $(1+3i)$, $(2+2i)$ & $(-2+2i)$, $4$ & $3i$, a conjugate pair, and $(-1+3i)$ & $(2-i)$. Click **Random** to generate two arbitrary points. Each preset has a dedicated section below with the tool frozen on it: the [mirror pair](!#the-mirror-pair-preset), the [axis pair](!#the-axis-pair-preset), the [conjugate pair](!#conjugate-pairs-in-addition-and-subtraction), and the [mixed-signs pair](!#the-mixed-signs-preset).
 
-The **Show** toggle lets you display both operations simultaneously, or isolate addition or subtraction for a cleaner view. Start with "Both" to compare the two operations side by side, then switch to "Addition" or "Subtraction" to focus on the geometry of each one individually.`,
+The **Show** toggle lets you display both operations simultaneously, or isolate addition or subtraction for a cleaner view. Start with [Both](!#both-mode-comparing-addition-and-subtraction) to compare the two operations side by side, then switch to [Addition](!#the-parallelogram-rule-for-addition) or [Subtraction](!#subtraction-and-the-difference-vector) to focus on the geometry of each one individually.`,
       before:``,
       after:``,
       link:'',
@@ -55,7 +57,9 @@ Two dashed "ghost" vectors complete the parallelogram. A dashed copy of $z_2$ (o
 
 The light green shaded region fills the interior of the parallelogram, making the geometric relationship immediately visible. Try the preset $(3+i)$ & $(1+3i)$ — the parallelogram tilts toward the imaginary axis because $z_2$ has a larger imaginary component. Then try $4$ & $3i$ — one side lies along the real axis and the other along the imaginary axis, producing a rectangle.`,
       before:``,
-      after:``,
+      after:`The frozen frame computes $(3+i) + (1+3i) = 4+4i$: because the two inputs are mirror images across the 45° line, their sum lands exactly on it. The [component-wise rule](!#how-complex-addition-works) is visible in the coordinates — reals $3+1$, imaginaries $1+3$, no interaction between them.
+
+Notice also what the picture does not show: the sum vector $4+4i$ has modulus $\\sqrt{32} \\approx 5.66$, less than $|z_1|+|z_2| = 2\\sqrt{10} \\approx 6.32$ — the [triangle inequality](!#the-triangle-inequality) at work, strict because the two vectors point in different directions.`,
       link:'',
     },
 
@@ -69,7 +73,9 @@ A faint dashed vector labeled $-z_2$ appears opposite to $z_2$ (rotated 180°). 
 
 Try the **conjugate pair** preset: $z_1 = 3 + 2i$ and $z_2 = 3 - 2i$. The difference is $4i$ (pure imaginary) and the dashed line between the points is vertical. The sum is $6$ (pure real) and lies on the real axis — conjugate pairs always produce this split.`,
       before:``,
-      after:``,
+      after:`In the frozen frame, $(3+i) - (1+3i) = 2-2i$: the purple vector drops into the fourth quadrant, and the dashed line from $z_2$ to $z_1$ is its exact translate. The distance between the two points is $|2-2i| = 2\\sqrt{2} \\approx 2.83$.
+
+The faint $-z_2$ ghost at $-1-3i$ completes the identity $z_1 - z_2 = z_1 + (-z_2)$: run the [parallelogram rule](!#the-parallelogram-rule-for-addition) on $z_1$ and the ghost and you land on the same purple point. Full algebra in [how complex subtraction works](!#how-complex-subtraction-works).`,
       link:'',
     },
 
@@ -83,7 +89,9 @@ Try dragging $z_2$ to the exact opposite of $z_1$. For example, set $z_1 = 3 + 2
 
 Now set both points in the same direction — for example $z_1 = 2 + i$ and $z_2 = 4 + 2i$. The sum is $6 + 3i$ (aligned), the parallelogram again degenerates to a line, and the triangle inequality reaches equality.`,
       before:``,
-      after:``,
+      after:`The frozen frame is the tool's opening state, $(3+i)$ & $(1+3i)$, with everything switched on. The two diagonals tell the whole story: the green one, $4+4i$, runs from the origin through the parallelogram's interior; the purple one, $2-2i$, joins the two input points and reappears as a vector from the origin.
+
+This double-diagonal reading is worth internalizing before visiting the presets — the [mirror pair](!#the-mirror-pair-preset) makes the two diagonals land on the two axes, and the [conjugate pair](!#conjugate-pairs-in-addition-and-subtraction) splits them between real and imaginary in the opposite way.`,
       link:'',
     },
 
@@ -179,7 +187,9 @@ Subtracting conjugates always cancels the real components: $(3 + 2i) - (3 - 2i) 
 
 The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always symmetric about the real axis. This pair produces one of the cleanest illustrations: real-axis sum, imaginary-axis difference, and a perfectly symmetric parallelogram.`,
       before:``,
-      after:``,
+      after:`The frozen frame also demonstrates the tool's [off-screen behavior](!#degenerate-and-axis-aligned-configurations): the sum $6$ exceeds the $\\pm 5$ window, so the green vector is replaced by a dashed ray aimed along the positive real axis — the direction is exact even when the endpoint is out of view.
+
+The general rule behind the split: $z + \\bar{z} = 2\\,\\text{Re}(z)$ and $z - \\bar{z} = 2\\,\\text{Im}(z)\\,i$. Sum and difference of a conjugate pair are the real and imaginary parts of $z$, each doubled — which is why one diagonal always lies on each axis. The [mirror pair preset](!#the-mirror-pair-preset) produces the same axis-split with the roles reversed.`,
       link:'',
     },
 
@@ -208,6 +218,42 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
 [Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) — visualize $e^{i\theta} = \cos\theta + i\sin\theta$ and see how the exponential function traces the unit circle, connecting trigonometry, complex numbers, and the number $e$.`,
       before:``,
       after:``,
+      link:'',
+    },
+
+    obj12:{
+      title:`The Mirror Pair Preset`,
+      content:`The preset $(2+2i)$ & $(-2+2i)$ loads two numbers that are reflections of each other across the imaginary axis: same height, opposite real parts.`,
+      before:``,
+      after:`The cancellation is the reverse of the conjugate pair's: here the real parts cancel in the sum, $(2+2i) + (-2+2i) = 4i$, and the imaginary parts cancel in the difference, $(2+2i) - (-2+2i) = 4$. One diagonal lands on each axis — the same clean split as [conjugate pairs](!#conjugate-pairs-in-addition-and-subtraction), rotated a quarter turn.
+
+There is extra geometry hiding in this preset: both inputs have the same modulus $\\sqrt{8}$, so the parallelogram is a rhombus — and the diagonals of a rhombus are always perpendicular. The frozen frame shows it directly: the vertical sum and horizontal difference cross at a right angle.
+
+Reflection across the imaginary axis is the map $z \\mapsto -\\bar{z}$: it negates the real part and keeps the imaginary part, which is exactly what pairs each input with the other.`,
+      link:'',
+    },
+
+    obj13:{
+      title:`The Axis Pair Preset`,
+      content:`The preset $4$ & $3i$ puts one number on each axis: $z_1$ purely real, $z_2$ purely imaginary. The [parallelogram](!#the-parallelogram-rule-for-addition) becomes a perfect rectangle.`,
+      before:``,
+      after:`With perpendicular sides, the sum $4 + 3i$ is the rectangle's diagonal, and its modulus is the classic $3$–$4$–$5$ triangle: $|4+3i| = \\sqrt{16+9} = 5$. The difference $4 - 3i$ is the other diagonal, and a rectangle's diagonals are equal — so $|z_1 - z_2| = 5$ as well.
+
+This preset is the cleanest possible view of the [triangle inequality](!#the-triangle-inequality) being strict: $5 \\leq 4 + 3 = 7$, with a wide gap because the two vectors are perpendicular — as far from pointing the same way as they can be while staying in one quadrant.
+
+It is also the natural bridge to the [degenerate configurations](!#degenerate-and-axis-aligned-configurations): nudge $z_2$ down onto the real axis and the rectangle collapses to a line.`,
+      link:'',
+    },
+
+    obj14:{
+      title:`The Mixed-Signs Preset`,
+      content:`The preset $(-1+3i)$ & $(2-i)$ places the two inputs in opposite quadrants — second and fourth — so the vectors pull against each other.`,
+      before:``,
+      after:`Opposing directions make addition cancel and subtraction amplify. The sum shrinks to $1 + 2i$, with modulus $\\sqrt{5} \\approx 2.24$ — shorter than $z_1$ itself. The difference stretches to $-3 + 4i$, with modulus exactly $5$ (another $3$–$4$–$5$ triangle, mirrored into the second quadrant): longer than either input.
+
+This is the [triangle inequality](!#the-triangle-inequality) near its other extreme — $\\sqrt{5}$ against $\\sqrt{10} + \\sqrt{5} \\approx 5.4$. Push it all the way by making the vectors exactly antiparallel, as in the [Both mode](!#both-mode-comparing-addition-and-subtraction) example, and the sum collapses to zero.
+
+The lesson of the preset: subtraction measures separation, not size. Two modest numbers far apart in direction produce a small sum and a large difference — $|z_1 - z_2|$ is the distance between the points, whatever their moduli.`,
       link:'',
     },
 
@@ -325,12 +371,45 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plane + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    add: demoUnitFrame({ svg: complexAddSubDiagrams.add, caption: 'Addition mode — (3+i) + (1+3i), frozen',
+      text: 'The teal diagonal reaches the sum 4 + 4i; the two dashed ghosts — z&#x2082; shifted to the tip of z&#x2081;, and z&#x2081; shifted to the tip of z&#x2082; — both arrive at the same corner of the shaded parallelogram.' }),
+    sub: demoUnitFrame({ svg: complexAddSubDiagrams.sub, caption: 'Subtraction mode — (3+i) &#8722; (1+3i), frozen',
+      text: 'The purple vector lands on 2 &#8722; 2i; the dashed line from z&#x2082; to z&#x2081; carries the same length and direction, and the faint &#8722;z&#x2082; ghost points opposite the orange vector.' }),
+    both: demoUnitFrame({ svg: complexAddSubDiagrams.both, caption: 'Both mode — the opening pair, frozen',
+      text: 'Green and purple share one parallelogram: the sum diagonal runs from the origin through the interior, while the difference matches the other diagonal, joining the two input points.' }),
+    mirror: demoUnitFrame({ svg: complexAddSubDiagrams.mirror, caption: 'Mirror pair — (2+2i) &amp; (&#8722;2+2i), frozen',
+      text: 'Sum 4i straight up, difference 4 straight right: real parts cancel in the sum, imaginary parts cancel in the difference. Equal moduli make the parallelogram a rhombus with perpendicular diagonals.' }),
+    axes: demoUnitFrame({ svg: complexAddSubDiagrams.axes, caption: 'Axis pair — 4 &amp; 3i, frozen',
+      text: 'A perfect rectangle: one side on each axis. The sum diagonal reaches 4 + 3i, whose modulus is exactly 5 — the 3-4-5 right triangle hiding inside the parallelogram rule.' }),
+    conjugatePair: demoUnitFrame({ svg: complexAddSubDiagrams.conjugatePair, caption: 'Conjugate pair — (3+2i) &amp; (3&#8722;2i), frozen',
+      text: 'The sum 6 has left the ±5 window, so a dashed teal ray points along the real axis toward it; the purple difference 4i climbs the imaginary axis. One result per axis — the conjugate split.' }),
+    mixed: demoUnitFrame({ svg: complexAddSubDiagrams.mixed, caption: 'Mixed signs — (&#8722;1+3i) &amp; (2&#8722;i), frozen',
+      text: 'Vectors pulling in nearly opposite directions: the sum shrinks to 1 + 2i while the difference &#8722;3 + 4i grows longer than either input — cancellation working in reverse.' }),
+  };
+
+  // Per-state additions for the tool's Key Ideas panel: one entry per display
+  // mode (always active) and one per preset pair (active when matched).
+  const explanations = {
+    both: 'The two results are the two diagonals of one parallelogram — green through the interior, purple across the input points. [Learn more about Both mode](!#both-mode-comparing-addition-and-subtraction) · [Getting started](!#getting-started-drag-two-points)',
+    add: 'Tip-to-tail twice over: both dashed ghosts arrive at the same sum point. [Learn more about the parallelogram rule](!#the-parallelogram-rule-for-addition) · [How addition works](!#how-complex-addition-works)',
+    sub: 'The purple vector is the line between the points, picked up and moved to the origin. [Learn more about the difference vector](!#subtraction-and-the-difference-vector) · [How subtraction works](!#how-complex-subtraction-works)',
+    mirror: 'Mirror images across the imaginary axis: the sum goes purely imaginary, the difference purely real. [Learn more about the mirror pair](!#the-mirror-pair-preset) · [Getting started](!#getting-started-drag-two-points)',
+    axes: 'One input per axis makes the parallelogram a rectangle — and both diagonals have modulus exactly 5. [Learn more about the axis pair](!#the-axis-pair-preset) · [Getting started](!#getting-started-drag-two-points)',
+    conjugatePair: 'Conjugates split the results between the axes: real sum, imaginary difference. [Learn more about conjugate pairs](!#conjugate-pairs-in-addition-and-subtraction) · [Getting started](!#getting-started-drag-two-points)',
+    mixed: 'Opposite quadrants: the sum cancels down while the difference outgrows both inputs. [Learn more about the mixed-signs pair](!#the-mixed-signs-preset) · [Getting started](!#getting-started-drag-two-points)',
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "Complex Addition & Subtraction | Learn Math Class",
         description: "Visualize complex number addition and subtraction with draggable vectors. See the parallelogram rule, step-by-step solutions, and triangle inequality in real time.",
@@ -343,12 +422,12 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
     {
-        id:'1',
+        id:'getting-started-drag-two-points',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -356,31 +435,67 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'2',
+        id:'the-parallelogram-rule-for-addition',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key='u-add' dangerouslySetInnerHTML={{ __html: stateUnits.add }} />,
+          sectionsContent.obj2.after,
         ]
     },
     {
-        id:'3',
+        id:'subtraction-and-the-difference-vector',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key='u-sub' dangerouslySetInnerHTML={{ __html: stateUnits.sub }} />,
+          sectionsContent.obj3.after,
         ]
     },
     {
-        id:'4',
+        id:'both-mode-comparing-addition-and-subtraction',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key='u-both' dangerouslySetInnerHTML={{ __html: stateUnits.both }} />,
+          sectionsContent.obj4.after,
         ]
     },
     {
-        id:'5',
+        id:'the-mirror-pair-preset',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-mirror' dangerouslySetInnerHTML={{ __html: stateUnits.mirror }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'the-axis-pair-preset',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-axes' dangerouslySetInnerHTML={{ __html: stateUnits.axes }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'the-mixed-signs-preset',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div key='u-mixed' dangerouslySetInnerHTML={{ __html: stateUnits.mixed }} />,
+          sectionsContent.obj14.after,
+        ]
+    },
+    {
+        id:'degenerate-and-axis-aligned-configurations',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -388,7 +503,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'6',
+        id:'reading-the-step-by-step-panel',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -396,7 +511,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'7',
+        id:'the-triangle-inequality',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -404,7 +519,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'8',
+        id:'how-complex-addition-works',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -412,7 +527,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'9',
+        id:'how-complex-subtraction-works',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -420,15 +535,17 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'10',
+        id:'conjugate-pairs-in-addition-and-subtraction',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key='u-conjugatePair' dangerouslySetInnerHTML={{ __html: stateUnits.conjugatePair }} />,
+          sectionsContent.obj10.after,
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
@@ -496,8 +613,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Addition /Subtraction Visualizer</h1>
    <br/>
-   <SiblingsNav>
-  <ComplexAdditionSubtractionVisualizer/>
+   <SiblingsNav maxWidth='100%'>
+  <ComplexAdditionSubtractionVisualizer explanations={explanations}/>
   </SiblingsNav>
  
    <br/>

@@ -584,8 +584,11 @@ import {
   ControlBar, Divider,
 } from "../shared.jsx";
 
-// ── Tree data ───────────────────────────────────────────────────────
-const TREE = {
+// ── Default tree data (counting formulas) ───────────────────────────
+// Node shape — question: { type: "q", text, yes, no, yesLabel, noLabel,
+// help? }; leaf: { type: "leaf", num, name, short, formula, desc }.
+// Any object of this shape can be passed via the `tree` prop.
+export const DEFAULT_TREE = {
   A: { type: "q", text: "Order matters?",
        yes: "B", no: "C", yesLabel: "Yes", noLabel: "No" },
   B: { type: "q", text: "Repetition allowed?",
@@ -640,52 +643,81 @@ const TREE = {
        desc: "n identical items into k distinct bins; every bin holds at least 1." },
 };
 
-// ── Layout ──────────────────────────────────────────────────────────
-// Full-width SVG: 1100 × 540 viewBox, scales to its container.
-// 9 leaves spread across the bottom; internal nodes at midpoint of leaf
-// descendants.
-const SVG_W = 1100;
-const SVG_H = 540;
+// ── Auto-layout ─────────────────────────────────────────────────────
+// Works for any binary-question tree: leaves are spread evenly along
+// the bottom row (DFS order, yes-branch first), each question sits at
+// the mean x of its leaf descendants, and question rows are spaced by
+// depth between the top and the leaf row.
 
-const POS = {
-  A: { x: 495, y: 50 },
-  B: { x: 200, y: 160 },
-  C: { x: 790, y: 160 },
-  E: { x: 300, y: 270 },
-  J: { x: 635, y: 270 },
-  K: { x: 940, y: 270 },
-  G: { x: 380, y: 380 },
-  M: { x: 715, y: 380 },
-  D: { x: 80,  y: 480 },
-  F: { x: 200, y: 480 },
-  H: { x: 320, y: 480 },
-  I: { x: 440, y: 480 },
-  L: { x: 555, y: 480 },
-  N: { x: 670, y: 480 },
-  O: { x: 790, y: 480 },
-  P: { x: 905, y: 480 },
-  Q: { x: 1020, y: 480 },
-};
-
-const LEAF_W = 96, LEAF_H = 50;
-const Q_W = 170, Q_H = 52;
-function nodeSize(id) {
-  return TREE[id].type === "leaf"
-    ? { w: LEAF_W, h: LEAF_H }
-    : { w: Q_W, h: Q_H };
-}
-
-// Parent lookup (for breadcrumb)
-const PARENT = (() => {
-  const out = {};
-  for (const [id, node] of Object.entries(TREE)) {
+function findRoot(tree) {
+  const referenced = new Set();
+  for (const node of Object.values(tree)) {
     if (node.type === "q") {
-      out[node.yes] = { parent: id, branch: "yes" };
-      out[node.no]  = { parent: id, branch: "no" };
+      referenced.add(node.yes);
+      referenced.add(node.no);
     }
   }
-  return out;
-})();
+  return Object.keys(tree).find((id) => !referenced.has(id));
+}
+
+function buildLayout(tree, { width, height, leafW, leafH, qW, qH }) {
+  const root = findRoot(tree);
+
+  // Parent lookup (for breadcrumb)
+  const parent = {};
+  for (const [id, node] of Object.entries(tree)) {
+    if (node.type === "q") {
+      parent[node.yes] = { parent: id, branch: "yes" };
+      parent[node.no]  = { parent: id, branch: "no" };
+    }
+  }
+
+  const depth = {};
+  const leaves = [];
+  let maxQuestionDepth = 0;
+  (function walk(id, d) {
+    depth[id] = d;
+    const node = tree[id];
+    if (node.type === "q") {
+      maxQuestionDepth = Math.max(maxQuestionDepth, d);
+      walk(node.yes, d + 1);
+      walk(node.no, d + 1);
+    } else {
+      leaves.push(id);
+    }
+  })(root, 0);
+
+  const marginX = leafW / 2 + 12;
+  const span = width - 2 * marginX;
+  const pos = {};
+  leaves.forEach((id, i) => {
+    pos[id] = {
+      x: leaves.length === 1 ? width / 2 : marginX + (span * i) / (leaves.length - 1),
+    };
+  });
+
+  const leafXs = (id) => {
+    const node = tree[id];
+    return node.type === "q" ? [...leafXs(node.yes), ...leafXs(node.no)] : [pos[id].x];
+  };
+
+  const topY = qH / 2 + 24;
+  const bottomY = height - leafH / 2 - 35;
+  const rowGap = (bottomY - topY) / (maxQuestionDepth + 1);
+  for (const [id, node] of Object.entries(tree)) {
+    if (node.type === "q") {
+      const xs = leafXs(id);
+      pos[id] = {
+        x: xs.reduce((a, b) => a + b, 0) / xs.length,
+        y: topY + depth[id] * rowGap,
+      };
+    } else {
+      pos[id].y = bottomY;
+    }
+  }
+
+  return { root, parent, pos };
+}
 
 // ── Local styles ────────────────────────────────────────────────────
 function TreeStyles() {
@@ -808,22 +840,74 @@ function wrapText(s, maxCharsPerLine) {
   return lines;
 }
 
-const QUESTION_HELP = {
-  A: "If swapping two items would give a different outcome, order matters (permutations). If they&apos;re interchangeable, order doesn&apos;t matter (combinations / distributions).",
-  B: "Can the same item appear more than once? A 3-letter code with letters A-Z allows repetition; a hand of cards doesn&apos;t.",
+// Wrap a node's text and size its box to the wrapped content so text
+// can never overflow. Estimated glyph widths: 12px sans 600 ≈ 7.5px,
+// 10px mono ≈ 6px.
+function measureNode(node, { leafW, leafH, qW, qH }) {
+  if (node.type === "leaf") {
+    const chars = Math.max(6, Math.floor((leafW - 12) / 6));
+    const lines = wrapText(node.short, chars);
+    const longest = Math.max(...lines.map((l) => l.length));
+    return {
+      lines,
+      w: Math.max(leafW, longest * 6 + 12),
+      h: Math.max(leafH, lines.length * 11 + 30),
+    };
+  }
+  const chars = Math.max(8, Math.floor((qW - 20) / 7.5));
+  const lines = wrapText(node.text, chars);
+  const longest = Math.max(...lines.map((l) => l.length));
+  return {
+    lines,
+    w: Math.max(qW, longest * 7.5 + 20),
+    h: Math.max(qH, lines.length * 14 + 16),
+  };
+}
+
+export const DEFAULT_HELP = {
+  A: "If swapping two items would give a different outcome, order matters (permutations). If they're interchangeable, order doesn't matter (combinations / distributions).",
+  B: "Can the same item appear more than once? A 3-letter code with letters A-Z allows repetition; a hand of cards doesn't.",
   C: "Are the items being distributed distinguishable from one another (like 5 different books) or indistinguishable (like 5 identical balls)?",
   E: "Is r = n (use every item), or r < n (use only some)?",
   G: "Linear: arrangement in a row (start and end matter). Circular: around a circle (rotations equivalent).",
   J: "Are you choosing some items to form a set (select), or sending every item to some destination (distribute)?",
-  M: "Labeled cells: Box 1, Box 2, … are distinguishable. Unlabeled groups: just &quote;split into groups of these sizes&quote;.",
-  K: "Can a cell receive zero items? &quote;Yes&quote; → weak composition; &quote;No&quote; (every cell ≥ 1) → strong composition.",
+  M: "Labeled cells: Box 1, Box 2, … are distinguishable. Unlabeled groups: just \"split into groups of these sizes\".",
+  K: "Can a cell receive zero items? \"Yes\" → weak composition; \"No\" (every cell ≥ 1) → strong composition.",
 };
 
 // ── Component ───────────────────────────────────────────────────────
-export default function CountingDecisionTree() {
-  const [path, setPath] = useState(["A"]);
+export default function CountingDecisionTree({
+  tree = DEFAULT_TREE,
+  help = DEFAULT_HELP,
+  width = 1100,
+  height = 540,
+  leafW = 96,
+  leafH = 50,
+  qW = 170,
+  qH = 52,
+}) {
+  const { root, parent, pos } = useMemo(
+    () => buildLayout(tree, { width, height, leafW, leafH, qW, qH }),
+    [tree, width, height, leafW, leafH, qW, qH]
+  );
+
+  const metrics = useMemo(() => {
+    const m = {};
+    for (const [id, node] of Object.entries(tree)) {
+      m[id] = measureNode(node, { leafW, leafH, qW, qH });
+    }
+    return m;
+  }, [tree, leafW, leafH, qW, qH]);
+  const nodeSize = useCallback((id) => metrics[id], [metrics]);
+
+  const [rawPath, setPath] = useState([root]);
+  // If the tree prop changes under us, fall back to its root.
+  const path = useMemo(
+    () => (rawPath[0] === root && rawPath.every((id) => tree[id]) ? rawPath : [root]),
+    [rawPath, root, tree]
+  );
   const currentId = path[path.length - 1];
-  const currentNode = TREE[currentId];
+  const currentNode = tree[currentId];
 
   const pathSet = useMemo(() => new Set(path), [path]);
   const pathEdges = useMemo(() => {
@@ -836,29 +920,29 @@ export default function CountingDecisionTree() {
 
   const isClickable = useCallback((id) => {
     if (pathSet.has(id)) return true;
-    const cn = TREE[currentId];
+    const cn = tree[currentId];
     if (cn.type !== "q") return false;
     return cn.yes === id || cn.no === id;
-  }, [pathSet, currentId]);
+  }, [pathSet, currentId, tree]);
 
   const navigateTo = useCallback((id) => {
     if (path.includes(id)) {
       const idx = path.indexOf(id);
       setPath(path.slice(0, idx + 1));
     } else {
-      const cn = TREE[path[path.length - 1]];
+      const cn = tree[path[path.length - 1]];
       if (cn.type !== "q") return;
       if (cn.yes !== id && cn.no !== id) return;
       setPath([...path, id]);
     }
-  }, [path]);
+  }, [path, tree]);
 
   const stepBack = useCallback(() => {
     if (path.length <= 1) return;
     setPath(path.slice(0, -1));
   }, [path]);
 
-  const reset = useCallback(() => setPath(["A"]), []);
+  const reset = useCallback(() => setPath([root]), [root]);
 
   return (
     <VTRoot>
@@ -897,36 +981,36 @@ export default function CountingDecisionTree() {
           <div className="dt-scene-wrap">
             <svg
               className="dt-scene-svg"
-              viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+              viewBox={`0 0 ${width} ${height}`}
               preserveAspectRatio="xMidYMid meet"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect width={SVG_W} height={SVG_H} fill="#ffffff" />
+              <rect width={width} height={height} fill="#ffffff" />
 
               {/* Edges (under nodes) */}
-              {Object.entries(TREE).flatMap(([id, node]) => {
+              {Object.entries(tree).flatMap(([id, node]) => {
                 if (node.type !== "q") return [];
                 return [
                   <TreeEdge
                     key={`${id}-${node.yes}`}
                     parentId={id} childId={node.yes} label={node.yesLabel}
-                    childIdx={0}
+                    childIdx={0} pos={pos} nodeSize={nodeSize}
                     pathSet={pathSet} pathEdges={pathEdges}
                   />,
                   <TreeEdge
                     key={`${id}-${node.no}`}
                     parentId={id} childId={node.no} label={node.noLabel}
-                    childIdx={1}
+                    childIdx={1} pos={pos} nodeSize={nodeSize}
                     pathSet={pathSet} pathEdges={pathEdges}
                   />,
                 ];
               })}
 
               {/* Nodes on top */}
-              {Object.entries(TREE).map(([id, node]) => (
+              {Object.entries(tree).map(([id, node]) => (
                 <TreeNode
                   key={id}
-                  id={id} node={node}
+                  node={node} p={pos[id]} size={nodeSize(id)}
                   isCurrent={id === currentId}
                   isInPath={pathSet.has(id)}
                   clickable={isClickable(id)}
@@ -938,11 +1022,11 @@ export default function CountingDecisionTree() {
 
           {/* Bottom panel: question or leaf */}
           <div className="dt-bottom-panel">
-            <Breadcrumb path={path} />
+            <Breadcrumb path={path} tree={tree} parent={parent} />
             {currentNode.type === "q" ? (
               <QuestionPanel
                 node={currentNode}
-                currentId={currentId}
+                help={currentNode.help || help[currentId]}
                 onChoose={navigateTo}
                 onStepBack={stepBack}
                 onReset={reset}
@@ -971,8 +1055,8 @@ function edgeT(childIdx) {
   return childIdx === 0 ? 0.4 : 0.6;
 }
 
-function TreeEdge({ parentId, childId, label, childIdx, pathSet, pathEdges }) {
-  const p = POS[parentId], c = POS[childId];
+function TreeEdge({ parentId, childId, label, childIdx, pos, nodeSize, pathSet, pathEdges }) {
+  const p = pos[parentId], c = pos[childId];
   const pSize = nodeSize(parentId), cSize = nodeSize(childId);
   const x1 = p.x, y1 = p.y + pSize.h / 2;
   const x2 = c.x, y2 = c.y - cSize.h / 2;
@@ -988,7 +1072,7 @@ function TreeEdge({ parentId, childId, label, childIdx, pathSet, pathEdges }) {
   const len = Math.sqrt(dx * dx + dy * dy) || 1;
   const ox = (-dy / len) * 8;
   const oy = (dx / len) * 8;
-  const labelLen = label.length * 6 + 8;
+  const labelLen = label.length * 6.6 + 10;
 
   return (
     <g>
@@ -1020,9 +1104,7 @@ function TreeEdge({ parentId, childId, label, childIdx, pathSet, pathEdges }) {
   );
 }
 
-function TreeNode({ id, node, isCurrent, isInPath, clickable, onClick }) {
-  const p = POS[id];
-  const size = nodeSize(id);
+function TreeNode({ node, p, size, isCurrent, isInPath, clickable, onClick }) {
   const isLeaf = node.type === "leaf";
 
   let fill, stroke, strokeW, textFill;
@@ -1045,7 +1127,7 @@ function TreeNode({ id, node, isCurrent, isInPath, clickable, onClick }) {
   const opacity = clickable || isInPath ? 1 : 0.4;
 
   if (isLeaf) {
-    const lines = wrapText(node.short, 16);
+    const lines = size.lines;
     return (
       <g
         style={clickable ? { cursor: "pointer" } : undefined}
@@ -1058,7 +1140,7 @@ function TreeNode({ id, node, isCurrent, isInPath, clickable, onClick }) {
           fill={fill} stroke={stroke} strokeWidth={strokeW}
         />
         <text
-          x={p.x} y={p.y - 10} textAnchor="middle"
+          x={p.x} y={p.y - size.h / 2 + 14} textAnchor="middle"
           fill={isCurrent ? "white" : COLORS.highlight}
           fontSize="11" fontWeight="700"
           fontFamily="'JetBrains Mono',monospace"
@@ -1068,7 +1150,7 @@ function TreeNode({ id, node, isCurrent, isInPath, clickable, onClick }) {
         {lines.map((line, i) => (
           <text
             key={i}
-            x={p.x} y={p.y + 4 + i * 11} textAnchor="middle"
+            x={p.x} y={p.y - size.h / 2 + 28 + i * 11} textAnchor="middle"
             fill={textFill}
             fontSize="10" fontWeight="600"
             fontFamily="'JetBrains Mono',monospace"
@@ -1080,7 +1162,7 @@ function TreeNode({ id, node, isCurrent, isInPath, clickable, onClick }) {
     );
   }
 
-  const lines = wrapText(node.text, 26);
+  const lines = size.lines;
   const totalH = lines.length * 14;
   return (
     <g
@@ -1107,12 +1189,12 @@ function TreeNode({ id, node, isCurrent, isInPath, clickable, onClick }) {
   );
 }
 
-function Breadcrumb({ path }) {
+function Breadcrumb({ path, tree, parent }) {
   if (path.length === 0) return null;
   const parts = [];
   for (let i = 0; i < path.length; i++) {
     const id = path[i];
-    const node = TREE[id];
+    const node = tree[id];
     if (i === 0) {
       parts.push(
         <span key={`n-${i}`} style={{ color: COLORS.text }}>
@@ -1120,8 +1202,8 @@ function Breadcrumb({ path }) {
         </span>
       );
     } else {
-      const par = PARENT[id];
-      const parentNode = TREE[par.parent];
+      const par = parent[id];
+      const parentNode = tree[par.parent];
       const lbl = par.branch === "yes" ? parentNode.yesLabel : parentNode.noLabel;
       parts.push(
         <React.Fragment key={`a-${i}`}>
@@ -1140,11 +1222,11 @@ function Breadcrumb({ path }) {
   );
 }
 
-function QuestionPanel({ node, currentId, onChoose, onStepBack, onReset, canStepBack }) {
+function QuestionPanel({ node, help, onChoose, onStepBack, onReset, canStepBack }) {
   return (
     <>
       <div className="dt-title">{node.text}</div>
-      <QuestionHelp id={currentId} />
+      <QuestionHelp text={help} />
       <div className="dt-choice-row">
         <button className="dt-choice-btn" onClick={() => onChoose(node.yes)} type="button">
           {node.yesLabel}
@@ -1171,10 +1253,9 @@ function QuestionPanel({ node, currentId, onChoose, onStepBack, onReset, canStep
   );
 }
 
-function QuestionHelp({ id }) {
-  const help = QUESTION_HELP[id];
-  if (!help) return null;
-  return <div className="dt-help">{help}</div>;
+function QuestionHelp({ text }) {
+  if (!text) return null;
+  return <div className="dt-help">{text}</div>;
 }
 
 function LeafPanel({ node, onStepBack, onReset }) {

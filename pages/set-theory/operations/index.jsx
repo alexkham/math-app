@@ -8,6 +8,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -478,6 +479,50 @@ The symmetric difference with the empty set leaves a set unchanged: $A \\triangl
     after: ``,
     link: '',
   },
+
+  notation: {
+    title: `Set Operation Notation`,
+    lead: `Five operations, six marks, and more glyph collisions than any other page in the section: the cup and cap, a complement with three spellings, two ways to subtract sets, and a triangle already working three other jobs elsewhere.`,
+    inherited: `The braces, set-builder bar, $\\in$ and $\\varnothing$ inside every definition come from [set theory basics](!/set-theory/basics#2); the containment marks from the [subsets page](!/set-theory/subsets).`,
+    entries: [
+      {
+        id: 'cup-cap',
+        tex: `$\\cup$ · $\\cap$`,
+        read: `union; intersection`,
+        means: `The cup collects, the cap filters: $A \\cup B$ holds members of either set, $A \\cap B$ only members of both — **Union** and **Intersection** above. The cup opens upward "to hold everything", the standard hook for keeping them apart.`,
+        cases: `Chains of sets grow the marks into big operators with index bounds — $\\bigcup_{i=1}^{n} A_i$, the same enlarging habit $\\Sigma$ has; the shapes deliberately mirror logic's or ($\\vee$) and and ($\\wedge$), catalogued with the [logic symbols](!/math-symbols/math-logic).`,
+        confusedWith: `Each other, by rotation. A flipped glance swaps "either" for "both" — and a domain built with $\\cap$ by reflex is usually empty, the error [domain notation](!/functions/domain#2) warns about from the other side.`,
+      },
+      {
+        id: 'complement-three',
+        tex: `$A^c$ · $A'$ · $\\overline{A}$`,
+        read: `the complement of A`,
+        means: `One operation, three spellings: the superscript $c$ (this site's choice), the prime, and the overbar — all meaning "everything in $U$ that is not in $A$", as **Complement** above defines. The mark is meaningless until the universal set is fixed.`,
+        cases: `This site's interactive explorers use the prime form $A'$ — expect both when moving between pages; the overbar dominates probability, where complements of events are everywhere.`,
+        confusedWith: `The other bars and primes. $\\overline{A}$ shares its stroke with the [complex conjugate](!/complex-numbers/complex-conjugate#notation) and the sample mean; $A'$ with the [derivative prime](!/calculus/derivatives/function#notation) — the object under the mark (a set) is the only tell.`,
+      },
+      {
+        id: 'setminus',
+        tex: `$A \\setminus B$`,
+        read: `A minus B; the difference of A and B`,
+        means: `Subtraction for sets: everything in $A$ that is not in $B$ — **Set Difference** above. The backslash is the set-specific spelling; $A - B$ borrows the arithmetic minus for the same job.`,
+        cases: `Order matters — $A \\setminus B \\neq B \\setminus A$ in general; against a universal set the difference becomes complement, $U \\setminus B = B^c$, and [domain notation](!/functions/domain#2) writes "all reals except 2" as $\\mathbb{R} \\setminus \\{2\\}$ with exactly this mark.`,
+        confusedWith: `The division slash. $\\setminus$ leans backward, $/$ forward — and unlike numeric subtraction, removing elements never produces "negative" members: subtracting what is not there does nothing.`,
+      },
+      {
+        id: 'symmetric-triangle',
+        tex: `$A \\triangle B$`,
+        read: `the symmetric difference of A and B`,
+        means: `The either-but-not-both operation: $A \\triangle B$ keeps elements of exactly one set — the shared members drop out, as **Symmetric Difference** above shows. Logic knows the pattern as exclusive or.`,
+        cases: `Two equivalent spellings mirror the two definitions: $(A \\setminus B) \\cup (B \\setminus A)$ and $(A \\cup B) \\setminus (A \\cap B)$ — one collects the private parts, the other removes the shared core.`,
+        sameGlyphElsewhere: `The triangle's fourth job: $\\Delta$ already means [increment](!/calculus/derivatives/differentials#notation) in calculus, the [discriminant](!/algebra/equations/quadratic#notation) in algebra, and the determinant in older linear-algebra texts — between two sets it is an operator, not a quantity.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/set-theory`,
+    symbolsLabel: `All set theory symbols`,
+    parentHref: `/set-theory`,
+    parentLabel: `Set Theory`,
+  },
   obj6: {
     title: `Summary: All Five Operations at a Glance`,
     content: `
@@ -760,6 +805,25 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
         ]
     },
 
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
     // obj6: NEW capstone — all five operations at a glance
     {
         id:'6',

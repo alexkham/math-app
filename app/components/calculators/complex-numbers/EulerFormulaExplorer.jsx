@@ -3,8 +3,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function EulerFormulaExplorer() {
+export default function EulerFormulaExplorer({ explanations }) {
   const [theta, setTheta] = useState(Math.PI / 4);
   const [radius, setRadius] = useState(1);
   const [dragging, setDragging] = useState(false);
@@ -136,6 +137,22 @@ export default function EulerFormulaExplorer() {
   ];
 
   const closestLandmark = landmarks.find(l => Math.abs(theta - l.angle) < 0.05);
+
+  // Line 1: page-supplied per-state explanations, keyed by the landmark the
+  // current angle matches (r = 1) or the scaled r ≠ 1 state. Nothing renders
+  // when no explanations prop is passed — defaults stay intact.
+  const stateKey =
+    radius !== 1 ? 'scaled'
+    : Math.abs(theta) < 0.05 || Math.abs(theta - 2 * Math.PI) < 0.05 ? 'theta0'
+    : Math.abs(theta - Math.PI / 6) < 0.05 ? 'theta30'
+    : Math.abs(theta - Math.PI / 4) < 0.05 ? 'theta45'
+    : Math.abs(theta - Math.PI / 3) < 0.05 ? 'theta60'
+    : Math.abs(theta - Math.PI / 2) < 0.05 ? 'theta90'
+    : Math.abs(theta - Math.PI) < 0.05 ? 'theta180'
+    : Math.abs(theta - 3 * Math.PI / 2) < 0.05 ? 'theta270'
+    : null;
+  const stateExplanation =
+    explanations && stateKey ? explanations[stateKey] : null;
 
   return (
     <div style={styles.container}>
@@ -416,6 +433,12 @@ export default function EulerFormulaExplorer() {
                 <strong>r &middot; e<sup>i&theta;</sup> is the polar form</strong> of any complex number. r is the distance from the origin (modulus), &theta; is the angle (argument). Every complex number can be written this way.
               </span>
             </div>
+            {stateExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.teal }}></span>
+                <span>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -446,7 +469,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1180px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -464,7 +489,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '624px 1fr',
+    gridTemplateColumns: 'minmax(560px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

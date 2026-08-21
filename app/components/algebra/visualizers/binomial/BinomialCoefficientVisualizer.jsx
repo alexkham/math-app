@@ -5,6 +5,7 @@
 // styles, and the top-level visualizer.
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { processContent } from '../../../../utils/contentProcessor';
 
 // ============================================================
 //   1. CONSTANTS & "TYPES"
@@ -1320,9 +1321,26 @@ const BC_STYLES = `
 //   5. MAIN COMPONENT
 // ============================================================
 
-export default function BinomialCoefficientsVisualizer() {
+// Line 1 (additive): maps the live view/n onto the page's per-state
+// explanation keys — the two n-boundary states take precedence over the
+// plain view keys.
+function l1KeyOf(activeView, n) {
+  if (activeView === VIEW.TREE && n === 1) return 'tree-n1';
+  if (activeView === VIEW.PASCAL && n === 5) return 'pascal-n5';
+  if (activeView === VIEW.TREE) return 'view-tree';
+  if (activeView === VIEW.DISTRIB) return 'view-distribution';
+  if (activeView === VIEW.PASCAL) return 'view-pascal';
+  return null;
+}
+
+export default function BinomialCoefficientsVisualizer({ explanations = null }) {
   const [n, setN] = useState(3);
   const [activeView, setActiveView] = useState(VIEW.TREE);
+
+  // Line 1 (additive): matched entry appended under the active view; nothing
+  // renders without the prop.
+  const l1Key = l1KeyOf(activeView, n);
+  const extraExplanation = (explanations && l1Key && explanations[l1Key]) || null;
 
   return (
     <>
@@ -1343,6 +1361,13 @@ export default function BinomialCoefficientsVisualizer() {
           {activeView === VIEW.TREE    && <TreeView n={n} />}
           {activeView === VIEW.DISTRIB && <DistributionView n={n} />}
           {activeView === VIEW.PASCAL  && <PascalView n={n} />}
+
+          {extraExplanation && (
+            <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid #e2e8f0',
+                          fontSize: '13.5px', lineHeight: 1.55, color: '#334155' }}>
+              {processContent(extraExplanation)}
+            </div>
+          )}
         </div>
       </div>
     </>

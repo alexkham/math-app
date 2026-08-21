@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import diagrams from '@/app/api/db/svg/set-theory/svg'
 import summaries from '@/app/api/db/tables/set-theory/summaries'
 
@@ -97,78 +98,48 @@ What kinds of items or entities can be members of a mathematical set? Whatever t
     after: ``,
     link: '',
   },
-  obj2: {
+  notation: {
     title: `Notation Used in Set Theory`,
-    content: `
-It is a widespread convention to denote mathematical sets by capital English letters (for instance $A$, $B$, $C$). Although there are no strict rules here, following the convention helps maintain standards of communication in the academic world.
-
-**Enumerative Set Notation**
-
-This method is straightforward: it lists the elements of a set within curly braces. There are several ways to describe a mathematical set using enumerative notation.
-
-Listing all elements of a set within curly braces:
-
-- $A$ = {1, 2, 3}
-
-- $B$ = {a, b, c, d} — not only numbers are allowed
-
-- $C$ = {1, a, 30, 'cfgd', π} — a reminder that a set can hold items of different types
-
-- $D$ = {23, a, 😊, π, A, 🔺, 'hello', ψ} — a mathematical set can include practically anything
-
-- $E$ = { } — the empty set
-
-Listing the elements we can list, then using an ellipsis (...) which stands for the omitted items:
-
-- $A$ = {1, 2, 3, ...}
-
-- $B$ = {a, b, c, d, ...}
-
-- $C$ = {1, a, b, 4, 7, ...}
-
-We will see later in which cases this form is useful — for the moment, the examples themselves are enough.
-
-**Descriptive Set Notation**
-
-Descriptive (set-builder) notation defines a set by specifying a property that its elements must satisfy. It is particularly useful when enumerative notation would not work — when a set is too large, or its elements are difficult to list directly.
-
-For example, the set of all positive even numbers can be expressed as $A$ = {x | x is a positive even number}, where the vertical bar means "such that". This notation represents large or infinite sets without listing all their elements explicitly.
-
-You can think of descriptive set notation as comprising four main building blocks:
-
-**1. Variable (element of the set)** — may be denoted by symbols (x, y, z) or simply by words ({number | number is a positive even number}, {prime number | prime number > 10}).
-
-**2. Vertical bar (|)** — represents the phrase "such that", widely used in mathematics (in other words, "where" or "for which"). It always comes between the variable and the condition that follows.
-
-**3. Condition(s)** — the property or rule that defines which elements belong to the set. It must be present, has to be clear and precise, and cannot include logical contradictions. Like variables, conditions may be expressed with mathematical symbols (x > 0, or 0 ≤ y ≤ 3) or with words (x is divisible by 2, for example).
-
-**4. Curly braces ({})** — enclose the entire notation, indicating that the expression inside defines a set. They turn everything described above into a formal mathematical expression.
-
-**More Basic Notations Used in Set Theory**
-
-- **Empty set (∅ or {})** — represents a mathematical set which contains no elements.
-
-- **Belongs to (∈)** — x ∈ A means that x is an element of set A.
-
-- **Does not belong to (∉)** — y ∉ B means that y is not an element of set B.
-
-**Symbols for Concepts Covered Further Down This Page**
-
-- **Subset (⊆)**
-
-- **Proper subset (⊂)**
-
-- **Superset (⊇)**
-
-- **Proper superset (⊃)**
-
-These relations are discussed in the Relationships Between Sets section below.
-
-Every symbol on this page belongs to a larger family — the full chart of [set theory symbols](!/math-symbols/set-theory) lists each one together with the [LaTeX](!/latex) code that produces it, and the interactive [mathematical keyboard](!/keyboard) lets you type the symbols directly, no codes required.
-    `,
-    before: ``,
-    after: ``,
-    link: '',
+    lead: `The discipline that lends its marks to all the others starts here: the braces that build sets, the bar that filters them, the membership pair, and the symbol for having nothing. Sets take capital letters ($A$, $B$, $C$) by convention; the full chart of [set theory symbols](!/math-symbols/set-theory) lists every mark with its [LaTeX](!/latex) code, and the [mathematical keyboard](!/keyboard) types them directly. The summary table below collects the symbols at a glance.`,
+    inherited: `The containment family $\\subseteq$, $\\subset$, $\\supseteq$, $\\supset$ appears in **Relationships Between Sets** below and is owned by the [subsets page](!/set-theory/subsets); the operation marks $\\cap$, $\\cup$ belong to [operations](!/set-theory/operations).`,
+    entries: [
+      {
+        id: 'roster-braces',
+        tex: `$\\{1, 2, 3\\}$`,
+        read: `the set containing one, two, three`,
+        means: `Enumerative (roster) notation: curly braces list the members outright, and membership is all they claim — order and repetition carry no meaning. Anything can be a member: numbers, letters, words, other sets.`,
+        cases: `Unlistable tails compress to an ellipsis — $\\{1, 2, 3, \\ldots\\}$ continues the visible pattern; [ranges of functions](!/functions/range#2) borrow the roster for finite output lists.`,
+        confusedWith: `The other braces and brackets. A single brace selects rows in [piecewise definitions](!/functions/piecewise#2); square brackets build [intervals](!/functions/domain#2) — $\\{2, 7\\}$ is two numbers, $[2, 7]$ is infinitely many.`,
+      },
+      {
+        id: 'set-builder-bar',
+        tex: `$\\{x \\mid x > 0\\}$`,
+        read: `the set of all x such that x is positive`,
+        means: `Descriptive (set-builder) notation: four building blocks — a variable, the vertical bar reading "such that", a condition, and the enclosing braces. It names sets too large or too awkward to list.`,
+        cases: `Both slots accept words as freely as symbols — $\\{$prime number $\\mid$ prime number $> 10\\}$ is legal; [domain descriptions](!/functions/domain#2) run this grammar with the colon variant $\\{x : \\ldots\\}$ as an alternative bar.`,
+        confusedWith: `Other vertical bars. The same stroke means [divides](!/arithmetic/divisibility) in number theory and absolute value when doubled around a quantity — between a variable and its condition, inside braces, it is always "such that".`,
+      },
+      {
+        id: 'membership-pair',
+        tex: `$\\in$ · $\\notin$`,
+        read: `is an element of; is not an element of`,
+        means: `The membership pair: $x \\in A$ claims $x$ is a member, and the slash manufactures the denial — $y \\notin B$. The slash-negation pattern is general equipment: $\\neq$, $\\notin$, $\\not\\subset$ all deny by striking through.`,
+        cases: `Membership doubles as a domain declaration across mathematics — the $n \\in \\mathbb{Z}$ of [general solutions](!/trigonometry/functions#notation) and the $z \\in \\mathbb{C}$ of [complex numbers](!/complex-numbers/basics#notation) are this mark at work abroad.`,
+        confusedWith: `Containment. $1 \\in A$ but $\\{1\\} \\subseteq A$ — an element belongs, a set is contained; mixing $\\in$ with $\\subseteq$ is the subject's most reliable exam error, and **Relationships Between Sets** below draws the line.`,
+      },
+      {
+        id: 'empty-set',
+        tex: `$\\varnothing$`,
+        read: `the empty set`,
+        means: `The set with no members, written $\\varnothing$ or $\\{\\}$ — one object, two spellings. It is a set like any other: a legitimate value, a legitimate member, a legitimate answer.`,
+        cases: `Nesting is not emptiness: $\\{\\varnothing\\}$ is a one-element set whose single member happens to be empty — $|\\varnothing| = 0$ but $|\\{\\varnothing\\}| = 1$.`,
+        confusedWith: `The Greek letter phi. Handwriting collapses $\\varnothing$ into $\\phi$ — but the empty-set mark is a struck circle, not a letter; writing "phi" for the empty set is a naming error graders notice.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/set-theory`,
+    symbolsLabel: `All set theory symbols`,
+    parentHref: `/set-theory`,
+    parentLabel: `Set Theory`,
   },
   obj3: {
     title: `Cardinality and Types of Sets`,
@@ -455,10 +426,21 @@ export default function SetTheoryBasicsPage({seoData, sectionsContent, introCont
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div
             key={'notation-table'}
             style={tableWrapStyle}

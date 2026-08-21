@@ -1,5 +1,6 @@
 
 import React, { useState, useMemo, useId } from 'react';
+import { processContent } from '../../../../utils/contentProcessor';
 import { Source_Serif_4, IBM_Plex_Sans } from 'next/font/google';
 
 const sourceSerif = Source_Serif_4({
@@ -15,7 +16,18 @@ const ibmPlex = IBM_Plex_Sans({
 const serifFont = sourceSerif.style.fontFamily;
 const sansFont = ibmPlex.style.fontFamily;
 
-const PowerTable = () => {
+// Line 1 (additive): maps the live (base, maxPower) pair onto the page's
+// per-state explanation keys.
+function l1KeyOf(base, maxPower) {
+  if (base === 2 && maxPower === 10) return 'b2-default';
+  if (base === 2 && maxPower === 16) return 'b2-deep';
+  if (base === 5 && maxPower === 10) return 'b5-cap';
+  if (base === 7 && maxPower === 10) return 'b7';
+  if (base === 10 && maxPower === 10) return 'b10';
+  return null;
+}
+
+const PowerTable = ({ explanations = null }) => {
   const [base, setBase] = useState(2);
   const [maxPower, setMaxPower] = useState(10);
   const [baseInput, setBaseInput] = useState('2');
@@ -514,6 +526,22 @@ const PowerTable = () => {
             Each row is <strong style={styles.patternStrong}>×{base}</strong> the row above it — that is the power of exponents!
           </p>
         </div>
+
+        {(() => {
+          // Line 1 (additive): matched configuration entry; nothing renders
+          // without the prop or for unmatched (base, maxPower) pairs.
+          const l1Key = l1KeyOf(base, maxPower);
+          const entry = explanations && l1Key && explanations[l1Key];
+          if (!entry) return null;
+          return (
+            <div style={{ marginTop: 12, padding: '12px 16px', background: '#fff',
+                          borderRadius: 10, border: '1px solid #c8e0ff',
+                          fontFamily: sansFont, fontSize: '0.9rem',
+                          lineHeight: 1.55, color: '#1a365d' }}>
+              {processContent(entry)}
+            </div>
+          );
+        })()}
       </div>
     </div>
   );

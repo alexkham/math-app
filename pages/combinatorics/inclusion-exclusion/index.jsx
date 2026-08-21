@@ -222,7 +222,7 @@ export async function getStaticProps(){
 
 // ## Structure of the Formula
 
-// The number of terms at level $k$ — meaning the number of $k$-fold intersections being summed — is [$\\binom{n}{k}$](!/combinatorics/binomial-coefficient), one term for each $k$-subset of the $n$ sets. The total number of terms across all levels is
+// The number of terms at level $k$ — meaning the number of $k$-fold intersections being summed — is the [binomial coefficient](!/combinatorics/binomial-coefficient#notation) $\\binom{n}{k}$, one term for each $k$-subset of the $n$ sets. The total number of terms across all levels is
 
 // $$\\sum_{k=1}^{n} \\binom{n}{k} = 2^n - 1,$$
 
@@ -433,7 +433,7 @@ $$\\left| \\bigcup_{i=1}^{n} A_i \\right| = \\sum_{k=1}^{n} (-1)^{k+1} \\sum_{1 
 
 ## Structure of the Formula
 
-The number of terms at level $k$ — meaning the number of $k$-fold intersections being summed — is [$\\binom{n}{k}$](!/combinatorics/binomial-coefficient), one term for each $k$-subset of the $n$ sets. The total number of terms across all levels is
+The number of terms at level $k$ — meaning the number of $k$-fold intersections being summed — is the [binomial coefficient](!/combinatorics/binomial-coefficient#notation) $\\binom{n}{k}$, one term for each $k$-subset of the $n$ sets. The total number of terms across all levels is
 
 $$\\sum_{k=1}^{n} \\binom{n}{k} = 2^n - 1,$$
 

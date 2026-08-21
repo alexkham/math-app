@@ -9,6 +9,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -266,24 +267,40 @@ The domain is distinct from the [range](!/functions/range), which describes outp
     link: '',
   },
 
-  obj2: {
-    title: `Expressing Domain`,
-    content: `Domain can be expressed in several equivalent notations, each suited to different contexts — all of them collected among the [function symbols](!/math-symbols/functions).
-
-Interval notation uses parentheses and brackets to describe continuous sets. A parenthesis excludes the endpoint; a bracket includes it. The interval $[2, 5)$ contains all numbers from $2$ to $5$, including $2$ but excluding $5$. The interval $(-\\infty, 3]$ contains all numbers up to and including $3$. Infinity always takes a parenthesis because infinity is not a number that can be reached.
-
-Set-builder notation describes the domain by a defining property. The set $\\{x \\mid x \\geq 0\\}$ reads "the set of all $x$ such that $x$ is greater than or equal to zero." This notation handles complex conditions that intervals cannot easily express.
-
-Inequality notation states the condition directly: $x \\geq 0$ or $-3 < x \\leq 7$. This form appears often in contexts where the domain restriction is being derived or explained.
-
-Graphical representation shows the domain on a number line. A solid dot marks an included endpoint; an open dot marks an excluded one. Shading indicates the included values.
-
-Disconnected domains use union notation. The domain $(-\\infty, -1) \\cup (1, \\infty)$ consists of all numbers less than $-1$ together with all numbers greater than $1$, excluding everything in between.
-
-The table below collects these notations side by side with their forms and representative examples.`,
-    before: ``,
-    after: ``,
-    link: '',
+  notation: {
+    title: `Domain Notation`,
+    lead: `Four spellings for one set: intervals, the set-builder bar, bare inequalities, and the union glue for disconnected pieces — all collected among the [function symbols](!/math-symbols/functions), and compared side by side in the table below. The number-line picture (solid dot in, open dot out) is the graphical twin of the bracket rules.`,
+    inherited: `The inequality signs themselves — $<$, $\\leq$ and their chains — are owned by [inequality notation](!/algebra/inequalities/linear#notation), which also carries the endpoint fine print (Bourbaki's reversed brackets, the $\\infty$ rule's rationale); $f(x)$ comes from [function notation](!/functions/basics#5).`,
+    entries: [
+      {
+        id: 'interval-brackets',
+        tex: `$[2, 5)$`,
+        read: `the interval from two, included, to five, excluded`,
+        means: `Bracket in, parenthesis out: $[2, 5)$ holds everything from $2$ to $5$, keeping $2$, dropping $5$. One symbol pair per endpoint, each deciding membership independently.`,
+        cases: `Infinity always takes the parenthesis — $(-\\infty, 3]$ — because no set reaches it; half-open intervals like $[0, 2\\pi)$ are the standard trick for one-copy-per-cycle work in [trigonometry](!/trigonometry/equations#notation).`,
+        confusedWith: `A coordinate point. $(2, 5)$ is simultaneously an open interval and a point in the plane — and a [vector](!/linear-algebra/vectors/basic-operations#notation); only context says whether the pair is a set or a location.`,
+      },
+      {
+        id: 'set-builder',
+        tex: `$\\{x \\mid x \\geq 0\\}$`,
+        read: `the set of all x such that x is at least zero`,
+        means: `The set-builder bar: left of $\\mid$ names the variable, right of it states the admission test — "such that" is the reading. It handles conditions intervals cannot spell, and the braces are [set-theory marks](!/set-theory/basics) on loan.`,
+        cases: `The colon variant $\\{x : x \\geq 0\\}$ is the same statement — common where the bar could collide with absolute value; fuller spellings declare the universe first: $\\{x \\in \\mathbb{R} \\mid x \\geq 0\\}$.`,
+        confusedWith: `Divisibility's bar. In number theory $a \\mid b$ means "$a$ divides $b$" — the same stroke, an unrelated claim; inside braces it is always "such that".`,
+      },
+      {
+        id: 'union-glue',
+        tex: `$(-\\infty, -1) \\cup (1, \\infty)$`,
+        read: `the union of two intervals`,
+        means: `The glue for disconnected domains: $\\cup$ joins pieces into one set, reading as "or" — a number qualifies by landing in either interval. Rational functions manufacture these in **Finding Domain: Rational Functions** below.`,
+        cases: `Each excluded point splits the line once — two exclusions, three pieces: $(-\\infty, -3) \\cup (-3, 3) \\cup (3, \\infty)$; the alternative spelling $\\mathbb{R} \\setminus \\{2\\}$ says "all reals except $2$" in one stroke.`,
+        confusedWith: `Intersection. $\\cup$ collects, $\\cap$ filters — a domain written with $\\cap$ by reflex is usually empty; the cup opens upward to "hold everything", the standard memory hook.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/functions`,
+    symbolsLabel: `All function symbols`,
+    parentHref: `/functions`,
+    parentLabel: `Functions`,
   },
 
   obj3: {
@@ -626,10 +643,21 @@ export default function DomainPage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
         ]

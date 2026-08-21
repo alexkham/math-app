@@ -8,6 +8,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -735,6 +736,42 @@ Here $a$ controls vertical stretch and reflection, $b$ controls horizontal stret
     link: '',
   },
 
+  notation: {
+    title: `Transformation Notation`,
+    lead: `Four lowercase knobs, one sign trap, and a minus that flips a different mirror depending on where it stands. The inside/outside split — input changes move horizontally, output changes vertically — is the single rule behind everything here.`,
+    inherited: `$f(x)$, substitution and the letter conventions come from [function notation](!/functions/basics#5); the domain and range each transformation drags along are written with [domain](!/functions/domain#2) and [range](!/functions/range#2) notation.`,
+    entries: [
+      {
+        id: 'four-knobs',
+        tex: `$a \\cdot f(b(x - h)) + k$`,
+        read: `a times f of b times, x minus h, plus k`,
+        means: `The four-knob recipe: outside letters ($a$, $k$) act on the output and move things vertically; inside letters ($b$, $h$) act on the input and move things horizontally — **Transformations Overview** above assigns each its job.`,
+        cases: `Trigonometry runs the same machine in capitals — the $A\\sin(Bx - C) + D$ of [sinusoidal graphs](!/trigonometry/graphs#notation); the $h, k$ pair is the one vertex form $(x - h)^2 + k$ carries. Case is convention; the grammar is identical.`,
+        confusedWith: `A left-to-right pipeline. The knobs do not apply in reading order — inside transformations act before outside ones, which is why combined problems track **Order of Transformations** below.`,
+      },
+      {
+        id: 'minus-shifts-right',
+        tex: `$f(x - h)$`,
+        read: `f of x minus h`,
+        means: `The sign trap of the subject: subtracting inside shifts right — $(x - 3)^2$ sits three units to the right of $x^2$. **Horizontal Translations** below explains why the direction inverts; the notation just records the outcome.`,
+        cases: `Left shifts hide as negative $h$: $|x + 2|$ is $x - (-2)$, so $h = -2$, two units left — reading a shift means first rewriting the inside as a subtraction.`,
+        confusedWith: `The vertical twin. Outside, the sign behaves: $f(x) + k$ goes up for positive $k$, no inversion — importing that intuition inside is exactly how graphs land on the wrong side.`,
+      },
+      {
+        id: 'two-mirrors',
+        tex: `$-f(x)$ vs $f(-x)$`,
+        read: `minus f of x; f of minus x`,
+        means: `One minus, two mirrors — position picks the axis: $-f(x)$ negates outputs and flips across the $x$-axis; $f(-x)$ negates inputs and flips across the $y$-axis. **Vertical Reflections** and **Horizontal Reflections** below draw both.`,
+        cases: `The pair doubles as the symmetry test: $f(-x) = f(x)$ declares a function even, $f(-x) = -f(x)$ odd — the checks of [graph analysis](!/functions/analyzing).`,
+        confusedWith: `Each other, constantly. For odd functions the two coincide — $(-x)^3 = -x^3$ hides the difference; testing on a lopsided function like $\\sqrt{x}$ or $e^x$ is the fastest way to see the two mirrors apart.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/functions`,
+    symbolsLabel: `All function symbols`,
+    parentHref: `/functions`,
+    parentLabel: `Functions`,
+  },
+
   obj3: {
     title: `Vertical Translations`,
     content: `A vertical translation shifts the graph up or down. Every point moves the same vertical distance; the shape remains unchanged.
@@ -905,7 +942,7 @@ For $f(x) = \\sin(x)$, the function $g(x) = \\sin(2x)$ compresses the wave horiz
 
 Horizontal scaling affects the [domain](!/functions/domain). If $f$ has domain $[a, b]$, then $f(bx)$ has domain $[a/b, b/b] = [a/b, 1]$ when $b > 0$.
 
-Across the six basic transformations covered in obj3–obj8, a single pattern emerges: operations applied *inside* $f$ act on the horizontal direction, while operations applied *outside* $f$ act on the vertical direction. The table below pairs the inside form with the outside form for each of the three operation types — addition, negation, and scaling.`,
+Across the six basic transformations covered in obj3–obj8, a single pattern emerges: operations applied **inside** $f$ act on the horizontal direction, while operations applied **outside** $f$ act on the vertical direction. The table below pairs the inside form with the outside form for each of the three operation types — addition, negation, and scaling.`,
     before: ``,
     after: ``,
     link: '',
@@ -1234,6 +1271,25 @@ export default function TransformationsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

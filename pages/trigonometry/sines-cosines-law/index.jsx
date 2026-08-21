@@ -8,6 +8,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -257,20 +258,40 @@ const sectionsContent={
   },
  
     
-     obj1: {
+     notation: {
     title: `Triangle Notation`,
-    content: `A standard labeling convention is used throughout triangle-solving problems. The three vertices are labeled $A$, $B$, $C$. The side opposite each vertex is labeled with the corresponding lowercase letter: $a$ is opposite $A$, $b$ is opposite $B$, $c$ is opposite $C$.
-
-This means $a$ is the side between vertices $B$ and $C$, $b$ is the side between $A$ and $C$, and $c$ is the side between $A$ and $B$. The convention ensures that every side-angle pair — $(a, A)$, $(b, B)$, $(c, C)$ — consists of a side and the angle directly across the triangle from it. This pairing is central to the Law of Sines.
-
-The sum of the interior angles is always $180°$ (or $\\pi$ radians):
-
-$$A + B + C = 180°$$
-
-This constraint means that knowing any two angles immediately gives the third. It also limits the possible configurations: at most one angle can be obtuse (greater than $90°$), and if one angle is obtuse, the other two must both be acute.`,
-    before: ``,
-    after: ``,
-    link: ``,
+    lead: `The labeling convention every triangle-solving statement assumes: case-paired letters, the side-angle teams they form, and two reserved letters the formulas lean on. The angle-sum constraint $A + B + C = 180°$ rides along — knowing two angles always gives the third.`,
+    inherited: `$\\sin$ and $\\cos$ come from the [right triangle page](!/trigonometry/right-triangle#notation), degrees and radians from [angle measure](!/trigonometry/degrees-radians#notation); the general-solution machinery for recovered angles lives with [solution sets](!/trigonometry/equations#notation).`,
+    entries: [
+      {
+        id: 'case-pairing',
+        tex: `$A, B, C$ · $a, b, c$`,
+        read: `capital A, B, C; lowercase a, b, c`,
+        means: `Case carries the geometry: capitals name the vertices — and the angles at them — while each lowercase letter names the side opposite its capital. $a$ faces $A$ from across the triangle, and every capital does double duty as point and angle measure.`,
+        cases: `The convention retires the [right-triangle labels](!/trigonometry/right-triangle#notation) — opp/adj/hyp give way to opposite-pairing — and the [Greek dress code](!/trigonometry/degrees-radians#notation) yields to Latin capitals inside triangle work.`,
+        confusedWith: `Adjacency. $a$ is not a side touching $A$ — it is the one side that avoids $A$ entirely, running between $B$ and $C$; reading "$a$ belongs to $A$" as adjacency inverts the whole convention.`,
+      },
+      {
+        id: 'side-angle-pairs',
+        tex: `$(a, A)$`,
+        read: `the side-angle pair a, A`,
+        means: `Pairs travel together: $(a, A)$, $(b, B)$, $(c, C)$ — one side and the angle directly across. **The Law of Sines** below is written entirely in these teams: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$.`,
+        cases: `A complete pair is the price of admission — the strategies of **When to Use the Law of Sines** below are stated as "one complete pair plus one more piece"; the common ratio itself equals $2R$, twice the circumradius.`,
+        confusedWith: `A coordinate point. The parentheses group a team, not a location — $(a, A)$ mixes a length with an angle and plots nowhere.`,
+      },
+      {
+        id: 'reserved-letters',
+        tex: `$s$ · $R$`,
+        read: `little s, the semiperimeter; capital R, the circumradius`,
+        means: `Two reserved letters of triangle-solving: $s = \\frac{a+b+c}{2}$, half the perimeter, the workhorse of **Heron's Formula** below; and $R$, the radius of the circle through all three vertices, surfacing in $\\frac{a}{\\sin A} = 2R$.`,
+        cases: `Both are strong enough conventions to appear undefined in careless texts — a bare $s$ in a triangle formula means semiperimeter unless stated otherwise, and lowercase $r$ stays reserved for the inscribed circle.`,
+        confusedWith: `Arc length's $s$. The same letter measures the [arc](!/trigonometry/degrees-radians) in $s = r\\theta$ — an unrelated job; no circle in sight is the tell that Heron's $s$ is meant.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/trigonometry`,
+    symbolsLabel: `All trigonometry symbols`,
+    parentHref: `/trigonometry`,
+    parentLabel: `Trigonometry`,
   },
   obj2: {
     title: `The Law of Sines`,
@@ -618,10 +639,21 @@ export default function SinesCosinesLawPage({
     },
     {
         id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj1.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

@@ -494,6 +494,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import CompletingTheSquare from '../../../../app/components/algebra/visualizers/equations/CompleteTheSquare'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import completeTheSquareDiagrams from '../../../../app/components/algebra/visualizers/equations/completeTheSquareDiagrams'
 
 
 export async function getStaticProps(){
@@ -584,15 +586,15 @@ Edits update the diagram and the step list immediately. There is no apply button
       title: `Presets`,
       content: `Five preset buttons below the input row load curated quadratics chosen to show different cases of the completing-the-square procedure:
 
-• **$x^2 + 6x + 5$** — the default. Monic, positive $b$, the constant is less than $(b/2)^2 = 9$, so the diagram shows a gap.
+• **$x^2 + 6x + 5$** — [the default quadratic](!#the-default-quadratic). Monic, positive $b$, the constant is less than $(b/2)^2 = 9$, so the diagram shows a gap.
 
-• **$2x^2 + 8x + 3$** — non-monic. Triggers the extra step that factors out $2$ from the $x$ terms.
+• **$2x^2 + 8x + 3$** — non-monic, with [a leading coefficient of two](!#a-leading-coefficient-of-two). Triggers the extra step that factors out $2$ from the $x$ terms.
 
-• **$x^2 - 4x + 1$** — negative $b$. The half-strips are oriented the same way; the sign appears in the final $(x - 2)^2$ form.
+• **$x^2 - 4x + 1$** — [the negative middle term](!#the-negative-middle-term). The half-strips are oriented the same way; the sign appears in the final $(x - 2)^2$ form.
 
-• **$x^2 + 5x + 2$** — fractional $b/2 = 2.5$. Demonstrates that the method works for non-integer halves.
+• **$x^2 + 5x + 2$** — [the fractional half](!#the-fractional-half), $b/2 = 2.5$. Demonstrates that the method works for non-integer halves.
 
-• **$3x^2 + 12x + 7$** — non-monic with positive leading coefficient. Combines factoring and a non-trivial gap.
+• **$3x^2 + 12x + 7$** — non-monic, with [a leading coefficient of three](!#a-leading-coefficient-of-three). Combines factoring and a non-trivial gap.
 
 Click any preset to load it; the inputs, diagram, and step list all refresh.`,
       before: ``,
@@ -604,19 +606,19 @@ Click any preset to load it; the inputs, diagram, and step list all refresh.`,
       title: `The Geometric Diagram`,
       content: `The left-side **Geometric Picture** card animates the construction stage by stage. Each stage shows a different state of the square-in-progress:
 
-• **Start** — three separate pieces appear side by side: a blue $x^2$ square, an orange $bx$ rectangle, and a green or red constant block for $c$.
+• [Start](!#the-starting-equation) — three separate pieces appear side by side: a blue $x^2$ square, an orange $bx$ rectangle, and a green or red constant block for $c$.
 
-• **Factor out $a$** (only when $a \\neq 1$) — a text card noting that the rest of the work happens on the monic part; the $a$ is restored at the end.
+• [Factor out a](!#factoring-out-the-leading-coefficient) (only when $a \\neq 1$) — a text card noting that the rest of the work happens on the monic part; the $a$ is restored at the end.
 
-• **Place the $x^2$ square** — the blue square is positioned alone with both sides labeled $x$.
+• [Place the x² square](!#placing-the-x-square) — the blue square is positioned alone with both sides labeled $x$.
 
-• **Split the $bx$ rectangle** — the orange rectangle is divided into two equal strips of width $b/2$ and length $x$, one placed to the right of the square and one below.
+• [Split the bx rectangle](!#splitting-the-bx-rectangle) — the orange rectangle is divided into two equal strips of width $b/2$ and length $x$, one placed to the right of the square and one below.
 
-• **Drop $c$ into the corner** — the green block lands in the bottom-right corner where the two strips meet. A leader line points to a label noting that the corner needs $(b/2) \\times (b/2) = (b/2)^2$ to be complete.
+• [Drop c into the corner](!#the-constant-in-the-corner) — the green block lands in the bottom-right corner where the two strips meet. A leader line points to a label noting that the corner needs $(b/2) \\times (b/2) = (b/2)^2$ to be complete.
 
-• **The gap or excess** — if $c < (b/2)^2$, a pulsing red block highlights the missing area equal to $(b/2)^2 - c$. If $c > (b/2)^2$, an overflow note appears instead.
+• [The gap or excess](!#the-gap-in-the-corner) — if $c < (b/2)^2$, a pulsing red block highlights the missing area equal to $(b/2)^2 - c$. If $c > (b/2)^2$, an overflow note appears instead.
 
-• **Complete the square** — the full $(x + b/2) \\times (x + b/2)$ square is shown with dimension bars on the outside and the final vertex-form equation below.`,
+• [Complete the square](!#reading-off-the-vertex-form) — the full $(x + b/2) \\times (x + b/2)$ square is shown with dimension bars on the outside and the final vertex-form equation below, ready for [the solving step](!#solving-for-x).`,
       before: ``,
       after: ``,
       link: '',
@@ -736,44 +738,194 @@ For the general $ax^2 + bx + c$, first factor $a$ out of the $x^2$ and $x$ terms
       link: '',
     },
 
+    // ---- Line 1 per-state sections: the step sequence (frozen on x² + 6x + 5) ----
+
     obj11: {
-      title: ``,
-      content: ``,
+      title: `The Starting Equation`,
+      content: `Step one lays the raw material side by side: the blue $x^2$ square, the orange $6x$ rectangle, and the green constant $5$ — three algebraic terms drawn as three areas, not yet arranged into anything.`,
       before: ``,
-      after: ``,
+      after: `The frame establishes the tool's central translation: *terms are areas*. $x^2$ is literally a square of side $x$, $6x$ a rectangle with sides $6$ and $x$, and the constant a block of fixed area. Everything the procedure does from here is rearrangement — no area is ever created or destroyed, which is why the algebra stays honest.
+
+The color code set here persists through every later frame: blue for the square, orange for anything built from the $x$-term, green for the constant, and — later — red for what is missing. Follow the colors and the algebra follows.`,
       link: '',
     },
+
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Factoring Out the Leading Coefficient`,
+      content: `A step that only exists when $a \\neq 1$ — frozen here from the preset $2x^2 + 8x + 3$. The card announces the move to the monic part $x^2 + 4x$, with the factor of $2$ set aside.`,
       before: ``,
-      after: ``,
+      after: `The geometric construction needs a plain $x^2$ square to build on, so a non-monic quadratic is first divided down: $2x^2 + 8x$ becomes $2(x^2 + 4x)$, and the picture works inside the parentheses. The factor waits outside and is restored in the final step — which is why this frame is deliberately text-only, a bookkeeping interlude between two geometric acts.
+
+Note what changed and what did not: the working middle coefficient is now $b/a = 4$, so all later half-splitting uses $2$, not $4$ — the halving happens *after* the factoring. Skipping this order is the classic non-monic error, and the tool structurally prevents it.`,
       link: '',
     },
+
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Placing the x² Square`,
+      content: `The construction begins: a single blue square, sides labeled $x$, area $x^2$. Nothing else on the canvas.`,
       before: ``,
-      after: ``,
+      after: `Starting from the square alone makes the goal visible by its absence: the finished figure will be a *larger* square, and everything that follows is about growing this one symmetrically. The two labeled sides matter — both must grow by the same amount for the result to stay square.
+
+This is also where the geometric method quietly commits to $x > 0$ pictures: lengths are drawn positive. The algebra it encodes has no such restriction — a point the negative-$b$ preset returns to.`,
       link: '',
     },
+
     obj14: {
-      title: ``,
-      content: ``,
+      title: `Splitting the bx Rectangle`,
+      content: `The $6x$ rectangle is cut into two equal strips of size $3 \\times x$, one laid along the square's right edge, one along its bottom. The figure is now an L-shape — a square with two arms.`,
       before: ``,
-      after: ``,
+      after: `The split *in half* is the step where completing the square actually happens, conceptually: only an even division lets the two strips extend the square symmetrically in both directions. Any other cut would produce a rectangle, not a near-square. Half of $6$ is $3$, and that $3$ is the number that will appear inside the parentheses of $(x+3)^2$.
+
+Algebraically the frame reads $x^2 + 2 \\cdot 3x$ — the rewriting of $6x$ as twice $3x$ that seems pointless on paper and is self-evident in the picture: two identical orange strips.`,
       link: '',
     },
+
     obj15: {
-      title: ``,
-      content: ``,
+      title: `The Constant in the Corner`,
+      content: `The dashed outline marks what the L-shape is missing: a $3 \\times 3$ corner. The green constant $5$ is dropped into it — and visibly fails to fill it, since the corner needs area $9$.`,
       before: ``,
-      after: ``,
+      after: `This is the frame where the question of the whole method crystallizes: *does the constant complete the square?* The leader line does the arithmetic in place — the corner needs $(b/2)^2 = 9$ — while the green block supplies only $5$. The mismatch is no failure; measuring it is precisely the next step.
+
+The three possible answers (too little, too much, exactly right) are the three characters a quadratic can have here, and the presets cover them. For the default, the answer is "too little by 4" — see [the gap step](!#the-gap-in-the-corner).`,
       link: '',
-    }
+    },
+
+    obj16: {
+      title: `The Gap in the Corner`,
+      content: `The red block makes the shortfall explicit: the corner needs $9$, the constant gives $5$, and the missing area — the **gap** — is $4$. The near-square is complete except for this red rectangle.`,
+      before: ``,
+      after: `The gap is the number the whole procedure was built to find: the original expression equals the completed square *minus the gap*, $x^2 + 6x + 5 = (x+3)^2 - 4$. In the live tool this block pulses; frozen here, it simply sits where the missing area is, labeled with its value.
+
+Its sign carries the geometry of the parabola: a positive gap means the vertex lies below the $x$-axis by exactly that amount (for monic quadratics, $k = -\\text{gap}$), which is why the equation $(x+3)^2 = 4$ will have two real solutions. The overflow case — constant larger than the corner — flips every one of those statements.`,
+      link: '',
+    },
+
+    obj17: {
+      title: `Reading Off the Vertex Form`,
+      content: `The finished figure: a full square of side $x + 3$, dimension bars along both edges, the corner filled, and the equation below — $(x + 3)^2 - 4 = 0$.`,
+      before: ``,
+      after: `The dimension bars are the payoff of the whole construction: the big square's side is readable as $x + 3$ directly from the picture, so its area is $(x+3)^2$ with no expansion needed. Subtract the red gap and the vertex form is simply *what the figure says*.
+
+From here the vertex coordinates fall out: $h = -3$ (the sign flips because the form is $(x - h)^2$) and $k = -4$. The tool's blue vertex box activates at this step with exactly those numbers — geometry and formula agreeing in public.`,
+      link: '',
+    },
+
+    obj18: {
+      title: `Solving for x`,
+      content: `The final step keeps the completed-square picture and turns it into roots: move the $4$ across, take square roots, and $x = -3 \\pm 2$ — the solutions $-1$ and $-5$.`,
+      before: ``,
+      after: `The solving step is deliberately anticlimactic — the hard work was geometric, and what remains is two lines of algebra on the vertex form: $(x+3)^2 = 4$, so $x + 3 = \\pm 2$. The $\\pm$ is where the parabola's symmetry re-enters: two points at equal distance from the axis $x = -3$.
+
+The same two lines run in general as $x = h \\pm \\sqrt{-k/a}$, and the sign of $-k/a$ decides everything: positive gives two roots, zero one repeated root, negative a complex pair — the tool prints the $i$ explicitly in that case. Completing the square doesn't just solve the equation; run on the general coefficients, it *derives the quadratic formula*, which is the deepest fact on this page.`,
+      link: '',
+    },
+
+    // ---- Line 1 per-state sections: the presets (frozen at the gap stage) ----
+
+    obj19: {
+      title: `The Default Quadratic`,
+      content: `$x^2 + 6x + 5$, frozen at its gap frame: strips of width $3$, a corner needing $9$, a constant of $5$, and a red gap of $4$.`,
+      before: ``,
+      after: `The default is chosen to be maximally legible: monic, everything integer, and a gap that is a perfect square, so the roots come out whole ($-1$ and $-5$). It is the configuration every step section on this page freezes, which makes it the reference thread — read the [step sequence](!#the-geometric-diagram) with these numbers in mind and every frame belongs to one continuous story.
+
+As a factoring cross-check: $x^2 + 6x + 5 = (x+1)(x+5)$, confirming the roots the square-completion finds. When both methods are available, they must agree — a useful habit of verification the tool makes cheap.`,
+      link: '',
+    },
+
+    obj20: {
+      title: `A Leading Coefficient of Two`,
+      content: `$2x^2 + 8x + 3$, frozen at the gap stage of its monic part $x^2 + 4x + 1.5$: strips of width $2$, a corner needing $4$, and a gap of $2.5$.`,
+      before: ``,
+      after: `The non-monic preset shows the division rippling through every number: the working middle term is $8/2 = 4$, the half is $2$, and the constant becomes the fraction $1.5$ — integer inputs do not guarantee integer geometry once $a$ is factored out.
+
+The finish restores the factor: $2(x + 2)^2 - 5$, so the vertex is $(-2, -5)$ and the gap seen in the frame gets scaled by $a$ on the way back. That final multiplication is the step most often forgotten in hand calculations; the tool performs it as its own titled move — see [the factoring step](!#factoring-out-the-leading-coefficient) for the opening half of the same bracket.`,
+      link: '',
+    },
+
+    obj21: {
+      title: `The Negative Middle Term`,
+      content: `$x^2 - 4x + 1$, frozen at its gap frame: half of $-4$ is $-2$, the strips carry the label $-2x$, the corner needs $4$, and the gap is $3$.`,
+      before: ``,
+      after: `Geometry draws lengths positive, so the strips look the same as ever — the negative sign lives in the labels and re-emerges in the algebra as $(x - 2)^2$. The picture is best read as an honest diagram of the *magnitudes* with the signs tracked symbolically, which is exactly how the tool renders it.
+
+The result $(x-2)^2 - 3 = 0$ gives $x = 2 \\pm \\sqrt{3}$ — the preset where the roots go irrational, a reminder that clean inputs promise nothing about outputs. The vertex $(2, -3)$ sits to the *right* of the axis: negative $b$ pushes the parabola's turning point in the positive direction.`,
+      link: '',
+    },
+
+    obj22: {
+      title: `The Fractional Half`,
+      content: `$x^2 + 5x + 2$, frozen at its gap frame: an odd middle coefficient makes the half $2.5$, the corner $6.25$, and the gap $4.25$.`,
+      before: ``,
+      after: `The odd-$b$ preset retires a common suspicion — that the halving trick only works when $b$ is even. The geometry does not care: strips of width $2.5$ extend the square exactly as well as integer ones, and the corner is simply $2.5^2 = 6.25$.
+
+The completed form $(x + 2.5)^2 - 4.25$ produces the roots $-2.5 \\pm \\sqrt{4.25}$. Fractions are precisely why completing the square is taught as a general method rather than a factoring shortcut: $x^2 + 5x + 2$ has no rational factorization, yet the procedure never notices.`,
+      link: '',
+    },
+
+    obj23: {
+      title: `A Leading Coefficient of Three`,
+      content: `$3x^2 + 12x + 7$, frozen at the gap stage of its monic part $x^2 + 4x + 7/3$: strips of width $2$, a corner of $4$, and a gap of $5/3$ — drawn as its decimal $1.6667$.`,
+      before: ``,
+      after: `The last preset compounds both complications: factoring out $3$ *and* a fractional constant $7/3$. The frame's proportions tell the story at a glance — the green block fills most of the corner, leaving a thin red sliver, the smallest gap of the five presets.
+
+Restoring the factor gives $3(x + 2)^2 - 5$, vertex $(-2, -5)$ — coincidentally the same vertex as [the coefficient-two preset](!#a-leading-coefficient-of-two), reached by an entirely different quadratic. Two parabolas sharing a vertex but not a width: a closing illustration that $a$ alone controls the opening, while completing the square finds the turning point.`,
+      link: '',
+    },
 
   }
 
+
+  // Frozen-state framed units (Line 1): the 8 construction steps plus the 5
+  // presets. Built here, passed via props, rendered as content-array items.
+  const d = completeTheSquareDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    'step-start': u('step-start', 'Step 1: starting equation, frozen',
+      'Three terms as three areas: the x&#178; square, the 6x rectangle, the constant block. Nothing arranged yet &#8212; the raw material.'),
+    'step-factor': u('step-factor', 'Factor-out step (2x&#178; + 8x + 3), frozen',
+      'The non-monic interlude: work moves to the monic part x&#178; + 4x, with the factor of 2 waiting outside until the end.'),
+    'step-square': u('step-square', 'Step 2: the x&#178; square, frozen',
+      'The construction site: one blue square, both sides labeled x. Everything that follows grows it symmetrically.'),
+    'step-split': u('step-split', 'Step 3: splitting 6x, frozen',
+      'Two equal 3&#215;x strips, right and below: the halving that makes the figure a near-square instead of a rectangle.'),
+    'step-corner': u('step-corner', 'Step 4: the constant in the corner, frozen',
+      'The dashed corner needs 3 &#215; 3 = 9; the green 5 sits inside and visibly falls short. The mismatch is the next step&#8217;s subject.'),
+    'step-gap': u('step-gap', 'Step 5: the gap, frozen',
+      'The red block measures the shortfall: gap = 9 &#8722; 5 = 4. The expression is exactly 4 less than a perfect square.'),
+    'step-vertex': u('step-vertex', 'Step 6: vertex form, frozen',
+      'Dimension bars read the side as x + 3, so the figure IS (x+3)&#178; &#8722; 4 &#8212; the vertex form as a picture.'),
+    'step-solve': u('step-solve', 'Step 7: solving, frozen',
+      'The completed square turned into roots: (x+3)&#178; = 4, so x = &#8722;3 &#177; 2 &#8212; the parabola&#8217;s symmetry made algebraic.'),
+    'ps-basic': u('ps-basic', 'x&#178; + 6x + 5, frozen at the gap',
+      'The reference preset: all integers, gap 4 a perfect square, roots &#8722;1 and &#8722;5 whole. Maximum legibility.'),
+    'ps-factored': u('ps-factored', '2x&#178; + 8x + 3, frozen at the gap',
+      'The factor of 2 ripples through: working middle term 4, half 2, and a fractional constant 1.5 in the corner.'),
+    'ps-negative-b': u('ps-negative-b', 'x&#178; &#8722; 4x + 1, frozen at the gap',
+      'Negative b lives in the labels (&#8722;2x strips), not the geometry &#8212; and resurfaces as (x &#8722; 2)&#178; in the result.'),
+    'ps-odd-b': u('ps-odd-b', 'x&#178; + 5x + 2, frozen at the gap',
+      'The odd middle coefficient: strips of width 2.5, corner 6.25 &#8212; the halving trick indifferent to fractions.'),
+    'ps-triple': u('ps-triple', '3x&#178; + 12x + 7, frozen at the gap',
+      'Both complications at once: factor 3 out, constant 7/3 in &#8212; leaving the thinnest red sliver of the five presets.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the tool's diagram
+  // caption through processContent — $math$ and same-page !# anchors work.
+  // The step entry and the preset entry can both be active.
+  const explanations = {
+    'step-start': `Terms are areas: $x^2$ a square, $bx$ a rectangle, $c$ a block — and the whole method is rearrangement without loss. [Learn more about the starting equation](!#the-starting-equation) · [All steps](!#the-geometric-diagram)`,
+    'step-factor': `The construction needs a monic square, so $a$ is factored out first and restored at the end — halving happens after dividing. [Learn more about the factor-out step](!#factoring-out-the-leading-coefficient) · [All steps](!#the-geometric-diagram)`,
+    'step-square': `One blue square, sides $x$: the goal is to grow it into a larger square symmetrically. [Learn more about placing the square](!#placing-the-x-square) · [All steps](!#the-geometric-diagram)`,
+    'step-split': `Cutting $bx$ in half is where the square gets completed conceptually — only an even split extends both sides equally. [Learn more about the split](!#splitting-the-bx-rectangle) · [All steps](!#the-geometric-diagram)`,
+    'step-corner': `The corner needs $(b/2)^2$; the constant may fall short, overflow, or fit exactly — measuring that is the whole point. [Learn more about the corner](!#the-constant-in-the-corner) · [All steps](!#the-geometric-diagram)`,
+    'step-gap': `The red gap is the number the method computes: the expression equals the completed square minus the gap. [Learn more about the gap](!#the-gap-in-the-corner) · [All steps](!#the-geometric-diagram)`,
+    'step-vertex': `The dimension bars read the side as $x + b/2$, so the vertex form is what the figure literally says. [Learn more about the vertex form](!#reading-off-the-vertex-form) · [All steps](!#the-geometric-diagram)`,
+    'step-solve': `Two lines of algebra on the vertex form give $x = h \\pm \\sqrt{-k/a}$ — run on general coefficients, this derives the quadratic formula. [Learn more about solving](!#solving-for-x) · [All steps](!#the-geometric-diagram)`,
+    'ps-basic': `The all-integer reference: gap $4$, roots $-1$ and $-5$, factoring cross-check available. [Learn more about the default quadratic](!#the-default-quadratic) · [All presets](!#presets)`,
+    'ps-factored': `Factoring out $2$ makes the working constant fractional — and the final step must remember to multiply back. [Learn more about this preset](!#a-leading-coefficient-of-two) · [All presets](!#presets)`,
+    'ps-negative-b': `The sign lives in the labels, not the lengths — and the roots go irrational: $2 \\pm \\sqrt{3}$. [Learn more about the negative middle term](!#the-negative-middle-term) · [All presets](!#presets)`,
+    'ps-odd-b': `Half of $5$ is $2.5$, and the geometry never notices — the method is general, not a factoring shortcut. [Learn more about the fractional half](!#the-fractional-half) · [All presets](!#presets)`,
+    'ps-triple': `Factor $3$ and a constant of $7/3$: the thinnest gap of the presets, and the same vertex as the coefficient-two case. [Learn more about this preset](!#a-leading-coefficient-of-three) · [All presets](!#presets)`,
+  };
 
   const introContent = {
     id: "intro",
@@ -888,6 +1040,8 @@ For the general $ax^2 + bx + c$, first factor $a$ out of the $x^2$ and $x$ terms
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Completing the Square Calculator | Learn Math Class",
         description: "Complete the square for any quadratic ax^2 + bx + c. Watch the geometric square build step by step, then read off the vertex form and the solutions for x.",
@@ -936,98 +1090,55 @@ For the general $ax^2 + bx + c$, first factor $a$ out of the $x^2$ and $x$ terms
   }
 }
 
-export default function CompletingTheSquareCalculator({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function CompletingTheSquareCalculator({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after].
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'entering-coefficients'),
+
+    plain('obj3', 'presets'),
+    stateRow('obj19', 'the-default-quadratic', 'ps-basic'),
+    stateRow('obj20', 'a-leading-coefficient-of-two', 'ps-factored'),
+    stateRow('obj21', 'the-negative-middle-term', 'ps-negative-b'),
+    stateRow('obj22', 'the-fractional-half', 'ps-odd-b'),
+    stateRow('obj23', 'a-leading-coefficient-of-three', 'ps-triple'),
+
+    plain('obj4', 'the-geometric-diagram'),
+    stateRow('obj11', 'the-starting-equation', 'step-start'),
+    stateRow('obj12', 'factoring-out-the-leading-coefficient', 'step-factor'),
+    stateRow('obj13', 'placing-the-x-square', 'step-square'),
+    stateRow('obj14', 'splitting-the-bx-rectangle', 'step-split'),
+    stateRow('obj15', 'the-constant-in-the-corner', 'step-corner'),
+    stateRow('obj16', 'the-gap-in-the-corner', 'step-gap'),
+    stateRow('obj17', 'reading-off-the-vertex-form', 'step-vertex'),
+    stateRow('obj18', 'solving-for-x', 'step-solve'),
+
+    plain('obj5', 'the-step-by-step-panel'),
+    plain('obj6', 'animation-controls'),
+    plain('obj7', 'the-vertex-form-box'),
+    plain('obj8', 'what-is-completing-the-square'),
+    plain('obj9', 'the-b-2-squared-step'),
+    plain('obj10', 'related-concepts'),
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1125,7 +1236,7 @@ export default function CompletingTheSquareCalculator({seoData, sectionsContent,
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Completing the Square</h1>
       <br/>
-      <CompletingTheSquare/>
+      <CompletingTheSquare explanations={explanations}/>
       <br/>
       <br/>
       <br/>

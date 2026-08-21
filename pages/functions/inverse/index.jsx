@@ -8,6 +8,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -641,26 +642,40 @@ Not every function has an inverse. The function $f(x) = x^2$ on $(-\\infty, \\in
     link: '',
   },
 
-  obj2: {
-    title: `Notation: f⁻¹(x) vs 1/f(x)`,
-    content: `The notation $f^{-1}(x)$ denotes the inverse function of $f$. This is not the same as $\\dfrac{1}{f(x)}$, which is the reciprocal of $f(x)$.
-
-Inverse function: $f^{-1}(x)$ undoes $f$. If $f(x) = 2x + 3$, then $f^{-1}(x) = \\dfrac{x - 3}{2}$.
-
-Reciprocal: $\\dfrac{1}{f(x)} = \\dfrac{1}{2x + 3}$.
-
-These are completely different functions with different meanings, different [graphs](!/functions/graphs), and different values.
-
-The superscript $-1$ in $f^{-1}$ is not an exponent indicating a power. It is a label indicating the inverse relationship. This notation conflicts with the convention that $x^{-1} = 1/x$, which is why confusion arises.
-
-When writing the reciprocal of a function, use $\\dfrac{1}{f(x)}$ or $(f(x))^{-1}$ with parentheses to clarify. Reserve $f^{-1}(x)$ exclusively for the inverse function.
-
-For trigonometric functions, the [same notational hazard](!/trigonometry/inverse-functions#6) exists. The inverse sine is $\\sin^{-1}(x)$ or $\\arcsin(x)$ — not the reciprocal $\\csc(x) = 1/\\sin(x)$. Both conventions are catalogued among the [function symbols](!/math-symbols/functions).
-
-The table below shows both notations side by side and what each one computes for the same example function.`,
-    before: ``,
-    after: ``,
-    link: '',
+  notation: {
+    title: `Inverse Function Notation`,
+    lead: `The general home of the $-1$ superscript's double life: the label that undoes, the spellings that keep the reciprocal safe, and the operators that name a function's two sets. Both conventions are catalogued among the [function symbols](!/math-symbols/functions), and the table below computes them side by side for one example function.`,
+    inherited: `$f(x)$ and substitution come from [function notation](!/functions/basics#5); the interval marks of the swapped sets from [domain](!/functions/domain#2) and [range](!/functions/range#2) notation.`,
+    entries: [
+      {
+        id: 'f-inverse',
+        tex: `$f^{-1}(x)$`,
+        read: `f inverse of x`,
+        means: `A label wearing an exponent's clothes: the $-1$ marks the undo-function — $f^{-1}(f(x)) = x$ — and raises nothing to any power. Fourth member of the corner census: reciprocals on [numbers](!/algebra/powers/negative#notation), inversion on [complex numbers](!/complex-numbers/multiplicative-inverse#notation) and [matrices](!/linear-algebra/matrix/inverse#notation).`,
+        cases: `Finding it runs on a letter swap — Step 2 of **Finding Inverse Algebraically** below trades $x$ for $y$ — and the graph mirrors the swap: $(a, b)$ on $f$ becomes $(b, a)$ on $f^{-1}$, per **Inverse as Reflection over y = x** below.`,
+        confusedWith: `The reciprocal. $f^{-1}(x) \\neq \\frac{1}{f(x)}$ — different functions, different graphs, different values; the trig family carries [the same hazard](!/trigonometry/inverse-functions#6) in $\\sin^{-1}$ versus $\\csc$.`,
+      },
+      {
+        id: 'reciprocal-spellings',
+        tex: `$\\frac{1}{f(x)}$ · $(f(x))^{-1}$`,
+        read: `one over f of x`,
+        means: `The safe spellings for the reciprocal: the fraction bar says division outright, and $(f(x))^{-1}$ puts the exponent on the value — the parentheses redirect the $-1$ from function to output.`,
+        cases: `Bracket position is the entire message: $(f(x))^{-1}$ inverts a number, $f^{-1}(x)$ inverts a mapping — one glyph pair apart; the bare $f^{-1}$ stays reserved for the inverse function.`,
+        confusedWith: `Interchangeable forms. Writing $f^{-1}$ for a reciprocal "just this once" is how the collision propagates — the convention only works because the bare form is never lent out.`,
+      },
+      {
+        id: 'dom-ran',
+        tex: `$\\text{Dom}(f)$ · $\\text{Ran}(f)$`,
+        read: `the domain of f; the range of f`,
+        means: `Set-naming operators: they turn "the domain of $f$" into a symbol that fits inside a formula — the swap identity $\\text{Dom}(f^{-1}) = \\text{Ran}(f)$ of **Domain and Range Swap** below is their showcase.`,
+        cases: `Spellings vary by text — lowercase $\\operatorname{dom} f$, subscripted $D_f$; the sets themselves are then written with [domain](!/functions/domain#2) and [range](!/functions/range#2) notation.`,
+        confusedWith: `Function application. $\\text{Dom}(f)$ takes a function and returns a set — it is not $f$ evaluated anywhere; the parentheses here hold a function's name, not an input.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/functions`,
+    symbolsLabel: `All function symbols`,
+    parentHref: `/functions`,
+    parentLabel: `Functions`,
   },
 
   obj3: {
@@ -1096,10 +1111,21 @@ export default function InversePage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div
             key={'obj2-table'}
             style={tableWrapStyle}

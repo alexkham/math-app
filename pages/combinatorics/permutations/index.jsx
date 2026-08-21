@@ -8,6 +8,7 @@ import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 
@@ -761,8 +762,45 @@ Most common:
       **Partial Permutation (without repetition) — Examples**:
 Selecting and ordering finalists from a group of contestants, arranging a subset of books on a display, picking and sequencing players for a relay team, choosing and ordering questions for an interview, organizing a limited set of tasks for a project phase.
       `,
-  
+
     },
+
+    notation: {
+      title: `Permutation Notation`,
+      lead: `Three marks carry every count on this page: the exclamation that multiplies downward, the two-letter family that orders selections, and the same exclamation moved out front to count the restless. Each scenario section keeps its own **Notation** block for the variant spellings.`,
+      inherited: `The choose-family marks $\\binom{n}{r}$ and $C(n, r)$ belong to the [binomial coefficient](!/combinatorics/binomial-coefficient); the set-size bars behind the counting arguments to [cardinality](!/set-theory/cardinality#notation).`,
+      entries: [
+        {
+          id: 'factorial',
+          tex: `$n!$`,
+          read: `n factorial`,
+          means: `The postfix count of complete rearrangements: $n! = n \\times (n-1) \\times \\cdots \\times 1$, introduced in **The Logic behind permutations** above. The convention $0! = 1$ is load-bearing — it keeps every counting formula honest at the edges.`,
+          cases: `The mark binds tight — $2n!$ means $2 \\cdot (n!)$, and $(2n)!$ needs its brackets; stacked marks are different animals: $(n!)!$ iterates, while $n!!$ skips every second factor (the double factorial), not a repeat.`,
+          confusedWith: `Punctuation. A sentence ending on $5$ with an exclamation and the operator in $5!$ share a glyph — and in programming @[!]@ negates; position and context carry the meaning.`,
+        },
+        {
+          id: 'p-family',
+          tex: `$P(n, r)$ · $_nP_r$`,
+          read: `P n r; n permute r`,
+          means: `The arrangement-count family: $P(n, r) = \\frac{n!}{(n - r)!}$ orders $r$ items chosen from $n$ — functional $P(n, r)$ in texts, subscripted $_nP_r$ on calculator keys, as the **Notation** blocks of **Permutation (Full)** and **Partial Permutation without Repetition** above list.`,
+          cases: `$A_n^r$ — the Arrangements letter of French and Russian textbooks, same count in a different alphabet; the full case collapses the second argument: $P(n, n) = P(n) = n!$.`,
+          confusedWith: `The choose family. $P(n, r)$ counts ordered selections, $\\binom{n}{r}$ unordered ones — they differ by exactly the factor $r!$, and the [binomial coefficient](!/combinatorics/binomial-coefficient) owns the other side of that ledger.`,
+        },
+        {
+          id: 'subfactorial',
+          tex: `$!n$ · $D_n$`,
+          read: `subfactorial n; derangements of n`,
+          means: `The factorial's mirror image: $!n$ counts permutations that leave nothing in place — the prefix position is the entire distinction, as **Derangement** below explains. $D_n$ is the older spelling, still common.`,
+          cases: `The two interchange freely — $!5 = D_5 = 44$; the prefix form reads badly mid-sentence, which is precisely what keeps the subscripted $D_n$ alive in running text.`,
+          confusedWith: `$n!$ read backwards. $!4 = 9$ while $4! = 24$ — position flips the meaning entirely, and a hasty transcription trades all arrangements for only the restless ones.`,
+        },
+      ],
+      symbolsHref: `/math-symbols/combinatorics`,
+      symbolsLabel: `All combinatorics symbols`,
+      parentHref: `/combinatorics`,
+      parentLabel: `Combinatorics`,
+    },
+
     circular:{
       title:`Circular Permutation`,
       content:``,
@@ -1213,6 +1251,25 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
           scenariosData["Partial Permutations without Repetition"].svg,
           scenariosData["Permutation without Repetition (Partial)"].svg,
 
+        ]
+    },
+      {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
       {

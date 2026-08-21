@@ -1,0 +1,3218 @@
+{
+  "$meta": {
+    "version": "2.0.0",
+    "description": "Cross-page link ledger for the Line 2 (tier 2) mesh. Per tool: identity fields and the related-terms list — the primary artifact — with dispositions (linked with link records, or dropped with reason). Stores only cross-app linkage data not visible from any single file. Line 1 on-page anchors are intentionally NOT recorded here.",
+    "generated": "2026-07-28",
+    "conventions": {
+      "toolKey": "kebab-case tool slug, matches the URL segment under /visual-tools/",
+      "relatedTerms": "Built first, before any linking: page prose scanned against definitionsRepository + formulasRepository names (tool’s own section by default; cross-section matches only when topical), plus explicit \"see the X page\" gestures, plus each knowledge section’s central subject. Each term: entity (repo key or null), sections (occurrence slugs), status (linked | dropped | pending), links[] or reason.",
+      "completeness": "A tool is complete when no relatedTerms entry has status \"pending\" and a re-scan yields no term missing from the list.",
+      "populationRule": "Universal registry rule: ANY pass touching a tool page (any operation/tier) updates this registry as a by-product - at minimum identity + scanned terms as pending. Line 2 passes write the full dispositioned list. Existing Line 2 dispositions are only altered by Line 2 itself."
+    }
+  },
+  "tools": {
+    "angle-explorer": {
+      "slug": "angle-explorer",
+      "name": "Angle Explorer",
+      "section": "trigonometry",
+      "pagePath": "/trigonometry/visual-tools/angle-explorer",
+      "relatedTerms": [
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "what-is-an-angle"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "what-is-an-angle",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "angle"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "what-is-an-angle",
+            "choosing-degrees-or-radians"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "what-is-an-angle",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "radian",
+          "entity": "radian",
+          "sections": [
+            "choosing-degrees-or-radians",
+            "what-is-an-angle"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-degrees-or-radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "choosing-degrees-or-radians",
+            "reading-the-trigonometric-values-table",
+            "special-angles-and-their-exact-values"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-degrees-or-radians",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            },
+            {
+              "fromSection": "reading-the-trigonometric-values-table",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            },
+            {
+              "fromSection": "special-angles-and-their-exact-values",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "complementary-supplementary-and-reference-angles",
+            "reference-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "complementary-supplementary-and-reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "reference_angle"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            },
+            {
+              "fromSection": "reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "reference_angle"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "complementary angles",
+          "entity": "complementary_angles",
+          "sections": [
+            "complementary-supplementary-and-reference-angles",
+            "complementary-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "complementary-supplementary-and-reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "complementary_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "complementary-supplementary-and-reference-angles",
+            "supplementary-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "complementary-supplementary-and-reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "supplementary_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "quadrantal angles",
+          "entity": "quadrantal_angles",
+          "sections": [
+            "quadrants-and-trigonometric-signs"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "quadrants-and-trigonometric-signs",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "quadrantal_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "coterminal angles",
+          "entity": "coterminal_angles",
+          "sections": [
+            "working-with-related-and-coterminal-angles",
+            "coterminal-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "coterminal-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "coterminal_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "trigonometric identities",
+          "entity": null,
+          "sections": [
+            "reading-the-trigonometric-values-table"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "reading-the-trigonometric-values-table",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "six trigonometric functions",
+          "entity": null,
+          "sections": [
+            "the-six-trigonometric-functions",
+            "reading-the-trigonometric-values-table"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-six-trigonometric-functions",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "angle types",
+          "entity": null,
+          "sections": [
+            "angle-types-and-classifications"
+          ],
+          "status": "dropped",
+          "reason": "No theory page treats angle types; the only rich treatment is the angle-types visual-tool page (tool-to-tool, future tier). Backlog: angle-types theory page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "multiple"
+          ],
+          "status": "dropped",
+          "reason": "Symbol-level mentions throughout; the concept is linked once via the six-functions link. Per-function on-page treatment is Line 1 material."
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "multiple"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "multiple"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-six-trigonometric-functions"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-six-trigonometric-functions"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-six-trigonometric-functions"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "setting-an-angle"
+          ],
+          "status": "dropped",
+          "reason": "Page uses \"terminal ray\" phrasing; passing definitional mention inside other treatments."
+        },
+        {
+          "term": "arc length",
+          "entity": "arc_length",
+          "sections": [
+            "what-is-an-angle"
+          ],
+          "status": "dropped",
+          "reason": "Single passing mention in the radian-definition context."
+        },
+        {
+          "term": "angle in standard position",
+          "entity": "angle_in_standard_position",
+          "sections": [
+            "what-is-an-angle"
+          ],
+          "status": "dropped",
+          "reason": "Single mention; the standard-position treatment lives on the angle-types visual-tool page (tool-to-tool, future tier)."
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "special-angle-45",
+            "special-angle-30"
+          ],
+          "status": "dropped",
+          "reason": "Right-triangle side mentions inside special-angle derivations; not the subject of those sections."
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "special-angle-30"
+          ],
+          "status": "dropped",
+          "reason": "Same as hypotenuse."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "coterminal-angles",
+            "quadrant-iii"
+          ],
+          "status": "dropped",
+          "reason": "Passing mentions inside periodicity remarks; periodicity is served by the coterminal and six-functions links."
+        }
+      ]
+    },
+    "three-sets-basic-venn": {
+      "slug": "three-sets-basic-venn",
+      "name": "Three-Set Venn Diagram: Basic Identities",
+      "section": "set-theory",
+      "pagePath": "/set-theory/visual-tools/three-sets-basic-venn",
+      "relatedTerms": [
+        {
+          "term": "three-set venn diagram",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "intersection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "union",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "region",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "truth table",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inclusion-exclusion principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Morgan's laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distributive laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/venn-diagrams/3-sets/threeSetsVennDiagrams.js",
+      "diagramStates": [
+        "plain",
+        "tripleIntersection",
+        "aUnionBintC",
+        "states.set-a",
+        "states.set-b",
+        "states.set-c",
+        "states.universe",
+        "states.empty",
+        "states.a-comp",
+        "states.b-comp",
+        "states.c-comp",
+        "states.inter-abc",
+        "states.inter-ab",
+        "states.inter-ac",
+        "states.inter-bc",
+        "states.union-abc",
+        "states.union-ab",
+        "states.union-ac",
+        "states.union-bc",
+        "states.a-minus-b",
+        "states.a-minus-c",
+        "states.b-minus-a",
+        "states.b-minus-c",
+        "states.c-minus-a",
+        "states.c-minus-b",
+        "states.a-only-only",
+        "states.b-only-only",
+        "states.c-only-only",
+        "states.ab-minus-c",
+        "states.symdiff-ab",
+        "states.symdiff-abc",
+        "states.ab-not-c",
+        "states.ac-not-b",
+        "states.bc-not-a",
+        "states.a-and-bORc",
+        "states.aORb-and-c",
+        "states.a-or-bANDc",
+        "states.exactly-one",
+        "states.exactly-two",
+        "states.at-least-two",
+        "states.at-most-one",
+        "states.dm-union",
+        "states.dm-inter"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 40,
+        "sections": 57,
+        "anchors": 178,
+        "orphans": 0,
+        "notes": "Case A wiring (explanations prop into shared ExplanationsPanel of VennCoreEnhanced); 40-scenario catalog (page count correct); diagrams module extended with a generic 8-region painter (freeze) keyed by scenario id under 'states'; 5 new group sections, De Morgan group = existing section; counting-identities section bolds converted to member links."
+      }
+    },
+    "basic-identities": {
+      "slug": "basic-identities",
+      "name": "Basic Trigonometric Identities Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/basic-identities/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "reciprocal identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quotient identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "periodicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reference angle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosecant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "secant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cotangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "double-angle-identities": {
+      "slug": "double-angle-identities",
+      "name": "Double Angle Identities Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/double-angle-identities/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "double angle identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "law of cosines",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "geometric proof",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "half-angle-identities": {
+      "slug": "half-angle-identities",
+      "name": "Half Angle Identities Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/half-angle-identities/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "half angle identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "law of cosines",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "geometric proof",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-graphs": {
+      "slug": "functions-graphs",
+      "name": "Interactive Trigonometric Functions Graphs",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/functions-graphs/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "periodicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "amplitude",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "period",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "radian",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "degree",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "two-sets-basic-venn": {
+      "slug": "two-sets-basic-venn",
+      "name": "Two-Set Venn Diagram Basic Identities Explorer",
+      "section": "set-theory",
+      "pagePath": "pages/set-theory/visual-tools/two-sets-basic-venn/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "union",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "intersection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complement",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "set difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "universal set",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "empty set",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "subset",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "disjoint sets",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "equal sets",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Morgan's laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inclusion-exclusion principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "double complement",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/venn-diagrams/twoSetsVennDiagrams.js",
+      "diagramStates": [
+        "union",
+        "intersection",
+        "complementA",
+        "differenceAB",
+        "symmetricDifference",
+        "equalSets",
+        "disjoint",
+        "subsetAinB",
+        "plain",
+        "regions",
+        "complementUnion",
+        "setA",
+        "setB",
+        "universeAll",
+        "complementB",
+        "differenceBA",
+        "aUnionBcomp",
+        "acompUnionB",
+        "complementIntersection",
+        "subsetBinA"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-20",
+        "states": 19,
+        "sections": 36,
+        "anchors": 94,
+        "orphans": 0,
+        "notes": "Case A wiring (component already accepted explanations via ExplanationsPanel); 19 scenario states, 6 new group sections, De Morgan group = existing section; page prose count corrected 22 to 19 (FAQ/schema untouched)."
+      }
+    },
+    "two-sets-laws-venn": {
+      "slug": "two-sets-laws-venn",
+      "name": "Two-Set Venn Diagram Laws and Identities Explorer",
+      "section": "set-theory",
+      "pagePath": "pages/set-theory/visual-tools/two-sets-laws-venn/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "distributive laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Morgan's laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absorption laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "identity laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "idempotent laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commutative laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complement laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "material implication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/venn-diagrams/twoSetsLawsVennDiagrams.js",
+      "diagramStates": [
+        "idem-u",
+        "idem-i",
+        "comm-u",
+        "comm-i",
+        "id-u-e",
+        "id-i-u",
+        "ann-i",
+        "ann-u",
+        "cmp-u",
+        "cmp-i",
+        "dcmp",
+        "cmp-U",
+        "cmp-e",
+        "dm-u",
+        "dm-i",
+        "abs-u",
+        "abs-i",
+        "diff",
+        "diff-r",
+        "sd-1",
+        "sd-2",
+        "sd-c",
+        "cc-1",
+        "cc-2",
+        "cc-3",
+        "cc-4"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-20",
+        "states": 26,
+        "sections": 44,
+        "anchors": 118,
+        "orphans": 0,
+        "notes": "Case A wiring (explanations prop into shared ExplanationsPanel); 26-law catalog (page prose claimed 27 — corrected to 26, FAQ/schema untouched); new pair-diagram module renders LHS=RHS minis with match badge; 7 new group sections, De Morgan group = existing section."
+      }
+    },
+    "three-sets-laws-venn": {
+      "slug": "three-sets-laws-venn",
+      "name": "Three-Set Venn Diagram Laws and Complex Identities Explorer",
+      "section": "set-theory",
+      "pagePath": "pages/set-theory/visual-tools/three-sets-laws-venn/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "distributive laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Morgan's laws",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "associativity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inclusion-exclusion",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "set difference",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "lattice",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/venn-diagrams/3-sets/threeSetsLawsVennDiagrams.js",
+      "diagramStates": [
+        "assoc-u",
+        "assoc-i",
+        "assoc-sd",
+        "dist-i-over-u",
+        "dist-u-over-i",
+        "dm-u-3",
+        "dm-i-3",
+        "diff-over-u",
+        "diff-over-i",
+        "union-minus-c",
+        "inter-minus-c",
+        "nested-diff"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-21",
+        "states": 12,
+        "sections": 25,
+        "anchors": 52,
+        "orphans": 0,
+        "notes": "Case A wiring; 12-law catalog (page count correct); new pair-diagram module with generic 8-region painter at mini scale (LHS=RHS + match badge); 1 new group section (De Morgan) — associative/distributive and difference groups served by existing sections whose lists became member links; page file carries a commented template head, all edits live-region-scoped."
+      }
+    },
+    "functions-types": {
+      "slug": "types",
+      "name": "Functions Families Gallery",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/types/index.jsx",
+      "diagramsModule": "app/components/functions/types/functionTypesDiagrams.js",
+      "diagramStates": [
+        "linear",
+        "quadratic",
+        "cubic",
+        "power",
+        "rational",
+        "exponential",
+        "logarithmic",
+        "sine",
+        "cosine",
+        "tangent",
+        "absolute",
+        "sqrt"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 12,
+        "sections": 22,
+        "anchors": 83,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "function family",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linear function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadratic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cubic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "power function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rational function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logarithmic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square root function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "periodicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inflection point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertex",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "discriminant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-asymptotes": {
+      "slug": "asymptotes",
+      "name": "Function Asymptotes Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/asymptotes/index.jsx",
+      "diagramsModule": "app/components/functions/asymptotes/functionAsymptotesDiagrams.js",
+      "diagramStates": [
+        "logarithmic",
+        "tangent",
+        "expDecay",
+        "bell",
+        "arctan",
+        "logistic",
+        "reciprocal",
+        "rationalShifted",
+        "xOverX2Minus1",
+        "obliqueClassic",
+        "obliqueRational"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 11,
+        "sections": 24,
+        "anchors": 62,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "oblique asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-sided limit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "limit at infinity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rational function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logarithmic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "arctangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logistic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential decay",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "end behavior",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-composition": {
+      "slug": "composition",
+      "name": "Function Composition Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/composition/index.jsx",
+      "diagramsModule": "app/components/functions/compositions/functionCompositionDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "quadratic",
+        "cubic",
+        "reciprocal",
+        "exponential",
+        "logarithmic",
+        "sine",
+        "cosine",
+        "absolute",
+        "sqrt",
+        "inversePair",
+        "sqrtSquare",
+        "selfCompose"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 13,
+        "sections": 23,
+        "anchors": 46,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "function composition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "composition operator",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inverse functions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "identity function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "chain rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commutativity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "iteration",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-domain": {
+      "slug": "domain",
+      "name": "Function Domain Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/domain/index.jsx",
+      "diagramsModule": "app/components/functions/domain/functionDomainDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "quadratic",
+        "cubic",
+        "exponential",
+        "sine",
+        "cosine",
+        "absolute",
+        "logarithmic",
+        "sqrt",
+        "reciprocal"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 11,
+        "sections": 23,
+        "anchors": 58,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "range",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "open interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "closed interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "excluded value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "interval notation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logarithmic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square root function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-sided limit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-range": {
+      "slug": "range",
+      "name": "Function Range Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/range/index.jsx",
+      "diagramsModule": "app/components/functions/range/functionRangeDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "cubic",
+        "logarithmic",
+        "quadratic",
+        "absolute",
+        "sqrt",
+        "exponential",
+        "sine",
+        "cosine",
+        "reciprocal"
+      ],
+      "line1": {
+        "done": "2026-08-01",
+        "states": 11,
+        "sections": 24,
+        "anchors": 52,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "range",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "bounded function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "amplitude",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "onto function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "attained value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "open interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "closed interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "excluded value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertex",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-inverse": {
+      "slug": "inverse-function",
+      "name": "Inverse Function Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/inverse-function/index.jsx",
+      "diagramsModule": "app/components/functions/inverse/functionInverseDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "cubic",
+        "reciprocal",
+        "exponential",
+        "logarithmic",
+        "quadratic",
+        "sqrt",
+        "absolute",
+        "sine",
+        "cosine"
+      ],
+      "line1": {
+        "done": "2026-08-01",
+        "states": 11,
+        "sections": 22,
+        "anchors": 40,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "inverse function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal line test",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-to-one function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "restricted branch",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "principal value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "arcsine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "arccosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "self-inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "mirror line",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "range",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "monotonic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-piecewise": {
+      "slug": "piecewise",
+      "name": "Piecewise Function Builder",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/piecewise/index.jsx",
+      "diagramsModule": "app/components/functions/piecewise/functionPiecewiseDiagrams.js",
+      "diagramStates": [
+        "absvalue",
+        "heaviside",
+        "sign",
+        "sawtooth",
+        "hole",
+        "jump"
+      ],
+      "line1": {
+        "done": "2026-08-01",
+        "states": 6,
+        "sections": 17,
+        "anchors": 25,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "piecewise function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "jump discontinuity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "removable discontinuity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "continuity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-sided limit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "open interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "closed interval",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Heaviside step",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sign function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sawtooth",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-reflections": {
+      "slug": "reflections",
+      "name": "Function Reflections Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/reflections/index.jsx",
+      "diagramsModule": "app/components/functions/reflections/functionReflectionsDiagrams.js",
+      "diagramStates": [
+        "xAxis",
+        "yAxis",
+        "yEqX",
+        "yLine",
+        "xLine",
+        "absF",
+        "fAbs"
+      ],
+      "line1": {
+        "done": "2026-08-02",
+        "states": 7,
+        "sections": 18,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "axis of symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inverse function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "mirror line",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multivalued",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "fixed point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal line test",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-symmetry": {
+      "slug": "symmetry",
+      "name": "Function Symmetry Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/symmetry/index.jsx",
+      "diagramsModule": "app/components/functions/symmetry/functionSymmetryDiagrams.js",
+      "diagramStates": [
+        "quadratic",
+        "absolute",
+        "cosine",
+        "identity",
+        "cubic",
+        "sine",
+        "reciprocal",
+        "sqrt",
+        "exponential",
+        "logarithmic",
+        "quadraticPlusLinear"
+      ],
+      "line1": {
+        "done": "2026-08-05",
+        "states": 11,
+        "sections": 24,
+        "anchors": 55,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "y-axis symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "origin symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even-odd decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "hyperbolic functions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "point symmetry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-tangent-line": {
+      "slug": "tangent-line",
+      "name": "Tangent Line Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/tangent-line/index.jsx",
+      "diagramsModule": "app/components/functions/tangent/tangentLineDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "linearScale",
+        "quadratic",
+        "cubic",
+        "reciprocal",
+        "exponential",
+        "logarithmic",
+        "sqrt",
+        "absolute",
+        "sine",
+        "cosine"
+      ],
+      "line1": {
+        "done": "2026-08-05",
+        "states": 11,
+        "sections": 21,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "tangent line",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "derivative",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "slope",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "instantaneous rate of change",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "point-slope form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "critical point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "corner",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "differentiability",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "small-angle approximation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "chain rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-transformations": {
+      "slug": "transformations",
+      "name": "Function Transformations Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/transformations/index.jsx",
+      "diagramsModule": "app/components/functions/transformations/functionTransformationsDiagrams.js",
+      "diagramStates": [
+        "a",
+        "k",
+        "b",
+        "h",
+        "custom"
+      ],
+      "line1": {
+        "done": "2026-08-05",
+        "states": 5,
+        "sections": 15,
+        "anchors": 20,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "function transformation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical scale",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical shift",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal scale",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal shift",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "stretch",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "compression",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rigid motion",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parent function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "composition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "complex-explorer": {
+      "slug": "complex-explorer",
+      "name": "Complex Number Explorer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/complex-explorer/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexExplorerDiagrams.js",
+      "diagramStates": [
+        "origin",
+        "purelyReal",
+        "pureImaginary",
+        "quadrantI",
+        "quadrantII",
+        "quadrantIII",
+        "quadrantIV"
+      ],
+      "line1": {
+        "done": "2026-08-18",
+        "states": 7,
+        "sections": 18,
+        "anchors": 38,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Argand diagram",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadrant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pure imaginary number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "complex-conjugate": {
+      "slug": "complex-conjugate",
+      "name": "Complex Conjugate and Modulus Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/complex-conjugate/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/conjugateModulusDiagrams.js",
+      "diagramStates": [
+        "start",
+        "negativeReal",
+        "pureImaginary",
+        "purelyReal",
+        "thirdQuadrant",
+        "origin"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 6,
+        "sections": 16,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Argand diagram",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rationalizing complex denominators",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "purely imaginary number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "addition-subtraction": {
+      "slug": "addition-subtraction",
+      "name": "Complex Addition & Subtraction Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/addition-subtraction/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexAddSubDiagrams.js",
+      "diagramStates": [
+        "add",
+        "sub",
+        "both",
+        "mirror",
+        "axes",
+        "conjugatePair",
+        "mixed"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 7,
+        "sections": 14,
+        "anchors": 35,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex number addition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex number subtraction",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parallelogram rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vector addition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "triangle inequality",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "real part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary part",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distance between complex numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commutative property",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "multiplication": {
+      "slug": "multiplication",
+      "name": "Complex Multiplication Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/multiplication/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexMultiplicationDiagrams.js",
+      "diagramStates": [
+        "general",
+        "conjugateProduct",
+        "realTimesImaginary",
+        "iTimesI",
+        "realScaling"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 5,
+        "sections": 11,
+        "anchors": 23,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex multiplication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "FOIL",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distributive property",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "powers of i",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "scaling",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rationalizing complex denominators",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "division": {
+      "slug": "division",
+      "name": "Complex Division Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/division/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/complexDivisionDiagrams.js",
+      "diagramStates": [
+        "general",
+        "realDivision",
+        "imaginaryDivision",
+        "oneOverI",
+        "conjugateQuotient",
+        "mixed",
+        "divideByZero"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 7,
+        "sections": 12,
+        "anchors": 28,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "complex division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rationalizing complex denominators",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "division by zero",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean triple",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex multiplication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "polar-rectangular": {
+      "slug": "polar-rectangular",
+      "name": "Polar-Rectangular Converter",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/polar-rectangular/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/polarRectangularDiagrams.js",
+      "diagramStates": [
+        "qi",
+        "qii",
+        "qiii",
+        "qiv",
+        "posImaginary",
+        "negReal"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 6,
+        "sections": 16,
+        "anchors": 38,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rectangular form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "atan2",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reference angle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "special angles",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadrant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "radian",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "euler-formula": {
+      "slug": "euler-formula",
+      "name": "Euler's Formula Explorer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/euler-formula/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/eulerFormulaDiagrams.js",
+      "diagramStates": [
+        "theta0",
+        "theta30",
+        "theta45",
+        "theta60",
+        "theta90",
+        "theta180",
+        "theta270",
+        "scaled"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 8,
+        "sections": 16,
+        "anchors": 40,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "radian",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "special angles",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cofunction identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Taylor series",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "roots of unity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "i-powers": {
+      "slug": "i-powers",
+      "name": "Powers of i Calculator",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/i-powers/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/iPowersDiagrams.js",
+      "diagramStates": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 4,
+        "sections": 14,
+        "anchors": 17,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "imaginary unit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "powers of i",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "remainder",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cyclic group",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiplicative inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "negative exponent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "zero exponent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "demoivre-visualizer": {
+      "slug": "demoivre-visualizer",
+      "name": "De Moivre's Theorem Visualizer",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/demoivre-visualizer/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/deMoivreDiagrams.js",
+      "diagramStates": [
+        "squared",
+        "fourth",
+        "iCubed",
+        "eighth",
+        "inverse",
+        "twoTen",
+        "inward"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 7,
+        "sections": 13,
+        "anchors": 33,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "De Moivre's theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "polar form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euler's formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "roots of unity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "powers of i",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "negative exponent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential growth",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential decay",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trigonometric identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "distance-midpoint": {
+      "slug": "distance-midpoint",
+      "name": "Complex Distance & Midpoint Tool",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/visual-tools/distance-midpoint/index.jsx",
+      "diagramsModule": "app/components/calculators/complex-numbers/distanceMidpointDiagrams.js",
+      "diagramStates": [
+        "general",
+        "originPair",
+        "symmetric",
+        "vertical",
+        "horizontal",
+        "coincident"
+      ],
+      "line1": {
+        "done": "2026-08-19",
+        "states": 6,
+        "sections": 13,
+        "anchors": 28,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "distance between complex numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "midpoint",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Euclidean distance",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "locus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "circle equation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex conjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "additive inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "metric",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex subtraction",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "section formula",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Argand plane",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    }
+  },
+  "$stubTemplate": {
+    "description": "Copy this shape when adding a new tool entry under tools.",
+    "template": {
+      "slug": "<kebab-slug-matching-url>",
+      "name": "<Human-readable name>",
+      "section": "<algebra | trigonometry | set-theory | ...>",
+      "pagePath": "/<section>/visual-tools/<slug>",
+      "relatedTerms": []
+    }
+  }
+}

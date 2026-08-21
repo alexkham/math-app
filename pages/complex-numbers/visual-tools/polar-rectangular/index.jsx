@@ -470,6 +470,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import PolarRectangularConverter from '../../../../app/components/calculators/complex-numbers/PolarRectangularConverter'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import polarRectangularDiagrams from '../../../../app/components/calculators/complex-numbers/polarRectangularDiagrams'
 
 export async function getStaticProps(){
 
@@ -497,7 +499,7 @@ export async function getStaticProps(){
       title:`Getting Started — Drag, Type, or Pick a Preset`,
       content:`There are three ways to set a complex number in this converter. Drag the blue point anywhere on the complex plane and both the rectangular and polar panels update instantly. Type values directly into the $a$ and $b$ fields (rectangular) or the $r$ and $\\theta$ fields (polar) — the other form recalculates automatically. Or click one of six preset buttons below the plane: $3 + 2i$, $-4 + 3i$, $5i$, $-6$, $5 - 5i$, and $-3 - 4i$.
 
-Each preset places the point in a different region of the complex plane, producing a distinct triangle configuration. The **Random** button generates an arbitrary point within the $\\pm 10$ range. All inputs are clamped to $\\pm 10$ — if you type a value outside this range, a warning message appears briefly and the value snaps to the nearest limit.`,
+Each preset places the point in a different region of the complex plane, producing a distinct triangle configuration, and each has a dedicated section below with the tool frozen on it: [3 + 2i](!#quadrant-i-baseline-3-2i), [−4 + 3i](!#quadrant-ii-4-3i), [5i](!#on-the-imaginary-axis-5i), [−6](!#on-the-negative-real-axis-6), [5 − 5i](!#equal-component-states-and-special-angles), and [−3 − 4i](!#quadrant-iii-3-4i). The **Random** button generates an arbitrary point within the $\\pm 10$ range. All inputs are clamped to $\\pm 10$ — if you type a value outside this range, a warning message appears briefly and the value snaps to the nearest limit.`,
       before:``,
       after:``,
       link:'',
@@ -506,13 +508,13 @@ Each preset places the point in a different region of the complex plane, produci
       title:`Points in All Four Quadrants`,
       content:`Each quadrant of the complex plane produces a different triangle orientation and a different sign combination for the rectangular components.
 
-**Quadrant I** ($a > 0$, $b > 0$): click $3 + 2i$. The green horizontal leg points right, the red vertical leg points up, and the angle $\\theta$ is positive between $0°$ and $90°$. Both the real and imaginary parts are positive.
+**Quadrant I** ($a > 0$, $b > 0$): click $3 + 2i$. The green horizontal leg points right, the red vertical leg points up, and the angle $\\theta$ is positive between $0°$ and $90°$. Both the real and imaginary parts are positive — this is the [baseline configuration](!#quadrant-i-baseline-3-2i).
 
-**Quadrant II** ($a < 0$, $b > 0$): click $-4 + 3i$. The green leg extends left of the imaginary axis while the red leg still points up. The angle is between $90°$ and $180°$.
+**Quadrant II** ($a < 0$, $b > 0$): click $-4 + 3i$. The green leg extends left of the imaginary axis while the red leg still points up. The angle is [between 90° and 180°](!#quadrant-ii-4-3i).
 
-**Quadrant III** ($a < 0$, $b < 0$): click $-3 - 4i$. Both legs point in negative directions — the triangle sits below and to the left of the origin. The angle is negative, between $-90°$ and $-180°$.
+**Quadrant III** ($a < 0$, $b < 0$): click $-3 - 4i$. Both legs point in negative directions — the triangle sits below and to the left of the origin. The angle is [negative, between −90° and −180°](!#quadrant-iii-3-4i).
 
-**Quadrant IV** ($a > 0$, $b < 0$): click $5 - 5i$. The green leg points right while the red leg drops below the real axis. The angle is negative, between $0°$ and $-90°$.
+**Quadrant IV** ($a > 0$, $b < 0$): click $5 - 5i$. The green leg points right while the red leg drops below the real axis. The angle is negative, between $0°$ and $-90°$ — this preset is also the [equal-component special case](!#equal-component-states-and-special-angles).
 
 Each configuration is a unique visual snapshot showing how the signs of $a$ and $b$ determine the quadrant and how $\\theta$ changes accordingly.`,
       before:``,
@@ -524,9 +526,9 @@ Each configuration is a unique visual snapshot showing how the signs of $a$ and 
       title:`Degenerate Cases — Points on the Axes`,
       content:`When the point lies exactly on an axis, one component is zero and the triangle collapses into a line segment.
 
-Click $5i$ to place the point on the positive imaginary axis. Here $a = 0$ and $b = 5$, so the green horizontal leg vanishes entirely. Only the red vertical segment remains. The modulus equals the imaginary part ($r = 5$) and the angle is exactly $90°$. There is no right-angle marker because there is no triangle — just a vertical line from the origin.
+Click [5i](!#on-the-imaginary-axis-5i) to place the point on the positive imaginary axis. Here $a = 0$ and $b = 5$, so the green horizontal leg vanishes entirely. Only the red vertical segment remains. The modulus equals the imaginary part ($r = 5$) and the angle is exactly $90°$. There is no right-angle marker because there is no triangle — just a vertical line from the origin.
 
-Click $-6$ to place the point on the negative real axis. Now $b = 0$, the red vertical leg disappears, and only the green horizontal segment remains. The modulus is $6$ and the angle is $180°$.
+Click [−6](!#on-the-negative-real-axis-6) to place the point on the negative real axis. Now $b = 0$, the red vertical leg disappears, and only the green horizontal segment remains. The modulus is $6$ and the angle is $180°$.
 
 These axis-aligned states also demonstrate how the atan2 function handles special cases: $\\text{atan2}(0, -6) = 180°$ and $\\text{atan2}(5, 0) = 90°$. Dragging the point along an axis lets you watch the triangle appear and disappear as the perpendicular component passes through zero.`,
       before:``,
@@ -544,7 +546,9 @@ Other special angles are easy to produce. Setting $a = 5$, $b = 5\\sqrt{3} \\app
 
 The dashed modulus circle also changes radius with each configuration, giving a visual sense of how the same modulus can map to different $a$ and $b$ combinations at different angles.`,
       before:``,
-      after:``,
+      after:`The frozen isosceles frame makes the equal-legs claim checkable at a glance: both side labels read $5$, the right-angle marker sits at the corner, and the orange arc stops at exactly one-eighth of a turn below the axis. In radians the polar panel reports the symbolic $-\\frac{\\pi}{4}$ rather than a decimal — one of the special values the [polar form panel](!#using-the-polar-form-panel) recognizes.
+
+Equal components are the boundary between "wide" and "tall" triangles: the moment $|b|$ overtakes $|a|$, the reference angle passes $45°$. Watching the triangle cross that boundary as you drag is the fastest way to build intuition for which of the [quadrant configurations](!#points-in-all-four-quadrants) you are in.`,
       link:'',
     },
 
@@ -688,6 +692,62 @@ obj11:{
   link:'',
 },
 
+    obj12:{
+      title:`On the Imaginary Axis: 5i`,
+      content:`The preset $5i$ is pure imaginary: $a = 0$, and the whole number lives on the vertical axis.`,
+      before:``,
+      after:`With no horizontal component, the conversion becomes trivial in one direction and instructive in the other: $r = \\sqrt{0^2 + 5^2} = 5$ and $\\theta = \\text{atan2}(5, 0) = 90°$ exactly. Going back, $a = 5\\cos(90°) = 0$ — the cosine of a right angle is what keeps the point pinned to the axis, as the [polar-to-rectangular formulas](!#polar-to-rectangular-conversion) spell out.
+
+Notice that $5i$ shares its dashed modulus circle with two other presets: $-4+3i$ and $-3-4i$ all have $r = 5$. Load the three in turn and only the orange arc moves — one circle, three angles, three different numbers. That is polar form's whole message: $r$ and $\\theta$ are independent coordinates.
+
+The mirror case on the horizontal axis is [−6](!#on-the-negative-real-axis-6), where the sine rather than the cosine does the vanishing.`,
+      link:'',
+    },
+
+    obj13:{
+      title:`On the Negative Real Axis: −6`,
+      content:`The preset $-6$ is an ordinary negative real number — and polar form has an opinion about the minus sign: the modulus refuses to carry it.`,
+      before:``,
+      after:`Polar form always keeps $r \\geq 0$, so the negativity moves into the angle: $-6 = 6 \\cdot e^{i \\cdot 180°}$. The frozen frame shows the consequence — the orange arc sweeps a full half-turn from the positive axis to reach a point that rectangular form describes with a single sign.
+
+This is also the boundary case of the argument convention. The tool reports angles in $(-180°, 180°]$, and $\\text{atan2}(0, -6) = 180°$ sits exactly on the seam — a hair above the axis would read $+179.9°$, a hair below $-179.9°$. The [rectangular-to-polar section](!#rectangular-to-polar-conversion) explains why atan2, not plain arctangent, handles this correctly.
+
+Together with [5i](!#on-the-imaginary-axis-5i), this preset completes the pair of [axis degeneracies](!#degenerate-cases-points-on-the-axes): one where the triangle loses its base, one where it loses its height.`,
+      link:'',
+    },
+
+    obj14:{
+      title:`Quadrant I Baseline: 3 + 2i`,
+      content:`The preset $3 + 2i$ is the converter's opening state: a right triangle with nothing negative in it, and every element of the display visible at once.`,
+      before:``,
+      after:`Both conversions can be read straight off the frozen frame. Rightward: $r = \\sqrt{3^2 + 2^2} = \\sqrt{13} \\approx 3.61$ and $\\theta = \\text{atan2}(2, 3) \\approx 33.7°$. Leftward: $3.61 \\cos(33.7°) \\approx 3$ and $3.61 \\sin(33.7°) \\approx 2$ — the round trip closes, as the [live conversion formulas](!#live-conversion-formulas) panel confirms on every drag.
+
+Because all signs are positive, this is the one quadrant where naive $\\tan^{-1}(b/a)$ and atan2 agree — no correction needed. Every complication this page discusses starts when the point leaves this quadrant, beginning with [−4 + 3i](!#quadrant-ii-4-3i) next door.`,
+      link:'',
+    },
+
+    obj15:{
+      title:`Quadrant II: −4 + 3i`,
+      content:`The preset $-4 + 3i$ crosses the imaginary axis: the real part turns negative, the triangle flips left, and the angle passes $90°$.`,
+      before:``,
+      after:`The modulus is a clean $5$ — the $3$–$4$–$5$ triangle mirrored into the second quadrant — and the argument is $\\theta = \\text{atan2}(3, -4) \\approx 143.1°$, which is $180° - 36.9°$: the reference angle measured back from the negative real axis.
+
+This preset is the standard trap for the naive formula: $\\tan^{-1}(3/-4) \\approx -36.9°$, a fourth-quadrant answer for a second-quadrant point. The signs of $a$ and $b$ individually — not just their ratio — decide the quadrant, which is exactly the case for atan2 made in [rectangular to polar conversion](!#rectangular-to-polar-conversion).
+
+Its double mirror is [−3 − 4i](!#quadrant-iii-3-4i): same digits, same modulus, opposite corner of the plane.`,
+      link:'',
+    },
+
+    obj16:{
+      title:`Quadrant III: −3 − 4i`,
+      content:`The preset $-3 - 4i$ has both components negative — the quadrant where the sign convention for angles matters most.`,
+      before:``,
+      after:`The tool reports $\\theta = \\text{atan2}(-4, -3) \\approx -126.9°$, a *negative* angle measured clockwise from the positive real axis. The same direction could be written $+233.1°$; the converter's $(-180°, 180°]$ convention always picks the representative closer to zero, so points below the real axis always read negative — compare [Quadrant IV's](!#equal-component-states-and-special-angles) $-45°$.
+
+Once again $r = 5$: this is the third preset on the radius-5 circle, with [−4 + 3i](!#quadrant-ii-4-3i) and [5i](!#on-the-imaginary-axis-5i). The frozen frame shows the triangle fully inverted — legs pointing left and down, the right-angle marker tucked into the corner at $(-3, 0)$ — yet built from the same two lengths as its Quadrant II mirror.`,
+      link:'',
+    },
+
   }
 
 
@@ -802,12 +862,42 @@ obj11:{
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plane + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    qi: demoUnitFrame({ svg: polarRectangularDiagrams.qi, caption: 'z = 3 + 2i, frozen',
+      text: 'The bridge triangle in its home orientation: teal leg a = 3, red leg b = 2, navy hypotenuse r = 3.61, and the orange &#952; arc opening 33.7° from the positive real axis.' }),
+    qii: demoUnitFrame({ svg: polarRectangularDiagrams.qii, caption: 'z = &#8722;4 + 3i, frozen',
+      text: 'The teal leg runs left and the &#952; arc sweeps past the imaginary axis to 143.1°, with r = 5 — the 3-4-5 triangle mirrored into the second quadrant.' }),
+    qiii: demoUnitFrame({ svg: polarRectangularDiagrams.qiii, caption: 'z = &#8722;3 &#8722; 4i, frozen',
+      text: 'Both legs point into negative territory and the arc sweeps clockwise to &#8722;126.9°: the same 3-4-5 triangle upside down, with r still 5.' }),
+    qiv: demoUnitFrame({ svg: polarRectangularDiagrams.qiv, caption: 'z = 5 &#8722; 5i, frozen',
+      text: 'An isosceles right triangle hanging below the axis: equal legs of 5, &#952; = &#8722;45° exactly, and the dashed modulus circle out at r = 5&#8730;2 &#8776; 7.07.' }),
+    posImaginary: demoUnitFrame({ svg: polarRectangularDiagrams.posImaginary, caption: 'z = 5i, frozen',
+      text: 'The triangle has collapsed to a single red vertical segment: a = 0, r = b = 5, &#952; = 90°. The dashed circle and quarter arc survive; the right-angle marker has nothing left to mark.' }),
+    negReal: demoUnitFrame({ svg: polarRectangularDiagrams.negReal, caption: 'z = &#8722;6, frozen',
+      text: 'A flat teal segment pointing left: b = 0, r = 6, and the orange arc sweeps a full half-turn to &#952; = 180° — the atan2 boundary case.' }),
+  };
+
+  // Per-state additions for the tool's Key Ideas panel, keyed by the preset
+  // the current point matches (see PolarRectangularConverter).
+  const explanations = {
+    qi: 'The baseline triangle: legs 3 and 2, hypotenuse √13, every sign positive. [Learn more about Quadrant I](!#quadrant-i-baseline-3-2i) · [All four quadrants](!#points-in-all-four-quadrants)',
+    qii: 'A negative real part pushes θ past 90° — atan2, not plain arctangent, keeps the quadrant straight. [Learn more about Quadrant II](!#quadrant-ii-4-3i) · [All four quadrants](!#points-in-all-four-quadrants)',
+    qiii: 'Both parts negative: θ reads −126.9°, and r stays 5 regardless of signs. [Learn more about Quadrant III](!#quadrant-iii-3-4i) · [All four quadrants](!#points-in-all-four-quadrants)',
+    qiv: 'Equal legs make the isosceles −45° triangle with r = 5√2. [Learn more about equal components](!#equal-component-states-and-special-angles) · [All four quadrants](!#points-in-all-four-quadrants)',
+    posImaginary: 'On the imaginary axis the triangle collapses: r = b = 5 and θ = 90° exactly. [Learn more about 5i](!#on-the-imaginary-axis-5i) · [All axis cases](!#degenerate-cases-points-on-the-axes)',
+    negReal: 'The 180° edge case: polar form keeps r positive and moves the minus sign into the angle. [Learn more about −6](!#on-the-negative-real-axis-6) · [All axis cases](!#degenerate-cases-points-on-the-axes)',
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "Polar-Rectangular Converter | Learn Math Class",
         description: "Convert complex numbers between rectangular (a+bi) and polar (r, θ) forms. Drag points on the complex plane, see live formulas, and explore all four quadrants.",
@@ -820,12 +910,12 @@ obj11:{
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
     {
-        id:'1',
+        id:'getting-started-drag-type-or-pick-a-preset',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -833,7 +923,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'2',
+        id:'points-in-all-four-quadrants',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -841,7 +931,47 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'3',
+        id:'quadrant-i-baseline-3-2i',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div key='u-qi' dangerouslySetInnerHTML={{ __html: stateUnits.qi }} />,
+          sectionsContent.obj14.after,
+        ]
+    },
+    {
+        id:'quadrant-ii-4-3i',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+          <div key='u-qii' dangerouslySetInnerHTML={{ __html: stateUnits.qii }} />,
+          sectionsContent.obj15.after,
+        ]
+    },
+    {
+        id:'quadrant-iii-3-4i',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+          <div key='u-qiii' dangerouslySetInnerHTML={{ __html: stateUnits.qiii }} />,
+          sectionsContent.obj16.after,
+        ]
+    },
+    {
+        id:'equal-component-states-and-special-angles',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
+        content:[
+          sectionsContent.obj4.content,
+          <div key='u-qiv' dangerouslySetInnerHTML={{ __html: stateUnits.qiv }} />,
+          sectionsContent.obj4.after,
+        ]
+    },
+    {
+        id:'degenerate-cases-points-on-the-axes',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -849,15 +979,27 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
+        id:'on-the-imaginary-axis-5i',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
         content:[
-          sectionsContent.obj4.content,
+          sectionsContent.obj12.content,
+          <div key='u-posImaginary' dangerouslySetInnerHTML={{ __html: stateUnits.posImaginary }} />,
+          sectionsContent.obj12.after,
         ]
     },
     {
-        id:'5',
+        id:'on-the-negative-real-axis-6',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-negReal' dangerouslySetInnerHTML={{ __html: stateUnits.negReal }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'using-the-rectangular-form-panel',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -865,7 +1007,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'6',
+        id:'using-the-polar-form-panel',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -873,7 +1015,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'7',
+        id:'live-conversion-formulas',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -881,7 +1023,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'8',
+        id:'rectangular-to-polar-conversion',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -889,7 +1031,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'9',
+        id:'polar-to-rectangular-conversion',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -897,7 +1039,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'10',
+        id:'when-to-use-each-form',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -905,7 +1047,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
@@ -973,8 +1115,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Polar-Rectangular Converter</h1>
    <br/>
-   <SiblingsNav>
-   <PolarRectangularConverter/>
+   <SiblingsNav maxWidth='100%'>
+   <PolarRectangularConverter explanations={explanations}/>
    </SiblingsNav>
    <br/>
    <SectionTableOfContents sections={genericSections}

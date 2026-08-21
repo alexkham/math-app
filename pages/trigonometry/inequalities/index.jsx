@@ -439,7 +439,7 @@ obj7: {
 
 $$2\\sin(3x) > 1 \\quad \\Rightarrow \\quad \\sin(3x) > \\frac{1}{2}$$
 
-**Step 2: Solve for the inner argument.** Let $u = 3x$. The inequality $\\sin(u) > \\frac{1}{2}$ has the solution:
+**Step 2: Solve for the inner argument.** Let $u = 3x$. The inequality $\\sin(u) > \\frac{1}{2}$ has the solution — an interval whose endpoints carry the integer parameter of the [general-solution notation](!/trigonometry/equations#notation):
 
 $$u \\in \\left(\\frac{\\pi}{6} + 2n\\pi, \\quad \\frac{5\\pi}{6} + 2n\\pi\\right)$$
 

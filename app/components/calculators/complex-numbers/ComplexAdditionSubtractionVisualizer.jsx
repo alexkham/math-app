@@ -3,8 +3,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function ComplexAddSubVisualizer() {
+export default function ComplexAddSubVisualizer({ explanations }) {
   const [z1, setZ1] = useState({ re: 3, im: 1 });
   const [z2, setZ2] = useState({ re: 1, im: 3 });
   const [mode, setMode] = useState('both'); // 'add' | 'sub' | 'both'
@@ -55,6 +56,18 @@ export default function ComplexAddSubVisualizer() {
 
   const showAdd = mode === 'add' || mode === 'both';
   const showSub = mode === 'sub' || mode === 'both';
+
+  // Line 1: page-supplied per-state explanations. Two keys can be active at
+  // once — the display mode, and the preset pair the current values match.
+  // Nothing renders when no explanations prop is passed — defaults intact.
+  const pairKey =
+    z1.re === 2 && z1.im === 2 && z2.re === -2 && z2.im === 2 ? 'mirror'
+    : z1.re === 4 && z1.im === 0 && z2.re === 0 && z2.im === 3 ? 'axes'
+    : z1.re === 3 && z1.im === 2 && z2.re === 3 && z2.im === -2 ? 'conjugatePair'
+    : z1.re === -1 && z1.im === 3 && z2.re === 2 && z2.im === -1 ? 'mixed'
+    : null;
+  const modeExplanation = explanations ? explanations[mode] : null;
+  const pairExplanation = explanations && pairKey ? explanations[pairKey] : null;
 
   const handlePointerDown = useCallback((which) => (e) => {
     setDragging(which);
@@ -472,6 +485,18 @@ export default function ComplexAddSubVisualizer() {
                 <strong>Triangle inequality:</strong> |z&#x2081;+z&#x2082;| &le; |z&#x2081;| + |z&#x2082;|. The sum can never be longer than both vectors placed end-to-end. Drag z&#x2081; and z&#x2082; to the same direction to see equality.
               </span>
             </div>
+            {modeExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.teal }}></span>
+                <span>{processContent(modeExplanation)}</span>
+              </div>
+            )}
+            {pairExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.orange }}></span>
+                <span>{processContent(pairExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -501,7 +526,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1280px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -524,7 +551,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '720px 1fr',
+    gridTemplateColumns: 'minmax(620px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

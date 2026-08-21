@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function PolarRectangularConverter() {
+export default function PolarRectangularConverter({ explanations }) {
   const [re, setRe] = useState(3);
   const [im, setIm] = useState(2);
   const [dragging, setDragging] = useState(false);
@@ -37,6 +38,20 @@ export default function PolarRectangularConverter() {
   const modulus = Math.sqrt(re * re + im * im);
   const argument = Math.atan2(im, re);
   const argDeg = argument * 180 / Math.PI;
+
+  // Line 1: page-supplied per-state explanations, keyed by the preset the
+  // current point matches. Nothing renders when no explanations prop is
+  // passed — defaults stay intact.
+  const stateKey =
+    re === 3 && im === 2 ? 'qi'
+    : re === -4 && im === 3 ? 'qii'
+    : re === -3 && im === -4 ? 'qiii'
+    : re === 5 && im === -5 ? 'qiv'
+    : re === 0 && im === 5 ? 'posImaginary'
+    : re === -6 && im === 0 ? 'negReal'
+    : null;
+  const stateExplanation =
+    explanations && stateKey ? explanations[stateKey] : null;
 
   const zSvg = toSvg(re, im);
   const originSvg = toSvg(0, 0);
@@ -391,6 +406,12 @@ export default function PolarRectangularConverter() {
                 <strong>When to use which?</strong> Rectangular is easier for addition and subtraction. Polar is easier for multiplication, division, and powers &mdash; because multiplying in polar means multiplying moduli and adding angles.
               </span>
             </div>
+            {stateExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.teal }}></span>
+                <span>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -421,7 +442,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1180px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -444,7 +467,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '624px 1fr',
+    gridTemplateColumns: 'minmax(560px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

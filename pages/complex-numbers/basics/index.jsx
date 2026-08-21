@@ -290,7 +290,7 @@ notation: {
       id: 'a-plus-bi',
       tex: `$a + bi$`,
       read: `a plus b i`,
-      means: `The algebraic form as a mark: $a$ the real part, $b$ the coefficient of $i$ — two real numbers carrying one complex one. The plus is honest addition, yet nothing evaluates: the expression *is* the finished number.`,
+      means: `The algebraic form as a mark: $a$ the real part, $b$ the coefficient of $i$ — two real numbers carrying one complex one. The plus is honest addition, yet nothing evaluates: the expression **is** the finished number.`,
       cases: `General work uses $a + bi$; concrete numbers go literal — $3 + 2i$, $-i$ (coefficient $1$ suppressed), bare $7$ ($b = 0$ unwritten). The padded spellings $1 + 0i$ and $0 + 0i$ of **The Mathematical Theory** below appear only where the classification itself is the point.`,
       alsoWritten: `$a + ib$ — the $i$-first order, obligatory once the coefficient grows: $\\cos\\theta + i\\sin\\theta$, never $\\cos\\theta + \\sin\\theta\\, i$. Complex analysis prefers $x + iy$, matching the plane's coordinates; electrical engineering swaps the [unit's letter](!/complex-numbers/imaginary-numbers) entirely, writing $a + jb$.`,
       confusedWith: `An unfinished sum. $3 + 2i$ reads like an addition awaiting an answer; it is the answer — the two parts never merge, and the “simplification” $(a + b)i$ is the standard first-week error.`,

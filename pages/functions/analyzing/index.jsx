@@ -446,7 +446,7 @@ Non-periodic functions never repeat exactly. The exponential function $f(x) = 2^
 
 Four possibilities exist for each direction:
 
-The function may increase without bound: $f(x) \\to \\infty$. The graph rises indefinitely.
+The function may increase without bound: $f(x) \\to \\infty$ — the arrow and infinity marks of [limit notation](!/calculus/limits/infinity#notation). The graph rises indefinitely.
 
 The function may decrease without bound: $f(x) \\to -\\infty$. The graph falls indefinitely.
 

@@ -8,6 +8,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -910,24 +911,40 @@ Composition creates new functions with potentially different [domains](!/functio
     link: '',
   },
 
-  obj2: {
-    title: `Notation for Composition`,
-    content: `Several notations express the same composition:
-
-@@(f \\circ g)(x) = f(g(x))@@
-
-The symbol $\\circ$ denotes composition. Read $f \\circ g$ as "$f$ composed with $g$" or "$f$ of $g$."
-
-The notation $f(g(x))$ shows the structure explicitly: $g(x)$ is computed first, then $f$ is applied to that result. The inner function $g$ acts first; the outer function $f$ acts second.
-
-Some texts write $fg(x)$ without the composition symbol, relying on context to distinguish from multiplication. This notation risks confusion and is best avoided unless the meaning is clear.
-
-The order in the notation matters critically. In $f \\circ g$, the function $g$ appears on the right but acts first. The function $f$ appears on the left but acts second. This right-to-left reading matches the nested parentheses in $f(g(x))$: evaluate from the inside out.
-
-When speaking aloud, "$f$ of $g$ of $x$" follows the written order while preserving the evaluation sequence: start with $x$, apply $g$, then apply $f$. All three forms appear among the [function symbols](!/math-symbols/functions).`,
-    before: ``,
-    after: ``,
-    link: '',
+  notation: {
+    title: `Composition Notation`,
+    lead: `One operation, three spellings: the ring, the nested parentheses, and the juxtaposition some texts risk. The order rule — right side acts first — is the whole game, and all three forms appear among the [function symbols](!/math-symbols/functions).`,
+    inherited: `$f(x)$, the letter conventions and substitution come from [function notation](!/functions/basics#5); the domain restrictions a composition inherits are written with [domain notation](!/functions/domain#2).`,
+    entries: [
+      {
+        id: 'circ-ring',
+        tex: `$f \\circ g$`,
+        read: `f composed with g; f after g`,
+        means: `The hollow ring is the composition operator: $f \\circ g$ is one new function, built by feeding $g$'s output to $f$. Read right-to-left — $g$ sits second but acts first; "f after g" is the reading that encodes the order.`,
+        cases: `Iterates hide the ring: in dynamics $f^2$ means $f \\circ f$ — while the [squared shorthand](!/trigonometry/functions#notation) $\\sin^2\\theta$ squares the value; the superscript's meaning flips by field, so careful texts write $f \\circ f$ out.`,
+        confusedWith: `The multiplication dot. $f \\circ g$ and $f \\cdot g$ differ by hollowness alone — one chains rules, the other multiplies outputs; and the ring is not the [degree mark](!/trigonometry/degrees-radians#notation) $°$, which rides superscript on a number.`,
+      },
+      {
+        id: 'nested-form',
+        tex: `$f(g(x))$`,
+        read: `f of g of x`,
+        means: `The self-explaining spelling: nesting shows the order — evaluate inside out, $g(x)$ first, then $f$ of the result. $(f \\circ g)(x) = f(g(x))$ is the bridge between the two forms.`,
+        cases: `At a point the nesting becomes a two-step computation — $(f \\circ g)(4)$ runs $g(4)$ then $f$ of it, the drill of **Evaluating Compositions at a Point** below; spoken aloud, "f of g of x" preserves both order and sequence.`,
+        confusedWith: `$g(f(x))$. Same letters, opposite machine — $f \\circ g$ and $g \\circ f$ are generally different functions, as the $101 \\neq 49$ example below demonstrates; the notation is order-critical.`,
+      },
+      {
+        id: 'juxtaposition',
+        tex: `$fg(x)$`,
+        read: `f g of x — ambiguous`,
+        means: `The risky spelling: some texts drop the ring and juxtapose, trusting context to rule out multiplication. Best avoided in elementary work — the same string means the product in [function arithmetic](!/functions/arithmetic), where $(fg)(x) = f(x) \\cdot g(x)$.`,
+        cases: `Where it is standard: operator theory and abstract algebra compose by juxtaposition routinely, because composition is the only product those settings have.`,
+        confusedWith: `A product. $fg(x)$ read as $f(x) \\cdot g(x)$ versus $f(g(x))$ — two different numbers from one string; the ring or the nest costs one symbol and removes the ambiguity entirely.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/functions`,
+    symbolsLabel: `All function symbols`,
+    parentHref: `/functions`,
+    parentLabel: `Functions`,
   },
 
   obj3: {
@@ -1378,10 +1395,21 @@ export default function CompositionPage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

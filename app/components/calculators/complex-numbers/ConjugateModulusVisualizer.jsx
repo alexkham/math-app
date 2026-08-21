@@ -3,8 +3,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function ConjugateModulusVisualizer() {
+export default function ConjugateModulusVisualizer({ explanations }) {
   const [z, setZ] = useState({ re: 3, im: 2 });
   const [dragging, setDragging] = useState(false);
   const [warning, setWarning] = useState(false);
@@ -40,6 +41,20 @@ export default function ConjugateModulusVisualizer() {
   const modulus = Math.sqrt(z.re * z.re + z.im * z.im);
   const modulusSq = z.re * z.re + z.im * z.im;
   const conj = { re: z.re, im: -z.im };
+
+  // Line 1: page-supplied per-state explanations, keyed by the preset/special
+  // value z currently matches. Nothing renders when no explanations prop is
+  // passed or z is not on a keyed state — defaults stay intact.
+  const stateKey =
+    z.re === 0 && z.im === 0 ? 'origin'
+    : z.re === 3 && z.im === 2 ? 'start'
+    : z.re === -1 && z.im === 4 ? 'negativeReal'
+    : z.re === 0 && z.im === 3 ? 'pureImaginary'
+    : z.re === 4 && z.im === 0 ? 'purelyReal'
+    : z.re === -2 && z.im === -3 ? 'thirdQuadrant'
+    : null;
+  const stateExplanation =
+    explanations && stateKey ? explanations[stateKey] : null;
 
   const zSvg = toSvg(z.re, z.im);
   const conjSvg = toSvg(conj.re, conj.im);
@@ -300,6 +315,12 @@ export default function ConjugateModulusVisualizer() {
               <span style={{ ...styles.dot, backgroundColor: palette.teal }}></span>
               <span>Multiplying z &middot; z&#x305; always gives a <strong>real number</strong> equal to |z|&sup2;. This is why we multiply by the conjugate to rationalize complex denominators.</span>
             </div>
+            {stateExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.orange }}></span>
+                <span>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -329,7 +350,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1060px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -352,7 +375,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '520px 1fr',
+    gridTemplateColumns: 'minmax(520px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

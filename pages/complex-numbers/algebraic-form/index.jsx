@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -532,24 +533,42 @@ Special cases deserve mention. When $b = 0$, the imaginary term vanishes and $z 
 },
 
   
-    obj2: {
-  title: `Real and Imaginary Parts: Formal Notation`,
-  before: ``,
-  content: `Mathematics benefits from precise notation, and the components of a complex number receive dedicated symbols. For any $z = a + bi$, we write $Re(z) = a$ to denote the real part and $Im(z) = b$ to denote the imaginary part. These functions extract the individual coordinates from the combined expression.
-
-The notation $Re(z)$ reads as "the real part of $z$." Applied to $z = 7 + 4i$, we obtain $Re(7 + 4i) = 7$. The function strips away the imaginary term and returns what remains. Similarly, $Im(z)$ reads as "the imaginary part of $z$," and $Im(7 + 4i) = 4$. Note again: the output is $4$, not $4i$. The function extracts the coefficient, not the entire imaginary term.
-
-Geometric interpretation reinforces the meaning. On the [complex plane](!/complex-numbers/geometric-representation), the real part measures horizontal displacement from the origin — movement along the real axis. The imaginary part measures vertical displacement — movement along the imaginary axis. The number $z = 3 - 2i$ sits at coordinates $(3, -2)$: three units right and two units down. Here $Re(z) = 3$ gives the horizontal coordinate and $Im(z) = -2$ gives the vertical coordinate.
-
-Negative imaginary parts require careful handling. Consider $z = 5 - 3i$. Writing this in strict standard form yields $z = 5 + (-3)i$, revealing that the coefficient of $i$ is $-3$. Therefore $Re(z) = 5$ and $Im(z) = -3$. The negative sign belongs to the imaginary part; it does not float separately. Students who report $Im(5 - 3i) = 3$ have dropped the sign and produced an incorrect answer.
-
-Both $Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$. They accept a complex number as input and return a real number as output. No complex number emerges from either function — even when applied to the most elaborate complex expression, the result always belongs to the real number line. This property makes $Re$ and $Im$ essential tools for decomposing complex problems into real-valued components that standard techniques can address.
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
-
-`,
-  after: ``,
-  link: '',
+    notation: {
+  title: `Real and Imaginary Part Notation`,
+  lead: `The extraction marks live here: the operator pair that splits a complex number into its two real coordinates, the strict spelling that keeps signs honest, and the letters that turn one complex unknown into two real ones.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation); the conjugate bar $\\bar{z}$ of **The Complex Conjugate** below is owned by [its dedicated page](!/complex-numbers/complex-conjugate).`,
+  entries: [
+    {
+      id: 're-im',
+      tex: `$Re(z)$ · $Im(z)$`,
+      read: `the real part of z; the imaginary part of z`,
+      means: `The extraction pair: $Re(z) = a$ and $Im(z) = b$ for $z = a + bi$ — both functions from $\\mathbb{C}$ to $\\mathbb{R}$, so the output never carries an $i$. Careful print sets the operators upright, $\\operatorname{Re}(z)$ rather than italic, via @[\\operatorname{Re}]@ — the [LaTeX reference](!/latex) has the ready-made commands.`,
+      cases: `Operator style drops the parentheses — $\\operatorname{Re}\\, z$ is common in analysis. The pair acts as coordinates: $z = 3 - 2i$ lands at $(Re(z), Im(z)) = (3, -2)$; the conjugate extraction identities live in **The Real Part** and **The Imaginary Part** below.`,
+      alsoWritten: `$\\Re(z)$ and $\\Im(z)$ — Fraktur capitals, the 19th-century German convention still standard in physics and older analysis texts; hard to read at small sizes, which is why modern print spells the operators out.`,
+      confusedWith: `$Im(z) = bi$. The commonest error in the topic — the function returns the bare coefficient: $Im(7 + 4i)$ is $4$, a real number, never $4i$.`,
+      sameGlyphElsewhere: `$\\operatorname{Im}$ is also the **image** of a linear map — $\\operatorname{Im}(T)$ in [image and kernel](!/linear-algebra/transformations/image-kernel#notation) — an unrelated job on an unrelated object; what follows the mark (complex number vs transformation) decides.`,
+    },
+    {
+      id: 'strict-form',
+      tex: `$a + (-b)i$`,
+      read: `a plus negative b, i`,
+      means: `The strict spelling of a subtraction: $4 - 5i$ **is** $4 + (-5)i$. Rewriting makes the coefficient of $i$ visible before anything is extracted or [conjugated](!/complex-numbers/complex-conjugate) — the [general form's](!/complex-numbers/basics#notation) sign convention applied under pressure.`,
+      cases: `Needed exactly where signs are harvested: reading off $Im(5 - 3i) = -3$, building $\\bar{z}$, matching coefficients in **Equality of Complex Numbers** below.`,
+      confusedWith: `A detachable minus. Reporting $Im(5 - 3i) = 3$ drops the sign the notation had already absorbed into the coefficient — the whole point of the strict form is that the sign travels with $b$.`,
+    },
+    {
+      id: 'x-plus-yi',
+      tex: `$z = x + yi$`,
+      read: `z equals x plus y i`,
+      means: `The unknowns convention: when $z$ itself is what you solve for, its parts take the unknown letters — $x, y$ real by declaration. One complex unknown becomes two real ones, the engine behind **Equality of Complex Numbers** below.`,
+      cases: `Analysis extends the split to outputs: $w = u + iv$ for values $w = f(z)$, keeping input parts $(x, y)$ and output parts $(u, v)$ in separate alphabets.`,
+      confusedWith: `Free letters. The method works only because $x, y \\in \\mathbb{R}$ is declared — treat them as complex and one equation stops splitting into two.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
 },
   
    
@@ -979,10 +998,21 @@ export default function AlgebraicFormPage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div
             key={'obj2-table'}
             style={tableWrapStyle}

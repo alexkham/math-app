@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -484,14 +485,48 @@ The power set transforms subset relationships into membership relationships: $B 
     after: ``,
     link: '',
   },
-  obj6: {
-    title: `Summary: Subset and Superset Notation`,
-    content: `
-Four [containment symbols](!/math-symbols/set-theory) cover every subset/superset relationship encountered above. The capstone reference card below collects all four — with how each is read, what it means, and a representative example — so the right notation is always one glance away.
-    `,
-    before: ``,
-    after: ``,
-    link: '',
+  notation: {
+    title: `Subset and Superset Notation`,
+    lead: `Four containment marks, a calligraphic P with an exponent twin, and the double-struck number chain — all met above, gathered here with their reading rules and their one genuine convention war. The reference card below lists the four [containment symbols](!/math-symbols/set-theory) at a glance.`,
+    inherited: `$\\in$, $\\varnothing$, the braces and set-builder come from [set theory basics](!/set-theory/basics#2); the counting behind $2^{|A|}$ is [cardinality's](!/set-theory/cardinality) business.`,
+    entries: [
+      {
+        id: 'subset-pair',
+        tex: `$\\subseteq$ · $\\subset$`,
+        read: `is a subset of; is a proper subset of`,
+        means: `Containment with and without the escape clause: $A \\subseteq B$ allows $A = B$, $A \\subset B$ forbids it — the underbar means "or equal", the same bar-job it performs on the [inequality signs](!/algebra/inequalities/linear#notation). **Subsets** and **Proper Subsets** above define both.`,
+        cases: `The convention war: many texts — especially older and European ones — write $\\subset$ for any subset and reserve $\\subsetneq$ for proper containment; when it matters, an author's first $\\subset$ deserves a suspicious read.`,
+        confusedWith: `Membership. $1 \\in A$ but $\\{1\\} \\subseteq A$ — the [basics page](!/set-theory/basics#2) calls this the subject's most reliable exam error, and it runs both directions.`,
+      },
+      {
+        id: 'superset-pair',
+        tex: `$\\supseteq$ · $\\supset$`,
+        read: `is a superset of; contains`,
+        means: `The same relationships read from the other end: $B \\supseteq A$ says $B$ contains $A$ — one fact, two spellings, mirror-image marks. **Superset** above works the reversal.`,
+        cases: `The open side faces the bigger set — the same visual rule inequality signs follow; $A \\subseteq B$ and $B \\supseteq A$ are interchangeable, and writers pick whichever keeps the emphasized set first.`,
+        confusedWith: `A different claim. Reversing the glyph does not negate it — the denial of $A \\subseteq B$ is $A \\not\\subseteq B$ with the slash, not $A \\supseteq B$, which asserts containment the other way.`,
+      },
+      {
+        id: 'power-set',
+        tex: `$\\mathcal{P}(A)$ · $2^A$`,
+        read: `the power set of A; two to the A`,
+        means: `The set of all subsets, in calligraphic dress — $\\mathcal{P}(A) = \\{S : S \\subseteq A\\}$, per **Power Set** above. The exponent spelling $2^A$ earns its name from the count: $|\\mathcal{P}(A)| = 2^{|A|}$.`,
+        cases: `The bridge identity converts relations: $B \\subseteq A$ exactly when $B \\in \\mathcal{P}(A)$ — containment outside becomes membership inside; $\\mathcal{P}(\\varnothing) = \\{\\varnothing\\}$, one element, not zero.`,
+        confusedWith: `A plain capital P. The calligraphic font is load-bearing — $P(A)$ in roman type reads as probability of an event or a polynomial value; the script $\\mathcal{P}$ keeps the power set visually distinct.`,
+      },
+      {
+        id: 'number-chain',
+        tex: `$\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R}$`,
+        read: `the number systems, each inside the next`,
+        means: `The double-struck (blackboard-bold) family: naturals, integers, rationals, reals — reserved letters for the standard number sets, and the containment chain is the family portrait. Chalk invented the double stroke to fake print bold; print then adopted it back.`,
+        cases: `The chain extends to $\\mathbb{C}$ at the top — the [complex numbers](!/complex-numbers/basics#notation) own that link — and each letter serves as a standing domain, $n \\in \\mathbb{Z}$, $x \\in \\mathbb{R}$, wherever a variable's habitat needs declaring.`,
+        confusedWith: `Ordinary italic letters. $N$, $Z$, $Q$, $R$ are free variables; only the double stroke reserves the letter — handwriting that skips the second stroke silently releases the reservation.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/set-theory`,
+    symbolsLabel: `All set theory symbols`,
+    parentHref: `/set-theory`,
+    parentLabel: `Set Theory`,
   },
 };
 
@@ -739,10 +774,21 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, obj
     // obj6: NEW capstone — subset/superset notation reference card
     {
         id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj6.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div
             key={'summary-table'}
             style={tableWrapStyle}

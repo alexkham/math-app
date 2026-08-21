@@ -8,6 +8,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -561,6 +562,42 @@ Multiplying by $x$ and differentiating again, or integrating and substituting, p
     link: '',
   },
 
+  notation: {
+    title: `Binomial Expansion Notation`,
+    lead: `The theorem's machinery in three marks: the sigma that folds an expansion into one expression, the term labels with their built-in shift, and the sum whose subscript is an equation.`,
+    inherited: `$\\binom{n}{k}$ and the multinomial coefficient are owned by [binomial coefficient notation](!/combinatorics/binomial-coefficient#notation), $n!$ by [permutation notation](!/combinatorics/permutations#notation); the alternating $(-1)^k$ of **Special Cases** above is the device [solution sets](!/trigonometry/equations#notation) formalize.`,
+    entries: [
+      {
+        id: 'sigma-bounds',
+        tex: `$\\sum_{k=0}^{n}$`,
+        read: `the sum as k runs from zero to n`,
+        means: `The expansion compressor: capital sigma with its counter declared below and its stopping point above — $n + 1$ terms folded into one expression in **The Theorem** above. The letter is an operator, not a quantity.`,
+        cases: `The counter $k$ is a bound (dummy) variable — the sum's value never mentions it, the same disappearing act as the [dummy variable of integration](!/calculus/integrals/definite#2); renaming $k$ to $j$ changes nothing.`,
+        confusedWith: `A product of sigma and its neighbors. Nothing multiplies — everything to the right of the sigma sits inside its scope; how far the scope reaches is convention, and brackets settle any dispute.`,
+      },
+      {
+        id: 'term-labels',
+        tex: `$T_{k+1}$`,
+        read: `the k-plus-first term`,
+        means: `Term labels with a built-in shift: numbering starts at $T_1$ — the term with no $b$ — so the term containing $b^k$ is $T_{k+1}$, never $T_k$; the **Index Convention** of **The General Term** above.`,
+        cases: `The middle term inherits the shift — even $n$ puts it at $T_{n/2+1}$; every "find the 7th term" problem is really a $k = 6$ computation, and writing that translation down first prevents the classic slip.`,
+        confusedWith: `Zero-based counting. The exponent $k$ runs from $0$, the label $T$ from $1$ — two counters one step apart riding the same term; conflating them is the standard error of expansion problems.`,
+      },
+      {
+        id: 'constrained-sum',
+        tex: `$\\sum_{k_1 + \\cdots + k_r = n}$`,
+        read: `the sum over all splittings of n`,
+        means: `Summation with an equation for a subscript: the index set is every non-negative solution of $k_1 + \\cdots + k_r = n$ — one term per way of splitting $n$, as **The Multinomial Theorem** above deploys it.`,
+        cases: `The constraint replaces bounds entirely — no corners, just a membership condition under the sigma, with extra conditions stacked beneath ($k_i \\geq 0$): a miniature [set-builder](!/set-theory/basics#2) doing index duty.`,
+        confusedWith: `A single running index. No one counter exists here — the sum ranges over tuples; expanding it as if one $k$ walks from somewhere to $n$ produces phantom terms and misses most of the real ones.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/combinatorics`,
+    symbolsLabel: `All combinatorics symbols`,
+    parentHref: `/combinatorics`,
+    parentLabel: `Combinatorics`,
+  },
+
   obj4: {
     title: `The Multinomial Theorem`,
     content: `
@@ -863,6 +900,25 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

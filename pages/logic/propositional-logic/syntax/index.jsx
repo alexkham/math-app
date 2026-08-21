@@ -351,11 +351,56 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head'
 import MyList from '@/app/components/page-components/lists/MyList'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 export async function getStaticProps() {
 
  const sectionContent = {
-  
+
+  notation: {
+    title: `Propositional Logic Notation`,
+    lead: `The alphabet's marks, formalized: the capital letters that stand for statements, the five connectives that combine them, the Greek letters that stand for whole formulas, and the parentheses that hold everything together. Every symbol is catalogued among the [logic symbols](!/math-symbols/math-logic).`,
+    inherited: `The equivalence and consequence marks ($\\equiv$, $\\vDash$) belong to the [semantics pages](!/logic/propositional-logic/semantics); $\\top$, $\\bot$ and $\\vdash$ to the [tautology](!/logic/propositional-logic/semantics/tautology) and [contradiction](!/logic/propositional-logic/semantics/contradiction) pages.`,
+    entries: [
+      {
+        id: 'atomic-letters',
+        tex: `$P, Q, R$ · $P_1, P_2$`,
+        read: `atomic proposition letters`,
+        means: `Capital letters name atomic propositions — indivisible statements that are true or false, as **Propositional Logic Alphabet** above defines. Subscripts extend the supply when three letters run out: $P_1, P_2, \\ldots$ — the same enumeration job subscripts do everywhere.`,
+        cases: `Lowercase $p, q, r$ is an equally standard dialect — many texts, and parts of this site, use it; case is convention, not meaning.`,
+        confusedWith: `Free algebra variables. $P$ holds a truth value, not a number — substituting $5$ for $P$ is a category error; the letters range over statements, never quantities.`,
+      },
+      {
+        id: 'five-connectives',
+        tex: `$\\neg \\;\\; \\wedge \\;\\; \\vee \\;\\; \\to \\;\\; \\leftrightarrow$`,
+        read: `not; and; or; implies; if and only if`,
+        means: `The five standard connectives: negation, conjunction, disjunction, implication, biconditional — the complete combining toolkit of **Propositional Logic Alphabet** above. Only $\\neg$ is unary; the rest join exactly two formulas.`,
+        cases: `The shapes deliberately mirror [set operations](!/set-theory/operations#notation) — $\\wedge$ with $\\cap$, $\\vee$ with $\\cup$ — because "and" filters and "or" collects in both worlds; code and tool inputs use the ASCII stand-ins @[!]@, @[&&]@, @[||]@, @[->]@, @[<->]@.`,
+        alsoWritten: `Older and neighboring dialects: $\\sim\\!P$ for negation, $P'$ or $\\bar{P}$ in Boolean algebra, $\\supset$ for implication in Principia-era texts, $\\&$ for conjunction — all still met in the literature.`,
+        confusedWith: `Arithmetic on truth values. $P \\wedge Q$ computes nothing numeric — the connectives build formulas whose truth is settled later, by the [semantics](!/logic/propositional-logic/semantics); syntax only checks the grammar.`,
+      },
+      {
+        id: 'metavariables',
+        tex: `$\\varphi, \\psi$`,
+        read: `phi and psi — formula placeholders`,
+        means: `Greek letters stand for whole formulas, known or unknown: the rule "if $\\varphi$ is well-formed, so is $\\neg\\varphi$" of **Formation Rules** below quantifies over every possible formula at once. Latin letters name atoms; Greek letters name anything.`,
+        cases: `The split keeps levels apart — $P \\wedge Q$ is one concrete formula, $\\varphi \\wedge \\psi$ a template matching infinitely many; formation rules, laws and proofs are all stated in the Greek layer.`,
+        confusedWith: `More proposition letters. Reading $\\varphi$ as "just another atom" collapses the template into one instance — the rule stops generating and the recursion of **Formation Rules** below loses its engine.`,
+      },
+      {
+        id: 'parentheses-precedence',
+        tex: `$(\\varphi \\wedge \\psi)$`,
+        read: `parenthesized conjunction`,
+        means: `At the formation level, parentheses are mandatory grammar — every binary connective brings its own pair, and no precedence exists, as **Formation Rules** below insists. Bare $P \\wedge Q \\vee R$ is not yet a formula.`,
+        cases: `Precedence arrives later as a reading convention: $\\neg$ binds tightest, then $\\wedge$, $\\vee$, $\\to$, $\\leftrightarrow$ — an auxiliary shorthand for dropping brackets, not a formation rule; the site's tools parse by exactly this hierarchy.`,
+        confusedWith: `Optional decoration. Dropping parentheses "because the meaning is obvious" trades a well-formed formula for an ambiguous string — $P \\to Q \\to R$ has two incompatible readings until convention or brackets decide.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/math-logic`,
+    symbolsLabel: `All logic symbols`,
+    parentHref: `/logic/propositional-logic`,
+    parentLabel: `Propositional Logic`,
+  },
 
   definitions:{
     title:`Syntax Definition`,
@@ -564,6 +609,24 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
     content:[
       sectionContent.formation.description
 
+    ]
+   },
+   {
+    id:'notation',
+    title: sectionContent.notation.title,
+    content:[
+      <NotationSection
+        key={'notation'}
+        title={sectionContent.notation.title}
+        lead={sectionContent.notation.lead}
+        inherited={sectionContent.notation.inherited}
+        entries={sectionContent.notation.entries}
+        symbolsHref={sectionContent.notation.symbolsHref}
+        symbolsLabel={sectionContent.notation.symbolsLabel}
+        parentHref={sectionContent.notation.parentHref}
+        parentLabel={sectionContent.notation.parentLabel}
+        theme={'navy'}
+      />,
     ]
    },
 

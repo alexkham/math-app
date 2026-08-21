@@ -8,6 +8,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 
@@ -118,7 +119,44 @@ const notation=[
   `"If $𝑝$, then $𝑞$" (verbal expression)`,
   `"$𝑝$ implies $𝑞$" (another verbal expression)`
 ]
-  
+
+const notationSection = {
+  title: `Implication Notation`,
+  lead: `One arrow, two shafts, and a small library of English phrasings that all mean the same conditional — plus the one phrasing that reverses it.`,
+  inherited: `The connectives and proposition letters come from [propositional logic notation](!/logic/propositional-logic/syntax#notation); the meta-level $\\equiv$ from [equivalence notation](!/logic/propositional-logic/semantics/equivalences#notation); the turnstile $\\vdash$ appearing in the laws table below belongs to the [tautology page](!/logic/propositional-logic/semantics/tautology).`,
+  entries: [
+    {
+      id: 'single-arrow',
+      tex: `$p \\to q$`,
+      read: `if p then q; p implies q`,
+      means: `The conditional connective: $p \\to q$ builds a formula from two others, with $p$ the antecedent and $q$ the consequent — **Definition** above. Being a connective, it has a truth value of its own, which the truth table below settles.`,
+      cases: `The arrow points from hypothesis to conclusion and never commutes — $p \\to q$ and $q \\to p$ are different formulas (the converse); the [contrapositive](!/logic/propositional-logic/laws) $\\neg q \\to \\neg p$ is the one that always matches.`,
+      confusedWith: `A claim that $p$ is true. The arrow asserts only the dependency — when $p$ is false the whole formula is true regardless of $q$, the vacuous truth of **Truth Table for Logical Implication** below.`,
+    },
+    {
+      id: 'double-arrow-meta',
+      tex: `$p \\Rightarrow q$`,
+      read: `p implies q — in the meta sense`,
+      means: `The double shaft raises the claim a level: where $\\to$ builds a formula, $\\Rightarrow$ typically states that the implication holds in every case — the same shaft convention [equivalence notation](!/logic/propositional-logic/semantics/equivalences#notation) applies to $\\leftrightarrow$ and $\\Leftrightarrow$.`,
+      cases: `Usage is not universal — many texts write $\\Rightarrow$ for the plain connective and reserve nothing; when a source mixes both arrows, the shaft is meaningful, and when it uses only one, it is not.`,
+      alsoWritten: `$p \\supset q$ — the horseshoe of Principia-era logic, still met in older texts and philosophy; the [syntax page](!/logic/propositional-logic/syntax#notation) lists it among the historical connective spellings.`,
+      confusedWith: `Set containment. The horseshoe $\\supset$ is also [superset](!/set-theory/subsets#6) — one glyph, two disciplines; between formulas it implies, between sets it contains.`,
+    },
+    {
+      id: 'verbal-forms',
+      tex: `$p \\to q$ in words`,
+      read: `the English phrasings of one arrow`,
+      means: `The same formula answers to many readings — "if $p$, then $q$", "$p$ implies $q$", "$q$ if $p$", "$p$ is sufficient for $q$", "$q$ is necessary for $p$" — all naming $p \\to q$ exactly, as the notation list in **Definition** above begins.`,
+      cases: `Necessity and sufficiency divide the labour: the antecedent is sufficient, the consequent necessary — the phrasing chosen usually signals which side the writer cares about.`,
+      confusedWith: `"$p$ only if $q$". It sounds like the converse and is not — "only if" marks the **consequent**, so "$p$ only if $q$" is $p \\to q$, while "$p$ if $q$" is $q \\to p$; the two English words sit one word apart and point opposite ways.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/math-logic`,
+  symbolsLabel: `All logic symbols`,
+  parentHref: `/logic/propositional-logic/semantics`,
+  parentLabel: `Semantics`,
+}
+
 
   return {
     props:{
@@ -127,8 +165,9 @@ const notation=[
       introContent,
       properties,
       keyWords,
-      notation
-      
+      notation,
+      notationSection
+
     }
   }
 }
@@ -136,24 +175,41 @@ const notation=[
 
 
 
-export default function ImplicationPage({implicationLaws ,introContent ,properties ,keyWords ,notation}) {
+export default function ImplicationPage({implicationLaws ,introContent ,properties ,keyWords ,notation ,notationSection}) {
 
 
  
    const implicationSections=[
       {
             id:'definition',
-            title:'Definition and Notation',
+            title:'Definition',
             content:[`**Logical implication** is a fundamental concept in logic and mathematics. It describes a conditional relationship between two statements.
-## Definition:
+
             Logical implication ($𝑝→𝑞$) is a conditional statement meaning "if $p$, then $𝑞$." It asserts that whenever $𝑝$ (the antecedent or hypothesis) is true, $𝑞$ (the consequent or conclusion) must also be true.
-            **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the the consequent**. 
-            However, if $𝑝$ is false, the implication is still considered to be true regardless of $𝑞$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table). 
-## Notation:
+            **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the the consequent**.
+            However, if $𝑝$ is false, the implication is still considered to be true regardless of $𝑞$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
             `,
-            <MyList data={notation}
-            key={1}
-            boxed={true} color={'blue'} compact={true} type={'dot'} width='400px'/>
+        ]
+          },
+      {
+            id:'notation',
+            title:notationSection.title,
+            content:[
+              <NotationSection
+                key={'notation'}
+                title={notationSection.title}
+                lead={notationSection.lead}
+                inherited={notationSection.inherited}
+                entries={notationSection.entries}
+                symbolsHref={notationSection.symbolsHref}
+                symbolsLabel={notationSection.symbolsLabel}
+                parentHref={notationSection.parentHref}
+                parentLabel={notationSection.parentLabel}
+                theme={'navy'}
+              />,
+              <MyList data={notation}
+              key={1}
+              boxed={true} color={'blue'} compact={true} type={'dot'} width='400px'/>
         ]
           },
     //   {

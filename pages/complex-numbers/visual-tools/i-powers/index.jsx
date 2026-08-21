@@ -7,6 +7,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import PowersOfICalculator from '@/app/components/calculators/complex-numbers/PowersOfICalculator'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import iPowersDiagrams from '../../../../app/components/calculators/complex-numbers/iPowersDiagrams'
 
 
 
@@ -47,15 +49,15 @@ The four-case strip at the top always stays visible, displaying the four values 
       title:`The Four Remainder States`,
       content:`Every power of $i$ reduces to one of exactly four values, determined by the remainder when the exponent is divided by 4. Each state produces a distinct visual configuration in the calculator.
 
-**Remainder 0** — result is $1$. Try entering 100, 44, or any multiple of 4. The left node on the cycle diagram lights up and the case cell for $r = 0$ highlights. The four-step breakdown shows the division leaving zero remainder.
+**Remainder 0** — result is $1$. Try entering 100, 44, or any multiple of 4. The left node on the cycle diagram lights up and the case cell for $r = 0$ highlights. The four-step breakdown shows [full cycles vanishing](!#remainder-0-full-cycles-vanish) with zero left over.
 
-**Remainder 1** — result is $i$. Enter 17, 45, or 1001. The top node activates. The calculation confirms that the exponent equals $4q + 1$, so the final lookup gives $i^1 = i$.
+**Remainder 1** — result is $i$. Enter 17, 45, or 1001. The top node activates. The calculation confirms that the exponent equals $4q + 1$, so the final lookup gives $i^1 = i$ — [the cycle restarting](!#remainder-1-the-cycle-restarts).
 
-**Remainder 2** — result is $-1$. Enter 82, 50, or 6. The right node highlights. This is the state behind the fundamental definition $i^2 = -1$.
+**Remainder 2** — result is $-1$. Enter 82, 50, or 6. The right node highlights. This is the state behind [the fundamental definition](!#remainder-2-the-definition-itself) $i^2 = -1$.
 
-**Remainder 3** — result is $-i$. Enter 323, 99, or 7. The bottom node activates. The chain $i^3 = i^2 \\cdot i = -1 \\cdot i = -i$ appears in the explanation panel.
+**Remainder 3** — result is $-i$. Enter 323, 99, or 7. The bottom node activates. The chain $i^3 = i^2 \\cdot i = -1 \\cdot i = -i$ appears in the explanation panel — this is [the tool's opening example](!#remainder-3-the-opening-example).
 
-Each remainder state produces its own unique cycle diagram highlighting, making four distinct visual snapshots.`,
+Each remainder state produces its own unique cycle diagram highlighting, and each has a dedicated section below with the diagram frozen in that state.`,
       before:``,
       after:``,
       link:'',
@@ -213,6 +215,46 @@ The [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectang
   link:'',
 },
 
+    obj11:{
+      title:`Remainder 0: Full Cycles Vanish`,
+      content:`When the exponent is a multiple of 4, nothing survives the reduction: $i^{100} = 1$, exactly as if no multiplication had happened at all.`,
+      before:``,
+      after:`The frozen computation is $100 \\div 4 = 25$ remainder $0$: twenty-five complete trips around the cycle and not a single step more. Each trip contributes a factor of $i^4 = 1$, and $1^{25}$ is still $1$ — a hundred multiplications collapsing to nothing, as the [step-by-step walkthrough](!#step-by-step-calculation-walkthrough) shows line by line.
+
+This state is the identity of the cycle, and it explains the other three: every power of $i$ is "some full cycles, then a short remainder walk". Remainder 0 is the case where the walk has length zero. One step further takes you to [remainder 1](!#remainder-1-the-cycle-restarts).`,
+      link:'',
+    },
+
+    obj12:{
+      title:`Remainder 1: The Cycle Restarts`,
+      content:`An exponent one step past a multiple of 4 lands back on $i$ itself: $i^{17} = i$, seventeen multiplications with the effect of one.`,
+      before:``,
+      after:`The frozen computation reads $17 = 4 \\times 4 + 1$: four vanishing cycles and a single leftover step. The top node of the [cycle diagram](!#reading-the-cycle-diagram) lights up, which is the diagram's way of saying the sequence has begun again.
+
+Remainder 1 is why the pattern is periodic rather than merely finite — the cycle does not stop at $i^4 = 1$, it starts over from there. Every exponent congruent to $1 \\pmod 4$, whether $5$, $17$, or $1001$, is geometrically a single quarter-turn.`,
+      link:'',
+    },
+
+    obj13:{
+      title:`Remainder 2: The Definition Itself`,
+      content:`Two steps into the cycle sits the identity everything else is built on: $i^{82} = i^2 = -1$.`,
+      before:``,
+      after:`The frozen computation is $82 = 4 \\times 20 + 2$: twenty silent cycles, then the two-step walk $1 \\to i \\to -1$. Whatever the exponent, remainder 2 always lands on the number whose existence defines $i$ in the first place — $i^2 = -1$ is not derived from anything, it is the starting axiom, as the [cycle explanation](!#why-powers-of-i-cycle-every-4) lays out.
+
+Half the cycle equals negation: multiplying by $i^2$ flips any number to its opposite. That is the algebraic shadow of a $180°$ rotation, and it is why even powers of $i$ are always real ($\\pm 1$) while odd powers are always imaginary ($\\pm i$).`,
+      link:'',
+    },
+
+    obj14:{
+      title:`Remainder 3: The Opening Example`,
+      content:`The tool opens on $i^{323}$ — a deliberately unwieldy exponent that the mod-4 shortcut dispatches in one line: remainder $3$, so $i^{323} = -i$.`,
+      before:``,
+      after:`The frozen computation is $323 = 4 \\times 80 + 3$: eighty full cycles and a three-step walk $1 \\to i \\to -1 \\to -i$, ending at the bottom node. Three hundred twenty-three multiplications, and the answer was decided entirely by the last two digits' remainder.
+
+Remainder 3 has a second reading worth knowing: three steps forward is one step back, so $i^3 = i^{-1}$ — the multiplicative inverse of $i$. That equivalence is exactly the [negative exponent rule](!#negative-and-zero-exponents) seen from the other side of the cycle.`,
+      link:'',
+    },
+
   }
 
 
@@ -326,12 +368,36 @@ The [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectang
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // cycle diagram + attached picture-reading panel, one frame, no link.
+  const stateUnits = {
+    r0: demoUnitFrame({ svg: iPowersDiagrams.r0, caption: 'i&#185;&#8304;&#8304; — remainder 0, frozen',
+      text: 'The left node glows: 100 &#247; 4 = 25 with nothing left over, so twenty-five full cycles vanish and i&#185;&#8304;&#8304; = 1.' }),
+    r1: demoUnitFrame({ svg: iPowersDiagrams.r1, caption: 'i&#185;&#8311; — remainder 1, frozen',
+      text: 'The top node glows: 17 = 4&#215;4 + 1, four silent cycles and one leftover quarter-step — seventeen multiplications with the effect of one.' }),
+    r2: demoUnitFrame({ svg: iPowersDiagrams.r2, caption: 'i&#8312;&#178; — remainder 2, frozen',
+      text: 'The right node glows: 82 mod 4 = 2 lands on &#8722;1, the defining value of the imaginary unit — half the cycle equals negation.' }),
+    r3: demoUnitFrame({ svg: iPowersDiagrams.r3, caption: 'i&#179;&#178;&#179; — remainder 3, frozen',
+      text: 'The tool&#8217;s opening state: 323 = 4&#215;80 + 3, and the bottom node glows on &#8722;i — three steps forward, which is also one step back.' }),
+  };
+
+  // Per-state additions for the tool's Explanation panel, keyed by the
+  // current remainder class (see PowersOfICalculator).
+  const explanations = {
+    r0: 'Multiples of 4 erase themselves: every full cycle is a factor of 1. [Learn more about remainder 0](!#remainder-0-full-cycles-vanish) · [All four states](!#the-four-remainder-states)',
+    r1: 'One step past a multiple of 4, the cycle simply begins again at i. [Learn more about remainder 1](!#remainder-1-the-cycle-restarts) · [All four states](!#the-four-remainder-states)',
+    r2: 'Remainder 2 always lands on the axiom itself: i² = −1, a half-turn of the cycle. [Learn more about remainder 2](!#remainder-2-the-definition-itself) · [All four states](!#the-four-remainder-states)',
+    r3: 'Three steps forward is one step back: i³ = −i is also 1/i. [Learn more about remainder 3](!#remainder-3-the-opening-example) · [All four states](!#the-four-remainder-states)',
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "Powers of i Calculator | Learn Math Class",
         description: "Calculate any power of the imaginary unit i instantly. See the mod 4 cycle, step-by-step solution, animated diagram, and full reference table from i⁰ to i¹⁰⁰.",
@@ -344,12 +410,12 @@ The [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectang
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
     {
-        id:'1',
+        id:'getting-started-enter-any-exponent',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -357,7 +423,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'2',
+        id:'the-four-remainder-states',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -365,7 +431,47 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'3',
+        id:'remainder-0-full-cycles-vanish',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+          <div key='u-r0' dangerouslySetInnerHTML={{ __html: stateUnits.r0 }} />,
+          sectionsContent.obj11.after,
+        ]
+    },
+    {
+        id:'remainder-1-the-cycle-restarts',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-r1' dangerouslySetInnerHTML={{ __html: stateUnits.r1 }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'remainder-2-the-definition-itself',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-r2' dangerouslySetInnerHTML={{ __html: stateUnits.r2 }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'remainder-3-the-opening-example',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div key='u-r3' dangerouslySetInnerHTML={{ __html: stateUnits.r3 }} />,
+          sectionsContent.obj14.after,
+        ]
+    },
+    {
+        id:'reading-the-cycle-diagram',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -373,7 +479,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'4',
+        id:'step-by-step-calculation-walkthrough',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
@@ -381,7 +487,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'5',
+        id:'explanation-panel-and-special-cases',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -389,7 +495,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'6',
+        id:'quick-reference-table',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -397,7 +503,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'7',
+        id:'why-powers-of-i-cycle-every-4',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -405,7 +511,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'8',
+        id:'negative-and-zero-exponents',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -413,7 +519,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'9',
+        id:'connection-to-complex-numbers-and-eulers-formula',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -421,7 +527,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         ]
     },
     {
-        id:'10',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -489,8 +595,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Powers of i Calculator/Visualizer</h1>
    <br/>
-   <SiblingsNav>
-  <PowersOfICalculator/>
+   <SiblingsNav maxWidth='100%'>
+  <PowersOfICalculator explanations={explanations}/>
   </SiblingsNav>
    <br/>
    <SectionTableOfContents sections={genericSections}

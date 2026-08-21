@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PolynomialMultiplicationVisualizer from '../../../../app/components/algebra/visualizers/polynomials/PolynomialMultiplication'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import polynomialMultiplicationDiagrams from '../../../../app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 
 
 export async function getStaticProps(){
@@ -587,15 +589,15 @@ A few mechanics worth knowing:
       title: `Presets`,
       content: `Five preset products demonstrate different sizes and structures:
 
-• **$(x + 2)(x + 3)$** — the canonical FOIL: binomial times binomial, a $2 \\times 2$ grid with four cells.
+• **$(x + 2)(x + 3)$** — [the canonical FOIL](!#the-canonical-foil): binomial times binomial, a $2 \\times 2$ grid with four cells.
 
-• **$(2x - 1)(x + 4)$** — binomial times binomial with a negative coefficient, useful for seeing sign handling.
+• **$(2x - 1)(x + 4)$** — binomial times binomial with a negative coefficient, useful for [seeing sign handling](!#sign-handling).
 
-• **$(x^2 - 3x + 2)(2x + 5)$** — trinomial times binomial, a $3 \\times 2$ grid with six cells. The default load.
+• **$(x^2 - 3x + 2)(2x + 5)$** — [trinomial times binomial](!#trinomial-times-binomial), a $3 \\times 2$ grid with six cells. The default load.
 
-• **$(x + 1)(x^2 - x + 1)$** — binomial times trinomial, a $2 \\times 3$ grid. Note the famous result: this product equals $x^3 + 1$.
+• **$(x + 1)(x^2 - x + 1)$** — binomial times trinomial, a $2 \\times 3$ grid. Note the famous result: this product equals $x^3 + 1$ — [the sum of cubes](!#the-sum-of-cubes).
 
-• **$(2x^2 + x - 3)(x^2 - 2x + 1)$** — trinomial times trinomial, a $3 \\times 3$ grid with nine cells. The most complex preset.
+• **$(2x^2 + x - 3)(x^2 - 2x + 1)$** — [trinomial times trinomial](!#trinomial-times-trinomial), a $3 \\times 3$ grid with nine cells. The most complex preset.
 
 Click any preset to load it; the editors, grid, buckets, and result all refresh immediately.`,
       before: ``,
@@ -735,44 +737,86 @@ After the grid fills, the **like-term collection** step groups cells whose expon
       link: '',
     },
 
+    // ---- Line 1 per-state sections: the five presets, frozen at completion ----
+
     obj11: {
-      title: ``,
-      content: ``,
+      title: `The Canonical FOIL`,
+      content: `$(x + 2)(x + 3)$, frozen with all four cells delivered: a $2 \\times 2$ grid whose cells read $x^2$, $3x$, $2x$, $6$, three like-term buckets, and the result $x^2 + 5x + 6$.`,
       before: ``,
-      after: ``,
+      after: `This is the product every algebra student meets first, and the grid explains the FOIL acronym better than the acronym does: First, Outer, Inner, Last are simply the four cells of a $2 \\times 2$ grid, visited in row-major order. The mnemonic is a tour route; the grid is the territory.
+
+The frozen buckets show the one interesting event: the two middle cells $3x$ and $2x$ land in the same amber bucket and merge to $5x$. Every like-term collection in every larger product is this event repeated — which is why the tool colors cells by exponent rather than by position.`,
       link: '',
     },
+
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Sign Handling`,
+      content: `$(2x - 1)(x + 4)$, frozen at completion: four cells again, but one row carries the negative term, and the bucket arithmetic must subtract — the $x$ bucket collects $8 - 1 = 7$.`,
       before: ``,
-      after: ``,
+      after: `Negative coefficients are where hand multiplication usually goes wrong, and the grid localizes the danger: each cell's sign is decided once, at the cell, by the ordinary rule of signs ($-1 \\cdot 4 = -4$), and the buckets then merely add signed numbers. Two error-prone operations become two separate, simpler ones.
+
+The frozen frame keeps the evidence visible: the bottom row's cells carry the minus signs of the $-1$ term, and the bucket contributions show $+8$ and $-1$ arriving as separate deliveries before summing to the final $7x$. The result: $2x^2 + 7x - 4$.`,
       link: '',
     },
+
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Trinomial Times Binomial`,
+      content: `The default load: $(x^2 - 3x + 2)(2x + 5)$, frozen with all six cells delivered in a $3 \\times 2$ grid, four buckets, and the result $2x^3 - x^2 - 11x + 10$.`,
       before: ``,
-      after: ``,
+      after: `Six cells is where FOIL-the-mnemonic dies — there is no acronym for $3 \\times 2$ — and the grid principle takes over undamaged: every term of the left meets every term of the right, once. The cell count is always the product of the term counts, so the bookkeeping scales multiplicatively while the rule stays constant.
+
+The four buckets illustrate the other scaling law: the result's degree is the sum of the factors' degrees ($2 + 1 = 3$), and every exponent from $3$ down to $0$ is hit. Both middle buckets require genuine arithmetic ($5 - 6 = -1$ for $x^2$; $-15 + 4 = -11$ for $x$) — collection is no longer optional the way it nearly is in the FOIL frame.`,
       link: '',
     },
+
     obj14: {
-      title: ``,
-      content: ``,
+      title: `The Sum of Cubes`,
+      content: `$(x + 1)(x^2 - x + 1)$, frozen at completion — and the buckets steal the show: the $x^2$ bucket collects $-1 + 1 = 0$, the $x$ bucket collects $1 - 1 = 0$, and the result collapses to $x^3 + 1$.`,
       before: ``,
-      after: ``,
+      after: `This preset freezes a factoring identity being verified in public: $(x+1)(x^2 - x + 1) = x^3 + 1$, the sum-of-cubes pattern. Six cells are delivered, but four of them exist only to annihilate each other — the frozen buckets display the cancellation as visibly empty sums rather than as algebraic sleight of hand.
+
+Cancellation is the phenomenon that makes special products *special*: the second factor is engineered so its cross-terms exactly oppose the first factor's contributions. Seen in the grid, the identity stops being a formula to memorize and becomes a pattern of paired cells — the same mechanism behind the difference of squares and the telescoping products of higher factoring identities.`,
       link: '',
     },
+
     obj15: {
-      title: ``,
-      content: ``,
+      title: `Trinomial Times Trinomial`,
+      content: `The heavyweight: $(2x^2 + x - 3)(x^2 - 2x + 1)$, frozen with all nine cells delivered, five buckets from $x^4$ down to the constants, and the result $2x^4 - 3x^3 - 3x^2 + 7x - 3$.`,
       before: ``,
-      after: ``,
+      after: `Nine cells is roughly the practical limit of by-hand multiplication, and the frozen frame shows why the grid remains calm where vertical multiplication gets crowded: every product has a pre-assigned cell, every cell a pre-assigned bucket, and nothing depends on keeping running totals in your head. The $x^2$ bucket alone collects three contributions ($2 - 2 - 3 = -3$) — the kind of triple merge that produces most hand-calculation errors.
+
+The five colors of the frozen grid also make a structural point: cells of equal exponent lie along the grid's anti-diagonals. That diagonal striping is not a coincidence of this preset — it is the convolution structure of polynomial multiplication, the same pattern that makes long multiplication of numbers carry along diagonals.`,
       link: '',
-    }
+    },
 
   }
 
+
+  // Frozen-state framed units (Line 1): the five presets at completion.
+  const d = polynomialMultiplicationDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    'ps-foil': u('ps-foil', '(x + 2)(x + 3), frozen at completion',
+      'FOIL as territory rather than tour: four cells, and the two middle ones merging in the amber bucket to 5x.'),
+    'ps-signs': u('ps-signs', '(2x &#8722; 1)(x + 4), frozen at completion',
+      'Signs decided cell by cell: the bottom row carries the minuses, and the x bucket adds 8 &#8722; 1 = 7.'),
+    'ps-3x2': u('ps-3x2', '(x&#178; &#8722; 3x + 2)(2x + 5), frozen at completion',
+      'Six cells, four buckets, no acronym &#8212; the grid principle scaling where FOIL cannot.'),
+    'ps-cubes': u('ps-cubes', '(x + 1)(x&#178; &#8722; x + 1), frozen at completion',
+      'Four of six cells annihilate: both middle buckets sum to zero, and x&#179; + 1 emerges &#8212; the sum-of-cubes identity, verified.'),
+    'ps-3x3': u('ps-3x3', '(2x&#178; + x &#8722; 3)(x&#178; &#8722; 2x + 1), frozen at completion',
+      'Nine cells, five buckets, and equal exponents striping the anti-diagonals &#8212; convolution made visible.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the tool's explain
+  // box through processContent — $math$ and same-page !# anchors work.
+  const explanations = {
+    'ps-foil': `First, Outer, Inner, Last are simply the four cells of a $2 \\times 2$ grid in row-major order — the mnemonic is a tour route, the grid is the territory. [Learn more about the canonical FOIL](!#the-canonical-foil) · [All presets](!#presets)`,
+    'ps-signs': `Each cell's sign is decided once, at the cell; the buckets then just add signed numbers — two error-prone operations made separate and simple. [Learn more about sign handling](!#sign-handling) · [All presets](!#presets)`,
+    'ps-3x2': `Six cells and no acronym: every left term meets every right term once, and the degree of the result is the sum of the degrees. [Learn more about this product](!#trinomial-times-binomial) · [All presets](!#presets)`,
+    'ps-cubes': `Watch the middle buckets cancel to zero: this is $(x+1)(x^2-x+1) = x^3+1$, the sum-of-cubes identity verified cell by cell. [Learn more about the sum of cubes](!#the-sum-of-cubes) · [All presets](!#presets)`,
+    'ps-3x3': `Nine cells with equal exponents lying along anti-diagonals — the convolution structure that also makes long multiplication carry along diagonals. [Learn more about this product](!#trinomial-times-trinomial) · [All presets](!#presets)`,
+  };
 
   const introContent = {
     id: "intro",
@@ -887,6 +931,8 @@ After the grid fills, the **like-term collection** step groups cells whose expon
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Polynomial Multiplication Visualizer | Learn Math Class",
         description: "Multiply any two polynomials with the visual grid method. Watch every pairwise product fill the grid, then collect like-term buckets into the final answer.",
@@ -954,10 +1000,49 @@ After the grid fills, the **like-term collection** step groups cells whose expon
   }
 }
 
-export default function PolynomialMultiplicationCalculator({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PolynomialMultiplicationCalculator({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after].
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'entering-the-polynomials'),
+
+    plain('obj3', 'presets'),
+    stateRow('obj11', 'the-canonical-foil', 'ps-foil'),
+    stateRow('obj12', 'sign-handling', 'ps-signs'),
+    stateRow('obj13', 'trinomial-times-binomial', 'ps-3x2'),
+    stateRow('obj14', 'the-sum-of-cubes', 'ps-cubes'),
+    stateRow('obj15', 'trinomial-times-trinomial', 'ps-3x3'),
+
+    plain('obj4', 'the-multiplication-grid'),
+    plain('obj5', 'the-like-term-buckets'),
+    plain('obj6', 'animation-controls'),
+    plain('obj7', 'the-final-result'),
+    plain('obj8', 'what-is-polynomial-multiplication'),
+    plain('obj9', 'foil-generalized'),
+    plain('obj10', 'related-concepts'),
+  ]
+
+  /* Pre-Line-1 numeric-id section rows, superseded by the slug build above:
     {
       id: '0',
       title: sectionsContent.obj0.title,
@@ -1087,7 +1172,7 @@ export default function PolynomialMultiplicationCalculator({seoData, sectionsCon
     //     ]
     // },
 
-  ]
+  ] */
 
   return (
     <>
@@ -1144,7 +1229,7 @@ export default function PolynomialMultiplicationCalculator({seoData, sectionsCon
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Polynomial Multiplication</h1>
       <br/>
       <div style={{transform:'scale(0.9)'}}>
-      <PolynomialMultiplicationVisualizer/>
+      <PolynomialMultiplicationVisualizer explanations={explanations}/>
       </div>
       <br/>
       <SectionTableOfContents sections={genericSections}

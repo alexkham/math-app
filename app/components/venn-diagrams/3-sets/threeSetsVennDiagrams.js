@@ -48,10 +48,79 @@ const wrap = (regions) =>
   `style="border:1px solid #cbd5e1;background:#fff;border-radius:12px;max-width:100%;display:block;margin:12px auto">` +
   `<rect width="${W}" height="${H}" fill="#fff"/>` + regions + chrome + `</svg>`;
 
+// ---- Line 1 additions (2026-08-21): generic 8-region painter + all 40 explorer states ----
+
+const lensAB = (fill, id) => clipOf(A, id) + `<circle cx="${B.cx}" cy="${B.cy}" r="${B.r}" fill="${fill}" clip-path="url(#${id})"/>`;
+const lensAC = (fill, id) => clipOf(A, id) + `<circle cx="${C.cx}" cy="${C.cy}" r="${C.r}" fill="${fill}" clip-path="url(#${id})"/>`;
+const uRectFill = (fill) => `<rect x="${M}" y="${M}" width="${W - 2 * M}" height="${H - 2 * M}" fill="${fill}"/>`;
+
+// freeze(key, regions): paint coarse-to-fine so each of the 8 disjoint regions
+// ends in its own color. Region names match the explorer's highlight keys
+// (A/B/C = the "only" regions, A∩B etc. = pairwise-not-third, A∩B∩C = center).
+// Clip ids are state-scoped: many SVGs share one page.
+const freeze = (key, S) => {
+  const col = (r) => (S.includes(r) ? FILL : '#fff');
+  return wrap(
+    uRectFill(col('outside')) +
+    disc(A, col('A')) + disc(B, col('B')) + disc(C, col('C')) +
+    lensAB(col('A∩B'), `f3-${key}-ab`) +
+    lensAC(col('A∩C'), `f3-${key}-ac`) +
+    lensBC(col('B∩C'), `f3-${key}-bc`) +
+    tripleLens(col('A∩B∩C'), `f3-${key}-ta`, `f3-${key}-tb`)
+  );
+};
+
+const ALL7 = ['A', 'B', 'C', 'A∩B', 'A∩C', 'B∩C', 'A∩B∩C'];
+
+// Keyed by the explorer's scenario ids (highlight sets copied verbatim).
+const line1States = {
+  'set-a':        freeze('set-a', ['A', 'A∩B', 'A∩C', 'A∩B∩C']),
+  'set-b':        freeze('set-b', ['B', 'A∩B', 'B∩C', 'A∩B∩C']),
+  'set-c':        freeze('set-c', ['C', 'A∩C', 'B∩C', 'A∩B∩C']),
+  'universe':     freeze('universe', ['outside', ...ALL7]),
+  'empty':        freeze('empty', []),
+  'a-comp':       freeze('a-comp', ['outside', 'B', 'C', 'B∩C']),
+  'b-comp':       freeze('b-comp', ['outside', 'A', 'C', 'A∩C']),
+  'c-comp':       freeze('c-comp', ['outside', 'A', 'B', 'A∩B']),
+  'inter-abc':    freeze('inter-abc', ['A∩B∩C']),
+  'inter-ab':     freeze('inter-ab', ['A∩B', 'A∩B∩C']),
+  'inter-ac':     freeze('inter-ac', ['A∩C', 'A∩B∩C']),
+  'inter-bc':     freeze('inter-bc', ['B∩C', 'A∩B∩C']),
+  'union-abc':    freeze('union-abc', ALL7),
+  'union-ab':     freeze('union-ab', ['A', 'B', 'A∩B', 'A∩C', 'B∩C', 'A∩B∩C']),
+  'union-ac':     freeze('union-ac', ['A', 'C', 'A∩B', 'A∩C', 'B∩C', 'A∩B∩C']),
+  'union-bc':     freeze('union-bc', ['B', 'C', 'A∩B', 'A∩C', 'B∩C', 'A∩B∩C']),
+  'a-minus-b':    freeze('a-minus-b', ['A', 'A∩C']),
+  'a-minus-c':    freeze('a-minus-c', ['A', 'A∩B']),
+  'b-minus-a':    freeze('b-minus-a', ['B', 'B∩C']),
+  'b-minus-c':    freeze('b-minus-c', ['B', 'A∩B']),
+  'c-minus-a':    freeze('c-minus-a', ['C', 'B∩C']),
+  'c-minus-b':    freeze('c-minus-b', ['C', 'A∩C']),
+  'a-only-only':  freeze('a-only-only', ['A']),
+  'b-only-only':  freeze('b-only-only', ['B']),
+  'c-only-only':  freeze('c-only-only', ['C']),
+  'ab-minus-c':   freeze('ab-minus-c', ['A', 'B', 'A∩B']),
+  'symdiff-ab':   freeze('symdiff-ab', ['A', 'A∩C', 'B', 'B∩C']),
+  'symdiff-abc':  freeze('symdiff-abc', ['A', 'B', 'C', 'A∩B∩C']),
+  'ab-not-c':     freeze('ab-not-c', ['A∩B']),
+  'ac-not-b':     freeze('ac-not-b', ['A∩C']),
+  'bc-not-a':     freeze('bc-not-a', ['B∩C']),
+  'a-and-bORc':   freeze('a-and-bORc', ['A∩B', 'A∩C', 'A∩B∩C']),
+  'aORb-and-c':   freeze('aORb-and-c', ['A∩C', 'B∩C', 'A∩B∩C']),
+  'a-or-bANDc':   freeze('a-or-bANDc', ['A', 'A∩B', 'A∩C', 'A∩B∩C', 'B∩C']),
+  'exactly-one':  freeze('exactly-one', ['A', 'B', 'C']),
+  'exactly-two':  freeze('exactly-two', ['A∩B', 'A∩C', 'B∩C']),
+  'at-least-two': freeze('at-least-two', ['A∩B', 'A∩C', 'B∩C', 'A∩B∩C']),
+  'at-most-one':  freeze('at-most-one', ['outside', 'A', 'B', 'C']),
+  'dm-union':     freeze('dm-union', ['outside']),
+  'dm-inter':     freeze('dm-inter', ['outside', 'A', 'B', 'C', 'A∩B', 'A∩C', 'B∩C']),
+};
+
 const threeSetsVennDiagrams = {
   plain: wrap(''),
   tripleIntersection: wrap(tripleLens(FILL, 'ts3-ti-a', 'ts3-ti-b')),
   aUnionBintC: wrap(disc(A, FILL) + lensBC(FILL, 'ts3-ubc')),
+  states: line1States,
 };
 
 export default threeSetsVennDiagrams;

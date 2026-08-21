@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -446,6 +447,43 @@ The primitive $n$-th root of unity, denoted $\\omega = \\text{cis}\\left(\\frac{
   after: ``,
   link: '',
 },
+
+notation: {
+  title: `Notation for $n$-th Roots`,
+  lead: `Root-finding invents three marks of its own: the running label that names each answer, the Greek letter that generates them all, and a fractional exponent that means one thing on positive reals and $n$ things on complex numbers.`,
+  inherited: `$z$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $\\operatorname{cis}$ from the [trigonometric form](!/complex-numbers/trigonometric-form#notation), $e^{i\\theta}$ and the periodic exponent from the [exponential form](!/complex-numbers/exponential-form#notation), the conjugate bar from [its page](!/complex-numbers/complex-conjugate#notation).`,
+  entries: [
+    {
+      id: 'z-k-roots',
+      tex: `$z_k$`,
+      read: `z sub k — the k-th root`,
+      means: `The enumeration subscript with a job description: $k$ runs $0, 1, \\ldots, n-1$, one label per root — **The Formula for $n$-th Roots** above. Beyond $k = n-1$ the labels wrap ($z_n$ would repeat $z_0$), which is exactly why the list stops.`,
+      cases: `$k = 0$ marks the principal root, argument $\\phi/n$; the target number wears capitals to stay distinct — $w = R\\operatorname{cis}\\phi$ in, $z_k$ out. The same enumeration job as [quadratic roots](!/algebra/equations/quadratic#notation), here with a running range.`,
+      confusedWith: `A power. $z_k$ is the $k$-th **label**, $z^k$ the $k$-th **power** — subscript versus superscript, and roots of unity put both in one equation: $z_k = \\omega^k$.`,
+    },
+    {
+      id: 'omega-unity',
+      tex: `$\\omega$`,
+      read: `omega — the primitive root of unity`,
+      means: `One letter generates them all: $\\omega = \\operatorname{cis}(2\\pi/n)$, and the full set of $n$-th roots of unity is $\\{1, \\omega, \\omega^2, \\ldots, \\omega^{n-1}\\}$ — **Roots of Unity** above. The convention travels intact into group theory, number theory and Fourier analysis.`,
+      cases: `The bare letter assumes context fixes $n$; texts juggling several orders subscript it — $\\omega_n = e^{2\\pi i/n}$, the spelling signal processing uses for the DFT's twiddle factors.`,
+      confusedWith: `The letter $w$. In handwriting $\\omega$ and $w$ collapse into each other — and this very page uses $w$ for the number whose roots are sought; keeping the Greek curl visible is not pedantry here.`,
+      sameGlyphElsewhere: `Physics' angular frequency — the $\\omega$ of $Ae^{i\\omega t}$ in the [exponential form's](!/complex-numbers/exponential-form#notation) engineering costume — an unrelated job for the same letter.`,
+    },
+    {
+      id: 'fractional-exponent-roots',
+      tex: `$R^{1/n}$ · $w^{1/n}$`,
+      read: `R to the one over n`,
+      means: `Two bases, two behaviors. On the positive real $R$, the [fractional exponent](!/algebra/powers/rational-exponents) means the single positive root — what makes $R^{1/n}$ safe in the roots formula. On a complex $w$, the same exponent is $n$-valued: $w^{1/n}$ without a chosen branch names all $n$ roots at once.`,
+      cases: `The formula splits the jobs deliberately: single-valued $R^{1/n}$ for the modulus, the $+2\\pi k$ in the angle for the multiplicity — multivaluedness lives in the [periodic exponent](!/complex-numbers/exponential-form#notation), never in the real root.`,
+      confusedWith: `The radical habit. $\\sqrt[3]{8} = 2$ on the real line, but "the" cube root of $8i$ does not exist — three do; importing the single-answer instinct from [real radicals](!/algebra/roots/properties#notation) is how the other $n - 1$ roots vanish from solutions.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
+},
   
     obj9: {
   title: `Properties of Roots of Unity`,
@@ -845,6 +883,25 @@ export default function DeMoivreTheoremPage({
             key={'obj8-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },

@@ -803,6 +803,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1019,16 +1020,40 @@ The expression $12 \\bmod 4 = 0$ because $12 = 4 \\cdot 3 + 0$. The division is 
   link: '',
 },
 
-obj2: {
-  title: `Notation`,
-  content: `Mathematical notation writes the operation as $a \\bmod n$. The expression is read "a modulo n" or simply "a mod n."
-
-Most programming languages use the percent symbol instead: $a \\% \\; n$. In C, Java, Python, JavaScript, and nearly every other language, the $\\%$ operator computes remainders. The syntax differs from the mathematical form, but the underlying operation is the same.
-
-One notational subtlety deserves attention early. The expression $a \\bmod n$ denotes an operation that produces a number — a remainder. The expression $a \\equiv b \\pmod{n}$, which appears later on this page, denotes a relationship between two numbers. The first is a computation; the second is a statement. Both use "mod," but they play different grammatical roles. In [LaTeX](!/latex) source the two are produced by \\bmod and \\pmod, and both are catalogued among the [arithmetic symbols](!/math-symbols/arithmetic).`,
-  before: ``,
-  after: ``,
-  link: '',
+notation: {
+  title: `Modulo Notation`,
+  lead: `One word, three costumes: the infix operator that computes, the percent sign machines prefer, and the triple-bar statement that merely claims. Telling the computation from the claim is the page's founding distinction. Both LaTeX spellings — @[\\bmod]@ and @[\\pmod]@ — are catalogued among the [arithmetic symbols](!/math-symbols/arithmetic); see the [LaTeX reference](!/latex).`,
+  inherited: `The divides bar behind every exact-division statement is owned by [divisibility notation](!/arithmetic/divisibility#2); the negative-dividend convention split lives on [its own page](!/arithmetic/modulo/negative-numbers).`,
+  entries: [
+    {
+      id: 'bmod-operator',
+      tex: `$a \\bmod n$`,
+      read: `a mod n; a modulo n`,
+      means: `The infix operator that computes: $17 \\bmod 5 = 2$ — a number out, every time, drawn from $\\{0, 1, \\ldots, n-1\\}$ as **The Range of Remainders** below fixes. **What is Modulo?** above grounds it in the division equation $a = nq + r$.`,
+      cases: `Zero remainder is the divisibility bridge — $a \\bmod n = 0$ exactly when $n \\mid a$, the two-dialect fact of **Modulo and Divisibility** below.`,
+      confusedWith: `The other spoken "mod". [Complex numbers](!/complex-numbers/absolute-value#notation) read $|z|$ aloud as "mod z" — modulus as magnitude, no remainder anywhere; the shared syllable is an accident of Latin.`,
+    },
+    {
+      id: 'percent-operator',
+      tex: `$a \\ \\% \\ n$`,
+      read: `a percent n — the remainder operator in code`,
+      means: `The machine spelling: C, Java, Python, JavaScript and nearly every language compute remainders with @[%]@ — same operation, different glyph. The mathematical page and the program disagree only in costume.`,
+      cases: `Languages disagree on negative dividends — @[(-7) % 3]@ returns $-1$ in some, $2$ in others; the [negative numbers page](!/arithmetic/modulo/negative-numbers) maps the two conventions and the universal repair idiom.`,
+      confusedWith: `A percentage. The glyph's day job is per-hundred — $50\\%$ of something — and its remainder career exists only between two operands in code; $a \\% n$ never means a fraction of $n$.`,
+    },
+    {
+      id: 'congruence-statement',
+      tex: `$a \\equiv b \\pmod{n}$`,
+      read: `a is congruent to b modulo n`,
+      means: `The statement, not the computation: the triple bar claims $a$ and $b$ leave the same remainder — true or false, no number produced. The parenthesized modulus trails the whole claim; **Congruence** below develops the relation in full.`,
+      cases: `The grammar split is the working skill: $a \\bmod n$ appears inside computations, $\\equiv \\pmod{n}$ inside proofs and rules — the modular identities behind [divisibility rules](!/arithmetic/divisibility/rules) are all written in the second dialect.`,
+      confusedWith: `The identity triple-bar. Elsewhere $\\equiv$ means "identically equal" — $f(x) \\equiv 0$ holding for every $x$ — with no modulus in sight; the trailing $\\pmod{n}$ is what selects the congruence reading.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/arithmetic`,
+  symbolsLabel: `All arithmetic symbols`,
+  parentHref: `/arithmetic`,
+  parentLabel: `Arithmetic`,
 },
 
 obj3: {
@@ -1443,10 +1468,21 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

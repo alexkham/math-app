@@ -280,7 +280,7 @@ For a polynomial $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_1z + a_0$, the co
 
 $$p(z) = a_n(z - z_1)(z - z_2)\\cdots(z - z_n)$$
 
-The roots $z_1, z_2, \\ldots, z_n$ may repeat. A root appearing $m$ times is said to have multiplicity $m$. The polynomial $p(z) = (z - 2)^3(z + i)(z - i)$ has degree $5$, with root $2$ of multiplicity $3$ and simple roots $\\pm i$.
+The roots $z_1, z_2, \\ldots, z_n$ may repeat. A root appearing $m$ times is said to have [multiplicity](!/algebra/polynomials/roots#notation) $m$. The polynomial $p(z) = (z - 2)^3(z + i)(z - i)$ has degree $5$, with root $2$ of multiplicity $3$ and simple roots $\\pm i$.
 
 The factorization of $z^3 - 1$ illustrates the interplay with [roots of unity](!/complex-numbers/demoivre-theorem). The roots satisfy $z^3 = 1$, giving $z_0 = 1$, $z_1 = \\text{cis}(120°) = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, and $z_2 = \\text{cis}(240°) = -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$. Writing $\\omega = \\text{cis}(120°)$:
 

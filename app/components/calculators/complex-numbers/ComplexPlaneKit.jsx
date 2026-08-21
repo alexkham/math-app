@@ -1139,15 +1139,33 @@ export function RangeControl({ range, onRangeChange, min = 5, max = 10 }) {
 export function CoordInput({ a, b, onAChange, onBChange, range = 5 }) {
   const [aText, setAText] = useState(String(a));
   const [bText, setBText] = useState(String(b));
+  const [aFocus, setAFocus] = useState(false);
+  const [bFocus, setBFocus] = useState(false);
   const snap = getSnap(range);
 
-  useEffect(() => { setAText(formatNum(a)); }, [a]);
-  useEffect(() => { setBText(formatNum(b)); }, [b]);
+  // Sync display from drags only while the field is not being typed in,
+  // so live-committing keystrokes never rewrites the text under the cursor.
+  useEffect(() => { if (!aFocus) setAText(formatNum(a)); }, [a, aFocus]);
+  useEffect(() => { if (!bFocus) setBText(formatNum(b)); }, [b, bFocus]);
+
+  // Live commit: every valid keystroke updates the plane immediately.
+  const liveA = (raw) => {
+    setAText(raw);
+    const parsed = parseFloat(raw);
+    if (!isNaN(parsed)) onAChange(clamp(Math.round(parsed / snap) * snap, -range, range));
+  };
+
+  const liveB = (raw) => {
+    setBText(raw);
+    const parsed = parseFloat(raw);
+    if (!isNaN(parsed)) onBChange(clamp(Math.round(parsed / snap) * snap, -range, range));
+  };
 
   const commitA = () => {
     const parsed = parseFloat(aText);
     if (!isNaN(parsed)) {
       onAChange(clamp(Math.round(parsed / snap) * snap, -range, range));
+      setAText(formatNum(clamp(Math.round(parsed / snap) * snap, -range, range)));
     } else {
       setAText(formatNum(a));
     }
@@ -1157,6 +1175,7 @@ export function CoordInput({ a, b, onAChange, onBChange, range = 5 }) {
     const parsed = parseFloat(bText);
     if (!isNaN(parsed)) {
       onBChange(clamp(Math.round(parsed / snap) * snap, -range, range));
+      setBText(formatNum(clamp(Math.round(parsed / snap) * snap, -range, range)));
     } else {
       setBText(formatNum(b));
     }
@@ -1171,8 +1190,9 @@ export function CoordInput({ a, b, onAChange, onBChange, range = 5 }) {
         <input
           type="text" inputMode="decimal"
           value={aText}
-          onChange={(e) => setAText(e.target.value)}
-          onBlur={commitA}
+          onChange={(e) => liveA(e.target.value)}
+          onFocus={() => setAFocus(true)}
+          onBlur={() => { setAFocus(false); commitA(); }}
           onKeyDown={onKey(commitA)}
           style={{ ...kit.coordField, borderColor: C.orange }}
         />
@@ -1183,8 +1203,9 @@ export function CoordInput({ a, b, onAChange, onBChange, range = 5 }) {
         <input
           type="text" inputMode="decimal"
           value={bText}
-          onChange={(e) => setBText(e.target.value)}
-          onBlur={commitB}
+          onChange={(e) => liveB(e.target.value)}
+          onFocus={() => setBFocus(true)}
+          onBlur={() => { setBFocus(false); commitB(); }}
           onKeyDown={onKey(commitB)}
           style={{ ...kit.coordField, borderColor: C.navy }}
         />

@@ -3,8 +3,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function DeMoivreCalculator() {
+export default function DeMoivreCalculator({ explanations }) {
   const [re, setRe] = useState(1);
   const [im, setIm] = useState(1);
   const [n, setN] = useState(3);
@@ -193,6 +194,21 @@ export default function DeMoivreCalculator() {
 
   const supDigits = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻' };
   const toSup = (num) => String(num).split('').map(c => supDigits[c] || c).join('');
+
+  // Line 1: page-supplied per-state explanations, keyed by the preset the
+  // current (z, n) matches. Nothing renders when no explanations prop is
+  // passed — defaults stay intact.
+  const stateKey =
+    re === 1 && im === 1 && n === 2 ? 'squared'
+    : re === 1 && im === 1 && n === 4 ? 'fourth'
+    : re === 0 && im === 1 && n === 3 ? 'iCubed'
+    : re === 1 && im === 1 && n === 8 ? 'eighth'
+    : re === 3 && im === 4 && n === -1 ? 'inverse'
+    : re === 2 && im === 0 && n === 10 ? 'twoTen'
+    : re === 0.5 && im === 0.5 && n === 6 ? 'inward'
+    : null;
+  const stateExplanation =
+    explanations && stateKey ? explanations[stateKey] : null;
 
   return (
     <div style={styles.container}>
@@ -529,6 +545,12 @@ export default function DeMoivreCalculator() {
                 <strong>On the unit circle (|z|=1),</strong> powers only rotate — the point stays on the circle. This is why powers of i cycle: i¹, i², i³, i⁴ = i, −1, −i, 1 are four 90° rotations.
               </span>
             </div>
+            {stateExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.green }}></span>
+                <span>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -558,7 +580,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1180px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -582,7 +606,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '624px 1fr',
+    gridTemplateColumns: 'minmax(560px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

@@ -8,6 +8,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -419,7 +420,7 @@ export async function getStaticProps(){
 // Skipped (empty link.url in data): Sum of Squares of Binomial Coefficients, Newton's Generalized Binomial Theorem
 const sectionsContent = {
   obj1: {
-    title: `Definition and Notation`,
+    title: `Definition`,
     content: `
 For non-negative integers $n$ and $k$ with $0 \\le k \\le n$, the binomial coefficient is
 
@@ -430,18 +431,7 @@ $$\\binom{n}{k} = \\frac{n!}{k!\\,(n-k)!}.$$
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
-Boundary cases follow directly: $\\binom{n}{0} = \\binom{n}{n} = 1$ for every $n \\ge 0$, and $\\binom{n}{k} = 0$ whenever $k > n$. The expression is read aloud as "$n$ choose $k$".
-
-## Notation Variants
-
-Several notations are in use for the same object:
-
-• $\\binom{n}{k}$ — the standard modern form, used throughout mathematics
-• $C(n,k)$ — common in introductory texts
-• $C_n^k$ or $C_k^n$ — used in some European traditions; the position of the subscript and superscript varies by source
-• \${}_nC_k$ — the form most calculator displays use
-
-In [LaTeX](!/latex) source, the standard stacked form is produced by the command \\binom{n}{k}.
+Boundary cases follow directly: $\\binom{n}{0} = \\binom{n}{n} = 1$ for every $n \\ge 0$, and $\\binom{n}{k} = 0$ whenever $k > n$.
 
 ## Generalization to Real Upper Index
 
@@ -457,14 +447,47 @@ $$\\binom{x}{k} = \\frac{x(x-1)(x-2) \\cdots (x-k+1)}{k!}, \\quad k \\in \\mathb
 Here $x$ can be any real or complex number and $k$ remains a non-negative integer. The numerator is a polynomial of degree $k$ in $x$, so $\\binom{x}{k}$ is itself a polynomial in $x$. This is the form that appears in Newton's generalized binomial theorem, where the upper index is no longer required to be a non-negative integer.
 
 The combinatorial interpretation — the number of [combinations](!/combinatorics/combinations) of $k$ items chosen from $n$ — remains the most intuitive entry point, but the algebraic definition is what extends to non-integer settings.
-
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Combinatorics Symbols and Notations](!/math-symbols/combinatorics) →@
-
 `,
     before: ``,
     between: ``,
     after: ``,
     link: '',
+  },
+
+  notation: {
+    title: `Binomial Coefficient Notation`,
+    lead: `One object, four spellings, and a stack that is not a fraction. The read-aloud form — "$n$ choose $k$" — is the key that unlocks all of them; in [LaTeX](!/latex) the stacked form is @[\\binom{n}{k}]@.`,
+    inherited: `$n!$ inside every formula is owned by [permutation notation](!/combinatorics/permutations#notation); the multinomial extension $\\binom{n}{k_1, \\ldots, k_r}$ is built in **The Multinomial Coefficient** below.`,
+    entries: [
+      {
+        id: 'stacked-binom',
+        tex: `$\\binom{n}{k}$`,
+        read: `n choose k`,
+        means: `The standard modern form: two numbers stacked in parentheses, no bar between them — the top chooses from, the bottom chooses how many. Reading it as a fraction is the founding error; $\\binom{6}{2} = 15$, not $3$.`,
+        cases: `The same mark survives the definition's stretch: $\\binom{x}{k}$ with real or complex upper index — **Generalization to Real Upper Index** above — and grows extra lower entries in the multinomial form of **The Multinomial Coefficient** below.`,
+        sameGlyphElsewhere: `A two-entry [column vector](!/linear-algebra/vectors/basic-operations#notation) wears identical clothing — two stacked numbers in parentheses; context (counting versus coordinates) is the only separator.`,
+      },
+      {
+        id: 'functional-calculator',
+        tex: `$C(n, k)$ · $_nC_k$`,
+        read: `C n k; n choose k on a calculator`,
+        means: `The linear spellings: $C(n, k)$ in introductory texts — function notation borrowed for a count — and $_nC_k$ on calculator keys and displays, the combinatorial sibling of $_nP_r$ from [permutation notation](!/combinatorics/permutations#notation).`,
+        cases: `All spellings agree with the stacked form: $C(n, k) = {}_nC_k = \\binom{n}{k}$; the linear forms survive where stacking is impossible — plain-text input, spreadsheet formulas, calculator screens.`,
+        confusedWith: `A function named C. $C(n, k)$ looks like an evaluation of some function $C$ — harmless until $C$ is also a constant or a circle in the same problem; the stacked form dodges the letter entirely.`,
+      },
+      {
+        id: 'european-position',
+        tex: `$C_n^k$ vs $C_k^n$`,
+        read: `C with n and k in the corners — order varies`,
+        means: `The European corner forms: French and Russian traditions attach $n$ and $k$ as subscript and superscript — but which corner holds which number varies by country and by book. The mark alone does not say.`,
+        cases: `Where the convention is fixed it is fixed hard — Russian texts write $C_n^k$ with the pool $n$ below; some French sources invert. Checking against a known value ($C_5^2 = 10$ or $C_2^5$?) settles any book in one line.`,
+        confusedWith: `A power. $C_n^k$ reads dangerously like "$C_n$ raised to the $k$" — the superscript is an index, not an exponent; the same crowded-corner hazard the [inverse marks](!/functions/inverse#2) live with.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/combinatorics`,
+    symbolsLabel: `All combinatorics symbols`,
+    parentHref: `/combinatorics`,
+    parentLabel: `Combinatorics`,
   },
 
   obj2: {
@@ -801,6 +824,25 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

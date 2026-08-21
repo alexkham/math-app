@@ -11,6 +11,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import BinomialCoefficientsVisualizer from '../../../../app/components/algebra/visualizers/binomial/BinomialCoefficientVisualizer'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import binomialCoefficientDiagrams from '../../../../app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 
 
 export async function getStaticProps(){
@@ -83,11 +85,11 @@ To explore quickly:
       title: `The Three Views`,
       content: `The same binomial coefficients are computed three different ways. Each view answers the question *where do the numbers in row $n$ of Pascal&apos;s triangle come from?*
 
-• **Decision Tree** — every path of length $n$ in a binary tree corresponds to one term in the expansion. Leaves with the same b-count belong to the same like-term group. Group size equals the coefficient.
+• [Decision Tree](!#decision-tree-view) — every path of length $n$ in a binary tree corresponds to one term in the expansion. Leaves with the same b-count belong to the same like-term group. Group size equals the coefficient.
 
-• **Distribution** — animates the actual multiplication. For each of the $n$ factors $(a+b)$, pick either $a$ or $b$. Each of the $2^n$ choice sequences produces one product. Products with the same exponents fall into the same bucket; the bucket count is the coefficient.
+• [Distribution](!#distribution-view) — animates the actual multiplication. For each of the $n$ factors $(a+b)$, pick either $a$ or $b$. Each of the $2^n$ choice sequences produces one product. Products with the same exponents fall into the same bucket; the bucket count is the coefficient.
 
-• **Pascal Paths** — Pascal&apos;s triangle reinterpreted as a path-counting grid. To reach cell $(n, k)$ from the top, take $n$ steps, $k$ of them going right. The number of ways equals $\\binom{n}{k}$.
+• [Pascal Paths](!#pascal-paths-view) — Pascal&apos;s triangle reinterpreted as a path-counting grid. To reach cell $(n, k)$ from the top, take $n$ steps, $k$ of them going right. The number of ways equals $\\binom{n}{k}$.
 
 The pedagogical payoff is the same coefficients appear in all three pictures &mdash; binomial coefficients are simultaneously a count, a polynomial coefficient, and a path count.`,
       before: ``,
@@ -99,7 +101,7 @@ The pedagogical payoff is the same coefficients appear in all three pictures &md
       title: `Adjusting n`,
       content: `The **n** picker offers five values:
 
-• **n = 1**: $(a+b)^1 = a + b$. Two terms, two leaves, a one-row Pascal triangle (after the apex).
+• **n = 1**: $(a+b)^1 = a + b$. Two terms, two leaves, a one-row Pascal triangle (after the apex) — [the base case](!#the-base-case-n-1).
 
 • **n = 2**: $(a+b)^2 = a^2 + 2ab + b^2$. Four leaves, three groups, classic FOIL.
 
@@ -107,7 +109,7 @@ The pedagogical payoff is the same coefficients appear in all three pictures &md
 
 • **n = 4**: $(a+b)^4$ has 16 leaves and five groups with coefficients $1, 4, 6, 4, 1$.
 
-• **n = 5**: $(a+b)^5$ has 32 leaves and six groups with coefficients $1, 5, 10, 10, 5, 1$. The most complex view the tool supports visually.
+• **n = 5**: $(a+b)^5$ has 32 leaves and six groups with coefficients $1, 5, 10, 10, 5, 1$. The most complex view the tool supports visually — [the fifth row](!#the-fifth-row).
 
 Changing $n$ resets all three views simultaneously. The formula readout in the top-right of the n-picker bar updates to $(a+b)^n$ for the new value. The visual cap at $n = 5$ keeps the decision tree and Pascal triangle readable; the underlying coefficients can be computed for any $n$ using the factorial formula.`,
       before: ``,
@@ -135,7 +137,9 @@ Interaction:
 
 The big insight: hover the middle group when $n = 4$ and watch six different paths light up &mdash; that&apos;s why the coefficient of $a^2 b^2$ is $6$, not $1$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above captures the default $n = 3$ tree in full: eight leaves in four color groups, and the group cards doing the counting — $1, 3, 3, 1$. The deeper point the tree makes is about *why* multiplication produces coefficients at all: algebra never adds anything during expansion, it only enumerates. The coefficient $3$ on $a^2b$ exists because three distinct histories ($aab$, $aba$, $baa$) produce indistinguishable products, and the tree is the only view where those histories remain visually separate.
+
+The degenerate end of this picture — a tree with a single split — is worth a look of its own: [the base case n = 1](!#the-base-case-n-1). And the same 8 histories reappear as delivery pellets in the [Distribution view](!#distribution-view), collapsed into buckets the moment they land.`,
       link: '',
     },
 
@@ -159,7 +163,9 @@ Three controls drive the animation:
 
 By the time all $2^n$ products are delivered, each bucket holds exactly $\\binom{n}{k}$ pellets. The final expansion box at the bottom lights up to show the resulting polynomial.`,
       before: ``,
-      after: ``,
+      after: `The frame above freezes the finished run at $n = 3$: the last product $b \\cdot b \\cdot b$ locked in the factor boxes, eight pellets sorted $1{+}3{+}3{+}1$ into their buckets, and the expansion line lit. Where the tree shows the choice *structure*, this view shows the choice *process* — the same $2^n$ sequences arriving one at a time, which is exactly what "multiplying out the brackets" means when done honestly.
+
+The pellets keep their identity inside the buckets (each is labeled with its history, $aab$ or $bba$), so the frozen frame doubles as a proof that no product was lost or double-counted: eight sequences in, eight pellets out. The [Pascal Paths view](!#pascal-paths-view) then abandons the products entirely and keeps only the counting.`,
       link: '',
     },
 
@@ -177,7 +183,9 @@ Two side cards update with the hover:
 
 Below the triangle, a note reminds you that every cell&apos;s value equals the sum of the two cells above &mdash; that&apos;s **Pascal&apos;s rule**, which is the same as saying *paths arriving here = paths from the left parent + paths from the right parent*.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame engages the hover the way a visitor would: cell $(3, 1)$ selected, its three paths fanned out in amber from the apex, the touched cells tinted. Three paths, coefficient $3$ — the same number the tree counted as leaves and the distribution counted as pellets, now counted as routes.
+
+This is the most abstract of the three views, and the most powerful: the letters $a$ and $b$ are gone entirely, leaving pure combinatorics. Every left-move is "choose $a$", every right-move "choose $b$" — the correspondence that makes all three views one theorem. For the triangle at full size, with $C(5,2) = 10$ paths crowding the frame, see [the fifth row](!#the-fifth-row).`,
       link: '',
     },
 
@@ -265,18 +273,25 @@ The triangle&apos;s rows are built up using this rule alone: start with $\\binom
       link: '',
     },
 
+    // ---- Line 1 per-state sections: the n-boundary states ----
+
     obj11: {
-      title: ``,
-      content: ``,
+      title: `The Base Case n = 1`,
+      content: `Set $n = 1$ in the Decision Tree view and the whole apparatus shrinks to its atom: one split, two leaves ($a$ and $b$), two groups of size one, and the expansion $(a+b)^1 = a + b$.`,
       before: ``,
-      after: ``,
+      after: `Trivial cases earn their sections by calibrating everything else. Here the tree *is* one binary choice, so every claim the tool makes becomes checkable by eye: $2^1 = 2$ leaves, coefficients $1, 1$ matching row 1 of Pascal's triangle, and group size equal to path count because each group holds exactly one path.
+
+The base case is also the induction seed the other frames grow from: the $n = 3$ tree is this split repeated at every node, three levels deep. Read them in sequence — this frame, then [the full Decision Tree view](!#decision-tree-view) — and the doubling $2 \\to 4 \\to 8$ that produces the $2^n$ law is visible as pure branching.`,
       link: '',
     },
+
     obj12: {
-      title: ``,
-      content: ``,
+      title: `The Fifth Row`,
+      content: `The other extreme: $n = 5$ in the Pascal Paths view, frozen with cell $(5, 2)$ engaged — ten amber paths converging on the value $10$, the largest coefficient the tool displays.`,
       before: ``,
-      after: ``,
+      after: `Ten paths is where counting by eye starts to fail, which is precisely the frame's point: the coefficient $10$ is no longer surveyable as a picture, but it is still *computable* as $C(5,2) = 5!/(2! \\cdot 3!)$ — the moment the formula earns its keep over enumeration. The fan of overlapping routes conveys the growth honestly: rows sum to $2^n$, and by row five that is already $32$.
+
+The frame also shows why the tool caps at $n = 5$: another row would double the path counts again and the visualization would stop informing. The cap is not a limitation of the mathematics — the factorial formula continues indefinitely — but an honest boundary of what pictures can teach. Beyond it, the [Pascal Paths view](!#pascal-paths-view)'s ideas carry on symbolically.`,
       link: '',
     },
     obj13: {
@@ -411,12 +426,42 @@ The triangle&apos;s rows are built up using this rule alone: start with $\\binom
   }
 
 
+  // Frozen-state framed units (Line 1): the three views at the default n = 3
+  // plus the two n-boundary states. Built here, passed via props, rendered as
+  // content-array items.
+  const d = binomialCoefficientDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    'view-tree': u('view-tree', 'Decision Tree, n = 3, frozen',
+      'Eight leaves in four color groups, the group cards counting 1, 3, 3, 1 &#8212; coefficients as populations of paths.'),
+    'view-distribution': u('view-distribution', 'Distribution, n = 3, complete',
+      'All eight products delivered: the last pick b&#183;b&#183;b locked in the factors, pellets sorted into buckets, expansion lit.'),
+    'view-pascal': u('view-pascal', 'Pascal Paths, cell (3, 1) engaged',
+      'Three amber routes from the apex to the value 3 &#8212; the coefficient counted as paths, letters gone entirely.'),
+    'tree-n1': u('tree-n1', 'Decision Tree, n = 1, frozen',
+      'The atom of the whole tool: one split, two leaves, coefficients 1, 1 &#8212; every claim checkable by eye.'),
+    'pascal-n5': u('pascal-n5', 'Pascal Paths, cell (5, 2) engaged',
+      'Ten overlapping routes converge on 10 &#8212; the point where enumeration fails the eye and the factorial formula takes over.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the active view
+  // through processContent — $math$ and same-page !# anchors work.
+  const explanations = {
+    'view-tree': `Multiplication never adds — it enumerates: the coefficient $3$ exists because three distinct paths produce indistinguishable products. [Learn more about the tree view](!#decision-tree-view) · [All three views](!#the-three-views)`,
+    'view-distribution': `The same $2^n$ choice sequences, arriving one at a time — "multiplying out the brackets" done honestly, with no product lost. [Learn more about the distribution view](!#distribution-view) · [All three views](!#the-three-views)`,
+    'view-pascal': `Letters gone, counting kept: left-moves are "choose $a$", right-moves "choose $b$" — the correspondence that makes the three views one theorem. [Learn more about the Pascal view](!#pascal-paths-view) · [All three views](!#the-three-views)`,
+    'tree-n1': `The induction seed: one split, $2^1 = 2$ leaves, row 1 of the triangle — everything the larger frames grow from. [Learn more about the base case](!#the-base-case-n-1) · [Adjusting n](!#adjusting-n)`,
+    'pascal-n5': `Ten paths defeat the eye but not the formula — $C(5,2) = 5!/(2! \\cdot 3!)$ is the moment enumeration hands over to computation. [Learn more about the fifth row](!#the-fifth-row) · [Adjusting n](!#adjusting-n)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Binomial Coefficient Visualizer: C(n,k) | Learn Math Class",
         description: "See where binomial coefficients come from: a decision tree of choice paths, products landing in like-term buckets, and Pascal's triangle as a path count.",
@@ -503,10 +548,48 @@ The triangle&apos;s rows are built up using this rule alone: start with $\\binom
   }
 }
 
-export default function BinomialCoefficientVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function BinomialCoefficientVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after].
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+
+    plain('obj2', 'the-three-views'),
+    stateRow('obj4', 'decision-tree-view', 'view-tree'),
+    stateRow('obj5', 'distribution-view', 'view-distribution'),
+    stateRow('obj6', 'pascal-paths-view', 'view-pascal'),
+
+    plain('obj3', 'adjusting-n'),
+    stateRow('obj11', 'the-base-case-n-1', 'tree-n1'),
+    stateRow('obj12', 'the-fifth-row', 'pascal-n5'),
+
+    plain('obj7', 'reading-the-coefficients'),
+    plain('obj8', 'what-are-binomial-coefficients'),
+    plain('obj9', 'c-n-k-formula-and-pascals-rule'),
+    plain('obj10', 'related-concepts'),
+  ]
+
+
+  /* Pre-Line-1 numeric-id section rows, superseded by the slug build above:
     {
       id: '0',
       title: sectionsContent.obj0.title,
@@ -636,7 +719,7 @@ export default function BinomialCoefficientVisualizerPage({seoData, sectionsCont
     //     ]
     // },
 
-  ]
+  ] */
 
   return (
     <>
@@ -693,7 +776,7 @@ export default function BinomialCoefficientVisualizerPage({seoData, sectionsCont
       <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Binomial Coefficient Visualizer</h1>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
-        <BinomialCoefficientsVisualizer/>
+        <BinomialCoefficientsVisualizer explanations={explanations}/>
       </div>
       <br/>
       <SectionTableOfContents sections={genericSections}

@@ -11,6 +11,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import { renderMultiplesLine } from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
@@ -464,6 +465,42 @@ The relationship between $\\sigma(n)$ and $n$ classifies every positive integer.
     link: '',
   },
 
+  notation: {
+    title: `Divisor Function Notation`,
+    lead: `The divisor-structure toolkit runs on three marks: the prime-power template every formula reads from, the two names of the counting function this page computes anonymously, and the sigma that sums.`,
+    inherited: `The divides bar and its slash are owned by [divisibility notation](!/arithmetic/divisibility#2); $\\gcd$ and $\\operatorname{lcm}$ by [their](!/arithmetic/divisibility/gcd#notation) [pages](!/arithmetic/divisibility/lcm#notation).`,
+    entries: [
+      {
+        id: 'canonical-template',
+        tex: `$n = p_1^{a_1} \\cdots p_k^{a_k}$`,
+        read: `n as a product of prime powers`,
+        means: `The canonical-factorization template: $p$ reserved for primes, subscripts enumerating the distinct ones, exponents counting repeats — $72 = 2^3 \\cdot 3^2$ filled in. Every divisor formula on this page reads its data off this shape.`,
+        cases: `The subscript does the enumeration job of [root labels](!/algebra/equations/quadratic#notation), conventionally ascending $p_1 < p_2 < \\cdots$; an absent prime is exponent zero, which is exactly how the $(a_i + 1)$ choice-counts of **Counting Factors** above work.`,
+        confusedWith: `An equation to solve. The template states a shape — nothing multiplies until a concrete $n$ arrives; treating $p_1^{a_1}$ as unknowns misreads a description as a problem.`,
+      },
+      {
+        id: 'divisor-count-names',
+        tex: `$d(n)$ · $\\tau(n)$`,
+        read: `d of n; tau of n — the divisor count`,
+        means: `The names the counting formula answers to: $(a_1 + 1) \\cdots (a_k + 1)$ of **Counting Factors** above computes $d(n)$ — written $\\tau(n)$ in number-theory texts. This page leaves the function anonymous; the literature does not.`,
+        cases: `$d(72) = 12$, $\\tau(64) = 7$ — one function, two dialects: $d$ in elementary writing, $\\tau$ in research papers, alongside $\\sigma$'s family below.`,
+        confusedWith: `A differential. The letter $d$ is mathematics' most overloaded — [differentials](!/calculus/derivatives/differentials#notation) own $dx$; here $d(n)$ is an ordinary function value, its parentheses the only shield.`,
+      },
+      {
+        id: 'sigma-function',
+        tex: `$\\sigma(n)$`,
+        read: `sigma of n — the sum of divisors`,
+        means: `Lowercase sigma as a named function: $\\sigma(n)$ sums every positive divisor — $\\sigma(12) = 28$, per **Sum of Factors** above. The perfect/abundant/deficient classification is written entirely in $\\sigma(n) - n$ comparisons.`,
+        cases: `Proper-divisor sums drop $n$ itself — $\\sigma(n) - n$, sometimes named $s(n)$, the aliquot sum; perfect numbers are exactly the solutions of $\\sigma(n) = 2n$.`,
+        sameGlyphElsewhere: `The letter's other careers: capital $\\Sigma$ is the [summation operator](!/combinatorics/binomial-theorem#notation) — kindred in spirit, different in grammar — and lowercase $\\sigma$ names [singular values](!/linear-algebra/decompositions/svd#notation) and standard deviations elsewhere; the argument $(n)$ marks the divisor-sum reading.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/arithmetic`,
+    symbolsLabel: `All arithmetic symbols`,
+    parentHref: `/arithmetic/divisibility`,
+    parentLabel: `Divisibility`,
+  },
+
   obj11: {
     title: `Worked Examples`,
     content: `Find all factors of $48$. Test from $1$ to $\\sqrt{48} \\approx 6.9$: $1 \\mid 48$ (pair $1, 48$), $2 \\mid 48$ (pair $2, 24$), $3 \\mid 48$ (pair $3, 16$), $4 \\mid 48$ (pair $4, 12$), $5 \\nmid 48$, $6 \\mid 48$ (pair $6, 8$). Factors: $\\{1, 2, 3, 4, 6, 8, 12, 16, 24, 48\\}$ — ten in total.
@@ -843,6 +880,25 @@ export default function FactorsPage({seoData, sectionsContent,
           sectionsContent.obj10.afterFigure,
           <div key={'obj10-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

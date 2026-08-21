@@ -467,6 +467,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ThreeSetsLawsExplorer from '../../../../app/components/venn-diagrams/3-sets/ThreeSetsLawsExplorer'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import threeSetsLawsVennDiagrams from '../../../../app/components/venn-diagrams/3-sets/threeSetsLawsVennDiagrams'
 
 export async function getStaticProps(){
 
@@ -524,10 +526,10 @@ The interface has three control areas: the **category tabs** at the top, the **f
       title: `Navigating Category Tabs`,
       content: `The four category tabs group the 12 laws by structural type:
 
-• **Associative** — grouping does not matter for repeated $\\cup$, $\\cap$, or $\\triangle$ (three identities)
-• **Distributive** — intersection distributes over union and union distributes over intersection (two identities)
-• **De Morgan's Laws** — the complement of a triple union or triple intersection (two identities)
-• **Difference** — five identities showing how set difference interacts with union, intersection, and itself, including nested differences
+• [Associative](!#associative-and-distributive-laws) — grouping does not matter for repeated $\\cup$, $\\cap$, or $\\triangle$ (three identities)
+• [Distributive](!#associative-and-distributive-laws) — intersection distributes over union and union distributes over intersection (two identities)
+• [De Morgan's Laws](!#de-morgans-laws-for-three-sets) — the complement of a triple union or triple intersection (two identities)
+• [Difference](!#difference-identities-in-three-sets) — five identities showing how set difference interacts with union, intersection, and itself, including nested differences
 
 Click a tab to switch the row of formula buttons below it. The current identity stays selected across tab switches, so you can browse other groups without losing context. The active tab updates automatically when you use Previous/Next.`,
       before: ``,
@@ -639,7 +641,7 @@ $$A \\cup (B \\cap C) = (A \\cup B) \\cap (A \\cup C)$$
 
 Unlike ordinary arithmetic — where addition does not distribute over multiplication — set union and intersection are mutually distributive. Each law lets you expand or factor expressions, and both can be verified by checking that the eight regions match on both sides.`,
       before: ``,
-      after: ``,
+      after: `All five get dedicated frozen frames below: [associativity of union](!#associativity-of-union), [of intersection](!#associativity-of-intersection), and [of the symmetric difference](!#associativity-of-the-symmetric-difference), then [intersection over union](!#intersection-distributes-over-union) and [union over intersection](!#union-distributes-over-intersection).`,
       link: '',
     },
 
@@ -647,11 +649,11 @@ Unlike ordinary arithmetic — where addition does not distribute over multiplic
       title: `Difference Identities in Three Sets`,
       content: `The Difference tab collects five identities that govern how set difference interacts with union, intersection, and itself across three sets:
 
-• **Difference over union**: $A \\setminus (B \\cup C) = (A \\setminus B) \\cap (A \\setminus C)$ — removing a union equals intersecting individual differences
-• **Difference over intersection**: $A \\setminus (B \\cap C) = (A \\setminus B) \\cup (A \\setminus C)$ — removing an intersection equals unioning individual differences
-• **Union minus a set**: $(A \\cup B) \\setminus C = (A \\setminus C) \\cup (B \\setminus C)$ — difference distributes from the right over union
-• **Intersection minus a set**: $(A \\cap B) \\setminus C = A \\cap (B \\setminus C)$ — subtracting $C$ from $A \\cap B$ equals intersecting $A$ with $B \\setminus C$
-• **Nested difference**: $(A \\setminus B) \\setminus C = A \\setminus (B \\cup C)$ — subtracting two sets in sequence equals subtracting their union
+• [Difference over union](!#difference-over-a-union): $A \\setminus (B \\cup C) = (A \\setminus B) \\cap (A \\setminus C)$ — removing a union equals intersecting individual differences
+• [Difference over intersection](!#difference-over-an-intersection): $A \\setminus (B \\cap C) = (A \\setminus B) \\cup (A \\setminus C)$ — removing an intersection equals unioning individual differences
+• [Union minus a set](!#a-union-minus-a-set): $(A \\cup B) \\setminus C = (A \\setminus C) \\cup (B \\setminus C)$ — difference distributes from the right over union
+• [Intersection minus a set](!#an-intersection-minus-a-set): $(A \\cap B) \\setminus C = A \\cap (B \\setminus C)$ — subtracting $C$ from $A \\cap B$ equals intersecting $A$ with $B \\setminus C$
+• [Nested difference](!#the-nested-difference): $(A \\setminus B) \\setminus C = A \\setminus (B \\cup C)$ — subtracting two sets in sequence equals subtracting their union
 
 These laws are essentially the De Morgan and distributive laws translated into difference notation, since $A \\setminus B = A \\cap B'$. They are useful for simplifying complex expressions involving multiple subtractions.`,
       before: ``,
@@ -679,11 +681,197 @@ These laws are essentially the De Morgan and distributive laws translated into d
       link: '',
     },
 
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
-    obj15: { title:``, content:``, before:``, after:``, link:'' },
+    // ---- Line 1 group section (De Morgan; the other three groups are served
+    // by the existing associative/distributive and difference sections) ----
+
+    obj12: {
+      title: `De Morgan's Laws for Three Sets`,
+      content: `The two shortest proofs in the catalog, and the most extreme shadings: [the complement of the triple union](!#the-complement-of-the-triple-union) matches a single region on each side, while [the complement of the triple intersection](!#the-complement-of-the-triple-intersection) matches seven.
+
+The pattern is the two-set De Morgan pair scaled up — complement converts $\\cup$ to $\\cap$ and back, and adding a third operand changes only the number of complements on the right-hand side. The same laws hold for any finite collection of sets.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    // ---- Per-state sections: Associative ----
+
+    obj13: {
+      title: `Associativity of Union`,
+      content: `$(A \\cup B) \\cup C = A \\cup (B \\cup C)$: both frames shade all seven regions inside the circles. However the union is grouped, the answer is "in at least one".`,
+      before: ``,
+      after: `The parentheses vanish because both groupings compute the same membership test: $x$ qualifies once any single set contains it. That is what licenses the notation $A \\cup B \\cup C$ with no parentheses at all — an expression that would be ambiguous for a non-associative operation.
+
+Associativity plus commutativity together make union order-and-grouping blind: any of the twelve ways to parenthesize and arrange three sets shades these same seven regions. Its intersection twin is [associativity of intersection](!#associativity-of-intersection).`,
+      link: '',
+    },
+
+    obj14: {
+      title: `Associativity of Intersection`,
+      content: `$(A \\cap B) \\cap C = A \\cap (B \\cap C)$: both frames shade only the central core — the region passing all three membership tests.`,
+      before: ``,
+      after: `Intersecting is filtering, and filters compose in any order: whether you first demand "$A$ and $B$" and then "$C$", or start from "$B$ and $C$", the survivors are the elements in all three sets. One region, however grouped.
+
+Together with [the union law](!#associativity-of-union), this justifies writing $A \\cap B \\cap C$ bare — and the pair of frames (seven regions there, one here) bookends how differently the two operations spread while obeying the same structural law.`,
+      link: '',
+    },
+
+    obj15: {
+      title: `Associativity of the Symmetric Difference`,
+      content: `$(A \\triangle B) \\triangle C = A \\triangle (B \\triangle C)$: both frames shade the three "only" regions plus the center — the odd-membership pattern.`,
+      before: ``,
+      after: `This is the least obvious associativity in elementary set theory, and the parity argument is what makes it work: each $\\triangle$ toggles membership, so an element ends up inside exactly when an odd number of the three sets contain it. Toggles compose associatively — the grouping cannot change a count's parity.
+
+The shaded pattern (count 1 or count 3) is the same "checkerboard" the basic explorer shows for $A \\triangle B \\triangle C$, and it is the reason $\\triangle$ gives the subsets of $U$ a genuine group structure, with $\\emptyset$ as identity and every set its own inverse.`,
+      link: '',
+    },
+
+    // ---- Per-state sections: Distributive ----
+
+    obj16: {
+      title: `Intersection Distributes over Union`,
+      content: `$A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$: both frames shade three regions — $A$'s two slivers and the center, the part of circle $A$ touching at least one neighbor.`,
+      before: ``,
+      after: `The left side clips the six-region union $B \\cup C$ to circle $A$; the right side assembles the same area from the two pairwise intersections. Same three regions from opposite directions — expansion and factoring certified equal.
+
+The law is the set-theoretic sibling of $a(b+c) = ab + ac$, with one upgrade: in arithmetic only multiplication distributes over addition, while in set algebra the mirror law also holds — see [union over intersection](!#union-distributes-over-intersection).`,
+      link: '',
+    },
+
+    obj17: {
+      title: `Union Distributes over Intersection`,
+      content: `$A \\cup (B \\cap C) = (A \\cup B) \\cap (A \\cup C)$: five regions on each side — all of circle $A$ plus the bottom sliver where $B$ and $C$ meet without it.`,
+      before: ``,
+      after: `The right-hand side is the surprising one: intersecting two six-region unions somehow leaves five regions, exactly $A$ plus $B \\cap C$. Working the regions by eye — which regions do both unions shade? — is a worthwhile one-minute exercise, and the explorer has already done it for you.
+
+This second distributive law has no arithmetic analogue at all ($a + bc \\neq (a+b)(a+c)$ in general). Its validity is a genuine peculiarity of the lattice of sets, dual to [intersection over union](!#intersection-distributes-over-union) under the usual $\\cup \\leftrightarrow \\cap$ swap.`,
+      link: '',
+    },
+
+    // ---- Per-state sections: De Morgan's Laws ----
+
+    obj18: {
+      title: `The Complement of the Triple Union`,
+      content: `$(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$: both frames shade the single outside region — beyond all three circles at once.`,
+      before: ``,
+      after: `The left side negates "in at least one"; the right side conjoins three negations. Both leave exactly the outside, and the eight-case check is a truth-table proof drawn as a picture — one region shaded out of eight.
+
+The law scales without change: for $n$ sets, the complement of the union is the intersection of the $n$ complements. Compare [the intersection form](!#the-complement-of-the-triple-intersection), where the same swap runs in reverse and the shading flips from one region to seven.`,
+      link: '',
+    },
+
+    obj19: {
+      title: `The Complement of the Triple Intersection`,
+      content: `$(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$: seven regions on each side — everything except the central core.`,
+      before: ``,
+      after: `Escaping "all three" requires failing just one membership test, and the union of the three complements collects every way to fail. Only the center — where nothing fails — stays blank.
+
+The pair of De Morgan frames is the catalog's starkest duality display: 1 versus 7 shaded regions, $\\cup$ versus $\\cap$, and each law recoverable from the other by complementing both sides and cancelling doubles. The difference tab that follows is these laws wearing subtraction notation — see [difference over a union](!#difference-over-a-union).`,
+      link: '',
+    },
+
+    // ---- Per-state sections: Difference ----
+
+    obj20: {
+      title: `Difference over a Union`,
+      content: `$A \\setminus (B \\cup C) = (A \\setminus B) \\cap (A \\setminus C)$: both frames shade one region — A-only, the part of $A$ clear of both neighbors.`,
+      before: ``,
+      after: `Removing a union removes everything either set touches, so what survives must avoid $B$ *and* avoid $C$ — an intersection of the two one-sided differences. Rewrite $\\setminus$ as intersection-with-complement and this is literally the first De Morgan law wearing subtraction clothes: $A \\cap (B \\cup C)' = A \\cap B' \\cap C'$.
+
+The same single region reappears in [the nested difference](!#the-nested-difference), reached by subtracting sequentially instead of at once — one identity, three notations.`,
+      link: '',
+    },
+
+    obj21: {
+      title: `Difference over an Intersection`,
+      content: `$A \\setminus (B \\cap C) = (A \\setminus B) \\cup (A \\setminus C)$: three regions — everything in circle $A$ except the central core.`,
+      before: ``,
+      after: `Removing only the intersection is the gentlest subtraction: an element of $A$ is deleted only if *both* $B$ and $C$ claim it. Escaping either one suffices to stay — hence the union of the two differences on the right.
+
+This is the second De Morgan law in subtraction form ($A \\cap (B \\cap C)' = A \\cap (B' \\cup C')$). Comparing its three shaded regions with the single region of [difference over a union](!#difference-over-a-union) shows at a glance how much more a union takes away than an intersection.`,
+      link: '',
+    },
+
+    obj22: {
+      title: `A Union Minus a Set`,
+      content: `$(A \\cup B) \\setminus C = (A \\setminus C) \\cup (B \\setminus C)$: three regions — A-only, B-only, and their shared sliver, the two-circle union scrubbed of everything touching $C$.`,
+      before: ``,
+      after: `Subtraction distributes over union from the right: removing $C$ from a union is the same as removing it from each part first. Both routes strip the same three $C$-touching regions from the six-region union.
+
+Caution for the algebraically adventurous: the mirror statement with intersection, $(A \\cap B) \\setminus C$ versus intersecting the differences, needs its own law — the next frame, [an intersection minus a set](!#an-intersection-minus-a-set), gives the correct form.`,
+      link: '',
+    },
+
+    obj23: {
+      title: `An Intersection Minus a Set`,
+      content: `$(A \\cap B) \\setminus C = A \\cap (B \\setminus C)$: one region — the $A \\cap B$ sliver, the pairwise overlap with the center subtracted away.`,
+      before: ``,
+      after: `The law says the $\\setminus C$ can slide inside the intersection and attach to either factor: subtracting after intersecting equals intersecting with an already-subtracted set. Under the hood all three expressions are the same triple conjunction $A \\cap B \\cap C'$ — associativity and commutativity of $\\cap$ in light disguise.
+
+The single shaded region is one the basic explorer knows as "A and B but not C" — the same region, arrived at here as the meeting point of two different orders of operations.`,
+      link: '',
+    },
+
+    obj24: {
+      title: `The Nested Difference`,
+      content: `$(A \\setminus B) \\setminus C = A \\setminus (B \\cup C)$: one region, A-only — two subtractions in sequence collapsing into one subtraction of a union.`,
+      before: ``,
+      after: `Sequential removal accumulates: first strip $B$'s territory from $A$, then strip $C$'s from what is left, and everything either neighbor touched is gone — exactly what subtracting $B \\cup C$ in one stroke removes. The catalog closes by connecting back to [difference over a union](!#difference-over-a-union), which reaches this same region through an intersection instead.
+
+The law generalizes into a habit worth keeping: a chain of subtractions can always be flattened into one subtraction of a union, $((A \\setminus B) \\setminus C) \\setminus D = A \\setminus (B \\cup C \\cup D)$ — often the single most simplifying rewrite in a difference-heavy expression.`,
+      link: '',
+    },
   }
+
+  // Frozen-state framed units (Line 1): the LHS = RHS pair with match badge,
+  // one per law. Built here, passed via props, rendered as content-array items.
+  const d = threeSetsLawsVennDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    'assoc-u': u('assoc-u', '(A &#8746; B) &#8746; C = A &#8746; (B &#8746; C), frozen',
+      'Seven regions on each side, however the parentheses fall. Grouping cannot change &#8220;in at least one&#8221;.'),
+    'assoc-i': u('assoc-i', '(A &#8745; B) &#8745; C = A &#8745; (B &#8745; C), frozen',
+      'Both frames shade only the central core. Filters compose in any order &#8212; the survivors pass all three tests.'),
+    'assoc-sd': u('assoc-sd', '(A &#9651; B) &#9651; C = A &#9651; (B &#9651; C), frozen',
+      'The odd-count checkerboard: three private regions plus the center. Toggles compose associatively &#8212; parity ignores grouping.'),
+    'dist-i-over-u': u('dist-i-over-u', 'A &#8745; (B &#8746; C) = (A &#8745; B) &#8746; (A &#8745; C), frozen',
+      'Three regions from opposite directions: clip the union to A, or glue the two pairwise intersections. Factoring certified.'),
+    'dist-u-over-i': u('dist-u-over-i', 'A &#8746; (B &#8745; C) = (A &#8746; B) &#8745; (A &#8746; C), frozen',
+      'Five regions: all of A plus the bottom sliver. Two six-region unions intersect down to exactly this &#8212; the law arithmetic lacks.'),
+    'dm-u-3': u('dm-u-3', '(A &#8746; B &#8746; C)&#8242; = A&#8242; &#8745; B&#8242; &#8745; C&#8242;, frozen',
+      'One region out of eight: beyond the union means beyond each set. A truth-table proof drawn as near-empty frames.'),
+    'dm-i-3': u('dm-i-3', '(A &#8745; B &#8745; C)&#8242; = A&#8242; &#8746; B&#8242; &#8746; C&#8242;, frozen',
+      'Seven regions out of eight: one failed membership suffices to escape. The 1-versus-7 mirror of the union law.'),
+    'diff-over-u': u('diff-over-u', 'A &#8726; (B &#8746; C) = (A &#8726; B) &#8745; (A &#8726; C), frozen',
+      'One region: A-only. Surviving a union-removal means avoiding B and avoiding C &#8212; De Morgan in subtraction clothes.'),
+    'diff-over-i': u('diff-over-i', 'A &#8726; (B &#8745; C) = (A &#8726; B) &#8746; (A &#8726; C), frozen',
+      'Three regions: all of A except the core. Only elements claimed by both neighbors are deleted &#8212; the gentlest subtraction.'),
+    'union-minus-c': u('union-minus-c', '(A &#8746; B) &#8726; C = (A &#8726; C) &#8746; (B &#8726; C), frozen',
+      'The two-circle union scrubbed of C &#8212; whether C is removed after uniting or from each part first.'),
+    'inter-minus-c': u('inter-minus-c', '(A &#8745; B) &#8726; C = A &#8745; (B &#8726; C), frozen',
+      'One sliver: the subtraction slides inside the intersection and attaches to either factor. Three notations, one region.'),
+    'nested-diff': u('nested-diff', '(A &#8726; B) &#8726; C = A &#8726; (B &#8746; C), frozen',
+      'Two sequential subtractions collapse into one subtraction of a union &#8212; the chain-flattening rewrite, certified.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered by ExplanationsPanel as an
+  // extra tab through processContent — $math$ and same-page !# anchors work.
+  // The built-in Overview tab still renders when nothing is passed.
+  const tab = (content) => [{ key: 'learn', label: 'Learn More', sections: [{ title: 'On This Page', content }] }];
+  const explanations = {
+    'assoc-u': tab(`Both groupings compute "in at least one", which is what licenses the parenthesis-free notation $A \\cup B \\cup C$. [Learn more about associativity of union](!#associativity-of-union) · [Associative and distributive laws](!#associative-and-distributive-laws)`),
+    'assoc-i': tab(`Intersection is filtering, and filters compose in any order — one region survives, however grouped. [Learn more about associativity of intersection](!#associativity-of-intersection) · [Associative and distributive laws](!#associative-and-distributive-laws)`),
+    'assoc-sd': tab(`Each $\\triangle$ toggles membership, and grouping cannot change a toggle-count's parity — the least obvious associativity, proved by the checkerboard. [Learn more about the symmetric-difference law](!#associativity-of-the-symmetric-difference) · [Associative and distributive laws](!#associative-and-distributive-laws)`),
+    'dist-i-over-u': tab(`Clip the union to $A$, or glue the two pairwise intersections — the set sibling of $a(b+c) = ab+ac$. [Learn more about intersection over union](!#intersection-distributes-over-union) · [Associative and distributive laws](!#associative-and-distributive-laws)`),
+    'dist-u-over-i': tab(`The mirror law with no arithmetic analogue: $a + bc \\neq (a+b)(a+c)$, yet the set version holds on all eight regions. [Learn more about union over intersection](!#union-distributes-over-intersection) · [Associative and distributive laws](!#associative-and-distributive-laws)`),
+    'dm-u-3': tab(`Outside the triple union means outside every set — one region against seven, and the law scales to any $n$. [Learn more about the complement of the triple union](!#the-complement-of-the-triple-union) · [De Morgan's laws](!#de-morgans-laws-for-three-sets)`),
+    'dm-i-3': tab(`One failed membership escapes the triple intersection; only the core, where nothing fails, stays blank. [Learn more about the complement of the triple intersection](!#the-complement-of-the-triple-intersection) · [De Morgan's laws](!#de-morgans-laws-for-three-sets)`),
+    'diff-over-u': tab(`Surviving a union-removal means avoiding both sets — the first De Morgan law rewritten with $\\setminus$. [Learn more about difference over a union](!#difference-over-a-union) · [All difference identities](!#difference-identities-in-three-sets)`),
+    'diff-over-i': tab(`Only elements claimed by both $B$ and $C$ are deleted, so escaping either suffices to stay — the second De Morgan law in subtraction form. [Learn more about difference over an intersection](!#difference-over-an-intersection) · [All difference identities](!#difference-identities-in-three-sets)`),
+    'union-minus-c': tab(`Remove $C$ after uniting, or from each part first — subtraction distributes over union from the right. [Learn more about a union minus a set](!#a-union-minus-a-set) · [All difference identities](!#difference-identities-in-three-sets)`),
+    'inter-minus-c': tab(`The $\\setminus C$ slides inside the intersection: all three readings are the one conjunction $A \\cap B \\cap C'$. [Learn more about an intersection minus a set](!#an-intersection-minus-a-set) · [All difference identities](!#difference-identities-in-three-sets)`),
+    'nested-diff': tab(`Chains of subtractions flatten into one subtraction of a union — often the most simplifying rewrite available. [Learn more about the nested difference](!#the-nested-difference) · [All difference identities](!#difference-identities-in-three-sets)`),
+  };
 
   const introContent = {
     id: "intro",
@@ -802,6 +990,8 @@ These laws are essentially the De Morgan and distributive laws translated into d
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Three-Set Venn Diagram: Laws & Identities | Learn Math Class",
         description: "Verify three-set laws and complex identities by shading both sides on side-by-side Venn diagrams — associative, distributive, De Morgan's, and difference identities.",
@@ -816,21 +1006,63 @@ These laws are essentially the De Morgan and distributive laws translated into d
   }
 }
 
-export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  // Helper rows: plain section / section with after-text / per-state section
+  // carrying its frozen LHS=RHS unit as [content, unit, after].
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const withAfter = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content, sectionsContent[obj].after]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    { id:'0', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
-    { id:'1', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
-    { id:'2', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
-    { id:'3', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
-    { id:'4', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
-    { id:'5', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
-    { id:'6', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
-    { id:'7', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
-    { id:'8', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
-    { id:'9', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
-    { id:'11', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started-with-the-explorer'),
+    plain('obj2', 'navigating-category-tabs'),
+    plain('obj3', 'selecting-an-identity'),
+    plain('obj4', 'reading-the-side-by-side-proof'),
+    plain('obj5', 'the-match-indicator'),
+    plain('obj6', 'theme-controls-and-navigation'),
+    plain('obj7', 'what-is-a-three-set-identity'),
+    plain('obj8', 'why-do-visual-proofs-work'),
+
+    withAfter('obj9', 'associative-and-distributive-laws'),
+    stateRow('obj13', 'associativity-of-union', 'assoc-u'),
+    stateRow('obj14', 'associativity-of-intersection', 'assoc-i'),
+    stateRow('obj15', 'associativity-of-the-symmetric-difference', 'assoc-sd'),
+    stateRow('obj16', 'intersection-distributes-over-union', 'dist-i-over-u'),
+    stateRow('obj17', 'union-distributes-over-intersection', 'dist-u-over-i'),
+
+    plain('obj12', 'de-morgans-laws-for-three-sets'),
+    stateRow('obj18', 'the-complement-of-the-triple-union', 'dm-u-3'),
+    stateRow('obj19', 'the-complement-of-the-triple-intersection', 'dm-i-3'),
+
+    plain('obj10', 'difference-identities-in-three-sets'),
+    stateRow('obj20', 'difference-over-a-union', 'diff-over-u'),
+    stateRow('obj21', 'difference-over-an-intersection', 'diff-over-i'),
+    stateRow('obj22', 'a-union-minus-a-set', 'union-minus-c'),
+    stateRow('obj23', 'an-intersection-minus-a-set', 'inter-minus-c'),
+    stateRow('obj24', 'the-nested-difference', 'nested-diff'),
+
+    plain('obj11', 'related-concepts-and-tools'),
   ]
 
   return (
@@ -894,7 +1126,7 @@ export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introCo
       <h1 className='title' style={{marginTop:'-10px',marginBottom:'-80px'}}>Venn Diagrams: Three Sets Laws and Complex Identities</h1>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
-       <ThreeSetsLawsExplorer/>
+       <ThreeSetsLawsExplorer explanations={explanations}/>
       </div>
 
       <br/>

@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -671,6 +672,44 @@ Every nonzero complex number has an exponential form. The number $3 + 4i$ has mo
   after: ``,
   link: '',
 },
+
+notation: {
+  title: `Exponential Form Notation`,
+  lead: `One mark does the work here: the imaginary exponent. This section owns its reading, the full form that carries a modulus in front, and the periodicity that makes exponents non-unique — the price of importing power rules into rotation.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation), $r$, $\\theta$, $\\arg$ and $\\operatorname{cis}$ from the [trigonometric form](!/complex-numbers/trigonometric-form#notation); the letter $e$ itself is a [reserved constant](!/algebra/powers/exponential-functions#notation).`,
+  entries: [
+    {
+      id: 'e-i-theta',
+      tex: `$e^{i\\theta}$`,
+      read: `e to the i theta`,
+      means: `A power with an imaginary exponent — defined, not computed: **Euler's Formula** above assigns it the value $\\cos\\theta + i\\sin\\theta$, and the notation is chosen precisely so the exponent rules keep working.`,
+      cases: `Always modulus $1$: $e^{i\\theta}$ walks the unit circle, $\\theta$ the arc walked. The exponent writes $i$ first — $e^{i\\theta}$ — echoing the [i-first order](!/complex-numbers/imaginary-numbers#notation) used whenever the coefficient is an expression.`,
+      alsoWritten: `$\\exp(i\\theta)$ — the [functional spelling](!/algebra/powers/exponential-functions#notation) of analysis and programming, obligatory once the exponent outgrows a superscript.`,
+      confusedWith: `A growth process. Real $e^x$ grows; an imaginary exponent rotates — larger $\\theta$ means more turning, never more magnitude.`,
+    },
+    {
+      id: 'r-e-i-theta',
+      tex: `$re^{i\\theta}$`,
+      read: `r e to the i theta`,
+      means: `The full form: size out front, direction in the exponent — $r = |z|$ from the [absolute value](!/complex-numbers/absolute-value), $\\theta = \\arg(z)$ from the [trigonometric form](!/complex-numbers/trigonometric-form#notation). The chain $a + bi = r\\operatorname{cis}\\theta = re^{i\\theta}$ of **The Exponential Form of a Complex Number** above closes the three-form family.`,
+      cases: `The sign lives in the exponent, never on $r$: $-2 = 2e^{i\\pi}$, not $(-2)e^{i0}$; pure imaginaries drop the coefficient entirely — $i = e^{i\\pi/2}$.`,
+      alsoWritten: `$Ae^{i\\omega t}$ — the physics and engineering costume: amplitude $A$, angular frequency $\\omega$, time $t$; the same mark running oscillations and waves.`,
+      confusedWith: `A merged exponent. Only the $e^{i\\theta}$ factor rotates; sliding $r$ into the exponent — $e^{ri\\theta}$ or $e^{r + i\\theta}$ — names a different number.`,
+    },
+    {
+      id: 'periodic-exponent',
+      tex: `$e^{i(\\theta + 2\\pi k)}$`,
+      read: `e to the i, theta plus two pi k`,
+      means: `The exponent is determined only up to full turns: $e^{i(\\theta + 2\\pi)} = e^{i\\theta}$. Equal values under visibly different exponents — the multivalued [argument](!/complex-numbers/trigonometric-form#notation) wearing exponential clothing.`,
+      cases: `Harmless in a single computation, load-bearing for roots: **Roots in Exponential Form** below finds all $n$ answers precisely by writing $z = re^{i(\\theta + 2\\pi k)}$ before dividing the exponent by $n$.`,
+      confusedWith: `Real-exponential injectivity. For real exponents, $e^{x_1} = e^{x_2}$ forces $x_1 = x_2$; with imaginary exponents that cancellation is invalid — silently "equating exponents" is how root solutions get lost.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
+},
    
     obj5: {
   title: `Converting Between Forms`,
@@ -1120,6 +1159,25 @@ export default function ExponentialFormPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

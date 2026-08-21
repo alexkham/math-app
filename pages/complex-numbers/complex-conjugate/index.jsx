@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -520,6 +521,44 @@ The conjugate is not the same as negation. The negative of $3 + 2i$ is $-3 - 2i$
   link: '',
 },
 
+notation: {
+  title: `Conjugate Notation`,
+  lead: `Four inherited strips across this section promised the bar would be explained somewhere — this is the somewhere. The bar itself, the bar as a scope mark, and the star the physicists use instead.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation), $Re/Im$ from the [algebraic form](!/complex-numbers/algebraic-form#2); the modulus $|z|$ of **Conjugate and Modulus** below is owned by the [absolute value page](!/complex-numbers/absolute-value).`,
+  entries: [
+    {
+      id: 'z-bar',
+      tex: `$\\bar{z}$`,
+      read: `z bar — the conjugate of z`,
+      means: `A bar over a number flips the sign of its imaginary part: $\\bar{z} = a - bi$ for $z = a + bi$ — **Definition of the Conjugate** above. One stroke, one reflection; nothing else about the number changes.`,
+      cases: `Real numbers pass through unchanged — $\\bar{a} = a$; pure imaginaries negate — $\\bar{z} = -z$; applied twice, the bar erases itself: $\\overline{\\bar{z}} = z$.`,
+      confusedWith: `Negation. $-z$ flips both signs, $\\bar{z}$ only the imaginary one: $-(3+2i) = -3-2i$ while $\\overline{3+2i} = 3-2i$ — equations mixing both marks punish the mix-up.`,
+      sameGlyphElsewhere: `Bars over letters are a crowded namespace: the sample mean $\\bar{x}$ of statistics and the set complement $\\bar{A}$ of [set theory](!/set-theory/basics) — unrelated jobs sharing the stroke.`,
+    },
+    {
+      id: 'bar-scope',
+      tex: `$\\overline{z_1 + z_2}$`,
+      read: `the conjugate of z-one plus z-two`,
+      means: `The bar stretches over whatever it conjugates — a scope mark as much as an operator. LaTeX splits the two jobs: @[\\bar]@ for the short accent on one letter, @[\\overline]@ for the stretching version; the [LaTeX reference](!/latex) lists both.`,
+      cases: `Distribution is a theorem, not a reading rule: $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$ and $\\overline{z_1 z_2} = \\bar{z_1}\\,\\bar{z_2}$ hold because **Fundamental Properties** below proves them — the notation alone promises nothing.`,
+      confusedWith: `Bar width read carelessly. $\\bar{z_1}\\,z_2$ and $\\overline{z_1 z_2}$ are different numbers — how far the bar reaches decides what gets conjugated, the same way a radical's vinculum decides what sits under the root.`,
+    },
+    {
+      id: 'z-star',
+      tex: `$z^*$`,
+      read: `z star`,
+      means: `The physics spelling of the same operation: $z^* = \\bar{z}$, dominant in quantum mechanics and signal processing — this site keeps the bar, but both run through the literature, as **Definition of the Conjugate** above notes.`,
+      cases: `The star scales where the bar cannot: in linear algebra it climbs to matrices as the conjugate transpose $A^*$, joining the [superscript-corner family](!/linear-algebra/matrix/operations#notation) of $A^T$ and kin.`,
+      confusedWith: `Multiplication. In programming and calculator syntax $*$ **is** the times sign, and $z^*$ reads dangerously like an unfinished product — the superscript position carries the meaning.`,
+      sameGlyphElsewhere: `The starred sample points $x_i^*$ of [Riemann sums](!/calculus/integrals/definite#2) — a "chosen element" decoration, no conjugation anywhere; that page's notation section points back here for exactly this reason.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
+},
+
   obj2: {
   title: `Geometric Interpretation`,
   before: ``,
@@ -1018,6 +1057,25 @@ export default function ComplexConjugatePage({
             key={'obj1-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },

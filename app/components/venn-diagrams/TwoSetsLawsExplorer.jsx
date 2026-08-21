@@ -2228,8 +2228,8 @@ const s = {
   groupLabel: { fontSize: '10px', fontWeight: '600', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' },
   dropdownWrap: { display: 'flex', flexDirection: 'column', gap: '4px', minWidth: '180px' },
   dropdown: { width: '100%', padding: '7px 10px', fontSize: '13px', fontWeight: '500', color: '#334155', backgroundColor: '#f8fafc', border: '2px solid #e2e8f0', borderRadius: '6px', cursor: 'pointer', outline: 'none' },
-  main: { display: 'flex', gap: '20px', alignItems: 'flex-start', flexWrap: 'wrap' },
-  col: { flex: '1 1 600px', display: 'flex', flexDirection: 'column', gap: '12px' },
+  main: { display: 'flex', gap: '20px', alignItems: 'flex-start', flexWrap: 'nowrap' },
+  col: { flex: '1 1 600px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '12px' },
   panel: { backgroundColor: '#fff', borderRadius: '12px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)', overflow: 'hidden' },
   panelHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid #e2e8f0', backgroundColor: '#f8fafc' },
   panelTitle: { fontSize: '12px', fontWeight: '600', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px' },
@@ -2251,7 +2251,7 @@ const s = {
   nav: { backgroundColor: '#fff', borderRadius: '12px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)', padding: '12px 20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px' },
   navBtn: { padding: '8px 20px', fontSize: '13px', fontWeight: '600', color: '#fff', backgroundColor: '#245de1', border: 'none', borderRadius: '6px', cursor: 'pointer', outline: 'none' },
   counter: { fontSize: '13px', fontWeight: '600', color: '#64748b', minWidth: '70px', textAlign: 'center' },
-  explanationPanel: { flex: '1 1 350px' }
+  explanationPanel: { flex: '1 1 350px', minWidth: '300px' }
 };
 
 export default TwoSetsLawsExplorer;

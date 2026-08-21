@@ -705,8 +705,9 @@
 'use client';
 
 import { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function PowersOfICalculator() {
+export default function PowersOfICalculator({ explanations }) {
   const [power, setPower] = useState(323);
   const [refOpen, setRefOpen] = useState(false);
 
@@ -714,6 +715,11 @@ export default function PowersOfICalculator() {
   const q = Math.floor(Math.abs(k) / 4) * (k < 0 ? -1 : 1);
   const r = ((k % 4) + 4) % 4;
   const hasInput = power !== '';
+
+  // Line 1: page-supplied per-state explanations, keyed by the current
+  // remainder class. Nothing renders when no explanations prop is passed.
+  const stateExplanation =
+    explanations && hasInput ? explanations[`r${r}`] : null;
 
   const results = {
     0: { value: '1', label: 'i\u2070 = 1', note: 'Any number to power 0 equals 1' },
@@ -831,6 +837,11 @@ export default function PowersOfICalculator() {
                 <span style={styles.explainNote}>{results[rem].note}</span>
               </div>
             ))}
+            {stateExplanation && (
+              <div style={{ ...styles.explainItem, borderLeftColor: palette.orange, backgroundColor: `${palette.orange}10` }}>
+                <span style={styles.explainNote}>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -1014,7 +1025,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '840px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {

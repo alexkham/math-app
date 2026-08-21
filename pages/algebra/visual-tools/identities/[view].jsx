@@ -13,6 +13,8 @@ import SquareOfSum from '@/app/components/algebra/identities/SquareOfSum'
 import SquareOfDifference from '@/app/components/algebra/identities/SquareOfDifference'
 import SquareOfTrinomial from '@/app/components/algebra/identities/SquareOfTrinomial'
 import DifferenceOfSquares from '@/app/components/algebra/identities/DifferenceOfSquares'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 
 
 export async function getStaticPaths() {
@@ -93,7 +95,7 @@ Squaring a sum produces a square term for each part plus a cross term that captu
 
 The identity appears constantly: expanding binomials, completing the square, simplifying calculus expressions, and shortcuts for mental arithmetic. Memorising the formula is one path; seeing why it must hold turns it into something you can reconstruct anytime.`,
           before: ``,
-          after: ``,
+          after: `The proof unfolds in four frozen frames below: [reading the starting square](!#reading-the-starting-square), [splitting each side into a and b](!#splitting-each-side-into-a-and-b), [drawing the grid cuts](!#drawing-the-grid-cuts), and [colouring the four pieces](!#colouring-the-four-pieces-in-sequence).`,
           link: '',
         },
 
@@ -105,7 +107,9 @@ The square's area is $(a+b) \\times (a+b) = (a+b)^2$. That is one expression for
 
 Nothing has been cut, marked, or rearranged yet. The starting state is the cleanest possible illustration of the identity's left-hand side.`,
           before: ``,
-          after: ``,
+          after: `The frozen frame shows the visualizer's concrete choice of numbers: the square is drawn with $a = 5$ and $b = 3$ grid units, so every later piece will have honest proportions — the $a^2$ block really will be about three times the area of $b^2$. Working with a specific-but-unlabeled scale is the quiet trick of all dissection proofs: the picture is one example, but nothing in the argument uses the numbers, so the conclusion holds for every $a$ and $b$.
+
+From here the proof is three moves long: [split the sides](!#splitting-each-side-into-a-and-b), cut, and add up the pieces.`,
           link: '',
         },
 
@@ -117,7 +121,9 @@ This step is purely organisational. No area has been added, removed, or moved �
 
 The split is the only setup the proof needs. From here, dropping perpendiculars from the tick marks will partition the interior into pieces with sides we can compute.`,
           before: ``,
-          after: ``,
+          after: `Note the deliberate bookkeeping in the frozen frame: the combined "$a + b$" dimension slides outward rather than disappearing, so both descriptions of each edge — one segment or two — stay on screen simultaneously. That redundancy *is* the proof's engine: the left-hand side of the identity lives in the outer label, the right-hand side will live in the inner ones.
+
+The amber tick marks are the only new geometry. Everything else in [the next step](!#drawing-the-grid-cuts) is determined by them.`,
           link: '',
         },
 
@@ -129,7 +135,9 @@ The four pieces are not yet coloured — they exist only as outlines. This empha
 
 Now each piece has known side lengths. The top-left piece has dimensions $a \\times a$. The bottom-right piece has dimensions $b \\times b$. The top-right and bottom-left pieces each have dimensions $a \\times b$ — and they are the same dimensions, just in different orientations.`,
           before: ``,
-          after: ``,
+          after: `The uncolored outlines in the frozen frame are the proof at its most honest: four rectangles whose dimensions can be read off the edge labels, and nothing else. This is also the frame that connects the geometry to FOIL — each of the four cells is one of the four products in $(a+b)(a+b)$, laid out as a multiplication grid.
+
+The colours arrive in [the final step](!#colouring-the-four-pieces-in-sequence), but the identity is already decided here; colouring only announces it.`,
           link: '',
         },
 
@@ -145,7 +153,9 @@ Now each piece has known side lengths. The top-left piece has dimensions $a \\ti
 
 Adding the four areas: $a^2 + ab + ab + b^2 = a^2 + 2ab + b^2$. The same square that has area $(a+b)^2$ also has area $a^2 + 2ab + b^2$. The identity follows by area conservation.`,
           before: ``,
-          after: ``,
+          after: `The frozen frame is the completed proof and the page's best answer to the classic error of writing $a^2 + b^2$: the two amber rectangles are simply *there*, occupying real area that any expansion must account for. Cover them with a thumb and you are looking at the wrong identity.
+
+The simultaneous colouring of the two $ab$ pieces — deliberately staged as one event in the animation — is what earns the coefficient: they are one term because they are one kind of piece, counted twice.`,
           link: '',
         },
 
@@ -263,7 +273,7 @@ The right-hand side has the same outer terms $a^2$ and $b^2$ as the square-of-a-
 
 Forgetting the minus sign or mishandling it is a frequent source of error. Seeing the geometry behind it — overlapping strips that cover the same patch twice — turns a sign rule into a counting argument that is hard to misremember.`,
           before: ``,
-          after: ``,
+          after: `The proof unfolds in four frozen frames below: [reading the starting square](!#reading-the-starting-square), [marking the b² corner](!#marking-the-b-squared-corner), [the two overlapping strips](!#two-ab-strips-with-an-overlap), and [the discard step](!#the-discard-step).`,
           link: '',
         },
 
@@ -273,7 +283,9 @@ Forgetting the minus sign or mishandling it is a frequent source of error. Seein
 
 The square's area is $a \\times a = a^2$. This is the quantity we will decompose. Unlike the square-of-a-sum proof, where the goal was to expand $(a+b)^2$ into pieces, here we begin from $a^2$ and work toward an expression involving $(a-b)^2$.`,
           before: ``,
-          after: ``,
+          after: `The direction of the argument is the thing to fix in mind at this frame: the target quantity $(a-b)^2$ is *smaller* than what is on screen, so the proof will proceed by covering and correcting rather than by cutting cleanly. The visualizer draws the square with $a = 7$ and $b = 3$ units, leaving a $4 \\times 4$ target square comfortably visible inside.
+
+The next frame, [marking the b² corner](!#marking-the-b-squared-corner), sets the split that everything else references.`,
           link: '',
         },
 
@@ -285,7 +297,9 @@ The marked $b^2$ corner is not yet doing any work in the proof — it is a refer
 
 The $b^2$ patch will reappear in the next step as the place where two strips overlap. Its role is structural, not decorative.`,
           before: ``,
-          after: ``,
+          after: `The frozen frame is worth comparing against the same step in the difference-of-squares proof: an identical pink corner in an identical position, about to play a completely different role. There the corner is *removed*; here it stays put and becomes the overlap witness. Two proofs, one marked square, two destinies — a good reminder that a diagram's meaning lives in the argument, not the picture.
+
+The double edge-labelling ($b$ and $a-b$ inside, $a$ slid outside) carries both descriptions of the side at once, exactly as [the strips step](!#two-ab-strips-with-an-overlap) will require.`,
           link: '',
         },
 
@@ -303,7 +317,9 @@ Counting areas naively gives $ab + ab = 2ab$, but this double-counts the overlap
 
 $$a^2 = (2ab - b^2) + (a-b)^2$$`,
           before: ``,
-          after: ``,
+          after: `In the frozen frame the $(a-b)^2$ square in the lower-left already announces itself with its own label and a dashed outline — the proof's destination visible before the algebra arrives. Both strips sit in place, and the pink $b^2$ patch is doing double duty exactly where they cross.
+
+This is the identity's entire content in one still image; [the discard step](!#the-discard-step) only pulls the strips apart so the double-counting can be *seen* instead of asserted.`,
           link: '',
         },
 
@@ -317,7 +333,9 @@ $$(a-b)^2 = a^2 - 2ab + b^2$$
 
 The minus sign in front of $2ab$ is the strip-overlap correction. The plus sign in front of $b^2$ is the rebate that compensates for double-subtracting the overlap when we wrote $-2ab$. Both signs are forced by the geometry; neither is a memorisation rule.`,
           before: ``,
-          after: ``,
+          after: `The frozen frame captures the exploded extreme of the oscillation: the top strip lifted clear (carrying its copy of the $b^2$ corner), the right strip slid out with its overlap copy already discarded, and the $(a-b)^2$ square holding its ground. Read the separated inventory left to right and the equation assembles itself: one $(a-b)^2$, two $ab$ strips, one $b^2$ counted once too often.
+
+In the live tool the pieces breathe apart and together continuously — freezing at maximum separation trades the motion for the clearest single reading of the count.`,
           link: '',
         },
 
@@ -439,7 +457,7 @@ Three squared terms cover the diagonal of the expansion. Three cross-product ter
 
 This identity is the natural step beyond $(a+b)^2$. The same dissection logic that proves the binomial case extends with no modification: more terms, more pieces, same area-conservation argument.`,
           before: ``,
-          after: ``,
+          after: `The proof unfolds in four frozen frames below: [reading the starting square](!#reading-the-starting-square), [splitting each side into three segments](!#splitting-each-side-into-three-segments), [building the 3×3 grid](!#building-the-3x3-grid), and [the explosion view](!#the-explosion-view).`,
           link: '',
         },
 
@@ -449,7 +467,9 @@ This identity is the natural step beyond $(a+b)^2$. The same dissection logic th
 
 The starting frame is intentionally similar to the $(a+b)^2$ frame, just with one more term in the side length. The next steps will show that the structural argument is identical to the binomial case, only with a 3×3 grid replacing the 2×2 grid.`,
           before: ``,
-          after: ``,
+          after: `The visualizer picks $a = 4$, $b = 2$, $c = 3$ — three visibly different segment lengths, so the nine future cells will all have distinct, readable proportions. Deliberately unequal segments matter here more than in the binomial case: with nine cells coming, equal splits would make the grid look like a tic-tac-toe board and hide which cell is which product.
+
+One extra term costs nothing structurally, and that is this frame's real message: the side is longer, the square is bigger, and the argument ahead — [split](!#splitting-each-side-into-three-segments), cut, add — is unchanged.`,
           link: '',
         },
 
@@ -461,7 +481,9 @@ The labels on the top and left edges read $a$, $b$, $c$ in the same order. This 
 
 No area has been added or removed. The square is still the same square; only its boundary description has been refined.`,
           before: ``,
-          after: ``,
+          after: `The frozen frame shows six small dimension labels — $a$, $b$, $c$ twice over — plus the two combined "$a+b+c$" labels slid outward, all coexisting. That is the same double-bookkeeping the binomial proof used, scaled up: the outer labels hold the left-hand side of the identity, the inner ones are about to generate the right.
+
+Row-and-column indexing starts paying off in [the next frame](!#building-the-3x3-grid): cell $(i, j)$ will have the $i$th segment for height and the $j$th for width, no further thought required.`,
           link: '',
         },
 
@@ -475,7 +497,9 @@ Each cell takes a colour and a label according to its dimensions:
 
 • **Off-diagonal cells** are rectangles. The top-middle and middle-left both have dimensions $a$ and $b$ and are labelled $ab$. The top-right and bottom-left both have dimensions $a$ and $c$ and are labelled $ac$. The middle-right and bottom-middle both have dimensions $b$ and $c$ and are labelled $bc$. Each off-diagonal pair shares a colour to emphasise that the two cells in a pair are equal.`,
           before: ``,
-          after: ``,
+          after: `The frozen grid rewards a minute of deliberate reading: find the diagonal ($a^2$, $b^2$, $c^2$ in blue, pink, green), then verify each off-diagonal colour appears exactly twice, mirrored across the diagonal. That mirror symmetry *is* the commutativity of multiplication drawn as geometry — cell $(i,j)$ and cell $(j,i)$ are the same rectangle rotated.
+
+The six colours for six distinct products also preview the answer's shape: six terms, three of them doubled. [The explosion view](!#the-explosion-view) pulls the nine pieces apart so the count can be made piece by piece.`,
           link: '',
         },
 
@@ -493,7 +517,9 @@ The total area equals $(a+b+c)^2$ from the original square, so:
 
 $$(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$$`,
           before: ``,
-          after: ``,
+          after: `The frozen frame holds the explosion at full separation — each cell pushed outward along its own line from the centre, gaps open, every label readable. This is the counting configuration: nine separate pieces, and the tally $3 + 3 \\times 2$ terms performable by pointing.
+
+A generalization is visible from here at no extra cost: an $n$-term sum squared would give an $n \\times n$ grid — $n$ diagonal squares and $\\binom{n}{2}$ mirrored pairs. The trinomial is simply the first case where the grid is big enough to make that pattern unmistakable.`,
           link: '',
         },
 
@@ -617,7 +643,7 @@ The left side is one square minus another. The right side is a product of two bi
 
 The visual proof works backwards from the geometry: instead of multiplying $(a+b)(a-b)$ by FOIL and watching the cross terms cancel, we start with the area $a^2 - b^2$ and physically rearrange it into a rectangle of dimensions $(a+b)$ by $(a-b)$. The factorisation is then read directly off the rearranged shape.`,
           before: ``,
-          after: ``,
+          after: `The proof unfolds in four frozen frames below: [reading the starting square](!#reading-the-starting-square), [marking the b² removal](!#marking-the-b-squared-removal), [splitting the L-shape](!#splitting-the-l-shape-into-two-rectangles), and [lift, rotate, and place](!#lift-rotate-and-place).`,
           link: '',
         },
 
@@ -627,7 +653,9 @@ The visual proof works backwards from the geometry: instead of multiplying $(a+b
 
 Nothing has been cut or removed. The starting state simply establishes the larger square. The proof's first move will be to mark a small square inside it that we plan to remove.`,
           before: ``,
-          after: ``,
+          after: `Like its sibling proofs, the frame runs on concrete proportions — $a = 7$, $b = 3$ — chosen so the pieces to come stay chunky and readable: the L-shape will keep most of the square's area, and the final rectangle will be a satisfying $10 \\times 4$.
+
+This proof is the family's only *factoring* argument: instead of expanding a square into pieces, it will reshape a difference into a product. The direction shows immediately in [the next frame](!#marking-the-b-squared-removal), where area is marked for removal rather than for labelling.`,
           link: '',
         },
 
@@ -639,7 +667,9 @@ Notice the corner square is fully drawn but visually distinct — it has its own
 
 A small text label "(removed)" appears with the $b^2$ patch to make the operation unambiguous: this corner is being taken out, not added.`,
           before: ``,
-          after: ``,
+          after: `The frozen frame carries dimension labels on *both* sides of the corner — "$a-b$ then $b$" along the top, "$b$ then $a-b$" down the right — and those four little labels are quietly the entire factorisation: every side of every future piece is already named here.
+
+Subtraction as geometry deserves a pause: $a^2 - b^2$ is not an abstract difference but a literal hole about to be punched at the corner. What shape remains, and what can be built from it, is the business of [the L-shape step](!#splitting-the-l-shape-into-two-rectangles).`,
           link: '',
         },
 
@@ -653,7 +683,9 @@ A small text label "(removed)" appears with the $b^2$ patch to make the operatio
 
 The two pieces are still in their original positions inside the L. Adding them gives $(a-b) \\cdot b + a \\cdot (a-b) = (a-b)(a+b)$ by direct factoring of $(a-b)$ — but the visualizer takes the more striking route of physically combining the pieces into a single rectangle in the next step.`,
           before: ``,
-          after: ``,
+          after: `In the frozen frame the corner is genuinely gone — background shows through, and the outline follows the L — while a faint "$b^2$ (removed)" ghost marks what was subtracted. The dashed split line and the two piece labels, $(a-b) \\cdot b$ and $a \\cdot (a-b)$, prepare the inventory.
+
+The shared factor $(a-b)$ in both labels is the algebraic version of a geometric fact the eye can check: both pieces have the same height once one of them is turned — which is precisely why [the rotation step](!#lift-rotate-and-place) will make them dock into a single clean rectangle.`,
           link: '',
         },
 
@@ -673,7 +705,9 @@ $$(a+b)(a-b) = a^2 - b^2$$
 
 The factorisation is now a literal description of the rearranged rectangle's sides.`,
           before: ``,
-          after: ``,
+          after: `The frozen frame shows the journey's end: the strip settled in its rotated position, the merged rectangle traced with a single dark outline, and the dimension marks reading "$a + b$" along the bottom and "$a - b$" up the side. The factors of the identity are now physical edge lengths — the rare case where a formula can be measured with a ruler.
+
+Note the whole scene has shifted left compared with the earlier frames: the visualizer moves the layout to make room for the docked strip on the right, a small honest detail of the rearrangement being real rather than notational.`,
           link: '',
         },
 
@@ -824,12 +858,85 @@ The right panel lists the four written steps with the current step highlighted a
     content: currentConfig.introContent
   }
 
+  // ---- Line 1: frozen-step framed units + per-step panel explanations ----
+  // Diagram keys are <prefix>-1..4 per view; explanations key by step-1..4
+  // (the components' stepNumber) and render under each visualizer's Steps
+  // list through processContent — $math$ and same-page !# anchors work.
+  const DIAGRAM_PREFIX = {
+    'square-of-sum': 'sum',
+    'square-of-difference': 'diff',
+    'square-of-trinomial': 'tri',
+    'difference-of-squares': 'dos',
+  };
+  const UNIT_TEXTS = {
+    'square-of-sum': [
+      ['Step 1: the (a+b) square, frozen', 'One square, one label, two identical edges &#8212; the left-hand side of the identity, drawn at a = 5, b = 3.'],
+      ['Step 2: the side split, frozen', 'Amber ticks divide each edge into a then b; the combined a + b label slides outward. Two descriptions of one boundary.'],
+      ['Step 3: the grid cuts, frozen', 'Two perpendiculars from the ticks make four outlined rectangles &#8212; the multiplication grid of (a+b)(a+b), uncolored.'],
+      ['Step 4: the four pieces, frozen', 'Blue a&#178;, pink b&#178;, and the two amber ab twins at opposite corners &#8212; the 2ab made of two visible pieces.'],
+    ],
+    'square-of-difference': [
+      ['Step 1: the a&#178; square, frozen', 'The plain a-square (a = 7, b = 3): the quantity about to be covered and corrected rather than cut cleanly.'],
+      ['Step 2: the b&#178; corner, frozen', 'The pink reference corner with the split labels b and a &#8722; b on both edges &#8212; the same marked square two proofs share.'],
+      ['Step 3: the overlapping strips, frozen', 'Two ab strips in place, crossing exactly on the b&#178; patch, with the (a&#8722;b)&#178; target outlined dashed in the lower left.'],
+      ['Step 4: the discard, frozen at full separation', 'Strips lifted and slid apart, the double-counted b&#178; removed &#8212; the inventory a&#178; = 2ab &#8722; b&#178; + (a&#8722;b)&#178;, readable piece by piece.'],
+    ],
+    'square-of-trinomial': [
+      ['Step 1: the (a+b+c) square, frozen', 'One more term in the side (a = 4, b = 2, c = 3), same opening move: a single area with a compound name.'],
+      ['Step 2: the three-way split, frozen', 'Each edge divided a, b, c with the totals slid outward &#8212; the bookkeeping that will name all nine cells.'],
+      ['Step 3: the 3&#215;3 grid, frozen', 'Nine cells in six colours: three squares on the diagonal, three mirrored pairs off it. Commutativity as symmetry.'],
+      ['Step 4: the explosion, frozen at full separation', 'The nine pieces pushed apart along their own rays &#8212; count them: a&#178; + b&#178; + c&#178; and three doubled cross products.'],
+    ],
+    'difference-of-squares': [
+      ['Step 1: the a&#178; square, frozen', 'The larger square (a = 7, b = 3) whose area supplies the first term of a&#178; &#8722; b&#178;.'],
+      ['Step 2: the removal mark, frozen', 'The amber b&#178; corner labelled for subtraction, with a &#8722; b and b named on both edges.'],
+      ['Step 3: the L-shape, frozen', 'The corner gone &#8212; background showing through &#8212; and the dashed line splitting the L into (a&#8722;b)&#183;b and a&#183;(a&#8722;b).'],
+      ['Step 4: the rectangle, frozen settled', 'The strip rotated and docked: one dark outline, sides reading a + b and a &#8722; b &#8212; the factorisation as edge lengths.'],
+    ],
+  };
+  const EXPLANATIONS = {
+    'square-of-sum': {
+      'step-1': `One area, two future descriptions: the outer label $(a+b)^2$ is the identity's left side, and the proof only ever rearranges. [Learn more about the starting square](!#reading-the-starting-square) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-2': `The split is pure bookkeeping — no area moves — but it hands every future piece its dimensions. [Learn more about the side split](!#splitting-each-side-into-a-and-b) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-3': `Four outlined cells, and FOIL appears as geometry: each cell is one product of $(a+b)(a+b)$. [Learn more about the grid cuts](!#drawing-the-grid-cuts) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-4': `The two amber $ab$ twins are the $2$ in $2ab$ — cover them and you are looking at the classic wrong answer $a^2 + b^2$. [Learn more about the four pieces](!#colouring-the-four-pieces-in-sequence) · [The identity at a glance](!#identity-at-a-glance)`,
+    },
+    'square-of-difference': {
+      'step-1': `The target $(a-b)^2$ is smaller than what is on screen — this proof covers and corrects instead of cutting. [Learn more about the starting square](!#reading-the-starting-square) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-2': `The marked corner is a reference, not a removal — it will become the witness where two strips overlap. [Learn more about the b² corner](!#marking-the-b-squared-corner) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-3': `Two $ab$ strips cover everything but the target, overlapping once: $a^2 = (2ab - b^2) + (a-b)^2$ in one picture. [Learn more about the strips](!#two-ab-strips-with-an-overlap) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-4': `Pulling the strips apart shows the double count: subtract $2ab$, rebate $b^2$ — both signs forced by geometry. [Learn more about the discard step](!#the-discard-step) · [The identity at a glance](!#identity-at-a-glance)`,
+    },
+    'square-of-trinomial': {
+      'step-1': `One more term costs nothing structurally — the argument stays split, cut, add. [Learn more about the starting square](!#reading-the-starting-square) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-2': `Three labelled segments per edge: cell $(i, j)$ will measure segment $i$ by segment $j$, no further thought needed. [Learn more about the three-way split](!#splitting-each-side-into-three-segments) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-3': `Nine cells, six colours: the diagonal holds the squares, and each off-diagonal colour appears twice, mirrored — $xy = yx$ drawn. [Learn more about the 3×3 grid](!#building-the-3x3-grid) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-4': `Exploded, the pieces count themselves: three squares plus three doubled pairs — six terms, not nine. [Learn more about the explosion view](!#the-explosion-view) · [The identity at a glance](!#identity-at-a-glance)`,
+    },
+    'difference-of-squares': {
+      'step-1': `The family's only factoring proof: a difference will be reshaped into a product rather than a square into pieces. [Learn more about the starting square](!#reading-the-starting-square) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-2': `Subtraction as geometry: the corner is a literal hole about to be punched, its edges already labelled $b$ and $a-b$. [Learn more about the removal mark](!#marking-the-b-squared-removal) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-3': `The L-shape splits into two pieces sharing the factor $(a-b)$ — the algebraic hint that they can dock into one rectangle. [Learn more about the L-shape](!#splitting-the-l-shape-into-two-rectangles) · [The identity at a glance](!#identity-at-a-glance)`,
+      'step-4': `The settled rectangle has sides $a+b$ and $a-b$: the factorisation is now a measurement, not a formula. [Learn more about lift, rotate, and place](!#lift-rotate-and-place) · [The identity at a glance](!#identity-at-a-glance)`,
+    },
+  };
+  const prefix = DIAGRAM_PREFIX[params.view];
+  const stateUnits = {};
+  UNIT_TEXTS[params.view].forEach(([caption, text], i) => {
+    stateUnits[`step-${i + 1}`] = demoUnitFrame({
+      svg: identityDiagrams[`${prefix}-${i + 1}`], caption, text,
+    });
+  });
+  const explanations = EXPLANATIONS[params.view];
+
   return {
     props: {
       sectionsContent: currentConfig.sectionsContent,
       introContent,
       faqQuestions: currentConfig.faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: currentConfig.title,
         description: currentConfig.description,
@@ -890,20 +997,56 @@ export default function AlgebraicIdentityViewPage({
   schemas,
   currentView,
   componentName,
-  h1Title
+  h1Title,
+  stateUnits,
+  explanations
 }) {
 
+  // Line 1: per-view section slugs. The slots are shared across views —
+  // obj1 = identity overview (group), obj2..obj5 = the four proof steps
+  // (each carries its frozen unit), obj6 = the view's deeper why-section,
+  // obj7 = controls, obj8 = related.
+  const VIEW_SLUGS = {
+    'square-of-sum': ['identity-at-a-glance', 'reading-the-starting-square',
+      'splitting-each-side-into-a-and-b', 'drawing-the-grid-cuts',
+      'colouring-the-four-pieces-in-sequence', 'why-the-middle-term-is-2ab',
+      'using-the-controls', 'related-concepts-and-tools'],
+    'square-of-difference': ['identity-at-a-glance', 'reading-the-starting-square',
+      'marking-the-b-squared-corner', 'two-ab-strips-with-an-overlap',
+      'the-discard-step', 'why-the-signs-land-where-they-do',
+      'using-the-controls', 'related-concepts-and-tools'],
+    'square-of-trinomial': ['identity-at-a-glance', 'reading-the-starting-square',
+      'splitting-each-side-into-three-segments', 'building-the-3x3-grid',
+      'the-explosion-view', 'why-each-cross-product-is-doubled',
+      'using-the-controls', 'related-concepts-and-tools'],
+    'difference-of-squares': ['identity-at-a-glance', 'reading-the-starting-square',
+      'marking-the-b-squared-removal', 'splitting-the-l-shape-into-two-rectangles',
+      'lift-rotate-and-place', 'why-this-identity-is-so-useful',
+      'using-the-controls', 'related-concepts-and-tools'],
+  }
+  const slugs = VIEW_SLUGS[currentView] || []
+
   const genericSections = Object.keys(sectionsContent).length > 0
-    ? [
-        { id: '1', title: sectionsContent.obj1?.title || '', link: '', content: sectionsContent.obj1?.content || '' },
-        { id: '2', title: sectionsContent.obj2?.title || '', link: '', content: sectionsContent.obj2?.content || '' },
-        { id: '3', title: sectionsContent.obj3?.title || '', link: '', content: sectionsContent.obj3?.content || '' },
-        { id: '4', title: sectionsContent.obj4?.title || '', link: '', content: sectionsContent.obj4?.content || '' },
-        { id: '5', title: sectionsContent.obj5?.title || '', link: '', content: sectionsContent.obj5?.content || '' },
-        { id: '6', title: sectionsContent.obj6?.title || '', link: '', content: sectionsContent.obj6?.content || '' },
-        { id: '7', title: sectionsContent.obj7?.title || '', link: '', content: sectionsContent.obj7?.content || '' },
-        { id: '8', title: sectionsContent.obj8?.title || '', link: '', content: sectionsContent.obj8?.content || '' },
-      ].filter(section => section.title)
+    ? [1, 2, 3, 4, 5, 6, 7, 8].map((n) => {
+        const obj = sectionsContent[`obj${n}`] || {}
+        const row = {
+          id: slugs[n - 1] || String(n),
+          title: obj.title || '',
+          link: '',
+          content: [obj.content || ''],
+        }
+        // obj1 carries its member-link after-text; obj2..obj5 carry their
+        // frozen-step units as [content, unit, after].
+        if (n === 1 && obj.after) row.content.push(obj.after)
+        if (n >= 2 && n <= 5 && stateUnits && stateUnits[`step-${n - 1}`]) {
+          row.content.push(
+            <div key={`u-step-${n - 1}`}
+                 dangerouslySetInnerHTML={{ __html: stateUnits[`step-${n - 1}`] }} />
+          )
+          if (obj.after) row.content.push(obj.after)
+        }
+        return row
+      }).filter(section => section.title)
     : []
 
   return (
@@ -971,25 +1114,25 @@ export default function AlgebraicIdentityViewPage({
       >
         {componentName === 'SquareOfSum' && (
           <div style={{ transform: 'scale(0.9)' }}>
-            <SquareOfSum />
+            <SquareOfSum explanations={explanations} />
           </div>
         )}
 
         {componentName === 'SquareOfDifference' && (
           <div style={{ transform: 'scale(0.9)' }}>
-            <SquareOfDifference />
+            <SquareOfDifference explanations={explanations} />
           </div>
         )}
 
         {componentName === 'SquareOfTrinomial' && (
           <div style={{ transform: 'scale(0.9)' }}>
-            <SquareOfTrinomial />
+            <SquareOfTrinomial explanations={explanations} />
           </div>
         )}
 
         {componentName === 'DifferenceOfSquares' && (
           <div style={{ transform: 'scale(0.9)' }}>
-            <DifferenceOfSquares />
+            <DifferenceOfSquares explanations={explanations} />
           </div>
         )}
       </SiblingsNav>

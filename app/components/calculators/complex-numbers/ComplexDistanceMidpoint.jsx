@@ -2,8 +2,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function ComplexDistanceMidpoint() {
+export default function ComplexDistanceMidpoint({ explanations }) {
   const [z1, setZ1] = useState({ re: -2, im: 1 });
   const [z2, setZ2] = useState({ re: 3, im: 3 });
   const [showCircle, setShowCircle] = useState(true);
@@ -39,6 +40,20 @@ export default function ComplexDistanceMidpoint() {
   const diff = { re: z1.re - z2.re, im: z1.im - z2.im };
   const distance = Math.sqrt(diff.re * diff.re + diff.im * diff.im);
   const midpoint = { re: (z1.re + z2.re) / 2, im: (z1.im + z2.im) / 2 };
+
+  // Line 1: page-supplied per-state explanations, keyed by the preset pair
+  // the current points match (or the coincident configuration). Nothing
+  // renders when no explanations prop is passed — defaults stay intact.
+  const stateKey =
+    z1.re === z2.re && z1.im === z2.im ? 'coincident'
+    : z1.re === -2 && z1.im === 1 && z2.re === 3 && z2.im === 3 ? 'general'
+    : z1.re === 0 && z1.im === 0 && z2.re === 3 && z2.im === 4 ? 'originPair'
+    : z1.re === -3 && z1.im === -2 && z2.re === 3 && z2.im === 2 ? 'symmetric'
+    : z1.re === 1 && z1.im === 4 && z2.re === 1 && z2.im === -2 ? 'vertical'
+    : z1.re === -4 && z1.im === 0 && z2.re === 4 && z2.im === 0 ? 'horizontal'
+    : null;
+  const stateExplanation =
+    explanations && stateKey ? explanations[stateKey] : null;
 
   const z1Svg = toSvg(z1.re, z1.im);
   const z2Svg = toSvg(z2.re, z2.im);
@@ -395,6 +410,12 @@ export default function ComplexDistanceMidpoint() {
                 <strong>When z&#x2082; = 0 (the origin),</strong> the distance |z&#x2081; &minus; 0| = |z&#x2081;| is just the modulus. Distance generalizes modulus to any two points, not just from the origin.
               </span>
             </div>
+            {stateExplanation && (
+              <div style={styles.explainItem}>
+                <span style={{ ...styles.dot, backgroundColor: palette.orange }}></span>
+                <span>{processContent(stateExplanation)}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -424,7 +445,9 @@ const styles = {
     color: palette.text,
     fontFamily: sans,
     padding: '20px 28px',
-    maxWidth: '1280px',
+    width: '90%',
+    minWidth: '90%',
+    maxWidth: '90%',
     margin: '0 auto',
   },
   header: {
@@ -447,7 +470,7 @@ const styles = {
   },
   mainLayout: {
     display: 'grid',
-    gridTemplateColumns: '720px 1fr',
+    gridTemplateColumns: 'minmax(620px, 1fr) minmax(320px, 420px)',
     gap: '20px',
     alignItems: 'start',
   },

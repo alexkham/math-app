@@ -7,6 +7,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -292,7 +293,7 @@ const keyWords = [
 
 // Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
 
-// The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#power-set) of $\\mathbb{N}$.
+// The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
 //     `,
 //     before: ``,
 //     after: ``,
@@ -475,11 +476,47 @@ The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument prove
 
 Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
 
-The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#power-set) of $\\mathbb{N}$.
+The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
     `,
     before: ``,
     after: ``,
     link: '',
+  },
+
+  notation: {
+    title: `Cardinality Notation`,
+    lead: `Size gets a bar pair, infinity gets a Hebrew letter, and the continuum gets a Fraktur one — three generations of marks for one question: how many members? The variant zoo ($\\operatorname{card}$, $\\#$, $n(A)$) rides along.`,
+    inherited: `The braces, $\\in$, $\\varnothing$ and set-builder come from [set theory basics](!/set-theory/basics#2); the power set $\\mathcal{P}(A)$ and $2^A$ behind the continuum from the [subsets page](!/set-theory/subsets#6); the double-struck ℕ–ℝ chain likewise.`,
+    entries: [
+      {
+        id: 'bar-pair',
+        tex: `$|A|$`,
+        read: `the cardinality of A`,
+        means: `The bar pair around a set counts it: $|A| = 3$ for $A = \\{1, 2, 3\\}$ — **Definition of Cardinality** above. The same fence with a different tenant: on numbers the bars mean [absolute value](!/algebra/equations/absolute-value#notation), on sets they count.`,
+        cases: `The variant zoo by dialect: $\\operatorname{card}(A)$ in formal set theory, $\\#A$ in combinatorics, $n(A)$ in school probability texts, $\\|A\\|$ occasionally — all the same question; this site keeps the bars.`,
+        confusedWith: `A number's magnitude. $|{-5}| = 5$ but $|\\{-5\\}| = 1$ — bars around the number measure distance, bars around the braces count members; the inner braces flip the meaning entirely.`,
+      },
+      {
+        id: 'aleph-null',
+        tex: `$\\aleph_0$`,
+        read: `aleph-null; aleph-nought`,
+        means: `The first infinite cardinal: $|\\mathbb{N}| = \\aleph_0$ — the size shared by every countably infinite set, as **Countable Sets** above establishes. The aleph is mathematics' one standard Hebrew letter, Cantor's own choice.`,
+        cases: `The subscript starts a ladder — $\\aleph_0, \\aleph_1, \\ldots$ enumerate ever-larger infinities; $|\\mathbb{Z}| = |\\mathbb{Q}| = \\aleph_0$ despite appearances, the working surprise of the countability arguments above.`,
+        confusedWith: `The infinity symbol. $\\aleph_0$ is a cardinal — a size — while the $\\infty$ of [limit notation](!/calculus/limits/infinity#notation) is a direction of growth; the two never interchange, and $\\aleph_0 + 1 = \\aleph_0$ obeys arithmetic $\\infty$ was never given.`,
+      },
+      {
+        id: 'continuum',
+        tex: `$\\mathfrak{c} = 2^{\\aleph_0}$`,
+        read: `the continuum; two to the aleph-null`,
+        means: `The size of the reals: $|\\mathbb{R}| = \\mathfrak{c}$, in Fraktur type — the blackletter font also seen on the [real-part marks](!/complex-numbers/algebraic-form#2) $\\Re$ and $\\Im$. The exponent spelling $2^{\\aleph_0}$ reads it as a power-set size, via $|\\mathcal{P}(A)| = 2^{|A|}$ from the [subsets page](!/set-theory/subsets#6).`,
+        cases: `Strictness is the point: $\\aleph_0 < \\mathfrak{c}$ — **Uncountable Sets** above proves the gap with Cantor's diagonal; every interval $(a, b)$ already has full cardinality $\\mathfrak{c}$.`,
+        confusedWith: `A plain letter c. The Fraktur stroke is the reservation — roman $c$ is a free constant; and $2^{\\aleph_0}$ is not "a huge finite power of two" but a set-sized exponent, legal only in cardinal arithmetic.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/set-theory`,
+    symbolsLabel: `All set theory symbols`,
+    parentHref: `/set-theory`,
+    parentLabel: `Set Theory`,
   },
   obj6: {
     title: `Comparing Cardinalities`,
@@ -768,6 +805,25 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
     },
 
     // obj6: prose + cardinality-comparison-relations aggregation table
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
     {
         id:'6',
         title:sectionsContent.obj6.title,

@@ -55,6 +55,14 @@ const SA = { cx: 280, cy: 210, r: 55 };                        // subset: A nest
 const SB = { cx: 260, cy: 210, r: 130 };
 const subsetChrome = uRect + outline(SB) + outline(SA) + uText + setLabel(280, 280, 'A') + setLabel(130, 340, 'B');
 
+// Mirror layout: B nested inside A (explorer scenario sub-b-a).
+const NB = { cx: 280, cy: 210, r: 55 };                        // subset: B nested inside A
+const NA = { cx: 260, cy: 210, r: 130 };
+const subsetBChrome = uRect + outline(NA) + outline(NB) + uText + setLabel(130, 340, 'A') + setLabel(280, 280, 'B');
+
+// Full-universe shade (covers the circles too — flat pre-blended fill).
+const uFill = `<rect x="${M}" y="${M}" width="${W - 2 * M}" height="${H - 2 * M}" fill="${FILL}"/>`;
+
 // Small in-region notation labels (for the anatomy/regions state).
 const regionLabel = (x, y, t) =>
   `<text x="${x}" y="${y}" font-size="14" font-style="italic" fill="#334155" text-anchor="middle" font-family="${SERIF}">${t}</text>`;
@@ -81,6 +89,26 @@ const twoSetsVennDiagrams = {
     `<rect x="${M}" y="${M}" width="${W - 2 * M}" height="${H - 2 * M}" fill="${FILL}"/>` +
     disc(A, '#fff') + disc(B, '#fff')
   ),
+
+  // ---- Line 1 additions (2026-08-20): the explorer states not yet frozen ----
+  // Set A alone: both A-regions (crescent + lens), i.e. the full disc.
+  setA: wrap(disc(A, FILL)),
+  // Set B alone.
+  setB: wrap(disc(B, FILL)),
+  // Universal set: every region shaded.
+  universeAll: wrap(uFill),
+  // Complement of B: everything outside circle B.
+  complementB: wrap(uFill + disc(B, '#fff')),
+  // B \ A: disc B with the lens erased.
+  differenceBA: wrap(disc(B, FILL) + lens('#fff', 'tsv-dba')),
+  // A ∪ B′: everything except the B-only crescent.
+  aUnionBcomp: wrap(uFill + disc(B, '#fff') + disc(A, FILL)),
+  // A′ ∪ B: everything except the A-only crescent.
+  acompUnionB: wrap(uFill + disc(A, '#fff') + disc(B, FILL)),
+  // (A ∩ B)′: everything except the lens.
+  complementIntersection: wrap(uFill + lens('#fff', 'tsv-dmint')),
+  // B ⊆ A: small B shaded inside big A.
+  subsetBinA: wrap(disc(NB, FILL), subsetBChrome),
 };
 
 export default twoSetsVennDiagrams;

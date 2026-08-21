@@ -1,6 +1,7 @@
 
 'use client'
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { processContent } from '../../../../utils/contentProcessor';
 
 
 const CTS_STYLES = `
@@ -709,7 +710,21 @@ function Diagram({ stageId, a, b, c, derived }) {
 /* =====================================================
    MAIN COMPONENT
    ===================================================== */
-export default function CompletingTheSquare() {
+// Line 1 (additive): maps the live state onto the page's per-state explanation
+// keys — one for the current step, one for the matched preset.
+const STAGE_KEYS = {
+  0: 'step-start', 1: 'step-factor', 2: 'step-square', 3: 'step-split',
+  4: 'step-corner', 5: 'step-gap', 6: 'step-vertex',
+};
+const PRESET_KEYS = [
+  { a: 1, b: 6, c: 5, key: 'ps-basic' },
+  { a: 2, b: 8, c: 3, key: 'ps-factored' },
+  { a: 1, b: -4, c: 1, key: 'ps-negative-b' },
+  { a: 1, b: 5, c: 2, key: 'ps-odd-b' },
+  { a: 3, b: 12, c: 7, key: 'ps-triple' },
+];
+
+export default function CompletingTheSquare({ explanations = null }) {
   const [a, setA] = useState(1);
   const [b, setB] = useState(6);
   const [c, setC] = useState(5);
@@ -817,6 +832,16 @@ export default function CompletingTheSquare() {
 
   const currentStepObj = derived.steps[currentStep];
 
+  // Line 1 (additive): matched entries render under the diagram caption;
+  // nothing renders when no prop is passed.
+  const stepKey = currentStepObj.title === 'Solve for x'
+    ? 'step-solve'
+    : STAGE_KEYS[currentStepObj.stageId] || null;
+  const presetKey = (PRESET_KEYS.find(p => p.a === a && p.b === b && p.c === c) || {}).key || null;
+  const extraExplanations = explanations
+    ? [explanations[stepKey], explanations[presetKey]].filter(Boolean)
+    : [];
+
   const presets = [
     { label: 'x² + 6x + 5', a: 1, b: 6, c: 5 },
     { label: '2x² + 8x + 3', a: 2, b: 8, c: 3 },
@@ -863,6 +888,13 @@ export default function CompletingTheSquare() {
               <div className="cts-caption">
                 <strong>{currentStepObj.title}.</strong> {currentStepObj.explain}
               </div>
+              {extraExplanations.map((entry, i) => (
+                <div key={`l1-${i}`}
+                     style={{ marginTop: 8, paddingTop: 8, borderTop: '1px solid #e2e8f0',
+                              fontSize: '13.5px', lineHeight: 1.55, color: '#334155' }}>
+                  {processContent(entry)}
+                </div>
+              ))}
               <div className="cts-anim-controls">
                 <button className="cts-anim-btn" onClick={prev} disabled={currentStep === 0}>← Back</button>
                 <button

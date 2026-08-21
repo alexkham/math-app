@@ -692,6 +692,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -953,6 +954,42 @@ The denominator cannot equal zero. Division by zero is undefined in mathematics,
     before: ``,
     after: ``,
     link: '',
+  },
+
+  notation: {
+    title: `Fraction Notation`,
+    lead: `Three ways to write one division: the bar that also groups, the slash that saves vertical space, and the obelus that retires after school. All appear among the [arithmetic symbols](!/math-symbols/arithmetic).`,
+    inherited: `The mixed-number juxtaposition $2\\frac{3}{4}$ — where side-by-side means addition, not multiplication — belongs to the [mixed numbers page](!/arithmetic/fractions/mixed-numbers); stacked fractions-within-fractions to [complex fractions](!/arithmetic/fractions/complex).`,
+    entries: [
+      {
+        id: 'vinculum-bar',
+        tex: `$\\frac{a}{b}$`,
+        read: `a over b`,
+        means: `Division frozen mid-act: the horizontal bar — the vinculum — holds numerator over denominator, as **What Is a Fraction** above defines. The bar also **groups**: $\\frac{a+b}{c}$ needs no brackets, because everything above the bar is one package.`,
+        cases: `The grouping power is the working difference from the other spellings — writing $\\frac{a+b}{c}$ inline requires $(a+b)/c$, brackets restored; display work prefers the bar for exactly this reason.`,
+        sameGlyphElsewhere: `The vinculum is a family of overlines: it roofs radicands under the [root sign](!/algebra/roots/properties#notation) and conjugates [complex numbers](!/complex-numbers/complex-conjugate#notation) — the same stroke, grouping each time, operating only sometimes.`,
+      },
+      {
+        id: 'slash-form',
+        tex: `$a/b$`,
+        read: `a slash b; a over b`,
+        means: `The inline spelling — the solidus — for running text and code: $3/4$ where $\\frac{3}{4}$ would break the line. Same value, no grouping power.`,
+        cases: `Binding is the hazard: $1/2x$ reads as $\\frac{1}{2}x$ to most conventions but $\\frac{1}{2x}$ to some — brackets or the bar settle it; code inherits the same trap with @[1/2*x]@ vs @[1/(2*x)]@.`,
+        confusedWith: `The backslash. $/$ divides while $\\setminus$ [subtracts sets](!/set-theory/operations#notation) — mirror leans, unrelated jobs; and doubled forward strokes $//$ mean integer division or comments in code, never a fraction.`,
+      },
+      {
+        id: 'obelus',
+        tex: `$a \\div b$`,
+        read: `a divided by b`,
+        means: `The obelus — a vinculum with dots standing in for the missing numbers — is the schoolroom's division sign: $\\frac{a}{b} = a \\div b$ exactly. Past elementary work it retires; the bar and slash carry on.`,
+        cases: `The glyph survives on calculator keys and in primary curricula; typography note — some European texts once used $\\div$ for subtraction, one reason mathematics abandoned it for the bar.`,
+        confusedWith: `The divides bar's direction. $12 \\div 3$ asks "twelve split by three" while $3 \\mid 12$ claims "three divides twelve" — [divisibility notation](!/arithmetic/divisibility#2) reads its operands in the opposite order, the subtree's standing trap.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/arithmetic`,
+    symbolsLabel: `All arithmetic symbols`,
+    parentHref: `/arithmetic`,
+    parentLabel: `Arithmetic`,
   },
 
   obj2: {
@@ -1299,6 +1336,25 @@ export default function FractionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

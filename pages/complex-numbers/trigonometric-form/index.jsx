@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -864,6 +865,54 @@ This identity shows that $\\text{cis}\\,\\theta = e^{i\\theta}$, so the trigonom
   link: '',
 },
 
+notation: {
+  title: `Trigonometric Form Notation`,
+  lead: `The angle marks live here: the multivalued operator, the capital that picks one value, the polar letter pair, and the abbreviation that packs cosine-plus-i-sine into three letters. The bar of $|z|$ and the exponential $e^{i\\theta}$ each have their own page.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation); the modulus bars $|z|$ are owned by the [absolute value page](!/complex-numbers/absolute-value), $e^{i\\theta}$ by the [exponential form](!/complex-numbers/exponential-form).`,
+  entries: [
+    {
+      id: 'arg',
+      tex: `$\\arg(z)$`,
+      read: `arg of z — the argument of z`,
+      means: `The angle operator: $\\arg(z) = \\theta$, the counterclockwise angle from the positive real axis to $z$. Genuinely multivalued — if $\\theta$ works, so does $\\theta + 2\\pi k$ for every integer $k$; the non-uniqueness in **Argument (Angle)** above is the point, not a defect.`,
+      cases: `Radians by default, degrees in elementary work — the [degree and radian](!/trigonometry/degrees-radians) conventions carry over unchanged. Print sets $\\arg$ upright, like $\\sin$ and $\\log$.`,
+      alsoWritten: `$\\varphi$ or $\\phi$ — the **phase**, standard in physics and engineering, especially for phasors and waves.`,
+      confusedWith: `A single value. Treating $\\arg(z)$ as one number produces the classic "paradoxes" around $\\arg(z_1 z_2) = \\arg(z_1) + \\arg(z_2)$ — an identity that holds only up to multiples of $2\\pi$.`,
+    },
+    {
+      id: 'arg-capital',
+      tex: `$\\operatorname{Arg}(z)$`,
+      read: `capital arg of z — the principal argument`,
+      means: `The capital letter buys uniqueness: $\\operatorname{Arg}(z)$ is the single representative of $\\arg(z)$ drawn from one agreed interval — a choice, not a discovery.`,
+      cases: `Two rival conventions: $(-\\pi, \\pi]$ in advanced mathematics, $[0, 2\\pi)$ in elementary and computational settings — **The Principal Argument** above works the first. An answer of $-\\frac{3\\pi}{4}$ under one is $\\frac{5\\pi}{4}$ under the other; state the interval before comparing results.`,
+      alsoWritten: `$\\operatorname{atan2}(b, a)$ — the programming spelling, returning the principal value directly; note the argument order, $b$ before $a$, opposite the fraction in $\\tan\\theta = b/a$.`,
+      confusedWith: `$\\arg(z)$ itself. Lowercase is the infinite family, uppercase the chosen one — mixing them silently is how off-by-$2\\pi$ errors enter multi-step calculations.`,
+    },
+    {
+      id: 'r-theta',
+      tex: `$r$ · $\\theta$`,
+      read: `r and theta — the polar pair`,
+      means: `The letter pair of polar description: $r = |z|$, the [modulus](!/complex-numbers/absolute-value), and $\\theta = \\arg(z)$. Together they rebuild the number — $z = r(\\cos\\theta + i\\sin\\theta)$, with $a = r\\cos\\theta$ and $b = r\\sin\\theta$.`,
+      cases: `$r$ is non-negative by definition — a "negative $r$" is not alternative notation but a different number, its $\\theta$ shifted by $\\pi$. Subscripts track multiple numbers: $r_1 r_2$ and $\\theta_1 + \\theta_2$ in **Multiplication and Division in Trigonometric Form** below.`,
+      alsoWritten: `$\\rho$ (rho) for the modulus in some European and physics texts, freeing $r$ for other radii; the pair $(r, \\theta)$ deliberately mirrors polar coordinates.`,
+      confusedWith: `A degree–radian mix. The pair means nothing until the angle unit is fixed; converting $r$ correctly and $\\theta$ in the wrong mode is the classic calculator error.`,
+    },
+    {
+      id: 'cis',
+      tex: `$\\operatorname{cis}\\theta$`,
+      read: `sis theta — cosine plus i sine`,
+      means: `A pure abbreviation: $\\operatorname{cis}\\theta = \\cos\\theta + i\\sin\\theta$, so $z = r\\operatorname{cis}\\theta$. It adds no mathematics — it compresses the bracket that **The Trigonometric Form** above spells out.`,
+      cases: `At home in precalculus and engineering texts; research mathematics skips it and writes $e^{i\\theta}$ via [Euler's formula](!/complex-numbers/exponential-form) instead — same object, one notation generation apart.`,
+      alsoWritten: `$r\\angle\\theta$ — electrical engineering's phasor angle notation, standard on circuit diagrams and calculator displays.`,
+      confusedWith: `A product. $\\operatorname{cis}$ is one operator, not $c \\cdot i \\cdot s$, and $\\operatorname{cis}(n\\theta) \\neq n\\,\\operatorname{cis}(\\theta)$ — the argument lives inside the operator, which is exactly what [De Moivre's theorem](!/complex-numbers/demoivre-theorem) exploits.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
+},
+
     obj8: {
   title: `Converting Algebraic to Trigonometric`,
   content: `To convert $z = a + bi$ into trigonometric form $z = r\\,\\text{cis}\\,\\theta$:
@@ -1270,6 +1319,25 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

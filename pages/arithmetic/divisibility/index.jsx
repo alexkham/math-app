@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 // import { renderMultiplesLine } from '../../../app/utils/illustrations/multiplesLine'
 import {renderMultiplesLine} from '../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
@@ -277,22 +278,41 @@ Divisibility is a yes-or-no question. Either $a$ fits into $b$ a whole number of
   link: '',
 },
 
-obj2: {
-  title: `Terminology and Notation`,
-  content: `The vertical bar in $a \\mid b$ is the standard notation for divisibility. It is a statement — either true or false — not an operation that produces a number. This distinguishes it from the division symbol $\\div$, which computes a quotient.
-
-A single relationship supports multiple phrasings, all meaning the same thing. When $3 \\mid 12$:
-
-$3$ divides $12$. Or: $12$ is divisible by $3$. Or: $3$ is a divisor of $12$. Or: $3$ is a factor of $12$. Or: $12$ is a multiple of $3$.
-
-Each phrasing shifts the emphasis — "divides" foregrounds $3$, "is divisible by" foregrounds $12$, "factor" and "multiple" name the roles — but the underlying fact is identical in every case: $12 = 3 \\cdot 4$ for an integer $4$.
-
-The negation uses a slashed bar: $5 \\nmid 12$ means $5$ does not divide $12$.
-
-Both bars, along with every other symbol this subtree relies on, are catalogued among the [arithmetic symbols](!/math-symbols/arithmetic) with the [LaTeX](!/latex) code for each — and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
-  before: ``,
-  after: ``,
-  link: '',
+notation: {
+  title: `Divisibility Notation`,
+  lead: `One vertical stroke carries the whole subtree: the bar that states, the slash that denies, and the remainder spelling that computes the same fact. Every symbol here is catalogued among the [arithmetic symbols](!/math-symbols/arithmetic) with its [LaTeX](!/latex) code, and the [mathematical keyboard](!/keyboard) types them directly. The table below collects the five spoken phrasings of one statement.`,
+  inherited: `$\\gcd(a,b)$ and $\\operatorname{lcm}(a,b)$ are introduced on [their](!/arithmetic/divisibility/gcd) [own](!/arithmetic/divisibility/lcm) pages; the congruence triple-bar $\\equiv$ belongs to [modulo](!/arithmetic/modulo#5).`,
+  entries: [
+    {
+      id: 'divides-bar',
+      tex: `$a \\mid b$`,
+      read: `a divides b`,
+      means: `A statement, not an operation: $a \\mid b$ is true or false — it claims $b = a \\cdot k$ for some integer $k$ and produces no number, unlike $\\div$, which computes. **What is Divisibility?** above sets the definition.`,
+      cases: `Five spoken phrasings share the one mark — divides, is divisible by, is a divisor of, is a factor of, is a multiple of — each shifting emphasis, none changing the fact; the table below lines them up for $3 \\mid 12$.`,
+      confusedWith: `Division's argument order. In $3 \\mid 12$ the small number leads; in $12 \\div 3$ it trails — the bar and the division sign read their operands in opposite directions, the subtree's most reliable misreading.`,
+      sameGlyphElsewhere: `The identical stroke is "such that" inside [set-builder braces](!/set-theory/basics#2) and, doubled, the [absolute value](!/algebra/equations/absolute-value#notation) fence — position decides the job.`,
+    },
+    {
+      id: 'nmid-slash',
+      tex: `$5 \\nmid 12$`,
+      read: `five does not divide twelve`,
+      means: `The slashed bar denies: $5 \\nmid 12$ because no integer $k$ gives $12 = 5k$. One stroke through the mark manufactures the negation — the same [slash-negation family](!/set-theory/basics#2) that builds $\\neq$ and $\\notin$.`,
+      cases: `The negation stays a statement — false claims become true denials; proofs by contradiction lean on it, assuming $a \\mid b$ and deriving $a \\nmid b$.`,
+      confusedWith: `A fraction slash. The stroke negates the bar, it does not divide anything — $5 \\nmid 12$ has no numeric value, while $5/12$ is a number.`,
+    },
+    {
+      id: 'mod-bridge',
+      tex: `$b \\bmod a = 0$`,
+      read: `b mod a equals zero`,
+      means: `The computational spelling of the same fact: $a \\mid b$ exactly when the remainder vanishes — one statement, two dialects, as **Divisibility and Remainders** below works out. The $\\bmod$ operator itself is owned by the [modulo page](!/arithmetic/modulo#2).`,
+      cases: `The bridge runs both ways: theory prefers the bar ($3 \\mid 12$), computation the remainder test (@[12 % 3 == 0]@ in code) — choosing the dialect is choosing the audience.`,
+      confusedWith: `The congruence triple-bar. $b \\bmod a = 0$ is an equation about a computed remainder; $b \\equiv 0 \\pmod a$ states the same thing in [congruence dress](!/arithmetic/modulo#5) — interchangeable in content, different in grammar.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/arithmetic`,
+  symbolsLabel: `All arithmetic symbols`,
+  parentHref: `/arithmetic`,
+  parentLabel: `Arithmetic`,
 },
 
 obj3: {
@@ -702,10 +722,21 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
 },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj2.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
         ]

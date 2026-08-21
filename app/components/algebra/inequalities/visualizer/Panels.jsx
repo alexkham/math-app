@@ -5,6 +5,7 @@ import {
   fmt, formatTick, niceTickStep, subText, signSymOf, signClassOf,
   sel,
 } from './logic.js';
+import { processContent } from '../../../../utils/contentProcessor';
 export function Tooltip({ content, children, side = 'top' }) {
   const [visible, setVisible] = useState(false);
   const timer = useRef(null);
@@ -719,7 +720,7 @@ export function SignChart({ iq }) {
     </table>
   );
 }
-export function Explanation({ iq }) {
+export function Explanation({ iq, extra = null }) {
   const { state, dispatch, focus, inDomain } = iq;
   const x = state.marble;
   const inDom = inDomain(x);
@@ -740,6 +741,13 @@ export function Explanation({ iq }) {
         </span>
       </div>
       {state.explainTab === 'live' ? <LiveTab iq={iq} /> : <StrategyTab iq={iq} />}
+      {extra && extra.length > 0 && extra.map((entry, i) => (
+        <div key={`l1-${i}`}
+             style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid #e2e8f0',
+                      fontSize: '13.5px', lineHeight: 1.55, color: '#334155' }}>
+          {processContent(entry)}
+        </div>
+      ))}
     </>
   );
 }

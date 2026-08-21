@@ -306,7 +306,7 @@ The four quadrants organize complex numbers by the signs of their components. Th
 
 Special cases occupy the axes rather than the quadrants. Real numbers like $5$ appear at $(5, 0)$ on the horizontal axis. Pure imaginary numbers like $-2i$ appear at $(0, -2)$ on the vertical axis. These numbers have one zero component, placing them precisely on the boundary between quadrants rather than inside any particular region.
 
-Complex numbers expressed differently may occupy the same point. The number $\\frac{6}{2} + \\frac{8}{4}i$ simplifies to $3 + 2i$ and plots at $(3, 2)$ regardless of how the components were originally written. The geometric location depends only on the final real values of $Re(z)$ and $Im(z)$, not on the form of the expression.`,
+Complex numbers expressed differently may occupy the same point. The number $\\frac{6}{2} + \\frac{8}{4}i$ simplifies to $3 + 2i$ and plots at $(3, 2)$ regardless of how the components were originally written. The geometric location depends only on the final real values of $Re(z)$ and $Im(z)$ — the [extraction marks](!/complex-numbers/algebraic-form#2) — not on the form of the expression.`,
   after: ``,
   link: '',
 },

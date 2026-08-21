@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import DeMoivreCalculator from '../../../../app/components/calculators/complex-numbers/DeMoivreCalculator'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import deMoivreDiagrams from '../../../../app/components/calculators/complex-numbers/deMoivreDiagrams'
 
 export async function getStaticProps(){
 
@@ -33,7 +35,7 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Set z and Choose n`,
-      content:`Drag the navy point $z$ anywhere on the complex plane, or type values into the Re and Im input fields (range $\\pm 10$). Then set the exponent $n$ using the slider ($-10$ to $10$), the input field ($-20$ to $20$), or one of seven presets: $(1+i)^2$, $(1+i)^4$, $i^3$, $(1+i)^8$, $(3+4i)^{-1}$, $2^{10}$, and $(0.5+0.5i)^6$.
+      content:`Drag the navy point $z$ anywhere on the complex plane, or type values into the Re and Im input fields (range $\\pm 10$). Then set the exponent $n$ using the slider ($-10$ to $10$), the input field ($-20$ to $20$), or one of seven presets: $(1+i)^2$, $(1+i)^4$, $i^3$, $(1+i)^8$, $(3+4i)^{-1}$, $2^{10}$, and $(0.5+0.5i)^6$. Each preset has a dedicated section below with the tool frozen on it: the [squaring baseline](!#the-squaring-baseline), the [outward spiral](!#the-outward-spiral-when-z-1), [escaping the window](!#escaping-the-window), the [inward spiral](!#the-inward-spiral-when-z-1), [unit circle rotation](!#unit-circle-rotation-when-z-1), [negative exponents](!#negative-exponents-reciprocals-and-reversal), and the [pure real base](!#pure-real-base-no-spiral-just-scaling).
 
 The green result vector $z^n$ updates instantly along with the step-by-step panel, polar values, and the purple intermediate power trail. Click **Random** to generate a random base and exponent.
 
@@ -52,7 +54,9 @@ Now click $(1+i)^8$. The spiral extends further — the modulus reaches $(\\sqrt
 
 Try increasing $n$ with the slider while watching the spiral grow. Each click of $n$ adds one more purple dot and pushes the green result further outward.`,
       before:``,
-      after:``,
+      after:`The frozen frame catches the fourth power mid-flight: three purple dots at $1+i$, $2i$, and $-2+2i$, each $45°$ further around and $\\sqrt{2}$ times further out, before the teal vector lands on $-4$. Both dashed circles are visible — the small navy one at $|z| = \\sqrt{2}$ and the teal one at $|z^4| = 4$ — with the whole [trail](!#reading-the-purple-trail-and-modulus-circles) strung between them.
+
+The landing point deserves a second look: $(1+i)^4$ is a *negative real number*, reached without a single negative sign in the base. Angle accumulation did it — four lots of $45°$ make the half-turn. Push on to the eighth power and the spiral [escapes the window](!#escaping-the-window) entirely.`,
       link:'',
     },
 
@@ -66,7 +70,9 @@ This behavior is the opposite of the outward spiral: if $|z| < 1$, repeated mult
 
 Drag $z$ to any point inside the unit circle and increase $n$ to see the inward spiral get tighter. The higher the exponent, the closer the result is to zero.`,
       before:``,
-      after:``,
+      after:`The frozen frame shows both of the tool's smallness devices at once: five purple dots coiling into the origin, and the zoom inset in the corner magnifying the final $-0.125i$ that would otherwise be invisible at full scale.
+
+Note the symmetry with [the outward spiral](!#the-outward-spiral-when-z-1): this base is exactly half of $1+i$, same $45°$ angle, and the two spirals are mirror processes — one compounds, one decays. The boundary between them is the unit circle, explored in [the rotation state](!#unit-circle-rotation-when-z-1), where powers neither grow nor shrink.`,
       link:'',
     },
 
@@ -80,7 +86,9 @@ Click the $i^3$ preset to see three purple trail dots evenly spaced $90°$ apart
 
 This is why **powers of i** cycle every four steps. On the unit circle, De Moivre's theorem is pure rotation: the modulus is fixed and only the angle changes. Any point on the unit circle produces this behavior — try $z = \\cos(60°) + i\\sin(60°)$ and watch the dots walk around the circle in $60°$ steps.`,
       before:``,
-      after:``,
+      after:`The frozen $i^3$ frame is the smallest complete example: two trail dots at $i$ and $-1$, the result at $-i$, and the navy and teal dashed circles perfectly superimposed at radius $1$ — the visual signature of a modulus that refuses to change.
+
+The teal $n\\theta$ arc sweeps clockwise to $-90°$ rather than counterclockwise to $270°$: the tool normalizes result angles into $(-180°, 180°]$, and the two descriptions name the same point. This unit-circle behavior is also where [roots of unity](!#connection-to-roots-of-unity) live — points whose powers walk in place around the circle and come home.`,
       link:'',
     },
 
@@ -94,7 +102,9 @@ Try sliding $n$ into negative values with any base. The trail reverses: instead 
 
 At $n = 0$, the result is always $z^0 = 1$ regardless of $z$ — the green point sits at $(1, 0)$ on the positive real axis. This is the boundary between positive and negative exponents.`,
       before:``,
-      after:``,
+      after:`The frozen frame pairs the extremes: the navy $z = 3+4i$ reaching out to modulus $5$, and its reciprocal caught in the zoom inset at modulus $0.2$ — the two moduli multiplying to exactly $1$, as reciprocals must. The teal $n\\theta$ arc dips below the axis to $-53.1°$, the mirror of the base's angle above it.
+
+Reciprocal-taking is the one power that ties directly back to division: $z^{-1} = \\bar{z}/|z|^2$, so this preset's answer $0.12 - 0.16i$ is just $\\frac{3-4i}{25}$ — the conjugate shrunk by the squared modulus. The [five-step panel](!#the-five-step-calculation) reaches the same place through polar arithmetic alone.`,
       link:'',
     },
 
@@ -102,11 +112,13 @@ At $n = 0$, the result is always $z^0 = 1$ regardless of $z$ — the green point
       title:`Pure Real Base — No Spiral, Just Scaling`,
       content:`Click $2^{10}$ to see a purely real base. Since $z = 2$ has angle $\\theta = 0°$, every power also has angle $0°$: the result sits on the positive real axis. The modulus is $2^{10} = 1024$ — far off-screen — so the green result appears as a dashed ray pointing right with an arrow.
 
-The purple trail dots $z^1, z^2, \\dots, z^9$ march along the positive real axis, each one doubling the previous: $2, 4, 8, 16, \\dots, 512$. There is no rotation because $n \\times 0° = 0°$ for any $n$.
+The purple trail dots $z^1, z^2, \\dots, z^9$ march along the positive real axis, each one doubling the previous — though only $2$, $4$, and $8$ remain inside the visible window. There is no rotation because $n \\times 0° = 0°$ for any $n$.
 
 Now try changing $z$ to $-2$ (angle $180°$). The powers alternate between the positive and negative real axes: $(-2)^1 = -2$, $(-2)^2 = 4$, $(-2)^3 = -8$, and so on. The trail zigzags left and right along the real axis, growing in magnitude. The angle alternates between $0°$ and $180°$ because $n \\times 180°$ is $0°$ for even $n$ and $180°$ for odd $n$.`,
       before:``,
-      after:``,
+      after:`The frozen frame is De Moivre's theorem with the rotation half switched off: no arcs anywhere, three doubling dots on the axis, and the dashed ray carrying the invisible $1024$ off to the right. Ordinary real exponentiation is the $\\theta = 0$ slice of the complex theory.
+
+That reading runs both ways: real powers were never a different subject, just the special case where angle multiplication has nothing to multiply. Compare the fully angular opposite — [the unit-circle state](!#unit-circle-rotation-when-z-1), where *only* the angle moves — and the general spirals are every mixture in between.`,
       link:'',
     },
 
@@ -213,6 +225,28 @@ Finally, for the unit circle behavior — where $|z| = 1$ and powers only rotate
   after:``,
   link:'',
 },
+
+    obj12:{
+      title:`The Squaring Baseline`,
+      content:`The preset $(1+i)^2$ is the smallest possible use of the theorem — one multiplication — and the cleanest place to check the machinery against plain algebra.`,
+      before:``,
+      after:`FOIL gives the answer in one line: $(1+i)^2 = 1 + 2i + i^2 = 2i$. De Moivre's route agrees from the other direction: modulus $(\\sqrt{2})^2 = 2$, angle $2 \\times 45° = 90°$, which is $2i$ exactly. Two completely different computations, one point on the imaginary axis.
+
+The frozen frame is deliberately spare — a single trail dot sitting under $z$ itself, the base's $45°$ arc doubled to the result's $90°$ — because at $n = 2$ the theorem barely differs from [one complex multiplication](!#what-is-de-moivres-theorem). Every larger exponent on this page is this step iterated: the same base squared again gives [the fourth power](!#the-outward-spiral-when-z-1), and twice more, [the eighth](!#escaping-the-window).`,
+      link:'',
+    },
+
+    obj13:{
+      title:`Escaping the Window`,
+      content:`The preset $(1+i)^8$ pushes the outward spiral past the edge of the visible plane: the result, $+16$, is real, positive — and outside the $\\pm 10$ window.`,
+      before:``,
+      after:`The tool answers with its off-screen convention: a dashed teal ray aimed along the positive real axis, arrowhead at the boundary, label pointing at the unreachable $z^8$. The direction is exact even though the endpoint is not drawn — and the seven trail dots, the last of them at $8 - 8i$, still trace the two full revolutions that got there.
+
+The arithmetic behind the direction: $8 \\times 45° = 360°$, a whole number of turns, so the eighth power comes home to the positive real axis with modulus $(\\sqrt{2})^8 = 16$. Squaring [the fourth power's](!#the-outward-spiral-when-z-1) $-4$ confirms it: $(-4)^2 = 16$.
+
+No teal $n\\theta$ arc appears in this frame — the normalized result angle is $0°$, so there is no angle left to draw. Growth without net rotation: the opposite corner of the theorem from [the unit-circle state](!#unit-circle-rotation-when-z-1).`,
+      link:'',
+    },
 
   }
 
@@ -328,12 +362,45 @@ Finally, for the unit circle behavior — where $|z| = 1$ and powers only rotate
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plane + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    squared: demoUnitFrame({ svg: deMoivreDiagrams.squared, caption: '(1+i)&#178;, frozen',
+      text: 'The smallest use of the theorem: the 45° base arc doubles to 90° and the result lands on 2i — one multiplication, checked against FOIL.' }),
+    fourth: demoUnitFrame({ svg: deMoivreDiagrams.fourth, caption: '(1+i)&#8308;, frozen',
+      text: 'Three purple dots fan outward — 1+i, 2i, &#8722;2+2i — each 45° further around and &#8730;2 longer, before the teal vector lands on &#8722;4: a negative real reached with no negative signs.' }),
+    iCubed: demoUnitFrame({ svg: deMoivreDiagrams.iCubed, caption: 'i&#179;, frozen',
+      text: 'Pure rotation: the navy and teal dashed circles coincide at radius 1, two trail dots wait at i and &#8722;1, and the result is &#8722;i — a quarter-turn walk with no growth.' }),
+    eighth: demoUnitFrame({ svg: deMoivreDiagrams.eighth, caption: '(1+i)&#8312;, frozen',
+      text: 'The spiral escapes: seven dots trace two full revolutions, the last at 8 &#8722; 8i, and a dashed ray aims at the off-screen +16 on the positive real axis.' }),
+    inverse: demoUnitFrame({ svg: deMoivreDiagrams.inverse, caption: '(3+4i)&#8315;&#185;, frozen',
+      text: 'The reciprocal caught in the zoom inset: modulus 5 inverts to 0.2, the angle mirrors to &#8722;53.1°, and the moduli multiply back to exactly 1.' }),
+    twoTen: demoUnitFrame({ svg: deMoivreDiagrams.twoTen, caption: '2&#185;&#8304;, frozen',
+      text: 'De Moivre with the rotation switched off: no arcs, three doubling dots at 2, 4 and 8, and a dashed ray carrying the invisible 1024 off to the right.' }),
+    inward: demoUnitFrame({ svg: deMoivreDiagrams.inward, caption: '(0.5+0.5i)&#8310;, frozen',
+      text: 'Five dots coil into the origin as the modulus decays by &#8730;2/2 per step; the zoom inset magnifies the final &#8722;0.125i that full scale cannot show.' }),
+  };
+
+  // Per-state additions for the tool's Key Ideas panel, keyed by the preset
+  // the current (z, n) matches (see DeMoivreCalculator).
+  const explanations = {
+    squared: 'One multiplication, two routes: FOIL and De Moivre both land (1+i)² on 2i. [Learn more about the squaring baseline](!#the-squaring-baseline) · [Getting started](!#getting-started-set-z-and-choose-n)',
+    fourth: 'Four 45° steps make a half-turn: a negative real number from an all-positive base. [Learn more about the outward spiral](!#the-outward-spiral-when-z-1) · [Getting started](!#getting-started-set-z-and-choose-n)',
+    iCubed: 'On the unit circle powers only rotate — this is the powers-of-i cycle in motion. [Learn more about unit-circle rotation](!#unit-circle-rotation-when-z-1) · [Getting started](!#getting-started-set-z-and-choose-n)',
+    eighth: 'Two full revolutions and modulus 16: the result escapes the window as a dashed ray. [Learn more about escaping the window](!#escaping-the-window) · [Getting started](!#getting-started-set-z-and-choose-n)',
+    inverse: 'The reciprocal inverts the modulus and mirrors the angle — |z| · |z⁻¹| = 1. [Learn more about negative exponents](!#negative-exponents-reciprocals-and-reversal) · [Getting started](!#getting-started-set-z-and-choose-n)',
+    twoTen: 'θ = 0 disables rotation: ordinary doubling is the real-axis slice of the theorem. [Learn more about the pure real base](!#pure-real-base-no-spiral-just-scaling) · [Getting started](!#getting-started-set-z-and-choose-n)',
+    inward: 'A base inside the unit circle decays: the spiral coils into the origin, inset and all. [Learn more about the inward spiral](!#the-inward-spiral-when-z-1) · [Getting started](!#getting-started-set-z-and-choose-n)',
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "De Moivre's Theorem Calculator | Learn Math Class",
         description: "Visualize De Moivre's theorem interactively. Raise complex numbers to any power, see spiral trails, angle multiplication, and step-by-step polar solutions.",
@@ -346,12 +413,12 @@ Finally, for the unit circle behavior — where $|z| = 1$ and powers only rotate
     }
    }
 
-export default function DeMoivreVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function DeMoivreVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
     {
-        id:'1',
+        id:'getting-started-set-z-and-choose-n',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -359,47 +426,77 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
         ]
     },
     {
-        id:'2',
+        id:'the-squaring-baseline',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-squared' dangerouslySetInnerHTML={{ __html: stateUnits.squared }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'the-outward-spiral-when-z-1',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key='u-fourth' dangerouslySetInnerHTML={{ __html: stateUnits.fourth }} />,
+          sectionsContent.obj2.after,
         ]
     },
     {
-        id:'3',
+        id:'escaping-the-window',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-eighth' dangerouslySetInnerHTML={{ __html: stateUnits.eighth }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'the-inward-spiral-when-z-1',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key='u-inward' dangerouslySetInnerHTML={{ __html: stateUnits.inward }} />,
+          sectionsContent.obj3.after,
         ]
     },
     {
-        id:'4',
+        id:'unit-circle-rotation-when-z-1',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key='u-iCubed' dangerouslySetInnerHTML={{ __html: stateUnits.iCubed }} />,
+          sectionsContent.obj4.after,
         ]
     },
     {
-        id:'5',
+        id:'negative-exponents-reciprocals-and-reversal',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key='u-inverse' dangerouslySetInnerHTML={{ __html: stateUnits.inverse }} />,
+          sectionsContent.obj5.after,
         ]
     },
     {
-        id:'6',
+        id:'pure-real-base-no-spiral-just-scaling',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key='u-twoTen' dangerouslySetInnerHTML={{ __html: stateUnits.twoTen }} />,
+          sectionsContent.obj6.after,
         ]
     },
     {
-        id:'7',
+        id:'reading-the-purple-trail-and-modulus-circles',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -407,7 +504,7 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
         ]
     },
     {
-        id:'8',
+        id:'the-five-step-calculation',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -415,7 +512,7 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
         ]
     },
     {
-        id:'9',
+        id:'what-is-de-moivres-theorem',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -423,7 +520,7 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
         ]
     },
     {
-        id:'10',
+        id:'connection-to-roots-of-unity',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -431,7 +528,7 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
@@ -499,8 +596,8 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>De Moivre Law Visual Calculator</h1>
    <br/>
-   <SiblingsNav>
-   <DeMoivreCalculator/>
+   <SiblingsNav maxWidth='100%'>
+   <DeMoivreCalculator explanations={explanations}/>
    </SiblingsNav>
    <br/>
    <SectionTableOfContents sections={genericSections}

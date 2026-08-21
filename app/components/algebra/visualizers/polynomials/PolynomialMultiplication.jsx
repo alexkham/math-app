@@ -8,6 +8,7 @@
 // screens, stacking vertically only when the viewport gets narrow.
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { processContent } from '../../../../utils/contentProcessor';
 
 // ============================================================
 //   1. CONSTANTS & "TYPES"
@@ -896,7 +897,10 @@ table.pm-product-grid td {
 //   5. MAIN COMPONENT
 // ============================================================
 
-export default function PolynomialMultiplicationVisualizer() {
+// Line 1 (additive): explanation keys for the five presets, by preset index.
+const PRESET_L1_KEYS = ['ps-foil', 'ps-signs', 'ps-3x2', 'ps-cubes', 'ps-3x3'];
+
+export default function PolynomialMultiplicationVisualizer({ explanations = null }) {
   const DEFAULT_PRESET = 2;
 
   const [left, setLeft] = useState(() => PRESETS[DEFAULT_PRESET].left.map(t => ({ ...t })));
@@ -1030,6 +1034,11 @@ export default function PolynomialMultiplicationVisualizer() {
   const canAddLeft  = left.length  < VALIDATION_LIMITS.MAX_TERMS_PER_POLY;
   const canAddRight = right.length < VALIDATION_LIMITS.MAX_TERMS_PER_POLY;
 
+  // Line 1 (additive): matched preset entry rendered under the explain box;
+  // nothing renders for custom-built polynomials or without the prop.
+  const l1Key = activePresetIdx !== null ? PRESET_L1_KEYS[activePresetIdx] : null;
+  const extraExplanation = (explanations && l1Key && explanations[l1Key]) || null;
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: PM_STYLES }} />
@@ -1098,6 +1107,13 @@ export default function PolynomialMultiplicationVisualizer() {
                 <>{validation.error}</>
               )}
             </div>
+
+            {extraExplanation && (
+              <div style={{ margin: '10px 0', padding: '10px 12px', borderTop: '1px solid #e2e8f0',
+                            fontSize: '13.5px', lineHeight: 1.55, color: '#334155' }}>
+                {processContent(extraExplanation)}
+              </div>
+            )}
 
             <GridPanel
               leftSorted={leftSorted}

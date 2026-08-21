@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
 import { renderEuclideanChain } from '../../../../app/utils/illustrations/arithmetic/divisibility/euclideanChain'
@@ -308,6 +309,43 @@ The same concept goes by several names. GCD (greatest common divisor) is standar
   before: ``,
   after: ``,
   link: '',
+},
+
+notation: {
+  title: `GCD Notation`,
+  lead: `A function spelling, an acronym zoo, and an equation that doubles as a definition — the marks behind every greatest-common-divisor statement on this page and its siblings.`,
+  inherited: `The divides bar $a \\mid b$ inside every argument is owned by [divisibility notation](!/arithmetic/divisibility#2); $\\operatorname{lcm}(a, b)$, the mirror twin, by the [LCM page](!/arithmetic/divisibility/lcm).`,
+  entries: [
+    {
+      id: 'gcd-function',
+      tex: `$\\gcd(a, b)$`,
+      read: `the g-c-d of a and b`,
+      means: `Function spelling for a number-theoretic quantity: lowercase upright $\\gcd$, arguments in parentheses — the same grammar as [function notation](!/functions/basics#5), applied to a count. **What is GCD?** above defines the value.`,
+      cases: `More arguments, same mark — $\\gcd(a, b, c)$, evaluated pairwise in any order, as **GCD of More Than Two Numbers** below shows; the twin $\\operatorname{lcm}(a, b)$ is tied to it by $\\gcd(a,b) \\cdot \\operatorname{lcm}(a,b) = a \\cdot b$.`,
+      alsoWritten: `$(a, b)$ — number theory's bare-parentheses shorthand, $\\gcd(12, 18)$ compressed to $(12, 18)$; compact but triple-booked, since the same glyphs write points, open intervals, and ordered pairs.`,
+      confusedWith: `A product of letters. $\\gcd$ is typeset upright as one operator name — italic $GCD(a, b)$ in math mode reads as $G \\cdot C \\cdot D$, the same multi-letter misreading the [trig abbreviations](!/trigonometry/right-triangle#notation) fight.`,
+    },
+    {
+      id: 'acronym-zoo',
+      tex: `$\\text{GCD · HCF · GCF}$`,
+      read: `greatest common divisor; highest common factor; greatest common factor`,
+      means: `One quantity, three acronyms: GCD standard in mathematical texts, HCF in British and Indian curricula, GCF in American school textbooks — **What is GCD?** above lists all three. The choice signals the audience, never the value.`,
+      cases: `Translation is the skill — an HCF exam problem and a $\\gcd$ formula are the same mathematics; calculators settle it with a @[gcd(]@ key almost universally.`,
+      confusedWith: `Different quantities. Meeting HCF after GCD suggests a new concept — but "highest"/"greatest" and "factor"/"divisor" are synonym pairs, not distinctions.`,
+    },
+    {
+      id: 'coprime-equation',
+      tex: `$\\gcd(a, b) = 1$`,
+      read: `a and b are coprime`,
+      means: `An equation doing definition duty: coprimality has no dedicated mark on this site — the statement $\\gcd(a, b) = 1$ is the notation, read directly as "coprime" or "relatively prime", per **Coprime (Relatively Prime) Numbers** below.`,
+      cases: `The idiom powers lowest-terms tests — $\\frac{3}{5}$ is reduced because $\\gcd(3, 5) = 1$, the [equivalent fractions](!/arithmetic/fractions/equivalent) criterion; some number-theory texts abbreviate to $a \\perp b$, the [perpendicularity glyph](!/linear-algebra/orthogonality/inner-product#notation) borrowed sideways.`,
+      confusedWith: `Primality. Coprime is a relationship between two numbers, prime a property of one — $8$ and $15$ are coprime though neither is prime; the pair-ness lives in the notation's two arguments.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/arithmetic`,
+  symbolsLabel: `All arithmetic symbols`,
+  parentHref: `/arithmetic/divisibility`,
+  parentLabel: `Divisibility`,
 },
 
 obj2: {
@@ -790,6 +828,25 @@ rtGcdObj10Tiles,}) {
       sectionsContent.obj1.afterFigure,
     ]
 },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+        ]
+    },
     {
         id:'2',
         title:sectionsContent.obj2.title,

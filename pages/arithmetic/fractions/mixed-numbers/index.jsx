@@ -681,6 +681,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -901,6 +902,42 @@ The fractional part of a mixed number must be a proper fraction. If someone writ
     before: ``,
     after: ``,
     link: '',
+  },
+
+  notation: {
+    title: `Mixed Number Notation`,
+    lead: `The one place in mathematics where writing two things side by side means adding them. That inversion, its grammar rule, and how the minus sign treats the pair — three conventions this page's arithmetic silently depends on.`,
+    inherited: `The fraction bar, slash and obelus are owned by [fraction notation](!/arithmetic/fractions#notation); the improper form $\\frac{7}{4}$ is plain [fraction spelling](!/arithmetic/fractions#notation) needing no extra marks.`,
+    entries: [
+      {
+        id: 'juxtaposition-addition',
+        tex: `$2\\frac{3}{4}$`,
+        read: `two and three quarters`,
+        means: `Adjacency means addition — the only place in mathematics where it does: $2\\frac{3}{4} = 2 + \\frac{3}{4}$. The spoken form says the plus out loud — "two AND three quarters"; the written form hides it entirely.`,
+        cases: `The convention exists for measurement and speech — rulers, recipes, times; computation converts to improper form first, as **Converting Mixed Numbers to Improper Fractions** below drills, precisely to escape the hidden plus.`,
+        confusedWith: `Multiplication. Everywhere else adjacency multiplies — $2x$, $2\\pi$, $2\\sin\\theta$ — so $2\\frac{3}{4}$ read by algebra's rule gives $\\frac{3}{2}$, half the true value; the classic error this notation invites.`,
+      },
+      {
+        id: 'standard-form-rule',
+        tex: `$3\\frac{5}{4}$ vs $4\\frac{1}{4}$`,
+        read: `non-standard form, and its correction`,
+        means: `The grammar rule: a mixed number's fractional part must be proper — $3\\frac{5}{4}$ is legal arithmetic but non-standard spelling; absorbing the extra whole gives $4\\frac{1}{4}$, per **What Is a Mixed Number** above.`,
+        cases: `Mid-computation the rule relaxes — carrying and borrowing pass through improper fractional parts freely; only final answers owe the standard form.`,
+        confusedWith: `An error in value. $3\\frac{5}{4}$ and $4\\frac{1}{4}$ are the same number — the rule polices spelling, not arithmetic; marking the first "wrong" confuses form with value.`,
+      },
+      {
+        id: 'sign-scope',
+        tex: `$-2\\frac{3}{4}$`,
+        read: `negative two and three quarters`,
+        means: `The minus grips the whole package: $-2\\frac{3}{4} = -(2 + \\frac{3}{4}) = -2.75$ — never $-2 + \\frac{3}{4}$. The hidden plus inherits the sign along with everything else.`,
+        cases: `Computation makes the scope explicit — convert first ($-\\frac{11}{4}$), operate second; keeping the mixed form through [subtraction](!/arithmetic/fractions/adding-subtracting) invites the split-sign slip.`,
+        confusedWith: `A signed whole with a positive fraction. Reading the parts separately gives $-2 + 0.75 = -1.25$, off by $1.5$ from the true $-2.75$ — the [unary minus](!/complex-numbers/additive-inverse#3) binds the pair, not just the first part.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/arithmetic`,
+    symbolsLabel: `All arithmetic symbols`,
+    parentHref: `/arithmetic/fractions`,
+    parentLabel: `Fractions`,
   },
 
   obj2: {
@@ -1244,6 +1281,25 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:``,
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

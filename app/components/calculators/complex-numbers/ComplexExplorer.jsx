@@ -246,6 +246,7 @@ import {
   clamp,
   formatNum,
   formatComplex,
+  getQuadrant,
   ComplexPlane,
   PlanePoint,
   PlaneProjection,
@@ -266,6 +267,7 @@ const C = THEME.colors;
 
 export default function ComplexExplorer({
   explanationEngine,
+  explanations,
   initialA = 2,
   initialB = 3,
   initialRange = 5,
@@ -289,6 +291,19 @@ export default function ComplexExplorer({
 
   const explanation = getExplanation(a, b);
   const modulus = Math.sqrt(a * a + b * b);
+
+  // Page-supplied per-state panel entries (keyed origin / purelyReal /
+  // pureImaginary / quadrantI..IV) are appended to the engine's lines; when
+  // no explanations prop is passed the built-in engine output stands alone.
+  const stateKey =
+    a === 0 && b === 0 ? "origin"
+    : b === 0 ? "purelyReal"
+    : a === 0 ? "pureImaginary"
+    : `quadrant${getQuadrant(a, b)}`;
+  const panelLines =
+    explanations && explanations[stateKey]
+      ? [...explanation.lines, explanations[stateKey]]
+      : explanation.lines;
 
   return (
     <div className={dmSans.className} style={styles.root}>
@@ -363,7 +378,7 @@ export default function ComplexExplorer({
 
           <ExplanationPanel
             title={explanation.title}
-            lines={explanation.lines}
+            lines={panelLines}
             highlight={explanation.highlight}
           />
 
@@ -387,7 +402,9 @@ const styles = {
     padding: "20px 28px",
     boxSizing: "border-box",
     color: C.text,
-    maxWidth: "1080px",
+    width: "90%",
+    minWidth: "90%",
+    maxWidth: "90%",
     margin: "0 auto",
   },
   header: {
@@ -395,7 +412,7 @@ const styles = {
     marginBottom: "16px",
     borderBottom: `2px solid ${C.navy}`,
     paddingBottom: "10px",
-    maxWidth: "1180px",
+    maxWidth: "none",
     margin: "0 auto 16px auto",
   },
   subtitle: {
@@ -407,15 +424,16 @@ const styles = {
   main: {
     display: "flex",
     gap: "24px",
-    maxWidth: "1180px",
+    width: "100%",
+    maxWidth: "none",
     margin: "0 auto",
     alignItems: "flex-start",
-    flexWrap: "wrap",
+    flexWrap: "nowrap",
   },
   leftCol: {
     flex: "1 1 500px",
     minWidth: "340px",
-    maxWidth: "560px",
+    maxWidth: "none",
     display: "flex",
     flexDirection: "column",
     gap: "10px",

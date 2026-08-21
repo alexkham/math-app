@@ -10,6 +10,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -610,25 +611,40 @@ The pattern is consistent: whatever signs the real and imaginary parts carry, th
   after: ``,
   link: '',
 },
-obj3: {
-  title: `Notation`,
-  content: `The additive inverse of $z$ is written $-z$. This notation mirrors the real number convention and means exactly what it suggests: the number that, when added to $z$, yields zero.
-
-When $z$ is given explicitly, the inverse can be written in multiple equivalent forms. For $z = a + bi$, the additive inverse may appear as $-z$, as $-(a + bi)$, or as $-a - bi$. All three expressions denote the same complex number.
-
-Parentheses matter when expressions become nested. The additive inverse of $-3 + 2i$ is $-(-3 + 2i) = 3 - 2i$. Without parentheses, $--3 + 2i$ becomes ambiguous or malformed. Writing $-(-3 + 2i)$ makes the double negation explicit and the result clear.
-
-In equations, the statement $z + w = 0$ implies $w = -z$. If two complex numbers sum to zero, each is the additive inverse of the other. This relationship is symmetric: if $w = -z$, then equally $z = -w$.
-
-When working with the [algebraic form](!/complex-numbers/algebraic-form), writing the inverse as $-a - bi$ often proves clearest. When working abstractly or with named variables, $-z$ is more compact. Context determines which notation communicates most effectively.
-
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
-
-`,
-  before: ``,
-  after: ``,
-  link: '',
+notation: {
+  title: `Additive Inverse Notation`,
+  lead: `One glyph carries this page: the minus. This section owns its unary job on a complex number, the three equivalent spellings it produces, and the boundary between minus-as-inverse and minus-as-subtraction.`,
+  inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation); the conjugate bar is owned by [its page](!/complex-numbers/complex-conjugate#notation), the modulus bars by [absolute value](!/complex-numbers/absolute-value#notation).`,
+  entries: [
+    {
+      id: 'neg-z',
+      tex: `$-z$`,
+      read: `negative z; minus z`,
+      means: `The unary minus as an operator: $-z$ names the number that cancels $z$, and for $z = a + bi$ it flips **both** signs — $-z = -a - bi$, per **Additive Inverse of a Complex Number** above. One mark, one point-reflection through the origin.`,
+      cases: `Modulus survives, direction reverses: $|-z| = |z|$ while $\\arg(-z) = \\arg(z) + \\pi$ — **Geometric Interpretation** below; on the polar side the sign is absorbed into the [exponent](!/complex-numbers/exponential-form#notation), $-z = re^{i(\\theta + \\pi)}$.`,
+      confusedWith: `The conjugate. [The bar](!/complex-numbers/complex-conjugate#notation) flips one sign, the minus flips two — reflection across the real axis versus through the origin; **Additive Inverse vs. Complex Conjugate** below draws both pictures.`,
+    },
+    {
+      id: 'neg-spellings',
+      tex: `$-(a + bi)$`,
+      read: `minus, quantity a plus b i`,
+      means: `Three equivalent spellings, one number: $-z$, $-(a + bi)$, $-a - bi$. Compact for abstract work, parenthesized before distributing, fully distributed when the components matter — context picks the form.`,
+      cases: `Nesting demands parentheses: the inverse of $-3 + 2i$ is $-(-3 + 2i) = 3 - 2i$, and a bare $--3 + 2i$ is malformed — double negation must be scoped.`,
+      confusedWith: `Half-distribution. $-(a + bi) = -a + bi$ is the standard slip — the minus must reach the $bi$ term too; **Common Mistakes** below collects the variants.`,
+    },
+    {
+      id: 'minus-two-jobs',
+      tex: `$z - w$`,
+      read: `z minus w`,
+      means: `The glyph's second job: between two numbers it subtracts, and the jobs meet in the definition $z - w = z + (-w)$ — **Connection to Subtraction** below. Same stroke, different arity.`,
+      cases: `Unary binds to one operand ($-w$, $-3i$); binary sits between two ($z - w$). Calculators give them separate keys and programming languages parse them by position — mathematics never marks the difference visually.`,
+      confusedWith: `A sign attached to $w$. In $z - w$ the minus belongs to the operation, not the number; rewriting as $z + (-w)$ moves it onto the number explicitly — which is exactly what makes the identity useful.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/complex-numbers`,
+  symbolsLabel: `All complex number symbols`,
+  parentHref: `/complex-numbers`,
+  parentLabel: `Complex Numbers`,
 },
 obj4: {
   title: `Geometric Interpretation`,
@@ -787,7 +803,7 @@ The most frequent mistake is negating only the real part. Given $z = 3 + 2i$, a 
 
 The reverse error also occurs: negating only the imaginary part. Writing $-z = 3 - 2i$ instead of $-z = -3 - 2i$ produces the conjugate, not the additive inverse. Again, both components must change sign.
 
-Confusion between $-z$ and $\overline{z}$ underlies both mistakes. The conjugate flips one sign; the additive inverse flips both. Keeping this distinction clear prevents the errors.
+Confusion between $-z$ and $\\overline{z}$ underlies both mistakes. The conjugate flips one sign; the additive inverse flips both. Keeping this distinction clear prevents the errors.
 
 Sign mistakes compound in subtraction. Computing $(5 + 2i) - (3 - 4i)$ requires the additive inverse of $3 - 4i$, which is $-3 + 4i$. The full calculation:
 
@@ -1061,10 +1077,21 @@ export default function AdditiveInversePage({
     },
     {
         id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
+        title:sectionsContent.notation.title,
+        link:``,
         content:[
-          sectionsContent.obj3.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
