@@ -356,7 +356,7 @@
 
 // The PMF, denoted $p(x)$ or $P(X = x)$, tells us exactly how much probability "mass" sits at each possible outcome. Think of it like distributing weight across specific points rather than spreading it continuously. For a fair six-sided die, the PMF assigns exactly $\\frac{1}{6}$ probability mass to each outcome from 1 to 6.
 
-// Two critical properties define valid PMFs: First, probabilities must be non-negative: $p(x) \\geq 0$ for all $x$. Second, the total probability must equal one: $\\sum_{\\text{all } x} p(x) = 1$. This captures the certainty that *something* must occur when we observe the random variable.
+// Two critical properties define valid PMFs: First, probabilities must be non-negative: $p(x) \\geq 0$ for all $x$. Second, the total probability must equal one: $\\sum_{\\text{all } x} p(x) = 1$. This captures the certainty that **something** must occur when we observe the random variable.
 
 // Visualizing a PMF typically involves vertical bars or "impulses" at each possible value, with heights representing probabilities. This distinct, separated structure contrasts sharply with the smooth curves of continuous probability density functions. The PMF gives us complete probabilistic information—knowing it lets us calculate probabilities for any event involving our discrete random variable, whether we're finding $P(X > 3)$ or computing expected values and variances.
 //       `,
@@ -379,7 +379,7 @@
 
 // This area represents the actual probability of landing between $a$ and $b$.
 
-// For any legitimate PDF: first, $f(x) \\geq 0$ always (negative density makes no sense), and second, the total area under the entire curve must equal 1 since the variable has to take *some* value:
+// For any legitimate PDF: first, $f(x) \\geq 0$ always (negative density makes no sense), and second, the total area under the entire curve must equal 1 since the variable has to take **some** value:
 // $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
 
 // The takeaway: PDFs show you where probability concentrates through their shape. Tall peaks mean common values. Only areas—not heights—give you probabilities.
@@ -719,6 +719,7 @@ import Head from 'next/head'
 import DiscreteProbabilityDistributions from '@/app/components/visualizations/probability/discrete-distribution/DiscreteProbabilityDistributions'
 import ContinuousProbabilityDistributions from '@/app/components/visualizations/probability/continuous-distribution/ContinuousProbabilityDistribution'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1027,36 +1028,43 @@ export async function getStaticProps(){
 
     notation:{
       title:`Notation and Symbols`,
-      content:`
-When we work with probability functions, a few symbols show up again and again.
-Here is what they **really** mean in everyday language:
-
-$(X)$ — this is the random variable. Think of it as the "thing that can happen" when you run a random experiment: the number on a die, waiting time, measurement, etc.
-
- $(x)$ — a particular outcome or value that (X) might take. It's just one possible result you might see.
-
- $(p(x))$ — what the probability function looks like in the **discrete** case. It tells you directly: *"What is the chance that the outcome is exactly (x)?"
-
- $(f(x))$ — what the probability function looks like in the **continuous** case. It's not the probability of (X = x) (that's zero for continuous variables). Instead, it shows how "dense" the probability is around that point — where the curve rises or falls.
-
- $(P(,\\cdot,))$ — our general way to talk about the probability of something happening.
-  Whatever we put inside the parentheses describes the event:
-  $(P(X=3))$, $(P(X>10))$, $(P(a \\le X \\le b))$, etc.
-
- $(\\int f(x),dx)$ — the tool we use to get actual probabilities in the continuous case.
-  It measures the **area under the curve** over an interval, which *is* the probability for continuous variables.
-
-This is the "language" we use to describe how probabilities behave, whether the outcomes are separate points or part of a continuous range.
-
-To typeset these symbols, the [LaTeX](!/latex) reference lists the command behind each one — $\\int$ is \\int, for instance — and the [mathematical keyboard](!/keyboard) inserts them without any code.
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      
-`,
+      lead: `Probability's core grammar in three marks: the case distinction that separates a variable from its value, the operator that turns an event into a number, and the two letters that split discrete from continuous. Every symbol is catalogued among the [probability symbols](!/math-symbols/probability), with commands in the [LaTeX](!/latex) reference and keys on the [mathematical keyboard](!/keyboard).`,
+      inherited: `The integral $\\int f(x)\\,dx$ that turns density into probability is owned by [definite integrals](!/calculus/integrals/definite#2); the inequality signs inside events by [inequality notation](!/algebra/inequalities/linear#notation); function grammar by [function notation](!/functions/basics#5).`,
+      entries: [
+        {
+          id: 'capital-x-lowercase-x',
+          tex: `$X$ · $x$`,
+          read: `capital X, the random variable; lowercase x, a value it takes`,
+          means: `Case carries the distinction: capital $X$ names the random variable — the whole uncertain quantity, before any experiment runs — while lowercase $x$ names one particular value it might take. $P(X = x)$ reads "the chance the variable lands on that value".`,
+          cases: `Several variables queue alphabetically — $X, Y, Z$ — with $x_1, x_2$ enumerating values; observed data conventionally arrives lowercase, which is why sample lists are written $x_1, \\ldots, x_n$.`,
+          confusedWith: `A single letter used twice. $X$ and $x$ are different objects, not one symbol in two sizes — writing $P(x = x)$ collapses the statement into a tautology and loses the question being asked.`,
+        },
+        {
+          id: 'p-operator',
+          tex: `$P(\\cdot)$`,
+          read: `P of — the probability of`,
+          means: `An operator that eats an event and returns a number in $[0,1]$: whatever describes the event goes inside the parentheses — $P(X = 3)$, $P(X > 10)$, $P(a \\le X \\le b)$. The dot is a placeholder for the empty slot, not a multiplication.`,
+          cases: `Capital $P$ is reserved for the probability measure — a set function on events, which is why [the axioms](!/probability/axioms) speak of $P(A)$ and $P(\\Omega)$ rather than $P(x)$; the lowercase $p$ is a different animal, below.`,
+          confusedWith: `Function application on a number. $P$ takes an **event**, not a value — $P(3)$ is meaningless without a variable to compare against; the event $X = 3$ is what carries the meaning.`,
+        },
+        {
+          id: 'pmf-pdf-letters',
+          tex: `$p(x)$ · $f(x)$`,
+          read: `little p of x; f of x`,
+          means: `Two letters mark the great divide: $p(x)$ is the discrete probability mass — an actual chance — while $f(x)$ is the continuous density, a rate rather than a probability. **How the Probability Function Behaves** below works the distinction.`,
+          cases: `The split has teeth: $p(x)$ may be read straight off, while $f(x)$ must be integrated over an interval before it means anything — for a continuous variable $P(X = x) = 0$ at every single point.`,
+          alsoWritten: `Subscripts disambiguate when several variables share a page — $p_X(x)$, $f_X(x)$ — standard in multivariable work and mandatory once joint and marginal functions appear together.`,
+          confusedWith: `$f(x)$ as a probability. A density can exceed $1$ without contradiction — only its area is bounded; reading a tall curve as "more than certain" is the classic misstep the continuous case invites.`,
+        },
+      ],
+      symbolsHref: `/math-symbols/probability`,
+      symbolsLabel: `All probability symbols`,
+      parentHref: `/probability`,
+      parentLabel: `Probability`,
       before:``,
       after:``,
-  
-  
+
+
     },
     ways:{
       title:`Ways to Figure Out the Probability Function`,
@@ -1229,7 +1237,7 @@ The **Probability Mass Function (PMF)** serves as the fundamental building block
 
 The PMF, denoted $p(x)$ or $P(X = x)$, tells us exactly how much probability "mass" sits at each possible outcome. Think of it like distributing weight across specific points rather than spreading it continuously. For a fair six-sided die, the PMF assigns exactly $\\frac{1}{6}$ probability mass to each outcome from 1 to 6.
 
-Two critical properties define valid PMFs: First, probabilities must be non-negative: $p(x) \\geq 0$ for all $x$. Second, the total probability must equal one: $\\sum_{\\text{all } x} p(x) = 1$. This captures the certainty that *something* must occur when we observe the random variable.
+Two critical properties define valid PMFs: First, probabilities must be non-negative: $p(x) \\geq 0$ for all $x$. Second, the total probability must equal one: $\\sum_{\\text{all } x} p(x) = 1$. This captures the certainty that **something** must occur when we observe the random variable.
 
 Visualizing a PMF typically involves vertical bars or "impulses" at each possible value, with heights representing probabilities. This distinct, separated structure contrasts sharply with the smooth curves of continuous probability density functions. The PMF gives us complete probabilistic information—knowing it lets us calculate probabilities for any event involving our discrete random variable, whether we're finding $P(X > 3)$ or computing expected values and variances.
       `,
@@ -1252,7 +1260,7 @@ $$P(a \\leq X \\leq b) = \\int_{a}^{b} f(x)\\,dx$$
 
 This area represents the actual probability of landing between $a$ and $b$.
 
-For any legitimate PDF: first, $f(x) \\geq 0$ always (negative density makes no sense), and second, the total area under the entire curve must equal 1 since the variable has to take *some* value:
+For any legitimate PDF: first, $f(x) \\geq 0$ always (negative density makes no sense), and second, the total area under the entire curve must equal 1 since the variable has to take **some** value:
 $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
 
 The takeaway: PDFs show you where probability concentrates through their shape. Tall peaks mean common values. Only areas—not heights—give you probabilities.
@@ -1448,7 +1456,18 @@ export default function ProbabilityFunctionPage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-          sectionsContent.notation.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
      {

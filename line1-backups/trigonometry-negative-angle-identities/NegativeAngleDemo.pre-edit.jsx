@@ -2777,7 +2777,6 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
-import { processContent } from '@/app/utils/contentProcessor';
 
 /* ============================================================
    NegativeAngleDemo — v3
@@ -3210,7 +3209,7 @@ function MiniSolutionPanel({ steps, stepsTitle = 'Derivation', placeholder, onSt
                 color: isActive ? COLORS.text : COLORS.textMuted,
                 lineHeight: 1.5, margin: 0, paddingLeft: '42px',
                 transition: 'color 0.2s ease',
-              }}>{typeof step.description === 'string' ? processContent(step.description) : step.description}</p>
+              }}>{step.description}</p>
             </div>
           );
         })}

@@ -1,3 +1,2563 @@
+// // // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// // // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// // // import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// // // import Sections from '@/app/components/page-components/section/Sections'
+// // // import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// // // import React from 'react'
+// // // import '../../pages.css'
+// // // import Head from 'next/head'
+// // // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// // // import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+// // // import { tableHeaders } from '@/app/styles/theme'
+// // // import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
+// // // import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
+
+// // // export async function getStaticProps(){
+// // // const keyWords = [
+// // //   "cardinality of sets",
+// // //   "cardinality definition",
+// // //   "finite sets",
+// // //   "infinite sets",
+// // //   "countable sets",
+// // //   "uncountable sets",
+// // //   "countably infinite",
+// // //   "cardinality of real numbers",
+// // //   "cardinality of integers",
+// // //   "bijection between sets",
+// // //   "cantors diagonal argument",
+// // //   "comparing infinite sets",
+// // //   "power set cardinality",
+// // //   "size of infinity"
+// // // ]
+// // //   // •
+
+// // // //   \u2022 First item
+// // // // \u2022 Second item
+
+  
+// // // // <hr style="border-width:1px;"></hr>
+
+// // // // <hr style="color:blue;" />
+
+// // // // <hr style="border-color:#3498db; border-width:1px;" />
+
+
+
+// // // // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// // // // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+// // //         //     {processContent(sectionsContent.normal.notation)}
+// // //         // </div>,
+
+
+// // // //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+// // // //     {processContent(sectionsContent.normal.parameters)}
+// // // // </div>,
+        
+// // // //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+// // // //                   {processContent(sectionsContent.obj4.content)}
+// // // //                   </div>,
+
+
+// // // //  <div key={'dist'} style={{
+// // // //                     textAlign: 'center',
+// // // //                     transform: 'scale(0.98)',
+// // // //                     transformOrigin: 'center',
+// // // //                     marginTop:'50px',
+// // // //                     marginLeft:'-150px'
+// // // //                   }} dangerouslySetInnerHTML={{ 
+// // // //                     __html:   sectionContent.distributions.svg,
+// // // //                   }} />
+
+// // //   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// // //   // ---------- TABLES ----------
+
+// // //   // obj5 — comparison: countable vs uncountable
+// // //   const obj5Table = `
+// // // <table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// // //   <thead>
+// // //     <tr>
+// // //       <th style="${tableHeaders.comparison}">Category</th>
+// // //       <th style="${tableHeaders.comparison}">Defining condition</th>
+// // //       <th style="${tableHeaders.comparison}">Example sets</th>
+// // //       <th style="${tableHeaders.comparison}">Standard proof technique</th>
+// // //     </tr>
+// // //   </thead>
+// // //   <tbody>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Countably infinite</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a bijection with ℕ exists</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℕ, ℤ, ℚ; even integers</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">construct an explicit listing &nbsp;(sequence) of all elements</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Uncountable</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">no bijection with ℕ is possible</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">ℝ; any interval &nbsp;(a, b); &nbsp;𝒫(ℕ)</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">Cantor&apos;s diagonal argument &nbsp;(or Cantor&apos;s theorem)</td>
+// // //     </tr>
+// // //   </tbody>
+// // // </table>
+// // // `
+
+// // //   // obj6 — aggregation: cardinality comparison relations as a notation reference card
+// // //   const obj6Table = `
+// // // <table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// // //   <thead>
+// // //     <tr>
+// // //       <th style="${tableHeaders.aggregation}">Relation</th>
+// // //       <th style="${tableHeaders.aggregation}">Meaning</th>
+// // //       <th style="${tableHeaders.aggregation}">Witnessed by</th>
+// // //     </tr>
+// // //   </thead>
+// // //   <tbody>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|A| = |B|</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A and B have the same cardinality</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a bijection &nbsp;A → B</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|A| ≤ |B|</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is no larger than B</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">an injection &nbsp;A → B</td>
+// // //     </tr>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">|A| &lt; |B|</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">A is strictly smaller than B</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">an injection exists, but no bijection does</td>
+// // //     </tr>
+// // //   </tbody>
+// // // </table>
+// // // `
+
+// // //   // obj7 — summary: capstone hierarchy of cardinalities
+// // //   const summaryTable = `
+// // // <table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// // //   <thead>
+// // //     <tr>
+// // //       <th style="${tableHeaders.summary}">Cardinality</th>
+// // //       <th style="${tableHeaders.summary}">Description</th>
+// // //       <th style="${tableHeaders.summary}">Representative set(s)</th>
+// // //     </tr>
+// // //   </thead>
+// // //   <tbody>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">empty</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∅ &nbsp;(the only set with this cardinality)</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">finite n &nbsp;(n ∈ ℕ)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">bounded element count</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, ..., n}; &nbsp;the English alphabet &nbsp;(n = 26)</td>
+// // //     </tr>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℵ<sub>0</sub> &nbsp;(aleph-null)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">countably infinite — the smallest infinite cardinality</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℕ, ℤ, ℚ; &nbsp;the even integers</td>
+// // //     </tr>
+// // //     <tr>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">𝔠 = 2<sup>ℵ<sub>0</sub></sup> &nbsp;(continuum)</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">uncountable; the size of the real line</td>
+// // //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ; &nbsp;any interval &nbsp;(a, b); &nbsp;𝒫(ℕ)</td>
+// // //     </tr>
+// // //     <tr style="background: #f8f9fa;">
+// // //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">2<sup>𝔠</sup>, &nbsp;2<sup>(2<sup>𝔠</sup>)</sup>, &nbsp;...</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">strictly larger uncountable cardinalities &nbsp;(by Cantor&apos;s theorem)</td>
+// // //       <td style="padding: 12px 15px; color: #34495e;">𝒫(ℝ); &nbsp;𝒫(𝒫(ℝ)); &nbsp;the hierarchy continues without end</td>
+// // //     </tr>
+// // //   </tbody>
+// // // </table>
+// // // `
+
+// // // //   const sectionsContent = {
+// // // //     obj0: {
+// // // //   title: `Key Terms`,
+// // // //   content: `
+// // // // - [Cardinality](!/set-theory/definitions#cardinality) — the number of elements in a set
+// // // // - [Finite Set](!/set-theory/definitions#finite_set) — a set with a bounded element count
+// // // // - [Infinite Set](!/set-theory/definitions#infinite_set) — a set that cannot be matched with any finite count
+// // // // - [Countable Set](!/set-theory/definitions#countable_set) — a set whose elements can be listed in a sequence
+// // // // - [Uncountable Set](!/set-theory/definitions#uncountable_set) — a set too large to be listed sequentially
+// // // // - [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets related by having the same cardinality
+// // // // - [Power Set](!/set-theory/definitions#power_set) — always produces a set of strictly larger cardinality
+
+
+// // // // `,
+// // // //   before: ``,
+// // // //   after: `
+// // // // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+// // // //   link: '',
+// // // // },
+// // // //   obj1: {
+// // // //     title: `Definition of Cardinality`,
+// // // //     content: `
+// // // // The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$.
+
+// // // // For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, then $|A| = 3$. If $B = \\{1, 2, 3, 4, 5\\}$, then $|B| = 5$.
+
+// // // // The empty set contains no elements:
+
+// // // // $$|\\emptyset| = 0$$
+
+// // // // Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.
+// // // //     `,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: '',
+// // // //   },
+// // // //   obj2: {
+// // // //     title: `Finite Sets`,
+// // // //     content: `
+// // // // A set is finite if its elements can be counted with a natural number. Formally, a set $A$ is finite if there exists some $n \\in \\mathbb{N}$ such that:
+
+// // // // $$|A| = n$$
+
+// // // // This means a bijection exists between $A$ and the set $\\{1, 2, 3, \\ldots, n\\}$.
+
+// // // // Examples of finite sets:
+
+// // // // - The set of letters in the English alphabet has cardinality $26$
+
+// // // // - The set of prime numbers less than $20$ is $\\{2, 3, 5, 7, 11, 13, 17, 19\\}$ with cardinality $8$
+
+// // // // - Any [subset](!/set-theory/subsets) of a finite set is finite
+
+// // // // The cardinality of a finite set satisfies:
+
+// // // // $$|A \\cup B| = |A| + |B| - |A \\cap B|$$
+
+// // // // This inclusion-exclusion principle accounts for elements counted twice when sets overlap.
+// // // //     `,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: '',
+// // // //   },
+// // // //   obj3: {
+// // // //     title: `Infinite Sets`,
+// // // //     content: `
+// // // // A set is infinite if it is not finite — no natural number can express its size.
+
+// // // // The standard number sets are all infinite:
+
+// // // // - $\\mathbb{N} = \\{0, 1, 2, 3, \\ldots\\}$ — the natural numbers
+
+// // // // - $\\mathbb{Z} = \\{\\ldots, -2, -1, 0, 1, 2, \\ldots\\}$ — the integers
+
+// // // // - $\\mathbb{Q}$ — the rational numbers
+
+// // // // - $\\mathbb{R}$ — the real numbers
+
+// // // // A defining property of infinite sets: an infinite set can be put into one-to-one correspondence with a proper subset of itself. For example, the function $f(n) = 2n$ maps $\\mathbb{N}$ bijectively onto the even numbers, which form a proper subset of $\\mathbb{N}$.
+
+// // // // Not all infinite sets have the same cardinality. The integers and rationals turn out to be the same size as the natural numbers, but the real numbers form a strictly larger infinity.
+// // // //     `,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: '',
+// // // //   },
+// // // //   obj4: {
+// // // //     title: `Countable Sets`,
+// // // //     content: `
+// // // // A set is countably infinite if its elements can be put in one-to-one correspondence with the natural numbers $\\mathbb{N}$. Such a set can be listed as a sequence:
+
+// // // // $$a_1, a_2, a_3, \\ldots$$
+
+// // // // where every element appears exactly once.
+
+// // // // The integers $\\mathbb{Z}$ are countable. The listing:
+
+// // // // $$0, 1, -1, 2, -2, 3, -3, \\ldots$$
+
+// // // // establishes a bijection with $\\mathbb{N}$.
+
+// // // // The rationals $\\mathbb{Q}$ are countable despite appearing denser than $\\mathbb{Z}$. By arranging positive rationals in a grid and traversing diagonally, every rational is eventually listed.
+
+// // // // A set is called countable if it is either finite or countably infinite. Some authors reserve "countable" for countably infinite sets only — context determines the convention.
+
+// // // // The union of countably many countable sets remains countable. This is why $\\mathbb{Q}$ is countable: it is a countable union of countable sets (rationals with each fixed denominator).
+// // // //     `,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: '',
+// // // //   },
+// // // //   obj5: {
+// // // //     title: `Uncountable Sets`,
+// // // //     content: `
+// // // // A set is uncountable if it is infinite but not countable — its elements cannot be listed in a sequence that covers them all.
+
+// // // // The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
+
+// // // // Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
+
+// // // // The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
+// // // //     `,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: '',
+// // // //   },
+// // // //   obj6: {
+// // // //     title: `Comparing Cardinalities`,
+// // // //     content: `
+// // // // Cardinalities are compared using functions between sets:
+
+// // // // - $|A| = |B|$ when a bijection exists between $A$ and $B$
+
+// // // // - $|A| \\leq |B|$ when an injection (one-to-one function) exists from $A$ to $B$
+
+// // // // - $|A| < |B|$ when $|A| \\leq |B|$ and $|A| \\neq |B|$
+
+// // // // The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.
+
+// // // // Cantor's theorem establishes a fundamental inequality for any set $A$:
+
+// // // // $$|A| < |\\mathcal{P}(A)|$$
+
+// // // // The [power set](!/set-theory/subsets) always has strictly greater cardinality than the original set. For finite sets, this is immediate: $2^n > n$. For infinite sets, the proof uses a diagonal argument similar to the uncountability of $\\mathbb{R}$.
+
+// // // // This theorem implies there is no largest cardinality — given any set, its power set is strictly larger, producing an endless hierarchy of infinite sizes.
+// // // //     `,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: '',
+// // // //   },
+// // // //   obj7: {
+// // // //     title: `Summary: A Hierarchy of Cardinalities`,
+// // // //     content: `
+// // // // The sets covered above arrange themselves into a strict hierarchy of sizes. The table below collects the major rungs — empty, finite, countably infinite, the continuum, and beyond — with a representative set at each level. Cantor's theorem guarantees the hierarchy never ends: for every set, its power set is strictly larger, producing an unbounded tower of cardinalities.
+// // // //     `,
+// // // //     before: ``,
+// // // //     after: ``,
+// // // //     link: '',
+// // // //   },
+// // // // };
+
+// // // const sectionsContent = {
+// // //     obj0: {
+// // //   title: `Key Terms`,
+// // //   content: `
+// // // - [Cardinality](!/set-theory/definitions#cardinality) — the number of elements in a set
+// // // - [Finite Set](!/set-theory/definitions#finite_set) — a set with a bounded element count
+// // // - [Infinite Set](!/set-theory/definitions#infinite_set) — a set that cannot be matched with any finite count
+// // // - [Countable Set](!/set-theory/definitions#countable_set) — a set whose elements can be listed in a sequence
+// // // - [Uncountable Set](!/set-theory/definitions#uncountable_set) — a set too large to be listed sequentially
+// // // - [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets related by having the same cardinality
+// // // - [Power Set](!/set-theory/definitions#power_set) — always produces a set of strictly larger cardinality
+
+
+// // // `,
+// // //   before: ``,
+// // //   after: `
+// // // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+// // //   link: '',
+// // // },
+// // //   obj1: {
+// // //     title: `Definition of Cardinality`,
+// // //     content: `
+// // // The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$. This bar notation is one of several [cardinality symbols](!/math-symbols/set-theory) in standard use.
+
+// // // For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, then $|A| = 3$. If $B = \\{1, 2, 3, 4, 5\\}$, then $|B| = 5$.
+
+// // // The empty set contains no elements:
+
+// // // $$|\\emptyset| = 0$$
+
+// // // Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.
+// // //     `,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: '',
+// // //   },
+// // //   obj2: {
+// // //     title: `Finite Sets`,
+// // //     content: `
+// // // A set is finite if its elements can be counted with a natural number. Formally, a set $A$ is finite if there exists some $n \\in \\mathbb{N}$ such that:
+
+// // // $$|A| = n$$
+
+// // // This means a bijection exists between $A$ and the set $\\{1, 2, 3, \\ldots, n\\}$.
+
+// // // Examples of finite sets:
+
+// // // - The set of letters in the English alphabet has cardinality $26$
+
+// // // - The set of prime numbers less than $20$ is $\\{2, 3, 5, 7, 11, 13, 17, 19\\}$ with cardinality $8$
+
+// // // - Any [subset](!/set-theory/subsets) of a finite set is finite
+
+// // // The cardinality of a finite union of finite sets satisfies the inclusion-exclusion principle:
+
+// // // @academic[formula_callout:Inclusion-Exclusion - Two Sets
+// // // $$|A \\cup B| = |A| + |B| - |A \\cap B|$$
+// // // /set-theory/formulas#inclusion-exclusion_-_two_sets]@
+
+// // // @academic[formulas_link:Browse all set theory formulas
+// // // /set-theory/formulas]@
+
+// // // The correction term $|A \\cap B|$ accounts for elements counted twice when the sets overlap. The pattern extends to three sets by alternating between adding singles, subtracting pairwise intersections, and adding back the triple intersection:
+
+// // // @academic[formula_callout:Inclusion-Exclusion - Three Sets
+// // // $$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$$
+// // // /set-theory/formulas#inclusion-exclusion_-_three_sets]@
+
+// // // @academic[formulas_link:Browse all set theory formulas
+// // // /set-theory/formulas]@
+
+// // // When the sets share no elements, the correction terms vanish and the cardinality simply adds:
+
+// // // @academic[formula_callout:Cardinality of Disjoint Union
+// // // $$|A \\cup B| = |A| + |B| \\quad \\text{when } A \\cap B = \\emptyset$$
+// // // /set-theory/formulas#cardinality_of_disjoint_union]@
+
+// // // @academic[formulas_link:Browse all set theory formulas
+// // // /set-theory/formulas]@
+// // //     `,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: '',
+// // //   },
+// // //   obj3: {
+// // //     title: `Infinite Sets`,
+// // //     content: `
+// // // A set is infinite if it is not finite — no natural number can express its size.
+
+// // // The standard number sets are all infinite:
+
+// // // - $\\mathbb{N} = \\{0, 1, 2, 3, \\ldots\\}$ — the natural numbers
+
+// // // - $\\mathbb{Z} = \\{\\ldots, -2, -1, 0, 1, 2, \\ldots\\}$ — the integers
+
+// // // - $\\mathbb{Q}$ — the rational numbers
+
+// // // - $\\mathbb{R}$ — the real numbers
+
+// // // A defining property of infinite sets: an infinite set can be put into one-to-one correspondence with a proper subset of itself. For example, the function $f(n) = 2n$ maps $\\mathbb{N}$ bijectively onto the even numbers, which form a proper subset of $\\mathbb{N}$.
+
+// // // Not all infinite sets have the same cardinality. The integers and rationals turn out to be the same size as the natural numbers, but the real numbers form a strictly larger infinity.
+// // //     `,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: '',
+// // //   },
+// // //   obj4: {
+// // //     title: `Countable Sets`,
+// // //     content: `
+// // // A set is countably infinite if its elements can be put in one-to-one correspondence with the natural numbers $\\mathbb{N}$. Such a set can be listed as a sequence:
+
+// // // $$a_1, a_2, a_3, \\ldots$$
+
+// // // where every element appears exactly once.
+
+// // // The integers $\\mathbb{Z}$ are countable. The listing:
+
+// // // $$0, 1, -1, 2, -2, 3, -3, \\ldots$$
+
+// // // establishes a bijection with $\\mathbb{N}$.
+
+// // // The rationals $\\mathbb{Q}$ are countable despite appearing denser than $\\mathbb{Z}$. By arranging positive rationals in a grid and traversing diagonally, every rational is eventually listed.
+
+// // // A set is called countable if it is either finite or countably infinite. Some authors reserve "countable" for countably infinite sets only — context determines the convention.
+
+// // // The union of countably many countable sets remains countable. This is why $\\mathbb{Q}$ is countable: it is a countable union of countable sets (rationals with each fixed denominator).
+// // //     `,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: '',
+// // //   },
+// // //   obj5: {
+// // //     title: `Uncountable Sets`,
+// // //     content: `
+// // // A set is uncountable if it is infinite but not countable — its elements cannot be listed in a sequence that covers them all.
+
+// // // The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
+
+// // // Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
+
+// // // The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
+// // //     `,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: '',
+// // //   },
+
+// // //   notation: {
+// // //     title: `Cardinality Notation`,
+// // //     lead: `Size gets a bar pair, infinity gets a Hebrew letter, and the continuum gets a Fraktur one — three generations of marks for one question: how many members? The variant zoo ($\\operatorname{card}$, $\\#$, $n(A)$) rides along.`,
+// // //     inherited: `The braces, $\\in$, $\\varnothing$ and set-builder come from [set theory basics](!/set-theory/basics#2); the power set $\\mathcal{P}(A)$ and $2^A$ behind the continuum from the [subsets page](!/set-theory/subsets#6); the double-struck ℕ–ℝ chain likewise.`,
+// // //     entries: [
+// // //       {
+// // //         id: 'bar-pair',
+// // //         tex: `$|A|$`,
+// // //         read: `the cardinality of A`,
+// // //         means: `The bar pair around a set counts it: $|A| = 3$ for $A = \\{1, 2, 3\\}$ — **Definition of Cardinality** above. The same fence with a different tenant: on numbers the bars mean [absolute value](!/algebra/equations/absolute-value#notation), on sets they count.`,
+// // //         cases: `The variant zoo by dialect: $\\operatorname{card}(A)$ in formal set theory, $\\#A$ in combinatorics, $n(A)$ in school probability texts, $\\|A\\|$ occasionally — all the same question; this site keeps the bars.`,
+// // //         confusedWith: `A number's magnitude. $|{-5}| = 5$ but $|\\{-5\\}| = 1$ — bars around the number measure distance, bars around the braces count members; the inner braces flip the meaning entirely.`,
+// // //       },
+// // //       {
+// // //         id: 'aleph-null',
+// // //         tex: `$\\aleph_0$`,
+// // //         read: `aleph-null; aleph-nought`,
+// // //         means: `The first infinite cardinal: $|\\mathbb{N}| = \\aleph_0$ — the size shared by every countably infinite set, as **Countable Sets** above establishes. The aleph is mathematics' one standard Hebrew letter, Cantor's own choice.`,
+// // //         cases: `The subscript starts a ladder — $\\aleph_0, \\aleph_1, \\ldots$ enumerate ever-larger infinities; $|\\mathbb{Z}| = |\\mathbb{Q}| = \\aleph_0$ despite appearances, the working surprise of the countability arguments above.`,
+// // //         confusedWith: `The infinity symbol. $\\aleph_0$ is a cardinal — a size — while the $\\infty$ of [limit notation](!/calculus/limits/infinity#notation) is a direction of growth; the two never interchange, and $\\aleph_0 + 1 = \\aleph_0$ obeys arithmetic $\\infty$ was never given.`,
+// // //       },
+// // //       {
+// // //         id: 'continuum',
+// // //         tex: `$\\mathfrak{c} = 2^{\\aleph_0}$`,
+// // //         read: `the continuum; two to the aleph-null`,
+// // //         means: `The size of the reals: $|\\mathbb{R}| = \\mathfrak{c}$, in Fraktur type — the blackletter font also seen on the [real-part marks](!/complex-numbers/algebraic-form#2) $\\Re$ and $\\Im$. The exponent spelling $2^{\\aleph_0}$ reads it as a power-set size, via $|\\mathcal{P}(A)| = 2^{|A|}$ from the [subsets page](!/set-theory/subsets#6).`,
+// // //         cases: `Strictness is the point: $\\aleph_0 < \\mathfrak{c}$ — **Uncountable Sets** above proves the gap with Cantor's diagonal; every interval $(a, b)$ already has full cardinality $\\mathfrak{c}$.`,
+// // //         confusedWith: `A plain letter c. The Fraktur stroke is the reservation — roman $c$ is a free constant; and $2^{\\aleph_0}$ is not "a huge finite power of two" but a set-sized exponent, legal only in cardinal arithmetic.`,
+// // //       },
+// // //     ],
+// // //     symbolsHref: `/math-symbols/set-theory`,
+// // //     symbolsLabel: `All set theory symbols`,
+// // //     parentHref: `/set-theory`,
+// // //     parentLabel: `Set Theory`,
+// // //   },
+// // //   obj6: {
+// // //     title: `Comparing Cardinalities`,
+// // //     content: `
+// // // Cardinalities are compared using functions between sets:
+
+// // // - $|A| = |B|$ when a bijection exists between $A$ and $B$
+
+// // // - $|A| \\leq |B|$ when an injection (one-to-one function) exists from $A$ to $B$
+
+// // // - $|A| < |B|$ when $|A| \\leq |B|$ and $|A| \\neq |B|$
+
+// // // The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.
+
+// // // Cantor's theorem establishes a fundamental inequality for any set $A$:
+
+// // // @academic[formula_callout:Cantor Theorem
+// // // $$|A| < |\\mathcal{P}(A)|$$
+// // // /set-theory/formulas#cantor_theorem]@
+
+// // // @academic[formulas_link:Browse all set theory formulas
+// // // /set-theory/formulas]@
+
+// // // The [power set](!/set-theory/subsets) always has strictly greater cardinality than the original set. For finite sets, this is immediate: $2^n > n$. For infinite sets, the proof uses a diagonal argument similar to the uncountability of $\\mathbb{R}$.
+
+// // // This theorem implies there is no largest cardinality — given any set, its power set is strictly larger, producing an endless hierarchy of infinite sizes.
+// // //     `,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: '',
+// // //   },
+// // //   obj7: {
+// // //     title: `Summary: A Hierarchy of Cardinalities`,
+// // //     content: `
+// // // The sets covered above arrange themselves into a strict hierarchy of sizes. The table below collects the major rungs — empty, finite, countably infinite, the continuum, and beyond — with a representative set at each level. Cantor's theorem guarantees the hierarchy never ends: for every set, its power set is strictly larger, producing an unbounded tower of cardinalities.
+// // //     `,
+// // //     before: ``,
+// // //     after: ``,
+// // //     link: '',
+// // //   },
+// // // }; 
+
+
+// // // const introContent = {
+// // //   id: "intro",
+// // //   title: `Measuring the Size of Sets`,
+// // //   content: `
+// // // Cardinality measures the size of a [set](!/set-theory) — how many elements it contains. For finite sets, cardinality is simply a count. For infinite sets, the situation becomes more subtle: different infinite sets can have different sizes, and comparing them requires the concept of one-to-one correspondence. This leads to the distinction between countable and uncountable infinities.
+// // //   `,
+// // // };
+
+
+// // // const faqQuestions = {
+// // //   obj1: {
+// // //     question: "What is the cardinality of a set?",
+// // //     answer: "Cardinality measures the number of elements in a set, denoted |A|. For finite sets, it's a count. For infinite sets, two sets have equal cardinality when a bijection (one-to-one correspondence) exists between them.",
+// // //     sectionId: "1"
+// // //   },
+// // //   obj2: {
+// // //     question: "What is a finite set?",
+// // //     answer: "A set is finite if its elements can be counted with a natural number n. A bijection exists between the set and {1, 2, ..., n}. Any subset of a finite set is also finite.",
+// // //     sectionId: "2"
+// // //   },
+// // //   obj3: {
+// // //     question: "What is an infinite set?",
+// // //     answer: "A set is infinite if no natural number expresses its size. Infinite sets can be mapped bijectively onto proper subsets of themselves — for example, natural numbers onto even numbers via f(n) = 2n.",
+// // //     sectionId: "3"
+// // //   },
+// // //   obj4: {
+// // //     question: "What does countably infinite mean?",
+// // //     answer: "A set is countably infinite if its elements can be listed as a sequence a₁, a₂, a₃, ... covering every element exactly once. The integers and rationals are countably infinite.",
+// // //     sectionId: "4"
+// // //   },
+// // //   obj5: {
+// // //     question: "Are the rational numbers countable?",
+// // //     answer: "Yes. By arranging positive rationals in a grid and traversing diagonally, every rational appears in the sequence. The union of countably many countable sets remains countable.",
+// // //     sectionId: "4"
+// // //   },
+// // //   obj6: {
+// // //     question: "What is an uncountable set?",
+// // //     answer: "A set is uncountable if it is infinite but cannot be listed in a sequence. The real numbers are uncountable — Cantor's diagonal argument proves no list can include every real number.",
+// // //     sectionId: "5"
+// // //   },
+// // //   obj7: {
+// // //     question: "What is Cantor's diagonal argument?",
+// // //     answer: "Assume all reals between 0 and 1 are listed. Construct a new number by making its n-th digit differ from the n-th digit of the n-th listed number. This number isn't in the list, proving the reals are uncountable.",
+// // //     sectionId: "5"
+// // //   },
+// // //   obj8: {
+// // //     question: "How do you compare cardinalities of infinite sets?",
+// // //     answer: "|A| ≤ |B| when an injection exists from A to B. |A| = |B| when a bijection exists. The Cantor-Schröder-Bernstein theorem states: if |A| ≤ |B| and |B| ≤ |A|, then |A| = |B|.",
+// // //     sectionId: "6"
+// // //   },
+// // //   obj9: {
+// // //     question: "What is Cantor's theorem about power sets?",
+// // //     answer: "For any set A, |A| < |P(A)| — the power set always has strictly greater cardinality. This implies there is no largest infinity; each power set produces a larger one.",
+// // //     sectionId: "6"
+// // //   },
+// // //   obj10: {
+// // //     question: "What is the cardinality of the real numbers?",
+// // //     answer: "The cardinality of ℝ is denoted 𝔠 (continuum) or 2^ℵ₀, equal to the cardinality of the power set of ℕ. Every interval (a, b) has this same cardinality.",
+// // //     sectionId: "5"
+// // //   }
+// // // }
+
+
+// // // const schemas = {
+// // //   learningResource: {
+// // //     "@context": "https://schema.org",
+// // //     "@type": "LearningResource",
+// // //     "name": "Cardinality of Sets",
+// // //     "description": "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
+// // //     "url": "https://www.learnmathclass.com/set-theory/cardinality",
+// // //     "inLanguage": "en-US",
+// // //     "learningResourceType": "Explanation",
+// // //     "educationalLevel": "High School, College",
+// // //     "educationalUse": "Learning",
+// // //     "audience": {
+// // //       "@type": "EducationalAudience",
+// // //       "educationalRole": "student"
+// // //     },
+// // //     "about": {
+// // //       "@type": "Thing",
+// // //       "name": "Cardinality of Sets"
+// // //     },
+// // //     "teaches": [
+// // //       "Definition of cardinality and bijections",
+// // //       "Finite sets and counting",
+// // //       "Properties of infinite sets",
+// // //       "Countable and countably infinite sets",
+// // //       "Uncountable sets and Cantor's diagonal argument",
+// // //       "Comparing cardinalities and Cantor's theorem"
+// // //     ],
+// // //     "keywords": keyWords.join(", "),
+// // //     "author": {
+// // //       "@type": "Organization",
+// // //       "name": "Learn Math Class"
+// // //     },
+// // //     "publisher": {
+// // //       "@type": "Organization",
+// // //       "name": "Learn Math Class"
+// // //     },
+// // //     "datePublished": "2024-01-15",
+// // //     "dateModified": new Date().toISOString()
+// // //   },
+
+// // //   breadcrumb: {
+// // //     "@context": "https://schema.org",
+// // //     "@type": "BreadcrumbList",
+// // //     "itemListElement": [
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 1,
+// // //         "name": "Home",
+// // //         "item": "https://www.learnmathclass.com"
+// // //       },
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 2,
+// // //         "name": "Set Theory",
+// // //         "item": "https://www.learnmathclass.com/set-theory"
+// // //       },
+// // //       {
+// // //         "@type": "ListItem",
+// // //         "position": 3,
+// // //         "name": "Cardinality",
+// // //         "item": "https://www.learnmathclass.com/set-theory/cardinality"
+// // //       }
+// // //     ]
+// // //   },
+
+// // //   faq: {
+// // //     "@context": "https://schema.org",
+// // //     "@type": "FAQPage",
+// // //     "mainEntity": Object.keys(faqQuestions).map(key => ({
+// // //       "@type": "Question",
+// // //       "name": faqQuestions[key].question,
+// // //       "acceptedAnswer": {
+// // //         "@type": "Answer",
+// // //         "text": faqQuestions[key].answer
+// // //       }
+// // //     }))
+// // //   }
+// // // }
+
+
+
+
+
+// // //   // Operation A demonstration unit: frozen tool states + attached explanation
+// // //   // panel + tool link, one frame. Rendered as a content-array item.
+// // //   const demoUnits = {
+// // //     inclusionExclusion: demoUnitFrame({
+// // //       svg: [twoSetsVennDiagrams.union, twoSetsVennDiagrams.disjoint],
+// // //       caption: 'Why the correction term exists',
+// // //       text: 'Two frozen configurations tell the whole story: when the circles overlap (top), the lens lies inside both sets &#8212; summing |A| + |B| counts it twice, so |A &#8745; B| is subtracted once. When the sets are disjoint (bottom), there is no lens and the counts simply add. Slide between the two situations yourself on the',
+// // //       href: '/set-theory/visual-tools/two-sets-basic-venn',
+// // //       linkText: 'two-set Venn explorer',
+// // //     }),
+// // //   };
+
+// // //   return {
+// // //   props: {
+// // //     sectionsContent,
+// // //     introContent,
+// // //     obj5Table,
+// // //     obj6Table,
+// // //     summaryTable,
+// // //     faqQuestions,
+// // //     schemas,
+// // //     demoUnits,
+// // //     seoData: {
+// // //       title: "Cardinality of Sets: Finite, Countable & Uncountable | Learn Math Class",
+// // //       description: "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
+// // //       keywords: keyWords.join(", "),
+// // //       url: "/set-theory/cardinality",
+// // //       name: "Cardinality of Sets"
+// // //     },
+// // //   }
+// // // }
+// // //    }
+
+
+// // // export default function CardinalityPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+
+// // //   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+// // //   const genericSections=[
+// // //     {
+// // //         id:'0',
+// // //         title:sectionsContent.obj0.title,
+// // //         link:sectionsContent.obj0.link,
+// // //         content:[
+// // //           sectionsContent.obj0.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'1',
+// // //         title:sectionsContent.obj1.title,
+// // //         link:sectionsContent.obj1.link,
+// // //         content:[
+// // //           sectionsContent.obj1.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'2',
+// // //         title:sectionsContent.obj2.title,
+// // //         link:sectionsContent.obj2.link,
+// // //         content:[
+// // //           sectionsContent.obj2.content,
+// // //           <div key={'unit-inclusion-exclusion'} dangerouslySetInnerHTML={{ __html: demoUnits.inclusionExclusion }} />,
+// // //           `Counting without double-counting is the entire craft of finite cardinality — inclusion-exclusion just states it as a formula, and it scales to any number of sets.`,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'3',
+// // //         title:sectionsContent.obj3.title,
+// // //         link:sectionsContent.obj3.link,
+// // //         content:[
+// // //           sectionsContent.obj3.content,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'4',
+// // //         title:sectionsContent.obj4.title,
+// // //         link:sectionsContent.obj4.link,
+// // //         content:[
+// // //           sectionsContent.obj4.content,
+// // //         ]
+// // //     },
+
+// // //     // obj5: prose + countable-vs-uncountable comparison table
+// // //     // (placed here since obj4 + obj5 together define both categories; the table synthesizes both)
+// // //     {
+// // //         id:'5',
+// // //         title:sectionsContent.obj5.title,
+// // //         link:sectionsContent.obj5.link,
+// // //         content:[
+// // //           sectionsContent.obj5.content,
+// // //           <div
+// // //             key={'obj5-table'}
+// // //             style={tableWrapStyle}
+// // //             dangerouslySetInnerHTML={{ __html: obj5Table }}
+// // //           />,
+// // //         ]
+// // //     },
+
+// // //     // obj6: prose + cardinality-comparison-relations aggregation table
+// // //     {
+// // //         id:'notation',
+// // //         title:sectionsContent.notation.title,
+// // //         link:``,
+// // //         content:[
+// // //           <NotationSection
+// // //             key={'notation'}
+// // //             title={sectionsContent.notation.title}
+// // //             lead={sectionsContent.notation.lead}
+// // //             inherited={sectionsContent.notation.inherited}
+// // //             entries={sectionsContent.notation.entries}
+// // //             symbolsHref={sectionsContent.notation.symbolsHref}
+// // //             symbolsLabel={sectionsContent.notation.symbolsLabel}
+// // //             parentHref={sectionsContent.notation.parentHref}
+// // //             parentLabel={sectionsContent.notation.parentLabel}
+// // //             theme={'navy'}
+// // //           />,
+// // //         ]
+// // //     },
+// // //     {
+// // //         id:'6',
+// // //         title:sectionsContent.obj6.title,
+// // //         link:sectionsContent.obj6.link,
+// // //         content:[
+// // //           sectionsContent.obj6.content,
+// // //           <div
+// // //             key={'obj6-table'}
+// // //             style={tableWrapStyle}
+// // //             dangerouslySetInnerHTML={{ __html: obj6Table }}
+// // //           />,
+// // //         ]
+// // //     },
+
+// // //     // obj7: NEW capstone — hierarchy of cardinalities
+// // //     {
+// // //         id:'7',
+// // //         title:sectionsContent.obj7.title,
+// // //         link:sectionsContent.obj7.link,
+// // //         content:[
+// // //           sectionsContent.obj7.content,
+// // //           <div
+// // //             key={'summary-table'}
+// // //             style={tableWrapStyle}
+// // //             dangerouslySetInnerHTML={{ __html: summaryTable }}
+// // //           />,
+// // //         ]
+// // //     },
+// // //     // {
+// // //     //     id:'8',
+// // //     //     title:sectionsContent.obj8.title,
+// // //     //     link:sectionsContent.obj8.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj8.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'9',
+// // //     //     title:sectionsContent.obj9.title,
+// // //     //     link:sectionsContent.obj9.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj9.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'10',
+// // //     //     title:sectionsContent.obj10.title,
+// // //     //     link:sectionsContent.obj10.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj10.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'11',
+// // //     //     title:sectionsContent.obj11.title,
+// // //     //     link:sectionsContent.obj11.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj11.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'12',
+// // //     //     title:sectionsContent.obj12.title,
+// // //     //     link:sectionsContent.obj12.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj12.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'13',
+// // //     //     title:sectionsContent.obj13.title,
+// // //     //     link:sectionsContent.obj13.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj13.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'14',
+// // //     //     title:sectionsContent.obj14.title,
+// // //     //     link:sectionsContent.obj14.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj14.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'15',
+// // //     //     title:sectionsContent.obj15.title,
+// // //     //     link:sectionsContent.obj15.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj15.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'1',
+// // //     //     title:sectionsContent.obj1.title,
+// // //     //     link:sectionsContent.obj1.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj1.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'1',
+// // //     //     title:sectionsContent.obj1.title,
+// // //     //     link:sectionsContent.obj1.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj1.content,
+// // //     //     ]
+// // //     // },
+// // //     // {
+// // //     //     id:'1',
+// // //     //     title:sectionsContent.obj1.title,
+// // //     //     link:sectionsContent.obj1.link,
+// // //     //     content:[
+// // //     //       sectionsContent.obj1.content,
+// // //     //     ]
+// // //     // },
+    
+// // // ]
+
+// // //   return (
+// // //    <>
+ 
+
+// // // <Head>
+// // //   <title>{seoData.title}</title>
+// // //   <meta name="description" content={seoData.description} />
+// // //   <meta name="keywords" content={seoData.keywords} />
+// // //   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+// // //   <meta property="og:title" content={seoData.title} />
+// // //   <meta property="og:description" content={seoData.description} />
+// // //   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+// // //   <meta property="og:type" content="article" />
+// // //   <meta property="og:site_name" content="Learn Math Class" />
+  
+// // //   <meta name="twitter:card" content="summary" />
+// // //   <meta name="twitter:title" content={seoData.title} />
+// // //   <meta name="twitter:description" content={seoData.description} />
+  
+// // //   <meta name="robots" content="index, follow" />
+  
+// // //   <script 
+// // //     type="application/ld+json"
+// // //     dangerouslySetInnerHTML={{ 
+// // //       __html: JSON.stringify(schemas.learningResource)
+// // //     }}
+// // //   />
+
+// // //   <script 
+// // //     type="application/ld+json"
+// // //     dangerouslySetInnerHTML={{ 
+// // //       __html: JSON.stringify(schemas.breadcrumb)
+// // //     }}
+// // //   />
+
+// // //   <script 
+// // //     type="application/ld+json"
+// // //     dangerouslySetInnerHTML={{ 
+// // //       __html: JSON.stringify(schemas.faq)
+// // //     }}
+// // //   />
+// // // </Head>
+// // //    {/* <GenericNavbar/> */}
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //     <OperaSidebar 
+// // //            side='right'
+// // //            // topOffset='65px' 
+// // //            sidebarWidth='45px'
+// // //            panelWidth='200px'
+// // //            iconColor='white'
+// // //            panelBackgroundColor='#f2f2f2'
+// // //          /> 
+// // //    <Breadcrumb/>
+// // //    <br/>
+// // //    <br/>
+// // //    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cardinality of Sets</h1>
+// // //    <br/>
+// // //    <br/>
+// // //    <SectionTableOfContents sections={genericSections}
+// // //     showSecondaryNav={true}
+// // //          secondaryNavMode="siblings"  // or "children"
+// // //          secondaryNavTitle="More in this Section"
+   
+// // //    />
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //     <IntroSection 
+// // //           id={introContent.id}
+// // //           title={introContent.title}
+// // //           content={introContent.content}
+// // //            backgroundColor='#f9fafb'
+// // //           //  "#f2f2f2"
+// // //           textColor="#06357a"
+// // //         />
+// // //    <br/>
+// // //      <KeyTermsCard
+// // //            id="0"
+// // //            title={sectionsContent.obj0.title}
+// // //            content={sectionsContent.obj0.content}
+// // //            after={sectionsContent.obj0.after}
+// // //            variant="light"
+// // //          />
+// // //    <br/>
+// // //    <Sections sections={genericSections.slice(1)}/>
+// // //    <br/>
+// // //    <br/>
+// // //    <br/>
+// // //    {/* <ScrollUpButton/> */}
+// // //    </>
+// // //   )
+// // // }
+
+
+
+// // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// // import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// // import Sections from '@/app/components/page-components/section/Sections'
+// // import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// // import React from 'react'
+// // import '../../pages.css'
+// // import Head from 'next/head'
+// // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// // import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+// // import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
+// // import { tableHeaders } from '@/app/styles/theme'
+// // import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
+// // import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
+
+// // export async function getStaticProps(){
+// // const keyWords = [
+// //   "cardinality of sets",
+// //   "cardinality definition",
+// //   "finite sets",
+// //   "infinite sets",
+// //   "countable sets",
+// //   "uncountable sets",
+// //   "countably infinite",
+// //   "cardinality of real numbers",
+// //   "cardinality of integers",
+// //   "bijection between sets",
+// //   "cantors diagonal argument",
+// //   "comparing infinite sets",
+// //   "power set cardinality",
+// //   "size of infinity"
+// // ]
+
+// //   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// //   // ---------- TABLES ----------
+
+// //   // obj5 — comparison: countable vs uncountable
+// //   const obj5Table = `
+// // <table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// //   <thead>
+// //     <tr>
+// //       <th style="${tableHeaders.comparison}">Category</th>
+// //       <th style="${tableHeaders.comparison}">Defining condition</th>
+// //       <th style="${tableHeaders.comparison}">Example sets</th>
+// //       <th style="${tableHeaders.comparison}">Standard proof technique</th>
+// //     </tr>
+// //   </thead>
+// //   <tbody>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Countably infinite</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a bijection with ℕ exists</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℕ, ℤ, ℚ; even integers</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">construct an explicit listing &nbsp;(sequence) of all elements</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Uncountable</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">no bijection with ℕ is possible</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">ℝ; any interval &nbsp;(a, b); &nbsp;𝒫(ℕ)</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">Cantor&apos;s diagonal argument &nbsp;(or Cantor&apos;s theorem)</td>
+// //     </tr>
+// //   </tbody>
+// // </table>
+// // `
+
+// //   // obj6 — aggregation: cardinality comparison relations as a notation reference card
+// //   const obj6Table = `
+// // <table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// //   <thead>
+// //     <tr>
+// //       <th style="${tableHeaders.aggregation}">Relation</th>
+// //       <th style="${tableHeaders.aggregation}">Meaning</th>
+// //       <th style="${tableHeaders.aggregation}">Witnessed by</th>
+// //     </tr>
+// //   </thead>
+// //   <tbody>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|A| = |B|</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A and B have the same cardinality</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a bijection &nbsp;A → B</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|A| ≤ |B|</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is no larger than B</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">an injection &nbsp;A → B</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">|A| &lt; |B|</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">A is strictly smaller than B</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">an injection exists, but no bijection does</td>
+// //     </tr>
+// //   </tbody>
+// // </table>
+// // `
+
+// //   // obj7 — summary: capstone hierarchy of cardinalities
+// //   const summaryTable = `
+// // <table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+// //   <thead>
+// //     <tr>
+// //       <th style="${tableHeaders.summary}">Cardinality</th>
+// //       <th style="${tableHeaders.summary}">Description</th>
+// //       <th style="${tableHeaders.summary}">Representative set(s)</th>
+// //     </tr>
+// //   </thead>
+// //   <tbody>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">empty</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∅ &nbsp;(the only set with this cardinality)</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">finite n &nbsp;(n ∈ ℕ)</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">bounded element count</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, ..., n}; &nbsp;the English alphabet &nbsp;(n = 26)</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℵ<sub>0</sub> &nbsp;(aleph-null)</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">countably infinite — the smallest infinite cardinality</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℕ, ℤ, ℚ; &nbsp;the even integers</td>
+// //     </tr>
+// //     <tr>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">𝔠 = 2<sup>ℵ<sub>0</sub></sup> &nbsp;(continuum)</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">uncountable; the size of the real line</td>
+// //       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ; &nbsp;any interval &nbsp;(a, b); &nbsp;𝒫(ℕ)</td>
+// //     </tr>
+// //     <tr style="background: #f8f9fa;">
+// //       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">2<sup>𝔠</sup>, &nbsp;2<sup>(2<sup>𝔠</sup>)</sup>, &nbsp;...</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">strictly larger uncountable cardinalities &nbsp;(by Cantor&apos;s theorem)</td>
+// //       <td style="padding: 12px 15px; color: #34495e;">𝒫(ℝ); &nbsp;𝒫(𝒫(ℝ)); &nbsp;the hierarchy continues without end</td>
+// //     </tr>
+// //   </tbody>
+// // </table>
+// // `
+
+// // const sectionsContent = {
+// //     obj0: {
+// //   title: `Key Terms`,
+// //   content: `
+// // - [Cardinality](!/set-theory/definitions#cardinality) — the number of elements in a set
+// // - [Finite Set](!/set-theory/definitions#finite_set) — a set with a bounded element count
+// // - [Infinite Set](!/set-theory/definitions#infinite_set) — a set that cannot be matched with any finite count
+// // - [Countable Set](!/set-theory/definitions#countable_set) — a set whose elements can be listed in a sequence
+// // - [Uncountable Set](!/set-theory/definitions#uncountable_set) — a set too large to be listed sequentially
+// // - [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets related by having the same cardinality
+// // - [Power Set](!/set-theory/definitions#power_set) — always produces a set of strictly larger cardinality
+
+
+// // `,
+// //   before: ``,
+// //   after: `
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+// //   link: '',
+// // },
+// //   obj1: {
+// //     title: `Definition of Cardinality`,
+// //     content: `
+// // The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$. This bar notation is one of several [cardinality symbols](!/math-symbols/set-theory) in standard use.
+
+// // For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, then $|A| = 3$. If $B = \\{1, 2, 3, 4, 5\\}$, then $|B| = 5$.
+
+// // The empty set contains no elements:
+
+// // $$|\\emptyset| = 0$$
+
+// // Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj2: {
+// //     title: `Finite Sets`,
+// //     content: `
+// // A set is finite if its elements can be counted with a natural number. Formally, a set $A$ is finite if there exists some $n \\in \\mathbb{N}$ such that:
+
+// // $$|A| = n$$
+
+// // This means a bijection exists between $A$ and the set $\\{1, 2, 3, \\ldots, n\\}$.
+
+// // Examples of finite sets:
+
+// // - The set of letters in the English alphabet has cardinality $26$
+
+// // - The set of prime numbers less than $20$ is $\\{2, 3, 5, 7, 11, 13, 17, 19\\}$ with cardinality $8$
+
+// // - Any [subset](!/set-theory/subsets) of a finite set is finite
+
+// // The cardinality of a finite union of finite sets satisfies the inclusion-exclusion principle:
+
+// // @academic[formula_callout:Inclusion-Exclusion - Two Sets
+// // $$|A \\cup B| = |A| + |B| - |A \\cap B|$$
+// // /set-theory/formulas#inclusion-exclusion_-_two_sets]@
+
+// // @academic[formulas_link:Browse all set theory formulas
+// // /set-theory/formulas]@
+
+// // The correction term $|A \\cap B|$ accounts for elements counted twice when the sets overlap. The pattern extends to three sets by alternating between adding singles, subtracting pairwise intersections, and adding back the triple intersection:
+
+// // @academic[formula_callout:Inclusion-Exclusion - Three Sets
+// // $$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$$
+// // /set-theory/formulas#inclusion-exclusion_-_three_sets]@
+
+// // @academic[formulas_link:Browse all set theory formulas
+// // /set-theory/formulas]@
+
+// // When the sets share no elements, the correction terms vanish and the cardinality simply adds:
+
+// // @academic[formula_callout:Cardinality of Disjoint Union
+// // $$|A \\cup B| = |A| + |B| \\quad \\text{when } A \\cap B = \\emptyset$$
+// // /set-theory/formulas#cardinality_of_disjoint_union]@
+
+// // @academic[formulas_link:Browse all set theory formulas
+// // /set-theory/formulas]@
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj3: {
+// //     title: `Infinite Sets`,
+// //     content: `
+// // A set is infinite if it is not finite — no natural number can express its size.
+
+// // The standard number sets are all infinite:
+
+// // - $\\mathbb{N} = \\{0, 1, 2, 3, \\ldots\\}$ — the natural numbers
+
+// // - $\\mathbb{Z} = \\{\\ldots, -2, -1, 0, 1, 2, \\ldots\\}$ — the integers
+
+// // - $\\mathbb{Q}$ — the rational numbers
+
+// // - $\\mathbb{R}$ — the real numbers
+
+// // A defining property of infinite sets: an infinite set can be put into one-to-one correspondence with a proper subset of itself. For example, the function $f(n) = 2n$ maps $\\mathbb{N}$ bijectively onto the even numbers, which form a proper subset of $\\mathbb{N}$.
+
+// // Not all infinite sets have the same cardinality. The integers and rationals turn out to be the same size as the natural numbers, but the real numbers form a strictly larger infinity.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj4: {
+// //     title: `Countable Sets`,
+// //     content: `
+// // A set is countably infinite if its elements can be put in one-to-one correspondence with the natural numbers $\\mathbb{N}$. Such a set can be listed as a sequence:
+
+// // $$a_1, a_2, a_3, \\ldots$$
+
+// // where every element appears exactly once.
+
+// // The integers $\\mathbb{Z}$ are countable. The listing:
+
+// // $$0, 1, -1, 2, -2, 3, -3, \\ldots$$
+
+// // establishes a bijection with $\\mathbb{N}$.
+
+// // The rationals $\\mathbb{Q}$ are countable despite appearing denser than $\\mathbb{Z}$. By arranging positive rationals in a grid and traversing diagonally, every rational is eventually listed.
+
+// // A set is called countable if it is either finite or countably infinite. Some authors reserve "countable" for countably infinite sets only — context determines the convention.
+
+// // The union of countably many countable sets remains countable. This is why $\\mathbb{Q}$ is countable: it is a countable union of countable sets (rationals with each fixed denominator).
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj5: {
+// //     title: `Uncountable Sets`,
+// //     content: `
+// // A set is uncountable if it is infinite but not countable — its elements cannot be listed in a sequence that covers them all.
+
+// // The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
+
+// // Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
+
+// // The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+
+// //   notation: {
+// //     title: `Cardinality Notation`,
+// //     lead: `Size gets a bar pair, infinity gets a Hebrew letter, and the continuum gets a Fraktur one — three generations of marks for one question: how many members? The variant zoo ($\\operatorname{card}$, $\\#$, $n(A)$) rides along.`,
+// //     inherited: `The braces, $\\in$, $\\varnothing$ and set-builder come from [set theory basics](!/set-theory/basics#2); the power set $\\mathcal{P}(A)$ and $2^A$ behind the continuum from the [subsets page](!/set-theory/subsets#6); the double-struck ℕ–ℝ chain likewise.`,
+// //     entries: [
+// //       {
+// //         id: 'bar-pair',
+// //         tex: `$|A|$`,
+// //         read: `the cardinality of A`,
+// //         means: `The bar pair around a set counts it: $|A| = 3$ for $A = \\{1, 2, 3\\}$ — **Definition of Cardinality** above. The same fence with a different tenant: on numbers the bars mean [absolute value](!/algebra/equations/absolute-value#notation), on sets they count.`,
+// //         cases: `The variant zoo by dialect: $\\operatorname{card}(A)$ in formal set theory, $\\#A$ in combinatorics, $n(A)$ in school probability texts, $\\|A\\|$ occasionally — all the same question; this site keeps the bars.`,
+// //         confusedWith: `A number's magnitude. $|{-5}| = 5$ but $|\\{-5\\}| = 1$ — bars around the number measure distance, bars around the braces count members; the inner braces flip the meaning entirely.`,
+// //       },
+// //       {
+// //         id: 'aleph-null',
+// //         tex: `$\\aleph_0$`,
+// //         read: `aleph-null; aleph-nought`,
+// //         means: `The first infinite cardinal: $|\\mathbb{N}| = \\aleph_0$ — the size shared by every countably infinite set, as **Countable Sets** above establishes. The aleph is mathematics' one standard Hebrew letter, Cantor's own choice.`,
+// //         cases: `The subscript starts a ladder — $\\aleph_0, \\aleph_1, \\ldots$ enumerate ever-larger infinities; $|\\mathbb{Z}| = |\\mathbb{Q}| = \\aleph_0$ despite appearances, the working surprise of the countability arguments above.`,
+// //         confusedWith: `The infinity symbol. $\\aleph_0$ is a cardinal — a size — while the $\\infty$ of [limit notation](!/calculus/limits/infinity#notation) is a direction of growth; the two never interchange, and $\\aleph_0 + 1 = \\aleph_0$ obeys arithmetic $\\infty$ was never given.`,
+// //       },
+// //       {
+// //         id: 'continuum',
+// //         tex: `$\\mathfrak{c} = 2^{\\aleph_0}$`,
+// //         read: `the continuum; two to the aleph-null`,
+// //         means: `The size of the reals: $|\\mathbb{R}| = \\mathfrak{c}$, in Fraktur type — the blackletter font also seen on the [real-part marks](!/complex-numbers/algebraic-form#2) $\\Re$ and $\\Im$. The exponent spelling $2^{\\aleph_0}$ reads it as a power-set size, via $|\\mathcal{P}(A)| = 2^{|A|}$ from the [subsets page](!/set-theory/subsets#6).`,
+// //         cases: `Strictness is the point: $\\aleph_0 < \\mathfrak{c}$ — **Uncountable Sets** above proves the gap with Cantor's diagonal; every interval $(a, b)$ already has full cardinality $\\mathfrak{c}$.`,
+// //         confusedWith: `A plain letter c. The Fraktur stroke is the reservation — roman $c$ is a free constant; and $2^{\\aleph_0}$ is not "a huge finite power of two" but a set-sized exponent, legal only in cardinal arithmetic.`,
+// //       },
+// //     ],
+// //     symbolsHref: `/math-symbols/set-theory`,
+// //     symbolsLabel: `All set theory symbols`,
+// //     parentHref: `/set-theory`,
+// //     parentLabel: `Set Theory`,
+// //   },
+// //   obj6: {
+// //     title: `Comparing Cardinalities`,
+// //     content: `
+// // Cardinalities are compared using functions between sets:
+
+// // - $|A| = |B|$ when a bijection exists between $A$ and $B$
+
+// // - $|A| \\leq |B|$ when an injection (one-to-one function) exists from $A$ to $B$
+
+// // - $|A| < |B|$ when $|A| \\leq |B|$ and $|A| \\neq |B|$
+
+// // The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.
+
+// // Cantor's theorem establishes a fundamental inequality for any set $A$:
+
+// // @academic[formula_callout:Cantor Theorem
+// // $$|A| < |\\mathcal{P}(A)|$$
+// // /set-theory/formulas#cantor_theorem]@
+
+// // @academic[formulas_link:Browse all set theory formulas
+// // /set-theory/formulas]@
+
+// // The [power set](!/set-theory/subsets) always has strictly greater cardinality than the original set. For finite sets, this is immediate: $2^n > n$. For infinite sets, the proof uses a diagonal argument similar to the uncountability of $\\mathbb{R}$.
+
+// // This theorem implies there is no largest cardinality — given any set, its power set is strictly larger, producing an endless hierarchy of infinite sizes.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj7: {
+// //     title: `Summary: A Hierarchy of Cardinalities`,
+// //     content: `
+// // The sets covered above arrange themselves into a strict hierarchy of sizes. The table below collects the major rungs — empty, finite, countably infinite, the continuum, and beyond — with a representative set at each level. Cantor's theorem guarantees the hierarchy never ends: for every set, its power set is strictly larger, producing an unbounded tower of cardinalities.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   faq: {
+// //     title: `Frequently Asked Questions`,
+// //   },
+// // }; 
+
+
+// // const introContent = {
+// //   id: "intro",
+// //   title: `Measuring the Size of Sets`,
+// //   content: `
+// // Cardinality measures the size of a [set](!/set-theory) — how many elements it contains. For finite sets, cardinality is simply a count. For infinite sets, the situation becomes more subtle: different infinite sets can have different sizes, and comparing them requires the concept of one-to-one correspondence. This leads to the distinction between countable and uncountable infinities.
+// //   `,
+// // };
+
+
+// // const faqQuestions = {
+// //   obj1: {
+// //     question: "What is the cardinality of a set?",
+// //     answer: "Cardinality measures the number of elements in a set, denoted |A|. For finite sets, it's a count. For infinite sets, two sets have equal cardinality when a bijection (one-to-one correspondence) exists between them.",
+// //     sectionId: "1"
+// //   },
+// //   obj2: {
+// //     question: "What is a finite set?",
+// //     answer: "A set is finite if its elements can be counted with a natural number n. A bijection exists between the set and {1, 2, ..., n}. Any subset of a finite set is also finite.",
+// //     sectionId: "2"
+// //   },
+// //   obj3: {
+// //     question: "What is an infinite set?",
+// //     answer: "A set is infinite if no natural number expresses its size. Infinite sets can be mapped bijectively onto proper subsets of themselves — for example, natural numbers onto even numbers via f(n) = 2n.",
+// //     sectionId: "3"
+// //   },
+// //   obj4: {
+// //     question: "What does countably infinite mean?",
+// //     answer: "A set is countably infinite if its elements can be listed as a sequence a₁, a₂, a₃, ... covering every element exactly once. The integers and rationals are countably infinite.",
+// //     sectionId: "4"
+// //   },
+// //   obj5: {
+// //     question: "Are the rational numbers countable?",
+// //     answer: "Yes. By arranging positive rationals in a grid and traversing diagonally, every rational appears in the sequence. The union of countably many countable sets remains countable.",
+// //     sectionId: "4"
+// //   },
+// //   obj6: {
+// //     question: "What is an uncountable set?",
+// //     answer: "A set is uncountable if it is infinite but cannot be listed in a sequence. The real numbers are uncountable — Cantor's diagonal argument proves no list can include every real number.",
+// //     sectionId: "5"
+// //   },
+// //   obj7: {
+// //     question: "What is Cantor's diagonal argument?",
+// //     answer: "Assume all reals between 0 and 1 are listed. Construct a new number by making its n-th digit differ from the n-th digit of the n-th listed number. This number isn't in the list, proving the reals are uncountable.",
+// //     sectionId: "5"
+// //   },
+// //   obj8: {
+// //     question: "How do you compare cardinalities of infinite sets?",
+// //     answer: "|A| ≤ |B| when an injection exists from A to B. |A| = |B| when a bijection exists. The Cantor-Schröder-Bernstein theorem states: if |A| ≤ |B| and |B| ≤ |A|, then |A| = |B|.",
+// //     sectionId: "6"
+// //   },
+// //   obj9: {
+// //     question: "What is Cantor's theorem about power sets?",
+// //     answer: "For any set A, |A| < |P(A)| — the power set always has strictly greater cardinality. This implies there is no largest infinity; each power set produces a larger one.",
+// //     sectionId: "6"
+// //   },
+// //   obj10: {
+// //     question: "What is the cardinality of the real numbers?",
+// //     answer: "The cardinality of ℝ is denoted 𝔠 (continuum) or 2^ℵ₀, equal to the cardinality of the power set of ℕ. Every interval (a, b) has this same cardinality.",
+// //     sectionId: "5"
+// //   }
+// // }
+
+
+// // const schemas = {
+// //   learningResource: {
+// //     "@context": "https://schema.org",
+// //     "@type": "LearningResource",
+// //     "name": "Cardinality of Sets",
+// //     "description": "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
+// //     "url": "https://www.learnmathclass.com/set-theory/cardinality",
+// //     "inLanguage": "en-US",
+// //     "learningResourceType": "Explanation",
+// //     "educationalLevel": "High School, College",
+// //     "educationalUse": "Learning",
+// //     "audience": {
+// //       "@type": "EducationalAudience",
+// //       "educationalRole": "student"
+// //     },
+// //     "about": {
+// //       "@type": "Thing",
+// //       "name": "Cardinality of Sets"
+// //     },
+// //     "teaches": [
+// //       "Definition of cardinality and bijections",
+// //       "Finite sets and counting",
+// //       "Properties of infinite sets",
+// //       "Countable and countably infinite sets",
+// //       "Uncountable sets and Cantor's diagonal argument",
+// //       "Comparing cardinalities and Cantor's theorem"
+// //     ],
+// //     "keywords": keyWords.join(", "),
+// //     "author": {
+// //       "@type": "Organization",
+// //       "name": "Learn Math Class"
+// //     },
+// //     "publisher": {
+// //       "@type": "Organization",
+// //       "name": "Learn Math Class"
+// //     },
+// //     "datePublished": "2024-01-15",
+// //     "dateModified": new Date().toISOString()
+// //   },
+
+// //   breadcrumb: {
+// //     "@context": "https://schema.org",
+// //     "@type": "BreadcrumbList",
+// //     "itemListElement": [
+// //       {
+// //         "@type": "ListItem",
+// //         "position": 1,
+// //         "name": "Home",
+// //         "item": "https://www.learnmathclass.com"
+// //       },
+// //       {
+// //         "@type": "ListItem",
+// //         "position": 2,
+// //         "name": "Set Theory",
+// //         "item": "https://www.learnmathclass.com/set-theory"
+// //       },
+// //       {
+// //         "@type": "ListItem",
+// //         "position": 3,
+// //         "name": "Cardinality",
+// //         "item": "https://www.learnmathclass.com/set-theory/cardinality"
+// //       }
+// //     ]
+// //   }
+// // }
+
+
+// //   // Operation A demonstration unit: frozen tool states + attached explanation
+// //   // panel + tool link, one frame. Rendered as a content-array item.
+// //   const demoUnits = {
+// //     inclusionExclusion: demoUnitFrame({
+// //       svg: [twoSetsVennDiagrams.union, twoSetsVennDiagrams.disjoint],
+// //       caption: 'Why the correction term exists',
+// //       text: 'Two frozen configurations tell the whole story: when the circles overlap (top), the lens lies inside both sets &#8212; summing |A| + |B| counts it twice, so |A &#8745; B| is subtracted once. When the sets are disjoint (bottom), there is no lens and the counts simply add. Slide between the two situations yourself on the',
+// //       href: '/set-theory/visual-tools/two-sets-basic-venn',
+// //       linkText: 'two-set Venn explorer',
+// //     }),
+// //   };
+
+// //   return {
+// //   props: {
+// //     sectionsContent,
+// //     introContent,
+// //     obj5Table,
+// //     obj6Table,
+// //     summaryTable,
+// //     faqQuestions,
+// //     schemas,
+// //     demoUnits,
+// //     seoData: {
+// //       title: "Cardinality of Sets: Finite, Countable & Uncountable | Learn Math Class",
+// //       description: "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
+// //       keywords: keyWords.join(", "),
+// //       url: "/set-theory/cardinality",
+// //       name: "Cardinality of Sets"
+// //     },
+// //   }
+// // }
+// //    }
+
+
+// // export default function CardinalityPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+
+// //   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+// //   const genericSections=[
+// //     {
+// //         id:'0',
+// //         title:sectionsContent.obj0.title,
+// //         link:sectionsContent.obj0.link,
+// //         content:[
+// //           sectionsContent.obj0.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'1',
+// //         title:sectionsContent.obj1.title,
+// //         link:sectionsContent.obj1.link,
+// //         content:[
+// //           sectionsContent.obj1.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'2',
+// //         title:sectionsContent.obj2.title,
+// //         link:sectionsContent.obj2.link,
+// //         content:[
+// //           sectionsContent.obj2.content,
+// //           <div key={'unit-inclusion-exclusion'} dangerouslySetInnerHTML={{ __html: demoUnits.inclusionExclusion }} />,
+// //           `Counting without double-counting is the entire craft of finite cardinality — inclusion-exclusion just states it as a formula, and it scales to any number of sets.`,
+// //         ]
+// //     },
+// //     {
+// //         id:'3',
+// //         title:sectionsContent.obj3.title,
+// //         link:sectionsContent.obj3.link,
+// //         content:[
+// //           sectionsContent.obj3.content,
+// //         ]
+// //     },
+// //     {
+// //         id:'4',
+// //         title:sectionsContent.obj4.title,
+// //         link:sectionsContent.obj4.link,
+// //         content:[
+// //           sectionsContent.obj4.content,
+// //         ]
+// //     },
+
+// //     // obj5: prose + countable-vs-uncountable comparison table
+// //     // (placed here since obj4 + obj5 together define both categories; the table synthesizes both)
+// //     {
+// //         id:'5',
+// //         title:sectionsContent.obj5.title,
+// //         link:sectionsContent.obj5.link,
+// //         content:[
+// //           sectionsContent.obj5.content,
+// //           <div
+// //             key={'obj5-table'}
+// //             style={tableWrapStyle}
+// //             dangerouslySetInnerHTML={{ __html: obj5Table }}
+// //           />,
+// //         ]
+// //     },
+
+// //     // obj6: prose + cardinality-comparison-relations aggregation table
+// //     {
+// //         id:'notation',
+// //         title:sectionsContent.notation.title,
+// //         link:``,
+// //         content:[
+// //           <NotationSection
+// //             key={'notation'}
+// //             title={sectionsContent.notation.title}
+// //             lead={sectionsContent.notation.lead}
+// //             inherited={sectionsContent.notation.inherited}
+// //             entries={sectionsContent.notation.entries}
+// //             symbolsHref={sectionsContent.notation.symbolsHref}
+// //             symbolsLabel={sectionsContent.notation.symbolsLabel}
+// //             parentHref={sectionsContent.notation.parentHref}
+// //             parentLabel={sectionsContent.notation.parentLabel}
+// //             theme={'navy'}
+// //           />,
+// //         ]
+// //     },
+// //     {
+// //         id:'6',
+// //         title:sectionsContent.obj6.title,
+// //         link:sectionsContent.obj6.link,
+// //         content:[
+// //           sectionsContent.obj6.content,
+// //           <div
+// //             key={'obj6-table'}
+// //             style={tableWrapStyle}
+// //             dangerouslySetInnerHTML={{ __html: obj6Table }}
+// //           />,
+// //         ]
+// //     },
+
+// //     // obj7: NEW capstone — hierarchy of cardinalities
+// //     {
+// //         id:'7',
+// //         title:sectionsContent.obj7.title,
+// //         link:sectionsContent.obj7.link,
+// //         content:[
+// //           sectionsContent.obj7.content,
+// //           <div
+// //             key={'summary-table'}
+// //             style={tableWrapStyle}
+// //             dangerouslySetInnerHTML={{ __html: summaryTable }}
+// //           />,
+// //         ]
+// //     },
+
+// //     // faq: rendered component — must be built here, not in getStaticProps
+// //     {
+// //         id:'faq',
+// //         title:sectionsContent.faq.title,
+// //         link:``,
+// //         content:[
+// //           <FAQSection
+// //             key={'faq'}
+// //             faqQuestions={faqQuestions}
+// //             theme={'blueGradient'}
+// //             width={'100%'}
+// //           />,
+// //         ]
+// //     },
+// // ]
+
+// //   return (
+// //    <>
+ 
+
+// // <Head>
+// //   <title>{seoData.title}</title>
+// //   <meta name="description" content={seoData.description} />
+// //   <meta name="keywords" content={seoData.keywords} />
+// //   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+// //   <meta property="og:title" content={seoData.title} />
+// //   <meta property="og:description" content={seoData.description} />
+// //   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+// //   <meta property="og:type" content="article" />
+// //   <meta property="og:site_name" content="Learn Math Class" />
+  
+// //   <meta name="twitter:card" content="summary" />
+// //   <meta name="twitter:title" content={seoData.title} />
+// //   <meta name="twitter:description" content={seoData.description} />
+  
+// //   <meta name="robots" content="index, follow" />
+  
+// //   <script 
+// //     type="application/ld+json"
+// //     dangerouslySetInnerHTML={{ 
+// //       __html: JSON.stringify(schemas.learningResource)
+// //     }}
+// //   />
+
+// //   <script 
+// //     type="application/ld+json"
+// //     dangerouslySetInnerHTML={{ 
+// //       __html: JSON.stringify(schemas.breadcrumb)
+// //     }}
+// //   />
+// // </Head>
+// //    {/* <GenericNavbar/> */}
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //     <OperaSidebar 
+// //            side='right'
+// //            // topOffset='65px' 
+// //            sidebarWidth='45px'
+// //            panelWidth='200px'
+// //            iconColor='white'
+// //            panelBackgroundColor='#f2f2f2'
+// //          /> 
+// //    <Breadcrumb/>
+// //    <br/>
+// //    <br/>
+// //    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cardinality of Sets</h1>
+// //    <br/>
+// //    <br/>
+// //    <SectionTableOfContents sections={genericSections}
+// //     showSecondaryNav={true}
+// //          secondaryNavMode="siblings"  // or "children"
+// //          secondaryNavTitle="More in this Section"
+   
+// //    />
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //     <IntroSection 
+// //           id={introContent.id}
+// //           title={introContent.title}
+// //           content={introContent.content}
+// //            backgroundColor='#f9fafb'
+// //           //  "#f2f2f2"
+// //           textColor="#06357a"
+// //         />
+// //    <br/>
+// //      <KeyTermsCard
+// //            id="0"
+// //            title={sectionsContent.obj0.title}
+// //            content={sectionsContent.obj0.content}
+// //            after={sectionsContent.obj0.after}
+// //            variant="light"
+// //          />
+// //    <br/>
+// //    <Sections sections={genericSections.slice(1)}/>
+// //    <br/>
+// //    <br/>
+// //    <br/>
+// //    {/* <ScrollUpButton/> */}
+// //    </>
+// //   )
+// // }
+
+
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+// import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
+// import { tableHeaders } from '@/app/styles/theme'
+// import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
+// import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
+
+// export async function getStaticProps(){
+// const keyWords = [
+//   "cardinality of sets",
+//   "cardinality definition",
+//   "finite sets",
+//   "infinite sets",
+//   "countable sets",
+//   "uncountable sets",
+//   "countably infinite",
+//   "cardinality of real numbers",
+//   "cardinality of integers",
+//   "bijection between sets",
+//   "cantors diagonal argument",
+//   "comparing infinite sets",
+//   "power set cardinality",
+//   "size of infinity"
+// ]
+
+//   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+//   // ---------- TABLES ----------
+
+//   // obj5 — comparison: countable vs uncountable
+//   const obj5Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.comparison}">Category</th>
+//       <th style="${tableHeaders.comparison}">Defining condition</th>
+//       <th style="${tableHeaders.comparison}">Example sets</th>
+//       <th style="${tableHeaders.comparison}">Standard proof technique</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Countably infinite</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a bijection with ℕ exists</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℕ, ℤ, ℚ; even integers</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">construct an explicit listing &nbsp;(sequence) of all elements</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Uncountable</td>
+//       <td style="padding: 12px 15px; color: #34495e;">no bijection with ℕ is possible</td>
+//       <td style="padding: 12px 15px; color: #34495e;">ℝ; any interval &nbsp;(a, b); &nbsp;𝒫(ℕ)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">Cantor&apos;s diagonal argument &nbsp;(or Cantor&apos;s theorem)</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj6 — aggregation: cardinality comparison relations as a notation reference card
+//   const obj6Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Relation</th>
+//       <th style="${tableHeaders.aggregation}">Meaning</th>
+//       <th style="${tableHeaders.aggregation}">Witnessed by</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|A| = |B|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A and B have the same cardinality</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a bijection &nbsp;A → B</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|A| ≤ |B|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is no larger than B</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">an injection &nbsp;A → B</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">|A| &lt; |B|</td>
+//       <td style="padding: 12px 15px; color: #34495e;">A is strictly smaller than B</td>
+//       <td style="padding: 12px 15px; color: #34495e;">an injection exists, but no bijection does</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj7 — summary: capstone hierarchy of cardinalities
+//   const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Cardinality</th>
+//       <th style="${tableHeaders.summary}">Description</th>
+//       <th style="${tableHeaders.summary}">Representative set(s)</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">empty</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∅ &nbsp;(the only set with this cardinality)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">finite n &nbsp;(n ∈ ℕ)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">bounded element count</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, ..., n}; &nbsp;the English alphabet &nbsp;(n = 26)</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℵ<sub>0</sub> &nbsp;(aleph-null)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">countably infinite — the smallest infinite cardinality</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℕ, ℤ, ℚ; &nbsp;the even integers</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">𝔠 = 2<sup>ℵ<sub>0</sub></sup> &nbsp;(continuum)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">uncountable; the size of the real line</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ; &nbsp;any interval &nbsp;(a, b); &nbsp;𝒫(ℕ)</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">2<sup>𝔠</sup>, &nbsp;2<sup>(2<sup>𝔠</sup>)</sup>, &nbsp;...</td>
+//       <td style="padding: 12px 15px; color: #34495e;">strictly larger uncountable cardinalities &nbsp;(by Cantor&apos;s theorem)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">𝒫(ℝ); &nbsp;𝒫(𝒫(ℝ)); &nbsp;the hierarchy continues without end</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// const sectionsContent = {
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Cardinality](!/set-theory/definitions#cardinality) — the number of elements in a set
+// - [Finite Set](!/set-theory/definitions#finite_set) — a set with a bounded element count
+// - [Infinite Set](!/set-theory/definitions#infinite_set) — a set that cannot be matched with any finite count
+// - [Countable Set](!/set-theory/definitions#countable_set) — a set whose elements can be listed in a sequence
+// - [Uncountable Set](!/set-theory/definitions#uncountable_set) — a set too large to be listed sequentially
+// - [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets related by having the same cardinality
+// - [Power Set](!/set-theory/definitions#power_set) — always produces a set of strictly larger cardinality
+
+
+// `,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+//   link: '',
+// },
+//   obj1: {
+//     title: `Definition of Cardinality`,
+//     content: `
+// The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$. This bar notation is one of several [cardinality symbols](!/math-symbols/set-theory) in standard use.
+
+// For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, then $|A| = 3$. If $B = \\{1, 2, 3, 4, 5\\}$, then $|B| = 5$.
+
+// The empty set contains no elements:
+
+// $$|\\emptyset| = 0$$
+
+// Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Finite Sets`,
+//     content: `
+// A set is finite if its elements can be counted with a natural number. Formally, a set $A$ is finite if there exists some $n \\in \\mathbb{N}$ such that:
+
+// $$|A| = n$$
+
+// This means a bijection exists between $A$ and the set $\\{1, 2, 3, \\ldots, n\\}$.
+
+// Examples of finite sets:
+
+// - The set of letters in the English alphabet has cardinality $26$
+
+// - The set of prime numbers less than $20$ is $\\{2, 3, 5, 7, 11, 13, 17, 19\\}$ with cardinality $8$
+
+// - Any [subset](!/set-theory/subsets) of a finite set is finite
+
+// The cardinality of a finite union of finite sets satisfies the inclusion-exclusion principle:
+
+// @academic[formula_callout:Inclusion-Exclusion - Two Sets
+// $$|A \\cup B| = |A| + |B| - |A \\cap B|$$
+// /set-theory/formulas#inclusion-exclusion_-_two_sets]@
+
+// @academic[formulas_link:Browse all set theory formulas
+// /set-theory/formulas]@
+
+// The correction term $|A \\cap B|$ accounts for elements counted twice when the sets overlap. The pattern extends to three sets by alternating between adding singles, subtracting pairwise intersections, and adding back the triple intersection:
+
+// @academic[formula_callout:Inclusion-Exclusion - Three Sets
+// $$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$$
+// /set-theory/formulas#inclusion-exclusion_-_three_sets]@
+
+// @academic[formulas_link:Browse all set theory formulas
+// /set-theory/formulas]@
+
+// When the sets share no elements, the correction terms vanish and the cardinality simply adds:
+
+// @academic[formula_callout:Cardinality of Disjoint Union
+// $$|A \\cup B| = |A| + |B| \\quad \\text{when } A \\cap B = \\emptyset$$
+// /set-theory/formulas#cardinality_of_disjoint_union]@
+
+// @academic[formulas_link:Browse all set theory formulas
+// /set-theory/formulas]@
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Infinite Sets`,
+//     content: `
+// A set is infinite if it is not finite — no natural number can express its size.
+
+// The standard number sets are all infinite:
+
+// - $\\mathbb{N} = \\{0, 1, 2, 3, \\ldots\\}$ — the natural numbers
+
+// - $\\mathbb{Z} = \\{\\ldots, -2, -1, 0, 1, 2, \\ldots\\}$ — the integers
+
+// - $\\mathbb{Q}$ — the rational numbers
+
+// - $\\mathbb{R}$ — the real numbers
+
+// A defining property of infinite sets: an infinite set can be put into one-to-one correspondence with a proper subset of itself. For example, the function $f(n) = 2n$ maps $\\mathbb{N}$ bijectively onto the even numbers, which form a proper subset of $\\mathbb{N}$.
+
+// Not all infinite sets have the same cardinality. The integers and rationals turn out to be the same size as the natural numbers, but the real numbers form a strictly larger infinity.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Countable Sets`,
+//     content: `
+// A set is countably infinite if its elements can be put in one-to-one correspondence with the natural numbers $\\mathbb{N}$. Such a set can be listed as a sequence:
+
+// $$a_1, a_2, a_3, \\ldots$$
+
+// where every element appears exactly once.
+
+// The integers $\\mathbb{Z}$ are countable. The listing:
+
+// $$0, 1, -1, 2, -2, 3, -3, \\ldots$$
+
+// establishes a bijection with $\\mathbb{N}$.
+
+// The rationals $\\mathbb{Q}$ are countable despite appearing denser than $\\mathbb{Z}$. By arranging positive rationals in a grid and traversing diagonally, every rational is eventually listed.
+
+// A set is called countable if it is either finite or countably infinite. Some authors reserve "countable" for countably infinite sets only — context determines the convention.
+
+// The union of countably many countable sets remains countable. This is why $\\mathbb{Q}$ is countable: it is a countable union of countable sets (rationals with each fixed denominator).
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Uncountable Sets`,
+//     content: `
+// A set is uncountable if it is infinite but not countable — its elements cannot be listed in a sequence that covers them all.
+
+// The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
+
+// Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
+
+// The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   notation: {
+//     title: `Cardinality Notation`,
+//     lead: `Size gets a bar pair, infinity gets a Hebrew letter, and the continuum gets a Fraktur one — three generations of marks for one question: how many members? The variant zoo ($\\operatorname{card}$, $\\#$, $n(A)$) rides along.`,
+//     inherited: `The braces, $\\in$, $\\varnothing$ and set-builder come from [set theory basics](!/set-theory/basics#2); the power set $\\mathcal{P}(A)$ and $2^A$ behind the continuum from the [subsets page](!/set-theory/subsets#6); the double-struck ℕ–ℝ chain likewise.`,
+//     entries: [
+//       {
+//         id: 'bar-pair',
+//         tex: `$|A|$`,
+//         read: `the cardinality of A`,
+//         means: `The bar pair around a set counts it: $|A| = 3$ for $A = \\{1, 2, 3\\}$ — **Definition of Cardinality** above. The same fence with a different tenant: on numbers the bars mean [absolute value](!/algebra/equations/absolute-value#notation), on sets they count.`,
+//         cases: `The variant zoo by dialect: $\\operatorname{card}(A)$ in formal set theory, $\\#A$ in combinatorics, $n(A)$ in school probability texts, $\\|A\\|$ occasionally — all the same question; this site keeps the bars.`,
+//         confusedWith: `A number's magnitude. $|{-5}| = 5$ but $|\\{-5\\}| = 1$ — bars around the number measure distance, bars around the braces count members; the inner braces flip the meaning entirely.`,
+//       },
+//       {
+//         id: 'aleph-null',
+//         tex: `$\\aleph_0$`,
+//         read: `aleph-null; aleph-nought`,
+//         means: `The first infinite cardinal: $|\\mathbb{N}| = \\aleph_0$ — the size shared by every countably infinite set, as **Countable Sets** above establishes. The aleph is mathematics' one standard Hebrew letter, Cantor's own choice.`,
+//         cases: `The subscript starts a ladder — $\\aleph_0, \\aleph_1, \\ldots$ enumerate ever-larger infinities; $|\\mathbb{Z}| = |\\mathbb{Q}| = \\aleph_0$ despite appearances, the working surprise of the countability arguments above.`,
+//         confusedWith: `The infinity symbol. $\\aleph_0$ is a cardinal — a size — while the $\\infty$ of [limit notation](!/calculus/limits/infinity#notation) is a direction of growth; the two never interchange, and $\\aleph_0 + 1 = \\aleph_0$ obeys arithmetic $\\infty$ was never given.`,
+//       },
+//       {
+//         id: 'continuum',
+//         tex: `$\\mathfrak{c} = 2^{\\aleph_0}$`,
+//         read: `the continuum; two to the aleph-null`,
+//         means: `The size of the reals: $|\\mathbb{R}| = \\mathfrak{c}$, in Fraktur type — the blackletter font also seen on the [real-part marks](!/complex-numbers/algebraic-form#2) $\\Re$ and $\\Im$. The exponent spelling $2^{\\aleph_0}$ reads it as a power-set size, via $|\\mathcal{P}(A)| = 2^{|A|}$ from the [subsets page](!/set-theory/subsets#6).`,
+//         cases: `Strictness is the point: $\\aleph_0 < \\mathfrak{c}$ — **Uncountable Sets** above proves the gap with Cantor's diagonal; every interval $(a, b)$ already has full cardinality $\\mathfrak{c}$.`,
+//         confusedWith: `A plain letter c. The Fraktur stroke is the reservation — roman $c$ is a free constant; and $2^{\\aleph_0}$ is not "a huge finite power of two" but a set-sized exponent, legal only in cardinal arithmetic.`,
+//       },
+//     ],
+//     symbolsHref: `/math-symbols/set-theory`,
+//     symbolsLabel: `All set theory symbols`,
+//     parentHref: `/set-theory`,
+//     parentLabel: `Set Theory`,
+//   },
+//   obj6: {
+//     title: `Comparing Cardinalities`,
+//     content: `
+// Cardinalities are compared using functions between sets:
+
+// - $|A| = |B|$ when a bijection exists between $A$ and $B$
+
+// - $|A| \\leq |B|$ when an injection (one-to-one function) exists from $A$ to $B$
+
+// - $|A| < |B|$ when $|A| \\leq |B|$ and $|A| \\neq |B|$
+
+// The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.
+
+// Cantor's theorem establishes a fundamental inequality for any set $A$:
+
+// @academic[formula_callout:Cantor Theorem
+// $$|A| < |\\mathcal{P}(A)|$$
+// /set-theory/formulas#cantor_theorem]@
+
+// @academic[formulas_link:Browse all set theory formulas
+// /set-theory/formulas]@
+
+// The [power set](!/set-theory/subsets) always has strictly greater cardinality than the original set. For finite sets, this is immediate: $2^n > n$. For infinite sets, the proof uses a diagonal argument similar to the uncountability of $\\mathbb{R}$.
+
+// This theorem implies there is no largest cardinality — given any set, its power set is strictly larger, producing an endless hierarchy of infinite sizes.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj7: {
+//     title: `Summary: A Hierarchy of Cardinalities`,
+//     content: `
+// The sets covered above arrange themselves into a strict hierarchy of sizes. The table below collects the major rungs — empty, finite, countably infinite, the continuum, and beyond — with a representative set at each level. Cantor's theorem guarantees the hierarchy never ends: for every set, its power set is strictly larger, producing an unbounded tower of cardinalities.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   faq: {
+//     title: `Cardinality FAQ`,
+//   },
+// }; 
+
+
+// const introContent = {
+//   id: "intro",
+//   title: `Measuring the Size of Sets`,
+//   content: `
+// Cardinality measures the size of a [set](!/set-theory) — how many elements it contains. For finite sets, cardinality is simply a count. For infinite sets, the situation becomes more subtle: different infinite sets can have different sizes, and comparing them requires the concept of one-to-one correspondence. This leads to the distinction between countable and uncountable infinities.
+//   `,
+// };
+
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is the cardinality of a set?",
+//     answer: "Cardinality measures the number of elements in a set, denoted |A|. For finite sets, it's a count. For infinite sets, two sets have equal cardinality when a bijection (one-to-one correspondence) exists between them.",
+//     sectionId: "1"
+//   },
+//   obj2: {
+//     question: "What is a finite set?",
+//     answer: "A set is finite if its elements can be counted with a natural number n. A bijection exists between the set and {1, 2, ..., n}. Any subset of a finite set is also finite.",
+//     sectionId: "2"
+//   },
+//   obj3: {
+//     question: "What is an infinite set?",
+//     answer: "A set is infinite if no natural number expresses its size. Infinite sets can be mapped bijectively onto proper subsets of themselves — for example, natural numbers onto even numbers via f(n) = 2n.",
+//     sectionId: "3"
+//   },
+//   obj4: {
+//     question: "What does countably infinite mean?",
+//     answer: "A set is countably infinite if its elements can be listed as a sequence a₁, a₂, a₃, ... covering every element exactly once. The integers and rationals are countably infinite.",
+//     sectionId: "4"
+//   },
+//   obj5: {
+//     question: "Are the rational numbers countable?",
+//     answer: "Yes. By arranging positive rationals in a grid and traversing diagonally, every rational appears in the sequence. The union of countably many countable sets remains countable.",
+//     sectionId: "4"
+//   },
+//   obj6: {
+//     question: "What is an uncountable set?",
+//     answer: "A set is uncountable if it is infinite but cannot be listed in a sequence. The real numbers are uncountable — Cantor's diagonal argument proves no list can include every real number.",
+//     sectionId: "5"
+//   },
+//   obj7: {
+//     question: "What is Cantor's diagonal argument?",
+//     answer: "Assume all reals between 0 and 1 are listed. Construct a new number by making its n-th digit differ from the n-th digit of the n-th listed number. This number isn't in the list, proving the reals are uncountable.",
+//     sectionId: "5"
+//   },
+//   obj8: {
+//     question: "How do you compare cardinalities of infinite sets?",
+//     answer: "|A| ≤ |B| when an injection exists from A to B. |A| = |B| when a bijection exists. The Cantor-Schröder-Bernstein theorem states: if |A| ≤ |B| and |B| ≤ |A|, then |A| = |B|.",
+//     sectionId: "6"
+//   },
+//   obj9: {
+//     question: "What is Cantor's theorem about power sets?",
+//     answer: "For any set A, |A| < |P(A)| — the power set always has strictly greater cardinality. This implies there is no largest infinity; each power set produces a larger one.",
+//     sectionId: "6"
+//   },
+//   obj10: {
+//     question: "What is the cardinality of the real numbers?",
+//     answer: "The cardinality of ℝ is denoted 𝔠 (continuum) or $2^{ℵ₀}$, equal to the cardinality of the power set of ℕ. Every interval (a, b) has this same cardinality.",
+//     sectionId: "5"
+//   }
+// }
+
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Cardinality of Sets",
+//     "description": "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
+//     "url": "https://www.learnmathclass.com/set-theory/cardinality",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Cardinality of Sets"
+//     },
+//     "teaches": [
+//       "Definition of cardinality and bijections",
+//       "Finite sets and counting",
+//       "Properties of infinite sets",
+//       "Countable and countably infinite sets",
+//       "Uncountable sets and Cantor's diagonal argument",
+//       "Comparing cardinalities and Cantor's theorem"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Set Theory",
+//         "item": "https://www.learnmathclass.com/set-theory"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Cardinality",
+//         "item": "https://www.learnmathclass.com/set-theory/cardinality"
+//       }
+//     ]
+//   }
+// }
+
+
+//   // Operation A demonstration unit: frozen tool states + attached explanation
+//   // panel + tool link, one frame. Rendered as a content-array item.
+//   const demoUnits = {
+//     inclusionExclusion: demoUnitFrame({
+//       svg: [twoSetsVennDiagrams.union, twoSetsVennDiagrams.disjoint],
+//       caption: 'Why the correction term exists',
+//       text: 'Two frozen configurations tell the whole story: when the circles overlap (top), the lens lies inside both sets &#8212; summing |A| + |B| counts it twice, so |A &#8745; B| is subtracted once. When the sets are disjoint (bottom), there is no lens and the counts simply add. Slide between the two situations yourself on the',
+//       href: '/set-theory/visual-tools/two-sets-basic-venn',
+//       linkText: 'two-set Venn explorer',
+//     }),
+//   };
+
+//   return {
+//   props: {
+//     sectionsContent,
+//     introContent,
+//     obj5Table,
+//     obj6Table,
+//     summaryTable,
+//     faqQuestions,
+//     schemas,
+//     demoUnits,
+//     seoData: {
+//       title: "Cardinality of Sets: Finite, Countable & Uncountable | Learn Math Class",
+//       description: "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
+//       keywords: keyWords.join(", "),
+//       url: "/set-theory/cardinality",
+//       name: "Cardinality of Sets"
+//     },
+//   }
+// }
+//    }
+
+
+// export default function CardinalityPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+//   const genericSections=[
+//     {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//         ]
+//     },
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//           <div key={'unit-inclusion-exclusion'} dangerouslySetInnerHTML={{ __html: demoUnits.inclusionExclusion }} />,
+//           `Counting without double-counting is the entire craft of finite cardinality — inclusion-exclusion just states it as a formula, and it scales to any number of sets.`,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+
+//     // obj5: prose + countable-vs-uncountable comparison table
+//     // (placed here since obj4 + obj5 together define both categories; the table synthesizes both)
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//           <div
+//             key={'obj5-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj5Table }}
+//           />,
+//         ]
+//     },
+
+//     // obj6: prose + cardinality-comparison-relations aggregation table
+//     {
+//         id:'notation',
+//         title:sectionsContent.notation.title,
+//         link:``,
+//         content:[
+//           <NotationSection
+//             key={'notation'}
+//             title={sectionsContent.notation.title}
+//             lead={sectionsContent.notation.lead}
+//             inherited={sectionsContent.notation.inherited}
+//             entries={sectionsContent.notation.entries}
+//             symbolsHref={sectionsContent.notation.symbolsHref}
+//             symbolsLabel={sectionsContent.notation.symbolsLabel}
+//             parentHref={sectionsContent.notation.parentHref}
+//             parentLabel={sectionsContent.notation.parentLabel}
+//             theme={'navy'}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//           <div
+//             key={'obj6-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj6Table }}
+//           />,
+//         ]
+//     },
+
+//     // obj7: NEW capstone — hierarchy of cardinalities
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//           <div
+//             key={'summary-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: summaryTable }}
+//           />,
+//         ]
+//     },
+
+//     // faq: rendered component — must be built here, not in getStaticProps
+//     {
+//         id:'faq',
+//         title:sectionsContent.faq.title,
+//         link:``,
+//         content:[
+//           // <FAQSection
+//           //   key={'faq'}
+//           //   faqQuestions={faqQuestions}
+//           //   theme={'blueGradient'}
+//           //   width={'100%'}
+//           //   openFirst={false}
+//           // />,
+
+// //           <FAQSection
+// //             key={'faq'}
+// //             faqQuestions={faqQuestions}
+// //             theme={'cardBased'}
+// //             width={'100%'}
+// //             openFirst={false}
+// // />,
+
+// <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+// <FAQSection
+//   key={'faq'}
+//   faqQuestions={faqQuestions}
+//   theme={'leftBorder'}
+//   width={'100%'}
+//   openFirst={false}
+// />
+// </div>
+// ,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+ 
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cardinality of Sets</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "children"
+//          secondaryNavTitle="More in this Section"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//      <KeyTermsCard
+//            id="0"
+//            title={sectionsContent.obj0.title}
+//            content={sectionsContent.obj0.content}
+//            after={sectionsContent.obj0.after}
+//            variant="light"
+//          />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -8,6 +2568,7 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -30,46 +2591,6 @@ const keyWords = [
   "power set cardinality",
   "size of infinity"
 ]
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
 
   const linkStyle = 'color: inherit; text-decoration: underline;'
 
@@ -172,168 +2693,6 @@ const keyWords = [
   </tbody>
 </table>
 `
-
-//   const sectionsContent = {
-//     obj0: {
-//   title: `Key Terms`,
-//   content: `
-// - [Cardinality](!/set-theory/definitions#cardinality) — the number of elements in a set
-// - [Finite Set](!/set-theory/definitions#finite_set) — a set with a bounded element count
-// - [Infinite Set](!/set-theory/definitions#infinite_set) — a set that cannot be matched with any finite count
-// - [Countable Set](!/set-theory/definitions#countable_set) — a set whose elements can be listed in a sequence
-// - [Uncountable Set](!/set-theory/definitions#uncountable_set) — a set too large to be listed sequentially
-// - [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets related by having the same cardinality
-// - [Power Set](!/set-theory/definitions#power_set) — always produces a set of strictly larger cardinality
-
-
-// `,
-//   before: ``,
-//   after: `
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
-//   link: '',
-// },
-//   obj1: {
-//     title: `Definition of Cardinality`,
-//     content: `
-// The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$.
-
-// For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, then $|A| = 3$. If $B = \\{1, 2, 3, 4, 5\\}$, then $|B| = 5$.
-
-// The empty set contains no elements:
-
-// $$|\\emptyset| = 0$$
-
-// Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj2: {
-//     title: `Finite Sets`,
-//     content: `
-// A set is finite if its elements can be counted with a natural number. Formally, a set $A$ is finite if there exists some $n \\in \\mathbb{N}$ such that:
-
-// $$|A| = n$$
-
-// This means a bijection exists between $A$ and the set $\\{1, 2, 3, \\ldots, n\\}$.
-
-// Examples of finite sets:
-
-// - The set of letters in the English alphabet has cardinality $26$
-
-// - The set of prime numbers less than $20$ is $\\{2, 3, 5, 7, 11, 13, 17, 19\\}$ with cardinality $8$
-
-// - Any [subset](!/set-theory/subsets) of a finite set is finite
-
-// The cardinality of a finite set satisfies:
-
-// $$|A \\cup B| = |A| + |B| - |A \\cap B|$$
-
-// This inclusion-exclusion principle accounts for elements counted twice when sets overlap.
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj3: {
-//     title: `Infinite Sets`,
-//     content: `
-// A set is infinite if it is not finite — no natural number can express its size.
-
-// The standard number sets are all infinite:
-
-// - $\\mathbb{N} = \\{0, 1, 2, 3, \\ldots\\}$ — the natural numbers
-
-// - $\\mathbb{Z} = \\{\\ldots, -2, -1, 0, 1, 2, \\ldots\\}$ — the integers
-
-// - $\\mathbb{Q}$ — the rational numbers
-
-// - $\\mathbb{R}$ — the real numbers
-
-// A defining property of infinite sets: an infinite set can be put into one-to-one correspondence with a proper subset of itself. For example, the function $f(n) = 2n$ maps $\\mathbb{N}$ bijectively onto the even numbers, which form a proper subset of $\\mathbb{N}$.
-
-// Not all infinite sets have the same cardinality. The integers and rationals turn out to be the same size as the natural numbers, but the real numbers form a strictly larger infinity.
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj4: {
-//     title: `Countable Sets`,
-//     content: `
-// A set is countably infinite if its elements can be put in one-to-one correspondence with the natural numbers $\\mathbb{N}$. Such a set can be listed as a sequence:
-
-// $$a_1, a_2, a_3, \\ldots$$
-
-// where every element appears exactly once.
-
-// The integers $\\mathbb{Z}$ are countable. The listing:
-
-// $$0, 1, -1, 2, -2, 3, -3, \\ldots$$
-
-// establishes a bijection with $\\mathbb{N}$.
-
-// The rationals $\\mathbb{Q}$ are countable despite appearing denser than $\\mathbb{Z}$. By arranging positive rationals in a grid and traversing diagonally, every rational is eventually listed.
-
-// A set is called countable if it is either finite or countably infinite. Some authors reserve "countable" for countably infinite sets only — context determines the convention.
-
-// The union of countably many countable sets remains countable. This is why $\\mathbb{Q}$ is countable: it is a countable union of countable sets (rationals with each fixed denominator).
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj5: {
-//     title: `Uncountable Sets`,
-//     content: `
-// A set is uncountable if it is infinite but not countable — its elements cannot be listed in a sequence that covers them all.
-
-// The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
-
-// Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
-
-// The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj6: {
-//     title: `Comparing Cardinalities`,
-//     content: `
-// Cardinalities are compared using functions between sets:
-
-// - $|A| = |B|$ when a bijection exists between $A$ and $B$
-
-// - $|A| \\leq |B|$ when an injection (one-to-one function) exists from $A$ to $B$
-
-// - $|A| < |B|$ when $|A| \\leq |B|$ and $|A| \\neq |B|$
-
-// The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.
-
-// Cantor's theorem establishes a fundamental inequality for any set $A$:
-
-// $$|A| < |\\mathcal{P}(A)|$$
-
-// The [power set](!/set-theory/subsets) always has strictly greater cardinality than the original set. For finite sets, this is immediate: $2^n > n$. For infinite sets, the proof uses a diagonal argument similar to the uncountability of $\\mathbb{R}$.
-
-// This theorem implies there is no largest cardinality — given any set, its power set is strictly larger, producing an endless hierarchy of infinite sizes.
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj7: {
-//     title: `Summary: A Hierarchy of Cardinalities`,
-//     content: `
-// The sets covered above arrange themselves into a strict hierarchy of sizes. The table below collects the major rungs — empty, finite, countably infinite, the continuum, and beyond — with a representative set at each level. Cantor's theorem guarantees the hierarchy never ends: for every set, its power set is strictly larger, producing an unbounded tower of cardinalities.
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-// };
 
 const sectionsContent = {
     obj0: {
@@ -557,6 +2916,9 @@ The sets covered above arrange themselves into a strict hierarchy of sizes. The 
     after: ``,
     link: '',
   },
+  faq: {
+    title: `Cardinality FAQ`,
+  },
 }; 
 
 
@@ -569,56 +2931,39 @@ Cardinality measures the size of a [set](!/set-theory) — how many elements it 
 };
 
 
+// Six questions, each 50-60 words, each covering ground the prose above does
+// not state in extractable form. Questions that merely restated a section
+// heading were removed.
 const faqQuestions = {
   obj1: {
-    question: "What is the cardinality of a set?",
-    answer: "Cardinality measures the number of elements in a set, denoted |A|. For finite sets, it's a count. For infinite sets, two sets have equal cardinality when a bijection (one-to-one correspondence) exists between them.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is a finite set?",
-    answer: "A set is finite if its elements can be counted with a natural number n. A bijection exists between the set and {1, 2, ..., n}. Any subset of a finite set is also finite.",
+    question: "How do you find the cardinality of a union of two sets?",
+    answer: "Add the sizes and subtract the overlap: |A ∪ B| = |A| + |B| − |A ∩ B|. The subtraction is needed because elements lying in both sets would otherwise be counted twice. When the sets are disjoint the overlap is empty and the sizes simply add. Adjust the circles on the [two-set Venn explorer](!/set-theory/visual-tools/two-sets-basic-venn) to watch the correction term appear and vanish.",
     sectionId: "2"
   },
+  obj2: {
+    question: "Are the rational numbers countable?",
+    answer: "Yes. Arrange the positive rationals in a grid by numerator and denominator, then traverse it diagonally — every fraction is reached at some finite step, so the whole set can be listed as a sequence. That listing is a bijection with the natural numbers, making ℚ countably infinite despite sitting densely inside the real line.",
+    sectionId: "4"
+  },
   obj3: {
-    question: "What is an infinite set?",
-    answer: "A set is infinite if no natural number expresses its size. Infinite sets can be mapped bijectively onto proper subsets of themselves — for example, natural numbers onto even numbers via f(n) = 2n.",
-    sectionId: "3"
+    question: "What is Cantor's diagonal argument?",
+    answer: "Suppose every real number between 0 and 1 could be listed. Build a new number whose n-th decimal digit differs from the n-th digit of the n-th number on the list. This number differs from every entry in at least one place, so it is missing from the list. The assumption fails, and the reals are therefore uncountable.",
+    sectionId: "5"
   },
   obj4: {
-    question: "What does countably infinite mean?",
-    answer: "A set is countably infinite if its elements can be listed as a sequence a₁, a₂, a₃, ... covering every element exactly once. The integers and rationals are countably infinite.",
-    sectionId: "4"
+    question: "Can two infinite sets have different sizes?",
+    answer: "Yes. The naturals and the reals are both infinite, but no bijection between them exists — Cantor's diagonal argument rules one out. ℕ has cardinality ℵ₀ and ℝ has cardinality 𝔠, with ℵ₀ < 𝔠. Sizes are compared by functions: an injection from A to B gives |A| ≤ |B|, and a bijection gives equality.",
+    sectionId: "6"
   },
   obj5: {
-    question: "Are the rational numbers countable?",
-    answer: "Yes. By arranging positive rationals in a grid and traversing diagonally, every rational appears in the sequence. The union of countably many countable sets remains countable.",
-    sectionId: "4"
+    question: "What is the cardinality of the real numbers?",
+    answer: "The reals have cardinality 𝔠, called the continuum, also written 2^ℵ₀ because it equals the size of the [power set](!/set-theory/subsets) of ℕ. It is strictly larger than ℵ₀, the size of the naturals. Every interval (a, b) has this same cardinality — a bijection maps any open interval onto the whole real line.",
+    sectionId: "5"
   },
   obj6: {
-    question: "What is an uncountable set?",
-    answer: "A set is uncountable if it is infinite but cannot be listed in a sequence. The real numbers are uncountable — Cantor's diagonal argument proves no list can include every real number.",
-    sectionId: "5"
-  },
-  obj7: {
-    question: "What is Cantor's diagonal argument?",
-    answer: "Assume all reals between 0 and 1 are listed. Construct a new number by making its n-th digit differ from the n-th digit of the n-th listed number. This number isn't in the list, proving the reals are uncountable.",
-    sectionId: "5"
-  },
-  obj8: {
-    question: "How do you compare cardinalities of infinite sets?",
-    answer: "|A| ≤ |B| when an injection exists from A to B. |A| = |B| when a bijection exists. The Cantor-Schröder-Bernstein theorem states: if |A| ≤ |B| and |B| ≤ |A|, then |A| = |B|.",
+    question: "Is there a largest infinity?",
+    answer: "No. Cantor's theorem says |A| < |P(A)| for every set A — the power set is always strictly larger. Apply it to ℝ to get a bigger infinity, then apply it again, and again. The result is an endless tower of cardinalities with no top. For finite sets the same theorem is just the observation that 2ⁿ > n.",
     sectionId: "6"
-  },
-  obj9: {
-    question: "What is Cantor's theorem about power sets?",
-    answer: "For any set A, |A| < |P(A)| — the power set always has strictly greater cardinality. This implies there is no largest infinity; each power set produces a larger one.",
-    sectionId: "6"
-  },
-  obj10: {
-    question: "What is the cardinality of the real numbers?",
-    answer: "The cardinality of ℝ is denoted 𝔠 (continuum) or 2^ℵ₀, equal to the cardinality of the power set of ℕ. Every interval (a, b) has this same cardinality.",
-    sectionId: "5"
   }
 }
 
@@ -686,24 +3031,8 @@ const schemas = {
         "item": "https://www.learnmathclass.com/set-theory/cardinality"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
-
-
-
 
 
   // Operation A demonstration unit: frozen tool states + attached explanation
@@ -852,95 +3181,23 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
           />,
         ]
     },
-    // {
-    //     id:'8',
-    //     title:sectionsContent.obj8.title,
-    //     link:sectionsContent.obj8.link,
-    //     content:[
-    //       sectionsContent.obj8.content,
-    //     ]
-    // },
-    // {
-    //     id:'9',
-    //     title:sectionsContent.obj9.title,
-    //     link:sectionsContent.obj9.link,
-    //     content:[
-    //       sectionsContent.obj9.content,
-    //     ]
-    // },
-    // {
-    //     id:'10',
-    //     title:sectionsContent.obj10.title,
-    //     link:sectionsContent.obj10.link,
-    //     content:[
-    //       sectionsContent.obj10.content,
-    //     ]
-    // },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    
+
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:sectionsContent.faq.title,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -976,13 +3233,6 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

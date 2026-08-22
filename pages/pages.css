@@ -52,3 +52,16 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
+
+
+/* 
+faq */
+
+
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-summary::marker {
+  content: '';
+}

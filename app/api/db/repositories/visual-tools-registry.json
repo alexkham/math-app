@@ -3814,10 +3814,22 @@
       ],
       "diagramsModule": "app/components/algebra/identities/identityDiagrams.js",
       "diagramStates": [
-        "sum-1", "sum-2", "sum-3", "sum-4",
-        "diff-1", "diff-2", "diff-3", "diff-4",
-        "tri-1", "tri-2", "tri-3", "tri-4",
-        "dos-1", "dos-2", "dos-3", "dos-4"
+        "sum-1",
+        "sum-2",
+        "sum-3",
+        "sum-4",
+        "diff-1",
+        "diff-2",
+        "diff-3",
+        "diff-4",
+        "tri-1",
+        "tri-2",
+        "tri-3",
+        "tri-4",
+        "dos-1",
+        "dos-2",
+        "dos-3",
+        "dos-4"
       ],
       "line1": {
         "done": true,
@@ -3827,6 +3839,94 @@
         "anchors": 60,
         "orphans": 0,
         "notes": "STRUCTURAL SPECIAL CASE: one dynamic [view].jsx serving 4 routes (square-of-sum, square-of-difference, square-of-trinomial, difference-of-squares), each with its own 4-step visualizer component. States = 4 proof steps x 4 views, ALL mapped onto existing per-step sections (obj2..obj5 of each view) — zero new sections; obj1 identity-at-a-glance = per-view group. Case C wiring in each of the 4 components (explanations keyed step-1..4 by stepNumber, entry under the Steps list); per-view units/explanations selected by params.view in getStaticProps. Shared numeric-id section builder replaced with a per-view slug map (slugs repeat across views — separate URLs). One diagrams module ports all four renderers; oscillating stages (diff/tri step 4) frozen at full separation, dos step 4 frozen settled with the shifted layout. Companion hub page identities/index.jsx untouched (no tool on it). Pre-edit backups pending Bash recovery via git show HEAD (files verified clean at session start)."
+      }
+    },
+    "pythagorean-identities": {
+      "slug": "pythagorean-identities",
+      "name": "Pythagorean Identities Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/pythagorean-identities/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "pythagorean identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "right triangle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "geometric proof",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "perpendicular bisector",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "isosceles triangle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "first quadrant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trigonometric substitution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square root",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams.js",
+      "diagramStates": [
+        "sin.overview",
+        "sin.steps[0..5]",
+        "cos.overview",
+        "cos.steps[0..5]",
+        "tan",
+        "csc",
+        "sec",
+        "cot"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-22",
+        "states": 16,
+        "sections": 29,
+        "anchors": 82,
+        "orphans": 0,
+        "notes": "One of the four trigonometry pages missed by the 2026-07-31 batch. Case C, wired exactly like its twin DoubleAngleExplorer: additive `explanations` prop, entry keyed by activeFn; for the geometric tabs the hoisted strings replace each scenario step's `description` in the shared BisectedApexDemo step log, for the four derived tabs the string replaces the DerivedIdentityCard intro via a new `introOverride` prop rendered through processContent. States = 12 proof stages (6 sin + 6 cos) + 4 derived cards; the 6 function-level identity sections carry the overview units and act as group sections alongside the two existing group sections (geometric-proof-sin2-cos2-1, derived-identities-tan-sec-csc-cot). 18 new sections on top of 11 existing (all migrated from numeric ids to slugs), 18 units, 0 orphans. Steps 1-4 are literally identical in both scenarios (same state, same wording), and following the double-angle precedent each still got its own dedicated section, with the cosine copies written from the cosine's point of view. Diagrams module ports BisectedApexCore at theta=35: no apex arc (PS never sets showApex), amber #B45309 chord and half-chord labels per BisectedApexDemo v8, unit-circle arc drawn only between A and B since the full circle leaves the compact frame; stages 3-6 share one scene so each carries a banner with that step's algebra. Frozen values (0.574, 0.819, 0.700, 1.743, 1.221, 1.428) verified against the live formula table. VERIFICATION: statics complete (29 sections, 82 anchors, 0 orphans, 18/18 units); SSR verified by curl (200, 29 sections, 36 unit panels = 2x18) and one clean browser render (29 sections, 18 frames, 180 KaTeX, no overlay). Playwright landing tests NOT run - the dev environment had a concurrent `next build` plus a second `next dev` writing the same .next directory, which corrupts it and returns intermittent 500s."
       }
     }
   },

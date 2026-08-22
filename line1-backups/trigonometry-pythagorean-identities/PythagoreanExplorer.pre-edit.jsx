@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import BisectedApexDemo from '../BisectedApexDemo';
-import { processContent } from '@/app/utils/contentProcessor';
 
 /* ============================================================
    PythagoreanExplorer v4
@@ -396,7 +395,7 @@ function ThetaSlider({ theta, onChange, min = 10, max = 80 }) {
   );
 }
 
-function DerivedIdentityCard({ fn, theta, onThetaChange, onJumpTo, introOverride }) {
+function DerivedIdentityCard({ fn, theta, onThetaChange, onJumpTo }) {
   const r = REGISTRY[fn];
   const d = r.derived;
   const th = (theta * Math.PI) / 180;
@@ -423,7 +422,7 @@ function DerivedIdentityCard({ fn, theta, onThetaChange, onJumpTo, introOverride
           lineHeight: 1.5,
           color: COLORS.textMuted,
           margin: '0 0 12px',
-        }}>{introOverride ? processContent(introOverride) : d.intro}</p>
+        }}>{d.intro}</p>
         <SourceButtons sources={r.derivedFrom || []} onJumpTo={onJumpTo} />
       </div>
 
@@ -581,13 +580,9 @@ function FormulaTable({ theta, active, onSelect }) {
   );
 }
 
-// Legacy scenario step descriptions and derived intros above are kept as
-// fallback only. Canonical explanations live in getStaticProps of the page
-// that renders this component; edit the page's explanations object.
 export default function PythagoreanExplorer({
   initialFn    = 'sin',
   initialTheta = 35,
-  explanations = null,
 }) {
   const [activeFn, setActiveFn] = useState(initialFn);
   const [theta, setTheta]       = useState(initialTheta);
@@ -604,11 +599,6 @@ export default function PythagoreanExplorer({
   const entry = REGISTRY[activeFn];
   const isGeometric = !!entry.scenario;
 
-  const ex = explanations && explanations[activeFn];
-  const scenario = (isGeometric && ex && Array.isArray(ex.steps))
-    ? { ...entry.scenario, steps: entry.scenario.steps.map((s, i) => (ex.steps[i] ? { ...s, description: ex.steps[i] } : s)) }
-    : entry.scenario;
-
   return (
     <div>
       <TabStrip active={activeFn} onChange={setActiveFn} />
@@ -616,7 +606,7 @@ export default function PythagoreanExplorer({
       {isGeometric ? (
         <BisectedApexDemo
           key={activeFn}
-          scenario={scenario}
+          scenario={entry.scenario}
           theta={theta}
           onThetaChange={setTheta}
         />
@@ -627,7 +617,6 @@ export default function PythagoreanExplorer({
           theta={theta}
           onThetaChange={setTheta}
           onJumpTo={setActiveFn}
-          introOverride={ex ? ex.content : null}
         />
       )}
 

@@ -8,6 +8,7 @@ import { renderAcademicBlockHTML } from '@/app/utils/academicBlocks'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 
@@ -178,30 +179,57 @@ This page explores tautologies comprehensively, examining their properties, rela
 
   const sectionsContent={
     definition:{
-      title:'Definition and Notation',
-      content:`A **tautology** is a proposition that is always true, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a tautology is a formula that evaluates to true under all possible truth assignments. 
+      title:'Definition',
+      content:`A **tautology** is a proposition that is always true, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a tautology is a formula that evaluates to true under all possible truth assignments.
             Example:
 \t\t\t\t\t\t$P∨¬P$
 (The [law](!/logic/propositional-logic/laws) of the excluded middle: "P or not P" is always true.)
-The **notation** commonly used for **tautology** in logic is:  
-
-\t\t\t\t\t\t$\\top$  
-
-(The **top symbol**, also called "verum" or "true constant").  
-
-Alternatively, a **tautology can be denoted** explicitly as:  
-
-\t\t\t\t\t\t$\\vdash P$
-
-which means **"P is provable"** or **"P is always true"**.  
-
-In some texts, tautologies are also expressed using [equivalence](!/logic/propositional-logic/semantics/equivalences) sign like this: 
-
-\t\t\t\t\t\t$P \\equiv \\top$
-
-to explicitly state that a proposition $\( P \)$ is always true (equivalent to true).
 `
 
+    },
+
+    notation:{
+      title: `Tautology Notation`,
+      lead: `The constant that is true by definition, and the two turnstiles that certify truth by different means — one by proof, one by inspection of every case. Telling those two apart is the oldest distinction in formal logic.`,
+      inherited: `The connectives and letters come from [propositional logic notation](!/logic/propositional-logic/syntax#notation), the meta-level $\\equiv$ from [equivalence notation](!/logic/propositional-logic/semantics/equivalences#notation); the mirror constant $\\bot$ belongs to the [contradiction page](!/logic/propositional-logic/semantics/contradiction).`,
+      entries: [
+        {
+          id: 'verum',
+          tex: `$\\top$`,
+          read: `top; verum; the true constant`,
+          means: `A constant, not a variable: $\\top$ denotes truth itself — a formula true under every assignment, needing no letters. It stands for the whole class of tautologies the way a single number stands for a value.`,
+          cases: `As a constant it can sit inside formulas — $P \\vee \\top$ is $\\top$, $P \\wedge \\top$ is $P$; the [laws page](!/logic/propositional-logic/laws) states these as the identity and domination rules.`,
+          sameGlyphElsewhere: `The same glyph is the [perpendicularity mark's](!/linear-algebra/orthogonality/inner-product#notation) upside-down twin, and in other fields marks the top of an ordering; in logic it is always the true constant.`,
+        },
+        {
+          id: 'turnstile',
+          tex: `$\\vdash P$`,
+          read: `turnstile P; P is provable`,
+          means: `The single turnstile is a **syntactic** certificate: $\\vdash P$ claims a derivation of $P$ exists in the proof system — obtained by pushing symbols according to rules, without consulting truth values at all.`,
+          cases: `With premises on the left it becomes an argument: $P, P \\to Q \\vdash Q$ reads "from these, $Q$ is derivable"; bare on the left, $\\vdash P$ marks $P$ as a theorem of the system.`,
+          confusedWith: `A statement inside the language. The turnstile is metalanguage — it talks about formulas from outside; writing $\\vdash$ between two connectives produces no formula the [formation rules](!/logic/propositional-logic/syntax#notation) recognize.`,
+        },
+        {
+          id: 'double-turnstile',
+          tex: `$\\vDash P$`,
+          read: `double turnstile P; P is valid`,
+          means: `The double turnstile is a **semantic** certificate: $\\vDash P$ claims $P$ comes out true under every assignment — established by checking cases, as a truth table does, not by deriving anything.`,
+          cases: `The two turnstiles answer different questions about the same formula — $\\vdash P$ asks "can it be proved?", $\\vDash P$ asks "is it always true?"; that a system's answers agree in both directions is exactly what soundness and completeness assert.`,
+          confusedWith: `The single turnstile. One extra bar swaps proof for truth — and the pair also appears with premises, where $\\Gamma \\vDash P$ means every model of $\\Gamma$ makes $P$ true, the semantic cousin of $\\Gamma \\vdash P$.`,
+        },
+        {
+          id: 'equiv-top',
+          tex: `$P \\equiv \\top$`,
+          read: `P is equivalent to the true constant`,
+          means: `The third spelling: rather than name $P$ a tautology, assert that it agrees with $\\top$ in every case — the [equivalence relation](!/logic/propositional-logic/semantics/equivalences#notation) applied to a constant.`,
+          cases: `Handy where a proof already runs in equivalences — a chain of law-substitutions ending in $\\top$ has proved a tautology, which is the algebraic verification method in **Are all equivalences tautologies?** below.`,
+          confusedWith: `An assignment. $P \\equiv \\top$ does not set $P$ true — it reports that $P$ was already true in every case; the $\\equiv$ is a verdict, not an instruction.`,
+        },
+      ],
+      symbolsHref: `/math-symbols/math-logic`,
+      symbolsLabel: `All logic symbols`,
+      parentHref: `/logic/propositional-logic/semantics`,
+      parentLabel: `Semantics`,
     },
     tautology_equivalence:{
       title:'Tautology vs Equivalence',
@@ -402,6 +430,24 @@ export default function TautologyPage({tautologies ,introContent ,sectionsConten
             id:'definition',
             title:sectionsContent.definition.title,
             content:sectionsContent.definition.content,
+          },
+          {
+            id:'notation',
+            title:sectionsContent.notation.title,
+            content:[
+              <NotationSection
+                key={'notation'}
+                title={sectionsContent.notation.title}
+                lead={sectionsContent.notation.lead}
+                inherited={sectionsContent.notation.inherited}
+                entries={sectionsContent.notation.entries}
+                symbolsHref={sectionsContent.notation.symbolsHref}
+                symbolsLabel={sectionsContent.notation.symbolsLabel}
+                parentHref={sectionsContent.notation.parentHref}
+                parentLabel={sectionsContent.notation.parentLabel}
+                theme={'navy'}
+              />,
+            ]
           },
             {
             id:'tautology_vs_equivalence',

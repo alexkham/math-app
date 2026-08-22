@@ -567,6 +567,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -863,25 +864,41 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
   
     },
     notation:{
-      title:`Useful Notation
-`,
-      content:`
-      Before working with sample spaces in probability, a few standard symbols are used to describe outcomes and the sets they belong to:
-
-$\(\\Omega\)$ — the sample space (the set of all possible outcomes)
- $\(\\omega\)$ — a single outcome (an element of $\(\\Omega\))$
- \{\ \} — explicit listing of outcomes for finite sample spaces
- Set-builder notation, e.g. $\(\\{x : x > 0\\}\)$
- Intervals for continuous outcomes, e.g. $\([0,\\infty)\)$
- Cartesian products for multi-step scenarios, e.g. $\(\\Omega = A \\times B\)$
- Events as subsets of the sample space: $\(A \\subseteq \\Omega\)$
-
-These symbols will appear throughout the page whenever we describe outcomes or refer to parts of the sample space.
-
-`,
-      before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
-  
+      title:`Sample Space Notation`,
+      lead:`Two Greek letters carry the whole page — one capital for the set of everything that could happen, one lowercase for a single thing that did. The set-theory machinery they sit inside is borrowed wholesale, and every mark is catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The braces, set-builder bar, $\\in$ and $\\subseteq$ that describe sample spaces are owned by [set theory](!/set-theory/basics#2) and the [subsets page](!/set-theory/subsets#6); interval spellings like $[0, \\infty)$ by [domain notation](!/functions/domain#2); $P(\\cdot)$ by the [probability function](!/probability/probability-function#notation).`,
+      entries:[
+        {
+          id:'omega-capital',
+          tex:`$\\Omega$`,
+          read:`omega — the sample space`,
+          means:`Capital omega names the set of every possible outcome of an experiment — the universe the whole problem lives inside, as **Definition of Sample Space** above establishes. Nothing outside $\\Omega$ can occur, which is exactly why $P(\\Omega) = 1$.`,
+          cases:`Its shape varies with the experiment: a finite roster $\\{1,2,3,4,5,6\\}$, a countable list, or a continuous interval $[0,\\infty)$ — **Types of Sample Spaces** below sorts them; multi-step experiments build it as a Cartesian product, $\\Omega = A \\times B$.`,
+          alsoWritten:`$S$ — the school-textbook letter, from "sample space"; older and applied texts also write $U$, borrowing the [universal set](!/set-theory/operations#notation) that plays the same role in set theory.`,
+          confusedWith:`An event. $\\Omega$ is the ground everything else is measured against, not one outcome competing for probability — it is the certain event, the only one whose probability is fixed in advance.`,
+        },
+        {
+          id:'omega-lowercase',
+          tex:`$\\omega$`,
+          read:`little omega — a single outcome`,
+          means:`Lowercase omega names one individual outcome, an element of the sample space: $\\omega \\in \\Omega$. The case distinction does the work — capital for the whole collection, lowercase for one member, the same convention [random variables](!/probability/probability-function#notation) use for $X$ and $x$.`,
+          cases:`Outcomes can be compound objects — an ordered pair $(H, T)$ or a triple $(x_1, x_2, x_3)$ is still a single $\\omega$, which is what makes multi-step experiments fit the same framework.`,
+          confusedWith:`An event. $\\omega$ is an element and $A$ a subset, so membership and containment do not swap: $\\omega \\in \\Omega$ but $A \\subseteq \\Omega$, and the singleton $\\{\\omega\\}$ — not $\\omega$ — is the event that outcome occurs. The [element-versus-subset error](!/set-theory/basics#2) arrives here in probability dress.`,
+          sameGlyphElsewhere:`The same letter is the [primitive root of unity](!/complex-numbers/demoivre-theorem#notation) in complex numbers and angular frequency in physics — unrelated tenants of a much-used letter.`,
+        },
+        {
+          id:'event-subset',
+          tex:`$A \\subseteq \\Omega$`,
+          read:`A is a subset of the sample space`,
+          means:`Events are written as subsets: any collection of outcomes is an event, so the containment mark is how probability declares what it is about to measure — the bridge that lets [set operations](!/set-theory/operations#notation) become event algebra.`,
+          cases:`The two extremes are named: $\\Omega$ itself is the certain event and $\\varnothing$ the impossible one; unions, intersections and complements of events are those set operations unchanged, which is what the [events page](!/probability/events) exploits.`,
+          confusedWith:`A statement about likelihood. The subset mark records structure only — which outcomes belong — while $P(A)$ supplies the number; a large event is not automatically a probable one.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
     },
   
     types:{
@@ -1111,8 +1128,18 @@ export default function SampleSpacePage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.notation.content,
-            sectionsContent.notation.after,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

@@ -7,6 +7,7 @@ import ExpandableTable from '@/app/components/data-wrapper/generic-table/Expanda
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 export async function getStaticProps(){
@@ -180,33 +181,52 @@ This page explores contradictions in detail, examining their properties, relatio
   const contradictionContent={
       
     definition:{
-      title:'Definition and Notation',
+      title:'Definition',
       description:`A **contradiction** is a proposition that is always false, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a contradiction is a formula that evaluates to false under all possible truth assignments.
 
 **Example**:
 
-\t\t\t\t\t$P∧¬P$ 
+\t\t\t\t\t$P∧¬P$
 
 (The [law](!/logic/propositional-logic/laws) of non-contradiction: "P and not P" is always false.)
-
-The **notation** commonly used for **contradiction** in logic is:
-
-\t\t\t\t\t$\\bot$
-
-(The **bottom symbol**, also called "falsum" or "false constant").
-
-Alternatively, a **contradiction can be denoted** explicitly as:
-
-\t\t\t\t\t$\\vdash ¬P$ 
-
-which means "the negation of P is provable" when P is a [tautology](!/logic/propositional-logic/semantics/tautology).
-
-In some texts, contradictions are also expressed using [equivalence](!/logic/propositional-logic/semantics/equivalences) sign like this:
-
-\t\t\t\t\t$P \\equiv \\bot$
-
-to explicitly state that a proposition $\( P \)$ is always false (equivalent to false).
 `
+    },
+
+    notation:{
+      title: `Contradiction Notation`,
+      lead: `The mirror of the tautology marks: a constant for falsehood, a turnstile carrying a negation, and the equivalence spelling. Everything here is the [tautology notation](!/logic/propositional-logic/semantics/tautology#notation) reflected — same grammar, opposite pole.`,
+      inherited: `$\\top$, $\\vdash$ and $\\vDash$ are owned by the [tautology page](!/logic/propositional-logic/semantics/tautology#notation); the connectives and letters by [propositional logic notation](!/logic/propositional-logic/syntax#notation); $\\equiv$ by [equivalence notation](!/logic/propositional-logic/semantics/equivalences#notation).`,
+      entries: [
+        {
+          id: 'falsum',
+          tex: `$\\bot$`,
+          read: `bottom; falsum; the false constant`,
+          means: `The false constant — $\\top$ turned upside down, and the inversion is the whole idea: $\\bot$ denotes falsehood itself, a formula false under every assignment, as **Definition** above establishes with $P \\wedge \\neg P$.`,
+          cases: `Inside formulas it absorbs and annihilates in mirror image: $P \\wedge \\bot$ is $\\bot$, $P \\vee \\bot$ is $P$ — the [laws](!/logic/propositional-logic/laws) reflect the $\\top$ rules exactly. Proof by contradiction is the practical payoff: derive $\\bot$ and the assumption falls.`,
+          alsoWritten: `$F$ or $\\mathbf{F}$ in truth tables and elementary texts — the tables on this page use it; some systems write $0$, borrowing Boolean algebra's values.`,
+          sameGlyphElsewhere: `The identical glyph is the [perpendicular sign](!/linear-algebra/orthogonality/inner-product#notation) $\\perp$ of geometry and linear algebra, where it relates two objects rather than naming a constant — same shape, different arity.`,
+        },
+        {
+          id: 'turnstile-negation',
+          tex: `$\\vdash \\neg P$`,
+          read: `the negation of P is provable`,
+          means: `The turnstile applied to a negation: $\\vdash \\neg P$ certifies that $\\neg P$ is derivable — which is the proof-side way of declaring $P$ contradictory, since a formula false in every case has a provable negation.`,
+          cases: `The mirror is exact — $\\vdash P$ marks a [tautology](!/logic/propositional-logic/semantics/tautology#notation), $\\vdash \\neg P$ a contradiction; negation is what carries a claim from one pole to the other.`,
+          confusedWith: `$\\nvdash P$. "Not provable" is a much weaker statement than "the negation is provable" — the crossed turnstile denies a derivation exists; $\\vdash \\neg P$ supplies one for the opposite formula.`,
+        },
+        {
+          id: 'equiv-bot',
+          tex: `$P \\equiv \\bot$`,
+          read: `P is equivalent to the false constant`,
+          means: `The equivalence spelling: rather than call $P$ a contradiction, assert that it agrees with $\\bot$ in every case — the same construction the tautology page makes with $\\top$.`,
+          cases: `The laws of **Contradictions as Logic Laws** below are written this way, in the $F$ dialect: $P \\wedge \\neg P \\equiv F$; a simplification chain ending at $\\bot$ has proved a contradiction.`,
+          confusedWith: `A claim that $P$ is false right now. Like its twin, $\\equiv$ delivers a verdict over all cases, not a truth assignment in one — the sentence "$P$ happens to be false" is a different, weaker statement.`,
+        },
+      ],
+      symbolsHref: `/math-symbols/math-logic`,
+      symbolsLabel: `All logic symbols`,
+      parentHref: `/logic/propositional-logic/semantics`,
+      parentLabel: `Semantics`,
     },
     laws:{
       title:'Contradictions as Logic Laws',
@@ -344,6 +364,24 @@ export default function ContradictionPage({
             id:'definition',
             title: contradictionContent.definition.title,
             content:contradictionContent.definition.description
+          },
+          {
+            id:'notation',
+            title: contradictionContent.notation.title,
+            content:[
+              <NotationSection
+                key={'notation'}
+                title={contradictionContent.notation.title}
+                lead={contradictionContent.notation.lead}
+                inherited={contradictionContent.notation.inherited}
+                entries={contradictionContent.notation.entries}
+                symbolsHref={contradictionContent.notation.symbolsHref}
+                symbolsLabel={contradictionContent.notation.symbolsLabel}
+                parentHref={contradictionContent.notation.parentHref}
+                parentLabel={contradictionContent.notation.parentLabel}
+                theme={'navy'}
+              />,
+            ]
           },
            
           {

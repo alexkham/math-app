@@ -508,8 +508,6 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PythagoreanExplorer from '../../../../app/components/trigonometry/identities/pythagorean/PythagoreanExplorer'
 import SiblingsNavStandalone  from '../../../../app/components/SiblingsNavStandalone'
-import pythagoreanDiagrams from '../../../../app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -569,7 +567,7 @@ What changes as you slide:
 • The number readout shows the exact degree value.
 • The verification cards at the bottom recompute both sides of the identity at the new $\\theta$.
 
-Restricting to the first quadrant keeps every trig function positive, which lets the tool [take square roots without sign ambiguity](!#sine-proof-step-6-take-the-positive-root).`,
+Restricting to the first quadrant keeps every trig function positive, which lets the tool take square roots without sign ambiguity.`,
       before:``,
       after:``,
       link:'',
@@ -583,7 +581,7 @@ Restricting to the first quadrant keeps every trig function positive, which lets
 • **Play** / **Pause** — advance automatically.
 • **Speed selector** — $0.5\\times$, $1\\times$, $1.5\\times$, $2\\times$.
 
-Each step adds one element (radii, triangle fill, bisector, half-angles, leg labels $\\sin\\theta$ and $\\cos\\theta$, final metrics). The right panel logs each step with reasoning, and every stage has its own write-up below, beginning with [the setup](!#sine-proof-step-1-setup).`,
+Each step adds one element (radii, triangle fill, bisector, half-angles, leg labels $\\sin\\theta$ and $\\cos\\theta$, final metrics). The right panel logs each step with reasoning.`,
       before:``,
       after:``,
       link:'',
@@ -596,7 +594,7 @@ Elements that appear across the steps:
 • **Indigo chord** $AB$ — the base of the isosceles triangle.
 • **Blue segment** $OM$ — the bisector, equal to $\\cos\\theta$ in right triangle $OMA$.
 • **Half-chord labels** — $\\sin\\theta$ on segment $MA$.
-• **Right-angle mark** at $M$ — the key to [applying Pythagoras](!#sine-proof-step-4-pythagoras).
+• **Right-angle mark** at $M$ — the key to applying Pythagoras.
 
 Once the legs are labeled, the identity $\\sin^2\\theta + \\cos^2\\theta = 1$ follows from leg² + leg² = hypotenuse² with hypotenuse $1$.`,
       before:``,
@@ -609,7 +607,7 @@ Once the legs are labeled, the identity $\\sin^2\\theta + \\cos^2\\theta = 1$ fo
 
 Layout of the derived card:
 • A short intro explains which manipulation (divide by $\\sin^2\\theta$ or $\\cos^2\\theta$) produces the identity.
-• **Jump buttons** link directly to [the geometric proofs of the source identities](!#geometric-proof-sin2-cos2-1) $\\sin\\theta$ and $\\cos\\theta$.
+• **Jump buttons** link directly to the geometric proofs of the source identities $\\sin\\theta$ and $\\cos\\theta$.
 • A multi-line derivation block shows each manipulation with a side note.
 • Verification cards confirm both sides match numerically.
 
@@ -625,7 +623,7 @@ This split keeps the geometric idea isolated to the base identity and treats the
 • **Function** column — the active trig function.
 • **Identity** column — the identity expressed as a square root.
 • **Value** column — the numeric value at the current $\\theta$.
-• **Source** column — labels each as [geometric](!#geometric-proof-sin2-cos2-1) ($\\sin\\theta$, $\\cos\\theta$) or **via sin, cos** for the [derived forms](!#derived-identities-tan-sec-csc-cot).
+• **Source** column — labels each as **geometric** ($\\sin\\theta$, $\\cos\\theta$) or **via sin, cos** for derived ones.
 
 Click any row to make that function active. The current row gets a deep-blue left border and tinted background.`,
       before:``,
@@ -660,8 +658,6 @@ $$\\sin^2\\theta + \\cos^2\\theta = 1$$
 Solving for $\\sin\\theta$ or $\\cos\\theta$ and taking the positive root gives the two geometric identities:
 $$\\sin\\theta = \\sqrt{1 - \\cos^2\\theta}, \\quad \\cos\\theta = \\sqrt{1 - \\sin^2\\theta}$$
 
-Each result is treated separately below, stage by stage: [the sine form](!#the-sine-pythagorean-identity) and [the cosine form](!#the-cosine-pythagorean-identity).
-
 For full coverage and equivalent forms across all quadrants, see the **Pythagorean identities theory page**.`,
       before:``,
       after:``,
@@ -673,11 +669,11 @@ For full coverage and equivalent forms across all quadrants, see the **Pythagore
 
 Dividing $\\sin^2\\theta + \\cos^2\\theta = 1$ by $\\cos^2\\theta$:
 $$\\tan^2\\theta + 1 = \\sec^2\\theta$$
-This gives the [tangent form](!#the-tangent-pythagorean-identity) $\\tan\\theta = \\sqrt{\\sec^2\\theta - 1}$ and the [secant form](!#the-secant-pythagorean-identity) $\\sec\\theta = \\sqrt{1 + \\tan^2\\theta}$.
+This gives $\\tan\\theta = \\sqrt{\\sec^2\\theta - 1}$ and $\\sec\\theta = \\sqrt{1 + \\tan^2\\theta}$.
 
 Dividing $\\sin^2\\theta + \\cos^2\\theta = 1$ by $\\sin^2\\theta$:
 $$1 + \\cot^2\\theta = \\csc^2\\theta$$
-This gives the [cotangent form](!#the-cotangent-pythagorean-identity) $\\cot\\theta = \\sqrt{\\csc^2\\theta - 1}$ and the [cosecant form](!#the-cosecant-pythagorean-identity) $\\csc\\theta = \\sqrt{1 + \\cot^2\\theta}$.
+This gives $\\cot\\theta = \\sqrt{\\csc^2\\theta - 1}$ and $\\csc\\theta = \\sqrt{1 + \\cot^2\\theta}$.
 
 For step-by-step derivations and the unsigned forms valid in all quadrants, see the **trigonometric identities page** and the **reciprocal identities page**.`,
       before:``,
@@ -692,8 +688,6 @@ For step-by-step derivations and the unsigned forms valid in all quadrants, see 
 • **Integration** — $u$-substitution in integrals like $\\int \\sec^2\\theta \\, d\\theta = \\tan\\theta + C$ relies on $1 + \\tan^2\\theta = \\sec^2\\theta$.
 • **Equation solving** — quadratic equations in $\\sin\\theta$ or $\\cos\\theta$ frequently emerge after substitution.
 • **Proofs of other identities** — sum, difference, double-angle, and half-angle identities all use Pythagorean relations along the way.
-
-Every one of these leans on a single line of algebra, [the base identity](!#sine-proof-step-4-pythagoras), or on one of the five forms rearranged from it.
 
 For applications and worked examples, see the **trigonometric identities applications page**.`,
       before:``,
@@ -712,183 +706,6 @@ For applications and worked examples, see the **trigonometric identities applica
 • **Triangle Explorer** — interactive triangles with built-in Pythagoras verification.`,
       before:``,
       after:``,
-      link:'',
-    },
-
-    obj12:{
-      title:`The Sine Pythagorean Identity`,
-      content:`The identity $\\sin\\theta = \\sqrt{1 - \\cos^2\\theta}$ is proved geometrically in the explorer, by reading the legs of a right triangle whose hypotenuse is a radius of the unit circle.`,
-      before:``,
-      after:`The proof runs through six stages: [setup](!#sine-proof-step-1-setup), [bisect](!#sine-proof-step-2-bisect), [identify the legs](!#sine-proof-step-3-identify-the-legs), [apply Pythagoras](!#sine-proof-step-4-pythagoras), [solve for the squared sine](!#sine-proof-step-5-solve-for-sin2), and [take the positive root](!#sine-proof-step-6-take-the-positive-root).
-
-Everything else on the page rests on this one. [The cosine form](!#the-cosine-pythagorean-identity) is the same equation solved for the other leg, and all four [derived identities](!#derived-identities-tan-sec-csc-cot) begin by dividing $\\sin^2\\theta + \\cos^2\\theta = 1$ through by one of its two terms.`,
-      link:'',
-    },
-    obj13:{
-      title:`The Cosine Pythagorean Identity`,
-      content:`The identity $\\cos\\theta = \\sqrt{1 - \\sin^2\\theta}$ comes out of the same right triangle, solved for the other leg.`,
-      before:``,
-      after:`Its six stages: [setup](!#cosine-proof-step-1-setup), [bisect](!#cosine-proof-step-2-bisect), [identify the legs](!#cosine-proof-step-3-identify-the-legs), [apply Pythagoras](!#cosine-proof-step-4-pythagoras), [solve for the squared cosine](!#cosine-proof-step-5-solve-for-cos2), and [take the positive root](!#cosine-proof-step-6-take-the-positive-root).
-
-Because $\\sin^2\\theta + \\cos^2\\theta = 1$ treats its two terms alike, this proof and [the sine proof](!#the-sine-pythagorean-identity) are the same argument until the fifth step, where one subtracts $\\cos^2\\theta$ and the other subtracts $\\sin^2\\theta$. Switching tabs between them leaves the picture unchanged and rewrites only the last two entries of the step log.`,
-      link:'',
-    },
-    obj14:{
-      title:`The Tangent Pythagorean Identity`,
-      content:`Tangent needs no new geometry. Dividing the base identity by $\\cos^2\\theta$ converts it into a statement about tangent and secant.`,
-      before:``,
-      after:`$$\\frac{\\sin^2\\theta + \\cos^2\\theta}{\\cos^2\\theta} = \\frac{1}{\\cos^2\\theta} \\quad\\Longrightarrow\\quad \\tan^2\\theta + 1 = \\sec^2\\theta$$
-
-Solving that for the squared tangent and taking the root gives the form the tool displays:
-$$\\tan\\theta = \\sqrt{\\sec^2\\theta - 1}$$
-
-The same three lines, stopped one step earlier and solved the other way, give [the secant form](!#the-secant-pythagorean-identity) — which is why both cards show the identical derivation down to their fourth line. The division is only legal where $\\cos\\theta \\neq 0$; inside the slider's first-quadrant range that never bites, but at $\\theta = 90°$ both tangent and secant blow up together.`,
-      link:'',
-    },
-    obj15:{
-      title:`The Cosecant Pythagorean Identity`,
-      content:`Cosecant comes from the other division: dividing the base identity by $\\sin^2\\theta$ brings cotangent and cosecant into play.`,
-      before:``,
-      after:`$$\\frac{\\sin^2\\theta + \\cos^2\\theta}{\\sin^2\\theta} = \\frac{1}{\\sin^2\\theta} \\quad\\Longrightarrow\\quad 1 + \\cot^2\\theta = \\csc^2\\theta$$
-
-Solving for the squared cosecant leaves the identity in the tool's square-root form:
-$$\\csc\\theta = \\sqrt{1 + \\cot^2\\theta}$$
-
-No root is ever taken of a negative number here: $\\cot^2\\theta$ cannot be negative, so this form is safe for every $\\theta$ where cotangent is defined. [The cotangent form](!#the-cotangent-pythagorean-identity) shares its first three lines, and the division that produced both is undefined only where $\\sin\\theta = 0$.`,
-      link:'',
-    },
-    obj16:{
-      title:`The Secant Pythagorean Identity`,
-      content:`Secant is the second harvest of the divide-by-$\\cos^2\\theta$ derivation: the same relation $\\tan^2\\theta + 1 = \\sec^2\\theta$, solved for the other unknown.`,
-      before:``,
-      after:`$$\\sec^2\\theta = 1 + \\tan^2\\theta \\quad\\Longrightarrow\\quad \\sec\\theta = \\sqrt{1 + \\tan^2\\theta}$$
-
-This is the form that makes trigonometric substitution work in calculus: any expression of the shape $\\sqrt{1 + x^2}$ becomes a single secant after the substitution $x = \\tan\\theta$. Its partner in the same derivation is [the tangent form](!#the-tangent-pythagorean-identity), and both descend from [the base identity](!#sine-proof-step-4-pythagoras) proved in the geometric scene.`,
-      link:'',
-    },
-    obj17:{
-      title:`The Cotangent Pythagorean Identity`,
-      content:`Cotangent is the second harvest of the divide-by-$\\sin^2\\theta$ derivation, taken from $1 + \\cot^2\\theta = \\csc^2\\theta$.`,
-      before:``,
-      after:`$$\\cot^2\\theta = \\csc^2\\theta - 1 \\quad\\Longrightarrow\\quad \\cot\\theta = \\sqrt{\\csc^2\\theta - 1}$$
-
-Unlike its partner [the cosecant form](!#the-cosecant-pythagorean-identity), this one subtracts inside the root, so it needs $\\csc^2\\theta \\geq 1$ — true for every angle, since $|\\sin\\theta| \\leq 1$. The pairing mirrors what happens on the cosine side of the family: [tangent](!#the-tangent-pythagorean-identity) subtracts inside its root for the same reason.`,
-      link:'',
-    },
-    obj18:{
-      title:`Sine Proof, Step 1: Setup`,
-      content:`[The sine proof](!#the-sine-pythagorean-identity) opens with two radii $OA$ and $OB$ of length $1$ drawn from the center $O$ of the unit circle, joined by the chord $AB$.`,
-      before:``,
-      after:`Nothing has been claimed yet. The only fact on the table is the one that carries the whole argument: both radii are exactly $1$ long, so any right triangle built inside this figure inherits a hypotenuse of $1$.
-
-The figure is isosceles by construction, which is what makes the next move — [dropping the perpendicular](!#sine-proof-step-2-bisect) — split it into two matching halves.`,
-      link:'',
-    },
-    obj19:{
-      title:`Sine Proof, Step 2: Bisect`,
-      content:`Dropping $OM$ perpendicular to the chord $AB$ produces right triangle $OMA$, with the right angle at $M$.`,
-      before:``,
-      after:`Because triangle $OAB$ is isosceles, that perpendicular also bisects the angle at $O$: the two arcs marked at the center are equal, and each one is the $\\theta$ the slider controls. The scene draws them only above $22°$, so at very small angles the marks disappear while the geometry stays the same.
-
-The small square at $M$ is the reason for this step. [Pythagoras](!#sine-proof-step-4-pythagoras) applies to right triangles and nothing else, so the proof cannot proceed until one exists.`,
-      link:'',
-    },
-    obj20:{
-      title:`Sine Proof, Step 3: Identify the Legs`,
-      content:`In right triangle $OMA$ the hypotenuse is $OA = 1$ and the angle at $O$ is $\\theta$, which makes the two legs the basic ratios themselves.`,
-      before:``,
-      after:`$$MA = \\sin\\theta \\qquad OM = \\cos\\theta$$
-
-With a hypotenuse of $1$, "opposite over hypotenuse" collapses to "opposite". That is why the unit circle is the natural home for these identities: the ratios stop being ratios and become plain lengths you can measure off the picture.
-
-Both labels appear at once, because the same triangle carries both. [The cosine proof](!#cosine-proof-step-3-identify-the-legs) reads the very same figure — it simply keeps its eye on $OM$ instead of $MA$.`,
-      link:'',
-    },
-    obj21:{
-      title:`Sine Proof, Step 4: Pythagoras`,
-      content:`Applying the Pythagorean theorem to triangle $OMA$ — leg squared plus leg squared equals hypotenuse squared — turns the picture into the base identity.`,
-      before:``,
-      after:`$$\\sin^2\\theta + \\cos^2\\theta = 1$$
-
-This one line is the source of every result on the page. [The cosine identity](!#the-cosine-pythagorean-identity) is it, rearranged; the four [derived identities](!#derived-identities-tan-sec-csc-cot) are it, divided through.
-
-Note what the theorem is being applied to: not an abstract triangle, but one whose hypotenuse was fixed at $1$ back in [the setup](!#sine-proof-step-1-setup). That is where the $1$ on the right-hand side comes from.`,
-      link:'',
-    },
-    obj22:{
-      title:`Sine Proof, Step 5: Solve for sin²θ`,
-      content:`Subtracting $\\cos^2\\theta$ from both sides isolates the squared sine.`,
-      before:``,
-      after:`$$\\sin^2\\theta = 1 - \\cos^2\\theta$$
-
-This is where the two geometric proofs part company. [The cosine proof](!#cosine-proof-step-5-solve-for-cos2) subtracts the other term at exactly this point; up to here the two are the same proof with the same picture, which is why switching tabs mid-animation changes nothing on screen.`,
-      link:'',
-    },
-    obj23:{
-      title:`Sine Proof, Step 6: Take the Positive Root`,
-      content:`Taking the square root finishes the identity, and the first-quadrant restriction decides the sign.`,
-      before:``,
-      after:`$$\\sin\\theta = \\sqrt{1 - \\cos^2\\theta}$$
-
-The slider's $10°$–$80°$ range keeps $\\theta$ in the first quadrant, where $\\sin\\theta > 0$, so the positive root is the correct one. Outside that range the squared statement from [the previous step](!#sine-proof-step-5-solve-for-sin2) still holds, but the sign in front of the root follows the quadrant.
-
-At the tool's opening angle of $35°$ the two verification cards both read $0.574$ — the same number reached along two independent routes.`,
-      link:'',
-    },
-    obj24:{
-      title:`Cosine Proof, Step 1: Setup`,
-      content:`[The cosine proof](!#the-cosine-pythagorean-identity) starts from precisely the figure [the sine proof](!#sine-proof-step-1-setup) starts from: two unit radii from $O$, closed off by the chord $AB$.`,
-      before:``,
-      after:`The construction is identical because the target is a rearrangement of the same equation. What differs is which leg the proof is chasing — here it is $OM$, the bisector, rather than the half-chord.
-
-Because the two proofs share a figure, the tool renders the same scene under both tabs and changes only the wording in the step log.`,
-      link:'',
-    },
-    obj25:{
-      title:`Cosine Proof, Step 2: Bisect`,
-      content:`The same perpendicular $OM$ is dropped onto $AB$, producing the same right triangle $OMA$ with its right angle at $M$.`,
-      before:``,
-      after:`The bisector is drawn in indigo and now carries extra weight: it is not just a construction line but the quantity the proof is about. Its length will turn out to be $\\cos\\theta$ exactly.
-
-Everything said about the bisection in [the sine version of this step](!#sine-proof-step-2-bisect) applies unchanged — equal half-angles at $O$, two congruent right triangles, one right angle to work with.`,
-      link:'',
-    },
-    obj26:{
-      title:`Cosine Proof, Step 3: Identify the Legs`,
-      content:`The hypotenuse is still $OA = 1$ and the angle at $O$ is still $\\theta$, so the legs read off the same way — but this time the interest is in the adjacent one.`,
-      before:``,
-      after:`$$OM = \\cos\\theta \\qquad MA = \\sin\\theta$$
-
-The bisector $OM$ sits adjacent to the angle $\\theta$, so with a unit hypotenuse it *is* the cosine. Reading the same figure for the opposite leg is what [the sine proof](!#sine-proof-step-3-identify-the-legs) does at this step.`,
-      link:'',
-    },
-    obj27:{
-      title:`Cosine Proof, Step 4: Pythagoras`,
-      content:`Pythagoras applied to triangle $OMA$ produces the base identity again — the two proofs reach the same equation from the same picture.`,
-      before:``,
-      after:`$$\\sin^2\\theta + \\cos^2\\theta = 1$$
-
-There is genuinely only one theorem here, appearing twice under two tabs. What makes the identities different is the next step, not this one: [the sine proof](!#sine-proof-step-4-pythagoras) will isolate one term and this proof will isolate the other.`,
-      link:'',
-    },
-    obj28:{
-      title:`Cosine Proof, Step 5: Solve for cos²θ`,
-      content:`Subtracting $\\sin^2\\theta$ from both sides isolates the squared cosine.`,
-      before:``,
-      after:`$$\\cos^2\\theta = 1 - \\sin^2\\theta$$
-
-Compare with [the sine proof's fifth step](!#sine-proof-step-5-solve-for-sin2): identical algebra, opposite term removed. The symmetry of $\\sin^2\\theta + \\cos^2\\theta = 1$ is what makes both readings equally valid, and it is the reason the tool can present the two as separate proofs sharing one figure.`,
-      link:'',
-    },
-    obj29:{
-      title:`Cosine Proof, Step 6: Take the Positive Root`,
-      content:`The square root closes the argument, with the first quadrant again fixing the sign.`,
-      before:``,
-      after:`$$\\cos\\theta = \\sqrt{1 - \\sin^2\\theta}$$
-
-Cosine is positive throughout the slider's $10°$–$80°$ range, so the positive root holds there. In the second and third quadrants cosine turns negative and the root would need a minus sign in front — the equation for $\\cos^2\\theta$ from [the previous step](!#cosine-proof-step-5-solve-for-cos2) survives everywhere, but its square root does not.
-
-At $35°$ both verification cards settle on $0.819$.`,
       link:'',
     },
 
@@ -1009,71 +826,6 @@ At $35°$ both verification cards settle on $0.819$.`,
 }
 
 
-  // Framed illustration units for the per-state sections (Line 1 v5): frozen
-  // scene + attached picture-reading panel, one frame, no link (own page).
-  const stateUnits = {
-    sinOverview: demoUnitFrame({ svg: pythagoreanDiagrams.sin.overview, caption: 'The complete sine proof, frozen',
-      text: 'The finished right triangle OMA: hypotenuse 1, legs sin θ and cos θ, with the identity solved for the half-chord.' }),
-    cosOverview: demoUnitFrame({ svg: pythagoreanDiagrams.cos.overview, caption: 'The complete cosine proof, frozen',
-      text: 'The same triangle, read for the other leg — the bisector OM, whose length is cos θ.' }),
-    tan: demoUnitFrame({ svg: pythagoreanDiagrams.tan, caption: 'tan θ, derived',
-      text: 'Five algebraic lines: divide the base identity by cos²θ, recognise tan and sec, solve, take the root.' }),
-    csc: demoUnitFrame({ svg: pythagoreanDiagrams.csc, caption: 'csc θ, derived',
-      text: 'The divide-by-sin²θ chain, solved for the cosecant rather than the cotangent.' }),
-    sec: demoUnitFrame({ svg: pythagoreanDiagrams.sec, caption: 'sec θ, derived',
-      text: 'The same first three lines as the tangent card, finished the other way round.' }),
-    cot: demoUnitFrame({ svg: pythagoreanDiagrams.cot, caption: 'cot θ, derived',
-      text: 'Subtracting inside the root instead of adding — the cotangent counterpart of the tangent form.' }),
-    sinStep1: demoUnitFrame({ svg: pythagoreanDiagrams.sin.steps[0], caption: 'Step 1: the unit setup',
-      text: 'Two radii of length 1 from O, closed by the chord AB. No claim yet — only the fixed hypotenuse.' }),
-    sinStep2: demoUnitFrame({ svg: pythagoreanDiagrams.sin.steps[1], caption: 'Step 2: bisect',
-      text: 'OM lands perpendicular on AB, splitting the figure into two congruent right triangles.' }),
-    sinStep3: demoUnitFrame({ svg: pythagoreanDiagrams.sin.steps[2], caption: 'Step 3: the legs named',
-      text: 'A hypotenuse of 1 makes the legs the ratios themselves: MA = sin θ, OM = cos θ.' }),
-    sinStep4: demoUnitFrame({ svg: pythagoreanDiagrams.sin.steps[3], caption: 'Step 4: Pythagoras',
-      text: 'Leg squared plus leg squared equals 1 — the base identity, read straight off the triangle.' }),
-    sinStep5: demoUnitFrame({ svg: pythagoreanDiagrams.sin.steps[4], caption: 'Step 5: solve for sin²θ',
-      text: 'The banner carries the algebra; the picture is unchanged, because nothing new was constructed.' }),
-    sinStep6: demoUnitFrame({ svg: pythagoreanDiagrams.sin.steps[5], caption: 'Step 6: the positive root',
-      text: 'The finished identity, with its value at the frozen angle of 35°.' }),
-    cosStep1: demoUnitFrame({ svg: pythagoreanDiagrams.cos.steps[0], caption: 'Step 1: same setup, other leg',
-      text: 'Identical construction to the sine proof — the target, not the figure, is what differs.' }),
-    cosStep2: demoUnitFrame({ svg: pythagoreanDiagrams.cos.steps[1], caption: 'Step 2: bisect',
-      text: 'The indigo bisector is now the quantity of interest, not just a construction line.' }),
-    cosStep3: demoUnitFrame({ svg: pythagoreanDiagrams.cos.steps[2], caption: 'Step 3: the adjacent leg',
-      text: 'OM sits adjacent to θ, so against a unit hypotenuse it is exactly cos θ.' }),
-    cosStep4: demoUnitFrame({ svg: pythagoreanDiagrams.cos.steps[3], caption: 'Step 4: Pythagoras',
-      text: 'The same theorem on the same triangle yields the same equation as the sine proof.' }),
-    cosStep5: demoUnitFrame({ svg: pythagoreanDiagrams.cos.steps[4], caption: 'Step 5: solve for cos²θ',
-      text: 'The other term is subtracted this time — the single point where the two proofs diverge.' }),
-    cosStep6: demoUnitFrame({ svg: pythagoreanDiagrams.cos.steps[5], caption: 'Step 6: the positive root',
-      text: 'The cosine identity, checked at 35° where both sides read 0.819.' }),
-  };
-
-  const explanations = {
-    sin: { steps: [
-      `Two radii OA and OB of length 1 from center O of the unit circle, with chord AB between them. [Learn more about the setup](!#sine-proof-step-1-setup) · [The sine identity](!#the-sine-pythagorean-identity)`,
-      `Drop OM perpendicular to AB. This forms right triangle OMA, with the right angle at M. [Learn more about the bisection](!#sine-proof-step-2-bisect) · [The sine identity](!#the-sine-pythagorean-identity)`,
-      `In right triangle OMA: hypotenuse OA = 1, angle at O is θ. So leg MA = sin θ and leg OM = cos θ. [Learn more about the legs](!#sine-proof-step-3-identify-the-legs) · [The sine identity](!#the-sine-pythagorean-identity)`,
-      `leg² + leg² = hypotenuse² gives sin²θ + cos²θ = 1. [Learn more about this step](!#sine-proof-step-4-pythagoras) · [The sine identity](!#the-sine-pythagorean-identity)`,
-      `Subtract cos²θ from both sides: sin²θ = 1 − cos²θ. [Learn more about solving for sin²θ](!#sine-proof-step-5-solve-for-sin2) · [The sine identity](!#the-sine-pythagorean-identity)`,
-      `For θ in the first quadrant, sin θ > 0, so: sin θ = √(1 − cos²θ). [Learn more about the positive root](!#sine-proof-step-6-take-the-positive-root) · [The sine identity](!#the-sine-pythagorean-identity)`,
-    ] },
-    cos: { steps: [
-      `Two radii OA and OB of length 1 from center O of the unit circle, with chord AB between them. [Learn more about the setup](!#cosine-proof-step-1-setup) · [The cosine identity](!#the-cosine-pythagorean-identity)`,
-      `Drop OM perpendicular to AB. This forms right triangle OMA, with the right angle at M. [Learn more about the bisection](!#cosine-proof-step-2-bisect) · [The cosine identity](!#the-cosine-pythagorean-identity)`,
-      `In right triangle OMA: hypotenuse OA = 1, angle at O is θ. So leg OM = cos θ and leg MA = sin θ. [Learn more about the legs](!#cosine-proof-step-3-identify-the-legs) · [The cosine identity](!#the-cosine-pythagorean-identity)`,
-      `leg² + leg² = hypotenuse² gives sin²θ + cos²θ = 1. [Learn more about this step](!#cosine-proof-step-4-pythagoras) · [The cosine identity](!#the-cosine-pythagorean-identity)`,
-      `Subtract sin²θ from both sides: cos²θ = 1 − sin²θ. [Learn more about solving for cos²θ](!#cosine-proof-step-5-solve-for-cos2) · [The cosine identity](!#the-cosine-pythagorean-identity)`,
-      `For θ in the first quadrant, cos θ > 0, so: cos θ = √(1 − sin²θ). [Learn more about the positive root](!#cosine-proof-step-6-take-the-positive-root) · [The cosine identity](!#the-cosine-pythagorean-identity)`,
-    ] },
-    tan: { content: `Divide the base identity by cos²θ to bring tan and sec into play, then solve for tan²θ and take the root. [Learn more about the tangent form](!#the-tangent-pythagorean-identity) · [All derived identities](!#derived-identities-tan-sec-csc-cot)` },
-    csc: { content: `Divide the base identity by sin²θ, then solve the result 1 + cot²θ = csc²θ for the cosecant. [Learn more about the cosecant form](!#the-cosecant-pythagorean-identity) · [All derived identities](!#derived-identities-tan-sec-csc-cot)` },
-    sec: { content: `The same divide-by-cos²θ derivation as tan — just solved for sec instead. [Learn more about the secant form](!#the-secant-pythagorean-identity) · [All derived identities](!#derived-identities-tan-sec-csc-cot)` },
-    cot: { content: `The same divide-by-sin²θ derivation as csc — just solved for cot instead. [Learn more about the cotangent form](!#the-cotangent-pythagorean-identity) · [All derived identities](!#derived-identities-tan-sec-csc-cot)` },
-  };
-
-
 
 
    return {
@@ -1082,8 +834,6 @@ At $35°$ both verification cards settle on $0.819$.`,
          introContent,
          faqQuestions,
          schemas,
-         explanations,
-         stateUnits,
           seoData: {
         title: "Pythagorean Identities: Interactive Proofs | Learn Math Class",
         description: "Explore all six Pythagorean trig identities: sin, cos, tan, csc, sec, cot. Animated geometric proof, algebraic derivations, and live numeric verification.",
@@ -1098,7 +848,7 @@ At $35°$ both verification cards settle on $0.819$.`,
     }
    }
 
-export default function PythagoreanIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PythagoreanIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
 
   const genericSections=[
@@ -1111,7 +861,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
     //     ]
     // },
     {
-        id:'switching-between-functions',
+        id:'1',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -1119,7 +869,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'adjusting-the-angle',
+        id:'2',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -1127,7 +877,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'playing-through-a-geometric-proof',
+        id:'3',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -1135,7 +885,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'reading-the-geometric-scene',
+        id:'4',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
@@ -1143,7 +893,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'working-with-derived-identities',
+        id:'5',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -1151,7 +901,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'reading-the-formula-table',
+        id:'6',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -1159,7 +909,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'verifying-identities-numerically',
+        id:'7',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -1167,7 +917,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'geometric-proof-sin2-cos2-1',
+        id:'8',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -1175,7 +925,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'derived-identities-tan-sec-csc-cot',
+        id:'9',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -1183,7 +933,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'why-pythagorean-identities-matter',
+        id:'10',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -1191,191 +941,11 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'related-concepts-and-tools',
+        id:'11',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-        ]
-    },
-    {
-        id:'the-sine-pythagorean-identity',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-          <div key={'u-sinOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['sinOverview'] }} />,
-          sectionsContent.obj12.after,
-        ]
-    },
-    {
-        id:'the-cosine-pythagorean-identity',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-          <div key={'u-cosOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['cosOverview'] }} />,
-          sectionsContent.obj13.after,
-        ]
-    },
-    {
-        id:'the-tangent-pythagorean-identity',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-          <div key={'u-tan'} dangerouslySetInnerHTML={{ __html: stateUnits['tan'] }} />,
-          sectionsContent.obj14.after,
-        ]
-    },
-    {
-        id:'the-cosecant-pythagorean-identity',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
-        content:[
-          sectionsContent.obj15.content,
-          <div key={'u-csc'} dangerouslySetInnerHTML={{ __html: stateUnits['csc'] }} />,
-          sectionsContent.obj15.after,
-        ]
-    },
-    {
-        id:'the-secant-pythagorean-identity',
-        title:sectionsContent.obj16.title,
-        link:sectionsContent.obj16.link,
-        content:[
-          sectionsContent.obj16.content,
-          <div key={'u-sec'} dangerouslySetInnerHTML={{ __html: stateUnits['sec'] }} />,
-          sectionsContent.obj16.after,
-        ]
-    },
-    {
-        id:'the-cotangent-pythagorean-identity',
-        title:sectionsContent.obj17.title,
-        link:sectionsContent.obj17.link,
-        content:[
-          sectionsContent.obj17.content,
-          <div key={'u-cot'} dangerouslySetInnerHTML={{ __html: stateUnits['cot'] }} />,
-          sectionsContent.obj17.after,
-        ]
-    },
-    {
-        id:'sine-proof-step-1-setup',
-        title:sectionsContent.obj18.title,
-        link:sectionsContent.obj18.link,
-        content:[
-          sectionsContent.obj18.content,
-          <div key={'u-sinStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep1'] }} />,
-          sectionsContent.obj18.after,
-        ]
-    },
-    {
-        id:'sine-proof-step-2-bisect',
-        title:sectionsContent.obj19.title,
-        link:sectionsContent.obj19.link,
-        content:[
-          sectionsContent.obj19.content,
-          <div key={'u-sinStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep2'] }} />,
-          sectionsContent.obj19.after,
-        ]
-    },
-    {
-        id:'sine-proof-step-3-identify-the-legs',
-        title:sectionsContent.obj20.title,
-        link:sectionsContent.obj20.link,
-        content:[
-          sectionsContent.obj20.content,
-          <div key={'u-sinStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep3'] }} />,
-          sectionsContent.obj20.after,
-        ]
-    },
-    {
-        id:'sine-proof-step-4-pythagoras',
-        title:sectionsContent.obj21.title,
-        link:sectionsContent.obj21.link,
-        content:[
-          sectionsContent.obj21.content,
-          <div key={'u-sinStep4'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep4'] }} />,
-          sectionsContent.obj21.after,
-        ]
-    },
-    {
-        id:'sine-proof-step-5-solve-for-sin2',
-        title:sectionsContent.obj22.title,
-        link:sectionsContent.obj22.link,
-        content:[
-          sectionsContent.obj22.content,
-          <div key={'u-sinStep5'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep5'] }} />,
-          sectionsContent.obj22.after,
-        ]
-    },
-    {
-        id:'sine-proof-step-6-take-the-positive-root',
-        title:sectionsContent.obj23.title,
-        link:sectionsContent.obj23.link,
-        content:[
-          sectionsContent.obj23.content,
-          <div key={'u-sinStep6'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep6'] }} />,
-          sectionsContent.obj23.after,
-        ]
-    },
-    {
-        id:'cosine-proof-step-1-setup',
-        title:sectionsContent.obj24.title,
-        link:sectionsContent.obj24.link,
-        content:[
-          sectionsContent.obj24.content,
-          <div key={'u-cosStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep1'] }} />,
-          sectionsContent.obj24.after,
-        ]
-    },
-    {
-        id:'cosine-proof-step-2-bisect',
-        title:sectionsContent.obj25.title,
-        link:sectionsContent.obj25.link,
-        content:[
-          sectionsContent.obj25.content,
-          <div key={'u-cosStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep2'] }} />,
-          sectionsContent.obj25.after,
-        ]
-    },
-    {
-        id:'cosine-proof-step-3-identify-the-legs',
-        title:sectionsContent.obj26.title,
-        link:sectionsContent.obj26.link,
-        content:[
-          sectionsContent.obj26.content,
-          <div key={'u-cosStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep3'] }} />,
-          sectionsContent.obj26.after,
-        ]
-    },
-    {
-        id:'cosine-proof-step-4-pythagoras',
-        title:sectionsContent.obj27.title,
-        link:sectionsContent.obj27.link,
-        content:[
-          sectionsContent.obj27.content,
-          <div key={'u-cosStep4'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep4'] }} />,
-          sectionsContent.obj27.after,
-        ]
-    },
-    {
-        id:'cosine-proof-step-5-solve-for-cos2',
-        title:sectionsContent.obj28.title,
-        link:sectionsContent.obj28.link,
-        content:[
-          sectionsContent.obj28.content,
-          <div key={'u-cosStep5'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep5'] }} />,
-          sectionsContent.obj28.after,
-        ]
-    },
-    {
-        id:'cosine-proof-step-6-take-the-positive-root',
-        title:sectionsContent.obj29.title,
-        link:sectionsContent.obj29.link,
-        content:[
-          sectionsContent.obj29.content,
-          <div key={'u-cosStep6'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep6'] }} />,
-          sectionsContent.obj29.after,
         ]
     },
 
@@ -1453,7 +1023,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
      activeColor="#4F46E5"
      activeBg="#eef2ff"
      />
-     <PythagoreanExplorer explanations={explanations}/>
+     <PythagoreanExplorer/>
    </div>
 
    <br/>

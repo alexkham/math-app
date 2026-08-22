@@ -1,489 +1,3 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import Head from 'next/head'
-// import '@/pages/pages.css'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import NegativeAngleExplorer from '../../../../app/components/trigonometry/identities/negative-angle/NegativeAngleExplorer'
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=['','','','','']
-
-//   // •
-
-// //   \u2022 First item
-// // \u2022 Second item
-
-  
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-//     const sectionsContent={
-
-//     obj0:{
-//       title:`Key Terms`,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj5:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj6:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
-
-
-//   const introContent = {
-//   id: "intro",
-//   title: "",
-//   content: ``
-// }
-
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Title | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/trigonometry/visual-tools/negative-angle-identities",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-//    }
-
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
-    
-//   const genericSections=[
-//     // {
-//     //     id:'0',
-//     //     title:sectionsContent.obj0.title,
-//     //     link:sectionsContent.obj0.link,
-//     //     content:[
-//     //       sectionsContent.obj0.content,
-//     //     ]
-//     // },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     {
-//         id:'11',
-//         title:sectionsContent.obj11.title,
-//         link:sectionsContent.obj11.link,
-//         content:[
-//           sectionsContent.obj11.content,
-//         ]
-//     },
-//     {
-//         id:'12',
-//         title:sectionsContent.obj12.title,
-//         link:sectionsContent.obj12.link,
-//         content:[
-//           sectionsContent.obj12.content,
-//         ]
-//     },
-//     {
-//         id:'13',
-//         title:sectionsContent.obj13.title,
-//         link:sectionsContent.obj13.link,
-//         content:[
-//           sectionsContent.obj13.content,
-//         ]
-//     },
-//     {
-//         id:'14',
-//         title:sectionsContent.obj14.title,
-//         link:sectionsContent.obj14.link,
-//         content:[
-//           sectionsContent.obj14.content,
-//         ]
-//     },
-//     {
-//         id:'15',
-//         title:sectionsContent.obj15.title,
-//         link:sectionsContent.obj15.link,
-//         content:[
-//           sectionsContent.obj15.content,
-//         ]
-//     },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <meta name="viewport" content="width=device-width, initial-scale=1" />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'20px'}}>Negative Angle Trigonometric Identities</h1>
-//    <br/>
-//    <NegativeAngleExplorer/>
-//    <br/>
-//    {/* <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    /> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//     {/* <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         /> */}
-//    <br/>
-//     {/* <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    /> */}
-//    <br/>
-//    {/* <Sections sections={genericSections}/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -493,6 +7,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NegativeAngleExplorer from '../../../../app/components/trigonometry/identities/negative-angle/NegativeAngleExplorer'
+import negativeAngleDiagrams from '../../../../app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -566,7 +82,7 @@ Sweep the slider to see that $\\sin(-\\theta)$ and $-\\sin\\theta$ track togethe
 • **Play** / **Pause** — advance automatically.
 • **Speed selector** — $0.5\\times$, $1\\times$, $1.5\\times$, $2\\times$.
 
-The three steps are: (1) place $P$ at angle $\\theta$, (2) reflect across the x-axis to produce $P'$ at angle $-\\theta$, (3) read off the identity from the coordinates of $P'$.`,
+The three steps are: (1) [place $P$ at angle θ](!#sine-proof-step-1-place-p), (2) [reflect across the x-axis](!#sine-proof-step-2-mirror-p) to produce $P'$ at angle $-\\theta$, (3) [read off the identity](!#sine-proof-step-3-read-off-sin) from the coordinates of $P'$.`,
       before:``,
       after:``,
       link:'',
@@ -579,8 +95,8 @@ The three steps are: (1) place $P$ at angle $\\theta$, (2) reflect across the x-
 • **P&apos;** at angle $-\\theta$ below the x-axis, with coordinates $(\\cos\\theta, -\\sin\\theta)$.
 
 Reflection across the x-axis is the key operation:
-• Preserves the **x-coordinate** — so $\\cos(-\\theta) = \\cos\\theta$ (even).
-• Flips the sign of the **y-coordinate** — so $\\sin(-\\theta) = -\\sin\\theta$ (odd).
+• Preserves the **x-coordinate** — so [cosine comes out even](!#cosine-proof-step-3-read-off-cos), $\\cos(-\\theta) = \\cos\\theta$.
+• Flips the sign of the **y-coordinate** — so [sine comes out odd](!#sine-proof-step-3-read-off-sin), $\\sin(-\\theta) = -\\sin\\theta$.
 
 A comparison overlay highlights the shared horizontal foot and the equal-magnitude, opposite-sign vertical legs.`,
       before:``,
@@ -593,7 +109,7 @@ A comparison overlay highlights the shared horizontal foot and the equal-magnitu
 
 Layout of the derived card:
 • A short intro explains which earlier identity the current one rests on.
-• **Jump buttons** link directly to the geometric proofs of $\\sin(-\\theta)$ or $\\cos(-\\theta)$.
+• **Jump buttons** link directly to [the geometric proofs](!#geometric-proofs-sin-and-cos) of $\\sin(-\\theta)$ or $\\cos(-\\theta)$.
 • A multi-line derivation block shows each manipulation with a brief side note.
 • Verification cards confirm both sides match numerically.
 
@@ -610,7 +126,7 @@ Two derived identities preserve sign ($\\sec$, like $\\cos$, is even); four flip
 • **Identity** column — the right-hand side.
 • **Parity** column — labels each as **even** or **odd**.
 • **Value** column — the numeric value at the current $\\theta$.
-• **Source** column — labels each as **geometric** ($\\sin$, $\\cos$) or **via X** for derived ones.
+• **Source** column — labels each as [geometric](!#geometric-proofs-sin-and-cos) ($\\sin$, $\\cos$) or **via X** for the [derived forms](!#derived-identities-tan-csc-sec-cot).
 
 Click any row to make that function active. The current row gets a deep-blue left border and tinted background.`,
       before:``,
@@ -640,6 +156,8 @@ Since the y-coordinate of $P'$ is $\\sin(-\\theta)$ by definition, $\\sin(-\\the
 
 **cos(-θ) = cos θ** — reflection preserves the x-coordinate. The x-coordinate of $P'$ equals the x-coordinate of $P$, which is $\\cos\\theta$. Therefore $\\cos(-\\theta) = \\cos\\theta$. Cosine is **even**.
 
+Each is treated stage by stage below: [the sine form](!#the-sine-negative-angle-identity) and [the cosine form](!#the-cosine-negative-angle-identity).
+
 For full coverage with proofs in all quadrants, see the **negative angle identities theory page**.`,
       before:``,
       after:``,
@@ -649,14 +167,14 @@ For full coverage with proofs in all quadrants, see the **negative angle identit
       title:`Derived Identities: tan, csc, sec, cot`,
       content:`The four remaining identities follow from the two geometric ones:
 
-**tan(-θ) = -tan θ** (odd) — $\\tan = \\sin/\\cos$:
+[tan(-θ) = -tan θ](!#the-tangent-negative-angle-identity) (odd) — $\\tan = \\sin/\\cos$:
 $$\\tan(-\\theta) = \\frac{\\sin(-\\theta)}{\\cos(-\\theta)} = \\frac{-\\sin\\theta}{\\cos\\theta} = -\\tan\\theta$$
 
-**csc(-θ) = -csc θ** (odd) — reciprocal of an odd function is odd: $\\csc(-\\theta) = 1/\\sin(-\\theta) = -1/\\sin\\theta = -\\csc\\theta$.
+[csc(-θ) = -csc θ](!#the-cosecant-negative-angle-identity) (odd) — reciprocal of an odd function is odd: $\\csc(-\\theta) = 1/\\sin(-\\theta) = -1/\\sin\\theta = -\\csc\\theta$.
 
-**sec(-θ) = sec θ** (even) — reciprocal of an even function is even: $\\sec(-\\theta) = 1/\\cos(-\\theta) = 1/\\cos\\theta = \\sec\\theta$.
+[sec(-θ) = sec θ](!#the-secant-negative-angle-identity) (even) — reciprocal of an even function is even: $\\sec(-\\theta) = 1/\\cos(-\\theta) = 1/\\cos\\theta = \\sec\\theta$.
 
-**cot(-θ) = -cot θ** (odd) — reciprocal of tangent: $\\cot(-\\theta) = 1/\\tan(-\\theta) = -1/\\tan\\theta = -\\cot\\theta$.
+[cot(-θ) = -cot θ](!#the-cotangent-negative-angle-identity) (odd) — reciprocal of tangent: $\\cot(-\\theta) = 1/\\tan(-\\theta) = -1/\\tan\\theta = -\\cot\\theta$.
 
 For full derivations, see the **trigonometric identities page** and the **reciprocal identities page**.`,
       before:``,
@@ -672,6 +190,8 @@ For full derivations, see the **trigonometric identities page** and the **recipr
 • **Fourier series** — even functions expand into cosines only, odd functions into sines only.
 • **Integration** — odd integrands over symmetric intervals like $[-a, a]$ integrate to zero.
 • **Solving equations** — paired solutions $\\theta$ and $-\\theta$ are predictable from parity.
+
+All five uses come down to one of two facts, each proved in a single picture: [sine flips sign](!#sine-proof-step-3-read-off-sin), [cosine does not](!#cosine-proof-step-3-read-off-cos).
 
 For applications and examples, see the **trigonometric identities applications page**.`,
       before:``,
@@ -690,6 +210,119 @@ For applications and examples, see the **trigonometric identities applications p
 • **Trigonometric Functions Graphs** — see the parity visually in each function's graph.`,
       before:``,
       after:``,
+      link:'',
+    },
+
+    obj12:{
+      title:`The Sine Negative-Angle Identity`,
+      content:`The identity $\\sin(-\\theta) = -\\sin\\theta$ is proved by reflecting the terminal point across the x-axis and reading its new y-coordinate.`,
+      before:``,
+      after:`Its three stages: [place the point](!#sine-proof-step-1-place-p), [mirror it](!#sine-proof-step-2-mirror-p), and [read off the y-coordinate](!#sine-proof-step-3-read-off-sin).
+
+Sine is the odd function of the pair, and three of the four [derived identities](!#derived-identities-tan-csc-sec-cot) inherit their sign flip from it: [cosecant](!#the-cosecant-negative-angle-identity) directly, [tangent](!#the-tangent-negative-angle-identity) through the quotient, and [cotangent](!#the-cotangent-negative-angle-identity) through tangent.`,
+      link:'',
+    },
+    obj13:{
+      title:`The Cosine Negative-Angle Identity`,
+      content:`The identity $\\cos(-\\theta) = \\cos\\theta$ comes from the same reflection, read along the other axis: mirroring across the x-axis cannot change an x-coordinate.`,
+      before:``,
+      after:`Its three stages: [place the point](!#cosine-proof-step-1-place-p), [mirror it](!#cosine-proof-step-2-mirror-p), and [read off the x-coordinate](!#cosine-proof-step-3-read-off-cos).
+
+Under the cosine tab the tool hides the vertical legs entirely and draws a faint connector between $P$ and $P'$ instead — the picture is arguing that the two points sit on one vertical line, which is exactly what "same x-coordinate" means. Cosine is the even function of the pair, and [secant](!#the-secant-negative-angle-identity) is the only derived identity that inherits that evenness.`,
+      link:'',
+    },
+    obj14:{
+      title:`The Tangent Negative-Angle Identity`,
+      content:`Tangent is a quotient of one odd function and one even function, so exactly one sign flips and the quotient comes out odd.`,
+      before:``,
+      after:`$$\\tan(-\\theta) = \\frac{\\sin(-\\theta)}{\\cos(-\\theta)} = \\frac{-\\sin\\theta}{\\cos\\theta} = -\\tan\\theta$$
+
+This is the general rule in miniature: odd divided by even is odd. Both ingredients are proved geometrically — [the sine identity](!#the-sine-negative-angle-identity) supplies the minus sign, [the cosine identity](!#the-cosine-negative-angle-identity) supplies the unchanged denominator — and the card's jump buttons lead to each. [Cotangent](!#the-cotangent-negative-angle-identity) then inherits the flip from tangent.`,
+      link:'',
+    },
+    obj15:{
+      title:`The Cosecant Negative-Angle Identity`,
+      content:`Cosecant is the reciprocal of sine, and a reciprocal keeps the parity of what it inverts.`,
+      before:``,
+      after:`$$\\csc(-\\theta) = \\frac{1}{\\sin(-\\theta)} = \\frac{1}{-\\sin\\theta} = -\\csc\\theta$$
+
+The minus sign moves out of the denominator untouched, so cosecant is odd for the same reason [sine](!#the-sine-negative-angle-identity) is. Note what the identity does not fix: cosecant is undefined wherever $\\sin\\theta = 0$, and negating the angle does not rescue it — if one side is undefined, so is the other. The slider's $15°$–$75°$ range stays clear of those angles.`,
+      link:'',
+    },
+    obj16:{
+      title:`The Secant Negative-Angle Identity`,
+      content:`Secant is the reciprocal of cosine, so it is the one derived identity with no sign change at all.`,
+      before:``,
+      after:`$$\\sec(-\\theta) = \\frac{1}{\\cos(-\\theta)} = \\frac{1}{\\cos\\theta} = \\sec\\theta$$
+
+Nothing flips because nothing flipped in [the cosine identity](!#the-cosine-negative-angle-identity) it rests on. Secant and cosine are the two even functions in the table; the other four are odd. Sweeping the slider is the quickest way to see it — the two verification cards for secant never separate, while the cards for every odd function stay opposite in sign.`,
+      link:'',
+    },
+    obj17:{
+      title:`The Cotangent Negative-Angle Identity`,
+      content:`Cotangent is the reciprocal of tangent, so it flips sign for the same reason tangent does — one step further removed from the geometry.`,
+      before:``,
+      after:`$$\\cot(-\\theta) = \\frac{1}{\\tan(-\\theta)} = \\frac{1}{-\\tan\\theta} = -\\cot\\theta$$
+
+Cotangent sits two derivations from the picture: it depends on [tangent](!#the-tangent-negative-angle-identity), which depends on [sine](!#the-sine-negative-angle-identity) and [cosine](!#the-cosine-negative-angle-identity). It can also be read straight off the definition $\\cot\\theta = \\cos\\theta / \\sin\\theta$ — even over odd, which is odd — and the two routes agree, as they must.`,
+      link:'',
+    },
+    obj18:{
+      title:`Sine Proof, Step 1: Place P at Angle θ`,
+      content:`[The sine proof](!#the-sine-negative-angle-identity) opens with a single point: $P$ on the unit circle at angle $\\theta$ above the x-axis, with the vertical leg from the axis up to $P$ drawn in amber.`,
+      before:``,
+      after:`That leg has signed length $\\sin\\theta$, and because the circle has radius $1$ the length *is* the y-coordinate of $P$ — no scaling in between. The red arc at the origin marks the angle $\\theta$ measured counter-clockwise, the positive direction.
+
+Under this tab the tool runs in its sine-only mode, hiding the horizontal $\\cos\\theta$ leg so that nothing competes with the quantity being tracked. The [cosine proof](!#cosine-proof-step-1-place-p) hides the opposite one.`,
+      link:'',
+    },
+    obj19:{
+      title:`Sine Proof, Step 2: Mirror P Across the x-Axis`,
+      content:`Reflecting $P$ across the x-axis produces $P'$, sitting directly below at angle $-\\theta$ — the same rotation measured clockwise.`,
+      before:``,
+      after:`The reflection is what carries the whole argument, and it does two things at once: it leaves the x-coordinate exactly where it was, and it flips the sign of the y-coordinate. The second amber leg has the same length as the first but points the other way, so its signed length is $-\\sin\\theta$.
+
+Nothing has been proved yet — so far this is only a construction. The claim arrives when the picture is read as a statement about the angle $-\\theta$, which is [the next step](!#sine-proof-step-3-read-off-sin).`,
+      link:'',
+    },
+    obj20:{
+      title:`Sine Proof, Step 3: Read Off sin(-θ)`,
+      content:`$P'$ is the terminal point of the angle $-\\theta$ on the unit circle, so by the definition of sine its y-coordinate *is* $\\sin(-\\theta)$.`,
+      before:``,
+      after:`$$\\sin(-\\theta) = -\\sin\\theta$$
+
+The proof is a matter of naming the same number twice. The picture gives that y-coordinate as $-\\sin\\theta$; the definition gives it as $\\sin(-\\theta)$; therefore the two are equal. At the tool's opening angle of $40°$ both verification cards read $-0.643$.
+
+That single sign flip is the definition of an odd function, and it propagates through [tangent](!#the-tangent-negative-angle-identity), [cosecant](!#the-cosecant-negative-angle-identity) and [cotangent](!#the-cotangent-negative-angle-identity).`,
+      link:'',
+    },
+    obj21:{
+      title:`Cosine Proof, Step 1: Place P at Angle θ`,
+      content:`[The cosine proof](!#the-cosine-negative-angle-identity) begins from the same point $P$ at angle $\\theta$, but with the indigo horizontal leg drawn instead of the vertical one.`,
+      before:``,
+      after:`That leg runs from the origin to the foot of $P$ on the x-axis, and its length is $\\cos\\theta$ — again equal to the coordinate itself, because the radius is $1$.
+
+The tool switches to its cosine-only mode here, hiding the vertical legs and the right-angle markers that [the sine proof](!#sine-proof-step-1-place-p) relies on. Same circle, same point, different quantity in view.`,
+      link:'',
+    },
+    obj22:{
+      title:`Cosine Proof, Step 2: Mirror P Across the x-Axis`,
+      content:`The same reflection places $P'$ at angle $-\\theta$, and a faint vertical connector is drawn between $P$ and $P'$.`,
+      before:``,
+      after:`That connector is the argument. Two points joined by a vertical segment have the same x-coordinate by definition, and the horizontal indigo leg — drawn once — serves both of them. The reflection moved the point without moving its foot.
+
+Compare with [the sine version of this step](!#sine-proof-step-2-mirror-p): the same construction supports both proofs, and the tool draws whichever consequence the active tab is about.`,
+      link:'',
+    },
+    obj23:{
+      title:`Cosine Proof, Step 3: Read Off cos(-θ)`,
+      content:`$P'$ is the terminal point of $-\\theta$, so its x-coordinate *is* $\\cos(-\\theta)$ — and that x-coordinate is the one $P$ already had.`,
+      before:``,
+      after:`$$\\cos(-\\theta) = \\cos\\theta$$
+
+No sign appears anywhere, which is the whole content of the result: cosine is even. At $40°$ both verification cards read $0.766$, and they stay locked together for every angle the slider reaches.
+
+Only [secant](!#the-secant-negative-angle-identity) inherits this evenness; the remaining three derived identities take their sign flip from [sine](!#the-sine-negative-angle-identity) instead.`,
       link:'',
     },
 
@@ -810,6 +443,51 @@ For applications and examples, see the **trigonometric identities applications p
 }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // scene + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    sinOverview: demoUnitFrame({ svg: negativeAngleDiagrams.sin.overview, caption: 'The complete sine proof, frozen',
+      text: 'P and its mirror image P′, with the two amber legs of equal length pointing opposite ways — the whole content of sin(−θ) = −sin θ.' }),
+    cosOverview: demoUnitFrame({ svg: negativeAngleDiagrams.cos.overview, caption: 'The complete cosine proof, frozen',
+      text: 'One indigo leg serving both points: mirroring across the x-axis cannot move a foot that sits on the x-axis.' }),
+    tan: demoUnitFrame({ svg: negativeAngleDiagrams.tan, caption: 'tan(−θ), derived',
+      text: 'Odd over even: the numerator flips, the denominator does not, so the quotient flips.' }),
+    csc: demoUnitFrame({ svg: negativeAngleDiagrams.csc, caption: 'csc(−θ), derived',
+      text: 'The minus sign travels straight out of the denominator — a reciprocal keeps its parity.' }),
+    sec: demoUnitFrame({ svg: negativeAngleDiagrams.sec, caption: 'sec(−θ), derived',
+      text: 'The one derived card with no sign anywhere in it, because cosine had none to give.' }),
+    cot: demoUnitFrame({ svg: negativeAngleDiagrams.cot, caption: 'cot(−θ), derived',
+      text: 'Two steps from the picture: cotangent inverts tangent, which already inherited the flip from sine.' }),
+    sinStep1: demoUnitFrame({ svg: negativeAngleDiagrams.sin.steps[0], caption: 'Step 1: place P at angle θ',
+      text: 'One point, one amber leg. On a unit circle that leg’s signed length is the y-coordinate itself.' }),
+    sinStep2: demoUnitFrame({ svg: negativeAngleDiagrams.sin.steps[1], caption: 'Step 2: mirror across the x-axis',
+      text: 'P′ appears directly below, same distance from the axis, opposite side — equal magnitude, flipped sign.' }),
+    sinStep3: demoUnitFrame({ svg: negativeAngleDiagrams.sin.steps[2], caption: 'Step 3: read off sin(−θ)',
+      text: 'The label y = sin(−θ) names the coordinate the picture already gave as −sin θ.' }),
+    cosStep1: demoUnitFrame({ svg: negativeAngleDiagrams.cos.steps[0], caption: 'Step 1: place P at angle θ',
+      text: 'Same point, indigo leg instead: the horizontal distance from the y-axis, equal to cos θ.' }),
+    cosStep2: demoUnitFrame({ svg: negativeAngleDiagrams.cos.steps[1], caption: 'Step 2: mirror across the x-axis',
+      text: 'The faint connector is the argument — a vertical segment means one shared x-coordinate.' }),
+    cosStep3: demoUnitFrame({ svg: negativeAngleDiagrams.cos.steps[2], caption: 'Step 3: read off cos(−θ)',
+      text: 'x = cos(−θ) labels the same foot that was already labelled cos θ. No sign appears.' }),
+  };
+
+  const explanations = {
+    sin: { steps: [
+      `P sits on the unit circle at angle θ above the x-axis. P = (cos θ, sin θ). The vertical leg has signed length sin θ (positive, P above the x-axis). [Learn more about placing P](!#sine-proof-step-1-place-p) · [The sine identity](!#the-sine-negative-angle-identity)`,
+      `P′ lies directly below P, at angle −θ. Reflection across the x-axis preserves the x-coordinate (so the horizontal leg cos θ is shared) and flips the sign of the y-coordinate. [Learn more about the reflection](!#sine-proof-step-2-mirror-p) · [The sine identity](!#the-sine-negative-angle-identity)`,
+      `P′ is the terminal point of the angle −θ on the unit circle, so its y-coordinate IS sin(−θ). From the picture, P′ = (cos θ, −sin θ). Therefore sin(−θ) = −sin θ. [Learn more about reading it off](!#sine-proof-step-3-read-off-sin) · [The sine identity](!#the-sine-negative-angle-identity)`,
+    ] },
+    cos: { steps: [
+      `P sits on the unit circle at angle θ above the x-axis. Its x-coordinate is cos θ — the horizontal distance from the y-axis to P, drawn as the blue segment along the x-axis. [Learn more about placing P](!#cosine-proof-step-1-place-p) · [The cosine identity](!#the-cosine-negative-angle-identity)`,
+      `P′ lies at angle −θ, directly below P. Reflection across the x-axis leaves the x-coordinate unchanged — P and P′ share the same horizontal foot on the x-axis, so they share the same cos θ. [Learn more about the reflection](!#cosine-proof-step-2-mirror-p) · [The cosine identity](!#the-cosine-negative-angle-identity)`,
+      `P′ is the terminal point of the angle −θ, so its x-coordinate IS cos(−θ). But the x-coordinate of P′ equals the x-coordinate of P, which is cos θ. Therefore cos(−θ) = cos θ. [Learn more about reading it off](!#cosine-proof-step-3-read-off-cos) · [The cosine identity](!#the-cosine-negative-angle-identity)`,
+    ] },
+    tan: { content: `Tangent is sine over cosine. Substitute the negative-angle identities for sin and cos and simplify — odd over even is odd. [Learn more about the tangent form](!#the-tangent-negative-angle-identity) · [All derived identities](!#derived-identities-tan-csc-sec-cot)` },
+    csc: { content: `Cosecant is the reciprocal of sine, and a reciprocal keeps the parity of what it inverts. [Learn more about the cosecant form](!#the-cosecant-negative-angle-identity) · [All derived identities](!#derived-identities-tan-csc-sec-cot)` },
+    sec: { content: `Secant is the reciprocal of cosine. Since cosine is unchanged by negating the angle, so is secant. [Learn more about the secant form](!#the-secant-negative-angle-identity) · [All derived identities](!#derived-identities-tan-csc-sec-cot)` },
+    cot: { content: `Cotangent is the reciprocal of tangent, so it flips sign for the same reason tangent does. [Learn more about the cotangent form](!#the-cotangent-negative-angle-identity) · [All derived identities](!#derived-identities-tan-csc-sec-cot)` },
+  };
 
 
    return {
@@ -818,6 +496,8 @@ For applications and examples, see the **trigonometric identities applications p
          introContent,
          faqQuestions,
          schemas,
+         explanations,
+         stateUnits,
           seoData: {
         title: "Negative Angle Identities: Even & Odd Trig | Learn Math Class",
         description: "Explore all six negative-angle trig identities. Animated reflection proofs for sin and cos, algebraic derivations for tan, csc, sec, cot. Live numeric verification.",
@@ -832,12 +512,12 @@ For applications and examples, see the **trigonometric identities applications p
     }
    }
 
-export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
     {
-        id:'1',
+        id:'switching-between-functions',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -845,7 +525,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'2',
+        id:'adjusting-the-angle',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -853,7 +533,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'3',
+        id:'playing-through-a-geometric-proof',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -861,7 +541,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'4',
+        id:'reading-the-geometric-scene',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
@@ -869,7 +549,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'5',
+        id:'working-with-derived-identities',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -877,7 +557,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'6',
+        id:'reading-the-formula-table',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -885,7 +565,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'7',
+        id:'verifying-identities-numerically',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -893,7 +573,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'8',
+        id:'geometric-proofs-sin-and-cos',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -901,7 +581,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'9',
+        id:'derived-identities-tan-csc-sec-cot',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -909,7 +589,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'10',
+        id:'why-negative-angle-identities-matter',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -917,11 +597,131 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'the-sine-negative-angle-identity',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key={'u-sinOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['sinOverview'] }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'the-cosine-negative-angle-identity',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key={'u-cosOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['cosOverview'] }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'the-tangent-negative-angle-identity',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div key={'u-tan'} dangerouslySetInnerHTML={{ __html: stateUnits['tan'] }} />,
+          sectionsContent.obj14.after,
+        ]
+    },
+    {
+        id:'the-cosecant-negative-angle-identity',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+          <div key={'u-csc'} dangerouslySetInnerHTML={{ __html: stateUnits['csc'] }} />,
+          sectionsContent.obj15.after,
+        ]
+    },
+    {
+        id:'the-secant-negative-angle-identity',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+          <div key={'u-sec'} dangerouslySetInnerHTML={{ __html: stateUnits['sec'] }} />,
+          sectionsContent.obj16.after,
+        ]
+    },
+    {
+        id:'the-cotangent-negative-angle-identity',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
+          <div key={'u-cot'} dangerouslySetInnerHTML={{ __html: stateUnits['cot'] }} />,
+          sectionsContent.obj17.after,
+        ]
+    },
+    {
+        id:'sine-proof-step-1-place-p',
+        title:sectionsContent.obj18.title,
+        link:sectionsContent.obj18.link,
+        content:[
+          sectionsContent.obj18.content,
+          <div key={'u-sinStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep1'] }} />,
+          sectionsContent.obj18.after,
+        ]
+    },
+    {
+        id:'sine-proof-step-2-mirror-p',
+        title:sectionsContent.obj19.title,
+        link:sectionsContent.obj19.link,
+        content:[
+          sectionsContent.obj19.content,
+          <div key={'u-sinStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep2'] }} />,
+          sectionsContent.obj19.after,
+        ]
+    },
+    {
+        id:'sine-proof-step-3-read-off-sin',
+        title:sectionsContent.obj20.title,
+        link:sectionsContent.obj20.link,
+        content:[
+          sectionsContent.obj20.content,
+          <div key={'u-sinStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep3'] }} />,
+          sectionsContent.obj20.after,
+        ]
+    },
+    {
+        id:'cosine-proof-step-1-place-p',
+        title:sectionsContent.obj21.title,
+        link:sectionsContent.obj21.link,
+        content:[
+          sectionsContent.obj21.content,
+          <div key={'u-cosStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep1'] }} />,
+          sectionsContent.obj21.after,
+        ]
+    },
+    {
+        id:'cosine-proof-step-2-mirror-p',
+        title:sectionsContent.obj22.title,
+        link:sectionsContent.obj22.link,
+        content:[
+          sectionsContent.obj22.content,
+          <div key={'u-cosStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep2'] }} />,
+          sectionsContent.obj22.after,
+        ]
+    },
+    {
+        id:'cosine-proof-step-3-read-off-cos',
+        title:sectionsContent.obj23.title,
+        link:sectionsContent.obj23.link,
+        content:[
+          sectionsContent.obj23.content,
+          <div key={'u-cosStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep3'] }} />,
+          sectionsContent.obj23.after,
         ]
     },
 
@@ -987,14 +787,14 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'20px'}}>Negative Angle Trigonometric Identities</h1>
    <br/>
-   <NegativeAngleExplorer/>
+   <NegativeAngleExplorer explanations={explanations}/>
    <br/>
-   {/* <SectionTableOfContents sections={genericSections}
+    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
 
-   /> */}
+   /> 
    <br/>
    <br/>
    <br/>
@@ -1015,8 +815,8 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
      variant="light"
    /> */}
    <br/>
-   {/* <Sections sections={genericSections}/> */}
-   <br/>
+   <Sections sections={genericSections}/>
+  
    <br/>
    <br/>
    {/* <ScrollUpButton/> */}
