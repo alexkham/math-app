@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReflectionDemo from '../ReflectionDemo'; // v3 — MiniSolutionPanel, bigger scene, distinct colors
-import { processContent } from '@/app/utils/contentProcessor';
 
 /* ============================================================
    SupplementaryAngleExplorer v1
@@ -320,7 +319,7 @@ function ThetaSlider({ theta, onChange, min = 15, max = 75 }) {
   );
 }
 
-function DerivedIdentityCard({ fn, theta, onThetaChange, onJumpTo, introOverride }) {
+function DerivedIdentityCard({ fn, theta, onThetaChange, onJumpTo }) {
   const r = REGISTRY[fn];
   const d = r.derived;
   const th = (theta * Math.PI) / 180;
@@ -347,7 +346,7 @@ function DerivedIdentityCard({ fn, theta, onThetaChange, onJumpTo, introOverride
           lineHeight: 1.5,
           color: COLORS.textMuted,
           margin: '0 0 12px',
-        }}>{introOverride ? processContent(introOverride) : d.intro}</p>
+        }}>{d.intro}</p>
         <SourceButtons sources={r.derivedFrom || []} onJumpTo={onJumpTo} />
       </div>
 
@@ -511,13 +510,9 @@ function FormulaTable({ theta, active, onSelect }) {
   );
 }
 
-// Legacy scenario steps (in ReflectionDemo) and derived intros above are kept
-// as fallback only. Canonical explanations live in getStaticProps of the page
-// that renders this component; edit the page's explanations object.
 export default function SupplementaryAngleExplorer({
   initialFn    = 'sin',
   initialTheta = 35,
-  explanations = null,
 }) {
   const [activeFn, setActiveFn] = useState(initialFn);
   const [theta, setTheta]       = useState(initialTheta);
@@ -534,8 +529,6 @@ export default function SupplementaryAngleExplorer({
   const entry = REGISTRY[activeFn];
   const isGeometric = entry.derived === null;
 
-  const ex = explanations && explanations[activeFn];
-
   return (
     <div>
       <TabStrip active={activeFn} onChange={setActiveFn} />
@@ -545,7 +538,6 @@ export default function SupplementaryAngleExplorer({
           key={activeFn}
           mirror="y"
           scenario={entry.scenario || {}}
-          stepNotes={ex && Array.isArray(ex.steps) ? ex.steps : null}
           theta={theta}
           onThetaChange={setTheta}
         />
@@ -556,7 +548,6 @@ export default function SupplementaryAngleExplorer({
           theta={theta}
           onThetaChange={setTheta}
           onJumpTo={setActiveFn}
-          introOverride={ex ? ex.content : null}
         />
       )}
 

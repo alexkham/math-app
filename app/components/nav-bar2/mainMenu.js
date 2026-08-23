@@ -108,7 +108,7 @@ export const mainMenuStructure = [
             title: 'Generators',
             href: '',
             items: [
-              { label: 'Venn Diagrams Generator', href: '/set-theory/venn-generator' },
+              { label: 'Venn Diagrams Generator', href: '/set-theory/visual-tools/venn-generator' },
               { label: 'Truth Tables Generator', href: '/logic/truth-tables' },
               
             ]

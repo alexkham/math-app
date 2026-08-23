@@ -1,7 +1,7 @@
 /**
  * Auto-generated from sitemap.xml
- * Generated: 2026-05-07T20:26:59.793Z
- * Total pages: 436
+ * Generated: 2026-08-23T18:47:50.763Z
+ * Total pages: 562
  * 
  * To regenerate: node generateNavFromSitemap.js
  */
@@ -23,6 +23,10 @@ export const mainMenuStructure = [
         "title": "Algebra",
         "href": "/algebra",
         "items": [
+          {
+            "label": "Calculators",
+            "href": "/algebra/calculators"
+          },
           {
             "label": "Definitions",
             "href": "/algebra/definitions"
@@ -60,6 +64,10 @@ export const mainMenuStructure = [
             "href": "/algebra/roots"
           },
           {
+            "label": "Sequences",
+            "href": "/algebra/sequences"
+          },
+          {
             "label": "Visual Tools",
             "href": "/algebra/visual-tools"
           }
@@ -88,6 +96,10 @@ export const mainMenuStructure = [
           {
             "label": "Limits",
             "href": "/calculus/limits"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/calculus/visual-tools"
           }
         ]
       },
@@ -158,6 +170,18 @@ export const mainMenuStructure = [
         "href": "/combinatorics",
         "items": [
           {
+            "label": "Basics",
+            "href": "/combinatorics/basics"
+          },
+          {
+            "label": "Binomial Coefficient",
+            "href": "/combinatorics/binomial-coefficient"
+          },
+          {
+            "label": "Binomial Theorem",
+            "href": "/combinatorics/binomial-theorem"
+          },
+          {
             "label": "Calculator",
             "href": "/combinatorics/calculator"
           },
@@ -166,12 +190,28 @@ export const mainMenuStructure = [
             "href": "/combinatorics/combinations"
           },
           {
+            "label": "Counting Principles",
+            "href": "/combinatorics/counting-principles"
+          },
+          {
+            "label": "Definitions",
+            "href": "/combinatorics/definitions"
+          },
+          {
             "label": "Formulas",
             "href": "/combinatorics/formulas"
           },
           {
+            "label": "Inclusion Exclusion",
+            "href": "/combinatorics/inclusion-exclusion"
+          },
+          {
             "label": "Permutations",
             "href": "/combinatorics/permutations"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/combinatorics/visual-tools"
           }
         ]
       },
@@ -226,6 +266,10 @@ export const mainMenuStructure = [
           {
             "label": "Vectors",
             "href": "/linear-algebra/vectors"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/linear-algebra/visual-tools"
           }
         ]
       },
@@ -236,6 +280,10 @@ export const mainMenuStructure = [
           {
             "label": "Axioms",
             "href": "/probability/axioms"
+          },
+          {
+            "label": "Basics",
+            "href": "/probability/basics"
           },
           {
             "label": "Bayes Theorem",
@@ -338,10 +386,6 @@ export const mainMenuStructure = [
             "href": "/probability/sets"
           },
           {
-            "label": "Tables",
-            "href": "/probability/tables"
-          },
-          {
             "label": "Total Probability",
             "href": "/probability/total-probability"
           },
@@ -386,8 +430,16 @@ export const mainMenuStructure = [
         "href": "/set-theory",
         "items": [
           {
+            "label": "Basics",
+            "href": "/set-theory/basics"
+          },
+          {
             "label": "Cardinality",
             "href": "/set-theory/cardinality"
+          },
+          {
+            "label": "Definitions",
+            "href": "/set-theory/definitions"
           },
           {
             "label": "Formulas",
@@ -414,25 +466,16 @@ export const mainMenuStructure = [
             "href": "/set-theory/venn-diagrams"
           },
           {
-            "label": "Venn Generator",
-            "href": "/set-theory/venn-generator"
+            "label": "Visual Tools",
+            "href": "/set-theory/visual-tools"
           }
         ]
       },
-      // {
-      //   "title": "Sequences",
-      //   "href": "/sequences",
-      //   "items": [
-      //     {
-      //       "label": "Fibonacci Numbers",
-      //       "href": "/sequences/fibonacci-numbers"
-      //     },
-      //     {
-      //       "label": "Prime Numbers",
-      //       "href": "/sequences/prime-numbers"
-      //     }
-      //   ]
-      // },
+      {
+        "title": "Sequences",
+        "href": "/sequences",
+        "items": []
+      },
       {
         "title": "Complex Numbers",
         "href": "/complex-numbers",
@@ -450,12 +493,20 @@ export const mainMenuStructure = [
             "href": "/complex-numbers/algebraic-form"
           },
           {
+            "label": "Basics",
+            "href": "/complex-numbers/basics"
+          },
+          {
             "label": "Cheat Sheets",
             "href": "/complex-numbers/cheat-sheets"
           },
           {
             "label": "Complex Conjugate",
             "href": "/complex-numbers/complex-conjugate"
+          },
+          {
+            "label": "Definitions",
+            "href": "/complex-numbers/definitions"
           },
           {
             "label": "Demoivre Theorem",
@@ -468,6 +519,10 @@ export const mainMenuStructure = [
           {
             "label": "Exponential Form",
             "href": "/complex-numbers/exponential-form"
+          },
+          {
+            "label": "Formulas",
+            "href": "/complex-numbers/formulas"
           },
           {
             "label": "Geometric Representation",
@@ -508,6 +563,10 @@ export const mainMenuStructure = [
             "href": "/arithmetic/calculators"
           },
           {
+            "label": "Definitions",
+            "href": "/arithmetic/definitions"
+          },
+          {
             "label": "Divisibility",
             "href": "/arithmetic/divisibility"
           },
@@ -518,6 +577,10 @@ export const mainMenuStructure = [
           {
             "label": "Modulo",
             "href": "/arithmetic/modulo"
+          },
+          {
+            "label": "Properties",
+            "href": "/arithmetic/properties"
           },
           {
             "label": "Visual Tools",
@@ -538,8 +601,16 @@ export const mainMenuStructure = [
             "href": "/functions/arithmetic"
           },
           {
+            "label": "Basics",
+            "href": "/functions/basics"
+          },
+          {
             "label": "Composition",
             "href": "/functions/composition"
+          },
+          {
+            "label": "Definitions",
+            "href": "/functions/definitions"
           },
           {
             "label": "Domain",
@@ -548,6 +619,10 @@ export const mainMenuStructure = [
           {
             "label": "Families",
             "href": "/functions/families"
+          },
+          {
+            "label": "Formulas",
+            "href": "/functions/formulas"
           },
           {
             "label": "Graphs",
@@ -572,6 +647,10 @@ export const mainMenuStructure = [
           {
             "label": "Transformations",
             "href": "/functions/transformations"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/functions/visual-tools"
           }
         ]
       }
@@ -697,10 +776,6 @@ export const mainMenuStructure = [
           {
             "label": "Matrix Multiplication",
             "href": "/visual-tools/matrix-multiplication"
-          },
-          {
-            "label": "Matrix Transposition",
-            "href": "/visual-tools/matrix-transposition"
           },
           {
             "label": "Matrix Types",
@@ -837,10 +912,6 @@ export const mainMenuStructure = [
             "href": "/calculators/factorial-calculator"
           },
           {
-            "label": "Factoring Calculator",
-            "href": "/calculators/factoring-calculator"
-          },
-          {
             "label": "Fraction Calculator",
             "href": "/calculators/fraction-calculator"
           },
@@ -883,10 +954,6 @@ export const mainMenuStructure = [
           {
             "label": "Poisson",
             "href": "/probability/calculators/expected-value/poisson"
-          },
-          {
-            "label": "Polynomial Calculator",
-            "href": "/calculators/polynomial-calculator"
           },
           {
             "label": "Raw Data",
@@ -949,7 +1016,7 @@ export const mainMenuStructure = [
           },
           {
             "label": "Venn Generator",
-            "href": "/set-theory/venn-generator"
+            "href": "/set-theory/visual-tools/venn-generator"
           }
         ]
       },
@@ -975,20 +1042,28 @@ export const mainMenuStructure = [
         "title": "Tables",
         "items": [
           {
+            "label": "Algebra",
+            "href": "/math-symbols/algebra"
+          },
+          {
+            "label": "Algebra Identities",
+            "href": "/tables/algebra-identities"
+          },
+          {
             "label": "Angle Conversion",
             "href": "/tables/angle-conversion"
           },
           {
-            "label": "Arithmetics",
-            "href": "/tables/arithmetics"
+            "label": "Arithmetic",
+            "href": "/math-symbols/arithmetic"
           },
           {
             "label": "Base Conversion",
-            "href": "/tables/arithmetics/base-conversion"
+            "href": "/tables/base-conversion"
           },
           {
-            "label": "Binary Logarithms",
-            "href": "/tables/arithmetics/binary-logarithms"
+            "label": "Binomial Distribution",
+            "href": "/tables/binomial-distribution"
           },
           {
             "label": "Calculus",
@@ -999,44 +1074,32 @@ export const mainMenuStructure = [
             "href": "/math-symbols/combinatorics"
           },
           {
-            "label": "Complement Angle",
-            "href": "/tables/trigonometry/complement-angle"
+            "label": "Common Derivatives",
+            "href": "/tables/common-derivatives"
+          },
+          {
+            "label": "Common Integrals",
+            "href": "/tables/common-integrals"
+          },
+          {
+            "label": "Common Limits",
+            "href": "/tables/common-limits"
           },
           {
             "label": "Complex Numbers",
             "href": "/math-symbols/complex-numbers"
           },
           {
-            "label": "Difference Angle",
-            "href": "/tables/trigonometry/difference-angle"
+            "label": "Functions",
+            "href": "/math-symbols/functions"
           },
-          {
-            "label": "Double Angle",
-            "href": "/tables/trigonometry/double-angle"
-          },
-          {
-            "label": "Exponential Table",
-            "href": "/tables/arithmetics/exponential-table"
-          },
-          {
-            "label": "Half Angle",
-            "href": "/tables/trigonometry/half-angle"
-          },
-          {
-            "label": "Inverse",
-            "href": "/tables/trigonometry/inverse"
-          },
-          // {
-          //   "label": "Layout",
-          //   "href": "/tables/[category]/layout"
-          // },
           {
             "label": "Linear Algebra",
             "href": "/math-symbols/linear-algebra"
           },
           {
             "label": "Logarithm",
-            "href": "/tables/arithmetics/logarithm"
+            "href": "/tables/logarithm"
           },
           {
             "label": "Math Logic",
@@ -1048,39 +1111,35 @@ export const mainMenuStructure = [
           },
           {
             "label": "Multiplication",
-            "href": "/tables/arithmetics/multiplication"
+            "href": "/tables/multiplication"
           },
           {
-            "label": "Natural Logarithms",
-            "href": "/tables/arithmetics/natural-logarithms"
-          },
-          {
-            "label": "Negative Angle",
-            "href": "/tables/trigonometry/negative-angle"
+            "label": "Normal Distribution",
+            "href": "/tables/normal-distribution"
           },
           {
             "label": "Perfect Cubes",
-            "href": "/tables/arithmetics/perfect-cubes"
+            "href": "/tables/perfect-cubes"
           },
           {
             "label": "Perfect Squares",
-            "href": "/tables/arithmetics/perfect-squares"
+            "href": "/tables/perfect-squares"
+          },
+          {
+            "label": "Poisson Distribution",
+            "href": "/tables/poisson-distribution"
           },
           {
             "label": "Powers Table",
-            "href": "/tables/arithmetics/powers-table"
+            "href": "/tables/powers-table"
+          },
+          {
+            "label": "Prime Numbers",
+            "href": "/tables/prime-numbers"
           },
           {
             "label": "Probability",
             "href": "/math-symbols/probability"
-          },
-          {
-            "label": "Probability",
-            "href": "/tables/probability"
-          },
-          {
-            "label": "Reduction",
-            "href": "/tables/trigonometry/reduction"
           },
           {
             "label": "Set Theory",
@@ -1088,27 +1147,19 @@ export const mainMenuStructure = [
           },
           {
             "label": "Special Angles",
-            "href": "/tables/trigonometry/special-angles"
+            "href": "/tables/special-angles"
           },
           {
-            "label": "Sum Angle",
-            "href": "/tables/trigonometry/sum-angle"
+            "label": "T Distribution",
+            "href": "/tables/t-distribution"
           },
           {
-            "label": "Supplement Angle",
-            "href": "/tables/trigonometry/supplement-angle"
+            "label": "Trigonometric Identities",
+            "href": "/tables/trigonometric-identities"
           },
           {
             "label": "Trigonometry",
             "href": "/math-symbols/trigonometry"
-          },
-          {
-            "label": "Trigonometry",
-            "href": "/tables/trigonometry"
-          },
-          {
-            "label": "Triple Angle",
-            "href": "/tables/trigonometry/triple-angle"
           }
         ],
         "href": "/tables"

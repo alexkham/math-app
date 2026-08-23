@@ -102,7 +102,7 @@ const CustomConvert=()=>(
   { id: 6, icon: CustomWrench, tooltip: 'Other Tools', 
     content: [
         { text: 'Truth Tables Generator', url: '/logic/truth-tables' },
-        { text: 'Venn Diagrams Generator', url: '/set-theory/venn-generator' },
+        { text: 'Venn Diagrams Generator', url: '/set-theory/visual-tools/venn-generator' },
     ] },
    
 ];

@@ -959,6 +959,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1290,25 +1291,42 @@ This measure gives us our first quantitative tool for describing not where a dis
   
     },
     notation:{
-      title:`Useful Notation`,
-      content:`
-Before working with variance formulas, we establish the standard notation used throughout probability theory:
-
-     • $X$ — a random variable
-     • $\\mu = \\mathbb{E}[X]$ — the expected value (mean) of $X$
-     • $\\mathrm{Var}(X)$ or $\\sigma^2$ — the variance of $X$
-     • $\\mathbb{E}[\\cdot]$ — the expectation operator, computed as a sum for discrete variables or an integral for continuous variables
-     • $(X - \\mu)^2$ — the squared deviation of $X$ from its mean
-
-These symbols appear consistently in variance calculations and provide a compact way to express the relationships between a random variable, its center, and its spread.
-
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-`,
+      title:`Variance Notation`,
+      lead:`A named operator, a squared Greek letter, and its unsquared partner — the exponent in $\\sigma^2$ is not decoration but a units statement, and it is the reason two symbols exist for one idea. All are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$X$, $x$ and the distinction between them come from the [probability function](!/probability/probability-function#notation); the expectation operator $E[\\cdot]$ and the mean $\\mu$ from [expected value notation](!/probability/expected-value#notation).`,
+      entries:[
+        {
+          id:'var-operator',
+          tex:`$\\operatorname{Var}(X)$`,
+          read:`the variance of X`,
+          means:`The spelled-out operator: like $E[\\cdot]$, it consumes a whole random variable and returns one number — the expected squared deviation, $E[(X - \\mu)^2]$, as **What Variance Measures** below explains.`,
+          cases:`Print sets it upright and abbreviated — $\\operatorname{Var}$, sometimes $\\operatorname{V}$ or $\\mathbb{V}$; the name is preferred over $\\sigma^2$ in formulas where the argument matters, since $\\operatorname{Var}(aX + b)$ has somewhere to put the transformation.`,
+          confusedWith:`Linearity. Constants do not slide out untouched: $\\operatorname{Var}(aX) = a^2\\operatorname{Var}(X)$ and $\\operatorname{Var}(X + b) = \\operatorname{Var}(X)$ — the square in the definition changes both rules, unlike the [expectation](!/probability/expected-value#notation) it is built from.`,
+        },
+        {
+          id:'sigma-squared',
+          tex:`$\\sigma^2$`,
+          read:`sigma squared — the variance`,
+          means:`The parameter-side name, exactly as $\\mu$ names the mean: $\\sigma^2 = \\operatorname{Var}(X)$. Writing the variance as a square is a promise that an unsquared $\\sigma$ exists and means something.`,
+          cases:`Subscripts identify the variable — $\\sigma_X^2$ — and the pair $(\\mu, \\sigma^2)$ is what distribution declarations carry, as in the $N(\\mu, \\sigma^2)$ of the [tilde convention](!/probability/random-variables#notation).`,
+          sameGlyphElsewhere:`Lowercase sigma is heavily tenanted: [singular values](!/linear-algebra/decompositions/svd#notation) in linear algebra and the [divisor-sum function](!/arithmetic/divisibility/factors#notation) $\\sigma(n)$ in number theory — while capital $\\Sigma$ is the summation operator that computes this very quantity.`,
+        },
+        {
+          id:'sigma-sd',
+          tex:`$\\sigma$ · $\\operatorname{SD}(X)$`,
+          read:`sigma; the standard deviation`,
+          means:`The square root of the variance — and the reason the squared notation matters: $\\sigma$ carries the same units as $X$, while $\\sigma^2$ carries their square. A spread in "dollars squared" is unreportable; the root brings it back.`,
+          cases:`Reporting conventions follow the units: results and error bars are quoted in $\\sigma$, while algebra is done in $\\sigma^2$ because variances add for independent variables and standard deviations do not.`,
+          confusedWith:`Interchangeability. $\\sigma$ and $\\sigma^2$ are one letter apart and never equal (except at $1$) — reading a variance as a standard deviation silently squares or roots the answer, the arithmetic error this notation invites most often.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
       after:``,
-  
+
     },
   
     what:{
@@ -1876,7 +1894,18 @@ export default function VariancePage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.notation.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     // {

@@ -877,7 +877,6 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
-import { processContent } from '@/app/utils/contentProcessor';
 
 /* ============================================================
    ReflectionDemo v3 (fixed: hooks moved above early return)
@@ -1226,7 +1225,7 @@ function MiniSolutionPanel({ steps, stepsTitle = 'Derivation', placeholder, onSt
                 fontSize: '0.88rem',
                 color: isActive ? COLORS.text : COLORS.textMuted,
                 lineHeight: 1.5, margin: 0, paddingLeft: '36px',
-              }}>{typeof step.description === 'string' ? processContent(step.description) : step.description}</p>
+              }}>{step.description}</p>
               {step.callout && isActive && (
                 <div style={{
                   background: COLORS.calloutBg,
@@ -1539,13 +1538,9 @@ function ReflectionScene({
    Main exported component
    FIX: all hooks moved ABOVE the early `if (!def) return ...`
 ------------------------------------------------------------ */
-// Step descriptions here are fallback only when `stepNotes` is not supplied.
-// Canonical explanations live in getStaticProps of the page that renders this
-// component; edit the page's explanations object.
 export default function ReflectionDemo({
   mirror         = 'y=x',
   scenario       = {},
-  stepNotes      = null,
   initialTheta   = 35,
   theta:           thetaProp,
   onThetaChange,
@@ -1564,12 +1559,9 @@ export default function ReflectionDemo({
 
   const def = DEFAULTS[mirror];
 
-  const baseSteps = def ? (scenario.steps ?? def.steps) : [];
   const merged = def ? {
     identity:    scenario.identity    ?? def.identity,
-    steps:       Array.isArray(stepNotes)
-      ? baseSteps.map((s, i) => (stepNotes[i] ? { ...s, description: stepNotes[i] } : s))
-      : baseSteps,
+    steps:       scenario.steps       ?? def.steps,
     metricPairs: scenario.metricPairs ?? def.metricPairs,
   } : { identity: { pieces: [] }, steps: [], metricPairs: [] };
 

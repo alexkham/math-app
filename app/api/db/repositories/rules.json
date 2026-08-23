@@ -1,0 +1,2863 @@
+{
+  "$meta": {
+    "version": "1.0.0",
+    "description": "Rules table — theorems, laws, axioms, principles, identities, inequalities and tests. A peer of concepts.json with its own ids, joined to it by concepts[].",
+    "generated": "2026-08-23",
+    "generatedBy": "scripts/build-rules-methods.mjs — regenerate, never hand-edit",
+    "foreignKey": "concepts[] references concepts.json id",
+    "conceptsSource": "Seeded from the `entity` field of the source row, which already names the concept the rule or method is about.",
+    "statementField": "`statement` is null on every row. LaTeX statements are a later pass and belong in an overlay file, not here.",
+    "counts": {
+      "rules": 171,
+      "withConcepts": 129,
+      "withoutConcepts": 42
+    }
+  },
+  "rules": [
+    {
+      "id": "binomial_theorem",
+      "kind": "theorem",
+      "name": "Binomial Theorem",
+      "section": "algebra",
+      "category": "Polynomial Theorems",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/identities",
+      "anchor": "general",
+      "sourceEntity": "binomial_theorem",
+      "source": "formulasRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "descartes_rule_of_signs",
+      "kind": "rule",
+      "name": "Descartes' Rule of Signs",
+      "section": "algebra",
+      "category": "Polynomials",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/polynomials/rules",
+      "anchor": "9",
+      "sourceEntity": "descartes'_rule_of_signs",
+      "source": "definitionsRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "even_root_identity",
+      "kind": "identity",
+      "name": "Even Root Identity",
+      "section": "algebra",
+      "category": "Radical Rules",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/roots/properties",
+      "anchor": "4",
+      "sourceEntity": "even_root_identity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "exponents_product_rule",
+      "kind": "rule",
+      "name": "Product Rule",
+      "section": "algebra",
+      "category": "Exponents",
+      "disambiguation": "Exponents",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/powers/exponent-rules",
+      "anchor": null,
+      "sourceEntity": "product_rule_(exponents)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "exponents_quotient_rule",
+      "kind": "rule",
+      "name": "Quotient Rule",
+      "section": "algebra",
+      "category": "Exponents",
+      "disambiguation": "Exponents",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/powers/exponent-rules",
+      "anchor": null,
+      "sourceEntity": "quotient_rule_(exponents)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "factor_theorem",
+      "kind": "theorem",
+      "name": "Factor Theorem",
+      "section": "algebra",
+      "category": "Polynomials",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/polynomials/rules",
+      "anchor": "3",
+      "sourceEntity": "factor_theorem",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "fundamental_theorem_of_algebra",
+      "kind": "theorem",
+      "name": "Fundamental Theorem of Algebra",
+      "section": "algebra",
+      "category": "Polynomials",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/polynomials/rules",
+      "anchor": "11",
+      "sourceEntity": "fundamental_theorem_of_algebra",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "logarithms_power_rule",
+      "kind": "rule",
+      "name": "Power Rule",
+      "section": "algebra",
+      "category": "Logarithms",
+      "disambiguation": "Logarithms",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/logarithms/rules",
+      "anchor": null,
+      "sourceEntity": "power_rule_(logarithms)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "logarithms_product_rule",
+      "kind": "rule",
+      "name": "Product Rule",
+      "section": "algebra",
+      "category": "Logarithms",
+      "disambiguation": "Logarithms",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/logarithms/rules",
+      "anchor": null,
+      "sourceEntity": "product_rule_(logarithms)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "logarithms_quotient_rule",
+      "kind": "rule",
+      "name": "Quotient Rule",
+      "section": "algebra",
+      "category": "Logarithms",
+      "disambiguation": "Logarithms",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/logarithms/rules",
+      "anchor": null,
+      "sourceEntity": "quotient_rule_(logarithms)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "odd_root_identity",
+      "kind": "identity",
+      "name": "Odd Root Identity",
+      "section": "algebra",
+      "category": "Radical Rules",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/roots/properties",
+      "anchor": "5",
+      "sourceEntity": "odd_root_identity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "pascals_rule",
+      "kind": "rule",
+      "name": "Pascal's Rule",
+      "section": "algebra",
+      "category": "Polynomial Theorems",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/identities",
+      "anchor": "general",
+      "sourceEntity": "pascal_s_rule",
+      "source": "formulasRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "radicals_power_rule",
+      "kind": "rule",
+      "name": "Power Rule",
+      "section": "algebra",
+      "category": "Roots",
+      "disambiguation": "Radicals",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/roots/radical-rules",
+      "anchor": null,
+      "sourceEntity": "power_rule_(radicals)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "radicals_product_rule",
+      "kind": "rule",
+      "name": "Product Rule",
+      "section": "algebra",
+      "category": "Roots",
+      "disambiguation": "Radicals",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/roots/radical-rules",
+      "anchor": null,
+      "sourceEntity": "product_rule_(radicals)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "radicals_quotient_rule",
+      "kind": "rule",
+      "name": "Quotient Rule",
+      "section": "algebra",
+      "category": "Roots",
+      "disambiguation": "Radicals",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/roots/radical-rules",
+      "anchor": null,
+      "sourceEntity": "quotient_rule_(radicals)",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "rational_root_theorem",
+      "kind": "theorem",
+      "name": "Rational Root Theorem",
+      "section": "algebra",
+      "category": "Polynomials",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/polynomials/rules",
+      "anchor": "5",
+      "sourceEntity": "rational_root_theorem",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "remainder_theorem",
+      "kind": "theorem",
+      "name": "Remainder Theorem",
+      "section": "algebra",
+      "category": "Polynomials",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/polynomials/rules",
+      "anchor": "1",
+      "sourceEntity": "remainder_theorem",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "absolute_value_rule",
+      "kind": "rule",
+      "name": "Absolute Value Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "10",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "chain_rule",
+      "kind": "rule",
+      "name": "Chain Rule",
+      "section": "calculus",
+      "category": "Differentiation Rules",
+      "disambiguation": null,
+      "concepts": [
+        "derivative",
+        "conditional_probability"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "7",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "composition_rule",
+      "kind": "rule",
+      "name": "Composition Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "13",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "constant_rule",
+      "kind": "rule",
+      "name": "Constant Rule",
+      "section": "calculus",
+      "category": "Differentiation Rules",
+      "disambiguation": "Derivatives",
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "1",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "derivatives_constant_multiple_rule",
+      "kind": "rule",
+      "name": "Constant Multiple Rule",
+      "section": "calculus",
+      "category": "Differentiation Rules",
+      "disambiguation": "Derivatives",
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "3",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "derivatives_power_rule",
+      "kind": "rule",
+      "name": "Power Rule",
+      "section": "calculus",
+      "category": "Differentiation Rules",
+      "disambiguation": "Derivatives",
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "2",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "derivatives_product_rule",
+      "kind": "rule",
+      "name": "Product Rule",
+      "section": "calculus",
+      "category": "Differentiation Rules",
+      "disambiguation": "Derivatives",
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "5",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "derivatives_quotient_rule",
+      "kind": "rule",
+      "name": "Quotient Rule",
+      "section": "calculus",
+      "category": "Differentiation Rules",
+      "disambiguation": "Derivatives",
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "6",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "derivatives_sum_and_difference_rule",
+      "kind": "rule",
+      "name": "Sum and Difference Rule",
+      "section": "calculus",
+      "category": "Differentiation Rules",
+      "disambiguation": "Derivatives",
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "4",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "extreme_value_theorem",
+      "kind": "theorem",
+      "name": "Extreme Value Theorem",
+      "section": "calculus",
+      "category": "Graph Analysis",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/applications",
+      "anchor": "9",
+      "sourceEntity": "extreme_value_theorem",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "first_derivative_test",
+      "kind": "test",
+      "name": "First Derivative Test",
+      "section": "calculus",
+      "category": "Graph Analysis",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/applications",
+      "anchor": "5",
+      "sourceEntity": "first_derivative_test",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "fundamental_theorem_of_calculus_part_1",
+      "kind": "theorem",
+      "name": "Fundamental Theorem of Calculus, Part 1",
+      "section": "calculus",
+      "category": "Fundamental Theorem & Antiderivatives",
+      "disambiguation": null,
+      "concepts": [
+        "definite_integral"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/integrals/rules",
+      "anchor": "5",
+      "sourceEntity": "definite_integral",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "fundamental_theorem_of_calculus_part_2",
+      "kind": "theorem",
+      "name": "Fundamental Theorem of Calculus, Part 2",
+      "section": "calculus",
+      "category": "Fundamental Theorem & Antiderivatives",
+      "disambiguation": null,
+      "concepts": [
+        "definite_integral"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/integrals/rules",
+      "anchor": "6",
+      "sourceEntity": "definite_integral",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "integrals_constant_multiple_rule",
+      "kind": "rule",
+      "name": "Constant Multiple Rule",
+      "section": "calculus",
+      "category": "Integration Rules",
+      "disambiguation": "Integrals",
+      "concepts": [
+        "indefinite_integral"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/integrals/rules",
+      "anchor": "2",
+      "sourceEntity": "indefinite_integral",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "integrals_power_rule",
+      "kind": "rule",
+      "name": "Power Rule",
+      "section": "calculus",
+      "category": "Standard Antiderivatives — Algebraic & Logarithmic",
+      "disambiguation": "Integrals",
+      "concepts": [
+        "indefinite_integral"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/integrals/special",
+      "anchor": "2",
+      "sourceEntity": "indefinite_integral",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "integrals_sum_and_difference_rule",
+      "kind": "rule",
+      "name": "Sum and Difference Rule",
+      "section": "calculus",
+      "category": "Integration Rules",
+      "disambiguation": "Integrals",
+      "concepts": [
+        "indefinite_integral"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/integrals/rules",
+      "anchor": "1",
+      "sourceEntity": "indefinite_integral",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "intermediate_value_theorem",
+      "kind": "theorem",
+      "name": "Intermediate Value Theorem",
+      "section": "calculus",
+      "category": "Continuity",
+      "disambiguation": null,
+      "concepts": [
+        "continuity"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/continuity",
+      "anchor": "11",
+      "sourceEntity": "continuity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "lh_pitals_rule",
+      "kind": "rule",
+      "name": "L'Hôpital's Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": null,
+      "concepts": [
+        "indeterminate_form"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "10",
+      "sourceEntity": "indeterminate_form",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "limit_of_the_identity_function",
+      "kind": "identity",
+      "name": "Limit of the Identity Function",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": null,
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "3",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "limits_constant_multiple_rule",
+      "kind": "rule",
+      "name": "Constant Multiple Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "5",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "limits_power_rule",
+      "kind": "rule",
+      "name": "Power Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "8",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "limits_product_rule",
+      "kind": "rule",
+      "name": "Product Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "6",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "limits_quotient_rule",
+      "kind": "rule",
+      "name": "Quotient Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "7",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "limits_sum_and_difference_rule",
+      "kind": "rule",
+      "name": "Sum and Difference Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "4",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "mean_value_theorem",
+      "kind": "theorem",
+      "name": "Mean Value Theorem",
+      "section": "calculus",
+      "category": "Major Theorems",
+      "disambiguation": null,
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "8",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "p_test_for_improper_integrals",
+      "kind": "test",
+      "name": "p-Test for Improper Integrals",
+      "section": "calculus",
+      "category": "Inverse Trig, Symmetry, Improper, Average",
+      "disambiguation": null,
+      "concepts": [
+        "improper_integral"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/integrals/improper",
+      "anchor": "5",
+      "sourceEntity": "improper_integral",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "rolles_theorem",
+      "kind": "theorem",
+      "name": "Rolle's Theorem",
+      "section": "calculus",
+      "category": "Major Theorems",
+      "disambiguation": null,
+      "concepts": [
+        "derivative"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/rules",
+      "anchor": "9",
+      "sourceEntity": "derivative",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "root_rule",
+      "kind": "rule",
+      "name": "Root Rule",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": "Limits",
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "9",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "second_derivative_test",
+      "kind": "test",
+      "name": "Second Derivative Test",
+      "section": "calculus",
+      "category": "Graph Analysis",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/calculus/derivatives/applications",
+      "anchor": "7",
+      "sourceEntity": "second_derivative_test",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "squeeze_theorem",
+      "kind": "theorem",
+      "name": "Squeeze Theorem",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": null,
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/rules",
+      "anchor": "14",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "two_sided_limit_existence_theorem",
+      "kind": "theorem",
+      "name": "Two-Sided Limit Existence Theorem",
+      "section": "calculus",
+      "category": "Limit Laws",
+      "disambiguation": null,
+      "concepts": [
+        "limit"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/limits/two-sided",
+      "anchor": "2",
+      "sourceEntity": "limit",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "absorption_identity",
+      "kind": "identity",
+      "name": "Absorption Identity",
+      "section": "combinatorics",
+      "category": "Binomial Coefficient Identities",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-coefficient",
+      "anchor": "2",
+      "sourceEntity": "absorption_identity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "addition_rule",
+      "kind": "rule",
+      "name": "Addition Rule",
+      "section": "combinatorics",
+      "category": "Counting Principles",
+      "disambiguation": null,
+      "concepts": [
+        "event"
+      ],
+      "statement": null,
+      "primaryPage": "/combinatorics/counting-principles",
+      "anchor": "1",
+      "sourceEntity": "addition_rule",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 3
+    },
+    {
+      "id": "binomial_symmetry_identity",
+      "kind": "identity",
+      "name": "Binomial Symmetry Identity",
+      "section": "combinatorics",
+      "category": "Binomial Coefficient Identities",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-coefficient",
+      "anchor": "2",
+      "sourceEntity": "binomial_symmetry_identity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "general_inclusion_exclusion_principle",
+      "kind": "principle",
+      "name": "Inclusion-Exclusion Principle",
+      "section": "combinatorics",
+      "category": "Inclusion-Exclusion",
+      "disambiguation": "General",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/inclusion-exclusion",
+      "anchor": "3",
+      "sourceEntity": "inclusion_exclusion_principle_general",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "generalized_pigeonhole_principle",
+      "kind": "principle",
+      "name": "Pigeonhole Principle",
+      "section": "combinatorics",
+      "category": "Counting Principles",
+      "disambiguation": "Generalized",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/counting-principles",
+      "anchor": "5",
+      "sourceEntity": "pigeonhole_principle_generalized",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "hockey_stick_identity",
+      "kind": "identity",
+      "name": "Hockey Stick Identity",
+      "section": "combinatorics",
+      "category": "Binomial Coefficient Identities",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-coefficient",
+      "anchor": "2",
+      "sourceEntity": "hockey_stick_identity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "inclusion_exclusion_principle",
+      "kind": "principle",
+      "name": "Inclusion-Exclusion Principle",
+      "section": "combinatorics",
+      "category": "Counting Principles",
+      "disambiguation": null,
+      "concepts": [
+        "event"
+      ],
+      "statement": null,
+      "primaryPage": "/combinatorics/inclusion-exclusion",
+      "anchor": null,
+      "sourceEntity": "inclusion_exclusion_principle",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "multinomial_theorem",
+      "kind": "theorem",
+      "name": "Multinomial Theorem",
+      "section": "combinatorics",
+      "category": "Binomial & Multinomial Theorems",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-theorem",
+      "anchor": "4",
+      "sourceEntity": "multinomial_theorem",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "multiplication_rule",
+      "kind": "rule",
+      "name": "Multiplication Rule",
+      "section": "combinatorics",
+      "category": "Counting Principles",
+      "disambiguation": null,
+      "concepts": [
+        "conditional_probability"
+      ],
+      "statement": null,
+      "primaryPage": "/combinatorics/counting-principles",
+      "anchor": "2",
+      "sourceEntity": "multiplication_rule",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 3
+    },
+    {
+      "id": "newtons_generalized_binomial_theorem",
+      "kind": "theorem",
+      "name": "Newton's Generalized Binomial Theorem",
+      "section": "combinatorics",
+      "category": "Binomial & Multinomial Theorems",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-theorem",
+      "anchor": "1",
+      "sourceEntity": "newton_s_generalized_binomial_theorem",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "pigeonhole_principle",
+      "kind": "principle",
+      "name": "Pigeonhole Principle",
+      "section": "combinatorics",
+      "category": "Counting Principles",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/counting-principles",
+      "anchor": "5",
+      "sourceEntity": "pigeonhole_principle",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "three_sets_inclusion_exclusion_principle",
+      "kind": "principle",
+      "name": "Inclusion-Exclusion Principle",
+      "section": "combinatorics",
+      "category": "Inclusion-Exclusion",
+      "disambiguation": "Three Sets",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/inclusion-exclusion",
+      "anchor": "2",
+      "sourceEntity": "inclusion_exclusion_principle_three_sets",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "two_sets_inclusion_exclusion_principle",
+      "kind": "principle",
+      "name": "Inclusion-Exclusion Principle",
+      "section": "combinatorics",
+      "category": "Inclusion-Exclusion",
+      "disambiguation": "Two Sets",
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/inclusion-exclusion",
+      "anchor": "1",
+      "sourceEntity": "inclusion_exclusion_principle_two_sets",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "vandermondes_identity",
+      "kind": "identity",
+      "name": "Vandermonde's Identity",
+      "section": "combinatorics",
+      "category": "Binomial Coefficient Identities",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-coefficient",
+      "anchor": "2",
+      "sourceEntity": "vandermonde_s_identity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "conjugate_root_theorem",
+      "kind": "theorem",
+      "name": "Conjugate Root Theorem",
+      "section": "complex-numbers",
+      "category": "Polynomial Theory",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/complex-numbers/equations-polynomials",
+      "anchor": "5",
+      "sourceEntity": "fundamental_theorem_of_algebra",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "de_moivres_theorem",
+      "kind": "theorem",
+      "name": "De Moivre’s Theorem",
+      "section": "complex-numbers",
+      "category": "Powers & Roots",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/complex-numbers/demoivre-theorem",
+      "anchor": "2",
+      "sourceEntity": "de_moivres_theorem",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "eulers_identity",
+      "kind": "identity",
+      "name": "Euler’s Identity",
+      "section": "complex-numbers",
+      "category": "Identities",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/complex-numbers/exponential-form",
+      "anchor": "3",
+      "sourceEntity": "eulers_identity",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "pure_imaginary_test",
+      "kind": "test",
+      "name": "Pure Imaginary Test",
+      "section": "complex-numbers",
+      "category": "Conjugate",
+      "disambiguation": null,
+      "concepts": [
+        "pure_imaginary_number"
+      ],
+      "statement": null,
+      "primaryPage": "/complex-numbers/complex-conjugate",
+      "anchor": "5",
+      "sourceEntity": "pure_imaginary_number",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "real_number_test",
+      "kind": "test",
+      "name": "Real Number Test",
+      "section": "complex-numbers",
+      "category": "Conjugate",
+      "disambiguation": null,
+      "concepts": [
+        "complex_conjugate"
+      ],
+      "statement": null,
+      "primaryPage": "/complex-numbers/complex-conjugate",
+      "anchor": "5",
+      "sourceEntity": "complex_conjugate",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "reverse_triangle_inequality",
+      "kind": "inequality",
+      "name": "Reverse Triangle Inequality",
+      "section": "complex-numbers",
+      "category": "Modulus",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/complex-numbers/absolute-value",
+      "anchor": "7",
+      "sourceEntity": "triangle_inequality",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "triangle_inequality",
+      "kind": "inequality",
+      "name": "Triangle Inequality",
+      "section": "complex-numbers",
+      "category": "Modulus",
+      "disambiguation": null,
+      "concepts": [
+        "magnitude"
+      ],
+      "statement": null,
+      "primaryPage": "/complex-numbers/absolute-value",
+      "anchor": "5",
+      "sourceEntity": "triangle_inequality",
+      "source": "formulasRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "even_function_test",
+      "kind": "test",
+      "name": "Even Function Test",
+      "section": "functions",
+      "category": "Symmetry",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/functions/properties",
+      "anchor": "1",
+      "sourceEntity": "even_function_test",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "odd_function_test",
+      "kind": "test",
+      "name": "Odd Function Test",
+      "section": "functions",
+      "category": "Symmetry",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/functions/properties",
+      "anchor": "1",
+      "sourceEntity": "odd_function_test",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "adjugate_identity",
+      "kind": "identity",
+      "name": "Adjugate Identity",
+      "section": "linear-algebra",
+      "category": "Adjugate & Inverse",
+      "disambiguation": null,
+      "concepts": [
+        "cofactor_matrix"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/determinants/cofactors",
+      "anchor": "6",
+      "sourceEntity": "cofactor_matrix",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cauchy_schwarz_inequality",
+      "kind": "inequality",
+      "name": "Cauchy-Schwarz Inequality",
+      "section": "linear-algebra",
+      "category": "Norm & Distance",
+      "disambiguation": null,
+      "concepts": [
+        "dot_product"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vectors/dot-product",
+      "anchor": "8",
+      "sourceEntity": "dot_product",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cramers_rule",
+      "kind": "rule",
+      "name": "Cramers Rule",
+      "section": "linear-algebra",
+      "category": "Linear Systems",
+      "disambiguation": null,
+      "concepts": [
+        "determinant"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/determinants/applications",
+      "anchor": "1",
+      "sourceEntity": "determinant",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "determinant_of_identity",
+      "kind": "identity",
+      "name": "Determinant of Identity",
+      "section": "linear-algebra",
+      "category": "Algebraic Properties",
+      "disambiguation": null,
+      "concepts": [
+        "determinant"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/determinants/properties",
+      "anchor": "7",
+      "sourceEntity": "determinant",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "direct_sum_criterion",
+      "kind": "test",
+      "name": "Direct Sum Criterion",
+      "section": "linear-algebra",
+      "category": "Dimension & Rank",
+      "disambiguation": null,
+      "concepts": [
+        "subspace"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/dimension",
+      "anchor": "8",
+      "sourceEntity": "subspace",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "direction_cosines_identity",
+      "kind": "identity",
+      "name": "Direction Cosines Identity",
+      "section": "linear-algebra",
+      "category": "Representation",
+      "disambiguation": null,
+      "concepts": [
+        "vector"
+      ],
+      "statement": null,
+      "primaryPage": null,
+      "anchor": null,
+      "sourceEntity": "vector",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "general_cauchy_schwarz_inequality",
+      "kind": "inequality",
+      "name": "Cauchy-Schwarz Inequality",
+      "section": "linear-algebra",
+      "category": "Inner Product",
+      "disambiguation": "General",
+      "concepts": [
+        "inner_product"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/orthogonality/inner-product",
+      "anchor": "6",
+      "sourceEntity": "inner_product",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "gram_rank_identity",
+      "kind": "identity",
+      "name": "Gram Rank Identity",
+      "section": "linear-algebra",
+      "category": "Rank",
+      "disambiguation": null,
+      "concepts": [
+        "rank"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/rank",
+      "anchor": "8",
+      "sourceEntity": "rank",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "identity_matrix_definition",
+      "kind": "identity",
+      "name": "Identity Matrix Definition",
+      "section": "linear-algebra",
+      "category": "Special Matrix Types",
+      "disambiguation": null,
+      "concepts": [
+        "identity_matrix"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/types",
+      "anchor": "2",
+      "sourceEntity": "identity_matrix",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "identity_matrix_property",
+      "kind": "identity",
+      "name": "Identity Matrix Property",
+      "section": "linear-algebra",
+      "category": "Special Matrix Types",
+      "disambiguation": null,
+      "concepts": [
+        "identity_matrix"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/types",
+      "anchor": "2",
+      "sourceEntity": "identity_matrix",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "injectivity_kernel_criterion",
+      "kind": "test",
+      "name": "Injectivity Kernel Criterion",
+      "section": "linear-algebra",
+      "category": "Image & Kernel",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/transformations/image-kernel",
+      "anchor": "3",
+      "sourceEntity": "kernel",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "inner_product_triangle_inequality",
+      "kind": "inequality",
+      "name": "Triangle Inequality",
+      "section": "linear-algebra",
+      "category": "Inner Product",
+      "disambiguation": "Inner Product",
+      "concepts": [
+        "inner_product"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/orthogonality/inner-product",
+      "anchor": "7",
+      "sourceEntity": "inner_product",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "invertible_matrix_theorem",
+      "kind": "theorem",
+      "name": "Invertible Matrix Theorem",
+      "section": "linear-algebra",
+      "category": "Inverse",
+      "disambiguation": null,
+      "concepts": [
+        "inverse_matrix"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/inverse",
+      "anchor": "3",
+      "sourceEntity": "inverse_matrix",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "lagrange_identity",
+      "kind": "identity",
+      "name": "Lagrange Identity",
+      "section": "linear-algebra",
+      "category": "Cross Product",
+      "disambiguation": null,
+      "concepts": [
+        "cross_product"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vectors/cross-product",
+      "anchor": "5",
+      "sourceEntity": "cross_product",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "linear_independence_determinant_test",
+      "kind": "test",
+      "name": "Linear Independence Determinant Test",
+      "section": "linear-algebra",
+      "category": "Linear Independence",
+      "disambiguation": null,
+      "concepts": [
+        "linear_independence"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/linear-independence",
+      "anchor": "4",
+      "sourceEntity": "linear_independence",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "linear_independence_matrix_test",
+      "kind": "test",
+      "name": "Linear Independence Matrix Test",
+      "section": "linear-algebra",
+      "category": "Linear Independence",
+      "disambiguation": null,
+      "concepts": [
+        "linear_independence"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/linear-independence",
+      "anchor": "3",
+      "sourceEntity": "linear_independence",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "multiplicity_inequality",
+      "kind": "inequality",
+      "name": "Multiplicity Inequality",
+      "section": "linear-algebra",
+      "category": "Multiplicities",
+      "disambiguation": null,
+      "concepts": [
+        "eigenvalue"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/eigen/properties",
+      "anchor": "3",
+      "sourceEntity": "eigenvalue",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "parallelism_test",
+      "kind": "test",
+      "name": "Parallelism Test",
+      "section": "linear-algebra",
+      "category": "Cross Product",
+      "disambiguation": "Cross Product",
+      "concepts": [
+        "cross_product"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vectors/cross-product",
+      "anchor": "6",
+      "sourceEntity": "cross_product",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "parseval_identity",
+      "kind": "identity",
+      "name": "Parseval Identity",
+      "section": "linear-algebra",
+      "category": "Orthogonal Sets",
+      "disambiguation": null,
+      "concepts": [
+        "orthogonal_set"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/orthogonality/orthogonal-sets",
+      "anchor": "8",
+      "sourceEntity": "orthogonal_set",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "pythagorean_theorem",
+      "kind": "theorem",
+      "name": "Pythagorean Theorem",
+      "section": "linear-algebra",
+      "category": "Inner Product",
+      "disambiguation": null,
+      "concepts": [
+        "inner_product"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/orthogonality/inner-product",
+      "anchor": "10",
+      "sourceEntity": "inner_product",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "rank_nullity_theorem",
+      "kind": "theorem",
+      "name": "Rank-Nullity Theorem",
+      "section": "linear-algebra",
+      "category": "Dimension & Rank",
+      "disambiguation": "Matrix Form",
+      "concepts": [
+        "column_space"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/dimension",
+      "anchor": "9",
+      "sourceEntity": "column_space",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "rank_product_inequality",
+      "kind": "inequality",
+      "name": "Rank Product Inequality",
+      "section": "linear-algebra",
+      "category": "Rank",
+      "disambiguation": null,
+      "concepts": [
+        "rank"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/rank",
+      "anchor": "7",
+      "sourceEntity": "rank",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "rank_sum_inequality",
+      "kind": "inequality",
+      "name": "Rank Sum Inequality",
+      "section": "linear-algebra",
+      "category": "Rank",
+      "disambiguation": null,
+      "concepts": [
+        "rank"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/rank",
+      "anchor": "7",
+      "sourceEntity": "rank",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "solvability_rank_criterion",
+      "kind": "test",
+      "name": "Solvability Rank Criterion",
+      "section": "linear-algebra",
+      "category": "Solvability",
+      "disambiguation": null,
+      "concepts": [
+        "system_of_linear_equations"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/linear-systems/solvability",
+      "anchor": "5",
+      "sourceEntity": "system_of_linear_equations",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "span_membership_criterion",
+      "kind": "test",
+      "name": "Span Membership Criterion",
+      "section": "linear-algebra",
+      "category": "Span",
+      "disambiguation": null,
+      "concepts": [
+        "span"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/span",
+      "anchor": "4",
+      "sourceEntity": "span",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "spectral_theorem",
+      "kind": "theorem",
+      "name": "Spectral Theorem",
+      "section": "linear-algebra",
+      "category": "Spectral",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/eigen/diagonalization",
+      "anchor": "7",
+      "sourceEntity": "diagonalizable_matrix",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "subspace_dimension_inequality",
+      "kind": "inequality",
+      "name": "Subspace Dimension Inequality",
+      "section": "linear-algebra",
+      "category": "Dimension & Rank",
+      "disambiguation": null,
+      "concepts": [
+        "dimension"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/dimension",
+      "anchor": "7",
+      "sourceEntity": "dimension",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "subspace_test",
+      "kind": "test",
+      "name": "Subspace Test",
+      "section": "linear-algebra",
+      "category": "Subspaces",
+      "disambiguation": null,
+      "concepts": [
+        "subspace"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/subspaces",
+      "anchor": "2",
+      "sourceEntity": "subspace",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "subspace_test_combined",
+      "kind": "test",
+      "name": "Subspace Test Combined",
+      "section": "linear-algebra",
+      "category": "Subspaces",
+      "disambiguation": null,
+      "concepts": [
+        "subspace"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/subspaces",
+      "anchor": "2",
+      "sourceEntity": "subspace",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "sylvester_rank_inequality",
+      "kind": "inequality",
+      "name": "Sylvester Rank Inequality",
+      "section": "linear-algebra",
+      "category": "Rank",
+      "disambiguation": null,
+      "concepts": [
+        "rank"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/rank",
+      "anchor": "7",
+      "sourceEntity": "rank",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "wronskian_test",
+      "kind": "test",
+      "name": "Wronskian Test",
+      "section": "linear-algebra",
+      "category": "Linear Independence",
+      "disambiguation": null,
+      "concepts": [
+        "linear_independence"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vector-spaces/linear-independence",
+      "anchor": "7",
+      "sourceEntity": "linear_independence",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "associative_law_for_conjunction",
+      "kind": "law",
+      "name": "Associative Law for Conjunction",
+      "section": "logic",
+      "category": "Associative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "conjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "conjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "associative_law_for_disjunction",
+      "kind": "law",
+      "name": "Associative Law for Disjunction",
+      "section": "logic",
+      "category": "Associative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "disjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "disjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "commutative_law_for_conjunction",
+      "kind": "law",
+      "name": "Commutative Law for Conjunction",
+      "section": "logic",
+      "category": "Commutative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "conjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "conjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "commutative_law_for_disjunction",
+      "kind": "law",
+      "name": "Commutative Law for Disjunction",
+      "section": "logic",
+      "category": "Commutative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "disjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "disjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "de_morgan_law_for_conjunction",
+      "kind": "law",
+      "name": "De Morgan Law for Conjunction",
+      "section": "logic",
+      "category": "De Morgan Laws",
+      "disambiguation": null,
+      "concepts": [
+        "negation"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "negation",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "de_morgan_law_for_disjunction",
+      "kind": "law",
+      "name": "De Morgan Law for Disjunction",
+      "section": "logic",
+      "category": "De Morgan Laws",
+      "disambiguation": null,
+      "concepts": [
+        "negation"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "negation",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "distributive_law_of_conjunction_over_disjunction",
+      "kind": "law",
+      "name": "Distributive Law of Conjunction over Disjunction",
+      "section": "logic",
+      "category": "Distributive Laws",
+      "disambiguation": null,
+      "concepts": [
+        "conjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "conjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "distributive_law_of_disjunction_over_conjunction",
+      "kind": "law",
+      "name": "Distributive Law of Disjunction over Conjunction",
+      "section": "logic",
+      "category": "Distributive Laws",
+      "disambiguation": null,
+      "concepts": [
+        "disjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "disjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "domination_law_for_conjunction",
+      "kind": "law",
+      "name": "Domination Law for Conjunction",
+      "section": "logic",
+      "category": "Domination Laws",
+      "disambiguation": null,
+      "concepts": [
+        "conjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "conjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "domination_law_for_disjunction",
+      "kind": "law",
+      "name": "Domination Law for Disjunction",
+      "section": "logic",
+      "category": "Domination Laws",
+      "disambiguation": null,
+      "concepts": [
+        "disjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "disjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "double_negation_law",
+      "kind": "law",
+      "name": "Double Negation Law",
+      "section": "logic",
+      "category": "Double Negation",
+      "disambiguation": null,
+      "concepts": [
+        "negation"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "negation",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "idempotent_law_for_conjunction",
+      "kind": "law",
+      "name": "Idempotent Law for Conjunction",
+      "section": "logic",
+      "category": "Idempotent Laws",
+      "disambiguation": null,
+      "concepts": [
+        "conjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "conjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "idempotent_law_for_disjunction",
+      "kind": "law",
+      "name": "Idempotent Law for Disjunction",
+      "section": "logic",
+      "category": "Idempotent Laws",
+      "disambiguation": null,
+      "concepts": [
+        "disjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "disjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "identity_law_for_conjunction",
+      "kind": "law",
+      "name": "Identity Law for Conjunction",
+      "section": "logic",
+      "category": "Identity Laws",
+      "disambiguation": null,
+      "concepts": [
+        "conjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "conjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "identity_law_for_disjunction",
+      "kind": "law",
+      "name": "Identity Law for Disjunction",
+      "section": "logic",
+      "category": "Identity Laws",
+      "disambiguation": null,
+      "concepts": [
+        "disjunction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "disjunction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "law_of_excluded_middle",
+      "kind": "law",
+      "name": "Law of Excluded Middle",
+      "section": "logic",
+      "category": "Semantics",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "law_of_excluded_middle",
+      "source": "definitionsRepository",
+      "status": "seeded",
+      "variants": 2
+    },
+    {
+      "id": "law_of_non_contradiction",
+      "kind": "law",
+      "name": "Law of Non Contradiction",
+      "section": "logic",
+      "category": "Negation Laws",
+      "disambiguation": null,
+      "concepts": [
+        "non_contradiction"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "non_contradiction",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "redundancy_law_for_conjunction",
+      "kind": "law",
+      "name": "Redundancy Law for Conjunction",
+      "section": "logic",
+      "category": "Redundancy Laws",
+      "disambiguation": null,
+      "concepts": [
+        "absorption"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "absorption",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "redundancy_law_for_disjunction",
+      "kind": "law",
+      "name": "Redundancy Law for Disjunction",
+      "section": "logic",
+      "category": "Redundancy Laws",
+      "disambiguation": null,
+      "concepts": [
+        "absorption"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "absorption",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "bayes_theorem",
+      "kind": "theorem",
+      "name": "Bayes Theorem",
+      "section": "probability",
+      "category": "Total Probability & Bayes",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/probability/bayes-theorem",
+      "anchor": "formula",
+      "sourceEntity": "bayes_theorem",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "booles_inequality",
+      "kind": "inequality",
+      "name": "Booles Inequality",
+      "section": "probability",
+      "category": "Union & Inclusion-Exclusion",
+      "disambiguation": null,
+      "concepts": [
+        "event"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/rules",
+      "anchor": "additive",
+      "sourceEntity": "event",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "complement_rule",
+      "kind": "rule",
+      "name": "Complement Rule",
+      "section": "probability",
+      "category": "Basic Properties",
+      "disambiguation": null,
+      "concepts": [
+        "event"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/rules",
+      "anchor": "additive",
+      "sourceEntity": "event",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "countable_additivity_axiom",
+      "kind": "axiom",
+      "name": "Countable Additivity Axiom",
+      "section": "probability",
+      "category": "Probability Axioms",
+      "disambiguation": null,
+      "concepts": [
+        "probability_measure"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/axioms",
+      "anchor": "axiom3",
+      "sourceEntity": "probability_measure",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "covariance_self_identity",
+      "kind": "identity",
+      "name": "Covariance Self-Identity",
+      "section": "probability",
+      "category": "Covariance & Correlation",
+      "disambiguation": null,
+      "concepts": [
+        "covariance"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/covariance",
+      "anchor": "7",
+      "sourceEntity": "covariance",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "difference_rule",
+      "kind": "rule",
+      "name": "Difference Rule",
+      "section": "probability",
+      "category": "Basic Properties",
+      "disambiguation": null,
+      "concepts": [
+        "event"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/rules",
+      "anchor": "additive",
+      "sourceEntity": "event",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "law_of_iterated_expectation",
+      "kind": "law",
+      "name": "Law of Iterated Expectation",
+      "section": "probability",
+      "category": "Conditional Expectation & Variance",
+      "disambiguation": null,
+      "concepts": [
+        "conditional_expectation"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/expected-value",
+      "anchor": "properties",
+      "sourceEntity": "conditional_expectation",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "law_of_total_probability",
+      "kind": "law",
+      "name": "Law of Total Probability",
+      "section": "probability",
+      "category": "Total Probability & Bayes",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/probability/total-probability",
+      "anchor": "law",
+      "sourceEntity": "total_probability",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "law_of_total_variance",
+      "kind": "law",
+      "name": "Law of Total Variance",
+      "section": "probability",
+      "category": "Conditional Expectation & Variance",
+      "disambiguation": null,
+      "concepts": [
+        "conditional_variance"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/variance",
+      "anchor": "sum",
+      "sourceEntity": "conditional_variance",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "monotonicity_rule",
+      "kind": "rule",
+      "name": "Monotonicity Rule",
+      "section": "probability",
+      "category": "Basic Properties",
+      "disambiguation": null,
+      "concepts": [
+        "event"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/rules",
+      "anchor": "additive",
+      "sourceEntity": "event",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "non_negativity_axiom",
+      "kind": "axiom",
+      "name": "Non-negativity Axiom",
+      "section": "probability",
+      "category": "Probability Axioms",
+      "disambiguation": null,
+      "concepts": [
+        "probability_measure"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/axioms",
+      "anchor": "axiom1",
+      "sourceEntity": "probability_measure",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "normalization_axiom",
+      "kind": "axiom",
+      "name": "Normalization Axiom",
+      "section": "probability",
+      "category": "Probability Axioms",
+      "disambiguation": null,
+      "concepts": [
+        "probability_measure"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/axioms",
+      "anchor": "axiom2",
+      "sourceEntity": "probability_measure",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "absorption_law_intersection",
+      "kind": "law",
+      "name": "Absorption Law - Intersection",
+      "section": "set-theory",
+      "category": "Absorption Laws",
+      "disambiguation": null,
+      "concepts": [
+        "intersection"
+      ],
+      "statement": null,
+      "primaryPage": null,
+      "anchor": null,
+      "sourceEntity": "intersection",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "absorption_law_union",
+      "kind": "law",
+      "name": "Absorption Law - Union",
+      "section": "set-theory",
+      "category": "Absorption Laws",
+      "disambiguation": null,
+      "concepts": [
+        "union"
+      ],
+      "statement": null,
+      "primaryPage": null,
+      "anchor": null,
+      "sourceEntity": "union",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "associative_law_intersection",
+      "kind": "law",
+      "name": "Associative Law - Intersection",
+      "section": "set-theory",
+      "category": "Associative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "intersection"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "associative",
+      "sourceEntity": "intersection",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "associative_law_union",
+      "kind": "law",
+      "name": "Associative Law - Union",
+      "section": "set-theory",
+      "category": "Associative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "union"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "associative",
+      "sourceEntity": "union",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cantor_theorem",
+      "kind": "theorem",
+      "name": "Cantor Theorem",
+      "section": "set-theory",
+      "category": "Cardinality Formulas",
+      "disambiguation": null,
+      "concepts": [
+        "cardinality"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/cardinality",
+      "anchor": "6",
+      "sourceEntity": "cardinality",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "commutative_law_intersection",
+      "kind": "law",
+      "name": "Commutative Law - Intersection",
+      "section": "set-theory",
+      "category": "Commutative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "intersection"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "commutative",
+      "sourceEntity": "intersection",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "commutative_law_union",
+      "kind": "law",
+      "name": "Commutative Law - Union",
+      "section": "set-theory",
+      "category": "Commutative Laws",
+      "disambiguation": null,
+      "concepts": [
+        "union"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "commutative",
+      "sourceEntity": "union",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "complement_law_intersection",
+      "kind": "law",
+      "name": "Complement Law - Intersection",
+      "section": "set-theory",
+      "category": "Complement Laws",
+      "disambiguation": null,
+      "concepts": [
+        "complement"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "complement",
+      "sourceEntity": "complement",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "complement_law_union",
+      "kind": "law",
+      "name": "Complement Law - Union",
+      "section": "set-theory",
+      "category": "Complement Laws",
+      "disambiguation": null,
+      "concepts": [
+        "complement"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "complement",
+      "sourceEntity": "complement",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "de_morgan_law_intersection",
+      "kind": "law",
+      "name": "De Morgan Law - Intersection",
+      "section": "set-theory",
+      "category": "De Morgan Laws",
+      "disambiguation": null,
+      "concepts": [
+        "complement"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "de_morgan",
+      "sourceEntity": "complement",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "de_morgan_law_union",
+      "kind": "law",
+      "name": "De Morgan Law - Union",
+      "section": "set-theory",
+      "category": "De Morgan Laws",
+      "disambiguation": null,
+      "concepts": [
+        "complement"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "de_morgan",
+      "sourceEntity": "complement",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "distributive_law_intersection_over_union",
+      "kind": "law",
+      "name": "Distributive Law - Intersection over Union",
+      "section": "set-theory",
+      "category": "Distributive Laws",
+      "disambiguation": null,
+      "concepts": [
+        "intersection"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "distributive",
+      "sourceEntity": "intersection",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "distributive_law_union_over_intersection",
+      "kind": "law",
+      "name": "Distributive Law - Union over Intersection",
+      "section": "set-theory",
+      "category": "Distributive Laws",
+      "disambiguation": null,
+      "concepts": [
+        "union"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "distributive",
+      "sourceEntity": "union",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "domination_law_intersection",
+      "kind": "law",
+      "name": "Domination Law - Intersection",
+      "section": "set-theory",
+      "category": "Domination Laws",
+      "disambiguation": null,
+      "concepts": [
+        "intersection"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "identity",
+      "sourceEntity": "intersection",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "domination_law_union",
+      "kind": "law",
+      "name": "Domination Law - Union",
+      "section": "set-theory",
+      "category": "Domination Laws",
+      "disambiguation": null,
+      "concepts": [
+        "union"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "identity",
+      "sourceEntity": "union",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "double_complement_law",
+      "kind": "law",
+      "name": "Double Complement Law",
+      "section": "set-theory",
+      "category": "Complement Laws",
+      "disambiguation": null,
+      "concepts": [
+        "complement"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "complement",
+      "sourceEntity": "complement",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "idempotent_law_intersection",
+      "kind": "law",
+      "name": "Idempotent Law - Intersection",
+      "section": "set-theory",
+      "category": "Idempotent Laws",
+      "disambiguation": null,
+      "concepts": [
+        "intersection"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "idempotent",
+      "sourceEntity": "intersection",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "idempotent_law_union",
+      "kind": "law",
+      "name": "Idempotent Law - Union",
+      "section": "set-theory",
+      "category": "Idempotent Laws",
+      "disambiguation": null,
+      "concepts": [
+        "union"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "idempotent",
+      "sourceEntity": "union",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "identity_law_intersection",
+      "kind": "law",
+      "name": "Identity Law - Intersection",
+      "section": "set-theory",
+      "category": "Identity Laws",
+      "disambiguation": null,
+      "concepts": [
+        "intersection"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "identity",
+      "sourceEntity": "intersection",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "identity_law_union",
+      "kind": "law",
+      "name": "Identity Law - Union",
+      "section": "set-theory",
+      "category": "Identity Laws",
+      "disambiguation": null,
+      "concepts": [
+        "union"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/rules",
+      "anchor": "identity",
+      "sourceEntity": "union",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "set_equality_criterion",
+      "kind": "test",
+      "name": "Set Equality Criterion",
+      "section": "set-theory",
+      "category": "Set Relationships",
+      "disambiguation": null,
+      "concepts": [
+        "equal_sets"
+      ],
+      "statement": null,
+      "primaryPage": "/set-theory/relationships",
+      "anchor": "1",
+      "sourceEntity": "equal_sets",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cosecant_reciprocal_identity",
+      "kind": "identity",
+      "name": "Cosecant Reciprocal Identity",
+      "section": "trigonometry",
+      "category": "Reciprocal Identities",
+      "disambiguation": null,
+      "concepts": [
+        "cosecant"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/functions",
+      "anchor": "7",
+      "sourceEntity": "cosecant",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cosine_even_identity",
+      "kind": "identity",
+      "name": "Cosine Even Identity",
+      "section": "trigonometry",
+      "category": "Even-Odd Identities",
+      "disambiguation": null,
+      "concepts": [
+        "cosine"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/properties",
+      "anchor": "2",
+      "sourceEntity": "cosine",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cosine_supplement_identity",
+      "kind": "identity",
+      "name": "Cosine Supplement Identity",
+      "section": "trigonometry",
+      "category": "Supplement & Shift Identities",
+      "disambiguation": null,
+      "concepts": [
+        "supplementary_angles"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/degrees-radians",
+      "anchor": "8",
+      "sourceEntity": "supplementary_angles",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cotangent_quotient_identity",
+      "kind": "identity",
+      "name": "Cotangent Quotient Identity",
+      "section": "trigonometry",
+      "category": "Quotient Identities",
+      "disambiguation": null,
+      "concepts": [
+        "cotangent"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/functions",
+      "anchor": "7",
+      "sourceEntity": "cotangent",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cotangent_reciprocal_identity",
+      "kind": "identity",
+      "name": "Cotangent Reciprocal Identity",
+      "section": "trigonometry",
+      "category": "Reciprocal Identities",
+      "disambiguation": null,
+      "concepts": [
+        "cotangent"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/functions",
+      "anchor": "7",
+      "sourceEntity": "cotangent",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "law_of_cosines",
+      "kind": "law",
+      "name": "Law of Cosines",
+      "section": "trigonometry",
+      "category": "Triangle Formulas",
+      "disambiguation": null,
+      "concepts": [
+        "cosine"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/sines-cosines-law",
+      "anchor": "5",
+      "sourceEntity": "cosine",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "law_of_sines",
+      "kind": "law",
+      "name": "Law of Sines",
+      "section": "trigonometry",
+      "category": "Triangle Formulas",
+      "disambiguation": null,
+      "concepts": [
+        "sine"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/sines-cosines-law",
+      "anchor": "2",
+      "sourceEntity": "sine",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "law_of_tangents",
+      "kind": "law",
+      "name": "Law of Tangents",
+      "section": "trigonometry",
+      "category": "Triangle Formulas",
+      "disambiguation": null,
+      "concepts": [
+        "tangent"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/sines-cosines-law",
+      "anchor": "7",
+      "sourceEntity": "tangent",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "pythagorean_identity_cotangent_cosecant",
+      "kind": "identity",
+      "name": "Pythagorean Identity - Cotangent Cosecant",
+      "section": "trigonometry",
+      "category": "Pythagorean Identities",
+      "disambiguation": null,
+      "concepts": [
+        "cotangent"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/unit-circle",
+      "anchor": "7",
+      "sourceEntity": "cotangent",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "pythagorean_identity_sine_cosine",
+      "kind": "identity",
+      "name": "Pythagorean Identity - Sine Cosine",
+      "section": "trigonometry",
+      "category": "Pythagorean Identities",
+      "disambiguation": null,
+      "concepts": [
+        "sine"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/unit-circle",
+      "anchor": "7",
+      "sourceEntity": "sine",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "pythagorean_identity_tangent_secant",
+      "kind": "identity",
+      "name": "Pythagorean Identity - Tangent Secant",
+      "section": "trigonometry",
+      "category": "Pythagorean Identities",
+      "disambiguation": null,
+      "concepts": [
+        "tangent"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/unit-circle",
+      "anchor": "7",
+      "sourceEntity": "tangent",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "secant_reciprocal_identity",
+      "kind": "identity",
+      "name": "Secant Reciprocal Identity",
+      "section": "trigonometry",
+      "category": "Reciprocal Identities",
+      "disambiguation": null,
+      "concepts": [
+        "secant"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/functions",
+      "anchor": "7",
+      "sourceEntity": "secant",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "sine_odd_identity",
+      "kind": "identity",
+      "name": "Sine Odd Identity",
+      "section": "trigonometry",
+      "category": "Even-Odd Identities",
+      "disambiguation": null,
+      "concepts": [
+        "sine"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/properties",
+      "anchor": "2",
+      "sourceEntity": "sine",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "sine_supplement_identity",
+      "kind": "identity",
+      "name": "Sine Supplement Identity",
+      "section": "trigonometry",
+      "category": "Supplement & Shift Identities",
+      "disambiguation": null,
+      "concepts": [
+        "supplementary_angles"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/degrees-radians",
+      "anchor": "8",
+      "sourceEntity": "supplementary_angles",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "tangent_odd_identity",
+      "kind": "identity",
+      "name": "Tangent Odd Identity",
+      "section": "trigonometry",
+      "category": "Even-Odd Identities",
+      "disambiguation": null,
+      "concepts": [
+        "tangent"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/properties",
+      "anchor": "2",
+      "sourceEntity": "tangent",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "tangent_quotient_identity",
+      "kind": "identity",
+      "name": "Tangent Quotient Identity",
+      "section": "trigonometry",
+      "category": "Quotient Identities",
+      "disambiguation": null,
+      "concepts": [
+        "tangent"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/functions",
+      "anchor": "7",
+      "sourceEntity": "tangent",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "tangent_supplement_identity",
+      "kind": "identity",
+      "name": "Tangent Supplement Identity",
+      "section": "trigonometry",
+      "category": "Supplement & Shift Identities",
+      "disambiguation": null,
+      "concepts": [
+        "supplementary_angles"
+      ],
+      "statement": null,
+      "primaryPage": "/trigonometry/degrees-radians",
+      "anchor": "8",
+      "sourceEntity": "supplementary_angles",
+      "source": "formulasRepository",
+      "status": "seeded"
+    }
+  ]
+}

@@ -1,5 +1,1002 @@
 
 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import { tableHeaders } from '@/app/styles/theme'
+
+
+// export async function getStaticProps(){
+// const keyWords = [
+//   "set relationships",
+//   "equal sets",
+//   "equivalent sets",
+//   "disjoint sets",
+//   "overlapping sets",
+//   "partition of a set",
+//   "mutually exclusive sets",
+//   "pairwise disjoint",
+//   "equal vs equivalent sets",
+//   "sets with same cardinality",
+//   "set equality proof",
+//   "partition definition",
+//   "sets no common elements",
+//   "how sets relate"
+// ]
+//   // •
+
+// //   \u2022 First item
+// // \u2022 Second item
+
+  
+// // <hr style="border-width:1px;"></hr>
+
+// // <hr style="color:blue;" />
+
+// // <hr style="border-color:#3498db; border-width:1px;" />
+
+
+
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+//         //     {processContent(sectionsContent.normal.notation)}
+//         // </div>,
+
+
+// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+// //     {processContent(sectionsContent.normal.parameters)}
+// // </div>,
+        
+// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+// //                   {processContent(sectionsContent.obj4.content)}
+// //                   </div>,
+
+
+// //  <div key={'dist'} style={{
+// //                     textAlign: 'center',
+// //                     transform: 'scale(0.98)',
+// //                     transformOrigin: 'center',
+// //                     marginTop:'50px',
+// //                     marginLeft:'-150px'
+// //                   }} dangerouslySetInnerHTML={{ 
+// //                     __html:   sectionContent.distributions.svg,
+// //                   }} />
+
+//   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+//   // ---------- TABLES ----------
+
+//   // obj6 — summary: capstone of the five relationship types
+//   const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Relationship</th>
+//       <th style="${tableHeaders.summary}">Defining condition</th>
+//       <th style="${tableHeaders.summary}">Example</th>
+//       <th style="${tableHeaders.summary}">Key distinguishing fact</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Equal sets</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same elements: &nbsp;∀x &nbsp;(x ∈ A ⇔ x ∈ B)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, 3} = {3, 1, 2}</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proved by mutual <a href="/set-theory/subsets" style="${linkStyle}">subset</a> containment &nbsp;(A ⊆ B and B ⊆ A)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Equivalent sets</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same <a href="/set-theory/cardinality" style="${linkStyle}">cardinality</a>: &nbsp;|A| = |B|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{a, b, c} ~ {1, 2, 3}; &nbsp;ℕ ~ ℤ</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equal ⇒ equivalent, but not the other way around</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Disjoint sets</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no common elements: &nbsp;A ∩ B = ∅</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, 3} and {4, 5, 6}; &nbsp;evens and odds</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">called &quot;mutually exclusive&quot; in <a href="/probability/events" style="${linkStyle}">probability</a></td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Overlapping sets</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A ∩ B ≠ ∅, &nbsp;A ⊄ B, &nbsp;B ⊄ A</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, 3} and {2, 3, 4}</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both A \\ B and B \\ A are non-empty &nbsp;(lens-shaped Venn intersection)</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Partition &nbsp;(of S)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">non-empty, pairwise disjoint subsets whose union = S</td>
+//       <td style="padding: 12px 15px; color: #34495e;">{evens, odds} of ℤ; &nbsp;residue classes mod n</td>
+//       <td style="padding: 12px 15px; color: #34495e;">every element of S belongs to exactly one piece</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// //   const sectionsContent = {
+// //     obj0: {
+// //   title: `Key Terms`,
+// //   content: `
+// // - [Equal Sets](!/set-theory/definitions#equal_sets) — sets containing exactly the same elements
+// // - [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets with the same cardinality
+// // - [Disjoint Sets](!/set-theory/definitions#disjoint_sets) — sets with no common elements
+// // - [Overlapping Sets](!/set-theory/definitions#overlapping_sets) — sets sharing at least one element
+// // - [Partition](!/set-theory/definitions#partition) — non-overlapping subsets that cover the whole set
+// // - [Subset](!/set-theory/definitions#subset) — equality is proved via mutual subset containment`,
+// //   before: ``,
+// //   after: `
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+// //   link: '',
+// // },
+ 
+// //   obj1: {
+// //     title: `Equal Sets`,
+// //     content: `
+// // Two sets $A$ and $B$ are equal if they contain exactly the same elements:
+
+// // $$A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$$
+
+// // Order does not matter: $\\{1, 2, 3\\} = \\{3, 1, 2\\}$. Repetition does not matter: $\\{1, 2, 2, 3\\} = \\{1, 2, 3\\}$. Only membership determines equality.
+
+// // The standard method for proving two sets are equal is to show mutual [subset](!/set-theory/subsets) containment:
+
+// // $$A = B \\iff (A \\subseteq B) \\land (B \\subseteq A)$$
+
+// // This reduces the problem to two subset proofs: show every element of $A$ belongs to $B$, then show every element of $B$ belongs to $A$.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj2: {
+// //     title: `Equivalent Sets`,
+// //     content: `
+// // Two sets are equivalent if they have the same [cardinality](!/set-theory/cardinality):
+
+// // $$|A| = |B|$$
+
+// // This means a bijection exists between $A$ and $B$ — a one-to-one correspondence pairing each element of $A$ with exactly one element of $B$.
+
+// // Equal sets are always equivalent: if $A = B$, then certainly $|A| = |B|$. However, equivalent sets need not be equal.
+
+// // The sets $\\{a, b, c\\}$ and $\\{1, 2, 3\\}$ are equivalent (both have cardinality $3$) but not equal (they contain different elements). The sets $\\mathbb{N}$ and $\\mathbb{Z}$ are equivalent (both countably infinite) but not equal ($\\mathbb{Z}$ contains negative integers).
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj3: {
+// //     title: `Disjoint Sets`,
+// //     content: `
+// // Two sets are disjoint if they have no elements in common:
+
+// // $$A \\cap B = \\emptyset$$
+
+// // The sets $\\{1, 2, 3\\}$ and $\\{4, 5, 6\\}$ are disjoint. The set of even integers and the set of odd integers are disjoint.
+
+// // For a collection of more than two sets, the sets are pairwise disjoint if every pair is disjoint:
+
+// // $$A_i \\cap A_j = \\emptyset \\quad \\text{for all } i \\neq j$$
+
+// // Pairwise disjoint sets have no overlap whatsoever — no element belongs to more than one set in the collection.
+
+// // In [probability](!/probability/events), disjoint events are called mutually exclusive: if one occurs, the others cannot.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj4: {
+// //     title: `Overlapping Sets`,
+// //     content: `
+// // Two sets overlap if they share at least one element but neither is a [subset](!/set-theory/subsets) of the other:
+
+// // $$A \\cap B \\neq \\emptyset \\quad \\text{and} \\quad A \\not\\subseteq B \\quad \\text{and} \\quad B \\not\\subseteq A$$
+
+// // This means each set contains elements the other lacks, yet they also have common elements.
+
+// // The sets $\\{1, 2, 3\\}$ and $\\{2, 3, 4\\}$ overlap: they share $2$ and $3$, but $1$ belongs only to the first and $4$ belongs only to the second.
+
+// // In a [Venn diagram](!/set-theory/venn-diagrams), overlapping sets appear as circles that intersect but neither contains the other. The lens-shaped intersection region is non-empty, and both the $A \\setminus B$ and $B \\setminus A$ regions are also non-empty.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj5: {
+// //     title: `Partitions`,
+// //     content: `
+// // A partition of a set $S$ is a collection of non-empty, pairwise disjoint subsets whose union equals $S$:
+
+// // $$\\{A_1, A_2, \\ldots, A_n\\} \\text{ partitions } S \\iff \\begin{cases} A_i \\neq \\emptyset & \\text{for all } i \\\\ A_i \\cap A_j = \\emptyset & \\text{for } i \\neq j \\\\ A_1 \\cup A_2 \\cup \\cdots \\cup A_n = S \\end{cases}$$
+
+// // Every element of $S$ belongs to exactly one subset in the partition.
+
+// // Examples:
+
+// // - $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}\\}$ partitions $\\{1, 2, 3, 4, 5\\}$
+
+// // - The sets of even and odd integers partition $\\mathbb{Z}$
+
+// // - Residue classes modulo $n$ partition $\\mathbb{Z}$ into $n$ subsets
+
+// // Partitions arise naturally in classification problems and connect to equivalence relations. The [law of total probability](!/probability/total-probability) relies on partitions: if events $B_1, B_2, \\ldots, B_n$ partition the sample space, probabilities can be computed by summing over the partition.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj6: {
+// //     title: `Summary: How Sets Relate`,
+// //     content: `
+// // The five relationships introduced above describe the main ways sets can be related to one another — from identity, through size equivalence, through varying degrees of overlap, to the multi-set case of partitioning. The capstone table below collects them all with the defining condition, a worked example, and the key fact that distinguishes each relationship from the others.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// // };
+
+
+
+// // ---------- SECTIONS ----------
+
+// // const sectionsContent = {
+// //   obj0: {
+// //     title: `Key Terms`,
+// //     content: `
+// // - [Union](!/set-theory/definitions#union) — elements in at least one of the sets
+// // - [Intersection](!/set-theory/definitions#intersection) — elements common to both sets
+// // - [Complement](!/set-theory/definitions#complement) — elements in the universal set but not in the given set
+// // - [Set Difference](!/set-theory/definitions#set_difference) — elements in one set but not the other
+// // - [Symmetric Difference](!/set-theory/definitions#symmetric_difference) — elements in exactly one of two sets
+// // - [Universal Set](!/set-theory/definitions#universal_set) — reference set for the complement operation
+// // - [Empty Set](!/set-theory/definitions#empty_set) — identity element for union, annihilator for intersection
+
+// // `,
+// //     before: ``,
+// //     after: `
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+// //     link: '',
+// //   },
+// //   obj1: {
+// //     title: `Union`,
+// //     content: `
+// // The union of two sets $A$ and $B$ is the set of elements that belong to $A$ or $B$ or both:
+
+// // $$A \\cup B = \\{x : x \\in A \\text{ or } x \\in B\\}$$
+
+// // The word "or" here is inclusive — elements belonging to both sets are included. If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// // $$A \\cup B = \\{1, 2, 3, 4, 5\\}$$
+
+// // The element $3$ appears in both sets but is listed only once in the union.
+
+// // Union is commutative and associative:
+
+// // $$A \\cup B = B \\cup A$$
+
+// // $$(A \\cup B) \\cup C = A \\cup (B \\cup C)$$
+
+// // For multiple sets, the union extends naturally:
+
+// // $$\\bigcup_{i=1}^{n} A_i = A_1 \\cup A_2 \\cup \\cdots \\cup A_n$$
+
+// // This contains every element that appears in at least one of the sets $A_1, A_2, \\ldots, A_n$.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj2: {
+// //     title: `Intersection`,
+// //     content: `
+// // The intersection of two sets $A$ and $B$ is the set of elements that belong to both $A$ and $B$:
+
+// // $$A \\cap B = \\{x : x \\in A \\text{ and } x \\in B\\}$$
+
+// // If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// // $$A \\cap B = \\{3\\}$$
+
+// // When two sets have no elements in common, their intersection is the empty set, and the sets are called disjoint:
+
+// // $$A \\cap B = \\emptyset$$
+
+// // Intersection is commutative and associative:
+
+// // $$A \\cap B = B \\cap A$$
+
+// // $$(A \\cap B) \\cap C = A \\cap (B \\cap C)$$
+
+// // For multiple sets:
+
+// // $$\\bigcap_{i=1}^{n} A_i = A_1 \\cap A_2 \\cap \\cdots \\cap A_n$$
+
+// // This contains only elements that appear in every one of the sets $A_1, A_2, \\ldots, A_n$.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj3: {
+// //     title: `Complement`,
+// //     content: `
+// // The complement of a set $A$ consists of all elements not in $A$. This operation requires a universal set $U$ that contains all elements under consideration:
+
+// // $$A^c = \\{x \\in U : x \\notin A\\}$$
+
+// // Alternative notations include $A'$ and $\\overline{A}$.
+
+// // If the universal set is $U = \\{1, 2, 3, 4, 5\\}$ and $A = \\{1, 2\\}$, then:
+
+// // $$A^c = \\{3, 4, 5\\}$$
+
+// // The complement depends entirely on the choice of universal set. The same set $A$ has different complements relative to different universal sets.
+
+// // Taking the complement twice returns the original set:
+
+// // $$(A^c)^c = A$$
+
+// // Two additional facts hold for any set $A$:
+
+// // $$A \\cup A^c = U$$
+
+// // $$A \\cap A^c = \\emptyset$$
+
+// // Every element either belongs to $A$ or to its complement, but not to both.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj4: {
+// //     title: `Set Difference`,
+// //     content: `
+// // The set difference $A \\setminus B$ (also written $A - B$) contains all elements that belong to $A$ but not to $B$:
+
+// // $$A \\setminus B = \\{x : x \\in A \\text{ and } x \\notin B\\}$$
+
+// // If $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// // $$A \\setminus B = \\{1, 2\\}$$
+
+// // $$B \\setminus A = \\{5\\}$$
+
+// // Unlike union and intersection, set difference is not commutative — the order of $A$ and $B$ matters.
+
+// // Set difference relates to complement: when $B \\subseteq U$, the complement $B^c$ equals $U \\setminus B$. More generally:
+
+// // @academic[formula_callout:Difference as Intersection with Complement
+// // $$A \\setminus B = A \\cap B^c$$
+// // /set-theory/formulas#difference_as_intersection_with_complement]@
+
+// // @academic[formulas_link:Browse all set theory formulas
+// // /set-theory/formulas]@
+
+// // This expresses difference as an intersection with a complement.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj5: {
+// //     title: `Symmetric Difference`,
+// //     content: `
+// // The symmetric difference of $A$ and $B$ contains elements that belong to exactly one of the two sets:
+
+// // $$A \\triangle B = (A \\setminus B) \\cup (B \\setminus A)$$
+
+// // An equivalent definition uses union and intersection:
+
+// // @academic[formula_callout:Symmetric Difference - Union Minus Intersection
+// // $$A \\triangle B = (A \\cup B) \\setminus (A \\cap B)$$
+// // /set-theory/formulas#symmetric_difference_-_union_minus_intersection]@
+
+// // @academic[formulas_link:Browse all set theory formulas
+// // /set-theory/formulas]@
+
+// // If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// // $$A \\triangle B = \\{1, 2, 4, 5\\}$$
+
+// // The element $3$ belongs to both sets, so it is excluded from the symmetric difference.
+
+// // Symmetric difference is commutative and associative:
+
+// // $$A \\triangle B = B \\triangle A$$
+
+// // $$(A \\triangle B) \\triangle C = A \\triangle (B \\triangle C)$$
+
+// // The symmetric difference with the empty set leaves a set unchanged: $A \\triangle \\emptyset = A$. The symmetric difference of a set with itself is empty: $A \\triangle A = \\emptyset$.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// //   obj6: {
+// //     title: `Summary: All Five Operations at a Glance`,
+// //     content: `
+// // The five operations introduced above share a uniform structure: each consumes one or two sets and returns a new set, defined by a precise membership condition. The capstone table below collects them all in one place — every operation with its notation, its membership rule, the result on a single worked example ($A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$, $U = \\{1, 2, 3, 4, 5\\}$), and its key algebraic properties.
+// //     `,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+// // };
+
+
+
+// // ---------- SECTIONS ----------
+
+// const sectionsContent = {
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Equal Sets](!/set-theory/definitions#equal_sets) — sets containing exactly the same elements
+// - [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets with the same cardinality
+// - [Disjoint Sets](!/set-theory/definitions#disjoint_sets) — sets with no common elements
+// - [Overlapping Sets](!/set-theory/definitions#overlapping_sets) — sets sharing at least one element
+// - [Partition](!/set-theory/definitions#partition) — non-overlapping subsets that cover the whole set
+// - [Subset](!/set-theory/definitions#subset) — equality is proved via mutual subset containment`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `Equal Sets`,
+//     content: `
+// Two sets $A$ and $B$ are equal if they contain exactly the same elements:
+
+// $$A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$$
+
+// The two [logic symbols](!/math-symbols/math-logic) in this criterion read naturally: $\\forall$ means 'for all' and $\\iff$ means 'if and only if'.
+
+// Order does not matter: $\\{1, 2, 3\\} = \\{3, 1, 2\\}$. Repetition does not matter: $\\{1, 2, 2, 3\\} = \\{1, 2, 3\\}$. Only membership determines equality.
+
+// The standard method for proving two sets are equal is to show mutual [subset](!/set-theory/subsets) containment:
+
+// @academic[formula_callout:Set Equality Criterion
+// $$A = B \\iff (A \\subseteq B) \\land (B \\subseteq A)$$
+// /set-theory/formulas#set_equality_criterion]@
+
+// @academic[formulas_link:Browse all set theory formulas
+// /set-theory/formulas]@
+
+// This reduces the problem to two subset proofs: show every element of $A$ belongs to $B$, then show every element of $B$ belongs to $A$.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Equivalent Sets`,
+//     content: `
+// Two sets are equivalent if they have the same [cardinality](!/set-theory/cardinality):
+
+// $$|A| = |B|$$
+
+// This means a bijection exists between $A$ and $B$ — a one-to-one correspondence pairing each element of $A$ with exactly one element of $B$.
+
+// Equal sets are always equivalent: if $A = B$, then certainly $|A| = |B|$. However, equivalent sets need not be equal.
+
+// The sets $\\{a, b, c\\}$ and $\\{1, 2, 3\\}$ are equivalent (both have cardinality $3$) but not equal (they contain different elements). The sets $\\mathbb{N}$ and $\\mathbb{Z}$ are equivalent (both countably infinite) but not equal ($\\mathbb{Z}$ contains negative integers).
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Disjoint Sets`,
+//     content: `
+// Two sets are disjoint if they have no elements in common:
+
+// $$A \\cap B = \\emptyset$$
+
+// The sets $\\{1, 2, 3\\}$ and $\\{4, 5, 6\\}$ are disjoint. The set of even integers and the set of odd integers are disjoint.
+
+// For a collection of more than two sets, the sets are pairwise disjoint if every pair is disjoint:
+
+// $$A_i \\cap A_j = \\emptyset \\quad \\text{for all } i \\neq j$$
+
+// Pairwise disjoint sets have no overlap whatsoever — no element belongs to more than one set in the collection.
+
+// In [probability](!/probability/events), disjoint events are called mutually exclusive: if one occurs, the others cannot.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Overlapping Sets`,
+//     content: `
+// Two sets overlap if they share at least one element but neither is a [subset](!/set-theory/subsets) of the other:
+
+// $$A \\cap B \\neq \\emptyset \\quad \\text{and} \\quad A \\not\\subseteq B \\quad \\text{and} \\quad B \\not\\subseteq A$$
+
+// This means each set contains elements the other lacks, yet they also have common elements.
+
+// The sets $\\{1, 2, 3\\}$ and $\\{2, 3, 4\\}$ overlap: they share $2$ and $3$, but $1$ belongs only to the first and $4$ belongs only to the second.
+
+// In a [Venn diagram](!/set-theory/venn-diagrams), overlapping sets appear as circles that intersect but neither contains the other. The lens-shaped intersection region is non-empty, and both the $A \\setminus B$ and $B \\setminus A$ regions are also non-empty.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Partitions`,
+//     content: `
+// A partition of a set $S$ is a collection of non-empty, pairwise disjoint subsets whose union equals $S$:
+
+// $$\\{A_1, A_2, \\ldots, A_n\\} \\text{ partitions } S \\iff \\begin{cases} A_i \\neq \\emptyset & \\text{for all } i \\\\ A_i \\cap A_j = \\emptyset & \\text{for } i \\neq j \\\\ A_1 \\cup A_2 \\cup \\cdots \\cup A_n = S \\end{cases}$$
+
+// Every element of $S$ belongs to exactly one subset in the partition.
+
+// Examples:
+
+// - $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}\\}$ partitions $\\{1, 2, 3, 4, 5\\}$
+
+// - The sets of even and odd integers partition $\\mathbb{Z}$
+
+// - Residue classes modulo $n$ partition $\\mathbb{Z}$ into $n$ subsets
+
+// Partitions arise naturally in classification problems and connect to equivalence relations. The [law of total probability](!/probability/total-probability) relies on partitions: if events $B_1, B_2, \\ldots, B_n$ partition the sample space, probabilities can be computed by summing over the partition.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Summary: How Sets Relate`,
+//     content: `
+// The five relationships introduced above describe the main ways sets can be related to one another — from identity, through size equivalence, through varying degrees of overlap, to the multi-set case of partitioning. The capstone table below collects them all with the defining condition, a worked example, and the key fact that distinguishes each relationship from the others.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+
+
+//  const introContent = {
+//   id: "intro",
+//   title: `How Sets Compare and Connect`,
+//   content: `
+// Beyond [subset](!/set-theory/subsets) containment, sets can relate to one another in several ways. Two sets may be equal, equivalent in size, disjoint, or overlapping. Understanding these relationships clarifies how collections compare and interact, and leads to the concept of a partition — a way of dividing a set into non-overlapping pieces.
+//   `,
+// };
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "When are two sets equal?",
+//     answer: "Two sets are equal if they contain exactly the same elements. Order and repetition don't matter — only membership. Prove equality by showing A ⊆ B and B ⊆ A.",
+//     sectionId: "1"
+//   },
+//   obj2: {
+//     question: "What is the difference between equal and equivalent sets?",
+//     answer: "Equal sets have identical elements. Equivalent sets have the same cardinality (size) but may contain different elements. Equal implies equivalent, but not vice versa.",
+//     sectionId: "2"
+//   },
+//   obj3: {
+//     question: "What are disjoint sets?",
+//     answer: "Two sets are disjoint if they share no elements — their intersection is empty: A ∩ B = ∅. In probability, disjoint events are called mutually exclusive.",
+//     sectionId: "3"
+//   },
+//   obj4: {
+//     question: "What does pairwise disjoint mean?",
+//     answer: "A collection of sets is pairwise disjoint if every pair has empty intersection: Aᵢ ∩ Aⱼ = ∅ for all i ≠ j. No element belongs to more than one set.",
+//     sectionId: "3"
+//   },
+//   obj5: {
+//     question: "What are overlapping sets?",
+//     answer: "Sets overlap when they share at least one element but neither is a subset of the other. Each contains elements the other lacks, yet their intersection is non-empty.",
+//     sectionId: "4"
+//   },
+//   obj6: {
+//     question: "What is a partition of a set?",
+//     answer: "A partition divides a set S into non-empty, pairwise disjoint subsets whose union equals S. Every element of S belongs to exactly one subset in the partition.",
+//     sectionId: "5"
+//   },
+//   obj7: {
+//     question: "How do you prove two sets are equal?",
+//     answer: "Show mutual subset containment: prove every element of A belongs to B, then prove every element of B belongs to A. This establishes A = B.",
+//     sectionId: "1"
+//   },
+//   obj8: {
+//     question: "Can equivalent sets have different elements?",
+//     answer: "Yes. Equivalent sets only need the same cardinality. For example, {a, b, c} and {1, 2, 3} are equivalent (both size 3) but not equal (different elements).",
+//     sectionId: "2"
+//   },
+//   obj9: {
+//     question: "How are partitions used in probability?",
+//     answer: "If events B₁, B₂, ..., Bₙ partition the sample space, the law of total probability lets you compute P(A) by summing P(A|Bᵢ)P(Bᵢ) over the partition.",
+//     sectionId: "5"
+//   },
+//   obj10: {
+//     question: "What is an example of a partition?",
+//     answer: "The even and odd integers partition ℤ. Residue classes modulo n partition ℤ into n subsets. Each integer belongs to exactly one class.",
+//     sectionId: "5"
+//   }
+// }
+
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Set Relationships",
+//     "description": "Learn how sets relate: equal sets, equivalent sets, disjoint and overlapping sets, and partitions. Understand set equality proofs and pairwise disjoint collections.",
+//     "url": "https://www.learnmathclass.com/set-theory/relationships",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Set Relationships"
+//     },
+//     "teaches": [
+//       "Equal sets and equality proofs",
+//       "Equivalent sets and cardinality",
+//       "Disjoint and pairwise disjoint sets",
+//       "Overlapping sets",
+//       "Partitions of a set"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Set Theory",
+//         "item": "https://www.learnmathclass.com/set-theory"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Relationships",
+//         "item": "https://www.learnmathclass.com/set-theory/relationships"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+ 
+
+//   return {
+//   props: {
+//     sectionsContent,
+//     introContent,
+//     summaryTable,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Set Relationships: Equal, Equivalent, Disjoint & Partitions | Learn Math Class",
+//       description: "Learn how sets relate: equal sets, equivalent sets, disjoint and overlapping sets, and partitions. Understand set equality proofs and pairwise disjoint collections.",
+//       keywords: keyWords.join(", "),
+//       url: "/set-theory/relationships",
+//       name: "Set Relationships"
+//     },
+//   }
+// }
+//    }
+
+
+ 
+
+// export default function SetRelationshipsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas}) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+//   const genericSections=[
+//     {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//         ]
+//     },
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+
+//     // obj6: NEW capstone — how sets relate at a glance
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//           <div
+//             key={'summary-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: summaryTable }}
+//           />,
+//         ]
+//     },
+//     // {
+//     //     id:'7',
+//     //     title:sectionsContent.obj7.title,
+//     //     link:sectionsContent.obj7.link,
+//     //     content:[
+//     //       sectionsContent.obj7.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'8',
+//     //     title:sectionsContent.obj8.title,
+//     //     link:sectionsContent.obj8.link,
+//     //     content:[
+//     //       sectionsContent.obj8.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'9',
+//     //     title:sectionsContent.obj9.title,
+//     //     link:sectionsContent.obj9.link,
+//     //     content:[
+//     //       sectionsContent.obj9.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'10',
+//     //     title:sectionsContent.obj10.title,
+//     //     link:sectionsContent.obj10.link,
+//     //     content:[
+//     //       sectionsContent.obj10.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'11',
+//     //     title:sectionsContent.obj11.title,
+//     //     link:sectionsContent.obj11.link,
+//     //     content:[
+//     //       sectionsContent.obj11.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'12',
+//     //     title:sectionsContent.obj12.title,
+//     //     link:sectionsContent.obj12.link,
+//     //     content:[
+//     //       sectionsContent.obj12.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'13',
+//     //     title:sectionsContent.obj13.title,
+//     //     link:sectionsContent.obj13.link,
+//     //     content:[
+//     //       sectionsContent.obj13.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'14',
+//     //     title:sectionsContent.obj14.title,
+//     //     link:sectionsContent.obj14.link,
+//     //     content:[
+//     //       sectionsContent.obj14.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'15',
+//     //     title:sectionsContent.obj15.title,
+//     //     link:sectionsContent.obj15.link,
+//     //     content:[
+//     //       sectionsContent.obj15.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+    
+// ]
+
+//   return (
+//    <>
+  
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Page Title</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "children"
+//          secondaryNavTitle="More in this Section"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//       <KeyTermsCard
+//         id="0"
+//         title={sectionsContent.obj0.title}
+//         content={sectionsContent.obj0.content}
+//         after={sectionsContent.obj0.after}
+//         variant="light"
+//       />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+  
+//    </>
+//   )
+// }
+
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -9,6 +1006,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -556,6 +1554,9 @@ Partitions arise naturally in classification problems and connect to equivalence
     after: ``,
     link: '',
   },
+  faq: {
+    title: `Set Relationships FAQ`,
+  },
   obj6: {
     title: `Summary: How Sets Relate`,
     content: `
@@ -564,7 +1565,7 @@ The five relationships introduced above describe the main ways sets can be relat
     before: ``,
     after: ``,
     link: '',
-  },
+  }
 };
 
 
@@ -578,55 +1579,32 @@ Beyond [subset](!/set-theory/subsets) containment, sets can relate to one anothe
   `,
 };
 
+// Five questions. Those restating a section heading were cut. This page owns
+// the disjoint-sets question for the whole section.
 const faqQuestions = {
   obj1: {
-    question: "When are two sets equal?",
-    answer: "Two sets are equal if they contain exactly the same elements. Order and repetition don't matter — only membership. Prove equality by showing A ⊆ B and B ⊆ A.",
-    sectionId: "1"
-  },
-  obj2: {
     question: "What is the difference between equal and equivalent sets?",
-    answer: "Equal sets have identical elements. Equivalent sets have the same cardinality (size) but may contain different elements. Equal implies equivalent, but not vice versa.",
+    answer: "Equal sets contain exactly the same elements. Equivalent sets merely have the same size, so their elements can differ entirely. {a, b, c} and {1, 2, 3} are equivalent but not equal. Every pair of equal sets is equivalent, but the reverse fails. Equivalence is settled by [cardinality](!/set-theory/cardinality), equality by membership.",
     sectionId: "2"
   },
-  obj3: {
+  obj2: {
     question: "What are disjoint sets?",
-    answer: "Two sets are disjoint if they share no elements — their intersection is empty: A ∩ B = ∅. In probability, disjoint events are called mutually exclusive.",
+    answer: "Two sets are disjoint when they share no elements, so their intersection is empty. The even and odd integers are disjoint, as are {1, 2, 3} and {4, 5, 6}. In [probability](!/probability/events) the same condition is called mutually exclusive: if one event happens, the other cannot. Disjointness is a property of the pair, not of either set alone.",
+    sectionId: "3"
+  },
+  obj3: {
+    question: "What does pairwise disjoint mean?",
+    answer: "A collection of three or more sets is pairwise disjoint when every possible pair of them is disjoint. Checking only that all the sets share no common element is not enough: three sets can have empty triple intersection while two of them still overlap. Pairwise disjoint is the stronger condition and the one partitions require.",
     sectionId: "3"
   },
   obj4: {
-    question: "What does pairwise disjoint mean?",
-    answer: "A collection of sets is pairwise disjoint if every pair has empty intersection: Aᵢ ∩ Aⱼ = ∅ for all i ≠ j. No element belongs to more than one set.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "What are overlapping sets?",
-    answer: "Sets overlap when they share at least one element but neither is a subset of the other. Each contains elements the other lacks, yet their intersection is non-empty.",
-    sectionId: "4"
-  },
-  obj6: {
-    question: "What is a partition of a set?",
-    answer: "A partition divides a set S into non-empty, pairwise disjoint subsets whose union equals S. Every element of S belongs to exactly one subset in the partition.",
-    sectionId: "5"
-  },
-  obj7: {
     question: "How do you prove two sets are equal?",
-    answer: "Show mutual subset containment: prove every element of A belongs to B, then prove every element of B belongs to A. This establishes A = B.",
+    answer: "Show containment in both directions. Prove that every element of A belongs to B, then prove that every element of B belongs to A. Together these give A ⊆ B and B ⊆ A, which forces A = B. This double-inclusion method turns one equality claim into two [subset](!/set-theory/subsets) proofs and is the standard technique.",
     sectionId: "1"
   },
-  obj8: {
-    question: "Can equivalent sets have different elements?",
-    answer: "Yes. Equivalent sets only need the same cardinality. For example, {a, b, c} and {1, 2, 3} are equivalent (both size 3) but not equal (different elements).",
-    sectionId: "2"
-  },
-  obj9: {
-    question: "How are partitions used in probability?",
-    answer: "If events B₁, B₂, ..., Bₙ partition the sample space, the law of total probability lets you compute P(A) by summing P(A|Bᵢ)P(Bᵢ) over the partition.",
-    sectionId: "5"
-  },
-  obj10: {
-    question: "What is an example of a partition?",
-    answer: "The even and odd integers partition ℤ. Residue classes modulo n partition ℤ into n subsets. Each integer belongs to exactly one class.",
+  obj5: {
+    question: "What is a partition of a set?",
+    answer: "A partition splits a set into non-empty pieces that are pairwise disjoint and together cover everything, so each element lands in exactly one piece. The even and odd integers partition the integers; residue classes mod n partition them into n pieces. The [law of total probability](!/probability/total-probability) is built directly on this idea.",
     sectionId: "5"
   }
 }
@@ -696,18 +1674,6 @@ const schemas = {
     ]
   },
 
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
  
@@ -898,6 +1864,22 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
     //     ]
     // },
     
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:sectionsContent.faq.title,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -935,12 +1917,6 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

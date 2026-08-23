@@ -63,7 +63,7 @@ const CONFIG = {
     },
     'Generators': {
       pathPatterns: [
-        '/set-theory/venn-generator',
+        '/set-theory/visual-tools/venn-generator',
         '/logic/truth-tables'
       ],
       exclude: ['/tables/truth-tables']

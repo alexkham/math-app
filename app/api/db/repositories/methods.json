@@ -1,0 +1,323 @@
+{
+  "$meta": {
+    "version": "1.0.0",
+    "description": "Methods table — ordered procedures, algorithms and decompositions. A peer of concepts.json with its own ids, joined to it by concepts[].",
+    "generated": "2026-08-23",
+    "generatedBy": "scripts/build-rules-methods.mjs — regenerate, never hand-edit",
+    "foreignKey": "concepts[] references concepts.json id",
+    "conceptsSource": "Seeded from the `entity` field of the source row, which already names the concept the rule or method is about.",
+    "statementField": "`statement` is null on every row. LaTeX statements are a later pass and belong in an overlay file, not here.",
+    "counts": {
+      "methods": 19,
+      "withConcepts": 10,
+      "withoutConcepts": 9
+    }
+  },
+  "methods": [
+    {
+      "id": "completing_the_square",
+      "kind": "method",
+      "name": "Completing the Square",
+      "section": "algebra",
+      "category": "Equations",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/algebra/equations/quadratic",
+      "anchor": "3",
+      "sourceEntity": "completing_the_square",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "substitution_rule",
+      "kind": "method",
+      "name": "Substitution Rule",
+      "section": "calculus",
+      "category": "Integration Rules",
+      "disambiguation": null,
+      "concepts": [
+        "indefinite_integral"
+      ],
+      "statement": null,
+      "primaryPage": "/calculus/integrals/techniques",
+      "anchor": "2",
+      "sourceEntity": "indefinite_integral",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "general_term_in_binomial_expansion",
+      "kind": "method",
+      "name": "General Term in Binomial Expansion",
+      "section": "combinatorics",
+      "category": "Binomial & Multinomial Theorems",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-theorem",
+      "anchor": "2",
+      "sourceEntity": "general_term_in_binomial_expansion",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "middle_term_in_binomial_expansion",
+      "kind": "method",
+      "name": "Middle Term in Binomial Expansion",
+      "section": "combinatorics",
+      "category": "Binomial & Multinomial Theorems",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/combinatorics/binomial-theorem",
+      "anchor": "2",
+      "sourceEntity": "middle_term_in_binomial_expansion",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cholesky_decomposition",
+      "kind": "method",
+      "name": "Cholesky Decomposition",
+      "section": "linear-algebra",
+      "category": "Cholesky",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/decompositions/cholesky",
+      "anchor": "1",
+      "sourceEntity": "cholesky_decomposition",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "gram_schmidt_process",
+      "kind": "method",
+      "name": "Gram-Schmidt Process",
+      "section": "linear-algebra",
+      "category": "Gram-Schmidt",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/orthogonality/gram-schmidt",
+      "anchor": "3",
+      "sourceEntity": "gram_schmidt",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "laplace_column_expansion",
+      "kind": "method",
+      "name": "Laplace Column Expansion",
+      "section": "linear-algebra",
+      "category": "Cofactor Expansion",
+      "disambiguation": null,
+      "concepts": [
+        "determinant"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/determinants/cofactors",
+      "anchor": "4",
+      "sourceEntity": "determinant",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "laplace_row_expansion",
+      "kind": "method",
+      "name": "Laplace Row Expansion",
+      "section": "linear-algebra",
+      "category": "Cofactor Expansion",
+      "disambiguation": null,
+      "concepts": [
+        "determinant"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/determinants/cofactors",
+      "anchor": "3",
+      "sourceEntity": "determinant",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "lu_decomposition",
+      "kind": "method",
+      "name": "LU Decomposition",
+      "section": "linear-algebra",
+      "category": "LU",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/decompositions/lower-upper",
+      "anchor": "1",
+      "sourceEntity": "lu_decomposition",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "orthogonal_decomposition",
+      "kind": "method",
+      "name": "Orthogonal Decomposition",
+      "section": "linear-algebra",
+      "category": "Dot Product",
+      "disambiguation": null,
+      "concepts": [
+        "orthogonal_vectors"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vectors/dot-product",
+      "anchor": "9",
+      "sourceEntity": "orthogonal_vectors",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "qr_algorithm_for_eigenvalues",
+      "kind": "method",
+      "name": "QR Algorithm for Eigenvalues",
+      "section": "linear-algebra",
+      "category": "QR",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/decompositions/qr",
+      "anchor": "7",
+      "sourceEntity": "qr_decomposition",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "qr_decomposition",
+      "kind": "method",
+      "name": "QR Decomposition",
+      "section": "linear-algebra",
+      "category": "QR",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/decompositions/qr",
+      "anchor": "1",
+      "sourceEntity": "qr_decomposition",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "solution_structure_decomposition",
+      "kind": "method",
+      "name": "Solution Structure Decomposition",
+      "section": "linear-algebra",
+      "category": "Solvability",
+      "disambiguation": null,
+      "concepts": [
+        "system_of_linear_equations"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/linear-systems/solvability",
+      "anchor": "10",
+      "sourceEntity": "system_of_linear_equations",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "spectral_decomposition",
+      "kind": "method",
+      "name": "Spectral Decomposition",
+      "section": "linear-algebra",
+      "category": "Spectral",
+      "disambiguation": null,
+      "concepts": [],
+      "statement": null,
+      "primaryPage": "/linear-algebra/eigen/diagonalization",
+      "anchor": "7",
+      "sourceEntity": "diagonalizable_matrix",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "standard_basis_decomposition",
+      "kind": "method",
+      "name": "Standard Basis Decomposition",
+      "section": "linear-algebra",
+      "category": "Representation",
+      "disambiguation": null,
+      "concepts": [
+        "vector"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/vectors",
+      "anchor": "2",
+      "sourceEntity": "vector",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "subspace_orthogonal_decomposition",
+      "kind": "method",
+      "name": "Orthogonal Decomposition",
+      "section": "linear-algebra",
+      "category": "Orthogonal Complement",
+      "disambiguation": "Subspace",
+      "concepts": [
+        "orthogonal_complement"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/orthogonality/projections",
+      "anchor": "2",
+      "sourceEntity": "orthogonal_complement",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "symmetric_skew_decomposition",
+      "kind": "method",
+      "name": "Symmetric Skew Decomposition",
+      "section": "linear-algebra",
+      "category": "Transpose & Symmetry",
+      "disambiguation": null,
+      "concepts": [
+        "symmetric_matrix"
+      ],
+      "statement": null,
+      "primaryPage": "/linear-algebra/matrix/types",
+      "anchor": "6",
+      "sourceEntity": "symmetric_matrix",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "conjunction_elimination",
+      "kind": "method",
+      "name": "Conjunction Elimination",
+      "section": "logic",
+      "category": "Monotonicity Laws",
+      "disambiguation": null,
+      "concepts": [
+        "conditional"
+      ],
+      "statement": null,
+      "primaryPage": "/logic/propositional-logic/laws",
+      "anchor": null,
+      "sourceEntity": "conditional",
+      "source": "formulasRepository",
+      "status": "seeded"
+    },
+    {
+      "id": "cdf_method_for_transformations",
+      "kind": "method",
+      "name": "CDF Method for Transformations",
+      "section": "probability",
+      "category": "Transformations",
+      "disambiguation": null,
+      "concepts": [
+        "function_of_random_variable"
+      ],
+      "statement": null,
+      "primaryPage": "/probability/probability-function/pdf",
+      "anchor": "11",
+      "sourceEntity": "function_of_random_variable",
+      "source": "formulasRepository",
+      "status": "seeded"
+    }
+  ]
+}

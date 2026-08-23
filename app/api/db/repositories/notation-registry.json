@@ -486,8 +486,8 @@
       "recommendations": [],
       "externalNotationLinks": []
     },
-    "set-theory/venn-generator": {
-      "pagePath": "pages/set-theory/venn-generator/index.jsx",
+    "set-theory/visual-tools/venn-generator": {
+      "pagePath": "pages/set-theory/visual-tools/venn-generator/index.jsx",
       "template": "tool",
       "sections": [],
       "spots": [],
@@ -1560,23 +1560,23 @@
       "template": "titled",
       "sections": ["… notation 'Notation and Symbols' … ways …"],
       "spots": [
-        {"sectionId": "notation", "sectionTitle": "Notation and Symbols", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "X, x, p(x), f(x), P(·), ∫f(x)dx each explained in everyday language + live symbols chip", "stage2": {"latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "added": "2026-08-06", "placement": "typesetting sentence inserted before the pre-existing chip"}}
+        {"sectionId": "notation", "sectionTitle": "Notation and Symbols", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "the case distinction that separates a variable from its value, the operator that turns an event into a number, and the two letters that split discrete from continuous", "covers": ["X vs x (capital random variable / lowercase value; X,Y,Z queue + x₁..xₙ data convention; P(x=x) tautology-collapse confusion)", "P(·) operator (event-in/number-out; dot as empty slot not multiplication; reserved capital as measure on events → axioms; P(3)-meaningless confusion)", "p(x) vs f(x) (mass vs density; P(X=x)=0 pointwise continuous; p_X/f_X subscripted alsoWritten for multivariable; DENSITY-MAY-EXCEED-1 flagship error)"], "stage2": {"latex": {"page": "/latex", "anchorText": "LaTeX"}, "keyboard": {"page": "/keyboard", "anchorText": "mathematical keyboard"}, "mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "PROBABILITY PASS PAGE 1 (STRATEGY, operator-unanswered → recommended option taken, REVERSIBLE: probability treated like every other section — theoretical pages, gate-checked, legacy notation sections replaced ONLY where the page owns marks; NO mass conversion of the ~24 legacy sections). REPLACED legacy 'Notation and Symbols' in place at slug id 'notation' (seventeenth replacement; title kept — already contains 'Notation'; trio links absorbed into lead; ∫ deferred to integrals/definite#2). Fixed in passing: two pre-existing *italics* render bugs in the page's live PMF/PDF prose."}}
       ],
       "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2 (pattern)"}]
     },
     "probability/sample-space": {
       "pagePath": "pages/probability/sample-space/index.jsx",
       "template": "titled",
-      "sections": ["… notation 'Useful Notation' …"],
-      "spots": [{"sectionId": "notation", "sectionTitle": "Useful Notation", "field": "content + after-chip", "kind": "dedicated-section", "status": "existing", "quote": "house-pattern notation section (Ω, outcomes)", "stage2": null}],
-      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+      "sections": ["… notation 'Sample Space Notation' (replaced 2026-08-22) …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Sample Space Notation", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "one capital for the set of everything that could happen, one lowercase for a single thing that did", "covers": ["Ω (universe-of-the-problem, why P(Ω)=1; finite/countable/continuous shapes + Cartesian product; S school-letter + U universal-set alsoWritten → set-theory/operations#notation; certain-event-not-an-outcome confusion)", "ω (single outcome; capital/lowercase convention tied to X/x → probability-function#notation; compound outcomes as one ω; ω∈Ω vs A⊆Ω element-subset error → set-theory/basics#2; ω primitive-root + angular-frequency sameGlyph → demoivre-theorem#notation)", "A ⊆ Ω (events as subsets; set-ops-become-event-algebra bridge; certain/impossible extremes; structure-not-likelihood confusion)"], "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "REPLACED legacy 'Useful Notation' in place at slug id 'notation' (eighteenth replacement; renamed per house rule 1). ERRATUM FIXED: the entire legacy body used the broken `$\\(...\\)$` mixed-delimiter pattern — Ω and ω rendered as literal backslashes/parens for readers; gone with the replacement. Chip → footer pill."}}],
+      "externalNotationLinks": []
     },
     "probability/random-variables": {
       "pagePath": "pages/probability/random-variables/index.jsx",
       "template": "titled",
-      "sections": ["… notation 'Notation & Naming Conventions' …"],
-      "spots": [{"sectionId": "notation", "sectionTitle": "Notation & Naming Conventions", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "capital X vs lowercase x conventions", "stage2": null}],
-      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+      "sections": ["… notation 'Random Variable Notation' (replaced 2026-08-22) …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Random Variable Notation", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "the signature that reveals it is a function, the braces that turn its values into events, and the tilde that names the distribution", "covers": ["X: Ω→ℝ signature (random-variable-IS-a-function; arrow signature borrowed → functions/range#2; X(ω) argument spelling; unknown-to-solve-for confusion)", "{X ≤ x} event braces (condition-becomes-set, why P(X≤x) is well-formed; brace-dropping shorthand; cdf built from ≤ form; algebraic-inequality confusion)", "X ~ Bin(n,p) tilde (distribution declaration; PARAMETER CONVENTION WARNING N(μ,σ²) vs N(μ,σ) by source; approximately/asymptotic sameGlyph)"], "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "REPLACED legacy 'Notation & Naming Conventions' in place at slug id 'notation' (twentieth replacement; renamed per house rule 1; chip → footer pill). OVERLAP RESOLVED: the legacy body taught only X-vs-x, which probability-function#notation already owns — demoted to the inherited strip rather than duplicated, and the page's three genuinely distinct marks written instead. ~ tilde ownership lands here (the distributions family uses it throughout)."}}],
+      "externalNotationLinks": []
     },
     "probability/sets": {
       "pagePath": "pages/probability/sets/index.jsx",
@@ -1585,12 +1585,28 @@
       "spots": [{"sectionId": "notation", "sectionTitle": "Notation Used for Sets in Probability", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "set symbols as used in probability", "stage2": null}],
       "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
     },
+    "probability/expected-value__notationSpot": {
+      "pagePath": "pages/probability/expected-value/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Expected Value Notation' (replaced 2026-08-22) …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Expected Value Notation", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "One operator with three costumes, a Greek letter that names its output, and a bracket that quietly wraps a whole transformation", "covers": ["E[X]/E(X)/𝔼[X] (operator-consumes-variable; bracket rationale; three interchangeable spellings with field attributions + E_P subscript; expectation-need-not-be-attainable 3.5-die confusion)", "μ (parameter side of the same number; μ_X subscripts; σ pairing → variance; μ-vs-x̄ population/estimate line → magnitude#notation two-hats)", "E[g(X)] (transformed variable; E[X²] feeding variance; linearity E[aX+b]=aE[X]+b; E[g(X)]≠g(E[X]) with the variance gap — most consequential error)"], "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "REPLACED legacy '**Notation We Use for Expected Value**' in place at slug id 'notation' (twenty-first replacement; title normalized — the legacy title carried literal markdown bold; chip → footer pill). Σ and ∫ from the legacy roster deferred to their owners via strip; p(x)/f(x) to probability-function."}}],
+      "notes": "Recorded under a distinct key because the pre-existing 'probability/expected-value' entry below holds the 2026-08-06 survey data; merge on a future registry tidy.",
+      "externalNotationLinks": []
+    },
     "probability/expected-value": {
       "pagePath": "pages/probability/expected-value/index.jsx",
       "template": "titled",
       "sections": ["… notation '**Notation We Use for Expected Value**' (title carries stray markdown bold) …"],
       "spots": [{"sectionId": "notation", "sectionTitle": "Notation We Use for Expected Value", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "E[X] / E(X) / μ conventions", "stage2": null}],
       "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+    },
+    "probability/variance__notationSpot": {
+      "pagePath": "pages/probability/variance/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Variance Notation' (replaced 2026-08-22) …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Variance Notation", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "the exponent in σ² is not decoration but a units statement, and it is the reason two symbols exist for one idea", "covers": ["Var(X) operator (upright print + V/𝕍 variants; name-preferred-when-argument-matters; NON-LINEARITY Var(aX)=a²Var(X), Var(X+b)=Var(X) contrasted with expectation)", "σ² (parameter side; σ_X subscripts; (μ,σ²) declaration pair → random-variables#notation tilde; σ census sameGlyph → svd#notation singular values + factors#notation divisor-sum + Σ operator)", "σ / SD(X) (units argument — dollars-squared unreportable; report-in-σ but algebra-in-σ² because variances add; σ-vs-σ² silent square/root error)"], "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "REPLACED legacy 'Useful Notation' in place at slug id 'notation' (twenty-second replacement; renamed per house rule 1; chip → footer pill). Legacy roster's X, μ, E[·], (X−μ)² deferred to their owners via strip; the units story (σ vs σ²) is the entry the legacy list never made."}}],
+      "notes": "Distinct key — the canonical 'probability/variance' entry below holds 2026-08-06 survey data; merge on a future registry tidy.",
+      "externalNotationLinks": []
     },
     "probability/variance": {
       "pagePath": "pages/probability/variance/index.jsx",
@@ -1599,12 +1615,19 @@
       "spots": [{"sectionId": "notation", "sectionTitle": "Useful Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "Var(X) / σ² conventions", "stage2": null}],
       "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
     },
+    "probability/conditional-probability": {
+      "pagePath": "pages/probability/conditional-probability/index.jsx",
+      "template": "titled",
+      "sections": ["… notation 'Conditional Probability Notation' (replaced 2026-08-22) …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "Conditional Probability Notation", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "One vertical stroke changes everything it stands in: inside P(·) it means 'given'", "covers": ["P(A|B) given-bar (bar-is-notation-not-arithmetic; P(B)>0 condition + stacked conditions; P(A|B) vs P(B|A) reversal → bayes-theorem; PIPE'S FIFTH JOB sameGlyph census → set-theory/basics#2 such-that + arithmetic/divisibility#2 divides + equations/absolute-value#notation + cardinality#notation fences)", "P(A∩B) joint (overlap = formula numerator; P(A,B) comma + P(AB) juxtaposition alsoWritten; same-numerator-different-denominator confusion vs conditional)", "P(A|B)=P(A) independence-as-equation (no dedicated elementary symbol; multiplicative form survives P(B)=0; A⊥B advanced abbreviation → inner-product#notation; independence-vs-disjointness near-opposites confusion)"], "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "REPLACED legacy 'Useful Notation' in place at slug id 'notation' (nineteenth replacement; renamed per house rule 1; chip → footer pill; the legacy A/B/P(A)/∩ roster absorbed into entries + strip). Split out of $notationPatternPages. Fixed in passing: three pre-existing *italics* render bugs in live content."}}],
+      "externalNotationLinks": []
+    },
     "probability/$notationPatternPages": {
       "pagePath": "(pattern summary — see individual files)",
       "template": "titled",
       "sections": ["each page carries a dedicated notation section (id 'notation' where verified) + live '[See All Probability Symbols and Notations](!/math-symbols/probability)' chip(s)"],
       "spots": [{"sectionId": "notation", "sectionTitle": "Useful Notation / Notation Used / Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "house pattern replicated across: conditional-probability, bayes-theorem, joint-probability, independence, total-probability, covariance ('Notation & Naming Conventions'), median, mode, probability-function/pdf, probability-function/pmf, distributions (hub, id 'notation'), distributions/discrete (hub, 6 chips), distributions/continuous (hub, 3 chips), discrete/{uniform,binomial,geometric,hypergeometric,negative-binomial,poisson} ('Notation Used'), continuous/{uniform,normal,exponential} ('Notation')", "stage2": null}],
-      "notes": "Aggregate entry for 24 pages sharing the identical pattern; individual ids beyond the verified 'notation' slug not extracted. Split into per-page entries if any page gets individual treatment.",
+      "notes": "Aggregate entry for 24 pages sharing the identical pattern; individual ids beyond the verified 'notation' slug not extracted. Split into per-page entries if any page gets individual treatment. 2026-08-22: probability-function, sample-space and conditional-probability SPLIT OUT (upgraded to NotationSection); the remaining ~21 keep their legacy sections per the pass strategy — no mass conversion.",
       "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "~50 chips across the family"}]
     },
     "probability/$chiplessPages": {

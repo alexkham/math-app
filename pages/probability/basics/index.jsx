@@ -380,7 +380,7 @@ By treating [events](!/probability/events) as sets, we gain access to the full p
         @academic[example:Consider the classical probability formula:
          $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$.
          If we literally counted individual points (dots), each with zero "probability mass," we'd face the paradox that every single outcome has probability zero, yet their sum must equal one.]@`,
-        after:`To visualize these relationships between events-as-sets, we use [Venn diagrams](!/set-theory/venn-generator)—powerful tools that illustrate unions, intersections, complements, and other set operations that form the algebraic backbone of probability theory.`,
+        after:`To visualize these relationships between events-as-sets, we use [Venn diagrams](!/set-theory/visual-tools/venn-generator)—powerful tools that illustrate unions, intersections, complements, and other set operations that form the algebraic backbone of probability theory.`,
         svg:``
 
       },

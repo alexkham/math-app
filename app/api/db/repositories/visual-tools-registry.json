@@ -3928,6 +3928,157 @@
         "orphans": 0,
         "notes": "One of the four trigonometry pages missed by the 2026-07-31 batch. Case C, wired exactly like its twin DoubleAngleExplorer: additive `explanations` prop, entry keyed by activeFn; for the geometric tabs the hoisted strings replace each scenario step's `description` in the shared BisectedApexDemo step log, for the four derived tabs the string replaces the DerivedIdentityCard intro via a new `introOverride` prop rendered through processContent. States = 12 proof stages (6 sin + 6 cos) + 4 derived cards; the 6 function-level identity sections carry the overview units and act as group sections alongside the two existing group sections (geometric-proof-sin2-cos2-1, derived-identities-tan-sec-csc-cot). 18 new sections on top of 11 existing (all migrated from numeric ids to slugs), 18 units, 0 orphans. Steps 1-4 are literally identical in both scenarios (same state, same wording), and following the double-angle precedent each still got its own dedicated section, with the cosine copies written from the cosine's point of view. Diagrams module ports BisectedApexCore at theta=35: no apex arc (PS never sets showApex), amber #B45309 chord and half-chord labels per BisectedApexDemo v8, unit-circle arc drawn only between A and B since the full circle leaves the compact frame; stages 3-6 share one scene so each carries a banner with that step's algebra. Frozen values (0.574, 0.819, 0.700, 1.743, 1.221, 1.428) verified against the live formula table. VERIFICATION: statics complete (29 sections, 82 anchors, 0 orphans, 18/18 units); SSR verified by curl (200, 29 sections, 36 unit panels = 2x18) and one clean browser render (29 sections, 18 frames, 180 KaTeX, no overlay). Playwright landing tests NOT run - the dev environment had a concurrent `next build` plus a second `next dev` writing the same .next directory, which corrupts it and returns intermittent 500s."
       }
+    },
+    "supplementary-angle-identities": {
+      "slug": "supplementary-angle-identities",
+      "name": "Supplementary Angle Identities Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/supplementary-angle-identities/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "supplementary angles",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complementary angles",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "terminal point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trigonometric identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/trigonometry/identities/supplementary-angle/supplementaryAngleDiagrams.js",
+      "diagramStates": [
+        "steps[0..5]",
+        "sinOverview",
+        "cosOverview",
+        "tan",
+        "csc",
+        "sec",
+        "cot"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-23",
+        "states": 16,
+        "sections": 23,
+        "anchors": 77,
+        "orphans": 0,
+        "notes": "Third of the four trigonometry pages missed by the 2026-07-31 batch. Case C. Geometric tabs render the SHARED ReflectionDemo scene with mirror='y': the explorer overrides only the identity bar and metric cards for cos, so sin and cos run the same six-stage animation with the same step text. Consequence: 6 SHARED reflection-proof step sections rather than 12 duplicated ones (the two function-level sections act as the per-tab group, and each tab's panel entry links to the shared step plus its own identity section). ReflectionDemo had no explanations hook and rendered step.description as raw text, so it gained an additive `stepNotes` prop (index-aligned description override, merged before the early return so hook order is untouched) plus processContent in its step log; it is imported only by SupplementaryAngleExplorer. PAGE ODDITY: section ids were auto-mapped via Object.keys(sectionsContent).map -> '1'..'11'; replaced with explicit slug rows (the powers-table fix), old map left commented. Diagrams port ReflectionScene's visibility ladder and colour vocabulary (blue/brown original legs, teal/violet reflected, red mirror, amber gap arcs, green new-angle arc), legend and callout boxes dropped, values frozen at theta=35. VERIFIED IN THE RENDERED DOM, not just the source: 23 sections present, 12 unit frames, 23 in-page link targets all resolving, no section without an incoming link, 0 page errors; Playwright confirmed the panel anchors appear in the live step log and in the derived card, with landings at 41px and 100px after scroll-settle."
+      }
+    },
+    "negative-angle-identities": {
+      "slug": "negative-angle-identities",
+      "name": "Negative Angle Identities Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/negative-angle-identities/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "negative angle identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit circle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "terminal point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reciprocal identities",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams.js",
+      "diagramStates": [
+        "sin.overview",
+        "sin.steps[0..2]",
+        "cos.overview",
+        "cos.steps[0..2]",
+        "tan",
+        "csc",
+        "sec",
+        "cot"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-23",
+        "states": 10,
+        "sections": 23,
+        "anchors": 66,
+        "orphans": 0,
+        "notes": "Second of the four trigonometry pages missed by the 2026-07-31 batch. Case C, wired like DoubleAngleExplorer: additive `explanations` prop keyed by activeFn, hoisted strings replace each scenario step's description, derived tabs get introOverride. NegativeAngleDemo rendered step.description as raw text, so it gained processContent (it is imported only by NegativeAngleExplorer). States = 3 sin stages + 3 cos stages + 4 derived cards; 12 new sections on top of 11 existing (numeric ids migrated to slugs). Diagrams port NegativeAngleCore honouring its coordMode switch (sinOnly hides the cos leg, cosOnly hides the vertical legs and adds the shared-x connector), frozen at theta=40. IMPORTANT PAGE HISTORY: this page's <Sections> and <SectionTableOfContents> were commented out in the live component, so nothing rendered - the whole pass was invisible and the first static verification (which compared anchors against the genericSections array in the source) was therefore meaningless. The owner uncommented both calls on 2026-08-23; re-verified in the rendered DOM afterwards: 23 sections present, 12 unit frames, 23 in-page link targets, 0 unresolved. LESSON FOR FUTURE PASSES: confirm the page actually renders its sections in the DOM before authoring any anchors, and verify anchors against the DOM, never against the source array."
+      }
     }
   },
   "$stubTemplate": {

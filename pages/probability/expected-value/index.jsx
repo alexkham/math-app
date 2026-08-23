@@ -790,6 +790,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1011,39 +1012,42 @@ It is simply the number that reflects the overall behavior of the distribution �
   
     },
     notation:{
-      title:`**Notation We Use for Expected Value**`,
-      content:`
-When we talk about expected value, a few symbols appear again and again.  
-Here is what they mean in plain language, without the formal overload.
-
-$E(X)$ or $𝔼[X]$ — the expected value of the random variable $X$.  
-This is the most common way to write “the long-run average of $X$.”
-
-$Σ$ (the summation sign) — used in the discrete case.  
-It tells us we are adding together the contributions from all possible values of $X$,
-each weighted by its probability.
-
-$∫$ (the integral sign) — used in the continuous case.  
-It represents adding up contributions continuously along the density curve.
-
-$p(x)$ — the probability that $X$ takes the value x (for discrete variables).  
-This comes from the PMF.
-
-$f(x)$ — the probability density at x (for continuous variables).  
-It shows where values tend to concentrate.
-
-$E[g(X)]$ — the expected value of some function of $X$.  
-This appears when computing variance, powers of $X$, or transformations.
-
-All of these symbols simply help express the same idea:  
-expected value is a weighted average based on the probability function of the variable.
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-`,
+      title:`Expected Value Notation`,
+      lead:`One operator with three costumes, a Greek letter that names its output, and a bracket that quietly wraps a whole transformation. Every mark here is catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$X$, $x$, $p(x)$ and $f(x)$ are owned by the [probability function](!/probability/probability-function#notation); the summation $\\sum$ that performs the discrete average by [binomial expansion notation](!/combinatorics/binomial-theorem#notation) and the integral $\\int$ by [definite integrals](!/calculus/integrals/definite#2).`,
+      entries:[
+        {
+          id:'e-operator',
+          tex:`$E[X]$ · $E(X)$ · $\\mathbb{E}[X]$`,
+          read:`the expected value of X; the expectation of X`,
+          means:`An operator, not a function of a number: $E$ consumes a whole random variable and returns a single number — the probability-weighted average that **How to Calculate Expected Value** below computes. Square brackets are the usual dress precisely because the contents are an object, not an argument.`,
+          cases:`The three spellings are interchangeable — parentheses $E(X)$ in elementary texts, blackboard-bold $\\mathbb{E}[X]$ in probability theory and finance, plain $E[X]$ almost everywhere else; a subscript names the distribution when several are in play, $E_P[X]$.`,
+          confusedWith:`A likely or typical value. The expectation need not be attainable: a fair die has $E[X] = 3.5$, a value it never shows — "expected" names the long-run average, not an outcome to expect.`,
+        },
+        {
+          id:'mu-parameter',
+          tex:`$\\mu$`,
+          read:`mu — the mean`,
+          means:`The Greek letter names the same number from the parameter side: $\\mu = E[X]$. Where $E[\\cdot]$ is the operation, $\\mu$ is the resulting constant — which is why distributions are declared with it, as in $N(\\mu, \\sigma^2)$.`,
+          cases:`Subscripts disambiguate when several variables appear — $\\mu_X$, $\\mu_Y$ — and the letter pairs with $\\sigma$ from [variance](!/probability/variance) as the standard parameter duo.`,
+          confusedWith:`The sample mean $\\bar{x}$. Greek letters name the true, unknown population values; Latin letters with hats or bars name estimates computed from data — the [two-hats convention](!/linear-algebra/vectors/magnitude#notation) draws the same line in statistics.`,
+        },
+        {
+          id:'e-of-g',
+          tex:`$E[g(X)]$`,
+          read:`the expected value of g of X`,
+          means:`The bracket wraps a transformed variable: $g(X)$ is itself a random variable, so its expectation is computed by weighting $g(x)$ — not $x$ — against the same probabilities. This is what makes $E[X^2]$ available to the [variance](!/probability/variance) formula.`,
+          cases:`Linearity is the property the notation invites and only partly grants: $E[aX + b] = aE[X] + b$ always holds, which is why constants slide out of the brackets freely.`,
+          confusedWith:`$g(E[X])$. Applying the function to the average is not the same as averaging the function — $E[X^2] \\ne (E[X])^2$, and the gap between them is exactly the variance; swapping the two is the most consequential error the notation permits.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
       after:``,
-  
+
     },
   
     calculate:{
@@ -1491,7 +1495,18 @@ export default function ExpectedValuePage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.notation.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

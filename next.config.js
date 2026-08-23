@@ -17,6 +17,15 @@ const nextConfig = {
     return config;
   },
   async rewrites() { return []; },
+  async redirects() {
+    return [
+      {
+        source: '/set-theory/venn-generator',
+        destination: '/set-theory/visual-tools/venn-generator',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     domains: ['www.learnmathclass.com', 'learnmathclass.com'],
     remotePatterns: [{ protocol: 'https', hostname: '**.learnmathclass.com' }],

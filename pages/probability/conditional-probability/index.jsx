@@ -260,7 +260,7 @@
 // Independence is the special case where this shift does **not** occur. If events are independent, then knowing that one event happened provides no information about the other. In that case, conditioning leaves probabilities unchanged.
 
 // This contrast is crucial:  
-// - **Conditional probability** describes how probabilities *update* when information is known.  
+// - **Conditional probability** describes how probabilities **update** when information is known.  
 // - **Independence** describes when such an update is unnecessary.
 
 // Understanding this distinction prevents a common mistake — assuming probabilities should change just because a condition is mentioned, or assuming independence without justification.
@@ -612,6 +612,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -940,21 +941,44 @@ This verbal description captures the essence of conditional probability before a
     },
   
     notation:{
-  
-      title:`Useful Notation`,
-      content:`
-Before introducing the formula, we fix the symbols used to describe conditional probability:
 
-- $A$, $B$ — events  
-- $P(A)$, $P(B)$ — unconditional probabilities  
-- $P(A \\mid B)$ — probability of $A$ when $B$ is known to have occurred  
-- $A \\cap B$ — the event that both $A$ and $B$ occur  
-
-This notation allows us to express conditioning precisely and compactly in the next section.
-`,
+      title:`Conditional Probability Notation`,
+      lead:`One vertical stroke changes everything it stands in: inside $P(\\cdot)$ it means "given". The bar is not an operation and not a division — it marks which world the probability is being measured in. All the marks here are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$P(\\cdot)$ and the event letters come from the [probability function](!/probability/probability-function#notation); $\\cap$, $\\cup$ and complements from [set operations](!/set-theory/operations#notation); the sample space $\\Omega$ from [sample space notation](!/probability/sample-space#notation).`,
+      entries:[
+        {
+          id:'given-bar',
+          tex:`$P(A \\mid B)$`,
+          read:`the probability of A given B`,
+          means:`The bar reads "given": everything to its right is assumed to have happened, and the probability of what stands to its left is measured inside that restricted world — **Conditioning as Restricting the Situation** above draws the picture. The bar belongs to the notation, not to the arithmetic.`,
+          cases:`The condition can be any event with $P(B) > 0$; chained conditions stack on the same side, $P(A \\mid B \\cap C)$, and the [formula](!/probability/conditional-probability#formula) below turns the bar into a ratio — the division happens because of the definition, not because the bar divides.`,
+          confusedWith:`$P(B \\mid A)$. Swapping the sides reverses the statement completely — "probability of disease given a positive test" versus "probability of a positive test given disease" — the confusion **Common Mistakes** below singles out, and the reason [Bayes' theorem](!/probability/bayes-theorem) exists.`,
+          sameGlyphElsewhere:`The stroke's fifth career: "such that" in [set-builder braces](!/set-theory/basics#2), "divides" in [number theory](!/arithmetic/divisibility#2), and doubled as the [absolute value](!/algebra/equations/absolute-value#notation) and [cardinality](!/set-theory/cardinality#notation) fences — position and company decide which job it holds.`,
+        },
+        {
+          id:'joint-intersection',
+          tex:`$P(A \\cap B)$`,
+          read:`the probability of A and B`,
+          means:`The joint probability: the intersection names the event that both occur, so $P(A \\cap B)$ measures the overlap — the numerator of the conditional formula, and the quantity the bar is silent about.`,
+          alsoWritten:`$P(A, B)$ — the comma form, standard once several variables are in play, and $P(AB)$ by juxtaposition in older and applied texts; all three name the same overlap.`,
+          confusedWith:`The conditional. $P(A \\cap B)$ measures inside the whole sample space while $P(A \\mid B)$ measures inside $B$ alone — the same numerator, different denominators, which is exactly what the formula makes explicit.`,
+        },
+        {
+          id:'independence-statement',
+          tex:`$P(A \\mid B) = P(A)$`,
+          read:`conditioning on B changes nothing`,
+          means:`Independence written as a non-event: knowing $B$ leaves $A$'s probability untouched. The equation is the notation — there is no dedicated symbol in elementary work, as **Conditional Probability vs Independence** below explains.`,
+          cases:`The multiplicative form $P(A \\cap B) = P(A)P(B)$ says the same thing without a bar, and survives when $P(B) = 0$ makes the conditional undefined; advanced texts abbreviate the relation as $A \\perp B$, borrowing the [perpendicularity mark](!/linear-algebra/orthogonality/inner-product#notation).`,
+          confusedWith:`Disjointness. Mutually exclusive events satisfy $P(A \\cap B) = 0$, which makes them maximally **dependent** — knowing one occurred rules the other out; independence and exclusivity are near-opposites wearing similar-looking equations.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
-  
+      after:``,
+
     },
     formula:{
   
@@ -1023,7 +1047,7 @@ Conditioning usually changes probabilities, because new information restricts th
 Independence is the special case where this shift does **not** occur. If events are independent, then knowing that one event happened provides no information about the other. In that case, conditioning leaves probabilities unchanged.
 
 This contrast is crucial:  
-- **Conditional probability** describes how probabilities *update* when information is known.  
+- **Conditional probability** describes how probabilities **update** when information is known.  
 - **Independence** describes when such an update is unnecessary.
 
 Understanding this distinction prevents a common mistake — assuming probabilities should change just because a condition is mentioned, or assuming independence without justification.
@@ -1196,8 +1220,18 @@ export default function ConditionalProbabilityPage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.notation.content,
-            sectionsContent.notation.after,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

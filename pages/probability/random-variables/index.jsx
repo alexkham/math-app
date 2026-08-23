@@ -616,6 +616,7 @@ import '../../pages.css'
 import Head from 'next/head'
 import Image from 'next/image'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -998,25 +999,43 @@ occurs and 0 when it does not.
   
     },
     notation:{
-  
-      title:`Notation & Naming Conventions`,
-      content:`
-Random variables are typically written using capital letters, such as $X$, $Y$, or $Z$.  
-Individual numerical outcomes associated with a random variable are written using
-lowercase letters, such as $x$ or $y$.
 
-The symbol for a random variable refers to the entire assignment rule, not to a single
-observed number.  
-A lowercase value represents a specific result obtained after the random experiment
-has taken place.
-
-Keeping this distinction clear is necessary for writing correct probability statements
-and for understanding formulas introduced later.
-
-`,
+      title:`Random Variable Notation`,
+      lead:`Three marks make a random variable usable: the signature that reveals it is a function, the braces that turn its values into events, and the tilde that names the distribution it follows. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The capital-versus-lowercase convention — $X$ for the variable, $x$ for a value it takes — is owned by the [probability function](!/probability/probability-function#notation), along with $P(\\cdot)$, $p(x)$ and $f(x)$; the sample space $\\Omega$ and its outcomes $\\omega$ by [sample space notation](!/probability/sample-space#notation).`,
+      entries:[
+        {
+          id:'rv-signature',
+          tex:`$X : \\Omega \\to \\mathbb{R}$`,
+          read:`X maps the sample space to the real numbers`,
+          means:`The signature exposes what a random variable really is — not a variable at all, but a **function** assigning a number to every outcome. The [arrow signature](!/functions/range#2) is ordinary function notation, applied to the sample space as domain.`,
+          cases:`Written out, $X(\\omega)$ names the value at a particular outcome — the spelling that makes formulas like $E[X] = \\sum X(\\omega)P(\\omega)$ readable; everyday work suppresses the argument and writes just $X$.`,
+          confusedWith:`An unknown to solve for. Algebra's $x$ waits for a value; a random variable already **is** the rule — there is nothing to solve, only outcomes to feed it.`,
+        },
+        {
+          id:'event-braces',
+          tex:`$\\{X \\le x\\}$`,
+          read:`the event that X is at most x`,
+          means:`Braces turn a condition on the variable into an event — a subset of the sample space, exactly the kind of object the [probability operator](!/probability/probability-function#notation) $P(\\cdot)$ can measure. This is why $P(X \\le x)$ is well-formed: the inequality names a set, not a number.`,
+          cases:`The braces are routinely dropped inside $P$ — $P(X \\le x)$ rather than $P(\\{X \\le x\\})$ — and the same shorthand covers $\\{X = x\\}$, $\\{X > 3\\}$, $\\{a \\le X \\le b\\}$; the [cdf](!/probability/cdf) is built entirely from the $\\le$ form.`,
+          confusedWith:`An algebraic inequality to solve. $\\{X \\le x\\}$ is not a constraint on $x$ — it collects the outcomes where the variable lands at or below $x$, which is a set, and the probability of that set is what follows.`,
+        },
+        {
+          id:'distributed-as',
+          tex:`$X \\sim \\text{Bin}(n, p)$`,
+          read:`X is distributed as; X follows`,
+          means:`The tilde declares which distribution governs a variable, with the parameters in parentheses — $X \\sim \\text{Bin}(n, p)$, $X \\sim N(\\mu, \\sigma^2)$. One symbol replaces a paragraph: it fixes the whole probability function at once.`,
+          cases:`Parameter conventions vary by family and must be read from the source — the normal is written $N(\\mu, \\sigma^2)$ with a variance in most texts but $N(\\mu, \\sigma)$ with a standard deviation in some software; the [distributions pages](!/probability/distributions) state each convention explicitly.`,
+          confusedWith:`Equality or approximation. The tilde does not say $X$ equals anything — it names a law, and elsewhere the same glyph means "approximately" or "asymptotically equal", which is why $X \\sim N(0,1)$ and $f(n) \\sim g(n)$ are unrelated statements.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
-  
+      after:``,
+
     },
     next:{
   
@@ -1203,8 +1222,18 @@ export default function RandomVariablesPage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.notation.content,
-            sectionsContent.notation.after,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

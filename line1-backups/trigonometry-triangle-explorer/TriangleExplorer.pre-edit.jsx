@@ -1,6 +1,5 @@
 
 import { useState, useRef, useMemo } from "react";
-import { processContent } from "@/app/utils/contentProcessor";
 
 /* ═══════════════════════════════════════════════
    TRIANGLE EXPLORER v8
@@ -622,10 +621,7 @@ function LockCtrl({ label, color, on, val, toggle, set }) {
    MAIN EXPLORER
    ══════════════════════════════════════════════════ */
 
-// The per-scenario `intro` strings and explain() blocks above are the built-in
-// defaults. Canonical explanations live in getStaticProps of the page that
-// renders this component; edit the page's explanations object.
-export default function TriangleExplorer({ scenarios = SCENARIOS, maxWidth = 1380, explanations = null }) {
+export default function TriangleExplorer({ scenarios = SCENARIOS, maxWidth = 1380 }) {
   const [activeId, setActiveId] = useState(scenarios[0]?.id);
   const [dragOvr, setDragOvr] = useState(null);
   const [zm, setZm] = useState(100);
@@ -866,16 +862,6 @@ export default function TriangleExplorer({ scenarios = SCENARIOS, maxWidth = 138
                 borderBottom: `1px solid ${TH.borderLt}`,
               }}>
                 {sc.intro}
-              </div>
-            )}
-
-            {explanations && explanations[sc.id] && (
-              <div style={{
-                fontSize: 13, lineHeight: 1.6, color: TH.txMid,
-                paddingBottom: 12, marginBottom: 12,
-                borderBottom: `1px solid ${TH.borderLt}`,
-              }}>
-                {processContent(explanations[sc.id])}
               </div>
             )}
 
