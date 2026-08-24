@@ -454,10 +454,10 @@ All three conditions must hold. The single equation
 
 @academic[formula_callout:Continuity at a Point
 $$f \\text{ continuous at } a \\iff \\lim_{x \\to a} f(x) = f(a)$$
-/calculus/limits/formulas#continuity_at_a_point]@
+/calculus/formulas#continuity_at_a_point]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 encapsulates all three: the right side requires $f(a)$ to exist, the left side requires the limit to exist, and the equality requires them to match.
 `,
@@ -638,10 +638,10 @@ Continuity is preserved under standard operations. If $f$ and $g$ are continuous
 
 @academic[formula_callout:Continuity Preserved Under Operations
 $$f, g \\text{ continuous at } a \\implies f \\pm g, \\; cf, \\; f \\cdot g, \\; f/g \\;(g(a) \\neq 0), \\; f \\circ g \\text{ continuous at } a$$
-/calculus/limits/formulas#continuity_preserved_under_operations]@
+/calculus/formulas#continuity_preserved_under_operations]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Compositions also preserve continuity: if $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then $f \\circ g$ is continuous at $a$.
 
@@ -658,10 +658,10 @@ If $f$ is continuous on $[a, b]$ and $k$ is any value between $f(a)$ and $f(b)$,
 
 @academic[formula_callout:Intermediate Value Theorem
 $$f \\text{ continuous on } [a,b], \\; k \\text{ between } f(a) \\text{ and } f(b) \\implies \\exists\\, c \\in (a,b) \\text{ with } f(c) = k$$
-/calculus/limits/formulas#intermediate_value_theorem]@
+/calculus/formulas#intermediate_value_theorem]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Continuous functions hit every intermediate value—no skipping. The graph cannot jump from $f(a)$ to $f(b)$ without passing through every height in between.
 

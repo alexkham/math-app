@@ -279,10 +279,10 @@ If $\\lim_{x \\to \\infty} f(x) = L$ where $L$ is finite, the line $y = L$ is a 
 
 @academic[formula_callout:Horizontal Asymptote Condition
 $$\\lim_{x \\to \\infty} f(x) = L \\;\\text{ or }\\; \\lim_{x \\to -\\infty} f(x) = L \\implies y = L \\text{ is a horizontal asymptote}$$
-/calculus/limits/formulas#horizontal_asymptote_condition]@
+/calculus/formulas#horizontal_asymptote_condition]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 A function can have:
 
@@ -391,10 +391,10 @@ If any of the following hold:
 
 @academic[formula_callout:Vertical Asymptote Condition
 $$\\lim_{x \\to a^-} f(x) = \\pm\\infty \\;\\text{ or }\\; \\lim_{x \\to a^+} f(x) = \\pm\\infty \\implies x = a \\text{ is a vertical asymptote}$$
-/calculus/limits/formulas#vertical_asymptote_condition]@
+/calculus/formulas#vertical_asymptote_condition]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 then the line $x = a$ is a vertical asymptote. The graph shoots up or down near $x = a$.
 
@@ -492,10 +492,10 @@ The exponential function $e^x$ exhibits contrasting behavior in opposite directi
 
 @academic[formula_callout:Exponential End Behavior
 $$\\lim_{x \\to \\infty} e^x = \\infty, \\qquad \\lim_{x \\to -\\infty} e^x = 0$$
-/calculus/limits/formulas#exponential_end_behavior]@
+/calculus/formulas#exponential_end_behavior]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 As $x \\to \\infty$, exponential growth is unbounded. As $x \\to -\\infty$, the function decays toward zero.
 
@@ -526,10 +526,10 @@ As $x$ approaches zero from the right, $\\ln x$ plunges to $-\\infty$. The line 
 
 @academic[formula_callout:Logarithm End Behavior
 $$\\lim_{x \\to \\infty} \\ln x = \\infty, \\qquad \\lim_{x \\to 0^+} \\ln x = -\\infty$$
-/calculus/limits/formulas#logarithm_end_behavior]@
+/calculus/formulas#logarithm_end_behavior]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 The one-sided notation is essential: $\\ln x$ is undefined for $x \\leq 0$, so no left-hand limit exists at $x = 0$.
 `,

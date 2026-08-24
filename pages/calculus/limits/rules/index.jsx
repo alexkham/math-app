@@ -490,7 +490,7 @@ For any constant $c$:
 
 @academic[formula_callout:Limit of a Constant
 $$\\lim_{x \\to a} c = c$$
-/calculus/limits/formulas#limit_of_a_constant]@
+/calculus/formulas#limit_of_a_constant]@
 
 A constant function $f(x) = c$ outputs the same value regardless of input. As $x$ approaches $a$, the output remains $c$. The limit is simply $c$.
 
@@ -507,10 +507,10 @@ For the identity function $f(x) = x$:
 
 @academic[formula_callout:Limit of the Identity Function
 $$\\lim_{x \\to a} x = a$$
-/calculus/limits/formulas#limit_of_the_identity_function]@
+/calculus/formulas#limit_of_the_identity_function]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 As $x$ approaches $a$, the value of $x$ approaches $a$. This tautology provides the base case for handling any polynomial: every polynomial is built from constants and powers of $x$, and this rule handles the linear term.
 `,
@@ -525,10 +525,10 @@ If $\\lim_{x \\to a} f(x) = L$ and $\\lim_{x \\to a} g(x) = M$, then:
 
 @academic[formula_callout:Sum and Difference Rule (Limits)
 $$\\lim_{x \\to a} [f(x) \\pm g(x)] = \\lim_{x \\to a} f(x) \\pm \\lim_{x \\to a} g(x)$$
-/calculus/limits/formulas#sum_and_difference_rule_limits]@
+/calculus/formulas#sum_and_difference_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 The limit of a sum is the sum of the limits. The limit of a difference is the difference of the limits.
 
@@ -545,10 +545,10 @@ If $\\lim_{x \\to a} f(x) = L$ and $c$ is a constant:
 
 @academic[formula_callout:Constant Multiple Rule (Limits)
 $$\\lim_{x \\to a} [c \\cdot f(x)] = c \\cdot \\lim_{x \\to a} f(x)$$
-/calculus/limits/formulas#constant_multiple_rule_limits]@
+/calculus/formulas#constant_multiple_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Constants factor out of limits. This is a special case of the product rule where one factor is constant, but it appears frequently enough to state separately.
 
@@ -565,10 +565,10 @@ If $\\lim_{x \\to a} f(x) = L$ and $\\lim_{x \\to a} g(x) = M$, then:
 
 @academic[formula_callout:Product Rule (Limits)
 $$\\lim_{x \\to a} [f(x) \\cdot g(x)] = \\lim_{x \\to a} f(x) \\cdot \\lim_{x \\to a} g(x)$$
-/calculus/limits/formulas#product_rule_limits]@
+/calculus/formulas#product_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 The limit of a product is the product of the limits. This extends to any finite number of factors: if each factor has a limit, the product's limit equals the product of those limits.
 
@@ -585,10 +585,10 @@ If $\\lim_{x \\to a} f(x) = L$ and $\\lim_{x \\to a} g(x) = M$ with $M \\neq 0$,
 
 @academic[formula_callout:Quotient Rule (Limits)
 $$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a} f(x)}{\\lim_{x \\to a} g(x)}, \\quad \\lim_{x \\to a} g(x) \\neq 0$$
-/calculus/limits/formulas#quotient_rule_limits]@
+/calculus/formulas#quotient_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 The limit of a quotient is the quotient of the limits, provided the denominator's limit is nonzero.
 
@@ -605,10 +605,10 @@ If $\\lim_{x \\to a} f(x) = L$ and $n$ is a positive integer:
 
 @academic[formula_callout:Power Rule (Limits)
 $$\\lim_{x \\to a} [f(x)]^n = \\left[\\lim_{x \\to a} f(x)\\right]^n$$
-/calculus/limits/formulas#power_rule_limits]@
+/calculus/formulas#power_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Repeated application of the product rule yields this result. The limit of a power is the power of the limit.
 
@@ -629,10 +629,10 @@ If $\\lim_{x \\to a} f(x) = L$ and the $n$-th root exists:
 
 @academic[formula_callout:Root Rule (Limits)
 $$\\lim_{x \\to a} \\sqrt[n]{f(x)} = \\sqrt[n]{\\lim_{x \\to a} f(x)}$$
-/calculus/limits/formulas#root_rule_limits]@
+/calculus/formulas#root_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 For odd $n$, this holds for all real $L$. For even $n$, the rule requires $L \\geq 0$ and $f(x) \\geq 0$ near $a$.
 
@@ -649,10 +649,10 @@ If $\\lim_{x \\to a} f(x) = L$, then:
 
 @academic[formula_callout:Absolute Value Rule (Limits)
 $$\\lim_{x \\to a} |f(x)| = \\left|\\lim_{x \\to a} f(x)\\right|$$
-/calculus/limits/formulas#absolute_value_rule_limits]@
+/calculus/formulas#absolute_value_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 The limit of an absolute value is the absolute value of the limit.
 
@@ -669,10 +669,10 @@ For any polynomial $p(x) = a_n x^n + a_{n-1} x^{n-1} + \\cdots + a_1 x + a_0$:
 
 @academic[formula_callout:Limit of a Polynomial
 $$\\lim_{x \\to a} p(x) = p(a)$$
-/calculus/limits/formulas#limit_of_a_polynomial]@
+/calculus/formulas#limit_of_a_polynomial]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Direct substitution always works for polynomials. This follows from applying the sum, constant multiple, and power rules to each term.
 
@@ -689,10 +689,10 @@ For a rational function $r(x) = \\dfrac{p(x)}{q(x)}$ where $p$ and $q$ are polyn
 
 @academic[formula_callout:Limit of a Rational Function
 $$\\lim_{x \\to a} \\frac{p(x)}{q(x)} = \\frac{p(a)}{q(a)}, \\quad q(a) \\neq 0$$
-/calculus/limits/formulas#limit_of_a_rational_function]@
+/calculus/formulas#limit_of_a_rational_function]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 When the denominator is nonzero at $a$, substitute directly. When $q(a) = 0$, the quotient rule fails and [other techniques](!/calculus/limits/evaluating) are needed.
 
@@ -709,10 +709,10 @@ If $\\lim_{x \\to a} g(x) = L$ and $f$ is [continuous](!/calculus/limits/continu
 
 @academic[formula_callout:Composition Rule (Limits)
 $$\\lim_{x \\to a} f(g(x)) = f\\left(\\lim_{x \\to a} g(x)\\right) \\quad \\text{if } f \\text{ continuous at } \\lim_{x \\to a} g(x)$$
-/calculus/limits/formulas#composition_rule_limits]@
+/calculus/formulas#composition_rule_limits]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 The limit passes through continuous functions. You first find the limit of the inner function, then apply the outer function to that limit.
 
@@ -735,10 +735,10 @@ $$\\lim_{x \\to a} f(x) = L$$
 
 @academic[formula_callout:Squeeze Theorem
 $$g(x) \\leq f(x) \\leq h(x) \\text{ near } a, \\; \\lim_{x \\to a} g(x) = \\lim_{x \\to a} h(x) = L \\implies \\lim_{x \\to a} f(x) = L$$
-/calculus/limits/formulas#squeeze_theorem]@
+/calculus/formulas#squeeze_theorem]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 The function $f$ is trapped between two functions that converge to the same limit. It has nowhere to go but $L$.
 

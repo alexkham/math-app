@@ -445,7 +445,7 @@ The power rule for integration:
 
 @academic[formula_callout:Power Rule (Integrals)
 $$\\int x^n\\, dx = \\frac{x^{n+1}}{n+1} + C \\quad n \\neq -1$$
-/calculus/integrals/formulas#power_rule_integrals]@
+/calculus/formulas#power_rule_integrals]@
 
 The exponent increases by one; divide by the new exponent.
 
@@ -453,10 +453,10 @@ The exception $n = -1$ is critical:
 
 @academic[formula_callout:Reciprocal Antiderivative
 $$\\int \\frac{1}{x}\\, dx = \\ln|x| + C$$
-/calculus/integrals/formulas#reciprocal_antiderivative]@
+/calculus/formulas#reciprocal_antiderivative]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 The absolute value ensures validity for negative $x$. For $x > 0$, the antiderivative is $\\ln x$; for $x < 0$, it is $\\ln(-x)$. Both cases combine into $\\ln|x|$.
 `,
@@ -471,16 +471,16 @@ The exponential function is its own antiderivative:
 
 @academic[formula_callout:Exponential Antiderivative
 $$\\int e^x\\, dx = e^x + C$$
-/calculus/integrals/formulas#exponential_antiderivative]@
+/calculus/formulas#exponential_antiderivative]@
 
 For other bases:
 
 @academic[formula_callout:General Exponential Antiderivative
 $$\\int a^x\\, dx = \\frac{a^x}{\\ln a} + C \\quad a > 0, \\, a \\neq 1$$
-/calculus/integrals/formulas#general_exponential_antiderivative]@
+/calculus/formulas#general_exponential_antiderivative]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 The factor $1/\\ln a$ compensates for the chain rule in $(a^x)' = a^x \\ln a$.
 
@@ -499,30 +499,30 @@ Basic trigonometric integrals:
 
 @academic[formula_callout:Antiderivative of Sine
 $$\\int \\sin x\\, dx = -\\cos x + C$$
-/calculus/integrals/formulas#antiderivative_of_sine]@
+/calculus/formulas#antiderivative_of_sine]@
 
 @academic[formula_callout:Antiderivative of Cosine
 $$\\int \\cos x\\, dx = \\sin x + C$$
-/calculus/integrals/formulas#antiderivative_of_cosine]@
+/calculus/formulas#antiderivative_of_cosine]@
 
 @academic[formula_callout:Antiderivative of Sec Squared
 $$\\int \\sec^2 x\\, dx = \\tan x + C$$
-/calculus/integrals/formulas#antiderivative_of_sec_squared]@
+/calculus/formulas#antiderivative_of_sec_squared]@
 
 @academic[formula_callout:Antiderivative of Csc Squared
 $$\\int \\csc^2 x\\, dx = -\\cot x + C$$
-/calculus/integrals/formulas#antiderivative_of_csc_squared]@
+/calculus/formulas#antiderivative_of_csc_squared]@
 
 @academic[formula_callout:Antiderivative of Sec Tan
 $$\\int \\sec x \\tan x\\, dx = \\sec x + C$$
-/calculus/integrals/formulas#antiderivative_of_sec_tan]@
+/calculus/formulas#antiderivative_of_sec_tan]@
 
 @academic[formula_callout:Antiderivative of Csc Cot
 $$\\int \\csc x \\cot x\\, dx = -\\csc x + C$$
-/calculus/integrals/formulas#antiderivative_of_csc_cot]@
+/calculus/formulas#antiderivative_of_csc_cot]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 Each reverses a standard derivative. The negative signs in $\\sin x$ and $\\csc^2 x$ integrals reflect the negatives in $(\\cos x)' = -\\sin x$ and $(\\cot x)' = -\\csc^2 x$.
 `,
@@ -537,18 +537,18 @@ These integrals produce inverse trigonometric functions:
 
 @academic[formula_callout:Arctangent Form
 $$\\int \\frac{1}{1 + x^2}\\, dx = \\arctan x + C$$
-/calculus/integrals/formulas#arctangent_form]@
+/calculus/formulas#arctangent_form]@
 
 @academic[formula_callout:Arcsine Form
 $$\\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx = \\arcsin x + C$$
-/calculus/integrals/formulas#arcsine_form]@
+/calculus/formulas#arcsine_form]@
 
 @academic[formula_callout:Arcsecant Form
 $$\\int \\frac{1}{x\\sqrt{x^2 - 1}}\\, dx = \\operatorname{arcsec}|x| + C$$
-/calculus/integrals/formulas#arcsecant_form]@
+/calculus/formulas#arcsecant_form]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 More generally, with constant $a > 0$:
 
@@ -567,16 +567,16 @@ The logarithm itself requires integration by parts:
 
 @academic[formula_callout:Antiderivative of Natural Log
 $$\\int \\ln x\\, dx = x\\ln x - x + C$$
-/calculus/integrals/formulas#antiderivative_of_natural_log]@
+/calculus/formulas#antiderivative_of_natural_log]@
 
 A crucial pattern recognizes when integrands have the form $f'(x)/f(x)$:
 
 @academic[formula_callout:Logarithmic Derivative Pattern
 $$\\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$$
-/calculus/integrals/formulas#logarithmic_derivative_pattern]@
+/calculus/formulas#logarithmic_derivative_pattern]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 This pattern appears frequently in disguise.
 
@@ -597,22 +597,22 @@ Several standard integrals produce logarithms:
 
 @academic[formula_callout:Antiderivative of Tangent
 $$\\int \\tan x\\, dx = -\\ln|\\cos x| + C = \\ln|\\sec x| + C$$
-/calculus/integrals/formulas#antiderivative_of_tangent]@
+/calculus/formulas#antiderivative_of_tangent]@
 
 @academic[formula_callout:Antiderivative of Cotangent
 $$\\int \\cot x\\, dx = \\ln|\\sin x| + C$$
-/calculus/integrals/formulas#antiderivative_of_cotangent]@
+/calculus/formulas#antiderivative_of_cotangent]@
 
 @academic[formula_callout:Antiderivative of Secant
 $$\\int \\sec x\\, dx = \\ln|\\sec x + \\tan x| + C$$
-/calculus/integrals/formulas#antiderivative_of_secant]@
+/calculus/formulas#antiderivative_of_secant]@
 
 @academic[formula_callout:Antiderivative of Cosecant
 $$\\int \\csc x\\, dx = -\\ln|\\csc x + \\cot x| + C = \\ln|\\csc x - \\cot x| + C$$
-/calculus/integrals/formulas#antiderivative_of_cosecant]@
+/calculus/formulas#antiderivative_of_cosecant]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 The $\\sec x$ and $\\csc x$ integrals are less obvious—they require multiplying by clever forms of $1$ to create the $f'/f$ pattern.
 `,

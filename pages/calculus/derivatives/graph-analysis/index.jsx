@@ -493,7 +493,7 @@ The tangent line to $f$ at $x = a$ passes through $(a, f(a))$ with slope $f'(a)$
 
 @academic[formula_callout:Tangent Line Equation
 $$y - f(a) = f'(a)(x - a) \\qquad y = f(a) + f'(a)(x - a)$$
-/calculus/derivatives/formulas#tangent_line_equation]@
+/calculus/formulas#tangent_line_equation]@
 
 This line is the best linear approximation to $f$ near $x = a$. For values of $x$ close to $a$, the tangent line and the curve are nearly indistinguishable. This is the geometric foundation of [linear approximation](!/calculus/derivatives/differentials).
 
@@ -501,10 +501,10 @@ The normal line at the same point is perpendicular to the tangent. If $f'(a) \\n
 
 @academic[formula_callout:Normal Line Equation
 $$y - f(a) = -\\frac{1}{f'(a)}(x - a)$$
-/calculus/derivatives/formulas#normal_line_equation]@
+/calculus/formulas#normal_line_equation]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 `,
     before: ``,
     after: ``,
@@ -557,10 +557,10 @@ If $f'(x) > 0$ for all $x$ in an open interval $(a, b)$, then $f$ is strictly in
 
 @academic[formula_callout:Sign of First Derivative
 $$f'(x) > 0 \\implies f \\text{ increasing}, \\quad f'(x) < 0 \\implies f \\text{ decreasing}$$
-/calculus/derivatives/formulas#sign_of_first_derivative]@
+/calculus/formulas#sign_of_first_derivative]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The proof relies on the [Mean Value Theorem](!/calculus/derivatives/rules). For any two points $x_1 < x_2$ in $(a, b)$, there exists $c$ between them with $f(x_2) - f(x_1) = f'(c)(x_2 - x_1)$. If $f'(c) > 0$ and $x_2 - x_1 > 0$, then $f(x_2) - f(x_1) > 0$, confirming $f$ is increasing.
 
@@ -577,10 +577,10 @@ A critical point of $f$ is a value $x = c$ in the domain of $f$ where either $f'
 
 @academic[formula_callout:Critical Point Condition
 $$f'(c) = 0 \\quad \\text{or} \\quad f'(c) \\text{ undefined}$$
-/calculus/derivatives/formulas#critical_point_condition]@
+/calculus/formulas#critical_point_condition]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Critical points are the only candidates for local extrema. If $f$ has a local maximum or minimum at $c$, then $c$ must be a critical point. This is Fermat's theorem: a local extremum at an interior point requires the derivative to vanish or fail to exist.
 
@@ -602,10 +602,10 @@ If $f'$ changes from positive to negative at $c$—the function rises then falls
 @academic[formula_callout:First Derivative Test
 $$f'(x) \\text{ changes } + \\to - \\text{ at } c \\implies c \\text{ is a local max}$$
 $$f'(x) \\text{ changes } - \\to + \\text{ at } c \\implies c \\text{ is a local min}$$
-/calculus/derivatives/formulas#first_derivative_test]@
+/calculus/formulas#first_derivative_test]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The test works even when $f'(c)$ does not exist, as long as $f$ is continuous at $c$. It requires checking the sign of $f'$ in an interval immediately to the left and immediately to the right of $c$. No information about $f''$ is needed, making this test universally applicable among derivative-based classification methods.
 `,
@@ -623,10 +623,10 @@ If $f''(c) > 0$, the graph is concave up at $c$, and the horizontal tangent sits
 @academic[formula_callout:Second Derivative Test
 $$f'(c) = 0, \\; f''(c) > 0 \\implies c \\text{ is a local min}$$
 $$f'(c) = 0, \\; f''(c) < 0 \\implies c \\text{ is a local max}$$
-/calculus/derivatives/formulas#second_derivative_test]@
+/calculus/formulas#second_derivative_test]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 If $f''(c) = 0$, the test is inconclusive. The point might be an extremum or an inflection point—further analysis is required. In this case, fall back to the first derivative test or examine [higher-order derivatives](!/calculus/derivatives/higher-order).
 
@@ -647,10 +647,10 @@ If $f''(x) < 0$ on an interval, the derivative $f'$ is decreasing: the slope get
 
 @academic[formula_callout:Concavity from Second Derivative
 $$f''(x) > 0 \\implies f \\text{ concave up}, \\quad f''(x) < 0 \\implies f \\text{ concave down}$$
-/calculus/derivatives/formulas#concavity_from_second_derivative]@
+/calculus/formulas#concavity_from_second_derivative]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 A function can be increasing and concave down simultaneously—rising but decelerating, like a ball thrown upward before reaching its peak. Concavity and direction are independent properties controlled by $f''$ and $f'$ respectively. The four sign combinations of $f'$ and $f''$ produce four qualitatively distinct shapes, collected in the table below alongside the visual picture each one produces.
 `,
@@ -665,10 +665,10 @@ An inflection point is a point where the concavity of $f$ changes—from concave
 
 @academic[formula_callout:Inflection Point Condition
 $$f''(c) = 0 \\text{ or undefined}, \\text{ and } f''(x) \\text{ changes sign at } c$$
-/calculus/derivatives/formulas#inflection_point_condition]@
+/calculus/formulas#inflection_point_condition]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 At an inflection point, $f''$ must either equal zero or fail to exist. However, $f''(c) = 0$ alone does not guarantee an inflection point. The function $f(x) = x^4$ has $f''(0) = 0$, but the concavity does not change at $x = 0$—the graph is concave up on both sides. The sign of $f''$ must actually switch across the point.
 
@@ -702,10 +702,10 @@ On a closed interval $[a, b]$, the Extreme Value Theorem guarantees that a conti
 
 @academic[formula_callout:Extreme Value Theorem
 $$f \\text{ continuous on } [a, b] \\implies f \\text{ attains a max and min on } [a, b]$$
-/calculus/derivatives/formulas#extreme_value_theorem]@
+/calculus/formulas#extreme_value_theorem]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Applied optimization problems translate a real scenario into a function of one variable. The steps are: identify the quantity to optimize, express it as a function of a single variable, determine the feasible domain, find critical points within that domain, and compare values at critical points and endpoints.
 

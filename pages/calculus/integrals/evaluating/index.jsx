@@ -289,16 +289,16 @@ Symmetric integrands over symmetric intervals simplify dramatically.
 
 @academic[formula_callout:Even Function Symmetry
 $$\\int_{-a}^{a} f(x)\\, dx = 2 \\int_0^a f(x)\\, dx \\quad \\text{when } f(-x) = f(x)$$
-/calculus/integrals/formulas#even_function_symmetry]@
+/calculus/formulas#even_function_symmetry]@
 
 **Odd functions** satisfy $f(-x) = -f(x)$:
 
 @academic[formula_callout:Odd Function Symmetry
 $$\\int_{-a}^{a} f(x)\\, dx = 0 \\quad \\text{when } f(-x) = -f(x)$$
-/calculus/integrals/formulas#odd_function_symmetry]@
+/calculus/formulas#odd_function_symmetry]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 **Example:**
 

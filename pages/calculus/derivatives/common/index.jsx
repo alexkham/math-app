@@ -442,14 +442,14 @@ The two fundamental trigonometric derivatives are:
 
 @academic[formula_callout:Derivative of Sine
 $$\\frac{d}{dx}[\\sin x] = \\cos x$$
-/calculus/derivatives/formulas#derivative_of_sine]@
+/calculus/formulas#derivative_of_sine]@
 
 @academic[formula_callout:Derivative of Cosine
 $$\\frac{d}{dx}[\\cos x] = -\\sin x$$
-/calculus/derivatives/formulas#derivative_of_cosine]@
+/calculus/formulas#derivative_of_cosine]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The sine derivative is proved from the limit definition. Expanding $\\sin(x + h)$ using the angle addition formula gives $\\sin x \\cos h + \\cos x \\sin h$. The difference quotient becomes
 
@@ -472,22 +472,22 @@ The remaining four trigonometric derivatives follow from sine and cosine via the
 
 @academic[formula_callout:Derivative of Tangent
 $$\\frac{d}{dx}[\\tan x] = \\sec^2 x$$
-/calculus/derivatives/formulas#derivative_of_tangent]@
+/calculus/formulas#derivative_of_tangent]@
 
 @academic[formula_callout:Derivative of Cotangent
 $$\\frac{d}{dx}[\\cot x] = -\\csc^2 x$$
-/calculus/derivatives/formulas#derivative_of_cotangent]@
+/calculus/formulas#derivative_of_cotangent]@
 
 @academic[formula_callout:Derivative of Secant
 $$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x$$
-/calculus/derivatives/formulas#derivative_of_secant]@
+/calculus/formulas#derivative_of_secant]@
 
 @academic[formula_callout:Derivative of Cosecant
 $$\\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
-/calculus/derivatives/formulas#derivative_of_cosecant]@
+/calculus/formulas#derivative_of_cosecant]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 For $\\tan x = \\frac{\\sin x}{\\cos x}$, the quotient rule gives $\\frac{\\cos x \\cdot \\cos x - \\sin x \\cdot (-\\sin x)}{\\cos^2 x} = \\frac{\\cos^2 x + \\sin^2 x}{\\cos^2 x} = \\frac{1}{\\cos^2 x} = \\sec^2 x$.
 
@@ -506,7 +506,7 @@ The natural exponential function has the unique property of being its own deriva
 
 @academic[formula_callout:Derivative of Natural Exponential
 $$\\frac{d}{dx}[e^x] = e^x$$
-/calculus/derivatives/formulas#derivative_of_natural_exponential]@
+/calculus/formulas#derivative_of_natural_exponential]@
 
 No other function satisfies $f'(x) = f(x)$ except constant multiples $Ce^x$. This self-replicating property is what makes $e$ the natural base for exponential functions.
 
@@ -516,10 +516,10 @@ For a general base $a > 0$, $a \\neq 1$:
 
 @academic[formula_callout:Derivative of General Exponential
 $$\\frac{d}{dx}[a^x] = a^x \\ln a$$
-/calculus/derivatives/formulas#derivative_of_general_exponential]@
+/calculus/formulas#derivative_of_general_exponential]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 This follows from rewriting $a^x = e^{x \\ln a}$ and applying the chain rule. The factor $\\ln a$ is constant—it scales the derivative. When $a = e$, $\\ln a = 1$ and the factor disappears, confirming the special role of base $e$.
 `,
@@ -534,7 +534,7 @@ The natural logarithm has derivative:
 
 @academic[formula_callout:Derivative of Natural Logarithm
 $$\\frac{d}{dx}[\\ln x] = \\frac{1}{x}$$
-/calculus/derivatives/formulas#derivative_of_natural_logarithm]@
+/calculus/formulas#derivative_of_natural_logarithm]@
 
 This can be derived by [implicit differentiation](!/calculus/derivatives/techniques). If $y = \\ln x$, then $e^y = x$. Differentiating both sides: $e^y \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{e^y} = \\frac{1}{x}$.
 
@@ -544,10 +544,10 @@ For a general base $a > 0$, $a \\neq 1$:
 
 @academic[formula_callout:Derivative of General Logarithm
 $$\\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
-/calculus/derivatives/formulas#derivative_of_general_logarithm]@
+/calculus/formulas#derivative_of_general_logarithm]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 This follows from the change of base formula $\\log_a x = \\frac{\\ln x}{\\ln a}$ and the constant multiple rule. The natural logarithm gives the simplest derivative—another reason $e$ is the preferred base.
 

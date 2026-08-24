@@ -188,10 +188,10 @@ Substitution reverses the chain rule. If the integrand contains a function and i
 
 @academic[formula_callout:Substitution Rule
 $$\\int f(g(x))\\, g'(x)\\, dx = \\int f(u)\\, du \\quad \\text{with } u = g(x)$$
-/calculus/integrals/formulas#substitution_rule]@
+/calculus/formulas#substitution_rule]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 **Example:**
 
@@ -252,10 +252,10 @@ Integration by parts reverses the product rule:
 
 @academic[formula_callout:Integration by Parts
 $$\\int u\\, dv = uv - \\int v\\, du$$
-/calculus/integrals/formulas#integration_by_parts]@
+/calculus/formulas#integration_by_parts]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 **Method:** Identify factors $u$ and $dv$ in the integrand. Differentiate $u$ to get $du$; integrate $dv$ to get $v$. Apply the formula.
 

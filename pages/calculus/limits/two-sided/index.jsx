@@ -307,10 +307,10 @@ A two-sided limit exists if and only if both [one-sided limits](!/calculus/limit
 
 @academic[formula_callout:Two-Sided Limit Existence Theorem
 $$\\lim_{x \\to a} f(x) = L \\iff \\lim_{x \\to a^-} f(x) = L \\;\\text{ and }\\; \\lim_{x \\to a^+} f(x) = L$$
-/calculus/limits/formulas#two_sided_limit_existence_theorem]@
+/calculus/formulas#two_sided_limit_existence_theorem]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Three conditions must hold. First, the left-hand limit $\\lim_{x \\to a^-} f(x)$ must exist. Second, the right-hand limit $\\lim_{x \\to a^+} f(x)$ must exist. Third, these two values must be identical.
 

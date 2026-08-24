@@ -480,10 +480,10 @@ Memorizing them provides immediate payoff:
     content: `
 @academic[formula_callout:Sine Limit at Zero
 $$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$$
-/calculus/limits/formulas#sine_limit_at_zero]@
+/calculus/formulas#sine_limit_at_zero]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 This limit requires $x$ measured in radians. Direct substitution gives $0/0$, revealing nothing.
 
@@ -514,18 +514,18 @@ Several limits follow from the fundamental trigonometric limit.
 
 @academic[formula_callout:Cosine Limit at Zero
 $$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 0$$
-/calculus/limits/formulas#cosine_limit_at_zero]@
+/calculus/formulas#cosine_limit_at_zero]@
 
 @academic[formula_callout:Cosine Quadratic Limit at Zero
 $$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}$$
-/calculus/limits/formulas#cosine_quadratic_limit_at_zero]@
+/calculus/formulas#cosine_quadratic_limit_at_zero]@
 
 @academic[formula_callout:Tangent Limit at Zero
 $$\\lim_{x \\to 0} \\frac{\\tan x}{x} = 1$$
-/calculus/limits/formulas#tangent_limit_at_zero]@
+/calculus/formulas#tangent_limit_at_zero]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 $$\\lim_{x \\to 0} \\frac{x}{\\sin x} = 1$$
 
@@ -563,10 +563,10 @@ $$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 1 \\cdot 0 = 0$$
     content: `
 @academic[formula_callout:Exponential Limit at Zero
 $$\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$$
-/calculus/limits/formulas#exponential_limit_at_zero]@
+/calculus/formulas#exponential_limit_at_zero]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Direct substitution gives $0/0$. This limit defines the derivative of $e^x$ at $x = 0$:
 
@@ -595,10 +595,10 @@ For the natural logarithm:
 
 @academic[formula_callout:Logarithm Taylor Limit
 $$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1$$
-/calculus/limits/formulas#logarithm_taylor_limit]@
+/calculus/formulas#logarithm_taylor_limit]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 This can be seen by substituting $u = \\ln(1 + x)$, so $e^u = 1 + x$ and $x = e^u - 1$. As $x \\to 0$, $u \\to 0$:
 
@@ -615,10 +615,10 @@ The number $e$ emerges from limits:
 
 @academic[formula_callout:Definition of e as a Limit
 $$\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$$
-/calculus/limits/formulas#definition_of_e_as_a_limit]@
+/calculus/formulas#definition_of_e_as_a_limit]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Equivalently, using discrete notation:
 
@@ -641,10 +641,10 @@ Logarithms grow slowly—slower than any positive power of $x$.
 
 @academic[formula_callout:x ln x Limit at Zero
 $$\\lim_{x \\to 0^+} x \\ln x = 0$$
-/calculus/limits/formulas#x_ln_x_limit_at_zero]@
+/calculus/formulas#x_ln_x_limit_at_zero]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 This is a $0 \\cdot (-\\infty)$ form. As $x \\to 0^+$, $x$ vanishes while $\\ln x \\to -\\infty$. The factor $x$ wins: the product approaches $0$.
 
@@ -673,14 +673,14 @@ Specifically:
 
 @academic[formula_callout:Polynomial Beats Logarithm
 $$\\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0, \\quad n > 0$$
-/calculus/limits/formulas#polynomial_beats_logarithm]@
+/calculus/formulas#polynomial_beats_logarithm]@
 
 @academic[formula_callout:Exponential Beats Polynomial
 $$\\lim_{x \\to \\infty} \\frac{x^n}{e^x} = 0$$
-/calculus/limits/formulas#exponential_beats_polynomial]@
+/calculus/formulas#exponential_beats_polynomial]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 $$\\lim_{x \\to \\infty} \\frac{x^n}{a^x} = 0 \\quad \\text{for any } a > 1 \\text{ and any } n$$
 

@@ -217,10 +217,10 @@ $$\\int_{-\\infty}^{\\infty} f(x)\\, dx = \\int_{-\\infty}^c f(x)\\, dx + \\int_
 
 @academic[formula_callout:Improper Integral (Infinite Limits)
 $$\\int_a^{\\infty} f(x)\\, dx = \\lim_{b \\to \\infty} \\int_a^b f(x)\\, dx$$
-/calculus/integrals/formulas#improper_integral_infinite_limits]@
+/calculus/formulas#improper_integral_infinite_limits]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 Both integrals must converge independently. The choice of $c$ is arbitrary—any finite value works.
 `,
@@ -285,10 +285,10 @@ $$\\int_a^b f(x)\\, dx = \\lim_{t \\to c^-} \\int_a^t f(x)\\, dx + \\lim_{s \\to
 
 @academic[formula_callout:Improper Integral (Discontinuous Integrand)
 $$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx \\quad \\text{when } f \\text{ has an asymptote at } b$$
-/calculus/integrals/formulas#improper_integral_discontinuous_integrand]@
+/calculus/formulas#improper_integral_discontinuous_integrand]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 Both limits must exist independently.
 `,
@@ -330,10 +330,10 @@ $$\\int_0^1 \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p < 1
 
 @academic[formula_callout:p-Test for Improper Integrals
 $$\\int_1^{\\infty} \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p > 1 \\\\ \\text{diverges} & p \\leq 1 \\end{cases}$$
-/calculus/integrals/formulas#p_test_for_improper_integrals]@
+/calculus/formulas#p_test_for_improper_integrals]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 The boundary case $p = 1$ always diverges—$\\int 1/x\\, dx = \\ln|x|$, which is unbounded both as $x \\to \\infty$ and as $x \\to 0^+$.
 `,

@@ -349,10 +349,10 @@ Integrals distribute over addition and subtraction:
 
 @academic[formula_callout:Sum and Difference Rule (Integrals)
 $$\\int [f(x) \\pm g(x)]\\, dx = \\int f(x)\\, dx \\pm \\int g(x)\\, dx$$
-/calculus/integrals/formulas#sum_and_difference_rule_integrals]@
+/calculus/formulas#sum_and_difference_rule_integrals]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 These rules apply to both definite and indefinite integrals. They allow complex integrands to be broken into simpler pieces, each handled separately.
 
@@ -371,10 +371,10 @@ Constants factor out of integrals:
 
 @academic[formula_callout:Constant Multiple Rule (Integrals)
 $$\\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$$
-/calculus/integrals/formulas#constant_multiple_rule_integrals]@
+/calculus/formulas#constant_multiple_rule_integrals]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 This holds for any constant $c$. The rule simplifies computation by separating numerical coefficients from the integration process.
 
@@ -397,10 +397,10 @@ For [definite integrals](!/calculus/integrals/definite), integration over adjace
 
 @academic[formula_callout:Additivity Over Intervals
 $$\\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$$
-/calculus/integrals/formulas#additivity_over_intervals]@
+/calculus/formulas#additivity_over_intervals]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 This property allows splitting an integral at any intermediate point. It proves essential for piecewise functions, where different formulas apply on different subintervals.
 
@@ -417,7 +417,7 @@ Swapping the limits of a definite integral negates the result:
 
 @academic[formula_callout:Reversing Limits of Integration
 $$\\int_a^b f(x)\\, dx = -\\int_b^a f(x)\\, dx$$
-/calculus/integrals/formulas#reversing_limits_of_integration]@
+/calculus/formulas#reversing_limits_of_integration]@
 
 This follows from the Riemann sum definition. Integrating from $a$ to $b$ accumulates in one direction; integrating from $b$ to $a$ accumulates in the reverse direction.
 
@@ -425,10 +425,10 @@ A useful consequence: if $a = b$, the integral vanishes:
 
 @academic[formula_callout:Zero-Width Interval
 $$\\int_a^a f(x)\\, dx = 0$$
-/calculus/integrals/formulas#zero_width_interval]@
+/calculus/formulas#zero_width_interval]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 No interval means no accumulation.
 `,
@@ -449,10 +449,10 @@ $$F'(x) = f(x)$$
 
 @academic[formula_callout:Fundamental Theorem of Calculus, Part 1
 $$\\frac{d}{dx}\\left[\\int_a^x f(t)\\, dt\\right] = f(x) \\quad \\text{when } f \\text{ is continuous}$$
-/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_1]@
+/calculus/formulas#fundamental_theorem_of_calculus_part_1]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 Differentiation undoes integration. The rate of change of accumulated area equals the integrand's value at the boundary.
 
@@ -469,10 +469,10 @@ If $F$ is any antiderivative of $f$ (meaning $F'(x) = f(x)$), then:
 
 @academic[formula_callout:Fundamental Theorem of Calculus, Part 2
 $$\\int_a^b f(x)\\, dx = F(b) - F(a) \\quad \\text{where } F'(x) = f(x)$$
-/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_2]@
+/calculus/formulas#fundamental_theorem_of_calculus_part_2]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 This is the computational engine of integral calculus. Rather than computing limits of Riemann sums, find an antiderivative and evaluate at the endpoints.
 
@@ -518,16 +518,16 @@ $$\\int_a^b f(x)\\, dx \\geq 0$$
 
 @academic[formula_callout:Comparison Property (Integrals)
 $$f(x) \\leq g(x) \\text{ on } [a, b] \\implies \\int_a^b f(x)\\, dx \\leq \\int_a^b g(x)\\, dx$$
-/calculus/integrals/formulas#comparison_property_integrals]@
+/calculus/formulas#comparison_property_integrals]@
 
 **Bounding:** If $m \\leq f(x) \\leq M$ on $[a, b]$, then:
 
 @academic[formula_callout:Bounding Property (Integrals)
 $$m \\leq f(x) \\leq M \\text{ on } [a, b] \\implies m(b - a) \\leq \\int_a^b f(x)\\, dx \\leq M(b - a)$$
-/calculus/integrals/formulas#bounding_property_integrals]@
+/calculus/formulas#bounding_property_integrals]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 These properties enable estimation when exact computation is difficult or impossible.
 `,

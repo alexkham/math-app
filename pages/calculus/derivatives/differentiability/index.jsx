@@ -384,10 +384,10 @@ If $f$ is differentiable at $a$, then $f$ is continuous at $a$. The proof is dir
 
 @academic[formula_callout:Differentiability Implies Continuity
 $$f \\text{ differentiable at } a \\implies f \\text{ continuous at } a$$
-/calculus/derivatives/formulas#differentiability_implies_continuity]@
+/calculus/formulas#differentiability_implies_continuity]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Rewrite $f(x) - f(a)$ as
 
@@ -468,10 +468,10 @@ $$f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
 
 @academic[formula_callout:One-Sided Derivative
 $$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\qquad f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
-/calculus/derivatives/formulas#one_sided_derivative]@
+/calculus/formulas#one_sided_derivative]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The two-sided derivative $f'(a)$ exists if and only if both one-sided derivatives exist, are finite, and are equal: $f'_-(a) = f'_+(a)$.
 

@@ -346,10 +346,10 @@ Fix a function $f$ and consider the limit
 
 @academic[formula_callout:Derivative Limit Definition
 $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{f(t) - f(x)}{t - x}$$
-/calculus/derivatives/formulas#derivative_limit_definition]@
+/calculus/formulas#derivative_limit_definition]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 evaluated not at a single point $a$ but at a variable $x$. Wherever this limit produces a finite value, $f'(x)$ is defined. The result is a function $f'$ whose input is $x$ and whose output is the slope of $f$ at $x$.
 

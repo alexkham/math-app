@@ -318,10 +318,10 @@ If $F(x)$ is one antiderivative of $f(x)$, then every antiderivative has the for
 
 @academic[formula_callout:Antiderivative Family
 $$\\int f(x)\\, dx = F(x) + C \\quad \\text{where } F'(x) = f(x)$$
-/calculus/integrals/formulas#antiderivative_family]@
+/calculus/formulas#antiderivative_family]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 where $C$ is an arbitrary constant. This follows from a basic fact: if two functions have the same derivative on an interval, they differ by a constant.
 

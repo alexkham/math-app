@@ -401,10 +401,10 @@
 
 // @academic[formula_callout:Differential
 // $$dy = f'(x)\\, dx$$
-// /calculus/derivatives/formulas#differential]@
+// /calculus/formulas#differential]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // The differential $dy$ depends on two things: the point $x$ (which determines the slope $f'(x)$) and the increment $dx$ (which determines the scale). For fixed $x$, $dy$ is a linear function of $dx$—doubling $dx$ doubles $dy$.
 
@@ -442,10 +442,10 @@
 
 // @academic[formula_callout:Linear Approximation
 // $$f(x) \\approx f(a) + f'(a)(x - a) \\qquad \\Delta y \\approx f'(a)\\, \\Delta x$$
-// /calculus/derivatives/formulas#linear_approximation]@
+// /calculus/formulas#linear_approximation]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // This is the linearization of $f$ at $x$. Given a known value $f(x)$ and the slope $f'(x)$, the tangent line estimates $f$ at nearby points.
 
@@ -474,10 +474,10 @@
 
 // @academic[formula_callout:Logarithmic Derivative
 // $$\\frac{d}{dx}[\\ln f(x)] = \\frac{f'(x)}{f(x)}$$
-// /calculus/derivatives/formulas#logarithmic_derivative]@
+// /calculus/formulas#logarithmic_derivative]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in $x^n$ is $n$ times the relative error in $x$. Squaring a measurement doubles its relative error. Cubing triples it. This scaling rule is a standard tool in experimental science for propagating uncertainties through power-law relationships.
 // `,
@@ -492,10 +492,10 @@
 
 // @academic[formula_callout:Total Differential
 // $$dz = \\frac{\\partial z}{\\partial x}\\, dx + \\frac{\\partial z}{\\partial y}\\, dy$$
-// /calculus/derivatives/formulas#total_differential]@
+// /calculus/formulas#total_differential]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // Each partial derivative weights the contribution of the corresponding variable's error. The total differential estimates how $z$ responds to simultaneous small changes in all inputs.
 
@@ -1306,10 +1306,10 @@ Given $y = f(x)$ where $f$ is [differentiable](!/calculus/derivatives/differenti
 
 @academic[formula_callout:Differential
 $$dy = f'(x)\\, dx$$
-/calculus/derivatives/formulas#differential]@
+/calculus/formulas#differential]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The differential $dy$ depends on two things: the point $x$ (which determines the slope $f'(x)$) and the increment $dx$ (which determines the scale). For fixed $x$, $dy$ is a linear function of $dx$—doubling $dx$ doubles $dy$.
 
@@ -1398,10 +1398,10 @@ The differential formula rearranges into an approximation for function values:
 
 @academic[formula_callout:Linear Approximation
 $$f(x) \\approx f(a) + f'(a)(x - a) \\qquad \\Delta y \\approx f'(a)\\, \\Delta x$$
-/calculus/derivatives/formulas#linear_approximation]@
+/calculus/formulas#linear_approximation]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 This is the linearization of $f$ at $x$. Given a known value $f(x)$ and the slope $f'(x)$, the tangent line estimates $f$ at nearby points.
 
@@ -1430,10 +1430,10 @@ The ratio $\\frac{f'(x)}{f(x)} = \\frac{d}{dx}[\\ln|f(x)|]$ is the logarithmic d
 
 @academic[formula_callout:Logarithmic Derivative
 $$\\frac{d}{dx}[\\ln f(x)] = \\frac{f'(x)}{f(x)}$$
-/calculus/derivatives/formulas#logarithmic_derivative]@
+/calculus/formulas#logarithmic_derivative]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in $x^n$ is $n$ times the relative error in $x$. Squaring a measurement doubles its relative error. Cubing triples it. This scaling rule is a standard tool in experimental science for propagating uncertainties through power-law relationships.
 `,
@@ -1448,10 +1448,10 @@ When a formula involves several measured quantities, each contributes to the tot
 
 @academic[formula_callout:Total Differential
 $$dz = \\frac{\\partial z}{\\partial x}\\, dx + \\frac{\\partial z}{\\partial y}\\, dy$$
-/calculus/derivatives/formulas#total_differential]@
+/calculus/formulas#total_differential]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Each partial derivative weights the contribution of the corresponding variable's error. The total differential estimates how $z$ responds to simultaneous small changes in all inputs.
 

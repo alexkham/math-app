@@ -424,10 +424,10 @@ The procedure: given $y = f(x)$, take $\\ln$ of both sides to get $\\ln y = \\ln
 
 @academic[formula_callout:Logarithmic Differentiation
 $$y = f(x) \\implies \\ln y = \\ln f(x) \\implies \\frac{y'}{y} = \\frac{d}{dx}[\\ln f(x)] \\implies y' = y \\cdot \\frac{d}{dx}[\\ln f(x)]$$
-/calculus/derivatives/formulas#logarithmic_differentiation]@
+/calculus/formulas#logarithmic_differentiation]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 For $y = x^x$: taking $\\ln$ gives $\\ln y = x \\ln x$. Differentiating: $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$. Solving: $\\frac{dy}{dx} = x^x(\\ln x + 1)$. No standard rule handles $x^x$ directly—the base and exponent both vary. Logarithmic differentiation is the natural approach.
 
@@ -444,10 +444,10 @@ If $f$ is a one-to-one differentiable function with inverse $f^{-1}$, the deriva
 
 @academic[formula_callout:Inverse Function Derivative
 $$(f^{-1})'(b) = \\frac{1}{f'(a)} \\quad \\text{where } b = f(a)$$
-/calculus/derivatives/formulas#inverse_function_derivative]@
+/calculus/formulas#inverse_function_derivative]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 provided $f'(f^{-1}(x)) \\neq 0$. The derivative of the inverse is the reciprocal of the derivative of the original, evaluated at the corresponding point.
 
@@ -483,7 +483,7 @@ A curve defined parametrically by $x = x(t)$ and $y = y(t)$ does not express $y$
 
 @academic[formula_callout:Parametric First Derivative
 $$\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt} \\quad \\text{when } x = x(t), \\, y = y(t)$$
-/calculus/derivatives/formulas#parametric_first_derivative]@
+/calculus/formulas#parametric_first_derivative]@
 
 provided $\\frac{dx}{dt} \\neq 0$. Each coordinate is differentiated with respect to the parameter $t$, and the ratio gives the slope.
 
@@ -493,10 +493,10 @@ The second derivative of a parametric curve is not $\\frac{d^2y/dt^2}{d^2x/dt^2}
 
 @academic[formula_callout:Parametric Second Derivative
 $$\\frac{d^2 y}{dx^2} = \\frac{d}{dx}\\!\\left[\\frac{dy}{dx}\\right] = \\frac{d/dt\\,[dy/dx]}{dx/dt}$$
-/calculus/derivatives/formulas#parametric_second_derivative]@
+/calculus/formulas#parametric_second_derivative]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Differentiate $dy/dx$ (which is a function of $t$) with respect to $t$, then divide by $dx/dt$ once more. This error is common and produces incorrect concavity analysis when made.
 `,

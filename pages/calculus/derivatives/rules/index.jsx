@@ -455,10 +455,10 @@ If $f(x) = c$ for some constant $c$, then
 
 @academic[formula_callout:Constant Rule (Derivatives)
 $$\\frac{d}{dx}[c] = 0$$
-/calculus/derivatives/formulas#constant_rule_derivatives]@
+/calculus/formulas#constant_rule_derivatives]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 A constant function has a horizontal graph—its slope is zero everywhere. From the limit definition: the difference quotient $\\frac{c - c}{h} = 0$ for all $h$, so the limit is $0$.
 
@@ -475,10 +475,10 @@ For any real exponent $n$:
 
 @academic[formula_callout:Power Rule (Derivatives)
 $$\\frac{d}{dx}[x^n] = n x^{n-1}$$
-/calculus/derivatives/formulas#power_rule_derivatives]@
+/calculus/formulas#power_rule_derivatives]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The rule covers positive integers ($x^3 \\to 3x^2$), negative integers ($x^{-2} \\to -2x^{-3}$), fractions ($x^{1/2} \\to \\frac{1}{2}x^{-1/2}$), and irrational exponents ($x^\\pi \\to \\pi x^{\\pi - 1}$). For positive integer $n$, the proof uses the binomial expansion of $(x+h)^n$ in the limit definition. Extension to rational and real exponents requires [logarithmic differentiation](!/calculus/derivatives/techniques) or the generalized exponential $x^n = e^{n \\ln x}$.
 
@@ -495,10 +495,10 @@ If $c$ is a constant and $f$ is differentiable, then
 
 @academic[formula_callout:Constant Multiple Rule (Derivatives)
 $$\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$$
-/calculus/derivatives/formulas#constant_multiple_rule_derivatives]@
+/calculus/formulas#constant_multiple_rule_derivatives]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Constants factor out of derivatives. The proof is immediate from the limit definition: the constant $c$ factors out of the difference quotient and passes through the limit.
 
@@ -515,10 +515,10 @@ If $f$ and $g$ are both differentiable, then
 
 @academic[formula_callout:Sum and Difference Rule (Derivatives)
 $$\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$$
-/calculus/derivatives/formulas#sum_and_difference_rule_derivatives]@
+/calculus/formulas#sum_and_difference_rule_derivatives]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The derivative of a sum is the sum of the derivatives. This follows from the limit definition by splitting the difference quotient into two parts and applying the sum rule for [limits](!/calculus/limits/rules).
 
@@ -535,10 +535,10 @@ If $f$ and $g$ are both differentiable, then
 
 @academic[formula_callout:Product Rule (Derivatives)
 $$\\frac{d}{dx}[f(x) \\cdot g(x)] = f'(x) \\cdot g(x) + f(x) \\cdot g'(x)$$
-/calculus/derivatives/formulas#product_rule_derivatives]@
+/calculus/formulas#product_rule_derivatives]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The derivative of a product is not the product of the derivatives. Each factor takes a turn being differentiated while the other remains unchanged, and the two contributions are added.
 
@@ -557,10 +557,10 @@ If $f$ and $g$ are differentiable and $g(x) \\neq 0$, then
 
 @academic[formula_callout:Quotient Rule (Derivatives)
 $$\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{[g(x)]^2}$$
-/calculus/derivatives/formulas#quotient_rule_derivatives]@
+/calculus/formulas#quotient_rule_derivatives]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The numerator subtracts where the product rule adds, and the entire expression is divided by the square of the denominator. The order matters: $f'g - fg'$, not $fg' - f'g$.
 
@@ -583,10 +583,10 @@ $$\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$
 
 @academic[formula_callout:Chain Rule
 $$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x) \\qquad \\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$
-/calculus/derivatives/formulas#chain_rule]@
+/calculus/formulas#chain_rule]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The notation suggests fraction cancellation, and while $dy/dx$ is not literally a fraction, the chain rule makes Leibniz notation behave as though it were.
 
@@ -605,10 +605,10 @@ If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exis
 
 @academic[formula_callout:Mean Value Theorem
 $$f'(c) = \\frac{f(b) - f(a)}{b - a} \\qquad \\text{for some } c \\in (a, b)$$
-/calculus/derivatives/formulas#mean_value_theorem]@
+/calculus/formulas#mean_value_theorem]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The instantaneous rate of change at $c$ equals the average rate of change over the entire interval. Geometrically, there is a point where the tangent line is parallel to the secant line connecting $(a, f(a))$ and $(b, f(b))$.
 
@@ -629,10 +629,10 @@ If $f$ is continuous on $[a, b]$, differentiable on $(a, b)$, and $f(a) = f(b)$,
 
 @academic[formula_callout:Rolle&apos;s Theorem
 $$\\text{If } f(a) = f(b), \\text{ then } f'(c) = 0 \\text{ for some } c \\in (a, b)$$
-/calculus/derivatives/formulas#rolles_theorem]@
+/calculus/formulas#rolles_theorem]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 A function that starts and ends at the same value must have a horizontal tangent somewhere between. If the function rises above its starting value, it must turn around—creating a maximum with zero slope. If it drops below, it must turn upward—creating a minimum. If it stays constant, $f'(x) = 0$ everywhere on the interval.
 
@@ -649,10 +649,10 @@ If $\\lim_{x \\to a} \\frac{f(x)}{g(x)}$ produces the indeterminate form $\\frac
 
 @academic[formula_callout:L&apos;Hôpital&apos;s Rule
 $$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)} \\quad \\text{for indeterminate forms } \\tfrac{0}{0} \\text{ or } \\tfrac{\\infty}{\\infty}$$
-/calculus/derivatives/formulas#lhopitals_rule]@
+/calculus/formulas#lhopitals_rule]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The rule replaces a difficult limit of functions with a (potentially simpler) limit of their derivatives. It applies equally when $a$ is finite or $a = \\pm\\infty$.
 

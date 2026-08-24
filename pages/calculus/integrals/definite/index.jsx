@@ -373,10 +373,10 @@ To find total unsigned area, integrate the absolute value:
 
 @academic[formula_callout:Total Unsigned Area
 $$\\text{Total area} = \\int_a^b |f(x)|\\, dx$$
-/calculus/integrals/formulas#total_unsigned_area]@
+/calculus/formulas#total_unsigned_area]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 `,
     before: ``,
     after: ``,
@@ -450,10 +450,10 @@ The average value of $f$ on the interval $[a, b]$ is:
 
 @academic[formula_callout:Average Value of a Function
 $$f_{\\text{avg}} = \\frac{1}{b - a} \\int_a^b f(x)\\, dx$$
-/calculus/integrals/formulas#average_value_of_a_function]@
+/calculus/formulas#average_value_of_a_function]@
 
 @academic[formulas_link:Browse all integral formulas
-/calculus/integrals/formulas]@
+/calculus/formulas]@
 
 This generalizes the familiar average of discrete values. The integral computes the total, and division by the interval length yields the mean.
 

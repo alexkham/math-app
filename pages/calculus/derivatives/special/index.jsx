@@ -438,14 +438,14 @@ The derivatives of $\\arcsin x$ and $\\arccos x$ are:
 
 @academic[formula_callout:Derivative of Arcsine
 $$\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1 - x^2}}$$
-/calculus/derivatives/formulas#derivative_of_arcsine]@
+/calculus/formulas#derivative_of_arcsine]@
 
 @academic[formula_callout:Derivative of Arccosine
 $$\\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1 - x^2}}$$
-/calculus/derivatives/formulas#derivative_of_arccosine]@
+/calculus/formulas#derivative_of_arccosine]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The two derivatives differ only by sign. This follows from the identity $\\arcsin x + \\arccos x = \\frac{\\pi}{2}$: differentiating both sides gives $(\\arcsin x)' + (\\arccos x)' = 0$.
 
@@ -462,14 +462,14 @@ The domain restriction $|x| < 1$ reflects the range of $\\sin y$ on $[-\\pi/2, \
     content: `
 @academic[formula_callout:Derivative of Arctangent
 $$\\frac{d}{dx}[\\arctan x] = \\frac{1}{1 + x^2}$$
-/calculus/derivatives/formulas#derivative_of_arctangent]@
+/calculus/formulas#derivative_of_arctangent]@
 
 @academic[formula_callout:Derivative of Arccotangent
 $$\\frac{d}{dx}[\\operatorname{arccot} x] = -\\frac{1}{1 + x^2}$$
-/calculus/derivatives/formulas#derivative_of_arccotangent]@
+/calculus/formulas#derivative_of_arccotangent]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Again the derivatives are negatives of each other, following from $\\arctan x + \\text{arccot}\\, x = \\frac{\\pi}{2}$.
 
@@ -488,14 +488,14 @@ This derivative appears prominently in [integration](!/calculus/integrals/specia
     content: `
 @academic[formula_callout:Derivative of Arcsecant
 $$\\frac{d}{dx}[\\operatorname{arcsec} x] = \\frac{1}{|x| \\sqrt{x^2 - 1}}$$
-/calculus/derivatives/formulas#derivative_of_arcsecant]@
+/calculus/formulas#derivative_of_arcsecant]@
 
 @academic[formula_callout:Derivative of Arccosecant
 $$\\frac{d}{dx}[\\operatorname{arccsc} x] = -\\frac{1}{|x| \\sqrt{x^2 - 1}}$$
-/calculus/derivatives/formulas#derivative_of_arccosecant]@
+/calculus/formulas#derivative_of_arccosecant]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The derivation for arcsecant: let $y = \\text{arcsec}\\, x$, so $\\sec y = x$. Differentiating: $\\sec y \\tan y \\cdot \\frac{dy}{dx} = 1$. Since $\\sec y = x$ and $\\tan y = \\pm\\sqrt{\\sec^2 y - 1} = \\pm\\sqrt{x^2 - 1}$, the sign depends on the quadrant. The absolute value $|x|$ in the formula resolves this: $\\sec y \\tan y = |x|\\sqrt{x^2 - 1}$ across the full domain.
 
@@ -537,30 +537,30 @@ Their derivatives parallel the trigonometric pattern:
 
 @academic[formula_callout:Derivative of Hyperbolic Sine
 $$\\frac{d}{dx}[\\sinh x] = \\cosh x$$
-/calculus/derivatives/formulas#derivative_of_hyperbolic_sine]@
+/calculus/formulas#derivative_of_hyperbolic_sine]@
 
 @academic[formula_callout:Derivative of Hyperbolic Cosine
 $$\\frac{d}{dx}[\\cosh x] = \\sinh x$$
-/calculus/derivatives/formulas#derivative_of_hyperbolic_cosine]@
+/calculus/formulas#derivative_of_hyperbolic_cosine]@
 
 @academic[formula_callout:Derivative of Hyperbolic Tangent
 $$\\frac{d}{dx}[\\tanh x] = \\operatorname{sech}^2 x$$
-/calculus/derivatives/formulas#derivative_of_hyperbolic_tangent]@
+/calculus/formulas#derivative_of_hyperbolic_tangent]@
 
 @academic[formula_callout:Derivative of Hyperbolic Cotangent
 $$\\frac{d}{dx}[\\coth x] = -\\operatorname{csch}^2 x$$
-/calculus/derivatives/formulas#derivative_of_hyperbolic_cotangent]@
+/calculus/formulas#derivative_of_hyperbolic_cotangent]@
 
 @academic[formula_callout:Derivative of Hyperbolic Secant
 $$\\frac{d}{dx}[\\operatorname{sech} x] = -\\operatorname{sech} x \\tanh x$$
-/calculus/derivatives/formulas#derivative_of_hyperbolic_secant]@
+/calculus/formulas#derivative_of_hyperbolic_secant]@
 
 @academic[formula_callout:Derivative of Hyperbolic Cosecant
 $$\\frac{d}{dx}[\\operatorname{csch} x] = -\\operatorname{csch} x \\coth x$$
-/calculus/derivatives/formulas#derivative_of_hyperbolic_cosecant]@
+/calculus/formulas#derivative_of_hyperbolic_cosecant]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The critical difference from trigonometric derivatives: $(\\cosh x)' = \\sinh x$ carries no negative sign, whereas $(\\cos x)' = -\\sin x$ does. This single sign difference propagates through all six formulas.
 
@@ -577,18 +577,18 @@ The inverse hyperbolic functions have derivatives that resemble the inverse trig
 
 @academic[formula_callout:Derivative of Inverse Hyperbolic Sine
 $$\\frac{d}{dx}[\\operatorname{arcsinh} x] = \\frac{1}{\\sqrt{x^2 + 1}}$$
-/calculus/derivatives/formulas#derivative_of_inverse_hyperbolic_sine]@
+/calculus/formulas#derivative_of_inverse_hyperbolic_sine]@
 
 @academic[formula_callout:Derivative of Inverse Hyperbolic Cosine
 $$\\frac{d}{dx}[\\operatorname{arccosh} x] = \\frac{1}{\\sqrt{x^2 - 1}}$$
-/calculus/derivatives/formulas#derivative_of_inverse_hyperbolic_cosine]@
+/calculus/formulas#derivative_of_inverse_hyperbolic_cosine]@
 
 @academic[formula_callout:Derivative of Inverse Hyperbolic Tangent
 $$\\frac{d}{dx}[\\operatorname{arctanh} x] = \\frac{1}{1 - x^2}$$
-/calculus/derivatives/formulas#derivative_of_inverse_hyperbolic_tangent]@
+/calculus/formulas#derivative_of_inverse_hyperbolic_tangent]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Compare with inverse trigonometric derivatives: $\\sqrt{1 - x^2}$ becomes $\\sqrt{x^2 + 1}$ or $\\sqrt{x^2 - 1}$, and $1 + x^2$ becomes $1 - x^2$. The signs inside the expressions flip.
 

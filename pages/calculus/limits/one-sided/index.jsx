@@ -517,10 +517,10 @@
 
 // // @academic[formula_callout:One-Sided Continuity
 // // $$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a); \\quad f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$
-// // /calculus/limits/formulas#one_sided_continuity]@
+// // /calculus/formulas#one_sided_continuity]@
 
 // // @academic[formulas_link:Browse all limit formulas
-// // /calculus/limits/formulas]@
+// // /calculus/formulas]@
 
 // // Full continuity at $a$ requires both. On a closed interval $[a, b]$, continuity means: continuous on the open interval $(a, b)$, continuous from the right at $a$, and continuous from the left at $b$.
 // // `,
@@ -1496,10 +1496,10 @@
 
 // @academic[formula_callout:One-Sided Continuity
 // $$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a); \\quad f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$
-// /calculus/limits/formulas#one_sided_continuity]@
+// /calculus/formulas#one_sided_continuity]@
 
 // @academic[formulas_link:Browse all limit formulas
-// /calculus/limits/formulas]@
+// /calculus/formulas]@
 
 // Full continuity at $a$ requires both. On a closed interval $[a, b]$, continuity means: continuous on the open interval $(a, b)$, continuous from the right at $a$, and continuous from the left at $b$.
 // `,
@@ -2494,10 +2494,10 @@ $$\\lim_{x \\to a^+} f(x) = f(a)$$
 
 @academic[formula_callout:One-Sided Continuity
 $$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a); \\quad f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$
-/calculus/limits/formulas#one_sided_continuity]@
+/calculus/formulas#one_sided_continuity]@
 
 @academic[formulas_link:Browse all limit formulas
-/calculus/limits/formulas]@
+/calculus/formulas]@
 
 Full continuity at $a$ requires both. On a closed interval $[a, b]$, continuity means: continuous on the open interval $(a, b)$, continuous from the right at $a$, and continuous from the left at $b$.
 `,

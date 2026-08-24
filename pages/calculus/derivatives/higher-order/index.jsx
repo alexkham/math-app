@@ -576,7 +576,7 @@
 
 // @academic[formula_callout:nth Derivative of Natural Exponential
 // $$\\frac{d^n}{dx^n}[e^x] = e^x$$
-// /calculus/derivatives/formulas#nth_derivative_of_natural_exponential]@
+// /calculus/formulas#nth_derivative_of_natural_exponential]@
 
 // Every derivative of $e^x$ is $e^x$. No other elementary function has this property (aside from the trivial $f(x) = 0$).
 
@@ -584,10 +584,10 @@
 
 // @academic[formula_callout:nth Derivative of Scaled Exponential
 // $$\\frac{d^n}{dx^n}[e^{ax}] = a^n e^{ax}$$
-// /calculus/derivatives/formulas#nth_derivative_of_scaled_exponential]@
+// /calculus/formulas#nth_derivative_of_scaled_exponential]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // Each differentiation multiplies by $a$. After $n$ differentiations, the accumulated constant is $a^n$. This pattern appears in solutions to differential equations, where $e^{ax}$ satisfies equations whose characteristic root is $a$.
 
@@ -612,14 +612,14 @@
 
 // @academic[formula_callout:nth Derivative of Sine
 // $$\\frac{d^n}{dx^n}[\\sin x] = \\sin\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
-// /calculus/derivatives/formulas#nth_derivative_of_sine]@
+// /calculus/formulas#nth_derivative_of_sine]@
 
 // @academic[formula_callout:nth Derivative of Cosine
 // $$\\frac{d^n}{dx^n}[\\cos x] = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
-// /calculus/derivatives/formulas#nth_derivative_of_cosine]@
+// /calculus/formulas#nth_derivative_of_cosine]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // For $\\sin(ax)$, the chain rule introduces a factor of $a$ per differentiation: $\\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin\\left(ax + \\frac{n\\pi}{2}\\right)$. The cycle in the trigonometric part persists; only the amplitude grows as $a^n$.
 
@@ -638,7 +638,7 @@
 
 // @academic[formula_callout:nth Derivative of Reciprocal
 // $$\\frac{d^n}{dx^n}\\!\\left[\\frac{1}{x}\\right] = \\frac{(-1)^n\\, n!}{x^{n+1}}$$
-// /calculus/derivatives/formulas#nth_derivative_of_reciprocal]@
+// /calculus/formulas#nth_derivative_of_reciprocal]@
 
 // Each differentiation multiplies by one more negative integer, producing the factorial and the alternating sign.
 
@@ -646,16 +646,16 @@
 
 // @academic[formula_callout:nth Derivative of Natural Logarithm
 // $$\\frac{d^n}{dx^n}[\\ln x] = \\frac{(-1)^{n-1}\\, (n-1)!}{x^n}$$
-// /calculus/derivatives/formulas#nth_derivative_of_natural_logarithm]@
+// /calculus/formulas#nth_derivative_of_natural_logarithm]@
 
 // For $f(x) = x^m$ where $m$ is a positive integer and $n \\leq m$:
 
 // @academic[formula_callout:nth Derivative of Power
 // $$\\frac{d^n}{dx^n}[x^m] = \\frac{m!}{(m-n)!}\\, x^{m-n} \\quad (n \\leq m)$$
-// /calculus/derivatives/formulas#nth_derivative_of_power]@
+// /calculus/formulas#nth_derivative_of_power]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // The coefficient $\\frac{m!}{(m-n)!}$ is the falling factorial, counting the multipliers accumulated over $n$ applications of the power rule.
 
@@ -672,10 +672,10 @@
 
 // @academic[formula_callout:Taylor Series
 // $$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n$$
-// /calculus/derivatives/formulas#taylor_series]@
+// /calculus/formulas#taylor_series]@
 
 // @academic[formulas_link:Browse all derivative formulas
-// /calculus/derivatives/formulas]@
+// /calculus/formulas]@
 
 // Each coefficient depends on a higher-order derivative evaluated at the center point $a$. The zeroth derivative $f^{(0)}(a) = f(a)$ gives the constant term. The first derivative gives the linear term. The second derivative gives the quadratic correction. Each successive term captures finer detail about how $f$ deviates from the lower-order approximation.
 
@@ -1830,7 +1830,7 @@ The natural exponential $e^x$ is unchanged by differentiation:
 
 @academic[formula_callout:nth Derivative of Natural Exponential
 $$\\frac{d^n}{dx^n}[e^x] = e^x$$
-/calculus/derivatives/formulas#nth_derivative_of_natural_exponential]@
+/calculus/formulas#nth_derivative_of_natural_exponential]@
 
 Every derivative of $e^x$ is $e^x$. No other elementary function has this property (aside from the trivial $f(x) = 0$).
 
@@ -1838,10 +1838,10 @@ For the general exponential $e^{ax}$, the chain rule introduces a factor of $a$ 
 
 @academic[formula_callout:nth Derivative of Scaled Exponential
 $$\\frac{d^n}{dx^n}[e^{ax}] = a^n e^{ax}$$
-/calculus/derivatives/formulas#nth_derivative_of_scaled_exponential]@
+/calculus/formulas#nth_derivative_of_scaled_exponential]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Each differentiation multiplies by $a$. After $n$ differentiations, the accumulated constant is $a^n$. This pattern appears in solutions to differential equations, where $e^{ax}$ satisfies equations whose characteristic root is $a$.
 
@@ -1866,14 +1866,14 @@ A compact formula captures all four cases: $\\frac{d^n}{dx^n}[\\sin x] = \\sin\\
 
 @academic[formula_callout:nth Derivative of Sine
 $$\\frac{d^n}{dx^n}[\\sin x] = \\sin\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
-/calculus/derivatives/formulas#nth_derivative_of_sine]@
+/calculus/formulas#nth_derivative_of_sine]@
 
 @academic[formula_callout:nth Derivative of Cosine
 $$\\frac{d^n}{dx^n}[\\cos x] = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
-/calculus/derivatives/formulas#nth_derivative_of_cosine]@
+/calculus/formulas#nth_derivative_of_cosine]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 For $\\sin(ax)$, the chain rule introduces a factor of $a$ per differentiation: $\\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin\\left(ax + \\frac{n\\pi}{2}\\right)$. The cycle in the trigonometric part persists; only the amplitude grows as $a^n$.
 
@@ -1892,7 +1892,7 @@ For $f(x) = \\frac{1}{x}$: rewriting as $x^{-1}$ and applying the power rule rep
 
 @academic[formula_callout:nth Derivative of Reciprocal
 $$\\frac{d^n}{dx^n}\\!\\left[\\frac{1}{x}\\right] = \\frac{(-1)^n\\, n!}{x^{n+1}}$$
-/calculus/derivatives/formulas#nth_derivative_of_reciprocal]@
+/calculus/formulas#nth_derivative_of_reciprocal]@
 
 Each differentiation multiplies by one more negative integer, producing the factorial and the alternating sign.
 
@@ -1900,16 +1900,16 @@ For $f(x) = \\ln x$: since $f'(x) = x^{-1}$, the higher derivatives follow the p
 
 @academic[formula_callout:nth Derivative of Natural Logarithm
 $$\\frac{d^n}{dx^n}[\\ln x] = \\frac{(-1)^{n-1}\\, (n-1)!}{x^n}$$
-/calculus/derivatives/formulas#nth_derivative_of_natural_logarithm]@
+/calculus/formulas#nth_derivative_of_natural_logarithm]@
 
 For $f(x) = x^m$ where $m$ is a positive integer and $n \\leq m$:
 
 @academic[formula_callout:nth Derivative of Power
 $$\\frac{d^n}{dx^n}[x^m] = \\frac{m!}{(m-n)!}\\, x^{m-n} \\quad (n \\leq m)$$
-/calculus/derivatives/formulas#nth_derivative_of_power]@
+/calculus/formulas#nth_derivative_of_power]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 The coefficient $\\frac{m!}{(m-n)!}$ is the falling factorial, counting the multipliers accumulated over $n$ applications of the power rule.
 
@@ -1926,10 +1926,10 @@ The Taylor series of $f$ centered at $x = a$ is
 
 @academic[formula_callout:Taylor Series
 $$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n$$
-/calculus/derivatives/formulas#taylor_series]@
+/calculus/formulas#taylor_series]@
 
 @academic[formulas_link:Browse all derivative formulas
-/calculus/derivatives/formulas]@
+/calculus/formulas]@
 
 Each coefficient depends on a higher-order derivative evaluated at the center point $a$. The zeroth derivative $f^{(0)}(a) = f(a)$ gives the constant term. The first derivative gives the linear term. The second derivative gives the quadratic correction. Each successive term captures finer detail about how $f$ deviates from the lower-order approximation.
 
