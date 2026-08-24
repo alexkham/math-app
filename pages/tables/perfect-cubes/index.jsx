@@ -16,12 +16,12 @@
 // //         <title>Perfect Cubes 1-10000 | Cube Numbers Table | Learn Math Class</title>
 // //         <meta name="description" content="Explore perfect cubes from 1 to 1000000 with our comprehensive table. Learn about cube numbers, find cube roots, and understand perfect cubes in mathematics." />
 // //         <meta name="keywords" content={keyWords.join(', ')} />
-// //         <link rel="canonical" href="https://www.learnmathclass.com/tables/arithmetics/perfect-cubes" />
+// //         <link rel="canonical" href="https://www.learnmathclass.com/tables/perfect-cubes" />
         
 // //         {/* Open Graph tags */}
 // //         <meta property="og:title" content="Perfect Cubes Table (1-1000000) - Learn Math Class" />
 // //         <meta property="og:description" content="Complete table of perfect cubes and their cube roots. Interactive search and educational explanations included." />
-// //         <meta property="og:url" content="https://www.learnmathclass.com/tables/arithmetics/perfect-cubes" />
+// //         <meta property="og:url" content="https://www.learnmathclass.com/tables/perfect-cubes" />
 // //         <meta property="og:type" content="website" />
 // //         <meta property="og:site_name" content="Learn Math Class" />
         
@@ -269,7 +269,7 @@
 //       "@type": "WebApplication",
 //       "name": "Perfect Cubes Table and Tool 1 to 1,000,000",
 //       "description": "Look up every perfect cube from 1 to 1,000,000. Test any number, cube any integer, or find cubes in a range. Pattern filters, cell details, and a quiz.",
-//       "url": "https://www.learnmathclass.com/tables/arithmetics/perfect-cubes",
+//       "url": "https://www.learnmathclass.com/tables/perfect-cubes",
 //       "applicationCategory": "EducationalApplication",
 //       "operatingSystem": "Any",
 //       "offers": {
@@ -319,13 +319,13 @@
 //           "@type": "ListItem",
 //           "position": 3,
 //           "name": "Arithmetic",
-//           "item": "https://www.learnmathclass.com/tables/arithmetics"
+//           "item": "https://www.learnmathclass.com/tables"
 //         },
 //         {
 //           "@type": "ListItem",
 //           "position": 4,
 //           "name": "Perfect Cubes",
-//           "item": "https://www.learnmathclass.com/tables/arithmetics/perfect-cubes"
+//           "item": "https://www.learnmathclass.com/tables/perfect-cubes"
 //         }
 //       ]
 //     },
@@ -353,7 +353,7 @@
 //         title: "Perfect Cubes 1-1000000 Table & Tool | Learn Math Class",
 //         description: "Look up every perfect cube from 1 to 1,000,000. Test any number, cube any integer, or find cubes in a range. Pattern filters, cell details, and a quiz.",
 //         keywords: keyWords.join(", "),
-//         url: "/tables/arithmetics/perfect-cubes",
+//         url: "/tables/perfect-cubes",
 //         name: "Perfect Cubes Table and Tool 1 to 1,000,000"
 //       }
 //     },
@@ -522,7 +522,7 @@ export async function getStaticProps() {
       "@type": "WebApplication",
       "name": "Perfect Cubes Table and Tool 1 to 1,000,000",
       "description": "Look up every perfect cube from 1 to 1,000,000. Test any number, cube any integer, or find cubes within a range, with pattern filters, cell details, and a built-in quiz.",
-      "url": "https://www.learnmathclass.com/tables/arithmetics/perfect-cubes",
+      "url": "https://www.learnmathclass.com/tables/perfect-cubes",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -572,13 +572,13 @@ export async function getStaticProps() {
           "@type": "ListItem",
           "position": 3,
           "name": "Arithmetic",
-          "item": "https://www.learnmathclass.com/tables/arithmetics"
+          "item": "https://www.learnmathclass.com/tables"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Perfect Cubes",
-          "item": "https://www.learnmathclass.com/tables/arithmetics/perfect-cubes"
+          "item": "https://www.learnmathclass.com/tables/perfect-cubes"
         }
       ]
     },
@@ -606,7 +606,7 @@ export async function getStaticProps() {
         title: "Perfect Cubes 1-1000000 Table & Tool | Learn Math Class",
         description: "Look up every perfect cube from 1 to 1,000,000. Test any number, cube any integer, or find cubes within a range. Pattern filters, cell details, and a quiz.",
         keywords: keyWords.join(", "),
-        url: "/tables/arithmetics/perfect-cubes",
+        url: "/tables/perfect-cubes",
         name: "Perfect Cubes Table and Tool 1 to 1,000,000",
         hubDescription: "Look up every perfect cube from 1 to 1,000,000 in one of three modes: test whether a number is a cube, compute the cube of any integer, or find every cube within a range. Cells are color-coded by the root's last digit, hover for the gap to the next cube, and click any cell for prime factorization, digit sum, and mod-9 details.",
         category: "Arithmetic",

@@ -325,7 +325,7 @@ export default function NormalDistributionExplorer({
 
       <div style={{ marginTop: '15px', textAlign: 'center' }}>
         <Link 
-          href="/tables/probability/normal-distribution"
+          href="/tables/normal-distribution"
           style={{
             display: 'inline-block',
             padding: '8px 16px',

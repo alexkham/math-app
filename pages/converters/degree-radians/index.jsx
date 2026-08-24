@@ -134,7 +134,7 @@ export async function getStaticProps() {
   {
     title:'Related Tables',
     items:[
-      {title:'Trigonometry Tables',link:'/tables/trigonometry'}
+      {title:'Trigonometry Tables',link:'/tables'}
     ]
   }
 ]

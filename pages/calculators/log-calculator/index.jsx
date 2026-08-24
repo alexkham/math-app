@@ -36,7 +36,7 @@ const logarithmExplanations = {
     links: [
       {
         title: "Explore Logarithmic Tables Page",
-        link: "/tables/arithmetics"
+        link: "/tables"
       }
     ],
   },
@@ -45,7 +45,7 @@ const logarithmExplanations = {
     links: [
       {
         title: "Explore Logarithmic Tables Page",
-        link: "/tables/arithmetics"
+        link: "/tables"
       }
     ]
   }

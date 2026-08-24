@@ -144,7 +144,7 @@
 
 // // The [matrix](!/linear-algebra/matrix) space $\\mathbb{R}^{m \\times n}$ has the matrix unit basis $\\{E_{ij}\\}$, where $E_{ij}$ has a $1$ in position $(i,j)$ and zeros elsewhere. There are $mn$ such matrices, and every $m \\times n$ matrix is a unique linear combination of them. The coordinates of a matrix are its entries.
 
-// // These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigenvalues-vectors) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
+// // These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigen) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
 // //     before: ``,
 // //     after: ``,
 // //     link: ``,
@@ -155,7 +155,7 @@
 
 // // For the column space of an $m \\times n$ matrix $A$: row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — are a basis for $\\text{Col}(A)$. The echelon form reveals which columns are independent, but the original columns are the actual vectors spanning the column space.
 
-// // For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/rref) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
+// // For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/echelon-form) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
 
 // // For the row space: the nonzero rows of the echelon form are a basis. Unlike the column space, the echelon form's rows — not the original rows — are used, because row operations change individual rows but preserve their span.
 
@@ -193,7 +193,7 @@
 
 // // In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.
 
-// // Change of basis connects to [similarity](!/linear-algebra/linear-transformations/change-of-basis): if a [linear transformation](!/linear-algebra/linear-transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization).`,
+// // Change of basis connects to [similarity](!/linear-algebra/transformations/basis-change): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigen/diagonalization).`,
 // //     before: ``,
 // //     after: ``,
 // //     link: ``,
@@ -228,7 +228,7 @@
 // //     title: `Subspaces and the Fundamental Subspaces`,
 // //     content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is itself a vector space under the same operations. The subspace test requires only two checks: closure under addition and closure under scalar multiplication. Lines and planes through the origin, null spaces, column spaces, and row spaces are all subspaces.
 
-// // Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
+// // Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
 
 // // These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements: the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. The [rank](!/linear-algebra/matrix/rank) governs all four dimensions and completely determines the geometry of the linear map $\\mathbf{x} \\mapsto A\\mathbf{x}$.`,
 // //     before: ``,
@@ -334,7 +334,7 @@
 
 // The [matrix](!/linear-algebra/matrix) space $\\mathbb{R}^{m \\times n}$ has the matrix unit basis $\\{E_{ij}\\}$, where $E_{ij}$ has a $1$ in position $(i,j)$ and zeros elsewhere. There are $mn$ such matrices, and every $m \\times n$ matrix is a unique linear combination of them. The coordinates of a matrix are its entries.
 
-// These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigenvalues-vectors) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
+// These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigen) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -345,7 +345,7 @@
 
 // For the column space of an $m \\times n$ matrix $A$: row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — are a basis for $\\text{Col}(A)$. The echelon form reveals which columns are independent, but the original columns are the actual vectors spanning the column space.
 
-// For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/rref) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
+// For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/echelon-form) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
 
 // For the row space: the nonzero rows of the echelon form are a basis. Unlike the column space, the echelon form's rows — not the original rows — are used, because row operations change individual rows but preserve their span.
 
@@ -395,7 +395,7 @@
 
 // In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.
 
-// Change of basis connects to [similarity](!/linear-algebra/linear-transformations/change-of-basis): if a [linear transformation](!/linear-algebra/linear-transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization).`,
+// Change of basis connects to [similarity](!/linear-algebra/transformations/basis-change): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigen/diagonalization).`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -435,7 +435,7 @@
 //     title: `Subspaces and the Fundamental Subspaces`,
 //     content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is itself a vector space under the same operations. The subspace test requires only two checks: closure under addition and closure under scalar multiplication. Lines and planes through the origin, null spaces, column spaces, and row spaces are all subspaces.
 
-// Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
+// Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
 
 // These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements: the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. The [rank](!/linear-algebra/matrix/rank) governs all four dimensions and completely determines the geometry of the linear map $\\mathbf{x} \\mapsto A\\mathbf{x}$.`,
 //     before: ``,
@@ -964,7 +964,7 @@ const keyWords = [
 
 // The [matrix](!/linear-algebra/matrix) space $\\mathbb{R}^{m \\times n}$ has the matrix unit basis $\\{E_{ij}\\}$, where $E_{ij}$ has a $1$ in position $(i,j)$ and zeros elsewhere. There are $mn$ such matrices, and every $m \\times n$ matrix is a unique linear combination of them. The coordinates of a matrix are its entries.
 
-// These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigenvalues-vectors) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
+// These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigen) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -975,7 +975,7 @@ const keyWords = [
 
 // For the column space of an $m \\times n$ matrix $A$: row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — are a basis for $\\text{Col}(A)$. The echelon form reveals which columns are independent, but the original columns are the actual vectors spanning the column space.
 
-// For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/rref) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
+// For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/echelon-form) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
 
 // For the row space: the nonzero rows of the echelon form are a basis. Unlike the column space, the echelon form's rows — not the original rows — are used, because row operations change individual rows but preserve their span.
 
@@ -1013,7 +1013,7 @@ const keyWords = [
 
 // In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.
 
-// Change of basis connects to [similarity](!/linear-algebra/linear-transformations/change-of-basis): if a [linear transformation](!/linear-algebra/linear-transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization).`,
+// Change of basis connects to [similarity](!/linear-algebra/transformations/basis-change): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigen/diagonalization).`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -1048,7 +1048,7 @@ const keyWords = [
 //     title: `Subspaces and the Fundamental Subspaces`,
 //     content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is itself a vector space under the same operations. The subspace test requires only two checks: closure under addition and closure under scalar multiplication. Lines and planes through the origin, null spaces, column spaces, and row spaces are all subspaces.
 
-// Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
+// Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
 
 // These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements: the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. The [rank](!/linear-algebra/matrix/rank) governs all four dimensions and completely determines the geometry of the linear map $\\mathbf{x} \\mapsto A\\mathbf{x}$.`,
 //     before: ``,
@@ -1192,7 +1192,7 @@ The polynomial space $\\mathcal{P}_n$ of polynomials with degree at most $n$ has
 
 The [matrix](!/linear-algebra/matrix) space $\\mathbb{R}^{m \\times n}$ has the matrix unit basis $\\{E_{ij}\\}$, where $E_{ij}$ has a $1$ in position $(i,j)$ and zeros elsewhere. There are $mn$ such matrices, and every $m \\times n$ matrix is a unique linear combination of them. The coordinates of a matrix are its entries.
 
-These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigenvalues-vectors) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
+These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigen) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1203,7 +1203,7 @@ These are all "standard" bases in the sense that they are the most natural first
 
 For the column space of an $m \\times n$ matrix $A$: row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — are a basis for $\\text{Col}(A)$. The echelon form reveals which columns are independent, but the original columns are the actual vectors spanning the column space.
 
-For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/rref) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
+For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/echelon-form) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
 
 For the row space: the nonzero rows of the echelon form are a basis. Unlike the column space, the echelon form's rows — not the original rows — are used, because row operations change individual rows but preserve their span.
 
@@ -1253,7 +1253,7 @@ $$P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = \\bigl(P_{\\mathcal{C} \\leftarrow
 
 In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.
 
-Change of basis connects to [similarity](!/linear-algebra/linear-transformations/change-of-basis): if a [linear transformation](!/linear-algebra/linear-transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization).`,
+Change of basis connects to [similarity](!/linear-algebra/transformations/basis-change): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigen/diagonalization).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1293,7 +1293,7 @@ A set of exactly $n$ vectors in an $n$-dimensional space is a basis if and only 
     title: `Subspaces and the Fundamental Subspaces`,
     content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is itself a vector space under the same operations. The subspace test requires only two checks: closure under addition and closure under scalar multiplication. Lines and planes through the origin, null spaces, column spaces, and row spaces are all subspaces.
 
-Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
+Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
 
 These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements: the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. The [rank](!/linear-algebra/matrix/rank) governs all four dimensions and completely determines the geometry of the linear map $\\mathbf{x} \\mapsto A\\mathbf{x}$.`,
     before: ``,

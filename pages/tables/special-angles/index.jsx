@@ -252,7 +252,7 @@
 //   {
 //     title: "Other Trigonometric Tables",
 //     items: [
-//       // { title: "Special Angles", link: "/tables/trigonometry/special-angles" },
+//       // { title: "Special Angles", link: "/tables/special-angles" },
 //       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
 //       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
       
@@ -753,7 +753,7 @@
 //   {
 //     title: "Other Trigonometric Tables",
 //     items: [
-//       // { title: "Special Angles", link: "/tables/trigonometry/special-angles" },
+//       // { title: "Special Angles", link: "/tables/special-angles" },
 //       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
 //       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
       
@@ -1405,7 +1405,7 @@ const navigationGroups = [
   {
     title: "Other Trigonometric Tables",
     items: [
-      // { title: "Special Angles", link: "/tables/trigonometry/special-angles" },
+      // { title: "Special Angles", link: "/tables/special-angles" },
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
       

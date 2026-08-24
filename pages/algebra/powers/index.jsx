@@ -262,7 +262,7 @@
 
 //   obj11: {
 //     title: `Exponential Functions`,
-//     content: `When the base is a fixed positive number and the exponent varies, the power $a^x$ becomes a [function](!/algebra/functions) of $x$. This is the conceptual shift from computing individual powers to studying how powers change.
+//     content: `When the base is a fixed positive number and the exponent varies, the power $a^x$ becomes a [function](!/functions) of $x$. This is the conceptual shift from computing individual powers to studying how powers change.
 
 // For $a > 1$, the function grows — each unit increase in $x$ multiplies the output by $a$. For $0 < a < 1$, the function decays. The number $e \\approx 2.718$ occupies a central role: the function $e^x$ is its own derivative, making it foundational in calculus.
 
@@ -1042,7 +1042,7 @@ The [exponential inequalities](!/algebra/powers/exponential-inequalities) page d
 
   obj11: {
     title: `Exponential Functions`,
-    content: `When the base is a fixed positive number and the exponent varies, the power $a^x$ becomes a [function](!/algebra/functions) of $x$. This is the conceptual shift from computing individual powers to studying how powers change.
+    content: `When the base is a fixed positive number and the exponent varies, the power $a^x$ becomes a [function](!/functions) of $x$. This is the conceptual shift from computing individual powers to studying how powers change.
 
 For $a > 1$, the function grows — each unit increase in $x$ multiplies the output by $a$. For $0 < a < 1$, the function decays. The number $e \\approx 2.718$ occupies a central role: the function $e^x$ is its own derivative, making it foundational in calculus.
 

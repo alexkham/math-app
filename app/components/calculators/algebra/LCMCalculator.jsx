@@ -70,7 +70,7 @@ function LCMCalculator({ explanations }) {
       text: "The prime factorization method finds LCM by breaking each number into prime factors, then taking the highest power of each prime that appears. This gives you the smallest number divisible by all inputs."
       // links: [
       //   { title: "GCF Calculator", link: "/calculators/gcf-calculator" },
-      //   { title: "Factoring Calculator", link: "/calculators/factoring-calculator" }
+      //   { title: "Factoring Calculator", link: "/algebra/calculators/factoring" }
       // ]
     },
     formula: {

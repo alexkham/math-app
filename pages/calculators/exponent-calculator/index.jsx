@@ -52,9 +52,9 @@ Remember that when squaring a negative number, the result is always positive bec
 This calculator can handle both integer and decimal numbers, and will display the result in standard notation for manageable numbers or scientific notation ($1.234e+10$) for very large or small results.`,
     links:[
       {title:"Explore Exponents Table Page",
-        link:"/tables/arithmetics/exponential-table"},
+        link:"/tables/powers-table"},
       {title:"See Table of Integer Numbers Exponents (Powers)",
-        link:"/tables/arithmetics/powers-table"}
+        link:"/tables/powers-table"}
     ]
   },
   cube: {

@@ -92,7 +92,7 @@ const PROPERTY_CARDS = [
   {
     icon: '\u25C6',
     title: 'The diagonal is the squares',
-    body: 'Cells where row equals column are perfect squares: 1, 4, 9, 16, 25\u2026 See the full <a href="/tables/arithmetics/perfect-squares" style="color:#4f46e5;font-weight:600;text-decoration:none;">perfect squares page</a>.',
+    body: 'Cells where row equals column are perfect squares: 1, 4, 9, 16, 25\u2026 See the full <a href="/tables/perfect-squares" style="color:#4f46e5;font-weight:600;text-decoration:none;">perfect squares page</a>.',
     code: '1\u00B2=1, 2\u00B2=4, 3\u00B2=9, 4\u00B2=16, 5\u00B2=25',
   },
   {

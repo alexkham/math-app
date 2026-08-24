@@ -17,12 +17,12 @@
 //         <title>Perfect Squares 1-10000 | Square Numbers Table | Learn Math Class</title>
 //         <meta name="description" content="Explore perfect squares from 1 to 10000 with our comprehensive table. Learn about square numbers, find square roots, and understand perfect squares in mathematics." />
 //         <meta name="keywords" content={keyWords.join(', ')} />
-//         <link rel="canonical" href="https://www.learnmathclass.com/tables/arithmetics/perfect-squares" />
+//         <link rel="canonical" href="https://www.learnmathclass.com/tables/perfect-squares" />
         
 //         {/* Open Graph tags */}
 //         <meta property="og:title" content="Perfect Squares Table (1-10000) - Learn Math Class" />
 //         <meta property="og:description" content="Complete table of perfect squares and their square roots. Interactive search and educational explanations included." />
-//         <meta property="og:url" content="https://www.learnmathclass.com/tables/arithmetics/perfect-squares" />
+//         <meta property="og:url" content="https://www.learnmathclass.com/tables/perfect-squares" />
 //         <meta property="og:type" content="website" />
 //         <meta property="og:site_name" content="Learn Math Class" />
         
@@ -272,7 +272,7 @@ export async function getStaticProps() {
       "@type": "WebApplication",
       "name": "Perfect Squares Table and Tool 1 to 10000",
       "description": "Look up every perfect square from 1 to 10000. Test any number, square any integer, or find squares in a range. Filters, cell details, and a quiz.",
-      "url": "https://www.learnmathclass.com/tables/arithmetics/perfect-squares",
+      "url": "https://www.learnmathclass.com/tables/perfect-squares",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -322,13 +322,13 @@ export async function getStaticProps() {
           "@type": "ListItem",
           "position": 3,
           "name": "Arithmetic",
-          "item": "https://www.learnmathclass.com/tables/arithmetics"
+          "item": "https://www.learnmathclass.com/tables"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Perfect Squares",
-          "item": "https://www.learnmathclass.com/tables/arithmetics/perfect-squares"
+          "item": "https://www.learnmathclass.com/tables/perfect-squares"
         }
       ]
     },
@@ -356,7 +356,7 @@ export async function getStaticProps() {
         title: "Perfect Squares 1-10000 Table & Tool | Learn Math Class",
         description: "Look up every perfect square from 1 to 10000. Test any number, square any integer, or find squares in a range. Filters, cell details, and a quiz.",
         keywords: keyWords.join(", "),
-        url: "/tables/arithmetics/perfect-squares",
+        url: "/tables/perfect-squares",
         name: "Perfect Squares Table and Tool 1 to 10000",
         category:'Arithmetic'
       }

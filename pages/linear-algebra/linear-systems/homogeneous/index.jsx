@@ -479,7 +479,7 @@
 //     "@type": "LearningResource",
 //     "name": "Homogeneous Systems of Equations",
 //     "description": "Homogeneous linear systems Ax = 0: trivial and nontrivial solutions, null space as solution set, superposition principle, connection to non-homogeneous systems, independence, and eigenvalues.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogenous",
+//     "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogeneous",
 //     "inLanguage": "en-US",
 //     "learningResourceType": "Explanation",
 //     "educationalLevel": "College",
@@ -542,7 +542,7 @@
 //         "@type": "ListItem",
 //         "position": 4,
 //         "name": "Homogeneous Systems",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogenous"
+//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogeneous"
 //       }
 //     ]
 //   },
@@ -569,7 +569,7 @@
 // //         title: "Title | Learn Math Class",
 // //         description: "Metadescription",
 // //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/linear-systems/homogenous",
+// //         url: "/linear-algebra/linear-systems/homogeneous",
 // //          name: "name"
 // //       },
         
@@ -589,7 +589,7 @@
 //       title: "Homogeneous Systems: Ax = 0 & Null Space | Learn Math Class",
 //       description: "Homogeneous linear systems Ax = 0: trivial and nontrivial solutions, null space as solution set, superposition principle, connection to non-homogeneous systems, independence, and eigenvalues.",
 //       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/linear-systems/homogenous",
+//       url: "/linear-algebra/linear-systems/homogeneous",
 //       name: "Homogeneous Systems of Equations"
 //     },
 //   }
@@ -1347,7 +1347,7 @@ const schemas = {
     "@type": "LearningResource",
     "name": "Homogeneous Systems of Equations",
     "description": "Homogeneous linear systems Ax = 0: trivial and nontrivial solutions, null space as solution set, superposition principle, connection to non-homogeneous systems, independence, and eigenvalues.",
-    "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogenous",
+    "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogeneous",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "College",
@@ -1410,7 +1410,7 @@ const schemas = {
         "@type": "ListItem",
         "position": 4,
         "name": "Homogeneous Systems",
-        "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogenous"
+        "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogeneous"
       }
     ]
   },
@@ -1437,7 +1437,7 @@ const schemas = {
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/linear-algebra/linear-systems/homogenous",
+//         url: "/linear-algebra/linear-systems/homogeneous",
 //          name: "name"
 //       },
         
@@ -1457,7 +1457,7 @@ return {
       title: "Homogeneous Systems: Ax = 0 & Null Space | Learn Math Class",
       description: "Homogeneous linear systems Ax = 0: trivial and nontrivial solutions, null space as solution set, superposition principle, connection to non-homogeneous systems, independence, and eigenvalues.",
       keywords: keyWords.join(", "),
-      url: "/linear-algebra/linear-systems/homogenous",
+      url: "/linear-algebra/linear-systems/homogeneous",
       name: "Homogeneous Systems of Equations"
     },
   }

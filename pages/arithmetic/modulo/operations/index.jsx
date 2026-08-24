@@ -467,7 +467,7 @@
 //     "@type": "LearningResource",
 //     "name": "Modular Arithmetic",
 //     "description": "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
-//     "url": "https://www.learnmathclass.com/arithmetic/modulo/modular-arithmetic",
+//     "url": "https://www.learnmathclass.com/arithmetic/modulo",
 //     "inLanguage": "en-US",
 //     "learningResourceType": "Explanation",
 //     "educationalLevel": "High School, College",
@@ -528,7 +528,7 @@
 //         "@type": "ListItem",
 //         "position": 4,
 //         "name": "Modular Arithmetic",
-//         "item": "https://www.learnmathclass.com/arithmetic/modulo/modular-arithmetic"
+//         "item": "https://www.learnmathclass.com/arithmetic/modulo"
 //       }
 //     ]
 //   },
@@ -559,7 +559,7 @@
 //       title: "Modular Arithmetic: Operations, Power Cycles & Applications | Learn Math Class",
 //       description: "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
 //       keywords: keyWords.join(", "),
-//       url: "/arithmetic/modulo/modular-arithmetic",
+//       url: "/arithmetic/modulo",
 //       name: "Modular Arithmetic"
 //     },
 //   }
@@ -1342,7 +1342,7 @@ const schemas = {
     "@type": "LearningResource",
     "name": "Modular Arithmetic",
     "description": "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
-    "url": "https://www.learnmathclass.com/arithmetic/modulo/modular-arithmetic",
+    "url": "https://www.learnmathclass.com/arithmetic/modulo",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -1404,7 +1404,7 @@ const schemas = {
         "@type": "ListItem",
         "position": 4,
         "name": "Modular Arithmetic",
-        "item": "https://www.learnmathclass.com/arithmetic/modulo/modular-arithmetic"
+        "item": "https://www.learnmathclass.com/arithmetic/modulo"
       }
     ]
   },
@@ -1438,7 +1438,7 @@ return {
       title: "Modular Arithmetic: Operations, Power Cycles & Applications | Learn Math Class",
       description: "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
       keywords: keyWords.join(", "),
-      url: "/arithmetic/modulo/modular-arithmetic",
+      url: "/arithmetic/modulo",
       name: "Modular Arithmetic"
     },
   }

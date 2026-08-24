@@ -153,7 +153,7 @@
 //           "@type": "ListItem",
 //           "position": 3,
 //           "name": "Arithmetic",
-//           "item": "https://www.learnmathclass.com/tables/arithmetics"
+//           "item": "https://www.learnmathclass.com/tables"
 //         },
 //         {
 //           "@type": "ListItem",
@@ -459,7 +459,7 @@ export async function getStaticProps(){
           "@type": "ListItem",
           "position": 3,
           "name": "Arithmetic",
-          "item": "https://www.learnmathclass.com/tables/arithmetics"
+          "item": "https://www.learnmathclass.com/tables"
         },
         {
           "@type": "ListItem",

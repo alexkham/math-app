@@ -521,7 +521,7 @@ For these and similar problems the table answers a single lookup faster than rec
           "@type": "ListItem",
           "position": 4,
           "name": "Binomial Distribution Table",
-          "item": "https://www.learnmathclass.com/probability/tables/binomial-distribution"
+          "item": "https://www.learnmathclass.com/tables/binomial-distribution"
         }
       ]
     },

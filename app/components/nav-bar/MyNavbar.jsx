@@ -49,8 +49,8 @@ function MyNavbar() {
               <a onClick={() => setIsSequencesExpanded(!isSequencesExpanded)}>Sequences ▼</a>
               {isSequencesExpanded && (
                 <ul>
-                  <li><Link href="/sequences/prime-numbers">Prime Numbers</Link></li>
-                  <li><Link href="/sequences/fibonacci-numbers">Fibonacci Numbers</Link></li>
+                  <li><Link href="/algebra/calculators/sequences/prime-numbers">Prime Numbers</Link></li>
+                  <li><Link href="/algebra/calculators/sequences/fibonacci-sequence">Fibonacci Numbers</Link></li>
                 </ul>
               )}
             </li>

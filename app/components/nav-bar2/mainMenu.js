@@ -80,8 +80,8 @@ export const mainMenuStructure = [
             { label: 'Root Calculator', href: '/calculators/root-calculator' },
             { label: 'Logarithm Calculator', href: '/calculators/log-calculator' },
             { label: 'Exponent Calculator', href: '/calculators/exponent-calculator' },
-            { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
-            { label: 'Polynomial Calculator', href: '/calculators/polynomial-calculator' },
+            { label: 'Factoring Calculator', href: '/algebra/calculators/factoring' },
+            { label: 'Polynomial Calculator', href: '/algebra/calculators/polynomial' },
            
             { label: 'Percentage Calculator', href: '/calculators/percentage-calculator' },
             { label: 'Modulo Calculator', href: '/calculators/modulo-calculator' },
@@ -131,12 +131,12 @@ export const mainMenuStructure = [
           href: '/tables',
           items: [
             { label: 'All Tables', href: '/tables' },
-            { label: 'Basic Math', href: '/tables/arithmetics' },
-            { label: 'Probability', href: '/tables/probability' },
+            { label: 'Basic Math', href: '/tables' },
+            { label: 'Probability', href: '/tables' },
             { label: 'Mathematical Symbols', href: '/math-symbols' },
-            { label: 'Truth Tables', href: '/tables/truth-tables' },
+            { label: 'Truth Tables', href: '/logic/truth-tables' },
             { label: 'Angle Conversion Table', href: '/tables/angle-conversion' },
-            { label: 'Trigonometry Tables', href: '/tables/trigonometry' },
+            { label: 'Trigonometry Tables', href: '/tables' },
            
           ]
         },

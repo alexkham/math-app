@@ -106,7 +106,7 @@ export async function getStaticProps() {
       seoData: {
         title: 'Matrix Product Laws | Learn Math Class',
         description: 'Which algebraic laws hold for matrix multiplication, which fail, and the counterexample for each failure.',
-        url: '/linear-algebra/matrix/operations/laws',
+        url: '/linear-algebra/matrix/operations',
         name: 'Matrix Product Laws',
       },
     },

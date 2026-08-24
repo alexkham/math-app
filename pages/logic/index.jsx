@@ -87,7 +87,7 @@
 //           <div class="lmc-tool-desc">Build custom truth tables for any logical expression. Enter your own propositions and operators to dynamically generate complete truth tables with step-by-step evaluation.</div>
 //           <span class="lmc-tool-open">Open tool &rarr;</span>
 //         </a>
-//         <a class="lmc-tool-card" href="/tables/truth-tables">
+//         <a class="lmc-tool-card" href="/logic/truth-tables">
 //           <span class="lmc-tool-badge">Reference</span>
 //           <div class="lmc-tool-title">Truth Tables</div>
 //           <div class="lmc-tool-desc">Explore truth tables for all logical operators including AND, OR, XOR, NAND, NOR, and XNOR. See how different combinations of truth values affect logical outcomes with clear explanations.</div>
@@ -336,7 +336,7 @@ const customSections = {
           <div class="lmc-tool-desc">Build custom truth tables for any logical expression. Enter your own propositions and operators to dynamically generate complete truth tables with step-by-step evaluation.</div>
           <span class="lmc-tool-open">Open tool &rarr;</span>
         </a>
-        <a class="lmc-tool-card" href="/tables/truth-tables">
+        <a class="lmc-tool-card" href="/logic/truth-tables">
           <span class="lmc-tool-badge">Reference</span>
           <div class="lmc-tool-title">Truth Tables</div>
           <div class="lmc-tool-desc">Explore truth tables for all logical operators including AND, OR, XOR, NAND, NOR, and XNOR. See how different combinations of truth values affect logical outcomes with clear explanations.</div>

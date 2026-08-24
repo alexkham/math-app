@@ -477,7 +477,7 @@
 //     "@type": "LearningResource",
 //     "name": "Matrix Representation of Linear Transformations",
 //     "description": "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations",
+//     "url": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representation",
 //     "inLanguage": "en-US",
 //     "learningResourceType": "Explanation",
 //     "educationalLevel": "College",
@@ -538,7 +538,7 @@
 //         "@type": "ListItem",
 //         "position": 4,
 //         "name": "Matrix Representations",
-//         "item": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations"
+//         "item": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representation"
 //       }
 //     ]
 //   },
@@ -571,7 +571,7 @@
 //       title: "Matrix Representation of Transformations | Learn Math Class",
 //       description: "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
 //       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/transformations/matrix-representations",
+//       url: "/linear-algebra/transformations/matrix-representation",
 //       name: "Matrix Representation of Linear Transformations"
 //     },
 //   }
@@ -1251,7 +1251,7 @@ const schemas = {
     "@type": "LearningResource",
     "name": "Matrix Representation of Linear Transformations",
     "description": "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
-    "url": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations",
+    "url": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representation",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "College",
@@ -1312,7 +1312,7 @@ const schemas = {
         "@type": "ListItem",
         "position": 4,
         "name": "Matrix Representations",
-        "item": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations"
+        "item": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representation"
       }
     ]
   },
@@ -1345,7 +1345,7 @@ return {
       title: "Matrix Representation of Transformations | Learn Math Class",
       description: "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
       keywords: keyWords.join(", "),
-      url: "/linear-algebra/transformations/matrix-representations",
+      url: "/linear-algebra/transformations/matrix-representation",
       name: "Matrix Representation of Linear Transformations"
     },
   }

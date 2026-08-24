@@ -24,7 +24,7 @@
 // //   {
 // //     title: "Other Trigonometric Tables",
 // //     items: [
-// //       { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
+// //       { title: "Trigonometric Functions of Special Angles", link: "/tables/special-angles" },
 // //       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
 // //       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
 // //       { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },

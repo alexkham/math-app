@@ -795,7 +795,7 @@ const complexNumbersCheatSheetData = {
             { key: 'Sum of roots', value: '$z_1 + z_2 = -b$' },
             { key: 'Product of roots', value: '$z_1 \\cdot z_2 = c$' }
           ],
-          note: "Extends to higher degrees: the $k$-th symmetric sum of roots $= (-1)^k \\times$ coefficient of $z^{n-k}$. See [Vieta's formulas](!/complex-numbers/equations-and-polynomials).",
+          note: "Extends to higher degrees: the $k$-th symmetric sum of roots $= (-1)^k \\times$ coefficient of $z^{n-k}$. See [Vieta's formulas](!/complex-numbers/equations-polynomials).",
           color: '#0ea5e9'
         },
         {
@@ -824,7 +824,7 @@ const complexNumbersCheatSheetData = {
             { key: '$z - \\bar{z} = ki$', value: 'Horizontal line $Im(z) = k/2$' },
             { key: '$z \\cdot \\bar{z} = k$', value: 'Circle $|z| = \\sqrt{k}$ centered at origin' }
           ],
-          note: 'Combine conditions to find intersections. See [equations & polynomials](!/complex-numbers/equations-and-polynomials).',
+          note: 'Combine conditions to find intersections. See [equations & polynomials](!/complex-numbers/equations-polynomials).',
           color: '#0ea5e9'
         }
       ]
@@ -874,7 +874,7 @@ const complexNumbersCheatSheetData = {
         },
         {
           name: 'Algebraic Closure',
-          note: '$\\mathbb{C}$ is **algebraically closed**: every non-constant polynomial has at least one root. No further number system extension is needed. See the [Fundamental Theorem of Algebra](!/complex-numbers/equations-and-polynomials).',
+          note: '$\\mathbb{C}$ is **algebraically closed**: every non-constant polynomial has at least one root. No further number system extension is needed. See the [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials).',
           color: '#64748b'
         }
       ]

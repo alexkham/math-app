@@ -800,7 +800,7 @@
 // - [Principal Root](!/algebra/definitions#principal_root)
 // - [Cube Root](!/algebra/definitions#cube_root)
 // - [Perfect Square](!/algebra/definitions#perfect_square)
-// - [Perfect Squares Table](!/tables/arithmetics/perfect-squares)
+// - [Perfect Squares Table](!/tables/perfect-squares)
 // - [Square Root Visual Tool](!/visual-tools/square-root)`
 //   },
 //   category: "Roots"
@@ -829,7 +829,7 @@
 // - [Root](!/algebra/definitions#root)
 // - [Square Root](!/algebra/definitions#square_root)
 // - [Perfect Cube](!/algebra/definitions#perfect_cube)
-// - [Perfect Cubes Table](!/tables/arithmetics/perfect-cubes)
+// - [Perfect Cubes Table](!/tables/perfect-cubes)
 // - [Odd-Index Radicals](!/algebra/roots/properties#2)`
 //   },
 //   category: "Roots"
@@ -1050,7 +1050,7 @@
 // - [Perfect Cube](!/algebra/definitions#perfect_cube)
 // - [Simplest Form](!/algebra/definitions#simplest_form)
 // - [Square Root](!/algebra/definitions#square_root)
-// - [Perfect Squares Table](!/tables/arithmetics/perfect-squares)`
+// - [Perfect Squares Table](!/tables/perfect-squares)`
 //   },
 //   category: "Roots"
 // },
@@ -1075,7 +1075,7 @@
 // - [Perfect Square](!/algebra/definitions#perfect_square)
 // - [Simplest Form](!/algebra/definitions#simplest_form)
 // - [Cube Root](!/algebra/definitions#cube_root)
-// - [Perfect Cubes Table](!/tables/arithmetics/perfect-cubes)`
+// - [Perfect Cubes Table](!/tables/perfect-cubes)`
 //   },
 //   category: "Roots"
 // },
@@ -1398,7 +1398,7 @@
 // - [Natural Logarithm](!/algebra/definitions#natural_logarithm)
 // - [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — converts to/from common log
 // - [The Common Logarithm](!/algebra/logarithms/common-natural#1)
-// - [Logarithm Table](!/tables/arithmetics/logarithm)
+// - [Logarithm Table](!/tables/logarithm)
 // - [Log Calculator](!/calculators/log-calculator)`
 //   },
 //   category: "Logarithms"
@@ -1428,7 +1428,7 @@
 // - [Common Logarithm](!/algebra/definitions#common_logarithm)
 // - [Change of Base Formula](!/algebra/definitions#change_of_base_formula)
 // - [The Natural Logarithm](!/algebra/logarithms/common-natural#2)
-// - [Natural Logarithm Table](!/tables/arithmetics/natural-logarithms)`
+// - [Natural Logarithm Table](!/tables/logarithm)`
 //   },
 //   category: "Logarithms"
 // },
@@ -4685,7 +4685,7 @@ $\\sqrt{2} \\approx 1.414$ (irrational)`,
 - [Principal Root](!/algebra/definitions#principal_root)
 - [Cube Root](!/algebra/definitions#cube_root)
 - [Perfect Square](!/algebra/definitions#perfect_square)
-- [Perfect Squares Table](!/tables/arithmetics/perfect-squares)
+- [Perfect Squares Table](!/tables/perfect-squares)
 - [Square Root Visual Tool](!/visual-tools/square-root)`
   },
   category: "Roots"
@@ -4714,7 +4714,7 @@ $\\sqrt[3]{2} \\approx 1.260$ (irrational)`,
 - [Root](!/algebra/definitions#root)
 - [Square Root](!/algebra/definitions#square_root)
 - [Perfect Cube](!/algebra/definitions#perfect_cube)
-- [Perfect Cubes Table](!/tables/arithmetics/perfect-cubes)
+- [Perfect Cubes Table](!/tables/perfect-cubes)
 - [Odd-Index Radicals](!/algebra/roots/properties#2)`
   },
   category: "Roots"
@@ -4941,7 +4941,7 @@ $\\sqrt{50a^2} = 5|a|\\sqrt{2}$ — $25$ and $a^2$ extracted`,
 - [Perfect Cube](!/algebra/definitions#perfect_cube)
 - [Simplest Form](!/algebra/definitions#simplest_form)
 - [Square Root](!/algebra/definitions#square_root)
-- [Perfect Squares Table](!/tables/arithmetics/perfect-squares)`
+- [Perfect Squares Table](!/tables/perfect-squares)`
   },
   category: "Roots"
 },
@@ -4966,7 +4966,7 @@ $\\sqrt[3]{x^6} = x^2$ — $x^6 = (x^2)^3$`,
 - [Perfect Square](!/algebra/definitions#perfect_square)
 - [Simplest Form](!/algebra/definitions#simplest_form)
 - [Cube Root](!/algebra/definitions#cube_root)
-- [Perfect Cubes Table](!/tables/arithmetics/perfect-cubes)`
+- [Perfect Cubes Table](!/tables/perfect-cubes)`
   },
   category: "Roots"
 },
@@ -5293,7 +5293,7 @@ $\\log(500) \\approx 2.699$`,
 - [Natural Logarithm](!/algebra/definitions#natural_logarithm)
 - [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — converts to/from common log
 - [The Common Logarithm](!/algebra/logarithms/common-natural#1)
-- [Logarithm Table](!/tables/arithmetics/logarithm)
+- [Logarithm Table](!/tables/logarithm)
 - [Log Calculator](!/calculators/log-calculator)`,
     "related formulas": `
 - [Change of Base Formula](!/algebra/formulas#change_of_base_formula)`
@@ -5325,7 +5325,7 @@ $\\ln(10) \\approx 2.303$`,
 - [Common Logarithm](!/algebra/definitions#common_logarithm)
 - [Change of Base Formula](!/algebra/definitions#change_of_base_formula)
 - [The Natural Logarithm](!/algebra/logarithms/common-natural#2)
-- [Natural Logarithm Table](!/tables/arithmetics/natural-logarithms)`,
+- [Natural Logarithm Table](!/tables/logarithm)`,
     "related formulas": `
 - [Change of Base Formula](!/algebra/formulas#change_of_base_formula)`
   },

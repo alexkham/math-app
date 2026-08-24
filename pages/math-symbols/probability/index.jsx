@@ -233,7 +233,7 @@ export async function getStaticProps() {
     {"symbol": "α", "latex_code": "\\alpha", "explanation": "Significance level — the probability of rejecting H₀ when it's actually true (Type I error). Common values: 0.05, 0.01."},
     {"symbol": "p-value", "latex_code": "\\text{p-value}", "explanation": "Probability of observing data at least as extreme as what was observed, assuming H₀ is true. Reject H₀ if p-value < α."},
     {"symbol": "z", "latex_code": "z", "explanation": "Z-score — number of standard deviations from the mean. Uses the [normal distribution](!/probability/distributions/continuous/normal) for large samples."},
-    {"symbol": "t", "latex_code": "t", "explanation": "T-score — similar to z-score but accounts for uncertainty in estimated standard deviation. Uses the [t-distribution](!/probability/tables/t-distribution)."}
+    {"symbol": "t", "latex_code": "t", "explanation": "T-score — similar to z-score but accounts for uncertainty in estimated standard deviation. Uses the [t-distribution](!/tables/t-distribution)."}
   ],
   "information_theory": [
     {"symbol": "H(X)", "latex_code": "H(X)", "explanation": "Entropy — measures uncertainty or information content of X. Higher entropy means more unpredictable outcomes."},

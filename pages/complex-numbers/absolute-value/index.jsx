@@ -1,4 +1,1262 @@
 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages/pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+// import { tableHeaders } from '@/app/styles/theme'
+
+
+// export async function getStaticProps(){
+
+//  const keyWords = [
+//   "modulus complex number",
+//   "absolute value complex number",
+//   "complex number magnitude",
+//   "modulus formula",
+//   "sqrt a squared plus b squared",
+//   "z times z bar",
+//   "triangle inequality complex",
+//   "reverse triangle inequality",
+//   "complex number distance",
+//   "modulus properties",
+//   "complex modulus definition",
+//   "calculate modulus",
+//   "conjugate modulus identity",
+//   "complex plane distance",
+//   "modulus product rule"
+// ]
+
+//   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+//   // ---------- TABLES ----------
+
+//   // obj1 — aggregation: modulus computation examples
+//   const obj1Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">z = a + bi</th>
+//       <th style="${tableHeaders.aggregation} text-align: center;">a²</th>
+//       <th style="${tableHeaders.aggregation} text-align: center;">b²</th>
+//       <th style="${tableHeaders.aggregation} text-align: center;">a² + b²</th>
+//       <th style="${tableHeaders.aggregation}">|z| = √(a² + b²)</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">3 + 4i</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">9</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">16</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">25</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">5&nbsp;&nbsp;<span style="font-size: 13px;">(the 3-4-5 right triangle)</span></td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">−2 + i</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">4</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">5</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√5 ≈ 2.236</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">1 − i</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√2 ≈ 1.414</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">5&nbsp;&nbsp;<span style="font-size: 13px;">(real)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">25</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">25</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">5&nbsp;&nbsp;<span style="font-size: 13px;">(= ordinary absolute value)</span></td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">−3i&nbsp;&nbsp;<span style="font-size: 13px;">(pure imag)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">9</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">9</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">3&nbsp;&nbsp;<span style="font-size: 13px;">(= absolute value of the coefficient)</span></td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">0</td>
+//       <td style="padding: 12px 15px; color: #34495e; text-align: center;">0</td>
+//       <td style="padding: 12px 15px; color: #34495e; text-align: center;">0</td>
+//       <td style="padding: 12px 15px; color: #34495e; text-align: center;">0</td>
+//       <td style="padding: 12px 15px; color: #34495e;">0&nbsp;&nbsp;<span style="font-size: 13px;">(the only z with |z| = 0)</span></td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj4 — aggregation: algebraic properties of modulus
+//   const obj4Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Property</th>
+//       <th style="${tableHeaders.aggregation}">Formula</th>
+//       <th style="${tableHeaders.aggregation}">Note</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Non-negativity</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z| ≥ 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equality holds iff z = 0</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Conjugate-preservation</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z̄| = |z|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reflection across the real axis doesn&apos;t change distance from origin</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Conjugate identity</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z · z̄ = |z|²</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the cornerstone identity; powers division and many proofs</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product rule</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ · z₂| = |z₁| · |z₂|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">moduli of a product multiply</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient rule</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ / z₂| = |z₁| / |z₂|&nbsp;&nbsp;<span style="font-size: 13px;">(z₂ ≠ 0)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">moduli of a quotient divide</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Power rule</td>
+//       <td style="padding: 12px 15px; color: #34495e;">|zⁿ| = |z|ⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(integer n)</span></td>
+//       <td style="padding: 12px 15px; color: #34495e;">modulus raised to the same power; pairs naturally with De Moivre&apos;s theorem</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj7 — comparison: triangle inequality and its reverse
+//   const obj7Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.comparison}">Inequality</th>
+//       <th style="${tableHeaders.comparison}">Statement</th>
+//       <th style="${tableHeaders.comparison}">Geometric reading</th>
+//       <th style="${tableHeaders.comparison}">Equality holds when…</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Triangle</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ + z₂| ≤ |z₁| + |z₂|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a triangle&apos;s side never exceeds the sum of the other two</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁, z₂ point in the same direction from the origin (one is a non-negative real multiple of the other)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Triangle (n terms)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ + z₂ + … + zₙ| ≤ |z₁| + |z₂| + … + |zₙ|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">iterated detour through every intermediate point</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all zₖ point in the same direction from the origin</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Reverse triangle</td>
+//       <td style="padding: 12px 15px; color: #34495e;">||z₁| − |z₂|| ≤ |z₁ − z₂|</td>
+//       <td style="padding: 12px 15px; color: #34495e;">difference of radii never exceeds the distance between points</td>
+//       <td style="padding: 12px 15px; color: #34495e;">z₁, z₂ point in the same direction from the origin</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj9 — summary capstone: typology of |z| behavior under each operation on z
+//   const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Operation on z</th>
+//       <th style="${tableHeaders.summary}">Effect on |z|</th>
+//       <th style="${tableHeaders.summary}">Behavior class</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z̄&nbsp;&nbsp;<span style="font-size: 13px;">(conjugate)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z̄| = |z|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><span style="font-weight: bold; color: #06357a;">INVARIANT</span> — exactly preserved</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">−z&nbsp;&nbsp;<span style="font-size: 13px;">(additive inverse)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|−z| = |z|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><span style="font-weight: bold; color: #06357a;">INVARIANT</span> — exactly preserved</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z₁ · z₂&nbsp;&nbsp;<span style="font-size: 13px;">(product)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ · z₂| = |z₁| · |z₂|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><span style="font-weight: bold; color: #06357a;">MULTIPLICATIVE</span> — moduli combine via the same operation</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z₁ / z₂&nbsp;&nbsp;<span style="font-size: 13px;">(quotient, z₂ ≠ 0)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ / z₂| = |z₁| / |z₂|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><span style="font-weight: bold; color: #06357a;">MULTIPLICATIVE</span> — moduli combine via the same operation</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">zⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(integer power)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|zⁿ| = |z|ⁿ</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><span style="font-weight: bold; color: #06357a;">MULTIPLICATIVE</span> — modulus is raised to the same exponent</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z⁻¹&nbsp;&nbsp;<span style="font-size: 13px;">(multiplicative inverse, z ≠ 0)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z⁻¹| = 1 / |z|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><span style="font-weight: bold; color: #06357a;">MULTIPLICATIVE</span> — modulus reciprocates</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z₁ + z₂&nbsp;&nbsp;<span style="font-size: 13px;">(sum)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ + z₂| ≤ |z₁| + |z₂|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><span style="font-weight: bold; color: #06357a;">BOUNDED</span> — only an inequality (triangle inequality)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">z₁ − z₂&nbsp;&nbsp;<span style="font-size: 13px;">(difference)</span></td>
+//       <td style="padding: 12px 15px; color: #34495e;">||z₁| − |z₂|| ≤ |z₁ − z₂|</td>
+//       <td style="padding: 12px 15px; color: #34495e;"><span style="font-weight: bold; color: #06357a;">BOUNDED</span> — only an inequality (reverse triangle inequality)</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // ---------- SECTIONS (original prose unchanged; obj9 added) ----------
+
+// //     const sectionsContent={
+
+// //    obj0: {
+// //   title: `Key Terms`,
+// //   content: `
+// // - [Modulus](!/complex-numbers/definitions#modulus) — the absolute value $|z| = \\sqrt{a^2 + b^2}$
+// // - [Complex Plane](!/complex-numbers/definitions#complex_plane) — where modulus measures distance
+// // - [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — connected via $|z|^2 = z \\cdot \\overline{z}$`,
+// //   before: ``,
+// //   after: `
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+// //   link: '',
+// // },
+ 
+
+// //     obj1: {
+// //   title: `Definition of Modulus`,
+// //   before: ``,
+// //   content: `The modulus of a complex number $z = a + bi$, written $|z|$, measures the straight-line distance from the origin to the point $(a, b)$ in the [complex plane](!/complex-numbers/geometric-representation). This distance follows directly from the Pythagorean theorem: the point $(a, b)$ sits at the end of a right triangle with horizontal leg $a$ and vertical leg $b$, so the hypotenuse has length $\\sqrt{a^2 + b^2}$.
+
+// // The formula is thus:
+
+// // $$|z| = |a + bi| = \\sqrt{a^2 + b^2}$$
+
+// // The notation mirrors real number absolute value, and for good reason — modulus generalizes the familiar concept to two dimensions. Where real absolute value measures distance from zero along a line, complex modulus measures distance from zero across a plane.
+
+// // Computation proceeds by squaring both components, adding, and taking the square root. For $z = 3 + 4i$, we calculate $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$. The famous 3-4-5 right triangle appears here — the complex number $3 + 4i$ lies exactly 5 units from the origin. For $z = -2 + i$, the modulus is $|z| = \\sqrt{(-2)^2 + 1^2} = \\sqrt{4 + 1} = \\sqrt{5}$, an irrational distance approximately equal to $2.236$.
+
+// // The geometric picture makes modulus tangible. Draw the point, draw the line segment connecting it to the origin, and measure that segment's length. Every complex number possesses exactly one modulus, always a non-negative real value. Numbers closer to the origin have smaller moduli; numbers farther away have larger moduli. The modulus provides the only meaningful sense of "size" for complex numbers, since $\\mathbb{C}$ lacks the ordering that lets us compare real numbers directly.`,
+// //   after: ``,
+// //   link: '',
+// // },
+
+
+  
+
+// //     obj2: {
+// //   title: `Special Cases`,
+// //   before: ``,
+// //   content: `The modulus formula applies uniformly to all complex numbers, but certain categories yield particularly simple results. These special cases connect complex modulus back to familiar real-number concepts.
+
+// // For purely real numbers — those with $b = 0$ — the modulus reduces to ordinary absolute value. If $z = a$ where $a$ is real, then $|z| = \\sqrt{a^2 + 0^2} = \\sqrt{a^2} = |a|$. The number $5$ has modulus $5$; the number $-7$ has modulus $7$. Real numbers sit on the horizontal axis of the complex plane, and their distance from the origin equals their distance from zero on the real line. Complex modulus and real absolute value agree completely on their shared domain.
+
+// // For [pure imaginary numbers](!/complex-numbers/imaginary-numbers) — those with $a = 0$ — the modulus equals the absolute value of the coefficient. If $z = bi$, then $|z| = \\sqrt{0^2 + b^2} = \\sqrt{b^2} = |b|$. The number $4i$ has modulus $4$; the number $-3i$ has modulus $3$. Pure imaginaries sit on the vertical axis, and their modulus simply measures how far up or down they lie from the origin, ignoring the sign.
+
+// // The complex number zero stands alone with modulus zero. Since $0 = 0 + 0i$, we have $|0| = \\sqrt{0^2 + 0^2} = 0$. This is the only complex number with vanishing modulus — every nonzero number lies some positive distance from the origin. The equivalence "$|z| = 0$ if and only if $z = 0$" proves essential in analysis, allowing us to test whether an expression equals zero by checking whether its modulus vanishes.`,
+// //   after: ``,
+// //   link: '',
+// // },
+
+  
+
+
+// //     obj3: {
+// //   title: `Modulus and the Conjugate`,
+// //   before: ``,
+// //   content: `A beautiful identity connects the modulus to the [complex conjugate](!/complex-numbers/complex-conjugate): for any complex number $z$, the product of $z$ and its conjugate equals the square of the modulus.
+
+// // $$z \\cdot \\bar{z} = |z|^2$$
+
+// // The proof follows from direct computation. Let $z = a + bi$, so $\\bar{z} = a - bi$. Their product expands as:
+
+// // $$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$
+
+// // The cross terms cancel, and since $i^2 = -1$, the imaginary square becomes positive. The result $a^2 + b^2$ is precisely $|z|^2$ by definition of modulus.
+
+// // This identity appears everywhere in complex analysis. It explains why multiplying by the conjugate eliminates imaginary components — the product is guaranteed real. It provides a quick way to compute modulus: rather than taking a square root, compute $z \\cdot \\bar{z}$ and recognize the result as $|z|^2$.
+
+// // The identity also enables [division](!/complex-numbers/operations). To compute $\\frac{w}{z}$, multiply numerator and denominator by $\\bar{z}$:
+
+// // $$\\frac{w}{z} = \\frac{w \\cdot \\bar{z}}{z \\cdot \\bar{z}} = \\frac{w \\cdot \\bar{z}}{|z|^2}$$
+
+// // The denominator becomes the real number $|z|^2$, converting the quotient to standard [algebraic form](!/complex-numbers/algebraic-form). Without the identity $z \\cdot \\bar{z} = |z|^2$, division of complex numbers would require far more cumbersome techniques.`,
+// //   after: ``,
+// //   link: '',
+// // },
+   
+
+// //     obj4: {
+// //   title: `Properties of Modulus`,
+// //   before: ``,
+// //   content: `The modulus operation obeys algebraic laws that mirror and extend properties of real absolute value. These rules simplify calculations and enable estimation when exact values prove difficult.
+
+// // Non-negativity holds universally: $|z| \\geq 0$ for every complex number $z$. The modulus is a sum of squares under a square root, and both operations preserve non-negativity. Equality $|z| = 0$ occurs precisely when $z = 0$, since only the origin lies zero distance from itself.
+
+// // The conjugate preserves modulus: $|\\bar{z}| = |z|$. Conjugation reflects a point across the real axis, and reflection does not change distance from the origin. The points $z = 3 + 4i$ and $\\bar{z} = 3 - 4i$ both lie exactly 5 units from zero.
+
+// // Products follow a multiplicative rule: $|z_1 \\cdot z_2| = |z_1| \\cdot |z_2|$. The modulus of a product equals the product of the moduli. This property, impossible to guess from the definition, emerges from the algebra of complex multiplication and finds its natural explanation in [trigonometric form](!/complex-numbers/trigonometric-form), where multiplication multiplies lengths.
+
+// // Division obeys the corresponding quotient rule: $|z_1 / z_2| = |z_1| / |z_2|$ for $z_2 \\neq 0$. The modulus of a quotient equals the quotient of the moduli.
+
+// // Powers extend the pattern: $|z^n| = |z|^n$ for any integer $n$. Raising a complex number to the $n$-th power raises its modulus to the $n$-th power. Combined with [De Moivre's theorem](!/complex-numbers/demoivre-theorem), this property makes computing powers of complex numbers remarkably efficient.
+
+// // These rules transform modulus from a mere distance measurement into a powerful algebraic tool. When facing a complicated product or quotient, compute each factor's modulus separately and combine using multiplication or division — often far simpler than working with the full complex expressions.`,
+// //   after: ``,
+// //   link: '',
+// // },
+ 
+
+// //     obj5: {
+// //   title: `The Triangle Inequality`,
+// //   before: ``,
+// //   content: `Among all properties of modulus, none proves more fundamental than the triangle inequality. This bound constrains how moduli combine under addition and provides the foundation for estimation throughout complex analysis.
+
+// // The statement is concise: for any two complex numbers $z_1$ and $z_2$,
+
+// // $$|z_1 + z_2| \\leq |z_1| + |z_2|$$
+
+// // The modulus of a sum never exceeds the sum of the moduli. Equality can occur, but the left side can never surpass the right.
+
+// // The name comes from geometry. In the [complex plane](!/complex-numbers/geometric-representation), the numbers $0$, $z_1$, and $z_1 + z_2$ form vertices of a triangle (possibly degenerate). The side from $0$ to $z_1 + z_2$ has length $|z_1 + z_2|$. The path from $0$ to $z_1$ and then from $z_1$ to $z_1 + z_2$ has total length $|z_1| + |z_2|$. The direct path cannot exceed the detour — a triangle's side never surpasses the sum of the other two sides.
+
+// // The vector interpretation makes this vivid. View $z_1$ and $z_2$ as arrows from the origin. Their sum $z_1 + z_2$ places $z_2$ at the tip of $z_1$ and measures the resultant. Walking along both vectors sequentially covers distance $|z_1| + |z_2|$. The straight-line resultant covers at most that distance, and typically less unless the vectors point in the same direction.
+
+// // The inequality extends to any finite sum: $|z_1 + z_2 + \\cdots + z_n| \\leq |z_1| + |z_2| + \\cdots + |z_n|$. Repeated application of the two-term inequality yields this generalization immediately.`,
+// //   after: ``,
+// //   link: '',
+// // },
+   
+
+// //     obj6: {
+// //   title: `Proving the Triangle Inequality`,
+// //   before: ``,
+// //   content: `The geometric picture motivates the triangle inequality, but rigorous proof requires algebraic verification. The argument proceeds by squaring both sides and exploiting the identity $|z|^2 = z \\cdot \\bar{z}$.
+
+// // Begin with the squared modulus of the sum:
+
+// // $$|z_1 + z_2|^2 = (z_1 + z_2) \\cdot \\overline{(z_1 + z_2)} = (z_1 + z_2)(\\bar{z_1} + \\bar{z_2})$$
+
+// // Expanding the product:
+
+// // $$= z_1\\bar{z_1} + z_1\\bar{z_2} + z_2\\bar{z_1} + z_2\\bar{z_2} = |z_1|^2 + z_1\\bar{z_2} + \\overline{z_1\\bar{z_2}} + |z_2|^2$$
+
+// // The middle terms $z_1\\bar{z_2}$ and $\\overline{z_1\\bar{z_2}}$ are [conjugates](!/complex-numbers/complex-conjugate) of each other. Their sum equals $2\\text{Re}(z_1\\bar{z_2})$, twice the real part. Thus:
+
+// // $$|z_1 + z_2|^2 = |z_1|^2 + 2\\text{Re}(z_1\\bar{z_2}) + |z_2|^2$$
+
+// // The key observation: the real part of any complex number never exceeds its modulus, so $\\text{Re}(z_1\\bar{z_2}) \\leq |z_1\\bar{z_2}| = |z_1||z_2|$. Substituting:
+
+// // $$|z_1 + z_2|^2 \\leq |z_1|^2 + 2|z_1||z_2| + |z_2|^2 = (|z_1| + |z_2|)^2$$
+
+// // Taking square roots of both sides (valid since all quantities are non-negative) yields the triangle inequality.
+
+// // Equality holds precisely when $\\text{Re}(z_1\\bar{z_2}) = |z_1\\bar{z_2}|$, which occurs when $z_1\\bar{z_2}$ is a non-negative real number. This happens if and only if $z_1$ and $z_2$ point in the same direction from the origin — one is a non-negative real multiple of the other. Geometrically, the triangle degenerates to a line segment when both vectors align.`,
+// //   after: ``,
+// //   link: '',
+// // },
+   
+
+// //     obj7: {
+// //   title: `The Reverse Triangle Inequality`,
+// //   before: ``,
+// //   content: `A companion inequality bounds differences rather than sums. The reverse triangle inequality states:
+
+// // $$\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$$
+
+// // The absolute difference of two moduli never exceeds the modulus of the difference. This bound proves useful when estimating how much moduli can vary as complex numbers change.
+
+// // The proof derives from the standard triangle inequality. Write $z_1 = (z_1 - z_2) + z_2$. Applying the triangle inequality:
+
+// // $$|z_1| = |(z_1 - z_2) + z_2| \\leq |z_1 - z_2| + |z_2|$$
+
+// // Rearranging gives $|z_1| - |z_2| \\leq |z_1 - z_2|$. The same argument with roles reversed yields $|z_2| - |z_1| \\leq |z_2 - z_1| = |z_1 - z_2|$. Combining both inequalities:
+
+// // $$-|z_1 - z_2| \\leq |z_1| - |z_2| \\leq |z_1 - z_2|$$
+
+// // This is equivalent to $\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$.
+
+// // The geometric interpretation: $|z_1 - z_2|$ measures the distance between two points in the plane. The quantity $\\big||z_1| - |z_2|\\big|$ measures how much their distances from the origin differ. Two points can be close together (small $|z_1 - z_2|$) even if they lie at very different distances from the origin — but the difference in their radii cannot exceed their separation. Conversely, two points far apart have moduli that may differ substantially, but never by more than the distance between them.`,
+// //   after: ``,
+// //   link: '',
+// // },
+   
+
+// //     obj8: {
+// //   title: `Applications`,
+// //   before: ``,
+// //   content: `The modulus and its inequalities serve practical purposes throughout complex analysis, from routine calculations to sophisticated proofs.
+
+// // Bounding provides estimates when exact computation proves difficult. Suppose we need to show that some complicated expression stays small. Rather than evaluating it precisely, apply the triangle inequality to bound its modulus by a sum of simpler terms. The product rule $|z_1 z_2| = |z_1||z_2|$ often simplifies factors further. Such estimates form the backbone of convergence proofs and error analysis.
+
+// // Distance measurement follows immediately from modulus. The quantity $|z_1 - z_2|$ gives the Euclidean distance between points $z_1$ and $z_2$ in the [complex plane](!/complex-numbers/geometric-representation). This interpretation converts geometric problems into algebraic ones and vice versa. Finding the closest point, testing whether two regions overlap, measuring path lengths — all reduce to modulus calculations.
+
+// // Circles admit elegant description through modulus. The set of all complex numbers $z$ satisfying $|z - z_0| = r$ forms a circle centered at $z_0$ with radius $r$. The equation asks for all points lying distance exactly $r$ from the center $z_0$. Similarly, $|z - z_0| < r$ describes the open disk interior, and $|z - z_0| \\leq r$ describes the closed disk including its boundary. These sets appear constantly in complex analysis: convergence regions, domains of analyticity, and integration contours often take circular form.
+
+// // The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only when restricted to real numbers. In the full complex plane, the inequality carves out a two-dimensional region, not an interval. This shift from intervals to disks marks one of the fundamental differences between real and complex analysis.`,
+// //   after: ``,
+// //   link: '',
+// // },
+// //     obj9:{
+// //       title:`Summary: How |z| Behaves Under Every Operation on z`,
+// //       content:`The modulus is most usefully understood not in isolation but through how it behaves when complex numbers are combined or transformed. The table below classifies every standard operation on z by its effect on |z| — some operations leave the modulus exactly unchanged, some transform it in a clean multiplicative way that mirrors the operation itself, and some yield only an inequality rather than an equality.`,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj10:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj11:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj12:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj13:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+// //       link:'',
+  
+// //     },
+// //     obj14:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+// //       link:'',
+  
+// //     },
+
+
+// //     obj15:{
+  
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     }
+  
+// //   }
+
+
+// // formulas-optimized: v1 | 2026-06-11 | 10 callouts (obj1 ×2, obj3, obj4 ×4, obj5, obj7, obj8)
+// const sectionsContent={
+
+//    obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Modulus](!/complex-numbers/definitions#modulus) — the absolute value $|z| = \\sqrt{a^2 + b^2}$
+// - [Complex Plane](!/complex-numbers/definitions#complex_plane) — where modulus measures distance
+// - [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — connected via $|z|^2 = z \\cdot \\overline{z}$`,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+//   link: '',
+// },
+ 
+
+//     obj1: {
+//   title: `Definition of Modulus`,
+//   before: ``,
+//   content: `The modulus of a complex number $z = a + bi$, written $|z|$, measures the straight-line distance from the origin to the point $(a, b)$ in the [complex plane](!/complex-numbers/geometric-representation). This distance follows directly from the Pythagorean theorem: the point $(a, b)$ sits at the end of a right triangle with horizontal leg $a$ and vertical leg $b$, so the hypotenuse has length $\\sqrt{a^2 + b^2}$.
+
+// The formula is thus:
+
+// @academic[formula_callout:Modulus
+// $$|z| = \\sqrt{a^2 + b^2}$$
+// /complex-numbers/formulas#modulus]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// An often-useful equivalent form avoids the square root:
+
+// @academic[formula_callout:Modulus Squared
+// $$|z|^2 = a^2 + b^2$$
+// /complex-numbers/formulas#modulus_squared]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// The notation mirrors real number absolute value, and for good reason — modulus generalizes the familiar concept to two dimensions. Where real absolute value measures distance from zero along a line, complex modulus measures distance from zero across a plane.
+
+// Computation proceeds by squaring both components, adding, and taking the square root. For $z = 3 + 4i$, we calculate $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$. The famous 3-4-5 right triangle appears here — the complex number $3 + 4i$ lies exactly 5 units from the origin. For $z = -2 + i$, the modulus is $|z| = \\sqrt{(-2)^2 + 1^2} = \\sqrt{4 + 1} = \\sqrt{5}$, an irrational distance approximately equal to $2.236$.
+
+// The geometric picture makes modulus tangible. Draw the point, draw the line segment connecting it to the origin, and measure that segment's length. Every complex number possesses exactly one modulus, always a non-negative real value. Numbers closer to the origin have smaller moduli; numbers farther away have larger moduli. The modulus provides the only meaningful sense of "size" for complex numbers, since $\\mathbb{C}$ lacks the ordering that lets us compare real numbers directly.`,
+//   after: ``,
+//   link: '',
+// },
+
+// notation: {
+//   title: `Modulus Notation`,
+//   lead: `Three inherited strips promised the bars would be explained here. This section owns the mark on a complex number, its root-free square, and the locus idiom that writes circles as single equations.`,
+//   inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation), the conjugate bar from [its page](!/complex-numbers/complex-conjugate#notation); the polar letter $r$ lives with the [trigonometric form](!/complex-numbers/trigonometric-form#notation).`,
+//   entries: [
+//     {
+//       id: 'mod-z',
+//       tex: `$|z|$`,
+//       read: `the modulus of z; mod z`,
+//       means: `The same bars as the real [absolute value](!/algebra/equations/absolute-value#notation), promoted to two dimensions: $|z| = \\sqrt{a^2 + b^2}$, the distance from the origin — **Definition of Modulus** above. "Modulus" is the traditional name; "absolute value" and the spoken "mod $z$" are equally current.`,
+//       cases: `On the axes it collapses to the real mark: $|a|$ for reals, $|b|$ for pure imaginaries — **Special Cases** below. In polar work it answers to the letter $r$ of the [trigonometric form](!/complex-numbers/trigonometric-form#notation).`,
+//       confusedWith: `The arithmetic "mod". Spoken aloud, "mod $z$" collides with [modular arithmetic](!/arithmetic/modulo)'s remainder operation — unrelated; the bars never mean remainder.`,
+//       sameGlyphElsewhere: `The bar family scales by tenant: $\\|\\mathbf{v}\\|$ for [vector length](!/linear-algebra/vectors/magnitude#notation), $|A|$ for [determinants](!/linear-algebra/determinants/properties#notation), $|S|$ for set cardinality — same fence each time.`,
+//     },
+//     {
+//       id: 'mod-z-squared',
+//       tex: `$|z|^2$`,
+//       read: `mod z squared`,
+//       means: `The root-free spelling: $|z|^2 = a^2 + b^2 = z\\bar{z}$ — **Modulus and the Conjugate** below. Analysis reaches for the square precisely to avoid dragging $\\sqrt{\\phantom{x}}$ through a calculation.`,
+//       cases: `Division writes it in the denominator — $\\frac{w}{z} = \\frac{w\\bar{z}}{|z|^2}$; quantum mechanics reads $|\\psi|^2$ as a probability density, the same mark on a wavefunction.`,
+//       confusedWith: `$z^2$. For real numbers $|x|^2 = x^2$; for complex ones $|i|^2 = 1$ while $i^2 = -1$ — dropping the bars changes the mathematics, not just the typography.`,
+//     },
+//     {
+//       id: 'locus',
+//       tex: `$|z - c| = R$`,
+//       read: `mod z minus c equals R`,
+//       means: `Geometry written in modulus: $|z - c|$ is the distance between $z$ and $c$, so the equation names the circle of radius $R$ centered at $c$ — one mark replacing two coordinate equations.`,
+//       cases: `Inequalities trade the circle for regions: $|z - c| < R$ is the open disk, $|z - c| > R$ its outside, and $|z - z_1| = |z - z_2|$ the perpendicular bisector — the locus dialect of complex analysis.`,
+//       confusedWith: `A directed quantity. $|z_1 - z_2| = |z_2 - z_1|$ always — distance forgets direction, though the difference $z_1 - z_2$ itself does not.`,
+//     },
+//   ],
+//   symbolsHref: `/math-symbols/complex-numbers`,
+//   symbolsLabel: `All complex number symbols`,
+//   parentHref: `/complex-numbers`,
+//   parentLabel: `Complex Numbers`,
+// },
+
+
+  
+
+//     obj2: {
+//   title: `Special Cases`,
+//   before: ``,
+//   content: `The modulus formula applies uniformly to all complex numbers, but certain categories yield particularly simple results. These special cases connect complex modulus back to familiar real-number concepts.
+
+// For purely real numbers — those with $b = 0$ — the modulus reduces to ordinary absolute value. If $z = a$ where $a$ is real, then $|z| = \\sqrt{a^2 + 0^2} = \\sqrt{a^2} = |a|$. The number $5$ has modulus $5$; the number $-7$ has modulus $7$. Real numbers sit on the horizontal axis of the complex plane, and their distance from the origin equals their distance from zero on the real line. Complex modulus and real absolute value agree completely on their shared domain.
+
+// For [pure imaginary numbers](!/complex-numbers/imaginary-numbers) — those with $a = 0$ — the modulus equals the absolute value of the coefficient. If $z = bi$, then $|z| = \\sqrt{0^2 + b^2} = \\sqrt{b^2} = |b|$. The number $4i$ has modulus $4$; the number $-3i$ has modulus $3$. Pure imaginaries sit on the vertical axis, and their modulus simply measures how far up or down they lie from the origin, ignoring the sign.
+
+// The complex number zero stands alone with modulus zero. Since $0 = 0 + 0i$, we have $|0| = \\sqrt{0^2 + 0^2} = 0$. This is the only complex number with vanishing modulus — every nonzero complex number lies some positive distance from the origin. The equivalence "$|z| = 0$ if and only if $z = 0$" proves essential in analysis, allowing us to test whether an expression equals zero by checking whether its modulus vanishes.`,
+//   after: ``,
+//   link: '',
+// },
+
+  
+
+
+//     obj3: {
+//   title: `Modulus and the Conjugate`,
+//   before: ``,
+//   content: `A beautiful identity connects the modulus to the [complex conjugate](!/complex-numbers/complex-conjugate): for any complex number $z$, the product of $z$ and its conjugate equals the square of the modulus.
+
+// @academic[formula_callout:Conjugate Times Number
+// $$z \\cdot \\overline{z} = |z|^2 = a^2 + b^2$$
+// /complex-numbers/formulas#conjugate_times_number]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// The proof follows from direct computation. Let $z = a + bi$, so $\\bar{z} = a - bi$. Their product expands as:
+
+// $$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$
+
+// The cross terms cancel, and since $i^2 = -1$, the imaginary square becomes positive. The result $a^2 + b^2$ is precisely $|z|^2$ by definition of modulus.
+
+// This identity appears everywhere in complex analysis. It explains why multiplying by the conjugate eliminates imaginary components — the product is guaranteed real. It provides a quick way to compute modulus: rather than taking a square root, compute $z \\cdot \\bar{z}$ and recognize the result as $|z|^2$.
+
+// The identity also enables [division](!/complex-numbers/operations). To compute $\\frac{w}{z}$, multiply numerator and denominator by $\\bar{z}$:
+
+// $$\\frac{w}{z} = \\frac{w \\cdot \\bar{z}}{z \\cdot \\bar{z}} = \\frac{w \\cdot \\bar{z}}{|z|^2}$$
+
+// The denominator becomes the real number $|z|^2$, converting the quotient to standard [algebraic form](!/complex-numbers/algebraic-form). Without the identity $z \\cdot \\bar{z} = |z|^2$, division of complex numbers would require far more cumbersome techniques.`,
+//   after: ``,
+//   link: '',
+// },
+   
+
+//     obj4: {
+//   title: `Properties of Modulus`,
+//   before: ``,
+//   content: `The modulus operation obeys algebraic laws that mirror and extend properties of real absolute value. These rules simplify calculations and enable estimation when exact values prove difficult.
+
+// Non-negativity holds universally: $|z| \\geq 0$ for every complex number $z$. The modulus is a sum of squares under a square root, and both operations preserve non-negativity. Equality $|z| = 0$ occurs precisely when $z = 0$, since only the origin lies zero distance from itself.
+
+// The conjugate preserves modulus:
+
+// @academic[formula_callout:Modulus of Conjugate
+// $$|\\overline{z}| = |z|$$
+// /complex-numbers/formulas#modulus_of_conjugate]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// Conjugation reflects a point across the real axis, and reflection does not change distance from the origin. The points $z = 3 + 4i$ and $\\bar{z} = 3 - 4i$ both lie exactly 5 units from zero.
+
+// Products follow a multiplicative rule:
+
+// @academic[formula_callout:Modulus of a Product
+// $$|z_1 \\cdot z_2| = |z_1| \\cdot |z_2|$$
+// /complex-numbers/formulas#modulus_of_a_product]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// The modulus of a product equals the product of the moduli. This property, impossible to guess from the definition, emerges from the algebra of complex multiplication and finds its natural explanation in [trigonometric form](!/complex-numbers/trigonometric-form), where multiplication multiplies lengths.
+
+// Division obeys the corresponding quotient rule:
+
+// @academic[formula_callout:Modulus of a Quotient
+// $$\\left|\\frac{z_1}{z_2}\\right| = \\frac{|z_1|}{|z_2|}$$
+// /complex-numbers/formulas#modulus_of_a_quotient]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// The modulus of a quotient equals the quotient of the moduli (for $z_2 \\neq 0$).
+
+// Powers extend the pattern:
+
+// @academic[formula_callout:Modulus of a Power
+// $$|z^n| = |z|^n$$
+// /complex-numbers/formulas#modulus_of_a_power]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// Raising a complex number to the $n$-th power raises its modulus to the $n$-th power. Combined with [De Moivre's theorem](!/complex-numbers/demoivre-theorem), this property makes computing powers of complex numbers remarkably efficient.
+
+// These rules transform modulus from a mere distance measurement into a powerful algebraic tool. When facing a complicated product or quotient, compute each factor's modulus separately and combine using multiplication or division — often far simpler than working with the full complex expressions.`,
+//   after: ``,
+//   link: '',
+// },
+ 
+
+//     obj5: {
+//   title: `The Triangle Inequality`,
+//   before: ``,
+//   content: `Among all properties of modulus, none proves more fundamental than the triangle inequality. This bound constrains how moduli combine under addition and provides the foundation for estimation throughout complex analysis.
+
+// The statement is concise: for any two complex numbers $z_1$ and $z_2$,
+
+// @academic[formula_callout:Triangle Inequality
+// $$|z_1 + z_2| \\leq |z_1| + |z_2|$$
+// /complex-numbers/formulas#triangle_inequality]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// The modulus of a sum never exceeds the sum of the moduli. Equality can occur, but the left side can never surpass the right.
+
+// The name comes from geometry. In the [complex plane](!/complex-numbers/geometric-representation), the numbers $0$, $z_1$, and $z_1 + z_2$ form vertices of a triangle (possibly degenerate). The side from $0$ to $z_1 + z_2$ has length $|z_1 + z_2|$. The path from $0$ to $z_1$ and then from $z_1$ to $z_1 + z_2$ has total length $|z_1| + |z_2|$. The direct path cannot exceed the detour — a triangle's side never surpasses the sum of the other two sides.
+
+// The vector interpretation makes this vivid. View $z_1$ and $z_2$ as arrows from the origin. Their sum $z_1 + z_2$ places $z_2$ at the tip of $z_1$ and measures the resultant. Walking along both vectors sequentially covers distance $|z_1| + |z_2|$. The straight-line resultant covers at most that distance, and typically less unless the vectors point in the same direction.
+
+// The inequality extends to any finite sum: $|z_1 + z_2 + \\cdots + z_n| \\leq |z_1| + |z_2| + \\cdots + |z_n|$. Repeated application of the two-term inequality yields this generalization immediately.`,
+//   after: ``,
+//   link: '',
+// },
+   
+
+//     obj6: {
+//   title: `Proving the Triangle Inequality`,
+//   before: ``,
+//   content: `The geometric picture motivates the triangle inequality, but rigorous proof requires algebraic verification. The argument proceeds by squaring both sides and exploiting the identity $|z|^2 = z \\cdot \\bar{z}$.
+
+// Begin with the squared modulus of the sum:
+
+// $$|z_1 + z_2|^2 = (z_1 + z_2) \\cdot \\overline{(z_1 + z_2)} = (z_1 + z_2)(\\bar{z_1} + \\bar{z_2})$$
+
+// Expanding the product:
+
+// $$= z_1\\bar{z_1} + z_1\\bar{z_2} + z_2\\bar{z_1} + z_2\\bar{z_2} = |z_1|^2 + z_1\\bar{z_2} + \\overline{z_1\\bar{z_2}} + |z_2|^2$$
+
+// The middle terms $z_1\\bar{z_2}$ and $\\overline{z_1\\bar{z_2}}$ are [conjugates](!/complex-numbers/complex-conjugate) of each other. Their sum equals $2\\text{Re}(z_1\\bar{z_2})$, twice the real part. Thus:
+
+// $$|z_1 + z_2|^2 = |z_1|^2 + 2\\text{Re}(z_1\\bar{z_2}) + |z_2|^2$$
+
+// The key observation: the real part of any complex number never exceeds its modulus, so $\\text{Re}(z_1\\bar{z_2}) \\leq |z_1\\bar{z_2}| = |z_1||z_2|$. Substituting:
+
+// $$|z_1 + z_2|^2 \\leq |z_1|^2 + 2|z_1||z_2| + |z_2|^2 = (|z_1| + |z_2|)^2$$
+
+// Taking square roots of both sides (valid since all quantities are non-negative) yields the triangle inequality.
+
+// Equality holds precisely when $\\text{Re}(z_1\\bar{z_2}) = |z_1\\bar{z_2}|$, which occurs when $z_1\\bar{z_2}$ is a non-negative real number. This happens if and only if $z_1$ and $z_2$ point in the same direction from the origin — one is a non-negative real multiple of the other. Geometrically, the triangle degenerates to a line segment when both vectors align.`,
+//   after: ``,
+//   link: '',
+// },
+   
+
+//     obj7: {
+//   title: `The Reverse Triangle Inequality`,
+//   before: ``,
+//   content: `A companion inequality bounds differences rather than sums. The reverse triangle inequality states:
+
+// @academic[formula_callout:Reverse Triangle Inequality
+// $$\\bigl||z_1| - |z_2|\\bigr| \\leq |z_1 - z_2|$$
+// /complex-numbers/formulas#reverse_triangle_inequality]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// The absolute difference of two moduli never exceeds the modulus of the difference. This bound proves useful when estimating how much moduli can vary as complex numbers change.
+
+// The proof derives from the standard triangle inequality. Write $z_1 = (z_1 - z_2) + z_2$. Applying the triangle inequality:
+
+// $$|z_1| = |(z_1 - z_2) + z_2| \\leq |z_1 - z_2| + |z_2|$$
+
+// Rearranging gives $|z_1| - |z_2| \\leq |z_1 - z_2|$. The same argument with roles reversed yields $|z_2| - |z_1| \\leq |z_2 - z_1| = |z_1 - z_2|$. Combining both inequalities:
+
+// $$-|z_1 - z_2| \\leq |z_1| - |z_2| \\leq |z_1 - z_2|$$
+
+// This is equivalent to $\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$.
+
+// The geometric interpretation: $|z_1 - z_2|$ measures the distance between two points in the plane. The quantity $\\big||z_1| - |z_2|\\big|$ measures how much their distances from the origin differ. Two points can be close together (small $|z_1 - z_2|$) even if they lie at very different distances from the origin — but the difference in their radii cannot exceed their separation. Conversely, two points far apart have moduli that may differ substantially, but never by more than the distance between them.`,
+//   after: ``,
+//   link: '',
+// },
+   
+
+//     obj8: {
+//   title: `Applications`,
+//   before: ``,
+//   content: `The modulus and its inequalities serve practical purposes throughout complex analysis, from routine calculations to sophisticated proofs.
+
+// Bounding provides estimates when exact computation proves difficult. Suppose we need to show that some complicated expression stays small. Rather than evaluating it precisely, apply the triangle inequality to bound its modulus by a sum of simpler terms. The product rule $|z_1 z_2| = |z_1||z_2|$ often simplifies factors further. Such estimates form the backbone of convergence proofs and error analysis.
+
+// Distance measurement follows immediately from modulus. The quantity $|z_1 - z_2|$ gives the Euclidean distance between points $z_1$ and $z_2$ in the [complex plane](!/complex-numbers/geometric-representation). Formally:
+
+// @academic[formula_callout:Distance Between Complex Numbers
+// $$d(z_1, z_2) = |z_1 - z_2| = \\sqrt{(a_1 - a_2)^2 + (b_1 - b_2)^2}$$
+// /complex-numbers/formulas#distance_between_complex_numbers]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// This interpretation converts geometric problems into algebraic ones and vice versa. Finding the closest point, testing whether two regions overlap, measuring path lengths — all reduce to modulus calculations.
+
+// Circles admit elegant description through modulus. The set of all complex numbers $z$ satisfying $|z - z_0| = r$ forms a circle centered at $z_0$ with radius $r$. The equation asks for all points lying distance exactly $r$ from the center $z_0$. Similarly, $|z - z_0| < r$ describes the open disk interior, and $|z - z_0| \\leq r$ describes the closed disk including its boundary. These sets appear constantly in complex analysis: convergence regions, domains of analyticity, and integration contours often take circular form.
+
+// The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only when restricted to real numbers. In the full complex plane, the inequality carves out a two-dimensional region, not an interval. This shift from intervals to disks marks one of the fundamental differences between real and complex analysis.`,
+//   after: ``,
+//   link: '',
+// },
+//     obj9:{
+//       title:`Summary: How |z| Behaves Under Every Operation on z`,
+//       content:`The modulus is most usefully understood not in isolation but through how it behaves when complex numbers are combined or transformed. The table below classifies every standard operation on z by its effect on |z| — some operations leave the modulus exactly unchanged, some transform it in a clean multiplicative way that mirrors the operation itself, and some yield only an inequality rather than an equality.`,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj10:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj11:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj12:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj13:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+//     obj14:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+
+
+//     obj15:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     }
+  
+//   }
+
+
+
+
+//   const introContent = {
+//   id: "intro",
+//   title: "Measuring Distance in the Complex Plane",
+//   content: `Every complex number occupies a position in the [complex plane](!/complex-numbers/geometric-representation), and a natural question arises: how far does it lie from the origin? The modulus — also called absolute value — answers this question with a single non-negative real number. Beyond mere measurement, the modulus obeys algebraic laws that connect it to the [conjugate](!/complex-numbers/complex-conjugate), govern products and quotients, and establish fundamental inequalities used throughout analysis.`
+// }
+
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is the modulus of a complex number?",
+//     answer: "The modulus of z = a + bi, written |z|, is the distance from the origin to point (a, b) in the complex plane. The formula is |z| = √(a² + b²), derived from the Pythagorean theorem. It's also called absolute value or magnitude."
+//   },
+//   obj2: {
+//     question: "How do you calculate the modulus of a complex number?",
+//     answer: "Square both the real and imaginary parts, add them together, and take the square root. For z = 3 + 4i: |z| = √(3² + 4²) = √(9 + 16) = √25 = 5. For z = -2 + i: |z| = √(4 + 1) = √5 ≈ 2.236."
+//   },
+//   obj3: {
+//     question: "What is the relationship between modulus and conjugate?",
+//     answer: "The product of a complex number and its conjugate equals the square of its modulus: z·z̄ = |z|². For z = a + bi, this gives (a + bi)(a - bi) = a² + b² = |z|². This identity is essential for division and many proofs."
+//   },
+//   obj4: {
+//     question: "What is the modulus of a real number?",
+//     answer: "For a real number z = a (where the imaginary part is zero), the modulus equals the ordinary absolute value: |a| = √(a² + 0²) = √a² = |a|. Complex modulus and real absolute value agree completely on real numbers."
+//   },
+//   obj5: {
+//     question: "What is the modulus of a pure imaginary number?",
+//     answer: "For a pure imaginary number z = bi (where the real part is zero), the modulus equals the absolute value of the coefficient: |bi| = √(0² + b²) = |b|. For example, |4i| = 4 and |-3i| = 3."
+//   },
+//   obj6: {
+//     question: "When is the modulus equal to zero?",
+//     answer: "The modulus equals zero only when the complex number itself is zero: |z| = 0 if and only if z = 0. Every nonzero complex number has a positive modulus since it lies some distance from the origin."
+//   },
+//   obj7: {
+//     question: "What is the product rule for modulus?",
+//     answer: "The modulus of a product equals the product of the moduli: |z₁·z₂| = |z₁|·|z₂|. Similarly for division: |z₁/z₂| = |z₁|/|z₂|. For powers: |zⁿ| = |z|ⁿ. These rules simplify calculations significantly."
+//   },
+//   obj8: {
+//     question: "Does the conjugate change the modulus?",
+//     answer: "No, the conjugate preserves the modulus: |z̄| = |z|. Conjugation reflects a point across the real axis, and reflection doesn't change the distance from the origin. Both z = 3 + 4i and z̄ = 3 - 4i have modulus 5."
+//   },
+//   obj9: {
+//     question: "What is the triangle inequality for complex numbers?",
+//     answer: "The triangle inequality states |z₁ + z₂| ≤ |z₁| + |z₂|. The modulus of a sum never exceeds the sum of the moduli. Geometrically, the direct path (left side) can't exceed the detoured path through z₁ then z₂ (right side)."
+//   },
+//   obj10: {
+//     question: "When does equality hold in the triangle inequality?",
+//     answer: "Equality |z₁ + z₂| = |z₁| + |z₂| holds when z₁ and z₂ point in the same direction from the origin — that is, when one is a non-negative real multiple of the other. Geometrically, the triangle degenerates to a line segment."
+//   },
+//   obj11: {
+//     question: "What is the reverse triangle inequality?",
+//     answer: "The reverse triangle inequality states ||z₁| - |z₂|| ≤ |z₁ - z₂|. The absolute difference of two moduli never exceeds the modulus of the difference. This bounds how much moduli can vary as complex numbers change."
+//   },
+//   obj12: {
+//     question: "How does modulus describe circles in the complex plane?",
+//     answer: "The equation |z - z₀| = r describes a circle centered at z₀ with radius r — all points at distance exactly r from center z₀. The inequality |z - z₀| < r describes the open disk interior, and |z - z₀| ≤ r the closed disk."
+//   },
+//   obj13: {
+//     question: "How do you find the distance between two complex numbers?",
+//     answer: "The distance between z₁ and z₂ in the complex plane equals |z₁ - z₂|. This is the Euclidean distance formula applied to points (a₁, b₁) and (a₂, b₂): √[(a₁-a₂)² + (b₁-b₂)²]."
+//   }
+// }
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Modulus (Absolute Value) of Complex Numbers",
+//     "description": "Learn the modulus of complex numbers: definition |z| = √(a² + b²), the identity z·z̄ = |z|², properties, the triangle inequality and its proof, reverse triangle inequality, and applications.",
+//     "url": "https://www.learnmathclass.com/complex-numbers/absolute-value",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Complex Number Modulus"
+//     },
+//     "teaches": [
+//       "Definition of modulus |z| = √(a² + b²)",
+//       "Special cases: real, pure imaginary, zero",
+//       "The identity z·z̄ = |z|²",
+//       "Modulus properties: products, quotients, powers",
+//       "The triangle inequality and its proof",
+//       "The reverse triangle inequality",
+//       "Circles and distance in the complex plane",
+//       "Typology of how |z| behaves under every operation on z: invariant, multiplicative, and bounded"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Complex Numbers",
+//         "item": "https://www.learnmathclass.com/complex-numbers"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Absolute Value",
+//         "item": "https://www.learnmathclass.com/complex-numbers/absolute-value"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+
+ 
+
+//   return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     obj1Table,
+//     obj4Table,
+//     obj7Table,
+//     summaryTable,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Modulus: Absolute Value & Triangle Inequality | Learn Math Class",
+//       description: "Learn the modulus of complex numbers: definition |z| = √(a² + b²), the identity z·z̄ = |z|², properties, the triangle inequality and its proof, reverse triangle inequality, and applications.",
+//       keywords: keyWords.join(", "),
+//       url: "/complex-numbers/absolute-value",
+//       name: "Modulus (Absolute Value) of Complex Numbers"
+//     },
+//   }
+// }
+//    }
+
+
+
+// export default function AbsoluteValuePage({
+//   seoData,
+//   sectionsContent,
+//   introContent,
+//   obj1Table,
+//   obj4Table,
+//   obj7Table,
+//   summaryTable,
+//   faqQuestions,
+//   schemas,
+// }) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//           <div
+//             key={'obj1-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj1Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'notation',
+//         title:sectionsContent.notation.title,
+//         link:``,
+//         content:[
+//           <NotationSection
+//             key={'notation'}
+//             title={sectionsContent.notation.title}
+//             lead={sectionsContent.notation.lead}
+//             inherited={sectionsContent.notation.inherited}
+//             entries={sectionsContent.notation.entries}
+//             symbolsHref={sectionsContent.notation.symbolsHref}
+//             symbolsLabel={sectionsContent.notation.symbolsLabel}
+//             parentHref={sectionsContent.notation.parentHref}
+//             parentLabel={sectionsContent.notation.parentLabel}
+//             theme={'navy'}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//           <div
+//             key={'obj4-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj4Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//           <div
+//             key={'obj7-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj7Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//           <div
+//             key={'summary-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: summaryTable }}
+//           />,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Absolute Value</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//    showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "siblings"
+//          secondaryNavTitle="More in Complex Numbers"
+   
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//     <KeyTermsCard
+//            id="0"
+//            title={sectionsContent.obj0.title}
+//            content={sectionsContent.obj0.content}
+//            after={sectionsContent.obj0.after}
+//            variant="light"
+//          />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -9,6 +1267,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -846,8 +2105,11 @@ The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only 
       after:``,
       link:'',
   
-    }
+    },
   
+    faq: {
+      title: `Modulus FAQ`,
+    },
   }
 
 
@@ -862,56 +2124,29 @@ The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only 
 
 const faqQuestions = {
   obj1: {
-    question: "What is the modulus of a complex number?",
-    answer: "The modulus of z = a + bi, written |z|, is the distance from the origin to point (a, b) in the complex plane. The formula is |z| = √(a² + b²), derived from the Pythagorean theorem. It's also called absolute value or magnitude."
+    question: "What is the modulus of a real number or a pure imaginary number?",
+    answer: "For a real number it is the ordinary absolute value, since the vertical component is zero and only the sign is discarded. For a pure imaginary number it is the size of the coefficient, so the modulus of −5i is 5. In both cases the modulus measures distance from the origin along one axis.",
+    sectionId: "2"
   },
   obj2: {
-    question: "How do you calculate the modulus of a complex number?",
-    answer: "Square both the real and imaginary parts, add them together, and take the square root. For z = 3 + 4i: |z| = √(3² + 4²) = √(9 + 16) = √25 = 5. For z = -2 + i: |z| = √(4 + 1) = √5 ≈ 2.236."
+    question: "Does taking the conjugate change the modulus?",
+    answer: "No. Conjugating reflects a point across the horizontal axis, and reflection does not move it any closer to or further from the origin. Since the modulus depends on the squares of both components, flipping the sign of one leaves it untouched. A number and its conjugate always lie on the same circle.",
+    sectionId: "3"
   },
   obj3: {
-    question: "What is the relationship between modulus and conjugate?",
-    answer: "The product of a complex number and its conjugate equals the square of its modulus: z·z̄ = |z|². For z = a + bi, this gives (a + bi)(a - bi) = a² + b² = |z|². This identity is essential for division and many proofs."
+    question: "Is the modulus of a product equal to the product of the moduli?",
+    answer: "Yes. Multiplying two complex numbers multiplies their distances from the origin, so the modulus of a product is the product of the moduli. Division behaves the same way with a quotient. This is one of the reasons polar form makes multiplication and powers so much easier than rectangular form does.",
+    sectionId: "4"
   },
   obj4: {
-    question: "What is the modulus of a real number?",
-    answer: "For a real number z = a (where the imaginary part is zero), the modulus equals the ordinary absolute value: |a| = √(a² + 0²) = √a² = |a|. Complex modulus and real absolute value agree completely on real numbers."
+    question: "When does equality hold in the triangle inequality?",
+    answer: "Only when the two numbers point in the same direction from the origin, meaning one is a non-negative real multiple of the other. Geometrically the triangle collapses into a straight line and the two paths coincide. In every other case the direct route is genuinely shorter and the inequality is strict.",
+    sectionId: "5"
   },
   obj5: {
-    question: "What is the modulus of a pure imaginary number?",
-    answer: "For a pure imaginary number z = bi (where the real part is zero), the modulus equals the absolute value of the coefficient: |bi| = √(0² + b²) = |b|. For example, |4i| = 4 and |-3i| = 3."
-  },
-  obj6: {
-    question: "When is the modulus equal to zero?",
-    answer: "The modulus equals zero only when the complex number itself is zero: |z| = 0 if and only if z = 0. Every nonzero complex number has a positive modulus since it lies some distance from the origin."
-  },
-  obj7: {
-    question: "What is the product rule for modulus?",
-    answer: "The modulus of a product equals the product of the moduli: |z₁·z₂| = |z₁|·|z₂|. Similarly for division: |z₁/z₂| = |z₁|/|z₂|. For powers: |zⁿ| = |z|ⁿ. These rules simplify calculations significantly."
-  },
-  obj8: {
-    question: "Does the conjugate change the modulus?",
-    answer: "No, the conjugate preserves the modulus: |z̄| = |z|. Conjugation reflects a point across the real axis, and reflection doesn't change the distance from the origin. Both z = 3 + 4i and z̄ = 3 - 4i have modulus 5."
-  },
-  obj9: {
-    question: "What is the triangle inequality for complex numbers?",
-    answer: "The triangle inequality states |z₁ + z₂| ≤ |z₁| + |z₂|. The modulus of a sum never exceeds the sum of the moduli. Geometrically, the direct path (left side) can't exceed the detoured path through z₁ then z₂ (right side)."
-  },
-  obj10: {
-    question: "When does equality hold in the triangle inequality?",
-    answer: "Equality |z₁ + z₂| = |z₁| + |z₂| holds when z₁ and z₂ point in the same direction from the origin — that is, when one is a non-negative real multiple of the other. Geometrically, the triangle degenerates to a line segment."
-  },
-  obj11: {
-    question: "What is the reverse triangle inequality?",
-    answer: "The reverse triangle inequality states ||z₁| - |z₂|| ≤ |z₁ - z₂|. The absolute difference of two moduli never exceeds the modulus of the difference. This bounds how much moduli can vary as complex numbers change."
-  },
-  obj12: {
-    question: "How does modulus describe circles in the complex plane?",
-    answer: "The equation |z - z₀| = r describes a circle centered at z₀ with radius r — all points at distance exactly r from center z₀. The inequality |z - z₀| < r describes the open disk interior, and |z - z₀| ≤ r the closed disk."
-  },
-  obj13: {
     question: "How do you find the distance between two complex numbers?",
-    answer: "The distance between z₁ and z₂ in the complex plane equals |z₁ - z₂|. This is the Euclidean distance formula applied to points (a₁, b₁) and (a₂, b₂): √[(a₁-a₂)² + (b₁-b₂)²]."
+    answer: "Take the modulus of their difference. Subtracting gives the vector running from one point to the other, and the modulus of that vector is its length. This is the same distance formula used for points in the plane, which is why equations like |z − c| = r describe circles. See the [distance and midpoint tool](!/complex-numbers/visual-tools/distance-midpoint).",
+    sectionId: "8"
   }
 }
 
@@ -982,18 +2217,6 @@ const schemas = {
     ]
   },
 
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1157,6 +2380,22 @@ export default function AbsoluteValuePage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:sectionsContent.faq.title,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1194,12 +2433,6 @@ export default function AbsoluteValuePage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

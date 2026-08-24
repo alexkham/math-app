@@ -579,7 +579,7 @@ const summaryTable = `
 
 // These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.`,
 //   before: ``,
-//   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/de-moivres-theorem) →@`,
+//   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/demoivre-theorem) →@`,
 //   link: '',
 // },
 //     obj11:{
@@ -1028,7 +1028,7 @@ $$\\frac{z_1}{z_2} = \\frac{10}{2}\\,\\text{cis}\\left(\\frac{2\\pi}{3} - \\frac
 
 These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.`,
   before: ``,
-  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/de-moivres-theorem) →@`,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/demoivre-theorem) →@`,
   link: '',
 },
     obj11:{

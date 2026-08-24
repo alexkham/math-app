@@ -105,7 +105,7 @@
 // //       "@type": "WebApplication",
 // //       "name": "Trigonometric Identities Table and Practice Tool",
 // //       "description": "Reference table of 64 trigonometric identities across 14 families: Pythagorean, reciprocal, negative-angle, complement, supplement, sum, difference, double, triple, half, power-reduction, product-to-sum, sum-to-product, and inverse. Search, filter, and drill with a drag puzzle.",
-// //       "url": "https://www.learnmathclass.com/tables/trigonometry/identities",
+// //       "url": "https://www.learnmathclass.com/tables/trigonometric-identities",
 // //       "applicationCategory": "EducationalApplication",
 // //       "operatingSystem": "Any",
 // //       "offers": {
@@ -155,7 +155,7 @@
 // //           "@type": "ListItem",
 // //           "position": 3,
 // //           "name": "Trigonometric Identities",
-// //           "item": "https://www.learnmathclass.com/tables/trigonometry/identities"
+// //           "item": "https://www.learnmathclass.com/tables/trigonometric-identities"
 // //         }
 // //       ]
 // //     },
@@ -186,7 +186,7 @@
 // //            title: "Trigonometric Identities Table & Puzzle | Learn Math Class",
 // //            description: "Reference table of 64 trig identities across 14 families: Pythagorean, sum-angle, double-angle, half-angle, inverse, and more. Search by LHS or RHS, filter by family, drill with a drag puzzle.",
 // //            keywords: keyWords.join(", "),
-// //            url: "/tables/trigonometry/identities",
+// //            url: "/tables/trigonometric-identities",
 // //            name: "Trigonometric Identities Table and Practice Tool"
 // //          }
 // //        }
@@ -576,7 +576,7 @@
 //       "@type": "WebApplication",
 //       "name": "Trigonometric Identities Table and Practice Tool",
 //       "description": "Reference table of 115 trigonometric identities across 15 families: Pythagorean, reciprocal and quotient, negative-angle (even-odd), complement (cofunction), supplement, reference-angle reduction, sum-angle, difference-angle, double-angle, triple-angle, half-angle, power reduction, product-to-sum, sum-to-product, and inverse. All six functions covered: sine, cosine, tangent, cotangent, secant, and cosecant. Search, filter, and drill with a drag puzzle.",
-//       "url": "https://www.learnmathclass.com/tables/trigonometry/identities",
+//       "url": "https://www.learnmathclass.com/tables/trigonometric-identities",
 //       "applicationCategory": "EducationalApplication",
 //       "operatingSystem": "Any",
 //       "offers": {
@@ -628,7 +628,7 @@
 //           "@type": "ListItem",
 //           "position": 3,
 //           "name": "Trigonometric Identities",
-//           "item": "https://www.learnmathclass.com/tables/trigonometry/identities"
+//           "item": "https://www.learnmathclass.com/tables/trigonometric-identities"
 //         }
 //       ]
 //     },

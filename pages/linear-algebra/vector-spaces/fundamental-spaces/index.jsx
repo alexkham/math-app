@@ -607,7 +607,7 @@
 // // //     "@type": "LearningResource",
 // // //     "name": "Four Fundamental Subspaces",
 // // //     "description": "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
-// // //     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces",
+// // //     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces",
 // // //     "inLanguage": "en-US",
 // // //     "learningResourceType": "Explanation",
 // // //     "educationalLevel": "College",
@@ -670,7 +670,7 @@
 // // //         "@type": "ListItem",
 // // //         "position": 4,
 // // //         "name": "Fundamental Subspaces",
-// // //         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces"
+// // //         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces"
 // // //       }
 // // //     ]
 // // //   },
@@ -703,7 +703,7 @@
 // // //       title: "Four Fundamental Subspaces of a Matrix | Learn Math Class",
 // // //       description: "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
 // // //       keywords: keyWords.join(", "),
-// // //       url: "/linear-algebra/vector-spaces/fundamental-subspaces",
+// // //       url: "/linear-algebra/vector-spaces/fundamental-spaces",
 // // //       name: "Four Fundamental Subspaces"
 // // //     },
 // // //   }
@@ -1607,7 +1607,7 @@
 // //     "@type": "LearningResource",
 // //     "name": "Four Fundamental Subspaces",
 // //     "description": "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
-// //     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces",
+// //     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces",
 // //     "inLanguage": "en-US",
 // //     "learningResourceType": "Explanation",
 // //     "educationalLevel": "College",
@@ -1670,7 +1670,7 @@
 // //         "@type": "ListItem",
 // //         "position": 4,
 // //         "name": "Fundamental Subspaces",
-// //         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces"
+// //         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces"
 // //       }
 // //     ]
 // //   },
@@ -1703,7 +1703,7 @@
 // //       title: "Four Fundamental Subspaces of a Matrix | Learn Math Class",
 // //       description: "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
 // //       keywords: keyWords.join(", "),
-// //       url: "/linear-algebra/vector-spaces/fundamental-subspaces",
+// //       url: "/linear-algebra/vector-spaces/fundamental-spaces",
 // //       name: "Four Fundamental Subspaces"
 // //     },
 // //   }
@@ -2639,7 +2639,7 @@
 //     "@type": "LearningResource",
 //     "name": "Four Fundamental Subspaces",
 //     "description": "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces",
+//     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces",
 //     "inLanguage": "en-US",
 //     "learningResourceType": "Explanation",
 //     "educationalLevel": "College",
@@ -2702,7 +2702,7 @@
 //         "@type": "ListItem",
 //         "position": 4,
 //         "name": "Fundamental Subspaces",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces"
+//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces"
 //       }
 //     ]
 //   },
@@ -2735,7 +2735,7 @@
 //       title: "Four Fundamental Subspaces of a Matrix | Learn Math Class",
 //       description: "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
 //       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/vector-spaces/fundamental-subspaces",
+//       url: "/linear-algebra/vector-spaces/fundamental-spaces",
 //       name: "Four Fundamental Subspaces"
 //     },
 //   }
@@ -3713,7 +3713,7 @@ const schemas = {
     "@type": "LearningResource",
     "name": "Four Fundamental Subspaces",
     "description": "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
-    "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces",
+    "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "College",
@@ -3776,7 +3776,7 @@ const schemas = {
         "@type": "ListItem",
         "position": 4,
         "name": "Fundamental Subspaces",
-        "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces"
+        "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-spaces"
       }
     ]
   },
@@ -3809,7 +3809,7 @@ return {
       title: "Four Fundamental Subspaces of a Matrix | Learn Math Class",
       description: "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
       keywords: keyWords.join(", "),
-      url: "/linear-algebra/vector-spaces/fundamental-subspaces",
+      url: "/linear-algebra/vector-spaces/fundamental-spaces",
       name: "Four Fundamental Subspaces"
     },
   }

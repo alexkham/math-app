@@ -165,7 +165,7 @@
 //       items:[
 //         {title:"Trigonometry",link:'/trigonometry'},
 //         {title:"Trigonometric Identities",link:'/trigonometry/identities'},
-//         {title:"Trigonometric Tables",link:'/tables/trigonometry'}
+//         {title:"Trigonometric Tables",link:'/tables'}
 //       ]
 //     }
 
@@ -615,7 +615,7 @@ export async function getStaticProps() {
       items:[
         {title:"Trigonometry",link:'/trigonometry'},
         {title:"Trigonometric Identities",link:'/trigonometry/identities'},
-        {title:"Trigonometric Tables",link:'/tables/trigonometry'}
+        {title:"Trigonometric Tables",link:'/tables'}
       ]
     }
 

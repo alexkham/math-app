@@ -545,7 +545,7 @@
 //     "@type": "LearningResource",
 //     "name": "Gaussian Elimination",
 //     "description": "Gaussian elimination: forward elimination, back substitution, Gauss-Jordan, row operations, pivots, worked examples for unique, infinite, and no-solution cases, partial pivoting, and cost.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-eliminations",
+//     "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-elimination",
 //     "inLanguage": "en-US",
 //     "learningResourceType": "Explanation",
 //     "educationalLevel": "College",
@@ -608,7 +608,7 @@
 //         "@type": "ListItem",
 //         "position": 4,
 //         "name": "Gaussian Elimination",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-eliminations"
+//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-elimination"
 //       }
 //     ]
 //   },
@@ -636,7 +636,7 @@
 // //         title: "Title | Learn Math Class",
 // //         description: "Metadescription",
 // //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/linear-systems/gaussian-eliminations",
+// //         url: "/linear-algebra/linear-systems/gaussian-elimination",
 // //          name: "name"
 // //       },
         
@@ -656,7 +656,7 @@
 //       title: "Gaussian Elimination: Row Reduction | Learn Math Class",
 //       description: "Gaussian elimination: forward elimination, back substitution, Gauss-Jordan, row operations, pivots, worked examples for unique, infinite, and no-solution cases, partial pivoting, and cost.",
 //       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/linear-systems/gaussian-eliminations",
+//       url: "/linear-algebra/linear-systems/gaussian-elimination",
 //       name: "Gaussian Elimination"
 //     },
 //   }
@@ -1533,7 +1533,7 @@ const schemas = {
     "@type": "LearningResource",
     "name": "Gaussian Elimination",
     "description": "Gaussian elimination: forward elimination, back substitution, Gauss-Jordan, row operations, pivots, worked examples for unique, infinite, and no-solution cases, partial pivoting, and cost.",
-    "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-eliminations",
+    "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-elimination",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "College",
@@ -1596,7 +1596,7 @@ const schemas = {
         "@type": "ListItem",
         "position": 4,
         "name": "Gaussian Elimination",
-        "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-eliminations"
+        "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-elimination"
       }
     ]
   },
@@ -1624,7 +1624,7 @@ const schemas = {
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/linear-algebra/linear-systems/gaussian-eliminations",
+//         url: "/linear-algebra/linear-systems/gaussian-elimination",
 //          name: "name"
 //       },
         
@@ -1644,7 +1644,7 @@ return {
       title: "Gaussian Elimination: Row Reduction | Learn Math Class",
       description: "Gaussian elimination: forward elimination, back substitution, Gauss-Jordan, row operations, pivots, worked examples for unique, infinite, and no-solution cases, partial pivoting, and cost.",
       keywords: keyWords.join(", "),
-      url: "/linear-algebra/linear-systems/gaussian-eliminations",
+      url: "/linear-algebra/linear-systems/gaussian-elimination",
       name: "Gaussian Elimination"
     },
   }

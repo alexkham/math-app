@@ -214,7 +214,7 @@
 // //         title: "Title | Learn Math Class",
 // //         description: "Metadescription",
 // //         keywords: keyWords.join(", "),
-// //         url: "/tables/calculus/common-limits",
+// //         url: "/tables/common-limits",
 // //          name: "name"
 // //       },
         

@@ -164,11 +164,11 @@ const CustomProbability=()=>(
               // },
               {
                 name: "Factoring Calculator",
-                href: "/calculators/factoring-calculator"
+                href: "/algebra/calculators/factoring"
               },
               {
                 name: "Polynomial Calculator",
-                href: "/calculators/polynomial-calculator"
+                href: "/algebra/calculators/polynomial"
               }
             ]
           },
@@ -181,11 +181,11 @@ const CustomProbability=()=>(
             subcategories: [
               {
                 name: "Prime Numbers Calculator",
-                href: "/sequences/prime-numbers"
+                href: "/algebra/calculators/sequences/prime-numbers"
               },
               {
                 name: "Fibonacci Calculator",
-                href: "/sequences/fibonacci-numbers"
+                href: "/algebra/calculators/sequences/fibonacci-sequence"
               }
             ]
           },

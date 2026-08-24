@@ -1302,7 +1302,7 @@ const definitionsRepository = [
       },
       {
         "name": "Perfect Squares Table",
-        "url": "/tables/arithmetics/perfect-squares"
+        "url": "/tables/perfect-squares"
       },
       {
         "name": "Square Root Visual Tool",
@@ -1359,7 +1359,7 @@ const definitionsRepository = [
       },
       {
         "name": "Perfect Cubes Table",
-        "url": "/tables/arithmetics/perfect-cubes"
+        "url": "/tables/perfect-cubes"
       },
       {
         "name": "Odd-Index Radicals",
@@ -1764,7 +1764,7 @@ const definitionsRepository = [
       },
       {
         "name": "Perfect Squares Table",
-        "url": "/tables/arithmetics/perfect-squares"
+        "url": "/tables/perfect-squares"
       }
     ],
     "relatedFormulas": [],
@@ -1817,7 +1817,7 @@ const definitionsRepository = [
       },
       {
         "name": "Perfect Cubes Table",
-        "url": "/tables/arithmetics/perfect-cubes"
+        "url": "/tables/perfect-cubes"
       }
     ],
     "relatedFormulas": [],
@@ -2404,7 +2404,7 @@ const definitionsRepository = [
       },
       {
         "name": "Logarithm Table",
-        "url": "/tables/arithmetics/logarithm"
+        "url": "/tables/logarithm"
       },
       {
         "name": "Log Calculator",
@@ -2474,7 +2474,7 @@ const definitionsRepository = [
       },
       {
         "name": "Natural Logarithm Table",
-        "url": "/tables/arithmetics/natural-logarithms"
+        "url": "/tables/logarithm"
       }
     ],
     "relatedFormulas": [

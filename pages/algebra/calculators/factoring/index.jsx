@@ -235,7 +235,7 @@
 //     "@type": "WebApplication",
 //     "name": "Factoring Calculator - Prime and Complete Factorization",
 //     "description": "Free online factoring calculator for finding prime factors and complete factors of any number. Instantly calculate all factors and factor pairs with step-by-step results.",
-//     "url": "https://www.learnmathclass.com/calculators/factoring-calculator",
+//     "url": "https://www.learnmathclass.com/algebra/calculators/factoring",
 //     "applicationCategory": "EducationalApplication",
 //     "operatingSystem": "Any",
 //     "offers": {
@@ -285,7 +285,7 @@
 //         "@type": "ListItem",
 //         "position": 3,
 //         "name": "Factoring Calculator",
-//         "item": "https://www.learnmathclass.com/calculators/factoring-calculator"
+//         "item": "https://www.learnmathclass.com/algebra/calculators/factoring"
 //       }
 //     ]
 //   },

@@ -1785,11 +1785,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Continuity at a Point",
-            "url": "/calculus/limits/formulas#continuity_at_a_point"
+            "url": "/calculus/formulas#continuity_at_a_point"
           },
           {
             "name": "One-Sided Continuity",
-            "url": "/calculus/limits/formulas#one_sided_continuity"
+            "url": "/calculus/formulas#one_sided_continuity"
           }
         ],
     relatedTheorems: [],
@@ -1814,11 +1814,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Limit of the Identity Function",
-            "url": "/calculus/limits/formulas#limit_of_the_identity_function"
+            "url": "/calculus/formulas#limit_of_the_identity_function"
           },
           {
             "name": "Limit of a Polynomial",
-            "url": "/calculus/limits/formulas#limit_of_a_polynomial"
+            "url": "/calculus/formulas#limit_of_a_polynomial"
           }
         ],
     relatedTheorems: [],
@@ -1843,11 +1843,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Limit of a Constant",
-            "url": "/calculus/limits/formulas#limit_of_a_constant"
+            "url": "/calculus/formulas#limit_of_a_constant"
           },
           {
             "name": "Limit of a Polynomial",
-            "url": "/calculus/limits/formulas#limit_of_a_polynomial"
+            "url": "/calculus/formulas#limit_of_a_polynomial"
           }
         ],
     relatedTheorems: [],
@@ -1877,15 +1877,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Constant Multiple Rule (Limits)",
-            "url": "/calculus/limits/formulas#constant_multiple_rule_limits"
+            "url": "/calculus/formulas#constant_multiple_rule_limits"
           },
           {
             "name": "Product Rule (Limits)",
-            "url": "/calculus/limits/formulas#product_rule_limits"
+            "url": "/calculus/formulas#product_rule_limits"
           },
           {
             "name": "Quotient Rule (Limits)",
-            "url": "/calculus/limits/formulas#quotient_rule_limits"
+            "url": "/calculus/formulas#quotient_rule_limits"
           }
         ],
     relatedTheorems: [],
@@ -1910,11 +1910,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Sum and Difference Rule (Limits)",
-            "url": "/calculus/limits/formulas#sum_and_difference_rule_limits"
+            "url": "/calculus/formulas#sum_and_difference_rule_limits"
           },
           {
             "name": "Product Rule (Limits)",
-            "url": "/calculus/limits/formulas#product_rule_limits"
+            "url": "/calculus/formulas#product_rule_limits"
           }
         ],
     relatedTheorems: [],
@@ -1944,15 +1944,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Quotient Rule (Limits)",
-            "url": "/calculus/limits/formulas#quotient_rule_limits"
+            "url": "/calculus/formulas#quotient_rule_limits"
           },
           {
             "name": "Power Rule (Limits)",
-            "url": "/calculus/limits/formulas#power_rule_limits"
+            "url": "/calculus/formulas#power_rule_limits"
           },
           {
             "name": "Sum and Difference Rule (Limits)",
-            "url": "/calculus/limits/formulas#sum_and_difference_rule_limits"
+            "url": "/calculus/formulas#sum_and_difference_rule_limits"
           }
         ],
     relatedTheorems: [],
@@ -1982,15 +1982,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Product Rule (Limits)",
-            "url": "/calculus/limits/formulas#product_rule_limits"
+            "url": "/calculus/formulas#product_rule_limits"
           },
           {
             "name": "Limit of a Rational Function",
-            "url": "/calculus/limits/formulas#limit_of_a_rational_function"
+            "url": "/calculus/formulas#limit_of_a_rational_function"
           },
           {
             "name": "L'Hôpital's Rule",
-            "url": "/calculus/limits/formulas#lhopitals_rule"
+            "url": "/calculus/formulas#lhopitals_rule"
           }
         ],
     relatedTheorems: [],
@@ -2015,11 +2015,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Product Rule (Limits)",
-            "url": "/calculus/limits/formulas#product_rule_limits"
+            "url": "/calculus/formulas#product_rule_limits"
           },
           {
             "name": "Root Rule (Limits)",
-            "url": "/calculus/limits/formulas#root_rule_limits"
+            "url": "/calculus/formulas#root_rule_limits"
           }
         ],
     relatedTheorems: [],
@@ -2044,7 +2044,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Power Rule (Limits)",
-            "url": "/calculus/limits/formulas#power_rule_limits"
+            "url": "/calculus/formulas#power_rule_limits"
           }
         ],
     relatedTheorems: [],
@@ -2094,11 +2094,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Limit of a Rational Function",
-            "url": "/calculus/limits/formulas#limit_of_a_rational_function"
+            "url": "/calculus/formulas#limit_of_a_rational_function"
           },
           {
             "name": "Continuity at a Point",
-            "url": "/calculus/limits/formulas#continuity_at_a_point"
+            "url": "/calculus/formulas#continuity_at_a_point"
           }
         ],
     relatedTheorems: [],
@@ -2132,15 +2132,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Limit of a Polynomial",
-            "url": "/calculus/limits/formulas#limit_of_a_polynomial"
+            "url": "/calculus/formulas#limit_of_a_polynomial"
           },
           {
             "name": "Quotient Rule (Limits)",
-            "url": "/calculus/limits/formulas#quotient_rule_limits"
+            "url": "/calculus/formulas#quotient_rule_limits"
           },
           {
             "name": "L'Hôpital's Rule",
-            "url": "/calculus/limits/formulas#lhopitals_rule"
+            "url": "/calculus/formulas#lhopitals_rule"
           }
         ],
     relatedTheorems: [],
@@ -2170,11 +2170,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Continuity Preserved Under Operations",
-            "url": "/calculus/limits/formulas#continuity_preserved_under_operations"
+            "url": "/calculus/formulas#continuity_preserved_under_operations"
           },
           {
             "name": "Continuity at a Point",
-            "url": "/calculus/limits/formulas#continuity_at_a_point"
+            "url": "/calculus/formulas#continuity_at_a_point"
           }
         ],
     relatedTheorems: [],
@@ -2199,11 +2199,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Sine Limit at Zero",
-            "url": "/calculus/limits/formulas#sine_limit_at_zero"
+            "url": "/calculus/formulas#sine_limit_at_zero"
           },
           {
             "name": "Cosine Limit at Zero",
-            "url": "/calculus/limits/formulas#cosine_limit_at_zero"
+            "url": "/calculus/formulas#cosine_limit_at_zero"
           }
         ],
     relatedTheorems: [],
@@ -2237,11 +2237,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Quotient Rule (Limits)",
-            "url": "/calculus/limits/formulas#quotient_rule_limits"
+            "url": "/calculus/formulas#quotient_rule_limits"
           },
           {
             "name": "Limit of a Rational Function",
-            "url": "/calculus/limits/formulas#limit_of_a_rational_function"
+            "url": "/calculus/formulas#limit_of_a_rational_function"
           }
         ],
     relatedTheorems: [],
@@ -2276,15 +2276,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "One-Sided Continuity",
-            "url": "/calculus/limits/formulas#one_sided_continuity"
+            "url": "/calculus/formulas#one_sided_continuity"
           },
           {
             "name": "Two-Sided Limit Existence Theorem",
-            "url": "/calculus/limits/formulas#two_sided_limit_existence_theorem"
+            "url": "/calculus/formulas#two_sided_limit_existence_theorem"
           },
           {
             "name": "Limit of a Polynomial",
-            "url": "/calculus/limits/formulas#limit_of_a_polynomial"
+            "url": "/calculus/formulas#limit_of_a_polynomial"
           }
         ],
     relatedTheorems: [],
@@ -2314,11 +2314,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Continuity at a Point",
-            "url": "/calculus/limits/formulas#continuity_at_a_point"
+            "url": "/calculus/formulas#continuity_at_a_point"
           },
           {
             "name": "Two-Sided Limit Existence Theorem",
-            "url": "/calculus/limits/formulas#two_sided_limit_existence_theorem"
+            "url": "/calculus/formulas#two_sided_limit_existence_theorem"
           }
         ],
     relatedTheorems: [],
@@ -2343,23 +2343,23 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Continuity at a Point",
-            "url": "/calculus/limits/formulas#continuity_at_a_point"
+            "url": "/calculus/formulas#continuity_at_a_point"
           },
           {
             "name": "Composition Rule (Limits)",
-            "url": "/calculus/limits/formulas#composition_rule_limits"
+            "url": "/calculus/formulas#composition_rule_limits"
           },
           {
             "name": "Sum and Difference Rule (Limits)",
-            "url": "/calculus/limits/formulas#sum_and_difference_rule_limits"
+            "url": "/calculus/formulas#sum_and_difference_rule_limits"
           },
           {
             "name": "Product Rule (Limits)",
-            "url": "/calculus/limits/formulas#product_rule_limits"
+            "url": "/calculus/formulas#product_rule_limits"
           },
           {
             "name": "Quotient Rule (Limits)",
-            "url": "/calculus/limits/formulas#quotient_rule_limits"
+            "url": "/calculus/formulas#quotient_rule_limits"
           }
         ],
     relatedTheorems: [],
@@ -2384,7 +2384,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Continuity at a Point",
-            "url": "/calculus/limits/formulas#continuity_at_a_point"
+            "url": "/calculus/formulas#continuity_at_a_point"
           }
         ],
     relatedTheorems: [],
@@ -2414,19 +2414,19 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Cosine Limit at Zero",
-            "url": "/calculus/limits/formulas#cosine_limit_at_zero"
+            "url": "/calculus/formulas#cosine_limit_at_zero"
           },
           {
             "name": "Cosine Quadratic Limit at Zero",
-            "url": "/calculus/limits/formulas#cosine_quadratic_limit_at_zero"
+            "url": "/calculus/formulas#cosine_quadratic_limit_at_zero"
           },
           {
             "name": "Tangent Limit at Zero",
-            "url": "/calculus/limits/formulas#tangent_limit_at_zero"
+            "url": "/calculus/formulas#tangent_limit_at_zero"
           },
           {
             "name": "Squeeze Theorem",
-            "url": "/calculus/limits/formulas#squeeze_theorem"
+            "url": "/calculus/formulas#squeeze_theorem"
           }
         ],
     relatedTheorems: [],
@@ -2451,11 +2451,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Sine Limit at Zero",
-            "url": "/calculus/limits/formulas#sine_limit_at_zero"
+            "url": "/calculus/formulas#sine_limit_at_zero"
           },
           {
             "name": "Cosine Quadratic Limit at Zero",
-            "url": "/calculus/limits/formulas#cosine_quadratic_limit_at_zero"
+            "url": "/calculus/formulas#cosine_quadratic_limit_at_zero"
           }
         ],
     relatedTheorems: [],
@@ -2480,11 +2480,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Cosine Limit at Zero",
-            "url": "/calculus/limits/formulas#cosine_limit_at_zero"
+            "url": "/calculus/formulas#cosine_limit_at_zero"
           },
           {
             "name": "Sine Limit at Zero",
-            "url": "/calculus/limits/formulas#sine_limit_at_zero"
+            "url": "/calculus/formulas#sine_limit_at_zero"
           }
         ],
     relatedTheorems: [],
@@ -2509,11 +2509,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Sine Limit at Zero",
-            "url": "/calculus/limits/formulas#sine_limit_at_zero"
+            "url": "/calculus/formulas#sine_limit_at_zero"
           },
           {
             "name": "Cosine Limit at Zero",
-            "url": "/calculus/limits/formulas#cosine_limit_at_zero"
+            "url": "/calculus/formulas#cosine_limit_at_zero"
           }
         ],
     relatedTheorems: [],
@@ -2543,11 +2543,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Logarithm Taylor Limit",
-            "url": "/calculus/limits/formulas#logarithm_taylor_limit"
+            "url": "/calculus/formulas#logarithm_taylor_limit"
           },
           {
             "name": "Definition of e as a Limit",
-            "url": "/calculus/limits/formulas#definition_of_e_as_a_limit"
+            "url": "/calculus/formulas#definition_of_e_as_a_limit"
           }
         ],
     relatedTheorems: [],
@@ -2572,11 +2572,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Exponential Limit at Zero",
-            "url": "/calculus/limits/formulas#exponential_limit_at_zero"
+            "url": "/calculus/formulas#exponential_limit_at_zero"
           },
           {
             "name": "Definition of e as a Limit",
-            "url": "/calculus/limits/formulas#definition_of_e_as_a_limit"
+            "url": "/calculus/formulas#definition_of_e_as_a_limit"
           }
         ],
     relatedTheorems: [],
@@ -2601,11 +2601,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Exponential Limit at Zero",
-            "url": "/calculus/limits/formulas#exponential_limit_at_zero"
+            "url": "/calculus/formulas#exponential_limit_at_zero"
           },
           {
             "name": "Logarithm Taylor Limit",
-            "url": "/calculus/limits/formulas#logarithm_taylor_limit"
+            "url": "/calculus/formulas#logarithm_taylor_limit"
           }
         ],
     relatedTheorems: [],
@@ -2635,11 +2635,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Polynomial Beats Logarithm",
-            "url": "/calculus/limits/formulas#polynomial_beats_logarithm"
+            "url": "/calculus/formulas#polynomial_beats_logarithm"
           },
           {
             "name": "Logarithm End Behavior",
-            "url": "/calculus/limits/formulas#logarithm_end_behavior"
+            "url": "/calculus/formulas#logarithm_end_behavior"
           }
         ],
     relatedTheorems: [],
@@ -2674,11 +2674,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Vertical Asymptote Condition",
-            "url": "/calculus/limits/formulas#vertical_asymptote_condition"
+            "url": "/calculus/formulas#vertical_asymptote_condition"
           },
           {
             "name": "Limit of a Rational Function",
-            "url": "/calculus/limits/formulas#limit_of_a_rational_function"
+            "url": "/calculus/formulas#limit_of_a_rational_function"
           }
         ],
     relatedTheorems: [],
@@ -2712,11 +2712,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Horizontal Asymptote Condition",
-            "url": "/calculus/limits/formulas#horizontal_asymptote_condition"
+            "url": "/calculus/formulas#horizontal_asymptote_condition"
           },
           {
             "name": "Logarithm End Behavior",
-            "url": "/calculus/limits/formulas#logarithm_end_behavior"
+            "url": "/calculus/formulas#logarithm_end_behavior"
           }
         ],
     relatedTheorems: [],
@@ -2746,15 +2746,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Exponential Beats Polynomial",
-            "url": "/calculus/limits/formulas#exponential_beats_polynomial"
+            "url": "/calculus/formulas#exponential_beats_polynomial"
           },
           {
             "name": "Horizontal Asymptote Condition",
-            "url": "/calculus/limits/formulas#horizontal_asymptote_condition"
+            "url": "/calculus/formulas#horizontal_asymptote_condition"
           },
           {
             "name": "Logarithm End Behavior",
-            "url": "/calculus/limits/formulas#logarithm_end_behavior"
+            "url": "/calculus/formulas#logarithm_end_behavior"
           }
         ],
     relatedTheorems: [],
@@ -2784,15 +2784,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Polynomial Beats Logarithm",
-            "url": "/calculus/limits/formulas#polynomial_beats_logarithm"
+            "url": "/calculus/formulas#polynomial_beats_logarithm"
           },
           {
             "name": "Vertical Asymptote Condition",
-            "url": "/calculus/limits/formulas#vertical_asymptote_condition"
+            "url": "/calculus/formulas#vertical_asymptote_condition"
           },
           {
             "name": "Exponential End Behavior",
-            "url": "/calculus/limits/formulas#exponential_end_behavior"
+            "url": "/calculus/formulas#exponential_end_behavior"
           }
         ],
     relatedTheorems: [],
@@ -2822,11 +2822,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Polynomial Beats Logarithm",
-            "url": "/calculus/limits/formulas#polynomial_beats_logarithm"
+            "url": "/calculus/formulas#polynomial_beats_logarithm"
           },
           {
             "name": "Exponential End Behavior",
-            "url": "/calculus/limits/formulas#exponential_end_behavior"
+            "url": "/calculus/formulas#exponential_end_behavior"
           }
         ],
     relatedTheorems: [],
@@ -2856,15 +2856,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Exponential Beats Polynomial",
-            "url": "/calculus/limits/formulas#exponential_beats_polynomial"
+            "url": "/calculus/formulas#exponential_beats_polynomial"
           },
           {
             "name": "Logarithm End Behavior",
-            "url": "/calculus/limits/formulas#logarithm_end_behavior"
+            "url": "/calculus/formulas#logarithm_end_behavior"
           },
           {
             "name": "x ln x Limit at Zero",
-            "url": "/calculus/limits/formulas#x_ln_x_limit_at_zero"
+            "url": "/calculus/formulas#x_ln_x_limit_at_zero"
           }
         ],
     relatedTheorems: [],
@@ -2903,11 +2903,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Fundamental Theorem of Calculus, Part 2",
-            "url": "/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_2"
+            "url": "/calculus/formulas#fundamental_theorem_of_calculus_part_2"
           },
           {
             "name": "Antiderivative Family",
-            "url": "/calculus/integrals/formulas#antiderivative_family"
+            "url": "/calculus/formulas#antiderivative_family"
           }
         ],
     relatedTheorems: [],
@@ -2945,11 +2945,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Fundamental Theorem of Calculus, Part 1",
-            "url": "/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_1"
+            "url": "/calculus/formulas#fundamental_theorem_of_calculus_part_1"
           },
           {
             "name": "Antiderivative Family",
-            "url": "/calculus/integrals/formulas#antiderivative_family"
+            "url": "/calculus/formulas#antiderivative_family"
           }
         ],
     relatedTheorems: [],
@@ -2987,7 +2987,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Fundamental Theorem of Calculus, Part 2",
-            "url": "/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_2"
+            "url": "/calculus/formulas#fundamental_theorem_of_calculus_part_2"
           }
         ],
     relatedTheorems: [],
@@ -3017,7 +3017,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Constant Multiple Rule (Integrals)",
-            "url": "/calculus/integrals/formulas#constant_multiple_rule_integrals"
+            "url": "/calculus/formulas#constant_multiple_rule_integrals"
           }
         ],
     relatedTheorems: [],
@@ -3042,7 +3042,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Sum and Difference Rule (Integrals)",
-            "url": "/calculus/integrals/formulas#sum_and_difference_rule_integrals"
+            "url": "/calculus/formulas#sum_and_difference_rule_integrals"
           }
         ],
     relatedTheorems: [],
@@ -3072,11 +3072,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Reversing Limits of Integration",
-            "url": "/calculus/integrals/formulas#reversing_limits_of_integration"
+            "url": "/calculus/formulas#reversing_limits_of_integration"
           },
           {
             "name": "Zero-Width Interval",
-            "url": "/calculus/integrals/formulas#zero_width_interval"
+            "url": "/calculus/formulas#zero_width_interval"
           }
         ],
     relatedTheorems: [],
@@ -3106,11 +3106,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Zero-Width Interval",
-            "url": "/calculus/integrals/formulas#zero_width_interval"
+            "url": "/calculus/formulas#zero_width_interval"
           },
           {
             "name": "Additivity Over Intervals",
-            "url": "/calculus/integrals/formulas#additivity_over_intervals"
+            "url": "/calculus/formulas#additivity_over_intervals"
           }
         ],
     relatedTheorems: [],
@@ -3135,11 +3135,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Reversing Limits of Integration",
-            "url": "/calculus/integrals/formulas#reversing_limits_of_integration"
+            "url": "/calculus/formulas#reversing_limits_of_integration"
           },
           {
             "name": "Additivity Over Intervals",
-            "url": "/calculus/integrals/formulas#additivity_over_intervals"
+            "url": "/calculus/formulas#additivity_over_intervals"
           }
         ],
     relatedTheorems: [],
@@ -3164,7 +3164,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Bounding Property (Integrals)",
-            "url": "/calculus/integrals/formulas#bounding_property_integrals"
+            "url": "/calculus/formulas#bounding_property_integrals"
           }
         ],
     relatedTheorems: [],
@@ -3189,11 +3189,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Comparison Property (Integrals)",
-            "url": "/calculus/integrals/formulas#comparison_property_integrals"
+            "url": "/calculus/formulas#comparison_property_integrals"
           },
           {
             "name": "Average Value of a Function",
-            "url": "/calculus/integrals/formulas#average_value_of_a_function"
+            "url": "/calculus/formulas#average_value_of_a_function"
           }
         ],
     relatedTheorems: [],
@@ -3223,7 +3223,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Integration by Parts",
-            "url": "/calculus/integrals/formulas#integration_by_parts"
+            "url": "/calculus/formulas#integration_by_parts"
           }
         ],
     relatedTheorems: [],
@@ -3248,11 +3248,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Substitution Rule",
-            "url": "/calculus/integrals/formulas#substitution_rule"
+            "url": "/calculus/formulas#substitution_rule"
           },
           {
             "name": "Antiderivative of Natural Log",
-            "url": "/calculus/integrals/formulas#antiderivative_of_natural_log"
+            "url": "/calculus/formulas#antiderivative_of_natural_log"
           }
         ],
     relatedTheorems: [],
@@ -3286,7 +3286,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Comparison Property (Integrals)",
-            "url": "/calculus/integrals/formulas#comparison_property_integrals"
+            "url": "/calculus/formulas#comparison_property_integrals"
           }
         ],
     relatedTheorems: [],
@@ -3316,7 +3316,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Reciprocal Antiderivative",
-            "url": "/calculus/integrals/formulas#reciprocal_antiderivative"
+            "url": "/calculus/formulas#reciprocal_antiderivative"
           }
         ],
     relatedTheorems: [],
@@ -3341,11 +3341,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Power Rule (Integrals)",
-            "url": "/calculus/integrals/formulas#power_rule_integrals"
+            "url": "/calculus/formulas#power_rule_integrals"
           },
           {
             "name": "Logarithmic Derivative Pattern",
-            "url": "/calculus/integrals/formulas#logarithmic_derivative_pattern"
+            "url": "/calculus/formulas#logarithmic_derivative_pattern"
           }
         ],
     relatedTheorems: [],
@@ -3370,15 +3370,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Reciprocal Antiderivative",
-            "url": "/calculus/integrals/formulas#reciprocal_antiderivative"
+            "url": "/calculus/formulas#reciprocal_antiderivative"
           },
           {
             "name": "Antiderivative of Tangent",
-            "url": "/calculus/integrals/formulas#antiderivative_of_tangent"
+            "url": "/calculus/formulas#antiderivative_of_tangent"
           },
           {
             "name": "Antiderivative of Cotangent",
-            "url": "/calculus/integrals/formulas#antiderivative_of_cotangent"
+            "url": "/calculus/formulas#antiderivative_of_cotangent"
           }
         ],
     relatedTheorems: [],
@@ -3403,11 +3403,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Integration by Parts",
-            "url": "/calculus/integrals/formulas#integration_by_parts"
+            "url": "/calculus/formulas#integration_by_parts"
           },
           {
             "name": "Reciprocal Antiderivative",
-            "url": "/calculus/integrals/formulas#reciprocal_antiderivative"
+            "url": "/calculus/formulas#reciprocal_antiderivative"
           }
         ],
     relatedTheorems: [],
@@ -3437,7 +3437,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "General Exponential Antiderivative",
-            "url": "/calculus/integrals/formulas#general_exponential_antiderivative"
+            "url": "/calculus/formulas#general_exponential_antiderivative"
           }
         ],
     relatedTheorems: [],
@@ -3462,7 +3462,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Exponential Antiderivative",
-            "url": "/calculus/integrals/formulas#exponential_antiderivative"
+            "url": "/calculus/formulas#exponential_antiderivative"
           }
         ],
     relatedTheorems: [],
@@ -3487,7 +3487,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Antiderivative of Cosine",
-            "url": "/calculus/integrals/formulas#antiderivative_of_cosine"
+            "url": "/calculus/formulas#antiderivative_of_cosine"
           }
         ],
     relatedTheorems: [],
@@ -3512,7 +3512,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Antiderivative of Sine",
-            "url": "/calculus/integrals/formulas#antiderivative_of_sine"
+            "url": "/calculus/formulas#antiderivative_of_sine"
           }
         ],
     relatedTheorems: [],
@@ -3537,7 +3537,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Antiderivative of Cosecant Squared",
-            "url": "/calculus/integrals/formulas#antiderivative_of_cosecant_squared"
+            "url": "/calculus/formulas#antiderivative_of_cosecant_squared"
           }
         ],
     relatedTheorems: [],
@@ -3562,7 +3562,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Antiderivative of Secant Squared",
-            "url": "/calculus/integrals/formulas#antiderivative_of_secant_squared"
+            "url": "/calculus/formulas#antiderivative_of_secant_squared"
           }
         ],
     relatedTheorems: [],
@@ -3587,7 +3587,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Antiderivative of Csc Cot",
-            "url": "/calculus/integrals/formulas#antiderivative_of_csc_cot"
+            "url": "/calculus/formulas#antiderivative_of_csc_cot"
           }
         ],
     relatedTheorems: [],
@@ -3612,7 +3612,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Antiderivative of Sec Tan",
-            "url": "/calculus/integrals/formulas#antiderivative_of_sec_tan"
+            "url": "/calculus/formulas#antiderivative_of_sec_tan"
           }
         ],
     relatedTheorems: [],
@@ -3637,15 +3637,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Logarithmic Derivative Pattern",
-            "url": "/calculus/integrals/formulas#logarithmic_derivative_pattern"
+            "url": "/calculus/formulas#logarithmic_derivative_pattern"
           },
           {
             "name": "Antiderivative of Cotangent",
-            "url": "/calculus/integrals/formulas#antiderivative_of_cotangent"
+            "url": "/calculus/formulas#antiderivative_of_cotangent"
           },
           {
             "name": "Antiderivative of Secant",
-            "url": "/calculus/integrals/formulas#antiderivative_of_secant"
+            "url": "/calculus/formulas#antiderivative_of_secant"
           }
         ],
     relatedTheorems: [],
@@ -3670,15 +3670,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Logarithmic Derivative Pattern",
-            "url": "/calculus/integrals/formulas#logarithmic_derivative_pattern"
+            "url": "/calculus/formulas#logarithmic_derivative_pattern"
           },
           {
             "name": "Antiderivative of Tangent",
-            "url": "/calculus/integrals/formulas#antiderivative_of_tangent"
+            "url": "/calculus/formulas#antiderivative_of_tangent"
           },
           {
             "name": "Antiderivative of Cosecant",
-            "url": "/calculus/integrals/formulas#antiderivative_of_cosecant"
+            "url": "/calculus/formulas#antiderivative_of_cosecant"
           }
         ],
     relatedTheorems: [],
@@ -3703,15 +3703,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Logarithmic Derivative Pattern",
-            "url": "/calculus/integrals/formulas#logarithmic_derivative_pattern"
+            "url": "/calculus/formulas#logarithmic_derivative_pattern"
           },
           {
             "name": "Antiderivative of Cosecant",
-            "url": "/calculus/integrals/formulas#antiderivative_of_cosecant"
+            "url": "/calculus/formulas#antiderivative_of_cosecant"
           },
           {
             "name": "Antiderivative of Tangent",
-            "url": "/calculus/integrals/formulas#antiderivative_of_tangent"
+            "url": "/calculus/formulas#antiderivative_of_tangent"
           }
         ],
     relatedTheorems: [],
@@ -3736,15 +3736,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Logarithmic Derivative Pattern",
-            "url": "/calculus/integrals/formulas#logarithmic_derivative_pattern"
+            "url": "/calculus/formulas#logarithmic_derivative_pattern"
           },
           {
             "name": "Antiderivative of Secant",
-            "url": "/calculus/integrals/formulas#antiderivative_of_secant"
+            "url": "/calculus/formulas#antiderivative_of_secant"
           },
           {
             "name": "Antiderivative of Cotangent",
-            "url": "/calculus/integrals/formulas#antiderivative_of_cotangent"
+            "url": "/calculus/formulas#antiderivative_of_cotangent"
           }
         ],
     relatedTheorems: [],
@@ -3774,11 +3774,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Arcsine Form",
-            "url": "/calculus/integrals/formulas#arcsine_form"
+            "url": "/calculus/formulas#arcsine_form"
           },
           {
             "name": "Arcsecant Form",
-            "url": "/calculus/integrals/formulas#arcsecant_form"
+            "url": "/calculus/formulas#arcsecant_form"
           }
         ],
     relatedTheorems: [],
@@ -3803,11 +3803,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Arctangent Form",
-            "url": "/calculus/integrals/formulas#arctangent_form"
+            "url": "/calculus/formulas#arctangent_form"
           },
           {
             "name": "Arcsecant Form",
-            "url": "/calculus/integrals/formulas#arcsecant_form"
+            "url": "/calculus/formulas#arcsecant_form"
           }
         ],
     relatedTheorems: [],
@@ -3832,11 +3832,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Arctangent Form",
-            "url": "/calculus/integrals/formulas#arctangent_form"
+            "url": "/calculus/formulas#arctangent_form"
           },
           {
             "name": "Arcsine Form",
-            "url": "/calculus/integrals/formulas#arcsine_form"
+            "url": "/calculus/formulas#arcsine_form"
           }
         ],
     relatedTheorems: [],
@@ -3861,7 +3861,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Odd Function Symmetry",
-            "url": "/calculus/integrals/formulas#odd_function_symmetry"
+            "url": "/calculus/formulas#odd_function_symmetry"
           }
         ],
     relatedTheorems: [],
@@ -3886,7 +3886,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Even Function Symmetry",
-            "url": "/calculus/integrals/formulas#even_function_symmetry"
+            "url": "/calculus/formulas#even_function_symmetry"
           }
         ],
     relatedTheorems: [],
@@ -3916,11 +3916,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Improper Integral (Discontinuous Integrand)",
-            "url": "/calculus/integrals/formulas#improper_integral_discontinuous_integrand"
+            "url": "/calculus/formulas#improper_integral_discontinuous_integrand"
           },
           {
             "name": "p-Test for Improper Integrals",
-            "url": "/calculus/integrals/formulas#p_test_for_improper_integrals"
+            "url": "/calculus/formulas#p_test_for_improper_integrals"
           }
         ],
     relatedTheorems: [],
@@ -3954,11 +3954,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Improper Integral (Infinite Limits)",
-            "url": "/calculus/integrals/formulas#improper_integral_infinite_limits"
+            "url": "/calculus/formulas#improper_integral_infinite_limits"
           },
           {
             "name": "p-Test for Improper Integrals",
-            "url": "/calculus/integrals/formulas#p_test_for_improper_integrals"
+            "url": "/calculus/formulas#p_test_for_improper_integrals"
           }
         ],
     relatedTheorems: [],
@@ -3988,11 +3988,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Improper Integral (Infinite Limits)",
-            "url": "/calculus/integrals/formulas#improper_integral_infinite_limits"
+            "url": "/calculus/formulas#improper_integral_infinite_limits"
           },
           {
             "name": "Improper Integral (Discontinuous Integrand)",
-            "url": "/calculus/integrals/formulas#improper_integral_discontinuous_integrand"
+            "url": "/calculus/formulas#improper_integral_discontinuous_integrand"
           }
         ],
     relatedTheorems: [],
@@ -4026,7 +4026,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Bounding Property (Integrals)",
-            "url": "/calculus/integrals/formulas#bounding_property_integrals"
+            "url": "/calculus/formulas#bounding_property_integrals"
           }
         ],
     relatedTheorems: [],
@@ -4069,11 +4069,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative Limit Definition",
-            "url": "/calculus/derivatives/formulas#derivative_limit_definition"
+            "url": "/calculus/formulas#derivative_limit_definition"
           },
           {
             "name": "Mean Value Theorem",
-            "url": "/calculus/derivatives/formulas#mean_value_theorem"
+            "url": "/calculus/formulas#mean_value_theorem"
           }
         ],
     relatedTheorems: [],
@@ -4115,15 +4115,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Average Rate of Change",
-            "url": "/calculus/derivatives/formulas#average_rate_of_change"
+            "url": "/calculus/formulas#average_rate_of_change"
           },
           {
             "name": "Constant Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#constant_rule_derivatives"
+            "url": "/calculus/formulas#constant_rule_derivatives"
           },
           {
             "name": "Power Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#power_rule_derivatives"
+            "url": "/calculus/formulas#power_rule_derivatives"
           }
         ],
     relatedTheorems: [],
@@ -4158,11 +4158,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Power Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#power_rule_derivatives"
+            "url": "/calculus/formulas#power_rule_derivatives"
           },
           {
             "name": "Sum and Difference Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#sum_and_difference_rule_derivatives"
+            "url": "/calculus/formulas#sum_and_difference_rule_derivatives"
           }
         ],
     relatedTheorems: [],
@@ -4192,11 +4192,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Constant Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#constant_rule_derivatives"
+            "url": "/calculus/formulas#constant_rule_derivatives"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           }
         ],
     relatedTheorems: [],
@@ -4226,11 +4226,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Sum and Difference Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#sum_and_difference_rule_derivatives"
+            "url": "/calculus/formulas#sum_and_difference_rule_derivatives"
           },
           {
             "name": "Product Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#product_rule_derivatives"
+            "url": "/calculus/formulas#product_rule_derivatives"
           }
         ],
     relatedTheorems: [],
@@ -4260,11 +4260,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Constant Multiple Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#constant_multiple_rule_derivatives"
+            "url": "/calculus/formulas#constant_multiple_rule_derivatives"
           },
           {
             "name": "Sum and Difference Rule (Limits)",
-            "url": "/calculus/limits/formulas#sum_and_difference_rule_limits"
+            "url": "/calculus/formulas#sum_and_difference_rule_limits"
           }
         ],
     relatedTheorems: [],
@@ -4294,15 +4294,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Quotient Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#quotient_rule_derivatives"
+            "url": "/calculus/formulas#quotient_rule_derivatives"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           },
           {
             "name": "Constant Multiple Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#constant_multiple_rule_derivatives"
+            "url": "/calculus/formulas#constant_multiple_rule_derivatives"
           }
         ],
     relatedTheorems: [],
@@ -4332,15 +4332,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Product Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#product_rule_derivatives"
+            "url": "/calculus/formulas#product_rule_derivatives"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           },
           {
             "name": "Derivative of Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_tangent"
+            "url": "/calculus/formulas#derivative_of_tangent"
           }
         ],
     relatedTheorems: [],
@@ -4374,15 +4374,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Product Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#product_rule_derivatives"
+            "url": "/calculus/formulas#product_rule_derivatives"
           },
           {
             "name": "Quotient Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#quotient_rule_derivatives"
+            "url": "/calculus/formulas#quotient_rule_derivatives"
           },
           {
             "name": "Power Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#power_rule_derivatives"
+            "url": "/calculus/formulas#power_rule_derivatives"
           }
         ],
     relatedTheorems: [],
@@ -4425,15 +4425,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Rolle's Theorem",
-            "url": "/calculus/derivatives/formulas#rolles_theorem"
+            "url": "/calculus/formulas#rolles_theorem"
           },
           {
             "name": "Average Rate of Change",
-            "url": "/calculus/derivatives/formulas#average_rate_of_change"
+            "url": "/calculus/formulas#average_rate_of_change"
           },
           {
             "name": "Fundamental Theorem of Calculus, Part 2",
-            "url": "/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_2"
+            "url": "/calculus/formulas#fundamental_theorem_of_calculus_part_2"
           }
         ],
     relatedTheorems: [],
@@ -4467,7 +4467,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Mean Value Theorem",
-            "url": "/calculus/derivatives/formulas#mean_value_theorem"
+            "url": "/calculus/formulas#mean_value_theorem"
           }
         ],
     relatedTheorems: [],
@@ -4502,11 +4502,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Cosine",
-            "url": "/calculus/derivatives/formulas#derivative_of_cosine"
+            "url": "/calculus/formulas#derivative_of_cosine"
           },
           {
             "name": "Derivative of Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_tangent"
+            "url": "/calculus/formulas#derivative_of_tangent"
           }
         ],
     relatedTheorems: [],
@@ -4536,11 +4536,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Sine",
-            "url": "/calculus/derivatives/formulas#derivative_of_sine"
+            "url": "/calculus/formulas#derivative_of_sine"
           },
           {
             "name": "Derivative of Cotangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_cotangent"
+            "url": "/calculus/formulas#derivative_of_cotangent"
           }
         ],
     relatedTheorems: [],
@@ -4570,15 +4570,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Cotangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_cotangent"
+            "url": "/calculus/formulas#derivative_of_cotangent"
           },
           {
             "name": "Derivative of Secant",
-            "url": "/calculus/derivatives/formulas#derivative_of_secant"
+            "url": "/calculus/formulas#derivative_of_secant"
           },
           {
             "name": "Quotient Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#quotient_rule_derivatives"
+            "url": "/calculus/formulas#quotient_rule_derivatives"
           }
         ],
     relatedTheorems: [],
@@ -4608,11 +4608,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_tangent"
+            "url": "/calculus/formulas#derivative_of_tangent"
           },
           {
             "name": "Derivative of Cosecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_cosecant"
+            "url": "/calculus/formulas#derivative_of_cosecant"
           }
         ],
     relatedTheorems: [],
@@ -4642,11 +4642,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Cosecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_cosecant"
+            "url": "/calculus/formulas#derivative_of_cosecant"
           },
           {
             "name": "Derivative of Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_tangent"
+            "url": "/calculus/formulas#derivative_of_tangent"
           }
         ],
     relatedTheorems: [],
@@ -4676,11 +4676,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Secant",
-            "url": "/calculus/derivatives/formulas#derivative_of_secant"
+            "url": "/calculus/formulas#derivative_of_secant"
           },
           {
             "name": "Derivative of Cotangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_cotangent"
+            "url": "/calculus/formulas#derivative_of_cotangent"
           }
         ],
     relatedTheorems: [],
@@ -4710,11 +4710,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of General Exponential",
-            "url": "/calculus/derivatives/formulas#derivative_of_general_exponential"
+            "url": "/calculus/formulas#derivative_of_general_exponential"
           },
           {
             "name": "Derivative of Natural Logarithm",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_logarithm"
+            "url": "/calculus/formulas#derivative_of_natural_logarithm"
           }
         ],
     relatedTheorems: [],
@@ -4744,15 +4744,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Natural Exponential",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_exponential"
+            "url": "/calculus/formulas#derivative_of_natural_exponential"
           },
           {
             "name": "Derivative of General Logarithm",
-            "url": "/calculus/derivatives/formulas#derivative_of_general_logarithm"
+            "url": "/calculus/formulas#derivative_of_general_logarithm"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           }
         ],
     relatedTheorems: [],
@@ -4782,11 +4782,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of General Logarithm",
-            "url": "/calculus/derivatives/formulas#derivative_of_general_logarithm"
+            "url": "/calculus/formulas#derivative_of_general_logarithm"
           },
           {
             "name": "Derivative of Natural Exponential",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_exponential"
+            "url": "/calculus/formulas#derivative_of_natural_exponential"
           }
         ],
     relatedTheorems: [],
@@ -4816,11 +4816,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Natural Logarithm",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_logarithm"
+            "url": "/calculus/formulas#derivative_of_natural_logarithm"
           },
           {
             "name": "Derivative of General Exponential",
-            "url": "/calculus/derivatives/formulas#derivative_of_general_exponential"
+            "url": "/calculus/formulas#derivative_of_general_exponential"
           }
         ],
     relatedTheorems: [],
@@ -4855,11 +4855,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Arccosine",
-            "url": "/calculus/derivatives/formulas#derivative_of_arccosine"
+            "url": "/calculus/formulas#derivative_of_arccosine"
           },
           {
             "name": "Derivative of Sine",
-            "url": "/calculus/derivatives/formulas#derivative_of_sine"
+            "url": "/calculus/formulas#derivative_of_sine"
           }
         ],
     relatedTheorems: [],
@@ -4889,11 +4889,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Arcsine",
-            "url": "/calculus/derivatives/formulas#derivative_of_arcsine"
+            "url": "/calculus/formulas#derivative_of_arcsine"
           },
           {
             "name": "Derivative of Cosine",
-            "url": "/calculus/derivatives/formulas#derivative_of_cosine"
+            "url": "/calculus/formulas#derivative_of_cosine"
           }
         ],
     relatedTheorems: [],
@@ -4923,11 +4923,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Arccotangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_arccotangent"
+            "url": "/calculus/formulas#derivative_of_arccotangent"
           },
           {
             "name": "Derivative of Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_tangent"
+            "url": "/calculus/formulas#derivative_of_tangent"
           }
         ],
     relatedTheorems: [],
@@ -4957,11 +4957,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Arctangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_arctangent"
+            "url": "/calculus/formulas#derivative_of_arctangent"
           },
           {
             "name": "Derivative of Cotangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_cotangent"
+            "url": "/calculus/formulas#derivative_of_cotangent"
           }
         ],
     relatedTheorems: [],
@@ -4991,11 +4991,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Arccosecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_arccosecant"
+            "url": "/calculus/formulas#derivative_of_arccosecant"
           },
           {
             "name": "Derivative of Secant",
-            "url": "/calculus/derivatives/formulas#derivative_of_secant"
+            "url": "/calculus/formulas#derivative_of_secant"
           }
         ],
     relatedTheorems: [],
@@ -5025,11 +5025,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Arcsecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_arcsecant"
+            "url": "/calculus/formulas#derivative_of_arcsecant"
           },
           {
             "name": "Derivative of Cosecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_cosecant"
+            "url": "/calculus/formulas#derivative_of_cosecant"
           }
         ],
     relatedTheorems: [],
@@ -5064,11 +5064,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Hyperbolic Cosine",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_cosine"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_cosine"
           },
           {
             "name": "Derivative of Natural Exponential",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_exponential"
+            "url": "/calculus/formulas#derivative_of_natural_exponential"
           }
         ],
     relatedTheorems: [],
@@ -5098,11 +5098,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Hyperbolic Sine",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_sine"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_sine"
           },
           {
             "name": "Derivative of Hyperbolic Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_tangent"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_tangent"
           }
         ],
     relatedTheorems: [],
@@ -5132,11 +5132,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Hyperbolic Cotangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_cotangent"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_cotangent"
           },
           {
             "name": "Derivative of Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_tangent"
+            "url": "/calculus/formulas#derivative_of_tangent"
           }
         ],
     relatedTheorems: [],
@@ -5166,11 +5166,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Hyperbolic Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_tangent"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_tangent"
           },
           {
             "name": "Derivative of Hyperbolic Cosecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_cosecant"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_cosecant"
           }
         ],
     relatedTheorems: [],
@@ -5200,11 +5200,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Hyperbolic Cosecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_cosecant"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_cosecant"
           },
           {
             "name": "Derivative of Secant",
-            "url": "/calculus/derivatives/formulas#derivative_of_secant"
+            "url": "/calculus/formulas#derivative_of_secant"
           }
         ],
     relatedTheorems: [],
@@ -5234,11 +5234,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Hyperbolic Secant",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_secant"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_secant"
           },
           {
             "name": "Derivative of Cosecant",
-            "url": "/calculus/derivatives/formulas#derivative_of_cosecant"
+            "url": "/calculus/formulas#derivative_of_cosecant"
           }
         ],
     relatedTheorems: [],
@@ -5273,11 +5273,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Inverse Hyperbolic Cosine",
-            "url": "/calculus/derivatives/formulas#derivative_of_inverse_hyperbolic_cosine"
+            "url": "/calculus/formulas#derivative_of_inverse_hyperbolic_cosine"
           },
           {
             "name": "Derivative of Hyperbolic Sine",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_sine"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_sine"
           }
         ],
     relatedTheorems: [],
@@ -5307,11 +5307,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Inverse Hyperbolic Sine",
-            "url": "/calculus/derivatives/formulas#derivative_of_inverse_hyperbolic_sine"
+            "url": "/calculus/formulas#derivative_of_inverse_hyperbolic_sine"
           },
           {
             "name": "Derivative of Hyperbolic Cosine",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_cosine"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_cosine"
           }
         ],
     relatedTheorems: [],
@@ -5341,11 +5341,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Hyperbolic Tangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_hyperbolic_tangent"
+            "url": "/calculus/formulas#derivative_of_hyperbolic_tangent"
           },
           {
             "name": "Derivative of Arctangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_arctangent"
+            "url": "/calculus/formulas#derivative_of_arctangent"
           }
         ],
     relatedTheorems: [],
@@ -5388,11 +5388,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative Limit Definition",
-            "url": "/calculus/derivatives/formulas#derivative_limit_definition"
+            "url": "/calculus/formulas#derivative_limit_definition"
           },
           {
             "name": "Differentiability Implies Continuity",
-            "url": "/calculus/derivatives/formulas#differentiability_implies_continuity"
+            "url": "/calculus/formulas#differentiability_implies_continuity"
           }
         ],
     relatedTheorems: [],
@@ -5426,11 +5426,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "One-Sided Derivative",
-            "url": "/calculus/derivatives/formulas#one_sided_derivative"
+            "url": "/calculus/formulas#one_sided_derivative"
           },
           {
             "name": "Continuity at a Point",
-            "url": "/calculus/limits/formulas#continuity_at_a_point"
+            "url": "/calculus/formulas#continuity_at_a_point"
           }
         ],
     relatedTheorems: [],
@@ -5469,11 +5469,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Linear Approximation",
-            "url": "/calculus/derivatives/formulas#linear_approximation"
+            "url": "/calculus/formulas#linear_approximation"
           },
           {
             "name": "Total Differential",
-            "url": "/calculus/derivatives/formulas#total_differential"
+            "url": "/calculus/formulas#total_differential"
           }
         ],
     relatedTheorems: [],
@@ -5507,15 +5507,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Differential",
-            "url": "/calculus/derivatives/formulas#differential"
+            "url": "/calculus/formulas#differential"
           },
           {
             "name": "Tangent Line Equation",
-            "url": "/calculus/derivatives/formulas#tangent_line_equation"
+            "url": "/calculus/formulas#tangent_line_equation"
           },
           {
             "name": "Taylor Series",
-            "url": "/calculus/derivatives/formulas#taylor_series"
+            "url": "/calculus/formulas#taylor_series"
           }
         ],
     relatedTheorems: [],
@@ -5549,11 +5549,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Differential",
-            "url": "/calculus/derivatives/formulas#differential"
+            "url": "/calculus/formulas#differential"
           },
           {
             "name": "Linear Approximation",
-            "url": "/calculus/derivatives/formulas#linear_approximation"
+            "url": "/calculus/formulas#linear_approximation"
           }
         ],
     relatedTheorems: [],
@@ -5583,15 +5583,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Logarithmic Differentiation",
-            "url": "/calculus/derivatives/formulas#logarithmic_differentiation"
+            "url": "/calculus/formulas#logarithmic_differentiation"
           },
           {
             "name": "Derivative of Natural Logarithm",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_logarithm"
+            "url": "/calculus/formulas#derivative_of_natural_logarithm"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           }
         ],
     relatedTheorems: [],
@@ -5613,7 +5613,7 @@ const formulasRepository = [
     formula: "$$y - f(a) = f'(a)(x - a) \\qquad y = f(a) + f'(a)(x - a)$$",
     link: {
           "label": "Tangent Line Equation",
-          "url": "/calculus/derivatives/applications#1"
+          "url": "/calculus/derivatives/graph-analysis#2"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5630,15 +5630,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Linear Approximation",
-            "url": "/calculus/derivatives/formulas#linear_approximation"
+            "url": "/calculus/formulas#linear_approximation"
           },
           {
             "name": "Normal Line Equation",
-            "url": "/calculus/derivatives/formulas#normal_line_equation"
+            "url": "/calculus/formulas#normal_line_equation"
           },
           {
             "name": "Derivative Limit Definition",
-            "url": "/calculus/derivatives/formulas#derivative_limit_definition"
+            "url": "/calculus/formulas#derivative_limit_definition"
           }
         ],
     relatedTheorems: [],
@@ -5655,7 +5655,7 @@ const formulasRepository = [
     formula: "$$y - f(a) = -\\frac{1}{f'(a)}(x - a)$$",
     link: {
           "label": "Normal Line",
-          "url": "/calculus/derivatives/applications#2"
+          "url": "/calculus/derivatives/graph-analysis#2"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5668,7 +5668,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Tangent Line Equation",
-            "url": "/calculus/derivatives/formulas#tangent_line_equation"
+            "url": "/calculus/formulas#tangent_line_equation"
           }
         ],
     relatedTheorems: [],
@@ -5685,7 +5685,7 @@ const formulasRepository = [
     formula: "$$f'(x) > 0 \\implies f \\text{ increasing}, \\quad f'(x) < 0 \\implies f \\text{ decreasing}$$",
     link: {
           "label": "Increasing and Decreasing",
-          "url": "/calculus/derivatives/applications#3"
+          "url": "/calculus/derivatives/graph-analysis#3"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5702,15 +5702,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "First Derivative Test",
-            "url": "/calculus/derivatives/formulas#first_derivative_test"
+            "url": "/calculus/formulas#first_derivative_test"
           },
           {
             "name": "Critical Point Condition",
-            "url": "/calculus/derivatives/formulas#critical_point_condition"
+            "url": "/calculus/formulas#critical_point_condition"
           },
           {
             "name": "Mean Value Theorem",
-            "url": "/calculus/derivatives/formulas#mean_value_theorem"
+            "url": "/calculus/formulas#mean_value_theorem"
           }
         ],
     relatedTheorems: [],
@@ -5727,7 +5727,7 @@ const formulasRepository = [
     formula: "$$f'(c) = 0 \\quad \\text{or} \\quad f'(c) \\text{ undefined}$$",
     link: {
           "label": "Critical Points",
-          "url": "/calculus/derivatives/applications#4"
+          "url": "/calculus/derivatives/graph-analysis#4"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5744,15 +5744,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "First Derivative Test",
-            "url": "/calculus/derivatives/formulas#first_derivative_test"
+            "url": "/calculus/formulas#first_derivative_test"
           },
           {
             "name": "Second Derivative Test",
-            "url": "/calculus/derivatives/formulas#second_derivative_test"
+            "url": "/calculus/formulas#second_derivative_test"
           },
           {
             "name": "Sign of First Derivative",
-            "url": "/calculus/derivatives/formulas#sign_of_first_derivative"
+            "url": "/calculus/formulas#sign_of_first_derivative"
           }
         ],
     relatedTheorems: [],
@@ -5769,7 +5769,7 @@ const formulasRepository = [
     formula: "$$f'(x) \\text{ changes } + \\to - \\text{ at } c \\implies c \\text{ is a local max}$$\n$$f'(x) \\text{ changes } - \\to + \\text{ at } c \\implies c \\text{ is a local min}$$",
     link: {
           "label": "First Derivative Test",
-          "url": "/calculus/derivatives/applications#5"
+          "url": "/calculus/derivatives/graph-analysis#5"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5786,15 +5786,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Critical Point Condition",
-            "url": "/calculus/derivatives/formulas#critical_point_condition"
+            "url": "/calculus/formulas#critical_point_condition"
           },
           {
             "name": "Second Derivative Test",
-            "url": "/calculus/derivatives/formulas#second_derivative_test"
+            "url": "/calculus/formulas#second_derivative_test"
           },
           {
             "name": "Sign of First Derivative",
-            "url": "/calculus/derivatives/formulas#sign_of_first_derivative"
+            "url": "/calculus/formulas#sign_of_first_derivative"
           }
         ],
     relatedTheorems: [],
@@ -5811,7 +5811,7 @@ const formulasRepository = [
     formula: "$$f'(c) = 0, \\; f''(c) > 0 \\implies c \\text{ is a local min}$$\n$$f'(c) = 0, \\; f''(c) < 0 \\implies c \\text{ is a local max}$$",
     link: {
           "label": "Second Derivative Test",
-          "url": "/calculus/derivatives/applications#7"
+          "url": "/calculus/derivatives/graph-analysis#6"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5828,15 +5828,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "First Derivative Test",
-            "url": "/calculus/derivatives/formulas#first_derivative_test"
+            "url": "/calculus/formulas#first_derivative_test"
           },
           {
             "name": "Concavity from Second Derivative",
-            "url": "/calculus/derivatives/formulas#concavity_from_second_derivative"
+            "url": "/calculus/formulas#concavity_from_second_derivative"
           },
           {
             "name": "Critical Point Condition",
-            "url": "/calculus/derivatives/formulas#critical_point_condition"
+            "url": "/calculus/formulas#critical_point_condition"
           }
         ],
     relatedTheorems: [],
@@ -5853,7 +5853,7 @@ const formulasRepository = [
     formula: "$$f''(x) > 0 \\implies f \\text{ concave up}, \\quad f''(x) < 0 \\implies f \\text{ concave down}$$",
     link: {
           "label": "Concavity",
-          "url": "/calculus/derivatives/applications#6"
+          "url": "/calculus/derivatives/graph-analysis#7"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5870,11 +5870,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Inflection Point Condition",
-            "url": "/calculus/derivatives/formulas#inflection_point_condition"
+            "url": "/calculus/formulas#inflection_point_condition"
           },
           {
             "name": "Second Derivative Test",
-            "url": "/calculus/derivatives/formulas#second_derivative_test"
+            "url": "/calculus/formulas#second_derivative_test"
           }
         ],
     relatedTheorems: [],
@@ -5891,7 +5891,7 @@ const formulasRepository = [
     formula: "$$f''(c) = 0 \\text{ or undefined}, \\text{ and } f''(x) \\text{ changes sign at } c$$",
     link: {
           "label": "Inflection Points",
-          "url": "/calculus/derivatives/applications#8"
+          "url": "/calculus/derivatives/graph-analysis#8"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5908,7 +5908,7 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Concavity from Second Derivative",
-            "url": "/calculus/derivatives/formulas#concavity_from_second_derivative"
+            "url": "/calculus/formulas#concavity_from_second_derivative"
           }
         ],
     relatedTheorems: [],
@@ -5925,7 +5925,7 @@ const formulasRepository = [
     formula: "$$f \\text{ continuous on } [a, b] \\implies f \\text{ attains a max and min on } [a, b]$$",
     link: {
           "label": "Extreme Value Theorem",
-          "url": "/calculus/derivatives/applications#9"
+          "url": "/calculus/derivatives/graph-analysis#10"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -5942,11 +5942,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Critical Point Condition",
-            "url": "/calculus/derivatives/formulas#critical_point_condition"
+            "url": "/calculus/formulas#critical_point_condition"
           },
           {
             "name": "Intermediate Value Theorem",
-            "url": "/calculus/limits/formulas#intermediate_value_theorem"
+            "url": "/calculus/formulas#intermediate_value_theorem"
           }
         ],
     relatedTheorems: [],
@@ -5981,11 +5981,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Power Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#power_rule_derivatives"
+            "url": "/calculus/formulas#power_rule_derivatives"
           },
           {
             "name": "Taylor Series",
-            "url": "/calculus/derivatives/formulas#taylor_series"
+            "url": "/calculus/formulas#taylor_series"
           }
         ],
     relatedTheorems: [],
@@ -6015,11 +6015,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Natural Exponential",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_exponential"
+            "url": "/calculus/formulas#derivative_of_natural_exponential"
           },
           {
             "name": "nth Derivative of Scaled Exponential",
-            "url": "/calculus/derivatives/formulas#nth_derivative_of_scaled_exponential"
+            "url": "/calculus/formulas#nth_derivative_of_scaled_exponential"
           }
         ],
     relatedTheorems: [],
@@ -6049,11 +6049,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "nth Derivative of Natural Exponential",
-            "url": "/calculus/derivatives/formulas#nth_derivative_of_natural_exponential"
+            "url": "/calculus/formulas#nth_derivative_of_natural_exponential"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           }
         ],
     relatedTheorems: [],
@@ -6083,11 +6083,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "nth Derivative of Cosine",
-            "url": "/calculus/derivatives/formulas#nth_derivative_of_cosine"
+            "url": "/calculus/formulas#nth_derivative_of_cosine"
           },
           {
             "name": "Derivative of Sine",
-            "url": "/calculus/derivatives/formulas#derivative_of_sine"
+            "url": "/calculus/formulas#derivative_of_sine"
           }
         ],
     relatedTheorems: [],
@@ -6117,11 +6117,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "nth Derivative of Sine",
-            "url": "/calculus/derivatives/formulas#nth_derivative_of_sine"
+            "url": "/calculus/formulas#nth_derivative_of_sine"
           },
           {
             "name": "Derivative of Cosine",
-            "url": "/calculus/derivatives/formulas#derivative_of_cosine"
+            "url": "/calculus/formulas#derivative_of_cosine"
           }
         ],
     relatedTheorems: [],
@@ -6151,11 +6151,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Power Rule (Derivatives)",
-            "url": "/calculus/derivatives/formulas#power_rule_derivatives"
+            "url": "/calculus/formulas#power_rule_derivatives"
           },
           {
             "name": "nth Derivative of Power",
-            "url": "/calculus/derivatives/formulas#nth_derivative_of_power"
+            "url": "/calculus/formulas#nth_derivative_of_power"
           }
         ],
     relatedTheorems: [],
@@ -6185,11 +6185,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "nth Derivative of Reciprocal",
-            "url": "/calculus/derivatives/formulas#nth_derivative_of_reciprocal"
+            "url": "/calculus/formulas#nth_derivative_of_reciprocal"
           },
           {
             "name": "Derivative of Natural Logarithm",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_logarithm"
+            "url": "/calculus/formulas#derivative_of_natural_logarithm"
           }
         ],
     relatedTheorems: [],
@@ -6219,11 +6219,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Linear Approximation",
-            "url": "/calculus/derivatives/formulas#linear_approximation"
+            "url": "/calculus/formulas#linear_approximation"
           },
           {
             "name": "nth Derivative of Power",
-            "url": "/calculus/derivatives/formulas#nth_derivative_of_power"
+            "url": "/calculus/formulas#nth_derivative_of_power"
           }
         ],
     relatedTheorems: [],
@@ -6262,15 +6262,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Derivative of Arcsine",
-            "url": "/calculus/derivatives/formulas#derivative_of_arcsine"
+            "url": "/calculus/formulas#derivative_of_arcsine"
           },
           {
             "name": "Derivative of Arctangent",
-            "url": "/calculus/derivatives/formulas#derivative_of_arctangent"
+            "url": "/calculus/formulas#derivative_of_arctangent"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           }
         ],
     relatedTheorems: [],
@@ -6300,15 +6300,15 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Logarithmic Derivative",
-            "url": "/calculus/derivatives/formulas#logarithmic_derivative"
+            "url": "/calculus/formulas#logarithmic_derivative"
           },
           {
             "name": "Derivative of Natural Logarithm",
-            "url": "/calculus/derivatives/formulas#derivative_of_natural_logarithm"
+            "url": "/calculus/formulas#derivative_of_natural_logarithm"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           }
         ],
     relatedTheorems: [],
@@ -6342,11 +6342,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Parametric Second Derivative",
-            "url": "/calculus/derivatives/formulas#parametric_second_derivative"
+            "url": "/calculus/formulas#parametric_second_derivative"
           },
           {
             "name": "Chain Rule",
-            "url": "/calculus/derivatives/formulas#chain_rule"
+            "url": "/calculus/formulas#chain_rule"
           }
         ],
     relatedTheorems: [],
@@ -6380,11 +6380,11 @@ const formulasRepository = [
     relatedFormulas: [
           {
             "name": "Parametric First Derivative",
-            "url": "/calculus/derivatives/formulas#parametric_first_derivative"
+            "url": "/calculus/formulas#parametric_first_derivative"
           },
           {
             "name": "Concavity from Second Derivative",
-            "url": "/calculus/derivatives/formulas#concavity_from_second_derivative"
+            "url": "/calculus/formulas#concavity_from_second_derivative"
           }
         ],
     relatedTheorems: [],

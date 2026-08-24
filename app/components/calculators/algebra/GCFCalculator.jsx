@@ -72,7 +72,7 @@ function GCFCalculator({ explanations }) {
     prime: {
       text: "The prime factorization method finds GCF by breaking each number into prime factors, then multiplying the common prime factors. This method clearly shows why the GCF works."
       // links: [
-      //   { title: "Factoring Calculator", link: "/calculators/factoring-calculator" },
+      //   { title: "Factoring Calculator", link: "/algebra/calculators/factoring" },
       //   { title: "Prime Number Checker", link: "/calculators/prime-checker" }
       // ]
     }

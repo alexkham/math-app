@@ -66,7 +66,7 @@ function DivisibilityCalculator({ explanations }) {
     single: {
       text: "Check if one number divides evenly into another. If the remainder is 0, the number is divisible. For example, 12 ÷ 3 = 4 with remainder 0, so 12 is divisible by 3."
       // links: [
-      //   { title: "Factoring Calculator", link: "/calculators/factoring-calculator" },
+      //   { title: "Factoring Calculator", link: "/algebra/calculators/factoring" },
       //   { title: "Modulo Calculator", link: "/calculators/modulo-calculator" }
       // ]
     },
@@ -74,7 +74,7 @@ function DivisibilityCalculator({ explanations }) {
       text: "Test divisibility by common numbers (2, 3, 4, 5, 6, 8, 9, 10, 12) all at once. Useful for quick factorability checks and understanding number properties."
       // links: [
       //   { title: "Prime Number Checker", link: "/calculators/prime-checker" },
-      //   { title: "Factoring Calculator", link: "/calculators/factoring-calculator" }
+      //   { title: "Factoring Calculator", link: "/algebra/calculators/factoring" }
       // ]
     }
   };

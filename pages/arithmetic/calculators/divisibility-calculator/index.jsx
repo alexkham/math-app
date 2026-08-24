@@ -13,7 +13,7 @@ export async function getStaticProps() {
 const navigationGroup=[
   {title:'Arithmetic Calculators',
     items:[
-      {title:'Factoring Calculator',link:'/calculators/factoring-calculator'},
+      {title:'Factoring Calculator',link:'/algebra/calculators/factoring'},
       {title:'GCF Calculator',link:'/arithmetic/calculators/gcf-calculator'},
       {title:'LCM Calculator',link:'/arithmetic/calculators/lcm-calculator'},
       {title:'Prime Number Checker',link:'/arithmetic/calculators/prime-calculator'},

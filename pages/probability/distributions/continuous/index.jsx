@@ -537,7 +537,7 @@ exponential:{
   content:``,
   before:``,
   link:'/probability/distributions/continuous/exponential',
-  after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use continuous distributions calculator](!/probability/calculator/continuous-distributions?tab=2) →@`,
+  after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use continuous distributions calculator](!/probability/calculators/continuous-distributions?tab=2) →@`,
   
   checklist:`<h2 style="color: #52525b;"> Checklist for Identifying an Exponential Distribution</h2>
 ✔ Models the time until an event occurs in a continuous process.

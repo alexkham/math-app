@@ -42,13 +42,13 @@ const explanations = {
     text: "A square root of a number is a value that, when multiplied by itself, gives the number. For example, the square root of $25$ is $5$, because $5 \\times 5 = 25$.",
     links: [
       {title: "Square Root Visualizer", link: "/visual-tools/square-root"},
-      {title: "Perfect Squares and Roots Table", link: "/tables/arithmetics/perfect-squares"}
+      {title: "Perfect Squares and Roots Table", link: "/tables/perfect-squares"}
     ],
   },
   cube: {
     text: "A cube root of a number is a value that, when multiplied by itself twice, gives the number. For example, the cube root of $27$ is $3$, because $3 \\times 3 \\times 3 = 27$.",
     links: [
-      {title: "Perfect Cubes and Cube Roots Table", link: "/tables/arithmetics/perfect-cubes"}
+      {title: "Perfect Cubes and Cube Roots Table", link: "/tables/perfect-cubes"}
     ],
   },
   nth: {

@@ -14,7 +14,7 @@
 //         <title> Powers of Integer Numbers from 1 to 10 | Powers Table | Learn Math Class</title>
 //         <meta name="description" content="Explore powers of integer numbers from 1 to 10000 with our comprehensive table. " />
 //         <meta name="keywords" content={keyWords.join(', ')} />
-//         <link rel="canonical" href="https://www.learnmathclass.com/tables/arithmetics/powers-table" />
+//         <link rel="canonical" href="https://www.learnmathclass.com/tables/powers-table" />
         
       
 //       </Head>
@@ -40,7 +40,7 @@
 //      instructions={instructions}
 //      links={[
 //         { text: "Exponents Calculator", url: "/calculators/exponent-calculator" },
-//         { text: "Natural Exponential Table", url: "/tables/arithmetics/exponential-table" }
+//         { text: "Natural Exponential Table", url: "/tables/powers-table" }
 //       ]}/>
 //       </div>
 //     <div style={{transform:'scale(0.9)'}}>
@@ -159,7 +159,7 @@ export default function PowersTablePage({seoData, instructions, faqQuestions, sc
      instructions={instructions}
      links={[
         // { text: "Exponents Calculator", url: "/calculators/exponent-calculator" },
-        { text: "Natural Exponential Table", url: "/tables/arithmetics/exponential-table" }
+        { text: "Natural Exponential Table", url: "/tables/powers-table" }
       ]}/>
       </div>
     <div style={{transform:'scale(0.9)'}}>
@@ -236,7 +236,7 @@ export async function getStaticProps() {
         "@type": "WebApplication",
         "name": "Powers Table 1 to 10 with Searchable Lookup",
         "description": "Reference table of all 100 powers from 1^1 to 10^10. Look up any number to find which power it is, with yellow-highlighted matches and ten per-base stacks.",
-        "url": "https://www.learnmathclass.com/tables/arithmetics/powers-table",
+        "url": "https://www.learnmathclass.com/tables/powers-table",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -286,13 +286,13 @@ export async function getStaticProps() {
             "@type": "ListItem",
             "position": 3,
             "name": "Arithmetic",
-            "item": "https://www.learnmathclass.com/tables/arithmetics"
+            "item": "https://www.learnmathclass.com/tables"
           },
           {
             "@type": "ListItem",
             "position": 4,
             "name": "Powers Table",
-            "item": "https://www.learnmathclass.com/tables/arithmetics/powers-table"
+            "item": "https://www.learnmathclass.com/tables/powers-table"
           }
         ]
       },
@@ -322,7 +322,7 @@ export async function getStaticProps() {
           title: "Powers Table 1-10 (Exponents 1 to 10) | Learn Math Class",
           description: "Reference table of all 100 powers from 1^1 to 10^10. Look up any number to find which power it is, with yellow-highlighted matches and ten per-base stacks.",
           keywords: keyWords.join(", "),
-          url: "/tables/arithmetics/powers-table",
+          url: "/tables/powers-table",
           name: "Powers Table 1 to 10 with Searchable Lookup",
           hubDescription: "Reference table of all 100 powers of integer bases 1 through 10, from base^1 up to base^10. Type any number into the search bar to find which power it equals (if any) — the table scrolls to the matching stack and highlights the cell in yellow. Stack titles show each base's range, for example base 7 spans 7 through 282,475,249, and base 10 reaches 10 billion.",
           category: "Arithmetic",

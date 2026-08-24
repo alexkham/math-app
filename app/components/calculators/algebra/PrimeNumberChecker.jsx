@@ -83,14 +83,14 @@ function PrimeNumberChecker({ explanations }) {
     check: {
       text: "A prime number has exactly two factors: 1 and itself. This checker tests if your number can be divided by any number other than 1 and itself. Numbers less than 2 are not considered prime."
       // links: [
-      //   { title: "Factoring Calculator", link: "/calculators/factoring-calculator" },
+      //   { title: "Factoring Calculator", link: "/algebra/calculators/factoring" },
       //   { title: "List of Prime Numbers", link: "/reference/prime-numbers" }
       // ]
     },
     detailed: {
       text: "Detailed mode shows all factors when a number is composite (not prime). This helps you understand why a number isn't prime and see what divides into it evenly."
       // links: [
-      //   { title: "Factoring Calculator", link: "/calculators/factoring-calculator" },
+      //   { title: "Factoring Calculator", link: "/algebra/calculators/factoring" },
       //   { title: "Divisibility Calculator", link: "/calculators/divisibility-calculator" }
       // ]
     }

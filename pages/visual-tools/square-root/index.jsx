@@ -72,11 +72,11 @@ export async function getStaticProps() {
         4. The tooltips show the exact square root value`,
       links: [
         { text: "Root Calculator", url: "/calculators/root-calculator" },
-        { text: "Perfect Squares and Roots Table", url: "/tables/arithmetics/perfect-squares" }
+        { text: "Perfect Squares and Roots Table", url: "/tables/perfect-squares" }
       ],
       externalLinks: [
         { text: "Root Calculator", url: "/calculators/root-calculator" },
-        { text: "Perfect Squares and Roots Table", url: "/tables/arithmetics/perfect-squares" }
+        { text: "Perfect Squares and Roots Table", url: "/tables/perfect-squares" }
       ]
     },
     perfect: {
@@ -89,7 +89,7 @@ export async function getStaticProps() {
         In our visualization, perfect squares appear along the diagonal of the grid, marked with their values. The blue shading shows the area of each perfect square, making it easy to see how they grow.`,
       links: [
         { text: "Root Calculator", url: "/calculators/root-calculator" },
-        { text: "Perfect Squares and Roots Table", url: "/tables/arithmetics/perfect-squares" }
+        { text: "Perfect Squares and Roots Table", url: "/tables/perfect-squares" }
       ],
     },
     irrational: {
@@ -105,7 +105,7 @@ export async function getStaticProps() {
         • The frame's position shows the exact decimal value`,
       links: [
         { text: "Root Calculator", url: "/calculators/root-calculator" },
-        { text: "Perfect Squares and Roots Table", url: "/tables/arithmetics/perfect-squares" }
+        { text: "Perfect Squares and Roots Table", url: "/tables/perfect-squares" }
       ],
     }
   };

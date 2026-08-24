@@ -77,12 +77,12 @@
 // //     // 'Algebra': '/algebra',
 // //     // 'Calculus': '/calculus',
 // //     // 'Trigonometry': '/trigonometry',
-// //     'Probability': '/tables/probability',
-// //     'Arithmetics': '/tables/arithmetics',
+// //     'Probability': '/tables',
+// //     'Arithmetics': '/tables',
 // //     'Math-Symbols': '/math-symbols',
 // //     'Truth-Tables':'/logic/truth-tables',
 // //     'Angle-Conversion-Table':'/tables/angle-conversion',
-// //     'Trigonometry-Tables':'/tables/trigonometry'
+// //     'Trigonometry-Tables':'/tables'
 
 // //   };
   

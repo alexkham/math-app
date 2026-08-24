@@ -254,7 +254,7 @@ You can observe these sign changes by using the interactive tool above. Set the 
 
 These angles, along with their equivalents in other quadrants, form the backbone of trigonometric calculations. Notice the pattern: 30° and 60° are complementary (they add to 90°), and their sine and cosine values are swapped. The 45° angle creates an isosceles right triangle, giving equal sine and cosine values.
 
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See Special Angles Table](!/tables/trigonometry/special-angles) →@
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See Special Angles Table](!/tables/special-angles) →@
 
  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use trigonometry calculator](!/calculators/trigonometry-calculator) →@
 
@@ -278,7 +278,7 @@ Try entering these angles in the interactive tool above. You'll notice that the 
   @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Check angle conversion table](!/tables/angle-conversion) →@
 
       `,
-      link:'/tables/trigonometry/special-angles',
+      link:'/tables/special-angles',
   
     },
     obj5:{

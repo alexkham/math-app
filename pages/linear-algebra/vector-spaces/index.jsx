@@ -367,7 +367,7 @@
 // //   },
 // //   obj11: {
 // //     title: `The Four Fundamental Subspaces`,
-// //     content: `Every $m \\times n$ matrix $A$ defines four [subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces) that together form its complete structural portrait.
+// //     content: `Every $m \\times n$ matrix $A$ defines four [subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) that together form its complete structural portrait.
 
 // // The column space $\\text{Col}(A)$, a subspace of $\\mathbb{R}^m$, consists of all vectors of the form $A\\mathbf{x}$. Its dimension is the [rank](!/linear-algebra/matrix/rank) $r$. The row space $\\text{Row}(A)$, a subspace of $\\mathbb{R}^n$, consists of all linear combinations of the rows. Its dimension is also $r$.
 
