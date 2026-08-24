@@ -25,16 +25,16 @@
 // //     title: "Other Trigonometric Tables",
 // //     items: [
 // //       { title: "Trigonometric Functions of Special Angles", link: "/tables/special-angles" },
-// //       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
-// //       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
-// //       { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
+// //       { title: "Inverse Trigonometric Functions", link: "/trigonometry/inverse-functions" },
+// //       { title: "Trigonometric Reduction Formulas", link: "/trigonometry/identities#shift" },
+// //       { title: "Half Angle Formulas", link: "/trigonometry/identities#half" },
       
-// //        { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
-// //         { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
-// //         { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
-// //          { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
-// //       { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" }, 
-// //       { title: "Supplement Angle Formulas", link: "/tables/trigonometry/supplement-angle" },   
+// //        { title: "Triple Angle Formulas", link: "/trigonometry/identities#triple" },
+// //         { title: "Sum of Angles Formulas", link: "/trigonometry/identities#sum" },
+// //         { title: "Difference of Angles Formulas", link: "/trigonometry/identities#difference" },
+// //          { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/trigonometry/identities#even-odd" },
+// //       { title: "Complement Angle Formulas", link: "/trigonometry/identities#co-function" }, 
+// //       { title: "Supplement Angle Formulas", link: "/trigonometry/identities#shift" },   
 // //     ]
 // //   },
 // //    {

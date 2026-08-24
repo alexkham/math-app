@@ -276,7 +276,7 @@ export async function getStaticProps(){
     },
     {
       title: "Bayes' Theorem Calculator",
-      link: "/probability/calculators/bayes-theorem"
+      link: "/probability/calculators/bayes-calculator"
     },
   ]
 

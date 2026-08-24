@@ -217,7 +217,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(-x)'],
       rhsAlts: ['-sin', 'negative sin'],
       tip: 'Sine is an odd function \u2014 reflecting the input across zero flips the sign of the output.',
-      link: '/trigonometry/negative-angle',
+      link: '/trigonometry/identities#even-odd',
     },
     {
       id: 'neg_cos',
@@ -228,7 +228,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(-x)'],
       rhsAlts: ['cos'],
       tip: 'Cosine is an even function \u2014 reflecting the input across zero leaves the output unchanged.',
-      link: '/trigonometry/negative-angle',
+      link: '/trigonometry/identities#even-odd',
     },
     {
       id: 'neg_tan',
@@ -239,7 +239,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(-x)'],
       rhsAlts: ['-tan', 'negative tan'],
       tip: 'Odd because $\\tan = \\sin / \\cos$, and odd divided by even is odd.',
-      link: '/trigonometry/negative-angle',
+      link: '/trigonometry/identities#even-odd',
     },
     {
       id: 'neg_cot',
@@ -250,7 +250,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(-x)'],
       rhsAlts: ['-cot', 'negative cot'],
       tip: 'Odd because $\\cot = \\cos / \\sin$, and even divided by odd is odd.',
-      link: '/trigonometry/negative-angle',
+      link: '/trigonometry/identities#even-odd',
     },
     {
       id: 'neg_sec',
@@ -261,7 +261,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(-x)'],
       rhsAlts: ['sec'],
       tip: 'Even because $\\sec = 1 / \\cos$, and the reciprocal of an even function is even.',
-      link: '/trigonometry/negative-angle',
+      link: '/trigonometry/identities#even-odd',
     },
     {
       id: 'neg_csc',
@@ -272,7 +272,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(-x)'],
       rhsAlts: ['-csc', 'negative csc'],
       tip: 'Odd because $\\csc = 1 / \\sin$, and the reciprocal of an odd function is odd.',
-      link: '/trigonometry/negative-angle',
+      link: '/trigonometry/identities#even-odd',
     },
 
     // ─── COMPLEMENT (COFUNCTION) ─────────────────────────
@@ -285,7 +285,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(pi/2 - x)', 'sin of complement'],
       rhsAlts: ['cos'],
       tip: 'The cofunction relationship between sine and cosine. In a right triangle, the sine of one acute angle equals the cosine of the other.',
-      link: '/trigonometry/complement-angle',
+      link: '/trigonometry/identities#co-function',
     },
     {
       id: 'comp_cos',
@@ -296,7 +296,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(pi/2 - x)', 'cos of complement'],
       rhsAlts: ['sin'],
       tip: 'Mirror of the sine cofunction identity.',
-      link: '/trigonometry/complement-angle',
+      link: '/trigonometry/identities#co-function',
     },
     {
       id: 'comp_tan',
@@ -307,7 +307,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(pi/2 - x)', 'tan of complement'],
       rhsAlts: ['cot'],
       tip: 'The "co" in cotangent comes from this identity \u2014 cotangent is the tangent of the complementary angle.',
-      link: '/trigonometry/complement-angle',
+      link: '/trigonometry/identities#co-function',
     },
     {
       id: 'comp_cot',
@@ -318,7 +318,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(pi/2 - x)', 'cot of complement'],
       rhsAlts: ['tan'],
       tip: 'Mirror of the tangent cofunction identity.',
-      link: '/trigonometry/complement-angle',
+      link: '/trigonometry/identities#co-function',
     },
     {
       id: 'comp_sec',
@@ -329,7 +329,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(pi/2 - x)', 'sec of complement'],
       rhsAlts: ['csc'],
       tip: 'The "co" in cosecant indicates the secant of the complementary angle.',
-      link: '/trigonometry/complement-angle',
+      link: '/trigonometry/identities#co-function',
     },
     {
       id: 'comp_csc',
@@ -340,7 +340,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(pi/2 - x)', 'csc of complement'],
       rhsAlts: ['sec'],
       tip: 'Mirror of the secant cofunction identity.',
-      link: '/trigonometry/complement-angle',
+      link: '/trigonometry/identities#co-function',
     },
 
     // ─── SUPPLEMENT ──────────────────────────────────────
@@ -353,7 +353,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(pi - x)', 'sin of supplement'],
       rhsAlts: ['sin'],
       tip: 'Supplementary angles share the same sine. Geometric meaning: reflection across the $y$-axis on the unit circle preserves the $y$-coordinate.',
-      link: '/trigonometry/supplement-angle',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'sup_cos',
@@ -364,7 +364,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(pi - x)', 'cos of supplement'],
       rhsAlts: ['-cos', 'negative cos'],
       tip: 'Reflection across the $y$-axis flips the $x$-coordinate, so cosine changes sign.',
-      link: '/trigonometry/supplement-angle',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'sup_tan',
@@ -375,7 +375,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(pi - x)', 'tan of supplement'],
       rhsAlts: ['-tan', 'negative tan'],
       tip: 'Tangent flips sign because the cosine in the denominator flips while sine in the numerator is preserved.',
-      link: '/trigonometry/supplement-angle',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'sup_cot',
@@ -386,7 +386,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(pi - x)', 'cot of supplement'],
       rhsAlts: ['-cot', 'negative cot'],
       tip: 'Same sign behavior as tangent \u2014 cotangent inherits the sign flip from its cosine numerator.',
-      link: '/trigonometry/supplement-angle',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'sup_sec',
@@ -397,7 +397,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(pi - x)', 'sec of supplement'],
       rhsAlts: ['-sec', 'negative sec'],
       tip: 'Sign flips with cosine, since $\\sec = 1/\\cos$.',
-      link: '/trigonometry/supplement-angle',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'sup_csc',
@@ -408,7 +408,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(pi - x)', 'csc of supplement'],
       rhsAlts: ['csc'],
       tip: 'Unchanged like sine, since $\\csc = 1/\\sin$.',
-      link: '/trigonometry/supplement-angle',
+      link: '/trigonometry/identities#shift',
     },
 
     // ─── REFERENCE-ANGLE REDUCTION ───────────────────────
@@ -422,7 +422,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(pi/2 + x)', 'sin(90 + x)'],
       rhsAlts: ['cos'],
       tip: 'Rotating $\\pi/2$ counterclockwise turns a sine into a cosine. Equivalent statement: in degrees, $\\sin(90\u00B0 + x) = \\cos x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_90p_cos',
@@ -433,7 +433,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(pi/2 + x)', 'cos(90 + x)'],
       rhsAlts: ['-sin', 'negative sin'],
       tip: 'The cofunction relationship with a sign flip. In degrees: $\\cos(90\u00B0 + x) = -\\sin x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_90p_tan',
@@ -444,7 +444,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(pi/2 + x)', 'tan(90 + x)'],
       rhsAlts: ['-cot', 'negative cot'],
       tip: 'Follows from the sine and cosine versions: ratio of $\\cos x$ over $-\\sin x$ equals $-\\cot x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_90p_cot',
@@ -455,7 +455,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(pi/2 + x)', 'cot(90 + x)'],
       rhsAlts: ['-tan', 'negative tan'],
       tip: 'Reciprocal of the tangent version.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_90p_sec',
@@ -466,7 +466,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(pi/2 + x)', 'sec(90 + x)'],
       rhsAlts: ['-csc', 'negative csc'],
       tip: 'Reciprocal of the cosine version: $1/(-\\sin x) = -\\csc x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_90p_csc',
@@ -477,7 +477,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(pi/2 + x)', 'csc(90 + x)'],
       rhsAlts: ['sec'],
       tip: 'Reciprocal of the sine version: $1/\\cos x = \\sec x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     // ── π + x ───────────────────────────────────────────
     {
@@ -489,7 +489,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(pi + x)', 'sin(180 + x)'],
       rhsAlts: ['-sin', 'negative sin'],
       tip: 'Rotating by $\\pi$ takes a point on the unit circle to its diametric opposite, flipping both coordinates. In degrees: $\\sin(180\u00B0 + x) = -\\sin x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_180p_cos',
@@ -500,7 +500,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(pi + x)', 'cos(180 + x)'],
       rhsAlts: ['-cos', 'negative cos'],
       tip: 'Cosine also flips sign under the diametric rotation.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_180p_tan',
@@ -511,7 +511,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(pi + x)', 'tan(180 + x)'],
       rhsAlts: ['tan'],
       tip: 'Tangent has period $\\pi$, so shifting by $\\pi$ leaves it unchanged. This is why $\\tan$ has half the period of $\\sin$ and $\\cos$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_180p_cot',
@@ -522,7 +522,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(pi + x)', 'cot(180 + x)'],
       rhsAlts: ['cot'],
       tip: 'Cotangent shares tangent\u2019s period of $\\pi$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_180p_sec',
@@ -533,7 +533,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(pi + x)', 'sec(180 + x)'],
       rhsAlts: ['-sec', 'negative sec'],
       tip: 'Flips sign with cosine.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_180p_csc',
@@ -544,7 +544,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(pi + x)', 'csc(180 + x)'],
       rhsAlts: ['-csc', 'negative csc'],
       tip: 'Flips sign with sine.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     // ── 3π/2 − x ────────────────────────────────────────
     {
@@ -556,7 +556,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(3pi/2 - x)', 'sin(270 - x)'],
       rhsAlts: ['-cos', 'negative cos'],
       tip: 'Three-quarter rotation minus a small turn lands in the third quadrant. In degrees: $\\sin(270\u00B0 - x) = -\\cos x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270m_cos',
@@ -567,7 +567,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(3pi/2 - x)', 'cos(270 - x)'],
       rhsAlts: ['-sin', 'negative sin'],
       tip: 'Cosine and sine swap roles, both with sign flip.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270m_tan',
@@ -578,7 +578,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(3pi/2 - x)', 'tan(270 - x)'],
       rhsAlts: ['cot'],
       tip: 'Tangent becomes cotangent: ratio of $-\\cos x$ over $-\\sin x$ equals $\\cot x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270m_cot',
@@ -589,7 +589,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(3pi/2 - x)', 'cot(270 - x)'],
       rhsAlts: ['tan'],
       tip: 'Reciprocal of the tangent version.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270m_sec',
@@ -600,7 +600,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(3pi/2 - x)', 'sec(270 - x)'],
       rhsAlts: ['-csc', 'negative csc'],
       tip: 'Reciprocal of the cosine version.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270m_csc',
@@ -611,7 +611,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(3pi/2 - x)', 'csc(270 - x)'],
       rhsAlts: ['-sec', 'negative sec'],
       tip: 'Reciprocal of the sine version.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     // ── 3π/2 + x ────────────────────────────────────────
     {
@@ -623,7 +623,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(3pi/2 + x)', 'sin(270 + x)'],
       rhsAlts: ['-cos', 'negative cos'],
       tip: 'Three-quarter rotation plus a small turn lands in the fourth quadrant. In degrees: $\\sin(270\u00B0 + x) = -\\cos x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270p_cos',
@@ -634,7 +634,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(3pi/2 + x)', 'cos(270 + x)'],
       rhsAlts: ['sin'],
       tip: 'Sine and cosine swap roles \u2014 the only function pair with this property.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270p_tan',
@@ -645,7 +645,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(3pi/2 + x)', 'tan(270 + x)'],
       rhsAlts: ['-cot', 'negative cot'],
       tip: 'Ratio of $-\\cos x$ over $\\sin x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270p_cot',
@@ -656,7 +656,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(3pi/2 + x)', 'cot(270 + x)'],
       rhsAlts: ['-tan', 'negative tan'],
       tip: 'Reciprocal of the tangent version.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270p_sec',
@@ -667,7 +667,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(3pi/2 + x)', 'sec(270 + x)'],
       rhsAlts: ['csc'],
       tip: 'Reciprocal of the cosine version.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_270p_csc',
@@ -678,7 +678,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(3pi/2 + x)', 'csc(270 + x)'],
       rhsAlts: ['-sec', 'negative sec'],
       tip: 'Reciprocal of the sine version.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     // ── 2π − x ──────────────────────────────────────────
     {
@@ -690,7 +690,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(2pi - x)', 'sin(360 - x)'],
       rhsAlts: ['-sin', 'negative sin'],
       tip: 'Equivalent to $\\sin(-x)$ by periodicity, hence $-\\sin x$. In degrees: $\\sin(360\u00B0 - x) = -\\sin x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360m_cos',
@@ -701,7 +701,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(2pi - x)', 'cos(360 - x)'],
       rhsAlts: ['cos'],
       tip: 'Equivalent to $\\cos(-x)$ by periodicity, hence $\\cos x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360m_tan',
@@ -712,7 +712,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(2pi - x)', 'tan(360 - x)'],
       rhsAlts: ['-tan', 'negative tan'],
       tip: 'Same as $\\tan(-x)$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360m_cot',
@@ -723,7 +723,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(2pi - x)', 'cot(360 - x)'],
       rhsAlts: ['-cot', 'negative cot'],
       tip: 'Same as $\\cot(-x)$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360m_sec',
@@ -734,7 +734,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(2pi - x)', 'sec(360 - x)'],
       rhsAlts: ['sec'],
       tip: 'Same as $\\sec(-x) = \\sec x$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360m_csc',
@@ -745,7 +745,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(2pi - x)', 'csc(360 - x)'],
       rhsAlts: ['-csc', 'negative csc'],
       tip: 'Same as $\\csc(-x)$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     // ── 2π + x (periodicity) ────────────────────────────
     {
@@ -757,7 +757,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(2pi + x)', 'sin(360 + x)', 'periodicity'],
       rhsAlts: ['sin'],
       tip: 'Sine has period $2\\pi$ \u2014 a full rotation lands back where it started.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360p_cos',
@@ -768,7 +768,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(2pi + x)', 'cos(360 + x)', 'periodicity'],
       rhsAlts: ['cos'],
       tip: 'Cosine has period $2\\pi$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360p_tan',
@@ -779,7 +779,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(2pi + x)', 'tan(360 + x)', 'periodicity'],
       rhsAlts: ['tan'],
       tip: 'Tangent\u2019s period is $\\pi$, so a $2\\pi$ shift is two full cycles \u2014 also unchanged.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360p_cot',
@@ -790,7 +790,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(2pi + x)', 'cot(360 + x)', 'periodicity'],
       rhsAlts: ['cot'],
       tip: 'Period $\\pi$, unchanged after $2\\pi$.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360p_sec',
@@ -801,7 +801,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(2pi + x)', 'sec(360 + x)', 'periodicity'],
       rhsAlts: ['sec'],
       tip: 'Inherits cosine\u2019s $2\\pi$ period.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
     {
       id: 'red_360p_csc',
@@ -812,7 +812,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(2pi + x)', 'csc(360 + x)', 'periodicity'],
       rhsAlts: ['csc'],
       tip: 'Inherits sine\u2019s $2\\pi$ period.',
-      link: '/trigonometry/reduction',
+      link: '/trigonometry/identities#shift',
     },
 
     // ─── SUM-ANGLE ───────────────────────────────────────
@@ -825,7 +825,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(a+b)', 'sin of sum'],
       rhsAlts: ['sin cos + cos sin', 'sa cb + ca sb'],
       tip: 'The most foundational compound-angle identity. Mnemonic: "sine \u2014 same; sign \u2014 same" (matches the sign of $a + b$). Setting $a = b = x$ recovers the double-angle formula.',
-      link: '/trigonometry/sum-angle',
+      link: '/trigonometry/identities#sum',
     },
     {
       id: 'sum_cos',
@@ -836,7 +836,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(a+b)', 'cos of sum'],
       rhsAlts: ['cos cos - sin sin'],
       tip: 'Mnemonic: "cosine \u2014 cross; sign \u2014 opposite" (sign on the RHS is opposite to the sign of $a + b$). Setting $b = a$ produces all three forms of $\\cos(2a)$.',
-      link: '/trigonometry/sum-angle',
+      link: '/trigonometry/identities#sum',
     },
     {
       id: 'sum_tan',
@@ -847,7 +847,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(a+b)', 'tan of sum'],
       rhsAlts: ['(tan + tan)/(1 - tan tan)'],
       tip: 'Derived by dividing the sin-sum identity by the cos-sum identity, then dividing numerator and denominator by $\\cos(a)\\cos(b)$. Valid where $\\cos(a)$, $\\cos(b)$, and $\\cos(a+b)$ are all nonzero.',
-      link: '/trigonometry/sum-angle',
+      link: '/trigonometry/identities#sum',
     },
     {
       id: 'sum_cot',
@@ -858,7 +858,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(a+b)', 'cot of sum'],
       rhsAlts: ['(cot cot - 1)/(cot + cot)'],
       tip: 'Reciprocal of the tangent sum, expressed in $\\cot$. Derive by dividing numerator and denominator of $\\cos(a+b)/\\sin(a+b)$ by $\\sin(a)\\sin(b)$.',
-      link: '/trigonometry/sum-angle',
+      link: '/trigonometry/identities#sum',
     },
     {
       id: 'sum_sec',
@@ -869,7 +869,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(a+b)', 'sec of sum'],
       rhsAlts: ['sec sec / (1 - tan tan)'],
       tip: 'Take the reciprocal of the cosine sum and divide numerator and denominator by $\\cos(a)\\cos(b)$.',
-      link: '/trigonometry/sum-angle',
+      link: '/trigonometry/identities#sum',
     },
     {
       id: 'sum_csc',
@@ -880,7 +880,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(a+b)', 'csc of sum'],
       rhsAlts: ['csc csc / (cot + cot)'],
       tip: 'Reciprocal of the sine sum, written in $\\csc$ and $\\cot$.',
-      link: '/trigonometry/sum-angle',
+      link: '/trigonometry/identities#sum',
     },
 
     // ─── DIFFERENCE-ANGLE ────────────────────────────────
@@ -893,7 +893,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(a-b)', 'sin of difference'],
       rhsAlts: ['sin cos - cos sin'],
       tip: 'Replace $b$ with $-b$ in the sum-angle formula; the second term flips sign because sine is odd while cosine is even.',
-      link: '/trigonometry/difference-angle',
+      link: '/trigonometry/identities#difference',
     },
     {
       id: 'diff_cos',
@@ -904,7 +904,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(a-b)', 'cos of difference'],
       rhsAlts: ['cos cos + sin sin'],
       tip: 'Replace $b$ with $-b$ in the sum-angle formula. The sign flips relative to the sum form because the sin-sin term picks up a negative from $\\sin(-b)$.',
-      link: '/trigonometry/difference-angle',
+      link: '/trigonometry/identities#difference',
     },
     {
       id: 'diff_tan',
@@ -915,7 +915,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(a-b)', 'tan of difference'],
       rhsAlts: ['(tan - tan)/(1 + tan tan)'],
       tip: 'Sign flips appear in both the numerator and the denominator relative to the sum form. Valid where $\\cos(a)$, $\\cos(b)$, and $\\cos(a-b)$ are all nonzero.',
-      link: '/trigonometry/difference-angle',
+      link: '/trigonometry/identities#difference',
     },
     {
       id: 'diff_cot',
@@ -926,7 +926,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(a-b)', 'cot of difference'],
       rhsAlts: ['(cot cot + 1)/(cot - cot)'],
       tip: 'Note the order of subtraction in the denominator: $\\cot(b) - \\cot(a)$, not the reverse. Sign pattern mirrors the tangent difference identity.',
-      link: '/trigonometry/difference-angle',
+      link: '/trigonometry/identities#difference',
     },
     {
       id: 'diff_sec',
@@ -937,7 +937,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(a-b)', 'sec of difference'],
       rhsAlts: ['sec sec / (1 + tan tan)'],
       tip: 'Sign on the denominator flips relative to the sum form.',
-      link: '/trigonometry/difference-angle',
+      link: '/trigonometry/identities#difference',
     },
     {
       id: 'diff_csc',
@@ -948,7 +948,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(a-b)', 'csc of difference'],
       rhsAlts: ['csc csc / (cot - cot)'],
       tip: 'Mirrors the cotangent-difference denominator structure.',
-      link: '/trigonometry/difference-angle',
+      link: '/trigonometry/identities#difference',
     },
 
     // ─── DOUBLE-ANGLE ────────────────────────────────────
@@ -961,7 +961,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(2x)', 'sine double angle'],
       rhsAlts: ['2 sin cos'],
       tip: 'Set $a = b = x$ in the sum-angle formula for sine.',
-      link: '/trigonometry/double-angle',
+      link: '/trigonometry/identities#double',
     },
     {
       id: 'dbl_cos',
@@ -972,7 +972,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(2x)', 'cosine double angle'],
       rhsAlts: ['cos^2 - sin^2'],
       tip: 'Three equivalent forms, all useful in different contexts: $\\cos^2(x) - \\sin^2(x) \\;=\\; 2\\cos^2(x) - 1 \\;=\\; 1 - 2\\sin^2(x)$. The latter two follow by substituting the Pythagorean identity; they are the source of the power-reduction formulas.',
-      link: '/trigonometry/double-angle',
+      link: '/trigonometry/identities#double',
     },
     {
       id: 'dbl_tan',
@@ -983,7 +983,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(2x)', 'tangent double angle'],
       rhsAlts: ['2 tan / (1 - tan^2)'],
       tip: 'Set $a = b = x$ in the sum-angle formula for tangent. Valid where $\\cos(x) \\neq 0$ and $\\tan^2(x) \\neq 1$ (i.e. $x \\neq \\tfrac{\\pi}{4} + \\tfrac{k\\pi}{2}$).',
-      link: '/trigonometry/double-angle',
+      link: '/trigonometry/identities#double',
     },
     {
       id: 'dbl_cot',
@@ -994,7 +994,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(2x)', 'cotangent double angle'],
       rhsAlts: ['(cot^2 - 1)/(2 cot)'],
       tip: 'Reciprocal of the tangent double-angle. Equivalent forms by sign manipulation are common in textbooks.',
-      link: '/trigonometry/double-angle',
+      link: '/trigonometry/identities#double',
     },
     {
       id: 'dbl_sec',
@@ -1005,7 +1005,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(2x)', 'secant double angle'],
       rhsAlts: ['sec^2 / (2 - sec^2)'],
       tip: 'Reciprocal of $\\cos(2x) = 2\\cos^2(x) - 1$, written in $\\sec$ by substituting $\\cos^2(x) = 1/\\sec^2(x)$. Equivalent forms: $\\dfrac{1}{2\\cos^2(x) - 1}$ and $\\dfrac{1 + \\tan^2(x)}{1 - \\tan^2(x)}$.',
-      link: '/trigonometry/double-angle',
+      link: '/trigonometry/identities#double',
     },
     {
       id: 'dbl_csc',
@@ -1016,7 +1016,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(2x)', 'cosecant double angle'],
       rhsAlts: ['sec csc / 2'],
       tip: 'Reciprocal of $\\sin(2x) = 2\\sin(x)\\cos(x)$, rewritten with both reciprocals on top.',
-      link: '/trigonometry/double-angle',
+      link: '/trigonometry/identities#double',
     },
 
     // ─── TRIPLE-ANGLE ────────────────────────────────────
@@ -1029,7 +1029,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(3x)', 'sine triple angle'],
       rhsAlts: ['3 sin - 4 sin^3'],
       tip: 'Derived by applying the sum-angle formula to $\\sin(2x + x)$ and expanding using double-angle formulas.',
-      link: '/trigonometry/triple-angle',
+      link: '/trigonometry/identities#triple',
     },
     {
       id: 'tri_cos',
@@ -1040,7 +1040,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(3x)', 'cosine triple angle'],
       rhsAlts: ['4 cos^3 - 3 cos'],
       tip: 'Derived by applying the sum-angle formula to $\\cos(2x + x)$ and expanding. The Chebyshev polynomial $T_3(\\cos x) = \\cos(3x)$ encodes exactly this relationship.',
-      link: '/trigonometry/triple-angle',
+      link: '/trigonometry/identities#triple',
     },
     {
       id: 'tri_tan',
@@ -1051,7 +1051,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(3x)', 'tangent triple angle'],
       rhsAlts: ['(3 tan - tan^3)/(1 - 3 tan^2)'],
       tip: 'Apply the sum-angle formula to $\\tan(2x + x)$ and simplify. Valid where the denominator is nonzero \u2014 i.e. $\\tan^2(x) \\neq \\tfrac{1}{3}$.',
-      link: '/trigonometry/triple-angle',
+      link: '/trigonometry/identities#triple',
     },
     {
       id: 'tri_cot',
@@ -1062,7 +1062,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(3x)', 'cotangent triple angle'],
       rhsAlts: ['(cot^3 - 3 cot)/(3 cot^2 - 1)'],
       tip: 'Reciprocal of the tangent triple-angle.',
-      link: '/trigonometry/triple-angle',
+      link: '/trigonometry/identities#triple',
     },
     {
       id: 'tri_sec',
@@ -1073,7 +1073,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(3x)', 'secant triple angle'],
       rhsAlts: ['sec / (4 cos^2 - 3)'],
       tip: 'Reciprocal of $\\cos(3x) = \\cos(x)(4\\cos^2(x) - 3)$. Undefined wherever $\\cos(3x) = 0$.',
-      link: '/trigonometry/triple-angle',
+      link: '/trigonometry/identities#triple',
     },
     {
       id: 'tri_csc',
@@ -1084,7 +1084,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(3x)', 'cosecant triple angle'],
       rhsAlts: ['csc / (3 - 4 sin^2)'],
       tip: 'Reciprocal of $\\sin(3x) = \\sin(x)(3 - 4\\sin^2(x))$. Undefined wherever $\\sin(3x) = 0$.',
-      link: '/trigonometry/triple-angle',
+      link: '/trigonometry/identities#triple',
     },
 
     // ─── HALF-ANGLE ──────────────────────────────────────
@@ -1097,7 +1097,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(x/2)', 'sine half angle'],
       rhsAlts: ['sqrt((1 - cos)/2)'],
       tip: 'The sign on the right is determined by the quadrant of $x/2$. Square-rooting the power-reduction formula $\\sin^2(x/2) = (1 - \\cos x)/2$ gives the half-angle form.',
-      link: '/trigonometry/half-angle',
+      link: '/trigonometry/identities#half',
     },
     {
       id: 'half_cos',
@@ -1108,7 +1108,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(x/2)', 'cosine half angle'],
       rhsAlts: ['sqrt((1 + cos)/2)'],
       tip: 'Sign determined by the quadrant of $x/2$. Square-rooting $\\cos^2(x/2) = (1 + \\cos x)/2$.',
-      link: '/trigonometry/half-angle',
+      link: '/trigonometry/identities#half',
     },
     {
       id: 'half_tan',
@@ -1119,7 +1119,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(x/2)', 'tangent half angle'],
       rhsAlts: ['(1 - cos)/sin'],
       tip: 'Three equivalent forms: $\\dfrac{1 - \\cos(x)}{\\sin(x)} \\;=\\; \\dfrac{\\sin(x)}{1 + \\cos(x)} \\;=\\; \\pm\\sqrt{\\dfrac{1 - \\cos(x)}{1 + \\cos(x)}}$. The first two are sign-unambiguous and usually preferred over the radical form.',
-      link: '/trigonometry/half-angle',
+      link: '/trigonometry/identities#half',
     },
     {
       id: 'half_cot',
@@ -1130,7 +1130,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cot(x/2)', 'cotangent half angle'],
       rhsAlts: ['(1 + cos)/sin'],
       tip: 'Three equivalent forms: $\\dfrac{1 + \\cos(x)}{\\sin(x)} \\;=\\; \\dfrac{\\sin(x)}{1 - \\cos(x)} \\;=\\; \\pm\\sqrt{\\dfrac{1 + \\cos(x)}{1 - \\cos(x)}}$. Reciprocal of the tangent half-angle.',
-      link: '/trigonometry/half-angle',
+      link: '/trigonometry/identities#half',
     },
     {
       id: 'half_sec',
@@ -1141,7 +1141,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sec(x/2)', 'secant half angle'],
       rhsAlts: ['sqrt(2/(1 + cos))'],
       tip: 'Reciprocal of the cosine half-angle. Sign determined by the quadrant of $x/2$. Undefined when $\\cos x = -1$.',
-      link: '/trigonometry/half-angle',
+      link: '/trigonometry/identities#half',
     },
     {
       id: 'half_csc',
@@ -1152,7 +1152,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['csc(x/2)', 'cosecant half angle'],
       rhsAlts: ['sqrt(2/(1 - cos))'],
       tip: 'Reciprocal of the sine half-angle. Sign determined by the quadrant of $x/2$. Undefined when $\\cos x = 1$.',
-      link: '/trigonometry/half-angle',
+      link: '/trigonometry/identities#half',
     },
 
     // ─── POWER REDUCTION ─────────────────────────────────
@@ -1282,7 +1282,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(arcsin x)', 'sin arcsin'],
       rhsAlts: ['x'],
       tip: 'Direct composition: the function and its inverse cancel. Valid for $|x| \\leq 1$. The reverse direction $\\arcsin(\\sin x) = x$ only holds for $x \\in [-\\tfrac{\\pi}{2}, \\tfrac{\\pi}{2}]$ due to the principal-value restriction on $\\arcsin$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_cos_arccos',
@@ -1293,7 +1293,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(arccos x)', 'cos arccos'],
       rhsAlts: ['x'],
       tip: 'Direct composition. Valid for $|x| \\leq 1$. The reverse $\\arccos(\\cos x) = x$ only holds for $x \\in [0, \\pi]$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_tan_arctan',
@@ -1304,7 +1304,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(arctan x)', 'tan arctan'],
       rhsAlts: ['x'],
       tip: 'Direct composition. Valid for all real $x$. The reverse $\\arctan(\\tan x) = x$ only holds for $x \\in (-\\tfrac{\\pi}{2}, \\tfrac{\\pi}{2})$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     // ── Mixed compositions ──────────────────────────────
     {
@@ -1316,7 +1316,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['cos(arcsin x)', 'cos arcsin'],
       rhsAlts: ['sqrt(1 - x^2)'],
       tip: 'Let $\\theta = \\arcsin x$. Then $\\sin\\theta = x$ with $\\theta \\in [-\\tfrac{\\pi}{2}, \\tfrac{\\pi}{2}]$, so $\\cos\\theta \\geq 0$, and the Pythagorean identity gives $\\cos\\theta = \\sqrt{1 - x^2}$. Valid for $|x| \\leq 1$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_sin_arccos',
@@ -1327,7 +1327,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['sin(arccos x)', 'sin arccos'],
       rhsAlts: ['sqrt(1 - x^2)'],
       tip: 'Same Pythagorean argument as the previous identity. Since $\\arccos$ returns values in $[0, \\pi]$, sine is non-negative, so the positive root is the right choice. Valid for $|x| \\leq 1$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_tan_arcsin',
@@ -1338,7 +1338,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['tan(arcsin x)', 'tan arcsin'],
       rhsAlts: ['x / sqrt(1 - x^2)'],
       tip: 'Use $\\tan = \\sin/\\cos$ and combine with the previous two identities: $\\tan(\\arcsin x) = \\dfrac{x}{\\sqrt{1 - x^2}}$. Valid for $|x| < 1$ (strict, since the denominator vanishes at $\\pm 1$).',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     // ── Cofunction sums (= π/2) ─────────────────────────
     {
@@ -1350,7 +1350,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['arcsin + arccos'],
       rhsAlts: ['pi/2'],
       tip: 'Cofunction identity for the inverse functions. Mirrors $\\sin\\!\\left(\\tfrac{\\pi}{2} - \\theta\\right) = \\cos\\theta$ \u2014 the angles whose sine and cosine equal $x$ sum to $\\tfrac{\\pi}{2}$. Valid for $|x| \\leq 1$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_sum_atan_acot',
@@ -1361,7 +1361,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['arctan + arccot'],
       rhsAlts: ['pi/2'],
       tip: 'Cofunction identity. Differentiating both sides confirms it: $\\dfrac{d}{dx}[\\arctan x] = \\dfrac{1}{1+x^2}$ and $\\dfrac{d}{dx}[\\operatorname{arccot} x] = -\\dfrac{1}{1+x^2}$ cancel, so the sum is constant; checking at $x = 0$ pins the constant to $\\tfrac{\\pi}{2}$. Valid for all real $x$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_sum_asec_acsc',
@@ -1372,7 +1372,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['arcsec + arccsc'],
       rhsAlts: ['pi/2'],
       tip: 'Cofunction identity for the secant/cosecant pair. Valid for $|x| \\geq 1$.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     // ── Negative-input behavior ─────────────────────────
     {
@@ -1384,7 +1384,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['arcsin(-x)'],
       rhsAlts: ['-arcsin'],
       tip: 'Arcsine is an odd function. Follows from the inverse of an odd function being odd, applied to sine.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_neg_arccos',
@@ -1395,7 +1395,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['arccos(-x)'],
       rhsAlts: ['pi - arccos'],
       tip: 'Arccosine is neither odd nor even \u2014 it satisfies the supplementary-angle relation. Geometric reading: the points $x$ and $-x$ on the unit circle have supplementary angles from the positive $x$-axis.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
     {
       id: 'inv_neg_arctan',
@@ -1406,7 +1406,7 @@ const TRIG_IDENTITIES_DATASET = {
       lhsAlts: ['arctan(-x)'],
       rhsAlts: ['-arctan'],
       tip: 'Arctangent is an odd function, like its parent tangent. Symmetric about the origin on the graph.',
-      link: '/trigonometry/inverse',
+      link: '/trigonometry/inverse-functions',
     },
   ],
 

@@ -360,7 +360,7 @@ The complete set of rules, with their restrictions and derivations, appears in [
 The table below collects these three rules in compact form; the dedicated rules page develops them with their full restrictions.`,
     before: ``,
     after: ``,
-    link: '/algebra/roots/rules',
+    link: '/algebra/roots/radical-rules',
   },
 
   obj6: {

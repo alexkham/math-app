@@ -80,7 +80,7 @@ export async function getStaticProps() {
       title:'Related Pages',
       items:[
         {title:'Base Converter',link:'/converters/base-converter'},
-        {title:'Base Convertion Table',link:'/tables/arithmetics/base-conversion'}
+        {title:'Base Convertion Table',link:'/tables/base-conversion'}
       ]
     }
   ]
