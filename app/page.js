@@ -189,7 +189,7 @@ themeName='dark'
 
   <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
     <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
-      <Link href="/sequences" style={{ color: '#3498db', textDecoration: 'none' }}>Sequences</Link>
+      <Link href="/algebra/sequences" style={{ color: '#3498db', textDecoration: 'none' }}>Sequences</Link>
     </strong> – We demonstrate patterns in number sequences like Fibonacci and primes, revealing their mathematical significance and natural occurrences.
   </p>
 
@@ -378,7 +378,7 @@ themeName='dark'
           <li style={{ marginBottom: '8px' }}><Link href="/probability" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Probability</Link></li>
           <li style={{ marginBottom: '8px' }}><Link href="/logic" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Mathematical Logic</Link></li>
           <li style={{ marginBottom: '8px' }}><Link href="/set-theory" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Set Theory</Link></li>
-          <li style={{ marginBottom: '8px' }}><Link href="/sequences" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Sequences</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/algebra/sequences" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Sequences</Link></li>
           <li style={{ marginBottom: '8px' }}><Link href="/complex-numbers" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Complex Numbers</Link></li>
         </ul>
       </div>

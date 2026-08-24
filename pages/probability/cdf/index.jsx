@@ -306,7 +306,7 @@
 //       content:`
 // The cumulative distribution function is often misunderstood because it looks simple but encodes a lot of structure.
 
-// A common mistake is confusing the CDF with a density or mass function. The CDF does not describe how much probability sits *at* a point, but how much has accumulated *up to* that point.
+// A common mistake is confusing the CDF with a density or mass function. The CDF does not describe how much probability sits **at** a point, but how much has accumulated **up to** that point.
 
 // Another frequent error is forgetting that the CDF is cumulative. Interpreting its value as a probability of an exact outcome leads to incorrect conclusions, especially in continuous cases.
 
@@ -660,6 +660,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -980,7 +981,46 @@ The choice of "less than or equal to" is not arbitrary. It ensures that the CDF 
 `,
       before:``,
       after:``,
-  
+
+    },
+
+    notation:{
+      title:`CDF Notation`,
+      lead:`One capital letter, one subscript, and one inequality sign that was chosen rather than inherited. The case of the letter is the whole distinction between a probability and a density, and every mark here is catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$X$, $x$, $P(\\cdot)$ and the density $f(x)$ come from the [probability function](!/probability/probability-function#notation); the event braces $\\{X \\le x\\}$ that $P$ measures from [random variable notation](!/probability/random-variables#notation).`,
+      entries:[
+        {
+          id:'capital-f',
+          tex:`$F_X(x)$`,
+          read:`capital F sub X of x — the CDF of X at x`,
+          means:`Capital $F$ names the cumulative function, and the subscript names which variable it belongs to: $F_X(x) = P(X \\le x)$, per **Mathematical Definition** above. The subscript earns its place the moment two variables share a page — $F_X$ and $F_Y$ are different functions.`,
+          cases:`The subscript is dropped when only one variable is in play, leaving plain $F(x)$; the argument is always a number on the real line, so $F$ is defined everywhere even where the variable never lands.`,
+          confusedWith:`The density $f(x)$. One letter, two cases, two different objects: $F$ accumulates and is bounded by $1$, while lowercase $f$ is a rate that may exceed $1$ — **CDF vs PMF vs PDF** below sets them side by side, and calculus ties them together as $F' = f$.`,
+        },
+        {
+          id:'leq-convention',
+          tex:`$P(X \\le x)$`,
+          read:`the probability that X is at most x`,
+          means:`The inequality is a convention, not an accident: writing $\\le$ rather than $<$ includes the point itself, which is what makes the CDF right-continuous and lets one definition serve discrete, continuous and mixed variables alike.`,
+          cases:`For continuous variables the choice is invisible — $P(X = x) = 0$, so $\\le$ and $<$ agree; for discrete ones it decides whether a jump belongs to the step before or after it, which is exactly where **Common Mistakes** below finds its errors.`,
+          confusedWith:`A strict inequality. $F(3)$ includes the outcome $3$ — the survival function $P(X > x) = 1 - F(x)$ is what excludes it, and the two differ by exactly the mass sitting at the point.`,
+        },
+        {
+          id:'interval-difference',
+          tex:`$F(b) - F(a)$`,
+          read:`F of b minus F of a`,
+          means:`The idiom for interval probabilities: accumulating to $b$ and subtracting what accumulated to $a$ leaves $P(a < X \\le b)$ — the notation of **Using the CDF to Compute Probabilities** below, and the reason the CDF is a computational tool rather than a description.`,
+          cases:`The same shape as the [evaluation bracket](!/calculus/integrals/definite#2) of definite integrals — and not by coincidence: for continuous variables $F(b) - F(a)$ is exactly $\\int_a^b f(x)\\,dx$.`,
+          confusedWith:`Which endpoint is included. The difference gives $P(a < X \\le b)$ — open on the left, closed on the right; for discrete variables shifting to $P(a \\le X \\le b)$ requires adding the mass at $a$ back in.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
+      before:``,
+      after:``,
+
     },
     properties:{
       title:`Key Properties of the CDF`,
@@ -1097,7 +1137,7 @@ Reading the CDF from left to right shows how probability builds up. At any point
       content:`
 The cumulative distribution function is often misunderstood because it looks simple but encodes a lot of structure.
 
-A common mistake is confusing the CDF with a density or mass function. The CDF does not describe how much probability sits *at* a point, but how much has accumulated *up to* that point.
+A common mistake is confusing the CDF with a density or mass function. The CDF does not describe how much probability sits **at** a point, but how much has accumulated **up to** that point.
 
 Another frequent error is forgetting that the CDF is cumulative. Interpreting its value as a probability of an exact outcome leads to incorrect conclusions, especially in continuous cases.
 
@@ -1248,6 +1288,25 @@ export default function PageTemplate({
         link:'',
         content:[
             sectionsContent.mathematical.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

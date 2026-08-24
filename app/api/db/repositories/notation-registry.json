@@ -1630,11 +1630,27 @@
       "notes": "Aggregate entry for 24 pages sharing the identical pattern; individual ids beyond the verified 'notation' slug not extracted. Split into per-page entries if any page gets individual treatment. 2026-08-22: probability-function, sample-space and conditional-probability SPLIT OUT (upgraded to NotationSection); the remaining ~21 keep their legacy sections per the pass strategy — no mass conversion.",
       "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "~50 chips across the family"}]
     },
+    "probability/covariance": {
+      "pagePath": "pages/probability/covariance/index.jsx",
+      "template": "untitled",
+      "sections": ["ids 0-8 + capstone; id 7 = NotationSection 'Covariance Notation' (replaced 2026-08-22)"],
+      "spots": [{"sectionId": "7", "sectionTitle": "Covariance Notation", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "A two-argument operator, its subscripted Greek shorthand, and the normalized cousin that strips the units away", "covers": ["Cov(X,Y) (two-argument operator; upright print; commuting arguments; Cov(X,X)=Var(X) family tie → variance#notation; UNCORRELATED-≠-INDEPENDENT one-way implication)", "σ_XY (parameter-side double subscript; σ_XX=σ_X²; σ_ij matrix indices → basic-operations#notation coordinate-slot job; not-a-product-of-sigmas confusion)", "ρ_XY (units divided out → [−1,1] comparability; Corr(X,Y) + Latin r sample estimate alsoWritten → expected-value#notation population/estimate line; LINEAR-ONLY detection with the parabola counterexample; no causation)"], "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "REPLACED legacy 'Notation & Naming Conventions' in place at numeric id 7 (twenty-third replacement; renamed per house rule 1; chip → footer pill). Legacy taught only Cov symmetry + Cov(X,X)=Var — both absorbed into entry 1's cases; σ_XY and ρ are new. Fixed in passing: legacy prose carried a stray-'e' typo ('[random variable](...)e is paired') — gone with the replacement (commented duplicate at line ~270 left as dead code). Registry note: the aggregate $notationPatternPages listing had this section's id as 'notation'; it is actually numeric id 7 — corrected here."}}],
+      "notes": "Split out of $notationPatternPages 2026-08-22.",
+      "externalNotationLinks": []
+    },
+    "probability/cdf": {
+      "pagePath": "pages/probability/cdf/index.jsx",
+      "template": "titled",
+      "sections": ["… mathematical 'Mathematical Definition', notation 'CDF Notation' (added 2026-08-22), properties …"],
+      "spots": [{"sectionId": "notation", "sectionTitle": "CDF Notation", "field": "notation (NotationSection component)", "kind": "dedicated-section", "status": "existing", "quote": "One capital letter, one subscript, and one inequality sign that was chosen rather than inherited", "covers": ["F_X(x) (capital-F cumulative + variable subscript; subscript-dropping; defined-everywhere-on-ℝ; F-vs-f case split — accumulates-and-bounded vs rate-may-exceed-1, F'=f calculus tie)", "P(X ≤ x) ≤-convention (chosen not inherited; right-continuity + one-definition-covers-discrete/continuous/mixed; invisible for continuous, decides jump ownership for discrete; survival function 1−F contrast)", "F(b)−F(a) interval idiom (accumulate-and-subtract; evaluation-bracket kinship → integrals/definite#2 with ∫ₐᵇf identity; endpoint inclusion P(a<X≤b) trap)"], "stage2": {"mathSymbols": {"page": "/math-symbols/probability", "category": null, "anchorText": "in-lead catalog + footer pill"}, "added": "2026-08-22", "placement": "GREENFIELD — first notation content on this page; slug id 'notation' after 'mathematical'. RESOLVES the $chiplessPages flag 'cdf (F(x) convention unglossed)' and gives the page its first /math-symbols link. Fixed in passing: two pre-existing *italics* render bugs in Common Mistakes prose."}}],
+      "notes": "Split out of $chiplessPages 2026-08-22.",
+      "externalNotationLinks": []
+    },
     "probability/$chiplessPages": {
       "pagePath": "(gap summary)",
       "template": "untitled",
       "sections": [],
-      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "recommended-note", "status": "recommended", "why": "pages WITHOUT any symbols link or notation section: cdf (F(x) convention unglossed), central-limit-theorem, combinatorics, indicators, inequalities + markov + chebyshev, large-numbers-law, models + coin-toss + dice-roll, rules (P(A∪B) etc. used cold), tree-diagrams, formulas, definitions. Candidates for future notation notes/links.", "stage2": null}],
+      "spots": [{"sectionId": "(various)", "sectionTitle": "—", "field": "—", "kind": "recommended-note", "status": "recommended", "why": "pages WITHOUT any symbols link or notation section: central-limit-theorem, combinatorics, indicators, inequalities + markov + chebyshev, large-numbers-law, models + coin-toss + dice-roll, rules (P(A∪B) etc. used cold), tree-diagrams, formulas, definitions. Candidates for future notation notes/links. [cdf RESOLVED 2026-08-22 — got a full NotationSection and split out to its own entry.]", "stage2": null}],
       "notes": "Aggregate gap entry; axioms and events were in this group until the 2026-08-06 pass linked them.",
       "externalNotationLinks": []
     },

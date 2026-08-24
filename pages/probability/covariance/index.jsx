@@ -661,6 +661,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -983,21 +984,43 @@ behavior.
   
     },
     obj7:{
-      title:`Notation & Naming Conventions`,
-      content:`
-Covariance between two [random variables](!/probability/random-variables) is written as $\\operatorname{Cov}(X,Y)$.  
-The order of the variables does not affect the value, so $\\operatorname{Cov}(X,Y)$ and
-$\\operatorname{Cov}(Y,X)$ represent the same quantity.
-
-When a [random variable](!/probability/random-variables)e is paired with itself, covariance reduces to [variance](!/probability/variance).  
-This relationship links covariance directly to concepts introduced earlier.
-
-
-`,
+      title:`Covariance Notation`,
+      lead:`A two-argument operator, its subscripted Greek shorthand, and the normalized cousin that strips the units away. All are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$X$, $Y$ and the expectation $E[\\cdot]$ come from the [probability function](!/probability/probability-function#notation) and [expected value notation](!/probability/expected-value#notation); $\\sigma^2$, $\\sigma$ and $\\mu$ from [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'cov-operator',
+          tex:`$\\operatorname{Cov}(X, Y)$`,
+          read:`the covariance of X and Y`,
+          means:`A two-argument operator: it consumes a **pair** of random variables and returns one number measuring how they move together — $E[(X - \\mu_X)(Y - \\mu_Y)]$. Print sets the name upright, like $\\operatorname{Var}$ and $E$.`,
+          cases:`The arguments commute — $\\operatorname{Cov}(X,Y) = \\operatorname{Cov}(Y,X)$ — and feeding the same variable twice collapses it to [variance](!/probability/variance#notation): $\\operatorname{Cov}(X,X) = \\operatorname{Var}(X)$, which is why the two operators share a family.`,
+          confusedWith:`A statement about dependence. $\\operatorname{Cov}(X,Y) = 0$ means uncorrelated, not independent — the two coincide only in special cases, as **Covariance and Independence** above explains; independence forces zero covariance, never the reverse.`,
+        },
+        {
+          id:'sigma-xy',
+          tex:`$\\sigma_{XY}$`,
+          read:`sigma X Y — the covariance`,
+          means:`The parameter-side spelling, matching the $\\sigma^2$ of [variance](!/probability/variance#notation): a double subscript names the pair. With this convention $\\sigma_{XX}$ is just $\\sigma_X^2$, and the whole family collects into a covariance matrix.`,
+          cases:`Matrix work makes the subscripts indices — $\\sigma_{ij}$ for the covariance of the $i$-th and $j$-th variables — the [coordinate-slot subscript job](!/linear-algebra/vectors/basic-operations#notation) applied to a pair rather than a position.`,
+          confusedWith:`A product of sigmas. $\\sigma_{XY}$ is one symbol with a two-letter subscript, not $\\sigma_X \\cdot \\sigma_Y$ — that product appears in the denominator of the correlation below, which is a different quantity entirely.`,
+        },
+        {
+          id:'rho-correlation',
+          tex:`$\\rho_{XY}$`,
+          read:`rho — the correlation coefficient`,
+          means:`Covariance with the units divided out: $\\rho = \\dfrac{\\operatorname{Cov}(X,Y)}{\\sigma_X \\sigma_Y}$, which forces the value into $[-1, 1]$ and makes different variable pairs comparable — something raw covariance, carrying the product of two units, can never be.`,
+          alsoWritten:`$\\operatorname{Corr}(X,Y)$ — the spelled-out operator, preferred where $\\rho$ is already taken; sample estimates switch to Latin $r$, following the [population-versus-estimate convention](!/probability/expected-value#notation) that pairs $\\mu$ with $\\bar{x}$.`,
+          confusedWith:`A measure of any relationship. $\\rho$ detects **linear** association only — a perfect parabola can have $\\rho = 0$ while the variables determine each other completely; the sign carries direction, the magnitude carries linear strength, and neither carries causation.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
+      after:``,
       link:'',
-  
+
     },
     obj8:{
       title:`What Comes Next`,
@@ -1187,10 +1210,20 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
     {
         id:'7',
         title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
+        link:``,
         content:[
-          sectionsContent.obj7.content,
-          sectionsContent.obj7.after,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.obj7.title}
+            lead={sectionsContent.obj7.lead}
+            inherited={sectionsContent.obj7.inherited}
+            entries={sectionsContent.obj7.entries}
+            symbolsHref={sectionsContent.obj7.symbolsHref}
+            symbolsLabel={sectionsContent.obj7.symbolsLabel}
+            parentHref={sectionsContent.obj7.parentHref}
+            parentLabel={sectionsContent.obj7.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

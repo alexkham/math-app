@@ -1,6 +1,6 @@
 /**
  * Auto-generated from sitemap.xml
- * Generated: 2026-08-23T18:47:50.763Z
+ * Generated: 2026-08-24T14:54:25.920Z
  * Total pages: 562
  * 
  * To regenerate: node generateNavFromSitemap.js
@@ -470,11 +470,6 @@ export const mainMenuStructure = [
             "href": "/set-theory/visual-tools"
           }
         ]
-      },
-      {
-        "title": "Sequences",
-        "href": "/sequences",
-        "items": []
       },
       {
         "title": "Complex Numbers",
