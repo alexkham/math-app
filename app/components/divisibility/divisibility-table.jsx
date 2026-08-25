@@ -765,8 +765,9 @@
 
 
 import React, { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-const DivisibilityTable = () => {
+const DivisibilityTable = ({ explanations = null }) => {
   const [selectedDivisors, setSelectedDivisors] = useState([]);
   const [hoveredNumber, setHoveredNumber] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0, height: 0 });
@@ -846,6 +847,15 @@ const DivisibilityTable = () => {
 
   const divisorsOfHovered = hoveredNumber !== null ? getDivisorsOf(hoveredNumber) : [];
   const isZero = hoveredNumber === 0;
+
+  // Line 1: state key for the hoisted explanations - one divisor selected -> that
+  // divisor's entry, two or more -> the multi-select entry, none -> nothing extra.
+  const stateKey = selectedDivisors.length === 0
+    ? null
+    : selectedDivisors.length === 1
+      ? `d${selectedDivisors[0]}`
+      : 'multi';
+  const stateEntry = (explanations && stateKey && explanations[stateKey]) || null;
 
   // Build button style explicitly each time
   const getDivisorBtnStyle = (d) => {
@@ -984,6 +994,12 @@ const DivisibilityTable = () => {
           </div>
         </div>
 
+        {stateEntry && (
+          <div style={styles.stateExplanation}>
+            {processContent(stateEntry)}
+          </div>
+        )}
+
         {/* Tooltip */}
         {hoveredNumber !== null && (
           <div
@@ -1099,6 +1115,16 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(17, 1fr)',
     gap: '4px',
+  },
+  stateExplanation: {
+    background: '#fff',
+    borderRadius: '12px',
+    padding: '14px 18px',
+    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.06)',
+    marginTop: '16px',
+    fontSize: '0.9rem',
+    lineHeight: '1.6',
+    color: '#1e3a5f',
   },
   tooltip: {
     position: 'fixed',

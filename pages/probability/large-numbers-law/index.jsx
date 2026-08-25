@@ -1036,7 +1036,7 @@ These visuals highlight the core message of the theorem:
 `,
   before:``,
   after:``,
-  link:'visual-intuition',
+  link:'',
 },
 
     obj5:{

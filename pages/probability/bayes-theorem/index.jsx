@@ -628,6 +628,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -920,28 +921,60 @@ Because of this, Bayes' theorem cannot be understood in isolation. It is a direc
   
     },
     notation:{
-      title:`Useful Notation`,
-      content:`
-Before writing Bayes' theorem formally, we fix the symbols used to describe the situation:
-
-- $A$ — the event or situation we want to assess  
-- $B$ — the observed event or condition  
-- $P(A)$ — the initial probability assigned to $A$  
-- $P(B \\mid A)$ — how likely $B$ is under the assumption that $A$ occurred  
-- $P(A \\mid B)$ — the updated probability of $A$ once $B$ is known  
-
-This notation makes it clear which quantities are known, which are updated, and how conditional probability is used to connect them in the formula that follows.
-`,
+      title:`Bayes' Theorem Notation`,
+      lead:`Bayes' theorem introduces no new marks — every symbol in it is already a conditional probability. What it adds is roles: the same $P(\\cdot)$ expressions read as prior, likelihood, evidence and posterior depending on where they stand, and the notation's whole job is keeping the bar's two directions from trading places. Every mark here is catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The given-bar $P(A \\mid B)$ and the joint $P(A \\cap B)$ come from [conditional probability notation](!/probability/conditional-probability#notation), $P(\\cdot)$ itself from the [probability function](!/probability/probability-function#notation), the complement mark $A^c$ from [set operations](!/set-theory/operations#notation), and the summation sign from [sequence notation](!/algebra/sequences/arithmetic#notation).`,
+      entries:[
+        {
+          id:'reversal-pair',
+          tex:`$P(A \\mid B),\\; P(B \\mid A)$`,
+          read:`the probability of A given B — and of B given A`,
+          means:`The same [given-bar](!/probability/conditional-probability#notation), standing in opposite directions: one conditions on the evidence, the other on the hypothesis. Bayes' theorem is the exchange rate between the two — it computes the direction you want from the direction you can measure.`,
+          cases:`The likelihood direction $P(B \\mid A)$ is usually the computable one — a model says how the evidence behaves under each scenario; the posterior direction $P(A \\mid B)$ is usually the question being asked. The formula below converts one into the other.`,
+          confusedWith:`Each other — the transposed conditional, first row of the **Common Mistakes** table below. A test with $P(\\text{positive} \\mid \\text{disease}) = 0.99$ says nothing by itself about $P(\\text{disease} \\mid \\text{positive})$, which can be small when the disease is rare; in courtroom form this is the prosecutor's fallacy.`,
+        },
+        {
+          id:'prior-posterior',
+          tex:`$P(A) \\to P(A \\mid B)$`,
+          read:`from the prior of A to the posterior of A given B`,
+          means:`One event, two probabilities: bare $P(A)$ carries no bar — nothing assumed — and $P(A \\mid B)$ is the same event re-measured once $B$ is in hand. "Prior" and "posterior" are positions relative to the evidence, not points in time.`,
+          cases:`Evidence stacks on the right of the bar, $P(A \\mid B_1 \\cap B_2)$, or arrives in rounds — each round's posterior serves as the next round's prior; hypothesis-flavored texts trade $A, B$ for $H, E$ (hypothesis, evidence) or $H, D$ (data), changing letters and nothing else.`,
+          alsoWritten:`Bayesian statistics writes the pair as densities over a parameter: $\\pi(\\theta)$ for the prior and $\\pi(\\theta \\mid x)$ for the posterior, with the [distribution](!/probability/distributions) families supplying the shapes; the objectivist school writes even the prior conditionally, $P(A \\mid I)$, with $I$ the background information.`,
+          confusedWith:`A timestamp. In sequential use one and the same number is the posterior of this round and the prior of the next — the words name roles in a single application of the formula, not the order in which anything happened.`,
+        },
+        {
+          id:'denominator-forms',
+          tex:`$P(B) = \\sum_j P(B \\mid A_j)\\,P(A_j)$`,
+          read:`the total probability of B, summed across all the hypotheses`,
+          means:`The normalizer. Written compactly it is just $P(B)$; expanded, it is the [law of total probability](!/probability/total-probability) doing denominator duty — every route to the evidence, weighted by its prior, so the posteriors across all hypotheses sum to one.`,
+          cases:`Compact $P(B)$ when the evidence's probability is known outright; the two-case split $P(B \\mid A)\\,P(A) + P(B \\mid A^c)\\,P(A^c)$ when there is only a hypothesis and its complement; the indexed sum when a full partition $A_1, \\dots, A_n$ competes.`,
+          alsoWritten:`Not at all: $P(A \\mid B) \\propto P(B \\mid A)\\,P(A)$ — "posterior proportional to likelihood times prior" — postpones the division and normalizes at the end, the standard spelling in Bayesian computation.`,
+          confusedWith:`An independent input. $P(B)$ is assembled from the same priors and likelihoods that fill the numerator — supplying it from elsewhere double-counts the evidence; omitting it leaves products that no longer sum to one, the **Common Mistakes** table's final row.`,
+        },
+        {
+          id:'odds-form',
+          tex:`$O(A \\mid B) = \\mathrm{LR} \\times O(A)$`,
+          read:`posterior odds equal the likelihood ratio times the prior odds`,
+          means:`Bayes with the denominator cancelled: state the theorem for $A$ and for $A^c$ and divide — $P(B)$ drops out. Odds are the ratio $O(A) = P(A)/P(A^c)$, and the likelihood ratio $\\mathrm{LR} = P(B \\mid A)/P(B \\mid A^c)$ carries the entire weight of the evidence in one number.`,
+          cases:`[Independent](!/probability/independence) pieces of evidence multiply their ratios one after another — the cleanest spelling of sequential updating; two-hypothesis problems, a diagnosis against its absence, are its natural habitat.`,
+          alsoWritten:`$\\Lambda$ for the likelihood ratio in detection and engineering texts; the **Bayes factor** in statistical model comparison — the same ratio, renamed by tradition.`,
+          confusedWith:`Probability on the wrong scale. $O = 3$ means $3{:}1$, i.e. $P = 3/4$ — odds live on $[0, \\infty)$, probabilities on $[0, 1]$, and feeding one into a slot expecting the other corrupts the update without any visible error.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
-  
+      after:``,
+
     },
     formula:{
       title:`Bayes' Theorem (The Formula)`,
       content:`
 Bayes' theorem expresses the update of probability in a single relation built from conditional probability:
 
-$$P(A \\mid B) = \\dfrac{P(B \\mid A)\\P(A)}{P(B)}$$
+$$P(A \\mid B) = \\dfrac{P(B \\mid A)\\,P(A)}{P(B)}$$
 
 Each part of the formula has a clear role.
 
@@ -1103,7 +1136,7 @@ Bayes' theorem is built from several familiar pieces of probability — conditio
     content: `
 Probability does not stay fixed when new information appears. What we believe about a situation often changes once evidence is observed, data is collected, or a condition becomes known. Bayes' theorem captures this process in a precise and consistent way.
 
-At its core, Bayes' theorem describes how probabilities should update when we move from what we believed *before* seeing evidence to what we should believe *after*. It connects prior knowledge with new information and explains how both should be combined rather than treated separately.
+At its core, Bayes' theorem describes how probabilities should update when we move from what we believed **before** seeing evidence to what we should believe **after**. It connects prior knowledge with new information and explains how both should be combined rather than treated separately.
 
 This idea is not an add-on to probability theory. Bayes' theorem sits at the intersection of conditional probability, total probability, and independence, tying them together into a single update mechanism. The sections that follow show how this connection works and why Bayes' theorem plays such a central role in probabilistic reasoning.
 `
@@ -1181,8 +1214,18 @@ export default function BayesPage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-          sectionsContent.notation.content,
-          sectionsContent.notation.after,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

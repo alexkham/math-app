@@ -4079,6 +4079,135 @@
         "orphans": 0,
         "notes": "Second of the four trigonometry pages missed by the 2026-07-31 batch. Case C, wired like DoubleAngleExplorer: additive `explanations` prop keyed by activeFn, hoisted strings replace each scenario step's description, derived tabs get introOverride. NegativeAngleDemo rendered step.description as raw text, so it gained processContent (it is imported only by NegativeAngleExplorer). States = 3 sin stages + 3 cos stages + 4 derived cards; 12 new sections on top of 11 existing (numeric ids migrated to slugs). Diagrams port NegativeAngleCore honouring its coordMode switch (sinOnly hides the cos leg, cosOnly hides the vertical legs and adds the shared-x connector), frozen at theta=40. IMPORTANT PAGE HISTORY: this page's <Sections> and <SectionTableOfContents> were commented out in the live component, so nothing rendered - the whole pass was invisible and the first static verification (which compared anchors against the genericSections array in the source) was therefore meaningless. The owner uncommented both calls on 2026-08-23; re-verified in the rendered DOM afterwards: 23 sections present, 12 unit frames, 23 in-page link targets, 0 unresolved. LESSON FOR FUTURE PASSES: confirm the page actually renders its sections in the DOM before authoring any anchors, and verify anchors against the DOM, never against the source array."
       }
+    },
+    "divisibility-table": {
+      "slug": "divisibility-table",
+      "name": "Interactive Divisibility Table",
+      "section": "arithmetic",
+      "pagePath": "pages/arithmetic/visual-tools/divisibility-table/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "divisibility",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "divisibility rules",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "digit sum",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "factors",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiples",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "greatest common divisor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least common multiple",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime factorization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "coprime",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inclusion-exclusion",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "place value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "remainder",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/divisibility/divisibilityTableDiagrams.js",
+      "diagramStates": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d8",
+        "d9",
+        "d10",
+        "d11",
+        "d12",
+        "multi"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 13,
+        "sections": 20,
+        "anchors": 72,
+        "orphans": 0,
+        "notes": "First arithmetic tool. Case C from zero props: additive `explanations` prop on DivisibilityTable, stateKey derived from selectedDivisors (exactly one selected -> d<N>, two or more -> multi, none -> null/no panel), entry rendered in a new white card below the grid through processContent. States = the 12 divisor buttons plus the multi-select union (frozen at the doc's own example pair, ÷2+÷3). 9 of the 12 rule sections already existed (rules 2,3,4,5,6,9,10,11,12); new sections: rule-for-1, rule-for-7 (classic double-and-subtract rule with proof), rule-for-8, combining-divisors (inclusion-exclusion + LCM), and the group section the-twelve-divisibility-rules linking all 13. Diagrams replicate the component's grid verbatim: 17-column 0-100 layout, isHighlighted predicate (0 lights under every selection), exact colors and the selector row with active-button gradient and clear button. Rendered/landing verification PENDING - permission-classifier outage gated Bash and preview tools during the pass (same as the 08-21/22 sessions); statics grep-verified (20 slugs, 72 anchors, 0 orphans, 13 units = 13 explanations = 13 stateRows). Backups pending materialization from git (page + component verified clean at session start): git show HEAD:<path>."
+      }
     }
   },
   "$stubTemplate": {

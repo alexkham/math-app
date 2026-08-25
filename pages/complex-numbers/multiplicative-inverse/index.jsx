@@ -2046,7 +2046,7 @@ notation: {
       id: 'z-inverse',
       tex: `$z^{-1}$`,
       read: `z to the minus one; z inverse`,
-      means: `The $-1$ superscript as an exponent in earnest: $z^{-1}$ is the number with $z \\cdot z^{-1} = 1$, computed by $\\bar{z}/|z|^2$ — **Multiplicative Inverse of a Complex Number** above. The same corner mark [negative powers](!/algebra/powers/negative#notation) put on real numbers, now paid for by a conjugate.`,
+      means: `The $-1$ superscript as an exponent in earnest: $z^{-1}$ is the number with $z \\cdot z^{-1} = 1$, computed by $\\bar{z}/|z|^2$ — **Multiplicative Inverse of a Complex Number** above. The same corner mark [negative powers](!/algebra/powers/negative-exponents#notation) put on real numbers, now paid for by a conjugate.`,
       cases: `Extends along the exponent ladder — $z^{-n} = (z^{-1})^n = (z^n)^{-1}$; in polar dress the corner distributes: $z^{-1} = r^{-1}e^{-i\\theta}$, modulus inverted, [argument negated](!/complex-numbers/exponential-form#notation).`,
       confusedWith: `The conjugate. $z^{-1} = \\bar{z}/|z|^2$ makes them parallel, and on the unit circle equal — $|z| = 1$ forces $z^{-1} = \\bar{z}$; off the circle they differ in length, and **Multiplicative Inverse vs. Complex Conjugate** below separates them.`,
       sameGlyphElsewhere: `The corner changes job by base: undo-the-map on functions ($f^{-1}$), [matrix inversion](!/linear-algebra/matrix/inverse#notation) on $A^{-1}$ — on numbers alone it is honest arithmetic.`,

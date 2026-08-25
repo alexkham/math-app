@@ -442,7 +442,7 @@
 //   meta: {
 //     intro:               'Reference table of common limit identities. Try **puzzle** mode to drill, or read the full',
 //     introLinkText:       'limits explanation \u2192',
-//     articleHref:         '/calculus/limits/common',
+//     articleHref:         '/calculus/limits',
 //     toolTitle:           'Common limits tool',
 //     toolSubtitle:        'Search by expression, by value, by name \u2014 or pick a family.',
 //     categoriesTitle:     'Families of limits',
@@ -995,7 +995,7 @@ const LIMITS_DATASET = {
   meta: {
     intro:               'Reference table of common limit identities. Try **puzzle** mode to drill, or read the full',
     introLinkText:       'limits explanation \u2192',
-    articleHref:         '/calculus/limits/common',
+    articleHref:         '/calculus/limits',
     toolTitle:           'Common limits tool',
     toolSubtitle:        'Search by expression, by value, by name \u2014 or pick a family.',
     categoriesTitle:     'Families of limits',

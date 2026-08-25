@@ -421,7 +421,7 @@
 //   meta: {
 //     intro:               'Reference table of common indefinite integrals. Try **puzzle** mode to drill, or read the full',
 //     introLinkText:       'integration explanation \u2192',
-//     articleHref:         '/calculus/integrals/common',
+//     articleHref:         '/calculus/integrals',
 //     toolTitle:           'Indefinite integral tool',
 //     toolSubtitle:        'Search by integrand, by antiderivative, by name \u2014 or pick a family.',
 //     categoriesTitle:     'Families of integrals',
@@ -953,7 +953,7 @@ const INTEGRALS_DATASET = {
   meta: {
     intro:               'Reference table of common indefinite integrals. Try **puzzle** mode to drill, or read the full',
     introLinkText:       'integration explanation \u2192',
-    articleHref:         '/calculus/integrals/common',
+    articleHref:         '/calculus/integrals',
     toolTitle:           'Indefinite integral tool',
     toolSubtitle:        'Search by integrand, by antiderivative, by name \u2014 or pick a family.',
     categoriesTitle:     'Families of integrals',

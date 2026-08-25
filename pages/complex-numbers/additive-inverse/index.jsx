@@ -1,6 +1,1285 @@
 
 
 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages/pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+// import { tableHeaders } from '@/app/styles/theme'
+
+
+// export async function getStaticProps(){
+
+//   const keyWords = [
+//   "additive inverse complex number",
+//   "negative complex number",
+//   "opposite complex number",
+//   "negate complex number",
+//   "complex number minus z",
+//   "additive inverse definition",
+//   "complex subtraction",
+//   "reflection through origin",
+//   "additive inverse vs conjugate",
+//   "complex number negation",
+//   "additive inverse formula",
+//   "z plus negative z equals zero",
+//   "complex additive identity",
+//   "inverse properties complex",
+//   "negate real imaginary parts"
+// ]
+
+//   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+//   // ---------- TABLES ----------
+
+//   // obj5 — aggregation: properties of additive inverse
+//   const obj5Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Property</th>
+//       <th style="${tableHeaders.aggregation}">Formula</th>
+//       <th style="${tableHeaders.aggregation}">Meaning</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Defining property</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z + (−z) = 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a number plus its inverse sums to zero</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Double negation</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−(−z) = z</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">applying inversion twice returns the original</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distribution over sum</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−(z₁ + z₂) = −z₁ − z₂</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inverse of a sum = sum of inverses</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Commutes with conjugation</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−z̄ = <span style="text-decoration: overline;">−z</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">order of negation and conjugation doesn&apos;t matter</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modulus preservation</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|−z| = |z|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same distance from the origin</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Argument shift</td>
+//       <td style="padding: 12px 15px; color: #34495e;">arg(−z) = arg(z) + π</td>
+//       <td style="padding: 12px 15px; color: #34495e;">direction reverses — a 180° rotation about the origin</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj6 — comparison: additive inverse vs complex conjugate
+//   const obj6Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.comparison}">Feature</th>
+//       <th style="${tableHeaders.comparison}">Additive inverse&nbsp;&nbsp;−z</th>
+//       <th style="${tableHeaders.comparison}">Complex conjugate&nbsp;&nbsp;z̄</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Algebraic action on a + bi</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negates both parts: −a − bi</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negates only the imaginary part: a − bi</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Geometric action</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reflection through the origin (180° rotation)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reflection across the real axis</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modulus</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|−z| = |z|</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z̄| = |z|</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Argument</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arg(z) + π</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−arg(z)</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Defining property</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the number w with z + w = 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the reflection a − bi of a + bi</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">−z and z̄ coincide when…</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;" colspan="2"><div style="text-align: center;">z is pure imaginary (or z = 0)</div></td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Most common confusion</td>
+//       <td style="padding: 12px 15px; color: #34495e;">writing −(a + bi) = −a + bi (flipping only one sign)</td>
+//       <td style="padding: 12px 15px; color: #34495e;">writing z̄ = −z (which is true only for pure imaginary z)</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj10 — aggregation: common mistakes
+//   const obj10Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Mistake</th>
+//       <th style="${tableHeaders.aggregation}">Wrong result</th>
+//       <th style="${tableHeaders.aggregation}">Correct result</th>
+//       <th style="${tableHeaders.aggregation}">Why</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Negating only the real part</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−(3 + 2i) = −3 + 2i&nbsp;&nbsp;<span style="color: #e74c3c; font-weight: bold;">✗</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−3 − 2i</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">this gives −z̄ , not −z; the additive inverse flips both signs</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Negating only the imaginary part</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−(3 + 2i) = 3 − 2i&nbsp;&nbsp;<span style="color: #e74c3c; font-weight: bold;">✗</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−3 − 2i</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">this gives z̄ , not −z; same root cause — both parts must change sign</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Dropping a sign in subtraction</td>
+//       <td style="padding: 12px 15px; color: #34495e;">(5 + 2i) − (3 − 4i) = 2 − 2i&nbsp;&nbsp;<span style="color: #e74c3c; font-weight: bold;">✗</span></td>
+//       <td style="padding: 12px 15px; color: #34495e;">2 + 6i</td>
+//       <td style="padding: 12px 15px; color: #34495e;">subtracting −4i means adding +4i; the negative must distribute to both parts of the subtrahend</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // obj11 — summary capstone: side-by-side examples of −z and z̄
+//   const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">z</th>
+//       <th style="${tableHeaders.summary}">−z&nbsp;&nbsp;<span style="font-weight: normal; font-size: 13px;">(both signs flip)</span></th>
+//       <th style="${tableHeaders.summary}">z̄&nbsp;&nbsp;<span style="font-weight: normal; font-size: 13px;">(only imag flips)</span></th>
+//       <th style="${tableHeaders.summary} text-align: center;">−z = z̄ ?</th>
+//       <th style="${tableHeaders.summary}">Geometric note</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">3 + 2i&nbsp;&nbsp;<span style="font-size: 13px;">(Q1)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−3 − 2i&nbsp;&nbsp;<span style="font-size: 13px;">(Q3)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">3 − 2i&nbsp;&nbsp;<span style="font-size: 13px;">(Q4)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−z opposite quadrant; z̄ mirrored across real axis</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">−1 + 4i&nbsp;&nbsp;<span style="font-size: 13px;">(Q2)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 − 4i&nbsp;&nbsp;<span style="font-size: 13px;">(Q4)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−1 − 4i&nbsp;&nbsp;<span style="font-size: 13px;">(Q3)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−z and z̄ are themselves conjugates of each other</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">5&nbsp;&nbsp;<span style="font-size: 13px;">(real)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−5</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">5</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only −z reflects; z̄ = z since the point lies on the real axis</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">4i&nbsp;&nbsp;<span style="font-size: 13px;">(pure imag)</span></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−4i</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−4i</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both operations land at (0, −4); the only nonzero case where they agree</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero is the unique fixed point of both reflections</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">2 − 3i&nbsp;&nbsp;<span style="font-size: 13px;">(Q4)</span></td>
+//       <td style="padding: 12px 15px; color: #34495e;">−2 + 3i&nbsp;&nbsp;<span style="font-size: 13px;">(Q2)</span></td>
+//       <td style="padding: 12px 15px; color: #34495e;">2 + 3i&nbsp;&nbsp;<span style="font-size: 13px;">(Q1)</span></td>
+//       <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+//       <td style="padding: 12px 15px; color: #34495e;">again −z and z̄ are conjugates of each other</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // ---------- SECTIONS (original prose unchanged; obj11 added) ----------
+
+// //     const sectionsContent={
+
+// //     obj0: {
+// //   title: `Key Terms`,
+// //   content: `
+// // - [Additive Inverse](!/complex-numbers/definitions#additive_inverse) — the number $-z$ satisfying $z + (-z) = 0$
+// // - [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — a different operation that negates only the imaginary part
+// // - [Complex Plane](!/complex-numbers/definitions#complex_plane) — additive inverse reflects through the origin`,
+// //   before: ``,
+// //   after: `
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+// //   link: '',
+// // },
+
+// //     obj1: {
+// //   title: `Additive Inverse in Real Numbers`,
+// //   content: `Before examining complex numbers, consider how additive inverses work in the familiar real number system.
+
+// // For any real number $a$, the additive inverse is $-a$. The defining property is:
+
+// // $$a + (-a) = 0$$
+
+// // The sum of a number and its additive inverse always equals zero.
+
+// // ## Examples
+
+// // - The additive inverse of $5$ is $-5$, since $5 + (-5) = 0$
+
+// // - The additive inverse of $-3$ is $3$, since $-3 + 3 = 0$
+
+// // - The additive inverse of $\\frac{7}{2}$ is $-\\frac{7}{2}$, since $\\frac{7}{2} + \\left(-\\frac{7}{2}\\right) = 0$
+
+// // ## Geometric Interpretation
+
+// // On the number line, a number and its additive inverse lie at equal distances from the origin but on opposite sides. The number $5$ sits five units to the right of zero; its inverse $-5$ sits five units to the left. They are mirror images across the origin.
+
+// // ## Uniqueness
+
+// // Every real number has exactly one additive inverse. If $a + x = 0$ and $a + y = 0$, then $x = y$. No real number has two different additive inverses, and no real number lacks one.
+
+// // This structure carries over completely to complex numbers.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+// // obj2: {
+// //   title: `Additive Inverse of a Complex Number`,
+// //   content: `The additive inverse of a complex number follows the same principle as real numbers: find the number that sums to zero. For a complex number $z = a + bi$, the additive inverse is:
+
+// // $$-z = -a - bi$$
+
+// // Both the real part and the imaginary part are negated. The defining property remains unchanged:
+
+// // $$z + (-z) = 0$$
+
+// // Verification is straightforward. Adding $z = a + bi$ to $-z = -a - bi$ gives:
+
+// // $$(a + bi) + (-a - bi) = (a + (-a)) + (b + (-b))i = 0 + 0i = 0$$
+
+// // The real components cancel and the imaginary components cancel, leaving zero.
+
+// // Consider $z = 3 + 2i$. The additive inverse is $-z = -3 - 2i$. Adding them: $(3 + 2i) + (-3 - 2i) = 0$. For $z = -4 + 5i$, the inverse is $-z = 4 - 5i$. The signs of both components flip. For $z = -1 - 7i$, the inverse is $-z = 1 + 7i$. A number in the third quadrant has its inverse in the first quadrant, and vice versa.
+
+// // The pattern is consistent: whatever signs the real and imaginary parts carry, the additive inverse reverses both.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+// // obj3: {
+// //   title: `Notation`,
+// //   content: `The additive inverse of $z$ is written $-z$. This notation mirrors the real number convention and means exactly what it suggests: the number that, when added to $z$, yields zero.
+
+// // When $z$ is given explicitly, the inverse can be written in multiple equivalent forms. For $z = a + bi$, the additive inverse may appear as $-z$, as $-(a + bi)$, or as $-a - bi$. All three expressions denote the same complex number.
+
+// // Parentheses matter when expressions become nested. The additive inverse of $-3 + 2i$ is $-(-3 + 2i) = 3 - 2i$. Without parentheses, $--3 + 2i$ becomes ambiguous or malformed. Writing $-(-3 + 2i)$ makes the double negation explicit and the result clear.
+
+// // In equations, the statement $z + w = 0$ implies $w = -z$. If two complex numbers sum to zero, each is the additive inverse of the other. This relationship is symmetric: if $w = -z$, then equally $z = -w$.
+
+// // When working with the [algebraic form](!/complex-numbers/algebraic-form), writing the inverse as $-a - bi$ often proves clearest. When working abstractly or with named variables, $-z$ is more compact. Context determines which notation communicates most effectively.
+
+
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+
+// // `,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+// // obj4: {
+// //   title: `Geometric Interpretation`,
+// //   content: `In the [complex plane](!/complex-numbers/geometric-representation), a complex number $z = a + bi$ corresponds to the point $(a, b)$. Its additive inverse $-z = -a - bi$ corresponds to the point $(-a, -b)$. The relationship between these two points reveals a clean geometric picture.
+
+// // The additive inverse is the reflection of $z$ through the origin. Not across the real axis, not across the imaginary axis, but through the origin itself — the single point where both axes intersect. If $z$ lies in the first quadrant, $-z$ lies in the third. If $z$ lies in the second quadrant, $-z$ lies in the fourth. The origin sits exactly midway between any number and its additive inverse.
+
+// // The [modulus](!/complex-numbers/absolute-value) remains unchanged under this reflection:
+
+// // $$|-z| = |z|$$
+
+// // Both $z$ and $-z$ lie at the same distance from the origin. They occupy opposite ends of a diameter of the circle centered at the origin with radius $|z|$.
+
+// // The [argument](!/complex-numbers/trigonometric-form) shifts by exactly $\\pi$ radians:
+
+// // $$\\arg(-z) = \\arg(z) + \\pi$$
+
+// // If $z$ points in direction $\\theta$, then $-z$ points in direction $\\theta + \\pi$ — the exact opposite direction. A rotation of $180°$ about the origin carries $z$ to $-z$.
+
+// // This geometric understanding unifies the algebraic definition. Negating both coordinates, preserving distance, reversing direction, and reflecting through the origin are all descriptions of the same transformation.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+// // obj5: {
+// //   title: `Properties of Additive Inverse`,
+// //   content: `The additive inverse interacts predictably with other operations on complex numbers. These properties follow from the definitions and mirror the corresponding rules for real numbers.
+
+// // Double negation returns the original number:
+
+// // $$-(-z) = z$$
+
+// // Taking the additive inverse twice leaves $z$ unchanged. Reflecting through the origin twice brings you back to where you started.
+
+// // Negation distributes over addition:
+
+// // $$-(z_1 + z_2) = -z_1 - z_2$$
+
+// // The inverse of a sum equals the sum of the inverses. This property underlies the familiar rule for expanding expressions like $-(3 + 2i + 4 - i)$.
+
+// // Negation and [conjugation](!/complex-numbers/complex-conjugate) commute:
+
+// // $$-\\overline{z} = \\overline{-z}$$
+
+// // It does not matter whether you conjugate first and then negate, or negate first and then conjugate. For $z = 3 + 2i$, we have $\\overline{z} = 3 - 2i$ and $-\\overline{z} = -3 + 2i$. Alternatively, $-z = -3 - 2i$ and $\\overline{-z} = -3 + 2i$. Both paths arrive at the same destination.
+
+// // The [modulus](!/complex-numbers/absolute-value) is unchanged:
+
+// // $$|-z| = |z|$$
+
+// // Distance from the origin depends only on position, not direction.
+
+// // The [argument](!/complex-numbers/trigonometric-form) shifts by $\\pi$:
+
+// // $$\\arg(-z) = \\arg(z) + \\pi$$
+
+// // Direction reverses completely, adding half a full rotation.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+
+// // obj6: {
+// //   title: `Additive Inverse vs. Complex Conjugate`,
+// //   content: `Students frequently confuse the additive inverse with the [complex conjugate](!/complex-numbers/complex-conjugate). Both operations involve changing signs, but they change different signs and produce different geometric effects.
+
+// // The conjugate of $z = a + bi$ is $\\overline{z} = a - bi$. Only the imaginary part changes sign. The real part remains untouched.
+
+// // The additive inverse of $z = a + bi$ is $-z = -a - bi$. Both parts change sign. Nothing remains untouched.
+
+// // Consider $z = 3 + 2i$. The conjugate is $\\overline{z} = 3 - 2i$ — same real part, opposite imaginary part. The additive inverse is $-z = -3 - 2i$ — both parts negated. These are different numbers occupying different locations in the complex plane.
+
+// // Geometrically, conjugation reflects across the real axis. A point above the axis moves to the corresponding point below, and vice versa. The horizontal position stays fixed. Additive inversion reflects through the origin. A point moves to the diametrically opposite position, with both coordinates reversed.
+
+// // For $z = 4 + 3i$: the conjugate $\\overline{z} = 4 - 3i$ lies directly below $z$, reflected across the horizontal axis. The additive inverse $-z = -4 - 3i$ lies diagonally opposite, reflected through the origin.
+
+// // When are they equal? Only for pure imaginary numbers. If $z = bi$ with $b \\neq 0$, then $\\overline{z} = -bi$ and $-z = -bi$. Both operations produce the same result. For any number with a nonzero real part, conjugate and additive inverse differ.
+
+// // The most common mistake is writing $-(3 + 2i) = -3 + 2i$, negating only the real part. This produces the negation of the conjugate, not the additive inverse. The correct result is $-(3 + 2i) = -3 - 2i$, with both signs flipped.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+
+
+// // obj7: {
+// //   title: `The Zero Case`,
+// //   content: `The complex number zero occupies a unique position in the additive structure. It is the only complex number that equals its own additive inverse.
+
+// // For $z = 0 = 0 + 0i$, the additive inverse is:
+
+// // $$-0 = -0 - 0i = 0 + 0i = 0$$
+
+// // Negating zero returns zero. The equation $0 + 0 = 0$ confirms the defining property: zero added to its inverse yields zero.
+
+// // No other complex number shares this property. For any $z \\neq 0$, the additive inverse $-z$ differs from $z$. If $z = a + bi$ with at least one of $a$ or $b$ nonzero, then $-z = -a - bi$ cannot equal $z$ because either $-a \\neq a$ or $-b \\neq b$ (or both).
+
+// // Zero also serves as the additive identity — the unique complex number satisfying $z + 0 = z$ for every $z$. These two roles are connected. The additive identity must be its own inverse: if $0 + 0 = 0$ follows from the identity property, and $0 + (-0) = 0$ follows from the inverse property, then $0 = -0$.
+
+// // Geometrically, zero sits at the origin of the complex plane. Reflection through the origin maps the origin to itself. Every other point moves to a different location; the origin alone stays fixed.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+
+// // obj8: {
+// //   title: `Connection to Subtraction`,
+// //   content: `Subtraction of complex numbers is not a separate operation but rather addition in disguise. To subtract one complex number from another, add the additive inverse:
+
+// // $$z_1 - z_2 = z_1 + (-z_2)$$
+
+// // This definition reduces subtraction to addition, which is already well understood. All properties of subtraction follow from properties of addition combined with properties of the additive inverse.
+
+// // Consider $(5 + 3i) - (2 + 7i)$. The additive inverse of $2 + 7i$ is $-2 - 7i$. Adding:
+
+// // $$(5 + 3i) + (-2 - 7i) = (5 + (-2)) + (3 + (-7))i = 3 - 4i$$
+
+// // This matches the component-wise subtraction rule: subtract real parts and subtract imaginary parts. The rule works precisely because subtraction means adding the inverse, and the inverse negates both components.
+
+// // The connection explains why subtraction inherits certain behaviors. Subtraction is not commutative: $z_1 - z_2 \\neq z_2 - z_1$ in general, because $z_1 + (-z_2) \\neq z_2 + (-z_1)$ unless $z_1 = z_2$. Subtraction is not associative in the usual sense, but the expression $z_1 - z_2 - z_3$ is unambiguous when read left to right as $(z_1 - z_2) - z_3 = z_1 + (-z_2) + (-z_3)$.
+
+// // For detailed coverage of subtraction and other arithmetic, see [operations](!/complex-numbers/operations).`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+
+
+// // obj9: {
+// //   title: `Uniqueness`,
+// //   content: `Every complex number has exactly one additive inverse. Not zero inverses, not two inverses — precisely one.
+
+// // The existence is clear: for any $z = a + bi$, the number $-z = -a - bi$ satisfies the defining property $z + (-z) = 0$. An additive inverse always exists.
+
+// // Uniqueness requires a short argument. Suppose $w_1$ and $w_2$ are both additive inverses of $z$, meaning $z + w_1 = 0$ and $z + w_2 = 0$. Then:
+
+// // $$w_1 = w_1 + 0 = w_1 + (z + w_2) = (w_1 + z) + w_2 = 0 + w_2 = w_2$$
+
+// // The two supposed inverses must be the same. No complex number admits two different additive inverses.
+
+// // This uniqueness is not an accident but a consequence of the [field axioms](!/complex-numbers/properties) that govern complex arithmetic. In any field, additive inverses are unique. The argument above uses only associativity of addition and the properties of zero as the additive identity — both guaranteed by the field structure.
+
+// // Uniqueness justifies the notation $-z$. If multiple inverses existed, writing $-z$ would be ambiguous — which inverse do we mean? Because exactly one inverse exists, the notation refers unambiguously to that single number.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+
+
+
+// // obj10: {
+// //   title: `Common Mistakes`,
+// //   content: `Several errors appear repeatedly when students work with additive inverses of complex numbers. Recognizing these patterns helps avoid them.
+
+// // The most frequent mistake is negating only the real part. Given $z = 3 + 2i$, a student writes $-z = -3 + 2i$ instead of the correct $-z = -3 - 2i$. This error produces the negative of the [conjugate](!/complex-numbers/complex-conjugate), not the additive inverse. Both components must change sign.
+
+// // The reverse error also occurs: negating only the imaginary part. Writing $-z = 3 - 2i$ instead of $-z = -3 - 2i$ produces the conjugate, not the additive inverse. Again, both components must change sign.
+
+// // Confusion between $-z$ and $\overline{z}$ underlies both mistakes. The conjugate flips one sign; the additive inverse flips both. Keeping this distinction clear prevents the errors.
+
+// // Sign mistakes compound in subtraction. Computing $(5 + 2i) - (3 - 4i)$ requires the additive inverse of $3 - 4i$, which is $-3 + 4i$. The full calculation:
+
+// // $$(5 + 2i) + (-3 + 4i) = 2 + 6i$$
+
+// // A common error is writing $(5 + 2i) - (3 - 4i) = 5 + 2i - 3 - 4i = 2 - 2i$, forgetting that subtracting $-4i$ means adding $+4i$. Distributing the negative sign completely — to both the real and imaginary parts of the subtracted number — eliminates this mistake.
+
+// // When in doubt, write out the additive inverse explicitly before combining terms. Converting $z_1 - z_2$ to $z_1 + (-z_2)$ and computing $-z_2$ as a separate step reduces errors.`,
+// //   before: ``,
+// //   after: ``,
+// //   link: '',
+// // },
+
+
+// //     obj11:{
+// //       title:`Summary: Side-by-Side Examples of −z and z̄`,
+// //       content:`The additive inverse and the [conjugate](!/complex-numbers/complex-conjugate) both negate signs, but they negate different signs and produce different points on the [complex plane](!/complex-numbers/geometric-representation). The table below presents both operations side by side for a representative selection of complex numbers, highlighting when −z and z̄ coincide and when they diverge.`,
+// //       content:`The additive inverse and the [conjugate](!/complex-numbers/complex-conjugate) both negate signs, but they negate different signs and produce different points on the [complex plane](!/complex-numbers/geometric-representation). The table below presents both operations side by side for a representative selection of complex numbers, highlighting when −z and z̄ coincide and when they diverge.`,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj12:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj13:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+// //       link:'',
+  
+// //     },
+// //     obj14:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+// //       link:'',
+  
+// //     },
+
+
+// //     obj15:{
+  
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     }
+  
+// //   }
+
+
+// // formulas-optimized: v1 | 2026-06-11 | 1 callout (obj2)
+// const sectionsContent={
+
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Additive Inverse](!/complex-numbers/definitions#additive_inverse) — the number $-z$ satisfying $z + (-z) = 0$
+// - [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — a different operation that negates only the imaginary part
+// - [Complex Plane](!/complex-numbers/definitions#complex_plane) — additive inverse reflects through the origin`,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+//   link: '',
+// },
+
+//     obj1: {
+//   title: `Additive Inverse in Real Numbers`,
+//   content: `Before examining complex numbers, consider how additive inverses work in the familiar real number system.
+
+// For any real number $a$, the additive inverse is $-a$. The defining property is:
+
+// $$a + (-a) = 0$$
+
+// The sum of a number and its additive inverse always equals zero.
+
+// ## Examples
+
+// - The additive inverse of $5$ is $-5$, since $5 + (-5) = 0$
+
+// - The additive inverse of $-3$ is $3$, since $-3 + 3 = 0$
+
+// - The additive inverse of $\\frac{7}{2}$ is $-\\frac{7}{2}$, since $\\frac{7}{2} + \\left(-\\frac{7}{2}\\right) = 0$
+
+// ## Geometric Interpretation
+
+// On the number line, a number and its additive inverse lie at equal distances from the origin but on opposite sides. The number $5$ sits five units to the right of zero; its inverse $-5$ sits five units to the left. They are mirror images across the origin.
+
+// ## Uniqueness
+
+// Every real number has exactly one additive inverse. If $a + x = 0$ and $a + y = 0$, then $x = y$. No real number has two different additive inverses, and no real number lacks one.
+
+// This structure carries over completely to complex numbers.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+// obj2: {
+//   title: `Additive Inverse of a Complex Number`,
+//   content: `The additive inverse of a complex number follows the same principle as real numbers: find the number that sums to zero. For a complex number $z = a + bi$, the additive inverse is:
+
+// @academic[formula_callout:Additive Inverse
+// $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
+// /complex-numbers/formulas#additive_inverse]@
+
+// @academic[formulas_link:Browse all complex numbers formulas
+// /complex-numbers/formulas]@
+
+// Both the real part and the imaginary part are negated. The defining property remains unchanged:
+
+// $$z + (-z) = 0$$
+
+// Verification is straightforward. Adding $z = a + bi$ to $-z = -a - bi$ gives:
+
+// $$(a + bi) + (-a - bi) = (a + (-a)) + (b + (-b))i = 0 + 0i = 0$$
+
+// The real components cancel and the imaginary components cancel, leaving zero.
+
+// Consider $z = 3 + 2i$. The additive inverse is $-z = -3 - 2i$. Adding them: $(3 + 2i) + (-3 - 2i) = 0$. For $z = -4 + 5i$, the inverse is $-z = 4 - 5i$. The signs of both components flip. For $z = -1 - 7i$, the inverse is $-z = 1 + 7i$. A number in the third quadrant has its inverse in the first quadrant, and vice versa.
+
+// The pattern is consistent: whatever signs the real and imaginary parts carry, the additive inverse reverses both.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+// notation: {
+//   title: `Additive Inverse Notation`,
+//   lead: `One glyph carries this page: the minus. This section owns its unary job on a complex number, the three equivalent spellings it produces, and the boundary between minus-as-inverse and minus-as-subtraction.`,
+//   inherited: `$z$, $a + bi$ and $\\mathbb{C}$ come from [complex numbers basics](!/complex-numbers/basics#notation), $i$ from [the imaginary unit](!/complex-numbers/imaginary-numbers#notation); the conjugate bar is owned by [its page](!/complex-numbers/complex-conjugate#notation), the modulus bars by [absolute value](!/complex-numbers/absolute-value#notation).`,
+//   entries: [
+//     {
+//       id: 'neg-z',
+//       tex: `$-z$`,
+//       read: `negative z; minus z`,
+//       means: `The unary minus as an operator: $-z$ names the number that cancels $z$, and for $z = a + bi$ it flips **both** signs — $-z = -a - bi$, per **Additive Inverse of a Complex Number** above. One mark, one point-reflection through the origin.`,
+//       cases: `Modulus survives, direction reverses: $|-z| = |z|$ while $\\arg(-z) = \\arg(z) + \\pi$ — **Geometric Interpretation** below; on the polar side the sign is absorbed into the [exponent](!/complex-numbers/exponential-form#notation), $-z = re^{i(\\theta + \\pi)}$.`,
+//       confusedWith: `The conjugate. [The bar](!/complex-numbers/complex-conjugate#notation) flips one sign, the minus flips two — reflection across the real axis versus through the origin; **Additive Inverse vs. Complex Conjugate** below draws both pictures.`,
+//     },
+//     {
+//       id: 'neg-spellings',
+//       tex: `$-(a + bi)$`,
+//       read: `minus, quantity a plus b i`,
+//       means: `Three equivalent spellings, one number: $-z$, $-(a + bi)$, $-a - bi$. Compact for abstract work, parenthesized before distributing, fully distributed when the components matter — context picks the form.`,
+//       cases: `Nesting demands parentheses: the inverse of $-3 + 2i$ is $-(-3 + 2i) = 3 - 2i$, and a bare $--3 + 2i$ is malformed — double negation must be scoped.`,
+//       confusedWith: `Half-distribution. $-(a + bi) = -a + bi$ is the standard slip — the minus must reach the $bi$ term too; **Common Mistakes** below collects the variants.`,
+//     },
+//     {
+//       id: 'minus-two-jobs',
+//       tex: `$z - w$`,
+//       read: `z minus w`,
+//       means: `The glyph's second job: between two numbers it subtracts, and the jobs meet in the definition $z - w = z + (-w)$ — **Connection to Subtraction** below. Same stroke, different arity.`,
+//       cases: `Unary binds to one operand ($-w$, $-3i$); binary sits between two ($z - w$). Calculators give them separate keys and programming languages parse them by position — mathematics never marks the difference visually.`,
+//       confusedWith: `A sign attached to $w$. In $z - w$ the minus belongs to the operation, not the number; rewriting as $z + (-w)$ moves it onto the number explicitly — which is exactly what makes the identity useful.`,
+//     },
+//   ],
+//   symbolsHref: `/math-symbols/complex-numbers`,
+//   symbolsLabel: `All complex number symbols`,
+//   parentHref: `/complex-numbers`,
+//   parentLabel: `Complex Numbers`,
+// },
+// obj4: {
+//   title: `Geometric Interpretation`,
+//   content: `In the [complex plane](!/complex-numbers/geometric-representation), a complex number $z = a + bi$ corresponds to the point $(a, b)$. Its additive inverse $-z = -a - bi$ corresponds to the point $(-a, -b)$. The relationship between these two points reveals a clean geometric picture.
+
+// The additive inverse is the reflection of $z$ through the origin. Not across the real axis, not across the imaginary axis, but through the origin itself — the single point where both axes intersect. If $z$ lies in the first quadrant, $-z$ lies in the third. If $z$ lies in the second quadrant, $-z$ lies in the fourth. The origin sits exactly midway between any number and its additive inverse.
+
+// The [modulus](!/complex-numbers/absolute-value) remains unchanged under this reflection:
+
+// $$|-z| = |z|$$
+
+// Both $z$ and $-z$ lie at the same distance from the origin. They occupy opposite ends of a diameter of the circle centered at the origin with radius $|z|$.
+
+// The [argument](!/complex-numbers/trigonometric-form) shifts by exactly $\\pi$ radians:
+
+// $$\\arg(-z) = \\arg(z) + \\pi$$
+
+// If $z$ points in direction $\\theta$, then $-z$ points in direction $\\theta + \\pi$ — the exact opposite direction. A rotation of $180°$ about the origin carries $z$ to $-z$.
+
+// This geometric understanding unifies the algebraic definition. Negating both coordinates, preserving distance, reversing direction, and reflecting through the origin are all descriptions of the same transformation.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+// obj5: {
+//   title: `Properties of Additive Inverse`,
+//   content: `The additive inverse interacts predictably with other operations on complex numbers. These properties follow from the definitions and mirror the corresponding rules for real numbers.
+
+// Double negation returns the original number:
+
+// $$-(-z) = z$$
+
+// Taking the additive inverse twice leaves $z$ unchanged. Reflecting through the origin twice brings you back to where you started.
+
+// Negation distributes over addition:
+
+// $$-(z_1 + z_2) = -z_1 - z_2$$
+
+// The inverse of a sum equals the sum of the inverses. This property underlies the familiar rule for expanding expressions like $-(3 + 2i + 4 - i)$.
+
+// Negation and [conjugation](!/complex-numbers/complex-conjugate) commute:
+
+// $$-\\overline{z} = \\overline{-z}$$
+
+// It does not matter whether you conjugate first and then negate, or negate first and then conjugate. For $z = 3 + 2i$, we have $\\overline{z} = 3 - 2i$ and $-\\overline{z} = -3 + 2i$. Alternatively, $-z = -3 - 2i$ and $\\overline{-z} = -3 + 2i$. Both paths arrive at the same destination.
+
+// The [modulus](!/complex-numbers/absolute-value) is unchanged:
+
+// $$|-z| = |z|$$
+
+// Distance from the origin depends only on position, not direction.
+
+// The [argument](!/complex-numbers/trigonometric-form) shifts by $\\pi$:
+
+// $$\\arg(-z) = \\arg(z) + \\pi$$
+
+// Direction reverses completely, adding half a full rotation.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj6: {
+//   title: `Additive Inverse vs. Complex Conjugate`,
+//   content: `Students frequently confuse the additive inverse with the [complex conjugate](!/complex-numbers/complex-conjugate). Both operations involve changing signs, but they change different signs and produce different geometric effects.
+
+// The conjugate of $z = a + bi$ is $\\overline{z} = a - bi$. Only the imaginary part changes sign. The real part remains untouched.
+
+// The additive inverse of $z = a + bi$ is $-z = -a - bi$. Both parts change sign. Nothing remains untouched.
+
+// Consider $z = 3 + 2i$. The conjugate is $\\overline{z} = 3 - 2i$ — same real part, opposite imaginary part. The additive inverse is $-z = -3 - 2i$ — both parts negated. These are different numbers occupying different locations in the complex plane.
+
+// Geometrically, conjugation reflects across the real axis. A point above the axis moves to the corresponding point below, and vice versa. The horizontal position stays fixed. Additive inversion reflects through the origin. A point moves to the diametrically opposite position, with both coordinates reversed.
+
+// For $z = 4 + 3i$: the conjugate $\\overline{z} = 4 - 3i$ lies directly below $z$, reflected across the horizontal axis. The additive inverse $-z = -4 - 3i$ lies diagonally opposite, reflected through the origin.
+
+// When are they equal? Only for pure imaginary numbers. If $z = bi$ with $b \\neq 0$, then $\\overline{z} = -bi$ and $-z = -bi$. Both operations produce the same result. For any number with a nonzero real part, conjugate and additive inverse differ.
+
+// The most common mistake is writing $-(3 + 2i) = -3 + 2i$, negating only the real part. This produces the negation of the conjugate, not the additive inverse. The correct result is $-(3 + 2i) = -3 - 2i$, with both signs flipped.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+// obj7: {
+//   title: `The Zero Case`,
+//   content: `The complex number zero occupies a unique position in the additive structure. It is the only complex number that equals its own additive inverse.
+
+// For $z = 0 = 0 + 0i$, the additive inverse is:
+
+// $$-0 = -0 - 0i = 0 + 0i = 0$$
+
+// Negating zero returns zero. The equation $0 + 0 = 0$ confirms the defining property: zero added to its inverse yields zero.
+
+// No other complex number shares this property. For any $z \\neq 0$, the additive inverse $-z$ differs from $z$. If $z = a + bi$ with at least one of $a$ or $b$ nonzero, then $-z = -a - bi$ cannot equal $z$ because either $-a \\neq a$ or $-b \\neq b$ (or both).
+
+// Zero also serves as the additive identity — the unique complex number satisfying $z + 0 = z$ for every $z$. These two roles are connected. The additive identity must be its own inverse: if $0 + 0 = 0$ follows from the identity property, and $0 + (-0) = 0$ follows from the inverse property, then $0 = -0$.
+
+// Geometrically, zero sits at the origin of the complex plane. Reflection through the origin maps the origin to itself. Every other point moves to a different location; the origin alone stays fixed.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj8: {
+//   title: `Connection to Subtraction`,
+//   content: `Subtraction of complex numbers is not a separate operation but rather addition in disguise. To subtract one complex number from another, add the additive inverse:
+
+// $$z_1 - z_2 = z_1 + (-z_2)$$
+
+// This definition reduces subtraction to addition, which is already well understood. All properties of subtraction follow from properties of addition combined with properties of the additive inverse.
+
+// Consider $(5 + 3i) - (2 + 7i)$. The additive inverse of $2 + 7i$ is $-2 - 7i$. Adding:
+
+// $$(5 + 3i) + (-2 - 7i) = (5 + (-2)) + (3 + (-7))i = 3 - 4i$$
+
+// This matches the component-wise subtraction rule: subtract real parts and subtract imaginary parts. The rule works precisely because subtraction means adding the inverse, and the inverse negates both components.
+
+// The connection explains why subtraction inherits certain behaviors. Subtraction is not commutative: $z_1 - z_2 \\neq z_2 - z_1$ in general, because $z_1 + (-z_2) \\neq z_2 + (-z_1)$ unless $z_1 = z_2$. Subtraction is not associative in the usual sense, but the expression $z_1 - z_2 - z_3$ is unambiguous when read left to right as $(z_1 - z_2) - z_3 = z_1 + (-z_2) + (-z_3)$.
+
+// For detailed coverage of subtraction and other arithmetic, see [operations](!/complex-numbers/operations).`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+// obj9: {
+//   title: `Uniqueness`,
+//   content: `Every complex number has exactly one additive inverse. Not zero inverses, not two inverses — precisely one.
+
+// The existence is clear: for any $z = a + bi$, the number $-z = -a - bi$ satisfies the defining property $z + (-z) = 0$. An additive inverse always exists.
+
+// Uniqueness requires a short argument. Suppose $w_1$ and $w_2$ are both additive inverses of $z$, meaning $z + w_1 = 0$ and $z + w_2 = 0$. Then:
+
+// $$w_1 = w_1 + 0 = w_1 + (z + w_2) = (w_1 + z) + w_2 = 0 + w_2 = w_2$$
+
+// The two supposed inverses must be the same. No complex number admits two different additive inverses.
+
+// This uniqueness is not an accident but a consequence of the [field axioms](!/complex-numbers/properties) that govern complex arithmetic. In any field, additive inverses are unique. The argument above uses only associativity of addition and the properties of zero as the additive identity — both guaranteed by the field structure.
+
+// Uniqueness justifies the notation $-z$. If multiple inverses existed, writing $-z$ would be ambiguous — which inverse do we mean? Because exactly one inverse exists, the notation refers unambiguously to that single number.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+
+// obj10: {
+//   title: `Common Mistakes`,
+//   content: `Several errors appear repeatedly when students work with additive inverses of complex numbers. Recognizing these patterns helps avoid them.
+
+// The most frequent mistake is negating only the real part. Given $z = 3 + 2i$, a student writes $-z = -3 + 2i$ instead of the correct $-z = -3 - 2i$. This error produces the negative of the [conjugate](!/complex-numbers/complex-conjugate), not the additive inverse. Both components must change sign.
+
+// The reverse error also occurs: negating only the imaginary part. Writing $-z = 3 - 2i$ instead of $-z = -3 - 2i$ produces the conjugate, not the additive inverse. Again, both components must change sign.
+
+// Confusion between $-z$ and $\\overline{z}$ underlies both mistakes. The conjugate flips one sign; the additive inverse flips both. Keeping this distinction clear prevents the errors.
+
+// Sign mistakes compound in subtraction. Computing $(5 + 2i) - (3 - 4i)$ requires the additive inverse of $3 - 4i$, which is $-3 + 4i$. The full calculation:
+
+// $$(5 + 2i) + (-3 + 4i) = 2 + 6i$$
+
+// A common error is writing $(5 + 2i) - (3 - 4i) = 5 + 2i - 3 - 4i = 2 - 2i$, forgetting that subtracting $-4i$ means adding $+4i$. Distributing the negative sign completely — to both the real and imaginary parts of the subtracted number — eliminates this mistake.
+
+// When in doubt, write out the additive inverse explicitly before combining terms. Converting $z_1 - z_2$ to $z_1 + (-z_2)$ and computing $-z_2$ as a separate step reduces errors.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+//     obj11:{
+//       title:`Summary: Side-by-Side Examples of −z and z̄`,
+//       content:`The additive inverse and the [conjugate](!/complex-numbers/complex-conjugate) both negate signs, but they negate different signs and produce different points on the [complex plane](!/complex-numbers/geometric-representation). The table below presents both operations side by side for a representative selection of complex numbers, highlighting when −z and z̄ coincide and when they diverge.`,
+//       content:`The additive inverse and the [conjugate](!/complex-numbers/complex-conjugate) both negate signs, but they negate different signs and produce different points on the [complex plane](!/complex-numbers/geometric-representation). The table below presents both operations side by side for a representative selection of complex numbers, highlighting when −z and z̄ coincide and when they diverge.`,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj12:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj13:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+//     obj14:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+
+
+//     obj15:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//   id: "intro",
+//   title: "The Number That Cancels Through Addition",
+//   content: `Every complex number has a counterpart that, when added to it, produces zero. This counterpart is called the additive inverse. The concept extends directly from real numbers, where $5$ and $-5$ cancel each other, to complex numbers, where both the real and imaginary parts must be negated. Understanding the additive inverse clarifies the nature of subtraction and reveals a fundamental symmetry in the [complex plane](!/complex-numbers/geometric-representation).`
+// }
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is the additive inverse of a complex number?",
+//     answer: "The additive inverse of z = a + bi is -z = -a - bi. Both the real part and the imaginary part are negated. The defining property is z + (-z) = 0: a number plus its additive inverse always equals zero."
+//   },
+//   obj2: {
+//     question: "How do you find the additive inverse of a complex number?",
+//     answer: "Negate both components. For z = a + bi, the additive inverse is -z = -a - bi. For example, the additive inverse of 3 + 2i is -3 - 2i, and the additive inverse of -4 + 5i is 4 - 5i."
+//   },
+//   obj3: {
+//     question: "What is the geometric meaning of the additive inverse?",
+//     answer: "The additive inverse is the reflection of z through the origin in the complex plane. If z lies in the first quadrant, -z lies in the third. Both z and -z are equidistant from the origin but point in opposite directions, separated by exactly π radians."
+//   },
+//   obj4: {
+//     question: "What is the difference between additive inverse and conjugate?",
+//     answer: "The additive inverse -z negates both parts: for z = a + bi, -z = -a - bi. The conjugate z̄ negates only the imaginary part: z̄ = a - bi. Geometrically, -z reflects through the origin while z̄ reflects across the real axis."
+//   },
+//   obj5: {
+//     question: "Does taking the additive inverse change the modulus?",
+//     answer: "No. The modulus is preserved: |-z| = |z|. Both z and -z lie at the same distance from the origin. They occupy opposite ends of a diameter of the circle centered at the origin with radius |z|."
+//   },
+//   obj6: {
+//     question: "What happens to the argument when taking the additive inverse?",
+//     answer: "The argument shifts by π radians: arg(-z) = arg(z) + π. If z points in direction θ, then -z points in direction θ + π — the exact opposite direction. This corresponds to a 180° rotation about the origin."
+//   },
+//   obj7: {
+//     question: "Is the additive inverse unique?",
+//     answer: "Yes. Every complex number has exactly one additive inverse. If w₁ and w₂ both satisfy z + w = 0, then w₁ = w₂. This uniqueness justifies writing -z without ambiguity."
+//   },
+//   obj8: {
+//     question: "How is subtraction related to additive inverse?",
+//     answer: "Subtraction is defined as adding the additive inverse: z₁ - z₂ = z₁ + (-z₂). This reduces subtraction to addition. The component-wise rule works because -z₂ negates both parts of z₂."
+//   },
+//   obj9: {
+//     question: "What is the additive inverse of zero?",
+//     answer: "The additive inverse of 0 is 0 itself. Zero is the only complex number equal to its own additive inverse. Geometrically, the origin is the only point that maps to itself under reflection through the origin."
+//   },
+//   obj10: {
+//     question: "What is double negation of a complex number?",
+//     answer: "Double negation returns the original: -(-z) = z. Taking the additive inverse twice leaves the number unchanged. Reflecting through the origin twice brings you back to the starting point."
+//   },
+//   obj11: {
+//     question: "Do negation and conjugation commute?",
+//     answer: "Yes. The order does not matter: -z̄ = (-z)̄. For z = 3 + 2i, both paths give -3 + 2i. You can negate first then conjugate, or conjugate first then negate — the result is the same."
+//   },
+//   obj12: {
+//     question: "What is a common mistake with additive inverses?",
+//     answer: "The most common error is negating only one part. Writing -(3 + 2i) = -3 + 2i is wrong — this produces the negative of the conjugate. The correct result is -(3 + 2i) = -3 - 2i, with both signs flipped."
+//   },
+//   obj13: {
+//     question: "When are the additive inverse and conjugate equal?",
+//     answer: "Only for pure imaginary numbers. If z = bi with b ≠ 0, then -z = -bi and z̄ = -bi, so they match. For any number with a nonzero real part, the additive inverse and conjugate are different."
+//   }
+// }
+
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Additive Inverse of Complex Numbers",
+//     "description": "Learn the additive inverse of complex numbers: definition -z = -a - bi, geometric meaning as reflection through origin, properties, comparison with conjugate, connection to subtraction, and common mistakes.",
+//     "url": "https://www.learnmathclass.com/complex-numbers/additive-inverse",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Additive Inverse of Complex Numbers"
+//     },
+//     "teaches": [
+//       "Definition of additive inverse: -z = -a - bi",
+//       "Geometric interpretation as reflection through origin",
+//       "Properties: double negation, distribution, modulus preservation",
+//       "Difference between additive inverse and conjugate",
+//       "Connection between subtraction and additive inverse",
+//       "Uniqueness of additive inverse",
+//       "Common mistakes when negating complex numbers",
+//       "Side-by-side reference of −z and z̄ across categories, showing when they coincide"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Complex Numbers",
+//         "item": "https://www.learnmathclass.com/complex-numbers"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Additive Inverse",
+//         "item": "https://www.learnmathclass.com/complex-numbers/additive-inverse"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+
+//   return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     obj5Table,
+//     obj6Table,
+//     obj10Table,
+//     summaryTable,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Additive Inverse: Negation of Complex Numbers | Learn Math Class",
+//       description: "Learn the additive inverse of complex numbers: definition -z = -a - bi, geometric meaning as reflection through origin, properties, comparison with conjugate, connection to subtraction, and common mistakes.",
+//       keywords: keyWords.join(", "),
+//       url: "/complex-numbers/additive-inverse",
+//       name: "Additive Inverse of Complex Numbers"
+//     },
+//   }
+// }
+//    }
+
+
+
+// export default function AdditiveInversePage({
+//   seoData,
+//   sectionsContent,
+//   introContent,
+//   obj5Table,
+//   obj6Table,
+//   obj10Table,
+//   summaryTable,
+//   faqQuestions,
+//   schemas,
+// }) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.notation.title,
+//         link:``,
+//         content:[
+//           <NotationSection
+//             key={'notation'}
+//             title={sectionsContent.notation.title}
+//             lead={sectionsContent.notation.lead}
+//             inherited={sectionsContent.notation.inherited}
+//             entries={sectionsContent.notation.entries}
+//             symbolsHref={sectionsContent.notation.symbolsHref}
+//             symbolsLabel={sectionsContent.notation.symbolsLabel}
+//             parentHref={sectionsContent.notation.parentHref}
+//             parentLabel={sectionsContent.notation.parentLabel}
+//             theme={'navy'}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//           <div
+//             key={'obj5-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj5Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//           <div
+//             key={'obj6-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj6Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//         ]
+//     },
+//     {
+//         id:'10',
+//         title:sectionsContent.obj10.title,
+//         link:sectionsContent.obj10.link,
+//         content:[
+//           sectionsContent.obj10.content,
+//           <div
+//             key={'obj10-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: obj10Table }}
+//           />,
+//         ]
+//     },
+//     {
+//         id:'11',
+//         title:sectionsContent.obj11.title,
+//         link:sectionsContent.obj11.link,
+//         content:[
+//           sectionsContent.obj11.content,
+//           <div
+//             key={'summary-table'}
+//             style={tableWrapStyle}
+//             dangerouslySetInnerHTML={{ __html: summaryTable }}
+//           />,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+  
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Additive Inverse of a Complex Number</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//    showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "siblings"
+//          secondaryNavTitle="More in Complex Numbers"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//     <KeyTermsCard
+//            id="0"
+//            title={sectionsContent.obj0.title}
+//            content={sectionsContent.obj0.content}
+//            after={sectionsContent.obj0.after}
+//            variant="light"
+//          />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}
+   
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -11,6 +1290,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -863,8 +2143,11 @@ When in doubt, write out the additive inverse explicitly before combining terms.
       after:``,
       link:'',
   
-    }
+    },
   
+    faq: {
+      title: `Additive Inverse FAQ`,
+    },
   }
 
 
@@ -876,56 +2159,24 @@ When in doubt, write out the additive inverse explicitly before combining terms.
 
 const faqQuestions = {
   obj1: {
-    question: "What is the additive inverse of a complex number?",
-    answer: "The additive inverse of z = a + bi is -z = -a - bi. Both the real part and the imaginary part are negated. The defining property is z + (-z) = 0: a number plus its additive inverse always equals zero."
+    question: "What is the difference between the additive inverse and the conjugate?",
+    answer: "Negation flips both components, sending a + bi to −a − bi, which rotates the point half a turn about the origin. Conjugation flips only the imaginary part, reflecting it across the real axis. The two coincide only for pure imaginary numbers, where there is no real part left to distinguish them.",
+    sectionId: "6"
   },
   obj2: {
-    question: "How do you find the additive inverse of a complex number?",
-    answer: "Negate both components. For z = a + bi, the additive inverse is -z = -a - bi. For example, the additive inverse of 3 + 2i is -3 - 2i, and the additive inverse of -4 + 5i is 4 - 5i."
+    question: "Does negating a complex number change its modulus?",
+    answer: "No. Rotating a point half a turn about the origin leaves its distance from the origin untouched, so a number and its negative always lie on the same circle. What does change is the argument, which shifts by half a turn and then needs reducing back into the principal range.",
+    sectionId: "5"
   },
   obj3: {
-    question: "What is the geometric meaning of the additive inverse?",
-    answer: "The additive inverse is the reflection of z through the origin in the complex plane. If z lies in the first quadrant, -z lies in the third. Both z and -z are equidistant from the origin but point in opposite directions, separated by exactly π radians."
+    question: "Do negation and conjugation commute?",
+    answer: "Yes. Negating then conjugating gives the same result as conjugating then negating, because the two operations act on different components independently. One flips both signs, the other flips only the imaginary sign, and applying them in either order flips the real part once and the imaginary part twice.",
+    sectionId: "5"
   },
   obj4: {
-    question: "What is the difference between additive inverse and conjugate?",
-    answer: "The additive inverse -z negates both parts: for z = a + bi, -z = -a - bi. The conjugate z̄ negates only the imaginary part: z̄ = a - bi. Geometrically, -z reflects through the origin while z̄ reflects across the real axis."
-  },
-  obj5: {
-    question: "Does taking the additive inverse change the modulus?",
-    answer: "No. The modulus is preserved: |-z| = |z|. Both z and -z lie at the same distance from the origin. They occupy opposite ends of a diameter of the circle centered at the origin with radius |z|."
-  },
-  obj6: {
-    question: "What happens to the argument when taking the additive inverse?",
-    answer: "The argument shifts by π radians: arg(-z) = arg(z) + π. If z points in direction θ, then -z points in direction θ + π — the exact opposite direction. This corresponds to a 180° rotation about the origin."
-  },
-  obj7: {
-    question: "Is the additive inverse unique?",
-    answer: "Yes. Every complex number has exactly one additive inverse. If w₁ and w₂ both satisfy z + w = 0, then w₁ = w₂. This uniqueness justifies writing -z without ambiguity."
-  },
-  obj8: {
-    question: "How is subtraction related to additive inverse?",
-    answer: "Subtraction is defined as adding the additive inverse: z₁ - z₂ = z₁ + (-z₂). This reduces subtraction to addition. The component-wise rule works because -z₂ negates both parts of z₂."
-  },
-  obj9: {
-    question: "What is the additive inverse of zero?",
-    answer: "The additive inverse of 0 is 0 itself. Zero is the only complex number equal to its own additive inverse. Geometrically, the origin is the only point that maps to itself under reflection through the origin."
-  },
-  obj10: {
-    question: "What is double negation of a complex number?",
-    answer: "Double negation returns the original: -(-z) = z. Taking the additive inverse twice leaves the number unchanged. Reflecting through the origin twice brings you back to the starting point."
-  },
-  obj11: {
-    question: "Do negation and conjugation commute?",
-    answer: "Yes. The order does not matter: -z̄ = (-z)̄. For z = 3 + 2i, both paths give -3 + 2i. You can negate first then conjugate, or conjugate first then negate — the result is the same."
-  },
-  obj12: {
-    question: "What is a common mistake with additive inverses?",
-    answer: "The most common error is negating only one part. Writing -(3 + 2i) = -3 + 2i is wrong — this produces the negative of the conjugate. The correct result is -(3 + 2i) = -3 - 2i, with both signs flipped."
-  },
-  obj13: {
-    question: "When are the additive inverse and conjugate equal?",
-    answer: "Only for pure imaginary numbers. If z = bi with b ≠ 0, then -z = -bi and z̄ = -bi, so they match. For any number with a nonzero real part, the additive inverse and conjugate are different."
+    question: "How is subtraction related to the additive inverse?",
+    answer: "Subtracting is adding the inverse: the difference of two numbers is the first plus the negative of the second. Geometrically this reverses the second arrow before joining them, which is why the difference vector runs from the second point to the first. See the [subtraction tool](!/complex-numbers/visual-tools/addition-subtraction).",
+    sectionId: "8"
   }
 }
 
@@ -995,20 +2246,8 @@ const schemas = {
         "item": "https://www.learnmathclass.com/complex-numbers/additive-inverse"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
+
 }
 
 
@@ -1178,6 +2417,22 @@ export default function AdditiveInversePage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:sectionsContent.faq.title,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1216,12 +2471,6 @@ export default function AdditiveInversePage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>
