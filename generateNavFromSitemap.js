@@ -38,10 +38,10 @@ const CONFIG = {
       pathPatterns: [
         '/visual-tools/',
         '/combinatorics/permutations/permutations-visualizer',
-        '/trigonometry/quadrants',
+        '/trigonometry/visual-tools/functions-signs',
         '/logic/propositional-logic/syntax/tree-builder',
-        '/probability/distributions/discrete/visualizer',
-        '/probability/distributions/continuous/visualizer',
+        '/probability/visual-tools/distributions/binomial',
+        '/probability/visual-tools/distributions/normal',
         '/probability/visual-tools/'
       ]
     },
@@ -55,7 +55,7 @@ const CONFIG = {
     },
     'Solvers': {
       pathPatterns: [
-        '/algebra/equations/linear/solver',
+        '/algebra/calculators/equations/linear',
         '/logic/propositional-logic/semantics/equivalence-validator',
         'quadratic-equations'
       ]

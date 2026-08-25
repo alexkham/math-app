@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { processContent } from '@/app/utils/contentProcessor';
 
-const DivisibilityTiles = ({ explanations = null }) => {
+const DivisibilityTiles = () => {
   const [number, setNumber] = useState(23);
   const [divisor, setDivisor] = useState(5);
   const [grouped, setGrouped] = useState(false);
@@ -9,17 +8,6 @@ const DivisibilityTiles = ({ explanations = null }) => {
   const groupCount = Math.floor(number / divisor);
   const remainder = number % divisor;
   const isDivisible = remainder === 0;
-
-  // Line 1: state key for the hoisted explanations - the display outcome, with
-  // the zero-groups edge case (divisor larger than the number) checked first.
-  const stateKey = !grouped
-    ? 'ungrouped'
-    : groupCount === 0
-      ? 'zeroGroups'
-      : isDivisible
-        ? 'divisible'
-        : 'remainder';
-  const stateEntry = (explanations && explanations[stateKey]) || null;
 
   const handleNumberChange = (e) => {
     const val = parseInt(e.target.value) || 1;
@@ -255,12 +243,6 @@ const DivisibilityTiles = ({ explanations = null }) => {
                     </p>
                   </div>
                 )}
-              </div>
-            )}
-
-            {stateEntry && (
-              <div style={styles.stateExplanation}>
-                {processContent(stateEntry)}
               </div>
             )}
           </div>
@@ -646,16 +628,6 @@ const styles = {
     color: '#475569',
     margin: 0,
     lineHeight: '1.5',
-  },
-  stateExplanation: {
-    marginTop: '12px',
-    background: '#f8fafc',
-    borderRadius: '10px',
-    padding: '14px 16px',
-    borderLeft: '3px solid #3b82f6',
-    fontSize: '0.9rem',
-    lineHeight: '1.6',
-    color: '#1e3a5f',
   },
 };
 

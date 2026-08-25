@@ -496,8 +496,6 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ModPieWheel from '../../../../app/components/arithmetic/visualizers/ModPieWheel'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
-import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 
 
 export async function getStaticProps(){
@@ -534,7 +532,7 @@ export async function getStaticProps(){
 
 **Equivalence class / residue class** — the set of all integers sharing the same remainder. There are exactly $n$ classes mod $n$, labeled $[0], [1], \\dots, [n - 1]$.
 
-**Zero class (principal class)** — the class $[0]$, containing $0$ and all multiples of $n$. It's the identity element of the ring $\\mathbb{Z}/n\\mathbb{Z}$ and corresponds to the principal ideal $n\\mathbb{Z}$. The tool highlights this class with a [gold star and warm color](!#the-zero-class-why-its-special).
+**Zero class (principal class)** — the class $[0]$, containing $0$ and all multiples of $n$. It's the identity element of the ring $\\mathbb{Z}/n\\mathbb{Z}$ and corresponds to the principal ideal $n\\mathbb{Z}$. The tool highlights this class with a gold star and warm color.
 
 **$\\mathbb{Z}/n\\mathbb{Z}$** — the integers mod $n$, the set of $n$ equivalence classes with addition and multiplication inherited from $\\mathbb{Z}$.`,
       before: ``,
@@ -548,9 +546,9 @@ export async function getStaticProps(){
 
 • A **control panel** on the left with inputs for the count target, the divisor (a button grid for $n = 2$ through $9$), a speed slider, and Run / Stop / Reset buttons.
 
-• A **circular wheel** in the middle, divided into $n$ equal slices. Each slice is one remainder class. The [zero class](!#the-zero-class-why-its-special) sits at the top (12 o'clock) marked with a gold star ★.
+• A **circular wheel** in the middle, divided into $n$ equal slices. Each slice is one remainder class. The zero class sits at the top (12 o'clock) marked with a gold star ★.
 
-• A **context panel** on the right that [switches modes](!#right-panel-context) depending on what's happening: an *overview* before running, a *now placing* log while running, a *class details* card when you hover or pin a slice, and a *run complete* summary at the end.
+• A **context panel** on the right that switches modes depending on what's happening: an *overview* before running, a *now placing* log while running, a *class details* card when you hover or pin a slice, and a *run complete* summary at the end.
 
 To run:
 
@@ -564,19 +562,17 @@ To run:
 
 • **Reset** to clear and try a different combination.`,
       before: ``,
-      after: `The frozen frame above is the idle wheel: six empty slices around the mod 6 hub, structure without content. Even empty, it already says something — the modulus alone fixes how many classes exist, before a single number is sorted.
-
-Idle is also the state to read the geometry in: slice labels outside, row arcs faint inside, and the starred zero slice at twelve o'clock. Once Run is pressed, the [wheel anatomy](!#the-wheel-and-slices) fills in exactly these positions.`,
+      after: ``,
       link: '',
     },
 
     obj2: {
       title: `The Wheel and Slices`,
-      content: `The wheel divides a circle into $n$ equal slices, one per [remainder class](!#equivalence-classes-and-their-structure). Five things to watch:
+      content: `The wheel divides a circle into $n$ equal slices, one per remainder class. Five things to watch:
 
 • **Slice labels** outside each slice show the remainder value: $0$ at the top, then $1, 2, \\dots, n - 1$ going clockwise.
 
-• **Slice colors** use a blue palette so the [zero class](!#the-zero-class-why-its-special) can stand apart. The zero slice has a warmer fill and a thin gold accent arc along its outer edge.
+• **Slice colors** use a blue palette so the zero class can stand apart. The zero slice has a warmer fill and a thin gold accent arc along its outer edge.
 
 • **Rows** within each slice run from the center outward — row $1$ is closest to the center, row $2$ above it, and so on. Each row holds the next occurrence of that class.
 
@@ -602,11 +598,9 @@ Cells are placed in real time as the run progresses. The geometry adapts to the 
 
 • **Speed slider** with tortoise 🐢 and hare 🐇 markers controls the tick delay. The tick interval is roughly $\\max(20, 400 - 35 \\cdot \\text{speed})$ milliseconds — at speed $1$ each number takes about $365$ ms; at speed $10$ each takes about $50$ ms.
 
-While running, the right panel switches into [*now placing* mode](!#right-panel-context) and shows live arithmetic for the most recent number: $n \\div d = q$ remainder $r$, and which slice and row it just landed in. Numbers in the zero class get extra emphasis to call out the divisibility.`,
+While running, the right panel switches into *now placing* mode and shows live arithmetic for the most recent number: $n \\div d = q$ remainder $r$, and which slice and row it just landed in. Numbers in the zero class get extra emphasis to call out the divisibility.`,
       before: ``,
-      after: `The frozen frame above catches a run mid-flight: seventeen numbers placed, and the log reporting $17 \\div 6 = 2$ remainder $5$ — so 17 has just landed in class 5, row 3. Rows count occurrences: 17 is the third number (after 5 and 11) to leave remainder 5.
-
-Watching a few ticks makes the rhythm obvious: the placement simply walks around the wheel, one slice clockwise per number, wrapping back to the starred slice at every multiple. That steady rotation is the additive structure of [equivalence classes](!#equivalence-classes-and-their-structure) in motion.`,
+      after: ``,
       link: '',
     },
 
@@ -626,13 +620,11 @@ The class details panel includes:
 
 • The formula — $n = nk$ for class $0$, or $n = nk + r$ for class $r$.
 
-• A list of first $8$ examples of [integers in the class](!#equivalence-classes-and-their-structure).
+• A list of first $8$ examples of integers in the class.
 
 • A *Placed so far* block listing every number from the current run that landed in this class, if any.`,
       before: ``,
-      after: `The frozen frame above has class 2 pinned after a full run of 36: the darkened slice holds 2, 8, 14, 20, 26, 32 — six numbers, each exactly six apart. Pinning turns one wedge of the wheel into a statement: this is a single residue class, an arithmetic progression wrapped into a slice.
-
-Pinning is also the way to compare classes: pin one, read its members, then pin its neighbor and watch every number shift by exactly one. The only slice that answers differently is the starred one — see [the zero class](!#the-zero-class-why-its-special).`,
+      after: ``,
       link: '',
     },
 
@@ -642,7 +634,7 @@ Pinning is also the way to compare classes: pin one, read its members, then pin 
 
 The emphasis is mathematical, not cosmetic. The zero class is the **principal class**:
 
-• It contains the integer $0$, which is the [additive identity](!#equivalence-classes-and-their-structure) of $\\mathbb{Z}/n\\mathbb{Z}$.
+• It contains the integer $0$, which is the additive identity of $\\mathbb{Z}/n\\mathbb{Z}$.
 
 • It's the only class where *divisibility by $n$* is true — every member is an exact multiple of $n$.
 
@@ -652,11 +644,9 @@ The emphasis is mathematical, not cosmetic. The zero class is the **principal cl
 
 • It's the kernel of the canonical map $\\mathbb{Z} \\to \\mathbb{Z}/n\\mathbb{Z}$ — the integers that get sent to $0$ under modular reduction.
 
-For applications, the zero class is what you test for divisibility, what triggers modular conditions like *check if $n$ is a multiple of $7$*, and what determines whether a number has a [multiplicative inverse](!#related-concepts) in $\\mathbb{Z}/n\\mathbb{Z}$ (nonzero residues coprime to $n$ do; zero never does).`,
+For applications, the zero class is what you test for divisibility, what triggers modular conditions like *check if $n$ is a multiple of $7$*, and what determines whether a number has an inverse in $\\mathbb{Z}/n\\mathbb{Z}$ (nonzero residues coprime to $n$ do; zero never does).`,
       before: ``,
-      after: `The frozen frame above has the principal class pinned after a full run: 6, 12, 18, 24, 30, 36 sit in the gold-edged slice — the multiples of 6, and nothing else. Every divisibility question about 6 is a question about membership in this one slice.
-
-The gold styling repays attention during a run, too: each time the placement crosses twelve o'clock, the number landing there is exactly a multiple of the modulus, and the *now placing* log flags it. Divisibility stops being a property you compute and becomes a place on the wheel.`,
+      after: ``,
       link: '',
     },
 
@@ -672,15 +662,13 @@ Try these comparisons:
 
 • **Divisor $2$** — split into even and odd halves. Class $0$ = evens, class $1$ = odds.
 
-• **Divisor $5$** — slice $r$ holds every integer whose last digit is $r$ or $r + 5$. The closest this wheel gets to reading off last digits directly (a mod-$10$ wheel would do it exactly, but the divisor grid stops at $9$).
+• **Divisor $10$** — slice $r$ holds every integer whose last digit is $r$. Useful intuition for base-$10$ digit patterns.
 
-• **Divisor $7$** — counting from $1$ takes seven numbers to complete one row across all slices. Mimics the [day-of-week shift](!#what-is-modular-arithmetic).
+• **Divisor $7$** — counting from $1$ takes seven numbers to complete one row across all slices. Mimics the day-of-week shift.
 
 • **Same number, different divisors** — keep the count fixed at $30$ and step through divisors $2$ to $9$ to see how class sizes change.`,
       before: ``,
-      after: `The frozen frame above is the divisor-2 wheel after counting to 20: two half-circles, evens in the starred half, odds opposite, ten numbers each. Parity — the oldest classification in arithmetic — is just modular arithmetic at its smallest modulus, and the wheel draws it as a coin with two faces.
-
-Changing the divisor is the tool's most instructive move: the same integers exist either way, but the wheel repartitions them completely. Nothing about a number changes; only the question asked of it does. How the classes balance out at the end of a run is taken up under [reading a complete run](!#reading-a-complete-run).`,
+      after: ``,
       link: '',
     },
 
@@ -688,15 +676,15 @@ Changing the divisor is the tool's most instructive move: the same integers exis
       title: `Right Panel Context`,
       content: `The right panel adapts to whichever phase the visualization is in:
 
-• **Overview (idle)** — appears [before the first run](!#getting-started). Confirms which divisor is selected and prompts you to press Run.
+• **Overview (idle)** — appears before the first run. Confirms which divisor is selected and prompts you to press Run.
 
-• **Now placing (running)** — shows the [most recent number](!#run-controls-and-speed), its division arithmetic ($n \\div d = q$ remainder $r$), which class it landed in, and which row within that class. [Zero-class hits](!#the-zero-class-why-its-special) get a *divisible by $n$* accent.
+• **Now placing (running)** — shows the most recent number, its division arithmetic ($n \\div d = q$ remainder $r$), which class it landed in, and which row within that class. Zero-class hits get a *divisible by $n$* accent.
 
-• **Class details (hover/pin)** — appears whenever a slice is [hovered or pinned](!#hovering-and-pinning-classes). Shows the formula, first eight examples, and any run-placed numbers in this class.
+• **Class details (hover/pin)** — appears whenever a slice is hovered or pinned. Shows the formula, first eight examples, and any run-placed numbers in this class.
 
-• **Run complete (summary)** — appears [after the count target is reached](!#reading-a-complete-run). Lists the divisible numbers in the zero class as the headline, then a grid showing the count per class.
+• **Run complete (summary)** — appears after the count target is reached. Lists the divisible numbers in the zero class as the headline, then a grid showing the count per class.
 
-Below the adaptive box sits a static **deep-dive section** with five collapsible-looking subsections: *What is modular arithmetic*, *Equivalence classes*, *The zero class — why it's special*, *How to read this wheel*, and [Try this](!#adjusting-divisor-and-count). These are always available and don't change with state — they're reference material to read alongside experimenting on the wheel.`,
+Below the adaptive box sits a static **deep-dive section** with five collapsible-looking subsections: *What is modular arithmetic*, *Equivalence classes*, *The zero class — why it's special*, *How to read this wheel*, and *Try this*. These are always available and don't change with state — they're reference material to read alongside experimenting on the wheel.`,
       before: ``,
       after: ``,
       link: '',
@@ -718,13 +706,13 @@ Examples:
 
 • **Days of the week** are mod $7$. If today is Wednesday, day $100$ from now is Wednesday $+ 100 \\bmod 7 = $ Wednesday $+ 2$ = Friday.
 
-• [Parity](!#adjusting-divisor-and-count) is mod $2$. *Even* means $\\equiv 0 \\pmod 2$; *odd* means $\\equiv 1 \\pmod 2$.
+• **Parity** is mod $2$. *Even* means $\\equiv 0 \\pmod 2$; *odd* means $\\equiv 1 \\pmod 2$.
 
 • **Cryptography** — RSA, Diffie-Hellman, elliptic-curve protocols all operate in $\\mathbb{Z}/p\\mathbb{Z}$ or $\\mathbb{Z}/n\\mathbb{Z}$ for very large $n$.
 
 • **Hashing and indexing** — converting arbitrary integers into a fixed range $\\{0, \\dots, n - 1\\}$ is exactly modular reduction.
 
-The operations of addition, subtraction, and multiplication on classes are well-defined: $(a + b) \\bmod n = ((a \\bmod n) + (b \\bmod n)) \\bmod n$, and likewise for multiplication. Division ([modular inverse](!#related-concepts)) exists only when $\\gcd(a, n) = 1$.
+The operations of addition, subtraction, and multiplication on classes are well-defined: $(a + b) \\bmod n = ((a \\bmod n) + (b \\bmod n)) \\bmod n$, and likewise for multiplication. Division (modular inverse) exists only when $\\gcd(a, n) = 1$.
 
 For deeper coverage, see the **modular arithmetic** section on the number theory page.`,
       before: ``,
@@ -758,7 +746,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
 • When $n$ is composite, some classes are **zero divisors**: nonzero $[a], [b]$ with $[a] \\cdot [b] = [0]$. For instance, in $\\mathbb{Z}/6\\mathbb{Z}$, $[2] \\cdot [3] = [6] = [0]$.
 
-[The wheel](!#the-wheel-and-slices) visualizes the additive structure: shifting all numbers by $+1$ rotates everything one slice clockwise. Multiplicative structure is harder to picture but underlies most applications.`,
+The wheel visualizes the additive structure: shifting all numbers by $+1$ rotates everything one slice clockwise. Multiplicative structure is harder to picture but underlies most applications.`,
       before: ``,
       after: ``,
       link: '',
@@ -788,19 +776,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
       link: '',
     },
 
-    obj11: {
-      title: `Reading a Complete Run`,
-      content: `When the last number lands, the right panel switches to its *run complete* summary: the divisible numbers — the contents of the [zero class](!#the-zero-class-why-its-special) — as the headline, then a small grid counting the members of every class.
-
-For the default run of $36$ with divisor $6$, the wheel finishes perfectly balanced: six full rows in every slice, exactly six numbers per class. That is no accident — $36$ is a multiple of $6$, so the count 1 through 36 completes whole laps of the wheel.
-
-The counts can never be lopsided by much. Counting $1$ through $N$ deals numbers to the slices in strict rotation, so any two classes differ by at most one member.`,
-      before: ``,
-      after: `The near-balance has a precise form. Write $N = qn + r$; then classes $1$ through $r$ hold $q + 1$ numbers and the rest hold $q$. Try counting to $20$ with divisor $6$: classes 1 and 2 collect four members, every other class three — and the zero class gets exactly $\\lfloor 20/6 \\rfloor = 3$, namely 6, 12, 18.
-
-This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-and-their-structure): $n$ boxes, dealt in rotation, can never be unfair by more than a single card. Change the divisor and rerun to watch the same fairness reassert itself over different slices.`,
-      link: '',
-    },
+    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
@@ -922,43 +898,12 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
   }
 
 
-  // Frozen-state framed units (Line 1): the tool's panel phases + the parity wheel.
-  const d = modPieWheelDiagrams;
-  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
-  const stateUnits = {
-    idle: u('idle', 'mod 6, idle, frozen',
-      'Six empty slices around the mod 6 hub, the zero class starred at twelve o’clock. Nothing is placed yet — the wheel is pure structure.'),
-    running: u('running', 'mod 6, placing 17, frozen',
-      'Seventeen numbers in: 17 ÷ 6 = 2 remainder 5, so 17 has just landed in class 5, row 3 — the third number to leave that remainder.'),
-    classDetail: u('classDetail', 'mod 6, class 2 pinned, frozen',
-      'The darkened slice collects 2, 8, 14, 20, 26, 32 — every number of the form 6k + 2, each exactly six apart.'),
-    zeroPinned: u('zeroPinned', 'mod 6, zero class pinned, frozen',
-      'The gold-edged slice holds 6, 12, 18, 24, 30, 36 — the multiples of 6, the only class where divisibility is true.'),
-    summary: u('summary', 'mod 6, run complete, frozen',
-      'All 36 numbers placed: six full rows in every slice, six per class — perfectly balanced, because 36 is a multiple of 6.'),
-    parity: u('parity', 'mod 2, 20 placed, frozen',
-      'Two half-circles: evens in the starred half, odds opposite, ten each. Parity is the smallest modulus, drawn as a coin with two faces.'),
-  };
-
-  // Per-state panel explanations (Line 1). Rendered between the context box and
-  // the deep-dive in the right panel through processContent — !# anchors work.
-  const explanations = {
-    idle: `The wheel is set: one slice per remainder class, the zero class starred at the top. Press Run and the integers will sort themselves. [Learn more about getting started](!#getting-started) · [Panel modes](!#right-panel-context)`,
-    running: `Each tick places one number: divide by the modulus, keep the remainder, drop it in that slice — rows grow outward from the center. [Learn more about the run controls](!#run-controls-and-speed) · [Panel modes](!#right-panel-context)`,
-    classDetail: `A pinned slice is one residue class: every number in it leaves the same remainder, so its members sit exactly one modulus apart on the number line. [Learn more about hovering and pinning](!#hovering-and-pinning-classes) · [Panel modes](!#right-panel-context)`,
-    zeroPinned: `You pinned the principal class: the multiples of the modulus, the only slice where divisibility holds — and the identity of the ring of classes. [Learn more about the zero class](!#the-zero-class-why-its-special) · [Panel modes](!#right-panel-context)`,
-    summary: `The run is complete: every integer up to the target found exactly one slice, and no two classes differ by more than one member. [Learn more about reading a complete run](!#reading-a-complete-run) · [Panel modes](!#right-panel-context)`,
-    parity: `Divisor 2 is parity made visible: the wheel splits into even and odd halves, alternating one number at a time. [Learn more about changing the divisor](!#adjusting-divisor-and-count) · [Panel modes](!#right-panel-context)`,
-  };
-
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
-      stateUnits,
-      explanations,
       seoData: {
         title: "Modular Arithmetic Visualizer: a mod n | Learn Math Class",
         description: "Visualize modular arithmetic on a pie wheel: numbers 1 to N sort into n remainder classes mod n, with the zero class (multiples of n) highlighted as principal.",
@@ -974,40 +919,99 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
   }
 }
 
-export default function ModularWheelVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function ModularWheelVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
-  // Helper rows: plain section / per-state section carrying its frozen unit
-  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
-  const plain = (obj, id) => ({
-    id,
-    title: sectionsContent[obj].title,
-    link: sectionsContent[obj].link,
-    content: [sectionsContent[obj].content]
-  })
-  const stateRow = (obj, id, unitKey) => ({
-    id,
-    title: sectionsContent[obj].title,
-    link: sectionsContent[obj].link,
-    content: [
-      sectionsContent[obj].content,
-      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
-      sectionsContent[obj].after,
-    ]
-  })
 
   const genericSections = [
-    plain('obj0', 'key-terms'),
-    stateRow('obj1', 'getting-started', 'idle'),
-    plain('obj2', 'the-wheel-and-slices'),
-    stateRow('obj3', 'run-controls-and-speed', 'running'),
-    stateRow('obj4', 'hovering-and-pinning-classes', 'classDetail'),
-    stateRow('obj5', 'the-zero-class-why-its-special', 'zeroPinned'),
-    stateRow('obj6', 'adjusting-divisor-and-count', 'parity'),
-    plain('obj7', 'right-panel-context'),
-    stateRow('obj11', 'reading-a-complete-run', 'summary'),
-    plain('obj8', 'what-is-modular-arithmetic'),
-    plain('obj9', 'equivalence-classes-and-their-structure'),
-    plain('obj10', 'related-concepts'),
+    {
+      id: '0',
+      title: sectionsContent.obj0.title,
+      link: sectionsContent.obj0.link,
+      content: [
+        sectionsContent.obj0.content,
+      ]
+    },
+    {
+      id: '1',
+      title: sectionsContent.obj1.title,
+      link: sectionsContent.obj1.link,
+      content: [
+        sectionsContent.obj1.content,
+      ]
+    },
+    {
+      id: '2',
+      title: sectionsContent.obj2.title,
+      link: sectionsContent.obj2.link,
+      content: [
+        sectionsContent.obj2.content,
+      ]
+    },
+    {
+      id: '3',
+      title: sectionsContent.obj3.title,
+      link: sectionsContent.obj3.link,
+      content: [
+        sectionsContent.obj3.content,
+      ]
+    },
+    {
+      id: '4',
+      title: sectionsContent.obj4.title,
+      link: sectionsContent.obj4.link,
+      content: [
+        sectionsContent.obj4.content,
+      ]
+    },
+    {
+      id: '5',
+      title: sectionsContent.obj5.title,
+      link: sectionsContent.obj5.link,
+      content: [
+        sectionsContent.obj5.content,
+      ]
+    },
+    {
+      id: '6',
+      title: sectionsContent.obj6.title,
+      link: sectionsContent.obj6.link,
+      content: [
+        sectionsContent.obj6.content,
+      ]
+    },
+    {
+      id: '7',
+      title: sectionsContent.obj7.title,
+      link: sectionsContent.obj7.link,
+      content: [
+        sectionsContent.obj7.content,
+      ]
+    },
+    {
+      id: '8',
+      title: sectionsContent.obj8.title,
+      link: sectionsContent.obj8.link,
+      content: [
+        sectionsContent.obj8.content,
+      ]
+    },
+    {
+      id: '9',
+      title: sectionsContent.obj9.title,
+      link: sectionsContent.obj9.link,
+      content: [
+        sectionsContent.obj9.content,
+      ]
+    },
+    {
+      id: '10',
+      title: sectionsContent.obj10.title,
+      link: sectionsContent.obj10.link,
+      content: [
+        sectionsContent.obj10.content,
+      ]
+    },
+
   ]
 
   return (
@@ -1065,7 +1069,7 @@ export default function ModularWheelVisualizer({seoData, sectionsContent, introC
       <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Modular Wheel</h1>
       <br/>
       <div style={{transform:'scale(0.9)'}}>
-        <ModPieWheel explanations={explanations}/>
+        <ModPieWheel/>
       </div>
       <br/>
       <SectionTableOfContents sections={genericSections}

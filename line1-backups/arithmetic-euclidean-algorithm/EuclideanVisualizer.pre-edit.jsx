@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { processContent } from '@/app/utils/contentProcessor'
 
 // ----------------------------------------------------------------------------
 // EuclideanVisualizer (v2) — friendlier standalone Next.js component.
@@ -107,7 +106,7 @@ function randPair() {
 }
 
 // ---------- Component ----------
-export default function EuclideanVisualizer({ explanations = null }) {
+export default function EuclideanVisualizer() {
   const [aStr, setAStr] = useState('252')
   const [bStr, setBStr] = useState('105')
   const [hover, setHover] = useState(null) // index of remainder being hovered
@@ -131,28 +130,6 @@ export default function EuclideanVisualizer({ explanations = null }) {
 
   const muted = 'var(--color-text-secondary, #6b6b6b)'
   const neutral = 'var(--color-text-primary, #1a1a1a)'
-
-  // Line 1: state key for the hoisted explanations - specials first (equal
-  // inputs, the Fibonacci worst case), then exact value-match against the
-  // preset pairs on the swapped (hi, lo); custom input shows nothing.
-  const stateKey = !ready
-    ? null
-    : a === b
-      ? 'equal'
-      : hi === 144 && lo === 89
-        ? 'fibonacci'
-        : hi === 252 && lo === 105
-          ? 'classic'
-          : hi === 462 && lo === 198
-            ? 'quickFinish'
-            : hi === 1071 && lo === 462
-              ? 'textbook'
-              : hi === 84 && lo === 56
-                ? 'shortCase'
-                : hi === 54 && lo === 35
-                  ? 'coprime'
-                  : null
-  const stateEntry = (explanations && stateKey && explanations[stateKey]) || null
 
   const applyPair = (pa, pb) => {
     setAStr(String(pa))
@@ -447,22 +424,6 @@ export default function EuclideanVisualizer({ explanations = null }) {
               ))}
             </ol>
             <p className="ev-gloss">GCD is the last nonzero remainder.</p>
-            {stateEntry && (
-              <div
-                style={{
-                  marginTop: '12px',
-                  padding: '10px 12px',
-                  background: 'rgba(127, 119, 221, 0.07)',
-                  borderLeft: `3px solid ${C.primary}`,
-                  borderRadius: '8px',
-                  fontSize: '13px',
-                  lineHeight: '1.55',
-                  color: 'var(--color-text-primary, #1a1a1a)',
-                }}
-              >
-                {processContent(stateEntry)}
-              </div>
-            )}
           </aside>
         )}
       </div>

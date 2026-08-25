@@ -10,6 +10,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1050,69 +1051,40 @@ The mode works best when probability genuinely concentrates at identifiable peak
   after: ``,
   link: '',
 },
-  obj11: {
-  title: `Notation`,
-  content: `
-The mode has several standard notations used across probability and statistics literature.
-
-## Common Notations
-
-The most widely used notation is:
-
-$$\\text{mode}(X)$$
-
-This explicitly labels the measure being computed.
-
-Alternative notations include:
-
-$$\\text{Mo}(X)$$
-
-A compact abbreviation.
-
-$$M_o$$
-
-Used in some texts, though less common due to potential confusion with other $M$ symbols.
-
-## Relationship to Argmax
-
-The mode is mathematically expressed using the argument of the maximum:
-
-For discrete distributions:
-
-$$\\text{mode}(X) = \\arg\\max_k P(X = k)$$
-
-For continuous distributions:
-
-$$\\text{mode}(X) = \\arg\\max_x f(x)$$
-
-The $\\arg\\max$ notation means "the argument (value) that maximizes the function."
-
-## Multiple Modes
-
-When multiple values share the maximum probability, notation may indicate this by returning a set:
-
-$$\\text{mode}(X) = \\{k_1, k_2, \\ldots, k_m\\}$$
-
-Or by explicitly stating bimodal/multimodal nature in text rather than notation.
-
-## In Statistical Context
-
-Sample mode (from data) vs population mode (from distribution) may be distinguished:
-
-$\\hat{M}_o$ or $\\text{mode}(\\text{sample})$ for the observed mode
-
-$M_o$ or $\\text{mode}(X)$ for the theoretical population mode
-
-Context usually makes this distinction clear without special notation.
-
-## No Universal Standard
-
-Unlike mean ($\\mu$ or $E[X]$) and variance ($\\sigma^2$ or $\\text{Var}(X)$), the mode lacks a single universally adopted symbol. Different sources use different conventions.
-
-Always define your notation explicitly when writing technical work to avoid confusion.
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-  `,
+  notation: {
+  title: `Mode Notation`,
+  lead: `Like the [median](!/probability/median#12), the mode never earned one settled symbol — but it did earn an operator all its own: the mark that asks not how high the peak is, but where it stands. This section fixes the operator spellings, the arg max that defines them, and the set braces that appear when the peak is shared. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+  inherited: `$P(\\cdot)$ and $P(X = k)$ come from the [probability function](!/probability/probability-function#notation) and [random variable notation](!/probability/random-variables#notation); the density $f$ from the [probability function](!/probability/probability-function#notation)'s mass/density split; the mean's $\\mu$ and $E[X]$ from [expected value notation](!/probability/expected-value#notation).`,
+  entries: [
+    {
+      id:'mode-operator',
+      tex:`$\\operatorname{mode}(X)$, $\\operatorname{Mo}(X)$, $M_o$`,
+      read:`the mode of X`,
+      means:`The operator spelling written out or abbreviated, and the letter form $M_o$ with a subscript "o" — the letter variant travels poorly, since $M$ already works as a maximum, a bound and a matrix elsewhere. Like the [median](!/probability/median#12), the mode has **no universally adopted symbol**; sources define their own, and careful reading starts by checking which convention is in force.`,
+      cases:`The sample/population split hats the letter: $\\hat{M}_o$ for the mode observed in data against $M_o$ for the distribution's own — the estimate hat of the [two-hats convention](!/linear-algebra/vectors/magnitude#notation), the same story $\\bar{x}$ tells against the [population mean](!/probability/expected-value#notation).`,
+      confusedWith:`$M$ at its other jobs. In the same text $M$ may be a supremum bound or a moment cap; only the subscript "o" — and often only the surrounding sentence — marks the mode.`,
+    },
+    {
+      id:'arg-max',
+      tex:`$\\operatorname{mode}(X) = \\arg\\max_x f(x)$`,
+      read:`the argument that maximizes f — the location of the peak, not its height`,
+      means:`$\\max f$ returns how high the peak is; $\\arg\\max f$ returns **where it stands** — the mode is the second kind of answer. The underscript names the variable being searched; discrete distributions swap the density for the mass, $\\arg\\max_k P(X = k)$.`,
+      cases:`The same operator runs Bayesian statistics: the [posterior](!/probability/bayes-theorem#notation)'s mode is the MAP estimate, $\\hat{\\theta} = \\arg\\max_\\theta \\pi(\\theta \\mid x)$ — one notation serving both a descriptive statistic and an estimation principle.`,
+      confusedWith:`$\\max$ itself. Reading $\\arg\\max_x f(x)$ as the maximum value swaps a location on the $x$-axis for a height on the $y$-axis — the two agree in neither units nor meaning, and the "arg" prefix is the only mark separating them.`,
+    },
+    {
+      id:'set-valued-mode',
+      tex:`$\\operatorname{mode}(X) = \\{k_1, \\ldots, k_m\\}$`,
+      read:`the modes of X — plural, as a set`,
+      means:`When several values tie for the highest probability, the operator returns a set: braces signal that "the" mode is not unique. Prose carries the same information as vocabulary — unimodal, bimodal, multimodal — where formulas use the braces.`,
+      cases:`A uniform distribution is the degenerate extreme: every value ties, and the set-valued answer becomes the whole support — which is why "the mode" is only quoted for distributions with an actual peak; the [mean and median](!/probability/median#12) never need this escape hatch, since averaging and halving always produce one number.`,
+      confusedWith:`A mode that does not exist versus modes that are many. An empty peak (nothing stands out) and a shared peak (several values stand out equally) both break uniqueness, but only the second returns a usable set — flattening the distinction misreads uniform data as "having modes".`,
+    },
+  ],
+  symbolsHref: `/math-symbols/probability`,
+  symbolsLabel: `All probability symbols`,
+  parentHref: `/probability`,
+  parentLabel: `Probability`,
   before: ``,
   after: ``,
   link: '',
@@ -1580,10 +1552,21 @@ export default function ModePage({
     },
     {
         id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-          sectionsContent.obj11.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

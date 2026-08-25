@@ -728,6 +728,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1022,7 +1023,7 @@ Let $\\bar X_n$ denote their sample mean.
 
 As the sample size $n$ increases, the standardized sample mean converges in distribution to a normal [random variable](!/probability/random-variables):
 
-$\\displaystyle (\\bar X_n - \\mu)\, / \, (\\sigma / \\sqrt{n}) \;\\xrightarrow{d}\; \\mathcal{N}(0,1)$
+$\\displaystyle (\\bar X_n - \\mu)\\, / \\, (\\sigma / \\sqrt{n}) \;\\xrightarrow{d}\; \\mathcal{N}(0,1)$
 
 This result does not depend on the shape of the original distribution.  
 Only [independence](!/probability/independence), identical distribution, and finite [variance](!/probability/variance) are required.
@@ -1037,8 +1038,8 @@ Only [independence](!/probability/independence), identical distribution, and fin
     obj2:{
       title:`What the Theorem Is Really Describing`,
       content:`
-The Central Limit Theorem is not concerned with individual outcomes or single measurements.  
-Instead, it describes the behavior of the *distribution of averages* formed from many observations.
+The Central Limit Theorem is not concerned with individual outcomes or single measurements.
+Instead, it describes the behavior of the **distribution of averages** formed from many observations.
 
 Even when the original [random variable](!/probability/random-variables) has a skewed, irregular, or discrete distribution, the distribution of the sample mean becomes approximately normal once the sample size is sufficiently large. As the number of observations increases, this distribution moves closer to the familiar bell-shaped curve.
 
@@ -1065,19 +1066,59 @@ The Central Limit Theorem involves several distinct objects, each playing a diff
 
 * **Sample mean** ($\\bar X_n$) 
   The average of the sample values,
-  $[ \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i, ]$
+  $\\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$,
   which is itself a [random variable](!/probability/random-variables).
 
 * **Limiting normal distribution**  
   The [normal distribution](!/probability/distributions/continuous#normal) that the standardized sample mean approaches in distribution as $n$ increases.
 
-The theorem does not describe how individual observations behave.  
+The theorem does not describe how individual observations behave.
 It describes how the **distribution of the sample mean** behaves as the sample size grows. The table below collects these objects with their notation and the role each plays in the theorem.
 `,
       before:``,
       after:``,
       link:'',
-  
+
+    },
+
+    notation:{
+      title:`Central Limit Theorem Notation`,
+      lead:`The theorem's statement packs three layers of marks into one line: an average that is itself a random variable, an arrow that carries convergence of distributions rather than numbers, and a standardization whose denominator earned its own name. **Objects Involved in the Theorem** above sorts the roles; this section fixes the marks. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$X_1, \\dots, X_n$, the capital/lowercase split and the i.i.d. declaration come from [random variable](!/probability/random-variables#notation) and [independence notation](!/probability/independence#notation); $\\mu$ and $\\sigma^2$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation); the family form $N(\\mu, \\sigma^2)$ from [distribution notation](!/probability/distributions#notation); the summation sign from [sequence notation](!/algebra/sequences/arithmetic#notation).`,
+      entries:[
+        {
+          id:'sample-mean-bar',
+          tex:`$\\bar{X}_n$, $S_n$`,
+          read:`X-bar-sub-n — the sample mean of n observations; S-sub-n — their sum`,
+          means:`The data-average bar lifted to a random variable: capital $X$ under the bar means the average is itself random, and the subscript $n$ keeps the sample size in view — the whole theorem is about what happens as that subscript grows. The partial sum $S_n = \\sum_{i=1}^n X_i$ is its sibling spelling, with $\\bar{X}_n = S_n / n$.`,
+          cases:`The theorem wears both: the mean form concentrates while the sum form spreads — $S_n$ is approximately $N(n\\mu,\\, n\\sigma^2)$ while $\\bar{X}_n$ is approximately $N(\\mu,\\, \\sigma^2/n)$ — same statement, rescaled; texts pick whichever makes their application's arithmetic cleaner.`,
+          confusedWith:`$\\bar{x}$ the number. Lowercase $\\bar{x}$ is one computed average from one data set; capital $\\bar{X}_n$ is the random variable ranging over every sample that might have been drawn — the [capital/lowercase convention](!/probability/random-variables#notation) doing its most important job on this page.`,
+        },
+        {
+          id:'converges-in-distribution',
+          tex:`$\\xrightarrow{d}$`,
+          read:`converges in distribution, as n grows`,
+          means:`An arrow with a rider: the $d$ says what converges is the **distribution** — the histogram's shape — not the values themselves. It is the moving version of the [equality in distribution](!/probability/distributions#notation) mark $\\overset{d}{=}$: one compares two laws, the other tracks a sequence of laws approaching a limit.`,
+          alsoWritten:`$\\xrightarrow{D}$ with a capital rider; $\\Rightarrow$ — the bare double arrow of weak convergence in advanced probability texts, no rider at all; some sources write the limit variable over the arrow instead.`,
+          confusedWith:`The plain limit arrow. $\\bar{X}_n \\to \\mu$ (the law of large numbers' statement) drives values to a constant; $\\xrightarrow{d}$ preserves a whole spread-out limit shape — reading the CLT's arrow as a plain limit collapses the bell curve the theorem exists to deliver.`,
+        },
+        {
+          id:'standardization-anatomy',
+          tex:`$Z_n = \\dfrac{\\bar{X}_n - \\mu}{\\sigma / \\sqrt{n}}$, $\\mathcal{N}(0,1)$`,
+          read:`the standardized sample mean — and the standard normal it approaches`,
+          means:`Subtract the center, divide by the spread: the numerator recenters at zero, and the denominator $\\sigma/\\sqrt{n}$ — the **standard error** of the mean, a mark with its own name — rescales to unit spread, which is why the limit's slots hold $(0, 1)$. **Why Scaling by the Square Root Matters** below tells the story behind the $\\sqrt{n}$.`,
+          cases:`Calligraphic $\\mathcal{N}$ and plain $N$ name the same family — a typographic preference, not a distinction; for finite $n$ the exact arrow statement is often traded for the approximation idiom, $\\bar{X}_n \\approx N(\\mu, \\sigma^2/n)$, precise enough for practice and silent about the limit.`,
+          confusedWith:`The standard error with the variance slot. $\\sigma/\\sqrt{n}$ is a standard deviation while $\\sigma^2/n$ is a variance — the same [second-slot convention trap](!/probability/distributions#notation) as $N(\\mu, \\sigma^2)$ vs $N(\\mu, \\sigma)$, and mixing them mis-scales every interval built on the theorem.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
+      before:``,
+      after:``,
+      link:'',
+
     },
     obj4:{
       title:`Visual Intuition`,
@@ -1110,7 +1151,7 @@ These visuals highlight the core message of the theorem:
       content:`
 As more observations are averaged together, the variability of the sample mean naturally decreases. Larger samples produce more stable averages, with less random fluctuation from one sample to another.
 
-If we looked at the raw sample mean alone, this shrinking variability would eventually hide all randomness. Scaling by $\sqrt{n}$ counteracts this effect by keeping the spread of the distribution at a visible, meaningful scale.
+If we looked at the raw sample mean alone, this shrinking variability would eventually hide all randomness. Scaling by $\\sqrt{n}$ counteracts this effect by keeping the spread of the distribution at a visible, meaningful scale.
 
 The factor $\\sigma / \\sqrt{n}$ reflects how uncertainty decreases with sample size. It captures the rate at which averaging reduces variability and explains why this term appears in the standardized form of the theorem.
 
@@ -1159,10 +1200,10 @@ The Central Limit Theorem is often misunderstood. The following clarifications a
 * **"The theorem works for any small sample."**  
   There is no universal sample size at which the approximation becomes accurate. The required size depends on the shape of the original distribution.
 
-* **"The theorem is only about sums."**  
-  While sums appear in the mathematics, the meaningful object is the average. The scaling by $\sqrt{n}$ is what reveals the limiting behavior.
+* **"The theorem is only about sums."**
+  While sums appear in the mathematics, the meaningful object is the average. The scaling by $\\sqrt{n}$ is what reveals the limiting behavior.
 
-* **"Normal data are required."**  
+* **"Normal data are required."**
   Normality of the original distribution is not an assumption. Skewed, discrete, and irregular distributions can all satisfy the theorem's conditions.
 
 The table below sets each misconception alongside the corresponding correct view so the contrasts are easy to scan.
@@ -1185,7 +1226,7 @@ In short:
 - **LLN** → the sample mean **converges to a number** (deterministic behavior)
 - **CLT** → the sample mean **follows a distribution** (probabilistic behavior)
 
-Both involve averaging, both require large samples, but they reveal different aspects of how randomness behaves at scale. The LLN tells us *where* the mean goes; the CLT tells us *how* it gets there. The table below sets the two theorems side by side across the aspects that most often get confused.`,
+Both involve averaging, both require large samples, but they reveal different aspects of how randomness behaves at scale. The LLN tells us **where** the mean goes; the CLT tells us **how** it gets there. The table below sets the two theorems side by side across the aspects that most often get confused.`,
       before:``,
       after:``,
       link:'',
@@ -1378,6 +1419,25 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj3Table}}/>,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

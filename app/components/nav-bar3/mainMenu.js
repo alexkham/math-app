@@ -1,6 +1,6 @@
 /**
  * Auto-generated from sitemap.xml
- * Generated: 2026-08-24T14:54:25.920Z
+ * Generated: 2026-08-25T13:52:52.988Z
  * Total pages: 562
  * 
  * To regenerate: node generateNavFromSitemap.js
@@ -749,6 +749,10 @@ export const mainMenuStructure = [
             "href": "/visual-tools/fractions-visualizer"
           },
           {
+            "label": "Functions Signs",
+            "href": "/trigonometry/visual-tools/functions-signs"
+          },
+          {
             "label": "Gauss Elimination",
             "href": "/visual-tools/gauss-elimination"
           },
@@ -983,6 +987,10 @@ export const mainMenuStructure = [
           {
             "label": "Equivalence Validator",
             "href": "/logic/propositional-logic/semantics/equivalence-validator"
+          },
+          {
+            "label": "Linear",
+            "href": "/algebra/calculators/equations/linear"
           }
         ]
       },

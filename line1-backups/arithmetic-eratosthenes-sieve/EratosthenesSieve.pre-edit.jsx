@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { processContent } from '@/app/utils/contentProcessor';
 
-const EratosthenesSieve = ({ explanations = null }) => {
+const EratosthenesSieve = () => {
   const MAX = 100;
   
   const primeColors = {
@@ -252,15 +251,6 @@ const EratosthenesSieve = ({ explanations = null }) => {
 
   const numbers = Array.from({ length: MAX }, (_, i) => i + 1);
 
-  // Line 1: state key for the hoisted explanations - the algorithm's stage:
-  // idle, one key per prime sweep (2, 3, 5, 7), or done.
-  const stateKey = phase === 'done'
-    ? 'done'
-    : activeDivisors.length === 0
-      ? 'idle'
-      : `sieve${activeDivisors[activeDivisors.length - 1]}`;
-  const stateEntry = (explanations && explanations[stateKey]) || null;
-
   return (
     <div style={styles.container}>
       <div style={styles.mainLayout}>
@@ -438,12 +428,6 @@ const EratosthenesSieve = ({ explanations = null }) => {
                   <br />
                   <strong>{primesCount}</strong> primes, <strong>{compositesCount}</strong> composites.
                 </div>
-              </div>
-            )}
-
-            {stateEntry && (
-              <div style={styles.stateExplanation}>
-                {processContent(stateEntry)}
               </div>
             )}
           </div>
@@ -695,16 +679,6 @@ const styles = {
     background: '#f0fdf4',
     borderRadius: '8px',
     border: '1px solid #bbf7d0',
-  },
-  stateExplanation: {
-    marginTop: '12px',
-    padding: '12px',
-    background: '#f8fafc',
-    borderLeft: '3px solid #3b82f6',
-    borderRadius: '8px',
-    fontSize: '0.8rem',
-    color: '#1e3a5f',
-    lineHeight: '1.5',
   },
   completeIcon: {
     width: '24px',

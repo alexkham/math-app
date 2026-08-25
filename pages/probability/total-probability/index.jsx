@@ -939,6 +939,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1355,44 +1356,43 @@ Each case contributes its share, and those shares sum to give the complete pictu
     },
   
     notation:{
-  
-      title:`Useful Notation`,
-      content:`
-Before expressing the phenomenon formally, we need notation for the key pieces.
 
-**The event of interest:**
-Call it $A$. This is what you're trying to find the probability of.
-
-**The cases (partition):**
-Call them $B₁, B₂, ..., Bₙ$. These are the distinct scenarios that divide the sample space.
-
-Key properties:
-• They're disjoint (no overlap — only one can occur)
-• They're exhaustive (together they cover everything)
-• Exactly one of them happens
-
-**Conditional pieces:**
-$P(A | Bᵢ)$ is the probability of $A$ given that case $Bᵢ$ occurred. This captures how likely $A$ is within that specific scenario.
-
-**Weights:**
-$P(Bᵢ)$ is the probability that case $Bᵢ$ occurs. This tells you how much that scenario contributes to the total.
-
-**Sum notation:**
-When we add contributions from all cases, we write:
-$∑$ (sum over all $i$)
-
-That's the notation toolkit. Each piece has a clear meaning:
-• $A$ is what you want
-• The $Bᵢ$ are the cases
-• $P(A | Bᵢ)$ is $A$'s probability within case $i$
-• $P(Bᵢ)$ is the weight of case $i$
-
-Next, we combine these pieces into the formal law.
-
-`,
+      title:`Total Probability Notation`,
+      lead:`The law's marks are the machinery of splitting: the two conditions that make a family of cases a partition, the sum whose every term is one branch of a tree, and the integral the sum becomes when the cases refine to single values. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$P(\\cdot)$ and the given-bar come from the [probability function](!/probability/probability-function#notation) and [conditional probability notation](!/probability/conditional-probability#notation); $\\Omega$ from [sample space notation](!/probability/sample-space#notation); plain $\\cup$, $\\cap$, $\\emptyset$ and complements from [set operations](!/set-theory/operations#notation); the summation sign from [sequence notation](!/algebra/sequences/arithmetic#notation).`,
+      entries:[
+        {
+          id:'partition-marks',
+          tex:`$\\bigcup_{i=1}^{n} B_i = \\Omega$, $B_i \\cap B_j = \\emptyset$`,
+          read:`the cases tile the sample space: together they cover it, pairwise they never overlap`,
+          means:`The words "disjoint and exhaustive" from **Splitting a Probability Across Cases** above, written as marks: the enlarged [union](!/set-theory/operations#notation) with index limits collects every case into the whole [sample space](!/probability/sample-space#notation), and the empty pairwise [intersection](!/set-theory/operations#notation) forbids overlap.`,
+          cases:`The overlap condition carries a silent qualifier — $B_i \\cap B_j = \\emptyset$ holds **for $i \\ne j$** — the subscript-pair convention meaning "any two distinct cases"; read without it, the condition would demand $B_i \\cap B_i = \\emptyset$ and annihilate every case. The big $\\bigcup$ is the set world's $\\sum$: same anatomy — running index below, stop above, collecting operator in front.`,
+          confusedWith:`A mere list. Writing $B_1, \\dots, B_n$ only names candidates; the two conditions are what make them a **partition** — and the law's conclusion silently fails when the cases leak coverage or double-count an outcome.`,
+        },
+        {
+          id:'weighted-sum',
+          tex:`$P(A) = \\sum_i P(A \\mid B_i)\\,P(B_i)$`,
+          read:`the probability of A: its chance within each case, times the weight of the case, summed`,
+          means:`Each summand is one branch of the probability tree that **Diagrammatic Representations** below draws: multiply along the branch — the case's weight, then $A$'s chance inside it — and add across branches. Product inside, sum outside: the mark encodes the whole procedure.`,
+          cases:`With only a case and its complement the sum shortens to $P(A \\mid B)\\,P(B) + P(A \\mid B^c)\\,P(B^c)$; and as [Bayes' theorem](!/probability/bayes-theorem#notation)'s denominator the identical expression serves a second career — written there with the letters traded, evidence outside the bar and hypotheses inside.`,
+          confusedWith:`A letter pattern. Memorizing "$P(A)$ equals a sum over the $B$'s" breaks the moment a source trades letters — the [Bayes page](!/probability/bayes-theorem#notation) writes this same law in mirrored roles; what stays fixed is the grammar: target outside the bar, cases inside it and standing alone as weights.`,
+        },
+        {
+          id:'continuous-form',
+          tex:`$P(A) = \\int P(A \\mid B = b)\\,f(b)\\,db$`,
+          read:`the continuous law: condition on each value, weight by density, integrate`,
+          means:`The partition refined to infinitely many hairline cases: $\\sum$ becomes $\\int$, and the case weight $P(B_i)$ becomes a [density](!/probability/probability-function#notation) times $db$. The capitals inside the condition follow [random variable notation](!/probability/random-variables#notation): $B$ is the variable, $b$ one of its values.`,
+          cases:`For a continuous variable the condition $B = b$ has probability zero, so $P(A \\mid B = b)$ cannot mean the ratio formula — it is defined by a limiting construction the notation quietly papers over; advanced texts flag the subtlety, elementary ones let the analogy carry it.`,
+          confusedWith:`A sum with more terms. The integral is not "add up $P(A \\mid B\\!=\\!b) \\cdot P(B\\!=\\!b)$" — every $P(B = b)$ is zero; only density-times-$db$ makes the weights meaningful, which is why $f(b)$ replaces the probability rather than approximating it.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
-  
+      after:``,
+
     },
     law:{
   
@@ -1920,8 +1920,18 @@ export default function TotalProbabilityPage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-          sectionsContent.notation.content,
-          sectionsContent.notation.after,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

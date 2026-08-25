@@ -4208,6 +4208,562 @@
         "orphans": 0,
         "notes": "First arithmetic tool. Case C from zero props: additive `explanations` prop on DivisibilityTable, stateKey derived from selectedDivisors (exactly one selected -> d<N>, two or more -> multi, none -> null/no panel), entry rendered in a new white card below the grid through processContent. States = the 12 divisor buttons plus the multi-select union (frozen at the doc's own example pair, ÷2+÷3). 9 of the 12 rule sections already existed (rules 2,3,4,5,6,9,10,11,12); new sections: rule-for-1, rule-for-7 (classic double-and-subtract rule with proof), rule-for-8, combining-divisors (inclusion-exclusion + LCM), and the group section the-twelve-divisibility-rules linking all 13. Diagrams replicate the component's grid verbatim: 17-column 0-100 layout, isHighlighted predicate (0 lights under every selection), exact colors and the selector row with active-button gradient and clear button. Rendered/landing verification PENDING - permission-classifier outage gated Bash and preview tools during the pass (same as the 08-21/22 sessions); statics grep-verified (20 slugs, 72 anchors, 0 orphans, 13 units = 13 explanations = 13 stateRows). Backups pending materialization from git (page + component verified clean at session start): git show HEAD:<path>."
       }
+    },
+    "divisibility-tiles": {
+      "slug": "divisibility-tiles",
+      "name": "Divisibility Tiles Interactive Visualizer",
+      "section": "arithmetic",
+      "pagePath": "pages/arithmetic/visual-tools/divisibility-tiles/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "divisibility",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "remainder",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quotient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "division algorithm",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulo operation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "divisibility rules",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "factors",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiples",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "composite numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime factorization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "greatest common divisor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least common multiple",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "fractions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/divisibility/divisibilityTilesDiagrams.js",
+      "diagramStates": [
+        "ungrouped",
+        "divisible",
+        "remainder",
+        "zeroGroups"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 4,
+        "sections": 11,
+        "anchors": 25,
+        "orphans": 0,
+        "notes": "Second arithmetic tool. Case C from zero props (component file is CLEAN - no commented template heads, unlike most pages). The tool's state is (number 1-100 free input, divisor 2-9, grouped boolean) - free numeric input is not enumerable, so states are the four qualitative display outcomes: ungrouped (gray grid in rows of ten), divisible (all blue, checkmark), remainder (yellow leftover + hint card), zeroGroups (divisor > number -> quotient 0, all yellow; special case checked FIRST in the stateKey derivation). Entry renders at the bottom of the right-hand Explanation column. Three outcomes mapped onto existing state-aware sections (understanding-the-tiles-display, what-is-divisibility, division-quotients-and-remainders); one new section when-the-divisor-is-larger; obj1 how-to-use-divisibility-tiles serves as the group section with in-text member links. Diagrams replicate the banner + tiles card + group/leftover boxes with the component's own grouping math and greedy flex-wrap layout (frozen at 23 ungrouped, 20÷5, 23÷5, 3÷5). Rendered/landing verification PENDING (same classifier outage); statics grep-verified (11 slugs, 25 anchors, 0 orphans, 4 units = 4 explanations = 4 stateRows). Backups pending materialization from git: git show HEAD:<path>."
+      }
+    },
+    "divisibility-tree": {
+      "slug": "divisibility-tree",
+      "name": "Divisibility Decision Tree",
+      "section": "arithmetic",
+      "pagePath": "pages/arithmetic/visual-tools/divisibility-tree/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "divisibility rules",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even and odd numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "digit sum",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "alternating sum",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime factorization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trial division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "contrapositive",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "casting out nines",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "greatest common divisor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least common multiple",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "place value",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/divisibility/divisibilityTreeDiagrams.js",
+      "diagramStates": [
+        "empty",
+        "evenPath",
+        "oddPath",
+        "eightChain",
+        "threePass",
+        "threeFail",
+        "primeLike"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 7,
+        "sections": 14,
+        "anchors": 42,
+        "orphans": 0,
+        "notes": "Third arithmetic tool. Case C from zero props; component file is clean (no commented heads). Free input 1-9999, so states are the seven qualitatively distinct tree configurations, rendered as TWO SIMULTANEOUS DIMENSIONS (precedent: inequality, completing-square): parity path (oddPath | evenPath = even-but-4-fails | eightChain = 4-passes) + digit-sum path (threePass | threeFail), with specials checked first (empty = no input, primeLike = only 1 passes -> single entry replaces the pair). Entries render stacked at the bottom of the summary panel. Frozen examples verified by hand: 26 (even, 4 fails), 45 (odd), 104 (2-4-8 all pass), 126 (3+9 pass, 7 hits), 50 (3 fails, 5+10 pass), 13 (prime). New sections: the-odd-shortcut, the-powers-of-two-chain, when-the-digit-sum-fails, only-divisible-by-1 (incl. the 169-smallest-impostor argument); obj2 understanding-the-tree-structure is the group section linking all seven members. Diagrams module ports the full 576x816 tree SVG verbatim (analysis logic, node coords, branch-box opacity, derived-box colors) with a freeze(key, n) generic; width attr 400. Backups materialized in line1-backups/arithmetic-divisibility-tree/. Rendered/landing verification PENDING (classifier outage); statics grep-verified (14 slugs, 42 anchors, 0 orphans, 7 units = 7 explanations = 7 stateRows)."
+      }
+    },
+    "eratosthenes-sieve": {
+      "slug": "eratosthenes-sieve",
+      "name": "Sieve of Eratosthenes Visualization",
+      "section": "arithmetic",
+      "pagePath": "pages/arithmetic/visual-tools/eratosthenes-sieve/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "sieve of eratosthenes",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "composite numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime factorization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "fundamental theorem of arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trial division",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime number theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "twin primes",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "divisibility",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiples",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "greatest common divisor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least common multiple",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "algorithm complexity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cryptography",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/visualizations/arithmetic/eratosthenesSieveDiagrams.js",
+      "diagramStates": [
+        "idle",
+        "sieve2",
+        "sieve3",
+        "sieve5",
+        "sieve7",
+        "done"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 6,
+        "sections": 14,
+        "anchors": 35,
+        "orphans": 0,
+        "notes": "Fourth arithmetic tool. Case C from zero props; component clean. The tool is an ANIMATED ALGORITHM, so states are its stages (precedent: proof-step tools): idle, sieve2/3/5/7 (each frozen at the END of that prime's sweep - the clearest teaching frame), done. stateKey from phase + last activeDivisors entry (activeDivisors never gains 11 - the done branch fires first). Entry renders at the bottom of the Step-by-Step panel. Mapping: idle->how-to-use, sieve5->why-start-at-p-squared (its own worked example is p=5), done->understanding-the-grid-display; new sections the-first-pass-multiples-of-2, the-second-pass-multiples-of-3, the-last-pass-multiples-of-7 (incl. the 91 = 7x13 trap and the 21-number mass promotion); obj6 what-is-the-sieve-of-eratosthenes is the group section. Diagrams simulate the component's sieve verbatim including the append-to-already-crossed behavior (so 56 = [2,7] stripes match live), single-prime tint color+'30'/border color+'60', multi-prime stripes as rotated SVG <pattern> standing in for the CSS repeating gradient. Counts verified: 49 crossings for 2, 16 new for 3, 6 new for 5 (25,35,55,65,85,95), 3 new for 7 (49,77,91), 25 primes/74 composites final. Backups materialized in line1-backups/arithmetic-eratosthenes-sieve/. Rendered/landing verification PENDING (classifier outage); statics grep-verified (14 slugs, 35 anchors, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+      }
+    },
+    "euclidean-algorithm": {
+      "slug": "euclidean-algorithm",
+      "name": "Euclidean Algorithm Visualizer",
+      "section": "arithmetic",
+      "pagePath": "pages/arithmetic/visual-tools/euclidean-algorithm/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "euclidean algorithm",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "greatest common divisor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "division algorithm",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quotient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "remainder",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "coprime",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least common multiple",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "prime factorization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "bezout identity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "fibonacci numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "simplifying fractions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "algorithm complexity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/arithmetic/visualizers/euclideanVisualizerDiagrams.js",
+      "diagramStates": [
+        "classic",
+        "quickFinish",
+        "textbook",
+        "shortCase",
+        "coprime",
+        "fibonacci",
+        "equal"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 7,
+        "sections": 14,
+        "anchors": 44,
+        "orphans": 0,
+        "notes": "Fifth arithmetic tool. Case C; component clean, styled-jsx with CSS vars and its own purple palette (#7F77DD - NOT the blue family of the other arithmetic tools; diagrams keep it). Complex-numbers pattern: states are the 5 presets value-matched on the SWAPPED (hi, lo) pair - classic (252,105), quickFinish (462,198), textbook (1071,462), shortCase (84,56), coprime (54,35) - plus specials checked first: equal (a===b, one-row chain) and fibonacci (144,89 exact - the page's own worst-case example). Custom/random input shows nothing. Entry renders under the Steps list. New sections filled into the page's EMPTY obj11-14 STUBS (obj15 still empty): short-chains, the-textbook-example-1071-and-462, coprime-pairs, fibonacci-worst-case (Lame 1844). Mapping: classic->getting-started, equal->why-the-algorithm-works (gcd(d,0)=d base case), shortCase->special-cases; obj2 entering-numbers-and-using-presets is the group. PROSE CORRECTION: obj2/obj9 claimed (56,84) is a case 'where one input divides the other' - false (56 does not divide 84); rewritten as swap-then-quick-finish (28 divides 56). FAQ/schemas untouched. Diagrams port computeChain + layoutRow + the chain SVG verbatim (monospace CHAR_W 10.8 layout, amber pills, dashed Bezier arrows + arrowheads, gray stop pill, purple GCD box + callout), non-hover appearance. Chains verified by hand for all 7 states. Backups materialized in line1-backups/arithmetic-euclidean-algorithm/. Rendered/landing verification PENDING; statics grep-verified (14 slugs, 44 anchors, 0 orphans - every section has an inbound link, 7 units = 7 explanations = 7 stateRows)."
+      }
+    },
+    "modular-wheel": {
+      "slug": "modular-wheel",
+      "name": "Modular Arithmetic Wheel Visualizer",
+      "section": "arithmetic",
+      "pagePath": "pages/arithmetic/visual-tools/modular-wheel/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "modular arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "remainder",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "congruence",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "equivalence classes",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "residue class",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "clock arithmetic",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "divisibility",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "greatest common divisor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "euler totient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "fermat little theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "chinese remainder theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modular exponentiation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cryptography",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pigeonhole principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/arithmetic/visualizers/modPieWheelDiagrams.js",
+      "diagramStates": [
+        "idle",
+        "running",
+        "classDetail",
+        "zeroPinned",
+        "summary",
+        "parity"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 6,
+        "sections": 12,
+        "anchors": 37,
+        "orphans": 0,
+        "notes": "Sixth and LAST arithmetic tool - section complete. Case C; component clean, own PALETTE (blues on #f5f8ff with warm-gold zero-class accents). States are the tool's panel phases keyed off the EXISTING panelMode variable: idle, running, class -> split into classDetail (nonzero pinned) vs zeroPinned (slice 0 - visually distinct gold treatment), summary -> split into summary vs parity (divisor 2, the wheel as two halves). Entry renders between the context box and the deep-dive in the right panel with a gold left border. New section reading-a-complete-run (balance theorem: classes 1..r get q+1, rest get q) filled into the obj11 stub; obj7 right-panel-context is the group (it already enumerates the modes). Note the page renders obj0 Key Terms BOTH as a KeyTermsCard and as section 0 - existing behavior, kept. TWO PROSE CORRECTIONS: obj6 and the component's own deep-dive 'Try this' both said 'Run with divisor 10' but the divisor grid stops at 9 - obj6 bullet rewritten around divisor 5 (last digits five apart), component bullet fixed likewise (a rare in-component text edit, flagged to owner). Diagrams port the wheel verbatim (polar geometry, slice opacities 0.32/0.14/0.55, gold accent arc, outward rows, rotated upright labels, placement math n%d + per-class row counter) at frozen svgSize 520; states frozen at mod-6 idle / 17-of-36 / class-2 pinned / zero pinned / complete / mod-2 with 20. Backups pending: git show HEAD:<path>. Rendered/landing verification PENDING for the whole arithmetic section (classifier outage all session; owner's server hit the stale-.next ENOENT on divisibility-table - recovery authorized but also blocked); statics grep-verified (12 slugs, 37 anchors, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+      }
     }
   },
   "$stubTemplate": {

@@ -126,7 +126,7 @@ const obj6Table = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Ignoring domain restrictions</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(−3) · √(−3) = √9 = 3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product rule fails for negative radicands under even roots; use <a href="/algebra/roots/complex" style="${linkStyle}">complex numbers</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product rule fails for negative radicands under even roots; use complex numbers</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Dropping absolute values</td>
@@ -230,7 +230,7 @@ const summaryTable = `
 
 // This is the power of a product rule from [powers](!/algebra/powers), applied to fractional exponents.
 
-// For even indices, both $a$ and $b$ must be non-negative when working in real numbers. Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require [complex number](!/algebra/roots/complex) treatment.
+// For even indices, both $a$ and $b$ must be non-negative when working in real numbers. Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require complex number treatment.
 
 // The product rule is essential for [simplifying radicals](!/algebra/roots/simplifying) — factoring out perfect powers relies on splitting the radical.`,
 //     before: ``,
@@ -342,7 +342,7 @@ const summaryTable = `
 
 // For example, $\\sqrt[3]{-27} = -\\sqrt[3]{27} = -3$. The negative sign passes through the radical freely when the index is odd.
 
-// Violating the even-index restrictions does not merely give a wrong answer — it produces expressions that have no real value. The expression $\\sqrt{-4}$ requires [complex numbers](!/algebra/roots/complex) to interpret.`,
+// Violating the even-index restrictions does not merely give a wrong answer — it produces expressions that have no real value. The expression $\\sqrt{-4}$ requires complex numbers to interpret.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -368,7 +368,7 @@ const summaryTable = `
 
 // $$\\sqrt{-3} \\cdot \\sqrt{-3} \\neq \\sqrt{9} = 3$$
 
-// The left side has no real value. Each factor is non-real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in [radicals and complex numbers](!/algebra/roots/complex).
+// The left side has no real value. Each factor is non-real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in radicals and complex numbers.
 
 // Dropping absolute values:
 
@@ -462,7 +462,7 @@ $$(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$$
 
 This is the power of a product rule from [powers](!/algebra/powers), applied to fractional exponents.
 
-For even indices, both $a$ and $b$ must be non-negative when working in real numbers. Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require [complex number](!/algebra/roots/complex) treatment.
+For even indices, both $a$ and $b$ must be non-negative when working in real numbers. Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require complex number treatment.
 
 The product rule is essential for [simplifying radicals](!/algebra/roots/simplifying) — factoring out perfect powers relies on splitting the radical.`,
     before: ``,
@@ -589,7 +589,7 @@ $$\\sqrt[n]{-a} = -\\sqrt[n]{a} \\quad (n \\text{ odd})$$
 
 For example, $\\sqrt[3]{-27} = -\\sqrt[3]{27} = -3$. The negative sign passes through the radical freely when the index is odd.
 
-Violating the even-index restrictions does not merely give a wrong answer — it produces expressions that have no real value. The expression $\\sqrt{-4}$ requires [complex numbers](!/algebra/roots/complex) to interpret.`,
+Violating the even-index restrictions does not merely give a wrong answer — it produces expressions that have no real value. The expression $\\sqrt{-4}$ requires complex numbers to interpret.`,
     before: ``,
     after: ``,
     link: '',
@@ -615,7 +615,7 @@ Ignoring domain restrictions:
 
 $$\\sqrt{-3} \\cdot \\sqrt{-3} \\neq \\sqrt{9} = 3$$
 
-The left side has no real value. Each factor is non-real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in [radicals and complex numbers](!/algebra/roots/complex).
+The left side has no real value. Each factor is non-real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in radicals and complex numbers.
 
 Dropping absolute values:
 

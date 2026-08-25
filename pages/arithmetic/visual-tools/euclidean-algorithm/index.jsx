@@ -1,487 +1,4 @@
 
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import Head from 'next/head'
-// import '@/pages/pages.css'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import EuclideanVisualizer from '../../../../app/components/arithmetic/visualizers/EuclideanVisualizer'
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=['','','','','']
-
-//   // •
-
-// //   \u2022 First item
-// // \u2022 Second item
-
-  
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-//     const sectionsContent={
-
-//     obj0:{
-//       title:`Key Terms`,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj5:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj6:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
-
-
-//   const introContent = {
-//   id: "intro",
-//   title: "",
-//   content: ``
-// }
-
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Title | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/arithmetic/visual-tools/euclidean-algorithm",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-//    }
-
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
-    
-//   const genericSections=[
-//     {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     {
-//         id:'11',
-//         title:sectionsContent.obj11.title,
-//         link:sectionsContent.obj11.link,
-//         content:[
-//           sectionsContent.obj11.content,
-//         ]
-//     },
-//     {
-//         id:'12',
-//         title:sectionsContent.obj12.title,
-//         link:sectionsContent.obj12.link,
-//         content:[
-//           sectionsContent.obj12.content,
-//         ]
-//     },
-//     {
-//         id:'13',
-//         title:sectionsContent.obj13.title,
-//         link:sectionsContent.obj13.link,
-//         content:[
-//           sectionsContent.obj13.content,
-//         ]
-//     },
-//     {
-//         id:'14',
-//         title:sectionsContent.obj14.title,
-//         link:sectionsContent.obj14.link,
-//         content:[
-//           sectionsContent.obj14.content,
-//         ]
-//     },
-//     {
-//         id:'15',
-//         title:sectionsContent.obj15.title,
-//         link:sectionsContent.obj15.link,
-//         content:[
-//           sectionsContent.obj15.content,
-//         ]
-//     },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <meta name="viewport" content="width=device-width, initial-scale=1" />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Euclidean Algorithm</h1>
-//    <br/>
-//    <EuclideanVisualizer/>
-//    <br/>
-//    {/* <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    /> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//     {/* <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         /> */}
-//    <br/>
-//     {/* <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    /> */}
-//    <br/>
-//    {/* <Sections sections={genericSections}/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
 
 
 
@@ -495,6 +12,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import EuclideanVisualizer from '../../../../app/components/arithmetic/visualizers/EuclideanVisualizer'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 
 
 export async function getStaticProps(){
@@ -525,14 +44,16 @@ export async function getStaticProps(){
 
 The visualizer has four main parts arranged top to bottom:
 
-• **Input controls** — two number fields for $a$ and $b$, plus a Random pair button and five preset pairs
-• **Result banner** — large purple number showing the GCD, with a plain-language sentence explaining what it means
-• **Division chain** — a vertical stack of equations of the form $a = b \\cdot q + r$, each step shrinking the pair, with amber remainder pills and dashed arrows connecting each remainder to the next divisor
+• **Input controls** — two number fields for $a$ and $b$, plus a Random pair button and [five preset pairs](!#entering-numbers-and-using-presets)
+• **Result banner** — large purple number showing the [GCD](!#what-is-the-greatest-common-divisor), with a plain-language sentence explaining what it means
+• **Division chain** — a vertical stack of equations of the form $a = b \\cdot q + r$, each step shrinking the pair, with amber remainder pills and [dashed arrows](!#following-the-substitution-arrows) connecting each remainder to the next divisor
 • **Steps list and legend** — a side panel listing every division as plain text, plus a color legend
 
 A collapsible "How the Euclidean algorithm works" panel sits at the bottom for the underlying mathematical idea.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the tool exactly as it opens: $252 = 105 \\cdot 2 + 42$, then $105 = 42 \\cdot 2 + 21$, then $42 = 21 \\cdot 2 + 0$. Three rows, three identical quotients of 2, and the purple box closing on 21.
+
+The launch example is well chosen: big enough that listing divisors would be tedious (252 has eighteen of them), small enough that each division is mental arithmetic. When you want other behaviors — instant finishes, coprime grinds, worst cases — the presets supply them one click away.`,
       link: '',
     },
 
@@ -543,9 +64,9 @@ A collapsible "How the Euclidean algorithm works" panel sits at the bottom for t
 For exploration without typing, three quick options live next to the input fields:
 
 • **Random pair** — generates two random integers between 12 and 480 and runs the algorithm on them. Useful for sampling the variety of chain lengths that arise from different inputs.
-• **Five preset pairs** — curated examples spanning easy and interesting cases: $(252, 105)$ giving GCD $21$, $(462, 198)$ giving $66$, $(1071, 462)$ giving $21$, $(56, 84)$ where one input divides the other, and $(35, 54)$ which are coprime (GCD $1$).
+• **Five preset pairs** — curated examples spanning easy and interesting cases: the [launch pair](!#getting-started-with-the-visualizer) $(252, 105)$ giving GCD $21$, the [quick finish](!#short-chains) $(462, 198)$ giving $66$, the [textbook example](!#the-textbook-example-1071-and-462) $(1071, 462)$ giving $21$, the [swap-then-finish case](!#special-cases-and-corner-behavior) $(56, 84)$ ending at $28$, and the [coprime pair](!#coprime-pairs) $(35, 54)$ with GCD $1$.
 
-The presets are deliberately chosen to demonstrate the algorithm's qualitative behaviors: coprime cases that grind through many steps, divisor cases that finish in one step, and mid-sized examples that produce a satisfyingly visual chain of about 3–5 rows.`,
+The presets are deliberately chosen to demonstrate the algorithm's qualitative behaviors: coprime cases that grind through many steps, quick finishes that end in two rows, and mid-sized examples that produce a satisfyingly visual chain of about 3–5 rows. Two more states are worth typing by hand: a [Fibonacci pair](!#fibonacci-worst-case) like $89$ and $144$ for the algorithm's worst case, and [equal numbers](!#why-the-algorithm-works) for its shortest run.`,
       before: ``,
       after: ``,
       link: '',
@@ -553,13 +74,13 @@ The presets are deliberately chosen to demonstrate the algorithm's qualitative b
 
     obj3: {
       title: `Reading a Division Row`,
-      content: `Each row of the chain shows one application of the **division algorithm**:
+      content: `Each row of the chain shows one application of the [division algorithm](!#related-concepts-and-tools):
 
 $$\\text{dividend} = \\text{divisor} \\cdot \\text{quotient} + \\text{remainder}$$
 
 Read left to right: the **dividend** is the larger of the current pair, the **divisor** is the smaller, the **quotient** is how many whole times the divisor fits into the dividend, and the **remainder** is what is left over.
 
-The remainder is highlighted in an **amber pill** to draw the eye — it is the key piece that becomes the divisor of the *next* row. The final divisor, when the remainder finally hits zero, is shown in a **purple box** with a "gcd = N" callout below it. The terminating zero remainder appears as a dashed gray pill with an italic "stop" label, indicating that the algorithm has finished.
+The remainder is highlighted in an **amber pill** to draw the eye — it is the key piece that becomes the divisor of the *next* row. The final divisor, when the remainder finally hits zero, is shown in a **purple box** with a "gcd = N" [callout](!#the-result-banner-and-gcd-callout) below it. The terminating zero remainder appears as a dashed gray pill with an italic "stop" label, indicating that the algorithm has finished.
 
 Every numerical field is rendered in monospace so the rows align vertically. The visual chain reads top to bottom as a step-by-step computation that the eye can follow without effort.`,
       before: ``,
@@ -575,7 +96,7 @@ $$\\text{new pair} = (\\text{old divisor}, \\text{old remainder})$$
 
 The arrow makes the substitution concrete. You can literally see the number that was a remainder in row $i$ become the divisor in row $i + 1$, repeating until a remainder of zero finally appears. The whole algorithm is captured by that single recurring move.
 
-The arrows are deliberately subtle by default — drawn in the same amber as the remainder pills — so they read as decoration when you scan but become useful when you study a particular step. Hovering a remainder darkens its arrow and turns it purple, making the connection unmistakable.`,
+The arrows are deliberately subtle by default — drawn in the same amber as the remainder pills — so they read as decoration when you scan but become useful when you study a particular step. [Hovering a remainder](!#hovering-remainders-and-steps) darkens its arrow and turns it purple, making the connection unmistakable.`,
       before: ``,
       after: ``,
       link: '',
@@ -585,7 +106,7 @@ The arrows are deliberately subtle by default — drawn in the same amber as the
       title: `Hovering Remainders and Steps`,
       content: `Two coordinated hover interactions help you trace the algorithm:
 
-• **Hover an amber remainder pill** — its arrow lights up in purple, and the divisor on the next row gets a purple ring around it. Both endpoints of the substitution glow together, letting you confirm which remainder becomes which divisor.
+• **Hover an amber remainder pill** — its arrow lights up in purple, and the divisor on the next row gets a purple ring around it. Both endpoints of the substitution glow together, letting you confirm [which remainder becomes which divisor](!#following-the-substitution-arrows).
 • **Hover an entry in the side Steps list** — the same row in the diagram lights up. Useful when you want to inspect a specific step from the textual summary without scrolling.
 
 Both hover targets connect the textual representation (numbered list of equations on the right) to the graphical chain (the diagram in the center). Wherever your attention lands, the corresponding parts in the other view highlight automatically.
@@ -604,7 +125,7 @@ The hover state is also exposed as a native browser tooltip on the SVG elements,
 • A **monospace equation** — $\\gcd(a, b) = N$ in the canonical mathematical form
 • A **plain-language sentence** — "The largest number that divides both $a$ and $b$ evenly is $N$ (found in $k$ steps)"
 
-The triple presentation is deliberate. The standalone number is for someone who just wants the answer. The equation is for someone copying the result into a homework problem. The sentence is for a beginner first encountering the concept and needing to know what "greatest common divisor" actually means.
+The triple presentation is deliberate. The standalone number is for someone who just wants the answer. The equation is for someone copying the result into a homework problem. The sentence is for a beginner first encountering the concept and needing to know what "[greatest common divisor](!#what-is-the-greatest-common-divisor)" actually means.
 
 Below the diagram, the final divisor — the GCD — appears in a purple-bordered box with a callout line and the label "gcd = N" beneath it. This visual punctuation marks the chain's endpoint and connects the diagram back to the banner.`,
       before: ``,
@@ -623,9 +144,9 @@ For small numbers, you could find the GCD by listing every divisor of each numbe
 • Common divisors: $1, 2, 3, 6$
 • Greatest common divisor: $\\gcd(12, 18) = 6$
 
-This naive approach works but becomes slow for large numbers. The Euclidean algorithm — the method visualized here — finds the GCD without ever listing divisors. For $\\gcd(252, 105)$ it takes only three division steps, regardless of how many divisors $252$ and $105$ actually have.
+This naive approach works but becomes slow for large numbers. The Euclidean algorithm — the method visualized here — finds the GCD without ever listing divisors. For $\\gcd(252, 105)$ it takes only [three division steps](!#getting-started-with-the-visualizer), regardless of how many divisors $252$ and $105$ actually have.
 
-The GCD is foundational for simplifying fractions, modular arithmetic, and number theory. Two numbers with GCD equal to $1$ are called **coprime** — they share no common factors and are in some sense "as different as possible" multiplicatively.`,
+The GCD is foundational for simplifying fractions, modular arithmetic, and number theory. Two numbers with GCD equal to $1$ are called [coprime](!#coprime-pairs) — they share no common factors and are in some sense "as different as possible" multiplicatively.`,
       before: ``,
       after: ``,
       link: '',
@@ -643,7 +164,9 @@ The argument is short. Any common divisor of $a$ and $b$ also divides $a - q \\c
 
 The algorithm terminates because every step strictly decreases the smaller of the two numbers. A strictly decreasing sequence of non-negative integers must eventually reach zero. When it does, the partner — the last nonzero remainder — is the GCD, because $\\gcd(d, 0) = d$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the base case made visible: with equal inputs the very first division reads $36 = 36 \\cdot 1 + 0$, the remainder is zero on arrival, and $\\gcd(36, 36) = 36$ ends the story in one row — the shortest chain the tool can draw.
+
+Termination and correctness meet in that final line. Every chain, however long, is marching toward some pair $(d, 0)$; the [special cases](!#special-cases-and-corner-behavior) differ only in how many substitutions the journey takes.`,
       link: '',
     },
 
@@ -651,17 +174,19 @@ The algorithm terminates because every step strictly decreases the smaller of th
       title: `Special Cases and Corner Behavior`,
       content: `A few input patterns produce notably short or long chains:
 
-• **One number divides the other** — try the preset $(56, 84)$. The first division gives $84 = 56 \\cdot 1 + 28$, then $56 = 28 \\cdot 2 + 0$, and the algorithm stops at GCD $28$ after just two steps. Whenever the smaller number is a divisor of the larger, the chain terminates in one or two rows.
+• **A swap, then a quick finish** — try the preset $(56, 84)$. Since $56 < 84$ the pair is swapped first; the division gives $84 = 56 \\cdot 1 + 28$, and $28$ divides $56$, so $56 = 28 \\cdot 2 + 0$ stops the algorithm at GCD $28$ after just two steps. (When the smaller number actually divides the larger — try $(28, 84)$ — the chain ends in a single row.)
 
-• **Coprime numbers** — try the preset $(35, 54)$. The GCD is $1$, and the chain works through several reductions before finally hitting a remainder of $1$ and then $0$. Coprime pairs tend to produce the *longest* chains relative to the size of the numbers.
+• [Coprime numbers](!#coprime-pairs) — try the preset $(35, 54)$. The GCD is $1$, and the chain works through several reductions before finally hitting a remainder of $1$ and then $0$. Coprime pairs tend to produce the *longest* chains relative to the size of the numbers.
 
-• **Consecutive Fibonacci numbers** — try entering, e.g., $89$ and $144$. These pairs produce the absolute worst-case behavior of the algorithm and the longest chains for their magnitude. The reason is built into the recursive definition of Fibonacci numbers themselves.
+• [Consecutive Fibonacci numbers](!#fibonacci-worst-case) — try entering, e.g., $89$ and $144$. These pairs produce the absolute worst-case behavior of the algorithm and the longest chains for their magnitude. The reason is built into the recursive definition of Fibonacci numbers themselves.
 
-• **Equal numbers** — entering the same number twice gives a one-step chain ending immediately at the GCD, which is that number.
+• **Equal numbers** — entering the same number twice gives a one-step chain ending immediately at the GCD, which is that number — the base case $\\gcd(d, 0) = d$ in action, as explained under [why the algorithm works](!#why-the-algorithm-works).
 
 Running the algorithm on a few of these intentionally extreme cases gives a feel for how the input size relates to the chain length — and why the Euclidean algorithm is considered remarkably efficient even on enormous inputs.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above shows the $(56, 84)$ case: a swap, one substantial division, one clean finish. Between such quick runs and the ten-row Fibonacci grind lies the algorithm's whole spectrum of behavior, and the Random pair button samples it — most random pairs land in the middle, at three to five rows.
+
+The swap itself is worth a note: the algorithm never needs to be told which number is larger. If $a < b$, the first division simply produces quotient $0$ and remainder $a$, which performs the swap automatically — the tool just does it up front to keep the chain tidy.`,
       link: '',
     },
 
@@ -671,7 +196,7 @@ Running the algorithm on a few of these intentionally extreme cases gives a feel
 
 **Least Common Multiple (LCM)** — the dual concept, related to the GCD by $\\text{lcm}(a, b) = a \\cdot b / \\gcd(a, b)$.
 
-**Division Algorithm** — the basic theorem that for any positive integers $a$ and $b$, there exist unique $q$ and $r$ with $0 \\leq r < b$ such that $a = b \\cdot q + r$. Every row of the visualizer is one application of this.
+**Division Algorithm** — the basic theorem that for any positive integers $a$ and $b$, there exist unique $q$ and $r$ with $0 \\leq r < b$ such that $a = b \\cdot q + r$. [Every row of the visualizer](!#reading-a-division-row) is one application of this.
 
 **Coprime Integers** — pairs with GCD equal to $1$; foundational for modular arithmetic and number theory.
 
@@ -681,16 +206,70 @@ Running the algorithm on a few of these intentionally extreme cases gives a feel
 
 **Modular Arithmetic** — the GCD underlies which numbers are invertible modulo $n$ and is the foundation of many cryptographic schemes.
 
-**Fibonacci Numbers** — the worst-case inputs for the Euclidean algorithm, related to it through deep recursive structure.`,
+**Fibonacci Numbers** — the [worst-case inputs](!#fibonacci-worst-case) for the Euclidean algorithm, related to it through deep recursive structure.`,
       before: ``,
       after: ``,
       link: '',
     },
 
-    obj11: { title:``, content:``, before:``, after:``, link:'' },
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `Short Chains: When a Remainder Divides Its Divisor`,
+      content: `Try the preset $(462, 198)$. The first division gives $462 = 198 \\cdot 2 + 66$, and then something decisive happens: $66$ divides $198$ exactly, so the second row reads $198 = 66 \\cdot 3 + 0$ and the algorithm stops at GCD $66$.
+
+Every chain ends this way — the question is only how soon. The algorithm terminates precisely when a remainder divides the number it is about to be paired with. In short chains that happens on the first try; in long ones the pair has to shrink many times first.
+
+A useful way to watch the tool: after each row, ask "does this remainder divide the number above it?" The moment the answer is yes, the next row is the last.`,
+      before: ``,
+      after: `The two-row pattern has a clean characterization: the chain for $(a, b)$ has exactly two rows when the first remainder $a \\bmod b$ divides $b$ without being zero. The preset $(56, 84)$ under [special cases](!#special-cases-and-corner-behavior) is the same story with a swap in front.
+
+At the other extreme sit pairs whose remainders keep refusing to divide — the [coprime pairs](!#coprime-pairs) that grind down to 1, and the [Fibonacci pairs](!#fibonacci-worst-case) that do so as slowly as arithmetic allows.`,
+      link: '',
+    },
+    obj12: {
+      title: `The Textbook Example: 1071 and 462`,
+      content: `The pair $(1071, 462)$ is the classic worked example of the Euclidean algorithm — it has appeared in textbooks for over a century. The chain runs:
+
+$$1071 = 462 \\cdot 2 + 147$$
+
+$$462 = 147 \\cdot 3 + 21$$
+
+$$147 = 21 \\cdot 7 + 0$$
+
+Three rows, GCD $21$. The example earns its fame by exercising the algorithm's range: quotients of $2$, $3$, and then $7$, remainders that fall fast ($147$, $21$, $0$), and four-digit input dispatched in three lines of arithmetic.
+
+Notice the coincidence with the launch pair: $\\gcd(252, 105) = 21$ as well. Different pairs, same answer — infinitely many pairs share any given GCD.`,
+      before: ``,
+      after: `The chain also demonstrates how little the algorithm cares about size. Listing the divisors of $1071 = 3^2 \\cdot 7 \\cdot 17$ by hand would be real work; three divisions need none of it. That contrast — divisions instead of factorizations — is the practical content of [why the algorithm works](!#why-the-algorithm-works).
+
+For input this size the chain is still short. To see the algorithm genuinely struggle, hand it a [Fibonacci pair](!#fibonacci-worst-case) and watch every quotient collapse to 1.`,
+      link: '',
+    },
+    obj13: {
+      title: `Coprime Pairs: When the GCD Is 1`,
+      content: `Try the preset $(35, 54)$. After the automatic swap, the chain runs through five divisions with remainders $19$, $16$, $3$, $1$, and finally $0$: the GCD is $1$.
+
+Two integers with GCD $1$ are called **coprime** (or relatively prime). They need not be prime themselves — $35 = 5 \\cdot 7$ and $54 = 2 \\cdot 3^3$ are both composite — they simply share no prime factor.
+
+Coprime pairs make the algorithm work hardest for its answer: with no common factor to find, the chain must grind all the way down to $1$ before a remainder of $0$ can appear. Relative to their size, coprime pairs produce the longest chains.`,
+      before: ``,
+      after: `Coprimality is the property that matters most in practice: a fraction $a/b$ is fully reduced exactly when $a$ and $b$ are coprime, and a number is invertible modulo $n$ exactly when it is coprime to $n$ — the fact underlying the [modular arithmetic](!#related-concepts-and-tools) applications of the GCD.
+
+Coprime pairs are also abundant: two random integers are coprime with probability $6/\\pi^2 \\approx 61\\%$, a celebrated result that connects the GCD to $\\pi$. The extreme members of the family are the [Fibonacci neighbors](!#fibonacci-worst-case), which are always coprime and always slowest.`,
+      link: '',
+    },
+    obj14: {
+      title: `The Worst Case: Fibonacci Pairs`,
+      content: `Enter $89$ and $144$ — two consecutive **Fibonacci numbers**. The chain takes ten rows, and every quotient except the final one is $1$: each division removes as little as possible, so the pair shrinks at the slowest rate the algorithm allows.
+
+The reason is the Fibonacci recurrence itself. Since $F_{n+1} = F_n + F_{n-1}$ with $F_{n-1} < F_n$, dividing $F_{n+1}$ by $F_n$ always gives quotient $1$ and remainder $F_{n-1}$ — so the algorithm walks the Fibonacci sequence backwards, one term per row, all the way down to $\\gcd = 1$.
+
+This is not just a curiosity but the exact worst case: a theorem of Gabriel Lamé (1844) states that if the algorithm takes $n$ steps, the smaller input is at least the Fibonacci number $F_{n+1}$. No inputs of a given size can be slower than Fibonacci neighbors.`,
+      before: ``,
+      after: `Lamé's bound is why the algorithm is fast: the step count grows only logarithmically — roughly five steps per digit of the smaller number, even in the worst case. His 1844 argument is often called the first complexity analysis of an algorithm, a century before computers existed to run one.
+
+Fibonacci neighbors are also always coprime — the backwards walk always ends at $1$ — making them the extreme members of the [coprime pairs](!#coprime-pairs) family.`,
+      link: '',
+    },
     obj15: { title:``, content:``, before:``, after:``, link:'' },
   }
 
@@ -808,12 +387,46 @@ Running the algorithm on a few of these intentionally extreme cases gives a feel
   }
 
 
+  // Frozen-state framed units (Line 1): the five presets plus the two typed specials.
+  const d = euclideanVisualizerDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    classic: u('classic', '252 and 105, frozen',
+      'The launch chain: remainders 42, then 21, then 0 — three quotients of 2 in a row, and the purple box closes on 21.'),
+    quickFinish: u('quickFinish', '462 and 198, frozen',
+      'Remainder 66 drops down, divides 198 exactly, and the chain stops at two rows: gcd = 66.'),
+    textbook: u('textbook', '1071 and 462, frozen',
+      'The century-old textbook chain: three rows ending in a quotient of 7, and the same answer as the launch pair — 21.'),
+    shortCase: u('shortCase', '84 and 56, frozen',
+      'The inputs arrive as (56, 84) and are swapped; remainder 28 then divides 56 exactly, ending the chain at gcd = 28.'),
+    coprime: u('coprime', '54 and 35, frozen',
+      'Five divisions, remainders 19, 16, 3, 1, 0: nothing divides both 54 and 35 except 1 — a coprime pair.'),
+    fibonacci: u('fibonacci', '144 and 89, frozen',
+      'Ten rows for two three-digit numbers: with every quotient 1 until the last, Fibonacci neighbors shrink as slowly as the algorithm allows.'),
+    equal: u('equal', '36 and 36, frozen',
+      'One row: 36 = 36 · 1 + 0. The remainder is zero on arrival, and gcd(36, 36) = 36 — the shortest chain the tool can draw.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the Steps list
+  // through processContent — same-page !# anchors work.
+  const explanations = {
+    classic: `The launch example: three divisions take (252, 105) down to 21 — the remainders shrink 42, 21, 0, and the last divisor standing is the GCD. [Learn more about the default example](!#getting-started-with-the-visualizer) · [All presets](!#entering-numbers-and-using-presets)`,
+    quickFinish: `Two rows and done: the first remainder 66 divides 198 exactly, so the very next division ends the chain. [Learn more about short chains](!#short-chains) · [All presets](!#entering-numbers-and-using-presets)`,
+    textbook: `The classic textbook pair: (1071, 462) reduces in three rows — including a quotient of 7 — to the same GCD as the launch example, 21. [Learn more about this example](!#the-textbook-example-1071-and-462) · [All presets](!#entering-numbers-and-using-presets)`,
+    shortCase: `After the swap, 84 = 56 · 1 + 28, and 28 divides 56 — a two-step finish at GCD 28. [Learn more about special cases](!#special-cases-and-corner-behavior) · [All presets](!#entering-numbers-and-using-presets)`,
+    coprime: `Five rows grind (54, 35) all the way down to 1: these numbers are coprime, sharing no factor at all. [Learn more about coprime pairs](!#coprime-pairs) · [All presets](!#entering-numbers-and-using-presets)`,
+    fibonacci: `Consecutive Fibonacci numbers are the algorithm's worst case: every quotient before the last is 1, so (144, 89) takes ten rows to reach gcd 1. [Learn more about the worst case](!#fibonacci-worst-case) · [All presets](!#entering-numbers-and-using-presets)`,
+    equal: `Equal inputs end immediately: a = a · 1 + 0, and since gcd(d, 0) = d, the answer is the number itself. [Learn more about why this works](!#why-the-algorithm-works) · [All presets](!#entering-numbers-and-using-presets)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Euclidean Algorithm Visualizer | Find the GCD Step by Step",
         description: "Visualize the Euclidean algorithm for any two numbers. Watch each division step reduce the pair until the greatest common divisor emerges as the last divisor.",
@@ -829,19 +442,42 @@ Running the algorithm on a few of these intentionally extreme cases gives a feel
 }
 
 
-export default function EuclideanAlgorithmPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function EuclideanAlgorithmPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    stateRow('obj1', 'getting-started-with-the-visualizer', 'classic'),
+    plain('obj2', 'entering-numbers-and-using-presets'),
+    plain('obj3', 'reading-a-division-row'),
+    plain('obj4', 'following-the-substitution-arrows'),
+    plain('obj5', 'hovering-remainders-and-steps'),
+    plain('obj6', 'the-result-banner-and-gcd-callout'),
+    plain('obj7', 'what-is-the-greatest-common-divisor'),
+    stateRow('obj8', 'why-the-algorithm-works', 'equal'),
+    stateRow('obj11', 'short-chains', 'quickFinish'),
+    stateRow('obj12', 'the-textbook-example-1071-and-462', 'textbook'),
+    stateRow('obj13', 'coprime-pairs', 'coprime'),
+    stateRow('obj14', 'fibonacci-worst-case', 'fibonacci'),
+    stateRow('obj9', 'special-cases-and-corner-behavior', 'shortCase'),
+    plain('obj10', 'related-concepts-and-tools'),
   ]
 
   return (
@@ -898,7 +534,7 @@ export default function EuclideanAlgorithmPage({seoData, sectionsContent, introC
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Euclidean Algorithm</h1>
       <br/>
-      <EuclideanVisualizer/>
+      <EuclideanVisualizer explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

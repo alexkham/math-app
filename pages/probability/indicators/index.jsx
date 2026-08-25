@@ -670,6 +670,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -710,7 +711,7 @@ export async function getStaticProps(){
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">What it is</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a <a href="/probability/random-variables" style="${linkStyle}">random variable</a> assigning 1 to outcomes in A and 0 to all others</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>A</sub> : Ω → {0, 1}; follows a <a href="/probability/distributions/discrete/bernoulli" style="${linkStyle}">Bernoulli</a> distribution with parameter P(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>A</sub> : Ω → {0, 1}; follows a Bernoulli distribution with parameter P(A)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">What it is NOT</td>
@@ -905,9 +906,49 @@ An indicator is **not** a probability value; it is a random variable whose value
       before:``,
       after:``,
       link:'',
-  
+
     },
-  
+
+    notation:{
+      title:`Indicator Notation`,
+      lead:`The indicator is itself a piece of notation — a function built to turn membership into arithmetic. The marks to fix are its competing spellings, the brace form that accepts a whole condition instead of an event, and the sum that turns indicators into counts. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$P(\\cdot)$ and the event letters come from the [probability function](!/probability/probability-function#notation); $\\omega$ and the membership sign from [sample space notation](!/probability/sample-space#notation) and [set membership](!/set-theory/basics#2); $E[\\cdot]$ from [expected value notation](!/probability/expected-value#notation); the summation sign from [sequence notation](!/algebra/sequences/arithmetic#notation).`,
+      entries:[
+        {
+          id:'indicator-spellings',
+          tex:`$I_A$, $\\mathbf{1}_A$`,
+          read:`the indicator of A`,
+          means:`One function, several dresses: the roman capital $I_A$ the **Definition** above uses, and the bold or blackboard one — typeset 𝟙 in modern texts — a digit promoted to a letter, advertising the only two values the function ever takes. The subscript holds the event; some texts move it into parentheses as $I(A)$.`,
+          alsoWritten:`$\\chi_A$ in analysis and measure theory, where the same object is called the "characteristic function" of the set — the older tradition probability walked away from.`,
+          confusedWith:`The other "characteristic function". In probability that name is already taken by $E[e^{itX}]$, the transform of a distribution — so a probability text saying "characteristic function" almost never means $\\chi_A$; same name, two objects across the fence, which is exactly why this side writes "indicator" and leaves χ alone.`,
+        },
+        {
+          id:'condition-braces',
+          tex:`$\\mathbf{1}\\{X \\le x\\}$`,
+          read:`one if the condition holds, zero otherwise`,
+          means:`The brace form takes a **statement** where the subscript form takes an event: the braces convert a condition into the event of its truth — the same move as [random variable notation](!/probability/random-variables#notation)'s $\\{X \\le x\\}$ — and the indicator then converts that event into a number.`,
+          cases:`The [CDF](!/probability/cdf#notation) in one line: $F(x) = E[\\mathbf{1}\\{X \\le x\\}]$ — accumulation as the average of a condition; in code the same idiom survives as booleans-cast-to-integers, the indicator wearing syntax.`,
+          confusedWith:`The subscript form fed a set. $\\mathbf{1}_A(\\omega)$ asks whether a point belongs; $\\mathbf{1}\\{X \\le x\\}$ holds a claim — both return 0 or 1, but one's argument is an outcome and the other's content is a sentence, and swapping them writes sets where statements belong.`,
+        },
+        {
+          id:'counting-sum',
+          tex:`$N = \\sum_{i=1}^{n} I_{A_i}$`,
+          read:`the count: one indicator per event, summed`,
+          means:`The mark behind **Counting with Indicator Random Variables** below: each event contributes its 0-or-1, so $N$ is exactly "how many of the $A_i$ occurred" — a random count, not a probability.`,
+          cases:`Taking $E$ termwise turns the count into probabilities, $E[N] = \\sum_i P(A_i)$ — the engine of **Expectation** and **Linearity** below; and a lone indicator is the simplest named variable there is, $I_A \\sim \\operatorname{Bern}(P(A))$ in the [family-declaration notation](!/probability/distributions#notation).`,
+          confusedWith:`A probability. $N$ ranges over $0, 1, \\dots, n$; only its **expectation** lands back among probabilities — keeping the random count and its average apart is the entire trick the page turns on.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
+      before:``,
+      after:``,
+      link:'',
+
+    },
+
     obj3:{
   
       title:`Basic Properties of Indicator Random Variables`,
@@ -1161,6 +1202,25 @@ export default function IndicatorsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

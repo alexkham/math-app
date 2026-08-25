@@ -13,6 +13,7 @@ import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/dis
 import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
 
@@ -136,26 +137,51 @@ The distribution functions as a model that captures the regularities of randomne
     
       },
       notation:{
-    
-        title:`Useful Notation`,
-        content:`
-Throughout this page, we use standard probability notation:
 
-- $\\Omega$ — the sample space, the set of all possible outcomes of a random experiment
-- $\\mathcal{F}$ — a σ-algebra of events, the collection of measurable subsets of $\\Omega$
-- $\\mathbb{P}$ — a probability measure on $(\\Omega, \\mathcal{F})$, assigning probabilities to events
-- $X : \\Omega \\to \\mathbb{R}$ — a random variable, a measurable function mapping outcomes to real numbers
-- $\\mathbb{P}_X$ — the probability distribution of $X$, the induced measure on $\\mathbb{R}$
-- $A$ — a measurable set, typically a subset of $\\mathbb{R}$
-
-The triple $(\\Omega, \\mathcal{F}, \\mathbb{P})$ is called a probability space and provides the foundational structure for all probability theory.
-
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-`,
+        title:`Distribution Notation`,
+        lead:`Every child page in this section declares its family with the same few marks. This hub owns the shared machinery: the formal triple behind the word "distribution", the measure that is the distribution once it becomes a single object, the sign that says two variables share one law, and the family-declaration convention whose parameter slots quietly shift meaning between sources. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+        inherited:`$\\Omega$ and the outcome letters come from [sample space notation](!/probability/sample-space#notation); the signature $X : \\Omega \\to \\mathbb{R}$ and the declaration tilde from [random variable notation](!/probability/random-variables#notation); plain $P(\\cdot)$ and the event letters from the [probability function](!/probability/probability-function#notation); $F_X$ from [CDF notation](!/probability/cdf#notation); the parameters $\\mu$ and $\\sigma^2$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+        entries:[
+          {
+            id:'probability-space-triple',
+            tex:`$(\\Omega, \\mathcal{F}, \\mathbb{P})$`,
+            read:`omega, script F, P — the probability space`,
+            means:`The standing preamble of formal probability — "let $(\\Omega, \\mathcal{F}, \\mathbb{P})$ be a probability space" — three fonts carrying three roles: the outcome set, the collection of events allowed to receive probabilities (the σ-algebra), and the measure that assigns them. **What a Probability Distribution Is** above opens with exactly this triple.`,
+            cases:`Calligraphic $\\mathcal{F}$ — also $\\mathcal{A}$ or $\\Sigma$ by text — marks a collection of sets, one level up from the sets themselves; blackboard $\\mathbb{P}$ is the formal register of the plain $P$ from the [probability function](!/probability/probability-function#notation): measure-theory texts blackboard it, elementary texts do not, and the object is the same.`,
+            confusedWith:`The CDF's letter. Script $\\mathcal{F}$ is a family of events; italic $F_X$ is the [cumulative distribution function](!/probability/cdf#notation) — the same letter working two jobs on this very page, told apart by font alone.`,
+          },
+          {
+            id:'induced-measure',
+            tex:`$\\mathbb{P}_X(A) = \\mathbb{P}(X \\in A)$`,
+            read:`P sub X — the distribution of X, as a measure`,
+            means:`The page's central object in one line: the subscript names whose distribution, and the defining equation moves probability from outcomes to values — the derivation **What a Probability Distribution Is** above spells out. This is "the distribution" once it stops being a table or a curve and becomes a single object.`,
+            alsoWritten:`$P_X$ without the blackboard; $\\operatorname{Law}(X)$ or $\\mathcal{L}(X)$ in advanced texts; measure-theory books write the induced measure as $\\mu_X$ — a collision worth knowing, since probability reserves $\\mu$ for the [mean](!/probability/expected-value#notation).`,
+            confusedWith:`The function that represents it. The measure $\\mathbb{P}_X$ is the distribution itself; the pmf, pdf and CDF are three interchangeable descriptions of it — which is why the page can say every distribution has a CDF without saying every distribution is one.`,
+          },
+          {
+            id:'distribution-equality',
+            tex:`$X \\overset{d}{=} Y$`,
+            read:`X equals Y in distribution`,
+            means:`Same law, not same values: the $d$ rides the equality sign to mark which kind of sameness is claimed — one mark for the body's observation that variables on different spaces may share a distribution.`,
+            cases:`The moving version is $X_n \\xrightarrow{d} X$, convergence in distribution — the mode of convergence the [central limit theorem](!/probability/central-limit-theorem) is stated in; some texts write $\\overset{\\mathcal{D}}{=}$, or put a tilde between two variables.`,
+            confusedWith:`Plain $X = Y$, equality as functions on $\\Omega$. Two fair dice are equal in distribution and almost never equal in value — the unmarked equals sign makes the far stronger claim.`,
+          },
+          {
+            id:'family-declaration',
+            tex:`$X \\sim N(\\mu, \\sigma^2)$`,
+            read:`X is distributed normal with mean mu and variance sigma squared`,
+            means:`The [tilde](!/probability/random-variables#notation) hands a variable to a **named family**: a capitalized code — $N$, $\\operatorname{Bin}$, $\\operatorname{Pois}$, $\\operatorname{Exp}$, $U$ — followed by a parameter list. Each family's own marks live on its page: [Binomial](!/probability/distributions/discrete/binomial), [Geometric](!/probability/distributions/discrete/geometric), [Normal](!/probability/distributions/continuous/normal), [Exponential](!/probability/distributions/continuous/exponential).`,
+            cases:`The parameter slots are the minefield the [tilde entry](!/probability/random-variables#notation) points here about: $N(\\mu, \\sigma^2)$ carries the **variance** in most textbooks but $N(\\mu, \\sigma)$ the **standard deviation** in much software; $\\operatorname{Exp}(\\lambda)$ is a **rate** in most texts and a **mean** in others; the Geometric counts trials from one or failures from zero by source. The family name never settles its own second slot — check the convention before reading any parameter positionally.`,
+            confusedWith:`A function call. $N(\\mu, \\sigma^2)$ computes nothing — it names a member of a family; the parenthesis holds a label's arguments, not an evaluation.`,
+          },
+        ],
+        symbolsHref:`/math-symbols/probability`,
+        symbolsLabel:`All probability symbols`,
+        parentHref:`/probability`,
+        parentLabel:`Probability`,
         before:``,
         after:``,
-    
+
       },
       common:{
     
@@ -206,9 +232,9 @@ Distributions bridge probability theory and data science. They connect theoretic
 
 $$F_X(x) = \\mathbb{P}(X \\leq x)$$
 
-This function serves as a complete characterization of any [random variable](!/probability/random-variables), whether [discrete](!/probability/distributions/discrete) or [continuous](!/probability/distributions/continuous). In the discrete case, the CDF forms a step function that increases in jumps at each outcome. In the continuous case, it appears as a smooth, continuous curve that represents the integral of the density function from $-\infty$ to $x$.
+This function serves as a complete characterization of any [random variable](!/probability/random-variables), whether [discrete](!/probability/distributions/discrete) or [continuous](!/probability/distributions/continuous). In the discrete case, the CDF forms a step function that increases in jumps at each outcome. In the continuous case, it appears as a smooth, continuous curve that represents the integral of the density function from $-\\infty$ to $x$.
 
-The [CDF](!/probability/cdf) is universally applicable and mathematically powerful. It allows us to easily calculate the probability of intervals—simply by taking the difference $F(b) - F(a)$—and is the basis for defining **Quantiles** and **Percentiles**. Because probabilities cannot be negative and total probability must sum to one, every CDF fundamentally starts at 0 (at $-\infty$) and monotonically increases to 1 (at $+\infty$).`,
+The [CDF](!/probability/cdf) is universally applicable and mathematically powerful. It allows us to easily calculate the probability of intervals—simply by taking the difference $F(b) - F(a)$—and is the basis for defining **Quantiles** and **Percentiles**. Because probabilities cannot be negative and total probability must sum to one, every CDF fundamentally starts at 0 (at $-\\infty$) and monotonically increases to 1 (at $+\\infty$).`,
         before:``,
         after:``,
     
@@ -467,9 +493,20 @@ continuousDistributionsTypesData, seoData}) {
      {
         id:'notation',
         title:sectionsContent.notation.title,
-        link:sectionsContent.notation.link,
+        link:'',
         content:[
-          sectionsContent.notation.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
      {

@@ -160,7 +160,7 @@ const CustomProbability=()=>(
             subcategories: [
               // {
               //   name: "Quadratic Equations Calculator",
-              //   href: "/calculators/quadratic-equations"
+              //   href: "/algebra/calculators/equations/quadratic"
               // },
               {
                 name: "Factoring Calculator",

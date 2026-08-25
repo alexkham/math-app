@@ -79,7 +79,7 @@ export default function VisualToolsPage() {
                 { name: 'Matrix Multiplication Visualizer', href: '/visual-tools/matrix-multiplication' },
                 { name: 'Gauss Elimination Visual Calculator', href: '/visual-tools/gauss-elimination' },
                 { name: 'Determinat Visual Calculator', href: '/visual-tools/determinant-calculator' },
-                // { name: 'Matrix Transposition Visualizer', href: '/visual-tools/matrix-transposition' },
+                // { name: 'Matrix Transposition Visualizer', href: '/linear-algebra/visual-tools/matrix-transpose' },
                 { name: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
             ]
         },
@@ -97,7 +97,7 @@ export default function VisualToolsPage() {
             content: "See How Main Concepts of Trigonometry Visualized",
             subcategories: [
                 { name: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
-                // { name: 'Angle Quadrants', href: '/trigonometry/quadrants' },
+                // { name: 'Angle Quadrants', href: '/trigonometry/visual-tools/functions-signs' },
             ]
         },
         {

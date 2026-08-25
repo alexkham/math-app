@@ -663,6 +663,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1011,26 +1012,50 @@ In simple terms, it is a way to look at **the whole outcome**, and it is the fir
   
     },
     notation:{
-      title:`Useful Notation`,
-      content:`
-Before working with joint probability formulas, we establish the standard notation:
-
-- $X, Y, Z$ — random variables
-- $P(X=x, Y=y)$ or $P(x,y)$ — joint probability mass function (discrete)
-- $f(x,y)$ or $f_{X,Y}(x,y)$ — joint probability density function (continuous)
-- $P(A \\cap B)$ — probability of events $A$ and $B$ both occurring
-- $(x,y)$ — a point in the joint sample space
-- $\\mathbb{R}^2, \\mathbb{R}^n$ — multidimensional spaces
-
-These symbols appear consistently throughout joint probability calculations and provide a compact way to express relationships between multiple random variables.
-
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-`,
+      title:`Joint Probability Notation`,
+      lead:`Joint probability's marks are about reading several names inside one parenthesis: what the comma is doing there, which subscripts say who survived, and how to tell from the letters alone whether an expression holds the whole two-variable picture or only a shadow of it. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The event comma $P(A, B)$ and the joint $P(A \\cap B)$ come from [conditional probability notation](!/probability/conditional-probability#notation); the capital/lowercase split $X$ vs $x$ from [random variable notation](!/probability/random-variables#notation); $p$ vs $f$ and $F$ from the [probability function](!/probability/probability-function#notation) and [CDF notation](!/probability/cdf#notation); the coordinate pair $(x, y)$ and the plane $\\mathbb{R}^2$ from [vector notation](!/linear-algebra/vectors/basic-operations#notation).`,
+      entries:[
+        {
+          id:'variable-comma',
+          tex:`$P(X = x,\\, Y = y)$`,
+          read:`the probability that X equals x and Y equals y`,
+          means:`The comma is a quiet $\\cap$: each equality names an event, and the comma intersects them. With random variables the comma form is not an alternative spelling but the standard one — the intersection sign all but disappears once two or more variables share the parenthesis.`,
+          cases:`More variables simply extend the list, $P(X = x, Y = y, Z = z)$; events and variables mix freely on the same comma, $P(A,\\, X = x)$; the fully compressed $P(x, y)$ drops the capitals and keeps only the values, readable because the lowercase letters advertise whose values they are.`,
+          confusedWith:`The ordered pair. The same comma builds the point $(x, y)$ in the plane, so $P(x, y)$ can misread as "P applied to a point" — it is an intersection of two events, not a function evaluated at coordinates.`,
+        },
+        {
+          id:'joint-pmf-pdf',
+          tex:`$p(x, y)$, $f_{X,Y}(x, y)$`,
+          read:`the joint mass function — the joint density`,
+          means:`The one-variable split between mass $p$ and density $f$ carries over unchanged from the [probability function](!/probability/probability-function#notation); what is new is the argument list. Two names inside the parenthesis declare a function over pairs — a table of cells in the discrete case, a surface over the plane in the continuous one.`,
+          cases:`The subscript pair $f_{X,Y}$ names exactly which variables the function describes — bookkeeping that becomes load-bearing the moment marginals enter and $f_X$, $f_Y$ and $f_{X,Y}$ circulate in the same computation; when only one joint function is in play, the bare $f(x, y)$ is standard.`,
+          confusedWith:`A product. $f_{X,Y}(x, y)$ does not split into $f_X(x)\\,f_Y(y)$ in general — when it does, that factorization **is** [independence](!/probability/independence#notation), and assuming the split is precisely the error **Common Mistakes** below warns against.`,
+        },
+        {
+          id:'marginal-sum',
+          tex:`$p_X(x) = \\sum_y p(x, y)$`,
+          read:`the marginal of X: sum the joint over every value of y`,
+          means:`Marginalization: collapse the joint by adding up everything the other variable can do. The surviving variable is named in the subscript; the summed-away one appears only under the $\\sum$. For densities the sum becomes an integral, $f_X(x) = \\int f_{X,Y}(x, y)\\,dy$.`,
+          alsoWritten:`The name is literal: in a contingency table these are the row and column totals written in the table's **margins** — the layout **Contingency Tables** above draws — and the notation inherited the word from the printed page.`,
+          confusedWith:`The conditional. $p_X(x)$ averages over the other variable while $p(x \\mid y)$ pins it to one value — in a table, a row total versus a single cell divided by its column total; mixing the two is the table-reading error **Common Mistakes** below lists.`,
+        },
+        {
+          id:'joint-cdf',
+          tex:`$F(x, y) = P(X \\le x,\\, Y \\le y)$`,
+          read:`the joint CDF: both variables at or below their thresholds`,
+          means:`[CDF notation](!/probability/cdf#notation) with the comma spliced in: one accumulated probability over the quarter-plane south-west of $(x, y)$. Capital $F$ keeps its accumulate-and-bound role; the argument list keeps the comma's intersection reading.`,
+          cases:`Probabilities of rectangles come out by inclusion–exclusion on corner values, $F(b, d) - F(a, d) - F(b, c) + F(a, c)$ — the two-variable analogue of the one-variable $F(b) - F(a)$ subtraction.`,
+          confusedWith:`A componentwise product. $F(x, y)$ is not $F_X(x)\\,F_Y(y)$ unless the variables are independent — the same factorization trap as the density, one storey up.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
       after:``,
-  
+
     },
   
     tables:{
@@ -1049,10 +1074,10 @@ The table displays the **entire joint distribution at once**, making it easy to 
 
 A small table illustrates the idea:
 
-|        | \(y_1\) | \(y_2\) |
+|        | $y_1$ | $y_2$ |
 |--------|--------|--------|
-| \(x_1\) | \(P(x_1, y_1)\) | \(P(x_1, y_2)\) |
-| \(x_2\) | \(P(x_2, y_1)\) | \(P(x_2, y_2)\) |
+| $x_1$ | $P(x_1, y_1)$ | $P(x_1, y_2)$ |
+| $x_2$ | $P(x_2, y_1)$ | $P(x_2, y_2)$ |
 
 This layout makes it easy to read, compare, and analyze how outcomes **pair up** across the two variables.
 `,
@@ -1156,9 +1181,9 @@ Independence is the cleanest possible relationship between variables: completely
     conditional:{
       title:`Connection to Conditional Probability`,
       content:`
-• Conditional probability is built directly from the joint distribution  
-• $\(P(X=x \\mid Y=y)\)$ is found by taking the joint value and dividing by the marginal of \(Y\)  
-• In a table: cell ÷ column total  
+• Conditional probability is built directly from the joint distribution
+• $P(X=x \\mid Y=y)$ is found by taking the joint value and dividing by the marginal of $Y$
+• In a table: cell ÷ column total
 • In a density: joint density ÷ marginal density  
 • The chain rule comes from this relationship and breaks joint probabilities into conditional pieces  
 • Bayes' theorem is a direct consequence of joint and marginal probabilities working together
@@ -1204,9 +1229,9 @@ The table below lines up these standard families with the type they belong to, w
       title:`Common Mistakes`,
       content:`
 • Confusing joint probability with conditional probability  
-• Assuming independence when variables are actually dependent  
-• Treating \(P(A, B)\) as if it were \(P(A) + P(B)\)  
-• Forgetting that all joint values must sum or integrate to 1  
+• Assuming independence when variables are actually dependent
+• Treating $P(A, B)$ as if it were $P(A) + P(B)$
+• Forgetting that all joint values must sum or integrate to 1
 • Mixing up marginals and conditionals when reading tables  
 • Misinterpreting patterns in contingency tables as independence
 
@@ -1234,7 +1259,7 @@ The pitfalls above can be lined up with what makes each one a misreading and wha
     obj5:{
   
       title:`Joint Probability at a Glance`,
-      content:`The table below condenses joint probability into a single quick-reference card — what it represents, how it&apos;s expressed in the discrete and continuous cases, how marginals and conditional probabilities are recovered from it, what independence looks like in the joint structure, why it matters in practice, and the pitfall most frequently confused with it.`,
+      content:`The table below condenses joint probability into a single quick-reference card — what it represents, how it is expressed in the discrete and continuous cases, how marginals and conditional probabilities are recovered from it, what independence looks like in the joint structure, why it matters in practice, and the pitfall most frequently confused with it.`,
       before:``,
       after:``,
   
@@ -1312,7 +1337,18 @@ export default function JointProbabilityPage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.notation.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

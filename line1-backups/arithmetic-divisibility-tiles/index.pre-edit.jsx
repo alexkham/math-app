@@ -470,8 +470,6 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import DivisibilityTiles from '../../../../app/components/divisibility/DivisibilityTiles'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
-import divisibilityTilesDiagrams from '@/app/components/divisibility/divisibilityTilesDiagrams'
 
 
 export async function getStaticProps(){
@@ -521,11 +519,11 @@ export async function getStaticProps(){
 
     obj1: {
       title: `How to Use Divisibility Tiles`,
-      content: `This interactive tool helps you visualize how numbers divide into equal groups. Start by entering any number between 1 and 100 in the Number field. The tool displays your number as a [grid of gray tiles](!#understanding-the-tiles-display), arranged in rows of 10 for easy counting.
+      content: `This interactive tool helps you visualize how numbers divide into equal groups. Start by entering any number between 1 and 100 in the Number field. The tool displays your number as a grid of gray tiles, arranged in rows of 10 for easy counting.
 
 Next, select a divisor by clicking one of the buttons labeled 2 through 9. This determines how many tiles will be in each group when you perform the division.
 
-Click the **Group** button to see the magic happen. The tool rearranges all tiles into equal-sized groups based on your chosen divisor. Blue groups show complete sets, while any [leftover tiles](!#division-quotients-and-remainders) appear in a yellow group. Click **Reset** to return to the original grid view and try a different divisor. A perfect split with no yellow at all is what [divisibility](!#what-is-divisibility) means—and if the divisor is larger than the number itself, [no complete group forms](!#when-the-divisor-is-larger).`,
+Click the **Group** button to see the magic happen. The tool rearranges all tiles into equal-sized groups based on your chosen divisor. Blue groups show complete sets, while any leftover tiles appear in a yellow group. Click **Reset** to return to the original grid view and try a different divisor.`,
       before: ``,
       after: ``,
       link: '',
@@ -539,9 +537,7 @@ When you click Group, the display transforms to show the division result. Comple
 
 The visual contrast between blue groups and yellow leftovers provides instant feedback about divisibility. Equal-sized blue boxes mean perfect division, while any yellow tiles indicate a remainder exists.`,
       before: ``,
-      after: `The rows-of-ten arrangement is deliberate: it mirrors base-ten notation, so a number like 23 is readable at a glance as two full rows and three extra tiles—the tens digit and the units digit made physical.
-
-Both views show the same count; only the organizing question changes. Ungrouped, the tiles just state the number. Grouped, they answer whether that number splits evenly, and the [result banner](!#reading-the-result-banner) records the verdict in symbols.`,
+      after: ``,
       link: '',
     },
 
@@ -549,7 +545,7 @@ Both views show the same count; only the organizing question changes. Ungrouped,
       title: `Reading the Result Banner`,
       content: `The blue result banner above the tiles area summarizes your division in plain language. Before grouping, it simply shows your tile count (for example, "23 tiles").
 
-After clicking Group, the banner updates to show the complete result. For a number like 23 divided by 5, you'll see: **4 groups of 5 + 3 leftover**. This corresponds to the division equation $23 ÷ 5 = 4$ [remainder](!#division-quotients-and-remainders) $3$.
+After clicking Group, the banner updates to show the complete result. For a number like 23 divided by 5, you'll see: **4 groups of 5 + 3 leftover**. This corresponds to the division equation $23 ÷ 5 = 4$ remainder $3$.
 
 When a number divides evenly, the banner displays only the group count followed by a green checkmark and "Divisible ✓". For instance, dividing 20 by 5 shows: **4 groups of 5 — Divisible ✓**. This visual confirmation helps reinforce when remainders are zero.`,
       before: ``,
@@ -563,7 +559,7 @@ When a number divides evenly, the banner displays only the group count followed 
 
 After grouping, the panel shows numbered steps with mathematical notation. Step 1 displays the division equation with the quotient and remainder. Step 2 shows the multiplication check: groups times divisor equals the portion that divides evenly.
 
-When a remainder exists, Step 3 appears with yellow highlighting, showing the subtraction that yields the leftover: $\\text{number} - (\\text{groups} × \\text{divisor}) = \\text{remainder}$. The conclusion box at the bottom confirms whether the number is [divisible](!#what-is-divisibility) (green) or not (yellow).`,
+When a remainder exists, Step 3 appears with yellow highlighting, showing the subtraction that yields the leftover: $\\text{number} - (\\text{groups} × \\text{divisor}) = \\text{remainder}$. The conclusion box at the bottom confirms whether the number is divisible (green) or not (yellow).`,
       before: ``,
       after: ``,
       link: '',
@@ -578,7 +574,7 @@ The hint suggests two options: subtract the remainder to find a smaller divisibl
 - Subtract 3 to get **20** (which gives 4 groups of 5)
 - Add 2 to get **25** (which gives 5 groups of 5)
 
-This feature helps students understand the relationship between consecutive [multiples](!#divisibility-and-factors) and see how close any number is to being divisible by a given divisor.`,
+This feature helps students understand the relationship between consecutive **multiples** and see how close any number is to being divisible by a given divisor.`,
       before: ``,
       after: ``,
       link: '',
@@ -590,11 +586,9 @@ This feature helps students understand the relationship between consecutive [mul
 
 The notation $b | a$ means "b divides a" and indicates that $a$ is a **multiple** of $b$. Equivalently, $b$ is a **factor** (or divisor) of $a$. Understanding divisibility is fundamental to working with fractions, finding common denominators, and factoring numbers.
 
-Divisibility connects directly to the concept of [remainders](!#division-quotients-and-remainders). When $a ÷ b$ produces remainder $r$, we write $a = b × q + r$ where $q$ is the quotient. When $r = 0$, divisibility holds.`,
+Divisibility connects directly to the concept of remainders. When $a ÷ b$ produces remainder $r$, we write $a = b × q + r$ where $q$ is the quotient. When $r = 0$, divisibility holds.`,
       before: ``,
-      after: `The frozen frame above is the definition made visible: twenty tiles, four boxes of five, and nothing outside a box. The witness $k$ in $a = b × k$ is simply the number of blue boxes—divisibility is not an abstract property but a successful packing.
-
-Note what the picture rules out: there is no way to draw a fifth box, and no partial box is allowed. That all-or-nothing character is why divisibility questions have clean yes/no answers, and why the [common divisibility rules](!#common-divisibility-rules) can decide them from digits alone without drawing a single tile.`,
+      after: ``,
       link: '',
     },
 
@@ -608,9 +602,7 @@ The quotient tells how many complete groups of size $b$ fit into $a$. The remain
 
 The **modulo operation** extracts just the remainder: $a \\mod b = r$. For instance, $23 \\mod 5 = 3$. This operation appears throughout mathematics and computer science for cyclic patterns and clock arithmetic.`,
       before: ``,
-      after: `The frozen 23 ÷ 5 above shows why the division algorithm's constraint $0 ≤ r < b$ is forced: three yellow tiles cannot form a fourth-and-a-bit blue box, and if five could ever be left over they would immediately close another complete group. The remainder is small precisely because grouping is greedy.
-
-Uniqueness matters too: for a given number and divisor there is exactly one way to fill the picture—one group count, one leftover. Two edge cases bracket the idea: a remainder of zero collapses the yellow box entirely, and a [quotient of zero](!#when-the-divisor-is-larger) leaves nothing but yellow. When the split fails, the [hint below the conclusion](!#finding-nearby-divisible-numbers) names the nearest numbers that would succeed.`,
+      after: ``,
       link: '',
     },
 
@@ -625,7 +617,7 @@ Uniqueness matters too: for a given number and divisor there is exactly one way 
 - **Divisible by 6**: Divisible by both 2 and 3
 - **Divisible by 9**: Sum of digits is divisible by 9
 
-Use the Divisibility Tiles tool to verify these rules visually. Enter a number, select the divisor, and observe whether groups form perfectly or [leave remainders](!#division-quotients-and-remainders). This hands-on approach builds intuition for why these rules work.`,
+Use the Divisibility Tiles tool to verify these rules visually. Enter a number, select the divisor, and observe whether groups form perfectly or leave remainders. This hands-on approach builds intuition for why these rules work.`,
       before: ``,
       after: ``,
       link: '',
@@ -633,7 +625,7 @@ Use the Divisibility Tiles tool to verify these rules visually. Enter a number, 
 
     obj9: {
       title: `Divisibility and Factors`,
-      content: `The divisors of a number $n$ are all integers that divide $n$ evenly. For example, the divisors of 12 are: 1, 2, 3, 4, 6, and 12. Each divisor produces [zero remainder](!#what-is-divisibility) when dividing into 12.
+      content: `The divisors of a number $n$ are all integers that divide $n$ evenly. For example, the divisors of 12 are: 1, 2, 3, 4, 6, and 12. Each divisor produces zero remainder when dividing into 12.
 
 **Prime numbers** have exactly two divisors: 1 and themselves. Numbers like 2, 3, 5, 7, 11, and 13 cannot be split into smaller equal groups (other than groups of 1). Use the Divisibility Tiles tool to explore primes—try dividing a prime by various divisors and notice that none produce zero remainder.
 
@@ -655,23 +647,9 @@ Use the Divisibility Tiles tool to verify these rules visually. Enter a number, 
 
 **Prime Factorization**: Breaking numbers into prime factors reveals all divisibility relationships and provides a systematic approach to finding GCD and LCM.
 
-**Modular Arithmetic**: Extends [remainder concepts](!#division-quotients-and-remainders) into a complete number system used in cryptography, computer science, and advanced mathematics.`,
+**Modular Arithmetic**: Extends remainder concepts into a complete number system used in cryptography, computer science, and advanced mathematics.`,
       before: ``,
       after: ``,
-      link: '',
-    },
-
-    obj11: {
-      title: `When the Divisor Is Larger Than the Number`,
-      content: `What happens when you try to divide 3 tiles into groups of 5? Not even one complete group can form. The tool shows zero blue boxes and all three tiles in yellow, and the banner reads: **0 groups of 5 + 3 leftover**.
-
-This is a perfectly legal division—just an extreme one. The [quotient](!#division-quotients-and-remainders) is 0 and the remainder equals the number itself: $3 = 5 × 0 + 3$. The division algorithm's condition $0 ≤ r < b$ still holds, because 3 is less than 5.
-
-Try it in the tool: enter any number smaller than your chosen divisor and click Group. The all-yellow display makes the case memorable—division did not fail, it simply produced nothing but leftover.`,
-      before: ``,
-      after: `The case matters beyond curiosity. It anchors the general fact that any number smaller than the divisor is its own remainder—which is exactly why $a \\mod b$ leaves small numbers untouched, and why clock arithmetic reads 3 o'clock as simply 3.
-
-It also completes the tool's spectrum of outcomes: all blue (divisible), blue with yellow (a proper remainder), and all yellow (quotient zero). The [nearby-numbers hint](!#finding-nearby-divisible-numbers) still works here: for 3 ÷ 5 it points down to 0 and up to 5, the two nearest multiples.`,
       link: '',
     }
 
@@ -772,38 +750,13 @@ It also completes the tool's spectrum of outcomes: all blue (divisible), blue wi
     content: ``
   }
 
-  // Frozen-state framed units (Line 1): the tool's four display outcomes.
-  const d = divisibilityTilesDiagrams;
-  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
-  const stateUnits = {
-    ungrouped: u('ungrouped', '23 tiles, ungrouped, frozen',
-      'Twenty-three gray tiles in rows of ten: two full rows and three more. The layout states the number before any question about grouping is asked.'),
-    divisible: u('divisible', '20 ÷ 5, frozen',
-      'Four blue boxes of five tiles each, and nothing outside them: 20 = 4 × 5 exactly, so the banner reports Divisible ✓.'),
-    remainder: u('remainder', '23 ÷ 5, frozen',
-      'Four complete blue groups absorb twenty tiles; the three that would not fit glow yellow — the remainder the equation writes as 23 = 4 × 5 + 3.'),
-    zeroGroups: u('zeroGroups', '3 ÷ 5, frozen',
-      'With only three tiles, no group of five can form: zero blue boxes and every tile yellow — 3 = 5 × 0 + 3.'),
-  };
-
-  // Per-state panel explanations (Line 1). Rendered at the bottom of the tool's
-  // Explanation column through processContent — same-page !# anchors work.
-  const explanations = {
-    ungrouped: `The grid shows your number as unit tiles in rows of ten — nothing is decided yet; grouping will ask whether they split into equal sets. [Learn more about the tiles display](!#understanding-the-tiles-display) · [How the tool works](!#how-to-use-divisibility-tiles)`,
-    divisible: `Every tile landed in a complete blue group and none are left over — the remainder is zero, which is exactly what divisibility means. [Learn more about divisibility](!#what-is-divisibility) · [How the tool works](!#how-to-use-divisibility-tiles)`,
-    remainder: `The yellow tiles are the remainder: what stays after the largest possible number of complete groups has been formed. [Learn more about quotients and remainders](!#division-quotients-and-remainders) · [How the tool works](!#how-to-use-divisibility-tiles)`,
-    zeroGroups: `The divisor is larger than the number, so not even one complete group forms — the quotient is 0 and every tile is leftover. [Learn more about this edge case](!#when-the-divisor-is-larger) · [How the tool works](!#how-to-use-divisibility-tiles)`,
-  };
-
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
-      seoData,
-      stateUnits,
-      explanations
+      seoData
     }
   }
 }
@@ -813,42 +766,70 @@ export default function DivisibilityTilesPage({
   sectionsContent,
   introContent,
   faqQuestions,
-  schemas,
-  stateUnits,
-  explanations
+  schemas
 }) {
 
-  // Helper rows: plain section / per-state section carrying its frozen unit
-  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
-  const plain = (obj, id) => ({
-    id,
-    title: sectionsContent[obj].title,
-    link: sectionsContent[obj].link,
-    content: [sectionsContent[obj].content]
-  })
-  const stateRow = (obj, id, unitKey) => ({
-    id,
-    title: sectionsContent[obj].title,
-    link: sectionsContent[obj].link,
-    content: [
-      sectionsContent[obj].content,
-      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
-      sectionsContent[obj].after,
-    ]
-  })
-
   const genericSections = [
-    plain('obj1', 'how-to-use-divisibility-tiles'),
-    stateRow('obj2', 'understanding-the-tiles-display', 'ungrouped'),
-    plain('obj3', 'reading-the-result-banner'),
-    plain('obj4', 'using-the-explanation-panel'),
-    plain('obj5', 'finding-nearby-divisible-numbers'),
-    stateRow('obj6', 'what-is-divisibility', 'divisible'),
-    stateRow('obj7', 'division-quotients-and-remainders', 'remainder'),
-    stateRow('obj11', 'when-the-divisor-is-larger', 'zeroGroups'),
-    plain('obj8', 'common-divisibility-rules'),
-    plain('obj9', 'divisibility-and-factors'),
-    plain('obj10', 'related-concepts-and-tools'),
+    {
+      id: '1',
+      title: sectionsContent.obj1.title,
+      link: sectionsContent.obj1.link,
+      content: [sectionsContent.obj1.content]
+    },
+    {
+      id: '2',
+      title: sectionsContent.obj2.title,
+      link: sectionsContent.obj2.link,
+      content: [sectionsContent.obj2.content]
+    },
+    {
+      id: '3',
+      title: sectionsContent.obj3.title,
+      link: sectionsContent.obj3.link,
+      content: [sectionsContent.obj3.content]
+    },
+    {
+      id: '4',
+      title: sectionsContent.obj4.title,
+      link: sectionsContent.obj4.link,
+      content: [sectionsContent.obj4.content]
+    },
+    {
+      id: '5',
+      title: sectionsContent.obj5.title,
+      link: sectionsContent.obj5.link,
+      content: [sectionsContent.obj5.content]
+    },
+    {
+      id: '6',
+      title: sectionsContent.obj6.title,
+      link: sectionsContent.obj6.link,
+      content: [sectionsContent.obj6.content]
+    },
+    {
+      id: '7',
+      title: sectionsContent.obj7.title,
+      link: sectionsContent.obj7.link,
+      content: [sectionsContent.obj7.content]
+    },
+    {
+      id: '8',
+      title: sectionsContent.obj8.title,
+      link: sectionsContent.obj8.link,
+      content: [sectionsContent.obj8.content]
+    },
+    {
+      id: '9',
+      title: sectionsContent.obj9.title,
+      link: sectionsContent.obj9.link,
+      content: [sectionsContent.obj9.content]
+    },
+    {
+      id: '10',
+      title: sectionsContent.obj10.title,
+      link: sectionsContent.obj10.link,
+      content: [sectionsContent.obj10.content]
+    }
   ]
 
   return (
@@ -909,7 +890,7 @@ export default function DivisibilityTilesPage({
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Tiles</h1>
       <br/>
-      <DivisibilityTiles explanations={explanations}/>
+      <DivisibilityTiles/>
       <br/>
       <SectionTableOfContents sections={genericSections}/>
       <br/>

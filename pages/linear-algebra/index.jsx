@@ -105,7 +105,7 @@ const customSections = {
           <div class="lmc-tool-desc">Learn the process of matrix multiplication explained step after step with our interactive widget.</div>
           <span class="lmc-tool-open">Open tool &rarr;</span>
         </a>
-        <a class="lmc-tool-card" href="/visual-tools/matrix-transposition">
+        <a class="lmc-tool-card" href="/linear-algebra/visual-tools/matrix-transpose">
           <span class="lmc-tool-badge">Visual Tool</span>
           <div class="lmc-tool-title">Matrix Transposition Visualizer</div>
           <div class="lmc-tool-desc">Learn the principles of matrix transposition using this interactive visual tool.</div>

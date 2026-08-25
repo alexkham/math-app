@@ -1563,6 +1563,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -2872,77 +2873,40 @@ The table below collects the patterns above into a single reference, pairing eac
   link: '',
 },
 
-  obj12: {
-  title: `Notation`,
-  content: `
-The median has several standard notations used across probability and statistics literature.
-
-## Common Notations
-
-The most widely used notation is:
-
-$$\\text{median}(X)$$
-
-This explicitly labels the measure being computed.
-
-Alternative notations include:
-
-$$\\text{Med}(X)$$
-
-A compact abbreviation.
-
-$$\\tilde{x}$$ or $$\\tilde{\\mu}$$
-
-The tilde symbol over a variable, commonly used to distinguish median from [mean](!/probability/expected-value) $\\mu$ or sample mean $\\bar{x}$.
-
-$$Q_2$$
-
-The median as the second quartile.
-
-$$m$$
-
-A simple variable for the median value.
-
-## Relationship to Quantile Notation
-
-The median is mathematically expressed as the 0.5-quantile or 50th percentile:
-
-$$\\text{median}(X) = F^{-1}(0.5)$$
-
-where $F^{-1}$ denotes the inverse [cumulative distribution function](!/probability/cdf).
-
-Alternative quantile notations:
-
-$$x_{0.5}$$ or $$Q_{0.5}$$
-
-Both indicate the value at cumulative probability 0.5.
-
-## In Statistical Context
-
-Sample median (from data) vs population median (from distribution) may be distinguished:
-
-$\\tilde{x}$ or $\\text{median}(\\text{sample})$ for the observed median
-
-$m$ or $\\text{median}(X)$ for the theoretical population median
-
-Context usually makes this distinction clear without special notation.
-
-## Comparison with Mean Notation
-
-[Mean](!/probability/expected-value): $\\mu$, $E[X]$, or $\\bar{x}$ (sample mean)
-
-Median: $\\tilde{x}$, $\\text{Med}(X)$, or $Q_2$
-
-The tilde distinguishes median from mean in formulas where both appear.
-
-## No Universal Standard
-
-Unlike [variance](!/probability/variance) ($\\sigma^2$ or $\\text{Var}(X)$), the median lacks a single universally adopted symbol. Different sources use different conventions.
-
-Always define your notation explicitly when writing technical work to avoid confusion.
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-  `,
+  notation: {
+  title: `Median Notation`,
+  lead: `Half the probability on each side is the concept; the marks for it never settled into one symbol. This section fixes the three families in circulation — the spelled-out operator, the tilde that marks a sample estimate, and the quantile spellings that make the median one value of a larger function. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+  inherited: `$P(\\cdot)$ and the variable letters come from the [probability function](!/probability/probability-function#notation) and [random variable notation](!/probability/random-variables#notation); $F$ from [CDF notation](!/probability/cdf#notation); the mean's $\\mu$, $E[X]$ and $\\bar{x}$ from [expected value notation](!/probability/expected-value#notation).`,
+  entries: [
+    {
+      id:'median-operator',
+      tex:`$\\operatorname{median}(X)$, $\\operatorname{Med}(X)$, $m$`,
+      read:`the median of X`,
+      means:`The operator spelling, written out or abbreviated — upright, like $\\operatorname{Var}$ and $\\operatorname{Cov}$ — plus the bare letter $m$ for the value itself. The defining inequality pair lives in **Median for Discrete Distributions** above; the notation here names the number those two conditions pin down.`,
+      cases:`Lowercase $\\operatorname{med}(X)$ in journal shorthand; and the caveat the field itself admits: unlike [variance](!/probability/variance#notation) with its settled $\\sigma^2$ and $\\operatorname{Var}$, the median has **no universally adopted symbol** — careful technical writing defines its choice explicitly, and a reader should expect the convention to change between sources.`,
+      confusedWith:`The letter $m$ at its other jobs. Nothing reserves $m$ — the same problem may hand it to a slope, a count or a bound; when the median genuinely matters, the operator spelling removes the ambiguity the single letter invites.`,
+    },
+    {
+      id:'sample-median-tilde',
+      tex:`$\\tilde{x}$`,
+      read:`x-tilde — the sample median`,
+      means:`A tilde stacked **over** the letter marks the median's side of the population/estimate line: $\\tilde{x}$ is to the sample as $\\bar{x}$ is to $\\mu$ — the pairing [expected value notation](!/probability/expected-value#notation) draws for the mean; $\\tilde{\\mu}$ appears when a text wants the population median wearing Greek.`,
+      cases:`From sorted data the sample median reads off the order statistics — parenthesized subscripts $x_{(k)}$ mean "$k$-th smallest" — as $x_{((n+1)/2)}$ for odd $n$, and by the averaging convention $\\tfrac{1}{2}\\left(x_{(n/2)} + x_{(n/2+1)}\\right)$ for even $n$; the average is a convention, not a theorem.`,
+      sameGlyphElsewhere:`The same squiggle **between** symbols is the distribution declaration $X \\sim F$ of [random variable notation](!/probability/random-variables#notation) — position decides the job: over a letter it estimates, between letters it declares.`,
+    },
+    {
+      id:'quantile-forms',
+      tex:`$Q_2 = F^{-1}(0.5)$`,
+      read:`the second quartile — F-inverse at one half`,
+      means:`The median in its quantile uniforms: second quartile $Q_2$ of the $Q_1, Q_2, Q_3$ family, the $0.5$-quantile $x_{0.5}$ (also written $Q_{0.5}$), the 50th percentile — **Median as the 50th Percentile** above walks the equivalence. $F^{-1}$ inverts the [CDF](!/probability/cdf#notation): a probability goes in, a value comes back.`,
+      cases:`The $^{-1}$ is the [inverse-function label](!/functions/inverse#2), not a reciprocal — and for a discrete or plateaued $F$ no literal inverse exists, so the quantile function means the smallest $x$ with $F(x) \\ge 0.5$, which is exactly why the discrete definition above needs two inequalities instead of one equation.`,
+      confusedWith:`The subscripts of $Q_2$ and $Q_{0.5}$. One counts cut points — second of the three quartiles — and the other states a probability; the two conventions sit one keystroke apart and name the same value by different logic.`,
+    },
+  ],
+  symbolsHref: `/math-symbols/probability`,
+  symbolsLabel: `All probability symbols`,
+  parentHref: `/probability`,
+  parentLabel: `Probability`,
   before: ``,
   after: ``,
   link: '',
@@ -3420,10 +3384,21 @@ export default function MedianPage({
     },
     {
         id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-          sectionsContent.obj12.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { processContent } from '@/app/utils/contentProcessor';
 
 // ============================================================================
 // Constants
@@ -100,7 +99,7 @@ function computeGeometry(physicalWidth, divisor, maxNumber) {
 // Component
 // ============================================================================
 
-export default function ModPieWheel({ explanations = null }) {
+export default function ModPieWheel() {
   // --- state ---
   const [divisor, setDivisor] = useState(6);
   const [inputValue, setInputValue] = useState('36');
@@ -303,18 +302,6 @@ export default function ModPieWheel({ explanations = null }) {
     ? 'summary'
     : 'idle';
 
-  // Line 1: state key for the hoisted explanations - the panel phase, with the
-  // pinned zero class and the divisor-2 parity wheel as their own states.
-  const stateKey =
-    panelMode === 'running'
-      ? 'running'
-      : panelMode === 'class'
-      ? (activeRemainder === 0 ? 'zeroPinned' : 'classDetail')
-      : panelMode === 'summary'
-      ? (divisor === 2 ? 'parity' : 'summary')
-      : 'idle';
-  const stateEntry = (explanations && explanations[stateKey]) || null;
-
   // ============================================================================
   // Render
   // ============================================================================
@@ -448,22 +435,6 @@ export default function ModPieWheel({ explanations = null }) {
             placed,
             committedNumber,
           })}
-          {stateEntry && (
-            <div
-              style={{
-                background: PALETTE.bg,
-                border: `1px solid ${PALETTE.border}`,
-                borderLeft: `4px solid ${PALETTE.accentWarm}`,
-                borderRadius: 8,
-                padding: '0.9rem 1rem',
-                fontSize: '0.82rem',
-                lineHeight: 1.55,
-                color: PALETTE.text,
-              }}
-            >
-              {processContent(stateEntry)}
-            </div>
-          )}
           {renderDeepDive()}
         </aside>
       </div>
@@ -1415,8 +1386,7 @@ function renderDeepDive() {
             Run with divisor 2 — even and odd numbers split into two halves of the wheel.
           </li>
           <li>
-            Run with divisor 5 — numbers ending in the same digit, or in digits
-            five apart (like 3 and 8), share a slice.
+            Run with divisor 10 — the last digit of any number is its remainder.
           </li>
           <li>
             Switch divisors after running — the same numbers exist, but the class

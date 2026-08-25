@@ -57,15 +57,15 @@ export const mainMenuStructure = [
             { label: 'Determinant Visual Calculator', href: '/visual-tools/determinant-calculator' },
             { label: 'Gauss Elimination Calculator', href: '/visual-tools/gauss-elimination' },
             { label: 'Matrix Multiplication Visualizer', href: '/visual-tools/matrix-multiplication' },
-            { label: 'Matrix Transposition', href: '/visual-tools/matrix-transposition' },
+            { label: 'Matrix Transposition', href: '/linear-algebra/visual-tools/matrix-transpose' },
             { label: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
             { label: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' },
             { label: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
-            { label: 'Angle Quadrants Visualizer', href: '/trigonometry/quadrants' },
+            { label: 'Angle Quadrants Visualizer', href: '/trigonometry/visual-tools/functions-signs' },
             { label: 'Syntax Tree Builder', href: '/logic/propositional-logic/syntax/tree-builder' },
             { label: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' },
-            { label: 'Discrete Distribution Visualizer', href: '/probability/distributions/discrete/visualizer' },
-            { label: 'Continuous Distribution Visualizer', href: '/probability/distributions/continuous/visualizer' },
+            { label: 'Discrete Distribution Visualizer', href: '/probability/visual-tools/distributions/binomial' },
+            { label: 'Continuous Distribution Visualizer', href: '/probability/visual-tools/distributions/normal' },
           ]
         },
         {
@@ -89,7 +89,7 @@ export const mainMenuStructure = [
             { label: 'Fraction Calculator', href: '/calculators/fraction-calculator' },
             { label: 'Combinatorics Calculator', href: '/combinatorics/calculator' },
             { label: 'Complex Numbers Calculator', href: '/calculators/complex-numbers' },
-            { label: 'Conditional Probability Calculator', href: '/probability/calculators/conditional-probability-calculator' },
+            { label: 'Conditional Probability Calculator', href: '/probability/calculators/conditional-probability' },
              { label: 'Joint Probability Calculator', href: '/probability/calculators/joint-probability' },
             
           ]
@@ -98,8 +98,8 @@ export const mainMenuStructure = [
           title:"Solvers",
           items:[
             { label: 'Logical Equivalence Validator', href: '/logic/propositional-logic/semantics/equivalence-validator' },
-            { label: 'Quadratic Equations Solver', href: '/calculators/quadratic-equations' },
-            {label:'Linear Equations Solver',href:'/algebra/equations/linear/solver'}
+            { label: 'Quadratic Equations Solver', href: '/algebra/calculators/equations/quadratic' },
+            {label:'Linear Equations Solver',href:'/algebra/calculators/equations/linear'}
 
           ]
 

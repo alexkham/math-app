@@ -189,7 +189,7 @@ const keyWords = [
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">studying radicals as functions — their shape, behavior, and properties</td>
     </tr>
     <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/algebra/roots/complex" style="${linkStyle}">Radicals and Complex Numbers</a></td>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Radicals and Complex Numbers</td>
       <td style="padding: 12px 15px; color: #34495e;">extending to negative radicands via the imaginary unit i</td>
       <td style="padding: 12px 15px; color: #34495e;">what happens to even roots beyond the real-number system</td>
     </tr>
@@ -447,7 +447,7 @@ $$\\sqrt{-4} = 2i$$
 
 This opens the door to complex numbers, where every polynomial has roots and the square root function extends to negative inputs.
 
-The connection between radicals and complex numbers is developed in [radicals and complex numbers](!/algebra/roots/complex).
+The connection between radicals and complex numbers is developed in radicals and complex numbers.
 
 The table below collects the even/odd index distinction in full — covering principal root, domain, and behavior with both positive and negative radicands.`,
     before: ``,

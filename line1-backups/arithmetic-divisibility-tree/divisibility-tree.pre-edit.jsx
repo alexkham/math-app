@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { processContent } from '@/app/utils/contentProcessor';
 
-const DivisibilityTreeSVG = ({ explanations = null }) => {
+const DivisibilityTreeSVG = () => {
   const [inputNumber, setInputNumber] = useState('');
   const [hoveredNode, setHoveredNode] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
@@ -294,21 +293,6 @@ const DivisibilityTreeSVG = ({ explanations = null }) => {
 
   const tooltip = hoveredNode ? getExplanation(hoveredNode) : null;
 
-  // Line 1: state keys for the hoisted explanations. Specials first (no input,
-  // prime suspect), then the two independent dimensions of the display - the
-  // parity path and the digit-sum path - which render together.
-  const stateKeys = !hasInput
-    ? ['empty']
-    : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter(d => a.results[d]).length === 1
-      ? ['primeLike']
-      : [
-          a.isEven ? (a.results[4] ? 'eightChain' : 'evenPath') : 'oddPath',
-          a.results[3] ? 'threePass' : 'threeFail',
-        ];
-  const stateEntries = explanations
-    ? stateKeys.map(k => explanations[k]).filter(Boolean)
-    : [];
-
   // Layout constants
   const svgWidth = 576;
   const svgHeight = 816;
@@ -498,12 +482,6 @@ const DivisibilityTreeSVG = ({ explanations = null }) => {
               )}
             </>
           )}
-
-          {stateEntries.map((entry, i) => (
-            <div key={i} style={styles.stateExplanation}>
-              {processContent(entry)}
-            </div>
-          ))}
         </div>
       </div>
 
@@ -689,16 +667,6 @@ const styles = {
     fontSize: '0.7rem',
     color: '#854d0e',
     lineHeight: '1.4',
-  },
-  stateExplanation: {
-    marginTop: '10px',
-    padding: '10px',
-    background: '#f8fafc',
-    borderLeft: '3px solid #3b82f6',
-    borderRadius: '8px',
-    fontSize: '0.75rem',
-    color: '#1e3a5f',
-    lineHeight: '1.5',
   },
   tooltip: {
     position: 'fixed',

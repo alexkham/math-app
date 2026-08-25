@@ -619,7 +619,7 @@
 //       parameters: '$a$ = minimum value, $b$ = maximum value'
 //     },
 //     // {
-//     //   distribution: '[Bernoulli](!/probability/distributions/discrete/bernoulli#7)',
+//     //   distribution: 'Bernoulli',
 //     //   formula: '\\mathrm{Var}(X) = p(1-p)',
 //     //   parameters: '$p$ = probability of success'
 //     // },
@@ -1767,7 +1767,7 @@ const discreteVarianceFormulasData = {
       parameters: '$a$ = minimum value, $b$ = maximum value'
     },
     // {
-    //   distribution: '[Bernoulli](!/probability/distributions/discrete/bernoulli#7)',
+    //   distribution: 'Bernoulli',
     //   formula: '\\mathrm{Var}(X) = p(1-p)',
     //   parameters: '$p$ = probability of success'
     // },

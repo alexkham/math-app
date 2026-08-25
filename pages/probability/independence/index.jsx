@@ -592,6 +592,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -890,30 +891,58 @@ This definition focuses on the idea of unchanged information. If the occurrence 
     },
   
     notation:{
-  
-      title:`Useful Notation`,
-      content:`
-Before writing the independence formulas, we fix the symbols used to describe the events and their relationships:
 
-- $A$ and $B$ — the events under discussion  
-- $P(A)$ and $P(B)$ — their individual probabilities  
-- $P(A \\mid B)$ and $P(B \\mid A)$ — probabilities evaluated under given conditions  
-- $P(A \\cap B)$ — the event in which both occur  
-
-These symbols allow us to express independence in a compact way once the formal statements appear in the following section.
-
-
-`,
+      title:`Independence Notation`,
+      lead:`The defining equations of independence for a single pair are written — and owned — at [conditional probability notation](!/probability/conditional-probability#notation). This page's marks begin where two events end: what independence looks like across a whole collection, inside a condition, between random variables, and compressed into statistics' favorite abbreviation. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The equalities $P(A \\mid B) = P(A)$ and $P(A \\cap B) = P(A)\\,P(B)$ — and the warning that disjointness is their near-opposite — come from [conditional probability notation](!/probability/conditional-probability#notation); $P(\\cdot)$ from the [probability function](!/probability/probability-function#notation); the distribution tilde from [random variable notation](!/probability/random-variables#notation).`,
+      entries:[
+        {
+          id:'mutual-pairwise',
+          tex:`$P(A \\cap B \\cap C) = P(A)\\,P(B)\\,P(C)$`,
+          read:`the triple product — and every pair besides`,
+          means:`For a collection, the product must hold for **every** sub-collection: three [events](!/probability/events) are mutually independent only when the triple equation and all three pairwise equations hold — four statements, not one. For $n$ events the count is $2^n - n - 1$.`,
+          cases:`Pairwise independence — all pairs checked, the triple not — is strictly weaker: with two fair coins, "first is heads", "second is heads", "both show the same" are independent in every pair, yet the triple product fails. When a text calls a collection "independent" it means mutual unless it says otherwise.`,
+          confusedWith:`One equation standing in for all of them. Checking only the triple product, or only the pairs, each accepts collections that are not mutually independent — the shortfall runs in both directions.`,
+        },
+        {
+          id:'perp-family',
+          tex:`$A \\perp B$, $X \\perp\\!\\!\\!\\perp Y$`,
+          read:`A is independent of B`,
+          means:`The whole defining equation in a single mark, borrowed from the [perpendicularity symbol](!/linear-algebra/orthogonality/inner-product#notation) — the [mathematical keyboard](!/keyboard) carries it. Between random variables, $X \\perp Y$ asserts that the joint distribution factors: every event about $X$ is independent of every event about $Y$, infinitely many statements at once.`,
+          alsoWritten:`With the stroke doubled, $X \\perp\\!\\!\\!\\perp Y$ — Dawid's notation, standard in the graphical-models literature precisely so that single $\\perp$ keeps its geometric job; elementary texts avoid the symbol entirely and write the equation out.`,
+          confusedWith:`Orthogonality proper. For zero-mean random variables $E[XY] = 0$ means [uncorrelated](!/probability/covariance#7) — a strictly weaker property than independence, so reading probability's $\\perp$ with geometry's meaning quietly downgrades the claim.`,
+        },
+        {
+          id:'conditional-independence',
+          tex:`$A \\perp B \\mid C$`,
+          read:`A is independent of B, given C`,
+          means:`The bar and the perp compose: inside the world where $C$ holds, the product factors — $P(A \\cap B \\mid C) = P(A \\mid C)\\,P(B \\mid C)$. **Conditional Independence** below tells this story in prose; this line is its formula.`,
+          cases:`The slots take events or whole variables, $X \\perp Y \\mid Z$ — the workhorse mark of graphical models and the reasoning behind [Bayes' theorem](!/probability/bayes-theorem)'s sequential use; in those texts it usually wears the doubled stroke.`,
+          confusedWith:`The unconditional kind. Neither implies the other: dependence can vanish once a shared cause is fixed — the **How Independence Fails** patterns — and independent events can turn dependent inside a condition; both directions genuinely fail.`,
+        },
+        {
+          id:'iid',
+          tex:`$X_1, \\dots, X_n \\overset{\\text{iid}}{\\sim} F$`,
+          read:`independent and identically distributed, drawn from F`,
+          means:`Statistics' compression: one tag making two separate claims — mutual independence of the whole collection, and one shared [distribution](!/probability/distributions) declared by the tilde.`,
+          cases:`Spelled iid, i.i.d., or IID by house style; the tag rides above the tilde or trails the sentence. It is the standing assumption of sample-based statistics — sums, averages and the [law of large numbers](!/probability/large-numbers-law) all open with "let $X_1, \\dots, X_n$ be i.i.d.".`,
+          confusedWith:`A single claim. Independent-but-differently-distributed and identically-distributed-but-dependent each break exactly one half of the abbreviation — and only the two halves together license the standard limit theorems.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
-  
+      after:``,
+
     },
     formula:{
       title:`Independence Formula`,
       content:`
 The intuitive idea of independence becomes precise when expressed in terms of probabilities. Two events are independent exactly when their joint occurrence behaves like the product of their separate chances:
 
-- $P(A \\cap B) = P(A) \, P(B)$
+- $P(A \\cap B) = P(A) \\, P(B)$
 
 This statement captures the idea that combining the events does not introduce any new influence between them. It is the compact formal expression of "no change in information."  
 
@@ -1147,8 +1176,18 @@ export default function IndependencePage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.notation.content,
-            sectionsContent.notation.after,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
