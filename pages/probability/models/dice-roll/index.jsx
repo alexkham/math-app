@@ -182,7 +182,7 @@
 // These labels serve only to distinguish outcomes.  
 // At this stage, they are not numerical measurements and carry no arithmetic meaning.
 
-// The outcome space specifies *what can happen* in a single roll.  
+// The outcome space specifies **what can happen** in a single roll.
 // Probabilities, numerical values, and interpretations are introduced only in later steps.
 // `,
 //       before:``,
@@ -202,7 +202,7 @@
 // • grouped outcomes
 // • category-based events such as parity or range conditions
 
-// Events describe *which outcomes are considered together* for a given question.  
+// Events describe **which outcomes are considered together** for a given question.
 // They organize the outcome space without assigning probabilities or numerical values.
 
 // This richer event structure is one of the main differences between the dice roll model and binary models.
@@ -289,7 +289,7 @@
 //       content:`
 // Richer distributions appear when the dice roll model is repeated and outcomes from multiple rolls are combined.
 
-// Each roll adds another categorical outcome, and sequences of rolls can be aggregated in different ways to define new random variables. The resulting distribution depends on *how* the outcomes are combined, not on the die itself.
+// Each roll adds another categorical outcome, and sequences of rolls can be aggregated in different ways to define new random variables. The resulting distribution depends on **how** the outcomes are combined, not on the die itself.
 
 // Common constructions include:
 // • sums of multiple rolls
@@ -997,7 +997,7 @@ Outcomes are often labeled using integers, such as
 These labels serve only to distinguish outcomes.  
 At this stage, they are not numerical measurements and carry no arithmetic meaning.
 
-The outcome space specifies *what can happen* in a single roll.  
+The outcome space specifies **what can happen** in a single roll.
 Probabilities, numerical values, and interpretations are introduced only in later steps.
 `,
       before:``,
@@ -1017,7 +1017,7 @@ Because the outcome space contains several elements, events can be formed in man
 • grouped outcomes
 • category-based events such as parity or range conditions
 
-Events describe *which outcomes are considered together* for a given question.  
+Events describe **which outcomes are considered together** for a given question.
 They organize the outcome space without assigning probabilities or numerical values.
 
 This richer event structure is one of the main differences between the dice roll model and binary models.
@@ -1104,7 +1104,7 @@ At this level, the distributions reflect the finite, multi-outcome structure of 
       content:`
 Richer distributions appear when the dice roll model is repeated and outcomes from multiple rolls are combined.
 
-Each roll adds another categorical outcome, and sequences of rolls can be aggregated in different ways to define new random variables. The resulting distribution depends on *how* the outcomes are combined, not on the die itself.
+Each roll adds another categorical outcome, and sequences of rolls can be aggregated in different ways to define new random variables. The resulting distribution depends on **how** the outcomes are combined, not on the die itself.
 
 Common constructions include:
 • sums of multiple rolls

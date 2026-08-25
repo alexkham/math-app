@@ -9,6 +9,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -395,25 +396,52 @@ Use this tool to evaluate [truth tables](!/logic/truth-tables).
     `,
     table:`<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:80%;margin:auto"><thead><tr style="background-color:#f2f2f2"><th style="width:20%;padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Property</th><th style="width:40%;padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Tautology</th><th style="width:40%;padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Contradiction</th></tr></thead><tbody><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Definition</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Always true under every interpretation</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Always false under every interpretation</td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Symbolic Trait</td><td style="padding:12px;text-align:left;border:1px solid #ddd">⊨ φ (φ is valid)</td><td style="padding:12px;text-align:left;border:1px solid #ddd">⊨ ¬φ for every φ (negation of tautology)</td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Truth Table</td><td style="padding:12px;text-align:left;border:1px solid #ddd">All rows are <span style="background-color:#f0f0f0;padding:2px 4px;border-radius:3px;font-family:monospace">T</span></td><td style="padding:12px;text-align:left;border:1px solid #ddd">All rows are <span style="background-color:#f0f0f0;padding:2px 4px;border-radius:3px;font-family:monospace">F</span></td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Negation</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Becomes a contradiction</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Becomes a tautology</td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Role in Proofs</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Represents logical necessity</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Used to derive absurdity in indirect proofs</td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Example</td><td style="padding:12px;text-align:left;border:1px solid #ddd"><span style="font-family:monospace">'P ∨ ¬P'</span></td><td style="padding:12px;text-align:left;border:1px solid #ddd"><span style="font-family:monospace">'P ∧ ¬P'</span></td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Practical Use</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Validates general rules, laws of logic</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Signals inconsistency, contradiction in assumptions</td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Evaluation Outcome</td><td style="padding:12px;text-align:left;border:1px solid #ddd">True in all models</td><td style="padding:12px;text-align:left;border:1px solid #ddd">False in all models</td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Logical Status</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Universally affirmed</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Universally rejected</td></tr></tbody></table>
 `  ,
+  },
+
+  faq:{
+    title:`Tautology FAQ`,
   }
 
   }
 
+// Three questions written from scratch — this page had no faqQuestions object.
+// The page's own h2s already answer "tautology vs contradiction" and "are laws
+// tautologies", and /logic/truth-tables/tautologies owns the proof-method and
+// intuitionistic questions. These target buried notation content (⊤, the
+// turnstiles) and the Peirce's law table row.
+const faqQuestions = {
+  obj1: {
+    question: "What does the symbol ⊤ mean in logic?",
+    answer: "⊤ (read 'top' or 'verum') is the constant for truth itself: a formula that is true under every assignment, containing no variables. Its mirror image ⊥ denotes the always-false constant. Inside formulas it simplifies by the identity and domination laws: P ∧ ⊤ reduces to P, while P ∨ ⊤ reduces to ⊤. Writing P ≡ ⊤ is another way of saying P is a tautology.",
+    sectionId: "notation"
+  },
+  obj2: {
+    question: "What is the difference between ⊢ and ⊨ in logic?",
+    answer: "The single turnstile ⊢ is syntactic: ⊢ P claims a derivation of P exists in the proof system, obtained by applying rules without consulting truth values. The double turnstile ⊨ is semantic: ⊨ P claims P is true under every assignment, as a truth table shows. That the two agree — everything provable is valid and everything valid is provable — is what soundness and completeness assert.",
+    sectionId: "notation"
+  },
+  obj3: {
+    question: "What is Peirce's law?",
+    answer: "Peirce's law is the tautology ((P → Q) → P) → P: if P follows from the mere assumption that P implies Q, then P holds outright. A truth table confirms it is true in all four rows. Its interest is philosophical — the law is valid in classical logic but not provable in intuitionistic logic, so it serves as a test case separating the two systems. Check it in the [truth table generator](!/logic/truth-tables).",
+    sectionId: "other"
+  }
+}
 
   return {
     props:{
       tautologies,
       introContent,
       sectionsContent,
-      keyWords
+      keyWords,
+      faqQuestions
 
-      
+
     }
   }
 }
 
 
-export default function TautologyPage({tautologies ,introContent ,sectionsContent,keyWords}) {
+export default function TautologyPage({tautologies ,introContent ,sectionsContent,keyWords ,faqQuestions}) {
 
   // const theoremHTML = renderAcademicBlockHTML("Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions.", 
   //   "definition");
@@ -486,9 +514,25 @@ export default function TautologyPage({tautologies ,introContent ,sectionsConten
 
 
 
-``     
+``
 
 ]
+          },
+          // faq: rendered component — must be built here, not in getStaticProps
+          {
+            id:'faq',
+            title:sectionsContent.faq.title,
+            link:``,
+            content:[
+              <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+                <FAQSection
+                  faqQuestions={faqQuestions}
+                  theme={'leftBorder'}
+                  width={'100%'}
+                  openFirst={false}
+                />
+              </div>,
+            ]
           },
           //     {
         //     id:'',

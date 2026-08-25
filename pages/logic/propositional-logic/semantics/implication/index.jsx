@@ -9,6 +9,7 @@ import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -157,6 +158,36 @@ const notationSection = {
   parentLabel: `Semantics`,
 }
 
+// Four questions written from scratch — this page had no faqQuestions object.
+// Ownership: vacuous truth, converse and the fallacies belong to
+// /logic/truth-tables/implications; necessary-vs-sufficient and iff to
+// /logic/truth-tables/biconditionals; material implication and the negation
+// of an implication to /logic/propositional-logic/semantics/equivalences.
+// These four target buried content only this page has: the "only if"
+// direction trap, the arrow shafts, antecedent/consequent naming, and
+// proof by contrapositive.
+const faqQuestions = {
+  obj1: {
+    question: "What does 'only if' mean in logic?",
+    answer: "'Only if' marks the consequent, not the antecedent: 'p only if q' translates to p → q, because q must hold for p to be possible. It is 'p if q' that reverses the arrow and means q → p. The two phrasings sit one word apart and point in opposite directions, which makes 'only if' the most commonly misread phrase in conditional statements.",
+    sectionId: "notation"
+  },
+  obj2: {
+    question: "What is the difference between → and ⇒ in logic?",
+    answer: "The single arrow → is the conditional connective: p → q is a formula whose truth value depends on p and q. The double arrow ⇒ is usually a meta-level claim that the implication holds in every case. Usage varies — many texts write ⇒ for the plain connective — so the distinction only carries weight in sources that use both arrows side by side.",
+    sectionId: "notation"
+  },
+  obj3: {
+    question: "What are the antecedent and consequent in an implication?",
+    answer: "In p → q, the proposition p is the antecedent (also called the hypothesis or premise) and q is the consequent (the conclusion). The implication claims that the truth of the antecedent guarantees the truth of the consequent — it is false only when p is true and q is false. Explore all four rows in the [truth table generator](!/logic/truth-tables).",
+    sectionId: "definition"
+  },
+  obj4: {
+    question: "How does proof by contrapositive work?",
+    answer: "Instead of proving 'if p then q' directly, prove 'if not q then not p' — the contrapositive, which is logically equivalent to the original. To show that n² even implies n even, prove that n odd implies n² odd, which follows in one line from n = 2k + 1. The method pays off whenever the negated statements are simpler to manipulate than the originals.",
+    sectionId: "proofs"
+  }
+}
 
   return {
     props:{
@@ -166,7 +197,8 @@ const notationSection = {
       properties,
       keyWords,
       notation,
-      notationSection
+      notationSection,
+      faqQuestions
 
     }
   }
@@ -175,7 +207,7 @@ const notationSection = {
 
 
 
-export default function ImplicationPage({implicationLaws ,introContent ,properties ,keyWords ,notation ,notationSection}) {
+export default function ImplicationPage({implicationLaws ,introContent ,properties ,keyWords ,notation ,notationSection ,faqQuestions}) {
 
 
  
@@ -301,8 +333,24 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
               `These rules are particularly useful for transforming, simplifying, or interpreting logical statements involving conditional relationships.`,
               `Read more about [laws of propositional logic](!/logic/propositional-logic/laws) on dedicated page.`
             ]
+          },
+          // faq: rendered component — must be built here, not in getStaticProps
+          {
+            id:'faq',
+            title:`Logical Implication FAQ`,
+            link:``,
+            content:[
+              <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+                <FAQSection
+                  faqQuestions={faqQuestions}
+                  theme={'leftBorder'}
+                  width={'100%'}
+                  openFirst={false}
+                />
+              </div>,
+            ]
           }
-          
+
 
           
           

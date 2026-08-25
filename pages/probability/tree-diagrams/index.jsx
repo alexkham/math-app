@@ -199,7 +199,7 @@
 //       content:`
 // Probabilities in a tree diagram are assigned to the branches, not to the paths directly.
 
-// Each branch probability represents the likelihood of an outcome *given* that the process has reached the corresponding node. In this way, branch probabilities are conditional by nature.
+// Each branch probability represents the likelihood of an outcome **given** that the process has reached the corresponding node. In this way, branch probabilities are conditional by nature.
 
 // The probability of a complete path is obtained by following the path from the root and combining the probabilities along its branches. This reflects how uncertainty accumulates across successive stages of the process.
 
@@ -1007,7 +1007,7 @@ These components work together to make the order of events and the structure of 
       content:`
 Probabilities in a tree diagram are assigned to the branches, not to the paths directly.
 
-Each branch probability represents the likelihood of an outcome *given* that the process has reached the corresponding node. In this way, branch probabilities are conditional by nature.
+Each branch probability represents the likelihood of an outcome **given** that the process has reached the corresponding node. In this way, branch probabilities are conditional by nature.
 
 The probability of a complete path is obtained by following the path from the root and combining the probabilities along its branches. This reflects how uncertainty accumulates across successive stages of the process.
 
@@ -1044,8 +1044,8 @@ Each first-level branch of a tree represents a distinct case that cannot occur t
 
 When a later event can occur through several different branches, its overall probability is obtained by accounting for **all paths** that lead to it. Each path contributes according to the probability values along that path, and the total probability is obtained by combining these contributions.
 
-In this way, the law of total probability is not an abstract rule added afterward.  
-It is read directly from the structure of the tree: split the process into disjoint cases, follow the branches, and combine their contributions.
+In this way, the law of total probability is not an abstract rule added afterward.
+It is read directly from the structure of the tree: split the process into disjoint cases, follow the branches, and combine their contributions — the multiply-along-a-branch, add-across-branches reading that [total probability notation](!/probability/total-probability#notation) writes as marks.
 `,
       before:``,
       after:``,

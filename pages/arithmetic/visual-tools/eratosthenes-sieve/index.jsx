@@ -253,7 +253,8 @@ Fittingly, the last pass is also the smallest — three new crossings against th
     description: "Interactive Sieve of Eratosthenes visualization. Watch primes emerge as composites get crossed out with step-by-step explanations and color-coded divisibility.",
     keywords: keyWords.join(", "),
     url: "/arithmetic/visual-tools/eratosthenes-sieve",
-    name: "Sieve of Eratosthenes Visualization"
+    name: "Sieve of Eratosthenes Visualization",
+    category: "Primes, GCD & Modular Arithmetic"
   }
 
   const schemas = {

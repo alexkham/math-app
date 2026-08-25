@@ -6,9 +6,33 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import '../../pages.css'
 
-export default function PropositionalLogicPage({ keyWords, introContent, propositionalLogicSections }) {
+export default function PropositionalLogicPage({ keyWords, introContent, propositionalLogicSections, faqQuestions }) {
+
+  // faq: rendered component — must be built here, not in getStaticProps
+  // (this page's sections array is created in getStaticProps, so the JSX
+  // entry is appended on the client side of the props boundary)
+  const allSections = [
+    ...propositionalLogicSections,
+    {
+      id: 'faq',
+      title: `Propositional Logic FAQ`,
+      link: ``,
+      content: [
+        <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+          <FAQSection
+            faqQuestions={faqQuestions}
+            theme={'leftBorder'}
+            width={'100%'}
+            openFirst={false}
+          />
+        </div>,
+      ]
+    },
+  ]
+
   return (
     <>
       <Head>

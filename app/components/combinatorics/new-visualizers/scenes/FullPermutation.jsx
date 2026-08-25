@@ -9,6 +9,7 @@
 import React, {
   useState, useEffect, useRef, useCallback, useMemo,
 } from "react";
+import { processContent } from "@/app/utils/contentProcessor";
 import {
   // data / constants
   N_MIN, N_MAX, ROW_H_MIN, SVG_W_DEFAULT, COLORS,
@@ -45,7 +46,7 @@ const BUILD_SP = 70;
 const BUILD_Y_OFFSET = 130;
 const RESULTS_TOP_OFFSET = 64;
 
-export default function FullPermutation() {
+export default function FullPermutation({ explanations = null }) {
   // ── State ─────────────────────────────────────────────
   const [n, setN] = useState(3);
   const [mode, setMode] = useState("balls");
@@ -333,6 +334,15 @@ export default function FullPermutation() {
       (animState === "complete" ? 1 : 0);
     statusText = `Step ${stepIdx + 1} (${nameOf(item, mode)}): ${k} / ${outcomesPerGroup}`;
   }
+
+  // Line 1: state key for the hoisted explanations - the tool's phase, with
+  // the completed enumeration keyed by n (n3 / n4 / n5).
+  const stateKey = animState === "done"
+    ? `n${n}`
+    : animState === "idle" && completed.length === 0
+      ? "idle"
+      : "building";
+  const stateEntry = (explanations && explanations[stateKey]) || null;
 
   // ── Narration builder ─────────────────────────────────
   const narrationFor = (stepIdx) => {
@@ -690,6 +700,24 @@ export default function FullPermutation() {
                 );
               })}
             </div>
+            {stateEntry && (
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: "10px 12px",
+                  background: COLORS.surfaceTint,
+                  border: `1px solid #dbeafe`,
+                  borderLeft: `3px solid ${COLORS.accent}`,
+                  borderRadius: 8,
+                  fontSize: 12,
+                  lineHeight: 1.55,
+                  color: COLORS.text,
+                  fontFamily: "system-ui, sans-serif",
+                }}
+              >
+                {processContent(stateEntry)}
+              </div>
+            )}
           </RightPanel>
         </SceneGrid>
       </PageWrap>

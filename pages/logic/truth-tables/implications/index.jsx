@@ -8,6 +8,7 @@ import Head from 'next/head'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export default function ImplicationsTruthTablesPage({ seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
@@ -70,6 +71,22 @@ export default function ImplicationsTruthTablesPage({ seoData, keyWords, implica
         link: sectionsContent.obj8.link,
         content: [sectionsContent.obj8.content]
       },
+      // faq: rendered component — must be built here, not in getStaticProps
+      {
+        id: 'faq',
+        title: sectionsContent.faq.title,
+        link: ``,
+        content: [
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+      },
     ]
 
   return (
@@ -99,17 +116,10 @@ export default function ImplicationsTruthTablesPage({ seoData, keyWords, implica
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
@@ -328,32 +338,35 @@ For example, to prove "if n² is even then n is even," it is simpler to prove th
       after: ``,
       link: ``,
     },
+    faq: {
+      title: `Implications FAQ`,
+    },
   }
 
+  // FAQ pass: cut "what is an implication" (h2 asks it verbatim), contrapositive
+  // and inverse (symbol h2s whose first lines answer directly), and the P → ¬Q
+  // question (no search demand). Kept converse and vacuous truth; invented the
+  // two fallacy questions from content buried in obj4 and obj7.
   const faqQuestions = {
     obj1: {
-      question: "What is a logical implication?",
-      answer: "A logical implication P → Q (if P then Q) is a compound proposition that is false only when the antecedent P is true and the consequent Q is false. In all other cases — including when P is false — the implication is true. It is equivalent to ¬P ∨ Q."
+      question: "What is the difference between an implication and its converse?",
+      answer: "The converse of P → Q is Q → P — the antecedent and consequent switch places. The two are not logically equivalent: P → Q is false only when P is true and Q is false, while Q → P is false only when Q is true and P is false. When both hold together they combine into the biconditional P ↔ Q. Compare their tables in the [truth table generator](!/logic/truth-tables).",
+      sectionId: "4"
     },
     obj2: {
-      question: "What is the difference between an implication and its converse?",
-      answer: "The implication P → Q and its converse Q → P are not logically equivalent. P → Q is false when P is true and Q is false; Q → P is false when Q is true and P is false. Assuming the converse from the original is the fallacy of affirming the consequent."
+      question: "Why is an implication true when the antecedent is false?",
+      answer: "When P is false, P → Q is counted as vacuously true regardless of Q. An implication only promises something about cases where its premise holds; a false hypothesis cannot break that promise. For example, \"if it rains, I take an umbrella\" is not violated on a dry day. The convention keeps formal logic consistent.",
+      sectionId: "1"
     },
     obj3: {
-      question: "What is the contrapositive and why is it equivalent to the original?",
-      answer: "The contrapositive of P → Q is ¬Q → ¬P. They are logically equivalent — their truth tables are identical. This equivalence is the basis of proof by contrapositive, where proving ¬Q → ¬P establishes P → Q."
+      question: "What is affirming the consequent?",
+      answer: "Affirming the consequent is the fallacy of concluding P from P → Q and Q: \"if it rains the ground is wet; the ground is wet; therefore it rained.\" The reasoning fails because Q can be true for other reasons — a true implication says nothing about what follows when only its conclusion is known. It amounts to mistaking an implication for its converse.",
+      sectionId: "4"
     },
     obj4: {
-      question: "Why is an implication true when the antecedent is false?",
-      answer: "When P is false, P → Q is vacuously true regardless of Q. A false hypothesis cannot violate a conditional — there is no case where the premise held and the conclusion failed. This convention ensures consistency in formal logic and mathematics."
-    },
-    obj5: {
-      question: "What is the inverse of an implication?",
-      answer: "The inverse of P → Q is ¬P → ¬Q. It is not equivalent to the original implication but is equivalent to the converse Q → P. Confusing the inverse with the original is the fallacy of denying the antecedent."
-    },
-    obj6: {
-      question: "How is P → ¬Q related to mutual exclusivity?",
-      answer: "P → ¬Q is equivalent to ¬P ∨ ¬Q, which by De Morgan's law equals ¬(P ∧ Q). It asserts that P and Q cannot both be true — if P holds, Q must be false. This expresses mutual exclusivity under the assumption of P."
+      question: "What is denying the antecedent?",
+      answer: "Denying the antecedent is the fallacy of concluding ¬Q from P → Q and ¬P: \"if it rains the ground is wet; it did not rain; therefore the ground is dry.\" The conclusion does not follow — the ground could be wet from a sprinkler. The error treats an implication as if it were its inverse ¬P → ¬Q, which is not equivalent to it.",
+      sectionId: "7"
     }
   }
 
@@ -426,19 +439,6 @@ For example, to prove "if n² is even then n is even," it is simpler to prove th
           "item": "https://www.learnmathclass.com/logic/truth-tables/implications"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 

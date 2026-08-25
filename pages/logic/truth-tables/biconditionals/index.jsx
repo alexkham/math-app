@@ -8,6 +8,7 @@ import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButto
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
@@ -162,6 +163,22 @@ export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalE
         link: sectionsContent.obj10.link,
         content: [sectionsContent.obj10.content]
       },
+      // faq: rendered component — must be built here, not in getStaticProps
+      {
+        id: 'faq',
+        title: sectionsContent.faq.title,
+        link: ``,
+        content: [
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+      },
     ]
 
   return (
@@ -191,17 +208,10 @@ export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalE
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
@@ -454,40 +464,32 @@ De Morgan&apos;s laws (the second being P ∨ Q ↔ ¬(¬P ∧ ¬Q)) are essenti
       after: ``,
       link: ``,
     },
+    faq: {
+      title: `Biconditionals FAQ`,
+    },
   }
 
+  // FAQ pass: cut six questions whose own section h2 names the topic with a
+  // defining first line (biconditional, mutual implication, contrapositive
+  // tautology, transitivity, De Morgan, double negation) — the last four are
+  // also phrasings with no search demand. Kept the truth-table and iff
+  // questions (both buried mid-paragraph); invented necessary-vs-sufficient
+  // from obj1's second paragraph.
   const faqQuestions = {
     obj1: {
-      question: "What is a biconditional in logic?",
-      answer: "A biconditional (P ↔ Q) states that P and Q have the same truth value — both true or both false. It is equivalent to the conjunction of two conditionals: (P → Q) ∧ (Q → P), meaning each side implies the other."
+      question: "What is the truth table for P ↔ Q?",
+      answer: "P ↔ Q is true when both P and Q are true, or when both are false. It is false when P and Q have different truth values. This gives two true rows (TT, FF) and two false rows (TF, FT) in a two-variable truth table. See it row by row in the [truth table generator](!/logic/truth-tables).",
+      sectionId: "3"
     },
     obj2: {
-      question: "What is the truth table for P ↔ Q?",
-      answer: "P ↔ Q is true when both P and Q are true, or when both are false. It is false when P and Q have different truth values. This gives two true rows and two false rows in a two-variable truth table."
+      question: "What does 'if and only if' mean in logic?",
+      answer: "'If and only if' (abbreviated iff) expresses a biconditional. 'P if and only if Q' means P implies Q and Q implies P: the two sides always share a truth value and are interchangeable. Because both directions are claimed, proving an iff statement takes two parts — forward and backward. Mathematical definitions are implicitly iff statements.",
+      sectionId: "1"
     },
     obj3: {
-      question: "How is a biconditional related to mutual implication?",
-      answer: "The biconditional P ↔ Q is logically equivalent to (P → Q) ∧ (Q → P). This means P if and only if Q: P is sufficient for Q and also necessary for Q. The equivalence is itself a tautology."
-    },
-    obj4: {
-      question: "What does 'if and only if' mean in logic?",
-      answer: "'If and only if' (abbreviated iff) expresses a biconditional. P if and only if Q means P implies Q and Q implies P — the two propositions are logically equivalent and always share the same truth value."
-    },
-    obj5: {
-      question: "Why is the contrapositive equivalence a tautology?",
-      answer: "(P → Q) ↔ (¬Q → ¬P) is a tautology because a conditional and its contrapositive always have the same truth value. This equivalence is foundational in proof strategies — proving the contrapositive is logically identical to proving the original statement."
-    },
-    obj6: {
-      question: "What is the transitivity of biconditionals?",
-      answer: "If P ↔ Q and Q ↔ R, then P ↔ R. This transitivity property lets you chain equivalences: if two propositions are each equivalent to a third, they are equivalent to each other."
-    },
-    obj7: {
-      question: "How does De Morgan's law appear as a biconditional?",
-      answer: "(P ∧ Q) ↔ ¬(¬P ∨ ¬Q) expresses De Morgan's law as a biconditional tautology. It states that the conjunction of P and Q is equivalent to the negation of the disjunction of their negations."
-    },
-    obj8: {
-      question: "What is the double negation biconditional?",
-      answer: "P ↔ ¬¬P is a tautology in classical logic stating that any proposition is equivalent to its double negation. This principle is accepted in classical logic but not in intuitionistic logic, where double negation elimination does not hold universally."
+      question: "What is the difference between a necessary and a sufficient condition?",
+      answer: "In the conditional P → Q, the truth of P is sufficient for the truth of Q — P guarantees Q. In the same conditional, Q is necessary for P: P cannot hold without Q. A biconditional P ↔ Q says each side is both necessary and sufficient for the other, which is why it is read 'P if and only if Q.'",
+      sectionId: "1"
     }
   }
 
@@ -560,19 +562,6 @@ De Morgan&apos;s laws (the second being P ∨ Q ↔ ¬(¬P ∧ ¬Q)) are essenti
           "item": "https://www.learnmathclass.com/logic/truth-tables/biconditionals"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 

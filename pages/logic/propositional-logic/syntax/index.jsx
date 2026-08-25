@@ -352,6 +352,7 @@ import Head from 'next/head'
 import MyList from '@/app/components/page-components/lists/MyList'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 export async function getStaticProps() {
 
@@ -504,8 +505,39 @@ Learn more about normal forms and practice your skills and understanding of this
 
     `
 
+  },
+  faq:{
+    title:`Logic Syntax FAQ`,
   }
  }
+
+// Four questions written from scratch — this page had no faqQuestions object.
+// "What is a WFF" and the formation rules are case A (own h2s answer them).
+// These target buried content: syntax vs semantics (definitions ¶2), operator
+// precedence and the φ/ψ metavariables (notation entries), and the five
+// connectives (alphabet ¶3, under a heading that does not match the query).
+const faqQuestions = {
+  obj1: {
+    question: "What is the difference between syntax and semantics in logic?",
+    answer: "Syntax governs form: it asks whether an expression is properly built from the allowed symbols, before any question of meaning arises. Semantics governs truth: it interprets a well-formed expression and asks whether it is true or false. The order matters — only a syntactically correct formula can be given a truth value at all, which is why formal logic defines its grammar first.",
+    sectionId: "definitions"
+  },
+  obj2: {
+    question: "What is the order of precedence for logical operators?",
+    answer: "Negation ¬ binds tightest, then conjunction ∧, disjunction ∨, implication →, and biconditional ↔ loosest. So ¬P ∧ Q ∨ R reads ((¬P) ∧ Q) ∨ R. Strictly, precedence is only a reading convention for dropping parentheses — at the formation-rule level every binary connective requires its own pair. See how a formula parses in the [syntax tree builder](!/logic/propositional-logic/syntax/tree-builder).",
+    sectionId: "notation"
+  },
+  obj3: {
+    question: "What are the five logical connectives?",
+    answer: "The five standard connectives of propositional logic are negation ¬ ('not'), conjunction ∧ ('and'), disjunction ∨ ('or'), implication → ('if… then'), and biconditional ↔ ('if and only if'). Negation is unary — it applies to a single formula — while the other four each join exactly two formulas. Keyboards and code often use the ASCII stand-ins !, &&, ||, -> and <->.",
+    sectionId: "alphabet"
+  },
+  obj4: {
+    question: "What do φ and ψ mean in logic?",
+    answer: "φ (phi) and ψ (psi) are metavariables: Greek letters that stand for whole formulas rather than atomic propositions. A rule like 'if φ is well-formed, so is ¬φ' is a template quantifying over every possible formula at once, which is what powers the recursive formation rules. Latin letters P, Q, R name single atomic statements; Greek letters can stand for anything the grammar generates.",
+    sectionId: "notation"
+  }
+}
 
  const introContent = {
    id: "intro",
@@ -556,7 +588,8 @@ This section introduces the basic elements of propositional logic syntax, beginn
      structuredData,
      keyWords,
      canonicalUrl,
-     lastModified
+     lastModified,
+     faqQuestions
    }
  }
 }
@@ -569,7 +602,8 @@ export default function LogicPage({
  structuredData,
  keyWords,
  canonicalUrl,
- lastModified
+ lastModified,
+ faqQuestions
 }) {
 
  const logicSections = [
@@ -648,8 +682,23 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
 
     ]
    },
+   // faq: rendered component — must be built here, not in getStaticProps
+   {
+    id:'faq',
+    title:sectionContent.faq.title,
+    link:``,
+    content:[
+      <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+        <FAQSection
+          faqQuestions={faqQuestions}
+          theme={'leftBorder'}
+          width={'100%'}
+          openFirst={false}
+        />
+      </div>,
+    ]
+   },
 
-  
  ]
 
  return (

@@ -434,7 +434,7 @@ Fibonacci neighbors are also always coprime — the backwards walk always ends a
         url: "/arithmetic/visual-tools/euclidean-algorithm",
         name: "Euclidean Algorithm Visualizer",
         hubDescription: "Enter two positive integers and watch the Euclidean algorithm compute their greatest common divisor as a vertical chain of division equations. Amber remainder pills, dashed substitution arrows, and a purple GCD callout make every step of the algorithm's recursion visible. Random pair button and five curated presets cover coprime, divisor, and mid-complexity cases.",
-        category: "",
+        category: "Primes, GCD & Modular Arithmetic",
         subCategory: ""
       },
     }

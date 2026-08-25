@@ -311,6 +311,7 @@ import '../../../pages.css'
 import DataWrapper2 from '@/app/components/data-wrapper/generic-table/DataWrapper'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -415,7 +416,30 @@ export async function getStaticProps(){
         copyableFields: ["formula"],  // Allow copying just the formula
         searchableFields: ["law","topic", "formula", "explanation"]  // Allow searching by name, formula, or explanation
       };
-      
+
+// Four questions written from scratch, sourced from table rows — this page is
+// a pure reference table with no prose sections, which is exactly the
+// "comparison table whose rows answer questions the prose never asks" case.
+// De Morgan is unclaimed (the formulas page renders no FAQ); Peirce's law
+// stays with the tautology page; contrapositive with the implication pages.
+const faqQuestions = {
+  obj1: {
+    question: "What are De Morgan's laws?",
+    answer: "De Morgan's laws describe how negation passes over AND and OR: ¬(p ∨ q) ≡ ¬p ∧ ¬q, and ¬(p ∧ q) ≡ ¬p ∨ ¬q. Negating a disjunction turns it into a conjunction of negations, and vice versa — the connective flips and the negation lands on each term. The laws are central to simplifying expressions and converting formulas to normal forms."
+  },
+  obj2: {
+    question: "What is the absorption law in logic?",
+    answer: "The absorption laws remove redundant terms: p ∨ (p ∧ q) ≡ p and p ∧ (p ∨ q) ≡ p. In the first, if p already holds the conjunction adds nothing; if p fails, p ∧ q fails with it. Either way the whole expression rises and falls with p alone. Absorption is a workhorse of Boolean simplification, collapsing circuits and formulas without changing their behaviour."
+  },
+  obj3: {
+    question: "What is the distributive law in logic?",
+    answer: "Each of AND and OR distributes over the other: p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r), and p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r). The first mirrors multiplication distributing over addition in algebra; the second has no arithmetic analogue and is special to logic. Both directions are used when converting expressions to conjunctive or disjunctive normal form."
+  },
+  obj4: {
+    question: "What is XOR in logic?",
+    answer: "XOR (exclusive or, written ⊕) is true when exactly one of its operands is true: p ⊕ q ≡ (p ∨ q) ∧ ¬(p ∧ q). It differs from OR by excluding the both-true case. It is commutative, associative, and p ⊕ p ≡ F — a value never differs from itself. Type ⊕ and the other connectives with the [mathematical keyboard](!/keyboard)."
+  }
+}
 
 
    return {
@@ -423,6 +447,7 @@ export async function getStaticProps(){
         //  sectionsContent,
         config,
         logicLawsData,
+        faqQuestions,
         seoData: {
       title: "Propositional Logic Laws - Complete Reference Guide | Learn Math Class",
       description: "Comprehensive collection of propositional logic laws including De Morgan's, distributive, absorption, and identity laws. Essential discrete mathematics reference.",
@@ -436,7 +461,7 @@ export async function getStaticProps(){
    }
   
 
-export default function PropositionalLogicLawsPage({ seoData, config, logicLawsData, keyWords }) {
+export default function PropositionalLogicLawsPage({ seoData, config, logicLawsData, faqQuestions, keyWords }) {
 
     // const logicLawsData = {
     //     "Identity Laws": [
@@ -601,10 +626,21 @@ export default function PropositionalLogicLawsPage({ seoData, config, logicLawsD
     config={config}/>
     </div>
     <br/>
+    {/* faq: this page has no Sections wrapper, so the heading is rendered manually */}
+    <h2 style={{textAlign:'center', color:'#06357a', fontFamily:'Arial, sans-serif'}}>Logic Laws FAQ</h2>
+    <div style={{width:'80%',margin:'auto'}}>
+      <FAQSection
+        faqQuestions={faqQuestions}
+        theme={'leftBorder'}
+        width={'100%'}
+        openFirst={false}
+      />
+    </div>
+    <br/>
     <br/>
     <br/>
     {/* <ScrollUpButton/> */}
-    
+
     </>
   )
 }

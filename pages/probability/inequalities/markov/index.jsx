@@ -664,6 +664,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -899,11 +900,11 @@ These minimal assumptions explain both the strength and the weakness of the resu
     obj2:{
       title:`Statement of Markov's Inequality`,
       content:`
-Let $X$ be a non-negative random variable with finite expected value $\mathbb{E}[X]$.
+Let $X$ be a non-negative random variable with finite expected value $\\mathbb{E}[X]$.
 
 For any real number $a > 0$, Markov's inequality states:
 
-$\[\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}.\]$
+$$\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$$
 
 This inequality provides an upper bound on the probability that $X$ exceeds a given threshold, expressed solely in terms of its expectation.
 
@@ -912,9 +913,49 @@ No additional assumptions on the distribution of $X$ are required.
       before:``,
       after:``,
       link:'',
-  
+
     },
-  
+
+    notation:{
+      title:`Markov's Inequality Notation`,
+      lead:`This page is the first in the inequalities family to write its marks down, so the shared grammar starts here: the tail event, the bound chain that reads as a guarantee, and the normalized threshold that hands the story on to Chebyshev. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$X$ and the event-building braces come from [random variable notation](!/probability/random-variables#notation); $E[X]$ from [expected value notation](!/probability/expected-value#notation); the blackboard register $\\mathbb{P}$, $\\mathbb{E}$ from [distribution notation](!/probability/distributions#notation).`,
+      entries:[
+        {
+          id:'tail-event',
+          tex:`$P(X \\ge a)$`,
+          read:`the probability that X reaches the threshold a — a tail probability`,
+          means:`The event "at least $a$" wrapped in $P(\\cdot)$: everything from the threshold rightward, which is why it is called the **right tail**. The mirror $P(X \\le a)$ is the left tail — and accumulated left tails are exactly what [CDF notation](!/probability/cdf#notation) packages as $F(a)$, making the right tail $1 - F(a)$ wherever no atom sits at the boundary.`,
+          cases:`$\\ge$ versus $>$ matters only where probability concentrates at the threshold itself: for continuous variables the two spellings agree, for discrete ones they differ by the atom $P(X = a)$ — the same boundary bookkeeping the [CDF's chosen ≤](!/probability/cdf#notation) settles on the left side.`,
+          confusedWith:`A value of $X$. $P(X \\ge a)$ is a number about the variable, not a region of outcomes or a truncated variable — bounding it says nothing about which particular large values occur, only about their collective weight.`,
+        },
+        {
+          id:'bound-chain',
+          tex:`$\\mathbb{P}(X \\ge a) \\le \\dfrac{\\mathbb{E}[X]}{a}$`,
+          read:`the tail probability never exceeds the mean over the threshold`,
+          means:`A probability on the left, a distribution-free recipe on the right, and $\\le$ standing between them as a **guarantee**, not an estimate — the reading **What the Inequality Is Saying** below insists on. The bound is a ceiling: the truth can sit far beneath it.`,
+          cases:`The claim is quantified over every threshold — "for any $a > 0$" — one inequality per choice of $a$, all true at once; when the right side exceeds $1$ the statement stays true and says nothing, which is the notation's way of admitting the threshold was too small for the information used.`,
+          confusedWith:`An approximation. Reading $\\le$ as $\\approx$ converts a worst-case ceiling into a prediction — the single most common misuse of the mark, and the reason the page calls the inequality a **constraint**.`,
+        },
+        {
+          id:'normalized-threshold',
+          tex:`$\\mathbb{P}(X \\ge k\\,\\mathbb{E}[X]) \\le \\dfrac{1}{k}$`,
+          read:`at least k times the mean happens with probability at most one over k`,
+          means:`The same inequality with the threshold rewritten in units of the mean: substituting $a = k\\,\\mathbb{E}[X]$ makes the bound dimensionless — no more than a fifth of the mass can sit at five times the average, whatever the distribution.`,
+          cases:`This units-of-the-mean spelling is the bridge to [Chebyshev's inequality](!/probability/inequalities/chebyshev), which measures its threshold in units of the standard deviation instead — $k\\sigma$ rather than $k\\,\\mathbb{E}[X]$ — trading wider assumptions for a squared improvement in the bound.`,
+          confusedWith:`A count. $k$ is a scale factor on the mean, not a number of events or trials — the same letter that counts successes elsewhere here stretches a threshold, and only the position next to $\\mathbb{E}[X]$ signals which job it holds.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/inequalities`,
+      parentLabel:`Probability Inequalities`,
+      before:``,
+      after:``,
+      link:'',
+
+    },
+
     obj3:{
   
       title:`What the Inequality Is Saying`,
@@ -1156,6 +1197,25 @@ export default function MarkovInequalityPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

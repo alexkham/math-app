@@ -433,6 +433,7 @@ import Head from 'next/head'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 export async function getStaticProps(){
 
@@ -698,8 +699,39 @@ All logical equivalences involving **implications** provide ways to rewrite cond
     
     In formal logic, these properties make biconditionals a powerful tool for **proofs, simplifications, and logical reasoning** across mathematics, philosophy, and computing.`,
 
+  },
+
+  faq:{
+    title:`Logical Equivalence FAQ`,
   }
 
+}
+
+// Four questions written from scratch — this page had no faqQuestions object.
+// Section headings already own "what is logical equivalence" and "how to verify",
+// so these target the buried content: the ≡ vs ↔ notation trap and the three
+// most-searched table-row equivalences.
+const faqQuestions = {
+  obj1: {
+    question: "What is the difference between ≡ and ↔ in logic?",
+    answer: "The triple bar ≡ makes a claim about two formulas: P ≡ Q says they agree in every possible case, so it is itself always simply true or false. The single arrow ↔ is a connective inside the language, and the truth of P ↔ Q varies with its components. The bridge between them: P ≡ Q holds exactly when P ↔ Q is a tautology.",
+    sectionId: "notation"
+  },
+  obj2: {
+    question: "What is material implication?",
+    answer: "Material implication is the equivalence p → q ≡ ¬p ∨ q: the statement \"if p then q\" says exactly that either p is false or q is true. Both sides are false in only one case — p true and q false — so their truth values always match. The rewrite removes the arrow, so implications can be simplified using the [laws of logic](!/logic/propositional-logic/laws) for AND, OR, and NOT.",
+    sectionId: "conditional"
+  },
+  obj3: {
+    question: "What is the negation of an implication?",
+    answer: "The negation of p → q is p ∧ ¬q: the antecedent true and the consequent false. That is the single row of the truth table where an [implication](!/logic/propositional-logic/semantics/implication) fails, so denying \"if p then q\" asserts exactly that case. The negation of an implication is a conjunction — not another implication, and not p → ¬q, a frequent mistake.",
+    sectionId: "conditional"
+  },
+  obj4: {
+    question: "What is the negation of a biconditional?",
+    answer: "Negating a biconditional produces an exclusive or: ¬(p ↔ q) ≡ p ↔ ¬q, true exactly when p and q have different truth values. A biconditional asserts that both statements match — both true or both false — so its denial asserts a mismatch: one true and the other false. Attaching the negation to either side gives the same equivalent result.",
+    sectionId: "biconditional"
+  }
 }
 
   return {
@@ -710,13 +742,14 @@ All logical equivalences involving **implications** provide ways to rewrite cond
        logicalEquivalences,
        sectionsContent,
        keyWords,
-       introContent
+       introContent,
+       faqQuestions
     }
   }
 }
 
 export default function EquivalencesPage({verify ,biconditionalEquivalences ,logicalLaws ,logicalEquivalences,
-  sectionsContent,keyWords ,introContent}) {
+  sectionsContent,keyWords ,introContent ,faqQuestions}) {
 
 
     const equivalencesSections=[
@@ -791,6 +824,22 @@ sectionsContent.conditional.after,
                 copyableFields={'equivalence'}
                 includedFields={['name','equivalence','explanation']}/>,
              sectionsContent.biconditional.after,
+            ]
+          },
+          // faq: rendered component — must be built here, not in getStaticProps
+          {
+            id:'faq',
+            title:sectionsContent.faq.title,
+            link:``,
+            content:[
+              <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+                <FAQSection
+                  faqQuestions={faqQuestions}
+                  theme={'leftBorder'}
+                  width={'100%'}
+                  openFirst={false}
+                />
+              </div>,
             ]
           },
         //   {

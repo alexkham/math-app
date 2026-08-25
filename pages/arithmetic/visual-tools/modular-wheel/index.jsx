@@ -966,7 +966,7 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
         url: "/arithmetic/visual-tools/modular-wheel",
         name: "Modular Arithmetic Wheel Visualizer",
         hubDescription: "Watch the integers 1 through N sort themselves into n remainder classes on a pie wheel — one slice per class, with the zero class (multiples of n) starred and centered at the top. Hover any slice for its formula and examples; switch the divisor from 2 to 9 to see how class structure changes.",
-        category: "Arithmetic",
+        category: "Primes, GCD & Modular Arithmetic",
         subCategory: ""
       },
 

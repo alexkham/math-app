@@ -3,13 +3,18 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
-import ModernCardsGroup from '@/app/components/cards/ModernCardsGroup'
-import QuickNav from '@/app/components/cards/QuickNav'
-import ScrollToTop from '@/app/components/scroll-up-button/ScrollToTop'
-import ToolsPageHeader from '@/app/components/cards/ToolsPageHeader'
+import VisualToolsPage from '../../../app/components/page-components/visual-tools-page/VisualToolsPage'
+import { buildToolIndexData } from '../../../app/components/page-components/visual-tools-page/buildToolsPageData'
 
 
 export async function getStaticProps(){
+
+  // Surfaced on the /arithmetic hub via buildSectionData extraction.
+  // First-match-wins: placed before the seoData below.
+  const hubMeta = {
+    name: 'Arithmetic Visual Tools',
+    hubDescription: 'Interactive explorers for the building blocks of number theory: a divisibility table that highlights multiples across a grid, a divisibility-rules decision tree, divisibility tiles that group numbers into equal sets, a Sieve of Eratosthenes prime finder, a step-by-step Euclidean algorithm GCD visualizer, and a modular arithmetic wheel that sorts integers into remainder classes.',
+  }
 
   const keyWords = [
     'arithmetic visualization tools',
@@ -20,6 +25,10 @@ export async function getStaticProps(){
     'divisibility table visualizer',
     'divisibility tree visualizer',
     'interactive divisibility tools',
+    'sieve of eratosthenes visualizer',
+    'euclidean algorithm visualizer',
+    'gcd visualizer',
+    'modular arithmetic visualizer',
     'arithmetic teaching tools',
     'visual math tools',
     'number theory visualization',
@@ -29,40 +38,12 @@ export async function getStaticProps(){
     'elementary arithmetic tools'
   ]
 
-  const cardsData = [
-    {
-      title: "Divisibility Table Visualizer",
-      description: "Explore divisibility patterns through an interactive table that highlights multiples, common factors, and divisibility relationships. Adjust the range and select divisors to see how numbers relate through divisibility with color-coded visual feedback.",
-      backgroundColor: "#4F46E5",
-      textColor: "#ffffff",
-      ratio: 7,
-      image: '',
-      href: "/arithmetic/visual-tools/divisibility-table"
-    },
-    {
-      title: "Divisibility Tree Visualizer",
-      description: "Break down numbers into their prime factors with an interactive tree diagram. Watch step-by-step how composite numbers decompose through repeated division, revealing the fundamental building blocks of any integer with a dynamic branching visualization.",
-      backgroundColor: "#4F46E5",
-      textColor: "#ffffff",
-      ratio: 7,
-      image: '',
-      href: "/arithmetic/visual-tools/divisibility-tree"
-    },
-      {
-      title: "Divisibility Tiles Visualizer",
-      description: "Explore divisibility by grouping tiles into equal sets. Enter any number from 1 to 100, choose a divisor, and watch tiles organize into complete groups with remainders highlighted. See instantly whether numbers divide evenly with step-by-step visual explanations.",
-      backgroundColor: "#4F46E5",
-      textColor: "#ffffff",
-      ratio: 7,
-      image: '',
-      href: "/arithmetic/visual-tools/divisibility-tiles"
-    }
-  ]
+  const toolsData = await buildToolIndexData('/arithmetic/visual-tools')
 
   const faqQuestions = {
     obj1: {
       question: "What arithmetic visualization tools are available?",
-      answer: "The collection currently includes interactive visualizers for divisibility tables and divisibility trees. The divisibility table tool highlights multiples and factor relationships across a number grid, while the divisibility tree tool shows step-by-step prime factorization through branching diagrams."
+      answer: "The collection includes six interactive visualizers: a divisibility table that highlights multiples and factor relationships across a number grid, a divisibility decision tree that tests any number against the rules for 2 through 12, divisibility tiles that group numbers into equal sets, a Sieve of Eratosthenes prime finder, a Euclidean algorithm visualizer that computes the greatest common divisor step by step, and a modular arithmetic wheel that sorts integers into remainder classes."
     },
     obj2: {
       question: "How do arithmetic visualization tools help learning?",
@@ -70,7 +51,7 @@ export async function getStaticProps(){
     },
     obj3: {
       question: "What is the difference between the divisibility table and divisibility tree?",
-      answer: "The divisibility table shows relationships between numbers and their divisors across a grid, making it easy to spot patterns and common factors. The divisibility tree focuses on breaking down a single number into its prime factors through a step-by-step branching diagram."
+      answer: "The divisibility table shows relationships between numbers and their divisors across a grid, making it easy to spot patterns and common factors. The divisibility tree takes a single number through a flowchart of divisibility rules for 2 through 12, showing step by step which tests pass, which fail, and why."
     },
     obj4: {
       question: "Are these arithmetic tools free to use?",
@@ -82,12 +63,21 @@ export async function getStaticProps(){
     }
   }
 
+  // hasPart / itemList are generated from the auto-discovered tools so the
+  // schemas always match what the page actually shows.
+  const toolSchemaParts = toolsData.items.map((tool) => ({
+    "@type": "WebPage",
+    "name": tool.title,
+    "url": `https://www.learnmathclass.com${tool.href}`,
+    "description": tool.shortDescription || tool.description || ''
+  }))
+
   const schemas = {
     collectionPage: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": "Arithmetic Visual Tools",
-      "description": "Interactive visualization tools for learning arithmetic including divisibility tables, divisibility trees, and number theory explorers with real-time visual feedback.",
+      "description": "Interactive visualization tools for learning arithmetic including divisibility tables, divisibility trees, prime sieves, the Euclidean algorithm, and modular arithmetic with real-time visual feedback.",
       "url": "https://www.learnmathclass.com/arithmetic/visual-tools",
       "inLanguage": "en-US",
       "about": {
@@ -105,49 +95,23 @@ export async function getStaticProps(){
       },
       "datePublished": "2024-01-15",
       "dateModified": new Date().toISOString(),
-      "hasPart": [
-        {
-          "@type": "WebPage",
-          "name": "Divisibility Table Visualizer",
-          "url": "https://www.learnmathclass.com/arithmetic/visual-tools/divisibility-table",
-          "description": "Interactive divisibility table with color-coded multiples and factor highlighting"
-        },
-        {
-          "@type": "WebPage",
-          "name": "Divisibility Tree Visualizer",
-          "url": "https://www.learnmathclass.com/arithmetic/visual-tools/divisibility-tree",
-          "description": "Interactive prime factorization tree with step-by-step decomposition"
-        }
-      ]
+      "hasPart": toolSchemaParts
     },
 
     itemList: {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "SoftwareApplication",
-            "name": "Divisibility Table Visualizer",
-            "url": "https://www.learnmathclass.com/arithmetic/visual-tools/divisibility-table",
-            "applicationCategory": "EducationalApplication",
-            "description": "Interactive divisibility table with color-coded multiples and factor highlighting"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "SoftwareApplication",
-            "name": "Divisibility Tree Visualizer",
-            "url": "https://www.learnmathclass.com/arithmetic/visual-tools/divisibility-tree",
-            "applicationCategory": "EducationalApplication",
-            "description": "Interactive prime factorization tree with step-by-step decomposition"
-          }
+      "itemListElement": toolsData.items.map((tool, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": tool.title,
+          "url": `https://www.learnmathclass.com${tool.href}`,
+          "applicationCategory": "EducationalApplication",
+          "description": tool.shortDescription || tool.description || ''
         }
-      ]
+      }))
     },
 
     breadcrumb: {
@@ -189,60 +153,25 @@ export async function getStaticProps(){
     }
   }
 
-  const sectionsContent = {
-    obj1: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-    },
-    obj2: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-    },
-    obj3: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-    },
-    obj4: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-    },
-    obj5: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-    }
-  }
-
-  const introContent = {
-    id: "intro",
-    title: "",
-    content: ``
-  }
-
   const pageArticle=`Arithmetic forms the foundation of all mathematical thinking, and understanding divisibility is one of its most essential skills. These interactive visualization tools transform abstract number relationships into concrete, explorable experiences.
 
 The Divisibility Table Visualizer presents numbers in a grid format, highlighting multiples and common factors with color coding. Select any divisor and watch patterns emerge across the table — a powerful way to recognize divisibility rules intuitively rather than memorizing them.
 
-The Divisibility Tree Visualizer takes a different approach, breaking down individual numbers into their prime factors through animated branching diagrams. Enter any composite number and observe step-by-step how it decomposes through repeated division until only primes remain.
+The Divisibility Tree Visualizer takes a different approach: it runs a single number through a decision tree of divisibility rules for 2 through 12. Enter any number up to 9999 and watch each test light up green or red — last digit, digit sum, alternating sum — with derived rules for 6, 10, and 12 combining earlier results.
 
 The Divisibility Tiles Visualizer offers a hands-on grouping experience. Numbers from 1 to 100 can be divided into equal sets, with remainders clearly highlighted. This concrete representation helps learners grasp why some divisions result in whole numbers while others leave remainders.
+
+The Sieve of Eratosthenes Visualization shows how primes emerge as composites get crossed out, one divisor at a time. Color-coded steps and explanations make the classic prime-finding algorithm easy to follow from start to finish.
+
+The Euclidean Algorithm Visualizer computes the greatest common divisor of any two numbers as a chain of division equations, making each remainder and substitution step visible until the GCD emerges as the last divisor.
+
+The Modular Arithmetic Wheel sorts the integers 1 through N into remainder classes on a pie wheel — one slice per class, with the multiples of the divisor highlighted. Switch the divisor to see how the class structure changes.
 
 Each tool runs directly in your browser with no downloads or registration required. Use them for self-study, classroom demonstrations, or homework support.`
 
   return {
     props: {
-      sectionsContent,
-      introContent,
-      cardsData,
+      toolsData,
       faqQuestions,
       schemas,
       pageArticle,
@@ -257,29 +186,7 @@ Each tool runs directly in your browser with no downloads or registration requir
   }
 }
 
-export default function ArithmeticVisualToolsPage({seoData, sectionsContent, 
-  introContent, cardsData, faqQuestions, schemas, pageArticle}) {
-
-  const genericSections = [
-    {
-      id: '1',
-      title: 'section1',
-      link: '',
-      content: ''
-    },
-    {
-      id: '2',
-      title: 'section2',
-      link: '',
-      content: ''
-    },
-    {
-      id: '',
-      title: '',
-      link: '',
-      content: ''
-    }
-  ]
+export default function ArithmeticVisualToolsPage({seoData, toolsData, faqQuestions, schemas, pageArticle}) {
 
   return (
     <>
@@ -344,61 +251,25 @@ export default function ArithmeticVisualToolsPage({seoData, sectionsContent,
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Arithmetic Visual Tools</h1>
-      <QuickNav items={cardsData} dropdownLabel="All Tools" />
-      <br/>
-      <ScrollToTop
-        top={'80px'}
-        center={true}
-      />
-      <br/>
-      <ToolsPageHeader 
-        items={cardsData}
-        icon="🔧"
+      <VisualToolsPage
+        tools={toolsData}
+        pageTitle="Arithmetic Visual Tools"
         intro={{
           title: "Explore Interactive Arithmetic Tools",
           description: "Master concepts through hands-on visualization...",
           tip: "Click any tool below to see its description..."
         }}
-        onFilteredItemsChange={(filtered) => setDisplayedItems(filtered)}
         article={pageArticle}
+        icon="🧮"
+        dropdownLabel="All Tools"
+        theme="deepBlue"
+        sidebar={true}
+        sidebarBrandName="Arithmetic"
+        sidebarBrandSub="Visual Tools"
       />
       <br/>
       <br/>
       <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <ModernCardsGroup items={cardsData}/>
-      <br/>
-      {/* <SectionTableOfContents sections={genericSections}/> */}
-      <br/>
-      <br/>
-      <br/>
-      {/* <IntroSection 
-        id={introContent.id}
-        title={introContent.title}
-        content={introContent.content}
-        backgroundColor='#f9fafb'
-        textColor="#06357a"
-      /> */}
-      <br/>
-      <br/>
-      {/* <Sections sections={genericSections}/> */}
-      <br/>
-      <br/>
-      <br/>
-      {/* <ScrollUpButton/> */}
     </>
   )
 }

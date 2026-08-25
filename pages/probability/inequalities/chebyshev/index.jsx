@@ -657,6 +657,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -893,24 +894,64 @@ Compared to Markov's inequality, Chebyshev uses more information — variance �
     obj2:{
       title:`Statement of Chebyshev's Inequality`,
       content:`
-Let $X$ be a random variable with finite mean $\mu$ and finite variance $\sigma^2$.
+Let $X$ be a random variable with finite mean $\\mu$ and finite variance $\\sigma^2$.
 
 For any real number $k > 0$, Chebyshev's inequality states:
- 
- $\[\\mathbb{P}\\big(|X - \\mu| \\ge k\,\\sigma\\big) \\le \\frac{1}{k^2}.\]$
+
+$$\\mathbb{P}\\big(|X - \\mu| \\ge k\\,\\sigma\\big) \\le \\frac{1}{k^2}$$
 
 Equivalently, for any $\\varepsilon > 0$,
-  
-  $\[\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\varepsilon^2}.\]$
+
+$$\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\varepsilon^2}$$
 
 The bound depends only on the variance and makes no assumptions about the form of the distribution.
 `,
       before:``,
       after:``,
       link:'',
-  
+
     },
-  
+
+    notation:{
+      title:`Chebyshev's Inequality Notation`,
+      lead:`Chebyshev's marks refine [Markov's](!/probability/inequalities/markov#notation) in two moves: the tail turns two-sided, and the threshold changes units — from multiples of the mean to multiples of the standard deviation. This section fixes the deviation event, the bound's two equivalent spellings, and the flipped form that reads as a coverage guarantee. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The one-sided tail $P(X \\ge a)$ and the ≤-as-guarantee reading come from [Markov's inequality notation](!/probability/inequalities/markov#notation); the deviation event $|X - \\mu| > \\varepsilon$ and the quantified $\\varepsilon$ from [law of large numbers notation](!/probability/large-numbers-law#notation); $\\mu$ and $\\sigma$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'two-sided-deviation',
+          tex:`$|X - \\mu| \\ge k\\sigma$`,
+          read:`X lands at least k standard deviations from its mean — in either direction`,
+          means:`Two refinements in one event: the absolute value makes the tail **two-sided** — both directions at once, where [Markov's](!/probability/inequalities/markov#notation) $X \\ge a$ watches only one — and the threshold $k\\sigma$ is measured in units of the standard deviation, the origin of everyday "two-sigma, three-sigma" talk.`,
+          cases:`The same event in absolute units swaps $k\\sigma$ for a plain tolerance $\\varepsilon$ — the spelling the [law of large numbers](!/probability/large-numbers-law#notation) runs on; the two are interchangeable through $\\varepsilon = k\\sigma$, and which one a text uses signals whether it thinks in σ-units or in raw distance.`,
+          confusedWith:`Markov's $k$. There the letter multiplies the **mean**, here the **standard deviation** — same letter, different unit, and carrying a bound from one threshold convention to the other silently changes what is being claimed.`,
+        },
+        {
+          id:'bound-pair',
+          tex:`$\\le \\dfrac{1}{k^2}$, $\\le \\dfrac{\\sigma^2}{\\varepsilon^2}$`,
+          read:`at most one over k squared — at most variance over tolerance squared`,
+          means:`One inequality, two dresses: substitute $\\varepsilon = k\\sigma$ and each becomes the other. The $\\sigma$-units spelling gives the clean distribution-free constants; the $\\varepsilon$ spelling exposes the mechanism — variance up top, tolerance squared below — that **Why Chebyshev Improves on Markov** below explains.`,
+          cases:`The bound only says something when $k > 1$ — at $k \\le 1$ the right side reaches $1$ and the statement goes vacuous, Markov-style; the square is the visible improvement over Markov's $1/k$: twice the threshold buys four times the guarantee, not two.`,
+          confusedWith:`Each other, mid-formula. Writing $\\sigma^2/k^2$ or $1/\\varepsilon^2$ mixes the two spellings — the numerator and the denominator must come from the same convention, and the mismatch produces bounds that are silently off by a factor of $\\sigma^2$.`,
+        },
+        {
+          id:'coverage-complement',
+          tex:`$\\mathbb{P}\\big(|X - \\mu| < k\\sigma\\big) \\ge 1 - \\dfrac{1}{k^2}$`,
+          read:`at least the fraction one minus one-over-k-squared lies within k standard deviations`,
+          means:`The same fact flipped through the complement: the tail bound becomes a **coverage guarantee**, and both marks turn around together — $\\ge$ becomes $<$ inside, $\\le$ becomes $\\ge$ outside. In numbers: at least $75\\%$ within $2\\sigma$, at least $89\\%$ within $3\\sigma$, for every distribution with a variance.`,
+          cases:`This is the honest, distribution-free cousin of the [normal distribution](!/probability/distributions/continuous/normal)'s 68–95–99.7 rule — Chebyshev promises less (0, 75, 89) because it assumes nothing about shape.`,
+          confusedWith:`The normal rule itself. Quoting "95% within two sigmas" for data nobody checked for normality claims the bell curve's privilege without its assumptions — Chebyshev's $75\\%$ is what the variance alone can promise, and the gap between the two numbers is exactly what normality is worth.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/inequalities`,
+      parentLabel:`Probability Inequalities`,
+      before:``,
+      after:``,
+      link:'',
+
+    },
+
     obj3:{
   
       title:`What the Inequality Is Saying`,
@@ -1146,6 +1187,25 @@ export default function ChebyshevInequalityPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

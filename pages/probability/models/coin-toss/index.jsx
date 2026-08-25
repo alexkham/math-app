@@ -187,7 +187,7 @@
 // The labels themselves have no mathematical meaning.  
 // They simply distinguish the two possible results of the experiment.
 
-// At this stage, the model specifies only *what can happen*.  
+// At this stage, the model specifies only **what can happen**.
 // No probabilities or numerical values are attached yet.
 // `,
 //       before:``,
@@ -208,7 +208,7 @@
 // • the event that some outcome occurs
 // • the event that no outcome occurs
 
-// [Events](!/probability/events) describe *which outcomes are of interest*, not how likely they are.  
+// [Events](!/probability/events) describe **which outcomes are of interest**, not how likely they are.
 // At this level, the model organizes outcomes into meaningful groups without assigning probabilities.
 // `,
 //       before:``,
@@ -1022,7 +1022,7 @@ These outcomes are usually labeled for convenience, for example:
 The labels themselves have no mathematical meaning.  
 They simply distinguish the two possible results of the experiment.
 
-At this stage, the model specifies only *what can happen*.  
+At this stage, the model specifies only **what can happen**.
 No probabilities or numerical values are attached yet.
 `,
       before:``,
@@ -1043,7 +1043,7 @@ With two possible outcomes, the possible events include:
 • the event that some outcome occurs
 • the event that no outcome occurs
 
-[Events](!/probability/events) describe *which outcomes are of interest*, not how likely they are.  
+[Events](!/probability/events) describe **which outcomes are of interest**, not how likely they are.
 At this level, the model organizes outcomes into meaningful groups without assigning probabilities.
 `,
       before:``,

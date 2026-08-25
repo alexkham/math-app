@@ -723,7 +723,8 @@ A good exercise: hunt for the smallest impostor. A composite number always has a
     description: "Interactive divisibility decision tree for testing numbers 1-9999. Visualize divisibility rules for 2-12 with step-by-step explanations and hover tooltips.",
     keywords: keyWords.join(", "),
     url: "/arithmetic/visual-tools/divisibility-tree",
-    name: "Divisibility Decision Tree Interactive Tool"
+    name: "Divisibility Decision Tree Interactive Tool",
+    category: "Divisibility & Remainders"
   }
 
   const schemas = {

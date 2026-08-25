@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import PartialPermutation from '../../../../app/components/combinatorics/new-visualizers/scenes/PartialPermutation'
+// import PermutationWithIdenticalItems from '../../../../app/components/combinatorics/new-visualizers/scenes/PermutationWithIdentical'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/combinatorics/visual-tools/partial-permutation",
+//         url: "/combinatorics/visual-tools/permutation-with-identical",
 //          name: "name"
 //       },
         
@@ -443,9 +443,9 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Partial Permutations</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Permutations with Identical Items</h1>
 //    <br/>
-//    <PartialPermutation/>
+//    <PermutationWithIdenticalItems/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -483,6 +483,7 @@
 // }
 
 
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -491,46 +492,44 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import PartialPermutation from '../../../../app/components/combinatorics/new-visualizers/scenes/PartialPermutation'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
-import partialPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partialPermutationDiagrams'
+import PermutationWithIdenticalItems from '../../../../app/components/combinatorics/new-visualizers/scenes/PermutationWithIdentical'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    'partial permutation',
-    'partial permutation visualizer',
-    'P(n,r) formula',
-    'n!/(n-r)! formula',
-    'permutation without repetition',
-    'arranging r items from n',
-    'permutation of r from n',
-    'partial permutation formula',
-    'permutations step by step',
-    'ordered selection without repetition',
-    'how to find P(n,r)',
-    'permutation r objects from n',
-    'visualize partial permutations',
-    'combinatorics partial permutation',
-    'k permutations of n'
+    'permutation with identical items',
+    'multiset permutation',
+    'permutations with duplicates',
+    'n!/(k1! k2!) formula',
+    'distinct permutations of a multiset',
+    'arrangements with identical items',
+    'multinomial coefficient',
+    'how many ways to arrange letters with duplicates',
+    'permutations of letters with repeats',
+    'multiset permutation visualizer',
+    'arranging identical objects',
+    'visualize multiset permutations',
+    'permutations identical objects formula',
+    'combinatorics multiset',
+    'distinct arrangements with repeats'
   ]
 
   const sectionsContent = {
 
     obj0: {
       title: `Key Terms`,
-      content: `**Partial permutation** — an ordered selection of $r$ items from a set of $n$ distinct items, with no item reused. The count is $P(n, r) = n! / (n - r)!$.
+      content: `**Multiset** — a collection of items where some may be identical. Unlike a set, a multiset records how many copies of each item are present. In this tool the multiset is encoded as a string like *AABBC*.
 
-**$P(n, r)$** — standard notation for the number of partial permutations of size $r$ taken from $n$ items. Also written $_nP_r$ or $P^n_r$.
+**Permutation with identical items** — a distinct arrangement of a multiset in a line. Swapping two identical copies does not produce a new permutation. The count is $n! / (k_1! \\cdot k_2! \\cdots)$ where each $k_i$ is the size of an identical group.
 
-**Order matters** — two selections with the same items in different positions count as different partial permutations. This is what distinguishes partial permutations from combinations.
+**Multinomial coefficient** — the formula $\\binom{n}{k_1, k_2, \\dots} = n! / (k_1! \\cdot k_2! \\cdots)$. The generalization of the binomial coefficient to more than two groups.
 
-**Position** — a slot in the arrangement, numbered $\\#1$ through $\\#r$ from left to right in the build area.
+**Distinct first item** — a unique item value in the multiset. The completed section groups arrangements by which distinct item appears in position $\\#1$, so there is one group per distinct item, not one per source position.
 
-**First-item group** — the [family of partial permutations](!#grouping-by-first-item) that share the same item in position $\\#1$. There are $n$ such groups, each containing $(n - 1)! / (n - r)!$ partial permutations.
+**Positional dimming** — the source row shows every copy in its own position. When a copy is used in the current build, only that position dims — the other copies of the same item stay fully visible.
 
-**Source row** — the set of $n$ available items shown at the top of the scene. Items already placed in the current build are dimmed.`,
+**Group size** — the number of distinct arrangements in a first-item group. With $k_i$ copies of the chosen first item, that count is $(n - 1)! / ((k_i - 1)! \\cdot \\prod_{j \\neq i} k_j!)$, which varies between groups.`,
       before: ``,
       after: ``,
       link: '',
@@ -538,17 +537,17 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started`,
-      content: `The tool opens with $n = 3$ and $r = 2$, ready to build. The scene splits into three areas:
+      content: `The tool opens with multiset *AAB* selected: two copies of $A$ and one copy of $B$. The scene splits into three areas:
 
-• A **source row** at the top showing all $n$ available items.
+• A **source row** at the top showing the multiset as separate balls, including duplicates side by side.
 
-• A **build area** in the middle with exactly $r$ slots labeled $\\#1$ through $\\#r$.
+• A **build area** in the middle with $n$ slots, where $n$ is the total size of the multiset (counting duplicates).
 
-• A **completed** section below, where every finished partial permutation is filed under the row matching its first item.
+• A **completed** section below, where every finished distinct permutation is filed under the row matching its first item.
 
 To run the visualization:
 
-• Press **▶ Play** to auto-build all $P(n, r)$ partial permutations.
+• Press **▶ Play** to auto-build all distinct permutations of the current multiset.
 
 • Press **Step ▶** to advance one ball at a time.
 
@@ -556,85 +555,75 @@ To run the visualization:
 
 • Adjust the **Speed** slider to control how fast play advances.
 
-The header in the top right shows $P(n, r) = \\text{total}$ alongside a live status line such as *Step X (item name): $k$ / $(n-1)!/(n-r)!$* while building, or *Complete · total / total* when done.`,
+The header shows the formula $n! / (k_1! \\cdot k_2! \\cdots) = \\text{total}$ together with a live status line like *Group A: $k$ / size* while building.`,
       before: ``,
-      after: `The frozen frame above is the opening position, and its geometry already states the problem: three balls in the source row, but only two dashed slots below. A partial permutation never intends to use everything — the mismatch between pool and positions is the point.
-
-Every run therefore ends with someone left out. Which items are left out, and in what order the chosen ones stand, together determine the count — the [build area](!#the-build-area) shows the mechanics.`,
+      after: ``,
       link: '',
     },
 
     obj2: {
       title: `The Build Area`,
-      content: `The build area is where one partial permutation at a time is constructed. Unlike a full permutation, only $r$ slots appear — not $n$. The label above the area reads *BUILD AREA (r = R)* with the current $r$.
+      content: `The build area is where one distinct permutation at a time is constructed. The label above the area simply reads *BUILD AREA*; the slot count equals the size of the chosen multiset.
 
 What to watch:
 
-• **Empty slot outlines** with dashed borders, labeled $\\#1, \\#2, \\dots, \\#r$. The label tells you the position number being filled.
+• **Empty slot outlines** with dashed borders, labeled $\\#1, \\#2, \\dots, \\#n$ from left to right.
 
-• When a ball is in flight from the source row to a slot, a **dotted guide line** in that ball's color traces the trajectory.
+• When a ball is in flight from the source row to a slot, a **dotted guide line** traces the trajectory in the color of the item being moved.
 
-• Each ball lands in its assigned slot and stays put until the partial permutation completes.
+• Each ball lands in its assigned slot and stays put until the permutation completes.
 
-• In the source row above, every item already placed in the current build (plus the one in flight) is **dimmed** to indicate it's out of play.
+• In the source row, **only the specific copy** being used dims — not every copy of that item. So when one of the two $A$ balls flies into a slot, the other $A$ stays bright. This is the visual signature of positional dimming.
 
-• When all $r$ slots are filled, a **flash ring** briefly pulses around the build area. The completed arrangement is then copied to the appropriate [first-item row](!#grouping-by-first-item) in the completed section below.`,
+• When all $n$ slots are filled, a **flash ring** briefly pulses around the build area, and the completed arrangement is filed in the appropriate first-item row below.`,
       before: ``,
-      after: `The frozen frame above catches the third arrangement mid-build: B has claimed slot #1, A is dropping into #2 along its dotted guide, and both are dimmed above. Green C stays bright — available, but about to be left out of this particular pair.
-
-The stop-after-r discipline is what separates this build from the full permutation's: when slot #2 fills, the arrangement is *finished*, with a bright ball still sitting unused in the source row. That permanent leftover is the $(n - r)!$ that [the formula divides away](!#deriving-p-n-r-step-by-step).`,
+      after: ``,
       link: '',
     },
 
     obj3: {
-      title: `Adjusting n and r`,
-      content: `Two steppers in the control bar control the size:
+      title: `The Multiset Stepper`,
+      content: `Instead of an $n$ stepper, this tool has a **multiset stepper** that cycles through six curated presets, increasing in complexity:
 
-• **n** sets the size of the source set — the pool of available items.
+• **AAB** — two of $A$, one of $B$. $3! / (2! \\cdot 1!) = 3$ distinct permutations.
 
-• **r** sets the number of positions to fill. The constraint $r \\leq n$ is enforced; if you reduce $n$ below the current $r$, the tool clamps $r$ down automatically.
+• **AAAB** — three of $A$, one of $B$. $4! / (3! \\cdot 1!) = 4$ permutations.
 
-Common combinations:
+• **AABB** — two each of $A$ and $B$. $4! / (2! \\cdot 2!) = 6$ permutations.
 
-• $n = 3, r = 2$: $P(3, 2) = 6$ partial permutations — the [default configuration](!#grouping-by-first-item).
+• **AABC** — two of $A$, one each of $B$ and $C$. $4! / (2! \\cdot 1! \\cdot 1!) = 12$ permutations.
 
-• $n = 4, r = 2$: $P(4, 2) = 12$ partial permutations.
+• **AAABB** — three of $A$, two of $B$. $5! / (3! \\cdot 2!) = 10$ permutations.
 
-• $n = 4, r = 3$: $P(4, 3) = 24$ partial permutations.
+• **AABBC** — two each of $A$ and $B$, one of $C$. $5! / (2! \\cdot 2! \\cdot 1!) = 30$ permutations.
 
-• $n = 5, r = 3$: $P(5, 3) = 60$ partial permutations — the [largest worked example](!#deriving-p-n-r-step-by-step) on this page.
-
-• $n = 5, r = 5$: $P(5, 5) = 120$ — this is the [full permutation case](!#when-r-equals-n), where $r = n$ and the formula reduces to $n!$.
-
-Changing either $n$ or $r$ resets the build, refreshes the formula in the header, and reorganizes the completed grid into the new number of first-item rows. Two boundary settings repay a visit of their own: [r = n](!#when-r-equals-n), where nothing is left out, and [r = 1](!#when-r-is-one), where nothing is ordered.`,
+Use the **◀** and **▶** buttons next to *multiset =* to cycle. Each preset resets the build, refreshes the formula in the header, and rebuilds the completed section into the new set of first-item rows.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj4: {
-      title: `Grouping by First Item`,
-      content: `The completed section organizes partial permutations into **first-item groups** — every arrangement starting with the same item appears in the same row.
+      title: `Grouping by Distinct First Item`,
+      content: `The completed section organizes permutations into **distinct first-item groups** — one row per distinct value in the multiset, not one per source position. So *AAB* has two groups ($A$ and $B$), not three.
 
-There are exactly $n$ groups (one per item in the source set), and each group holds exactly $(n - 1)! / (n - r)!$ partial permutations. So the total is:
+Group sizes vary because the remaining multiset depends on which item was used first. For example with *AABB*:
 
-$$n \\times \\frac{(n - 1)!}{(n - r)!} = \\frac{n!}{(n - r)!} = P(n, r)$$
+• Starting with $A$: remaining multiset is $ABB$, giving $3! / (1! \\cdot 2!) = 3$ arrangements.
 
-This is the visual proof of the [partial permutation formula](!#deriving-p-n-r-step-by-step). Pick any item to put in position $\\#1$: $n$ choices. For each choice, fill the remaining $r - 1$ positions with $r - 1$ items chosen in order from the remaining $n - 1$ items: $(n - 1)! / (n - r)!$ ways. Multiply.
+• Starting with $B$: remaining multiset is $AAB$, also giving $3! / (2! \\cdot 1!) = 3$ arrangements.
 
-Each group row in the completed area has:
+For *AABC*:
 
-• A **tinted background** in a faint version of the group's color.
+• Starting with $A$: remaining is $ABC$ (no repeats), giving $3! = 6$ arrangements.
 
-• A **colored accent stripe** on the left edge.
+• Starting with $B$: remaining is $AAC$, giving $3! / 2! = 3$.
 
-• A **left-side avatar** showing the first item — a colored circle with the item's number in balls mode, or the letter in letters mode.
+• Starting with $C$: remaining is $AAB$, giving $3! / 2! = 3$.
 
-• Mini partial-permutation cards, each one a full arrangement of $r$ items starting with that first item.`,
+This is why each row in the completed area has its own height — the tool computes a separate row size per group to keep proportions clean. The total across all groups always equals the multinomial coefficient $n! / (k_1! \\cdot k_2! \\cdots)$.`,
       before: ``,
-      after: `The frozen frame above is the default $P(3, 2)$ completed: six ordered pairs in three rows of two. Read any row and the factoring appears — first slot fixed, one slot to fill, two candidates for it.
-
-Two cards per row instead of the full permutation's $(n-1)!$ is the visible effect of stopping early: the second slot exhausts the arrangement, so the deeper orderings of the leftover item never happen. Multiply rows by row size — $3 \\times 2 = 6$ — and you have $P(3, 2)$ without touching a factorial.`,
+      after: ``,
       link: '',
     },
 
@@ -642,15 +631,15 @@ Two cards per row instead of the full permutation's $(n-1)!$ is the visible effe
       title: `Transport Controls`,
       content: `The control bar offers four transport buttons plus a speed slider:
 
-• **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single partial permutation or pausing mid-build.
+• **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single arrangement or pausing mid-build.
 
-• **Step ▶** (Step forward) — advances [one ball into one slot](!#the-build-area). Stop after each step to read the partial arrangement so far.
+• **Step ▶** (Step forward) — advances one ball into one slot. Stop after each step to read the partial arrangement.
 
-• **▶ Play / ⏸ Pause** — runs the animation continuously until all $P(n, r)$ partial permutations are built, then auto-pauses.
+• **▶ Play / ⏸ Pause** — runs the animation continuously until all distinct permutations are built, then auto-pauses.
 
 • **↺ Reset** — clears the completed section and starts over from the first arrangement.
 
-The **Speed** slider controls how fast play advances. At higher speeds the fly and land timings shrink proportionally; at slower speeds you can clearly see each ball travel from source to slot and follow the dotted guide line in detail.`,
+The **Speed** slider controls how fast play advances. At higher speeds the fly and land timings shrink proportionally; at slower speeds you can clearly see each ball travel from its source position to the assigned slot.`,
       before: ``,
       after: ``,
       link: '',
@@ -660,11 +649,11 @@ The **Speed** slider controls how fast play advances. At higher speeds the fly a
       title: `Mode Switch`,
       content: `The **Mode** switch at the start of the control bar toggles how each item is rendered:
 
-• **Balls mode** (default) — items appear as colored circles. The first-item avatar in each completed group is a circle with the item's number. Best for tracking position and group membership visually.
+• **Balls mode** (default) — items appear as colored circles. Identical copies share the same color, so the multiset *AABB* shows two circles of one color and two of another. The first-item avatar in each completed group is a circle with the item's number.
 
-• **Letters mode** — items appear with letter labels (A, B, C, …). The first-item avatar in each completed group is just the letter, colored to match. Best for reading off the sequence in each partial permutation and matching it to algebraic notation like $(A, C)$ or $(B, A, D)$.
+• **Letters mode** — items appear with letter labels (A, B, C, …). The multiset display becomes literal — *AABB* shows as $A, A, B, B$ in the source row. The first-item avatar in each completed group is just the letter, colored to match.
 
-The encoding is consistent across the source row, the build slots, the flying ball, every mini card in the completed grid, and the [right-panel narration](!#right-panel-and-progress). Switching modes mid-animation is safe — the build state preserves; only the rendering changes.`,
+The encoding is consistent across the source row, the build slots, the flying ball, every mini permutation card in the completed grid, and the right-panel narration. Letters mode is especially useful for this scenario because the multiset names themselves are letter strings.`,
       before: ``,
       after: ``,
       link: '',
@@ -672,67 +661,61 @@ The encoding is consistent across the source row, the build slots, the flying ba
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds, anchored by the header *Building partial permutations* with the full formula $P(n, r) = n! / (n - r)! = n \\times (n - 1) \\times \\dots = \\text{total}$.
+      content: `The right panel narrates the build as it unfolds, anchored by the header *Permutations with identical items* and the full multinomial formula for the current multiset.
 
-A **StepRow** is added for each [first-item group](!#grouping-by-first-item) as soon as a partial permutation in that group either starts building or completes. Each StepRow shows:
+A **StepRow** is added for each distinct first-item group as soon as a permutation in that group starts or completes. Each StepRow shows:
 
 • The **first item** as a chip plus its name — for instance, *First item: A*.
 
-• A **progress counter** like $k / ((n - 1)!/(n - r)!)$ tracking how many partial permutations in this group have completed.
+• A **progress counter** like $k / \\text{group size}$ tracking how many distinct permutations in this group have completed.
 
-• A short **narration** of the structure: *Position 1 is locked to A. The next $r - 1$ positions are filled from B, C, D, or E in $(n - 1) \\times (n - 2) \\times \\dots = M$ ways.* When $r = 1$ the narration adjusts: with only one position, the outcome is just the first item alone.
+• A short **narration** of the structure: *Position 1 is locked to A. The remaining positions hold 1 A, 2 Bs, and 1 C, arranged in $4! / (1! \\cdot 2! \\cdot 1!) = 12$ distinct ways.* The formula uses the leftover multiplicities after one copy of the first item is removed.
 
-When all groups complete, every StepRow shows *done* with a checkmark, and the header counter reaches $\\text{total} / \\text{total}$.`,
+When all groups complete, every StepRow shows *done* with a checkmark, and the counter reaches *total / total*.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj8: {
-      title: `What Is a Partial Permutation`,
-      content: `A **partial permutation** is an ordered selection of $r$ items from a set of $n$ distinct items, with no item used twice. The count of such selections is:
+      title: `What Is a Permutation with Identical Items`,
+      content: `A **permutation with identical items** is a distinct arrangement of a multiset — a collection of $n$ items where some are repeated. Two arrangements count as the same if they only differ by swapping copies of the same item. The number of distinct arrangements is:
 
-$$P(n, r) = \\frac{n!}{(n - r)!} = n \\times (n - 1) \\times \\dots \\times (n - r + 1)$$
+$$\\frac{n!}{k_1! \\cdot k_2! \\cdots k_m!}$$
 
-The formula collapses to $n!$ when $r = n$ — the full permutation. When $r < n$, the multiplication stops after $r$ factors instead of continuing all the way down to $1$.
+where $k_i$ is the number of copies of the $i$th distinct item and $k_1 + k_2 + \\dots + k_m = n$. This is the **multinomial coefficient** $\\binom{n}{k_1, k_2, \\dots, k_m}$.
 
 Examples:
 
-• Picking a $1$st, $2$nd, and $3$rd place from $8$ runners: $P(8, 3) = 8 \\times 7 \\times 6 = 336$ podiums.
+• Distinct arrangements of the letters in *MISSISSIPPI* (11 letters: 1 M, 4 I, 4 S, 2 P): $11! / (1! \\cdot 4! \\cdot 4! \\cdot 2!) = 34{,}650$.
 
-• Choosing a president and a vice-president from $10$ candidates: $P(10, 2) = 90$ outcomes.
+• Distinct arrangements of the word *DATA* (4 letters with 2 A): $4! / 2! = 12$.
 
-• Forming a $4$-digit code from $10$ digits with no repeats: $P(10, 4) = 5040$ codes.
+• Lining up 8 students where 3 wear identical red shirts and 5 wear identical blue shirts: $8! / (3! \\cdot 5!) = 56$ distinguishable lineups.
 
-The partial permutation is the right model whenever you need both *which* items and *what order* — and reuse is not allowed.
-
-For deeper coverage of the formula and its derivation, see the **partial permutation without repetition** section on the permutations theory page.`,
+For deeper coverage, see the **permutation with identical items** section on the permutations theory page.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj9: {
-      title: `Deriving P(n,r) Step by Step`,
-      content: `Apply the multiplication principle of counting one position at a time:
+      title: `Why Divide by k!`,
+      content: `Start with the multiset treated as if every item were distinct — say by tagging copies $A_1, A_2$ and $B_1, B_2$ for *AABB*. There are $n! = 4! = 24$ full permutations of the tagged set.
 
-• **Position $\\#1$**: any of the $n$ items. $n$ choices.
+But the tags are fake. When we remove them and look at the actual multiset, many of those $24$ permutations collapse into the same arrangement:
 
-• **Position $\\#2$**: any of the remaining $n - 1$ items. $n - 1$ choices.
+• The two $A$ copies can swap in $2! = 2$ ways without changing what we see.
 
-• **Position $\\#3$**: any of the remaining $n - 2$ items. $n - 2$ choices.
+• The two $B$ copies can swap in $2! = 2$ ways without changing what we see.
 
-• $\\dots$
+• Together, $2! \\cdot 2! = 4$ tagged permutations map to each distinct untagged arrangement.
 
-• **Position $\\#r$**: any of the remaining $n - r + 1$ items. $n - r + 1$ choices.
+So the distinct count is $24 / 4 = 6$, matching the formula $4! / (2! \\cdot 2!)$.
 
-Multiply the $r$ factors:
+Generalizing: for each identical group of size $k_i$, exactly $k_i!$ tagged permutations collapse into one untagged arrangement. Dividing $n!$ by the product of all such $k_i!$ removes every layer of redundancy:
 
-$$P(n, r) = n \\times (n - 1) \\times (n - 2) \\times \\dots \\times (n - r + 1)$$
-
-This product equals $n! / (n - r)!$ because the $r$ factors are exactly the top $r$ terms of $n!$, with the bottom $n - r$ terms canceled by the $(n - r)!$ in the denominator.
-
-The tool visualizes the equivalent factoring: fix the first item ($n$ ways), then arrange $r - 1$ of the remaining $n - 1$ items in order ($(n - 1)!/(n - r)!$ ways). Every row in the completed section is one of those $n$ first-item families.`,
+$$\\text{distinct count} = \\frac{n!}{k_1! \\cdot k_2! \\cdots k_m!}$$`,
       before: ``,
       after: ``,
       link: '',
@@ -740,19 +723,19 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Full permutation** — the case $r = n$, where every item from the source set is used. Formula $P(n, n) = n!$.
+      content: `**Full permutation** — the case where every item is distinct, so all $k_i = 1$. The formula reduces to $n!$ because every factorial in the denominator is $1$.
 
-**Permutation with repetition** — relaxes the no-reuse rule, allowing the same item in multiple positions. Formula $n^r$, which is larger than $P(n, r)$.
+**Partial permutation without repetition** — pick and arrange only $r$ items from a distinct set of $n$. Formula $n! / (n - r)!$.
 
-**Permutation with identical items** — handles a source set where some items are indistinguishable. Divides $n!$ by the factorial of each repeat group's size.
+**Permutation with repetition** — items can be reused, but a fixed pool of $n$ distinct options is used for $r$ positions. Formula $n^r$.
 
 **Circular permutation** — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
 
-**Combination** — the unordered companion of the partial permutation. Drops the order requirement, so $C(n, r) = P(n, r) / r!$.
+**Multinomial coefficient** — the direct algebraic name for $n! / (k_1! \\cdot k_2! \\cdots)$. Generalizes the binomial coefficient and appears in the multinomial theorem.
 
-**Multiplication principle** — the foundational counting rule that produces $P(n, r)$ as the product of choices at each successive position.
+**Binomial coefficient** — the special case with exactly two groups: $\\binom{n}{k} = n! / (k! \\cdot (n - k)!)$. Counts arrangements of a multiset with two distinct items.
 
-**Combinatorics calculator** — to compute $P(n, r)$ for arbitrary values of $n$ and $r$, see the **partial permutation calculator**.`,
+**Combinatorics calculator** — to compute $n! / (k_1! \\cdot k_2! \\cdots)$ for any multiset, see the **multiset permutation calculator**.`,
       before: ``,
       after: ``,
       link: '',
@@ -806,24 +789,24 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
 
   const faqQuestions = {
     obj1: {
-      question: "What is a partial permutation?",
-      answer: "A partial permutation is an ordered selection of r items from a set of n distinct items, where no item is used more than once. Order matters, so the same r items in a different sequence count as a different partial permutation. The number of partial permutations is P(n, r) = n! / (n minus r) factorial."
+      question: "What is a permutation with identical items?",
+      answer: "A permutation with identical items is a distinct arrangement of a multiset, where some elements are copies of one another. Two arrangements that differ only by swapping identical copies count as the same arrangement. The number of distinct arrangements is n factorial divided by the product of k factorial for each group of identical items."
     },
     obj2: {
-      question: "What is the formula for P(n, r)?",
-      answer: "P(n, r) equals n factorial divided by (n minus r) factorial. Equivalently, it is the product of r consecutive integers starting from n and going down: n times (n minus 1) times (n minus 2) and so on through (n minus r plus 1). For example, P(5, 3) = 5 times 4 times 3 = 60."
+      question: "What is the formula for permutations with repeated elements?",
+      answer: "The number of distinct permutations of n items with repeated elements is n factorial divided by the product of k1 factorial, k2 factorial, and so on, where each ki is the number of copies of the i-th distinct item. This expression is called the multinomial coefficient."
     },
     obj3: {
-      question: "How is a partial permutation different from a full permutation?",
-      answer: "A full permutation uses every item in the set, so it has n positions filled by all n items in some order, giving n factorial arrangements. A partial permutation uses only r of the n items, with r typically less than n. When r equals n, the partial permutation formula P(n, r) reduces to n factorial."
+      question: "Why do you divide by k factorial when there are duplicates?",
+      answer: "Because swapping two identical copies does not produce a new arrangement, multiple tagged permutations of n items collapse into the same untagged arrangement. For each group of k identical items there are k factorial ways to permute the copies among themselves invisibly. Dividing n factorial by the product of these k factorials removes all the redundant counting."
     },
     obj4: {
-      question: "How is a partial permutation different from a combination?",
-      answer: "Both pick r items from n without repetition, but a partial permutation cares about order and a combination does not. The same r items in different orders are different partial permutations but the same combination. The two are related by C(n, r) = P(n, r) divided by r factorial."
+      question: "How many distinct arrangements does the word MISSISSIPPI have?",
+      answer: "The word MISSISSIPPI has 11 letters: 1 M, 4 I, 4 S, and 2 P. The number of distinct arrangements is 11 factorial divided by the product of 1 factorial, 4 factorial, 4 factorial, and 2 factorial, which equals 34650."
     },
     obj5: {
-      question: "When should I use a partial permutation?",
-      answer: "Whenever a problem asks both which items and in what order, with no reuse allowed. Common cases include awarding distinct ranked prizes from a pool of candidates, forming codes or words with non-repeating characters, choosing officers for distinct roles, and any selection where the positions are not interchangeable."
+      question: "How is this different from a permutation with repetition?",
+      answer: "Permutation with identical items arranges a fixed multiset of n items where some are duplicates, using each copy exactly once. Permutation with repetition fills r positions from a pool of n distinct options where any option can be reused freely, giving n to the power r arrangements. The first counts arrangements of a multiset; the second counts choices of length r from a distinct set with reuse allowed."
     }
   }
 
@@ -832,9 +815,9 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Partial Permutation Visualizer",
-      "description": "Visualize every partial permutation P(n, r) of r items chosen in order from n distinct items, grouped by first item to illustrate how n! divided by (n minus r)! factors as n times (n minus 1)! divided by (n minus r)!.",
-      "url": "https://www.learnmathclass.com/combinatorics/visual-tools/partial-permutation",
+      "name": "Permutation with Identical Items Visualizer",
+      "description": "Visualize every distinct permutation of a multiset using the multinomial formula n!/(k1! k2! ...). Cycle through curated duplicate patterns and watch each arrangement build position by position.",
+      "url": "https://www.learnmathclass.com/combinatorics/visual-tools/permutation-with-identical",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -843,13 +826,13 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Build every P(n, r) partial permutation step by step with an animated build area",
-        "Completed permutations grouped by first item to visualize the n times (n-1)!/(n-r)! factoring",
-        "Independent steppers for the source size n and the selection size r, with the r ≤ n constraint enforced",
-        "Live formula P(n, r) = n! / (n-r)! updating in the header alongside a step-by-step status line",
+        "Build every distinct multiset permutation step by step with an animated build area",
+        "Multiset stepper cycling six curated presets: AAB, AAAB, AABB, AABC, AAABB, AABBC",
+        "Live multinomial formula n!/(k1! k2! ...) updating in the header alongside a status line",
+        "Positional source dimming so each individual copy dims only when used, not every duplicate at once",
+        "Completed permutations grouped by distinct first item, with per-group sizes that reflect the leftover multiplicities",
         "Four transport buttons for step back, step forward, play, and reset, plus a speed slider",
-        "Mode switch between colored balls and letter labels for items",
-        "Right-side narration panel that adds a step row for each first-item group as it activates"
+        "Mode switch between colored balls and letter labels matching the multiset name"
       ],
       "author": {
         "@type": "Organization",
@@ -861,7 +844,7 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
       "isAccessibleForFree": true,
       "learningResourceType": "Interactive Tool",
       "educationalLevel": "High School, College",
-      "keywords": "partial permutation, partial permutation visualizer, P(n,r) formula, n!/(n-r)! formula, permutation without repetition, arranging r items from n, permutation of r from n, partial permutation formula, permutations step by step, ordered selection without repetition, how to find P(n,r), permutation r objects from n, visualize partial permutations, combinatorics partial permutation, k permutations of n"
+      "keywords": "permutation with identical items, multiset permutation, permutations with duplicates, n!/(k1! k2!) formula, distinct permutations of a multiset, arrangements with identical items, multinomial coefficient, how many ways to arrange letters with duplicates, permutations of letters with repeats, multiset permutation visualizer, arranging identical objects, visualize multiset permutations, permutations identical objects formula, combinatorics multiset, distinct arrangements with repeats"
     },
 
     breadcrumb: {
@@ -889,8 +872,8 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Partial Permutation Visualizer",
-          "item": "https://www.learnmathclass.com/combinatorics/visual-tools/partial-permutation"
+          "name": "Permutation with Identical Items Visualizer",
+          "item": "https://www.learnmathclass.com/combinatorics/visual-tools/permutation-with-identical"
         }
       ]
     },
@@ -917,12 +900,12 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
       faqQuestions,
       schemas,
       seoData: {
-        title: "Partial Permutation Visualizer: P(n,r) | Learn Math Class",
-        description: "Visualize partial permutations P(n,r) = n!/(n-r)!. Watch every ordered selection of r items from n build step by step, grouped by first item to expose the structure.",
+        title: "Permutation with Identical Items: n!/(k!) | Learn Math Class",
+        description: "Visualize multiset permutations with the formula n!/(k1! · k2! · ...). Cycle duplicate patterns and watch every distinct arrangement build step by step.",
         keywords: keyWords.join(", "),
-        url: "/combinatorics/visual-tools/partial-permutation",
-        name: "Partial Permutation Visualizer",
-        hubDescription: "Pick r items from n and arrange them in order, one ball at a time. Each partial permutation is grouped by its first item — making the n × (n−1) × … × (n−r+1) structure of P(n,r) visible at a glance.",
+        url: "/combinatorics/visual-tools/permutation-with-identical",
+        name: "Permutation with Identical Items Visualizer",
+        hubDescription: "Cycle through six multisets — AAB, AAAB, AABB, AABC, AAABB, AABBC — and watch every distinct permutation build one position at a time. Only the specific copy in use dims in the source row, exposing why n! divides by k! for each repeated group.",
         category: "Permutations",
         subCategory: ""
       },
@@ -931,7 +914,7 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
   }
 }
 
-export default function PartialPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PermutationWithIdenticalItemsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
 
   const genericSections = [
@@ -1118,9 +1101,9 @@ export default function PartialPermutationVisualizer({seoData, sectionsContent, 
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Partial Permutations</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Permutations with Identical Items</h1>
       <br/>
-      <PartialPermutation/>
+      <PermutationWithIdenticalItems/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

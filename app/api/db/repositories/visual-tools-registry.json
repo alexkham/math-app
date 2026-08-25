@@ -4764,6 +4764,167 @@
         "orphans": 0,
         "notes": "Sixth and LAST arithmetic tool - section complete. Case C; component clean, own PALETTE (blues on #f5f8ff with warm-gold zero-class accents). States are the tool's panel phases keyed off the EXISTING panelMode variable: idle, running, class -> split into classDetail (nonzero pinned) vs zeroPinned (slice 0 - visually distinct gold treatment), summary -> split into summary vs parity (divisor 2, the wheel as two halves). Entry renders between the context box and the deep-dive in the right panel with a gold left border. New section reading-a-complete-run (balance theorem: classes 1..r get q+1, rest get q) filled into the obj11 stub; obj7 right-panel-context is the group (it already enumerates the modes). Note the page renders obj0 Key Terms BOTH as a KeyTermsCard and as section 0 - existing behavior, kept. TWO PROSE CORRECTIONS: obj6 and the component's own deep-dive 'Try this' both said 'Run with divisor 10' but the divisor grid stops at 9 - obj6 bullet rewritten around divisor 5 (last digits five apart), component bullet fixed likewise (a rare in-component text edit, flagged to owner). Diagrams port the wheel verbatim (polar geometry, slice opacities 0.32/0.14/0.55, gold accent arc, outward rows, rotated upright labels, placement math n%d + per-class row counter) at frozen svgSize 520; states frozen at mod-6 idle / 17-of-36 / class-2 pinned / zero pinned / complete / mod-2 with 20. Backups pending: git show HEAD:<path>. Rendered/landing verification PENDING for the whole arithmetic section (classifier outage all session; owner's server hit the stale-.next ENOENT on divisibility-table - recovery authorized but also blocked); statics grep-verified (12 slugs, 37 anchors, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
       }
+    },
+    "full-permutation": {
+      "slug": "full-permutation",
+      "name": "Full Permutation Visualizer",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/visual-tools/full-permutation/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "permutation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "factorial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiplication principle",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "partial permutation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "permutation with repetition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "circular permutation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "combinations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "arrangement",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "ordering",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/fullPermutationDiagrams.js",
+      "diagramStates": [
+        "idle",
+        "building",
+        "n3",
+        "n4",
+        "n5"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 5,
+        "sections": 11,
+        "anchors": 30,
+        "orphans": 0,
+        "notes": "FIRST COMBINATORICS TOOL - section started 2026-08-25. All 11 combinatorics tools share the new-visualizers architecture: scenes/*.jsx built on shared.jsx (a 3-version file, v3 LIVE from ~line 1382: ALL_ITEMS 5 colored balls A-E, N 3-5, radial-gradient Ball, ControlBar/steppers/TransportButtons, RightPanel/InfoPanelHeader/StepRow, injected vt-* CSS). NO shared explanations infra -> whole section is Case C; this pass sets the pattern. IMPORTANT: these pages' commented heads are FULL PREVIOUS COPIES with real prose (not empty templates) - single-paragraph Edit anchors collide; use multi-paragraph anchors. Page shape = modular-wheel's (obj0 Key Terms as both KeyTermsCard and section 0, obj1-10 content, obj11-15 empty stubs). States = phases + completed enumerations: idle, building (frozen mid-flight with dotted guide + dimmed source), n3/n4/n5 (animState done keyed by n). ZERO new sections - all states map to existing prose (idle->getting-started, building->the-build-area, n3->grouping-by-first-item, n4->adjusting-n, n5->deriving-n-step-by-step); obj8 what-is-a-full-permutation is the group. Entry renders under the right panel's step rows. Diagrams port shared.jsx + scene verbatim (layout math incl. CARD_CFG per n, permsAll order, tint-0.08 group rows, avatar r13); balls mode only; n5 frame = all 120 cards (svgH ~1582). Rendered/landing verification PENDING (classifier outage; owner's server had stale-.next ENOENT - recovery still pending too). Backups pending: git show HEAD:<path>. Statics grep-verified (11 slugs, 30 anchors all in live region, 0 orphans, 5 units = 5 explanations = 5 stateRows)."
+      }
+    },
+    "permutation-with-identical": {
+      "slug": "permutation-with-identical",
+      "name": "Permutation with Identical Items Visualizer",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/visual-tools/permutation-with-identical/index.jsx",
+      "relatedTerms": [
+        {
+          "term": "multiset",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiset permutation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "binomial coefficient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "factorial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "full permutation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "permutation with repetition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "circular permutation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distinguishable arrangements",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/permutationWithIdenticalDiagrams.js",
+      "diagramStates": [
+        "idle",
+        "building",
+        "mAAB",
+        "mAAAB",
+        "mAABB",
+        "mAABC",
+        "mAAABB",
+        "mAABBC"
+      ],
+      "line1": {
+        "done": true,
+        "completedAt": "2026-08-25",
+        "states": 8,
+        "sections": 15,
+        "anchors": 40,
+        "orphans": 0,
+        "notes": "Second combinatorics tool; same scene architecture as full-permutation, wired identically (Case C additive prop, entry under right-panel step rows). Preset pattern: multiset stepper cycles 6 curated multisets, so states = idle + building + one per preset keyed m<ID> off animState done + multiset.id. Counts verified by hand: AAB 3 (groups 2+1), AAAB 4 (3+1), AABB 6 (3+3), AABC 12 (6+3+3), AAABB 10 (6+4), AABBC 30 (12+12+6). The building frame freezes POSITIONAL DIMMING (the scene's signature: only the specific copy in use dims, its twin stays bright - outcome ABA with left A landed, B mid-flight). Four new sections in the obj11-14 stubs: aab-the-smallest-multiset, aaab-placing-the-single-b (positions-of-the-rare-letter view), aaabb-two-letters-ten-arrangements (two-letter multiset = binomial coefficient), aabbc-the-longest-run; mAABB -> why-divide-by-k (its own tagged-collapse example), mAABC -> grouping-by-distinct-first-item (its own unequal-rows example); obj3 the-multiset-stepper is the group with all six preset links. Diagrams port distinctPerms order + per-group row heights + positional dimming verbatim. Rendered/landing verification PENDING (section-wide). Backups pending: git show HEAD:<path>. Statics grep-verified (15 slugs, 40 anchors all live-region, 0 orphans, 8 units = 8 explanations = 8 stateRows)."
+      }
     }
   },
   "$stubTemplate": {

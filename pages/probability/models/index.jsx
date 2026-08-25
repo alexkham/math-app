@@ -1077,11 +1077,11 @@ A probability model defines a space of outcomes and their probabilities.
 
 A **random variable** is a function defined on that space:
 
-$\[X : S \\rightarrow \\mathbb{R}\]$
+$$X : S \\rightarrow \\mathbb{R}$$
 
 A **distribution** is the probability law induced by that function:
 
-$\[P(X \\in A)\]$
+$$P(X \\in A)$$
 
 The order is fixed:
 
@@ -1108,8 +1108,8 @@ The same distribution may arise from:
 
 Once a distribution is formed, the mechanism that generated it is no longer visible.
 
-Distributions describe *results*, not *processes*.  
-Models describe *processes*, not results.
+Distributions describe **results**, not **processes**.
+Models describe **processes**, not results.
 `,
       before:``,
       after:``,
@@ -1119,15 +1119,15 @@ Models describe *processes*, not results.
     obj6:{
       title:`One Model, Many Distributions`,
       content:`
-Fix a probability model $(S,\mathcal{E},P)$.
+Fix a probability model $(S,\\mathcal{E},P)$ — the [probability-space triple](!/probability/distributions#notation) in its school lettering, $S$ for the sample space and $\\mathcal{E}$ for the events.
 
 Different random variables can be defined on the same model:
 
-$\[X_1, X_2, \\dots : S \\rightarrow \\mathbb{R}.\]$
+$$X_1, X_2, \\dots : S \\rightarrow \\mathbb{R}$$
 
 Each choice produces its own distribution:
 
-$\[P(X_k \\in A), \\quad A \\subseteq \\mathbb{R}.\]$
+$$P(X_k \\in A), \\quad A \\subseteq \\mathbb{R}$$
 
 By changing the mapping (not the model), the resulting distribution may be:
 • discrete

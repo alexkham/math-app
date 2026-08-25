@@ -8,6 +8,7 @@ import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButto
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export default function TautologiesTruthTablesPage({ seoData, keyWords, tautologyExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
@@ -168,6 +169,22 @@ export default function TautologiesTruthTablesPage({ seoData, keyWords, tautolog
         link: sectionsContent.obj11.link,
         content: [sectionsContent.obj11.content]
       },
+      // faq: rendered component — must be built here, not in getStaticProps
+      {
+        id: 'faq',
+        title: sectionsContent.faq.title,
+        link: ``,
+        content: [
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+      },
     ]
 
   return (
@@ -197,17 +214,10 @@ export default function TautologiesTruthTablesPage({ seoData, keyWords, tautolog
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
@@ -499,40 +509,32 @@ This decomposition is the standard way to prove a biconditional in mathematics: 
       after: ``,
       link: ``,
     },
+    faq: {
+      title: `Tautologies FAQ`,
+    },
   }
 
+  // FAQ pass: cut the five questions whose own section h2 names the pattern and
+  // defines it in the first line (tautology, excluded middle, modus ponens,
+  // hypothetical syllogism, disjunctive syllogism), the contingency question
+  // (contingency is never defined on this page) and conjunction elimination
+  // (no search demand). Kept the proof-method question; invented two from
+  // buried content in obj3, obj4 and obj8.
   const faqQuestions = {
     obj1: {
-      question: "What is a tautology in logic?",
-      answer: "A tautology is a formula that is true under every possible assignment of truth values to its variables. Its truth table has only true values in the final column. The negation of a tautology is a contradiction."
+      question: "How do you prove a formula is a tautology?",
+      answer: "Construct its truth table and verify that the final column is true in every row. If the formula has n variables, the table has 2ⁿ rows. If all rows evaluate to true, the formula is a tautology. Alternatively, use algebraic simplification or formal proof. Test any formula yourself in the [truth table generator](!/logic/truth-tables).",
+      sectionId: "1"
     },
     obj2: {
-      question: "What is the law of excluded middle?",
-      answer: "The law of excluded middle states that P ∨ ¬P is always true — every proposition is either true or false with no third option. It is one of the classical laws of thought and is accepted in classical logic but rejected in intuitionistic logic."
+      question: "Why does intuitionistic logic reject the law of excluded middle?",
+      answer: "Intuitionistic logic demands constructive proof: asserting P ∨ ¬P requires actually proving P or proving ¬P. For statements where neither has been established — an unsolved conjecture, for instance — the disjunction cannot be asserted. Classical logic, by contrast, accepts P ∨ ¬P for every proposition on the grounds that no third truth value exists. The disagreement marks the main divide between the two systems.",
+      sectionId: "3"
     },
     obj3: {
-      question: "What is modus ponens?",
-      answer: "Modus ponens is the inference rule that from P → Q and P, we can conclude Q. The formula ((P → Q) ∧ P) → Q is a tautology, confirming that this rule is logically valid under every truth assignment."
-    },
-    obj4: {
-      question: "What is hypothetical syllogism?",
-      answer: "Hypothetical syllogism is the transitivity of implication: if P → Q and Q → R, then P → R. It allows chaining implications in multi-step proofs and is a tautology confirmed by truth table analysis."
-    },
-    obj5: {
-      question: "What is disjunctive syllogism?",
-      answer: "Disjunctive syllogism states that if P ∨ Q is true and P is false, then Q must be true. The formula ((P ∨ Q) ∧ ¬P) → Q is a tautology. It formalizes the process of eliminating one alternative to conclude the other."
-    },
-    obj6: {
-      question: "How do you prove a formula is a tautology?",
-      answer: "Construct its truth table and verify that the final column is true in every row. If the formula has n variables, the table has 2ⁿ rows. If all rows evaluate to true, the formula is a tautology. Alternatively, use algebraic simplification or formal proof."
-    },
-    obj7: {
-      question: "What is the difference between a tautology and a contingency?",
-      answer: "A tautology is true in every row of its truth table. A contingency is true in some rows and false in others — its truth value depends on the specific assignment. A contradiction is false in every row."
-    },
-    obj8: {
-      question: "Why is conjunction elimination a tautology?",
-      answer: "(P ∧ Q) → P is a tautology because whenever both P and Q are true, P is certainly true. When the conjunction is false, the implication holds vacuously. This justifies inferring either conjunct from a conjunction."
+      question: "What are the paradoxes of material implication?",
+      answer: "Two tautologies strike most people as wrong on first sight: (P → Q) ∨ (Q → P), which says that of any two propositions one implies the other, and P → (Q → P), which says a true proposition is implied by anything. Both follow from the truth-table definition of the conditional, where a false antecedent makes the whole implication true. They signal no deep connection between the statements — only how material implication is defined.",
+      sectionId: "4"
     }
   }
 
@@ -605,19 +607,6 @@ This decomposition is the standard way to prove a biconditional in mathematics: 
           "item": "https://www.learnmathclass.com/logic/truth-tables/tautologies"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 

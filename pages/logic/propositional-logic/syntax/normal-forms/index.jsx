@@ -135,6 +135,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 export async function getStaticProps() {
 
@@ -312,6 +313,10 @@ Normal forms also appear in other areas of mathematics and computer science. Dat
       link: '',
     },
 
+    faq: {
+      title: `Normal Forms FAQ`,
+    },
+
   }
 
   const faqQuestions = {
@@ -325,7 +330,7 @@ Normal forms also appear in other areas of mathematics and computer science. Dat
     },
     obj3: {
       question: "How do you convert a logical expression to DNF?",
-      answer: "Generate the complete truth table for the expression. Find every row where the result is true. For each true row, build a conjunction of literals matching the variable assignments. Join all the conjunctions with OR to produce the DNF."
+      answer: "Generate the complete truth table for the expression. Find every row where the result is true. For each true row, build a conjunction containing every variable: a variable assigned true appears as itself, and a variable assigned false appears negated. Join all the conjunctions with OR. The result is the DNF, and it is logically equivalent to the original expression."
     },
     obj4: {
       question: "What is the difference between DNF and CNF?",
@@ -401,19 +406,6 @@ Normal forms also appear in other areas of mathematics and computer science. Dat
           "item": "https://www.learnmathclass.com/logic/propositional-logic/syntax/normal-forms"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -444,12 +436,29 @@ export default function NormalFormsConverterPage({
   schemas
 }) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
+  const genericSections = Object.keys(sectionsContent).filter(key => key !== 'faq').map((key, index) => ({
     id: `${index + 1}`,
     title: sectionsContent[key].title,
     link: sectionsContent[key].link,
     content: [sectionsContent[key].content]
   }))
+
+  // faq: rendered component — must be built here, not in getStaticProps
+  genericSections.push({
+    id: 'faq',
+    title: sectionsContent.faq.title,
+    link: ``,
+    content: [
+      <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+        <FAQSection
+          faqQuestions={faqQuestions}
+          theme={'leftBorder'}
+          width={'100%'}
+          openFirst={false}
+        />
+      </div>,
+    ]
+  })
 
   return (
     <>
@@ -480,11 +489,6 @@ export default function NormalFormsConverterPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
         />
       </Head>
       {/* <GenericNavbar/> */}

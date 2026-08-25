@@ -46,7 +46,7 @@
 //     obj1:{
 //       title:`Formal Statement of the Law of Large Numbers`,
 //       content:`
-// Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](/probability/random-variables) with finite mean $\\mu$.  
+// Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](!/probability/random-variables) with finite mean $\\mu$.  
 // Let $\\bar X_n$ denote their sample mean:
 
 // $$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$
@@ -62,8 +62,8 @@
 // The probability that the sample mean differs from $\\mu$ by more than any fixed amount approaches zero as the sample size grows.
 
 // This result does not depend on the shape of the original distribution.  
-// Only [independence](/probability/independence), identical distribution, and finite mean are required.  
-// Unlike the [Central Limit Theorem](/probability/central-limit-theorem), finite [variance](/probability/variance) is not necessary.
+// Only [independence](!/probability/independence), identical distribution, and finite mean are required.  
+// Unlike the [Central Limit Theorem](!/probability/central-limit-theorem), finite [variance](!/probability/variance) is not necessary.
 
 // `,
 //       before:``,
@@ -81,7 +81,7 @@
 
 // When you flip a coin once, the result is completely unpredictable. When you flip it ten times, the proportion of heads might be anywhere from 0 to 1. But when you flip it a thousand times, something remarkable happens: the proportion stabilizes near 0.5, and deviations become increasingly rare.
 
-// This stabilization is not coincidence—it is mathematical necessity. The Law of Large Numbers guarantees that as the sample size grows, the sample mean gets arbitrarily close to the true [expected value](/probability/expected-value), with probability approaching certainty.
+// This stabilization is not coincidence—it is mathematical necessity. The Law of Large Numbers guarantees that as the sample size grows, the sample mean gets arbitrarily close to the true [expected value](!/probability/expected-value), with probability approaching certainty.
 
 // The theorem explains why **averages are more reliable than individual observations**. A single measurement tells you little. The average of many measurements tells you almost everything about the underlying mean.
 
@@ -100,15 +100,15 @@
 // The Law of Large Numbers involves several distinct mathematical objects, each playing a specific role. Understanding these objects separately is essential for correct interpretation.
 
 //  **Population mean** ($\\mu$)  
-//   The true [expected value](/probability/expected-value) of the underlying distribution. This is the fixed, deterministic value that the sample mean approaches. It represents what we would obtain if we could average infinitely many observations.
+//   The true [expected value](!/probability/expected-value) of the underlying distribution. This is the fixed, deterministic value that the sample mean approaches. It represents what we would obtain if we could average infinitely many observations.
 
 //  **Random variables** ($X_1, X_2, \\dots, X_n$)  
-//   Independent copies of the same underlying [random variable](/probability/random-variables), each drawn from the identical distribution with mean $\\mu$. These are the individual observations or measurements.
+//   Independent copies of the same underlying [random variable](!/probability/random-variables), each drawn from the identical distribution with mean $\\mu$. These are the individual observations or measurements.
 
 //  **Sample mean** ($\\bar X_n$)  
 //   The average of the first $n$ observations,
 //   $$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$
-//   This is itself a [random variable](/probability/random-variables)—before data is collected, its value is uncertain. As $n$ increases, this random quantity becomes less random, concentrating near $\\mu$.
+//   This is itself a [random variable](!/probability/random-variables)—before data is collected, its value is uncertain. As $n$ increases, this random quantity becomes less random, concentrating near $\\mu$.
 
 //  **Sample size** ($n$)  
 //   The number of observations used to compute the average. Larger $n$ produces stronger convergence. The theorem describes behavior as $n \\to \\infty$, but practical convergence begins at finite sample sizes.
@@ -140,7 +140,7 @@
 //   For sufficiently large samples, the sample mean stays very close to the true mean. Random fluctuations persist, but they become negligible relative to the sample size. The path may wander slightly, but it remains tightly clustered around $\\mu$.
 
 // * **Universal pattern across distributions**  
-//   Whether the original data come from [uniform](/probability/distributions/continuous/uniform), [exponential](/probability/distributions/continuous/exponential), or [discrete distributions](/probability/distributions/discrete), the sample mean always converges to the population mean. The specific distribution affects the speed of convergence, but not the eventual outcome.
+//   Whether the original data come from [uniform](!/probability/distributions/continuous/uniform), [exponential](!/probability/distributions/continuous/exponential), or [discrete distributions](!/probability/distributions/discrete), the sample mean always converges to the population mean. The specific distribution affects the speed of convergence, but not the eventual outcome.
 
 // These visuals highlight the core message of the theorem:  
 // **averaging transforms randomness into predictability**. Individual values remain uncertain, but their average becomes certain at scale.
@@ -159,18 +159,18 @@
 // For any $\\varepsilon > 0$, no matter how small:
 // $$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0$$
 
-// This says: the probability of the sample mean deviating from $\\mu$ by more than any fixed amount shrinks to zero. The sample mean converges to $\\mu$ *in probability*. This is a statement about probabilities, not about individual sequences.
+// This says: the probability of the sample mean deviating from $\\mu$ by more than any fixed amount shrinks to zero. The sample mean converges to $\\mu$ **in probability**. This is a statement about probabilities, not about individual sequences.
 
 // **Strong Law of Large Numbers (SLLN)**  
 // With probability 1:
 // $$\\displaystyle \\bar X_n \\to \\mu \\text{ as } n \\to \\infty$$
 
-// This says: for almost every sequence of observations, the sample mean actually converges to $\\mu$. This is *almost sure convergence*—a stronger form of convergence than the weak law provides. The set of sequences that fail to converge has probability zero.
+// This says: for almost every sequence of observations, the sample mean actually converges to $\\mu$. This is **almost sure convergence**—a stronger form of convergence than the weak law provides. The set of sequences that fail to converge has probability zero.
 
 // **Key Difference**  
 // The weak law guarantees that large deviations become unlikely. The strong law guarantees that convergence actually happens for the sequence you observe. Almost sure convergence implies convergence in probability, but not vice versa.
 
-// In practice, both versions lead to the same intuition: **averages stabilize at the true mean**. The distinction matters primarily in theoretical contexts and when analyzing sequences with [dependence](/probability/independence) or unusual tail behavior.
+// In practice, both versions lead to the same intuition: **averages stabilize at the true mean**. The distinction matters primarily in theoretical contexts and when analyzing sequences with [dependence](!/probability/independence) or unusual tail behavior.
 // `,
 //   before:``,
 //   after:``,
@@ -190,13 +190,13 @@
 //   Each observation must come from the same underlying distribution. Mixing different distributions—changing means, changing shapes—can prevent convergence. The theorem requires that $\\mu$ is the same for all $X_i$.
 
 //  **Finite mean**  
-//   The [expected value](/probability/expected-value) $\\mu$ must exist and be finite. Distributions with undefined or infinite means (like the Cauchy distribution) violate this requirement. Without a well-defined mean, there is nothing for the sample mean to converge to.
+//   The [expected value](!/probability/expected-value) $\\mu$ must exist and be finite. Distributions with undefined or infinite means (like the Cauchy distribution) violate this requirement. Without a well-defined mean, there is nothing for the sample mean to converge to.
 
 //  **Variance requirement (context-dependent)**  
-//   The weak law does not require finite [variance](/probability/variance)—only finite mean. The strong law typically requires stronger conditions. Heavy-tailed distributions with infinite variance can still satisfy the weak law, but convergence may be slow.
+//   The weak law does not require finite [variance](!/probability/variance)—only finite mean. The strong law typically requires stronger conditions. Heavy-tailed distributions with infinite variance can still satisfy the weak law, but convergence may be slow.
 
 // When these conditions fail, the conclusion of the theorem may no longer hold.  
-// In particular, strongly dependent data or distributions without finite means can produce sample means that never stabilize, even as the sample size grows arbitrarily large. [Independence](/probability/independence) and identical distribution are the core structural requirements.
+// In particular, strongly dependent data or distributions without finite means can produce sample means that never stabilize, even as the sample size grows arbitrarily large. [Independence](!/probability/independence) and identical distribution are the core structural requirements.
 // `,
 //   before:``,
 //   after:``,
@@ -209,16 +209,16 @@
 // The Law of Large Numbers is often misunderstood. The following clarifications address the most common errors.
 
 //  **"Small samples are unreliable."**  
-//   Small samples are not wrong—they are simply more variable. The sample mean from a small sample is an unbiased estimator of $\\mu$; it is not systematically incorrect. The issue is [variance](/probability/variance), not bias. Small samples produce wider ranges of possible values, but their average is still centered at the true mean.
+//   Small samples are not wrong—they are simply more variable. The sample mean from a small sample is an unbiased estimator of $\\mu$; it is not systematically incorrect. The issue is [variance](!/probability/variance), not bias. Small samples produce wider ranges of possible values, but their average is still centered at the true mean.
 
 //  **"The theorem guarantees convergence for any finite sample."**  
-//   The Law of Large Numbers is an *asymptotic* result. It describes behavior as $n \\to \\infty$, not at any particular finite $n$. There is no fixed sample size where convergence is guaranteed. Practical convergence depends on the distribution's properties—how skewed, how heavy-tailed, how volatile.
+//   The Law of Large Numbers is an **asymptotic** result. It describes behavior as $n \\to \\infty$, not at any particular finite $n$. There is no fixed sample size where convergence is guaranteed. Practical convergence depends on the distribution's properties—how skewed, how heavy-tailed, how volatile.
 
 //  **"Past results influence future outcomes" (the gambler's fallacy).**  
-//   [Independence](/probability/independence) means no memory. If a fair coin lands heads ten times in a row, the next flip is still 50-50. The Law of Large Numbers does not say that tails become "due" to balance things out. It says that with enough flips, the proportion approaches 0.5, but each individual flip remains independent.
+//   [Independence](!/probability/independence) means no memory. If a fair coin lands heads ten times in a row, the next flip is still 50-50. The Law of Large Numbers does not say that tails become "due" to balance things out. It says that with enough flips, the proportion approaches 0.5, but each individual flip remains independent.
 
 //  **"LLN and CLT are the same thing."**  
-//   The Law of Large Numbers tells us the sample mean converges to a value ($\\mu$). The [Central Limit Theorem](/probability/central-limit-theorem) tells us the distribution of sample means is approximately normal. LLN describes *where* we go; CLT describes *how* we get there. They are complementary, not equivalent.
+//   The Law of Large Numbers tells us the sample mean converges to a value ($\\mu$). The [Central Limit Theorem](!/probability/central-limit-theorem) tells us the distribution of sample means is approximately normal. LLN describes **where** we go; CLT describes **how** we get there. They are complementary, not equivalent.
 
 //  **"Convergence means the sample mean equals the population mean."**  
 //   Convergence in probability does not mean equality. It means the probability of large deviations shrinks. For any finite $n$, $\\bar X_n \\neq \\mu$ with positive probability. The theorem describes limiting behavior, not finite-sample certainty.
@@ -231,7 +231,7 @@
 //     obj8:{
 //   title:`LLN vs Central Limit Theorem`,
 //   content:`
-// The Law of Large Numbers and the [Central Limit Theorem](/probability/central-limit-theorem) are often confused because both involve sample means and large sample sizes. However, they answer fundamentally different questions.
+// The Law of Large Numbers and the [Central Limit Theorem](!/probability/central-limit-theorem) are often confused because both involve sample means and large sample sizes. However, they answer fundamentally different questions.
 
 // **Law of Large Numbers (LLN)**  
 // Tells us that as we collect more observations, the sample mean gets closer and closer to the true population mean. This is a statement about **convergence to a specific value**. If you flip a fair coin many times, the proportion of heads approaches 0.5—that's the LLN at work.
@@ -253,11 +253,11 @@
 // • **LLN**: Sample mean → a value (where we're going)
 // • **CLT**: Sample means → a distribution (how they're distributed around where we're going)
 // • **LLN**: Requires only finite mean
-// • **CLT**: Requires finite [variance](/probability/variance)
+// • **CLT**: Requires finite [variance](!/probability/variance)
 // • **LLN**: Describes one sequence converging
 // • **CLT**: Describes many sample means forming a bell curve
 
-// Both involve averaging, both require large samples, but they reveal different aspects of how randomness behaves at scale. The LLN tells us *where* the mean goes; the CLT tells us *the shape of the path*.
+// Both involve averaging, both require large samples, but they reveal different aspects of how randomness behaves at scale. The LLN tells us **where** the mean goes; the CLT tells us **the shape of the path**.
 // `,
 //   before:``,
 //   after:``,
@@ -305,7 +305,7 @@
 // Track the distance between sample mean and population mean as sample size grows. See how volatility decreases and deviations become rarer. Control the starting point and watch multiple simulation runs to observe the probabilistic nature of convergence.
 
 // **Distribution Comparison Tool**  
-// Compare convergence speed across different distributions. See how [uniform](/probability/distributions/continuous/uniform), [exponential](/probability/distributions/continuous/exponential), and heavy-tailed distributions all converge to their means, but at different rates. Understand how distribution shape affects practical convergence speed.
+// Compare convergence speed across different distributions. See how [uniform](!/probability/distributions/continuous/uniform), [exponential](!/probability/distributions/continuous/exponential), and heavy-tailed distributions all converge to their means, but at different rates. Understand how distribution shape affects practical convergence speed.
 
 // These tools make abstract convergence tangible. The LLN describes behavior "as n approaches infinity"—but these simulators let you see exactly when "large enough" becomes large enough for practical purposes. Understanding comes from watching the process unfold, not just reading the theorem.
 // `,
@@ -324,7 +324,7 @@
 // Three core insights define the LLN:
 // • Averaging reduces variability systematically
 // • Sample means converge to population means as sample size grows
-// • This convergence requires only [independence](/probability/independence), identical distribution, and finite mean
+// • This convergence requires only [independence](!/probability/independence), identical distribution, and finite mean
 
 // The Law of Large Numbers is why statistics works. It's why we trust sample averages to estimate population parameters. It's why polls can predict elections, why insurance companies stay solvent, why Monte Carlo methods compute probabilities, and why repeated experiments reveal truth.
 
@@ -717,6 +717,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -935,7 +936,7 @@ export async function getStaticProps(){
     obj1:{
       title:`Formal Statement of the Law of Large Numbers`,
       content:`
-Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](/probability/random-variables) with finite mean $\\mu$.  
+Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](!/probability/random-variables) with finite mean $\\mu$.  
 Let $\\bar X_n$ denote their sample mean:
 
 $$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$
@@ -951,8 +952,8 @@ $$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0
 The probability that the sample mean differs from $\\mu$ by more than any fixed amount approaches zero as the sample size grows.
 
 This result does not depend on the shape of the original distribution.  
-Only [independence](/probability/independence), identical distribution, and finite mean are required.  
-Unlike the [Central Limit Theorem](/probability/central-limit-theorem), finite [variance](/probability/variance) is not necessary.
+Only [independence](!/probability/independence), identical distribution, and finite mean are required.  
+Unlike the [Central Limit Theorem](!/probability/central-limit-theorem), finite [variance](!/probability/variance) is not necessary.
 
 `,
       before:``,
@@ -964,13 +965,13 @@ Unlike the [Central Limit Theorem](/probability/central-limit-theorem), finite [
     obj2:{
       title:`What the Theorem Is Really Describing`,
       content:`
-The Law of Large Numbers is not about individual outcomes or single measurements.  
+The Law of Large Numbers is not about individual outcomes or single measurements.
 
-Instead, it describes the behavior of the *average* as more and more observations are collected.
+Instead, it describes the behavior of the **average** as more and more observations are collected.
 
 When you flip a coin once, the result is completely unpredictable. When you flip it ten times, the proportion of heads might be anywhere from 0 to 1. But when you flip it a thousand times, something remarkable happens: the proportion stabilizes near 0.5, and deviations become increasingly rare.
 
-This stabilization is not coincidence—it is mathematical necessity. The Law of Large Numbers guarantees that as the sample size grows, the sample mean gets arbitrarily close to the true [expected value](/probability/expected-value), with probability approaching certainty.
+This stabilization is not coincidence—it is mathematical necessity. The Law of Large Numbers guarantees that as the sample size grows, the sample mean gets arbitrarily close to the true [expected value](!/probability/expected-value), with probability approaching certainty.
 
 The theorem explains why **averages are more reliable than individual observations**. A single measurement tells you little. The average of many measurements tells you almost everything about the underlying mean.
 
@@ -989,15 +990,15 @@ This is not about eliminating randomness—individual outcomes remain random. Th
 The Law of Large Numbers involves several distinct mathematical objects, each playing a specific role. Understanding these objects separately is essential for correct interpretation.
 
  **Population mean** ($\\mu$)  
-  The true [expected value](/probability/expected-value) of the underlying distribution. This is the fixed, deterministic value that the sample mean approaches. It represents what we would obtain if we could average infinitely many observations.
+  The true [expected value](!/probability/expected-value) of the underlying distribution. This is the fixed, deterministic value that the sample mean approaches. It represents what we would obtain if we could average infinitely many observations.
 
  **Random variables** ($X_1, X_2, \\dots, X_n$)  
-  Independent copies of the same underlying [random variable](/probability/random-variables), each drawn from the identical distribution with mean $\\mu$. These are the individual observations or measurements.
+  Independent copies of the same underlying [random variable](!/probability/random-variables), each drawn from the identical distribution with mean $\\mu$. These are the individual observations or measurements.
 
  **Sample mean** ($\\bar X_n$)  
   The average of the first $n$ observations,
   $$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$
-  This is itself a [random variable](/probability/random-variables)—before data is collected, its value is uncertain. As $n$ increases, this random quantity becomes less random, concentrating near $\\mu$.
+  This is itself a [random variable](!/probability/random-variables)—before data is collected, its value is uncertain. As $n$ increases, this random quantity becomes less random, concentrating near $\\mu$.
 
  **Sample size** ($n$)  
   The number of observations used to compute the average. Larger $n$ produces stronger convergence. The theorem describes behavior as $n \\to \\infty$, but practical convergence begins at finite sample sizes.
@@ -1029,7 +1030,7 @@ Rather than focusing on formulas, this section shows how the sample mean evolves
   For sufficiently large samples, the sample mean stays very close to the true mean. Random fluctuations persist, but they become negligible relative to the sample size. The path may wander slightly, but it remains tightly clustered around $\\mu$.
 
 * **Universal pattern across distributions**  
-  Whether the original data come from [uniform](/probability/distributions/continuous/uniform), [exponential](/probability/distributions/continuous/exponential), or [discrete distributions](/probability/distributions/discrete), the sample mean always converges to the population mean. The specific distribution affects the speed of convergence, but not the eventual outcome.
+  Whether the original data come from [uniform](!/probability/distributions/continuous/uniform), [exponential](!/probability/distributions/continuous/exponential), or [discrete distributions](!/probability/distributions/discrete), the sample mean always converges to the population mean. The specific distribution affects the speed of convergence, but not the eventual outcome.
 
 These visuals highlight the core message of the theorem:  
 **averaging transforms randomness into predictability**. Individual values remain uncertain, but their average becomes certain at scale.
@@ -1048,18 +1049,18 @@ The Law of Large Numbers actually comes in two versions, differing in the streng
 For any $\\varepsilon > 0$, no matter how small:
 $$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0$$
 
-This says: the probability of the sample mean deviating from $\\mu$ by more than any fixed amount shrinks to zero. The sample mean converges to $\\mu$ *in probability*. This is a statement about probabilities, not about individual sequences.
+This says: the probability of the sample mean deviating from $\\mu$ by more than any fixed amount shrinks to zero. The sample mean converges to $\\mu$ **in probability**. This is a statement about probabilities, not about individual sequences.
 
 **Strong Law of Large Numbers (SLLN)**  
 With probability 1:
 $$\\displaystyle \\bar X_n \\to \\mu \\text{ as } n \\to \\infty$$
 
-This says: for almost every sequence of observations, the sample mean actually converges to $\\mu$. This is *almost sure convergence*—a stronger form of convergence than the weak law provides. The set of sequences that fail to converge has probability zero.
+This says: for almost every sequence of observations, the sample mean actually converges to $\\mu$. This is **almost sure convergence**—a stronger form of convergence than the weak law provides. The set of sequences that fail to converge has probability zero.
 
 **Key Difference**  
 The weak law guarantees that large deviations become unlikely. The strong law guarantees that convergence actually happens for the sequence you observe. Almost sure convergence implies convergence in probability, but not vice versa.
 
-In practice, both versions lead to the same intuition: **averages stabilize at the true mean**. The distinction matters primarily in theoretical contexts and when analyzing sequences with [dependence](/probability/independence) or unusual tail behavior.
+In practice, both versions lead to the same intuition: **averages stabilize at the true mean**. The distinction matters primarily in theoretical contexts and when analyzing sequences with [dependence](!/probability/independence) or unusual tail behavior.
 
 ## Weak vs Strong at a Glance
 
@@ -1068,6 +1069,45 @@ The two versions can be lined up side by side: the statement, the convergence mo
   before:``,
   after:``,
   link:'',
+},
+
+    notation:{
+      title:`Law of Large Numbers Notation`,
+      lead:`The two laws differ by a single notational choice — where the limit stands relative to $P$ — and the arrows that state them differ only by their riders. This section fixes the rider system, the ε-anatomy of the weak guarantee, and the probability-one spelling of the strong one. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`$X_1, \\dots, X_n$, the i.i.d. declaration and $\\bar{X}_n$ come from [random variable](!/probability/random-variables#notation), [independence](!/probability/independence#notation) and [central limit theorem notation](!/probability/central-limit-theorem#notation); $\\mu$ from [expected value notation](!/probability/expected-value#notation); $\\lim_{n \\to \\infty}$ from [limit notation](!/calculus/limits/two-sided#notation).`,
+      entries:[
+        {
+          id:'convergence-riders',
+          tex:`$\\xrightarrow{P}$, $\\xrightarrow{\\text{a.s.}}$`,
+          read:`converges in probability — converges almost surely`,
+          means:`One arrow, different riders: the rider names the mode, and the mode is the entire difference between the two laws **Weak vs Strong Law of Large Numbers** above separates. $\\xrightarrow{P}$ is the weak law's arrow from the **Formal Statement**; the strong law's own mark $\\xrightarrow{\\text{a.s.}}$ rarely appears in elementary texts, which write a bare arrow and say "with probability 1" in prose.`,
+          alsoWritten:`$\\operatorname{plim}\\, \\bar{X}_n = \\mu$ — econometrics' spelling of convergence in probability, the arrow traded for a limit operator; some texts set the rider as a subscript, $\\to_P$.`,
+          confusedWith:`The CLT's $\\xrightarrow{d}$ from [central limit theorem notation](!/probability/central-limit-theorem#notation). The riders rank — almost-sure implies in-probability implies in-distribution — and an unmarked arrow leans entirely on context to say which is meant, which is why careful statements never drop the rider.`,
+        },
+        {
+          id:'epsilon-statement',
+          tex:`$P(|\\bar{X}_n - \\mu| > \\varepsilon)$`,
+          read:`the probability of deviating from the mean by more than epsilon`,
+          means:`The anatomy of the weak law's guarantee: the [absolute-value](!/algebra/equations/absolute-value#notation) bar measures distance from the target, $\\varepsilon$ names an arbitrary tolerance, and $P(\\cdot)$ wraps the deviation into an event — the object whose probability the limit then sends to zero.`,
+          cases:`The claim is quantified: "for every $\\varepsilon > 0$", so the statement must survive every shrinking of the tolerance, not one choice of it; the letter itself comes in two glyphs, $\\varepsilon$ and $\\epsilon$ — one typesetting tradition apart, mathematically identical.`,
+          confusedWith:`A fixed small number. $\\varepsilon$ is not "some tiny constant" the statement picked — it is chosen by the challenger and ranges over everything positive; reading it as a single value quietly converts the law's guarantee into a far weaker claim.`,
+        },
+        {
+          id:'lim-position',
+          tex:`$P\\big(\\lim_{n \\to \\infty} \\bar{X}_n = \\mu\\big) = 1$`,
+          read:`with probability one, the sequence itself converges`,
+          means:`The strong law in marks — and the sharpest reading on this page: **the position of the limit is the whole difference between the two laws**. The weak law puts $\\lim$ outside $P$ — a sequence of probabilities falls to zero; the strong law puts $\\lim$ inside $P$ — the convergence itself becomes an event, and that event carries probability one.`,
+          cases:`The prose abbreviations line up by tradition: "a.s." (almost surely) in probability, "w.p. 1" (with probability 1) in applied writing, and "a.e." (almost everywhere) in measure theory — three spellings of the same probability-one qualifier.`,
+          confusedWith:`Certainty. Probability one is not "always": with infinitely many outcomes, exceptional sequences exist — a coin can land heads forever — but the set of them collects probability zero; the "almost" in "almost surely" is doing precise work, not hedging.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
+      before:``,
+      after:``,
+      link:'',
 },
 
     obj6:{
@@ -1083,13 +1123,13 @@ Its validity depends on several key conditions.
   Each observation must come from the same underlying distribution. Mixing different distributions—changing means, changing shapes—can prevent convergence. The theorem requires that $\\mu$ is the same for all $X_i$.
 
  **Finite mean**  
-  The [expected value](/probability/expected-value) $\\mu$ must exist and be finite. Distributions with undefined or infinite means (like the Cauchy distribution) violate this requirement. Without a well-defined mean, there is nothing for the sample mean to converge to.
+  The [expected value](!/probability/expected-value) $\\mu$ must exist and be finite. Distributions with undefined or infinite means (like the Cauchy distribution) violate this requirement. Without a well-defined mean, there is nothing for the sample mean to converge to.
 
  **Variance requirement (context-dependent)**  
-  The weak law does not require finite [variance](/probability/variance)—only finite mean. The strong law typically requires stronger conditions. Heavy-tailed distributions with infinite variance can still satisfy the weak law, but convergence may be slow.
+  The weak law does not require finite [variance](!/probability/variance)—only finite mean. The strong law typically requires stronger conditions. Heavy-tailed distributions with infinite variance can still satisfy the weak law, but convergence may be slow.
 
 When these conditions fail, the conclusion of the theorem may no longer hold.  
-In particular, strongly dependent data or distributions without finite means can produce sample means that never stabilize, even as the sample size grows arbitrarily large. [Independence](/probability/independence) and identical distribution are the core structural requirements.
+In particular, strongly dependent data or distributions without finite means can produce sample means that never stabilize, even as the sample size grows arbitrarily large. [Independence](!/probability/independence) and identical distribution are the core structural requirements.
 
 ## Conditions at a Glance
 
@@ -1106,16 +1146,16 @@ Each requirement plays a specific structural role, and each one fails in its own
 The Law of Large Numbers is often misunderstood. The following clarifications address the most common errors.
 
  **"Small samples are unreliable."**  
-  Small samples are not wrong—they are simply more variable. The sample mean from a small sample is an unbiased estimator of $\\mu$; it is not systematically incorrect. The issue is [variance](/probability/variance), not bias. Small samples produce wider ranges of possible values, but their average is still centered at the true mean.
+  Small samples are not wrong—they are simply more variable. The sample mean from a small sample is an unbiased estimator of $\\mu$; it is not systematically incorrect. The issue is [variance](!/probability/variance), not bias. Small samples produce wider ranges of possible values, but their average is still centered at the true mean.
 
  **"The theorem guarantees convergence for any finite sample."**  
-  The Law of Large Numbers is an *asymptotic* result. It describes behavior as $n \\to \\infty$, not at any particular finite $n$. There is no fixed sample size where convergence is guaranteed. Practical convergence depends on the distribution's properties—how skewed, how heavy-tailed, how volatile.
+  The Law of Large Numbers is an **asymptotic** result. It describes behavior as $n \\to \\infty$, not at any particular finite $n$. There is no fixed sample size where convergence is guaranteed. Practical convergence depends on the distribution's properties—how skewed, how heavy-tailed, how volatile.
 
  **"Past results influence future outcomes" (the gambler's fallacy).**  
-  [Independence](/probability/independence) means no memory. If a fair coin lands heads ten times in a row, the next flip is still 50-50. The Law of Large Numbers does not say that tails become "due" to balance things out. It says that with enough flips, the proportion approaches 0.5, but each individual flip remains independent.
+  [Independence](!/probability/independence) means no memory. If a fair coin lands heads ten times in a row, the next flip is still 50-50. The Law of Large Numbers does not say that tails become "due" to balance things out. It says that with enough flips, the proportion approaches 0.5, but each individual flip remains independent.
 
  **"LLN and CLT are the same thing."**  
-  The Law of Large Numbers tells us the sample mean converges to a value ($\\mu$). The [Central Limit Theorem](/probability/central-limit-theorem) tells us the distribution of sample means is approximately normal. LLN describes *where* we go; CLT describes *how* we get there. They are complementary, not equivalent.
+  The Law of Large Numbers tells us the sample mean converges to a value ($\\mu$). The [Central Limit Theorem](!/probability/central-limit-theorem) tells us the distribution of sample means is approximately normal. LLN describes **where** we go; CLT describes **how** we get there. They are complementary, not equivalent.
 
  **"Convergence means the sample mean equals the population mean."**  
   Convergence in probability does not mean equality. It means the probability of large deviations shrinks. For any finite $n$, $\\bar X_n \\neq \\mu$ with positive probability. The theorem describes limiting behavior, not finite-sample certainty.
@@ -1132,7 +1172,7 @@ The errors above share a common pattern: confusing what the theorem says about l
     obj8:{
   title:`LLN vs Central Limit Theorem`,
   content:`
-The Law of Large Numbers and the [Central Limit Theorem](/probability/central-limit-theorem) are often confused because both involve sample means and large sample sizes. However, they answer fundamentally different questions.
+The Law of Large Numbers and the [Central Limit Theorem](!/probability/central-limit-theorem) are often confused because both involve sample means and large sample sizes. However, they answer fundamentally different questions.
 
 **Law of Large Numbers (LLN)**  
 Tells us that as we collect more observations, the sample mean gets closer and closer to the true population mean. This is a statement about **convergence to a specific value**. If you flip a fair coin many times, the proportion of heads approaches 0.5—that's the LLN at work.
@@ -1154,11 +1194,11 @@ The sample mean follows a distribution. This is probabilistic structure revealed
 • **LLN**: Sample mean → a value (where we're going)
 • **CLT**: Sample means → a distribution (how they're distributed around where we're going)
 • **LLN**: Requires only finite mean
-• **CLT**: Requires finite [variance](/probability/variance)
+• **CLT**: Requires finite [variance](!/probability/variance)
 • **LLN**: Describes one sequence converging
 • **CLT**: Describes many sample means forming a bell curve
 
-Both involve averaging, both require large samples, but they reveal different aspects of how randomness behaves at scale. The LLN tells us *where* the mean goes; the CLT tells us *the shape of the path*.
+Both involve averaging, both require large samples, but they reveal different aspects of how randomness behaves at scale. The LLN tells us **where** the mean goes; the CLT tells us **the shape of the path**.
 `,
   before:``,
   after:``,
@@ -1206,7 +1246,7 @@ Watch a single running mean converge to the expected value in real-time. Choose 
 Track the distance between sample mean and population mean as sample size grows. See how volatility decreases and deviations become rarer. Control the starting point and watch multiple simulation runs to observe the probabilistic nature of convergence.
 
 **Distribution Comparison Tool**  
-Compare convergence speed across different distributions. See how [uniform](/probability/distributions/continuous/uniform), [exponential](/probability/distributions/continuous/exponential), and heavy-tailed distributions all converge to their means, but at different rates. Understand how distribution shape affects practical convergence speed.
+Compare convergence speed across different distributions. See how [uniform](!/probability/distributions/continuous/uniform), [exponential](!/probability/distributions/continuous/exponential), and heavy-tailed distributions all converge to their means, but at different rates. Understand how distribution shape affects practical convergence speed.
 
 These tools make abstract convergence tangible. The LLN describes behavior "as n approaches infinity"—but these simulators let you see exactly when "large enough" becomes large enough for practical purposes. Understanding comes from watching the process unfold, not just reading the theorem.
 `,
@@ -1225,7 +1265,7 @@ The theorem doesn't eliminate randomness—it organizes it. Each observation is 
 Three core insights define the LLN:
 • Averaging reduces variability systematically
 • Sample means converge to population means as sample size grows
-• This convergence requires only [independence](/probability/independence), identical distribution, and finite mean
+• This convergence requires only [independence](!/probability/independence), identical distribution, and finite mean
 
 The Law of Large Numbers is why statistics works. It's why we trust sample averages to estimate population parameters. It's why polls can predict elections, why insurance companies stay solvent, why Monte Carlo methods compute probabilities, and why repeated experiments reveal truth.
 
@@ -1478,6 +1518,25 @@ export default function LargeNumbersLawPage({
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

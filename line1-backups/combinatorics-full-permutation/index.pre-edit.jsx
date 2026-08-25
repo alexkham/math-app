@@ -1142,8 +1142,6 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FullPermutation from '../../../../app/components/combinatorics/new-visualizers/scenes/FullPermutation'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
-import fullPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/fullPermutationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1176,7 +1174,7 @@ export async function getStaticProps(){
 
 **Position** — a slot in the arrangement, numbered $\\#1$ through $\\#n$ from left to right in the build area.
 
-**Step / first-item group** — the [family of permutations](!#grouping-by-first-item) that share the same item in position $\\#1$. With $n$ items there are $n$ such groups, each containing $(n - 1)!$ permutations.
+**Step / first-item group** — the family of permutations that share the same item in position $\\#1$. With $n$ items there are $n$ such groups, each containing $(n - 1)!$ permutations.
 
 **Permutation prefix** — the part of the arrangement already filled at any moment during the build. A landed ball is part of the prefix; the source row dims items already used.
 
@@ -1192,9 +1190,9 @@ export async function getStaticProps(){
 
 • A **source row** at the top showing the available items.
 
-• A [build area](!#the-build-area) in the middle with $n$ empty slots labeled $\\#1$ through $\\#n$.
+• A **build area** in the middle with $n$ empty slots labeled $\\#1$ through $\\#n$.
 
-• A **completed** section below, where every finished permutation is recorded and [organized by which item went into position one](!#grouping-by-first-item).
+• A **completed** section below, where every finished permutation is recorded and organized by which item went into position $\\#1$.
 
 To run the visualization:
 
@@ -1208,9 +1206,7 @@ To run the visualization:
 
 The badge in the top right shows the formula $P(n) = n!$ together with the total, and a live status line such as "Step X (item name): k / (n-1)!" while building, or "Complete · n! / n!" when done.`,
       before: ``,
-      after: `The frozen frame above is the opening position: three source balls, three dashed slots, an empty completed list. Nothing is decided, yet the count already is — $3! = 6$ is a fact about the future, fixed before a single ball moves.
-
-That is the quiet lesson of the idle state: counting problems are settled by structure, not by carrying out the process. The [transport controls](!#transport-controls) merely make the enumeration watchable.`,
+      after: ``,
       link: '',
     },
 
@@ -1226,11 +1222,9 @@ That is the quiet lesson of the idle state: counting problems are settled by str
 
 • In the source row above, every item already placed in the current permutation (plus the one currently in flight) is **dimmed** to indicate it's out of play.
 
-• When all $n$ slots are filled, a **flash ring** briefly pulses around the build area. The completed permutation is then copied to the [appropriate row](!#grouping-by-first-item) in the completed section below, and the build area resets for the next permutation.`,
+• When all $n$ slots are filled, a **flash ring** briefly pulses around the build area. The completed permutation is then copied to the appropriate row in the completed section below, and the build area resets for the next permutation.`,
       before: ``,
-      after: `The frozen frame above catches the machinery mid-move: B has landed in slot #1, A is dropping into #2 along its dotted guide, and both are dimmed in the source row. What remains bright is exactly what can still be chosen.
-
-The dimming is the visual form of "without repetition": each landing shrinks the pool by one, which is why the choice counts run $n$, then $n - 1$, then $n - 2$ — the [multiplication chain behind the factorial](!#deriving-n-step-by-step).`,
+      after: ``,
       link: '',
     },
 
@@ -1248,9 +1242,7 @@ Changing $n$ resets the build state: the source row repopulates, the build area 
 
 Counts grow fast — by $n = 5$ you're already at $120$ permutations, and the formula $5! = 5 \\times 4 \\times 3 \\times 2 \\times 1$ reads out in the right-panel header. For $n = 7$ you would be looking at $5{,}040$ arrangements; for $n = 10$, over three million.`,
       before: ``,
-      after: `The frozen frame above is the completed run at $n = 4$: twenty-four cards in four rows of six. Compare it with the six-card layout under [grouping by first item](!#grouping-by-first-item) — one extra item quadrupled the outcome count, precisely the leading factor $n$ in $n \\times (n-1)!$.
-
-Stepping $n$ is the tool's best experiment: the structure never changes, only the scale. One further step up gives the 120-card view shown under [the derivation](!#deriving-n-step-by-step), which is where the factorial's growth stops feeling abstract.`,
+      after: ``,
       link: '',
     },
 
@@ -1262,7 +1254,7 @@ There are exactly $n$ groups (one per item) and each group holds exactly $(n - 1
 
 $$n \\times (n - 1)! = n!$$
 
-This is the visual proof of [the factorial formula](!#deriving-n-step-by-step). Pick any item to put in position $\\#1$: that's $n$ choices. For each choice, the remaining $n - 1$ items fill the other $n - 1$ slots in any order: $(n - 1)!$ ways. Multiply.
+This is the visual proof of the factorial formula. Pick any item to put in position $\\#1$: that's $n$ choices. For each choice, the remaining $n - 1$ items fill the other $n - 1$ slots in any order: $(n - 1)!$ ways. Multiply.
 
 Each group row in the completed area has:
 
@@ -1274,9 +1266,7 @@ Each group row in the completed area has:
 
 • Mini permutation cards, each one a full arrangement starting with that item.`,
       before: ``,
-      after: `The frozen frame above is the finished $n = 3$ run, and it is the formula drawn to scale: three tinted rows, two cards in each, six cards total. Cover any row with a hand and you have removed exactly $(n-1)! = 2$ arrangements — no more, no less.
-
-The rows also explain why the groups can never be uneven: within a row the first slot is fixed, so the cards in it are just the full permutations of the remaining two items. Each row is a smaller copy of the same problem — the recursion $n! = n \\cdot (n-1)!$ made literal.`,
+      after: ``,
       link: '',
     },
 
@@ -1286,7 +1276,7 @@ The rows also explain why the groups can never be uneven: within a row the first
 
 • **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single permutation or pausing mid-build.
 
-• **Step ▶** (Step forward) — advances [one ball into one slot](!#the-build-area). Stop after each step to read the partial arrangement.
+• **Step ▶** (Step forward) — advances one ball into one slot. Stop after each step to read the partial arrangement.
 
 • **▶ Play / ⏸ Pause** — runs the animation continuously until all $n!$ permutations are built, then auto-pauses.
 
@@ -1306,7 +1296,7 @@ The **Speed** slider controls how fast play advances. At higher speeds the fly a
 
 • **Letters mode** — items appear with letter labels (A, B, C, …). The first-item avatar in each completed group is just the letter, colored to match. Best for reading off the sequence in each permutation and matching it to algebraic notation like $(A, B, C)$.
 
-The encoding is consistent across the source row, the build slots, the flying ball, every mini permutation card in the completed grid, and the [right-panel narration](!#right-panel-and-progress). Switching modes mid-animation is safe — the build state preserves; only the rendering changes.`,
+The encoding is consistent across the source row, the build slots, the flying ball, every mini permutation card in the completed grid, and the right-panel narration. Switching modes mid-animation is safe — the build state preserves; only the rendering changes.`,
       before: ``,
       after: ``,
       link: '',
@@ -1314,7 +1304,7 @@ The encoding is consistent across the source row, the build slots, the flying ba
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds. Initially empty, it adds a **StepRow** for each [first-item group](!#grouping-by-first-item) as soon as a permutation in that group either starts building or completes.
+      content: `The right panel narrates the build as it unfolds. Initially empty, it adds a **StepRow** for each first-item group as soon as a permutation in that group either starts building or completes.
 
 Each StepRow shows:
 
@@ -1348,8 +1338,6 @@ Examples of full permutations:
 
 The full permutation is the simplest of the five permutation scenarios — no repeated items, no partial selection, no circular structure. Every item used, every position distinct, every order counted separately.
 
-On this page the idea runs live: from the [opening position](!#getting-started), the [build area](!#the-build-area) assembles one arrangement at a time, the completed grid [groups results by first item](!#grouping-by-first-item), and [changing n](!#adjusting-n) rescales the whole enumeration — up to the [120-arrangement view](!#deriving-n-step-by-step) at $n = 5$.
-
 For deeper coverage of full permutations and the other four scenarios, see the **full permutation** section on the permutations theory page.`,
       before: ``,
       after: ``,
@@ -1374,13 +1362,11 @@ Multiply the choices at each step:
 
 $$n \\times (n - 1) \\times (n - 2) \\times \\cdots \\times 1 = n!$$
 
-The tool visualizes the equivalent split: fix the first item ($n$ ways), then permute the rest ($(n - 1)!$ ways), giving $n \\times (n - 1)! = n!$. Every row in the completed section is one of those $n$ [first-item families](!#grouping-by-first-item).
+The tool visualizes the equivalent split: fix the first item ($n$ ways), then permute the rest ($(n - 1)!$ ways), giving $n \\times (n - 1)! = n!$. Every row in the completed section is one of those $n$ first-item families.
 
 Factorials grow extremely fast: $5! = 120$, $10! \\approx 3.6$ million, $20! \\approx 2.4 \\times 10^{18}$. This is why full permutations of even moderately large sets are uncountable in practice — you need the formula, not enumeration.`,
       before: ``,
-      after: `The frozen frame above shows the derivation's endpoint at the tool's largest setting: $n = 5$, all $120$ arrangements on screen, cards shrunk just to fit. It is the last value where enumeration is even drawable — and that is the point. Two more items would demand $5{,}040$ cards; the picture would fail long before the formula does.
-
-Seen against the six-card and twenty-four-card views reached by [adjusting n](!#adjusting-n), this frame is the third term of a geometric story: 6, 24, 120 — each step multiplying by the new $n$. Enumeration is the proof; the factorial is the escape from ever needing it again.`,
+      after: ``,
       link: '',
     },
 
@@ -1396,7 +1382,7 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
 
 **Combinations** — selection where order doesn't matter. The companion concept; full permutations divide $n!$ by $1$ to keep all orderings, combinations divide further to remove ordering.
 
-**Multiplication principle** — the [foundational counting rule](!#deriving-n-step-by-step) behind $n!$. If choice $A$ has $a$ options and choice $B$ has $b$ options, the combined choice has $a \\times b$ options.
+**Multiplication principle** — the foundational counting rule behind $n!$. If choice $A$ has $a$ options and choice $B$ has $b$ options, the combined choice has $a \\times b$ options.
 
 **Combinatorics calculator** — to compute $n!$ for arbitrary $n$, see the **full permutation calculator**.`,
       before: ``,
@@ -1556,40 +1542,12 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
   }
 
 
-  // Frozen-state framed units (Line 1): the tool's phases + the three enumerations.
-  const d = fullPermutationDiagrams;
-  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
-  const stateUnits = {
-    idle: u('idle', 'n = 3, idle, frozen',
-      'Three source balls, three dashed slots, an empty completed list: the tool before any choice — all six orders still ahead.'),
-    building: u('building', 'Mid-build, frozen',
-      'The third arrangement under way: B has landed in slot #1, A is dropping into #2 along its dotted guide, and the source row dims whatever is spoken for.'),
-    n3: u('n3', 'n = 3 complete, frozen',
-      'Six cards in three tinted rows: each first item owns exactly two arrangements, and 3 × 2 = 6 is the whole formula in one picture.'),
-    n4: u('n4', 'n = 4 complete, frozen',
-      'Twenty-four cards in four rows of six: one more item, four times the outcomes — exactly as n! promises.'),
-    n5: u('n5', 'n = 5 complete, frozen',
-      'One hundred twenty mini cards in five rows of twenty-four — the factorial explosion at the largest n the tool allows.'),
-  };
-
-  // Per-state panel explanations (Line 1). Rendered under the right panel's
-  // step rows through processContent — same-page !# anchors work.
-  const explanations = {
-    idle: `Three items wait in the source row and three dashed slots wait below — nothing is chosen yet, and every one of the n! orders is still possible. [Learn more about getting started](!#getting-started) · [What is a full permutation](!#what-is-a-full-permutation)`,
-    building: `One arrangement is being built: used items dim in the source row, and the dotted line shows the current ball dropping into its position. [Learn more about the build area](!#the-build-area) · [What is a full permutation](!#what-is-a-full-permutation)`,
-    n3: `All 3! = 6 arrangements are in: three rows — one per first item — with exactly 2 = (3−1)! permutations each. That factoring is the formula. [Learn more about first-item groups](!#grouping-by-first-item) · [What is a full permutation](!#what-is-a-full-permutation)`,
-    n4: `With four items the count jumps to 4! = 24: four first-item rows, six arrangements each — one more item, four times the outcomes. [Learn more about adjusting n](!#adjusting-n) · [What is a full permutation](!#what-is-a-full-permutation)`,
-    n5: `Five items give 5! = 120 arrangements — the grid shrinks its cards just to fit them, and the factorial's growth becomes visible. [Learn more about the n! derivation](!#deriving-n-step-by-step) · [What is a full permutation](!#what-is-a-full-permutation)`,
-  };
-
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
-      stateUnits,
-      explanations,
       seoData: {
         title: "Full Permutation Visualizer: n! Formula | Learn Math Class",
         description: "Visualize full permutations with the n! formula. Watch every arrangement of n distinct items build step by step, organized by which item starts the sequence.",
@@ -1605,39 +1563,98 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
   }
 }
 
-export default function FullPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function FullPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
-  // Helper rows: plain section / per-state section carrying its frozen unit
-  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
-  const plain = (obj, id) => ({
-    id,
-    title: sectionsContent[obj].title,
-    link: sectionsContent[obj].link,
-    content: [sectionsContent[obj].content]
-  })
-  const stateRow = (obj, id, unitKey) => ({
-    id,
-    title: sectionsContent[obj].title,
-    link: sectionsContent[obj].link,
-    content: [
-      sectionsContent[obj].content,
-      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
-      sectionsContent[obj].after,
-    ]
-  })
 
   const genericSections = [
-    plain('obj0', 'key-terms'),
-    stateRow('obj1', 'getting-started', 'idle'),
-    stateRow('obj2', 'the-build-area', 'building'),
-    stateRow('obj3', 'adjusting-n', 'n4'),
-    stateRow('obj4', 'grouping-by-first-item', 'n3'),
-    plain('obj5', 'transport-controls'),
-    plain('obj6', 'mode-switch'),
-    plain('obj7', 'right-panel-and-progress'),
-    plain('obj8', 'what-is-a-full-permutation'),
-    stateRow('obj9', 'deriving-n-step-by-step', 'n5'),
-    plain('obj10', 'related-concepts'),
+    {
+      id: '0',
+      title: sectionsContent.obj0.title,
+      link: sectionsContent.obj0.link,
+      content: [
+        sectionsContent.obj0.content,
+      ]
+    },
+    {
+      id: '1',
+      title: sectionsContent.obj1.title,
+      link: sectionsContent.obj1.link,
+      content: [
+        sectionsContent.obj1.content,
+      ]
+    },
+    {
+      id: '2',
+      title: sectionsContent.obj2.title,
+      link: sectionsContent.obj2.link,
+      content: [
+        sectionsContent.obj2.content,
+      ]
+    },
+    {
+      id: '3',
+      title: sectionsContent.obj3.title,
+      link: sectionsContent.obj3.link,
+      content: [
+        sectionsContent.obj3.content,
+      ]
+    },
+    {
+      id: '4',
+      title: sectionsContent.obj4.title,
+      link: sectionsContent.obj4.link,
+      content: [
+        sectionsContent.obj4.content,
+      ]
+    },
+    {
+      id: '5',
+      title: sectionsContent.obj5.title,
+      link: sectionsContent.obj5.link,
+      content: [
+        sectionsContent.obj5.content,
+      ]
+    },
+    {
+      id: '6',
+      title: sectionsContent.obj6.title,
+      link: sectionsContent.obj6.link,
+      content: [
+        sectionsContent.obj6.content,
+      ]
+    },
+    {
+      id: '7',
+      title: sectionsContent.obj7.title,
+      link: sectionsContent.obj7.link,
+      content: [
+        sectionsContent.obj7.content,
+      ]
+    },
+    {
+      id: '8',
+      title: sectionsContent.obj8.title,
+      link: sectionsContent.obj8.link,
+      content: [
+        sectionsContent.obj8.content,
+      ]
+    },
+    {
+      id: '9',
+      title: sectionsContent.obj9.title,
+      link: sectionsContent.obj9.link,
+      content: [
+        sectionsContent.obj9.content,
+      ]
+    },
+    {
+      id: '10',
+      title: sectionsContent.obj10.title,
+      link: sectionsContent.obj10.link,
+      content: [
+        sectionsContent.obj10.content,
+      ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1735,7 +1752,7 @@ export default function FullPermutationVisualizer({seoData, sectionsContent, int
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Full Permutation</h1>
       <br/>
-      <FullPermutation explanations={explanations}/>
+      <FullPermutation/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

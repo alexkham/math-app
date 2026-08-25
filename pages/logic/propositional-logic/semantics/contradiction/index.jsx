@@ -8,6 +8,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -320,13 +321,39 @@ style="display: block; margin: 0 auto; fill:none; stroke:none; fill-rule:evenodd
      `These two related and opposite concepts exist in perfect duality through negation as shown in the diagram – the negation of any [tautology](!/logic/propositional-logic/semantics/tautology) produces a contradiction, and negating any contradiction creates a [tautology](!/logic/propositional-logic/semantics/tautology). This relationship reveals a fundamental symmetry in logical reasoning.
      
      This duality plays a crucial role in logical analysis. Tautologies provide the foundation for valid arguments and proofs, as they represent statements that must necessarily be true. Contradictions enable powerful proof techniques like reductio ad absurdum, where we disprove statements by showing they lead to contradictions. Together, they establish the boundary conditions of logical reasoning – what must be true and what cannot be true – providing the fixed points around which all logical deduction revolves in propositional logic.`
-     
 
+
+    },
+
+    faq:{
+      title:`Contradiction FAQ`,
     }
 
   }
 
-
+// Three questions written from scratch — this page had no faqQuestions object.
+// The page's own h2s cover the definition and contradiction-vs-tautology, and
+// /logic/truth-tables/contradictions owns identification, unsatisfiability,
+// inconsistent premises and explosion. These target buried content: the ⊥
+// symbol, proof by contradiction (reserved for this page when it was cut from
+// the truth-tables page) and the false-vs-contradictory confusion.
+const faqQuestions = {
+  obj1: {
+    question: "What does the symbol ⊥ mean in logic?",
+    answer: "⊥ (read 'bottom' or 'falsum') is the constant for falsehood: a formula false under every assignment, the upside-down twin of ⊤. Truth tables often write it F or 0. Inside formulas it absorbs conjunctions and vanishes from disjunctions: P ∧ ⊥ is ⊥, while P ∨ ⊥ is P. The same glyph also serves as the perpendicularity sign in geometry — one shape, two unrelated jobs.",
+    sectionId: "notation"
+  },
+  obj2: {
+    question: "How does proof by contradiction work?",
+    answer: "Proof by contradiction (reductio ad absurdum) establishes a statement by assuming its negation and deriving something impossible. Assume ¬P, reason until a contradiction such as Q ∧ ¬Q appears, and conclude that the assumption was untenable — so P holds. The method works because a contradiction is false under every assignment: any assumption that forces one cannot be true.",
+    sectionId: "contradictions_as_laws"
+  },
+  obj3: {
+    question: "Is every false statement a contradiction?",
+    answer: "No. An ordinary false statement is false under the particular circumstances at hand but could be true under others — its truth table contains both values. A contradiction is false under every possible assignment: no circumstances whatever make it true. 'It is raining' may happen to be false; 'it is raining and it is not raining' cannot be true at all. Test any formula in the [truth table generator](!/logic/truth-tables).",
+    sectionId: "definition"
+  }
+}
 
   return{
     props:{
@@ -334,6 +361,7 @@ style="display: block; margin: 0 auto; fill:none; stroke:none; fill-rule:evenodd
       contradictions,
       introContent,
       contradictionContent,
+      faqQuestions,
        seoData: {
       title: "Contradiction in Propositional Logic - Complete Guide | Learn Math Class",
       description: "Learn about contradictions in propositional logic, their relationship to tautologies, and how they represent logical impossibilities. Explore examples, notation, and applications in logical reasoning.",
@@ -352,6 +380,7 @@ export default function ContradictionPage({
   contradictions,
   introContent,
   contradictionContent,
+  faqQuestions,
   keyWords
 }) {
 //  const keyWords=['logic','propositional logic','contradiction',
@@ -409,7 +438,23 @@ export default function ContradictionPage({
               contradictionContent.contradiction_vs_tautology.description,
               contradictionContent.contradiction_vs_tautology.svg,
               contradictionContent.contradiction_vs_tautology.description2,
-  
+
+            ]
+          },
+          // faq: rendered component — must be built here, not in getStaticProps
+          {
+            id:'faq',
+            title:contradictionContent.faq.title,
+            link:``,
+            content:[
+              <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+                <FAQSection
+                  faqQuestions={faqQuestions}
+                  theme={'leftBorder'}
+                  width={'100%'}
+                  openFirst={false}
+                />
+              </div>,
             ]
           },
         //     {

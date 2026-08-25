@@ -8,6 +8,7 @@ import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButto
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export default function ContradictionsTruthTablesPage({ keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
@@ -189,6 +190,22 @@ export default function ContradictionsTruthTablesPage({ keyWords, contradictionE
         link: sectionsContent.obj12.link,
         content: [sectionsContent.obj12.content]
       },
+      // faq: rendered component — must be built here, not in getStaticProps
+      {
+        id: 'faq',
+        title: sectionsContent.faq.title,
+        link: ``,
+        content: [
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+      },
     ]
 
   return (
@@ -218,17 +235,10 @@ export default function ContradictionsTruthTablesPage({ keyWords, contradictionE
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
@@ -521,40 +531,42 @@ The formula reduces to (P ∧ ¬Q) ∧ (P ∧ Q) = P ∧ (¬Q ∧ Q) = P ∧ ⊥
       after: ``,
       link: ``,
     },
+    faq: {
+      title: `Contradictions FAQ`,
+    },
   }
 
+  // FAQ pass: cut "what is a contradiction" and "law of non-contradiction"
+  // (case A — own h2s answer them), "how are contradictions used in proofs"
+  // (obj2 heading + opening answers it; the semantics/contradiction page owns
+  // proof by contradiction) and the P ↔ ¬P question (no search demand).
+  // Kept four rewritten; invented the explosion question from obj2's buried
+  // third paragraph.
   const faqQuestions = {
     obj1: {
-      question: "What is a contradiction in logic?",
-      answer: "A contradiction is a formula that is false under every possible assignment of truth values to its variables. The simplest example is P ∧ ¬P — a proposition and its negation cannot both be true. Contradictions are also called unsatisfiable formulas."
+      question: "How do you identify a contradiction in a truth table?",
+      answer: "A formula is a contradiction if the final column of its truth table contains only false values — every row, without exception. One false row among true ones only makes the formula contingent, not contradictory. Build the table for any candidate formula in the [truth table generator](!/logic/truth-tables) and inspect the final column.",
+      sectionId: "1"
     },
     obj2: {
-      question: "What is the law of non-contradiction?",
-      answer: "The law of non-contradiction states that a proposition and its negation cannot both be true at the same time: P ∧ ¬P is always false. It is one of the three classical laws of thought and a foundational principle in logic and mathematics."
+      question: "What is the difference between a contradiction and a tautology?",
+      answer: "A tautology is true under every truth assignment; a contradiction is false under every truth assignment. In a truth table, a tautology's final column contains only T values and a contradiction's only F values. The two are exact opposites: negating a tautology yields a contradiction, and negating a contradiction yields a tautology.",
+      sectionId: "1"
     },
     obj3: {
-      question: "How do you identify a contradiction in a truth table?",
-      answer: "A formula is a contradiction if its final column in the truth table contains only false values for every row. No matter what combination of truth values you assign to the variables, the formula always evaluates to false."
+      question: "Can inconsistent premises produce a contradiction?",
+      answer: "Yes. When premises are mutually inconsistent — such as P → Q, P → ¬Q, and P asserted together — their conjunction is a contradiction: no truth assignment satisfies them all. This gives a practical consistency test: conjoin the premises and check the truth table. If every row is false, the premise set is inconsistent and at least two of them conflict.",
+      sectionId: "4"
     },
     obj4: {
-      question: "What is the difference between a contradiction and a tautology?",
-      answer: "A tautology is always true under every truth value assignment; a contradiction is always false. They are logical opposites — the negation of a tautology is a contradiction, and the negation of a contradiction is a tautology."
+      question: "What does it mean for a formula to be unsatisfiable?",
+      answer: "An unsatisfiable formula has no truth assignment that makes it true — every row of its truth table is false. Unsatisfiable and contradiction name the same property. A satisfiable formula, by contrast, is true under at least one assignment; a formula that is true under all of them is a tautology.",
+      sectionId: "1"
     },
     obj5: {
-      question: "How are contradictions used in proofs?",
-      answer: "Proof by contradiction (reductio ad absurdum) assumes the negation of the desired conclusion and derives a contradiction, proving the original statement must be true. If assuming ¬P leads to a contradiction, then P must hold."
-    },
-    obj6: {
-      question: "Can inconsistent premises produce a contradiction?",
-      answer: "Yes. When premises are mutually inconsistent — such as P → Q, P → ¬Q, and P all being asserted together — their conjunction is a contradiction. No truth value assignment can satisfy all premises simultaneously."
-    },
-    obj7: {
-      question: "What does it mean for a formula to be unsatisfiable?",
-      answer: "An unsatisfiable formula has no truth value assignment that makes it true. Unsatisfiable and contradiction mean the same thing: the formula is false in every possible interpretation."
-    },
-    obj8: {
-      question: "Why does P ↔ ¬P produce a contradiction?",
-      answer: "The biconditional P ↔ ¬P requires P and ¬P to share the same truth value. But by definition P and ¬P always have opposite values — when P is true, ¬P is false, and vice versa — so the biconditional is always false."
+      question: "What is the principle of explosion?",
+      answer: "The principle of explosion (ex falso quodlibet) states that from a contradiction, anything can be derived: once both P and ¬P are accepted, every statement whatever becomes provable. This is why contradictions are fatal to a formal system — a single one makes the system trivial, since it can no longer distinguish true claims from false ones.",
+      sectionId: "2"
     }
   }
 
@@ -627,19 +639,6 @@ The formula reduces to (P ∧ ¬Q) ∧ (P ∧ Q) = P ∧ (¬Q ∧ Q) = P ∧ ⊥
           "item": "https://www.learnmathclass.com/logic/truth-tables/contradictions"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 

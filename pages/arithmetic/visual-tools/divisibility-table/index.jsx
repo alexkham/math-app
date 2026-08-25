@@ -1010,7 +1010,8 @@ Selecting several buttons at once shows the union of their patterns—see [combi
         description: "Interactive divisibility table for numbers 0-100. Select divisors 1-12 to highlight patterns. Hover for rule explanations including digit sums, last digits, and more.",
         keywords: keyWords.join(", "),
         url: "/arithmetic/visual-tools/divisibility-table",
-        name: "Interactive Divisibility Table"
+        name: "Interactive Divisibility Table",
+        category: "Divisibility & Remainders"
       },
     }
   }

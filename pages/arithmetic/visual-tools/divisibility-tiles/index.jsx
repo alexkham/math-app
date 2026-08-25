@@ -682,7 +682,8 @@ It also completes the tool's spectrum of outcomes: all blue (divisible), blue wi
     description: "Interactive divisibility visualization tool. Group tiles to see division, remainders, and check divisibility for numbers 1-100 with divisors 2-9.",
     keywords: keyWords.join(", "),
     url: "/arithmetic/visual-tools/divisibility-tiles",
-    name: "Divisibility Tiles Interactive Visualizer"
+    name: "Divisibility Tiles Interactive Visualizer",
+    category: "Divisibility & Remainders"
   }
 
   const schemas = {
