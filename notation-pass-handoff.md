@@ -142,10 +142,15 @@ indicator family 𝟙/I_A (indicators).
    with its slot open), roots/properties (square/cube/fourth-root keys — the page
    linked the keyboard for `±` but not for the radical itself). Keyboard-linking
    sections 18 → 21. Verified present before linking: `√ | ‖ → ⌊ ∑ ∫ ∤`.
-   Not done, lower value: arrow entries and the remaining bar-family members
-   (cardinality, divides), whose sections discuss the mark's meaning rather than
-   how to type it. Side note: `⌊` being on the keyboard retires part of the parked
-   floor-bracket item — it was always typeable; what it lacks is an owning section.
+   The three remaining candidates were then checked individually rather than
+   assumed: **two already had links** (limits/two-sided for the arrow,
+   divisibility for the divides bar), so the earlier "not done" note was
+   over-broad; only **cardinality** genuinely lacked one and gained a link on its
+   aleph entry (`ℵ`, `ℶ`, `∅`, `ℕ` all confirmed present). Keyboard-linking
+   sections **18 → 22**. ASK-1 is fully closed: no dataset changes needed, and
+   every owner section for the affected marks now links the keyboard.
+   Side note: `⌊` being on the keyboard retires part of the parked floor-bracket
+   item — it was always typeable; what it lacks is an owning section.
 4. ASK-2: `/math-symbols/{algebra,functions,arithmetic}` not wired into other
    symbols pages' menus or the `/math-symbols` hub (structural, operator decides).
 5. **SITE-WIDE SWEEPS — three done 2026-08-25, one left open.** Details in the
