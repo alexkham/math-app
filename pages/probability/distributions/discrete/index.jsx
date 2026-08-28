@@ -585,6 +585,8 @@ $U(a, b)$ — **also used, though it can refer to either discrete or continuous;
 
 $P(X = k) = \\frac{1}{b - a + 1}, \\quad \\text{for } k = a, a+1, \\dots, b$ — probability mass function
 
+Full account of these marks, including the $U(a,b)$ name collision with the continuous family: [discrete uniform notation](!/probability/distributions/discrete/uniform#15).
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 `,
 parameters:`
@@ -684,6 +686,8 @@ $B(n,p)$ — **occasionally used in theoretical or formal contexts (less common)
 
 $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k}$ — probability mass function
 
+Full account of these marks, including the $q$ abbreviation and the semicolon parameter separator: [binomial notation](!/probability/distributions/discrete/binomial#15).
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 `,
   pmf:`
@@ -771,6 +775,8 @@ $G(p)$ — **less common shorthand in some texts or software contexts**.
 
 $P(X = k) = (1 - p)^{k - 1} p, \\quad \\text{for } k = 1, 2, 3, \\dots$ — probability mass function
 
+Full account of these marks, including the two rival definitions and how to tell them apart: [geometric notation](!/probability/distributions/discrete/geometric#15).
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
      `,
@@ -837,6 +843,8 @@ $\\text{NegativeBinomial}(r, p)$ — **used to denote the distribution itself (n
 $NB(r, p)$ — **common shorthand, especially in statistical software**.
 
 $P(X = k) = \\binom{k - 1}{r - 1} p^r (1 - p)^{k - r}, \\quad \\text{for } k = r, r+1, r+2, \\dots$ — probability mass function (trials until $r$-th success)
+
+Full account of these marks, including why the coefficient carries a shift in both slots: [negative binomial notation](!/probability/distributions/discrete/negative-binomial#15).
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
@@ -929,6 +937,8 @@ $H(N, K, n)$ — **occasionally used in compact form, especially in software or 
 
 $P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \\text{for valid } k$ — probability mass function
 
+Full account of these marks, including the capitals-population/lowercase-sample case system: [hypergeometric notation](!/probability/distributions/discrete/hypergeometric#15).
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
 `,
@@ -1019,6 +1029,8 @@ $\\text{Poisson}(\\lambda)$ — **used to denote the distribution itself (not th
 $P(\\lambda)$ — **sometimes used informally, especially in compact notation**.
 
 $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad \\text{for } k = 0, 1, 2, \\dots$ — probability mass function
+
+Full account of these marks, including $\\lambda$'s double duty as mean and variance: [Poisson notation](!/probability/distributions/discrete/poisson#15).
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 

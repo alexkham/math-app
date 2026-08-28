@@ -302,6 +302,8 @@ $Z \\sim N(0, 1)$ — conventional notation for a standard normal [random variab
 
 **Note:** Some texts use $N(\\mu, \\sigma)$ with standard deviation instead of variance. Always check which convention is being used. Statistical software often defaults to variance notation.
 
+Full account of these marks, including the reserved letters $Z$, $\\varphi$ and $\\Phi$: [normal distribution notation](!/probability/distributions/continuous/normal#2).
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
 
 
@@ -439,6 +441,8 @@ $U(0, 1)$ — the standard uniform distribution on the unit interval.
 
 **Note:** The continuous uniform distribution is distinct from the discrete uniform distribution. The continuous version has a probability density function, while the discrete version has a probability mass function.
 
+Full account of these marks, including why $[a,b]$ and $(a,b)$ describe the same distribution here: [continuous uniform notation](!/probability/distributions/continuous/uniform#2).
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
 
   pdf:`<h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
@@ -561,6 +565,8 @@ $\\text{Exp}(\\lambda)$ — used to denote the distribution itself (not the [ran
 $X \\sim \\text{Exp}(\\beta)$ — scale parameterization where $\\beta = 1/\\lambda$ is the mean.
 
 **Note:** Always check whether the parameter represents the rate (λ) or the scale (β = 1/λ). Statistical software may use either convention. The rate parameterization is more common in probability theory.
+
+Full account of these marks, including the mean fingerprint that reveals which convention a source uses: [exponential distribution notation](!/probability/distributions/continuous/exponential#2).
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
 

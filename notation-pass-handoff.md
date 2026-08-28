@@ -241,14 +241,16 @@ four gate-failed (pmf, pdf, both sub-hubs). Six render bugs fixed on the discret
 sub-hub (family names inside `$…$` without `\text{}`, rendering as runs of italic
 letters).
 
-**ASK-6 is now class-wide and is the one open content decision.** Eleven satellite
-notation accounts duplicate material now owned elsewhere: pmf, pdf, six discrete
-roster blocks, three continuous roster blocks. The procedure forbids two full
-accounts of one mark, but trimming means eleven edits to pre-project content across
-page boundaries — so it is one operator call, not an executor's: **(a)** trim all
-eleven to pointers, **(b)** keep them as browse-surface summaries and add pointer
-links only *(recommended)*, **(c)** leave as-is. Pointers are already woven on pmf
-and pdf.
+**ASK-6 — RESOLVED 2026-08-25, option (b) pointer-only.** The eleven satellite
+notation accounts (pmf, pdf, six discrete roster blocks, three continuous roster
+blocks) keep their text — they earn their place as browse-surface summaries — and
+each now carries a pointer to the owning section, so no mark has two competing full
+accounts without a route to the canonical one. Each pointer names what the child
+adds (the `U(a,b)` collision, the `q` abbreviation, the two rival geometric
+definitions, the shifted coefficient, the case system, λ's double duty, the reserved
+`Z`/`φ`/`Φ`, endpoint irrelevance, the mean fingerprint) rather than being a bare
+"see also". All nine new anchors verified against the registry's recorded section
+ids. Nothing trimmed or deleted.
 
 Threads the family pass completed, worth preserving if it extends:
 - **Support-style census (5 members, all cross-linked):** binomial's closed list,
