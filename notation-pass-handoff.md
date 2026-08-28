@@ -136,9 +136,16 @@ indicator family 𝟙/I_A (indicators).
    (`e.symbol === '√'`), then read that entry's `latex_code` to see what the
    keyboard actually inserts.
 
-   *Follow-up opportunity (not done):* entries on radicals, the bar family
-   (`|x|`, `|z|`, `‖v‖`, cardinality, divides) and arrow marks were written without
-   keyboard links on the strength of the bad grep — they could legitimately gain them.
+   *Follow-up — done for the owner pages 2026-08-25.* Keyboard links added to the
+   four sections that own the affected marks and had none: absolute-value (bar pair),
+   magnitude (double bar has its own key), complex-numbers/absolute-value (radical
+   with its slot open), roots/properties (square/cube/fourth-root keys — the page
+   linked the keyboard for `±` but not for the radical itself). Keyboard-linking
+   sections 18 → 21. Verified present before linking: `√ | ‖ → ⌊ ∑ ∫ ∤`.
+   Not done, lower value: arrow entries and the remaining bar-family members
+   (cardinality, divides), whose sections discuss the mark's meaning rather than
+   how to type it. Side note: `⌊` being on the keyboard retires part of the parked
+   floor-bracket item — it was always typeable; what it lacks is an owning section.
 4. ASK-2: `/math-symbols/{algebra,functions,arithmetic}` not wired into other
    symbols pages' menus or the `/math-symbols` hub (structural, operator decides).
 5. **SITE-WIDE SWEEPS — three done 2026-08-25, one left open.** Details in the

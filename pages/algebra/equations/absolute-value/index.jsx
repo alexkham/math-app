@@ -405,7 +405,7 @@ This non-negativity has an immediate consequence for equations: if $|f(x)| = k$ 
         id: 'bars-as-brackets',
         tex: `$|a + b|$`,
         read: `The absolute value of the whole quantity a plus b`,
-        means: `The bars are a bracket pair: everything between them is one block, evaluated first — like the radical's vinculum, an invisible parenthesis with a built-in operation.`,
+        means: `The bars are a bracket pair: everything between them is one block, evaluated first — like the radical's vinculum, an invisible parenthesis with a built-in operation. The [mathematical keyboard](!/keyboard) inserts the pair without typing either bar.`,
         cases: `Nested bars are legal but hard on the eye: $\\left||x| - 1\\right|$ resolves inside-out. Print sizes the outer pair taller; handwriting has no such mercy, which is why worked solutions relabel the inner block instead.`,
         alsoWritten: `$\\operatorname{abs}(x)$ — the functional spelling, universal in programming, rare in print.`,
         confusedWith: `A distributable mark. $|a + b| \\neq |a| + |b|$ in general — the gap between them is the triangle inequality $|a+b| \\leq |a| + |b|$, and treating the bars like a factor erases it.`,

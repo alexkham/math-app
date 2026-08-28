@@ -502,7 +502,7 @@ This restriction affects the domain of [radical functions](!/algebra/roots/funct
         id: 'radical-anatomy',
         tex: `$\\sqrt[n]{a}$`,
         read: `The n-th root of a; root a, for the square root`,
-        means: `Three parts: the index $n$ in the crook, the radicand $a$ under the bar, and the hook joining them. The index $2$ is never written — a bare $\\sqrt{a}$ is the square root. The [LaTeX reference](!/latex) puts the index in brackets: @[\\sqrt[n]{a}]@.`,
+        means: `Three parts: the index $n$ in the crook, the radicand $a$ under the bar, and the hook joining them. The index $2$ is never written — a bare $\\sqrt{a}$ is the square root. The [LaTeX reference](!/latex) puts the index in brackets: @[\\sqrt[n]{a}]@, and the [mathematical keyboard](!/keyboard) inserts the sign with the radicand slot already waiting — square, cube and fourth roots each have their own key.`,
         cases: `Index parity is the whole story on this page — even in **Even Index Radicals** above, odd in **Odd Index Radicals** below; domain, sign, and convention all key off it.`,
         alsoWritten: `$a^{1/n}$ — the exponent spelling, bridged at [rational exponents](!/algebra/powers/rational-exponents#notation). Older British texts call an irrational root a “surd”.`,
         confusedWith: `A both-roots symbol. The glyph returns one number only — the non-negative one for even indices, per **Principal Root Convention** below; the other root needs the sign written explicitly.`,

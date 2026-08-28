@@ -1132,7 +1132,7 @@ The geometric intuition is the same in both cases: the magnitude is the straight
         id: 'bar-count',
         tex: `$\\|\\mathbf{v}\\|$`,
         read: `The norm of v; the magnitude of v`,
-        means: `Double bars for vector length — the bar count is doing real work: one pair for a scalar's [absolute value](!/algebra/equations/absolute-value#notation), two for a vector's norm, and the scalar-vector split is spelled out in **The General Norm** below.`,
+        means: `Double bars for vector length — the bar count is doing real work: one pair for a scalar's [absolute value](!/algebra/equations/absolute-value#notation), two for a vector's norm, and the scalar-vector split is spelled out in **The General Norm** below. The [mathematical keyboard](!/keyboard) carries the double pair as its own key, so the count is never a typing accident.`,
         cases: `The scaling law mixes both in one line: $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$ — single bars on the scalar, double on the vector, each pair applying its own operation.`,
         alsoWritten: `$|\\mathbf{v}|$ — single bars for magnitude, standard in physics and engineering texts; unambiguous there because bold already marks the vector, but it collides with the [determinant's](!/linear-algebra/determinants) bars once matrices arrive.`,
         confusedWith: `Parallel lines or “evaluated at” bars. The paired-delimiter reading is the only one — and nothing here is a fraction: $\\|\\mathbf{v}\\|$ wraps, it never divides.`,
