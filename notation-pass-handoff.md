@@ -208,10 +208,23 @@ indicator family 𝟙/I_A (indicators).
    regression on ~85 links. A grep for genuinely notation-flavored contexts across
    the whole tree found exactly **one** (`z*` → "Alternative notation for the
    complex conjugate"), which was upgraded. Final score: 1 of 119.
-9. Parked candidates: `⌊x⌋` floor bracket, complex-fractions main-bar-length cue,
-   `sinh⁻¹/arsinh` naming, classical ratio P(A)=|A|/|Ω| as a compound mark
-   (recommended-note at probability/combinatorics — natural home if a
-   probability-basics pass ever runs).
+9. Parked candidates, with dispositions:
+   - **`⌊x⌋` floor bracket — investigated 2026-08-25, stays parked, and the reason
+     is now precise.** It is *not* a keyboard gap (`⌊` is present as
+     `\left\lfloor`). It has **no eligible owner**: ten pages with notation
+     sections use `⌊ ⌋` — led by limits/one-sided with 18 occurrences — but every
+     one merely *uses* it (one-sided calls it "a standard example"; the
+     distribution pages only need it inside mode formulas), which fails ownership
+     test 5. The site has no floor/ceiling page, so no node can claim the mark.
+     **Blocked on a content gap, not a notation one (ASK-4 class).** A
+     floor/ceiling page would unblock a genuinely rich entry: `⌊⌋` vs `⌈⌉`, the
+     round-toward-−∞ convention that diverges from truncation for negatives, the
+     older `[x]`, and the int/trunc/floor split across programming languages.
+   - complex-fractions main-bar-length cue — own-able marks number only two, below
+     the floor of three.
+   - `sinh⁻¹/arsinh` naming — recommended-note at derivatives/special.
+   - classical ratio P(A)=|A|/|Ω| as a compound mark — recommended-note at
+     probability/combinatorics; natural home if a probability-basics pass runs.
 10. Known pre-existing bug NOT fixed (out of scope): arithmetic visual-tool
     `divisibility-table` id 13 reads `a | b` backwards vs the lesson pages.
 
