@@ -542,7 +542,7 @@ This is the only preset where the midpoint coincides with the origin. It produce
 
 You can create other symmetric configurations by setting $z_2 = -z_1$ for any $z_1$. The midpoint will always land at the origin because the two points cancel when averaged.`,
       before:``,
-      after:`The frozen frame shows the coincidence directly: the purple $M$ swallows the gray origin dot, and the two faint origin vectors lie exactly along the orange distance segment — because for opposite points, the segment between them *is* the line through the origin.
+      after:`The frozen frame shows the coincidence directly: the purple $M$ swallows the gray origin dot, and the two faint origin vectors lie exactly along the orange distance segment — because for opposite points, the segment between them **is** the line through the origin.
 
 Algebraically this preset freezes the statement $z + (-z) = 0$: additive inverses average to zero. It is the midpoint counterpart of what [the coincident state](!#coincident-points-distance-zero) does for distance — one collapses the average, the other collapses the difference.`,
       link:'',
@@ -636,7 +636,7 @@ This is the only configuration where $|z_1 - z_2| = 0$. By definition, $|w| = 0$
       before:``,
       after:`The frozen frame is the tool with everything switched off by mathematics rather than by settings: no triangle, no circle, no distance label — just two stacked markers and the midpoint hiding beneath them at the same spot. Both step-by-step panels still run; they simply compute zeros all the way down.
 
-Degenerate as it looks, this state carries real content: it is the *definiteness* half of what makes $|z_1 - z_2|$ a genuine distance. Zero output happens for exactly one input configuration — compare [the symmetric preset](!#symmetric-points-and-midpoint-at-the-origin), where it is the midpoint, not the distance, that collapses to zero.`,
+Degenerate as it looks, this state carries real content: it is the **definiteness** half of what makes $|z_1 - z_2|$ a genuine distance. Zero output happens for exactly one input configuration — compare [the symmetric preset](!#symmetric-points-and-midpoint-at-the-origin), where it is the midpoint, not the distance, that collapses to zero.`,
       link:'',
     },
 
@@ -692,7 +692,7 @@ The midpoint keeps the shared real part and averages the heights: $M = 1 + i$. A
       before:``,
       after:`This frame is complex distance at its most familiar: $|{-4} - 4| = 8$ is exactly the number-line distance between $-4$ and $4$. The orange segment lies flat along the axis, and the red $\\Delta b$ leg has nothing to measure.
 
-Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so the purple $M$ lands on the origin — this preset is *also* a symmetric pair, kin to [the symmetric preset](!#symmetric-points-and-midpoint-at-the-origin). And the dashed [locus circle](!#the-dashed-circle-and-locus-interpretation), centered at $-4$ with radius $8$, is the largest circle any preset draws — it exits the window on three sides.`,
+Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so the purple $M$ lands on the origin — this preset is **also** a symmetric pair, kin to [the symmetric preset](!#symmetric-points-and-midpoint-at-the-origin). And the dashed [locus circle](!#the-dashed-circle-and-locus-interpretation), centered at $-4$ with radius $8$, is the largest circle any preset draws — it exits the window on three sides.`,
       link:'',
     },
 

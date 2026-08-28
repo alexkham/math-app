@@ -54,7 +54,7 @@ The page launches with quadratic as the base and all parameters at defaults — 
       title: `Picking a Base Function`,
       content: `The picker on the left lists ten base function families, with sine and cosine grouped together under "Trigonometric". Each entry shows a small glyph of the family's characteristic shape. Click to switch — the plot resets the transformed curve to match the base, and all four transformation parameters return to their defaults ($a = 1$, $b = 1$, $h = 0$, $k = 0$).
 
-The base function controls only the *starting shape*. The four transformations work the same way for every family: $a$ scales vertically, $k$ shifts vertically, $b$ scales horizontally, $h$ shifts horizontally. What changes between families is how those transformations affect family-specific features — moving the vertex of a parabola, the asymptote of a reciprocal, the midline of a sinusoid, or the domain start of a square root.
+The base function controls only the **starting shape**. The four transformations work the same way for every family: $a$ scales vertically, $k$ shifts vertically, $b$ scales horizontally, $h$ shifts horizontally. What changes between families is how those transformations affect family-specific features — moving the vertex of a parabola, the asymptote of a reciprocal, the midline of a sinusoid, or the domain start of a square root.
 
 Switching base functions resets parameters but preserves the active tab, so you can compare the same transformation across different bases without losing your place.`,
       before: ``,
@@ -125,7 +125,7 @@ The chip strip is especially useful in Custom mode, where multiple transformatio
       content: `The info panel on the right reads the current tab and the current base function and assembles a contextual explanation in two parts:
 
 • **General** — what this transformation does, independent of the base function. The formula, the qualitative effects of positive and negative parameter values, the conditions for stretches versus compressions, and reflections
-• **Applied to [base]** — what this specific parameter value does to *this* specific function family. The vertex of the parabola moves to $(h, k)$, the amplitude of the sine becomes $|a|$, the vertical asymptote of the reciprocal moves to $x = h$, and so on
+• **Applied to [base]** — what this specific parameter value does to **this** specific function family. The vertex of the parabola moves to $(h, k)$, the amplitude of the sine becomes $|a|$, the vertical asymptote of the reciprocal moves to $x = h$, and so on
 
 When the parameter is at its default, the applied section reminds you that no transformation has been applied yet and prompts you to move the slider. Switch to the Custom tab and the info panel lists every non-default transformation in one place, each with its general formula and family-specific consequence.`,
       before: ``,
@@ -143,8 +143,8 @@ Each parameter controls one type of transformation:
 
 • $a$ — **vertical scale and reflection**. Multiplies outputs by $a$. $|a| > 1$ stretches vertically; $|a| < 1$ compresses; $a < 0$ reflects across the $x$-axis.
 • $k$ — **vertical shift**. Adds $k$ to every output. Positive $k$ moves the curve up, negative moves it down. Shape is unchanged.
-• $b$ — **horizontal scale and reflection**. Multiplies inputs by $b$. $|b| > 1$ *compresses* horizontally (counterintuitive); $|b| < 1$ stretches; $b < 0$ reflects across the $y$-axis.
-• $h$ — **horizontal shift**. Subtracts $h$ from the input. Positive $h$ moves the curve *right* (the minus sign in $f(x - h)$ is the source of the inversion).
+• $b$ — **horizontal scale and reflection**. Multiplies inputs by $b$. $|b| > 1$ **compresses** horizontally (counterintuitive); $|b| < 1$ stretches; $b < 0$ reflects across the $y$-axis.
+• $h$ — **horizontal shift**. Subtracts $h$ from the input. Positive $h$ moves the curve **right** (the minus sign in $f(x - h)$ is the source of the inversion).
 
 The four transformations commute in pairs (vertical with horizontal) but not across axes. The order in $g(x) = a \\cdot f(b(x - h)) + k$ is the canonical convention.`,
       before: ``,
@@ -159,7 +159,7 @@ The four transformations commute in pairs (vertical with horizontal) but not acr
 • Replacing $x$ with $x - h$ moves the graph **right** by $h$, not left
 • Replacing $x$ with $bx$ where $b > 1$ **compresses** the graph horizontally, not stretches it
 
-The reason is that the substitution acts on the *input* axis, not the output. If you want $g$ to take value $f(0)$ at $x = h$ (i.e. move that feature right to $h$), you need $g(h) = f(0)$, which means the input to $f$ must equal $0$ when $x = h$ — hence $f(x - h)$. Similarly, if $b$ doubles, you reach the same input value of $f$ in half the distance, so the curve compresses.
+The reason is that the substitution acts on the **input** axis, not the output. If you want $g$ to take value $f(0)$ at $x = h$ (i.e. move that feature right to $h$), you need $g(h) = f(0)$, which means the input to $f$ must equal $0$ when $x = h$ — hence $f(x - h)$. Similarly, if $b$ doubles, you reach the same input value of $f$ in half the distance, so the curve compresses.
 
 The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide right by three units, in spite of the minus sign in the formula. Setting $b$ to auto and watching it sweep through the same effect is the quickest cure for the confusion.`,
       before: ``,
@@ -224,7 +224,7 @@ On the parabola, $f(2x) = 4x^2$ happens to equal a vertical scaling by $4$ — a
       title: `The Horizontal Shift`,
       content: `The parameter $h$ shifts inputs: $g(x) = f(x - h)$, sliding the curve along the x-axis — with the sign convention that trips everyone once.`,
       before: ``,
-      after: `The frozen $h = 3$ moves the vertex to $x = 3$: *subtracting* $3$ inside the parentheses moves the curve to the *right*. The rule reads backwards until you see it from the input's side — the point that used to happen at $0$ now happens at $3$, because $3 - 3 = 0$.
+      after: `The frozen $h = 3$ moves the vertex to $x = 3$: **subtracting** $3$ inside the parentheses moves the curve to the **right**. The rule reads backwards until you see it from the input's side — the point that used to happen at $0$ now happens at $3$, because $3 - 3 = 0$.
 
 Like the [vertical shift](!#the-vertical-shift), this is a rigid motion: shape perfectly preserved, position changed. Every feature — vertex, roots, extrema — translates by exactly $h$.
 

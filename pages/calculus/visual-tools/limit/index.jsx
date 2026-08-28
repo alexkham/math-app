@@ -519,7 +519,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Limit at a point** — the value $f(x)$ approaches as $x$ approaches $c$, written $\\lim_{x \\to c} f(x)$. The limit is about the *approach*, not the value $f(c)$ itself.
+      content: `**Limit at a point** — the value $f(x)$ approaches as $x$ approaches $c$, written $\\lim_{x \\to c} f(x)$. The limit is about the **approach**, not the value $f(c)$ itself.
 
 **Left limit** — $L^{-} = \\lim_{x \\to c^{-}} f(x)$. The value approached from values smaller than $c$.
 
@@ -527,7 +527,7 @@ export async function getStaticProps(){
 
 **Two-sided limit** — exists exactly when $L^{-}$ and $L^{+}$ are both finite and equal. The common value is the limit.
 
-**DNE** — abbreviation for *does not exist*. Used for limits when the one-sided limits disagree, one is infinite, or the function oscillates.
+**DNE** — abbreviation for **does not exist**. Used for limits when the one-sided limits disagree, one is infinite, or the function oscillates.
 
 **Removable discontinuity** — the two-sided limit exists but $f(c)$ is either undefined or different from the limit. Patching $f(c)$ would restore continuity.
 
@@ -603,7 +603,7 @@ To explore quickly, switch families in the left panel — the discontinuity zoo 
 
 The slider is on a **logarithmic scale**, ranging from $\\varepsilon = 1$ down to $\\varepsilon = 10^{-3}$. Each tick is roughly an order of magnitude, so very small values of $\\varepsilon$ are easy to reach precisely.
 
-This mirrors the formal definition of a limit: for the limit to equal $L$, the value $f(x)$ must get *arbitrarily close* to $L$ when $x$ gets sufficiently close to $c$. Shrinking $\\varepsilon$ is the visual equivalent of "as close as you like".
+This mirrors the formal definition of a limit: for the limit to equal $L$, the value $f(x)$ must get **arbitrarily close** to $L$ when $x$ gets sufficiently close to $c$. Shrinking $\\varepsilon$ is the visual equivalent of "as close as you like".
 
 The **Reset** button next to **Parameters** restores the default $\\varepsilon = 0.5$.`,
       before: ``,

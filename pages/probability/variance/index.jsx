@@ -454,7 +454,7 @@
 
 // When variables are independent, their covariance is zero, recovering the simpler formula.
 
-// For a deeper understanding of how variables interact, see the [covariance](/probability/covariance) page.`,
+// For a deeper understanding of how variables interact, see the [covariance](!/probability/covariance) page.`,
 //       before:``,
 //       after:``,
   
@@ -470,23 +470,23 @@
 
 // **Binomial distribution** (parameters $n$, $p$):
 // $$\\mathrm{Var}(X) = np(1-p)$$
-// See the [binomial distribution](/probability/distributions/discrete#binomial) page.
+// See the [binomial distribution](!/probability/distributions/discrete#binomial) page.
 
 // **Poisson distribution** (parameter $\\lambda$):
 // $$\\mathrm{Var}(X) = \\lambda$$
-// See the [Poisson distribution](/probability/distributions/discrete#poisson) page.
+// See the [Poisson distribution](!/probability/distributions/discrete#poisson) page.
 
 // **Uniform distribution** on $[a, b]$:
 // $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
-// See the [uniform distribution](/probability/distributions/continuous#uniform) page.
+// See the [uniform distribution](!/probability/distributions/continuous#uniform) page.
 
 // **Exponential distribution** (parameter $\\lambda$):
 // $$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$$
-// See the [exponential distribution](/probability/distributions/continuous#exponential) page.
+// See the [exponential distribution](!/probability/distributions/continuous#exponential) page.
 
 // **Normal distribution** (parameters $\\mu$, $\\sigma^2$):
 // $$\\mathrm{Var}(X) = \\sigma^2$$
-// See the [normal distribution](/probability/distributions/continuous#normal) page.
+// See the [normal distribution](!/probability/distributions/continuous#normal) page.
 
 // Each distribution's page contains derivations and detailed explanations of these variance formulas.`,
 //       before:``,
@@ -540,7 +540,7 @@
 
 // [Expectation](!/probability/expected-value) (Expected Value): 
 
-// Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ defines variance as an expected value, making it a second-order moment of the distribution. Understanding expectation is prerequisite to understanding variance. See the [expected value](/probability/expected-value) page.
+// Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ defines variance as an expected value, making it a second-order moment of the distribution. Understanding expectation is prerequisite to understanding variance. See the [expected value](!/probability/expected-value) page.
 
  
 // [Covariance](!/probability/covariance): 
@@ -1594,7 +1594,7 @@ The quantity $\\mathrm{Cov}(X, Y)$ is the covariance between $X$ and $Y$, which 
 
 When variables are independent, their covariance is zero, recovering the simpler formula.
 
-For a deeper understanding of how variables interact, see the [covariance](/probability/covariance) page.`,
+For a deeper understanding of how variables interact, see the [covariance](!/probability/covariance) page.`,
       before:``,
       after:``,
   
@@ -1610,23 +1610,23 @@ $$\\mathrm{Var}(X) = p(1-p)$$
 
 **Binomial distribution** (parameters $n$, $p$):
 $$\\mathrm{Var}(X) = np(1-p)$$
-See the [binomial distribution](/probability/distributions/discrete#binomial) page.
+See the [binomial distribution](!/probability/distributions/discrete#binomial) page.
 
 **Poisson distribution** (parameter $\\lambda$):
 $$\\mathrm{Var}(X) = \\lambda$$
-See the [Poisson distribution](/probability/distributions/discrete#poisson) page.
+See the [Poisson distribution](!/probability/distributions/discrete#poisson) page.
 
 **Uniform distribution** on $[a, b]$:
 $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
-See the [uniform distribution](/probability/distributions/continuous#uniform) page.
+See the [uniform distribution](!/probability/distributions/continuous#uniform) page.
 
 **Exponential distribution** (parameter $\\lambda$):
 $$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$$
-See the [exponential distribution](/probability/distributions/continuous#exponential) page.
+See the [exponential distribution](!/probability/distributions/continuous#exponential) page.
 
 **Normal distribution** (parameters $\\mu$, $\\sigma^2$):
 $$\\mathrm{Var}(X) = \\sigma^2$$
-See the [normal distribution](/probability/distributions/continuous#normal) page.
+See the [normal distribution](!/probability/distributions/continuous#normal) page.
 
 Each distribution's page contains derivations and detailed explanations of these variance formulas.`,
       before:``,
@@ -1680,7 +1680,7 @@ Variance does not exist in isolation—it connects to numerous other ideas in pr
 
 [Expectation](!/probability/expected-value) (Expected Value): 
 
-Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ defines variance as an expected value, making it a second-order moment of the distribution. Understanding expectation is prerequisite to understanding variance. See the [expected value](/probability/expected-value) page.
+Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ defines variance as an expected value, making it a second-order moment of the distribution. Understanding expectation is prerequisite to understanding variance. See the [expected value](!/probability/expected-value) page.
 
  
 [Covariance](!/probability/covariance): 

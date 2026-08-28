@@ -645,7 +645,7 @@ Read the row as you slide: left tells you the area piling up, middle tells you t
 
 • **f(t)** — toggles the integrand curve. Off, you see just the accumulator and the shaded area outline.
 
-• **F(x)** — toggles the dashed accumulator curve. Off, the picture reduces to a classical *area under f* view without the FTC overlay.
+• **F(x)** — toggles the dashed accumulator curve. Off, the picture reduces to a classical **area under f** view without the FTC overlay.
 
 • **area** — toggles the shaded fill. Off, the two function curves remain but the area visualization is gone.
 
@@ -659,13 +659,13 @@ The **Accent color** picker at the bottom recolors the highlight throughout — 
 
     obj7: {
       title: `What Is the FTC`,
-      content: `The **Fundamental Theorem of Calculus** is the bridge between the two central operations of calculus: differentiation (slope of a curve) and integration (area under a curve). It says the two operations are *inverses* of each other.
+      content: `The **Fundamental Theorem of Calculus** is the bridge between the two central operations of calculus: differentiation (slope of a curve) and integration (area under a curve). It says the two operations are **inverses** of each other.
 
 The theorem has two parts, both essential.
 
 **Part 1** establishes that if you define a function by integrating $f$ from a fixed lower bound up to a moving upper bound, the derivative of that function recovers $f$. Symbolically, if $F(x) = \\int_a^x f(t)\\, dt$, then $F'(x) = f(x)$.
 
-**Part 2** uses Part 1 to give a practical way to compute definite integrals: pick *any* antiderivative $G$ of $f$, and the integral $\\int_a^b f(t)\\, dt$ equals $G(b) - G(a)$.
+**Part 2** uses Part 1 to give a practical way to compute definite integrals: pick **any** antiderivative $G$ of $f$, and the integral $\\int_a^b f(t)\\, dt$ equals $G(b) - G(a)$.
 
 For full coverage of proofs and applications, see the **fundamental theorem of calculus** page.`,
       before: ``,
@@ -681,7 +681,7 @@ $$F'(x) = f(x).$$
 
 The intuition: push $x$ a little further right by $\\Delta x$. The shaded area grows by a thin strip of width $\\Delta x$ and height roughly $f(x)$. So $\\Delta F \\approx f(x) \\cdot \\Delta x$, which means $F'(x) = f(x)$ in the limit.
 
-This is the reason the accumulator is sometimes called the *integral function* — it shows that integration produces a function whose derivative is the original integrand. Differentiation undoes integration, point by point.
+This is the reason the accumulator is sometimes called the **integral function** — it shows that integration produces a function whose derivative is the original integrand. Differentiation undoes integration, point by point.
 
 In the tool, you can verify this visually. Pick any $x$, note the slope of the $F$ curve there (use the rate at which the dot is climbing), and compare it to the height of $f$ at the same $x$. They match.`,
       before: ``,
@@ -691,7 +691,7 @@ In the tool, you can verify this visually. Pick any $x$, note the slope of the $
 
     obj9: {
       title: `Part 2 - Evaluation`,
-      content: `**FTC Part 2.** If $f$ is continuous on $[a, b]$ and $G$ is *any* antiderivative of $f$ (so $G'(x) = f(x)$ everywhere on the interval), then
+      content: `**FTC Part 2.** If $f$ is continuous on $[a, b]$ and $G$ is **any** antiderivative of $f$ (so $G'(x) = f(x)$ everywhere on the interval), then
 
 $$\\int_a^b f(t)\\, dt = G(b) - G(a).$$
 

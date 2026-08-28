@@ -521,7 +521,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Multiset** — a collection of items where some may be identical. Unlike a set, a multiset records how many copies of each item are present. In this tool the multiset is encoded as a string like *AABBC*.
+      content: `**Multiset** — a collection of items where some may be identical. Unlike a set, a multiset records how many copies of each item are present. In this tool the multiset is encoded as a string like **AABBC**.
 
 **Permutation with identical items** — a distinct arrangement of a multiset in a line. Swapping two identical copies does not produce a new permutation. The count is $n! / (k_1! \\cdot k_2! \\cdots)$ where each $k_i$ is the size of an identical group.
 
@@ -539,7 +539,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started`,
-      content: `The tool opens with multiset *AAB* selected: two copies of $A$ and one copy of $B$. The scene splits into three areas:
+      content: `The tool opens with multiset **AAB** selected: two copies of $A$ and one copy of $B$. The scene splits into three areas:
 
 • A **source row** at the top showing the multiset as separate balls, including duplicates side by side.
 
@@ -567,7 +567,7 @@ That tension is the whole subject. The tool draws copies separately so you can w
 
     obj2: {
       title: `The Build Area`,
-      content: `The build area is where one distinct permutation at a time is constructed. The label above the area simply reads *BUILD AREA*; the slot count equals the size of the chosen multiset.
+      content: `The build area is where one distinct permutation at a time is constructed. The label above the area simply reads **BUILD AREA**; the slot count equals the size of the chosen multiset.
 
 What to watch:
 
@@ -611,15 +611,15 @@ Use the **◀** and **▶** buttons next to *multiset =* to cycle. Each preset r
 
     obj4: {
       title: `Grouping by Distinct First Item`,
-      content: `The completed section organizes permutations into **distinct first-item groups** — one row per distinct value in the multiset, not one per source position. So *AAB* has two groups ($A$ and $B$), not three.
+      content: `The completed section organizes permutations into **distinct first-item groups** — one row per distinct value in the multiset, not one per source position. So **AAB** has two groups ($A$ and $B$), not three.
 
-Group sizes vary because the remaining multiset depends on which item was used first. For example with *AABB*:
+Group sizes vary because the remaining multiset depends on which item was used first. For example with **AABB**:
 
 • Starting with $A$: remaining multiset is $ABB$, giving $3! / (1! \\cdot 2!) = 3$ arrangements.
 
 • Starting with $B$: remaining multiset is $AAB$, also giving $3! / (2! \\cdot 1!) = 3$ arrangements.
 
-For *AABC*:
+For **AABC**:
 
 • Starting with $A$: remaining is $ABC$ (no repeats), giving $3! = 6$ arrangements.
 
@@ -629,7 +629,7 @@ For *AABC*:
 
 This is why each row in the completed area has its own height — the tool computes a separate row size per group to keep proportions clean. The total across all groups always equals the [multinomial coefficient](!#what-is-a-permutation-with-identical-items) $n! / (k_1! \\cdot k_2! \\cdots)$.`,
       before: ``,
-      after: `The frozen frame above is *AABC* complete, and the unequal rows tell the story at a glance: the $A$ row holds six cards while the $B$ and $C$ rows hold three each. Starting with $A$ uses up one of the duplicates and leaves three distinct letters — the freest possible remainder — while starting with $B$ or $C$ leaves the pair $AA$ intact to keep collapsing arrangements.
+      after: `The frozen frame above is **AABC** complete, and the unequal rows tell the story at a glance: the $A$ row holds six cards while the $B$ and $C$ rows hold three each. Starting with $A$ uses up one of the duplicates and leaves three distinct letters — the freest possible remainder — while starting with $B$ or $C$ leaves the pair $AA$ intact to keep collapsing arrangements.
 
 Unequal group sizes are the feature that separates this tool from the [full permutation's](!#related-concepts) perfectly even rows: with duplicates, symmetry among first choices is broken by what each choice leaves behind. Adding down the rows — $6 + 3 + 3 = 12$ — recovers the multinomial total.`,
       link: '',
@@ -657,9 +657,9 @@ The **Speed** slider controls how fast play advances. At higher speeds the fly a
       title: `Mode Switch`,
       content: `The **Mode** switch at the start of the control bar toggles how each item is rendered:
 
-• **Balls mode** (default) — items appear as colored circles. Identical copies share the same color, so the multiset *AABB* shows two circles of one color and two of another. The first-item avatar in each completed group is a circle with the item's number.
+• **Balls mode** (default) — items appear as colored circles. Identical copies share the same color, so the multiset **AABB** shows two circles of one color and two of another. The first-item avatar in each completed group is a circle with the item's number.
 
-• **Letters mode** — items appear with letter labels (A, B, C, …). The multiset display becomes literal — *AABB* shows as $A, A, B, B$ in the source row. The first-item avatar in each completed group is just the letter, colored to match.
+• **Letters mode** — items appear with letter labels (A, B, C, …). The multiset display becomes literal — **AABB** shows as $A, A, B, B$ in the source row. The first-item avatar in each completed group is just the letter, colored to match.
 
 The encoding is consistent across the source row, the build slots, the flying ball, every mini permutation card in the completed grid, and the [right-panel narration](!#right-panel-and-progress). Letters mode is especially useful for this scenario because the multiset names themselves are letter strings.`,
       before: ``,
@@ -669,7 +669,7 @@ The encoding is consistent across the source row, the build slots, the flying ba
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds, anchored by the header *Permutations with identical items* and the full multinomial formula for the current multiset.
+      content: `The right panel narrates the build as it unfolds, anchored by the header **Permutations with identical items** and the full multinomial formula for the current multiset.
 
 A **StepRow** is added for each [distinct first-item group](!#grouping-by-distinct-first-item) as soon as a permutation in that group starts or completes. Each StepRow shows:
 
@@ -679,7 +679,7 @@ A **StepRow** is added for each [distinct first-item group](!#grouping-by-distin
 
 • A short **narration** of the structure: *Position 1 is locked to A. The remaining positions hold 1 A, 2 Bs, and 1 C, arranged in $4! / (1! \\cdot 2! \\cdot 1!) = 12$ distinct ways.* The formula uses the leftover multiplicities after one copy of the first item is removed.
 
-When all groups complete, every StepRow shows *done* with a checkmark, and the counter reaches *total / total*.`,
+When all groups complete, every StepRow shows **done** with a checkmark, and the counter reaches *total / total*.`,
       before: ``,
       after: ``,
       link: '',
@@ -695,9 +695,9 @@ where $k_i$ is the number of copies of the $i$th distinct item and $k_1 + k_2 + 
 
 Examples:
 
-• Distinct arrangements of the letters in *MISSISSIPPI* (11 letters: 1 M, 4 I, 4 S, 2 P): $11! / (1! \\cdot 4! \\cdot 4! \\cdot 2!) = 34{,}650$.
+• Distinct arrangements of the letters in **MISSISSIPPI** (11 letters: 1 M, 4 I, 4 S, 2 P): $11! / (1! \\cdot 4! \\cdot 4! \\cdot 2!) = 34{,}650$.
 
-• Distinct arrangements of the word *DATA* (4 letters with 2 A): $4! / 2! = 12$.
+• Distinct arrangements of the word **DATA** (4 letters with 2 A): $4! / 2! = 12$.
 
 • Lining up 8 students where 3 wear identical red shirts and 5 wear identical blue shirts: $8! / (3! \\cdot 5!) = 56$ distinguishable lineups.
 
@@ -709,7 +709,7 @@ For deeper coverage, see the **permutation with identical items** section on the
 
     obj9: {
       title: `Why Divide by k!`,
-      content: `Start with the multiset treated as if every item were distinct — say by tagging copies $A_1, A_2$ and $B_1, B_2$ for *AABB*. There are $n! = 4! = 24$ full permutations of the tagged set.
+      content: `Start with the multiset treated as if every item were distinct — say by tagging copies $A_1, A_2$ and $B_1, B_2$ for **AABB**. There are $n! = 4! = 24$ full permutations of the tagged set.
 
 But the tags are fake. When we remove them and look at the actual multiset, many of those $24$ permutations collapse into the same arrangement:
 
@@ -725,7 +725,7 @@ Generalizing: for each identical group of size $k_i$, exactly $k_i!$ tagged perm
 
 $$\\text{distinct count} = \\frac{n!}{k_1! \\cdot k_2! \\cdots k_m!}$$`,
       before: ``,
-      after: `The frozen frame above is the argument's own example completed on screen: *AABB*, six cards, split three-and-three between the $A$-first and $B$-first rows. Each visible card stands for exactly four invisible tagged permutations — the $2! \\cdot 2!$ silent swaps of the copies.
+      after: `The frozen frame above is the argument's own example completed on screen: **AABB**, six cards, split three-and-three between the $A$-first and $B$-first rows. Each visible card stands for exactly four invisible tagged permutations — the $2! \\cdot 2!$ silent swaps of the copies.
 
 The collapse ratio is the same for every card, which is why plain division works: redundancy in this problem is perfectly uniform. Run the build and watch for repeats that never come — the enumeration simply skips arrangements it has already produced, which is division enacted rather than computed. The remaining presets scale the same idea; see [the multiset stepper](!#the-multiset-stepper) for the full ladder.`,
       link: '',
@@ -768,7 +768,7 @@ Being fully enumerable by hand makes this the preset to verify against. Every cl
       title: `AAAB: Placing the Single B`,
       content: `Three copies of $A$ and a single $B$: $4! / (3! \\cdot 1!) = 4$ distinct arrangements — $AAAB$, $AABA$, $ABAA$, $BAAA$.
 
-The count equals the number of slots the lone $B$ can occupy, and that is no coincidence: when a multiset has just one letter that differs, an arrangement carries no information beyond *where the odd one out went*. Four positions, four arrangements.
+The count equals the number of slots the lone $B$ can occupy, and that is no coincidence: when a multiset has just one letter that differs, an arrangement carries no information beyond **where the odd one out went**. Four positions, four arrangements.
 
 Watch the group structure: the $A$-first row holds three arrangements (the $B$ still has three slots left to choose from), while the $B$-first row holds exactly one — $BAAA$, with all decisions already made.`,
       before: ``,
@@ -781,7 +781,7 @@ Try predicting before pressing Play: which group will fill first, and how large 
       title: `AAABB: Two Letters, Ten Arrangements`,
       content: `Three $A$s and two $B$s give $5! / (3! \\cdot 2!) = 120 / 12 = 10$ distinct arrangements — the largest two-letter preset in the stepper.
 
-Ten should ring a bell: $\\binom{5}{2} = 10$ as well. With exactly two distinct letters, arranging the multiset is the same act as *choosing which positions get the* $B$*s* — order inside each letter group is meaningless, so only the choice of positions matters. Every two-letter multiset permutation is secretly a binomial coefficient:
+Ten should ring a bell: $\\binom{5}{2} = 10$ as well. With exactly two distinct letters, arranging the multiset is the same act as **choosing which positions get the** $B$**s** — order inside each letter group is meaningless, so only the choice of positions matters. Every two-letter multiset permutation is secretly a binomial coefficient:
 
 $$\\frac{n!}{k! \\cdot (n-k)!} = \\binom{n}{k}$$
 

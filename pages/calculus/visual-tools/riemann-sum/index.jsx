@@ -547,7 +547,7 @@ export async function getStaticProps(){
 
 • Dashed gray vertical lines at $a$ and $b$ marking the bounds.
 
-Below the graph, the result card shows three numbers side by side: the approximation $S_n$, the true integral, and the error. A small tag below the error labels the result as *overshoots*, *undershoots*, or *exact*.
+Below the graph, the result card shows three numbers side by side: the approximation $S_n$, the true integral, and the error. A small tag below the error labels the result as **overshoots**, **undershoots**, or **exact**.
 
 To explore, switch between **Left**, **Right**, **Midpoint**, and **Trapezoid** in the **Method** section, drag the **partitions n** slider, or pick a different function family in the left panel.`,
       before: ``,
@@ -559,11 +559,11 @@ To explore, switch between **Left**, **Right**, **Midpoint**, and **Trapezoid** 
       title: `The Four Methods`,
       content: `The **Method** section in the left panel offers four ways to build the approximation. Each samples the function at a different point on each strip:
 
-• **Left** — sample at the left endpoint. On an increasing function every rectangle sits *below* the curve; on a decreasing function every rectangle sits *above*. Convergence order $O(1/n)$.
+• **Left** — sample at the left endpoint. On an increasing function every rectangle sits **below** the curve; on a decreasing function every rectangle sits **above**. Convergence order $O(1/n)$.
 
 • **Right** — sample at the right endpoint. Mirror image of left: overshoots on increasing, undershoots on decreasing. Same $O(1/n)$ order.
 
-• **Midpoint** — sample at the center. The flat top punches *above* the curve on one half of each strip and *below* on the other, so over- and under-shoots within each strip mostly cancel. Convergence order $O(1/n^2)$.
+• **Midpoint** — sample at the center. The flat top punches **above** the curve on one half of each strip and **below** on the other, so over- and under-shoots within each strip mostly cancel. Convergence order $O(1/n^2)$.
 
 • **Trapezoid** — connect the left and right endpoint heights with a straight line. Errors also mostly cancel, opposite in sign to midpoint. Same $O(1/n^2)$ order.
 
@@ -679,7 +679,7 @@ For full theoretical coverage, see the **Riemann integral** page.`,
 
     obj8: {
       title: `Convergence and Error`,
-      content: `The four rules differ not just in how they sample the curve, but in *how fast* the error shrinks as $n$ grows.
+      content: `The four rules differ not just in how they sample the curve, but in **how fast** the error shrinks as $n$ grows.
 
 **Endpoint rules (Left and Right): error is $O(1/n)$.**
 
@@ -687,7 +687,7 @@ Each rectangle&apos;s flat top mismatches the curve&apos;s slope. Doubling $n$ h
 
 **Midpoint and Trapezoid: error is $O(1/n^2)$.**
 
-Both rules sample more representatively. Midpoint takes the height at the center of each strip; trapezoid uses the linear interpolant between endpoint heights. In either case the over- and undershoots within a single strip largely cancel, so the leading-order error is in $1/n^2$ instead of $1/n$. Doubling $n$ shrinks the error by a factor of *four*. To reduce the error by $100$, $n$ only needs to grow by $10$.
+Both rules sample more representatively. Midpoint takes the height at the center of each strip; trapezoid uses the linear interpolant between endpoint heights. In either case the over- and undershoots within a single strip largely cancel, so the leading-order error is in $1/n^2$ instead of $1/n$. Doubling $n$ shrinks the error by a factor of **four**. To reduce the error by $100$, $n$ only needs to grow by $10$.
 
 The practical lesson: choose the rule before you crank up $n$.`,
       before: ``,
@@ -699,7 +699,7 @@ The practical lesson: choose the rule before you crank up $n$.`,
       title: `Signed Area`,
       content: `When the integrand dips below the x-axis, the function values become negative and the corresponding rectangles count as **negative area**. The tool draws them on the appropriate side of the axis and the Riemann sum subtracts them naturally.
 
-This matches the standard convention for definite integrals: $\\int_a^b f(x)\\, dx$ is the *signed* area between the curve and the x-axis, counting area above the axis positively and area below negatively. A function that&apos;s symmetric about the x-axis (like $\\sin x$ over $[-\\pi, \\pi]$) has integral zero — positive and negative areas cancel.
+This matches the standard convention for definite integrals: $\\int_a^b f(x)\\, dx$ is the **signed** area between the curve and the x-axis, counting area above the axis positively and area below negatively. A function that&apos;s symmetric about the x-axis (like $\\sin x$ over $[-\\pi, \\pi]$) has integral zero — positive and negative areas cancel.
 
 Two other sign conventions are also handled correctly:
 

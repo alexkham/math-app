@@ -100,7 +100,7 @@ In the diagonal reflection method, no arrows appear. Instead, a dashed diagonal 
       content: `The diagonal reflection method behaves differently for square and non-square $A$, and the visualizer makes this explicit.
 
 • For a **square** matrix ($m = n$), the main diagonal is a real geometric line. Reflection across it swaps $a_{i,j}$ with $a_{j,i}$ and fixes the diagonal entries in place
-• For a **rectangular** matrix ($m \\neq n$), a strict main diagonal only extends through the $\\min(m,n) \\times \\min(m,n)$ subregion. The visualizer draws a *diagonal-like* reflection axis through that subregion and explains that the swap rule still applies to every cell, including those in the overhang
+• For a **rectangular** matrix ($m \\neq n$), a strict main diagonal only extends through the $\\min(m,n) \\times \\min(m,n)$ subregion. The visualizer draws a **diagonal-like** reflection axis through that subregion and explains that the swap rule still applies to every cell, including those in the overhang
 
 Try a $3 \\times 4$ matrix with the diagonal reflection method to see the abstract axis, then switch to $3 \\times 3$ to see the true diagonal.`,
       before: ``,

@@ -641,7 +641,7 @@ Skim across the row as you slide $x_0$. The left number tells you what $f$ is do
 
 • **f(x)** — toggles the solid curve of the original function. Off, you see just $f'$ and the tangent, which is sometimes useful when the function curve is busy.
 
-• **f&apos;(x)** — toggles the dashed derivative curve. Off, the picture reduces to the classical *tangent line at a point* without the derivative-as-function overlay.
+• **f&apos;(x)** — toggles the dashed derivative curve. Off, the picture reduces to the classical **tangent line at a point** without the derivative-as-function overlay.
 
 • **tangent** — toggles the tangent line at $x_0$. Off, you see just the two function curves and their link line.
 
@@ -657,7 +657,7 @@ The toggles are independent — any combination is valid. The legend below the g
 
 $$f'(x_0) = \\lim_{h \\to 0} \\frac{f(x_0 + h) - f(x_0)}{h}$$
 
-The fraction inside the limit is the *slope of the secant line* through the two nearby points $(x_0, f(x_0))$ and $(x_0 + h, f(x_0 + h))$. As $h$ shrinks to zero, the secant slope approaches the **slope of the tangent line** to $f$ at $x_0$ — the derivative.
+The fraction inside the limit is the **slope of the secant line** through the two nearby points $(x_0, f(x_0))$ and $(x_0 + h, f(x_0 + h))$. As $h$ shrinks to zero, the secant slope approaches the **slope of the tangent line** to $f$ at $x_0$ — the derivative.
 
 When the derivative exists at every $x$ in some interval, the collection of values $f'(x)$ forms a new function $f'$, called the **derivative function** of $f$.
 

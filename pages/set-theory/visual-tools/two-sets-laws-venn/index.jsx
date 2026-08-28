@@ -285,7 +285,7 @@ Each is proved the same mechanical way: apply De Morgan, then cancel the double 
       before: ``,
       after: `The element-level argument is one line: $x \\in A \\cup A$ means "$x \\in A$ or $x \\in A$", and a disjunction of a statement with itself is just the statement. The diagram says the same thing spatially — painting the circle of $A$ twice leaves the picture unchanged.
 
-Idempotence has a practical face: duplicate conditions can always be dropped. Its intersection twin, [the idempotent law for intersection](!#idempotent-law-for-intersection), makes the identical claim with *and* in place of *or*.`,
+Idempotence has a practical face: duplicate conditions can always be dropped. Its intersection twin, [the idempotent law for intersection](!#idempotent-law-for-intersection), makes the identical claim with **and** in place of **or**.`,
       link: '',
     },
 
@@ -293,7 +293,7 @@ Idempotence has a practical face: duplicate conditions can always be dropped. It
       title: `Idempotent Law for Intersection`,
       content: `The conjunction twin, $A \\cap A = A$: overlapping a set with itself is total, so both mini diagrams shade the full circle of $A$.`,
       before: ``,
-      after: `"$x \\in A$ and $x \\in A$" carries exactly the information of "$x \\in A$" — the intersection version of the same collapse seen in [the idempotent law for union](!#idempotent-law-for-union). Geometrically, a circle overlapped with itself *is* itself, which is why the two sides of the equals sign are indistinguishable frames.
+      after: `"$x \\in A$ and $x \\in A$" carries exactly the information of "$x \\in A$" — the intersection version of the same collapse seen in [the idempotent law for union](!#idempotent-law-for-union). Geometrically, a circle overlapped with itself **is** itself, which is why the two sides of the equals sign are indistinguishable frames.
 
 Together the idempotent pair guarantees that set expressions never gain content by repetition — a property arithmetic lacks and one that Boolean algebras take as an axiom.`,
       link: '',
@@ -317,7 +317,7 @@ Commutativity seems too obvious to state until it fails: subtraction breaks it, 
       before: ``,
       after: `The lens does not belong to either circle more than the other, so there is nothing for the operand order to change. At the element level, "and" commutes just as "or" does in [the commutative law for union](!#commutative-law-for-union).
 
-One subtlety worth noticing: commutativity concerns the *operands* of a single operation, not the interaction of different operations. How union and intersection interact with each other is the business of the distributive and absorption laws — see [absorption by union](!#absorption-by-union) for the version this catalog covers.`,
+One subtlety worth noticing: commutativity concerns the **operands** of a single operation, not the interaction of different operations. How union and intersection interact with each other is the business of the distributive and absorption laws — see [absorption by union](!#absorption-by-union) for the version this catalog covers.`,
       link: '',
     },
 
@@ -359,7 +359,7 @@ The arithmetic analogy is multiplication by zero. Its dual is [union with the un
       before: ``,
       after: `$U$ annihilates union the way $\\emptyset$ annihilates intersection: once every element is already included, no union can add more. The left-hand frame paints $A$ and then paints everything; the second paint makes the first invisible.
 
-This completes the four-law square of the tab — two identities, two annihilations, exchanged by the $\\emptyset \\leftrightarrow U$ duality visible in [intersection with the empty set](!#intersection-with-the-empty-set). Boundedness from above by $U$ and below by $\\emptyset$ is what makes the algebra of subsets a *bounded* lattice, the structure all these laws axiomatize.`,
+This completes the four-law square of the tab — two identities, two annihilations, exchanged by the $\\emptyset \\leftrightarrow U$ duality visible in [intersection with the empty set](!#intersection-with-the-empty-set). Boundedness from above by $U$ and below by $\\emptyset$ is what makes the algebra of subsets a **bounded** lattice, the structure all these laws axiomatize.`,
       link: '',
     },
 
@@ -371,7 +371,7 @@ This completes the four-law square of the tab — two identities, two annihilati
       before: ``,
       after: `Every element faces a two-way choice — in $A$ or not in $A$ — and the union collects both answers, so nobody is missed. In logic this is the law of excluded middle: $P$ or not-$P$ always holds.
 
-Paired with [the intersection form](!#a-set-intersected-with-its-complement), it says $A$ and $A'$ form a *partition* of $U$: exhaustive (this law) and mutually exclusive (the other). The pair is what justifies every case-split argument of the form "either $x \\in A$ or $x \\notin A$".`,
+Paired with [the intersection form](!#a-set-intersected-with-its-complement), it says $A$ and $A'$ form a **partition** of $U$: exhaustive (this law) and mutually exclusive (the other). The pair is what justifies every case-split argument of the form "either $x \\in A$ or $x \\notin A$".`,
       link: '',
     },
 
@@ -411,7 +411,7 @@ With its mirror, [the complement of the empty set](!#the-complement-of-the-empty
       before: ``,
       after: `Every element of the universe vacuously fails to be in $\\emptyset$, so all of them land in the complement. The all-shaded frame is [the complement of the universe](!#the-complement-of-the-universe) run backwards — one more face of the involution property.
 
-Reading the two boundary laws together with the double complement closes the loop: $\\emptyset' = U$, $U' = \\emptyset$, and a second application of either returns the start. The two extreme sets are complementation's only fixed *pair*, swapped endlessly.`,
+Reading the two boundary laws together with the double complement closes the loop: $\\emptyset' = U$, $U' = \\emptyset$, and a second application of either returns the start. The two extreme sets are complementation's only fixed **pair**, swapped endlessly.`,
       link: '',
     },
 
@@ -505,7 +505,7 @@ Against [the bottom-up construction](!#symmetric-difference-from-two-differences
       title: `The Complement of the Symmetric Difference`,
       content: `$(A \\triangle B)' = (A \\cap B) \\cup (A \\cup B)'$: the negative of "exactly one" is "both or neither". Both frames shade the lens and the outside — the two regions where the sets agree.`,
       before: ``,
-      after: `The symmetric difference collects the regions where membership in $A$ and membership in $B$ *disagree*; its complement therefore collects the agreement: elements in both sets (the lens) together with elements in neither (the outside). In logic this is the biconditional — the truth set of "$x \\in A$ if and only if $x \\in B$".
+      after: `The symmetric difference collects the regions where membership in $A$ and membership in $B$ **disagree**; its complement therefore collects the agreement: elements in both sets (the lens) together with elements in neither (the outside). In logic this is the biconditional — the truth set of "$x \\in A$ if and only if $x \\in B$".
 
 The two-piece shading is unusual among the catalog's states: a disconnected region, inner lens plus outer field. It is a good final test of region-reading skill — and clicking between this law and [either symmetric-difference form](!#symmetric-difference-from-two-differences) flips the shading to its exact photographic negative.`,
       link: '',
@@ -519,7 +519,7 @@ The two-piece shading is unusual among the catalog's states: a disconnected regi
       before: ``,
       after: `The derivation is the tab's standard two-step: De Morgan turns $(A' \\cup B)'$ into $(A')' \\cap B'$, and the double complement collapses $(A')'$ to $A$. Every compound complement in the group falls to the same combination.
 
-The logical reading gives the law its bite: $A' \\cup B$ is the truth set of the implication $A \\Rightarrow B$, so its complement is the truth set of the implication's *negation* — "in $A$ yet not in $B$", the exact region where a counterexample lives. Its operand-swapped mirror is [the complement of A ∪ B′](!#the-complement-of-a-union-b-complement).`,
+The logical reading gives the law its bite: $A' \\cup B$ is the truth set of the implication $A \\Rightarrow B$, so its complement is the truth set of the implication's **negation** — "in $A$ yet not in $B$", the exact region where a counterexample lives. Its operand-swapped mirror is [the complement of A ∪ B′](!#the-complement-of-a-union-b-complement).`,
       link: '',
     },
 
@@ -537,7 +537,7 @@ Held next to [its mirror](!#the-complement-of-a-complement-union-b), the pair sh
       title: `The Complement of A ∩ B′`,
       content: `$(A \\cap B')' = A' \\cup B$: both frames shade three regions, sparing only the A-only crescent. Negating a counterexample recovers the implication.`,
       before: ``,
-      after: `The inner expression $A \\cap B'$ is "in $A$ but not $B$" — the failure region of $A \\Rightarrow B$. Complementing it therefore *asserts* the implication: the shaded three-region set is the material conditional itself, true everywhere except where $A$ holds without $B$.
+      after: `The inner expression $A \\cap B'$ is "in $A$ but not $B$" — the failure region of $A \\Rightarrow B$. Complementing it therefore **asserts** the implication: the shaded three-region set is the material conditional itself, true everywhere except where $A$ holds without $B$.
 
 Mechanically it is De Morgan's intersection law plus the cancellation of $(B')'$. This identity is the one most often met outside set theory, since rewriting "$A$ implies $B$" as "not-$A$ or $B$" is the same law in propositional clothing. Its swap-mirror is [the complement of A′ ∩ B](!#the-complement-of-a-complement-intersect-b).`,
       link: '',
@@ -549,7 +549,7 @@ Mechanically it is De Morgan's intersection law plus the cancellation of $(B')'$
       before: ``,
       after: `The inner $A' \\cap B$ is the failure region of the reverse implication $B \\Rightarrow A$; complementing it asserts that implication, shading all regions except the lone counterexample crescent. As with [its mirror](!#the-complement-of-a-intersect-b-complement), the proof is one De Morgan step and one double-complement cancellation.
 
-Closing the catalog here is fitting: the four compound complements demonstrate that the basic laws are not a list to memorize but a *toolkit* — every new-looking identity in the tab is two old laws composed. That composability is what the phrase "algebra of sets" promises.`,
+Closing the catalog here is fitting: the four compound complements demonstrate that the basic laws are not a list to memorize but a **toolkit** — every new-looking identity in the tab is two old laws composed. That composability is what the phrase "algebra of sets" promises.`,
       link: '',
     },
   }
@@ -619,7 +619,7 @@ Closing the catalog here is fitting: the four compound complements demonstrate t
   const tab = (content) => [{ key: 'learn', label: 'Learn More', sections: [{ title: 'On This Page', content }] }];
   const explanations = {
     'idem-u': tab(`Repetition adds nothing in set algebra — unlike arithmetic, where $x + x = x$ only holds for zero. [Learn more about the idempotent union law](!#idempotent-law-for-union) · [All idempotent laws](!#the-idempotent-laws)`),
-    'idem-i': tab(`A set overlapped with itself is total overlap — the *and* twin of the union law. [Learn more about the idempotent intersection law](!#idempotent-law-for-intersection) · [All idempotent laws](!#the-idempotent-laws)`),
+    'idem-i': tab(`A set overlapped with itself is total overlap — the **and** twin of the union law. [Learn more about the idempotent intersection law](!#idempotent-law-for-intersection) · [All idempotent laws](!#the-idempotent-laws)`),
     'comm-u': tab(`Swapping the operands reflects the diagram left-right, and the union's shading is its own reflection. [Learn more about commutative union](!#commutative-law-for-union) · [All commutative laws](!#the-commutative-laws)`),
     'comm-i': tab(`The lens belongs equally to both circles, so order cannot matter. [Learn more about commutative intersection](!#commutative-law-for-intersection) · [All commutative laws](!#the-commutative-laws)`),
     'id-u-e': tab(`$\\emptyset$ is the identity element for union — the set-theoretic zero. [Learn more about union with the empty set](!#union-with-the-empty-set) · [Identity and annihilation](!#identity-and-annihilation)`),

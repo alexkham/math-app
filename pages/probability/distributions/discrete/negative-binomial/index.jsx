@@ -852,6 +852,7 @@ import NegativeBinomialDistributionCDF from '@/app/components/visualizations/pro
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import NegativeBinomialCalculator from '@/app/components/calculators/probability/distributions/NegativeBinomialCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -978,15 +979,15 @@ Flipping a coin until you obtain $3$ heads. If $X=7$, this means the third head 
     obj2:{
       title:`Parameters`,
       content:`
-$𝑟$: number of successes to achieve (a positive integer)
+$r$: number of successes to achieve (a positive integer)
 
-$𝑝$: probability of success in each trial, with $0<𝑝≤1$
+$p$: probability of success in each trial, with $0<p≤1$
 
-This distribution models the number of trials needed to observe $𝑟$ successes, assuming each trial is independent and has the same probability $𝑝$ of success. 
+This distribution models the number of trials needed to observe $r$ successes, assuming each trial is independent and has the same probability $p$ of success. 
 
-The outcomes are integers $𝑟$, $𝑟+1$ ,$𝑟+2$ ,…, since at least $𝑟$ trials are needed. 
+The outcomes are integers $r$, $r+1$ ,$r+2$ ,…, since at least $r$ trials are needed. 
 
-$𝑟$ controls the target (how many successes), and $𝑝$ controls the chance of achieving each one — together, they define how spread out or concentrated the distribution is.
+$r$ controls the target (how many successes), and $p$ controls the chance of achieving each one — together, they define how spread out or concentrated the distribution is.
       `,
       before:``,
       after:``,
@@ -1290,50 +1291,45 @@ Note: The geometric distribution is a special case of the negative binomial dist
     },
 
 
-    obj15:{
-  
-      title:`Notation Used`,
-      content:`
-      $X \\sim \\text{NegBin}(r, p)$ or $X \\sim \\text{NB}(r, p)$ — **distribution of the random variable**.
+    notation:{
 
-$\\text{NegativeBinomial}(r, p)$ — **used to denote the distribution itself (not the random variable)**.
-
-$\\text{NB}(r, p)$ — **common shorthand, especially in statistical software**.
-
-$P(X = k) = \\binom{k - 1}{r - 1} p^r (1 - p)^{k - r}, \\quad \\text{for } k = r, r+1, r+2, \\ldots$ — **probability mass function (PMF)** (trials until $r$-th success), where:
-
-\t$r$ — number of successes desired
-
-\t$p$ — probability of success on each trial
-
-\t$k$ — total number of trials until $r$-th success
-
-\t$\\binom{k-1}{r-1} = \\frac{(k-1)!}{(r-1)!(k-r)!}$ — binomial coefficient
-
-**Alternative PMF formulation:**
-
-\t$P(X = k) = \\binom{k + r - 1}{k} p^r (1 - p)^k, \\quad \\text{for } k = 0, 1, 2, \\ldots$ — number of failures before $r$-th success
-
-**Alternative notations:**
-
-\t$q = 1 - p$ — probability of failure, so PMF can be written as $P(X = k) = \\binom{k-1}{r-1} p^r q^{k-r}$
-
-**Key properties:**
-
-\t$E[X] = \\frac{r}{p}$ — expected value (mean)
-
-\t$\\text{Var}(X) = \\frac{r(1-p)}{p^2}$ — variance
-
-**Relationship to geometric distribution:**
-
-\t$\\text{NegBin}(1, p) = \\text{Geom}(p)$ — negative binomial is a generalization of geometric distribution
-
-      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+      title:`Negative Binomial Notation`,
+      lead:`The negative binomial inherits the [geometric's](!/probability/distributions/discrete/geometric#15) two-definitions problem and raises it: two rival counts, a coefficient with a deliberate shift in both slots, and a support that starts at $r$ instead of zero or one. The marks below are how to tell which negative binomial a source means. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); $q = 1 - p$ from [binomial notation](!/probability/distributions/discrete/binomial#15); the coefficient's spellings from [binomial coefficient notation](!/combinatorics/binomial-coefficient#notation); $E[X]$ and $\\operatorname{Var}(X)$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'family-declaration',
+          tex:`$X \\sim \\operatorname{NB}(r, p)$`,
+          read:`negative binomial: repeat until the r-th success, with success probability p`,
+          means:`$\\operatorname{NB}$, $\\operatorname{NegBin}$, spelled-out $\\operatorname{NegativeBinomial}$ — and, in older texts, the **Pascal distribution** for the trials-counting version. The new slot is $r$, the target number of successes; setting it to one collapses the family onto the [geometric](!/probability/distributions/discrete/geometric#15): $\\operatorname{NB}(1, p) = \\operatorname{Geom}(p)$, conventions and all.`,
+          cases:`Both of the geometric's rival definitions scale up: $X$ counts the **trials up to** the $r$-th success, or the **failures before** it — and software leans failures while texts lean trials, exactly as before; every fingerprint from the geometric's entry applies here with $r$ in place of one.`,
+          confusedWith:`The binomial. The names differ by one word and the letters overlap, but the roles flip: the [binomial](!/probability/distributions/discrete/binomial#15) fixes the trials and counts successes, the negative binomial fixes the successes and counts trials — what is held constant is the entire difference, and the declaration's slots encode it.`,
+        },
+        {
+          id:'shifted-coefficient',
+          tex:`$P(X{=}k) = \\dbinom{k-1}{r-1} p^r q^{k-r}$`,
+          read:`arrange the first k-minus-one trials; the last one is pinned as the r-th success`,
+          means:`The coefficient's double shift is the formula's signature: the final trial **must** be the $r$-th success, so only the first $k{-}1$ trials are free to arrange, and only $r{-}1$ successes go among them — $\\binom{k-1}{r-1}$, not $\\binom{k}{r}$. The [failure abbreviation $q$](!/probability/distributions/discrete/binomial#15) compresses the tail as usual.`,
+          cases:`The failures-counting convention wears a different coat: $\\binom{k+r-1}{k} p^r q^k$ — same pinned-last-trial logic, re-indexed so $k$ counts failures alone; the coefficient's shape (shifted top-and-bottom vs summed top) is itself a fingerprint of which convention is in force.`,
+          confusedWith:`The binomial's unshifted $\\binom{n}{k}$. Restoring the "missing" ones — writing $\\binom{k}{r}$ — counts arrangements where the last trial is a failure, sequences that never stop at $k$; the shift is the mathematics, not a typo.`,
+        },
+        {
+          id:'shifted-support',
+          tex:`$k = r,\\ r{+}1,\\ r{+}2,\\ \\ldots$`,
+          read:`the support opens at r: fewer trials cannot hold r successes`,
+          means:`The family's fourth support style: a **shifted open list** — unbounded above like the [Poisson's](!/probability/distributions/discrete/poisson#15), but starting at $r$, since $r$ successes need at least $r$ trials. The failures convention starts its list at $0$ instead — the support line, once again, is the convention's fingerprint.`,
+          cases:`All four family support styles are now on record: the [binomial's](!/probability/distributions/discrete/binomial#15) closed list, the [Poisson's](!/probability/distributions/discrete/poisson#15) open ellipsis, the [hypergeometric's](!/probability/distributions/discrete/hypergeometric#15) computed clamps, and this shifted open list — reading the support clause identifies the family before the formula does.`,
+          confusedWith:`A sum from zero. Summing the trials-convention pmf from $k = 0$ adds terms with negative factorial arguments — the support clause is not decoration but the guard that keeps the coefficient meaningful.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj16:{
@@ -1556,12 +1552,21 @@ export default function NegativeBinomialDistributionPage({
     },
      {
         id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-    <div key={'notation-negative-binomial'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-              {processContent(sectionsContent.obj15.content,)}
-          </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

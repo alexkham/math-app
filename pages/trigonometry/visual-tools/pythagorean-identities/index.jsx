@@ -859,7 +859,7 @@ Everything said about the bisection in [the sine version of this step](!#sine-pr
       before:``,
       after:`$$OM = \\cos\\theta \\qquad MA = \\sin\\theta$$
 
-The bisector $OM$ sits adjacent to the angle $\\theta$, so with a unit hypotenuse it *is* the cosine. Reading the same figure for the opposite leg is what [the sine proof](!#sine-proof-step-3-identify-the-legs) does at this step.`,
+The bisector $OM$ sits adjacent to the angle $\\theta$, so with a unit hypotenuse it **is** the cosine. Reading the same figure for the opposite leg is what [the sine proof](!#sine-proof-step-3-identify-the-legs) does at this step.`,
       link:'',
     },
     obj27:{

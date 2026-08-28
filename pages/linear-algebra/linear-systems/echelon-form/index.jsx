@@ -1118,7 +1118,7 @@ const rrefReadings = {
           formula: 'pivot columns of the **original** $A$',
           condition: 'not of the reduced form',
           strict: true,
-          note: 'Row operations change the column space but preserve which columns are dependent on which. So the reduction tells you *which* columns to take, and you take them from $A$ \u2014 the single most common error on this page.',
+          note: 'Row operations change the column space but preserve which columns are dependent on which. So the reduction tells you **which** columns to take, and you take them from $A$ \u2014 the single most common error on this page.',
         },
         {
           name: 'Row space basis',

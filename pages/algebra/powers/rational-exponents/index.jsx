@@ -273,7 +273,7 @@ The general strategy is to take the root first whenever the base has a clean $n$
         means: `Linear text has no raised slot, so the grouping must be spelled out: @[8^1/3]@ parses as $\\frac{8^1}{3} = \\frac{8}{3}$, not $2$ — the caret binds tighter than the slash.`,
         cases: `Same rule in spreadsheets and code (@[8**(1/3)]@). Languages with integer division add a second layer: @[1/3]@ evaluating to $0$ turns the whole expression into $8^0 = 1$.`,
         alsoWritten: `@[8^(0.333…)]@ — the decimal dodge; exact only when the decimal is exact.`,
-        confusedWith: `The typeset form, where the raised fraction *is* the grouping. On paper the notation protects you; in a formula bar nothing does.`,
+        confusedWith: `The typeset form, where the raised fraction **is** the grouping. On paper the notation protects you; in a formula bar nothing does.`,
       },
     ],
     symbolsHref: `/math-symbols/algebra`,

@@ -550,7 +550,7 @@ export async function getStaticProps(){
 
 • A **circular wheel** in the middle, divided into $n$ equal slices. Each slice is one remainder class. The [zero class](!#the-zero-class-why-its-special) sits at the top (12 o'clock) marked with a gold star ★.
 
-• A **context panel** on the right that [switches modes](!#right-panel-context) depending on what's happening: an *overview* before running, a *now placing* log while running, a *class details* card when you hover or pin a slice, and a *run complete* summary at the end.
+• A **context panel** on the right that [switches modes](!#right-panel-context) depending on what's happening: an **overview** before running, a **now placing** log while running, a **class details** card when you hover or pin a slice, and a **run complete** summary at the end.
 
 To run:
 
@@ -602,7 +602,7 @@ Cells are placed in real time as the run progresses. The geometry adapts to the 
 
 • **Speed slider** with tortoise 🐢 and hare 🐇 markers controls the tick delay. The tick interval is roughly $\\max(20, 400 - 35 \\cdot \\text{speed})$ milliseconds — at speed $1$ each number takes about $365$ ms; at speed $10$ each takes about $50$ ms.
 
-While running, the right panel switches into [*now placing* mode](!#right-panel-context) and shows live arithmetic for the most recent number: $n \\div d = q$ remainder $r$, and which slice and row it just landed in. Numbers in the zero class get extra emphasis to call out the divisibility.`,
+While running, the right panel switches into [**now placing** mode](!#right-panel-context) and shows live arithmetic for the most recent number: $n \\div d = q$ remainder $r$, and which slice and row it just landed in. Numbers in the zero class get extra emphasis to call out the divisibility.`,
       before: ``,
       after: `The frozen frame above catches a run mid-flight: seventeen numbers placed, and the log reporting $17 \\div 6 = 2$ remainder $5$ — so 17 has just landed in class 5, row 3. Rows count occurrences: 17 is the third number (after 5 and 11) to leave remainder 5.
 
@@ -614,13 +614,13 @@ Watching a few ticks makes the rhythm obvious: the placement simply walks around
       title: `Hovering and Pinning Classes`,
       content: `Every slice on the wheel is interactive:
 
-• **Hover** any slice — a floating tooltip appears showing the class title, formula, description, and example numbers. The right panel simultaneously switches into *class details* mode with the same information plus the list of numbers already placed in that class.
+• **Hover** any slice — a floating tooltip appears showing the class title, formula, description, and example numbers. The right panel simultaneously switches into **class details** mode with the same information plus the list of numbers already placed in that class.
 
 • **Click** to pin the class — the tooltip stays put, the slice darkens slightly, and the right panel keeps showing details until you click somewhere else (or click the same slice again to unpin).
 
 • **Click anywhere outside any slice** to clear the pin.
 
-The tooltip layout adapts to viewport edges — it flips to the left of the cursor when too close to the right edge and above when too close to the bottom. Pinned tooltips show a *📌 Pinned* indicator at the bottom; hover-only tooltips show *Tap to pin*.
+The tooltip layout adapts to viewport edges — it flips to the left of the cursor when too close to the right edge and above when too close to the bottom. Pinned tooltips show a *📌 Pinned* indicator at the bottom; hover-only tooltips show **Tap to pin**.
 
 The class details panel includes:
 
@@ -628,7 +628,7 @@ The class details panel includes:
 
 • A list of first $8$ examples of [integers in the class](!#equivalence-classes-and-their-structure).
 
-• A *Placed so far* block listing every number from the current run that landed in this class, if any.`,
+• A **Placed so far** block listing every number from the current run that landed in this class, if any.`,
       before: ``,
       after: `The frozen frame above has class 2 pinned after a full run of 36: the darkened slice holds 2, 8, 14, 20, 26, 32 — six numbers, each exactly six apart. Pinning turns one wedge of the wheel into a statement: this is a single residue class, an arithmetic progression wrapped into a slice.
 
@@ -656,7 +656,7 @@ For applications, the zero class is what you test for divisibility, what trigger
       before: ``,
       after: `The frozen frame above has the principal class pinned after a full run: 6, 12, 18, 24, 30, 36 sit in the gold-edged slice — the multiples of 6, and nothing else. Every divisibility question about 6 is a question about membership in this one slice.
 
-The gold styling repays attention during a run, too: each time the placement crosses twelve o'clock, the number landing there is exactly a multiple of the modulus, and the *now placing* log flags it. Divisibility stops being a property you compute and becomes a place on the wheel.`,
+The gold styling repays attention during a run, too: each time the placement crosses twelve o'clock, the number landing there is exactly a multiple of the modulus, and the **now placing** log flags it. Divisibility stops being a property you compute and becomes a place on the wheel.`,
       link: '',
     },
 
@@ -696,7 +696,7 @@ Changing the divisor is the tool's most instructive move: the same integers exis
 
 • **Run complete (summary)** — appears [after the count target is reached](!#reading-a-complete-run). Lists the divisible numbers in the zero class as the headline, then a grid showing the count per class.
 
-Below the adaptive box sits a static **deep-dive section** with five collapsible-looking subsections: *What is modular arithmetic*, *Equivalence classes*, *The zero class — why it's special*, *How to read this wheel*, and [Try this](!#adjusting-divisor-and-count). These are always available and don't change with state — they're reference material to read alongside experimenting on the wheel.`,
+Below the adaptive box sits a static **deep-dive section** with five collapsible-looking subsections: **What is modular arithmetic**, **Equivalence classes**, *The zero class — why it's special*, **How to read this wheel**, and [Try this](!#adjusting-divisor-and-count). These are always available and don't change with state — they're reference material to read alongside experimenting on the wheel.`,
       before: ``,
       after: ``,
       link: '',
@@ -718,7 +718,7 @@ Examples:
 
 • **Days of the week** are mod $7$. If today is Wednesday, day $100$ from now is Wednesday $+ 100 \\bmod 7 = $ Wednesday $+ 2$ = Friday.
 
-• [Parity](!#adjusting-divisor-and-count) is mod $2$. *Even* means $\\equiv 0 \\pmod 2$; *odd* means $\\equiv 1 \\pmod 2$.
+• [Parity](!#adjusting-divisor-and-count) is mod $2$. **Even** means $\\equiv 0 \\pmod 2$; **odd** means $\\equiv 1 \\pmod 2$.
 
 • **Cryptography** — RSA, Diffie-Hellman, elliptic-curve protocols all operate in $\\mathbb{Z}/p\\mathbb{Z}$ or $\\mathbb{Z}/n\\mathbb{Z}$ for very large $n$.
 
@@ -790,7 +790,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
     obj11: {
       title: `Reading a Complete Run`,
-      content: `When the last number lands, the right panel switches to its *run complete* summary: the divisible numbers — the contents of the [zero class](!#the-zero-class-why-its-special) — as the headline, then a small grid counting the members of every class.
+      content: `When the last number lands, the right panel switches to its **run complete** summary: the divisible numbers — the contents of the [zero class](!#the-zero-class-why-its-special) — as the headline, then a small grid counting the members of every class.
 
 For the default run of $36$ with divisor $6$, the wheel finishes perfectly balanced: six full rows in every slice, exactly six numbers per class. That is no accident — $36$ is a multiple of $6$, so the count 1 through 36 completes whole laps of the wheel.
 

@@ -611,7 +611,7 @@ The **Reset** button next to the **Parameters** label returns $c$ to the family&
       title: `Reading the Three-Condition Checklist`,
       content: `The boxed panel below the graph lists the three conditions for continuity at $c$, each with a green check or a red cross:
 
-• **Condition 1: f(c) is defined.** Shown with the numerical value when it passes; with the phrase *undefined* when it fails. Polynomials always pass; rational functions fail wherever the denominator is zero.
+• **Condition 1: f(c) is defined.** Shown with the numerical value when it passes; with the phrase **undefined** when it fails. Polynomials always pass; rational functions fail wherever the denominator is zero.
 
 • **Condition 2: the limit exists.** Passes when $L^{-} = L^{+}$ and both are finite. Fails for jumps (finite but unequal) and infinite discontinuities (at least one limit is not finite).
 
@@ -675,7 +675,7 @@ For deeper coverage of each kind, see the **discontinuity** page.`,
 
     obj9: {
       title: `Continuity and Limits`,
-      content: `Continuity is built directly on limits. The middle condition — *the limit exists* — is exactly the condition that $\\lim_{x \\to c^{-}} f(x) = \\lim_{x \\to c^{+}} f(x)$ and is finite.
+      content: `Continuity is built directly on limits. The middle condition — **the limit exists** — is exactly the condition that $\\lim_{x \\to c^{-}} f(x) = \\lim_{x \\to c^{+}} f(x)$ and is finite.
 
 So checking continuity at $c$ amounts to comparing three numbers:
 

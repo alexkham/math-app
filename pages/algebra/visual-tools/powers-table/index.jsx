@@ -112,7 +112,7 @@ At the maximum, base 2 reaches $2^{16} = 65{,}536$ — the value 64K, familiar f
       before: ``,
       after: `The frozen table above shows the deepest view the tool offers: base 2 pushed to all seventeen rows, from $2^0 = 1$ to $2^{16} = 65{,}536$. Two rendering rules become visible only here. The Expression column switches to its abbreviated form past exponent 10 — $2 \\times 2 \\times \\dots \\times 2\\ (16\\ \\text{times})$ — because seventeen explicit factors would overflow the cell. And the values stay exact to the last digit, courtesy of the arbitrary-precision arithmetic underneath.
 
-Sixteen doublings is also a good place to *feel* the exponential law: halfway down the table, at $2^8$, the value is only $256$ — under half a percent of the final value. Exponential sequences spend most of their journey looking small; the last few rows do most of the growing. Compare [the default ten-row table](!#the-default-table-powers-of-two) to see how different the same base looks when cut six rows shorter.`,
+Sixteen doublings is also a good place to **feel** the exponential law: halfway down the table, at $2^8$, the value is only $256$ — under half a percent of the final value. Exponential sequences spend most of their journey looking small; the last few rows do most of the growing. Compare [the default ten-row table](!#the-default-table-powers-of-two) to see how different the same base looks when cut six rows shorter.`,
       link: '',
     },
 
@@ -172,7 +172,7 @@ For the formal definition and behavior of exponential functions, see **exponenti
       before: ``,
       after: `Base 2 is the default for a reason: it is the smallest possible base, so its table grows the slowest and stays the most readable — and it happens to be the most consequential sequence in modern life. The rows are the file sizes, the memory ranges, and the subset counts: $2^{10} = 1{,}024$ is the "kilo" of kilobyte, and a set of ten elements has exactly $1{,}024$ subsets.
 
-The Expression column earns its keep here more than anywhere: watching $2 \\times 2 \\times 2 \\times 2$ grow one factor per row makes the definition of exponentiation *visible* rather than notational. Every claim in the theory sections below — the zero-power rule, the ×base row law — can be checked against these eleven rows by eye. When the doubling stops feeling surprising, push deeper: [the sixteen-row table](!#pushing-to-maximum-powers) is one input away.`,
+The Expression column earns its keep here more than anywhere: watching $2 \\times 2 \\times 2 \\times 2$ grow one factor per row makes the definition of exponentiation **visible** rather than notational. Every claim in the theory sections below — the zero-power rule, the ×base row law — can be checked against these eleven rows by eye. When the doubling stops feeling surprising, push deeper: [the sixteen-row table](!#pushing-to-maximum-powers) is one input away.`,
       link: '',
     },
 
@@ -180,7 +180,7 @@ The Expression column earns its keep here more than anywhere: watching $2 \\time
       title: `Powers of Ten and Place Value`,
       content: `Base 10, max power 10: the table where the Value column writes itself — 1, 10, 100, 1,000, and so on to $10^{10} = 10{,}000{,}000{,}000$, one zero added per row.`,
       before: ``,
-      after: `This is the table you already know by heart, which is exactly what makes it worth freezing: the decimal number system *is* this table. Writing "4,507" means $4 \\cdot 10^3 + 5 \\cdot 10^2 + 0 \\cdot 10^1 + 7 \\cdot 10^0$ — place value is powers of ten wearing digit clothing, and the thousand separators in the Value column mark off the rows of this very table.
+      after: `This is the table you already know by heart, which is exactly what makes it worth freezing: the decimal number system **is** this table. Writing "4,507" means $4 \\cdot 10^3 + 5 \\cdot 10^2 + 0 \\cdot 10^1 + 7 \\cdot 10^0$ — place value is powers of ten wearing digit clothing, and the thousand separators in the Value column mark off the rows of this very table.
 
 Ten is also the largest base the tool accepts, which makes this the fastest-growing table on offer: ten billion by row ten. Scientific notation exists precisely to ride this ladder — $3 \\times 10^8$ names a rung rather than spelling out zeros. Compare [the default base-2 table](!#the-default-table-powers-of-two) at the same ten rows: $1{,}024$ versus $10{,}000{,}000{,}000$, the whole answer to "does the base matter?"`,
       link: '',

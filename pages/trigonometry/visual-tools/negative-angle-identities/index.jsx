@@ -271,7 +271,7 @@ Cotangent sits two derivations from the picture: it depends on [tangent](!#the-t
       title:`Sine Proof, Step 1: Place P at Angle θ`,
       content:`[The sine proof](!#the-sine-negative-angle-identity) opens with a single point: $P$ on the unit circle at angle $\\theta$ above the x-axis, with the vertical leg from the axis up to $P$ drawn in amber.`,
       before:``,
-      after:`That leg has signed length $\\sin\\theta$, and because the circle has radius $1$ the length *is* the y-coordinate of $P$ — no scaling in between. The red arc at the origin marks the angle $\\theta$ measured counter-clockwise, the positive direction.
+      after:`That leg has signed length $\\sin\\theta$, and because the circle has radius $1$ the length **is** the y-coordinate of $P$ — no scaling in between. The red arc at the origin marks the angle $\\theta$ measured counter-clockwise, the positive direction.
 
 Under this tab the tool runs in its sine-only mode, hiding the horizontal $\\cos\\theta$ leg so that nothing competes with the quantity being tracked. The [cosine proof](!#cosine-proof-step-1-place-p) hides the opposite one.`,
       link:'',
@@ -287,7 +287,7 @@ Nothing has been proved yet — so far this is only a construction. The claim ar
     },
     obj20:{
       title:`Sine Proof, Step 3: Read Off sin(-θ)`,
-      content:`$P'$ is the terminal point of the angle $-\\theta$ on the unit circle, so by the definition of sine its y-coordinate *is* $\\sin(-\\theta)$.`,
+      content:`$P'$ is the terminal point of the angle $-\\theta$ on the unit circle, so by the definition of sine its y-coordinate **is** $\\sin(-\\theta)$.`,
       before:``,
       after:`$$\\sin(-\\theta) = -\\sin\\theta$$
 
@@ -316,7 +316,7 @@ Compare with [the sine version of this step](!#sine-proof-step-2-mirror-p): the 
     },
     obj23:{
       title:`Cosine Proof, Step 3: Read Off cos(-θ)`,
-      content:`$P'$ is the terminal point of $-\\theta$, so its x-coordinate *is* $\\cos(-\\theta)$ — and that x-coordinate is the one $P$ already had.`,
+      content:`$P'$ is the terminal point of $-\\theta$, so its x-coordinate **is** $\\cos(-\\theta)$ — and that x-coordinate is the one $P$ already had.`,
       before:``,
       after:`$$\\cos(-\\theta) = \\cos\\theta$$
 

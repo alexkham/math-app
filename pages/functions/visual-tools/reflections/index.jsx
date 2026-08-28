@@ -715,7 +715,7 @@ This reflection is also the $c = 0$ special case of the [horizontal-line family]
       title: `Reflection Across the Y-Axis`,
       content: `The left-right mirror: $g(x) = f(-x)$ negates every input, so the curve's left and right halves swap sides.`,
       before: ``,
-      after: `The frozen square root makes the move unmistakable: $\\sqrt{x}$ lives on the right half-line, and $\\sqrt{-x}$ lives entirely on the left — the reflection relocated the *domain* itself, not just the shape.
+      after: `The frozen square root makes the move unmistakable: $\\sqrt{x}$ lives on the right half-line, and $\\sqrt{-x}$ lives entirely on the left — the reflection relocated the **domain** itself, not just the shape.
 
 Even functions are invisible to this mirror: $x^2$, $|x|$, and $\\cos x$ map onto themselves, which is precisely what "even" means. Odd functions land on their own [x-axis reflection](!#reflection-across-the-x-axis) instead.
 
@@ -726,7 +726,7 @@ Input-side and output-side negation are the two atoms of reflection; every other
       title: `Reflection Across the Line y = x`,
       content: `The diagonal mirror swaps coordinates outright: every point $(x, y)$ of $f$ becomes $(y, x)$ — the reflection that manufactures inverse functions.`,
       before: ``,
-      after: `The frozen parabola shows the catch: reflecting $x^2$ produces the sideways parabola $x = y^2$, whose two branches $\\pm\\sqrt{x}$ stack two outputs over each input. The reflection of a graph is always a *set* of points — it is a *function* only when $f$ was one-to-one.
+      after: `The frozen parabola shows the catch: reflecting $x^2$ produces the sideways parabola $x = y^2$, whose two branches $\\pm\\sqrt{x}$ stack two outputs over each input. The reflection of a graph is always a **set** of points — it is a **function** only when $f$ was one-to-one.
 
 That is the [horizontal line test](!#the-y-x-reflection-and-multivalued-inverses) seen geometrically: horizontal lines through $f$ become vertical lines through the reflection, and multiple crossings become multiple branches.
 

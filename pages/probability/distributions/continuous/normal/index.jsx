@@ -1082,6 +1082,7 @@ import NormalDistribution from '@/app/components/visualizations/probability/cont
 import NormalDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/NormalDistributionCDF'
 import NormalDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/NormalDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1217,29 +1218,44 @@ Human height results from genetics, nutrition, environment, and random biologica
   
   
     },
-    obj2:{
-      title:`Notation`,
-      content:`
-      $X \\sim N(\\mu, \\sigma^2)$ — distribution of the [random variable](!/probability/random-variables) ([variance](!/probability/variance) notation).
-
-$X \\sim \\text{Normal}(\\mu, \\sigma^2)$ — alternative explicit form.
-
-$N(\\mu, \\sigma^2)$ — used to denote the distribution itself (not the [random variable](!/probability/random-variables)
-).
-
-$N(0, 1)$ — the standard normal distribution ($\\mu = 0, \\sigma = 1$).
-
-$Z \\sim N(0, 1)$ — conventional notation for a standard normal [random variable](!/probability/random-variables)
-.
-
-**Note:** Some texts use $N(\\mu, \\sigma)$ with standard deviation instead of variance. Always check which convention is being used. Statistical software often defaults to variance notation.
-      
-      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+    notation:{
+      title:`Normal Distribution Notation`,
+      lead:`The normal is the only distribution with reserved letters: a capital for its standard variable, a Greek pair for its density and accumulation, and a declaration whose second slot is the most-checked convention in probability. The [general warning](!/probability/distributions#notation) points here — this is the minefield's home ground. All marks are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and the capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); $\\mu$ and $\\sigma^2$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation); $F$ and $F^{-1}$ from [CDF notation](!/probability/cdf#notation).`,
+      entries:[
+        {
+          id:'second-slot',
+          tex:`$X \\sim N(\\mu, \\sigma^2)$ vs $N(\\mu, \\sigma)$`,
+          read:`normal with mean mu and — check the source — variance or standard deviation`,
+          means:`The second slot is a convention, not a fact: most textbooks put the **variance** there, while much software and many applied texts put the **standard deviation** — R's and Python's normal functions take the SD. The declaration form itself follows the [family pattern](!/probability/distributions#notation); $\\mathcal{N}$ and the spelled-out $\\operatorname{Normal}$ are typographic variants, and the naked $N(\\mu,\\sigma^2)$ names the distribution while $X \\sim$ attaches it.`,
+          cases:`Magnitude sometimes betrays the convention — a height model reading $N(175, 49)$ is carrying $\\sigma = 7$ squared, one reading $N(175, 7)$ is carrying the SD raw — but only the source's definition settles it; the standard slots $N(0, 1)$ agree in both conventions, which is why the ambiguity hides so well.`,
+          confusedWith:`Nothing louder than itself: reading the wrong convention silently rescales every interval and every z-score by a square root — the exact trap the [standard-error slot](!/probability/central-limit-theorem#notation) inherits one level up.`,
+        },
+        {
+          id:'reserved-z',
+          tex:`$Z \\sim N(0,1)$, $z = \\dfrac{x - \\mu}{\\sigma}$`,
+          read:`capital Z — the standard normal variable; little z — a score in sigma units`,
+          means:`$Z$ is reserved: by convention the letter means a standard normal variable unless a text says otherwise — no other distribution owns a letter. Lowercase $z$ is the **score**: a data value recentred and rescaled into $\\sigma$-units, the [capital/lowercase convention](!/probability/random-variables#notation) carrying the variable/value split one more time.`,
+          cases:`The subscripted $z_p$ marks standard-normal quantiles — **Quantiles/Percentiles** below builds every percentile from them via $x_p = \\mu + \\sigma z_p$; the sample-mean cousin $Z_n = (\\bar{X}_n - \\mu)/(\\sigma/\\sqrt{n})$ belongs to [central limit theorem notation](!/probability/central-limit-theorem#notation) — same recipe, standard error in the denominator.`,
+          confusedWith:`A distance. $z = -2$ is two standard deviations **below** the mean, not "a distance of −2" — the sign carries direction, and dropping it collapses the two tails the score exists to tell apart.`,
+        },
+        {
+          id:'phi-pair',
+          tex:`$\\varphi(z)$, $\\Phi(z)$`,
+          read:`little phi — the standard normal density; capital Phi — its CDF`,
+          means:`The Greek pair is the normal's second reserved privilege: lowercase $\\varphi$ (or $\\phi$) names the standard density, capital $\\Phi$ its accumulation — the $f$/$F$ case convention transposed into Greek. **Cumulative Distribution Function** above defines $\\Phi$ and the reduction $F(x) = \\Phi\\big(\\tfrac{x-\\mu}{\\sigma}\\big)$ that makes one table serve every normal.`,
+          cases:`$\\Phi$ has no closed form — it is **defined** by its integral and evaluated by table or software; its inverse $\\Phi^{-1}$ is the **probit**, the function behind every $z_p$ lookup; when a text writes $\\varphi$ and $\\Phi$ without introduction, the standard normal is being assumed silently.`,
+          confusedWith:`The letter's other tenants. Handwritten $\\varphi$ collides with the [empty set](!/set-theory/operations#notation)'s $\\emptyset$ — a loop through a stroke either way — and $\\phi$ moonlights as an angle and as the golden ratio; inside probability, though, the pair is unambiguous: density below, accumulation above.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj3:{
@@ -2016,14 +2032,21 @@ export default function NormalDistributionPage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-
-
-  <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.obj2.content,)}
-        </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

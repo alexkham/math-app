@@ -672,11 +672,11 @@ For the full proof and an extended theoretical treatment, see the **mean value t
       title: `The Speedometer Intuition`,
       content: `The simplest way to internalize the MVT is the driving metaphor.
 
-You drive $100$ kilometers in exactly one hour. Your **average speed** is $100$ km/h. The MVT says that at some instant during the trip, your speedometer read *exactly* $100$ km/h. You cannot average $100$ km/h without hitting $100$ km/h at some moment.
+You drive $100$ kilometers in exactly one hour. Your **average speed** is $100$ km/h. The MVT says that at some instant during the trip, your speedometer read **exactly** $100$ km/h. You cannot average $100$ km/h without hitting $100$ km/h at some moment.
 
 Mapping back: position is $f$, time is $x$, the interval is $[a, b] = [\\text{start}, \\text{end}]$, average speed is the secant slope, and instantaneous speed is $f'(c)$. The MVT guarantees there is a $c$ in the trip where instantaneous speed equals average speed.
 
-This is the reason the theorem deserves the word "value" — at some interior point the rate of change *takes on the value* of the average rate of change. The intuition extends to any quantity that changes over a smooth interval.`,
+This is the reason the theorem deserves the word "value" — at some interior point the rate of change **takes on the value** of the average rate of change. The intuition extends to any quantity that changes over a smooth interval.`,
       before: ``,
       after: ``,
       link: '',

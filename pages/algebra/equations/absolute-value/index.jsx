@@ -415,8 +415,8 @@ This non-negativity has an immediate consequence for equations: if $|f(x)| = k$ 
         tex: `$|x|$ · $|z|$ · $|A|$ · $|M|$`,
         read: `The same two bars, four different jobs`,
         means: `The vertical pair is the most overloaded bracket in mathematics. Here it means distance to zero, per the **Definition** above — and only some of its other jobs keep that meaning.`,
-        cases: `$|z|$ on a [complex number](!/complex-numbers/basics) is the *same* idea — distance to the origin, plane instead of line. $\\|v\\|$ doubles the bars for vector length. Both generalize this page's bars honestly.`,
-        confusedWith: `The unrelated jobs. $|A|$ on a set is [cardinality](!/set-theory/basics) — a count; $|M|$ on a matrix is the [determinant](!/linear-algebra/determinants) — which can be *negative*: the one place the bars carry no non-negativity promise at all.`,
+        cases: `$|z|$ on a [complex number](!/complex-numbers/basics) is the **same** idea — distance to the origin, plane instead of line. $\\|v\\|$ doubles the bars for vector length. Both generalize this page's bars honestly.`,
+        confusedWith: `The unrelated jobs. $|A|$ on a set is [cardinality](!/set-theory/basics) — a count; $|M|$ on a matrix is the [determinant](!/linear-algebra/determinants) — which can be **negative**: the one place the bars carry no non-negativity promise at all.`,
       },
       {
         id: 'sqrt-alias',

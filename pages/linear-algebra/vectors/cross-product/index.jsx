@@ -2398,7 +2398,7 @@ Placing vectors rather than numbers in the top row makes this a notational devic
         id: 'cross-mark',
         tex: `$\\mathbf{a} \\times \\mathbf{b}$`,
         read: `a cross b`,
-        means: `The arithmetic $\\times$ recycled for a new operation — vector in, vector out, and *only* in $\\mathbb{R}^3$. For the first time in a student's notation, order changes the answer: $\\mathbf{b} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{b})$, as **Properties of the Cross Product** below develops.`,
+        means: `The arithmetic $\\times$ recycled for a new operation — vector in, vector out, and **only** in $\\mathbb{R}^3$. For the first time in a student's notation, order changes the answer: $\\mathbf{b} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{b})$, as **Properties of the Cross Product** below develops.`,
         cases: `$\\mathbf{a} \\times \\mathbf{a} = \\mathbf{0}$ — the bold zero, a vector. Against the [dot](!/linear-algebra/vectors/dot-product#notation): same inputs, different species out — scalar from the dot, vector from the cross.`,
         alsoWritten: `$\\mathbf{a} \\wedge \\mathbf{b}$ — the wedge, standard in French texts for this very operation; in differential geometry the wedge is a related but distinct exterior product, so the symbol does not travel safely between fields.`,
         confusedWith: `Scalar multiplication written with $\\times$. Between numbers, $\\times$ and $\\cdot$ are interchangeable; between vectors they are two different operations — carrying the arithmetic habit across is a species error.`,
@@ -2410,7 +2410,7 @@ Placing vectors rather than numbers in the top row makes this a notational devic
         means: `The scalar triple product — and its parentheses are a courtesy, not a necessity: the other grouping $(\\mathbf{a} \\cdot \\mathbf{b}) \\times \\mathbf{c}$ is a species error, a scalar crossed with a vector. Only one parse exists; the volume it computes is **The Scalar Triple Product** below.`,
         cases: `The cyclic shuffle preserves it — $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c}) = \\mathbf{b} \\cdot (\\mathbf{c} \\times \\mathbf{a})$ — while any swap of two letters flips the sign, mirroring the cross product's own antisymmetry.`,
         alsoWritten: `$[\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]$ — the box-product bracket, common in Russian and European texts, where the operation is called the mixed product; some write plain $(\\mathbf{a}, \\mathbf{b}, \\mathbf{c})$, colliding with tuples.`,
-        confusedWith: `A vector result. The nesting reads inside-out: the cross builds a vector, the dot collapses it — the triple product is a *number*, single bars only when its absolute value is taken.`,
+        confusedWith: `A vector result. The nesting reads inside-out: the cross builds a vector, the dot collapses it — the triple product is a **number**, single bars only when its absolute value is taken.`,
       },
       {
         id: 'basis-spellings',

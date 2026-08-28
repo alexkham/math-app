@@ -471,7 +471,7 @@ Geometrically the position is identical to $0°$ — same terminal point $(1, 0)
       before:``,
       after:`The diagram freezes the explorer at $35°$ with the **Show Complementary Angle** overlay on: the green dashed arc measures the remaining $55°$ up to the vertical axis, and $35° + 55° = 90°$.
 
-Complements drive the **cofunction identities**: $\\sin\\theta = \\cos(90° - \\theta)$ and $\\tan\\theta = \\cot(90° - \\theta)$ — "cosine" literally means *sine of the complement*. That is why sine and cosine swap values between $30°$ and $60°$, and coincide at $45°$, which is its own complement. Together with [supplementary](!#supplementary-angles) and [reference angles](!#reference-angles), complements make up the panel's [related angles](!#complementary-supplementary-and-reference-angles) column.`,
+Complements drive the **cofunction identities**: $\\sin\\theta = \\cos(90° - \\theta)$ and $\\tan\\theta = \\cot(90° - \\theta)$ — "cosine" literally means **sine of the complement**. That is why sine and cosine swap values between $30°$ and $60°$, and coincide at $45°$, which is its own complement. Together with [supplementary](!#supplementary-angles) and [reference angles](!#reference-angles), complements make up the panel's [related angles](!#complementary-supplementary-and-reference-angles) column.`,
       link:'',
     },
     obj41:{

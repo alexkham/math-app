@@ -2337,6 +2337,8 @@ When dealing with multiple random variables, the subscript keeps them distinct:
 
 With only one variable in context, you can drop the subscript and write $p(x)$.
 
+The full account of these marks — the mass/density split, the subscript conventions, and the confusions they invite — lives at [probability function notation](!/probability/probability-function#notation).
+
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
     `,

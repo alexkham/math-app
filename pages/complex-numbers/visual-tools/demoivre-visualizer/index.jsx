@@ -56,7 +56,7 @@ Try increasing $n$ with the slider while watching the spiral grow. Each click of
       before:``,
       after:`The frozen frame catches the fourth power mid-flight: three purple dots at $1+i$, $2i$, and $-2+2i$, each $45°$ further around and $\\sqrt{2}$ times further out, before the teal vector lands on $-4$. Both dashed circles are visible — the small navy one at $|z| = \\sqrt{2}$ and the teal one at $|z^4| = 4$ — with the whole [trail](!#reading-the-purple-trail-and-modulus-circles) strung between them.
 
-The landing point deserves a second look: $(1+i)^4$ is a *negative real number*, reached without a single negative sign in the base. Angle accumulation did it — four lots of $45°$ make the half-turn. Push on to the eighth power and the spiral [escapes the window](!#escaping-the-window) entirely.`,
+The landing point deserves a second look: $(1+i)^4$ is a **negative real number**, reached without a single negative sign in the base. Angle accumulation did it — four lots of $45°$ make the half-turn. Push on to the eighth power and the spiral [escapes the window](!#escaping-the-window) entirely.`,
       link:'',
     },
 
@@ -118,7 +118,7 @@ Now try changing $z$ to $-2$ (angle $180°$). The powers alternate between the p
       before:``,
       after:`The frozen frame is De Moivre's theorem with the rotation half switched off: no arcs anywhere, three doubling dots on the axis, and the dashed ray carrying the invisible $1024$ off to the right. Ordinary real exponentiation is the $\\theta = 0$ slice of the complex theory.
 
-That reading runs both ways: real powers were never a different subject, just the special case where angle multiplication has nothing to multiply. Compare the fully angular opposite — [the unit-circle state](!#unit-circle-rotation-when-z-1), where *only* the angle moves — and the general spirals are every mixture in between.`,
+That reading runs both ways: real powers were never a different subject, just the special case where angle multiplication has nothing to multiply. Compare the fully angular opposite — [the unit-circle state](!#unit-circle-rotation-when-z-1), where **only** the angle moves — and the general spirals are every mixture in between.`,
       link:'',
     },
 

@@ -1875,7 +1875,7 @@ const keyWords = [
               form: 'takes both signs',
               surface: 'saddle \u2014 hyperboloid',
             },
-            note: 'The form rises along the positive eigenvectors and falls along the negative ones, so the origin is a saddle rather than an extremum. A single sign disagreement is enough \u2014 which is why definiteness is a statement about *every* eigenvalue.',
+            note: 'The form rises along the positive eigenvectors and falls along the negative ones, so the origin is a saddle rather than an extremum. A single sign disagreement is enough \u2014 which is why definiteness is a statement about **every** eigenvalue.',
           },
         ],
       },

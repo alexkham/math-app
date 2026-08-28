@@ -230,7 +230,7 @@ This landmark anchors the whole page: every other [preset](!#landmark-angle-pres
       before:``,
       after:`The exact values are the ones every trig course memorizes: $\\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2} \\approx 0.866$ and $\\sin\\frac{\\pi}{6} = \\frac{1}{2}$ exactly. The frozen frame shows their geometric meaning — a wide, flat triangle whose base is $\\sqrt{3}$ times its height.
 
-Euler's formula turns the memorized pair into a single statement: $e^{i\\pi/6} = \\frac{\\sqrt{3}}{2} + \\frac{1}{2}i$. The complex exponential *is* the value table of trigonometry, one angle at a time.
+Euler's formula turns the memorized pair into a single statement: $e^{i\\pi/6} = \\frac{\\sqrt{3}}{2} + \\frac{1}{2}i$. The complex exponential **is** the value table of trigonometry, one angle at a time.
 
 Its mirror twin is [the 60° landmark](!#the-60-degree-landmark), where base and height trade lengths; between them sits [the balanced 45° case](!#the-45-degree-landmark).`,
       link:'',

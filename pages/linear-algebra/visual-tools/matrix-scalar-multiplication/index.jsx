@@ -160,7 +160,7 @@ Set the visualizer to $2 \\times 3$ and step through to see this animated symbol
       title: `Common Mistakes`,
       content: `A few mistakes recur.
 
-• **Multiplying only the first entry or only the diagonal** — $k$ multiplies *every* entry, not a privileged subset
+• **Multiplying only the first entry or only the diagonal** — $k$ multiplies **every** entry, not a privileged subset
 • **Confusing scalar multiplication with the Hadamard product** — $kA$ uses a single number; Hadamard product uses an entire matrix of multipliers
 • **Confusing scalar multiplication with matrix multiplication** — there is no row-column pairing; scalar multiplication is purely element-wise
 • **Thinking the shape changes** — $kA$ always has the same shape as $A$, regardless of $k$

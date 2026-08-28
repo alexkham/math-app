@@ -360,7 +360,7 @@ By definition, an [event](!/probability/events) is any subset of the [sample spa
  Event $C = \\{1, 2, 3, 4, 5, 6\\}$ (any outcome - certain event)
  Event $D = \\{\\}$ (impossible event)
  As the definition states and the example shows, [probability event](!/probability/events) may include one or more outcomes.It is a set of results counting as one event.         
- @academic[theorem:Probability is a function that assigns to each event in the sample space a real number in $[0,1]$ where total probability value of the entire sample space $𝑃(𝑆)=1$.]@
+ @academic[theorem:Probability is a function that assigns to each event in the sample space a real number in $[0,1]$ where total probability value of the entire sample space $P(S)=1$.]@
  @academic[theorem:This number is calculated as a ratio $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$]@
  Probability function satisfies three basic [axioms](!/probability#axioms) of probability.
  `
@@ -429,7 +429,7 @@ Even with powerful general tools—[probability distributions](!/probability#dis
       },
       distributions:{
         title:`Random Variables and Distributions`,
-        before:`As we defined earlier, sample space $𝑆$ is the full list of “all that can happen” in a given experiment.
+        before:`As we defined earlier, sample space $S$ is the full list of “all that can happen” in a given experiment.
 But are all outcomes equally likely?
 **The answer is: it depends.**
  As we know from everyday experience, some experiments—like flipping a fair coin or rolling a fair die—assign the same probability to each outcome, while in others certain outcomes carry more weight.

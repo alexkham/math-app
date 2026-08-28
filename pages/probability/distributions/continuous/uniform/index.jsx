@@ -1115,6 +1115,7 @@ import ContinuousUniformDistribution from '@/app/components/visualizations/proba
 import ContinuousUniformDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/ContinuousUniformDistributionCDF'
 import ContinuousUniformCalculator from '@/app/components/calculators/probability/distributions/continuous/UniformDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1244,25 +1245,44 @@ Choose a real number at random between 0 and 10, with no additional information.
   
   
     },
-    obj2:{
-      title:`Notation`,
-      content:`
-      $X \\sim U(a, b)$ — distribution of the [random variable](!/probability/random-variables).
-
-$X \\sim \\text{Uniform}(a, b)$ — alternative explicit form.
-
-$U(a, b)$ or $\\text{Unif}(a, b)$ — used to denote the distribution itself (not the [random variable](!/probability/random-variables)).
-
-$U(0, 1)$ — the standard uniform distribution on the unit interval.
-
-**Note:** The continuous uniform distribution is distinct from the discrete uniform distribution. The continuous version has a probability density function, while the discrete version has a probability mass function.
-      
-      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+    notation:{
+      title:`Continuous Uniform Notation`,
+      lead:`The flat distribution has the plainest marks in the family and one genuine hazard: $U(a, b)$ names this family and [the discrete uniform](!/probability/distributions/discrete/uniform#15) equally well. What follows fixes the declaration, the density height that is a width's reciprocal, and the endpoints that turn out not to matter. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); $f$ for density from the [probability function](!/probability/probability-function#notation); interval brackets from [interval notation](!/functions/domain#2); $E[X]$ and $\\operatorname{Var}(X)$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'declaration-and-standard',
+          tex:`$X \\sim U(a, b)$, $U(0,1)$`,
+          read:`uniform on the interval from a to b — and the standard unit case`,
+          means:`$U$, $\\operatorname{Unif}$, spelled-out $\\operatorname{Uniform}$; the two slots are the interval's endpoints, not a centre and a spread — unlike every other continuous family on the site, the parameters name **where** rather than how much. $U(0,1)$ is the standard instance and the source of essentially all computer-generated randomness.`,
+          cases:`The same $U(a,b)$ serves the [discrete uniform](!/probability/distributions/discrete/uniform#15), so texts that use both disambiguate in prose or switch to $\\operatorname{DU}$ for the discrete one; a density in the neighborhood settles it in this family's favor.`,
+          confusedWith:`A mean-and-spread pair. Reading $U(2, 8)$ as "centre 2, width 8" — the [normal's](!/probability/distributions/continuous/normal#2) habit — inverts the model completely; here the numbers are the interval's ends, and the centre $\\tfrac{a+b}{2}$ has to be computed.`,
+        },
+        {
+          id:'density-height',
+          tex:`$f(x) = \\dfrac{1}{b - a}$`,
+          read:`constant density: one over the interval's width`,
+          means:`A flat density whose height is fixed by the requirement that area equal one — so the height is the reciprocal of the width, with no $+1$ anywhere: the [discrete uniform's](!/probability/distributions/discrete/uniform#15) $1/(b-a+1)$ counts values, this measures an interval.`,
+          cases:`Narrow intervals push the height above one — $U(0, 0.5)$ has density $2$ everywhere — the family's cleanest demonstration that a [density is not a probability](!/probability/probability-function#notation); probability only appears after multiplying by a width.`,
+          confusedWith:`A probability of $\\tfrac{1}{b-a}$ per point. Every individual point carries probability zero here; the constant is a rate per unit length, and it becomes a probability only when an interval is specified.`,
+        },
+        {
+          id:'endpoint-irrelevance',
+          tex:`$[a, b]$ vs $(a, b)$`,
+          read:`closed or open — the same distribution either way`,
+          means:`Sources write the support as $[a,b]$, $(a,b)$ or any half-open mix, and all describe the same distribution: the endpoints are two points in an uncountable interval, so including or excluding them changes no probability at all. The [bracket-versus-parenthesis distinction](!/functions/domain#2) that decides membership elsewhere is inert here.`,
+          cases:`The contrast is exactly what makes it notable: on the [discrete uniform](!/probability/distributions/discrete/uniform#15) dropping an endpoint deletes an outcome and rescales every probability, while here it deletes nothing measurable — the same edit, two entirely different consequences.`,
+          confusedWith:`A meaningful distinction, imported from set theory. Arguing over whether $b$ "belongs" wastes the effort the notation is trying to save; what does matter is that $a < b$, since $a = b$ collapses the width and the density's denominator with it.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj3:{
@@ -2082,13 +2102,21 @@ export default function ContinuousUniformDistributionPage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-          
-      <div key={'notation-uniform'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-                {processContent(sectionsContent.obj2.content,)}
-            </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

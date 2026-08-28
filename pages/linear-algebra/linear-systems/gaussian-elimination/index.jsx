@@ -1318,7 +1318,7 @@ Each operation is reversible: swapping the same pair undoes the swap, scaling by
         tex: `$[A \\mid \\mathbf{b}]$`,
         read: `The augmented matrix — A, bar, b`,
         means: `The vertical bar is punctuation, not an operation: left of it, coefficient columns; right of it, the constants. The bar records where the $=$ signs of the original system stood, and it rides along unchanged through every row operation.`,
-        cases: `Erase the bar and the object changes species — from a record of a *system* to a plain $m \\times (n{+}1)$ matrix. Multiple right-hand sides stack more columns behind the bar: $[A \\mid \\mathbf{b}_1 \\; \\mathbf{b}_2]$, the device that computes an [inverse](!/linear-algebra/matrix/inverse) via $[A \\mid I]$.`,
+        cases: `Erase the bar and the object changes species — from a record of a **system** to a plain $m \\times (n{+}1)$ matrix. Multiple right-hand sides stack more columns behind the bar: $[A \\mid \\mathbf{b}_1 \\; \\mathbf{b}_2]$, the device that computes an [inverse](!/linear-algebra/matrix/inverse) via $[A \\mid I]$.`,
         alsoWritten: `$(A \\mid \\mathbf{b})$ with parentheses, matching this site's matrix brackets; some texts drop the bar entirely and trust the reader's memory — the bar exists so nobody has to.`,
         confusedWith: `A determinant or divisibility bar. The single upright stroke has many jobs; between matrix columns inside brackets it only ever separates.`,
       },
@@ -1326,8 +1326,8 @@ Each operation is reversible: swapping the same pair undoes the swap, scaling by
         id: 'replacement-direction',
         tex: `$R_i + cR_j \\to R_i$`,
         read: `Row i plus c times row j, replacing row i`,
-        means: `The arrow points at the row being *replaced* — that is the entire convention, and the entire hazard. In every legal addition step, the row that survives unscaled is the one being written over; row $j$ is only read, never changed.`,
-        cases: `Texts disagree on the spelling: $R_i \\to R_i + cR_j$ (arrow first), $R_i := R_i + cR_j$ (assignment), $R_i' = R_i + cR_j$ (primes). Same operation throughout — but the illegal move $cR_j \\to R_i$, overwriting a row with a multiple of *another*, destroys information and no notation makes it legal.`,
+        means: `The arrow points at the row being **replaced** — that is the entire convention, and the entire hazard. In every legal addition step, the row that survives unscaled is the one being written over; row $j$ is only read, never changed.`,
+        cases: `Texts disagree on the spelling: $R_i \\to R_i + cR_j$ (arrow first), $R_i := R_i + cR_j$ (assignment), $R_i' = R_i + cR_j$ (primes). Same operation throughout — but the illegal move $cR_j \\to R_i$, overwriting a row with a multiple of **another**, destroys information and no notation makes it legal.`,
         alsoWritten: `Annotations over a long arrow between displayed matrices — $\\xrightarrow{R_2 - 3R_1}$ — the compact form worked examples use.`,
         confusedWith: `The limit arrow. Same glyph as [approach](!/calculus/limits/two-sided#notation); here it means “becomes” — an update, not a tendency.`,
       },
@@ -1335,7 +1335,7 @@ Each operation is reversible: swapping the same pair undoes the swap, scaling by
         id: 'row-equivalence-tilde',
         tex: `$A \\sim B$`,
         read: `A is row-equivalent to B`,
-        means: `The tilde asserts that a chain of row operations connects $A$ to $B$ — entries differ, solution sets agree. It is precisely *not* equality: writing $=$ between elimination steps is the classic false statement, because the matrices are genuinely different.`,
+        means: `The tilde asserts that a chain of row operations connects $A$ to $B$ — entries differ, solution sets agree. It is precisely **not** equality: writing $=$ between elimination steps is the classic false statement, because the matrices are genuinely different.`,
         cases: `Every elimination chain is a chain of tildes ending in [echelon form](!/linear-algebra/linear-systems/echelon-form); the tilde is what licenses reading the final matrix's solutions as the first matrix's.`,
         alsoWritten: `$\\rightarrow$ between displayed matrices, arrow standing in for the tilde in worked examples — including this page's.`,
         confusedWith: `The tilde's other lives: [equivalent sets](!/set-theory/relationships) in set theory, “is distributed as” in statistics, $\\approx$'s single-stroke cousin for approximation. One squiggle, four fields, four meanings.`,
@@ -1799,7 +1799,7 @@ export default function GaussianEliminationPage({
             <IdentitySheet data={eliminationStages} theme="navy" variant="ledger" />
           </DiagramFrame>,
           `The classification stage is the one most easily skipped and the one that carries the most. Before any solution is written down, the pivot positions already give the rank, the free columns already give the number of parameters, and a contradiction row already settles that there is no solution at all. Work done after that point is filling in a shape that has already been determined.`,
-          `Between the two readings, back substitution wins on arithmetic and Gauss–Jordan wins on form. Continuing to the reduced row echelon form costs roughly half again as much for the same answer, which is a poor trade if solving is the goal. It is the right trade when the *form* is the goal — the RREF is unique where the REF is not, so it is what a null space basis, a matrix inverse, or a comparison between two matrices has to be read from.`,
+          `Between the two readings, back substitution wins on arithmetic and Gauss–Jordan wins on form. Continuing to the reduced row echelon form costs roughly half again as much for the same answer, which is a poor trade if solving is the goal. It is the right trade when the **form** is the goal — the RREF is unique where the REF is not, so it is what a null space basis, a matrix inverse, or a comparison between two matrices has to be read from.`,
         ]
     },
 ]

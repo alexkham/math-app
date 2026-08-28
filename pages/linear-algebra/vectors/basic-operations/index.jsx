@@ -1185,7 +1185,7 @@ Geometrically, vector addition has two equivalent visualizations. In the tip-to-
         id: 'components-and-columns',
         tex: `$\\mathbf{v} = (v_1, \\ldots, v_n)$`,
         read: `v with components v-one through v-n`,
-        means: `The subscript names a *coordinate slot* — $v_2$ is the second component of one vector, a scalar. Another job for the subscript, alongside the [sequence position](!/algebra/sequences/arithmetic#notation) and [root enumeration](!/algebra/equations/quadratic#notation) uses.`,
+        means: `The subscript names a **coordinate slot** — $v_2$ is the second component of one vector, a scalar. Another job for the subscript, alongside the [sequence position](!/algebra/sequences/arithmetic#notation) and [root enumeration](!/algebra/equations/quadratic#notation) uses.`,
         cases: `The tuple $(v_1, \\ldots, v_n)$ and the column $\\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix}$ carry the same data; the column form becomes obligatory once matrices enter, because matrix multiplication reads shapes. Row versus column is a real distinction there, not typography.`,
         alsoWritten: `$\\langle v_1, v_2 \\rangle$ — angle-bracket components in some American calculus texts; risky, since the same brackets later mean the inner product.`,
         confusedWith: `A point. $(3, 4)$ names both the point and the vector from the origin to it — same glyphs, and only context says whether it is a location or a displacement.`,

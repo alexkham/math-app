@@ -516,7 +516,7 @@ Click $1/i$ for the most striking case. The numerator $z_1 = 1$ has angle $0°$ 
       before:``,
       after:`The frozen frame completes the numbers: $(4+2i)/(1-i) = 1+3i$, with modulus $\\sqrt{20}/\\sqrt{2} = \\sqrt{10}$. Both halves of the [polar method](!#the-polar-geometric-method) are visible at once — the teal vector is shorter than the navy numerator by the denominator's length, and higher than it by the denominator's (negative) angle.
 
-The arc picture rewards attention: because the orange arc dips below the axis, the teal arc reaches *above* the navy one. Subtraction of angles, like subtraction of numbers, gets bigger when what you subtract is negative.`,
+The arc picture rewards attention: because the orange arc dips below the axis, the teal arc reaches **above** the navy one. Subtraction of angles, like subtraction of numbers, gets bigger when what you subtract is negative.`,
       link:'',
     },
 
@@ -530,7 +530,7 @@ Now change $z_2$ to $-3$. The denominator angle becomes $180°$, so the quotient
 
 These real-only cases produce the cleanest SVG snapshots: all vectors collinear along the real axis, with the quotient either shorter or longer than the numerator depending on whether $|z_2| > 1$ or $|z_2| < 1$.`,
       before:``,
-      after:`Note what the frozen frame does *not* contain: not a single angle arc. All three arguments are $0°$, so the entire [angle-subtraction machinery](!#the-three-angle-arcs-subtraction-in-action) sits idle — complex division restricted to the positive real axis is just the division you learned in school, and the picture honestly shows nothing more.
+      after:`Note what the frozen frame does **not** contain: not a single angle arc. All three arguments are $0°$, so the entire [angle-subtraction machinery](!#the-three-angle-arcs-subtraction-in-action) sits idle — complex division restricted to the positive real axis is just the division you learned in school, and the picture honestly shows nothing more.
 
 That makes this preset the baseline for every other one on this page: each of the others changes exactly one thing about this frame — an angle here, an axis there — and the arcs light up accordingly.`,
       link:'',
@@ -560,7 +560,7 @@ Dividing by $i$ is the inverse of multiplying by $i$. Multiplication by $i$ rota
 
 Try changing $z_1$ to other values while keeping $z_2 = i$. Every quotient is the numerator rotated $90°$ clockwise. Setting $z_1 = 1 + i$ gives $(1+i)/i = 1 - i$, confirmed by the green vector appearing in Quadrant IV.`,
       before:``,
-      after:`In the frozen frame the teal arc is the only one sweeping *below* the axis — the visual signature of a negative quotient angle. No navy arc exists (the numerator $1$ has angle zero), so the entire event is the orange $90°$ being subtracted.
+      after:`In the frozen frame the teal arc is the only one sweeping **below** the axis — the visual signature of a negative quotient angle. No navy arc exists (the numerator $1$ has angle zero), so the entire event is the orange $90°$ being subtracted.
 
 Every modulus in the frame is $1$, which makes this the division counterpart of the multiplication fact $i^2 = -1$: pure rotation, no scaling. One quarter-turn forward, one quarter-turn back — $(z \\cdot i)/i$ returns home, which is exactly what division being the inverse operation means. The full arc anatomy is described in [the three angle arcs](!#the-three-angle-arcs-subtraction-in-action).`,
       link:'',

@@ -212,7 +212,7 @@ export async function getStaticProps() {
   ],
   "conjugate_and_inverses": [
     {"symbol": "z̄", "latex_code": "\\bar{z}", "explanation": "The [complex conjugate](!/complex-numbers/complex-conjugate) of z. For z = a + bi, the conjugate is z̄ = a − bi."},
-    {"symbol": "z*", "latex_code": "z^*", "explanation": "Alternative notation for the [complex conjugate](!/complex-numbers/complex-conjugate), commonly used in physics and engineering."},
+    {"symbol": "z*", "latex_code": "z^*", "explanation": "Alternative notation for the [complex conjugate](!/complex-numbers/complex-conjugate#notation), commonly used in physics and engineering."},
     {"symbol": "−z", "latex_code": "-z", "explanation": "The [additive inverse](!/complex-numbers/additive-inverse) of z. For z = a + bi, we have −z = −a − bi. Satisfies z + (−z) = 0."},
     {"symbol": "z⁻¹", "latex_code": "z^{-1}", "explanation": "The [multiplicative inverse](!/complex-numbers/multiplicative-inverse) (reciprocal) of z. Satisfies z · z⁻¹ = 1. Equals z̄/|z|² for nonzero z."},
     {"symbol": "1/z", "latex_code": "\\frac{1}{z}", "explanation": "Reciprocal of z, equivalent to z⁻¹. Computed by multiplying numerator and denominator by the [conjugate](!/complex-numbers/complex-conjugate)."},

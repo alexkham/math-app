@@ -565,11 +565,11 @@ To explore, drag the **left endpoint a** and **right endpoint b** sliders to cha
 
 • **Quadratic** $f(x) = x^2$ — exactly one local minimum at the origin. The simplest non-trivial optimization.
 
-• **x³ − 3x** — a cubic with a local max and a local min. The canonical *both kinds at once* example.
+• **x³ − 3x** — a cubic with a local max and a local min. The canonical **both kinds at once** example.
 
 • **x³** — a critical point at the origin where $f'$ touches zero but doesn&apos;t change sign. The second-derivative test fails; first-derivative test reveals an inflection.
 
-• **x⁴ − 4x²** — a *W shape* with two local minima and a local maximum. Multiple extrema of mixed kinds.
+• **x⁴ − 4x²** — a **W shape** with two local minima and a local maximum. Multiple extrema of mixed kinds.
 
 **Transcendental:**
 
@@ -593,7 +593,7 @@ To explore, drag the **left endpoint a** and **right endpoint b** sliders to cha
 
 • Markers, drop lines, and table rows update together.
 
-If you set $a > b$, the tool silently swaps them — only the interval matters. If the interval shrinks below a tiny threshold, the table reports *interval too narrow* until you give it a real interval.
+If you set $a > b$, the tool silently swaps them — only the interval matters. If the interval shrinks below a tiny threshold, the table reports **interval too narrow** until you give it a real interval.
 
 This is useful for two reasons: you can zoom in on a single critical point to study it in isolation, or you can widen the window to see how many extrema a family produces over a long range.
 
@@ -669,7 +669,7 @@ The **Accent color** picker at the bottom recolors the live highlight throughout
 
     obj7: {
       title: `What Is Optimization`,
-      content: `**Optimization** in single-variable calculus means finding the maximum or minimum value a function takes — either over its entire domain (a *global* extremum) or over a restricted interval (a *local* extremum).
+      content: `**Optimization** in single-variable calculus means finding the maximum or minimum value a function takes — either over its entire domain (a **global** extremum) or over a restricted interval (a **local** extremum).
 
 The basic idea: at a smooth extremum, the tangent line is horizontal, so the derivative is zero. Solving $f'(c) = 0$ finds the candidates; the second-derivative test (or the first-derivative test as backup) classifies each one.
 

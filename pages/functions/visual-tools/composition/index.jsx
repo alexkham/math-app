@@ -261,7 +261,7 @@ The domain effects here are the extreme case of the patterns cataloged in [Domai
       before: ``,
       after: `As outer, $e^{\\sin x}$ oscillates between $e^{-1} \\approx 0.37$ and $e \\approx 2.72$: the sine's symmetric swing becomes an asymmetric breathing between reciprocal bounds, always positive. As inner, $\\sin(e^x)$ is flat and slow on the far left (where $e^x$ barely moves) and oscillates ever faster to the right as $e^x$ explodes.
 
-The exponential's signature — turning addition into multiplication — shows in the outer role: equal ups and downs of sine become equal *ratios* above and below $1$.
+The exponential's signature — turning addition into multiplication — shows in the outer role: equal ups and downs of sine become equal **ratios** above and below $1$.
 
 Its inverse partnership with the [logarithm](!#composing-with-the-logarithm) collapses both compositions to the identity — the special case given its own section in [the inverse pair](!#the-inverse-pair-exponential-and-logarithm).`,
       link: '',
@@ -270,7 +270,7 @@ Its inverse partnership with the [logarithm](!#composing-with-the-logarithm) col
       title: `Composing with the Logarithm`,
       content: `The logarithm is the fussiest function in the picker — it demands positive input, so its compositions live or die by what the inner function delivers.`,
       before: ``,
-      after: `As outer, $\\ln(x^2)$ survives everywhere except $x = 0$: the squaring feeds it positive values on both sides, doubling the log's usual half-line domain into two mirrored branches. This is the domain-*expansion* trick — the composed domain is bigger than the log's own.
+      after: `As outer, $\\ln(x^2)$ survives everywhere except $x = 0$: the squaring feeds it positive values on both sides, doubling the log's usual half-line domain into two mirrored branches. This is the domain-**expansion** trick — the composed domain is bigger than the log's own.
 
 As inner, $(\\ln x)^2$ keeps the log's restriction: nothing exists for $x \\leq 0$. The squared output bends the log's slow climb into a valley bottoming at $x = 1$, where $\\ln 1 = 0$.
 
@@ -314,7 +314,7 @@ Like the [quadratic](!#composing-with-the-quadratic), an inner $|x|$ forces even
       title: `Composing with the Square Root`,
       content: `The square root brings the sharpest domain scissors in the picker: whatever the inner function sends below zero is simply cut away.`,
       before: ``,
-      after: `As outer, $\\sqrt{\\sin x}$ exists only where $\\sin x \\geq 0$ — the positive arches survive as rounded humps and the negative dips vanish entirely, leaving a curve that lives on alternating intervals $[2k\\pi, (2k{+}1)\\pi]$. As inner, $\\sin(\\sqrt{x})$ exists only for $x \\geq 0$ and oscillates ever more *slowly*, since $\\sqrt{x}$ feeds sine a decelerating input — the mirror image of the accelerating $\\sin(x^2)$.
+      after: `As outer, $\\sqrt{\\sin x}$ exists only where $\\sin x \\geq 0$ — the positive arches survive as rounded humps and the negative dips vanish entirely, leaving a curve that lives on alternating intervals $[2k\\pi, (2k{+}1)\\pi]$. As inner, $\\sin(\\sqrt{x})$ exists only for $x \\geq 0$ and oscillates ever more **slowly**, since $\\sqrt{x}$ feeds sine a decelerating input — the mirror image of the accelerating $\\sin(x^2)$.
 
 An outer root censors the inner function's negative stretches; an inner root restricts the axis and stretches the pacing. Two different scissors from the same function.
 
@@ -325,7 +325,7 @@ Its algebraically famous pairing with the quadratic — $\\sqrt{x^2}$ versus $(\
       title: `The Inverse Pair: Exponential and Logarithm`,
       content: `Pick $e^x$ and $\\ln x$ together, in either order, and composition performs its most elegant trick: both curves collapse onto the line $y = x$.`,
       before: ``,
-      after: `The collapse is the *definition* of inverse functions made visible: $f$ and $g$ are inverses exactly when $f \\circ g$ and $g \\circ f$ are the identity. The frozen scene shows the fine print too — $e^{\\ln x} = x$ exists only for $x > 0$ (blue half-line), while $\\ln(e^x) = x$ holds for every real $x$ (amber full line).
+      after: `The collapse is the **definition** of inverse functions made visible: $f$ and $g$ are inverses exactly when $f \\circ g$ and $g \\circ f$ are the identity. The frozen scene shows the fine print too — $e^{\\ln x} = x$ exists only for $x > 0$ (blue half-line), while $\\ln(e^x) = x$ holds for every real $x$ (amber full line).
 
 That asymmetry between the two identity-copies is not a defect; it records the original domains. Undoing in one order can only recover what the first function accepted.
 

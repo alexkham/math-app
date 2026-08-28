@@ -17,6 +17,7 @@ import BinomialDistributionCDF from '@/app/components/visualizations/probability
 import BinomialCalculator from '@/app/components/calculators/probability/distributions/BinomialDistributionCalculator'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -151,13 +152,13 @@ Flipping a coin $10$ times and counting how many times it lands heads. Each flip
     obj2:{
       title:`Parameters`,
       content:`
-      $𝑛$ : fixed number of independent trials;
+      $n$ : fixed number of independent trials;
 
-$𝑝$ : probability of success in each trial;
+$p$ : probability of success in each trial;
 
-This distribution models the number of successes when repeating the same binary experiment $𝑛$ times under identical conditions. The two parameters fully describe the setup: 
+This distribution models the number of successes when repeating the same binary experiment $n$ times under identical conditions. The two parameters fully describe the setup: 
 
-$𝑛$ gives the structure — how many attempts, and $𝑝$ defines the behavior of each — what chance success has.
+$n$ gives the structure — how many attempts, and $p$ defines the behavior of each — what chance success has.
 
 It's useful to compare with the negative binomial, where instead of fixing how many trials you run, you fix how many successes you want and ask: how many trials will it take? Both deal with repeated binary outcomes, but what's held constant — trials vs. successes — flips.
       `,
@@ -227,7 +228,7 @@ $\\binom{n}{i}$ = binomial coefficient "$n$ choose $i$"
 **Definition**: The [CDF](!/probability/cdf) gives the probability of observing $k$ or fewer successes in $n$ trials.
 
 **Summation of Probabilities**: 
-Since we want the probability of getting *at most* $k$ successes, we sum the individual probabilities from 0 successes up to $k$ successes:
+Since we want the probability of getting **at most** $k$ successes, we sum the individual probabilities from 0 successes up to $k$ successes:
 
 $$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$
 
@@ -469,45 +470,45 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
     },
 
 
-    obj15:{
-  
-      title:`Notation Used`,
-      content:`
-$X \\sim \\text{Bin}(n, p)$ or $X \\sim \\text{B}(n, p)$ — **distribution of the random variable**.  
+    notation:{
 
-$\\text{Binomial}(n, p)$ — **used to denote the distribution itself (not the random variable)**.
-
-$B(n,p)$ — **occasionally used in theoretical or formal contexts (less common)**.
-
-$P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k}$ — **probability mass function (PMF)**, where:
-
-\t$n$ — number of trials
-
-\t$p$ — probability of success on each trial
-
-\t$k$ — number of successes ($k = 0, 1, 2, \\ldots, n$)
-
-\t$\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ — binomial coefficient
-
-**Alternative notations:**
-
-\t$q = 1 - p$ — probability of failure, so PMF can be written as $P(X = k) = \\binom{n}{k} p^k q^{n-k}$
-
-\t$X \\sim \\text{Binomial}(n, p)$ — more verbose but explicit
-
-**Key properties:**
-
-\t$E[X] = np$ — expected value (mean)
-
-\t$\\text{Var}(X) = np(1-p)$ — variance
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-     
-`,
+      title:`Binomial Notation`,
+      lead:`The binomial's marks are the [family-declaration convention](!/probability/distributions#notation) at its busiest: three spellings of the family name, a standing abbreviation for failure, and a pmf line that carries its own domain and its own parameter punctuation. All of them are catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and the capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); the coefficient's spellings and its not-a-fraction stack from [binomial coefficient notation](!/combinatorics/binomial-coefficient#notation); $E[X]$ and $\\operatorname{Var}(X)$ — here $np$ and $npq$, derived in **Expected Value** and **Variance** below — from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'family-spellings',
+          tex:`$X \\sim \\operatorname{Bin}(n, p)$`,
+          read:`X follows a binomial distribution with n trials and success probability p`,
+          means:`Three spellings of one family name: $\\operatorname{Bin}(n,p)$ the standard abbreviation, $\\operatorname{Binomial}(n,p)$ written out when explicitness matters, and $B(n,p)$ — common in school and exam-board texts. The argument order is fixed: trials first, success probability second, and the naked family name denotes the distribution itself while $X \\sim$ attaches it to a variable.`,
+          alsoWritten:`$\\operatorname{Bi}(n,p)$ in some older texts; the single-trial case drops to $\\operatorname{Bern}(p)$ — the Bernoulli member the **Expected Value** derivation below decomposes into.`,
+          confusedWith:`The Beta function. Capital $B(a, b)$ already names Euler's Beta in the same probabilistic neighborhood — the letter alone cannot say which is meant, which is why $\\operatorname{Bin}$ is the safer spelling wherever both objects circulate.`,
+        },
+        {
+          id:'q-abbreviation',
+          tex:`$q = 1 - p$`,
+          read:`q — the failure probability, one minus p`,
+          means:`A standing abbreviation, not a new parameter: once $p$ is fixed, $q$ is determined, and the letter exists purely to compress formulas — the pmf's tail becomes $q^{n-k}$ and the variance reads $npq$ instead of $np(1-p)$.`,
+          cases:`The convention travels with the whole trials family — [geometric](!/probability/distributions/discrete/geometric) and [negative binomial](!/probability/distributions/discrete/negative-binomial) formulas lean on the same $q$ — so a reader meeting $q$ cold should first look for the $p$ it silently complements.`,
+          confusedWith:`A free parameter. Nothing is ever declared $\\operatorname{Bin}(n, p, q)$ — writing $q$ into a declaration double-counts one degree of freedom; $q$ appears only inside formulas, always on $p$'s leash.`,
+        },
+        {
+          id:'pmf-line',
+          tex:`$P(X{=}k) = \\binom{n}{k} p^k q^{n-k},\\ \\ k = 0, \\ldots, n$`,
+          read:`the pmf — with its domain riding on the same line`,
+          means:`The trailing clause $k = 0, \\ldots, n$ is part of the statement, not an afterthought: a pmf line carries its own support, and outside that list the probability is zero by convention. The three-factor logic is **Probability Mass Function** territory below; the coefficient's competing spellings belong to [binomial coefficient notation](!/combinatorics/binomial-coefficient#notation).`,
+          alsoWritten:`Statistics texts write $P(k;\\, n, p)$ — the semicolon fences the value off from the parameters: what stands left of it varies, what stands right of it is fixed by the model.`,
+          confusedWith:`The comma's job. In $P(k; n, p)$ the semicolon separates a value from parameters; a comma in that position — $P(k, n, p)$ — would read as a [joint probability](!/probability/joint-probability#notation) of three random quantities, a completely different claim one keystroke away.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj16:{
@@ -733,13 +734,21 @@ export default function BinomialDistributionPage({
     },
      {
         id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-
-           <div key={'notation-binomial'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-                      {processContent(sectionsContent.obj15.content,)}
-                  </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

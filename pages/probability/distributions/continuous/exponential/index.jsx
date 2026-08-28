@@ -1122,6 +1122,7 @@ import ExponentialDistribution from '@/app/components/visualizations/probability
 import ExponentialDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/ExponentialDistributionCDF'
 import ExponentialDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/ExponentialDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1257,25 +1258,44 @@ Consider the time until the next phone call arrives at a quiet call center where
   
   
     },
-    obj2:{
-      title:`Notation`,
-      content:`
-      $X \\sim \\text{Exp}(\\lambda)$ — distribution of the [random variable](!/probability/random-variables) (rate parameterization).
-
-$X \\sim \\text{Exponential}(\\lambda)$ — alternative explicit form.
-
-$\\text{Exp}(\\lambda)$ — used to denote the distribution itself (not the [random variable](!/probability/random-variables)).
-
-$X \\sim \\text{Exp}(\\beta)$ — scale parameterization where $\\beta = 1/\\lambda$ is the mean.
-
-**Note:** Always check whether the parameter represents the rate (λ) or the scale (β = 1/λ). Statistical software may use either convention. The rate parameterization is more common in probability theory.
-      
-      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+    notation:{
+      title:`Exponential Distribution Notation`,
+      lead:`The exponential's marks answer three questions the letters alone cannot: whether the parameter in the parenthesis is a rate or a mean, how the density and the tail share one exponent, and how the no-memory identity looks with real-valued slots. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); $e$ and its exponentials from [exponential function notation](!/algebra/powers/exponential-functions#notation); the given-bar from [conditional probability notation](!/probability/conditional-probability#notation); $F$ and the survival contrast from [CDF notation](!/probability/cdf#notation).`,
+      entries:[
+        {
+          id:'rate-vs-scale',
+          tex:`$X \\sim \\operatorname{Exp}(\\lambda)$ vs $\\operatorname{Exp}(\\beta)$`,
+          read:`exponential with rate lambda — or with scale beta, its reciprocal`,
+          means:`One slot, two rival readings: $\\lambda$ the **rate** (events per unit time — probability theory's usual choice) or $\\beta = 1/\\lambda$ the **scale**, which is the mean wait itself; much statistical software parameterizes by scale. The mean is the fingerprint: $E[X] = 1/\\lambda$ under rate, $E[X] = \\beta$ under scale — if the declared parameter equals the average wait, you are reading the scale convention.`,
+          cases:`This $\\lambda$ is the [Poisson's](!/probability/distributions/discrete/poisson#15) $\\lambda$, unchanged: one process, two questions — count the events per window and the count is $\\operatorname{Pois}(\\lambda)$, time the gap to the next and the wait is $\\operatorname{Exp}(\\lambda)$; the letter crossing the discrete/continuous line is the notation's way of saying it is the same phenomenon.`,
+          confusedWith:`Its own reciprocal. Feeding a rate into a scale slot (or back) turns a 10-minute average wait into a 6-per-hour rate misread as a 6-minute wait — the same silent-rescaling family as the [normal's second slot](!/probability/distributions/continuous/normal#2), with a reciprocal instead of a square root.`,
+        },
+        {
+          id:'pdf-survival-pair',
+          tex:`$f(x) = \\lambda e^{-\\lambda x}$, $P(X > x) = e^{-\\lambda x}$`,
+          read:`the density — and the survival tail, sharing one exponent`,
+          means:`Two marks, one exponent: the density starts at height $\\lambda$ and decays by $e^{-\\lambda x}$, and the tail probability is the bare exponential itself — the closed-form survival that makes this family the continuous twin of the [geometric's](!/probability/distributions/discrete/geometric#15) $q^k$. Written $S(x)$ where the survival function gets its own letter, it is $1 - F(x)$ in [CDF](!/probability/cdf#notation) terms.`,
+          cases:`The density's starting height IS the rate — so for $\\lambda > 1$ the curve begins above $1$, the flagship reminder that a [density is not a probability](!/probability/probability-function#notation); the support clause $x \\ge 0$ rides the definition, waits being non-negative by nature.`,
+          confusedWith:`Each other. $f(x)$ and $P(X > x)$ differ only by the leading $\\lambda$ — dropping or doubling it swaps a density for a probability mid-computation, and only the context (integrating vs evaluating) says which object is in hand.`,
+        },
+        {
+          id:'memoryless-continuous',
+          tex:`$P(X > s + t \\mid X > s) = P(X > t)$`,
+          read:`having waited s already, the remaining wait behaves like a fresh start`,
+          means:`The no-memory identity with real-valued slots — the continuous half of the pair whose discrete half lives at [geometric notation](!/probability/distributions/discrete/geometric#15). Among continuous distributions the exponential is the **only** one satisfying this line; **Properties** below walks the characterization.`,
+          cases:`The proof is the survival formula doing one division: $e^{-\\lambda(s+t)} / e^{-\\lambda s} = e^{-\\lambda t}$ — exponents subtracting is precisely what "no memory" looks like in algebra.`,
+          confusedWith:`Wear and ageing. Applying the identity to components that physically degrade reads the mark where its assumption fails — the formula describes waits driven by constant rates, and its very cleanness is the warning to check that the rate truly is constant.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj3:{
@@ -2089,13 +2109,21 @@ export default function ExponentialDistributionPage({
     },
     {
         id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-          
-    <div key={'notation-exponential'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-              {processContent(sectionsContent.obj2.content,)}
-          </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

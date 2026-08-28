@@ -3240,7 +3240,7 @@ export default function DimensionPage({seoData, sectionsContent, introContent, s
           >
             <ObjectTypeProfile data={subspaceSums} theme="navy" variant="stack" />
           </DiagramFrame>,
-          `The uniqueness column is the one that matters, and it is easy to read past. In a general sum a vector can usually be written as $\\mathbf{w}_1 + \\mathbf{w}_2$ in many ways — shift any element of the intersection from one part to the other and the sum is unchanged. A trivial intersection removes that freedom entirely, which is why the direct sum is the condition under which a decomposition can be spoken of as *the* decomposition.`,
+          `The uniqueness column is the one that matters, and it is easy to read past. In a general sum a vector can usually be written as $\\mathbf{w}_1 + \\mathbf{w}_2$ in many ways — shift any element of the intersection from one part to the other and the sum is unchanged. A trivial intersection removes that freedom entirely, which is why the direct sum is the condition under which a decomposition can be spoken of as **the** decomposition.`,
         ]
     },
     {

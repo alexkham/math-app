@@ -249,7 +249,7 @@ A note on convention: whether the natural numbers include $0$ varies by source. 
         id: 'power-anatomy',
         tex: `$a^n$`,
         read: `a to the n; a squared, a cubed for n = 2, 3`,
-        means: `Two slots: base below, count above — the raised position *is* the operator, as the **Definition** above spells out. The exponent $1$ is never written: $a^1 = a$.`,
+        means: `Two slots: base below, count above — the raised position **is** the operator, as the **Definition** above spells out. The exponent $1$ is never written: $a^1 = a$.`,
         cases: `$n = 2$ reads “squared”, $n = 3$ “cubed” — geometry's area and volume speaking; from $n = 4$ it is plain “to the fourth”.`,
         alsoWritten: `@[a^n]@ with a caret in plain text and on calculators, @[a**n]@ in most programming languages — ASCII stand-ins for the superscript.`,
         confusedWith: `Multiplication. $2^3 = 8$, not $6$ — the exponent counts factors; it never multiplies the base.`,

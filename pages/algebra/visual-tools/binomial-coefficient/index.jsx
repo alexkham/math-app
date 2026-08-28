@@ -59,7 +59,7 @@ export async function getStaticProps(){
       title: `Getting Started`,
       content: `The tool opens with $n = 3$ loaded and the **Decision Tree** view active. The top of the workspace has three controls:
 
-• **View switcher** — three tabs at the top: *Decision Tree*, *Distribution*, *Pascal Paths*. Each tab is a different lens on the same idea.
+• **View switcher** — three tabs at the top: **Decision Tree**, **Distribution**, **Pascal Paths**. Each tab is a different lens on the same idea.
 
 • **n picker** — a row of buttons numbered 1 through 5 with the formula $(a+b)^n$ displayed for the current value of $n$.
 
@@ -73,7 +73,7 @@ To explore quickly:
 
 • In the Decision Tree, hover any leaf or group card to highlight the matching paths.
 
-• In the Distribution view, press *Step* or *Auto-expand* to fill the buckets one product at a time.
+• In the Distribution view, press **Step** or **Auto-expand** to fill the buckets one product at a time.
 
 • In the Pascal Paths view, hover any cell to see every path from the top that lands there.`,
       before: ``,
@@ -137,7 +137,7 @@ Interaction:
 
 The big insight: hover the middle group when $n = 4$ and watch six different paths light up &mdash; that&apos;s why the coefficient of $a^2 b^2$ is $6$, not $1$.`,
       before: ``,
-      after: `The frozen frame above captures the default $n = 3$ tree in full: eight leaves in four color groups, and the group cards doing the counting — $1, 3, 3, 1$. The deeper point the tree makes is about *why* multiplication produces coefficients at all: algebra never adds anything during expansion, it only enumerates. The coefficient $3$ on $a^2b$ exists because three distinct histories ($aab$, $aba$, $baa$) produce indistinguishable products, and the tree is the only view where those histories remain visually separate.
+      after: `The frozen frame above captures the default $n = 3$ tree in full: eight leaves in four color groups, and the group cards doing the counting — $1, 3, 3, 1$. The deeper point the tree makes is about **why** multiplication produces coefficients at all: algebra never adds anything during expansion, it only enumerates. The coefficient $3$ on $a^2b$ exists because three distinct histories ($aab$, $aba$, $baa$) produce indistinguishable products, and the tree is the only view where those histories remain visually separate.
 
 The degenerate end of this picture — a tree with a single split — is worth a look of its own: [the base case n = 1](!#the-base-case-n-1). And the same 8 histories reappear as delivery pellets in the [Distribution view](!#distribution-view), collapsed into buckets the moment they land.`,
       link: '',
@@ -163,7 +163,7 @@ Three controls drive the animation:
 
 By the time all $2^n$ products are delivered, each bucket holds exactly $\\binom{n}{k}$ pellets. The final expansion box at the bottom lights up to show the resulting polynomial.`,
       before: ``,
-      after: `The frame above freezes the finished run at $n = 3$: the last product $b \\cdot b \\cdot b$ locked in the factor boxes, eight pellets sorted $1{+}3{+}3{+}1$ into their buckets, and the expansion line lit. Where the tree shows the choice *structure*, this view shows the choice *process* — the same $2^n$ sequences arriving one at a time, which is exactly what "multiplying out the brackets" means when done honestly.
+      after: `The frame above freezes the finished run at $n = 3$: the last product $b \\cdot b \\cdot b$ locked in the factor boxes, eight pellets sorted $1{+}3{+}3{+}1$ into their buckets, and the expansion line lit. Where the tree shows the choice **structure**, this view shows the choice **process** — the same $2^n$ sequences arriving one at a time, which is exactly what "multiplying out the brackets" means when done honestly.
 
 The pellets keep their identity inside the buckets (each is labeled with its history, $aab$ or $bba$), so the frozen frame doubles as a proof that no product was lost or double-counted: eight sequences in, eight pellets out. The [Pascal Paths view](!#pascal-paths-view) then abandons the products entirely and keeps only the counting.`,
       link: '',
@@ -279,7 +279,7 @@ The triangle&apos;s rows are built up using this rule alone: start with $\\binom
       title: `The Base Case n = 1`,
       content: `Set $n = 1$ in the Decision Tree view and the whole apparatus shrinks to its atom: one split, two leaves ($a$ and $b$), two groups of size one, and the expansion $(a+b)^1 = a + b$.`,
       before: ``,
-      after: `Trivial cases earn their sections by calibrating everything else. Here the tree *is* one binary choice, so every claim the tool makes becomes checkable by eye: $2^1 = 2$ leaves, coefficients $1, 1$ matching row 1 of Pascal's triangle, and group size equal to path count because each group holds exactly one path.
+      after: `Trivial cases earn their sections by calibrating everything else. Here the tree **is** one binary choice, so every claim the tool makes becomes checkable by eye: $2^1 = 2$ leaves, coefficients $1, 1$ matching row 1 of Pascal's triangle, and group size equal to path count because each group holds exactly one path.
 
 The base case is also the induction seed the other frames grow from: the $n = 3$ tree is this split repeated at every node, three levels deep. Read them in sequence — this frame, then [the full Decision Tree view](!#decision-tree-view) — and the doubling $2 \\to 4 \\to 8$ that produces the $2^n$ law is visible as pure branching.`,
       link: '',
@@ -289,7 +289,7 @@ The base case is also the induction seed the other frames grow from: the $n = 3$
       title: `The Fifth Row`,
       content: `The other extreme: $n = 5$ in the Pascal Paths view, frozen with cell $(5, 2)$ engaged — ten amber paths converging on the value $10$, the largest coefficient the tool displays.`,
       before: ``,
-      after: `Ten paths is where counting by eye starts to fail, which is precisely the frame's point: the coefficient $10$ is no longer surveyable as a picture, but it is still *computable* as $C(5,2) = 5!/(2! \\cdot 3!)$ — the moment the formula earns its keep over enumeration. The fan of overlapping routes conveys the growth honestly: rows sum to $2^n$, and by row five that is already $32$.
+      after: `Ten paths is where counting by eye starts to fail, which is precisely the frame's point: the coefficient $10$ is no longer surveyable as a picture, but it is still **computable** as $C(5,2) = 5!/(2! \\cdot 3!)$ — the moment the formula earns its keep over enumeration. The fan of overlapping routes conveys the growth honestly: rows sum to $2^n$, and by row five that is already $32$.
 
 The frame also shows why the tool caps at $n = 5$: another row would double the path counts again and the visualization would stop informing. The cap is not a limitation of the mathematics — the factorial formula continues indefinitely — but an honest boundary of what pictures can teach. Beyond it, the [Pascal Paths view](!#pascal-paths-view)'s ideas carry on symbolically.`,
       link: '',

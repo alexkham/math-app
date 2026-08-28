@@ -338,7 +338,7 @@ The explicit formula $a_n = a_1 + (n-1)d$ has the same structure as a linear fun
         id: 'position-subscript',
         tex: `$a_n$`,
         read: `a sub n — the n-th term`,
-        means: `The subscript is a *position*: $a_7$ is whatever sits in seventh place. One letter plus a counter names infinitely many values — the counter $n$ ranges, unlike the fixed job-title subscripts of [polynomial coefficients](!/algebra/polynomials/roots#notation) or the two-name enumeration of [quadratic roots](!/algebra/equations/quadratic#notation).`,
+        means: `The subscript is a **position**: $a_7$ is whatever sits in seventh place. One letter plus a counter names infinitely many values — the counter $n$ ranges, unlike the fixed job-title subscripts of [polynomial coefficients](!/algebra/polynomials/roots#notation) or the two-name enumeration of [quadratic roots](!/algebra/equations/quadratic#notation).`,
         cases: `Where counting starts is a convention: this page and most school texts begin at $a_1$; computer science and many analysis texts begin at $a_0$, which shifts every formula — the general term becomes $a_0 + nd$, not $a_1 + (n-1)d$.`,
         alsoWritten: `$a(n)$ — function notation, honest about what a sequence is (a function on the integers) but rare in print.`,
         confusedWith: `An exponent's job. $a_n$ selects, $a^n$ multiplies — the raised/lowered distinction carries the entire meaning.`,

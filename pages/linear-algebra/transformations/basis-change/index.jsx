@@ -1543,7 +1543,7 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
           >
             <IdentitySheet data={canonicalForms} theme="navy" variant="ledger" />
           </DiagramFrame>,
-          `Read downward and the hypotheses weaken while the form degrades in step. Distinct eigenvalues give a diagonal matrix and are easy to check; symmetry gives a diagonal matrix and an orthogonal $P$, so the inverse is a transpose; matching multiplicities is the exact condition and is the one that actually has to be tested. Below that line no diagonal form exists, and the question changes from *how do I diagonalize this* to *what is the best I can do*.`,
+          `Read downward and the hypotheses weaken while the form degrades in step. Distinct eigenvalues give a diagonal matrix and are easy to check; symmetry gives a diagonal matrix and an orthogonal $P$, so the inverse is a transpose; matching multiplicities is the exact condition and is the one that actually has to be tested. Below that line no diagonal form exists, and the question changes from **how do I diagonalize this** to **what is the best I can do**.`,
           `The last two rows answer that differently and it is worth knowing which is used. The Jordan form is the more informative — the ones on its superdiagonal count precisely how many eigenvectors each eigenvalue is missing — but it is numerically unusable, since an arbitrarily small perturbation can change the block structure entirely. The Schur form gives up on diagonal blocks and settles for triangular, in exchange for a unitary $P$ and stability. Libraries compute Schur; textbooks prove Jordan.`,
         ]
     },

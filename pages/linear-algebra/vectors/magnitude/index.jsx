@@ -1144,7 +1144,7 @@ The geometric intuition is the same in both cases: the magnitude is the straight
         means: `The subscript selects a member of the norm family that **The General Norm** below names in words: $1$ sums absolute values, $2$ is the Euclidean default, $\\infty$ takes the largest component. An unsubscripted $\\|\\mathbf{v}\\|$ means the $2$-norm.`,
         cases: `The same family carries the script-ell names $\\ell^1, \\ell^2, \\ell^{\\infty}$ — the letter honours Lebesgue, and the script form exists because a plain $l$ drowns among $1$ and $I$ in print.`,
         alsoWritten: `$\\|\\mathbf{v}\\|_p$ — the general member, exponent $p$ inside the sum, $p$-th root outside.`,
-        confusedWith: `A component index. $\\|\\mathbf{v}\\|_2$ is not “the norm of the second component” — on a norm, the subscript picks the *measuring rule*, not a slot.`,
+        confusedWith: `A component index. $\\|\\mathbf{v}\\|_2$ is not “the norm of the second component” — on a norm, the subscript picks the **measuring rule**, not a slot.`,
       },
       {
         id: 'unit-hat',

@@ -776,7 +776,7 @@ The pair of De Morgan frames is the catalog's starkest duality display: 1 versus
       title: `Difference over a Union`,
       content: `$A \\setminus (B \\cup C) = (A \\setminus B) \\cap (A \\setminus C)$: both frames shade one region — A-only, the part of $A$ clear of both neighbors.`,
       before: ``,
-      after: `Removing a union removes everything either set touches, so what survives must avoid $B$ *and* avoid $C$ — an intersection of the two one-sided differences. Rewrite $\\setminus$ as intersection-with-complement and this is literally the first De Morgan law wearing subtraction clothes: $A \\cap (B \\cup C)' = A \\cap B' \\cap C'$.
+      after: `Removing a union removes everything either set touches, so what survives must avoid $B$ **and** avoid $C$ — an intersection of the two one-sided differences. Rewrite $\\setminus$ as intersection-with-complement and this is literally the first De Morgan law wearing subtraction clothes: $A \\cap (B \\cup C)' = A \\cap B' \\cap C'$.
 
 The same single region reappears in [the nested difference](!#the-nested-difference), reached by subtracting sequentially instead of at once — one identity, three notations.`,
       link: '',
@@ -786,7 +786,7 @@ The same single region reappears in [the nested difference](!#the-nested-differe
       title: `Difference over an Intersection`,
       content: `$A \\setminus (B \\cap C) = (A \\setminus B) \\cup (A \\setminus C)$: three regions — everything in circle $A$ except the central core.`,
       before: ``,
-      after: `Removing only the intersection is the gentlest subtraction: an element of $A$ is deleted only if *both* $B$ and $C$ claim it. Escaping either one suffices to stay — hence the union of the two differences on the right.
+      after: `Removing only the intersection is the gentlest subtraction: an element of $A$ is deleted only if **both** $B$ and $C$ claim it. Escaping either one suffices to stay — hence the union of the two differences on the right.
 
 This is the second De Morgan law in subtraction form ($A \\cap (B \\cap C)' = A \\cap (B' \\cup C')$). Comparing its three shaded regions with the single region of [difference over a union](!#difference-over-a-union) shows at a glance how much more a union takes away than an intersection.`,
       link: '',

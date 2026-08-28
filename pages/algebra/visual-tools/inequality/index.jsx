@@ -82,7 +82,7 @@ The currently active type is highlighted in blue. The five families are [polynom
 
     obj3: {
       title: `Direction and Strictness`,
-      content: `Two controls determine *which* inequality you are solving for the current $f(x)$:
+      content: `Two controls determine **which** inequality you are solving for the current $f(x)$:
 
 • **Direction** — choose between $>$, $<$, $\\geq$, or $\\leq$. Selecting $>$ asks for $x$ where $f(x)$ is positive; selecting $\\leq$ asks for $x$ where $f(x)$ is non-positive
 • **Strictness** — toggles between strict ($>$, $<$) and non-strict ($\\geq$, $\\leq$). The strict and non-strict versions of an inequality differ only at the boundary points (zeros of $f$): strict excludes them, non-strict includes them
@@ -154,9 +154,9 @@ If the marble sits at a pole, the Live tab flags $f(x)$ as undefined and notes t
 
     obj8: {
       title: `What an Inequality Means Geometrically`,
-      content: `The inequality $f(x) > 0$ asks for every $x$ at which the graph $y = f(x)$ sits *above* the $x$-axis. The inequality $f(x) < 0$ asks for every $x$ where the graph sits *below*. The non-strict versions $\\geq$ and $\\leq$ include the boundary points where the graph touches the $x$-axis.
+      content: `The inequality $f(x) > 0$ asks for every $x$ at which the graph $y = f(x)$ sits **above** the $x$-axis. The inequality $f(x) < 0$ asks for every $x$ where the graph sits **below**. The non-strict versions $\\geq$ and $\\leq$ include the boundary points where the graph touches the $x$-axis.
 
-Unlike equations — whose solutions are typically isolated points where the curve crosses a level — inequalities have solution sets that are *regions* of the real line, almost always unions of intervals. A linear inequality has one half-line as its solution; a quadratic produces either a bounded interval, two unbounded intervals, an empty set, or the whole real line; rational inequalities can have arbitrarily many disjoint pieces.
+Unlike equations — whose solutions are typically isolated points where the curve crosses a level — inequalities have solution sets that are **regions** of the real line, almost always unions of intervals. A linear inequality has one half-line as its solution; a quadratic produces either a bounded interval, two unbounded intervals, an empty set, or the whole real line; rational inequalities can have arbitrarily many disjoint pieces.
 
 The solution set changes whenever the sign of $f(x)$ changes, which happens only at zeros or poles. That is why the sign chart, which catalogs those exact points, is the natural tool for solving any inequality.
 
@@ -219,7 +219,7 @@ Factored form is the pedagogical gift of this tab: the sign chart's factor rows 
 
     obj12: {
       title: `Quadratic Inequalities in the Explorer`,
-      content: `The Quadratic tab works in standard form $ax^2 + bx + c$, where the roots must be *earned* — the tool computes them from the discriminant before it can chart signs. The templates hit the three signature configurations: [two roots](!#a-quadratic-with-two-roots), [no real roots](!#a-quadratic-with-no-real-roots), and [an opens-down parabola](!#a-downward-parabola).
+      content: `The Quadratic tab works in standard form $ax^2 + bx + c$, where the roots must be **earned** — the tool computes them from the discriminant before it can chart signs. The templates hit the three signature configurations: [two roots](!#a-quadratic-with-two-roots), [no real roots](!#a-quadratic-with-no-real-roots), and [an opens-down parabola](!#a-downward-parabola).
 
 The family adds one twist the factored cubic cannot show: an irreducible quadratic, whose sign never changes. When the discriminant goes negative, the whole parabola sits on one side of zero and the inequality's answer is everything or nothing.`,
       before: ``,
@@ -251,7 +251,7 @@ The family exists to break a bad habit: multiplying both sides by $(x - b)$ flip
       title: `Radical Inequalities in the Explorer`,
       content: `The Radical tab solves $\\sqrt{x - a} - k < 0$ and brings the last complication: a **restricted domain**. Nothing exists left of $x = a$; the region is shaded out in red before any sign question can even be asked. The templates: [the basic radical](!#the-basic-radical), [a shifted start](!#the-shifted-radical), and [a high level](!#the-high-level-radical) pushing the zero far to the right.
 
-The standing lesson: a solution set lives *inside* the domain. Every radical answer is the intersection of an interval with $[a, \\infty)$, and forgetting that intersection is the classic radical-inequality error the red shading makes impossible to commit.`,
+The standing lesson: a solution set lives **inside** the domain. Every radical answer is the intersection of an interval with $[a, \\infty)$, and forgetting that intersection is the classic radical-inequality error the red shading makes impossible to commit.`,
       before: ``,
       after: ``,
       link: '',
@@ -275,7 +275,7 @@ The frozen marble sits at the left test point $x = -4$, where all three factors 
       before: ``,
       after: `A squared factor never changes sign, so the crossing at $2$ is cancelled: the curve comes down, touches, and returns. The sign pattern is negative, positive, positive — the alternation of [three distinct roots](!#three-distinct-roots) with one flip removed. The solution collapses to $(-\\infty, -3)$.
 
-The subtlety worth dwelling on: $x = 2$ *is* a zero of $f$, so for the non-strict version $\\leq$ it belongs to the solution set as an isolated point — a single closed dot disconnected from the interval. Even multiplicity is precisely the case where strict and non-strict answers differ by an isolated point rather than an endpoint.`,
+The subtlety worth dwelling on: $x = 2$ **is** a zero of $f$, so for the non-strict version $\\leq$ it belongs to the solution set as an isolated point — a single closed dot disconnected from the interval. Even multiplicity is precisely the case where strict and non-strict answers differ by an isolated point rather than an endpoint.`,
       link: '',
     },
 
@@ -285,7 +285,7 @@ The subtlety worth dwelling on: $x = 2$ *is* a zero of $f$, so for the non-stric
       before: ``,
       after: `Root spacing changes nothing logically and everything visually. The intervals $(-1, 0)$ and $(0, 1)$ are only one unit wide, and the curve oscillates through them in quick succession — a picture of why densely packed roots demand care with test points: there is little room to sample in.
 
-The cluster is also $x^3 - x$ in factored clothing, the same S-curve the equation explorer freezes as its three-root cubic. Same polynomial, different question: there the interest was *where* it crosses zero; here it is *which side* of zero it spends each interval on.`,
+The cluster is also $x^3 - x$ in factored clothing, the same S-curve the equation explorer freezes as its three-root cubic. Same polynomial, different question: there the interest was **where** it crosses zero; here it is **which side** of zero it spends each interval on.`,
       link: '',
     },
 
@@ -295,7 +295,7 @@ The cluster is also $x^3 - x$ in factored clothing, the same S-curve the equatio
       title: `A Quadratic with Two Roots`,
       content: `$x^2 - x - 6 < 0$: the parabola dips below zero between its roots $-2$ and $3$, and the single blue bar spans exactly that dip.`,
       before: ``,
-      after: `The tool factors the standard form for you — the sign chart shows $(x + 2)(x - 3)$ — and the answer is the single interval $(-2, 3)$: an upward parabola is negative *between* its roots, always. That "between" is worth internalizing as a reflex; its mirror ("outside") appears when the parabola [opens down](!#a-downward-parabola) or the direction flips to $>$.
+      after: `The tool factors the standard form for you — the sign chart shows $(x + 2)(x - 3)$ — and the answer is the single interval $(-2, 3)$: an upward parabola is negative **between** its roots, always. That "between" is worth internalizing as a reflex; its mirror ("outside") appears when the parabola [opens down](!#a-downward-parabola) or the direction flips to $>$.
 
 Note the contrast with the factored-cubic tab: two roots make three intervals and one sign change fewer, so the solution is one connected piece instead of two. Root count controls solution topology.`,
       link: '',
@@ -307,13 +307,13 @@ Note the contrast with the factored-cubic tab: two roots make three intervals an
       before: ``,
       after: `With the discriminant negative, the factor row shows a single irreducible chunk $(x^2 + 4)$ whose sign never changes — the sign chart has one column and it reads $+$. The strict inequality $< 0$ therefore has no solutions at all, and the tool's interval notation reports $\\emptyset$.
 
-The flip side is immediate: the same curve makes $x^2 + 4 > 0$ true *everywhere*, solution $(-\\infty, \\infty)$. Irreducible quadratics are all-or-nothing gates — a fact used constantly when factoring higher polynomials, where such factors can be crossed off the sign chart entirely.`,
+The flip side is immediate: the same curve makes $x^2 + 4 > 0$ true **everywhere**, solution $(-\\infty, \\infty)$. Irreducible quadratics are all-or-nothing gates — a fact used constantly when factoring higher polynomials, where such factors can be crossed off the sign chart entirely.`,
       link: '',
     },
 
     obj21: {
       title: `A Downward Parabola`,
-      content: `$-x^2 + 2x + 3 < 0$: the parabola opens downward with roots at $-1$ and $3$, and the shading covers the two outer rays — the parabola is below zero *outside* its roots.`,
+      content: `$-x^2 + 2x + 3 < 0$: the parabola opens downward with roots at $-1$ and $3$, and the shading covers the two outer rays — the parabola is below zero **outside** its roots.`,
       before: ``,
       after: `Flipping the leading coefficient's sign swaps "between" and "outside": a downward parabola is positive between its roots and negative beyond them, so the solution is $(-\\infty, -1) \\cup (3, \\infty)$ — the exact complement (up to endpoints) of what [the upward two-root state](!#a-quadratic-with-two-roots) produces.
 
@@ -349,7 +349,7 @@ Dragging either endpoint dot on the axis adjusts $k$ live — the explorer inver
       before: ``,
       after: `An absolute value is never negative, so $|x + 1| < 0$ has no solutions regardless of any chart — the frozen frame shows the honest picture: a curve that touches zero once and is positive everywhere else, with an empty axis bar.
 
-The state rewards operator experiments: switch to $\\leq$ and exactly one point qualifies, the vertex $x = -1$, appearing as a single closed dot; switch to $>$ and everything *except* the vertex qualifies. Three radically different solution sets from one frozen curve — the strongest argument on the page that the operator is a genuine state dimension, treated in [Direction and Strictness](!#direction-and-strictness).`,
+The state rewards operator experiments: switch to $\\leq$ and exactly one point qualifies, the vertex $x = -1$, appearing as a single closed dot; switch to $>$ and everything **except** the vertex qualifies. Three radically different solution sets from one frozen curve — the strongest argument on the page that the operator is a genuine state dimension, treated in [Direction and Strictness](!#direction-and-strictness).`,
       link: '',
     },
 
@@ -369,7 +369,7 @@ The pole's red styling carries the family's core rule: $x = -2$ is not in the do
       title: `Zero and Pole Crossed`,
       content: `$(x + 3)/(x - 4) < 0$: this time the zero ($-3$) sits left of the pole ($4$), and the negative stretch — the shaded bar — runs between them across seven units.`,
       before: ``,
-      after: `Swapping which critical point comes first does not change the logic — the fraction is still negative exactly between its two sign-relevant points — but it changes which *kind* of endpoint each end of the solution has: here the left end is a zero (closable under $\\leq$) and the right end is a pole (never closable), the mirror of [the simple configuration](!#a-simple-rational-inequality).
+      after: `Swapping which critical point comes first does not change the logic — the fraction is still negative exactly between its two sign-relevant points — but it changes which **kind** of endpoint each end of the solution has: here the left end is a zero (closable under $\\leq$) and the right end is a pole (never closable), the mirror of [the simple configuration](!#a-simple-rational-inequality).
 
 The wide gap also makes the graph's asymptotic behavior legible: the curve dives toward $-\\infty$ approaching the pole from the left, having crossed zero calmly at $-3$ far earlier. Zeros are gentle events; poles are violent ones. The chart treats them with one symbol each — $0$ versus undefined — and the geometry explains the difference.`,
       link: '',
@@ -425,7 +425,7 @@ Sixteen units of solution from one small parameter change (compare [the basic ra
       before: ``,
       after: `Strict less-than is the reference state the other three operators perturb. Its signature is the open circles: the roots themselves give $f(x) = 0$, and zero is not less than zero, so all three boundary points are excluded.
 
-The four operator states share one curve and one set of critical points; only membership at and around those points changes. Clicking through them in the live tool with the sign chart in view is the fastest way to see that direction picks *which intervals* and strictness picks *the boundary dots* — two independent switches. Compare [at most zero](!#at-most-zero) for the first switch flipped.`,
+The four operator states share one curve and one set of critical points; only membership at and around those points changes. Clicking through them in the live tool with the sign chart in view is the fastest way to see that direction picks **which intervals** and strictness picks **the boundary dots** — two independent switches. Compare [at most zero](!#at-most-zero) for the first switch flipped.`,
       link: '',
     },
 

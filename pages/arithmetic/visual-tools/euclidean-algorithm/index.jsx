@@ -80,7 +80,7 @@ $$\\text{dividend} = \\text{divisor} \\cdot \\text{quotient} + \\text{remainder}
 
 Read left to right: the **dividend** is the larger of the current pair, the **divisor** is the smaller, the **quotient** is how many whole times the divisor fits into the dividend, and the **remainder** is what is left over.
 
-The remainder is highlighted in an **amber pill** to draw the eye — it is the key piece that becomes the divisor of the *next* row. The final divisor, when the remainder finally hits zero, is shown in a **purple box** with a "gcd = N" [callout](!#the-result-banner-and-gcd-callout) below it. The terminating zero remainder appears as a dashed gray pill with an italic "stop" label, indicating that the algorithm has finished.
+The remainder is highlighted in an **amber pill** to draw the eye — it is the key piece that becomes the divisor of the **next** row. The final divisor, when the remainder finally hits zero, is shown in a **purple box** with a "gcd = N" [callout](!#the-result-banner-and-gcd-callout) below it. The terminating zero remainder appears as a dashed gray pill with an italic "stop" label, indicating that the algorithm has finished.
 
 Every numerical field is rendered in monospace so the rows align vertically. The visual chain reads top to bottom as a step-by-step computation that the eye can follow without effort.`,
       before: ``,
@@ -160,7 +160,7 @@ $$\\gcd(a, b) = \\gcd(b, a \\bmod b)$$
 
 In words: the greatest common divisor of two numbers stays the same if you replace the larger number with its remainder after division by the smaller. This is the **invariant** that the algorithm preserves at every step.
 
-The argument is short. Any common divisor of $a$ and $b$ also divides $a - q \\cdot b = r$, so it is a common divisor of $b$ and $r$ as well. Going the other way, any common divisor of $b$ and $r$ divides $b \\cdot q + r = a$, so it is a common divisor of $a$ and $b$. The two pairs have *exactly the same* set of common divisors, hence the same greatest common divisor.
+The argument is short. Any common divisor of $a$ and $b$ also divides $a - q \\cdot b = r$, so it is a common divisor of $b$ and $r$ as well. Going the other way, any common divisor of $b$ and $r$ divides $b \\cdot q + r = a$, so it is a common divisor of $a$ and $b$. The two pairs have **exactly the same** set of common divisors, hence the same greatest common divisor.
 
 The algorithm terminates because every step strictly decreases the smaller of the two numbers. A strictly decreasing sequence of non-negative integers must eventually reach zero. When it does, the partner — the last nonzero remainder — is the GCD, because $\\gcd(d, 0) = d$.`,
       before: ``,
@@ -176,7 +176,7 @@ Termination and correctness meet in that final line. Every chain, however long, 
 
 • **A swap, then a quick finish** — try the preset $(56, 84)$. Since $56 < 84$ the pair is swapped first; the division gives $84 = 56 \\cdot 1 + 28$, and $28$ divides $56$, so $56 = 28 \\cdot 2 + 0$ stops the algorithm at GCD $28$ after just two steps. (When the smaller number actually divides the larger — try $(28, 84)$ — the chain ends in a single row.)
 
-• [Coprime numbers](!#coprime-pairs) — try the preset $(35, 54)$. The GCD is $1$, and the chain works through several reductions before finally hitting a remainder of $1$ and then $0$. Coprime pairs tend to produce the *longest* chains relative to the size of the numbers.
+• [Coprime numbers](!#coprime-pairs) — try the preset $(35, 54)$. The GCD is $1$, and the chain works through several reductions before finally hitting a remainder of $1$ and then $0$. Coprime pairs tend to produce the **longest** chains relative to the size of the numbers.
 
 • [Consecutive Fibonacci numbers](!#fibonacci-worst-case) — try entering, e.g., $89$ and $144$. These pairs produce the absolute worst-case behavior of the algorithm and the longest chains for their magnitude. The reason is built into the recursive definition of Fibonacci numbers themselves.
 

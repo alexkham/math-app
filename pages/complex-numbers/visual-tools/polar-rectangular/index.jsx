@@ -742,7 +742,7 @@ Its double mirror is [−3 − 4i](!#quadrant-iii-3-4i): same digits, same modul
       title:`Quadrant III: −3 − 4i`,
       content:`The preset $-3 - 4i$ has both components negative — the quadrant where the sign convention for angles matters most.`,
       before:``,
-      after:`The tool reports $\\theta = \\text{atan2}(-4, -3) \\approx -126.9°$, a *negative* angle measured clockwise from the positive real axis. The same direction could be written $+233.1°$; the converter's $(-180°, 180°]$ convention always picks the representative closer to zero, so points below the real axis always read negative — compare [Quadrant IV's](!#equal-component-states-and-special-angles) $-45°$.
+      after:`The tool reports $\\theta = \\text{atan2}(-4, -3) \\approx -126.9°$, a **negative** angle measured clockwise from the positive real axis. The same direction could be written $+233.1°$; the converter's $(-180°, 180°]$ convention always picks the representative closer to zero, so points below the real axis always read negative — compare [Quadrant IV's](!#equal-component-states-and-special-angles) $-45°$.
 
 Once again $r = 5$: this is the third preset on the radius-5 circle, with [−4 + 3i](!#quadrant-ii-4-3i) and [5i](!#on-the-imaginary-axis-5i). The frozen frame shows the triangle fully inverted — legs pointing left and down, the right-angle marker tucked into the corner at $(-3, 0)$ — yet built from the same two lengths as its Quadrant II mirror.`,
       link:'',

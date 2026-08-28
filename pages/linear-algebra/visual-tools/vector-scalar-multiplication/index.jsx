@@ -752,7 +752,7 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
       title: `Common Mistakes`,
       content: `A few mistakes recur.
 
-• **Multiplying only the first component** — $k$ multiplies *every* component, not just one
+• **Multiplying only the first component** — $k$ multiplies **every** component, not just one
 • **Confusing scalar multiplication with the dot product** — scalar multiplication uses one number and returns a vector; the dot product uses two vectors and returns a number
 • **Confusing scalar multiplication with the Hadamard product** — $kv$ uses a single scalar; component-wise multiplication uses an entire vector of multipliers
 • **Thinking the length changes** — $kv$ always has the same number of components as $v$, regardless of $k$

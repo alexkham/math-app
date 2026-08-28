@@ -1675,7 +1675,7 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
             <ObjectTypeProfile data={matrixTypeProfiles} theme="navy" variant="stack" />
           </DiagramFrame>,
           `The power conditions are worth reading as polynomial equations. $A^2 = A$ says every eigenvalue satisfies $\\lambda^2 = \\lambda$, so $\\lambda \\in \\{0, 1\\}$; $A^2 = I$ says $\\lambda^2 = 1$, so $\\lambda = \\pm 1$; $A^k = O$ says $\\lambda^k = 0$, so every eigenvalue is zero. Three types, three constraints, and all of them fall out of substituting an eigenvector into the defining equation.`,
-          `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it *is* diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
+          `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it **is** diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
         ]
     },
    

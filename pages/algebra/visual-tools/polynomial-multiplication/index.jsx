@@ -629,7 +629,7 @@ Cells fill in left-to-right, top-to-bottom as the animation runs. Three visual s
 
 A bucket displays three things:
 
-• A **header** naming the like-term group: *constants*, *x terms*, *x&sup2; terms*, *x&sup3; terms*, and so on, with the exponent value shown on the right.
+• A **header** naming the like-term group: **constants**, **x terms**, *x&sup2; terms*, *x&sup3; terms*, and so on, with the exponent value shown on the right.
 
 • A **contributions row** listing the signed coefficients delivered to this bucket so far, in the order they arrived (for example, *&minus; 6 &plus; 2*).
 
@@ -775,7 +775,7 @@ The four buckets illustrate the other scaling law: the result's degree is the su
       before: ``,
       after: `This preset freezes a factoring identity being verified in public: $(x+1)(x^2 - x + 1) = x^3 + 1$, the sum-of-cubes pattern. Six cells are delivered, but four of them exist only to annihilate each other — the frozen buckets display the cancellation as visibly empty sums rather than as algebraic sleight of hand.
 
-Cancellation is the phenomenon that makes special products *special*: the second factor is engineered so its cross-terms exactly oppose the first factor's contributions. Seen in the grid, the identity stops being a formula to memorize and becomes a pattern of paired cells — the same mechanism behind the difference of squares and the telescoping products of higher factoring identities.`,
+Cancellation is the phenomenon that makes special products **special**: the second factor is engineered so its cross-terms exactly oppose the first factor's contributions. Seen in the grid, the identity stops being a formula to memorize and becomes a pattern of paired cells — the same mechanism behind the difference of squares and the telescoping products of higher factoring identities.`,
       link: '',
     },
 

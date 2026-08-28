@@ -884,7 +884,7 @@ This one scene serves both geometric tabs. [The sine identity](!#the-sine-supple
       title: `Reflection Proof, Step 2: Introduce the Mirror`,
       content: `The y-axis is drawn in as the mirror line, marked with the arc showing that its angle from the x-axis is exactly $90°$.`,
       before: ``,
-      after: `Naming the mirror's own angle matters, because the next two steps measure everything relative to it. The choice of the y-axis is what makes this the *supplementary* family — reflecting across the line $y = x$ instead produces [the complementary identities](!#supplementary-vs-complementary-identities), and reflecting across the x-axis produces the negative-angle ones.`,
+      after: `Naming the mirror's own angle matters, because the next two steps measure everything relative to it. The choice of the y-axis is what makes this the **supplementary** family — reflecting across the line $y = x$ instead produces [the complementary identities](!#supplementary-vs-complementary-identities), and reflecting across the x-axis produces the negative-angle ones.`,
       link: '',
     },
     obj20: {

@@ -579,7 +579,7 @@ notation :`**Notations Used:**
 
 $X \\sim \\text{Unif}(a, b)$ or $X \\sim \\text{DU}(a, b)$ — **distribution of the random variable**.
 
-$DiscreteUniform(a, b)$ — **used to denote the distribution itself (not the random variable)**.
+$\\text{DiscreteUniform}(a, b)$ — **used to denote the distribution itself (not the random variable)**.
 
 $U(a, b)$ — **also used, though it can refer to either discrete or continuous; context is important**.
 
@@ -605,7 +605,7 @@ $P(X = x) = \\frac{1}{b - a + 1} = \\frac{1}{n}, \\quad x \\in \\{x_1, x_2, \\do
 Where :
 $a$ = lower bound (integer)
 $b$ = upper bound (integer)
-$𝑛=b−a+1$ is total number of possible values 
+$n=b−a+1$ is total number of possible values 
 
 ### Intuition Behind the Formula
 
@@ -664,12 +664,12 @@ parameters:`
 
 **Parameters of Binomial Distribution** 
 
-$𝑛$ : fixed number of independent trials;
+$n$ : fixed number of independent trials;
 
-$𝑝$ : probability of success in each trial;
+$p$ : probability of success in each trial;
 
-This distribution models the number of successes when repeating the same binary experiment $𝑛$ times under identical conditions. The two parameters fully describe the setup: 
-$𝑛$ gives the structure — how many attempts, and $𝑝$ defines the behavior of each — what chance success has.
+This distribution models the number of successes when repeating the same binary experiment $n$ times under identical conditions. The two parameters fully describe the setup: 
+$n$ gives the structure — how many attempts, and $p$ defines the behavior of each — what chance success has.
 It’s useful to compare with the negative binomial, where instead of fixing how many trials you run, you fix how many successes you want and ask: how many trials will it take? Both deal with repeated binary outcomes, but what’s held constant — trials vs. successes — flips.
 `,
 notation:`
@@ -678,7 +678,7 @@ notation:`
 
 $X \\sim \\text{Bin}(n, p)$ or $X \\sim \\text{B}(n, p)$ — **distribution of the random variable**.  
 
-$Binomial(n, p)$ — **used to denote the distribution itself (not the random variable)**.
+$\\text{Binomial}(n, p)$ — **used to denote the distribution itself (not the random variable)**.
 
 $B(n,p)$ — **occasionally used in theoretical or formal contexts (less common)**.
 
@@ -753,10 +753,10 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
      parameters:`
 **Parameters of Geometric Distribution **
 
-$𝑝$: probability of success on a single trial, with $0<𝑝≤1$
+$p$: probability of success on a single trial, with $0<p≤1$
 
 The geometric distribution models the number of trials needed to get the first success in a sequence of independent Bernoulli trials. 
-There's only one parameter — $𝑝$, the chance of success each time — which completely determines the shape of the distribution. 
+There's only one parameter — $p$, the chance of success each time — which completely determines the shape of the distribution. 
 The outcomes are positive integers: $1,2,3,…$ where each value represents the trial number on which success first occurs.
      `,
 
@@ -765,7 +765,7 @@ The outcomes are positive integers: $1,2,3,…$ where each value represents the 
 
 $X \\sim \\text{Geom}(p)$ or $X \\sim \\text{Geometric}(p)$ — **distribution of the random variable**.
 
-$Geom(p)$ — **used to denote the distribution itself (not the random variable)**.
+$\\text{Geom}(p)$ — **used to denote the distribution itself (not the random variable)**.
 
 $G(p)$ — **less common shorthand in some texts or software contexts**.
 
@@ -832,7 +832,7 @@ notation:`
 
 $X \\sim \\text{NegBin}(r, p)$ or $X \\sim \\text{NB}(r, p)$ — **distribution of the random variable**.
 
-$NegativeBinomial(r, p)$ — **used to denote the distribution itself (not the random variable)**.
+$\\text{NegativeBinomial}(r, p)$ — **used to denote the distribution itself (not the random variable)**.
 
 $NB(r, p)$ — **common shorthand, especially in statistical software**.
 
@@ -845,13 +845,13 @@ $P(X = k) = \\binom{k - 1}{r - 1} p^r (1 - p)^{k - r}, \\quad \\text{for } k = r
 parameters:`
 **Parameters of Negative Binomial Distribution **
 
-$𝑟$: number of successes to achieve (a positive integer)
+$r$: number of successes to achieve (a positive integer)
 
-$𝑝$: probability of success in each trial, with $0<𝑝≤1$
+$p$: probability of success in each trial, with $0<p≤1$
 
-This distribution models the number of trials needed to observe $𝑟$ successes, assuming each trial is independent and has the same probability $𝑝$ of success. 
-The outcomes are integers $𝑟$, $𝑟+1$ ,$𝑟+2$ ,…, since at least $𝑟$ trials are needed. 
-$𝑟$ controls the target (how many successes), and $𝑝$ controls the chance of achieving each one — together, they define how spread out or concentrated the distribution is.
+This distribution models the number of trials needed to observe $r$ successes, assuming each trial is independent and has the same probability $p$ of success. 
+The outcomes are integers $r$, $r+1$ ,$r+2$ ,…, since at least $r$ trials are needed. 
+$r$ controls the target (how many successes), and $p$ controls the chance of achieving each one — together, they define how spread out or concentrated the distribution is.
 `,
 pmf:`
 The **probability mass function (PMF)** of a **negative binomial distribution** is given by:
@@ -923,7 +923,7 @@ notation:`
 
 $X \\sim \\text{Hypergeometric}(N, K, n)$ or $X \\sim \\text{Hyp}(N, K, n)$ — **distribution of the random variable**.
 
-$Hypergeometric(N, K, n)$ — **used to denote the distribution itself (not the random variable)**.
+$\\text{Hypergeometric}(N, K, n)$ — **used to denote the distribution itself (not the random variable)**.
 
 $H(N, K, n)$ — **occasionally used in compact form, especially in software or formulas**.
 
@@ -935,13 +935,13 @@ $P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \
 parameters:`
 **Parameters of Hypergeometric Distribution** 
 
-$𝑁$: total population size
+$N$: total population size
 
-$𝐾$: number of successes in the population
+$K$: number of successes in the population
 
-$𝑛$: number of draws (without replacement), where $𝑛≤𝑁$
+$n$: number of draws (without replacement), where $n≤N$
 
-The hypergeometric distribution models the number of successes in $𝑛$ draws from a finite population of size $𝑁$ that contains exactly $𝐾$ successes, without replacement. Unlike the binomial, where each trial is independent, here each draw changes the probabilities — once an item is drawn, it doesn't go back. This dependency is what defines the distribution’s behavior.
+The hypergeometric distribution models the number of successes in $n$ draws from a finite population of size $N$ that contains exactly $K$ successes, without replacement. Unlike the binomial, where each trial is independent, here each draw changes the probabilities — once an item is drawn, it doesn't go back. This dependency is what defines the distribution’s behavior.
 `,
 pmf:`
 The **probability mass function (PMF)** of a **hypergeometric distribution** is given by:
@@ -1014,7 +1014,7 @@ notation:`
 
 $X \\sim \\text{Poisson}(\\lambda)$ or $X \\sim \\mathcal{P}(\\lambda)$ — **distribution of the random variable**.
 
-$Poisson(\\lambda)$ — **used to denote the distribution itself (not the random variable)**.
+$\\text{Poisson}(\\lambda)$ — **used to denote the distribution itself (not the random variable)**.
 
 $P(\\lambda)$ — **sometimes used informally, especially in compact notation**.
 
@@ -1026,10 +1026,10 @@ $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad \\text{for } k = 0, 1, 
 parameters:`
 **Parameters of Poisson Distribution** 
 
-$𝜆$: the average rate (mean number of events), with $𝜆>0$
-The Poisson distribution models the number of events occurring in a fixed interval of time or space, assuming events happen independently and at a constant average rate $𝜆$. 
-It describes counts: 0, 1, 2, ..., with probabilities determined by how large or small $𝜆$ is. 
-The single parameter $𝜆$ controls both the mean and the variance of the distribution.
+$\\lambda$: the average rate (mean number of events), with $\\lambda >0$
+The Poisson distribution models the number of events occurring in a fixed interval of time or space, assuming events happen independently and at a constant average rate $\\lambda$. 
+It describes counts: 0, 1, 2, ..., with probabilities determined by how large or small $\\lambda$ is. 
+The single parameter $\\lambda$ controls both the mean and the variance of the distribution.
 `,
 pmf:`
 The **probability mass function (PMF)** of a **Poisson distribution** is given by:
@@ -1306,7 +1306,7 @@ Although discrete distributions vary significantly in their interpretation and b
   
       title:`Distribution-Specific Properties`,
       content:`
-Beyond their shared structural attributes, discrete probability distributions may exhibit **special mathematical properties** that distinguish one distribution from another. These properties are not universal: some apply only to specific distributions, while others hold only under particular conditions. They describe *how* a distribution behaves, not merely *what* quantities can be computed from it.
+Beyond their shared structural attributes, discrete probability distributions may exhibit **special mathematical properties** that distinguish one distribution from another. These properties are not universal: some apply only to specific distributions, while others hold only under particular conditions. They describe **how** a distribution behaves, not merely **what** quantities can be computed from it.
 
 Unlike attributes—which every discrete distribution possesses—properties capture unique behaviors that often explain **why a particular distribution is chosen** in a given modeling context.
 

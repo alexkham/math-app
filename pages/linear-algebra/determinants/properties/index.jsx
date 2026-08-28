@@ -2317,7 +2317,7 @@ Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaus
         id: 'bars-form',
         tex: `$|A|$ · $\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}$`,
         read: `The determinant of A, written with bars`,
-        means: `The delimiter spelling: single bars around a matrix name, or straight bars replacing the matrix's own brackets — the one operator in elementary mathematics written as a pure *delimiter*. Between the bars sits the array; the bars themselves say “take its determinant”.`,
+        means: `The delimiter spelling: single bars around a matrix name, or straight bars replacing the matrix's own brackets — the one operator in elementary mathematics written as a pure **delimiter**. Between the bars sits the array; the bars themselves say “take its determinant”.`,
         cases: `The bar family completes here: $|x|$ on a scalar, $\\|\\mathbf{v}\\|$ on a vector, $|A|$ on a matrix — and only this last one **can be negative**. The bars promise no non-negativity; a row swap above flips the sign inside them.`,
         alsoWritten: `$|A| = \\det(A)$, freely interchangeable; the bars win inside computations, $\\det$ wins in prose and wherever $|{\\cdot}|$ is already busy with absolute values.`,
         confusedWith: `Absolute value. $|\\det(A)|$ is a legitimate double-decker — the outer bars are the scalar [absolute value](!/algebra/equations/absolute-value#notation) of the possibly-negative number the inner operation produced; volume formulas use exactly this stack.`,

@@ -248,7 +248,7 @@ For comprehensive treatment, see **set laws and identities**.`,
       title: `The Basic Sets`,
       content: `The Basic Sets tab shows the diagram's raw material before any operation acts on it. [Set A](!#the-set-a-on-its-own), [set B](!#the-set-b-on-its-own), and [set C](!#the-set-c-on-its-own) each shade one full circle — which in a three-circle diagram already means four regions apiece. [The universal set](!#the-universal-set-u) shades all eight regions, and [the empty set](!#the-empty-set) shades none.
 
-The step up from two sets is worth pausing on: each circle now overlaps *two* neighbors plus the shared center, so even "just the set $A$" is a four-region composite. Learning to see one circle as four regions is the core reading skill for everything below.`,
+The step up from two sets is worth pausing on: each circle now overlaps **two** neighbors plus the shared center, so even "just the set $A$" is a four-region composite. Learning to see one circle as four regions is the core reading skill for everything below.`,
       before: ``,
       after: ``,
       link: '',
@@ -268,7 +268,7 @@ The three frames are rotations of one another, a first taste of the diagram's th
       title: `Intersections and Unions`,
       content: `Eight states cover the and/or combinations. At the extremes sit [the triple intersection](!#the-triple-intersection) — the diagram's smallest interesting region — and [the triple union](!#the-triple-union), everything inside any circle. Between them, the three pairwise intersections ([A ∩ B](!#pairwise-intersection-a-and-b), [A ∩ C](!#pairwise-intersection-a-and-c), [B ∩ C](!#pairwise-intersection-b-and-c)) and the three pairwise unions ([A ∪ B](!#pairwise-union-a-and-b), [A ∪ C](!#pairwise-union-a-and-c), [B ∪ C](!#pairwise-union-b-and-c)).
 
-The pairwise states carry the tab's key lesson: with a third set on the page, $A \\cap B$ is *two* regions and $A \\cup B$ is *six*, because the ignored set $C$ cuts through both. An operation on two sets does not stop being about two sets — but its picture changes when the universe holds a third.`,
+The pairwise states carry the tab's key lesson: with a third set on the page, $A \\cap B$ is **two** regions and $A \\cup B$ is **six**, because the ignored set $C$ cuts through both. An operation on two sets does not stop being about two sets — but its picture changes when the universe holds a third.`,
       before: ``,
       after: ``,
       link: '',
@@ -276,7 +276,7 @@ The pairwise states carry the tab's key lesson: with a third set on the page, $A
 
     obj15: {
       title: `The Differences`,
-      content: `Twelve subtraction states. The six one-sided differences ([A ∖ B](!#the-difference-a-minus-b), [A ∖ C](!#the-difference-a-minus-c), [B ∖ A](!#the-difference-b-minus-a), [B ∖ C](!#the-difference-b-minus-c), [C ∖ A](!#the-difference-c-minus-a), [C ∖ B](!#the-difference-c-minus-b)) each shade two regions. Subtracting *both* neighbors instead of one produces the three "only" states ([only in A](!#only-in-a), [only in B](!#only-in-b), [only in C](!#only-in-c)). The tab closes with [the mixed difference (A ∪ B) ∖ C](!#union-of-a-and-b-minus-c) and the two symmetric differences — [A △ B](!#symmetric-difference-of-a-and-b) and [the triple form A △ B △ C](!#the-triple-symmetric-difference).
+      content: `Twelve subtraction states. The six one-sided differences ([A ∖ B](!#the-difference-a-minus-b), [A ∖ C](!#the-difference-a-minus-c), [B ∖ A](!#the-difference-b-minus-a), [B ∖ C](!#the-difference-b-minus-c), [C ∖ A](!#the-difference-c-minus-a), [C ∖ B](!#the-difference-c-minus-b)) each shade two regions. Subtracting **both** neighbors instead of one produces the three "only" states ([only in A](!#only-in-a), [only in B](!#only-in-b), [only in C](!#only-in-c)). The tab closes with [the mixed difference (A ∪ B) ∖ C](!#union-of-a-and-b-minus-c) and the two symmetric differences — [A △ B](!#symmetric-difference-of-a-and-b) and [the triple form A △ B △ C](!#the-triple-symmetric-difference).
 
 The organizing contrast: $A \\setminus B$ keeps the part of $A$ that $C$ shares, while $A \\setminus (B \\cup C)$ strips $A$ to its private region. One extra subtraction, one region fewer — the difference between "not in $B$" and "in nothing else".`,
       before: ``,
@@ -394,7 +394,7 @@ Structurally, the triple intersection is inside every pairwise intersection, whi
       title: `The Pairwise Intersection A ∩ B`,
       content: `Two regions: the $A \\cap B$ sliver plus the central core. "In both $A$ and $B$" says nothing about $C$ — so both answers to the $C$ question are included.`,
       before: ``,
-      after: `This is the tab's recurring subtlety. The region labeled $A \\cap B$ in the diagram is really $A \\cap B \\cap C'$ — the *pairwise-but-not-triple* piece — while the full set $A \\cap B$ is that sliver together with the center. The explorer's shading draws the distinction sharply.
+      after: `This is the tab's recurring subtlety. The region labeled $A \\cap B$ in the diagram is really $A \\cap B \\cap C'$ — the **pairwise-but-not-triple** piece — while the full set $A \\cap B$ is that sliver together with the center. The explorer's shading draws the distinction sharply.
 
 Want the sliver alone? That is a different expression, $A \\cap B \\cap C'$, frozen at [A and B but not C](!#in-a-and-b-but-not-c) in the Compound tab.`,
       link: '',
@@ -530,7 +530,7 @@ The stricter cut that removes the surviving sliver too is [only in C](!#only-in-
       before: ``,
       after: `Subtracting the union of both neighbors is the strongest exclusion the diagram offers a single set. Compare [A minus B](!#the-difference-a-minus-b): one extra set in the subtrahend costs exactly one more region, the $A \\cap C$ sliver.
 
-The three "only" regions are the atoms of the counting states — [exactly one](!#exactly-one-of-the-three-sets) is precisely their union — and in survey problems they answer the question "how many chose *only* this option?"`,
+The three "only" regions are the atoms of the counting states — [exactly one](!#exactly-one-of-the-three-sets) is precisely their union — and in survey problems they answer the question "how many chose **only** this option?"`,
       link: '',
     },
 
@@ -538,7 +538,7 @@ The three "only" regions are the atoms of the counting states — [exactly one](
       title: `Only in B`,
       content: `The private region of the lower-left circle: $B \\setminus (A \\cup C)$, one region, no shared pieces.`,
       before: ``,
-      after: `The formula deserves one careful reading: subtracting $A \\cup C$ is subtracting *either* neighbor, so the survivors avoid both. This is De Morgan operating quietly — "not in $A$ or $C$" equals "not in $A$ and not in $C$", i.e. $B \\cap A' \\cap C'$.
+      after: `The formula deserves one careful reading: subtracting $A \\cup C$ is subtracting **either** neighbor, so the survivors avoid both. This is De Morgan operating quietly — "not in $A$ or $C$" equals "not in $A$ and not in $C$", i.e. $B \\cap A' \\cap C'$.
 
 The three only-frames are the diagram's rotational family at its purest: one region each, at three clock positions.`,
       link: '',
@@ -578,7 +578,7 @@ The genuinely three-set generalization is [the triple symmetric difference](!#th
       title: `The Triple Symmetric Difference`,
       content: `Four regions in the tab's most surprising pattern: the three "only" regions — plus the center.`,
       before: ``,
-      after: `$A \\triangle B \\triangle C$ collects elements in an *odd number* of the three sets: one or three. The only-regions supply the count-one elements; the triple intersection supplies count-three. The pairwise slivers, at count two, are excluded — which is why the shading skips them and the frame looks like "exactly one" with a lit center.
+      after: `$A \\triangle B \\triangle C$ collects elements in an **odd number** of the three sets: one or three. The only-regions supply the count-one elements; the triple intersection supplies count-three. The pairwise slivers, at count two, are excluded — which is why the shading skips them and the frame looks like "exactly one" with a lit center.
 
 The parity rule is what makes $\\triangle$ associative: however the expression is parenthesized, an element's membership flips once per set that contains it, and only an odd number of flips leaves it in. Compare [exactly one](!#exactly-one-of-the-three-sets) — identical but for the center.`,
       link: '',
@@ -602,7 +602,7 @@ In survey language: "chose $A$ and $B$ but not $C$" — the kind of clause inclu
       before: ``,
       after: `Same anatomy as [A and B but not C](!#in-a-and-b-but-not-c), one position around the ring. The three sliver-states are the middle tier of the membership hierarchy — more exclusive than a full set, less exclusive than the center.
 
-Note the formula's shape: every region of the diagram is a conjunction of three literals, one per set, primed or unprimed. Eight combinations, eight regions — the diagram *is* the truth table of three variables.`,
+Note the formula's shape: every region of the diagram is a conjunction of three literals, one per set, primed or unprimed. Eight combinations, eight regions — the diagram **is** the truth table of three variables.`,
       link: '',
     },
 
@@ -632,7 +632,7 @@ The frame is also the left side of a distributive law: $A \\cap (B \\cup C) = (A
       before: ``,
       after: `Structurally the twin of [A ∩ (B ∪ C)](!#a-intersected-with-b-union-c) with the roles rotated: form the union of two circles, then clip to the third. The result is always the clipped circle minus its private region.
 
-Comparing the two frames drives home that the *pattern* of a compound expression, not the letters in it, determines the picture's shape — relabeling rotates the frame, regrouping changes it.`,
+Comparing the two frames drives home that the **pattern** of a compound expression, not the letters in it, determines the picture's shape — relabeling rotates the frame, regrouping changes it.`,
       link: '',
     },
 

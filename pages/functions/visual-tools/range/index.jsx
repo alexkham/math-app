@@ -58,7 +58,7 @@ The page launches with the quadratic family. Its range is $y \\geq 0$ — the pa
 • [Bounded](!#ranges-bounded-on-both-sides) $[-1, 1]$ — [Sine](!#the-sine-function), [Cosine](!#the-cosine-function). Periodic functions with a hard ceiling and floor.
 • **Excluded point** — [Reciprocal](!#the-reciprocal-and-its-missing-output). Reaches every real number except $0$ — its horizontal asymptote.
 
-Notice that logarithmic appears here under "Unrestricted" even though its *domain* is restricted to positive numbers. Domain and range are independent: a function can have a restricted domain and still produce every real number as output.
+Notice that logarithmic appears here under "Unrestricted" even though its **domain** is restricted to positive numbers. Domain and range are independent: a function can have a restricted domain and still produce every real number as output.
 
 Click any entry to switch. Transformation parameters reset to defaults on every switch.`,
       before: ``,
@@ -75,7 +75,7 @@ Click any entry to switch. Transformation parameters reset to defaults on every 
 • $b$ — **horizontal scale**. Multiplies the input by $b$.
 • $h$ — **horizontal shift**. Subtracts $h$ from the input.
 
-A small "**affects range**" badge appears on the labels for $a$ and $k$ but not on $b$ or $h$. The reason is structural. The transformed function is $g(x) = a \\cdot f(b(x - h)) + k$. Reading right to left along the formula: $b$ and $h$ act on the input *before* $f$ runs, so they change *which* x produces each output — but the set of outputs $f$ can produce stays the same. Then $a$ scales those outputs and $k$ shifts them.
+A small "**affects range**" badge appears on the labels for $a$ and $k$ but not on $b$ or $h$. The reason is structural. The transformed function is $g(x) = a \\cdot f(b(x - h)) + k$. Reading right to left along the formula: $b$ and $h$ act on the input **before** $f$ runs, so they change **which** x produces each output — but the set of outputs $f$ can produce stays the same. Then $a$ scales those outputs and $k$ shifts them.
 
 Drag $b$ or $h$ as wildly as you want — the y-axis band does not move. Drag $a$ or $k$ and the band immediately rescales and shifts. The visualizer makes this asymmetry visible in real time.`,
       before: ``,
@@ -167,9 +167,9 @@ The range together with the domain fully characterizes the input-output behavior
       title: `Open vs Closed Endpoints and Excluded Values`,
       content: `Three subtle distinctions show up in the visualizer's range bar:
 
-• **Closed endpoint (filled circle)** — the boundary value is *reached*. Square root has range $y \\geq 0$ with a closed endpoint at $0$, because $\\sqrt{0} = 0$ exactly. The range bar shows a filled dot.
+• **Closed endpoint (filled circle)** — the boundary value is **reached**. Square root has range $y \\geq 0$ with a closed endpoint at $0$, because $\\sqrt{0} = 0$ exactly. The range bar shows a filled dot.
 
-• **Open endpoint (hollow circle)** — the boundary value is *approached* but never reached. Exponential has range $y > 0$ with an open endpoint at $0$, because $e^x$ gets arbitrarily close to $0$ as $x \\to -\\infty$ but never equals $0$. The range bar shows a hollow dot.
+• **Open endpoint (hollow circle)** — the boundary value is **approached** but never reached. Exponential has range $y > 0$ with an open endpoint at $0$, because $e^x$ gets arbitrarily close to $0$ as $x \\to -\\infty$ but never equals $0$. The range bar shows a hollow dot.
 
 • **Excluded value (red ×)** — the function reaches every value except one. Reciprocal has range $y \\neq 0$ — every nonzero real number is hit somewhere on the curve, but $0$ is the horizontal asymptote, never touched. The range bar shows a full fill broken by a small red × at the excluded value.
 
@@ -203,7 +203,7 @@ The distinction between open and closed endpoints is genuinely important in calc
       title: `Ranges Covering All of the Reals`,
       content: `Four functions in the picker produce every real number as an output: the [identity](!#the-identity-function), the [scaled linear](!#the-scaled-linear-function), the [cubic](!#the-cubic-function), and — the surprise of the group — the [logarithm](!#the-logarithmic-function). Their range bar is one unbroken green band up the whole y-axis.
 
-The logarithm's membership is the teaching moment: a function with a heavily *restricted domain* can still have a *complete range*. Domain and range restrictions are independent, and this group proves it in one glance.`,
+The logarithm's membership is the teaching moment: a function with a heavily **restricted domain** can still have a **complete range**. Domain and range restrictions are independent, and this group proves it in one glance.`,
       before: ``, after: ``, link: '',
     },
     obj12: {
@@ -212,7 +212,7 @@ The logarithm's membership is the teaching moment: a function with a heavily *re
       before: ``,
       after: `The green band runs the whole axis with nothing to mark. As with the domain tool, the identity is the control case: switch here and every red stripe vanishes.
 
-One nuance worth a look: the identity hits each output exactly once. The [cubic](!#the-cubic-function) also covers everything, but with a different rhythm — the comparison shows that "range = ℝ" says nothing about *how often* each value is reached.`,
+One nuance worth a look: the identity hits each output exactly once. The [cubic](!#the-cubic-function) also covers everything, but with a different rhythm — the comparison shows that "range = ℝ" says nothing about **how often** each value is reached.`,
       link: '',
     },
     obj13: {
@@ -246,7 +246,7 @@ This is the mirror image of its inverse: the [exponential](!#the-exponential-fun
       title: `Ranges Bounded Below`,
       content: `Four functions never output anything below a floor: the [quadratic](!#the-quadratic-function), the [absolute value](!#the-absolute-value-function), and the [square root](!#the-square-root-function) all bottom out at $0$ and include it — while the [exponential](!#the-exponential-function) presses toward $0$ forever without ever reaching it.
 
-Same floor, two different relationships with it: three closed dots and one open circle. Whether the boundary output is *attained* is exactly the open-versus-closed distinction, now on the y-axis.`,
+Same floor, two different relationships with it: three closed dots and one open circle. Whether the boundary output is **attained** is exactly the open-versus-closed distinction, now on the y-axis.`,
       before: ``, after: ``, link: '',
     },
     obj17: {
@@ -266,7 +266,7 @@ Drag $a$ negative and the whole picture flips: range $(-\\infty, 0]$, the floor 
       before: ``,
       after: `Identical range to the [quadratic](!#the-quadratic-function) — same closed floor, same double-covering of positive outputs — from a completely different shape. Range, like domain, is a coarse fingerprint: it cannot tell the parabola from the V.
 
-What distinguishes them is *how* the floor is touched: the parabola kisses it smoothly, the V hits it at a corner. The range bar sees only the same green dot.`,
+What distinguishes them is **how** the floor is touched: the parabola kisses it smoothly, the V hits it at a corner. The range bar sees only the same green dot.`,
       link: '',
     },
     obj19: {
@@ -307,11 +307,11 @@ Under the transformation $a \\sin(x) + k$ the band becomes $[k - |a|, k + |a|]$:
     },
     obj23: {
       title: `The Cosine Function`,
-      content: `Cosine shares sine's prison exactly: range $[-1, 1]$, both walls attained — only the *inputs* achieving each output differ.`,
+      content: `Cosine shares sine's prison exactly: range $[-1, 1]$, both walls attained — only the **inputs** achieving each output differ.`,
       before: ``,
       after: `The range bar cannot distinguish [sine](!#the-sine-function) from cosine at all — identical green band, identical closed dots. The phase shift between them lives entirely on the x-axis, invisible to any output-side measurement.
 
-That invisibility is the deeper point: range collapses a function to the *set* of its outputs, forgetting when and how often each occurs. Two functions can be output-identical yet nowhere equal.`,
+That invisibility is the deeper point: range collapses a function to the **set** of its outputs, forgetting when and how often each occurs. Two functions can be output-identical yet nowhere equal.`,
       link: '',
     },
     obj24: {
@@ -320,7 +320,7 @@ That invisibility is the deeper point: range collapses a function to the *set* o
       before: ``,
       after: `The open circle at $y = 0$ is the output-side twin of the reciprocal's excluded input: this function misses exactly one value in each direction, and both misses trace back to the same fraction $1/x$ never being zero and never accepting zero.
 
-The missing output is again a horizontal asymptote wearing range clothing: both branches flatten toward $y = 0$ without arriving, just like the [exponential's](!#the-exponential-function) floor — but here the asymptote is approached from *both* sides, puncturing the middle of the range rather than capping its end.
+The missing output is again a horizontal asymptote wearing range clothing: both branches flatten toward $y = 0$ without arriving, just like the [exponential's](!#the-exponential-function) floor — but here the asymptote is approached from **both** sides, puncturing the middle of the range rather than capping its end.
 
 Shift $k$ and the puncture rides to $y = k$: every transformed reciprocal misses exactly one output, always at its horizontal asymptote.`,
       link: '',

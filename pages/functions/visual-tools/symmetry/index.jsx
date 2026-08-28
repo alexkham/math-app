@@ -110,7 +110,7 @@ The card's border color, header text, and accent badges all derive from the curr
 
 This is the same hand-derivation a student would do on paper, written in monospace so the substitution steps line up neatly. Each family in the picker comes with its own per-step strings, so the derivation is specific to the function you have selected rather than generic.
 
-When you transform the function with sliders and the verdict changes from the base symmetry, a small note appears at the bottom of the derivation block: "The base function is *odd*, but the transformation broke the symmetry. The runtime verdict on $g(x)$ is *neither*." The derivation always describes the base; the verdict always describes the current state.`,
+When you transform the function with sliders and the verdict changes from the base symmetry, a small note appears at the bottom of the derivation block: "The base function is **odd**, but the transformation broke the symmetry. The runtime verdict on $g(x)$ is **neither**." The derivation always describes the base; the verdict always describes the current state.`,
       before: ``,
       after: ``,
       link: '',
@@ -191,7 +191,7 @@ The runtime verdict captures all of this automatically. You can use the sliders 
 
 **Reflections** — geometric operations on graphs; even and odd are the two special cases where a reflection or rotation lands the graph on itself.
 
-**Periodic Functions** — a different kind of symmetry: $f(x + T) = f(x)$ for some period $T$. Sine and cosine are both periodic *and* have parity symmetry; most periodic functions only have one or the other.
+**Periodic Functions** — a different kind of symmetry: $f(x + T) = f(x)$ for some period $T$. Sine and cosine are both periodic **and** have parity symmetry; most periodic functions only have one or the other.
 
 **Inverse Functions** — graph reflection across the line $y = x$; another kind of symmetric relationship between two functions, though strictly speaking not a symmetry of one graph alone.
 
@@ -225,7 +225,7 @@ But evenness is fragile: nudge the parabola sideways with $h$ and the mirror mat
       before: ``,
       after: `Both arms of the V are each other's mirror image, meeting at the corner on the axis of symmetry itself. Amber under blue, teal inverted below — the same overlap pattern as the [quadratic](!#symmetry-of-the-quadratic), delivered by a piecewise function instead of a power.
 
-The absolute value is the evenness *machine*: composing any function with $|x|$ on the input side manufactures an even result, which is exactly what the reflections tool demonstrates with $f(|x|)$.`,
+The absolute value is the evenness **machine**: composing any function with $|x|$ on the input side manufactures an even result, which is exactly what the reflections tool demonstrates with $f(|x|)$.`,
       link: '',
     },
     obj14: {
@@ -243,7 +243,7 @@ Its partner [sine](!#symmetry-of-sine) carries the opposite parity — together 
       title: `Odd Functions`,
       content: `Four families satisfy $f(-x) = -f(x)$: the [identity](!#symmetry-of-the-identity), the [cubic](!#symmetry-of-the-cubic), [sine](!#symmetry-of-sine), and the [reciprocal](!#symmetry-of-the-reciprocal). Their symmetry is rotational — spin the graph $180°$ about the origin and it lands on itself.
 
-The three-curve view shows the odd signature: amber $f(-x)$ and teal $-f(x)$ coincide with *each other*, leaving the blue curve to match them as a rotated copy of itself. A different overlap than the even case — and the tool's verdict card reads the difference automatically.`,
+The three-curve view shows the odd signature: amber $f(-x)$ and teal $-f(x)$ coincide with **each other**, leaving the blue curve to match them as a rotated copy of itself. A different overlap than the even case — and the tool's verdict card reads the difference automatically.`,
       before: ``, after: ``, link: '',
     },
     obj16: {
@@ -281,14 +281,14 @@ Sine and [cosine](!#symmetry-of-cosine) make the canonical even/odd pair, and th
       title: `Symmetry of the Reciprocal`,
       content: `The hyperbola $1/x$ is odd around its own singularity: $1/(-x) = -1/x$, the two branches trading places under a half-turn.`,
       before: ``,
-      after: `The first-quadrant branch rotates exactly onto the third-quadrant branch — origin symmetry that survives even though the function is not defined *at* the origin. Oddness never required $f(0)$ to exist; it only constrains the points that do.
+      after: `The first-quadrant branch rotates exactly onto the third-quadrant branch — origin symmetry that survives even though the function is not defined **at** the origin. Oddness never required $f(0)$ to exist; it only constrains the points that do.
 
 The frozen view shows the familiar coincidence of amber and teal, here split across two disconnected pieces — a reminder that symmetry is a property of the whole point set, not of a connected curve.`,
       link: '',
     },
     obj20: {
       title: `Functions with Neither Symmetry`,
-      content: `Four families answer "neither": the [square root](!#symmetry-of-the-square-root), the [exponential](!#symmetry-of-the-exponential), the [logarithm](!#symmetry-of-the-logarithm), and [the mixed polynomial](!#symmetry-of-the-mixed-polynomial) $x^2 + x$ — and they fail for three *different* reasons.
+      content: `Four families answer "neither": the [square root](!#symmetry-of-the-square-root), the [exponential](!#symmetry-of-the-exponential), the [logarithm](!#symmetry-of-the-logarithm), and [the mixed polynomial](!#symmetry-of-the-mixed-polynomial) $x^2 + x$ — and they fail for three **different** reasons.
 
 The root and the logarithm never get to take the test: their domains exclude the negative inputs the comparison needs. The exponential takes it and fails both halves. The mixed polynomial fails because its terms disagree — one even, one odd, no shared verdict. Three failure modes, all visible as three genuinely different curves in the frozen scenes.`,
       before: ``, after: ``, link: '',
@@ -310,7 +310,7 @@ The [logarithm](!#symmetry-of-the-logarithm) fails identically; one-sided domain
       before: ``,
       after: `The three curves are three genuinely different objects: blue growth, amber decay (its y-axis mirror), and teal negative growth (its flip). No overlaps anywhere — the visual definition of "neither".
 
-Yet the failure is structured: $e^{-x}$ is the *reciprocal* of $e^x$, a multiplicative symmetry the additive even/odd test cannot see. Some functions are asymmetric; the exponential is symmetric in a different currency.
+Yet the failure is structured: $e^{-x}$ is the **reciprocal** of $e^x$, a multiplicative symmetry the additive even/odd test cannot see. Some functions are asymmetric; the exponential is symmetric in a different currency.
 
 Its even and odd parts have names — $\\cosh$ and $\\sinh$ — the standard decomposition applied to the most famous "neither" function.`,
       link: '',
@@ -323,7 +323,7 @@ Its even and odd parts have names — $\\cosh$ and $\\sinh$ — the standard dec
 
 The derivation block simply reports "undefined for $x > 0$" — the honest verdict when the comparison cannot be evaluated.
 
-Interestingly, the amber curve $\\ln(-x)$ *is* a legitimate function — it is the [y-axis reflection](!#symmetry-of-the-square-root) of the logarithm — it just is not equal to the original, which is what evenness would demand.`,
+Interestingly, the amber curve $\\ln(-x)$ **is** a legitimate function — it is the [y-axis reflection](!#symmetry-of-the-square-root) of the logarithm — it just is not equal to the original, which is what evenness would demand.`,
       link: '',
     },
     obj24: {
@@ -332,7 +332,7 @@ Interestingly, the amber curve $\\ln(-x)$ *is* a legitimate function — it is t
       before: ``,
       after: `Compute the test: $f(-x) = x^2 - x$. That matches neither $f(x) = x^2 + x$ nor $-f(x) = -x^2 - x$ — the even term keeps its sign, the odd term flips, and the mixture agrees with nothing.
 
-The frozen scene shows three distinct parabolas, the amber one being the blue's mirror — a *shifted-looking* twin, not a coincident one.
+The frozen scene shows three distinct parabolas, the amber one being the blue's mirror — a **shifted-looking** twin, not a coincident one.
 
 The example generalizes into the decomposition theorem: every function splits uniquely as even part plus odd part — here literally $x^2$ plus $x$, the two terms this polynomial was built from.`,
       link: '',

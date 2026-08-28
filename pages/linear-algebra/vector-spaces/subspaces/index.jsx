@@ -948,7 +948,7 @@ const subspaceRecognition = {
           anchor: '#3',
           formula: '$V \\subseteq V$',
           condition: 'the largest subspace',
-          note: 'Closure holds because $V$ is a vector space to begin with. Worth stating so that "subspace" is understood as *at most* $V$ rather than strictly smaller \u2014 proper subspaces are the special case, not the definition.',
+          note: 'Closure holds because $V$ is a vector space to begin with. Worth stating so that "subspace" is understood as **at most** $V$ rather than strictly smaller \u2014 proper subspaces are the special case, not the definition.',
         },
         {
           name: 'The zero subspace',
@@ -1005,7 +1005,7 @@ const subspaceRecognition = {
           formula: '$\\mathbf{x}_p + \\operatorname{Null}(A)$, $\\mathbf{b} \\neq \\mathbf{0}$',
           condition: 'fails clause 1 \u2014 $A\\mathbf{0} = \\mathbf{0} \\neq \\mathbf{b}$',
           key: true,
-          note: 'The null space translated off the origin. Not a subspace, but a coset of one \u2014 which is why the general solution has the shape it does and why its *dimension* still comes from the null space.',
+          note: 'The null space translated off the origin. Not a subspace, but a coset of one \u2014 which is why the general solution has the shape it does and why its **dimension** still comes from the null space.',
         },
         {
           name: 'First quadrant of $\\mathbb{R}^2$',
@@ -1544,7 +1544,7 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          `A list of examples answers whether each one is a subspace. Sorting them by *which clause of the test decides* answers something more useful: what to check first, and what a near-miss looks like. The three groups below are the candidates that pass by definition, those that pass because linearity forces them to, and those that fail — with the failing clause named in each case.`,
+          `A list of examples answers whether each one is a subspace. Sorting them by **which clause of the test decides** answers something more useful: what to check first, and what a near-miss looks like. The three groups below are the candidates that pass by definition, those that pass because linearity forces them to, and those that fail — with the failing clause named in each case.`,
           <DiagramFrame
             key={'obj10-diagram'}
             id="subspace-recognition"

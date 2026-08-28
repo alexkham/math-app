@@ -155,7 +155,7 @@
 //     sample:{
 //       title:`Sample Space and Events`,
 //       content:`
-// In probability we start with the idea of a *sample space*: the collection of all possible outcomes of an experiment or situation. Once this full list of possibilities exists, we naturally group some of them together into meaningful situations — these are the **events** we reason about.
+// In probability we start with the idea of a **sample space**: the collection of all possible outcomes of an experiment or situation. Once this full list of possibilities exists, we naturally group some of them together into meaningful situations — these are the **events** we reason about.
 
 // An event might contain just one outcome or many of them. What matters is that it represents a situation we care about: "the result is 4," "the value falls in a certain range," "the system enters a failure mode," and so on.
 
@@ -176,7 +176,7 @@
 // - **Certain event** — a situation that always happens.
 // - **Complement** — everything that is "not" the event.
 // - **Union** — a situation where one event *or* another occurs.
-// - **Intersection** — a situation where events occur *together*.
+// - **Intersection** — a situation where events occur **together**.
 // - **Disjoint events** — situations that cannot both occur.
 // - **Difference (A − B)** — situations in A that do not include B.
 
@@ -268,7 +268,7 @@
 
 // - **"At least one"** — captures situations where any one of several conditions is enough.
 // - **"Exactly k"** — focuses on a specific number of occurrences.
-// - **Complements** — useful when it's easier to describe what does *not* happen.
+// - **Complements** — useful when it's easier to describe what does **not** happen.
 // - **Case-based events** — describing a situation by splitting it into separate scenarios.
 // - **Nested events** — one event happening inside a broader condition.
 
@@ -866,7 +866,7 @@ export async function getStaticProps(){
     sample:{
       title:`Sample Space and Events`,
       content:`
-In probability we start with the idea of a *sample space*: the collection of all possible outcomes of an experiment or situation. Once this full list of possibilities exists, we naturally group some of them together into meaningful situations — these are the **events** we reason about.
+In probability we start with the idea of a **sample space**: the collection of all possible outcomes of an experiment or situation. Once this full list of possibilities exists, we naturally group some of them together into meaningful situations — these are the **events** we reason about.
 
 An event might contain just one outcome or many of them. What matters is that it represents a situation we care about: "the result is 4," "the value falls in a certain range," "the system enters a failure mode," and so on.
 
@@ -886,8 +886,8 @@ Events can take many forms depending on how outcomes are grouped together. Some 
 - **Empty event** — a situation that cannot happen.
 - **Certain event** — a situation that always happens.
 - **Complement** — everything that is "not" the event.
-- **Union** — a situation where one event *or* another occurs.
-- **Intersection** — a situation where events occur *together*.
+- **Union** — a situation where one event **or** another occurs.
+- **Intersection** — a situation where events occur **together**.
 - **Disjoint events** — situations that cannot both occur.
 - **Difference (A − B)** — situations in A that do not include B.
 
@@ -983,7 +983,7 @@ Certain forms of events appear again and again in probability questions. Recogni
 
 - **"At least one"** — captures situations where any one of several conditions is enough.
 - **"Exactly k"** — focuses on a specific number of occurrences.
-- **Complements** — useful when it's easier to describe what does *not* happen.
+- **Complements** — useful when it's easier to describe what does **not** happen.
 - **Case-based events** — describing a situation by splitting it into separate scenarios.
 - **Nested events** — one event happening inside a broader condition.
 

@@ -131,7 +131,7 @@ Hovering or clicking an interval or critical point updates the explanation panel
 • **Steps** — a numbered list reconstructing the standard solving procedure: rewrite the equation as $f(x) - n = 0$, factor or otherwise reduce, locate the zeros, classify them by multiplicity, and read off the solution set. Each step is short and tied to what is on screen.
 • **Live** — a compact table that recomputes whenever the marble moves. It shows the marble's current $x$, the value of $f(x)$, the target $n$, the difference $f(x) - n$, and its sign, ending with a verdict: does the equation $f(x) = n$ hold at this $x$?
 
-A short verbal summary below the table phrases the conclusion in plain language. The Steps tab is best for understanding *why* a solution is what it is; the Live tab is best for *checking* candidate solutions in real time.`,
+A short verbal summary below the table phrases the conclusion in plain language. The Steps tab is best for understanding **why** a solution is what it is; the Live tab is best for **checking** candidate solutions in real time.`,
       before: ``,
       after: ``,
       link: '',
@@ -236,7 +236,7 @@ The quartet is the discriminant of $f(x) - n$ made visible: positive, zero, nega
 
     obj13: {
       title: `Cubic Equations in the Explorer`,
-      content: `The Cubic tab solves $ax^3 + bx + c = n$. A cubic's ends run to opposite infinities, so it can never miss a horizontal line — the question is only *how many times* it crosses: three ([three roots](!#a-cubic-with-three-roots)), one ([one root](!#a-cubic-with-one-root)), or three again after the level moves off the symmetric zero ([the shifted cubic](!#the-shifted-cubic)).
+      content: `The Cubic tab solves $ax^3 + bx + c = n$. A cubic's ends run to opposite infinities, so it can never miss a horizontal line — the question is only **how many times** it crosses: three ([three roots](!#a-cubic-with-three-roots)), one ([one root](!#a-cubic-with-one-root)), or three again after the level moves off the symmetric zero ([the shifted cubic](!#the-shifted-cubic)).
 
 The guaranteed crossing is the family's headline fact: every cubic equation has at least one real solution, a direct consequence of the intermediate value theorem. The local hills and valleys created by a negative linear coefficient are what open the door to three.`,
       before: ``,
@@ -260,7 +260,7 @@ The V makes the solution-count logic purely visual: the vertex sits at height $k
       title: `The Basic Linear Equation`,
       content: `The opening template freezes $x = 3$ — the identity line $f(x) = x$ against the level $n = 3$. One clean crossing at $x = 3$, marked on the axis; the marble waits at $x = 0$, off by exactly $3$.`,
       before: ``,
-      after: `No equation is more transparent, which is precisely its value as a first frame: the curve *is* the $x$-value, so asking "where does $f(x)$ reach $3$?" answers itself. The sign chart underneath is correspondingly minimal — negative left of $3$, zero at $3$, positive right of it.
+      after: `No equation is more transparent, which is precisely its value as a first frame: the curve **is** the $x$-value, so asking "where does $f(x)$ reach $3$?" answers itself. The sign chart underneath is correspondingly minimal — negative left of $3$, zero at $3$, positive right of it.
 
 Every other state on this page is a complication of this picture: steeper slopes rescale it, negative slopes mirror it, higher degrees bend the line into curves that can cross a level more than once — or not at all. Compare [the steep line](!#the-steep-line) for the first complication.`,
       link: '',
@@ -270,7 +270,7 @@ Every other state on this page is a complication of this picture: steeper slopes
       title: `The Steep Line`,
       content: `The second template freezes $3x - 2 = 4$: a slope-3 line meeting the level at the single solution $x = 2$.`,
       before: ``,
-      after: `Steepness changes the *sensitivity*, not the count: there is still exactly one solution, but each unit the level moves shifts it by only a third. Algebraically that is the division step $x = (n - b)/a$ — the steeper the line, the smaller the correction.
+      after: `Steepness changes the **sensitivity**, not the count: there is still exactly one solution, but each unit the level moves shifts it by only a third. Algebraically that is the division step $x = (n - b)/a$ — the steeper the line, the smaller the correction.
 
 The frozen marble at $x = 0$ reads $f(0) = -2$, a gap of $6$ to the target — the amber bar in the frame measures exactly that vertical shortfall. Watching the bar shrink as the marble slides right is the graphical version of "closing in on the solution". The mirrored orientation is next, in [the falling line](!#the-falling-line).`,
       link: '',
@@ -280,7 +280,7 @@ The frozen marble at $x = 0$ reads $f(0) = -2$, a gap of $6$ to the target — t
       title: `The Falling Line`,
       content: `The third template freezes $-x + 5 = 0$: a downhill line crossing level zero at $x = 5$.`,
       before: ``,
-      after: `A negative slope flips the geometry — the line now descends through the level — but not the arithmetic: one slope, one crossing, one solution. The sign chart is the giveaway detail: $f(x) - n$ is now *positive* on the left and *negative* on the right, the reverse of the rising templates.
+      after: `A negative slope flips the geometry — the line now descends through the level — but not the arithmetic: one slope, one crossing, one solution. The sign chart is the giveaway detail: $f(x) - n$ is now **positive** on the left and **negative** on the right, the reverse of the rising templates.
 
 That sign reversal matters more than it seems: for equations it changes nothing, but for the companion inequality tool it swaps which side of the crossing satisfies $f(x) < n$. The explorer's shared layout makes the comparison one click away.`,
       link: '',
@@ -290,7 +290,7 @@ That sign reversal matters more than it seems: for equations it changes nothing,
       title: `The Constant Equation`,
       content: `Not a template, but one slider-drag away: set $a = 0$ and the line goes flat. The frozen frame shows $2 = 3$ — a horizontal line at height $2$ that never touches the level $3$. No solution markers appear anywhere.`,
       before: ``,
-      after: `This is the linear family's degenerate boundary, and the tool's own slider tooltip calls it out: when $a = 0$ the equation has no solution unless $b = n$. The dichotomy is total. If $b \\neq n$, the two horizontal lines are parallel and distinct — the equation $b = n$ is simply false, and the solution set is empty. If $b = n$, they coincide and *every* $x$ is a solution — the equation has become an identity.
+      after: `This is the linear family's degenerate boundary, and the tool's own slider tooltip calls it out: when $a = 0$ the equation has no solution unless $b = n$. The dichotomy is total. If $b \\neq n$, the two horizontal lines are parallel and distinct — the equation $b = n$ is simply false, and the solution set is empty. If $b = n$, they coincide and **every** $x$ is a solution — the equation has become an identity.
 
 Nothing in between is possible: a constant equation has zero solutions or infinitely many, never one. It is the first stop in a theme the other families continue — solution counts are governed by geometry, and degenerate geometry produces degenerate counts. Try it live: load [the basic line](!#the-basic-linear-equation) and drag the slope slider to $0$.`,
       link: '',
@@ -312,7 +312,7 @@ The sign chart shows the signature quadratic pattern: positive, zero, negative, 
       title: `The Tangent Case: One Solution`,
       content: `The second template freezes $x^2 = 0$: the level line grazes the parabola exactly at its vertex. One marker, at $x = 0$ — and this time the marble happens to sit on it.`,
       before: ``,
-      after: `Tangency is the boundary case of the discriminant — zero, in this configuration — and the root it produces is *repeated*: $x = 0$ counts twice as a root of $x^2$. The sign chart betrays the multiplicity: the product row reads positive, zero, positive, with **no sign change** across the root. The curve touches the level and retreats without crossing.
+      after: `Tangency is the boundary case of the discriminant — zero, in this configuration — and the root it produces is **repeated**: $x = 0$ counts twice as a root of $x^2$. The sign chart betrays the multiplicity: the product row reads positive, zero, positive, with **no sign change** across the root. The curve touches the level and retreats without crossing.
 
 That failure to change sign is the visual definition of even multiplicity, and it is why the tangent case is fragile: nudge $n$ up and the single solution splits into [two](!#a-parabola-with-two-solutions); nudge it down and both vanish into [none](!#a-parabola-with-no-solution). One slider unit in either direction changes the count.`,
       link: '',
@@ -324,7 +324,7 @@ That failure to change sign is the visual definition of even multiplicity, and i
       before: ``,
       after: `An empty solution set drawn honestly: the curve and the level line simply never meet, because $x^2 + 4 \\geq 4 > 0$ for every real $x$. The sign chart collapses to a single all-positive row — no zeros, no sign changes, no columns to inspect.
 
-This is also the doorway to complex numbers: $x^2 + 4 = 0$ has no *real* solutions, but it has two imaginary ones, $\\pm 2i$. The explorer draws the real story only — the picture of "no crossing" is exactly what "the roots moved off the real line" looks like from the real axis.`,
+This is also the doorway to complex numbers: $x^2 + 4 = 0$ has no **real** solutions, but it has two imaginary ones, $\\pm 2i$. The explorer draws the real story only — the picture of "no crossing" is exactly what "the roots moved off the real line" looks like from the real axis.`,
       link: '',
     },
 
@@ -334,7 +334,7 @@ This is also the doorway to complex numbers: $x^2 + 4 = 0$ has no *real* solutio
       before: ``,
       after: `This state makes the page's central rearrangement concrete: subtract the level and solve $x^2 - 2x - 8 = 0$, which factors as $(x - 4)(x + 2)$. The two frozen markers are those factors' roots — the target $n = 5$ has been absorbed into the constant term, exactly as the "solve $f(x) = n$ via $f(x) - n = 0$" recipe prescribes.
 
-Unlike [the symmetric two-solution state](!#a-parabola-with-two-solutions), the crossings here are off-center — the linear term $-2x$ pushes the vertex to $x = 1$, and the two solutions sit symmetrically around *that* axis instead of around zero. Same count, same mechanism, less symmetry: a useful step away from special cases.`,
+Unlike [the symmetric two-solution state](!#a-parabola-with-two-solutions), the crossings here are off-center — the linear term $-2x$ pushes the vertex to $x = 1$, and the two solutions sit symmetrically around **that** axis instead of around zero. Same count, same mechanism, less symmetry: a useful step away from special cases.`,
       link: '',
     },
 
@@ -344,7 +344,7 @@ Unlike [the symmetric two-solution state](!#a-parabola-with-two-solutions), the 
       title: `A Cubic with Three Roots`,
       content: `The first cubic template freezes $x^3 - 3x = 0$: an S-shaped curve crossing the zero level three times — at $-\\sqrt{3}$, $0$, and $\\sqrt{3}$.`,
       before: ``,
-      after: `Three is the cubic's maximum, and the frame shows what it takes: the negative linear term carves a local hill and valley, and the level line passes *between* their heights, meeting each monotone stretch once. The crossings at $\\pm\\sqrt{3} \\approx \\pm 1.73$ land at irrational positions — the axis labels read $1.73$, a quiet reminder that solution sets don't respect integer grids.
+      after: `Three is the cubic's maximum, and the frame shows what it takes: the negative linear term carves a local hill and valley, and the level line passes **between** their heights, meeting each monotone stretch once. The crossings at $\\pm\\sqrt{3} \\approx \\pm 1.73$ land at irrational positions — the axis labels read $1.73$, a quiet reminder that solution sets don't respect integer grids.
 
 The sign chart alternates through all four intervals: negative, positive, negative, positive. That alternation — sign change at every root — certifies all three roots as simple. Compress the hill and valley away and you get [the one-root cubic](!#a-cubic-with-one-root).`,
       link: '',
@@ -354,7 +354,7 @@ The sign chart alternates through all four intervals: negative, positive, negati
       title: `A Cubic with One Root`,
       content: `The second template freezes $x^3 = 0$: the pure cube, monotone from $-\\infty$ to $+\\infty$, crossing the level exactly once — at the origin, where the marble sits.`,
       before: ``,
-      after: `With no linear term to fight it, the cubic never turns back: it rises through every level exactly once, so *every* target $n$ yields exactly one real solution. This is the intermediate value theorem in its cleanest costume — a continuous curve from one infinity to the other cannot skip a level.
+      after: `With no linear term to fight it, the cubic never turns back: it rises through every level exactly once, so **every** target $n$ yields exactly one real solution. This is the intermediate value theorem in its cleanest costume — a continuous curve from one infinity to the other cannot skip a level.
 
 The root at $0$ is triple ($x^3$ has $x = 0$ with multiplicity three), and the sign chart records it with a change of sign — odd multiplicity crosses, unlike the quadratic's [tangent touch](!#the-tangent-case-one-solution). The flattened shelf around the origin is the picture of that tripled root: the curve crosses, but reluctantly.`,
       link: '',
@@ -388,7 +388,7 @@ Between the arms, the sign chart dips negative — $|x| - 3 < 0$ for $|x| < 3$ �
       before: ``,
       after: `The V's version of tangency: level and vertex agree, and the equation $|x| = 0$ has the unique solution $x = 0$. But the analogy to the parabola's [tangent case](!#the-tangent-case-one-solution) has a limit worth stating — there is no multiplicity here in the polynomial sense, because $|x|$ is not a polynomial. The curve is not flat at the touching point; it comes in at slope $-1$ and leaves at slope $+1$.
 
-The sign chart still shows the even-multiplicity *pattern* — positive, zero, positive, no sign change — proving the pattern belongs to the geometry (touch without crossing) rather than to polynomial algebra. One nudge of $n$ resolves the state into [two solutions](!#the-v-with-two-solutions) or [none](!#the-v-that-never-reaches).`,
+The sign chart still shows the even-multiplicity **pattern** — positive, zero, positive, no sign change — proving the pattern belongs to the geometry (touch without crossing) rather than to polynomial algebra. One nudge of $n$ resolves the state into [two solutions](!#the-v-with-two-solutions) or [none](!#the-v-that-never-reaches).`,
       link: '',
     },
 
@@ -396,9 +396,9 @@ The sign chart still shows the even-multiplicity *pattern* — positive, zero, p
       title: `The V That Never Reaches`,
       content: `The last template freezes $|x| + 5 = 2$: the V floats with its vertex at height $5$, far above the level line at $2$. No markers, no solutions.`,
       before: ``,
-      after: `The inequality behind the emptiness is one line: $|x| + 5 \\geq 5 > 2$ for every $x$, so nothing to solve. The explorer's result pill states it directly — *no real solutions* — and the sign chart is one all-positive stripe, the same degenerate chart the parabola's [no-solution state](!#a-parabola-with-no-solution) produces.
+      after: `The inequality behind the emptiness is one line: $|x| + 5 \\geq 5 > 2$ for every $x$, so nothing to solve. The explorer's result pill states it directly — **no real solutions** — and the sign chart is one all-positive stripe, the same degenerate chart the parabola's [no-solution state](!#a-parabola-with-no-solution) produces.
 
-One difference from the quadratic case deserves the closing word: there is no complex-number rescue here. $x^2 + 4 = 0$ has imaginary roots, but $|x| + 5 = 2$ has no solutions in any number system where absolute value means distance — the equation is not hiding its answers off the real line; it simply asks for a negative distance. Empty can mean *empty*.`,
+One difference from the quadratic case deserves the closing word: there is no complex-number rescue here. $x^2 + 4 = 0$ has imaginary roots, but $|x| + 5 = 2$ has no solutions in any number system where absolute value means distance — the equation is not hiding its answers off the real line; it simply asks for a negative distance. Empty can mean **empty**.`,
       link: '',
     },
   }

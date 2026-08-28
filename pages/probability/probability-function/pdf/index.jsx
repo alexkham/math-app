@@ -154,7 +154,7 @@ The density function $f_X(x)$ must be integrated over an interval to yield proba
 
 Point probabilities are always zero: $P(X = a) = \\int_a^a f_X(x)dx = 0$
 
-The notation emphasizes that $f(x)$ is fundamentally different from the PMF notation $p(x)$—one requires integration to get probability, the other gives probability directly.
+The notation emphasizes that $f(x)$ is fundamentally different from the PMF notation $p(x)$—one requires integration to get probability, the other gives probability directly. The full account of these marks — including the density-may-exceed-one warning — lives at [probability function notation](!/probability/probability-function#notation).
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
     `,

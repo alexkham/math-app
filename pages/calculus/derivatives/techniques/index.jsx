@@ -380,10 +380,10 @@ The technique works because the equation defines $y$ as a function of $x$ locall
         id: 'inverse-prime',
         tex: `$(f^{-1})'(b)$`,
         read: `The derivative of f inverse, at b`,
-        means: `Parentheses first, prime second: invert the function, *then* differentiate. The bracketing is load-bearing — three different objects live one keystroke apart.`,
+        means: `Parentheses first, prime second: invert the function, **then** differentiate. The bracketing is load-bearing — three different objects live one keystroke apart.`,
         cases: `$(f^{-1})'$ — derivative of the inverse, this page. $(f')^{-1}$ — could be reciprocal or the inverse function of $f'$; context must decide. $\\frac{1}{f'}$ — the pointwise reciprocal, unambiguous.`,
         alsoWritten: `$\\frac{dx}{dy}$ — Leibniz form, where inverting the function literally flips the fraction: $\\frac{dx}{dy} = 1\\big/\\frac{dy}{dx}$.`,
-        confusedWith: `Reading $(f^{-1})'(b) = \\frac{1}{f'(a)}$ as a pointwise identity at one input. The two sides are evaluated at *different* points — $b$ on the left, $a = f^{-1}(b)$ on the right; the $-1$ superscript hazard itself is mapped on [inverse functions](!/functions/inverse).`,
+        confusedWith: `Reading $(f^{-1})'(b) = \\frac{1}{f'(a)}$ as a pointwise identity at one input. The two sides are evaluated at **different** points — $b$ on the left, $a = f^{-1}(b)$ on the right; the $-1$ superscript hazard itself is mapped on [inverse functions](!/functions/inverse).`,
       },
       {
         id: 'parametric-ratio',

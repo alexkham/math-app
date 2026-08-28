@@ -857,6 +857,7 @@ import GeometricDistributionCDF from '@/app/components/visualizations/probabilit
 import GeometricDistributionCalculator from '@/app/components/calculators/probability/distributions/GeometricDistributionCalculator'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -992,11 +993,11 @@ Flipping a [coin](!/probability/models/coin-toss) repeatedly until the first hea
     obj2:{
       title:`Parameters`,
       content:`
-      $𝑝$: probability of success on a single trial, with $0<𝑝≤1$
+      $p$: probability of success on a single trial, with $0<p≤1$
 
 The geometric distribution models the number of trials needed to get the first success in a sequence of independent Bernoulli trials. 
 
-There's only one parameter — $𝑝$, the chance of success each time — which completely determines the shape of the distribution. 
+There's only one parameter — $p$, the chance of success each time — which completely determines the shape of the distribution. 
 
 The outcomes are positive integers: $1,2,3,…$ where each value represents the trial number on which success first occurs.
       `,
@@ -1304,46 +1305,45 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
     },
 
 
-    obj15:{
-  
-      title:`Notation Used`,
-      content:`
-      $X \\sim \\text{Geom}(p)$ or $X \\sim \\text{Geometric}(p)$ — **distribution of the random variable**.
+    notation:{
 
-$\\text{Geom}(p)$ — **used to denote the distribution itself (not the random variable)**.
-
-$G(p)$ — **less common shorthand in some texts or software contexts**.
-
-$P(X = k) = (1 - p)^{k - 1} p, \\quad \\text{for } k = 1, 2, 3, \\ldots$ — **probability mass function (PMF)**, where:
-
-\t$p$ — probability of success on each trial
-
-\t$k$ — number of trials until first success
-
-**Alternative PMF formulation:**
-
-\t$P(X = k) = (1 - p)^k p, \\quad \\text{for } k = 0, 1, 2, \\ldots$ — number of failures before first success
-
-**Alternative notations:**
-
-\t$q = 1 - p$ — probability of failure, so PMF can be written as $P(X = k) = q^{k-1} p$
-
-**Key properties:**
-
-\t$E[X] = \\frac{1}{p}$ — expected value (mean)
-
-\t$\\text{Var}(X) = \\frac{1-p}{p^2}$ — variance
-
-**Memoryless property:**
-
-\t$P(X > m + n \\mid X > m) = P(X > n)$ — the distribution has no memory
-      
-  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+      title:`Geometric Notation`,
+      lead:`The geometric is the family's cautionary tale: one name, two incompatible definitions, and nothing but the notation to tell them apart. The [parameter-convention warning](!/probability/distributions#notation) names this page as its worst case — the marks below are how to read which geometric a source means before trusting a single formula. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); $q = 1 - p$ from [binomial notation](!/probability/distributions/discrete/binomial#15); the given-bar from [conditional probability notation](!/probability/conditional-probability#notation); $E[X]$ and $\\operatorname{Var}(X)$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'two-definitions',
+          tex:`$X \\sim \\operatorname{Geom}(p)$`,
+          read:`X follows a geometric distribution — but which one, the declaration alone cannot say`,
+          means:`$\\operatorname{Geom}(p)$, spelled-out $\\operatorname{Geometric}(p)$, occasionally $G(p)$ — and behind every spelling, two rival definitions: $X$ counts the **trials up to and including** the first success, or the **failures before** it. The declaration looks identical either way; only the surrounding marks reveal the convention.`,
+          cases:`Two fingerprints settle it: the support line — starting at $1, 2, 3, \\ldots$ means trials, starting at $0, 1, 2, \\ldots$ means failures — and the mean, $E[X] = 1/p$ for trials against $q/p$ for failures. Much software counts failures while most introductory texts count trials, so the check is not optional when moving between the two.`,
+          confusedWith:`Each other, silently. Every formula on this page shifts by exactly one between the conventions — quoting a trials-convention mean into a failures-convention model is off by one forever, with no error message anywhere.`,
+        },
+        {
+          id:'pmf-pair',
+          tex:`$P(X{=}k) = q^{k-1}p$ vs $q^k p$`,
+          read:`k-minus-one failures then a success — or k failures then a success`,
+          means:`The exponent carries the convention: $q^{k-1}p$ spells "the $k$-th trial succeeds after $k{-}1$ failures", $q^k p$ spells "$k$ failures, then success" — the [failure abbreviation $q$](!/probability/distributions/discrete/binomial#15) doing the compression in both. Read the exponent before the formula: it is the convention's signature inside the pmf itself.`,
+          cases:`The tail closes in one mark: $P(X > k) = q^k$ under the trials convention — surviving $k$ trials means $k$ straight failures — the cleanest [tail-probability](!/probability/inequalities/markov#notation) formula any distribution owns, and the engine behind the memoryless property below.`,
+          confusedWith:`A typo. The two pmfs differ only in an exponent's $-1$ — easy to "correct" in either direction when copying between sources; the support clause beside the formula is the arbiter of which exponent is right.`,
+        },
+        {
+          id:'memoryless',
+          tex:`$P(X > m + n \\mid X > m) = P(X > n)$`,
+          read:`given m fruitless trials so far, the remaining wait behaves like a fresh start`,
+          means:`The signature property written in marks: two survival tails and a [given-bar](!/probability/conditional-probability#notation), stating that conditioning on $m$ failures shifts nothing — the wait restarts clean. Among discrete distributions only the geometric satisfies this line; its continuous twin is the [exponential](!/probability/distributions/continuous/exponential), which owns the same identity with real-valued slots.`,
+          cases:`The proof is one substitution: with $P(X > k) = q^k$, the left side becomes $q^{m+n}/q^m = q^n$ — the tail formula from the previous entry doing all the work.`,
+          confusedWith:`The gambler's intuition it refutes. The identity says a streak of failures does **not** make success "due" — reading the conditional as accumulating pressure is exactly the fallacy the formula exists to forbid.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj16:{
@@ -1567,13 +1567,21 @@ export default function GeometricDistributionPage({
 
       {
         id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-
-            <div key={'notation-geometric'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-                                {processContent(sectionsContent.obj15.content)}
-                            </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

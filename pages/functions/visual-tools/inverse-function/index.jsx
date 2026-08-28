@@ -75,7 +75,7 @@ Click any family to switch. Parameters reset to defaults on every switch, so you
 
 The transformed function is $g(x) = a \\cdot f(b(x - h)) + k$. The visualizer **re-derives the inverse symbolically** every time you move a slider, so $g^{-1}(x) = h + f^{-1}((x - k) / a) / b$ updates in real time. Both equations are displayed as monospace badges in the plot header.
 
-The most important thing this slider strip teaches: transforming $f$ does not just move the inverse on the screen, it changes *which* transformations the inverse carries. A vertical scale of $f$ becomes a horizontal scale of $f^{-1}$. Vertical shifts on $f$ become horizontal shifts on $f^{-1}$. The Parameters tab in the info panel makes this explicit.`,
+The most important thing this slider strip teaches: transforming $f$ does not just move the inverse on the screen, it changes **which** transformations the inverse carries. A vertical scale of $f$ becomes a horizontal scale of $f^{-1}$. Vertical shifts on $f$ become horizontal shifts on $f^{-1}$. The Parameters tab in the info panel makes this explicit.`,
       before: ``,
       after: ``,
       link: '',
@@ -118,7 +118,7 @@ For self-inverse functions at default parameters, $g$ and $g^{-1}$ are the same 
 
 • **Explanation** — reads the current state. Shows the base function and its inverse, the transformed equations, and special notes for the current family (self-inverse identity, restriction explanation for restricted families). Closes with the inverse-check identity $g(g^{-1}(x)) = x$.
 
-• **Parameters** — explains the rule by which transformations of $f$ become transformations of $f^{-1}$. Includes a table showing each correspondence (vertical scale on $f$ becomes horizontal scale on $f^{-1}$, vertical shift becomes horizontal shift, and so on), then describes the current parameter values one by one. The most useful tab for understanding *why* the inverse changes the way it does.
+• **Parameters** — explains the rule by which transformations of $f$ become transformations of $f^{-1}$. Includes a table showing each correspondence (vertical scale on $f$ becomes horizontal scale on $f^{-1}$, vertical shift becomes horizontal shift, and so on), then describes the current parameter values one by one. The most useful tab for understanding **why** the inverse changes the way it does.
 
 • **Concepts** — general theory: reflection across $y = x$, the horizontal line test, restricted branches, the mirror identity. Independent of the current state.`,
       before: ``,
@@ -202,7 +202,7 @@ This is the same as the geometric fact that reflecting across $y = x$ swaps hori
       title: `Functions That Are Their Own Inverse`,
       content: `Two picker families answer the inversion question with "already done": the [identity](!#the-identity-and-its-inverse) and the [reciprocal](!#the-reciprocal-and-its-inverse) are **self-inverse** — applying them twice returns the input, so $f^{-1} = f$.
 
-Geometrically, self-inverse means the graph is its own mirror image across $y = x$. The identity lies *on* the mirror; the reciprocal straddles it symmetrically. In the plots for both, the amber inverse curve lands exactly on the blue one — the visualizer dashes the amber so the coincidence stays visible.`,
+Geometrically, self-inverse means the graph is its own mirror image across $y = x$. The identity lies **on** the mirror; the reciprocal straddles it symmetrically. In the plots for both, the amber inverse curve lands exactly on the blue one — the visualizer dashes the amber so the coincidence stays visible.`,
       before: ``, after: ``, link: '',
     },
     obj12: {
@@ -263,7 +263,7 @@ That interchangeability is the point: an inverse pair is one relationship viewed
       title: `The Quadratic and the Square Root`,
       content: `The parabola fails the horizontal line test — every positive output comes from two inputs — so inverting it requires surgery: keep only the branch $x \\geq 0$, shown bold over the faded full curve.`,
       before: ``,
-      after: `The kept right half is one-to-one, and its reflection is exactly $\\sqrt{x}$ — the amber curve. The discarded left half is why $\\sqrt{x}$ returns only the non-negative root: the branch choice made here *is* the definition of the square root function.
+      after: `The kept right half is one-to-one, and its reflection is exactly $\\sqrt{x}$ — the amber curve. The discarded left half is why $\\sqrt{x}$ returns only the non-negative root: the branch choice made here **is** the definition of the square root function.
 
 Choosing the other branch ($x \\leq 0$) would have produced $-\\sqrt{x}$ instead. Branch choice is a genuine convention, standardized so that everyone's square root agrees.
 
@@ -292,7 +292,7 @@ The absolute value makes the restriction lesson stark: what remains after cuttin
       title: `Sine and the Arcsine`,
       content: `A periodic wave hits every output infinitely often — the worst possible horizontal line test failure — so sine is restricted to one increasing sweep, $[-\\pi/2, \\pi/2]$, before inverting.`,
       before: ``,
-      after: `That single bold arch, rising from $-1$ to $1$, reflects into $\\arcsin(x)$: a curve living on the domain $[-1, 1]$ (sine's range, swapped into position) and producing angles in $[-\\pi/2, \\pi/2]$ — the *principal values*.
+      after: `That single bold arch, rising from $-1$ to $1$, reflects into $\\arcsin(x)$: a curve living on the domain $[-1, 1]$ (sine's range, swapped into position) and producing angles in $[-\\pi/2, \\pi/2]$ — the **principal values**.
 
 Every other period of the faded wave could have been chosen; the standardized branch is the one crossing the origin. Calculators answer $\\arcsin(0.5) = 30°$ rather than $150°$ because of exactly this convention.
 
@@ -303,7 +303,7 @@ Every other period of the faded wave could have been chosen; the standardized br
       title: `Cosine and the Arccosine`,
       content: `Cosine's restriction cannot copy sine's: on $[-\\pi/2, \\pi/2]$ cosine rises and falls, failing the test inside the window. The invertible sweep is $[0, \\pi]$ instead — one full descent from $1$ to $-1$.`,
       before: ``,
-      after: `Reflecting that falling branch produces $\\arccos(x)$: defined on $[-1, 1]$, returning angles in $[0, \\pi]$, and *decreasing* — the visible signature that distinguishes it from arcsine at a glance.
+      after: `Reflecting that falling branch produces $\\arccos(x)$: defined on $[-1, 1]$, returning angles in $[0, \\pi]$, and **decreasing** — the visible signature that distinguishes it from arcsine at a glance.
 
 The two arc functions are tied by $\\arccos(x) = \\pi/2 - \\arcsin(x)$: complementary branches of complementary functions.
 
@@ -457,7 +457,7 @@ Together with [sine](!#sine-and-the-arcsine), this closes the picker's tour of r
   // (SSR/SEO-visible; the component has no built-in per-family texts).
   const explanations = {
     identity:
-      '**Identity** $f(x) = x$ — self-inverse: its graph *is* the mirror line, so reflection changes nothing.\n\n' +
+      '**Identity** $f(x) = x$ — self-inverse: its graph **is** the mirror line, so reflection changes nothing.\n\n' +
       '[Learn more about the identity](!#the-identity-and-its-inverse) · [Self-inverse functions](!#functions-that-are-their-own-inverse)',
     linearScale:
       '**Linear** $f(x) = 2x$, $f^{-1}(x) = x/2$ — reciprocal slopes: reflection across $y = x$ swaps rise with run.\n\n' +
@@ -475,7 +475,7 @@ Together with [sine](!#sine-and-the-arcsine), this closes the picker's tour of r
       '**Logarithm** $\\ln(x)$, inverse $e^x$ — the same pair from the other end: $(f^{-1})^{-1} = f$.\n\n' +
       '[Learn more about this pair](!#the-logarithm-and-the-exponential)',
     quadratic:
-      '**Quadratic** $x^2$ restricted to $x \\geq 0$ — the branch choice that *defines* the square root; the discarded arm is why $\\sqrt{x}$ is never negative.\n\n' +
+      '**Quadratic** $x^2$ restricted to $x \\geq 0$ — the branch choice that **defines** the square root; the discarded arm is why $\\sqrt{x}$ is never negative.\n\n' +
       '[Learn more about the quadratic pair](!#the-quadratic-and-the-square-root) · [Restricted branches](!#the-horizontal-line-test-and-restricted-branches)',
     sqrt:
       '**Square root** $\\sqrt{x}$, inverse $x^2$ on $x \\geq 0$ — the restriction is inherited: inversion cannot recover what a branch cut discarded.\n\n' +

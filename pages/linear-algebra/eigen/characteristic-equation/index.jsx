@@ -1207,7 +1207,7 @@ The characteristic equation transforms the geometric question "which directions 
         means: `$\\lambda$ is the subject's reserved letter — eigenvalues are $\\lambda$ in every textbook on earth, enumerated $\\lambda_1, \\lambda_2, \\ldots$ when there are several. The defining equation reads as a balance: matrix action on the left, plain scaling on the right, same vector both sides.`,
         cases: `The full set of eigenvalues has its own mark in advanced texts: the spectrum $\\sigma(A)$ — a set-valued operator, sibling to $\\text{Col}$ and $\\text{Null}$.`,
         alsoWritten: `$\\mu$ when $\\lambda$ is spoken for, in perturbation and two-matrix arguments; German texts historically used $\\lambda$ from the start — the letter is Hilbert-era and stuck.`,
-        confusedWith: `A matrix. $\\lambda$ is a *scalar* — which is exactly why $A - \\lambda$ is illegal and the next entry's $I$ exists.`,
+        confusedWith: `A matrix. $\\lambda$ is a **scalar** — which is exactly why $A - \\lambda$ is illegal and the next entry's $I$ exists.`,
       },
       {
         id: 'lambda-i-object',

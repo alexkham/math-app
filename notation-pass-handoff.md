@@ -52,7 +52,7 @@ traditions, confusions). Canonical procedure: `notation-agent-procedure-v7.md`
    TWICE while drafting new entries (`[$\mu$](...)`), both caught by the greps.
    Run rule 9 on your OWN drafts, not just legacy content.
 
-## State: DONE — 12 sections, 107 notation sections written
+## State: DONE — 12 sections, 116 notation sections written
 
 | Section | Written | Notes |
 |---|---|---|
@@ -66,10 +66,10 @@ traditions, confusions). Canonical procedure: `notation-agent-procedure-v7.md`
 | combinatorics | 3 | 2026-08-17 |
 | arithmetic | 7 | 2026-08-21 |
 | logic | 5 | 2026-08-22 |
-| probability | **20** | 8 on 2026-08-22 + **12 on 2026-08-25 — SECTION CLOSED** |
+| probability | **29** | 8 on 2026-08-22 + **21 on 2026-08-25 — SECTION CLOSED** |
 
-**30 in-place replacements** (numeric-id or slug kept, inbound anchors verified each
-time) and **5 mandatory splits** project-wide.
+**39 in-place replacements** (numeric-id or slug kept, inbound anchors verified each
+time), **6 greenfields**, and **5 mandatory splits** project-wide.
 
 ## PROBABILITY — CLOSED 2026-08-25
 
@@ -92,13 +92,27 @@ indicator family 𝟙/I_A (indicators).
 
 ## Open items
 
-1. **REGISTRY VALIDATION + BUILD + COMMIT.** The permission classifier was down for
-   the ENTIRE 2026-08-25 session (~25 attempts) — `node` JSON-validation of the
-   registry never ran. Every edited region was read back and structurally verified
-   by hand, but run the parse FIRST thing in a working shell. Then: stop the dev
-   server on port 3000 (it contends with `next build` over `.next`; a second
-   instance may sit on 3001), `npx next build` (do NOT pipe through `head`), commit.
-   The tree carries this entire project plus older uncommitted work.
+1. **COMMIT — the only remaining operational debt.** Registry JSON validation and
+   the production build were BOTH blocked all session by a permission-classifier
+   outage (~30 attempts); the classifier recovered at the end of 2026-08-25 and both
+   ran clean:
+   - `node -e "JSON.parse(...)"` on the registry → **VALID**.
+   - `npx next build` → **exit code 0**, compiled in 3.5 min, lint passed, all 29
+     pages edited that day prerendered as SSG (verified by name in the output).
+     Only pre-existing `react-hooks/exhaustive-deps` and `no-img-element` warnings
+     in visualization components — none from notation work.
+   The tree still carries this entire project plus older uncommitted work. Commit is
+   all that is left.
+
+   **Build hygiene (learned the hard way 2026-08-25):** do NOT pipe `next build`
+   through `head` **or `tail`**. `head` kills it via SIGPIPE mid-write and corrupts
+   `.next`; `tail` is worse in one respect — it swallows the output *and* the
+   reported exit code becomes **tail's, not the build's**, so a failing build looks
+   green. A run that appeared to "exit 0" while printing an `ENOENT … mkdir
+   .next/server/pages/algebra/inequalities` was in fact a corrupted `.next`;
+   `rm -rf .next` plus an **unpiped** rebuild cleared it. Always run it unpiped and
+   read the real tail from the task output file. Stop any dev server on port 3000
+   first; it contends over `.next`.
 2. Doc patches pending (operator): H5 slug-id rule text, component path (~line 13).
 3. ASK-1 (CORRECTED 2026-08-25): `\lim`, `\to`, `\sqrt`, `\mid` absent from the
    keyboard dataset. **`\propto` and `\sum` ARE present** — the 08-24 flag on them
@@ -106,16 +120,61 @@ indicator family 𝟙/I_A (indicators).
    on independence).
 4. ASK-2: `/math-symbols/{algebra,functions,arithmetic}` not wired into other
    symbols pages' menus or the `/math-symbols` hub (structural, operator decides).
-5. **SITE-WIDE GREP CANDIDATE:** large-numbers-law had ALL 23 internal links missing
-   the `!` prefix (every link opened a new tab). Other pages authored in the same
-   batch may share the defect — `grep -rn '](/probability' pages/` style sweeps
-   per section would find them cheaply.
-6. Registry tidy: `probability/expected-value__notationSpot` and
-   `probability/variance__notationSpot` distinct-key merge still pending.
+5. **SITE-WIDE SWEEPS — three done 2026-08-25, one left open.** Details in the
+   registry under `$crossSectionFindings.$siteWideSweeps`.
+   - *Missing-`!` links* — swept site-wide; only large-numbers-law (23) and
+     variance (7) were affected. **Clean now.**
+   - *`*italics*` inside NotationSection fields* — **108 fixed across 37 files.**
+     Diagnostic finding: every affected file was in algebra, calculus or
+     linear-algebra, i.e. written **before** the render-bug rule existed
+     (2026-08-17). Every section written after it was clean — the rule-9 greps
+     work when they are actually run. Verified by asterisk-strip equality,
+     257 math segments compared identical, and a green build.
+   - *Broken `$\[…\]$` / `\(…\)` delimiters* — site-wide only two live instances
+     remained after the day's page fixes (both on /math-symbols). **Clean now.**
+   - *Body-prose italics* (fields `after`/`content`/`note`/`footnote`) — 260
+     site-wide at survey. **Probability's 7 fixed** (axioms, events,
+     distributions/discrete); that section is clean.
+   - *Math-alphanumeric Unicode inside `$…$`* — **found by the build, not a grep.**
+     `next build` warns `No character metrics for '𝜆'`: characters from the
+     Mathematical Alphanumeric Symbols block (U+1D400–U+1D7FF) were written inside
+     math where plain ASCII belongs, and KaTeX renders them with broken fallback
+     glyphs. 141 live segments site-wide. **Probability's 66 fixed** across 8 files
+     (Latin italics → ASCII, which KaTeX italicises anyway; Greek → `\\lambda`).
+     Then the remaining 75 (logic 74, trigonometry 1) were cleared too.
+     **ZERO remain site-wide.**
+   - *Body-prose italics, site-wide* — the deferred 253 were cleared as well
+     (combinatorics 71, algebra 57, functions 55, set-theory 37, calculus 24,
+     linear-algebra 19, arithmetic 12, complex-numbers 10, trigonometry 6).
+     **ZERO remain site-wide.**
+
+   **Verification methodology — read this before repeating a bulk repair.** The
+   asterisk-strip equality test used on the first sweep **cannot be reused naively**
+   here: `git diff` compares against HEAD, and this tree carries a lot of
+   uncommitted work from earlier sessions (arithmetic alone shows −469 lines that
+   predate this pass), so diffing against HEAD mixes other edits into the comparison
+   and reports a **false failure**. For a tree with pre-existing uncommitted work,
+   verify instead by: (a) **idempotency** — re-run the transform in dry-run and
+   confirm 0 changed lines; (b) **no `***`** anywhere, proving no double-application;
+   (c) the defect greps return 0; (d) a green production build.
+6. ~~Registry tidy: the two `__notationSpot` distinct keys~~ — **DONE 2026-08-25.**
+   Both merged into their canonical `probability/expected-value` and
+   `probability/variance` entries: current NotationSection spot first, the
+   superseded 2026-08-06 survey spot kept beside it as `resolved` with a
+   `resolution` string (never-delete-a-spot rule). Zero `__notationSpot` keys
+   remain; 236 page entries total.
 7. Stray `plagiarism:'yes'` key on chebyshev's obj3 sectionsContent — noted 2026-08-25,
    left untouched, operator's call.
-8. Backlink micro-pass candidate: `/math-symbols/*` explanations use page-level
-   links; could tighten to the ~107 `#notation` anchors now available.
+8. ~~Backlink micro-pass~~ — **INVESTIGATED AND CLOSED 2026-08-25. Do not re-open
+   as a bulk task.** The idea was to tighten `/math-symbols/*` page-level backlinks
+   to the 116 `#notation` anchors. Sizing looked good (119 page-level links, 85
+   pointing at pages that now own an anchor) — but reading the link *contexts*
+   overturned it: they are **concept** references inside symbol explanations
+   ("proportion of [variance]", "Central to [Bayes' theorem]"), where the reader
+   wants the topic, not its conventions. Re-anchoring would have been a net
+   regression on ~85 links. A grep for genuinely notation-flavored contexts across
+   the whole tree found exactly **one** (`z*` → "Alternative notation for the
+   complex conjugate"), which was upgraded. Final score: 1 of 119.
 9. Parked candidates: `⌊x⌋` floor bracket, complex-fractions main-bar-length cue,
    `sinh⁻¹/arsinh` naming, classical ratio P(A)=|A|/|Ω| as a compound mark
    (recommended-note at probability/combinatorics — natural home if a
@@ -165,6 +224,42 @@ tree/ownership conflicts silently.
 
 ## What's left project-wide
 
-The 12 content sections are all complete. Remaining work is optional/structural:
-the open items above (esp. the site-wide missing-`!` sweep and the backlink
-micro-pass), plus whatever new pages the site grows. There is no "next section."
+**STRATEGY REVERSED (operator go-ahead, late 2026-08-25):** the 2026-08-22
+no-mass-conversion decision is off — the distribution family's legacy sections
+became upgrade candidates, and **nine of the eleven are done**: binomial, normal,
+poisson, geometric, exponential, hypergeometric, negative-binomial, and both
+uniforms (replacements #31–39). pmf and pdf **gate-failed** — their legacy sections
+duplicate marks owned by the parent probability-function#notation; pointers were
+woven and **ASK-6** raised (trim to pointers, or keep as local summaries?).
+
+**The family pass is CLOSED.** Both sub-hubs (`distributions/discrete`,
+`distributions/continuous`) **gate-failed** under house rule 5 and the calculus
+"all hubs skipped" precedent: each is a family roster whose per-child "Notations
+Used" blocks are condensed copies of the child sections replaced the same day, so
+every mark is owned downstream and the parent hub holds the rest. Nine written,
+four gate-failed (pmf, pdf, both sub-hubs). Six render bugs fixed on the discrete
+sub-hub (family names inside `$…$` without `\text{}`, rendering as runs of italic
+letters).
+
+**ASK-6 is now class-wide and is the one open content decision.** Eleven satellite
+notation accounts duplicate material now owned elsewhere: pmf, pdf, six discrete
+roster blocks, three continuous roster blocks. The procedure forbids two full
+accounts of one mark, but trimming means eleven edits to pre-project content across
+page boundaries — so it is one operator call, not an executor's: **(a)** trim all
+eleven to pointers, **(b)** keep them as browse-surface summaries and add pointer
+links only *(recommended)*, **(c)** leave as-is. Pointers are already woven on pmf
+and pdf.
+
+Threads the family pass completed, worth preserving if it extends:
+- **Support-style census (5 members, all cross-linked):** binomial's closed list,
+  Poisson's open ellipsis, hypergeometric's computed clamps, negative binomial's
+  shifted list, discrete uniform's finite named-ends run. "Read the support clause
+  first" now identifies the family before the formula does.
+- **Trials-and-waits mesh:** binomial ↔ poisson ↔ exponential ↔ geometric, fully
+  bidirectional (λ crossing, memorylessness twins, rare-events bridge, NB(1,p)=Geom).
+- **Two-definitions warnings:** geometric and negative binomial both carry them;
+  the distributions hub's generic minefield entry now points at concrete pages.
+- **Shared-name collision:** U(a,b) written from BOTH uniform pages, cross-linked.
+
+Beyond that: the open items above (esp. the site-wide missing-`!` sweep and the
+backlink micro-pass), plus whatever new pages the site grows.

@@ -131,7 +131,7 @@ The **Show** strip below has two toggle buttons, one each for the function $f$ a
 
 • **Concepts** — general theory of tangent lines independent of the current state. Covers the secant-to-tangent limit definition, the relationship between the slope of the tangent and the derivative, the two equivalent forms of the equation, and the three ways the tangent can fail to exist (corners, vertical tangents, points outside the domain).
 
-The Explanation tab is the right place to look when you want to know *what is happening right now*; the Concepts tab is the right place for *why it works that way in general*.`,
+The Explanation tab is the right place to look when you want to know **what is happening right now**; the Concepts tab is the right place for **why it works that way in general**.`,
       before: ``,
       after: ``,
       link: '',
@@ -197,7 +197,7 @@ In all three cases the derivative does not exist at the affected point. Sliding 
       before: ``,
       after: `The frozen scene dashes the amber tangent so the coincidence stays visible — it lies exactly on the blue line, whatever $x_0$ you drag to. A constant derivative means one tangent serves all points.
 
-Self-tangency is the degenerate case that calibrates all the others: the tangent line is the *best linear approximation*, and a line's best linear approximation is itself, error zero everywhere.
+Self-tangency is the degenerate case that calibrates all the others: the tangent line is the **best linear approximation**, and a line's best linear approximation is itself, error zero everywhere.
 
 The [scaled linear function](!#tangent-to-the-scaled-linear) repeats the story at slope $2$; the first genuinely moving tangent belongs to the [quadratic](!#tangent-to-the-quadratic).`,
       link: '',
@@ -237,9 +237,9 @@ Symmetric positions give equal slopes: $f'(-x_0) = f'(x_0)$, the derivative of a
       title: `Tangent to the Reciprocal`,
       content: `Every tangent to $1/x$ points downhill: $f'(x) = -1/x^2$ is negative on both branches, steepening without bound near the wall at $x = 0$.`,
       before: ``,
-      after: `At the frozen $x_0 = 1$ the slope is exactly $-1$, and the tangent $y = 2 - x$ encloses a triangle with the axes of area $2$ — remarkably, the *same* area for every choice of $x_0$, one of the reciprocal's classic invariants.
+      after: `At the frozen $x_0 = 1$ the slope is exactly $-1$, and the tangent $y = 2 - x$ encloses a triangle with the axes of area $2$ — remarkably, the **same** area for every choice of $x_0$, one of the reciprocal's classic invariants.
 
-Approach the singularity and the tangent tilts toward vertical while sliding off to infinity; there is no tangent *at* $x = 0$ because there is no point there at all — the domain hole, not a differentiability failure.`,
+Approach the singularity and the tangent tilts toward vertical while sliding off to infinity; there is no tangent **at** $x = 0$ because there is no point there at all — the domain hole, not a differentiability failure.`,
       link: '',
     },
     obj16: {
@@ -286,7 +286,7 @@ At $x = 0$ itself there is no tangent at all: the left and right slopes disagree
     },
     obj20: {
       title: `Tangent to Sine`,
-      content: `Sine's tangents cycle with the wave itself: $f'(x) = \\cos(x)$, the slope at every point read off the *other* wave.`,
+      content: `Sine's tangents cycle with the wave itself: $f'(x) = \\cos(x)$, the slope at every point read off the **other** wave.`,
       before: ``,
       after: `The frozen $x_0 = 0$ shows the most celebrated tangent in trigonometry: slope $\\cos(0) = 1$, giving the line $y = x$ — the small-angle approximation $\\sin(x) \\approx x$ drawn as geometry.
 

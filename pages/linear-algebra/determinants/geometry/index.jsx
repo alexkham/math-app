@@ -960,7 +960,7 @@ const determinantGeometry = {
           formula: '$\\det A = 0$',
           condition: 'image lies in a proper subspace',
           strict: true,
-          note: 'The collapse case in every dimension: the image has zero content because it fits inside something lower-dimensional. Note the determinant reports *that* a collapse happened but not by how much \u2014 a matrix flattening $\\mathbb{R}^3$ to a plane and one flattening it to a point both give zero. That is what [rank](!/linear-algebra/matrix/rank) is for.',
+          note: 'The collapse case in every dimension: the image has zero content because it fits inside something lower-dimensional. Note the determinant reports **that** a collapse happened but not by how much \u2014 a matrix flattening $\\mathbb{R}^3$ to a plane and one flattening it to a point both give zero. That is what [rank](!/linear-algebra/matrix/rank) is for.',
         },
       ],
     },
@@ -1519,7 +1519,7 @@ const schemas = {
           >
             <IdentitySheet data={determinantGeometry} theme="navy" variant="ledger" />
           </DiagramFrame>,
-          `That the pattern continues past three dimensions is a claim rather than an observation, and it is worth being clear about which way the definition runs. In $\\mathbb{R}^2$ and $\\mathbb{R}^3$ the determinant is checked against an area and a volume that were already understood. Above that there is no prior notion of content to check against, so the determinant supplies one — $n$-dimensional volume is *defined* as what the determinant measures, and the [change of variables formula](#6) is what makes that definition useful rather than arbitrary.`,
+          `That the pattern continues past three dimensions is a claim rather than an observation, and it is worth being clear about which way the definition runs. In $\\mathbb{R}^2$ and $\\mathbb{R}^3$ the determinant is checked against an area and a volume that were already understood. Above that there is no prior notion of content to check against, so the determinant supplies one — $n$-dimensional volume is **defined** as what the determinant measures, and the [change of variables formula](#6) is what makes that definition useful rather than arbitrary.`,
           `The zero case deserves separate attention because it is the one that loses information. A determinant of zero says the image fits inside a proper subspace, but says nothing about which subspace or how far the collapse went — a matrix squashing $\\mathbb{R}^3$ onto a plane and one squashing it onto a point both report zero. The determinant detects collapse; [rank](!/linear-algebra/matrix/rank) measures it.`,
         ]
     },

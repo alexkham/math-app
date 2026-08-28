@@ -1944,7 +1944,7 @@ const reflectionCases = {
   title: 'Reflections in the plane',
   tallyLabel: 'mirrors',
   intro: 'Four mirrors, four matrices. The first three are special cases of the fourth \u2014 substituting $\\alpha = 0$, $\\tfrac{\\pi}{2}$ and $\\tfrac{\\pi}{4}$ into the general form recovers them exactly.',
-  footnote: 'Every reflection has $\\det = -1$, eigenvalues $+1$ along the mirror and $-1$ across it, and equals its own inverse. Those three facts hold whatever $\\alpha$ is, which is what makes reflection a *family* rather than a list \u2014 and why the general row is the only one that has to be remembered.',
+  footnote: 'Every reflection has $\\det = -1$, eigenvalues $+1$ along the mirror and $-1$ across it, and equals its own inverse. Those three facts hold whatever $\\alpha$ is, which is what makes reflection a **family** rather than a list \u2014 and why the general row is the only one that has to be remembered.',
   slots: [
     { key: 'matrix', label: 'matrix' },
     { key: 'effect', label: 'effect on (x, y)' },

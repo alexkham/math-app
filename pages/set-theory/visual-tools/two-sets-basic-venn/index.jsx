@@ -230,7 +230,7 @@ These four are worth visiting first, because every other identity in the catalog
 
     obj12: {
       title: `The Two Complements`,
-      content: `The Complements tab holds the two states that flip shading inside-out: [the complement of A](!#the-complement-of-a) and [the complement of B](!#the-complement-of-b). Complementation is the only basic operation that shades the region *outside* both circles, which is why these two states look so different from every union or intersection.
+      content: `The Complements tab holds the two states that flip shading inside-out: [the complement of A](!#the-complement-of-a) and [the complement of B](!#the-complement-of-b). Complementation is the only basic operation that shades the region **outside** both circles, which is why these two states look so different from every union or intersection.
 
 The complement is also the operation that makes the universal set matter. Without a fixed $U$, "everything not in $A$" is not a well-defined set; with one, $A'$ is simply $U \\setminus A$, and the diagram shows it as the rectangle with a circular hole.`,
       before: ``,
@@ -240,7 +240,7 @@ The complement is also the operation that makes the universal set matter. Withou
 
     obj13: {
       title: `Intersection and Union`,
-      content: `The two central operations of set algebra get one state each: [the intersection](!#the-intersection-of-a-and-b) shades the single overlap region, and [the union](!#the-union-of-a-and-b) shades all three regions inside the circles. Together they are the diagram's translation of the logical words *and* and *or*.
+      content: `The two central operations of set algebra get one state each: [the intersection](!#the-intersection-of-a-and-b) shades the single overlap region, and [the union](!#the-union-of-a-and-b) shades all three regions inside the circles. Together they are the diagram's translation of the logical words **and** and **or**.
 
 They are also each other's extremes: the intersection is the smallest set containing exactly the shared elements, the union the smallest set containing both $A$ and $B$ whole. Every set sandwiched between them — $A \\cap B \\subseteq S \\subseteq A \\cup B$ — is expressible from the diagram's regions.`,
       before: ``,
@@ -270,9 +270,9 @@ These two states are the diagram's version of logical implication. $A' \\cup B$ 
 
     obj16: {
       title: `Set Relations`,
-      content: `The Relations tab is different in kind from every other tab: instead of shading regions of the standard overlapping layout, it *redraws the circles* to express a relationship between the sets. [A as a subset of B](!#a-as-a-subset-of-b) nests a small circle inside a large one, [B as a subset of A](!#b-as-a-subset-of-a) mirrors it, [disjoint sets](!#disjoint-sets) pulls the circles apart, and [equal sets](!#equal-sets) draws them on top of each other.
+      content: `The Relations tab is different in kind from every other tab: instead of shading regions of the standard overlapping layout, it **redraws the circles** to express a relationship between the sets. [A as a subset of B](!#a-as-a-subset-of-b) nests a small circle inside a large one, [B as a subset of A](!#b-as-a-subset-of-a) mirrors it, [disjoint sets](!#disjoint-sets) pulls the circles apart, and [equal sets](!#equal-sets) draws them on top of each other.
 
-This is an honest limitation of Venn diagrams worth understanding: the standard two-circle layout deliberately shows the *general position*, where all four regions are possible. A relation like $A \\subseteq B$ asserts that one of those regions is empty, and the clearest way to draw an empty region is not to draw it at all.`,
+This is an honest limitation of Venn diagrams worth understanding: the standard two-circle layout deliberately shows the **general position**, where all four regions are possible. A relation like $A \\subseteq B$ asserts that one of those regions is empty, and the clearest way to draw an empty region is not to draw it at all.`,
       before: ``,
       after: ``,
       link: '',
@@ -318,7 +318,7 @@ Two algebraic roles follow directly from the all-shaded picture. As the largest 
       title: `The Empty Set`,
       content: `Selecting $\\emptyset$ shades nothing. The frozen frame is the diagram at rest: circles, rectangle, labels — and zero highlighted regions.`,
       before: ``,
-      after: `An all-blank diagram is not a degenerate case; it is a legitimate answer. Plenty of natural expressions evaluate to the empty set — $A \\cap A'$ for any $A$, or the intersection of [disjoint sets](!#disjoint-sets) — and when the explorer produces no shading at all, that *is* the picture of such an expression.
+      after: `An all-blank diagram is not a degenerate case; it is a legitimate answer. Plenty of natural expressions evaluate to the empty set — $A \\cap A'$ for any $A$, or the intersection of [disjoint sets](!#disjoint-sets) — and when the explorer produces no shading at all, that **is** the picture of such an expression.
 
 The empty set's algebra mirrors the universal set's, with the roles reversed: it vanishes from unions ($A \\cup \\emptyset = A$) and absorbs intersections ($A \\cap \\emptyset = \\emptyset$). One more fact has no visual clue at all and is worth stating: $\\emptyset \\subseteq A$ for every set $A$ — vacuously, since there is no element of $\\emptyset$ that could fail to be in $A$.`,
       link: '',
@@ -352,7 +352,7 @@ Applying the operation twice undoes it: $(B')' = B$, the double complement law. 
       title: `The Intersection of A and B`,
       content: `Selecting $A \\cap B$ shades a single region: the lens where the two circles overlap. This is the tightest shading of any operation in the catalog — one region out of four.`,
       before: ``,
-      after: `The intersection answers the question *and*: an element is highlighted exactly when it is in $A$ **and** in $B$. With the explorer's example sets $A = \\{1,2,3,4\\}$ and $B = \\{3,4,5,6\\}$, the lens holds $\\{3,4\\}$ — the elements the two sets share.
+      after: `The intersection answers the question **and**: an element is highlighted exactly when it is in $A$ **and** in $B$. With the explorer's example sets $A = \\{1,2,3,4\\}$ and $B = \\{3,4,5,6\\}$, the lens holds $\\{3,4\\}$ — the elements the two sets share.
 
 Two structural facts are visible in the frozen frame. First, $A \\cap B$ sits inside both circles, which is the picture of $A \\cap B \\subseteq A$ and $A \\cap B \\subseteq B$: the intersection is always a subset of each of its parents. Second, the lens is the region that [disjoint sets](!#disjoint-sets) lose entirely — when it is empty, the sets have nothing in common, and the Relations tab redraws them apart.`,
       link: '',
@@ -362,7 +362,7 @@ Two structural facts are visible in the frozen frame. First, $A \\cap B$ sits in
       title: `The Union of A and B`,
       content: `Selecting $A \\cup B$ shades three regions at once — both crescents and the overlap — covering everything inside either circle and leaving only the outside blank.`,
       before: ``,
-      after: `The union answers the question *or*, in the inclusive sense: in $A$, in $B$, or in both. With $A = \\{1,2,3\\}$ and $B = \\{3,4,5\\}$ the union is $\\{1,2,3,4,5\\}$ — the shared element $3$ appears once, not twice, because sets do not count multiplicity.
+      after: `The union answers the question **or**, in the inclusive sense: in $A$, in $B$, or in both. With $A = \\{1,2,3\\}$ and $B = \\{3,4,5\\}$ the union is $\\{1,2,3,4,5\\}$ — the shared element $3$ appears once, not twice, because sets do not count multiplicity.
 
 The three-region shading explains the most used counting formula in elementary set theory. Adding $|A|$ and $|B|$ counts the lens twice — it is inside both circles — so the correction
 
@@ -380,7 +380,7 @@ subtracts [the intersection](!#the-intersection-of-a-and-b) exactly once. The fr
       before: ``,
       after: `The difference is intersection in disguise: $A \\setminus B = A \\cap B'$, "in $A$ and not in $B$". The frozen frame proves the equivalence — start from the full circle of $A$ and delete the lens, or intersect $A$ with [the complement of B](!#the-complement-of-b); either route paints the same crescent.
 
-Subtraction of sets, like subtraction of numbers, is order-sensitive. The mirror state [B minus A](!#the-difference-b-minus-a) shades the *other* crescent, and the two results share no elements at all — a stronger asymmetry than numbers show, where $a - b$ and $b - a$ at least sit symmetrically around zero. The two crescents together, with the lens still excluded, form [the symmetric difference](!#the-symmetric-difference).`,
+Subtraction of sets, like subtraction of numbers, is order-sensitive. The mirror state [B minus A](!#the-difference-b-minus-a) shades the **other** crescent, and the two results share no elements at all — a stronger asymmetry than numbers show, where $a - b$ and $b - a$ at least sit symmetrically around zero. The two crescents together, with the lens still excluded, form [the symmetric difference](!#the-symmetric-difference).`,
       link: '',
     },
 
@@ -398,7 +398,7 @@ The identity $B \\setminus A = B \\cap A'$ holds just as its mirror does, and on
       title: `The Symmetric Difference`,
       content: `Selecting $A \\triangle B$ shades both crescents while leaving the central lens blank — the elements belonging to exactly one of the two sets.`,
       before: ``,
-      after: `The symmetric difference is the *exclusive or* of set theory: in $A$ or in $B$, but not in both. The frozen frame shows its two equivalent constructions at a glance. Union the two one-sided differences, $(A \\setminus B) \\cup (B \\setminus A)$, and you paint the two crescents directly; or take [the union](!#the-union-of-a-and-b) and delete [the intersection](!#the-intersection-of-a-and-b), $(A \\cup B) \\setminus (A \\cap B)$, and you arrive at the same picture from outside in.
+      after: `The symmetric difference is the **exclusive or** of set theory: in $A$ or in $B$, but not in both. The frozen frame shows its two equivalent constructions at a glance. Union the two one-sided differences, $(A \\setminus B) \\cup (B \\setminus A)$, and you paint the two crescents directly; or take [the union](!#the-union-of-a-and-b) and delete [the intersection](!#the-intersection-of-a-and-b), $(A \\cup B) \\setminus (A \\cap B)$, and you arrive at the same picture from outside in.
 
 Unlike the one-sided differences, $\\triangle$ is commutative — the shading is left-right symmetric — and it has an algebra of its own: $A \\triangle A = \\emptyset$, $A \\triangle \\emptyset = A$, and the operation is even associative, making it a group operation on subsets of $U$. The blank lens is the whole story: shared elements cancel.`,
       link: '',
@@ -422,7 +422,7 @@ The same region-reading gives the logical meaning: an element fails to be in $A 
       before: ``,
       after: `The blank region is $A \\setminus B$, so this state is the complement of [the difference A minus B](!#the-difference-a-minus-b): $A' \\cup B = (A \\setminus B)'$. In logical form it is the truth set of the implication $A \\Rightarrow B$ — the only way to violate "if in $A$, then in $B$" is to sit in the A-only crescent, and that is precisely the one unshaded region.
 
-This state also quietly contains the subset relation. Saying $A \\subseteq B$ is saying the implication holds for *every* element of $U$ — that is, $A' \\cup B = U$, all four regions shaded. Compare [A as a subset of B](!#a-as-a-subset-of-b) in the Relations tab, where the same fact is drawn by moving the circles instead of shading around them.`,
+This state also quietly contains the subset relation. Saying $A \\subseteq B$ is saying the implication holds for **every** element of $U$ — that is, $A' \\cup B = U$, all four regions shaded. Compare [A as a subset of B](!#a-as-a-subset-of-b) in the Relations tab, where the same fact is drawn by moving the circles instead of shading around them.`,
       link: '',
     },
 
@@ -432,7 +432,7 @@ This state also quietly contains the subset relation. Saying $A \\subseteq B$ is
       title: `The Complement of the Union`,
       content: `Selecting $(A \\cup B)'$ shades a single region: the space outside both circles. Nothing inside either circle is highlighted.`,
       before: ``,
-      after: `This is the most extreme shading in the catalog — one region, and the one no basic operation reaches on its own. The frame is the visual proof of the first De Morgan law: being outside the union means being outside $A$ *and* outside $B$ simultaneously, which is precisely the intersection of the two complements,
+      after: `This is the most extreme shading in the catalog — one region, and the one no basic operation reaches on its own. The frame is the visual proof of the first De Morgan law: being outside the union means being outside $A$ **and** outside $B$ simultaneously, which is precisely the intersection of the two complements,
 
 $$(A \\cup B)' = A' \\cap B'$$
 
@@ -444,7 +444,7 @@ You can verify it with the earlier frames: overlay [the complement of A](!#the-c
       title: `The Complement of the Intersection`,
       content: `Selecting $(A \\cap B)'$ shades three regions — outside and both crescents — leaving only the central lens blank.`,
       before: ``,
-      after: `The second De Morgan law is this frame's caption written in symbols: avoiding the intersection means missing at least one of the two sets, i.e. being outside $A$ *or* outside $B$,
+      after: `The second De Morgan law is this frame's caption written in symbols: avoiding the intersection means missing at least one of the two sets, i.e. being outside $A$ **or** outside $B$,
 
 $$(A \\cap B)' = A' \\cup B'$$
 
@@ -460,7 +460,7 @@ A useful reading habit generalizes from here: a complemented compound expression
       title: `A as a Subset of B`,
       content: `Selecting $A \\subseteq B$ redraws the layout: a small circle $A$ sits entirely inside a large circle $B$, and the shading fills $A$ — which is now the same thing as the overlap $A \\cap B$.`,
       before: ``,
-      after: `The nested layout encodes the relation geometrically: there is nowhere to stand inside $A$ without also standing inside $B$, so the A-only crescent of the standard layout has vanished. That vanished region *is* the assertion — $A \\subseteq B$ is equivalent to $A \\setminus B = \\emptyset$.
+      after: `The nested layout encodes the relation geometrically: there is nowhere to stand inside $A$ without also standing inside $B$, so the A-only crescent of the standard layout has vanished. That vanished region **is** the assertion — $A \\subseteq B$ is equivalent to $A \\setminus B = \\emptyset$.
 
 Two algebraic consequences become obvious in the picture: $A \\cap B = A$ (the overlap is all of $A$) and $A \\cup B = B$ (uniting adds nothing new to $B$). Either equation can serve as the definition of subset, and both degenerate gracefully in the extremes: $\\emptyset \\subseteq B$ for any $B$, and $B \\subseteq B$ always — the subset relation is reflexive. When it holds in both directions at once, the sets are equal; see [equal sets](!#equal-sets) for that limiting layout, and [B as a subset of A](!#b-as-a-subset-of-a) for this state's mirror.`,
       link: '',
@@ -472,7 +472,7 @@ Two algebraic consequences become obvious in the picture: $A \\cap B = A$ (the o
       before: ``,
       after: `Everything from [A as a subset of B](!#a-as-a-subset-of-b) transfers with the roles reversed: $B \\setminus A = \\emptyset$, $A \\cap B = B$, and $A \\cup B = A$. The pair of nested frames also makes antisymmetry visible — if each set is a subset of the other, neither circle can be strictly smaller, and the layouts collapse into the coincident circles of equal sets.
 
-One caution the drawing teaches by contrast: in the *standard* overlapping layout, nothing stops $B \\subseteq A$ from being true — the picture merely fails to show it, since it draws a B-only crescent that would in fact be empty. The Relations layouts exist precisely to remove that silent possibility from the page.`,
+One caution the drawing teaches by contrast: in the **standard** overlapping layout, nothing stops $B \\subseteq A$ from being true — the picture merely fails to show it, since it draws a B-only crescent that would in fact be empty. The Relations layouts exist precisely to remove that silent possibility from the page.`,
       link: '',
     },
 
@@ -559,7 +559,7 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
     'b-comp': [{ key: 'learn', label: 'Learn More', sections: [{ title: 'On This Page', content:
       `The photographic negative of $B$; taking the complement twice restores the original, $(B')' = B$. [Learn more about the complement of B](!#the-complement-of-b) · [All complements](!#the-two-complements)` }] }],
     'intersection': [{ key: 'learn', label: 'Learn More', sections: [{ title: 'On This Page', content:
-      `The lens is the diagram's word for *and*, and it always sits inside both parents: $A \\cap B \\subseteq A$ and $A \\cap B \\subseteq B$. [Learn more about the intersection](!#the-intersection-of-a-and-b) · [Intersection and union](!#intersection-and-union)` }] }],
+      `The lens is the diagram's word for **and**, and it always sits inside both parents: $A \\cap B \\subseteq A$ and $A \\cap B \\subseteq B$. [Learn more about the intersection](!#the-intersection-of-a-and-b) · [Intersection and union](!#intersection-and-union)` }] }],
     'union': [{ key: 'learn', label: 'Learn More', sections: [{ title: 'On This Page', content:
       `Three regions, each painted once — which is why $|A \\cup B| = |A| + |B| - |A \\cap B|$ needs its correction term. [Learn more about the union](!#the-union-of-a-and-b) · [Intersection and union](!#intersection-and-union)` }] }],
     'a-minus-b': [{ key: 'learn', label: 'Learn More', sections: [{ title: 'On This Page', content:

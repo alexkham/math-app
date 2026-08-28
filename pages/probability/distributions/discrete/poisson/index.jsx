@@ -856,6 +856,7 @@ import PoissonDistributionCDF from '@/app/components/visualizations/probability/
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import PoissonCalculator from '@/app/components/calculators/probability/distributions/PoissonDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -981,13 +982,13 @@ Counting the number of emails received by a support desk in one hour when emails
     obj2:{
       title:`Parameters`,
       content:`
-      $𝜆$: the average rate (mean number of events), with $𝜆>0$
+      $\\lambda$: the average rate (mean number of events), with $\\lambda >0$
 
-      The Poisson distribution models the number of events occurring in a fixed interval of time or space, assuming events happen independently and at a constant average rate $𝜆$. 
+      The Poisson distribution models the number of events occurring in a fixed interval of time or space, assuming events happen independently and at a constant average rate $\\lambda$. 
 
-      It describes counts: $0, 1, 2, ...,$ with probabilities determined by how large or small $𝜆$ is. 
+      It describes counts: $0, 1, 2, ...,$ with probabilities determined by how large or small $\\lambda$ is. 
 
-      The single parameter $𝜆$ controls both the mean and the variance of the distribution.
+      The single parameter $\\lambda$ controls both the mean and the variance of the distribution.
       `,
       before:``,
       after:``,
@@ -1306,41 +1307,46 @@ Note: The Poisson distribution is often used as an approximation to the binomial
     },
 
 
-    obj15:{
-  
-      title:`Notation Used`,
-      content:`
-$X \\sim \\text{Poisson}(\\lambda)$ or $X \\sim \\mathcal{P}(\\lambda)$ — **distribution of the random variable**.
+    notation:{
 
-$\\text{Poisson}(\\lambda)$ — **used to denote the distribution itself (not the random variable)**.
-
-$\\text{P}(\\lambda)$ — **sometimes used informally, especially in compact notation**.
-
-$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad \\text{for } k = 0, 1, 2, \\ldots$ — **probability mass function (PMF)**, where:
-
-\t$\\lambda$ — average rate of occurrence (expected number of events in the interval)
-
-\t$k$ — number of events observed
-
-\t$e \\approx 2.71828$ — Euler's number (base of natural logarithm)
-
-**Key properties:**
-
-\t$E[X] = \\lambda$ — expected value (mean)
-
-\t$\\text{Var}(X) = \\lambda$ — variance (equal to the mean)
-
-**Relationship to binomial distribution:**
-
-\t$\\text{Poisson}(\\lambda) \\approx \\text{Binomial}(n, p)$ where $\\lambda = np$, when $n$ is large and $p$ is small (rare events approximation)
-
-      
-      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+      title:`Poisson Notation`,
+      lead:`One Greek letter runs this entire page: it fills the declaration's only slot, it is simultaneously the mean and the variance, and it changes size with the window you watch. The marks to fix are the family's spellings, λ's double duty, and a pmf line whose support never closes. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); $e$ and its exponentials from [exponential function notation](!/algebra/powers/exponential-functions#notation); $n!$ and the counting marks from [permutation notation](!/combinatorics/permutations#notation); $E[X]$ and $\\operatorname{Var}(X)$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'family-spellings',
+          tex:`$X \\sim \\operatorname{Pois}(\\lambda)$`,
+          read:`X follows a Poisson distribution with rate lambda`,
+          means:`One slot, three spellings: $\\operatorname{Pois}(\\lambda)$ standard, $\\operatorname{Poisson}(\\lambda)$ explicit, script $\\mathcal{P}(\\lambda)$ in compact writing. A single parameter carries the whole family — and does double bookkeeping, since $E[X] = \\operatorname{Var}(X) = \\lambda$: one number sets both the center and the spread.`,
+          cases:`The rare-events bridge is written as an approximation between declarations: $\\operatorname{Bin}(n, p) \\approx \\operatorname{Pois}(np)$ for large $n$, small $p$ — the [binomial's](!/probability/distributions/discrete/binomial#15) two parameters collapsing into the product that survives.`,
+          confusedWith:`The probability operator. The informal $X \\sim P(\\lambda)$ puts capital $P$ at two jobs in one line — $P(X = k)$ and $P(\\lambda)$ mean utterly different things a few symbols apart — which is precisely why the script $\\mathcal{P}$ variant exists.`,
+        },
+        {
+          id:'lambda-rate',
+          tex:`$\\lambda$`,
+          read:`lambda — the expected number of events per observation window`,
+          means:`A rate wearing a count's clothes: $\\lambda$ is the average number of occurrences in the interval being watched, so it silently carries the window's size — double the window and the model becomes $\\operatorname{Pois}(2\\lambda)$; process texts make the exposure explicit as $\\lambda t$.`,
+          cases:`The same $\\lambda$ crosses the discrete/continuous line: counting events per window is Poisson, waiting for the next event is [exponential](!/probability/distributions/continuous/exponential) — one rate, two questions, and the letter travels between the two pages unchanged.`,
+          confusedWith:`A probability. $\\lambda = 4.2$ is perfectly legal — rates are counts, not chances, and live on $[0, \\infty)$; capping $\\lambda$ at 1 imports a constraint from the wrong kind of parameter.`,
+          sameGlyphElsewhere:`Linear algebra's [eigenvalue](!/linear-algebra/eigen/characteristic-equation#notation) — the reserved λ of $A\\mathbf{v} = \\lambda\\mathbf{v}$ — is an unrelated tenant of the same letter; context and neighbors decide instantly which is on duty.`,
+        },
+        {
+          id:'pmf-line',
+          tex:`$P(X{=}k) = \\dfrac{\\lambda^k e^{-\\lambda}}{k!},\\ \\ k = 0, 1, 2, \\ldots$`,
+          read:`the pmf — with a support that never closes`,
+          means:`The trailing list ends in an ellipsis and nothing else: the support is all of $\\mathbb{N}$, unbounded — any count is possible, however unlikely. Compare the [binomial's](!/probability/distributions/discrete/binomial#15) closed clause $k = 0, \\ldots, n$: the presence or absence of a final term is itself information.`,
+          cases:`The three factors split the labor: $\\lambda^k$ scales with the count, $e^{-\\lambda}$ normalizes the whole family at once, and $k!$ divides out orderings — with $e$ owned by the [exponential function](!/algebra/powers/exponential-functions#notation) and the factorial by [permutation notation](!/combinatorics/permutations#notation).`,
+          confusedWith:`A distribution over $k!$ or $\\lambda^k$ alone. Dropping the ellipsis — or the normalizing $e^{-\\lambda}$ — leaves an expression that no longer sums to one; the line works only as a whole, domain clause included.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj16:{
@@ -1561,13 +1567,21 @@ export default function PoissonDistributionPage({
     },
      {
         id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-          
-      <div key={'notation-poisson'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-                {processContent(sectionsContent.obj15.content,)}
-            </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

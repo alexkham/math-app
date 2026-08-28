@@ -849,6 +849,7 @@ import HypergeometricDistributionCDF from '@/app/components/visualizations/proba
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import HypergeometricCalculator from '@/app/components/calculators/probability/distributions/HypergeometricDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -978,13 +979,13 @@ Drawing $5$ cards from a standard deck without replacement and counting how many
     obj2:{
       title:`Parameters`,
       content:`
-      $𝑁$: total population size
+      $N$: total population size
 
-$𝐾$: number of successes in the population
+$K$: number of successes in the population
 
-$𝑛$: number of draws (without replacement), where $𝑛≤𝑁$
+$n$: number of draws (without replacement), where $n≤N$
 
-The hypergeometric distribution models the number of successes in $𝑛$ draws from a finite population of size $𝑁$ that contains exactly $𝐾$ successes, without replacement. 
+The hypergeometric distribution models the number of successes in $n$ draws from a finite population of size $N$ that contains exactly $K$ successes, without replacement. 
 
 Unlike the [binomial distribution](!/probability/distributions/discrete/binomial), where each trial is independent, here each draw changes the probabilities — once an item is drawn, it doesn't go back. This dependency is what defines the distribution's behavior.
       `,
@@ -1296,46 +1297,45 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
     },
 
 
-    obj15:{
-  
-      title:`Notation Used`,
-      content:`
-      $X \\sim \\text{Hypergeometric}(N, K, n)$ or $X \\sim \\text{Hyp}(N, K, n)$ — **distribution of the random variable**.
+    notation:{
 
-$\\text{Hypergeometric}(N, K, n)$ — **used to denote the distribution itself (not the random variable)**.
-
-$\\text{H}(N, K, n)$ — **occasionally used in compact form, especially in software or formulas**.
-
-$P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \\text{for valid } k$ — **probability mass function (PMF)**, where:
-
-\t$N$ — total population size
-
-\t$K$ — number of success states in the population
-
-\t$n$ — number of draws (sample size) without replacement
-
-\t$k$ — number of observed successes in the sample
-
-\t$\\max(0, n - (N - K)) \\leq k \\leq \\min(n, K)$ — valid range for $k$
-
-\t$\\binom{a}{b} = \\frac{a!}{b!(a-b)!}$ — binomial coefficient
-
-**Key properties:**
-
-\t$E[X] = n \\frac{K}{N}$ — expected value (mean)
-
-\t$\\text{Var}(X) = n \\frac{K}{N} \\frac{N-K}{N} \\frac{N-n}{N-1}$ — variance
-
-**Relationship to binomial distribution:**
-
-\t$\\text{Hypergeometric}(N, K, n) \\approx \\text{Binomial}(n, p)$ where $p = \\frac{K}{N}$, when $N$ is large relative to $n$ (sampling with replacement approximation)
-      
-      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+      title:`Hypergeometric Notation`,
+      lead:`Four letters, two sizes: the hypergeometric's marks run on a case system — capitals for the population, lowercase for the sample — and its pmf is the only one in the family with no probability parameter anywhere in sight. The declaration, the three-coefficient fraction, and the clamped support each carry part of the without-replacement story. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); the coefficients and their spellings from [binomial coefficient notation](!/combinatorics/binomial-coefficient#notation); $E[X]$ and $\\operatorname{Var}(X)$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'four-letter-system',
+          tex:`$X \\sim \\operatorname{Hyp}(N, K, n)$`,
+          read:`hypergeometric with population N, K successes among them, and n draws`,
+          means:`Three slots and a case system: capital $N$ and $K$ describe the **population** (its size, and the successes it contains), lowercase $n$ and $k$ describe the **sample** (its size, and the successes observed) — the letter case is the mnemonic, population above, sample below. Spellings run $\\operatorname{Hypergeometric}$, $\\operatorname{Hyp}$, compact $H$.`,
+          cases:`Both the letters and their order drift between sources — some write $(N, n, K)$, and software renames the slots outright — so the safe reading is by **role**, not position: find the population size, the success count, the draw count, and map them onto the source's letters before using any formula.`,
+          confusedWith:`The binomial's $n$ and $k$. The lowercase pair means the same thing in both families, but the hypergeometric's capitals have no binomial counterpart — carrying $K$ into a binomial formula, or reading the binomial's $n$ as a population, crosses the with/without-replacement line the case system exists to guard.`,
+        },
+        {
+          id:'three-coefficient-pmf',
+          tex:`$P(X{=}k) = \\dfrac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$`,
+          read:`choose the successes, choose the failures, over all ways to choose the sample`,
+          means:`Three [coefficients](!/combinatorics/binomial-coefficient#notation) tell the whole story: $k$ successes from the $K$ available, $n{-}k$ failures from the $N{-}K$ available, divided by every possible sample. The formula's loudest feature is an absence — **no probability parameter appears**: without replacement there is no fixed $p$, and pure counting replaces it.`,
+          cases:`When the population dwarfs the sample, $p = K/N$ emerges as a ratio and $\\operatorname{Hyp}(N, K, n) \\approx \\operatorname{Bin}(n, K/N)$ — the [binomial](!/probability/distributions/discrete/binomial#15) as the with-replacement limit; the variance's extra factor $\\tfrac{N-n}{N-1}$, the **finite-population correction**, is the mark that measures exactly how far from that limit a given setup sits.`,
+          confusedWith:`A product of probabilities. The three-coefficient fraction is counting, not multiplying chances — importing the binomial's $p^k q^{n-k}$ intuition here double-books the changing composition of the urn after every draw.`,
+        },
+        {
+          id:'clamped-support',
+          tex:`$\\max(0,\\, n - (N - K)) \\le k \\le \\min(n, K)$`,
+          read:`k runs only where the draw is feasible: fenced below and above`,
+          means:`The family's most intricate support clause: $\\min(n, K)$ fences the top — you cannot observe more successes than you drew, nor than exist — and $\\max(0, n - (N-K))$ fences the bottom — once the failures run out, further draws are forced to be successes. The clamps are the feasibility logic written as marks.`,
+          cases:`The family now shows three support styles side by side: the [binomial's](!/probability/distributions/discrete/binomial#15) closed list $k = 0, \\ldots, n$, the [Poisson's](!/probability/distributions/discrete/poisson#15) open ellipsis, and the hypergeometric's computed clamps — reading the support line first is the fastest identification of which family a formula belongs to.`,
+          confusedWith:`The simple $0 \\le k \\le n$. Using the binomial's range silently assigns probability to impossible draws — the lower clamp in particular is routinely forgotten, and every formula summed over the wrong support quietly leaks mass.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj16:{
@@ -1557,12 +1557,21 @@ export default function HypergeometricDistributionPage({
     },
      {
         id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-      <div key={'notation-hypergeometric'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-                {processContent(sectionsContent.obj15.content,)}
-            </div>,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

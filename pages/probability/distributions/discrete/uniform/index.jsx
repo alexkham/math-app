@@ -862,6 +862,7 @@ import DiscreteUniformDistributionCDF from '@/app/components/visualizations/prob
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import DiscreteUniformCalculator from '@/app/components/calculators/probability/distributions/UniformDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -1019,7 +1020,7 @@ $$P(X = x) = \\frac{1}{b - a + 1} = \\frac{1}{n}, \\quad x \\in \\{x_1, x_2, \\d
 Where :
 $a$ = lower bound (integer)
 $b$ = upper bound (integer)
-$𝑛=b−a+1$ is total number of possible values 
+$n=b−a+1$ is total number of possible values 
 
 ### Intuition Behind the Formula
 
@@ -1309,43 +1310,45 @@ Each face has an equal and independent chance of appearing.
     },
 
 
-    obj15:{
-  
-      title:`Notation Used`,
-      content:`
-      $X \\sim \\text{Unif}(a, b)$ or $X \\sim \\text{DU}(a, b)$ — **distribution of the random variable**.
+    notation:{
 
-$\\text{DiscreteUniform}(a, b)$ — **used to denote the distribution itself (not the random variable)**.
-
-$\\text{U}(a, b)$ — **also used, though it can refer to either discrete or continuous; context is important**.
-
-$P(X = k) = \\frac{1}{b - a + 1}, \\quad \\text{for } k = a, a+1, \\ldots, b$ — **probability mass function (PMF)**, where:
-
-\t$a$ — minimum value (lower bound)
-
-\t$b$ — maximum value (upper bound)
-
-\t$k$ — any integer in the range $[a, b]$
-
-\t$b - a + 1$ — total number of possible outcomes
-
-**Key properties:**
-
-\t$E[X] = \\frac{a + b}{2}$ — expected value (mean)
-
-\t$\\text{Var}(X) = \\frac{(b - a + 1)^2 - 1}{12}$ — variance
-
-**Special case:**
-
-\t$\\text{DiscreteUniform}(1, n)$ — uniform distribution on $\\{1, 2, \\ldots, n\\}$, often used for fair dice or simple random selection
-
-      
-      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+      title:`Discrete Uniform Notation`,
+      lead:`This is the one distribution whose name is genuinely ambiguous: $U(a, b)$ names this family and [its continuous namesake](!/probability/distributions/continuous/uniform#2) equally, and the two behave differently. The marks below are the disambiguators — the letters that resolve the name, the counted denominator, and the support that gives the game away. All catalogued among the [probability symbols](!/math-symbols/probability).`,
+      inherited:`The declaration tilde and capital/lowercase split come from [random variable notation](!/probability/random-variables#notation) and [distribution notation](!/probability/distributions#notation); set braces from [set notation](!/set-theory/basics#2); $E[X]$ and $\\operatorname{Var}(X)$ from [expected value](!/probability/expected-value#notation) and [variance notation](!/probability/variance#notation).`,
+      entries:[
+        {
+          id:'name-collision',
+          tex:`$X \\sim \\operatorname{DU}(a, b)$`,
+          read:`discrete uniform on the integers from a to b`,
+          means:`The unambiguous spellings put the word in the name: $\\operatorname{DU}$, $\\operatorname{DiscreteUniform}$, sometimes $\\operatorname{Unif}$ qualified in prose. Bare $U(a, b)$ is the problem — it names this family and the [continuous uniform](!/probability/distributions/continuous/uniform#2) with equal authority, and nothing inside the parentheses distinguishes them.`,
+          cases:`Two tells resolve it without asking the author: integer-looking bounds and a **pmf** mean discrete, real bounds with a **density** mean continuous; and the standard instance is written $\\operatorname{DU}(1, n)$ — the fair die, the random draw from a numbered list.`,
+          confusedWith:`Its continuous namesake, in both directions. The same $U(3, 7)$ can mean five equally likely integers or an interval of infinitely many points — the first assigns each outcome probability $1/5$, the second assigns every single point probability zero.`,
+        },
+        {
+          id:'counted-denominator',
+          tex:`$P(X{=}k) = \\dfrac{1}{b - a + 1}$`,
+          read:`one over the number of values — bounds included`,
+          means:`The denominator counts outcomes rather than measuring width, and the $+1$ is why: the integers from $a$ to $b$ inclusive number $b - a + 1$, not $b - a$. That single term is the whole notational difference from the [continuous uniform's](!/probability/distributions/continuous/uniform#2) $1/(b-a)$.`,
+          cases:`On the standard $\\operatorname{DU}(1, n)$ the count collapses to the familiar $1/n$ — the form most texts introduce first, and the reason the $+1$ often goes unnoticed until the lower bound stops being one.`,
+          confusedWith:`The interval width. Writing $1/(b-a)$ here is the fencepost error in probabilistic dress: on $\\operatorname{DU}(1, 6)$ it hands each face $1/5$, and the six probabilities sum to $1.2$.`,
+        },
+        {
+          id:'integer-support',
+          tex:`$k = a,\\ a{+}1,\\ \\ldots,\\ b$`,
+          read:`the support is a list of integers, endpoints included`,
+          means:`A stepped list, not an interval: the support is $\\{a, a+1, \\ldots, b\\}$ — spelled with [set braces](!/set-theory/basics#2) where the continuous family writes $[a, b]$. Braces against brackets is the fastest discrete/continuous tell on the page.`,
+          cases:`It joins the family's support-style census as its fifth member — beside the [binomial's](!/probability/distributions/discrete/binomial#15) closed list, the [Poisson's](!/probability/distributions/discrete/poisson#15) open ellipsis, the [hypergeometric's](!/probability/distributions/discrete/hypergeometric#15) clamps and the [negative binomial's](!/probability/distributions/discrete/negative-binomial#15) shifted list: here, a finite run with both ends named.`,
+          confusedWith:`The real interval $[a, b]$. The bracket form admits every real number between the bounds; this family admits only the integers among them, and the notation is the only place that distinction is recorded.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability/distributions`,
+      parentLabel:`Probability Distributions`,
       before:``,
       after:``,
       link:'',
-  
+
     },
   
     obj16:{
@@ -1568,15 +1571,21 @@ export default function DiscreteUniformDistributionPage({
     },
      {
         id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
+        title:sectionsContent.notation.title,
+        link:'',
         content:[
-
-          
-    <div key={'notation-uniform'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-              {processContent(sectionsContent.obj15.content,)}
-          </div>,
-
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

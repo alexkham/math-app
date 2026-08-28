@@ -477,7 +477,7 @@ encapsulates all three: the right side requires $f(a)$ to exist, the left side r
         means: `Three claims in one equation — $f(a)$ exists, the [two-sided limit](!/calculus/limits/two-sided) exists, they match. Fail any one and the equation is false or meaningless.`,
         cases: `Interior point — as written. Open interval $(a,b)$ — the equation at every point. Closed $[a,b]$ — endpoints switch to the one-sided form below.`,
         alsoWritten: `Epsilon-delta: $|x - a| < \\delta \\Rightarrow |f(x) - f(a)| < \\varepsilon$. Note the missing $0 <$ — unlike a limit's punctured $0 < |x - a|$, continuity lets $x = a$ in.`,
-        confusedWith: `A computation rule. “Evaluate by substitution” is what continuity *licenses*, not what defines it — quoting substitution to prove continuity runs in a circle.`,
+        confusedWith: `A computation rule. “Evaluate by substitution” is what continuity **licenses**, not what defines it — quoting substitution to prove continuity runs in a circle.`,
       },
       {
         id: 'one-sided-continuity',

@@ -105,7 +105,7 @@ For excluded domains like the reciprocal, both views mark the excluded value wit
 • Below the slider, an "**in domain**" or "**outside domain**" badge updates with the result.
 • Next to the badge, the actual function value appears: $g(x) = \\ldots$ for legal inputs, or "$g(x)$ is undefined" for inputs outside the domain.
 
-The function value display is the key difference from the range visualizer. Where the range tool only answers achievability, the domain tool tells you *what comes out* whenever the input is legal — so you can use it as both a domain checker and a quick function evaluator.`,
+The function value display is the key difference from the range visualizer. Where the range tool only answers achievability, the domain tool tells you **what comes out** whenever the input is legal — so you can use it as both a domain checker and a quick function evaluator.`,
       before: ``,
       after: ``,
       link: '',
@@ -162,9 +162,9 @@ Domain is independent of range. A function can have a tiny domain and reach ever
       title: `Open vs Closed Endpoints and Excluded Values`,
       content: `Three subtle distinctions show up in the visualizer's domain bar:
 
-• **Closed endpoint (filled circle)** — the boundary value is *included* in the domain. Square root has domain $x \\geq 0$ with a closed endpoint at $0$, because $\\sqrt{0} = 0$ is defined. The bar shows a filled dot.
+• **Closed endpoint (filled circle)** — the boundary value is **included** in the domain. Square root has domain $x \\geq 0$ with a closed endpoint at $0$, because $\\sqrt{0} = 0$ is defined. The bar shows a filled dot.
 
-• **Open endpoint (hollow circle)** — the boundary value is *excluded* from the domain. Logarithm has domain $x > 0$ with an open endpoint at $0$, because $\\ln(0)$ is undefined (the limit is $-\\infty$). The bar shows a hollow dot.
+• **Open endpoint (hollow circle)** — the boundary value is **excluded** from the domain. Logarithm has domain $x > 0$ with an open endpoint at $0$, because $\\ln(0)$ is undefined (the limit is $-\\infty$). The bar shows a hollow dot.
 
 • **Excluded value (red ×)** — the function is defined everywhere except one value. Reciprocal has domain $x \\neq 0$ — every nonzero real number is a legal input, but $0$ is the vertical asymptote and forbidden. The bar shows a full fill broken by a small red × at the excluded point.
 
@@ -214,7 +214,7 @@ Its real use in this tool is as a control: switch here after a restricted family
       title: `The Scaled Linear Function`,
       content: `The line $f(x) = 2x$ doubles its input — and doubling is something every real number tolerates.`,
       before: ``,
-      after: `Like the [identity](!#the-identity-function), its domain is all of $\\mathbb{R}$ under every parameter setting. What the scaling *does* move is the range and the steepness — a reminder that domain (allowed inputs) and range (produced outputs) are independent questions.
+      after: `Like the [identity](!#the-identity-function), its domain is all of $\\mathbb{R}$ under every parameter setting. What the scaling **does** move is the range and the steepness — a reminder that domain (allowed inputs) and range (produced outputs) are independent questions.
 
 Every polynomial shares this immunity: addition and multiplication never refuse an input. Division and even roots are where refusals start — the theme of the [restricted families](!#the-restricted-families).`,
       link: '',
@@ -223,9 +223,9 @@ Every polynomial shares this immunity: addition and multiplication never refuse 
       title: `The Quadratic Function`,
       content: `Squaring accepts every real number — negative inputs included — so the parabola's domain bar is solid green.`,
       before: ``,
-      after: `The quadratic is the classic place where students first confuse domain with range: the outputs never dip below zero, but the *inputs* are unrestricted. The visualizer separates the two visually — the green band on the x-axis is about inputs only, and it never shrinks however the parabola moves.
+      after: `The quadratic is the classic place where students first confuse domain with range: the outputs never dip below zero, but the **inputs** are unrestricted. The visualizer separates the two visually — the green band on the x-axis is about inputs only, and it never shrinks however the parabola moves.
 
-Note the contrast with its inverse: undoing a square means taking a [square root](!#the-square-root-and-its-closed-boundary), and *that* function pays for the parabola's generosity with a halved domain.`,
+Note the contrast with its inverse: undoing a square means taking a [square root](!#the-square-root-and-its-closed-boundary), and **that** function pays for the parabola's generosity with a halved domain.`,
       link: '',
     },
     obj15: {
@@ -243,14 +243,14 @@ In the tool this makes the cubic the cleanest demonstration that $a$, $k$, $b$, 
       before: ``,
       after: `That mismatch is the exponential's signature: domain $\\mathbb{R}$, range $(0, \\infty)$. Feed it $-1000$ and it answers with a very small positive number, not a refusal.
 
-The refusals belong to its inverse: the [logarithm](!#the-logarithm-and-its-open-boundary) inherits the exponential's *range* as its domain — positive inputs only. Inverting a function swaps domain and range, and this pair is the tool's best illustration of the swap.`,
+The refusals belong to its inverse: the [logarithm](!#the-logarithm-and-its-open-boundary) inherits the exponential's **range** as its domain — positive inputs only. Inverting a function swaps domain and range, and this pair is the tool's best illustration of the swap.`,
       link: '',
     },
     obj17: {
       title: `The Sine Function`,
       content: `Sine accepts any angle — wind around the circle as many times as you like — so its domain is all of $\\mathbb{R}$.`,
       before: ``,
-      after: `Periodicity and full domain go together: the wave repeats forever in both directions with no boundary to mark. The bounded part of sine's story is its *range*, locked inside $[-1, 1]$.
+      after: `Periodicity and full domain go together: the wave repeats forever in both directions with no boundary to mark. The bounded part of sine's story is its **range**, locked inside $[-1, 1]$.
 
 Contrast this with tangent — periodic but riddled with excluded points at every half-period. Periodicity alone tells you nothing about domain; it is the division inside tangent that punches the holes, the same mechanism as the [reciprocal's excluded point](!#the-reciprocal-and-its-excluded-point).`,
       link: '',
@@ -261,14 +261,14 @@ Contrast this with tangent — periodic but riddled with excluded points at ever
       before: ``,
       after: `Everything said about sine's domain transfers verbatim: unbroken green band, immunity to all four sliders, range trapped in $[-1, 1]$.
 
-The pair is useful in this tool for a subtler point: two different functions can have *identical* domain behavior. Domain is a coarse fingerprint — it distinguishes the logarithm from the sine instantly, but cannot tell sine from cosine at all.`,
+The pair is useful in this tool for a subtler point: two different functions can have **identical** domain behavior. Domain is a coarse fingerprint — it distinguishes the logarithm from the sine instantly, but cannot tell sine from cosine at all.`,
       link: '',
     },
     obj19: {
       title: `The Absolute Value Function`,
       content: `The absolute value $|x|$ happily accepts negatives — it just strips their sign — so its domain runs the whole axis.`,
       before: ``,
-      after: `The V-shape has a corner, and a corner is a *differentiability* problem, not a domain problem: the function is defined and continuous everywhere, including at $x = 0$. The green band takes no notice of the kink.
+      after: `The V-shape has a corner, and a corner is a **differentiability** problem, not a domain problem: the function is defined and continuous everywhere, including at $x = 0$. The green band takes no notice of the kink.
 
 That distinction — defined everywhere versus smooth everywhere — is worth one deliberate look here, because the domain bar and the curve tell different stories at the corner point.`,
       link: '',

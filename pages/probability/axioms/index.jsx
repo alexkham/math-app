@@ -240,7 +240,7 @@
   
 // //       title:`Axiom 2 — Normalization`,
 // //       content:`
-// // Probability is measured on a fixed scale. The event that represents absolute certainty — that *something happens* — must anchor this scale.
+// // Probability is measured on a fixed scale. The event that represents absolute certainty — that **something happens** — must anchor this scale.
 
 // // This axiom states that the probability of the entire sample space is equal to one. It establishes what "100% certainty" means and ensures that all other probabilities are measured relative to this reference point.
 
@@ -277,7 +277,7 @@
 // axiom2:{
 //   title:`Axiom 2 — Normalization`,
 //   content:`
-// Probability is measured on a fixed scale. The event that represents absolute certainty — that *something happens* — must anchor this scale.
+// Probability is measured on a fixed scale. The event that represents absolute certainty — that **something happens** — must anchor this scale.
 
 // This axiom states that the probability of the entire sample space is equal to one. It establishes what "100% certainty" means and ensures that all other probabilities are measured relative to this reference point.
 
@@ -353,7 +353,7 @@
 // - **No restriction to finite spaces**  
 //   The axioms apply equally to finite, countable, and continuous sample spaces.
 
-// This section is crucial because it separates what probability *requires* from what is often *assumed*. Many misunderstandings arise from attributing extra meaning to the axioms that they do not contain.
+// This section is crucial because it separates what probability **requires** from what is often **assumed**. Many misunderstandings arise from attributing extra meaning to the axioms that they do not contain.
 // `,
 //       before:``,
 //       after:``,
@@ -367,7 +367,7 @@
 
 // Once probability is treated as a consistent assignment to events, concepts like conditional probability, total probability, independence, and Bayes' theorem emerge naturally. Each of these ideas can be derived by applying the axioms to specific event constructions and relationships.
 
-// This is why the axioms sit at the foundation of probability. They do not compete with later rules; they *produce* them. Everything else in probability refines or reorganizes what the axioms already enforce.
+// This is why the axioms sit at the foundation of probability. They do not compete with later rules; they **produce** them. Everything else in probability refines or reorganizes what the axioms already enforce.
 // `,
 //       before:``,
 //       after:``,
@@ -1081,7 +1081,7 @@ Together, these axioms define what it means for a probability assignment to be v
   
 //       title:`Axiom 2 — Normalization`,
 //       content:`
-// Probability is measured on a fixed scale. The event that represents absolute certainty — that *something happens* — must anchor this scale.
+// Probability is measured on a fixed scale. The event that represents absolute certainty — that **something happens** — must anchor this scale.
 
 // This axiom states that the probability of the entire sample space is equal to one. It establishes what "100% certainty" means and ensures that all other probabilities are measured relative to this reference point.
 
@@ -1118,7 +1118,7 @@ These two axioms (non-negativity and normalization) are fundamental for both [Pr
 axiom2:{
   title:`Axiom 2 — Normalization`,
   content:`
-Probability is measured on a fixed scale. The event that represents absolute certainty — that *something happens* — must anchor this scale.
+Probability is measured on a fixed scale. The event that represents absolute certainty — that **something happens** — must anchor this scale.
 
 This axiom states that the probability of the entire sample space is equal to one. It establishes what "100% certainty" means and ensures that all other probabilities are measured relative to this reference point.
 
@@ -1194,7 +1194,7 @@ The probability axioms are intentionally minimal. They impose consistency, but t
 - **No restriction to finite spaces**  
   The axioms apply equally to finite, countable, and continuous sample spaces.
 
-This section is crucial because it separates what probability *requires* from what is often *assumed*. Many misunderstandings arise from attributing extra meaning to the axioms that they do not contain. The table below collects each non-assumption alongside what it means and where the corresponding assumption must come from if a model needs it.
+This section is crucial because it separates what probability **requires** from what is often **assumed**. Many misunderstandings arise from attributing extra meaning to the axioms that they do not contain. The table below collects each non-assumption alongside what it means and where the corresponding assumption must come from if a model needs it.
 `,
       before:``,
       after:``,
@@ -1208,7 +1208,7 @@ The axioms are not isolated rules. Together, they are strong enough to generate 
 
 Once probability is treated as a consistent assignment to events, concepts like conditional probability, total probability, independence, and Bayes' theorem emerge naturally. Each of these ideas can be derived by applying the axioms to specific event constructions and relationships.
 
-This is why the axioms sit at the foundation of probability. They do not compete with later rules; they *produce* them. Everything else in probability refines or reorganizes what the axioms already enforce.
+This is why the axioms sit at the foundation of probability. They do not compete with later rules; they **produce** them. Everything else in probability refines or reorganizes what the axioms already enforce.
 `,
       before:``,
       after:``,

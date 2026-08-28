@@ -121,7 +121,7 @@ This step is purely organisational. No area has been added, removed, or moved �
 
 The split is the only setup the proof needs. From here, dropping perpendiculars from the tick marks will partition the interior into pieces with sides we can compute.`,
           before: ``,
-          after: `Note the deliberate bookkeeping in the frozen frame: the combined "$a + b$" dimension slides outward rather than disappearing, so both descriptions of each edge — one segment or two — stay on screen simultaneously. That redundancy *is* the proof's engine: the left-hand side of the identity lives in the outer label, the right-hand side will live in the inner ones.
+          after: `Note the deliberate bookkeeping in the frozen frame: the combined "$a + b$" dimension slides outward rather than disappearing, so both descriptions of each edge — one segment or two — stay on screen simultaneously. That redundancy **is** the proof's engine: the left-hand side of the identity lives in the outer label, the right-hand side will live in the inner ones.
 
 The amber tick marks are the only new geometry. Everything else in [the next step](!#drawing-the-grid-cuts) is determined by them.`,
           link: '',
@@ -153,7 +153,7 @@ The colours arrive in [the final step](!#colouring-the-four-pieces-in-sequence),
 
 Adding the four areas: $a^2 + ab + ab + b^2 = a^2 + 2ab + b^2$. The same square that has area $(a+b)^2$ also has area $a^2 + 2ab + b^2$. The identity follows by area conservation.`,
           before: ``,
-          after: `The frozen frame is the completed proof and the page's best answer to the classic error of writing $a^2 + b^2$: the two amber rectangles are simply *there*, occupying real area that any expansion must account for. Cover them with a thumb and you are looking at the wrong identity.
+          after: `The frozen frame is the completed proof and the page's best answer to the classic error of writing $a^2 + b^2$: the two amber rectangles are simply **there**, occupying real area that any expansion must account for. Cover them with a thumb and you are looking at the wrong identity.
 
 The simultaneous colouring of the two $ab$ pieces — deliberately staged as one event in the animation — is what earns the coefficient: they are one term because they are one kind of piece, counted twice.`,
           link: '',
@@ -283,7 +283,7 @@ Forgetting the minus sign or mishandling it is a frequent source of error. Seein
 
 The square's area is $a \\times a = a^2$. This is the quantity we will decompose. Unlike the square-of-a-sum proof, where the goal was to expand $(a+b)^2$ into pieces, here we begin from $a^2$ and work toward an expression involving $(a-b)^2$.`,
           before: ``,
-          after: `The direction of the argument is the thing to fix in mind at this frame: the target quantity $(a-b)^2$ is *smaller* than what is on screen, so the proof will proceed by covering and correcting rather than by cutting cleanly. The visualizer draws the square with $a = 7$ and $b = 3$ units, leaving a $4 \\times 4$ target square comfortably visible inside.
+          after: `The direction of the argument is the thing to fix in mind at this frame: the target quantity $(a-b)^2$ is **smaller** than what is on screen, so the proof will proceed by covering and correcting rather than by cutting cleanly. The visualizer draws the square with $a = 7$ and $b = 3$ units, leaving a $4 \\times 4$ target square comfortably visible inside.
 
 The next frame, [marking the b² corner](!#marking-the-b-squared-corner), sets the split that everything else references.`,
           link: '',
@@ -297,7 +297,7 @@ The marked $b^2$ corner is not yet doing any work in the proof — it is a refer
 
 The $b^2$ patch will reappear in the next step as the place where two strips overlap. Its role is structural, not decorative.`,
           before: ``,
-          after: `The frozen frame is worth comparing against the same step in the difference-of-squares proof: an identical pink corner in an identical position, about to play a completely different role. There the corner is *removed*; here it stays put and becomes the overlap witness. Two proofs, one marked square, two destinies — a good reminder that a diagram's meaning lives in the argument, not the picture.
+          after: `The frozen frame is worth comparing against the same step in the difference-of-squares proof: an identical pink corner in an identical position, about to play a completely different role. There the corner is **removed**; here it stays put and becomes the overlap witness. Two proofs, one marked square, two destinies — a good reminder that a diagram's meaning lives in the argument, not the picture.
 
 The double edge-labelling ($b$ and $a-b$ inside, $a$ slid outside) carries both descriptions of the side at once, exactly as [the strips step](!#two-ab-strips-with-an-overlap) will require.`,
           link: '',
@@ -319,7 +319,7 @@ $$a^2 = (2ab - b^2) + (a-b)^2$$`,
           before: ``,
           after: `In the frozen frame the $(a-b)^2$ square in the lower-left already announces itself with its own label and a dashed outline — the proof's destination visible before the algebra arrives. Both strips sit in place, and the pink $b^2$ patch is doing double duty exactly where they cross.
 
-This is the identity's entire content in one still image; [the discard step](!#the-discard-step) only pulls the strips apart so the double-counting can be *seen* instead of asserted.`,
+This is the identity's entire content in one still image; [the discard step](!#the-discard-step) only pulls the strips apart so the double-counting can be **seen** instead of asserted.`,
           link: '',
         },
 
@@ -497,7 +497,7 @@ Each cell takes a colour and a label according to its dimensions:
 
 • **Off-diagonal cells** are rectangles. The top-middle and middle-left both have dimensions $a$ and $b$ and are labelled $ab$. The top-right and bottom-left both have dimensions $a$ and $c$ and are labelled $ac$. The middle-right and bottom-middle both have dimensions $b$ and $c$ and are labelled $bc$. Each off-diagonal pair shares a colour to emphasise that the two cells in a pair are equal.`,
           before: ``,
-          after: `The frozen grid rewards a minute of deliberate reading: find the diagonal ($a^2$, $b^2$, $c^2$ in blue, pink, green), then verify each off-diagonal colour appears exactly twice, mirrored across the diagonal. That mirror symmetry *is* the commutativity of multiplication drawn as geometry — cell $(i,j)$ and cell $(j,i)$ are the same rectangle rotated.
+          after: `The frozen grid rewards a minute of deliberate reading: find the diagonal ($a^2$, $b^2$, $c^2$ in blue, pink, green), then verify each off-diagonal colour appears exactly twice, mirrored across the diagonal. That mirror symmetry **is** the commutativity of multiplication drawn as geometry — cell $(i,j)$ and cell $(j,i)$ are the same rectangle rotated.
 
 The six colours for six distinct products also preview the answer's shape: six terms, three of them doubled. [The explosion view](!#the-explosion-view) pulls the nine pieces apart so the count can be made piece by piece.`,
           link: '',
@@ -655,7 +655,7 @@ Nothing has been cut or removed. The starting state simply establishes the large
           before: ``,
           after: `Like its sibling proofs, the frame runs on concrete proportions — $a = 7$, $b = 3$ — chosen so the pieces to come stay chunky and readable: the L-shape will keep most of the square's area, and the final rectangle will be a satisfying $10 \\times 4$.
 
-This proof is the family's only *factoring* argument: instead of expanding a square into pieces, it will reshape a difference into a product. The direction shows immediately in [the next frame](!#marking-the-b-squared-removal), where area is marked for removal rather than for labelling.`,
+This proof is the family's only **factoring** argument: instead of expanding a square into pieces, it will reshape a difference into a product. The direction shows immediately in [the next frame](!#marking-the-b-squared-removal), where area is marked for removal rather than for labelling.`,
           link: '',
         },
 
@@ -667,7 +667,7 @@ Notice the corner square is fully drawn but visually distinct — it has its own
 
 A small text label "(removed)" appears with the $b^2$ patch to make the operation unambiguous: this corner is being taken out, not added.`,
           before: ``,
-          after: `The frozen frame carries dimension labels on *both* sides of the corner — "$a-b$ then $b$" along the top, "$b$ then $a-b$" down the right — and those four little labels are quietly the entire factorisation: every side of every future piece is already named here.
+          after: `The frozen frame carries dimension labels on **both** sides of the corner — "$a-b$ then $b$" along the top, "$b$ then $a-b$" down the right — and those four little labels are quietly the entire factorisation: every side of every future piece is already named here.
 
 Subtraction as geometry deserves a pause: $a^2 - b^2$ is not an abstract difference but a literal hole about to be punched at the corner. What shape remains, and what can be built from it, is the business of [the L-shape step](!#splitting-the-l-shape-into-two-rectangles).`,
           link: '',

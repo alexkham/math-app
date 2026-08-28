@@ -933,7 +933,7 @@ const combinationForms = {
           formula: '$0\\mathbf{v}_1 + \\cdots + 0\\mathbf{v}_k = \\mathbf{0}$',
           condition: 'always available, always gives $\\mathbf{0}$',
           strict: true,
-          note: 'Available for any set whatsoever, which is why finding *a* combination equal to $\\mathbf{0}$ proves nothing. [Independence](!/linear-algebra/vector-spaces/linear-independence) asks whether it is the *only* one \u2014 the whole subject turns on that word.',
+          note: 'Available for any set whatsoever, which is why finding **a** combination equal to $\\mathbf{0}$ proves nothing. [Independence](!/linear-algebra/vector-spaces/linear-independence) asks whether it is the **only** one \u2014 the whole subject turns on that word.',
         },
       ],
     },
@@ -1441,7 +1441,7 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
             <IdentitySheet data={combinationForms} theme="navy" variant="ledger" />
           </DiagramFrame>,
           `Reading it this way changes what the basic operations are. Addition is not an operation that linear combinations later generalise — it is the combination with both coefficients equal to one, and subtraction is the same with one of them negated. Nothing is added to the vocabulary between the first row and the last; only the freedom in the coefficients changes.`,
-          `The trivial combination is the row that matters most later, and it is easy to pass over. Every set of vectors admits it, so exhibiting *a* combination equal to $\\mathbf{0}$ establishes nothing at all. [Independence](!/linear-algebra/vector-spaces/linear-independence) is the statement that it is the only one, and that single word — only — is what the rest of the subject is built on.`,
+          `The trivial combination is the row that matters most later, and it is easy to pass over. Every set of vectors admits it, so exhibiting **a** combination equal to $\\mathbf{0}$ establishes nothing at all. [Independence](!/linear-algebra/vector-spaces/linear-independence) is the statement that it is the only one, and that single word — only — is what the rest of the subject is built on.`,
         ]
     },
     // {
