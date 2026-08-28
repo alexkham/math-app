@@ -114,10 +114,31 @@ indicator family 𝟙/I_A (indicators).
    read the real tail from the task output file. Stop any dev server on port 3000
    first; it contends over `.next`.
 2. Doc patches pending (operator): H5 slug-id rule text, component path (~line 13).
-3. ASK-1 (CORRECTED 2026-08-25): `\lim`, `\to`, `\sqrt`, `\mid` absent from the
-   keyboard dataset. **`\propto` and `\sum` ARE present** — the 08-24 flag on them
-   was a grep-escaping error, corrected in the registry. `\perp` is present (used
-   on independence).
+3. **ASK-1 — LARGELY WITHDRAWN 2026-08-25. The dataset needs no additions.**
+   The "missing commands" were mostly a flawed verification recipe. The procedure's
+   check `grep -c '"latex_code": "\\<command>"'` fails twice over: argument-taking
+   commands are stored **with their braces**, and the same glyph is often filed under
+   a **different command name**. Re-checked all 650 entries *by glyph*:
+   - `\sqrt` **is present** — stored as `\sqrt{}` (plus `\sqrt[3]{}`, `\sqrt[4]{}`);
+     the brace suffix defeated the old grep.
+   - `|` **is present** — as `\left|` / `\right|` (and `\nmid` for ∤), so the whole
+     bar family could always have named the keyboard.
+   - `→` **is present** — as `\rightarrow` among ~18 arrow forms; `\to` is just
+     LaTeX's alias for it.
+   - `\lim` is genuinely absent **and should stay absent**: every entry carries a
+     `symbol` glyph (this is a character-insertion keyboard) and `lim` is an operator
+     name with no glyph — it does not fit the data model.
+   - `\propto`, `\sum`, `\perp` present (the 08-24 flag on those was a grep-escaping
+     error, already corrected).
+
+   **Corrected recipe — verify by glyph, not by command string:** load the JSON,
+   flatten every array, find entries by the character itself
+   (`e.symbol === '√'`), then read that entry's `latex_code` to see what the
+   keyboard actually inserts.
+
+   *Follow-up opportunity (not done):* entries on radicals, the bar family
+   (`|x|`, `|z|`, `‖v‖`, cardinality, divides) and arrow marks were written without
+   keyboard links on the strength of the bad grep — they could legitimately gain them.
 4. ASK-2: `/math-symbols/{algebra,functions,arithmetic}` not wired into other
    symbols pages' menus or the `/math-symbols` hub (structural, operator decides).
 5. **SITE-WIDE SWEEPS — three done 2026-08-25, one left open.** Details in the
