@@ -231,8 +231,12 @@ indicator family 𝟙/I_A (indicators).
    the whole tree found exactly **one** (`z*` → "Alternative notation for the
    complex conjugate"), which was upgraded. Final score: 1 of 119.
 9. Parked candidates, with dispositions:
-   - **`⌊x⌋` floor bracket — investigated 2026-08-25, stays parked, and the reason
-     is now precise.** It is *not* a keyboard gap (`⌊` is present as
+   - **`⌊x⌋` floor bracket — CLOSED, WON'T DO (operator decision 2026-08-25).**
+     Asked directly whether to create a floor/ceiling page; answer was to skip it.
+     The bracket stays permanently unowned — used as an example on ten pages,
+     taught on none, and that is the accepted state. **Do not re-propose this as
+     notation work**; it would require the content page first, which has been
+     considered and declined. The investigation behind that, for context: It is *not* a keyboard gap (`⌊` is present as
      `\left\lfloor`). It has **no eligible owner**: ten pages with notation
      sections use `⌊ ⌋` — led by limits/one-sided with 18 occurrences — but every
      one merely *uses* it (one-sided calls it "a standard example"; the
