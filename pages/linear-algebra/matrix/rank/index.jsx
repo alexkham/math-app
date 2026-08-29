@@ -1991,6 +1991,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
@@ -2509,6 +2510,45 @@ A $5 \\times 3$ matrix with rank $3$ uses all three of its column directions. A 
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Rank Notation`,
+    lead: `One unqualified word standing for two quantities that are only equal because a theorem says so, an operator with four spellings, and a bound whose ceiling names the two conditions a matrix can be in. All of them are catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `The $m \\times n$ shape and the entry brackets come from [matrix operation notation](!/linear-algebra/matrix/operations#notation); $\\dim$, $\\operatorname{Col}$ and $\\operatorname{Nul}$ from [fundamental-space notation](!/linear-algebra/vector-spaces/fundamental-spaces#notation); $\\ker$, $\\operatorname{Im}$ and the rank–nullity dictionary from [image and kernel notation](!/linear-algebra/transformations/image-kernel#notation).`,
+    entries: [
+      {
+        id: 'rank-operator',
+        tex: `$\\operatorname{rank}(A)$`,
+        read: `the rank of A`,
+        means: `An operator name set upright, like $\\det$ and $\\operatorname{tr}$ — it takes a matrix of any shape and returns a single non-negative integer, as **What Rank Measures** above defines. Unlike the [trace](!/linear-algebra/matrix/trace#notation) and the determinant it does **not** require a square matrix, which is why the bound below has to mention both dimensions.`,
+        alsoWritten: `$\\operatorname{rk}(A)$ is the common short form and appears on this page alongside the long one; $\\operatorname{rg}(A)$ in German and French texts (from **Rang**); and $\\rho(A)$ in older and some engineering sources — a spelling worth knowing but not imitating, since $\\rho$ is heavily booked elsewhere.`,
+        confusedWith: `The Greek $\\rho$ at its other posts — spectral radius in numerical analysis, correlation in [statistics](!/probability/covariance#7), density in physics. When a source writes $\\rho(A)$ for a matrix, the surrounding claim decides whether it means rank or spectral radius, and the two are unrelated numbers.`,
+      },
+      {
+        id: 'rank-bound',
+        tex: `$0 \\le \\operatorname{rank}(A) \\le \\min(m, n)$`,
+        read: `rank runs from zero up to the smaller dimension`,
+        means: `The ceiling is $\\min(m, n)$, not $m$ or $n$ — the shorter side of the matrix caps how many independent directions there can be. Hitting the ceiling is **full rank**; falling short is **rank-deficient**. Those two words are the notation's whole vocabulary for a matrix's condition.`,
+        cases: `Only the zero matrix reaches the floor: $\\operatorname{rank}(A) = 0$ means every entry vanishes. For a square $n \\times n$ matrix, full rank $= n$ is exactly invertibility, which is why $\\operatorname{rank}(A) = n$, $\\det(A) \\neq 0$ and "$A^{-1}$ exists" are three spellings of one condition — the [determinant](!/linear-algebra/determinants/properties#notation) and [inverse](!/linear-algebra/matrix/inverse#notation) pages state the same fact in their own marks.`,
+        confusedWith: `Reading "full rank" as "square". A $5 \\times 3$ matrix of rank $3$ is at full rank while being nowhere near square — the term measures attainment of the $\\min(m,n)$ ceiling, not the shape of the array.`,
+      },
+      {
+        id: 'unqualified-rank',
+        tex: `column rank $=$ row rank $= \\operatorname{rank}(A)$`,
+        read: `the two rank counts coincide, so the bare word is unambiguous`,
+        means: `The single unqualified word is licensed by a theorem, not by convention: the columns live in $\\mathbb{R}^m$ and the rows in $\\mathbb{R}^n$ — different spaces — yet the two counts always agree, as **Column Rank and Row Rank** below proves. Only that equality makes it safe to write $\\operatorname{rank}(A)$ with no qualifier at all.`,
+        cases: `The qualified forms survive where the distinction is being argued rather than used — a proof will say "row rank" while establishing the equality, then drop the adjective forever after. In the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces#notation) the same number appears as $\\dim(\\operatorname{Col} A)$ and $\\dim(\\operatorname{Row} A)$, which is the dimension dialect of the same claim.`,
+        confusedWith: `Treating the equality as a definition. It is a result — the notation quietly depends on it, and a reader who assumes the bare word was simply **defined** to be unambiguous misses that something had to be proved before the word could exist.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/matrix`,
+    parentLabel: `Matrices`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Column Rank and Row Rank`,
     content: `The column rank of $A$ is the dimension of its column space — the subspace of $\\mathbb{R}^m$ spanned by the columns of $A$. It counts the maximum number of [linearly independent](!/linear-algebra/vector-spaces/linear-independence) columns.
@@ -2848,6 +2888,25 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
