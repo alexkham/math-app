@@ -513,7 +513,7 @@ This restriction affects the domain of [radical functions](!/algebra/roots/funct
         read: `The root of the whole quantity, nine plus sixteen`,
         means: `The overbar — the vinculum — is a grouping symbol: an invisible pair of parentheses. Everything beneath it is rooted as one block, so $\\sqrt{9+16} = \\sqrt{25} = 5$.`,
         cases: `In print the bar's reach is exact; in handwriting an under-extended bar silently shrinks the radicand — the sloppiest common source of radical errors.`,
-        alsoWritten: `Descartes fused the hook with the vinculum in *La Géométrie* (1637); before that, radicals grouped with dots or not at all.`,
+        alsoWritten: `Descartes fused the hook with the vinculum in **La Géométrie** (1637); before that, radicals grouped with dots or not at all.`,
         confusedWith: `A distributable operation. $\\sqrt{9+16} = 5$ while $\\sqrt{9} + \\sqrt{16} = 7$ — the root does not distribute over sums, and the bar is precisely what marks the difference.`,
       },
       {

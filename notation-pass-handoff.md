@@ -181,6 +181,28 @@ indicator family 𝟙/I_A (indicators).
      linear-algebra 19, arithmetic 12, complex-numbers 10, trigonometry 6).
      **ZERO remain site-wide.**
 
+   - **The ASCII trap.** The italics greps in house rule 9 use an ASCII-only
+     class, so they **silently miss emphasis containing accented or non-ASCII
+     letters**. Two real bugs survived every sweep this way — `*La Géométrie*`
+     (roots/properties) and `*Körper*` (span) — and were only caught by looking at
+     rendered output. Re-run with a `\p{L}`-based class. Both now fixed; the 21
+     other non-ASCII hits are decorative asterisks in visual-tools diagram labels.
+
+   **Verify against rendered output, not just greps and exit codes.** Procedure H6
+   asks you to look at the page; this pass nearly skipped it entirely. With dev
+   servers unusable, the practical substitute is the production build's prerendered
+   HTML in `.next/server/pages/**.html` — no server needed. Checking
+   `poisson.html` id=15 confirmed 62 KaTeX spans, no leaked `$`/`**`/`*italics*`,
+   and all eight cross-links with correct hrefs. **Gotcha:** a naive "leaked LaTeX"
+   test false-positives, because KaTeX re-emits the TeX source inside
+   `<annotation encoding="application/x-tex">` for screen readers — strip
+   `<annotation>` blocks before testing.
+
+   **Sub-hub rosters are client-rendered.** The distribution sub-hubs' per-family
+   blocks (legacy "Notations Used" *and* the ASK-6 pointers) are absent from the
+   server-rendered HTML — they mount client-side. Verify those in a browser, not
+   in prerendered HTML.
+
    **Verification methodology — read this before repeating a bulk repair.** The
    asterisk-strip equality test used on the first sweep **cannot be reused naively**
    here: `git diff` compares against HEAD, and this tree carries a lot of

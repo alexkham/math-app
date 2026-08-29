@@ -1359,7 +1359,7 @@ By convention, the span of the empty set is $\\{\\mathbf{0}\\}$. With no vectors
         read: `The scalars come from the field F`,
         means: `Hollow $\\mathbb{F}$ is a placeholder: **whatever field the space is built over** — $\\mathbb{R}$ in this section, $\\mathbb{C}$ in complex spaces. Writing $\\mathbb{F}$ instead of $\\mathbb{R}$ signals that nothing in the statement depends on which one.`,
         cases: `The definition above quietly uses it: scalars range over $\\mathbb{F}$, so the same line defines real and complex spans at once. Concrete pages instantiate it; abstract ones leave it hollow.`,
-        alsoWritten: `$K$ or $k$ — the algebraists' field letters (from German *Körper*); $\\mathbb{F}_p$ with a subscript names the finite fields.`,
+        alsoWritten: `$K$ or $k$ — the algebraists' field letters (from German **Körper**); $\\mathbb{F}_p$ with a subscript names the finite fields.`,
         confusedWith: `A specific number system. $\\mathbb{F}$ joins the blackboard family $\\mathbb{N}, \\mathbb{Z}, \\mathbb{Q}, \\mathbb{R}, \\mathbb{C}$ — but unlike them it names no fixed set; it is a variable wearing the family's typeface.`,
       },
     ],
