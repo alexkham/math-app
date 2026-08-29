@@ -419,7 +419,7 @@
 //   },
 //   obj5: {
 //     title: `Symmetric Matrices`,
-//     content: `A square matrix is symmetric if it equals its own [transpose](!/linear-algebra/matrix/operations), meaning $a_{ij} = a_{ji}$ for every pair of indices:
+//     content: `A square matrix is symmetric if it equals its own [transpose](!/linear-algebra/matrix/operations), meaning $a_{ij} = a_{ji}$ for every pair of indices. Defining a whole matrix type by a single equation is itself a notational habit — [transpose notation](!/linear-algebra/matrix/operations#notation) collects the family: $A = A^T$ for symmetry, $A^T = -A$ for skew-symmetry, $Q^TQ = I$ for orthogonality:
 
 // @academic[formula_callout:symmetric_matrix_definition|Symmetric Matrix Definition|$$A = A^T$$]@
 // @academic[formulas_link:/linear-algebra/formulas#symmetric_matrix_definition]@
@@ -1281,7 +1281,7 @@ These properties make triangular matrices the natural endpoint of [Gaussian elim
   },
   obj5: {
     title: `Symmetric Matrices`,
-    content: `A square matrix is symmetric if it equals its own [transpose](!/linear-algebra/matrix/operations), meaning $a_{ij} = a_{ji}$ for every pair of indices:
+    content: `A square matrix is symmetric if it equals its own [transpose](!/linear-algebra/matrix/operations), meaning $a_{ij} = a_{ji}$ for every pair of indices. Defining a whole matrix type by a single equation is itself a notational habit — [transpose notation](!/linear-algebra/matrix/operations#notation) collects the family: $A = A^T$ for symmetry, $A^T = -A$ for skew-symmetry, $Q^TQ = I$ for orthogonality:
 
 @academic[formula_callout:symmetric_matrix_definition|Symmetric Matrix Definition|$$A = A^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#symmetric_matrix_definition]@

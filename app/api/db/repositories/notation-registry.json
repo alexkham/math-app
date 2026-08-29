@@ -3616,6 +3616,17 @@
       "externalNotationLinks": [],
       "notes": "matrix/types recorded as gate-fail (taxonomy catalog; its I/O marks folded into this section). Matrix family remaining: inverse (A⁻¹ — already back-linked from algebra negative-exponents), rank, trace (tr/rank operator marks — classify; likely one thin pass each or fold)."
     },
+    "linear-algebra/matrix/types": {
+      "pagePath": "pages/linear-algebra/matrix/types/index.jsx",
+      "template": "untitled",
+      "sections": ["ids numeric; Square, The Identity Matrix, Diagonal, Triangular, Symmetric, Skew-Symmetric, Orthogonal, Nilpotent and Idempotent, Involutory and Permutation, Singular and Nonsingular, Summary"],
+      "spots": [
+        {"sectionId": "(symmetric)", "sectionTitle": "Symmetric Matrices", "field": "content", "kind": "mention", "status": "existing", "quote": "Defining a whole matrix type by a single equation is itself a notational habit", "stage2": {"mathSymbols": null, "internal": {"page": "/linear-algebra/matrix/operations", "section": "notation", "anchorText": "transpose notation"}, "added": "2026-08-25", "placement": "woven link planted at the symmetry definition, naming the characterizing-equation family (A=Aᵀ, Aᵀ=−A, QᵀQ=I) and routing to its owner — the floor rule's inline gloss"}},
+        {"sectionId": "(diagonal)", "sectionTitle": "Diagonal Matrices", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "OWNERSHIP QUESTION worth an operator eye (not taken unilaterally, HALT-3-adjacent). decompositions/svd#notation currently covers 'diag() constructor' as one clause inside its Σ entry, where diag is used to describe Σ's shape. This page TEACHES diag: D = diag(d₁..dₙ) with the full array, the product rule diag(d)·diag(e) = diag(de), and powers Dᵏ = diag(dᵏ) — 18 occurrences. By ownership test 5 (meaning taught here, not merely used here) the general constructor arguably belongs on this page as an OWN-CASE beneath svd's Σ-specific use. Not moved, because reassigning would rewrite svd's entry.", "stage2": null}
+      ],
+      "notes": "NO SECTION — GATE FAIL (2026-08-25). Every candidate mark is already owned, and by pages that already cross-link here: matrix/operations#notation owns I/Iₙ and O as reserved letters AND the type-characterizing equations explicitly ('$A = A^{T}$ is symmetry, $A^{T} = -A$ skew-symmetry, $Q^{T}Q = I$ orthogonality' — its own text links to this page); decompositions/svd#notation owns diag() and the U upper-vs-orthogonal double-booking; Aᵀ itself is matrix/operations'. Surviving candidates were the general diag() constructor (blocked by the collision rule, see the recommended-note above) and the power-equation characterizations A²=A, Aᵏ=O, A²=I — one and a half entries, well below the floor of three. Writing a section here would have produced exactly the 'reads identically on a sibling page' failure the procedure warns about. Third page examined from the 2026-08-25 coverage audit; first of them to fail the gate.",
+      "externalNotationLinks": []
+    },
     "linear-algebra/matrix/rank": {
       "pagePath": "pages/linear-algebra/matrix/rank/index.jsx",
       "template": "untitled",
