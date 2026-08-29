@@ -763,6 +763,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1091,6 +1092,47 @@ The converse is equally immediate: every $m \\times n$ matrix $A$ defines a line
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Matrix Representation Notation`,
+    lead: `The same square brackets that turn a vector into a column turn a map into a matrix — and once a map is inside them, the subscripts have to say which bases were used, because the array changes when they do. All of these marks are catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `The brackets themselves, the script-vs-roman basis letters and the backward-arrow subscript come from [basis notation](!/linear-algebra/vector-spaces/basis#notation), where they wrap a vector; $T: V \\to W$ and the map letters come from [image and kernel notation](!/linear-algebra/transformations/image-kernel#notation); $A\\mathbf{x}$ juxtaposition and the $m \\times n$ shape from [matrix operation notation](!/linear-algebra/matrix/operations#notation).`,
+    entries: [
+      {
+        id: 'map-in-brackets',
+        tex: `$[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$`,
+        read: `the matrix of T, from the B basis to the C basis`,
+        means: `The bracket device of [coordinate notation](!/linear-algebra/vector-spaces/basis#notation) with a **map** inside instead of a vector: the result is the array that does what $T$ does, once both ends have been given coordinates. The subscript is not decoration — **Matrices for Abstract Vector Spaces** below shows the same $T$ producing different arrays under different bases.`,
+        cases: `When both spaces carry the standard basis the subscript is dropped and the bare $[T]$ or $A$ is the **standard matrix** of **Constructing the Standard Matrix** below — the only case where a map has one uncontested array. An operator mapping a space to itself uses one basis twice, written $[T]_{\\mathcal{B}}$ rather than $[T]_{\\mathcal{B} \\leftarrow \\mathcal{B}}$.`,
+        alsoWritten: `$A_T$, $M(T)$ and $\\mathcal{M}(T)$ all appear for the same object; some texts drop the brackets entirely once a basis is fixed and simply reuse $T$ for both the map and its matrix — convenient, and the source of the confusion below.`,
+        confusedWith: `The map itself. $T$ is basis-free; $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is one of infinitely many arrays representing it. Texts that write $T$ for both are relying on a fixed basis the reader is expected to remember, and the distinction reappears the moment a change of basis does.`,
+      },
+      {
+        id: 'domino-relation',
+        tex: `$[T(\\mathbf{v})]_{\\mathcal{C}} = [T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\,[\\mathbf{v}]_{\\mathcal{B}}$`,
+        read: `coordinates of the image equal the matrix times the coordinates`,
+        means: `The equation the subscripts were designed for: adjacent basis letters touch and cancel, $\\mathcal{C} \\leftarrow \\mathcal{B}$ against $\\mathcal{B}$, leaving $\\mathcal{C}$ on both sides. It is the same domino reading [change-of-basis notation](!/linear-algebra/vector-spaces/basis#notation) uses for $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$, which is why both marks point their arrows the same way.`,
+        cases: `Chaining is the payoff: $[S \\circ T]_{\\mathcal{D} \\leftarrow \\mathcal{B}} = [S]_{\\mathcal{D} \\leftarrow \\mathcal{C}}[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ — **Composition Corresponds to Matrix Multiplication** below — where the inner labels cancel in sequence and the surviving outer pair names the composite.`,
+        confusedWith: `A left-to-right reading. The rightmost factor acts first, so the arrow chain runs backwards relative to the page: $\\mathcal{B}$ enters on the right and $\\mathcal{D}$ leaves on the left, matching function composition rather than reading order.`,
+      },
+      {
+        id: 'columns-are-images',
+        tex: `$[T] = \\big[\\;[T(\\mathbf{b}_1)]_{\\mathcal{C}} \\;\\cdots\\; [T(\\mathbf{b}_n)]_{\\mathcal{C}}\\;\\big]$`,
+        read: `column j is the image of the j-th basis vector, in coordinates`,
+        means: `The construction rule written as a mark: each column is one basis vector's image, expressed in the target basis — **Constructing the Standard Matrix** below builds it this way. The outer brackets here are matrix-assembly, not coordinates; the inner ones are coordinates.`,
+        cases: `With the standard basis the inner brackets collapse, since $[\\mathbf{v}]_{\\mathcal{E}} = \\mathbf{v}$, and the rule shortens to "columns are $T(\\mathbf{e}_j)$" — the form most first courses state, and a special case rather than the definition.`,
+        confusedWith: `Rows. Reading the images across rows instead of down columns transposes the matrix and breaks $T(\\mathbf{x}) = A\\mathbf{x}$; the column convention is fixed by the fact that the matrix multiplies a column vector on its right.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/transformations`,
+    parentLabel: `Linear Transformations`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Constructing the Standard Matrix`,
     content: `The recipe is direct: apply $T$ to each standard basis vector $\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n$ and arrange the results as columns:
@@ -1363,6 +1405,25 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
