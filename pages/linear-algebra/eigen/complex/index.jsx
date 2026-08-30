@@ -1573,6 +1573,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1926,6 +1927,46 @@ The geometric interpretation is clear: no real direction in $\\mathbb{R}^2$ is m
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Complex Eigenvalue Notation`,
+    lead: `A bar that has to be applied twice — once to a number and once to a whole vector — plus a $\\pm$ that is a statement about pairing rather than a shorthand for two options, and a normal form whose block is chosen so that no complex number has to be written down at all. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$\\lambda$, the spectrum and the characteristic polynomial come from [eigenvalue notation](!/linear-algebra/eigen/characteristic-equation#notation); the overbar and $a + bi$ from [conjugate](!/complex-numbers/complex-conjugate#notation) and [complex number notation](!/complex-numbers/basics#notation); $\\Delta$ as discriminant from [quadratic notation](!/algebra/equations/quadratic#notation); $P^{-1}AP$ from [matrix representation notation](!/linear-algebra/transformations/matrix-representation#notation).`,
+    entries: [
+      {
+        id: 'conjugate-bar-two-levels',
+        tex: `$A\\mathbf{v} = \\lambda\\mathbf{v} \\;\\Rightarrow\\; A\\bar{\\mathbf{v}} = \\bar{\\lambda}\\bar{\\mathbf{v}}$`,
+        read: `conjugating both the eigenvalue and the eigenvector gives another eigenpair`,
+        means: `The [overbar](!/complex-numbers/complex-conjugate#notation) works at two levels here: over $\\lambda$ it conjugates a single number, over $\\mathbf{v}$ it conjugates **every entry** of a vector. The same mark, applied to objects of different type — and the implication only holds because $A$ is real, as **Conjugate Pairs** below proves.`,
+        cases: `Physics and much of numerical linear algebra prefer $A^{*}$ or $A^{H}$ for the conjugate transpose of a matrix, reserving the plain bar for entrywise conjugation without the transpose; the two differ, and on a real matrix the distinction disappears, which is why it goes unnoticed until complex entries arrive.`,
+        confusedWith: `Conjugating only the eigenvalue. $\\bar{\\lambda}$ pairs with $\\bar{\\mathbf{v}}$, not with $\\mathbf{v}$ — the original eigenvector does not belong to the conjugate eigenvalue, and dropping the bar on the vector produces a statement that is simply false.`,
+      },
+      {
+        id: 'pm-as-pairing',
+        tex: `$\\lambda = a \\pm bi$`,
+        read: `a pair of eigenvalues, not a choice between two`,
+        means: `Elsewhere $\\pm$ offers alternatives; here it asserts that **both** values occur, together, as a package — a real matrix cannot have one without the other. The compression is honest because the pair always appears in full, which is what makes the single line a complete description of two eigenvalues.`,
+        cases: `The sign convention runs through the geometry: $b$ is the rotation rate and its sign fixes the direction of turning, so writing $a \\pm bi$ records a rotation together with its mirror image; $b = 0$ collapses the pair to a single real eigenvalue and the notation degenerates gracefully.`,
+        confusedWith: `The $\\pm$ of the [quadratic formula](!/algebra/equations/quadratic#notation), where the two signs are two candidate roots you may pick between. Here selecting one is not an option — the eigenvalues are both present in the matrix.`,
+      },
+      {
+        id: 'real-canonical-block',
+        tex: `$\\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix}$`,
+        read: `the real canonical block standing in for the pair a plus or minus b i`,
+        means: `A $2 \\times 2$ block that represents a conjugate pair **without writing any complex number** — the whole point of **Real Canonical Form** below. The off-diagonal sign asymmetry is the notation: $-b$ above the diagonal and $b$ below is what encodes rotation.`,
+        cases: `Scaled out, the block reads $r\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta\\end{pmatrix}$ with $r = |\\lambda|$ and $\\theta = \\arg\\lambda$ — the [modulus and argument](!/complex-numbers/trigonometric-form#notation) of the eigenvalue reappearing as a scaling factor and a rotation angle.`,
+        confusedWith: `A diagonal matrix. The whole reason this form exists is that a real matrix with complex eigenvalues **cannot** be diagonalised over $\\mathbb{R}$; the block is the closest real substitute, and treating it as diagonal loses the rotation it was built to carry.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/eigen`,
+    parentLabel: `Eigenvalues and Eigenvectors`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Conjugate Pairs`,
     content: `For a real matrix, complex eigenvalues always come in conjugate pairs. If $\\lambda = a + bi$ is an eigenvalue (with $b \\neq 0$), then $\\bar{\\lambda} = a - bi$ is also an eigenvalue. The corresponding eigenvectors are also conjugates:
@@ -2221,6 +2262,25 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
