@@ -816,6 +816,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1173,6 +1174,50 @@ To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\math
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Basis Change Notation`,
+    lead: `The coordinate machinery is borrowed from elsewhere. What belongs to this page is a prime that is not a derivative, an arrow whose two ends are deliberately the same, and a relation that is never given a symbol.`,
+    inherited: `The coordinate brackets $[\\mathbf{v}]_\\mathcal{B}$, the script letters for bases, and the backward-arrow subscript on $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ with its domino cancellation are all set out at [basis](!/linear-algebra/vector-spaces/basis). The same device around a map, $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$, belongs to [matrix representation](!/linear-algebra/transformations/matrix-representation). The letter contract of $A = PDP^{-1}$ is at [diagonalization](!/linear-algebra/eigen/diagonalization), and the transpose standing in for an inverse at [the spectral decomposition](!/linear-algebra/decompositions/spectral).`,
+    entries: [
+      {
+        id: `prime-and-side`,
+        tex: `A' = P^{-1}AP`,
+        read: `A prime equals P inverse A P`,
+        means: `The prime says **same transformation, different basis**. It is not a derivative, not a transpose, and not a new matrix built from $A$ by some operation on its entries. $A$ and $A'$ are two descriptions of one object, and the prime is the only thing recording that they describe the same thing.`,
+        cases: `Which side $P^{-1}$ takes is decided by the direction $P$ converts, not by preference. With $P$ carrying $\\mathcal{B}$-coordinates into $\\mathcal{C}$-coordinates, the conversion has to undo itself on the way in and redo itself on the way out, which puts the inverse on the left. Reverse the direction of $P$ and the same relation is written $A = PA'P^{-1}$, with the letters unchanged and the sides swapped.`,
+        alsoWritten: `Both forms appear on this page: $A' = P^{-1}AP$ when a basis is being changed, and $A = PDP^{-1}$ when a matrix is being built out of eigen-data. They are one relation read in opposite directions.`,
+        confusedWith: `Taking the visible symmetry of $P^{-1}AP$ — the same letter on both sides — for a promise that structure survives. Symmetry of $A$ does not: $P^{-1}AP$ is generally not symmetric unless $P$ is orthogonal, and entries, zeros and sparsity are lost as a matter of course.`,
+        sameGlyphElsewhere: `A prime marks differentiation elsewhere on this site, including inside the Wronskian at [determinant applications](!/linear-algebra/determinants/applications). Nothing is being differentiated here.`,
+      },
+      {
+        id: `equal-endpoints`,
+        tex: `T: V \\to V`,
+        read: `T maps V to V`,
+        means: `Both ends of the arrow name the same space, and that repetition is what makes this page possible. Because input and output live in one space, a single basis choice governs both, so a single $P$ appears twice in the relation — once undoing the choice and once redoing it.`,
+        cases: `A map between different spaces, $T: V \\to W$, needs two independent basis choices and the relation becomes $A' = Q^{-1}AP$ with two unrelated matrices. Similarity is the special case in which the two collapse into one.`,
+        alsoWritten: `Such a map is called an operator on $V$ rather than a transformation between spaces, and the word carries exactly the information the repeated $V$ does.`,
+        confusedWith: `Reading the two $V$ symbols as decoration. If they differ, $A$ and $A'$ need not even be the same size, the invariants below stop being invariants, and the notation $P^{-1}AP$ does not typecheck.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `unwritten-similarity-symbol`,
+        tex: `A \\sim B`,
+        read: `A is similar to B`,
+        means: `This page names the relation in words and never writes it with a symbol, which is a deliberate omission. The tilde is already spoken for: at [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) $A \\sim B$ means row equivalence, a different relation entirely.`,
+        cases: `The two relations disagree on the things this page cares about. Row-equivalent matrices generally have different eigenvalues and different determinants; similar matrices always share both. A tilde read with the wrong meaning turns a true statement into a false one without changing a symbol.`,
+        alsoWritten: `Where a symbol is wanted, $A \\simeq B$ or $A \\approx B$ appear for similarity, and some texts write $A \\sim_{s} B$ with a subscript naming the relation. None is standard enough to rely on.`,
+        confusedWith: `Reading similarity as a loose word for resemblance. It is an equivalence relation with a precise definition — reflexive with $P = I$, symmetric by inverting $P$, transitive by multiplying the two conversions — and matrices that merely look alike are not similar.`,
+        sameGlyphElsewhere: `The tilde also marks approximation, asymptotic equivalence, and distribution membership in probability. Its meaning here would come entirely from context, which is the reason for avoiding it.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/transformations`,
+    parentLabel: `Linear transformations`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj3: {
     title: `The Similarity Relation`,
     content: `If $T: V \\to V$ has matrix $A$ in basis $\\mathcal{B}$ and matrix $A'$ in basis $\\mathcal{C}$, then
@@ -1466,6 +1511,25 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
