@@ -1000,6 +1000,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1475,6 +1476,60 @@ Cramer's rule proves that each solution component is a rational function of the 
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Determinant Application Notation`,
+    lead: `Subscripts on this page rarely mean what subscripts usually mean. Four of them name a constructed matrix, a matrix size, a condition on pairs, and a point of evaluation.`,
+    inherited: `The operator spelling $\\det(A)$, the bar delimiters $|A|$ and the $\\Delta_x/\\Delta$ tradition of Cramer's own school belong to [determinant properties](!/linear-algebra/determinants/properties). Minors, cofactors and the transpose hidden inside $\\operatorname{adj}(A)$ are set out at [cofactor expansion](!/linear-algebra/determinants/cofactors), the $\\hat{\\mathbf{i}}\\,\\hat{\\mathbf{j}}\\,\\hat{\\mathbf{k}}$ row and the symbolic-determinant device at [the cross product](!/linear-algebra/vectors/cross-product), and $p(\\lambda) = \\det(A - \\lambda I)$ at [the characteristic equation](!/linear-algebra/eigen/characteristic-equation).`,
+    entries: [
+      {
+        id: `column-replacement-subscript`,
+        tex: `x_i = \\frac{\\det(A_i)}{\\det(A)}`,
+        read: `x sub i is the determinant of A sub i over the determinant of A`,
+        means: `$A_i$ is not an entry, a row, a column or a member of a sequence. It is a whole matrix built for the occasion: $A$ with its $i$-th column thrown away and $\\mathbf{b}$ put in its place, every other column untouched. The subscript names a construction the notation never describes.`,
+        cases: `The two subscripts in the formula do different jobs. On the left, $i$ selects a component of the solution; on the right, the same $i$ selects which column was replaced. They match because the rule pairs them, not because the symbols are the same kind of thing.`,
+        alsoWritten: `Cramer's own school writes $\\Delta$ for the coefficient determinant and $\\Delta_{x}$, $\\Delta_{y}$ for the replaced ones, naming the columns by the unknown rather than by number.`,
+        confusedWith: `Reading $A_i$ as a submatrix, in the way that deleting a row and column produces one for a minor. Nothing is deleted here: $A_i$ is the same size as $A$, and the replacement is a substitution rather than a removal.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `wronskian-two-argument-lists`,
+        tex: `W(f_1, \\dots, f_n)(x)`,
+        read: `the Wronskian of f one through f n, evaluated at x`,
+        means: `Two bracketed lists in a row, and they hold different kinds of thing. The first takes the functions and fixes which determinant is being formed; the second supplies the point at which that determinant is worked out. $W$ consumes functions and returns a function, so the answer varies with $x$ and a single number is never the whole object.`,
+        cases: `Inside the matrix, one symbol carries two indices with unrelated jobs: in $f_1^{(n-1)}$ the subscript picks the function and the parenthesised superscript gives the order of differentiation. The parentheses are what keep it from reading as a power.`,
+        alsoWritten: `Shortened to $W(x)$ once the functions are fixed by context, which hides the first list entirely and makes the object look like an ordinary function of one variable.`,
+        confusedWith: `Testing the value at one convenient point and concluding dependence when it comes out zero. A single nonzero value proves independence; vanishing everywhere proves nothing unless the functions are already known to solve one linear differential equation.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `product-over-pairs`,
+        tex: `\\det(V) = \\prod_{1 \\leq i < j \\leq n} (x_j - x_i)`,
+        read: `the product over all pairs i less than j between one and n, of x j minus x i`,
+        means: `What sits under the product sign is a condition, not a counter running from a start to a finish. It selects every pair of indices with $i$ below $j$ and multiplies one factor for each, which is $\\binom{n}{2}$ factors rather than $n$.`,
+        cases: `The condition also fixes the order inside each factor: the larger index comes first, so every difference is written $x_j - x_i$. Swapping them in one factor flips the sign of the whole product, which is why the inequality is part of the notation rather than a remark about it.`,
+        alsoWritten: `Spelled out as $\\prod_{i<j}$ when the range $1$ to $n$ is clear, and occasionally as a nested double product, which obscures that each pair is counted once.`,
+        confusedWith: `Reading it as a single-index product and expecting $n$ factors. For four nodes the formula has six, and the count is the first thing to check when a hand computation disagrees.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `size-indexed-determinant`,
+        tex: `D_n = a_nD_{n-1} - b_nc_nD_{n-2}`,
+        read: `D sub n equals a sub n times D sub n minus one, minus b sub n c sub n times D sub n minus two`,
+        means: `The subscript on $D$ is a matrix size. $D_n$ is the determinant of the $n \\times n$ tridiagonal matrix, $D_{n-1}$ the determinant of a smaller one, so the recurrence relates numbers coming from matrices of three different dimensions in a single line.`,
+        cases: `The subscripts on $a$, $b$ and $c$ mean something else in the same equation: they locate entries within one matrix. Two subscript conventions sit side by side, and only the letter tells them apart.`,
+        alsoWritten: `Written $\\det(T_n)$ when the matrices are named explicitly, which makes the size-indexing visible at the cost of a longer line.`,
+        confusedWith: `Treating $D_{n-1}$ and $D_{n-2}$ as earlier values of one fixed matrix, in the way a sequence recurrence usually works. Each term here belongs to a different matrix, and the family has to be defined before the recurrence means anything.`,
+        sameGlyphElsewhere: `$D$ names a diagonal matrix at [diagonalization](!/linear-algebra/eigen/diagonalization) and a scalar determinant here, and the letter is also the older rival to $\\Delta$ in the Cramer tradition.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/determinants`,
+    parentLabel: `Determinants`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj2: {
     title: `The Inverse via the Adjugate`,
     content: `The [adjugate identity](!/linear-algebra/determinants/cofactors) $A \\cdot \\operatorname{adj}(A) = \\det(A) \\cdot I$ immediately gives an explicit formula for the inverse when $\\det(A) \\neq 0$:
@@ -1851,6 +1906,25 @@ const schemas = {
             key={'obj1-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },
