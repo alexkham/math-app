@@ -2824,6 +2824,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -3194,6 +3195,60 @@ The factorization captures the entire elimination process in a reusable form. In
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `LU Notation`,
+    lead: `Two letters chosen for what they look like, a diagonal of ones nobody writes down as a choice, and a permutation whose meaning depends entirely on which side of $A$ it stands.`,
+    inherited: `The echelon form that $U$ turns out to be, and the pivot vocabulary that comes with it, are set out at [row echelon form](!/linear-algebra/linear-systems/echelon-form). The row operations themselves, their arrow convention and the augmented bar belong to [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination), and the general habit of naming a factorisation by its factors is described at [the singular value decomposition](!/linear-algebra/decompositions/svd).`,
+    entries: [
+      {
+        id: `lu-letter-contract`,
+        tex: `A = LU`,
+        read: `A equals L U — A written as a lower triangular matrix times an upper triangular one`,
+        means: `The letters are mnemonic rather than arbitrary: $L$ is lower, $U$ is upper. That is unusual. Most factorisations pick letters for the role a factor plays, and here they name the shape instead, which is why the equation can be read off without a legend.`,
+        cases: `The two factors are not interchangeable. $UL$ is a different product describing a different matrix, and the order in $A = LU$ is fixed by the elimination that produced it — the lower factor records what was done, the upper factor records what was left.`,
+        alsoWritten: `German-language texts write $A = LR$, keeping $L$ and taking $R$ from the word for the right-hand, upper triangle. The three-factor spelling $A = LDU$ pulls the pivots out into a diagonal $D$ so that both triangular factors carry ones.`,
+        confusedWith: `Treating $LU$ as an expression waiting to be multiplied out. The point of the factorisation is that the pair is kept and reused; multiplying it back to $A$ is only ever a check.`,
+        sameGlyphElsewhere: `The letter $U$ names the orthogonal left factor at [the singular value decomposition](!/linear-algebra/decompositions/svd), where the clash with **upper triangular** is set out.`,
+      },
+      {
+        id: `unit-diagonal-normalisation`,
+        tex: `L = \\begin{pmatrix} 1 & 0 & 0 \\\\ l_{21} & 1 & 0 \\\\ l_{31} & l_{32} & 1 \\end{pmatrix}`,
+        read: `L is unit lower triangular — ones along the diagonal, multipliers below it`,
+        means: `**Unit** here refers to the diagonal entries being $1$ and to nothing else. The ones are a normalisation that has to be supplied from outside, because $A = LU$ on its own does not determine the factors: for any invertible diagonal $D$, the pair $LD$ and $D^{-1}U$ multiplies to the same $A$. Fixing $L$ to carry ones removes the freedom and makes the factorisation unique.`,
+        cases: `The three-factor form $A = LDU$ makes the choice visible instead of silent, putting the pivots in $D$ and leaving both triangular factors with unit diagonals.`,
+        alsoWritten: `Some treatments normalise $U$ instead, giving $U$ the ones and leaving the pivots in $L$. Both conventions produce a correct $A = LU$, and they produce different $L$ and $U$.`,
+        confusedWith: `Reading **unit** as unit length or orthonormal columns, neither of which is claimed. The second misreading is expecting $U$ to have ones as well: the diagonal of $U$ holds the pivots, and it is their product that gives the [determinant](!/linear-algebra/determinants).`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `permutation-side`,
+        tex: `PA = LU`,
+        read: `P A equals L U — permute the rows of A, then factor the result`,
+        means: `Which side $P$ stands on is the whole content of the line. On the left it multiplies the rows of $A$, and the equation asserts an order of events: the swaps are decided first, and elimination runs on the reordered matrix. The factorisation belongs to $PA$, not to $A$.`,
+        cases: `Rearranged forms say the same thing: since $P$ is a permutation, $P^{-1} = P^{T}$, so $A = P^{T}LU$. Numerical libraries commonly return the transposed permutation and report $A = PLU$ — the same letter naming the inverse matrix, which is worth checking before mixing output from two sources.`,
+        alsoWritten: `The row swaps are sometimes reported as a list of indices rather than a matrix, which stores the same information without committing to a side.`,
+        confusedWith: `Dropping $P$ once the factors are in hand. Solving $A\\mathbf{x} = \\mathbf{b}$ requires the right-hand side to be permuted too, so forward substitution runs on $P\\mathbf{b}$; using $\\mathbf{b}$ untouched silently solves a system with its rows in the wrong order.`,
+        sameGlyphElsewhere: `$P$ carries the eigenvectors at [diagonalization](!/linear-algebra/eigen/diagonalization), where it is an arbitrary invertible matrix rather than a rearrangement of rows.`,
+      },
+      {
+        id: `multiplier-entries`,
+        tex: `l_{ij}, \\quad i > j`,
+        read: `the entry of L in row i, column j, below the diagonal`,
+        means: `These entries are a transcript, not a computation on $A$. Each one is the multiplier that cleared position $(i, j)$ during forward elimination, so $L$ is a record of the procedure and $U$ is its result.`,
+        cases: `The sign follows subtraction. Subtracting $2$ times row $1$ from row $2$ stores $+2$; adding row $1$ to row $3$ stores $-1$. The number in $L$ therefore reads with the opposite sign to the operation as it is usually spoken.`,
+        alsoWritten: `The multipliers are written $m_{ij}$ while elimination is being described and $l_{ij}$ once they have been placed in the matrix — two names for one number at two moments.`,
+        confusedWith: `Reading the packed storage as a matrix. Since the ones in $L$ and the zeros in $U$ carry no information, software keeps both factors in one $n \\times n$ array with the multipliers in the lower triangle and $U$ in the upper. Printed, it looks like a single matrix and is neither factor.`,
+        sameGlyphElsewhere: ``,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/decompositions`,
+    parentLabel: `Matrix decompositions`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj2: {
     title: `Construction from Gaussian Elimination`,
     content: `Forward elimination on $A$ applies a sequence of row-addition [operations](!/linear-algebra/matrix/operations), each represented by an [elementary matrix](!/linear-algebra/matrix/operations) $E_i$. The product $E_k \\cdots E_2 E_1 A = U$ reduces $A$ to upper triangular form.
@@ -3508,6 +3563,25 @@ export default function LUDecompositionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
