@@ -956,6 +956,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1359,6 +1360,45 @@ REF is not unique. Different sequences of row operations applied to the same mat
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Echelon Form Notation`,
+    lead: `Two acronyms that differ by one word and by whether the article in front of them may be "the", a marked entry that is a **position** rather than a value, and a solution written with letters that stand for nothing in particular. All of them are catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `The augmented bar $[A \\mid \\mathbf{b}]$, the row-operation arrows and $A \\sim B$ row equivalence come from [Gaussian elimination notation](!/linear-algebra/linear-systems/gaussian-elimination#notation); the $m \\times n$ shape and entry brackets from [matrix operation notation](!/linear-algebra/matrix/operations#notation); $\\operatorname{rank}$ from [rank notation](!/linear-algebra/matrix/rank#notation).`,
+    entries: [
+      {
+        id: 'ref-rref',
+        tex: `REF, RREF`,
+        read: `row echelon form; reduced row echelon form`,
+        means: `Two acronyms one word apart, and the extra word changes the grammar around them. **REF is not unique** — as this section notes, different row operations give different echelon forms — so a matrix has *an* REF. **RREF is unique**, which is what licenses the definite article: *the* RREF of a matrix, the subject of **Uniqueness of RREF** below.`,
+        alsoWritten: `Spelled out in full in most European texts, which avoids the acronym entirely; some sources write $\\operatorname{rref}(A)$ as an operator, treating the unique reduced form as a function of the matrix — a spelling only the reduced version can support, precisely because it is unique.`,
+        confusedWith: `Using "the" with REF. Saying *the* echelon form of a matrix quietly asserts a uniqueness that only the reduced form has; what every echelon form does share is the **set of pivot positions**, not the entries.`,
+      },
+      {
+        id: 'pivot-marking',
+        tex: `$\\boxed{2}$, $\\boxed{\\ast}$`,
+        read: `a boxed entry marks a pivot — the leading nonzero entry of its row`,
+        means: `The box is presentational, not algebraic: it highlights which entries are pivots without changing them, and the schematic form replaces the values with $\\ast$ to show only the staircase. Circling is the common alternative on a blackboard. A **pivot position** is a location in the array; a **pivot column** is a column containing one.`,
+        cases: `In RREF every pivot is forced to $1$ — the "leading 1" — so the box becomes redundant and texts drop it; in plain REF the pivot can be any nonzero value, which is exactly why it needs marking there and not here.`,
+        confusedWith: `A pivot's value with its position. What is invariant across all echelon forms of a matrix is **where** the pivots sit, not what they are — so "the pivots of $A$" means the positions, and it is the positions that determine [rank](!/linear-algebra/matrix/rank#notation).`,
+      },
+      {
+        id: 'free-parameters',
+        tex: `$\\mathbf{x} = \\mathbf{p} + t\\mathbf{v}_1 + s\\mathbf{v}_2$`,
+        read: `the general solution: a particular vector plus free directions`,
+        means: `Each free column contributes one letter, and the letters are arbitrary: $t$, $s$, or $t_1, t_2, \\ldots$ when there are many — **Parametric Vector Form** below assembles them. A free variable is one whose column holds no pivot, so the pivot pattern decides how many letters the answer needs.`,
+        cases: `The count is forced, not chosen: free variables $= n - \\operatorname{rank}(A)$, so the number of parameters is fixed even though their names are not. A unique solution is the case where that count is zero and the parameter part disappears entirely.`,
+        confusedWith: `Reading the parameters as unknowns still to be solved for. They are not — they range over all scalars, and the expression is the whole solution set at once rather than an equation waiting to be finished.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/linear-systems`,
+    parentLabel: `Linear Systems`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj2: {
     title: `Reduced Row Echelon Form`,
     content: `A matrix is in reduced row echelon form (RREF) if it satisfies two additional conditions beyond REF. Each pivot is equal to $1$. Each pivot is the only nonzero entry in its column — all entries above the pivot are also zero, not just below.
@@ -1696,6 +1736,25 @@ export default function EchelonFormPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
