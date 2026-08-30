@@ -1761,6 +1761,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -2116,6 +2117,60 @@ This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Spectral Decomposition Notation`,
+    lead: `A single superscript carries the whole theorem, the same decomposition is written twice in shapes that look unrelated, and the letters collapse into one another when the matrix is symmetric.`,
+    inherited: `The letter $\\lambda$, the spectrum and the characteristic determinant are set out at [the characteristic equation](!/linear-algebra/eigen/characteristic-equation); the factorisation $A = PDP^{-1}$ and the column-to-diagonal pairing at [diagonalization](!/linear-algebra/eigen/diagonalization). The reserved $Q$ with $Q^{T}Q = I$ and the Kronecker delta belong to [orthogonal sets](!/linear-algebra/orthogonality/orthogonal-sets), the transpose position that separates an outer product from an inner one to [QR](!/linear-algebra/decompositions/qr), and the condition $\\mathbf{x}^{T}A\\mathbf{x} > 0$ with its curved comparison signs to [Cholesky](!/linear-algebra/decompositions/cholesky).`,
+    entries: [
+      {
+        id: `transpose-for-inverse`,
+        tex: `A = QDQ^{T}`,
+        read: `A equals Q D Q transpose`,
+        means: `This is $A = PDP^{-1}$ with one superscript changed, and the change is the entire content. Writing $Q^{T}$ where an inverse is required asserts that $Q^{-1} = Q^{T}$, which holds only for an orthogonal matrix. The line therefore states the spectral theorem in a superscript: the eigenvector matrix can be chosen orthogonal, so no inversion is ever needed.`,
+        cases: `The guarantee is unconditional for a real symmetric $A$, including when eigenvalues repeat. Where general diagonalization can fail outright, this factorisation always exists, and the letter $Q$ rather than $P$ is what announces it.`,
+        alsoWritten: `The complex case replaces the transpose with the conjugate transpose, $A = UDU^{*}$ for Hermitian $A$, keeping the shape and widening the hypothesis.`,
+        confusedWith: `Reading $Q^{T}$ as a factor unrelated to $Q^{-1}$, which makes the line look like an unusual choice rather than a saving. The two are the same matrix here, and $A = QDQ^{-1}$ is equally correct and never written.`,
+        sameGlyphElsewhere: `The exponent $T$ marks an ordinary [transpose](!/linear-algebra/matrix/operations) throughout. Nothing about this equation makes it a special operation — the content is that the transpose happens to land on the inverse.`,
+      },
+      {
+        id: `product-form-versus-sum-form`,
+        tex: `A = QDQ^{T} = \\lambda_1\\mathbf{q}_1\\mathbf{q}_1^{T} + \\cdots + \\lambda_n\\mathbf{q}_n\\mathbf{q}_n^{T}`,
+        read: `A equals Q D Q transpose, which also equals a sum of n rank-one terms`,
+        means: `One decomposition written in two shapes that share no visible structure. On the left, three matrices multiplied. On the right, $n$ matrices added. Nothing in either expression records that they are the same thing; the equality comes from expanding the product column by column, and it has to be supplied by the reader.`,
+        cases: `Each term $\\lambda_i\\mathbf{q}_i\\mathbf{q}_i^{T}$ is a rank-one matrix, and the factor $\\mathbf{q}_i\\mathbf{q}_i^{T}$ on its own is the [projection](!/linear-algebra/orthogonality/projections) onto the line through $\\mathbf{q}_i$. The sum form is the one that shows what $A$ does; the product form is the one that computes.`,
+        alsoWritten: `Compressed to $A = \\sum_{i=1}^{n}\\lambda_iP_i$ where each $P_i$ is named as a projector, which hides the vectors and makes the decoupling explicit.`,
+        confusedWith: `Reading the sum as an approximation, in the way a truncated series usually is. With all $n$ terms present the equality is exact; dropping terms is a separate decision, and it is what turns the same line into low-rank approximation.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `quadratic-form-change-of-variables`,
+        tex: `\\mathbf{x}^{T}A\\mathbf{x} = \\mathbf{y}^{T}D\\mathbf{y} = \\sum_{i=1}^{n}\\lambda_iy_i^2, \\qquad \\mathbf{x} = Q\\mathbf{y}`,
+        read: `x transpose A x equals y transpose D y, which equals the sum of lambda i times y i squared, where x is Q y`,
+        means: `The two sandwiches describe one number, and the substitution written to the right is what licenses the equality. Replacing $A$ by $D$ is not a simplification of the matrix; it is the same form measured in different coordinates, and $\\mathbf{y}$ names the coordinates of $\\mathbf{x}$ along the eigenvectors.`,
+        cases: `Because $D$ is diagonal, the middle expression has no cross terms, which is what the final sum makes visible: $n$ independent squares, each weighted by an eigenvalue. The cross terms did not cancel — they were absorbed into the change of variables.`,
+        alsoWritten: `The substitution is sometimes folded in as $\\mathbf{y} = Q^{T}\\mathbf{x}$, the same statement read in the other direction, which is available only because $Q^{-1} = Q^{T}$.`,
+        confusedWith: `Treating $\\mathbf{y}$ as a new unknown to solve for. It is a relabelling of the same vector, and the sign of each $\\lambda_i$ then classifies the form — positive definite, indefinite and their relatives are set out at [Cholesky](!/linear-algebra/decompositions/cholesky).`,
+        sameGlyphElsewhere: `$\\Sigma$ appears on this page as a covariance matrix, as the summation sign above, and at [the singular value decomposition](!/linear-algebra/decompositions/svd) as the matrix of singular values — three unrelated jobs for one glyph, distinguished only by position.`,
+      },
+      {
+        id: `letters-collapsing`,
+        tex: `U = V = Q, \\qquad \\sigma_i = |\\lambda_i|`,
+        read: `U and V both become Q, and each singular value is the absolute value of an eigenvalue`,
+        means: `The three-letter form $A = U\\Sigma V^{T}$ and the two-letter form $A = QDQ^{T}$ describe the same matrix when $A$ is symmetric with non-negative eigenvalues. The separate names for the outer factors exist to allow them to differ; symmetry removes the need, and the notation contracts.`,
+        cases: `When an eigenvalue is negative the collapse is incomplete. Singular values are never negative, so $\\sigma_i = |\\lambda_i|$, and the discarded sign is stored by negating the matching column of $U$ relative to $V$. The bars are doing bookkeeping, not measurement.`,
+        alsoWritten: `Written $\\Sigma = |D|$ as a statement about the whole diagonal, which is entrywise here only because both matrices are diagonal.`,
+        confusedWith: `Concluding that eigenvalues and singular values are the same quantity. They agree for symmetric positive semi-definite matrices and for nothing else, and the sign is the information the absolute value throws away.`,
+        sameGlyphElsewhere: ``,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/decompositions`,
+    parentLabel: `Matrix decompositions`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj2: {
     title: `The Spectral Theorem`,
     content: `The spectral theorem for real symmetric matrices states three facts.
@@ -2402,6 +2457,25 @@ export default function SpectralDecompositionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
