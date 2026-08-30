@@ -851,6 +851,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1201,6 +1202,46 @@ A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Orthogonal Set Notation`,
+    lead: `Two conditions — mutual perpendicularity and unit length — that most of this subject states in prose, compressed by one symbol into a single equation. Around it sit a hat that means a specific normalisation and a matrix letter whose name does not match its defining property. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `The dot and $\\perp$ come from [dot product](!/linear-algebra/vectors/dot-product#notation) and [inner product notation](!/linear-algebra/orthogonality/inner-product#notation); $\\|\\mathbf{v}\\|$ and the hat from [norm notation](!/linear-algebra/vectors/magnitude#notation); $A^{T}$, $I$ and $A^{-1}$ from [matrix operation](!/linear-algebra/matrix/operations#notation) and [inverse notation](!/linear-algebra/matrix/inverse#notation); subscripted index pairs from [matrix entry notation](!/linear-algebra/matrix/operations#notation).`,
+    entries: [
+      {
+        id: 'kronecker-delta',
+        tex: `$\\mathbf{v}_i \\cdot \\mathbf{v}_j = \\delta_{ij}$`,
+        read: `the dot product is one when the indices agree and zero otherwise`,
+        means: `The Kronecker delta is a **switch written as a symbol**: $\\delta_{ij} = 1$ when $i = j$ and $0$ otherwise. It compresses the whole definition of an orthonormal set into one equation — perpendicularity is the $i \\neq j$ case, unit length the $i = j$ case, as **Orthonormal Sets** below states.`,
+        cases: `The same symbol is the identity matrix entrywise, $I = [\\delta_{ij}]$, which is why $Q^{T}Q = I$ and "the columns are orthonormal" are the same statement written two ways — one in matrix marks, one in index marks.`,
+        confusedWith: `The $\\Delta$ and $\\delta$ of calculus — an increment or a small quantity. Here $\\delta$ takes two subscripts and returns one of two values; it is a function of a pair of indices, not a magnitude, and nothing about it is small.`,
+      },
+      {
+        id: 'hat-unit-vector',
+        tex: `$\\hat{\\mathbf{u}} = \\dfrac{\\mathbf{v}}{\\|\\mathbf{v}\\|}$`,
+        read: `u-hat — the unit vector in the direction of v`,
+        means: `The hat is a claim about length, not about identity: it says this vector has been divided by its own [norm](!/linear-algebra/vectors/magnitude#notation) and now measures $1$. Normalising is the single step that turns an orthogonal set into an orthonormal one, so the hat marks exactly what the extra word "normal" contributes.`,
+        cases: `The standard basis carries hats for the same reason — $\\hat{\\imath}, \\hat{\\jmath}, \\hat{k}$ in physics for what this site writes $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ — and the hat is dropped once every vector in play is known to be a unit vector.`,
+        sameGlyphElsewhere: `In statistics the same hat marks an **estimate** rather than a length — $\\hat{\\mu}$ is an estimated mean, with no implication that anything equals one. The [two-hats convention](!/linear-algebra/vectors/magnitude#notation) keeps the jobs apart.`,
+      },
+      {
+        id: 'orthogonal-matrix-letter',
+        tex: `$Q^{T}Q = I$, so $Q^{-1} = Q^{T}$`,
+        read: `Q is orthogonal: its transpose is its inverse`,
+        means: `$Q$ is the reserved letter for a matrix with orthonormal columns, and the defining equation is the payoff — **Orthogonal Matrices** below — since it replaces inversion, normally expensive, with transposition, which is free.`,
+        cases: `The equation is a statement about **columns**, and it forces the same of rows, so $QQ^{T} = I$ holds too — one of the few places where a matrix identity is symmetric in that way.`,
+        confusedWith: `The name itself. An "orthogonal matrix" has **orthonormal** columns, not merely orthogonal ones — unit length is part of the definition, and a matrix whose columns are perpendicular but not normalised satisfies no such identity. The terminology is a historical accident the notation does not repeat.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/orthogonality`,
+    parentLabel: `Orthogonality`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Orthogonal Sets Are Independent`,
     content: `Every orthogonal set of nonzero vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence):
@@ -1500,6 +1541,25 @@ export default function OrthogonalSetsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
