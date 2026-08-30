@@ -2801,6 +2801,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -3075,6 +3076,46 @@ Equivalently, $A$ is diagonalizable if and only if $\\mathbb{R}^n$ has a basis c
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Diagonalization Notation`,
+    lead: `Three letters in a fixed arrangement, where the two outer factors are inverses of each other and the middle one holds everything the matrix really does — plus a silent pairing requirement between them, and a one-word name for the matrices that refuse. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$\\lambda$, eigenvectors, the spectrum and the algebraic/geometric multiplicity pair come from [eigenvalue notation](!/linear-algebra/eigen/characteristic-equation#notation); $P^{-1}$ from [inverse notation](!/linear-algebra/matrix/inverse#notation); $D$ and $\\operatorname{diag}$ from [SVD notation](!/linear-algebra/decompositions/svd#notation); the decomposition letter-contract family from the same page; $P^{-1}AP$ similarity from [matrix representation notation](!/linear-algebra/transformations/matrix-representation#notation).`,
+    entries: [
+      {
+        id: 'pdp-contract',
+        tex: `$A = PDP^{-1}$`,
+        read: `A factors as P, times a diagonal D, times P inverse`,
+        means: `A letter contract in the [decomposition family](!/linear-algebra/decompositions/svd#notation): $P$ holds the eigenvectors as columns, $D$ the eigenvalues on its diagonal, and the outer factors are inverses so the product is a **change of coordinates and back** — the same matrix seen in a basis where it merely scales.`,
+        cases: `The arrangement is also written $P^{-1}AP = D$, which reads as an instruction rather than a factorisation: conjugating $A$ **diagonalises** it. Both say one thing, and which appears depends on whether the author is building $A$ or simplifying it.`,
+        confusedWith: `$PDP^{-1}$ with $P^{-1}DP$. The two are different matrices — swapping them inverts the change of basis — and since both are "$P$ and its inverse around a diagonal", the error survives a casual look at the shape.`,
+      },
+      {
+        id: 'column-order-pairing',
+        tex: `column $j$ of $P$ $\\leftrightarrow$ entry $j$ of $D$`,
+        read: `the j-th eigenvector must sit above the j-th eigenvalue`,
+        means: `A requirement the notation states nowhere: **Constructing the Diagonalization** below says to place them "in matching order", and nothing in $A = PDP^{-1}$ records that the pairing has been respected. The letters look correct whether or not the columns line up.`,
+        cases: `The order itself is otherwise free — permuting the pairs consistently gives a different but equally valid $P$ and $D$, which is why the factorisation is not unique and why "the" diagonalisation is a loose phrase.`,
+        confusedWith: `Treating $D$ as sorted. There is no convention forcing eigenvalues into increasing order here — unlike the [singular values](!/linear-algebra/decompositions/svd#notation) of an SVD, which carry a built-in ordering — so a $D$ that looks unsorted is not thereby wrong.`,
+      },
+      {
+        id: 'defective',
+        tex: `defective`,
+        read: `a matrix with too few independent eigenvectors to diagonalise`,
+        means: `The one-word name for failure, and it is a statement about **counts**: a matrix is defective when some eigenvalue's geometric multiplicity falls short of its algebraic one, so the eigenvectors cannot fill a basis — **When Diagonalization Fails** below.`,
+        cases: `The word is unusually specific: it never means singular, ill-conditioned, or wrong. A defective matrix can be invertible and perfectly well behaved; it simply has no $P$, and the [Jordan form](!/linear-algebra/eigen/characteristic-equation#notation) is what replaces $D$ when it does not exist.`,
+        confusedWith: `Having a repeated eigenvalue. Repetition is necessary for defectiveness but not sufficient — the identity matrix repeats an eigenvalue $n$ times and is already diagonal; it is the multiplicity **gap**, not the repetition, that defeats the construction.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/eigen`,
+    parentLabel: `Eigenvalues and Eigenvectors`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Constructing the Diagonalization`,
     content: `The procedure has three steps.
@@ -3441,6 +3482,25 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
