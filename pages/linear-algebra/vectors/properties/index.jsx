@@ -791,6 +791,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
@@ -1104,6 +1105,60 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
     after: ``,
     link: '',
   },
+  notation: {
+    title: `Vector Property Notation`,
+    lead: `The properties above are written one way and the properties below another, and the shape of the mark tells you which kind you are reading. Four points decide the rest.`,
+    inherited: `The double bars of $\\|\\mathbf{v}\\|$, the hat on a unit vector and the norm subscripts belong to [magnitude](!/linear-algebra/vectors/magnitude). The dot in $\\mathbf{a} \\cdot \\mathbf{b}$ is set out at [the dot product](!/linear-algebra/vectors/dot-product), the perpendicular sign $\\perp$ at [inner products](!/linear-algebra/orthogonality/inner-product), and bold type, component tuples and $\\mathbb{R}^n$ at [basic operations](!/linear-algebra/vectors/basic-operations).`,
+    entries: [
+      {
+        id: `intrinsic-versus-relational-shape`,
+        tex: `\\|\\mathbf{v}\\| \\quad\\text{versus}\\quad \\mathbf{a} \\parallel \\mathbf{b}`,
+        read: `something applied to one vector, against something written between two`,
+        means: `The two kinds of property on this page are distinguishable before the symbols are read. An intrinsic property is written as an operation on a single vector and returns a number. A relational property is written as a sign standing between two vectors and returns a yes or no.`,
+        cases: `Magnitude, direction and dimension take one argument. Equality, parallelism and orthogonality take two and assert nothing about either vector on its own — a vector is not parallel, it is parallel **to** something.`,
+        alsoWritten: `Relational signs are sometimes negated with a slash, as in $\\mathbf{a} \\nparallel \\mathbf{b}$, which has no counterpart on the intrinsic side because there is nothing there to deny.`,
+        confusedWith: `Treating direction as a one-vector quantity in the way magnitude is. Direction has no single-number output; the closest thing is the unit vector, which is another vector, and the angle it makes is measured against a reference that has to be chosen.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `parallel-sign`,
+        tex: `\\mathbf{a} \\parallel \\mathbf{b} \\iff \\mathbf{a} = c\\mathbf{b}`,
+        read: `a is parallel to b exactly when a is some scalar multiple of b`,
+        means: `The sign is borrowed from elementary geometry, where it joins two lines. Here it joins two vectors, and the definition it stands for is wider than the word suggests: any scalar $c$ qualifies, including negative ones, so a vector and its reverse are parallel.`,
+        cases: `The symbol records no distinction between $c > 0$ and $c < 0$. The second case is called anti-parallel when the difference matters, and it needs the word because the mark cannot carry it.`,
+        alsoWritten: `Some texts reserve $\\parallel$ for the positive case and write $\\mathbf{a} \\uparrow\\downarrow \\mathbf{b}$ for the reverse, so the same symbol means slightly different things in different books.`,
+        confusedWith: `The double bars of the norm. $\\|\\mathbf{a}\\|$ and $\\mathbf{a} \\parallel \\mathbf{b}$ use two vertical strokes for unrelated jobs — one encloses, the other separates — and both can appear in a single line of working. Position is the only clue.`,
+        sameGlyphElsewhere: `In geometry the same sign relates lines and planes, where parallel objects never meet. Vectors have no position, so that reading does not transfer: parallel vectors lie along one line through the origin.`,
+      },
+      {
+        id: `zero-vector-both-conventions`,
+        tex: `\\mathbf{0} \\parallel \\mathbf{v} \\quad\\text{and}\\quad \\mathbf{0} \\perp \\mathbf{v} \\quad \\text{for every } \\mathbf{v}`,
+        read: `the zero vector is parallel to every vector, and orthogonal to every vector`,
+        means: `Parallelism and orthogonality are presented as opposite extremes, and one object sits at both. Neither statement is forced by geometry — the zero vector has no direction to align or oppose. They are conventions, adopted so that theorems about parallel or orthogonal vectors need no clause excluding $\\mathbf{0}$.`,
+        cases: `Each convention has a computation behind it that comes out the right way: $\\mathbf{0} = 0\\mathbf{v}$ satisfies the definition of parallel, and $\\mathbf{0} \\cdot \\mathbf{v} = 0$ satisfies the definition of orthogonal. The definitions were written in a form that admits the zero vector rather than being patched afterwards.`,
+        alsoWritten: `Stated as **the zero vector is parallel and orthogonal to everything**, which is accurate and sounds contradictory. The contradiction is only in the words: no vector other than $\\mathbf{0}$ has both relations to a given vector.`,
+        confusedWith: `Concluding that $\\parallel$ and $\\perp$ are not really opposites. They are, everywhere except at the one vector that has no direction, and the overlap is a property of $\\mathbf{0}$ rather than of the two relations.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `ratio-chain-test`,
+        tex: `\\frac{a_1}{b_1} = \\frac{a_2}{b_2} = \\cdots = \\frac{a_n}{b_n}`,
+        read: `the component ratios are all equal`,
+        means: `A test written as a chain of equalities, each link comparing one pair of components. The chain says the ratio is the same throughout, and that shared value is the scalar $c$ that the definition of parallelism asks for, recovered without being solved for.`,
+        cases: `The form is undefined exactly where it is most likely to be used. Any zero component of $\\mathbf{b}$ puts a zero in a denominator, and the vectors may still be parallel — $(0, 3)$ and $(0, 6)$ are, while the first ratio cannot be written.`,
+        alsoWritten: `Cross-multiplied as $a_ib_j = a_jb_i$ for every pair $i, j$, which has no denominators and no exceptions. This is the form to use when either vector might have a zero component.`,
+        confusedWith: `Reading the parenthetical **with appropriate handling** as a minor caveat. It is where the notation stops working, and the cross-multiplied version exists because of it.`,
+        sameGlyphElsewhere: ``,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vectors`,
+    parentLabel: `Vectors`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj4: {
     title: `Equality`,
     content: `Two vectors are equal when every one of their corresponding components matches. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$:
@@ -1360,6 +1415,25 @@ export default function VectorPropertiesPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
