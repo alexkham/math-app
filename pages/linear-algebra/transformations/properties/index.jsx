@@ -810,6 +810,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
@@ -1156,6 +1157,60 @@ Both conditions must hold for every choice of vectors and scalars — not just f
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Linearity Notation`,
+    lead: `The definition of a linear map is written with one set of symbols standing for two sets of operations. Four marks decide what the equation is actually claiming.`,
+    inherited: `The bracket $[T]$ that turns a map into an array, the chaining rule for compositions and the reason the rightmost factor acts first are set out at [matrix representation](!/linear-algebra/transformations/matrix-representation). Coordinate brackets and the script letters used for bases belong to [basis](!/linear-algebra/vector-spaces/basis), and $\\dim$ with its field subscript to [dimension](!/linear-algebra/vector-spaces/dimension).`,
+    entries: [
+      {
+        id: `two-spaces-one-notation`,
+        tex: `T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})`,
+        read: `T of c u plus d v equals c times T of u plus d times T of v`,
+        means: `Four operations appear here and they are not the same four. The addition and the scaling on the left are performed in $V$, before $T$ is applied; the ones on the right are performed in $W$, after. One glyph is reused for both, and the equation is precisely the claim that the two structures agree.`,
+        cases: `Setting $c = d = 1$ leaves additivity; setting $\\mathbf{v} = \\mathbf{0}$ leaves homogeneity. The single line is not a shorthand for the pair — it implies both, and both together imply it.`,
+        alsoWritten: `Split into two displayed conditions when each is being checked separately, which is the usual form in a proof and hides that one equation carries both.`,
+        confusedWith: `Reading the line as an identity to be simplified. It is a condition to be tested: a hypothesis about a particular $T$, true for some functions and false for most, and nothing about the symbols guarantees it.`,
+        sameGlyphElsewhere: `The plus sign inside $T(\\cdot)$ and the plus sign outside it denote different operations in different spaces throughout this page. Nothing marks the difference except position.`,
+      },
+      {
+        id: `space-subscripts`,
+        tex: `T(\\mathbf{0}_V) = \\mathbf{0}_W, \\qquad T^{-1} \\circ T = I_V`,
+        read: `T of the zero of V is the zero of W; T inverse after T is the identity on V`,
+        means: `The subscripts name which space the object belongs to. There are two zero vectors here and two identity maps, and without the labels the first equation reads as though nothing happened and the second as though one identity were being used twice.`,
+        cases: `When $V$ and $W$ are the same space the subscripts are dropped and nothing is lost. They earn their place exactly when a map crosses between spaces, which is also when the statement stops being obvious.`,
+        alsoWritten: `Written $\\mathbf{0}$ and $I$ unadorned in most sources, leaving the reader to supply the space from the surrounding line.`,
+        confusedWith: `Taking $T(\\mathbf{0}) = \\mathbf{0}$ for part of the definition. It is a consequence, and it works in one direction only: failing it disproves linearity outright, while passing it proves nothing — $T(x) = x|x|$ sends $0$ to $0$ and is not linear.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `parentheses-double-duty`,
+        tex: `T(x, y, z) = (2x - y, \\; x + 3z)`,
+        read: `T of the triple x, y, z is the pair two x minus y, x plus three z`,
+        means: `The parentheses after $T$ are doing two jobs at once. Written strictly the line would begin $T\\big((x, y, z)\\big)$, with the inner pair building a vector and the outer pair applying the function; one pair is dropped by convention. $T$ takes a single argument, not three.`,
+        cases: `On the right the parentheses have only the tuple job — there is no function being applied there. The same glyph carries two meanings on the left and one on the right, in a single line.`,
+        alsoWritten: `The argument is written $T(\\mathbf{v})$ with a bold letter elsewhere on this page. The bold form and the coordinate form name the same thing, and the switch happens whenever a concrete formula is needed.`,
+        confusedWith: `Treating $T$ as a function of three separate variables. It suggests holding one fixed or reordering them, neither of which is defined; the input is one vector and the coordinates are its description, not its arguments.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `space-of-maps`,
+        tex: `\\mathcal{L}(V, W)`,
+        read: `the space of linear maps from V to W`,
+        means: `This notation turns functions into elements. Once sums and scalar multiples of transformations are defined pointwise, the collection of all linear maps from $V$ to $W$ satisfies the vector space conditions itself, and the script letter marks that change of level — its members are maps, and they are being treated as vectors.`,
+        cases: `Its dimension is $\\dim(V) \\cdot \\dim(W)$, which is the number of entries in a representing matrix. The zero element is the map sending everything to $\\mathbf{0}_W$, and the additive inverse of $T$ is $(-1)T$.`,
+        alsoWritten: `Written $\\operatorname{Hom}(V, W)$ in more algebraic treatments, and $\\mathcal{L}(V)$ with one argument when the two spaces coincide.`,
+        confusedWith: `Reading it as a set of matrices. Its elements are maps, and a matrix appears only after a basis has been chosen at each end — see [matrix representation](!/linear-algebra/transformations/matrix-representation).`,
+        sameGlyphElsewhere: `A script letter marks a basis at [basis](!/linear-algebra/vector-spaces/basis), where $\\mathcal{B}$ is a finite collection of vectors. Here the script letter names a whole space, and the two conventions share only their typeface.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/transformations`,
+    parentLabel: `Linear transformations`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj2: {
     title: `The One-Step Test`,
     content: `The two conditions can be combined into a single check. $T$ is linear if and only if
@@ -1457,6 +1512,25 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
