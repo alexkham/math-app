@@ -1836,6 +1836,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -2238,6 +2239,46 @@ At every stage, $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_j\\} = \\text
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Gram-Schmidt Notation`,
+    lead: `An algorithm's notation has to record not just what the objects are but the order they were built in — so this page runs three letters for three stages of the same vector, and a sum whose upper limit moves with the step it appears in. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$\\operatorname{proj}$ and its subscript come from [projection notation](!/linear-algebra/orthogonality/projections#notation); the dot from [dot product notation](!/linear-algebra/vectors/dot-product#notation); $\\|\\mathbf{v}\\|$ and the unit hat from [norm notation](!/linear-algebra/vectors/magnitude#notation); $\\operatorname{Span}$ from [span notation](!/linear-algebra/vector-spaces/span#notation); $\\delta_{ij}$ and $Q$ from [orthogonal set notation](!/linear-algebra/orthogonality/orthogonal-sets#notation).`,
+    entries: [
+      {
+        id: 'letter-pipeline',
+        tex: `$\\mathbf{v}_j \\to \\mathbf{u}_j \\to \\mathbf{e}_j$`,
+        read: `input, orthogonalised, normalised`,
+        means: `Three letters for three stages of the same vector: $\\mathbf{v}_j$ is what you started with, $\\mathbf{u}_j$ what survives after the projections are removed, and $\\mathbf{e}_j$ the unit version — **Normalization** below performs that last step. The subscript stays fixed across all three; only the letter records how far the vector has been processed.`,
+        cases: `Sources that skip the orthogonal stage write $\\mathbf{q}_j$ directly for the normalised output, matching the $Q$ of the decomposition below; others reuse $\\mathbf{v}_j$ throughout and overwrite in place, which is how the algorithm is actually implemented but loses the ability to refer to an earlier stage.`,
+        confusedWith: `$\\mathbf{e}_j$ as a standard basis vector. Here it is the $j$-th vector **this process produced**, not the $j$-th axis — the letter is borrowed for "unit vector", and only the surrounding construction says which unit vector is meant.`,
+      },
+      {
+        id: 'moving-upper-limit',
+        tex: `$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\operatorname{proj}_{\\mathbf{u}_i}(\\mathbf{v}_j)$`,
+        read: `subtract the projections onto everything built so far`,
+        means: `The upper limit is the notational content: $j-1$ means **everything already constructed**, so the sum's length grows as the algorithm proceeds and the formula refers to its own earlier outputs. This is a recursive definition written as a formula, not a closed expression.`,
+        cases: `The first step is the empty case — at $j = 1$ the sum has no terms, which is why $\\mathbf{u}_1 = \\mathbf{v}_1$ needs no separate rule; and the projections are onto the $\\mathbf{u}_i$, never the $\\mathbf{v}_i$, which is the one substitution that silently breaks the algorithm.`,
+        confusedWith: `A fixed sum over all $k$ vectors. Reading the limit as $k$ rather than $j-1$ asks the formula to use vectors that do not exist yet — the range is the whole reason the construction terminates.`,
+      },
+      {
+        id: 'qr-contract',
+        tex: `$A = QR$`,
+        read: `A factors into an orthonormal Q and an upper-triangular R`,
+        means: `Letters as a contract, in the family pattern [decomposition notation](!/linear-algebra/decompositions/svd#notation) describes: $Q$ carries the orthonormal columns this process produces, $R$ collects the coefficients it discarded along the way — **The QR Decomposition** below reads them off directly.`,
+        cases: `$R$ comes out upper triangular for a reason the notation encodes: $\\mathbf{v}_j$ is built only from $\\mathbf{u}_1, \\dots, \\mathbf{u}_j$, so every entry below the diagonal is a coefficient that was never used.`,
+        confusedWith: `$R$ as the real numbers. Blackboard $\\mathbb{R}$ is the field; italic $R$ here is one specific triangular matrix, and the two sit close together in exactly the equations where both appear.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/orthogonality`,
+    parentLabel: `Orthogonality`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj4: {
     title: `Normalization`,
     content: `After computing the orthogonal set $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$, normalization produces an orthonormal set:
@@ -2539,6 +2580,25 @@ export default function GramSchmidtsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
