@@ -816,6 +816,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1176,6 +1177,46 @@ Most of the ten axioms — commutativity, associativity, distributivity, the ide
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Subspace Notation`,
+    lead: `The containment sign here is doing more work than it does in set theory — it is asked to carry a structural claim it cannot actually make on its own. Alongside it sit the two subspaces every space owns for free, and a circled plus that adds a uniqueness guarantee to an ordinary sum. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$\\subseteq$, $\\cap$, $\\emptyset$ and set-builder braces come from [set operation notation](!/set-theory/operations#notation); $\\mathbf{0}$ and the bold-vector convention from [vector notation](!/linear-algebra/vectors/basic-operations#notation); $\\operatorname{Col}$, $\\operatorname{Nul}$ and $\\operatorname{Row}$ from [fundamental-space notation](!/linear-algebra/vector-spaces/fundamental-spaces#notation); $\\dim$ from [dimension notation](!/linear-algebra/vector-spaces/dimension#notation).`,
+    entries: [
+      {
+        id: 'containment-vs-subspace',
+        tex: `$W \\subseteq V$`,
+        read: `W is contained in V — which is necessary for being a subspace, not sufficient`,
+        means: `The same [containment sign](!/set-theory/operations#notation) set theory uses, and it claims only membership: every element of $W$ lies in $V$. Being a **subspace** is a strictly stronger condition that the symbol cannot express — closure under addition and scalar multiplication, which is what **The Subspace Test** below exists to check.`,
+        alsoWritten: `$W \\le V$ in algebra texts, where the order symbol is borrowed precisely to say "substructure" rather than "subset" — the same convention that writes $H \\le G$ for subgroups. It is the honest notation for the claim, and this site does not use it.`,
+        confusedWith: `Reading $\\subseteq$ as though it already asserted subspacehood. The unit circle in $\\mathbb{R}^2$ satisfies $\\subseteq$ and fails every closure test; the symbol is silent about structure, so the test has to be performed rather than read off.`,
+      },
+      {
+        id: 'trivial-subspaces',
+        tex: `$\\{\\mathbf{0}\\}$ and $V$`,
+        read: `the zero subspace and the whole space`,
+        means: `Every space owns exactly two subspaces for free, and both are called **trivial** — including $V$ itself. The braces matter: $\\{\\mathbf{0}\\}$ is a *set containing* the zero vector, a space of [dimension](!/linear-algebra/vector-spaces/dimension#notation) $0$, while a bare $\\mathbf{0}$ is the vector itself.`,
+        cases: `"Proper" excludes $V$ and nothing else, so a proper subspace may still be trivial in the other direction — $\\{\\mathbf{0}\\}$ is proper. The two words cut the collection differently, which is why careful statements say "proper nonzero subspace" when they mean neither extreme.`,
+        confusedWith: `The empty set. $\\emptyset$ is **not** a subspace of anything: a subspace must contain $\\mathbf{0}$, so the smallest one is $\\{\\mathbf{0}\\}$ — and this is the one place where a set-theory instinct gives the wrong smallest object.`,
+      },
+      {
+        id: 'direct-sum',
+        tex: `$W_1 \\oplus W_2$`,
+        read: `the direct sum of W-one and W-two`,
+        means: `The circle is a promise. Ordinary $W_1 + W_2$ collects every $\\mathbf{w}_1 + \\mathbf{w}_2$; the circled version additionally asserts $W_1 \\cap W_2 = \\{\\mathbf{0}\\}$, which makes each vector's decomposition **unique** — as **Subspaces from Operations** below states.`,
+        cases: `Writing $\\oplus$ is therefore a claim, not a choice of typography: $V = W_1 \\oplus W_2$ says the pieces are independent as well as spanning, and it is what licenses $\\dim(W_1) + \\dim(W_2) = \\dim(V)$ with no correction term.`,
+        sameGlyphElsewhere: `The same circled plus means exclusive or in [logic](!/logic/propositional-logic/syntax#notation) and addition modulo 2 in computing — unrelated jobs that happen to share the glyph, resolved entirely by what stands on either side of it.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vector-spaces`,
+    parentLabel: `Vector Spaces`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `The Subspace Test`,
     content: `A nonempty subset $W \\subseteq V$ is a subspace if and only if it satisfies two closure conditions:
@@ -1468,6 +1509,25 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
