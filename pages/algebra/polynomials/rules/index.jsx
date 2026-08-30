@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -681,6 +682,51 @@ This simplification makes monic polynomials particularly approachable. The candi
     link: '',
   },
 
+  notation: {
+    title: `Polynomial Theorem Notation`,
+    lead: `The theorems below are read off marks rather than computed from them: a substitution that produces a second polynomial, a row of signs, and an exponent whose only job is to alternate.`,
+    inherited: `The coefficient subscripts $a_n, \\dots, a_0$, the convention that a missing term carries a zero coefficient, $\\deg P$ and the phrase **counted with multiplicity** all belong to [polynomial roots](!/algebra/polynomials/roots). The vertical bar of $p \\mid a_0$, which asserts divisibility rather than naming a quotient, is set out at [divisibility](!/arithmetic/divisibility), and the lowest-terms requirement on $\\tfrac{p}{q}$ at [equivalent fractions](!/arithmetic/fractions/equivalent).`,
+    entries: [
+      {
+        id: `p-of-minus-x`,
+        tex: `P(-x)`,
+        read: `P of minus x`,
+        means: `A second polynomial built from the first by substituting $-x$ for $x$. It is a new object with its own coefficients, not a value of $P$ and not a sign flip of the whole thing: $P(-x)$ and $-P(x)$ are different polynomials, and only the first is what Descartes' rule asks for.`,
+        cases: `The substitution changes the sign of every odd-degree term and leaves the even ones alone, which is why one polynomial yields two different sign sequences. Running the count on $P(x)$ gives the positive roots and on $P(-x)$ the negative ones.`,
+        alsoWritten: `Some treatments name the second polynomial outright, writing $Q(x) = P(-x)$, which makes it visible that two objects are in play.`,
+        confusedWith: `Reading the minus as applying to the whole expression. Negating $P$ changes every coefficient and leaves the number of sign changes untouched, so the mistake produces the positive-root count a second time and no information about negative roots.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `sign-sequence`,
+        tex: `+, \\; -, \\; -, \\; +`,
+        read: `plus, minus, minus, plus — the sign sequence of the coefficients`,
+        means: `The coefficients are stripped down to their signs and read in order of descending degree. Everything else about them is discarded, because the rule counts transitions and nothing else: two adjacent entries either differ or they do not.`,
+        cases: `The count is of changes between neighbours, not of minus signs. The sequence above has two minus signs and two changes, and those numbers agree here by accident. Standard form is required first, since the sequence is meaningless if the terms are out of order.`,
+        alsoWritten: `A missing term contributes no entry at all. It is skipped rather than written as a zero, since a zero would create two transitions where the rule intends none.`,
+        confusedWith: `Taking the count as the answer. It is an upper bound, and the true number of positive roots is that count or less by an even number — so two sign changes permit two roots or none, and only one change forces the count exactly.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `alternating-exponent`,
+        tex: `e_k(r_1, \\dots, r_n) = (-1)^k \\, a_{n-k}`,
+        read: `the k-th elementary symmetric polynomial of the roots equals minus one to the k, times the coefficient of x to the n minus k`,
+        means: `The factor $(-1)^k$ exists only to alternate. It is $+1$ for even $k$ and $-1$ for odd $k$, and writing the alternation as an exponent is what lets one line replace a list of formulas whose signs would otherwise have to be stated case by case.`,
+        cases: `The line carries a condition it does not display: the polynomial must be **monic**. Every formula on this page — the sum of the roots as $-b$, the product as $c$ or $-d$ — assumes a leading coefficient of $1$. For a general polynomial each right-hand side is divided by $a_n$, and applying the monic version to a non-monic polynomial gives answers wrong by that factor.`,
+        alsoWritten: `Written out degree by degree for the quadratic and cubic cases, as above, where the alternation appears as an explicit minus sign on the first and third lines and nothing on the second.`,
+        confusedWith: `Reading $e_k$ as a power or a product of the roots. It is a sum: every product of exactly $k$ distinct roots, added together, which is why the cubic case has three terms in its middle line and one in each of the others.`,
+        sameGlyphElsewhere: `A superscript on $-1$ is a genuine exponent here and is being evaluated. The same mark counts row swaps in a determinant and inversions in a permutation, always with the single purpose of producing a sign.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/algebra`,
+    symbolsLabel: `All algebra symbols`,
+    parentHref: `/algebra/polynomials`,
+    parentLabel: `Polynomials`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj9: {
     title: `Descartes' Rule of Signs`,
     content: `Descartes' Rule of Signs estimates the number of positive and negative real roots of a polynomial by counting sign changes in its coefficients.
@@ -1037,6 +1083,25 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
