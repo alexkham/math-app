@@ -852,6 +852,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1172,6 +1173,46 @@ The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the 
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Homogeneous System Notation`,
+    lead: `One boldface character carries the whole definition: the right-hand side is a vector of zeros, not the number zero. From that follow a solution that is guaranteed rather than sought, and a vocabulary that names the two cases a homogeneous system can be in. All of it is catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `The augmented bar $[A \\mid \\mathbf{0}]$ and the row-operation conventions come from [Gaussian elimination notation](!/linear-algebra/linear-systems/gaussian-elimination#notation); $\\operatorname{Nul}(A)$ from [fundamental-space notation](!/linear-algebra/vector-spaces/fundamental-spaces#notation); $\\operatorname{rank}$ and the free-variable count from [rank](!/linear-algebra/matrix/rank#notation) and [echelon form notation](!/linear-algebra/linear-systems/echelon-form#notation); $\\det$ from [determinant notation](!/linear-algebra/determinants/properties#notation).`,
+    entries: [
+      {
+        id: 'bold-zero',
+        tex: `$A\\mathbf{x} = \\mathbf{0}$`,
+        read: `A x equals the zero vector`,
+        means: `The boldface is the definition, not styling: $\\mathbf{0}$ is a **column of $m$ zeros**, while a plain $0$ is a single number. Writing $A\\mathbf{x} = 0$ equates a vector with a scalar — the shapes do not match, and the equation only typechecks once the right side is bold.`,
+        alsoWritten: `$\\vec{0}$ where the site's [arrow convention](!/linear-algebra/vectors/basic-operations#notation) is in force, and $\\mathbf{0}_m$ when the length needs stating; handwriting has no bold, so an underline or an arrow does the work at the board — which is exactly where the scalar/vector slip happens.`,
+        confusedWith: `The zero **matrix** $O$. Same idea, different shape: $O$ is a rectangular array of zeros, $\\mathbf{0}$ a single column, and [matrix operation notation](!/linear-algebra/matrix/operations#notation) reserves the two letters separately for that reason.`,
+      },
+      {
+        id: 'trivial-solution',
+        tex: `$\\mathbf{x} = \\mathbf{0}$`,
+        read: `the trivial solution`,
+        means: `A named solution rather than a described one: $\\mathbf{x} = \\mathbf{0}$ satisfies $A\\mathbf{x} = \\mathbf{0}$ for every $A$, so it is **guaranteed, never discovered**. As **Definition** above puts it, the question for a homogeneous system is never whether a solution exists but whether another one does.`,
+        cases: `"Nontrivial" is the entire vocabulary for the interesting case, and it is a claim about **existence of a second solution**, not about complexity — a nontrivial solution can be as simple as $(1, 0, 0)$. Its presence is equivalent to a free column, to $\\operatorname{rank}(A) < n$, and for square $A$ to $\\det(A) = 0$.`,
+        confusedWith: `"Trivial" as a comment on difficulty. Here it is a technical label for one specific vector, not an editorial judgement — and a system whose only solution is trivial is the more constrained, often harder case.`,
+      },
+      {
+        id: 'solution-set-is-a-space',
+        tex: `$\\{\\mathbf{x} : A\\mathbf{x} = \\mathbf{0}\\} = \\operatorname{Nul}(A)$`,
+        read: `the solution set is the null space of A`,
+        means: `An equality between two descriptions of one object: set-builder on the left, a named [fundamental space](!/linear-algebra/vector-spaces/fundamental-spaces#notation) on the right. Only homogeneous systems earn this — the notation records that the solutions form a subspace rather than a scattered set.`,
+        cases: `The **Superposition Principle** below is that subspace closure spelled out: if $\\mathbf{u}$ and $\\mathbf{v}$ solve the system then so does $c\\mathbf{u} + d\\mathbf{v}$, which is why the general solution can be written as a span rather than a list.`,
+        confusedWith: `Expecting the same of $A\\mathbf{x} = \\mathbf{b}$. A non-homogeneous solution set is a **translate** of $\\operatorname{Nul}(A)$, not a subspace — it misses $\\mathbf{0}$ unless $\\mathbf{b} = \\mathbf{0}$, which is precisely the structural difference **Homogeneous vs. Non-Homogeneous** below turns on.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/linear-systems`,
+    parentLabel: `Linear Systems`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `When Do Nontrivial Solutions Exist?`,
     content: `Nontrivial solutions to $A\\mathbf{x} = \\mathbf{0}$ exist if and only if the [rank](!/linear-algebra/matrix/rank) of $A$ is less than $n$, the number of unknowns. When $\\text{rank}(A) < n$, at least one free variable appears in the [echelon form](!/linear-algebra/linear-systems/echelon-form), and that free variable parametrizes a family of nonzero solutions.
@@ -1486,6 +1527,25 @@ export default function HomogeneousSystemsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
