@@ -1780,6 +1780,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -2117,6 +2118,70 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Cholesky Notation`,
+    lead: `One letter does the work of two, a word that sounds like a claim about entries is a claim about something else entirely, and a set of quotation marks marks the one place the wording is loose.`,
+    inherited: `The habit of naming a factorisation by its factors is described at [the singular value decomposition](!/linear-algebra/decompositions/svd), and the unit diagonal, the multiplier entries and the one-sided permutation $PA = LU$ at [LU](!/linear-algebra/decompositions/lower-upper). Transpose notation itself belongs to [matrix operations](!/linear-algebra/matrix/operations).`,
+    entries: [
+      {
+        id: `one-letter-twice`,
+        tex: `A = LL^{T}`,
+        read: `A equals L times L transpose`,
+        means: `Every other factorisation on this site names its factors with separate letters. Here there is one factor, written twice, and the second appearance is fully determined by the first. That is the notation carrying a fact: $LL^{T}$ comes out symmetric no matter what $L$ is, so the shape of the equation already restricts which matrices can appear on the left.`,
+        cases: `Only the lower triangle of $L$ is ever stored. The transposed copy is the same array of numbers read in the other direction, which is where the halved storage comes from.`,
+        alsoWritten: `The upper-first spelling $A = R^{T}R$ with $R = L^{T}$ is the identical factorisation, and both are called the Cholesky decomposition. Which one a library returns is a convention, not a result.`,
+        confusedWith: `Reading the second factor as an independent unknown to be found. There is nothing to solve for beyond $L$ — the algorithm produces one triangular matrix and the equation supplies the rest.`,
+        sameGlyphElsewhere: `$L$ is also the lower factor at [LU](!/linear-algebra/decompositions/lower-upper), where it is unit lower triangular and its partner $U$ is independent. The two $L$ matrices of one symmetric $A$ are different matrices.`,
+      },
+      {
+        id: `positive-definite-form`,
+        tex: `\\mathbf{x}^{T}A\\mathbf{x} > 0 \\quad \\text{for all } \\mathbf{x} \\neq \\mathbf{0}`,
+        read: `x transpose A x is greater than zero for every nonzero vector x`,
+        means: `The sandwich collapses to a single number: a row times a matrix times a column leaves a scalar, not a matrix. **Positive** in the name **positive definite** describes those numbers and nothing else. **Definite** carries the strictness — every nonzero $\\mathbf{x}$, with no exceptions allowed.`,
+        cases: `Semi-definite weakens $>$ to $\\geq$, admitting vectors the form sends to zero. Indefinite means both signs occur. Each weakening changes exactly one symbol and changes which factorisation exists.`,
+        alsoWritten: `Compressed to $A \\succ 0$, with the curved comparison sign chosen precisely so it cannot be read entrywise; $A \\succeq 0$ is the semi-definite case. Plain $A > 0$ appears too and is ambiguous for that reason.`,
+        confusedWith: `Taking **positive** to describe the entries of $A$. The worked example on this page is positive definite and contains $-2$ and $-1$; a matrix whose entries are all positive need not be positive definite. The two properties are unrelated.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `square-root-quotes`,
+        tex: `LL^{T} = A, \\qquad LL \\neq A`,
+        read: `L times L transpose is A, but L times L is not`,
+        means: `$L$ is described as a matrix square root, and the quotation marks around that phrase are doing real work. A square root normally multiplies by itself; this one multiplies by its transpose. $LL$ is again lower triangular and cannot equal a full symmetric $A$.`,
+        cases: `A genuine matrix square root exists: the unique symmetric positive definite $S$ with $SS = A$, built from the eigenvalues. It is a different matrix from $L$ — $S$ is symmetric, $L$ is triangular — and it costs far more to compute.`,
+        alsoWritten: `The true root is written $A^{1/2}$. The Cholesky factor is written $L$ and should not inherit that exponent.`,
+        confusedWith: `Writing $A^{1/2}$ for the Cholesky factor. Both reproduce $A$ through a product, and they are not the same matrix; substituting one for the other silently changes any result that depends on symmetry.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `two-sided-permutation`,
+        tex: `PAP^{T} = LL^{T}`,
+        read: `P A P transpose equals L L transpose`,
+        means: `$P$ stands on both sides because one side alone would break the symmetry the method depends on. Multiplying on the left reorders the rows; multiplying by $P^{T}$ on the right applies the same reordering to the columns, so an entry and its mirror image move together and the result is still symmetric.`,
+        cases: `Since $P$ is a permutation, $P^{T} = P^{-1}$, so $PAP^{T}$ is [similar](!/linear-algebra/transformations/basis-change) to $A$: the eigenvalues are untouched, and with them positive definiteness. Reordering is safe here in a way that is not obvious from the symbols.`,
+        alsoWritten: `Written $P^{T}AP$ when the permutation is defined in the opposite direction, which describes the same reordering with $P$ replaced by its inverse.`,
+        confusedWith: `The one-sided $PA = LU$ at [LU](!/linear-algebra/decompositions/lower-upper). There the swaps act on rows only, because nothing about $LU$ requires symmetry; copying that form here would produce a matrix with no Cholesky factorisation at all.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `ldl-variant`,
+        tex: `A = LDL^{T}, \\qquad L_{\\text{Chol}} = L_UD^{1/2}`,
+        read: `A equals L D L transpose, and the Cholesky factor is the unit lower triangular L times the square root of D`,
+        means: `The two factorisations differ only in whether the diagonal is carried separately. In $LDL^{T}$ the triangular factor has ones on its diagonal and $D$ holds the positive numbers; the Cholesky factor absorbs $\\sqrt{D}$ and gives up the ones.`,
+        cases: `$D^{1/2}$ means the diagonal matrix of square roots of the entries. For a diagonal matrix that happens to agree with the genuine matrix square root, which is why the exponent passes here without comment and would not for a general matrix.`,
+        alsoWritten: `$LDL^{T}$ is the square-root-free variant, computing $D$ and the unit factor separately. It survives some semi-definite matrices that break the standard algorithm.`,
+        confusedWith: `The two lower triangular factors of one $A$. They differ by a diagonal scaling and sources write $L$ for both, so a factor taken from one formula and used in the other is wrong by exactly $D^{1/2}$.`,
+        sameGlyphElsewhere: `$D$ holds eigenvalues at [diagonalization](!/linear-algebra/eigen/diagonalization) and pivots here. Both are diagonal matrices of positive numbers for a positive definite $A$, and they are not the same numbers.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/decompositions`,
+    parentLabel: `Matrix decompositions`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj2: {
     title: `Existence: Symmetric Positive Definite Matrices`,
     content: `The Cholesky factorization exists if and only if $A$ is symmetric and positive definite. Symmetry means $A = A^T$. Positive definiteness means $\\mathbf{x}^TA\\mathbf{x} > 0$ for every nonzero vector $\\mathbf{x}$.
@@ -2417,6 +2482,25 @@ export default function PageTemplate({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
