@@ -1118,6 +1118,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
@@ -1648,6 +1649,46 @@ A single nonzero vector is always independent — the equation $c\\mathbf{v} = \
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Linear Independence Notation`,
+    lead: `A property defined by an arrow rather than a formula — what is written is not an equation to solve but an implication that must hold — plus a named witness for when it fails, and a determinant wearing a different letter because its entries are functions. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$\\mathbf{0}$ and the bold-vector convention come from [vector notation](!/linear-algebra/vectors/basic-operations#notation); set braces and the subscripted list from [span notation](!/linear-algebra/vector-spaces/span#notation); $A\\mathbf{x} = \\mathbf{0}$ and the trivial solution from [homogeneous system notation](!/linear-algebra/linear-systems/homogeneous#notation); $\\det$ from [determinant notation](!/linear-algebra/determinants/properties#notation).`,
+    entries: [
+      {
+        id: 'implication-definition',
+        tex: `$c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0} \\;\\Rightarrow\\; c_1 = \\cdots = c_k = 0$`,
+        read: `if a combination vanishes, then every coefficient was zero`,
+        means: `The arrow is the definition. What is written is not an equation to be solved but a **conditional that must hold for all coefficients**: whenever the combination collapses to $\\mathbf{0}$, the only way it happened was trivially. **Definition** above states it in exactly this shape.`,
+        cases: `Note which side is bold: the left $\\mathbf{0}$ is the zero **vector**, the right zeros are **scalars** — the same equation carries both, and the [bold-zero convention](!/linear-algebra/linear-systems/homogeneous#notation) is what keeps them apart.`,
+        confusedWith: `Reading it as a system to solve. $c_1\\mathbf{v}_1 + \\cdots = \\mathbf{0}$ always has the trivial solution, so finding it proves nothing; independence is the claim that **no other** solution exists, which is why the statement needs an implication rather than an equation.`,
+      },
+      {
+        id: 'dependence-relation',
+        tex: `$c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ with some $c_i \\neq 0$`,
+        read: `a dependence relation — an explicit witness to dependence`,
+        means: `Dependence gets a named object rather than a mere negation: a **dependence relation** is one specific combination with at least one nonzero coefficient, and exhibiting it settles the question — **Dependence Relations** below works with them directly.`,
+        cases: `Any single nonzero coefficient lets that vector be solved for in terms of the others, which is the sense in which one of them is redundant; a set can carry many different dependence relations, and the notation names an individual witness, not the whole failure.`,
+        confusedWith: `"Dependent" as a claim about every vector. A dependent set need not have every vector redundant — $\\{\\mathbf{v}, \\mathbf{v}, \\mathbf{w}\\}$ is dependent while $\\mathbf{w}$ may be unrelated to the rest; the relation identifies which vectors participate.`,
+      },
+      {
+        id: 'wronskian',
+        tex: `$W(f_1, \\ldots, f_n)(x)$`,
+        read: `the Wronskian of the functions, evaluated at x`,
+        means: `A determinant with its own letter because its entries are **functions and their derivatives**, so the value varies with $x$ — hence the second argument list. **The Wronskian Test for Functions** below builds it; it is the independence test transplanted from vectors to function spaces.`,
+        cases: `The test is one-directional in a way the notation hides: $W \\neq 0$ at a single point **proves** independence, while $W \\equiv 0$ proves nothing in general — a genuinely one-way implication, unlike the determinant test for vectors in $\\mathbb{R}^n$, which decides both ways.`,
+        confusedWith: `An ordinary [determinant](!/linear-algebra/determinants/properties#notation) of numbers. $W$ is a **function** of $x$, so asking whether "the Wronskian is zero" needs a point or an interval attached before it means anything.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vector-spaces`,
+    parentLabel: `Vector Spaces`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Geometric Interpretation in Rⁿ`,
     content: `In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, independence has clean geometric meaning.
@@ -1961,6 +2002,25 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
