@@ -1720,6 +1720,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -2021,6 +2022,70 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `QR Notation`,
+    lead: `The same two letters appear on this page with three different jobs, and the shapes behind them are never written down. Five marks decide which reading applies.`,
+    inherited: `The contract $A = QR$ itself — what each factor carries and why $R$ comes out upper triangular — is set out at [the Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt). The reserved letter $Q$ and the equation $Q^{T}Q = I$ belong to [orthogonal sets](!/linear-algebra/orthogonality/orthogonal-sets), the normal equations and the hat on $\\hat{\\mathbf{x}}$ to [least squares](!/linear-algebra/orthogonality/least-squares).`,
+    entries: [
+      {
+        id: `thin-versus-full`,
+        tex: `A = Q_1R_1 \\qquad \\text{versus} \\qquad A = QR`,
+        read: `A equals Q one R one — the thin factorisation — against A equals Q R, the full one`,
+        means: `The letters match and the matrices do not. Thin: $Q_1$ is $m \\times n$ with orthonormal columns and $R_1$ is $n \\times n$. Full: $Q$ is square $m \\times m$ and $R$ is $m \\times n$, carrying $m - n$ rows of zeros underneath. The line $A = QR$ records neither shape, so which version is meant has to come from the surrounding sentence.`,
+        cases: `The subscript $1$ marks the thin factors only when both versions are in play; on their own the thin factors are usually written $Q$ and $R$ as well. Gram-Schmidt produces the thin version, and the full one is reached by appending $m - n$ columns that span the orthogonal complement of the column space.`,
+        alsoWritten: `**Reduced** and **economy** are the same thing as thin. Numerical libraries select between them with an argument rather than a symbol, which is why code and page can disagree about what $Q$ names.`,
+        confusedWith: `Assuming $Q$ is square. That assumption is harmless for the full version and is exactly where the identity in the next entry stops holding.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `column-versus-row-identity`,
+        tex: `Q^{T}Q = I_n, \\qquad QQ^{T} \\neq I_m`,
+        read: `Q transpose Q is the n by n identity; Q Q transpose is not the identity`,
+        means: `For a thin $Q$ the order of the product decides whether the statement is true. Orthonormal columns give $Q^{T}Q = I_n$ directly. Reversing the factors gives $QQ^{T}$, the [projection](!/linear-algebra/orthogonality/projections) onto the column space of $A$ — equal to the identity only when $Q$ is square and there is nothing left over to project away.`,
+        cases: `In the full factorisation $Q$ is square and both products give $I_m$, which is the case set out at [orthogonal sets](!/linear-algebra/orthogonality/orthogonal-sets). This page needs the other one, and that is why $QQ^{T}$ appears here as a projection matrix rather than as a way of writing $I$.`,
+        alsoWritten: `The thin case is sometimes flagged in words as **orthonormal columns** rather than by the equation, precisely to avoid claiming more than holds.`,
+        confusedWith: `Calling a thin $Q$ an orthogonal matrix. That name requires a square matrix, and a thin $Q$ has no inverse at all. The practical version of the error is cancelling $QQ^{T}$ inside a longer expression as though it were $I$.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `positive-diagonal-convention`,
+        tex: `R_{jj} = \\|\\mathbf{u}_j\\| > 0`,
+        read: `the j-th diagonal entry of R is the norm of the j-th orthogonal vector, and it is positive`,
+        means: `Positivity buys uniqueness and is a convention, not something the factorisation forces. Multiplying a column of $Q$ by $-1$ and the matching row of $R$ by $-1$ leaves the product untouched, so without the sign rule an $n$-column matrix has $2^n$ different QR factorisations. The line $A = QR$ records none of that.`,
+        cases: `Gram-Schmidt gets the positive diagonal for free, since each $R_{jj}$ is a norm. Householder reflections do not, and numerical libraries generally do not enforce the convention — two correct computed factorisations of one matrix can differ by a column of sign flips with nothing wrong in either.`,
+        alsoWritten: `Stated as a condition on $R$ rather than built into the notation: **with $R$ having positive diagonal entries**, appended to the factorisation whenever uniqueness is being claimed.`,
+        confusedWith: `Reading **the** QR factorisation as though the article were earned. It is earned only once the sign convention is stated, in the same way that the diagonal of ones earns uniqueness at [LU](!/linear-algebra/decompositions/lower-upper).`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `qr-iteration`,
+        tex: `A_k = Q_kR_k, \\qquad A_{k+1} = R_kQ_k`,
+        read: `factor A sub k into Q sub k times R sub k, then multiply those same factors back in the opposite order`,
+        means: `The letters $Q$ and $R$ name a factorisation everywhere else on this page and an iteration here. The whole method sits in the reversal: the second line multiplies the factors just produced in swapped order, which amounts to $A_{k+1} = Q_k^{T}A_kQ_k$ — a [similarity](!/linear-algebra/transformations/basis-change) transformation, so the eigenvalues survive while the sub-diagonal shrinks.`,
+        cases: `The subscript $k$ counts iteration steps. It is the only subscript on the page that indexes time rather than a column, a row or an entry, and $Q_k$ is a different matrix at every step.`,
+        alsoWritten: `The shifted form factors $A_k - \\sigma_kI$ and adds $\\sigma_kI$ back afterwards, keeping the same two-line shape with a scalar moved in and out.`,
+        confusedWith: `Reading $R_kQ_k$ as a second factorisation, or expecting the reversal to undo the first line. Swapping the order changes the matrix, and repeating the swap is what drives $A_k$ toward upper triangular form with the eigenvalues on its diagonal.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `householder-outer-inner`,
+        tex: `H = I - \\frac{2\\mathbf{v}\\mathbf{v}^{T}}{\\mathbf{v}^{T}\\mathbf{v}}`,
+        read: `H equals the identity minus two times v v transpose, over v transpose v`,
+        means: `One vector appears four times in two products that are not the same operation. $\\mathbf{v}\\mathbf{v}^{T}$ is an $m \\times m$ matrix of rank one; $\\mathbf{v}^{T}\\mathbf{v}$ is a single number, the squared length. Only the position of the transpose separates them, and it determines the shape of the result.`,
+        cases: `The numerator is a matrix and the denominator a scalar, so the fraction is ordinary scaling of a matrix and the subtraction from $I$ is well formed. Writing $\\mathbf{v}$ as a unit vector makes the denominator $1$ and shortens the formula to $I - 2\\mathbf{v}\\mathbf{v}^{T}$, the form most texts quote — the same reflection either way.`,
+        alsoWritten: `The rank-one term is sometimes written $\\mathbf{v} \\otimes \\mathbf{v}$ to name the outer product explicitly instead of leaving it to the transpose position.`,
+        confusedWith: `Reading the two products as interchangeable. Swapping them makes the subtraction ill-formed in one direction and the division ill-formed in the other, which is a useful check when the formula is being recalled rather than copied.`,
+        sameGlyphElsewhere: ``,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/decompositions`,
+    parentLabel: `Matrix decompositions`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj2: {
     title: `QR via Gram-Schmidt`,
     content: `Applying the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) to the columns $\\mathbf{a}_1, \\dots, \\mathbf{a}_n$ of $A$ produces orthonormal vectors $\\mathbf{q}_1, \\dots, \\mathbf{q}_n$. These become the columns of $Q$.
@@ -2313,6 +2378,25 @@ export default function QRDecompositionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
