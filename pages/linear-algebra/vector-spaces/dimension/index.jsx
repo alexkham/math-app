@@ -2291,6 +2291,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -2823,6 +2824,46 @@ By convention, the zero space $\\{\\mathbf{0}\\}$ has dimension $0$. Its only "b
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Dimension Notation`,
+    lead: `An operator whose value depends on something the notation usually hides — the field you are counting over — plus a symbol for "no finite count" that is a label rather than a number, and the relation that lets one integer stand in for an entire space. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$\\mathcal{B}$ and the basis letters come from [basis notation](!/linear-algebra/vector-spaces/basis#notation); $|\\mathcal{B}|$ counting bars from [cardinality notation](!/set-theory/cardinality#notation); $\\operatorname{Col}$, $\\operatorname{Nul}$ and the rank–nullity dictionary from [fundamental-space notation](!/linear-algebra/vector-spaces/fundamental-spaces#notation) and [image and kernel notation](!/linear-algebra/transformations/image-kernel#notation); $\\mathbb{F}$ from [span notation](!/linear-algebra/vector-spaces/span#notation).`,
+    entries: [
+      {
+        id: 'dim-operator',
+        tex: `$\\dim(V)$, $\\dim_{\\mathbb{F}}(V)$`,
+        read: `the dimension of V — over the field F, when it matters`,
+        means: `An upright operator taking a space and returning a count, defined as $|\\mathcal{B}|$ for any basis, per **Definition** above. The parentheses are optional — $\\dim V$ is equally standard — and the subscript names the field of scalars, which most writing omits because it is fixed by context.`,
+        cases: `Omitting the subscript is safe until two fields are in play, and then it is essential: $\\mathbb{C}$ has dimension $1$ over $\\mathbb{C}$ and dimension $2$ over $\\mathbb{R}$, so $\\dim_{\\mathbb{C}}(\\mathbb{C}) = 1$ while $\\dim_{\\mathbb{R}}(\\mathbb{C}) = 2$. The space has not changed — only what counts as a scalar.`,
+        confusedWith: `A property of the set. Dimension belongs to the space **together with its field**, not to the underlying collection of vectors; a bare $\\dim$ carries an unstated field, and two authors can write the same symbol for different numbers without either being wrong.`,
+      },
+      {
+        id: 'infinite-dimension',
+        tex: `$\\dim(V) = \\infty$`,
+        read: `V is infinite-dimensional`,
+        means: `A label, not an arithmetic value: it records that **no finite basis exists**, which is the distinction **Finite vs. Infinite Dimension** below draws. The prose form "infinite-dimensional" is the more common spelling precisely because the equation invites reading $\\infty$ as a number.`,
+        cases: `Where the size genuinely matters, the count is replaced by a cardinal — the dimension of a space with a countably infinite basis is written $\\aleph_0$ rather than $\\infty$, borrowing [cardinality notation](!/set-theory/cardinality#notation); function spaces and polynomial spaces of unbounded degree are the usual inhabitants.`,
+        confusedWith: `Arithmetic. $\\dim(V) = \\infty$ cannot be added or subtracted the way finite dimensions can — the subspace and rank–nullity formulas below all carry a silent finiteness assumption, and applying them across an infinite-dimensional space is where they quietly fail.`,
+      },
+      {
+        id: 'isomorphism-relation',
+        tex: `$V \\cong W$`,
+        read: `V is isomorphic to W`,
+        means: `The wavy equals sign claims structural sameness rather than equality — the spaces may consist of entirely different objects. **Dimension and Isomorphism** below gives the classification it enables: over one field, $V \\cong W$ exactly when $\\dim(V) = \\dim(W)$, so a single integer determines the space up to $\\cong$.`,
+        cases: `Every $n$-dimensional space over $\\mathbb{F}$ satisfies $V \\cong \\mathbb{F}^{n}$, which is what licenses treating abstract spaces as coordinate space once a basis is chosen — the [coordinate brackets](!/linear-algebra/vector-spaces/basis#notation) are that isomorphism written down.`,
+        sameGlyphElsewhere: `$\\cong$ marks congruence in geometry — same shape and size — and the two uses share only the idea of "the same in the ways that matter here"; a third relative, $\\equiv$, means congruence [modulo](!/arithmetic/modulo#2) an integer.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vector-spaces`,
+    parentLabel: `Vector Spaces`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `The Basis Size Theorem`,
     content: `If a vector space $V$ has a basis with $n$ elements, then every basis for $V$ has exactly $n$ elements.
@@ -3168,6 +3209,25 @@ export default function DimensionPage({seoData, sectionsContent, introContent, s
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
