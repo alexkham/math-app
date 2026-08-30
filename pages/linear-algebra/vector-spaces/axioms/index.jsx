@@ -1097,6 +1097,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1622,6 +1623,60 @@ A set satisfying all ten is a vector space. A set violating even one is not.`,
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Vector Space Axiom Notation`,
+    lead: `The axioms are written almost entirely in reused symbols. A digit stands for two objects, juxtaposition stands for two multiplications, and one plus sign is being defined by another.`,
+    inherited: `The script letters $\\mathcal{P}_n$ and $\\mathcal{B}$ and their calligraphic convention are set out at [basis](!/linear-algebra/vector-spaces/basis); the braces in $\\{\\mathbf{0}\\}$ and what separates a set from its element at [subspaces](!/linear-algebra/vector-spaces/subspaces); $\\dim$ with its field subscript, where the choice of $\\mathbb{F}$ changes the answer, at [dimension](!/linear-algebra/vector-spaces/dimension).`,
+    entries: [
+      {
+        id: `one-digit-two-objects`,
+        tex: `0\\mathbf{v} = \\mathbf{0}, \\qquad c\\mathbf{0} = \\mathbf{0}`,
+        read: `the scalar zero times v is the zero vector; c times the zero vector is the zero vector`,
+        means: `Two different objects are written with the same digit, and only the weight of the type separates them. The upright $0$ is a number in the field; the bold $\\mathbf{0}$ is an element of $V$, which might be a tuple, a matrix or the function that is zero everywhere. The line is worth stating precisely because the two are not the same thing.`,
+        cases: `Neither statement is an axiom. Both are proved from the ten, and the proof of the first turns on reading $(0 + 0)$ as addition in the field and $0\\mathbf{v} + 0\\mathbf{v}$ as addition in the space — the same argument written without the weight distinction says nothing at all.`,
+        alsoWritten: `Some texts use $\\vec{0}$ or an underlined zero, and handwriting has no bold at all, which is where the distinction is most often lost.`,
+        confusedWith: `Reading the equations as trivial. They assert that a scalar and a vector, both called zero, interact in the expected way, which is a claim about the two operations rather than about arithmetic.`,
+        sameGlyphElsewhere: `The zero vector inside braces, $\\{\\mathbf{0}\\}$, is a set rather than an element, and the difference is set out at [subspaces](!/linear-algebra/vector-spaces/subspaces).`,
+      },
+      {
+        id: `juxtaposition-two-multiplications`,
+        tex: `c(d\\mathbf{v}) = (cd)\\mathbf{v}`,
+        read: `c times the quantity d times v equals the quantity c d, times v`,
+        means: `Neither multiplication is written with a symbol, and they are not the same operation. Inside the right-hand parentheses, $cd$ is multiplication of two scalars within the field. Everywhere else, juxtaposition means scaling a vector — an operation that takes one scalar and one vector and returns a vector. The axiom claims the two agree, and it has to be assumed because nothing forces it.`,
+        cases: `The same doubling appears in $(c + d)\\mathbf{v} = c\\mathbf{v} + d\\mathbf{v}$, where the plus on the left is addition in $\\mathbb{F}$ and the plus on the right is addition in $V$. Both distributive axioms are statements that a field operation and a space operation line up.`,
+        alsoWritten: `Written with an explicit dot, $c \\cdot (d \\cdot \\mathbf{v})$, in treatments that want the two multiplications visibly separated. The dot does not distinguish them either.`,
+        confusedWith: `Treating the parentheses as removable, as they would be for ordinary numbers. Here they record which operation runs first, and the axiom exists precisely because dropping them assumes the answer.`,
+        sameGlyphElsewhere: `The same reuse of one glyph for operations in two different spaces governs the definition of a linear map at [transformation properties](!/linear-algebra/transformations/properties).`,
+      },
+      {
+        id: `pointwise-definition`,
+        tex: `(f + g)(x) = f(x) + g(x)`,
+        read: `the function f plus g, evaluated at x, equals f of x plus g of x`,
+        means: `The two plus signs are not doing the same work. The one on the left is being **defined**; there is no prior meaning to adding two functions. The one on the right is ordinary addition of real numbers, already available. The line is a definition disguised as an identity, and it reads as an identity only if the difference is missed.`,
+        cases: `The parentheses on the left group $f + g$ into a single function, which is then applied to $x$. Reading them as multiplication or as $f + g(x)$ changes the statement into something false.`,
+        alsoWritten: `Called **pointwise** addition, the word recording that the definition is made one input at a time and inherits its properties from the numbers.`,
+        confusedWith: `Assuming a definition of this shape always produces a vector space. It supplies the operations; closure still has to be checked separately, which is what makes continuity a genuine hypothesis in $C[a, b]$.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `circled-operation`,
+        tex: `(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)`,
+        read: `u circle-plus v is defined as the pair u one plus v one, zero`,
+        means: `The circle is a warning. It marks an operation that has been stipulated for the occasion and is not the addition the reader already knows, so the axioms have to be checked against the definition rather than against habit.`,
+        cases: `An ordinary $+$ still appears on the right, inside the definition, doing its usual job on real numbers. One line therefore holds both a stipulated operation and a familiar one, distinguished only by the circle.`,
+        alsoWritten: `Any decorated symbol serves — $\\boxplus$, $*$, or an explicitly named operation. The convention is that decoration means **do not assume the usual rules**.`,
+        confusedWith: `Reading $\\oplus$ as a fixed standard operation. It has no meaning beyond the definition given alongside it, and a different page may use the same circle for something unrelated.`,
+        sameGlyphElsewhere: `In logic, $\\oplus$ is the fixed symbol for exclusive or, with a settled truth table. Nothing carries over: here the circle announces a local definition, there it names a specific connective.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/vector-spaces`,
+    parentLabel: `Vector spaces`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj3: {
     title: `The Field of Scalars`,
     content: `The scalars in a vector space come from a field — a set where addition, subtraction, multiplication, and division (by nonzero elements) all work and satisfy the standard arithmetic laws. The real numbers $\\mathbb{R}$ and the [complex numbers](!/complex-numbers) $\\mathbb{C}$ are the two fields that appear most often in linear algebra.
@@ -1936,6 +1991,25 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
           >
             <IdentitySheet data={vectorSpaceAxioms} theme="navy" variant="sheet" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
