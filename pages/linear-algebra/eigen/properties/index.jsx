@@ -909,6 +909,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
@@ -1325,6 +1326,50 @@ For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\la
     after: ``,
     link: ``,
   },
+  notation: {
+    title: `Spectral Property Notation`,
+    lead: `Almost every result below is written in one shape, and the part that carries the claim is the part that does not change. Three marks decide how the rest of the page reads.`,
+    inherited: `The letter $\\lambda$ itself, the enumeration $\\lambda_1, \\dots, \\lambda_n$, the spectrum $\\sigma(A)$, the characteristic determinant $\\det(A - \\lambda I)$, the eigenspace $E_\\lambda$ and the multiplicity pair $m_a, m_g$ are all set out at [the characteristic equation](!/linear-algebra/eigen/characteristic-equation). Modulus $|\\lambda|$ and conjugate pairs belong to [complex eigenvalues](!/linear-algebra/eigen/complex), and the factorisation $A = PDP^{-1}$ to [diagonalization](!/linear-algebra/eigen/diagonalization).`,
+    entries: [
+      {
+        id: `fixed-vector-template`,
+        tex: `A\\mathbf{v} = \\lambda\\mathbf{v} \\;\\Rightarrow\\; f(A)\\mathbf{v} = f(\\lambda)\\mathbf{v}`,
+        read: `if $\\mathbf{v}$ is an eigenvector of $A$ with eigenvalue $\\lambda$, then $\\mathbf{v}$ is still an eigenvector after the operation, and only the eigenvalue has moved`,
+        means: `The claim sits in the letter that stays put. Both sides carry the same $\\mathbf{v}$, and that repetition is the assertion: the operation left the direction alone and rescaled it differently. Readers watch the $\\lambda$ side, where something visibly happens, and take the fixed $\\mathbf{v}$ for background.`,
+        cases: `Five operations on this page fit the shape: the inverse sends $\\lambda$ to $1/\\lambda$, the $k$-th power to $\\lambda^k$, a polynomial to $q(\\lambda)$, a shift to $\\lambda + c$, a scaling to $c\\lambda$. The arrow is also read one vector at a time. It says nothing about a vector that was not already an eigenvector of $A$.`,
+        alsoWritten: `Stated in words as **$A$ and $f(A)$ share eigenvectors**, or compressed to the spectrum statement $\\sigma(f(A)) = f(\\sigma(A))$, which drops the eigenvectors from the record entirely.`,
+        confusedWith: `Read as a general licence for algebra on matrices. Nothing here covers $A + B$ or $AB$: the eigenvalues of a sum are not the sums of the eigenvalues, and the same holds for products, because two matrices need not share a single eigenvector. Every operation in the list acts on **one** matrix, and that restriction is the reason the pattern holds.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `polynomial-at-a-matrix`,
+        tex: `q(\\lambda) = c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m \\;\\longrightarrow\\; q(A) = c_0 I + c_1 A + \\cdots + c_m A^m`,
+        read: `the polynomial $q$ evaluated at the matrix $A$`,
+        means: `One letter $q$ is fed two different kinds of object: a number on the left, a square matrix on the right. Substitution is mechanical everywhere except at the constant term. A bare $c_0$ is a number and cannot be added to a matrix, so it becomes $c_0 I$ — the notation $q(A)$ performs that swap without announcing it.`,
+        cases: `Exponents on $A$ mean repeated matrix multiplication, so $A$ must be square. Any two polynomials in the same $A$ commute with each other and with $A$, which is why the expansion in the proof may be reordered freely.`,
+        alsoWritten: `Written $p(A)$ when the polynomial in question is the characteristic one, where the result is the zero matrix.`,
+        confusedWith: `Applying $q$ to each entry of $A$ separately. The two agree for a [diagonal matrix](!/linear-algebra/matrix/types) apart from the constant term, which lets the mistake pass unnoticed on exactly the examples used to introduce the idea.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `left-eigenvector`,
+        tex: `\\mathbf{w}^{T} A = \\lambda \\mathbf{w}^{T}`,
+        read: `$\\mathbf{w}$ transpose $A$ equals $\\lambda$ times $\\mathbf{w}$ transpose — $\\mathbf{w}$ is a left eigenvector of $A$`,
+        means: `The side of the multiplication is the whole distinction. Unqualified, **eigenvector** always means the right one, with $A$ acting from the left on a column. Here the vector stands to the left of $A$, so it has to be a row, and the $T$ is what makes the product legal rather than a statement about $\\mathbf{w}$ itself.`,
+        cases: `Transposing the equation gives $A^{T}\\mathbf{w} = \\lambda\\mathbf{w}$, so the left eigenvectors of $A$ are the ordinary eigenvectors of $A^{T}$, sharing $\\lambda$ with the right eigenvectors of $A$.`,
+        alsoWritten: `Row-vector notation $\\mathbf{w}^{T}$ is sometimes replaced by $\\mathbf{w}^{*}$ once complex entries are allowed, where the conjugate travels with the transpose.`,
+        confusedWith: `Taking equal eigenvalues to mean equal eigenvectors. $A$ and $A^{T}$ agree on every $\\lambda$ and generally disagree on the directions — the transpose is the one operation on this page that breaks the fixed-vector shape above.`,
+        sameGlyphElsewhere: `Two transposes sit in the same sentence and do different work: the $T$ on $\\mathbf{w}$ turns a column into a row, while the $T$ on $A$ names the matrix being studied.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/eigen`,
+    parentLabel: `Eigenvalues and eigenvectors`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj4: {
     title: `Eigenvalues of the Inverse`,
     content: `If $\\lambda$ is an eigenvalue of an invertible matrix $A$ with eigenvector $\\mathbf{v}$, then the eigenvector is preserved and the eigenvalue inverts:
@@ -1669,6 +1714,25 @@ export default function EigenvaluePropertiesPage({
             key={'obj3-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
+          />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
           />,
         ]
     },
