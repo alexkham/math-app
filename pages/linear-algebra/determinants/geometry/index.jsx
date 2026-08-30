@@ -803,6 +803,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1139,6 +1140,46 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Determinant Geometry Notation`,
+    lead: `The same three marks appear here as in the algebraic treatment, but each is read for a different thing: the sign becomes a direction, the bars become a size, and a matrix of derivatives inherits the whole apparatus so it can measure how a change of coordinates stretches space. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$\\det(A)$, the $|A|$ bars and the $\\Delta$ tradition come from [determinant notation](!/linear-algebra/determinants/properties#notation); $\\|\\mathbf{v}\\|$ from [norm notation](!/linear-algebra/vectors/magnitude#notation); the cross product and its determinant mnemonic from [cross product notation](!/linear-algebra/vectors/cross-product#notation); $T$ and its matrix from [matrix representation notation](!/linear-algebra/transformations/matrix-representation#notation).`,
+    entries: [
+      {
+        id: 'sign-as-orientation',
+        tex: `$\\det(A) < 0$`,
+        read: `a negative determinant — the map reverses orientation`,
+        means: `Here the minus sign is **geometric information, not an error**: it records that the transformation flips handedness, turning a counterclockwise pair clockwise. **Orientation** below reads it directly; the algebraic treatment only notes that determinants *can* be negative, without saying what the sign means.`,
+        cases: `A reflection has $\\det = -1$, a rotation $\\det = +1$, and $\\det = 0$ is the degenerate case where the image collapses to lower dimension — three readings of one number, and the reason "signed area" carries its adjective.`,
+        confusedWith: `Reading the sign as a mistake to be dropped. Taking $|\\det|$ too early discards the orientation the sign was carrying — the absolute value is the right move only when a **size** is wanted, which is exactly the next entry's distinction.`,
+      },
+      {
+        id: 'absolute-value-as-size',
+        tex: `$|\\det(A)|$`,
+        read: `the absolute value of the determinant — the area or volume scale factor`,
+        means: `A double-decker of bars with two different jobs: the inner pair (or the $\\det$ spelling) makes a number from a matrix, the outer pair strips its sign to leave a magnitude. That magnitude is the factor by which areas in $\\mathbb{R}^2$ or volumes in $\\mathbb{R}^3$ are multiplied.`,
+        cases: `The nesting is why this page prefers $|\\det(A)|$ over $||A||$ — writing the determinant with its own word keeps the two bar-pairs visually distinct, and [norm notation](!/linear-algebra/vectors/magnitude#notation) has already claimed the doubled bar for something else entirely.`,
+        confusedWith: `The [norm](!/linear-algebra/vectors/magnitude#notation) of a matrix. $\\|A\\|$ measures how far the matrix moves vectors; $|\\det(A)|$ measures how much it inflates volume. Both are "size", and they are different numbers with different units.`,
+      },
+      {
+        id: 'jacobian',
+        tex: `$J_T(\\mathbf{x})$, $\\det J_T$`,
+        read: `the Jacobian matrix at x, and the Jacobian determinant`,
+        means: `The local version of everything above: $J_T$ collects the partial derivatives $\\frac{\\partial T_i}{\\partial x_j}$ into a matrix, so $\\det J_T$ is the volume scale factor **at a point** for a map that need not be linear — **The Change-of-Variables Formula** below is where it earns its keep.`,
+        alsoWritten: `$\\frac{\\partial(x, y)}{\\partial(u, v)}$ — the fraction-of-tuples spelling, standard in multivariable calculus and integral change-of-variables, where the numerator lists the output coordinates and the denominator the input ones. It denotes the determinant, not the matrix.`,
+        confusedWith: `Matrix and determinant sharing one word. "The Jacobian" means the **matrix** in some texts and its **determinant** in others; here $J_T$ is the matrix and $\\det J_T$ the number, and an integral that asks for "the Jacobian" always wants the number.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/determinants`,
+    parentLabel: `Determinants`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Signed Volume in Three Dimensions`,
     content: `Three vectors in $\\mathbb{R}^3$ span a parallelepiped — the three-dimensional analogue of a parallelogram. Arranging these vectors as columns of a $3 \\times 3$ matrix $A$, the determinant equals the signed volume of that parallelepiped.
@@ -1444,6 +1485,25 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
