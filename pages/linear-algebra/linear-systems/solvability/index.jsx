@@ -1757,6 +1757,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -2126,6 +2127,46 @@ The two questions are independent — existence can hold without uniqueness, and
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Solvability Notation`,
+    lead: `Two words that classify a system before any solving happens, a rank comparison that answers the existence question without producing a single solution, and a count of solutions that is never anything but zero, one, or infinity. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `$A\\mathbf{x} = \\mathbf{b}$, the augmented matrix $[A \\mid \\mathbf{b}]$ and its bar come from [Gaussian elimination notation](!/linear-algebra/linear-systems/gaussian-elimination#notation); $\\operatorname{rank}$ from [rank notation](!/linear-algebra/matrix/rank#notation); free variables and pivot positions from [echelon form notation](!/linear-algebra/linear-systems/echelon-form#notation); $\\operatorname{Col}$ and $\\operatorname{Nul}$ from [fundamental-space notation](!/linear-algebra/vector-spaces/fundamental-spaces#notation).`,
+    entries: [
+      {
+        id: 'consistent-vocabulary',
+        tex: `consistent / inconsistent`,
+        read: `the system has at least one solution — or none at all`,
+        means: `A two-word classification applied to the **system**, not to any solution: consistent means at least one exists, inconsistent means none does. The words settle existence only and say nothing about how many, which is why **The Two Questions** above keeps existence and uniqueness apart.`,
+        cases: `The marks that detect inconsistency are visual: a row reading $[\\,0 \\; \\cdots \\; 0 \\mid d\\,]$ with $d \\neq 0$ asserts $0 = d$, so a single such row in the [augmented matrix](!/linear-algebra/linear-systems/gaussian-elimination#notation) decides the whole system.`,
+        confusedWith: `"Inconsistent" as a comment on the equations being contradictory in some loose sense. It is a precise verdict about the solution set being empty — and a system can look perfectly reasonable and still be inconsistent, which is what the rank test below is for.`,
+      },
+      {
+        id: 'rank-comparison',
+        tex: `$\\operatorname{rank}(A) = \\operatorname{rank}([A \\mid \\mathbf{b}])$`,
+        read: `the ranks agree, so the system is consistent`,
+        means: `Existence written as a comparison rather than a search: appending $\\mathbf{b}$ adds no new independent direction exactly when $\\mathbf{b}$ already lies in the column space. The test answers **whether** a solution exists while producing none — the point of **The Existence Condition** below.`,
+        cases: `Adding the second rank gives the whole classification, the [Rouché–Capelli](!/linear-algebra/matrix/rank#notation) statement below: ranks unequal means no solution, ranks equal to $n$ means exactly one, ranks equal but less than $n$ means infinitely many — with $n - \\operatorname{rank}(A)$ counting the free parameters.`,
+        confusedWith: `Reading $\\operatorname{rank}([A \\mid \\mathbf{b}])$ as a rank of two things. The bar is [punctuation, not an operation](!/linear-algebra/linear-systems/gaussian-elimination#notation) — the argument is one matrix that happens to have been assembled from a coefficient block and a column.`,
+      },
+      {
+        id: 'zero-one-infinity',
+        tex: `$0$, $1$, or $\\infty$`,
+        read: `a linear system has no solutions, exactly one, or infinitely many`,
+        means: `The count of solutions is not an arbitrary number: **The Three Cases Combined** below shows only these three occur. A system with two distinct solutions has infinitely many, because the whole line through them solves it as well — linearity forbids any finite count above one.`,
+        cases: `The infinite case is written as a parametrised family rather than the bare $\\infty$ — a particular solution plus the [null space](!/linear-algebra/vector-spaces/fundamental-spaces#notation), which is why "infinitely many" still admits a precise description and a dimension.`,
+        confusedWith: `Expecting "more equations than unknowns" to force zero and "fewer" to force infinitely many. Neither holds: an [overdetermined](!/linear-algebra/orthogonality/least-squares#notation) system can be consistent and an underdetermined one inconsistent — the shape suggests the outcome, the ranks decide it.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/linear-systems`,
+    parentLabel: `Linear Systems`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `The Existence Condition`,
     content: `The system $A\\mathbf{x} = \\mathbf{b}$ has at least one solution if and only if
@@ -2438,6 +2479,25 @@ export default function SolvabilityPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
