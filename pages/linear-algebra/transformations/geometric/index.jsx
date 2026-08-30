@@ -1875,6 +1875,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -2308,6 +2309,46 @@ The absolute value $|\\det(A)|$ measures how the transformation scales areas (in
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Geometric Transformation Notation`,
+    lead: `Named matrices with their defining parameter hung in the subscript — an angle, an axis, a factor — so the letter says what kind of motion it is and the subscript says which one. Two sign conventions ride along, and one composition order that reads backwards. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `The matrix bracket anatomy and $AB$ juxtaposition come from [matrix operation notation](!/linear-algebra/matrix/operations#notation); $\\det$ and $|\\det|$ as a scale factor from [determinant](!/linear-algebra/determinants/properties#notation) and [determinant geometry notation](!/linear-algebra/determinants/geometry#notation); $[T]$ and its columns from [matrix representation notation](!/linear-algebra/transformations/matrix-representation#notation); $\\theta$, $\\cos$ and $\\sin$ from [trigonometric notation](!/trigonometry/unit-circle#notation).`,
+    entries: [
+      {
+        id: 'parameter-subscript',
+        tex: `$R_\\theta$, $S_k$, $P_W$`,
+        read: `rotation by theta, scaling by k, projection onto W`,
+        means: `A naming scheme rather than three separate symbols: the letter names the **kind** of motion and the subscript supplies the parameter that pins down which one. The subscript's type varies with the letter — an angle for $R$, a number for $S$, a whole subspace for the [projection matrix](!/linear-algebra/orthogonality/projections#notation) — and reading it wrongly is the usual way these get confused.`,
+        cases: `In $\\mathbb{R}^3$ the rotation needs an axis as well, so the subscript grows: $R_{z,\\theta}$ or $R_{\\mathbf{n}}(\\theta)$ name the axis first and the angle second — the convention varies, and **Rotations in R³** below fixes one.`,
+        confusedWith: `$P$ at its other jobs. The same letter is a projection here, a [change-of-basis matrix](!/linear-algebra/vector-spaces/basis#notation) elsewhere, and a permutation matrix in factorisations — three unrelated tenants distinguished only by what sits in the subscript.`,
+      },
+      {
+        id: 'rotation-sign-convention',
+        tex: `$R_\\theta = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$`,
+        read: `the minus sign sits above the diagonal — counterclockwise`,
+        means: `The placement of the single minus is the entire convention: with $-\\sin\\theta$ in the upper right, positive $\\theta$ turns **counterclockwise**, the standard orientation this page uses. Transposing the matrix — equivalently negating $\\theta$ — reverses the direction.`,
+        cases: `Computer graphics often uses the opposite sign because screen coordinates run $y$ downward, so the same matrix appears with the minus below the diagonal and still called "rotation by $\\theta$"; the convention is a property of the coordinate system, not of the formula.`,
+        confusedWith: `The rotation's [inverse](!/linear-algebra/matrix/inverse#notation) as something to be computed. $R_\\theta^{-1} = R_{-\\theta} = R_\\theta^{T}$ — the transpose already is the inverse, since a rotation is [orthogonal](!/linear-algebra/orthogonality/orthogonal-sets#notation), and inverting one by elimination is wasted effort.`,
+      },
+      {
+        id: 'composition-order',
+        tex: `$BA$ means "do $A$ first"`,
+        read: `the rightmost factor acts first`,
+        means: `Composing transformations writes the matrices in the reverse of the order they happen — **Combining Transformations** below relies on it — because each acts on the column to its right. The notation inherits its direction from function composition, not from reading order.`,
+        cases: `The consequence is that $AB \\neq BA$ carries geometric meaning here: rotating then reflecting is a different motion from reflecting then rotating, and the notation's order is what records which was meant.`,
+        confusedWith: `Left-to-right execution. Writing $R_\\theta S_k$ and reading it as "rotate, then scale" reverses the actual sequence — the scaling happens first, and the mistake is invisible until the two operations fail to commute.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/transformations`,
+    parentLabel: `Linear Transformations`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `Scaling`,
     content: `Uniform scaling multiplies every coordinate by the same factor: $T(\\mathbf{x}) = c\\mathbf{x}$, with matrix $cI$. When $c > 1$ the transformation enlarges, when $0 < c < 1$ it shrinks, and when $c < 0$ it reflects through the origin and scales.
@@ -2658,6 +2699,25 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
