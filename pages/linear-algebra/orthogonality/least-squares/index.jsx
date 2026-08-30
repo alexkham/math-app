@@ -931,6 +931,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
@@ -1296,6 +1297,46 @@ The quantity $\\|A\\mathbf{x} - \\mathbf{b}\\|^2 = \\sum_i (A\\mathbf{x} - \\mat
     after: ``,
     link: ``,
   },
+
+  notation: {
+    title: `Least Squares Notation`,
+    lead: `A hat that marks a best guess rather than a solution, a named equation whose name means "perpendicular" and not "usual", and a superscript plus that stands in for an inverse the matrix does not have. All catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited: `The estimate hat $\\hat{\\mathbf{x}}$, $\\operatorname{proj}_W$ and the projection matrix $P$ come from [projection notation](!/linear-algebra/orthogonality/projections#notation); $\\|\\cdot\\|$ from [norm notation](!/linear-algebra/vectors/magnitude#notation); $A^{T}$ and $A^{-1}$ from [matrix operation](!/linear-algebra/matrix/operations#notation) and [inverse notation](!/linear-algebra/matrix/inverse#notation); $A = QR$ from [Gram-Schmidt notation](!/linear-algebra/orthogonality/gram-schmidt#notation); $\\operatorname{Col}$ from [fundamental-space notation](!/linear-algebra/vector-spaces/fundamental-spaces#notation).`,
+    entries: [
+      {
+        id: 'minimiser-not-solution',
+        tex: `$\\hat{\\mathbf{x}} = \\arg\\min_{\\mathbf{x}} \\|A\\mathbf{x} - \\mathbf{b}\\|$`,
+        read: `x-hat is the x that minimises the residual length`,
+        means: `The hat announces that this is a **best available** answer, not a solution: when $A\\mathbf{x} = \\mathbf{b}$ has no solution, $\\hat{\\mathbf{x}}$ is what replaces it. The [arg min](!/probability/mode#11) is doing the same job it does elsewhere — returning the input that minimises, not the minimum itself.`,
+        cases: `Squaring is a notational convenience, not a change of problem: $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ has the same minimiser as $\\|A\\mathbf{x} - \\mathbf{b}\\|$ because squaring is increasing on non-negative numbers — and the square is what makes the derivative tractable, which is where the method's name comes from.`,
+        confusedWith: `An exact solution. $A\\hat{\\mathbf{x}} = \\mathbf{b}$ is generally **false** — that is the entire premise — so writing $\\hat{\\mathbf{x}}$ without the hat quietly asserts something the setup denies.`,
+      },
+      {
+        id: 'normal-equations',
+        tex: `$A^{T}A\\hat{\\mathbf{x}} = A^{T}\\mathbf{b}$`,
+        read: `the normal equations`,
+        means: `A named system, and the name is geometric: **"normal" here means perpendicular**, recording that the residual is orthogonal to the column space — the condition **The Normal Equations** below derives. Multiplying through by $A^{T}$ is what converts an unsolvable system into a solvable one.`,
+        cases: `When $A^{T}A$ is invertible the equations close into $\\hat{\\mathbf{x}} = (A^{T}A)^{-1}A^{T}\\mathbf{b}$; that inverse exists exactly when $A$ has independent columns, so the formula silently assumes full column [rank](!/linear-algebra/matrix/rank#notation) and should not be written otherwise.`,
+        confusedWith: `"Normal" as ordinary, or as the normal distribution. Neither is meant — the word points at the right angle in the geometry, and the collision with the statistical sense is pure accident of vocabulary, not a shared idea.`,
+      },
+      {
+        id: 'pseudoinverse',
+        tex: `$A^{+}$`,
+        read: `A-plus — the pseudoinverse of A`,
+        means: `The plus superscript joins the corner census as a **stand-in for an inverse that does not exist**: $\\hat{\\mathbf{x}} = A^{+}\\mathbf{b}$ mirrors $\\mathbf{x} = A^{-1}\\mathbf{b}$ in shape, and the changed symbol is the only warning that $A$ may be non-square or singular. Its construction belongs to [SVD notation](!/linear-algebra/decompositions/svd#notation).`,
+        alsoWritten: `$A^{\\dagger}$ — the dagger — is equally standard and dominant in physics and numerical texts; both spellings mean the Moore–Penrose pseudoinverse, and the choice is house style rather than a difference in object.`,
+        confusedWith: `The superscript $+$ of set theory and elsewhere. Here it neither adds nor denotes a positive part; the corner is a **label**, the same grammar as $A^{T}$ and $A^{-1}$, and only its position identifies the job.`,
+      },
+    ],
+    symbolsHref: `/math-symbols/linear-algebra`,
+    symbolsLabel: `All linear algebra symbols`,
+    parentHref: `/linear-algebra/orthogonality`,
+    parentLabel: `Orthogonality`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+
   obj2: {
     title: `The Geometric Interpretation`,
     content: `The set of all vectors $A\\mathbf{x}$ as $\\mathbf{x}$ ranges over $\\mathbb{R}^n$ is the column space of $A$. Minimizing $\\|A\\mathbf{x} - \\mathbf{b}\\|$ means finding the point in the column space closest to $\\mathbf{b}$. That closest point is the [orthogonal projection](!/linear-algebra/orthogonality/projections) $\\hat{\\mathbf{b}} = \\text{proj}_{\\text{Col}(A)}\\mathbf{b}$.
@@ -1628,6 +1669,25 @@ export default function LeastSquaresPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {
