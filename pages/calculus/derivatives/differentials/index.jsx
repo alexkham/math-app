@@ -1341,7 +1341,7 @@ For larger $dx$, the gap between $\\Delta y$ and $dy$ widens. The tangent line i
     link: '',
   },
   notation: {
-    title: `The Differential Symbols`,
+    title: `Differential Notation`,
     lead: `Four marks, and the whole subject turns on telling two pairs apart: $d$ from $\\Delta$, and $dy$ from $\\Delta y$.`,
     inherited: `$\\frac{dy}{dx}$ as a derivative belongs to [Derivatives](!/calculus/derivatives). Here it is re-read as an actual quotient.`,
     entries: [

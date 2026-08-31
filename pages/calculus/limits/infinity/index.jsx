@@ -447,7 +447,7 @@ Both sides agree, so we write $\\lim_{x \\to 2} f(x) = +\\infty$.
     link: ``
   },
   notation: {
-    title: `The Two Roles of the Infinity Symbol`,
+    title: `Infinity Symbol Notation`,
     lead: `One glyph, opposite jobs: under the lim as a direction for $x$, after the equals sign as a verdict about $f$. The entries keep them apart.`,
     inherited: `$\\lim$, the bare arrow and DNE belong to [two-sided limits](!/calculus/limits/two-sided); the superscripts $a^{-}$, $a^{+}$ to [one-sided limits](!/calculus/limits/one-sided).`,
     entries: [
