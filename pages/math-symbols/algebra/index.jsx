@@ -126,22 +126,22 @@ export async function getStaticProps() {
 
   const symbolsData = {
     "exponents_and_powers": [
-      {"symbol": "aⁿ", "latex_code": "a^n", "explanation": "Base a raised to exponent n — for a [natural exponent](!/algebra/powers/natural-exponents), n factors of a multiplied together"},
+      {"symbol": "aⁿ", "latex_code": "a^n", "explanation": "Base a raised to exponent n — for a [natural exponent](!/algebra/powers/natural-exponents#notation), n factors of a multiplied together"},
       {"symbol": "a⁰ = 1", "latex_code": "a^0 = 1", "explanation": "The [zero power](!/algebra/powers/zero-powers) — equals 1 for every a ≠ 0; 0⁰ is left undefined in most conventions"},
-      {"symbol": "a⁻ⁿ", "latex_code": "a^{-n}", "explanation": "[Negative exponent](!/algebra/powers/negative-exponents) — the reciprocal 1/aⁿ; the minus flips, it never makes the result negative"},
-      {"symbol": "a^(m/n)", "latex_code": "a^{m/n}", "explanation": "[Rational exponent](!/algebra/powers/rational-exponents) — the n-th root of aᵐ; denominator is the root, numerator the power"},
-      {"symbol": "aˣ", "latex_code": "a^x", "explanation": "[Exponential function](!/algebra/powers/exponential-functions) — the exponent is the variable; contrast xⁿ, where the base varies"}
+      {"symbol": "a⁻ⁿ", "latex_code": "a^{-n}", "explanation": "[Negative exponent](!/algebra/powers/negative-exponents#notation) — the reciprocal 1/aⁿ; the minus flips, it never makes the result negative"},
+      {"symbol": "a^(m/n)", "latex_code": "a^{m/n}", "explanation": "[Rational exponent](!/algebra/powers/rational-exponents#notation) — the n-th root of aᵐ; denominator is the root, numerator the power"},
+      {"symbol": "aˣ", "latex_code": "a^x", "explanation": "[Exponential function](!/algebra/powers/exponential-functions#notation) — the exponent is the variable; contrast xⁿ, where the base varies"}
     ],
     "roots_and_radicals": [
       {"symbol": "√a", "latex_code": "\\sqrt{a}", "explanation": "The principal [square root](!/algebra/roots) — the non-negative solution only; the ± is supplied separately when solving equations"},
-      {"symbol": "ⁿ√a", "latex_code": "\\sqrt[n]{a}", "explanation": "The [n-th root](!/algebra/roots/properties) — index n written in the crook of the radical; index 2 is left unwritten"},
+      {"symbol": "ⁿ√a", "latex_code": "\\sqrt[n]{a}", "explanation": "The [n-th root](!/algebra/roots/properties#notation) — index n written in the crook of the radical; index 2 is left unwritten"},
       {"symbol": "√(a²) = |a|", "latex_code": "\\sqrt{a^2} = |a|", "explanation": "[Simplifying](!/algebra/roots/simplifying) an even root of a power produces an absolute value, not a bare a"},
       {"symbol": "a^(1/n) = ⁿ√a", "latex_code": "a^{1/n} = \\sqrt[n]{a}", "explanation": "The bridge between radical and [rational-exponent](!/algebra/roots/rational-exponents) notation — one object, two spellings"}
     ],
     "logarithms": [
       {"symbol": "log_b x", "latex_code": "\\log_b x", "explanation": "The [logarithm](!/algebra/logarithms) base b of x — the exponent b needs to reach x; defined for b > 0, b ≠ 1, x > 0"},
-      {"symbol": "ln x", "latex_code": "\\ln x", "explanation": "The [natural logarithm](!/algebra/logarithms/common-natural) — base e; the default in calculus and the sciences"},
-      {"symbol": "log x", "latex_code": "\\log x", "explanation": "Base-10 in school texts and engineering; base-e in advanced mathematics — the [convention depends on the field](!/algebra/logarithms/common-natural); European texts write lg for base-10"},
+      {"symbol": "ln x", "latex_code": "\\ln x", "explanation": "The [natural logarithm](!/algebra/logarithms/common-natural#notation) — base e; the default in calculus and the sciences"},
+      {"symbol": "log x", "latex_code": "\\log x", "explanation": "Base-10 in school texts and engineering; base-e in advanced mathematics — the [convention depends on the field](!/algebra/logarithms/common-natural#notation); European texts write lg for base-10"},
       {"symbol": "log_b x = y ⇔ bʸ = x", "latex_code": "\\log_b x = y \\iff b^y = x", "explanation": "The defining equivalence — every logarithmic statement is an exponential statement read backwards"}
     ],
     "polynomials": [
@@ -152,15 +152,15 @@ export async function getStaticProps() {
     ],
     "equations_and_solution_sets": [
       {"symbol": "ax + b = 0", "latex_code": "ax + b = 0", "explanation": "General [linear equation](!/algebra/equations/linear) — a, b are fixed coefficients, x the unknown; the letter roles are conventional, not intrinsic"},
-      {"symbol": "ax² + bx + c = 0", "latex_code": "ax^2 + bx + c = 0", "explanation": "General [quadratic equation](!/algebra/equations/quadratic) in standard form, a ≠ 0"},
+      {"symbol": "ax² + bx + c = 0", "latex_code": "ax^2 + bx + c = 0", "explanation": "General [quadratic equation](!/algebra/equations/quadratic#notation) in standard form, a ≠ 0"},
       {"symbol": "x = (−b ± √D)/2a", "latex_code": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", "explanation": "The quadratic formula — the ± packs both solutions into one line; expand it to two before substituting"},
       {"symbol": "D = b² − 4ac", "latex_code": "D = b^2 - 4ac", "explanation": "The discriminant — also written Δ; its sign counts the real solutions (two, one, or none)"},
-      {"symbol": "|x| = a", "latex_code": "|x| = a", "explanation": "[Absolute value equation](!/algebra/equations/absolute-value) — splits into x = a or x = −a when a > 0"},
+      {"symbol": "|x| = a", "latex_code": "|x| = a", "explanation": "[Absolute value equation](!/algebra/equations/absolute-value#notation) — splits into x = a or x = −a when a > 0"},
       {"symbol": "x ∈ {2, 5}", "latex_code": "x \\in \\{2, 5\\}", "explanation": "Solution set notation — the solutions listed as a set rather than as separate equations"}
     ],
     "inequalities_and_intervals": [
       {"symbol": "< ≤ > ≥", "latex_code": "< \\; \\leq \\; > \\; \\geq", "explanation": "Strict and inclusive [inequality](!/algebra/inequalities) signs — the bar under the symbol admits equality"},
-      {"symbol": "a < x < b", "latex_code": "a < x < b", "explanation": "Chained inequality — two conditions at once; both signs must point the same way ([linear inequalities](!/algebra/inequalities/linear))"},
+      {"symbol": "a < x < b", "latex_code": "a < x < b", "explanation": "Chained inequality — two conditions at once; both signs must point the same way ([linear inequalities](!/algebra/inequalities/linear#notation))"},
       {"symbol": "|x| < a ⇔ −a < x < a", "latex_code": "|x| < a \\iff -a < x < a", "explanation": "[Absolute value inequality](!/algebra/inequalities/absolute-value) — less-than gives a band; |x| > a gives the two outer rays instead"},
       {"symbol": "(−∞, −1) ∪ (2, ∞)", "latex_code": "(-\\infty, -1) \\cup (2, \\infty)", "explanation": "Solution written in interval notation — unions capture the disconnected solution sets typical of [rational inequalities](!/algebra/inequalities/rational)"}
     ],
