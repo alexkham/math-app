@@ -140,9 +140,9 @@ export async function getStaticProps() {
     "divisibility": [
       {"symbol": "a | b", "latex_code": "a \\mid b", "explanation": "a divides b — a statement, true or false, not an operation ([terminology and notation](!/arithmetic/divisibility#2))"},
       {"symbol": "a ∤ b", "latex_code": "a \\nmid b", "explanation": "a does not divide b — the negation uses a slashed bar"},
-      {"symbol": "gcd(a, b)", "latex_code": "\\gcd(a, b)", "explanation": "Greatest common divisor of a and b ([GCD](!/arithmetic/divisibility/gcd))"},
-      {"symbol": "lcm(a, b)", "latex_code": "\\operatorname{lcm}(a, b)", "explanation": "Least common multiple of a and b ([LCM](!/arithmetic/divisibility/lcm))"},
-      {"symbol": "σ(n)", "latex_code": "\\sigma(n)", "explanation": "Sum of all positive divisors of n ([sum of factors](!/arithmetic/divisibility/factors))"}
+      {"symbol": "gcd(a, b)", "latex_code": "\\gcd(a, b)", "explanation": "Greatest common divisor of a and b ([GCD](!/arithmetic/divisibility/gcd#notation))"},
+      {"symbol": "lcm(a, b)", "latex_code": "\\operatorname{lcm}(a, b)", "explanation": "Least common multiple of a and b ([LCM](!/arithmetic/divisibility/lcm#notation))"},
+      {"symbol": "σ(n)", "latex_code": "\\sigma(n)", "explanation": "Sum of all positive divisors of n ([sum of factors](!/arithmetic/divisibility/factors#notation))"}
     ],
     "modular_arithmetic": [
       {"symbol": "a mod n", "latex_code": "a \\bmod n", "explanation": "The modulo operation — produces the remainder of a divided by n ([modulo notation](!/arithmetic/modulo#2))"},
@@ -150,9 +150,9 @@ export async function getStaticProps() {
       {"symbol": "a ≡ b (mod n)", "latex_code": "a \\equiv b \\pmod{n}", "explanation": "Congruence — a statement that a and b leave the same remainder modulo n ([congruence](!/arithmetic/modulo#5)); an assertion, not a computation"}
     ],
     "fractions": [
-      {"symbol": "a⁄b (stacked)", "latex_code": "\\frac{a}{b}", "explanation": "Fraction — numerator over denominator; the horizontal line is the fraction bar or vinculum ([what is a fraction](!/arithmetic/fractions))"},
+      {"symbol": "a⁄b (stacked)", "latex_code": "\\frac{a}{b}", "explanation": "Fraction — numerator over denominator; the horizontal line is the fraction bar or vinculum ([what is a fraction](!/arithmetic/fractions#notation))"},
       {"symbol": "a/b (inline)", "latex_code": "a/b", "explanation": "The slash form of the same fraction, used in running text"},
-      {"symbol": "2¾", "latex_code": "2\\tfrac{3}{4}", "explanation": "Mixed number — a whole part written next to a proper fraction; here adjacency means addition, not multiplication ([mixed numbers](!/arithmetic/fractions/mixed-numbers))"},
+      {"symbol": "2¾", "latex_code": "2\\tfrac{3}{4}", "explanation": "Mixed number — a whole part written next to a proper fraction; here adjacency means addition, not multiplication ([mixed numbers](!/arithmetic/fractions/mixed-numbers#notation))"},
       {"symbol": "b⁄a", "latex_code": "\\frac{b}{a}", "explanation": "Reciprocal of a⁄b — numerator and denominator swapped ([dividing fractions](!/arithmetic/fractions/dividing))"},
       {"symbol": "(a⁄b)/(c⁄d)", "latex_code": "\\frac{\\;\\frac{a}{b}\\;}{\\;\\frac{c}{d}\\;}", "explanation": "Complex fraction — the longer main bar separates the overall numerator and denominator ([complex fractions](!/arithmetic/fractions/complex))"}
     ],

@@ -137,12 +137,12 @@ export async function getStaticProps() {
       {"symbol": "∧", "latex_code": "\\land", "explanation": "Logical AND"},
       {"symbol": "∨", "latex_code": "\\lor", "explanation": "Logical OR"},
       {"symbol": "⊕", "latex_code": "\\oplus", "explanation": "Logical XOR"},
-      {"symbol": "→", "latex_code": "\\to", "explanation": "[Implication](!/logic/propositional-logic/semantics/implication) (if...then...)"},
-      {"symbol": "↔", "latex_code": "\\leftrightarrow", "explanation": "[Biconditional](!/logic/propositional-logic/semantics/equivalences) (logical equivalence)"},
+      {"symbol": "→", "latex_code": "\\to", "explanation": "[Implication](!/logic/propositional-logic/semantics/implication#notation) (if...then...)"},
+      {"symbol": "↔", "latex_code": "\\leftrightarrow", "explanation": "[Biconditional](!/logic/propositional-logic/semantics/equivalences#notation) (logical equivalence)"},
       {"symbol": "⊨", "latex_code": "\\models", "explanation": "Entails (satisfiability or semantic entailment)"},
       {"symbol": "⊢", "latex_code": "\\vdash", "explanation": "Provable (syntactic entailment)"},
-      {"symbol": "⊤", "latex_code": "\\top", "explanation": "[Tautology](!/logic/propositional-logic/semantics/tautology) (always true)"},
-      {"symbol": "⊥", "latex_code": "\\bot", "explanation": "[Contradiction](!/logic/propositional-logic/semantics/contradiction) (always false)"}
+      {"symbol": "⊤", "latex_code": "\\top", "explanation": "[Tautology](!/logic/propositional-logic/semantics/tautology#notation) (always true)"},
+      {"symbol": "⊥", "latex_code": "\\bot", "explanation": "[Contradiction](!/logic/propositional-logic/semantics/contradiction#notation) (always false)"}
     ],
     "quantifiers": [
       {"symbol": "∀", "latex_code": "\\forall", "explanation": "Universal quantifier (for all)"},

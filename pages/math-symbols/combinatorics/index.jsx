@@ -134,7 +134,7 @@ export async function getStaticProps() {
   const symbolsData = {
     "basic_notations": [
       {"symbol": "$n!$", "latex_code": "n!", "explanation": "Factorial of n"},
-      {"symbol": "$nPk$", "latex_code": "{n \\mathcal{P} k}", "explanation": "Number of [permutations](!/combinatorics/permutations) for k elements chosen from n"},
+      {"symbol": "$nPk$", "latex_code": "{n \\mathcal{P} k}", "explanation": "Number of [permutations](!/combinatorics/permutations#notation) for k elements chosen from n"},
       {"symbol": "$nCk$", "latex_code": "\\binom{n}{k}", "explanation": "Number of [combinations](!/combinatorics/combinations) for k elements chosen from n"},
       {"symbol": "$P(A)$", "latex_code": "P(A)", "explanation": "[Probability](!/probability) of event A"},
       {"symbol": "|A|", "latex_code": "|A|", "explanation": "Cardinality of set A (number of elements)"},
@@ -147,8 +147,8 @@ export async function getStaticProps() {
       {"symbol": "nCk = n! / (k!(n − k)!)", "latex_code": "\\binom{n}{k} = \\frac{n!}{k!(n-k)!}", "explanation": "Formula for binomial coefficient"}
     ],
     "permutations_and_combinations": [
-      {"symbol": "$n!$", "latex_code": "n!", "explanation": "Number of [permutations](!/combinatorics/permutations) for n elements"},
-      {"symbol": "$P(n, k) = \\frac{n!}{(n-k)!}$", "latex_code": "P(n, k) = \\frac{n!}{(n-k)!}", "explanation": "Number of [permutations](!/combinatorics/permutations) for k elements chosen from n"},
+      {"symbol": "$n!$", "latex_code": "n!", "explanation": "Number of [permutations](!/combinatorics/permutations#notation) for n elements"},
+      {"symbol": "$P(n, k) = \\frac{n!}{(n-k)!}$", "latex_code": "P(n, k) = \\frac{n!}{(n-k)!}", "explanation": "Number of [permutations](!/combinatorics/permutations#notation) for k elements chosen from n"},
       {"symbol": "$C(n, k) = \\frac{n!}{k!(n-k)!}$", "latex_code": "C(n, k) = \\frac{n!}{k!(n-k)!}", "explanation": "Number of [combinations](!/combinatorics/combinations) for k elements chosen from n"},
       {"symbol": "$nHk$", "latex_code": "\\binom{n+k-1}{k}", "explanation": "Number of ways to distribute k identical items into n distinct groups ([combinations with replacement](!/combinatorics/combinations))"},
       {"symbol": "$P(n,r)$", "latex_code": "P(n,r)", "explanation": "[Partial Permutations without repetitions](!/combinatorics/permutations#without)"}

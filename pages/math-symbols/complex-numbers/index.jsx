@@ -202,37 +202,37 @@ export async function getStaticProps() {
 
  const symbolsData = {
   "basic_notation": [
-    {"symbol": "i", "latex_code": "i", "explanation": "The imaginary unit, defined by i² = −1. It is the foundation of all [imaginary numbers](!/complex-numbers/imaginary-numbers) and complex arithmetic."},
+    {"symbol": "i", "latex_code": "i", "explanation": "The imaginary unit, defined by i² = −1. It is the foundation of all [imaginary numbers](!/complex-numbers/imaginary-numbers#notation) and complex arithmetic."},
     {"symbol": "z", "latex_code": "z", "explanation": "Standard variable representing a complex number, typically written as z = a + bi where a and b are real numbers."},
-    {"symbol": "a + bi", "latex_code": "a + bi", "explanation": "Rectangular or [algebraic form](!/complex-numbers/algebraic-form) of a complex number, where a is the real part and b is the imaginary part."},
+    {"symbol": "a + bi", "latex_code": "a + bi", "explanation": "Rectangular or [algebraic form](!/complex-numbers/algebraic-form#2) of a complex number, where a is the real part and b is the imaginary part."},
     {"symbol": "Re(z)", "latex_code": "\\text{Re}(z)", "explanation": "The real part of z. For z = a + bi, Re(z) = a. Sometimes written as ℜ(z)."},
     {"symbol": "Im(z)", "latex_code": "\\text{Im}(z)", "explanation": "The imaginary part of z. For z = a + bi, Im(z) = b. Note that Im(z) itself is a real number."},
     {"symbol": "ℂ", "latex_code": "\\mathbb{C}", "explanation": "The set of all complex numbers. Contains ℝ (real numbers) as a subset."},
     {"symbol": "ℝ", "latex_code": "\\mathbb{R}", "explanation": "The set of all real numbers. In the [complex plane](!/complex-numbers/geometric-representation), ℝ corresponds to the horizontal axis."}
   ],
   "conjugate_and_inverses": [
-    {"symbol": "z̄", "latex_code": "\\bar{z}", "explanation": "The [complex conjugate](!/complex-numbers/complex-conjugate) of z. For z = a + bi, the conjugate is z̄ = a − bi."},
+    {"symbol": "z̄", "latex_code": "\\bar{z}", "explanation": "The [complex conjugate](!/complex-numbers/complex-conjugate#notation) of z. For z = a + bi, the conjugate is z̄ = a − bi."},
     {"symbol": "z*", "latex_code": "z^*", "explanation": "Alternative notation for the [complex conjugate](!/complex-numbers/complex-conjugate#notation), commonly used in physics and engineering."},
-    {"symbol": "−z", "latex_code": "-z", "explanation": "The [additive inverse](!/complex-numbers/additive-inverse) of z. For z = a + bi, we have −z = −a − bi. Satisfies z + (−z) = 0."},
-    {"symbol": "z⁻¹", "latex_code": "z^{-1}", "explanation": "The [multiplicative inverse](!/complex-numbers/multiplicative-inverse) (reciprocal) of z. Satisfies z · z⁻¹ = 1. Equals z̄/|z|² for nonzero z."},
+    {"symbol": "−z", "latex_code": "-z", "explanation": "The [additive inverse](!/complex-numbers/additive-inverse#3) of z. For z = a + bi, we have −z = −a − bi. Satisfies z + (−z) = 0."},
+    {"symbol": "z⁻¹", "latex_code": "z^{-1}", "explanation": "The [multiplicative inverse](!/complex-numbers/multiplicative-inverse#4) (reciprocal) of z. Satisfies z · z⁻¹ = 1. Equals z̄/|z|² for nonzero z."},
     {"symbol": "1/z", "latex_code": "\\frac{1}{z}", "explanation": "Reciprocal of z, equivalent to z⁻¹. Computed by multiplying numerator and denominator by the [conjugate](!/complex-numbers/complex-conjugate)."},
-    {"symbol": "z · z̄ = |z|²", "latex_code": "z \\cdot \\bar{z} = |z|^2", "explanation": "Fundamental identity: a complex number times its conjugate equals the square of its [modulus](!/complex-numbers/absolute-value)."}
+    {"symbol": "z · z̄ = |z|²", "latex_code": "z \\cdot \\bar{z} = |z|^2", "explanation": "Fundamental identity: a complex number times its conjugate equals the square of its [modulus](!/complex-numbers/absolute-value#notation)."}
   ],
   "modulus_and_argument": [
-    {"symbol": "|z|", "latex_code": "|z|", "explanation": "The [modulus](!/complex-numbers/absolute-value) (absolute value) of z, representing its distance from the origin in the complex plane."},
-    {"symbol": "|z| = √(a² + b²)", "latex_code": "|z| = \\sqrt{a^2 + b^2}", "explanation": "Formula for the [modulus](!/complex-numbers/absolute-value) derived from the Pythagorean theorem. For z = 3 + 4i, |z| = 5."},
+    {"symbol": "|z|", "latex_code": "|z|", "explanation": "The [modulus](!/complex-numbers/absolute-value#notation) (absolute value) of z, representing its distance from the origin in the complex plane."},
+    {"symbol": "|z| = √(a² + b²)", "latex_code": "|z| = \\sqrt{a^2 + b^2}", "explanation": "Formula for the [modulus](!/complex-numbers/absolute-value#notation) derived from the Pythagorean theorem. For z = 3 + 4i, |z| = 5."},
     {"symbol": "arg(z)", "latex_code": "\\arg(z)", "explanation": "The argument of z — the angle from the positive real axis to z, measured counterclockwise. Multi-valued, differing by multiples of 2π."},
     {"symbol": "Arg(z)", "latex_code": "\\text{Arg}(z)", "explanation": "The principal argument of z, restricted to (−π, π]. Gives a unique angle for each nonzero complex number."},
     {"symbol": "θ = arctan(b/a)", "latex_code": "\\theta = \\arctan\\left(\\frac{b}{a}\\right)", "explanation": "Formula for the argument when a > 0. For other quadrants, adjustments of π are needed."}
   ],
   "polar_and_trigonometric_forms": [
-    {"symbol": "r(cos θ + i sin θ)", "latex_code": "r(\\cos\\theta + i\\sin\\theta)", "explanation": "The [trigonometric form](!/complex-numbers/trigonometric-form) of a complex number, where r = |z| and θ = arg(z)."},
-    {"symbol": "r cis θ", "latex_code": "r\\,\\text{cis}\\,\\theta", "explanation": "Shorthand for [trigonometric form](!/complex-numbers/trigonometric-form). \"cis\" stands for \"cosine + i sine\"."},
+    {"symbol": "r(cos θ + i sin θ)", "latex_code": "r(\\cos\\theta + i\\sin\\theta)", "explanation": "The [trigonometric form](!/complex-numbers/trigonometric-form#notation) of a complex number, where r = |z| and θ = arg(z)."},
+    {"symbol": "r cis θ", "latex_code": "r\\,\\text{cis}\\,\\theta", "explanation": "Shorthand for [trigonometric form](!/complex-numbers/trigonometric-form#notation). \"cis\" stands for \"cosine + i sine\"."},
     {"symbol": "z = r∠θ", "latex_code": "z = r\\angle\\theta", "explanation": "Polar notation commonly used in engineering, where r is the modulus and θ is the argument."}
   ],
   "exponential_form": [
-    {"symbol": "re^(iθ)", "latex_code": "re^{i\\theta}", "explanation": "The [exponential form](!/complex-numbers/exponential-form) of a complex number, combining modulus r and argument θ."},
-    {"symbol": "e^(iθ) = cos θ + i sin θ", "latex_code": "e^{i\\theta} = \\cos\\theta + i\\sin\\theta", "explanation": "Euler's formula — the bridge between [exponential](!/complex-numbers/exponential-form) and [trigonometric](!/complex-numbers/trigonometric-form) forms."},
+    {"symbol": "re^(iθ)", "latex_code": "re^{i\\theta}", "explanation": "The [exponential form](!/complex-numbers/exponential-form#notation) of a complex number, combining modulus r and argument θ."},
+    {"symbol": "e^(iθ) = cos θ + i sin θ", "latex_code": "e^{i\\theta} = \\cos\\theta + i\\sin\\theta", "explanation": "Euler's formula — the bridge between [exponential](!/complex-numbers/exponential-form#notation) and [trigonometric](!/complex-numbers/trigonometric-form#notation) forms."},
     {"symbol": "e^(iπ) + 1 = 0", "latex_code": "e^{i\\pi} + 1 = 0", "explanation": "Euler's identity, connecting five fundamental constants: e, i, π, 1, and 0."},
     {"symbol": "e^(a+bi) = eᵃ(cos b + i sin b)", "latex_code": "e^{a+bi} = e^a(\\cos b + i\\sin b)", "explanation": "General formula for the complex exponential, separating the real exponential growth from the rotational component."}
   ],
@@ -246,8 +246,8 @@ export async function getStaticProps() {
   ],
   "powers_and_roots": [
     {"symbol": "zⁿ", "latex_code": "z^n", "explanation": "The nth power of z. In exponential form: zⁿ = rⁿe^(inθ)."},
-    {"symbol": "(cos θ + i sin θ)ⁿ = cos(nθ) + i sin(nθ)", "latex_code": "(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)", "explanation": "[De Moivre's theorem](!/complex-numbers/demoivre-theorem) — essential for computing powers and roots of complex numbers."},
-    {"symbol": "zⁿ = rⁿe^(inθ)", "latex_code": "z^n = r^n e^{in\\theta}", "explanation": "Power formula in [exponential form](!/complex-numbers/exponential-form): raise the modulus to the nth power, multiply the argument by n."},
+    {"symbol": "(cos θ + i sin θ)ⁿ = cos(nθ) + i sin(nθ)", "latex_code": "(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)", "explanation": "[De Moivre's theorem](!/complex-numbers/demoivre-theorem#notation) — essential for computing powers and roots of complex numbers."},
+    {"symbol": "zⁿ = rⁿe^(inθ)", "latex_code": "z^n = r^n e^{in\\theta}", "explanation": "Power formula in [exponential form](!/complex-numbers/exponential-form#notation): raise the modulus to the nth power, multiply the argument by n."},
     {"symbol": "ⁿ√z", "latex_code": "\\sqrt[n]{z}", "explanation": "The nth root of z. Has exactly n distinct values, evenly spaced around a circle in the complex plane."},
     {"symbol": "ωₖ = e^(2πik/n)", "latex_code": "\\omega_k = e^{2\\pi i k/n}", "explanation": "The nth roots of unity — solutions to zⁿ = 1. There are exactly n of them, for k = 0, 1, ..., n−1."},
     {"symbol": "ω = e^(2πi/n)", "latex_code": "\\omega = e^{2\\pi i/n}", "explanation": "The primitive nth root of unity. All other nth roots are powers of ω."}

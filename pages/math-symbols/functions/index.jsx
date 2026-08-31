@@ -124,8 +124,8 @@ export async function getStaticProps() {
       {"symbol": "f(a)", "latex_code": "f(a)", "explanation": "The output of f at a specific input a — e.g. f(3) is the value at x = 3"}
     ],
     "domain_and_range": [
-      {"symbol": "Dom(f)", "latex_code": "\\operatorname{Dom}(f)", "explanation": "The [domain](!/functions/domain) of f — the set of allowed inputs"},
-      {"symbol": "Ran(f)", "latex_code": "\\operatorname{Ran}(f)", "explanation": "The [range](!/functions/range) of f — the set of outputs actually produced"},
+      {"symbol": "Dom(f)", "latex_code": "\\operatorname{Dom}(f)", "explanation": "The [domain](!/functions/domain#2) of f — the set of allowed inputs"},
+      {"symbol": "Ran(f)", "latex_code": "\\operatorname{Ran}(f)", "explanation": "The [range](!/functions/range#2) of f — the set of outputs actually produced"},
       {"symbol": "{x | x ≥ 0}", "latex_code": "\\{x \\mid x \\geq 0\\}", "explanation": "Set-builder notation: 'the set of all x such that x ≥ 0' ([expressing domain](!/functions/domain#2))"},
       {"symbol": "ℝ", "latex_code": "\\mathbb{R}", "explanation": "The set of all real numbers — the default universe for domains and ranges"},
       {"symbol": "x ∈ A", "latex_code": "x \\in A", "explanation": "x is an element of the set A"}
