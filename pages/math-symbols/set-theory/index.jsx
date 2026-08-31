@@ -160,45 +160,45 @@ export async function getStaticProps() {
  
   const symbolsData = {
     "basic_set_operations": [
-      {"symbol": "∈", "latex_code": "\\in", "explanation": "Element of a set"},
-      {"symbol": "∉", "latex_code": "\\notin", "explanation": "Not an element of a set"},
-      {"symbol": "⊂", "latex_code": "\\subset", "explanation": "Proper subset of a set"},
-      {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "Subset or equal to"},
-      {"symbol": "⊄", "latex_code": "\\nsubseteq", "explanation": "Not a subset of a set"},
-      {"symbol": "⊃", "latex_code": "\\supset", "explanation": "Proper superset of a set"},
-      {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "Superset or equal to"},
-      {"symbol": "∪", "latex_code": "\\cup", "explanation": "Union of sets"},
-      {"symbol": "∩", "latex_code": "\\cap", "explanation": "Intersection of sets"},
-      {"symbol": "∖", "latex_code": "\\setminus", "explanation": "Set difference"},
-      {"symbol": "∅", "latex_code": "\\emptyset", "explanation": "Empty set"},
-      {"symbol": "U", "latex_code": "U", "explanation": "Universal set"}
+      {"symbol": "∈", "latex_code": "\\in", "explanation": "[Element of a set](!/set-theory/basics#2)"},
+      {"symbol": "∉", "latex_code": "\\notin", "explanation": "[Not an element of a set](!/set-theory/basics#2)"},
+      {"symbol": "⊂", "latex_code": "\\subset", "explanation": "[Proper subset of a set](!/set-theory/subsets#6)"},
+      {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "[Subset or equal to](!/set-theory/subsets#6)"},
+      {"symbol": "⊄", "latex_code": "\\nsubseteq", "explanation": "[Not a subset of a set](!/set-theory/basics#2)"},
+      {"symbol": "⊃", "latex_code": "\\supset", "explanation": "[Proper superset of a set](!/set-theory/subsets#6)"},
+      {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "[Superset or equal to](!/set-theory/subsets#6)"},
+      {"symbol": "∪", "latex_code": "\\cup", "explanation": "[Union of sets](!/set-theory/operations#notation)"},
+      {"symbol": "∩", "latex_code": "\\cap", "explanation": "[Intersection of sets](!/set-theory/operations#notation)"},
+      {"symbol": "∖", "latex_code": "\\setminus", "explanation": "[Set difference](!/set-theory/operations#notation)"},
+      {"symbol": "∅", "latex_code": "\\emptyset", "explanation": "[Empty set](!/set-theory/basics#2)"},
+      {"symbol": "U", "latex_code": "U", "explanation": "[Universal set](!/set-theory/basics#2)"}
     ],
     "relations_between_sets": [
-      {"symbol": "=", "latex_code": "=", "explanation": "Equality of sets"},
-      {"symbol": "≠", "latex_code": "\\neq", "explanation": "Inequality of sets"},
-      {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "Set is a subset of another"},
-      {"symbol": "⊂", "latex_code": "\\subset", "explanation": "Set is a proper subset of another"},
-      {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "Set is a superset of another"},
-      {"symbol": "⊃", "latex_code": "\\supset", "explanation": "Set is a proper superset of another"}
+      {"symbol": "=", "latex_code": "=", "explanation": "[Equality of sets](!/set-theory/basics#2)"},
+      {"symbol": "≠", "latex_code": "\\neq", "explanation": "[Inequality of sets](!/set-theory/basics#2)"},
+      {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "[Set is a subset of another](!/set-theory/subsets#6)"},
+      {"symbol": "⊂", "latex_code": "\\subset", "explanation": "[Set is a proper subset of another](!/set-theory/subsets#6)"},
+      {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "[Set is a superset of another](!/set-theory/subsets#6)"},
+      {"symbol": "⊃", "latex_code": "\\supset", "explanation": "[Set is a proper superset of another](!/set-theory/subsets#6)"}
     ],
     "special_sets": [
-      {"symbol": "ℕ", "latex_code": "\\mathbb{N}", "explanation": "Set of natural numbers"},
-      {"symbol": "ℤ", "latex_code": "\\mathbb{Z}", "explanation": "Set of integers"},
-      {"symbol": "ℚ", "latex_code": "\\mathbb{Q}", "explanation": "Set of rational numbers"},
-      {"symbol": "ℝ", "latex_code": "\\mathbb{R}", "explanation": "Set of real numbers"},
-      {"symbol": "ℂ", "latex_code": "\\mathbb{C}", "explanation": "Set of complex numbers"}
+      {"symbol": "ℕ", "latex_code": "\\mathbb{N}", "explanation": "[Set of natural numbers](!/set-theory/subsets#6)"},
+      {"symbol": "ℤ", "latex_code": "\\mathbb{Z}", "explanation": "[Set of integers](!/set-theory/subsets#6)"},
+      {"symbol": "ℚ", "latex_code": "\\mathbb{Q}", "explanation": "[Set of rational numbers](!/set-theory/subsets#6)"},
+      {"symbol": "ℝ", "latex_code": "\\mathbb{R}", "explanation": "[Set of real numbers](!/set-theory/subsets#6)"},
+      {"symbol": "ℂ", "latex_code": "\\mathbb{C}", "explanation": "[Set of complex numbers](!/complex-numbers/basics#notation)"}
     ],
     "cardinality": [
-      {"symbol": "|A|", "latex_code": "|A|", "explanation": "Cardinality of a set A"},
-      {"symbol": "ℵ₀", "latex_code": "\\aleph_0", "explanation": "Aleph-null, the cardinality of countably infinite sets"},
-      {"symbol": "ℵ₁", "latex_code": "\\aleph_1", "explanation": "Aleph-one, the next larger cardinality"},
-      {"symbol": "2^ℵ₀", "latex_code": "2^{\\aleph_0}", "explanation": "Cardinality of the power set of a countably infinite set"}
+      {"symbol": "|A|", "latex_code": "|A|", "explanation": "[Cardinality of a set A](!/set-theory/cardinality#notation)"},
+      {"symbol": "ℵ₀", "latex_code": "\\aleph_0", "explanation": "[Aleph-null, the cardinality of countably infinite sets](!/set-theory/cardinality#notation)"},
+      {"symbol": "ℵ₁", "latex_code": "\\aleph_1", "explanation": "[Aleph-one, the next larger cardinality](!/set-theory/cardinality#notation)"},
+      {"symbol": "2^ℵ₀", "latex_code": "2^{\\aleph_0}", "explanation": "[Cardinality of the power set of a countably infinite set](!/set-theory/cardinality#notation)"}
     ],
     "set_constructors": [
-      {"symbol": "{a, b, c}", "latex_code": "\\{a, b, c\\}", "explanation": "Set containing elements a, b, and c"},
-      {"symbol": "{x | P(x)}", "latex_code": "\\{x \\mid P(x)\\}", "explanation": "Set of elements x satisfying property P(x)"},
+      {"symbol": "{a, b, c}", "latex_code": "\\{a, b, c\\}", "explanation": "[Set containing elements a, b, and c](!/set-theory/basics#2)"},
+      {"symbol": "{x | P(x)}", "latex_code": "\\{x \\mid P(x)\\}", "explanation": "[Set of elements x satisfying property P(x)](!/set-theory/basics#2)"},
       {"symbol": "A × B", "latex_code": "A \\times B", "explanation": "Cartesian product of sets A and B"},
-      {"symbol": "P(A)", "latex_code": "\\mathcal{P}(A)", "explanation": "Power set of set A"}
+      {"symbol": "P(A)", "latex_code": "\\mathcal{P}(A)", "explanation": "[Power set of set A](!/set-theory/subsets#6)"}
     ],
     "set_equations": [
       {"symbol": "A ∪ ∅ = A", "latex_code": "A \\cup \\emptyset = A", "explanation": "Union with the empty set is the set itself"},
@@ -207,40 +207,40 @@ export async function getStaticProps() {
       {"symbol": "A ∩ U = A", "latex_code": "A \\cap U = A", "explanation": "Intersection with the universal set is the set itself"}
     ],
     "operations_on_sets": [
-      {"symbol": "A ⊆ B", "latex_code": "A \\subseteq B", "explanation": "A is a subset of B"},
-      {"symbol": "A ⊂ B", "latex_code": "A \\subset B", "explanation": "A is a proper subset of B"},
-      {"symbol": "A = B", "latex_code": "A = B", "explanation": "A and B are equal sets"},
-      {"symbol": "A ∪ B", "latex_code": "A \\cup B", "explanation": "Union of A and B"},
-      {"symbol": "A ∩ B", "latex_code": "A \\cap B", "explanation": "Intersection of A and B"},
-      {"symbol": "A ∖ B", "latex_code": "A \\setminus B", "explanation": "Difference of A and B"},
-      {"symbol": "A △ B", "latex_code": "A \\triangle B", "explanation": "Symmetric difference of A and B"}
+      {"symbol": "A ⊆ B", "latex_code": "A \\subseteq B", "explanation": "[A is a subset of B](!/set-theory/subsets#6)"},
+      {"symbol": "A ⊂ B", "latex_code": "A \\subset B", "explanation": "[A is a proper subset of B](!/set-theory/subsets#6)"},
+      {"symbol": "A = B", "latex_code": "A = B", "explanation": "[A and B are equal sets](!/set-theory/basics#2)"},
+      {"symbol": "A ∪ B", "latex_code": "A \\cup B", "explanation": "[Union of A and B](!/set-theory/operations#notation)"},
+      {"symbol": "A ∩ B", "latex_code": "A \\cap B", "explanation": "[Intersection of A and B](!/set-theory/operations#notation)"},
+      {"symbol": "A ∖ B", "latex_code": "A \\setminus B", "explanation": "[Difference of A and B](!/set-theory/operations#notation)"},
+      {"symbol": "A △ B", "latex_code": "A \\triangle B", "explanation": "[Symmetric difference of A and B](!/set-theory/operations#notation)"}
     ],
     "advanced_operations": [
-    {"symbol": "⋂ₐₑ Aᵢ", "latex_code": "\\bigcap_{i=a}^b A_i", "explanation": "Intersection of indexed family of sets"},
-    {"symbol": "⋃ₐₑ Aᵢ", "latex_code": "\\bigcup_{i=a}^b A_i", "explanation": "Union of indexed family of sets"},
+    {"symbol": "⋂ₐₑ Aᵢ", "latex_code": "\\bigcap_{i=a}^b A_i", "explanation": "[Intersection of indexed family of sets](!/set-theory/operations#notation)"},
+    {"symbol": "⋃ₐₑ Aᵢ", "latex_code": "\\bigcup_{i=a}^b A_i", "explanation": "[Union of indexed family of sets](!/set-theory/operations#notation)"},
     {"symbol": "∑_{x∈A} f(x)", "latex_code": "\\sum_{x \\in A} f(x)", "explanation": "Summation over elements of set A"},
     {"symbol": "Π_{x∈A} f(x)", "latex_code": "\\prod_{x \\in A} f(x)", "explanation": "Product over elements of set A"}
   ],
   "indexed_sets": [
     {"symbol": "Aᵢ", "latex_code": "A_i", "explanation": "An indexed set A at index i"},
     {"symbol": "{Aᵢ | i ∈ I}", "latex_code": "\\{A_i \\mid i \\in I\\}", "explanation": "Collection of sets indexed by I"},
-    {"symbol": "⋃ Aᵢ", "latex_code": "\\bigcup A_i", "explanation": "Union of all indexed sets Aᵢ"},
-    {"symbol": "⋂ Aᵢ", "latex_code": "\\bigcap A_i", "explanation": "Intersection of all indexed sets Aᵢ"}
+    {"symbol": "⋃ Aᵢ", "latex_code": "\\bigcup A_i", "explanation": "[Union of all indexed sets Aᵢ](!/set-theory/operations#notation)"},
+    {"symbol": "⋂ Aᵢ", "latex_code": "\\bigcap A_i", "explanation": "[Intersection of all indexed sets Aᵢ](!/set-theory/operations#notation)"}
   ],
   "relations_and_functions": [
     {"symbol": "(x, y)", "latex_code": "(x, y)", "explanation": "Ordered pair"},
     {"symbol": "f: A → B", "latex_code": "f: A \\to B", "explanation": "A function f from set A to set B"},
-    {"symbol": "f(x)", "latex_code": "f(x)", "explanation": "Value of function f at x"},
+    {"symbol": "f(x)", "latex_code": "f(x)", "explanation": "[Value of function f at x](!/functions/basics#5)"},
     {"symbol": "idₐ", "latex_code": "\\text{id}_A", "explanation": "Identity function on set A"},
     {"symbol": "f⁻¹(B)", "latex_code": "f^{-1}(B)", "explanation": "Preimage of set B under function f"},
     {"symbol": "f(A)", "latex_code": "f(A)", "explanation": "Image of set A under function f"}
   ],
   "venn_diagram_notations": [
-    {"symbol": "A ∩ B", "latex_code": "A \\cap B", "explanation": "Region where A and B overlap"},
-    {"symbol": "A ∪ B", "latex_code": "A \\cup B", "explanation": "Region including A or B"},
-    {"symbol": "A ∖ B", "latex_code": "A \\setminus B", "explanation": "Region in A but not in B"},
-    {"symbol": "B ∖ A", "latex_code": "B \\setminus A", "explanation": "Region in B but not in A"},
-    {"symbol": "A △ B", "latex_code": "A \\triangle B", "explanation": "Region in A or B but not both"}
+    {"symbol": "A ∩ B", "latex_code": "A \\cap B", "explanation": "[Region where A and B overlap](!/set-theory/operations#notation)"},
+    {"symbol": "A ∪ B", "latex_code": "A \\cup B", "explanation": "[Region including A or B](!/set-theory/operations#notation)"},
+    {"symbol": "A ∖ B", "latex_code": "A \\setminus B", "explanation": "[Region in A but not in B](!/set-theory/operations#notation)"},
+    {"symbol": "B ∖ A", "latex_code": "B \\setminus A", "explanation": "[Region in B but not in A](!/set-theory/operations#notation)"},
+    {"symbol": "A △ B", "latex_code": "A \\triangle B", "explanation": "[Region in A or B but not both](!/set-theory/operations#notation)"}
   ],
   "logic_and_set_theory": [
     {"symbol": "∀x ∈ A, P(x)", "latex_code": "\\forall x \\in A, P(x)", "explanation": "For all elements x in A, P(x) is true"},
