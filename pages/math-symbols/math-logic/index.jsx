@@ -133,14 +133,14 @@ export async function getStaticProps() {
   };
   const symbolsData = {
     "logical_operations": [
-      {"symbol": "¬", "latex_code": "\\neg", "explanation": "Logical NOT"},
-      {"symbol": "∧", "latex_code": "\\land", "explanation": "Logical AND"},
-      {"symbol": "∨", "latex_code": "\\lor", "explanation": "Logical OR"},
+      {"symbol": "¬", "latex_code": "\\neg", "explanation": "[Logical NOT](!/logic/propositional-logic/syntax#notation)"},
+      {"symbol": "∧", "latex_code": "\\land", "explanation": "[Logical AND](!/logic/propositional-logic/syntax#notation)"},
+      {"symbol": "∨", "latex_code": "\\lor", "explanation": "[Logical OR](!/logic/propositional-logic/syntax#notation)"},
       {"symbol": "⊕", "latex_code": "\\oplus", "explanation": "Logical XOR"},
       {"symbol": "→", "latex_code": "\\to", "explanation": "[Implication](!/logic/propositional-logic/semantics/implication#notation) (if...then...)"},
       {"symbol": "↔", "latex_code": "\\leftrightarrow", "explanation": "[Biconditional](!/logic/propositional-logic/semantics/equivalences#notation) (logical equivalence)"},
-      {"symbol": "⊨", "latex_code": "\\models", "explanation": "Entails (satisfiability or semantic entailment)"},
-      {"symbol": "⊢", "latex_code": "\\vdash", "explanation": "Provable (syntactic entailment)"},
+      {"symbol": "⊨", "latex_code": "\\models", "explanation": "[Entails (satisfiability or semantic entailment)](!/logic/propositional-logic/semantics/tautology#notation)"},
+      {"symbol": "⊢", "latex_code": "\\vdash", "explanation": "[Provable (syntactic entailment)](!/logic/propositional-logic/semantics/tautology#notation)"},
       {"symbol": "⊤", "latex_code": "\\top", "explanation": "[Tautology](!/logic/propositional-logic/semantics/tautology#notation) (always true)"},
       {"symbol": "⊥", "latex_code": "\\bot", "explanation": "[Contradiction](!/logic/propositional-logic/semantics/contradiction#notation) (always false)"}
     ],
@@ -150,39 +150,39 @@ export async function getStaticProps() {
       {"symbol": "∄", "latex_code": "\\nexists", "explanation": "Negated existential quantifier (there does not exist)"}
     ],
     "set_operations": [
-      {"symbol": "∈", "latex_code": "\\in", "explanation": "Element of"},
-      {"symbol": "∉", "latex_code": "\\notin", "explanation": "Not an element of"},
-      {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "Subset or equal"},
-      {"symbol": "⊂", "latex_code": "\\subset", "explanation": "Proper subset"},
-      {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "Superset or equal"},
-      {"symbol": "⊃", "latex_code": "\\supset", "explanation": "Proper superset"},
-      {"symbol": "∩", "latex_code": "\\cap", "explanation": "Intersection (common elements)"},
-      {"symbol": "∪", "latex_code": "\\cup", "explanation": "Union (all elements)"},
-      {"symbol": "∖", "latex_code": "\\setminus", "explanation": "Set difference"}
+      {"symbol": "∈", "latex_code": "\\in", "explanation": "[Element of](!/set-theory/basics#2)"},
+      {"symbol": "∉", "latex_code": "\\notin", "explanation": "[Not an element of](!/set-theory/basics#2)"},
+      {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "[Subset or equal](!/set-theory/subsets#6)"},
+      {"symbol": "⊂", "latex_code": "\\subset", "explanation": "[Proper subset](!/set-theory/subsets#6)"},
+      {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "[Superset or equal](!/set-theory/subsets#6)"},
+      {"symbol": "⊃", "latex_code": "\\supset", "explanation": "[Proper superset](!/set-theory/subsets#6)"},
+      {"symbol": "∩", "latex_code": "\\cap", "explanation": "[Intersection (common elements)](!/set-theory/operations#notation)"},
+      {"symbol": "∪", "latex_code": "\\cup", "explanation": "[Union (all elements)](!/set-theory/operations#notation)"},
+      {"symbol": "∖", "latex_code": "\\setminus", "explanation": "[Set difference](!/set-theory/operations#notation)"}
     ],
     "set_theory_cardinality": [
-        {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "Subset or equal (includes equality)"},
-        {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "Superset or equal (includes equality)"},
-        {"symbol": "⊄", "latex_code": "\\not\\subset", "explanation": "Not subset"},
-        {"symbol": "⊅", "latex_code": "\\not\\supset", "explanation": "Not superset"},
-        {"symbol": "ℵ₀", "latex_code": "\\aleph_0", "explanation": "Aleph-null (smallest infinite cardinal)"},
-        {"symbol": "𝒫(A)", "latex_code": "\\mathcal{P}(A)", "explanation": "Power set (set of all subsets)"}
+        {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "[Subset or equal (includes equality)](!/set-theory/subsets#6)"},
+        {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "[Superset or equal (includes equality)](!/set-theory/subsets#6)"},
+        {"symbol": "⊄", "latex_code": "\\not\\subset", "explanation": "[Not subset](!/set-theory/basics#2)"},
+        {"symbol": "⊅", "latex_code": "\\not\\supset", "explanation": "[Not superset](!/set-theory/basics#2)"},
+        {"symbol": "ℵ₀", "latex_code": "\\aleph_0", "explanation": "[Aleph-null (smallest infinite cardinal)](!/set-theory/cardinality#notation)"},
+        {"symbol": "𝒫(A)", "latex_code": "\\mathcal{P}(A)", "explanation": "[Power set (set of all subsets)](!/set-theory/subsets#6)"}
       ],
     "relation_symbols": [
       {"symbol": "=", "latex_code": "=", "explanation": "Equality"},
       {"symbol": "≠", "latex_code": "\\neq", "explanation": "Not equal"},
-      {"symbol": "<", "latex_code": "<", "explanation": "Less than"},
-      {"symbol": ">", "latex_code": ">", "explanation": "Greater than"},
-      {"symbol": "≤", "latex_code": "\\leq", "explanation": "Less than or equal to"},
-      {"symbol": "≥", "latex_code": "\\geq", "explanation": "Greater than or equal to"}
+      {"symbol": "<", "latex_code": "<", "explanation": "[Less than](!/algebra/inequalities/linear#notation)"},
+      {"symbol": ">", "latex_code": ">", "explanation": "[Greater than](!/algebra/inequalities/linear#notation)"},
+      {"symbol": "≤", "latex_code": "\\leq", "explanation": "[Less than or equal to](!/algebra/inequalities/linear#notation)"},
+      {"symbol": "≥", "latex_code": "\\geq", "explanation": "[Greater than or equal to](!/algebra/inequalities/linear#notation)"}
     ],
     "special_symbols": [
-      {"symbol": "∅", "latex_code": "\\emptyset", "explanation": "Empty set (no elements)"},
-      {"symbol": "ℕ", "latex_code": "\\mathbb{N}", "explanation": "Set of natural numbers"},
-      {"symbol": "ℤ", "latex_code": "\\mathbb{Z}", "explanation": "Set of integers"},
-      {"symbol": "ℚ", "latex_code": "\\mathbb{Q}", "explanation": "Set of rational numbers"},
-      {"symbol": "ℝ", "latex_code": "\\mathbb{R}", "explanation": "Set of real numbers"},
-      {"symbol": "ℂ", "latex_code": "\\mathbb{C}", "explanation": "Set of complex numbers"}
+      {"symbol": "∅", "latex_code": "\\emptyset", "explanation": "[Empty set (no elements)](!/set-theory/basics#2)"},
+      {"symbol": "ℕ", "latex_code": "\\mathbb{N}", "explanation": "[Set of natural numbers](!/set-theory/subsets#6)"},
+      {"symbol": "ℤ", "latex_code": "\\mathbb{Z}", "explanation": "[Set of integers](!/set-theory/subsets#6)"},
+      {"symbol": "ℚ", "latex_code": "\\mathbb{Q}", "explanation": "[Set of rational numbers](!/set-theory/subsets#6)"},
+      {"symbol": "ℝ", "latex_code": "\\mathbb{R}", "explanation": "[Set of real numbers](!/set-theory/subsets#6)"},
+      {"symbol": "ℂ", "latex_code": "\\mathbb{C}", "explanation": "[Set of complex numbers](!/complex-numbers/basics#notation)"}
     ],
     "temporal_modal_logic": [
       {"symbol": "□", "latex_code": "\\Box", "explanation": "Necessity (it is necessary that)"},
@@ -191,9 +191,9 @@ export async function getStaticProps() {
       {"symbol": "○", "latex_code": "\\bigcirc", "explanation": "Next (temporal logic)"}
     ],
     "advanced_logical_operations": [
-      {"symbol": "⊢", "latex_code": "\\vdash", "explanation": "Provable in proof system"},
+      {"symbol": "⊢", "latex_code": "\\vdash", "explanation": "[Provable in proof system](!/logic/propositional-logic/semantics/tautology#notation)"},
       {"symbol": "⊬", "latex_code": "\\nvdash", "explanation": "Not provable in proof system"},
-      {"symbol": "⊨", "latex_code": "\\models", "explanation": "Semantic entailment"},
+      {"symbol": "⊨", "latex_code": "\\models", "explanation": "[Semantic entailment](!/logic/propositional-logic/semantics/tautology#notation)"},
       {"symbol": "⊭", "latex_code": "\\nvDash", "explanation": "Not semantic entailment"},
       {"symbol": "⊣", "latex_code": "\\dashv", "explanation": "Assertion of incompatibility"}
     ],
@@ -205,15 +205,15 @@ export async function getStaticProps() {
     ],
     "probability_logic": [
       {"symbol": "Pr(A)", "latex_code": "\\Pr(A)", "explanation": "Probability of event A"},
-      {"symbol": "E[X]", "latex_code": "\\mathbb{E}[X]", "explanation": "Expected value of random variable X"}
+      {"symbol": "E[X]", "latex_code": "\\mathbb{E}[X]", "explanation": "[Expected value of random variable X](!/probability/expected-value#notation)"}
     ],
     "proof_notations": [
-      {"symbol": "⇒", "latex_code": "\\Rightarrow", "explanation": "Implies in proofs"},
+      {"symbol": "⇒", "latex_code": "\\Rightarrow", "explanation": "[Implies in proofs](!/logic/propositional-logic/semantics/implication#notation)"},
       {"symbol": "⇐", "latex_code": "\\Leftarrow", "explanation": "Implied by in proofs"},
-      {"symbol": "○", "latex_code": "\\circ", "explanation": "Composition of functions"}
+      {"symbol": "○", "latex_code": "\\circ", "explanation": "[Composition of functions](!/functions/composition#2)"}
     ],
     "miscellaneous": [
-      {"symbol": "∞", "latex_code": "\\infty", "explanation": "Infinity"},
+      {"symbol": "∞", "latex_code": "\\infty", "explanation": "[Infinity](!/calculus/limits/infinity#notation)"},
       {"symbol": "∴", "latex_code": "\\therefore", "explanation": "Therefore (consequence)"},
       {"symbol": "∵", "latex_code": "\\because", "explanation": "Because (reasoning)"}
     ],
