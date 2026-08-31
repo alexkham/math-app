@@ -1525,7 +1525,7 @@ In practice, these are rarely evaluated directly. When an expression involves $\
         tex: `$\\sin^{-1}(x)$`,
         read: `inverse sine of x; sine inverse`,
         means: `An inconsistency by convention: every other exponent on a function name is a power — $\\sin^2 x = (\\sin x)^2$ — but $-1$ alone means the inverse function. $\\sin^{-1}(x) = \\arcsin(x)$, an angle out, never $\\frac{1}{\\sin x}$; the override applies to all six functions.`,
-        cases: `The corner mark's fourth career: reciprocals on [numbers](!/algebra/powers/negative-exponents#notation), inversion on [complex numbers](!/complex-numbers/multiplicative-inverse#notation) and [matrices](!/linear-algebra/matrix/inverse#notation) — on functions it flips the map, and only the base tells you which reading applies.`,
+        cases: `The corner mark's fourth career: reciprocals on [numbers](!/algebra/powers/negative-exponents#notation), inversion on [complex numbers](!/complex-numbers/multiplicative-inverse#4) and [matrices](!/linear-algebra/matrix/inverse#notation) — on functions it flips the map, and only the base tells you which reading applies.`,
         confusedWith: `$\\csc x$. By the power pattern, $\\sin^{-1}$ "should" be the reciprocal — writing the reciprocal safely takes brackets, $(\\sin x)^{-1}$, or the honest $\\frac{1}{\\sin x}$; exactly the split the table below works through.`,
       },
       {

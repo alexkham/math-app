@@ -2004,7 +2004,7 @@ Not every function has an inverse. The function $f(x) = x^2$ on $(-\\infty, \\in
         id: 'f-inverse',
         tex: `$f^{-1}(x)$`,
         read: `f inverse of x`,
-        means: `A label wearing an exponent's clothes: the $-1$ marks the undo-function — $f^{-1}(f(x)) = x$ — and raises nothing to any power. Fourth member of the corner census: reciprocals on [numbers](!/algebra/powers/negative-exponents#notation), inversion on [complex numbers](!/complex-numbers/multiplicative-inverse#notation) and [matrices](!/linear-algebra/matrix/inverse#notation).`,
+        means: `A label wearing an exponent's clothes: the $-1$ marks the undo-function — $f^{-1}(f(x)) = x$ — and raises nothing to any power. Fourth member of the corner census: reciprocals on [numbers](!/algebra/powers/negative-exponents#notation), inversion on [complex numbers](!/complex-numbers/multiplicative-inverse#4) and [matrices](!/linear-algebra/matrix/inverse#notation).`,
         cases: `Finding it runs on a letter swap — Step 2 of **Finding Inverse Algebraically** below trades $x$ for $y$ — and the graph mirrors the swap: $(a, b)$ on $f$ becomes $(b, a)$ on $f^{-1}$, per **Inverse as Reflection over y = x** below.`,
         confusedWith: `The reciprocal. $f^{-1}(x) \\neq \\frac{1}{f(x)}$ — different functions, different graphs, different values; the trig family carries [the same hazard](!/trigonometry/inverse-functions#6) in $\\sin^{-1}$ versus $\\csc$.`,
       },

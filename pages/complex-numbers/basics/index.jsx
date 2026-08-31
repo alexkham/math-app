@@ -1178,7 +1178,7 @@ notation: {
       cases: `Membership declares domain: $z \\in \\mathbb{C}$ opens a statement the way $\\mathbf{v} \\in \\mathbb{R}^n$ does for [vectors](!/linear-algebra/vectors/basic-operations#notation); superscripted, $\\mathbb{C}^n$ names the space of complex $n$-tuples.`,
       alsoWritten: `Bold upright $\\mathbf{C}$ in older print — blackboard's double stroke began as chalk imitating bold type, then migrated back into books.`,
       confusedWith: `$\\mathbb{R}^2$. The complex plane and the real plane share their points, but $\\mathbb{R}^2$ has no multiplication of points — writing $\\mathbb{C}$ asserts the field structure of **The Mathematical Theory** below.`,
-      sameGlyphElsewhere: `Italic $C$ is the integration constant of [indefinite integrals](!/calculus/integrals/indefinite#notation) and the combination count $C(n, k)$ of [combinatorics](!/combinatorics/combinations) — unrelated jobs; the typeface is the only separator.`,
+      sameGlyphElsewhere: `Italic $C$ is the integration constant of [indefinite integrals](!/calculus/integrals/indefinite#3) and the combination count $C(n, k)$ of [combinatorics](!/combinatorics/combinations) — unrelated jobs; the typeface is the only separator.`,
     },
   ],
   symbolsHref: `/math-symbols/complex-numbers`,
