@@ -136,56 +136,56 @@ export async function getStaticProps() {
   };
   const symbolsData = {
     "matrix_operations": [
-      {"symbol": "A⊤", "latex_code": "A^\\top", "explanation": "Matrix transpose"},
-      {"symbol": "A⁻¹", "latex_code": "A^{-1}", "explanation": "Matrix inverse"},
-      {"symbol": "det(A)", "latex_code": "\\det(A)", "explanation": "Matrix determinant"},
-      {"symbol": "tr(A)", "latex_code": "\\text{tr}(A)", "explanation": "Matrix trace"},
-      {"symbol": "rank(A)", "latex_code": "\\text{rank}(A)", "explanation": "Matrix rank"},
-      {"symbol": "adj(A)", "latex_code": "\\text{adj}(A)", "explanation": "Matrix adjugate"},
+      {"symbol": "A⊤", "latex_code": "A^\\top", "explanation": "[Matrix transpose](!/linear-algebra/matrix/operations#notation)"},
+      {"symbol": "A⁻¹", "latex_code": "A^{-1}", "explanation": "[Matrix inverse](!/linear-algebra/matrix/inverse#notation)"},
+      {"symbol": "det(A)", "latex_code": "\\det(A)", "explanation": "[Matrix determinant](!/linear-algebra/determinants/properties#notation)"},
+      {"symbol": "tr(A)", "latex_code": "\\text{tr}(A)", "explanation": "[Matrix trace](!/linear-algebra/matrix/trace#notation)"},
+      {"symbol": "rank(A)", "latex_code": "\\text{rank}(A)", "explanation": "[Matrix rank](!/linear-algebra/matrix/rank#notation)"},
+      {"symbol": "adj(A)", "latex_code": "\\text{adj}(A)", "explanation": "[Matrix adjugate](!/linear-algebra/determinants/cofactors#notation)"},
       {"symbol": "A⊗B", "latex_code": "A \\otimes B", "explanation": "Kronecker product"},
       {"symbol": "A∘B", "latex_code": "A \\circ B", "explanation": "Hadamard (elementwise) product"},
       {"symbol": "A†", "latex_code": "A^\\dagger", "explanation": "Conjugate transpose"},
-      {"symbol": "ker(A)", "latex_code": "\\text{ker}(A)", "explanation": "Kernel (nullspace) of matrix"}
+      {"symbol": "ker(A)", "latex_code": "\\text{ker}(A)", "explanation": "[Kernel (nullspace) of matrix](!/linear-algebra/transformations/image-kernel#notation)"}
     ],
     "vector_spaces": [
-      {"symbol": "ℝⁿ", "latex_code": "\\mathbb{R}^n", "explanation": "n-dimensional real vector space"},
-      {"symbol": "span{v₁,...,vₙ}", "latex_code": "\\text{span}\\{v_1,\\ldots,v_n\\}", "explanation": "Span of vectors"},
-      {"symbol": "⟨v,w⟩", "latex_code": "\\langle v,w \\rangle", "explanation": "Inner product"},
-      {"symbol": "∥v∥", "latex_code": "\\|v\\|", "explanation": "Vector norm"},
-      {"symbol": "v⊥w", "latex_code": "v \\perp w", "explanation": "Orthogonal vectors"},
-      {"symbol": "dim(V)", "latex_code": "\\dim(V)", "explanation": "Dimension of vector space"},
+      {"symbol": "ℝⁿ", "latex_code": "\\mathbb{R}^n", "explanation": "[n-dimensional real vector space](!/linear-algebra/vectors/basic-operations#notation)"},
+      {"symbol": "span{v₁,...,vₙ}", "latex_code": "\\text{span}\\{v_1,\\ldots,v_n\\}", "explanation": "[Span of vectors](!/linear-algebra/vector-spaces/span#notation)"},
+      {"symbol": "⟨v,w⟩", "latex_code": "\\langle v,w \\rangle", "explanation": "[Inner product](!/linear-algebra/orthogonality/inner-product#notation)"},
+      {"symbol": "∥v∥", "latex_code": "\\|v\\|", "explanation": "[Vector norm](!/linear-algebra/vectors/magnitude#notation)"},
+      {"symbol": "v⊥w", "latex_code": "v \\perp w", "explanation": "[Orthogonal vectors](!/linear-algebra/orthogonality/inner-product#notation)"},
+      {"symbol": "dim(V)", "latex_code": "\\dim(V)", "explanation": "[Dimension of vector space](!/linear-algebra/vector-spaces/dimension#notation)"},
       {"symbol": "V⊕W", "latex_code": "V \\oplus W", "explanation": "Direct sum of vector spaces"}
     ],
     "eigenvalues_eigenvectors": [
-      {"symbol": "Av=λv", "latex_code": "Av=\\lambda v", "explanation": "Eigenvalue equation"},
-      {"symbol": "χₐ(λ)", "latex_code": "\\chi_A(\\lambda)", "explanation": "Characteristic polynomial"},
-      {"symbol": "σ(A)", "latex_code": "\\sigma(A)", "explanation": "Spectrum (set of eigenvalues)"},
+      {"symbol": "Av=λv", "latex_code": "Av=\\lambda v", "explanation": "[Eigenvalue equation](!/linear-algebra/eigen/characteristic-equation#notation)"},
+      {"symbol": "χₐ(λ)", "latex_code": "\\chi_A(\\lambda)", "explanation": "[Characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#notation)"},
+      {"symbol": "σ(A)", "latex_code": "\\sigma(A)", "explanation": "[Spectrum (set of eigenvalues)](!/linear-algebra/eigen/characteristic-equation#notation)"},
       {"symbol": "ρ(A)", "latex_code": "\\rho(A)", "explanation": "Spectral radius"},
-      {"symbol": "diag(λ₁,...,λₙ)", "latex_code": "\\text{diag}(\\lambda_1,\\ldots,\\lambda_n)", "explanation": "Diagonal matrix of eigenvalues"}
+      {"symbol": "diag(λ₁,...,λₙ)", "latex_code": "\\text{diag}(\\lambda_1,\\ldots,\\lambda_n)", "explanation": "[Diagonal matrix of eigenvalues](!/linear-algebra/decompositions/svd#notation)"}
     ],
     "linear_transformations": [
-      {"symbol": "T:V→W", "latex_code": "T:V\\to W", "explanation": "Linear transformation"},
-      {"symbol": "im(T)", "latex_code": "\\text{im}(T)", "explanation": "Image of transformation"},
-      {"symbol": "ker(T)", "latex_code": "\\text{ker}(T)", "explanation": "Kernel of transformation"},
-      {"symbol": "T∘S", "latex_code": "T \\circ S", "explanation": "Composition of transformations"},
+      {"symbol": "T:V→W", "latex_code": "T:V\\to W", "explanation": "[Linear transformation](!/linear-algebra/transformations/image-kernel#notation)"},
+      {"symbol": "im(T)", "latex_code": "\\text{im}(T)", "explanation": "[Image of transformation](!/linear-algebra/transformations/image-kernel#notation)"},
+      {"symbol": "ker(T)", "latex_code": "\\text{ker}(T)", "explanation": "[Kernel of transformation](!/linear-algebra/transformations/image-kernel#notation)"},
+      {"symbol": "T∘S", "latex_code": "T \\circ S", "explanation": "[Composition of transformations](!/linear-algebra/transformations/matrix-representation#notation)"},
       {"symbol": "GL(n,ℝ)", "latex_code": "GL(n,\\mathbb{R})", "explanation": "General linear group"}
     ],
     "matrix_decompositions": [
-      {"symbol": "A=LU", "latex_code": "A=LU", "explanation": "LU decomposition"},
-      {"symbol": "A=QR", "latex_code": "A=QR", "explanation": "QR decomposition"},
-      {"symbol": "A=UΣV⊤", "latex_code": "A=U\\Sigma V^\\top", "explanation": "Singular value decomposition"},
-      {"symbol": "A=PDP⁻¹", "latex_code": "A=PDP^{-1}", "explanation": "Eigendecomposition"},
-      {"symbol": "A=CC⊤", "latex_code": "A=CC^\\top", "explanation": "Cholesky decomposition"}
+      {"symbol": "A=LU", "latex_code": "A=LU", "explanation": "[LU decomposition](!/linear-algebra/decompositions/lower-upper#notation)"},
+      {"symbol": "A=QR", "latex_code": "A=QR", "explanation": "[QR decomposition](!/linear-algebra/decompositions/qr#notation)"},
+      {"symbol": "A=UΣV⊤", "latex_code": "A=U\\Sigma V^\\top", "explanation": "[Singular value decomposition](!/linear-algebra/decompositions/svd#notation)"},
+      {"symbol": "A=PDP⁻¹", "latex_code": "A=PDP^{-1}", "explanation": "[Eigendecomposition](!/linear-algebra/eigen/diagonalization#notation)"},
+      {"symbol": "A=CC⊤", "latex_code": "A=CC^\\top", "explanation": "[Cholesky decomposition](!/linear-algebra/decompositions/cholesky#notation)"}
     ],
     "basic_matrix_forms": [
     {"symbol": "[a₁₁ a₁₂; a₂₁ a₂₂]", "latex_code": "\\begin{bmatrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \\end{bmatrix}", "explanation": "2×2 matrix"},
     {"symbol": "(a b c)", "latex_code": "\\begin{pmatrix} a & b & c \\end{pmatrix}", "explanation": "Row vector"},
     {"symbol": "[a; b; c]", "latex_code": "\\begin{bmatrix} a \\\\ b \\\\ c \\end{bmatrix}", "explanation": "Column vector"},
-    {"symbol": "∥a₁₁ a₁₂∥", "latex_code": "\\begin{vmatrix} a_{11} & a_{12} \\end{vmatrix}", "explanation": "Matrix determinant notation"},
+    {"symbol": "∥a₁₁ a₁₂∥", "latex_code": "\\begin{vmatrix} a_{11} & a_{12} \\end{vmatrix}", "explanation": "[Matrix determinant notation](!/linear-algebra/determinants/properties#notation)"},
     {"symbol": "{a₁₁ a₁₂}", "latex_code": "\\begin{Bmatrix} a_{11} & a_{12} \\end{Bmatrix}", "explanation": "Curly brace matrix"}
   ],
   "matrix_elements": [
-    {"symbol": "aᵢⱼ", "latex_code": "a_{ij}", "explanation": "General matrix element"},
+    {"symbol": "aᵢⱼ", "latex_code": "a_{ij}", "explanation": "[General matrix element](!/linear-algebra/matrix/operations#notation)"},
     {"symbol": "a₁₁", "latex_code": "a_{11}", "explanation": "First element"},
     {"symbol": "aᵢ₊₁,ⱼ", "latex_code": "a_{i+1,j}", "explanation": "Element with offset indices"},
     {"symbol": "⋯", "latex_code": "\\cdots", "explanation": "Horizontal ellipsis"},
@@ -193,7 +193,7 @@ export async function getStaticProps() {
     {"symbol": "⋱", "latex_code": "\\ddots", "explanation": "Diagonal ellipsis"}
   ],
   "special_matrices": [
-    {"symbol": "I", "latex_code": "I_n", "explanation": "Identity matrix"},
+    {"symbol": "I", "latex_code": "I_n", "explanation": "[Identity matrix](!/linear-algebra/matrix/operations#notation)"},
     {"symbol": "0", "latex_code": "0_{m \\times n}", "explanation": "Zero matrix"},
     {"symbol": "diag(a₁,…,aₙ)", "latex_code": "\\text{diag}(a_1,\\ldots,a_n)", "explanation": "Diagonal matrix"},
     {"symbol": "⎡⎢⎣", "latex_code": "\\left\\lbrack", "explanation": "Left matrix bracket"},
