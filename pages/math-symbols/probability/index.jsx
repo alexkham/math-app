@@ -191,40 +191,40 @@ export async function getStaticProps() {
 
  const symbolsData = {
   "probability_and_statistics": [
-    {"symbol": "P(A ∩ B)", "latex_code": "P(A \\cap B)", "explanation": "The [joint probability](!/probability/joint-probability) of events A and B both occurring. For independent events, P(A ∩ B) = P(A) · P(B)."},
+    {"symbol": "P(A ∩ B)", "latex_code": "P(A \\cap B)", "explanation": "The [joint probability](!/probability/joint-probability#notation) of events A and B both occurring. For independent events, P(A ∩ B) = P(A) · P(B)."},
     {"symbol": "P(A ∪ B)", "latex_code": "P(A \\cup B)", "explanation": "Probability of A or B (or both) occurring. Calculated as P(A) + P(B) − P(A ∩ B) by the [addition rule](!/probability/rules)."},
-    {"symbol": "P(A | B)", "latex_code": "P(A \\mid B)", "explanation": "[Conditional probability](!/probability/conditional-probability) of A given that B has occurred. Defined as P(A ∩ B) / P(B) when P(B) > 0."},
-    {"symbol": "E(X)", "latex_code": "E(X)", "explanation": "The [expected value](!/probability/expected-value) (mean) of random variable X — the long-run average value over many trials."},
-    {"symbol": "Var(X)", "latex_code": "\\text{Var}(X)", "explanation": "The [variance](!/probability/variance) of X, measuring how spread out values are from the mean. Equals E[(X − μ)²]."},
-    {"symbol": "Cov(X, Y)", "latex_code": "\\text{Cov}(X, Y)", "explanation": "The [covariance](!/probability/covariance) of X and Y, measuring how two variables change together. Positive means they increase together."}
+    {"symbol": "P(A | B)", "latex_code": "P(A \\mid B)", "explanation": "[Conditional probability](!/probability/conditional-probability#notation) of A given that B has occurred. Defined as P(A ∩ B) / P(B) when P(B) > 0."},
+    {"symbol": "E(X)", "latex_code": "E(X)", "explanation": "The [expected value](!/probability/expected-value#notation) (mean) of random variable X — the long-run average value over many trials."},
+    {"symbol": "Var(X)", "latex_code": "\\text{Var}(X)", "explanation": "The [variance](!/probability/variance#notation) of X, measuring how spread out values are from the mean. Equals E[(X − μ)²]."},
+    {"symbol": "Cov(X, Y)", "latex_code": "\\text{Cov}(X, Y)", "explanation": "The [covariance](!/probability/covariance#7) of X and Y, measuring how two variables change together. Positive means they increase together."}
   ],
   "probability_notations": [
     {"symbol": "P(A)", "latex_code": "P(A)", "explanation": "Probability of [event](!/probability/events) A occurring. Always between 0 and 1, where 0 means impossible and 1 means certain."},
     {"symbol": "P(¬A)", "latex_code": "P(\\neg A)", "explanation": "Probability of A not occurring (complement). Equals 1 − P(A) by the [complement rule](!/probability/rules)."},
-    {"symbol": "P(A ∩ B)", "latex_code": "P(A \\cap B)", "explanation": "[Joint probability](!/probability/joint-probability) of A and B. For [independent](!/probability/independence) events: P(A ∩ B) = P(A) · P(B)."},
+    {"symbol": "P(A ∩ B)", "latex_code": "P(A \\cap B)", "explanation": "[Joint probability](!/probability/joint-probability#notation) of A and B. For [independent](!/probability/independence) events: P(A ∩ B) = P(A) · P(B)."},
     {"symbol": "P(A ∪ B)", "latex_code": "P(A \\cup B)", "explanation": "Probability of A or B. Use [Venn diagrams](!/probability/visual-tools/venn-diagrams) to visualize the union of events."},
-    {"symbol": "P(A | B)", "latex_code": "P(A \\mid B)", "explanation": "[Conditional probability](!/probability/conditional-probability) — the probability of A when we know B happened. Central to [Bayes' theorem](!/probability/bayes-theorem)."}
+    {"symbol": "P(A | B)", "latex_code": "P(A \\mid B)", "explanation": "[Conditional probability](!/probability/conditional-probability#notation) — the probability of A when we know B happened. Central to [Bayes' theorem](!/probability/bayes-theorem)."}
   ],
   "random_variables_and_distributions": [
-    {"symbol": "X", "latex_code": "X", "explanation": "A [random variable](!/probability/random-variables) — a function that assigns numerical values to outcomes in a sample space."},
-    {"symbol": "f_X(x)", "latex_code": "f_X(x)", "explanation": "The [probability function](!/probability/probability-function). For discrete X, gives P(X = x). For continuous X, integrates to give probabilities."},
-    {"symbol": "F_X(x)", "latex_code": "F_X(x)", "explanation": "The [cumulative distribution function](!/probability/cdf) (CDF). Gives P(X ≤ x) and is non-decreasing from 0 to 1."},
-    {"symbol": "μ", "latex_code": "\\mu", "explanation": "Population mean — the [expected value](!/probability/expected-value) of a distribution. The center of mass of the probability distribution."},
-    {"symbol": "σ²", "latex_code": "\\sigma^2", "explanation": "Population [variance](!/probability/variance) — measures the average squared deviation from the mean."},
+    {"symbol": "X", "latex_code": "X", "explanation": "A [random variable](!/probability/random-variables#notation) — a function that assigns numerical values to outcomes in a sample space."},
+    {"symbol": "f_X(x)", "latex_code": "f_X(x)", "explanation": "The [probability function](!/probability/probability-function#notation). For discrete X, gives P(X = x). For continuous X, integrates to give probabilities."},
+    {"symbol": "F_X(x)", "latex_code": "F_X(x)", "explanation": "The [cumulative distribution function](!/probability/cdf#notation) (CDF). Gives P(X ≤ x) and is non-decreasing from 0 to 1."},
+    {"symbol": "μ", "latex_code": "\\mu", "explanation": "Population mean — the [expected value](!/probability/expected-value#notation) of a distribution. The center of mass of the probability distribution."},
+    {"symbol": "σ²", "latex_code": "\\sigma^2", "explanation": "Population [variance](!/probability/variance#notation) — measures the average squared deviation from the mean."},
     {"symbol": "σ", "latex_code": "\\sigma", "explanation": "Standard deviation — the square root of variance. Same units as the original data, easier to interpret than variance."}
   ],
   "common_distributions": [
-    {"symbol": "Bin(n, p)", "latex_code": "\\text{Bin}(n, p)", "explanation": "[Binomial distribution](!/probability/distributions/discrete/binomial) — models the number of successes in n independent trials, each with success probability p."},
-    {"symbol": "Poisson(λ)", "latex_code": "\\text{Poisson}(\\lambda)", "explanation": "[Poisson distribution](!/probability/distributions/discrete/poisson) — models rare events occurring at rate λ per interval. Mean and variance both equal λ."},
-    {"symbol": "N(μ, σ²)", "latex_code": "\\mathcal{N}(\\mu, \\sigma^2)", "explanation": "[Normal distribution](!/probability/distributions/continuous/normal) — the bell curve. Central to statistics due to the [central limit theorem](!/probability/central-limit-theorem)."},
-    {"symbol": "Exp(λ)", "latex_code": "\\text{Exp}(\\lambda)", "explanation": "[Exponential distribution](!/probability/distributions/continuous/exponential) — models waiting times between Poisson events. Memoryless property."},
-    {"symbol": "U(a, b)", "latex_code": "\\text{U}(a, b)", "explanation": "[Uniform distribution](!/probability/distributions/continuous/uniform) — all values in [a, b] equally likely. Mean is (a + b)/2."}
+    {"symbol": "Bin(n, p)", "latex_code": "\\text{Bin}(n, p)", "explanation": "[Binomial distribution](!/probability/distributions/discrete/binomial#15) — models the number of successes in n independent trials, each with success probability p."},
+    {"symbol": "Poisson(λ)", "latex_code": "\\text{Poisson}(\\lambda)", "explanation": "[Poisson distribution](!/probability/distributions/discrete/poisson#15) — models rare events occurring at rate λ per interval. Mean and variance both equal λ."},
+    {"symbol": "N(μ, σ²)", "latex_code": "\\mathcal{N}(\\mu, \\sigma^2)", "explanation": "[Normal distribution](!/probability/distributions/continuous/normal#2) — the bell curve. Central to statistics due to the [central limit theorem](!/probability/central-limit-theorem)."},
+    {"symbol": "Exp(λ)", "latex_code": "\\text{Exp}(\\lambda)", "explanation": "[Exponential distribution](!/probability/distributions/continuous/exponential#2) — models waiting times between Poisson events. Memoryless property."},
+    {"symbol": "U(a, b)", "latex_code": "\\text{U}(a, b)", "explanation": "[Uniform distribution](!/probability/distributions/continuous/uniform#2) — all values in [a, b] equally likely. Mean is (a + b)/2."}
   ],
   "statistical_measures": [
-    {"symbol": "E(X)", "latex_code": "E(X)", "explanation": "[Expected value](!/probability/expected-value) — weighted average of all possible values, weighted by their probabilities."},
-    {"symbol": "Var(X)", "latex_code": "\\text{Var}(X)", "explanation": "[Variance](!/probability/variance) — E[(X − μ)²] or equivalently E(X²) − [E(X)]². Measures dispersion."},
+    {"symbol": "E(X)", "latex_code": "E(X)", "explanation": "[Expected value](!/probability/expected-value#notation) — weighted average of all possible values, weighted by their probabilities."},
+    {"symbol": "Var(X)", "latex_code": "\\text{Var}(X)", "explanation": "[Variance](!/probability/variance#notation) — E[(X − μ)²] or equivalently E(X²) − [E(X)]². Measures dispersion."},
     {"symbol": "SD(X)", "latex_code": "\\text{SD}(X)", "explanation": "Standard deviation — √Var(X). In the same units as X, unlike variance which is in squared units."},
-    {"symbol": "Cov(X, Y)", "latex_code": "\\text{Cov}(X, Y)", "explanation": "[Covariance](!/probability/covariance) — E(XY) − E(X)E(Y). Zero for independent variables, but zero covariance doesn't imply independence."},
+    {"symbol": "Cov(X, Y)", "latex_code": "\\text{Cov}(X, Y)", "explanation": "[Covariance](!/probability/covariance#7) — E(XY) − E(X)E(Y). Zero for independent variables, but zero covariance doesn't imply independence."},
     {"symbol": "Corr(X, Y)", "latex_code": "\\text{Corr}(X, Y)", "explanation": "Correlation coefficient — Cov(X,Y)/(σ_X · σ_Y). Standardized to range from −1 to 1."}
   ],
   "hypothesis_testing": [
@@ -247,21 +247,21 @@ export async function getStaticProps() {
     {"symbol": "M''(0) = E(X²)", "latex_code": "M''(0) = E(X^2)", "explanation": "Second derivative at t = 0 gives E(X²). Combined with M'(0), we can find [variance](!/probability/variance): Var(X) = E(X²) − [E(X)]²."}
   ],
   "probability_inequalities": [
-    {"symbol": "P(X ≥ a) ≤ E(X)/a", "latex_code": "P(X \\geq a) \\leq \\frac{E(X)}{a}", "explanation": "[Markov's inequality](!/probability/inequalities/markov) — bounds tail probability using only the mean. Requires X ≥ 0 and a > 0."},
-    {"symbol": "P(|X − μ| ≥ kσ) ≤ 1/k²", "latex_code": "P(|X - \\mu| \\geq k\\sigma) \\leq \\frac{1}{k^2}", "explanation": "[Chebyshev's inequality](!/probability/inequalities/chebyshev) — at most 1/k² of values lie more than k standard deviations from the mean."},
+    {"symbol": "P(X ≥ a) ≤ E(X)/a", "latex_code": "P(X \\geq a) \\leq \\frac{E(X)}{a}", "explanation": "[Markov's inequality](!/probability/inequalities/markov#notation) — bounds tail probability using only the mean. Requires X ≥ 0 and a > 0."},
+    {"symbol": "P(|X − μ| ≥ kσ) ≤ 1/k²", "latex_code": "P(|X - \\mu| \\geq k\\sigma) \\leq \\frac{1}{k^2}", "explanation": "[Chebyshev's inequality](!/probability/inequalities/chebyshev#notation) — at most 1/k² of values lie more than k standard deviations from the mean."},
     {"symbol": "P(Sₙ/n − μ ≥ ε) ≤ e^(−nε²/2σ²)", "latex_code": "P\\left(\\frac{S_n}{n} - \\mu \\geq \\epsilon\\right) \\leq e^{-\\frac{n\\epsilon^2}{2\\sigma^2}}", "explanation": "Hoeffding's inequality — exponentially decreasing bound on deviations of sample means. Tighter than Chebyshev for large n."}
   ],
   "bayesian_statistics": [
-    {"symbol": "P(A | B)", "latex_code": "P(A \\mid B)", "explanation": "Posterior probability — our updated belief in A after observing evidence B. The output of [Bayes' theorem](!/probability/bayes-theorem)."},
-    {"symbol": "P(A | B) = P(B | A)P(A) / P(B)", "latex_code": "P(A \\mid B) = \\frac{P(B \\mid A) P(A)}{P(B)}", "explanation": "[Bayes' theorem](!/probability/bayes-theorem) — relates posterior to prior P(A) and likelihood P(B|A). Foundation of Bayesian inference."},
-    {"symbol": "P(A, B)", "latex_code": "P(A, B)", "explanation": "[Joint probability](!/probability/joint-probability) of A and B — same as P(A ∩ B). The probability both events occur together."},
-    {"symbol": "P(A ∩ B) = P(A)P(B | A)", "latex_code": "P(A \\cap B) = P(A) P(B \\mid A)", "explanation": "Multiplication rule — expresses joint probability in terms of [conditional probability](!/probability/conditional-probability). Basis for [tree diagrams](!/probability/tree-diagrams)."}
+    {"symbol": "P(A | B)", "latex_code": "P(A \\mid B)", "explanation": "Posterior probability — our updated belief in A after observing evidence B. The output of [Bayes' theorem](!/probability/bayes-theorem#notation)."},
+    {"symbol": "P(A | B) = P(B | A)P(A) / P(B)", "latex_code": "P(A \\mid B) = \\frac{P(B \\mid A) P(A)}{P(B)}", "explanation": "[Bayes' theorem](!/probability/bayes-theorem#notation) — relates posterior to prior P(A) and likelihood P(B|A). Foundation of Bayesian inference."},
+    {"symbol": "P(A, B)", "latex_code": "P(A, B)", "explanation": "[Joint probability](!/probability/joint-probability#notation) of A and B — same as P(A ∩ B). The probability both events occur together."},
+    {"symbol": "P(A ∩ B) = P(A)P(B | A)", "latex_code": "P(A \\cap B) = P(A) P(B \\mid A)", "explanation": "Multiplication rule — expresses joint probability in terms of [conditional probability](!/probability/conditional-probability#notation). Basis for [tree diagrams](!/probability/tree-diagrams)."}
   ],
   "regression_and_correlation": [
     {"symbol": "Y = β₀ + β₁X + ε", "latex_code": "Y = \\beta_0 + \\beta_1 X + \\epsilon", "explanation": "Simple linear regression model — β₀ is intercept, β₁ is slope, ε is random error with E(ε) = 0."},
     {"symbol": "R²", "latex_code": "R^2", "explanation": "Coefficient of determination — proportion of [variance](!/probability/variance) in Y explained by X. Ranges from 0 to 1."},
     {"symbol": "ρ(X, Y)", "latex_code": "\\rho(X, Y)", "explanation": "Pearson correlation — measures linear relationship strength. Equals ±1 for perfect linear relationship, 0 for no linear correlation."},
-    {"symbol": "Cov(X, Y) = E(XY) − E(X)E(Y)", "latex_code": "\\text{Cov}(X, Y) = E(XY) - E(X)E(Y)", "explanation": "[Covariance](!/probability/covariance) formula — alternative computation using expected values. Useful for theoretical derivations."}
+    {"symbol": "Cov(X, Y) = E(XY) − E(X)E(Y)", "latex_code": "\\text{Cov}(X, Y) = E(XY) - E(X)E(Y)", "explanation": "[Covariance](!/probability/covariance#7) formula — alternative computation using expected values. Useful for theoretical derivations."}
   ]
 };
 
