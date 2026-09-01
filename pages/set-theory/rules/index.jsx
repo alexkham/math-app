@@ -201,17 +201,30 @@ export async function getStaticProps(){
   
   }
 
+  const introContent = {
+    id: 'intro',
+    content: `Every law below is written in five marks, and the tables assume you already read them.
+
+$A \\cup B$ is the **union** — everything in either set. $A \\cap B$ is the **intersection** — only what is in both. The two are set out at [set operations](!/set-theory/operations#notation), which also explains why the cup opens upward and the cap down.
+
+$\\emptyset$ is the **empty set**, the one with no members, and $U$ is the **universal set**, everything currently under discussion. Both are defined at [set basics](!/set-theory/basics#2). $U$ is not fixed: it is whatever the problem says it is, which is what makes the complement below depend on it.
+
+$A^c$ is the **complement** of $A$ — everything in $U$ that is not in $A$. This site also writes it $A'$ on the [Venn tools](!/set-theory/visual-tools/two-sets-basic-venn), and $\\overline{A}$ appears in other texts; all three mean the same set.
+
+Read that way, each law states that two different routes through these operations land on the same set.`,
+  }
+
     return {
       props:{
         sectionsContent,
         setAlgebraLawsData,
-        
+        introContent,
       }
     }
   }
   
 
-export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData}) {
+export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData,introContent}) {
 
 
     
@@ -457,7 +470,7 @@ export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData})
     <br/>
     <SectionTableOfContents sections={setTheoryRulesSections}/>
     <br/>
-    <IntroSection/>
+    <IntroSection id={introContent.id} content={introContent.content}/>
     <br/>
     <Sections sections={setTheoryRulesSections}/>
     <br/>

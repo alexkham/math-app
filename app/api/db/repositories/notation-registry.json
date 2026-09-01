@@ -459,7 +459,7 @@
           "sectionTitle": "—",
           "field": "intro (currently empty)",
           "kind": "recommended-note",
-          "status": "recommended",
+          "status": "resolved", "resolved": "2026-08-25", "resolution": "RESOLVED 2026-08-25. The page had an <IntroSection/> rendered WITH NO PROPS AT ALL — that is why the intro was empty; nothing was passed to it. Added an introContent object to getStaticProps, threaded it through the page signature, and passed content to the component, which is the pattern the rest of the site already uses. The legend introduces exactly the five marks the tables use, counted from the data rather than guessed: ∪ 24 times, ∩ 24, ∅ 12, U 12, A^c 10 — union and intersection deferred to set-theory/operations#notation, empty and universal set to set-theory/basics#2, and the complement noted as A^c here, A' on the Venn tools, and overline-A in other texts, all the same set. It also says the universal set is not fixed, which is what makes the complement laws below depend on it. TITLE DELIBERATELY OMITTED: IntroSection renders its title prop as an <h1>, and the page already carries one at line 470, so passing a title would have produced a second h1 on the page. Verified against rendered output: h1 count 1, legend present, 0 literal $math$, 0 unconverted links, 90 KaTeX spans.",
           "why": "page throws ∅, U, A^c at the reader with zero introduction (all sectionsContent prose empty, empty IntroSection); a brief notation legend before the first laws table needed",
           "stage2": null
         }
