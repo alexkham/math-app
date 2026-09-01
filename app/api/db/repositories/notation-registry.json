@@ -586,7 +586,7 @@
           "sectionTitle": "De Morgan's Laws and Their Mirrors",
           "field": "content",
           "kind": "recommended-note",
-          "status": "recommended",
+          "status": "resolved", "resolved": "2026-08-25", "resolution": "RESOLVED 2026-08-25. Note said the mark was A -> B; the page actually uses the double shaft A => B, in 'the failure region of A => B'. Glossed at first use with the reading 'A implies B' and linked to implication#notation, which owns the meta shaft.",
           "why": "logic arrow $A \\to B$ introduced without gloss ('read as: A implies B'); minor",
           "stage2": null
         }
@@ -836,7 +836,7 @@
       "sections": ["0-9: Key Terms, Reciprocals, Basic Rule, Why Multiply by Reciprocal, By Whole Numbers, Whole by Fractions, Mixed Numbers, Simplifying, Word Problems, Summary"],
       "spots": [
         {"sectionId": "1", "sectionTitle": "Reciprocals", "field": "content (line 840)", "kind": "inline-intro", "status": "existing", "quote": "reciprocal … obtained by swapping its numerator and denominator", "stage2": null},
-        {"sectionId": "2", "sectionTitle": "Dividing Fractions — Basic Rule", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "÷ symbol carries the whole page but never remarked upon; equivalent complex-fraction form (at /arithmetic/fractions/complex id 1) not cross-referenced", "stage2": null}
+        {"sectionId": "2", "sectionTitle": "Dividing Fractions — Basic Rule", "field": "content", "kind": "recommended-note", "status": "resolved", "resolved": "2026-08-25", "resolution": "RESOLVED 2026-08-25: added a line naming the three spellings of one operation on this site — a ÷ b, the slash a/b, and the stacked fraction — and pointing at complex fractions, where stacking a fraction over a fraction produces this same rule and the longer bar marks the main division. That also discharges the cross-reference half of the note.", "why": "÷ symbol carries the whole page but never remarked upon; equivalent complex-fraction form (at /arithmetic/fractions/complex id 1) not cross-referenced", "stage2": null}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -998,7 +998,7 @@
       "sections": ["ids 1-11: How to Use, Grid Display, Status Bar, Step-by-Step Panel, Statistics, 6 What is the Sieve?, 7 Why Start at p²?, 8 Prime Numbers and Properties, 9 Algorithm Complexity, 10 Patterns in Prime Distribution, 11 Related"],
       "spots": [
         {"sectionId": "9", "sectionTitle": "Algorithm Complexity", "field": "content (line 618)", "kind": "mention", "status": "existing", "quote": "big-O ($O(n \\log\\log n)$) unintroduced", "stage2": null},
-        {"sectionId": "9", "sectionTitle": "Algorithm Complexity", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "big-O appears cold on an otherwise elementary page; parenthetical gloss would help", "stage2": null}
+        {"sectionId": "9", "sectionTitle": "Algorithm Complexity", "field": "content", "kind": "recommended-note", "status": "resolved", "resolved": "2026-08-25", "resolution": "RESOLVED 2026-08-25: glossed in place as notation for how the work grows with n, ignoring constant factors and slower-growing terms, so it compares methods rather than predicting a running time.", "why": "big-O appears cold on an otherwise elementary page; parenthetical gloss would help", "stage2": null}
       ],
       "recommendations": [],
       "externalNotationLinks": []

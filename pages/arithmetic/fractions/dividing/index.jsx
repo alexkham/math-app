@@ -857,6 +857,8 @@ $$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{a
 
 For example, $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$.
 
+The division sign $\\div$ is one of three spellings for the same operation: $a \\div b$, the slash $a / b$, and the stacked $\\frac{a}{b}$. Writing a fraction over a fraction produces the [complex fraction](!/arithmetic/fractions/complex) form of this same rule, where the longer bar shows which division is the main one.
+
 The mnemonic "keep, change, flip" summarizes the steps: keep the first fraction as is, change division to multiplication, flip the second fraction to its reciprocal.`,
     before: ``,
     after: ``,

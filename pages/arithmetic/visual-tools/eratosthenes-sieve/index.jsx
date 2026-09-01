@@ -164,7 +164,7 @@ The **Fundamental Theorem of Arithmetic** states that every integer greater than
 
     obj9: {
       title: `Algorithm Complexity and Efficiency`,
-      content: `The Sieve of Eratosthenes has time complexity $O(n \\log \\log n)$, where n is the upper limit. This is nearly linear and much faster than testing each number individually with trial division, which takes $O(n \\sqrt{n})$.
+      content: `The Sieve of Eratosthenes has time complexity $O(n \\log \\log n)$, where n is the upper limit. The $O(\\cdot)$ is big-O notation: it names how the work grows as $n$ grows, ignoring constant factors and slower-growing terms, so it compares methods rather than predicting a running time. This is nearly linear and much faster than testing each number individually with trial division, which takes $O(n \\sqrt{n})$.
 
 The efficiency comes from avoiding division entirely. Instead of asking "is this number prime?", the sieve marks multiples using simple addition. Each composite gets marked first by its [smallest prime factor](!#related-concepts), minimizing redundant work.
 

@@ -537,7 +537,7 @@ Held next to [its mirror](!#the-complement-of-a-complement-union-b), the pair sh
       title: `The Complement of A ∩ B′`,
       content: `$(A \\cap B')' = A' \\cup B$: both frames shade three regions, sparing only the A-only crescent. Negating a counterexample recovers the implication.`,
       before: ``,
-      after: `The inner expression $A \\cap B'$ is "in $A$ but not $B$" — the failure region of $A \\Rightarrow B$. Complementing it therefore **asserts** the implication: the shaded three-region set is the material conditional itself, true everywhere except where $A$ holds without $B$.
+      after: `The inner expression $A \\cap B'$ is "in $A$ but not $B$" — the failure region of $A \\Rightarrow B$, read **$A$ implies $B$** and set out at [implication notation](!/logic/propositional-logic/semantics/implication#notation). Complementing it therefore **asserts** the implication: the shaded three-region set is the material conditional itself, true everywhere except where $A$ holds without $B$.
 
 Mechanically it is De Morgan's intersection law plus the cancellation of $(B')'$. This identity is the one most often met outside set theory, since rewriting "$A$ implies $B$" as "not-$A$ or $B$" is the same law in propositional clothing. Its swap-mirror is [the complement of A′ ∩ B](!#the-complement-of-a-complement-intersect-b).`,
       link: '',
