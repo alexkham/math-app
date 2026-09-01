@@ -526,7 +526,7 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `**Modular arithmetic** — arithmetic on remainders. Given a divisor (or modulus) $n$, every integer is replaced by its remainder when divided by $n$, an integer in the range $\\{0, 1, \\dots, n - 1\\}$.
 
-**Modulus / divisor $n$** — the integer you divide by. On this tool, $n$ ranges from $2$ to $9$ (the slice count).
+**Modulus / divisor** $n$ — the integer you divide by. On this tool, $n$ ranges from $2$ to $9$ (the slice count).
 
 **Remainder** — the leftover after integer division. For $a = qn + r$ with $0 \\leq r < n$, the remainder is $r$, written $a \\bmod n = r$.
 
@@ -536,7 +536,7 @@ export async function getStaticProps(){
 
 **Zero class (principal class)** — the class $[0]$, containing $0$ and all multiples of $n$. It's the identity element of the ring $\\mathbb{Z}/n\\mathbb{Z}$ and corresponds to the principal ideal $n\\mathbb{Z}$. The tool highlights this class with a [gold star and warm color](!#the-zero-class-why-its-special).
 
-**$\\mathbb{Z}/n\\mathbb{Z}$** — the integers mod $n$, the set of $n$ equivalence classes with addition and multiplication inherited from $\\mathbb{Z}$.`,
+$\\mathbb{Z}/n\\mathbb{Z}$ — the integers mod $n$, the set of $n$ equivalence classes with addition and multiplication inherited from $\\mathbb{Z}$.`,
       before: ``,
       after: ``,
       link: '',
@@ -670,11 +670,11 @@ The gold styling repays attention during a run, too: each time the placement cro
 
 Try these comparisons:
 
-• **Divisor $2$** — split into even and odd halves. Class $0$ = evens, class $1$ = odds.
+• **Divisor** $2$ — split into even and odd halves. Class $0$ = evens, class $1$ = odds.
 
-• **Divisor $5$** — slice $r$ holds every integer whose last digit is $r$ or $r + 5$. The closest this wheel gets to reading off last digits directly (a mod-$10$ wheel would do it exactly, but the divisor grid stops at $9$).
+• **Divisor** $5$ — slice $r$ holds every integer whose last digit is $r$ or $r + 5$. The closest this wheel gets to reading off last digits directly (a mod-$10$ wheel would do it exactly, but the divisor grid stops at $9$).
 
-• **Divisor $7$** — counting from $1$ takes seven numbers to complete one row across all slices. Mimics the [day-of-week shift](!#what-is-modular-arithmetic).
+• **Divisor** $7$ — counting from $1$ takes seven numbers to complete one row across all slices. Mimics the [day-of-week shift](!#what-is-modular-arithmetic).
 
 • **Same number, different divisors** — keep the count fixed at $30$ and step through divisors $2$ to $9$ to see how class sizes change.`,
       before: ``,
@@ -770,7 +770,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
       title: `Related Concepts`,
       content: `**Greatest common divisor (gcd)** — closely tied to modular arithmetic. The Euclidean algorithm computes $\\gcd(a, b)$ using repeated modular reduction. An integer $a$ has a multiplicative inverse mod $n$ iff $\\gcd(a, n) = 1$.
 
-**Euler's totient $\\varphi(n)$** — counts integers in $\\{1, \\dots, n - 1\\}$ that are coprime to $n$. Equivalently, the number of invertible classes in $\\mathbb{Z}/n\\mathbb{Z}$. For prime $n$, $\\varphi(n) = n - 1$.
+**Euler's totient** $\\varphi(n)$ — counts integers in $\\{1, \\dots, n - 1\\}$ that are coprime to $n$. Equivalently, the number of invertible classes in $\\mathbb{Z}/n\\mathbb{Z}$. For prime $n$, $\\varphi(n) = n - 1$.
 
 **Fermat's little theorem** — for prime $p$ and $a$ coprime to $p$: $a^{p-1} \\equiv 1 \\pmod p$. Generalizes to Euler's theorem $a^{\\varphi(n)} \\equiv 1 \\pmod n$.
 
