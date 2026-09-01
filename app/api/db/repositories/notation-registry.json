@@ -349,7 +349,7 @@
           "sectionTitle": "Countable Sets",
           "field": "content",
           "kind": "recommended-note",
-          "status": "recommended",
+          "status": "resolved", "resolved": "2026-08-25", "resolution": "RESOLVED 2026-08-25 — but NOT where this note said. The page has since gained a notation section that owns ℵ₀, and it renders before id 7, so the summary-table gap the note describes is already closed. The real cold use is in id 5 (Uncountable Sets), which renders BEFORE the notation section and introduces 2^ℵ₀ with no gloss. Fixed there: aleph-null is now named in place as the Hebrew letter aleph carrying subscript zero, the size of ℕ and the smallest infinite cardinal.",
           "why": "ℵ₀ first appears in id 7 summary table without prose introduction of aleph notation; a one-liner here ('aleph-null, symbol for the smallest infinite cardinal') would bridge it",
           "stage2": null
         }
@@ -392,7 +392,7 @@
           "sectionTitle": "Summary: How Sets Relate",
           "field": "summaryTable",
           "kind": "recommended-note",
-          "status": "recommended",
+          "status": "resolved", "resolved": "2026-08-25", "resolution": "RESOLVED 2026-08-25: defined in place, in the same summary-table row that uses it — the definition column now reads 'same cardinality: |A| = |B|, written A ~ B', so the mark is introduced exactly where a reader first meets it rather than in prose they may not have read.",
           "why": "the ~ equivalence notation appears only in the table and is never introduced on the page; one line defining $A \\sim B$ needed",
           "stage2": null
         }

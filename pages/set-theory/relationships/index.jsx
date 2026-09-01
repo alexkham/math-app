@@ -1092,7 +1092,7 @@ const keyWords = [
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Equivalent sets</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same <a href="/set-theory/cardinality" style="${linkStyle}">cardinality</a>: &nbsp;|A| = |B|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same <a href="/set-theory/cardinality" style="${linkStyle}">cardinality</a>: &nbsp;|A| = |B|, written A ~ B</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{a, b, c} ~ {1, 2, 3}; &nbsp;ℕ ~ ℤ</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equal ⇒ equivalent, but not the other way around</td>
     </tr>

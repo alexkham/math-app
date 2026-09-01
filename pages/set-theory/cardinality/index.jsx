@@ -2835,7 +2835,7 @@ The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument prove
 
 Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
 
-The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, indicating it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
+The cardinality of $\\mathbb{R}$ is denoted $\\mathfrak{c}$ (for continuum) or $2^{\\aleph_0}$, where $\\aleph_0$ — aleph-null, the Hebrew letter aleph carrying subscript zero — is the size of $\\mathbb{N}$ and the smallest infinite cardinal. The second spelling indicates that it equals the cardinality of the [power set](!/set-theory/subsets#5) of $\\mathbb{N}$.
     `,
     before: ``,
     after: ``,
