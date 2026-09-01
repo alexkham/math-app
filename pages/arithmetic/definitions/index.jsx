@@ -287,6 +287,8 @@ export async function getStaticProps() {
 
 [Modular Arithmetic](#category_modular_arithmetic) addresses 4 entries on cyclic number systems: modulus, congruence, remainder, and residue class. These terms define how integers are grouped by their remainders and how arithmetic operates within those groups.
 
+The definitions are written in words, but the lessons they link to are written in symbols. Four carry most of the weight. $b \\mid a$ says **b divides a** — a statement that is true or false, not a number, and the divisor is named first. $a \\equiv b \\pmod{n}$ says $a$ and $b$ leave the same remainder on division by $n$; the modulus rides in parentheses at the end rather than acting as an operator. $a \\bmod n$, without the parentheses, is the remainder itself and so is a number. And $\\frac{a}{b}$ stacks a numerator over a denominator, the bar doing the same work the division sign does. Each is set out where it belongs: [divisibility](!/arithmetic/divisibility#2), [modulo](!/arithmetic/modulo#2) and [fractions](!/arithmetic/fractions#notation).
+
 Each definition includes an intuitive explanation, key properties, examples, and links to the detailed lesson page. Use the search bar or category filters above to navigate.`
   }
 
