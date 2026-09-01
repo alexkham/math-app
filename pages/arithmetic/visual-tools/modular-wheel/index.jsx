@@ -530,7 +530,7 @@ export async function getStaticProps(){
 
 **Remainder** — the leftover after integer division. For $a = qn + r$ with $0 \\leq r < n$, the remainder is $r$, written $a \\bmod n = r$.
 
-**Congruence $a \\equiv b \\pmod n$** — read **$a$ is congruent to $b$ modulo $n$**. True when $a$ and $b$ leave the same remainder when divided by $n$, equivalently when $n$ divides $a - b$.
+**Congruence** $a \\equiv b \\pmod n$ — read $a$ **is congruent to** $b$ **modulo** $n$. True when $a$ and $b$ leave the same remainder when divided by $n$, equivalently when $n$ divides $a - b$.
 
 **Equivalence class / residue class** — the set of all integers sharing the same remainder. There are exactly $n$ classes mod $n$, labeled $[0], [1], \\dots, [n - 1]$.
 
@@ -582,7 +582,7 @@ Idle is also the state to read the geometry in: slice labels outside, row arcs f
 
 • **Numbers in cells** are drawn rotated so they always read upright relative to the slice they sit in. A label like *36* in slice $0$ row $6$ tells you $36 = 6 \\cdot 6 + 0$, the sixth multiple of $6$.
 
-• **Center label** shows **mod $n$** — the modulus currently in effect.
+• **Center label** shows **mod** $n$ — the modulus currently in effect.
 
 Cells are placed in real time as the run progresses. The geometry adapts to the available width: bigger screens get a larger wheel with taller rows; smaller screens compress the row height. The control panel shows a max-count cap for the current divisor — going beyond it would make labels unreadable.`,
       before: ``,
@@ -644,7 +644,7 @@ The emphasis is mathematical, not cosmetic. The zero class is the **principal cl
 
 • It contains the integer $0$, which is the [additive identity](!#equivalence-classes-and-their-structure) of $\\mathbb{Z}/n\\mathbb{Z}$.
 
-• It's the only class where **divisibility by $n$** is true — every member is an exact multiple of $n$.
+• It's the only class where **divisibility by** $n$ is true — every member is an exact multiple of $n$.
 
 • Every other class is the zero class shifted: class $[r] = [0] + r$.
 
@@ -652,7 +652,7 @@ The emphasis is mathematical, not cosmetic. The zero class is the **principal cl
 
 • It's the kernel of the canonical map $\\mathbb{Z} \\to \\mathbb{Z}/n\\mathbb{Z}$ — the integers that get sent to $0$ under modular reduction.
 
-For applications, the zero class is what you test for divisibility, what triggers modular conditions like **check if $n$ is a multiple of $7$**, and what determines whether a number has a [multiplicative inverse](!#related-concepts) in $\\mathbb{Z}/n\\mathbb{Z}$ (nonzero residues coprime to $n$ do; zero never does).`,
+For applications, the zero class is what you test for divisibility, what triggers modular conditions like **check if** $n$ **is a multiple of** $7$, and what determines whether a number has a [multiplicative inverse](!#related-concepts) in $\\mathbb{Z}/n\\mathbb{Z}$ (nonzero residues coprime to $n$ do; zero never does).`,
       before: ``,
       after: `The frozen frame above has the principal class pinned after a full run: 6, 12, 18, 24, 30, 36 sit in the gold-edged slice — the multiples of 6, and nothing else. Every divisibility question about 6 is a question about membership in this one slice.
 
@@ -664,7 +664,7 @@ The gold styling repays attention during a run, too: each time the placement cro
       title: `Adjusting Divisor and Count`,
       content: `Two inputs control the size and shape of the wheel:
 
-• **Count up to** sets the upper bound of the integers placed during a run. Range starts at $1$ and is capped per divisor by a geometric maximum — the cap ensures rows fit at the minimum readable cell height. The cap appears below the input as **max for divisor $n$: M**. Common caps at default width: divisor $2$ allows roughly $80$ numbers, divisor $9$ allows much more since rows are spread across more slices.
+• **Count up to** sets the upper bound of the integers placed during a run. Range starts at $1$ and is capped per divisor by a geometric maximum — the cap ensures rows fit at the minimum readable cell height. The cap appears below the input as **max for divisor** $n$**: M**. Common caps at default width: divisor $2$ allows roughly $80$ numbers, divisor $9$ allows much more since rows are spread across more slices.
 
 • **Divisor (number of slices)** is an eight-button grid for $n = 2, 3, 4, 5, 6, 7, 8, 9$. Picking a new divisor immediately clears any in-progress run and re-divides the wheel. The wheel resizes and re-labels each slice.
 
@@ -690,7 +690,7 @@ Changing the divisor is the tool's most instructive move: the same integers exis
 
 • **Overview (idle)** — appears [before the first run](!#getting-started). Confirms which divisor is selected and prompts you to press Run.
 
-• **Now placing (running)** — shows the [most recent number](!#run-controls-and-speed), its division arithmetic ($n \\div d = q$ remainder $r$), which class it landed in, and which row within that class. [Zero-class hits](!#the-zero-class-why-its-special) get a **divisible by $n$** accent.
+• **Now placing (running)** — shows the [most recent number](!#run-controls-and-speed), its division arithmetic ($n \\div d = q$ remainder $r$), which class it landed in, and which row within that class. [Zero-class hits](!#the-zero-class-why-its-special) get a **divisible by** $n$ accent.
 
 • **Class details (hover/pin)** — appears whenever a slice is [hovered or pinned](!#hovering-and-pinning-classes). Shows the formula, first eight examples, and any run-placed numbers in this class.
 
@@ -710,7 +710,7 @@ The fundamental notation is **congruence**:
 
 $$a \\equiv b \\pmod n \\iff n \\mid (a - b)$$
 
-That is, $a$ and $b$ are **congruent modulo $n$** when their difference is a multiple of $n$, equivalently when they leave the same remainder.
+That is, $a$ and $b$ are **congruent modulo** $n$ when their difference is a multiple of $n$, equivalently when they leave the same remainder.
 
 Examples:
 
