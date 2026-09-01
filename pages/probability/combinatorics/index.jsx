@@ -865,6 +865,8 @@ In classical probability models, probabilities are computed using
 This formula applies only when the [sample space](!/probability/sample-space) $\\Omega$ is finite and all outcomes are equally likely.
 Under these conditions, probability values are determined entirely by counting — the [cardinality bars](!/set-theory/cardinality#notation) $|A|$ and $|\\Omega|$ measure how many outcomes belong to an [event](!/probability/events) and how many outcomes are possible in total.
 
+Read aloud it is **favourable outcomes over possible outcomes**, and that phrasing is where the trouble hides: the equally-likely assumption appears nowhere in the marks. The line looks like a definition of probability and is only a special case of one, so the condition has to travel alongside it in words.
+
 When these assumptions fail, counting alone is no longer sufficient and other probability tools are required.
 `,
       before:``,
