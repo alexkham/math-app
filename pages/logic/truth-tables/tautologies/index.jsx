@@ -384,7 +384,9 @@ export async function getStaticProps() {
 
 Tautologies are also called logically valid formulas. They represent logical truths — statements whose truth depends entirely on their logical structure, not on the meaning of their components. The negation of a tautology is a [contradiction](!/logic/propositional-logic/semantics/contradiction) (always false), and vice versa.
 
-Tautologies play a central role in formal logic: they define the valid inference rules, establish equivalences between formulas, and serve as the axioms of many deductive systems. Recognizing tautologies is essential for constructing sound mathematical proofs.`,
+Tautologies play a central role in formal logic: they define the valid inference rules, establish equivalences between formulas, and serve as the axioms of many deductive systems. Recognizing tautologies is essential for constructing sound mathematical proofs.
+
+Three marks travel with the idea and do not appear in truth tables themselves. The symbol ⊤ names the proposition that is true outright, ⊢P says P can be derived from no assumptions at all, and ⊨P says P holds under every interpretation. The last two look interchangeable and are not — one is about proof, the other about truth. All three are set out in [tautology notation](!/logic/propositional-logic/semantics/tautology#notation).`,
       before: ``,
       after: ``,
       link: ``,

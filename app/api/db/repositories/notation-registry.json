@@ -1228,7 +1228,7 @@
       "template": "tool",
       "sections": ["ids 1-11: 1 What Is a Tautology?, 2 Key Tautological Patterns, 3 Law of Excluded Middle, 4 Implication Comparability, 5 Conjunction Elimination, 6 Hypothetical Syllogism, 7 Modus Ponens, 8 Positive Antecedent, 9 Implication Over Disjunction, 10 Disjunctive Syllogism, 11 Biconditional Decomposition"],
       "spots": [
-        {"sectionId": "1", "sectionTitle": "What Is a Tautology?", "field": "obj1", "kind": "recommended-note", "status": "recommended", "why": "page never mentions ⊤/⊢ though sibling /logic/propositional-logic/semantics/tautology#definition has a full notation section; one-line note or cross-link would tie them together", "stage2": null}
+        {"sectionId": "1", "sectionTitle": "What Is a Tautology?", "field": "obj1", "kind": "recommended-note", "status": "resolved", "resolved": "2026-08-25", "resolution": "Added a closing paragraph to obj1 naming all three marks and linking tautology#notation: ⊤ for the outright-true proposition, ⊢P for derivable from no assumptions, ⊨P for holding under every interpretation, with the point that the two turnstiles look interchangeable and are not. Written in plain Unicode, not $math$, because this page carries only two $ characters in total — the truth-tables family does not use LaTeX in prose.", "why": "page never mentions ⊤/⊢ though sibling /logic/propositional-logic/semantics/tautology#definition has a full notation section; one-line note or cross-link would tie them together", "stage2": null}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -1239,7 +1239,7 @@
       "sections": ["ids 1-12: 1 What Is a Contradiction?, 2 In Proofs and Reasoning, 3 Law of Non-Contradiction, 4 Inconsistent Implications, 5 Denied Disjunction, 6 Self-Contradictory Equivalence, 7 Conjunction Meets De Morgan, 8 Broken Implication Chain, 9 Reordered Chain, 10 Conflicting Equivalences, 11 Asserting Q and ¬Q, 12 Negated Implication Conflict"],
       "spots": [
         {"sectionId": "11", "sectionTitle": "Asserting Q and ¬Q", "field": "obj10 area (line 519)", "kind": "mention", "status": "existing", "quote": "reduces to … P ∧ ⊥ = ⊥ (⊥ used without any on-page introduction)", "stage2": null},
-        {"sectionId": "11", "sectionTitle": "Asserting Q and ¬Q", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "gloss ⊥ on first use or link to the contradiction semantics page's notation section", "stage2": null}
+        {"sectionId": "11", "sectionTitle": "Asserting Q and ¬Q", "field": "content", "kind": "recommended-note", "status": "resolved", "resolved": "2026-08-25", "resolution": "⊥ was genuinely used cold — one occurrence on the whole page, inside 'P ∧ ⊥ = ⊥' in obj12, with no introduction anywhere before it. Glossed in place: ⊥ is the proposition false outright, the mirror of ⊤, and the reason anything conjoined with it collapses; links contradiction#notation. Note the registry recorded this against section 11 but the first and only use is in obj12.", "why": "gloss ⊥ on first use or link to the contradiction semantics page's notation section", "stage2": null}
       ],
       "recommendations": [],
       "externalNotationLinks": []

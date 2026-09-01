@@ -526,7 +526,7 @@ The formula can be rewritten as P ∧ (Q ∧ ¬Q) by factoring out P. Since Q �
 
 But the second conjunct P ∧ Q asserts that both P and Q are true. The first conjunct requires Q to be false; the second requires Q to be true. These conditions are mutually exclusive.
 
-The formula reduces to (P ∧ ¬Q) ∧ (P ∧ Q) = P ∧ (¬Q ∧ Q) = P ∧ ⊥ = ⊥. The conflict between Q and ¬Q makes the formula unsatisfiable.`,
+The formula reduces to (P ∧ ¬Q) ∧ (P ∧ Q) = P ∧ (¬Q ∧ Q) = P ∧ ⊥ = ⊥, where ⊥ is the symbol for the proposition that is false outright — the mirror of ⊤, and the reason anything conjoined with it collapses. The mark is set out in [contradiction notation](!/logic/propositional-logic/semantics/contradiction#notation). The conflict between Q and ¬Q makes the formula unsatisfiable.`,
       before: ``,
       after: ``,
       link: ``,
