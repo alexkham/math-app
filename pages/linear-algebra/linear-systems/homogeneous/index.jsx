@@ -1183,7 +1183,7 @@ The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the 
         id: 'bold-zero',
         tex: `$A\\mathbf{x} = \\mathbf{0}$`,
         read: `A x equals the zero vector`,
-        means: `The boldface is the definition, not styling: $\\mathbf{0}$ is a **column of $m$ zeros**, while a plain $0$ is a single number. Writing $A\\mathbf{x} = 0$ equates a vector with a scalar — the shapes do not match, and the equation only typechecks once the right side is bold.`,
+        means: `The boldface is the definition, not styling: $\\mathbf{0}$ is a **column of** $m$ **zeros**, while a plain $0$ is a single number. Writing $A\\mathbf{x} = 0$ equates a vector with a scalar — the shapes do not match, and the equation only typechecks once the right side is bold.`,
         alsoWritten: `$\\vec{0}$ where the site's [arrow convention](!/linear-algebra/vectors/basic-operations#notation) is in force, and $\\mathbf{0}_m$ when the length needs stating; handwriting has no bold, so an underline or an arrow does the work at the board — which is exactly where the scalar/vector slip happens.`,
         confusedWith: `The zero **matrix** $O$. Same idea, different shape: $O$ is a rectangular array of zeros, $\\mathbf{0}$ a single column, and [matrix operation notation](!/linear-algebra/matrix/operations#notation) reserves the two letters separately for that reason.`,
       },

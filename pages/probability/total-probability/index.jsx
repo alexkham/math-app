@@ -1366,7 +1366,7 @@ Each case contributes its share, and those shares sum to give the complete pictu
           tex:`$\\bigcup_{i=1}^{n} B_i = \\Omega$, $B_i \\cap B_j = \\emptyset$`,
           read:`the cases tile the sample space: together they cover it, pairwise they never overlap`,
           means:`The words "disjoint and exhaustive" from **Splitting a Probability Across Cases** above, written as marks: the enlarged [union](!/set-theory/operations#notation) with index limits collects every case into the whole [sample space](!/probability/sample-space#notation), and the empty pairwise [intersection](!/set-theory/operations#notation) forbids overlap.`,
-          cases:`The overlap condition carries a silent qualifier — $B_i \\cap B_j = \\emptyset$ holds **for $i \\ne j$** — the subscript-pair convention meaning "any two distinct cases"; read without it, the condition would demand $B_i \\cap B_i = \\emptyset$ and annihilate every case. The big $\\bigcup$ is the set world's $\\sum$: same anatomy — running index below, stop above, collecting operator in front.`,
+          cases:`The overlap condition carries a silent qualifier — $B_i \\cap B_j = \\emptyset$ holds for **every distinct pair** $i \\ne j$ — the subscript-pair convention meaning "any two distinct cases"; read without it, the condition would demand $B_i \\cap B_i = \\emptyset$ and annihilate every case. The big $\\bigcup$ is the set world's $\\sum$: same anatomy — running index below, stop above, collecting operator in front.`,
           confusedWith:`A mere list. Writing $B_1, \\dots, B_n$ only names candidates; the two conditions are what make them a **partition** — and the law's conclusion silently fails when the cases leak coverage or double-count an outcome.`,
         },
         {

@@ -1161,7 +1161,7 @@
 // //           formula: '$\\operatorname{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\}$',
 // //           condition: 'dimension $r$ \u2014 the rank',
 // //           strict: true,
-// //           note: 'The reachable outputs. Row-reduce to find which columns hold pivots, then take **those columns of the original $A$** \u2014 not of the echelon form. Row operations change the column space, so the reduced columns span something else entirely. This is the single most common error on the page.',
+// //           note: 'The reachable outputs. Row-reduce to find which columns hold pivots, then take **those columns of the original matrix** $A$ \u2014 not of the echelon form. Row operations change the column space, so the reduced columns span something else entirely. This is the single most common error on the page.',
 // //         },
 // //         {
 // //           name: 'Left null space',
@@ -2193,7 +2193,7 @@
 //           formula: '$\\operatorname{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\}$',
 //           condition: 'dimension $r$ \u2014 the rank',
 //           strict: true,
-//           note: 'The reachable outputs. Row-reduce to find which columns hold pivots, then take **those columns of the original $A$** \u2014 not of the echelon form. Row operations change the column space, so the reduced columns span something else entirely. This is the single most common error on the page.',
+//           note: 'The reachable outputs. Row-reduce to find which columns hold pivots, then take **those columns of the original matrix** $A$ \u2014 not of the echelon form. Row operations change the column space, so the reduced columns span something else entirely. This is the single most common error on the page.',
 //         },
 //         {
 //           name: 'Left null space',
@@ -3229,7 +3229,7 @@ const fourSubspaceCard = {
           formula: '$\\operatorname{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\}$',
           condition: 'dimension $r$ \u2014 the rank',
           strict: true,
-          note: 'The reachable outputs. Row-reduce to find which columns hold pivots, then take **those columns of the original $A$** \u2014 not of the echelon form. Row operations change the column space, so the reduced columns span something else entirely. This is the single most common error on the page.',
+          note: 'The reachable outputs. Row-reduce to find which columns hold pivots, then take **those columns of the original matrix** $A$ \u2014 not of the echelon form. Row operations change the column space, so the reduced columns span something else entirely. This is the single most common error on the page.',
         },
         {
           name: 'Left null space',
