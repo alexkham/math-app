@@ -135,7 +135,7 @@ Below the diagram, the final divisor — the GCD — appears in a purple-bordere
 
     obj7: {
       title: `What Is the Greatest Common Divisor?`,
-      content: `The **greatest common divisor** (GCD) of two integers is the largest integer that divides both of them with no remainder. Equivalently, it is the largest member of their common set of divisors.
+      content: `The **greatest common divisor** (GCD) of two integers $a$ and $b$, written $\\gcd(a, b)$, is the largest integer that divides both of them with no remainder. Equivalently, it is the largest member of their common set of divisors.
 
 For small numbers, you could find the GCD by listing every divisor of each number and picking the biggest one they share. For example:
 

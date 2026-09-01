@@ -105,6 +105,8 @@ Common Divisors mode is excellent for **learning divisibility rules**, finding *
     title: `Understanding Divisibility`,
     content: `A number $a$ is divisible by $b$ if $a ÷ b$ gives a whole number with remainder $0$. In mathematical notation: $a \\div b = q$ with $a = b × q$ for some integer $q$. For example, $24$ is divisible by $6$ because $24 = 6 × 4$.
 
+Written compactly, this is $b \\mid a$ — read **b divides a**. The bar is not a division sign and not a fraction: $b \\mid a$ is a statement that is either true or false, where $a \\div b$ is a number. It is also the reverse of the reading order most people expect, since the divisor comes first. The mark is set out in full at [divisibility notation](!/arithmetic/divisibility#2).
+
 Divisibility is the foundation of many number theory concepts. If $a$ is divisible by $b$, then $b$ is a **factor** of $a$, and $a$ is a **multiple** of $b$. The number $12$ is divisible by $1, 2, 3, 4, 6, 12$—these are all factors of $12$.
 
 Testing divisibility is equivalent to checking if the remainder (modulo) is zero. The calculator uses the modulo operation: if $a \\bmod b = 0$, then $a$ is divisible by $b$. This is why $15 \\bmod 5 = 0$ confirms $15$ is divisible by $5$.

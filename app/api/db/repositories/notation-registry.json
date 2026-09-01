@@ -549,7 +549,8 @@
           "sectionTitle": "Key Terms",
           "field": "content",
           "kind": "recommended-note",
-          "status": "recommended",
+          "status": "resolved",
+          "resolved": "2026-08-25",
           "why": "tool pages use $A'$ for complement while theory pages use $A^c$; one line 'also written $A^c$' would reconcile conventions for learners moving between pages",
           "stage2": null
         }
@@ -935,7 +936,7 @@
       "sections": ["ids 1-10: Getting Started, Single Divisor Mode, Common Divisors Mode, 4 Understanding Divisibility, Rules and Patterns, Reading Results, Fraction Simplification, Prime Testing, Divisibility and Modular Arithmetic, Related"],
       "spots": [
         {"sectionId": "4", "sectionTitle": "Understanding Divisibility", "field": "content (line 106)", "kind": "inline-intro", "status": "existing", "quote": "In mathematical notation: $a \\div b = q$ with $a = b × q$ (does not use $\\mid$ at all)", "stage2": null},
-        {"sectionId": "4", "sectionTitle": "Understanding Divisibility", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "aligning with site-standard $b \\mid a$ notation (and linking /arithmetic/divisibility#2) would unify the tool with the lessons", "stage2": null}
+        {"sectionId": "4", "sectionTitle": "Understanding Divisibility", "field": "content", "kind": "recommended-note", "status": "resolved", "resolved": "2026-08-25", "why": "aligning with site-standard $b \\mid a$ notation (and linking /arithmetic/divisibility#2) would unify the tool with the lessons", "stage2": null}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -1008,7 +1009,7 @@
       "sections": ["ids 1-10: Getting Started, Entering Numbers/Presets, 3 Reading a Division Row, 4 Substitution Arrows, 5 Hovering, 6 Result Banner, 7 What Is the GCD?, 8 Why the Algorithm Works, 9 Special Cases, 10 Related. Key Terms obj0 exists but commented out of render."],
       "spots": [
         {"sectionId": "3", "sectionTitle": "Reading a Division Row", "field": "content (lines 556-558)", "kind": "inline-intro", "status": "existing", "quote": "dividend = divisor · quotient + remainder, each term defined", "stage2": null},
-        {"sectionId": "7", "sectionTitle": "What Is the GCD?", "field": "content (line 624)", "kind": "recommended-note", "status": "recommended", "why": "$\\gcd(\\cdot)$ used without a 'written as' phrase; one clause would match the gcd lesson page's introduction pattern", "stage2": null}
+        {"sectionId": "7", "sectionTitle": "What Is the GCD?", "field": "content (line 624)", "kind": "recommended-note", "status": "resolved", "resolved": "2026-08-25", "why": "$\\gcd(\\cdot)$ used without a 'written as' phrase; one clause would match the gcd lesson page's introduction pattern", "stage2": null}
       ],
       "recommendations": [],
       "externalNotationLinks": []
@@ -1021,7 +1022,7 @@
         {"sectionId": "8", "sectionTitle": "What Is Modular Arithmetic", "field": "content (lines 695-715)", "kind": "inline-intro", "status": "existing", "quote": "The fundamental notation is congruence: $a \\equiv b \\pmod n \\iff n \\mid (a-b)$; also $\\mathbb{Z}/n\\mathbb{Z}$", "stage2": null},
         {"sectionId": "9", "sectionTitle": "Equivalence Classes and Their Structure", "field": "content (lines 725-747)", "kind": "inline-intro", "status": "existing", "quote": "$[r]$ is the set $\\{r + kn\\}$; $\\mathbb{Z} = [0] \\sqcup [1] \\sqcup \\dots$", "stage2": null},
         {"sectionId": "10", "sectionTitle": "Related Concepts", "field": "content (line 759)", "kind": "inline-intro", "status": "existing", "quote": "Euler's totient $\\varphi(n)$", "stage2": null},
-        {"sectionId": "9", "sectionTitle": "Equivalence Classes and Their Structure", "field": "content", "kind": "recommended-note", "status": "recommended", "why": "$\\sqcup$ (disjoint union) appears with no gloss anywhere on the site; parenthetical would keep the page self-contained (notation here is notably more advanced than the rest of the tree)", "stage2": null}
+        {"sectionId": "9", "sectionTitle": "Equivalence Classes and Their Structure", "field": "content", "kind": "recommended-note", "status": "resolved", "resolved": "2026-08-25", "why": "$\\sqcup$ (disjoint union) appears with no gloss anywhere on the site; parenthetical would keep the page self-contained (notation here is notably more advanced than the rest of the tree)", "stage2": null}
       ],
       "recommendations": [],
       "externalNotationLinks": []

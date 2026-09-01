@@ -72,7 +72,7 @@ No setup is required — pick any tab and any button to see the corresponding re
       content: `The category tabs organize all 19 identities into seven groups based on their structural role:
 
 • [Basic Sets](!#the-basic-sets) — the sets $A$ and $B$ themselves, the universal set $U$, and the empty set $\\emptyset$
-• [Complements](!#the-two-complements) — $A'$ and $B'$
+• [Complements](!#the-two-complements) — $A'$ and $B'$, also written $A^c$ and $B^c$ in the [set operations](!/set-theory/operations#notation) lessons; the prime is this tool's house style and the two spellings mean the same thing
 • [Intersection & Union](!#intersection-and-union) — $A \\cap B$ and $A \\cup B$
 • [Differences](!#the-three-differences) — $A \\setminus B$, $B \\setminus A$, and the symmetric difference $A \\triangle B$
 • [Compound](!#compound-expressions) — combined expressions like $A \\cup B'$ and $A' \\cup B$
