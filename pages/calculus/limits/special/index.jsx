@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -747,55 +748,30 @@ Knowing these limits transforms difficult calculations into straightforward appl
 };
 
 
+// FAQ pass: cut six case-A questions — why memorize, (1 − cos x)/x (its h2
+// carries the formula and the answer), the definition of e, growth rates,
+// using special limits, and x·ln(x). Kept four formula-shaped queries: this
+// page titles its sections descriptively ("The Fundamental Trigonometric
+// Limit"), so the formulas people actually search for match no heading.
 const faqQuestions = {
   obj1: {
-    question: "Why should you memorize special limits?",
-    answer: "Special limits resist direct computation—substitution yields indeterminate forms. Their values come from geometric arguments or series expansions. Memorizing them speeds problem-solving, provides building blocks for complex limits, and forms the foundation for derivatives of transcendental functions.",
-    sectionId: "1"
-  },
-  obj2: {
     question: "What is the limit of sin(x)/x as x approaches 0?",
-    answer: "The limit of sin(x)/x as x approaches 0 equals 1, with x measured in radians. This result is proven using the Squeeze Theorem and the unit circle inequality sin(x) < x < tan(x). This limit determines the derivative of sin(x).",
+    answer: "The limit equals 1, with x measured in radians. Direct substitution gives 0/0, so the standard proof uses the unit circle inequality sin x < x < tan x, which rearranges to cos x < sin(x)/x < 1. Since cos x approaches 1, the Squeeze Theorem forces the middle term to 1. This result is what makes the derivative of sin x equal cos x.",
     sectionId: "2"
   },
-  obj3: {
-    question: "What is the limit of (1 - cos x)/x as x approaches 0?",
-    answer: "The limit of (1 - cos x)/x as x approaches 0 equals 0. This is derived by multiplying by the conjugate (1 + cos x)/(1 + cos x), converting to sin²x, then using the fact that sin(x)/x → 1 while sin(x)/(1 + cos x) → 0.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "What is the limit of (e^x - 1)/x as x approaches 0?",
-    answer: "The limit of (e^x - 1)/x as x approaches 0 equals 1. This limit defines the derivative of e^x at x = 0 and is the cornerstone of the property that the exponential function equals its own derivative.",
+  obj2: {
+    question: "What is the limit of (e^x − 1)/x as x approaches 0?",
+    answer: "The limit equals 1. Direct substitution gives 0/0, but the expression is exactly the difference quotient for e^x at x = 0, so the limit is the derivative of e^x there. Its value of 1 is what makes e the unique base whose exponential function is its own derivative, with f(0) = 1.",
     sectionId: "5"
   },
-  obj5: {
-    question: "How is the number e defined using limits?",
-    answer: "The number e can be defined as lim(x→∞)(1 + 1/x)^x = e, or equivalently lim(n→∞)(1 + 1/n)^n = e. This limit arises from compound interest: compounding n times per year at 100% annual rate gives growth factor (1 + 1/n)^n, approaching e ≈ 2.71828.",
-    sectionId: "7"
-  },
-  obj6: {
-    question: "What is the limit of x·ln(x) as x approaches 0+?",
-    answer: "The limit of x·ln(x) as x approaches 0+ equals 0. Although this is a 0·(-∞) form where x vanishes while ln(x) → -∞, the factor x dominates and the product approaches 0. Logarithms lose to any positive power.",
-    sectionId: "8"
-  },
-  obj7: {
-    question: "How do logarithms, polynomials, and exponentials compare in growth rate?",
-    answer: "As x → ∞, the growth hierarchy is: logarithmic ≪ polynomial ≪ exponential. Specifically, ln(x)/x^n → 0 and x^n/e^x → 0 for any n. Exponentials dominate polynomials, which dominate logarithms.",
-    sectionId: "9"
-  },
-  obj8: {
-    question: "How do you use special limits to evaluate other limits?",
-    answer: "Rewrite expressions to match known forms. For example, lim(sin 5x)/(3x) = (5/3)·lim(sin 5x)/(5x) = 5/3·1 = 5/3. Factor coefficients to expose the standard pattern, then apply the memorized result.",
-    sectionId: "10"
-  },
-  obj9: {
-    question: "What is the limit of (a^x - 1)/x as x approaches 0?",
-    answer: "For any base a > 0, the limit of (a^x - 1)/x as x approaches 0 equals ln(a). When a = e, this reduces to 1 since ln(e) = 1. This generalizes the natural exponential limit to arbitrary bases.",
+  obj3: {
+    question: "What is the limit of ln(1+x)/x as x approaches 0?",
+    answer: "The limit equals 1. Substituting u = ln(1 + x) gives x = e^u − 1, and as x approaches 0 so does u, turning the expression into u/(e^u − 1) — the reciprocal of the natural exponential limit, which is also 1. The two results are the same fact viewed from opposite sides.",
     sectionId: "6"
   },
-  obj10: {
-    question: "What is the limit of ln(1+x)/x as x approaches 0?",
-    answer: "The limit of ln(1+x)/x as x approaches 0 equals 1. This can be proven by substituting u = ln(1+x), which transforms the limit into u/(e^u - 1), and as x → 0, u → 0, giving the result 1.",
+  obj4: {
+    question: "What is the limit of (a^x − 1)/x as x approaches 0?",
+    answer: "For any base a > 0, the limit equals ln a. This generalizes the natural exponential limit: setting a = e gives ln e = 1, recovering the familiar result. The appearance of ln a here is why the derivative of a^x is a^x·ln a rather than simply a^x, and why base e is the convenient choice.",
     sectionId: "6"
   }
 }
@@ -871,19 +847,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits/special"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1008,6 +971,22 @@ export default function SpecialPage({seoData, sectionsContent, introContent, obj
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Special Limits FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1045,12 +1024,6 @@ export default function SpecialPage({seoData, sectionsContent, introContent, obj
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

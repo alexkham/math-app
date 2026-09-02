@@ -8,6 +8,8 @@ import React from 'react'
 import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import ContinuousCDFVisualizer from '@/app/components/visualizations/probability/continuous-distribution/CDF/ContinuousCDFVisualizer'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -146,6 +148,81 @@ For detailed comparison of probability functions including integration and diffe
       after: ``,
       link: '',
     },
+
+    obj11: {
+      title: `Continuous Uniform: a Straight Line`,
+      content: `With the default bounds $a = 0$ and $b = 10$, the CDF is $F(x) = \\frac{x - 0}{10 - 0} = \\frac{x}{10}$ on the interval — a straight line of constant slope $0.1$, flat at 0 to the left of $a$ and flat at 1 to the right of $b$.
+
+$F(5) = 0.5$ exactly. Half the probability sits in the first half of the interval, because every part of the interval is equally likely.`,
+      before: ``,
+      after: `The slope *is* the density. The uniform pdf is the constant $\\frac{1}{b-a} = 0.1$, and that constant is precisely the gradient of the line you see — which is the geometric statement of $f(x) = F'(x)$ in its simplest possible case.
+
+The two corners are worth noticing. At $x = a$ and $x = b$ the curve has a kink: it is continuous there, but not differentiable, because the density jumps from 0 to 0.1 and back. A CDF must be continuous for a continuous random variable, but it need not be smooth.`,
+      link: '',
+    },
+
+    obj12: {
+      title: `Normal: the S-Curve and the 68-95-99.7 Rule`,
+      content: `At $\\mu = 0$ and $\\sigma = 1$ the tool plots the window $\\mu \\pm 4\\sigma$. The curve is the familiar sigmoid, symmetric about the mean: $F(0) = 0.5$ exactly, $F(1) = 0.8413$, and $F(-1) = 0.1587$.
+
+The symmetry is the identity $F(-x) = 1 - F(x)$, which is why the two readings above sum to 1.`,
+      before: ``,
+      after: `The empirical rule falls straight out as differences of CDF values: $F(1) - F(-1) = 0.6827$, $F(2) - F(-2) = 0.9545$, $F(3) - F(-3) = 0.9973$. Those are the 68%, 95% and 99.7% figures, read off this one curve rather than memorised.
+
+One implementation detail is worth knowing, because it explains why a normal CDF is always a numerical answer and never a formula. The Gaussian density has no elementary antiderivative, so $F$ cannot be written in closed form with the usual functions. The tool evaluates it with an Abramowitz and Stegun approximation to the error function, accurate to about $1.5 \\times 10^{-7}$ — which is why the readings above match published tables to four decimals.
+
+The steepest point is at $x = \\mu$, where the density peaks. The inflection points, where the curve stops steepening and starts flattening, sit at $\\mu \\pm \\sigma$ — so $\\sigma$ is readable off the CDF's shape, not just off the pdf.`,
+      link: '',
+    },
+
+    obj13: {
+      title: `Exponential: Fast Rise, Asymptotic Tail`,
+      content: `At $\\lambda = 1$ the CDF is $F(x) = 1 - e^{-\\lambda x}$ and the tool plots $x$ from 0 out to $5/\\lambda$. It climbs steeply at first, then flattens.
+
+$F(1) = 1 - e^{-1} = 0.6321$: about 63.2% of the probability is used up within one mean lifetime $1/\\lambda$, whatever $\\lambda$ is.`,
+      before: ``,
+      after: `The median sits at $\\frac{\\ln 2}{\\lambda} = 0.6931$, noticeably to the left of the mean $\\frac{1}{\\lambda} = 1$. That gap is the signature of a right-skewed distribution: a long thin tail pulls the mean above the halfway point.
+
+The curve never reaches 1. At the right edge of the plotted window $F \\approx 0.9931$, and the remaining $0.0069$ is spread over the infinite tail beyond it. Like the geometric on the discrete page, the support is unbounded, so the tool draws a finite window and the tail is negligible rather than absent.
+
+The memoryless property is what the shape encodes: $P(X > s + t \\mid X > s) = P(X > t)$. Slide the origin anywhere along the curve, rescale so it starts at 0 again, and you get the same curve back. A component that has already survived an hour is exactly as likely to survive the next hour as a brand new one.`,
+      link: '',
+    },
+  }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The live chart is recharts, which cannot be rendered to a string at build
+     time, so continuousCdfDiagrams.js ports the plot: the component's own three
+     data builders, evaluated at its default sliders, drawn from the component's
+     own exported CDF functions with the visual configuration it gives recharts. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: continuousCdfDiagrams[key], caption, text })
+
+  const stateUnits = {
+    uniform: unit('uniform', 'Continuous uniform, a = 0 to b = 10',
+      'A straight line of slope 0.1 between the bounds, flat at 0 before a and flat at 1 after b. ' +
+      'F(5) = 0.5 exactly, and the slope of the line is the density 1/(b-a).'),
+    normal: unit('normal', 'Normal, mean 0, standard deviation 1',
+      'The sigmoid, symmetric about the mean: F(0) = 0.5, F(1) = 0.8413, F(-1) = 0.1587. Their ' +
+      'difference, 0.6827, is the 68% of the empirical rule.'),
+    exponential: unit('exponential', 'Exponential, lambda = 1',
+      'A fast rise then a long flattening: F(1) = 0.6321 at one mean lifetime, and the right edge of ' +
+      'the window is still only 0.9931. The median, ln2 = 0.6931, sits left of the mean.'),
+  }
+
+
+  /* ---- per-distribution notes appended to the tool's own explanation (Line 1)
+     The component already had `explanationsOverride`, but that REPLACES its
+     built-in text. An additive `explanationsAppend` prop was added so the tool's
+     explanation survives and this link is appended to it. The panel renders
+     through processContent, so these use markdown anchors. */
+  const note = (slug, label) =>
+    ` [Learn more about ${label}](!#${slug}) &middot; [compare all three](!#comparing-curve-shapes)`
+
+  const explanationsAppend = {
+    uniform: note('continuous-uniform', 'the continuous uniform CDF'),
+    normal: note('normal', 'the normal CDF'),
+    exponential: note('exponential', 'the exponential CDF'),
   }
 
   const faqQuestions = {
@@ -267,6 +344,8 @@ For detailed comparison of probability functions including integration and diffe
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanationsAppend,
       introContent,
       faqQuestions,
       schemas,
@@ -275,20 +354,51 @@ For detailed comparison of probability functions including integration and diffe
         description: "Visualize smooth cumulative distribution functions for continuous probability distributions. Adjust parameters, explore curves, calculate probabilities.",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools/cdf/continuous",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="16" x2="74" y2="16" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="3,2.5"/><path d="M 14 60 C 26 60, 30 20, 44 18 C 56 16.5, 62 16, 72 16" fill="none" stroke="#97C459" stroke-width="2.2"/><line x1="14" y1="10" x2="14" y2="66" stroke="#B5D4F4" stroke-width="1"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="8" y="18" font-family="Georgia,serif" font-size="7" fill="#B5D4F4" text-anchor="middle">1</text></svg>`,
+        category: "Probability Functions & CDF",
         name: "Continuous Distributions CDF Visualizer"
       },
     }
   }
 }
 
-export default function CDFContinuousVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function CDFContinuousVisualizerPage({seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit slug list
+  const genericSections = [
+    plain('obj1', 'selecting-a-distribution'),
+    plain('obj2', 'adjusting-parameters'),
+    plain('obj3', 'reading-smooth-cdf-curves'),
+    plain('obj4', 'continuous-vs-discrete-cdfs'),
+    plain('obj5', 'finding-cumulative-probabilities'),
+    plain('obj6', 'comparing-curve-shapes'),
+    stateRow('obj11', 'continuous-uniform', 'uniform'),
+    stateRow('obj12', 'normal', 'normal'),
+    stateRow('obj13', 'exponential', 'exponential'),
+    plain('obj7', 'parameter-effects-on-shape'),
+    plain('obj8', 'what-is-a-continuous-cdf'),
+    plain('obj9', 'cdf-and-pdf'),
+    plain('obj10', 'related-tools-and-concepts'),
+  ]
 
   return (
     <>
@@ -343,7 +453,7 @@ export default function CDFContinuousVisualizerPage({seoData, sectionsContent, i
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function(CDF) of Continuous Distributions</h1>
       
       <div style={{transform:'scale(0.8)'}}>
-        <ContinuousCDFVisualizer/>
+        <ContinuousCDFVisualizer explanationsAppend={explanationsAppend}/>
       </div>
       
       <br/>

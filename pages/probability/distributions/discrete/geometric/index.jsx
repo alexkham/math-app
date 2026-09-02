@@ -858,6 +858,7 @@ import GeometricDistributionCalculator from '@/app/components/calculators/probab
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1396,26 +1397,31 @@ const geometricExplanations = {
   "Interpretation": "• Mean (μ = 1/p): Expected number of trials until first success\n• Variance (σ² = (1-p)/p²): Variability in number of trials needed\n• Std Dev (σ): Typical deviation from expected trials\n• Chart: Shows how probability decreases as trial number increases - first few trials most likely"
 };
 
+  // FAQ pass: the definition, the PMF, the mean and "when to use" each name
+  // their own h2. Kept the memoryless property — Key Properties is commented
+  // out of the render array, so no live heading names it — and led with the
+  // two rival conventions, which the notation section catalogues and no
+  // heading mentions at all.
   const faqQuestions = {
     obj1: {
-      question: "What is the geometric distribution?",
-      answer: "The geometric distribution models the number of trials needed until the first success occurs in a sequence of independent Bernoulli trials. Unlike the binomial distribution where trials are fixed, the geometric distribution continues until success happens. It has one parameter p (probability of success on each trial)."
+      question: "Does the geometric distribution count trials or failures?",
+      answer: "Both conventions exist, and the declaration Geom(p) does not say which. Under the trials convention X counts trials up to and including the first success; under the failures convention it counts failures before it. Three fingerprints settle it: the support starts at 1 or at 0, the pmf exponent is k−1 or k, and the mean is 1/p or q/p.",
+      sectionId: "15"
     },
     obj2: {
-      question: "What is the geometric probability formula?",
-      answer: "The probability of first success on trial k is P(X = k) = (1-p)^(k-1) × p, where p is the success probability. This formula multiplies the probability of k-1 failures by the probability of success on trial k. The support is all positive integers: 1, 2, 3, ..."
+      question: "What is the memoryless property?",
+      answer: "Past failures carry no information: P(X > m + n | X > m) = P(X > n). After a run of failures the wait restarts clean, with the same distribution it had at the start. The proof is one substitution — with P(X > k) = q^k, the left side becomes q^(m+n)/q^m = q^n. It refutes the intuition that a long streak makes success due.",
+      sectionId: "15"
     },
     obj3: {
-      question: "How do you find the mean of a geometric distribution?",
-      answer: "The mean (expected value) of a geometric distribution is E[X] = 1/p, where p is the probability of success. If success probability is 1/6 (like rolling a specific number on a die), you expect to need 6 trials on average. The smaller p is, the more trials you expect to need."
+      question: "What is the probability of needing more than k trials?",
+      answer: "q^k, under the trials convention — the cleanest tail formula any distribution owns. Surviving k trials without success means k straight failures, each with probability q = 1 − p, so P(X > k) = q^k. That single expression is also what makes the memoryless identity fall out in one substitution.",
+      sectionId: "5"
     },
     obj4: {
-      question: "What is the memoryless property?",
-      answer: "The memoryless property means that the probability of success in future trials doesn't depend on how many failures have already occurred. Mathematically: P(X > m + n | X > m) = P(X > n). The process 'resets' after each failure—past failures don't affect future success chances."
-    },
-    obj5: {
-      question: "When should you use the geometric distribution?",
-      answer: "Use the geometric distribution when counting trials until the first success, with independent trials having constant success probability. Common examples include: number of sales calls until first sale, items inspected until finding first defect, or coin flips until first heads. The key distinction from binomial is that trials continue until success rather than being fixed in advance."
+      question: "Is the geometric distribution the only memoryless distribution?",
+      answer: "Among discrete distributions, yes — no other discrete distribution satisfies the identity. It has a continuous twin, though: the [exponential](!/probability/distributions/continuous/exponential) owns the same property with real-valued slots, and is likewise the only continuous distribution that does. Memorylessness picks out exactly one distribution on each side of the discrete/continuous line.",
+      sectionId: "15"
     }
   }
 
@@ -1494,19 +1500,6 @@ const geometricExplanations = {
           "item": "https://www.learnmathclass.com/probability/distributions/discrete/geometric"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1676,6 +1669,22 @@ export default function GeometricDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Geometric Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1709,13 +1718,6 @@ export default function GeometricDistributionPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

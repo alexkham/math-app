@@ -10,6 +10,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -516,40 +517,30 @@ Understanding $f'$ as a function—not just a computation applied at isolated po
 
 
 
+// FAQ pass: all seven originals restated their own h2 — the definition,
+// computing from the definition, graphing f' from f, graphing f from f',
+// the f/f' relationship, rate of change, and continuity of f' (whose
+// section opens with that exact question). Replaced with three traps from
+// the notation section and the one buried consequence of Darboux's theorem.
 const faqQuestions = {
   obj1: {
-    question: "What is the derivative function?",
-    answer: "The derivative function f'(x) is defined by the limit of the difference quotient evaluated at variable x rather than a fixed point. Wherever this limit exists and is finite, f'(x) gives the slope of f at x. The domain of f' is all points where f is differentiable.",
-    sectionId: "1"
+    question: "What does the vertical bar in dy/dx|ₓ₌ₐ mean?",
+    answer: "It means evaluate the derivative at x = a, after differentiating. Prime notation has an input slot, so f′(a) substitutes directly, but dy/dx names no slot — the bar supplies the missing “now substitute” instruction. It is not an absolute value or a divider, and it must sit outside a finished derivative: substituting a first leaves a constant, whose derivative is 0.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you find the derivative function from the definition?",
-    answer: "Apply the limit f'(x) = lim(h→0) [f(x+h) - f(x)]/h with x as a free variable. For f(x) = x², expanding gives (2xh + h²)/h = 2x + h, and the limit is 2x. The result is a function that outputs the slope at any input x.",
-    sectionId: "2"
+    question: "What is the difference between f′(a) and the derivative of f(a)?",
+    answer: "f′(a) means differentiate f first, then substitute a — the prime binds to the function, not to the value. The derivative of f(a) is something else entirely: f(a) is a fixed number, and the derivative of a constant is 0. Evaluation always comes after differentiation, which is why the prime is attached to f rather than to f(a).",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you graph f' from the graph of f?",
-    answer: "Where f is increasing, f' is positive (above x-axis). Where f is decreasing, f' is negative. Steep sections give large |f'|; flat sections give f' near zero. Local extrema of f correspond to zeros of f'. Concavity of f determines whether f' is increasing or decreasing.",
-    sectionId: "3"
+    question: "What is the symmetric difference quotient?",
+    answer: "It is the two-sided version of the difference quotient, [f(x+h) − f(x−h)]/(2h), which steps forward and backward by h instead of forward only. Its limit is the same derivative, but for a fixed h it approximates the slope one order more accurately, so numerical differentiation almost always uses it. It can also return a value where no derivative exists.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "How do you reconstruct f from f'?",
-    answer: "Where f' is positive, f rises; where f' negative, f falls. Sign changes of f' indicate extrema of f. The magnitude of f' controls steepness. Where f' is increasing, f is concave up. The vertical position of f is undetermined—any constant can be added.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the relationship between f and f'?",
-    answer: "Zeros of f' correspond to horizontal tangents on f. Sign changes of f' indicate direction changes of f. Extrema of f' correspond to inflection points of f. The derivative encodes the complete shape of f up to vertical translation.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How is the derivative a rate of change function?",
-    answer: "When f models a varying quantity, f'(x) models how fast it changes at each x. For position s(t), the derivative s'(t) is velocity as a function of time. For cost C(x), the derivative C'(x) is marginal cost as a function of production level.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "Must the derivative function be continuous?",
-    answer: "No. A function can be differentiable everywhere yet have a discontinuous derivative. However, Darboux's theorem says f' always has the intermediate value property—it cannot have jump discontinuities, only oscillatory ones. Functions with continuous derivatives form class C¹.",
+    question: "Can a derivative have a jump discontinuity?",
+    answer: "No. Darboux's theorem says every derivative has the intermediate value property: if f′ takes two values on an interval, it takes every value between them, and a jump would skip values. Derivatives can still be discontinuous — x²sin(1/x) is [differentiable](!/calculus/derivatives/differentiability) everywhere yet its derivative oscillates at 0 — but only oscillatory discontinuities are possible.",
     sectionId: "7"
   }
 }
@@ -624,19 +615,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/function"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -757,6 +735,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Derivative Function FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -795,12 +789,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

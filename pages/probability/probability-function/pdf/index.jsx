@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -857,26 +858,37 @@ The goal is not to catalog distributions, but to understand what a PDF is, how i
 }
 
 
+// FAQ pass: the definition, the axioms and the CDF connection each name
+// their own h2. Kept the point-probability and density-above-1 questions —
+// this is the dedicated page for densities, so it takes both from the
+// bridge pages that were carrying them (probability/sets and the parent
+// probability-function). Anchors avoid obj2 and obj14, which exist in
+// sectionsContent but are commented out of the render array.
 const faqQuestions = {
   obj1: {
-    question: "What is a probability density function (PDF)?",
-    answer: "A probability density function f_X(x) describes how probability is distributed across a continuous random variable. Unlike discrete probability, density at a point is not itself a probability. Probability is obtained by integrating the PDF over an interval: P(a less than or equal to X less than or equal to b) equals the integral of f_X(x) from a to b."
+    question: "Why is the probability at a single point zero for a continuous variable?",
+    answer: "Because probability is the area under the density, and a single point has no width. Integrating f over an interval of zero length gives zero, whatever the density's height there. This does not mean the value cannot occur — every observation lands on some point. It means probability for a continuous variable lives on intervals, never on individual points.",
+    sectionId: "8"
   },
   obj2: {
-    question: "Why is the probability at a single point zero for a continuous random variable?",
-    answer: "For a continuous random variable, a single point has no width, so the integral of the PDF over that single point is zero. Probability is the area under the PDF, and the area of a line segment of zero width is zero. Probability only exists across intervals, not at individual points."
+    question: "Can a PDF value exceed 1?",
+    answer: "Yes. A PMF returns probabilities, so its values are capped at 1; a PDF returns density, which has no such ceiling. What must equal 1 is the total area, not any height. A [uniform distribution](!/probability/distributions/continuous/uniform) on [0, 0.1] has f(x) = 10 across that interval — perfectly valid, since 10 × 0.1 = 1.",
+    sectionId: "5"
   },
   obj3: {
-    question: "What two axioms must every valid PDF satisfy?",
-    answer: "First, the PDF must be non-negative everywhere: f_X(x) greater than or equal to zero for all x. Second, the total area under the curve must equal one: the integral of f_X(x) from negative infinity to positive infinity equals 1. Any function that fails either condition is not a valid probability density function."
+    question: "Does it matter whether you use < or ≤ for a continuous variable?",
+    answer: "No — they give identical answers. P(X < a) and P(X ≤ a) differ by the single point a, which carries zero probability, so all four of <, ≤, >, ≥ agree. This is the opposite of the discrete case, where including or excluding an endpoint changes the answer by that value's whole probability.",
+    sectionId: "8"
   },
   obj4: {
-    question: "How are the PDF and CDF related?",
-    answer: "The CDF is the integral of the PDF from negative infinity up to x, and the PDF is the derivative of the CDF. This relationship is an application of the Fundamental Theorem of Calculus to probability: integration accumulates density into cumulative probability, and differentiation recovers the density."
+    question: "What does the value of a PDF actually tell you?",
+    answer: "A rate, not a probability. f(5) = 0.8 means the density at 5 is 0.8 — roughly, probability per unit of x in that neighborhood — not that anything has probability 0.8. To get a probability you integrate over an interval. Saying “the probability at x = 5 is 0.8” is the phrasing to avoid.",
+    sectionId: "1"
   },
   obj5: {
-    question: "Can a PDF value exceed 1?",
-    answer: "Yes. Unlike a PMF, whose values are probabilities and must satisfy p(x) less than or equal to 1, a PDF gives density and can take any non-negative value. For example, the uniform distribution on the interval from 0 to 0.1 has f(x) equal to 10. What must equal 1 is the total area under the curve, not the height."
+    question: "Why does the change-of-variables formula need an absolute value?",
+    answer: "To keep the density non-negative. Transforming a variable multiplies the density by the derivative of the inverse map, and that derivative is negative whenever the transformation reverses direction. Without the absolute value the result would be a negative density, violating the [axioms](!/probability/axioms). The bars record that only the magnitude of the stretch matters, not its orientation.",
+    sectionId: "11"
   },
 }
 
@@ -952,19 +964,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/probability/probability-function/pdf"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1101,6 +1100,22 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
           sectionsContent.obj13.content,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`PDF FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'14',
     //     title:sectionsContent.obj14.title,
@@ -1176,13 +1191,6 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

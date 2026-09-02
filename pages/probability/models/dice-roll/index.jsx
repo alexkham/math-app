@@ -693,6 +693,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -844,26 +845,27 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: "what is being modeled", "assumptions", "what distributions"
+  // (two headings) and "what it is used for" each name their own h2. Kept
+  // the coin-toss comparison — no heading mentions it, and this page owns it
+  // as the generalization rather than the hub, since it is not a symmetric
+  // pairing. The biased-die variation and the continuous limit both defer
+  // to the coin-toss page, which already carries those lessons.
   const faqQuestions = {
     obj1: {
-      question: "What is the dice roll probability model?",
-      answer: "The dice roll model represents a single random trial with a fixed, finite number of possible outcomes. Each trial produces exactly one outcome from mutually exclusive categories. It abstracts away physical details and keeps only the structure of a finite multi-outcome mechanism, typically with outcomes labeled 1 through 6."
+      question: "How is the dice roll model different from the coin toss model?",
+      answer: "More than two outcomes, and that changes the kind of reasoning available. With two outcomes everything reduces to success-or-failure; with six, events involve grouping and comparison — “even”, “greater than four”, “not a one”. The outcomes are also categories rather than an ordered scale by default. It is the bridge from binary models to general discrete ones.",
+      sectionId: "10"
     },
     obj2: {
-      question: "What assumptions does the dice roll model make?",
-      answer: "The model assumes: exactly one outcome occurs in each roll, all listed outcomes are mutually exclusive and exhaustive, the probability assigned to each outcome is fixed, and rolls are independent when repeated. These assumptions are part of the model definition—changing any of them produces a different model."
+      question: "Why isn't the sum of two dice uniform when each die is?",
+      answer: "Because the sum can be reached in different numbers of ways. There is one way to make 2 and one to make 12, but six ways to make 7, so 7 is six times as likely. The uniformity belongs to the individual die; the distribution of the sum depends on how outcomes are combined, not on the die itself.",
+      sectionId: "8"
     },
     obj3: {
-      question: "How is the dice roll model different from the coin toss model?",
-      answer: "The dice roll model has more than two possible outcomes, introducing genuinely categorical behavior where outcomes are not ordered by default. Events naturally involve grouping and comparison rather than simple success-failure logic. It forms a bridge between binary models and more general discrete models."
-    },
-    obj4: {
-      question: "What distributions can be created from dice rolls?",
-      answer: "A single roll with uniform probabilities produces a discrete uniform distribution. Repeated rolls can create: sums producing triangular or normal-like shapes, counts of specific faces (binomial-type), maximum or minimum values, and aggregated values that approximate continuous distributions through rescaling."
-    },
-    obj5: {
-      question: "What is the dice roll model used for?",
-      answer: "The model is used for situations involving finite distinct categories from a single random mechanism: modeling categorical outcomes, sampling from finite populations, constructing discrete distributions, studying aggregation effects across trials, and providing a foundation for simulation and Monte Carlo methods."
+      question: "Are the numbers on a die ordered, or just labels?",
+      answer: "By default they are labels. The model treats the six outcomes as mutually exclusive categories, and nothing in it requires 3 to sit between 2 and 4. Order enters only when you define a random variable that uses it — a maximum, a sum, a comparison. The faces could be colors and the model would be unchanged.",
+      sectionId: "2"
     }
   }
 
@@ -940,19 +942,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/models/dice-roll"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1390,6 +1379,22 @@ export default function DiceRollPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Dice Roll Model FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,
@@ -1472,13 +1477,6 @@ export default function DiceRollPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

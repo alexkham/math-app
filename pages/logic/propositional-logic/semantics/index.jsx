@@ -162,8 +162,8 @@ export default function LogicPage({
     title:"Logical Equivalences",
     link:'/logic/propositional-logic/semantics/equivalences',
     content:`Logical equivalences are statements in propositional logic that always have the same truth value regardless of the truth values of their individual components. 
-   If two propositions $A$ and $𝐵$ are logically equivalent, we write:$A≡B$.      
-This means that for every possible truth assignment,$A$ and $𝐵$ yield the same truth value.
+   If two propositions $A$ and $B$ are logically equivalent, we write:$A≡B$.      
+This means that for every possible truth assignment,$A$ and $B$ yield the same truth value.
 Logical equivalences form the foundation of [propositional logic laws](!/logic/propositional-logic#laws). Each logical law is a logical equivalence that helps us simplify, manipulate, or prove logical expressions.
 However, not all logical equivalences are laws. Some are specific derivations that are still true but are not considered "fundamental" enough to be named as laws.
 Logical equivalences are essential in **mathematical logic**, shaping both **syntax** and **semantics**. Syntactically, they allow transformations between logically identical formulas, crucial for **normal forms** like CNF and DNF. Semantically, they ensure truth preservation across interpretations, making them fundamental in [truth tables](!/logic/truth-tables) and **model theory**. In **proof techniques**, equivalences justify valid transformations within formal systems, aiding in **inferences** and **proof simplifications**. By bridging **truth conditions** with **formal derivations**, logical equivalences unify reasoning in propositional logic, predicate logic, and beyond.
@@ -185,7 +185,7 @@ A proposition that is **always true**, no matter what.
 A proposition is valid if it is true in all possible interpretations—in other words, if it is a [tautology](!/logic/propositional-logic/semantics/tautology).
 If a proposition is valid, it means there is no possible scenario where it is false.
 
-\t\t\t\t\t\t$𝑝∨¬𝑝$
+\t\t\t\t\t\t$p∨¬p$
 (Law of the Excluded Middle) is valid because it’s always true.
 
 ## 2. [Contradiction](!/logic/propositional-logic/semantics/contradiction) 
@@ -196,7 +196,7 @@ A proposition that is **always false**, no matter what.
 **Unsatisfiability and Contradictions**
 A proposition is unsatisfiable if it is false in every possible interpretation—which means it is a contradiction.
 
-$𝑝∧¬𝑝$ is unsatisfiable because there is no way to make it true.
+$p∧¬p$ is unsatisfiable because there is no way to make it true.
 
 ## 3. **Contingency** 
 A proposition that is **sometimes true and sometimes false**, depending on the values of its variables. Example:  
@@ -207,7 +207,7 @@ A proposition that is **sometimes true and sometimes false**, depending on the v
 A proposition is satisfiable if there is at least one interpretation where it is true.Otherwise it would be [contradiction](!/logic/propositional-logic/semantics/contradiction).
 A contingent proposition (one that is sometimes true and sometimes false) is always satisfiable because it has at least one true case.
 
-$𝑝∨𝑞$ is satisfiable because it’s true in cases where either $𝑝$ or $𝑞$ is true.
+$p∨q$ is satisfiable because it’s true in cases where either $p$ or $q$ is true.
 
 **These three categories exhaust all possibilities** for a proposition in classical logic. Every proposition must be one of these. 
 

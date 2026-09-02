@@ -853,6 +853,7 @@ import CalculatorInstructions from '@/app/components/calculators/CalculatorInstr
 import NegativeBinomialCalculator from '@/app/components/calculators/probability/distributions/NegativeBinomialCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -1382,26 +1383,32 @@ const negativeBinomialExplanations = {
   "Interpretation": "• Mean (μ = r(1-p)/p): Expected number of failures before achieving r successes\n• Variance: Measure of variability in failure count\n• Std Dev: Typical deviation from expected failures\n• Chart: Shows probability distribution of failures - extends geometric distribution to multiple successes"
 };
 
+  // FAQ pass: the definition, the PMF, the mean and "when to use" each name
+  // their own h2. Kept the geometric relationship — Special Cases and
+  // Related Distributions are both commented out of the render array, so no
+  // live heading serves it. The trials-versus-failures ambiguity is
+  // explained on the geometric page and only referenced here; what this page
+  // owns is the shifted coefficient and the shifted support.
   const faqQuestions = {
     obj1: {
-      question: "What is the negative binomial distribution?",
-      answer: "The negative binomial distribution models the number of trials needed to achieve a fixed number of successes (r) in independent Bernoulli trials. Unlike binomial where trials are fixed, negative binomial continues until r successes occur. It generalizes the geometric distribution, which is the special case when r = 1."
+      question: "What is the difference between the binomial and negative binomial?",
+      answer: "What is held fixed. The [binomial](!/probability/distributions/discrete/binomial#15) fixes the number of trials and counts successes; the negative binomial fixes the number of successes and counts trials. Everything else follows from that swap — the binomial's support is bounded by n, while the negative binomial's runs upward without limit, since any number of trials might be needed.",
+      sectionId: "15"
     },
     obj2: {
-      question: "What is the negative binomial probability formula?",
-      answer: "The probability of needing exactly k trials to get r successes is P(X = k) = C(k-1, r-1) × p^r × (1-p)^(k-r), where k ≥ r. The binomial coefficient counts ways to arrange r-1 successes in the first k-1 trials (the k-th trial must be the r-th success)."
+      question: "How is the negative binomial related to the geometric?",
+      answer: "The geometric is the case r = 1: NB(1, p) = [Geom(p)](!/probability/distributions/discrete/geometric#15), conventions and all. Going the other way, a negative binomial variable is the sum of r independent geometrics — wait for the first success, then start over and wait for the second, r times. That is why the mean is r/p, exactly r times the geometric's 1/p.",
+      sectionId: "15"
     },
     obj3: {
-      question: "How do you find the mean of a negative binomial distribution?",
-      answer: "The mean (expected value) is E[X] = r/p, where r is the target number of successes and p is the probability of success per trial. This equals r times the geometric mean (1/p), since achieving r successes is like waiting for r independent geometric random variables."
+      question: "Why is the coefficient C(k−1, r−1) and not C(k, r)?",
+      answer: "Because the last trial is pinned. The k-th trial must be the r-th success, or the sequence would have stopped earlier — so only the first k−1 trials are free to arrange, and only r−1 successes go among them. Writing C(k, r) counts sequences ending in a failure, which never stop at k. The shift is the mathematics, not a typo.",
+      sectionId: "4"
     },
     obj4: {
-      question: "How is negative binomial related to geometric distribution?",
-      answer: "The geometric distribution is a special case of negative binomial with r = 1 (waiting for the first success). Negative binomial can be viewed as the sum of r independent geometric random variables. When r = 1, NegBin(1, p) = Geom(p), and both mean and variance formulas reduce to their geometric equivalents."
-    },
-    obj5: {
-      question: "When should you use the negative binomial distribution?",
-      answer: "Use negative binomial when counting trials until achieving a fixed number of successes, with independent trials having constant success probability. Common applications include: number of sales calls until reaching a quota, items inspected until finding r defects, or attempts until achieving r wins. It differs from binomial where the number of trials (not successes) is fixed."
+      question: "Why does the negative binomial support start at r?",
+      answer: "Because r successes need at least r trials — fewer is impossible, so the list opens at k = r and runs upward without bound. Summing the pmf from k = 0 instead feeds negative arguments into the binomial coefficient. Under the failures convention the list starts at 0, which is itself a fingerprint of which convention is in force.",
+      sectionId: "15"
     }
   }
 
@@ -1480,19 +1487,6 @@ const negativeBinomialExplanations = {
           "item": "https://www.learnmathclass.com/probability/distributions/discrete/negative-binomial"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1662,6 +1656,22 @@ export default function NegativeBinomialDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Negative Binomial Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1695,13 +1705,6 @@ export default function NegativeBinomialDistributionPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

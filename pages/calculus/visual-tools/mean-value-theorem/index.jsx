@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Mean Value Theorem</h1>
 //    <br/>
-//    <FunctionMVT/>
+//    <FunctionMVT explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -492,6 +492,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionMVT from '../../../../app/components/functions/mvt/FunctionMVT'
+import functionMVTDiagrams from '../../../../app/components/functions/mvt/functionMVTDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -721,38 +723,81 @@ For deeper coverage, see the **Rolle&apos;s theorem** page.`,
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Identity: Every Point Is a c`,
+      content: `$f(x) = x$ on $[-2, 2]$. The endpoints are $(-2, -2)$ and $(2, 2)$, so the secant slope is
+
+$m = \frac{2 - (-2)}{2 - (-2)} = 1$
+
+and $f'(x) = 1$ everywhere. The theorem asks for a point where $f'(c) = m$, and here **every** point in the interval qualifies.`,
       before: ``,
-      after: ``,
+      after: `The MVT promises *at least one* $c$, never exactly one, and this family is the reason that wording matters. The tool's solver reports several hundred solutions on this interval — one per sample step — because there is genuinely no place where the condition fails.
+
+Geometrically the secant, the curve and every tangent are the same line, which is why the picture looks so bare. A straight function has nothing to deviate from its own average rate, so the "somewhere the instantaneous rate equals the average rate" guarantee is satisfied trivially and everywhere at once.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Quadratic: Rolle's Theorem in Disguise`,
+      content: `$f(x) = x^2$ on $[-2, 2]$. Because the parabola is symmetric about the origin, the two endpoint heights are equal — $f(-2) = f(2) = 4$ — so the secant is horizontal:
+
+$m = \frac{4 - 4}{2 - (-2)} = 0$
+
+Solving $f'(c) = 2c = 0$ gives the single solution $c = 0$.`,
       before: ``,
-      after: ``,
+      after: `Equal endpoint values is exactly the hypothesis of [Rolle's theorem](!#rolles-theorem), which is the special case of the MVT where $f(a) = f(b)$ and the conclusion becomes $f'(c) = 0$. This family is the MVT and Rolle's theorem being the same statement.
+
+The location of $c$ is not a coincidence either. For any interval $[a, b]$ on a parabola, the mean value point is the midpoint $\frac{a+b}{2}$ — a property of quadratics specifically, not something the theorem promises in general. Drag the endpoints and watch $c$ track the middle.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Cubic: Two Solutions at Once`,
+      content: `$f(x) = x^3$ on $[-2, 2]$ runs from $-8$ to $8$, so
+
+$m = \frac{8 - (-8)}{4} = 4$
+
+Solving $f'(c) = 3c^2 = 4$ gives $c = \pm\frac{2}{\sqrt{3}} \approx \pm 1.1547$ — two solutions, both inside the interval, and the tool draws a tangent at each.`,
       before: ``,
-      after: ``,
+      after: `Two parallel tangents, one on either side of the origin, both matching the secant's slope of 4. This is the clearest demonstration that the theorem's "at least one" is not merely cautious phrasing.
+
+Between the two solutions the curve is shallower than the secant — at the origin the tangent is flat — and outside them it is steeper. The mean rate of 4 gets attained on the way down to that flat spot and again on the way back up.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `Sine: a Full Period With a Flat Secant`,
+      content: `$f(x) = \sin(x)$ on $[0, 2\pi]$ starts and ends at zero, so the secant is horizontal again:
+
+$m = \frac{0 - 0}{2\pi} = 0$
+
+Solving $\cos(c) = 0$ on $(0, 2\pi)$ gives $c = \frac{\pi}{2} \approx 1.5708$ and $c = \frac{3\pi}{2} \approx 4.7124$ — the peak and the trough.`,
       before: ``,
-      after: ``,
+      after: `Another Rolle's-theorem configuration, and the two solutions are precisely the turning points of the wave. That is what a horizontal tangent means for a sine: nothing else on a full period has zero slope.
+
+The lesson worth carrying is about the net-versus-total distinction. The function travels up to 1, down to $-1$ and back, yet its average rate of change over the interval is exactly zero, because average rate only ever compares the endpoints. All that motion cancels in the numerator.`,
       link: '',
     },
     obj15: {
-      title: ``,
-      content: ``,
+      title: `Cosine: a Secant That Is Not Flat`,
+      content: `$f(x) = \cos(x)$ on $[0, \pi]$ falls from $1$ to $-1$, so this time the secant genuinely slopes:
+
+$m = \frac{-1 - 1}{\pi} = -\frac{2}{\pi} \approx -0.6366$
+
+Solving $-\sin(c) = -\frac{2}{\pi}$ gives two solutions, $c \approx 0.6901$ and $c \approx 2.4515$, placed symmetrically about $\frac{\pi}{2}$.`,
       before: ``,
-      after: ``,
+      after: `This is the first family where the tangents are visibly tilted rather than horizontal, which makes the actual claim of the theorem easier to see: three parallel lines, one secant and two tangents, all at slope $-0.64$.
+
+The symmetry of the two solutions about the midpoint reflects the symmetry of $\sin$ about $\frac{\pi}{2}$ on this interval. The cosine descends fastest at the middle and more gently at both ends, so the average steepness is achieved once on the way in and once on the way out.`,
+      link: '',
+    },
+    obj16: {
+      title: `Exponential: Where the Average Rate Is Attained`,
+      content: `$f(x) = e^x$ on $[0, 1]$ climbs from $1$ to $e$, so
+
+$m = \frac{e - 1}{1} \approx 1.7183$
+
+Since $f' = f$, solving $e^c = e - 1$ gives $c = \ln(e - 1) \approx 0.5413$ — a single solution, slightly right of the midpoint.`,
+      before: ``,
+      after: `That offset is the interesting part. For the parabola the mean value point sat exactly at the midpoint; here it does not, and it never will. Because $e^x$ is convex, the function spends more of the interval below its average slope and less above it, which pushes the crossing point past the middle.
+
+The value $\ln(e - 1)$ also has a neat reading: it is the point where the height of the curve equals the average rate of change across the whole interval — a coincidence available only to a function that is its own derivative.`,
       link: '',
     }
 
@@ -763,6 +808,55 @@ For deeper coverage, see the **Rolle&apos;s theorem** page.`,
     id: "intro",
     title: "",
     content: ``
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     SVGs come from the tool's own scene description, serialised through the
+     core's generateSVG - see app/components/functions/frozenSvg.js. Each state
+     uses that family's own defaultInterval and the c values the tool's solver
+     returns for it. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: functionMVTDiagrams[key], caption, text })
+
+  const stateUnits = {
+    identity: unit('identity', 'Identity on [-2, 2], frozen',
+      'Secant, curve and tangents all coincide, because f&prime; is 1 everywhere and the secant slope is ' +
+      'also 1. The solver returns hundreds of valid c values here; the frozen picture keeps four of them, ' +
+      'which looks identical since every tangent is the same line.'),
+    quadratic: unit('quadratic', 'Quadratic on [-2, 2], frozen',
+      'Equal endpoint heights make the secant horizontal, so the single tangent at c = 0 is horizontal too. ' +
+      'This is the Rolle configuration.'),
+    cubic: unit('cubic', 'Cubic on [-2, 2], frozen',
+      'Three parallel lines at slope 4: the secant, plus tangents at c = -1.1547 and c = +1.1547. ' +
+      'Two solutions, both drawn.'),
+    sine: unit('sine', 'Sine on [0, 2&pi;], frozen',
+      'A full period returns to its starting height, so the secant is flat and the two tangents sit at the ' +
+      'crest and the trough - c = &pi;/2 and c = 3&pi;/2.'),
+    cosine: unit('cosine', 'Cosine on [0, &pi;], frozen',
+      'The first family with a genuinely tilted secant, at slope -0.6366. The two tangents are parallel to ' +
+      'it, placed symmetrically about the midpoint.'),
+    exponential: unit('exponential', 'Exponential on [0, 1], frozen',
+      'One tangent, at c = 0.5413, matching the secant slope e - 1 = 1.7183. Note it sits right of the ' +
+      'interval midpoint rather than on it.'),
+  }
+
+
+  /* ---- per-family panel notes, passed into the component (Line 1) ----
+     FunctionMVT had no explanations prop; one was added additively and defaults
+     to null, so the panel is unchanged when nothing is passed. Content is
+     markdown - InfoPanel renders it through processContent, so anchors use the
+     normal [text](!#slug) form. */
+  const note = (body, slug, label) =>
+    `### Where this leads\n\n${body} See [${label}](!#${slug}) or compare [all six families](!#the-function-families).`
+
+  const explanations = {
+    identity: note('A constant derivative means every point of the interval satisfies the theorem at once.', 'every-point-is-a-c', 'the identity family'),
+    quadratic: note('Equal endpoint values make this the Rolle case, with c at the midpoint.', 'rolles-theorem-in-disguise', 'the quadratic family'),
+    cubic: note('Two values of c satisfy the condition here, which is why the theorem says at least one.', 'two-solutions-at-once', 'the cubic family'),
+    sine: note('A full period has a flat secant, and the two solutions are the crest and the trough.', 'a-full-period', 'the sine family'),
+    cosine: note('A tilted secant with two parallel tangents - the theorem in its least degenerate form.', 'a-secant-that-is-not-flat', 'the cosine family'),
+    exponential: note('One solution, and it sits right of the midpoint because the exponential is convex.', 'where-the-average-rate-is-attained', 'the exponential family'),
   }
 
 
@@ -869,6 +963,8 @@ For deeper coverage, see the **Rolle&apos;s theorem** page.`,
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -880,147 +976,55 @@ For deeper coverage, see the **Rolle&apos;s theorem** page.`,
         name: "Mean Value Theorem Visualizer",
         hubDescription: "Draw a secant between any two points on a smooth curve and the tool finds every interior c where the tangent has matching slope — the parallel-tangent guarantee at the heart of the Mean Value Theorem. Six function families illustrate the single-c, multi-c, and exact-midpoint cases.",
         category: "Derivatives",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="62" x2="76" y2="62" stroke="#B5D4F4" stroke-width="0.9"/><line x1="12" y1="8" x2="12" y2="64" stroke="#B5D4F4" stroke-width="0.9"/><path d="M 16 56 Q 43 14 70 14" fill="none" stroke="#85B7EB" stroke-width="1.8"/><line x1="20" y1="50" x2="64" y2="14.52" stroke="#FAC775" stroke-width="1.6" stroke-dasharray="3,2"/><line x1="30" y1="34.96" x2="56" y2="14.01" stroke="#97C459" stroke-width="1.8"/><circle cx="20" cy="50" r="2.6" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="64" cy="14.52" r="2.6" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="42" cy="25.29" r="3.2" fill="#97C459" stroke="#27500A" stroke-width="1.2"/><text x="42" y="72" font-family="Georgia,serif" font-size="8" fill="#C0DD97" text-anchor="middle" font-style="italic">c</text><text x="68" y="42" font-family="Georgia,serif" font-size="10" fill="#C0DD97" text-anchor="middle">&#8741;</text></svg>`
       },
 
     }
   }
 }
 
-export default function MeanValueTheoremVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function MeanValueTheoremVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-function-families'),
+    stateRow('obj11', 'every-point-is-a-c', 'identity'),
+    stateRow('obj12', 'rolles-theorem-in-disguise', 'quadratic'),
+    stateRow('obj13', 'two-solutions-at-once', 'cubic'),
+    stateRow('obj14', 'a-full-period', 'sine'),
+    stateRow('obj15', 'a-secant-that-is-not-flat', 'cosine'),
+    stateRow('obj16', 'where-the-average-rate-is-attained', 'exponential'),
+    plain('obj3', 'the-a-and-b-sliders'),
+    plain('obj4', 'the-three-result-cards'),
+    plain('obj5', 'the-per-c-detail-rows'),
+    plain('obj6', 'display-toggles'),
+    plain('obj7', 'what-is-the-mvt'),
+    plain('obj8', 'the-speedometer-intuition'),
+    plain('obj9', 'rolles-theorem'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -1076,7 +1080,7 @@ export default function MeanValueTheoremVisualizer({seoData, sectionsContent, in
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Mean Value Theorem Visualizer</h1>
       <br/>
-      <FunctionMVT/>
+      <FunctionMVT explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

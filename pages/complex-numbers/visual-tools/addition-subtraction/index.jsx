@@ -415,6 +415,9 @@ The lesson of the preset: subtraction measures separation, not size. Two modest 
         description: "Visualize complex number addition and subtraction with draggable vectors. See the parallelogram rule, step-by-step solutions, and triangle inequality in real time.",
         keywords: keyWords.join(", "),
         url: "/complex-numbers/visual-tools/addition-subtraction",
+        hubDescription: "Add and subtract complex numbers geometrically. Drag two points and watch the parallelogram rule for addition and the difference vector for subtraction update instantly, with step-by-step component breakdowns and the triangle inequality verified in real time.",
+        category: "Arithmetic",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="52" x2="74" y2="52" stroke="#B5D4F4" stroke-width="0.9"/><line x1="30" y1="10" x2="30" y2="70" stroke="#B5D4F4" stroke-width="0.9"/><line x1="52" y1="40" x2="62" y2="18" stroke="#B5D4F4" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="40" y1="30" x2="62" y2="18" stroke="#B5D4F4" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="30" y1="52" x2="52" y2="40" stroke="#85B7EB" stroke-width="1.9"/><line x1="30" y1="52" x2="40" y2="30" stroke="#97C459" stroke-width="1.9"/><line x1="30" y1="52" x2="62" y2="18" stroke="#FAC775" stroke-width="2.2"/><circle cx="52" cy="40" r="2.6" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="40" cy="30" r="2.6" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="62" cy="18" r="3.4" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="40" y="74" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">z&#8321; + z&#8322;</text></svg>`,
          name: "Complex Addition & Subtraction Visualizer"
       },
         

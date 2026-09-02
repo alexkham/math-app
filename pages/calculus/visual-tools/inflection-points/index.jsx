@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Inflection Points</h1>
 //    <br/>
-//    <FunctionConcavity/>
+//    <FunctionConcavity explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionConcavity from '../../../../app/components/calculus/visualizers/FunctionConcavity'
+import functionConcavityDiagrams from '../../../../app/components/calculus/visualizers/functionConcavityDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -700,13 +702,122 @@ This is exactly why the visualizer&apos;s Inflection scenario emphasizes the sig
       link: '',
     },
 
-    // obj11–obj15 left for future expansion
-    // obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    // obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    // obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `Concave Up: the Slope Is Increasing`,
+      content: `The Concave up scenario locks $c = 1.3$ and shades the window from $0.3$ to $2.3$. There $f''(1.3) = 2(1.3) = 2.6$, comfortably positive, and the tangent at $P$ runs underneath the curve on both sides.
+
+The second derivative is the derivative of the slope, so reading $f'' > 0$ as "the slope is increasing" is the most useful translation. Sample $f'(x) = x^2 - 1$ across the shaded window and the slopes climb steadily:
+
+$f'(0.5) = -0.75$, $f'(1) = 0$, $f'(1.3) = 0.69$, $f'(2) = 3$
+
+A curve whose slope keeps rising has no choice but to cup upward.`,
+      before: ``,
+      after: `Worth separating two words that are easy to run together: **increasing** describes $f$, **concave up** describes $f'$. They are independent. Between $x = 0$ and $x = 1$ this curve is still falling — $f' < 0$ there — and yet it is already concave up, because the slope is on its way from $-1$ toward $0$. Falling, but falling less steeply each moment.
+
+That is also why the shaded gap never closes on either side of $P$. The tangent has one fixed slope; the curve's slope keeps growing past it, so the curve pulls away above the line in both directions.`,
+      link: '',
+    },
+
+    obj12: {
+      title: `Concave Down: the Slope Is Decreasing`,
+      content: `The Concave down scenario locks $c = -1.3$ and shades the window from $-2.3$ to $-0.3$. There $f''(-1.3) = -2.6 < 0$, and the tangent at $P$ now lies above the curve on both sides.
+
+The same reading applies with the sign reversed: $f'' < 0$ means the slope is decreasing. Across the shaded window $f'(x) = x^2 - 1$ falls the whole way:
+
+$f'(-2) = 3$, $f'(-1.3) = 0.69$, $f'(-1) = 0$, $f'(-0.5) = -0.75$
+
+The slope starts steeply positive, passes through zero at the peak, and keeps dropping into negative territory.`,
+      before: ``,
+      after: `Notice which point sits inside this region: $x = -1$, the local maximum. That is the [second derivative test](!#the-second-derivative-test) in one picture — $f'(-1) = 0$ makes it a critical point, and $f''(-1) = -2 < 0$ makes it a maximum, because a critical point in concave-down territory can only be a peak.
+
+For this cubic the split is clean and total: every $x < 0$ is concave down, every $x > 0$ is concave up, since $f''(x) = 2x$ carries the sign of $x$ itself.`,
+      link: '',
+    },
+
+    obj13: {
+      title: `The Inflection Point at c = 0`,
+      content: `The Inflection scenario locks $c = 0$, the single place where $f''(x) = 2x$ vanishes. Solving $2x = 0$ gives $x = 0$ and nothing else, so this cubic has exactly one inflection point.
+
+Two things happen there at once, and both matter. The second derivative equals zero, and its sign **flips** — negative for every $x < 0$, positive for every $x > 0$. The picture shows the consequence: the tangent at $P$ crosses the curve instead of resting on one side of it, and the shading changes color as it passes $c$.`,
+      before: ``,
+      after: `The zero on its own proves nothing, which is the point of the "necessary vs sufficient" distinction covered [further down](!#necessary-vs-sufficient). For $f(x) = x^4$ the second derivative $12x^2$ is zero at the origin but never negative, so the concavity never changes and there is no inflection there.
+
+One more detail this scenario makes visible: the tangent at $c = 0$ is **not** horizontal. Here $f'(0) = -1$, a distinctly slanted line. An inflection point has nothing to do with a critical point — the first derivative is free to be anything. The two coincide only in the special case of a saddle, like $f(x) = x^3$ at the origin.`,
+      link: '',
+    },
+
+    // obj14–obj15 left for future expansion
     // obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
     // obj15: { title: ``, content: ``, before: ``, after: ``, link: '' },
 
+  }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ---- */
+  const stateUnits = {
+    idle: demoUnitFrame({
+      svg: functionConcavityDiagrams.idle,
+      caption: 'Free drag, frozen at c = -0.5',
+      text: 'No scenario running - the widget at its default point. f&Prime;(-0.5) = -1, so the badge reads ' +
+        'negative and the tangent already sits above the curve. Drag c across zero and the gap flips colour.',
+    }),
+    up: demoUnitFrame({
+      svg: functionConcavityDiagrams.up,
+      caption: 'Concave up, frozen at c = 1.3',
+      text: 'f&Prime;(1.3) = 2.6 > 0. The tangent through P runs below the curve, and the blue gap widens ' +
+        'in both directions as the curve pulls away above the line.',
+    }),
+    down: demoUnitFrame({
+      svg: functionConcavityDiagrams.down,
+      caption: 'Concave down, frozen at c = -1.3',
+      text: 'f&Prime;(-1.3) = -2.6 < 0. The mirror image: the tangent lies above the curve and the red gap ' +
+        'opens downward. The local maximum at x = -1 sits inside this same region.',
+    }),
+    infl: demoUnitFrame({
+      svg: functionConcavityDiagrams.infl,
+      caption: 'Inflection, frozen at c = 0',
+      text: 'f&Prime;(0) = 0 and the sign flips across c. The tangent crosses the curve rather than staying ' +
+        'on one side, and the gap is red to the left of c, blue to the right - the concavity change made visible.',
+    }),
+  }
+
+
+  /* ---- panel explanations, hoisted out of the component (Line 1) ----
+     Shape follows FunctionConcavity's own override contract:
+     meaning.{idle|up|down|infl}.{badge|title|text|notePill|note}, raw HTML
+     (the component renders these through dangerouslySetInnerHTML, so anchors
+     are written as <a href="#slug"> rather than markdown), {c} and {d2} are
+     substituted with live values, and var(--sc*) picks up the scenario theme.
+     Anything omitted here keeps the component's built-in default. */
+  const STR = (s) => `<strong style="color:var(--scDeep)">${s}</strong>`
+  const CODE = (s) => `<code style="font-family:'SF Mono',ui-monospace,Menlo,Monaco,Consolas,monospace;background:#eff6ff;padding:1px 5px;border-radius:3px;color:#1e3a8a">${s}</code>`
+  const MORE = (slug, label) =>
+    ` <a href="#${slug}" style="color:var(--scDeep);font-weight:600">Learn more about ${label}</a>` +
+    ` &middot; <a href="#the-three-scenarios" style="color:var(--scDeep);font-weight:600">the three scenarios</a>`
+
+  const explanations = {
+    meaning: {
+      idle: {
+        note: `f&Prime;(c) measures how the slope is changing. Positive: slope is increasing → curve bends up. ` +
+          `Negative: slope decreasing → curve bends down. Zero with a sign flip: inflection.` +
+          MORE('drag-and-scenario-modes', 'dragging c freely'),
+      },
+      up: {
+        note: `Concave up ⇔ f&prime; is ${STR('increasing')} on the interval ⇔ ${STR('f&Prime;(x) &gt; 0')}. ` +
+          `A curve whose slope keeps rising must curl upward.` +
+          MORE('concave-up', 'concave up'),
+      },
+      down: {
+        note: `Concave down ⇔ f&prime; is ${STR('decreasing')} on the interval ⇔ ${STR('f&Prime;(x) &lt; 0')}. ` +
+          `A curve whose slope keeps falling must curl downward.` +
+          MORE('concave-down', 'concave down'),
+      },
+      infl: {
+        note: `f&Prime;(c) = 0 by itself is not enough — the sign must ${STR('change')}. ` +
+          `E.g., ${CODE('f(x) = x⁴')} has f&Prime;(0) = 0 but f&Prime;(x) ≥ 0 everywhere — no inflection at 0.` +
+          MORE('inflection-point', 'the inflection point'),
+      },
+    },
   }
 
 
@@ -826,6 +937,8 @@ This is exactly why the visualizer&apos;s Inflection scenario emphasizes the sig
    return {
       props:{
          sectionsContent,
+         stateUnits,
+         explanations,
          introContent,
          faqQuestions,
          schemas,
@@ -837,148 +950,52 @@ This is exactly why the visualizer&apos;s Inflection scenario emphasizes the sig
            name: "Inflection Points and Concavity Visualizer",
            hubDescription: "Drag point c along the cubic f(x) = (1/3)x^3 - x to see how the sign of f''(c) decides whether the curve is concave up, concave down, or inflecting. Three pre-built scenarios animate the seven analysis steps from picking a region to evaluating f''(c) and shading the concavity gap between curve and tangent.",
            category: "Calculus",
-           subCategory: "Derivatives"
+           subCategory: "Derivatives",
+           svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="66" x2="76" y2="66" stroke="#B5D4F4" stroke-width="0.9"/><line x1="42" y1="37" x2="42" y2="66" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2.5,2"/><path d="M 14 58 Q 30 58 42 37 Q 54 16 70 16" fill="none" stroke="#85B7EB" stroke-width="1.8"/><path d="M 22 47 Q 26 41 30 47" fill="none" stroke="#ED93B1" stroke-width="1.4"/><path d="M 52 27 Q 56 33 60 27" fill="none" stroke="#C0DD97" stroke-width="1.4"/><circle cx="42" cy="37" r="3.4" fill="#FAC775" stroke="#854F0B" stroke-width="1.3"/><text x="42" y="75" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">f&#8243; = 0</text></svg>`
          }
        }
     }
    }
 
-export default function InflectionPointsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function InflectionPointsVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // obj11–obj15 slots reserved for future expansion
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    stateRow('obj2', 'drag-and-scenario-modes', 'idle'),
+    plain('obj3', 'the-three-scenarios'),
+    stateRow('obj11', 'concave-up', 'up'),
+    stateRow('obj12', 'concave-down', 'down'),
+    stateRow('obj13', 'inflection-point', 'infl'),
+    plain('obj4', 'the-seven-step-animation'),
+    plain('obj5', 'reading-the-concavity-gap'),
+    plain('obj6', 'the-info-panel-tabs'),
+    plain('obj7', 'what-is-concavity'),
+    plain('obj8', 'the-second-derivative-test'),
+    plain('obj9', 'necessary-vs-sufficient'),
+    plain('obj10', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -1040,7 +1057,7 @@ export default function InflectionPointsVisualizer({seoData, sectionsContent, in
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Inflection Points</h1>
    <br/>
   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
-   <FunctionConcavity/>
+   <FunctionConcavity explanations={explanations}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

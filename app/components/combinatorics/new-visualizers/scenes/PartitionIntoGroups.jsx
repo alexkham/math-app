@@ -6,6 +6,7 @@
 import React, {
   useState, useEffect, useRef, useCallback, useMemo,
 } from "react";
+import { processContent } from "@/app/utils/contentProcessor";
 import {
   ROW_H_MIN, SVG_W_DEFAULT, COLORS,
   combinations, factorial, getItems, nameOf, tint,
@@ -143,7 +144,7 @@ const BOX_LABEL_OFFSET = 14;
 const BUILD_Y_OFFSET = 110;
 const RESULTS_TOP_OFFSET = 70;
 
-export default function PartitionIntoGroups() {
+export default function PartitionIntoGroups({ explanations = null }) {
   // ── State ─────────────────────────────────────────────
   const [preset, setPreset] = useState(PARTITIONS[0]);
   const [mode, setMode] = useState("balls");
@@ -483,6 +484,15 @@ export default function PartitionIntoGroups() {
       ? `Item 1 in Box ${BOX_LABELS[bi]}: ${k_done} / ${sz}`
       : "";
   }
+
+  // Line 1: state key for the hoisted explanations - the tool's phase, with
+  // the completed enumeration keyed by partition shape (p22 ... p221).
+  const stateKey = animState === "done"
+    ? `p${preset.id.replace(/\+/g, "")}`
+    : animState === "idle" && completed.length === 0
+      ? "idle"
+      : "building";
+  const stateEntry = (explanations && explanations[stateKey]) || null;
 
   // ── Narration per group ──────────────────────────────
   const narrationFor = (gi) => {
@@ -879,6 +889,24 @@ export default function PartitionIntoGroups() {
                 );
               })}
             </div>
+            {stateEntry && (
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: "10px 12px",
+                  background: COLORS.surfaceTint,
+                  border: `1px solid #dbeafe`,
+                  borderLeft: `3px solid ${COLORS.accent}`,
+                  borderRadius: 8,
+                  fontSize: 12,
+                  lineHeight: 1.55,
+                  color: COLORS.text,
+                  fontFamily: "system-ui, sans-serif",
+                }}
+              >
+                {processContent(stateEntry)}
+              </div>
+            )}
           </RightPanel>
         </SceneGrid>
       </PageWrap>

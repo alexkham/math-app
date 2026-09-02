@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -383,44 +384,24 @@ Systems involving multiple exponential inequalities with different bases are han
 
 const faqQuestions = {
   obj1: {
-    question: "How does the base affect solving exponential inequalities?",
-    answer: "When base a > 1, the exponential function is increasing, so the inequality direction is preserved: aˣ > aʸ means x > y. When 0 < a < 1, the function is decreasing, so the direction flips: aˣ > aʸ means x < y."
+    question: "Does the rule about flipping when you multiply by a negative apply here?",
+    answer: "No, and expecting it is the usual source of sign errors. In linear inequalities the direction reverses when you multiply or divide by a negative number. In exponential inequalities the multiplier is irrelevant: what governs the direction is the size of the base. Above $1$ the direction is preserved, between $0$ and $1$ it reverses.",
+    sectionId: "1"
   },
   obj2: {
-    question: "How do you solve a basic exponential inequality like 2^x > 8?",
-    answer: "Rewrite both sides with the same base: 2ˣ > 2³. Since base 2 > 1, the function is increasing and direction is preserved. Compare exponents directly: x > 3."
+    question: "Can an exponential inequality be true for every real number?",
+    answer: "Yes, and it can also be true for none. Since $a^x > 0$ for any positive base, $2^x > -5$ holds for every real $x$ with no computation required, while $2^x < -1$ and $2^x = 0$ have no solutions at all. Checking the sign of the other side first can settle the whole problem immediately.",
+    sectionId: "4"
   },
   obj3: {
-    question: "When do you flip the inequality sign in exponential inequalities?",
-    answer: "Flip the inequality when the base is between 0 and 1 (like 1/2, 1/3, 0.5). These bases create decreasing functions, so larger exponents give smaller values. For (1/3)ˣ > (1/3)², the solution is x < 2."
+    question: "Why is a base of $1$ excluded?",
+    answer: "Because $1^x = 1$ for every exponent, so distinct powers of $1$ are never distinct. There is nothing to compare: $1^x$ and $1^y$ are equal no matter what $x$ and $y$ are, which makes every strict inequality between them false and every non-strict one trivially true. The base must be positive and different from $1$.",
+    sectionId: "1"
   },
   obj4: {
-    question: "How do you solve exponential inequalities with different bases?",
-    answer: "Convert both sides to powers of a common base using exponent laws. For 4ˣ < 32: rewrite as (2²)ˣ < 2⁵, giving 2²ˣ < 2⁵. Then compare exponents: 2x < 5, so x < 5/2."
-  },
-  obj5: {
-    question: "Can an exponential expression ever equal zero or be negative?",
-    answer: "No. For any positive base a, aˣ > 0 for all real x. The equation 2ˣ = 0 has no solution. The inequality 3ˣ < 0 has no solution. This property often eliminates impossible cases."
-  },
-  obj6: {
-    question: "How do you solve compound exponential inequalities?",
-    answer: "Rewrite all parts with the same base, then solve both inequality conditions. For 1/4 < 2ˣ < 16: rewrite as 2⁻² < 2ˣ < 2⁴. Since base > 1, preserve direction: -2 < x < 4."
-  },
-  obj7: {
-    question: "What is the inequality 2^x > -5 solution?",
-    answer: "All real numbers. Since 2ˣ is always positive (greater than 0), it is automatically greater than -5 for every value of x. No calculation needed once you recognize aˣ > 0 always."
-  },
-  obj8: {
-    question: "How do you handle (1/2)^x > 4?",
-    answer: "Rewrite 4 as a power of 1/2: since (1/2)⁻² = 4, the inequality becomes (1/2)ˣ > (1/2)⁻². Base 1/2 < 1 means decreasing function, so flip direction: x < -2."
-  },
-  obj9: {
-    question: "What if the base equals 1?",
-    answer: "The base a = 1 is excluded from exponential functions because 1ˣ = 1 for all x. No inequality between distinct powers is possible — 1ˣ = 1ʸ = 1 always, regardless of x and y."
-  },
-  obj10: {
-    question: "How do you solve 9^(x+1) ≥ 27^x?",
-    answer: "Convert to base 3: 9 = 3² and 27 = 3³. Rewrite as 3^(2x+2) ≥ 3^(3x). Base 3 > 1, preserve direction: 2x + 2 ≥ 3x, giving 2 ≥ x, so x ≤ 2."
+    question: "How do you flip a compound inequality with a fractional base?",
+    answer: "Reverse both comparisons and then rewrite the chain so it reads left to right. With $\\frac{1}{3}$ as the base, flipping $-2 < x < -1$ carelessly produces $-2 > x > -1$, which looks like the empty set once transcribed as $-1 < x < -2$. Reorder the endpoints after reversing, and check that the smaller bound ends up on the left.",
+    sectionId: "5"
   }
 }
 
@@ -495,19 +476,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/exponential-inequalities"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -613,6 +581,22 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Exponential Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -749,12 +733,6 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

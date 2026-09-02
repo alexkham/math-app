@@ -89,7 +89,8 @@ const SM_CSS = `
 // ===========================================================
 // VECTOR SCENE BUILDER — k · u = w (1×n)
 // ===========================================================
-function buildVectorScenes(n) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildVectorScenes(n) {
   const wFontSize = n <= 3 ? '14px' : n === 4 ? '12px' : '11px';
 
   const filledCellDisplay = (j) => ({
@@ -183,7 +184,8 @@ function buildVectorScenes(n) {
 // ===========================================================
 // MATRIX SCENE BUILDER — k · A = C (m×n)
 // ===========================================================
-function buildMatrixScenes(rows, cols) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildMatrixScenes(rows, cols) {
   const maxDim = Math.max(rows, cols);
   const cFontSize =
     maxDim <= 3 ? '14px' : maxDim === 4 ? '12px' : '11px';
@@ -411,6 +413,7 @@ function Pill({ active, onClick, children }) {
 // ===========================================================
 export default function ScalarMultiplicationWrapper({
   mode = 'both',
+  explanations = null,
   defaultScenario = 'matrices',
   defaultVecN = 4,
   defaultRows = 2,
@@ -439,9 +442,18 @@ export default function ScalarMultiplicationWrapper({
   const max = dimensionRange[dimensionRange.length - 1];
 
   const scenes = useMemo(() => {
-    if (scenario === 'vectors') return buildVectorScenes(vecN);
-    return buildMatrixScenes(rows, cols);
-  }, [scenario, vecN, rows, cols]);
+    const built = scenario === 'vectors'
+      ? buildVectorScenes(vecN)
+      : buildMatrixScenes(rows, cols);
+    if (!explanations) return built;
+    // Line 1 anchor mesh: append the page's note for this phase to the scene
+    // caption. Phases are intro (first), done (last), step (everything between).
+    const keyFor = (i) => (i === 0 ? 'intro' : i === built.length - 1 ? 'done' : 'step');
+    return built.map((sc, i) => {
+      const extra = explanations[keyFor(i)];
+      return extra ? { ...sc, formula: `${sc.formula || ''}${extra}` } : sc;
+    });
+  }, [scenario, vecN, rows, cols, explanations]);
 
   return (
     <div style={{

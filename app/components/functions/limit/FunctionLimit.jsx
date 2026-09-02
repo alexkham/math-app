@@ -352,6 +352,7 @@ function FamilyGlyph({ d, active, darkMode }) {
 export default function FunctionLimit({
   initialFamily = 'removable',
   initialEps = 0.5,
+  explanations = null,
   families = DEFAULT_FAMILIES,
   visualizerProps = {},
   infoPanelProps = {},
@@ -485,9 +486,14 @@ export default function FunctionLimit({
       `### Verdict\n\n` +
       `**${v.verdictTitle}** ${v.verdictDetail}\n\n` +
       `### What ε controls\n\n` +
-      `Slide ε to pick how far on each side of c we sample. As ε shrinks, $f(c - \u03b5)$ approaches $L^-$ and $f(c + \u03b5)$ approaches $L^+$. That&apos;s the definition of a limit: getting arbitrarily close.`
+      `Slide ε to pick how far on each side of c we sample. As ε shrinks, $f(c - \u03b5)$ approaches $L^-$ and $f(c + \u03b5)$ approaches $L^+$. That&apos;s the definition of a limit: getting arbitrarily close.` +
+      // Optional per-family note supplied by the page (Line 1 anchor mesh).
+      // Omitted -> the panel reads exactly as it always has.
+      (explanations?.[current] ? `
+
+${explanations[current]}` : '')
     );
-  }, [fam, eps, fL, fR, v]);
+  }, [fam, eps, fL, fR, v, explanations, current]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

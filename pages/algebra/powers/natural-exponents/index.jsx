@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -525,58 +526,27 @@ Each step applies one law. When multiple laws are needed, working from the inner
 
 const faqQuestions = {
   obj1: {
-    question: "What does a^n mean for natural exponents?",
-    answer: "For a natural number n ≥ 1, the expression aⁿ means the product of n copies of a. For example, 2⁴ = 2·2·2·2 = 16. The base a can be any real number, and the exponent n counts how many times to multiply the base by itself."
+    question: "What is the difference between $(-3)^2$ and $-3^2$?",
+    answer: "Parentheses decide what the base is. $(-3)^2 = (-3)(-3) = 9$, because the whole quantity is squared. But $-3^2 = -(3^2) = -9$, because the superscript binds tighter than the minus sign, so only the $3$ is squared and the sign is applied afterwards. The same binding beats multiplication: $ab^n$ means $a \\cdot (b^n)$, never $(ab)^n$.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the product rule for exponents?",
-    answer: "When multiplying powers with the same base, add the exponents: aᵐ · aⁿ = aᵐ⁺ⁿ. For example, 2³ · 2⁴ = 2⁷ = 128. The bases must match — the rule doesn't apply to expressions like 2³ · 3⁴."
+    question: "Why does a spreadsheet evaluate @[-2^2]@ as 4?",
+    answer: "Because spreadsheets break the written convention. In mathematics the superscript binds tighter than the minus, so $-2^2 = -4$; Excel applies the minus first and returns $4$. The written rule is universal, but software is not, which makes checking algebra against a spreadsheet a real source of sign errors. Write @[-(2^2)]@ when it matters.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the quotient rule for exponents?",
-    answer: "When dividing powers with the same base, subtract the exponents: aᵐ / aⁿ = aᵐ⁻ⁿ (where m > n and a ≠ 0). For example, x⁸ / x³ = x⁵. This rule subtracts exponents because division cancels common factors."
+    question: "What is the difference between $(a^m)^n$ and $a^{m^n}$?",
+    answer: "Where the grouping sits. $(a^m)^n = a^{mn}$, so you multiply the exponents and $(2^3)^2 = 2^6 = 64$. A bare tower nests from the top instead: $2^{3^2} = 2^9 = 512$. The tower is reserved for that top-down reading precisely because the bottom-up one already collapses to $a^{mn}$ and never needs it.",
+    sectionId: "5"
   },
   obj4: {
-    question: "What is the power of a power rule?",
-    answer: "When raising a power to another power, multiply the exponents: (aᵐ)ⁿ = aᵐⁿ. For example, (x⁴)³ = x¹². This works because the outer exponent creates n copies of aᵐ, and the product rule adds m to itself n times."
-  },
-  obj5: {
-    question: "What is the power of a product rule?",
-    answer: "An exponent applied to a product distributes to each factor: (ab)ⁿ = aⁿbⁿ. For example, (2·3)⁴ = 2⁴ · 3⁴ = 16 · 81 = 1296. This extends to any number of factors: (abc)ⁿ = aⁿbⁿcⁿ."
-  },
-  obj6: {
-    question: "What is the power of a quotient rule?",
-    answer: "An exponent applied to a quotient distributes to numerator and denominator: (a/b)ⁿ = aⁿ/bⁿ (where b ≠ 0). For example, (2/3)⁴ = 2⁴/3⁴ = 16/81."
-  },
-  obj7: {
-    question: "How does the sign of a negative base work with exponents?",
-    answer: "A negative base raised to an even exponent is positive: (-2)⁴ = 16. A negative base raised to an odd exponent is negative: (-2)⁵ = -32. The even/odd exponent determines whether the negative signs pair off and cancel."
-  },
-  obj8: {
-    question: "What is the difference between (-3)² and -3²?",
-    answer: "(-3)² = (-3)(-3) = 9 because the entire quantity -3 is squared. But -3² = -(3²) = -9 because the exponent binds only to 3, and the negative sign is applied after. Parentheses determine what is included in the base."
-  },
-  obj9: {
-    question: "What is a^1 equal to?",
-    answer: "a¹ = a for any base a. When the exponent is 1, there is only one copy of the base, so the result is simply the base itself. For example, 5¹ = 5 and (-7)¹ = -7."
-  },
-  obj10: {
-    question: "What is 1^n equal to?",
-    answer: "1ⁿ = 1 for any natural number n. Multiplying 1 by itself any number of times always produces 1. For example, 1¹⁰⁰ = 1."
-  },
-  obj11: {
-    question: "Why must the bases match to use the product rule?",
-    answer: "The product rule aᵐ · aⁿ = aᵐ⁺ⁿ works by counting total factors of the same base. With different bases like 2³ · 3⁴, you can't combine them into a single power — there's no law of exponents that simplifies mixed bases."
-  },
-  obj12: {
-    question: "What is the difference between (a^m)^n and a^(m^n)?",
-    answer: "(aᵐ)ⁿ = aᵐⁿ — you multiply the exponents. But aᵐⁿ means a raised to the power (mⁿ), with the stacked exponents evaluated top-down. For example, (2³)² = 2⁶ = 64, but 2^(3²) = 2⁹ = 512."
-  },
-  obj13: {
-    question: "How do you simplify expressions with multiple exponent rules?",
-    answer: "Work from innermost grouping outward. First simplify expressions inside parentheses using power rules, then combine like bases using product or quotient rules. For (2x³)⁴: distribute the exponent to get 2⁴x¹² = 16x¹²."
+    question: "Does $2^3$ mean 2 times 3?",
+    answer: "No. $2^3 = 8$, not $6$. The exponent counts factors rather than multiplying the base, so $2^3$ is $2 \\cdot 2 \\cdot 2$. The raised position is itself the operator, which is why no symbol appears between the base and the exponent. In plain text the same thing is written @[2^3]@ or @[2**3]@.",
+    sectionId: "notation"
   }
 }
+
 
 const schemas = {
   learningResource: {
@@ -648,19 +618,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/natural-exponents"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -810,6 +767,22 @@ export default function NaturalExponentsPage({seoData, sectionsContent, introCon
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Natural Exponents FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -917,13 +890,6 @@ export default function NaturalExponentsPage({seoData, sectionsContent, introCon
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

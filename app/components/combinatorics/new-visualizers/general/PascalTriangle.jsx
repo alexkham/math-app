@@ -16,6 +16,7 @@
 // for the focused cell.
 
 import React, { useState, useMemo, useCallback } from "react";
+import { processContent } from "@/app/utils/contentProcessor";
 import {
   COLORS,
   factorial,
@@ -256,7 +257,7 @@ function PascalCell({ n, r, role, onClick }) {
   );
 }
 
-export default function PascalsTriangle() {
+export default function PascalsTriangle({ explanations = null }) {
   // ── State ─────────────────────────────────────────────
   const [N, setN] = useState(6);
   const [mode, setMode] = useState("identity");
@@ -458,6 +459,11 @@ export default function PascalsTriangle() {
     );
   }
 
+  // Line 1: state key for the hoisted explanations - the active lens, or the
+  // unfocused view when no cell is selected (this tool has no animation).
+  const stateKey = focusN === null || focusR === null ? "unfocused" : mode;
+  const stateEntry = (explanations && explanations[stateKey]) || null;
+
   // Mode-specific content
   let modeContent = null;
   if (focusN === null) {
@@ -564,6 +570,24 @@ export default function PascalsTriangle() {
             {factorialBlock}
             {interpretationSection}
             {modeContent}
+            {stateEntry && (
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: "10px 12px",
+                  background: COLORS.surfaceTint,
+                  border: `1px solid #dbeafe`,
+                  borderLeft: `3px solid ${COLORS.accent}`,
+                  borderRadius: 8,
+                  fontSize: 12,
+                  lineHeight: 1.55,
+                  color: COLORS.text,
+                  fontFamily: "system-ui, sans-serif",
+                }}
+              >
+                {processContent(stateEntry)}
+              </div>
+            )}
           </RightPanel>
         </SceneGrid>
       </PageWrap>

@@ -8,6 +8,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -657,31 +658,36 @@ Most of these derivatives are established through [implicit differentiation or t
 };
 
 
+// FAQ pass: formula-library page — descriptive category headings, so
+// formula-shaped queries survive. Cut the pattern question (its own h2) and
+// the piecewise-boundary one, now owned by the differentiability page. Kept
+// and extended arcsin and arctan; added the |x| in arcsec, the cosh sign
+// contrast, and arcsinh so the inverse-hyperbolic section is represented.
 const faqQuestions = {
   obj1: {
     question: "What is the derivative of arcsin x?",
-    answer: "The derivative of arcsin x is 1/√(1 − x²) for |x| < 1. It is derived by setting y = arcsin x, so sin y = x, then applying implicit differentiation. The derivative of arccos x is the negative of this, −1/√(1 − x²).",
+    answer: "The derivative of arcsin x is 1/√(1 − x²), valid for |x| < 1. Set y = arcsin x so that sin y = x, differentiate implicitly to get cos y · dy/dx = 1, and use cos y = √(1 − sin²y), positive because y lies in [−π/2, π/2]. At x = ±1 the denominator vanishes, which is why the graph has vertical tangents at its endpoints.",
     sectionId: "1"
   },
   obj2: {
     question: "What is the derivative of arctan x?",
-    answer: "The derivative of arctan x is 1/(1 + x²), valid for all real x. This is derived by implicit differentiation of tan y = x, using the identity sec²y = 1 + tan²y. The result appears frequently in integration as the antiderivative of 1/(1 + x²).",
+    answer: "The derivative of arctan x is 1/(1 + x²), valid for every real x — unlike arcsine, there is no domain restriction. Set y = arctan x so tan y = x, differentiate to get sec²y · dy/dx = 1, then use sec²y = 1 + tan²y = 1 + x². The result is always positive, so arctan x is strictly increasing.",
     sectionId: "2"
   },
   obj3: {
-    question: "How do inverse trigonometric derivatives relate to each other?",
-    answer: "The six inverse trig derivatives form three pairs (arcsin/arccos, arctan/arccot, arcsec/arccsc), and within each pair the derivatives are negatives of each other. This follows from each pair summing to π/2, so their derivatives sum to zero.",
-    sectionId: "4"
+    question: "Why does the derivative of arcsec x have an absolute value?",
+    answer: "Because the sign of tan y depends on the quadrant. Setting y = arcsec x gives sec y · tan y · dy/dx = 1, and tan y = ±√(x² − 1) — positive on one branch of the domain, negative on the other. Writing sec y · tan y as |x|√(x² − 1) makes a single formula correct across the whole domain |x| > 1.",
+    sectionId: "3"
   },
   obj4: {
-    question: "What are the derivatives of hyperbolic functions?",
-    answer: "The hyperbolic derivatives mirror the trigonometric ones: (sinh x)' = cosh x, (cosh x)' = sinh x, and (tanh x)' = sech²x. The key difference is that (cosh x)' = sinh x has no negative sign, whereas (cos x)' = −sin x does.",
+    question: "Why is the derivative of cosh x positive when the derivative of cos x is negative?",
+    answer: "Because the hyperbolic functions are built from e^x and e^(−x) rather than from rotation. Differentiating cosh x = (e^x + e^(−x))/2 gives (e^x − e^(−x))/2, which is sinh x — no sign flip appears anywhere. The trigonometric minus sign comes from the circle; the hyperbola produces none. That one difference propagates through all six hyperbolic formulas.",
     sectionId: "5"
   },
   obj5: {
-    question: "How do you differentiate a piecewise function at a boundary?",
-    answer: "At a boundary point where the formula changes, the derivative exists only if the function is continuous there and the left-hand and right-hand derivatives are equal. If either condition fails, the function is not differentiable at that point.",
-    sectionId: "7"
+    question: "What is the derivative of arcsinh x?",
+    answer: "The derivative of arcsinh x is 1/√(x² + 1), valid for all real x. Compare arcsin, whose derivative is 1/√(1 − x²): the signs inside the radical flip, which is the general relationship between inverse trigonometric and inverse hyperbolic derivatives. It follows from the logarithmic form arcsinh x = ln(x + √(x² + 1)) differentiated by the chain rule.",
+    sectionId: "6"
   }
 }
 
@@ -755,19 +761,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/special"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -872,6 +865,22 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj8Table}}/>,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Special Derivatives FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -989,13 +998,6 @@ export default function PageTemplate({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

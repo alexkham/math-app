@@ -1083,6 +1083,7 @@ import NormalDistributionCDF from '@/app/components/visualizations/probability/c
 import NormalDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/NormalDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1865,26 +1866,32 @@ This convergence explains why the normal distribution appears so frequently in n
   `
 }
 
+  // FAQ pass: the definition and the CLT explanation are served by the
+  // experiment h2; the standard normal by Special Cases; the z-score
+  // procedure by CDF and Quantiles. Kept the 68-95-99.7 rule, which is a
+  // named result under a heading reading only "Properties", and took over
+  // the σ² versus σ question from the random-variables page, which owns the
+  // convention in general but not this family's instance of it.
   const faqQuestions = {
     obj1: {
-      question: "What is the normal distribution?",
-      answer: "The normal distribution (also called Gaussian distribution) is a continuous probability distribution characterized by its symmetric, bell-shaped curve. It is defined by two parameters: the mean μ (center) and standard deviation σ (spread). It arises naturally when many small, independent factors combine to produce an outcome."
+      question: "Does N(μ, σ²) use variance or standard deviation?",
+      answer: "It depends on the source, and nothing in the notation says which. Most textbooks put the variance in the second slot; much software puts the standard deviation — R's and Python's normal functions both take the SD. Magnitude sometimes betrays it: N(175, 49) carries σ = 7 squared, N(175, 7) the SD raw. N(0, 1) agrees under both, which is why the ambiguity hides so well.",
+      sectionId: "2"
     },
     obj2: {
-      question: "What is the standard normal distribution?",
-      answer: "The standard normal distribution is a special case with mean μ = 0 and standard deviation σ = 1, denoted N(0,1) or Z. Any normal variable X can be converted to standard normal using z = (X - μ)/σ. This standardization is the basis for z-scores and probability tables."
+      question: "What is the 68-95-99.7 rule?",
+      answer: "For a normal distribution, about 68% of values fall within one standard deviation of the mean, 95% within two, and 99.7% within three. It is a fast way to read a normal curve without tables. Note it holds only for normal data — a distribution with a variance but no bell shape guarantees far less.",
+      sectionId: "15"
     },
     obj3: {
-      question: "What is the 68-95-99.7 rule?",
-      answer: "The 68-95-99.7 rule (empirical rule) states that for a normal distribution, approximately 68% of values fall within one standard deviation of the mean, 95% within two standard deviations, and 99.7% within three standard deviations. This helps quickly estimate probabilities without calculations."
+      question: "Why is there no formula for normal probabilities?",
+      answer: "Because Φ, the standard normal CDF, has no closed form. It is defined by its integral, and that integral has no elementary antiderivative — so values come from tables or software rather than algebra. Its inverse Φ⁻¹, the probit, is what every z-quantile lookup computes. This is why normal problems route through z-scores and a single table.",
+      sectionId: "6"
     },
     obj4: {
-      question: "Why is the normal distribution so common?",
-      answer: "The Central Limit Theorem explains its ubiquity: when many independent random effects add together, their sum tends toward a normal distribution regardless of the original distributions. This makes it the natural model for measurements influenced by multiple factors, from heights to measurement errors."
-    },
-    obj5: {
-      question: "How do you calculate probabilities for a normal distribution?",
-      answer: "Convert your value to a z-score using z = (x - μ)/σ, then use standard normal tables, calculators, or software to find the cumulative probability. There is no closed-form solution for the normal CDF, so numerical methods or lookup tables are required."
+      question: "What does a negative z-score mean?",
+      answer: "Below the mean, by that many standard deviations. z = −2 means two standard deviations below, not a distance of two — the sign carries direction, and dropping it collapses the two tails the score exists to tell apart. Capital Z is the standard normal variable; lowercase z is one computed score.",
+      sectionId: "2"
     }
   }
 
@@ -1963,19 +1970,6 @@ This convergence explains why the normal distribution appears so frequently in n
           "item": "https://www.learnmathclass.com/probability/distributions/continuous/normal"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -2161,6 +2155,22 @@ export default function NormalDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Normal Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2197,12 +2207,6 @@ export default function NormalDistributionPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

@@ -863,6 +863,7 @@ import CalculatorInstructions from '@/app/components/calculators/CalculatorInstr
 import DiscreteUniformCalculator from '@/app/components/calculators/probability/distributions/UniformDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -1401,26 +1402,27 @@ const discreteUniformExplanations = {
   "Interpretation": "• Mean (μ = (a+b)/2): Average value, exactly in the middle of range\n• Variance (σ² = (n²-1)/12): Spread of values\n• Probability (1/n): Each value has exactly equal probability\n• Chart: All bars have equal height - uniform distribution"
 };
 
+  // FAQ pass: all five originals named their own h2 — the experiment, the
+  // PMF, Expected Value (Mean), and Applications. "Why are outcomes equally
+  // likely" is definitional and answered by the experiment section itself.
+  // Replaced with the notation section's three traps: the off-by-one
+  // denominator, the U(a, b) name collision, and the support-line tell.
+  // Three, not padded — the mean and variance both have their own headings.
   const faqQuestions = {
     obj1: {
-      question: "What is the discrete uniform distribution?",
-      answer: "The discrete uniform distribution models situations where outcomes are selected from a finite set of integers and every outcome is equally likely. It has two parameters: a (minimum) and b (maximum), with each integer in the range having probability 1/(b-a+1). Rolling a fair die is the classic example."
+      question: "Why is the denominator b − a + 1 and not b − a?",
+      answer: "Because it counts outcomes, not width. The integers from a to b inclusive number b − a + 1 — six faces from 1 to 6, not five. Writing 1/(b − a) is the fencepost error in probabilistic dress: on DU(1, 6) it hands each face 1/5 and the six probabilities sum to 1.2. The slip hides on DU(1, n), where the count collapses to 1/n.",
+      sectionId: "4"
     },
     obj2: {
-      question: "What is the discrete uniform probability formula?",
-      answer: "The probability of any outcome x is P(X = x) = 1/(b - a + 1) = 1/n, where a is the minimum value, b is the maximum value, and n is the total number of possible outcomes. Every value in the range has identical probability—this equal likelihood is the defining feature of uniformity."
+      question: "Does U(a, b) mean the discrete or continuous uniform?",
+      answer: "Bare U(a, b) names both with equal authority, and nothing in the parentheses distinguishes them. U(3, 7) can mean five equally likely integers, each with probability 1/5, or an interval of infinitely many points, each with probability 0. Two tells resolve it: a pmf and integer bounds mean discrete; a density and real bounds mean [continuous](!/probability/distributions/continuous/uniform#2).",
+      sectionId: "15"
     },
     obj3: {
-      question: "How do you find the mean of a discrete uniform distribution?",
-      answer: "The mean (expected value) is E[X] = (a + b)/2, which is simply the midpoint between the minimum and maximum values. This formula reflects the distribution's symmetry: since all outcomes are equally likely, the average naturally falls at the center of the range."
-    },
-    obj4: {
-      question: "Why are all outcomes equally likely in uniform distribution?",
-      answer: "In a uniform distribution, the mechanism generating outcomes treats all possibilities identically—there's no preference, weighting, or bias. This symmetry means probability is spread evenly across all values. Fair dice, random number generators, and lottery drawings exhibit this equal-chance property by design."
-    },
-    obj5: {
-      question: "When should you use the discrete uniform distribution?",
-      answer: "Use discrete uniform when selecting from a known finite set of integers where no outcome is favored over another. Common applications include fair dice rolls, random integer selection, lottery numbers, and any scenario with equally likely discrete outcomes. It serves as a baseline model for understanding more complex distributions."
+      question: "What does the support line tell you about a distribution?",
+      answer: "Often the family, before the formula does. Braces {a, a+1, …, b} mean a stepped integer run; brackets [a, b] mean a real interval. Among the discrete families the shapes differ too: a closed list for the binomial, an open ellipsis for the Poisson, computed clamps for the hypergeometric, a shifted list for the negative binomial.",
+      sectionId: "15"
     }
   }
 
@@ -1499,19 +1501,6 @@ const discreteUniformExplanations = {
           "item": "https://www.learnmathclass.com/probability/distributions/discrete/uniform"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1681,6 +1670,22 @@ export default function DiscreteUniformDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Discrete Uniform Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1717,12 +1722,6 @@ export default function DiscreteUniformDistributionPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

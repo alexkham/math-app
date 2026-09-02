@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Limit</h1>
 //    <br/>
-//    <FunctionLimit/>
+//    <FunctionLimit explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionLimit from '../../../../app/components/functions/limit/FunctionLimit'
+import functionLimitDiagrams from '../../../../app/components/functions/limit/functionLimitDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -766,38 +768,80 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Quadratic: the Control Case`,
+      content: `$f(x) = x^2$ centered at $c = 1$ is the family with nothing wrong with it, and it is here to give the other six something to be compared against.
+
+At $\varepsilon = 0.5$ the tool samples $f(0.5) = 0.25$ on the left and $f(1.5) = 2.25$ on the right. Both one-sided limits are $1$, $f(1) = 1$, and the single $L$ line passes straight through the curve.`,
       before: ``,
-      after: ``,
+      after: `Shrink $\varepsilon$ and the two sampled values close in on $1$ from either side. That is the definition being enacted: the limit is the number the function values approach, and here they approach it from both directions at once.
+
+Because $f(c)$ also equals that number, this family is continuous at $c$ as well. Limit and continuity coincide in the easy case — the six families that follow are exactly the ways they can come apart.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Hole: the Limit Exists Without the Value`,
+      content: `$f(x) = \frac{x^2 - 1}{x - 1}$ at $c = 1$. The expression cancels to $x + 1$ everywhere except at $x = 1$, where it reads $\frac{0}{0}$ and is undefined.
+
+At $\varepsilon = 0.5$: $f(0.5) = 1.5$, $f(1.5) = 2.5$. Both one-sided limits are $2$, and the $L$ line is drawn at that height — but no $f(c)$ marker appears on it, because there is no value there.`,
       before: ``,
-      after: ``,
+      after: `This family makes the sharpest point in the whole tool: **the limit does not care what happens at $c$**. Its definition only involves $x$ near $c$ with $x \neq c$, so the missing value is irrelevant to it. The limit is $2$ regardless.
+
+That is why the verdict rows split the way they do. The limit row passes; the continuity row fails. Filling the hole with $f(1) = 2$ would repair continuity without changing the limit at all.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Step: One-Sided Limits That Disagree`,
+      content: `A piecewise function — $f(x) = x$ below zero, $f(x) = x + 1$ from zero up — centered at $c = 0$.
+
+At $\varepsilon = 0.5$: $f(-0.5) = -0.5$ approaching from the left, $f(0.5) = 1.5$ from the right. The two $L$ lines sit at $0$ and $1$, and shrinking $\varepsilon$ drives the samples toward those two different numbers.`,
       before: ``,
-      after: ``,
+      after: `Both one-sided limits exist here, which is what separates a jump from the wilder failures below. What fails is the requirement that they agree: $\lim_{x \to 0} f(x)$ exists only when $L^- = L^+$, and $0 \neq 1$.
+
+The gap $L^+ - L^- = 1$ is the jump's size, and it is a fixed property of the two pieces. No choice of $f(0)$ can close it, which is what makes a jump irreparable while a hole is not.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `1/x²: Both Sides Blow Up the Same Way`,
+      content: `$f(x) = 1/x^2$ at $c = 0$ has a vertical asymptote, and the function grows without bound on both sides.
+
+At $\varepsilon = 0.5$: $f(-0.5) = 4$ and $f(0.5) = 4$ — equal, and both already large. Halve $\varepsilon$ and both become $16$; halve again and they are $64$. No $L$ lines are drawn at all, because there is no finite height to draw them at.`,
       before: ``,
-      after: ``,
+      after: `The tool records this as $L^- = L^+ = +\infty$, and that notation deserves care. It describes *how* the limit fails, not a value it takes. In the strict sense the limit does not exist, because "exists" means converging to a real number.
+
+Some texts write $\lim_{x \to 0} 1/x^2 = +\infty$ as shorthand for exactly this behaviour, which is a legitimate convention as long as everyone understands it is a statement about unbounded growth. See [one-sided vs two-sided](!#one-sided-vs-two-sided) for how the same distinction plays out with finite values.`,
       link: '',
     },
     obj15: {
-      title: ``,
-      content: ``,
+      title: `1/x: Infinite in Opposite Directions`,
+      content: `$f(x) = 1/x$ at $c = 0$ also has an asymptote, but the two sides run opposite ways.
+
+At $\varepsilon = 0.5$: $f(-0.5) = -2$ and $f(0.5) = 2$. Shrink $\varepsilon$ and the left sample dives toward $-\infty$ while the right climbs toward $+\infty$.`,
       before: ``,
-      after: ``,
+      after: `Compare this with $1/x^2$ directly. There, both sides agreed on their manner of failure; here they do not even do that. The tool reports $L^- = -\infty$ and $L^+ = +\infty$, which is a jump and an infinity at once.
+
+The practical consequence shows up in improper integrals and in graphing: the curve leaves the frame downward on one side and upward on the other, so the asymptote separates two branches that share no common value or common direction.`,
+      link: '',
+    },
+    obj16: {
+      title: `sin(1/x): Oscillation With No Limit at All`,
+      content: `$f(x) = \sin(1/x)$ at $c = 0$ is the family where neither one-sided limit exists — and not because the function grows too large. It stays neatly inside $[-1, 1]$ the whole time.
+
+At $\varepsilon = 0.5$ the samples read $f(-0.5) = -0.91$ and $f(0.5) = 0.91$. Those numbers are honest but useless: pick a slightly different $\varepsilon$ and they will be entirely different, because as $x \to 0$ the argument $1/x$ runs off to infinity and the sine cycles faster and faster.`,
+      before: ``,
+      after: `This is the cleanest demonstration that "bounded" is not "convergent". Between any two points, however close to zero, the function still completes infinitely many full oscillations, taking every value in $[-1, 1]$ along the way. There is no single number the values settle toward.
+
+It also shows why sampling alone can never establish a limit. Two sample points always produce two numbers; whether those numbers mean anything depends on the function, and here they do not. The tool reports $L^-$ and $L^+$ as DNE rather than picking a value from the noise.`,
+      link: '',
+    },
+    obj17: {
+      title: `Square Root: a Limit From One Side Only`,
+      content: `$f(x) = \sqrt{x}$ at $c = 0$ is defined only for $x \geq 0$, so the left half of the graph is simply empty.
+
+At $\varepsilon = 0.5$ the right sample reads $f(0.5) = 0.71$, and the left sample cannot be taken at all — $f(-0.5)$ is undefined. The tool reports $L^+ = 0$ and $L^-$ as DNE.`,
+      before: ``,
+      after: `The two-sided limit therefore does not exist, but the reason is different in kind from the previous families. Nothing misbehaves; there is simply no left side to approach from.
+
+That is why one-sided limits are worth having as their own notion. $\lim_{x \to 0^+} \sqrt{x} = 0$ is a perfectly good statement, and it is exactly what justifies calling $\sqrt{x}$ continuous on $[0, \infty)$ — continuity at an endpoint is defined using the one-sided limit, because that is the only one available.`,
       link: '',
     }
 
@@ -808,6 +852,57 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
     id: "intro",
     title: "",
     content: ``
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     SVGs come from the tool's own scene description, serialised through the
+     core's generateSVG - see app/components/functions/frozenSvg.js. Every state
+     is frozen at the component's initialEps = 0.5. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: functionLimitDiagrams[key], caption, text })
+
+  const stateUnits = {
+    continuous: unit('continuous', 'Quadratic, frozen at c = 1, &epsilon; = 0.5',
+      'One L line at height 1, with the f(c) marker sitting on it and the two approach markers straddling ' +
+      'c at 0.25 and 2.25. Everything agrees - this is the case with nothing to diagnose.'),
+    removable: unit('removable', 'Hole, frozen at c = 1, &epsilon; = 0.5',
+      'The L line is drawn at 2 and the approach markers close in on it from 1.5 and 2.5, but the line ' +
+      'carries no f(c) marker: the value at c is missing while the limit is not.'),
+    jump: unit('jump', 'Step, frozen at c = 0, &epsilon; = 0.5',
+      'Two L lines, at 0 and at 1, with an open endpoint below and a closed one above. The approach ' +
+      'markers at -0.5 and 1.5 are heading for different heights.'),
+    'infinite-pos': unit('infinite-pos', '1/x&sup2;, frozen at c = 0, &epsilon; = 0.5',
+      'No L lines at all - there is no finite height to draw one at. Both approach markers read 4 and ' +
+      'climb together as &epsilon; shrinks.'),
+    'infinite-jump': unit('infinite-jump', '1/x, frozen at c = 0, &epsilon; = 0.5',
+      'The same missing L lines, but the two branches leave the frame in opposite directions. The approach ' +
+      'markers read -2 and +2 and separate further with every reduction of &epsilon;.'),
+    oscillating: unit('oscillating', 'sin(1/x), frozen at c = 0, &epsilon; = 0.5',
+      'The curve stays inside [-1, 1] yet packs more and more oscillations toward c. The two approach ' +
+      'markers read -0.91 and 0.91 here, and would read something quite different at any other &epsilon;.'),
+    onesided: unit('onesided', 'Square root, frozen at c = 0, &epsilon; = 0.5',
+      'Nothing is drawn left of c, so only one approach marker exists, at 0.71. The closed endpoint at ' +
+      'the origin is where the right-hand limit lands.'),
+  }
+
+
+  /* ---- per-family panel notes, passed into the component (Line 1) ----
+     FunctionLimit had no explanations prop; one was added additively and
+     defaults to null, so the panel is unchanged when nothing is passed. Content
+     is markdown - InfoPanel renders it through processContent, so anchors use
+     the normal [text](!#slug) form. */
+  const note = (body, slug, label) =>
+    `### Where this leads\n\n${body} See [${label}](!#${slug}) or compare [the whole zoo](!#the-discontinuity-zoo).`
+
+  const explanations = {
+    continuous: note('Limit and value agree, so this family is continuous at c as well.', 'the-control-case', 'the control case'),
+    removable: note('The limit exists even though f(c) does not - the definition never looks at c itself.', 'the-hole', 'the hole'),
+    jump: note('Both one-sided limits exist but disagree, and no value at c can reconcile them.', 'the-step', 'the step'),
+    'infinite-pos': note('Both sides grow without bound in the same direction, so no finite limit exists.', 'blowing-up-both-ways', 'the 1/x squared case'),
+    'infinite-jump': note('The two sides run to opposite infinities - a jump and an asymptote at once.', 'infinite-in-opposite-directions', 'the 1/x case'),
+    oscillating: note('Bounded but never settling: infinitely many oscillations before reaching c.', 'oscillation-without-a-limit', 'the oscillating case'),
+    onesided: note('Only one side exists to approach from, which is what one-sided limits are for.', 'a-limit-from-one-side', 'the square root case'),
   }
 
 
@@ -914,6 +1009,8 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -925,147 +1022,56 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
         name: "Limit Explorer",
         hubDescription: "Watch left and right limits race toward each other as epsilon shrinks. Switch between seven canonical cases — continuous, hole, jump, infinite asymptote, oscillating, and one-sided — and read the verdict for both the limit and the continuity at c.",
         category: "Limits and Continuity",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="60" x2="76" y2="60" stroke="#B5D4F4" stroke-width="0.9"/><line x1="14" y1="8" x2="14" y2="64" stroke="#B5D4F4" stroke-width="0.9"/><line x1="14" y1="27" x2="44" y2="27" stroke="#C0DD97" stroke-width="0.9" stroke-dasharray="2.5,2"/><line x1="44" y1="27" x2="44" y2="60" stroke="#C0DD97" stroke-width="0.9" stroke-dasharray="2.5,2"/><path d="M 18 54 Q 29.44 38.16 40.88 29.29" fill="none" stroke="#85B7EB" stroke-width="1.8"/><path d="M 47.12 24.97 Q 58.56 18 70 18" fill="none" stroke="#85B7EB" stroke-width="1.8"/><circle cx="44" cy="27" r="3.2" fill="none" stroke="#FAC775" stroke-width="1.7"/><text x="9" y="29" font-family="Georgia,serif" font-size="7.5" fill="#C0DD97" text-anchor="middle" font-style="italic">L</text><text x="44" y="70" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">a</text></svg>`
       },
 
     }
   }
 }
 
-export default function LimitExplorer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function LimitExplorer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-discontinuity-zoo'),
+    stateRow('obj11', 'the-control-case', 'continuous'),
+    stateRow('obj12', 'the-hole', 'removable'),
+    stateRow('obj13', 'the-step', 'jump'),
+    stateRow('obj14', 'blowing-up-both-ways', 'infinite-pos'),
+    stateRow('obj15', 'infinite-in-opposite-directions', 'infinite-jump'),
+    stateRow('obj16', 'oscillation-without-a-limit', 'oscillating'),
+    stateRow('obj17', 'a-limit-from-one-side', 'onesided'),
+    plain('obj3', 'the-epsilon-slider'),
+    plain('obj4', 'the-approach-bar'),
+    plain('obj5', 'the-three-limit-cards'),
+    plain('obj6', 'the-two-verdict-rows'),
+    plain('obj7', 'display-toggles'),
+    plain('obj8', 'what-is-a-limit'),
+    plain('obj9', 'one-sided-vs-two-sided'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -1121,7 +1127,7 @@ export default function LimitExplorer({seoData, sectionsContent, introContent, f
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Limit Explorer - Interactive Visualizer</h1>
       <br/>
-      <FunctionLimit/>
+      <FunctionLimit explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

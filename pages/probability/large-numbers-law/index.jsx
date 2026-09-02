@@ -718,6 +718,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1328,26 +1329,31 @@ This page presents the formal statement of the theorem, clarifies what kind of c
 `
 }
 
+  // FAQ pass: all five originals named their own h2 — Formal Statement,
+  // Weak vs Strong, When the Law Applies, LLN vs Central Limit Theorem, Why
+  // LLN Is So Important. Replaced with four of the misconceptions the page
+  // lists as unheaded bullets, starting with the gambler's fallacy — the
+  // most consequential misreading of this theorem anywhere.
   const faqQuestions = {
     obj1: {
-      question: "What is the Law of Large Numbers?",
-      answer: "The Law of Large Numbers states that as sample size increases, the sample mean converges to the population mean. Mathematically, for independent identically distributed random variables with finite mean μ, the sample mean X̄ₙ approaches μ in probability as n→∞. This explains why averages become more reliable with more observations."
+      question: "Does a run of heads make tails more likely?",
+      answer: "No — that is the gambler's fallacy. Independence means the coin has no memory: after ten heads, the next flip is still 50-50. The Law of Large Numbers does not say tails become “due” to balance the record. It says the proportion of heads approaches 0.5 over enough flips, which happens by dilution, not by correction.",
+      sectionId: "7"
     },
     obj2: {
-      question: "What is the difference between weak and strong law of large numbers?",
-      answer: "The weak law (WLLN) guarantees convergence in probability—the probability of large deviations shrinks to zero. The strong law (SLLN) guarantees almost sure convergence—the sample mean actually converges to μ for almost every sequence. Almost sure convergence is stronger; it implies convergence in probability but not vice versa."
+      question: "How large does the sample need to be for the Law of Large Numbers to apply?",
+      answer: "There is no such number. The law is asymptotic: it describes behavior as n → ∞, not at any particular finite n. No sample size guarantees convergence. How quickly the sample mean settles depends on the distribution — skewness, heavy tails and high variance all slow it down. Rules of thumb like n ≥ 30 come from elsewhere, not from this theorem.",
+      sectionId: "7"
     },
     obj3: {
-      question: "When does the Law of Large Numbers apply?",
-      answer: "The LLN requires three conditions: independence (observations don't influence each other), identical distribution (all observations from the same distribution), and finite mean (expected value exists). The weak law needs only finite mean; the strong law may require finite variance. Violations—like dependent data or infinite means—can prevent convergence."
+      question: "Does convergence mean the sample mean eventually equals the true mean?",
+      answer: "No. Convergence in probability means the chance of a large deviation shrinks toward zero, not that the gap closes to nothing. For any finite n, the sample mean differs from μ with positive probability. The theorem describes limiting behavior, not finite-sample certainty — there is no point at which the two become equal.",
+      sectionId: "5"
     },
     obj4: {
-      question: "What is the difference between LLN and Central Limit Theorem?",
-      answer: "LLN tells us WHERE the sample mean goes (converges to μ). CLT tells us the SHAPE of the distribution of sample means (approximately normal). LLN requires only finite mean; CLT requires finite variance. LLN describes convergence to a value; CLT describes how sample means distribute around that value. They're complementary, not equivalent."
-    },
-    obj5: {
-      question: "Why is the Law of Large Numbers important?",
-      answer: "LLN is the foundation of statistical estimation—it proves that sample means converge to true values. This justifies polling, surveys, Monte Carlo methods, insurance risk pooling, and scientific replication. Without LLN, we couldn't trust sample averages to estimate population parameters. It explains why statistics works."
+      question: "Are small samples wrong, or just noisy?",
+      answer: "Noisy. A sample mean from a small sample is an unbiased estimator — it is centered on the true mean, not systematically off it. What small samples have is higher [variance](!/probability/variance): a wider range of plausible values around the right center. The problem is spread, not bias, and the two get conflated constantly.",
+      sectionId: "7"
     }
   }
 
@@ -1414,19 +1420,6 @@ This page presents the formal statement of the theorem, clarifies what kind of c
           "item": "https://www.learnmathclass.com/probability/large-numbers-law"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1601,6 +1594,22 @@ export default function LargeNumbersLawPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Law of Large Numbers FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1634,13 +1643,6 @@ export default function LargeNumbersLawPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

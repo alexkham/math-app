@@ -772,7 +772,8 @@ Closing the catalog here is fitting: the four compound complements demonstrate t
         name: "Two-Set Venn Diagram Laws and Identities Explorer",
         hubDescription: "Verify two-set algebraic laws by shading both sides of each identity on a pair of side-by-side Venn diagrams. Browse 27 laws across eight categories — idempotent, commutative, identity, complement, De Morgan's, absorption, difference, and compound complements — and watch the match indicator confirm each visual proof.",
         category: "Venn Diagrams",
-        subCategory: "Two Sets"
+        subCategory: "Two Sets",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g transform="translate(2 20) scale(0.45)"><circle cx="30" cy="40" r="20" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="2.6"/><circle cx="50" cy="40" r="20" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="2.6"/><path d="M 40 22.68 A 20 20 0 0 1 40 57.32 A 20 20 0 0 1 40 22.68 Z" fill="#FAC775" stroke="#854F0B" stroke-width="2.6"/></g><g transform="translate(42 20) scale(0.45)"><circle cx="30" cy="40" r="20" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="2.6"/><circle cx="50" cy="40" r="20" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="2.6"/><path d="M 40 22.68 A 20 20 0 0 1 40 57.32 A 20 20 0 0 1 40 22.68 Z" fill="#FAC775" stroke="#854F0B" stroke-width="2.6"/></g><text x="40" y="42" font-family="Georgia,serif" font-size="13" fill="#E6F1FB" text-anchor="middle">=</text><circle cx="40" cy="66" r="7" fill="#97C459" stroke="#27500A" stroke-width="1.2"/><path d="M36.5 66 L39 69 L43.5 62.5" fill="none" stroke="#173404" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`
       },
     }
   }

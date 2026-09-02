@@ -11,6 +11,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -409,41 +410,37 @@ Some infinite regions have finite area. The region under $1/x^2$ from $1$ to $\\
 
 
 
+// FAQ pass: all seven originals named their own h2 — what makes an integral
+// improper, infinite limits, discontinuous integrands, convergence vs
+// divergence, the p-test, comparison, limit comparison. That settles the
+// hub's deferred "What are improper integrals?": the h2 answers it, so no
+// page needs the entry. Replaced with the traps — impropriety you have to
+// notice, limits that must not be tied together, and the two divergences.
 const faqQuestions = {
   obj1: {
-    question: "What makes an integral improper?",
-    answer: "An integral is improper if it has infinite limits of integration (extending to ∞ or −∞) or an unbounded integrand (a vertical asymptote within or at the boundary of the interval). Both conditions can occur simultaneously in the same integral.",
-    sectionId: "1"
+    question: "How do you know an integral is improper if it looks normal?",
+    answer: "Inspect the integrand, because nothing in the notation warns you. ∫₀¹ (1/√x) dx looks like an ordinary definite integral, but the integrand blows up at x = 0, so it is improper and needs a limit. Applying the Fundamental Theorem straight to it happens to work here; on a divergent example it would produce a confident, wrong number.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you evaluate integrals with infinite limits?",
-    answer: "Replace the infinite limit with a finite variable, compute the resulting proper integral, then take a limit. For ∫ₐ^∞ f(x) dx, evaluate lim(b→∞) ∫ₐᵇ f(x) dx. For both limits infinite, split at any finite point c and evaluate each piece independently.",
-    sectionId: "2"
+    question: "Why must an integral from −∞ to ∞ be split into two separate limits?",
+    answer: "Because tying both ends to one variable changes the definition. Split at any finite c and require each half to converge on its own. The symmetric version, letting −R and R run out together, is Cauchy's principal value — a different object. The integral of x over the whole line diverges, yet its principal value is 0.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you handle integrals with discontinuous integrands?",
-    answer: "When f has a vertical asymptote at c within [a,b], split the integral and use limits. If the asymptote is at an endpoint, approach it from within the interval. Both limits must exist independently for the integral to converge.",
-    sectionId: "3"
+    question: "Does an integral that diverges always equal infinity?",
+    answer: "No. Divergence comes in two species. One is growth without bound, written = ∞ by the same equals-sign abuse used for [infinite limits](!/calculus/limits/infinity#notation). The other is oscillation: ∫₀^∞ sin x dx never settles and never grows, so no value exists at all. Every integral equal to infinity diverges, but not every divergent integral is infinite.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "What is the difference between convergence and divergence?",
-    answer: "An improper integral converges if the defining limit exists and is finite—the integral equals that value. It diverges if the limit is infinite or fails to exist. For example, ∫₁^∞ 1/x² dx converges to 1, while ∫₁^∞ 1/x dx diverges to infinity.",
-    sectionId: "4"
+    question: "Why do the two sides of an interior asymptote need separate limits?",
+    answer: "Because one variable for both sides secretly cancels the two infinities against each other. With an asymptote at c inside [a, b], write the left limit as t → c⁻ and the right as s → c⁺, using independent letters. Both must converge on their own; a shared letter can declare a divergent integral finite.",
+    sectionId: "3"
   },
   obj5: {
-    question: "What is the p-test for improper integrals?",
-    answer: "For ∫₁^∞ 1/xᵖ dx: converges if p > 1, diverges if p ≤ 1. For ∫₀¹ 1/xᵖ dx: converges if p < 1, diverges if p ≥ 1. The boundary case p = 1 always diverges because ∫1/x dx = ln|x| is unbounded in both directions.",
+    question: "Why does the p-test flip between infinity and zero?",
+    answer: "Because the danger sits at opposite ends. Out at infinity, ∫₁^∞ (1/xᵖ) dx converges when p > 1 — the integrand has to decay fast enough. Near zero, ∫₀¹ (1/xᵖ) dx converges when p < 1 — the blow-up has to be mild enough. Larger p helps at infinity and hurts at zero. At p = 1 both diverge.",
     sectionId: "5"
-  },
-  obj6: {
-    question: "What is the comparison test for improper integrals?",
-    answer: "For nonnegative functions: if f(x) ≤ g(x) and ∫g converges, then ∫f converges. If f(x) ≥ g(x) and ∫g diverges, then ∫f diverges. Compare unknown integrals to known ones like 1/xᵖ to determine convergence.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the limit comparison test?",
-    answer: "For positive functions f and g, if lim(x→∞) f(x)/g(x) = L where 0 < L < ∞, then ∫f and ∫g both converge or both diverge. This is useful when direct comparison is awkward but the functions have similar asymptotic behavior.",
-    sectionId: "7"
   }
 }
 
@@ -518,19 +515,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals/improper"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -649,6 +633,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Improper Integrals FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -683,13 +683,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

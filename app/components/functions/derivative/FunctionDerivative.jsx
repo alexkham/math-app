@@ -259,6 +259,7 @@ export default function FunctionDerivative({
   initialFamily = 'quadratic',
   initialX0 = 1,
   families = DEFAULT_FAMILIES,
+  explanations = null,
   visualizerProps = {},
   infoPanelProps = {},
   darkMode = false,
@@ -365,9 +366,14 @@ export default function FunctionDerivative({
       `### Right now\n\n` +
       `${numbersLine}\n\n` +
       `### The link\n\n` +
-      `The light-blue tangent line on $f$ has slope $f'(x_0)$. The deep-blue dot on $f'$ sits at the same height. Two pictures of the same number.`
+      `The light-blue tangent line on $f$ has slope $f'(x_0)$. The deep-blue dot on $f'$ sits at the same height. Two pictures of the same number.` +
+      // Optional per-family note supplied by the page (Line 1 anchor mesh).
+      // Omitted -> the panel reads exactly as it always has.
+      (explanations?.[current] ? `
+
+${explanations[current]}` : '')
     );
-  }, [fam, x0, f0, fp0, f0Defined, fp0Defined]);
+  }, [fam, x0, f0, fp0, f0Defined, fp0Defined, explanations, current]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

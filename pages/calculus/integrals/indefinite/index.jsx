@@ -12,6 +12,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -485,41 +486,37 @@ Finding antiderivatives is the central challenge. Unlike differentiation, which 
 `
 };
 
+// FAQ pass: all seven originals named their own h2 — antiderivatives, the
+// constant of integration, notation, basic formulas, linearity, verifying,
+// and the definite connection. That resolves the hub's deferred claim on
+// "What is an antiderivative?": the h2 answers it, so no page needs the
+// entry. Replaced with the theorem behind + C, the initial-condition
+// procedure, and the three notation traps.
 const faqQuestions = {
   obj1: {
-    question: "What is an antiderivative?",
-    answer: "A function F is an antiderivative of f if F'(x) = f(x). Antiderivatives reverse differentiation. They are not unique—if F is an antiderivative of f, then so is F + C for any constant C, forming a family of functions.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "Why do indefinite integrals have +C?",
-    answer: "The constant of integration C represents the complete family of antiderivatives. Since the derivative of any constant is zero, functions differing by a constant share the same derivative. Omitting +C gives only one member when infinitely many exist.",
+    question: "Why do all antiderivatives of a function differ by a constant?",
+    answer: "Because two functions with the same derivative on an interval can only differ by a constant. If F′ = G′ then (F − G)′ = 0, and a function whose derivative is zero everywhere on an interval is constant. So once you find one antiderivative F, the whole family is F + C — nothing outside that form can have the right derivative.",
     sectionId: "2"
   },
-  obj3: {
-    question: "What does indefinite integral notation mean?",
-    answer: "The notation ∫f(x) dx = F(x) + C means the indefinite integral. The ∫ symbol without limits indicates an indefinite integral, f(x) is the integrand, and dx specifies the variable. The result is a function family, not a number.",
+  obj2: {
+    question: "Do you need a separate + C for each term?",
+    answer: "No — one constant covers the whole answer. Integrating term by term, each piece contributes its own arbitrary constant, but a sum of arbitrary constants is just another arbitrary constant, so they merge into a single C. Writing C₁ + C₂ + C₃ is not wrong, only redundant. Collapse them and write + C once, at the end.",
     sectionId: "3"
   },
+  obj3: {
+    question: "How do you find the value of C?",
+    answer: "You need one known value of the antiderivative — an initial condition. Integrate to get F(x) + C, substitute the known point, and solve. If ∫2x dx = x² + C and you are told F(0) = 3, then 0² + C = 3, so C = 3 and F(x) = x² + 3. Without such a condition, C stays arbitrary.",
+    sectionId: "2"
+  },
   obj4: {
-    question: "What are the basic antiderivative formulas?",
-    answer: "Key formulas include: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C for n ≠ -1; ∫1/x dx = ln|x| + C; ∫eˣ dx = eˣ + C; ∫cos x dx = sin x + C; ∫sin x dx = -cos x + C. These should be memorized.",
-    sectionId: "4"
+    question: "Does the dx in an integral actually matter?",
+    answer: "Yes — it names the variable of integration, and dropping it leaves the expression ambiguous. ∫2t dx and ∫2t dt have different answers: the first treats t as a constant and gives 2tx + C, the second integrates in t and gives t² + C. The dx is also a live [differential](!/calculus/derivatives/differentials#notation) under substitution.",
+    sectionId: "3"
   },
   obj5: {
-    question: "What are the linearity rules for indefinite integrals?",
-    answer: "Sum rule: ∫[f(x) + g(x)] dx = ∫f(x) dx + ∫g(x) dx. Constant multiple rule: ∫c·f(x) dx = c∫f(x) dx. These rules let you break complex integrands into simpler pieces.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you verify an antiderivative?",
-    answer: "Differentiate your answer. If ∫f(x) dx = F(x) + C, then F'(x) must equal f(x). This check catches sign errors, missing constants, and algebraic mistakes because differentiation is mechanical and straightforward.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How are indefinite and definite integrals related?",
-    answer: "The Fundamental Theorem of Calculus connects them. Indefinite integrals find antiderivatives: ∫f(x) dx = F(x) + C. Definite integrals evaluate: ∫ₐᵇ f(x) dx = F(b) − F(a). The constant C cancels when computing F(b) − F(a).",
-    sectionId: "7"
+    question: "Why is an antiderivative written with a capital F?",
+    answer: "It is a case convention that carries a claim: writing F for an antiderivative of f asserts F′ = f without saying so in words. The same pairing works for G and g, or H and h. It is what makes the Fundamental Theorem readable as F(b) − F(a) — the capital signals which function is the antiderivative.",
+    sectionId: "3"
   }
 }
 
@@ -593,19 +590,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals/indefinite"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -712,6 +696,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Indefinite Integrals FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -746,13 +746,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

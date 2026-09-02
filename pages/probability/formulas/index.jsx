@@ -62,28 +62,13 @@ export async function getStaticProps() {
     'probability formulas reference'
   ]
 
-  const faqQuestions = {
-    obj1: {
-      question: "What does this probability formulas reference cover?",
-      answer: "This reference collects 108 formulas organized into 30 categories spanning the full first-course syllabus: Kolmogorov axioms and their consequences, set-operation rules, conditional probability and Bayes' theorem, random variables with PMF, PDF, and CDF, expectation and variance, covariance and correlation, conditional expectation, moments, indicator variables, transformations, moment generating functions, and the standard discrete and continuous distributions."
-    },
-    obj2: {
-      question: "What are the three Kolmogorov axioms of probability?",
-      answer: "Non-negativity states that every event has a probability at least zero. Normalization states that the entire sample space has probability one. Countable additivity states that probabilities of pairwise disjoint events add. All other rules - the complement rule, addition rule, monotonicity, and probability bounds - follow as consequences of these three."
-    },
-    obj3: {
-      question: "How is Bayes' theorem stated?",
-      answer: "The probability of A given B equals the probability of B given A times the probability of A, divided by the probability of B. The denominator is often expanded using the law of total probability, summing P(B given A_i) times P(A_i) over a partition of the sample space."
-    },
-    obj4: {
-      question: "What is the relationship between PDF, PMF, and CDF?",
-      answer: "The CDF F(x) is defined for any random variable as the probability that X is at most x. For a discrete variable, F(x) is the sum of PMF values up to x. For a continuous variable, F(x) is the integral of the PDF from minus infinity to x, and the PDF is the derivative of the CDF where it exists."
-    },
-    obj5: {
-      question: "Which standard distributions are covered in this reference?",
-      answer: "Discrete distributions include Bernoulli, binomial, geometric, negative binomial, hypergeometric, Poisson, and discrete uniform. Continuous distributions include continuous uniform, exponential, and normal. For each distribution the reference gives the PMF or PDF, the mean, the variance, and selected additional properties such as the memoryless property of the exponential and geometric, or the closure of normals and Poissons under independent sums."
-    }
-  }
+  // FAQ pass: no FAQ block on this page. It is a formula reference, not a
+  // lesson. Two originals were meta (describing the page's own contents) and
+  // the other three are owned by dedicated pages — the Kolmogorov axioms by
+  // /probability/axioms, the statement of Bayes' theorem by
+  // /probability/bayes-theorem, and the PMF/PDF/CDF relationship by
+  // /probability/cdf. Nothing survived triage, so faqQuestions and the dead
+  // FAQPage schema were both removed.
 
   const schemas = {
     learningResource: {
@@ -148,26 +133,12 @@ export async function getStaticProps() {
           "item": "https://www.learnmathclass.com/probability/formulas"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
   return {
     props: {
       probabilityFormulaList,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Probability Formulas: Complete Reference | Learn Math Class",
@@ -193,7 +164,7 @@ Each entry shows the formula in LaTeX, an explanation of what it captures, and w
   }
 }
 
-export default function ProbabilityFormulasPage({ probabilityFormulaList, faqQuestions, schemas, seoData }) {
+export default function ProbabilityFormulasPage({ probabilityFormulaList, schemas, seoData }) {
 
   return (
     <>
@@ -227,13 +198,6 @@ export default function ProbabilityFormulasPage({ probabilityFormulaList, faqQue
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schemas.breadcrumb)
-          }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
           }}
         />
       </Head>

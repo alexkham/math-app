@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -761,54 +762,24 @@ This distinction shapes everything — which inputs are valid, which outputs are
 
 const faqQuestions = {
   obj1: {
-    question: "Can you take the square root of a negative number?",
-    answer: "Not in the real number system. Even-index radicals (square root, fourth root, etc.) require non-negative radicands. √(−9) has no real value. Complex numbers are needed for even roots of negative numbers.",
-    sectionId: "1"
+    question: "Why does $\\sqrt{x^2} = |x|$ while $\\sqrt[3]{x^3} = x$?",
+    answer: "Index parity decides it. An even root must return a non-negative value under the principal root convention, so $\\sqrt{(-5)^2} = 5$ rather than $-5$, and the bars are what force that. An odd root carries no such restriction and keeps the sign, so $\\sqrt[3]{(-2)^3} = -2$. In general $\\sqrt[n]{a^n} = |a|$ for even $n$ and $a$ for odd $n$.",
+    sectionId: "4"
   },
   obj2: {
-    question: "Can you take the cube root of a negative number?",
-    answer: "Yes. Odd-index radicals accept any real number. ∛(−27) = −3 because (−3)³ = −27. Odd roots preserve sign: negative inputs yield negative outputs.",
-    sectionId: "2"
+    question: "When does an even root need absolute value bars?",
+    answer: "Only when the exponent you extract comes out odd. $\\sqrt{x^6} = |x^3| = |x|^3$ needs them, because $x^3$ is negative whenever $x$ is. But $\\sqrt{x^4} = x^2$ needs none, since an even power is already non-negative and the bars would change nothing. Check the parity of the exponent you are left with, not the one you started with.",
+    sectionId: "4"
   },
   obj3: {
-    question: "What is the principal root?",
-    answer: "For even-index radicals, both positive and negative values satisfy the equation (e.g., ±4 are square roots of 16). The principal root convention defines the radical symbol to return only the non-negative root: √16 = 4.",
-    sectionId: "3"
+    question: "Why doesn't a square root show its index?",
+    answer: "Because $2$ is the default and is left off by convention, so a bare $\\sqrt{a}$ means the square root. Every other index is written in the crook: $\\sqrt[3]{a}$, $\\sqrt[4]{a}$. In [LaTeX](!/latex) the index goes in square brackets before the radicand, and the [mathematical keyboard](!/keyboard) gives square, cube and fourth roots their own keys.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "Why does √(x²) equal |x| and not x?",
-    answer: "The principal root is always non-negative. When x = −5: √((−5)²) = √25 = 5 = |−5|. If it equaled x, we'd get −5, but square roots can't be negative. The absolute value ensures correctness.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "Does ∛(x³) equal x or |x|?",
-    answer: "For odd-index radicals, ∛(x³) = x with no absolute value. Odd roots preserve sign and every real number has exactly one real odd root. ∛(−8) = −2, not |−2|.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the domain of f(x) = √x?",
-    answer: "Domain is [0, ∞) — only non-negative inputs allowed. Range is also [0, ∞). For √(x−3), the radicand must be non-negative: x−3 ≥ 0, so x ≥ 3.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the domain of f(x) = ∛x?",
-    answer: "Domain is (−∞, ∞) — all real numbers. Odd-index radicals have no input restrictions. Any real number has a real cube root, fifth root, etc.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "When is √(x⁴) equal to x² vs |x²|?",
-    answer: "√(x⁴) = x² with no absolute value needed because x² is always non-negative. Absolute value is only required when the resulting exponent is odd: √(x⁶) = |x³| = |x|³.",
-    sectionId: "4"
-  },
-  obj9: {
-    question: "What happens when you square both sides of a radical equation?",
-    answer: "Squaring can introduce extraneous solutions because the principal root is always non-negative but squaring allows negative values. Always check solutions in the original equation.",
-    sectionId: "7"
-  },
-  obj10: {
-    question: "How do radical properties connect to rational exponents?",
-    answer: "ⁿ√a = a^(1/n). All properties translate: domain restrictions, sign behavior, and absolute value rules apply equally to both notations. (x^n)^(1/n) = |x| for even n, = x for odd n.",
-    sectionId: "8"
+    question: "Does $\\pm$ mean the same thing in science as in algebra?",
+    answer: "No. In algebra $x = \\pm 4$ is two statements compressed onto one line, unpacking to $x = 4$ or $x = -4$, and you unpack before computing. In the sciences $5.0 \\pm 0.1$ names an interval of uncertainty, a range rather than two values. Same glyph, unrelated job. Its partner $\\mp$ tracks the opposite choice inside one formula.",
+    sectionId: "notation"
   }
 }
 
@@ -885,19 +856,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots/properties"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1041,6 +999,22 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Properties of Roots FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -1151,12 +1125,6 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

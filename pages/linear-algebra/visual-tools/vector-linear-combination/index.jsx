@@ -611,6 +611,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import LinearCombinationWrapper from '../../../../app/components/linear-algebra copy/matrix/LinearCombinationWrapper'
+import vectorLinCombDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorLinCombDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -809,11 +811,92 @@ Set the visualizer to length $3$ and step through to see the three phases animat
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `The Opening Scene: Two Vectors and Two Scalars`,
+      content: `The player starts with the vectors $\mathbf{u}$ and $\mathbf{v}$, the scalars $\alpha$ and $\beta$, and an empty $\mathbf{w}$ waiting to hold $\alpha\mathbf{u} + \beta\mathbf{v}$.
+
+At the default length all three have four components. The caption states the plan before anything runs: the combination is built in three phases rather than in one pass.`,
+      before: ``,
+      after: `Two preconditions apply, one from each operation involved. The scalars are unrestricted, because scaling imposes no length rule. But $\mathbf{u}$ and $\mathbf{v}$ must have the same number of components, because the final phase adds them.
+
+This single expression is the central construction of linear algebra. Spans, linear independence, bases and dimension are all defined in terms of which vectors can or cannot be written as a linear combination of others — so the four scenes that follow are worth watching closely.`,
+      link: '',
+    },
+    obj12: {
+      title: `Phase 1: Scaling u by α`,
+      content: `The first sweep multiplies every component of $\mathbf{u}$ by $\alpha$, one slot at a time — scalar multiplication on its own, exactly as its own tool performs it.
+
+Four steps at the default length. $\mathbf{v}$ is untouched and $\mathbf{w}$ is still empty: this phase produces the intermediate $\alpha\mathbf{u}$, not part of the answer yet.`,
+      before: ``,
+      after: `Geometrically this phase stretches or flips $\mathbf{u}$ without turning it. Whatever $\alpha$ is, $\alpha\mathbf{u}$ stays on the line through the origin that $\mathbf{u}$ defines.
+
+That is why the sweep alone can never produce a genuinely new direction. Reaching anywhere off that line requires the second vector, which is precisely what the next two phases bring in.`,
+      link: '',
+    },
+    obj13: {
+      title: `Phase 2: Scaling v by β`,
+      content: `The second sweep repeats the operation on $\mathbf{v}$ with the other scalar, producing $\beta\mathbf{v}$. Another four steps, with $\mathbf{u}$ now left alone — already fully scaled from phase 1.
+
+$\mathbf{w}$ remains empty. Both inputs have been scaled; nothing has been combined.`,
+      before: ``,
+      after: `The two scalars are independent, and sweeping them over all real numbers is what generates the **span** of $\mathbf{u}$ and $\mathbf{v}$ — every vector reachable from the pair.
+
+How large that span is depends entirely on the two vectors. If $\mathbf{v}$ happens to be a multiple of $\mathbf{u}$, both lie on one line and every combination stays on it, however the scalars are chosen. If they point in genuinely different directions, the combinations fill a whole plane. That distinction is **linear independence**, and it is a statement about the vectors, not about the scalars.`,
+      link: '',
+    },
+    obj14: {
+      title: `Phase 3: Adding the Two Scaled Vectors`,
+      content: `The third sweep fills $\mathbf{w}$, adding the two intermediates component by component: $w_j = \alpha u_j + \beta v_j$.
+
+This phase is ordinary vector addition, and it is where the same-length requirement is actually consumed. Four more steps, and the combination is complete.`,
+      before: ``,
+      after: `Read across the phases and the definition assembles itself: scale, scale, add. Adding more terms changes nothing structurally — $\alpha\mathbf{u} + \beta\mathbf{v} + \gamma\mathbf{x}$ is one more scaling phase and one more addition.
+
+Geometrically the final phase is the parallelogram rule applied to the two scaled arrows rather than the originals. That is the picture behind the whole construction: pick how far to travel along each direction, then follow one after the other. Choosing coordinates for a vector in a given basis is exactly the reverse question — which $\alpha$ and $\beta$ land you on a particular $\mathbf{w}$.`,
+      link: '',
+    },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from LinearCombinationWrapper's own buildVectorScenes (exported
+     additively) and rendered through frozenMatrixSvg. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: vectorLinCombDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'u, v and an empty w, all four components long, with the two scalars named. Nothing computed ' +
+      'yet - the caption announces the three phases first.'),
+    scaleA: unit('scaleA', 'Phase 1, mid-sweep',
+      'Components of u picking up their &alpha; factor one at a time. v is untouched and w is still ' +
+      'empty: an intermediate, not an answer.'),
+    scaleB: unit('scaleB', 'Phase 2, mid-sweep',
+      'The same sweep on v with &beta;. u is left alone now, and w is still waiting. Between them ' +
+      'these two scaled vectors determine everything the pair can reach.'),
+    add: unit('add', 'Phase 3, mid-sweep',
+      'w finally filling, each slot reading &alpha;u + &beta;v. This is plain vector addition, and ' +
+      'the step where the same-length rule is actually used.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     Reuses the phase-keyed hook added to LinearCombinationWrapper for the matrix
+     page; the phase is derived from the scene index and works unchanged for
+     vectors. This page passes its own object. Captions render with
+     dangerouslySetInnerHTML, so these are raw HTML anchors. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#the-three-phases" style="color:#1d4ed8;font-weight:600">the three phases</a></div>`
+
+  const explanations = {
+    intro: note('Scalars impose no length rule; the addition in phase 3 does.', 'the-opening-scene', 'Learn more about the opening scene'),
+    scaleA: note('Scaling alone never leaves the line through the origin that u defines.', 'phase-1-scaling-u', 'Learn more about phase 1'),
+    scaleB: note('Sweeping both scalars generates the span - and whether that span is a line or a plane is what independence decides.', 'phase-2-scaling-v', 'Learn more about phase 2'),
+    add: note('Phase 3 is the parallelogram rule applied to the two scaled arrows.', 'phase-3-adding', 'Learn more about phase 3'),
+    done: note('Scale, scale, add - and asking which scalars land on a given w is the coordinates question.', 'phase-3-adding', 'Learn more about the final phase'),
   }
 
 
@@ -933,6 +1016,8 @@ Set the visualizer to length $3$ and step through to see the three phases animat
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -950,141 +1035,46 @@ Set the visualizer to length $3$ and step through to see the three phases animat
   }
 }
 
-export default function LinearCombinationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-three-phases'),
+    stateRow('obj11', 'the-opening-scene', 'intro'),
+    stateRow('obj12', 'phase-1-scaling-u', 'scaleA'),
+    stateRow('obj13', 'phase-2-scaling-v', 'scaleB'),
+    stateRow('obj14', 'phase-3-adding', 'add'),
+    plain('obj3', 'the-scene-player'),
+    plain('obj4', 'choosing-vector-length'),
+    plain('obj5', 'what-a-linear-combination-is'),
+    plain('obj6', 'key-properties'),
+    plain('obj7', 'why-it-matters'),
+    plain('obj8', 'worked-example'),
+    plain('obj9', 'common-mistakes'),
+    plain('obj10', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -1142,6 +1132,7 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, i
    <div style={{width:'80%',margin:'auto'}}>
    <LinearCombinationWrapper
    mode='vectors'
+   explanations={explanations}
    
    />
    </div>

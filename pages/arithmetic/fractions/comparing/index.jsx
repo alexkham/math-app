@@ -704,6 +704,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1087,56 +1088,28 @@ Number lines are particularly useful for developing intuition about fraction siz
   content: `Comparing fractions determines which of two values is larger, smaller, or whether they are equal. Several methods exist, each suited to different situations. Simple cases with matching numerators or denominators resolve by inspection, while more complex comparisons require finding [common denominators](!/arithmetic/fractions/equivalent), cross-multiplying, or converting to decimals.`
 }
 
+// FAQ pass: cut seven case-A questions — same denominator, same numerator,
+// cross-multiplication, benchmark fractions, decimal conversion, mixed
+// numbers, ordering multiple, and the number line each have an h2 stating
+// the answer. Kept the different-denominators question (its heading reads
+// "Common Denominator Method", which no searcher types) and the
+// larger-denominator confusion; invented the method-selection question,
+// whose guidance is scattered across five sections and stated in none.
 const faqQuestions = {
   obj1: {
-    question: "How do you compare fractions with the same denominator?",
-    answer: "Compare the numerators directly. The fraction with the larger numerator is larger. For example, 5/8 > 3/8 because 5 > 3. Both fractions have same-sized pieces, so more pieces means a larger value.",
-    sectionId: "1"
+    question: "How do you compare fractions with different denominators?",
+    answer: "Convert both to [equivalent fractions](!/arithmetic/fractions/equivalent) sharing a common denominator, then compare the numerators. To compare 3/4 and 5/6, the LCM of 4 and 6 is 12: 3/4 becomes 9/12 and 5/6 becomes 10/12, so 5/6 is larger. This method always works, though cross-multiplication is quicker when only two fractions are involved.",
+    sectionId: "3"
   },
   obj2: {
-    question: "How do you compare fractions with the same numerator?",
-    answer: "Compare denominators inversely — the smaller denominator means a larger fraction. For example, 3/4 > 3/7 because fourths are larger pieces than sevenths. Same number of pieces, but bigger pieces win.",
+    question: "Why does a larger denominator mean a smaller fraction?",
+    answer: "Because the denominator counts how many pieces the whole is cut into, so a bigger denominator makes each piece smaller. Splitting something into 100 parts yields far smaller pieces than splitting it into 2. When numerators match, the comparison therefore inverts: 3/4 > 3/7, since three quarters are three large pieces while three sevenths are three small ones.",
     sectionId: "2"
   },
   obj3: {
-    question: "How do you compare fractions with different denominators?",
-    answer: "Find a common denominator and convert both fractions, then compare numerators. Or use cross-multiplication: for a/b vs c/d, compute a×d and b×c. The larger cross product indicates the larger fraction.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is cross-multiplication for comparing fractions?",
-    answer: "Multiply each numerator by the opposite denominator. For 3/7 vs 4/9: compute 3×9=27 and 7×4=28. Since 28>27, we have 4/9 > 3/7. The larger product stays with its numerator's fraction.",
+    question: "What is the fastest way to compare two fractions?",
+    answer: "Pick the method that fits the shape of the problem. If the denominators already match, compare numerators; if the numerators match, the smaller denominator wins. For any other pair, cross-multiplication is quickest since it needs no common denominator. For a rough call, check each fraction against 1/2. When ordering three or more, convert them all to a common denominator instead.",
     sectionId: "4"
-  },
-  obj5: {
-    question: "What are benchmark fractions?",
-    answer: "Benchmark fractions like 0, 1/2, and 1 are reference points for quick comparison. If one fraction is less than 1/2 and another is greater than 1/2, you know immediately which is larger without calculating.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Can you compare fractions by converting to decimals?",
-    answer: "Yes. Divide numerator by denominator for each fraction. For 5/8 vs 7/11: 5/8 = 0.625 and 7/11 ≈ 0.636. Since 0.636 > 0.625, we have 7/11 > 5/8.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you compare mixed numbers?",
-    answer: "First compare the whole number parts. If they differ, the larger whole means the larger mixed number (5⅛ > 4⅞). If whole parts are equal, compare the fractional parts using any standard method.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you order multiple fractions from least to greatest?",
-    answer: "Find a common denominator for all fractions, convert each, then sort by numerators. For 2/3, 3/4, 5/6: LCD is 12, giving 8/12, 9/12, 10/12. Order: 2/3 < 3/4 < 5/6.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Why does a larger denominator mean a smaller fraction?",
-    answer: "Larger denominators divide the whole into more pieces, making each piece smaller. Dividing into 100 parts creates tiny pieces; dividing into 2 parts creates large pieces. More divisions = smaller pieces.",
-    sectionId: "2"
-  },
-  obj10: {
-    question: "How do you visualize fraction comparisons on a number line?",
-    answer: "Place fractions on a number line between 0 and 1. Fractions further right are larger. This shows relative positions clearly and confirms that equivalent fractions occupy the same point.",
-    sectionId: "9"
   }
 }
 
@@ -1213,19 +1186,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/fractions/comparing"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1349,6 +1309,22 @@ export default function ComparingPage({seoData, sectionsContent, introContent, o
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Comparing Fractions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1452,12 +1428,6 @@ export default function ComparingPage({seoData, sectionsContent, introContent, o
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

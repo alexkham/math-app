@@ -11,6 +11,12 @@ import WaffleChart from '@/app/components/probability/conditional-probability-de
 import ConditionalProbabilityTree2 from '@/app/components/probability/conditional-probability-demo/ConditionalProbabilityTree2'
 import ConditionalProbabilityVenn from '@/app/components/probability/conditional-probability-demo/ConditionalProbabiltyVenn'
 import ConditionalProbabilityTable2 from '@/app/components/probability/conditional-probability-demo/ConditionalProbabilityTable2'
+import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
+import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
+import waffleChartDiagrams from '@/app/components/probability/conditional-probability-demo/waffleChartDiagrams'
+import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
+import explanations2x2 from '@/app/components/probability/conditional-probability-demo/2x2explanations'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 export async function getStaticPaths() {
   const paths = [
@@ -32,6 +38,8 @@ export async function getStaticProps({ params }) {
       description: "Interactive probability tree diagram with adjustable P(A), P(B|A), and P(B|Aᶜ). Visualize sequential events, joint probabilities, and Bayes' theorem.",
       name: "Tree Diagram - Conditional Probability Visualization",
       url: "/probability/visual-tools/conditional-probability/tree-diagram",
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="40" x2="42" y2="22" stroke="#B5D4F4" stroke-width="1.3"/><line x1="18" y1="40" x2="42" y2="58" stroke="#B5D4F4" stroke-width="1.3"/><line x1="48" y1="18" x2="66" y2="10" stroke="#B5D4F4" stroke-width="1.1"/><line x1="48" y1="26" x2="66" y2="32" stroke="#B5D4F4" stroke-width="1.1"/><line x1="48" y1="54" x2="66" y2="48" stroke="#B5D4F4" stroke-width="1.1"/><line x1="48" y1="62" x2="66" y2="70" stroke="#B5D4F4" stroke-width="1.1"/><circle cx="16" cy="40" r="4.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="45" cy="22" r="4" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="45" cy="58" r="4" fill="#97C459" stroke="#27500A" stroke-width="1.1"/><circle cx="69" cy="10" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="69" cy="32" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="69" cy="48" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="69" cy="70" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><text x="29" y="27" font-family="Georgia,serif" font-size="5.5" fill="#C0DD97" text-anchor="middle">.7</text><text x="29" y="55" font-family="Georgia,serif" font-size="5.5" fill="#C0DD97" text-anchor="middle">.3</text></svg>`,
+      category: "Conditional Probability",
       h1: "Tree Diagram Visualization",
       introTitle: "Visualizing Conditional Probability with Tree Diagrams",
       introContent: "Tree diagrams display probability relationships as branching paths. Each branch represents a possible outcome with its probability labeled along the path. This tool lets you adjust P(A), P(B|A), and P(B|Aᶜ) to see how joint probabilities, marginal probabilities, and Bayes' theorem calculations change in real time.",
@@ -222,6 +230,56 @@ Try this experiment: set P(B|A) = 0.9 and P(B|Aᶜ) = 0.1 with P(A) = 0.5. Then 
     after: ``,
     link: '',
   },
+
+  obj9: {
+    title: `The Tree at Its Opening Settings`,
+    content: `The sliders start at $P(A) = 0.6$, $P(B \\mid A) = 0.7$ and $P(B \\mid A^c) = 0.3$. Every other number on the page is derived from those three.
+
+The four leaves come out as $0.42$, $0.18$, $0.12$ and $0.28$, and they sum to exactly $1$.`,
+    before: ``,
+    after: `Three numbers determine everything because of how the tree is built. The first split uses $P(A)$ and its complement; each second split uses a conditional and its complement. Three free parameters, four leaves, one constraint that they sum to 1.
+
+Read the edge labels as you go and the leaf values are just products along a path. Nothing on this diagram requires a formula you have not already used by the time you reach the right-hand side.`,
+    link: '',
+  },
+
+  obj10: {
+    title: `One Path: the Multiplication Rule`,
+    content: `Highlighting the $A \\cap B$ path colours the two edges that lead to it and fades the rest. The leaf reads $0.42$, which is $0.6 \\times 0.7$ — the edge probabilities multiplied.
+
+That is the multiplication rule $P(A \\cap B) = P(A) \\cdot P(B \\mid A)$, drawn as a route rather than written as an equation.`,
+    before: ``,
+    after: `The order matters for reading, not for the answer. The same leaf is $P(B) \\cdot P(A \\mid B) = 0.54 \\times 0.7778 = 0.42$, which is the tree drawn with $B$ first. A tree commits you to one order of conditioning; the joint probability it produces does not depend on that choice.
+
+Notice also what a single path is *not*. $0.42$ is the probability of $A$ and $B$ together, not the probability of $B$ given $A$. The conditional is the edge label, $0.7$; the joint is the leaf.`,
+    link: '',
+  },
+
+  obj11: {
+    title: `Two Paths: the Law of Total Probability`,
+    content: `Highlighting $B$ lights up **two** paths at once, because $B$ can be reached either through $A$ or through $A^c$.
+
+Adding those two leaves gives $P(B) = 0.42 + 0.12 = 0.54$.`,
+    before: ``,
+    after: `Written out, that is $P(B) = P(A)P(B \\mid A) + P(A^c)P(B \\mid A^c) = 0.6(0.7) + 0.4(0.3)$ — the law of total probability. The tree makes the reason obvious: $A$ and $A^c$ partition everything, so every route to $B$ passes through exactly one of them, and no route is counted twice.
+
+The result is worth sitting with. $P(B) = 0.54$ lies between the two conditionals $0.7$ and $0.3$, closer to $0.7$ because $A$ is the more likely branch. A marginal is always a weighted average of the conditionals, with the branch probabilities as the weights.
+
+From here Bayes' theorem is one division: $P(A \\mid B) = \\frac{0.42}{0.54} = 0.7778$. The numerator is one highlighted leaf and the denominator is both of them.`,
+    link: '',
+  },
+
+  obj12: {
+    title: `A Whole Subtree: Where the Ones Live`,
+    content: `Highlighting everything below $A$ picks out the two edges $P(B \\mid A) = 0.7$ and $P(B^c \\mid A) = 0.3$, and the two leaves $0.42$ and $0.18$.
+
+Those two edges sum to $1$. Those two leaves sum to $0.6$, which is $P(A)$.`,
+    before: ``,
+    after: `That contrast is the single most useful reading habit for trees. **Edges out of a node sum to 1**, because they are conditional on that node having been reached. **Leaves under a node sum to the node's own probability**, because they partition it.
+
+Confusing the two is the standard error. $0.42 + 0.18 = 0.6$, not $1$ — the branch under $A$ does not carry all the probability, only $A$'s share of it. Conditioning on $A$ is what rescales $0.42$ back up to $0.7$.`,
+    link: '',
+  },
 }
     },
 
@@ -231,6 +289,8 @@ Try this experiment: set P(B|A) = 0.9 and P(B|Aᶜ) = 0.1 with P(A) = 0.5. Then 
       description: "Interactive Venn diagram showing conditional probability through partitioned sample space. Click compartments to see P(A|Bᵢ) calculations with area-based explanations.",
       name: "Venn Diagram - Conditional Probability Visualization",
       url: "/probability/visual-tools/conditional-probability/venn-diagram",
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="40" r="22" fill="#97C459" fill-opacity="0.45" stroke="#3B6D11" stroke-width="1.4"/><circle cx="32" cy="40" r="22" fill="none" stroke="#B5D4F4" stroke-width="1.4"/><path d="M 41 21.9 A 22 22 0 0 0 41 58.1 A 22 22 0 0 0 41 21.9 Z" fill="#FAC775" fill-opacity="0.85" stroke="#854F0B" stroke-width="1.3"/><text x="22" y="43" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">A</text><text x="62" y="43" font-family="Georgia,serif" font-size="8" fill="#173404" text-anchor="middle" font-style="italic">B</text><text x="40" y="74" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">P(A | B)</text></svg>`,
+      category: "Conditional Probability",
       h1: "Venn Diagram Visualization",
       introTitle: "Visualizing Conditional Probability with Venn Diagrams",
       introContent: "This Venn diagram displays event A as an ellipse overlapping a partitioned sample space. The sample space divides into compartments B₁, B₂, B₃ (and optionally B₄). Click any compartment to see how P(A|Bᵢ) is calculated from the intersection area divided by the compartment area.",
@@ -432,6 +492,48 @@ This is the essence of [conditional probability](!/probability/conditional-proba
     after: ``,
     link: '',
   },
+
+  obj9: {
+    title: `The Three-Compartment Partition`,
+    content: `The tool opens with the sample space cut into three equal vertical compartments $B_1$, $B_2$, $B_3$, each of probability $\\frac{1}{3}$, and the event $A$ drawn as an ellipse lying across all three.
+
+The tool normalises areas so that the sample space is $100$ and $A$ is exactly $68$, giving $P(A) = 0.68$.`,
+    before: ``,
+    after: `The three pieces of $A$ come out as $18$, $32$ and $18$ out of $100$, so $P(A \\cap B_1) = 0.18$, $P(A \\cap B_2) = 0.32$ and $P(A \\cap B_3) = 0.18$. They add back to $0.68$.
+
+This is a partition in the technical sense: the compartments are disjoint and together they cover everything. That is exactly the condition the law of total probability needs, and the picture is what the law looks like before it is written down — $A$ chopped into as many pieces as there are compartments.
+
+The middle piece is largest because the ellipse is widest at its centre, not because $B_2$ is bigger. All three compartments have the same area.`,
+    link: '',
+  },
+
+  obj10: {
+    title: `Selecting a Compartment: Conditioning as Restriction`,
+    content: `Clicking $B_2$ fades the whole ellipse and redraws only the part inside that compartment at full strength. That solid region is $A \\cap B_2$.
+
+$P(A \\mid B_2) = \\frac{P(A \\cap B_2)}{P(B_2)} = \\frac{0.32}{1/3} = 0.96$.`,
+    before: ``,
+    after: `Conditioning is a change of denominator, and the picture shows it as a change of *frame*. Before selecting, the whole rectangle was the world and $A$ filled $68\\%$ of it. After selecting, only $B_2$ is the world and $A$ fills $96\\%$ of that.
+
+The three conditionals are $0.54$, $0.96$ and $0.54$, and they do **not** sum to anything meaningful — they are three separate answers to three separate questions. What does add up is the weighted combination: $\\frac{1}{3}(0.54) + \\frac{1}{3}(0.96) + \\frac{1}{3}(0.54) = 0.68 = P(A)$.
+
+Note that $P(A \\mid B_2) = 0.96$ is far above the unconditional $0.68$. Learning that you are in the middle compartment makes $A$ much more likely; learning you are in an outer one makes it less likely. That is what it means for the partition to carry information about $A$.`,
+    link: '',
+  },
+
+  obj11: {
+    title: `Four Compartments: More Pieces, Same Total`,
+    content: `Dragging the compartment count to four re-cuts the same ellipse into four pieces of $11$, $23$, $23$ and $11$.
+
+$P(A)$ is still $0.68$. The partition changed; the event did not.`,
+    before: ``,
+    after: `The conditionals do change, and they spread further apart: $0.44$, $0.92$, $0.92$, $0.44$ against the three-way case's $0.54$, $0.96$, $0.54$. Finer compartments distinguish more sharply between "near the middle of the ellipse" and "near its edge", so the extreme conditionals move further from $0.68$.
+
+Their weighted average is unchanged, though: $\\frac{1}{4}(0.44 + 0.92 + 0.92 + 0.44) = 0.68$. Any partition of the sample space reconstructs $P(A)$ exactly, however many pieces it has and however unequal the conditionals are.
+
+The two-compartment case is worth trying for the opposite reason. It gives $P(A \\mid B_1) = P(A \\mid B_2) = 0.68$ — both halves cut the symmetric ellipse identically, so knowing which half you are in tells you nothing at all about $A$. That is independence, arrived at by geometry.`,
+    link: '',
+  },
 }
     },
 
@@ -441,6 +543,8 @@ This is the essence of [conditional probability](!/probability/conditional-proba
       description: "Interactive waffle chart showing conditional probability across four regions. Adjust event distribution to see how P(Event|Region) differs from total probability P(Event).",
       name: "Waffle Chart - Conditional Probability Visualization",
       url: "/probability/visual-tools/conditional-probability/waffle-chart",
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g stroke="#185FA5" stroke-width="0.6"><rect x="12" y="16" width="9" height="9" fill="#FAC775"/><rect x="23" y="16" width="9" height="9" fill="#FAC775"/><rect x="34" y="16" width="9" height="9" fill="#FAC775"/><rect x="45" y="16" width="9" height="9" fill="#85B7EB"/><rect x="56" y="16" width="9" height="9" fill="#85B7EB"/><rect x="12" y="27" width="9" height="9" fill="#FAC775"/><rect x="23" y="27" width="9" height="9" fill="#FAC775"/><rect x="34" y="27" width="9" height="9" fill="#85B7EB"/><rect x="45" y="27" width="9" height="9" fill="#85B7EB"/><rect x="56" y="27" width="9" height="9" fill="#E6F1FB"/><rect x="12" y="38" width="9" height="9" fill="#FAC775"/><rect x="23" y="38" width="9" height="9" fill="#85B7EB"/><rect x="34" y="38" width="9" height="9" fill="#E6F1FB"/><rect x="45" y="38" width="9" height="9" fill="#E6F1FB"/><rect x="56" y="38" width="9" height="9" fill="#E6F1FB"/><rect x="12" y="49" width="9" height="9" fill="#85B7EB"/><rect x="23" y="49" width="9" height="9" fill="#E6F1FB"/><rect x="34" y="49" width="9" height="9" fill="#E6F1FB"/><rect x="45" y="49" width="9" height="9" fill="#E6F1FB"/><rect x="56" y="49" width="9" height="9" fill="#E6F1FB"/></g><text x="40" y="72" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle" font-style="italic">100 squares</text></svg>`,
+      category: "Conditional Probability",
       h1: "Waffle Chart Visualization",
       introTitle: "Visualizing Conditional Probability with Waffle Charts",
       introContent: "This waffle chart divides the sample space into four equal regions, each containing a 10×10 grid of tiles. Dark blue tiles represent an event occurring. Adjust the probability sliders to change how the event distributes across regions and observe how conditional probability P(Event|Region) differs from total probability P(Event).",
@@ -644,6 +748,30 @@ This illustrates why total probability alone doesn't tell the whole story. The d
     after: ``,
     link: '',
   },
+
+  obj9: {
+    title: `The Four Grids at Their Opening Rates`,
+    content: `Each region is a $10 \\times 10$ grid, so one tile is one percentage point. The four regions open at $0.15$, $0.40$, $0.65$ and $0.85$, which the tool renders as $15$, $40$, $65$ and $85$ dark tiles.
+
+The four regions are equally likely, $\\frac{1}{4}$ each, so $P(\\text{dark}) = \\frac{15 + 40 + 65 + 85}{400} = \\frac{205}{400} = 0.5125$.`,
+    before: ``,
+    after: `That single fraction is the law of total probability again, in its most countable form. Written the usual way it is $\\sum_i P(\\text{dark} \\mid \\text{region}_i) P(\\text{region}_i) = \\frac{0.15 + 0.40 + 0.65 + 0.85}{4}$, and it gives $0.5125$ either way — because with equal region weights, a weighted average is just an average.
+
+One honest caveat about the picture. The live tool decides *which* tiles are dark with a random shuffle, so the arrangement is different every time it loads and cannot be frozen. The count is fully determined, and the count is what the probability depends on, so the still below fills tiles in reading order instead. Scattered or blocked, $15$ dark tiles is $15$ dark tiles.`,
+    link: '',
+  },
+
+  obj10: {
+    title: `Setting Every Region Equal`,
+    content: `Drag all four sliders to the same value — $0.5$, say — and each grid shows $50$ dark tiles.
+
+$P(\\text{dark})$ becomes $\\frac{200}{400} = 0.5$, the same as every conditional.`,
+    before: ``,
+    after: `This is the degenerate case, and it is worth reaching deliberately. When all the conditionals are equal, the weighted average collapses to that common value and the region tells you nothing: $P(\\text{dark} \\mid \\text{region}_i) = P(\\text{dark})$ for every $i$. Knowing the region is useless information, which is exactly the definition of independence.
+
+Move any one slider away and the equality breaks immediately. That fragility is the point — independence is a knife edge, not a typical situation, and the four-slider layout makes it easy to see how rarely it holds by accident.`,
+    link: '',
+  },
 }
     },
 
@@ -653,6 +781,8 @@ This illustrates why total probability alone doesn't tell the whole story. The d
       description: "Interactive 2×2 contingency table with adjustable P(A), P(B|A), P(B|Aᶜ). See joint, marginal, and conditional probabilities with clickable highlighting.",
       name: "Contingency Table - Conditional Probability Visualization",
       url: "/probability/visual-tools/conditional-probability/contingency-table",
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="18" width="18" height="14" fill="#85B7EB" fill-opacity="0.5" stroke="#185FA5" stroke-width="0.9"/><rect x="32" y="18" width="18" height="14" fill="#85B7EB" fill-opacity="0.5" stroke="#185FA5" stroke-width="0.9"/><rect x="50" y="18" width="16" height="14" fill="#B5D4F4" fill-opacity="0.35" stroke="#185FA5" stroke-width="0.9"/><rect x="14" y="32" width="18" height="14" fill="#FAC775" fill-opacity="0.85" stroke="#854F0B" stroke-width="1.4"/><rect x="32" y="32" width="18" height="14" fill="#85B7EB" fill-opacity="0.5" stroke="#185FA5" stroke-width="0.9"/><rect x="50" y="32" width="16" height="14" fill="#B5D4F4" fill-opacity="0.35" stroke="#185FA5" stroke-width="0.9"/><rect x="14" y="46" width="18" height="14" fill="#B5D4F4" fill-opacity="0.35" stroke="#185FA5" stroke-width="0.9"/><rect x="32" y="46" width="18" height="14" fill="#B5D4F4" fill-opacity="0.35" stroke="#185FA5" stroke-width="0.9"/><rect x="50" y="46" width="16" height="14" fill="#C0DD97" fill-opacity="0.5" stroke="#3B6D11" stroke-width="0.9"/><text x="40" y="72" font-family="Georgia,serif" font-size="7" fill="#FAC775" text-anchor="middle" font-style="italic">joint cell</text></svg>`,
+      category: "Conditional Probability",
       h1: "Contingency Table Visualization",
       introTitle: "Visualizing Conditional Probability with Contingency Tables",
       introContent: "This interactive 2×2 contingency table displays the complete probability relationship between two events. Three sliders control P(A), P(B|A), and P(B|Aᶜ), with all joint, marginal, and conditional probabilities updating in real time. Click any cell or conditional probability row to highlight the mathematical relationship.",
@@ -866,11 +996,144 @@ The table shows P(B) calculated via [total probability](!/probability/total-prob
     after: ``,
     link: '',
   },
+
+  obj9: {
+    title: `The Table at Its Opening Settings`,
+    content: `The sliders start at $P(A) = 0.6$, $P(B \\mid A) = 0.7$ and $P(B \\mid A^c) = 0.3$, giving the four joint cells $0.42$, $0.18$, $0.12$ and $0.28$.
+
+Read across for the row marginals $0.60$ and $0.40$; read down for the column marginals $0.54$ and $0.46$. The grand total is exactly $1$.`,
+    before: ``,
+    after: `The table and the tree are the same three numbers in two layouts, and each makes a different thing easy. The tree shows how the joints are *built* — multiply along a path. The table shows how the marginals are *recovered* — sum along a row or a column.
+
+The column marginal is where the table earns its place. $P(B) = 0.42 + 0.12 = 0.54$ is the law of total probability, and in this layout it is not a formula at all, just the total of a column.
+
+Both conditionals live here too, as the same cell over two different totals: $P(B \\mid A) = \\frac{0.42}{0.60} = 0.7$ divides by its row, and $P(A \\mid B) = \\frac{0.42}{0.54} = 0.7778$ divides by its column. Bayes' theorem is the instruction to switch which total you divide by.`,
+    link: '',
+  },
 }
     }
   };
 
   const currentConfig = viewConfig[params.view];
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     All four components draw their canvas as inline JSX, so each diagrams module
+     ports the markup and re-runs the component's own maths at its opening
+     sliders. The waffle stills are the one place the tool cannot be reproduced
+     exactly: it shuffles which tiles are dark with Math.random(), so the count
+     is frozen and the arrangement is not - see the module header. */
+  const unit = (svg, caption, text) => demoUnitFrame({ svg, caption, text })
+
+  const unitsByView = {
+    'tree-diagram': {
+      opening: unit(conditionalTreeDiagrams.unhighlighted,
+        'The tree at P(A) = 0.6, P(B|A) = 0.7, P(B|not A) = 0.3',
+        'The four leaves are 0.42, 0.18, 0.12 and 0.28, summing to exactly 1. Three slider values ' +
+        'determine every number on the diagram.'),
+      onePath: unit(conditionalTreeDiagrams.leafPath,
+        'The A then B path highlighted',
+        'Two edges light up and the rest fade. The leaf is 0.6 x 0.7 = 0.42 - the multiplication rule ' +
+        'drawn as a route. The conditional 0.7 is the edge; the joint 0.42 is the leaf.'),
+      twoPaths: unit(conditionalTreeDiagrams.totalProbability,
+        'Both paths that reach B highlighted',
+        'B is reachable through A or through not-A, so two leaves light up: 0.42 + 0.12 = 0.54. That ' +
+        'is the law of total probability, and 0.54 sits between the conditionals 0.7 and 0.3.'),
+      subtree: unit(conditionalTreeDiagrams.subtreeGivenA,
+        'The whole subtree under A highlighted',
+        'Its two edges sum to 1 (they are conditional on A) but its two leaves sum to 0.6, which is ' +
+        'P(A). Edges out of a node sum to 1; leaves under it sum to the node.'),
+    },
+    'venn-diagram': {
+      threeWay: unit(partitionVennDiagrams.threeCompartments,
+        'Three equal compartments with event A across them',
+        'Areas normalised so the sample space is 100 and A is 68. The three pieces are 18, 32 and 18 - ' +
+        'the middle is largest because the ellipse is widest there, not because B2 is bigger.'),
+      selected: unit(partitionVennDiagrams.middleSelected,
+        'Compartment B2 selected',
+        'The ellipse fades and only the part inside B2 stays solid. P(A|B2) = 0.32 / (1/3) = 0.96 - ' +
+        'conditioning redraws the frame, so A now fills 96% of a smaller world.'),
+      fourWay: unit(partitionVennDiagrams.fourCompartments,
+        'The same event A over four compartments',
+        'Pieces of 11, 23, 23 and 11 - still 68 in total, so P(A) is unchanged at 0.68. The ' +
+        'conditionals spread wider, 0.44 / 0.92 / 0.92 / 0.44, but average back to 0.68.'),
+    },
+    'waffle-chart': {
+      opening: unit(waffleChartDiagrams.opening,
+        'Four 10x10 grids at 0.15, 0.40, 0.65 and 0.85',
+        'One tile is one percentage point, so the grids hold 15, 40, 65 and 85 dark tiles. With four ' +
+        'equally likely regions, P(dark) = 205/400 = 0.5125. The live tool scatters the dark tiles at ' +
+        'random; only the count is fixed, so this still fills them in reading order.'),
+      allEqual: unit(waffleChartDiagrams.allEqual,
+        'Every region set to 0.5',
+        'Fifty dark tiles in each grid, so P(dark) = 0.5 and every conditional equals it. When the ' +
+        'region tells you nothing about the outcome, the two are independent.'),
+    },
+    'contingency-table': {
+      opening: unit(contingencyTableDiagrams['2x2'],
+        'The 2x2 table at P(A) = 0.6, P(B|A) = 0.7, P(B|not A) = 0.3',
+        'Cells 0.42 / 0.18 / 0.12 / 0.28, row totals 0.60 and 0.40, column totals 0.54 and 0.46, grand ' +
+        'total exactly 1. P(B) = 0.54 is just a column sum.'),
+    },
+  }
+
+  // this page previously built eight sections with numeric ids; replaced with an
+  // explicit per-view slug list
+  const orderByView = {
+    'tree-diagram': [
+      ['obj1', 'getting-started'],
+      ['obj2', 'the-probability-sliders'],
+      ['obj3', 'reading-the-tree'],
+      ['obj9', 'the-opening-tree', 'opening'],
+      ['obj10', 'one-path', 'onePath'],
+      ['obj11', 'two-paths', 'twoPaths'],
+      ['obj12', 'a-whole-subtree', 'subtree'],
+      ['obj4', 'clicking-to-highlight'],
+      ['obj5', 'joint-probabilities'],
+      ['obj6', 'marginal-probabilities'],
+      ['obj7', 'bayes-in-the-tree'],
+      ['obj8', 'related-tools'],
+    ],
+    'venn-diagram': [
+      ['obj1', 'getting-started'],
+      ['obj2', 'the-sample-space-partition'],
+      ['obj3', 'event-a-and-intersections'],
+      ['obj9', 'three-compartments', 'threeWay'],
+      ['obj10', 'selecting-a-compartment', 'selected'],
+      ['obj11', 'four-compartments', 'fourWay'],
+      ['obj4', 'clicking-compartments'],
+      ['obj5', 'conditional-probability-calculations'],
+      ['obj6', 'total-probability'],
+      ['obj7', 'why-conditionals-differ'],
+      ['obj8', 'related-tools'],
+    ],
+    'waffle-chart': [
+      ['obj1', 'getting-started'],
+      ['obj2', 'the-grid-structure'],
+      ['obj9', 'the-opening-rates', 'opening'],
+      ['obj10', 'setting-every-region-equal', 'allEqual'],
+      ['obj3', 'the-distribution-sliders'],
+      ['obj4', 'reading-conditional-probabilities'],
+      ['obj5', 'total-probability-calculation'],
+      ['obj6', 'conditional-vs-total'],
+      ['obj7', 'same-total-different-distributions'],
+      ['obj8', 'related-tools'],
+    ],
+    'contingency-table': [
+      ['obj1', 'getting-started'],
+      ['obj2', 'the-probability-sliders'],
+      ['obj9', 'the-opening-table', 'opening'],
+      ['obj3', 'reading-the-joint-table'],
+      ['obj4', 'marginal-probabilities'],
+      ['obj5', 'conditional-probability-panels'],
+      ['obj6', 'clicking-to-trace'],
+      ['obj7', 'bayes-in-the-table'],
+      ['obj8', 'related-tools'],
+    ],
+  }
+
+  const stateUnits = unitsByView[params.view] || {}
+  const sectionOrder = orderByView[params.view] || []
 
   const schemas = {
     webApplication: {
@@ -971,6 +1234,8 @@ The table shows P(B) calculated via [total probability](!/probability/total-prob
         name: currentConfig.name
       },
       currentView: params.view,
+      stateUnits,
+      sectionOrder,
       componentName: currentConfig.component,
       h1Title: currentConfig.h1
     }
@@ -1022,6 +1287,8 @@ function getFeatureList(view) {
 export default function ConditionalProbabilityViewPage({ 
   seoData, 
   sectionsContent, 
+  stateUnits,
+  sectionOrder,
   introContent, 
   faqQuestions,
   schemas,
@@ -1030,58 +1297,16 @@ export default function ConditionalProbabilityViewPage({
   h1Title 
 }) {
 
-  const genericSections = Object.keys(sectionsContent).length > 0 
-    ? [
-        {
-          id: '1',
-          title: sectionsContent.obj1?.title || '',
-          link: '',
-          content: sectionsContent.obj1?.content || ''
-        },
-        {
-          id: '2',
-          title: sectionsContent.obj2?.title || '',
-          link: '',
-          content: sectionsContent.obj2?.content || ''
-        },
-        {
-          id: '3',
-          title: sectionsContent.obj3?.title || '',
-          link: '',
-          content: sectionsContent.obj3?.content || ''
-        },
-        {
-          id: '4',
-          title: sectionsContent.obj4?.title || '',
-          link: '',
-          content: sectionsContent.obj4?.content || ''
-        },
-        {
-          id: '5',
-          title: sectionsContent.obj5?.title || '',
-          link: '',
-          content: sectionsContent.obj5?.content || ''
-        },
-        {
-          id: '6',
-          title: sectionsContent.obj6?.title || '',
-          link: '',
-          content: sectionsContent.obj6?.content || ''
-        },
-        {
-          id: '7',
-          title: sectionsContent.obj7?.title || '',
-          link: '',
-          content: sectionsContent.obj7?.content || ''
-        },
-        {
-          id: '8',
-          title: sectionsContent.obj8?.title || '',
-          link: '',
-          content: sectionsContent.obj8?.content || ''
-        }
-      ].filter(section => section.title)
-    : [];
+  const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
+    const src = sectionsContent[obj]
+    if (!src || !src.title) return null
+    const body = [ src.content ]
+    if (unitKey && stateUnits[unitKey]) {
+      body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
+      if (src.after) body.push(src.after)
+    }
+    return { id, title: src.title, link: src.link || '', content: body }
+  }).filter(Boolean);
 
   return (
     <>
@@ -1160,7 +1385,7 @@ export default function ConditionalProbabilityViewPage({
 
       {componentName === 'ContingencyTable' && (
         <div style={{ transform: 'scale(0.9)' }}>
-          <ConditionalProbabilityTable2 />
+          <ConditionalProbabilityTable2 explanations={explanations2x2} />
         </div>
       )}
 

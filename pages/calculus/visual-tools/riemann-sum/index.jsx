@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Riemann Sum</h1>
 //    <br/>
-//    <FunctionRiemann/>
+//    <FunctionRiemann explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -491,6 +491,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionRiemann from '../../../../app/components/functions/riemann/FunctionRiemann'
+import functionRiemannDiagrams from '../../../../app/components/functions/riemann/functionRiemannDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -732,31 +734,55 @@ Two other sign conventions are also handled correctly:
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Left Rule: Every Rectangle Falls Short`,
+      content: `On the tool's opening setup — $f(x) = x^2$ from $a = 0$ to $b = 3$ with $n = 8$ strips, so $\Delta x = 0.375$ — the left rule takes each rectangle's height from the left edge of its strip.
+
+$S_8 = 7.3828$ against a true integral of $9$, an error of $-1.6172$.
+
+Because $x^2$ is increasing across the whole interval, the left edge is the lowest point of every strip. Every rectangle sits under the curve, and the sum has to come in low.`,
       before: ``,
-      after: ``,
+      after: `That undershoot is not a quirk of these numbers — it is guaranteed for any increasing function. Reverse the situation and the guarantee reverses with it: on a decreasing function the left rule overshoots by exactly the same reasoning.
+
+The gaps between the rectangle tops and the curve are the error, laid out visually. Each one is roughly a triangle of width $\Delta x$ and height $f'(x)\Delta x$, so halving $\Delta x$ quarters each gap but doubles their number — leaving the total error only halved. That is the $O(1/n)$ behaviour discussed under [convergence and error](!#convergence-and-error).`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Right Rule: Every Rectangle Overshoots`,
+      content: `Same interval, same eight strips, height taken from the right edge instead.
+
+$S_8 = 10.7578$, an error of $+1.7578$.
+
+On an increasing function the right edge is the highest point of each strip, so every rectangle pokes above the curve and the sum comes in high.`,
       before: ``,
-      after: ``,
+      after: `The two endpoint rules bracket the answer: $7.3828 < 9 < 10.7578$. That is genuinely useful — on a monotonic function the left and right sums are a rigorous lower and upper bound, so the true value is trapped between them without any further argument.
+
+Their average, $(7.3828 + 10.7578)/2 = 9.0703$, is precisely the [trapezoid rule](!#trapezoid-rule) result. Averaging the two one-sided errors cancels most of what each gets wrong, which is why the trapezoid rule converges an order faster than either of the rules it is built from.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Midpoint Rule: Errors That Cancel Inside Each Strip`,
+      content: `Height sampled at the centre of each strip rather than an edge.
+
+$S_8 = 8.9648$, an error of just $-0.0352$ — roughly fifty times smaller than either endpoint rule on the same eight strips.
+
+Each rectangle now cuts through the curve rather than sitting under or over it: it is too low on the right half of its strip and too high on the left half, and the two halves very nearly cancel.`,
       before: ``,
-      after: ``,
+      after: `That near-cancellation is what buys the extra order of accuracy. The midpoint rule is $O(1/n^2)$, so doubling the strip count cuts the error by about four rather than two.
+
+There is a tidier way to see it. A midpoint rectangle has exactly the same area as the trapezoid formed by the tangent line at that midpoint, so the midpoint rule is really a tangent-line approximation in disguise. For a function curving one way throughout — as $x^2$ does — that tangent lies below the curve, which is why the midpoint result lands slightly under the true value.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `Trapezoid Rule: Joining the Sample Points`,
+      content: `Instead of a flat top, each strip is capped by the straight line joining $f$ at its two edges.
+
+$S_8 = 9.0703$, an error of $+0.0703$ — about twice the midpoint error, and in the opposite direction.
+
+The shaded shapes are visibly slanted here, which is the one method where the outline follows the curve's direction rather than stepping across it.`,
       before: ``,
-      after: ``,
+      after: `The sign is predictable. A chord across a strip of an upward-curving function lies above the curve, so the trapezoid rule overshoots whenever $f'' > 0$ and undershoots whenever $f'' < 0$. The midpoint rule errs the other way for the same reason, which is why the two bracket the answer: $8.9648 < 9 < 9.0703$.
+
+They also err in a fixed ratio — the trapezoid error runs about twice the midpoint error and opposite in sign. Combining them in the proportion that cancels both, $\frac{2 \cdot \text{mid} + \text{trap}}{3}$, gives exactly $9$ here. That combination is Simpson's rule, which is accurate to $O(1/n^4)$ in general and exact for any polynomial of degree three or less — so on $x^2$ it lands on the true value with only eight strips.`,
       link: '',
     },
     obj15: {
@@ -774,6 +800,45 @@ Two other sign conventions are also handled correctly:
     id: "intro",
     title: "",
     content: ``
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     SVGs come from the tool's own scene description, serialised through the
+     core's generateSVG - see app/components/functions/frozenSvg.js. All four
+     states use the component's own defaults: quadratic, a = 0, b = 3, n = 8. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: functionRiemannDiagrams[key], caption, text })
+
+  const stateUnits = {
+    left: unit('left', 'Left rule, frozen at n = 8',
+      'Every rectangle top meets the curve at its left edge and falls away below it after that. ' +
+      'The eight gaps between the tops and the curve are the -1.6172 of error, drawn to scale.'),
+    right: unit('right', 'Right rule, frozen at n = 8',
+      'The mirror image: each top meets the curve at its right edge, so the whole strip sits above the ' +
+      'curve. The overshoot of +1.7578 is the visible excess.'),
+    mid: unit('mid', 'Midpoint rule, frozen at n = 8',
+      'Each rectangle now crosses the curve rather than clearing it, too high on one side of the strip ' +
+      'and too low on the other. What is left over after they cancel is -0.0352.'),
+    trap: unit('trap', 'Trapezoid rule, frozen at n = 8',
+      'The only method whose outline slants with the curve: each cap is the chord between the two strip ' +
+      'edges. On an upward-curving function the chord rides above, giving +0.0703.'),
+  }
+
+
+  /* ---- per-method panel notes, passed into the component (Line 1) ----
+     FunctionRiemann had no explanations prop; one was added additively and
+     defaults to null, so the panel is unchanged when nothing is passed. Content
+     is markdown - InfoPanel renders it through processContent, so anchors use
+     the normal [text](!#slug) form. */
+  const note = (body, slug, label) =>
+    `### Where this leads\n\n${body} See [${label}](!#${slug}) or compare [all four methods](!#the-four-methods).`
+
+  const explanations = {
+    left: note('On an increasing function every rectangle sits below the curve, so the sum is a guaranteed lower bound.', 'left-rule', 'the left rule'),
+    right: note('The mirror case: every rectangle clears the curve, giving a guaranteed upper bound.', 'right-rule', 'the right rule'),
+    mid: note('Sampling the centre lets the two halves of each strip cancel, which buys a whole order of accuracy.', 'midpoint-rule', 'the midpoint rule'),
+    trap: note('Chords instead of flat tops - the average of the two endpoint rules, and the exact opposite error to the midpoint.', 'trapezoid-rule', 'the trapezoid rule'),
   }
 
 
@@ -880,6 +945,8 @@ Two other sign conventions are also handled correctly:
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -891,147 +958,53 @@ Two other sign conventions are also handled correctly:
         name: "Riemann Sum Visualizer",
         hubDescription: "Approximate a definite integral with rectangles or trapezoids, then watch the error shrink as you increase the partition count. Switch between left, right, midpoint, and trapezoid rules to see why some converge as one over n and others as one over n squared.",
         category: "Integrals",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="52" width="9.6" height="10" fill="#B5D4F4" fill-opacity="0.55" stroke="#185FA5" stroke-width="0.7"/><rect x="23.6" y="40.09" width="9.6" height="21.91" fill="#B5D4F4" fill-opacity="0.55" stroke="#185FA5" stroke-width="0.7"/><rect x="33.2" y="31.32" width="9.6" height="30.68" fill="#B5D4F4" fill-opacity="0.55" stroke="#185FA5" stroke-width="0.7"/><rect x="42.8" y="25.77" width="9.6" height="36.23" fill="#B5D4F4" fill-opacity="0.55" stroke="#185FA5" stroke-width="0.7"/><rect x="52.4" y="23.58" width="9.6" height="38.42" fill="#B5D4F4" fill-opacity="0.55" stroke="#185FA5" stroke-width="0.7"/><rect x="62" y="24.85" width="9.6" height="37.15" fill="#B5D4F4" fill-opacity="0.55" stroke="#185FA5" stroke-width="0.7"/><path d="M 14 52 Q 44 10 72 30" fill="none" stroke="#FAC775" stroke-width="1.8"/><line x1="10" y1="62" x2="76" y2="62" stroke="#B5D4F4" stroke-width="1"/></svg>`
       },
 
     }
   }
 }
 
-export default function RiemannSumVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function RiemannSumVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-four-methods'),
+    stateRow('obj11', 'left-rule', 'left'),
+    stateRow('obj12', 'right-rule', 'right'),
+    stateRow('obj13', 'midpoint-rule', 'mid'),
+    stateRow('obj14', 'trapezoid-rule', 'trap'),
+    plain('obj3', 'the-function-families'),
+    plain('obj4', 'the-a-b-and-n-sliders'),
+    plain('obj5', 'the-result-card'),
+    plain('obj6', 'the-error-tag'),
+    plain('obj7', 'what-is-a-riemann-sum'),
+    plain('obj8', 'convergence-and-error'),
+    plain('obj9', 'signed-area'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -1087,7 +1060,7 @@ export default function RiemannSumVisualizer({seoData, sectionsContent, introCon
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Riemann Sum</h1>
       <br/>
-      <FunctionRiemann/>
+      <FunctionRiemann explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

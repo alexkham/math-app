@@ -914,6 +914,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1528,41 +1529,36 @@ This formalism does more than justify notation. It provides a direct tool for ap
 `
 };
 
+// FAQ pass: all seven originals named their own h2 — dx, dy, dy versus Δy,
+// linear approximation, error estimation, multiple variables, Leibniz
+// notation. Replaced with the "d times x" misreading, the one case where
+// dy and Δy coincide, the power-law error rule, what governs approximation
+// accuracy, and the second-order term. The hub owns "Is dy/dx a fraction?".
 const faqQuestions = {
   obj1: {
-    question: "What is the differential dx?",
-    answer: "The differential dx is an independent variable representing a change in x. Unlike h in the limit definition, dx is a finite quantity that can be any value—positive, negative, or zero. It sets the scale for linear approximations.",
-    sectionId: "1"
+    question: "Does dx mean d times x?",
+    answer: "No — dx is a single symbol, not a product. The d is not a factor and cannot be cancelled or divided out on its own. The misreading is tempting because dx really does behave algebraically: substitution in [integration](!/calculus/integrals) rearranges it, and dy/dx genuinely becomes a quotient once differentials are defined. What gets rearranged is dx as a whole.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the differential dy?",
-    answer: "For y = f(x), the differential dy = f'(x)·dx. It represents the vertical change along the tangent line when x shifts by dx. Geometrically, dy is the tangent line's estimate of how y changes, not the actual change.",
+    question: "When is dy exactly equal to Δy?",
+    answer: "Only when f is linear. For f(x) = mx + b the tangent line is the function itself, so dy = m·dx matches the actual change f(x + dx) − f(x) for every increment, however large. For any curved function the two differ, and the gap Δy − dy is the approximation error, widening as dx grows.",
     sectionId: "2"
   },
   obj3: {
-    question: "What is the difference between dy and Δy?",
-    answer: "Δy = f(x + dx) − f(x) is the actual change along the curve. dy = f'(x)·dx is the tangent line estimate. For small dx, they're nearly equal; for larger dx, they diverge. The error Δy − dy shrinks faster than dx as dx → 0.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you use differentials for linear approximation?",
-    answer: "Use f(x + dx) ≈ f(x) + f'(x)·dx. Given a known value f(x) and slope f'(x), estimate f at nearby points. For example, √4.03 ≈ 2 + (1/4)(0.03) = 2.0075, which matches the actual value to five decimal places.",
+    question: "How accurate is a linear approximation?",
+    answer: "Two things control it: how far you move from the base point, and how sharply the curve bends there. The error grows with the distance from the base point and with the size of f″ nearby, since f″ measures how fast the curve pulls away from its tangent. Approximating √4.03 from x = 4 is accurate to five decimal places; a much larger step would not be.",
     sectionId: "4"
   },
-  obj5: {
-    question: "How do differentials estimate error?",
-    answer: "If x has measurement error dx, then f(x) has error approximately |dy| = |f'(x)|·|dx|. The derivative acts as an error amplifier. Relative error in f equals the logarithmic derivative times the absolute error in x.",
+  obj4: {
+    question: "Why does squaring a measurement double its relative error?",
+    answer: "Because for f(x) = xⁿ the logarithmic derivative f′(x)/f(x) equals n/x, so the relative error in the output is n times the relative error in the input. Squaring gives n = 2, cubing gives n = 3. A 1% error in a measured radius becomes a 2% error in its square and a 3% error in its cube.",
     sectionId: "5"
   },
-  obj6: {
-    question: "What is the total differential for multiple variables?",
-    answer: "For z = f(x,y), the total differential is dz = (∂f/∂x)dx + (∂f/∂y)dy. Each partial derivative weights that variable's contribution to the total change. This extends error propagation to formulas with multiple inputs.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do differentials justify Leibniz notation?",
-    answer: "Differentials make dy/dx behave like a true fraction. In the chain rule, du cancels algebraically. In integration, substitution u = g(x), du = g'(x)dx is a literal change of variables. Separation of variables in differential equations becomes rigorous.",
-    sectionId: "7"
+  obj5: {
+    question: "How do you get a better approximation than the tangent line?",
+    answer: "Add the second-order term: Δy ≈ f′(x)dx + ½f″(x)(dx)². The tangent line matches the curve's value and slope at the base point; the quadratic term also matches its bending, so it tracks the curve further out. Continuing this way — each term using one more derivative and one more power of dx — produces the Taylor expansion.",
+    sectionId: "8"
   }
 }
 
@@ -1636,19 +1632,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/differentials"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1778,6 +1761,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Differentials FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1812,13 +1811,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

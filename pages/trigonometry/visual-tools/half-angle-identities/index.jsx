@@ -568,6 +568,7 @@ Both verification cards agree at every slider position — the numerical seal on
         category: "Identities",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/half-angle-identities",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="38" r="24" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><line x1="14" y1="38" x2="66" y2="38" stroke="#B5D4F4" stroke-width="0.8"/><line x1="40" y1="12" x2="40" y2="64" stroke="#B5D4F4" stroke-width="0.8"/><line x1="40" y1="38" x2="50.52" y2="16.43" stroke="#FAC775" stroke-width="1.9"/><line x1="40" y1="38" x2="60.35" y2="25.28" stroke="#97C459" stroke-width="1.7" stroke-dasharray="3,2"/><path d="M 55 38 A 15 15 0 0 0 46.58 24.52" fill="none" stroke="#FAC775" stroke-width="1.3"/><path d="M 49 38 A 9 9 0 0 0 47.63 33.23" fill="none" stroke="#97C459" stroke-width="1.2"/><circle cx="50.52" cy="16.43" r="3" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="60.35" cy="25.28" r="2.6" fill="#97C459" stroke="#27500A" stroke-width="1"/><text x="59" y="42" font-family="Georgia,serif" font-size="7" fill="#FAC775" text-anchor="middle" font-style="italic">&#945;</text><text x="51" y="35" font-family="Georgia,serif" font-size="6" fill="#C0DD97" text-anchor="middle" font-style="italic">&#945;/2</text><text x="40" y="74" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">sin(&#945;/2)</text></svg>`,
         name: "Half Angle Identities Explorer"
       },
 

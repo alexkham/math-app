@@ -1763,7 +1763,7 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
     reciprocal:{
       title:'Reciprocal Identities',
       before:  `In mathematics, the **reciprocal** of a number or expression is 1 divided by that number.
-      So, for any non-zero value $𝑥$, the reciprocal is $\\frac{1}{x}$ .
+      So, for any non-zero value $x$, the reciprocal is $\\frac{1}{x}$ .
       A reciprocal identity expresses the relationship between a trigonometric function and its multiplicative inverse — basically, how each function "flips".​
       Each basic trigonometric function (sine, cosine, tangent) has a reciprocal counterpart.
               

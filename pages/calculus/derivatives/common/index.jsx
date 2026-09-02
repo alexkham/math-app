@@ -10,6 +10,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -594,46 +595,32 @@ Each formula below is provable from the [limit definition](!/calculus/derivative
 };
 
 
+// FAQ pass: cut four case-A questions — constants, polynomials, sine/cosine
+// and the summary each have a heading naming them; the power rule is owned by
+// /calculus/derivatives/rules. This page groups formulas under category
+// headings ("Exponential Functions") while people search by formula, so the
+// specific formulas kept below match no heading. Two invented from the
+// general-base results buried in closing paragraphs.
 const faqQuestions = {
   obj1: {
-    question: "What is the derivative of a constant?",
-    answer: "The derivative of any constant c is zero: d/dx[c] = 0. A constant function graphs as a horizontal line with slope zero everywhere. Constant terms vanish under differentiation.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the power rule for derivatives?",
-    answer: "For any real exponent n: d/dx[xⁿ] = nxⁿ⁻¹. The rule works for positive integers, negative integers, fractions, and irrational exponents. Multiply by the exponent, then reduce the exponent by one.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you differentiate polynomials?",
-    answer: "Differentiate term by term using the power rule. Each term drops its degree by one; the constant term disappears. A degree-n polynomial has a degree-(n−1) derivative. After n differentiations, you get a constant; one more gives zero.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are the derivatives of sine and cosine?",
-    answer: "d/dx[sin x] = cos x and d/dx[cos x] = −sin x. The negative sign in the cosine derivative is essential. Repeated differentiation cycles with period four: sin → cos → −sin → −cos → sin.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are the derivatives of tan, cot, sec, and csc?",
-    answer: "d/dx[tan x] = sec²x, d/dx[cot x] = −csc²x, d/dx[sec x] = sec x tan x, d/dx[csc x] = −csc x cot x. Cofunctions (cos, cot, csc) carry negative signs in their derivatives; sin, tan, sec do not.",
-    sectionId: "5"
-  },
-  obj6: {
     question: "What is the derivative of e^x?",
-    answer: "d/dx[eˣ] = eˣ. The natural exponential is unique in being its own derivative. For general base a: d/dx[aˣ] = aˣ ln a. When a = e, ln a = 1 and the factor disappears.",
+    answer: "It is e^x — the natural exponential is its own derivative. No other function has this property except constant multiples Ce^x, and that self-replication is what makes e the natural base. The proof factors the difference quotient as e^x · (e^h − 1)/h and applies the [special limit](!/calculus/limits/special) (e^h − 1)/h → 1.",
     sectionId: "6"
   },
-  obj7: {
+  obj2: {
     question: "What is the derivative of ln x?",
-    answer: "d/dx[ln x] = 1/x for x > 0. For general base a: d/dx[logₐ x] = 1/(x ln a). The natural logarithm gives the simplest derivative. The function ln|x| extends to all x ≠ 0 with derivative 1/x.",
+    answer: "It is 1/x. The quickest derivation is implicit: if y = ln x then e^y = x, and differentiating gives e^y · dy/dx = 1, so dy/dx = 1/e^y = 1/x. The extended form ln|x| has the same derivative 1/x for every x ≠ 0, which is why it appears throughout [integration](!/calculus/integrals).",
     sectionId: "7"
   },
-  obj8: {
-    question: "What are all the common derivative formulas?",
-    answer: "The core formulas are: constants → 0, xⁿ → nxⁿ⁻¹, sin x → cos x, cos x → −sin x, tan x → sec²x, eˣ → eˣ, aˣ → aˣ ln a, ln x → 1/x. Combined with differentiation rules, these handle all standard functions.",
-    sectionId: "8"
+  obj3: {
+    question: "What is the derivative of a^x?",
+    answer: "For any base a > 0 with a ≠ 1, the derivative is a^x · ln a. It follows from rewriting a^x as e^(x ln a) and applying the chain rule, which leaves the constant factor ln a scaling the result. When a = e the factor becomes ln e = 1 and disappears — the reason base e is treated as the natural choice.",
+    sectionId: "6"
+  },
+  obj4: {
+    question: "What is the derivative of tan x?",
+    answer: "It is sec²x. Writing tan x as sin x / cos x and applying the quotient rule gives (cos x · cos x − sin x · (−sin x)) / cos²x, whose numerator collapses to cos²x + sin²x = 1 by the Pythagorean identity, leaving 1/cos²x = sec²x. The companion results are cot′ = −csc²x, sec′ = sec x tan x and csc′ = −csc x cot x.",
+    sectionId: "5"
   }
 }
 
@@ -707,19 +694,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/common"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -819,6 +793,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Common Derivatives FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -856,12 +846,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

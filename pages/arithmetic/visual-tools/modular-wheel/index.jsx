@@ -969,7 +969,8 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
         name: "Modular Arithmetic Wheel Visualizer",
         hubDescription: "Watch the integers 1 through N sort themselves into n remainder classes on a pie wheel — one slice per class, with the zero class (multiples of n) starred and centered at the top. Hover any slice for its formula and examples; switch the divisor from 2 to 9 to see how class structure changes.",
         category: "Primes, GCD & Modular Arithmetic",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><text x="40" y="9" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">mod 5</text><path d="M40 42 L24.71 20.97 A26 26 0 0 1 55.29 20.97 Z" fill="#FAC775" stroke="#854F0B" stroke-width="1.3"/><path d="M40 42 L55.29 20.97 A26 26 0 0 1 64.73 50.03 Z" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><path d="M40 42 L64.73 50.03 A26 26 0 0 1 40 68 Z" fill="#C0DD97" stroke="#3B6D11" stroke-width="1"/><path d="M40 42 L40 68 A26 26 0 0 1 15.27 50.03 Z" fill="#CECBF6" stroke="#534AB7" stroke-width="1"/><path d="M40 42 L15.27 50.03 A26 26 0 0 1 24.71 20.97 Z" fill="#F4C0D1" stroke="#72243E" stroke-width="1"/><path d="M40 24 L41.6 28.4 L46.2 28.4 L42.5 31.2 L43.9 35.6 L40 32.9 L36.1 35.6 L37.5 31.2 L33.8 28.4 L38.4 28.4 Z" fill="#412402"/><text x="55.2" y="40" font-family="Georgia,serif" font-size="7.5" fill="#042C53" text-anchor="middle">1</text><text x="49.4" y="57.5" font-family="Georgia,serif" font-size="7.5" fill="#173404" text-anchor="middle">2</text><text x="30.6" y="57.5" font-family="Georgia,serif" font-size="7.5" fill="#26215C" text-anchor="middle">3</text><text x="24.8" y="40" font-family="Georgia,serif" font-size="7.5" fill="#4B1528" text-anchor="middle">4</text></svg>`
       },
 
     }

@@ -1234,7 +1234,8 @@ function buildVectorOverrides(n, phase, sweepIdx, uvFontSize, wFontSize) {
   return { uOver, vOver, wOver };
 }
 
-function buildVectorScenes(n) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildVectorScenes(n) {
   const { cellPx, uvFontSize, wFontSize } = vecSizingFor(n);
 
   const baseMatrices = (uOver, vOver, wOver) => ({
@@ -1481,7 +1482,8 @@ function buildOverrides(rows, cols, phase, sweepIdx, abFontSize, cFontSize) {
   return { aOver, bOver, cOver };
 }
 
-function buildMatrixScenes(rows, cols) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildMatrixScenes(rows, cols) {
   const { cellPx, abFontSize, cFontSize } = sizingFor(rows, cols);
 
   const baseMatrices = (aOver, bOver, cOver) => ({
@@ -1769,6 +1771,7 @@ function Pill({ active, onClick, children }) {
 // ===========================================================
 export default function LinearCombinationWrapper({
   mode = 'both',
+  explanations = null,
   defaultScenario = 'matrices',
   defaultVecN = 4,
   defaultRows = 2,
@@ -1797,9 +1800,26 @@ export default function LinearCombinationWrapper({
   const max = dimensionRange[dimensionRange.length - 1];
 
   const scenes = useMemo(() => {
-    if (scenario === 'vectors') return buildVectorScenes(vecN);
-    return buildMatrixScenes(rows, cols);
-  }, [scenario, vecN, rows, cols]);
+    const built = scenario === 'vectors'
+      ? buildVectorScenes(vecN)
+      : buildMatrixScenes(rows, cols);
+    if (!explanations) return built;
+    // Line 1 anchor mesh: append the page's note for this phase to the scene
+    // caption. The run is 1 intro + 3 sweeps of `cells` steps + 1 done, so the
+    // phase boundaries follow from the scene count for either scenario.
+    const cells = (built.length - 2) / 3;
+    const keyFor = (i) => {
+      if (i === 0) return 'intro';
+      if (i === built.length - 1) return 'done';
+      if (i <= cells) return 'scaleA';
+      if (i <= 2 * cells) return 'scaleB';
+      return 'add';
+    };
+    return built.map((sc, i) => {
+      const extra = explanations[keyFor(i)];
+      return extra ? { ...sc, formula: `${sc.formula || ''}${extra}` } : sc;
+    });
+  }, [scenario, vecN, rows, cols, explanations]);
 
   return (
     <div style={{

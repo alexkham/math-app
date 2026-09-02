@@ -10,6 +10,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -719,66 +720,26 @@ Discontinuities occur when something fails. The function might be undefined at t
 `
 };
 
+// FAQ pass: cut all twelve. Every question mapped to an h2 stating its answer
+// — including the three-conditions query, which "The Formal Definition"
+// answers in its opening line, and the four discontinuity types, each with its
+// own heading. Invented three from the notation section, whose entries no
+// heading surfaces.
 const faqQuestions = {
   obj1: {
-    question: "What does it mean for a function to be continuous?",
-    answer: "A continuous function has no breaks in its graph—you can trace it without lifting your pen. Intuitively, small changes in input produce small changes in output, with no sudden jumps, missing points, or explosions to infinity.",
-    sectionId: "1"
+    question: "What does f ∈ C[a,b] mean?",
+    answer: "It says f belongs to C[a,b], the set of all functions continuous on the closed interval [a, b]. The brackets are the interval’s own, not arguments to C. Writing it this way shrinks a theorem hypothesis from a sentence to one symbol. The same class is also written C⁰ — the bottom rung of the ladder C¹, C², …, C^∞, which counts [continuous derivatives](!/calculus/derivatives/higher-order#9).",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the formal definition of continuity at a point?",
-    answer: "A function f is continuous at x = a if three conditions hold: f(a) is defined, the two-sided limit exists, and the limit equals the function value. The equation lim(x→a) f(x) = f(a) encapsulates all three requirements.",
-    sectionId: "2"
+    question: "How does the epsilon-delta definition of continuity differ from the one for limits?",
+    answer: "By a single missing condition. A limit requires 0 < |x − a| < δ, deliberately puncturing the point so that x never equals a. Continuity drops the 0 <, writing |x − a| < δ implies |f(x) − f(a)| < ε, which lets x = a into the argument. That inclusion is exactly what forces the value at a to agree with the surrounding behavior.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How is continuity defined on a closed interval?",
-    answer: "On [a,b], the function must be continuous on the open interval (a,b), right-continuous at a (limit from right equals f(a)), and left-continuous at b (limit from left equals f(b)). Endpoints use one-sided continuity.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are the types of discontinuities?",
-    answer: "The four types are: removable (limit exists but doesn't equal f(a)), jump (one-sided limits exist but differ), infinite (at least one one-sided limit is ±∞), and oscillating (limit fails to exist due to oscillation).",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is a removable discontinuity?",
-    answer: "A removable discontinuity occurs when the limit exists but the function is undefined or has a different value at that point. It appears as a hole in the graph and can be 'fixed' by redefining the function value to equal the limit.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is a jump discontinuity?",
-    answer: "A jump discontinuity occurs when both one-sided limits exist but are unequal. The function 'jumps' from one value to another. The floor function has jump discontinuities at every integer, jumping by 1 each time.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is an infinite discontinuity?",
-    answer: "An infinite discontinuity occurs when at least one one-sided limit equals ±∞. The function has a vertical asymptote at that point. For f(x) = 1/x at x = 0, both one-sided limits are infinite with opposite signs.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is an oscillating discontinuity?",
-    answer: "An oscillating discontinuity occurs when the function oscillates without settling, preventing the limit from existing. The classic example is sin(1/x) at x = 0, which oscillates infinitely between -1 and 1 as x approaches 0.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Which standard functions are continuous?",
-    answer: "Polynomials are continuous everywhere. Rational functions are continuous except where the denominator is zero. Trig functions, exponentials, logarithms, and roots are continuous on their domains. For these, limits can be evaluated by direct substitution.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "Are combinations of continuous functions continuous?",
-    answer: "Yes. If f and g are continuous at a, then f+g, f−g, f·g, and f/g (when g(a)≠0) are continuous at a. Compositions are also continuous: if g is continuous at a and f is continuous at g(a), then f∘g is continuous at a.",
-    sectionId: "10"
-  },
-  obj11: {
-    question: "What is the Intermediate Value Theorem?",
-    answer: "If f is continuous on [a,b] and k is any value between f(a) and f(b), then f(c) = k for some c in (a,b). Continuous functions hit every intermediate value—the graph cannot skip from f(a) to f(b) without passing through every height in between.",
-    sectionId: "11"
-  },
-  obj12: {
-    question: "How do you use IVT to find roots?",
-    answer: "If f is continuous on [a,b] with f(a) < 0 and f(b) > 0 (or vice versa), IVT guarantees f(c) = 0 for some c between a and b. A sign change means a root exists. The bisection method refines this by repeatedly halving the interval.",
-    sectionId: "12"
+    question: "Can you prove a function is continuous by substitution?",
+    answer: "No — that reasoning runs in a circle. Evaluating a limit by substituting the point is something continuity licenses, not something that establishes it; substitution works precisely because the function is already known to be continuous there. To prove continuity, check the three conditions directly or cite a theorem, such as the continuity of polynomials or of sums and products of continuous functions.",
+    sectionId: "notation"
   }
 }
 
@@ -853,19 +814,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits/continuity"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1024,6 +972,22 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Continuity FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1061,12 +1025,6 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

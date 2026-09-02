@@ -1,15 +1,21 @@
 
 import React, { useState } from 'react';
 
+// Hoisted out of the useState call and exported so the page's frozen-state
+// still is built from the tool's own opening distribution (Line 1). Cloned on
+// mount below, because handleProbabilityChange writes through to these objects
+// and would otherwise mutate the constant.
+export const DEFAULT_VALUES = [
+  { x: 1, p: 0.1 },
+  { x: 2, p: 0.15 },
+  { x: 3, p: 0.25 },
+  { x: 4, p: 0.3 },
+  { x: 5, p: 0.15 },
+  { x: 6, p: 0.05 }
+];
+
 export default function DiscreteExpectedValueVisualization() {
-  const [values, setValues] = useState([
-    { x: 1, p: 0.1 },
-    { x: 2, p: 0.15 },
-    { x: 3, p: 0.25 },
-    { x: 4, p: 0.3 },
-    { x: 5, p: 0.15 },
-    { x: 6, p: 0.05 }
-  ]);
+  const [values, setValues] = useState(() => DEFAULT_VALUES.map(v => ({ ...v })));
 
   const calculateExpectedValue = () => {
     return values.reduce((sum, val) => sum + val.x * val.p, 0);
@@ -66,7 +72,7 @@ export default function DiscreteExpectedValueVisualization() {
                 fontSize="12"
                 fill="#6c757d"
               >
-                {(i * 0.2).toFixed(1)}
+                {((i * 70) / scale).toFixed(2)}
               </text>
             </g>
           ))}
@@ -132,9 +138,9 @@ export default function DiscreteExpectedValueVisualization() {
 
           {/* Expected value line */}
           <line
-            x1={100 + (expectedValue - 1) * 90}
+            x1={130 + (expectedValue - 1) * 90}
             y1="30"
-            x2={100 + (expectedValue - 1) * 90}
+            x2={130 + (expectedValue - 1) * 90}
             y2="350"
             stroke="#e74c3c"
             strokeWidth="3"
@@ -143,7 +149,7 @@ export default function DiscreteExpectedValueVisualization() {
           
           {/* Expected value label */}
           <text
-            x={100 + (expectedValue - 1) * 90}
+            x={130 + (expectedValue - 1) * 90}
             y="20"
             textAnchor="middle"
             fontSize="14"

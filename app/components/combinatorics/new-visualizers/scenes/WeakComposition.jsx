@@ -20,6 +20,7 @@
 import React, {
   useState, useEffect, useRef, useCallback, useMemo,
 } from "react";
+import { processContent } from "@/app/utils/contentProcessor";
 import {
   ROW_H_MIN, SVG_W_DEFAULT, COLORS, tint,
   factorial, getItems,
@@ -190,7 +191,7 @@ function getBinRenderInfo(bars, stripX0, numSymbols) {
   return info;
 }
 
-export default function WeakComposition() {
+export default function WeakComposition({ explanations = null }) {
   // ── State ─────────────────────────────────────────────
   const [n, setN] = useState(4);
   const [k, setK] = useState(3);
@@ -546,6 +547,21 @@ export default function WeakComposition() {
       ? `x₁ = ${firstVal}: ${k_done} / ${sz}`
       : "";
   }
+
+  // Line 1: state key for the hoisted explanations - phases, then the done
+  // state keyed by notable (n, k) configurations; other combos show nothing.
+  const stateKey = animState === "done"
+    ? (k === 2
+        ? "twoBins"
+        : n === 4 && k === 3
+          ? "default43"
+          : n === 5 && k === 4
+            ? "big54"
+            : null)
+    : animState === "idle" && completed.length === 0
+      ? "idle"
+      : "building";
+  const stateEntry = (explanations && stateKey && explanations[stateKey]) || null;
 
   // ── Narration per group ──────────────────────────────
   const narrationFor = (gi) => {
@@ -1131,6 +1147,24 @@ export default function WeakComposition() {
                 );
               })}
             </div>
+            {stateEntry && (
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: "10px 12px",
+                  background: COLORS.surfaceTint,
+                  border: `1px solid #dbeafe`,
+                  borderLeft: `3px solid ${COLORS.accent}`,
+                  borderRadius: 8,
+                  fontSize: 12,
+                  lineHeight: 1.55,
+                  color: COLORS.text,
+                  fontFamily: "system-ui, sans-serif",
+                }}
+              >
+                {processContent(stateEntry)}
+              </div>
+            )}
           </RightPanel>
         </SceneGrid>
       </PageWrap>

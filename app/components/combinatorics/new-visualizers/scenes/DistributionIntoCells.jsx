@@ -14,6 +14,7 @@
 import React, {
   useState, useEffect, useRef, useCallback, useMemo,
 } from "react";
+import { processContent } from "@/app/utils/contentProcessor";
 import {
   ROW_H_MIN, SVG_W_DEFAULT, COLORS, tint,
   getItems,
@@ -119,7 +120,7 @@ function stackedItemY(p) {
   return CELL_TOP + CELL_H - CELL_PAD_BOT - BALL_R - p * (BALL_R * 2 + STACK_GAP);
 }
 
-export default function DistributionIntoCells() {
+export default function DistributionIntoCells({ explanations = null }) {
   // ── State ─────────────────────────────────────────────
   const [n, setN] = useState(3);
   const [k, setK] = useState(3);
@@ -436,6 +437,23 @@ export default function DistributionIntoCells() {
       ? `Cell ${firstVal}: ${k_done} / ${sz}`
       : "";
   }
+
+  // Line 1: state key for the hoisted explanations - phases, then the done
+  // state keyed by notable (n, k) configurations; other combos show nothing.
+  const stateKey = animState === "done"
+    ? (n === 3 && k === 3
+        ? "default33"
+        : n === 3 && k === 2
+          ? "twoCells"
+          : n === 2 && k === 4
+            ? "manyCells"
+            : n === 4 && k === 3
+              ? "big43"
+              : null)
+    : animState === "idle" && completed.length === 0
+      ? "idle"
+      : "building";
+  const stateEntry = (explanations && stateKey && explanations[stateKey]) || null;
 
   // ── Narration per group ──────────────────────────────
   const narrationFor = (gi) => {
@@ -898,6 +916,24 @@ export default function DistributionIntoCells() {
                 );
               })}
             </div>
+            {stateEntry && (
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: "10px 12px",
+                  background: COLORS.surfaceTint,
+                  border: `1px solid #dbeafe`,
+                  borderLeft: `3px solid ${COLORS.accent}`,
+                  borderRadius: 8,
+                  fontSize: 12,
+                  lineHeight: 1.55,
+                  color: COLORS.text,
+                  fontFamily: "system-ui, sans-serif",
+                }}
+              >
+                {processContent(stateEntry)}
+              </div>
+            )}
           </RightPanel>
         </SceneGrid>
       </PageWrap>

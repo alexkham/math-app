@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import { renderDigitRule } from '../../../../app/utils/illustrations/arithmetic/divisibility/digitRule'
 
@@ -684,58 +685,27 @@ Each rule is a human-readable compression of a modular identity. The [modular ar
   content: `Checking whether one number divides another by performing the full division works — but it is slow, especially for large numbers. For the most common divisors, patterns in the decimal digits provide an answer instantly. Each pattern is a consequence of how [modular arithmetic](!/arithmetic/modulo) interacts with the base-$10$ place value system, compressed into a rule simple enough to apply mentally.`
 }
 
+// FAQ pass: cut the definition and all nine test-by-N questions — each has
+// its own h2 ("What Are Divisibility Rules?", "Divisibility by N") whose
+// first line states the rule. Kept the rule for 12 (no h2 — it lives in
+// Combining Rules) and the two why-it-works mechanisms, which sit under the
+// generic "Why These Rules Work" heading. No rule for 7 exists on the page,
+// so no question was invented for it (case C).
 const faqQuestions = {
   obj1: {
-    question: "What are divisibility rules?",
-    answer: "Divisibility rules are shortcuts that determine whether a number is divisible by a given divisor without performing the full division. They exploit patterns in decimal digits based on how powers of 10 behave under modular arithmetic."
+    question: "How do you test divisibility by 12?",
+    answer: "Test divisibility by 4 AND by 3 (coprime factors of 12). Check that the last two digits are divisible by 4 AND the digit sum is divisible by 3. For 1,236: 36 ÷ 4 = 9 and 1+2+3+6 = 12, so 12 | 1236. Do NOT test 2 and 6 — they are not coprime (gcd(2,6)=2≠1). Check any candidate with the [divisibility calculator](!/arithmetic/calculators/divisibility-calculator).",
+    sectionId: "11"
   },
   obj2: {
-    question: "How do you test divisibility by 2?",
-    answer: "A number is divisible by 2 if its last digit is even (0, 2, 4, 6, or 8). Since 10 is divisible by 2, all digits except the last contribute multiples of 2, so only the ones digit matters."
+    question: "Why does the digit sum rule work for 3 and 9?",
+    answer: "Because 10 ≡ 1 (mod 3) and 10 ≡ 1 (mod 9). Every power of 10 is congruent to 1, so a digit d in position k contributes d×10^k ≡ d×1 = d. The number reduces to the sum of its digits under these moduli.",
+    sectionId: "13"
   },
   obj3: {
-    question: "How do you test divisibility by 3?",
-    answer: "A number is divisible by 3 if the sum of its digits is divisible by 3. This works because 10 ≡ 1 (mod 3), so each digit contributes only its face value. For 729: 7+2+9=18, and 3|18, so 3|729."
-  },
-  obj4: {
-    question: "How do you test divisibility by 4?",
-    answer: "A number is divisible by 4 if its last two digits form a number divisible by 4. Since 100 is divisible by 4, only the tens and ones places affect the remainder. For 3,516: 16÷4=4 exactly, so 4|3516."
-  },
-  obj5: {
-    question: "How do you test divisibility by 5?",
-    answer: "A number is divisible by 5 if its last digit is 0 or 5. Like divisibility by 2, since 10 is divisible by 5, only the last digit matters, and only 0 and 5 are single digits divisible by 5."
-  },
-  obj6: {
-    question: "How do you test divisibility by 6?",
-    answer: "A number is divisible by 6 if it is divisible by both 2 AND 3. Since 6=2×3 and gcd(2,3)=1, check that the last digit is even AND the digit sum is divisible by 3. Both conditions must hold."
-  },
-  obj7: {
-    question: "How do you test divisibility by 8?",
-    answer: "A number is divisible by 8 if its last three digits form a number divisible by 8. Since 1000 is divisible by 8, only the last three digits affect the remainder. For 53,104: 104÷8=13, so 8|53104."
-  },
-  obj8: {
-    question: "How do you test divisibility by 9?",
-    answer: "A number is divisible by 9 if the sum of its digits is divisible by 9. The reasoning is identical to divisibility by 3: since 10≡1 (mod 9), each digit contributes its face value. For 8,127: 8+1+2+7=18, and 9|18."
-  },
-  obj9: {
-    question: "How do you test divisibility by 10?",
-    answer: "A number is divisible by 10 if its last digit is 0. This is the simplest rule — the base of our number system is 10, so a number has no remainder when the ones place is empty."
-  },
-  obj10: {
-    question: "How do you test divisibility by 11?",
-    answer: "A number is divisible by 11 if the alternating sum of its digits (from right: add, subtract, add...) is divisible by 11. This works because 10≡-1 (mod 11), so digit positions alternate in sign. For 9,273: 3-7+2-9=-11, and 11|-11."
-  },
-  obj11: {
-    question: "How do you test divisibility by 12?",
-    answer: "Test divisibility by 4 AND by 3 (coprime factors of 12). Check that the last two digits are divisible by 4 AND the digit sum is divisible by 3. Do NOT test 2 and 6 — they are not coprime (gcd(2,6)=2≠1)."
-  },
-  obj12: {
-    question: "Why does the digit sum rule work for 3 and 9?",
-    answer: "Because 10≡1 (mod 3) and 10≡1 (mod 9). Every power of 10 is congruent to 1, so a digit d in position k contributes d×10^k ≡ d×1 = d. The number reduces to the sum of its digits under these moduli."
-  },
-  obj13: {
     question: "Why does the alternating sum rule work for 11?",
-    answer: "Because 10≡-1 (mod 11). Powers of 10 alternate: 10⁰=1, 10¹≡-1, 10²≡1, 10³≡-1. Each digit's contribution alternates in sign based on position, producing the alternating-sum pattern."
+    answer: "Because 10 ≡ -1 (mod 11): powers of 10 alternate, 10⁰ = 1, 10¹ ≡ -1, 10² ≡ 1, 10³ ≡ -1. Each digit's contribution therefore alternates in sign with its position, producing the alternating-sum pattern. For 9,273: from the right, 3 − 7 + 2 − 9 = −11, and 11 divides −11, so 11 | 9273.",
+    sectionId: "13"
   }
 }
 
@@ -811,19 +781,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/divisibility/rules"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1099,6 +1056,22 @@ drObj10,}) {
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Divisibility Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -1130,17 +1103,10 @@ drObj10,}) {
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

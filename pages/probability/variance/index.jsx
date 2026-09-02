@@ -960,6 +960,7 @@ import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1154,26 +1155,30 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — what variance is,
+  // how to calculate it, why squaring, variance of a sum, and variance vs
+  // standard deviation. Replaced with the non-linearity traps the notation
+  // section and Common Mistakes both flag but no heading states.
   const faqQuestions = {
     obj1: {
-      question: "What is variance in probability?",
-      answer: "Variance is a quantitative measure of how far, on average, outcomes of a random variable fall from the expected value (mean). It's calculated by taking each possible outcome, finding its distance from the mean, squaring that distance, and averaging all squared distances weighted by probability. High variance means outcomes tend to be far from the mean; low variance indicates outcomes cluster tightly around the mean."
+      question: "Why is Var(aX) = a²Var(X) and not aVar(X)?",
+      answer: "Because the definition squares the deviation. Scaling X by a scales every deviation by a, and squaring turns that into a². Expectation is linear, so E[aX] = aE[X]; variance is not, and the square is exactly where they part company. The companion rule follows the same way: Var(X + b) = Var(X), since shifting moves the mean along with the values.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "How do you calculate variance?",
-      answer: "Variance is calculated as Var(X) = E[(X - μ)²], the expected value of the squared deviation from the mean. A convenient alternative is the shortcut formula: Var(X) = E[X²] - μ². For discrete variables, use a sum: Σ(xᵢ - μ)² p(xᵢ). For continuous variables, use an integral: ∫(x - μ)² f(x) dx. Both express the same concept: averaging squared deviations weighted by probability."
+      question: "Do standard deviations add?",
+      answer: "No — variances do, standard deviations do not. For independent X and Y, Var(X + Y) = Var(X) + Var(Y), but the standard deviation of the sum is the square root of that total, not the sum of the two standard deviations. This is why algebra is done in σ² even though results are reported in σ.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "Why do we square deviations in variance?",
-      answer: "Squaring serves several purposes: First, it prevents cancellation—without squaring, positive and negative deviations would cancel out, always yielding zero. Second, it emphasizes larger deviations more than smaller ones, making variance sensitive to outliers. Third, it guarantees non-negativity—squared terms are always positive. Fourth, it leads to useful algebraic identities like the shortcut formula E[X²] - μ²."
+      question: "Is E[X²] the same as (E[X])²?",
+      answer: "No, and their difference is precisely the variance: Var(X) = E[X²] − (E[X])². Squaring before averaging is not the same as averaging before squaring, because squaring is a curved function that weights large values more heavily. The gap is always non-negative, and it vanishes only when X is constant.",
+      sectionId: "calculate"
     },
     obj4: {
-      question: "How does variance behave when adding random variables?",
-      answer: "For independent random variables X and Y, variances add: Var(X + Y) = Var(X) + Var(Y). This extends to any number of independent variables. When variables are not independent, an additional term appears: Var(X + Y) = Var(X) + Var(Y) + 2Cov(X,Y), where covariance measures how variables vary together. When independent, covariance is zero."
-    },
-    obj5: {
-      question: "What is the difference between variance and standard deviation?",
-      answer: "Variance and standard deviation measure the same concept—spread around the mean—but differ in units. Variance is in squared units (e.g., square meters, dollars squared), making it mathematically convenient but harder to interpret. Standard deviation (σ = √Var(X)) returns to original units, providing intuitive sense of typical deviation magnitude. Both contain the same information—knowing one determines the other."
+      question: "Can variance be negative?",
+      answer: "No. Variance is the average of squared deviations, and squares are never negative, so neither is their weighted average. A negative variance is not an unusual case — it is a signal that something went wrong, most often a sign error or a misapplied shortcut formula. Variance is zero only when the variable is constant.",
+      sectionId: "mistakes"
     }
   }
 
@@ -1244,19 +1249,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/variance"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -2041,6 +2033,22 @@ export default function VariancePage({
                  dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Variance FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2077,12 +2085,6 @@ export default function VariancePage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

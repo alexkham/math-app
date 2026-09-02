@@ -850,6 +850,9 @@ Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so 
         description: "Calculate distance and midpoint between complex numbers visually. Drag points, see the Pythagorean triangle, distance circle, and step-by-step formulas in real time.",
         keywords: keyWords.join(", "),
         url: "/complex-numbers/visual-tools/distance-midpoint",
+        hubDescription: "Compute and visualize the distance |z₁ − z₂| and midpoint between two complex numbers. Drag two points to see the right triangle, step-by-step calculations, and a circle of radius equal to the distance centered at z₁.",
+        category: "Modulus & Geometry",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="54" x2="74" y2="54" stroke="#B5D4F4" stroke-width="0.9"/><line x1="30" y1="12" x2="30" y2="70" stroke="#B5D4F4" stroke-width="0.9"/><path d="M 20 24 L 66 24 L 66 44" fill="none" stroke="#B5D4F4" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="20" y1="24" x2="66" y2="44" stroke="#FAC775" stroke-width="2.1"/><circle cx="20" cy="24" r="2.9" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="66" cy="44" r="2.9" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="43" cy="34" r="3.8" fill="#97C459" stroke="#27500A" stroke-width="1.3"/><text x="40" y="70" font-family="Georgia,serif" font-size="7.5" fill="#FAC775" text-anchor="middle" font-style="italic">|z&#8321; &#8722; z&#8322;|</text></svg>`,
          name: "Complex Distance & Midpoint Calculator"
       },
         

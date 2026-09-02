@@ -658,6 +658,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -745,26 +746,31 @@ export async function getStaticProps(){
 `
 
 
+  // FAQ pass: the statement, the conditions, the use cases and the
+  // limitations each name their own h2, and "Why Chebyshev Improves on
+  // Markov" covers the comparison twice over — the inequalities hub owns it
+  // as well. Replaced with the notation section's traps, led by the
+  // coverage form and its collision with the 68–95–99.7 rule.
   const faqQuestions = {
     obj1: {
-      question: "What is Chebyshev's inequality?",
-      answer: "Chebyshev's inequality states that for a random variable with finite mean μ and finite variance σ², the probability of deviating from the mean by k standard deviations is at most 1/k². Formally: P(|X - μ| ≥ kσ) ≤ 1/k². It bounds deviation probabilities using only mean and variance, without assuming any particular distribution shape."
+      question: "How much of a distribution lies within two standard deviations?",
+      answer: "At least 75%, for any distribution with a finite variance. Chebyshev's coverage form says P(|X − μ| < kσ) ≥ 1 − 1/k², giving 75% at two sigma and about 89% at three. The familiar 95% figure belongs to the [normal distribution](!/probability/distributions/continuous/normal), not to Chebyshev — quoting it for unchecked data claims the bell curve's privilege without its assumptions.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "What conditions does Chebyshev's inequality require?",
-      answer: "Chebyshev's inequality requires only that the random variable has a finite mean and finite variance. No assumptions are made about the distribution's shape, symmetry, or boundedness. It applies equally to discrete and continuous random variables and requires no independence assumptions."
+      question: "Why does Chebyshev's inequality use an absolute value?",
+      answer: "To make the bound two-sided. |X − μ| ≥ kσ captures deviations in both directions at once — too far above the mean and too far below — where Markov's X ≥ a watches only one side. That symmetry is possible because variance measures spread around the mean rather than size, so no direction is privileged.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "How does Chebyshev's inequality improve on Markov's inequality?",
-      answer: "Markov's inequality uses only the expected value and applies to non-negative quantities, giving weak bounds. Chebyshev incorporates additional information—the variance—to measure spread around the mean, allowing much stronger control over deviations in both directions. Chebyshev effectively applies Markov's idea to squared deviations, achieving tighter bounds while remaining distribution-free."
+      question: "Is the bound 1/k² or σ²/ε²?",
+      answer: "Both, but never mixed. They are the same inequality in two conventions: put ε = kσ and each becomes the other. The σ-units spelling gives the clean constants; the ε spelling exposes the mechanism, variance over squared tolerance. Writing σ²/k² or 1/ε² crosses the two and produces a bound silently off by a factor of σ².",
+      sectionId: "notation"
     },
     obj4: {
-      question: "What is Chebyshev's inequality used for?",
-      answer: "Chebyshev's inequality is used to bound probabilities of large deviations from the mean, analyze stability of averages and estimators, provide guarantees in problems involving uncertainty, and serve as a tool in theoretical arguments. It plays a central role in proving the Law of Large Numbers by showing that sample averages concentrate around their expected value as variances shrink."
-    },
-    obj5: {
-      question: "What are the limitations of Chebyshev's inequality?",
-      answer: "The bounds Chebyshev provides are often conservative because it depends only on variance and ignores finer distribution features like shape, symmetry, or tail behavior. Two random variables with the same variance receive the same bound even if one is far more concentrated. For tighter control, additional assumptions or more specialized inequalities are needed."
+      question: "Does k mean the same thing in Markov's and Chebyshev's inequalities?",
+      answer: "No — same letter, different unit. In [Markov's](!/probability/inequalities/markov#notation) normalized form k multiplies the mean, so the threshold is k·E[X]. In Chebyshev's it multiplies the standard deviation, so the threshold is kσ. Carrying a value of k from one to the other silently changes what is being claimed.",
+      sectionId: "notation"
     }
   }
 
@@ -839,19 +845,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/inequalities/chebyshev"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1274,6 +1267,22 @@ export default function ChebyshevInequalityPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Chebyshev's Inequality FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1372,13 +1381,6 @@ export default function ChebyshevInequalityPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

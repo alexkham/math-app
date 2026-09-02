@@ -10,6 +10,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
@@ -548,31 +549,32 @@ Each situation calls for a technique that adapts the core rules to a nonstandard
 
 
 
+// FAQ pass: cut implicit differentiation, inverse-function derivatives and
+// the choose-a-technique question (h2s "Implicit Differentiation",
+// "Differentiating Inverse Functions", "When to Use Which Technique" answer
+// them), plus the log-differentiation timing question, also served by the
+// when-to-use heading. Kept the parametric formula; invented three from the
+// notation section, which names each trap explicitly.
 const faqQuestions = {
   obj1: {
-    question: "What is implicit differentiation?",
-    answer: "Implicit differentiation finds dy/dx from an equation relating x and y without solving for y. You differentiate both sides with respect to x, applying the chain rule to every term involving y (which introduces a dy/dx factor), then solve algebraically for dy/dx.",
-    sectionId: "1"
+    question: "Why does d/dx[y²] equal 2y·dy/dx and not 2y?",
+    answer: "Because inside an equation being differentiated implicitly, every y silently means y(x) — a function of x, not an independent symbol. Differentiating y² therefore needs the chain rule: the outer power contributes 2y and the inner function contributes its own derivative dy/dx. Dropping that factor is the most common implicit-differentiation error, and the missing dy/dx cannot be recovered later.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "When should you use logarithmic differentiation?",
-    answer: "Logarithmic differentiation is used for expressions with variable exponents like x^x, complex products and quotients with many factors, or any case where taking ln of both sides converts multiplicative structure into additive structure that is easier to differentiate.",
-    sectionId: "3"
+    question: "What is the difference between (f⁻¹)′ and 1/f′?",
+    answer: "The parentheses are load-bearing. (f⁻¹)′ means invert the function first, then differentiate; 1/f′ is the pointwise reciprocal of the derivative. They are related by (f⁻¹)′(b) = 1/f′(a), but the two sides are evaluated at different points — b on the left, a = f⁻¹(b) on the right. Reading it as one shared input is the usual mistake.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the derivative of an inverse function?",
-    answer: "If f is one-to-one and differentiable, the derivative of its inverse is (f⁻¹)'(x) = 1/f'(f⁻¹(x)), provided f' is nonzero at that point. The derivative of the inverse is the reciprocal of the original derivative evaluated at the corresponding point.",
-    sectionId: "4"
-  },
-  obj4: {
     question: "How do you find dy/dx for a parametric curve?",
-    answer: "For a curve defined by x = x(t) and y = y(t), the slope is dy/dx = (dy/dt)/(dx/dt). Each coordinate is differentiated with respect to the parameter t, and their ratio gives the slope. The second derivative requires differentiating dy/dx with respect to t, then dividing by dx/dt again.",
+    answer: "Differentiate each coordinate with respect to the parameter and divide: dy/dx = (dy/dt)/(dx/dt). The cancellation of dt is legitimate here, licensed by [differentials](!/calculus/derivatives/differentials#notation). The formula holds wherever dx/dt ≠ 0; where dx/dt vanishes the tangent turns vertical. Physics writes the same ratio with Newton dots, as ẏ/ẋ.",
     sectionId: "6"
   },
-  obj5: {
-    question: "How do you choose which differentiation technique to use?",
-    answer: "Use implicit differentiation when x and y are tangled in an equation. Use logarithmic differentiation for variable exponents or complex products/quotients. Use the inverse function formula when differentiating f⁻¹ with a known f'. Use parametric differentiation when a curve is given as x(t), y(t).",
-    sectionId: "7"
+  obj4: {
+    question: "How do you find the second derivative of a parametric curve?",
+    answer: "Not by dividing d²y/dt² by d²x/dt² — second derivatives do not divide that way. Instead differentiate the first-derivative expression dy/dx with respect to t, then divide by dx/dt once more. The dt cancellation that licenses the first-derivative ratio stops working past first order, which is exactly why the naive formula fails.",
+    sectionId: "6"
   }
 }
 
@@ -645,19 +647,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/techniques"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -781,6 +770,22 @@ export default function PageTemplate({
         content:[
           sectionsContent.overview.content,
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Differentiation Techniques FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -910,12 +915,6 @@ export default function PageTemplate({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

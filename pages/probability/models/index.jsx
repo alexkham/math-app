@@ -741,6 +741,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -886,26 +887,32 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — What Is a Probability
+  // Model, Why Probability Uses Models, Models/Random Variables/
+  // Distributions, What all Models Have in Common, Modeling Assumptions.
+  // That last one also means this page serves "the three parts of a model"
+  // structurally, so the entry I had put on /probability/sets is redundant
+  // and has been removed there. Replaced with the one-to-many consequences.
   const faqQuestions = {
     obj1: {
-      question: "What is a probability model?",
-      answer: "A probability model is a mathematical description of a random situation that specifies the set of all possible outcomes, which collections of outcomes are considered events, and how probabilities are assigned to those events. It defines how randomness is generated, not what is later measured from it."
+      question: "Can you recover the experiment from its distribution?",
+      answer: "No. Once a distribution is formed, the mechanism that produced it is no longer visible. The same distribution can arise from different outcome spaces, different experimental setups and different probability assignments. Distributions record results, not processes — which is why knowing a variable is, say, uniform tells you nothing about how it was generated.",
+      sectionId: "5"
     },
     obj2: {
-      question: "Why does probability use models instead of dealing with reality directly?",
-      answer: "Real-world situations are too complex to analyze directly. Probability models replace reality with simplified structures that capture only the random mechanism of interest by stripping away irrelevant details, making assumptions explicit, and allowing repeated reasoning under controlled conditions. Any probabilistic conclusion is conditional on the chosen model."
+      question: "Does changing the random variable change the model?",
+      answer: "No — only the measurement changes. The model is the outcome space, the events and the probability assignment; a random variable is a mapping defined on top of it. Define a different mapping and you get a different distribution while the underlying model sits untouched. Confusing the two makes distributions look like properties of experiments rather than of measurements.",
+      sectionId: "6"
     },
     obj3: {
-      question: "What's the difference between a probability model and a distribution?",
-      answer: "A probability model defines a space of outcomes and their probabilities. A distribution is the probability law induced by a random variable defined on that model. The order is: model → random variable → distribution. The model supplies randomness, the random variable selects what is measured, and the distribution records the resulting probabilities. Distributions describe results, not processes; models describe processes, not results."
+      question: "Can the same model produce both discrete and continuous distributions?",
+      answer: "Yes. Fix one probability model and define different random variables on it: each mapping produces its own distribution, and those can be discrete, continuous or mixed. The randomness is fixed by the model; what varies is what you choose to measure. So the discrete/continuous split describes the variable, not the experiment behind it.",
+      sectionId: "6"
     },
     obj4: {
-      question: "What do all probability models have in common?",
-      answer: "At the core of every probability model are: a list of possible outcomes the experiment may produce, collections of outcomes treated as meaningful events, and numerical weights expressing how likely those events are. This structure is universal regardless of context—coins, dice, cards, measurements, or simulations all fit into the same abstract framework."
-    },
-    obj5: {
-      question: "What assumptions do probability models make?",
-      answer: "Every probability model rests on explicit choices including: outcomes are treated as symmetric, trials don't influence each other, the same mechanism is repeated each time, and whether the outcome space is finite or infinite. These assumptions are inputs to the model, not conclusions. Changing an assumption changes the model and therefore all results derived from it."
+      question: "Does a more realistic model give better answers?",
+      answer: "Not necessarily. Realistic detail does not guarantee correctness, and deliberately unrealistic models are often the useful ones because they isolate the mechanism you care about. What matters is whether the model matches the situation you are applying it to. When it does not, the calculations stay mathematically correct and become practically irrelevant.",
+      sectionId: "10"
     }
   }
 
@@ -976,19 +983,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/models"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1471,6 +1465,22 @@ export default function ModelsPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Probability Models FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,
@@ -1553,13 +1563,6 @@ export default function ModelsPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

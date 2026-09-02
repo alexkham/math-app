@@ -495,6 +495,9 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ChangeBasis from '../../../../app/components/linear-algebra copy/r2-visualizers/change-basis/ChangeBasis'
+import { SCENARIOS as CB_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/change-basis/ChangeBasis'
+import changeBasisDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/change-basis/changeBasisDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -695,33 +698,108 @@ For a full treatment see **matrix inverse**, **determinant**, and **matrix multi
       link:'',
     },
     obj12:{
-      title:``,
-      content:``,
+      title:`Natural Bases: Rotated and Stretched Axes`,
+      content:`Four presets keep the axes perpendicular. Two are rotations of the standard basis, one stretches the axes to unequal lengths, and one is the standard basis itself.
+
+The frozen picture is the 30° rotation. The vector $\mathbf{v}$ has not moved — it sits exactly where it always sat — but the dashed basis grid has turned beneath it, and the decomposition legs now run along the new axes. Its coordinates read $(2.915, 0.049)$ instead of $(2.5, 1.5)$.`,
       before:``,
-      after:``,
+      after:`That is the whole idea the tool exists to convey: **a change of basis moves the description, not the vector**. The arrow is fixed in the plane; only the numbers used to name it change.
+
+Rotations are the friendliest case because they are orthonormal — perpendicular axes of unit length. For those, the inverse of the basis matrix is simply its transpose, $B^{-1} = B^{\mathsf{T}}$, which is why converting coordinates costs nothing more than a transpose.
+
+The stretched-axes preset breaks the "unit length" half while keeping perpendicularity. One step along $\mathbf{b_1}$ then covers two standard units, so the coordinate along it *shrinks* while the other grows — a useful reminder that coordinates are counts of basis steps, not distances.`,
       link:'',
     },
     obj13:{
-      title:``,
-      content:``,
+      title:`Non-Orthogonal Bases: Parallelograms Instead of Squares`,
+      content:`Three presets drop the right angle. The frozen picture is the skewed basis, $\mathbf{b_1} = (1, 0.4)$ and $\mathbf{b_2} = (-0.3, 1)$, where the dashed basis grid is made of parallelograms rather than squares.
+
+The same $\mathbf{v}$ now reads $(2.634, 0.446)$, and the two decomposition legs meet at an oblique angle.`,
       before:``,
-      after:``,
+      after:`Nothing here is invalid. The only requirement for a basis is that the two vectors be **linearly independent** — equivalently $\det B \neq 0$ — and perpendicularity is a convenience, not a condition. Every vector still has exactly one pair of coordinates in this basis.
+
+What is lost is the convenience. Without orthogonality, $B^{-1} \neq B^{\mathsf{T}}$ and the inverse must be computed properly; the Pythagorean formula for length no longer applies to the coordinates; and projecting onto one axis is no longer independent of the other. Non-orthogonal bases are common in practice — crystal lattices and eigenbases are rarely perpendicular — which is why the tool insists they are legitimate.`,
       link:'',
     },
     obj14:{
-      title:``,
-      content:``,
+      title:`Orientation Reversed: a Negative Determinant`,
+      content:`Two presets have $\det B = -1$: one flips the $y$-axis, and one swaps the two axes outright. The frozen picture is the $y$-flip, where $\mathbf{b_2}$ points down instead of up.
+
+The coordinates come out $(2.5, -1.5)$ — the same numbers as the standard basis, with the second sign reversed.`,
       before:``,
-      after:``,
+      after:`These bases are perfectly valid — a negative determinant is still a non-zero one — but they are **left-handed**. Rotating $\mathbf{b_1}$ to $\mathbf{b_2}$ now turns clockwise rather than counterclockwise, and the sign of the determinant is exactly what records that.
+
+The magnitude and the sign of $\det B$ say different things. Its absolute value is the area of the parallelogram the basis spans, so it measures how much a coordinate step covers; its sign records handedness. Both matter, and the tool's readout shows the signed value rather than the area alone.`,
       link:'',
     },
     obj15:{
-      title:``,
-      content:``,
+      title:`Degenerate: When the Pair Is Not a Basis`,
+      content:`One preset is deliberately broken: $\mathbf{b_1} = (1, 0)$ and $\mathbf{b_2} = (2, 0)$ are collinear, so $\det B = 0$.
+
+The frozen picture shows the failure directly. The basis grid collapses — every "cell" flattens onto the $x$-axis — and no decomposition legs are drawn, because $\mathbf{v}$ has no coordinates in this pair at all.`,
       before:``,
-      after:``,
+      after:`Two vectors on one line cannot reach anything off that line, so most of the plane is unreachable; and any point *on* the line can be written in infinitely many ways, since $\mathbf{b_2} = 2\mathbf{b_1}$ lets you trade one for the other freely. Existence fails for most vectors, uniqueness fails for the rest — and a basis needs both.
+
+That is why $\det B \neq 0$ is the precondition for everything else on this page. The change-of-basis formula requires $B^{-1}$, and a singular $B$ has no inverse. Including one broken case is what makes the other nine legible: it shows what the condition is actually protecting against.`,
       link:'',
     }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from the tool's own canvas composition: 2DCore's SVGRender for the
+     grid, basis grid and origin, plus the tool's decomposition legs and three
+     arrows. See changeBasisDiagrams.js. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: changeBasisDiagrams[key], caption, text })
+
+  const stateUnits = {
+    natural: unit('natural', 'Rotated 30&deg; basis, frozen',
+      'v has not moved - the dashed basis grid has turned beneath it. The decomposition legs run along ' +
+      'the new axes, and the coordinates read (2.915, 0.049) instead of (2.5, 1.5).'),
+    nonorth: unit('nonorth', 'Skewed basis, frozen',
+      'The basis grid is made of parallelograms rather than squares, and the two legs meet at an oblique ' +
+      'angle. Still a valid basis: det = 1.12, so v has unique coordinates (2.634, 0.446).'),
+    special: unit('special', 'Y-flipped basis, frozen',
+      'b2 points downward, so det = -1 and the basis is left-handed. The coordinates are (2.5, -1.5) - ' +
+      'the standard numbers with the second sign reversed.'),
+    degenerate: unit('degenerate', 'Collinear pair, frozen',
+      'b1 and b2 lie on the same line, so det = 0. The basis grid has collapsed onto the x-axis and no ' +
+      'decomposition legs are drawn - v simply has no coordinates in this pair.'),
+  }
+
+
+  /* ---- per-scenario panel notes (Line 1) ----
+     Case A: the tool's ExplanationCard (from 2DCore) already accepts an
+     override with a byPreset map and REPLACES the entry, so each override
+     spreads the tool's own SCENARIOS entry and appends the anchor to `body`.
+     All ten scenarios are covered; each points at the section for its category.
+     The card renders with dangerouslySetInnerHTML, so the anchors are raw HTML. */
+  const SECTION_FOR_GROUP = {
+    natural: 'natural-bases',
+    nonorth: 'non-orthogonal-bases',
+    special: 'orientation-reversed',
+    degenerate: 'degenerate-pairs',
+  }
+  const LABEL_FOR_GROUP = {
+    natural: 'natural bases',
+    nonorth: 'non-orthogonal bases',
+    special: 'orientation-reversing bases',
+    degenerate: 'degenerate pairs',
+  }
+
+  const explanationOverride = {
+    byPreset: Object.fromEntries(
+      Object.entries(CB_SCENARIOS).map(([key, sc]) => {
+        const slug = SECTION_FOR_GROUP[groupOf[key]]
+        const label = LABEL_FOR_GROUP[groupOf[key]]
+        return [key, {
+          ...sc,
+          body: `${sc.body || ''}<br/><a href="#${slug}" style="color:#1d4ed8;font-weight:600">Learn more about ${label}</a>` +
+            ` &middot; <a href="#preset-scenarios" style="color:#1d4ed8;font-weight:600">all four categories</a>`,
+        }]
+      })
+    ),
   }
 
 
@@ -871,6 +949,8 @@ For a full treatment see **matrix inverse**, **determinant**, and **matrix multi
    return {
       props:{
          sectionsContent,
+         stateUnits,
+         explanationOverride,
          introContent,
          faqQuestions,
          schemas,
@@ -889,141 +969,46 @@ For a full treatment see **matrix inverse**, **determinant**, and **matrix multi
     }
    }
 
-export default function ChangeBasis2DPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function ChangeBasis2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'dragging-the-basis-vectors'),
+    plain('obj3', 'moving-the-vector-v'),
+    plain('obj6', 'preset-scenarios'),
+    stateRow('obj12', 'natural-bases', 'natural'),
+    stateRow('obj13', 'non-orthogonal-bases', 'nonorth'),
+    stateRow('obj14', 'orientation-reversed', 'special'),
+    stateRow('obj15', 'degenerate-pairs', 'degenerate'),
+    plain('obj4', 'the-coordinates-card'),
+    plain('obj5', 'the-basis-matrix-and-its-inverse'),
+    plain('obj7', 'display-layer-toggles'),
+    plain('obj8', 'what-is-a-change-of-basis'),
+    plain('obj9', 'the-change-of-basis-formula'),
+    plain('obj10', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -1079,7 +1064,7 @@ export default function ChangeBasis2DPage({seoData, sectionsContent, introConten
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Change of Basis</h1>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
-   <ChangeBasis/>
+   <ChangeBasis explanationOverride={explanationOverride}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

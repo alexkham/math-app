@@ -692,6 +692,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -838,26 +839,31 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — what a tree
+  // represents, computing with one, conditional probability, common
+  // mistakes, when they are useful. Replaced with the multiply/add
+  // justification deferred here from the total-probability page, plus three
+  // of the mistake bullets, which the page lists without unpacking.
   const faqQuestions = {
     obj1: {
-      question: "What does a probability tree diagram represent?",
-      answer: "A tree diagram represents a random process that unfolds in stages. Each stage corresponds to a point where several outcomes are possible, and the process branches with each branch representing one possible result. A complete path from the start to a final node represents one full sequence of outcomes. The tree organizes an already defined situation so sequential outcomes and their relationships are explicit."
+      question: "Why do you multiply along a path but add across paths?",
+      answer: "Two different rules are at work. Multiplying along a path applies the chain rule: each branch is conditional on everything before it, so the product gives the joint probability of that whole sequence. Adding across paths applies the [law of total probability](!/probability/total-probability): distinct complete paths are disjoint outcomes, so their probabilities simply sum.",
+      sectionId: "5"
     },
     obj2: {
-      question: "How do you compute probabilities using tree diagrams?",
-      answer: "Each complete path through the diagram represents one possible sequence of outcomes. The probability of a sequence is obtained by following the path and multiplying the probability values along its branches. When a question involves several possible sequences, combine the corresponding path probabilities. Tree diagrams turn complex probability questions into structured path-based calculations."
+      question: "Are the numbers on a tree's branches conditional probabilities?",
+      answer: "Yes, from the second stage onward. A branch at stage two carries the probability of that outcome given everything upstream of it, not its standalone probability. Only the first stage's branches are unconditional. Reading later branches as plain probabilities is the most common tree error, and it quietly breaks every path product that follows.",
+      sectionId: "3"
     },
     obj3: {
-      question: "How do tree diagrams relate to conditional probability?",
-      answer: "Tree diagrams make conditional probability explicit by construction. Each branch represents the probability of an outcome given that the process has reached a certain stage. Moving along a branch means accepting the condition imposed by all previous outcomes. Conditional probability is built into how the diagram is read—probabilities are interpreted step by step, with each stage conditioning on what has happened before."
+      question: "Should the branches at a node add up to 1?",
+      answer: "Yes — every set of branches leaving a single node must sum to 1, because they enumerate all the ways that stage can turn out given how you got there. It is the fastest check on a tree you have just drawn. This applies node by node; the complete path probabilities also sum to 1, but that is a separate check.",
+      sectionId: "8"
     },
     obj4: {
-      question: "What are common mistakes with tree diagrams?",
-      answer: "Common mistakes include: treating branch probabilities as unconditional rather than conditional, assigning probabilities to paths directly instead of branches, forgetting that branch probabilities at a node must sum to 1, double-counting outcomes by summing overlapping paths, and mixing up stages with events of interest. Another error is reading the tree in the wrong direction after information is observed—only paths consistent with observed outcomes should be considered."
-    },
-    obj5: {
-      question: "When are tree diagrams most useful in probability?",
-      answer: "Tree diagrams are most effective when a random situation unfolds in a small number of clearly ordered stages. They work well when: outcomes occur sequentially, later possibilities depend on earlier outcomes, conditional probabilities are central to the problem, and the number of branches remains manageable. They become less practical as stages or outcomes grow, where tables or formulas may be more efficient."
+      question: "How do you read a tree diagram after you learn the outcome?",
+      answer: "Keep only the paths consistent with what you observed, then compare them against each other. The branch probabilities were written for the forward direction, so you cannot read an answer straight off a branch; you divide the matching path's probability by the total of all surviving paths. That division is Bayes' theorem, done on the diagram.",
+      sectionId: "6"
     }
   }
 
@@ -928,19 +934,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/tree-diagrams"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1384,7 +1377,23 @@ export default function TreeDiagramsPage({
           sectionsContent.obj14.content,
         ]
     },
-   
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Tree Diagrams FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
+
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
@@ -1443,13 +1452,6 @@ export default function TreeDiagramsPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

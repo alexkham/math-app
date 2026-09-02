@@ -1,0 +1,85 @@
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of D:\next js\my projects\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * D:\next js\my projects\math-app\math-app\package-lock.json
+
+   ▲ Next.js 15.5.14
+   - Local:        http://localhost:3002
+   - Network:      http://10.119.175.75:3002
+
+ ✓ Starting...
+ ✓ Ready in 2.3s
+ ○ Compiling /probability/visual-tools ...
+ ✓ Compiled /probability/visual-tools in 4.8s (579 modules)
+Warning: Invalid DOM property `stroke-width`. Did you mean `strokeWidth`?
+    at svg
+    at CustomVisual
+    at div
+    at div
+    at div
+    at div
+    at OperaSidebar (D:\next js\my projects\math-app\math-app\app\components\nav-bar\OperaSidebar.jsx:148:3)
+    at ProbabilityVisualToolsPage (D:\next js\my projects\math-app\math-app\pages\probability\visual-tools\index.jsx:508:53)
+    at App (D:\next js\my projects\math-app\math-app\pages\_app.js:52:31)
+    at StyleRegistry (D:\next js\my projects\math-app\math-app\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (webpack://next/dist/src/shared/lib/router/adapters.tsx:70:3)
+    at AppContainer (webpack://next/dist/src/server/render.tsx:758:27)
+    at AppContainerWithIsomorphicFiberStructure (webpack://next/dist/src/server/render.tsx:810:11)
+    at div
+    at Body (webpack://next/dist/src/server/render.tsx:1279:19)
+Warning: Invalid DOM property `stroke-linecap`. Did you mean `strokeLinecap`?
+    at svg
+    at CustomVisual
+    at div
+    at div
+    at div
+    at div
+    at OperaSidebar (D:\next js\my projects\math-app\math-app\app\components\nav-bar\OperaSidebar.jsx:148:3)
+    at ProbabilityVisualToolsPage (D:\next js\my projects\math-app\math-app\pages\probability\visual-tools\index.jsx:508:53)
+    at App (D:\next js\my projects\math-app\math-app\pages\_app.js:52:31)
+    at StyleRegistry (D:\next js\my projects\math-app\math-app\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (webpack://next/dist/src/shared/lib/router/adapters.tsx:70:3)
+    at AppContainer (webpack://next/dist/src/server/render.tsx:758:27)
+    at AppContainerWithIsomorphicFiberStructure (webpack://next/dist/src/server/render.tsx:810:11)
+    at div
+    at Body (webpack://next/dist/src/server/render.tsx:1279:19)
+Warning: Invalid DOM property `stroke-linejoin`. Did you mean `strokeLinejoin`?
+    at svg
+    at CustomVisual
+    at div
+    at div
+    at div
+    at div
+    at OperaSidebar (D:\next js\my projects\math-app\math-app\app\components\nav-bar\OperaSidebar.jsx:148:3)
+    at ProbabilityVisualToolsPage (D:\next js\my projects\math-app\math-app\pages\probability\visual-tools\index.jsx:508:53)
+    at App (D:\next js\my projects\math-app\math-app\pages\_app.js:52:31)
+    at StyleRegistry (D:\next js\my projects\math-app\math-app\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (webpack://next/dist/src/shared/lib/router/adapters.tsx:70:3)
+    at AppContainer (webpack://next/dist/src/server/render.tsx:758:27)
+    at AppContainerWithIsomorphicFiberStructure (webpack://next/dist/src/server/render.tsx:810:11)
+    at div
+    at Body (webpack://next/dist/src/server/render.tsx:1279:19)
+Warning: Invalid DOM property `class`. Did you mean `className`?
+    at svg
+    at CustomVisual
+    at div
+    at div
+    at div
+    at div
+    at OperaSidebar (D:\next js\my projects\math-app\math-app\app\components\nav-bar\OperaSidebar.jsx:148:3)
+    at ProbabilityVisualToolsPage (D:\next js\my projects\math-app\math-app\pages\probability\visual-tools\index.jsx:508:53)
+    at App (D:\next js\my projects\math-app\math-app\pages\_app.js:52:31)
+    at StyleRegistry (D:\next js\my projects\math-app\math-app\node_modules\styled-jsx\dist\index\index.js:449:36)
+    at PathnameContextProviderAdapter (webpack://next/dist/src/shared/lib/router/adapters.tsx:70:3)
+    at AppContainer (webpack://next/dist/src/server/render.tsx:758:27)
+    at AppContainerWithIsomorphicFiberStructure (webpack://next/dist/src/server/render.tsx:810:11)
+    at div
+    at Body (webpack://next/dist/src/server/render.tsx:1279:19)
+Warning: viewport meta tags should not be used in _document.js's <Head>. https://nextjs.org/docs/messages/no-document-viewport-meta
+ GET /probability/visual-tools 200 in 7940ms
+ ○ Compiling /probability ...
+ ✓ Compiled /probability in 1040ms (546 modules)
+Warning: viewport meta tags should not be used in _document.js's <Head>. https://nextjs.org/docs/messages/no-document-viewport-meta
+ GET /probability 200 in 2339ms

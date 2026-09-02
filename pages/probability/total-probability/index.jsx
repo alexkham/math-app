@@ -940,6 +940,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1183,26 +1184,32 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: the law itself, when to use it, the Bayes relationship and
+  // the chain-rule comparison each name their own h2 — and the Bayes page
+  // already owns the denominator role. Kept the partition requirements,
+  // which the events page deferred here and which no heading serves, and
+  // added the notation section's reading traps. Four, not padded to five:
+  // the tree-diagram rule belongs to /probability/tree-diagrams.
   const faqQuestions = {
     obj1: {
-      question: "What is the law of total probability?",
-      answer: "The law of total probability states that if an event A can occur through several disjoint cases B₁, B₂, ..., Bₙ that cover the entire sample space, then P(A) equals the sum of its probability within each case, weighted by the probability of that case: P(A) = P(A|B₁)·P(B₁) + P(A|B₂)·P(B₂) + ... + P(A|Bₙ)·P(Bₙ). It breaks one probability question into smaller, manageable conditional pieces."
+      question: "What makes a valid set of cases in total probability?",
+      answer: "The cases must form a partition: disjoint and exhaustive. Disjoint means no two overlap, so no outcome is counted twice; exhaustive means their union is the whole sample space, so nothing is missed. Simply listing B₁, …, Bₙ names candidates, not a partition — and the law silently returns a wrong answer if the cases leak coverage or double-count.",
+      sectionId: "cases"
     },
     obj2: {
-      question: "When do you need to use total probability?",
-      answer: "Total probability applies when an outcome depends on which case or state you're in: diagnostic tests with different accuracies for diseased vs healthy populations, data from mixed sources with different subgroups, processes with multiple pathways, or systems in different operating conditions. The intuition is that final probability is a weighted blend of case-specific probabilities."
+      question: "How do you know which event goes inside the conditioning bar?",
+      answer: "Go by the grammar, not the letters. The target — the thing whose probability you want — stands outside the bar in every term. The cases stand inside the bar and also appear alone as the weights. Memorizing “P(A) equals a sum over the B's” breaks as soon as a source trades letters, which [Bayes' theorem](!/probability/bayes-theorem#notation) does routinely.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "How does total probability relate to Bayes' theorem?",
-      answer: "Bayes' theorem cannot exist without total probability—they're inseparable. Bayes uses the chain rule in the numerator (P(A|Bᵢ)·P(Bᵢ)) and total probability in the denominator (sum of P(A|Bⱼ)·P(Bⱼ) over all cases). Total probability provides the normalization constant P(A) that makes Bayes work, ensuring posteriors sum to 1. Total probability aggregates forward from cases to outcome; Bayes inverts backward from outcome to cases."
+      question: "How does the law of total probability work for continuous variables?",
+      answer: "The sum becomes an integral: P(A) = ∫ P(A | B = b) f(b) db. The partition refines to infinitely many hairline cases, and each case's weight becomes a density times db. It is not a sum with more terms — every P(B = b) is zero, so the density replaces the probability rather than approximating it, and the conditional rests on a limiting construction rather than the ratio formula.",
+      sectionId: "notation"
     },
     obj4: {
-      question: "What are the requirements for cases in total probability?",
-      answer: "Cases must form a valid partition: they must be disjoint (mutually exclusive—no overlap, only one can occur) and exhaustive (together they cover everything in the sample space). Every outcome must belong to exactly one case. Using non-disjoint cases leads to double-counting probability, while failing to cover the entire space underestimates P(A)."
-    },
-    obj5: {
-      question: "How does total probability work with the chain rule?",
-      answer: "The chain rule and total probability work together but serve different purposes. Chain rule multiplies along a single path: P(A∩B) = P(A|B)·P(B). Total probability adds across multiple paths: P(A) = Σ P(A|Bᵢ)·P(Bᵢ). Each term P(A|Bᵢ)·P(Bᵢ) equals P(A∩Bᵢ) by the chain rule, so total probability sums joint probabilities across all cases."
+      question: "Why does the disjointness condition specify i ≠ j?",
+      answer: "Because without it the condition would be self-defeating. Bᵢ ∩ Bⱼ = ∅ is meant to say that any two distinct cases never overlap; if i and j were allowed to be equal it would also demand Bᵢ ∩ Bᵢ = ∅, forcing every case to be empty. The subscript-pair convention is doing real work here.",
+      sectionId: "notation"
     }
   }
 
@@ -1275,19 +1282,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/total-probability"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -2030,6 +2024,22 @@ export default function TotalProbabilityPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Total Probability FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -2069,13 +2079,6 @@ export default function TotalProbabilityPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

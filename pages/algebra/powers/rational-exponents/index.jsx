@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -426,55 +427,30 @@ The key advantage of exponent notation over radical notation is uniformity. Ever
   content: `[Natural exponents](!/algebra/powers/natural-exponents) count repeated multiplications. [Negative exponents](!/algebra/powers/negative-exponents) take reciprocals. Both extensions were forced by the [laws of exponents](!/algebra/powers/exponent-rules/) — the definitions were chosen as the only ones that keep the rules intact. The same logic now answers a harder question: what should $a^{1/2}$ mean? The laws leave no room for debate, and the answer ties exponentiation directly to roots.`
 }
 
+// FAQ pass: the definition, roots-as-powers, radical conversion, negative
+// rational exponents, the laws, simplifying and the worked example each name
+// their own h2. Kept the exponent-versus-radical question, which no heading
+// asks, and added the notation section's three traps — the lowest-terms flip
+// being the sharpest thing on the page.
 const faqQuestions = {
   obj1: {
-    question: "What is a rational exponent?",
-    answer: "A rational exponent is a fraction as an exponent. The expression a^(m/n) means the nth root of a raised to the mth power: a^(m/n) = (ⁿ√a)^m = ⁿ√(a^m). For example, 8^(2/3) = (³√8)² = 2² = 4.",
-    sectionId: "3"
+    question: "Does $\\frac{2}{6}$ mean the same as $\\frac{1}{3}$ in an exponent?",
+    answer: "Not always. For a negative base the unreduced form changes the answer: $(-8)^{1/3} = -2$, but $\\sqrt[6]{(-8)^2} = \\sqrt[6]{64} = 2$. Convention settles it — the exponent means its lowest-terms form. Positive bases are immune, since every equivalent fraction agrees there. This is the one elementary context where substituting an equal fraction can flip a result.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What does a^(1/2) mean?",
-    answer: "a^(1/2) means the square root of a. The product rule requires a^(1/2) · a^(1/2) = a^1 = a, so a^(1/2) must be √a. Similarly, a^(1/n) equals the nth root of a.",
-    sectionId: "1"
+    question: "Why does @[8^1/3]@ give the wrong answer in a spreadsheet?",
+    answer: "Because the caret binds tighter than the slash, so @[8^1/3]@ parses as $\\frac{8^1}{3} = \\frac{8}{3}$, not $2$. Linear text has no raised slot, so the grouping must be written out: @[8^(1/3)]@. Languages with integer division add a second trap, where @[1/3]@ evaluates to $0$ and the expression collapses to $8^0 = 1$.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you convert radicals to exponents?",
-    answer: "The nth root of a equals a^(1/n): ⁿ√a = a^(1/n). For roots with powers: ⁿ√(a^m) = a^(m/n). Examples: √x = x^(1/2), ³√x = x^(1/3), ⁴√x³ = x^(3/4).",
-    sectionId: "2"
+    question: "In $a^{m/n}$, which number is the root?",
+    answer: "The denominator. Bottom of the fraction, bottom job: $n$ is the root's index and $m$ is an ordinary power, so $a^{m/n} = \\left(\\sqrt[n]{a}\\right)^m$. The fraction is not a division either — $8^{2/3}$ is not $\\frac{8^2}{3}$; the whole fraction sits in the exponent slot and divides nothing.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "Should you take the root first or the power first?",
-    answer: "Both (ⁿ√a)^m and ⁿ√(a^m) give the same result, but taking the root first usually keeps numbers smaller. For 8^(2/3): root first gives (³√8)² = 2² = 4; power first gives ³√64 = 4. Same answer, easier arithmetic.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "What is a negative rational exponent?",
-    answer: "A negative rational exponent combines reciprocal and root/power: a^(-m/n) = 1/a^(m/n). For example, 8^(-2/3) = 1/8^(2/3) = 1/4. The negative takes the reciprocal; the fraction handles the root and power.",
-    sectionId: "4"
-  },
-  obj6: {
-    question: "Can you have a negative base with a rational exponent?",
-    answer: "It depends on the denominator. Odd roots allow negative bases: (-8)^(1/3) = -2. Even roots don't: (-4)^(1/2) is undefined in real numbers because no real number squared gives -4.",
-    sectionId: "5"
-  },
-  obj7: {
-    question: "Do the laws of exponents work with rational exponents?",
-    answer: "Yes. Product rule: a^(1/2) · a^(1/3) = a^(5/6). Power rule: (a^(2/3))^(3/4) = a^(1/2). Quotient rule: a^(3/4)/a^(1/4) = a^(1/2). All laws hold for rational exponents.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "How do you simplify expressions with rational exponents?",
-    answer: "Convert radicals to exponent form, then apply exponent laws. For √x · ³√x: convert to x^(1/2) · x^(1/3) = x^(5/6). Exponent notation makes different root indices easy to combine.",
-    sectionId: "7"
-  },
-  obj9: {
-    question: "What is 16^(3/4)?",
-    answer: "Take the 4th root first: ⁴√16 = 2. Then cube: 2³ = 8. So 16^(3/4) = 8. Alternatively: 16³ = 4096, then ⁴√4096 = 8. Same answer, but root-first is simpler.",
-    sectionId: "3"
-  },
-  obj10: {
     question: "Why use exponent form instead of radical form?",
-    answer: "Exponent form applies the same rules to all exponents — natural, negative, or rational. Radicals need separate procedures for combining indices. x^(1/2) · x^(1/3) = x^(5/6) is straightforward; √x · ³√x requires finding common indices first.",
+    answer: "Because one set of rules covers every exponent — natural, negative or rational — while radicals need separate procedures for combining indices. $x^{1/2} \\cdot x^{1/3} = x^{5/6}$ is immediate; $\\sqrt{x} \\cdot \\sqrt[3]{x}$ requires finding a common index first. The usual practice is exponent form for the algebra, radical form for the final answer.",
     sectionId: "7"
   }
 }
@@ -550,19 +526,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/rational-exponents"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -704,6 +667,22 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Rational Exponents FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -819,13 +798,6 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

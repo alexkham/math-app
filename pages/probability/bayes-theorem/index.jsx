@@ -629,6 +629,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -761,26 +762,36 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: "what is Bayes' theorem", "how does it work", "when should I
+  // use it" and "common mistakes" each name their own h2. Kept prior vs
+  // posterior — no heading uses either word — and added the base-rate
+  // failure, the denominator's provenance, the odds form, and sequential
+  // updating, none of which any heading surfaces.
   const faqQuestions = {
     obj1: {
-      question: "What is Bayes' theorem?",
-      answer: "Bayes' theorem is a fundamental formula in probability that describes how to update the probability of a situation when new information becomes available. It connects prior beliefs with observed evidence to produce updated (posterior) probabilities in a mathematically consistent way."
+      question: "What is the difference between prior and posterior probability?",
+      answer: "Prior is the probability of a hypothesis before the evidence is taken into account; posterior is the same hypothesis re-measured once the evidence is in hand — P(A) becoming P(A | B). The words name positions relative to the evidence, not moments in time; nothing has to happen in any particular order for the labels to apply.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "How does Bayes' theorem work?",
-      answer: "Bayes' theorem works by combining three components: the prior probability (initial belief), the likelihood (how compatible the observation is with each possibility), and normalization (accounting for all ways the observation could occur). These are combined to produce an updated probability that reflects both prior knowledge and new evidence."
+      question: "Why doesn't a 99% accurate test mean a 99% chance of having the disease?",
+      answer: "Because 99% accuracy is P(positive | disease), the likelihood, while what you want is P(disease | positive), the posterior. They point in opposite directions. When the disease is rare, the few true positives are swamped by false positives drawn from a much larger healthy population, so the posterior stays small. Ignoring the base rate this way is the prosecutor's fallacy.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "What is the difference between prior and posterior probability?",
-      answer: "Prior probability is the initial assessment of how likely something is before any new information is considered. Posterior probability is the updated assessment after taking new evidence into account. Bayes' theorem provides the formula for moving from prior to posterior probabilities."
+      question: "Where does the denominator P(B) in Bayes' theorem come from?",
+      answer: "From the same priors and likelihoods that build the numerator. It is the [law of total probability](!/probability/total-probability) doing denominator duty: every route to the evidence, weighted by its prior. Supplying P(B) from elsewhere double-counts the evidence; omitting it leaves posteriors that no longer sum to one.",
+      sectionId: "total"
     },
     obj4: {
-      question: "When should I use Bayes' theorem?",
-      answer: "Use Bayes' theorem when you observe evidence and want to reason about underlying causes, when you need to update probabilities based on new information, or when you know P(B|A) but need P(A|B). It's essential for diagnostic reasoning, classification problems, and any situation requiring principled probability updates."
+      question: "What is the odds form of Bayes' theorem?",
+      answer: "Posterior odds equal the likelihood ratio times the prior odds. State Bayes for A and for Aᶜ, then divide: P(B) cancels, leaving no denominator to compute. Watch the scale — odds of 3 mean 3:1, so a probability of 3/4, not 3.",
+      sectionId: "notation"
     },
     obj5: {
-      question: "What are common mistakes when using Bayes' theorem?",
-      answer: "Common mistakes include confusing P(A|B) with P(B|A), ignoring prior probabilities and focusing only on how well evidence fits, assuming independence without justification, and overlooking the normalization step that ensures updated probabilities remain consistent across all possibilities."
+      question: "Can you apply Bayes' theorem more than once?",
+      answer: "Yes — that is the standard way to handle several pieces of evidence. Apply the formula to the first observation, then use the resulting posterior as the prior for the next round; the same number is the posterior of one step and the prior of the next. In odds form, [independent](!/probability/independence) pieces of evidence simply multiply their likelihood ratios.",
+      sectionId: "notation"
     }
   }
 
@@ -848,19 +859,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/bayes-theorem"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1311,6 +1309,22 @@ export default function BayesPage({
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Bayes' Theorem FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -1356,13 +1370,6 @@ export default function BayesPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

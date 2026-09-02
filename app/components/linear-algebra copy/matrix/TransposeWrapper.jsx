@@ -374,7 +374,8 @@ function buildDiagonalScenes(rows, cols) {
 // -----------------------------------------------------------
 // Strategy registry
 // -----------------------------------------------------------
-const STRATEGIES = {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export const STRATEGIES = {
   'cell-by-cell': {
     id: 'cell-by-cell',
     label: 'Cell-by-cell',
@@ -665,6 +666,7 @@ const DIM_INFO =
 // ===========================================================
 export default function TransposeWrapper({
   defaultRows = 3,
+  explanations = null,
   defaultCols = 4,
   defaultStrategy = 'cell-by-cell',
   dimensionRange = [1, 2, 3, 4, 5],
@@ -683,8 +685,15 @@ export default function TransposeWrapper({
   const activeStrategy = STRATEGIES[strategy] || STRATEGIES['cell-by-cell'];
 
   const scenes = useMemo(
-    () => activeStrategy.build(rows, cols),
-    [rows, cols, activeStrategy]
+    () => {
+      const built = activeStrategy.build(rows, cols);
+      const extra = explanations?.[activeStrategy.id];
+      if (!extra) return built;
+      // Line 1 anchor mesh: the page's note for this strategy, appended to the
+      // caption of every scene the strategy produces.
+      return built.map((sc) => ({ ...sc, formula: `${sc.formula || ''}${extra}` }));
+    },
+    [rows, cols, activeStrategy, explanations]
   );
 
   const summary = (

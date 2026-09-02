@@ -500,6 +500,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import HadamardWrapper from '../../../../app/components/linear-algebra copy/matrix/HadamardWrapper'
+import hadamardDiagrams from '../../../../app/components/linear-algebra copy/matrix/hadamardDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -691,11 +693,76 @@ Compare with the standard product $A \\times B$: it is undefined here because $A
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `The Opening Scene: Two Matrices, Same Shape`,
+      content: `The player starts with $A$ and $B$ side by side and $C$ empty on the right, all three $2 \times 3$ at the default dimensions.
+
+The setup looks exactly like the addition tool's, and that is not a coincidence: the Hadamard product has the same precondition and the same output shape. Only the operation applied to each pair differs.`,
+      before: ``,
+      after: `Getting the precondition right matters more here than anywhere else in this section, because the operation shares a name with something that requires the opposite. **Standard matrix multiplication** needs the inner dimensions to agree — an $m \times n$ times an $n \times p$ — and produces an $m \times p$ result. The Hadamard product needs the shapes to be *identical* and returns that same shape.
+
+So $A \odot B$ is defined here where $AB$ is not: two $2 \times 3$ matrices cannot be multiplied in the standard sense at all, since $3 \neq 2$.`,
+      link: '',
+    },
+    obj12: {
+      title: `One Cell at a Time`,
+      content: `Each step highlights a cell of $A$, the cell in the same position of $B$, and the destination in $C$, then writes the plain product $a_{i,j} \cdot b_{i,j}$ into it.
+
+The frozen picture below is a step partway through the $2 \times 3$ run: some cells of $C$ already hold their product, one pair is being multiplied, and the rest are placeholders.`,
+      before: ``,
+      after: `Compare this sweep against standard matrix multiplication and the difference is stark. There, a single output entry consumes an entire row of $A$ and an entire column of $B$, and is a sum of products. Here, an output entry consumes exactly two numbers and is a single product.
+
+That is why the Hadamard product is cheap — $mn$ multiplications against the roughly $mnp$ of the standard product — and why it parallelises trivially. Nothing in one cell depends on anything in another.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Completed Element-wise Product`,
+      content: `The final scene fills every cell, so $C$ reads $c_{i,j} = a_{i,j} \, b_{i,j}$ throughout, at the same $2 \times 3$ shape it started with.
+
+Written that way, the Hadamard product is to multiplication what matrix addition is to addition: the underlying arithmetic applied entry by entry, with no mixing across positions.`,
+      before: ``,
+      after: `The properties follow from the entries, as they did for addition. It is **commutative**, $A \odot B = B \odot A$ — which standard matrix multiplication emphatically is not — and associative, and it distributes over matrix addition. Its identity is the all-ones matrix, not the identity matrix $I$: multiplying element-wise by $I$ would zero out everything off the diagonal.
+
+That last point is the cleanest illustration that the two products are genuinely different operations wearing similar notation. An element-wise inverse exists only when every entry of $A$ is non-zero, and is found by reciprocating each entry — nothing like a matrix inverse, which needs a non-zero determinant and mixes every entry into every other.`,
+      link: '',
+    },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from HadamardWrapper's own buildMatrixScenes (exported additively)
+     and rendered through frozenMatrixSvg. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: hadamardDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'A and B at 2&#215;3 with C empty. The same setup as matrix addition - identical shapes in, ' +
+      'identical shape out - which is exactly what standard multiplication does not require.'),
+    step: unit('step', 'Mid-sweep, frozen',
+      'One cell of A, the cell in the same position of B, and the destination in C. Two numbers ' +
+      'multiplied, no row or column involved.'),
+    done: unit('done', 'Completed product, frozen',
+      'All six cells filled with the plain product of the two entries above, and C still 2&#215;3. ' +
+      'No mixing across positions at any point.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     HadamardWrapper had no explanations prop; one was added additively and
+     defaults to null. Keys are the scene phase. Captions render with
+     dangerouslySetInnerHTML, so these are raw HTML anchors. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#hadamard-vs-standard-multiplication" style="color:#1d4ed8;font-weight:600">how it differs from AB</a></div>`
+
+  const explanations = {
+    intro: note('Identical shapes required - the opposite of what standard matrix multiplication asks for.', 'the-opening-scene', 'Learn more about the opening scene'),
+    step: note('Each output cell consumes two numbers, not a whole row and column.', 'one-cell-at-a-time', 'Learn more about the cell sweep'),
+    done: note('Commutative, and its identity is the all-ones matrix rather than I.', 'the-completed-product', 'Learn more about the completed product'),
   }
 
 
@@ -815,6 +882,8 @@ Compare with the standard product $A \\times B$: it is undefined here because $A
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -832,32 +901,44 @@ Compare with the standard product $A \\times B$: it is undefined here because $A
   }
 }
 
-export default function HadamardProductVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function HadamardProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [sectionsContent.obj0.content]
-    },
-    { id: '1',  title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
-    { id: '2',  title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
-    { id: '3',  title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
-    { id: '4',  title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
-    { id: '5',  title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
-    { id: '6',  title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
-    { id: '7',  title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
-    { id: '8',  title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
-    { id: '9',  title: sectionsContent.obj9.title,  link: sectionsContent.obj9.link,  content: [sectionsContent.obj9.content] },
-    { id: '10', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
-    // { id: '11', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
-    // { id: '12', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
-    // { id: '13', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
-    // { id: '14', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
-    // { id: '15', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-scene-player'),
+    stateRow('obj11', 'the-opening-scene', 'intro'),
+    stateRow('obj12', 'one-cell-at-a-time', 'step'),
+    stateRow('obj13', 'the-completed-product', 'done'),
+    plain('obj3', 'choosing-dimensions'),
+    plain('obj4', 'what-the-hadamard-product-is'),
+    plain('obj5', 'hadamard-vs-standard-multiplication'),
+    plain('obj6', 'key-properties'),
+    plain('obj7', 'where-it-appears'),
+    plain('obj8', 'worked-example'),
+    plain('obj9', 'common-mistakes'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -916,6 +997,7 @@ export default function HadamardProductVisualizer({ seoData, sectionsContent, in
       <div style={{ width: '80%', margin: 'auto' }}>
         <HadamardWrapper 
         mode='matrices'
+        explanations={explanations}
         
         />
       </div>

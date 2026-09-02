@@ -11,6 +11,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -754,60 +755,41 @@ This page develops the full framework: from the derivative at a single point thr
 
 
 
+// FAQ pass: all eleven originals restated their own h2 — derivative at a
+// point, tangent lines, increasing/decreasing, critical points, both tests,
+// concavity, inflection points, curve sketching, optimization, related
+// rates. Replaced with six results the headings hide: the normal line, the
+// two "candidate is not a verdict" traps, the independence of direction and
+// bending, the choice between the tests, and the related-rates timing rule.
 const faqQuestions = {
   obj1: {
-    question: "What does the derivative at a point tell you?",
-    answer: "The value f'(a) gives the slope of the tangent line at (a, f(a)). Positive means the function is increasing at that instant; negative means decreasing; zero means momentarily flat. The magnitude |f'(a)| measures steepness.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the equation of a tangent line?",
-    answer: "The tangent line to f at x = a has equation y − f(a) = f'(a)(x − a). It passes through (a, f(a)) with slope f'(a). This line is the best linear approximation to f near x = a.",
+    question: "How do you find the equation of the normal line?",
+    answer: "The normal line at x = a is perpendicular to the tangent there, so it passes through (a, f(a)) with slope −1/f′(a), giving y − f(a) = −(1/f′(a))(x − a). The negative reciprocal comes from perpendicularity. If f′(a) = 0 the tangent is horizontal, so the normal is the vertical line x = a and no slope formula applies.",
     sectionId: "2"
   },
-  obj3: {
-    question: "How do you find where a function is increasing or decreasing?",
-    answer: "If f'(x) > 0 on an interval, f is strictly increasing there. If f'(x) < 0, f is strictly decreasing. Find where f'(x) = 0 or is undefined, then test the sign of f' in each resulting interval.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is a critical point?",
-    answer: "A critical point is a value x = c in the domain of f where f'(c) = 0 or f'(c) does not exist. Critical points are the only candidates for local extrema. However, not every critical point is an extremum.",
+  obj2: {
+    question: "Is every critical point a maximum or minimum?",
+    answer: "No. Critical points are the only candidates for a local extremum, but many are not extrema. f(x) = x³ has f′(0) = 0, yet the function increases straight through the origin — no peak, no valley. That is why finding critical points is only the first step; the first or second derivative test has to classify each one.",
     sectionId: "4"
   },
-  obj5: {
-    question: "What is the first derivative test?",
-    answer: "The first derivative test classifies critical points by sign changes. If f' changes from positive to negative at c, f has a local maximum. If f' changes from negative to positive, f has a local minimum. No sign change means no extremum.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the second derivative test?",
-    answer: "When f'(c) = 0: if f''(c) > 0, f has a local minimum (concave up); if f''(c) < 0, f has a local maximum (concave down). If f''(c) = 0, the test is inconclusive—use the first derivative test instead.",
+  obj3: {
+    question: "Should you use the first or second derivative test?",
+    answer: "Use the second derivative test when f′(c) = 0 and f″ is easy to compute — it is a single evaluation rather than a sign check on both sides. Use the first derivative test when f″(c) = 0, when f″ is awkward, or when f′(c) does not exist, since the second test cannot handle that case at all.",
     sectionId: "6"
   },
-  obj7: {
-    question: "What is concavity?",
-    answer: "Concavity describes how f bends. If f''(x) > 0, the graph is concave up—slopes are increasing and the curve lies above its tangent lines. If f''(x) < 0, the graph is concave down—slopes are decreasing.",
+  obj4: {
+    question: "Can a function be increasing and concave down at the same time?",
+    answer: "Yes — direction and bending are independent. The sign of f′ says whether the function rises or falls; the sign of f″ says how the slope is changing. A ball thrown upward is rising while decelerating: f′ > 0 and f″ < 0. The four sign combinations of f′ and f″ give four distinct graph shapes.",
     sectionId: "7"
   },
-  obj8: {
-    question: "What is an inflection point?",
-    answer: "An inflection point is where concavity changes—from concave up to concave down or vice versa. At such points, f'' must equal zero or be undefined, and f'' must actually change sign across the point.",
+  obj5: {
+    question: "Does f″(x) = 0 always mean there is an inflection point?",
+    answer: "No. It makes the point a candidate, not a verdict — the concavity has to actually reverse there. For f(x) = x⁴, f″(0) = 0, yet the graph is concave up on both sides of the origin, so there is no inflection. Always confirm that f″ changes sign across the point before calling it one.",
     sectionId: "8"
   },
-  obj9: {
-    question: "What is curve sketching?",
-    answer: "Curve sketching combines derivative analysis to graph a function: find domain, intercepts, asymptotes; use f' to determine increasing/decreasing intervals and extrema; use f'' to determine concavity and inflection points; analyze end behavior.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "How do you solve optimization problems?",
-    answer: "On a closed interval, evaluate f at all critical points and endpoints—the largest value is the absolute maximum, smallest is the absolute minimum. For applied problems, express the quantity to optimize as a function of one variable first.",
-    sectionId: "10"
-  },
-  obj11: {
-    question: "What are related rates problems?",
-    answer: "Related rates involve quantities changing simultaneously with respect to time. Write an equation relating the variables, differentiate implicitly with respect to t, substitute known values and rates, then solve for the unknown rate.",
+  obj6: {
+    question: "Why can't you substitute values before differentiating in a related rates problem?",
+    answer: "Because substituting a value first turns a variable into a constant, and constants have zero rate of change — the term you needed disappears from the differentiated equation. Set up a relation that holds at every instant, differentiate it with respect to t using [implicit differentiation](!/calculus/derivatives/techniques), and only then plug in the values true at that moment.",
     sectionId: "11"
   }
 }
@@ -881,19 +863,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/graph-analysis"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1066,7 +1035,23 @@ export default function PageTemplate({
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
-    
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Graph Analysis FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
+
 ]
 
   return (
@@ -1101,13 +1086,6 @@ export default function PageTemplate({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

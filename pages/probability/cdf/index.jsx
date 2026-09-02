@@ -661,6 +661,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -821,26 +822,31 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — CDF Defined, CDF vs
+  // PMF vs PDF, Key Properties, Using the CDF to Compute Probabilities, and
+  // the discrete/continuous split across three sections. Replaced with the
+  // notation section's endpoint questions, which is where every costly CDF
+  // error actually lives.
   const faqQuestions = {
     obj1: {
-      question: "What is a cumulative distribution function (CDF)?",
-      answer: "The cumulative distribution function (CDF) of a random variable X, denoted F_X(x), gives the probability that X takes a value less than or equal to x. It shows how probability accumulates as values increase along the number line, providing a complete characterization of the random variable's distribution."
+      question: "Why is the CDF defined with ≤ rather than <?",
+      answer: "It is a deliberate choice, not an accident. Including the point itself is what makes the CDF right-continuous, and it lets a single definition cover discrete, continuous and mixed variables alike. For continuous variables the choice is invisible, since P(X = x) = 0. For discrete ones it decides whether a jump belongs to the step before it or the step after.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "How is CDF different from PDF and PMF?",
-      answer: "The CDF tracks accumulated probability up to a point and exists for all random variables. The PMF applies only to discrete variables and gives probability at individual values. The PDF applies only to continuous variables and describes probability density. The CDF is the most general representation, with PMF and PDF as special cases."
+      question: "Does F(b) − F(a) include the endpoint a?",
+      answer: "No. The difference gives P(a < X ≤ b) — open on the left, closed on the right. For a continuous variable that distinction costs nothing, since single points carry no probability. For a discrete variable it matters: to get P(a ≤ X ≤ b) you must add back the mass sitting at a, which F(a) has already subtracted away.",
+      sectionId: "using"
     },
     obj3: {
-      question: "What are the key properties of a CDF?",
-      answer: "A valid CDF must be: (1) non-decreasing - it can only stay the same or increase, (2) right-continuous, (3) bounded between 0 and 1, and (4) have limits of 0 as x approaches negative infinity and 1 as x approaches positive infinity. These properties follow directly from the probability axioms."
+      question: "What is the difference between F(x) and f(x)?",
+      answer: "One letter, two cases, two different objects. Capital F accumulates probability and is bounded by 1; lowercase f is a rate and may exceed 1. Calculus ties them together — f is the derivative of F, and F is the integral of f — but they answer different questions: F gives a probability directly, f does not.",
+      sectionId: "notation"
     },
     obj4: {
-      question: "How do you use the CDF to calculate probabilities?",
-      answer: "To find P(a < X ≤ b), subtract CDF values: F_X(b) - F_X(a). This works uniformly for discrete, continuous, and mixed distributions. For one-sided probabilities like P(X ≤ x), simply evaluate the CDF at x. This often simplifies calculations by replacing sums or integrals with function evaluations."
-    },
-    obj5: {
-      question: "What is the difference between discrete and continuous CDFs?",
-      answer: "For discrete random variables, the CDF is a step function with jumps at possible values, where each jump size equals the probability of that value. For continuous random variables, the CDF increases smoothly without jumps, and its slope is determined by the probability density function. Mixed distributions show both behaviors."
+      question: "What is the survival function?",
+      answer: "The complement of the CDF: P(X > x) = 1 − F(x). Where the CDF accumulates probability up to a point, the survival function measures what is left beyond it. The two differ by exactly the mass sitting at x — invisible for continuous variables, but a real gap at a discrete jump. It is standard in reliability and time-to-event work.",
+      sectionId: "notation"
     }
   }
 
@@ -908,19 +914,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/cdf"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1401,6 +1394,22 @@ export default function PageTemplate({
             <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`CDF FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -1455,12 +1464,6 @@ export default function PageTemplate({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 
-export default function TotalProbabilityVisualizerV2() {
+export default function TotalProbabilityVisualizerV2({ explanations = null } = {}) {
   const [numA, setNumA] = useState(3);
   const [numB, setNumB] = useState(3);
   const [showControls, setShowControls] = useState(false);
@@ -147,6 +147,15 @@ export default function TotalProbabilityVisualizerV2() {
 
   const baseColors = ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899'];
 
+  // Line 1 anchor mesh: which documented state the tool is currently showing.
+  // A highlighted branch and a highlighted outcome are the two readings the
+  // page keys on; with nothing highlighted the state is the plain tree, and a
+  // partition other than the default 3 is documented separately.
+  const line1Key = highlightedPath
+    ? (/^A\d+/.test(highlightedPath) ? 'branch' : 'outcome')
+    : (numA === 3 && numB === 3 ? 'overview' : 'wide');
+  const line1Note = explanations ? explanations[line1Key] : null;
+
   const getPathColor = (path) => {
     if (!highlightedPath) return '#666';
     if (path.belongsTo.includes(highlightedPath)) {
@@ -230,6 +239,23 @@ export default function TotalProbabilityVisualizerV2() {
       </div>
 
       {/* Main Layout */}
+      {line1Note && (
+        <div
+          style={{
+            margin: '0 0 18px',
+            padding: '10px 14px',
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            borderLeft: '4px solid #3b82f6',
+            borderRadius: 6,
+            fontSize: '13px',
+            lineHeight: 1.6,
+            color: '#475569',
+          }}
+          dangerouslySetInnerHTML={{ __html: line1Note }}
+        />
+      )}
+
       <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
         
         {/* Left side: Tree */}

@@ -1010,7 +1010,8 @@ const matrixResultLabelJSX = (
 // ===========================================================
 // VECTOR SCENE BUILDER
 // ===========================================================
-function buildVectorScenes(n) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildVectorScenes(n) {
   const scenes = [];
 
   // Result-cell content per phase.
@@ -1122,7 +1123,8 @@ function buildVectorScenes(n) {
 // ===========================================================
 // MATRIX SCENE BUILDER (Frobenius)
 // ===========================================================
-function buildMatrixScenes(rows, cols) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildMatrixScenes(rows, cols) {
   const total = rows * cols;
   const scenes = [];
 
@@ -1378,6 +1380,7 @@ function Pill({ active, onClick, children }) {
 // ===========================================================
 export default function InnerProductWrapper({
   mode = 'both',
+  explanations = null,
   defaultScenario = 'vectors',
   defaultVecN = 4,
   defaultMatRows = 2,
@@ -1406,9 +1409,18 @@ export default function InnerProductWrapper({
   const matMax = matrixRange[matrixRange.length - 1];
 
   const scenes = useMemo(() => {
-    if (scenario === 'vectors') return buildVectorScenes(vecN);
-    return buildMatrixScenes(matRows, matCols);
-  }, [scenario, vecN, matRows, matCols]);
+    const built = scenario === 'vectors'
+      ? buildVectorScenes(vecN)
+      : buildMatrixScenes(matRows, matCols);
+    if (!explanations) return built;
+    // Line 1 anchor mesh: append the page's note for this phase to the scene
+    // caption. Phases are intro (first), done (last), step (everything between).
+    const keyFor = (i) => (i === 0 ? 'intro' : i === built.length - 1 ? 'done' : 'step');
+    return built.map((sc, i) => {
+      const extra = explanations[keyFor(i)];
+      return extra ? { ...sc, formula: `${sc.formula || ''}${extra}` } : sc;
+    });
+  }, [scenario, vecN, matRows, matCols, explanations]);
 
   return (
     <div style={{

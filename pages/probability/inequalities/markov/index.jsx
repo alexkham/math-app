@@ -665,6 +665,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -752,26 +753,31 @@ export async function getStaticProps(){
 `
 
 
+  // FAQ pass: the statement, the conditions, the plain-words reading and the
+  // limitations each name their own h2. The Chebyshev comparison goes to the
+  // inequalities hub, which owns it — it spans both child pages. Replaced
+  // with the notation section's traps and the concrete version of the
+  // "loose bound" problem the hub states in general terms.
   const faqQuestions = {
     obj1: {
-      question: "What is Markov's inequality?",
-      answer: "Markov's inequality states that for a non-negative random variable X with finite expected value E[X], the probability that X exceeds any threshold a > 0 is at most E[X]/a. Formally: P(X ≥ a) ≤ E[X]/a. It bounds tail probabilities using only the expected value, without assumptions about distribution shape."
+      question: "What is the 1/k form of Markov's inequality?",
+      answer: "Substitute a = k·E[X] and the bound becomes dimensionless: P(X ≥ k·E[X]) ≤ 1/k. In words, no more than a fifth of the mass can sit at five times the average, no more than a tenth at ten times, and so on — for any non-negative variable, whatever its distribution. This is the form worth remembering.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "What conditions does Markov's inequality require?",
-      answer: "Markov's inequality requires only two minimal conditions: the random variable must be non-negative, and its expected value must exist and be finite. No assumptions about symmetry, boundedness, continuity, or distribution shape are needed. It applies equally to discrete and continuous random variables."
+      question: "Does Markov's inequality estimate the probability?",
+      answer: "No — it is a ceiling, not a prediction. The ≤ is a guarantee that the true probability sits at or below E[X]/a, and it may sit far below. Reading ≤ as ≈ turns a worst-case constraint into an estimate, which is the single most common misuse of the inequality.",
+      sectionId: "3"
     },
     obj3: {
-      question: "What does Markov's inequality say in simple terms?",
-      answer: "Markov's inequality says that a non-negative random variable cannot take large values too frequently if its average size is small. If the expected value is limited, the probability of observing values far above that average must also be limited. The larger the threshold chosen, the smaller the guaranteed upper bound on exceeding it."
+      question: "When does Markov's inequality tell you nothing?",
+      answer: "Whenever the threshold is at or below the mean. If a ≤ E[X], then E[X]/a ≥ 1, and the bound says the probability is at most something ≥ 1 — true, but no news, since every probability already satisfies it. The inequality only becomes informative once the threshold sits meaningfully above the average.",
+      sectionId: "7"
     },
     obj4: {
-      question: "How does Markov's inequality relate to Chebyshev's inequality?",
-      answer: "Markov's inequality is the most basic probability bound, using only non-negativity and expectation. Chebyshev's inequality is a direct refinement that applies Markov's inequality to squared deviations and uses variance to obtain tighter bounds. Chebyshev strengthens Markov by incorporating additional information while remaining distribution-free."
-    },
-    obj5: {
-      question: "What are the limitations of Markov's inequality?",
-      answer: "Markov's inequality often provides very loose bounds because it uses only the expected value and ignores how values are distributed around that average. The bound may be far larger than the true probability, especially for light-tailed or concentrated distributions. It's also uninformative when the threshold is close to the expected value, as the bound may approach or exceed 1."
+      question: "Does it matter whether Markov's inequality uses ≥ or >?",
+      answer: "Only for discrete variables. The two spellings differ by the atom P(X = a) sitting exactly at the threshold, which is zero for a continuous variable and can be substantial for a discrete one. Markov is normally stated with ≥, so the boundary value is included; switching to > gives a smaller left side and the bound still holds.",
+      sectionId: "notation"
     }
   }
 
@@ -846,19 +852,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/inequalities/markov"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1284,6 +1277,22 @@ export default function MarkovInequalityPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Markov's Inequality FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -1393,12 +1402,6 @@ export default function MarkovInequalityPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

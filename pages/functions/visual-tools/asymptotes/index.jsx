@@ -565,6 +565,7 @@ Zeros at $x = \\pm 1$ anchor the two branches to the axis on their way between w
         description: "Detect and visualize vertical, horizontal, and oblique asymptotes of any function. Color-coded dashed lines, one-sided limits, and live transformation sliders.",
         keywords: keyWords.join(", "),
         url: "/functions/visual-tools/asymptotes",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="44" x2="74" y2="44" stroke="#B5D4F4" stroke-width="0.8"/><line x1="36" y1="10" x2="36" y2="74" stroke="#B5D4F4" stroke-width="0.8"/><line x1="52" y1="8" x2="52" y2="74" stroke="#ED93B1" stroke-width="1.4" stroke-dasharray="3,2.5"/><line x1="8" y1="30" x2="74" y2="30" stroke="#97C459" stroke-width="1.4" stroke-dasharray="3,2.5"/><path d="M 12 28.5 C 30 27.5, 40 25, 46 17 C 47.5 14, 48.5 12, 49 10" fill="none" stroke="#FAC775" stroke-width="1.8"/><path d="M 54 60 C 56 46, 60 37.5, 66 34.5 C 69 33.7, 72 33.1, 74 32.8" fill="none" stroke="#FAC775" stroke-width="1.8"/></svg>`,
         name: "Function Asymptotes Visualizer",
         hubDescription: "Find vertical, horizontal, and oblique asymptotes of common functions and watch them drawn as color-coded dashed lines over the curve. One-sided limit probes report whether each vertical asymptote tends to plus or minus infinity from each side, and four transformation sliders let you watch every asymptote track shifts and scales in real time.",
         category: "Function Properties",

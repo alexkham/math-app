@@ -9,12 +9,14 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import TotalProbabilityVisualizerV2 from '@/app/components/probability/total-probability/TotalProbabilityVisualizerV2'
+import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
 // (card icon + description). Do not use apostrophes in comments here.
 const hubMeta = {
-  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="14" width="80" height="60" rx="4" fill="#fff" stroke="#1565c0" stroke-width="2"/><line x1="46" y1="14" x2="46" y2="74" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="72" y1="14" x2="72" y2="74" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="4 3"/><ellipse cx="60" cy="44" rx="30" ry="15" fill="#3498db" fill-opacity="0.35" stroke="#1565c0" stroke-width="2"/><text x="60" y="49" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#1565c0" stroke="none">A</text></svg>`,
+  svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="21" x2="50" y2="36" stroke="#B5D4F4" stroke-width="1.2"/><line x1="30" y1="39" x2="50" y2="39" stroke="#B5D4F4" stroke-width="1.2"/><line x1="30" y1="57" x2="50" y2="42" stroke="#B5D4F4" stroke-width="1.2"/><rect x="10" y="14" width="20" height="14" rx="3" fill="#85B7EB" fill-opacity="0.7" stroke="#0C447C" stroke-width="1"/><rect x="10" y="32" width="20" height="14" rx="3" fill="#97C459" fill-opacity="0.7" stroke="#27500A" stroke-width="1"/><rect x="10" y="50" width="20" height="14" rx="3" fill="#AFA9EC" fill-opacity="0.7" stroke="#3C3489" stroke-width="1"/><rect x="50" y="32" width="20" height="14" rx="3" fill="#FAC775" stroke="#854F0B" stroke-width="1.3"/><text x="20" y="24" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle" font-style="italic">B&#8321;</text><text x="20" y="42" font-family="Georgia,serif" font-size="7" fill="#173404" text-anchor="middle" font-style="italic">B&#8322;</text><text x="20" y="60" font-family="Georgia,serif" font-size="7" fill="#26215C" text-anchor="middle" font-style="italic">B&#8323;</text><text x="60" y="42" font-family="Georgia,serif" font-size="8" fill="#412402" text-anchor="middle" font-style="italic">A</text><text x="40" y="74" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle" font-style="italic">&#931; P(A|B)P(B)</text></svg>`,
 }
 
 export async function getStaticProps(){
@@ -188,8 +190,98 @@ Think of it this way: addition rule combines alternatives (A or B), while total 
       before: ``,
       after: ``,
       link: '',
-    }
+    },
+
+    obj13: {
+      title: `The Default Tree`,
+      content: `The visualizer opens on a three-part partition. From the start node, three branches carry $P(A_1) = 0.33$, $P(A_2) = 0.33$ and $P(A_3) = 0.34$; each then splits into three outcomes carrying the conditional probabilities $P(B_j \mid A_i)$.
+
+Multiplying along any root-to-leaf path gives that path's joint probability. The first path, for instance, is $0.33 \times 0.4 = 0.132$, which is $P(A_1 \cap B_1)$.`,
+      before: ``,
+      after: `Two conditions make the tree a valid partition, and both are visible in the numbers. The branch probabilities sum to 1, so the $A_i$ cover the whole sample space; and each fan of conditionals sums to 1, so within any branch the outcomes are exhaustive.
+
+Nine leaves, nine joint probabilities, and they sum to 1 as well. Every point of the sample space lands on exactly one leaf — that is what "partition" buys, and it is the reason the law of total probability can add path probabilities without any risk of double counting.`,
+      link: '',
+    },
+    obj14: {
+      title: `Following a Single Branch`,
+      content: `Clicking a partition event highlights everything downstream of it. In the frozen picture below, $A_1$ is selected: its branch and all three of its outcomes are drawn in colour while the rest of the tree fades to grey.
+
+What is highlighted is the conditional world "given $A_1$". Inside it the three conditional probabilities $0.4$, $0.3$, $0.3$ sum to 1 — they are a complete probability distribution in their own right.`,
+      before: ``,
+      after: `This view separates two quantities the notation makes easy to confuse. $P(B_1 \mid A_1) = 0.4$ is the probability *within* the highlighted sub-tree, and it is the number on the edge. $P(A_1 \cap B_1) = 0.132$ is the probability of that leaf *within the whole tree*, and it is the number at the node — the edge value scaled down by the $0.33$ it took to reach the branch at all.
+
+Conditioning is exactly that rescaling. Restricting attention to $A_1$ makes its probability the new total, and dividing through by $0.33$ is what turns joint probabilities back into conditional ones.`,
+      link: '',
+    },
+    obj15: {
+      title: `Summing Across Branches: the Law Itself`,
+      content: `Clicking an outcome instead highlights one $B_j$ across **every** branch. The still shows $B_2$ selected, so the three paths ending in $B_2$ are lit and the others fade.
+
+Those three paths are exactly the terms of the law of total probability:
+
+$P(B_2) = 0.33 \times 0.3 + 0.33 \times 0.5 + 0.34 \times 0.3 = 0.366$`,
+      before: ``,
+      after: `This is the picture the whole tool is built around. An event that is awkward to compute directly is decomposed into the ways it can happen — one per partition branch — and those pieces are added.
+
+The reason the addition is legitimate is that the branches are disjoint. $B_2$ can occur with $A_1$, with $A_2$ or with $A_3$, never with two at once, so the three joint probabilities can be summed without correction. That disjointness is why the partition condition matters and why this is not the general addition rule, which needs an intersection term subtracted.
+
+Highlighting each outcome in turn gives $0.299$, $0.366$ and $0.335$ — the three $B$ marginals, summing to 1.`,
+      link: '',
+    },
+    obj16: {
+      title: `Changing the Partition Size`,
+      content: `Nothing in the law fixes the number of branches. The controls let the partition run from two to five parts, with the outcome count adjusting inversely.
+
+The frozen picture is a four-part partition, each branch carrying $0.25$. The tree is wider, there are twelve leaves instead of nine, and the marginals still sum to 1.`,
+      before: ``,
+      after: `The statement generalises without change: $P(B) = \sum_{i} P(A_i) P(B \mid A_i)$, over however many branches the partition has. Two is enough — the common case is a partition into an event and its complement, $P(B) = P(A)P(B \mid A) + P(A^c)P(B \mid A^c)$ — and the sum extends to any finite number.
+
+What does change is the arithmetic burden. Each extra branch adds a term to every marginal, which is why the tree view stops being practical well before the mathematics does. The principle is what transfers; the drawing is a teaching aid that runs out of room first.`,
+      link: '',
+    },
   }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The tree is built inline in JSX, so totalProbabilityDiagrams.js ports it:
+     same canvas and column positions, same spacing rules, same highlight
+     colouring and path widths, same label plates. Joint probabilities and B
+     marginals come from the component's own model. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: totalProbabilityDiagrams[key], caption, text })
+
+  const stateUnits = {
+    overview: unit('overview', 'Default tree, nothing highlighted',
+      'Three branches into three outcomes: 12 edges, 13 nodes. Every root-to-leaf product is a joint ' +
+      'probability, and the nine of them sum to 1.'),
+    branch: unit('branch', 'Branch A1 highlighted',
+      'One partition event selected, so its branch and its three outcomes stay coloured while the rest ' +
+      'fades. Inside that sub-tree the conditionals 0.4, 0.3, 0.3 sum to 1 on their own.'),
+    outcome: unit('outcome', 'Outcome B2 highlighted across every branch',
+      'The three paths ending in B2 are lit. Their joint probabilities - 0.099, 0.165, 0.102 - are the ' +
+      'terms of the law of total probability, summing to P(B2) = 0.366.'),
+    wide: unit('wide', 'A four-part partition',
+      'The same construction with four branches of 0.25 each and twelve leaves. The marginals still ' +
+      'sum to 1; only the number of terms changed.'),
+  }
+
+
+  /* ---- per-state notes, passed into the component (Line 1) ----
+     TotalProbabilityVisualizerV2 took no props; an additive `explanations = null`
+     prop was added and the note renders above the tree. The state is derived
+     from the component's own highlightedPath and partition size. Rendered with
+     dangerouslySetInnerHTML, so raw HTML. */
+  const note = (body, slug, label) =>
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#what-is-the-law-of-total-probability" style="color:#1d4ed8;font-weight:600">the law itself</a>`
+
+  const explanations = {
+    overview: note('Every leaf is one branch probability times one conditional; all nine sum to 1.', 'the-default-tree', 'Learn more about the default tree'),
+    branch: note('Inside a highlighted branch the conditionals form a complete distribution of their own.', 'following-a-single-branch', 'Learn more about following one branch'),
+    outcome: note('These highlighted paths ARE the terms of the law - disjoint branches, so they simply add.', 'summing-across-branches', 'Learn more about summing across branches'),
+    wide: note('The law does not care how many branches the partition has.', 'changing-the-partition-size', 'Learn more about partition size'),
+  }
+
 
   const faqQuestions = {
     obj1: {
@@ -298,6 +390,8 @@ Think of it this way: addition rule combines alternatives (A or B), while total 
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       faqQuestions,
       schemas,
       seoData: {
@@ -305,20 +399,56 @@ Think of it this way: addition rule combines alternatives (A or B), while total 
         description: "Visualize the law of total probability with interactive tree diagrams. Calculate marginal, joint, and conditional probabilities with real-time updates and path highlighting.",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools/total-probability",
+        category: "Conditional Probability",
+        hubDescription: "Calculate marginal probabilities using the law of total probability with an interactive tree diagram. The tool shows how probabilities flow through partitioned sample spaces, displaying joint probabilities, conditional probabilities, and Bayes' theorem calculations in real-time.",
         name: "Total Probability Visualizer"
       }
     }
   }
 }
 
-export default function TotalProbabilityPage({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function TotalProbabilityPage({seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit slug list
+  const genericSections = [
+    plain('obj1', 'using-the-visualizer'),
+    plain('obj2', 'the-calculations-panel'),
+    stateRow('obj13', 'the-default-tree', 'overview'),
+    stateRow('obj14', 'following-a-single-branch', 'branch'),
+    stateRow('obj15', 'summing-across-branches', 'outcome'),
+    stateRow('obj16', 'changing-the-partition-size', 'wide'),
+    plain('obj3', 'what-is-the-law-of-total-probability'),
+    plain('obj4', 'partitions-of-the-sample-space'),
+    plain('obj5', 'connection-to-bayes-theorem'),
+    plain('obj6', 'joint-and-marginal-probabilities'),
+    plain('obj7', 'real-world-applications'),
+    plain('obj8', 'probability-trees-and-paths'),
+    plain('obj9', 'common-mistakes'),
+    plain('obj10', 'total-probability-vs-addition-rule'),
+    plain('obj11', 'related-concepts'),
+    plain('obj12', 'practice-problems'),
+  ]
+
+
 
   return (
     <>
@@ -380,7 +510,7 @@ export default function TotalProbabilityPage({seoData, sectionsContent, faqQuest
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Total Probability Visualizer</h1>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
-        <TotalProbabilityVisualizerV2/>
+        <TotalProbabilityVisualizerV2 explanations={explanations}/>
       </div>
       <br/>
       <SectionTableOfContents sections={genericSections}/>

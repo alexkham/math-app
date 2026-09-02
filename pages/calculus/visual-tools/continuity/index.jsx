@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Continuity</h1>
 //    <br/>
-//    <FunctionContinuity/>
+//    <FunctionContinuity explanations={explanations}/>
 //      <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionContinuity from '../../../../app/components/functions/continuity/FunctionContinuity'
+import functionContinuityDiagrams from '../../../../app/components/functions/continuity/functionContinuityDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -714,38 +716,69 @@ For a tool focused on the limit step alone — including an $\\varepsilon$ slide
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Smooth: All Three Conditions Pass`,
+      content: `The Smooth family is $f(x) = x^2$, a polynomial, and polynomials are continuous on the whole real line. There is no point of interest to jump to because there is nothing to find — the checklist passes at every $c$ you can slide to.
+
+At $c = 0$ the readings are $f(c) = 0$, $L^- = 0$, $L^+ = 0$. All three rows turn green: the value exists, the two one-sided limits agree, and their common value matches $f(c)$.`,
       before: ``,
-      after: ``,
+      after: `This is the baseline the other five families are measured against, and it is worth spending a moment on before moving to the failures. Continuity is the ordinary case — the interesting question is never "why is this function continuous here" but "what exactly broke at the one point where it isn't".
+
+Slide $c$ anywhere on this family and watch nothing happen. The dashed vertical moves, the $L$ line follows it, the three checks stay green.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Hole: the Value Is Missing`,
+      content: `The Hole family is $f(x) = \frac{x^2 - 1}{x - 1}$. Factoring gives $\frac{(x-1)(x+1)}{x-1}$, which cancels to $x + 1$ — but only for $x \neq 1$. At $x = 1$ the original expression is $\frac{0}{0}$, so the function simply has no value there.
+
+At the point of interest $c = 1$: $L^- = 2$ and $L^+ = 2$, so condition 2 passes cleanly. Condition 1 fails, because $f(1)$ is undefined. The verdict is a **removable** discontinuity.`,
       before: ``,
-      after: ``,
+      after: `Removable is the right word in the strict sense: define $f(1) = 2$ and every condition passes. The repair is a single point, and the limit tells you exactly which value to use.
+
+Note what the graph does and does not show. The curve looks like the line $y = x + 1$ with a gap you would miss at a glance, which is the practical danger of this case — the algebra says the point is absent, not the picture.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Jump: the One-Sided Limits Disagree`,
+      content: `The Jump family is piecewise: $f(x) = x$ for $x < 0$, and $f(x) = x + 1$ for $x \geq 0$. Each piece is continuous on its own; the trouble is at the seam.
+
+At $c = 0$: $L^- = 0$ approaching from the left, $L^+ = 1$ approaching from the right. Two different finite values, so the two-sided limit does not exist and condition 2 fails. Condition 1 passes — $f(0) = 1$ is perfectly well defined.`,
       before: ``,
-      after: ``,
+      after: `This one is not repairable, and the reason is worth stating precisely. A patch can only change $f(c)$, a single number. Here no single number equals both $0$ and $1$, so no redefinition of $f(0)$ can make the limit exist. The gap has size $L^+ - L^- = 1$, and that gap is a property of the two pieces, not of the value at the seam.
+
+That is the whole distinction between a removable discontinuity and a jump: removable means the limit exists and the value is wrong or missing; jump means the limit itself fails, and the [types of discontinuities](!#types-of-discontinuities) section works through the full classification.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `Wrong Value: the Limit Exists but Misses`,
+      content: `The Wrong value family is the line $f(x) = x + 1$ everywhere except at a single point, where the definition overrides it: $f(1) = 0$ instead of the natural $2$.
+
+At $c = 1$ the first two conditions pass — $f(1) = 0$ is defined, and $L^- = L^+ = 2$ so the limit exists. It is condition 3 that fails: $f(c) \neq \lim_{x \to c} f(x)$, because $0 \neq 2$. The graph shows it plainly, with the isolated dot sitting well below the line it belongs to.`,
       before: ``,
-      after: ``,
+      after: `The verdict is again **removable**, and this family exists to make the point that removable covers two different failures. In the hole family condition 1 failed and the value was missing; here condition 1 passes and condition 3 fails, because the value is present but wrong. Both are repaired the same way — set $f(1) = 2$, the value the limit dictates.
+
+That shared repair is why the classification groups them together. What matters for repairability is whether $\lim_{x \to c} f(x)$ exists, not whether $f(c)$ happens to be defined.`,
       link: '',
     },
     obj15: {
-      title: ``,
-      content: ``,
+      title: `Asymptote: an Infinite Discontinuity`,
+      content: `The Asymptote family is $f(x) = \frac{1}{x^2}$, which grows without bound on both sides of the origin.
+
+At $c = 0$ the tool reports $f(c)$ as undefined and both one-sided limits as $+\infty$. Condition 1 fails and condition 2 fails as well — and it fails for a stronger reason than in the jump case. It is not that the two sides disagree; it is that neither side approaches a finite value at all.`,
       before: ``,
-      after: ``,
+      after: `Because the limit is infinite rather than merely two-valued, no patch helps. Assigning $f(0)$ any real number leaves the surrounding values growing arbitrarily large, so condition 3 could never hold. The tool labels this **infinite**, and marks it explicitly as not removable.
+
+Worth noticing: "$L^- = L^+ = +\infty$" is a statement about how the function behaves, not a claim that the limit exists. In the strict sense the limit fails to exist here — $\infty$ is a description of the failure, not a value.`,
+      link: '',
+    },
+    obj16: {
+      title: `Staircase: Discontinuous at Every Integer`,
+      content: `The Staircase family is $f(x) = \lfloor x \rfloor + 0.5$, the floor function lifted by a half. It is flat on each interval between consecutive integers and steps up by exactly $1$ at each integer.
+
+The point of interest the tool jumps to first is $c = -2$, where $L^- = -2.5$, $L^+ = -1.5$, and $f(c) = -1.5$. That is a **jump** discontinuity, structurally identical to the jump family — except that here it repeats at every integer, and the jump-to buttons walk through five of them.`,
+      before: ``,
+      after: `This family is the useful counterweight to the tidy examples. The others each have one broken point and are continuous everywhere else; this one has infinitely many, one per integer, and is still continuous on every interval strictly between them.
+
+That combination is entirely ordinary. "Continuous" is a statement about a single point, and "continuous on an interval" means continuous at each point of it. A function can fail the test at infinitely many places and still be perfectly well behaved on each piece in between — which is exactly how floor, ceiling, and rounding functions behave in practice.`,
       link: '',
     }
 
@@ -756,6 +789,49 @@ For a tool focused on the limit step alone — including an $\\varepsilon$ slide
     id: "intro",
     title: "",
     content: ``
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The SVGs come from the tool's own scene description, serialised through
+     the core's generateSVG - see app/components/functions/frozenSvg.js. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: functionContinuityDiagrams[key], caption, text })
+
+  const stateUnits = {
+    smooth: unit('smooth', 'Smooth, frozen at c = 0',
+      'f(x) = x&sup2; with the probe at the origin. One L line, one marker, nothing else to see - ' +
+      'f(c), L&#8315; and L&#8314; all read 0 and the three checks pass.'),
+    hole: unit('hole', 'Hole, frozen at c = 1',
+      'The L line sits at 2 and the curve passes straight through that level, but no f(c) marker sits ' +
+      'on it: the function has no value at x = 1. Condition 1 is the one that fails.'),
+    jump: unit('jump', 'Jump, frozen at c = 0',
+      'Two L lines instead of one, at 0 and at 1. The closed endpoint belongs to the upper piece and the ' +
+      'open one to the lower - the visual signature of one-sided limits that disagree.'),
+    wrongvalue: unit('wrongvalue', 'Wrong value, frozen at c = 1',
+      'The L line is at 2 where the line would go, while the f(c) marker sits alone at 0. Both are drawn, ' +
+      'and the vertical distance between them is the failure of condition 3.'),
+    asymptote: unit('asymptote', 'Asymptote, frozen at c = 0',
+      'f(x) = 1/x&sup2; climbing off the top of the frame on both sides. No L lines are drawn at all, ' +
+      'because neither one-sided limit is finite.'),
+    staircase: unit('staircase', 'Staircase, frozen at c = -2',
+      'Each step carries a closed endpoint on the left and an open one on the right. L&#8315; = -2.5 and ' +
+      'L&#8314; = -1.5 straddle the step, and the same picture repeats at every integer.'),
+  }
+
+
+  /* ---- per-family panel notes, passed into the component (Line 1) ----
+     FunctionContinuity had no explanations prop; one was added additively and
+     defaults to null, so the panel reads exactly as before when nothing is
+     passed. Content is markdown - InfoPanel renders it through processContent,
+     so the anchors use the normal [text](!#slug) form. */
+  const explanations = {
+    smooth: `### Where this leads\n\nThe passing case, and the baseline for the other five. See [smooth: all three conditions pass](!#continuous-everywhere) or compare [all six families](!#the-function-families).`,
+    hole: `### Where this leads\n\nCondition 1 fails while the limit survives, which is what makes the break repairable. See [hole: the value is missing](!#removable-hole) or compare [all six families](!#the-function-families).`,
+    jump: `### Where this leads\n\nThe one-sided limits disagree, so no single patched value can help. See [jump: the one-sided limits disagree](!#jump-discontinuity) or compare [all six families](!#the-function-families).`,
+    wrongvalue: `### Where this leads\n\nThe limit exists and f(c) exists, but they differ - condition 3 is the one that breaks. See [wrong value: the limit exists but misses](!#wrong-value-at-a-point) or compare [all six families](!#the-function-families).`,
+    asymptote: `### Where this leads\n\nNeither one-sided limit is finite, which is a harder failure than a jump. See [asymptote: an infinite discontinuity](!#infinite-discontinuity) or compare [all six families](!#the-function-families).`,
+    staircase: `### Where this leads\n\nA jump at every integer, and continuity on each interval between them. See [staircase: discontinuous at every integer](!#the-staircase) or compare [all six families](!#the-function-families).`,
   }
 
 
@@ -862,6 +938,8 @@ For a tool focused on the limit step alone — including an $\\varepsilon$ slide
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -873,147 +951,55 @@ For a tool focused on the limit step alone — including an $\\varepsilon$ slide
         name: "Continuity Checker",
         hubDescription: "Probe continuity at any point with a live three-condition checklist — f(c) defined, two-sided limit exists, f(c) equals the limit. Slide c through holes, jumps, asymptotes, and staircases and watch each row flip pass or fail in real time.",
         category: "Limits and Continuity",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="60" x2="76" y2="60" stroke="#B5D4F4" stroke-width="0.9"/><line x1="14" y1="8" x2="14" y2="64" stroke="#B5D4F4" stroke-width="0.9"/><line x1="42" y1="32" x2="42" y2="60" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2.5,2"/><line x1="18" y1="48" x2="42" y2="32" stroke="#85B7EB" stroke-width="1.9"/><line x1="42" y1="18" x2="70" y2="12" stroke="#85B7EB" stroke-width="1.9"/><line x1="42" y1="30" x2="42" y2="20" stroke="#ED93B1" stroke-width="1.2" stroke-dasharray="2,1.6"/><circle cx="42" cy="32" r="3" fill="#85B7EB" stroke="#0C447C" stroke-width="1.2"/><circle cx="42" cy="18" r="3" fill="none" stroke="#ED93B1" stroke-width="1.7"/><text x="57" y="27" font-family="Georgia,serif" font-size="7" fill="#ED93B1" text-anchor="middle">jump</text><text x="42" y="70" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">a</text></svg>`
       },
 
     }
   }
 }
 
-export default function ContinuityChecker({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function ContinuityChecker({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-function-families'),
+    stateRow('obj11', 'continuous-everywhere', 'smooth'),
+    stateRow('obj12', 'removable-hole', 'hole'),
+    stateRow('obj13', 'jump-discontinuity', 'jump'),
+    stateRow('obj14', 'wrong-value-at-a-point', 'wrongvalue'),
+    stateRow('obj15', 'infinite-discontinuity', 'asymptote'),
+    stateRow('obj16', 'the-staircase', 'staircase'),
+    plain('obj3', 'the-c-slider'),
+    plain('obj4', 'jump-to-buttons'),
+    plain('obj5', 'the-three-condition-checklist'),
+    plain('obj6', 'display-toggles'),
+    plain('obj7', 'what-is-continuity'),
+    plain('obj8', 'types-of-discontinuities'),
+    plain('obj9', 'continuity-and-limits'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -1069,7 +1055,7 @@ export default function ContinuityChecker({seoData, sectionsContent, introConten
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Continuity Checker - Interactive Visualizer</h1>
       <br/>
-      <FunctionContinuity/>
+      <FunctionContinuity explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

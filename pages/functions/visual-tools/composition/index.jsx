@@ -548,6 +548,7 @@ Note the coinciding curves in the scene: the blue and amber graphs are identical
         description: "Plot both compositions of any two functions on the same graph. See why f composed with g and g composed with f are usually two very different curves.",
         keywords: keyWords.join(", "),
         url: "/functions/visual-tools/composition",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="52" x2="74" y2="52" stroke="#B5D4F4" stroke-width="0.9"/><line x1="14" y1="10" x2="14" y2="66" stroke="#B5D4F4" stroke-width="0.9"/><path d="M 16 48 C 24 20, 34 14, 48 13 C 58 12.5, 66 12, 72 12" fill="none" stroke="#85B7EB" stroke-width="1.9"/><path d="M 16 48 C 30 47, 44 44, 56 34 C 64 26, 69 18, 72 12" fill="none" stroke="#FAC775" stroke-width="1.9"/><text x="30" y="24" font-family="Georgia,serif" font-size="7" fill="#85B7EB" text-anchor="middle" font-style="italic">f&#8728;g</text><text x="62" y="38" font-family="Georgia,serif" font-size="7" fill="#FAC775" text-anchor="middle" font-style="italic">g&#8728;f</text></svg>`,
         name: "Function Composition Visualizer",
         hubDescription: "Pick an outer function f and an inner function g from ten base families to see both compositions plotted on the same graph — f composed with g in blue, g composed with f in amber. The visual contrast makes it immediate that composition is not commutative, while live symbolic expressions and special-case notes for identity and inverse pairs build the intuition behind f of g of x.",
         category: "",

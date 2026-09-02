@@ -617,6 +617,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -748,26 +749,31 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — what a random
+  // variable is, types, why they matter, notation, common examples.
+  // Replaced with the notation section's reading traps, the sharpest being
+  // that a random variable is a function rather than a variable at all.
+  // Indicator variables defer to /probability/indicators.
   const faqQuestions = {
     obj1: {
-      question: "What is a random variable?",
-      answer: "A random variable is a rule that assigns a real number to each possible outcome of a random experiment. It maps outcomes (like heads/tails or dice faces) to numerical values, making quantitative probability analysis possible. The randomness comes from the underlying experiment whose outcome is unknown in advance, not from the variable itself."
+      question: "Why is a random variable called a variable if it's a function?",
+      answer: "The name is historical and misleading. The signature X : Ω → ℝ says what it really is: a function assigning a number to every outcome. Written in full, X(ω) is the value at a particular outcome; everyday work drops the argument and writes just X. It is not an unknown waiting to be solved for — the rule already exists, and outcomes get fed into it.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "What's the difference between discrete and continuous random variables?",
-      answer: "A discrete random variable takes isolated, countable values that can be listed individually (like the number of heads in coin flips or dice outcomes). A continuous random variable takes values from intervals of real numbers, forming a continuum rather than separate points (like measurements of time, length, weight, or temperature)."
+      question: "What does P(X ≤ x) actually mean?",
+      answer: "It is the probability of a set. The condition X ≤ x collects every outcome where the variable lands at or below x, and that collection is an event — a subset of the sample space, which is the only kind of thing P can measure. Written strictly it is P({X ≤ x}); the braces are dropped by convention. It is not an inequality to solve.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "Why do we need random variables in probability?",
-      answer: "Random variables are the link that allows probability to move beyond describing events toward analyzing quantities. They make it possible to summarize randomness using numbers, compare outcomes across experiments, and study patterns. Concepts like averages, spread, dependence, and long-term behavior all rely on random variables. Without them, probability could not support distributions, expectation, variance, or modern statistical tools."
+      question: "What does the ~ symbol mean in X ~ N(μ, σ²)?",
+      answer: "It reads “is distributed as” — the variable follows that distribution, with the parameters in parentheses. One symbol replaces a paragraph, fixing the entire probability function at once. It does not assert equality or approximation: X ~ N(0,1) names a law, whereas the same glyph in f(n) ~ g(n) means asymptotically equal.",
+      sectionId: "notation"
     },
     obj4: {
-      question: "How are random variables notated?",
-      answer: "Random variables are typically written using capital letters like X, Y, or Z. Individual numerical outcomes are written using lowercase letters like x or y. The capital letter refers to the entire assignment rule (the random variable itself), while the lowercase represents a specific result obtained after the experiment. This distinction is necessary for writing correct probability statements."
-    },
-    obj5: {
-      question: "What are common examples of random variables?",
-      answer: "Random variables appear whenever outcomes are counted or measured: the number of heads in coin tosses, the face value or sum of dice rolls, time until an event occurs, distance measurements, weight or temperature readings, and indicator variables that equal 1 when an event occurs and 0 when it doesn't."
+      question: "What are the parameters in a distribution declaration?",
+      answer: "Whatever the family specifies, in the order that family fixes — and the notation does not say what they mean. Bin(n, p) takes trials then success probability; Exp(λ) takes a rate; N(μ, σ²) takes a centre then a spread. The conventions vary by family and by author, so the [distributions pages](!/probability/distributions) state each one explicitly.",
+      sectionId: "notation"
     }
   }
 
@@ -838,19 +844,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/random-variables"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1254,6 +1247,22 @@ export default function RandomVariablesPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Random Variables FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -1312,13 +1321,6 @@ export default function RandomVariablesPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

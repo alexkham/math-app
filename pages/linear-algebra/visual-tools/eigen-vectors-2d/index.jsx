@@ -495,6 +495,9 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import EigenVectors from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/EigenVectors'
+import { SCENARIOS as EV_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/EigenVectors'
+import eigenVectorsDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -698,33 +701,109 @@ For full treatment see **characteristic polynomial**, **defective matrices**, an
       link:'',
     },
     obj12:{
-      title:``,
-      content:``,
+      title:`Distinct Real Eigenvalues: Two Fixed Directions`,
+      content:`Four of the eleven presets have two different real eigenvalues. The frozen picture below is the diagonal matrix $\begin{pmatrix} 2 & 0 \\ 0 & 0.5 \end{pmatrix}$, whose eigenvalues are $2$ and $0.5$.
+
+Two dashed eigenlines are drawn, one per eigenvalue. Any vector lying along one of them is mapped to a multiple of itself: the transformation stretches it or shrinks it but never turns it.`,
       before:``,
-      after:``,
+      after:`This is the case the whole tool is calibrated around, and it is the easiest to read. Drag $v$ onto an eigenline and the alignment signal fires — $Av$ becomes parallel to $v$, the angle arc collapses to zero, and the eigenvalue readout shows the factor.
+
+Two independent eigendirections mean the matrix is **diagonalisable**: written in the basis of its own eigenvectors, it becomes diagonal, and applying it repeatedly just raises each eigenvalue to a power. That is why distinct real eigenvalues are the comfortable case in almost every application.
+
+Note that "distinct" refers to the eigenvalues, not the directions. The reflection preset has eigenvalues $1$ and $-1$ — still distinct, still two clean eigenlines, but one direction is flipped rather than stretched.`,
       link:'',
     },
     obj13:{
-      title:``,
-      content:``,
+      title:`Repeated Eigenvalue With a Full Set of Directions`,
+      content:`Two presets have a single repeated eigenvalue and still behave perfectly well: the identity, and the $2\times$ scaling shown below.
+
+For $A = 2I$ the only eigenvalue is $2$, but **every** direction is an eigendirection. Drag $v$ anywhere at all and $Av$ stays parallel to it — the alignment signal never switches off.`,
       before:``,
-      after:``,
+      after:`These are the isotropic maps: they scale the whole plane by one factor, treating every direction identically. The tool draws no distinguished eigenlines here because there is nothing to distinguish — the eigenspace is the entire plane rather than a line.
+
+The important point is that a repeated eigenvalue is not by itself a problem. What matters is whether the eigenspace is big enough: here the eigenvalue $2$ repeats twice and comes with a two-dimensional eigenspace, so the matrix is still diagonalisable. The next category is what happens when that fails.`,
       link:'',
     },
     obj14:{
-      title:``,
-      content:``,
+      title:`Defective: a Repeated Eigenvalue Short of Directions`,
+      content:`Two presets are defective. The frozen picture shows one: a repeated eigenvalue whose eigenspace is only one-dimensional, so a single eigenline appears where the previous category had a whole plane.
+
+Drag $v$ anywhere off that one line and $Av$ refuses to align, no matter where you put it.`,
       before:``,
-      after:``,
+      after:`This is the case that breaks diagonalisation. An $n \times n$ matrix needs $n$ independent eigenvectors to be written in a basis of its own eigenvectors, and a defective matrix simply does not have them — the algebraic multiplicity of the eigenvalue exceeds its geometric multiplicity.
+
+The shear is the classic example. Every vector along the shear axis is fixed, but nothing else keeps its direction, so there is one eigenline where there ought to be two. Such matrices are handled with the Jordan form instead of a diagonal one, and they are the reason "every matrix is diagonalisable" is false.`,
       link:'',
     },
     obj15:{
-      title:``,
-      content:``,
+      title:`Complex Eigenvalues: No Real Direction Survives`,
+      content:`Three presets have complex eigenvalues, and the tool draws **no eigenlines at all** for them. The frozen picture is a 30° rotation.
+
+Drag $v$ anywhere on the plane and $Av$ never lines up with it. The angle arc between the two arrows never closes, because a rotation genuinely turns every direction.`,
       before:``,
-      after:``,
+      after:`That is the honest geometric content of a complex eigenvalue: no real line through the origin is preserved. The eigenvalues still exist — they come as a conjugate pair $a \pm bi$ — but their eigenvectors live in $\mathbb{C}^2$ and have no real representative to draw.
+
+The pair still carries the geometry. Its modulus is the scaling factor per application, so $|\lambda| = 1$ means a rigid rotation while $|\lambda| > 1$ produces the outward spiral of the third preset; its argument is the rotation angle. Reading a rotation as "complex eigenvalues" rather than "no eigenvalues" is what keeps the theory uniform: over $\mathbb{C}$, every $2 \times 2$ matrix has two eigenvalues counted with multiplicity.`,
       link:'',
     }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The component renders its canvas from pure SVG string builders, so these
+     stills are its own output, frozen with the probe vector at its initial
+     v = [2, 1]. See eigenVectorsDiagrams.js. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: eigenVectorsDiagrams[key], caption, text })
+
+  const stateUnits = {
+    distinct: unit('distinct', 'Distinct real eigenvalues, frozen',
+      'The diagonal matrix, eigenvalues 2 and 0.5. Two dashed eigenlines - the coordinate axes here - ' +
+      'and a probe vector v whose image Av is turned away from it because v sits on neither line.'),
+    repeated: unit('repeated', 'Repeated eigenvalue, full eigenspace, frozen',
+      'The 2x scaling. One eigenvalue, but every direction is an eigendirection, so v and Av are ' +
+      'parallel wherever v is placed and no eigenline is singled out.'),
+    defective: unit('defective', 'Defective matrix, frozen',
+      'A repeated eigenvalue with only a one-dimensional eigenspace: a single eigenline where the ' +
+      'previous case had the whole plane. Off that line, Av never aligns with v.'),
+    complex: unit('complex', 'Complex eigenvalues, frozen',
+      'A 30 degree rotation. No eigenlines are drawn at all, and the angle arc between v and Av never ' +
+      'closes - no real direction is preserved.'),
+  }
+
+
+  /* ---- per-scenario panel notes (Line 1) ----
+     Case A: EigenVectors already accepts explanationOverride with a byPreset
+     map. ExplanationCard REPLACES the entry rather than merging it, so each
+     override spreads the tool's own SCENARIOS entry and appends the anchor to
+     `body`. All eleven scenarios are covered; each points at the section for its
+     eigen category. The card renders with dangerouslySetInnerHTML, so the
+     anchors are raw HTML. */
+  const SECTION_FOR_GROUP = {
+    distinct: 'distinct-real-eigenvalues',
+    repeated: 'repeated-eigenvalue',
+    defective: 'defective-matrices',
+    complex: 'complex-eigenvalues',
+  }
+  const LABEL_FOR_GROUP = {
+    distinct: 'distinct real eigenvalues',
+    repeated: 'a repeated eigenvalue with a full eigenspace',
+    defective: 'defective matrices',
+    complex: 'complex eigenvalues',
+  }
+
+  const explanationOverride = {
+    byPreset: Object.fromEntries(
+      Object.entries(EV_SCENARIOS).map(([key, sc]) => {
+        const slug = SECTION_FOR_GROUP[groupOf[key]]
+        const label = LABEL_FOR_GROUP[groupOf[key]]
+        return [key, {
+          ...sc,
+          body: `${sc.body}<br/><a href="#${slug}" style="color:#1d4ed8;font-weight:600">Learn more about ${label}</a>` +
+            ` &middot; <a href="#preset-scenarios" style="color:#1d4ed8;font-weight:600">all four categories</a>`,
+        }]
+      })
+    ),
   }
 
 
@@ -874,6 +953,8 @@ For full treatment see **characteristic polynomial**, **defective matrices**, an
    return {
       props:{
          sectionsContent,
+         stateUnits,
+         explanationOverride,
          introContent,
          faqQuestions,
          schemas,
@@ -892,141 +973,46 @@ For full treatment see **characteristic polynomial**, **defective matrices**, an
     }
    }
 
-export default function EigenVectors2DPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'dragging-v-and-watching-av'),
+    plain('obj6', 'preset-scenarios'),
+    stateRow('obj12', 'distinct-real-eigenvalues', 'distinct'),
+    stateRow('obj13', 'repeated-eigenvalue', 'repeated'),
+    stateRow('obj14', 'defective-matrices', 'defective'),
+    stateRow('obj15', 'complex-eigenvalues', 'complex'),
+    plain('obj3', 'the-alignment-signal'),
+    plain('obj4', 'the-eigen-structure-card'),
+    plain('obj5', 'the-snap-button'),
+    plain('obj7', 'display-layer-toggles'),
+    plain('obj8', 'what-is-an-eigenvector'),
+    plain('obj9', 'the-four-cases'),
+    plain('obj10', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -1082,7 +1068,7 @@ export default function EigenVectors2DPage({seoData, sectionsContent, introConte
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Eigen Vectors</h1>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
-   <EigenVectors/>
+   <EigenVectors explanationOverride={explanationOverride}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Newtons&apos;s Method</h1>
 //    <br/>
-//    <FunctionNewtonMethod/>
+//    <FunctionNewtonMethod explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
+import functionNewtonMethodDiagrams from '../../../../app/components/calculus/visualizers/functionNewtonMethodDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -692,24 +694,49 @@ Production root finders defend against these failures by bracketing the root wit
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Direct Hit: Four Steps from x₀ = 3`,
+      content: `The Direct hit scenario starts at $x_0 = 3$, to the right of the root and well inside the smooth basin where $f' $ is large. Four iterations are enough to reach the root to four decimal places.
+
+- $x_0 = 3$ — $f = 16$, $f' = 25$, error $9.1 \\times 10^{-1}$
+- $x_1 = 2.36$ — $f = 3.4243$, $f' = 14.709$, error $2.6 \\times 10^{-1}$
+- $x_2 = 2.127197$ — $f = 0.3711$, $f' = 11.575$, error $3.3 \\times 10^{-2}$
+- $x_3 = 2.095136$ — $f = 0.006527$, $f' = 11.169$, error $5.9 \\times 10^{-4}$
+
+Read the error figures downward: roughly $10^{-1}$, then $10^{-1}$, then $10^{-2}$, then $10^{-4}$. The exponent doubles once the guess is close enough, which is quadratic convergence doing its work.`,
       before: ``,
-      after: ``,
+      after: `Geometrically the run is uneventful, and that is the point. Every tangent in the picture is steep — $f'$ never drops below 11 after the first step — so each correction $f / f'$ is small and lands the next guess close by. The faded trail shows the iterates bunching up near $\\alpha$ rather than spreading out.
+
+The next step, had the animation continued, would put the error near $10^{-7}$. That is the practical shape of the [quadratic convergence](!#quadratic-convergence) result: a handful of steps from a decent starting guess, and no benefit in asking for more.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Crosses Over: One Tangent Throws the Guess Across the Root`,
+      content: `The Crosses over scenario starts at $x_0 = -1$, on the far side of the curve where $f(-1) = -4$ and $f'(-1) = 1$. That slope is shallow compared with the function value, so the correction is large:
+
+$x_1 = -1 - \\frac{-4}{1} = 3$
+
+The first tangent hurls the guess from $-1$ all the way to $3$, straight past the root at $\\alpha \\approx 2.0946$. From there the run is identical to the direct hit — the same four iterates, the same error collapse.`,
       before: ``,
-      after: ``,
+      after: `The overshoot is not a failure. Newton has no notion of which side of the root it is on; it only follows the tangent to the axis. Landing on the opposite side is common and usually harmless, as here, where the crossover happens to deposit the guess in the good basin.
+
+What makes the difference is the ratio $f / f'$, not the sign of anything. At $x_0 = -1$ that ratio is $-4$, large enough to jump the root but not large enough to escape the region. Push the start a little further left and the same mechanism throws the iterate somewhere far less convenient — which is exactly what the [stalling scenario](!#stalls-near-a-critical-point) does with a shallow slope instead of a distant start.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Stalls: What Happens Near a Critical Point`,
+      content: `The Stalls scenario starts at $x_0 = 0.85$, deliberately close to the critical point $x = \\sqrt{2/3} \\approx 0.8165$ where $f'$ vanishes. The numbers there are lopsided:
+
+$f(0.85) = -6.0859$, $f'(0.85) = 0.1675$
+
+The correction is the quotient of those two, $-36.33$, so
+
+$x_1 = 0.85 - (-36.33) = 37.18$
+
+The tangent leaves $P_0$ almost horizontally and travels a very long way before meeting the axis. The tool stops there and draws an arrow off the right edge, because $x_1 = 37.18$ is far outside the visible window.`,
       before: ``,
-      after: ``,
+      after: `Nothing about this is a defect in the method — it is the formula behaving exactly as written. The step size is $f / f'$, and any denominator near zero makes that quotient enormous no matter how ordinary the numerator is.
+
+The practical rule follows directly: **starting points near critical points of $f$ are unsafe for Newton**, and so are iterates that happen to land near one mid-run. From $x_1 = 37.18$ the method would in fact recover — $f'$ is huge out there, so the guess marches back down — but it would burn a dozen steps doing what a better start achieves in four. Other ways the method can break down are collected under [when Newton's method fails](!#when-newtons-method-fails).`,
       link: '',
     },
     obj14: {
@@ -727,6 +754,67 @@ Production root finders defend against these failures by bracketing the root wit
       link: '',
     }
 
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ---- */
+  const stateUnits = {
+    idle: demoUnitFrame({
+      svg: functionNewtonMethodDiagrams.idle,
+      caption: 'Manual start, frozen at x0 = 3',
+      text: 'Nothing has run yet: just the draggable x0 on the axis, the drop line up to P0 on the curve, ' +
+        'and the grey marker at the root &alpha; &asymp; 2.0946. Every Step click adds one tangent to this picture.',
+    }),
+    fast: demoUnitFrame({
+      svg: functionNewtonMethodDiagrams.fast,
+      caption: 'Direct hit, frozen after 4 iterations',
+      text: 'Four tangents, each steep enough to keep its correction small. The P-markers crowd together as they ' +
+        'approach &alpha;, and the final iterate x3 = 2.095136 is already correct to three decimals.',
+    }),
+    cross: demoUnitFrame({
+      svg: functionNewtonMethodDiagrams.cross,
+      caption: 'Crosses over, frozen after 5 iterations',
+      text: 'The leftmost tangent, at x0 = -1, is the shallow one: it carries the guess clear across the root to ' +
+        'x1 = 3. The remaining four steps repeat the direct-hit run exactly.',
+    }),
+    flat: demoUnitFrame({
+      svg: functionNewtonMethodDiagrams.flat,
+      caption: 'Stalls, frozen at the failing step',
+      text: 'f&prime;(0.85) = 0.1675 makes the tangent nearly horizontal, so it meets the axis at x1 = 37.18 - far ' +
+        'off the right edge, which is what the red arrow marks. The frame is the step itself, before the tool clears it.',
+    }),
+  }
+
+
+  /* ---- panel explanations, hoisted out of the component (Line 1) ----
+     FunctionNewtonMethod keys its verdict by outcome, not by scenario:
+     meaning.{success|fail} only. Both converging scenarios therefore share the
+     success entry, so its link line points at both of their sections. Raw HTML
+     (rendered through dangerouslySetInnerHTML, so anchors are <a href="#slug">),
+     {iters}/{plural}/{finalErr}/{x0}/{dfx0}/{xnext} are substituted live, and
+     var(--v*) themes blue for success, red for failure. Anything omitted keeps
+     the component's built-in default. */
+  const STR = (t) => `<strong style="color:var(--vDeep)">${t}</strong>`
+  const LNK = (slug, label) => `<a href="#${slug}" style="color:var(--vDeep);font-weight:600">${label}</a>`
+
+  const explanations = {
+    meaning: {
+      success: {
+        note:
+          `For a simple root &alpha;, e<sub>n+1</sub> &asymp; |f&Prime;(&alpha;) / (2f&prime;(&alpha;))| &middot; e<sub>n</sub><sup>2</sup>. ` +
+          `Each correct digit roughly produces two more on the next step &mdash; far faster than bisection&apos;s linear halving. ` +
+          `Learn more about ${LNK('direct-hit', 'the direct hit')} and ${LNK('crosses-over', 'the crossover start')} ` +
+          `&middot; ${LNK('preset-scenarios', 'all three scenarios')}`,
+      },
+      fail: {
+        note:
+          `The correction f / f&prime; blows up whenever f&prime; is small relative to f. ` +
+          `Starts near ${STR('critical points')} of f (where f&prime; &asymp; 0) are unsafe for Newton. ` +
+          `Learn more about ${LNK('stalls-near-a-critical-point', 'the stall')} ` +
+          `&middot; ${LNK('preset-scenarios', 'all three scenarios')}`,
+      },
+    },
   }
 
 
@@ -839,6 +927,8 @@ Production root finders defend against these failures by bracketing the root wit
    return {
       props:{
          sectionsContent,
+         stateUnits,
+         explanations,
          faqQuestions,
          schemas,
          seoData: {
@@ -849,147 +939,52 @@ Production root finders defend against these failures by bracketing the root wit
            name: `Newtons Method Visualizer`,
            hubDescription: "Drag a starting guess x₀ along the x-axis for f(x) = x³ − 2x − 5 and watch each Newton step draw its tangent, drop to the x-axis, and lift back to the curve. Three preset scenarios show a direct hit, a slow crossover, and a stalling failure when x₀ lands near a critical point where the tangent goes nearly horizontal.",
            category: "Calculus",
-           subCategory: "Derivatives"
+           subCategory: "Derivatives",
+           svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="56" x2="76" y2="56" stroke="#B5D4F4" stroke-width="0.9"/><line x1="64" y1="56" x2="64" y2="36.8" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2.5,2"/><line x1="44" y1="56" x2="44" y2="51.2" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2.5,2"/><path d="M 24 56 Q 47 56 70 30.6" fill="none" stroke="#85B7EB" stroke-width="1.8"/><line x1="64" y1="36.8" x2="44" y2="56" stroke="#FAC775" stroke-width="1.6"/><line x1="44" y1="51.2" x2="34" y2="56" stroke="#EF9F27" stroke-width="1.6"/><circle cx="64" cy="36.8" r="2.8" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="44" cy="51.2" r="2.6" fill="#EF9F27" stroke="#854F0B" stroke-width="1"/><circle cx="24" cy="56" r="3" fill="#97C459" stroke="#27500A" stroke-width="1.2"/><text x="64" y="66" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle" font-style="italic">x&#8320;</text><text x="44" y="66" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle" font-style="italic">x&#8321;</text></svg>`
          }
        }
     }
    }
 
-export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function NewtonsMethodVisualizer({seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'preset-scenarios'),
+    stateRow('obj11', 'direct-hit', 'fast'),
+    stateRow('obj12', 'crosses-over', 'cross'),
+    stateRow('obj13', 'stalls-near-a-critical-point', 'flat'),
+    stateRow('obj3', 'manual-stepping', 'idle'),
+    plain('obj4', 'reading-the-animation'),
+    plain('obj5', 'the-computation-tab'),
+    plain('obj6', 'the-meaning-and-theory-tabs'),
+    plain('obj7', 'what-is-newtons-method'),
+    plain('obj8', 'quadratic-convergence'),
+    plain('obj9', 'when-newtons-method-fails'),
+    plain('obj10', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -1051,7 +1046,7 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQu
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Newton&apos;s Method</h1>
    <br/>
    <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
-   <FunctionNewtonMethod/>
+   <FunctionNewtonMethod explanations={explanations}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

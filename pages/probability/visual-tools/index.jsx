@@ -8,6 +8,8 @@ import ModernCardsGroup from '@/app/components/cards/ModernCardsGroup'
 import QuickNav from '@/app/components/cards/QuickNav'
 import ScrollToTop from '@/app/components/scroll-up-button/ScrollToTop'
 import ToolsPageHeader from '@/app/components/cards/ToolsPageHeader'
+import VisualToolsPage from '../../../app/components/page-components/visual-tools-page/VisualToolsPage'
+import { buildToolIndexData } from '../../../app/components/page-components/visual-tools-page/buildToolsPageData'
 
 
 export async function getStaticProps(){
@@ -470,11 +472,26 @@ export async function getStaticProps(){
     content: ``
   }
 
+  // Migrated to the auto-discovery pattern. cardsData listed 12 group-level
+  // cards; buildToolIndexData walks the folder and emits one card per actual
+  // tool (29), expanding the [view].jsx groups into their individual views.
+  // Each tool declares its own category/subCategory so the hub groups them.
+  const toolsData = await buildToolIndexData('probability/visual-tools')
+
+  // Was the ToolsPageHeader intro block.
+  const intro = {
+    title: "Explore Interactive Probability Tools",
+    description: "Master concepts through hands-on visualization...",
+    tip: "Click any tool below to see its description..."
+  }
+
   return {
     props: {
       sectionsContent,
       introContent,
       cardsData,
+      toolsData,
+      intro,
       faqQuestions,
       schemas,
       seoData: {
@@ -488,7 +505,7 @@ export async function getStaticProps(){
   }
 }
 
-export default function ProbabilityVisualToolsPage({seoData, sectionsContent, introContent, cardsData, faqQuestions, schemas}) {
+export default function ProbabilityVisualToolsPage({seoData, sectionsContent, introContent, cardsData, toolsData, intro, faqQuestions, schemas}) {
 
   const genericSections = [
     {
@@ -574,47 +591,40 @@ export default function ProbabilityVisualToolsPage({seoData, sectionsContent, in
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Visual Tools</h1>
-     <QuickNav items={cardsData} dropdownLabel="All Tools" />
-      <br/>
       <ScrollToTop
       top={'80px'}
       center={true}
- 
+
+      />
+      <VisualToolsPage
+        tools={toolsData}
+        pageTitle="Probability Visual Tools"
+        intro={intro}
+        icon="🎲"
+        dropdownLabel="All Tools"
+        theme="deepBlue"
+        sidebar={true}
+        sidebarBrandName="Probability"
+        sidebarBrandSub="Visual Tools"
       />
       <br/>
-     <ToolsPageHeader 
-  items={cardsData}
-  icon="🔍"
-  intro={{
-    title: "Explore Interactive Probability Tools",
-    description: "Master concepts through hands-on visualization...",
-    tip: "Click any tool below to see its description..."
-  }}
-  onFilteredItemsChange={(filtered) => setDisplayedItems(filtered)}
-/>
+      <br/>
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-      
+      {/* Replaced by VisualToolsPage above (migrated to auto-discovery).
+          The old hand-listed layout is kept here for reference only.
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Visual Tools</h1>
+      <QuickNav items={cardsData} dropdownLabel="All Tools" />
+      <ToolsPageHeader
+        items={cardsData}
+        icon="🔍"
+        intro={{
+          title: "Explore Interactive Probability Tools",
+          description: "Master concepts through hands-on visualization...",
+          tip: "Click any tool below to see its description..."
+        }}
+      />
       <ModernCardsGroup items={cardsData}/>
+      */}
       <br/>
       {/* <SectionTableOfContents sections={genericSections}/> */}
       <br/>

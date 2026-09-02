@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionTangentLine from '../../../../app/components/calculus/visualizers/FunctionTangentLine'
+import functionTangentLineDiagrams from '../../../../app/components/calculus/visualizers/functionTangentLineDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -708,13 +710,137 @@ To classify a critical point, examine the sign change of $f'$ across $c$ or use 
       link: '',
     },
 
-    // obj11–obj15 left for future expansion
-    // obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    // obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    // obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    // obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `Positive Slope: the Tangent Rises`,
+      content: `The Positive slope scenario locks $c = -1.7$, out on the left wing of the cubic. The slope there is $f'(-1.7) = (-1.7)^2 - 1 = 1.89$, a positive number, so the tangent line tilts upward as you read it left to right.
+
+The shaded band covers the interval the scenario is talking about — the stretch left of the local maximum, where the curve is climbing. A tangent drawn at any $c$ inside that band leans the same way, because $f'(x) = x^2 - 1$ stays positive for every $x < -1$.`,
+      before: ``,
+      after: `The general statement behind the picture: **$f'(c) > 0$ means $f$ is increasing at $c$**. The tangent makes that visible, because the sign of the slope of a line is exactly the direction it travels.
+
+Notice how far apart the tangent and the curve drift near the edges of the canvas. The agreement between them is local — they share the point $P$ and the slope at $P$, and nothing beyond that is promised. The cubic bends away; the line cannot.
+
+Reverse the sign and you get the [negative slope](!#negative-slope) case, where the same reasoning runs downhill.`,
+      link: '',
+    },
+
+    obj12: {
+      title: `Negative Slope: the Tangent Falls`,
+      content: `The Negative slope scenario locks $c = 0.4$, inside the middle interval between the two extrema. The slope is $f'(0.4) = 0.4^2 - 1 = -0.84$, a negative number, so the tangent line tilts downward to the right.
+
+The shaded band here runs from $-1$ to $1$ — exactly the interval where $x^2 < 1$, and therefore where $f'(x) = x^2 - 1$ is negative. This is the descending stretch of the cubic, the run from the local maximum down to the local minimum.`,
+      before: ``,
+      after: `The mirror of the previous case: **$f'(c) < 0$ means $f$ is decreasing at $c$**. Nothing about the argument changes except the sign.
+
+The two bands together account for all of the curve&apos;s direction. Outside $[-1, 1]$ the slope is positive and the curve rises; inside, the slope is negative and it falls. The boundaries between those regimes are the two points where the slope passes through zero — the [local maximum](!#local-maximum) and the [local minimum](!#local-minimum).`,
+      link: '',
+    },
+
+    obj13: {
+      title: `Horizontal Tangent at the Local Maximum`,
+      content: `The Local max scenario locks $c = -1$, the left boundary between the rising and falling regions. The slope is $f'(-1) = (-1)^2 - 1 = 0$, so the tangent line is horizontal — perfectly parallel to the x-axis.
+
+Chevron arrows appear along the curve on both sides of $c$. To the left they point uphill, to the right they point downhill. That flip from positive to negative slope across $c$ is the signature of a local maximum, and the flat tangent sits exactly at the turning point.`,
+      before: ``,
+      after: `The direction that always holds is **Fermat&apos;s theorem**: if $f$ has a local extremum at an interior point $c$ and $f'(c)$ exists, then $f'(c) = 0$. A smooth peak forces a horizontal tangent.
+
+The converse fails, which is why the panel calls the flat tangent necessary but not sufficient. A horizontal tangent only says the curve is momentarily flat; $f(x) = x^3$ has one at the origin and no extremum there at all. What certifies the maximum is the sign change of $f'$ — positive before $c$, negative after — and that is precisely what the chevrons draw. The same test applied in the other order classifies the [local minimum](!#local-minimum), and the full procedure is set out under [horizontal tangents and critical points](!#horizontal-tangents-and-critical-points).`,
+      link: '',
+    },
+
+    obj14: {
+      title: `Horizontal Tangent at the Local Minimum`,
+      content: `The Local min scenario locks $c = 1$, the right boundary of the descending interval. Again $f'(1) = 1^2 - 1 = 0$, so the tangent is horizontal.
+
+The chevrons run the other way this time: downhill on the left of $c$, uphill on the right. The slope changes from negative to positive, which is the signature of a local minimum.`,
+      before: ``,
+      after: `Both extrema of this cubic are found the same way: solve $f'(c) = 0$, which for $f'(x) = x^2 - 1$ gives $c = \\pm 1$. Those two values are the complete set of critical points, and the scenarios visit them one each.
+
+Comparing the two flat tangents side by side is the fastest way to see that zero slope by itself carries no verdict. The tangent at $c = -1$ and the tangent at $c = 1$ are both horizontal lines; only the behavior of $f'$ around them tells the peak from the valley.`,
+      link: '',
+    },
+
+    // obj15 left for future expansion
     // obj15: { title: ``, content: ``, before: ``, after: ``, link: '' },
 
+  }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ---- */
+  const stateUnits = {
+    idle: demoUnitFrame({
+      svg: functionTangentLineDiagrams.idle,
+      caption: 'Free drag, frozen at c = -0.5',
+      text: 'No scenario is running - this is the widget at its default point of tangency. ' +
+        'P sits at (-0.5, 0.46) and the slope readout gives f&prime;(-0.5) = -0.75, so the tangent already ' +
+        'leans downhill. Drag c anywhere and this same picture redraws with a new slope.',
+    }),
+    pos: demoUnitFrame({
+      svg: functionTangentLineDiagrams.pos,
+      caption: 'Positive slope, frozen at c = -1.7',
+      text: 'The tangent through P = (-1.7, 0.06) carries slope 1.89. Curve and line both climb to the ' +
+        'right, and inside the shaded band every other tangent would climb as well.',
+    }),
+    neg: demoUnitFrame({
+      svg: functionTangentLineDiagrams.neg,
+      caption: 'Negative slope, frozen at c = 0.4',
+      text: 'The tangent through P = (0.4, -0.38) carries slope -0.84. The band spans (-1, 1), the whole ' +
+        'interval on which the cubic descends from its peak to its valley.',
+    }),
+    max: demoUnitFrame({
+      svg: functionTangentLineDiagrams.max,
+      caption: 'Local maximum, frozen at c = -1',
+      text: 'Slope 0: the tangent is a horizontal line through P = (-1, 0.67), the peak of the curve. ' +
+        'The chevrons point uphill on the left and downhill on the right - the sign change that confirms a maximum.',
+    }),
+    min: demoUnitFrame({
+      svg: functionTangentLineDiagrams.min,
+      caption: 'Local minimum, frozen at c = 1',
+      text: 'Slope 0 again, this time through P = (1, -0.67) at the bottom of the valley. The chevrons ' +
+        'run downhill then uphill - the reversed sign change that confirms a minimum.',
+    }),
+  }
+
+
+  /* ---- panel explanations, hoisted out of the component (Line 1) ----
+     Shape and styling follow FunctionTangentLine's own override contract:
+     meaning.{idle|pos|neg|max|min}.{badge|title|text|notePill|note}, raw HTML
+     (the component renders these through dangerouslySetInnerHTML, so anchors
+     are written as <a href="#slug"> rather than markdown), {c} and {m} are
+     substituted with live values, and var(--sc*) picks up the scenario theme.
+     Anything omitted here keeps the component's built-in default. */
+  const STR = (s) => `<strong style="color:var(--scDeep)">${s}</strong>`
+  const MORE = (slug, label) =>
+    ` <a href="#${slug}" style="color:var(--scDeep);font-weight:600">Learn more about ${label}</a>` +
+    ` &middot; <a href="#the-four-scenarios" style="color:var(--scDeep);font-weight:600">the four scenarios</a>`
+
+  const explanations = {
+    meaning: {
+      idle: {
+        note: `The derivative at a point IS the slope of the tangent there &mdash; that&apos;s the geometric meaning of f&prime;(c).` +
+          MORE('drag-and-scenario-modes', 'dragging c freely'),
+      },
+      pos: {
+        note: `On this f, the wings (|x| &gt; 1) have ${STR('f&prime;(x) = x² − 1 &gt; 0')} &mdash; ` +
+          `the curve is strictly increasing, and every tangent has positive slope.` +
+          MORE('positive-slope', 'positive slope'),
+      },
+      neg: {
+        note: `On the middle interval (−1, 1), ${STR('f&prime;(x) = x² − 1 &lt; 0')}. ` +
+          `The curve falls steadily from the local max down to the local min, and every tangent there has negative slope.` +
+          MORE('negative-slope', 'negative slope'),
+      },
+      max: {
+        note: `A horizontal tangent alone doesn&apos;t prove a maximum &mdash; it only says the curve is momentarily flat. ` +
+          `The ${STR('sign change of f&prime;')} (positive → negative) is what confirms the maximum.` +
+          MORE('local-maximum', 'the horizontal tangent at a maximum'),
+      },
+      min: {
+        note: `Zero slope is necessary but not sufficient. The ${STR('sign change of f&prime;')} ` +
+          `(negative → positive) is what confirms a minimum.` +
+          MORE('local-minimum', 'the horizontal tangent at a minimum'),
+      },
+    },
   }
 
 
@@ -834,6 +960,8 @@ To classify a critical point, examine the sign change of $f'$ across $c$ or use 
    return {
       props:{
          sectionsContent,
+         stateUnits,
+         explanations,
          introContent,
          faqQuestions,
          schemas,
@@ -845,147 +973,50 @@ To classify a critical point, examine the sign change of $f'$ across $c$ or use 
            name: "Tangent Line Visualizer at a Point",
            hubDescription: "Drag point c along the cubic f(x) = (1/3)x^3 - x to see the tangent line drawn through P = (c, f(c)) with slope f'(c). Four pre-built scenarios animate the six analysis steps for positive slopes, negative slopes, local maxima, and local minima, then write the tangent in point-slope form.",
            category: "Calculus",
-           subCategory: "Derivatives"
+           subCategory: "Derivatives",
+           svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="62" x2="76" y2="62" stroke="#B5D4F4" stroke-width="0.9"/><line x1="12" y1="8" x2="12" y2="64" stroke="#B5D4F4" stroke-width="0.9"/><line x1="40" y1="26.96" x2="40" y2="62" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2.5,2"/><path d="M 16 56 Q 43 14 70 14" fill="none" stroke="#85B7EB" stroke-width="1.8"/><line x1="26" y1="39.06" x2="56" y2="13.14" stroke="#FAC775" stroke-width="1.8"/><circle cx="40" cy="26.96" r="3.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="40" y="71" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">a</text></svg>`
          }
        }
     }
    }
 
-export default function TangentLineVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function TangentLineVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // obj11–obj15 slots reserved for future expansion
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    stateRow('obj2', 'drag-and-scenario-modes', 'idle'),
+    plain('obj3', 'the-four-scenarios'),
+    stateRow('obj11', 'positive-slope', 'pos'),
+    stateRow('obj12', 'negative-slope', 'neg'),
+    stateRow('obj13', 'local-maximum', 'max'),
+    stateRow('obj14', 'local-minimum', 'min'),
+    plain('obj4', 'the-six-step-animation'),
+    plain('obj5', 'the-computation-tab'),
+    plain('obj6', 'the-meaning-and-theory-tabs'),
+    plain('obj7', 'what-is-a-tangent-line'),
+    plain('obj8', 'derivative-as-slope'),
+    plain('obj9', 'horizontal-tangents-and-critical-points'),
+    plain('obj10', 'related-concepts'),
+  ]
 
   return (
    <>
@@ -1048,7 +1079,7 @@ export default function TangentLineVisualizer({seoData, sectionsContent, introCo
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Tangent Line</h1>
    <br/>
   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
-   <FunctionTangentLine/>
+   <FunctionTangentLine explanations={explanations}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

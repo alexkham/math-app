@@ -863,6 +863,7 @@ Drag above the x-axis for positive, below for negative.`,
         category: "Angles",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/angle-types",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="34" x2="26" y2="34" stroke="#85B7EB" stroke-width="1.8"/><line x1="10" y1="34" x2="21.31" y2="22.69" stroke="#85B7EB" stroke-width="1.8"/><path d="M 16 34 A 6 6 0 0 0 14.24 29.76" fill="none" stroke="#0C447C" stroke-width="1.1"/><line x1="48" y1="34" x2="64" y2="34" stroke="#97C459" stroke-width="1.8"/><line x1="48" y1="34" x2="48" y2="18" stroke="#97C459" stroke-width="1.8"/><path d="M 54 34 L 54 28 L 48 28" fill="none" stroke="#27500A" stroke-width="1.1"/><line x1="20" y1="70" x2="36" y2="70" stroke="#FAC775" stroke-width="1.8"/><line x1="20" y1="70" x2="8.69" y2="58.69" stroke="#FAC775" stroke-width="1.8"/><path d="M 26 70 A 6 6 0 0 0 15.76 65.76" fill="none" stroke="#854F0B" stroke-width="1.1"/><line x1="40" y1="70" x2="72" y2="70" stroke="#ED93B1" stroke-width="1.8"/><path d="M 62 70 A 6 6 0 0 0 50 70" fill="none" stroke="#72243E" stroke-width="1.1"/><circle cx="56" cy="70" r="2.2" fill="#ED93B1" stroke="#72243E" stroke-width="1"/></svg>`,
         name: "Interactive Angle Types Explorer"
       },
 

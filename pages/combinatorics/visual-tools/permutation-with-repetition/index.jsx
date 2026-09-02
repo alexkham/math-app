@@ -491,6 +491,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PermutationWithRepetition from '../../../../app/components/combinatorics/new-visualizers/scenes/PermutationsWithRepetition'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import permutationsWithRepetitionDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/permutationsWithRepetitionDiagrams'
 
 
 export async function getStaticProps(){
@@ -521,11 +523,11 @@ export async function getStaticProps(){
 
 **$n^r$** — the number of arrangements: $n$ choices for each of $r$ positions, multiplied together. Equivalently, the number of length-$r$ sequences (tuples) over an alphabet of size $n$.
 
-**Unlimited supply** — every item in the source set is available for every position, every time. Using an item in one slot does not remove it from the source.
+**Unlimited supply** — every item in the source set is available for every position, every time. [Using an item does not remove it](!#the-build-area) from the source.
 
 **Position** — a slot in the arrangement, numbered $\\#1$ through $\\#r$ from left to right in the build area.
 
-**First-item group** — the family of arrangements that share the same item in position $\\#1$. There are $n$ such groups, each containing $n^{r - 1}$ arrangements, since the remaining $r - 1$ positions can each be any of $n$ items.
+**First-item group** — the [family of arrangements](!#grouping-by-first-item) that share the same item in position $\\#1$. There are $n$ such groups, each containing $n^{r - 1}$ arrangements, since the remaining $r - 1$ positions can each be any of $n$ items.
 
 **Tuple** — a synonym for an ordered $r$-element sequence with repetition allowed. The output of a Cartesian product of $r$ copies of the source set.`,
       before: ``,
@@ -555,7 +557,9 @@ To run the visualization:
 
 The header shows the formula $n^r = \\text{total}$ alongside a live status line such as *Step X (item name): $k$ / $n^{r-1}$* while building, or *Complete · total / total* when done.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the opening position, and one phrase in it does the heavy lifting: **UNLIMITED SUPPLY**. The source row is not a stock of balls to be spent but a menu to be read from — as many times as there are slots.
+
+That single change of rules is worth an exponent: where drawing without replacement gives shrinking factors $n, n-1, n-2, \\dots$, the menu gives $n$ every time, and the count becomes $n^r$ — the [derivation](!#deriving-n-r) makes it precise.`,
       link: '',
     },
 
@@ -573,9 +577,11 @@ What to watch:
 
 • **The source row never dims.** This is the visual signature of repetition: even after an item is used, every copy of it remains fully bright in the source — because the supply is unlimited and the same item can be picked again for the next slot.
 
-• When all $r$ slots are filled, a **flash ring** briefly pulses around the build area. The completed arrangement is then copied to the appropriate first-item row in the completed section below.`,
+• When all $r$ slots are filled, a **flash ring** briefly pulses around the build area. The completed arrangement is then copied to the appropriate [first-item row](!#grouping-by-first-item) in the completed section below.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above catches the very first arrangement — and it is already a repeat: A sits landed in slot #1 while A flies in **again** toward slot #2, its source ball still fully bright. In the no-repetition tools this exact picture is impossible.
+
+The undimmed source is the entire scenario in one visual rule. Nothing is consumed, so nothing constrains the next pick — each slot is an independent choice from the full menu, which is why the factors in the count [never shrink](!#deriving-n-r).`,
       link: '',
     },
 
@@ -589,17 +595,17 @@ What to watch:
 
 The $r$ caps are:
 
-• $n = 3$: maximum $r = 4$, giving $3^4 = 81$ arrangements.
+• $n = 3$: maximum $r = 4$, giving $3^4 = 81$ arrangements — notably, [more slots than items](!#when-r-exceeds-n).
 
 • $n = 4$: maximum $r = 3$, giving $4^3 = 64$ arrangements.
 
-• $n = 5$: maximum $r = 3$, giving $5^3 = 125$ arrangements.
+• $n = 5$: maximum $r = 3$, giving $5^3 = 125$ arrangements — the [largest run on this page](!#deriving-n-r).
 
 Common combinations:
 
-• $n = 3, r = 2$: $3^2 = 9$ arrangements.
+• $n = 3, r = 2$: $3^2 = 9$ arrangements — the [default configuration](!#grouping-by-first-item).
 
-• $n = 3, r = 3$: $3^3 = 27$ arrangements.
+• $n = 3, r = 3$: $3^3 = 27$ arrangements — worth comparing with the [six repeat-free ones](!#sequences-versus-permutations).
 
 • $n = 4, r = 2$: $4^2 = 16$ arrangements.
 
@@ -617,7 +623,7 @@ There are exactly $n$ groups (one per item in the source) and each group holds e
 
 $$n \\times n^{r - 1} = n^r$$
 
-This is the visual proof of the $n^r$ formula. Pick any item for position $\\#1$: $n$ choices. For each choice, the remaining $r - 1$ positions can each independently be any of $n$ items: $n^{r - 1}$ ways. Multiply.
+This is the visual proof of the [n^r formula](!#deriving-n-r). Pick any item for position $\\#1$: $n$ choices. For each choice, the remaining $r - 1$ positions can each independently be any of $n$ items: $n^{r - 1}$ ways. Multiply.
 
 Each group row in the completed area has:
 
@@ -629,7 +635,9 @@ Each group row in the completed area has:
 
 • Mini arrangement cards, each one a full sequence of $r$ items starting with that first item, possibly including repetitions of that item or any other.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the default $3^2 = 9$ completed: three rows of three. Look at the first card of each row — AA, BA, CA — every group opens with a doubled or mixed pair, and the diagonal cards AA, BB, CC are arrangements no other tool on this site can produce.
+
+Nine also splits cleanly against its no-repetition counterpart: of the $9$ sequences, $6$ are repeat-free (the $P(3, 2)$ pairs) and $3$ are doubles. The gap between $n^r$ and $P(n, r)$ is exactly the arrangements that reuse something.`,
       link: '',
     },
 
@@ -639,7 +647,7 @@ Each group row in the completed area has:
 
 • **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single arrangement or pausing mid-build.
 
-• **Step ▶** (Step forward) — advances one ball into one slot. Stop after each step to read the partial arrangement.
+• **Step ▶** (Step forward) — advances [one ball into one slot](!#the-build-area). Stop after each step to read the partial arrangement.
 
 • **▶ Play / ⏸ Pause** — runs the animation continuously until all $n^r$ arrangements are built, then auto-pauses.
 
@@ -659,7 +667,7 @@ The **Speed** slider controls how fast play advances. At higher speeds the fly a
 
 • **Letters mode** — items appear with letter labels (A, B, C, …). The first-item avatar in each completed group is just the letter, colored to match. Best for reading off the sequence in each arrangement and matching it to algebraic notation like $(A, A, C)$ where repetition is explicit.
 
-The encoding is consistent across the source row, the build slots, the flying ball, every mini card in the completed grid, and the right-panel narration. Switching modes mid-animation is safe — the build state preserves; only the rendering changes.`,
+The encoding is consistent across the source row, the build slots, the flying ball, every mini card in the completed grid, and the [right-panel narration](!#right-panel-and-progress). Switching modes mid-animation is safe — the build state preserves; only the rendering changes.`,
       before: ``,
       after: ``,
       link: '',
@@ -667,9 +675,9 @@ The encoding is consistent across the source row, the build slots, the flying ba
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds, anchored by the header *Permutations with repetition* with the full formula $n^r = n \\times n \\times \\dots = \\text{total}$.
+      content: `The right panel narrates the build as it unfolds, anchored by the header **Permutations with repetition** with the full formula $n^r = n \\times n \\times \\dots = \\text{total}$.
 
-A **StepRow** is added for each first-item group as soon as an arrangement in that group starts building or completes. Each StepRow shows:
+A **StepRow** is added for each [first-item group](!#grouping-by-first-item) as soon as an arrangement in that group starts building or completes. Each StepRow shows:
 
 • The **first item** as a chip plus its name — for instance, *First item: A*.
 
@@ -677,7 +685,7 @@ A **StepRow** is added for each first-item group as soon as an arrangement in th
 
 • A short **narration** of the structure: *Position 1 is locked to A. The remaining $r - 1$ positions are each filled from A, B, or C (repetition allowed) in $n \\times n \\times \\dots = M$ ways.* When $r = 1$ the narration adjusts: with only one position, the outcome is just the first item alone.
 
-When all groups complete, every StepRow shows *done* with a checkmark, and the counter reaches *total / total*.`,
+When all groups complete, every StepRow shows **done** with a checkmark, and the counter reaches *total / total*.`,
       before: ``,
       after: ``,
       link: '',
@@ -701,7 +709,7 @@ Examples:
 
 • Binary strings of length $8$: $2^8 = 256$ strings.
 
-The permutation with repetition is the right model whenever positions are filled independently from a fixed pool and reuse is allowed — codes, passwords, function inputs, multiple rolls of the same die.
+The permutation with repetition is the right model whenever positions are filled independently from a fixed pool and reuse is allowed — codes, passwords, function inputs, multiple rolls of the same die. Note the binary-string example especially: eight slots served by just two symbols, an $r$ four times larger than $n$ — something [no repetition-free model permits](!#when-r-exceeds-n).
 
 For deeper coverage, see the **permutation with repetition** section on the permutations theory page.`,
       before: ``,
@@ -727,17 +735,19 @@ Multiply $r$ identical factors:
 
 $$n \\times n \\times n \\times \\dots \\times n = n^r$$
 
-The tool visualizes the equivalent factoring: fix the first item ($n$ ways), then fill the remaining $r - 1$ slots independently from the same pool ($n^{r-1}$ ways). Every row in the completed section is one of those $n$ first-item families, and within each family the leftover positions explore every possible $r-1$ tuple over the full pool — repetitions of the first item explicitly included.
+The tool visualizes the equivalent factoring: fix the first item ($n$ ways), then fill the remaining $r - 1$ slots independently from the same pool ($n^{r-1}$ ways). Every row in the completed section is one of those $n$ [first-item families](!#grouping-by-first-item), and within each family the leftover positions explore every possible $r-1$ tuple over the full pool — repetitions of the first item explicitly included.
 
 Counts grow geometrically: $3^3 = 27$, $3^4 = 81$, $3^5 = 243$. Doubling $r$ squares the count.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the tool's largest run: $5^3 = 125$ sequences, five rows of twenty-five. Against the $P(5, 3) = 60$ of the no-repetition tool, more than half of these arrangements — $65$ of them — contain at least one reuse.
+
+The exponent is what makes this the fastest-growing count in the permutation family: linear in $n$ for fixed $r$, but exponential in $r$ for fixed $n$. One extra slot multiplies the total by all of $n$, not by a shrinking remainder — which is why codes and passwords get their strength from length, not alphabet.`,
       link: '',
     },
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Partial permutation without repetition** — pick and arrange $r$ items from $n$ distinct items with no reuse. Formula $n! / (n - r)!$, always smaller than $n^r$ for $r > 1$.
+      content: `**Partial permutation without repetition** — pick and arrange $r$ items from $n$ distinct items with no reuse. Formula $n! / (n - r)!$, always smaller than $n^r$ for $r > 1$ — the gap is [the repeated arrangements](!#sequences-versus-permutations).
 
 **Full permutation** — every item used exactly once. Special case of partial permutation with $r = n$, formula $n!$.
 
@@ -758,17 +768,31 @@ Counts grow geometrically: $3^3 = 27$, $3^4 = 81$, $3^5 = 243$. Doubling $r$ squ
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `When r Exceeds n: More Slots Than Items`,
+      content: `Set $n = 3, r = 4$ and something quietly remarkable happens: the build area has **more slots than the source has items**. Without repetition this configuration is impossible — after three landings the pool would be empty with a slot still waiting. With unlimited supply it is routine: $3^4 = 81$ sequences.
+
+The pigeonhole principle adds a guarantee: with four slots and three items, **every one of the 81 arrangements contains at least one repeat**. There is no repeat-free card anywhere in this grid — the $P(3, 4)$ that would count them is $0$.
+
+Run it and watch the scale, too: 81 completions is the longest animation the $n = 3$ setting allows, three rows of twenty-seven cards each.`,
       before: ``,
-      after: ``,
+      after: `The impossibility on the other side is worth stating precisely: the no-repetition formula $n!/(n - r)!$ needs $(n - r)!$, and for $r > n$ the factorial of a negative number does not exist — the algebra refuses exactly where the balls run out.
+
+This is the configuration behind every code and identifier in computing: binary strings ($n = 2$) reach any length only because reuse is free. Whenever $r > n$ appears in a counting problem, repetition is not an option being allowed — it is the only way the problem can exist. See [what is a permutation with repetition](!#what-is-a-permutation-with-repetition) for the real-world catalog.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Sequences versus Permutations: 27 against 6`,
+      content: `Set $n = 3, r = 3$ and the tool builds all $3^3 = 27$ sequences of length three. Hidden inside them is a familiar face: exactly $3! = 6$ of the cards use each item once — they are precisely the [full permutations](!#related-concepts) of the three items.
+
+The other $21$ cards are what repetition adds: $18$ with one item doubled, and $3$ triples ($AAA$, $BBB$, $CCC$). The inclusion is strict and instructive:
+
+$$P(n, r) \\subset \\{\\text{sequences}\\} \\quad\\text{and}\\quad \\frac{P(3,3)}{3^3} = \\frac{6}{27} \\approx 22\\%$$
+
+Barely a fifth of all sequences are repeat-free — and that fraction only falls as $r$ grows.`,
       before: ``,
-      after: ``,
+      after: `The shrinking fraction has a famous name in disguise: the probability that a random sequence is repeat-free is the birthday-problem calculation. For birthdays, $n = 365$ and $r = 23$ people already push the repeat-free share below half — the same arithmetic as counting cards in this grid.
+
+Spotting the six permutation cards inside the 27 is a good exercise with the mode switch set to letters: scan for cards where no letter appears twice. The completed grid makes the subset relation physical — the no-repetition world is a thin slice of the with-repetition one.`,
       link: '',
     },
     obj13: {
@@ -909,12 +933,43 @@ Counts grow geometrically: $3^3 = 27$, $3^4 = 81$, $3^5 = 243$. Doubling $r$ squ
   }
 
 
+  // Frozen-state framed units (Line 1): phases + notable (n, r) configurations.
+  const d = permutationsWithRepetitionDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    idle: u('idle', '(n, r) = (3, 2), idle, frozen',
+      'Three balls under an UNLIMITED SUPPLY banner and two empty slots: a menu to read from, not a stock to spend.'),
+    building: u('building', '(3, 2) mid-build, frozen',
+      'The very first arrangement is a repeat: A sits landed in slot #1 while A flies in again toward #2 — and nothing in the source row dims.'),
+    default32: u('default32', '3² complete, frozen',
+      'Nine sequences in three rows of three, opening with the doubles AA, BB, CC — cards no repetition-free tool can produce.'),
+    cube33: u('cube33', '3³ complete, frozen',
+      'Twenty-seven length-three sequences; hidden among them, exactly six use each item once — the full permutations as a thin subset.'),
+    rExceedsN: u('rExceedsN', '3⁴ complete, frozen',
+      'Four slots served by three items: 81 sequences, every single one containing a repeat — a configuration impossible without reuse.'),
+    big53: u('big53', '5³ complete, frozen',
+      'The largest run: 125 sequences in five rows of twenty-five, of which only 60 are repeat-free — the exponent at work.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the right panel's
+  // step rows through processContent — same-page !# anchors work.
+  const explanations = {
+    idle: `The source row is a menu, not a stock: every item stays available for every slot, and the count is n multiplied by itself r times. [Learn more about getting started](!#getting-started) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    building: `Watch the source row — it never dims. The same item can land twice in a row, which is exactly what separates n^r from the shrinking factorials. [Learn more about the build area](!#the-build-area) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    default32: `All 3² = 9 sequences are in: three rows of three, including the doubles AA, BB, CC that no repetition-free count contains. [Learn more about first-item groups](!#grouping-by-first-item) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    cube33: `Twenty-seven sequences, of which just 3! = 6 are repeat-free: the permutations sit inside the sequences as a shrinking minority. [Learn more about the comparison](!#sequences-versus-permutations) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    rExceedsN: `More slots than items — impossible without repetition, routine with it: 3⁴ = 81, and the pigeonhole principle puts a repeat in every card. [Learn more about r exceeding n](!#when-r-exceeds-n) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    big53: `5³ = 125: one extra slot multiplies by all of n, never by a shrinking remainder — length, not alphabet, is where the growth lives. [Learn more about the derivation](!#deriving-n-r) · [Adjusting n and r](!#adjusting-n-and-r)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Permutation with Repetition: n^r Formula | Learn Math Class",
         description: "Visualize permutations with repetition using the n^r formula. Each of r positions picks independently from n items, with all arrangements built step by step.",
@@ -923,105 +978,49 @@ Counts grow geometrically: $3^3 = 27$, $3^4 = 81$, $3^5 = 243$. Doubling $r$ squ
         name: "Permutation with Repetition Visualizer",
         hubDescription: "Build every n^r arrangement of r positions where each spot can be any of n items — source balls never dim because copies are unlimited. Cycle n and r to compare n^r against n!/(n−r)! and see how reuse multiplies the count.",
         category: "Permutations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="26" y1="20" x2="24" y2="42" stroke="#FAC775" stroke-width="1" stroke-dasharray="2,1.5"/><line x1="26" y1="20" x2="40" y2="42" stroke="#FAC775" stroke-width="1" stroke-dasharray="2,1.5"/><line x1="54" y1="20" x2="56" y2="42" stroke="#B5D4F4" stroke-width="1" stroke-dasharray="2,1.5"/><circle cx="26" cy="14" r="6" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="40" cy="14" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="54" cy="14" r="6" fill="#97C459" stroke="#27500A" stroke-width="1.1"/><rect x="17" y="44" width="15" height="18" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><rect x="33" y="44" width="15" height="18" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><rect x="49" y="44" width="15" height="18" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><circle cx="24.5" cy="53" r="6" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="40.5" cy="53" r="6" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="56.5" cy="53" r="6" fill="#97C459" stroke="#27500A" stroke-width="1.1"/><text x="40" y="75" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">n &#215; n &#215; n</text></svg>`
       },
 
     }
   }
 }
 
-export default function PermutationWithRepetitionVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PermutationWithRepetitionVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
+    plain('obj0', 'key-terms'),
+    stateRow('obj1', 'getting-started', 'idle'),
+    stateRow('obj2', 'the-build-area', 'building'),
+    plain('obj3', 'adjusting-n-and-r'),
+    stateRow('obj4', 'grouping-by-first-item', 'default32'),
+    stateRow('obj12', 'sequences-versus-permutations', 'cube33'),
+    stateRow('obj11', 'when-r-exceeds-n', 'rExceedsN'),
+    plain('obj5', 'transport-controls'),
+    plain('obj6', 'mode-switch'),
+    plain('obj7', 'right-panel-and-progress'),
+    plain('obj8', 'what-is-a-permutation-with-repetition'),
+    stateRow('obj9', 'deriving-n-r', 'big53'),
+    plain('obj10', 'related-concepts'),
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1119,7 +1118,7 @@ export default function PermutationWithRepetitionVisualizer({seoData, sectionsCo
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Permutations with Repetition</h1>
       <br/>
-      <PermutationWithRepetition/>
+      <PermutationWithRepetition explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

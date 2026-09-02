@@ -724,7 +724,8 @@ A good exercise: hunt for the smallest impostor. A composite number always has a
     keywords: keyWords.join(", "),
     url: "/arithmetic/visual-tools/divisibility-tree",
     name: "Divisibility Decision Tree Interactive Tool",
-    category: "Divisibility & Remainders"
+    category: "Divisibility & Remainders",
+    svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="40" y1="23" x2="24" y2="37" stroke="#B5D4F4" stroke-width="1.2"/><line x1="40" y1="23" x2="56" y2="37" stroke="#B5D4F4" stroke-width="1.2"/><line x1="22" y1="52" x2="14" y2="61" stroke="#B5D4F4" stroke-width="1.1"/><line x1="22" y1="52" x2="32" y2="61" stroke="#B5D4F4" stroke-width="1.1"/><circle cx="40" cy="14" r="9" fill="#85B7EB" stroke="#0C447C" stroke-width="1.2"/><text x="40" y="17.5" font-family="Georgia,serif" font-size="8" fill="#042C53" text-anchor="middle">36</text><circle cx="22" cy="44" r="8" fill="#97C459" stroke="#27500A" stroke-width="1.2"/><path d="M18 44 L21 47.5 L26.5 40.5" fill="none" stroke="#173404" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="58" cy="44" r="8" fill="#F4C0D1" stroke="#72243E" stroke-width="1.2"/><line x1="55" y1="41" x2="61" y2="47" stroke="#72243E" stroke-width="1.6" stroke-linecap="round"/><line x1="61" y1="41" x2="55" y2="47" stroke="#72243E" stroke-width="1.6" stroke-linecap="round"/><circle cx="13" cy="66" r="6" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="33" cy="66" r="6" fill="#F4C0D1" stroke="#72243E" stroke-width="1"/><text x="24" y="33" font-family="Georgia,serif" font-size="7" fill="#C0DD97" text-anchor="middle" font-style="italic">÷2</text><text x="58" y="33" font-family="Georgia,serif" font-size="7" fill="#F4C0D1" text-anchor="middle" font-style="italic">÷5</text></svg>`
   }
 
   const schemas = {

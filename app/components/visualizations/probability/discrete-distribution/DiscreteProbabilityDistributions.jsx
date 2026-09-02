@@ -2,7 +2,58 @@ import { useState, useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { processContent } from '@/app/utils/contentProcessor';
 
-export default function DiscreteProbabilityDistributions({ explanationsOverride = {} }) {
+// The eight PMF helpers below were hoisted out of the component body and
+// exported so the page's frozen-state stills are built from the tool's own
+// functions (Line 1). Every one is pure and fully parameterised - none of them
+// referenced component state - so behaviour is unchanged.
+export const factorial = (n) => {
+  if (n <= 1) return 1;
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+};
+
+export const binomialCoeff = (n, k) => {
+  if (k > n) return 0;
+  if (k === 0 || k === n) return 1;
+  
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - i + 1) / i;
+  }
+  return result;
+};
+
+export const discreteUniformPMF = (k, a, b) => {
+  if (k < a || k > b) return 0;
+  return 1 / (b - a + 1);
+};
+
+export const binomialPMF = (k, n, p) => {
+  return binomialCoeff(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+};
+
+export const geometricPMF = (k, p) => {
+  return Math.pow(1 - p, k - 1) * p;
+};
+
+export const negativeBinomialPMF = (k, r, p) => {
+  return binomialCoeff(k - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, k - r);
+};
+
+export const hypergeometricPMF = (k, N, K, n) => {
+  const numerator = binomialCoeff(K, k) * binomialCoeff(N - K, n - k);
+  const denominator = binomialCoeff(N, n);
+  return numerator / denominator;
+};
+
+export const poissonPMF = (k, lambda) => {
+  return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
+};
+
+export default function DiscreteProbabilityDistributions({ explanationsOverride = {}, explanationsAppend = {} }) {
   const [activeDistribution, setActiveDistribution] = useState('discreteUniform');
   
   const [uniformMin, setUniformMin] = useState(1);
@@ -21,53 +72,6 @@ export default function DiscreteProbabilityDistributions({ explanationsOverride 
   const [hyperDraws, setHyperDraws] = useState(10);
   
   const [poissonLambda, setPoissonLambda] = useState(3);
-
-  const factorial = (n) => {
-    if (n <= 1) return 1;
-    let result = 1;
-    for (let i = 2; i <= n; i++) {
-      result *= i;
-    }
-    return result;
-  };
-
-  const binomialCoeff = (n, k) => {
-    if (k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - i + 1) / i;
-    }
-    return result;
-  };
-
-  const discreteUniformPMF = (k, a, b) => {
-    if (k < a || k > b) return 0;
-    return 1 / (b - a + 1);
-  };
-
-  const binomialPMF = (k, n, p) => {
-    return binomialCoeff(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
-  };
-
-  const geometricPMF = (k, p) => {
-    return Math.pow(1 - p, k - 1) * p;
-  };
-
-  const negativeBinomialPMF = (k, r, p) => {
-    return binomialCoeff(k - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, k - r);
-  };
-
-  const hypergeometricPMF = (k, N, K, n) => {
-    const numerator = binomialCoeff(K, k) * binomialCoeff(N - K, n - k);
-    const denominator = binomialCoeff(N, n);
-    return numerator / denominator;
-  };
-
-  const poissonPMF = (k, lambda) => {
-    return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
-  };
 
   const discreteUniformData = useMemo(() => {
     const data = [];
@@ -356,7 +360,12 @@ export default function DiscreteProbabilityDistributions({ explanationsOverride 
 
   const currentDist = distributions[activeDistribution];
   
-  const finalExplanation = explanationsOverride[activeDistribution] || currentDist.explanation;
+  // `explanationsOverride` REPLACES the built-in text; `explanationsAppend` adds
+  // to it, so a caller can attach a link without discarding the tool's own
+  // explanation (Line 1)
+  const finalExplanation =
+    (explanationsOverride[activeDistribution] || currentDist.explanation) +
+    (explanationsAppend[activeDistribution] || '');
 
   return (
     <div className="container">

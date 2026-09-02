@@ -11,6 +11,7 @@ import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1311,26 +1312,32 @@ This page introduces the mode as a measure that identifies the value (or values)
 `
 }
 
+// FAQ pass: all five originals named their own h2 — Definition and Concept,
+// Mode Mean and Median Compared, Multiple Modes (Modality), How to Find the
+// Mode, Properties of the Mode. Note the median page keeps its multiple-
+// medians question because its heading reads only "Special Cases and Edge
+// Cases"; here "Multiple Modes (Modality)" names it outright, so it goes.
+// Replaced with the arg max distinction and the degenerate-peak case.
 const faqQuestions = {
   obj1: {
-    question: "What is the mode in probability?",
-    answer: "The mode is the value where a probability distribution reaches its maximum. For discrete distributions, it's the value with the highest probability. For continuous distributions, it's the point where the probability density function peaks."
+    question: "What is the difference between max and arg max?",
+    answer: "max f returns how high the peak is; arg max f returns where it stands. The mode is the second kind of answer — a location on the x-axis, not a height on the y-axis. The two agree in neither units nor meaning, and the “arg” prefix is the only mark separating them.",
+    sectionId: "11"
   },
   obj2: {
-    question: "How is mode different from mean and median?",
-    answer: "The mode identifies the peak location (most likely value), the mean represents the weighted balance point, and the median splits probability in half. In symmetric distributions all three are equal, but in skewed distributions they separate with the mode typically at the peak, median in the middle, and mean pulled toward the tail."
+    question: "Does a uniform distribution have a mode?",
+    answer: "Not a useful one. Every value ties for the highest probability, so the set-valued answer becomes the entire support — a distribution with no peak rather than one with many peaks. Those two failures of uniqueness differ: a shared peak returns a usable set of modes, an absent peak does not. Treating uniform data as having modes flattens the distinction.",
+    sectionId: "11"
   },
   obj3: {
-    question: "Can a distribution have multiple modes?",
-    answer: "Yes. Unimodal distributions have one peak, bimodal have two, and multimodal have several. Some distributions like uniform have no unique mode since all values share equal probability. When a parameter creates a tie between adjacent values, both become modes."
+    question: "What does M_o mean, and why the subscript?",
+    answer: "M_o is one of the letter spellings for the mode, and the subscript “o” is doing necessary work: M alone is already busy as a maximum, a bound, a moment cap or a matrix. Only the subscript — and often only the surrounding sentence — identifies it as the mode. A hat marks the sample version against the distribution's own.",
+    sectionId: "11"
   },
   obj4: {
-    question: "How do you find the mode of a distribution?",
-    answer: "For discrete distributions, evaluate the PMF at each value and identify the maximum. For continuous distributions, take the derivative of the PDF, solve for critical points, verify with the second derivative, and check boundary values. Many standard distributions have known mode formulas."
-  },
-  obj5: {
-    question: "Why is the mode important in probability?",
-    answer: "The mode reveals where probability concentrates most heavily, showing the distribution's peak location. It's robust to outliers, works for categorical data where mean and median fail, and helps identify multimodal structures indicating mixed populations or complex underlying processes."
+    question: "What is a MAP estimate?",
+    answer: "The mode of a posterior distribution. MAP stands for maximum a posteriori: once [Bayes' theorem](!/probability/bayes-theorem#notation) produces a posterior over a parameter, the MAP estimate is the parameter value where that posterior peaks. It is arg max applied to a posterior rather than to a density, so one notation serves both a descriptive statistic and an estimation principle.",
+    sectionId: "11"
   }
 }
 
@@ -1397,19 +1404,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/probability/mode"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1597,6 +1591,22 @@ export default function ModePage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Mode FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1630,13 +1640,6 @@ export default function ModePage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -600,6 +600,7 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
         category: "Functions",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/functions-signs",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="12" width="28" height="28" fill="#C0DD97" fill-opacity="0.35"/><rect x="12" y="12" width="28" height="28" fill="#B5D4F4" fill-opacity="0.35"/><rect x="12" y="40" width="28" height="28" fill="#FAC775" fill-opacity="0.35"/><rect x="40" y="40" width="28" height="28" fill="#F4C0D1" fill-opacity="0.35"/><circle cx="40" cy="40" r="26" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><line x1="10" y1="40" x2="70" y2="40" stroke="#185FA5" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="70" stroke="#185FA5" stroke-width="1"/><text x="53" y="31" font-family="Georgia,serif" font-size="13" fill="#173404" text-anchor="middle">A</text><text x="27" y="31" font-family="Georgia,serif" font-size="13" fill="#042C53" text-anchor="middle">S</text><text x="27" y="59" font-family="Georgia,serif" font-size="13" fill="#412402" text-anchor="middle">T</text><text x="53" y="59" font-family="Georgia,serif" font-size="13" fill="#4B1528" text-anchor="middle">C</text></svg>`,
         name: "Interactive Trigonometric Functions Signs by Quadrants"
       },
 

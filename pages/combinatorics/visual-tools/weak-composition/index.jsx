@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import WeakComposition from '../../../../app/components/combinatorics/new-visualizers/scenes/WeakComposition'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import weakCompositionDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/weakCompositionDiagrams'
 
 
 export async function getStaticProps(){
@@ -557,7 +559,9 @@ To run the visualization:
 
 The header shows the formula $C(n + k - 1, k - 1) = \\text{total}$ alongside a live status line like *$x_1 = j$: $k$ / size*.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the opening position, and it reverses this section's usual casting: the **items** sit still — four identical red balls already in the strip — while the **bars** wait in the holding row above. The moving parts of a weak composition are the dividers, not the things being divided.
+
+That inversion is the whole stars-and-bars insight in staging form: identical items carry no information, so all the choice lives in where the separators go. The bracket labels below the strip wait as question marks until the [bars land](!#the-strip-and-bars).`,
       link: '',
     },
 
@@ -577,9 +581,11 @@ The header shows the formula $C(n + k - 1, k - 1) = \\text{total}$ alongside a l
 
 • **Empty bins** appear as dashed mini-rectangles in the bracket row, indicating that no cells lie between adjacent bars.
 
-When all $k - 1$ bars are placed, a **flash ring** pulses around the strip and the composition is filed in the completed grid below.`,
+When all $k - 1$ bars are placed, a **flash ring** pulses around the strip and the composition is filed in the [completed grid below](!#grouping-by-first-bin-count).`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above catches the second composition mid-build: the first bar has landed at cell 1, pinning $x_1 = 0$ — an empty first bin, marked by the dashed mini-rectangle in the bracket row — while the second bar rides its guide toward cell 3. The readout has hardened to $(0, 1, ?)$.
+
+Watch what each landing **decides**: a bar fixes the bin to its left, forever. That left-to-right hardening is why the tool can group results by $x_1$ the moment the first bar lands — the [stars-and-bars encoding](!#the-stars-and-bars-argument) reads off prefix by prefix.`,
       link: '',
     },
 
@@ -593,17 +599,17 @@ When all $k - 1$ bars are placed, a **flash ring** pulses around the strip and t
 
 Common combinations:
 
-• $n = 3, k = 2$: $\\binom{4}{1} = 4$ compositions.
+• $n = 3, k = 2$: $\\binom{4}{1} = 4$ compositions — [one bar, four doors](!#the-stars-and-bars-argument).
 
 • $n = 3, k = 3$: $\\binom{5}{2} = 10$ compositions.
 
-• $n = 4, k = 3$: $\\binom{6}{2} = 15$ compositions.
+• $n = 4, k = 3$: $\\binom{6}{2} = 15$ compositions — the [default configuration](!#grouping-by-first-bin-count).
 
 • $n = 4, k = 4$: $\\binom{7}{3} = 35$ compositions.
 
 • $n = 5, k = 3$: $\\binom{7}{2} = 21$ compositions.
 
-• $n = 5, k = 4$: $\\binom{8}{3} = 56$ compositions.
+• $n = 5, k = 4$: $\\binom{8}{3} = 56$ compositions — the [largest run on this page](!#three-bars-fifty-six-ways).
 
 Reducing $n$ does not constrain $k$ in this scenario, since even $n = 0$ gives valid weak compositions (all $x_i = 0$). Changing either value resets the build, refreshes the formula in the header, and rebuilds the completed section into a new set of $x_1$-rows.`,
       before: ``,
@@ -631,9 +637,11 @@ For example with $n = 4, k = 3$:
 
 • $x_1 = 4$: distribute 0 items into 2 bins. $\\binom{1}{1} = 1$ composition.
 
-Total: $5 + 4 + 3 + 2 + 1 = 15 = \\binom{6}{2}$. The decomposition is a visual proof of the hockey-stick identity $\\sum_{j=0}^{n} \\binom{n - j + k - 2}{k - 2} = \\binom{n + k - 1}{k - 1}$.`,
+Total: $5 + 4 + 3 + 2 + 1 = 15 = \\binom{6}{2}$. The decomposition is a visual proof of the [hockey-stick identity](!#related-concepts) $\\sum_{j=0}^{n} \\binom{n - j + k - 2}{k - 2} = \\binom{n + k - 1}{k - 1}$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is that decomposition completed: fifteen strip cards in five rows of $5, 4, 3, 2, 1$ — a perfect countdown, because each extra item claimed by the first bin removes exactly one option from the leftover problem.
+
+The triangular row profile is this scenario's fingerprint, as distinctive as the combination tool's staircase or the distribution tool's flat rows. One glance at how a completed grid's rows shrink tells you which counting regime produced it.`,
       link: '',
     },
 
@@ -643,7 +651,7 @@ Total: $5 + 4 + 3 + 2 + 1 = 15 = \\binom{6}{2}$. The decomposition is a visual p
 
 • **◀** (Step back) — walks the animation one step backward.
 
-• **Step ▶** (Step forward) — drops one bar into its cell. Stop after each step to read the partial composition; cells without bars yet show $?$ in their brackets.
+• **Step ▶** (Step forward) — drops one bar into [its cell](!#the-strip-and-bars). Stop after each step to read the partial composition; cells without bars yet show $?$ in their brackets.
 
 • **▶ Play / ⏸ Pause** — runs continuously until all $\\binom{n + k - 1}{k - 1}$ weak compositions are built, then auto-pauses.
 
@@ -663,7 +671,7 @@ The **Speed** slider controls how fast play advances. At slower speeds you can c
 
 • **Letters mode** — items appear as the letter A. Same identicality applies — every item shows the same letter in the same color. Best when reading compositions algebraically and emphasizing that the items are interchangeable.
 
-The encoding is consistent across the strip, the mini cards in the completed grid, and the right-panel narration. Bars are unaffected — they always render as the same accent-colored vertical bars regardless of mode.`,
+The encoding is consistent across the strip, the mini cards in the completed grid, and the [right-panel narration](!#right-panel-and-progress). Bars are unaffected — they always render as the same accent-colored vertical bars regardless of mode.`,
       before: ``,
       after: ``,
       link: '',
@@ -673,15 +681,15 @@ The encoding is consistent across the strip, the mini cards in the completed gri
       title: `Right Panel and Progress`,
       content: `The right panel narrates the build as it unfolds, anchored by the header *Weak compositions (stars and bars)* with the full formula across multiple lines and a reminder that this counts non-negative integer solutions to $x_1 + x_2 + \\dots + x_k = n$.
 
-A **StepRow** is added for each $x_1$-group as soon as a composition in that group starts or completes. Each StepRow shows:
+A **StepRow** is added for each [x₁-group](!#grouping-by-first-bin-count) as soon as a composition in that group starts or completes. Each StepRow shows:
 
 • The **first bin count** as a label — *First bin: $x_1 = j$*.
 
 • A **progress counter** $k / \\binom{n - j + k - 2}{k - 2}$ tracking how many compositions in this group have completed.
 
-• A short **narration** of the structure: *When the first bin holds $j$ items ($x_1 = j$), the remaining $n - j$ items are split among the other $k - 1$ bins, giving $\\binom{n - j + k - 2}{k - 2}$ outcomes.* Edge cases get tailored phrasing: $x_1 = 0$ uses *the first bin is empty*; $x_1 = n$ uses *all items go to the first bin* with the others empty.
+• A short **narration** of the structure: *When the first bin holds $j$ items ($x_1 = j$), the remaining $n - j$ items are split among the other $k - 1$ bins, giving $\\binom{n - j + k - 2}{k - 2}$ outcomes.* Edge cases get tailored phrasing: $x_1 = 0$ uses **the first bin is empty**; $x_1 = n$ uses **all items go to the first bin** with the others empty.
 
-When all groups complete, every StepRow shows *done* with a checkmark, and the counter reaches *total / total*.`,
+When all groups complete, every StepRow shows **done** with a checkmark, and the counter reaches *total / total*.`,
       before: ``,
       after: ``,
       link: '',
@@ -693,7 +701,7 @@ When all groups complete, every StepRow shows *done* with a checkmark, and the c
 
 $$x_1 + x_2 + \\dots + x_k = n, \\quad x_i \\geq 0$$
 
-The word *weak* distinguishes this from a **strong** composition, which requires every $x_i \\geq 1$. Weak compositions allow zero parts, so the first bin (or any bin) is permitted to be empty.
+The word **weak** distinguishes this from a **strong** composition, which requires every $x_i \\geq 1$. Weak compositions allow zero parts, so the first bin (or any bin) is permitted to be empty.
 
 The count of weak compositions is:
 
@@ -708,6 +716,8 @@ Examples:
 • Choosing $5$ scoops of ice cream from $6$ flavors with repetition allowed (a flavor may be skipped): $\\binom{10}{5} = 252$ choices.
 
 • Distributing $n$ identical items into $k$ labeled boxes with no capacity limit: the canonical setup.
+
+On this page the idea runs live: from the [opening strip](!#getting-started), bars drop into [numbered cells](!#the-strip-and-bars) to carve the bins, results group into the [triangular x₁ rows](!#grouping-by-first-bin-count), and the [n and k steppers](!#adjusting-n-and-k) scale the count from four compositions up to [fifty-six](!#three-bars-fifty-six-ways).
 
 For deeper coverage of weak compositions and their connections, see the **weak composition** section on the combinations theory page.`,
       before: ``,
@@ -731,7 +741,9 @@ This is the visual setup the tool implements. Each completed strip has $n$ items
 
 The dual reading $\\binom{n + k - 1}{n}$ — choose the $n$ star positions instead of the bars — gives the same count by complementary counting.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above shows the argument at its barest: $k = 2$ bins means a single bar, and the five completed cards are simply the five cells that one bar can occupy among $n + 1 = 5$. "Choose the bar positions" stops being a metaphor — you can point at each choice.
+
+With one bar the binomial collapses to $\\binom{5}{1} = 5$, and the composition tuple is just $(j, n - j)$ — the bar's cell number decides everything. Every richer configuration is this picture with [more bars to seat](!#three-bars-fifty-six-ways).`,
       link: '',
     },
 
@@ -747,9 +759,9 @@ The dual reading $\\binom{n + k - 1}{n}$ — choose the $n$ star positions inste
 
 **Partition into groups** — distributes $n$ distinct items into $k$ labeled boxes of fixed sizes. Multinomial coefficient $n! / (n_1! \\cdots n_k!)$.
 
-**Multiset coefficient** $\\binom{\\binom{k}{n}}{}$ — equivalent notation for the weak composition count, emphasizing that the outcome is a size-$n$ multiset over a $k$-element ground set.
+**Multiset coefficient** — the doubled-parenthesis notation $\\left(\\!\\!\\binom{k}{n}\\!\\!\\right)$ for the weak composition count, emphasizing that the outcome is a size-$n$ multiset over a $k$-element ground set.
 
-**Hockey-stick identity** — the grouping by $x_1$ proves $\\sum_{j=0}^{n} \\binom{n - j + k - 2}{k - 2} = \\binom{n + k - 1}{k - 1}$.
+**Hockey-stick identity** — the [grouping by x₁](!#grouping-by-first-bin-count) proves $\\sum_{j=0}^{n} \\binom{n - j + k - 2}{k - 2} = \\binom{n + k - 1}{k - 1}$.
 
 **Combinatorics calculator** — to compute $\\binom{n + k - 1}{k - 1}$ for any $n$ and $k$, see the **weak composition calculator**.`,
       before: ``,
@@ -757,7 +769,19 @@ The dual reading $\\binom{n + k - 1}{n}$ — choose the $n$ star positions inste
       link: '',
     },
 
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `Three Bars, Fifty-Six Ways`,
+      content: `The tool's largest setting: $n = 5$ items, $k = 4$ bins, so three bars land among $5 + 4 - 1 = 8$ cells — $\\binom{8}{3} = 56$ weak compositions.
+
+Fifty-six cards spread across six $x_1$-rows of sizes $21, 15, 10, 6, 3, 1$ — the triangular numbers, marching down as the first bin absorbs more items. Each row is itself a complete run of the smaller problem "distribute the remainder into three bins."
+
+At this scale the strip encoding shows its efficiency: every one of the 56 outcomes is a distinct picture of eight cells, yet the whole enumeration is just *choose 3 cells from 8* — a selection the combination tool could count without drawing a single strip.`,
+      before: ``,
+      after: `The row sizes deserve their name: $21, 15, 10, 6, 3, 1$ are consecutive triangular numbers, because each is itself a sum of the next row of counts — the hockey-stick identity stacked twice. Weak-composition counts are Pascal's triangle read along diagonals, and this grid is that diagonal drawn as cards.
+
+Fifty-six is also where the identical-items assumption pays its dividend: the same five items distributed as **distinct** objects into four cells would give $4^5 = 1024$ outcomes. Forgetting who's who collapses a thousand cases into fifty-six — see [related concepts](!#related-concepts) for that comparison.`,
+      link: '',
+    },
     obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
@@ -879,12 +903,40 @@ The dual reading $\\binom{n + k - 1}{n}$ — choose the $n$ star positions inste
   }
 
 
+  // Frozen-state framed units (Line 1): phases + notable (n, k) configurations.
+  const d = weakCompositionDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    idle: u('idle', '(n, k) = (4, 3), idle, frozen',
+      'Four identical balls already seated in the strip; two bars waiting above. The items sit still — all the choice belongs to the dividers.'),
+    building: u('building', '(4, 3) mid-build, frozen',
+      'The first bar landed at cell 1, sealing an empty first bin (x₁ = 0); the second rides its guide toward cell 3. The readout reads (0, 1, ?).'),
+    default43: u('default43', 'C(6, 2) complete, frozen',
+      'Fifteen strips in rows of 5, 4, 3, 2, 1 — a perfect countdown, one option lost for each item the first bin claims.'),
+    twoBins: u('twoBins', 'C(5, 1) complete, frozen',
+      'One bar, five cells, five cards: with two bins, "choose the bar positions" stops being a metaphor and becomes pointable.'),
+    big54: u('big54', 'C(8, 3) complete, frozen',
+      'Three bars among eight cells: 56 compositions in triangular rows of 21, 15, 10, 6, 3, 1 — Pascal’s diagonal drawn as cards.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the right panel's
+  // step rows through processContent — same-page !# anchors work.
+  const explanations = {
+    idle: `The items are identical, so they carry no information — the bars do. Placing k − 1 dividers among n + k − 1 cells is the whole problem. [Learn more about getting started](!#getting-started) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    building: `Each landing bar seals the bin to its left forever — the composition hardens left to right, question mark by question mark. [Learn more about the strip](!#the-strip-and-bars) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    default43: `All C(6, 2) = 15 compositions are in, in rows of 5, 4, 3, 2, 1 by the first bin's count — the hockey-stick identity as a countdown. [Learn more about the grouping](!#grouping-by-first-bin-count) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    twoBins: `With one bar the argument is at its purest: five cells, choose one, five compositions — and the tuple is just (j, n − j). [Learn more about stars and bars](!#the-stars-and-bars-argument) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    big54: `Three bars among eight cells give C(8, 3) = 56 — where the same five items as distinct objects would give 4⁵ = 1024. [Learn more about the largest run](!#three-bars-fifty-six-ways) · [Adjusting n and k](!#adjusting-n-and-k)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Weak Composition: Stars and Bars Formula | Learn Math Class",
         description: "Visualize weak compositions of n identical items into k bins via stars and bars. Choose k−1 bar positions among n+k−1 cells to count C(n+k−1, k−1) outcomes.",
@@ -893,105 +945,48 @@ The dual reading $\\binom{n + k - 1}{n}$ — choose the $n$ star positions inste
         name: "Weak Composition Visualizer",
         hubDescription: "Drop k−1 bars into a strip of n+k−1 cells to split n identical items into k bins — empty bins allowed. The stars-and-bars encoding makes C(n+k−1, k−1) visible directly, with live bin brackets, a composition tuple readout, and bar-position readout updating as the bars land.",
         category: "Combinations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><text x="40" y="16" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">C(n+k&#8722;1, k&#8722;1)</text><rect x="5" y="30" width="10" height="16" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="0.9"/><rect x="15" y="30" width="10" height="16" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="0.9"/><rect x="25" y="30" width="10" height="16" fill="#FAC775" fill-opacity="0.3" stroke="#B5D4F4" stroke-width="0.9"/><rect x="35" y="30" width="10" height="16" fill="#FAC775" fill-opacity="0.3" stroke="#B5D4F4" stroke-width="0.9"/><rect x="45" y="30" width="10" height="16" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="0.9"/><rect x="55" y="30" width="10" height="16" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="0.9"/><rect x="65" y="30" width="10" height="16" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="0.9"/><circle cx="10" cy="38" r="3.5" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.9"/><circle cx="20" cy="38" r="3.5" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.9"/><circle cx="50" cy="38" r="3.5" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.9"/><circle cx="60" cy="38" r="3.5" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.9"/><circle cx="70" cy="38" r="3.5" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.9"/><line x1="30" y1="32" x2="30" y2="44" stroke="#FAC775" stroke-width="2.6" stroke-linecap="round"/><line x1="40" y1="32" x2="40" y2="44" stroke="#FAC775" stroke-width="2.6" stroke-linecap="round"/><path d="M5 50 L5 55 L25 55 L25 50" fill="none" stroke="#97C459" stroke-width="1.2"/><path d="M33 50 L33 55 L37 55 L37 50" fill="none" stroke="#EF9F27" stroke-width="1.2"/><path d="M45 50 L45 55 L75 55 L75 50" fill="none" stroke="#97C459" stroke-width="1.2"/><text x="15" y="68" font-family="Georgia,serif" font-size="8" fill="#C0DD97" text-anchor="middle">2</text><text x="35" y="68" font-family="Georgia,serif" font-size="8" fill="#FAC775" text-anchor="middle">0</text><text x="60" y="68" font-family="Georgia,serif" font-size="8" fill="#C0DD97" text-anchor="middle">3</text></svg>`
       },
 
     }
   }
 }
 
-export default function WeakCompositionVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function WeakCompositionVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
+    plain('obj0', 'key-terms'),
+    stateRow('obj1', 'getting-started', 'idle'),
+    stateRow('obj2', 'the-strip-and-bars', 'building'),
+    plain('obj3', 'adjusting-n-and-k'),
+    stateRow('obj4', 'grouping-by-first-bin-count', 'default43'),
+    stateRow('obj11', 'three-bars-fifty-six-ways', 'big54'),
+    plain('obj5', 'transport-controls'),
+    plain('obj6', 'mode-switch'),
+    plain('obj7', 'right-panel-and-progress'),
+    plain('obj8', 'what-is-a-weak-composition'),
+    stateRow('obj9', 'the-stars-and-bars-argument', 'twoBins'),
+    plain('obj10', 'related-concepts'),
 
   ]
 
@@ -1049,7 +1044,7 @@ export default function WeakCompositionVisualizer({seoData, sectionsContent, int
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Weak Composition</h1>
       <br/>
-      <WeakComposition/>
+      <WeakComposition explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

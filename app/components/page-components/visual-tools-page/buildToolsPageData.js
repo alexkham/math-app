@@ -137,58 +137,62 @@ function ensureLeadingSlash(p) {
    FIELD EXTRACTION (block of code containing seoData / viewConfig)
    ================================================================ */
 
+// Every pattern below captures the OPENING quote as group 1 and backreferences
+// it to close, so the value may contain the other two quote characters. A plain
+// [^"'`] class ends the match at the apostrophe in "Pascal's Triangle" or
+// "De Morgan's laws" and silently truncates the field. Value is group 2.
 function extractFields(block) {
   const result = {};
 
   // title (prefer seoData.title)
   const seoTitle = block.match(
-    /(?:seoData|seo)\s*[:{]\s*[^}]*?title\s*:\s*["'`]([^"'`]{5,200})["'`]/s
+    /(?:seoData|seo)\s*[:{]\s*[^}]*?title\s*:\s*(["'`])((?:(?!\1)[\s\S]){5,200})\1/s
   );
-  if (seoTitle) result.title = cleanTitle(seoTitle[1]);
+  if (seoTitle) result.title = cleanTitle(seoTitle[2]);
   if (!result.title) {
-    const t = block.match(/(?:^|\W)title\s*:\s*["'`]([^"'`]{5,200})["'`]/);
-    if (t) result.title = cleanTitle(t[1]);
+    const t = block.match(/(?:^|\W)title\s*:\s*(["'`])((?:(?!\1)[\s\S]){5,200})\1/);
+    if (t) result.title = cleanTitle(t[2]);
   }
 
-  const desc = block.match(/(?:^|\W)description\s*:\s*["'`]([^"'`]{10,500})["'`]/);
-  if (desc) result.description = desc[1];
+  const desc = block.match(/(?:^|\W)description\s*:\s*(["'`])((?:(?!\1)[\s\S]){10,500})\1/);
+  if (desc) result.description = desc[2];
 
-  const hub = block.match(/hubDescription\s*:\s*["'`]([^"'`]{10,2000})["'`]/);
-  if (hub) result.hubDescription = hub[1];
+  const hub = block.match(/hubDescription\s*:\s*(["'`])((?:(?!\1)[\s\S]){10,2000})\1/);
+  if (hub) result.hubDescription = hub[2];
 
-  const name = block.match(/(?:^|\W)name\s*:\s*["'`]([^"'`]{3,150})["'`]/);
-  if (name) result.name = name[1];
+  const name = block.match(/(?:^|\W)name\s*:\s*(["'`])((?:(?!\1)[\s\S]){3,150})\1/);
+  if (name) result.name = name[2];
 
-  const url = block.match(/(?:^|\W)url\s*:\s*["'`](\/[^"'`]{1,200})["'`]/);
-  if (url) result.url = url[1];
+  const url = block.match(/(?:^|\W)url\s*:\s*(["'`])(\/(?:(?!\1)[\s\S]){1,200})\1/);
+  if (url) result.url = url[2];
 
-  const img = block.match(/(?:^|\W)image\s*:\s*["'`]([^"'`]{3,300})["'`]/);
-  if (img) result.image = img[1];
+  const img = block.match(/(?:^|\W)image\s*:\s*(["'`])((?:(?!\1)[\s\S]){3,300})\1/);
+  if (img) result.image = img[2];
 
-  const imgAlt = block.match(/imageAlt\s*:\s*["'`]([^"'`]{3,200})["'`]/);
-  if (imgAlt) result.imageAlt = imgAlt[1];
+  const imgAlt = block.match(/imageAlt\s*:\s*(["'`])((?:(?!\1)[\s\S]){3,200})\1/);
+  if (imgAlt) result.imageAlt = imgAlt[2];
 
-  const svg = block.match(/(?:^|\W)svg\s*:\s*["'`](<svg[\s\S]*?<\/svg>)["'`]/);
-  if (svg) result.svg = svg[1];
+  const svg = block.match(/(?:^|\W)svg\s*:\s*(["'`])(<svg[\s\S]*?<\/svg>)\1/);
+  if (svg) result.svg = svg[2];
 
-  const icon = block.match(/(?:^|\W)icon\s*:\s*["'`]([^"'`]{1,80})["'`]/);
-  if (icon) result.icon = icon[1];
+  const icon = block.match(/(?:^|\W)icon\s*:\s*(["'`])((?:(?!\1)[\s\S]){1,80})\1/);
+  if (icon) result.icon = icon[2];
 
-  const formula = block.match(/(?:^|\W)formula\s*:\s*["'`]([^"'`]{1,200})["'`]/);
-  if (formula) result.formula = formula[1];
+  const formula = block.match(/(?:^|\W)formula\s*:\s*(["'`])((?:(?!\1)[\s\S]){1,200})\1/);
+  if (formula) result.formula = formula[2];
 
-  const label = block.match(/(?:^|\W)label\s*:\s*["'`]([^"'`]{1,80})["'`]/);
-  if (label) result.label = label[1];
+  const label = block.match(/(?:^|\W)label\s*:\s*(["'`])((?:(?!\1)[\s\S]){1,80})\1/);
+  if (label) result.label = label[2];
 
   // Taxonomy fields
-  const category = block.match(/(?:^|\W)category\s*:\s*["'`]([^"'`]{1,120})["'`]/);
-  if (category) result.category = category[1];
+  const category = block.match(/(?:^|\W)category\s*:\s*(["'`])((?:(?!\1)[\s\S]){1,120})\1/);
+  if (category) result.category = category[2];
 
-  const subCategory = block.match(/(?:^|\W)subCategory\s*:\s*["'`]([^"'`]{1,120})["'`]/);
-  if (subCategory) result.subCategory = subCategory[1];
+  const subCategory = block.match(/(?:^|\W)subCategory\s*:\s*(["'`])((?:(?!\1)[\s\S]){1,120})\1/);
+  if (subCategory) result.subCategory = subCategory[2];
 
-  const cardVariant = block.match(/(?:^|\W)cardVariant\s*:\s*["'`]([^"'`]{1,20})["'`]/);
-  if (cardVariant) result.cardVariant = cardVariant[1];
+  const cardVariant = block.match(/(?:^|\W)cardVariant\s*:\s*(["'`])((?:(?!\1)[\s\S]){1,20})\1/);
+  if (cardVariant) result.cardVariant = cardVariant[2];
 
   return result;
 }

@@ -14,7 +14,7 @@ import StaticCards from '@/app/components/cards/static-cards/StaticCards'
 // Surfaced on the /probability hub via buildSectionData extraction
 // (card icon + description). Do not use apostrophes in comments here.
 const hubMeta = {
-  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="72" x2="104" y2="72" stroke="#1565c0" stroke-width="2"/><line x1="16" y1="72" x2="16" y2="12" stroke="#1565c0" stroke-width="2"/><path d="M 16 70 H 32 V 58 H 48 V 42 H 64 V 28 H 80 V 18 H 100" stroke="#3498db" stroke-width="2.5" fill="none"/><circle cx="32" cy="58" r="3" fill="#3498db"/><circle cx="48" cy="42" r="3" fill="#3498db"/><circle cx="64" cy="28" r="3" fill="#3498db"/><circle cx="80" cy="18" r="3" fill="#3498db"/></svg>`,
+  svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="16" x2="74" y2="16" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="3,2.5"/><path d="M 14 58 H 26 V 46 H 38 V 32 H 50 V 20 H 62 V 16 H 72" fill="none" stroke="#85B7EB" stroke-width="2"/><path d="M 14 59 C 26 58, 30 26, 44 20 C 56 16.8, 64 16, 72 16" fill="none" stroke="#97C459" stroke-width="1.9"/><line x1="14" y1="10" x2="14" y2="66" stroke="#B5D4F4" stroke-width="1"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="8" y="18" font-family="Georgia,serif" font-size="7" fill="#B5D4F4" text-anchor="middle">1</text></svg>`,
 }
 
 export async function getStaticProps(){
@@ -260,6 +260,8 @@ Explore both discrete and continuous probability distributions through specializ
         description: "Visualize cumulative distribution functions for discrete and continuous distributions. Interactive tools with parameter controls and real-time updates.",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools/cdf",
+        category: "Probability Functions & CDF",
+        hubDescription: "Understand cumulative distribution functions through interactive charts for discrete (Binomial, Poisson, Geometric) and continuous distributions (Normal, Exponential, Uniform). Adjust parameters to see how probability accumulates across different distributions with real-time CDF visualizations.",
         name: "Cumulative Distribution Function Visualizers"
       },
     }

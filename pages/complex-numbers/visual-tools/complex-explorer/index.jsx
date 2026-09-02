@@ -308,6 +308,9 @@ Sign-wise the quadrant mirrors [Quadrant II](!#quadrant-ii-upper-left): one part
     description: "Interactive complex plane visualizer. Drag points to explore real parts, imaginary parts, modulus, and conjugates with instant calculations and explanations.",
     keywords: keyWords.join(", "),
     url: "/complex-numbers/visual-tools/complex-explorer",
+    hubDescription: "Visualize complex numbers on an interactive Argand plane. Drag points or enter coordinates to see real parts, imaginary parts, modulus, and conjugates. Watch the right triangle form as you explore different quadrants with real-time calculations and explanations.",
+    category: "Plane & Representation",
+    svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="46" x2="74" y2="46" stroke="#B5D4F4" stroke-width="0.9"/><line x1="34" y1="10" x2="34" y2="72" stroke="#B5D4F4" stroke-width="0.9"/><path d="M 34 46 L 60 46 L 60 22 Z" fill="#B5D4F4" fill-opacity="0.25"/><line x1="34" y1="46" x2="60" y2="46" stroke="#85B7EB" stroke-width="2.2"/><line x1="60" y1="46" x2="60" y2="22" stroke="#97C459" stroke-width="2.2"/><line x1="34" y1="46" x2="60" y2="22" stroke="#FAC775" stroke-width="1.8"/><path d="M 55 46 L 55 41 L 60 41" fill="none" stroke="#B5D4F4" stroke-width="0.9"/><circle cx="60" cy="22" r="3.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="47" y="54" font-family="Georgia,serif" font-size="7" fill="#85B7EB" text-anchor="middle" font-style="italic">a</text><text x="67" y="36" font-family="Georgia,serif" font-size="7" fill="#C0DD97" text-anchor="middle" font-style="italic">b</text><text x="42" y="31" font-family="Georgia,serif" font-size="6.5" fill="#FAC775" text-anchor="middle" font-style="italic">|z|</text></svg>`,
     name: "Complex Number Explorer"
   }
 

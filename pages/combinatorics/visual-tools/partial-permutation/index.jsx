@@ -582,7 +582,7 @@ What to watch:
       before: ``,
       after: `The frozen frame above catches the third arrangement mid-build: B has claimed slot #1, A is dropping into #2 along its dotted guide, and both are dimmed above. Green C stays bright — available, but about to be left out of this particular pair.
 
-The stop-after-r discipline is what separates this build from the full permutation's: when slot #2 fills, the arrangement is *finished*, with a bright ball still sitting unused in the source row. That permanent leftover is the $(n - r)!$ that [the formula divides away](!#deriving-p-n-r-step-by-step).`,
+The stop-after-r discipline is what separates this build from the full permutation's: when slot #2 fills, the arrangement is **finished**, with a bright ball still sitting unused in the source row. That permanent leftover is the $(n - r)!$ that [the formula divides away](!#deriving-p-n-r-step-by-step).`,
       link: '',
     },
 
@@ -672,7 +672,7 @@ The encoding is consistent across the source row, the build slots, the flying ba
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds, anchored by the header *Building partial permutations* with the full formula $P(n, r) = n! / (n - r)! = n \\times (n - 1) \\times \\dots = \\text{total}$.
+      content: `The right panel narrates the build as it unfolds, anchored by the header **Building partial permutations** with the full formula $P(n, r) = n! / (n - r)! = n \\times (n - 1) \\times \\dots = \\text{total}$.
 
 A **StepRow** is added for each [first-item group](!#grouping-by-first-item) as soon as a partial permutation in that group either starts building or completes. Each StepRow shows:
 
@@ -682,7 +682,7 @@ A **StepRow** is added for each [first-item group](!#grouping-by-first-item) as 
 
 • A short **narration** of the structure: *Position 1 is locked to A. The next $r - 1$ positions are filled from B, C, D, or E in $(n - 1) \\times (n - 2) \\times \\dots = M$ ways.* When $r = 1$ the narration adjusts: with only one position, the outcome is just the first item alone.
 
-When all groups complete, every StepRow shows *done* with a checkmark, and the header counter reaches $\\text{total} / \\text{total}$.`,
+When all groups complete, every StepRow shows **done** with a checkmark, and the header counter reaches $\\text{total} / \\text{total}$.`,
       before: ``,
       after: ``,
       link: '',
@@ -694,7 +694,7 @@ When all groups complete, every StepRow shows *done* with a checkmark, and the h
 
 $$P(n, r) = \\frac{n!}{(n - r)!} = n \\times (n - 1) \\times \\dots \\times (n - r + 1)$$
 
-The formula collapses to $n!$ when $r = n$ — the full permutation. When $r < n$, the multiplication stops after $r$ factors instead of continuing all the way down to $1$.
+The formula collapses to $n!$ [when r = n](!#when-r-equals-n) — the full permutation. When $r < n$, the multiplication stops after $r$ factors instead of continuing all the way down to $1$.
 
 Examples:
 
@@ -704,7 +704,7 @@ Examples:
 
 • Forming a $4$-digit code from $10$ digits with no repeats: $P(10, 4) = 5040$ codes.
 
-The partial permutation is the right model whenever you need both *which* items and *what order* — and reuse is not allowed.
+The partial permutation is the right model whenever you need both **which** items and **what order** — and reuse is not allowed.
 
 For deeper coverage of the formula and its derivation, see the **partial permutation without repetition** section on the permutations theory page.`,
       before: ``,
@@ -732,15 +732,17 @@ $$P(n, r) = n \\times (n - 1) \\times (n - 2) \\times \\dots \\times (n - r + 1)
 
 This product equals $n! / (n - r)!$ because the $r$ factors are exactly the top $r$ terms of $n!$, with the bottom $n - r$ terms canceled by the $(n - r)!$ in the denominator.
 
-The tool visualizes the equivalent factoring: fix the first item ($n$ ways), then arrange $r - 1$ of the remaining $n - 1$ items in order ($(n - 1)!/(n - r)!$ ways). Every row in the completed section is one of those $n$ first-item families.`,
+The tool visualizes the equivalent factoring: fix the first item ($n$ ways), then arrange $r - 1$ of the remaining $n - 1$ items in order ($(n - 1)!/(n - r)!$ ways). Every row in the completed section is one of those $n$ [first-item families](!#grouping-by-first-item).`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the derivation at full stretch: $P(5, 3) = 5 \\times 4 \\times 3 = 60$ ordered triples, five rows of twelve. The chain runs exactly three factors and stops — the factors $2 \\times 1$ that a full permutation would keep multiplying belong to the two leftover items and never enter the count.
+
+Sixty is also where enumeration starts arguing for the formula: every card is on screen, but nobody would list them by hand. One stepper click to $r = 4$ would give $120$, and $r = 5$ the same $120$ again — a curious plateau explained at [the r = n boundary](!#when-r-equals-n).`,
       link: '',
     },
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Full permutation** — the case $r = n$, where every item from the source set is used. Formula $P(n, n) = n!$.
+      content: `**Full permutation** — the case [r = n](!#when-r-equals-n), where every item from the source set is used. Formula $P(n, n) = n!$.
 
 **Permutation with repetition** — relaxes the no-reuse rule, allowing the same item in multiple positions. Formula $n^r$, which is larger than $P(n, r)$.
 
@@ -750,7 +752,7 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
 
 **Combination** — the unordered companion of the partial permutation. Drops the order requirement, so $C(n, r) = P(n, r) / r!$.
 
-**Multiplication principle** — the foundational counting rule that produces $P(n, r)$ as the product of choices at each successive position.
+**Multiplication principle** — the [foundational counting rule](!#deriving-p-n-r-step-by-step) that produces $P(n, r)$ as the product of choices at each successive position.
 
 **Combinatorics calculator** — to compute $P(n, r)$ for arbitrary values of $n$ and $r$, see the **partial permutation calculator**.`,
       before: ``,
@@ -759,17 +761,35 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `When r = n: The Full Permutation Limit`,
+      content: `Push $r$ all the way up to $n$ and the partial permutation stops being partial: every item from the source row is used, nothing is left out, and the tool momentarily becomes a full permutation visualizer.
+
+The formula agrees gracefully. With $r = n$ the denominator is $(n - n)! = 0!$, and by the convention $0! = 1$:
+
+$$P(n, n) = \\frac{n!}{0!} = n!$$
+
+This is where the otherwise odd-looking convention earns its keep — without $0! = 1$, the boundary case would break a formula that works everywhere else.
+
+Set $n = 4, r = 4$ and run: $24$ cards fill four rows of six, exactly the $4!$ enumeration, built with the same fix-the-first-item structure.`,
       before: ``,
-      after: ``,
+      after: `Boundary cases like this are how counting formulas are sanity-checked: a good formula degrades into a known one when its parameters hit their extremes. Here the extreme also explains the plateau noted under [the derivation](!#deriving-p-n-r-step-by-step): $P(5, 4) = P(5, 5) = 120$, because once only one item remains, its "placement" is forced — a last factor of $1$ that changes nothing.
+
+The opposite boundary tells the complementary story: see [r = 1](!#when-r-is-one), where the arrangement collapses into a bare choice.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `When r = 1: A Single Choice`,
+      content: `Push $r$ down to $1$ and the arrangement disappears: one slot, one landing, done. The count is as small as it gets:
+
+$$P(n, 1) = \\frac{n!}{(n - 1)!} = n$$
+
+Set $n = 4, r = 1$ and run: four cards, one per item, each first-item group holding exactly one arrangement — a group structure where every family is a family of one.
+
+With a single position, "order matters" has nothing to bite on. That is why $P(n, 1)$ coincides with the combination count $C(n, 1) = n$: choosing one item and arranging one item are the same act.`,
       before: ``,
-      after: ``,
+      after: `The case is also the base of the recursion the whole tool enacts: $P(n, r) = n \\cdot P(n - 1, r - 1)$, falling step by step until it lands on $P(n - r + 1, 1) = n - r + 1$ — the last factor of the multiplication chain.
+
+The agreement between permutations and combinations at $r = 1$ is worth remembering when the two are later divided: the gap between $P(n, r)$ and $C(n, r)$ is a factor of $r!$, which equals $1$ here and grows with every extra slot — see the combination entry under [related concepts](!#related-concepts).`,
       link: '',
     },
     obj13: {
@@ -910,12 +930,43 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
   }
 
 
+  // Frozen-state framed units (Line 1): phases + notable (n, r) configurations.
+  const d = partialPermutationDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    idle: u('idle', '(n, r) = (3, 2), idle, frozen',
+      'Three source balls and only two slots: the build area is deliberately shorter than the source row — the defining picture of a partial permutation.'),
+    building: u('building', '(3, 2) mid-build, frozen',
+      'The third arrangement begins: B has claimed slot #1, A is dropping into #2 — while C stays bright, available but about to be left out.'),
+    default32: u('default32', 'P(3, 2) complete, frozen',
+      'Six ordered pairs in three rows of two: each first choice leaves two ways to fill the one remaining slot — 3 × 2 = 6.'),
+    rEqualsN: u('rEqualsN', 'P(4, 4) complete, frozen',
+      'With r = n the build uses every item: 24 cards in four rows of six — the full permutation 4! recovered as a boundary case.'),
+    rOne: u('rOne', 'P(4, 1) complete, frozen',
+      'One slot, four outcomes: with r = 1 each "arrangement" is just a choice, and every group row holds a single card.'),
+    big53: u('big53', 'P(5, 3) complete, frozen',
+      'Sixty ordered triples in five rows of twelve: the product 5 × 4 × 3 drawn to scale, stopping after exactly three factors.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the right panel's
+  // step rows through processContent — same-page !# anchors work.
+  const explanations = {
+    idle: `Fewer slots than source balls — that gap is the scenario: choose r of the n items and put them in order. [Learn more about getting started](!#getting-started) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    building: `One ordered selection is being built: used items dim, the dotted guide shows the landing, and the build stops after r slots — leaving the rest behind. [Learn more about the build area](!#the-build-area) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    default32: `All P(3, 2) = 6 ordered pairs are in: three first-item rows of two — the factoring n × (n−1)!/(n−r)! in miniature. [Learn more about first-item groups](!#grouping-by-first-item) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    rEqualsN: `With r = n nothing is left out: the count becomes n!, and the tool momentarily turns into the full permutation visualizer. [Learn more about the r = n limit](!#when-r-equals-n) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    rOne: `With r = 1 order has nothing to bite on: P(n, 1) = n, one outcome per item — a count of choices, not arrangements. [Learn more about the r = 1 case](!#when-r-is-one) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    big53: `P(5, 3) = 5 × 4 × 3 = 60: the multiplication chain stops after r factors, and that truncation is the whole formula. [Learn more about the derivation](!#deriving-p-n-r-step-by-step) · [Adjusting n and r](!#adjusting-n-and-r)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Partial Permutation Visualizer: P(n,r) | Learn Math Class",
         description: "Visualize partial permutations P(n,r) = n!/(n-r)!. Watch every ordered selection of r items from n build step by step, grouped by first item to expose the structure.",
@@ -924,105 +975,49 @@ The tool visualizes the equivalent factoring: fix the first item ($n$ ways), the
         name: "Partial Permutation Visualizer",
         hubDescription: "Pick r items from n and arrange them in order, one ball at a time. Each partial permutation is grouped by its first item — making the n × (n−1) × … × (n−r+1) structure of P(n,r) visible at a glance.",
         category: "Permutations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="5.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="26" cy="12" r="5.5" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="1"/><circle cx="40" cy="12" r="5.5" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="54" cy="12" r="5.5" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="1"/><circle cx="68" cy="12" r="5.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><text x="24.5" y="38" font-family="Georgia,serif" font-size="6.5" fill="#B5D4F4" text-anchor="middle">1</text><text x="40.5" y="38" font-family="Georgia,serif" font-size="6.5" fill="#B5D4F4" text-anchor="middle">2</text><text x="56.5" y="38" font-family="Georgia,serif" font-size="6.5" fill="#B5D4F4" text-anchor="middle">3</text><rect x="17" y="42" width="15" height="18" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><rect x="33" y="42" width="15" height="18" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><rect x="49" y="42" width="15" height="18" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><circle cx="24.5" cy="51" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="40.5" cy="51" r="6" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="56.5" cy="51" r="6" fill="#97C459" stroke="#27500A" stroke-width="1"/><text x="40" y="74" font-family="Georgia,serif" font-size="9" fill="#E6F1FB" text-anchor="middle" font-style="italic">P(5, 3)</text></svg>`
       },
 
     }
   }
 }
 
-export default function PartialPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PartialPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
+    plain('obj0', 'key-terms'),
+    stateRow('obj1', 'getting-started', 'idle'),
+    stateRow('obj2', 'the-build-area', 'building'),
+    plain('obj3', 'adjusting-n-and-r'),
+    stateRow('obj4', 'grouping-by-first-item', 'default32'),
+    stateRow('obj11', 'when-r-equals-n', 'rEqualsN'),
+    stateRow('obj12', 'when-r-is-one', 'rOne'),
+    plain('obj5', 'transport-controls'),
+    plain('obj6', 'mode-switch'),
+    plain('obj7', 'right-panel-and-progress'),
+    plain('obj8', 'what-is-a-partial-permutation'),
+    stateRow('obj9', 'deriving-p-n-r-step-by-step', 'big53'),
+    plain('obj10', 'related-concepts'),
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1120,7 +1115,7 @@ export default function PartialPermutationVisualizer({seoData, sectionsContent, 
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Partial Permutations</h1>
       <br/>
-      <PartialPermutation/>
+      <PartialPermutation explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

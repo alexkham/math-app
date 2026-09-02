@@ -374,6 +374,9 @@ And if you want to see what happens when you apply this operation repeatedly to 
         description: "Visualize complex multiplication with draggable vectors. See FOIL steps, polar angle addition, rotation and scaling, and special cases like i² = −1 in real time.",
         keywords: keyWords.join(", "),
         url: "/complex-numbers/visual-tools/multiplication",
+        hubDescription: "See complex multiplication as rotation and scaling. Drag two points and watch the product vector update — moduli multiply, angles add. Follow both the FOIL algebraic method and the geometric polar method side by side.",
+        category: "Arithmetic",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="48" x2="74" y2="48" stroke="#B5D4F4" stroke-width="0.9"/><line x1="34" y1="12" x2="34" y2="66" stroke="#B5D4F4" stroke-width="0.9"/><line x1="34" y1="48" x2="48.5" y2="41.24" stroke="#85B7EB" stroke-width="1.9"/><line x1="34" y1="48" x2="44.72" y2="39" stroke="#97C459" stroke-width="1.9"/><line x1="34" y1="48" x2="44.99" y2="24.44" stroke="#FAC775" stroke-width="2.3"/><path d="M 42 48 A 8 8 0 0 0 41.25 44.62" fill="none" stroke="#85B7EB" stroke-width="1.2"/><path d="M 43.97 43.35 A 11 11 0 0 0 38.65 38.03" fill="none" stroke="#97C459" stroke-width="1.2"/><circle cx="48.5" cy="41.24" r="2.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="44.72" cy="39" r="2.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="44.99" cy="24.44" r="3.4" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="40" y="72" font-family="Georgia,serif" font-size="7.5" fill="#C0DD97" text-anchor="middle" font-style="italic">&#952;&#8321; + &#952;&#8322;</text></svg>`,
          name: "Complex Multiplication Visualizer"
       },
         

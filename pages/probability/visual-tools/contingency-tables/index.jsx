@@ -15,12 +15,15 @@ import ConditionalProbabilityTable3x3 from '@/app/components/probability/conditi
 import explanations2x3 from '@/app/components/probability/conditional-probability-demo/2x3explanations'
 import explanations2x4 from '@/app/components/probability/conditional-probability-demo/2x4explanations'
 import explanations3x3 from '@/app/components/probability/conditional-probability-demo/3x3explanations'
+import explanations2x2 from '@/app/components/probability/conditional-probability-demo/2x2explanations'
+import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
 // (card icon + description). Do not use apostrophes in comments here.
 const hubMeta = {
-  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="14" width="64" height="60" rx="3" fill="#fff" stroke="#1565c0" stroke-width="2"/><rect x="28" y="14" width="64" height="16" rx="3" fill="#b8d4f0" stroke="#1565c0" stroke-width="2"/><line x1="28" y1="52" x2="92" y2="52" stroke="#1565c0" stroke-width="1.5"/><line x1="49" y1="14" x2="49" y2="74" stroke="#1565c0" stroke-width="1.5"/><line x1="70" y1="14" x2="70" y2="74" stroke="#1565c0" stroke-width="1.5"/></svg>`,
+  svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="18" width="18" height="14" fill="#85B7EB" fill-opacity="0.45" stroke="#185FA5" stroke-width="0.9"/><rect x="32" y="18" width="18" height="14" fill="#85B7EB" fill-opacity="0.45" stroke="#185FA5" stroke-width="0.9"/><rect x="50" y="18" width="18" height="14" fill="#C0DD97" fill-opacity="0.55" stroke="#3B6D11" stroke-width="1"/><rect x="14" y="32" width="18" height="14" fill="#85B7EB" fill-opacity="0.45" stroke="#185FA5" stroke-width="0.9"/><rect x="32" y="32" width="18" height="14" fill="#85B7EB" fill-opacity="0.45" stroke="#185FA5" stroke-width="0.9"/><rect x="50" y="32" width="18" height="14" fill="#C0DD97" fill-opacity="0.55" stroke="#3B6D11" stroke-width="1"/><rect x="14" y="46" width="18" height="14" fill="#C0DD97" fill-opacity="0.55" stroke="#3B6D11" stroke-width="1"/><rect x="32" y="46" width="18" height="14" fill="#C0DD97" fill-opacity="0.55" stroke="#3B6D11" stroke-width="1"/><rect x="50" y="46" width="18" height="14" fill="#FAC775" fill-opacity="0.9" stroke="#854F0B" stroke-width="1.3"/><text x="59" y="56" font-family="Georgia,serif" font-size="7" fill="#412402" text-anchor="middle">1.0</text><text x="40" y="72" font-family="Georgia,serif" font-size="6.5" fill="#C0DD97" text-anchor="middle" font-style="italic">joint &#183; marginal</text></svg>`,
 }
 
 export async function getStaticProps(){
@@ -418,6 +421,53 @@ For complete coverage of Bayesian reasoning, see the [Bayes theorem](!/probabili
     link: '',
   },
 
+  obj11: {
+    title: `The 2×2 Table: Two Events and Their Complements`,
+    content: `The default view crosses one event $A$ against one event $B$, giving four joint probabilities. With the tool's parameters — $P(A) = 0.6$, $P(B \mid A) = 0.7$, $P(B \mid A^c) = 0.3$ — the body reads
+
+$P(A \cap B) = 0.42$, $P(A \cap B^c) = 0.18$, $P(A^c \cap B) = 0.12$, $P(A^c \cap B^c) = 0.28$
+
+and the four cells sum to 1, as the frozen table's grand total confirms.`,
+    before: ``,
+    after: `The margins are where the table earns its name. Summing a row gives $P(A) = 0.6$ and $P(A^c) = 0.4$; summing a column gives $P(B) = 0.54$ and $P(B^c) = 0.46$. Those column totals are the law of total probability computed by addition rather than by formula.
+
+Conditioning is division by a margin. $P(B \mid A) = 0.42 / 0.6 = 0.7$ recovers the input, while $P(A \mid B) = 0.42 / 0.54 \approx 0.78$ does not equal it — the clearest demonstration on the page that $P(B \mid A)$ and $P(A \mid B)$ are different questions about the same cell.`,
+    link: '',
+  },
+  obj12: {
+    title: `The 2×3 Table: One Event Against Three Outcomes`,
+    content: `Widening the second variable to three mutually exclusive outcomes gives six joint cells. The tool uses $P(A) = 0.6$ with conditionals $0.5$, $0.3$ and the remainder $0.2$ across $B_1, B_2, B_3$, and $0.3$, $0.4$, $0.3$ in the $A^c$ row.
+
+Column totals come out $0.42$, $0.34$ and $0.24$, and the six cells still sum to 1.`,
+    before: ``,
+    after: `Nothing structural changes when a variable gains outcomes. Each row is still a conditional distribution summing to 1, each column total is still a marginal, and each cell is still a row probability times a conditional.
+
+What does change is that $B$ is no longer a yes/no question, so $B^c$ stops being a single column. The complement of $B_1$ is now $B_2 \cup B_3$, and reading it off means adding two columns rather than looking one up — which is exactly the step that trips people moving from the 2×2 case.`,
+    link: '',
+  },
+  obj13: {
+    title: `The 2×4 Table: Four Outcomes`,
+    content: `A fourth outcome column extends the same pattern to eight cells. The conditionals in the $A$ row are $0.3$, $0.25$, $0.25$ and the remaining $0.2$; the $A^c$ row runs $0.2$, $0.35$, $0.25$, $0.2$.
+
+Column totals are $0.26$, $0.29$, $0.25$ and $0.20$ — and again the grid sums to 1.`,
+    before: ``,
+    after: `This shape is worth seeing because the arithmetic stops being memorable. With four columns the marginals have to be computed rather than eyeballed, which is the point at which a table earns its keep over mental arithmetic.
+
+It also shows the growth pattern. An $r \times c$ table holds $rc$ joint probabilities but only $r + c$ marginals, and the joint values cannot be recovered from the marginals alone — knowing $P(A)$ and $P(B_2)$ tells you nothing about $P(A \cap B_2)$ unless the variables happen to be independent.`,
+    link: '',
+  },
+  obj14: {
+    title: `The 3×3 Table: Both Variables Partitioned`,
+    content: `The last shape partitions **both** variables into three, giving nine joint cells. The tool uses $P(A_1) = 0.3$, $P(A_2) = 0.4$ and the remaining $P(A_3) = 0.3$, with a row of conditionals for each.
+
+Row totals are $0.30$, $0.40$, $0.30$; column totals $0.34$, $0.35$, $0.30$; grand total 1.`,
+    before: ``,
+    after: `With neither variable binary, complements lose their special status entirely — there is no $A^c$ column to point at, only "the other two rows". That is the general case, and the 2×2 table is best understood as its smallest instance rather than as the basic form.
+
+This shape is also where independence becomes a real question rather than a check of one number. Two variables are independent when **every** cell equals its row total times its column total; here that is nine conditions, and failing any one of them is enough to make the variables dependent.`,
+    link: '',
+  },
+
 }
 
 
@@ -535,6 +585,8 @@ For complete coverage of Bayesian reasoning, see the [Bayes theorem](!/probabili
         description: "Explore joint, marginal, and conditional probabilities with interactive contingency tables. Visualize 2×2, 2×3, 2×4, and 3×3 probability tables with highlighting.",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools/contingency-tables",
+        category: "Conditional Probability",
+        hubDescription: "Interactive contingency tables for visualizing joint, marginal, and conditional probabilities. Click cells and conditional rows to highlight relationships and see how Bayes' theorem connects different probability perspectives. Available in 2×2, 2×3, 2×4, and 3×3 configurations with detailed explanations for each state.",
         name: "Interactive Contingency Tables Visualizer"
       },
     }
@@ -574,10 +626,49 @@ export default function ContingencyTablesVisualToolsPage({seoData, sectionsConte
     }
   ]
 
+  // Line 1 anchor mesh: the 2x2 map is new (this table had none), and every
+  // entry of all four maps gains a link to that table's section, so the reader
+  // can reach it whichever cell happens to be selected.
+  const SECTION_FOR_TABLE = {
+    'table2x2': ['the-2x2-table', 'the 2\u00D72 table'],
+    'table2x3': ['the-2x3-table', 'the 2\u00D73 table'],
+    'table2x4': ['the-2x4-table', 'the 2\u00D74 table'],
+    'table3x3': ['the-3x3-table', 'the 3\u00D73 table'],
+  }
+  const withAnchor = (map, key) => {
+    const [slug, label] = SECTION_FOR_TABLE[key]
+    const tail =
+      `<br/><a href="#${slug}" style="color:#1d4ed8;font-weight:600">Learn more about ${label}</a>` +
+      ` &middot; <a href="#comparing-table-sizes" style="color:#1d4ed8;font-weight:600">comparing all four</a>`
+    return Object.fromEntries(Object.entries(map).map(([k, v]) => [k, `${v}${tail}`]))
+  }
+
   const tableExplanations = {
-    'table2x3': explanations2x3,
-    'table2x4': explanations2x4,
-    'table3x3': explanations3x3
+    'table2x2': withAnchor(explanations2x2, 'table2x2'),
+    'table2x3': withAnchor(explanations2x3, 'table2x3'),
+    'table2x4': withAnchor(explanations2x4, 'table2x4'),
+    'table3x3': withAnchor(explanations3x3, 'table3x3'),
+  }
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The four table components render HTML tables, so contingencyTableDiagrams.js
+     ports the grid to SVG - joint body, marginal row and column, grand total -
+     using each component's own declared parameters. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: contingencyTableDiagrams[key], caption, text })
+
+  const stateUnits = {
+    '2x2': unit('2x2', '2\u00D72 table, frozen',
+      'Four joint probabilities summing to 1, with P(A) = 0.6 and P(A\u1D9C) = 0.4 down the right ' +
+      'margin and P(B) = 0.54, P(B\u1D9C) = 0.46 along the bottom.'),
+    '2x3': unit('2x3', '2\u00D73 table, frozen',
+      'Six cells. The B column totals read 0.42, 0.34, 0.24 - and the complement of B\u2081 is now ' +
+      'two columns rather than one.'),
+    '2x4': unit('2x4', '2\u00D74 table, frozen',
+      'Eight cells with column totals 0.26, 0.29, 0.25, 0.20. Wide enough that the marginals have to ' +
+      'be computed rather than eyeballed.'),
+    '3x3': unit('3x3', '3\u00D73 table, frozen',
+      'Nine cells with both variables partitioned three ways. Row totals 0.30, 0.40, 0.30; column ' +
+      'totals 0.34, 0.35, 0.30; grand total 1.'),
   }
 
 //   const genericSections = Object.keys(sectionsContent).map((key, index) => ({
@@ -587,67 +678,39 @@ export default function ContingencyTablesVisualToolsPage({seoData, sectionsConte
 //     content: [sectionsContent[key].content]
 //   }))
 
+const plain = (obj, id, title) => ({
+  id,
+  title,
+  link: '',
+  content: [ sectionsContent[obj].content ],
+})
+
+const stateRow = (obj, id, title, unitKey) => ({
+  id,
+  title,
+  link: '',
+  content: [
+    sectionsContent[obj].content,
+    <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+  ],
+})
+
+// this array previously carried hardcoded titles and numeric ids
 const genericSections = [
-  {
-    id: '1',
-    title: 'Getting Started with Contingency Tables',
-    link: '',
-    content: sectionsContent.obj1.content
-  },
-  {
-    id: '2',
-    title: 'Using the 2×2 Interactive Table',
-    link: '',
-    content: sectionsContent.obj2.content
-  },
-  {
-    id: '3',
-    title: 'Reading the Joint Probability Table',
-    link: '',
-    content: sectionsContent.obj3.content
-  },
-  {
-    id: '4',
-    title: 'Understanding Marginal Probabilities',
-    link: '',
-    content: sectionsContent.obj4.content
-  },
-  {
-    id: '5',
-    title: 'Exploring Conditional Probability Panels',
-    link: '',
-    content: sectionsContent.obj5.content
-  },
-  {
-    id: '6',
-    title: 'Comparing Different Table Sizes',
-    link: '',
-    content: sectionsContent.obj6.content
-  },
-  {
-    id: '7',
-    title: 'What is a Contingency Table?',
-    link: '',
-    content: sectionsContent.obj7.content
-  },
-  {
-    id: '8',
-    title: 'Joint, Marginal, and Conditional Probabilities',
-    link: '',
-    content: sectionsContent.obj8.content
-  },
-  {
-    id: '9',
-    title: 'Connection to Bayes\' Theorem',
-    link: '',
-    content: sectionsContent.obj9.content
-  },
-  {
-    id: '10',
-    title: 'Related Tools and Concepts',
-    link: '',
-    content: sectionsContent.obj10.content
-  }
+  plain('obj1', 'getting-started', 'Getting Started with Contingency Tables'),
+  plain('obj2', 'using-the-2x2-table', 'Using the 2\u00D72 Interactive Table'),
+  plain('obj3', 'reading-the-joint-table', 'Reading the Joint Probability Table'),
+  plain('obj4', 'marginal-probabilities', 'Understanding Marginal Probabilities'),
+  plain('obj5', 'conditional-probability-panels', 'Exploring Conditional Probability Panels'),
+  plain('obj6', 'comparing-table-sizes', 'Comparing Different Table Sizes'),
+  stateRow('obj11', 'the-2x2-table', 'The 2\u00D72 Table: Two Events and Their Complements', '2x2'),
+  stateRow('obj12', 'the-2x3-table', 'The 2\u00D73 Table: One Event Against Three Outcomes', '2x3'),
+  stateRow('obj13', 'the-2x4-table', 'The 2\u00D74 Table: Four Outcomes', '2x4'),
+  stateRow('obj14', 'the-3x3-table', 'The 3\u00D73 Table: Both Variables Partitioned', '3x3'),
+  plain('obj7', 'what-is-a-contingency-table', 'What is a Contingency Table?'),
+  plain('obj8', 'joint-marginal-conditional', 'Joint, Marginal, and Conditional Probabilities'),
+  plain('obj9', 'connection-to-bayes', "Connection to Bayes' Theorem"),
+  plain('obj10', 'related-tools-and-concepts', 'Related Tools and Concepts'),
 ]
 
   return (

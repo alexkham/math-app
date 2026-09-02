@@ -235,10 +235,10 @@ This page explores tautologies comprehensively, examining their properties, rela
     tautology_equivalence:{
       title:'Tautology vs Equivalence',
       content:`## Are all equivalences tautologies?
-            As the definition of [equivalence](!/logic/propositional-logic/semantics/equivalences) states, two propositions $𝐴$ and $𝐵$ are logically equivalent if they always have the same truth value in every possible scenario. This means that their truth tables are identical. This is a **bilateral relationship** meaning both expressions evaluate to **true** together or **false** together in all cases. It does not matter if they are true or false, the key here is that they are **the same (equal)**.
+            As the definition of [equivalence](!/logic/propositional-logic/semantics/equivalences) states, two propositions $A$ and $B$ are logically equivalent if they always have the same truth value in every possible scenario. This means that their truth tables are identical. This is a **bilateral relationship** meaning both expressions evaluate to **true** together or **false** together in all cases. It does not matter if they are true or false, the key here is that they are **the same (equal)**.
 **Example**:
 
-\t\t\t\t\t\t$(𝑃→𝑄)≡(¬𝑃∨𝑄)$
+\t\t\t\t\t\t$(P→Q)≡(¬P∨Q)$
 
 (Material implication rewritten in disjunctive form.)
 As long as the equivalence is valid -the overall bilateral expression as a whole evaluates to true and falls under [definition](!/logic/propositional-logic/semantics/tautology#definition) of tautology.
@@ -308,7 +308,7 @@ This means that the set of all logical equivalences is a subset of the set of al
            **Examples**:
            **De Morgan’s Laws**:
 
-\t\t\t\t\t\t$¬(𝑃∨𝑄)≡(¬𝑃∧¬𝑄)$
+\t\t\t\t\t\t$¬(P∨Q)≡(¬P∧¬Q)$
 
 \t\t\t\t\t\t$¬(P∧Q)≡(¬P∨¬Q)$
 

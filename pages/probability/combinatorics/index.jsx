@@ -644,6 +644,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -744,26 +745,31 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: scope limits, conditional-as-restricted-counting and
+  // counting-to-distributions each name their own h2, and the opening
+  // question restates the page title. Kept the classical formula — no
+  // heading states P(A) = |A|/|Ω| — and added the ordered/unordered
+  // decision, which the page lists as bullets without ever naming it.
   const faqQuestions = {
     obj1: {
-      question: "How is combinatorics used in probability?",
-      answer: "Combinatorics provides the counting methods needed to calculate probabilities in finite sample spaces. When outcomes are equally likely, probability equals the ratio of favorable outcomes to total outcomes. Counting these outcomes correctly determines whether probability calculations are accurate."
+      question: "What is the classical probability formula?",
+      answer: "P(A) = |A| / |Ω| — the number of outcomes in the event divided by the number in the sample space. The bars are [cardinality](!/set-theory/cardinality#notation): they count outcomes. The formula holds only when Ω is finite and every outcome is equally likely; under those conditions probability reduces entirely to counting.",
+      sectionId: "1"
     },
     obj2: {
-      question: "What is the classical probability formula?",
-      answer: "The classical probability formula is P(A) = |A| / |Ω|, where |A| is the number of outcomes in event A and |Ω| is the total number of outcomes in the sample space. This formula applies only when the sample space is finite and all outcomes are equally likely."
+      question: "How do you decide whether order matters in a counting problem?",
+      answer: "Ask whether two selections containing the same items but arranged differently count as the same outcome. If swapping positions gives a genuinely different result — finishing first versus second, or the sequence HT versus TH — order matters. If the items are merely gathered together, it does not. Decide this before counting; the choice fixes which method applies.",
+      sectionId: "2"
     },
     obj3: {
-      question: "When do counting methods work for probability calculations?",
-      answer: "Counting methods work only for finite, discrete probability models with equally likely outcomes. They do not apply when the sample space is infinite or continuous, when probabilities are defined through density functions, or when outcomes are modeled empirically or through simulation."
+      question: "Why can the same experiment need different counting rules?",
+      answer: "Because the counting depends on how you define an outcome, not on the physical setup. Rolling two dice has 36 ordered outcomes but only 21 unordered ones, and both are correct — for different questions. The experiment does not decide; the question does. Most counting errors start here, before any arithmetic, by fixing the wrong outcome space.",
+      sectionId: "3"
     },
     obj4: {
-      question: "How does conditional probability relate to counting?",
-      answer: "Under finite, equally likely assumptions, conditional probability is a counting problem on a restricted sample space. Outcomes that contradict the given information are removed, the sample space is reduced, and probabilities are recalculated by counting outcomes within this smaller space."
-    },
-    obj5: {
-      question: "How does counting lead to probability distributions?",
-      answer: "When counting is repeated across structured experiments, probability distributions form. Counting successes in Bernoulli trials leads to the binomial distribution, counting selections without replacement leads to the hypergeometric distribution, and counting outcomes in symmetric finite models leads to the discrete uniform distribution."
+      question: "What happens if outcomes are not equally likely?",
+      answer: "The classical formula stops working, and it fails silently — |A|/|Ω| still produces a number, just the wrong one. A loaded die has six outcomes but they do not carry equal probability, so counting them tells you nothing about likelihood. You need a [probability function](!/probability/probability-function) assigning each outcome its own weight instead.",
+      sectionId: "1"
     }
   }
 
@@ -825,19 +831,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/combinatorics"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1193,6 +1186,22 @@ export default function CombinatoricsPage({
           <div key={'summary-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: summaryTable}}/>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Combinatorics in Probability FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -1302,12 +1311,6 @@ export default function CombinatoricsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

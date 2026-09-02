@@ -856,6 +856,7 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
         category: "Angles",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/angle-explorer",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="7" width="22" height="12" rx="3" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><rect x="42" y="7" width="22" height="12" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/><text x="25" y="15.5" font-family="Georgia,serif" font-size="6.5" fill="#412402" text-anchor="middle">deg</text><text x="53" y="15.5" font-family="Georgia,serif" font-size="6.5" fill="#042C53" text-anchor="middle">rad</text><line x1="16" y1="62" x2="70" y2="62" stroke="#85B7EB" stroke-width="2"/><line x1="16" y1="62" x2="54.65" y2="27.2" stroke="#85B7EB" stroke-width="2"/><path d="M 34 62 A 18 18 0 0 0 29.38 49.96" fill="none" stroke="#FAC775" stroke-width="1.6"/><circle cx="16" cy="62" r="2.4" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><text x="40" y="54" font-family="Georgia,serif" font-size="8" fill="#FAC775" text-anchor="middle" font-style="italic">42&#176;</text></svg>`,
         name: "Angle Explorer"
       },
 

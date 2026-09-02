@@ -251,6 +251,10 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import VennExplorer from '@/app/components/probability/venn-explorer/VennExplorer'
 import VennExplorer2 from '@/app/components/probability/venn-explorer/VennExplorer2'
+import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennTwoSetDiagrams'
+import vennThreeSetDiagrams from '@/app/components/probability/venn-explorer/vennThreeSetDiagrams'
+import { threeSetProblems } from '@/app/components/probability/venn-explorer/vennThreeSetProblems'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticPaths() {
@@ -272,6 +276,8 @@ export async function getStaticProps({ params }){
       description: `Interactive 2-set Venn diagram for probability calculations. Click segments, explore intersections, unions, and complements with step-by-step solutions.`,
       name: `2-Set Venn Diagram Tool`,
       url: `/probability/visual-tools/venn-diagrams/two-sets`,
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="31" cy="38" r="21" fill="#85B7EB" fill-opacity="0.4" stroke="#0C447C" stroke-width="1.3"/><circle cx="49" cy="38" r="21" fill="#FAC775" fill-opacity="0.4" stroke="#854F0B" stroke-width="1.3"/><text x="22" y="41" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">0.3</text><text x="58" y="41" font-family="Georgia,serif" font-size="7" fill="#412402" text-anchor="middle">0.4</text><text x="40" y="41" font-family="Georgia,serif" font-size="7" fill="#4B1528" text-anchor="middle">0.2</text><text x="40" y="72" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">P(A &#8746; B)</text></svg>`,
+      category: `Venn Diagrams`,
       h1: `2-Set Venn Diagram`,
       keywords: [
         `2 set venn diagram`,
@@ -528,7 +534,47 @@ In terms of segments: $P(A \\cup B)$ equals segments #1 + #2 + #3, which is $P(A
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Probability Calculators](!/probability/calculators) →@`,
     link: ``
-  }
+  },
+
+  obj11: {
+    title: `Student Survey: Four Regions That Reproduce the Marginals`,
+    content: `The tool opens on this problem. It gives $P(A) = 0.6$ for Student, $P(B) = 0.4$ for Employed, and the single constraint $P(A \\cap B) = 0.15$; from those the four regions come out as $0.15$, $0.45$, $0.25$, $0.15$.
+
+They sum to exactly $1$, and — the check worth doing every time — adding them back the other way returns the marginals you started from: $0.15 + 0.45 = 0.6$ and $0.15 + 0.25 = 0.4$.`,
+    before: ``,
+    after: `That round trip is the whole method. Two marginals and one intersection are enough to pin down all four regions, because the four must sum to $1$ and each marginal is the sum of two of them. Four unknowns, four equations.
+
+The union follows immediately: $P(A \\cup B) = 1 - P(A^c \\cap B^c) = 1 - 0.15 = 0.85$, which is also what the addition rule gives as $0.6 + 0.4 - 0.15$. Reading it off the complement region is usually quicker than applying the rule.
+
+Notice that $P(A \\cap B) = 0.15$ is well below $P(A) \\cdot P(B) = 0.24$. Being a student and being employed are not independent here — they pull against each other, which the region sizes show directly.`,
+    link: ``
+  },
+
+  obj12: {
+    title: `Health Screening: Why the Two Conditionals Differ`,
+    content: `The second problem gives $P(A) = 0.2$ for Has Condition, $P(B) = 0.3$ for Test Positive, and the constraint $P(A \\cap B^c) = 0.05$. The regions are $0.15$, $0.05$, $0.15$, $0.65$, again summing to $1$ and reproducing both marginals.
+
+The two conditional probabilities hiding in those four numbers are not the same, and the gap between them is the point of the example.`,
+    before: ``,
+    after: `Read down the row for $A$: $P(B \\mid A) = \\frac{0.15}{0.20} = 0.75$. The test catches three quarters of the people who have the condition — that is its sensitivity, and it sounds reassuring.
+
+Now read down the column for $B$: $P(A \\mid B) = \\frac{0.15}{0.30} = 0.50$. Of everyone who tests positive, only half actually have the condition.
+
+Same intersection region, two different denominators, two very different numbers — and it is the second one a patient holding a positive result actually wants. The reason they diverge is visible in the diagram: the region "no condition but tests positive" is $0.15$, exactly as large as the true-positive region, because the $80\\%$ of people without the condition are numerous enough that even a small false-positive rate among them produces as many positives as the condition itself does. Reading $P(B \\mid A)$ when you meant $P(A \\mid B)$ is the base rate fallacy, and this problem is built to make it concrete.`,
+    link: ``
+  },
+
+  obj13: {
+    title: `Selecting a Region`,
+    content: `Clicking a numbered box fills it gold with an amber border and leaves the other three white. The still below shows region 1, the intersection $A \\cap B$, selected.
+
+Selection is a toggle: clicking the same box again clears it.`,
+    before: ``,
+    after: `The diagram deliberately carries no numbers. The circles and the four boxes show you *where* each outcome lives; the probabilities live in the list beside them, and selecting a region is what ties the two together.
+
+That split is worth keeping in mind when reading any Venn diagram: circle areas here are fixed and identical, so they encode set membership, not probability. A region drawn large may hold very little probability — in the Health Screening problem the outside region holds $0.65$, nearly two thirds of everything, while looking like empty background.`,
+    link: ``
+  },
 },      
 
 faqQuestions: {
@@ -632,6 +678,8 @@ faqQuestions: {
       description: `Interactive 3-set Venn diagram for complex probability problems. Visualize 8 regions, solve systems of equations, and explore triple intersections with calculations.`,
       name: `3-Set Venn Diagram Tool`,
       url: `/probability/visual-tools/venn-diagrams/three-sets`,
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="32" r="18" fill="#85B7EB" fill-opacity="0.38" stroke="#0C447C" stroke-width="1.2"/><circle cx="50" cy="32" r="18" fill="#FAC775" fill-opacity="0.38" stroke="#854F0B" stroke-width="1.2"/><circle cx="40" cy="50" r="18" fill="#97C459" fill-opacity="0.38" stroke="#27500A" stroke-width="1.2"/><text x="22" y="28" font-family="Georgia,serif" font-size="6" fill="#042C53" text-anchor="middle">.2</text><text x="58" y="28" font-family="Georgia,serif" font-size="6" fill="#412402" text-anchor="middle">.2</text><text x="40" y="60" font-family="Georgia,serif" font-size="6" fill="#173404" text-anchor="middle">.2</text><text x="40" y="38" font-family="Georgia,serif" font-size="6" fill="#4B1528" text-anchor="middle">.1</text><text x="40" y="74" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">three events</text></svg>`,
+      category: `Venn Diagrams`,
       h1: `3-Set Venn Diagram`,
       keywords: [
         `3 set venn diagram`,
@@ -787,7 +835,7 @@ sectionsContent: {
 
 The center segment (#1) shows the triple intersection where all three events occur simultaneously. Segments #2-#7 represent various two-way intersections and single-event-only regions. Segment #8 lies outside all circles.
 
-View the pre-loaded "Demographics Study" example showing how constraints like $P(A \\cap B^c) = 0.4$ and $P(A \\cap C^c) = 0.18$ determine all eight region probabilities through systematic calculation.`,
+View the pre-loaded "Demographics Study" example showing how three marginals and four constraints — $P(A \\cap B^c) = 0.4$, $P(A \\cap C^c) = 0.18$, $P(B \\cap C) = 0.38$ and $P(A \\cap B \\cap C) = 0.08$ — determine all eight region probabilities through systematic calculation.`,
     before: ``,
     after: ``,
     link: ``
@@ -831,9 +879,9 @@ Once the triple intersection is known, other regions follow systematically. For 
   },
   obj5: {
     title: `Reading Probability Solutions`,
-    content: `Each of the eight outcomes displays its calculated probability to three decimal places. In the Demographics example, $P(A \\cap B \\cap C) = 0.080$ means 8% of the population are women, unemployed, **and** have academic background.
+    content: `Each of the eight outcomes displays its calculated probability to three decimal places. In the Demographics example, $P(A \\cap B \\cap C) = 0.080$ means 8% of the population are women, employed, **and** have an academic background.
 
-Compare region sizes to understand relationships. If $P(A \\cap B^c \\cap C) = 0.240$ is much larger than $P(A \\cap B \\cap C) = 0.080$, academic women are predominantly employed in this dataset.
+Compare region sizes to understand relationships. Here $P(A \\cap B^c \\cap C) = 0.240$ is three times $P(A \\cap B \\cap C) = 0.080$, so academic women in this dataset are predominantly **not** employed.
 
 The probabilities reflect both the given marginals $P(A), P(B), P(C)$ and the specific constraints. Different constraints yield completely different regional distributions.`,
     before: ``,
@@ -842,7 +890,7 @@ The probabilities reflect both the given marginals $P(A), P(B), P(C)$ and the sp
   },
   obj6: {
     title: `Solving Systems of Equations`,
-    content: `Three-set problems require solving systems of equations. Given three marginals and two or three constraints, the tool determines all eight unknown region probabilities.
+    content: `Three-set problems require solving systems of equations. Eight regions mean eight unknowns, so eight independent equations are needed: the three marginals, the fact that everything sums to $1$, and four given constraints.
 
 The general approach: (1) Use constraints to find pairwise intersections like $P(A \\cap B)$. (2) Set up equations relating the triple intersection to known values. (3) Solve for the center region. (4) Calculate remaining regions systematically.
 
@@ -908,8 +956,50 @@ For four or more events, contingency tables or [tree diagrams](!/probability/tre
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Probability Calculators](!/probability/calculators) →@`,
     link: ``
-  }
-},      
+  },
+
+  obj11: {
+    title: `Demographics Study: Eight Regions That Reproduce Every Given`,
+    content: `The tool opens on this problem. It gives $P(A) = 0.5$ for Woman, $P(B) = 0.5$ for Employed and $P(C) = 0.62$ for Academic, together with four constraints: $P(A \\cap B^c) = 0.4$, $P(A \\cap C^c) = 0.18$, $P(B \\cap C) = 0.38$ and $P(A \\cap B \\cap C) = 0.08$.
+
+From those the eight regions come out as $0.08$, $0.02$, $0.24$, $0.16$, $0.30$, $0.10$, $0.00$ and $0.10$, in the order the tool lists them.`,
+    before: ``,
+    after: `They sum to exactly $1$, and — the check worth doing every time — adding them back the other way returns every given you started from. The three marginals: $0.08 + 0.02 + 0.24 + 0.16 = 0.5$, $0.08 + 0.02 + 0.30 + 0.10 = 0.5$, and $0.08 + 0.24 + 0.30 + 0.00 = 0.62$. The four constraints likewise: $0.24 + 0.16 = 0.4$, $0.02 + 0.16 = 0.18$, $0.08 + 0.30 = 0.38$, and region 1 is $0.08$ by itself.
+
+Region 7 is worth a second look because it is exactly $0.00$: nobody in this survey is a non-woman, not employed **and** academic. Every male academic here is employed. A zero region is legitimate — it says that combination simply does not occur — and it is why $P(A \\cup B \\cup C) = 1 - 0.10 = 0.90$ rather than something larger.
+
+The two conditionals the regions hand you show how strongly the events pull against each other. Among women, the employed fraction is $0.1 / 0.5 = 0.2$; among everyone else it is $0.4 / 0.5 = 0.8$. Employment and being a woman are very far from [independent](!/probability/independence) in this dataset, and the region sizes say so directly.`,
+    link: ``
+  },
+
+  obj12: {
+    title: `Why Four Constraints Are Needed, Not Two`,
+    content: `Eight regions are eight unknowns, so eight independent equations are needed to pin them down. The three marginals and the requirement that everything sums to $1$ supply four. Each given constraint supplies one more, so four constraints are exactly enough.
+
+That accounting is easy to get wrong. The three marginals, the total, and just the two constraints $P(A \\cap B^c)$ and $P(A \\cap C^c)$ come to six equations for eight unknowns — a system with infinitely many solutions, not one.`,
+    before: ``,
+    after: `The triple intersection is the region that resolves it. Add $P(B \\cap C) = 0.38$ and the eight unknowns collapse to a single free parameter, the value of region 1: every choice of $P(A \\cap B \\cap C)$ between $0.08$ and $0.10$ yields eight non-negative regions consistent with all seven equations. Only the eighth given, $P(A \\cap B \\cap C) = 0.08$, picks one of them out.
+
+That range has a boundary worth noticing. At the low end, $0.08$, region 7 falls to zero; push the triple intersection any lower and region 7 would have to go negative, which no probability may do. The problem sits exactly on that edge.
+
+The practical rule: count equations before solving. If a three-set problem hands you the marginals and only one or two intersections, it does not have a unique answer, and any single set of eight numbers you produce is a guess at which member of the family was intended.`,
+    link: ``
+  },
+
+  obj13: {
+    title: `Selecting a Region`,
+    content: `Clicking a numbered box fills it gold with an amber border and leaves the other seven white. Selection is a toggle: clicking the same box again clears it.
+
+The still below shows region 8, $A^c \\cap B^c \\cap C^c$ — the one region that lies inside the sample space $\\Omega$ but outside all three circles.`,
+    before: ``,
+    after: `Region 8 is easy to overlook because nothing is drawn around it, yet it carries $0.10$ here, as much as region 6 and more than region 2. The $\\Omega$ in the top-left corner is the reminder: the rectangle is the sample space, and everything not enclosed by a circle still belongs to it.
+
+The diagram deliberately carries no numbers. The circles and the eight boxes show you *where* each outcome lives; the probabilities live in the list beside them, and selecting a region is what ties the two together.
+
+That split matters more with three sets than with two. All three circles are drawn at the same radius and in fixed positions, so the picture encodes set membership only — never probability. Region 5 takes up about $11\\%$ of the area inside the circles but holds $0.30$, the largest probability of any region in the diagram; region 4 takes up twice that area, about $23\\%$, and holds only $0.16$. Region 7 is starker still: roughly $16\\%$ of the drawn interior, and a probability of exactly zero.`,
+    link: ``
+  },
+},
 
 faqQuestions: {
         obj1: {
@@ -1010,6 +1100,91 @@ faqQuestions: {
   };
 
   const currentConfig = viewConfig[params.view];
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Both components draw their diagrams as inline JSX, so vennTwoSetDiagrams.js
+     and vennThreeSetDiagrams.js port the markup and pull the problems from the
+     tools' own data. The diagram carries no numbers - the tool shows region
+     probabilities in an HTML list beside it - so the values sit in each unit's
+     text panel.
+     The three-sets problem is supplied from vennThreeSetProblems.js rather than
+     the component's own `defaultProblems`, which is mathematically inconsistent
+     (it states P(B) = 0.2 while its own eight regions give 0.5). That file's
+     header carries the derivation; nothing in VennExplorer.jsx was edited. */
+  const unit = (svg, caption, text) => demoUnitFrame({ svg, caption, text })
+  const V = vennTwoSetDiagrams
+  const V3 = vennThreeSetDiagrams
+
+  const unitsByView = {
+    'two-sets': {
+      studentSurvey: unit(V.studentSurvey, 'Student Survey: P(A) = 0.6, P(B) = 0.4, P(A and B) = 0.15',
+        'Regions 1 to 4 are 0.15, 0.45, 0.25 and 0.15. They sum to 1, and adding them back the other ' +
+        'way returns the marginals: 0.15 + 0.45 = 0.6 and 0.15 + 0.25 = 0.4.'),
+      healthScreening: unit(V.healthScreening, 'Health Screening: P(A) = 0.2, P(B) = 0.3, P(A and not B) = 0.05',
+        'Regions 0.15, 0.05, 0.15, 0.65. P(B|A) = 0.15/0.20 = 0.75 but P(A|B) = 0.15/0.30 = 0.50 - the ' +
+        'same intersection over two different denominators.'),
+      intersectionSelected: unit(V.intersectionSelected, 'Region 1 selected',
+        'A selected box fills gold with an amber border; the other three stay white. Clicking it again ' +
+        'clears the selection. The circles are fixed in size, so area shows membership, not probability.'),
+    },
+    'three-sets': {
+      demographicsStudy: unit(V3.demographicsStudy,
+        'Demographics Study: P(A) = 0.5, P(B) = 0.5, P(C) = 0.62',
+        'Regions 1 to 8 are 0.08, 0.02, 0.24, 0.16, 0.30, 0.10, 0.00 and 0.10. They sum to 1 and ' +
+        'reproduce all three marginals and all four constraints. Region 7 is exactly zero: every ' +
+        'male academic in this survey is employed.'),
+      tripleIntersectionSelected: unit(V3.tripleIntersectionSelected,
+        'Region 1 selected: the triple intersection',
+        'Eight regions need eight equations. Three marginals and the total give four; without four ' +
+        'constraints the answer is not unique. With P(B n C) = 0.38 but no value for region 1, any ' +
+        'triple intersection from 0.08 to 0.10 fits - the given 0.08 picks one out.'),
+      outsideRegionSelected: unit(V3.outsideRegionSelected,
+        'Region 8 selected: outside all three circles',
+        'A selected box fills gold with an amber border; the other seven stay white. Region 8 holds ' +
+        '0.10 here despite having nothing drawn around it - the omega in the corner is the reminder ' +
+        'that the rectangle is the sample space. Circle sizes are fixed, so area shows membership, ' +
+        'not probability.'),
+    },
+  }
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit per-view slug list
+  const orderByView = {
+    'two-sets': [
+      ['obj1', 'getting-started'],
+      ['obj2', 'clicking-and-hovering'],
+      ['obj3', 'the-four-regions'],
+      ['obj11', 'student-survey', 'studentSurvey'],
+      ['obj12', 'health-screening', 'healthScreening'],
+      ['obj13', 'selecting-a-region', 'intersectionSelected'],
+      ['obj4', 'show-calculations'],
+      ['obj5', 'reading-probability-values'],
+      ['obj6', 'multiple-problems'],
+      ['obj7', 'set-operations'],
+      ['obj8', 'conditional-probability'],
+      ['obj9', 'the-addition-rule'],
+      ['obj10', 'related-tools'],
+    ],
+    'three-sets': [
+      ['obj1', 'getting-started'],
+      ['obj2', 'navigating-eight-regions'],
+      ['obj3', 'the-eight-outcomes'],
+      ['obj11', 'demographics-study', 'demographicsStudy'],
+      ['obj12', 'counting-the-equations', 'tripleIntersectionSelected'],
+      ['obj13', 'selecting-a-region', 'outsideRegionSelected'],
+      ['obj4', 'show-calculations'],
+      ['obj5', 'reading-probability-solutions'],
+      ['obj6', 'solving-systems-of-equations'],
+      ['obj7', 'inclusion-exclusion'],
+      ['obj8', 'conditional-probability'],
+      ['obj9', 'when-to-use-3-set-diagrams'],
+      ['obj10', 'related-tools'],
+    ],
+  }
+
+  const stateUnits = unitsByView[params.view] || {}
+  const sectionOrder = orderByView[params.view] || []
   const sectionsContent = currentConfig.sectionsContent;
   const faqQuestions = currentConfig.faqQuestions;
   const schemas = {
@@ -1039,21 +1214,27 @@ faqQuestions: {
         keywords: currentConfig.keywords.join(", "),
         url: currentConfig.url,
         name: currentConfig.name
-      },
+      },      stateUnits,
+      sectionOrder,
+
       currentMode: currentConfig.mode,
       h1Title: currentConfig.h1
     }
   }
 }
 
-export default function VennDiagramsPage({seoData, sectionsContent, faqQuestions, schemas, currentMode, h1Title}) {
+export default function VennDiagramsPage({seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas, currentMode, h1Title}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }));
+  const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
+    const src = sectionsContent[obj]
+    if (!src || !src.title) return null
+    const body = [ src.content ]
+    if (unitKey && stateUnits[unitKey]) {
+      body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
+      if (src.after) body.push(src.after)
+    }
+    return { id, title: src.title, link: src.link || '', content: body }
+  }).filter(Boolean);
 
   return (
     <>
@@ -1117,7 +1298,7 @@ export default function VennDiagramsPage({seoData, sectionsContent, faqQuestions
       {currentMode === 2 ? (
         <VennExplorer2 problemsData={[]} />
       ) : (
-        <VennExplorer problemsData={[]} />
+        <VennExplorer problemsData={threeSetProblems} />
       )}
       
       <br/>

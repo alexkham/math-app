@@ -275,6 +275,8 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import VennGenerator from '../../../../app/components/diagrams/venn-generator/VennGenerator'
+import vennGeneratorDiagrams from '../../../../app/components/diagrams/venn-generator/vennGeneratorDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import React from 'react'
 import '../../../pages.css'
@@ -304,6 +306,57 @@ const instructions = [
 
 
 export async function getStaticProps() {
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Almost nothing here is a port. The component already exports its expression
+     parser and evaluator, its region enumerator, its layout maker and its path
+     builders, so vennGeneratorDiagrams.js calls them directly - every shaded
+     region below is decided by the same code that decides it on screen. */
+  const unit = (svg, caption, text) => demoUnitFrame({ svg, caption, text })
+  const V = vennGeneratorDiagrams
+
+  const stateUnits = {
+    operations: unit([V.intersection, V.union, V.symmetricDifference, V.complement],
+      'Two sets: A ∩ B, A ∪ B, A ⊕ B, Aᶜ',
+      'The same four regions throughout; only which ones are shaded changes. Intersection shades 1 of 4, ' +
+      'union 3, symmetric difference 2, and the complement of A a different 2 - it includes the area ' +
+      'outside everything, which union leaves out.'),
+    layouts: unit([V.disjoint, V.subset],
+      'A ∩ B under the Disjoint and A ⊆ B layouts',
+      'Under Disjoint the expression still selects the A ∩ B row, but that row has no area, so nothing ' +
+      'shades. Under A ⊆ B it is the "A only" region that has no area. The region table is always 2^n ' +
+      'rows; the drawing shows only the rows a layout admits.'),
+    threeSets: unit([V.threeSet, V.deMorgan],
+      'Three sets: A ∩ B ∩ C, then (A ∪ B)ᶜ',
+      'Eight regions. The triple intersection is one of them; the complement of A ∪ B is two - C alone ' +
+      'and the area outside everything. Put A ᶜ ∩ B ᶜ in the Compare box and the tool reports them ' +
+      'equivalent across all eight.'),
+    higherOrders: unit([V.fourSet, V.fiveSet],
+      'Four sets (A ∩ B) and five sets (A ∩ B ∩ C)',
+      'Circles cannot produce all 16 regions, so these layouts are fixed ellipse arrangements and ' +
+      'dragging is disabled. Fixing k of n sets leaves 2^(n-k) regions shaded: 4 of 16 here, and 4 of 32.'),
+  }
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit slug list
+  const sectionOrder = [
+    ['obj1', 'getting-started'],
+    ['obj2', 'writing-set-expressions'],
+    ['obj12', 'the-four-operations', 'operations'],
+    ['obj3', 'the-regions-strip'],
+    ['obj13', 'layouts-and-regions', 'layouts'],
+    ['obj4', 'comparing-two-expressions'],
+    ['obj14', 'three-sets-and-de-morgan', 'threeSets'],
+    ['obj15', 'four-and-five-sets', 'higherOrders'],
+    ['obj5', 'presets-and-layouts'],
+    ['obj6', 'placing-elements-in-regions'],
+    ['obj7', 'styling-and-exporting'],
+    ['obj8', 'what-a-venn-diagram-shows'],
+    ['obj9', 'the-core-set-operations'],
+    ['obj10', 'checking-identities-visually'],
+    ['obj11', 'related-concepts-and-tools'],
+  ]
+
 
   const keyWords = [
     'venn diagram generator',
@@ -523,6 +576,62 @@ For formal statements, see **set identities**.`,
       before: ``,
       after: ``,
       link: '',
+    },
+
+    obj12: {
+      title: `The Four Operations on Two Sets`,
+      content: `The generator opens on two sets with $A \\cap B$ in the box, shading $1$ of the $4$ regions. Swapping the operator changes only which regions light up, never how many exist.
+
+$A \\cup B$ shades $3$ of $4$; $A \\oplus B$, the symmetric difference, shades $2$; and $A^c$ shades $2$ — but not the same two.`,
+      before: ``,
+      after: `Those counts are worth reading as a group. Union and complement both shade a majority of the picture, yet $A \\cup B$ leaves out the region outside everything while $A^c$ includes it. The two are not opposites of each other; $A^c$ is the opposite of $A$ alone.
+
+Symmetric difference is the one people meet last and it is the easiest to read here: it shades exactly the regions union shades **minus** the one intersection shades. Written out, $A \\oplus B = (A \\cup B) \\setminus (A \\cap B)$, which the counts confirm as $3 - 1 = 2$.
+
+Every one of these is decided by the same evaluator. The tool parses your expression once and then asks it a yes-or-no question about each region's membership, so an expression of any depth is answered the same way a single operator is.`,
+      link: '',
+    },
+
+    obj13: {
+      title: `Layouts Change Which Regions Exist`,
+      content: `Switch the layout from Overlapping to **Disjoint** with $A \\cap B$ still in the box, and nothing shades. Switch to **$A \\subseteq B$** and the "A only" region disappears instead.
+
+The expression did not change. The set of regions that have any area did.`,
+      before: ``,
+      after: `This is the sharpest distinction the tool can draw, and it is easy to miss. The **region table** is combinatorial: $n$ sets always produce $2^n$ rows, whatever the picture looks like. The **drawing** is geometric, and a layout can leave a row with no area at all.
+
+Under Disjoint the tool still selects the $A \\cap B$ row — the strip shows it — but there is no path to fill, so the diagram stays empty. Under $A \\subseteq B$ the missing row is "A only", because every element of $A$ is also in $B$. Under $A = B$ both "A only" and "B only" vanish and just two regions survive of the four.
+
+That gap between what an expression *selects* and what a diagram can *show* is exactly why a Venn diagram is a tool for reasoning about relationships rather than a proof. The algebra is always over all $2^n$ regions; the picture only draws the ones your arrangement admits.`,
+      link: '',
+    },
+
+    obj14: {
+      title: `Three Sets and De Morgan's Law`,
+      content: `At three sets there are $2^3 = 8$ regions. $A \\cap B \\cap C$ shades exactly one of them, the centre.
+
+Put $(A \\cup B)^c$ in the box and $2$ regions shade: the area outside everything, and $C$ alone.`,
+      before: ``,
+      after: `That second result is De Morgan's law made visible. $(A \\cup B)^c = A^c \\cap B^c$ — everything outside both $A$ and $B$ — and with a third set present that leaves two places to be: inside $C$ only, or inside nothing at all.
+
+The Compare box turns this from a picture into a check. Type $(A \\cup B)^c$ in one box and $A^c \\cap B^c$ in the other and the tool reports $\\equiv$, meaning the two shade identically across all eight regions. Type $A^c \\cup B^c$ instead and it reports $\\not\\equiv$ and names the regions that differ.
+
+That is a genuine verification, not an illustration: comparing region by region over all $2^n$ rows is exactly what proving a set identity requires.`,
+      link: '',
+    },
+
+    obj15: {
+      title: `Four and Five Sets`,
+      content: `Beyond three sets circles stop working — no arrangement of four circles produces all $16$ regions — so the tool switches to a fixed layout of tilted ellipses at $4$ sets and a fixed five-fold arrangement at $5$.
+
+At four sets $A \\cap B$ shades $4$ of the $16$ regions; at five sets $A \\cap B \\cap C$ shades $4$ of the $32$.`,
+      before: ``,
+      after: `Those counts follow a rule worth knowing. Fixing $k$ of the $n$ sets to "inside" leaves the other $n - k$ free, so the expression shades $2^{n-k}$ regions: $2^{4-2} = 4$ and $2^{5-3} = 4$. A short expression selects a whole family of regions, and the family grows as the diagram does.
+
+These two layouts are the reason dragging is disabled at $4$ and $5$ sets. The arrangements are chosen so that every one of the $2^n$ regions exists and is reachable; nudging a curve destroys some of them, which is the geometric failure that made circles insufficient in the first place.
+
+It is also why five sets is close to the practical ceiling. $32$ regions is already more than a reader can track, and the diagram becomes a device for confirming an answer rather than for finding one.`,
+      link: '',
     }
 
   }
@@ -560,6 +669,7 @@ For formal statements, see **set identities**.`,
     hubDescription: "Shade any set expression on a 2, 3, 4, or 5 set Venn diagram. Type it with keyboard shortcuts, build it from symbol buttons, or load a preset. A region strip lists every region and whether it is shaded, a compare box tests two expressions for equivalence, and finished diagrams export to SVG or PNG.",
     category: "Venn Diagrams",
     subCategory: "Multiple Sets",
+    svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="5" width="11" height="10" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.9"/><rect x="25" y="5" width="11" height="10" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.9"/><rect x="38" y="5" width="11" height="10" rx="3" fill="#FAC775" stroke="#854F0B" stroke-width="1.3"/><rect x="51" y="5" width="11" height="10" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.9"/><text x="17.5" y="12.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">2</text><text x="30.5" y="12.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">3</text><text x="43.5" y="12.5" font-family="Georgia,serif" font-size="7" fill="#412402" text-anchor="middle">4</text><text x="56.5" y="12.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">5</text><ellipse cx="33" cy="48" rx="22" ry="13" transform="rotate(-40 33 48)" fill="#85B7EB" fill-opacity="0.45" stroke="#0C447C" stroke-width="1"/><ellipse cx="38" cy="44" rx="22" ry="13" transform="rotate(-40 38 44)" fill="#FAC775" fill-opacity="0.45" stroke="#854F0B" stroke-width="1"/><ellipse cx="42" cy="44" rx="22" ry="13" transform="rotate(40 42 44)" fill="#97C459" fill-opacity="0.45" stroke="#27500A" stroke-width="1"/><ellipse cx="47" cy="48" rx="22" ry="13" transform="rotate(40 47 48)" fill="#ED93B1" fill-opacity="0.45" stroke="#72243E" stroke-width="1"/></svg>`,
     breadcrumb: [
       { label: "Home", href: "/" },
       { label: "Set Theory", href: "/set-theory" },
@@ -653,6 +763,8 @@ For formal statements, see **set identities**.`,
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      sectionOrder,
       faqQuestions,
       schemas,
       seoData
@@ -661,14 +773,18 @@ For formal statements, see **set identities**.`,
 }
 
 
-export default function VennDiagramGeneratorPage({ seoData, sectionsContent, faqQuestions, schemas }) {
+export default function VennDiagramGeneratorPage({ seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas }) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
+    const src = sectionsContent[obj]
+    if (!src || !src.title) return null
+    const body = [ src.content ]
+    if (unitKey && stateUnits[unitKey]) {
+      body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
+      if (src.after) body.push(src.after)
+    }
+    return { id, title: src.title, link: src.link || '', content: body }
+  }).filter(Boolean);
 
   return (
    <>

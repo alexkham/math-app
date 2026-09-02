@@ -12,6 +12,7 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import { renderMultiplesLine } from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
@@ -535,58 +536,27 @@ Is $20$ abundant or deficient? Proper divisors: $1, 2, 4, 5, 10$. Sum: $22 > 20$
   content: `Every [divisibility](!/arithmetic/divisibility) relationship involves two numbers playing opposite roles. When $3 \\mid 12$, the number $3$ is a factor — it divides in. The number $12$ is a multiple — it is divided into. Factors look downward, toward the smaller numbers that build a given integer. Multiples look upward, toward the infinite sequence of numbers that a given integer builds. Together they form the structural vocabulary of divisibility.`
 }
 
+// FAQ pass: cut ten case-A questions — this page's h2s (Factors, Multiples,
+// Factors vs Multiples, Finding All Factors, Factor Pairs, Proper Divisors,
+// Common Factors, Common Multiples, Counting Factors, Sum of Factors /
+// Divisor Function Notation) answer them directly. Kept perfect numbers and
+// the odd-factor-count puzzle (both buried, no matching heading) and reframed
+// "Is 20 abundant or deficient?" to the query people actually type.
 const faqQuestions = {
   obj1: {
-    question: "What is a factor of a number?",
-    answer: "A factor (or divisor) of n is any integer a such that a divides n evenly — meaning n = a × k for some integer k. Every positive integer has at least two factors: 1 and itself. For example, the factors of 24 are 1, 2, 3, 4, 6, 8, 12, and 24."
+    question: "What is a perfect number?",
+    answer: "A perfect number equals the sum of its proper divisors. The number 6 is perfect: 1 + 2 + 3 = 6. The number 28 is perfect: 1 + 2 + 4 + 7 + 14 = 28. Perfect numbers are rare — the first four are 6, 28, 496, and 8128.",
+    sectionId: "4"
   },
   obj2: {
-    question: "What is a multiple of a number?",
-    answer: "A multiple of a is any number b such that a divides b — meaning b = a × k for some positive integer k. The multiples of 7 are 7, 14, 21, 28, 35... — an infinite sequence. Zero is technically a multiple of every number."
+    question: "Why do perfect squares have an odd number of factors?",
+    answer: "Factors come in pairs (a, n/a) that multiply to n. For perfect squares, the square root pairs with itself (√n, √n), counting as one factor instead of two. All other pairs contribute two factors, so the total is odd. That is why 36 has nine factors: 1, 2, 3, 4, 6, 9, 12, 18, 36.",
+    sectionId: "3"
   },
   obj3: {
-    question: "What is the difference between factors and multiples?",
-    answer: "Factors go downward (smaller than or equal to the number) and are finite. Multiples go upward (larger than or equal) and are infinite. If a is a factor of b, then b is a multiple of a. For 12: factors are 1,2,3,4,6,12; multiples are 12,24,36,48..."
-  },
-  obj4: {
-    question: "How do you find all factors of a number?",
-    answer: "Test integers from 1 to √n. If a divides n, both a and n/a are factors — a pair from one test. For 36: test 1-6, finding pairs (1,36), (2,18), (3,12), (4,9), (6,6). This gives all nine factors efficiently."
-  },
-  obj5: {
-    question: "What are factor pairs?",
-    answer: "Every factor a of n has a partner n/a, and together they multiply to n. For 24: pairs are (1,24), (2,12), (3,8), (4,6). For perfect squares, the square root pairs with itself, giving an odd number of total factors."
-  },
-  obj6: {
-    question: "What are proper divisors?",
-    answer: "Proper divisors of n are all factors except n itself. For 12: proper divisors are {1, 2, 3, 4, 6}. The sum of proper divisors determines whether a number is perfect (sum = n), abundant (sum > n), or deficient (sum < n)."
-  },
-  obj7: {
-    question: "What is a perfect number?",
-    answer: "A perfect number equals the sum of its proper divisors. The number 6 is perfect: 1 + 2 + 3 = 6. The number 28 is perfect: 1 + 2 + 4 + 7 + 14 = 28. Perfect numbers are rare — the first four are 6, 28, 496, and 8128."
-  },
-  obj8: {
-    question: "What are common factors?",
-    answer: "Common factors of two numbers m and n are numbers that divide both. For 12 and 18: factors of 12 are {1,2,3,4,6,12}, factors of 18 are {1,2,3,6,9,18}, common factors are {1,2,3,6}. The largest common factor is the GCD."
-  },
-  obj9: {
-    question: "What are common multiples?",
-    answer: "Common multiples of m and n are numbers divisible by both. For 4 and 6: common multiples are 12, 24, 36, 48... The smallest positive common multiple is the LCM. Every common multiple is a multiple of the LCM."
-  },
-  obj10: {
-    question: "How do you count the number of factors?",
-    answer: "Use prime factorization. If n = p₁^a₁ × p₂^a₂ × ... × pₖ^aₖ, the number of factors is (a₁+1)(a₂+1)...(aₖ+1). For 72 = 2³ × 3²: (3+1)(2+1) = 12 factors. Each exponent plus one represents choices for that prime."
-  },
-  obj11: {
-    question: "Why do perfect squares have an odd number of factors?",
-    answer: "Factors come in pairs (a, n/a) that multiply to n. For perfect squares, the square root pairs with itself (√n, √n), counting as one factor instead of two. All other pairs contribute two factors, so the total is odd."
-  },
-  obj12: {
-    question: "What is the sum of divisors function σ(n)?",
-    answer: "σ(n) is the sum of all positive divisors of n. For 12: σ(12) = 1+2+3+4+6+12 = 28. This function determines perfect/abundant/deficient classification: perfect when σ(n) = 2n, abundant when σ(n) > 2n, deficient when σ(n) < 2n."
-  },
-  obj13: {
-    question: "Is 20 abundant or deficient?",
-    answer: "Find proper divisors of 20: {1, 2, 4, 5, 10}. Sum: 1+2+4+5+10 = 22. Since 22 > 20, the number 20 is abundant — the sum of its proper divisors exceeds the number itself."
+    question: "What are abundant and deficient numbers?",
+    answer: "Classify a number by the sum of its proper divisors (all factors except the number itself). If the sum exceeds the number, it is abundant: 20 gives 1+2+4+5+10 = 22 > 20. If the sum falls short, it is deficient: 16 gives 1+2+4+8 = 15 < 16. If the sum lands exactly, the number is perfect. List any number's divisors with the [divisibility calculator](!/arithmetic/calculators/divisibility-calculator).",
+    sectionId: "10"
   }
 }
 
@@ -662,19 +632,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/divisibility/factors"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -919,6 +876,22 @@ export default function FactorsPage({seoData, sectionsContent,
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Factors and Multiples FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -951,17 +924,10 @@ export default function FactorsPage({seoData, sectionsContent,
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

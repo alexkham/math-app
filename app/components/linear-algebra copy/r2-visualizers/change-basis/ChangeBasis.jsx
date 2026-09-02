@@ -3331,7 +3331,8 @@ const DEFAULT_LEDE = {
 // =====================================================================
 //   SECTION 2  ::  Tool-specific CSS
 // =====================================================================
-const TOOL_CSS = `
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export const TOOL_CSS = `
 /* ---- app width override ---- */
 .r2-root .r2-app{max-width:1340px}
 

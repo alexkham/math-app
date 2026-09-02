@@ -613,6 +613,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -793,26 +794,36 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — the definition, the
+  // formula, vs independence, where conditioning appears, common mistakes.
+  // Replaced with the specific traps the notation section catalogues.
+  // Independence vs disjointness defers to /probability/independence, and
+  // the P(A, B) comma form to /probability/joint-probability.
   const faqQuestions = {
     obj1: {
-      question: "What is conditional probability?",
-      answer: "Conditional probability describes how likely an event is once we know that another event has occurred. It represents a reassessment of uncertainty after information is taken into account, where all reasoning is carried out under the assumption that the condition is true. It models how probabilities change when the frame of reference shifts to a restricted situation."
+      question: "Is P(A|B) the same as P(B|A)?",
+      answer: "No, and swapping them reverses the claim entirely. The probability of having a disease given a positive test and the probability of a positive test given the disease are different numbers, often wildly so. The first depends on how common the disease is; the second does not. Converting between them is what [Bayes' theorem](!/probability/bayes-theorem) is for.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "What is the conditional probability formula?",
-      answer: "The conditional probability formula is P(A|B) = P(A ∩ B) / P(B), where P(A|B) is the probability of event A given that event B has occurred. The numerator represents the part of A that is compatible with condition B, while the denominator accounts for working only inside B. This formula expresses how probabilities behave once the situation has been restricted by known information."
+      question: "Does the vertical bar in P(A|B) mean division?",
+      answer: "No. The bar reads “given” and marks which world the probability is measured in — everything to its right is assumed to have happened. Division does appear in the formula P(A|B) = P(A ∩ B)/P(B), but that comes from the definition, not from the bar. The same stroke means “such that”, “divides”, and absolute value elsewhere.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "How is conditional probability different from independence?",
-      answer: "Conditional probability describes how probabilities update when information is known, usually changing the probability. Independence is the special case where this shift does not occur - knowing one event happened provides no information about the other, so conditioning leaves probabilities unchanged. Independence means the update is unnecessary, not that conditioning doesn't apply."
+      question: "What is the difference between P(A and B) and P(A given B)?",
+      answer: "The denominator. P(A ∩ B) measures the overlap against the whole sample space; P(A|B) measures that same overlap against B alone. They share a numerator and differ only in what counts as everything. That is why P(A|B) = P(A ∩ B)/P(B) — dividing by P(B) rescales the overlap so that B becomes the new total.",
+      sectionId: "formula"
     },
     obj4: {
-      question: "When do you use conditional probability?",
-      answer: "Conditional probability appears in 'given that' reasoning where information is stated explicitly, filtering where attention is restricted to cases meeting a criterion, sequential processes where earlier outcomes affect later ones, and classification problems where probabilities are evaluated within specific groups. It's required whenever probabilities must be reassessed after a condition becomes known."
+      question: "What happens if the conditioning event has probability zero?",
+      answer: "P(A|B) is undefined. The formula divides by P(B), so the condition must satisfy P(B) > 0 — you cannot restrict attention to a world that never occurs. The multiplicative form P(A ∩ B) = P(A)P(B) survives in that case, which is one reason independence is often stated that way rather than with a bar.",
+      sectionId: "formula"
     },
     obj5: {
-      question: "What are common mistakes with conditional probability?",
-      answer: "Common mistakes include: forgetting to restrict the situation properly and reasoning as if all outcomes were still possible, dividing by the wrong probability leading to incorrect normalization, confusing P(A|B) with P(B|A) which reverses the statement's meaning, and assuming independence implicitly without justification. Being explicit about what is known and what space is being considered helps avoid these errors."
+      question: "How do you condition on more than one event?",
+      answer: "Stack the conditions on the right of the bar, joined by intersection: P(A | B ∩ C) is the probability of A once both B and C are assumed to have happened. The restricted world simply shrinks further. Everything on the right is treated as known; only what stands to the left is being measured.",
+      sectionId: "notation"
     }
   }
 
@@ -880,19 +891,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/conditional-probability"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1310,6 +1308,22 @@ export default function ConditionalProbabilityPage({
           sectionsContent.connections.content,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Conditional Probability FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -1367,13 +1381,6 @@ export default function ConditionalProbabilityPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

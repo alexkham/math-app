@@ -536,56 +536,32 @@ The endpoint: [exponential functions](!/algebra/powers/exponential-functions) $f
 //   }
 // }
 
+// FAQ pass: this page has the most explicit heading set in the section —
+// one h2 literally reads "Zero as an Exponent — Why $a^0 = 1$" — so eight of
+// the ten originals restated their own heading, and two ("What is $0^0$" and
+// "Is $0^0$ 0 or 1?") were the same question twice. Kept the empty product,
+// which no heading names, and added the reconciliation question the page
+// sets up across three sections but never asks.
 const faqQuestions = {
   obj1: {
-    question: "What is 0 raised to a positive power?",
-    answer: "Zero raised to any positive power equals zero: $0^1 = 0$, $0^2 = 0$, $0^{100} = 0$. Each multiplication introduces another factor of $0$, and any product containing zero equals zero.",
-    sectionId: "1"
+    question: "Why do different fields give different answers for $0^0$?",
+    answer: "Because they need different things from it. Combinatorics and algebra set $0^0 = 1$ so the binomial theorem and power series work — at $x = 0$ the leading term of $e^x = \\sum \\frac{x^n}{n!}$ is $\\frac{0^0}{0!}$, and $e^0 = 1$ forces it. Analysis leaves it undefined because the limit depends on the path taken. Neither field is wrong; they answer different questions.",
+    sectionId: "4"
   },
   obj2: {
-    question: "What is 0 raised to a negative power?",
-    answer: "Zero raised to any negative power is undefined. By the negative exponent rule, $0^{-n} = \\frac{1}{0^n} = \\frac{1}{0}$, which is division by zero. Expressions like $0^{-1}$, $0^{-2}$, $0^{-100}$ have no value.",
-    sectionId: "2"
+    question: "What is the empty product, and why does it equal 1?",
+    answer: "It is the result of multiplying no factors at all, and it equals $1$ because $1$ is the multiplicative identity — the value that leaves any product unchanged when included. The empty sum equals $0$ for the same reason. This is the cleanest argument for $a^0 = 1$: it is the product of zero copies of $a$, whatever $a$ happens to be.",
+    sectionId: "3"
   },
   obj3: {
-    question: "Why is anything to the power of 0 equal to 1?",
-    answer: "Three arguments prove $a^0 = 1$: (1) The quotient rule: $\\frac{a^n}{a^n} = a^0$, and $\\frac{a^n}{a^n} = 1$. (2) Pattern: $3^3=27$, $3^2=9$, $3^1=3$ — each divides by 3, so $3^0=1$. (3) Empty product: zero copies of $a$ multiplied together equals the multiplicative identity, $1$.",
-    sectionId: "3"
+    question: "Why is $0^{-n}$ undefined rather than zero?",
+    answer: "Because a negative exponent means a reciprocal, and zero has none. $0^{-2}$ is $\\frac{1}{0^2}$, which is $\\frac{1}{0}$. The behavior nearby shows why no value would serve: $0.1^{-2} = 100$, $0.01^{-2} = 10000$, and the values grow without bound as the base shrinks. There is nothing finite for $0^{-2}$ to be.",
+    sectionId: "2"
   },
   obj4: {
-    question: "What is $0^0$ (zero to the zero power)?",
-    answer: "$0^0$ has no single universal answer. From $0^n = 0$, it suggests $0$. From $a^0 = 1$, it suggests $1$. The value depends on context: discrete math uses $0^0 = 1$ by convention; calculus treats it as an indeterminate form requiring limits.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "Why do mathematicians say $0^0 = 1$ in combinatorics?",
-    answer: "Formulas require it. The binomial theorem, power series like $e^x = \\sum \\frac{x^n}{n!}$, and counting functions from empty set to empty set all need $0^0 = 1$ to work correctly. The empty product argument also gives $1$.",
+    question: "How many functions are there from the empty set to the empty set?",
+    answer: "Exactly one — the empty function, which assigns nothing to nothing. This matters because the number of functions from a set of size $n$ to a set of size $m$ is $m^n$, so the empty-to-empty case counts $0^0$. Since the answer is one, combinatorics takes $0^0 = 1$: the convention falls out of the counting rather than being imposed on it.",
     sectionId: "5"
-  },
-  obj6: {
-    question: "Why is $0^0$ indeterminate in calculus?",
-    answer: "Different paths to $(0,0)$ give different limits. The function $x^x \\to 1$ as $x \\to 0^+$, but $0^x \\to 0$ as $x \\to 0^+$. Since the limit depends on the path taken, $0^0$ is classified as an indeterminate form alongside $\\frac{0}{0}$ and $\\infty - \\infty$.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "Is $0^0$ equal to 0 or 1?",
-    answer: "It depends on context. In discrete mathematics, algebra, and combinatorics, $0^0 = 1$ by convention to make formulas work. In analysis and calculus, $0^0$ is left undefined (indeterminate) because limits can give any non-negative value.",
-    sectionId: "4"
-  },
-  obj8: {
-    question: "Can zero be used as a base for exponential functions?",
-    answer: "No. Exponential functions $f(x) = a^x$ require $a > 0$. Zero fails as a base because: $0^{-n}$ is undefined (division by zero), $0^0$ is problematic, and zero cannot anchor a smooth continuous curve across all real exponents.",
-    sectionId: "7"
-  },
-  obj9: {
-    question: "What is the empty product and why does it equal 1?",
-    answer: "The empty product is the result of multiplying zero factors together. By convention, it equals $1$ — the multiplicative identity — just as the empty sum (adding zero terms) equals $0$, the additive identity. This makes $a^0 = 1$.",
-    sectionId: "3"
-  },
-  obj10: {
-    question: "Why does $0^{-2}$ equal undefined instead of 0?",
-    answer: "Negative exponents mean reciprocals: $0^{-2} = \\frac{1}{0^2} = \\frac{1}{0}$. Division by zero is undefined. As bases approach $0$, the values explode: $0.1^{-2} = 100$, $0.01^{-2} = 10000$. At exactly $0$, there is no finite answer.",
-    sectionId: "2"
   }
 }
 
@@ -660,19 +636,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/zero-powers"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -928,13 +891,6 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

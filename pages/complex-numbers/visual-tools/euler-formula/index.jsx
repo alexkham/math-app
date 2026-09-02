@@ -442,6 +442,9 @@ Note also that $-i$ is the conjugate of $i$ from [the quarter turn](!#the-quarte
         description: "Interactive Euler's formula visualization on the complex plane. Drag points, adjust angle and radius, and see real-time trigonometric breakdowns for e^iθ.",
         keywords: keyWords.join(", "),
         url: "/complex-numbers/visual-tools/euler-formula",
+        hubDescription: "Explore eⁱᶿ = cos θ + i sin θ on an interactive unit circle. Drag the angle or use the slider, see the right triangle projections, hit landmark angles like Euler's identity eⁱᵖ = −1, and scale with r for the full polar form.",
+        category: "Powers & Exponential",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="42" r="24" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><line x1="12" y1="42" x2="68" y2="42" stroke="#B5D4F4" stroke-width="0.8"/><line x1="40" y1="14" x2="40" y2="66" stroke="#B5D4F4" stroke-width="0.8"/><line x1="53.77" y1="22.34" x2="53.77" y2="42" stroke="#85B7EB" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="53.77" y1="22.34" x2="40" y2="22.34" stroke="#97C459" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="40" y1="42" x2="53.77" y2="22.34" stroke="#FAC775" stroke-width="1.9"/><path d="M 49 42 A 9 9 0 0 0 45.16 34.63" fill="none" stroke="#FAC775" stroke-width="1.2"/><circle cx="53.77" cy="22.34" r="3.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="50" y="38" font-family="Georgia,serif" font-size="6" fill="#FAC775" text-anchor="middle" font-style="italic">&#952;</text><text x="34" y="76" font-family="Georgia,serif" font-size="10" fill="#E6F1FB" font-style="italic">e</text><text x="40" y="70.5" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" font-style="italic">i&#952;</text></svg>`,
          name: "Euler's Formula Explorer"
       },
         

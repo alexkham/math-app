@@ -6,6 +6,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Head from 'next/head'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
@@ -483,41 +484,38 @@ finds a function—the antiderivative whose derivative returns the original inte
 };
 
 
+// FAQ pass: hub page — it owns orientation only. Cut the five questions the
+// dedicated subpages own: antiderivatives (indefinite), the Fundamental
+// Theorem (rules), the technique list (techniques), improper integrals
+// (improper), and verifying by differentiating (evaluating). Kept and
+// extended the two genuinely hub-level questions, and added the naming of
+// parts plus the origin of the sign, both buried under "Notation and
+// Terminology", plus the applications list buried inside section one.
 const faqQuestions = {
   obj1: {
     question: "What is integration in calculus?",
-    answer: "Integration computes accumulated totals from rates of change. Given a velocity function, integrating yields total distance traveled. The integral formalizes continuous summation — adding infinitely many infinitesimal contributions to get a total.",
+    answer: "Integration recovers a total from a rate. If a function describes how fast something changes at each moment, integrating it over an interval gives the cumulative effect across that interval — velocity integrated over time gives total distance traveled. It formalizes continuous summation: adding up contributions that vary smoothly, rather than in the discrete chunks an ordinary sum handles.",
     sectionId: "1"
   },
   obj2: {
-    question: "What is the difference between definite and indefinite integrals?",
-    answer: "A definite integral has bounds (a to b) and produces a number representing accumulated quantity. An indefinite integral has no bounds and produces a family of functions (antiderivatives) differing by a constant C.",
-    sectionId: "2"
+    question: "What is integration used for?",
+    answer: "Anywhere a total has to be recovered from a rate. Integrate force over distance to get work; density over volume to get mass; a probability density to get a probability; marginal cost to get total cost. The pattern is the same in each case — the integrand gives the contribution at each point, and the integral adds those contributions across a range.",
+    sectionId: "1"
   },
   obj3: {
-    question: "What is an antiderivative?",
-    answer: "An antiderivative F(x) of f(x) is a function whose derivative equals f(x). The indefinite integral finds all antiderivatives, written as F(x) + C where C is an arbitrary constant representing the infinite family of solutions.",
-    sectionId: "5"
+    question: "What is the difference between a definite and an indefinite integral?",
+    answer: "A [definite integral](!/calculus/integrals/definite) carries bounds and returns a number: the accumulated quantity between a and b. An [indefinite integral](!/calculus/integrals/indefinite) carries no bounds and returns a family of functions, F(x) + C, every antiderivative of f. The same symbol serves both — the presence or absence of limits is what tells them apart.",
+    sectionId: "2"
   },
   obj4: {
-    question: "What is the Fundamental Theorem of Calculus?",
-    answer: "The Fundamental Theorem connects definite and indefinite integrals. If F is any antiderivative of f, then the definite integral from a to b equals F(b) - F(a). This transforms area computation into finding antiderivatives.",
-    sectionId: "6"
+    question: "What do the parts of the integral symbol mean?",
+    answer: "Four parts. The sign ∫ marks the operation. The integrand f(x) is the function being accumulated. The differential dx names the variable of integration and marks an infinitesimal width, so f(x) dx is one infinitesimal contribution to the total. For a definite integral, the lower limit sits below the sign and the upper limit above it.",
+    sectionId: "3"
   },
   obj5: {
-    question: "What are the main integration techniques?",
-    answer: "Key techniques include substitution (reversing chain rule), integration by parts (reversing product rule), partial fractions (decomposing rational functions), and trigonometric substitution (for square roots of quadratics).",
-    sectionId: "7"
-  },
-  obj6: {
-    question: "What are improper integrals?",
-    answer: "Improper integrals extend integration to infinite intervals or unbounded functions. They are defined as limits: the integral converges if the limit exists and is finite, diverges otherwise. Some infinite regions have finite area.",
-    sectionId: "9"
-  },
-  obj7: {
-    question: "How do you verify an integral is correct?",
-    answer: "Differentiate your answer. The derivative of the antiderivative should return the original integrand. This check catches algebraic errors and sign mistakes, since differentiation is more straightforward than integration.",
-    sectionId: "10"
+    question: "Why is the integral sign an elongated S?",
+    answer: "Because it stands for “sum”. Leibniz introduced the symbol as a stretched Latin S, short for summa, because he conceived integration as adding up infinitely many infinitesimal pieces, each of them f(x) dx wide. The shape is a direct record of that idea: an integral is a sum whose pieces vary continuously instead of arriving one at a time.",
+    sectionId: "3"
   }
 }
 
@@ -588,19 +586,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -728,6 +713,22 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, o
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Integrals FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -761,13 +762,6 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, o
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

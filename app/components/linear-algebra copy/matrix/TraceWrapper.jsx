@@ -108,7 +108,8 @@ function buildTraceFormula(n, activeK) {
 // -----------------------------------------------------------
 // Scene builder
 // -----------------------------------------------------------
-function buildScenes(n) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildScenes(n) {
   const sz = getMatrixDisplaySize(n);
   const scenes = [];
 
@@ -319,6 +320,7 @@ function Stepper({ value, onChange, min, max }) {
 // ===========================================================
 export default function TraceWrapper({
   defaultN = 4,
+  explanations = null,
   dimensionRange = [2, 3, 4, 5, 6, 7, 8, 9, 10],
   title = 'Matrix Trace',
   subtitle = 'Symbolic visualization of tr(A) = sum of the main-diagonal entries.',
@@ -329,7 +331,20 @@ export default function TraceWrapper({
   const min = dimensionRange[0];
   const max = dimensionRange[dimensionRange.length - 1];
 
-  const scenes = useMemo(() => buildScenes(n), [n]);
+  const scenes = useMemo(() => {
+    const built = buildScenes(n);
+    if (!explanations) return built;
+    // Line 1 anchor mesh: append the page's per-phase note to the scene caption.
+    // Phases: 0 pose, 1 diagonal reveal, 2..n+1 sweep, last complete.
+    const phaseOf = (i) => (i === 0 ? 'pose'
+      : i === 1 ? 'diagonal'
+      : i === built.length - 1 ? 'complete'
+      : 'sweep');
+    return built.map((sc, i) => {
+      const extra = explanations[phaseOf(i)];
+      return extra ? { ...sc, formula: `${sc.formula}${extra}` } : sc;
+    });
+  }, [n, explanations]);
 
   return (
     <div style={{

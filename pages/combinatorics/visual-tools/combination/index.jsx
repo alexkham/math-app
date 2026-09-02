@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import SimpleCombination from '../../../../app/components/combinatorics/new-visualizers/scenes/SimpleCombination'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import simpleCombinationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/simpleCombinationDiagrams'
 
 
 export async function getStaticProps(){
@@ -541,9 +543,9 @@ export async function getStaticProps(){
 
 • A **source row** at the top showing all $n$ available items.
 
-• A **build set** in the middle with $r$ unlabeled slots — the absence of numbers signals that order doesn't matter inside a combination.
+• A [build set](!#the-build-set) in the middle with $r$ unlabeled slots — the absence of numbers signals that order doesn't matter inside a combination.
 
-• A **completed** section below, where every finished subset is filed under the row matching its smallest element.
+• A **completed** section below, where every finished subset is filed under the row matching its [smallest element](!#grouping-by-smallest-item).
 
 To run the visualization:
 
@@ -557,7 +559,9 @@ To run the visualization:
 
 The header shows the formula $C(n, r) = \\text{total}$ alongside a live status line such as *Group A: $k$ / size* while building, or *Complete · total / total* when done.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the opening position, and its most eloquent feature is a small absence: the two waiting slots carry no position numbers. Every other build area on these pages labels its slots #1, #2, … — here there is nothing to label, because a subset has no first or second member.
+
+Everything else about the frame is familiar from the ordered tools: same balls, same source row, same machinery. The entire difference between $P(n, r)$ and $C(n, r)$ lives in those missing labels.`,
       link: '',
     },
 
@@ -577,7 +581,9 @@ The header shows the formula $C(n, r) = \\text{total}$ alongside a live status l
 
 The absence of position numbers is the visual signature of a combination — a deliberate contrast with the labeled $\\#1, \\#2, \\dots$ slots in the permutation visualizers.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above catches the third subset mid-build: B has landed, C is riding its dotted guide, and the two completed $\\{A, \\cdot\\}$ subsets already sit filed above. Because balls always land smallest-first, the arrangement being built is not an **order** — it is a canonical spelling of a set.
+
+Canonical order is a bookkeeping trick, not a mathematical claim: $\\{B, C\\}$ and $\\{C, B\\}$ are one subset, and the tool simply refuses to draw the second spelling. That refusal, applied everywhere, is exactly the [division by r!](!#deriving-c-n-r).`,
       link: '',
     },
 
@@ -599,13 +605,15 @@ Common combinations:
 
 • $n = 5, r = 2$: $C(5, 2) = 10$ subsets.
 
-• $n = 5, r = 3$: $C(5, 3) = 10$ subsets.
+• $n = 5, r = 3$: $C(5, 3) = 10$ subsets — the [worked grouping example](!#grouping-by-smallest-item) below.
 
-• $n = 5, r = 5$: $C(5, 5) = 1$ — the only size-$n$ subset is the whole set.
+• $n = 5, r = 5$: $C(5, 5) = 1$ — [the whole set](!#when-r-equals-n-one-subset) is the only size-$n$ subset.
 
 A useful symmetry to spot: $C(n, r) = C(n, n - r)$. Picking $r$ items to include and picking $n - r$ items to exclude give the same count, which is why $C(5, 2) = C(5, 3) = 10$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is $C(5, 2)$ completed — ten pair-cards — and it is one half of the symmetry stated in the last paragraph. Run $C(5, 3)$ next and count again: ten cards, differently shaped. Every pair in this frame silently names the triple it leaves behind, and vice versa.
+
+The include/exclude reading deserves to be more than a mnemonic: choosing who sits on the committee and choosing who stays home are the same decision. Whenever $r$ passes $n/2$, the smaller complement is the easier count — nobody computes $C(49, 43)$ except as $C(49, 6)$.`,
       link: '',
     },
 
@@ -615,7 +623,7 @@ A useful symmetry to spot: $C(n, r) = C(n, n - r)$. Picking $r$ items to include
 
 Group sizes vary. If the smallest item has index $i$ (counting from $0$), then the other $r - 1$ items must be chosen from the $n - 1 - i$ items strictly larger than it:
 
-$$\\text{group size at smallest} = i = \\binom{n - 1 - i}{r - 1}$$
+$$\\text{group size at smallest index } i = \\binom{n - 1 - i}{r - 1}$$
 
 For example with $n = 5, r = 3$:
 
@@ -625,11 +633,13 @@ For example with $n = 5, r = 3$:
 
 • Smallest is item 3: pick 2 from 2. $\\binom{2}{2} = 1$ subset.
 
-Total: $6 + 3 + 1 = 10 = C(5, 3)$. This decomposition is the visual proof of **Pascal's identity** in action — summing $\\binom{n - 1 - i}{r - 1}$ over valid $i$ values reconstructs $\\binom{n}{r}$.
+Total: $6 + 3 + 1 = 10 = C(5, 3)$. This decomposition is the visual proof of **Pascal's identity** in action — summing $\\binom{n - 1 - i}{r - 1}$ over valid $i$ values reconstructs $\\binom{n}{r}$, as laid out under [related concepts](!#related-concepts).
 
 Each row in the completed area sizes itself to its group's count, so rows shrink as the smallest item gets larger.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is that worked example completed: $C(5, 3)$ as three rows of $6$, $3$, and $1$ triples. The staircase shape is not decoration — each step down reflects a shrinking pool of larger items to draw from.
+
+Notice also which item never fronts a row: with $r = 3$ from five items, nothing above index $2$ can be a minimum, because a smallest element needs at least $r - 1$ items above it. The grouping teaches its own boundary conditions.`,
       link: '',
     },
 
@@ -639,7 +649,7 @@ Each row in the completed area sizes itself to its group's count, so rows shrink
 
 • **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single subset or pausing mid-build.
 
-• **Step ▶** (Step forward) — advances one ball into one slot. Stop after each step to read the partial subset.
+• **Step ▶** (Step forward) — advances one ball into [one unlabeled slot](!#the-build-set). Stop after each step to read the partial subset.
 
 • **▶ Play / ⏸ Pause** — runs the animation continuously until all $C(n, r)$ subsets are built, then auto-pauses.
 
@@ -659,7 +669,7 @@ The **Speed** slider controls how fast play advances. At higher speeds the fly a
 
 • **Letters mode** — items appear with letter labels (A, B, C, …). The smallest-item avatar in each group is just the letter, colored to match. Best for reading off the subset as a set like $\\{A, C, D\\}$ and connecting to algebraic notation.
 
-The encoding is consistent across the source row, the build set, the flying ball, every mini card in the completed grid, and the right-panel narration. Switching modes mid-animation is safe — the build state preserves; only the rendering changes.`,
+The encoding is consistent across the source row, the build set, the flying ball, every mini card in the completed grid, and the [right-panel narration](!#right-panel-and-progress). Switching modes mid-animation is safe — the build state preserves; only the rendering changes.`,
       before: ``,
       after: ``,
       link: '',
@@ -667,9 +677,9 @@ The encoding is consistent across the source row, the build set, the flying ball
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds, anchored by the header *Simple combinations* with the full formula $C(n, r) = n! / (r! \\cdot (n - r)!) = \\text{total}$ and a one-line reminder that each subset is counted $r!$ times among partial permutations, so $C(n, r) = P(n, r) / r!$.
+      content: `The right panel narrates the build as it unfolds, anchored by the header **Simple combinations** with the full formula $C(n, r) = n! / (r! \\cdot (n - r)!) = \\text{total}$ and a one-line reminder that each subset is counted $r!$ times among partial permutations, so $C(n, r) = P(n, r) / r!$.
 
-A **StepRow** is added for each smallest-item group as soon as a subset in that group starts or completes. Each StepRow shows:
+A **StepRow** is added for each [smallest-item group](!#grouping-by-smallest-item) as soon as a subset in that group starts or completes. Each StepRow shows:
 
 • The **smallest item** as a chip plus its name — for instance, *Smallest item: A*.
 
@@ -677,7 +687,7 @@ A **StepRow** is added for each smallest-item group as soon as a subset in that 
 
 • A short **narration** of the structure: *Smallest item is A. Pick the remaining $r - 1$ from B, C, D, and E: $\\binom{4}{r-1}$ subsets.* For $r = 1$ the narration says the subset is just the single item; when the smallest is the highest valid index, the subset is fully determined.
 
-When all groups complete, every StepRow shows *done* with a checkmark, and the counter reaches *total / total*.`,
+When all groups complete, every StepRow shows **done** with a checkmark, and the counter reaches *total / total*.`,
       before: ``,
       after: ``,
       link: '',
@@ -701,7 +711,9 @@ Examples:
 
 • Drawing a lottery ticket of $6$ numbers from $49$: $C(49, 6) = 13{,}983{,}816$ possible tickets.
 
-The combination is the right model whenever a problem asks *which* items are chosen but not *in what order* — and reuse is not allowed.
+The combination is the right model whenever a problem asks **which** items are chosen but not **in what order** — and reuse is not allowed.
+
+On this page the idea runs live: from the [opening position](!#getting-started) the [unlabeled build set](!#the-build-set) fills smallest-first, results file into [smallest-item groups](!#grouping-by-smallest-item), [n and r rescale the count](!#adjusting-n-and-r) with its include/exclude symmetry, and the boundary $r = n$ collapses everything to [a single subset](!#when-r-equals-n-one-subset).
 
 For deeper coverage, see the **combinations** section on the combinations theory page.`,
       before: ``,
@@ -711,7 +723,7 @@ For deeper coverage, see the **combinations** section on the combinations theory
 
     obj9: {
       title: `Deriving C(n,r)`,
-      content: `The cleanest derivation goes through the partial permutation. Start by counting ordered selections of $r$ items from $n$ — that's $P(n, r) = n! / (n - r)!$.
+      content: `The cleanest derivation goes through the [partial permutation](!#related-concepts). Start by counting ordered selections of $r$ items from $n$ — that's $P(n, r) = n! / (n - r)!$.
 
 Now ask: how many of those ordered selections correspond to the same unordered subset? Every subset of size $r$ can be arranged in $r!$ different orders, and the partial permutation counts each order separately. So:
 
@@ -723,9 +735,11 @@ Equivalently, by direct counting at the position level:
 
 • Because order doesn't matter, divide by the $r!$ permutations of each chosen subset.
 
-The tool visualizes the equivalent decomposition: every subset has a unique smallest element. Group by that smallest. The group whose smallest is index $i$ contributes $\\binom{n - 1 - i}{r - 1}$ subsets — the number of ways to fill the other $r - 1$ slots from the $n - 1 - i$ larger items. Summing across all valid $i$ values yields $\\binom{n}{r}$.`,
+The tool visualizes the equivalent decomposition: every subset has a unique smallest element. [Group by that smallest](!#grouping-by-smallest-item). The group whose smallest is index $i$ contributes $\\binom{n - 1 - i}{r - 1}$ subsets — the number of ways to fill the other $r - 1$ slots from the $n - 1 - i$ larger items. Summing across all valid $i$ values yields $\\binom{n}{r}$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the division made visible at the smallest scale: $C(3, 2) = 3$ subsets, where the partial permutation tool shows $P(3, 2) = 6$ ordered pairs for the same inputs. Set the two frames side by side and pair them up — $AB$ with $BA$, $AC$ with $CA$, $BC$ with $CB$ — exactly $2! = 2$ ordered spellings collapsing onto each card here.
+
+That two-to-one pairing **is** the formula. The division by $r!$ is not an algebraic trick but a census of duplicates, and at $n = 3, r = 2$ it is small enough to check by pointing.`,
       link: '',
     },
 
@@ -739,7 +753,7 @@ The tool visualizes the equivalent decomposition: every subset has a unique smal
 
 **Pascal's triangle** — every entry is a binomial coefficient $\\binom{n}{r}$. Adjacent rows satisfy $\\binom{n}{r} = \\binom{n - 1}{r - 1} + \\binom{n - 1}{r}$, the rule that builds the triangle.
 
-**Pascal's identity** — the smallest-element grouping in this tool gives a direct visual proof: $\\binom{n}{r} = \\sum_{i} \\binom{n - 1 - i}{r - 1}$ summed over valid smallest indices.
+**Pascal's identity** — the [smallest-element grouping](!#grouping-by-smallest-item) in this tool gives a direct visual proof: $\\binom{n}{r} = \\sum_{i} \\binom{n - 1 - i}{r - 1}$ summed over valid smallest indices.
 
 **Multinomial coefficient** — generalizes $\\binom{n}{r}$ to more than two groups: $\\binom{n}{k_1, k_2, \\dots, k_m} = n! / (k_1! \\cdots k_m!)$.
 
@@ -750,10 +764,18 @@ The tool visualizes the equivalent decomposition: every subset has a unique smal
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `When r = n: One Subset`,
+      content: `Push $r$ up to $n$ and the choice disappears: taking five items from five leaves nothing to decide. The count collapses to its floor:
+
+$$C(n, n) = \\frac{n!}{n! \\cdot 0!} = 1$$
+
+Run it at $n = 5, r = 5$ and the completed section holds a single card containing every ball — the whole set, the only subset of full size. The $0! = 1$ convention quietly holds the denominator together, just as it does at the other extreme $C(n, 0) = 1$ (the empty set).
+
+The symmetry $C(n, r) = C(n, n - r)$ frames both extremes at once: choosing everything and choosing nothing are mirror decisions, each with exactly one outcome.`,
       before: ``,
-      after: ``,
+      after: `One is the loneliest count in combinatorics, and it always signals the same thing: no freedom left. Between the two extremes the counts rise and fall along a row of Pascal's triangle, peaking at the middle $r \\approx n/2$ — the setting with the most genuine choice.
+
+The single-card run is also the fastest way to sanity-check the tool's grouping logic: with $r = n$ only one smallest-item group can exist (the group of the very first item), and its size formula $\\binom{n-1}{n-1} = 1$ agrees. Boundaries are where formulas either shine or break; this one shines — see [the derivation](!#deriving-c-n-r) for the general machinery.`,
       link: '',
     },
     obj12: {
@@ -901,12 +923,43 @@ The tool visualizes the equivalent decomposition: every subset has a unique smal
   }
 
 
+  // Frozen-state framed units (Line 1): phases + notable (n, r) configurations.
+  const d = simpleCombinationDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    idle: u('idle', '(n, r) = (3, 2), idle, frozen',
+      'Two waiting slots with no position numbers — the only build area on these pages with nothing to label, because a subset has no first member.'),
+    building: u('building', '(3, 2) mid-build, frozen',
+      'The third subset under way: B landed, C on its dotted guide — always smallest-first, a canonical spelling rather than an order.'),
+    default32: u('default32', 'C(3, 2) complete, frozen',
+      'Three subset cards where the ordered tool shows six: each card quietly absorbs the 2! spellings of the same pair.'),
+    sym52: u('sym52', 'C(5, 2) complete, frozen',
+      'Ten pair-cards — and every pair silently names the triple it leaves behind: C(5, 2) = C(5, 3) by include/exclude symmetry.'),
+    big53: u('big53', 'C(5, 3) complete, frozen',
+      'Ten triples in a staircase of rows: 6 + 3 + 1 by smallest element — Pascal’s identity drawn as shrinking shelves.'),
+    rEqualsN: u('rEqualsN', 'C(5, 5) complete, frozen',
+      'One card holding every ball: taking all five from five leaves nothing to decide — the count at its floor of 1.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the right panel's
+  // step rows through processContent — same-page !# anchors work.
+  const explanations = {
+    idle: `The slots carry no numbers — a subset has no first or second member, and that absence is the whole difference from the permutation tools. [Learn more about getting started](!#getting-started) · [What is a combination](!#what-is-a-combination)`,
+    building: `Balls land smallest-first: the build is a canonical spelling of a set, not an order — equivalent spellings are simply never drawn. [Learn more about the build set](!#the-build-set) · [What is a combination](!#what-is-a-combination)`,
+    default32: `Three subsets where the ordered count gives six: each card absorbs the r! = 2 spellings of one pair — division as a census of duplicates. [Learn more about the derivation](!#deriving-c-n-r) · [What is a combination](!#what-is-a-combination)`,
+    sym52: `Ten pairs — the same ten as C(5, 3), because choosing two to include is choosing three to exclude. [Learn more about adjusting n and r](!#adjusting-n-and-r) · [What is a combination](!#what-is-a-combination)`,
+    big53: `Ten triples in groups of 6, 3, and 1 by smallest element — Pascal's identity working row by row. [Learn more about the grouping](!#grouping-by-smallest-item) · [What is a combination](!#what-is-a-combination)`,
+    rEqualsN: `Taking everything leaves nothing to decide: C(n, n) = 1, one card with all the balls, held together by 0! = 1. [Learn more about the r = n boundary](!#when-r-equals-n-one-subset) · [What is a combination](!#what-is-a-combination)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Simple Combination Visualizer: C(n,r) | Learn Math Class",
         description: "Visualize simple combinations C(n,r) = n!/(r!·(n-r)!). Watch every unordered subset of r items from n build step by step, grouped by smallest element.",
@@ -915,105 +968,48 @@ The tool visualizes the equivalent decomposition: every subset has a unique smal
         name: "Simple Combination Visualizer",
         hubDescription: "Pick r items from n where order doesn't matter — watch each unordered subset build canonically and group by its smallest element. The varying row sizes expose why C(n,r) = P(n,r)/r! and how Pascal's identity sums to the binomial coefficient.",
         category: "Combinations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="14" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="26" cy="14" r="6" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="1"/><circle cx="40" cy="14" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="54" cy="14" r="6" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="1"/><circle cx="68" cy="14" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><line x1="40" y1="24" x2="40" y2="33" stroke="#B5D4F4" stroke-width="1" stroke-dasharray="2,1.5"/><path d="M37 33 L43 33 L40 37 Z" fill="#B5D4F4"/><text x="15" y="60" font-family="Georgia,serif" font-size="22" fill="#FAC775">{</text><text x="63" y="60" font-family="Georgia,serif" font-size="22" fill="#FAC775">}</text><circle cx="29" cy="52" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="41" cy="52" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="53" cy="52" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="40" y="74" font-family="Georgia,serif" font-size="9" fill="#E6F1FB" text-anchor="middle" font-style="italic">C(5, 3)</text></svg>`
       },
 
     }
   }
 }
 
-export default function SimpleCombinationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function SimpleCombinationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
+    plain('obj0', 'key-terms'),
+    stateRow('obj1', 'getting-started', 'idle'),
+    stateRow('obj2', 'the-build-set', 'building'),
+    stateRow('obj3', 'adjusting-n-and-r', 'sym52'),
+    stateRow('obj4', 'grouping-by-smallest-item', 'big53'),
+    stateRow('obj11', 'when-r-equals-n-one-subset', 'rEqualsN'),
+    plain('obj5', 'transport-controls'),
+    plain('obj6', 'mode-switch'),
+    plain('obj7', 'right-panel-and-progress'),
+    plain('obj8', 'what-is-a-combination'),
+    stateRow('obj9', 'deriving-c-n-r', 'default32'),
+    plain('obj10', 'related-concepts'),
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1111,7 +1107,7 @@ export default function SimpleCombinationVisualizer({seoData, sectionsContent, i
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Simple Combinations</h1>
       <br/>
-      <SimpleCombination/>
+      <SimpleCombination explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

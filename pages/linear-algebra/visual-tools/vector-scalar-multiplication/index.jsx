@@ -330,9 +330,8 @@
 //   }
 // }
 
-// export default function ScalarMultiplicationVisualizer({seoData,sectionsContent , introContent, faqQuestions, schemas}) {
+// export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-    
 //   const genericSections=[
 //     // {
 //     //     id:'0',
@@ -597,6 +596,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ScalarMultiplicationWrapper from '../../../../app/components/linear-algebra copy/matrix/ScalarMultiplicationWrapper'
+import vectorScalarDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorScalarDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -783,12 +784,81 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
       after: ``,
       link: '#related-concepts',
     },
-    obj10: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj10: {
+      title: `The Opening Scene: One Number and One Vector`,
+      content: `The player opens with the scalar $k$, the vector $\mathbf{u}$ laid out as a row of components, and an empty $\mathbf{w}$ below it. At the default length $\mathbf{u}$ has four components, so $\mathbf{w}$ will have four as well.
+
+Only the setup is on screen: a single number on one side, four components on the other, and the statement that $\mathbf{w} = k \cdot \mathbf{u}$ is about to be built one slot at a time.`,
+      before: ``,
+      after: `There is no matching-length precondition here, unlike addition. A scalar multiplies a vector of any length, because it meets each component individually rather than pairing off against a second vector.
+
+The result stays in the same space it started in: scale a vector of $\mathbb{R}^4$ by any real number and you get another vector of $\mathbb{R}^4$. That closure under scaling is one of the two operations a vector space is required to support, the other being the addition on its own page.`,
+      link: '',
+    },
+    obj11: {
+      title: `One Component at a Time`,
+      content: `Each step highlights one component $u_j$ together with its destination $w_j$, and writes $k \cdot u_j$ into that slot.
+
+The frozen picture below is a step partway through the run: earlier slots already hold their scaled value, one is being computed, and the rest are still placeholders.`,
+      before: ``,
+      after: `Every step uses the same $k$. That single shared factor is what makes the operation *uniform* — it stretches all components by an identical amount, which is precisely why the direction of the vector is preserved.
+
+Compare that with multiplying each component by a *different* number. That is a perfectly good operation too, but it is not scalar multiplication; it distorts the vector rather than scaling it, and it corresponds to applying a diagonal matrix instead of a scalar.`,
+      link: '',
+    },
+    obj12: {
+      title: `The Completed Product`,
+      content: `The final scene fills every slot, so $\mathbf{w}$ reads $w_j = k \cdot u_j$ across all four components, at the same length it started with.
+
+Geometrically, $\mathbf{w}$ points along the same line as $\mathbf{u}$ and its length is scaled by $|k|$: $\|k\mathbf{u}\| = |k| \, \|\mathbf{u}\|$.`,
+      before: ``,
+      after: `The sign of $k$ decides the direction. For $k > 1$ the vector stretches, for $0 < k < 1$ it shrinks, at $k = 0$ it collapses to the zero vector, and for $k < 0$ it flips to point the opposite way while scaling by $|k|$. The absolute value in the length formula is doing real work: a length can never come out negative.
+
+The algebraic rules follow from the components, exactly as for matrices: $k(\mathbf{u} + \mathbf{v}) = k\mathbf{u} + k\mathbf{v}$, $(k + m)\mathbf{u} = k\mathbf{u} + m\mathbf{u}$, $(km)\mathbf{u} = k(m\mathbf{u})$, and $1 \cdot \mathbf{u} = \mathbf{u}$. Together with the addition axioms these are what make $\mathbb{R}^n$ a vector space.
+
+One consequence worth naming: the set of all scalar multiples of a single non-zero $\mathbf{u}$ is a line through the origin. That set is the span of $\mathbf{u}$, and it is the simplest example of a subspace.`,
+      link: '',
+    },
     obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from ScalarMultiplicationWrapper's own buildVectorScenes (exported
+     additively) and rendered through frozenMatrixSvg - a vector is a one-row
+     matrix as far as the renderer is concerned. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: vectorScalarDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'The scalar k beside u, with w empty below. Every slot of w shows the placeholder - and there is ' +
+      'no length rule to satisfy, since k meets each component on its own.'),
+    step: unit('step', 'Mid-sweep, frozen',
+      'One component of u and its destination slot in w highlighted together. Earlier slots already hold ' +
+      'k times their component; later ones are still placeholders.'),
+    done: unit('done', 'Completed product, frozen',
+      'All four slots filled with k times the component above, and w still four long. The same k ' +
+      'everywhere is what keeps the direction unchanged.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     Reuses the explanations hook added to ScalarMultiplicationWrapper for the
+     matrix page: keys are the scene phase. This page passes its own object, so
+     the two pages never collide. Captions render with dangerouslySetInnerHTML,
+     so these are raw HTML anchors. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#what-scalar-multiplication-is" style="color:#1d4ed8;font-weight:600">what it is</a></div>`
+
+  const explanations = {
+    intro: note('No length rule to satisfy - k scales a vector of any length, and the result stays in the same space.', 'the-opening-scene', 'Learn more about the opening scene'),
+    step: note('One shared factor across every component - that uniformity is what preserves direction.', 'one-component-at-a-time', 'Learn more about the component sweep'),
+    done: note('Length scales by |k|, and a negative k reverses the direction.', 'the-completed-product', 'Learn more about the completed product'),
   }
 
 
@@ -908,6 +978,8 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
   return {
     props: {
       sectionsContent,
+         stateUnits,
+         explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -925,140 +997,43 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
   }
 }
 
-export default function ScalarMultiplicationVisualizer({seoData,sectionsContent , introContent, faqQuestions, schemas}) {
+export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    // {
-    //     id:'0',
-    //     title:sectionsContent.obj0.title,
-    //     link:sectionsContent.obj0.link,
-    //     content:[
-    //       sectionsContent.obj0.content,
-    //     ]
-    // },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    // {
-    //     id:'10',
-    //     title:sectionsContent.obj10.title,
-    //     link:sectionsContent.obj10.link,
-    //     content:[
-    //       sectionsContent.obj10.content,
-    //     ]
-    // },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    // obj0 Key Terms was defined but rendered nowhere - its section entry and the
+    // KeyTermsCard were both commented out, so the content was invisible. Restored.
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-scene-player'),
+    stateRow('obj10', 'the-opening-scene', 'intro'),
+    stateRow('obj11', 'one-component-at-a-time', 'step'),
+    stateRow('obj12', 'the-completed-product', 'done'),
+    plain('obj3', 'choosing-vector-length'),
+    plain('obj4', 'what-scalar-multiplication-is'),
+    plain('obj5', 'key-properties'),
+    plain('obj6', 'why-it-matters'),
+    plain('obj7', 'worked-example'),
+    plain('obj8', 'common-mistakes'),
+    plain('obj9', 'related-concepts'),
+  ]
 
   return (
    <>
@@ -1118,6 +1093,7 @@ export default function ScalarMultiplicationVisualizer({seoData,sectionsContent 
    <ScalarMultiplicationWrapper
    
    mode='vectors'
+   explanations={explanations}
    
    />
    </div>

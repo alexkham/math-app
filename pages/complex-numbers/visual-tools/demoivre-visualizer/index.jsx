@@ -406,6 +406,9 @@ No teal $n\\theta$ arc appears in this frame — the normalized result angle is 
         description: "Visualize De Moivre's theorem interactively. Raise complex numbers to any power, see spiral trails, angle multiplication, and step-by-step polar solutions.",
         keywords: keyWords.join(", "),
         url: "/complex-numbers/visual-tools/demoivre-visualizer",
+        hubDescription: "Raise any complex number to any integer power and watch the result animate on the plane. See modulus scale and angle multiply, follow the step-by-step polar calculation, and trace intermediate powers as a spiral trail.",
+        category: "Powers & Exponential",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="46" x2="72" y2="46" stroke="#B5D4F4" stroke-width="0.9"/><line x1="38" y1="14" x2="38" y2="68" stroke="#B5D4F4" stroke-width="0.9"/><path d="M 44 46 C 45.5 43, 42.5 37.5, 40.53 35.86 C 37 33.5, 34.5 33, 32.39 33.39 C 27 34, 24 35.5, 21.93 37.46 C 18 40, 15.5 46, 14.27 50.19" fill="none" stroke="#FAC775" stroke-width="1.4" stroke-dasharray="3,2"/><circle cx="44" cy="46" r="2" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.9"/><circle cx="40.53" cy="35.86" r="2.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="32.39" cy="33.39" r="2.9" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="21.93" cy="37.46" r="3.2" fill="#EF9F27" stroke="#854F0B" stroke-width="1"/><circle cx="14.27" cy="50.19" r="3.6" fill="#ED93B1" stroke="#72243E" stroke-width="1.1"/><text x="50" y="72" font-family="Georgia,serif" font-size="11" fill="#E6F1FB" font-style="italic">z</text><text x="57" y="65" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" font-style="italic">n</text></svg>`,
          name: "De Moivre's Theorem Visual Calculator"
       },
         

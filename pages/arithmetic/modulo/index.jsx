@@ -804,6 +804,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1281,58 +1282,32 @@ The [GCD](!/arithmetic/divisibility/gcd) — greatest common divisor — relies 
   content: `Division does not always come out even. When $17$ is divided by $5$, the result is $3$ with $2$ left over. That leftover — the remainder — is not a loose end to discard. It carries information about the relationship between the two numbers, and an entire branch of arithmetic is built around extracting and using it.`
 }
 
+// FAQ pass: cut seven case-A questions whose own h2s answer them (what is
+// modulo, range of remainders, congruence, its properties, clock analogy,
+// modulo-and-divisibility, why modulo matters), the divisibility-rules
+// question (owned by /arithmetic/divisibility/rules) and the Euclidean
+// algorithm question (owned by /arithmetic/divisibility/gcd). Kept four
+// buried-content questions, three of them extended.
 const faqQuestions = {
   obj1: {
-    question: "What is the modulo operation?",
-    answer: "The modulo operation returns the remainder when one integer is divided by another. For a mod n, it answers: what is left over when a is divided by n? For example, 17 mod 5 = 2 because 17 = 5×3 + 2, leaving a remainder of 2."
+    question: "What is the difference between mod and % operators?",
+    answer: "Mathematical notation writes a mod n; most programming languages write a % n. For positive integers the two agree completely. For negative operands they can disagree: -7 % 3 gives 2 in Python but -1 in C and JavaScript, because languages differ over whether the result follows the divisor's sign. The details are covered in [modulo with negative numbers](!/arithmetic/modulo/negative-numbers).",
+    sectionId: "2"
   },
   obj2: {
-    question: "What is the difference between mod and % operators?",
-    answer: "Mathematical notation writes a mod n, while most programming languages use a % n. Both compute remainders, but they may differ for negative numbers depending on the language. The underlying operation is the same for positive integers."
+    question: "How do you test if a number is even or odd using modulo?",
+    answer: "A number is even if n mod 2 = 0, and odd if n mod 2 = 1 — evenness is exact divisibility by 2, so the remainder decides. Similarly, n mod 10 gives the last digit of any number, and n mod 100 gives the last two digits.",
+    sectionId: "3"
   },
   obj3: {
-    question: "What is the range of possible remainders for a mod n?",
-    answer: "For any divisor n, the remainder is always one of the values {0, 1, 2, ..., n-1}. There are exactly n possibilities. The remainder can never equal n — if it did, another complete copy of n could be extracted."
+    question: "What is a congruence class?",
+    answer: "A congruence class (also called a residue class) modulo n is the set of all integers sharing the same remainder when divided by n. For n = 3, the integers partition into three classes: multiples of 3 (remainder 0), those with remainder 1, and those with remainder 2. Every integer belongs to exactly one class.",
+    sectionId: "5"
   },
   obj4: {
-    question: "What does congruent modulo n mean?",
-    answer: "Two integers a and b are congruent modulo n (written a ≡ b (mod n)) when they have the same remainder upon division by n. Equivalently, n divides their difference (a - b). For example, 17 ≡ 5 (mod 12) because both leave remainder 5."
-  },
-  obj5: {
-    question: "How is modulo related to divisibility?",
-    answer: "When a mod n = 0, the remainder is zero, meaning n divides a exactly. The statement a mod n = 0 is the computational form of n | a (n divides a). Every divisibility question is essentially a modulo question."
-  },
-  obj6: {
-    question: "What are the properties of congruence?",
-    answer: "Congruence is an equivalence relation with three properties: Reflexive (a ≡ a), Symmetric (if a ≡ b then b ≡ a), and Transitive (if a ≡ b and b ≡ c then a ≡ c). These properties partition integers into congruence classes sharing the same remainder."
-  },
-  obj7: {
-    question: "How does the clock analogy explain modulo?",
-    answer: "A 12-hour clock is modular arithmetic: after 12 comes 1, not 13. The time 15:00 on a 24-hour clock is 3:00 on a 12-hour clock (15 mod 12 = 3). Days of the week work similarly with mod 7. Any cyclic system uses modular arithmetic."
-  },
-  obj8: {
-    question: "How do you test if a number is even or odd using modulo?",
-    answer: "A number is even if n mod 2 = 0, and odd if n mod 2 = 1. This is a mod 2 test. Similarly, n mod 10 gives the last digit of any number, and n mod 100 gives the last two digits."
-  },
-  obj9: {
-    question: "What is a congruence class?",
-    answer: "A congruence class modulo n is the set of all integers sharing the same remainder when divided by n. For n = 3, integers partition into three classes: multiples of 3 (remainder 0), those with remainder 1, and those with remainder 2. Every integer belongs to exactly one class."
-  },
-  obj10: {
-    question: "Why is modulo important in computer science?",
-    answer: "Modulo controls array indexing, hash functions, and cyclic data structures. In cryptography, modular arithmetic underpins encryption algorithms like RSA. The remainder operation is fundamental to secure digital communication and efficient data storage."
-  },
-  obj11: {
-    question: "How do divisibility rules relate to modulo?",
-    answer: "Divisibility rules are modular arguments in compact form. The digit-sum test for 9 uses the fact that 10 ≡ 1 (mod 9). The test for 11 uses 10 ≡ -1 (mod 11). Each rule exploits a congruence property of powers of 10."
-  },
-  obj12: {
     question: "What is the difference between a mod n and a ≡ b (mod n)?",
-    answer: "a mod n is an operation that produces a number (the remainder). a ≡ b (mod n) is a relationship stating that a and b have the same remainder when divided by n. The first computes a value; the second asserts equality of remainders."
-  },
-  obj13: {
-    question: "How does the Euclidean algorithm use modulo?",
-    answer: "The Euclidean algorithm for finding the GCD repeatedly applies modulo to reduce a pair of numbers until the remainder reaches zero. Each step replaces the larger number with the remainder. The last nonzero remainder is the GCD."
+    answer: "a mod n is an operation that produces a number: the remainder. a ≡ b (mod n) is a relationship stating that a and b leave the same remainder when divided by n. The first computes a value, the second asserts a fact — 17 mod 5 = 2 is a computation, while 17 ≡ 2 (mod 5) is a true statement about two numbers.",
+    sectionId: "2"
   }
 }
 
@@ -1402,19 +1377,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/modulo"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1587,6 +1549,22 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Modulo FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -1619,17 +1597,10 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

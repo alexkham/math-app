@@ -980,7 +980,8 @@ For genuinely large multisets the tool bows out and the formula alone remains: M
         name: "Permutation with Identical Items Visualizer",
         hubDescription: "Cycle through six multisets — AAB, AAAB, AABB, AABC, AAABB, AABBC — and watch every distinct permutation build one position at a time. Only the specific copy in use dims in the source row, exposing why n! divides by k! for each repeated group.",
         category: "Permutations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="14" r="6.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="31" cy="14" r="6.5" fill="#85B7EB" fill-opacity="0.3" stroke="#0C447C" stroke-width="1" stroke-dasharray="2,1.5"/><circle cx="45" cy="14" r="6.5" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="59" cy="14" r="6.5" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><line x1="40" y1="26" x2="40" y2="34" stroke="#B5D4F4" stroke-width="1" stroke-dasharray="2,1.5"/><path d="M37 34 L43 34 L40 38 Z" fill="#B5D4F4"/><circle cx="17" cy="49" r="6.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="31" cy="49" r="6.5" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="45" cy="49" r="6.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="59" cy="49" r="6.5" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><rect x="23" y="63" width="34" height="14" rx="7" fill="#CECBF6" stroke="#534AB7" stroke-width="1.2"/><text x="40" y="73" font-family="Georgia,serif" font-size="8" fill="#26215C" text-anchor="middle" font-style="italic">2! &#183; 2!</text></svg>`
       },
 
     }

@@ -664,6 +664,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -871,26 +872,35 @@ export async function getStaticProps(){
 `
 
 
+  // FAQ pass: the definition, the calculation methods, contingency tables,
+  // joint-vs-marginal and independence each name their own h2. Replaced
+  // with the notation section's traps — including the P(A, B) comma form
+  // deferred here from conditional probability notation.
   const faqQuestions = {
     obj1: {
-      question: "What is joint probability?",
-      answer: "Joint probability measures the likelihood that two or more events occur simultaneously or that multiple random variables take specific values at the same time. It estimates the likelihood of combinations rather than isolated outcomes, showing how different outcomes line up within the same situation and occur side by side."
+      question: "What does the comma mean in P(X = x, Y = y)?",
+      answer: "It is a quiet intersection. Each equality names an event, and the comma joins them with “and” — P(X = x, Y = y) is P({X = x} ∩ {Y = y}). With random variables the comma is the standard spelling, not an alternative; the ∩ sign all but disappears. Do not read P(x, y) as a function evaluated at the point (x, y).",
+      sectionId: "notation"
     },
     obj2: {
-      question: "How do you calculate joint probability?",
-      answer: "Joint probability can be calculated several ways depending on the situation: (1) direct reasoning by counting favorable combined outcomes, (2) using contingency tables for discrete variables where each cell shows the likelihood of a specific pair, (3) integrating the joint density over regions for continuous variables, (4) using the joint CDF, or (5) applying probability rules to combined conditions."
+      question: "Can you always split a joint density into a product of marginals?",
+      answer: "No. f(x, y) equals f_X(x)·f_Y(y) only when X and Y are [independent](!/probability/independence#notation) — the factorization is not a rule, it is what independence means for densities. Assuming the split without justification is the most common error here, and the same trap appears one storey up with joint CDFs.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "What is a contingency table in probability?",
-      answer: "A contingency table organizes joint probabilities for discrete variables with one variable forming rows, the other forming columns, and each cell showing the likelihood of the two outcomes occurring together. The table displays the entire joint distribution at once, making it easy to see which combinations are more likely and how variables behave side by side."
+      question: "What is the difference between a marginal and a conditional probability?",
+      answer: "A marginal averages over the other variable; a conditional pins it to one value. In a contingency table that is the difference between a row total and a single cell divided by its column total. The marginal answers how likely X is overall, the conditional how likely X is among the cases where Y took one particular value.",
+      sectionId: "mistakes"
     },
     obj4: {
-      question: "What's the difference between joint and marginal probability?",
-      answer: "Joint probability describes the likelihood of combined outcomes for multiple variables together. Marginal probability describes the likelihood of each variable on its own, obtained from the joint distribution by summing or integrating over the other variable. Marginals show standalone behavior but lose information about dependence patterns visible in the joint distribution."
+      question: "Why is it called a marginal probability?",
+      answer: "Because of where the numbers used to be printed. In a contingency table the row and column totals are written in the margins, and those totals are exactly the individual probabilities of each variable. The name stuck even when no table is drawn: a marginal is what you get by summing the joint over everything the other variable can do.",
+      sectionId: "marginal"
     },
     obj5: {
-      question: "How does independence show up in joint probability?",
-      answer: "Two variables are independent when the joint probability equals the product of their marginal probabilities. In a contingency table, every cell equals (row marginal) × (column marginal). For continuous variables, the joint density breaks into the product of marginal densities. Independence means the variables don't influence each other and create no patterns together."
+      question: "How do you find the probability of a rectangle from a joint CDF?",
+      answer: "By inclusion–exclusion on the four corners: P(a < X ≤ b, c < Y ≤ d) = F(b, d) − F(a, d) − F(b, c) + F(a, c). Subtracting the two overhanging strips removes the corner region twice, so it has to be added back once. It is the two-variable analogue of F(b) − F(a).",
+      sectionId: "notation"
     }
   }
 
@@ -959,19 +969,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/joint-probability"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1455,6 +1452,22 @@ export default function JointProbabilityPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Joint Probability FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -1500,13 +1513,6 @@ export default function JointProbabilityPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

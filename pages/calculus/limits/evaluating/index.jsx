@@ -10,6 +10,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -516,66 +517,32 @@ This page covers the core techniques: factoring, rationalizing, and algebraic ma
 };
 
 
+// FAQ pass: cut ten case-A questions — direct substitution, indeterminate
+// forms, factoring, rationalizing, expanding, combining fractions, sign
+// analysis and worked examples each have an h2 stating the answer; limits at
+// infinity and special limits are owned by their dedicated pages. Kept the
+// 0/0 question, extended; invented three from the notation section, whose
+// entries no heading surfaces.
 const faqQuestions = {
   obj1: {
-    question: "What is direct substitution for limits?",
-    answer: "Direct substitution means plugging the value a into f(x). If the result is a finite number with no division by zero, that number is the limit. This works for polynomials, rational functions where the denominator is nonzero, and compositions of continuous functions.",
-    sectionId: "1"
-  },
-  obj2: {
     question: "What does 0/0 mean when evaluating a limit?",
-    answer: "The form 0/0 is indeterminate—it doesn't determine the limit's value. It signals that both numerator and denominator share a common factor that must be canceled. The limit might be any finite number, infinite, or nonexistent; more work is needed.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What are the indeterminate forms in calculus?",
-    answer: "The indeterminate forms are 0/0, ∞/∞, 0·∞, ∞−∞, 0⁰, 1^∞, and ∞⁰. Each represents a competition between opposing tendencies. These forms require transformation before limit rules can be applied.",
+    answer: "It is a diagnosis, not an answer. Substitution produced 0/0, which records only that the contest between numerator and denominator is still undecided — no arithmetic has been performed. The limit may yet turn out to be any number, or infinite, or nonexistent. Usually a shared factor is hiding in the expression, and factoring then canceling it resolves the form.",
     sectionId: "3"
   },
+  obj2: {
+    question: "Is 1/0 an indeterminate form?",
+    answer: "No. Indeterminate means undecided, and 1/0 has a verdict: a nonzero numerator over a vanishing denominator forces the magnitude to grow without bound. Only the sign is left to settle, by checking each side separately. Students often promote 1/0 to the indeterminate list because it fails direct substitution, but failing substitution and being undecided are different events.",
+    sectionId: "notation"
+  },
+  obj3: {
+    question: "Why is 1 to the power of infinity indeterminate?",
+    answer: "Because the base is never exactly 1 — it only approaches 1 while the exponent explodes, and the two tendencies pull against each other. A base slightly above 1 raised to a huge power grows without bound; slightly below 1, it collapses toward zero. That balance is why (1 + 1/n) to the n approaches e rather than 1. See [special limits](!/calculus/limits/special).",
+    sectionId: "notation"
+  },
   obj4: {
-    question: "How do you use factoring to evaluate limits?",
-    answer: "When substitution yields 0/0, factor both numerator and denominator to find the common factor causing the zeros. Cancel this factor, then substitute. The cancellation is valid because the limit considers x near a, not at a.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the conjugate method for limits with radicals?",
-    answer: "When radicals cause 0/0, multiply numerator and denominator by the conjugate (same terms, opposite sign). This creates a difference of squares that eliminates the radical, allowing cancellation and substitution.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you evaluate limits by expanding expressions?",
-    answer: "Sometimes expanding a product or simplifying a complex fraction reveals the common factor needed for cancellation. Expand the expression, simplify, factor to find the shared term, cancel, then substitute.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you evaluate limits involving difference of fractions?",
-    answer: "Combine the fractions over a common denominator. This often reveals a common factor in the resulting numerator that cancels with a factor in the denominator, resolving the indeterminate form.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you evaluate limits at infinity for rational functions?",
-    answer: "Divide every term in numerator and denominator by the highest power of x in the denominator. As x → ∞, terms with x in the denominator vanish, leaving only the dominant terms that determine the limit.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "How do you use special limits to evaluate other limits?",
-    answer: "Rewrite the expression to match known forms like sin(u)/u → 1 or (eᵘ−1)/u → 1. Factor out constants and substitute variables so the expression matches the standard pattern, then apply the memorized result.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "How do you evaluate limits involving absolute value?",
-    answer: "Evaluate one-sided limits separately. For x > 0 and x < 0, the absolute value |x| equals x and −x respectively. If the one-sided limits differ, the two-sided limit does not exist.",
-    sectionId: "10"
-  },
-  obj11: {
-    question: "How do you determine if a limit is positive or negative infinity?",
-    answer: "Use sign analysis near the point. Check the sign of numerator and denominator separately for values slightly above and below the point. Positive over small positive gives +∞; positive over small negative gives −∞.",
-    sectionId: "11"
-  },
-  obj12: {
-    question: "What are common limit evaluation examples?",
-    answer: "Common examples include factoring (x²−9)/(x−3), rationalizing (√x−2)/(x−4), using special limits for trigonometric expressions, and combining fractions to reveal cancellable factors. Each transforms 0/0 into a determinate form.",
-    sectionId: "12"
+    question: "Do you need to write lim on every line?",
+    answer: "Yes, until the substitution step. The algebra rewrites the expression inside the operator, so each intermediate line keeps its own lim; the symbol drops only once a number finally appears. Omitting it makes the middle lines claim that (x² − 4)/(x − 2) equals x + 2, which is false at x = 2 — only their limits agree.",
+    sectionId: "notation"
   }
 }
 
@@ -650,19 +617,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits/evaluating"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -821,6 +775,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Evaluating Limits FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -858,12 +828,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

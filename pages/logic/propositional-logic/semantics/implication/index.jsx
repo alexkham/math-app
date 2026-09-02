@@ -84,41 +84,41 @@ export async function getStaticProps(){
 
   const properties=[
     `**Reflexivity**:
-$p→p$ is always true for any proposition $𝑝$.
+$p→p$ is always true for any proposition $p$.
 This follows from the [truth table](!/logic/propositional-logic/semantics/implication#tt_self) because whenever 
-the **antecedent** and the **consequent** are the same-$𝑝→𝑝$ is always true since implication is only false when the antecedent is true and the consequent is false, and that simply can not happen here.
+the **antecedent** and the **consequent** are the same-$p→p$ is always true since implication is only false when the antecedent is true and the consequent is false, and that simply can not happen here.
 The expression is always true ([tautology](!/logic/propositional-logic/semantics/tautology)).`,
 `**Transitivity**:
-If $𝑝→𝑞$ and $𝑞→𝑟$, then $𝑝→𝑟$.
+If $p→q$ and $q→r$, then $p→r$.
 Example:
-"If it rains, the ground gets wet." ($𝑝→𝑞$)
-"If the ground gets wet, the grass grows." ($𝑞→𝑟$)
-Conclusion: "If it rains, the grass grows." ($𝑝→𝑟$)`,
+"If it rains, the ground gets wet." ($p→q$)
+"If the ground gets wet, the grass grows." ($q→r$)
+Conclusion: "If it rains, the grass grows." ($p→r$)`,
 `**Contraposition**:
-$𝑝→𝑞$ is logically equivalent to $¬𝑞→¬𝑝$.
+$p→q$ is logically equivalent to $¬q→¬p$.
 This means: If "If it rains, then the ground is wet" is true, then "If the ground is not wet, then it did not rain" must also be true.
 This equivalence is useful in proof techniques, especially proof by contrapositive.`,
 `**Material Implication (Alternative Form)**:
-$𝑝→𝑞$ is equivalent to $¬p∨q$.
-This means that "If $𝑝$ then $𝑞$" can be rewritten as "Either $𝑝$ is false or $𝑞$ is true."
+$p→q$ is equivalent to $¬p∨q$.
+This means that "If $p$ then $q$" can be rewritten as "Either $p$ is false or $q$ is true."
 **Example**:
 "If it's a dog, then it's an animal."
 This is logically the same as saying: "It's not a dog, or it's an animal."
 This equivalence is a key rule in propositional logic and is used in proofs and simplifications.`,
 `**Asymmetry**:
-($𝑝→𝑞$) is equivalent to ($¬𝑝∨𝑞$), but not equivalent to ($𝑞→𝑝$).
-This means that implication is not symmetric. Just because $𝑝→𝑞$ is true does not mean $𝑞→𝑝$ is true.
+($p→q$) is equivalent to ($¬p∨q$), but not equivalent to ($q→p$).
+This means that implication is not symmetric. Just because $p→q$ is true does not mean $q→p$ is true.
 **Example**:
-"If you are a mother, then you are a woman" ($𝑝→𝑞$) is true.
-But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessarily true.`
+"If you are a mother, then you are a woman" ($p→q$) is true.
+But "If you are a woman, then you are a mother" ($q→p$) is not necessarily true.`
 
 ]
 
 const notation=[
   `$p→q$ (standard notation)`,
   `$p⇒q$ (sometimes used in formal logic)`,
-  `"If $𝑝$, then $𝑞$" (verbal expression)`,
-  `"$𝑝$ implies $𝑞$" (another verbal expression)`
+  `"If $p$, then $q$" (verbal expression)`,
+  `"$p$ implies $q$" (another verbal expression)`
 ]
 
 const notationSection = {
@@ -217,9 +217,9 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
             title:'Definition',
             content:[`**Logical implication** is a fundamental concept in logic and mathematics. It describes a conditional relationship between two statements.
 
-            Logical implication ($𝑝→𝑞$) is a conditional statement meaning "if $p$, then $𝑞$." It asserts that whenever $𝑝$ (the antecedent or hypothesis) is true, $𝑞$ (the consequent or conclusion) must also be true.
+            Logical implication ($p→q$) is a conditional statement meaning "if $p$, then $q$." It asserts that whenever $p$ (the antecedent or hypothesis) is true, $q$ (the consequent or conclusion) must also be true.
             **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the the consequent**.
-            However, if $𝑝$ is false, the implication is still considered to be true regardless of $𝑞$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
+            However, if $p$ is false, the implication is still considered to be true regardless of $q$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
             `,
         ]
           },

@@ -10,6 +10,7 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 // import { renderMultiplesLine } from '../../../../app/utils/illustrations/multiplesLine'
 import {renderMultiplesLine} from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
@@ -588,50 +589,27 @@ Find $\\text{lcm}(6, 10, 15)$. $\\text{lcm}(6, 10) = 30$. $\\text{lcm}(30, 15) =
 }
 
 
+// FAQ pass: cut eight case-A questions — the definition, all three methods,
+// the GCD–LCM relationship, the coprime and one-divides-the-other special
+// cases and LCM-of-many all have h2s answering them (the relationship FAQ
+// also lives on the /arithmetic/divisibility hub). Kept the two application
+// questions (buried under the generic Applications h2) and reframed the
+// bounds question to the confusion people actually have.
 const faqQuestions = {
   obj1: {
-    question: "What is the least common multiple (LCM)?",
-    answer: "The LCM of two positive integers a and b is the smallest positive integer divisible by both. For example, lcm(4, 6) = 12 because 12 is the smallest number that both 4 and 6 divide into evenly."
+    question: "How is LCM used for adding fractions?",
+    answer: "The LCM of the denominators is the least common denominator (LCD). For 1/4 + 1/6: lcm(4, 6) = 12, so convert to 3/12 + 2/12 = 5/12. Any common denominator works — 24 would too — but the LCD keeps the numbers as small as possible and the final fraction closer to lowest terms.",
+    sectionId: "10"
   },
   obj2: {
-    question: "How do you find the LCM by listing multiples?",
-    answer: "List multiples of each number and find the first common one. For lcm(6, 8): multiples of 6 are 6,12,18,24... and multiples of 8 are 8,16,24... The first overlap is 24, so lcm(6,8) = 24."
+    question: "How is LCM used in scheduling problems?",
+    answer: "The LCM tells you when repeating events line up. If one bus comes every 12 minutes and another every 18, they arrive together every lcm(12, 18) = 36 minutes. The same reasoning schedules blinking lights, gear rotations, and recurring meetings: any cycle lengths coincide at the LCM of their periods. Try any pair in the [LCM calculator](!/arithmetic/calculators/lcm-calculator).",
+    sectionId: "10"
   },
   obj3: {
-    question: "How do you find the LCM using prime factorization?",
-    answer: "Factor both numbers into primes and take the maximum exponent for each prime. For lcm(12, 18): 12 = 2²×3 and 18 = 2×3². Take max exponents: 2² × 3² = 36."
-  },
-  obj4: {
-    question: "How do you find the LCM using the GCD?",
-    answer: "Use the formula: lcm(a,b) = (a × b) / gcd(a,b). For lcm(12, 18): gcd(12,18) = 6, so lcm = (12 × 18) / 6 = 216 / 6 = 36. This is often the fastest method."
-  },
-  obj5: {
-    question: "What is the relationship between GCD and LCM?",
-    answer: "For any positive integers a and b: a × b = gcd(a,b) × lcm(a,b). This means knowing one gives you the other. The GCD captures shared factors (minimum exponents), the LCM captures all factors (maximum exponents)."
-  },
-  obj6: {
-    question: "What is the LCM of coprime numbers?",
-    answer: "If gcd(a,b) = 1 (coprime), then lcm(a,b) = a × b. With no shared factors, the LCM equals the full product. For example, lcm(7,9) = 63 because gcd(7,9) = 1."
-  },
-  obj7: {
-    question: "What is the LCM when one number divides the other?",
-    answer: "If a divides b, then lcm(a,b) = b. The larger number is already a multiple of the smaller. For example, lcm(4,12) = 12 because 4 divides 12."
-  },
-  obj8: {
-    question: "How do you find the LCM of more than two numbers?",
-    answer: "Apply LCM pairwise: lcm(a,b,c) = lcm(lcm(a,b), c). For lcm(4,6,9): first lcm(4,6) = 12, then lcm(12,9) = 36. The order doesn't matter."
-  },
-  obj9: {
-    question: "How is LCM used for adding fractions?",
-    answer: "The LCM of denominators gives the least common denominator. For 1/4 + 1/6: lcm(4,6) = 12, so convert to 3/12 + 2/12 = 5/12. Using LCM minimizes the size of the common denominator."
-  },
-  obj10: {
-    question: "How is LCM used in scheduling problems?",
-    answer: "LCM finds when periodic events coincide. If Bus A comes every 12 minutes and Bus B every 18 minutes, they arrive together every lcm(12,18) = 36 minutes."
-  },
-  obj11: {
-    question: "What are the bounds on LCM?",
-    answer: "For positive integers a and b: max(a,b) ≤ lcm(a,b) ≤ a×b. The LCM is at least the larger input (minimal case: one divides the other) and at most the product (maximal case: coprime numbers)."
+    question: "Is the LCM always bigger than both numbers?",
+    answer: "The LCM is never smaller than either number, but it need not exceed both: max(a, b) ≤ lcm(a, b) ≤ a × b. When one number divides the other, the LCM simply equals the larger one — lcm(4, 12) = 12. The other extreme occurs for coprime numbers, where the LCM is the full product: lcm(7, 9) = 63.",
+    sectionId: "2"
   }
 }
 
@@ -708,19 +686,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/divisibility/lcm"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1009,6 +974,22 @@ obj10SvgBuses,pfLcmObj4,}) {
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`LCM FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -1040,17 +1021,10 @@ obj10SvgBuses,pfLcmObj4,}) {
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -314,6 +314,8 @@ import PoissonDistributionExplorer from '@/app/components/probability/explorers/
 import ContinuousUniformDistributionExplorer from '@/app/components/probability/explorers/distributions/continuous/ContinuousUniformDistributionVisualizer'
 import ExponentialDistributionExplorer from '@/app/components/probability/explorers/distributions/continuous/ExponentialDistributionExplorer'
 import NormalDistributionExplorer from '@/app/components/probability/explorers/distributions/continuous/NormalDistributionExplorer'
+import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 export async function getStaticPaths() {
   const paths = [
@@ -341,6 +343,9 @@ export async function getStaticProps({ params }) {
       description: 'Calculate binomial probabilities for n trials with success probability p. Interactive tool with PMF/CDF visualization, parameter controls, and step-by-step probability calculations.',
       h1Title: 'Binomial Distribution Explorer',
       url: '/probability/visual-tools/distributions/binomial',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="13" r="4" fill="#85B7EB" stroke="#185FA5" stroke-width="1"/><circle cx="31" cy="13" r="4" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><rect x="14" y="56" width="7" height="6" fill="#85B7EB" fill-opacity="0.75" stroke="#185FA5" stroke-width="0.8"/><rect x="22" y="46" width="7" height="16" fill="#85B7EB" fill-opacity="0.75" stroke="#185FA5" stroke-width="0.8"/><rect x="30" y="32" width="7" height="30" fill="#85B7EB" fill-opacity="0.75" stroke="#185FA5" stroke-width="0.8"/><rect x="38" y="24" width="7" height="38" fill="#85B7EB" fill-opacity="0.75" stroke="#185FA5" stroke-width="0.8"/><rect x="46" y="32" width="7" height="30" fill="#85B7EB" fill-opacity="0.75" stroke="#185FA5" stroke-width="0.8"/><rect x="54" y="46" width="7" height="16" fill="#85B7EB" fill-opacity="0.75" stroke="#185FA5" stroke-width="0.8"/><rect x="62" y="56" width="7" height="6" fill="#85B7EB" fill-opacity="0.75" stroke="#185FA5" stroke-width="0.8"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/></svg>`,
+      category: 'Distributions',
+      subCategory: 'Discrete',
       name: 'Binomial Distribution Calculator',
       keywords: [
         'binomial distribution',
@@ -487,7 +492,20 @@ For large n and small p, the **Poisson distribution** approximates the binomial 
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Parameters',
+    content: `The binomial view opens at $n = 10$ and $p = 0.5$, giving eleven bars from $k = 0$ to $k = 10$ that sum to exactly $1$. The red line marks $E[X] = np = 5$, and the tallest bar sits there too, at $P(X = 5) = 0.2461$.
+
+Switching to the CDF tab replots the same numbers as a running total that climbs from $0.001$ to $1$.`,
+    before: '',
+    after: `Mean and mode coincide here only because $p = 0.5$ makes the coefficient row palindromic. Move $p$ away from $0.5$ and the mode becomes $\\lfloor (n+1)p \\rfloor$, which parts company with $np$.
+
+The variance is $np(1-p) = 2.5$, so $\\sigma \\approx 1.58$. Almost the whole distribution lies within two standard deviations of the mean, which is why the bars at $k = 0$ and $k = 10$ — $1/1024$ each — are barely off the axis.
+
+Reading the two tabs together is the point of having both. The tallest PMF bar is the steepest CDF rise; a flat stretch in the CDF is a negligible PMF bar.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -685,6 +703,9 @@ schemas: {
       description: 'Calculate geometric probabilities for trials until first success. Interactive calculator with memoryless property visualization, PMF/CDF charts, and comprehensive probability tools.',
       h1Title: 'Geometric Distribution Explorer',
       url: '/probability/visual-tools/distributions/geometric',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="22" width="7" height="40" fill="#97C459" stroke="#27500A" stroke-width="1.4"/><rect x="22" y="36" width="7" height="26" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="0.8"/><rect x="30" y="45" width="7" height="17" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="0.8"/><rect x="38" y="51" width="7" height="11" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="0.8"/><rect x="46" y="55" width="7" height="7" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="0.8"/><rect x="54" y="58" width="7" height="4" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="0.8"/><rect x="62" y="59" width="7" height="3" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="0.8"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="17.5" y="17" font-family="Georgia,serif" font-size="7" fill="#C0DD97" text-anchor="middle" font-style="italic">1st</text></svg>`,
+      category: 'Distributions',
+      subCategory: 'Discrete',
       name: 'Geometric Distribution Calculator',
       keywords: [
         'geometric distribution',
@@ -831,7 +852,20 @@ The **exponential distribution** is the continuous version of the geometric, mod
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Parameter',
+    content: `At $p = 0.3$ the tallest bar is the first one, $P(X = 1) = 0.3$, and every bar after it is $0.7$ times its neighbour. The mode of a geometric distribution is always $k = 1$.
+
+The red line sits at $E[X] = 1/p = 3.33$, well to the right of the mode.`,
+    before: '',
+    after: `That gap between mode $1$ and mean $3.33$ is what right skew looks like: the most likely single outcome is the smallest one, but a long thin tail drags the average up.
+
+The tool plots $k = 1$ to $30$, and those bars sum to $0.999977$ rather than $1$. The missing $0.0023\\%$ lives past the right edge — the support is unbounded, so any finite window falls slightly short.
+
+The variance is $(1-p)/p^2 = 7.78$, giving $\\sigma = 2.79$, which is almost as large as the mean itself. A distribution whose standard deviation rivals its mean is very spread out, and the CDF tab shows the consequence: it takes until about $k = 9$ to accumulate $95\\%$ of the probability.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -1029,6 +1063,9 @@ schemas: {
       description: 'Calculate negative binomial probabilities for trials needed to achieve r successes. Interactive tool with PMF/CDF visualization and comprehensive probability calculations.',
       h1Title: 'Negative Binomial Distribution Explorer',
       url: '/probability/visual-tools/distributions/negative-binomial',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="13" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1"/><circle cx="25" cy="13" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1"/><circle cx="34" cy="13" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1"/><text x="43" y="16" font-family="Georgia,serif" font-size="7" fill="#CECBF6" font-style="italic">r = 3</text><rect x="14" y="58" width="7" height="4" fill="#AFA9EC" fill-opacity="0.7" stroke="#534AB7" stroke-width="0.8"/><rect x="22" y="50" width="7" height="12" fill="#AFA9EC" fill-opacity="0.7" stroke="#534AB7" stroke-width="0.8"/><rect x="30" y="38" width="7" height="24" fill="#AFA9EC" fill-opacity="0.7" stroke="#534AB7" stroke-width="0.8"/><rect x="38" y="28" width="7" height="34" fill="#AFA9EC" fill-opacity="0.7" stroke="#534AB7" stroke-width="0.8"/><rect x="46" y="30" width="7" height="32" fill="#AFA9EC" fill-opacity="0.7" stroke="#534AB7" stroke-width="0.8"/><rect x="54" y="40" width="7" height="22" fill="#AFA9EC" fill-opacity="0.7" stroke="#534AB7" stroke-width="0.8"/><rect x="62" y="50" width="7" height="12" fill="#AFA9EC" fill-opacity="0.7" stroke="#534AB7" stroke-width="0.8"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/></svg>`,
+      category: 'Distributions',
+      subCategory: 'Discrete',
       name: 'Negative Binomial Distribution Calculator',
       keywords: [
         'negative binomial distribution',
@@ -1177,7 +1214,20 @@ The **Poisson distribution** assumes mean equals variance, but negative binomial
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Parameters',
+    content: `With $r = 5$ and $p = 0.3$ the bars start at $k = 5$ — five successes need at least five trials — and run to the window edge at $k = 50$. The peak is at $k = 14$ with $P = 0.0701$, while the red mean line sits at $E[X] = r/p = 16.67$.
+
+The plotted bars sum to $0.999828$.`,
+    before: '',
+    after: `The mode is $\\lfloor (r-1)/p \\rfloor + 1 = 14$, not the mean. The two differ because the distribution is still right skewed, though far less so than the geometric — waiting for five successes averages out some of the randomness of waiting for one.
+
+Setting $r = 1$ would collapse this to the geometric case exactly. Raising $r$ pushes the whole distribution right and makes it more symmetric, since a sum of $r$ independent waiting times concentrates around its mean.
+
+The variance is $r(1-p)/p^2 = 38.9$, so $\\sigma = 6.24$. Note that this is $\\sqrt{5}$ times the geometric's $\\sigma$ at the same $p$ — variances of independent waits add, standard deviations do not.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -1375,6 +1425,9 @@ schemas: {
       description: 'Calculate Poisson probabilities for events in fixed intervals. Interactive rate parameter λ control with PMF/CDF visualization and comprehensive probability tools.',
       h1Title: 'Poisson Distribution Explorer',
       url: '/probability/visual-tools/distributions/poisson',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><text x="64" y="18" font-family="Georgia,serif" font-size="12" fill="#FAC775" text-anchor="middle" font-style="italic">&#955;</text><rect x="14" y="52" width="7" height="10" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="22" y="36" width="7" height="26" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="30" y="26" width="7" height="36" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="38" y="32" width="7" height="30" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="46" y="44" width="7" height="18" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="54" y="53" width="7" height="9" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="62" y="58" width="7" height="4" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/></svg>`,
+      category: 'Distributions',
+      subCategory: 'Discrete',
       name: 'Poisson Distribution Calculator',
       keywords: [
         'poisson distribution',
@@ -1523,7 +1576,20 @@ The **normal distribution** approximates Poisson for large λ (typically λ ≥ 
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Parameter',
+    content: `At $\\lambda = 3$ the chart shows **two** equally tall bars, at $k = 2$ and $k = 3$, both at $P = 0.2240$. The red mean line falls at $E[X] = \\lambda = 3$.
+
+That double peak is not a rounding artefact.`,
+    before: '',
+    after: `Consecutive Poisson probabilities satisfy $\\frac{P(k)}{P(k-1)} = \\frac{\\lambda}{k}$, so the ratio is exactly $1$ when $k = \\lambda$. Whenever $\\lambda$ is a whole number the distribution has two modes, at $\\lambda - 1$ and $\\lambda$; here $P(2) = \\frac{9e^{-3}}{2}$ and $P(3) = \\frac{27e^{-3}}{6}$ are the same number. Nudge $\\lambda$ off an integer and one bar wins, with the mode at $\\lfloor \\lambda \\rfloor$.
+
+The tool draws $k = 0$ to $19$ and stops early once the probabilities fall below $10^{-10}$; those twenty bars already sum to $1$ at full double precision.
+
+Variance equals the mean, both $3$, which is the Poisson's defining fingerprint and the first thing to test before using it. Count data whose variance clearly exceeds its mean is overdispersed, and a Poisson will understate its spread.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -1721,6 +1787,9 @@ schemas: {
       description: 'Calculate hypergeometric probabilities for sampling without replacement from finite populations. Interactive N, K, n parameter controls with comprehensive probability calculations.',
       h1Title: 'Hypergeometric Distribution Explorer',
       url: '/probability/visual-tools/distributions/hypergeometric',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M 12 16 L 12 32 Q 12 40 20 40 L 30 40 Q 38 40 38 32 L 38 16 Z" fill="#E6F1FB" fill-opacity="0.9" stroke="#185FA5" stroke-width="1.3"/><circle cx="19" cy="26" r="3.2" fill="#85B7EB" stroke="#0C447C" stroke-width="0.9"/><circle cx="28" cy="26" r="3.2" fill="#ED93B1" stroke="#72243E" stroke-width="0.9"/><circle cx="23" cy="34" r="3.2" fill="#85B7EB" stroke="#0C447C" stroke-width="0.9"/><circle cx="32" cy="34" r="3.2" fill="#ED93B1" stroke="#72243E" stroke-width="0.9"/><path d="M 42 26 L 52 26 M 50 24 L 52 26 L 50 28" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><text x="58" y="22" font-family="Georgia,serif" font-size="6.5" fill="#B5D4F4" text-anchor="middle">no</text><text x="58" y="30" font-family="Georgia,serif" font-size="6.5" fill="#B5D4F4" text-anchor="middle">repl.</text><rect x="20" y="52" width="9" height="10" fill="#ED93B1" fill-opacity="0.7" stroke="#72243E" stroke-width="0.8"/><rect x="31" y="44" width="9" height="18" fill="#ED93B1" fill-opacity="0.7" stroke="#72243E" stroke-width="0.8"/><rect x="42" y="48" width="9" height="14" fill="#ED93B1" fill-opacity="0.7" stroke="#72243E" stroke-width="0.8"/><rect x="53" y="56" width="9" height="6" fill="#ED93B1" fill-opacity="0.7" stroke="#72243E" stroke-width="0.8"/><line x1="14" y1="62" x2="70" y2="62" stroke="#B5D4F4" stroke-width="1.1"/></svg>`,
+      category: 'Distributions',
+      subCategory: 'Discrete',
       name: 'Hypergeometric Distribution Calculator',
       keywords: [
         'hypergeometric distribution',
@@ -1863,7 +1932,20 @@ In **quality control**, hypergeometric models acceptance sampling where you insp
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Parameters',
+    content: `Drawing $n = 10$ from a population of $N = 50$ containing $K = 20$ successes gives eleven bars, $k = 0$ to $10$, summing to exactly $1$. The peak is at $k = 4$ with $P = 0.2801$, which is also where the red mean line sits: $E[X] = n\\frac{K}{N} = 4$.
+
+The mean is the same as a binomial with $n = 10$ and $p = K/N = 0.4$. The spread is not.`,
+    before: '',
+    after: `The variance here is $n\\frac{K}{N}\\left(1 - \\frac{K}{N}\\right)\\frac{N-n}{N-1} = 2.4 \\times \\frac{40}{49} = 1.959$, against the binomial's $2.4$. That trailing factor is the **finite population correction**, and it is always below $1$ once $n > 1$.
+
+The reason is that sampling without replacement is self-correcting: each success drawn leaves fewer successes for the next draw, so outcomes cluster more tightly around the mean than independent trials would. Draw the entire population and the variance falls to zero — you would know the answer exactly.
+
+As $N$ grows with $n$ fixed the correction tends to $1$ and the hypergeometric converges to the binomial. That is why polling a city is treated as binomial while sampling ten items from a batch of fifty is not.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -2061,6 +2143,9 @@ schemas: {
       description: 'Calculate discrete uniform probabilities for equally likely outcomes. Interactive tool for finite uniform distributions with parameter controls and probability calculations.',
       h1Title: 'Discrete Uniform Distribution Explorer',
       url: '/probability/visual-tools/distributions/uniform-discrete',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="30" x2="72" y2="30" stroke="#F0997B" stroke-width="1.2" stroke-dasharray="3,2.5"/><rect x="14" y="32" width="7" height="30" fill="#F0997B" fill-opacity="0.7" stroke="#712B13" stroke-width="0.8"/><rect x="22" y="32" width="7" height="30" fill="#F0997B" fill-opacity="0.7" stroke="#712B13" stroke-width="0.8"/><rect x="30" y="32" width="7" height="30" fill="#F0997B" fill-opacity="0.7" stroke="#712B13" stroke-width="0.8"/><rect x="38" y="32" width="7" height="30" fill="#F0997B" fill-opacity="0.7" stroke="#712B13" stroke-width="0.8"/><rect x="46" y="32" width="7" height="30" fill="#F0997B" fill-opacity="0.7" stroke="#712B13" stroke-width="0.8"/><rect x="54" y="32" width="7" height="30" fill="#F0997B" fill-opacity="0.7" stroke="#712B13" stroke-width="0.8"/><rect x="62" y="32" width="7" height="30" fill="#F0997B" fill-opacity="0.7" stroke="#712B13" stroke-width="0.8"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="40" y="24" font-family="Georgia,serif" font-size="7" fill="#F0997B" text-anchor="middle" font-style="italic">1/n each</text></svg>`,
+      category: 'Distributions',
+      subCategory: 'Discrete',
       name: 'Discrete Uniform Distribution Calculator',
       keywords: [
         'discrete uniform distribution',
@@ -2206,7 +2291,20 @@ The discrete uniform appears as a special case of **categorical distributions** 
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Range',
+    content: `At $a = 1$ to $b = 6$ — a fair die — the chart shows six bars of identical height $1/6 = 0.1667$, summing to exactly $1$. The red line marks $E[X] = \\frac{a+b}{2} = 3.5$.
+
+The CDF tab turns those equal steps into a straight staircase, each riser the same $1/6$.`,
+    before: '',
+    after: `This is the only distribution among the nine with **no** peak: every value is a mode. It is also the only one whose mean is guaranteed not to be an outcome when the range has an even number of values — $3.5$ is not a face of a die.
+
+The variance is $\\frac{n^2 - 1}{12} = \\frac{35}{12} = 2.917$, so $\\sigma \\approx 1.71$. That formula depends only on how many values there are, not on where they sit, which is why shifting the range leaves the spread untouched while moving the mean.
+
+Equal bars also make the CDF the easiest of the nine to read backwards. Since every riser is $1/6$, the CDF at $k$ is just $k/6$ for a die, and any quantile can be read off by eye.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -2404,6 +2502,9 @@ schemas: {
       description: 'Calculate normal distribution probabilities with interactive μ and σ controls. Includes PDF/CDF visualization, Z-score calculator, and 68-95-99.7 empirical rule display.',
       h1Title: 'Normal Distribution Explorer',
       url: '/probability/visual-tools/distributions/normal',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M 12 62 C 24 62, 28 18, 40 18 C 52 18, 56 62, 68 62 L 12 62 Z" fill="#B5D4F4" fill-opacity="0.2"/><path d="M 28 62 C 31 55, 33 20, 40 18 C 47 20, 49 55, 52 62 Z" fill="#85B7EB" fill-opacity="0.45"/><path d="M 12 62 C 24 62, 28 18, 40 18 C 52 18, 56 62, 68 62" fill="none" stroke="#FAC775" stroke-width="1.9"/><line x1="40" y1="18" x2="40" y2="62" stroke="#854F0B" stroke-width="1.1" stroke-dasharray="2.5,2"/><line x1="8" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="40" y="72" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">&#956;</text></svg>`,
+      category: 'Distributions',
+      subCategory: 'Continuous',
       name: 'Normal Distribution Calculator',
       keywords: [
         'normal distribution',
@@ -2546,7 +2647,20 @@ The **t-distribution** approximates normal for large sample sizes but has heavie
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Parameters',
+    content: `The standard normal, $\\mu = 0$ and $\\sigma = 1$, is drawn over the window $\\mu \\pm 4\\sigma$. The density peaks at $f(0) = \\frac{1}{\\sqrt{2\\pi}} = 0.3989$, with the red mean line through the centre of the bell.
+
+The CDF tab shows the sigmoid crossing $0.5$ exactly at the mean, and reaching $0.99997$ at the right edge.`,
+    before: '',
+    after: `The peak height is the clearest illustration that a **density is not a probability**. Here it is $0.399$; shrink $\\sigma$ and it rises without limit, because the area underneath must stay at $1$. A density above $1$ is perfectly legal, a probability above $1$ is not.
+
+The two tabs locate $\\sigma$ differently, which is why both are worth looking at. On the PDF it is the distance from the peak to the inflection points; on the CDF it is where the curve stops steepening. Same number, two different visual cues.
+
+Because the Gaussian has no elementary antiderivative, the CDF cannot be written in closed form with ordinary functions — the tool evaluates it through an error-function approximation, which is why every normal probability you have ever looked up came from a table or a numerical routine rather than a formula.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -2746,6 +2860,9 @@ schemas: {
       description: 'Calculate exponential distribution probabilities for time between events. Interactive λ parameter control with PDF/CDF visualization and memoryless property demonstration.',
       h1Title: 'Exponential Distribution Explorer',
       url: '/probability/visual-tools/distributions/exponential',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M 16 18 C 24 44, 34 56, 50 60 C 58 61.5, 64 62, 70 62 L 16 62 Z" fill="#97C459" fill-opacity="0.35"/><path d="M 16 18 C 24 44, 34 56, 50 60 C 58 61.5, 64 62, 70 62" fill="none" stroke="#97C459" stroke-width="2"/><line x1="16" y1="12" x2="16" y2="66" stroke="#B5D4F4" stroke-width="1.1"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="52" y="34" font-family="Georgia,serif" font-size="7.5" fill="#C0DD97" text-anchor="middle" font-style="italic">&#955;e</text></svg>`,
+      category: 'Distributions',
+      subCategory: 'Continuous',
       name: 'Exponential Distribution Calculator',
       keywords: [
         'exponential distribution',
@@ -2888,7 +3005,20 @@ The **geometric distribution** is the discrete analog, counting trials until fir
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Parameter',
+    content: `At $\\lambda = 1$ the density starts at its maximum, $f(0) = \\lambda = 1$, and decays from there. There is no interior peak: the most probable region is always immediately after zero.
+
+The red line marks $E[X] = 1/\\lambda = 1$, and the plotted window runs from $0$ to about $6.91$.`,
+    before: '',
+    after: `That window edge is chosen, not arbitrary. The tool uses $x_{\\max} = -\\frac{\\ln(0.001)}{\\lambda} = 6.908$, the point where the surviving tail is exactly one thousandth — so the CDF tab ends at $0.999$ by construction rather than by accident.
+
+The mean sits at $1$ but the median is $\\frac{\\ln 2}{\\lambda} = 0.693$, noticeably to its left. That gap is the signature of right skew, and it means "average waiting time" and "typical waiting time" are different questions with different answers.
+
+Mean and standard deviation are both $1/\\lambda$, so the coefficient of variation is exactly $1$ for every $\\lambda$. Changing the rate rescales the whole picture without altering its shape — which is the memoryless property seen from the outside.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -3086,6 +3216,9 @@ schemas: {
       description: 'Calculate continuous uniform probabilities over intervals [a,b]. Interactive bounds control with constant PDF visualization and linear CDF display.',
       h1Title: 'Continuous Uniform Distribution Explorer',
       url: '/probability/visual-tools/distributions/uniform-continuous',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="24" y="30" width="34" height="32" fill="#FAC775" fill-opacity="0.5" stroke="none"/><path d="M 12 62 L 24 62 L 24 30 L 58 30 L 58 62 L 70 62" fill="none" stroke="#FAC775" stroke-width="2.1"/><line x1="24" y1="30" x2="24" y2="66" stroke="#854F0B" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="58" y1="30" x2="58" y2="66" stroke="#854F0B" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="8" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="24" y="74" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">a</text><text x="58" y="74" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">b</text></svg>`,
+      category: 'Distributions',
+      subCategory: 'Continuous',
       name: 'Continuous Uniform Distribution Calculator',
       keywords: [
         'continuous uniform distribution',
@@ -3230,7 +3363,20 @@ The **standard uniform distribution** Uniform[0, 1] is fundamental to random num
     before: '',
     after: '',
     link: ''
-  }
+  },
+  obj11: {
+    title: 'The Explorer at Its Opening Bounds',
+    content: `With $a = 0$ and $b = 10$ the density is the constant $\\frac{1}{b-a} = 0.1$ between the bounds and zero outside, which the tool draws by padding twenty points either side of the interval. The red line marks $E[X] = \\frac{a+b}{2} = 5$.
+
+The CDF tab turns that plateau into a straight line of slope $0.1$ rising from $0$ to $1$.`,
+    before: '',
+    after: `Comparing the two tabs makes the relationship concrete: **the CDF's slope is the PDF's height**. A constant density gives a straight-line CDF, and the two kinks in that line sit exactly where the density jumps from $0$ to $0.1$ and back.
+
+Those kinks are the only places the CDF is not differentiable. A continuous random variable must have a continuous CDF, but it need not have a smooth one.
+
+The variance is $\\frac{(b-a)^2}{12} = 8.33$, so $\\sigma \\approx 2.89$. Widening the interval lowers the density and raises the variance together, since the area under the density is pinned at $1$ — the two effects are the same fact seen from two directions.`,
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -3425,6 +3571,171 @@ schemas: {
 
   const config = viewConfig[view];
 
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The nine routes are thin wrappers around two generic explorers, so there are
+     only two charts to port rather than nine. distributionExplorerDiagrams.js
+     reproduces both recharts views - the discrete <BarChart> and the continuous
+     <AreaChart>/<LineChart> - from each wrapper's own pmf/pdf, data range and
+     closed-form statistics, evaluated at its own initial* prop defaults. Each
+     view is frozen under BOTH tabs and the pair is shown in one unit. */
+  const unit = (svg, caption, text) => demoUnitFrame({ svg, caption, text })
+  const D = distributionExplorerDiagrams
+
+  const unitsByView = {
+    'binomial': { state: unit([D['binomial-pmf'], D['binomial-cdf']],
+      'Binomial, n = 10, p = 0.5: PMF above, CDF below',
+      'Eleven bars summing to exactly 1, symmetric about the peak at k = 5 where P = 0.2461 = 252/1024. Mean and mode coincide only because p = 0.5; the CDF below climbs from 0.001 to 1.') },
+    'geometric': { state: unit([D['geometric-pmf'], D['geometric-cdf']],
+      'Geometric, p = 0.3: PMF above, CDF below',
+      'The first bar is tallest at 0.3 and each after it is 0.7 times the last, so the mode is 1 while the mean is 3.33. The plotted window (k to 30) holds 0.999977 of the probability.') },
+    'negative-binomial': { state: unit([D['negative-binomial-pmf'], D['negative-binomial-cdf']],
+      'Negative binomial, r = 5, p = 0.3: PMF above, CDF below',
+      'Support starts at k = 5 and the peak has moved to k = 14, left of the mean at 16.67. Setting r = 1 would collapse this to the geometric exactly.') },
+    'poisson': { state: unit([D['poisson-pmf'], D['poisson-cdf']],
+      'Poisson, lambda = 3: PMF above, CDF below',
+      'Two equally tall bars, k = 2 and k = 3, both 0.2240 - consecutive Poisson probabilities are in ratio lambda/k, which is exactly 1 at k = lambda. Variance equals the mean, both 3.') },
+    'hypergeometric': { state: unit([D['hypergeometric-pmf'], D['hypergeometric-cdf']],
+      'Hypergeometric, N = 50, K = 20, n = 10: PMF above, CDF below',
+      'Peak at k = 4, which is the mean n*K/N. Variance 1.959 against a binomial\'s 2.4 at the same mean - the difference is the finite population correction (N-n)/(N-1) = 40/49.') },
+    'uniform-discrete': { state: unit([D['uniform-discrete-pmf'], D['uniform-discrete-cdf']],
+      'Discrete uniform, a = 1 to b = 6: PMF above, CDF below',
+      'Six identical bars of 1/6. The only one of the nine with no peak - every value is a mode - and its mean of 3.5 is not a possible outcome.') },
+    'normal': { state: unit([D['normal-pdf'], D['normal-cdf']],
+      'Normal, mu = 0, sigma = 1: PDF above, CDF below',
+      'The bell peaks at 1/sqrt(2 pi) = 0.3989 and the sigmoid below crosses 0.5 at the mean. Shrink sigma and the peak rises without limit: a density may exceed 1, a probability may not.') },
+    'exponential': { state: unit([D['exponential-pdf'], D['exponential-cdf']],
+      'Exponential, lambda = 1: PDF above, CDF below',
+      'Density is largest at the very edge of the support, f(0) = 1, with no interior peak. The window ends at -ln(0.001) = 6.908, so the CDF below stops at exactly 0.999 by construction.') },
+    'uniform-continuous': { state: unit([D['uniform-continuous-pdf'], D['uniform-continuous-cdf']],
+      'Continuous uniform, a = 0, b = 10: PDF above, CDF below',
+      'A flat density of 0.1 and a straight-line CDF of slope 0.1. The CDF\'s slope IS the PDF\'s height, and its two kinks are where the density jumps from 0 to 0.1 and back.') },
+  }
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit per-view slug list
+  const orderByView = {
+    'binomial': [
+      ['obj1', 'parameter-controls'],
+      ['obj2', 'interpreting-the-pmf-chart'],
+      ['obj3', 'cdf-graph'],
+      ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
+      ['obj4', 'calculating-point-probabilities'],
+      ['obj5', 'computing-cumulative-probabilities'],
+      ['obj6', 'range-probability-calculations'],
+      ['obj7', 'binomial-distribution'],
+      ['obj8', 'understanding-distribution-parameters'],
+      ['obj9', 'normal-approximation-rule'],
+      ['obj10', 'related-distributions-and-tools'],
+    ],
+    'geometric': [
+      ['obj1', 'adjusting-success-probability'],
+      ['obj2', 'pmf-visualization'],
+      ['obj3', 'cdf-display'],
+      ['obj11', 'the-explorer-at-its-opening-parameter', 'state'],
+      ['obj4', 'computing-exact-probabilities'],
+      ['obj5', 'calculating-survival-probabilities'],
+      ['obj6', 'range-probability-calculations'],
+      ['obj7', 'geometric-distribution'],
+      ['obj8', 'the-memoryless-property-explained'],
+      ['obj9', 'mean-variance-and-statistics'],
+      ['obj10', 'related-distributions-and-calculators'],
+    ],
+    'negative-binomial': [
+      ['obj1', 'setting-distribution-parameters'],
+      ['obj2', 'pmf-display'],
+      ['obj3', 'interpreting-cdf-values'],
+      ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
+      ['obj4', 'calculating-point-probabilities'],
+      ['obj5', 'using-cumulative-calculators'],
+      ['obj6', 'computing-range-probabilities'],
+      ['obj7', 'negative-binomial-distribution'],
+      ['obj8', 'relationship-to-geometric-distribution'],
+      ['obj9', 'distribution-statistics-and-properties'],
+      ['obj10', 'related-distributions-and-tools'],
+    ],
+    'poisson': [
+      ['obj1', 'adjusting-the-rate-parameter'],
+      ['obj2', 'pmf-chart'],
+      ['obj3', 'understanding-cdf-values'],
+      ['obj11', 'the-explorer-at-its-opening-parameter', 'state'],
+      ['obj4', 'computing-exact-probabilities'],
+      ['obj5', 'calculating-cumulative-probabilities'],
+      ['obj6', 'range-probability-calculations'],
+      ['obj7', 'poisson-distribution'],
+      ['obj8', 'mean-equals-variance-property'],
+      ['obj9', 'poisson-as-binomial-approximation'],
+      ['obj10', 'related-distributions-and-calculators'],
+    ],
+    'hypergeometric': [
+      ['obj1', 'setting-population-parameters'],
+      ['obj2', 'understanding-parameter-dependencies'],
+      ['obj3', 'interpreting-the-pmf-visualization'],
+      ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
+      ['obj4', 'cdf-display'],
+      ['obj5', 'calculating-exact-probabilities'],
+      ['obj6', 'computing-cumulative-and-range-probabilities'],
+      ['obj7', 'hypergeometric-distribution'],
+      ['obj8', 'hypergeometric-vs-binomial'],
+      ['obj9', 'mean-variance-and-finite-population-correction'],
+      ['obj10', 'related-distributions-and-calculators'],
+    ],
+    'uniform-discrete': [
+      ['obj1', 'setting-the-distribution-range'],
+      ['obj2', 'flat-pmf'],
+      ['obj3', 'linear-cdf'],
+      ['obj11', 'the-explorer-at-its-opening-range', 'state'],
+      ['obj4', 'computing-point-probabilities'],
+      ['obj5', 'using-cumulative-calculators'],
+      ['obj6', 'range-probability-calculations'],
+      ['obj7', 'discrete-uniform-distribution'],
+      ['obj8', 'maximum-entropy-principle'],
+      ['obj9', 'distribution-statistics'],
+      ['obj10', 'related-distributions-and-tools'],
+    ],
+    'normal': [
+      ['obj1', 'adjusting-mean-and-standard-deviation'],
+      ['obj2', 'pdf-curve'],
+      ['obj3', 'cdf-display'],
+      ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
+      ['obj4', 'probability-calculators'],
+      ['obj5', 'working-with-z-scores'],
+      ['obj6', 'the-empirical-rule-68-95-99-7'],
+      ['obj7', 'normal-distribution'],
+      ['obj8', 'central-limit-theorem-connection'],
+      ['obj9', 'distribution-properties-and-statistics'],
+      ['obj10', 'related-distributions-and-calculators'],
+    ],
+    'exponential': [
+      ['obj1', 'adjusting-the-rate-parameter'],
+      ['obj2', 'pdf-curve'],
+      ['obj3', 'cdf-display'],
+      ['obj11', 'the-explorer-at-its-opening-parameter', 'state'],
+      ['obj4', 'computing-point-probabilities'],
+      ['obj5', 'calculating-cumulative-probabilities'],
+      ['obj6', 'range-probability-calculations'],
+      ['obj7', 'exponential-distribution'],
+      ['obj8', 'the-memoryless-property'],
+      ['obj9', 'distribution-statistics'],
+      ['obj10', 'related-distributions-and-tools'],
+    ],
+    'uniform-continuous': [
+      ['obj1', 'setting-interval-bounds'],
+      ['obj2', 'flat-pdf'],
+      ['obj3', 'linear-cdf'],
+      ['obj11', 'the-explorer-at-its-opening-bounds', 'state'],
+      ['obj4', 'computing-interval-probabilities'],
+      ['obj5', 'using-cumulative-calculators'],
+      ['obj6', 'range-probability-examples'],
+      ['obj7', 'continuous-uniform-distribution'],
+      ['obj8', 'maximum-entropy-principle'],
+      ['obj9', 'distribution-statistics'],
+      ['obj10', 'related-distributions-and-tools'],
+    ],
+  }
+
+  const stateUnits = unitsByView[view] || {}
+  const sectionOrder = orderByView[view] || []
+
   const sectionsContent = config.sectionsContent;
   const faqQuestions = config.faqQuestions;
   const schemas = {
@@ -3462,20 +3773,26 @@ schemas: {
         url: config.url,
         name: config.name
       },
+      stateUnits,
+      sectionOrder,
       componentName: config.componentName,
       h1Title: config.h1Title
     }
   };
 }
 
-export default function DistributionExplorerPage({ seoData, sectionsContent, introContent, componentName, h1Title, faqQuestions, schemas }) {
+export default function DistributionExplorerPage({ seoData, sectionsContent, stateUnits, sectionOrder, introContent, componentName, h1Title, faqQuestions, schemas }) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }));
+  const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
+    const src = sectionsContent[obj]
+    if (!src || !src.title) return null
+    const body = [ src.content ]
+    if (unitKey && stateUnits[unitKey]) {
+      body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
+      if (src.after) body.push(src.after)
+    }
+    return { id, title: src.title, link: src.link || '', content: body }
+  }).filter(Boolean);
 
   return (
     <>

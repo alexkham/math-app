@@ -709,6 +709,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/concepts'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -875,26 +876,37 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: the three-axioms list, "why axioms", "what normalization
+  // means" and "how rules derive" each name their own h2 — the page has a
+  // heading per axiom plus an overview. Kept the equal-likelihood question
+  // in its more searched form (fair coin) and added the consequences the
+  // page states in one direction only. This also settles the sample-space
+  // page's deferral of P(Ω) = 1, answered here as the scale question.
   const faqQuestions = {
     obj1: {
-      question: "What are the three axioms of probability?",
-      answer: "The three probability axioms are: (1) Non-negativity - probabilities cannot be negative, (2) Normalization - the probability of the entire sample space equals one, and (3) Additivity - for disjoint events, the probability of their union equals the sum of their individual probabilities."
+      question: "Does probability zero mean an event is impossible?",
+      answer: "Not necessarily. The axioms give one direction: an event that cannot occur has probability zero. The reverse does not follow. On a continuous sample space every individual outcome has probability zero, yet one of them happens on every trial — drawing exactly 0.5 from [0,1] is possible but has probability zero. Impossible implies zero; zero does not imply impossible.",
+      sectionId: "consequences"
     },
     obj2: {
-      question: "Why does probability need axioms?",
-      answer: "Axioms provide the foundational rules that make probability theory mathematically consistent. Like axioms in geometry or algebra, they are starting assumptions accepted without proof, from which all other probability rules, theorems, and formulas can be derived through logical reasoning."
+      question: "Why is probability measured from 0 to 1?",
+      answer: "Because Axiom 2 fixes the top of the scale by declaring P(Ω) = 1, and Axiom 1 fixes the bottom by forbidding negative values. The choice of 1 is a convention, not a discovery — it makes probabilities comparable across different models and lets them read directly as proportions. Percentages are the same scale multiplied by 100.",
+      sectionId: "axiom2"
     },
     obj3: {
-      question: "What does the normalization axiom mean?",
-      answer: "The normalization axiom states that the probability of the entire sample space equals one. This anchors the probability scale by establishing that absolute certainty corresponds to probability one, and all other probabilities are measured relative to this fixed reference point."
+      question: "Do the probability axioms assume a coin is fair?",
+      answer: "No. The axioms say nothing about fairness, symmetry, or equal likelihood. They require only that probabilities be non-negative, that the whole sample space gets 1, and that disjoint events add. A loaded die and a fair die both satisfy all three. Assuming a coin is fair is a modeling choice you make and must justify separately.",
+      sectionId: "assume"
     },
     obj4: {
-      question: "Do the axioms assume events are equally likely?",
-      answer: "No. The probability axioms do not assume equal likelihood, independence, or any specific probability values. They only enforce consistency constraints. Assumptions about fairness, symmetry, or uniform probability are modeling choices made separately from the axioms."
+      question: "Do the probability axioms work for continuous sample spaces?",
+      answer: "Yes. Nothing in the three axioms restricts the sample space to a finite list; they apply unchanged to finite, countably infinite, and continuous spaces. What changes is the machinery used to assign the numbers — sums for discrete spaces, integrals of a [density](!/probability/probability-function/pdf#3) for continuous ones — but the constraints are identical in every case.",
+      sectionId: "assume"
     },
     obj5: {
-      question: "How do all probability rules derive from these axioms?",
-      answer: "Every probability formula and theorem can be derived through logical deduction from the three axioms. Conditional probability, Bayes' theorem, the law of total probability, and rules for random variables all emerge by applying these foundational constraints to specific event constructions."
+      question: "Are the complement and monotonicity rules extra axioms?",
+      answer: "No — they are consequences, proved from the three axioms rather than assumed alongside them. The same goes for the impossible event having probability zero and for the two-event union rule that corrects for overlap. Only non-negativity, normalization, and additivity for disjoint events are taken as given; everything else is derived.",
+      sectionId: "consequences"
     }
   }
 
@@ -961,19 +973,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/axioms"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1451,6 +1450,22 @@ export default function AxiomsPage({
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Probability Axioms FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -1502,13 +1517,6 @@ export default function AxiomsPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

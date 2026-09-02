@@ -464,12 +464,12 @@ If they match in every row, the expressions are logically equivalent.
 ❌ Not practical for more than 3-4 variables due to exponential growth in rows.`,
 `**Algebraic Manipulation Using Logical Laws**:
 Apply known logical equivalences ([laws](!/logic/propositional-logic/laws)) (e.g., De Morgan’s laws, distributive, commutative, associative properties) to transform one statement into another.
-If you can rewrite $𝑃$ into $𝑄$ (or vice versa), they are equivalent.
+If you can rewrite $P$ into $Q$ (or vice versa), they are equivalent.
 ✅ Best for: Proofs and simplifying expressions without constructing tables.
 ❌ Requires familiarity with logical laws.`,
 `**Using Logical Implications**:
-Show that $𝑃→𝑄$ and $𝑄→𝑃$ are both true.
-If both implications hold, then $𝑃≡𝑄$.
+Show that $P→Q$ and $Q→P$ are both true.
+If both implications hold, then $P≡Q$.
 ✅ Best for: When equivalences involve implications.
 ❌ Requires proving two separate implications.`,
 `**Venn Diagrams (Set-Theoretic Approach)**:
@@ -545,7 +545,7 @@ const logicalEquivalences = [
     id: "1",
     name: "Material Implication",
     equivalence: "$p \\rightarrow q \\equiv \\neg p \\lor q$",
-    explanation: `"if $𝑝$ then $𝑞$" is the same as saying "either $𝑝$ is false or $𝑞$ is true."`
+    explanation: `"if $p$ then $q$" is the same as saying "either $p$ is false or $q$ is true."`
   },
   {
     id: "2",
@@ -647,7 +647,7 @@ const sectionsContent={
   verify:{
     title:'How to Verify Logical Equivalence?',
     content:``,
-    before:`To verify that two logical statements $𝑃$ and $𝑄$ are logically equivalent ($𝑃≡𝑄$), we need to show that they always have the same truth value in all cases. 
+    before:`To verify that two logical statements $P$ and $Q$ are logically equivalent ($P≡Q$), we need to show that they always have the same truth value in all cases. 
             There are several methods to do this:
             
             `,
@@ -671,14 +671,14 @@ const sectionsContent={
     content:``,
     before:  
     `In propositional logic, a conditional statement (**implication**) is written as:
-\t\t\t\t\t\t\t            $𝑃→𝑄$ 
-  which means "if $𝑃$, then $𝑄$".
+\t\t\t\t\t\t\t            $P→Q$ 
+  which means "if $P$, then $Q$".
 However, **implications** can be rewritten using logical equivalences. 
 Here are the key ones:
 
 `,
     after:`
-All logical equivalences involving **implications** provide ways to rewrite conditional statements in different but logically identical forms. A common theme among them is restructuring the relationship between the antecedent ($𝑝$) and the consequent ($𝑞$) using negation, disjunction, or conjunction while preserving truth values. These transformations help simplify logical expressions and proofs.
+All logical equivalences involving **implications** provide ways to rewrite conditional statements in different but logically identical forms. A common theme among them is restructuring the relationship between the antecedent ($p$) and the consequent ($q$) using negation, disjunction, or conjunction while preserving truth values. These transformations help simplify logical expressions and proofs.
 `,
 
   },
@@ -686,7 +686,7 @@ All logical equivalences involving **implications** provide ways to rewrite cond
 
     title:'Equivalences with Biconditionals',
     content:``,
-    before:`Logical equivalences involving **biconditional statements** ($𝑝↔𝑞$) focus on expressing the mutual dependence of two propositions in different but logically equivalent ways. The biconditional means "p if and only if q," meaning both must have the same truth value (either both true or both false).
+    before:`Logical equivalences involving **biconditional statements** ($p↔q$) focus on expressing the mutual dependence of two propositions in different but logically equivalent ways. The biconditional means "p if and only if q," meaning both must have the same truth value (either both true or both false).
                 Here are some equivalences involving **biconditional statements**:
                 
                 `,

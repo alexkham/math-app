@@ -1123,6 +1123,7 @@ import ExponentialDistributionCDF from '@/app/components/visualizations/probabil
 import ExponentialDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/ExponentialDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1942,26 +1943,32 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
   `
 }
 
+  // FAQ pass: the definition, the mean and "when to use" each name their own
+  // h2. The generic memoryless definition goes to the geometric page, which
+  // owns it as the discrete original; what survives here is the applied
+  // consequence, which is exponential-specific. Kept the Poisson link —
+  // "Related Distributions" names no distribution — and led with the rate
+  // versus scale convention, the analogue of geometric's trials/failures split.
   const faqQuestions = {
     obj1: {
-      question: "What is the exponential distribution?",
-      answer: "The exponential distribution is a continuous probability distribution that models waiting times until an event occurs. It describes situations where events happen randomly and independently at a constant average rate λ. The distribution is characterized by the memoryless property, meaning past waiting time provides no information about future waiting time."
+      question: "Is the exponential parameter a rate or a mean?",
+      answer: "Both conventions exist. Exp(λ) usually means the rate — events per unit time — giving E[X] = 1/λ. Exp(β) means the scale, β being the mean wait itself, so E[X] = β. Much statistical software uses scale while probability texts use rate. The mean is the fingerprint: if the declared parameter equals the average wait, you are reading scale.",
+      sectionId: "2"
     },
     obj2: {
-      question: "What is the memoryless property of the exponential distribution?",
-      answer: "The memoryless property states that P(X > s + t | X > s) = P(X > t). In practical terms, if you've already waited s time units, the probability of waiting an additional t units is the same as if you just started waiting. The exponential distribution is the only continuous distribution with this property."
+      question: "What is the relationship between the exponential and Poisson distributions?",
+      answer: "They describe one process from two angles. If events arrive as a Poisson process with rate λ, then the count in a fixed window is [Pois(λ)](!/probability/distributions/discrete/poisson#15) and the gap between consecutive events is Exp(λ) — the same λ, unchanged. Count the events or time the wait: same phenomenon, different question.",
+      sectionId: "16"
     },
     obj3: {
-      question: "How do you find the mean of an exponential distribution?",
-      answer: "The mean (expected value) of an exponential distribution with rate parameter λ is E[X] = 1/λ. If events occur at rate λ per unit time, the average waiting time until the next event is 1/λ time units. For example, if customers arrive at rate 3 per hour, the average wait is 1/3 hour (20 minutes)."
+      question: "Does memorylessness mean a used component is as good as new?",
+      answer: "Under an exponential model, yes — and that is the warning, not the reassurance. The identity says a component that has run for s hours has the same remaining-life distribution as a fresh one. Real parts that wear out do not behave that way, so the model's cleanness is a prompt to check the failure rate genuinely is constant.",
+      sectionId: "15"
     },
     obj4: {
-      question: "What is the relationship between exponential and Poisson distributions?",
-      answer: "The exponential distribution is intimately connected to the Poisson distribution through Poisson processes. If events follow a Poisson process with rate λ, then the time between consecutive events follows an exponential distribution with the same rate parameter λ. The exponential is the continuous-time analog of the geometric distribution."
-    },
-    obj5: {
-      question: "When should you use the exponential distribution?",
-      answer: "Use the exponential distribution when modeling waiting times or lifetimes where events occur randomly at a constant rate without memory effects. Common applications include time between customer arrivals, component failure times in reliability engineering, radioactive decay intervals, and inter-arrival times in queueing systems."
+      question: "What is the difference between the exponential density and its tail probability?",
+      answer: "A single factor of λ. The density is f(x) = λe^(−λx); the survival probability is P(X > x) = e^(−λx), the bare exponential. Dropping or doubling that leading λ swaps a density for a probability mid-computation, and nothing in the expression flags it — only whether you are integrating or evaluating says which object you hold.",
+      sectionId: "2"
     }
   }
 
@@ -2040,19 +2047,6 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
           "item": "https://www.learnmathclass.com/probability/distributions/continuous/exponential"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -2246,6 +2240,22 @@ export default function ExponentialDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Exponential Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2279,13 +2289,6 @@ export default function ExponentialDistributionPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

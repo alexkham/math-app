@@ -9,6 +9,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -424,41 +425,32 @@ This single concept—instantaneous rate of change via a limiting process—gene
 `
 };
 
+// FAQ pass: cut five owned by dedicated subpages — graph analysis,
+// differentiability, rules, techniques (implicit differentiation) and
+// higher-order. Kept the definition, which the hub owns and whose h2 reads
+// only "The Difference Quotient and Its Limit"; replaced the generic
+// notation question with three specific confusions buried inside that
+// section, none of which any heading surfaces.
 const faqQuestions = {
   obj1: {
     question: "What is a derivative?",
-    answer: "A derivative measures the instantaneous rate of change of a function at a point. It is defined as the limit of the difference quotient: f'(a) = lim(h→0) [f(a+h) - f(a)]/h. Geometrically, this equals the slope of the tangent line to the graph at that point.",
+    answer: "A derivative measures the instantaneous rate of change of a function. It is defined as the limit of the difference quotient: f′(a) = lim(h→0) [f(a+h) − f(a)]/h. Geometrically the difference quotient is the slope of a secant line, and as h shrinks toward zero that secant rotates into the tangent line — so f′(a) is the slope of the tangent at (a, f(a)).",
     sectionId: "1"
   },
   obj2: {
-    question: "What are the different notations for derivatives?",
-    answer: "Four notations are common: Lagrange (f'(x)), Leibniz (dy/dx), Euler (Df), and Newton (dot notation). Lagrange is compact for functions, Leibniz behaves like a fraction in chain rule, Euler appears in operator theory, and Newton is used for time derivatives.",
+    question: "Is dy/dx a fraction?",
+    answer: "Not literally. The derivative is defined as a limit, not as a quotient of two numbers, and dy and dx carry no independent meaning inside that definition. But the notation is built to behave like a fraction, which is why the chain rule reads as though factors cancel and why [differentials](!/calculus/derivatives/differentials) can treat dy and dx as separate quantities. Useful as an analogy, unsound as a proof.",
     sectionId: "2"
   },
   obj3: {
-    question: "What does the derivative tell you about a function?",
-    answer: "The sign of f'(x) indicates direction: positive means increasing, negative means decreasing. Where f'(x) = 0 are critical points (potential extrema). The second derivative f''(x) indicates concavity: positive is concave up, negative is concave down.",
-    sectionId: "3"
+    question: "What is the difference between dy/dx and f′(x)?",
+    answer: "They denote the same derivative in different notations. Lagrange’s f′(x) names the derivative as a function and stacks primes for higher orders, switching to f⁽ⁿ⁾(x) once they pile up. Leibniz’s dy/dx names the two variables being related, which makes the chain rule and substitution transparent; higher orders become d²y/dx². Lagrange is compact, Leibniz is explicit about the variables.",
+    sectionId: "2"
   },
   obj4: {
-    question: "When is a function not differentiable?",
-    answer: "A function fails to be differentiable at corners, cusps, vertical tangents, and discontinuities. Differentiability requires continuity (but continuity alone is not sufficient). The classic example is |x|, which is continuous but not differentiable at x = 0.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "What are the basic differentiation rules?",
-    answer: "The main rules are: power rule (d/dx[x^n] = nx^(n-1)), product rule, quotient rule, and chain rule for compositions. These convert the limit definition into algebraic procedures, making derivative computation efficient.",
-    sectionId: "6"
-  },
-  obj6: {
-    question: "What is implicit differentiation?",
-    answer: "Implicit differentiation finds dy/dx when y is not given explicitly as a function of x. Differentiate both sides of the equation with respect to x, treating y as a function of x (applying chain rule), then solve for dy/dx.",
-    sectionId: "7"
-  },
-  obj7: {
-    question: "What are higher-order derivatives?",
-    answer: "Higher-order derivatives result from differentiating repeatedly. The second derivative f''(x) measures concavity, the third and beyond capture finer behavior. Some functions exhibit patterns: e^x stays unchanged, polynomials eventually become zero, and trig functions cycle.",
-    sectionId: "10"
+    question: "What does a dot over a variable mean in calculus?",
+    answer: "It is Newton’s notation for a derivative with respect to time: ẏ means dy/dt, and ÿ means the second derivative with respect to time. The dot is used almost exclusively when the independent variable is time, which is why it runs throughout physics and mechanics — velocity and acceleration appear as ẋ and ẍ — signalling the variable without naming it.",
+    sectionId: "2"
   }
 }
 
@@ -528,19 +520,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -684,6 +663,22 @@ const schemas = {
           <div key={'roadmap-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: roadmapTable}}/>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Derivatives FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -777,12 +772,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

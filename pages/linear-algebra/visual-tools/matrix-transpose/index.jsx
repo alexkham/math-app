@@ -11,6 +11,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TransposeWrapper from '../../../../app/components/linear-algebra copy/matrix/TransposeWrapper'
+import transposeDiagrams from '../../../../app/components/linear-algebra copy/matrix/transposeDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -202,11 +204,96 @@ Set the visualizer to a $2 \\times 3$ shape and try each method to see this tran
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `Cell-by-Cell: the Definition, One Entry at a Time`,
+      content: `The first strategy is the definition made literal. It sweeps $A$ in row-major order and, at each step, places the single entry $a_{i,j}$ into position $[j, i]$ of $A^T$.
+
+At the default size that is $3 \times 4 = 12$ steps, one per entry. The frozen picture below is step 6: five entries have already landed in $A^T$, one is in flight, and the remaining cells of $A^T$ are still empty placeholders.`,
+      before: ``,
+      after: `The index swap is the whole operation. Everything else the transpose does — the shape change, the symmetry test, the reversal in $(AB)^T = B^T A^T$ — follows from $a_{i,j} \mapsto a_{j,i}$ and nothing more.
+
+Watch the shape while it fills. $A$ is $3 \times 4$ and $A^T$ is $4 \times 3$: the entry at row 2, column 4 of $A$ has nowhere to go in a $3 \times 4$ target, which is why the destination has to be a different shape rather than the same grid rearranged.
+
+This method is the slowest of the four and the one worth running first, because the other three are shortcuts that assume you already believe this one.`,
+      link: '',
+    },
+    obj12: {
+      title: `Row-as-Column: Moving a Whole Row at Once`,
+      content: `The second strategy takes an entire row of $A$ and stands it up as the corresponding column of $A^T$. Row 1 becomes column 1, row 2 becomes column 2, and so on.
+
+That is $3$ steps at the default size instead of $12$ — one per row of $A$. The still below is step 2, with the first row already standing as a column and the second in progress.`,
+      before: ``,
+      after: `The step count is the useful observation. Cell-by-cell needs $m \times n$ moves; this needs $m$. Both perform the same relabelling, but grouping the work by row makes the structure visible: a transpose is not twelve unrelated moves, it is three rows being re-oriented.
+
+This is also the reading that makes $A^T$ easy to write out by hand. Take the rows of $A$ in order, write each one down a column, and stop — no index arithmetic required.`,
+      link: '',
+    },
+    obj13: {
+      title: `Column-as-Row: the Same Operation From the Other Side`,
+      content: `The third strategy is the mirror of the second: each column of $A$ is laid down as the corresponding row of $A^T$. Column 1 becomes row 1, column 2 becomes row 2, and $A^T$ fills top-down rather than left-to-right.
+
+At the default size that is $4$ steps, one per column of $A$. The still is step 2 of 4.`,
+      before: ``,
+      after: `Row-as-column and column-as-row produce identical results, and the difference in step count — $3$ against $4$ — is purely a matter of which dimension you group by. On a $3 \times 4$ matrix, grouping by rows takes three moves and grouping by columns takes four; on a square matrix the two counts coincide.
+
+Holding both readings at once is what makes the transpose easy to think about: rows of $A$ *are* columns of $A^T$, and columns of $A$ *are* rows of $A^T$. Those are two descriptions of one fact, not two separate rules to remember.`,
+      link: '',
+    },
+    obj14: {
+      title: `Diagonal Reflection: One Geometric Move`,
+      content: `The fourth strategy drops the step-by-step framing entirely. Transposing is a **reflection across the main diagonal** — a single geometric operation rather than a sequence of moves.
+
+The colouring carries the argument: cells on the diagonal are marked separately from those above it and those below it. Reflecting swaps the above-group with the below-group and leaves the diagonal fixed.`,
+      before: ``,
+      after: `Two consequences fall straight out of that picture. First, $(A^T)^T = A$ — reflect twice about the same axis and every entry returns home. Second, the diagonal entries never move, which is why $\operatorname{tr}(A^T) = \operatorname{tr}(A)$ and why a symmetric matrix — one satisfying $A = A^T$ — is exactly a matrix whose above-diagonal half mirrors its below-diagonal half. The [symmetric and skew-symmetric](!#symmetric-and-skew-symmetric) section develops that.
+
+For a rectangular $A$ the axis is an abstraction rather than a line you could draw through the grid, since the source and target have different shapes. The tool labels it as such. The index swap still holds; only the tidy geometric picture needs the matrix to be square.`,
+      link: '',
+    },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built by calling each strategy's own scene builder (STRATEGIES is exported
+     additively from TransposeWrapper) and rendering one representative scene
+     through frozenMatrixSvg. Overlays - the curved source-to-destination arrows
+     and the dashed diagonal axis - are not reproduced; the cell colouring
+     carries the correspondence on its own. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: transposeDiagrams[key], caption, text })
+
+  const stateUnits = {
+    'cell-by-cell': unit('cell-by-cell', 'Cell-by-cell, step 6 of 12',
+      'A is 3&#215;4 on the left, A&#7488; is 4&#215;3 on the right. Five entries have landed, one is ' +
+      'highlighted in transit, and the remaining destination cells still show the empty placeholder.'),
+    'row-as-column': unit('row-as-column', 'Row-as-column, step 2 of 3',
+      'A whole row of A is highlighted at once, together with the column of A&#7488; it becomes. Three ' +
+      'steps cover the entire matrix instead of twelve.'),
+    'column-as-row': unit('column-as-row', 'Column-as-row, step 2 of 4',
+      'The mirror grouping: a full column of A and the row of A&#7488; it turns into. Same result as ' +
+      'row-as-column, reached in four steps rather than three.'),
+    'diagonal-reflection': unit('diagonal-reflection', 'Diagonal reflection, the geometric view',
+      'No step sequence at all. Cells are coloured by their relation to the main diagonal - on it, above ' +
+      'it, below it - and the transpose swaps the two off-diagonal groups while the diagonal stays put.'),
+  }
+
+
+  /* ---- per-strategy scene notes, passed into the component (Line 1) ----
+     TransposeWrapper had no explanations prop; one was added additively and
+     defaults to null, so captions are unchanged when nothing is passed. The
+     caption renders with dangerouslySetInnerHTML, so these are raw HTML with
+     <a href="#slug"> anchors rather than markdown. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#the-four-methods" style="color:#1d4ed8;font-weight:600">all four methods</a></div>`
+
+  const explanations = {
+    'cell-by-cell': note('The definition made literal: m &#215; n steps, one index swap each.', 'cell-by-cell', 'Learn more about the cell-by-cell method'),
+    'row-as-column': note('Group the same work by row and it takes m steps instead of m &#215; n.', 'row-as-column', 'Learn more about row-as-column'),
+    'column-as-row': note('The mirror grouping - identical result, n steps.', 'column-as-row', 'Learn more about column-as-row'),
+    'diagonal-reflection': note('One reflection, with the diagonal held fixed - which is where the symmetry tests come from.', 'diagonal-reflection', 'Learn more about the reflection view'),
   }
 
 
@@ -326,6 +413,8 @@ Set the visualizer to a $2 \\times 3$ shape and try each method to see this tran
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -343,27 +432,45 @@ Set the visualizer to a $2 \\times 3$ shape and try each method to see this tran
   }
 }
 
-export default function MatrixTransposeVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function MatrixTransposeVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    { id: '0',  title: sectionsContent.obj0.title,  link: sectionsContent.obj0.link,  content: [sectionsContent.obj0.content] },
-    { id: '1',  title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
-    { id: '2',  title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
-    { id: '3',  title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
-    { id: '4',  title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
-    { id: '5',  title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
-    { id: '6',  title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
-    { id: '7',  title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
-    { id: '8',  title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
-    { id: '9',  title: sectionsContent.obj9.title,  link: sectionsContent.obj9.link,  content: [sectionsContent.obj9.content] },
-    { id: '10', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
-    // { id: '11', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
-    // { id: '12', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
-    // { id: '13', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
-    // { id: '14', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
-    // { id: '15', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-four-methods'),
+    stateRow('obj11', 'cell-by-cell', 'cell-by-cell'),
+    stateRow('obj12', 'row-as-column', 'row-as-column'),
+    stateRow('obj13', 'column-as-row', 'column-as-row'),
+    stateRow('obj14', 'diagonal-reflection', 'diagonal-reflection'),
+    plain('obj3', 'the-scene-player'),
+    plain('obj4', 'square-vs-rectangular'),
+    plain('obj5', 'what-the-transpose-is'),
+    plain('obj6', 'key-properties'),
+    plain('obj7', 'symmetric-and-skew-symmetric'),
+    plain('obj8', 'worked-example'),
+    plain('obj9', 'common-mistakes'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -420,7 +527,7 @@ export default function MatrixTransposeVisualizer({ seoData, sectionsContent, in
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Transpose</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <TransposeWrapper />
+        <TransposeWrapper explanations={explanations} />
       </div>
       <br />
       <br />

@@ -495,6 +495,9 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import LinearTransformation from '../../../../app/components/linear-algebra copy/r2-visualizers/linear-transformations/LinearTransformations'
+import { SCENARIOS as LT_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/linear-transformations/LinearTransformations'
+import linearTransformationDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -722,33 +725,102 @@ For comprehensive treatment see **eigenvalues and eigenvectors**, **matrix rank*
       link:'',
     },
     obj12:{
-      title:``,
-      content:``,
+      title:`The Identity: the Transformation That Does Nothing`,
+      content:`The Identity preset sets $A = I$, and the canvas shows a plane that has not moved. The transformed grid sits exactly on the original, $\hat{i}$ still points to $(1, 0)$ and $\hat{j}$ still points to $(0, 1)$.
+
+It is worth starting here because it establishes what every later picture is a deviation *from*. Whatever a preset does, it does it to this.`,
       before:``,
-      after:``,
+      after:`The identity is also the left end of the scrub slider. The displayed matrix is $M(t) = (1-t)I + tA$, so at $t = 0$ every preset shows this same picture, and the animation is a straight-line morph from here to $A$.
+
+Two properties fall out immediately. Every non-zero vector is an eigenvector with eigenvalue 1, since $Iv = 1 \cdot v$ holds for all $v$. And $\det I = 1$, so areas and orientation are untouched — which is the baseline the determinant readout measures against.`,
       link:'',
     },
     obj13:{
-      title:``,
-      content:``,
+      title:`Full Rank: Reshaping Without Losing Anything`,
+      content:`Eight of the twelve presets are full-rank maps — rotations, scalings, shears, reflections and the general twist. Their common property is $\det A \neq 0$, which means the transformed grid stays a genuine grid: two independent directions in, two independent directions out.
+
+The frozen picture below shows the 45° rotation at $t = 1$. The unit circle is still a circle, the unit square has become a tilted square of equal area, and no direction has been flattened.`,
       before:``,
-      after:``,
+      after:`Within this group the determinant separates the sub-cases. Rotations and shears have $\det = 1$ and preserve area exactly; the $2\times$ scaling has $\det = 4$ and quadruples it; the reflections have $\det = -1$, preserving area but reversing orientation — watch $\hat{i}$ and $\hat{j}$ swap handedness.
+
+The essential point is invertibility. A full-rank map can be undone, because no two distinct vectors are sent to the same place. The kernel contains only the origin, and the image is the entire plane — which is why the kernel and image layers have nothing interesting to draw on any of these eight presets.`,
       link:'',
     },
     obj14:{
-      title:``,
-      content:``,
+      title:`Rank 1: Collapsing the Plane Onto a Line`,
+      content:`Three presets are singular with rank 1: projection onto the x-axis, projection onto the line $y = x$, and the outer-product matrix $\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$, whose second column is twice its first.
+
+Here $\det A = 0$ and the whole plane is flattened onto a single line through the origin. The frozen picture shows the projection onto the x-axis: the transformed grid has become one line, and the unit circle has become a segment.`,
       before:``,
-      after:``,
+      after:`This is where the kernel and image layers earn their place. The **image** is the line everything lands on — drawn in green. The **kernel** is the line of vectors sent to the origin — drawn in red. Both are one-dimensional, and the rank-nullity theorem says their dimensions must sum to 2, which is exactly what the picture shows.
+
+Information is destroyed here, irreversibly. Every point on a given kernel-parallel line collapses to the same image point, so there is no way back and no inverse exists. That is what a zero determinant means in practice, and it is why "singular" and "non-invertible" are the same statement.`,
       link:'',
     },
     obj15:{
-      title:``,
-      content:``,
+      title:`Rank 0: the Zero Map`,
+      content:`One preset takes the collapse to its limit. The zero matrix sends every vector to the origin, so the transformed grid, the unit square and the unit circle all contract to a single point.
+
+The frozen picture is that end state: nothing remains but the origin dot.`,
       before:``,
-      after:``,
+      after:`The rank-nullity accounting still holds, at the other extreme. The image is the origin alone — dimension 0 — and the kernel is the entire plane — dimension 2. They sum to 2, as they must.
+
+This preset is the reason "rank" is a more informative measure than "invertible or not". The projections and the zero map are all singular, but they are not equally destructive: a rank-1 map keeps one dimension of information and a rank-0 map keeps none. The determinant reports $0$ for both and cannot tell them apart.`,
       link:'',
     }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The component already renders SVG through pure string builders, so these
+     stills are its own output: SVGRender + the scoped stylesheet + the arrow
+     markers, frozen at t = 1 with the component's default layers. See
+     linearTransformationDiagrams.js. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: linearTransformationDiagrams[key], caption, text })
+
+  const stateUnits = {
+    identity: unit('identity', 'Identity, frozen at t = 1',
+      'Nothing has moved: the transformed grid lies on the original, and the basis arrows still point ' +
+      'to (1, 0) and (0, 1). Every preset shows this same picture at t = 0.'),
+    fullRank: unit('fullRank', 'Rotate 45&deg;, frozen at t = 1',
+      'A full-rank map. The unit circle is still a circle and the unit square is a tilted square of ' +
+      'equal area - det = 1, so nothing is stretched or flattened.'),
+    rankOne: unit('rankOne', 'Project to the x-axis, frozen at t = 1',
+      'Rank 1: the whole plane has collapsed onto one line. The green image line is where everything ' +
+      'lands; the red kernel line is everything sent to the origin.'),
+    zero: unit('zero', 'The zero map, frozen at t = 1',
+      'Rank 0. Grid, square and circle have all contracted to the origin - the image is a single ' +
+      'point and the kernel is the entire plane.'),
+  }
+
+
+  /* ---- per-scenario panel notes (Line 1) ----
+     Case A: LinearTransformations already accepts explanationOverride with a
+     byScenario map. pickScenarioCopy REPLACES the entry rather than merging it,
+     so each override spreads the tool's own SCENARIOS entry and appends the
+     anchor line to `watch`. All twelve scenarios are covered; each points at the
+     section for its rank group. The panel renders these with
+     dangerouslySetInnerHTML, so the anchors are raw HTML. */
+  const SECTION_FOR_GROUP = { full: 'full-rank', rank1: 'rank-1-collapse', zero: 'the-zero-map' }
+  const LABEL_FOR_GROUP = {
+    full: 'full-rank transformations',
+    rank1: 'the rank-1 collapse',
+    zero: 'the zero map',
+  }
+
+  const explanationOverride = {
+    byScenario: Object.fromEntries(
+      Object.entries(LT_SCENARIOS).map(([key, sc]) => {
+        const slug = key === 'identity' ? 'the-identity' : SECTION_FOR_GROUP[groupOf[key]]
+        const label = key === 'identity' ? 'the identity' : LABEL_FOR_GROUP[groupOf[key]]
+        return [key, {
+          ...sc,
+          watch: `${sc.watch}<br/><a href="#${slug}" style="color:#1d4ed8;font-weight:600">Learn more about ${label}</a>` +
+            ` &middot; <a href="#preset-scenarios" style="color:#1d4ed8;font-weight:600">all twelve presets</a>`,
+        }]
+      })
+    ),
   }
 
 
@@ -898,6 +970,8 @@ For comprehensive treatment see **eigenvalues and eigenvectors**, **matrix rank*
    return {
       props:{
          sectionsContent,
+         stateUnits,
+         explanationOverride,
          introContent,
          faqQuestions,
          schemas,
@@ -916,141 +990,47 @@ For comprehensive treatment see **eigenvalues and eigenvectors**, **matrix rank*
     }
    }
 
-export default function LinearTransformation2DPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function LinearTransformation2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-animation-slider'),
+    plain('obj7', 'preset-scenarios'),
+    stateRow('obj12', 'the-identity', 'identity'),
+    stateRow('obj13', 'full-rank', 'fullRank'),
+    stateRow('obj14', 'rank-1-collapse', 'rankOne'),
+    stateRow('obj15', 'the-zero-map', 'zero'),
+    plain('obj3', 'editing-the-matrix'),
+    plain('obj4', 'display-layer-toggles'),
+    plain('obj5', 'the-live-card'),
+    plain('obj6', 'the-classification-readout'),
+    plain('obj8', 'what-is-a-linear-transformation'),
+    plain('obj9', 'determinant-area-and-orientation'),
+    plain('obj10', 'eigenvalues-rank-and-matrix-types'),
+    plain('obj11', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -1106,7 +1086,7 @@ export default function LinearTransformation2DPage({seoData, sectionsContent, in
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Linear Transformation</h1>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
-   <LinearTransformation/>
+   <LinearTransformation explanationOverride={explanationOverride}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -370,6 +370,7 @@ function FamilyGlyph({ d, active, darkMode }) {
 export default function FunctionRiemann({
   initialFamily = 'quadratic',
   initialMethod = 'left',
+  explanations = null,
   initialLo = 0,
   initialHi = 3,
   initialN = 8,
@@ -512,9 +513,14 @@ export default function FunctionRiemann({
         m.order === 'O(1/n)'
           ? 'doubling $n$ roughly halves the error'
           : 'doubling $n$ shrinks the error by about a factor of four'
-      }.`
+      }.` +
+      // Optional per-method note supplied by the page (Line 1 anchor mesh).
+      // Omitted -> the panel reads exactly as it always has.
+      (explanations?.[method] ? `
+
+${explanations[method]}` : '')
     );
-  }, [fam, m, method, lo, hi, n, dx, sn, I, err]);
+  }, [fam, m, method, lo, hi, n, dx, sn, I, err, explanations]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

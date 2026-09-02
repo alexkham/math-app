@@ -18,6 +18,7 @@ import BinomialCalculator from '@/app/components/calculators/probability/distrib
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -563,26 +564,32 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
   "Interpretation": "• Mean (μ): The expected number of successes - where the distribution centers\n• Variance (σ²): How spread out the results are - higher means more variability\n• Std Dev (σ): Average distance from the mean - easier to interpret than variance\n• Chart: Shows probability distribution - taller bars are more likely outcomes"
 };
 
+  // FAQ pass: all five originals named their own h2 — the experiment behind
+  // the distribution, the PMF, Expected Value (Mean), Variance and Standard
+  // Deviation, and Applications and Examples. Unlike a formula-library page,
+  // this one gives the mean and the variance their own headings, so the
+  // formula queries are case A here. Replaced with the notation section's
+  // reading traps, which no heading covers.
   const faqQuestions = {
     obj1: {
-      question: "What is the binomial distribution?",
-      answer: "The binomial distribution models the number of successes in a fixed number of independent trials, where each trial has only two outcomes (success or failure) and the probability of success remains constant. It is characterized by two parameters: n (number of trials) and p (probability of success on each trial)."
+      question: "What does q mean in binomial formulas?",
+      answer: "q is shorthand for 1 − p, not a second parameter. Once p is fixed, q is determined; the letter exists only to compress formulas, turning the pmf's tail into q^(n−k) and the variance into npq. Nothing is ever declared Bin(n, p, q) — writing q into a declaration double-counts a single degree of freedom.",
+      sectionId: "15"
     },
     obj2: {
-      question: "What is the binomial probability formula?",
-      answer: "The probability of exactly k successes in n trials is P(X = k) = C(n,k) × p^k × (1-p)^(n-k), where C(n,k) is the binomial coefficient 'n choose k'. This formula multiplies the number of ways to arrange k successes among n trials by the probability of that specific arrangement."
+      question: "Does B(n, p) mean the binomial or the Beta function?",
+      answer: "It depends on the source, which is why B alone is risky. School and exam-board texts write B(n, p) for the binomial; elsewhere capital B(a, b) is Euler's Beta function, and both circulate in the same probabilistic neighborhood. Bin(n, p) is the unambiguous spelling, with Binomial(n, p) when explicitness matters more than brevity.",
+      sectionId: "15"
     },
     obj3: {
-      question: "How do you find the mean of a binomial distribution?",
-      answer: "The mean (expected value) of a binomial distribution is E[X] = np, where n is the number of trials and p is the probability of success. This formula reflects that if you perform n trials with success probability p, you expect np successes on average."
+      question: "What does the semicolon mean in P(k; n, p)?",
+      answer: "It fences the value off from the parameters: what stands left of the semicolon varies, what stands right is fixed by the model. So P(k; n, p) is the probability of k successes given n trials and success probability p. A comma in that slot would read as a [joint probability](!/probability/joint-probability#notation) of three random quantities.",
+      sectionId: "15"
     },
     obj4: {
-      question: "What is the variance of a binomial distribution?",
-      answer: "The variance of a binomial distribution is Var(X) = np(1-p), and the standard deviation is σ = √(np(1-p)). Variance is maximized when p = 0.5 (outcomes equally likely) and decreases as p approaches 0 or 1, reflecting more predictable outcomes."
-    },
-    obj5: {
-      question: "When should you use the binomial distribution?",
-      answer: "Use the binomial distribution when you have a fixed number of independent trials, each trial has exactly two outcomes (success/failure), the probability of success is constant across all trials, and you want to count the total number of successes. Common examples include coin flips, quality control testing, and survey responses."
+      question: "Why does the pmf line include “k = 0, …, n”?",
+      answer: "Because the support is part of the statement, not decoration. The clause declares exactly which values the variable can take; outside that list the probability is zero by convention. Dropping it leaves the formula looking as though it applies to any k, including negative values or values above n, where the model breaks down.",
+      sectionId: "15"
     }
   }
 
@@ -661,19 +668,6 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
           "item": "https://www.learnmathclass.com/probability/distributions/discrete/binomial"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -842,6 +836,22 @@ export default function BinomialDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Binomial Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -875,13 +885,6 @@ export default function BinomialDistributionPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -346,8 +346,7 @@
 //   }
 // }
 
-// export default function MatrixAdditionVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
-
+// export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
 
 //   const genericSections = [
 //     {
@@ -559,6 +558,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+import vectorAdditionDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -756,11 +757,91 @@ Geometrically, $u + v$ is the diagonal of the parallelogram spanned by $u$ and $
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `The Opening Scene: Two Vectors of the Same Length`,
+      content: `The player opens with $\mathbf{u}$ and $\mathbf{v}$ drawn as rows of components and $\mathbf{w}$ waiting empty beneath them. At the default length both inputs have four components, so $\mathbf{w}$ will have four as well.
+
+Nothing has been added yet. What the scene fixes is the precondition: $\mathbf{u}$ and $\mathbf{v}$ have the same number of components, so every $u_j$ has a $v_j$ sitting opposite it.`,
+      before: ``,
+      after: `The same-length rule is the vector form of the same-shape rule for matrices, and it exists for the same reason: addition is defined component by component, so it needs a partner for each component. A vector in $\mathbb{R}^4$ and one in $\mathbb{R}^3$ have nothing to pair the fourth component with.
+
+Put another way, addition is an operation *within* a single vector space. $\mathbb{R}^4$ is closed under it — add two of its members and you get another member of $\mathbb{R}^4$, never something of a different length.`,
+      link: '',
+    },
+    obj12: {
+      title: `One Component at a Time`,
+      content: `Each step highlights $u_j$, the matching $v_j$, and the destination slot $w_j$, then writes $u_j + v_j$ into it.
+
+The frozen picture below is a step partway through the run: earlier components of $\mathbf{w}$ already hold their sums, one pair is being combined, and the rest are still placeholders.`,
+      before: ``,
+      after: `No component ever meets a component in a different position. $u_1$ can only be added to $v_1$, which is why the sweep can be read as four completely independent one-number additions rather than a single four-dimensional operation.
+
+That independence is what makes vector addition componentwise in the technical sense, and it is the property that fails for other vector products. The inner product also pairs components positionally but then collapses them to a single number; the cross product mixes positions outright.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Completed Sum`,
+      content: `The final scene fills every slot, so $\mathbf{w}$ reads $w_j = u_j + v_j$ across all four positions and has the same length it started with.
+
+Geometrically this is the tip-to-tail rule: place $\mathbf{v}$ at the end of $\mathbf{u}$ and $\mathbf{w}$ runs from the start of $\mathbf{u}$ to the tip of $\mathbf{v}$. The component arithmetic on screen is that picture written out coordinate by coordinate.`,
+      before: ``,
+      after: `The algebraic properties follow from the components. Addition is **commutative** and **associative** because ordinary addition is; the zero vector is an identity; $-\mathbf{u}$ is an additive inverse. Those four facts are part of what makes $\mathbb{R}^n$ a vector space at all.
+
+The tip-to-tail reading also explains commutativity without any algebra: laying $\mathbf{v}$ after $\mathbf{u}$ or $\mathbf{u}$ after $\mathbf{v}$ traces the two sides of the same parallelogram and lands on the same corner.`,
+      link: '',
+    },
+    obj14: {
+      title: `Switching to Subtraction`,
+      content: `The operation toggle turns every $+$ into a $-$, and nothing else changes: same lengths, same positional pairing, same one-slot-at-a-time sweep, with each destination now reading $u_j - v_j$.
+
+The still below is the subtraction run at the same point in the sweep, for direct comparison with the addition step above.`,
+      before: ``,
+      after: `As with matrices, subtraction is not a new operation: $\mathbf{u} - \mathbf{v}$ means $\mathbf{u} + (-\mathbf{v})$, so the toggle negates one input and reuses addition.
+
+Geometrically the difference is the vector *from* the tip of $\mathbf{v}$ *to* the tip of $\mathbf{u}$ when both start at the origin. That direction is why order matters: $\mathbf{u} - \mathbf{v}$ and $\mathbf{v} - \mathbf{u}$ are the same arrow pointing opposite ways, and subtraction is therefore not commutative.`,
+      link: '',
+    },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from AdditionWrapper's own buildVectorScenes (exported additively)
+     and rendered through frozenMatrixSvg. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: vectorAdditionDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'u and v as four-component rows with w empty below. Every slot of w shows the placeholder; the ' +
+      'matching lengths are the only thing established so far.'),
+    step: unit('step', 'Mid-sweep, frozen',
+      'One component of u, the component opposite it in v, and the destination slot in w are highlighted ' +
+      'together. Earlier slots already read u + v; later ones are still placeholders.'),
+    done: unit('done', 'Completed sum, frozen',
+      'All four slots filled, each holding the sum of the two components directly above it. w has the ' +
+      'same length it started with.'),
+    subtract: unit('subtract', 'Subtraction, same point in the sweep',
+      'Identical choreography with the operator flipped: each destination slot now reads u - v. ' +
+      'Lengths and pairing are unchanged.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     Reuses the explanations hook added to AdditionWrapper for the matrix page:
+     keys are the scene phase (intro / step / done) plus one subtract key. This
+     page passes its own object, so the two pages never collide. Captions render
+     with dangerouslySetInnerHTML, so these are raw HTML anchors. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#what-vector-addition-is" style="color:#1d4ed8;font-weight:600">what vector addition is</a></div>`
+
+  const explanations = {
+    intro: note('Equal lengths give every component of u a partner in v - that is the whole precondition.', 'the-opening-scene', 'Learn more about the opening scene'),
+    step: note('Each slot of w depends on exactly two numbers, and on no other slot.', 'one-component-at-a-time', 'Learn more about the component sweep'),
+    done: note('Same length in, same length out - and tip-to-tail is this arithmetic drawn as arrows.', 'the-completed-sum', 'Learn more about the completed sum'),
+    subtract: note('u - v is u + (-v), which is why order matters here but not for addition.', 'switching-to-subtraction', 'Learn more about subtraction'),
   }
 
 
@@ -880,6 +961,8 @@ Geometrically, $u + v$ is the diagonal of the parallelogram spanned by $u$ and $
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -897,106 +980,42 @@ Geometrically, $u + v$ is the diagonal of the parallelogram spanned by $u$ and $
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [sectionsContent.obj0.content]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [sectionsContent.obj3.content]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [sectionsContent.obj6.content]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [sectionsContent.obj7.content]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [sectionsContent.obj8.content]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [sectionsContent.obj9.content]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [sectionsContent.obj10.content]
-    },
-    // {
-    //   id: '11',
-    //   title: sectionsContent.obj11.title,
-    //   link: sectionsContent.obj11.link,
-    //   content: [sectionsContent.obj11.content]
-    // },
-    // {
-    //   id: '12',
-    //   title: sectionsContent.obj12.title,
-    //   link: sectionsContent.obj12.link,
-    //   content: [sectionsContent.obj12.content]
-    // },
-    // {
-    //   id: '13',
-    //   title: sectionsContent.obj13.title,
-    //   link: sectionsContent.obj13.link,
-    //   content: [sectionsContent.obj13.content]
-    // },
-    // {
-    //   id: '14',
-    //   title: sectionsContent.obj14.title,
-    //   link: sectionsContent.obj14.link,
-    //   content: [sectionsContent.obj14.content]
-    // },
-    // {
-    //   id: '15',
-    //   title: sectionsContent.obj15.title,
-    //   link: sectionsContent.obj15.link,
-    //   content: [sectionsContent.obj15.content]
-    // },
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-scene-player'),
+    stateRow('obj11', 'the-opening-scene', 'intro'),
+    stateRow('obj12', 'one-component-at-a-time', 'step'),
+    stateRow('obj13', 'the-completed-sum', 'done'),
+    stateRow('obj14', 'switching-to-subtraction', 'subtract'),
+    plain('obj3', 'addition-and-subtraction'),
+    plain('obj4', 'choosing-vector-length'),
+    plain('obj5', 'what-vector-addition-is'),
+    plain('obj6', 'key-formulas'),
+    plain('obj7', 'the-same-length-rule'),
+    plain('obj8', 'common-mistakes'),
+    plain('obj9', 'worked-example'),
+    plain('obj10', 'related-concepts'),
   ]
 
   return (
@@ -1056,6 +1075,7 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
       <div style={{ width: '80%', margin: 'auto' }}>
         <AdditionWrapper 
         mode='vectors'
+        explanations={explanations}
         />
       </div>
       <br />

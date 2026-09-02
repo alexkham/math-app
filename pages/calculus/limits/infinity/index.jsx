@@ -10,6 +10,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -561,66 +562,33 @@ Both concepts connect to asymptotes. Horizontal asymptotes arise from finite lim
 `
 };
 
+// FAQ pass: cut nine case-A questions — horizontal behavior, horizontal and
+// vertical asymptotes, rational functions, dominant terms, growth rates, sign
+// analysis, one-sided infinite limits and logarithms each have an h2 stating
+// the answer. Also cut "what does it mean when a limit equals infinity":
+// /calculus/limits owns that as the existence question. Kept the two-concepts
+// distinction and the exponential formula query; invented two from the
+// notation section.
 const faqQuestions = {
   obj1: {
     question: "What is the difference between limits at infinity and infinite limits?",
-    answer: "Limits at infinity describe what happens as the input x grows without bound (x → ∞). Infinite limits describe what happens when the output f(x) grows without bound as x approaches a finite value. Both use the infinity symbol but in opposite roles.",
+    answer: "They describe opposite situations. A limit at infinity asks what f(x) does as x escapes beyond every bound; a finite answer gives a horizontal asymptote. An infinite limit asks what happens as x approaches a finite point where f grows without bound, which gives a vertical asymptote. The first puts ∞ under the lim, the second after the equals sign.",
     sectionId: "1"
   },
   obj2: {
-    question: "What does limit as x approaches infinity mean?",
-    answer: "The notation lim(x→∞) f(x) = L means f(x) approaches L as x increases without bound. No matter how close to L you demand, sufficiently large x will place f(x) within that tolerance. This describes the function's end behavior.",
-    sectionId: "2"
+    question: "Is infinity a number?",
+    answer: "No. In calculus ∞ is a name for unboundedness rather than a value, and it never enters arithmetic — which is why ∞ − ∞ and ∞/∞ are indeterminate forms instead of computations. It appears only inside limit statements. [Set theory](!/set-theory/cardinality) does treat infinite sizes as objects and distinguishes ℵ₀ from 𝔠, but the calculus symbol draws no such distinction.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is a horizontal asymptote?",
-    answer: "If lim(x→∞) f(x) = L where L is finite, the line y = L is a horizontal asymptote. A function can have zero, one, or two horizontal asymptotes depending on whether the limits exist and match in both directions.",
-    sectionId: "3"
+    question: "Does x → ∞ mean plugging in a huge number?",
+    answer: "No. Nothing is substituted — ∞ never enters the function. The notation says the input escapes beyond every bound, and the limit records the resulting trend in f. Testing one large value can suggest an answer but never establishes it, because the behavior has to hold past every bound, not past a single chosen number.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "How do you evaluate limits at infinity for rational functions?",
-    answer: "Divide numerator and denominator by the highest power of x in the denominator. Terms with x in the denominator vanish as x → ∞, leaving only the leading coefficients. The result depends on comparing the degrees of numerator and denominator.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is dominant term analysis?",
-    answer: "As x → ∞, the highest-degree terms control behavior. If the numerator degree is less than denominator degree, the limit is 0. If equal, it's the ratio of leading coefficients. If greater, the limit is ±∞.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do growth rates compare: logarithms, polynomials, and exponentials?",
-    answer: "The hierarchy is: logarithmic ≪ polynomial ≪ exponential. Any exponential eventually overtakes any polynomial (x^n/e^x → 0), and any polynomial eventually overtakes any logarithm (ln(x)/x^n → 0).",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What does it mean when a limit equals infinity?",
-    answer: "The notation lim(x→a) f(x) = ∞ means f(x) grows without bound as x approaches a. For any large number M, values of x sufficiently close to a make f(x) > M. This is not convergence to a value but describes unbounded behavior.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is a vertical asymptote?",
-    answer: "If lim(x→a⁺) f(x) = ±∞ or lim(x→a⁻) f(x) = ±∞, then x = a is a vertical asymptote. The graph shoots up or down near x = a. These typically occur where a rational function's denominator equals zero while the numerator doesn't.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "How do you determine if an infinite limit is positive or negative?",
-    answer: "Use sign analysis near the point. Check whether the expression is positive or negative for values slightly greater than and slightly less than the point. For 1/(x−2), x slightly above 2 gives positive output (+∞), while x slightly below gives negative (−∞).",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "Can one-sided infinite limits differ in sign?",
-    answer: "Yes. For f(x) = 1/(x−2), the left limit is −∞ and the right limit is +∞. The two-sided limit doesn't exist because the sides disagree. However, for f(x) = 1/(x−2)², both sides are +∞, so the two-sided limit is +∞.",
-    sectionId: "10"
-  },
-  obj11: {
-    question: "What are the limits of e^x at positive and negative infinity?",
-    answer: "As x → ∞, e^x → ∞ (unbounded exponential growth). As x → −∞, e^x → 0 (decay toward zero). The horizontal asymptote y = 0 appears in the direction where the exponent goes to −∞.",
+    question: "What is the limit of e^x as x approaches negative infinity?",
+    answer: "It is 0. As x decreases without bound, e^x decays toward zero without ever reaching it, making the x-axis a horizontal asymptote on the left. The other direction reverses completely: as x increases without bound, e^x grows without bound, so there is no horizontal asymptote on the right.",
     sectionId: "11"
-  },
-  obj12: {
-    question: "What are the limits of ln(x) at zero and infinity?",
-    answer: "As x → ∞, ln(x) → ∞ (grows slowly, slower than any positive power). As x → 0⁺, ln(x) → −∞, so x = 0 is a vertical asymptote. The one-sided notation is essential since ln(x) is undefined for x ≤ 0.",
-    sectionId: "12"
   }
 }
 
@@ -694,19 +662,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits/infinity"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -868,6 +823,22 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Limits and Infinity FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -905,12 +876,6 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

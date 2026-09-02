@@ -857,6 +857,7 @@ import CalculatorInstructions from '@/app/components/calculators/CalculatorInstr
 import PoissonCalculator from '@/app/components/calculators/probability/distributions/PoissonDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -1397,26 +1398,32 @@ const poissonExplanations = {
   "Interpretation": "• Mean (μ = λ): Expected number of events per interval\n• Variance (σ² = λ): Variability equals the mean for Poisson distribution\n• Std Dev (σ = √λ): Typical deviation from expected event count\n• Chart: Shows probability distribution - shape becomes more symmetric as λ increases"
 };
 
+  // FAQ pass: the definition, the PMF and "when to use" each name their own
+  // h2. Kept the variance-equals-mean property — Mean and Variance have
+  // separate headings, so their equality has none — and the binomial link,
+  // whose Special Cases and Related Distributions sections are commented out
+  // of the render array and never appear. Added the two λ traps from the
+  // notation section.
   const faqQuestions = {
     obj1: {
-      question: "What is the Poisson distribution?",
-      answer: "The Poisson distribution models the number of events occurring in a fixed interval of time or space when events happen independently at a constant average rate λ. Unlike binomial or geometric distributions, it doesn't involve discrete trials—it counts random occurrences like customer arrivals, website hits, or defects."
+      question: "Why does the Poisson variance equal the mean?",
+      answer: "Because a single parameter fixes the whole distribution. λ is the only input, so it has to determine both the center and the spread — E[X] = Var(X) = λ. That gives a practical test: if count data has variance far above its mean the data are overdispersed and Poisson is the wrong model; far below, underdispersed.",
+      sectionId: "7"
     },
     obj2: {
-      question: "What is the Poisson probability formula?",
-      answer: "The probability of exactly k events is P(X = k) = (λ^k × e^(-λ)) / k!, where λ is the average rate, e is Euler's number (≈2.718), and k! is k factorial. The formula uses the exponential function to ensure all probabilities sum to 1."
+      question: "How is the Poisson distribution related to the binomial?",
+      answer: "Poisson is the limit of the binomial for rare events. When n is large and p small, [Bin(n, p)](!/probability/distributions/discrete/binomial#15) ≈ Pois(np): the two binomial parameters collapse into the single product that survives. A common rule of thumb is n > 20 with p < 0.05. Counting rare successes among many trials behaves like a Poisson count.",
+      sectionId: "15"
     },
     obj3: {
-      question: "Why does Poisson variance equal the mean?",
-      answer: "The Poisson distribution has a unique property: both mean and variance equal λ. This occurs because the single parameter λ completely determines the distribution's shape. This equality provides a practical diagnostic: if observed count data has variance approximately equal to its mean, Poisson may be appropriate."
+      question: "Can λ be greater than 1?",
+      answer: "Yes — λ = 4.2 is perfectly legal. λ is a rate, not a probability: it counts expected occurrences and lives on [0, ∞), with no upper bound. Capping it at 1 imports a constraint from the wrong kind of parameter. A λ of 4.2 simply means about four events are expected in the window being watched.",
+      sectionId: "15"
     },
     obj4: {
-      question: "When should you use the Poisson distribution?",
-      answer: "Use Poisson when counting events that occur randomly and independently at a constant average rate over time or space. Common applications include call center arrivals, website traffic, radioactive decay, manufacturing defects, and accident frequencies. It's ideal when events are rare relative to the observation window."
-    },
-    obj5: {
-      question: "How is Poisson related to binomial distribution?",
-      answer: "Poisson approximates binomial when n (trials) is large and p (success probability) is small, with λ = np. This 'law of rare events' shows that counting rare successes in many trials behaves like Poisson. Rule of thumb: use Poisson approximation when n > 20 and p < 0.05."
+      question: "What happens to λ if you change the time window?",
+      answer: "It scales with the window. λ is the average count over the interval being watched, so it silently carries that interval's size: double the window and the model becomes Pois(2λ). Process texts make the exposure explicit by writing λt. Quoting a λ without saying over what period is an incomplete specification.",
+      sectionId: "15"
     }
   }
 
@@ -1495,19 +1502,6 @@ const poissonExplanations = {
           "item": "https://www.learnmathclass.com/probability/distributions/discrete/poisson"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1677,6 +1671,22 @@ export default function PoissonDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Poisson Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1710,13 +1720,6 @@ export default function PoissonDistributionPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

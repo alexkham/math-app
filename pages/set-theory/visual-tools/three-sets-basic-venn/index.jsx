@@ -969,7 +969,8 @@ Ending the catalog on this pair is apt: the two frames compress everything the p
         name: "Three-Set Venn Diagram Basic Identities Explorer",
         hubDescription: "Shade the three-circle Venn diagram for any three-set identity — triple union and intersection, complements, the various differences, counting identities like exactly two of A, B, C, and De Morgan's laws for three sets. Switch between six category tabs, pick an identity from the formula buttons or the Jump-to dropdown, and customize the shading color and opacity. Each highlighted region updates with an explanation panel showing the set-builder notation.",
         category: "Venn Diagrams",
-        subCategory: "Three Sets"
+        subCategory: "Three Sets",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="31" r="18" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.2"/><circle cx="51" cy="31" r="18" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.2"/><circle cx="40" cy="49" r="18" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.2"/><path d="M 33.05 32.40 A 18 18 0 0 1 46.95 32.40 A 18 18 0 0 1 40 45.25 A 18 18 0 0 1 33.05 32.40 Z" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="16" y="22" font-family="Georgia,serif" font-size="9" fill="#E6F1FB" text-anchor="middle" font-style="italic">A</text><text x="64" y="22" font-family="Georgia,serif" font-size="9" fill="#E6F1FB" text-anchor="middle" font-style="italic">B</text><text x="40" y="66" font-family="Georgia,serif" font-size="9" fill="#E6F1FB" text-anchor="middle" font-style="italic">C</text></svg>`
       },
     }
   }

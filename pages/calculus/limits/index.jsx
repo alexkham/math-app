@@ -13,6 +13,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -445,43 +446,30 @@ This concept underpins everything that follows in calculus. Derivatives measure 
 `
 };
 
+// FAQ pass: cut all seven. Every topic here has a dedicated subpage that owns
+// it — rules, evaluating, infinity, continuity, one-sided, two-sided, special —
+// and the definition question is answered by the h2 "The Central Idea of a
+// Limit". Invented three the hub genuinely owns: the why-limits-matter framing
+// and two confusions from "Limits That Fail to Exist", the one section of this
+// subtree with no dedicated page of its own.
 const faqQuestions = {
   obj1: {
-    question: "What is a limit in calculus?",
-    answer: "A limit describes the value a function approaches as its input approaches some target value. The notation lim(x→a) f(x) = L means f(x) gets arbitrarily close to L as x gets sufficiently close to a. The function need not be defined at a itself.",
+    question: "Why are limits important in calculus?",
+    answer: "Because every major construction in calculus is defined as a limit. The derivative is the limit of difference quotients as the interval shrinks toward zero. The definite integral is the limit of Riemann sums as the partition is refined. Continuity is defined by comparing a limit to a function value. Without limits, none of these definitions can be stated precisely.",
     sectionId: "1"
   },
   obj2: {
-    question: "When does a limit not exist?",
-    answer: "A limit fails to exist in three cases: oscillation (function bounces without settling), unbounded behavior (function grows to infinity), or disagreement between left and right approaches (one-sided limits differ).",
-    sectionId: "2"
+    question: "Does a function have to be defined at a point for the limit to exist?",
+    answer: "No. A limit describes behavior near a point, not at it. The value f(a) may be undefined, or defined but different from the limit, and the limit is unaffected either way. The function (x² − 4)/(x − 2) is undefined at x = 2, yet its limit there is 4. The limit ignores f(a) entirely and looks only at the approach.",
+    sectionId: "1"
   },
   obj3: {
-    question: "What is the difference between one-sided and two-sided limits?",
-    answer: "A two-sided limit requires x to approach a from both directions with the same result. One-sided limits consider only one direction: left-hand (x→a⁻) or right-hand (x→a⁺). The two-sided limit exists only when both one-sided limits exist and are equal.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are the basic limit rules?",
-    answer: "If both limits exist, you can take limits of sums, products, and quotients (when denominator limit is nonzero) by computing limits separately and combining. The Squeeze Theorem handles cases where a function is trapped between two others with the same limit.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "How do you evaluate limits with indeterminate forms?",
-    answer: "When direct substitution gives 0/0, algebraic manipulation is needed. Common techniques include factoring to cancel common factors, rationalizing expressions with conjugates, and applying known special limits like sin(x)/x → 1.",
-    sectionId: "6"
-  },
-  obj6: {
-    question: "What are limits at infinity?",
-    answer: "Limits at infinity describe function behavior as x grows without bound. When lim(x→∞) f(x) = L (finite), the line y = L is a horizontal asymptote. Infinite limits describe vertical asymptotes where f(x) → ±∞ as x approaches a finite value.",
-    sectionId: "8"
-  },
-  obj7: {
-    question: "How are limits related to continuity?",
-    answer: "A function is continuous at x = a when lim(x→a) f(x) = f(a). This requires three things: f(a) is defined, the limit exists, and they are equal. Failure of any condition creates a discontinuity.",
-    sectionId: "9"
+    question: "If a limit equals infinity, does the limit exist?",
+    answer: "Not in the usual finite sense. Writing lim f(x) = ∞ records that the function grows without bound, which describes how the limit fails rather than a value it reaches. The notation still carries information, since it distinguishes unbounded growth from oscillation, the other common failure mode. See [limits at infinity](!/calculus/limits/infinity) for the full treatment.",
+    sectionId: "2"
   }
 }
+
 
 
 const schemas = {
@@ -550,19 +538,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -681,6 +656,22 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Limits FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -717,12 +708,6 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

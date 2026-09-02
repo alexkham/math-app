@@ -213,28 +213,14 @@ export async function getStaticProps() {
 Each definition includes intuitive explanations, key properties, and links to detailed lesson pages. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are the foundational terms in probability?",
-      answer: "The foundational terms include probability (a measure between 0 and 1), random experiment (a process with uncertain outcomes), sample space (all possible outcomes), event (a subset of the sample space), and probability measure (the function assigning probabilities to events according to the Kolmogorov axioms)."
-    },
-    obj2: {
-      question: "What is the difference between a PMF, PDF, and CDF?",
-      answer: "A PMF (probability mass function) assigns probabilities to individual values of a discrete random variable. A PDF (probability density function) describes probability density for continuous variables -- its value at a point is not a probability, only integrals over intervals are. A CDF (cumulative distribution function) gives the probability of being at or below a value and works for both types."
-    },
-    obj3: {
-      question: "What is the difference between independent and mutually exclusive events?",
-      answer: "Independent events do not affect each other's probabilities: P(A and B) = P(A) times P(B). Mutually exclusive events cannot occur together: P(A and B) = 0. Two events with positive probability that are mutually exclusive are never independent, because knowing one occurred rules the other out."
-    },
-    obj4: {
-      question: "What do expected value and variance measure?",
-      answer: "Expected value is the long-run average of a random variable, representing the center of its distribution. Variance measures how spread out values are around that average. Standard deviation is the square root of variance, expressed in the same units as the variable itself."
-    },
-    obj5: {
-      question: "What probability distributions are covered in this glossary?",
-      answer: "The glossary covers seven discrete distributions (Bernoulli, binomial, Poisson, discrete uniform, geometric, hypergeometric, negative binomial) and two continuous distributions (exponential, normal). Each entry includes the distribution's purpose, notation, and links to its dedicated page."
-    }
-  }
+  // FAQ pass: no FAQ block on this page. It is a glossary, not a lesson, and
+  // every original question was either meta (listing the page's own
+  // contents) or owned by a dedicated page — PMF/PDF/CDF by the probability
+  // function pages and /probability/cdf, independent versus mutually
+  // exclusive by /probability/independence, expectation and spread by
+  // /probability/variance. Nothing survived triage, so faqQuestions and the
+  // dead FAQPage schema were both removed. Each term already links to its
+  // lesson page.
 
   const schemas = {
     learningResource: {
@@ -299,26 +285,12 @@ Each definition includes intuitive explanations, key properties, and links to de
           "item": "https://www.learnmathclass.com/probability/definitions"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
   return {
     props: {
       probabilityTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -334,7 +306,6 @@ Each definition includes intuitive explanations, key properties, and links to de
 
 export default function ProbabilityDefinitionsPage({
   probabilityTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -371,10 +342,6 @@ export default function ProbabilityDefinitionsPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
 
       {/* <GenericNavbar /> */}

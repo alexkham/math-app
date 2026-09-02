@@ -12,6 +12,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -495,40 +496,36 @@ Riemann sums provide the rigorous foundation. Approximate the region with rectan
 
 
 
+// FAQ pass: all seven originals named their own h2 — Riemann sums,
+// notation, signed area, properties, linearity, computing (which the rules
+// page owns anyway, via the FTC), and average value. Replaced with the two
+// notation traps, the unsigned-area formula the "signed area" heading hides,
+// the named theorem at the end of the average-value section, and the
+// sample-point question the Riemann construction answers in its last line.
 const faqQuestions = {
   obj1: {
-    question: "What is a Riemann sum?",
-    answer: "A Riemann sum approximates a definite integral by partitioning the interval into subintervals, forming rectangles with heights f(x*) and width Δx, then summing their areas. As the number of rectangles approaches infinity, the Riemann sum approaches the definite integral.",
-    sectionId: "1"
+    question: "Why is there no + C in a definite integral?",
+    answer: "Because the constant cancels. A definite integral evaluates F(b) − F(a), and using F(x) + C instead gives (F(b) + C) − (F(a) + C), where the two copies of C subtract away. Any antiderivative produces the same number, so there is nothing for + C to record. The family only survives in the [indefinite integral](!/calculus/integrals/indefinite#3).",
+    sectionId: "2"
   },
   obj2: {
-    question: "What does definite integral notation mean?",
-    answer: "In ∫ₐᵇ f(x) dx, the lower limit a and upper limit b bound the interval, f(x) is the integrand being accumulated, and dx indicates the variable of integration. The result is a number, not a function. The variable x is a dummy variable that disappears after integration.",
+    question: "Why is ∫ₐˣ f(t) dt written with t instead of x?",
+    answer: "Because x is already in use as the upper bound. Inside a definite integral the variable is a dummy — ∫₀¹ t² dt and ∫₀¹ x² dx name the same number — so the letter is normally free. But an accumulation function needs x for the bound, and ∫ₐˣ f(x) dx would give one letter two jobs at once.",
     sectionId: "2"
   },
   obj3: {
-    question: "What is signed area in integration?",
-    answer: "The definite integral computes area with sign: regions above the x-axis contribute positive area, regions below contribute negative area. The integral sums these signed contributions, so it can be zero (when areas cancel) or negative (when more area lies below the axis).",
-    sectionId: "3"
+    question: "Does it matter whether you use left or right endpoints in a Riemann sum?",
+    answer: "For any fixed number of rectangles, yes — left endpoints, right endpoints, and midpoints generally give three different numbers. In the limit, no: as the rectangles become infinitely thin all three converge to the same definite integral, provided f is integrable. The star in x* marks the sample point precisely because the choice is free.",
+    sectionId: "1"
   },
   obj4: {
-    question: "What are the properties of definite integrals?",
-    answer: "Key properties include: additivity over intervals (∫ₐᵇ + ∫ᵇᶜ = ∫ₐᶜ), reversing limits negates the integral (∫ₐᵇ = −∫ᵇₐ), zero-width intervals give zero (∫ₐᵃ = 0), and comparison (if f ≤ g then ∫f ≤ ∫g).",
-    sectionId: "4"
+    question: "How do you find the total area between a curve and the x-axis?",
+    answer: "Integrate the absolute value: total area = ∫ₐᵇ |f(x)| dx. The plain definite integral gives signed area, counting regions below the axis as negative, so it can come out smaller than the true area or even zero when the parts cancel. In practice, find where f crosses the axis, integrate each piece separately, and add the absolute values.",
+    sectionId: "3"
   },
   obj5: {
-    question: "What is the linearity property of integrals?",
-    answer: "Definite integrals respect addition and scalar multiplication: ∫[f + g] = ∫f + ∫g (sum rule) and ∫c·f = c·∫f (constant multiple rule). This allows complex integrands to be broken into simpler pieces, integrated separately, then combined.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you compute a definite integral?",
-    answer: "The Fundamental Theorem of Calculus provides the method: find an antiderivative F where F'(x) = f(x), then evaluate ∫ₐᵇ f(x) dx = F(b) − F(a). This transforms integration from a limiting process into finding antiderivatives and evaluating at endpoints.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the average value of a function?",
-    answer: "The average value of f on [a,b] is f_avg = (1/(b−a))∫ₐᵇ f(x) dx. Geometrically, it's the height of a rectangle with base [a,b] whose area equals the area under the curve. The Mean Value Theorem guarantees f attains this average at some point c in (a,b).",
+    question: "What is the Mean Value Theorem for Integrals?",
+    answer: "It guarantees that a continuous function actually attains its own average value somewhere on the interval: there is at least one c in (a, b) with f(c) = f_avg, where f_avg = (1/(b − a))∫ₐᵇ f(x) dx. Geometrically, the rectangle of height f(c) over [a, b] has exactly the area under the curve.",
     sectionId: "7"
   }
 }
@@ -604,19 +601,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals/definite"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -724,6 +708,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Definite Integrals FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -758,13 +758,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

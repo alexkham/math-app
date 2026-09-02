@@ -231,6 +231,7 @@ function autoYBounds(fam, a, xMin, xMax) {
 
 export default function FunctionFTC({
   initialFamily = 'quadratic',
+  explanations = null,
   initialA = 0,
   initialX = 2,
   families = DEFAULT_FAMILIES,
@@ -344,8 +345,13 @@ export default function FunctionFTC({
     `a = $${fmt(a, 2)}$, x = $${fmt(x, 2)}$. Shaded area = $${fmt(area)}$, F(x) = $${fmt(Fx)}$ (they match by construction). f(x) = $${fmt(fx)}$, which is also $F'(x)$ — the slope of the F curve at x.\n\n` +
     `### The two halves of the theorem\n\n` +
     `**Part 1 (the link).** Define $F(x) = \\int_a^x f(t)\\,dt$ — the accumulated area. Then F is differentiable and $F'(x) = f(x)$. Differentiation undoes integration.\n\n` +
-    `**Part 2 (evaluation).** If G is any antiderivative of f, then $\\int_a^b f(t)\\,dt = G(b) - G(a)$. That&apos;s how you compute definite integrals without summing rectangles forever.`
-  ), [fam, a, x, fx, Fx, area]);
+    `**Part 2 (evaluation).** If G is any antiderivative of f, then $\\int_a^b f(t)\\,dt = G(b) - G(a)$. That&apos;s how you compute definite integrals without summing rectangles forever.` +
+    // Optional per-family note supplied by the page (Line 1 anchor mesh).
+    // Omitted -> the panel reads exactly as it always has.
+    (explanations?.[current] ? `
+
+${explanations[current]}` : '')
+  ), [fam, a, x, fx, Fx, area, explanations, current]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

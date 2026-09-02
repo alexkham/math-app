@@ -10,13 +10,15 @@ import Head from 'next/head'
 import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
 import CoinFlipperSimulator from '@/app/components/probability/coin-toss/CoinTossProbabilitySimulator'
 import CoinSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/CoinSampleSpaceVisualizer'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
 // (card icon + description). Do not use apostrophes in comments here.
 const hubMeta = {
   hubDescription: 'Flip a fair or biased coin thousands of times and watch the Law of Large Numbers pull results toward theory, or map the complete sample space for up to six flips and calculate the probability of any pattern you highlight.',
-  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="82" cy="30" r="16" fill="#b8d4f0" stroke="#1565c0" stroke-width="2"/><circle cx="52" cy="48" r="26" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/><circle cx="52" cy="48" r="19" fill="none" stroke="#3498db" stroke-width="1.5" stroke-dasharray="4 3"/><text x="52" y="56" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#1565c0" stroke="none">H</text><text x="82" y="36" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#1565c0" stroke="none">T</text></svg>`,
+  svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="13" fill="#FAC775" stroke="#854F0B" stroke-width="1.6"/><text x="24" y="30" font-family="Georgia,serif" font-size="14" fill="#412402" text-anchor="middle" font-weight="bold">H</text><line x1="12" y1="48" x2="74" y2="48" stroke="#B5D4F4" stroke-width="1.1" stroke-dasharray="3,2.5"/><path d="M 14 62 C 20 36, 26 58, 32 46 C 40 52, 48 46, 56 48.6 C 62 49.4, 68 48, 74 48" fill="none" stroke="#97C459" stroke-width="1.8"/><line x1="12" y1="64" x2="74" y2="64" stroke="#B5D4F4" stroke-width="1.1"/><text x="62" y="44" font-family="Georgia,serif" font-size="7" fill="#B5D4F4" text-anchor="middle" font-style="italic">0.5</text></svg>`,
 }
 
 export async function getStaticProps(){
@@ -171,7 +173,98 @@ For detailed mathematical treatment of convergence and the Law of Large Numbers,
       after: ``,
       link: '',
     },
+
+    obj11: {
+      title: `The Full Sample Space for Three Coins`,
+      content: `With three coins selected, the explorer lists every possible result: HHH, HHT, HTH, HTT, THH, THT, TTH, TTT. That is $2^3 = 8$ outcomes, each card noting $P = 1/8$.
+
+Each coin contributes a factor of 2, so $n$ coins give $2^n$ outcomes. The growth is why the explorer becomes impractical well before the mathematics does — ten coins would already need 1024 cards.`,
+      before: ``,
+      after: `As with the dice, the outcomes are **ordered**: HHT, HTH and THH are three separate cards even though all three have two heads. That ordering is what makes the counts come out right.
+
+It also explains the shape of the binomial distribution directly. Exactly one outcome has three heads, three have two, three have one and one has none — the row $1, 3, 3, 1$ from Pascal's triangle. Those counts, divided by 8, are the probabilities of getting 0, 1, 2 or 3 heads.`,
+      link: '',
+    },
+    obj12: {
+      title: `A Majority of Heads`,
+      content: `The majority condition highlights every outcome with more heads than tails: HHH, HHT, HTH and THH.
+
+$P(\text{more heads than tails}) = \frac{4}{8} = \frac{1}{2}$
+
+Four of the eight cards light up — exactly half the space.`,
+      before: ``,
+      after: `The result is exactly a half, and symmetry is the reason. Flipping every coin in an outcome turns a heads-majority into a tails-majority and back, pairing the 8 outcomes into 4 mirrored couples. Since no outcome can be its own mirror here, the two events must be the same size.
+
+That argument depends on the coin count being **odd**. With three coins every outcome has a strict majority one way or the other, so the space splits cleanly in two. With an even number there is a third possibility — a tie — and the majority probability drops below a half.`,
+      link: '',
+    },
+    obj13: {
+      title: `All Three the Same`,
+      content: `The all-same condition highlights just HHH and TTT.
+
+$P(\text{all three match}) = \frac{2}{8} = \frac{1}{4}$
+
+These are the two most "extreme" outcomes, one at each end of the head count.`,
+      before: ``,
+      after: `The quick way to see the quarter: the first coin can be anything, and the remaining two each have to match it, giving $1 \times \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$. Counting cards and multiplying probabilities agree, as they must.
+
+This is also the pair people find least likely-looking, and that intuition is misleading. HHH has exactly the same probability as HTH — $1/8$ each — because both are single outcomes. What is rarer is not the *sequence* HHH but the *event* "all three match", which contains two of the eight sequences rather than one.`,
+      link: '',
+    },
+    obj14: {
+      title: `Alternating Outcomes`,
+      content: `The alternating condition highlights outcomes where no two adjacent coins agree: HTH and THT.
+
+$P(\text{alternating}) = \frac{2}{8} = \frac{1}{4}$
+
+The same probability as all-same, and for a related reason: the first coin is free and each of the next two is then forced.`,
+      before: ``,
+      after: `Both conditions constrain every coin after the first, so both come to $2/2^3$. The difference is only what the constraint says — "match the previous one" for all-same, "differ from it" for alternating — and neither is more restrictive than the other.
+
+That symmetry disappears once the condition stops being local. The explorer's "equal number of heads and tails" condition highlights **nothing at all** with three coins, because 3 is odd and cannot split evenly — a genuinely empty event, with probability 0. It is worth selecting once: an event that exists as a description but contains no outcome is easier to accept when you have seen the grid stay blank.`,
+      link: '',
+    },
   }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     From the SAMPLE SPACE explorer, not the toss simulator: the simulator's
+     convergence chart and streak tracker are empirical and render nothing until
+     random tosses accumulate. The explorer's cards are ported to SVG in
+     coinSampleSpaceDiagrams.js using the component's own highlight predicate. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: coinSampleSpaceDiagrams[key], caption, text })
+
+  const stateUnits = {
+    none: unit('none', 'Full sample space, nothing highlighted',
+      'All eight ordered outcomes for three coins - gold discs for heads, silver for tails - each with ' +
+      'its head/tail count and P = 1/8. HHT, HTH and THH are three separate cards.'),
+    majority: unit('majority', 'Heads majority highlighted',
+      'Four of the eight cards: HHH, HHT, HTH, THH. Exactly half, because flipping every coin pairs ' +
+      'each heads-majority outcome with a tails-majority one.'),
+    allSame: unit('allSame', 'All three matching highlighted',
+      'Just HHH and TTT - 2/8 = 1/4. The first coin is free and the other two must copy it.'),
+    alternating: unit('alternating', 'Alternating outcomes highlighted',
+      'HTH and THT, also 1/4. The same count as all-same, because both conditions fix every coin ' +
+      'after the first.'),
+  }
+
+
+  /* ---- per-state notes for the sample space explorer (Line 1) ----
+     CoinSampleSpaceVisualizer took no props; an additive `explanations = null`
+     prop was added and the note renders above the outcome grid. The value
+     reaches it through GenericMultiComponentFrame's own `explanations` prop,
+     which maps component keys to per-component values. */
+  const note = (body, slug, label) =>
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#using-the-sample-space-explorer" style="color:#1d4ed8;font-weight:600">using the explorer</a>`
+
+  const explanations = {
+    none: note('Eight ordered outcomes; the counts 1, 3, 3, 1 across head totals are Pascal&apos;s triangle.', 'the-full-sample-space', 'Learn more about the sample space'),
+    majority: note('Exactly half - flipping every coin pairs the two majorities off against each other.', 'a-majority-of-heads', 'Learn more about majorities'),
+    allSame: note('HHH is no rarer than HTH; what is rarer is the event, which holds two sequences of eight.', 'all-three-the-same', 'Learn more about matching outcomes'),
+    alternating: note('Same count as all-same: both conditions fix every coin after the first.', 'alternating-outcomes', 'Learn more about alternating outcomes'),
+  }
+
 
   const faqQuestions = {
     obj1: {
@@ -289,6 +382,8 @@ For detailed mathematical treatment of convergence and the Law of Large Numbers,
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -297,20 +392,53 @@ For detailed mathematical treatment of convergence and the Law of Large Numbers,
         description: "Simulate coin flips with real-time statistics, convergence graphs, and sample space exploration. Visualize the Law of Large Numbers interactively.",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools/coin-toss",
+        category: "Simulators",
         name: "Coin Toss Probability Simulator and Calculator"
       },
     }
   }
 }
 
-export default function CoinTossPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function CoinTossPage({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit slug list
+  const genericSections = [
+    plain('obj1', 'the-coin-toss-probability-model'),
+    plain('obj2', 'getting-started'),
+    plain('obj3', 'simulation-types'),
+    plain('obj4', 'the-convergence-graph'),
+    plain('obj5', 'statistics-and-metrics'),
+    plain('obj6', 'streaks-and-patterns'),
+    plain('obj7', 'using-the-sample-space-explorer'),
+    stateRow('obj11', 'the-full-sample-space', 'none'),
+    stateRow('obj12', 'a-majority-of-heads', 'majority'),
+    stateRow('obj13', 'all-three-the-same', 'allSame'),
+    stateRow('obj14', 'alternating-outcomes', 'alternating'),
+    plain('obj8', 'setting-highlight-conditions'),
+    plain('obj9', 'the-law-of-large-numbers'),
+    plain('obj10', 'related-tools-and-concepts'),
+  ]
+
+
 
   return (
     <>
@@ -369,6 +497,7 @@ export default function CoinTossPage({seoData, sectionsContent, introContent, fa
           { id: 1, name: 'Coin Toss Probability Simulator', key: 'simulator', component: CoinFlipperSimulator },
           { id: 2, name: 'Coin Toss Sample Space Explorer/Calculator', key: 'sampleSpace', component: CoinSampleSpaceVisualizer },
         ]}
+        explanations={{ sampleSpace: explanations }}
         initialActive={1}
         buttonMinWidth="160px"
         primaryColor="#007bff"

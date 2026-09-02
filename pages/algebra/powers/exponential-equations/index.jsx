@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -494,44 +495,24 @@ Substituting each candidate back into the original equation is the reliable fina
 
 const faqQuestions = {
   obj1: {
-    question: "What is an exponential equation?",
-    answer: "An exponential equation has the variable in the exponent, like 2ˣ = 16 or 3^(2x-1) = 27. This differs from polynomial equations like x³ = 8 where the variable is the base. The position of the variable determines which solving techniques apply."
+    question: "Which solving method should you try first?",
+    answer: "Matching bases, whenever both sides can be rewritten as powers of one number, because it is by far the fastest route. If several exponential terms share a base, use the exponent laws to factor them into a single term first. If the equation contains both $a^{2x}$ and $a^x$, substitute $t = a^x$. Logarithms are the universal fallback when no common base exists.",
+    sectionId: "4"
   },
   obj2: {
-    question: "How do you solve exponential equations by matching bases?",
-    answer: "Rewrite both sides as powers of the same base, then set exponents equal. For 2ˣ = 8: since 8 = 2³, the equation becomes 2ˣ = 2³, so x = 3. This works because aˣ = aʸ implies x = y when a > 0 and a ≠ 1."
+    question: "Is $x^{2/3} = 4$ an exponential equation?",
+    answer: "No, despite appearing on this page. An equation is exponential when the variable sits in the exponent, as in $2^x = 8$. Here the variable is the base and the exponent is a fixed [rational](!/algebra/powers/rational-exponents) number, which makes it a power equation. It is solved by raising both sides to the reciprocal exponent, not by matching bases or taking logarithms.",
+    sectionId: "9"
   },
   obj3: {
-    question: "How do you solve 4^x = 8?",
-    answer: "Convert both to powers of 2: 4 = 2² and 8 = 2³. The equation becomes (2²)ˣ = 2³, which simplifies to 2^(2x) = 2³. Match exponents: 2x = 3, so x = 3/2."
+    question: "Why do some exponential equations have no solution?",
+    answer: "Because $a^x$ is always strictly positive when the base $a$ is positive. The equation $2^x = -4$ therefore has no real solution, and neither does $2^x = 0$, since the curve approaches the axis without ever reaching it. Once an exponential term is isolated and set equal to a number that is zero or negative, you can stop.",
+    sectionId: "10"
   },
   obj4: {
-    question: "What if the bases cannot be matched?",
-    answer: "When no common base exists (like 2ˣ = 5), logarithms are required. Take log of both sides: x·log(2) = log(5), so x = log(5)/log(2). This topic is covered in the logarithms section."
-  },
-  obj5: {
-    question: "How do you solve equations with rational exponents like x^(2/3) = 4?",
-    answer: "Raise both sides to the reciprocal power. For x^(2/3) = 4: raise to power 3/2 to get x = 4^(3/2) = (√4)³ = 2³ = 8. The reciprocal exponent undoes the original."
-  },
-  obj6: {
-    question: "How do you solve x^(-2) = 9?",
-    answer: "Rewrite as 1/x² = 9, so x² = 1/9, giving x = ±1/3. Negative exponents mean reciprocals, so isolate the positive exponent first, then solve normally."
-  },
-  obj7: {
-    question: "How do substitution and quadratic methods work for exponential equations?",
-    answer: "When an equation has a^(2x) and a^x terms, substitute t = aˣ. For 4ˣ - 3·2ˣ + 2 = 0: since 4ˣ = (2ˣ)², let t = 2ˣ. Get t² - 3t + 2 = 0, factor to (t-1)(t-2) = 0, giving t = 1 or t = 2, so x = 0 or x = 1."
-  },
-  obj8: {
-    question: "Why do exponential equations sometimes have no solution?",
-    answer: "Because aˣ > 0 for any positive base and real exponent. The equation 2ˣ = -4 has no solution since 2ˣ is always positive. Similarly, when substitution gives a negative value for t = aˣ, that root must be rejected."
-  },
-  obj9: {
-    question: "What are extraneous solutions in exponential equations?",
-    answer: "Solutions that emerge from algebra but don't satisfy the original equation. Substitution can produce negative t values (invalid since aˣ > 0). Squaring can introduce false roots. Always substitute answers back into the original equation to verify."
-  },
-  obj10: {
-    question: "What's the difference between exponential and polynomial equations?",
-    answer: "In exponential equations (2ˣ = 8), the variable is in the exponent. In polynomial equations (x³ = 8), the variable is the base. They require completely different solving techniques: matching bases vs taking roots or factoring."
+    question: "Why can correct algebra produce answers that do not work?",
+    answer: "Two steps manufacture false roots. Squaring is one: $x^{1/2} = -3$ has no solution because a square root is never negative, yet squaring both sides yields $x = 9$. Substituting $t = a^x$ is the other, since a quadratic in $t$ can return a negative root even though $a^x$ is always positive. Test every candidate in the original equation.",
+    sectionId: "10"
   }
 }
 
@@ -605,19 +586,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/exponential-equations"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -782,6 +750,22 @@ export default function ExponentialEquationsPage({seoData, sectionsContent, intr
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Exponential Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -876,12 +860,6 @@ export default function ExponentialEquationsPage({seoData, sectionsContent, intr
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

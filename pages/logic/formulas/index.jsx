@@ -213,19 +213,6 @@ export async function getStaticProps() {
           "item": "https://www.learnmathclass.com/logic/formulas"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -284,13 +271,6 @@ export default function LogicFormulasPage({ logicFormulasList, faqQuestions, sch
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schemas.breadcrumb)
-          }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
           }}
         />
       </Head>

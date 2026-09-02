@@ -9,6 +9,7 @@
 import React, {
   useState, useEffect, useRef, useCallback, useMemo,
 } from "react";
+import { processContent } from "@/app/utils/contentProcessor";
 import {
   ROW_H_MIN, SVG_W_DEFAULT, COLORS, tint,
   factorial, getItems,
@@ -149,7 +150,7 @@ const FORMULA_CARD_OFFSET = 108;
 const FORMULA_CARD_H = 54;
 const RESULTS_TOP_OFFSET = 188;
 
-export default function StrongComposition() {
+export default function StrongComposition({ explanations = null }) {
   // ── State ─────────────────────────────────────────────
   const [n, setN] = useState(5);
   const [k, setK] = useState(3);
@@ -510,6 +511,24 @@ export default function StrongComposition() {
       ? `x₁ = ${firstVal}: ${k_done} / ${sz}`
       : "";
   }
+
+  // Line 1: state key for the hoisted explanations - phases, then the done
+  // state with boundaries first (k===n every gap filled, k===2 single bar),
+  // then the named configurations; other combos show nothing.
+  const stateKey = animState === "done"
+    ? (k === n
+        ? "kEqualsN"
+        : k === 2
+          ? "twoBins"
+          : n === 5 && k === 3
+            ? "default53"
+            : n === 7 && k === 4
+              ? "big74"
+              : null)
+    : animState === "idle" && completed.length === 0
+      ? "idle"
+      : "building";
+  const stateEntry = (explanations && stateKey && explanations[stateKey]) || null;
 
   // ── Narration per group ──────────────────────────────
   const narrationFor = (gi) => {
@@ -1095,6 +1114,24 @@ export default function StrongComposition() {
                 );
               })}
             </div>
+            {stateEntry && (
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: "10px 12px",
+                  background: COLORS.surfaceTint,
+                  border: `1px solid #dbeafe`,
+                  borderLeft: `3px solid ${COLORS.accent}`,
+                  borderRadius: 8,
+                  fontSize: 12,
+                  lineHeight: 1.55,
+                  color: COLORS.text,
+                  fontFamily: "system-ui, sans-serif",
+                }}
+              >
+                {processContent(stateEntry)}
+              </div>
+            )}
           </RightPanel>
         </SceneGrid>
       </PageWrap>

@@ -534,6 +534,7 @@ It is the scenario to reach for after the fixed ones, once the question stops be
         category: "Triangle",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/triangle-explorer",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M 14 62 L 66 62 L 46 16 Z" fill="#B5D4F4" fill-opacity="0.3" stroke="#185FA5" stroke-width="1.8" stroke-linejoin="round"/><path d="M 22 62 A 8 8 0 0 0 18.57 55.43" fill="none" stroke="#FAC775" stroke-width="1.4"/><path d="M 62.81 54.66 A 8 8 0 0 0 58 62" fill="none" stroke="#97C459" stroke-width="1.4"/><circle cx="14" cy="62" r="2.4" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="66" cy="62" r="2.4" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="46" cy="16" r="2.4" fill="#ED93B1" stroke="#72243E" stroke-width="1"/><text x="40" y="72" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">c</text><text x="61" y="38" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">a</text><text x="25" y="38" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">b</text></svg>`,
         name: "Interactive Triangle Explorer"
       },
 
@@ -860,7 +861,7 @@ export default function TriangleExplorerPage({seoData, sectionsContent, introCon
      variant="light"
    /> */}
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

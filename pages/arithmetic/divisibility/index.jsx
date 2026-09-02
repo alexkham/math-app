@@ -10,6 +10,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 // import { renderMultiplesLine } from '../../../app/utils/illustrations/multiplesLine'
 import {renderMultiplesLine} from '../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
@@ -516,58 +517,28 @@ obj10: {
   content: `Some divisions come out clean — $12 ÷ 3$ gives exactly $4$, with nothing left over. Others do not — $13 ÷ 3$ leaves a remainder of $1$. Divisibility is the study of when and why the first case occurs, and the consequences that follow from it. The concept threads through factoring, primes, common divisors, and the internal structure of the integers themselves.`
 }
 
+// FAQ pass: cut ten questions — divisibility meaning, remainder link, basic
+// properties, primes, prime factorization and divisibility rules are case A
+// (own h2s answer them); divisor/factor/multiple, find-all-factors, GCD and
+// LCM definitions are owned by the dedicated factors/gcd/lcm/rules subpages.
+// Kept three: the a | b notation (buried in NotationSection), the GCD×LCM
+// identity (a cross-topic fact the hub naturally owns) and why-1-is-not-prime
+// (buried mid-section, big query).
 const faqQuestions = {
   obj1: {
-    question: "What does divisibility mean?",
-    answer: "An integer a divides an integer b (written a | b) when b equals a multiplied by some integer k with no remainder. For example, 3 | 12 because 12 = 3 × 4. Divisibility is a yes-or-no question: either a fits into b a whole number of times, or it does not."
+    question: "What does the notation a | b mean?",
+    answer: "The vertical bar a | b is read 'a divides b' and means b = a × k for some integer k. It is a statement (true or false), not an operation, and order matters: 3 | 12 is true but 12 | 3 is false. The negation a ∤ b means 'a does not divide b.' This differs from a ÷ b, which computes a quotient.",
+    sectionId: "2"
   },
   obj2: {
-    question: "What is the difference between a divisor, factor, and multiple?",
-    answer: "When a | b: a is called a divisor (or factor) of b, and b is called a multiple of a. For 3 | 12: 3 is a factor of 12, and 12 is a multiple of 3. Divisor and factor mean the same thing; multiple refers to the other number in the relationship."
+    question: "How are GCD and LCM related?",
+    answer: "For any two positive integers a and b: a × b = gcd(a, b) × lcm(a, b). For 4 and 6: 4 × 6 = 24, and gcd(4,6) × lcm(4,6) = 2 × 12 = 24. Knowing one allows you to compute the other from the product. See the [GCD page](!/arithmetic/divisibility/gcd) for the ways to compute it.",
+    sectionId: "9"
   },
   obj3: {
-    question: "What does the notation a | b mean?",
-    answer: "The vertical bar a | b is read 'a divides b' and means b = a × k for some integer k. It is a statement (true or false), not an operation. The negation a ∤ b means 'a does not divide b.' This differs from a ÷ b, which computes a quotient."
-  },
-  obj4: {
-    question: "How is divisibility related to remainders?",
-    answer: "Divisibility means the remainder is zero. For any division a ÷ n, the division algorithm gives a = n × q + r. When r = 0, n divides a exactly (n | a). The modulo operation computes r directly: a mod n = 0 means n | a."
-  },
-  obj5: {
-    question: "What are the basic properties of divisibility?",
-    answer: "Key properties: every nonzero integer divides itself (a | a); 1 divides everything (1 | a); every nonzero integer divides 0 (a | 0); divisibility is transitive (if a | b and b | c, then a | c); and it distributes over addition (if a | b and a | c, then a | (b+c))."
-  },
-  obj6: {
-    question: "What is a prime number?",
-    answer: "A prime number is an integer greater than 1 whose only factors are 1 and itself. Examples: 2, 3, 5, 7, 11, 13. The number 1 is not prime (it has only one factor). Primes are the building blocks of all integers through multiplication."
-  },
-  obj7: {
-    question: "What is prime factorization?",
-    answer: "Prime factorization expresses an integer greater than 1 as a product of prime numbers. For example, 360 = 2³ × 3² × 5. The Fundamental Theorem of Arithmetic guarantees this factorization is unique (up to order). It reveals the complete divisor structure of a number."
-  },
-  obj8: {
-    question: "What is the GCD (greatest common divisor)?",
-    answer: "The GCD of two numbers is the largest integer that divides both. For 48 and 36, the common divisors are 1, 2, 3, 4, 6, 12, so gcd(48, 36) = 12. Methods include listing factors, prime factorization, or the Euclidean algorithm using repeated modulo operations."
-  },
-  obj9: {
-    question: "What is the LCM (least common multiple)?",
-    answer: "The LCM of two numbers is the smallest positive integer that both divide into. For 4 and 6: multiples of 4 are 4, 8, 12, 16...; multiples of 6 are 6, 12, 18...; the smallest common one is 12, so lcm(4, 6) = 12."
-  },
-  obj10: {
-    question: "How are GCD and LCM related?",
-    answer: "For any two positive integers a and b: a × b = gcd(a, b) × lcm(a, b). For 4 and 6: 4 × 6 = 24, and gcd(4,6) × lcm(4,6) = 2 × 12 = 24. Knowing one allows you to compute the other from the product."
-  },
-  obj11: {
-    question: "How do you find all factors of a number?",
-    answer: "Factors come in pairs: if a is a factor of n, then n/a is also a factor. Search only up to √n — every factor above the square root is paired with one below it. For 24: pairs are (1,24), (2,12), (3,8), (4,6), giving factors 1, 2, 3, 4, 6, 8, 12, 24."
-  },
-  obj12: {
-    question: "What are divisibility rules?",
-    answer: "Divisibility rules are shortcuts using digit patterns. A number is divisible by 2 if its last digit is even; by 5 if it ends in 0 or 5; by 3 or 9 if the digit sum is divisible by 3 or 9; by 11 if the alternating digit sum is divisible by 11."
-  },
-  obj13: {
     question: "Why is 1 not considered prime?",
-    answer: "A prime must have exactly two distinct factors: 1 and itself. The number 1 has only one factor (itself). Excluding 1 preserves the uniqueness of prime factorization — otherwise 12 could be written as 2² × 3 or 1 × 2² × 3 or 1² × 2² × 3, etc."
+    answer: "A prime must have exactly two distinct factors: 1 and itself. The number 1 has only one factor (itself). Excluding 1 preserves the uniqueness of prime factorization — otherwise 12 could be written as 2² × 3 or 1 × 2² × 3 or 1² × 2² × 3, and so on without end.",
+    sectionId: "7"
   }
 }
 
@@ -637,19 +608,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/divisibility"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -855,6 +813,22 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Divisibility FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -886,17 +860,10 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

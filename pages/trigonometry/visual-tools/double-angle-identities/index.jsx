@@ -1065,6 +1065,7 @@ As with sine, the verification cards keep both sides in numerical agreement acro
         category: "Identities",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/double-angle-identities",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="38" r="24" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><line x1="14" y1="38" x2="66" y2="38" stroke="#B5D4F4" stroke-width="0.8"/><line x1="40" y1="12" x2="40" y2="64" stroke="#B5D4F4" stroke-width="0.8"/><line x1="40" y1="38" x2="61.19" y2="26.73" stroke="#B5D4F4" stroke-width="1.5" stroke-dasharray="3,2"/><line x1="40" y1="38" x2="53.42" y2="18.10" stroke="#FAC775" stroke-width="1.9"/><path d="M 50 38 A 10 10 0 0 0 48.83 33.31" fill="none" stroke="#B5D4F4" stroke-width="1.1"/><path d="M 56 38 A 16 16 0 0 0 48.94 24.74" fill="none" stroke="#FAC775" stroke-width="1.3"/><circle cx="61.19" cy="26.73" r="2.4" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="53.42" cy="18.10" r="3" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><text x="51" y="35" font-family="Georgia,serif" font-size="6" fill="#B5D4F4" text-anchor="middle" font-style="italic">&#952;</text><text x="60" y="21" font-family="Georgia,serif" font-size="7" fill="#FAC775" text-anchor="middle" font-style="italic">2&#952;</text><text x="40" y="74" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">sin 2&#952;</text></svg>`,
         name: "Double Angle Identities Explorer"
       },
 

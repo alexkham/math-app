@@ -201,28 +201,13 @@ export async function getStaticProps() {
 Each definition includes an intuitive explanation, key properties, common errors where applicable, and links to the detailed lesson page. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a limit in calculus?",
-      answer: "A limit describes the value a function approaches as the input approaches a specified point. The function does not need to equal that value at the point itself -- the limit concerns only the behavior during the approach. A two-sided limit exists only when both one-sided limits exist and agree."
-    },
-    obj2: {
-      question: "What is the relationship between continuity and differentiability?",
-      answer: "Continuity means the function has no breaks, jumps, or holes at a point. Differentiability means the function has a well-defined tangent line there. Differentiability implies continuity, but not the reverse -- a function can be continuous at a corner or cusp where no single tangent line exists."
-    },
-    obj3: {
-      question: "What is the difference between a definite and indefinite integral?",
-      answer: "An indefinite integral produces a family of functions (antiderivatives) plus a constant C. A definite integral produces a single number representing the accumulated signed area under the curve between two bounds. The Fundamental Theorem of Calculus connects the two: evaluate the antiderivative at the bounds and subtract."
-    },
-    obj4: {
-      question: "What is a critical point and how is it used?",
-      answer: "A critical point is a value where the derivative equals zero or does not exist. Critical points are the only candidates for local maxima and minima. They are classified using the first derivative test (sign change of the derivative) or the second derivative test (sign of the second derivative)."
-    },
-    obj5: {
-      question: "What does signed area mean in integration?",
-      answer: "The definite integral measures signed area: regions where the function is positive contribute positive area, and regions where it is negative contribute negative area. The integral can be zero even when substantial area exists, if positive and negative regions cancel. To find total area, integrate the absolute value of the function."
-    }
-  }
+  // FAQ pass: no FAQ block on this page. It is a glossary, not a lesson, and
+  // all five original questions were owned by a dedicated page — limits by
+  // /calculus/limits, continuity vs differentiability by the differentiability
+  // page, definite vs indefinite by the integrals hub, critical points by
+  // graph-analysis, signed area by definite integrals. Nothing survived
+  // triage, so faqQuestions and the dead FAQPage schema were both removed
+  // rather than padded out. Each glossary term already links to its lesson.
 
   const schemas = {
     learningResource: {
@@ -287,26 +272,12 @@ Each definition includes an intuitive explanation, key properties, common errors
           "item": "https://www.learnmathclass.com/calculus/definitions"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
   return {
     props: {
       calculusTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -322,7 +293,6 @@ Each definition includes an intuitive explanation, key properties, common errors
 
 export default function CalculusDefinitionsPage({
   calculusTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -357,11 +327,6 @@ export default function CalculusDefinitionsPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
         />
       </Head>
       {/* <GenericNavbar/> */}

@@ -7,8 +7,55 @@ export default function ChebyshevInequality() {
   const [deviation, setDeviation] = useState(3);
   const [distribution, setDistribution] = useState('normal');
 
-  const stdDev = Math.sqrt(variance);
-  const chebyshevBound = deviation > 0 ? variance / (deviation * deviation) : 0;
+  // The variance the PLOTTED distribution actually has.
+  //
+  // Only the normal and the continuous uniform are built from the variance
+  // slider; the other seven generators below derive every parameter from the
+  // mean alone, so their true variance has nothing to do with the slider. The
+  // bound was previously computed from the slider regardless, which made the
+  // tool report P(|X-mu| >= a) exceeding sigma^2/a^2 - Chebyshev's inequality
+  // apparently violated - for the exponential, geometric and discrete uniform
+  // at the opening settings. Deriving sigma^2 from the chosen distribution
+  // makes the comparison honest for all nine.
+  const effectiveVariance = (() => {
+    switch (distribution) {
+      case 'normal':
+      case 'uniform':
+        return variance;                                              // built from the slider
+      case 'exponential':
+        return mean * mean;                                           // lambda = 1/mean
+      case 'poisson':
+        return mean;                                                  // lambda = mean
+      case 'binomial': {
+        const p = 0.4, n = Math.round(mean / p);
+        return n * p * (1 - p);
+      }
+      case 'geometric': {
+        const p = 1 / mean;
+        return (1 - p) / (p * p);
+      }
+      case 'discrete_uniform': {
+        const n = Math.round(2 * mean - 1);
+        return (n * n - 1) / 12;
+      }
+      case 'negative_binomial': {
+        const r = 5, p = r / (mean + r);
+        return (r * (1 - p)) / (p * p);
+      }
+      case 'hypergeometric': {
+        const N = 50, K = Math.round(N * 0.6), n = Math.round(mean * N / K);
+        return n * (K / N) * (1 - K / N) * ((N - n) / (N - 1));
+      }
+      default:
+        return variance;
+    }
+  })();
+
+  // sigma follows the effective variance, so the plotting window is wide enough
+  // to hold the distribution actually being drawn
+  const stdDev = Math.sqrt(effectiveVariance);
+  const varianceIsDerived = distribution !== 'normal' && distribution !== 'uniform';
+  const chebyshevBound = deviation > 0 ? effectiveVariance / (deviation * deviation) : 0;
   const chebyshevBoundPercent = (Math.min(chebyshevBound, 1) * 100).toFixed(1);
 
   const lowerBound = mean - deviation;
@@ -174,9 +221,16 @@ export default function ChebyshevInequality() {
       <div style={{ background: '#dbeafe', padding: '15px', borderRadius: '8px', marginBottom: '20px', border: '2px solid #3b82f6' }}>
         <div style={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', marginBottom: '8px' }}>P(|X - μ| ≥ a) ≤ σ² / a²</div>
         <div style={{ fontSize: '14px', textAlign: 'center', color: '#1e40af' }}>
-          P(|X - {mean}| ≥ {deviation}) ≤ {variance} / {(deviation * deviation).toFixed(1)} = {chebyshevBound.toFixed(3)} = {chebyshevBoundPercent}%
+          P(|X - {mean}| ≥ {deviation}) ≤ {effectiveVariance.toFixed(2)} / {(deviation * deviation).toFixed(1)} = {chebyshevBound.toFixed(3)} = {chebyshevBoundPercent}%
         </div>
         <div style={{ fontSize: '13px', textAlign: 'center', color: '#1e40af', marginTop: '8px' }}>Actual: {actualProbPercent}%</div>
+        {varianceIsDerived && (
+          <div style={{ fontSize: '12px', textAlign: 'center', color: '#1e40af', marginTop: '6px', fontStyle: 'italic' }}>
+            σ² = {effectiveVariance.toFixed(2)} is this distribution&apos;s own variance, derived from μ = {mean}. The variance
+            slider sets σ² only for the normal and the continuous uniform; every other option here fixes its variance
+            once the mean is chosen.
+          </div>
+        )}
       </div>
 
       <div style={{ display: 'flex', gap: '30px', alignItems: 'flex-start' }}>
@@ -268,7 +322,14 @@ export default function ChebyshevInequality() {
           </div>
 
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#6366f1' }}>Variance σ²: {variance}</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#6366f1' }}>
+              Variance σ²: {variance}
+              {varianceIsDerived && (
+                <span style={{ fontWeight: 'normal', fontSize: '12px', color: '#6b7280' }}>
+                  {' '}— not used by {distribution.replace('_', ' ')}; its σ² is {effectiveVariance.toFixed(2)}
+                </span>
+              )}
+            </label>
             <input type="range" min="1" max="16" step="0.5" value={variance} onChange={(e) => setVariance(parseFloat(e.target.value))} style={{ width: '100%' }} />
           </div>
 

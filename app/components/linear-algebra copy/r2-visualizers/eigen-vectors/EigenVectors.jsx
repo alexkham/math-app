@@ -1192,5 +1192,6 @@ export {
   LiveCard, EigenStructureCard, ExplanationCard, ScenariosPanel, AnimationCard,
   useEigenState, useAnimState,
   Math2D, SVGRender,
+  COMPONENT_CSS,
   SCENARIOS, SCENARIO_GROUPS, DEFAULT_LAYERS, DEFAULT_GEOM, ALL_LAYER_DEFS, DEFAULT_ANIM_STEPS,
 };

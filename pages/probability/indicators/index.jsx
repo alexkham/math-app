@@ -671,6 +671,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -753,26 +754,36 @@ export async function getStaticProps(){
 `
 
 
+  // FAQ pass: the definition, the expectation, counting, and "not a
+  // probability" each name their own h2 — which also settles the random-
+  // variables page's deferral of indicator variables: no entry needed for
+  // the definition. Kept the dependence question, since its heading names
+  // the topic without answering it, and added the notation traps.
   const faqQuestions = {
     obj1: {
-      question: "What is an indicator random variable?",
-      answer: "An indicator random variable converts an event into a numerical object by assigning the value 1 to outcomes in the event and 0 to all other outcomes. It's a random variable that takes only values 0 or 1, representing membership in an event numerically. Denoted I_A for event A, it equals 1 if the outcome is in A and 0 otherwise."
+      question: "Do indicator random variables need to be independent?",
+      answer: "No, and this is what makes them powerful. Linearity of expectation holds regardless of dependence, so the expectation of a sum of indicators is the sum of the event probabilities even when the events overlap or influence each other heavily. That is why counting arguments built from indicators need no independence assumption. Dependence only starts to matter for variance.",
+      sectionId: "7"
     },
     obj2: {
-      question: "What is the expected value of an indicator random variable?",
-      answer: "The expected value of an indicator random variable equals the probability of its event: E[I_A] = P(A). This holds because I_A takes value 1 exactly on outcomes in A and 0 otherwise, so expectation counts how often the event occurs in probability terms."
+      question: "Is an indicator variable the same as a Bernoulli variable?",
+      answer: "Yes — a lone indicator is the simplest Bernoulli variable there is: I_A ~ Bern(P(A)). It takes 1 with probability P(A) and 0 otherwise, which is exactly the Bernoulli definition. The two names differ only in emphasis: “indicator” points at the event being tracked, “Bernoulli” at the distribution being followed.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "How are indicator variables used for counting problems?",
-      answer: "Counting problems can be expressed as sums of indicator random variables. Each object gets an indicator that equals 1 if a condition is met and 0 otherwise. The total count is the sum of indicators. Using linearity of expectation, this converts counting into expectation calculations without enumerating all outcomes."
+      question: "What is the difference between 1_A and 1{X ≤ x}?",
+      answer: "What goes in the slot. The subscript form takes an event and asks whether a given outcome belongs to it. The brace form takes a statement and asks whether that statement is true. Both return 0 or 1, but one's argument is an outcome and the other's content is a sentence. The brace form is what makes F(x) = E[1{X ≤ x}] readable.",
+      sectionId: "notation"
     },
     obj4: {
-      question: "Do indicator random variables need to be independent?",
-      answer: "No. Indicator random variables may be dependent, and this doesn't affect the validity of linearity of expectation. Expectations of sums of indicators can still be computed term by term without independence assumptions. However, dependence becomes important when computing higher-order quantities like variance."
+      question: "Why do some texts write χ_A instead of I_A?",
+      answer: "Because analysis and measure theory call the same object the characteristic function of a set. Probability walked away from that name for good reason: here “characteristic function” already means E[e^{itX}], the transform of a distribution. Two different objects share one name across the fence, which is why this side writes “indicator” and leaves χ alone.",
+      sectionId: "notation"
     },
     obj5: {
-      question: "What's the difference between an indicator variable and a probability?",
-      answer: "An indicator is a random variable whose value depends on the outcome, not a probability value. It takes values 0 or 1 based on whether an event occurs. Its expected value equals the probability of the event (E[I_A] = P(A)), but the indicator itself is not a probability or probability distribution."
+      question: "Is a sum of indicators a probability?",
+      answer: "No — it is a random count. The sum ranges over 0, 1, …, n and tells you how many of the events actually occurred on this trial. Only its expectation lands back among probabilities, as the sum of the individual event probabilities. Keeping the random count apart from its average is the whole trick indicator arguments turn on.",
+      sectionId: "notation"
     }
   }
 
@@ -841,19 +852,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/indicators"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1297,6 +1295,22 @@ export default function IndicatorsPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Indicator Variables FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -1387,13 +1401,6 @@ export default function IndicatorsPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

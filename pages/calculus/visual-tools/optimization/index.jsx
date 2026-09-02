@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Optimization</h1>
 //    <br/>
-//    <FunctionOptimization/>
+//    <FunctionOptimization explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionOptimization from '../../../../app/components/functions/optimization/FunctionOptimization'
+import functionOptimizationDiagrams from '../../../../app/components/functions/optimization/functionOptimizationDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -736,38 +738,81 @@ When $f''(c) = 0$ the test fails because the curve&apos;s concavity isn&apos;t p
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Quadratic: One Critical Point, No Ambiguity`,
+      content: `$f(x) = x^2$ on $[-3, 3]$. Setting $f'(x) = 2x = 0$ gives a single critical point at $x = 0$, and $f''(0) = 2 > 0$ classifies it as a local minimum immediately.
+
+The three curves make the reasoning visible at once: $f$ is the parabola, $f'$ is the line $2x$ crossing zero at the origin, and $f''$ is the constant $2$ sitting flat above the axis.`,
       before: ``,
-      after: ``,
+      after: `Because $f''$ is positive everywhere, the parabola is concave up everywhere, and that upgrades the verdict: the local minimum is also the **global** minimum on any interval you choose. Concavity that never changes sign is a strong condition, and it is exactly what makes quadratic optimization problems easy.
+
+This is also the cleanest case of the [second-derivative test](!#the-second-derivative-test) — one evaluation, one sign, done, with no fallback needed.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `x³ − 3x: a Maximum and a Minimum`,
+      content: `$f(x) = x^3 - 3x$ has $f'(x) = 3x^2 - 3$, so $f'(x) = 0$ at $x = \pm 1$ — two critical points, and the second derivative $f''(x) = 6x$ separates them:
+
+- $x = -1$: $f'' = -6 < 0$, concave down, **local max**, with $f(-1) = 2$
+- $x = 1$: $f'' = +6 > 0$, concave up, **local min**, with $f(1) = -2$
+
+The markers are coloured accordingly — deep blue for the max, main blue for the min.`,
       before: ``,
-      after: ``,
+      after: `Neither of these is a global extremum. A cubic runs off to $+\infty$ on one side and $-\infty$ on the other, so on a wide enough interval the endpoints beat both critical points. That distinction — local versus global — is the reason a real optimization problem always has to check the endpoints too.
+
+Watch $f''$ as you read across: it is negative left of the origin and positive right of it, crossing zero exactly at $x = 0$. That crossing is an inflection point of $f$, but it is *not* a critical point, because $f'(0) = -3 \neq 0$. The tool marks only the critical points, which is why nothing appears there.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `x³: Where the Second-Derivative Test Fails`,
+      content: `$f(x) = x^3$ has $f'(x) = 3x^2$, which touches zero at $x = 0$ without changing sign. So $x = 0$ is a critical point — but $f''(0) = 0$, and the second-derivative test returns nothing at all.
+
+The tool falls back to the first-derivative test: it samples $f'$ just left and just right of the point, finds both positive, and reports **inflection (touch)** rather than a maximum or a minimum.`,
       before: ``,
-      after: ``,
+      after: `This family exists to make the limits of the tests explicit. $f''(c) = 0$ is not evidence of anything — the test is simply silent, and something else has to decide. Here the sign of $f'$ on both sides does the work, and it says the function never stops increasing.
+
+The finder itself has to work harder for this case too. A critical point where $f'$ crosses zero is easy to bracket by a sign change; one where $f'$ merely *touches* zero has no sign change to detect, so the tool scans separately for local minima of $|f'|$ that sit near zero. That is why this point is found at all.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `x⁴ − 4x²: Three Critical Points in a W`,
+      content: `$f(x) = x^4 - 4x^2$ gives $f'(x) = 4x^3 - 8x = 4x(x^2 - 2)$, so the critical points are $x = 0$ and $x = \pm\sqrt{2} \approx \pm 1.4142$. With $f''(x) = 12x^2 - 8$:
+
+- $x = -1.4142$: $f'' = 16 > 0$, **local min**, $f = -4$
+- $x = 0$: $f'' = -8 < 0$, **local max**, $f = 0$
+- $x = 1.4142$: $f'' = 16 > 0$, **local min**, $f = -4$
+
+Three markers, two of them at the same height.`,
       before: ``,
-      after: ``,
+      after: `The two minima tie exactly, at $f = -4$, because the function is even. That is worth noticing: a global minimum need not be unique, and any procedure that assumes it is will pick one arbitrarily.
+
+The local maximum at the origin is the more interesting one. It is a maximum *locally* — the curve does fall away on both sides of it — while sitting at height $0$, well above the two minima and well below where the quartic goes further out. "Local" is doing real work in that sentence, and the W shape is the clearest picture of why the word is there.`,
       link: '',
     },
     obj15: {
-      title: ``,
-      content: ``,
+      title: `sin(x): Four Critical Points Over Two Periods`,
+      content: `On its default interval $[-2\pi, 2\pi]$, $f(x) = \sin(x)$ has $f'(x) = \cos(x)$ vanishing four times: at $x = \pm\frac{\pi}{2}$ and $x = \pm\frac{3\pi}{2}$.
+
+The classification alternates, since $f'' = -\sin(x)$ flips sign at each one:
+
+- $x = -4.7124$: **local max**, $f = 1$
+- $x = -1.5708$: **local min**, $f = -1$
+- $x = 1.5708$: **local max**, $f = 1$
+- $x = 4.7124$: **local min**, $f = -1$`,
       before: ``,
-      after: ``,
+      after: `Every maximum ties at $1$ and every minimum at $-1$, which is what periodicity guarantees. Widen the interval and the tool simply finds more of them — there is no largest critical point to find, only more copies of the same two heights.
+
+That makes the search window matter in a way it does not for the polynomial families. On a periodic function "the maximum" is meaningless without an interval attached; what the tool reports is always the answer to "on this window", and the faint band across the graph is a reminder of which window that is.`,
+      link: '',
+    },
+    obj16: {
+      title: `The Gaussian: One Maximum and Two Inflections That Are Not Critical`,
+      content: `$f(x) = e^{-x^2}$ has $f'(x) = -2x e^{-x^2}$, which is zero only at $x = 0$ — the exponential factor never vanishes. So there is exactly one critical point, and $f''(0) = -2 < 0$ makes it a **local maximum** at $f(0) = 1$.
+
+It is a global maximum too: the function is positive everywhere and decays to zero in both directions, so nothing can exceed the peak.`,
+      before: ``,
+      after: `The dotted $f''$ curve is where this family gets interesting. It equals $(4x^2 - 2)e^{-x^2}$ and crosses zero at $x = \pm\frac{1}{\sqrt{2}} \approx \pm 0.707$ — the two inflection points, one on each shoulder of the bell. In statistics those are the points one standard deviation out.
+
+But neither is a critical point, and the tool marks neither, because $f'$ is nowhere near zero there. Critical points come from $f'$; inflection points come from $f''$. They are different questions asked of different derivatives, and this curve is the one where confusing them is easiest — which makes it the best place to keep them apart.`,
       link: '',
     }
 
@@ -778,6 +823,54 @@ When $f''(c) = 0$ the test fails because the curve&apos;s concavity isn&apos;t p
     id: "intro",
     title: "",
     content: ``
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     SVGs come from the tool's own scene description, serialised through the
+     core's generateSVG - see app/components/functions/frozenSvg.js. Each state
+     uses that family's defaultInterval, and the markers are the critical points
+     the tool's own finder returns, coloured by its own classification. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: functionOptimizationDiagrams[key], caption, text })
+
+  const stateUnits = {
+    quadratic: unit('quadratic', 'Quadratic on [-3, 3], frozen',
+      'One marker, at the origin. f&prime; is the line 2x crossing zero there, and f&Prime; is the constant 2 ' +
+      'lying flat above the axis - concave up everywhere, so the minimum is global.'),
+    'cubic-bump': unit('cubic-bump', 'x&sup3; - 3x on [-3, 3], frozen',
+      'Two markers in different colours: a local max at x = -1 where f&Prime; = -6, and a local min at ' +
+      'x = +1 where f&Prime; = +6. The dotted f&Prime; line crosses zero between them, at the inflection.'),
+    cubic: unit('cubic', 'x&sup3; on [-3, 3], frozen',
+      'A single grey-blue marker at the origin, labelled inflection (touch). f&prime; = 3x&sup2; sits on the ' +
+      'axis there without crossing it, which is exactly the case the second-derivative test cannot decide.'),
+    'quartic-w': unit('quartic-w', 'x&#8308; - 4x&sup2; on [-3, 3], frozen',
+      'Three markers: minima at &plusmn;1.4142 tied at f = -4, and a local max at the origin sitting at ' +
+      'f = 0 - above both minima, and still only a local maximum.'),
+    sine: unit('sine', 'sin(x) on [-2&pi;, 2&pi;], frozen',
+      'Four markers alternating max, min, max, min at &plusmn;&pi;/2 and &plusmn;3&pi;/2. Widen the window ' +
+      'and the tool just finds more of the same two heights.'),
+    gaussian: unit('gaussian', 'e^(-x&sup2;) on [-3, 3], frozen',
+      'One marker at the peak. The dotted f&Prime; curve crosses zero at &plusmn;0.707 - the two inflection ' +
+      'points on the shoulders - but neither is marked, because f&prime; is not zero there.'),
+  }
+
+
+  /* ---- per-family panel notes, passed into the component (Line 1) ----
+     FunctionOptimization had no explanations prop; one was added additively and
+     defaults to null, so the panel is unchanged when nothing is passed. Content
+     is markdown - InfoPanel renders it through processContent, so anchors use
+     the normal [text](!#slug) form. */
+  const note = (body, slug, label) =>
+    `### Where this leads\n\n${body} See [${label}](!#${slug}) or compare [all six families](!#the-function-families).`
+
+  const explanations = {
+    quadratic: note('One critical point, and concavity that never changes sign - so the local minimum is global.', 'one-critical-point', 'the quadratic family'),
+    'cubic-bump': note('A max and a min, separated by the sign of f&Prime;, and neither of them global.', 'a-maximum-and-a-minimum', 'the x cubed minus 3x family'),
+    cubic: note('f&Prime;(c) = 0 leaves the second-derivative test silent; the first-derivative test settles it.', 'where-the-test-fails', 'the x cubed family'),
+    'quartic-w': note('Three critical points, with the two minima tied - a global minimum need not be unique.', 'three-critical-points', 'the quartic family'),
+    sine: note('Periodicity means there is no largest critical point, only more copies inside a wider window.', 'four-critical-points', 'the sine family'),
+    gaussian: note('One critical point from f&prime;, two inflection points from f&Prime;, and the tool marks only the first kind.', 'one-maximum-two-inflections', 'the gaussian family'),
   }
 
 
@@ -884,6 +977,8 @@ When $f''(c) = 0$ the test fails because the curve&apos;s concavity isn&apos;t p
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -895,147 +990,55 @@ When $f''(c) = 0$ the test fails because the curve&apos;s concavity isn&apos;t p
         name: "Optimization Visualizer",
         hubDescription: "Find every critical point of a smooth function on a chosen interval and watch the second-derivative test classify each as local max, local min, or inflection. Six families show single-extremum cases, W-shapes, and touch zeros where the test falls back to the first-derivative test.",
         category: "Derivatives",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="66" x2="76" y2="66" stroke="#B5D4F4" stroke-width="0.9"/><path d="M 12 46 C 20 12 36 12 42 36 C 47 55 58 56 70 24" fill="none" stroke="#85B7EB" stroke-width="1.8"/><line x1="19" y1="19" x2="37" y2="19" stroke="#FAC775" stroke-width="1.5" stroke-dasharray="3,2"/><line x1="44" y1="49" x2="62" y2="49" stroke="#97C459" stroke-width="1.5" stroke-dasharray="3,2"/><circle cx="28" cy="19" r="3.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="53" cy="49" r="3.2" fill="#97C459" stroke="#27500A" stroke-width="1.2"/><text x="28" y="11" font-family="Georgia,serif" font-size="7" fill="#FAC775" text-anchor="middle">max</text><text x="53" y="59" font-family="Georgia,serif" font-size="7" fill="#C0DD97" text-anchor="middle">min</text></svg>`
       },
 
     }
   }
 }
 
-export default function OptimizationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function OptimizationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-function-families'),
+    stateRow('obj11', 'one-critical-point', 'quadratic'),
+    stateRow('obj12', 'a-maximum-and-a-minimum', 'cubic-bump'),
+    stateRow('obj13', 'where-the-test-fails', 'cubic'),
+    stateRow('obj14', 'three-critical-points', 'quartic-w'),
+    stateRow('obj15', 'four-critical-points', 'sine'),
+    stateRow('obj16', 'one-maximum-two-inflections', 'gaussian'),
+    plain('obj3', 'the-a-and-b-sliders'),
+    plain('obj4', 'the-critical-point-table'),
+    plain('obj5', 'classification'),
+    plain('obj6', 'display-toggles'),
+    plain('obj7', 'what-is-optimization'),
+    plain('obj8', 'the-first-derivative-test'),
+    plain('obj9', 'the-second-derivative-test'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -1091,7 +1094,7 @@ export default function OptimizationVisualizer({seoData, sectionsContent, introC
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Optimization Visualizer - Critical Points</h1>
       <br/>
-      <FunctionOptimization/>
+      <FunctionOptimization explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

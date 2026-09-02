@@ -9,6 +9,7 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
 import { renderEuclideanChain } from '../../../../app/utils/illustrations/arithmetic/divisibility/euclideanChain'
@@ -617,54 +618,31 @@ Simplify $\\frac{84}{126}$. $\\gcd(84, 126)$: $126 = 84 \\cdot 1 + 42$, $84 = 42
   content: `When two numbers share [common factors](!/arithmetic/divisibility/factors), the greatest among them captures the deepest structural connection between the pair. The greatest common divisor — GCD — measures how much two numbers overlap in their factor structure, and it appears everywhere from simplifying **fractions** to determining whether two quantities are fundamentally incompatible.`
 }
 
+// FAQ pass: cut eight questions — the GCD definition, all three methods, the
+// Euclidean algorithm, coprime definition, GCD-of-many and method-comparison
+// are case A (own h2s and the Three Methods summary answer them); the GCD×LCM
+// relation is owned by the /arithmetic/divisibility hub FAQ. Kept four
+// buried-content questions, all extended.
 const faqQuestions = {
   obj1: {
-    question: "What is the greatest common divisor (GCD)?",
-    answer: "The GCD of two positive integers a and b is the largest positive integer that divides both. For example, gcd(12, 18) = 6 because 6 is the largest number that divides both 12 and 18 evenly."
+    question: "What is the difference between GCD, HCF, and GCF?",
+    answer: "They are the same concept under different names. GCD (greatest common divisor) is the standard term in mathematics; HCF (highest common factor) is the usual British and Indian schoolbook name; GCF (greatest common factor) appears in American textbooks. All three label the same number — the largest integer dividing both inputs. Compute it with the [GCF calculator](!/arithmetic/calculators/gcf-calculator).",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the difference between GCD, HCF, and GCF?",
-    answer: "They are all the same concept with different names. GCD (greatest common divisor) is standard in mathematics. HCF (highest common factor) is common in British usage. GCF (greatest common factor) appears in some textbooks."
+    question: "Why are coprime numbers important?",
+    answer: "Coprimality unlocks key divisibility reasoning. If gcd(a, b) = 1 and a divides b×c, then a must divide c. This is why divisibility by 6 can be tested by checking 2 and 3 separately — gcd(2, 3) = 1 — and why a fraction is fully simplified exactly when its numerator and denominator are coprime. Any two consecutive integers are coprime, a fact many proofs exploit.",
+    sectionId: "8"
   },
   obj3: {
-    question: "How do you find the GCD by listing factors?",
-    answer: "List all factors of each number, find the common factors (numbers appearing in both lists), and select the largest. For gcd(24, 36): factors of 24 are {1,2,3,4,6,8,12,24}, factors of 36 are {1,2,3,4,6,9,12,18,36}, common factors are {1,2,3,4,6,12}, so GCD = 12."
+    question: "How is GCD used to simplify fractions?",
+    answer: "Divide both numerator and denominator by their GCD. For 84/126: gcd(84, 126) = 42, so 84/126 = (84÷42)/(126÷42) = 2/3. Dividing by the GCD reaches lowest terms in one step, where cancelling small common factors one at a time may take several rounds. A fraction is fully reduced exactly when gcd(numerator, denominator) = 1.",
+    sectionId: "10"
   },
   obj4: {
-    question: "How do you find the GCD using prime factorization?",
-    answer: "Factor both numbers into primes, identify shared primes, and take the minimum exponent for each. For gcd(48, 180): 48 = 2⁴×3¹ and 180 = 2²×3²×5¹. Shared primes: 2^min(4,2) × 3^min(1,2) = 2²×3 = 12."
-  },
-  obj5: {
-    question: "What is the Euclidean algorithm?",
-    answer: "A method to find GCD without factoring. Use the property gcd(a,b) = gcd(b, a mod b). Repeatedly replace (a,b) with (b, a mod b) until b=0. The final value of a is the GCD. For gcd(252,105): 252=105×2+42, 105=42×2+21, 42=21×2+0, so GCD=21."
-  },
-  obj6: {
-    question: "What does coprime (relatively prime) mean?",
-    answer: "Two numbers are coprime when their GCD is 1 — they share no common factor except 1. For example, 8 and 15 are coprime because gcd(8,15)=1. Any two consecutive integers are always coprime."
-  },
-  obj7: {
-    question: "Why are coprime numbers important?",
-    answer: "Coprimality enables key divisibility properties. If gcd(a,b)=1 and a divides b×c, then a must divide c. This is why divisibility by 6 can be tested by checking 2 and 3 separately — because gcd(2,3)=1."
-  },
-  obj8: {
-    question: "How do you find the GCD of more than two numbers?",
-    answer: "Apply GCD pairwise: gcd(a,b,c) = gcd(gcd(a,b), c). For gcd(24,36,60): first gcd(24,36)=12, then gcd(12,60)=12. The order doesn't matter — GCD is associative and commutative."
-  },
-  obj9: {
-    question: "How is GCD used to simplify fractions?",
-    answer: "Divide both numerator and denominator by their GCD. For 84/126: gcd(84,126)=42, so 84/126 = (84÷42)/(126÷42) = 2/3. A fraction is in lowest terms when gcd(numerator, denominator) = 1."
-  },
-  obj10: {
-    question: "What is the relationship between GCD and LCM?",
-    answer: "For any two positive integers a and b: a × b = gcd(a,b) × lcm(a,b). This means if you know the GCD, you can find the LCM by computing (a×b)/gcd(a,b), and vice versa."
-  },
-  obj11: {
     question: "What is gcd(a, 0)?",
-    answer: "gcd(a, 0) = a for any positive integer a. Every positive integer divides 0, so the common divisors of a and 0 are exactly the divisors of a, and the largest is a itself."
-  },
-  obj12: {
-    question: "Which method for finding GCD is most efficient?",
-    answer: "The Euclidean algorithm is most efficient, especially for large numbers. It requires no factorization and terminates quickly because the remainder strictly decreases at each step. Listing factors or finding prime factorizations is slower for large numbers."
+    answer: "gcd(a, 0) = a for any positive integer a. Every positive integer divides 0, so the common divisors of a and 0 are exactly the divisors of a, and the largest is a itself. This identity is what ends the Euclidean algorithm: when the remainder finally reaches zero, the other number is the answer.",
+    sectionId: "2"
   }
 }
 
@@ -740,19 +718,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/divisibility/gcd"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1014,6 +979,22 @@ rtGcdObj10Tiles,}) {
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`GCD FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -1045,17 +1026,10 @@ rtGcdObj10Tiles,}) {
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

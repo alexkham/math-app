@@ -3444,4 +3444,10 @@ export const VennGenerator = (props) => {
 
 export { DEFAULT_EXPLANATIONS, NAMED_SELECTIONS, DEFAULT_GEOMETRY_NOTES, DEFAULT_PRESETS };
 
+// The three path builders and the theme defaults are exported so the page's
+// frozen-state stills are drawn from the tool's own geometry rather than a
+// re-derivation (Line 1). All are pure module-level values; nothing about the
+// component's behaviour changes.
+export { shapePath, rectPath, twoSetPaths, DEFAULT_THEME, MATH_FONT };
+
 export default VennGenerator;

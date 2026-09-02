@@ -411,6 +411,7 @@ Cotangent's asymptotes stand at [tangent's](!#the-graph-of-tangent) zeros and vi
         category: "Functions",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/functions-graphs",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="40" x2="74" y2="40" stroke="#B5D4F4" stroke-width="0.9"/><line x1="12" y1="12" x2="12" y2="68" stroke="#B5D4F4" stroke-width="0.9"/><line x1="27" y1="38" x2="27" y2="42" stroke="#B5D4F4" stroke-width="0.8"/><line x1="42" y1="38" x2="42" y2="42" stroke="#B5D4F4" stroke-width="0.8"/><line x1="57" y1="38" x2="57" y2="42" stroke="#B5D4F4" stroke-width="0.8"/><path d="M 12 19 C 22 19, 32 61, 42 61 C 52 61, 62 19, 72 19" fill="none" stroke="#97C459" stroke-width="1.8"/><path d="M 12 40 C 22 12, 32 12, 42 40 C 52 68, 62 68, 72 40" fill="none" stroke="#FAC775" stroke-width="1.8"/><text x="20" y="76" font-family="Georgia,serif" font-size="7" fill="#FAC775" text-anchor="middle">sin</text><text x="40" y="76" font-family="Georgia,serif" font-size="7" fill="#C0DD97" text-anchor="middle">cos</text></svg>`,
         name: "Interactive Trigonometric Functions Graphs"
       },
 

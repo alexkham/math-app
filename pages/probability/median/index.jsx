@@ -1564,6 +1564,7 @@ import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -3132,26 +3133,37 @@ Not all measures of central tendency are based on averaging. Some describe posit
 This page introduces the median as the value that divides a distribution into two equally weighted halves. It focuses on how the median is defined through ordering and cumulative probability, and why it remains stable even when extreme values distort other measures of center.`
 }
 
+// FAQ pass: the definition, mean-vs-median, how to find it and why it
+// matters each name their own h2 (Definition and Concept, Median Mean and
+// Mode Compared, How to Find the Median, Median in Practice). Kept the
+// multiple-medians question, whose heading reads only "Special Cases and
+// Edge Cases", and added the notation section's conventions — this page
+// has more unsettled notation than any other in the section.
 const faqQuestions = {
   obj1: {
-    question: "What is the median in probability?",
-    answer: "The median is the 50th percentile of a distribution—the value that divides total probability exactly in half. For continuous distributions, it's where the CDF equals 0.5. For discrete distributions, it's the smallest value satisfying both P(X ≤ m) ≥ 0.5 and P(X ≥ m) ≥ 0.5."
+    question: "Can a distribution have multiple medians?",
+    answer: "Yes, though it takes a specific setup. A discrete distribution has several medians when the CDF steps from below 0.5 to above it and lands exactly on 0.5 along the way — the discrete uniform on {1,2,3,4} has medians at both 2 and 3. Continuous distributions are unique unless the CDF has a flat stretch at height 0.5.",
+    sectionId: "11"
   },
   obj2: {
-    question: "How is median different from mean?",
-    answer: "The median identifies the middle value by probability rank (50th percentile), while the mean is the probability-weighted average of all values. The median is robust to outliers since extreme values beyond the 50% threshold have no effect, whereas the mean can be heavily influenced by extremes."
+    question: "Is there a standard symbol for the median?",
+    answer: "No — unlike the variance, which settled on σ² and Var, the median never adopted one symbol. You will meet median(X), Med(X), med(X), a bare m, x̃ for the sample version, and quantile spellings like Q₂. Careful technical writing states which convention it is using, and a reader should expect it to change between sources.",
+    sectionId: "12"
   },
   obj3: {
-    question: "How do you find the median of a distribution?",
-    answer: "For continuous distributions, solve F(m) = 0.5 where F is the CDF, or use the inverse CDF: m = F⁻¹(0.5). For discrete distributions, calculate the CDF for each value, find where it first reaches or exceeds 0.5, and verify both median conditions hold."
+    question: "Why does the discrete median need two inequalities instead of one equation?",
+    answer: "Because the CDF of a discrete variable jumps rather than passing smoothly through 0.5, so F(m) = 0.5 usually has no solution at all. The pair P(X ≤ m) ≥ 0.5 and P(X ≥ m) ≥ 0.5 pins down the value the equation cannot reach. The same gap is why F⁻¹ is not a literal inverse for stepped or plateaued CDFs.",
+    sectionId: "12"
   },
   obj4: {
-    question: "Can a distribution have multiple medians?",
-    answer: "Yes, discrete distributions can have multiple medians when the CDF jumps from below 0.5 to above 0.5 in a single step, landing exactly on 0.5. Continuous distributions typically have a unique median unless the CDF has flat regions. For example, discrete uniform on {1,2,3,4} has medians at both 2 and 3."
+    question: "Why do you average the two middle values when the sample size is even?",
+    answer: "Because it is a convention, not a theorem. With an even count no single observation sits in the middle, and every value between the two central ones satisfies the median conditions equally well. Taking their average picks one representative from that whole interval. Other choices are defensible; the average is simply the one everyone agreed to use.",
+    sectionId: "12"
   },
   obj5: {
-    question: "Why is the median important in statistics?",
-    answer: "The median is crucial for understanding skewed distributions and data with outliers. It provides a robust measure of central location that remains stable when extreme values appear, making it ideal for income data, housing prices, and other measurements prone to outliers. It also reveals distribution symmetry through comparison with the mean."
+    question: "Does the subscript in Q₂ mean the same as in Q₀.₅?",
+    answer: "No — the two conventions count different things and happen to name the same value. Q₂ is the second of the three quartiles, so its subscript counts cut points. Q₀.₅ is the 0.5-quantile, so its subscript states a probability. Both land on the median, but reading one subscript as the other misidentifies every quantile except this one.",
+    sectionId: "12"
   }
 }
 
@@ -3219,19 +3231,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/probability/median"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -3429,6 +3428,22 @@ export default function MedianPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Median FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -3462,13 +3477,6 @@ export default function MedianPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

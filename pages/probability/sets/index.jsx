@@ -502,6 +502,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -658,26 +659,28 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — what a set is, why
+  // sets matter, core operations, how sets become events, types of sets.
+  // The events page deferred union vs intersection here; the operations h2
+  // serves the list, so what survives is the specific or/and error the
+  // Common Mistakes section flags. Proper vs improper subset defers to
+  // /set-theory/subsets, and the continuous point-probability question to
+  // probability-function/pdf, the dedicated page for densities.
   const faqQuestions = {
     obj1: {
-      question: "What is a set in probability?",
-      answer: "A set in probability is a collection of possible outcomes of a random experiment. Unlike abstract sets in set theory, sets in probability always describe 'what can happen' when an experiment is run. Their elements are outcomes, and these sets help form events, define sample spaces, and build probability models. Examples include {H, T} for a coin toss or {1, 2, 3, 4, 5, 6} for a die roll."
+      question: "Does “A or B” mean union or intersection?",
+      answer: "Union. “A or B” is A ∪ B, the event that at least one of them occurs; “A and B” is A ∩ B, the event that both occur. Swapping the two is among the most common errors here. Note also that mathematical “or” is inclusive — A ∪ B includes the outcomes where both happen, not just where exactly one does.",
+      sectionId: "mistakes"
     },
     obj2: {
-      question: "Why are sets important in probability?",
-      answer: "Sets are the basic way we describe everything that can happen in probability. Every outcome belongs to a set, and every event is just a set of outcomes. Sample spaces become the 'universe' of all outcomes, events become meaningful groups inside that universe, and probability models use these sets to assign chances. Sets provide the framework that all later concepts—events, probability functions, and distributions—rely on."
+      question: "What is the complement of an event taken relative to?",
+      answer: "The entire sample space, always. Aᶜ contains every outcome in Ω that is not in A — not merely the outcomes in whatever sub-part of the problem you happen to be looking at. Narrowing the reference set silently is a common error, and it breaks the rule that P(A) and P(Aᶜ) together account for all the probability.",
+      sectionId: "mistakes"
     },
     obj3: {
-      question: "What set operations are used in probability?",
-      answer: "Probability uses union (at least one event happens), intersection (both events happen), complement (event not happening), and difference (in one event but not the other). When two events share no outcomes, they are disjoint. These operations turn real-life statements about uncertainty into precise events that can be assigned probabilities, describing how events relate inside a sample space."
-    },
-    obj4: {
-      question: "How do sets become events in probability?",
-      answer: "An event is simply a set of outcomes within a sample space. Meaningful statements about what might happen are translated into sets: 'die shows even number' becomes {2, 4, 6}; 'waiting time less than 3 minutes' becomes interval (0, 3). Once expressed as a set, probability's tools—complements, unions, intersections, conditional relationships—can be applied to it."
-    },
-    obj5: {
-      question: "What types of sets are used in probability?",
-      answer: "Probability uses three main types: finite sets for discrete outcomes like coin flips or die rolls, countably infinite sets for counts like non-negative integers, and continuous sets (intervals on the real line) for measurements that can take any value in a range. These different types let us represent everything from simple discrete outcomes to full continuous scales."
+      question: "Are sets in probability different from sets in set theory?",
+      answer: "Same objects, different job. Set theory treats union, intersection and complement as abstract operations on arbitrary collections. Probability fixes the collections to be outcomes of an experiment, so the same operations acquire meanings: union becomes “at least one happens”, intersection “both happen”, complement “does not happen”. The machinery is borrowed unchanged; only the interpretation is new.",
+      sectionId: "operations"
     }
   }
 
@@ -747,19 +750,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/sets"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1054,6 +1044,22 @@ export default function SetsInProbabilityPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Sets in Probability FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1087,13 +1093,6 @@ export default function SetsInProbabilityPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -794,81 +795,25 @@ That final condition is crucial. Every rule listed here requires the individual 
 
 
 
+// FAQ pass: cut all fifteen. This is a rule-reference page and every question
+// mapped 1:1 to a rule-named h2 that states the answer in its first line.
+// Invented three from the caveats buried in closing paragraphs — the
+// conditions under which each rule stops working, which no heading mentions.
 const faqQuestions = {
   obj1: {
-    question: "Why do limit rules matter?",
-    answer: "Limit rules provide shortcuts that avoid returning to the epsilon-delta definition for each new function. Once basic limits are established, you combine them using algebraic rules to handle complex expressions efficiently.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the limit of a constant?",
-    answer: "For any constant c, lim(x→a) c = c. A constant function outputs the same value regardless of input, so as x approaches a, the output remains c. This foundational rule handles constant terms in any expression.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the limit of the identity function?",
-    answer: "For f(x) = x, lim(x→a) x = a. As x approaches a, the value of x approaches a. This provides the base case for polynomials since every polynomial is built from constants and powers of x.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are the sum and difference rules for limits?",
-    answer: "If lim f(x) = L and lim g(x) = M, then lim[f(x) + g(x)] = L + M and lim[f(x) − g(x)] = L − M. The limit of a sum is the sum of limits; the limit of a difference is the difference of limits. Both component limits must exist.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the constant multiple rule for limits?",
-    answer: "If lim f(x) = L and c is a constant, then lim[c·f(x)] = c·L. Constants factor out of limits. Scaling a function by a constant scales its limit by the same constant.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the product rule for limits?",
-    answer: "If lim f(x) = L and lim g(x) = M, then lim[f(x)·g(x)] = L·M. The limit of a product is the product of the limits. This extends to any finite number of factors.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the quotient rule for limits?",
-    answer: "If lim f(x) = L and lim g(x) = M with M ≠ 0, then lim[f(x)/g(x)] = L/M. The limit of a quotient is the quotient of limits, provided the denominator's limit is nonzero. When M = 0, the rule fails.",
+    question: "What happens if the limit of the denominator is zero?",
+    answer: "The quotient rule no longer applies, and two cases split apart. If the numerator approaches a nonzero value while the denominator approaches zero, the quotient grows without bound — check the sign from each side to decide between +∞ and −∞. If both approach zero, the result is the indeterminate form 0/0, which carries no information until the expression is rewritten. See [evaluating limits](!/calculus/limits/evaluating).",
     sectionId: "7"
   },
-  obj8: {
-    question: "What is the power rule for limits?",
-    answer: "If lim f(x) = L and n is a positive integer, then lim[f(x)]ⁿ = Lⁿ. The limit of a power is the power of the limit. For rational exponents, the rule requires L > 0 (or L ≥ 0 when n is odd).",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "What is the root rule for limits?",
-    answer: "If lim f(x) = L and the n-th root exists, then lim ⁿ√f(x) = ⁿ√L. For odd n, this holds for all real L. For even n, it requires L ≥ 0 and f(x) ≥ 0 near a.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "What is the absolute value rule for limits?",
-    answer: "If lim f(x) = L, then lim|f(x)| = |L|. The limit of an absolute value is the absolute value of the limit. The converse does not hold—|f(x)| may have a limit even when f(x) does not.",
-    sectionId: "10"
-  },
-  obj11: {
-    question: "How do you find limits of polynomials?",
-    answer: "For any polynomial p(x), lim(x→a) p(x) = p(a). Direct substitution always works for polynomials. This follows from applying sum, constant multiple, and power rules to each term.",
-    sectionId: "11"
-  },
-  obj12: {
-    question: "How do you find limits of rational functions?",
-    answer: "For r(x) = p(x)/q(x), if q(a) ≠ 0 then lim r(x) = p(a)/q(a). Substitute directly when the denominator is nonzero. When q(a) = 0, factor and cancel common roots or use other techniques.",
-    sectionId: "12"
-  },
-  obj13: {
-    question: "What is the composition rule for limits?",
-    answer: "If lim g(x) = L and f is continuous at L, then lim f(g(x)) = f(L). The limit passes through continuous functions. Find the inner limit first, then apply the outer function to that limit.",
+  obj2: {
+    question: "Why does the composition rule require continuity?",
+    answer: "Because the rule moves the limit inside the outer function, and that step is only valid when the behavior of f near L matches f(L) — which is exactly what continuity at L guarantees. Without it, g(x) can approach L while f(g(x)) approaches something other than f(L). A hole or jump in f at L breaks the substitution even though the inner limit exists.",
     sectionId: "13"
   },
-  obj14: {
-    question: "What is the Squeeze Theorem?",
-    answer: "If g(x) ≤ f(x) ≤ h(x) near a, and lim g(x) = lim h(x) = L, then lim f(x) = L. The function f is trapped between two functions converging to the same limit, so f must also converge to L.",
+  obj3: {
+    question: "When should you use the Squeeze Theorem?",
+    answer: "Use it when a limit resists direct evaluation but the function can be trapped between two simpler ones sharing the same limit. If g(x) ≤ f(x) ≤ h(x) near a, and both g and h approach L, then f has nowhere to go but L. The classic application proves the [special limit](!/calculus/limits/special) sin(x)/x → 1 by bounding it between cos x and 1.",
     sectionId: "14"
-  },
-  obj15: {
-    question: "When do limit rules fail?",
-    answer: "Rules fail when component limits don't exist. Indeterminate forms (0/0, ∞/∞, 0·∞, ∞−∞, 0⁰, 1^∞, ∞⁰) signal this breakdown. These require algebraic transformation before rules can be applied.",
-    sectionId: "15"
   }
 }
 
@@ -943,19 +888,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits/rules"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1119,6 +1051,22 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj12
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Limit Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1156,12 +1104,6 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj12
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -680,6 +680,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -776,26 +777,32 @@ export async function getStaticProps(){
 `
 
 
+  // FAQ pass: hub page. "What they do", "why they matter", "what they
+  // depend on" and "vs exact distributions" each name their own h2. Kept the
+  // Markov/Chebyshev comparison — it spans both child pages, so neither can
+  // own it, and the heading here reads only "Relationship Between Common
+  // Inequalities". Added the orientation questions a hub can answer that
+  // neither child would: why bounds are loose, and how to choose one.
   const faqQuestions = {
     obj1: {
-      question: "What are probability inequalities?",
-      answer: "Probability inequalities place limits on how likely certain events can be without requiring full knowledge of the underlying distribution. They provide guaranteed bounds that hold whenever stated assumptions are satisfied, using limited information such as expectation or variance. They don't compute exact probabilities but restrict how extreme outcomes can be."
+      question: "What's the difference between Markov's and Chebyshev's inequality?",
+      answer: "Markov uses only non-negativity and the expectation, so it applies almost anywhere but gives loose bounds. Chebyshev adds the variance, which tightens the bound at the cost of needing more information. That is the general pattern: each additional assumption buys a sharper bound and narrows the range of variables it covers.",
+      sectionId: "6"
     },
     obj2: {
-      question: "Why are probability inequalities important?",
-      answer: "Probability inequalities enable reasoning when exact probability calculations are unavailable or impractical. They provide bounds that hold under broad conditions with minimal assumptions, making them useful for justifying convergence results, controlling error and variability, and obtaining guarantees that remain valid across many models without knowing the full distribution."
+      question: "Do you need to know the distribution to use a probability inequality?",
+      answer: "No — that is precisely why they exist. An inequality uses a few summary facts, typically the expectation and sometimes the variance, plus structural conditions like non-negativity. From those alone it guarantees a bound holding for every distribution that meets the conditions. You trade precision for the freedom of not needing the full distribution.",
+      sectionId: "3"
     },
     obj3: {
-      question: "What's the difference between Markov's and Chebyshev's inequality?",
-      answer: "Markov's inequality uses only non-negativity and expectation, making it broadly applicable but often loose. Chebyshev's inequality adds information about variance, which tightens the bound while reducing generality. This illustrates a general trade-off: fewer assumptions give wider applicability, while more assumptions provide sharper bounds."
+      question: "Why do probability inequalities often give such loose bounds?",
+      answer: "Because they must hold for every distribution satisfying the assumptions, including the worst one. The bound is set by that worst case, so for any particular well-behaved distribution it will be conservative. A bound can even come out above 1 and say nothing at all — technically true, practically vacuous. That is the price of not needing the distribution.",
+      sectionId: "8"
     },
     obj4: {
-      question: "When should you use probability inequalities instead of exact distributions?",
-      answer: "Use probability inequalities when the exact distribution is unknown, difficult to compute, or unnecessary for the question being asked. They become most valuable when precise information is missing, incomplete, or too costly to compute. When exact distributions are known and manageable, working directly with them is usually preferable."
-    },
-    obj5: {
-      question: "What information do probability inequalities depend on?",
-      answer: "Most probability inequalities rely on expectation, measures of spread like variance, and structural assumptions like non-negativity or boundedness. Different inequalities require different levels of information - fewer assumptions mean more general but less tight bounds, while more assumptions lead to sharper bounds with narrower applicability."
+      question: "Does a tighter bound always mean a better inequality?",
+      answer: "No — tightness and applicability pull against each other. A sharper bound is bought with stronger assumptions, and if those assumptions fail the bound is not merely loose but invalid. The right choice depends on what you actually know: use the tightest inequality whose conditions you can genuinely verify, not the tightest one available.",
+      sectionId: "6"
     }
   }
 
@@ -864,19 +871,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/inequalities"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1270,7 +1264,23 @@ export default function ProbabilityInequalitiesPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
-   
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Probability Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
+
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -1377,13 +1387,6 @@ export default function ProbabilityInequalitiesPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

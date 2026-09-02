@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -350,53 +351,23 @@ The result: for any base $a > 0$ and any real exponent $x$, the expression $a^x$
 
 const faqQuestions = {
   obj1: {
-    question: "What is an irrational exponent?",
-    answer: "An irrational exponent is a power where the exponent is an irrational number like π or √2. Since irrational numbers can't be written as fractions, these exponents are defined through limits of rational approximations. For example, 2^π ≈ 8.825.",
+    question: "Why must $2^{\\pi}$ have a value at all?",
+    answer: "Because the laws of exponents already commit to one. The product rule forces $2^{\\pi} \\cdot 2^{1-\\pi} = 2^1 = 2$, and the power rule forces $(2^{\\pi})^{1/\\pi} = 2$. Algebra treats the number as existing before anyone says how to compute it. Repeated multiplication gives no meaning here, and there is no $\\pi$th root, so a fresh definition is needed.",
     sectionId: "1"
   },
   obj2: {
-    question: "How do you calculate 2^π?",
-    answer: "Approximate π with rationals: 3.14, 3.141, 3.1415... Calculate 2^3.14, 2^3.141, etc. using rational exponents. As approximations get closer to π, the values converge to 2^π ≈ 8.825. The limit defines the value.",
-    sectionId: "2"
+    question: "What does continuous extension mean?",
+    answer: "It means filling in a function's missing points by taking limits. The powers $2^r$ are already known for every rational $r$, and they trace a curve with no gaps or jumps, so only the irrational points are absent. Defining $2^{\\pi}$ as the [limit](!/calculus/limits/two-sided) of $2^{r_n}$ for rationals approaching $\\pi$ supplies those points, and smoothness makes the value unique.",
+    sectionId: "3"
   },
   obj3: {
-    question: "Why must the base be positive for irrational exponents?",
-    answer: "Negative bases behave erratically with dense rational exponents. Near x = 1/2, some rationals give real values for (-1)^x while others are undefined. No smooth limit exists. Only positive bases produce continuous, well-defined functions for all real exponents.",
+    question: "Why is zero excluded as a base, not just negative numbers?",
+    answer: "Because $0^x$ cannot be extended continuously either. It equals $0$ for every positive $x$, but for negative $x$ it demands $\\frac{1}{0^n}$ and is undefined, so the curve stops dead rather than continuing. No limiting value fills that gap. Defining $a^x$ across the whole real line therefore requires $a > 0$, not merely $a \\neq 0$.",
     sectionId: "4"
   },
   obj4: {
-    question: "What is continuous extension?",
-    answer: "Continuous extension fills gaps in a function by taking limits. Since a^x is defined and smooth for all rational x, irrational values are defined as limits: a^π = lim(a^r) as rational r approaches π. The smooth behavior guarantees a unique value.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "Do the laws of exponents work for irrational exponents?",
-    answer: "Yes. Since the laws hold for all rational exponents, and irrational exponents are defined as limits of rationals, the laws carry over automatically. Product rule, quotient rule, power of a power — all work for any real exponents.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Why can't zero be used as a base with real exponents?",
-    answer: "0^x = 0 for positive x, but 0^(-n) = 1/0^n is undefined. There's no continuous way to define 0^x across all real x. The exponential function a^x requires a > 0 for a complete definition on the real line.",
-    sectionId: "4"
-  },
-  obj7: {
-    question: "What is 2^√2?",
-    answer: "2^√2 is defined as the limit of 2^r where r approaches √2 through rationals. Since √2 ≈ 1.414, we have 2^√2 ≈ 2^1.414 ≈ 2.665. The exact value is irrational but uniquely determined by the limiting process.",
-    sectionId: "2"
-  },
-  obj8: {
-    question: "How does this complete the definition of exponents?",
-    answer: "Natural exponents cover positive integers. Negative exponents add zero and negatives. Rational exponents fill fractions. Irrational exponents complete the real line. Now a^x is defined for any a > 0 and any real x.",
-    sectionId: "6"
-  },
-  obj9: {
-    question: "Why does the approximation method give a unique value?",
-    answer: "The function a^x for rational x is continuous — no gaps or jumps. When rational approximations squeeze toward an irrational from both sides, the corresponding powers converge to the same limit. Continuity guarantees uniqueness.",
-    sectionId: "3"
-  },
-  obj10: {
-    question: "What is the connection between irrational exponents and exponential functions?",
-    answer: "Irrational exponents complete the definition of a^x for all real x, which is exactly what an exponential function needs. The function f(x) = a^x requires x to range over all reals — made possible by extending exponents to irrationals.",
+    question: "Why must irrational exponents be defined before exponential functions?",
+    answer: "Because an [exponential function](!/algebra/powers/exponential-functions) $f(x) = a^x$ lets $x$ range over all real numbers, and most real numbers are irrational. Without the irrational case its graph would be a dense scatter of points riddled with holes at $\\pi$, $\\sqrt{2}$, and infinitely many others, rather than a curve. Defining $a^x$ for every real $x$ is what makes the function continuous.",
     sectionId: "6"
   }
 }
@@ -472,19 +443,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/irrational-exponents"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -585,6 +543,22 @@ export default function IrrationalExponentsPage({seoData, sectionsContent, intro
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Irrational Exponents FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -721,12 +695,6 @@ export default function IrrationalExponentsPage({seoData, sectionsContent, intro
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

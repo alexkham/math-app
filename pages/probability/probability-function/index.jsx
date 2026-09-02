@@ -720,6 +720,7 @@ import DiscreteProbabilityDistributions from '@/app/components/visualizations/pr
 import ContinuousProbabilityDistributions from '@/app/components/visualizations/probability/continuous-distribution/ContinuousProbabilityDistribution'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -903,26 +904,28 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: properties, how to determine one, and why we need them each
+  // name their own h2. Kept the PMF/PDF comparison — it spans both child
+  // pages, so neither can own it, and the heading here reads only "The Two
+  // Forms of a Probability Function". Added the three case-and-letter
+  // distinctions this page owns, which the notation sections of six other
+  // probability pages inherit from it. "Can a density exceed 1?" moved to
+  // probability-function/pdf — the dedicated page for densities wins.
   const faqQuestions = {
     obj1: {
-      question: "What is a probability function?",
-      answer: "A probability function is a mathematical relation that describes how probability is distributed over the possible outcomes of a random variable. It comes in two forms: the Probability Mass Function (PMF) for discrete variables, which assigns probability to each individual value, and the Probability Density Function (PDF) for continuous variables, where probabilities come from areas under the curve."
+      question: "What is the difference between PMF and PDF?",
+      answer: "Which kind of variable they describe, and how you read a value off them. A PMF is for discrete variables and gives probability directly: p(x) = P(X = x). A PDF is for continuous variables and gives density, not probability — you have to integrate it over an interval before it means anything. For a continuous variable P(X = x) is 0 at every single point.",
+      sectionId: "function"
     },
     obj2: {
-      question: "What is the difference between PMF and PDF?",
-      answer: "The PMF (Probability Mass Function) is for discrete random variables and directly gives the probability that X equals a specific value: p(x) = P(X = x). The PDF (Probability Density Function) is for continuous variables and shows probability density rather than probability itself—actual probabilities come from integrating the PDF over an interval to get the area under the curve."
-    },
-    obj3: {
-      question: "What properties must a valid probability function have?",
-      answer: "A probability function must satisfy two essential properties: First, it cannot be negative—p(x) ≥ 0 or f(x) ≥ 0 for all x. Second, it must account for all probability—for discrete variables, the sum of all p(x) equals 1, and for continuous variables, the integral of f(x) over all real numbers equals 1."
+      question: "What is the difference between capital P and lowercase p?",
+      answer: "They take different arguments. Capital P is the probability measure: it consumes an event and returns a number, which is why [the axioms](!/probability/axioms) speak of P(A) and P(Ω). Lowercase p is the probability mass function: it consumes a value. So P(X = 3) and p(3) can name the same number while being different kinds of object.",
+      sectionId: "notation"
     },
     obj4: {
-      question: "How do you determine a probability function?",
-      answer: "There are several ways: using symmetry for fair models (coin toss, die roll), using counting methods for combinatorial problems, adopting a standard distribution that fits the situation (binomial, normal, Poisson, etc.), or estimating from data by counting frequencies (empirical PMF) or building histograms and density estimates (empirical PDF)."
-    },
-    obj5: {
-      question: "Why do we need probability functions?",
-      answer: "Probability functions are the foundation of probability theory. They connect random experiments to mathematical behavior, build probability distributions, enable calculation of expectations and variance, allow modeling of real-world phenomena, and answer questions about likelihood, ranges, and extreme events. Without them, we have only raw data, not predictive models."
+      question: "Why are X and x written differently?",
+      answer: "Because they are different objects, not one symbol in two sizes. Capital X is the random variable — the rule; lowercase x is a particular value it might take. The case carries the whole distinction, which is why P(x = x) collapses into a tautology and loses the question being asked. Observed data conventionally arrives lowercase, as x₁, …, xₙ.",
+      sectionId: "notation"
     }
   }
 
@@ -993,19 +996,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/probability-function"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1521,6 +1511,22 @@ export default function ProbabilityFunctionPage({
               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
        ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Probability Function FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
     // {
     //     id:'',
@@ -1576,12 +1582,6 @@ export default function ProbabilityFunctionPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -1944,6 +1944,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2557,51 +2558,33 @@ One-sided limits serve as the building blocks for two-sided limits. The two-side
 `
 };
 
+// FAQ pass: cut seven case-A questions — left-hand, right-hand, the two-sided
+// connection, jump discontinuities, vertical asymptotes, evaluating, and
+// one-sided continuity each have an h2 stating the answer. (The two-sided
+// comparison deferred here from the hub is settled by the h2 "The Connection
+// to Two-Sided Limits", so it needs no entry on either page.) Kept the
+// piecewise and square-root questions, both extended; invented two from the
+// notation section, whose entries no heading surfaces.
 const faqQuestions = {
   obj1: {
-    question: "What is a left-hand limit?",
-    answer: "A left-hand limit, written lim(x→a⁻) f(x), examines function behavior as x approaches a through values strictly less than a. You move along the x-axis from the left, getting closer to a but never reaching it.",
-    sectionId: "1"
+    question: "What does x → 0⁻ mean?",
+    answer: "The superscript marks a direction, not an operation. Nothing is being subtracted: 0⁻ is not −0 and not 0 − 1. Writing x → 0⁻ means x approaches zero through negative values, staying strictly below it. There is no point called “negative zero” being approached — the superscript modifies the approach, never the number itself.",
+    sectionId: "4"
   },
   obj2: {
-    question: "What is a right-hand limit?",
-    answer: "A right-hand limit, written lim(x→a⁺) f(x), examines function behavior as x approaches a through values strictly greater than a. You move along the x-axis from the right, getting closer to a but never reaching it.",
-    sectionId: "2"
+    question: "What does f(a⁻) mean?",
+    answer: "It is shorthand for the value of the left-hand limit, lim(x→a⁻) f(x) — not the result of evaluating f at some point called a⁻, since no such point exists. The notation earns its keep when both sides appear together: the size of a jump is f(a⁺) − f(a⁻), and right-continuity is written f(a) = f(a⁺).",
+    sectionId: "4"
   },
   obj3: {
-    question: "How do one-sided limits relate to two-sided limits?",
-    answer: "The two-sided limit exists if and only if both one-sided limits exist and are equal. If the left-hand and right-hand limits differ, or if either fails to exist, the two-sided limit does not exist.",
-    sectionId: "3"
-  },
-  obj4: {
     question: "How do you find limits of piecewise functions?",
-    answer: "At boundaries between pieces, evaluate each one-sided limit using the formula that applies on that side. For example, at x = 2 where f(x) = x² for x < 2 and f(x) = 3x−2 for x ≥ 2, use x² for the left limit and 3x−2 for the right limit.",
+    answer: "At a boundary between pieces, evaluate each one-sided limit using the formula that applies on that side. Where f(x) = x² for x < 2 and f(x) = 3x − 2 for x ≥ 2, the left limit at 2 uses x² and gives 4, while the right limit uses 3x − 2 and also gives 4. Since they agree, the two-sided limit exists.",
     sectionId: "5"
   },
-  obj5: {
-    question: "What is a jump discontinuity?",
-    answer: "A jump discontinuity occurs when both one-sided limits exist but differ. The function 'jumps' from one value to another at that point. The floor function ⌊x⌋ has jump discontinuities at every integer, jumping by 1 each time.",
-    sectionId: "6"
-  },
-  obj6: {
-    question: "How do one-sided limits behave at vertical asymptotes?",
-    answer: "Near vertical asymptotes, one-sided limits typically equal +∞ or −∞, and the sign can differ by direction. For f(x) = 1/(x−2), the left limit at x = 2 is −∞ while the right limit is +∞.",
-    sectionId: "7"
-  },
-  obj7: {
+  obj4: {
     question: "Why do square roots require one-sided limits?",
-    answer: "Square root expressions have domain restrictions. For √(4−x), the domain requires x ≤ 4, so at x = 4 only the left-hand limit is meaningful. Domain boundaries naturally restrict limits to one side.",
+    answer: "Because a square root restricts the domain, and a limit can only approach through points where the function is defined. The expression √(4 − x) needs x ≤ 4, so at x = 4 nothing lies to the right and only the left-hand limit is meaningful. Mirror image for √(x − 4): only the right-hand limit exists at 4.",
     sectionId: "8"
-  },
-  obj8: {
-    question: "How do you evaluate one-sided limits?",
-    answer: "Use the same techniques as two-sided limits—direct substitution, factoring, rationalizing—but track which side you approach from. Sign analysis is critical: for |x|/x, the left limit at 0 is −1 while the right limit is +1.",
-    sectionId: "9"
-  },
-  obj9: {
-    question: "What is one-sided continuity?",
-    answer: "A function is continuous from the left at a if lim(x→a⁻) f(x) = f(a), and continuous from the right if lim(x→a⁺) f(x) = f(a). Full continuity requires both. On closed intervals, endpoints use one-sided continuity.",
-    sectionId: "10"
   }
 }
 
@@ -2676,19 +2659,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits/one-sided"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -2829,6 +2799,22 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`One-Sided Limits FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2866,12 +2852,6 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

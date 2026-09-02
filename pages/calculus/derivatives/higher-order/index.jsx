@@ -1224,6 +1224,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1980,50 +1981,36 @@ Each successive derivative captures a finer layer of a function's behavior. The 
 
 
 
+// FAQ pass: cut the seven that named their own h2 — notation, the second
+// derivative, polynomials, exponentials, sine and cosine, Taylor series,
+// smoothness classes. Kept the 1/x and ln x formulas (heading says only
+// "Specific Forms") and refocused the kinematics one onto jerk, since
+// "Physical Interpretation" surfaces none of the names. Added two
+// superscript traps from the notation section and the non-analytic case.
 const faqQuestions = {
   obj1: {
-    question: "What is the notation for higher order derivatives?",
-    answer: "In Lagrange notation: f', f'', f''' for the first three, then f⁽⁴⁾, f⁽⁵⁾, f⁽ⁿ⁾ with parentheses to distinguish from exponents. In Leibniz notation: dⁿy/dxⁿ. The second derivative d²y/dx² means differentiating dy/dx with respect to x.",
+    question: "Why is the nth derivative written f⁽ⁿ⁾ with parentheses?",
+    answer: "Because the superscript slot is already crowded. Without parentheses, fⁿ reads as a power, f∘ⁿ is n-fold [composition](!/functions/composition), and f⁻¹ is the [inverse](!/functions/inverse) — three other meanings competing for the same position. The parentheses mark the number as a derivative count and nothing else. Primes handle orders one through three; past that they stop being countable.",
     sectionId: "notation"
   },
   obj2: {
-    question: "What does the second derivative tell you?",
-    answer: "The second derivative f''(x) measures the rate of change of slope. Where f'' > 0, the function is concave up (bending upward). Where f'' < 0, it's concave down. At critical points, f'' > 0 indicates a local minimum, f'' < 0 a local maximum.",
-    sectionId: "2"
+    question: "Why is the second derivative written d²y/dx² and not d²y/d²x?",
+    answer: "Because the two exponents count different things. In the numerator, d² records that the operator d has been applied twice to y. In the denominator, dx² is really (dx)² — the increment dx squared, from the dimensional bookkeeping. The whole symbol is one operator applied to y, not a fraction of d²y over dx².",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What are velocity, acceleration, and jerk?",
-    answer: "For position s(t): velocity s'(t) is the first derivative (rate of position change), acceleration s''(t) is the second derivative (rate of velocity change), and jerk s'''(t) is the third derivative (rate of acceleration change, felt as sudden pushes or lurches).",
+    question: "What is jerk in calculus?",
+    answer: "Jerk is the third derivative of position with respect to time — the rate at which acceleration changes. You feel it as a sudden lurch rather than as speed or force, which is why elevator, roller-coaster, and vehicle design all work to keep it small. The fourth, fifth, and sixth derivatives are sometimes called snap, crackle, and pop.",
     sectionId: "3"
   },
   obj4: {
-    question: "What happens when you differentiate a polynomial repeatedly?",
-    answer: "Each differentiation reduces the degree by one. A degree-n polynomial becomes constant after n differentiations and zero after n+1. The nth derivative of xⁿ is n! (n factorial). This termination property distinguishes polynomials from transcendental functions.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the nth derivative of e^x?",
-    answer: "The nth derivative of eˣ is eˣ for all n ≥ 1—it's unchanged by differentiation. For e^(ax), each differentiation multiplies by a, so the nth derivative is aⁿe^(ax). No other elementary function (except zero) has this self-replicating property.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the pattern for derivatives of sine and cosine?",
-    answer: "Derivatives of sin x cycle with period 4: sin x → cos x → −sin x → −cos x → sin x. The nth derivative is sin(x + nπ/2). Same for cosine: cos(x + nπ/2). For sin(ax), the pattern becomes aⁿsin(ax + nπ/2).",
-    sectionId: "6"
-  },
-  obj7: {
     question: "What is the nth derivative of 1/x and ln x?",
-    answer: "For 1/x: the nth derivative is (−1)ⁿ·n!/x^(n+1). For ln x: the nth derivative (n ≥ 1) is (−1)^(n−1)·(n−1)!/xⁿ. These closed-form expressions allow computing high-order derivatives without repeated differentiation.",
+    answer: "For 1/x the nth derivative is (−1)ⁿ·n!/x^(n+1); for ln x it is (−1)^(n−1)·(n−1)!/xⁿ. The two are the same pattern shifted by one step, because the first derivative of ln x is 1/x. Each differentiation multiplies by one more negative integer, which is where the factorial and the alternating sign both come from.",
     sectionId: "7"
   },
-  obj8: {
-    question: "How do higher derivatives connect to Taylor series?",
-    answer: "The Taylor series f(x) = Σ f⁽ⁿ⁾(a)/n! · (x−a)ⁿ uses all higher derivatives at the center point a. Each coefficient f⁽ⁿ⁾(a)/n! controls one term. For analytic functions, knowing all derivatives at one point reconstructs the entire function nearby.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "What are smoothness classes like C¹ and C∞?",
-    answer: "A function is Cⁿ if its first n derivatives exist and are continuous. C⁰ means continuous, C¹ means continuously differentiable, C∞ means infinitely differentiable (smooth). Polynomials, eˣ, sin x, cos x are C∞. Some C∞ functions are not analytic—their Taylor series doesn't converge to the function.",
+  obj5: {
+    question: "Is every smooth function equal to its Taylor series?",
+    answer: "No. A function can have derivatives of every order and still not be analytic. The standard example is f(x) = e^(−1/x²) with f(0) = 0: every derivative at the origin is zero, so its Taylor series there is identically zero, yet the function is positive everywhere else. Smooth guarantees the series exists, not that it converges to f.",
     sectionId: "9"
   }
 }
@@ -2097,19 +2084,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/higher-order"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -2268,6 +2242,22 @@ export default function PageTemplate({
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Higher-Order Derivatives FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -2419,13 +2409,6 @@ export default function PageTemplate({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

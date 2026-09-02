@@ -446,7 +446,7 @@
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Trace of a Matrix</h1>
 //    <br/>
 //    <div style={{width:'80%',margin:'auto'}}>
-//    <TraceWrapper/>
+//    <TraceWrapper explanations={explanations}/>
 //    </div>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
@@ -495,6 +495,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TraceWrapper from '../../../../app/components/linear-algebra copy/matrix/TraceWrapper'
+import traceDiagrams from '../../../../app/components/linear-algebra copy/matrix/traceDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -681,11 +683,98 @@ Set the visualizer to $3 \\times 3$ and step through to see this picking-out pro
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `Scene 0: the Question, Before Anything Is Highlighted`,
+      content: `The player opens on a deliberately blank slate. The matrix $A$ is drawn with every cell in its neutral grey, no diagonal marked, no running sum on screen — just the question of what the trace of this matrix is.
+
+That restraint is the point. Before any procedure runs, the only thing established is that $A$ is square, $4 \times 4$ at the default dimension, and that a single number is about to be extracted from it.`,
+      before: ``,
+      after: `Squareness is the one precondition worth dwelling on. The trace is defined only for square matrices, because it needs entries where the row index and the column index agree — and in a $3 \times 5$ matrix there is no $a_{4,4}$ to reach for.
+
+That is also why the dimension control offers a single number rather than a pair. Changing it from 4 to 7 rebuilds the scene list with three more sweep steps, but it can never produce a non-square matrix to take the trace of.`,
+      link: '',
+    },
+    obj12: {
+      title: `Scene 1: Revealing the Main Diagonal`,
+      content: `The next scene turns exactly four cells blue — $a_{1,1}$, $a_{2,2}$, $a_{3,3}$ and $a_{4,4}$ — and leaves the other twelve grey.
+
+Those four are the **main diagonal**: the cells whose row index equals their column index. Everything the trace does happens on them, and the twelve grey cells play no part in the calculation at all.`,
+      before: ``,
+      after: `A $4 \times 4$ matrix holds sixteen numbers and the trace consults four of them, so it throws away three quarters of the matrix. That is a severe compression, and it is fair to ask what survives it.
+
+Quite a lot, as it turns out. The trace is unchanged by transposing, since transposing swaps $a_{i,j}$ with $a_{j,i}$ and leaves $a_{i,i}$ exactly where it was. It also equals the sum of the eigenvalues — so this fixed handful of cells encodes something about the matrix as a transformation, not merely about its bookkeeping. The [key properties](!#key-properties) section takes that further.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Sweep: One Diagonal Entry at a Time`,
+      content: `The middle scenes walk the diagonal from top-left to bottom-right, one cell per step, and the colouring carries three distinct meanings at once:
+
+- **solid green** — already added to the running sum
+- **solid blue, slightly enlarged** — the entry being added right now
+- **dashed green outline** — on the diagonal, still to come
+
+The frozen picture below is the second sweep step. One entry is behind it, one is current, and two are still pending, so all three states are visible together.`,
+      before: ``,
+      after: `The formula line beneath the matrix grows in step with the colouring, so the sum is assembled in front of you rather than presented finished. At this point it reads $a_{1,1} + a_{2,2}$, with the remaining terms greyed until their turn.
+
+Nothing here depends on the order. Addition is commutative, so sweeping bottom-right to top-left, or in any order at all, produces the same total — the left-to-right walk is a presentational choice, not part of the definition.`,
+      link: '',
+    },
+    obj14: {
+      title: `The Completed Trace`,
+      content: `The final scene turns all four diagonal cells solid green and states the result in closed form:
+
+$\operatorname{tr}(A) = \sum_i a_{i,i}$
+
+with every off-diagonal entry of $A$ formally ignored.`,
+      before: ``,
+      after: `Written as a sum over $i$, the definition is size-independent: it reads identically whether the matrix is $2 \times 2$ or $10 \times 10$, which is exactly what the dimension control demonstrates when you change $n$ and replay.
+
+The compact form is also what makes the algebraic properties easy to check. Linearity, $\operatorname{tr}(A + B) = \operatorname{tr}(A) + \operatorname{tr}(B)$, follows immediately because addition is entrywise and the diagonal of a sum is the sum of the diagonals. The cyclic property $\operatorname{tr}(AB) = \operatorname{tr}(BA)$ takes a little more work but comes from the same summation, and it is the reason the trace is invariant under a change of basis.`,
+      link: '',
+    },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built by calling TraceWrapper's own buildScenes(4) and rendering the chosen
+     scenes through frozenMatrixSvg, so the cells and colours are the tool's own.
+     See app/components/linear-algebra copy/matrix/frozenMatrixSvg.js. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: traceDiagrams[key], caption, text })
+
+  const stateUnits = {
+    pose: unit('pose', 'Scene 0, frozen',
+      'Sixteen neutral cells and nothing else - no diagonal marked, no running sum. The only fact ' +
+      'established so far is that A is square, which is the one thing the trace requires.'),
+    diagonal: unit('diagonal', 'Scene 1, frozen',
+      'The four cells where the row index equals the column index turn blue. The other twelve stay grey ' +
+      'and take no part in the calculation.'),
+    sweep: unit('sweep', 'Sweep step 2 of 4, frozen',
+      'Three states at once: a11 solid green (already counted), a22 blue and slightly enlarged (being ' +
+      'added now), a33 and a44 dashed (still pending).'),
+    complete: unit('complete', 'Final scene, frozen',
+      'All four diagonal cells solid green. The caption states the closed form, sum over i of a(i,i), ' +
+      'with every off-diagonal entry formally ignored.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     TraceWrapper had no explanations prop; one was added additively and defaults
+     to null, so the scene captions are unchanged when nothing is passed. The
+     caption is rendered with dangerouslySetInnerHTML, so these are raw HTML with
+     <a href="#slug"> anchors rather than markdown. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#scene-order" style="color:#1d4ed8;font-weight:600">the scene order</a></div>`
+
+  const explanations = {
+    pose: note('Nothing is highlighted yet - only squareness has been established.', 'the-opening-scene', 'Learn more about the opening scene'),
+    diagonal: note('Four cells in, twelve out: the trace reads only where the row index equals the column index.', 'revealing-the-diagonal', 'Learn more about the main diagonal'),
+    sweep: note('Counted, current and pending are three different colours on the same diagonal.', 'the-diagonal-sweep', 'Learn more about the sweep'),
+    complete: note('The closed form is size-independent, which is what the dimension control demonstrates.', 'the-completed-trace', 'Learn more about the completed trace'),
   }
 
 
@@ -805,6 +894,8 @@ Set the visualizer to $3 \\times 3$ and step through to see this picking-out pro
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -822,59 +913,47 @@ Set the visualizer to $3 \\times 3$ and step through to see this picking-out pro
   }
 }
 
-export default function MatrixTraceVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function MatrixTraceVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections=[
-    // {
-    //     id:'0',
-    //     title:sectionsContent.obj0.title,
-    //     link:sectionsContent.obj0.link,
-    //     content:[
-    //       sectionsContent.obj0.content,
-    //     ]
-    // },
-    { id: '1',  title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
-    { id: '2',  title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
-    { id: '3',  title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
-    { id: '4',  title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
-    { id: '5',  title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
-    { id: '6',  title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
-    { id: '7',  title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
-    { id: '8',  title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
-    { id: '9',  title: sectionsContent.obj9.title,  link: sectionsContent.obj9.link,  content: [sectionsContent.obj9.content] },
-    { id: '10', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
-    // { id: '11', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
-    // { id: '12', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
-    // { id: '13', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
-    // { id: '14', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
-    // { id: '15', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-
+    // obj0 Key Terms was defined but rendered nowhere - its section entry and the
+    // KeyTermsCard were both commented out, so the content was invisible. Restored.
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-scene-player'),
+    plain('obj3', 'choosing-the-dimension'),
+    plain('obj4', 'scene-order'),
+    stateRow('obj11', 'the-opening-scene', 'pose'),
+    stateRow('obj12', 'revealing-the-diagonal', 'diagonal'),
+    stateRow('obj13', 'the-diagonal-sweep', 'sweep'),
+    stateRow('obj14', 'the-completed-trace', 'complete'),
+    plain('obj5', 'what-the-trace-is'),
+    plain('obj6', 'key-properties'),
+    plain('obj7', 'why-it-matters'),
+    plain('obj8', 'worked-example'),
+    plain('obj9', 'common-mistakes'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
    <>
@@ -931,7 +1010,7 @@ export default function MatrixTraceVisualizer({ seoData, sectionsContent, introC
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Trace of a Matrix</h1>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
-   <TraceWrapper/>
+   <TraceWrapper explanations={explanations}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

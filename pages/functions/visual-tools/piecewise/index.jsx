@@ -946,6 +946,7 @@ Together with the [hole](!#the-removable-hole), this preset completes the discon
         keywords: keyWords.join(", "),
         url: "/functions/visual-tools/piecewise",
         name: "Piecewise Function Builder",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="60" x2="74" y2="60" stroke="#B5D4F4" stroke-width="0.9"/><line x1="12" y1="10" x2="12" y2="68" stroke="#B5D4F4" stroke-width="0.9"/><line x1="14" y1="50" x2="30" y2="38" stroke="#85B7EB" stroke-width="2"/><line x1="30" y1="26" x2="48" y2="26" stroke="#FAC775" stroke-width="2"/><path d="M 48 44 Q 58 52 70 30" fill="none" stroke="#97C459" stroke-width="2"/><circle cx="14" cy="50" r="2.6" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="30" cy="38" r="2.6" fill="none" stroke="#0C447C" stroke-width="1.4"/><circle cx="30" cy="26" r="2.6" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="48" cy="26" r="2.6" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="48" cy="44" r="2.6" fill="none" stroke="#27500A" stroke-width="1.4"/></svg>`,
         hubDescription: "Build piecewise functions piece by piece — pick a shape from a catalog, set each piece's interval and open or closed endpoints, and watch the tool flag overlaps, gaps, jumps, and removable discontinuities in real time at every boundary."
       },
 

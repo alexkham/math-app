@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PascalsTriangle from '../../../../app/components/combinatorics/new-visualizers/general/PascalTriangle'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 
 
 export async function getStaticProps(){
@@ -523,15 +525,15 @@ export async function getStaticProps(){
 
 **Binomial coefficient $\\binom{n}{r}$** — the number of ways to choose $r$ items from $n$ distinct items without order. Equivalently the coefficient of $a^{n-r} b^r$ in the expansion of $(a + b)^n$. Computed as $\\binom{n}{r} = n! / (r! \\cdot (n-r)!)$.
 
-**Pascal's identity** — the recurrence that builds the triangle: $\\binom{n}{r} = \\binom{n-1}{r-1} + \\binom{n-1}{r}$. Every interior cell is the sum of the two cells above it.
+**Pascal's identity** — the [recurrence that builds the triangle](!#mode-1-pascals-identity): $\\binom{n}{r} = \\binom{n-1}{r-1} + \\binom{n-1}{r}$. Every interior cell is the sum of the two cells above it.
 
-**Hockey-stick identity** — a diagonal sum: $\\sum_{i=r}^{n} \\binom{i}{r} = \\binom{n+1}{r+1}$. The starting diagonal cells form the *stick*; the cell below-and-across is the *puck*.
+**Hockey-stick identity** — a [diagonal sum](!#mode-2-hockey-stick): $\\sum_{i=r}^{n} \\binom{i}{r} = \\binom{n+1}{r+1}$. The starting diagonal cells form the **stick**; the cell below-and-across is the **puck**.
 
-**Row sum** — the cells in row $n$ sum to $2^n$, counting the total number of subsets of an $n$-element set across all sizes.
+**Row sum** — the [cells in row n sum to 2ⁿ](!#mode-3-row-sum), counting the total number of subsets of an $n$-element set across all sizes.
 
-**Symmetry** — within each row, $\\binom{n}{r} = \\binom{n}{n-r}$. Choosing $r$ items to include is the same as choosing $n - r$ items to exclude.
+**Symmetry** — [within each row](!#mode-4-symmetry), $\\binom{n}{r} = \\binom{n}{n-r}$. Choosing $r$ items to include is the same as choosing $n - r$ items to exclude.
 
-**Focus** — the cell currently selected by clicking. The four modes highlight different relatives of the focus cell.`,
+**Focus** — the [cell currently selected](!#clicking-cells-and-focus) by clicking. The four modes highlight different relatives of the focus cell.`,
       before: ``,
       after: ``,
       link: '',
@@ -543,9 +545,9 @@ export async function getStaticProps(){
 
 • **The triangle** — clickable cells arranged in rows $0$ through $N$. The focused cell is filled in accent blue; its relatives (depending on mode) appear with amber or green outlines.
 
-• **A polynomial banner** below the triangle showing the focused row's expansion of $(a + b)^n$. The triangle's row values *are* the polynomial's coefficients.
+• [A polynomial banner](!#the-polynomial-banner) below the triangle showing the focused row's expansion of $(a + b)^n$. The triangle's row values **are** the polynomial's coefficients.
 
-• **A mode group** in the control bar with four buttons: *Pascal's identity*, *Hockey stick*, *Row sum*, *Symmetry*.
+• **A mode group** in the control bar with four buttons: [Pascal's identity](!#mode-1-pascals-identity), [Hockey stick](!#mode-2-hockey-stick), [Row sum](!#mode-3-row-sum), [Symmetry](!#mode-4-symmetry).
 
 • **A right info panel** showing the factorial breakdown $\\binom{n}{r} = n! / (r! \\cdot (n-r)!)$ for the focused cell, plus an identity-specific arithmetic block.
 
@@ -557,9 +559,11 @@ To explore:
 
 • **Adjust N** to add or remove rows.
 
-• **Clear selection** to return to an unfocused view.`,
+• **Clear selection** to return to [an unfocused view](!#clicking-cells-and-focus).`,
       before: ``,
-      after: ``,
+      after: `Unlike the ten counting scenes in this section, nothing here animates. The triangle is a **static object** to be interrogated: the four lenses are questions you ask of a cell, not steps a build passes through — which is why the tool opens already focused rather than waiting for a Play button.
+
+That makes the reading order yours to choose. A useful circuit is to keep one cell selected and cycle all four modes: [the identity](!#mode-1-pascals-identity) shows where the number came from, [the hockey stick](!#mode-2-hockey-stick) where it accumulates, [the row sum](!#mode-3-row-sum) what its neighbours total, and [symmetry](!#mode-4-symmetry) which other cell says the same thing.`,
       link: '',
     },
 
@@ -579,9 +583,11 @@ The focused cell renders in solid accent blue with white text, and its label $C(
 
 If you reduce $N$ below the focused cell's row, the focus clears automatically. Press **Clear selection** in the control bar to clear focus manually; the cells return to their default outlined state and the right panel shows a hint to click any cell.
 
-The polynomial banner always shows the row of the focused cell (or row $0$ when nothing is focused).`,
+[The polynomial banner](!#the-polynomial-banner) always shows the row of the focused cell (or row $0$ when nothing is focused).`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the triangle with nothing selected: every cell in its dashed neutral outline, no connectors, and the banner fallen back to row $0$ — the bare $(a + b)^0 = 1$.
+
+Worth a moment before clicking anything: unfocused, the triangle is just a table of $\\binom{n}{r}$ values, and its numbers are already meaningful — every entry counts subsets of some size. The lenses add nothing to the numbers; they only draw the relationships that were always there between them.`,
       link: '',
     },
 
@@ -591,7 +597,7 @@ The polynomial banner always shows the row of the focused cell (or row $0$ when 
 
 $$\\binom{n}{r} = \\binom{n-1}{r-1} + \\binom{n-1}{r}$$
 
-In this mode, the focused cell is connected to its two parents by dashed accent lines, and both parents are outlined in amber as *related* cells. The right panel shows the concrete arithmetic — for example, with focus on $\\binom{4}{2}$:
+In this mode, the focused cell is connected to its two parents by dashed accent lines, and both parents are outlined in amber as **related** cells. The right panel shows the concrete arithmetic — for example, with focus on $\\binom{4}{2}$:
 
 $\\binom{4}{2} = \\binom{3}{1} + \\binom{3}{2} = 3 + 3 = 6$.
 
@@ -603,9 +609,11 @@ Edge cases:
 
 • **Right edge** $\\binom{n}{n}$ has only one parent $\\binom{n-1}{n-1}$, also $1$, so right edges are all $1$.
 
-This identity is what *builds* the triangle — knowing the top row, you can construct every subsequent row by addition alone, without ever computing factorials.`,
+This identity is what **builds** the triangle — knowing the top row, you can construct every subsequent row by addition alone, without ever computing factorials.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is exactly the worked example: $\\binom{4}{2}$ in accent blue, its two parents $\\binom{3}{1}$ and $\\binom{3}{2}$ in amber, and dashed lines running down from each into the focus. Three plus three, drawn.
+
+The identity's combinatorial proof is worth carrying alongside the picture: single out one of the $n$ items. Subsets of size $r$ either contain it — leaving $\\binom{n-1}{r-1}$ ways to fill the rest — or they don't, leaving $\\binom{n-1}{r}$. Two dashed lines, two cases, no arithmetic required. That argument recurs across [the other identities](!#why-these-identities-matter).`,
       link: '',
     },
 
@@ -615,7 +623,7 @@ This identity is what *builds* the triangle — knowing the top row, you can con
 
 $$\\sum_{i=r}^{n} \\binom{i}{r} = \\binom{n+1}{r+1}$$
 
-In this mode, treat the focused cell as the *puck* — the cell where all the action ends up. The triangle highlights the diagonal stick (cells one column to the left, running from the puck's row back up to the row matching that column) and draws an amber path connecting them down to the puck.
+In this mode, treat the focused cell as the **puck** — the cell where all the action ends up. The triangle highlights the diagonal stick (cells one column to the left, running from the puck's row back up to the row matching that column) and draws an amber path connecting them down to the puck.
 
 For example, focusing on $\\binom{5}{2} = 10$:
 
@@ -627,7 +635,9 @@ The mode reveals why the formula for triangular numbers $1 + 2 + \\dots + n = \\
 
 If the focused cell is in column $0$, no valid stick exists; the right panel shows a hint to pick a cell with column ≥ $1$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the worked example drawn: the amber path runs up column $1$ through $1, 2, 3, 4$ and then hooks right into the puck $\\binom{5}{2} = 10$. The bend at the end is where the identity gets its name.
+
+The proof mirrors the shape. To choose $2$ items from $\\{1, \\dots, 5\\}$, ask what the **larger** item is: if it is $i$, the smaller one has $i - 1$ choices below it. Summing $1 + 2 + 3 + 4$ over the possible maxima gives every pair exactly once — which is also why the triangular numbers live along this diagonal, as [the identities section](!#why-these-identities-matter) notes.`,
       link: '',
     },
 
@@ -637,7 +647,7 @@ If the focused cell is in column $0$, no valid stick exists; the right panel sho
 
 $$\\sum_{r=0}^{n} \\binom{n}{r} = 2^n$$
 
-In this mode, every cell in the focused row (other than the focus itself) is outlined in amber as *related*. A label appears on the right edge of the row showing *sum = $2^n$*. The right panel lists the full sum:
+In this mode, every cell in the focused row (other than the focus itself) is outlined in amber as **related**. A label appears on the right edge of the row showing *sum = $2^n$*. The right panel lists the full sum:
 
 For row $4$: $\\binom{4}{0} + \\binom{4}{1} + \\binom{4}{2} + \\binom{4}{3} + \\binom{4}{4} = 1 + 4 + 6 + 4 + 1 = 16 = 2^4$.
 
@@ -645,7 +655,9 @@ Combinatorial interpretation: each binomial coefficient $\\binom{n}{r}$ counts s
 
 This identity is the source of many later results — for example, the expected size of a random subset of $\\{1, \\dots, n\\}$ is $n/2$ because the row sum decomposition is symmetric around $r = n/2$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above shows row $4$ lit end to end with the right-edge label reading *sum = 16 = 2⁴*. Every cell of the row participates; the focus is merely where you clicked.
+
+The doubling is visible in the geometry too: each row is built from the one above by [Pascal's rule](!#mode-1-pascals-identity), and since every entry above contributes to exactly two entries below, each row total is twice its predecessor. Powers of two are what repeated pairwise addition inevitably produces.`,
       link: '',
     },
 
@@ -665,9 +677,11 @@ Combinatorial reading: choosing $r$ items to **include** in a selection is the s
 
 Special case — the center of an even-length row maps to itself. Focusing on $\\binom{4}{2}$ when $n - r = r$ gives a self-symmetry; the right panel notes this and skips the arc since the focus and the mirror coincide.
 
-This identity is why the triangle is left-right symmetric and why so many identities have *dual* forms — you can always swap $r$ with $n - r$ to get an equivalent statement.`,
+This identity is why the triangle is left-right symmetric and why so many identities have **dual** forms — you can always swap $r$ with $n - r$ to get an equivalent statement.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is that example with the triangle extended to row $7$: $\\binom{7}{2}$ in blue, its mirror $\\binom{7}{5}$ in green, and the arc arching between them over the row.
+
+Symmetry is the identity that most often saves work in practice. Faced with $\\binom{100}{97}$, nobody expands $97!$ — they read it as $\\binom{100}{3}$ and multiply three numbers. Whenever $r$ exceeds half of $n$, the mirror cell is the easier computation, and the arc above says the two are the same number seen from opposite ends of the row.`,
       link: '',
     },
 
@@ -679,7 +693,7 @@ For row $4$:
 
 $$(a + b)^4 = a^4 + 4 a^3 b + 6 a^2 b^2 + 4 a b^3 + b^4$$
 
-This is the **binomial theorem**: the coefficient of $a^{n-r} b^r$ is exactly $\\binom{n}{r}$. The triangle's row values *are* the polynomial's coefficients, in order.
+This is the [binomial theorem](!#what-are-binomial-coefficients): the coefficient of $a^{n-r} b^r$ is exactly $\\binom{n}{r}$. The triangle's row values **are** the polynomial's coefficients, in order.
 
 The banner updates whenever you focus a cell in a different row, making it easy to see why each row of Pascal's triangle answers two questions at once:
 
@@ -695,21 +709,21 @@ For higher $n$ the polynomial is rendered at a smaller font to fit; the actual v
 
     obj8: {
       title: `What Are Binomial Coefficients`,
-      content: `The **binomial coefficient** $\\binom{n}{r}$ — read *n choose r* — is one of the most important numbers in combinatorics. It admits several equivalent definitions:
+      content: `The **binomial coefficient** $\\binom{n}{r}$ — read **n choose r** — is one of the most important numbers in combinatorics. It admits several equivalent definitions:
 
 **Counting subsets.** $\\binom{n}{r}$ is the number of $r$-element subsets of an $n$-element set.
 
-**Polynomial coefficient.** $\\binom{n}{r}$ is the coefficient of $a^{n-r} b^r$ in $(a + b)^n$. This is the *binomial theorem*:
+**Polynomial coefficient.** $\\binom{n}{r}$ is the coefficient of $a^{n-r} b^r$ in $(a + b)^n$. This is the **binomial theorem**:
 
 $$(a + b)^n = \\sum_{r=0}^{n} \\binom{n}{r} a^{n-r} b^r$$
 
 **Factorial formula.** $\\binom{n}{r} = \\dfrac{n!}{r! \\, (n - r)!}$.
 
-**Recursive definition.** $\\binom{n}{r} = \\binom{n-1}{r-1} + \\binom{n-1}{r}$ with edge values $\\binom{n}{0} = \\binom{n}{n} = 1$.
+**Recursive definition.** [Pascal's rule](!#mode-1-pascals-identity) $\\binom{n}{r} = \\binom{n-1}{r-1} + \\binom{n-1}{r}$ with edge values $\\binom{n}{0} = \\binom{n}{n} = 1$.
 
 Examples:
 
-• $\\binom{5}{2} = 10$: there are $10$ ways to choose $2$ items from $5$, and the coefficient of $a^3 b^2$ in $(a+b)^5$ is $10$.
+• $\\binom{5}{2} = 10$: there are $10$ ways to choose $2$ items from $5$, the coefficient of $a^3 b^2$ in $(a+b)^5$ — and the [hockey-stick puck](!#mode-2-hockey-stick) at the end of the column-1 diagonal.
 
 • $\\binom{52}{5} = 2{,}598{,}960$: the number of $5$-card poker hands from a standard deck.
 
@@ -723,15 +737,15 @@ For deeper coverage including identities, generating functions, and applications
 
     obj9: {
       title: `Why These Identities Matter`,
-      content: `The four identities highlighted in this tool aren't isolated curiosities — they're the workhorses of combinatorial proofs and probability calculations.
+      content: `The four identities highlighted in this tool aren't isolated curiosities — they're the workhorses of combinatorial proofs and probability calculations. Each has its own lens: [Pascal's identity](!#mode-1-pascals-identity), [hockey stick](!#mode-2-hockey-stick), [row sum](!#mode-3-row-sum), and [symmetry](!#mode-4-symmetry).
 
-**Pascal's identity** is the recursive backbone. It lets you compute any $\\binom{n}{r}$ from smaller ones without ever multiplying or dividing factorials. It also gives a *combinatorial proof*: pick a specific element; either you include it (giving $\\binom{n-1}{r-1}$) or you don't (giving $\\binom{n-1}{r}$).
+**Pascal's identity** is the recursive backbone. It lets you compute any $\\binom{n}{r}$ from smaller ones without ever multiplying or dividing factorials. It also gives a **combinatorial proof**: pick a specific element; either you include it (giving $\\binom{n-1}{r-1}$) or you don't (giving $\\binom{n-1}{r}$).
 
 **Hockey-stick** appears in counting problems where you fix the **maximum** element of a subset. The number of subsets of $\\{1, \\dots, n+1\\}$ with $r+1$ elements is $\\binom{n+1}{r+1}$, and grouping by the max element gives the diagonal sum.
 
 **Row sum $2^n$** is the source of countless probability results — it underlies binomial distribution normalization, the cardinality of power sets, and the fact that $n$-bit binary strings number $2^n$.
 
-**Symmetry** is invoked whenever a problem becomes easier from the *complementary* viewpoint — for example, computing $\\binom{100}{97}$ as $\\binom{100}{3} = 161{,}700$ rather than evaluating $97!$ directly.
+**Symmetry** is invoked whenever a problem becomes easier from the **complementary** viewpoint — for example, computing $\\binom{100}{97}$ as $\\binom{100}{3} = 161{,}700$ rather than evaluating $97!$ directly.
 
 Together, these four are sufficient to derive most other binomial identities by combination and induction.`,
       before: ``,
@@ -743,7 +757,7 @@ Together, these four are sufficient to derive most other binomial identities by 
       title: `Related Concepts`,
       content: `**Simple combination** — the no-repetition unordered selection. Formula $\\binom{n}{r}$ exactly; the triangle is the lookup table for all such values.
 
-**Binomial theorem** — $(a + b)^n = \\sum_{r=0}^{n} \\binom{n}{r} a^{n-r} b^r$. The triangle visualizes this expansion row by row.
+**Binomial theorem** — $(a + b)^n = \\sum_{r=0}^{n} \\binom{n}{r} a^{n-r} b^r$. The triangle visualizes this expansion row by row, as [the banner](!#the-polynomial-banner) shows.
 
 **Multinomial coefficient** — generalizes the binomial to more than two parts: $\\binom{n}{n_1, n_2, \\dots, n_k} = n! / (n_1! \\cdots n_k!)$. The binomial is the $k = 2$ case.
 
@@ -885,12 +899,40 @@ Together, these four are sufficient to derive most other binomial identities by 
   }
 
 
+  // Frozen-state framed units (Line 1): the unfocused view + the four lenses.
+  const d = pascalTriangleDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    unfocused: u('unfocused', 'No selection, frozen',
+      'Every cell in its dashed neutral outline, no connectors, the banner fallen back to row 0 — the triangle as a plain table of values.'),
+    identity: u('identity', 'Pascal’s identity on C(4, 2), frozen',
+      'The focus in accent blue with its two parents in amber and dashed lines running down into it: 3 + 3 = 6, drawn rather than computed.'),
+    hockey: u('hockey', 'Hockey stick on C(5, 2), frozen',
+      'The amber path runs up column 1 through 1, 2, 3, 4 and hooks right into the puck — the bend that gives the identity its name.'),
+    rowsum: u('rowsum', 'Row sum on row 4, frozen',
+      'The whole row lit end to end with the right-edge label reading sum = 16 = 2⁴: every cell participates, the focus is just where you clicked.'),
+    symmetry: u('symmetry', 'Symmetry on C(7, 2), frozen',
+      'The focus in blue, its mirror C(7, 5) in green, and a green arc arching between them — the same 21 read from either end of the row.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the mode content in
+  // the right panel through processContent — same-page !# anchors work.
+  const explanations = {
+    unfocused: `Nothing is selected yet — the triangle is simply its values. Click any cell and the lenses will draw the relationships already hiding between them. [Learn more about focusing cells](!#clicking-cells-and-focus) · [Getting started](!#getting-started)`,
+    identity: `The two amber parents add up to the blue focus — the rule that builds every row of the triangle from the one above it. [Learn more about Pascal's identity](!#mode-1-pascals-identity) · [Getting started](!#getting-started)`,
+    hockey: `The diagonal stick sums into the puck: fix the largest element of a subset and this sum counts every choice below it. [Learn more about the hockey stick](!#mode-2-hockey-stick) · [Getting started](!#getting-started)`,
+    rowsum: `The whole row totals 2ⁿ — every subset of an n-element set, counted once, sorted by size. [Learn more about row sums](!#mode-3-row-sum) · [Getting started](!#getting-started)`,
+    symmetry: `The focus and its mirror hold the same number: choosing r to include is choosing n − r to leave out. [Learn more about symmetry](!#mode-4-symmetry) · [Getting started](!#getting-started)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Pascal's Triangle: Binomial Coefficients | Learn Math Class",
         description: "Explore Pascal's triangle interactively: click any cell to see Pascal's identity, hockey-stick sum, row sum 2^n, symmetry, and the (a+b)^n expansion live.",
@@ -899,105 +941,54 @@ Together, these four are sufficient to derive most other binomial identities by 
         name: "Pascal's Triangle Visualizer",
         hubDescription: "Click any cell to focus a binomial coefficient C(n, r) and switch between four identity modes — Pascal's rule, the hockey-stick sum, the row sum of 2^n, and C(n, r) = C(n, n − r). A polynomial banner shows the focused row's expansion of (a + b)^n live.",
         category: "Combinations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="33" y1="60" x2="38" y2="64" stroke="#854F0B" stroke-width="1.3"/><line x1="47" y1="60" x2="42" y2="64" stroke="#854F0B" stroke-width="1.3"/><circle cx="40" cy="12" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="33" cy="26" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="47" cy="26" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="26" cy="40" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="40" cy="40" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="54" cy="40" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="19" cy="54" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="33" cy="54" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.4"/><circle cx="47" cy="54" r="6" fill="#FAC775" stroke="#854F0B" stroke-width="1.4"/><circle cx="61" cy="54" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="12" cy="68" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="26" cy="68" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="40" cy="68" r="6" fill="#97C459" stroke="#27500A" stroke-width="1.4"/><circle cx="54" cy="68" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="68" cy="68" r="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><text x="40" y="14.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="33" y="28.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="47" y="28.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="26" y="42.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="40" y="42.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">2</text><text x="54" y="42.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="19" y="56.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="33" y="56.5" font-family="Georgia,serif" font-size="7" fill="#412402" text-anchor="middle">3</text><text x="47" y="56.5" font-family="Georgia,serif" font-size="7" fill="#412402" text-anchor="middle">3</text><text x="61" y="56.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="12" y="70.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="26" y="70.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">4</text><text x="40" y="70.5" font-family="Georgia,serif" font-size="7" fill="#173404" text-anchor="middle">6</text><text x="54" y="70.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">4</text><text x="68" y="70.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text></svg>`
       },
 
     }
   }
 }
 
-export default function PascalTriangleVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PascalTriangleVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  // Same, but keeps a trailing prose block for sections that carry no unit.
+  const plainWithAfter = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content, sectionsContent[obj].after]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
+    plain('obj0', 'key-terms'),
+    plainWithAfter('obj1', 'getting-started'),
+    stateRow('obj2', 'clicking-cells-and-focus', 'unfocused'),
+    stateRow('obj3', 'mode-1-pascals-identity', 'identity'),
+    stateRow('obj4', 'mode-2-hockey-stick', 'hockey'),
+    stateRow('obj5', 'mode-3-row-sum', 'rowsum'),
+    stateRow('obj6', 'mode-4-symmetry', 'symmetry'),
+    plain('obj7', 'the-polynomial-banner'),
+    plain('obj8', 'what-are-binomial-coefficients'),
+    plain('obj9', 'why-these-identities-matter'),
+    plain('obj10', 'related-concepts'),
 
   ]
 
@@ -1055,7 +1046,7 @@ export default function PascalTriangleVisualizer({seoData, sectionsContent, intr
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Pascal&apos;s Triangle</h1>
       <br/>
-      <PascalsTriangle/>
+      <PascalsTriangle explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

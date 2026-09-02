@@ -1070,33 +1070,6 @@ const introContent = {
   content: `A power is an expression built from two components: a base and an exponent. The base is the number being acted on; the exponent dictates how. In the simplest case, the exponent counts repeated multiplications — but that interpretation covers only the starting point. Extending the exponent to zero, negative values, fractions, and irrational numbers requires progressively broader definitions, each consistent with the rules established at the natural-number level.`,
 }
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a power in math?",
-    answer: "A power is an expression consisting of a base and an exponent, written a^n. The base is the number being multiplied, and the exponent controls how many times. For positive integer exponents, a^n means a multiplied by itself n times.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "Why does anything to the zero power equal one?",
-    answer: "The definition a^0 = 1 is forced by the quotient rule. Since a^m divided by a^m equals a^(m-m) = a^0, and any nonzero number divided by itself is 1, a^0 must equal 1. The pattern of dividing successive powers by the base also confirms this result.",
-    sectionId: "4"
-  },
-  obj3: {
-    question: "What does a negative exponent mean?",
-    answer: "A negative exponent produces the reciprocal of the positive power. The expression a^(-n) equals 1/a^n. This extends the descending pattern: each reduction of the exponent by one divides the result by the base.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "How do rational exponents connect to roots?",
-    answer: "A rational exponent m/n means take the nth root and raise to the mth power. The expression a^(m/n) equals the nth root of a^m, or equivalently the nth root of a raised to the m. This bridges exponent notation and radical notation.",
-    sectionId: "6"
-  },
-  obj5: {
-    question: "What are the main laws of exponents?",
-    answer: "The main laws are the product rule a^m times a^n equals a^(m+n), the quotient rule a^m divided by a^n equals a^(m-n), and the power-of-a-power rule (a^m)^n equals a^(mn). These hold for all exponent types: natural, zero, negative, rational, and irrational.",
-    sectionId: "8"
-  }
-}
 
 
 const schemas = {
@@ -1163,19 +1136,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1186,7 +1146,6 @@ const schemas = {
     obj10Table,
     obj11Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Powers & Exponents: Rules and Types | Learn Math Class",
@@ -1200,7 +1159,7 @@ const schemas = {
    }
 
 
- export default function PowersAndExponentsPage({seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, faqQuestions, schemas}) {  
+ export default function PowersAndExponentsPage({seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1420,13 +1379,6 @@ const schemas = {
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -10,6 +10,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -427,56 +428,32 @@ In each case, the laws reduce the expression step by step. Negative exponents ar
 }
 
 
+// FAQ pass: the definition, simplifying, the fraction case, the laws still
+// holding and the worked example each name their own h2. Zero-exponent and
+// $0^0$ questions defer to /algebra/powers/zero-powers, which owns both, as
+// does "why can't 0 have a negative exponent". Kept the sign confusion —
+// no heading addresses it — and added the notation section's traps, led by
+// the $-1$ superscript that means something different everywhere else.
 const faqQuestions = {
   obj1: {
-    question: "What is a negative exponent?",
-    answer: "A negative exponent indicates the reciprocal of the base raised to the positive exponent. For any nonzero a and natural number n: a^(-n) = 1/a^n. For example, 2^(-3) = 1/2³ = 1/8.",
-    sectionId: "3"
+    question: "Does a negative exponent make the answer negative?",
+    answer: "No — the exponent's sign never reaches the answer's sign. $2^{-3} = \\frac{1}{8}$, a positive number; the minus is an instruction to take the reciprocal, not a statement about sign. Sign comes from the base: $(-2)^3 = -8$. The two are independent, so $(-2)^{-3} = \\frac{1}{(-2)^3} = -\\frac{1}{8}$.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "Why is anything to the power of 0 equal to 1?",
-    answer: "The quotient rule forces it: a^n / a^n = a^(n-n) = a^0, and any number divided by itself equals 1. Alternatively, the pattern 3³=27, 3²=9, 3¹=3 continues to 3⁰=1 by dividing by 3 each step.",
-    sectionId: "2"
+    question: "Does $f^{-1}$ mean $\\frac{1}{f}$?",
+    answer: "No, and this is the trap the number case sets. On a number, $a^{-1}$ genuinely is $\\frac{1}{a}$ — a real exponent obeying the exponent laws. Everywhere else the $-1$ superscript is a label, not a power: $f^{-1}$ names the [inverse function](!/functions/inverse), $\\sin^{-1}$ the [arcsine](!/trigonometry/inverse-functions), $A^{-1}$ the [matrix inverse](!/linear-algebra/matrix/inverse). None mean one over.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you simplify negative exponents?",
-    answer: "Move the term with negative exponent across the fraction bar and make the exponent positive. For example, a^(-2) = 1/a², and 1/b^(-3) = b³. In fractions, a^(-2)/b^(-3) = b³/a².",
-    sectionId: "4"
+    question: "How many zeros does $10^{-4}$ have after the decimal point?",
+    answer: "Three, not four. $10^{-4} = 0.0001$ — the exponent counts decimal places, and the leading digit occupies the fourth one. Miscounting here is the standard slip when converting scientific notation by hand. The rule holds generally: $10^{-n}$ puts the $1$ in the $n$-th decimal position, leaving $n - 1$ zeros before it.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "What is 0^0?",
-    answer: "0^0 is undefined or context-dependent. Following a^0 = 1 suggests 0^0 = 1. Following 0^n = 0 suggests 0^0 = 0. In combinatorics and series, 0^0 = 1 by convention; in calculus, it's left indeterminate.",
-    sectionId: "2"
-  },
-  obj5: {
-    question: "Do the laws of exponents work with negative exponents?",
-    answer: "Yes. The definition a^(-n) = 1/a^n was specifically chosen to preserve all exponent laws. Product rule: a^(-2) · a^(-3) = a^(-5). Power rule: (a^(-2))³ = a^(-6). All laws hold for integer exponents.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What does a^(-1) mean?",
-    answer: "a^(-1) equals 1/a, the multiplicative inverse of a. This is the standard notation for reciprocals throughout algebra. For example, 5^(-1) = 1/5 and x^(-1) = 1/x.",
-    sectionId: "4"
-  },
-  obj7: {
-    question: "How do you handle a negative exponent on a fraction?",
-    answer: "A negative exponent on a fraction flips it: (a/b)^(-n) = (b/a)^n. For example, (2/5)^(-3) = (5/2)³ = 125/8. The negative exponent inverts, then the positive exponent applies.",
-    sectionId: "4"
-  },
-  obj8: {
-    question: "Why can't 0 have a negative exponent?",
-    answer: "0^(-n) = 1/0^n = 1/0, which is division by zero. This is undefined. Zero as a base works only for positive exponents, where 0^n = 0.",
-    sectionId: "3"
-  },
-  obj9: {
-    question: "How do you simplify expressions like x³/x⁷?",
-    answer: "Use the quotient rule: x³/x⁷ = x^(3-7) = x^(-4) = 1/x⁴. Both x^(-4) and 1/x⁴ are correct; which form to use depends on context.",
-    sectionId: "6"
-  },
-  obj10: {
-    question: "What is the difference between negative base and negative exponent?",
-    answer: "A negative base like (-2)³ = -8 means multiply -2 by itself. A negative exponent like 2^(-3) = 1/8 means take the reciprocal. They are independent: (-2)^(-3) = 1/(-2)³ = -1/8.",
-    sectionId: "3"
+    question: "Why do scientists write $\\mathrm{m\\,s^{-1}}$ instead of $\\mathrm{m/s}$?",
+    answer: "Because slashes stack ambiguously. In $\\mathrm{m/s/s}$ it is unclear whether the second division applies to the metres or to the first quotient, while $\\mathrm{m\\,s^{-2}}$ has exactly one reading. SI style therefore prefers negative exponents for compound units. The exponent does the same job it does in algebra: $\\mathrm{s^{-1}}$ is one over seconds.",
+    sectionId: "notation"
   }
 }
 
@@ -551,19 +528,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/negative-exponents"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -699,6 +663,22 @@ export default function NegativeExponentsPage({seoData, sectionsContent, introCo
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Negative Exponents FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'8',
     //     title:sectionsContent.obj8.title,
@@ -822,13 +802,6 @@ export default function NegativeExponentsPage({seoData, sectionsContent, introCo
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

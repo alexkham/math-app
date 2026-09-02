@@ -1306,6 +1306,7 @@ import Head from 'next/head'
 import { pmfData } from '@/app/api/db/diagrams/pages/probability/probability-function/pmf/template'
 import DiscreteProbabilityDistributions from '@/app/components/visualizations/probability/discrete-distribution/DiscreteProbabilityDistributions'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -2396,26 +2397,32 @@ This page develops the Probability Mass Function (PMF) as the fundamental object
 }
 
 
+// FAQ pass: the definition, the axioms, the CDF connection and the
+// expectation/variance formulas each name their own h2. The PMF-vs-PDF
+// question goes on two counts: this page has a "Mass vs. Density" heading,
+// and the parent page owns the comparison since it spans both children.
+// Replaced with discrete-specific traps from Common Mistakes; the notation
+// section here defers to probability-function#notation for the P/p split.
 const faqQuestions = {
   obj1: {
-    question: "What is a probability mass function (PMF)?",
-    answer: "A probability mass function p_X(x) gives the probability that a discrete random variable X takes exactly the value x. It is defined as p_X(x) = P(X = x). The PMF assigns probability directly to each value in the support of X, and the total of all these probabilities equals 1."
+    question: "Does P(X > 4) include 4?",
+    answer: "No — a strict inequality excludes the endpoint. For a die, P(X > 4) is p(5) + p(6), not p(4) + p(5) + p(6). This matters far more for discrete variables than continuous ones: dropping or adding a single value changes the answer by that value's whole probability, whereas for a continuous variable an endpoint contributes nothing.",
+    sectionId: "12"
   },
   obj2: {
-    question: "What two axioms must every valid PMF satisfy?",
-    answer: "First, non-negativity: p_X(x) must be greater than or equal to zero for all x. Second, normalization: the sum of p_X(x) over all values in the support must equal exactly 1. Any function that fails either condition is not a valid probability mass function."
+    question: "Why can P(2 < X < 3) be zero for a discrete variable?",
+    answer: "Because a discrete variable takes isolated values, and there may be nothing between 2 and 3 for it to land on. An interval containing no point of the support carries no probability at all. Continuous variables never behave this way — any interval of positive length inside their support carries positive probability.",
+    sectionId: "12"
   },
   obj3: {
-    question: "What is the difference between a PMF and a PDF?",
-    answer: "A PMF describes discrete random variables, where probability concentrates at specific points and P(X = x) can be a nonzero value. A PDF describes continuous random variables, where probability spreads across intervals and P(X = x) equals zero at every individual point. PMF values are probabilities; PDF values are densities."
+    question: "What is the difference between the support and the domain of a PMF?",
+    answer: "The PMF is technically defined everywhere — it returns 0 outside the values the variable can take. The support is the smaller set where p_X(k) > 0. Only the support matters for calculations, since summing over anything else adds zeros. The two words are often used loosely as synonyms, but the distinction saves wasted work on infinite domains.",
+    sectionId: "2"
   },
   obj4: {
-    question: "How are the PMF and CDF related?",
-    answer: "The CDF F_X(x) is obtained by summing the PMF over all values less than or equal to x: F_X(x) equals the sum of p_X(k) for k less than or equal to x. The PMF is recovered from the CDF by taking the size of each jump: p_X(k) equals F_X(k) minus F_X(k-1). For discrete variables, the CDF is a step function."
-  },
-  obj5: {
-    question: "How do you compute the expected value and variance from a PMF?",
-    answer: "The expected value is E[X] = sum of k times p_X(k) over all values k in the support. The variance is Var(X) = sum of (k minus E[X]) squared times p_X(k), or equivalently E[X squared] minus (E[X]) squared. Both summaries are computed directly from the PMF by weighting outcomes by their probabilities."
+    question: "When do you need the subscript in p_X(x)?",
+    answer: "Only when more than one variable is in play. The subscript names which variable the function belongs to, so p_X(x) and p_Y(y) stay distinct on the same page. With a single variable in context you can drop it and write p(x). It becomes mandatory once joint and marginal functions appear together.",
+    sectionId: "13"
   },
 }
 
@@ -2489,19 +2496,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/probability/probability-function/pmf"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -2764,8 +2758,23 @@ export default function PMFPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
-   
-    
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`PMF FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
+
     // {
     //     id:'15',
     //     title:sectionsContent.obj15.title,
@@ -2833,13 +2842,6 @@ export default function PMFPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

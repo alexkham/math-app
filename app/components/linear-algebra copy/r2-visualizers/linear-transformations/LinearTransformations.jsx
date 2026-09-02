@@ -1214,6 +1214,7 @@ export {
   ExplanationCard, LiveDataCard, AnimationCard, CanvasReadout,
   useTransformState, useAnimationState,
   Math2D, SVGRender,
+  SVG_STYLE_CSS,
   SCENARIOS, SCENARIO_GROUPS, SCENARIO_CUSTOM, PRESETS,
   DEFAULT_LAYERS, DEFAULT_GEOM, ALL_LAYER_DEFS,
 };

@@ -2,7 +2,9 @@ import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { processContent } from '@/app/utils/contentProcessor';
 
-const uniformCDF = (x, a, b) => {
+// exported so the page's frozen-state stills are drawn from the tool's own
+// functions rather than a re-derivation (Line 1)
+export const uniformCDF = (x, a, b) => {
   if (x < a) return 0;
   if (x > b) return 1;
   return (x - a) / (b - a);
@@ -25,16 +27,16 @@ const erf = (x) => {
   return sign * y;
 };
 
-const normalCDF = (x, mean, stdDev) => {
+export const normalCDF = (x, mean, stdDev) => {
   return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
 };
 
-const exponentialCDF = (x, lambda) => {
+export const exponentialCDF = (x, lambda) => {
   if (x < 0) return 0;
   return 1 - Math.exp(-lambda * x);
 };
 
-export default function ContinuousCDFVisualizer({ explanationsOverride = {} }) {
+export default function ContinuousCDFVisualizer({ explanationsOverride = {}, explanationsAppend = {} }) {
   const [activeDistribution, setActiveDistribution] = useState('uniform');
   
   const [uniformA, setUniformA] = useState(0);
@@ -187,7 +189,12 @@ export default function ContinuousCDFVisualizer({ explanationsOverride = {} }) {
   };
 
   const currentDist = distributions[activeDistribution];
-  const finalExplanation = explanationsOverride[activeDistribution] || currentDist.explanation;
+  // `explanationsOverride` REPLACES the built-in text; `explanationsAppend` adds
+  // to it, so a caller can attach a note or a link without discarding the
+  // tool's own explanation (Line 1)
+  const finalExplanation =
+    (explanationsOverride[activeDistribution] || currentDist.explanation) +
+    (explanationsAppend[activeDistribution] || '');
 
   return (
     <div className="container">

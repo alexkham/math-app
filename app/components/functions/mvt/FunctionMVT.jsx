@@ -262,6 +262,7 @@ function autoYBounds(fam, xMin, xMax) {
 export default function FunctionMVT({
   initialFamily = 'quadratic',
   families = DEFAULT_FAMILIES,
+  explanations = null,
   visualizerProps = {},
   infoPanelProps = {},
   darkMode = false,
@@ -402,8 +403,14 @@ export default function FunctionMVT({
       `\n\n### How c is found\n\n` +
       `Compute the secant slope $m = (f(b) - f(a))/(b - a)$. Then solve $f'(c) = m$ for $c$ in $(a, b)$. For the quadratic, that&apos;s exactly the midpoint $(a+b)/2$. For other functions there can be more than one c.`;
 
-    return intro + rightNow + howFound;
-  }, [fam, aN, bN, m, cs, validInterval]);
+    // Optional per-family note supplied by the page (Line 1 anchor mesh).
+    // Omitted -> the panel reads exactly as it always has.
+    const extra = explanations?.[current] ? `
+
+${explanations[current]}` : '';
+
+    return intro + rightNow + howFound + extra;
+  }, [fam, aN, bN, m, cs, validInterval, explanations, current]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

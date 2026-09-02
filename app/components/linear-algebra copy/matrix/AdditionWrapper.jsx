@@ -1273,7 +1273,8 @@ const SAME_LENGTH_INFO =
 // ===========================================================
 // VECTOR SCENE BUILDER — element-wise u ± v = w (1×n)
 // ===========================================================
-function buildVectorScenes(n, operation) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildVectorScenes(n, operation) {
   const isAdd = operation === 'add';
   const opSymbol = isAdd ? '+' : '\u2212';
   const opWord = isAdd ? 'addition' : 'subtraction';
@@ -1387,7 +1388,8 @@ function buildVectorScenes(n, operation) {
 // ===========================================================
 // MATRIX SCENE BUILDER — element-wise A ± B = C (m×n)
 // ===========================================================
-function buildMatrixScenes(rows, cols, operation) {
+// exported additively for Line 1 frozen-state diagrams - unchanged behaviour
+export function buildMatrixScenes(rows, cols, operation) {
   const isAdd = operation === 'add';
   const opSymbol = isAdd ? '+' : '\u2212';
   const opWord = isAdd ? 'addition' : 'subtraction';
@@ -1706,6 +1708,7 @@ function Pill({ active, onClick, children }) {
 // ===========================================================
 export default function AdditionWrapper({
   mode = 'both',
+  explanations = null,
   defaultScenario = 'matrices',
   defaultVecN = 4,
   defaultRows = 2,
@@ -1736,9 +1739,21 @@ export default function AdditionWrapper({
   const max = dimensionRange[dimensionRange.length - 1];
 
   const scenes = useMemo(() => {
-    if (scenario === 'vectors') return buildVectorScenes(vecN, operation);
-    return buildMatrixScenes(rows, cols, operation);
-  }, [scenario, vecN, rows, cols, operation]);
+    const built = scenario === 'vectors'
+      ? buildVectorScenes(vecN, operation)
+      : buildMatrixScenes(rows, cols, operation);
+    if (!explanations) return built;
+    // Line 1 anchor mesh: append the page's note for this phase to the scene
+    // caption. Phases are intro (first), done (last) and step (everything
+    // between); subtraction has one note of its own covering the whole run.
+    const keyFor = (i) => (operation === 'subtract'
+      ? 'subtract'
+      : i === 0 ? 'intro' : i === built.length - 1 ? 'done' : 'step');
+    return built.map((sc, i) => {
+      const extra = explanations[keyFor(i)];
+      return extra ? { ...sc, formula: `${sc.formula || ''}${extra}` } : sc;
+    });
+  }, [scenario, vecN, rows, cols, operation, explanations]);
 
   return (
     <div style={{

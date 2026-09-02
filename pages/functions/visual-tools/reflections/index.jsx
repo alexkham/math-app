@@ -973,6 +973,7 @@ Together with [|f(x)|](!#output-reflection-fx), it completes the partial-reflect
            keywords: keyWords.join(", "),
            url: "/functions/visual-tools/reflections",
            name: "Function Reflections Visualizer",
+           svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="14" y1="10" x2="14" y2="70" stroke="#B5D4F4" stroke-width="0.8"/><line x1="30" y1="18" x2="30" y2="62" stroke="#B5D4F4" stroke-width="0.8" stroke-dasharray="2,2"/><line x1="52" y1="22" x2="52" y2="58" stroke="#B5D4F4" stroke-width="0.8" stroke-dasharray="2,2"/><path d="M 16 34 C 26 18, 38 14, 52 20 C 60 24, 66 30, 72 32" fill="none" stroke="#FAC775" stroke-width="1.9"/><path d="M 16 46 C 26 62, 38 66, 52 60 C 60 56, 66 50, 72 48" fill="none" stroke="#AFA9EC" stroke-width="1.9"/><line x1="8" y1="40" x2="74" y2="40" stroke="#ED93B1" stroke-width="1.8"/><text x="40" y="75" font-family="Georgia,serif" font-size="7.5" fill="#CECBF6" text-anchor="middle" font-style="italic">&#8722;f(x)</text></svg>`,
            hubDescription: "Pick a base function — linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, or square root — and switch between seven reflection types: across the x-axis, y-axis, y = x, the horizontal y = c, the vertical x = c, plus |f(x)| and f(|x|). Both curves draw together, with the axis of reflection highlighted in orange.",
            category: "Transformations",
            subCategory: "Reflections"

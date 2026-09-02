@@ -850,6 +850,7 @@ import CalculatorInstructions from '@/app/components/calculators/CalculatorInstr
 import HypergeometricCalculator from '@/app/components/calculators/probability/distributions/HypergeometricDistributionCalculator'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
@@ -1387,26 +1388,31 @@ const hypergeometricExplanations = {
   "Interpretation": "• Mean (μ = n·K/N): Expected number of successes in your sample\n• Variance: Measure of spread, affected by population and sample sizes\n• Std Dev: Typical variation from expected successes\n• Chart: Shows probability distribution - sampling without replacement means finite range of possible outcomes"
 };
 
+  // FAQ pass: the definition, the PMF, the mean and "when to use" each name
+  // their own h2. Kept the finite population correction — a named quantity
+  // under a heading reading only "Variance and Standard Deviation" — and
+  // added the notation section's three traps: the missing p, the two-level
+  // letter case, and the clamped support.
   const faqQuestions = {
     obj1: {
-      question: "What is the hypergeometric distribution?",
-      answer: "The hypergeometric distribution models the number of successes when sampling without replacement from a finite population. Unlike the binomial distribution, trials are not independent—each draw changes the probability of subsequent draws. It has three parameters: N (population size), K (number of successes in population), and n (sample size)."
+      question: "Why is there no p in the hypergeometric formula?",
+      answer: "Because without replacement there is no fixed success probability. Each draw changes the urn's composition, so the chance of a success depends on what came before — nothing constant is left for p to name. Pure counting replaces it: three coefficients, no probabilities. When the population dwarfs the sample, K/N emerges as an effective p and the [binomial](!/probability/distributions/discrete/binomial#15) takes over.",
+      sectionId: "4"
     },
     obj2: {
-      question: "What is the hypergeometric probability formula?",
-      answer: "The probability of exactly k successes is P(X = k) = C(K,k) × C(N-K,n-k) / C(N,n), where C(a,b) is the binomial coefficient. This formula counts favorable outcomes (ways to choose k successes and n-k failures) divided by total outcomes (ways to choose n items from N)."
+      question: "What is the finite population correction?",
+      answer: "The factor (N − n)/(N − 1) in the hypergeometric variance. It measures how far sampling without replacement departs from sampling with replacement: when the sample is a tiny fraction of the population it sits near 1 and the variance matches the binomial's; when n reaches N it hits 0 — sampling everything leaves nothing to vary.",
+      sectionId: "7"
     },
     obj3: {
-      question: "How do you find the mean of a hypergeometric distribution?",
-      answer: "The mean (expected value) is E[X] = n × K/N, where n is sample size, K is successes in population, and N is population size. This equals the sample size times the proportion of successes in the population, matching intuition that sample proportions reflect population proportions on average."
+      question: "What do N, K, n and k mean?",
+      answer: "Case marks the level: capital N and K describe the population — its size and the successes it contains — while lowercase n and k describe the sample, its size and the successes observed. But letters and their order drift between sources, and software renames the slots outright. Read by role rather than position: find the population size, the success count, the draw count.",
+      sectionId: "15"
     },
     obj4: {
-      question: "What is the finite population correction?",
-      answer: "The finite population correction factor (N-n)/(N-1) appears in the variance formula and accounts for reduced variability when sampling without replacement. As sample size n approaches population size N, this factor approaches zero—sampling the entire population eliminates randomness. This distinguishes hypergeometric variance from binomial variance."
-    },
-    obj5: {
-      question: "When should you use hypergeometric vs binomial distribution?",
-      answer: "Use hypergeometric when sampling without replacement from a finite population where each draw changes subsequent probabilities. Use binomial when trials are independent with constant success probability. When population N is much larger than sample n (rule of thumb: n < 0.05N), hypergeometric approximates binomial and either can be used."
+      question: "Why doesn't the hypergeometric support start at 0?",
+      answer: "It often does, but not always. The lower bound is max(0, n − (N − K)): once the failures in the population run out, further draws are forced to be successes, so a minimum becomes unavoidable. The top is min(n, K) — you cannot observe more successes than you drew or than exist. Using the binomial's 0 to n assigns probability to impossible draws.",
+      sectionId: "15"
     }
   }
 
@@ -1485,19 +1491,6 @@ const hypergeometricExplanations = {
           "item": "https://www.learnmathclass.com/probability/distributions/discrete/hypergeometric"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1665,6 +1658,22 @@ export default function HypergeometricDistributionPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Hypergeometric Distribution FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1698,13 +1707,6 @@ export default function HypergeometricDistributionPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

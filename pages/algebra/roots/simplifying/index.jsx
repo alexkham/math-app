@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -456,54 +457,24 @@ Simplification is not cosmetic. Simpler forms reveal structure, enable compariso
 
 const faqQuestions = {
   obj1: {
-    question: "What does simplest radical form mean?",
-    answer: "A radical is simplified when: (1) no perfect power factors remain under the radical, (2) no fractions appear under the radical, and (3) no radicals appear in denominators.",
-    sectionId: "1"
+    question: "Why do you have to rationalize the denominator at all?",
+    answer: "It is a convention for canonical form, not a mathematical necessity: $\\frac{5}{\\sqrt{3}}$ and $\\frac{5\\sqrt{3}}{3}$ are the same number. The habit began when division was done by hand, where dividing by $1.732$ is far more work than multiplying by it. It survives because one agreed form makes two expressions easy to compare and answers easy to match.",
+    sectionId: "5"
   },
   obj2: {
-    question: "How do you simplify √72?",
-    answer: "Factor out perfect squares: √72 = √(36·2) = √36·√2 = 6√2. Find the largest perfect square factor (36), separate using the product rule, then simplify.",
+    question: "Does it matter which perfect square factor you pull out first?",
+    answer: "Not for correctness, only for effort. $\\sqrt{72} = \\sqrt{4 \\cdot 18} = 2\\sqrt{18}$ is a valid step, but $18$ still contains a perfect square, so the work is unfinished; carry on and you reach $6\\sqrt{2}$. Taking the largest perfect square factor, $36$, gets there in one move. Both routes end at the same simplest form.",
     sectionId: "2"
   },
   obj3: {
-    question: "How do you simplify √(x⁷)?",
-    answer: "Divide the exponent by the index: 7÷2 = 3 remainder 1. Extract the quotient: √(x⁷) = √(x⁶·x) = x³√x. The largest even power extracts; the remainder stays.",
+    question: "Why do textbooks say to assume all variables are positive?",
+    answer: "To avoid absolute value bars. With an even index the honest answer carries them, since $\\sqrt{a^2}$ is $|a|$ rather than $a$, and they accumulate quickly across a long expression. Declaring every variable positive removes the sign question so the bars can be dropped. It is a stated assumption, not a fact, so check that your problem grants it.",
     sectionId: "3"
   },
   obj4: {
-    question: "How do you rationalize 5/√3?",
-    answer: "Multiply by √3/√3: (5/√3)·(√3/√3) = 5√3/3. The denominator becomes √3·√3 = 3, eliminating the radical.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "How do you rationalize 1/(2+√5)?",
-    answer: "Multiply by the conjugate: [1/(2+√5)]·[(2−√5)/(2−√5)] = (2−√5)/(4−5) = (2−√5)/(−1) = −2+√5. Conjugates eliminate radicals via difference of squares.",
-    sectionId: "6"
-  },
-  obj6: {
-    question: "What is the conjugate of a+√b?",
-    answer: "The conjugate is a−√b. When multiplied: (a+√b)(a−√b) = a²−b. This difference of squares pattern eliminates the radical.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you rationalize cube root denominators?",
-    answer: "Multiply to create a perfect cube: 2/∛5 becomes (2·∛25)/(∛5·∛25) = 2∛25/∛125 = 2∛25/5. Need two more factors of 5 to make ∛125 = 5.",
-    sectionId: "5"
-  },
-  obj8: {
-    question: "How do you reduce the index of a radical?",
-    answer: "Find common factors between index and exponent: ⁶√(x⁴) = x^(4/6) = x^(2/3) = ∛(x²). The index drops from 6 to 3 because gcd(4,6) = 2.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "How do you simplify √(50x⁵)?",
-    answer: "Factor completely: √(50x⁵) = √(25·2·x⁴·x) = 5x²√(2x). Extract perfect squares from both coefficient (25) and variable (x⁴).",
-    sectionId: "4"
-  },
-  obj10: {
-    question: "What are the steps to simplify any radical?",
-    answer: "1) Factor the radicand completely. 2) Extract perfect powers. 3) Check for index reduction. 4) Rationalize any denominators. 5) Verify all three criteria are met.",
-    sectionId: "9"
+    question: "Why doesn't the conjugate work for a cube root denominator?",
+    answer: "Because the conjugate relies on the difference of squares, which only clears square roots. Multiplying $\\sqrt[3]{2} + 1$ by $\\sqrt[3]{2} - 1$ leaves $\\sqrt[3]{4} - 1$, still irrational. Cube roots need the sum or difference of cubes instead, so the multiplier for $\\sqrt[3]{2} + 1$ is $\\sqrt[3]{4} - \\sqrt[3]{2} + 1$, which yields $2 + 1 = 3$.",
+    sectionId: "7"
   }
 }
 
@@ -580,19 +551,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots/simplifying"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -729,6 +687,22 @@ export default function SimplifyingPage({
           sectionsContent.obj10.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Simplifying Radicals FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -876,12 +850,6 @@ export default function SimplifyingPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

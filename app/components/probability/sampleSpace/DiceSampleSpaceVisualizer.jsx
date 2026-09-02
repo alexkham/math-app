@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
 
-const DiceSampleSpaceVisualizer = () => {
+const DiceSampleSpaceVisualizer = ({ explanations = null } = {}) => {
   const [numDice, setNumDice] = useState(2);
   const [diceSides] = useState(6);
   const [highlightCondition, setHighlightCondition] = useState('none');
@@ -39,6 +39,19 @@ const DiceSampleSpaceVisualizer = () => {
   }, [numDice, diceSides]);
 
   // Check if outcome matches highlight condition
+  // Line 1 anchor mesh: which documented state the explorer is showing. Only
+  // the conditions the page documents are keyed; anything else shows no note.
+  const line1Key = highlightCondition === 'none'
+    ? 'none'
+    : highlightCondition === 'doubles'
+      ? 'doubles'
+      : highlightCondition === 'even'
+        ? 'even'
+        : (highlightCondition === 'sumIs' && sumCondition === 'equals' && customSum === 7)
+          ? 'sum7'
+          : null;
+  const line1Note = explanations && line1Key ? explanations[line1Key] : null;
+
   const shouldHighlight = (outcome) => {
     const sum = outcome.reduce((a, b) => a + b, 0);
     const hasDoubles = new Set(outcome).size < outcome.length;
@@ -568,9 +581,26 @@ const DiceSampleSpaceVisualizer = () => {
           Sample Space ({totalOutcomes} total outcomes)
         </h3>
         
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', 
+        {line1Note && (
+          <div
+            style={{
+              margin: '0 10px 14px',
+              padding: '10px 14px',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderLeft: '4px solid #4A90E2',
+              borderRadius: 6,
+              fontSize: '13px',
+              lineHeight: 1.6,
+              color: '#475569',
+            }}
+            dangerouslySetInnerHTML={{ __html: line1Note }}
+          />
+        )}
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
           gap: '10px',
           padding: '10px'
         }}>

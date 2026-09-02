@@ -593,6 +593,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -745,26 +746,37 @@ export async function getStaticProps(){
 `
 
 
+  // FAQ pass: "what independence means", "the formula", "conditional
+  // independence" and the how-to-check question all name their own h2.
+  // Kept independent-vs-disjoint — the claim deferred here from conditional
+  // probability, and the one confusion no heading serves. Added the
+  // collection-level traps from the notation section. Uncorrelated versus
+  // independent defers to /probability/covariance, which owns correlation.
   const faqQuestions = {
     obj1: {
-      question: "What does independence mean for events in probability?",
-      answer: "Two events are independent when knowing that one has occurred does not alter the chance of the other. The occurrence of one event provides no information about the other, and learning that one situation happened does not change how we think about the likelihood of the second."
+      question: "What's the difference between independent and disjoint events?",
+      answer: "They are near-opposites. Disjoint events cannot happen together: P(A ∩ B) = 0. Independent events satisfy P(A ∩ B) = P(A)P(B), which is nonzero whenever both are possible. So two disjoint events with positive probability are strongly dependent — learning one occurred rules the other out completely. The similar-looking equations are what make the pair easy to confuse.",
+      sectionId: "mistakes"
     },
     obj2: {
-      question: "What is the independence formula?",
-      answer: "Events A and B are independent when P(A ∩ B) = P(A) · P(B). This means their joint probability equals the product of their individual probabilities. Equivalently, P(A|B) = P(A) and P(B|A) = P(B), showing that conditioning on one event doesn't change the probability of the other."
+      question: "Does pairwise independence imply mutual independence?",
+      answer: "No. Mutual independence demands the product rule for every sub-collection, not just the pairs — for three events that is four equations, and for n events it is 2ⁿ − n − 1. Toss two fair coins and take “first is heads”, “second is heads”, “both match”: every pair is independent, yet the triple product fails.",
+      sectionId: "notation"
     },
     obj3: {
-      question: "What's the difference between independent and disjoint events?",
-      answer: "Disjoint events cannot occur together (they are mutually exclusive), while independent events can and usually do occur together. Disjoint events are actually dependent because if one occurs, the other cannot. Independence means events don't influence each other; disjointness means they exclude each other."
+      question: "Does conditional independence imply independence?",
+      answer: "No, and neither direction holds. Two events can be dependent in general yet independent once a shared cause is fixed — conditioning removes the link. They can also be independent outright yet become dependent inside a condition. Independence and conditional independence are separate claims, and establishing one says nothing about the other.",
+      sectionId: "conditional"
     },
     obj4: {
-      question: "What is conditional independence?",
-      answer: "Conditional independence occurs when two events that influence each other in general become unrelated once additional information is known. The relationship between events depends on a third condition - knowing this extra information blocks the influence between them, so learning about one no longer changes how we think about the other."
+      question: "What does the symbol A ⊥ B mean?",
+      answer: "A is independent of B — the whole defining equation compressed into one mark, borrowed from the perpendicularity symbol. Graphical-models texts double the stroke so that a single ⊥ keeps its geometric job, while elementary texts skip the symbol and write the equation out. Between random variables it asserts that the joint distribution factors.",
+      sectionId: "notation"
     },
     obj5: {
-      question: "How do you know if events are truly independent?",
-      answer: "Check if P(A ∩ B) = P(A) · P(B), or equivalently if P(A|B) = P(A). However, independence should never be assumed blindly - justify it by understanding why one event truly doesn't influence another. Common failures include shared causes, structural restrictions, and hidden constraints that introduce dependence even when events look unrelated."
+      question: "What does i.i.d. mean?",
+      answer: "Independent and identically distributed — one tag making two separate claims. Independent: the whole collection is mutually independent, not merely pairwise. Identically distributed: every variable follows the same distribution. Breaking either half breaks the abbreviation, and both together are what license results such as the [law of large numbers](!/probability/large-numbers-law).",
+      sectionId: "notation"
     }
   }
 
@@ -833,19 +845,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/independence"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1268,6 +1267,22 @@ export default function IndependencePage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Independence FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1301,13 +1316,6 @@ export default function IndependencePage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

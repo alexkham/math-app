@@ -712,7 +712,8 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
         name: "Two-Set Venn Diagram Basic Identities Explorer",
         hubDescription: "Shade the Venn diagram for any two-set identity — union, intersection, complement, the three differences, De Morgan's laws, and set relations like subset and disjoint. Switch between categories using the tabs, pick an identity from the formula buttons or Jump-to dropdown, and customize the shading color and opacity. Each highlighted region updates with an explanation panel showing the set-builder notation.",
         category: "Venn Diagrams",
-        subCategory: "Two Sets"
+        subCategory: "Two Sets",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="38" r="20" fill="#FAC775" fill-opacity="0.85" stroke="#854F0B" stroke-width="1.3"/><circle cx="50" cy="38" r="20" fill="#FAC775" fill-opacity="0.85" stroke="#854F0B" stroke-width="1.3"/><text x="19" y="26" font-family="Georgia,serif" font-size="9" fill="#412402" text-anchor="middle" font-style="italic">A</text><text x="61" y="26" font-family="Georgia,serif" font-size="9" fill="#412402" text-anchor="middle" font-style="italic">B</text><text x="40" y="72" font-family="Georgia,serif" font-size="10" fill="#E6F1FB" text-anchor="middle" font-style="italic">A &#8746; B</text></svg>`
       },
     }
   }

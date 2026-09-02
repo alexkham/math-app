@@ -505,6 +505,7 @@ Only [secant](!#the-secant-negative-angle-identity) inherits this evenness; the 
         category: "Identities",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/negative-angle-identities",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="24" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><line x1="14" y1="40" x2="66" y2="40" stroke="#B5D4F4" stroke-width="1"/><line x1="40" y1="14" x2="40" y2="66" stroke="#B5D4F4" stroke-width="0.8"/><line x1="55.43" y1="21.61" x2="55.43" y2="58.39" stroke="#ED93B1" stroke-width="1.2" stroke-dasharray="3,2"/><line x1="40" y1="40" x2="55.43" y2="21.61" stroke="#FAC775" stroke-width="1.9"/><line x1="40" y1="40" x2="55.43" y2="58.39" stroke="#ED93B1" stroke-width="1.9"/><circle cx="55.43" cy="21.61" r="3" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="55.43" cy="58.39" r="3" fill="#ED93B1" stroke="#72243E" stroke-width="1.1"/><text x="49" y="33" font-family="Georgia,serif" font-size="6.5" fill="#FAC775" text-anchor="middle" font-style="italic">&#952;</text><text x="47" y="51" font-family="Georgia,serif" font-size="6.5" fill="#ED93B1" text-anchor="middle" font-style="italic">&#8722;&#952;</text><text x="40" y="76" font-family="Georgia,serif" font-size="6.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">sin(&#8722;&#952;) = &#8722;sin &#952;</text></svg>`,
         name: "Negative Angle Identities Explorer"
       },
 

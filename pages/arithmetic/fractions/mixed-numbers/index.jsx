@@ -682,6 +682,7 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1098,58 +1099,30 @@ Number line visualization also supports estimation and rounding. A mixed number 
 }
 
 
+// FAQ pass: cut all ten questions — every one is answered by an h2 with a
+// defining first line (mixed number, improper fraction, both conversions,
+// comparing, number line) or is owned by the operation pages
+// (/arithmetic/fractions/multiplying already answers why mixed numbers must
+// be converted before multiplying). Invented three from the notation section
+// and the improper-fractions section, none of which any heading surfaces.
 const faqQuestions = {
   obj1: {
-    question: "What is a mixed number?",
-    answer: "A mixed number combines a whole number with a proper fraction, like 5²/₃. The whole number counts complete units, while the fraction represents the remaining partial unit. Mixed numbers express quantities greater than one in an intuitive format.",
-    sectionId: "1"
+    question: "Does 2¾ mean 2 times ¾?",
+    answer: "No. A mixed number is the one place in mathematics where writing two things side by side means addition: 2¾ equals 2 + ¾, or 2.75. Everywhere else adjacency multiplies — 2x, 2π — so importing that habit here yields 1½, barely half the true value. The spoken form keeps the addition audible: two and three quarters.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is an improper fraction?",
-    answer: "An improper fraction has a numerator greater than or equal to its denominator, like 7/4 or 11/3. The value is at least 1. Despite the name, improper fractions are valid and often preferred for multiplication and division calculations.",
-    sectionId: "2"
+    question: "How do negative mixed numbers work?",
+    answer: "The minus sign covers the whole quantity, not just the whole-number part: −2¾ means −(2 + ¾) = −2.75, never −2 + ¾ = −1.25. The hidden plus inherits the sign along with everything else. Converting to an improper fraction first — −2¾ becomes −11/4 — makes the scope explicit and prevents the split-sign slip.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you convert an improper fraction to a mixed number?",
-    answer: "Divide the numerator by the denominator. The quotient becomes the whole number, the remainder becomes the new numerator, and the denominator stays the same. Example: 17/5 = 3²/₅ because 17 ÷ 5 = 3 remainder 2.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you convert a mixed number to an improper fraction?",
-    answer: "Multiply the whole number by the denominator, add the numerator, and place the result over the original denominator. Example: 4²/₇ becomes (4 × 7) + 2 = 30, so the improper fraction is 30/7.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do you compare mixed numbers?",
-    answer: "First compare the whole parts — a larger whole means a larger value. If whole parts are equal, compare the fractional parts. You may need to find a common denominator to compare the fractions accurately.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you add mixed numbers?",
-    answer: "Either convert to improper fractions and add, or add whole parts and fractional parts separately. When adding by parts, if the fractional sum exceeds 1, carry the extra whole unit to the whole number sum.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you multiply mixed numbers?",
-    answer: "Convert all mixed numbers to improper fractions first, then multiply numerators together and denominators together. Do not try to multiply whole and fractional parts separately — this gives wrong answers.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "How do you divide mixed numbers?",
-    answer: "Convert both mixed numbers to improper fractions, then multiply the first fraction by the reciprocal of the second. Example: 4½ ÷ 1½ = 9/2 ÷ 3/2 = 9/2 × 2/3 = 3.",
-    sectionId: "6"
-  },
-  obj9: {
-    question: "Why convert mixed numbers to improper fractions for calculations?",
-    answer: "Improper fractions allow direct application of fraction rules. Multiplying or dividing mixed numbers directly leads to errors because whole and fractional parts don't combine simply under these operations.",
-    sectionId: "6"
-  },
-  obj10: {
-    question: "Where do mixed numbers appear on a number line?",
-    answer: "Mixed numbers appear between consecutive whole numbers. The value 3¼ lies one-quarter of the way from 3 to 4. Both 2²/₅ and 12/5 mark the same point — different notations for identical quantities.",
-    sectionId: "7"
+    question: "Why is it called an improper fraction?",
+    answer: "The name is a historical label, not a verdict. It flags only that the numerator is at least as large as the denominator, so the value reaches or passes 1. Nothing about 7/4 is incorrect. Improper form is in fact preferred for computation, since [multiplying](!/arithmetic/fractions/multiplying) and [dividing](!/arithmetic/fractions/dividing) are simpler with no whole part to handle separately.",
+    sectionId: "2"
   }
 }
+
 
 const schemas = {
   learningResource: {
@@ -1221,19 +1194,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/fractions/mixed-numbers"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1364,6 +1324,22 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Mixed Numbers FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -1483,12 +1459,6 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

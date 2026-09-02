@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -434,54 +435,24 @@ Mastering these operations transforms complicated expressions into simpler ones 
 
 const faqQuestions = {
   obj1: {
-    question: "What are like radicals?",
-    answer: "Like radicals have the same index and the same radicand. For example, 3√5 and 7√5 are like radicals. √3 and √5 are not like (different radicands), and √2 and ∛2 are not like (different indices).",
-    sectionId: "1"
+    question: "Why can't you add $\\sqrt{2} + \\sqrt{3}$?",
+    answer: "Because they are unlike radicals, exactly as $3x + 7y$ cannot be combined. Adding requires a matching index and a matching radicand, and these two share no radicand, so $\\sqrt{2} + \\sqrt{3}$ is already in simplest form. Simplify before deciding, though: $\\sqrt{12} + \\sqrt{27}$ looks unlike but becomes $2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$.",
+    sectionId: "2"
   },
   obj2: {
-    question: "How do you add or subtract radicals?",
-    answer: "Only like radicals can be added or subtracted. Combine the coefficients and keep the radical unchanged: 3√5 + 7√5 = 10√5. Simplify each radical first to identify like radicals.",
-    sectionId: "2"
+    question: "Why does multiplying by the conjugate remove the radical when squaring doesn't?",
+    answer: "Because they trigger different patterns. A conjugate pair gives a difference of squares with no middle term: $(\\sqrt{7} + \\sqrt{3})(\\sqrt{7} - \\sqrt{3}) = 7 - 3 = 4$, fully rational. Squaring gives a perfect square trinomial whose middle term still carries a radical: $(\\sqrt{5} + \\sqrt{2})^2 = 7 + 2\\sqrt{10}$. The opposite signs are what cancel the cross terms.",
+    sectionId: "6"
   },
   obj3: {
-    question: "How do you multiply radicals?",
-    answer: "For radicals with the same index, multiply the radicands: √a · √b = √(ab). For example, √3 · √12 = √36 = 6. Multiply coefficients separately: 3√2 · 4√5 = 12√10.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you multiply radicals with different indices?",
-    answer: "Convert to rational exponents, find a common denominator, then multiply. For √2 · ∛2: write as 2^(1/2) · 2^(1/3) = 2^(3/6) · 2^(2/6) = 2^(5/6) = ⁶√32.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do you divide radicals?",
-    answer: "For same-index radicals, divide the radicands: √a/√b = √(a/b). For example, √50/√2 = √25 = 5. Rationalize if a radical remains in the denominator.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is a conjugate in radical expressions?",
-    answer: "The conjugate reverses the sign between terms. The conjugate of a + √b is a − √b. Multiplying conjugates eliminates radicals: (a + √b)(a − √b) = a² − b.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you expand (√a + √b)²?",
-    answer: "Use the binomial square formula: (√a + √b)² = a + 2√(ab) + b. Don't forget the middle term 2√(ab). For (√5 + √2)² = 5 + 2√10 + 2 = 7 + 2√10.",
+    question: "Why is $(a + \\sqrt{b})^2$ not $a^2 + b$?",
+    answer: "Because squaring a binomial produces three terms, not two. The expansion is $a^2 + 2a\\sqrt{b} + b$, and the middle term $2a\\sqrt{b}$ is the one most often dropped. Concretely $(3 + \\sqrt{2})^2 = 9 + 6\\sqrt{2} + 2 = 11 + 6\\sqrt{2}$, not $11$. The same omission produces wrong answers when a radical equation is squared.",
     sectionId: "7"
   },
-  obj8: {
-    question: "What happens when you square a radical expression?",
-    answer: "Squaring eliminates square roots: (√x)² = x and (3√5)² = 9·5 = 45. For binomials like (√x + 3)², expand fully: x + 6√x + 9. The radical may survive in binomials.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Can you add √2 + √3?",
-    answer: "No, √2 + √3 cannot be simplified further. They are unlike radicals (different radicands). The expression is already in simplest form.",
-    sectionId: "2"
-  },
-  obj10: {
-    question: "Why are conjugates useful?",
-    answer: "Conjugates eliminate radicals when multiplied: (√7 + √3)(√7 − √3) = 7 − 3 = 4. This is essential for rationalizing denominators and solving some radical equations.",
-    sectionId: "6"
+  obj4: {
+    question: "Do you still need to simplify after multiplying radicals?",
+    answer: "Usually yes, because multiplying tends to create perfect power factors that were not there before. $\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$ leaves no radical at all, and $\\sqrt{6} \\cdot \\sqrt{10} = \\sqrt{60} = 2\\sqrt{15}$ still needs extracting. Division has the mirror problem: the quotient may leave a radical in the denominator to rationalize.",
+    sectionId: "3"
   }
 }
 
@@ -558,19 +529,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots/operations"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -698,6 +656,22 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Operations on Roots FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -808,12 +782,6 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

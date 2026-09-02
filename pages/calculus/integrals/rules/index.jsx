@@ -8,6 +8,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -563,45 +564,39 @@ This theorem converts area computation—a limiting process involving infinite s
 };
 
 
+// FAQ pass: all eight originals named their own h2 — sum/difference,
+// constant multiple, additivity, reversing limits, FTC Parts 1 and 2, the
+// inverse relationship, and comparison. Kept the hub's deferred claim on
+// the Fundamental Theorem as a single unified question, since the page
+// splits it across three headings and none of them serves that query.
+// The rest are consequences the headings state without explaining — note
+// the linearity question states what linearity does NOT cover, which the
+// two linearity sections never say. Piecewise integration is owned by the
+// evaluating page, whose h2 names it outright.
 const faqQuestions = {
   obj1: {
-    question: "What are the sum and difference rules for integration?",
-    answer: "Integrals distribute over addition and subtraction: ∫[f(x) + g(x)] dx = ∫f(x) dx + ∫g(x) dx, and similarly for differences. These rules let you break complex integrands into simpler pieces handled separately.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the constant multiple rule for integration?",
-    answer: "Constants factor out of integrals: ∫c·f(x) dx = c∫f(x) dx. Combined with the sum rule, this gives linearity: ∫[af(x) + bg(x)] dx = a∫f(x) dx + b∫g(x) dx.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the additivity property of integrals?",
-    answer: "For definite integrals, integration over adjacent intervals combines: ∫ₐᵇ f(x) dx + ∫ᵇᶜ f(x) dx = ∫ₐᶜ f(x) dx. This allows splitting integrals at any intermediate point, essential for piecewise functions.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What happens when you reverse the limits of integration?",
-    answer: "Swapping limits negates the result: ∫ₐᵇ f(x) dx = −∫ᵇᵃ f(x) dx. Integrating in reverse accumulates in the opposite direction. When a = b, the integral equals zero since there's no interval.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is Part 1 of the Fundamental Theorem of Calculus?",
-    answer: "If F(x) = ∫ₐˣ f(t) dt and f is continuous, then F'(x) = f(x). Differentiation undoes integration—the derivative of the accumulation function equals the integrand at the boundary. This guarantees every continuous function has an antiderivative.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is Part 2 of the Fundamental Theorem of Calculus?",
-    answer: "If F is any antiderivative of f (F' = f), then ∫ₐᵇ f(x) dx = F(b) − F(a). This is the computational engine of calculus: find an antiderivative and evaluate at the endpoints instead of computing Riemann sum limits.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "Why are differentiation and integration inverse operations?",
-    answer: "Part 1 shows differentiating an integral recovers the integrand: d/dx ∫ₐˣ f(t) dt = f(x). Part 2 shows integrating a derivative recovers the function: ∫ₐᵇ F'(x) dx = F(b) − F(a). Each operation undoes the other.",
+    question: "What is the Fundamental Theorem of Calculus?",
+    answer: "It comes in two parts, and together they say differentiation and integration undo each other. Part 1: differentiating an accumulation function returns the integrand, d/dx ∫ₐˣ f(t) dt = f(x). Part 2: if F′ = f, then ∫ₐᵇ f(x) dx = F(b) − F(a). Part 1 guarantees antiderivatives exist; Part 2 turns area into arithmetic on two endpoint values.",
     sectionId: "7"
   },
-  obj8: {
-    question: "What are the comparison properties of integrals?",
-    answer: "If f(x) ≥ 0 on [a,b], then ∫f ≥ 0. If f(x) ≤ g(x), then ∫f ≤ ∫g. If m ≤ f(x) ≤ M, then m(b−a) ≤ ∫f ≤ M(b−a). These properties enable estimation when exact computation is difficult.",
+  obj2: {
+    question: "Does every continuous function have an antiderivative?",
+    answer: "Yes. Part 1 of the Fundamental Theorem builds one directly: for continuous f, the accumulation function F(x) = ∫ₐˣ f(t) dt satisfies F′ = f. The catch is that existence does not mean you can write it down. Functions like e^(−x²) have perfectly good [antiderivatives](!/calculus/definitions#antiderivative) that no combination of elementary functions expresses.",
+    sectionId: "5"
+  },
+  obj3: {
+    question: "Why does reversing the limits of integration flip the sign?",
+    answer: "Because the Riemann sum runs in the opposite direction. Going from a to b, each subinterval width Δx is positive; going from b to a, the same widths come out negative, so every term in the sum changes sign and so does the total. The same reasoning gives ∫ₐᵃ f(x) dx = 0: no interval, no accumulation.",
+    sectionId: "4"
+  },
+  obj4: {
+    question: "Can you split the integral of a product into two integrals?",
+    answer: "No. Linearity covers sums and constant multiples only: ∫[f + g] = ∫f + ∫g and ∫cf = c∫f. There is no matching rule for products or quotients — ∫fg is not ∫f · ∫g, and ∫(f/g) is not ∫f ÷ ∫g. A product needs a technique such as integration by parts or substitution instead.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "How can you estimate an integral without computing it?",
+    answer: "Bound the integrand. If m ≤ f(x) ≤ M on [a, b], then m(b − a) ≤ ∫ₐᵇ f(x) dx ≤ M(b − a) — the integral is trapped between the areas of two rectangles. Comparison works the same way: if f ≤ g on the interval then ∫f ≤ ∫g, so a function you can integrate bounds one you cannot.",
     sectionId: "8"
   }
 }
@@ -676,19 +671,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals/rules"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -794,6 +776,22 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Integration Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -828,13 +826,6 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

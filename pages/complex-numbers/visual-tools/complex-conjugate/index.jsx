@@ -498,6 +498,9 @@ The [special cases section](!#special-cases-to-investigate) lists the other boun
         description: "Interactive complex conjugate and modulus visualizer. Explore z, z̄, and |z| by dragging points on the Argand plane with live calculations and proof.",
         keywords: keyWords.join(", "),
         url: "/complex-numbers/visual-tools/complex-conjugate",
+        hubDescription: "Drag a point on the Argand plane to see z and its conjugate z̄ mirrored across the real axis. Watch the modulus circle, right triangle decomposition, and the proof that z · z̄ = |z|² update in real time.",
+        category: "Modulus & Geometry",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="22" fill="none" stroke="#FAC775" stroke-width="1" stroke-dasharray="3,2.5"/><line x1="10" y1="40" x2="70" y2="40" stroke="#B5D4F4" stroke-width="1.1"/><line x1="40" y1="12" x2="40" y2="68" stroke="#B5D4F4" stroke-width="0.8"/><line x1="58" y1="27" x2="58" y2="53" stroke="#AFA9EC" stroke-width="1.1" stroke-dasharray="2.5,2"/><line x1="40" y1="40" x2="58" y2="27" stroke="#FAC775" stroke-width="1.9"/><line x1="40" y1="40" x2="58" y2="53" stroke="#AFA9EC" stroke-width="1.9"/><circle cx="58" cy="27" r="3.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="58" cy="53" r="3.2" fill="#AFA9EC" stroke="#3C3489" stroke-width="1.2"/><text x="65" y="24" font-family="Georgia,serif" font-size="8" fill="#FAC775" text-anchor="middle" font-style="italic">z</text><line x1="62" y1="52" x2="68" y2="52" stroke="#CECBF6" stroke-width="1"/><text x="65" y="61" font-family="Georgia,serif" font-size="8" fill="#CECBF6" text-anchor="middle" font-style="italic">z</text><text x="20" y="24" font-family="Georgia,serif" font-size="6.5" fill="#FAC775" text-anchor="middle" font-style="italic">|z|</text></svg>`,
          name: "Complex Conjugate and Modulus Visualizer"
       },
         

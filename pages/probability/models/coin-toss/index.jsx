@@ -714,6 +714,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -865,26 +866,28 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: "what is being modeled", "assumptions", "how you get
+  // different distributions" and "why it is fundamental" each name their own
+  // h2. Kept the Bernoulli-trial question — no heading anywhere mentions
+  // Bernoulli — and added the two consequences the Variations and
+  // Approximation sections state without ever asking. The no-memory
+  // assumption defers to the law of large numbers, which owns the
+  // gambler's fallacy. Three, not padded.
   const faqQuestions = {
     obj1: {
-      question: "What is the coin toss probability model?",
-      answer: "The coin toss model represents a random mechanism with two possible outcomes produced in a single trial. It abstracts away all physical details and retains only the binary nature of the outcome, typically labeled Heads and Tails. The model is defined entirely by its possible outcomes and their assigned probabilities."
+      question: "What's the difference between the coin toss model and a Bernoulli trial?",
+      answer: "A Bernoulli trial is one execution of a two-outcome experiment; the coin toss model is the mathematical framework describing such an experiment — its outcome space, its events, and its probability assignment. The coin toss is the canonical instance of a Bernoulli trial, which is why the two names get used interchangeably even though one is a run and the other a specification.",
+      sectionId: "10"
     },
     obj2: {
-      question: "What assumptions does the coin toss model make?",
-      answer: "The coin toss model assumes: exactly one outcome occurs in each trial, the two outcomes are mutually exclusive, the probabilities assigned to the outcomes are fixed, and the mechanism has no memory of previous trials. These assumptions define the scope of the model—changing any of them creates a different model."
+      question: "Is a biased coin the same model as a fair one?",
+      answer: "No — it is a different model, even though the outcome labels are identical. The probability assignment is part of the model's definition, so changing it produces a new model with new consequences. The same applies to repeating the toss, stopping on a condition, or allowing dependence between tosses: each is a separate model wearing familiar labels.",
+      sectionId: "11"
     },
     obj3: {
-      question: "How do you get different distributions from the coin toss model?",
-      answer: "Different distributions arise by defining different random variables on the model or by repeating tosses. A single toss produces simple binary distributions. Repeated tosses allow counting successes (binomial), measuring waiting times (geometric), detecting patterns, or approximating continuous distributions through aggregation and rescaling."
-    },
-    obj4: {
-      question: "What's the difference between the coin toss model and a Bernoulli trial?",
-      answer: "A Bernoulli trial is a single execution of a binary random experiment, while the coin toss model is the mathematical framework describing such an experiment. The coin toss is the most common example of a Bernoulli trial, defining the outcome space, events, and probability assignment for a two-outcome mechanism."
-    },
-    obj5: {
-      question: "Why is the coin toss model fundamental in probability?",
-      answer: "The coin toss is the smallest fully specified non-trivial probability model, containing a complete outcome space, clear probability assignment, and independence when repeated. It serves as a basic component for more complex constructions—many probability models can be reduced to, approximated by, or simulated using sequences of coin tosses."
+      question: "Can coin tosses produce a continuous distribution?",
+      answer: "Not exactly, but arbitrarily closely. Combine long sequences of binary outcomes and rescale the result, and the discrete steps get finer until smooth shapes emerge. Continuous distributions can be viewed as limits of experiments built entirely from binary randomness — which is why simulations reach continuous behavior from nothing more than repeated coin flips.",
+      sectionId: "9"
     }
   }
 
@@ -961,19 +964,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/models/coin-toss"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1429,6 +1419,22 @@ export default function CoinTossPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Coin Toss Model FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,
@@ -1511,13 +1517,6 @@ export default function CoinTossPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

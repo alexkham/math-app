@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styles from './VennExplorer.module.css';
 
-const VennExplorer2 = ({ problemsData = [] }) => {
-  const defaultProblems = [
+// Hoisted out of the component body and exported so the page's frozen-state
+// stills are built from the tool's own problems (Line 1). A plain constant -
+// it closed over nothing - so behaviour is unchanged.
+export const defaultProblems = [
     {
       name: "Student Survey",
       events: ["Student", "Employed"],
@@ -47,6 +49,7 @@ const VennExplorer2 = ({ problemsData = [] }) => {
     }
   ];
 
+const VennExplorer2 = ({ problemsData = [] }) => {
   const problems = problemsData.length > 0 ? problemsData : defaultProblems;
   const [currentProblem, setCurrentProblem] = useState(0);
   const [selectedOutcome, setSelectedOutcome] = useState(null);

@@ -8,6 +8,8 @@ import ModernCardsGroup from '@/app/components/cards/ModernCardsGroup'
 import QuickNav from '@/app/components/cards/QuickNav'
 import ScrollToTop from '@/app/components/scroll-up-button/ScrollToTop'
 import ToolsPageHeader from '@/app/components/cards/ToolsPageHeader'
+import VisualToolsPage from '../../../app/components/page-components/visual-tools-page/VisualToolsPage'
+import { buildToolIndexData } from '../../../app/components/page-components/visual-tools-page/buildToolsPageData'
 
 
 export async function getStaticProps(){
@@ -267,11 +269,26 @@ Each tool runs directly in your browser with no downloads required. Use them for
     content: ``
   }
 
+  // Migrated to the auto-discovery pattern: cards are no longer hand-listed in
+  // cardsData, they are scanned from pages/complex-numbers/visual-tools/*. The
+  // old cardsData copy now lives on each tool page as seoData.hubDescription,
+  // and each tool declares its own category, so the hub groups them.
+  const toolsData = await buildToolIndexData('complex-numbers/visual-tools')
+
+  // Was the ToolsPageHeader intro block.
+  const intro = {
+    title: "Explore Interactive Complex Number Tools",
+    description: "Master complex numbers through hands-on visualization on the Argand plane.",
+    tip: "Click any tool below to see its description and start exploring."
+  }
+
   return {
     props: {
       sectionsContent,
       introContent,
       cardsData,
+      toolsData,
+      intro,
       faqQuestions,
       schemas,
       pageArticle,
@@ -285,6 +302,8 @@ export default function ComplexNumbersVisualToolsPage({
   sectionsContent,
   introContent,
   cardsData,
+  toolsData,
+  intro,
   faqQuestions,
   schemas,
   pageArticle
@@ -353,15 +372,30 @@ export default function ComplexNumbersVisualToolsPage({
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Visual Tools</h1>
-      <QuickNav items={cardsData} dropdownLabel="All Tools" />
-      <br/>
       <ScrollToTop
         top={'80px'}
         center={true}
       />
+      <VisualToolsPage
+        tools={toolsData}
+        pageTitle="Complex Numbers Visual Tools"
+        intro={intro}
+        pageArticle={pageArticle}
+        icon="ℂ"
+        dropdownLabel="All Tools"
+        theme="deepBlue"
+        sidebar={true}
+        sidebarBrandName="Complex Numbers"
+        sidebarBrandSub="Visual Tools"
+      />
       <br/>
-      <ToolsPageHeader 
+      <br/>
+
+      {/* Replaced by VisualToolsPage above (migrated to auto-discovery).
+          The old hand-listed layout is kept here for reference only.
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Visual Tools</h1>
+      <QuickNav items={cardsData} dropdownLabel="All Tools" />
+      <ToolsPageHeader
         items={cardsData}
         icon="ℂ"
         intro={{
@@ -371,27 +405,8 @@ export default function ComplexNumbersVisualToolsPage({
         }}
         article={pageArticle}
       />
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
       <ModernCardsGroup items={cardsData}/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      */}
     </>
   )
 }

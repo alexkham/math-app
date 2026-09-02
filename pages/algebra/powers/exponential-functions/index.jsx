@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -485,48 +486,29 @@ obj6: {
 
 const faqQuestions = {
   obj1: {
-    question: "What is an exponential function?",
-    answer: "An exponential function has the form f(x) = aˣ where a > 0 and a ≠ 1. The base a is constant and the exponent x is the variable. This is different from power functions like x² where the base varies. Examples: 2ˣ, 10ˣ, eˣ."
+    question: "Does $\\exp(x)$ mean something different from $e^x$?",
+    answer: "No, they are the same function written two ways. The choice is typesetting, not mathematics. The functional spelling earns its keep when the exponent is bulky: $\\exp\\!\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right)$ stays legible where a stacked superscript shrinks to nothing. It is also the function name in essentially every programming language and statistics package.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the difference between exponential growth and decay?",
-    answer: "When the base a > 1, the function grows (increases as x increases). When 0 < a < 1, the function decays (decreases as x increases). Both pass through (0, 1) since a⁰ = 1 for any positive base."
+    question: "Can you solve for $e$, or divide both sides by it?",
+    answer: "No. $e$ is a fixed constant, roughly $2.71828$, not an unknown, so cancelling it is the same error as cancelling the $2$ in $2^x$. You can divide by $e^x$, which is a quantity, but never solve for $e$ itself. On a calculator, note that the @[E]@ in @[2E3]@ is unrelated: it means $2 \\times 10^3$.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What are the domain and range of exponential functions?",
-    answer: "The domain is all real numbers — any x value works. The range is (0, ∞) — outputs are always positive, never zero or negative. The graph approaches but never touches the x-axis (horizontal asymptote at y = 0)."
+    question: "In $P(t) = P_0 e^{kt}$, what do $P_0$ and $k$ stand for?",
+    answer: "$P_0$ is the initial value, the amount at $t = 0$, read aloud as \"P-naught\". The subscript is a label: it multiplies nothing and is not a power. The constant $k$ sets the pace, and its sign carries the verdict, with $k > 0$ meaning growth and $k < 0$ meaning decay. Other letters follow the same convention: $N_0$, $y_0$, $A_0$.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "Why does every exponential function pass through (0, 1)?",
-    answer: "Because a⁰ = 1 for any positive base a. This is the zero exponent rule. No matter what base you choose (as long as it's positive and not 1), raising it to the power 0 gives 1."
+    question: "Why does exponential growth always beat polynomial growth?",
+    answer: "Because exponential growth multiplies by a fixed factor at every step while polynomial growth only adds a fixed power. The polynomial can lead early: at $x = 3$, $x^2 = 9$ beats $2^x = 8$. By $x = 20$, $x^2 = 400$ against $2^x = 1{,}048{,}576$. This holds for any degree, so $2^x$ eventually passes $x^{100}$ as well.",
+    sectionId: "4"
   },
   obj5: {
-    question: "What is the difference between exponential and power functions?",
-    answer: "In a power function like x², the variable is the base. In an exponential function like 2ˣ, the variable is the exponent. Exponential functions eventually grow faster than any polynomial, no matter how high the degree."
-  },
-  obj6: {
-    question: "Why does exponential growth beat polynomial growth?",
-    answer: "Exponential growth multiplies by a fixed factor at each step, while polynomial growth adds a fixed power. At x=10: x² = 100 but 2ˣ = 1024. At x=20: x² = 400 but 2ˣ ≈ 1 million. Repeated multiplication always wins long-term."
-  },
-  obj7: {
-    question: "What is Euler's number e?",
-    answer: "e ≈ 2.71828 is a special irrational number. The function eˣ has a unique property: its growth rate at any point equals its value at that point. This makes eˣ fundamental in calculus, differential equations, and continuous compound interest."
-  },
-  obj8: {
-    question: "Why is e^x called the natural exponential function?",
-    answer: "Because eˣ is the only exponential function where the rate of change equals the function value itself. At x=0, eˣ=1 and grows at rate 1. At x=1, eˣ≈2.718 and grows at rate ≈2.718. No other base has this self-replicating property."
-  },
-  obj9: {
-    question: "What is the horizontal asymptote of an exponential function?",
-    answer: "The line y = 0 (the x-axis). For a > 1, the curve approaches 0 as x → -∞. For 0 < a < 1, it approaches 0 as x → +∞. The function gets arbitrarily close to zero but never equals zero."
-  },
-  obj10: {
-    question: "Are exponential functions one-to-one?",
-    answer: "Yes. Exponential functions are strictly monotonic — either always increasing (when a > 1) or always decreasing (when 0 < a < 1). Different inputs always produce different outputs, so aˣ = aʸ implies x = y."
-  },
-  obj11: {
-    question: "How does the base affect the steepness of an exponential graph?",
-    answer: "The larger the base (when a > 1), the steeper the growth. 10ˣ rises much faster than 2ˣ. The closer the base is to 1, the flatter the curve — 1.01ˣ grows very slowly. Similarly for decay: 0.1ˣ falls faster than 0.9ˣ."
+    question: "What are the domain and range of an exponential function?",
+    answer: "The domain is every real number, since a positive base raised to any real exponent is defined. The range is $(0, \\infty)$: outputs are always strictly positive, never zero and never negative. That is why the line $y = 0$ is a horizontal asymptote the curve approaches but never touches, and why the graph has no x-intercept.",
+    sectionId: "3"
   }
 }
 
@@ -601,19 +583,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/exponential-functions"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -757,6 +726,22 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Exponential Functions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'8',
     //     title:sectionsContent.obj8.title,
@@ -883,12 +868,6 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

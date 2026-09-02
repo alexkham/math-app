@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -718,54 +719,24 @@ The most persistent algebraic error is distributing an exponent over a sum: $(a 
 
 const faqQuestions = {
   obj1: {
-    question: "What is the product rule for exponents?",
-    answer: "When multiplying powers with the same base, add the exponents: a^m · a^n = a^(m+n). For example, x³ · x⁵ = x⁸. The bases must be identical for this rule to apply.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the quotient rule for exponents?",
-    answer: "When dividing powers with the same base, subtract the exponents: a^m / a^n = a^(m-n). For example, x⁷ / x² = x⁵. The base cannot be zero.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the power of a power rule?",
-    answer: "When raising a power to another power, multiply the exponents: (a^m)^n = a^(mn). For example, (x³)⁴ = x¹². Don't confuse with stacked exponents: a^(m^n) is different.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "Does the exponent distribute over addition?",
-    answer: "No. (a + b)^n ≠ a^n + b^n. This is a common mistake. The power of a product rule only applies to multiplication: (ab)^n = a^n · b^n. Expanding (a + b)^n requires the binomial theorem.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the negative exponent rule?",
-    answer: "A negative exponent means reciprocal: a^(-n) = 1/a^n. For example, 4^(-2) = 1/16. Negative exponents in denominators move to numerators: 1/a^(-n) = a^n.",
-    sectionId: "6"
-  },
-  obj6: {
-    question: "Why does anything to the power of 0 equal 1?",
-    answer: "The quotient rule proves it: a^0 = a^(n-n) = a^n / a^n = 1. This holds for any nonzero base. The expression 0^0 is a special case not covered by this rule.",
-    sectionId: "7"
-  },
-  obj7: {
-    question: "How do fractional exponents work?",
-    answer: "A fractional exponent combines roots and powers: a^(m/n) = ⁿ√(a^m) = (ⁿ√a)^m. For example, 8^(2/3) = (³√8)² = 2² = 4. The denominator indicates the root.",
-    sectionId: "8"
-  },
-  obj8: {
-    question: "When must the base be positive?",
-    answer: "For irrational exponents and general real exponents, a > 0 is required. For rational exponents with even roots, a ≥ 0. For negative exponents, a ≠ 0. Natural exponents allow any base.",
-    sectionId: "9"
-  },
-  obj9: {
-    question: "What is the difference between (-a)^n and -a^n?",
-    answer: "(-a)^n raises the negative quantity to the power: (-3)² = 9. But -a^n raises a to the power then negates: -3² = -9. Parentheses determine which interpretation applies.",
+    question: "Does an exponent distribute over addition?",
+    answer: "No. $(a + b)^n \\neq a^n + b^n$. Check it with numbers: $(2 + 3)^2 = 25$, while $2^2 + 3^2 = 13$. The distribution rule covers products only, $(ab)^n = a^n b^n$, and it works because multiplication is commutative, so copies of $a$ and $b$ can be regrouped. A sum raised to a power needs the binomial theorem or direct multiplication.",
     sectionId: "10"
   },
-  obj10: {
-    question: "What are all the exponent rules?",
-    answer: "The main rules: Product (a^m · a^n = a^(m+n)), Quotient (a^m / a^n = a^(m-n)), Power of power ((a^m)^n = a^(mn)), Power of product ((ab)^n = a^n b^n), Power of quotient ((a/b)^n = a^n/b^n), Negative (a^(-n) = 1/a^n), Zero (a^0 = 1).",
+  obj2: {
+    question: "Why do you add exponents when multiplying but multiply them for a power of a power?",
+    answer: "They count different things. In $a^m \\cdot a^n$ you set two groups of factors side by side, so the totals add and you get $a^{m+n}$. In $(a^m)^n$ you make $n$ copies of the whole block $a^m$, so the count is $m$ taken $n$ times, giving $a^{mn}$. Adding joins groups; multiplying repeats one group.",
     sectionId: "1"
+  },
+  obj3: {
+    question: "Which exponents require a positive base?",
+    answer: "It depends on the exponent type, and the restriction tightens at each stage. [Natural exponents](!/algebra/powers/natural-exponents) permit any real base. [Negative exponents](!/algebra/powers/negative-exponents) and the zero exponent require $a \\neq 0$. [Rational exponents](!/algebra/powers/rational-exponents) with an even root require $a \\geq 0$. [Irrational exponents](!/algebra/powers/irrational-exponents) and real exponents generally require $a > 0$.",
+    sectionId: "9"
+  },
+  obj4: {
+    question: "Do the exponent laws change when the exponent is not a whole number?",
+    answer: "No. The product, quotient, and power rules read identically for natural, negative, rational, and irrational exponents, and that invariance is precisely what justifies extending the definition in the first place. What changes is the set of bases each law is valid for, which narrows at every stage. The algebra stays put; only the domain needs checking.",
+    sectionId: "9"
   }
 }
 
@@ -841,19 +812,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/powers/exponent-rules"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1002,6 +960,22 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj9T
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Exponent Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -1096,12 +1070,6 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj9T
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

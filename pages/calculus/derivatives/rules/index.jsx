@@ -10,6 +10,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -693,36 +694,30 @@ Beyond computational rules, three theorems govern the behavior of derivatives on
 
 
 
+// FAQ pass: cut four case-A questions — the basic-rules survey plus power,
+// chain and Mean Value Theorem, each with its own rule-named h2. Kept the
+// L'Hôpital conditions and the product-vs-quotient comparison, both extended;
+// invented two from caveats buried in closing paragraphs.
 const faqQuestions = {
   obj1: {
-    question: "What are the basic derivative rules?",
-    answer: "The basic derivative rules include the constant rule, power rule, constant multiple rule, sum and difference rules, product rule, quotient rule, and chain rule. Together these rules handle nearly all explicit functions encountered in calculus without returning to the limit definition.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the power rule for derivatives?",
-    answer: "The power rule states that if f(x) = xⁿ for any real exponent n, then f'(x) = nxⁿ⁻¹. It applies to positive integers, negative integers, fractions, and irrational exponents, making it the most frequently applied differentiation formula.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How does the chain rule work?",
-    answer: "The chain rule differentiates composite functions. For f(g(x)), the derivative is f'(g(x)) · g'(x): differentiate the outer function evaluated at the inner function, then multiply by the derivative of the inner function. In Leibniz notation, dy/dx = dy/du · du/dx.",
-    sectionId: "7"
-  },
-  obj4: {
-    question: "What is the Mean Value Theorem?",
-    answer: "The Mean Value Theorem states that if f is continuous on [a, b] and differentiable on (a, b), then there exists a point c in (a, b) where f'(c) equals the average rate of change (f(b) − f(a))/(b − a). It guarantees the instantaneous rate matches the average rate at some interior point.",
-    sectionId: "8"
-  },
-  obj5: {
     question: "When can you use L'Hôpital's rule?",
-    answer: "L'Hôpital's rule applies when a limit of f(x)/g(x) produces the indeterminate form 0/0 or ∞/∞. It replaces the limit of the functions with the limit of their derivatives. Other indeterminate forms like 0·∞ or 1^∞ must first be converted to 0/0 or ∞/∞ through algebraic rearrangement.",
+    answer: "Only when the limit is already an indeterminate form of type 0/0 or ∞/∞, and the limit of the derivative ratio exists or is ±∞. Applying it to a determinate limit produces wrong answers. If the derivative ratio yields another indeterminate form you may apply the rule again; if it oscillates or fails to exist, the rule simply gives no information — it does not show the original limit fails.",
     sectionId: "10"
   },
-  obj6: {
-    question: "What is the difference between the product rule and quotient rule?",
-    answer: "The product rule gives (fg)' = f'g + fg', adding two terms. The quotient rule gives (f/g)' = (f'g − fg')/g², subtracting in the numerator and dividing by the denominator squared. The quotient rule can be derived from the product rule by writing f/g as f · g⁻¹ and applying the chain rule.",
+  obj2: {
+    question: "Can you use L'Hôpital's rule on 0 × ∞ or ∞ − ∞?",
+    answer: "Not directly — the rule accepts only 0/0 and ∞/∞. The other forms have to be rewritten as a quotient first. For 0 · ∞, move one factor into the denominator; for ∞ − ∞, combine the terms into a single fraction. The exponential forms 0⁰, 1^∞ and ∞⁰ go through the identity f(x)^g(x) = e^(g(x)·ln f(x)), which converts them to 0 · ∞.",
+    sectionId: "10"
+  },
+  obj3: {
+    question: "What is the difference between the product rule and the quotient rule?",
+    answer: "The product rule adds two terms: (fg)′ = f′g + fg′. The quotient rule subtracts, then divides: (f/g)′ = (f′g − fg′)/g². Order matters in that numerator — it is f′g − fg′, never fg′ − f′g, because subtraction is not commutative. The quotient rule follows from the product rule applied to f · g⁻¹, so the two are not independent.",
     sectionId: "6"
+  },
+  obj4: {
+    question: "How do you apply the chain rule to three nested functions?",
+    answer: "Work from the outside in, with each layer contributing one factor. For f(g(h(x))) the derivative is f′(g(h(x))) · g′(h(x)) · h′(x): differentiate the outermost function at its argument, multiply by the derivative of the next layer at its argument, and continue until the innermost function is reached. Any depth of nesting follows the same pattern.",
+    sectionId: "7"
   }
 }
 
@@ -790,19 +785,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -930,6 +912,22 @@ export default function RulesPage({
         content:[
           sectionsContent.overview.content,
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Derivative Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -1077,12 +1075,6 @@ export default function RulesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

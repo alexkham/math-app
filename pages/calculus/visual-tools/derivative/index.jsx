@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Derivative</h1>
 //    <br/>
-//    <FunctionDerivative/>
+//    <FunctionDerivative explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionDerivative from '../../../../app/components/functions/derivative/FunctionDerivative'
+import functionDerivativeDiagrams from '../../../../app/components/functions/derivative/functionDerivativeDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -736,38 +738,80 @@ Sliding $x_0$ through the tool with both curves visible makes this dictionary vi
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Identity: a Constant Derivative`,
+      content: `$f(x) = x$ is the straight line through the origin at 45 degrees, and its derivative is the constant $f'(x) = 1$. On the graph that shows up as a horizontal dashed line sitting at height 1 — the same value no matter where $x_0$ goes.
+
+At $x_0 = 1$ the readings are $f(x_0) = 1$ and $f'(x_0) = 1$. The tangent to $f$ is the line itself, because a straight line is its own best linear approximation everywhere.`,
       before: ``,
-      after: ``,
+      after: `Drag $x_0$ anywhere and the tangent never tilts. That is what a constant derivative means: the rate of change does not depend on position.
+
+The two curves are worth comparing as objects rather than as pictures. $f$ is a line with slope 1; $f'$ is a line with slope 0. Differentiating dropped the degree by one, which is the pattern the [quadratic](!#the-quadratic) and [cubic](!#the-cubic) families continue.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Quadratic: a Derivative That Grows Linearly`,
+      content: `$f(x) = x^2$ has $f'(x) = 2x$ — a parabola paired with a straight line through the origin.
+
+At $x_0 = 1$: $f(x_0) = 1$ and $f'(x_0) = 2$. The tangent on the parabola climbs at slope 2, and the dot on $f'$ sits at height 2. Those are the same number seen two ways, which is the whole point of showing both curves at once.`,
       before: ``,
-      after: ``,
+      after: `The sign structure is easy to read here. $f'(x) = 2x$ is negative for $x < 0$, zero at the origin, positive for $x > 0$ — so the parabola falls, levels off, then rises. The single zero of $f'$ marks the single turning point of $f$.
+
+Notice also that $f'$ crosses zero rather than merely touching it. That crossing is what makes the origin a genuine minimum instead of a flat spot, a distinction the cubic makes vivid by failing it.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Cubic: a Flat Spot That Is Not an Extremum`,
+      content: `$f(x) = x^3$ has $f'(x) = 3x^2$, an upward parabola that touches zero at the origin and is positive everywhere else.
+
+At $x_0 = 1$: $f(x_0) = 1$ and $f'(x_0) = 3$. Slide $x_0$ to the origin and the tangent goes flat — but the curve does not turn around.`,
       before: ``,
-      after: ``,
+      after: `This is the standard counterexample to "zero derivative means extremum". At $x = 0$ the tangent is horizontal, yet $f' \ge 0$ everywhere, so the function never stops increasing. It merely pauses.
+
+What distinguishes this from the quadratic is that $f'$ touches the axis without crossing it. No sign change, no turning point. The rule that actually classifies a critical point is the sign change of $f'$, not the zero itself.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `Sine: the Derivative Is a Quarter Turn`,
+      content: `$f(x) = \sin(x)$ has $f'(x) = \cos(x)$ — the same wave, shifted left by $\pi/2$.
+
+At $x_0 = 1$: $f(x_0) = 0.84$ and $f'(x_0) = 0.54$. The sine is still climbing at that point, though it is slowing down as it nears its peak at $\pi/2 \approx 1.571$.`,
       before: ``,
-      after: ``,
+      after: `The shift is the most useful thing to see here. Every peak of $\sin$ lines up with a zero of $\cos$ going downward, every trough with a zero going upward, and the steepest parts of the sine sit exactly where the cosine reaches $\pm 1$.
+
+Differentiating four times returns you to where you started: $\sin \to \cos \to -\sin \to -\cos \to \sin$. Each step is another quarter turn, which is why trigonometric derivatives cycle rather than simplify.`,
       link: '',
     },
     obj15: {
-      title: ``,
-      content: ``,
+      title: `Cosine: the Same Wave With a Sign`,
+      content: `$f(x) = \cos(x)$ has $f'(x) = -\sin(x)$. Same shape as the sine family, but the minus sign matters.
+
+At $x_0 = 1$: $f(x_0) = 0.54$ and $f'(x_0) = -0.84$. The cosine is descending there — it peaked at the origin and is on its way down to its zero at $\pi/2$.`,
       before: ``,
-      after: ``,
+      after: `Compare this with the [sine family](!#sine) directly: the readings swap roles and one of them picks up a minus. That is not a coincidence but the quarter-turn rule applied one step further along the cycle.
+
+The negative sign is also the reason the second derivative of $\cos$ is $-\cos$ — the function equals the negative of its own second derivative, which is exactly the differential equation that makes sine and cosine describe oscillation.`,
+      link: '',
+    },
+    obj16: {
+      title: `Exponential: Its Own Derivative`,
+      content: `$f(x) = e^x$ has $f'(x) = e^x$. The two curves coincide exactly, so the solid and dashed lines lie on top of each other across the whole graph.
+
+At $x_0 = 1$: $f(x_0) = 2.72$ and $f'(x_0) = 2.72$. Both dots land at the same height, and they will do so wherever $x_0$ goes.`,
+      before: ``,
+      after: `This is the defining property of $e^x$, not a curiosity of it. Any function satisfying $f' = f$ has to be $Ce^x$ for some constant $C$, and requiring $f(0) = 1$ pins down $C = 1$. That is one legitimate way to define the number $e$ in the first place.
+
+Geometrically it says the height of the curve is its own slope: at height 2.72 the tangent rises at 2.72 per unit. Growth proportional to current size is exactly what compound interest, population models and radioactive decay all express.`,
+      link: '',
+    },
+    obj17: {
+      title: `Logarithm: a Derivative That Blows Up`,
+      content: `$f(x) = \ln(x)$ has $f'(x) = 1/x$, and both are defined only for $x > 0$ — the left half of the graph is empty for this family.
+
+At $x_0 = 1$: $f(x_0) = 0$ and $f'(x_0) = 1$. The logarithm crosses the x-axis at 1, and it does so at slope exactly 1.`,
+      before: ``,
+      after: `Watch what happens as $x_0$ moves toward zero. The logarithm plunges without bound, and $1/x$ climbs without bound alongside it — the curve gets steeper and steeper with no limiting slope. Move the other way and both flatten out: at $x = 5$ the slope is already down to $0.2$.
+
+That contrast is worth holding next to the [exponential](!#the-exponential), which is the inverse function. Where $e^x$ grows faster than any polynomial, $\ln x$ grows slower than any positive power of $x$ — and the reciprocal derivative is precisely why.`,
       link: '',
     }
 
@@ -778,6 +822,57 @@ Sliding $x_0$ through the tool with both curves visible makes this dictionary vi
     id: "intro",
     title: "",
     content: ``
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     SVGs come from the tool's own scene description, serialised through the
+     core's generateSVG - see app/components/functions/frozenSvg.js. Every state
+     is frozen at the component's initial x0 = 1. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: functionDerivativeDiagrams[key], caption, text })
+
+  const stateUnits = {
+    identity: unit('identity', 'Identity, frozen at x0 = 1',
+      'f is the 45-degree line, f&prime; the flat dashed line at height 1. The tangent lies exactly on f, ' +
+      'because a straight line is its own tangent everywhere.'),
+    quadratic: unit('quadratic', 'Quadratic, frozen at x0 = 1',
+      'The parabola with its derivative drawn as the line f&prime;(x) = 2x. At x0 = 1 the tangent slope is 2 ' +
+      'and the dashed line passes through height 2 - the same number in two places.'),
+    cubic: unit('cubic', 'Cubic, frozen at x0 = 1',
+      'f&prime;(x) = 3x&sup2; sits entirely above the axis apart from a single touch at the origin. That touch ' +
+      'without a crossing is why x&sup3; has a flat spot but no turning point.'),
+    sine: unit('sine', 'Sine, frozen at x0 = 1',
+      'Two waves a quarter period apart. The marker on f&prime; reads 0.54 while f reads 0.84 - the sine is ' +
+      'still rising, but slowing as it approaches its peak.'),
+    cosine: unit('cosine', 'Cosine, frozen at x0 = 1',
+      'The same pair with the roles swapped and a sign attached: f reads 0.54 and f&prime; reads -0.84. ' +
+      'The dashed curve is below the axis wherever the cosine is falling.'),
+    exponential: unit('exponential', 'Exponential, frozen at x0 = 1',
+      'Solid and dashed curves coincide across the whole frame, and both markers land at 2.72. ' +
+      'This is the graph of a function equal to its own derivative.'),
+    logarithm: unit('logarithm', 'Logarithm, frozen at x0 = 1',
+      'Nothing is drawn left of the y-axis: both ln x and 1/x are undefined there. At x0 = 1 the log crosses ' +
+      'zero while its derivative reads exactly 1.'),
+  }
+
+
+  /* ---- per-family panel notes, passed into the component (Line 1) ----
+     FunctionDerivative had no explanations prop; one was added additively and
+     defaults to null, so the panel is unchanged when nothing is passed. Content
+     is markdown - InfoPanel renders it through processContent, so anchors use
+     the normal [text](!#slug) form. */
+  const note = (body, slug, label) =>
+    `### Where this leads\n\n${body} See [${label}](!#${slug}) or compare [all seven families](!#the-function-families).`
+
+  const explanations = {
+    identity: note('A constant derivative: the slope never changes, so the tangent never tilts.', 'the-identity-function', 'the identity family'),
+    quadratic: note('A derivative that grows linearly, crossing zero exactly where the parabola turns.', 'the-quadratic', 'the quadratic family'),
+    cubic: note('A derivative that touches zero without crossing it - a flat spot, but no extremum.', 'the-cubic', 'the cubic family'),
+    sine: note('Differentiating shifts the wave by a quarter period.', 'sine', 'the sine family'),
+    cosine: note('The same quarter turn, one step further along the cycle, which is where the minus sign comes from.', 'cosine', 'the cosine family'),
+    exponential: note('The two curves coincide: this function is its own derivative.', 'the-exponential', 'the exponential family'),
+    logarithm: note('Defined only for x > 0, with a slope that grows without bound as x approaches zero.', 'the-logarithm', 'the logarithm family'),
   }
 
 
@@ -884,6 +979,8 @@ Sliding $x_0$ through the tool with both curves visible makes this dictionary vi
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -895,147 +992,56 @@ Sliding $x_0$ through the tool with both curves visible makes this dictionary vi
         name: "Derivative Visualizer",
         hubDescription: "Move x0 along the graph and watch three pictures of one number lock together — the slope of the tangent on f, the height of f-prime at x0, and the numeric derivative value. Snap directly to roots, extrema, and inflection points to see why each one matters.",
         category: "Derivatives",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="40" y1="17" x2="40" y2="57" stroke="#B5D4F4" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.75"/><line x1="10" y1="34" x2="76" y2="34" stroke="#B5D4F4" stroke-width="0.8"/><path d="M 14 30 Q 40 6 66 14" fill="none" stroke="#85B7EB" stroke-width="1.7"/><line x1="28" y1="17.69" x2="52" y2="10.31" stroke="#FAC775" stroke-width="1.5"/><circle cx="40" cy="14" r="2.6" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><line x1="8" y1="39" x2="76" y2="39" stroke="#B5D4F4" stroke-width="0.8" stroke-dasharray="3,2.5"/><line x1="10" y1="62" x2="76" y2="62" stroke="#B5D4F4" stroke-width="0.8"/><line x1="14" y1="50" x2="66" y2="70" stroke="#97C459" stroke-width="1.7"/><circle cx="40" cy="60" r="2.6" fill="#97C459" stroke="#27500A" stroke-width="1"/><text x="11" y="13" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" font-style="italic">f</text><text x="11" y="49" font-family="Georgia,serif" font-size="8" fill="#C0DD97" font-style="italic">f&#8242;</text></svg>`
       },
 
     }
   }
 }
 
-export default function DerivativeVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function DerivativeVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-function-families'),
+    stateRow('obj11', 'the-identity-function', 'identity'),
+    stateRow('obj12', 'the-quadratic', 'quadratic'),
+    stateRow('obj13', 'the-cubic', 'cubic'),
+    stateRow('obj14', 'sine', 'sine'),
+    stateRow('obj15', 'cosine', 'cosine'),
+    stateRow('obj16', 'the-exponential', 'exponential'),
+    stateRow('obj17', 'the-logarithm', 'logarithm'),
+    plain('obj3', 'the-x0-slider'),
+    plain('obj4', 'jump-to-points-of-interest'),
+    plain('obj5', 'the-at-the-point-card'),
+    plain('obj6', 'display-toggles'),
+    plain('obj7', 'what-is-a-derivative'),
+    plain('obj8', 'the-tangent-line'),
+    plain('obj9', 'from-f-to-f-prime'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -1091,7 +1097,7 @@ export default function DerivativeVisualizer({seoData, sectionsContent, introCon
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Derivative Visualizer & Tangent Line Tool</h1>
       <br/>
-      <FunctionDerivative/>
+      <FunctionDerivative explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

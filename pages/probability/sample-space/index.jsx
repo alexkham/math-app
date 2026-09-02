@@ -568,6 +568,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -725,26 +726,36 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: all five originals named their own h2 — definition, types,
+  // relationship to events, properties, and representing outcomes. Replaced
+  // with the element-versus-subset confusions the notation section catalogues
+  // and the ordering question the Common Mistakes list mentions but does not
+  // resolve. P(Ω) = 1 is left to the axioms page.
   const faqQuestions = {
     obj1: {
-      question: "What is a sample space in probability?",
-      answer: "The sample space is the complete collection of all possible outcomes a scenario can produce. Every outcome that can happen belongs to it, and anything that cannot happen is not included. Each outcome represents one full, specific result of the situation. For example, rolling a die has sample space {1, 2, 3, 4, 5, 6}."
+      question: "What is the difference between an outcome and an event?",
+      answer: "An outcome is a single element of the sample space, written ω ∈ Ω. An event is a subset, written A ⊆ Ω, and may contain many outcomes, one, or none. The distinction is element versus subset: the event that a particular outcome occurs is the singleton {ω}, not ω itself. Membership and containment do not swap.",
+      sectionId: "notation"
     },
     obj2: {
-      question: "What are the different types of sample spaces?",
-      answer: "Sample spaces fall into three categories: finite sample spaces with a limited number of outcomes (like rolling a die: {1,2,3,4,5,6}), countably infinite sample spaces where outcomes can be listed in sequence (like {1,2,3,...}), and uncountable or continuous sample spaces where outcomes fill an interval (like [0,∞) for measuring time)."
+      question: "Is (H, T) one outcome or two?",
+      answer: "One. An outcome can be a compound object — an ordered pair, a triple, or any tuple — and it still counts as a single element of the sample space. For two coin tosses, Ω = {(H,H), (H,T), (T,H), (T,T)} has exactly four outcomes, not eight. Treating the components separately is what makes multi-step experiments look harder than they are.",
+      sectionId: "outcomes"
     },
     obj3: {
-      question: "How do events relate to the sample space?",
-      answer: "Events are built directly from the sample space as subsets that collect the outcomes we care about. If the sample space describes everything that can happen, an event selects specific outcomes where something particular happens. For example, with die roll sample space {1,2,3,4,5,6}, the event 'roll an even number' is the subset {2,4,6}."
+      question: "Does order matter when listing a sample space?",
+      answer: "It depends on the experiment, and getting it wrong is a standard error. For two coin tosses with distinguishable coins, (H,T) and (T,H) are different outcomes and Ω has four elements. If only the number of heads matters, the space is smaller. Decide what counts as one full result of the experiment, then list accordingly.",
+      sectionId: "mistakes"
     },
     obj4: {
-      question: "What properties must a sample space have?",
-      answer: "A sample space must: include every outcome that can occur in the scenario, exclude outcomes that cannot occur, have mutually exclusive outcomes (only one outcome happens per trial), be collectively exhaustive (something from the set must occur), and allow events to be formed as subsets. These properties ensure probabilities behave consistently."
+      question: "Does an event with more outcomes always have a higher probability?",
+      answer: "Not in general. If one event is contained in another, A ⊆ B, then P(A) ≤ P(B) — that much always holds. But merely having more elements guarantees nothing, because outcomes need not be equally likely: a two-outcome event built from likely results can beat a ten-outcome event built from rare ones. The subset mark records structure; P supplies the number.",
+      sectionId: "notation"
     },
     obj5: {
-      question: "How do you represent a sample space?",
-      answer: "Sample spaces can be represented using: explicit lists for small finite spaces {1,2,3,4,5,6}, ordered pairs for multi-step experiments like {(H,H), (H,T), (T,H), (T,T)}, intervals for continuous outcomes like [0,1], set-builder notation {x : 0 ≤ x ≤ 10}, or Cartesian products for combining spaces. The representation depends on the scenario and size of the outcome set."
+      question: "Why is the sample space written Ω instead of S?",
+      answer: "Both are standard and name the same thing. Capital omega is the convention in measure-theoretic and university-level texts, while S — from the words sample space — is common in school textbooks. Older and applied writing sometimes uses U, borrowing the [universal set](!/set-theory/operations#notation) from set theory. The letter carries no mathematical content, only house style.",
+      sectionId: "notation"
     }
   }
 
@@ -814,19 +825,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/sample-space"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1212,6 +1210,22 @@ export default function SampleSpacePage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Sample Space FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1245,13 +1259,6 @@ export default function SampleSpacePage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

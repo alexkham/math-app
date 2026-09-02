@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function VarianceVisualizer() {
+export default function VarianceVisualizer({ explanations = null } = {}) {
   const [dataPoints, setDataPoints] = useState([12, 15, 18, 20, 22, 25, 28]);
   const [varianceType, setVarianceType] = useState('population'); // 'population' or 'sample'
   const [draggedIndex, setDraggedIndex] = useState(null);
@@ -20,6 +20,22 @@ export default function VarianceVisualizer() {
   const variance = sumSquaredDeviations / divisor;
   const standardDeviation = Math.sqrt(variance);
   const range = Math.max(...dataPoints) - Math.min(...dataPoints);
+
+  // Line 1 anchor mesh: which documented state the tool is currently showing.
+  // Datasets are value-matched against the component's own presets; the sample
+  // toggle wins, because n vs n-1 is the distinction the page keys on.
+  const LINE1_PRESETS = {
+    default: [12, 15, 18, 20, 22, 25, 28],
+    low: [20, 21, 20, 22, 21, 20, 22],
+    high: [10, 30, 15, 35, 12, 38, 8],
+    outliers: [15, 16, 15, 17, 16, 15, 40],
+  };
+  const line1Preset = Object.keys(LINE1_PRESETS).find((k) => {
+    const p = LINE1_PRESETS[k];
+    return p.length === dataPoints.length && p.every((v, i) => v === dataPoints[i]);
+  }) || null;
+  const line1Key = varianceType === 'sample' ? 'sample' : line1Preset;
+  const line1Note = explanations && line1Key ? explanations[line1Key] : null;
 
   // Chart dimensions
   const chartWidth = 700;
@@ -203,6 +219,23 @@ export default function VarianceVisualizer() {
           <div style={styles.statValue}>{dataPoints.length}</div>
         </div>
       </div>
+
+      {line1Note && (
+        <div
+          style={{
+            margin: '0 0 14px',
+            padding: '10px 14px',
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            borderLeft: '4px solid #2196F3',
+            borderRadius: 6,
+            fontSize: '13px',
+            lineHeight: 1.6,
+            color: '#475569',
+          }}
+          dangerouslySetInnerHTML={{ __html: line1Note }}
+        />
+      )}
 
       <div style={styles.mainLayout}>
         <div style={styles.chartContainer}>

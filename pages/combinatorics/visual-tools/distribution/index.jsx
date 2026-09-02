@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import DistributionIntoCells from '../../../../app/components/combinatorics/new-visualizers/scenes/DistributionIntoCells'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import distributionIntoCellsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/distributionIntoCellsDiagrams'
 
 
 export async function getStaticProps(){
@@ -541,7 +543,7 @@ export async function getStaticProps(){
 
 • An **items row** at the top, captioned *ITEMS TO PLACE (n = N)*, showing the $n$ distinct items.
 
-• A **cells row** in the middle, captioned *CELLS (k = K)*, with $k$ labeled boxes named *Cell 1* through *Cell k*.
+• A **cells row** in the middle, captioned *CELLS (k = K)*, with $k$ labeled boxes named *Cell 1* through **Cell k**.
 
 • A **completed** section below, where every finished distribution is filed under the row matching which cell item 1 picked.
 
@@ -557,7 +559,9 @@ To run the visualization:
 
 The header shows the formula $k^n = \\text{total}$ alongside a live status line like *Cell c: $k$ / $k^{n-1}$* while building. Below the cells a live assignment readout shows $(c_1, c_2, \\dots, c_n)$ with unknown slots marked $?$ as the build progresses.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the opening position: three items above three tall, empty cells, the readout showing $(?, ?, ?)$. The question marks are the honest notation — a distribution **is** that tuple, one cell number per item, and the run's only job is to replace every $?$ with a choice.
+
+Unlike the partition tool's fixed room sizes, nothing here constrains where anyone goes. Every $?$ has the full menu of $k$ cells, which is why the total is a clean power — see [the cells](!#the-cells) for the mechanics.`,
       link: '',
     },
 
@@ -567,7 +571,7 @@ The header shows the formula $k^n = \\text{total}$ alongside a live status line 
 
 • Each cell is **labeled** *Cell 1, Cell 2, …* above the box. The labels are part of the data — *Cell 1* and *Cell 2* are different even if they end up holding the same items.
 
-• Items stack **bottom-up** inside a cell as they arrive. The visual position in the stack reflects arrival order, but for counting purposes only *which items are in this cell* matters.
+• Items stack **bottom-up** inside a cell as they arrive. The visual position in the stack reflects arrival order, but for counting purposes only **which items are in this cell** matters.
 
 • **No capacity limit.** A cell can end up with $0$, $1$, $2$, … any number of items up to $n$. The all-items-in-Cell-1 outcome is just as valid as the perfectly-spread outcome.
 
@@ -577,7 +581,9 @@ The header shows the formula $k^n = \\text{total}$ alongside a live status line 
 
 Below the cells, an **assignment readout** shows the current tuple $(c_1, c_2, \\dots, c_n)$ with $?$ for unfilled positions, and a legend reminds you that $c_i$ is the cell item $i$ went to.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above catches the second distribution mid-build: items 1 and 2 stacked together in Cell 1, item 3 riding its dotted guide toward Cell 2, and the readout at $(1, 1, ?)$. Two items sharing a cell is not a collision — it is the "no capacity limit" rule doing exactly what it promises.
+
+The stack order inside a cell records arrival, not meaning: for the count, only the tuple matters. That is why the readout, not the picture, is the mathematical object — the picture is the tuple made physical, as [the derivation](!#deriving-k-n) spells out.`,
       link: '',
     },
 
@@ -591,17 +597,17 @@ Below the cells, an **assignment readout** shows the current tuple $(c_1, c_2, \
 
 The caps are:
 
-• $n = 2$: maximum $k = 4$, giving $4^2 = 16$ distributions.
+• $n = 2$: maximum $k = 4$, giving $4^2 = 16$ distributions — [more cells than items](!#more-cells-than-items).
 
 • $n = 3$: maximum $k = 4$, giving $4^3 = 64$ distributions.
 
-• $n = 4$: maximum $k = 3$, giving $3^4 = 81$ distributions.
+• $n = 4$: maximum $k = 3$, giving $3^4 = 81$ distributions — the [largest run on this page](!#deriving-k-n).
 
 Common combinations:
 
-• $n = 3, k = 2$: $2^3 = 8$ distributions.
+• $n = 3, k = 2$: $2^3 = 8$ distributions — [binary choices](!#two-cells-binary-choices).
 
-• $n = 3, k = 3$: $3^3 = 27$ distributions.
+• $n = 3, k = 3$: $3^3 = 27$ distributions — the [default configuration](!#grouping-by-item-1s-destination).
 
 • $n = 4, k = 2$: $2^4 = 16$ distributions.
 
@@ -615,7 +621,7 @@ Reducing $n$ may cause $k$ to clamp to the new maximum automatically. Changing e
       title: `Grouping by Item 1's Destination`,
       content: `The completed section organizes distributions by **which cell item 1 picked**. There are exactly $k$ rows — one per cell — and each row holds every distribution where item 1 went to that particular cell.
 
-Unlike the variable-size groups in *partition into groups*, here all $k$ groups have **the same size**:
+Unlike the variable-size groups in **partition into groups**, here all $k$ groups have **the same size**:
 
 $$\\text{group size} = k^{n - 1}$$
 
@@ -627,7 +633,9 @@ This uniformity is the visual signature of independent choice. Compare it with t
 
 Each row in the completed area has a *item 1 → Cell c* label on the left and a grid of mini cards. Each mini card shows the full assignment as $k$ small stacked cells plus the tuple $(c_1, c_2, \\dots, c_n)$ below it.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the default $3^3 = 27$ completed: three rows of nine, ruler-straight. The equal rows are this page's counterpoint to the staircases elsewhere in the section — independence means the first choice tells you nothing about how many ways remain.
+
+Twenty-seven cards also invite an audit of the "no constraint" claim: find $(1,1,1)$ — everything crowded into one cell — and $(1,2,3)$ — everything spread. Both sit in the grid with equal standing; the count plays no favorites among shapes.`,
       link: '',
     },
 
@@ -637,7 +645,7 @@ Each row in the completed area has a *item 1 → Cell c* label on the left and a
 
 • **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single distribution or pausing mid-build.
 
-• **Step ▶** (Step forward) — sends one item into its chosen cell. Stop after each step to read the partial assignment tuple.
+• **Step ▶** (Step forward) — sends one item into [its chosen cell](!#the-cells). Stop after each step to read the partial assignment tuple.
 
 • **▶ Play / ⏸ Pause** — runs the animation continuously until all $k^n$ distributions are built, then auto-pauses.
 
@@ -657,7 +665,7 @@ The **Speed** slider controls how fast play advances. At higher speeds the fly a
 
 • **Letters mode** — items appear with letter labels (A, B, C, …). Best for reading off each distribution and matching the visual stack to the assignment tuple, where item A goes to cell $c_1$, item B to cell $c_2$, and so on.
 
-The encoding is consistent across the items row, the cells, the flying ball, every mini distribution card in the completed grid, and the right-panel narration. Cell numbers (1, 2, 3, …) are independent of mode — cells are always numbered, regardless of how items are displayed.`,
+The encoding is consistent across the items row, the cells, the flying ball, every mini distribution card in the completed grid, and the [right-panel narration](!#right-panel-and-progress). Cell numbers (1, 2, 3, …) are independent of mode — cells are always numbered, regardless of how items are displayed.`,
       before: ``,
       after: ``,
       link: '',
@@ -667,7 +675,7 @@ The encoding is consistent across the items row, the cells, the flying ball, eve
       title: `Right Panel and Progress`,
       content: `The right panel narrates the build as it unfolds, anchored by the header *Distribution into cells ($k^n$)* with the formula displayed across multiple lines and a reminder that this is the same math as permutations with repetition, framed from the items' point of view rather than positions to fill.
 
-A **StepRow** is added for each item-1-destination group as soon as a distribution in that group starts or completes. Each StepRow shows:
+A **StepRow** is added for each [item-1-destination group](!#grouping-by-item-1s-destination) as soon as a distribution in that group starts or completes. Each StepRow shows:
 
 • The **destination** as text — *Item 1 → Cell c*.
 
@@ -675,7 +683,7 @@ A **StepRow** is added for each item-1-destination group as soon as a distributi
 
 • A short **narration**: *When item 1 goes to Cell c, the remaining $n - 1$ items each still independently pick one of $k$ cells. That gives $k^{n-1}$ outcomes in this group.*
 
-When all groups complete, every StepRow shows *done* with a checkmark, and the counter reaches *total / total*.`,
+When all groups complete, every StepRow shows **done** with a checkmark, and the counter reaches *total / total*.`,
       before: ``,
       after: ``,
       link: '',
@@ -705,6 +713,8 @@ Examples:
 
 • Number of functions from a $3$-element set to a $5$-element set: $5^3 = 125$.
 
+On this page the idea runs live: from the [opening tuple of question marks](!#getting-started), items [stack into cells](!#the-cells) one independent choice at a time, results group into [k equal-size rows](!#grouping-by-item-1s-destination), and the [n and k steppers](!#adjusting-n-and-k) stretch the count from the binary $2^3$ up to $3^4 = 81$.
+
 For deeper coverage of the formula and its connections, see the **distribution into cells** section on the combinations theory page.`,
       before: ``,
       after: ``,
@@ -731,13 +741,15 @@ Multiply $n$ identical factors of $k$:
 
 $$k \\times k \\times k \\times \\dots \\times k = k^n$$
 
-The tool visualizes the equivalent decomposition: fix where item 1 goes ($k$ ways), then ask how many ways the remaining $n - 1$ items can be distributed independently ($k^{n - 1}$ ways). Every row in the completed section is one of those $k$ item-1-destination families, all the same size.
+The tool visualizes the equivalent decomposition: fix where item 1 goes ($k$ ways), then ask how many ways the remaining $n - 1$ items can be distributed independently ($k^{n - 1}$ ways). Every row in the completed section is one of those $k$ [item-1-destination families](!#grouping-by-item-1s-destination), all the same size.
 
 Note the perfect symmetry: it doesn't matter which item you fix first — fixing item 2 or item $n$ instead would give the same decomposition into $k$ equal-size groups, just labeled differently. This is the visual signature of full independence.
 
 Counts grow quickly: $2^5 = 32$, $3^5 = 243$, $5^5 = 3125$. The base $k$ and exponent $n$ play asymmetric roles — increasing $n$ multiplies the count by $k$, increasing $k$ multiplies by a factor that itself depends on $n$.`,
       before: ``,
-      after: ``,
+      after: `The frozen frame above is the page's largest run: $3^4 = 81$ distributions of four items into three cells. With more items than cells, the [pigeonhole principle](!#related-concepts) guarantees a shared cell in every single card — scan the grid and you will find no distribution with all four items alone.
+
+Eighty-one is also where this tool and its mirror meet: the permutation-with-repetition page shows the same $81$ as $3^4$ sequences. One enumeration, two stories — positions choosing symbols there, items choosing cells here.`,
       link: '',
     },
 
@@ -755,7 +767,7 @@ Counts grow quickly: $2^5 = 32$, $3^5 = 243$, $5^5 = 3125$. The base $k$ and exp
 
 **Surjective functions** — functions where every cell is hit. Counted by $k! \\cdot S(n, k)$ where $S(n, k)$ is the Stirling number of the second kind. Always at most $k^n$.
 
-**Pigeonhole principle** — when $n > k$, at least one cell must contain more than one item. The distribution count $k^n$ includes every such forced overlap.
+**Pigeonhole principle** — when $n > k$, at least one cell must contain more than one item, as [the 81-card run](!#deriving-k-n) shows card by card. The distribution count $k^n$ includes every such forced overlap.
 
 **Combinatorics calculator** — to compute $k^n$ for arbitrary $n$ and $k$, see the **distribution into cells calculator**.`,
       before: ``,
@@ -763,8 +775,32 @@ Counts grow quickly: $2^5 = 32$, $3^5 = 243$, $5^5 = 3125$. The base $k$ and exp
       link: '',
     },
 
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `Two Cells: Binary Choices`,
+      content: `Set $k = 2$ and every item faces the simplest possible decision: Cell 1 or Cell 2. With $n = 3$ items, that is $2^3 = 8$ distributions — the assignment tuples run through every binary string of length three, from $(1,1,1)$ to $(2,2,2)$.
+
+Eight is a number with a second identity: it is the number of **subsets** of a three-element set. Read each distribution as "the set of items that chose Cell 1" and the eight cards become the eight subsets — empty set through full set — with Cell 2 holding each complement.
+
+This is why $2^n$ counts subsets: a subset is nothing but a two-cell distribution wearing set notation.`,
+      before: ``,
+      after: `The subset reading turns this configuration into a bridge across the whole section: the combination tool counts subsets **of one fixed size** ($\\binom{n}{r}$ of them), and summing those sizes recovers this page's total — $\\sum_r \\binom{n}{r} = 2^n$, the binomial theorem at $x = y = 1$.
+
+Every yes/no survey, every on/off switchboard, every include/exclude decision is a two-cell distribution. The general $k^n$ is just this picture with a longer menu.`,
+      link: '',
+    },
+    obj12: {
+      title: `More Cells Than Items`,
+      content: `Set $n = 2, k = 4$ and the tool draws a scene the fixed-size partition tool never could: four cells for only two items, $4^2 = 16$ distributions — and in every one of them, **at least two cells stand empty**.
+
+Emptiness here is not failure but freedom: "no capacity limit" cuts both ways, and a cell that attracts nobody is as legal as a cell that attracts everyone. The sixteen cards show every pattern — the two items together in any of the four cells, or split across any ordered pair of different cells.
+
+In function language: with a domain of $2$ and a codomain of $4$, no function can be surjective — the range simply runs out of elements before the codomain does.`,
+      before: ``,
+      after: `The guaranteed-empty configuration is the mirror image of the pigeonhole crowding at $n > k$: too many cells forces vacancy exactly as too many items forces sharing. Between the two regimes sits $n = k$, the only territory where every-cell-filled is even possible — those all-full distributions are the $k!$ bijections, a vanishing minority of the $k^k$ total.
+
+For counts that **require** every cell non-empty, the section offers the [strong composition](!#related-concepts) for identical items — and for distinct items, the surjection count in the related concepts is the answer this tool deliberately doesn't enforce.`,
+      link: '',
+    },
     obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
@@ -885,12 +921,43 @@ Counts grow quickly: $2^5 = 32$, $3^5 = 243$, $5^5 = 3125$. The base $k$ and exp
   }
 
 
+  // Frozen-state framed units (Line 1): phases + notable (n, k) configurations.
+  const d = distributionIntoCellsDiagrams;
+  const u = (key, caption, text) => demoUnitFrame({ svg: d[key], caption, text });
+  const stateUnits = {
+    idle: u('idle', '(n, k) = (3, 3), idle, frozen',
+      'Three items above three empty cells, the readout showing (?, ?, ?) — a distribution is that tuple, and the run just fills in the question marks.'),
+    building: u('building', '(3, 3) mid-build, frozen',
+      'Items 1 and 2 stacked together in Cell 1, item 3 riding its guide to Cell 2, readout (1, 1, ?) — sharing a cell is the rule working, not breaking.'),
+    default33: u('default33', '3³ complete, frozen',
+      'Twenty-seven cards in three ruler-straight rows of nine: equal groups are the fingerprint of fully independent choices.'),
+    twoCells: u('twoCells', '2³ complete, frozen',
+      'Eight cards, one per binary string — and one per subset of the three items, reading Cell 1 as "in" and Cell 2 as "out."'),
+    manyCells: u('manyCells', '4² complete, frozen',
+      'Sixteen cards, each leaving at least two of the four cells empty: with more cells than items, vacancy is guaranteed.'),
+    big43: u('big43', '3⁴ complete, frozen',
+      'The largest run: 81 cards, and by the pigeonhole principle every single one has some cell holding two or more items.'),
+  };
+
+  // Per-state panel explanations (Line 1). Rendered under the right panel's
+  // step rows through processContent — same-page !# anchors work.
+  const explanations = {
+    idle: `The readout's question marks are the whole problem: one cell number per item, freely chosen — no sizes, no quotas. [Learn more about getting started](!#getting-started) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    building: `Each item makes one independent choice and stacks where it lands — cells can crowd or stay empty, and the tuple below records it all. [Learn more about the cells](!#the-cells) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    default33: `All 3³ = 27 assignments are in: three equal rows of nine, because fixing item 1's cell constrains nobody else. [Learn more about the grouping](!#grouping-by-item-1s-destination) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    twoCells: `Eight distributions — every binary string of length three, and every subset of the items: 2^n counts subsets for exactly this reason. [Learn more about binary choices](!#two-cells-binary-choices) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    manyCells: `Sixteen distributions with emptiness guaranteed: two items cannot reach four cells, so no function here is surjective. [Learn more about spare cells](!#more-cells-than-items) · [Adjusting n and k](!#adjusting-n-and-k)`,
+    big43: `3⁴ = 81, and with four items in three cells the pigeonhole principle plants a shared cell in every card. [Learn more about the derivation](!#deriving-k-n) · [Adjusting n and k](!#adjusting-n-and-k)`,
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      stateUnits,
+      explanations,
       seoData: {
         title: "Distribution into Cells: k^n Formula | Learn Math Class",
         description: "Visualize all k^n ways to distribute n distinct items into k labeled cells. Each item independently picks a cell, with results grouped by item 1's destination.",
@@ -899,105 +966,49 @@ Counts grow quickly: $2^5 = 32$, $3^5 = 243$, $5^5 = 3125$. The base $k$ and exp
         name: "Distribution into Cells Visualizer",
         hubDescription: "Send n distinct items into k labeled cells where each item picks its own cell — watch the assignment tuple fill in below the cells and the k^n outcomes group by item 1's destination. Same math as permutations with repetition, framed from the items' point of view.",
         category: "Combinations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="12" r="5.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="40" cy="12" r="5.5" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="60" cy="12" r="5.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><line x1="20" y1="18" x2="14" y2="44" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2,1.5"/><line x1="40" y1="18" x2="24" y2="44" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2,1.5"/><line x1="60" y1="18" x2="62" y2="44" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2,1.5"/><rect x="6" y="42" width="20" height="22" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><rect x="30" y="42" width="20" height="22" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><rect x="54" y="42" width="20" height="22" rx="3" fill="#ffffff" fill-opacity="0.12" stroke="#B5D4F4" stroke-width="1.1"/><circle cx="13" cy="53" r="5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="23" cy="53" r="5" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="64" cy="53" r="5" fill="#97C459" stroke="#27500A" stroke-width="1"/><text x="16" y="73" font-family="Georgia,serif" font-size="7.5" fill="#B5D4F4" text-anchor="middle">1</text><text x="40" y="73" font-family="Georgia,serif" font-size="7.5" fill="#B5D4F4" text-anchor="middle">2</text><text x="64" y="73" font-family="Georgia,serif" font-size="7.5" fill="#B5D4F4" text-anchor="middle">3</text></svg>`
       },
 
     }
   }
 }
 
-export default function DistributionIntoCellsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function DistributionIntoCellsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
+  // Helper rows: plain section / per-state section carrying its frozen unit
+  // as [content, unit, after]. (Slug ids replace the former numeric ids.)
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [sectionsContent[obj].content]
+  })
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ]
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
+    plain('obj0', 'key-terms'),
+    stateRow('obj1', 'getting-started', 'idle'),
+    stateRow('obj2', 'the-cells', 'building'),
+    plain('obj3', 'adjusting-n-and-k'),
+    stateRow('obj4', 'grouping-by-item-1s-destination', 'default33'),
+    stateRow('obj11', 'two-cells-binary-choices', 'twoCells'),
+    stateRow('obj12', 'more-cells-than-items', 'manyCells'),
+    plain('obj5', 'transport-controls'),
+    plain('obj6', 'mode-switch'),
+    plain('obj7', 'right-panel-and-progress'),
+    plain('obj8', 'what-is-a-distribution-into-cells'),
+    stateRow('obj9', 'deriving-k-n', 'big43'),
+    plain('obj10', 'related-concepts'),
 
   ]
 
@@ -1055,7 +1066,7 @@ export default function DistributionIntoCellsVisualizer({seoData, sectionsConten
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Distribution into Cells</h1>
       <br/>
-      <DistributionIntoCells/>
+      <DistributionIntoCells explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

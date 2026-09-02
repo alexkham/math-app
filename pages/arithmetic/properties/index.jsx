@@ -756,6 +756,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1289,26 +1290,33 @@ const introContent = {
   content: `A property of an operation is a statement that holds for every input. The order of two addends never affects the sum; the grouping of three factors never changes the product. These facts are not coincidences — they are the structural rules of arithmetic, and every algebraic manipulation rests on them. This page collects the core properties of addition and multiplication, the bridge between the two, and the smaller derived rules that follow.`,
 }
  
+// FAQ pass: cut three case-A questions — the definition, the survey of main
+// properties, and the distributive property all have h2s stating the answer.
+// Kept the zero-inverse question (buried under an h3 inside Inverse Elements)
+// and the derived-operations question; invented the two "why" questions whose
+// mechanisms sit in final paragraphs under headings that state only the rule.
+// The zero-inverse answer is deliberately the formal angle — the intuitive
+// version belongs to /arithmetic/fractions ("Why can't the denominator be zero?").
 const faqQuestions = {
   obj1: {
-    question: "What are properties of arithmetic operations?",
-    answer: "A property of an arithmetic operation is a statement that holds for every choice of inputs. For example, the commutative property of addition states that a + b equals b + a for any numbers. These properties form the structural rules that all arithmetic and algebra rely on, independent of any specific computation."
+    question: "Why is a negative times a negative a positive?",
+    answer: "It follows from the distributive property rather than being a separate rule. Start from (−a)(b) + ab, which factors as (−a + a)(b) = 0 · b = 0, forcing (−a)(b) to equal −(ab). Applying the same argument again to (−a)(−b) forces it to equal ab. So (−3)(−4) = 12: the result is fixed by the structure of arithmetic, not chosen by convention.",
+    sectionId: "9"
   },
   obj2: {
-    question: "What are the main properties of addition and multiplication?",
-    answer: "The main properties are commutative (order does not matter), associative (grouping does not matter), and distributive (linking addition and multiplication). Each operation also has an identity element: 0 for addition and 1 for multiplication. Every real number has an additive inverse, and every nonzero real number has a multiplicative inverse."
+    question: "Why does any number times zero equal zero?",
+    answer: "It is a consequence of the distributive property, not a separate axiom. Since 0 = 0 + 0, we get a · 0 = a · (0 + 0) = a · 0 + a · 0. Subtracting a · 0 from both sides leaves 0 = a · 0. This result is also what prevents zero from having a reciprocal, and it underlies factoring: a product is zero whenever any factor is zero.",
+    sectionId: "8"
   },
   obj3: {
-    question: "What is the distributive property?",
-    answer: "The distributive property states that a(b + c) equals ab + ac. It connects addition and multiplication, allowing a sum to be multiplied term by term. Reading the equation in reverse gives the basis for factoring, where a common factor is pulled out of a sum: ab + ac equals a(b + c)."
+    question: "Why does zero have no multiplicative inverse?",
+    answer: "The number 0 is the only real number without a multiplicative inverse. The equation 0 · x = 1 has no solution because, by the zero property of multiplication, 0 times any number equals 0. There is no value that turns 0 into 1. This is the formal reason division by zero is undefined: 1/0 would name an inverse that does not exist.",
+    sectionId: "7"
   },
   obj4: {
-    question: "Why does zero have no multiplicative inverse?",
-    answer: "The number 0 is the only real number without a multiplicative inverse. The equation 0 times x equals 1 has no solution because, by the zero property of multiplication, 0 times any number equals 0. This is the formal reason division by zero is undefined."
-  },
-  obj5: {
     question: "How are subtraction and division related to addition and multiplication?",
-    answer: "Subtraction is defined as addition of an additive inverse: a minus b is shorthand for a plus negative b. Division is defined as multiplication by a multiplicative inverse: a divided by b is shorthand for a times 1/b. Both are derived operations built on top of addition and multiplication, not primitive operations of their own."
+    answer: "Subtraction is defined as addition of an additive inverse: a − b is shorthand for a + (−b). Division is defined as multiplication by a multiplicative inverse: a ÷ b is shorthand for a · (1/b). Both are derived operations rather than primitive ones, which is why neither inherits commutativity or associativity — a − b is not b − a.",
+    sectionId: "10"
   },
 }
 
@@ -1376,19 +1384,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/properties"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1548,6 +1543,22 @@ export default function ArithmeticProperties({seoData, sectionsContent, introCon
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Arithmetic Properties FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'15',
     //     title:sectionsContent.obj15.title,
@@ -1618,12 +1629,6 @@ export default function ArithmeticProperties({seoData, sectionsContent, introCon
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

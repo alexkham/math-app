@@ -445,7 +445,7 @@
 //    <br/>
 //    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Fundamental Theorem of Calculus</h1>
 //    <br/>
-//    <FunctionFTC/>
+//    <FunctionFTC explanations={explanations}/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -493,6 +493,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionFTC from '../../../../app/components/functions/ftc/FunctionFTC'
+import functionFTCDiagrams from '../../../../app/components/functions/ftc/functionFTCDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -734,38 +736,81 @@ For deeper coverage of integration techniques and antiderivative tables, see the
     },
 
     obj11: {
-      title: ``,
-      content: ``,
+      title: `Identity: Area That Grows Like a Triangle`,
+      content: `With $f(t) = t$, $a = 0$ and $x = 2$, the shaded region is a right triangle of base $2$ and height $2$, so its area is $2$ — and the accumulator reads $F(2) = 2$ to match.
+
+Geometry gives the whole answer here without any integration: $F(x) = \frac{1}{2} \cdot x \cdot x = \frac{x^2}{2}$, a parabola. The dashed F curve on the graph is exactly that parabola.`,
       before: ``,
-      after: ``,
+      after: `This family is the cleanest illustration of Part 1. Differentiate the area function and you get $\frac{d}{dx}\left(\frac{x^2}{2}\right) = x$, which is the integrand you started with. The slope of the dashed curve at any $x$ equals the height of the solid one at that same $x$.
+
+It also shows why a straight integrand produces a curved accumulator. Area accrues faster as $x$ grows, because each new sliver is taller than the last — so F bends upward even though f does not.`,
       link: '',
     },
     obj12: {
-      title: ``,
-      content: ``,
+      title: `Quadratic: the Tool's Opening State`,
+      content: `$f(t) = t^2$ from $a = 0$ to $x = 2$. The shaded area works out to
+
+$\int_0^2 t^2\,dt = \frac{2^3}{3} = \frac{8}{3} \approx 2.667$
+
+and $F(2)$ reads the same. Note that $f(2) = 4$ while $F(2) = 2.667$: the two markers sit at different heights, and they are measuring different things.`,
       before: ``,
-      after: ``,
+      after: `That difference is the point most worth pinning down. $f(x)$ is a **height** — how tall the integrand is at $x$. $F(x)$ is an **accumulated area** — everything collected between $a$ and $x$. They share an $x$ and nothing else.
+
+What connects them is the slope. The dashed F curve is steepest where the solid f curve is tallest, and $F'(2) = f(2) = 4$ exactly. Reading the two curves that way — heights on one, slopes on the other — is what makes [Part 1](!#part-1-the-accumulator) visible rather than symbolic.`,
       link: '',
     },
     obj13: {
-      title: ``,
-      content: ``,
+      title: `Cubic: a Faster Integrand, a Faster Accumulator`,
+      content: `$f(t) = t^3$ on $[0, 2]$ gives
+
+$\int_0^2 t^3\,dt = \frac{2^4}{4} = 4$
+
+with $f(2) = 8$. The accumulator is $F(x) = x^4/4$, which climbs steeply once past $x = 1$.`,
       before: ``,
-      after: ``,
+      after: `Integrating raises the degree by one, every time: $t$ accumulates to $x^2/2$, $t^2$ to $x^3/3$, $t^3$ to $x^4/4$. That is the power rule running backwards, and the three polynomial families lay it out in order.
+
+There is a detail the negative side of the graph makes visible. For $x < 0$ the cubic is below the axis, so area accrues *negatively* — yet $F(x) = x^4/4$ is positive there. No contradiction: with $x < 0 = a$ the integral runs backwards, and the two sign reversals cancel. The [signed area](!#the-shaded-area) discussion covers the bookkeeping.`,
       link: '',
     },
     obj14: {
-      title: ``,
-      content: ``,
+      title: `Sine: an Accumulator That Turns Around`,
+      content: `$f(t) = \sin(t)$ from $0$ to $2$. The area comes to
+
+$\int_0^2 \sin(t)\,dt = -\cos(2) + \cos(0) \approx 1.416$
+
+with $f(2) \approx 0.909$. Here $F(x) = 1 - \cos(x)$, a shifted cosine wave.`,
       before: ``,
-      after: ``,
+      after: `The interesting behaviour is just past $x = \pi$. There the sine drops below the axis, each new sliver of area is negative, and the accumulator stops rising and begins to fall — even though it is still positive.
+
+That turning point is Part 1 again, read in reverse: F has a maximum exactly where $f$ crosses zero going downward, because $F' = f$ and a maximum needs $F' = 0$. Every zero of the integrand is a critical point of the accumulator.`,
       link: '',
     },
     obj15: {
-      title: ``,
-      content: ``,
+      title: `Cosine: Where the Two Curves Swap Roles`,
+      content: `$f(t) = \cos(t)$ on $[0, 2]$ accumulates to
+
+$\int_0^2 \cos(t)\,dt = \sin(2) - \sin(0) \approx 0.909$
+
+while $f(2) = \cos(2) \approx -0.416$ — the integrand has already gone negative, though the accumulated total is still comfortably positive.
+
+The accumulator is $F(x) = \sin(x)$, so this family draws a cosine and a sine on the same axes.`,
       before: ``,
-      after: ``,
+      after: `Compare this state against the sine family and the pairing becomes obvious: there the integrand was $\sin$ and the accumulator a shifted $\cos$; here the integrand is $\cos$ and the accumulator is $\sin$. Differentiation and integration walk the same cycle in opposite directions.
+
+The negative readings also make the sign convention concrete. Between $\pi/2$ and $2$ the shaded region lies below the axis and is subtracted, which is why the total of $0.909$ is smaller than the area of the visible region above the axis alone.`,
+      link: '',
+    },
+    obj16: {
+      title: `Exponential: Accumulator and Integrand Almost Coincide`,
+      content: `$f(t) = e^t$ from $0$ to $2$ gives
+
+$\int_0^2 e^t\,dt = e^2 - 1 \approx 6.389$
+
+against $f(2) = e^2 \approx 7.389$. The two differ by exactly $1$, and they will differ by exactly $1$ at every $x$.`,
+      before: ``,
+      after: `That is the signature of the exponential. Since $F(x) = e^x - e^0 = e^x - 1$, the accumulator is the integrand shifted down by one unit — the two curves on screen are parallel in the vertical sense, never converging or diverging.
+
+It follows directly from $f' = f$. The only functions whose accumulated area matches their own height, up to a constant, are the exponentials, and the constant here is fixed by the starting point: $F(a) = 0$ always, so at $a = 0$ the offset must be $e^0 = 1$.`,
       link: '',
     }
 
@@ -776,6 +821,53 @@ For deeper coverage of integration techniques and antiderivative tables, see the
     id: "intro",
     title: "",
     content: ``
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     SVGs come from the tool's own scene description, serialised through the
+     core's generateSVG - see app/components/functions/frozenSvg.js. All six
+     states use the component's defaults: a = 0, x = 2. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: functionFTCDiagrams[key], caption, text })
+
+  const stateUnits = {
+    identity: unit('identity', 'Identity, frozen at a = 0, x = 2',
+      'The shaded region is a triangle of area 2, and the dashed accumulator passes through height 2 at ' +
+      'x = 2. A straight integrand gives a parabolic F.'),
+    quadratic: unit('quadratic', 'Quadratic, frozen at a = 0, x = 2',
+      'Two markers at different heights on the same vertical: f(2) = 4 is a height, F(2) = 2.667 is an ' +
+      'accumulated area. The slope of the dashed curve there is 4, not 2.667.'),
+    cubic: unit('cubic', 'Cubic, frozen at a = 0, x = 2',
+      'f(2) = 8 with an accumulated area of 4. F(x) = x&#8308;/4 climbs sharply past x = 1, and stays ' +
+      'positive on the left of the axis even though the integrand is negative there.'),
+    sine: unit('sine', 'Sine, frozen at a = 0, x = 2',
+      'Area 1.416 collected so far, with the integrand at 0.909 and falling. Past x = &pi; the shaded ' +
+      'slivers go negative and the dashed accumulator turns back down.'),
+    cosine: unit('cosine', 'Cosine, frozen at a = 0, x = 2',
+      'The integrand has already gone negative at -0.416 while the running total is still +0.909. ' +
+      'The accumulator here is exactly sin(x) - the two curves are the familiar pair, swapped.'),
+    exponential: unit('exponential', 'Exponential, frozen at a = 0, x = 2',
+      'f(2) = 7.389 against F(2) = 6.389 - a gap of exactly 1, and the same gap at every x, because ' +
+      'F(x) = e&#739; - 1 is the integrand shifted down one unit.'),
+  }
+
+
+  /* ---- per-family panel notes, passed into the component (Line 1) ----
+     FunctionFTC had no explanations prop; one was added additively and defaults
+     to null, so the panel is unchanged when nothing is passed. Content is
+     markdown - InfoPanel renders it through processContent, so anchors use the
+     normal [text](!#slug) form. */
+  const note = (body, slug, label) =>
+    `### Where this leads\n\n${body} See [${label}](!#${slug}) or compare [all six families](!#the-function-families).`
+
+  const explanations = {
+    identity: note('A triangular area, so F is a parabola - the simplest case where geometry alone gives the answer.', 'area-that-grows-like-a-triangle', 'the identity family'),
+    quadratic: note('f(x) is a height and F(x) an accumulated area; they share an x and nothing else.', 'the-opening-state', 'the quadratic family'),
+    cubic: note('Integrating raises the degree by one, every time.', 'a-faster-integrand', 'the cubic family'),
+    sine: note('Once the integrand dips below the axis the accumulator turns around - every zero of f is a critical point of F.', 'an-accumulator-that-turns-around', 'the sine family'),
+    cosine: note('Integrand and accumulator swap roles here, which is differentiation and integration walking the same cycle in opposite directions.', 'where-the-curves-swap-roles', 'the cosine family'),
+    exponential: note('Accumulator and integrand differ by exactly 1 at every x, which is what f = f&prime; forces.', 'accumulator-and-integrand-coincide', 'the exponential family'),
   }
 
 
@@ -882,6 +974,8 @@ For deeper coverage of integration techniques and antiderivative tables, see the
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -893,147 +987,55 @@ For deeper coverage of integration techniques and antiderivative tables, see the
         name: "Fundamental Theorem of Calculus Visualizer",
         hubDescription: "See both halves of the Fundamental Theorem of Calculus on one graph — slide x to grow the shaded area under f and watch the accumulator F match the area exactly, while the slope of F at every x equals f at the same point.",
         category: "Integrals",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M 14 62 L 14 52 Q 34.47 23.35 54 23.55 L 54 62 Z" fill="#FAC775" fill-opacity="0.5"/><path d="M 14 52 Q 44 10 72 30" fill="none" stroke="#FAC775" stroke-width="1.8"/><line x1="54" y1="62" x2="54" y2="23.55" stroke="#854F0B" stroke-width="1.3"/><line x1="10" y1="62" x2="76" y2="62" stroke="#B5D4F4" stroke-width="1"/><text x="54" y="70" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle" font-style="italic">x</text><text x="40" y="78" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">A&#8242;(x) = f(x)</text></svg>`
       },
 
     }
   }
 }
 
-export default function FTCVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function FTCVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-function-families'),
+    stateRow('obj11', 'area-that-grows-like-a-triangle', 'identity'),
+    stateRow('obj12', 'the-opening-state', 'quadratic'),
+    stateRow('obj13', 'a-faster-integrand', 'cubic'),
+    stateRow('obj14', 'an-accumulator-that-turns-around', 'sine'),
+    stateRow('obj15', 'where-the-curves-swap-roles', 'cosine'),
+    stateRow('obj16', 'accumulator-and-integrand-coincide', 'exponential'),
+    plain('obj3', 'the-a-and-x-sliders'),
+    plain('obj4', 'the-shaded-area'),
+    plain('obj5', 'the-at-the-point-card'),
+    plain('obj6', 'display-toggles'),
+    plain('obj7', 'what-is-the-ftc'),
+    plain('obj8', 'part-1-the-accumulator'),
+    plain('obj9', 'part-2-evaluation'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -1089,7 +1091,7 @@ export default function FTCVisualizer({seoData, sectionsContent, introContent, f
       <br/>
       <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Fundamental Theorem of Calculus</h1>
       <br/>
-      <FunctionFTC/>
+      <FunctionFTC explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

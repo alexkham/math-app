@@ -289,6 +289,7 @@ function viewBoundsFor(famKey) {
 export default function FunctionContinuity({
   initialFamily = 'hole',
   families = DEFAULT_FAMILIES,
+  explanations = null,
   visualizerProps = {},
   infoPanelProps = {},
   darkMode = false,
@@ -396,9 +397,12 @@ export default function FunctionContinuity({
       `### Right now\n\n` +
       `f(c) = $${fmt(v.Fc)}$; $L^-$ = $${fmt(v.Lminus)}$, $L^+$ = $${fmt(v.Lplus)}$. ${summary}\n\n` +
       `### What c controls\n\n` +
-      `Slide c to test the three conditions at any point. At most c the checklist passes — f is continuous almost everywhere. The interesting points are the few where at least one check fails. Use the jump-to buttons to land on them directly.`
+      `Slide c to test the three conditions at any point. At most c the checklist passes — f is continuous almost everywhere. The interesting points are the few where at least one check fails. Use the jump-to buttons to land on them directly.` +
+      // Optional per-family note supplied by the page (Line 1 anchor mesh).
+      // Omitted -> the panel reads exactly as it always has.
+      (explanations?.[current] ? `\n\n${explanations[current]}` : '')
     );
-  }, [fam, c, v]);
+  }, [fam, c, v, explanations, current]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

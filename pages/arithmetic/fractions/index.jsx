@@ -693,6 +693,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1159,56 +1160,27 @@ Each model serves different purposes. Circle models suit introductory understand
   content: `A fraction represents a part of a whole or, more generally, any number of equal parts. Written as one integer placed above another with a horizontal bar between them, fractions express quantities that fall between whole numbers or describe division that does not resolve into a whole number. The upper number is the numerator, indicating how many parts are taken, while the lower number is the denominator, indicating how many equal parts make up the whole.`
 }
 
+// FAQ pass: cut five case-A questions (fraction, numerator/denominator,
+// proper vs improper, unit fractions, visualizing — each has its own h2) and
+// four owned by dedicated subpages (equivalent, adding, multiplying,
+// dividing). Kept the denominator-zero question, extended; invented two from
+// buried content — the division identity in "What Is a Fraction" ¶2 and the
+// vinculum entry in the notation section.
 const faqQuestions = {
   obj1: {
-    question: "What is a fraction?",
-    answer: "A fraction expresses a quantity as a ratio of two integers, written as a/b. The top number (numerator) counts how many parts are taken. The bottom number (denominator) tells how many equal parts the whole is divided into. For example, 3/4 means 3 parts out of 4.",
+    question: "Why can't the denominator be zero?",
+    answer: "The denominator names how many equal parts make one whole, and \"zero parts\" describes nothing at all. Since a/b means a ÷ b, writing 5/0 would demand a number that, multiplied by 0, gives 5 — but every number times zero is zero. So 5/0 is undefined. The reverse causes no trouble: 0/7 = 0, because taking zero parts of something is simply nothing.",
     sectionId: "1"
   },
   obj2: {
-    question: "What are the numerator and denominator?",
-    answer: "The numerator is the top number — it counts how many parts are being considered. The denominator is the bottom number — it names the size of each part by specifying how many equal pieces make one whole. In 3/5, the denominator 5 creates fifths, and the numerator 3 counts three of them.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the difference between proper and improper fractions?",
-    answer: "A proper fraction has a numerator smaller than its denominator (like 2/5), so its value is less than 1. An improper fraction has a numerator greater than or equal to its denominator (like 5/3), so its value is 1 or greater.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "What is a unit fraction?",
-    answer: "A unit fraction has a numerator of 1, such as 1/2, 1/3, or 1/7. Unit fractions are building blocks for all other fractions — any fraction a/b equals a copies of the unit fraction 1/b. For example, 3/5 = 1/5 + 1/5 + 1/5.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "Why can't the denominator be zero?",
-    answer: "A fraction a/b represents division: a ÷ b. Division by zero is undefined in mathematics because no number multiplied by zero gives a nonzero result. Expressions like 5/0 have no meaning.",
+    question: "Is a fraction the same as division?",
+    answer: "Yes. Every fraction is a division waiting to be carried out: a/b means exactly a ÷ b, so 3/4 equals 3 ÷ 4 = 0.75. The obelus ÷ and the fraction bar say the same thing, which is why ÷ largely disappears after elementary school — the bar does the same job and groups its parts at the same time.",
     sectionId: "1"
   },
-  obj6: {
-    question: "What are equivalent fractions?",
-    answer: "Equivalent fractions are different representations of the same value. For example, 1/2, 2/4, and 3/6 all represent the same quantity. Multiplying or dividing both numerator and denominator by the same nonzero number produces an equivalent fraction.",
-    sectionId: "3"
-  },
-  obj7: {
-    question: "How do you add fractions?",
-    answer: "To add fractions, they must have a common denominator. If denominators match, add the numerators and keep the denominator: 2/7 + 3/7 = 5/7. If denominators differ, first convert to equivalent fractions with a shared denominator.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "How do you multiply fractions?",
-    answer: "Multiply the numerators together and multiply the denominators together: (2/3) × (4/5) = 8/15. No common denominator is needed for multiplication.",
-    sectionId: "6"
-  },
-  obj9: {
-    question: "How do you divide fractions?",
-    answer: "To divide fractions, multiply by the reciprocal (flip the second fraction): (2/3) ÷ (4/5) = (2/3) × (5/4) = 10/12 = 5/6. This is called 'keep, change, flip.'",
-    sectionId: "6"
-  },
-  obj10: {
-    question: "What are the different ways to visualize fractions?",
-    answer: "Three common models: Circle/pie charts divide a circle into wedges. Bar/rectangle models divide strips into sections — useful for comparing fractions. Number lines show fractions as points between whole numbers, emphasizing their precise values.",
-    sectionId: "7"
+  obj3: {
+    question: "What is the fraction bar called?",
+    answer: "The horizontal line is the vinculum, though \"fraction bar\" is the everyday name. It does more than separate the two numbers: it groups them. Everything above the bar counts as one package, so (a+b)/c needs no brackets when stacked as a fraction. Writing that same expression inline forces the brackets back, which is why display work prefers the bar.",
+    sectionId: "notation"
   }
 }
 
@@ -1277,19 +1249,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/fractions"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1419,6 +1378,22 @@ export default function FractionsPage({seoData, sectionsContent, introContent, o
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Fractions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -1537,12 +1512,6 @@ export default function FractionsPage({seoData, sectionsContent, introContent, o
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

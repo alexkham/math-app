@@ -835,6 +835,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1281,58 +1282,26 @@ Simplify $(2^{50} + 3^{50}) \\bmod 5$. Powers of $2 \\bmod 5$ cycle $\\{2, 4, 3,
   content: `[Computing a remainder](!/arithmetic/modulo#51) answers a single question about a single number. Modular arithmetic goes further — it builds a complete system where addition, subtraction, multiplication, and exponentiation all operate within the confines of a fixed modulus. Numbers exceeding the range cycle back, and the arithmetic never leaves the set $\\{0, 1, 2, \\ldots, n-1\\}$.`
 }
 
+// FAQ pass: cut ten case-A questions — this page's h2s are unusually
+// well-targeted (The Core Principle, Addition, Subtraction, Multiplication,
+// Detecting Cycles in Powers, Why Division Is Different, Last Digit Problems,
+// Clock Problems, Day of Week Problems, and Why Divisibility Rules Work
+// verbatim). Kept three whose queries have no matching heading.
 const faqQuestions = {
   obj1: {
     question: "What is modular arithmetic?",
-    answer: "Modular arithmetic is a system where numbers wrap around after reaching a modulus n. All operations stay within the set {0, 1, 2, ..., n-1}. Like a 12-hour clock where 10 + 5 = 3 (not 15), numbers cycle back when they exceed the modulus."
+    answer: "Modular arithmetic is a system where numbers wrap around after reaching a modulus n. All operations stay within the set {0, 1, 2, ..., n-1}. Like a 12-hour clock where 10 + 5 = 3 (not 15), numbers cycle back when they exceed the modulus. Addition, subtraction, multiplication, and exponentiation all work inside this system; only division behaves differently.",
+    sectionId: "1"
   },
   obj2: {
-    question: "What is the core principle of modular arithmetic?",
-    answer: "Reducing numbers before, during, or after an operation produces the same final remainder. This means large numbers can be replaced by their remainders at any stage without affecting the outcome, making calculations with huge numbers practical."
+    question: "How do you compute large powers modulo n?",
+    answer: "Reduce after every multiplication instead of computing the full power first. For 7⁴ mod 10: compute 7² = 49 → 9, then 9 × 7 = 63 → 3, then 3 × 7 = 21 → 1. The largest intermediate is 63, not 2,401. For genuinely huge exponents, use the repeating cycle of powers instead of multiplying step by step.",
+    sectionId: "6"
   },
   obj3: {
-    question: "How do you add numbers in modular arithmetic?",
-    answer: "Reduce each operand mod n, add the results, then reduce again if the sum reaches or exceeds n. For (47 + 38) mod 10: reduce to 7 + 8 = 15, then 15 mod 10 = 5. The final reduction handles sums that exceed the modulus."
-  },
-  obj4: {
-    question: "How do you subtract in modular arithmetic?",
-    answer: "Reduce each operand, subtract, and if the result is negative, add n. For (23 - 47) mod 10: reduce to 3 - 7 = -4, then add 10 to get 6. The negative result represents wrapping backward past zero on the number cycle."
-  },
-  obj5: {
-    question: "How do you multiply in modular arithmetic?",
-    answer: "Reduce each factor mod n, multiply the remainders, then reduce the product. For (89 × 76) mod 9: reduce to 8 × 4 = 32, then 32 mod 9 = 5. This avoids computing the full product 6,764."
-  },
-  obj6: {
-    question: "How do you compute large powers modulo n?",
-    answer: "Reduce after every multiplication instead of computing the full power first. For 7⁴ mod 10: compute 7² = 49 → 9, then 9 × 7 = 63 → 3, then 3 × 7 = 21 → 1. The largest intermediate is 63, not 2,401."
-  },
-  obj7: {
-    question: "What are power cycles in modular arithmetic?",
-    answer: "Powers of any base mod n eventually repeat in a cycle. For 2^k mod 7, the cycle is {2, 4, 1} with period 3. To find 2¹⁰⁰ mod 7: divide 100 by 3 to get remainder 1, so 2¹⁰⁰ ≡ 2¹ = 2 (mod 7)."
-  },
-  obj8: {
-    question: "Why doesn't division work normally in modular arithmetic?",
-    answer: "Modular reduction discards information that division needs. Dividing remainders directly gives wrong answers. Instead, division requires the modular inverse: to divide by b, multiply by b⁻¹ where b·b⁻¹ ≡ 1 (mod n). Not every number has an inverse for every modulus."
-  },
-  obj9: {
-    question: "How do you find the last digit of a large power?",
-    answer: "The last digit is the number mod 10. Find the cycle of powers mod 10, then locate the exponent's position in that cycle. For 7¹⁰⁰: powers of 7 cycle {7,9,3,1} with period 4. Since 100 mod 4 = 0, the answer is 1 (position of 7⁴)."
-  },
-  obj10: {
-    question: "How do you solve clock problems with modular arithmetic?",
-    answer: "A 12-hour clock uses mod 12; a 24-hour clock uses mod 24. Add hours to current time and reduce. For 50 hours after 10:00: (10 + 50) mod 12 = 60 mod 12 = 0, which is 12:00. For backward calculations, subtract and add n if negative."
-  },
-  obj11: {
-    question: "How do you calculate day of the week using modulo?",
-    answer: "Days cycle mod 7. Assign Sunday = 0 through Saturday = 6. Add the number of days to the current day number and reduce mod 7. For 100 days after Wednesday (day 3): (3 + 100) mod 7 = 103 mod 7 = 5 = Friday."
-  },
-  obj12: {
-    question: "Why do divisibility rules work?",
-    answer: "Divisibility rules exploit congruence properties of 10. For divisibility by 9: since 10 ≡ 1 (mod 9), each digit contributes its face value regardless of position, making the digit sum determine divisibility. For 11: since 10 ≡ -1 (mod 11), positions alternate in sign."
-  },
-  obj13: {
     question: "How do you find the last two digits of a power?",
-    answer: "The last two digits are the number mod 100. Find when the powers cycle mod 100. For 7⁵⁰ mod 100: since 7⁴ = 2401 ≡ 1 (mod 100), and 50 = 4×12 + 2, we get 7⁵⁰ ≡ 7² = 49 (mod 100). The last two digits are 49."
+    answer: "The last two digits are the number mod 100. Find when the powers cycle mod 100. For 7⁵⁰ mod 100: since 7⁴ = 2401 ≡ 1 (mod 100), and 50 = 4×12 + 2, we get 7⁵⁰ ≡ 7² = 49 (mod 100). The last two digits are 49.",
+    sectionId: "13"
   }
 }
 
@@ -1407,19 +1376,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/modulo"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1578,6 +1534,22 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Modular Arithmetic FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -1610,17 +1582,10 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

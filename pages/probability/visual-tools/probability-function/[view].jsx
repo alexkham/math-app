@@ -8,6 +8,9 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import DiscreteProbabilityDistributions from '@/app/components/visualizations/probability/discrete-distribution/DiscreteProbabilityDistributions'
 import ContinuousProbabilityDistributions from '@/app/components/visualizations/probability/continuous-distribution/ContinuousProbabilityDistribution'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticPaths() {
@@ -45,6 +48,8 @@ export async function getStaticProps({ params }){
         'probability mass function graph'
       ],
       url: "/probability/visual-tools/probability-function/discrete",
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="30" x2="18" y2="62" stroke="#AFA9EC" stroke-width="1.6"/><line x1="30" y1="20" x2="30" y2="62" stroke="#AFA9EC" stroke-width="1.6"/><line x1="42" y1="36" x2="42" y2="62" stroke="#AFA9EC" stroke-width="1.6"/><line x1="54" y1="26" x2="54" y2="62" stroke="#AFA9EC" stroke-width="1.6"/><line x1="66" y1="46" x2="66" y2="62" stroke="#AFA9EC" stroke-width="1.6"/><circle cx="18" cy="30" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1.1"/><circle cx="30" cy="20" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1.1"/><circle cx="42" cy="36" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1.1"/><circle cx="54" cy="26" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1.1"/><circle cx="66" cy="46" r="3.4" fill="#AFA9EC" stroke="#3C3489" stroke-width="1.1"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="40" y="74" font-family="Georgia,serif" font-size="7" fill="#CECBF6" text-anchor="middle" font-style="italic">P(X = x)</text></svg>`,
+      category: "Probability Functions & CDF",
       name: "Discrete Probability Distributions",
       h1: "Discrete Probability Distribution Visualizer",
       introTitle: "Understanding Discrete Probability Distributions",
@@ -143,6 +148,78 @@ export async function getStaticProps({ params }){
           before: ``,
           after: ``,
           link: '',
+        },
+
+        obj13: {
+          title: `Discrete Uniform: Six Equal Bars`,
+          content: `At the opening range $a = 1$ to $b = 6$ — a fair die — the chart shows six bars of identical height $1/6 = 0.1667$. The six sum to exactly $1$.
+
+Equal heights are the visual signature of a uniform distribution, and they are why every value is its own mode.`,
+          before: ``,
+          after: `A uniform PMF is the only one on this page with no peak. Because every bar is the same height, the distribution has no single most likely outcome — formally, all six values are modes.
+
+The mean is $\\frac{a+b}{2} = 3.5$, which is not one of the six possible values. That is worth pausing on: a distribution's mean need not be an outcome it can produce, and the fair die is the standard example.`,
+          link: '',
+        },
+
+        obj14: {
+          title: `Binomial: a Symmetric Peak at the Mean`,
+          content: `With $n = 10$ and $p = 0.5$ the chart shows eleven bars, $k = 0$ through $10$, summing to exactly $1$. The tallest is at $k = 5$ with $P(X = 5) = 0.2461$.
+
+The shape is symmetric because $p = 0.5$ makes the binomial coefficients palindromic.`,
+          before: ``,
+          after: `Every bar height here is a binomial coefficient over $2^{10} = 1024$: the row $1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1$. The peak $252/1024 = 0.2461$ is the tallest bar the chart will show for this distribution.
+
+Note how modest that peak is. Even the single most likely outcome happens under a quarter of the time, and the two extremes at $k = 0$ and $k = 10$ have probability $1/1024 \\approx 0.001$ each — visible as bars barely off the axis. Ten coin flips give five heads more often than any other single count, but usually give something else.`,
+          link: '',
+        },
+
+        obj15: {
+          title: `Geometric: Decay from the First Bar`,
+          content: `With $p = 0.3$ the tallest bar is the first one, $P(X = 1) = 0.3$, and each bar after it is $0.7$ times the one before.
+
+The mode of a geometric distribution is always $k = 1$, whatever $p$ is: the single most likely number of trials until the first success is one trial.`,
+          before: ``,
+          after: `The constant ratio between neighbouring bars is the memoryless property drawn out. Having already failed $k$ times, the chance of succeeding on the next trial is still $p$ — so the staircase looks the same from wherever you start.
+
+One detail about this chart specifically. The tool's builder drops any bar with probability at or below $0.001$, so the plot stops at $k = 16$ and the bars shown sum to $0.9967$ rather than $1$. The missing $0.33\\%$ is real probability living past the right edge, not an error: the geometric support is unbounded, and the tool has to stop somewhere. The same filter applies to the negative binomial and to no other distribution here.`,
+          link: '',
+        },
+
+        obj16: {
+          title: `Negative Binomial: the Peak Moves Off the First Bar`,
+          content: `With $r = 3$ and $p = 0.4$ the bars start at $k = 3$ — three successes need at least three trials — and the tallest is at $k = 5$ with $P(X = 5) = 0.1382$.
+
+Setting $r = 1$ would collapse this exactly to the geometric case, peak and all.`,
+          before: ``,
+          after: `That shift of the peak away from the left edge is the whole difference between waiting for one success and waiting for several. A single success is most likely to arrive immediately; three successes are not, because the first two have to happen first.
+
+The mean is $r/p = 7.5$, well to the right of the mode at $5$ — a right-skewed distribution, which the long thin tail on the chart shows directly. As with the geometric, the $0.001$ filter truncates that tail, so the plotted bars sum to $0.9976$.`,
+          link: '',
+        },
+
+        obj17: {
+          title: `Hypergeometric: Sampling Without Replacement`,
+          content: `With a population of $N = 50$ containing $K = 20$ successes and $n = 10$ draws, the bars run $k = 0$ to $10$ and sum to exactly $1$. The peak is at $k = 4$ with $P(X = 4) = 0.2801$.
+
+That peak sits at the mean $n \\cdot \\frac{K}{N} = 10 \\times 0.4 = 4$.`,
+          before: ``,
+          after: `Compare this with the binomial. A binomial with $n = 10$ and $p = 0.4$ has the same mean of $4$, but a *wider* spread: its variance is $np(1-p) = 2.4$ against the hypergeometric's $2.4 \\times \\frac{N-n}{N-1} = 2.4 \\times \\frac{40}{49} \\approx 1.96$.
+
+That extra factor is the finite population correction, and it is always less than 1 when $n > 1$. Sampling without replacement is self-correcting — every success drawn makes the next success slightly less likely — so outcomes cluster more tightly around the mean than independent trials would.`,
+          link: '',
+        },
+
+        obj18: {
+          title: `Poisson: Two Modes at an Integer Rate`,
+          content: `At $\\lambda = 3$ the bars run $k = 0$ to $18$ and sum to $1$. The chart has **two** equally tall bars, at $k = 2$ and $k = 3$, both at $P = 0.2240$.
+
+That is not a coincidence or a rounding artefact.`,
+          before: ``,
+          after: `Consecutive Poisson probabilities are related by $\\frac{P(k)}{P(k-1)} = \\frac{\\lambda}{k}$, so the ratio is exactly $1$ when $k = \\lambda$. Whenever $\\lambda$ is a whole number the distribution has two modes, at $\\lambda - 1$ and $\\lambda$; here $P(2) = \\frac{9e^{-3}}{2}$ and $P(3) = \\frac{27e^{-3}}{6}$, and both come to $0.2240$.
+
+Nudge $\\lambda$ off an integer and one bar wins: the mode becomes $\\lfloor \\lambda \\rfloor$ alone. It is the clearest thing on this page that you can check by eye and then confirm with one line of algebra.`,
+          link: '',
         }
       },
       faqQuestions: {
@@ -191,6 +268,8 @@ export async function getStaticProps({ params }){
         'probability density graph'
       ],
       url: "/probability/visual-tools/probability-function/continuous",
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M 12 62 C 26 62, 28 20, 42 20 C 56 20, 58 62, 72 62 Z" fill="#FAC775" fill-opacity="0.45"/><path d="M 12 62 C 26 62, 28 20, 42 20 C 56 20, 58 62, 72 62" fill="none" stroke="#FAC775" stroke-width="2.1"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="42" y="48" font-family="Georgia,serif" font-size="7.5" fill="#412402" text-anchor="middle" font-style="italic">area = 1</text></svg>`,
+      category: "Probability Functions & CDF",
       name: "Continuous Probability Distributions",
       h1: "Continuous Probability Distribution Visualizer",
       introTitle: "Understanding Continuous Probability Distributions",
@@ -289,6 +368,42 @@ export async function getStaticProps({ params }){
           before: ``,
           after: ``,
           link: '',
+        },
+
+        obj13: {
+          title: `Continuous Uniform: a Flat Density and a Straight CDF`,
+          content: `With $a = 0$ and $b = 10$ the PDF view is a flat plateau at $f(x) = \\frac{1}{b-a} = 0.1$ between the bounds and zero outside. Switch the toggle and the CDF view is a straight line of slope $0.1$ rising from $0$ to $1$.
+
+The two stills below are the same distribution under the two toggle positions.`,
+          before: ``,
+          after: `Seeing them together makes the relationship concrete: the CDF's slope *is* the PDF's height. A flat density gives a straight-line CDF, and the two corners in the CDF are exactly where the density jumps from $0$ to $0.1$ and back.
+
+Notice that the density value $0.1$ is not a probability. $P(X = 3) = 0$ here, as it is for any continuous variable. What $0.1$ means is probability per unit of $x$, so the probability of landing in an interval of width $2$ is $0.2$ — you have to multiply by a width before you get a probability at all.`,
+          link: '',
+        },
+
+        obj14: {
+          title: `Normal: the Bell and the Sigmoid`,
+          content: `At $\\mu = 0$ and $\\sigma = 1$ the PDF view peaks at $f(0) = \\frac{1}{\\sqrt{2\\pi}} = 0.3989$, and the CDF view is the symmetric S-curve crossing $0.5$ at the mean.
+
+The tool plots the window $\\mu \\pm 4\\sigma$.`,
+          before: ``,
+          after: `The peak height is worth reading carefully, because it is the clearest illustration that a density can exceed any bound. Here it is $0.399$, comfortably under 1 — but shrink $\\sigma$ and the peak rises without limit, since the area must stay at 1. A density above 1 is perfectly legal; a probability above 1 is not.
+
+The two views also locate $\\sigma$ differently. On the PDF it is the distance from the peak to the inflection points; on the CDF it is where the curve stops steepening. Same number, two quite different visual cues, which is the reason for having the toggle at all.`,
+          link: '',
+        },
+
+        obj15: {
+          title: `Exponential: Peak at Zero, Tail Without End`,
+          content: `At $\\lambda = 1$ the PDF view starts at its maximum, $f(0) = \\lambda = 1$, and decays; the CDF view rises steeply then flattens toward $1$.
+
+The tool plots $x$ from $0$ out to $5/\\lambda$.`,
+          before: ``,
+          after: `The exponential is the one distribution here whose density is largest at the very edge of its support. There is no interior peak: the most probable region is always immediately after zero, whatever $\\lambda$ is.
+
+The right edge of the window is the detail to carry away. The plotted CDF ends at about $0.9931$, not $1$, and the missing $0.69\\%$ is spread over the infinite tail beyond. The PDF view makes the same point differently — the curve is visibly still above zero when the plot stops, so there is clearly more distribution to the right than the window shows.`,
+          link: '',
         }
       },
       faqQuestions: {
@@ -317,6 +432,120 @@ export async function getStaticProps({ params }){
   };
 
   const currentConfig = viewConfig[params.view];
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Both charts are recharts, which cannot be rendered to a string at build
+     time, so the two diagrams modules port them: the components' own data
+     builders and PMF/PDF helpers, evaluated at their default sliders. The
+     continuous tool has a second state axis - the PDF/CDF toggle - so each of
+     its three distributions is frozen twice and the pair is shown in one unit. */
+  const unit = (svg, caption, text) => demoUnitFrame({ svg, caption, text })
+  const D = discretePmfDiagrams
+  const C = continuousPdfDiagrams
+
+  const unitsByView = {
+    discrete: {
+      discreteUniform: unit(D.discreteUniform, 'Discrete uniform, a = 1 to b = 6',
+        'Six bars of identical height 1/6 = 0.1667 summing to exactly 1. No peak, so every value is a ' +
+        'mode - and the mean, 3.5, is not one of the six possible outcomes.'),
+      binomial: unit(D.binomial, 'Binomial, n = 10, p = 0.5',
+        'Eleven bars summing to 1, symmetric about the peak at k = 5 where P = 0.2461 = 252/1024. The ' +
+        'extremes at k = 0 and k = 10 are 1/1024 each, barely off the axis.'),
+      geometric: unit(D.geometric, 'Geometric, p = 0.3',
+        'The first bar is tallest at 0.3, and each after it is 0.7 times the last. The tool drops bars ' +
+        'under 0.001, so the plot stops at k = 16 and the bars sum to 0.9967, not 1.'),
+      negativeBinomial: unit(D.negativeBinomial, 'Negative binomial, r = 3, p = 0.4',
+        'Support starts at k = 3 and the peak has moved off the first bar to k = 5, P = 0.1382. The ' +
+        'mean, 7.5, sits well right of the mode - a right-skewed shape.'),
+      hypergeometric: unit(D.hypergeometric, 'Hypergeometric, N = 50, K = 20, n = 10',
+        'Eleven bars summing to 1, peaking at the mean k = 4 with P = 0.2801. Tighter than a binomial ' +
+        'with the same mean, by the finite population correction (N-n)/(N-1).'),
+      poisson: unit(D.poisson, 'Poisson, lambda = 3',
+        'Two equally tall bars, at k = 2 and k = 3, both 0.2240. Consecutive Poisson probabilities are ' +
+        'in ratio lambda/k, which is exactly 1 at k = lambda, so an integer rate gives two modes.'),
+    },
+    continuous: {
+      uniform: unit([C['uniform-pdf'], C['uniform-cdf']], 'Continuous uniform on [0, 10]: PDF above, CDF below',
+        'A flat density of 0.1 and a straight-line CDF of slope 0.1. The CDF slope IS the PDF height, ' +
+        'and its two corners are where the density jumps from 0 to 0.1 and back.'),
+      normal: unit([C['normal-pdf'], C['normal-cdf']], 'Normal, mean 0, sigma 1: PDF above, CDF below',
+        'The bell peaks at 1/sqrt(2 pi) = 0.3989 and the sigmoid crosses 0.5 at the mean. Shrink sigma ' +
+        'and the peak rises without limit - a density may exceed 1, a probability may not.'),
+      exponential: unit([C['exponential-pdf'], C['exponential-cdf']], 'Exponential, lambda = 1: PDF above, CDF below',
+        'Density is largest at the very edge of the support, f(0) = 1, with no interior peak. The ' +
+        'plotted CDF ends at 0.9931 - the remaining 0.69% lies past the right edge of the window.'),
+    },
+  }
+
+  // this page previously built its sections from a hand-written list of numeric
+  // ids; replaced with an explicit per-view slug list
+  const orderByView = {
+    discrete: [
+      ['obj1', 'selecting-a-distribution'],
+      ['obj2', 'adjusting-parameters'],
+      ['obj3', 'reading-the-bar-chart'],
+      ['obj13', 'discrete-uniform', 'discreteUniform'],
+      ['obj14', 'binomial', 'binomial'],
+      ['obj15', 'geometric', 'geometric'],
+      ['obj16', 'negative-binomial', 'negativeBinomial'],
+      ['obj17', 'hypergeometric', 'hypergeometric'],
+      ['obj18', 'poisson', 'poisson'],
+      ['obj4', 'understanding-probability-values'],
+      ['obj5', 'comparing-distribution-shapes'],
+      ['obj6', 'working-with-scenarios'],
+      ['obj7', 'what-is-a-pmf'],
+      ['obj8', 'binomial-fundamentals'],
+      ['obj9', 'poisson-basics'],
+      ['obj10', 'geometric-vs-negative-binomial'],
+      ['obj11', 'when-to-use-each-distribution'],
+      ['obj12', 'related-concepts'],
+    ],
+    continuous: [
+      ['obj1', 'selecting-a-distribution'],
+      ['obj2', 'the-pdf-cdf-toggle'],
+      ['obj3', 'adjusting-parameters'],
+      ['obj13', 'continuous-uniform', 'uniform'],
+      ['obj14', 'normal', 'normal'],
+      ['obj15', 'exponential', 'exponential'],
+      ['obj4', 'reading-the-curve'],
+      ['obj5', 'density-vs-probability'],
+      ['obj6', 'comparing-distribution-shapes'],
+      ['obj7', 'what-is-a-pdf'],
+      ['obj8', 'normal-fundamentals'],
+      ['obj9', 'exponential-basics'],
+      ['obj10', 'integration-and-area'],
+      ['obj11', 'when-to-use-each-distribution'],
+      ['obj12', 'related-concepts'],
+    ],
+  }
+
+  /* ---- per-distribution notes appended to the tool's own explanation (Line 1)
+     Both components already had `explanationsOverride`, but that REPLACES their
+     built-in text. An additive `explanationsAppend` prop was added to each so the
+     tool's explanation survives and this link is appended to it. Both panels
+     render through processContent, so these use markdown anchors. */
+  const note = (slug, label) => ` [Learn more about ${label}](!#${slug})`
+
+  const appendByView = {
+    discrete: {
+      discreteUniform: note('discrete-uniform', 'the discrete uniform PMF'),
+      binomial: note('binomial', 'the binomial PMF'),
+      geometric: note('geometric', 'the geometric PMF'),
+      negativeBinomial: note('negative-binomial', 'the negative binomial PMF'),
+      hypergeometric: note('hypergeometric', 'the hypergeometric PMF'),
+      poisson: note('poisson', 'the Poisson PMF'),
+    },
+    continuous: {
+      uniform: note('continuous-uniform', 'the continuous uniform density'),
+      normal: note('normal', 'the normal density'),
+      exponential: note('exponential', 'the exponential density'),
+    },
+  }
+
+  const stateUnits = unitsByView[params.view] || {}
+  const sectionOrder = orderByView[params.view] || []
+  const explanationsAppend = appendByView[params.view] || {}
   const sectionsContent = currentConfig.sectionsContent;
   const faqQuestions = currentConfig.faqQuestions;
   
@@ -433,113 +662,28 @@ export async function getStaticProps({ params }){
         name: currentConfig.name
       },
       currentView: params.view,
+      stateUnits,
+      sectionOrder,
+      explanationsAppend,
       componentName: currentConfig.component,
       h1Title: currentConfig.h1
        }
     }
    }
 
-export default function ProbabilityFunctionViewPage({seoData, sectionsContent, introContent, faqQuestions, schemas, currentView, componentName, h1Title}) {
+export default function ProbabilityFunctionViewPage({seoData, sectionsContent, stateUnits, sectionOrder, explanationsAppend, introContent, faqQuestions, schemas, currentView, componentName, h1Title}) {
 
     
-  const genericSections=[
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
+  const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
+    const src = sectionsContent[obj]
+    if (!src || !src.title) return null
+    const body = [ src.content ]
+    if (unitKey && stateUnits[unitKey]) {
+      body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
+      if (src.after) body.push(src.after)
     }
-]
+    return { id, title: src.title, link: src.link || '', content: body }
+  }).filter(Boolean);
 
   return (
    <>
@@ -601,11 +745,11 @@ export default function ProbabilityFunctionViewPage({seoData, sectionsContent, i
    <br/>
    <div style={{transform:'scale(0.8)'}}>
    {componentName === 'DiscreteProbability' && (
-     <DiscreteProbabilityDistributions />
+     <DiscreteProbabilityDistributions explanationsAppend={explanationsAppend}/>
    )}
    
    {componentName === 'ContinuousProbability' && (
-     <ContinuousProbabilityDistributions />
+     <ContinuousProbabilityDistributions explanationsAppend={explanationsAppend}/>
    )}
    </div>
    

@@ -7,6 +7,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -368,46 +369,32 @@ For definite integrals, setup matters as much as computation. Identify the corre
 
 
 
+// FAQ pass: all eight originals named their own h2 — direct
+// antidifferentiation, recognizing forms, setting up, absolute values,
+// piecewise, symmetry, pitfalls, checking. The piecewise h2 here is why the
+// question belongs to no FAQ block, and why the entry I had put on the
+// rules page has been swapped out. Replaced with four results the headings
+// state without explaining.
 const faqQuestions = {
   obj1: {
-    question: "What is direct antidifferentiation?",
-    answer: "Direct antidifferentiation means applying known formulas and linearity directly to find the integral. Simplify the integrand first—expand, separate terms, rewrite fractions—then match each piece to a standard antiderivative formula.",
+    question: "How do you integrate a fraction like (x³ + 1)/x?",
+    answer: "Divide term by term before integrating. (x³ + 1)/x becomes x² + 1/x, and each piece is a standard form, giving x³/3 + ln|x| + C. There is no quotient rule for integration, so a fraction usually has to be rewritten as a sum, expanded, or split before any formula applies.",
     sectionId: "1"
   },
   obj2: {
-    question: "How do you recognize standard integral forms?",
-    answer: "Many integrals are disguised versions of basic formulas. Completing the square transforms quadratics into arctan or arcsin forms. Rewriting constants like √(9−x²) as √(3²−x²) reveals the arcsin pattern. Look for these hidden structures before using advanced techniques.",
+    question: "When do you complete the square to evaluate an integral?",
+    answer: "When the integrand holds an irreducible quadratic that almost matches an arctan or arcsin form. Rewriting x² + 4x + 8 as (x + 2)² + 4 turns ∫1/(x² + 4x + 8) dx into the arctan pattern with u = x + 2 and a = 2. The same move rewrites 9 − x² as 3² − x² to expose arcsin.",
     sectionId: "2"
   },
   obj3: {
-    question: "How do you set up a definite integral?",
-    answer: "Identify the variable and its range, express the integrand in terms of that variable, and determine the bounds where accumulation begins and ends. Check that the answer is reasonable—positive integrand with a < b should give positive result.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you integrate absolute value functions?",
-    answer: "Split the integral at points where the argument changes sign. For ∫|x| dx from -2 to 3, split at x = 0: integrate -x from -2 to 0, then x from 0 to 3. The absolute value of an integral does not equal the integral of the absolute value.",
+    question: "Is the absolute value of an integral the same as the integral of the absolute value?",
+    answer: "No — |∫f| ≤ ∫|f|, and they are usually unequal. Integrating f lets positive and negative regions cancel before you take the absolute value; integrating |f| flips the negative parts up first, so nothing cancels. For f(x) = x on [−1, 1], the first is 0 and the second is 1.",
     sectionId: "4"
   },
-  obj5: {
-    question: "How do you integrate piecewise functions?",
-    answer: "Split the integral at the boundaries between pieces using additivity: ∫ₐᶜ f = ∫ₐᵇ f + ∫ᵇᶜ f. Integrate each piece using its formula over its subinterval, then add the results.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How does symmetry simplify integrals?",
-    answer: "For integrals over symmetric intervals [-a, a]: even functions (f(-x) = f(x)) give ∫₋ₐᵃ f = 2∫₀ᵃ f; odd functions (f(-x) = -f(x)) give ∫₋ₐᵃ f = 0. This can eliminate half the work or give the answer immediately.",
+  obj4: {
+    question: "Why is the integral of an odd function over a symmetric interval zero?",
+    answer: "Because the two halves cancel exactly. An odd function satisfies f(−x) = −f(x), so whatever signed area accumulates on [0, a] is matched by the negative of it on [−a, 0], and the sum is 0 for every a. Even functions do the opposite: the halves match in sign, so the integral is twice the half.",
     sectionId: "6"
-  },
-  obj7: {
-    question: "What are common integration mistakes?",
-    answer: "Common errors include: forgetting +C in indefinite integrals, dropping absolute values in ln|x|, sign errors in substitution (if u = -x then du = -dx), forgetting to convert limits in substitution, and missing discontinuities that make integrals improper.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you check an integral answer?",
-    answer: "Differentiate your antiderivative—it should return the integrand. For definite integrals, verify the answer is reasonable: correct sign, value between m(b−a) and M(b−a) where m and M bound the integrand. Compare to numerical approximation when possible.",
-    sectionId: "8"
   }
 }
 
@@ -482,19 +469,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals/evaluating"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -601,6 +575,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Evaluating Integrals FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -635,13 +625,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

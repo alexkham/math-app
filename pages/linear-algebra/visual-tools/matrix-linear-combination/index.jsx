@@ -7,6 +7,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import LinearCombinationWrapper from '../../../../app/components/linear-algebra copy/matrix/LinearCombinationWrapper'
+import matrixLinCombDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixLinCombDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -205,11 +207,92 @@ Set the visualizer to $2 \\times 2$ and step through to see the three phases ani
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `The Opening Scene: Two Matrices and Two Scalars`,
+      content: `The player starts with everything named and nothing computed: the matrices $A$ and $B$, the scalars $\alpha$ and $\beta$, and an empty $C$ waiting to hold $\alpha A + \beta B$.
+
+At the default dimensions $A$ and $B$ are both $2 \times 3$, and so is $C$. The caption states the plan up front — the combination will be built in three phases rather than in one pass.`,
+      before: ``,
+      after: `Two preconditions are quietly in force here, one from each operation being combined. The scalars can be anything, because scalar multiplication imposes no shape rule. But $A$ and $B$ must have identical dimensions, because the final phase adds them, and addition does.
+
+That is the general shape of a linear combination: scalar multiplication is permissive, addition is strict, and the strict one governs. Everything the tool does after this scene is a consequence of that pairing.`,
+      link: '',
+    },
+    obj12: {
+      title: `Phase 1: Scaling A by α`,
+      content: `The first sweep multiplies every entry of $A$ by $\alpha$, one cell at a time, exactly as the scalar-multiplication tool does on its own.
+
+Six steps at the default size. $B$ is untouched throughout, and $C$ is still empty — this phase produces $\alpha A$ as an intermediate result, not part of the answer yet.`,
+      before: ``,
+      after: `Isolating this phase is the pedagogical point of the three-phase structure. A linear combination is not a new primitive operation; it is scalar multiplication and addition applied in sequence, and the tool refuses to blur them together.
+
+The frozen picture below is a step partway through this sweep: some entries of $A$ already carry their $\alpha$ factor, one is being scaled, and the rest are untouched.`,
+      link: '',
+    },
+    obj13: {
+      title: `Phase 2: Scaling B by β`,
+      content: `The second sweep repeats the operation on $B$ with the other scalar, producing $\beta B$. Another six steps, and $A$ is now left alone — the caption notes it is already fully scaled from phase 1.
+
+$C$ remains empty. Both inputs have now been scaled, but nothing has been combined.`,
+      before: ``,
+      after: `The two scalars are independent. Nothing requires $\alpha$ and $\beta$ to be related, equal, or even non-zero, and setting one of them to zero collapses the combination to a plain scalar multiple of the other matrix.
+
+That independence is what gives linear combinations their reach. Varying $\alpha$ and $\beta$ over all real numbers sweeps out every matrix expressible from $A$ and $B$ this way — the span of the pair, which for two independent matrices is a two-dimensional subspace of the $2 \times 3$ matrices.`,
+      link: '',
+    },
+    obj14: {
+      title: `Phase 3: Adding the Two Scaled Matrices`,
+      content: `The third sweep finally fills $C$, adding the two intermediates entry by entry: $c_{i,j} = \alpha a_{i,j} + \beta b_{i,j}$.
+
+This phase is ordinary matrix addition, and it is where the same-shape requirement is actually consumed. Six more steps, and the combination is complete.`,
+      before: ``,
+      after: `Read across the three phases and the definition assembles itself: scale, scale, add. That is all a linear combination is, and extending it to more terms changes nothing structurally — $\alpha A + \beta B + \gamma D$ is one more scaling phase and one more addition.
+
+It is also worth noticing what the entrywise formula licenses. Because each cell of $C$ depends only on the matching cells of $A$ and $B$, the whole operation could be done in any order, or in parallel. The three-phase sequence is a teaching device; the arithmetic has no dependencies to respect.`,
+      link: '',
+    },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from LinearCombinationWrapper's own buildMatrixScenes (exported
+     additively) and rendered through frozenMatrixSvg. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: matrixLinCombDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'A, B and an empty C, all 2&#215;3, with the two scalars named. Nothing computed yet - the ' +
+      'caption announces the three phases before any of them runs.'),
+    scaleA: unit('scaleA', 'Phase 1, mid-sweep',
+      'Entries of A picking up their &alpha; factor one at a time. B is untouched and C is still ' +
+      'empty: this phase produces an intermediate, not an answer.'),
+    scaleB: unit('scaleB', 'Phase 2, mid-sweep',
+      'The same sweep on B with &beta;. A is left alone now, fully scaled from phase 1, and C is ' +
+      'still waiting.'),
+    add: unit('add', 'Phase 3, mid-sweep',
+      'C finally filling, each cell reading &alpha;a + &beta;b. This is plain matrix addition, and ' +
+      'the step where the same-shape rule is actually used.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     LinearCombinationWrapper had no explanations prop; one was added additively
+     and defaults to null. Keys are the animation phase - intro, scaleA, scaleB,
+     add, done - derived from the scene index. Captions render with
+     dangerouslySetInnerHTML, so these are raw HTML anchors. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#the-three-phases" style="color:#1d4ed8;font-weight:600">the three phases</a></div>`
+
+  const explanations = {
+    intro: note('Scalars impose no shape rule; the addition in phase 3 does, and that is the binding constraint.', 'the-opening-scene', 'Learn more about the opening scene'),
+    scaleA: note('Phase 1 is scalar multiplication on its own - an intermediate, not part of the answer yet.', 'phase-1-scaling-a', 'Learn more about phase 1'),
+    scaleB: note('The two scalars are independent; set one to zero and the combination collapses to a single multiple.', 'phase-2-scaling-b', 'Learn more about phase 2'),
+    add: note('Phase 3 is ordinary matrix addition, and where the same-shape requirement is consumed.', 'phase-3-adding', 'Learn more about phase 3'),
+    done: note('Scale, scale, add - the whole definition, and it extends to more terms unchanged.', 'phase-3-adding', 'Learn more about the final phase'),
   }
 
 
@@ -329,6 +412,8 @@ Set the visualizer to $2 \\times 2$ and step through to see the three phases ani
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -346,165 +431,46 @@ Set the visualizer to $2 \\times 2$ and step through to see the three phases ani
   }
 }
 
-export default function LinearCombinationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-three-phases'),
+    stateRow('obj11', 'the-opening-scene', 'intro'),
+    stateRow('obj12', 'phase-1-scaling-a', 'scaleA'),
+    stateRow('obj13', 'phase-2-scaling-b', 'scaleB'),
+    stateRow('obj14', 'phase-3-adding', 'add'),
+    plain('obj3', 'the-scene-player'),
+    plain('obj4', 'choosing-dimensions'),
+    plain('obj5', 'what-a-linear-combination-is'),
+    plain('obj6', 'key-properties'),
+    plain('obj7', 'why-it-matters'),
+    plain('obj8', 'worked-example'),
+    plain('obj9', 'common-mistakes'),
+    plain('obj10', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -562,6 +528,7 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, i
    <div style={{width:'80%',margin:'auto'}}>
    <LinearCombinationWrapper
    mode='matrices'
+   explanations={explanations}
    
    />
    </div>

@@ -331,6 +331,7 @@ function autoYBounds(fam, xMin, xMax) {
 
 export default function FunctionOptimization({
   initialFamily = 'cubic-bump',
+  explanations = null,
   families = DEFAULT_FAMILIES,
   visualizerProps = {},
   infoPanelProps = {},
@@ -474,9 +475,14 @@ export default function FunctionOptimization({
       `### Right now\n\n` +
       `${summary}\n\n` +
       `### Reading the picture\n\n` +
-      `The solid curve is $f$. The dashed curve is $f'$. At every critical point, $f'$ crosses (or touches) zero. If $f'$ goes from positive to negative there, you&apos;re at a local max of $f$. Touch-and-return (like $x^3$ at 0) means the second-derivative test is inconclusive — use the first-derivative test.`
+      `The solid curve is $f$. The dashed curve is $f'$. At every critical point, $f'$ crosses (or touches) zero. If $f'$ goes from positive to negative there, you&apos;re at a local max of $f$. Touch-and-return (like $x^3$ at 0) means the second-derivative test is inconclusive — use the first-derivative test.` +
+      // Optional per-family note supplied by the page (Line 1 anchor mesh).
+      // Omitted -> the panel reads exactly as it always has.
+      (explanations?.[current] ? `
+
+${explanations[current]}` : '')
     );
-  }, [fam, aN, bN, cps, validInterval]);
+  }, [fam, aN, bN, cps, validInterval, explanations, current]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

@@ -495,6 +495,9 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import KernelImage from '../../../../app/components/linear-algebra copy/r2-visualizers/kernel-image/KernelImage'
+import { SCENARIOS as KI_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/kernel-image/KernelImage'
+import kernelImageDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -709,24 +712,36 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
       link:'',
     },
     obj12:{
-      title:``,
-      content:``,
+      title:`Full Rank: Nothing Collapses`,
+      content:`Four presets are invertible. The frozen pair below shows the rotation: on the left, the domain with its kernel; on the right, the codomain with its image.
+
+Neither highlight has anything to draw. The kernel is just the origin — no non-zero vector is sent to zero — and the image is the entire codomain plane rather than a line. Every $v$ you drag produces an $Av$ of the same length, turned but never flattened.`,
       before:``,
-      after:``,
+      after:`This is the case where the two canvases carry the least information, and that absence is itself the lesson: kernel and image only become *visible objects* when the map loses something.
+
+In rank-nullity terms, $\operatorname{rank} + \operatorname{nullity} = 2$ is satisfied by $2 + 0$. The image uses both available dimensions, so the kernel gets none. That accounting is what makes the map invertible — no two vectors share an image, so $A^{-1}$ exists and can undo it.`,
       link:'',
     },
     obj13:{
-      title:``,
-      content:``,
+      title:`Rank 1: a Kernel Line and an Image Line`,
+      content:`Five presets are singular with rank 1, and this is where both canvases finally have something to show. The frozen pair is the projection onto the x-axis.
+
+On the left, a red **kernel line**: every vector along it is sent to the origin. On the right, a green **image line**: everything in the domain lands somewhere on it. Both are one-dimensional.`,
       before:``,
-      after:``,
+      after:`Drag $v$ onto the kernel line and $Av$ collapses to a point at the origin on the right — the clearest demonstration in the tool that information is being destroyed. Drag $v$ anywhere else and $Av$ moves along the image line but never leaves it.
+
+Here rank-nullity reads $1 + 1 = 2$, and the two canvases show the two halves of that sum simultaneously. Note the kernel and image need not be perpendicular, or even different lines: for the projection onto $y = x$ they are perpendicular, while the nilpotent preset has a kernel and image that coincide — the same line playing both roles, which is exactly what makes $A^2 = 0$.`,
       link:'',
     },
     obj14:{
-      title:``,
-      content:``,
+      title:`Rank 0: Everything Goes to the Origin`,
+      content:`One preset takes it to the limit. The zero matrix sends every vector to the origin, so the codomain canvas shows a single point and no image line at all.
+
+On the left the kernel is not a line but the **whole plane** — shading everything, since there is no vector the map does not annihilate.`,
       before:``,
-      after:``,
+      after:`Rank-nullity still balances, at the extreme: $0 + 2 = 2$. The image has dimension 0 and the kernel dimension 2.
+
+Comparing this against the rank-1 case is the point of having it. Both are singular and both have $\det = 0$, but the projection keeps one dimension of information while the zero map keeps none. Rank distinguishes them; the determinant cannot. That is the practical argument for rank as the finer measure of what a matrix does.`,
       link:'',
     },
     obj15:{
@@ -739,6 +754,32 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
   }
 
 
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Each still composes BOTH of the tool's canvases - domain with the kernel,
+     codomain with the image - into one SVG, built from the component's own
+     SVGRender in its own composition order. See kernelImageDiagrams.js. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: kernelImageDiagrams[key], caption, text })
+
+  const stateUnits = {
+    full: unit('full', 'Full rank (rotation), frozen',
+      'Neither canvas has a highlight to draw: the kernel is only the origin and the image is the whole ' +
+      'plane. v and Av have the same length - turned, never flattened.'),
+    rankOne: unit('rankOne', 'Rank 1 (projection to x), frozen',
+      'Both lines finally appear - the red kernel line on the left, the green image line on the right. ' +
+      'Everything in the domain lands somewhere on that one green line.'),
+    zero: unit('zero', 'Rank 0 (the zero map), frozen',
+      'The codomain is a single point at the origin, and the kernel on the left is the entire plane ' +
+      'rather than a line.'),
+  }
+
+
+  /* ---- per-scenario panel notes (Line 1) ----
+     Case A: KernelImage already accepts explanationOverride with a byPreset map,
+     and ExplanationCard REPLACES rather than merges, so each override spreads
+     the tool's own SCENARIOS entry and appends the anchor to `body`. All ten
+     scenarios are covered; each points at the section for its rank category.
+     The card renders with dangerouslySetInnerHTML, so the anchors are raw HTML. */
   const faqQuestions = {
     obj1: {
       question: "What is the kernel of a matrix?",
@@ -886,6 +927,7 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
    return {
       props:{
          sectionsContent,
+         stateUnits,
          introContent,
          faqQuestions,
          schemas,
@@ -904,141 +946,79 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
     }
    }
 
-export default function KernelImage2DPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function KernelImage2DPage({seoData, sectionsContent, stateUnits, introContent, faqQuestions, schemas}) {
 
-    
+  /* ---- per-scenario panel notes (Line 1) ----
+     Built here rather than in getStaticProps: SCENARIOS entries carry A, and
+     sometimes title/body, as functions, and a spread of one cannot cross the
+     getStaticProps JSON boundary. ExplanationCard REPLACES rather than merges,
+     so each override still spreads the tool's own entry and appends the anchor
+     to `body`. All ten scenarios point at the section for their rank category. */
+  const SECTION_FOR_GROUP = { full: 'full-rank', rank1: 'rank-1', zero: 'rank-0' }
+  const LABEL_FOR_GROUP = {
+    full: 'full-rank maps',
+    rank1: 'the rank-1 case',
+    zero: 'the zero map',
+  }
+
+  const explanationOverride = {
+    byPreset: Object.fromEntries(
+      Object.entries(KI_SCENARIOS).map(([key, sc]) => {
+        const slug = SECTION_FOR_GROUP[groupOf[key]]
+        const label = LABEL_FOR_GROUP[groupOf[key]]
+        const anchors =
+          `<br/><a href="#${slug}" style="color:#1d4ed8;font-weight:600">Learn more about ${label}</a>` +
+          ` &middot; <a href="#preset-scenarios" style="color:#1d4ed8;font-weight:600">all three categories</a>`
+        // rotate's body is angle-dependent, so keep it callable rather than
+        // stringifying the function itself into the card.
+        return [key, {
+          ...sc,
+          body: typeof sc.body === 'function'
+            ? (arg) => `${sc.body(arg)}${anchors}`
+            : `${sc.body || ''}${anchors}`,
+        }]
+      })
+    ),
+  }
+
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    
-]
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'dragging-v-and-the-kernel'),
+    plain('obj3', 'av-and-the-image-line'),
+    plain('obj6', 'preset-scenarios'),
+    stateRow('obj12', 'full-rank', 'full'),
+    stateRow('obj13', 'rank-1', 'rankOne'),
+    stateRow('obj14', 'rank-0', 'zero'),
+    plain('obj4', 'editing-the-matrix'),
+    plain('obj5', 'sweep-playback'),
+    plain('obj7', 'display-layer-toggles'),
+    plain('obj8', 'defining-kernel-and-image'),
+    plain('obj9', 'three-rank-cases'),
+    plain('obj10', 'the-rank-nullity-theorem'),
+    plain('obj11', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -1094,7 +1074,7 @@ export default function KernelImage2DPage({seoData, sectionsContent, introConten
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Kernel and Image</h1>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
-   <KernelImage/>
+   <KernelImage explanationOverride={explanationOverride}/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

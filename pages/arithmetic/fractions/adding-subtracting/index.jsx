@@ -689,6 +689,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1050,56 +1051,31 @@ Improper borrowing with mixed numbers causes errors in subtraction. When borrowi
   content: `Adding and subtracting fractions requires a common denominator. Unlike [multiplication](!/arithmetic/fractions/multiplying), where numerators and denominators combine directly, addition and subtraction can only proceed when the fractions represent same-sized pieces. This page covers operations with same and different denominators, working with [mixed numbers](!/arithmetic/fractions/mixed-numbers), and avoiding common errors.`
 }
 
+// FAQ pass: cut six questions whose h2 states the answer — same denominator,
+// why common denominators are required, finding the LCD, adding mixed numbers
+// (also owned by /arithmetic/fractions/mixed-numbers), whole numbers, and
+// "most common mistake" (h2 "Common Mistakes"). Kept four whose query wording
+// does not match any heading, all extended past the 40-word floor.
 const faqQuestions = {
   obj1: {
-    question: "How do you add fractions with the same denominator?",
-    answer: "Add the numerators and keep the denominator the same: a/c + b/c = (a+b)/c. For example, 2/7 + 3/7 = 5/7. The denominator stays unchanged because you're combining pieces of the same size.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "Why do fractions need a common denominator to add?",
-    answer: "Fractions with different denominators represent different-sized pieces. You can't directly add thirds and fourths — it's like adding feet and inches. Convert to the same unit (common denominator) first.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you find the least common denominator?",
-    answer: "The LCD is the least common multiple (LCM) of the denominators. For 3 and 4, list multiples: 3, 6, 9, 12... and 4, 8, 12... The first match is 12, so the LCD is 12.",
-    sectionId: "3"
-  },
-  obj4: {
     question: "How do you add fractions with different denominators?",
-    answer: "Find a common denominator, convert each fraction, then add numerators. For 2/3 + 1/4: LCD is 12, so 2/3 = 8/12 and 1/4 = 3/12. Add: 8/12 + 3/12 = 11/12.",
+    answer: "Find a common denominator, rewrite each fraction with it, then add the numerators and keep that denominator. For 2/3 + 1/4 the LCD is 12, so 2/3 becomes 8/12 and 1/4 becomes 3/12, giving 11/12. Subtraction works identically: 5/6 − 1/4 converts to 10/12 − 3/12 = 7/12. Simplify the result if it is not already in lowest terms.",
     sectionId: "4"
   },
-  obj5: {
-    question: "How do you add mixed numbers?",
-    answer: "Add whole parts separately from fractional parts. For 2⅓ + 4¼: wholes give 6, fractions give 1/3 + 1/4 = 7/12. Result: 6⁷/₁₂. If fractions sum to more than 1, regroup into the whole number.",
-    sectionId: "5"
+  obj2: {
+    question: "Do you add denominators when adding fractions?",
+    answer: "No, never. The denominator names the size of each piece, and combining pieces does not change how big they are — only how many you have. So 1/2 + 1/3 is not 2/5. Convert to a common denominator first, then add only the numerators: 3/6 + 2/6 = 5/6. Adding denominators would make the answer smaller than one of the parts.",
+    sectionId: "8"
   },
-  obj6: {
+  obj3: {
     question: "How do you subtract mixed numbers with borrowing?",
-    answer: "When the first fraction is smaller, borrow 1 from the whole number. For 5¼ - 2¾: rewrite 5¼ as 4⁵/₄, then subtract: 4 - 2 = 2 and 5/4 - 3/4 = 2/4 = ½. Result: 2½.",
+    answer: "Borrow when the first fractional part is smaller than the second. For 5¼ − 2¾, the ¼ cannot cover ¾, so take 1 from the 5 and add it to the fraction as 4/4: 5¼ becomes 4⁵⁄₄. Now subtract in parts: 4 − 2 = 2 and 5/4 − 3/4 = 1/2, giving 2½. The borrowed 1 always becomes a fraction with the denominator already in use.",
     sectionId: "6"
   },
-  obj7: {
-    question: "How do you subtract a fraction from a whole number?",
-    answer: "Rewrite the whole number as a mixed number with the same denominator. For 5 - 3/4: rewrite 5 as 4⁴/₄, then subtract: 4⁴/₄ - ¾ = 4¼. Or use improper fractions: 20/4 - 3/4 = 17/4 = 4¼.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is the most common mistake when adding fractions?",
-    answer: "Adding denominators instead of finding a common denominator. The sum 1/2 + 1/3 does NOT equal 2/5. You must convert first: 3/6 + 2/6 = 5/6.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Do you add denominators when adding fractions?",
-    answer: "No, never. Only numerators are added after converting to a common denominator. The denominator represents the size of each piece, which doesn't change when combining pieces.",
-    sectionId: "8"
-  },
-  obj10: {
+  obj4: {
     question: "Should you simplify after adding fractions?",
-    answer: "Yes, always reduce to simplest form. If 2/8 + 2/8 = 4/8, simplify to 1/2. Find the GCF of numerator and denominator, then divide both by it.",
-    sectionId: "1"
+    answer: "Yes — a sum is not considered complete until it is in lowest terms. Adding 2/8 + 2/8 gives 4/8, which reduces to 1/2. Divide the numerator and denominator by their greatest common factor to reduce in one step. Using the least common denominator rather than a larger one keeps the numbers small and often leaves nothing to simplify.",
+    sectionId: "8"
   }
 }
 
@@ -1175,19 +1151,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/fractions/adding-subtracting"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1302,6 +1265,22 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Adding and Subtracting Fractions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -1412,12 +1391,6 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

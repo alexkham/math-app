@@ -8,6 +8,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+import matrixAdditionDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixAdditionDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -205,11 +207,92 @@ The visualizer above mirrors this process symbolically — set the dimensions to
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `The Opening Scene: Two Matrices of the Same Shape`,
+      content: `The player starts with $A$ and $B$ side by side and $C$ waiting empty on the right. At the default dimensions all three are $2 \times 3$, and every cell of $C$ shows a placeholder rather than a value.
+
+Nothing has been computed yet. What the scene establishes is the precondition: $A$ and $B$ have identical dimensions, so there is a cell of $B$ sitting opposite every cell of $A$.`,
+      before: ``,
+      after: `That pairing is the whole reason the same-shape rule exists. Addition is defined entry by entry, so it needs a partner for each entry — and a $2 \times 3$ matrix simply has no entry to pair with the $[3,1]$ entry of a $3 \times 3$ one.
+
+The result $C$ is created at the same shape as its inputs, which is worth stating explicitly: addition never changes dimensions. That is unlike multiplication, where a $2 \times 3$ times a $3 \times 4$ produces a $2 \times 4$.`,
+      link: '',
+    },
+    obj12: {
+      title: `One Cell at a Time`,
+      content: `Each step highlights one cell of $A$, the cell directly opposite it in $B$, and the destination cell in $C$, then writes $a_{i,j} + b_{i,j}$ into that destination.
+
+The frozen picture below is a step partway through the $2 \times 3$ run: some cells of $C$ already hold their sum, one pair is being combined now, and the rest are still placeholders.`,
+      before: ``,
+      after: `Notice what the sweep never does: it never looks at a cell of $B$ that sits somewhere else. The entry $b_{2,3}$ can only ever meet $a_{2,3}$. There is no mixing across positions, no row-times-column pairing, nothing resembling the machinery of matrix multiplication.
+
+That independence has a practical consequence. Because no cell's result depends on any other cell's result, the six steps could run in any order — or all at once. The left-to-right sweep is a teaching device, not an algorithm the operation requires.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Completed Sum`,
+      content: `The final scene fills every cell of $C$, so the whole matrix reads $c_{i,j} = a_{i,j} + b_{i,j}$ across all six positions.
+
+$C$ has exactly the shape it started with, $2 \times 3$, and each of its entries depends on precisely two numbers.`,
+      before: ``,
+      after: `From the completed picture the algebraic properties are easy to believe. Addition is **commutative**, $A + B = B + A$, because each cell reduces to an ordinary sum of two numbers and those commute. It is **associative** for the same reason. The zero matrix acts as an identity, and $-A$ — negate every entry — is an additive inverse.
+
+Every one of those follows from the entrywise definition rather than from anything matrix-specific. Matrix addition inherits its structure wholesale from the arithmetic of its entries, which is exactly why it is the easiest matrix operation to reason about.`,
+      link: '',
+    },
+    obj14: {
+      title: `Switching to Subtraction`,
+      content: `The operation toggle replaces every $+$ with a $-$, and nothing else about the run changes: same shapes, same pairing, same one-cell-at-a-time sweep, with each destination now reading $a_{i,j} - b_{i,j}$.
+
+The still below is the subtraction run at the same point in the sweep, so it can be compared directly against the addition step above.`,
+      before: ``,
+      after: `Subtraction is not really a separate operation. $A - B$ is defined as $A + (-B)$, where $-B$ negates every entry, so the toggle is shorthand for negating one input and reusing addition.
+
+That framing explains which properties survive and which do not. Subtraction is **not commutative** — $A - B$ and $B - A$ differ by a sign in every entry — and it is not associative either. The same-shape requirement is untouched, because the pairing argument never depended on which sign sits between the two entries.`,
+      link: '',
+    },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from AdditionWrapper's own buildMatrixScenes (exported additively)
+     and rendered through frozenMatrixSvg. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: matrixAdditionDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'A and B at 2&#215;3 with C empty beside them. Every cell of C shows the placeholder, and the ' +
+      'matching dimensions are the only thing established so far.'),
+    step: unit('step', 'Mid-sweep, frozen',
+      'One cell of A, the cell opposite it in B, and the destination in C are highlighted together. ' +
+      'Earlier cells of C already read a + b; later ones are still placeholders.'),
+    done: unit('done', 'Completed sum, frozen',
+      'All six cells of C filled, each holding the sum of the two entries directly above it. ' +
+      'C is 2&#215;3, the same shape it started as.'),
+    subtract: unit('subtract', 'Subtraction, same point in the sweep',
+      'Identical choreography with the operator flipped: each destination cell now reads a - b. ' +
+      'Shapes and pairing are unchanged.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     AdditionWrapper had no explanations prop; one was added additively and
+     defaults to null. Keys are the scene phase (intro / step / done), plus a
+     single subtract key that applies whenever the operation toggle is on
+     subtraction. Captions render with dangerouslySetInnerHTML, so these are raw
+     HTML with <a href="#slug"> anchors rather than markdown. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#what-matrix-addition-is" style="color:#1d4ed8;font-weight:600">what addition is</a></div>`
+
+  const explanations = {
+    intro: note('Matching dimensions give every entry of A a partner in B - that is the whole precondition.', 'the-opening-scene', 'Learn more about the opening scene'),
+    step: note('Each destination cell depends on exactly two numbers, and on no other cell.', 'one-cell-at-a-time', 'Learn more about the cell sweep'),
+    done: note('C keeps the shape it started with, and every algebraic property follows from the entries.', 'the-completed-sum', 'Learn more about the completed sum'),
+    subtract: note('A - B is A + (-B): one input negated, addition reused, commutativity lost.', 'switching-to-subtraction', 'Learn more about subtraction'),
   }
 
 
@@ -329,6 +412,8 @@ The visualizer above mirrors this process symbolically — set the dimensions to
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -346,107 +431,45 @@ The visualizer above mirrors this process symbolically — set the dimensions to
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [sectionsContent.obj0.content]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [sectionsContent.obj3.content]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [sectionsContent.obj6.content]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [sectionsContent.obj7.content]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [sectionsContent.obj8.content]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [sectionsContent.obj9.content]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [sectionsContent.obj10.content]
-    },
-    // {
-    //   id: '11',
-    //   title: sectionsContent.obj11.title,
-    //   link: sectionsContent.obj11.link,
-    //   content: [sectionsContent.obj11.content]
-    // },
-    // {
-    //   id: '12',
-    //   title: sectionsContent.obj12.title,
-    //   link: sectionsContent.obj12.link,
-    //   content: [sectionsContent.obj12.content]
-    // },
-    // {
-    //   id: '13',
-    //   title: sectionsContent.obj13.title,
-    //   link: sectionsContent.obj13.link,
-    //   content: [sectionsContent.obj13.content]
-    // },
-    // {
-    //   id: '14',
-    //   title: sectionsContent.obj14.title,
-    //   link: sectionsContent.obj14.link,
-    //   content: [sectionsContent.obj14.content]
-    // },
-    // {
-    //   id: '15',
-    //   title: sectionsContent.obj15.title,
-    //   link: sectionsContent.obj15.link,
-    //   content: [sectionsContent.obj15.content]
-    // },
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-scene-player'),
+    stateRow('obj11', 'the-opening-scene', 'intro'),
+    stateRow('obj12', 'one-cell-at-a-time', 'step'),
+    stateRow('obj13', 'the-completed-sum', 'done'),
+    stateRow('obj14', 'switching-to-subtraction', 'subtract'),
+    plain('obj3', 'addition-and-subtraction'),
+    plain('obj4', 'choosing-dimensions'),
+    plain('obj5', 'what-matrix-addition-is'),
+    plain('obj6', 'key-formulas'),
+    plain('obj7', 'the-same-shape-rule'),
+    plain('obj8', 'common-mistakes'),
+    plain('obj9', 'worked-example'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -505,6 +528,7 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
       <div style={{ width: '80%', margin: 'auto' }}>
         <AdditionWrapper 
         mode='matrices'
+        explanations={explanations}
         />
       </div>
       <br />

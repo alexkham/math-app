@@ -7,6 +7,8 @@ import React from 'react'
 import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import DiscreteDistributionsCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/DiscreteProbabilityCDF'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -149,7 +151,122 @@ For detailed comparison of probability functions including when to use each, see
       after: ``,
       link: '',
     },
+
+    obj11: {
+      title: `Discrete Uniform: Equal Steps`,
+      content: `With the default range $a = 1$ to $b = 6$ — a fair die — the CDF climbs in six identical steps of $1/6$. It starts at $F(1) = 0.1667$ and reaches exactly $1$ at $k = 6$.
+
+Every step is the same height because every outcome has the same probability. That is the visual signature of a uniform distribution: a staircase with even risers.`,
+      before: ``,
+      after: `The step height *is* the pmf. $F(k) - F(k-1) = P(X = k)$, so reading the jump at any $k$ recovers the probability of that single value — which is how a CDF and a pmf carry the same information in different form.
+
+Between the steps the function is flat, and that flatness is meaningful rather than decorative: $F(2.7) = F(2)$ because no probability accumulates between 2 and 3. A discrete CDF is defined for every real $k$, but only changes at the values the variable can actually take.`,
+      link: '',
+    },
+    obj12: {
+      title: `Binomial: a Symmetric S-Curve`,
+      content: `At $n = 10$ and $p = 0.5$ the CDF runs from $F(0) = 0.001$ to $F(10) = 1$ across eleven steps, and the steps are not equal.
+
+They are smallest at the ends and largest in the middle, tracing the S-shape you see in the frozen plot. The largest single jump is at $k = 5$, the mean.`,
+      before: ``,
+      after: `The step heights are the binomial coefficients scaled by $2^{-10}$ — the row $1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1$ over 1024. That is why the curve is symmetric here: $p = 0.5$ makes the row palindromic.
+
+Changing $p$ breaks that symmetry and slides the steep section. With $p = 0.5$ the CDF passes 0.5 at the middle; with $p = 0.2$ it climbs early and flattens, since most of the probability sits at low counts. The steepest region always sits at the mean $np$.`,
+      link: '',
+    },
+    obj13: {
+      title: `Geometric: Never Quite Reaching 1`,
+      content: `With $p = 0.3$, the CDF is $F(k) = 1 - (1-p)^k$. It starts at $0.3$ and rises quickly, but the plot's last point, at $k = 34$, is $0.999995$ — not 1.
+
+The support is unbounded: any number of failures before the first success is possible, however unlikely.`,
+      before: ``,
+      after: `This is the first distribution here whose CDF never terminates. It approaches 1 asymptotically rather than reaching it, and the tool draws a finite window — $\\min(50, \\lceil 10/p \\rceil)$ values — because it has to stop somewhere.
+
+The step heights decay geometrically, each $(1-p)$ times the last, which is exactly the memoryless property in visual form: having waited $k$ failures already, the chance of success on the next trial is still $p$. The staircase looks the same from wherever you start climbing it.`,
+      link: '',
+    },
+    obj14: {
+      title: `Negative Binomial: Waiting for Several Successes`,
+      content: `With $r = 3$ and $p = 0.4$, the variable counts trials until the third success, so the support starts at $k = 3$ — you cannot have three successes in fewer than three trials.
+
+$F(3) = 0.064 = 0.4^3$, the probability that the first three trials are all successes, and the curve climbs to 1 across the plotted window.`,
+      before: ``,
+      after: `The shape sits between the geometric and the binomial. Setting $r = 1$ collapses it exactly to the geometric case; raising $r$ pushes the whole curve right and makes it more symmetric, since a sum of several waiting times concentrates around its mean.
+
+The left endpoint is the detail worth carrying. Many distributions start at 0, this one starts at $r$, and mistaking the support is the commonest error in setting these problems up.`,
+      link: '',
+    },
+    obj15: {
+      title: `Hypergeometric: Sampling Without Replacement`,
+      content: `With $N = 50$ items, $K = 20$ of them successes, and $n = 10$ drawn, the CDF spans $k = 0$ to $10$ and reaches 1.
+
+$F(0) = 0.0029$: the chance of drawing no successes at all in ten draws from a population that is 40% successes.`,
+      before: ``,
+      after: `The contrast with the binomial is the point of having this distribution on the same page. The binomial assumes each draw has the same success probability; here each draw *changes* the population, so the probability shifts as you go.
+
+For large $N$ relative to $n$ the difference vanishes and the hypergeometric approaches the binomial with $p = K/N$ — which is why sampling 10 people from a city is treated as binomial while sampling 10 from a room of 50 is not.`,
+      link: '',
+    },
+    obj16: {
+      title: `Poisson: Counting Rare Events`,
+      content: `At $\\lambda = 3$ the CDF begins at $F(0) = e^{-3} = 0.0498$ and climbs to 1 over the plotted window of $k = 0$ to $18$.
+
+Like the geometric, the support is unbounded — any count is possible — so the tool plots a finite range and the tail is negligible rather than absent.`,
+      before: ``,
+      after: `The Poisson is the limiting case of the binomial when $n$ grows and $p$ shrinks with $np = \\lambda$ held fixed. That is why its curve resembles the binomial's S-shape while needing only one parameter.
+
+Its distinguishing feature is that mean and variance are both $\\lambda$. That is a strong claim about the data, and it is the first thing to check before using it: count data whose variance clearly exceeds its mean is overdispersed, and the Poisson will understate the spread.`,
+      link: '',
+    },
   }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The live chart is recharts, which cannot be rendered to a string at build
+     time, so discreteCdfDiagrams.js ports the step plot: same data (the six
+     builders and their pmf/cdf helpers, evaluated at the component's default
+     sliders) and the same visual configuration the component gives recharts. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: discreteCdfDiagrams[key], caption, text })
+
+  const stateUnits = {
+    discreteUniform: unit('discreteUniform', 'Discrete uniform, a = 1 to b = 6',
+      'Six identical steps of 1/6, from F(1) = 0.1667 to F(6) = 1. Equal risers are the signature of ' +
+      'a uniform distribution, and each riser IS the pmf at that value.'),
+    binomial: unit('binomial', 'Binomial, n = 10, p = 0.5',
+      'Eleven steps from F(0) = 0.001 to F(10) = 1, smallest at the ends and largest at k = 5. The ' +
+      'step heights are the binomial coefficients over 1024.'),
+    geometric: unit('geometric', 'Geometric, p = 0.3',
+      'Starts at 0.3 and rises fast, but the last plotted point (k = 34) is 0.999995 - the support is ' +
+      'unbounded, so the curve approaches 1 without reaching it.'),
+    negativeBinomial: unit('negativeBinomial', 'Negative binomial, r = 3, p = 0.4',
+      'The support starts at k = 3, not 0: three successes need at least three trials. F(3) = 0.064, ' +
+      'which is 0.4 cubed.'),
+    hypergeometric: unit('hypergeometric', 'Hypergeometric, N = 50, K = 20, n = 10',
+      'Ten draws without replacement from a population that is 40% successes. F(0) = 0.0029 is the ' +
+      'chance of drawing none at all.'),
+    poisson: unit('poisson', 'Poisson, lambda = 3',
+      'Begins at F(0) = e^-3 = 0.0498 and climbs to 1 over the plotted window. Unbounded support ' +
+      'again, so the tail is negligible rather than absent.'),
+  }
+
+
+  /* ---- per-distribution notes appended to the tool's own explanation (Line 1)
+     The component already had `explanationsOverride`, but that REPLACES its
+     built-in text. An additive `explanationsAppend` prop was added so the tool's
+     explanation survives and this link is appended to it. The panel renders
+     through processContent, so these use markdown anchors. */
+  const note = (slug, label) =>
+    ` [Learn more about ${label}](!#${slug}) &middot; [compare all six](!#comparing-distribution-shapes)`
+
+  const explanationsAppend = {
+    discreteUniform: note('discrete-uniform', 'the discrete uniform CDF'),
+    binomial: note('binomial', 'the binomial CDF'),
+    geometric: note('geometric', 'the geometric CDF'),
+    negativeBinomial: note('negative-binomial', 'the negative binomial CDF'),
+    hypergeometric: note('hypergeometric', 'the hypergeometric CDF'),
+    poisson: note('poisson', 'the Poisson CDF'),
+  }
+
 
   const faqQuestions = {
     obj1: {
@@ -270,6 +387,8 @@ For detailed comparison of probability functions including when to use each, see
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanationsAppend,
       introContent,
       faqQuestions,
       schemas,
@@ -278,20 +397,56 @@ For detailed comparison of probability functions including when to use each, see
         description: "Visualize cumulative distribution functions for discrete probability distributions. Adjust parameters, explore step functions, calculate probabilities interactively.",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools/cdf/discrete",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="16" x2="74" y2="16" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="3,2.5"/><path d="M 14 58 H 26 V 48 H 38 V 34 H 50 V 22 H 62 V 16 H 72" fill="none" stroke="#85B7EB" stroke-width="2.1"/><circle cx="26" cy="48" r="2.2" fill="#85B7EB" stroke="#0C447C" stroke-width="0.9"/><circle cx="38" cy="34" r="2.2" fill="#85B7EB" stroke="#0C447C" stroke-width="0.9"/><circle cx="50" cy="22" r="2.2" fill="#85B7EB" stroke="#0C447C" stroke-width="0.9"/><circle cx="62" cy="16" r="2.2" fill="#85B7EB" stroke="#0C447C" stroke-width="0.9"/><line x1="14" y1="10" x2="14" y2="66" stroke="#B5D4F4" stroke-width="1"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/><text x="8" y="18" font-family="Georgia,serif" font-size="7" fill="#B5D4F4" text-anchor="middle">1</text></svg>`,
+        category: "Probability Functions & CDF",
         name: "Discrete Distributions CDF Visualizer"
       },
     }
   }
 }
 
-export default function CDFDiscreteVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function CDFDiscreteVisualizerPage({seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit slug list
+  const genericSections = [
+    plain('obj1', 'selecting-a-distribution'),
+    plain('obj2', 'adjusting-parameters'),
+    plain('obj3', 'reading-the-cdf-chart'),
+    plain('obj4', 'step-functions-in-discrete-cdfs'),
+    plain('obj5', 'finding-cumulative-probabilities'),
+    plain('obj6', 'comparing-distribution-shapes'),
+    stateRow('obj11', 'discrete-uniform', 'discreteUniform'),
+    stateRow('obj12', 'binomial', 'binomial'),
+    stateRow('obj13', 'geometric', 'geometric'),
+    stateRow('obj14', 'negative-binomial', 'negativeBinomial'),
+    stateRow('obj15', 'hypergeometric', 'hypergeometric'),
+    stateRow('obj16', 'poisson', 'poisson'),
+    plain('obj7', 'parameter-effects-on-shape'),
+    plain('obj8', 'what-is-a-cdf'),
+    plain('obj9', 'cdf-vs-pmf'),
+    plain('obj10', 'related-tools-and-concepts'),
+  ]
+
+
 
   return (
     <>
@@ -345,7 +500,7 @@ export default function CDFDiscreteVisualizerPage({seoData, sectionsContent, int
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function(CDF) of Discrete Distributions</h1>
       <div style={{transform:'scale(0.8)'}}>
-        <DiscreteDistributionsCDF/>
+        <DiscreteDistributionsCDF explanationsAppend={explanationsAppend}/>
       </div>
       
       <br/>

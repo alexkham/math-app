@@ -662,6 +662,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -752,26 +753,32 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: "what covariance is", "what positive covariance means" and
+  // "common examples" each name their own h2. Kept the zero-covariance
+  // question — the claim the independence page deferred here, and which its
+  // notation section already links to as covariance#7 — and reframed the
+  // variance comparison around the Cov(X,X) identity. Added correlation,
+  // which no heading on this page mentions at all.
   const faqQuestions = {
     obj1: {
-      question: "What is covariance in probability?",
-      answer: "Covariance measures how two random variables are related by examining how their values deviate from their respective averages across the same observations. It extends the concept of variance from single variables to pairs of variables, focusing on their joint behavior."
+      question: "Does zero covariance mean independence?",
+      answer: "No — the implication runs one way only. Independence forces covariance to zero, but zero covariance does not force independence. Covariance detects linear association, so a relationship with no linear component slips past it: for a perfect parabola the variables determine each other completely, yet the covariance can be exactly zero. Zero covariance means uncorrelated, which is strictly weaker.",
+      sectionId: "4"
     },
     obj2: {
-      question: "What does positive covariance mean?",
-      answer: "Positive covariance indicates that higher-than-average values of one variable tend to occur with higher-than-average values of the other variable. Both variables move in the same direction relative to their averages."
+      question: "What is the difference between covariance and correlation?",
+      answer: "Units. Covariance carries the product of both variables' units, so its size means nothing on its own — you cannot tell a large covariance from a small one without knowing the scales. Correlation divides that out, forcing the value into [−1, 1] and making different pairs comparable. Both detect linear association only, and neither carries causation.",
+      sectionId: "7"
     },
     obj3: {
-      question: "Does zero covariance mean independence?",
-      answer: "No. While independent random variables always have zero covariance, the reverse is not true. Zero covariance only indicates no consistent linear relationship, but structured non-linear dependencies may still exist between the variables."
+      question: "Why does Cov(X, X) equal the variance?",
+      answer: "Because feeding the same variable into both slots reproduces the variance definition. Cov(X, Y) is E[(X − μ_X)(Y − μ_Y)]; set Y = X and the two factors become identical, giving E[(X − μ_X)²], which is Var(X). Variance is the special case of covariance where a variable is paired with itself, which is why the two operators share a family.",
+      sectionId: "7"
     },
     obj4: {
-      question: "How is covariance different from variance?",
-      answer: "Variance measures the spread of a single random variable around its mean, while covariance measures the joint behavior of two random variables. When covariance is calculated for a variable with itself, it equals that variable's variance."
-    },
-    obj5: {
-      question: "What are common examples of covariance in practice?",
-      answer: "Covariance arises when recording paired numerical quantities from the same observations, such as height and weight, study time and exam scores, daily temperature and energy usage, or returns of two financial assets. It describes how these quantities relate across observations."
+      question: "Is σ_XY the same as σ_X times σ_Y?",
+      answer: "No. σ_XY is a single symbol with a two-letter subscript naming a pair — it is the covariance, not a product. The product σ_X σ_Y is a different quantity, and it appears in the denominator of the correlation coefficient. Reading the subscript as multiplication gives something with the wrong units and the wrong value.",
+      sectionId: "7"
     }
   }
 
@@ -838,19 +845,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/covariance"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1244,6 +1238,22 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Covariance FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -1358,13 +1368,6 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

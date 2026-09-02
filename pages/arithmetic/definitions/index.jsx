@@ -378,19 +378,6 @@ Each definition includes an intuitive explanation, key properties, examples, and
           "item": "https://www.learnmathclass.com/arithmetic/definitions"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -448,11 +435,6 @@ export default function ArithmeticDefinitionsPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
         />
       </Head>
       {/* <GenericNavbar/> */}

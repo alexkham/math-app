@@ -7,6 +7,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ScalarMultiplicationWrapper from '../../../../app/components/linear-algebra copy/matrix/ScalarMultiplicationWrapper'
+import matrixScalarDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixScalarDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -188,12 +190,77 @@ Set the visualizer to $2 \\times 3$ and step through to see this animated symbol
       after: ``,
       link: '#related-concepts',
     },
-    obj10: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj10: {
+      title: `The Opening Scene: One Number and One Matrix`,
+      content: `The player starts with the scalar $k$, the matrix $A$, and an empty $C$ waiting for the result. At the default dimensions $A$ is $2 \times 3$, so $C$ will be $2 \times 3$ as well.
+
+Only the setup is on screen: a single number on one side, six entries on the other, and the statement that $C = k \cdot A$ is about to be built cell by cell.`,
+      before: ``,
+      after: `Unlike addition, this operation has no matching-shape precondition — there is nothing to match. A scalar can multiply a matrix of any dimensions, because it meets every entry individually rather than pairing off against a second grid.
+
+That also fixes the output shape immediately. $C$ has exactly the dimensions of $A$, whatever $k$ happens to be, and no choice of $k$ can add or remove an entry.`,
+      link: '',
+    },
+    obj11: {
+      title: `One Cell at a Time`,
+      content: `Each step highlights a single entry of $A$ together with its destination in $C$, and writes $k \cdot a_{i,j}$ into that slot.
+
+The frozen picture below is a step partway through the $2 \times 3$ run: some cells of $C$ already hold their scaled value, one is being computed, and the rest are still placeholders.`,
+      before: ``,
+      after: `The same $k$ is used at every step. That is the entire content of the operation — six multiplications that share one factor — and it is why scalar multiplication is so much simpler than the matrix product, where each output entry consumes a whole row and a whole column.
+
+Because each cell is independent, the order of the sweep is again a presentational choice. Nothing in $c_{2,3}$ depends on $c_{1,1}$ having been computed first.`,
+      link: '',
+    },
+    obj12: {
+      title: `The Completed Product`,
+      content: `The final scene fills every cell, so $C$ reads $c_{i,j} = k \cdot a_{i,j}$ throughout, at the same $2 \times 3$ shape it started with.
+
+Written that way the defining property is visible at a glance: **one factor, applied everywhere**.`,
+      before: ``,
+      after: `The algebraic rules all follow from that. Scalar multiplication distributes over matrix addition, $k(A + B) = kA + kB$, and over scalar addition, $(k + m)A = kA + mA$; it is associative with scalars, $(km)A = k(mA)$; and $1 \cdot A = A$ while $0 \cdot A$ is the zero matrix. Those are precisely the axioms that make the set of $2 \times 3$ matrices a vector space.
+
+Two consequences are worth knowing because they are easy to get wrong. The trace scales linearly, $\operatorname{tr}(kA) = k \operatorname{tr}(A)$, since every diagonal entry picks up one factor of $k$. The determinant does **not**: for an $n \times n$ matrix, $\det(kA) = k^n \det(A)$, because the determinant collects one factor of $k$ from each of the $n$ rows. Doubling a $3 \times 3$ matrix multiplies its determinant by eight, not by two.`,
+      link: '',
+    },
     obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from ScalarMultiplicationWrapper's own buildMatrixScenes (exported
+     additively) and rendered through frozenMatrixSvg. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: matrixScalarDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'The scalar k beside A at 2&#215;3, with C empty. Every cell of C shows the placeholder - no ' +
+      'shape precondition to satisfy, since k meets each entry on its own.'),
+    step: unit('step', 'Mid-sweep, frozen',
+      'One entry of A and its destination in C highlighted together. Earlier cells of C already hold ' +
+      'k times their entry; later ones are still placeholders.'),
+    done: unit('done', 'Completed product, frozen',
+      'All six cells filled with k times the entry above, and C still 2&#215;3. One factor, applied ' +
+      'everywhere.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     ScalarMultiplicationWrapper had no explanations prop; one was added
+     additively and defaults to null. Keys are the scene phase. Captions render
+     with dangerouslySetInnerHTML, so these are raw HTML anchors. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#what-scalar-multiplication-is" style="color:#1d4ed8;font-weight:600">what it is</a></div>`
+
+  const explanations = {
+    intro: note('No shape rule to satisfy - k multiplies a matrix of any dimensions.', 'the-opening-scene', 'Learn more about the opening scene'),
+    step: note('Six multiplications sharing one factor, each independent of the others.', 'one-cell-at-a-time', 'Learn more about the cell sweep'),
+    done: note('One factor everywhere - and note det(kA) = k^n det(A), not k det(A).', 'the-completed-product', 'Learn more about the completed product'),
   }
 
 
@@ -313,6 +380,8 @@ Set the visualizer to $2 \\times 3$ and step through to see this animated symbol
   return {
     props: {
       sectionsContent,
+         stateUnits,
+         explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -330,165 +399,46 @@ Set the visualizer to $2 \\times 3$ and step through to see this animated symbol
   }
 }
 
-export default function ScalarMultiplicationVisualizer({seoData,sectionsContent , introContent, faqQuestions, schemas}) {
+export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
-    
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections=[
-    // {
-    //     id:'0',
-    //     title:sectionsContent.obj0.title,
-    //     link:sectionsContent.obj0.link,
-    //     content:[
-    //       sectionsContent.obj0.content,
-    //     ]
-    // },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    // {
-    //     id:'10',
-    //     title:sectionsContent.obj10.title,
-    //     link:sectionsContent.obj10.link,
-    //     content:[
-    //       sectionsContent.obj10.content,
-    //     ]
-    // },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    
-]
+    // obj0 Key Terms was defined but rendered nowhere - its section entry and the
+    // KeyTermsCard were both commented out, so the content was invisible. Restored.
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-scene-player'),
+    stateRow('obj10', 'the-opening-scene', 'intro'),
+    stateRow('obj11', 'one-cell-at-a-time', 'step'),
+    stateRow('obj12', 'the-completed-product', 'done'),
+    plain('obj3', 'choosing-dimensions'),
+    plain('obj4', 'what-scalar-multiplication-is'),
+    plain('obj5', 'key-properties'),
+    plain('obj6', 'why-it-matters'),
+    plain('obj7', 'worked-example'),
+    plain('obj8', 'common-mistakes'),
+    plain('obj9', 'related-concepts'),
+  ]
 
+
+    
   return (
    <>
    <Head>
@@ -547,6 +497,7 @@ export default function ScalarMultiplicationVisualizer({seoData,sectionsContent 
    <ScalarMultiplicationWrapper
    
    mode='matrices'
+   explanations={explanations}
    
    />
    </div>

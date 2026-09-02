@@ -1,0 +1,1002 @@
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of D:\next js\my projects\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * D:\next js\my projects\math-app\math-app\package-lock.json
+
+   ▲ Next.js 15.5.14
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 68s
+   Skipping validation of types
+   Linting ...
+
+./app/components/algebra/inequalities/visualizer/logic.js
+1759:7  Warning: React Hook useMemo has a missing dependency: 'state'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+1763:5  Warning: React Hook useMemo has a missing dependency: 'state'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+1766:47  Warning: React Hook useMemo has a missing dependency: 'state'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+1805:6  Warning: React Hook useEffect has a missing dependency: 'state'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+1810:6  Warning: React Hook useEffect has a missing dependency: 'state'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/algebra/solvers/MathGraphComponent.jsx
+324:6  Warning: React Hook useMemo has missing dependencies: 'createTransforms', 'padding.left', 'padding.top', 'plotHeight', and 'plotWidth'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/algebra/visualizers/equations/CompleteTheSquare.jsx
+744:6  Warning: React Hook useEffect has a missing dependency: 'stopPlay'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/arithmetic/visualizers/ModPieWheel.jsx
+192:6  Warning: React Hook useEffect has a missing dependency: 'committedNumber'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/calculation-methods/CalculationsCard.jsx
+2779:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/calculators/complex-numbers/MultipleComplexAddition.jsx
+258:6  Warning: React Hook useCallback has a missing dependency: 'getColor'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/calculators/matrix/Matrix2.jsx
+1143:31  Warning: The ref value 'matrixRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'matrixRef.current' to a variable inside the effect, and use that variable in the cleanup function.  react-hooks/exhaustive-deps
+
+./app/components/calculators/matrix/MatrixInverseVisualCalculator.jsx
+193:6  Warning: React Hook useCallback has missing dependencies: 'formatMultiplier' and 'formatNumber'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/calculators/matrix/MatrixRankCalculator.jsx
+220:6  Warning: React Hook useCallback has missing dependencies: 'formatMultiplier' and 'formatNumber'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/combinatorics/CombinatoricsVisualisation4Balls.jsx
+1199:6  Warning: React Hook useEffect has a missing dependency: 'updatePermutation'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/combinatorics/new-visualizers/scenes/PermutationWithIdentical.jsx
+443:9  Warning: The 'currentOutcome' logical expression could make the dependencies of useMemo Hook (at line 452) change on every render. To fix this, wrap the initialization of 'currentOutcome' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./app/components/combinatorics/PermutationsWithIdentical.jsx
+91:6  Warning: React Hook useEffect has a missing dependency: 'updatePermutation'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/combinatorics/VariationsVisualizer.jsx
+235:6  Warning: React Hook useEffect has a missing dependency: 'options.length'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/converters/ComplexNumbersConverter.jsx
+97:6  Warning: React Hook useEffect has missing dependencies: 'calculate' and 'hasValidInput'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/diagrams/set-theory/IndexedUnionIntersectionExplorer.jsx
+671:6  Warning: React Hook useMemo has an unnecessary dependency: 'vennSets'. Either exclude it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/diagrams/unified-venn/VennDiagramExplorer.jsx
+13:9  Warning: The 'diagramDefaults' logical expression could make the dependencies of useMemo Hook (at line 72) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'diagramDefaults' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./app/components/diagrams/VennDiagram.jsx
+109:6  Warning: React Hook useEffect has a missing dependency: 'config'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/examples/DefinitionsGlossary.jsx
+54:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/examples/FormulaTOC.jsx
+1608:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/functions/FunctionVisualizerCoreImproved.jsx
+917:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/functions/FunctionVisualizerCorePro.jsx
+1426:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/functions/symmetry/FunctionSymmetry.jsx
+483:6  Warning: React Hook useMemo has missing dependencies: 'a', 'b', 'h', and 'k'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/functions/transformations/FunctionsTransformations.jsx
+1199:6  Warning: React Hook useMemo has a missing dependency: 'isDefault'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/graphs/GraphCore.jsx
+989:6  Warning: React Hook useEffect has a missing dependency: 'draw'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+999:6  Warning: React Hook useEffect has a missing dependency: 'draw'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/knowledge-graph/KnowledgeGraph.jsx
+16853:6  Warning: React Hook useEffect has missing dependencies: 'buildFocused' and 'buildOverview'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/logarithm-table/PowerTable.jsx
+801:70  Warning: React Hook useMemo has a missing dependency: 'calculatePowerValues'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/logic-calculator/proposition-tree/PropositionTreeBuilder.jsx
+488:6  Warning: React Hook useEffect has a missing dependency: 'analyzeProposition'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/matrices/MatrixGenerator.jsx
+127:6  Warning: React Hook useEffect has a missing dependency: 'generateMatrix'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/matrix-multiplication/DeterminantCalculator.jsx
+55:6  Warning: React Hook useEffect has a missing dependency: 'nextStep'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/matrix-multiplication/MatrixMultiplicationVisualizer.jsx
+2981:6  Warning: React Hook useEffect has a missing dependency: 'nextStep'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/page-components/top-navigation/TopNavigation.jsx
+438:6  Warning: React Hook useEffect has a missing dependency: 'processCards'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/page-components/view-page/ViewDynamicPage.jsx
+1655:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+1691:33  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+1729:35  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+1776:37  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+1819:37  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/page-components/visual-tools-page/VisualToolsBlocks.jsx
+73:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+150:29  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+226:31  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+280:29  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/probability/CentralLimitTheoremVisualizer.jsx
+246:6  Warning: React Hook useEffect has a missing dependency: 'drawPopulationDistribution'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+250:6  Warning: React Hook useEffect has a missing dependency: 'drawSamplingDistribution'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+267:6  Warning: React Hook useEffect has a missing dependency: 'distributions'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/probability/CLTSimulator.jsx
+805:6  Warning: React Hook useEffect has a missing dependency: 'runSimulation'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+830:6  Warning: React Hook useMemo has a missing dependency: 'generateValue'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/probability/conditional-probability-demo/ConditionalProbabilityTree.jsx
+118:6  Warning: React Hook useEffect has a missing dependency: 'drawTree'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/probability/conditional-probability-demo/WaffleChart.jsx
+52:6  Warning: React Hook useMemo has a missing dependency: 'generateTilesForArea'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/probability/expected-value/WeightedExpectedValueVisualization.jsx
+55:6  Warning: React Hook React.useEffect has a missing dependency: 'distributions'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/probability/tables/BinomialCumulativeTable.jsx
+121:6  Warning: React Hook React.useMemo has missing dependencies: 'calculateProbability' and 'pValues'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/puzzles/TablePuzzle2.jsx
+231:49  Warning: React Hook useMemo has a missing dependency: 'C'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+235:43  Warning: React Hook useMemo has a missing dependency: 'C'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/sequences/parametric-explorer/ParametricSequenceExplorer.jsx
+720:6  Warning: React Hook useEffect has a missing dependency: 'currentSolverMode'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/sequences/PrimeTable.jsx
+227:11  Warning: The 'resetAll' function makes the dependencies of useEffect Hook (at line 238) change on every render. Move it inside the useEffect callback. Alternatively, wrap the definition of 'resetAll' in its own useCallback() Hook.  react-hooks/exhaustive-deps
+
+./app/components/sequences/SequenceTable.jsx
+94:8  Warning: React Hook useEffect has a missing dependency: 'resetAll'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/solvers/LogarithmicEquationSolver.jsx
+908:6  Warning: React Hook useCallback has an unnecessary dependency: 'cursorPos'. Either exclude it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/solvers/MathGraphComponent.jsx
+324:6  Warning: React Hook useMemo has missing dependencies: 'createTransforms', 'padding.left', 'padding.top', 'plotHeight', and 'plotWidth'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/tables/table-explorer/GenericTableExplorer.jsx
+607:9  Warning: The 'items' conditional could make the dependencies of useMemo Hook (at line 631) change on every render. To fix this, wrap the initialization of 'items' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+607:9  Warning: The 'items' conditional could make the dependencies of useMemo Hook (at line 667) change on every render. To fix this, wrap the initialization of 'items' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+607:9  Warning: The 'items' conditional could make the dependencies of useMemo Hook (at line 937) change on every render. To fix this, wrap the initialization of 'items' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+608:9  Warning: The 'categories' logical expression could make the dependencies of useMemo Hook (at line 625) change on every render. To fix this, wrap the initialization of 'categories' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+608:9  Warning: The 'categories' logical expression could make the dependencies of useMemo Hook (at line 667) change on every render. To fix this, wrap the initialization of 'categories' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+609:9  Warning: The 'extraFilters' conditional could make the dependencies of useMemo Hook (at line 625) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'extraFilters' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+611:9  Warning: The 'templates' logical expression could make the dependencies of useMemo Hook (at line 937) change on every render. To fix this, wrap the initialization of 'templates' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+612:9  Warning: The 'searchModes' conditional could make the dependencies of useMemo Hook (at line 667) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'searchModes' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./app/components/trigo-calculator/TrigoPanel.jsx
+5357:6  Warning: React Hook useEffect has a missing dependency: 'outerTab'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/trigonometry/angle/types/AngleTypesExplorer.jsx
+493:6  Warning: React Hook useCallback has a missing dependency: 'DY'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/trigonometry/triangle/AnimatedTriangle.jsx
+24:6  Warning: React Hook useCallback has an unnecessary dependency: 'scenario.stages'. Either exclude it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/vectors/VectorLab.jsx
+549:6  Warning: React Hook useEffect has missing dependencies: 'angleBetween', 'dotProduct', 'magA', 'magB', 'projScalar', 'projX', 'projY', 'scaledX', 'scaledY', 'sumX', and 'sumY'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/venn-diagrams/drafts/SetIdentitiesExplorer.jsx
+872:9  Warning: The 'diagramDefaults' logical expression could make the dependencies of useMemo Hook (at line 918) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'diagramDefaults' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+873:9  Warning: The 'identities' logical expression could make the dependencies of useMemo Hook (at line 892) change on every render. To fix this, wrap the initialization of 'identities' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+874:9  Warning: The 'defaultTheme' logical expression could make the dependencies of useMemo Hook (at line 918) change on every render. To fix this, wrap the initialization of 'defaultTheme' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./app/components/venn-diagrams/drafts/VennCombinedPage.jsx
+1199:9  Warning: The 'diagramDefaults' logical expression could make the dependencies of useMemo Hook (at line 1238) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'diagramDefaults' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+1200:9  Warning: The 'scenarios' logical expression could make the dependencies of useMemo Hook (at line 1219) change on every render. To fix this, wrap the initialization of 'scenarios' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+1201:9  Warning: The 'defaultTheme' logical expression could make the dependencies of useMemo Hook (at line 1238) change on every render. To fix this, wrap the initialization of 'defaultTheme' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+1404:9  Warning: The 'diagramDefaults' logical expression could make the dependencies of useMemo Hook (at line 1450) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'diagramDefaults' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+1405:9  Warning: The 'identities' logical expression could make the dependencies of useMemo Hook (at line 1424) change on every render. To fix this, wrap the initialization of 'identities' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+1406:9  Warning: The 'defaultTheme' logical expression could make the dependencies of useMemo Hook (at line 1450) change on every render. To fix this, wrap the initialization of 'defaultTheme' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./app/components/venn-diagrams/drafts/VennDiagramExplorer.jsx
+883:9  Warning: The 'diagramDefaults' logical expression could make the dependencies of useMemo Hook (at line 922) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'diagramDefaults' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+884:9  Warning: The 'scenarios' logical expression could make the dependencies of useMemo Hook (at line 903) change on every render. To fix this, wrap the initialization of 'scenarios' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+885:9  Warning: The 'defaultTheme' logical expression could make the dependencies of useMemo Hook (at line 922) change on every render. To fix this, wrap the initialization of 'defaultTheme' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./app/components/venn-diagrams/VennCore.jsx
+934:6  Warning: React Hook useMemo has a missing dependency: 'predicate'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/BinomialDistributionPMF.jsx
+327:6  Warning: React Hook useMemo has a missing dependency: 'binomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/CDFs/BinomialDistributionCDF.jsx
+37:6  Warning: React Hook useMemo has a missing dependency: 'binomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/CDFs/DiscreteProbabilityCDF.jsx
+108:6  Warning: React Hook useMemo has a missing dependency: 'binomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+134:6  Warning: React Hook useMemo has a missing dependency: 'negativeBinomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+150:6  Warning: React Hook useMemo has a missing dependency: 'hypergeometricPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+164:6  Warning: React Hook useMemo has a missing dependency: 'poissonPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/CDFs/HypergeometricDistributionCDF.jsx
+43:6  Warning: React Hook useMemo has a missing dependency: 'hypergeometricPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/CDFs/NegativeBinomialDistributionCDF.jsx
+38:6  Warning: React Hook useMemo has a missing dependency: 'negativeBinomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/CDFs/PoissonDistributionCDF.jsx
+35:6  Warning: React Hook useMemo has a missing dependency: 'poissonPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/DiscreteProbabilityDistributions.jsx
+92:6  Warning: React Hook useMemo has a missing dependency: 'binomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+122:6  Warning: React Hook useMemo has a missing dependency: 'negativeBinomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+136:6  Warning: React Hook useMemo has a missing dependency: 'hypergeometricPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+148:6  Warning: React Hook useMemo has a missing dependency: 'poissonPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/HypergeometricDistributionPMF.jsx
+357:6  Warning: React Hook useMemo has a missing dependency: 'hypergeometricPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/NegativeBinomialDistributionPMF.jsx
+334:6  Warning: React Hook useMemo has a missing dependency: 'negativeBinomialPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/probability/discrete-distribution/PoissonDistributionPMF.jsx
+310:6  Warning: React Hook useMemo has a missing dependency: 'poissonPMF'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/visualizations/trigo/AngleVisualizer.jsx
+405:6  Warning: React Hook useEffect has missing dependencies: 'displayAngle' and 'unit'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/567) ...
+Warning: data for page "/algebra/visual-tools/equation" is 180 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/inverse-function" is 343 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/reflections" is 204 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+LaTeX-incompatible input and strict mode is set to 'warn': Unrecognized Unicode character "′" (8242) [unknownSymbol]
+LaTeX-incompatible input and strict mode is set to 'warn': Unrecognized Unicode character "′" (8242) [unknownSymbol]
+LaTeX-incompatible input and strict mode is set to 'warn': Unrecognized Unicode character "′" (8242) [unknownSymbol]
+Warning: data for page "/arithmetic/visual-tools/divisibility-table" is 477 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/arithmetic/visual-tools/eratosthenes-sieve" is 214 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/combinatorics/visual-tools/partition" is 222 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/combinatorics/visual-tools/permutation-with-repetition" is 294 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/combinatorics/visual-tools/permutation-with-identical" is 159 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/combinatorics/visual-tools/strong-composition" is 154 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/tangent-line" is 381 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/set-theory/visual-tools/two-sets-laws-venn" is 143 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+LaTeX-incompatible input and strict mode is set to 'warn': LaTeX's accent \' works only in text mode [mathVsTextAccents]
+LaTeX-incompatible input and strict mode is set to 'warn': LaTeX's accent \' works only in text mode [mathVsTextAccents]
+LaTeX-incompatible input and strict mode is set to 'warn': LaTeX's accent \' works only in text mode [mathVsTextAccents]
+LaTeX-incompatible input and strict mode is set to 'warn': LaTeX's accent \' works only in text mode [mathVsTextAccents]
+Files Table Data[object Object],[object Object],[object Object],[object Object]
+Warning: data for page "/calculus/formulas" is 134 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+algebra section ids: [
+  'visual-tools', 'formulas',
+  'definitions',  'equations',
+  'identities',   'inequalities',
+  'logarithms',   'polynomials',
+  'powers',       'roots',
+  'sequences',    'calculators'
+]
+Warning: data for page "/combinatorics/visual-tools/weak-composition" is 209 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/symmetry" is 470 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/composition" is 562 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+LaTeX-incompatible input and strict mode is set to 'warn': Unrecognized Unicode character "∅" (8709) [unknownSymbol]
+LaTeX-incompatible input and strict mode is set to 'warn': Unrecognized Unicode character "′" (8242) [unknownSymbol]
+Warning: data for page "/algebra/definitions" is 150 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+LaTeX-incompatible input and strict mode is set to 'warn': % comment has no terminating newline; LaTeX would fail because of commenting the end of math mode (e.g. $) [commentAtEnd]
+LaTeX-incompatible input and strict mode is set to 'warn': % comment has no terminating newline; LaTeX would fail because of commenting the end of math mode (e.g. $) [commentAtEnd]
+Warning: data for page "/algebra/visual-tools/inequality" is 210 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/trigonometry/visual-tools/angle-types" is 152 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/trigonometry/visual-tools/functions-signs" is 144 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/trigonometry/visual-tools/basic-identities" is 262 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/linear-algebra/formulas" is 329 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+LaTeX-incompatible input and strict mode is set to 'warn': Unrecognized Unicode character "—" (8212) [unknownSymbol]
+LaTeX-incompatible input and strict mode is set to 'warn': Unrecognized Unicode character "—" (8212) [unknownSymbol]
+Warning: data for page "/functions/visual-tools/domain" is 215 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/asymptotes" is 249 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/types" is 225 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/functions/visual-tools/range" is 216 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Reading sitemap from: D:\next js\my projects\math-app\math-app\public\sitemap.xml
+Sitemap content read successfully.
+Extracted URLs: 563
+Categorized URLs:
+Main: 1
+Category - algebra: 1
+Category - arithmetic: 1
+Category - calculators: 1
+Category - calculus: 1
+Category - combinatorics: 1
+Category - complex-numbers: 1
+Category - converters: 1
+Category - functions: 1
+Category - keyboard: 1
+Category - latex: 1
+Category - linear-algebra: 1
+Category - logic: 1
+Category - math-symbols: 1
+Category - probability: 1
+Category - set-theory: 1
+Category - tables: 1
+Category - tables1: 1
+Category - test1: 1
+Category - test10: 1
+Category - test11: 1
+Category - test12: 1
+Category - test13: 1
+Category - test2: 1
+Category - test3: 1
+Category - test4: 1
+Category - test5: 1
+Category - test6: 1
+Category - test7: 1
+Category - test8: 1
+Category - test9: 1
+Category - trigonometry: 1
+Category - visual-tools: 1
+Leaves: 530
+Warning: data for page "/combinatorics/visual-tools/distribution" is 274 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/combinatorics/visual-tools/full-permutation" is 253 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+Warning: data for page "/combinatorics/visual-tools/partial-permutation" is 149 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+   Generating static pages (141/567) 
+   Generating static pages (283/567) 
+Warning: data for page "/set-theory/visual-tools/three-sets-basic-venn" is 185 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+   Generating static pages (425/567) 
+ ✓ Generating static pages (567/567)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                                            Size  First Load JS
+┌ ○ /                                                                               26.6 kB         130 kB
+└ ○ /_not-found                                                                     1.01 kB         105 kB
++ First Load JS shared by all                                                        104 kB
+  ├ chunks/31255-8bbf7afa61ad2e8f.js                                                45.7 kB
+  ├ chunks/4bd1b696-bad92808725a934a.js                                             54.2 kB
+  └ other shared chunks (total)                                                     3.73 kB
+
+Route (pages)                                                                          Size  First Load JS  Revalidate  Expire
+┌   /_app                                                                               0 B         120 kB
+├ ● /algebra (1928 ms)                                                               1.9 kB         227 kB
+├ ● /algebra/calculators (1454 ms)                                                  2.21 kB         226 kB
+├ ● /algebra/calculators/equations/[view] (7640 ms)                                 65.1 kB         293 kB
+├   ├ /algebra/calculators/equations/linear (983 ms)
+├   ├ /algebra/calculators/equations/quadratic (981 ms)
+├   ├ /algebra/calculators/equations/polynomial (980 ms)
+├   ├ /algebra/calculators/equations/rational (980 ms)
+├   ├ /algebra/calculators/equations/radical (979 ms)
+├   ├ /algebra/calculators/equations/exponential (979 ms)
+├   ├ /algebra/calculators/equations/logarithmic (587 ms)
+├   └ [+2 more paths] (avg 586 ms)
+├ ● /algebra/calculators/factoring (1167 ms)                                        14.7 kB         239 kB          1d      1y
+├ ● /algebra/calculators/inequalities/[view] (4905 ms)                              62.4 kB         290 kB
+├   ├ /algebra/calculators/inequalities/absolute-value (890 ms)
+├   ├ /algebra/calculators/inequalities/radical (882 ms)
+├   ├ /algebra/calculators/inequalities/exponential (871 ms)
+├   ├ /algebra/calculators/inequalities/logarithmic (870 ms)
+├   ├ /algebra/calculators/inequalities/linear (665 ms)
+├   ├ /algebra/calculators/inequalities/quadratic (665 ms)
+├   └ /algebra/calculators/inequalities/rational
+├ ● /algebra/calculators/polynomial (1022 ms)                                       4.25 kB         237 kB
+├ ● /algebra/calculators/sequences/[view] (6956 ms)                                 14.6 kB         268 kB
+├   ├ /algebra/calculators/sequences/octagonal-numbers (674 ms)
+├   ├ /algebra/calculators/sequences/fibonacci-sequence (673 ms)
+├   ├ /algebra/calculators/sequences/prime-numbers (673 ms)
+├   ├ /algebra/calculators/sequences/tetrahedral-numbers (667 ms)
+├   ├ /algebra/calculators/sequences/arithmetic-sequence (666 ms)
+├   ├ /algebra/calculators/sequences/geometric-sequence (665 ms)
+├   ├ /algebra/calculators/sequences/square-numbers (590 ms)
+├   └ [+4 more paths] (avg 587 ms)
+├ ● /algebra/definitions (903 ms)                                                     947 B         218 kB
+├ ● /algebra/equations (845 ms)                                                     4.36 kB         223 kB
+├ ● /algebra/equations/absolute-value (815 ms)                                       1.4 kB         225 kB
+├ ● /algebra/equations/linear (901 ms)                                              4.28 kB         223 kB
+├ ● /algebra/equations/polynomial (1167 ms)                                          4.3 kB         223 kB
+├ ● /algebra/equations/quadratic (728 ms)                                           1.41 kB         225 kB
+├ ● /algebra/equations/rational (816 ms)                                            4.27 kB         223 kB
+├ ● /algebra/formulas (325 ms)                                                      1.03 kB         227 kB
+├ ● /algebra/identities (786 ms)                                                    4.26 kB         223 kB
+├ ● /algebra/inequalities (1251 ms)                                                 4.39 kB         223 kB
+├ ● /algebra/inequalities/absolute-value                                            4.26 kB         223 kB
+├ ● /algebra/inequalities/linear (725 ms)                                           1.41 kB         225 kB
+├ ● /algebra/inequalities/polynomial                                                4.28 kB         223 kB
+├ ● /algebra/inequalities/quadratic (1314 ms)                                       4.28 kB         223 kB
+├ ● /algebra/inequalities/rational (539 ms)                                         4.29 kB         223 kB
+├ ● /algebra/logarithms (804 ms)                                                    4.29 kB         223 kB
+├ ● /algebra/logarithms/common-natural (398 ms)                                     1.39 kB         225 kB
+├ ● /algebra/logarithms/equations (398 ms)                                          4.29 kB         223 kB
+├ ● /algebra/logarithms/graphs (1442 ms)                                            4.31 kB         223 kB
+├ ● /algebra/logarithms/inequalities (816 ms)                                       4.25 kB         223 kB
+├ ● /algebra/logarithms/properties (397 ms)                                         4.24 kB         223 kB
+├ ● /algebra/logarithms/rules (1975 ms)                                             4.26 kB         223 kB
+├ ● /algebra/polynomials (1977 ms)                                                  4.31 kB         223 kB
+├ ● /algebra/polynomials/factoring                                                   4.3 kB         223 kB
+├ ● /algebra/polynomials/graphing (1976 ms)                                          4.3 kB         223 kB
+├ ● /algebra/polynomials/operations                                                 4.24 kB         223 kB
+├ ● /algebra/polynomials/roots                                                      1.42 kB         225 kB
+├ ● /algebra/polynomials/rules                                                      4.29 kB         223 kB
+├ ● /algebra/powers                                                                 4.28 kB         223 kB
+├ ● /algebra/powers/exponent-rules                                                   4.3 kB         223 kB
+├ ● /algebra/powers/exponential-equations                                           4.33 kB         223 kB
+├ ● /algebra/powers/exponential-functions                                           1.38 kB         225 kB
+├ ● /algebra/powers/exponential-inequalities                                        4.24 kB         223 kB
+├ ● /algebra/powers/irrational-exponents (1107 ms)                                  4.22 kB         223 kB
+├ ● /algebra/powers/natural-exponents (1101 ms)                                     1.39 kB         225 kB
+├ ● /algebra/powers/negative-exponents (1102 ms)                                    1.37 kB         225 kB
+├ ● /algebra/powers/rational-exponents (1102 ms)                                    1.38 kB         225 kB
+├ ● /algebra/powers/zero-powers (1101 ms)                                           4.32 kB         225 kB
+├ ● /algebra/roots (1097 ms)                                                        4.29 kB         223 kB
+├ ● /algebra/roots/equations (1100 ms)                                              4.29 kB         223 kB
+├ ● /algebra/roots/functions (1101 ms)                                              4.29 kB         223 kB
+├ ● /algebra/roots/operations (595 ms)                                              4.28 kB         223 kB
+├ ● /algebra/roots/properties (596 ms)                                              1.39 kB         225 kB
+├ ● /algebra/roots/radical-rules (595 ms)                                           4.25 kB         223 kB
+├ ● /algebra/roots/rational-exponents (596 ms)                                      4.29 kB         223 kB
+├ ● /algebra/roots/simplifying (596 ms)                                             4.28 kB         223 kB
+├ ● /algebra/sequences (590 ms)                                                     4.16 kB         223 kB
+├ ● /algebra/sequences/arithmetic (584 ms)                                          1.32 kB         225 kB
+├ ● /algebra/sequences/fibonacci (593 ms)                                           4.21 kB         223 kB
+├ ● /algebra/sequences/geometric (596 ms)                                           4.24 kB         223 kB
+├ ● /algebra/sequences/harmonic (598 ms)                                            4.12 kB         223 kB
+├ ● /algebra/sequences/prime-numbers (590 ms)                                       4.15 kB         223 kB
+├ ● /algebra/sequences/square-numbers (584 ms)                                      4.13 kB         223 kB
+├ ● /algebra/sequences/triangular-numbers (584 ms)                                  4.13 kB         223 kB
+├ ● /algebra/visual-tools                                                             995 B         230 kB
+├ ● /algebra/visual-tools/binomial-coefficient (590 ms)                             11.2 kB         230 kB
+├ ● /algebra/visual-tools/completing-square (597 ms)                                4.52 kB         230 kB
+├ ● /algebra/visual-tools/equation (1141 ms)                                        4.62 kB         237 kB
+├ ● /algebra/visual-tools/identities (597 ms)                                       4.15 kB         223 kB
+├ ● /algebra/visual-tools/identities/[view] (2299 ms)                               12.4 kB         231 kB
+├   ├ /algebra/visual-tools/identities/square-of-trinomial (989 ms)
+├   ├ /algebra/visual-tools/identities/difference-of-squares (986 ms)
+├   ├ /algebra/visual-tools/identities/square-of-sum (313 ms)
+├   └ /algebra/visual-tools/identities/square-of-difference
+├ ● /algebra/visual-tools/inequality (600 ms)                                       4.75 kB         244 kB
+├ ● /algebra/visual-tools/polynomial-multiplication (1132 ms)                         10 kB         229 kB
+├ ● /algebra/visual-tools/powers-table (685 ms)                                     5.55 kB         225 kB
+├   └ css/bc24315c1ac66d34.css                                                      4.19 kB
+├ ƒ /api/sitemap                                                                        0 B         120 kB
+├ ● /arithmetic (600 ms)                                                             2.5 kB         224 kB
+├ ● /arithmetic/calculators (1133 ms)                                               1.38 kB         219 kB          1d      1y
+├ ● /arithmetic/calculators/divisibility-calculator (1132 ms)                          5 kB         230 kB          1d      1y
+├ ● /arithmetic/calculators/gcf-calculator (1133 ms)                                4.89 kB         229 kB          1d      1y
+├ ● /arithmetic/calculators/lcm-calculator (1128 ms)                                4.93 kB         229 kB          1d      1y
+├ ● /arithmetic/calculators/prime-calculator (1129 ms)                              4.86 kB         229 kB          1d      1y
+├ ● /arithmetic/definitions (1128 ms)                                                 976 B         218 kB
+├ ● /arithmetic/divisibility (682 ms)                                                1.6 kB         227 kB
+├ ● /arithmetic/divisibility/factors (682 ms)                                       1.68 kB         227 kB
+├ ● /arithmetic/divisibility/gcd (682 ms)                                           1.69 kB         227 kB
+├ ● /arithmetic/divisibility/lcm (682 ms)                                           1.63 kB         227 kB
+├ ● /arithmetic/divisibility/rules (682 ms)                                         4.57 kB         225 kB
+├ ● /arithmetic/fractions (593 ms)                                                  1.44 kB         227 kB
+├ ● /arithmetic/fractions/adding-subtracting (649 ms)                               4.34 kB         225 kB
+├ ● /arithmetic/fractions/comparing (682 ms)                                        4.35 kB         225 kB
+├ ● /arithmetic/fractions/complex (594 ms)                                          4.24 kB         223 kB
+├ ● /arithmetic/fractions/dividing (594 ms)                                         4.32 kB         225 kB
+├ ● /arithmetic/fractions/equivalent (593 ms)                                       4.32 kB         225 kB
+├ ● /arithmetic/fractions/mixed-numbers (593 ms)                                    1.45 kB         227 kB
+├ ● /arithmetic/fractions/multiplying (593 ms)                                      4.29 kB         225 kB
+├ ● /arithmetic/modulo (1084 ms)                                                     1.5 kB         227 kB
+├ ● /arithmetic/modulo/negative-numbers (1078 ms)                                   4.38 kB         225 kB
+├ ● /arithmetic/modulo/operations                                                   4.41 kB         225 kB
+├ ● /arithmetic/properties (1077 ms)                                                4.45 kB         225 kB
+├ ● /arithmetic/visual-tools (763 ms)                                               2.29 kB         226 kB
+├ ● /arithmetic/visual-tools/divisibility-table (1090 ms)                           5.86 kB         225 kB
+├ ● /arithmetic/visual-tools/divisibility-tiles (1077 ms)                           5.93 kB         225 kB
+├ ● /arithmetic/visual-tools/divisibility-tree (1085 ms)                            8.07 kB         227 kB
+├ ● /arithmetic/visual-tools/eratosthenes-sieve (1078 ms)                           6.24 kB         225 kB
+├ ● /arithmetic/visual-tools/euclidean-algorithm (1085 ms)                          9.15 kB         228 kB
+├ ● /arithmetic/visual-tools/modular-wheel (762 ms)                                 11.8 kB         231 kB
+├ ○ /calculators (707 ms)                                                           3.46 kB         134 kB
+├ ● /calculators/complex-numbers (762 ms)                                           5.75 kB         230 kB          1d      1y
+├ ● /calculators/exponent-calculator (761 ms)                                       17.9 kB         242 kB          1d      1y
+├ ● /calculators/factorial-calculator (680 ms)                                      8.37 kB         233 kB
+├   └ css/491ffa1f950c2946.css                                                      5.05 kB
+├ ● /calculators/fraction-calculator (791 ms)                                       7.36 kB         232 kB          1d      1y
+├   └ css/eabcd80c4a88037a.css                                                      4.69 kB
+├ ● /calculators/log-calculator (791 ms)                                            15.7 kB         240 kB          1d      1y
+├ ● /calculators/modulo-calculator (677 ms)                                         5.85 kB         228 kB
+├ ○ /calculators/percentage-calculator (695 ms)                                     2.96 kB         132 kB
+├   └ css/21aac772570e8947.css                                                      2.84 kB
+├ ● /calculators/root-calculator (833 ms)                                           16.2 kB         241 kB          1d      1y
+├ ● /calculators/statistics-calculator (832 ms)                                     8.07 kB         219 kB
+├   └ css/9b0bb486d1208ebe.css                                                      1.48 kB
+├ ● /calculators/trigonometry-calculator (676 ms)                                   9.06 kB         222 kB          1h      1y
+├   └ css/e186e5c7cee85106.css                                                      2.61 kB
+├ ● /calculus (1903 ms)                                                             5.74 kB         231 kB
+├ ● /calculus/definitions (678 ms)                                                    979 B         218 kB
+├ ● /calculus/derivatives (1885 ms)                                                 4.29 kB         223 kB
+├ ● /calculus/derivatives/common (677 ms)                                           4.25 kB         223 kB
+├ ● /calculus/derivatives/differentiability (679 ms)                                1.39 kB         225 kB
+├ ● /calculus/derivatives/differentials (677 ms)                                    1.39 kB         225 kB
+├ ● /calculus/derivatives/function                                                  1.37 kB         225 kB
+├ ● /calculus/derivatives/graph-analysis (679 ms)                                   1.46 kB         225 kB
+├ ● /calculus/derivatives/higher-order (1903 ms)                                    1.42 kB         225 kB
+├ ● /calculus/derivatives/rules (1880 ms)                                           4.29 kB         223 kB
+├ ● /calculus/derivatives/special (507 ms)                                          4.25 kB         223 kB
+├ ● /calculus/derivatives/techniques (1903 ms)                                      1.37 kB         225 kB
+├ ● /calculus/formulas (2043 ms)                                                    1.35 kB         228 kB
+├ ● /calculus/integrals (505 ms)                                                    4.28 kB         223 kB
+├ ● /calculus/integrals/definite (1902 ms)                                          1.34 kB         225 kB
+├ ● /calculus/integrals/evaluating (504 ms)                                         4.26 kB         223 kB
+├ ● /calculus/integrals/improper (1902 ms)                                          1.37 kB         225 kB
+├ ● /calculus/integrals/indefinite (509 ms)                                         1.35 kB         225 kB
+├ ● /calculus/integrals/rules (504 ms)                                              4.25 kB         223 kB
+├ ● /calculus/integrals/special (504 ms)                                            4.25 kB         223 kB
+├ ● /calculus/integrals/techniques (505 ms)                                         1.37 kB         225 kB
+├ ● /calculus/limits (505 ms)                                                       4.28 kB         223 kB
+├ ● /calculus/limits/continuity (386 ms)                                            1.44 kB         225 kB
+├ ● /calculus/limits/evaluating (386 ms)                                            1.43 kB         225 kB
+├ ● /calculus/limits/infinity (387 ms)                                              1.45 kB         225 kB
+├ ● /calculus/limits/one-sided (387 ms)                                              1.4 kB         225 kB
+├ ● /calculus/limits/rules (387 ms)                                                 4.35 kB         223 kB
+├ ● /calculus/limits/special (387 ms)                                               4.28 kB         223 kB
+├ ● /calculus/limits/two-sided (387 ms)                                             1.37 kB         225 kB
+├ ● /calculus/visual-tools (387 ms)                                                 3.91 kB         235 kB
+├ ● /calculus/visual-tools/average-rate-of-change (1107 ms)                         12.9 kB         232 kB
+├ ● /calculus/visual-tools/continuity (1108 ms)                                     7.45 kB         246 kB
+├ ● /calculus/visual-tools/derivative                                               6.84 kB         246 kB
+├ ● /calculus/visual-tools/fundamental-theorem (1108 ms)                             6.8 kB         245 kB
+├ ● /calculus/visual-tools/inflection-points (1101 ms)                              12.3 kB         231 kB
+├ ● /calculus/visual-tools/limit (1107 ms)                                           8.1 kB         247 kB
+├ ● /calculus/visual-tools/mean-value-theorem (1100 ms)                             7.37 kB         246 kB
+├ ● /calculus/visual-tools/newtons-method (1114 ms)                                 13.1 kB         232 kB
+├ ● /calculus/visual-tools/optimization (1100 ms)                                   7.61 kB         246 kB
+├ ● /calculus/visual-tools/riemann-sum (1100 ms)                                    7.83 kB         247 kB
+├ ● /calculus/visual-tools/tangent-line (1114 ms)                                   12.5 kB         231 kB
+├ ● /combinatorics (572 ms)                                                           911 B         226 kB
+├ ● /combinatorics/basics (3245 ms)                                                  120 kB         406 kB
+├   └ css/0b56c024274c425e.css                                                      1.54 kB
+├ ● /combinatorics/binomial-coefficient (1113 ms)                                    1.4 kB         227 kB
+├ ● /combinatorics/binomial-theorem (1114 ms)                                       1.42 kB         227 kB
+├ ● /combinatorics/calculator (397 ms)                                              3.72 kB         224 kB
+├   └ css/f742c546eb307793.css                                                      1.47 kB
+├ ● /combinatorics/combinations (1113 ms)                                           3.61 kB         243 kB
+├ ● /combinatorics/counting-principles (1113 ms)                                     4.3 kB         225 kB
+├ ● /combinatorics/definitions (1113 ms)                                              983 B         218 kB
+├ ● /combinatorics/formulas (1113 ms)                                                 859 B         224 kB
+├   └ css/6d8ed6e4fd760cbf.css                                                      2.57 kB
+├ ● /combinatorics/inclusion-exclusion (572 ms)                                      4.3 kB         225 kB
+├ ● /combinatorics/permutations (571 ms)                                            1.78 kB         243 kB
+├ ○ /combinatorics/permutations/permutations-visualizer (690 ms)                    5.47 kB         213 kB
+├   └ css/bc07ca1d105d71b8.css                                                      2.47 kB
+├ ● /combinatorics/visual-tools (571 ms)                                            3.92 kB         235 kB
+├ ● /combinatorics/visual-tools/circular-permutation (571 ms)                       7.66 kB         232 kB
+├ ● /combinatorics/visual-tools/combination (571 ms)                                8.29 kB         232 kB
+├ ● /combinatorics/visual-tools/distribution (572 ms)                               8.94 kB         233 kB
+├ ● /combinatorics/visual-tools/full-permutation (572 ms)                           7.97 kB         232 kB
+├ ● /combinatorics/visual-tools/partial-permutation                                 8.25 kB         232 kB
+├ ● /combinatorics/visual-tools/partition (1280 ms)                                 9.24 kB         233 kB
+├ ● /combinatorics/visual-tools/pascal-triangle (1304 ms)                           8.49 kB         232 kB
+├ ● /combinatorics/visual-tools/permutation-with-identical (1303 ms)                8.97 kB         233 kB
+├ ● /combinatorics/visual-tools/permutation-with-repetition (1303 ms)               8.27 kB         232 kB
+├ ● /combinatorics/visual-tools/strong-composition (1302 ms)                        9.89 kB         234 kB
+├ ● /combinatorics/visual-tools/weak-composition (1021 ms)                          9.88 kB         234 kB
+├ ● /complex-numbers (719 ms)                                                         885 B         226 kB
+├ ● /complex-numbers/absolute-value (1022 ms)                                       1.48 kB         227 kB
+├ ● /complex-numbers/additive-inverse (1211 ms)                                     1.51 kB         227 kB
+├ ● /complex-numbers/algebraic-form (1021 ms)                                       1.48 kB         227 kB
+├ ● /complex-numbers/basics (1021 ms)                                               1.53 kB         227 kB
+├ ● /complex-numbers/cheat-sheets (1021 ms)                                         3.77 kB         224 kB
+├ ● /complex-numbers/complex-conjugate (719 ms)                                     1.48 kB         227 kB
+├ ● /complex-numbers/definitions (719 ms)                                             991 B         218 kB
+├ ● /complex-numbers/demoivre-theorem (1021 ms)                                      1.5 kB         227 kB
+├ ● /complex-numbers/equations-polynomials (1021 ms)                                4.39 kB         225 kB
+├ ● /complex-numbers/exponential-form (719 ms)                                      1.51 kB         227 kB
+├ ● /complex-numbers/formulas (718 ms)                                              1.12 kB         228 kB
+├ ● /complex-numbers/geometric-representation (719 ms)                              4.35 kB         225 kB
+├ ● /complex-numbers/imaginary-numbers                                              1.46 kB         227 kB
+├ ● /complex-numbers/multiplicative-inverse (718 ms)                                1.52 kB         227 kB
+├ ● /complex-numbers/operations (718 ms)                                            4.35 kB         225 kB
+├ ● /complex-numbers/properties (1261 ms)                                           4.34 kB         225 kB
+├ ● /complex-numbers/trigonometric-form (1291 ms)                                    1.5 kB         227 kB
+├ ● /complex-numbers/visual-tools (903 ms)                                          1.51 kB         219 kB
+├ ● /complex-numbers/visual-tools/addition-subtraction (1282 ms)                    4.63 kB         229 kB
+├ ● /complex-numbers/visual-tools/complex-conjugate (1281 ms)                       8.15 kB         227 kB
+├ ● /complex-numbers/visual-tools/complex-explorer (1281 ms)                        4.68 kB         229 kB
+├   └ css/d838d88cef1147a3.css                                                      3.86 kB
+├ ● /complex-numbers/visual-tools/demoivre-visualizer (904 ms)                      4.61 kB         230 kB
+├ ● /complex-numbers/visual-tools/distance-midpoint (902 ms)                         4.6 kB         228 kB
+├ ● /complex-numbers/visual-tools/division (902 ms)                                 4.57 kB         230 kB
+├ ● /complex-numbers/visual-tools/euler-formula (540 ms)                            4.66 kB         229 kB
+├ ● /complex-numbers/visual-tools/i-powers (1304 ms)                                4.58 kB         228 kB
+├ ● /complex-numbers/visual-tools/multiplication (540 ms)                           4.53 kB         229 kB
+├ ● /complex-numbers/visual-tools/polar-rectangular (539 ms)                        4.62 kB         228 kB
+├ ○ /converters (690 ms)                                                            6.62 kB         219 kB
+├ ● /converters/base-converter (901 ms)                                             4.71 kB         216 kB
+├ ● /converters/degree-radians (902 ms)                                             7.47 kB         218 kB          1h      1y
+├   └ css/22a60c788046d80e.css                                                      3.82 kB
+├ ● /functions (821 ms)                                                               850 B         226 kB
+├ ● /functions/analyzing (540 ms)                                                   4.41 kB         225 kB
+├ ● /functions/arithmetic (539 ms)                                                  4.39 kB         225 kB
+├ ● /functions/basics                                                                1.5 kB         227 kB
+├ ● /functions/composition (816 ms)                                                 1.49 kB         227 kB
+├ ● /functions/definitions (539 ms)                                                   941 B         218 kB
+├ ● /functions/domain (539 ms)                                                      1.48 kB         227 kB
+├ ● /functions/families (1490 ms)                                                   4.46 kB         225 kB
+├ ● /functions/formulas (1488 ms)                                                   1.02 kB         227 kB
+├ ● /functions/graphs (1499 ms)                                                     4.42 kB         225 kB
+├ ● /functions/inverse (1489 ms)                                                    1.57 kB         227 kB
+├ ● /functions/piecewise (1491 ms)                                                  1.51 kB         227 kB
+├ ● /functions/properties (1489 ms)                                                 4.51 kB         225 kB
+├ ● /functions/range (1492 ms)                                                      1.47 kB         227 kB
+├ ● /functions/transformations (1489 ms)                                            1.53 kB         227 kB
+├ ● /functions/visual-tools (816 ms)                                                3.91 kB         235 kB
+├ ● /functions/visual-tools/asymptotes (604 ms)                                     7.96 kB         247 kB
+├ ● /functions/visual-tools/composition (795 ms)                                    5.33 kB         243 kB
+├ ● /functions/visual-tools/domain (604 ms)                                         1.73 kB         247 kB
+├ ● /functions/visual-tools/inverse-function (1924 ms)                              1.72 kB         246 kB
+├ ● /functions/visual-tools/piecewise (816 ms)                                      8.16 kB         247 kB
+├ ● /functions/visual-tools/range (354 ms)                                          1.74 kB         247 kB
+├ ● /functions/visual-tools/reflections (1929 ms)                                   8.87 kB         247 kB
+├ ● /functions/visual-tools/symmetry (726 ms)                                       8.19 kB         247 kB
+├ ● /functions/visual-tools/tangent-line (576 ms)                                   1.64 kB         245 kB
+├ ● /functions/visual-tools/transformations (787 ms)                                8.12 kB         246 kB
+├ ● /functions/visual-tools/types (705 ms)                                          1.69 kB         244 kB
+├ ● /keyboard (818 ms)                                                              20.6 kB         240 kB
+├   └ css/a58ffb5b4f9dbd2b.css                                                      3.75 kB
+├ ● /latex (397 ms)                                                                 4.95 kB         224 kB
+├ ● /latex/editor (397 ms)                                                          4.18 kB         233 kB
+├ ● /linear-algebra (2827 ms)                                                       1.13 kB         226 kB
+├ ● /linear-algebra/calculators (1453 ms)                                           3.44 kB         228 kB
+├ ● /linear-algebra/calculators/linear-systems (398 ms)                              5.4 kB         232 kB
+├ ● /linear-algebra/calculators/matrix (786 ms)                                      5.5 kB         239 kB
+├ ● /linear-algebra/calculators/vectors (1451 ms)                                   5.55 kB         237 kB
+├ ● /linear-algebra/decompositions (399 ms)                                         4.22 kB         223 kB
+├ ● /linear-algebra/decompositions/cholesky (1451 ms)                                2.2 kB         235 kB
+├ ● /linear-algebra/decompositions/lower-upper (786 ms)                             5.24 kB         235 kB
+├ ● /linear-algebra/decompositions/qr (1453 ms)                                     2.22 kB         235 kB
+├ ● /linear-algebra/decompositions/spectral (1451 ms)                               2.16 kB         235 kB
+├ ● /linear-algebra/decompositions/svd (2260 ms)                                    4.71 kB         239 kB
+├ ● /linear-algebra/definitions (1448 ms)                                           1.33 kB         219 kB
+├   └ css/5f73b5cb72e8cd52.css                                                      3.26 kB
+├ ● /linear-algebra/determinants (1447 ms)                                          4.25 kB         223 kB
+├ ● /linear-algebra/determinants/applications (787 ms)                              4.96 kB         230 kB
+├ ● /linear-algebra/determinants/cofactors (787 ms)                                 2.08 kB         232 kB
+├ ● /linear-algebra/determinants/geometry (773 ms)                                  4.96 kB         230 kB
+├ ● /linear-algebra/determinants/properties (604 ms)                                1.52 kB         235 kB
+├ ● /linear-algebra/eigen (787 ms)                                                  4.22 kB         223 kB
+├ ● /linear-algebra/eigen/characteristic-equation (604 ms)                          2.15 kB         232 kB
+├ ● /linear-algebra/eigen/complex (604 ms)                                           5.2 kB         235 kB
+├ ● /linear-algebra/eigen/diagonalization                                           14.2 kB         244 kB
+├ ● /linear-algebra/eigen/properties (2829 ms)                                      4.35 kB         231 kB
+├ ● /linear-algebra/formulas (2857 ms)                                              1.29 kB         228 kB
+├ ● /linear-algebra/linear-systems                                                  4.27 kB         223 kB
+├ ● /linear-algebra/linear-systems/echelon-form (603 ms)                            4.96 kB         230 kB
+├ ● /linear-algebra/linear-systems/gaussian-elimination (604 ms)                    2.11 kB         232 kB
+├ ● /linear-algebra/linear-systems/homogeneous (2826 ms)                            4.98 kB         230 kB
+├ ● /linear-algebra/linear-systems/solvability                                      5.27 kB         235 kB
+├ ● /linear-algebra/matrix (604 ms)                                                 4.26 kB         223 kB
+├ ● /linear-algebra/matrix/inverse                                                  1.86 kB         240 kB
+├ ● /linear-algebra/matrix/operations (2826 ms)                                     1.82 kB         237 kB
+├ ● /linear-algebra/matrix/rank (2827 ms)                                           4.64 kB         235 kB
+├ ● /linear-algebra/matrix/trace (354 ms)                                           4.33 kB         231 kB
+├ ● /linear-algebra/matrix/types                                                    4.95 kB         230 kB
+├ ● /linear-algebra/orthogonality                                                   4.24 kB         223 kB
+├ ● /linear-algebra/orthogonality/gram-schmidt (2825 ms)                            5.28 kB         235 kB
+├ ● /linear-algebra/orthogonality/inner-product                                     1.46 kB         233 kB
+├ ● /linear-algebra/orthogonality/least-squares                                     5.02 kB         230 kB
+├ ● /linear-algebra/orthogonality/orthogonal-sets (2826 ms)                         4.93 kB         230 kB
+├ ● /linear-algebra/orthogonality/projections                                       1.72 kB         237 kB
+├ ● /linear-algebra/transformations                                                 4.24 kB         223 kB
+├ ● /linear-algebra/transformations/basis-change                                    5.03 kB         230 kB
+├ ● /linear-algebra/transformations/geometric                                       5.05 kB         235 kB
+├ ● /linear-algebra/transformations/image-kernel                                    2.07 kB         232 kB
+├ ● /linear-algebra/transformations/matrix-representation                           4.97 kB         230 kB
+├ ● /linear-algebra/transformations/properties                                      4.35 kB         231 kB
+├ ● /linear-algebra/vector-spaces (1928 ms)                                          4.3 kB         223 kB
+├ ● /linear-algebra/vector-spaces/axioms                                            4.37 kB         230 kB
+├ ● /linear-algebra/vector-spaces/basis                                              3.1 kB         233 kB
+├ ● /linear-algebra/vector-spaces/dimension (1929 ms)                               4.64 kB         234 kB
+├ ● /linear-algebra/vector-spaces/fundamental-spaces (1929 ms)                      1.77 kB         236 kB
+├ ● /linear-algebra/vector-spaces/linear-independence (1924 ms)                     4.33 kB         231 kB
+├ ● /linear-algebra/vector-spaces/span (704 ms)                                     2.07 kB         232 kB
+├ ● /linear-algebra/vector-spaces/subspaces (704 ms)                                4.94 kB         230 kB
+├ ● /linear-algebra/vectors (1929 ms)                                               4.22 kB         223 kB
+├ ● /linear-algebra/vectors/basic-operations (704 ms)                               1.42 kB         233 kB
+├ ● /linear-algebra/vectors/cross-product (703 ms)                                  1.76 kB         237 kB
+├ ● /linear-algebra/vectors/dot-product (703 ms)                                    1.47 kB         233 kB
+├ ● /linear-algebra/vectors/linear-combinations (703 ms)                            4.83 kB         230 kB
+├ ● /linear-algebra/vectors/magnitude (354 ms)                                      1.37 kB         233 kB
+├ ● /linear-algebra/vectors/properties (354 ms)                                     4.29 kB         231 kB
+├ ● /linear-algebra/visual-tools (1469 ms)                                          2.25 kB         226 kB
+├ ● /linear-algebra/visual-tools/change-basis-2d (533 ms)                           4.21 kB         237 kB
+├ ● /linear-algebra/visual-tools/eigen-vectors-2d (354 ms)                          4.21 kB         235 kB
+├ ● /linear-algebra/visual-tools/hadamard-product (703 ms)                          4.58 kB         232 kB
+├ ● /linear-algebra/visual-tools/kernel-image-2d (574 ms)                           4.23 kB         235 kB
+├ ● /linear-algebra/visual-tools/linear-transformation-2d (353 ms)                  4.21 kB         235 kB
+├ ● /linear-algebra/visual-tools/matrix-addition (1456 ms)                          1.22 kB         232 kB
+├ ● /linear-algebra/visual-tools/matrix-linear-combination (1454 ms)                1.22 kB         233 kB
+├ ● /linear-algebra/visual-tools/matrix-scalar-multiplication (1455 ms)              1.2 kB         232 kB
+├ ● /linear-algebra/visual-tools/matrix-trace (353 ms)                               3.7 kB         231 kB
+├ ● /linear-algebra/visual-tools/matrix-transpose                                   6.03 kB         233 kB
+├ ● /linear-algebra/visual-tools/vector-addition (1454 ms)                          1.22 kB         232 kB
+├ ● /linear-algebra/visual-tools/vector-linear-combination (533 ms)                 1.22 kB         233 kB
+├ ● /linear-algebra/visual-tools/vector-scalar-multiplication (532 ms)              1.19 kB         232 kB
+├ ● /linear-algebra/visual-tools/vectors-inner-product (353 ms)                     4.86 kB         232 kB
+├ ● /logic (488 ms)                                                                 2.13 kB         227 kB
+├ ● /logic/definitions (1453 ms)                                                      981 B         218 kB
+├ ● /logic/formulas (489 ms)                                                        1.03 kB         227 kB
+├ ● /logic/propositional-logic (533 ms)                                             4.09 kB         225 kB          1d      1y
+├ ● /logic/propositional-logic/laws (489 ms)                                        7.65 kB         217 kB
+├   └ css/3e2fc19df9fa4a19.css                                                      3.02 kB
+├ ● /logic/propositional-logic/semantics (533 ms)                                   9.34 kB         228 kB
+├ ● /logic/propositional-logic/semantics/contradiction (533 ms)                     3.38 kB         229 kB
+├ ● /logic/propositional-logic/semantics/equivalence-validator (1471 ms)             7.5 kB         215 kB
+├   └ css/7c5891a5dfa02ca4.css                                                      2.51 kB
+├ ● /logic/propositional-logic/semantics/equivalences (500 ms)                      3.22 kB         231 kB
+├ ● /logic/propositional-logic/semantics/implication (561 ms)                       5.54 kB         233 kB
+├ ● /logic/propositional-logic/semantics/tautology (532 ms)                         3.13 kB         229 kB
+├ ● /logic/propositional-logic/syntax (489 ms)                                      1.29 kB         229 kB
+├ ● /logic/propositional-logic/syntax/normal-forms (488 ms)                         6.43 kB         230 kB
+├   └ css/831b1f637dceb5f9.css                                                      4.89 kB
+├ ● /logic/propositional-logic/syntax/tree-builder (488 ms)                         7.04 kB         229 kB
+├   └ css/7a571f01af9637f1.css                                                      6.27 kB
+├ ● /logic/truth-tables (3466 ms)                                                   47.6 kB         258 kB
+├   └ css/60520b1e61b59bee.css                                                      2.17 kB
+├ ● /logic/truth-tables/biconditionals (769 ms)                                     1.78 kB         230 kB
+├ ● /logic/truth-tables/contradictions (764 ms)                                     1.79 kB         230 kB
+├ ● /logic/truth-tables/implications (575 ms)                                       1.41 kB         230 kB
+├ ● /logic/truth-tables/tautologies (756 ms)                                        1.78 kB         230 kB
+├ ● /math-symbols (779 ms)                                                          4.24 kB         218 kB
+├ ● /math-symbols/algebra (488 ms)                                                    854 B         217 kB
+├ ● /math-symbols/arithmetic                                                          854 B         217 kB
+├ ● /math-symbols/calculus (757 ms)                                                 1.13 kB         224 kB
+├ ● /math-symbols/combinatorics (758 ms)                                            4.24 kB         218 kB
+├ ● /math-symbols/complex-numbers (576 ms)                                          4.43 kB         218 kB
+├ ● /math-symbols/functions (751 ms)                                                  850 B         217 kB
+├ ● /math-symbols/linear-algebra (760 ms)                                           4.24 kB         218 kB
+├ ● /math-symbols/math-logic (752 ms)                                               4.24 kB         218 kB
+├ ● /math-symbols/probability (576 ms)                                              4.41 kB         218 kB
+├ ● /math-symbols/set-theory (576 ms)                                               1.91 kB         218 kB
+├ ● /math-symbols/trigonometry (756 ms)                                             1.14 kB         224 kB
+├ ● /probability (1330 ms)                                                          1.14 kB         226 kB
+├ ● /probability/axioms (751 ms)                                                    1.45 kB         230 kB
+├ ● /probability/basics (756 ms)                                                    5.53 kB         236 kB
+├   └ css/a322d0570f377f58.css                                                        704 B
+├ ● /probability/bayes-theorem (577 ms)                                             1.48 kB         225 kB
+├ ● /probability/calculators (806 ms)                                               4.41 kB         222 kB
+├ ● /probability/calculators/basic (756 ms)                                         2.68 kB         217 kB
+├ ● /probability/calculators/bayes-calculator (576 ms)                              8.85 kB         228 kB
+├ ● /probability/calculators/conditional-probability (756 ms)                       2.79 kB         225 kB
+├   └ css/7fe581e37383ef20.css                                                      4.96 kB
+├ ● /probability/calculators/continuous-distributions (802 ms)                      1.63 kB         236 kB
+├ ● /probability/calculators/discrete-distributions (597 ms)                        1.66 kB         244 kB
+├ ● /probability/calculators/expected-value (577 ms)                                3.87 kB         223 kB
+├ ● /probability/calculators/expected-value/[view] (4520 ms)                        38.3 kB         257 kB
+├   ├ /probability/calculators/expected-value/normal (1990 ms)
+├   ├ /probability/calculators/expected-value/direct-data (378 ms)
+├   ├ /probability/calculators/expected-value/raw-data (376 ms)
+├   ├ /probability/calculators/expected-value/grouped-data
+├   ├ /probability/calculators/expected-value/discrete-uniform
+├   ├ /probability/calculators/expected-value/binomial
+├   ├ /probability/calculators/expected-value/geometric
+├   └ [+5 more paths]
+├ ● /probability/calculators/joint-probability                                      2.76 kB         227 kB
+├ ● /probability/calculators/three-events (574 ms)                                  8.59 kB         228 kB
+├ ● /probability/calculators/two-events (756 ms)                                    6.95 kB         226 kB
+├ ● /probability/cdf (804 ms)                                                       1.52 kB         225 kB
+├ ● /probability/central-limit-theorem (818 ms)                                     1.45 kB         225 kB
+├ ● /probability/combinatorics (804 ms)                                             4.25 kB         223 kB
+├ ● /probability/conditional-probability (804 ms)                                   1.47 kB         225 kB
+├ ● /probability/covariance (805 ms)                                                1.35 kB         225 kB
+├ ● /probability/definitions (596 ms)                                                 986 B         218 kB
+├ ● /probability/distributions (726 ms)                                             5.25 kB         248 kB
+├ ● /probability/distributions/continuous (1323 ms)                                 3.74 kB         242 kB
+├ ● /probability/distributions/continuous/exponential                               4.31 kB         336 kB
+├ ● /probability/distributions/continuous/normal                                    4.57 kB         336 kB
+├ ● /probability/distributions/continuous/uniform                                   4.31 kB         335 kB
+├ ● /probability/distributions/discrete (729 ms)                                    4.08 kB         244 kB
+├ ● /probability/distributions/discrete/binomial (304 ms)                            4.6 kB         344 kB
+├ ● /probability/distributions/discrete/geometric (313 ms)                           4.5 kB         343 kB
+├ ● /probability/distributions/discrete/hypergeometric                              4.74 kB         344 kB
+├ ● /probability/distributions/discrete/negative-binomial                           4.68 kB         344 kB
+├ ● /probability/distributions/discrete/poisson (312 ms)                            4.61 kB         344 kB
+├ ● /probability/distributions/discrete/uniform                                     4.47 kB         343 kB
+├ ● /probability/events (574 ms)                                                    4.31 kB         223 kB
+├ ● /probability/expected-value (716 ms)                                            1.71 kB         228 kB
+├ ● /probability/formulas (663 ms)                                                  1.03 kB         227 kB
+├ ● /probability/independence (593 ms)                                              1.46 kB         225 kB
+├ ● /probability/indicators (574 ms)                                                1.39 kB         225 kB
+├ ● /probability/inequalities (595 ms)                                              4.28 kB         223 kB
+├ ● /probability/inequalities/chebyshev (716 ms)                                    1.33 kB         225 kB
+├ ● /probability/inequalities/markov (742 ms)                                       1.33 kB         225 kB
+├ ● /probability/joint-probability (716 ms)                                         1.48 kB         225 kB
+├ ● /probability/large-numbers-law (716 ms)                                         1.41 kB         225 kB
+├ ● /probability/median (750 ms)                                                    1.53 kB         228 kB
+├ ● /probability/mode (1329 ms)                                                     1.53 kB         228 kB
+├ ● /probability/models                                                             4.33 kB         223 kB
+├ ● /probability/models/coin-toss (725 ms)                                          4.29 kB         223 kB
+├ ● /probability/models/dice-roll (1328 ms)                                         4.29 kB         223 kB
+├ ● /probability/probability-function                                               1.51 kB         345 kB
+├ ● /probability/probability-function/pdf (1322 ms)                                 4.22 kB         223 kB
+├ ● /probability/probability-function/pmf (2260 ms)                                 6.38 kB         338 kB
+├ ● /probability/random-variables (1322 ms)                                         1.48 kB         225 kB
+├ ● /probability/rules (1328 ms)                                                    5.35 kB         227 kB
+├ ● /probability/sample-space (1322 ms)                                             1.41 kB         225 kB
+├ ● /probability/sets (749 ms)                                                      4.29 kB         223 kB
+├ ● /probability/total-probability (749 ms)                                         1.48 kB         225 kB
+├ ● /probability/tree-diagrams (727 ms)                                             4.35 kB         223 kB
+├ ● /probability/variance (661 ms)                                                  1.65 kB         228 kB
+├ ● /probability/visual-tools (661 ms)                                              1.49 kB         219 kB
+├ ● /probability/visual-tools/cdf (662 ms)                                          1.92 kB         226 kB
+├ ● /probability/visual-tools/cdf/continuous (304 ms)                               5.87 kB         329 kB
+├ ● /probability/visual-tools/cdf/discrete                                          6.73 kB         330 kB
+├ ● /probability/visual-tools/coin-toss (662 ms)                                    5.85 kB         227 kB
+├ ● /probability/visual-tools/conditional-probability (749 ms)                      3.75 kB         223 kB
+├ ● /probability/visual-tools/conditional-probability/[view] (1504 ms)              10.1 kB         232 kB
+├   ├ /probability/visual-tools/conditional-probability/contingency-table (380 ms)
+├   ├ /probability/visual-tools/conditional-probability/venn-diagram (379 ms)
+├   ├ /probability/visual-tools/conditional-probability/waffle-chart (376 ms)
+├   └ /probability/visual-tools/conditional-probability/tree-diagram (369 ms)
+├ ● /probability/visual-tools/contingency-tables (952 ms)                           7.53 kB         232 kB
+├ ● /probability/visual-tools/dice-roll (1128 ms)                                   7.22 kB         229 kB
+├ ● /probability/visual-tools/distributions (661 ms)                                3.75 kB         223 kB
+├ ● /probability/visual-tools/distributions/[view] (12485 ms)                       7.78 kB         359 kB
+├   ├ /probability/visual-tools/distributions/binomial (1980 ms)
+├   ├ /probability/visual-tools/distributions/geometric (1979 ms)
+├   ├ /probability/visual-tools/distributions/negative-binomial (1979 ms)
+├   ├ /probability/visual-tools/distributions/poisson (1978 ms)
+├   ├ /probability/visual-tools/distributions/hypergeometric (1978 ms)
+├   ├ /probability/visual-tools/distributions/uniform-discrete (649 ms)
+├   ├ /probability/visual-tools/distributions/normal (648 ms)
+├   └ [+2 more paths] (avg 647 ms)
+├ ● /probability/visual-tools/expected-value (661 ms)                               3.54 kB         223 kB
+├ ● /probability/visual-tools/expected-value/[view] (1735 ms)                       6.76 kB         226 kB
+├   ├ /probability/visual-tools/expected-value/weighted (868 ms)
+├   └ /probability/visual-tools/expected-value/discrete (867 ms)
+├ ● /probability/visual-tools/inequalities (661 ms)                                 3.56 kB         223 kB
+├ ● /probability/visual-tools/inequalities/[view] (1757 ms)                         6.62 kB         226 kB
+├   ├ /probability/visual-tools/inequalities/chebyshev (888 ms)
+├   └ /probability/visual-tools/inequalities/markov (869 ms)
+├ ● /probability/visual-tools/probability-function                                  3.55 kB         223 kB
+├ ● /probability/visual-tools/probability-function/[view] (3960 ms)                 2.99 kB         342 kB
+├   ├ /probability/visual-tools/probability-function/discrete (1980 ms)
+├   └ /probability/visual-tools/probability-function/continuous (1980 ms)
+├ ● /probability/visual-tools/total-probability (952 ms)                            2.77 kB         225 kB
+├ ● /probability/visual-tools/variance (963 ms)                                     6.92 kB         226 kB
+├ ● /probability/visual-tools/venn-diagrams (951 ms)                                3.48 kB         223 kB
+├ ● /probability/visual-tools/venn-diagrams/[view] (752 ms)                         5.63 kB         225 kB
+├   └ css/4b74bede3e180f09.css                                                      4.59 kB
+├   ├ /probability/visual-tools/venn-diagrams/two-sets (376 ms)
+├   └ /probability/visual-tools/venn-diagrams/three-sets (376 ms)
+├ ● /set-theory (3266 ms)                                                             889 B         226 kB
+├ ● /set-theory/basics (950 ms)                                                     1.59 kB         227 kB
+├ ● /set-theory/cardinality (951 ms)                                                1.57 kB         227 kB
+├ ● /set-theory/definitions (950 ms)                                                  985 B         218 kB
+├ ● /set-theory/formulas                                                            1.07 kB         230 kB
+├   └ css/9561f496b3a13ad5.css                                                      4.34 kB
+├ ● /set-theory/operations (3267 ms)                                                1.87 kB         227 kB
+├ ● /set-theory/relationships (3267 ms)                                             4.26 kB         225 kB
+├ ● /set-theory/rules (3267 ms)                                                     5.28 kB         227 kB
+├ ● /set-theory/subsets (3266 ms)                                                   1.52 kB         227 kB
+├ ● /set-theory/venn-diagrams (966 ms)                                              4.28 kB         225 kB
+├ ● /set-theory/visual-tools (324 ms)                                               2.24 kB         226 kB
+├ ● /set-theory/visual-tools/three-sets-basic-venn (324 ms)                          9.3 kB         236 kB
+├ ● /set-theory/visual-tools/three-sets-laws-venn (324 ms)                          7.62 kB         235 kB
+├ ● /set-theory/visual-tools/two-sets-basic-venn (324 ms)                            6.2 kB         235 kB
+├ ● /set-theory/visual-tools/two-sets-laws-venn (1123 ms)                           4.84 kB         234 kB
+├ ● /set-theory/visual-tools/venn-generator (324 ms)                                4.67 kB         240 kB
+├ ● /tables (324 ms)                                                                 2.1 kB         226 kB
+├ ● /tables/algebra-identities (1122 ms)                                            10.4 kB         249 kB
+├ ● /tables/angle-conversion (3266 ms)                                              5.12 kB         228 kB
+├   └ css/70ade1a178fbeede.css                                                      3.73 kB
+├ ● /tables/base-conversion (323 ms)                                                4.43 kB         227 kB
+├ ● /tables/binomial-distribution (3271 ms)                                         6.28 kB         225 kB
+├ ● /tables/common-derivatives (491 ms)                                             4.19 kB         243 kB
+├ ● /tables/common-integrals (491 ms)                                               7.73 kB         247 kB
+├ ● /tables/common-limits (491 ms)                                                  8.01 kB         247 kB
+├ ● /tables/logarithm (1122 ms)                                                      4.2 kB         223 kB
+├ ● /tables/multiplication (492 ms)                                                 13.7 kB         224 kB
+├ ● /tables/normal-distribution (1123 ms)                                           1.94 kB         223 kB
+├   └ css/c28647d9f1cf203a.css                                                      4.18 kB
+├ ● /tables/perfect-cubes (845 ms)                                                    12 kB         227 kB          1d      1y
+├   └ css/206a4a7bc489c122.css                                                      2.16 kB
+├ ● /tables/perfect-squares (491 ms)                                                2.81 kB         227 kB          1d      1y
+├ ● /tables/poisson-distribution (1122 ms)                                          6.42 kB         225 kB
+├ ● /tables/powers-table (492 ms)                                                   3.49 kB         215 kB          1d      1y
+├ ● /tables/prime-numbers (491 ms)                                                  13.1 kB         235 kB
+├ ● /tables/special-angles (491 ms)                                                 3.63 kB         229 kB
+├ ● /tables/t-distribution (1121 ms)                                                3.15 kB         221 kB
+├   └ css/677657aa11f2d6bc.css                                                      3.65 kB
+├ ● /tables/trigonometric-identities (845 ms)                                       15.4 kB         254 kB
+├ ● /tables1 (3267 ms)                                                              5.29 kB         209 kB
+├   └ css/b9f1d200fb101ef3.css                                                      1.75 kB
+├ ○ /test1 (689 ms)                                                                 3.73 kB         208 kB
+├   └ css/03d83741c2193f52.css                                                      1.52 kB
+├ ● /test10 (1121 ms)                                                                  4 kB         223 kB
+├ ○ /test11 (695 ms)                                                                7.47 kB         128 kB
+├ ○ /test12 (689 ms)                                                                6.96 kB         127 kB
+├ ○ /test13 (3106 ms)                                                                202 kB         336 kB
+├ ○ /test2 (689 ms)                                                                 4.51 kB         238 kB
+├ ○ /test3 (2928 ms)                                                                 5.5 kB         245 kB
+├   └ css/cbc69705ab3567b9.css                                                      1.24 kB
+├ ○ /test4 (2889 ms)                                                                15.2 kB         369 kB
+├   └ css/846d89ea4b0d203d.css                                                      1.75 kB
+├ ○ /test5 (2014 ms)                                                                20.1 kB         386 kB
+├ ● /test6 (314 ms)                                                                 20.7 kB         402 kB
+├   └ css/819b9078438f9d37.css                                                      2.01 kB
+├ ● /test7 (845 ms)                                                                  2.5 kB         224 kB
+├ ● /test8 (564 ms)                                                                  163 kB         802 kB
+├   └ css/fb19089c2905ab72.css                                                      5.48 kB
+├ ● /test9 (3467 ms)                                                                51.1 kB         588 kB
+├   └ css/ea04401a5ea45673.css                                                      1.01 kB
+├ ● /trigonometry (1778 ms)                                                           889 B         226 kB
+├ ● /trigonometry/definitions (845 ms)                                                954 B         218 kB
+├ ● /trigonometry/degrees-radians (1782 ms)                                          1.7 kB         227 kB
+├ ● /trigonometry/equations (847 ms)                                                1.47 kB         227 kB
+├ ● /trigonometry/formulas (1780 ms)                                                1.05 kB         228 kB
+├ ● /trigonometry/functions (1778 ms)                                                1.5 kB         227 kB
+├ ● /trigonometry/graphs (844 ms)                                                    1.5 kB         227 kB
+├ ● /trigonometry/identities (382 ms)                                               10.4 kB         224 kB
+├ ● /trigonometry/inequalities (844 ms)                                             4.37 kB         225 kB
+├ ● /trigonometry/inverse-functions                                                 1.49 kB         227 kB
+├ ● /trigonometry/properties (1778 ms)                                              4.32 kB         225 kB
+├ ● /trigonometry/right-triangle (780 ms)                                            1.5 kB         227 kB
+├ ● /trigonometry/sines-cosines-law (1778 ms)                                       1.49 kB         227 kB
+├ ● /trigonometry/unit-circle (1777 ms)                                             1.47 kB         227 kB
+├ ● /trigonometry/visual-tools (779 ms)                                             2.28 kB         226 kB
+├ ● /trigonometry/visual-tools/angle-explorer (1777 ms)                              5.8 kB         230 kB
+├ ● /trigonometry/visual-tools/angle-types (781 ms)                                 7.02 kB         238 kB
+├ ● /trigonometry/visual-tools/basic-identities (384 ms)                            14.1 kB         233 kB
+├ ● /trigonometry/visual-tools/double-angle-identities (780 ms)                     6.96 kB         235 kB
+├ ● /trigonometry/visual-tools/functions-graphs (312 ms)                            9.84 kB         336 kB
+├ ● /trigonometry/visual-tools/functions-signs (779 ms)                              6.3 kB         229 kB
+├ ● /trigonometry/visual-tools/half-angle-identities (779 ms)                        5.9 kB         234 kB
+├ ● /trigonometry/visual-tools/negative-angle-identities (779 ms)                   11.7 kB         231 kB
+├ ● /trigonometry/visual-tools/pythagorean-identities (382 ms)                      5.72 kB         234 kB
+├ ● /trigonometry/visual-tools/supplementary-angle-identities (382 ms)              13.6 kB         233 kB
+├ ● /trigonometry/visual-tools/triangle-explorer (382 ms)                           5.96 kB         232 kB
+├ ○ /visual-tools (2015 ms)                                                         3.51 kB         134 kB
+├ ● /visual-tools/base-converter (779 ms)                                           3.38 kB         133 kB
+├   └ css/362749f35fc371bc.css                                                      2.33 kB
+├ ● /visual-tools/determinant-calculator (382 ms)                                   5.79 kB         227 kB
+├   └ css/580fec2d832a8165.css                                                      5.91 kB
+├ ● /visual-tools/fractions-visualizer (382 ms)                                     6.37 kB         219 kB
+├   └ css/2a17edca9f02a1bf.css                                                      2.66 kB
+├ ● /visual-tools/gauss-elimination                                                 5.27 kB         227 kB
+├   └ css/3ba388060bf14845.css                                                      5.81 kB
+├ ● /visual-tools/matrix-multiplication (382 ms)                                    4.01 kB         223 kB
+├   └ css/1eee76f60198068c.css                                                      3.56 kB
+├ ● /visual-tools/matrix-types (2227 ms)                                            5.59 kB         213 kB          1d      1y
+├   └ css/121a649c9b0d2bb9.css                                                      2.74 kB
+├ ● /visual-tools/square-root (2209 ms)                                             5.08 kB         215 kB          1d      1y
+├   └ css/ddcd48a0348c00b0.css                                                      3.48 kB
+└ ● /visual-tools/unit-circle (2261 ms)                                             6.56 kB         228 kB          1h      1y
+    └ css/978606253a2ad47b.css                                                      5.47 kB
++ First Load JS shared by all                                                        121 kB
+  ├ chunks/framework-eab48ca718795ea7.js                                            66.3 kB
+  ├ chunks/main-84cec2a50c3007cf.js                                                 34.7 kB
+  ├ chunks/pages/_app-0f52bb3eb1ac851f.js                                             16 kB
+  └ other shared chunks (total)                                                     4.03 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

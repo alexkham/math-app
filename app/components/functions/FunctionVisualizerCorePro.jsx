@@ -50,7 +50,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 // ============================================================
 // DEFAULT STYLES
 // ============================================================
-const DEFAULT_STYLES = {
+export const DEFAULT_STYLES = {
   canvas: { background: '#f6f7f9' },
   graphArea: { background: '#fcfcfd' },
   grid: {
@@ -141,7 +141,7 @@ const DEFAULT_COLORS = [
   '#06b6d4', '#ec4899', '#64748b', '#84cc16', '#f97316'
 ];
 
-function mergeStyles(defaults, overrides) {
+export function mergeStyles(defaults, overrides) {
   if (!overrides) return defaults;
   const result = { ...defaults };
   for (const key in overrides) {
@@ -913,7 +913,9 @@ function curveTooltipRenderer(ctx, opts) {
 // ============================================================
 // SVG GENERATOR (extended)
 // ============================================================
-function generateSVG(opts) {
+// exported additively for Line 1 frozen-state diagrams (pure string builder,
+// no DOM access) - behaviour for existing callers is unchanged
+export function generateSVG(opts) {
   const {
     width, height, padding, viewport, gridStep, functions, styles,
     showGrid, showMinorGrid, showAxes, showAxisLabels,

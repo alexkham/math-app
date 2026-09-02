@@ -729,6 +729,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -895,26 +896,37 @@ export async function getStaticProps(){
 </table>
 `
 
+  // FAQ pass: the formal statement, the LLN comparison, the applicability
+  // conditions and the importance question each name their own h2 — and the
+  // large-numbers-law page has its own LLN-vs-CLT heading, so neither needs
+  // the comparison. Kept the normal-data question, which is one of the
+  // unheaded misconception bullets, and added its mirror plus the notation
+  // section's standard-error and arrow traps.
   const faqQuestions = {
     obj1: {
-      question: "What is the Central Limit Theorem?",
-      answer: "The Central Limit Theorem (CLT) states that as sample size increases, the distribution of sample means becomes approximately normal, regardless of the original distribution's shape. This occurs when sampling independent observations with finite mean and variance, and the standardized sample mean converges to a standard normal distribution."
+      question: "Does the Central Limit Theorem require normal data?",
+      answer: "No — that is the point of it. The original distribution can be skewed, discrete, uniform, exponential or thoroughly irregular. What the theorem requires is independence, identical distribution, a finite mean and a finite variance. Normality is the conclusion about sample means, never an assumption about the data.",
+      sectionId: "6"
     },
     obj2: {
-      question: "What's the difference between CLT and Law of Large Numbers?",
-      answer: "The Law of Large Numbers (LLN) tells us the sample mean converges to a specific value (the population mean), describing deterministic behavior. The Central Limit Theorem describes the shape of the distribution that sample means follow, showing they become normally distributed. LLN tells us where the mean goes; CLT tells us how it gets there."
+      question: "Does the Central Limit Theorem make my data normal?",
+      answer: "No. Nothing about the data changes — the observations keep whatever distribution they always had. What becomes approximately normal is the distribution of the sample mean, which is a different object: it describes the spread of averages across all samples you might have drawn, not the spread of values within one sample.",
+      sectionId: "7"
     },
     obj3: {
-      question: "When does the Central Limit Theorem apply?",
-      answer: "The CLT requires: (1) independence - observations must not influence each other, (2) identical distribution - all observations from the same underlying distribution, (3) finite mean - the expected value must exist, and (4) finite variance - variability must be bounded. When these conditions fail, especially with heavy-tailed or strongly dependent data, the CLT may not hold."
+      question: "How large does n need to be for the Central Limit Theorem to work?",
+      answer: "There is no universal number. How fast the approximation improves depends on the shape of the original distribution: a mildly skewed one settles quickly, a heavy-tailed one may need thousands. The familiar n ≥ 30 is a rule of thumb for moderately behaved distributions, not a result the theorem provides.",
+      sectionId: "7"
     },
     obj4: {
-      question: "Why is the Central Limit Theorem important?",
-      answer: "The CLT is the foundation of statistical inference. It enables confidence intervals, hypothesis tests, and probability statements about sample statistics by guaranteeing their distribution is approximately normal. It explains why normal distributions appear everywhere in nature and science, and provides the bridge from probability theory to applied statistics."
+      question: "Is the standard error σ/√n or σ²/n?",
+      answer: "σ/√n. The standard error is a standard deviation, so it carries the same units as the data; σ²/n is the corresponding variance. They differ by a square root, and swapping them mis-scales every confidence interval and test statistic built on the theorem. It is the same second-slot trap as N(μ, σ²) versus N(μ, σ).",
+      sectionId: "notation"
     },
     obj5: {
-      question: "Does the Central Limit Theorem require normal data?",
-      answer: "No. The CLT does not require the original data to be normal. It works for skewed, discrete, uniform, exponential, or irregular distributions. The theorem states that the distribution of sample means becomes normal as sample size increases, regardless of the original distribution's shape, as long as the required conditions are met."
+      question: "What does the arrow in convergence in distribution mean?",
+      answer: "The d above the arrow says that what converges is the distribution — the shape of the histogram — not the values themselves. That distinguishes it from the plain limit arrow of the law of large numbers, which drives the sample mean to a single constant. Convergence in distribution preserves a whole spread-out limit shape.",
+      sectionId: "notation"
     }
   }
 
@@ -982,19 +994,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/central-limit-theorem"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1507,6 +1506,22 @@ export default function PageTemplate({
           sectionsContent.obj11.content,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Central Limit Theorem FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -1597,13 +1612,6 @@ export default function PageTemplate({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

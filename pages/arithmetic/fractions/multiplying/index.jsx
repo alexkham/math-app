@@ -680,6 +680,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -994,56 +995,28 @@ Multiplying by a fraction's reciprocal produces 1. The product $\\frac{3}{4} \\t
 }
 
 
+// FAQ pass: cut six case-A questions whose h2 states the answer (basic rule,
+// whole numbers, cross-canceling, mixed numbers, three or more, and 'of' —
+// the heading there literally reads The Word "Of" Means Multiply), the
+// multiply-by-1 question (no search demand) and the reciprocal question
+// (owned by /arithmetic/fractions/dividing). Kept and extended the two
+// confusions this page creates by following the addition page, and reframed
+// the mixed-numbers entry to the trap rather than the procedure.
 const faqQuestions = {
   obj1: {
-    question: "How do you multiply fractions?",
-    answer: "Multiply the numerators together to get the new numerator, and multiply the denominators together to get the new denominator: (a/b) × (c/d) = (a×c)/(b×d). For example, 2/3 × 4/5 = 8/15.",
+    question: "Do you need a common denominator to multiply fractions?",
+    answer: "No — that requirement belongs to addition and subtraction only. To multiply, go straight across: numerators together, denominators together. So 2/3 × 4/5 = 8/15 with no conversion step at all. The rule for [adding fractions](!/arithmetic/fractions/adding-subtracting) is the more demanding one, which is why many people carry it over to multiplication by mistake.",
     sectionId: "1"
   },
   obj2: {
-    question: "Do you need a common denominator to multiply fractions?",
-    answer: "No. Unlike addition and subtraction, multiplication does not require a common denominator. Simply multiply straight across: numerators together, denominators together.",
+    question: "Why does multiplying fractions give a smaller result?",
+    answer: "Because multiplying by a number less than 1 takes a part of something rather than repeating it. Finding 2/3 of 4/5 means subdividing a piece that is already smaller than a whole, so the product is smaller than either factor: 8/15. The pattern reverses once a factor exceeds 1 — multiplying by 3/2 makes the result larger.",
     sectionId: "1"
   },
   obj3: {
-    question: "How do you multiply a fraction by a whole number?",
-    answer: "Write the whole number as a fraction over 1, then multiply normally. For example, 3/4 × 5 = 3/4 × 5/1 = 15/4. Alternatively, just multiply the numerator by the whole number: 3 × 5 = 15, keeping denominator 4.",
-    sectionId: "2"
-  },
-  obj4: {
-    question: "What is cross-canceling?",
-    answer: "Cross-canceling simplifies before multiplying by dividing any numerator and any denominator by their common factor. For 4/9 × 3/8, cancel 4 with 8 (both ÷ 4) and 3 with 9 (both ÷ 3) to get 1/3 × 1/2 = 1/6.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "How do you multiply mixed numbers?",
-    answer: "Convert mixed numbers to improper fractions first, then multiply. For 2⅓ × 1½: convert to 7/3 × 3/2 = 21/6 = 3½. Do not multiply whole and fractional parts separately — this gives wrong answers.",
+    question: "Why must mixed numbers be converted before multiplying?",
+    answer: "Because multiplying whole parts and fractional parts separately gives the wrong answer. For 2⅓ × 1½, pairing 2 × 1 with ⅓ × ½ would suggest 2⅙, but the true product is 3½. Convert each to an improper fraction first — 7/3 and 3/2 — then multiply across: 21/6 = 7/2 = 3½.",
     sectionId: "4"
-  },
-  obj6: {
-    question: "How do you multiply three or more fractions?",
-    answer: "Multiply all numerators together and all denominators together. Cross-cancel across all fractions first for easier calculation. Example: 2/3 × 3/4 × 4/5 — after canceling, only 2/5 remains.",
-    sectionId: "5"
-  },
-  obj7: {
-    question: "What does 'of' mean in math?",
-    answer: "In mathematical contexts, 'of' means multiply. Finding 2/3 of 12 means calculating 2/3 × 12 = 8. This applies to phrases like 'half of,' 'a third of,' or fractions of quantities.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "What happens when you multiply a fraction by 1?",
-    answer: "The fraction stays the same. Since 1 = n/n for any nonzero n, multiplying by 1 (like 2/2 or 5/5) creates equivalent fractions without changing the value.",
-    sectionId: "7"
-  },
-  obj9: {
-    question: "What is the reciprocal and why does it matter for multiplication?",
-    answer: "The reciprocal of a/b is b/a. When you multiply a fraction by its reciprocal, the result is 1: (3/4) × (4/3) = 12/12 = 1. This property is the basis for dividing fractions.",
-    sectionId: "7"
-  },
-  obj10: {
-    question: "Why does multiplying fractions give a smaller result?",
-    answer: "When both fractions are less than 1, you're taking a part of a part, which is smaller than either original. For example, 1/2 × 1/2 = 1/4, which is less than both 1/2 values.",
-    sectionId: "1"
   }
 }
 
@@ -1119,19 +1092,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/fractions/multiplying"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1232,6 +1192,22 @@ export default function MultiplyingPage({seoData, sectionsContent, introContent,
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Multiplying Fractions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -1352,12 +1328,6 @@ export default function MultiplyingPage({seoData, sectionsContent, introContent,
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

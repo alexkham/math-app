@@ -852,6 +852,9 @@ Divisions this tidy are the exception, not the rule — nudge either input by $0
         description: "Divide complex numbers visually with draggable vectors. See conjugate multiplication, polar angle subtraction, and step-by-step solutions on the complex plane.",
         keywords: keyWords.join(", "),
         url: "/complex-numbers/visual-tools/division",
+        hubDescription: "Visualize complex division geometrically — moduli divide, angles subtract. See the conjugate multiplication method step by step alongside the polar interpretation, with a zoom inset for small quotients.",
+        category: "Arithmetic",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="48" x2="74" y2="48" stroke="#B5D4F4" stroke-width="0.9"/><line x1="34" y1="12" x2="34" y2="70" stroke="#B5D4F4" stroke-width="0.9"/><line x1="34" y1="48" x2="44.72" y2="57" stroke="#AFA9EC" stroke-width="1.4" stroke-dasharray="2.5,2"/><line x1="34" y1="48" x2="44.99" y2="24.44" stroke="#FAC775" stroke-width="2.1"/><line x1="34" y1="48" x2="44.72" y2="39" stroke="#97C459" stroke-width="1.9"/><line x1="34" y1="48" x2="44.88" y2="42.93" stroke="#85B7EB" stroke-width="2.3"/><path d="M 41.9 40.6 A 18 18 0 0 1 50.31 43.39" fill="none" stroke="#85B7EB" stroke-width="1.2"/><path d="M 50.31 43.39 L 47.6 41.9 L 47.9 45.4 Z" fill="#85B7EB"/><circle cx="44.99" cy="24.44" r="2.8" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><circle cx="44.72" cy="39" r="2.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="44.88" cy="42.93" r="3.4" fill="#85B7EB" stroke="#0C447C" stroke-width="1.2"/><circle cx="44.72" cy="57" r="2.2" fill="none" stroke="#AFA9EC" stroke-width="1.2"/><text x="40" y="74" font-family="Georgia,serif" font-size="7.5" fill="#85B7EB" text-anchor="middle" font-style="italic">&#952;&#8321; &#8722; &#952;&#8322;</text></svg>`,
          name: "Complex Division Visualizer"
       },
         

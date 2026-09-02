@@ -1598,7 +1598,8 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
         name: "Full Permutation Visualizer",
         hubDescription: "Build every n! permutation of n distinct items one ball at a time. Each arrangement starts with a different first item, and rows group all permutations sharing that starter — so you literally see why n! splits as n × (n−1)!",
         category: "Permutations",
-        subCategory: ""
+        subCategory: "",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="10" r="5.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="40" cy="10" r="5.5" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="54" cy="10" r="5.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><line x1="14" y1="20" x2="66" y2="20" stroke="#B5D4F4" stroke-width="0.9"/><circle cx="26" cy="30" r="5.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="40" cy="30" r="5.5" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="54" cy="30" r="5.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="26" cy="46" r="5.5" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="40" cy="46" r="5.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="54" cy="46" r="5.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="26" cy="62" r="5.5" fill="#97C459" stroke="#27500A" stroke-width="1"/><circle cx="40" cy="62" r="5.5" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><circle cx="54" cy="62" r="5.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">3! = 6</text></svg>`
       },
 
     }

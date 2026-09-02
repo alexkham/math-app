@@ -10,6 +10,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -495,48 +496,29 @@ This requirement is stringent but essential. Derivatives, integrals, and continu
 
 
 
+// FAQ pass: cut all eight. Definition, existence condition, visualization and
+// failure modes each have an h2 stating the answer; continuity, evaluating and
+// the derivative definition are owned by their dedicated pages. Invented two
+// from the notation section and reframed the boundary-point question, which is
+// the one place the heading names a topic without answering the yes/no.
 const faqQuestions = {
   obj1: {
-    question: "What is a two-sided limit?",
-    answer: "A two-sided limit is the standard limit notation lim(x→a) f(x) = L, requiring f(x) to approach the same value L as x approaches a from both directions—values less than a and values greater than a. No superscript appears on a, signaling this two-sided requirement.",
-    sectionId: "1"
+    question: "What does DNE mean in calculus?",
+    answer: "DNE stands for “does not exist” — a verdict about a limit, not a value the limit takes. Once a limit is DNE you cannot compute with it or set it equal to anything. It is also independent of whether f(a) is defined: sin(x)/x has no value at 0 yet its limit exists, while the floor function has a value at every integer but no limit there.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "When does a two-sided limit exist?",
-    answer: "A two-sided limit exists if and only if both one-sided limits exist and are equal. The left-hand limit and right-hand limit must both exist and have the same value. If they differ or either fails to exist, the two-sided limit does not exist.",
-    sectionId: "2"
+    question: "In a limit, does x ever actually equal a?",
+    answer: "No. The condition 0 < |x − a| holds the whole way, so x stays strictly away from a while getting arbitrarily close to it. The arrow describes an approach, not an equality in motion. Reading x → a as an instruction to set x = a is precisely the substitution error the limit concept exists to avoid, and it is why a limit can exist where the function has no value.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you visualize a two-sided limit?",
-    answer: "Trace the graph toward x = a from the left and note the y-value approached, then repeat from the right. If both traces converge to the same height, the two-sided limit exists and equals that height. The function value f(a) is irrelevant—only the approach matters.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What causes a two-sided limit to not exist?",
-    answer: "Three scenarios cause failure: jump discontinuities where left and right limits differ, infinite disagreement where one side tends to +∞ and the other to −∞, and oscillation where the function doesn't settle from at least one direction.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do continuous functions relate to two-sided limits?",
-    answer: "For continuous functions, the limit equals the function value: lim(x→a) f(x) = f(a). Polynomials, exponentials, sine, and cosine are continuous everywhere on their domains, so direct substitution yields the limit immediately.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you evaluate a two-sided limit?",
-    answer: "Start with direct substitution. If it produces an indeterminate form like 0/0, use algebraic manipulation—factor and cancel common terms, rationalize radicals, or simplify complex fractions until substitution becomes possible.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "Can two-sided limits exist at boundary points?",
-    answer: "At domain boundaries, only one direction of approach is available, so only a one-sided limit makes sense. For example, √x at x = 0 has only a right-hand limit since negative inputs are outside the domain.",
+    question: "Can a two-sided limit exist at the endpoint of a domain?",
+    answer: "Not in the full two-sided sense. At a domain endpoint only one direction of approach is available, so the two-sided limit is unavailable there while the one-sided limit remains perfectly meaningful. For √x at 0 nothing lies to the left, so the right-hand limit is the appropriate concept. See [one-sided limits](!/calculus/limits/one-sided) for that treatment.",
     sectionId: "7"
-  },
-  obj8: {
-    question: "How are derivatives defined using two-sided limits?",
-    answer: "The derivative f'(a) = lim(h→0) [f(a+h) - f(a)]/h is a two-sided limit where h approaches 0 from both positive and negative values. Differentiability requires the same rate of change from both directions.",
-    sectionId: "8"
   }
 }
+
 
 
 const schemas = {
@@ -609,19 +591,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/limits/two-sided"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -745,6 +714,22 @@ return {
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Two-Sided Limits FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -782,12 +767,6 @@ return {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

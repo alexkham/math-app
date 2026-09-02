@@ -2,9 +2,12 @@
 
 import React, { useState } from 'react';
 
-const WeightedExpectedValueVisualizer = () => {
-  const distributions = {
-    'Equal Weights': {
+// Hoisted out of the component body and exported so the page's frozen-state
+// stills are built from the tool's own presets rather than a copy (Line 1).
+// The object is a plain constant - it closed over nothing - so behaviour is
+// unchanged.
+export const distributions = {
+  'Equal Weights': {
       values: [1, 2, 3, 4, 5, 6],
       probabilities: [1/6, 1/6, 1/6, 1/6, 1/6, 1/6],
     },
@@ -32,8 +35,9 @@ const WeightedExpectedValueVisualizer = () => {
       values: [1, 2, 3, 4, 5, 6],
       probabilities: [0.6, 0.2, 0.1, 0.05, 0.03, 0.02],
     },
-  };
+};
 
+const WeightedExpectedValueVisualizer = () => {
   const [selectedDist, setSelectedDist] = useState('Equal Weights');
   const [isPlaying, setIsPlaying] = useState(false);
   

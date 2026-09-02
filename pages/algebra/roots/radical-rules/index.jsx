@@ -7,6 +7,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -661,29 +662,19 @@ These patterns are not arbitrary — they derive from the connection between rad
 
 const faqQuestions = {
   obj1: {
-    question: "What are the main rules for radicals?",
-    answer: "The main radical rules are the product rule (√(ab) = √a · √b), the quotient rule (√(a/b) = √a / √b), the power rule (ⁿ√(aᵐ) = a^(m/n)), and the nested radical rule (ᵐ√(ⁿ√a) = ᵐⁿ√a). Each rule requires matching indices and derives from corresponding exponent laws.",
-    sectionId: "1"
-  },
-  obj2: {
     question: "Can you distribute a radical over addition?",
-    answer: "No. √(a + b) does not equal √a + √b. For example, √(9 + 16) = √25 = 5, but √9 + √16 = 3 + 4 = 7. The product and quotient rules apply to multiplication and division only, never to sums or differences.",
+    answer: "No. $\\sqrt{a + b}$ is not $\\sqrt{a} + \\sqrt{b}$. Check it with numbers: $\\sqrt{9 + 16} = \\sqrt{25} = 5$, while $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$. The product and quotient rules cover multiplication and division only. A sum under a radical stays under it unless the whole radicand factors.",
     sectionId: "6"
   },
-  obj3: {
-    question: "How do you simplify nested radicals?",
-    answer: "When one radical contains another, multiply the indices. For example, √(√16) = ⁴√16 = 2. In exponent form, (a^(1/n))^(1/m) = a^(1/(mn)), which shows why the indices multiply.",
-    sectionId: "4"
+  obj2: {
+    question: "Why doesn't $\\sqrt{-3} \\cdot \\sqrt{-3}$ equal $3$?",
+    answer: "Because the product rule requires non-negative radicands and both of these fail it. Neither factor has a real value, so $\\sqrt{-3} \\cdot \\sqrt{-3} = \\sqrt{9} = 3$ is an illegal move rather than a wrong arithmetic step. This is the classic trap: the rule is not universal, and applying it outside its domain manufactures answers that look reasonable.",
+    sectionId: "6"
   },
   obj4: {
-    question: "When do radical rules not apply?",
-    answer: "Radical rules require matching indices for the product and quotient rules. For even indices, radicands must be non-negative in real numbers. Radicals with different indices cannot be directly combined — they must first be converted to rational exponents with a common denominator.",
+    question: "Do the product and quotient rules have the same restrictions?",
+    answer: "Almost. Both need matching indices, and with an even index both need non-negative radicands. The quotient rule adds one condition: its denominator must be strictly positive, not merely non-negative, since zero cannot divide. With an odd index the sign restriction disappears entirely and only the nonzero denominator remains.",
     sectionId: "5"
-  },
-  obj5: {
-    question: "How are radical rules connected to exponent laws?",
-    answer: "Every radical rule corresponds to an exponent law. The product rule comes from (ab)^(1/n) = a^(1/n) · b^(1/n), the quotient rule from (a/b)^(1/n) = a^(1/n) / b^(1/n), and the nested radical rule from (a^(1/n))^(1/m) = a^(1/(mn)). Rational exponents unify all radical operations.",
-    sectionId: "3"
   }
 }
 
@@ -844,19 +835,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots/radical-rules"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -970,6 +948,22 @@ export default function RadicalRulesPage({seoData, sectionsContent, introContent
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Radical Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -1089,12 +1083,6 @@ export default function RadicalRulesPage({seoData, sectionsContent, introContent
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

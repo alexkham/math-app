@@ -1091,6 +1091,7 @@ At $35°$ both verification cards settle on $0.819$.`,
         category: "Identities",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/pythagorean-identities",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="42" r="22" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><line x1="12" y1="42" x2="60" y2="42" stroke="#B5D4F4" stroke-width="0.8"/><line x1="36" y1="18" x2="36" y2="66" stroke="#B5D4F4" stroke-width="0.8"/><rect x="36" y="42" width="14.14" height="14.14" fill="#85B7EB" fill-opacity="0.4" stroke="#185FA5" stroke-width="1"/><rect x="50.14" y="25.15" width="16.85" height="16.85" fill="#97C459" fill-opacity="0.4" stroke="#3B6D11" stroke-width="1"/><line x1="36" y1="42" x2="50.14" y2="42" stroke="#185FA5" stroke-width="2"/><line x1="50.14" y1="42" x2="50.14" y2="25.15" stroke="#3B6D11" stroke-width="2"/><line x1="36" y1="42" x2="50.14" y2="25.15" stroke="#FAC775" stroke-width="1.8"/><circle cx="50.14" cy="25.15" r="2.8" fill="#FAC775" stroke="#854F0B" stroke-width="1.1"/><text x="41" y="31" font-family="Georgia,serif" font-size="7" fill="#FAC775" text-anchor="middle" font-style="italic">1</text><text x="40" y="76" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle" font-style="italic">sin&#178;&#952; + cos&#178;&#952; = 1</text></svg>`,
         name: "Pythagorean Identities Explorer"
       },
 

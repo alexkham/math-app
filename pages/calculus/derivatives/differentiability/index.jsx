@@ -12,6 +12,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -530,46 +531,36 @@ Each failure mode has a distinct geometric signature, and recognizing them is es
 };
 
 
+// FAQ pass: all eight originals named their own h2 — definition, implies
+// continuity, corners, cusps, vertical tangents, discontinuities, one-sided
+// derivatives, intervals. Replaced with the two notation traps, the
+// corner/cusp contrast (only the summary table draws it), the piecewise
+// boundary test, and Weierstrass, whose h2 reads "Pathological Examples".
 const faqQuestions = {
   obj1: {
-    question: "What is the definition of differentiability?",
-    answer: "A function f is differentiable at x = a if the limit of the difference quotient exists and is finite: f'(a) = lim(h→0) [f(a+h) - f(a)]/h. This two-sided limit must approach the same finite value from both directions.",
-    sectionId: "1"
+    question: "Can a derivative be infinite?",
+    answer: "No. In the definition, existence means the limit is finite, so writing f′(a) = ±∞ records a failure rather than a value — a borrowed abuse of the equals sign from [infinite limits](!/calculus/limits/infinity#notation). Careful texts write |f′(x)| → ∞ instead. Geometrically this is the mildest failure: a tangent line still exists, it is just vertical, so it has no slope.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "Does differentiability imply continuity?",
-    answer: "Yes, if f is differentiable at a, then f is continuous at a. The proof shows that f(x) - f(a) = [difference quotient] × (x - a), which approaches 0 as x→a. However, the converse is false—continuous functions need not be differentiable.",
-    sectionId: "2"
+    question: "Is a cusp the same as a corner?",
+    answer: "No. Both are sharp points on a continuous graph, but the one-sided derivatives behave differently. At a corner they are finite and unequal — |x| at 0 gives −1 and +1. At a cusp they are both infinite with opposite signs, as with x^(2/3) at 0, so the curve doubles back on itself. A cusp is the sharper of the two.",
+    sectionId: "10"
   },
   obj3: {
-    question: "What is a corner in calculus?",
-    answer: "A corner occurs when both one-sided derivatives exist as finite numbers but are unequal. The graph makes a sharp turn—two distinct tangent directions meeting at one point. Example: f(x) = |x| at x = 0 has left derivative -1 and right derivative +1.",
-    sectionId: "3"
+    question: "How do you check whether a piecewise function is differentiable at a boundary?",
+    answer: "Two conditions, in order. First check continuity at the boundary — the two pieces must agree on the value there, or differentiability is impossible. Then compute the one-sided derivatives from each piece separately and check that they are equal and finite. Continuity alone is not enough: |x| is continuous at 0 but its one-sided derivatives are −1 and +1.",
+    sectionId: "8"
   },
   obj4: {
-    question: "What is a cusp?",
-    answer: "A cusp occurs when both one-sided derivatives are infinite with opposite signs. The graph comes to a sharp point where the curve doubles back with vertical tangent directions from both sides. Example: f(x) = x^(2/3) at x = 0.",
-    sectionId: "4"
+    question: "Is there a function that is continuous everywhere but differentiable nowhere?",
+    answer: "Yes. The Weierstrass function, constructed in 1872, is continuous at every real number and differentiable at none — its graph is jagged at every scale with no smooth segment anywhere. Such functions are not isolated curiosities: they appear throughout fractal geometry, and the paths of Brownian motion are almost surely continuous everywhere and differentiable nowhere.",
+    sectionId: "9"
   },
   obj5: {
-    question: "What is a vertical tangent?",
-    answer: "A vertical tangent occurs when the two-sided limit of the difference quotient exists but equals ±∞. Both sides agree on direction, but the slope is infinite. Example: f(x) = x^(1/3) at x = 0 has a vertical tangent line x = 0.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Why are discontinuous functions not differentiable?",
-    answer: "Since differentiability implies continuity, any discontinuity automatically rules out differentiability. At jumps, the function leaps with no bridging tangent. At infinite discontinuities, there's no point through which a tangent could pass.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What are one-sided derivatives?",
-    answer: "The left-hand derivative is lim(h→0⁻) [f(a+h) - f(a)]/h and the right-hand derivative is lim(h→0⁺) of the same. The two-sided derivative exists if and only if both one-sided derivatives exist, are finite, and are equal.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What does it mean for a function to be differentiable on an interval?",
-    answer: "On an open interval (a,b), differentiable means differentiable at every point. On a closed interval [a,b], the function must be differentiable on (a,b) with a right-hand derivative at a and left-hand derivative at b.",
-    sectionId: "8"
+    question: "Does the one-sided derivative equal the one-sided limit of f′?",
+    answer: "Not necessarily — they are different objects. The right-hand derivative limits the difference quotient at the single point a, while the one-sided limit of f′ asks what the derivative function approaches near a. For x²sin(1/x) at 0 the right-hand derivative exists and equals 0, yet f′ has no limit there because it oscillates.",
+    sectionId: "notation"
   }
 }
 
@@ -643,19 +634,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/derivatives/differentiability"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -790,6 +768,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Differentiability FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -824,13 +818,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

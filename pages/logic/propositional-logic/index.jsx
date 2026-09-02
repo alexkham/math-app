@@ -61,7 +61,7 @@ export default function PropositionalLogicPage({ keyWords, introContent, proposi
       />
       <Breadcrumb/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Propositional Logic</h1>
-      <SectionTableOfContents sections={propositionalLogicSections}
+      <SectionTableOfContents sections={allSections}
        showSecondaryNav={true}
        secondaryNavMode="children"  // or "siblings"
        secondaryNavTitle="More in this Section" />
@@ -78,7 +78,7 @@ export default function PropositionalLogicPage({ keyWords, introContent, proposi
       />
       <br/>
       <br/>
-      <Sections sections={propositionalLogicSections}/>
+      <Sections sections={allSections}/>
       <br/>
       <br/>
       <br/>
@@ -194,9 +194,9 @@ In addition to these core concepts, **syntax trees** are used to visually repres
             Here are a few key ones:
 ## 1.Logical Equivalence:
 
-Two propositions $𝑃$ and $𝑄$ are logically equivalent (denoted $𝑃≡𝑄$) if they have the same truth value in every possible interpretation.
+Two propositions $P$ and $Q$ are logically equivalent (denoted $P≡Q$) if they have the same truth value in every possible interpretation.
 **Example**:
-\t\t\t\t\t\t$𝑃∨𝑄≡𝑄∨𝑃$
+\t\t\t\t\t\t$P∨Q≡Q∨P$
 (Commutativity of disjunction)
 Read more about [equivalence](!/logic/propositional-logic/semantics/equivalences).
 ## 2.Consistency & Inconsistency:
@@ -208,11 +208,11 @@ The set {"It is raining", "It is not raining"} is inconsistent.
 The set {"It is raining", "The ground is wet"} is consistent.
 ## 3.Implication (Entailment / Logical Consequence):
 
-A proposition $𝑄$ is a logical consequence of $𝑃$ (denoted $𝑃⊨𝑄$ — the [double turnstile](!/logic/propositional-logic/semantics/tautology#notation), one of the standard [logic symbols](!/math-symbols/math-logic)) if whenever $𝑃$ is true, $𝑄$ must also be true.
+A proposition $Q$ is a logical consequence of $P$ (denoted $P⊨Q$ — the [double turnstile](!/logic/propositional-logic/semantics/tautology#notation), one of the standard [logic symbols](!/math-symbols/math-logic)) if whenever $P$ is true, $Q$ must also be true.
 **Example**:
-\t\t\t\t\t\t$𝑃=$ "It is raining."
-\t\t\t\t\t\t$𝑄=$ "The ground is wet."
-If $𝑃$ is true, then $𝑄$ logically follows (assuming no weird circumstances).
+\t\t\t\t\t\t$P=$ "It is raining."
+\t\t\t\t\t\t$Q=$ "The ground is wet."
+If $P$ is true, then $Q$ logically follows (assuming no weird circumstances).
 Read more about logical [implications](!/logic/propositional-logic/semantics/implication).
 ## 4. Independence:
 
@@ -289,11 +289,42 @@ The system is complete (proves all tautologies) and sound (proves only tautologi
         //   },
   ]
 
+  // Four questions written from scratch — this hub page had no faqQuestions.
+  // They target content no dedicated page owns: the Hilbert system and the
+  // soundness/completeness line (proofs section), logical consequence
+  // (properties #3), and "what is a proposition" (implicit in the intro;
+  // logic/definitions has a version but renders no FAQ block). Consistency
+  // was skipped to avoid duplicating the inconsistent-premises answer on
+  // /logic/truth-tables/contradictions.
+  const faqQuestions = {
+    obj1: {
+      question: "What is a proposition in logic?",
+      answer: "A proposition is a declarative statement that is either true or false — it has exactly one definite truth value, even if we do not know which. 'It is raining' and '7 is prime' are propositions; questions, commands, and exclamations are not, since they cannot be assigned a truth value. Propositional logic studies how such statements combine through connectives like AND, OR, and NOT.",
+      sectionId: "properties"
+    },
+    obj2: {
+      question: "What is logical consequence in propositional logic?",
+      answer: "A proposition Q is a logical consequence of P, written P ⊨ Q, when every interpretation that makes P true also makes Q true — the truth of P guarantees the truth of Q. Unlike the connective P → Q, which is a formula that may be true or false, entailment is a claim about all interpretations at once. With several premises, Γ ⊨ Q means every model of the premises satisfies Q.",
+      sectionId: "properties"
+    },
+    obj3: {
+      question: "What is a Hilbert proof system?",
+      answer: "A Hilbert system derives theorems from a minimal fixed base: three axiom schemas — A → (B → A), (A → (B → C)) → ((A → B) → (A → C)), and (¬B → ¬A) → (A → B) — plus one inference rule, modus ponens. A proof is a finite sequence of formulas, each an axiom instance, a premise, or a modus ponens result. The system proves exactly the tautologies.",
+      sectionId: "proofs"
+    },
+    obj4: {
+      question: "What is the difference between soundness and completeness?",
+      answer: "Soundness says a proof system proves only true things: every formula it derives is valid. Completeness says it proves all of them: every valid formula has a derivation. Together they guarantee that the syntactic notion 'provable' (⊢) and the semantic notion 'valid' (⊨) pick out exactly the same formulas. The two turnstiles are catalogued in [tautology notation](!/logic/propositional-logic/semantics/tautology#notation).",
+      sectionId: "proofs"
+    }
+  }
+
   return {
     props: {
       keyWords,
       introContent,
-      propositionalLogicSections
+      propositionalLogicSections,
+      faqQuestions
     },
     // Optional: revalidate the page after a certain period (in seconds)
     revalidate: 86400 // Regenerate once per day

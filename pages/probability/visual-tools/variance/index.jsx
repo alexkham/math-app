@@ -8,13 +8,15 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import VarianceVisualizer from '@/app/components/probability/variance/VarianceVisualizer'
+import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
 // (card icon + description). Do not use apostrophes in comments here.
 const hubMeta = {
   hubDescription: 'Drag data points and watch variance update in real time as deviations from the mean become visually tangible through interactive bars and step-by-step calculations.',
-  svg: `<svg viewBox="0 0 120 88" width="120" height="88" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="70" x2="102" y2="70" stroke="#1565c0" stroke-width="2"/><line x1="18" y1="40" x2="102" y2="40" stroke="#3498db" stroke-width="1.5" stroke-dasharray="5 4"/><rect x="26" y="52" width="10" height="18" fill="#b8d4f0" stroke="#1565c0" stroke-width="1.5"/><rect x="42" y="24" width="10" height="46" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/><rect x="58" y="44" width="10" height="26" fill="#b8d4f0" stroke="#1565c0" stroke-width="1.5"/><rect x="74" y="18" width="10" height="52" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/><rect x="90" y="58" width="10" height="12" fill="#b8d4f0" stroke="#1565c0" stroke-width="1.5"/></svg>`,
+  svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="11" y="30" width="10" height="10" fill="#ED93B1" fill-opacity="0.5" stroke="#72243E" stroke-width="0.8"/><rect x="23" y="34" width="6" height="6" fill="#ED93B1" fill-opacity="0.5" stroke="#72243E" stroke-width="0.8"/><rect x="32.6" y="37.2" width="2.8" height="2.8" fill="#ED93B1" fill-opacity="0.5" stroke="#72243E" stroke-width="0.8"/><rect x="45" y="38" width="2" height="2" fill="#ED93B1" fill-opacity="0.5" stroke="#72243E" stroke-width="0.8"/><rect x="53" y="34" width="6" height="6" fill="#ED93B1" fill-opacity="0.5" stroke="#72243E" stroke-width="0.8"/><rect x="62.6" y="29.2" width="10.8" height="10.8" fill="#ED93B1" fill-opacity="0.5" stroke="#72243E" stroke-width="0.8"/><line x1="41" y1="18" x2="41" y2="62" stroke="#FAC775" stroke-width="1.5" stroke-dasharray="3,2"/><line x1="10" y1="44" x2="74" y2="44" stroke="#B5D4F4" stroke-width="1.1"/><circle cx="16" cy="44" r="3" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="26" cy="44" r="3" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="34" cy="44" r="3" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="46" cy="44" r="3" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="56" cy="44" r="3" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><circle cx="68" cy="44" r="3" fill="#85B7EB" stroke="#0C447C" stroke-width="1"/><text x="41" y="72" font-family="Georgia,serif" font-size="11" fill="#E6F1FB" text-anchor="middle" font-style="italic">&#963;&#178;</text></svg>`,
 }
 
 export async function getStaticProps(){
@@ -200,7 +202,68 @@ Variance is a fundamental building block in statistics. Mastering it through int
       before: ``,
       after: ``,
       link: '',
-    }
+    },
+
+    obj11: {
+      title: `The Default Dataset`,
+      content: `The visualizer opens on seven evenly spread points — 12, 15, 18, 20, 22, 25, 28 — whose mean is exactly 20. The dashed blue line marks that mean, and a coloured bar runs from it to each point: green where the point sits above, red where it sits below.
+
+Those bars are the deviations, and they are what the whole calculation is built from. The population variance here is $26.57$, giving a standard deviation of $5.16$.`,
+      before: ``,
+      after: `Notice that the deviations sum to zero — that is true of every dataset, by construction, since the mean is the balance point. It is also exactly why variance squares them: adding the raw deviations would always give zero and measure nothing.
+
+Squaring has a second consequence worth naming. It changes the units: if the data are in centimetres, the variance is in square centimetres, which is why the standard deviation — the square root — is usually the number quoted. At $5.16$ it sits on the same scale as the data itself.`,
+      link: '',
+    },
+    obj12: {
+      title: `Low Variance: Points Clustered on the Mean`,
+      content: `The Low Variance preset loads 20, 21, 20, 22, 21, 20, 22 — a spread of just 2 units around a mean of $20.86$.
+
+Every deviation bar is short, and the variance drops to $0.69$ with a standard deviation of $0.83$.`,
+      before: ``,
+      after: `Compared against the default dataset the range fell from 16 to 2, but the variance fell from $26.57$ to $0.69$ — a factor of nearly 40. That disproportion is the squaring at work: halving a deviation quarters its contribution.
+
+This is the case where the standard deviation earns its keep as a summary. A value of $0.83$ says immediately that a typical point sits under a unit from the mean, which is a claim you can check by eye against the chart. The variance of $0.69$, in squared units, says the same thing far less legibly.`,
+      link: '',
+    },
+    obj13: {
+      title: `High Variance: Points Pushed to the Extremes`,
+      content: `The High Variance preset loads 10, 30, 15, 35, 12, 38, 8 — values alternating between two clusters, with a mean of $21.14$ falling in the empty middle.
+
+The deviation bars are long in both directions, and the variance jumps to $138.98$, a standard deviation of $11.79$.`,
+      before: ``,
+      after: `This preset makes a point the summary statistics cannot: the mean of $21.14$ describes no actual observation. Nothing in the dataset is near 21 — the points sit around 10 and around 35 — yet the mean sits between them, and the standard deviation of $11.79$ is the tool's way of warning that the mean is a poor description here.
+
+That is the general reading of a large variance. It does not merely say "the numbers are big"; it says the mean is carrying little information about any individual value. A bimodal dataset like this one is precisely where reporting mean and variance alone would mislead.`,
+      link: '',
+    },
+    obj14: {
+      title: `A Single Outlier`,
+      content: `The Outliers preset loads 15, 16, 15, 17, 16, 15, 40. Six of the seven values sit within two units of each other; one sits at 40.
+
+That single point drags the mean up to $19.14$ — above every value except itself — and pushes the variance to $72.98$, a standard deviation of $8.54$.`,
+      before: ``,
+      after: `Compare the numbers with the low-variance preset, whose six clustered points look much like these six. Adding one distant value multiplies the variance by roughly a hundred. The squaring is why: a deviation of about 21 contributes over 400 to the sum on its own, dwarfing the six small deviations combined.
+
+This is the concrete argument for why variance and standard deviation are called **non-robust** statistics. One observation, possibly a typo, possibly a genuine rare event, controls the result. Where that risk matters, the interquartile range or the median absolute deviation are used instead — they change little when a single point moves far away.`,
+      link: '',
+    },
+    obj15: {
+      title: `The Sample Toggle: Dividing by n − 1`,
+      content: `The population/sample switch changes one thing in the arithmetic: the divisor. With the default dataset loaded, the sum of squared deviations is $186$ either way, but
+
+- **population**: $186 / 7 = 26.57$
+- **sample**: $186 / 6 = 31.00$
+
+The chart is identical in both — same points, same mean, same bars. Only the reported variance moves.`,
+      before: ``,
+      after: `Dividing by $n - 1$ is **Bessel's correction**, and it exists because a sample's own mean is not the population mean. The sample mean is, by construction, the point that minimises the sum of squared deviations *for that sample*, so those deviations come out slightly too small on average. Dividing by the smaller number $n - 1$ compensates, making the estimate unbiased.
+
+The correction matters most when $n$ is small: here, with $n = 7$, it raises the figure by about 17%. At $n = 100$ the difference is around 1%, and at $n = 1000$ it is negligible — which is why the choice is often glossed over for large datasets and should not be for small ones.
+
+Which to use is a question about intent, not data. Use $n$ when the points *are* the whole population you care about; use $n - 1$ when they are a sample standing in for something larger.`,
+      link: '',
+    },
   }
 
   const introContent = {
@@ -212,6 +275,51 @@ This interactive visualizer brings variance to life. Drag data points on the cha
 
 The tool displays everything simultaneously: the visual distribution, the data table with deviations, the complete calculation breakdown, and the final statistics. Whether you're learning variance for the first time or teaching it to others, this hands-on approach builds intuition that static formulas cannot provide.`
   }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The chart is built inline in JSX by the component, so varianceDiagrams.js
+     ports it: same 700x500 canvas, padding, value window, gridlines, dashed
+     mean line, deviation bars and point labels. Statistics come from the
+     component's own formulas, including the n vs n-1 divisor switch. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: varianceDiagrams[key], caption, text })
+
+  const stateUnits = {
+    default: unit('default', 'Default dataset, frozen',
+      'Seven points with a mean of exactly 20. Each deviation bar runs from the dashed mean line to ' +
+      'its point - green above, red below. Population variance 26.57, standard deviation 5.16.'),
+    low: unit('low', 'Low Variance preset, frozen',
+      'The same seven slots, now spanning just 2 units. Every bar is short and the variance falls to ' +
+      '0.69 - a range 8x smaller, but a variance nearly 40x smaller.'),
+    high: unit('high', 'High Variance preset, frozen',
+      'Values alternating between roughly 10 and roughly 35, with the mean of 21.14 sitting in the ' +
+      'empty middle where no observation lies. Variance 138.98.'),
+    outliers: unit('outliers', 'Outliers preset, frozen',
+      'Six clustered points and one at 40. That single value pulls the mean above every other point ' +
+      'and lifts the variance to 72.98 - about a hundred times the clustered case.'),
+    sample: unit('sample', 'Default dataset with the sample toggle, frozen',
+      'Identical chart to the first unit - same points, same mean, same bars. Only the divisor has ' +
+      'changed, from 7 to 6, so the reported variance reads 31.00 rather than 26.57.'),
+  }
+
+
+  /* ---- per-state notes, passed into the component (Line 1) ----
+     VarianceVisualizer took no props at all; an additive `explanations = null`
+     prop was added and the note renders under the statistics row. The state is
+     value-matched against the component's own presets, with the sample toggle
+     taking precedence. Rendered with dangerouslySetInnerHTML, so raw HTML. */
+  const note = (body, slug, label) =>
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#using-the-visualizer" style="color:#1d4ed8;font-weight:600">using the visualizer</a>`
+
+  const explanations = {
+    default: note('Deviations always sum to zero - which is exactly why variance squares them.', 'the-default-dataset', 'Learn more about the default dataset'),
+    low: note('Range fell 8x but variance fell nearly 40x: squaring amplifies the difference.', 'low-variance-preset', 'Learn more about low variance'),
+    high: note('The mean of 21.14 describes no actual observation here - that is what a large variance warns about.', 'high-variance-preset', 'Learn more about high variance'),
+    outliers: note('One distant point multiplies the variance by roughly a hundred - variance is not robust.', 'the-outlier-preset', 'Learn more about outliers'),
+    sample: note('Same chart, divisor 6 instead of 7 - Bessel&apos;s correction, worth about 17% at n = 7.', 'the-sample-toggle', 'Learn more about the sample toggle'),
+  }
+
 
   const faqQuestions = {
     obj1: {
@@ -313,6 +421,8 @@ The tool displays everything simultaneously: the visual distribution, the data t
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -321,6 +431,7 @@ The tool displays everything simultaneously: the visual distribution, the data t
         description: "Interactive variance calculator with real-time visualization. Drag data points, see step-by-step calculations, compare population vs sample variance online.",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools/variance",
+        category: "Expected Value & Variance",
         name: "Interactive Variance Calculator and Visualizer",
         pageType: "WebApplication"
       },
@@ -328,70 +439,44 @@ The tool displays everything simultaneously: the visual distribution, the data t
   }
 }
 
-export default function VarianceVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function VarianceVisualizerPage({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [sectionsContent.obj3.content]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [sectionsContent.obj6.content]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [sectionsContent.obj7.content]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [sectionsContent.obj8.content]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [sectionsContent.obj9.content]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [sectionsContent.obj10.content]
-    }
+    plain('obj1', 'what-is-variance'),
+    plain('obj2', 'variance-formulas'),
+    plain('obj3', 'using-the-visualizer'),
+    stateRow('obj11', 'the-default-dataset', 'default'),
+    stateRow('obj12', 'low-variance-preset', 'low'),
+    stateRow('obj13', 'high-variance-preset', 'high'),
+    stateRow('obj14', 'the-outlier-preset', 'outliers'),
+    stateRow('obj15', 'the-sample-toggle', 'sample'),
+    plain('obj4', 'the-visual-display'),
+    plain('obj5', 'step-by-step-calculation'),
+    plain('obj6', 'data-table-and-manual-input'),
+    plain('obj7', 'population-vs-sample'),
+    plain('obj8', 'exploring-outliers'),
+    plain('obj9', 'variance-and-standard-deviation'),
+    plain('obj10', 'related-concepts'),
   ]
+
 
   return (
     <>
@@ -460,7 +545,7 @@ export default function VarianceVisualizerPage({seoData, sectionsContent, introC
 
       <br/>
       
-      <VarianceVisualizer/>
+      <VarianceVisualizer explanations={explanations}/>
       
       <br/>
       

@@ -7,6 +7,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import InnerProductWrapper from '../../../../app/components/linear-algebra copy/matrix/InnerProductWrapper'
+import innerProductDiagrams from '../../../../app/components/linear-algebra copy/matrix/innerProductDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -200,11 +202,81 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
       after: ``,
       link: '#related-concepts',
     },
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj11: {
+      title: `The Opening Scene: Two Vectors, One Number`,
+      content: `The player starts with $\mathbf{u}$ and $\mathbf{v}$ side by side and the result slot $\langle \mathbf{u}, \mathbf{v} \rangle$ waiting empty. At the default length both vectors have four components.
+
+The running-sum line beneath the vectors is already laid out with all four terms, greyed until each is earned. What the scene announces is the shape of the answer: two vectors go in, **one number** comes out.`,
+      before: ``,
+      after: `That output shape is what separates the inner product from every other operation in this section. Addition and scalar multiplication return vectors of the same length; this one collapses the whole pair to a single scalar, which is why it is also called the scalar product.
+
+The same-length precondition still applies, and for the same reason as addition: the definition pairs components by position, so each $u_j$ needs a $v_j$ to meet.`,
+      link: '',
+    },
+    obj12: {
+      title: `Pairing, Multiplying, Accumulating`,
+      content: `Each step highlights $u_j$ and $v_j$ together, multiplies them, and adds the product into the running total. The term for that step turns solid in the sum line while the later terms stay greyed.
+
+The frozen picture below is a step partway through the run — some terms already contributed, one being computed, the rest still pending.`,
+      before: ``,
+      after: `Two operations are interleaved here, and it is worth separating them. The **pairing and multiplying** is componentwise, exactly like the operations on the neighbouring pages. The **summing** is what makes this different: it destroys the positional structure, folding four independent products into one total.
+
+Because the products are summed rather than kept, information is lost on purpose. Many different pairs of vectors give the same inner product, and that is the point — the number measures one specific relationship between them rather than describing them.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Completed Inner Product`,
+      content: `The final scene fills the result slot with the total, so the sum line reads
+
+$\langle \mathbf{u}, \mathbf{v} \rangle = u_1v_1 + u_2v_2 + u_3v_3 + u_4v_4$
+
+a single scalar standing where four products were.`,
+      before: ``,
+      after: `That number carries a great deal. Taking the inner product of a vector with itself gives $\sum u_j^2$, which is the squared length — so $\|\mathbf{u}\| = \sqrt{\langle \mathbf{u}, \mathbf{u} \rangle}$, and the whole notion of distance in $\mathbb{R}^n$ is built from this operation.
+
+Between two different vectors it measures alignment, through $\langle \mathbf{u}, \mathbf{v} \rangle = \|\mathbf{u}\|\,\|\mathbf{v}\|\cos\theta$. The sign alone is informative: positive means the vectors lean the same way, negative means they oppose, and **zero means they are orthogonal**. That last case is the reason the inner product underpins projections, least squares and orthogonal bases.
+
+The operation is symmetric, $\langle \mathbf{u}, \mathbf{v} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle$, and linear in each argument — properties that follow directly from the componentwise products being summed.`,
+      link: '',
+    },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     Built from InnerProductWrapper's own buildVectorScenes (exported additively)
+     and rendered through frozenMatrixSvg. The running-sum line lives in the
+     scene caption rather than the layout, so it is not part of these stills. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: innerProductDiagrams[key], caption, text })
+
+  const stateUnits = {
+    intro: unit('intro', 'Opening scene, frozen',
+      'u and v as four-component rows with the result slot empty between the brackets. Two vectors ' +
+      'in, one number out - the shape of the answer is the first thing established.'),
+    step: unit('step', 'Mid-sweep, frozen',
+      'One component of u and the component opposite it in v highlighted as a pair. Their product is ' +
+      'what joins the running total at this step.'),
+    done: unit('done', 'Completed inner product, frozen',
+      'The result slot filled with a single scalar. Four products have been summed away into one ' +
+      'number, and the positional structure is gone.'),
+  }
+
+
+  /* ---- per-phase scene notes, passed into the component (Line 1) ----
+     InnerProductWrapper had no explanations prop; one was added additively and
+     defaults to null. Keys are the scene phase. Captions render with
+     dangerouslySetInnerHTML, so these are raw HTML anchors. */
+  const note = (body, slug, label) =>
+    `<div style="margin-top:10px;padding-top:9px;border-top:1px solid #e2e8f0;font-size:12.5px;color:#475569">` +
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#what-the-inner-product-is" style="color:#1d4ed8;font-weight:600">what it is</a></div>`
+
+  const explanations = {
+    intro: note('Two vectors in, one scalar out - the only operation here that changes the kind of the answer.', 'the-opening-scene', 'Learn more about the opening scene'),
+    step: note('Componentwise multiplication, then a sum that deliberately discards the positional structure.', 'pairing-and-accumulating', 'Learn more about the sweep'),
+    done: note('The result gives length when taken with itself, and alignment - including orthogonality - between two vectors.', 'the-completed-inner-product', 'Learn more about the completed product'),
   }
 
 
@@ -324,6 +396,8 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
   return {
     props: {
       sectionsContent,
+      stateUnits,
+      explanations,
       introContent,
       faqQuestions,
       schemas,
@@ -341,34 +415,45 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
   }
 }
 
-export default function InnerProductVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function InnerProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
 
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
-    // {
-    //     id:'0',
-    //     title:sectionsContent.obj0.title,
-    //     link:sectionsContent.obj0.link,
-    //     content:[
-    //       sectionsContent.obj0.content,
-    //     ]
-    // },
-    { id: '1',  title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
-    { id: '2',  title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
-    { id: '3',  title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
-    { id: '4',  title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
-    { id: '5',  title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
-    { id: '6',  title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
-    { id: '7',  title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
-    { id: '8',  title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
-    { id: '9',  title: sectionsContent.obj9.title,  link: sectionsContent.obj9.link,  content: [sectionsContent.obj9.content] },
-    { id: '10', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
-    // { id: '11', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
-    // { id: '12', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
-    // { id: '13', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
-    // { id: '14', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
-    // { id: '15', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
+    // obj0 Key Terms was defined but commented out of the array - restored
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'the-vectors-scenario'),
+    stateRow('obj11', 'the-opening-scene', 'intro'),
+    stateRow('obj12', 'pairing-and-accumulating', 'step'),
+    stateRow('obj13', 'the-completed-inner-product', 'done'),
+    plain('obj3', 'the-matrices-scenario'),
+    plain('obj4', 'reading-the-running-sum'),
+    plain('obj5', 'what-the-inner-product-is'),
+    plain('obj6', 'key-properties'),
+    plain('obj7', 'why-it-matters'),
+    plain('obj8', 'worked-example'),
+    plain('obj9', 'common-mistakes'),
+    plain('obj10', 'related-concepts'),
   ]
+
+
 
   return (
     <>
@@ -425,7 +510,7 @@ export default function InnerProductVisualizer({ seoData, sectionsContent, intro
       <h1 className='title' style={{ marginTop: '-50px', marginBottom: '0px' }}>Inner Product of Vectors</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <InnerProductWrapper mode='vectors' />
+        <InnerProductWrapper mode='vectors' explanations={explanations} />
       </div>
       <br />
       <SectionTableOfContents sections={genericSections}

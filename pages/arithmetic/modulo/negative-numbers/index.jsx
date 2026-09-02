@@ -772,6 +772,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1137,54 +1138,31 @@ Ensure non-negative results in JavaScript: $((-23 \\% \\; 5) + 5) \\% \\; 5 = (-
   content: `[Modulo](!/arithmetic/modulo) with positive numbers is unambiguous — divide, take what's left over. But the moment the dividend turns negative, the operation splits into two competing definitions that produce different answers to the same question. The mathematics is consistent either way; the confusion arises from the fact that different contexts — and different programming languages — choose different sides.`
 }
 
+// FAQ pass: cut truncated/floored/which-is-correct/negative-divisor (case A —
+// their h2s answer them near-verbatim), "(-1) mod 7" (duplicates the (-7) mod 3
+// question's shape), "-1 and 2 same class" (no demand), and the JS-non-negative
+// and most-common-mistake questions (duplicates of kept answers). Kept the four
+// distinct programmer queries, two of them extended.
 const faqQuestions = {
   obj1: {
     question: "What is (-7) mod 3?",
-    answer: "It depends on the convention. Under truncated division (C, Java, JavaScript), the answer is -1. Under floored division (Python, mathematics), the answer is 2. Both are valid — they represent the same congruence class but use different representative values."
+    answer: "It depends on the convention. Truncated division (C, Java, JavaScript) rounds the quotient toward zero: -7 = 3 × (-2) - 1, so the answer is -1. Floored division (Python, and standard mathematics) rounds toward negative infinity: -7 = 3 × (-3) + 2, so the answer is 2. Both are valid — they name the same congruence class by different representatives.",
+    sectionId: "1"
   },
   obj2: {
-    question: "What is truncated division?",
-    answer: "Truncated division rounds the quotient toward zero. For (-7) ÷ 3 = -2.33, truncate to -2, giving remainder -7 - (3 × -2) = -1. The remainder inherits the sign of the dividend, so negative dividends produce non-positive remainders."
+    question: "Why does Python give different modulo results than JavaScript?",
+    answer: "Python uses floored division, so (-7) % 3 = 2; JavaScript uses truncated division, so (-7) % 3 = -1. The two conventions agree for positive operands and split only for negative ones. C and Java side with JavaScript; standard mathematical usage sides with Python. Code ported between languages must be tested with negative dividends explicitly.",
+    sectionId: "2"
   },
   obj3: {
-    question: "What is floored division?",
-    answer: "Floored division rounds the quotient toward negative infinity. For (-7) ÷ 3 = -2.33, floor to -3, giving remainder -7 - (3 × -3) = 2. The remainder is always non-negative, staying in {0, 1, ..., n-1} regardless of the dividend's sign."
+    question: "How do you convert a negative remainder to a positive one?",
+    answer: "Add the modulus. If truncated division gives (-7) mod 3 = -1, add 3 to get 2. The universal formula ((a % n) + n) % n works in any language: the inner operation produces a remainder somewhere in (-n, n), adding n lifts it above zero, and the final reduction brings values that were already non-negative back into range unchanged.",
+    sectionId: "7"
   },
   obj4: {
-    question: "Which modulo convention is correct?",
-    answer: "Both are correct — they are different definitions, not errors. Mathematics prefers floored division for cleaner theory. Computing often uses truncated division because it maps to hardware instructions. The choice doesn't affect congruence relationships."
-  },
-  obj5: {
-    question: "Why does Python give different modulo results than JavaScript?",
-    answer: "Python uses floored division: (-7) % 3 = 2. JavaScript uses truncated division: (-7) % 3 = -1. The algorithms produce different remainders for negative dividends. Code ported between languages must account for this difference."
-  },
-  obj6: {
-    question: "How do you convert a negative remainder to a positive one?",
-    answer: "Add the modulus. If truncated division gives (-7) mod 3 = -1, add 3 to get 2. The universal formula ((a % n) + n) % n works in any language — if the remainder is already non-negative, the formula leaves it unchanged."
-  },
-  obj7: {
-    question: "Are -1 and 2 the same modulo 3?",
-    answer: "Yes. Both -1 and 2 belong to the same congruence class modulo 3 because their difference (3) is divisible by 3. The conventions disagree on which representative to return, not on the underlying mathematical relationship."
-  },
-  obj8: {
-    question: "What happens with a negative divisor in modulo?",
-    answer: "Behavior varies unpredictably across languages. Mathematical convention typically requires the modulus to be positive. The safest practice is to use the absolute value of the modulus and handle sign logic separately."
-  },
-  obj9: {
     question: "Why does array indexing fail with negative modulo?",
-    answer: "In Python, (-1) % n = n-1, correctly wrapping to the last element. In C or JavaScript, (-1) % n = -1, an invalid index. Code expecting wrap-around behavior must use ((index % n) + n) % n to guarantee non-negative results."
-  },
-  obj10: {
-    question: "How do you ensure non-negative remainders in JavaScript?",
-    answer: "Use the formula ((a % n) + n) % n. For (-23 % 5) in JavaScript: -3, then (-3 + 5) % 5 = 2. This works universally regardless of which convention the language uses, converting any negative remainder to its positive equivalent."
-  },
-  obj11: {
-    question: "What is (-1) mod 7 under each convention?",
-    answer: "Truncated: -1 ÷ 7 = -0.14, truncate to 0, remainder = -1 - (7 × 0) = -1. Floored: floor to -1, remainder = -1 - (7 × -1) = -1 + 7 = 6. The truncated result is -1; the floored result is 6."
-  },
-  obj12: {
-    question: "What is the most common mistake with negative modulo?",
-    answer: "Assuming the % operator behaves identically in every language. Code written in Python (floored) will produce different results in Java or JavaScript (truncated) for negative inputs. Always test with negative dividends explicitly."
+    answer: "Wrapping backward through a circular buffer relies on the remainder staying non-negative. In Python, (-1) % n = n-1, which correctly lands on the last element. In C, Java, or JavaScript, (-1) % n = -1 — an invalid index that throws or reads out of bounds. Code that steps backward must use ((index % n) + n) % n to guarantee a valid position.",
+    sectionId: "10"
   }
 }
 
@@ -1259,19 +1237,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/modulo/negative-numbers"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1414,6 +1379,22 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Negative Modulo FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -1445,17 +1426,10 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

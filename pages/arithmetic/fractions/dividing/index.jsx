@@ -689,6 +689,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1017,56 +1018,28 @@ Rate problems also use fraction division. If a pipe fills $\\frac{1}{4}$ of a ta
 }
 
 
+// FAQ pass: cut seven case-A questions — reciprocal, basic rule, why multiply
+// by the reciprocal, both whole-number cases, mixed numbers and real-life
+// applications all have h2s that state the answer (the reciprocal heading
+// also settles the question deferred here from the multiplying page). Cut
+// "What is 1/2 ÷ 1/4?" as a calculator-shaped one-off. Kept the mnemonic and
+// the cross-cancel caveat, both extended; invented the bigger-result question,
+// which is the confusion this page creates and never addresses head-on.
 const faqQuestions = {
   obj1: {
-    question: "What is a reciprocal?",
-    answer: "The reciprocal of a fraction is formed by swapping numerator and denominator. The reciprocal of 3/4 is 4/3. A number times its reciprocal always equals 1: (3/4) × (4/3) = 1. Zero has no reciprocal because 1/0 is undefined.",
-    sectionId: "1"
+    question: "What does 'keep, change, flip' mean?",
+    answer: "It is the mnemonic for dividing fractions: KEEP the first fraction unchanged, CHANGE the division sign to multiplication, FLIP the second fraction to its reciprocal. So 2/3 ÷ 4/5 becomes 2/3 × 5/4 = 10/12 = 5/6. Only the second fraction is ever flipped — flipping the first is the most common way the rule goes wrong.",
+    sectionId: "2"
   },
   obj2: {
-    question: "How do you divide fractions?",
-    answer: "Multiply the first fraction by the reciprocal of the second: (a/b) ÷ (c/d) = (a/b) × (d/c). For example, 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6. Remember: keep, change, flip.",
-    sectionId: "2"
+    question: "Why does dividing by a fraction give a bigger result?",
+    answer: "Because division asks how many of the divisor fit inside the dividend, and small pieces fit many times. Dividing 6 by 1/2 asks how many halves are in 6, and the answer is 12. Any division by a number less than 1 enlarges the result; dividing by a fraction greater than 1, such as 3/2, shrinks it instead.",
+    sectionId: "3"
   },
   obj3: {
-    question: "What does 'keep, change, flip' mean?",
-    answer: "It's a mnemonic for dividing fractions: KEEP the first fraction unchanged, CHANGE division to multiplication, FLIP the second fraction to its reciprocal. Then multiply as usual.",
-    sectionId: "2"
-  },
-  obj4: {
-    question: "Why do you multiply by the reciprocal when dividing fractions?",
-    answer: "Division asks how many times one quantity fits into another. Multiplying by the reciprocal answers this question. It works because multiplying by a reciprocal undoes multiplication — they're inverse operations.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "How do you divide a fraction by a whole number?",
-    answer: "Write the whole number as a fraction over 1, then multiply by its reciprocal. For 3/4 ÷ 2: rewrite as 3/4 ÷ 2/1 = 3/4 × 1/2 = 3/8. The result is smaller than the original fraction.",
-    sectionId: "4"
-  },
-  obj6: {
-    question: "How do you divide a whole number by a fraction?",
-    answer: "Multiply the whole number by the reciprocal of the fraction. For 6 ÷ 1/2 = 6 × 2 = 12. The result is larger because you're asking how many small pieces fit into the whole.",
-    sectionId: "5"
-  },
-  obj7: {
-    question: "How do you divide mixed numbers?",
-    answer: "Convert both mixed numbers to improper fractions first, then divide normally. For 3½ ÷ 1¾: convert to 7/2 ÷ 7/4 = 7/2 × 4/7 = 28/14 = 2.",
-    sectionId: "6"
-  },
-  obj8: {
     question: "Can you cross-cancel when dividing fractions?",
-    answer: "Yes, but only after flipping the second fraction. Once you have multiplication, cross-cancel common factors between any numerator and any denominator before multiplying.",
+    answer: "Yes, but only after flipping the second fraction. Cross-canceling belongs to multiplication, so it is valid the moment the problem has been rewritten. For 8/9 ÷ 4/3, first rewrite as 8/9 × 3/4, then cancel 8 against 4 and 9 against 3 to get 2/3 directly. Canceling before the flip produces a wrong answer.",
     sectionId: "7"
-  },
-  obj9: {
-    question: "What is 1/2 ÷ 1/4?",
-    answer: "This asks how many quarters fit in one half. Calculate: 1/2 × 4/1 = 4/2 = 2. Two quarters make a half, so the answer is 2.",
-    sectionId: "3"
-  },
-  obj10: {
-    question: "When do you use fraction division in real life?",
-    answer: "Fraction division solves 'how many groups fit' problems. If a recipe uses 2/3 cup per batch and you have 4 cups, how many batches? Calculate 4 ÷ 2/3 = 4 × 3/2 = 6 batches.",
-    sectionId: "8"
   }
 }
 
@@ -1142,19 +1115,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/fractions/dividing"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1262,6 +1222,22 @@ export default function DividingPage({seoData, sectionsContent, introContent, ca
           sectionsContent.obj9.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Dividing Fractions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -1374,12 +1350,6 @@ export default function DividingPage({seoData, sectionsContent, introContent, ca
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

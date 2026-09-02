@@ -4,29 +4,31 @@ import { processContent } from '@/app/utils/contentProcessor';
 import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const uniformPDF = (x, a, b) => {
+// The six density/distribution helpers below are exported so the page's
+// frozen-state stills are drawn from the tool's own functions (Line 1).
+export const uniformPDF = (x, a, b) => {
   if (x < a || x > b) return 0;
   return 1 / (b - a);
 };
 
-const normalPDF = (x, mean, stdDev) => {
+export const normalPDF = (x, mean, stdDev) => {
   const coefficient = 1 / (stdDev * Math.sqrt(2 * Math.PI));
   const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));
   return coefficient * Math.exp(exponent);
 };
 
-const exponentialPDF = (x, lambda) => {
+export const exponentialPDF = (x, lambda) => {
   if (x < 0) return 0;
   return lambda * Math.exp(-lambda * x);
 };
 
-const uniformCDF = (x, a, b) => {
+export const uniformCDF = (x, a, b) => {
   if (x < a) return 0;
   if (x > b) return 1;
   return (x - a) / (b - a);
 };
 
-const normalCDF = (x, mean, stdDev) => {
+export const normalCDF = (x, mean, stdDev) => {
   return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
 };
 
@@ -47,12 +49,12 @@ const erf = (x) => {
   return sign * y;
 };
 
-const exponentialCDF = (x, lambda) => {
+export const exponentialCDF = (x, lambda) => {
   if (x < 0) return 0;
   return 1 - Math.exp(-lambda * x);
 };
 
-export default function ContinuousProbabilityDistributions({ explanationsOverride = {} }) {
+export default function ContinuousProbabilityDistributions({ explanationsOverride = {}, explanationsAppend = {} }) {
   const [activeDistribution, setActiveDistribution] = useState('uniform');
   
   const [uniformA, setUniformA] = useState(0);
@@ -208,7 +210,12 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
   };
 
   const currentDist = distributions[activeDistribution];
-  const finalExplanation = explanationsOverride[activeDistribution] || currentDist.explanation;
+  // `explanationsOverride` REPLACES the built-in text; `explanationsAppend` adds
+  // to it, so a caller can attach a link without discarding the tool's own
+  // explanation (Line 1)
+  const finalExplanation =
+    (explanationsOverride[activeDistribution] || currentDist.explanation) +
+    (explanationsAppend[activeDistribution] || '');
 
   const [viewType, setViewType] = useState('pdf');
 

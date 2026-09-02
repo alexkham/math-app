@@ -558,6 +558,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -740,26 +741,37 @@ export async function getStaticProps(){
 `
 
 
+  // FAQ pass: "what is an event" and "how do events relate to the sample
+  // space" are answered by the h1, the intro, and the "Sample Space and
+  // Events" h2; "set-theoretic view" and "independence" each name their own
+  // h2. Union/intersection defers to the sets page ("Core Set Operations in
+  // Probability") and independence to its dedicated page. Replaced with the
+  // bullets that carry real weight but are never unpacked.
   const faqQuestions = {
     obj1: {
-      question: "What is an event in probability?",
-      answer: "An event is a meaningful collection of outcomes from a sample space. Events represent situations we care about, such as 'the result is 4' or 'the value falls in a certain range.' They can contain one outcome or many, and serve as the basic objects we reason about, compare, and assign probabilities to in probability theory."
+      question: "How do you handle “at least one” in a probability problem?",
+      answer: "Switch to the complement. “At least one” means any number from one upward, which is awkward to count directly, but its opposite — none at all — is usually a single simple case. So P(at least one) = 1 − P(none). The two patterns work together: recognise the at-least-one shape, then describe what does not happen instead.",
+      sectionId: "patterns"
     },
     obj2: {
-      question: "How are events related to sample space?",
-      answer: "The sample space is the collection of all possible outcomes of an experiment. Events are formed by grouping some of these outcomes together into meaningful situations. The sample space provides the universe of possibilities, while events provide the structure we work with inside it."
+      question: "Why don't probabilities simply add when events overlap?",
+      answer: "Because the shared outcomes get counted twice. If A and B cannot both occur, their probabilities add cleanly. If they overlap, adding P(A) and P(B) counts every outcome in the intersection once from each side, so the total overshoots. The overlap has to be subtracted back out exactly once.",
+      sectionId: "assignement"
     },
     obj3: {
-      question: "What is the difference between union and intersection of events?",
-      answer: "The union of events represents a situation where one event or another occurs - at least one happens. The intersection captures situations where events occur together - both happen simultaneously. Union uses 'or' logic while intersection uses 'and' logic, reflecting how we combine possibilities."
+      question: "What does it mean for one event to be a subset of another?",
+      answer: "A ⊆ B means that whenever A occurs, B occurs too — A is the stricter condition. Rolling a 6 is a subset of rolling an even number, because every way to roll a 6 is also a way to roll an even number. Containment forces an ordering on probabilities as well: P(A) ≤ P(B) always.",
+      sectionId: "relations"
     },
     obj4: {
-      question: "What does it mean for events to be independent?",
-      answer: "Events are independent when knowing that one occurs tells us nothing about whether the other occurs - they do not influence each other. Independence means their occurrence patterns do not interact, and the presence of one event does not change how we think about the other."
+      question: "What is the difference of two events, A − B?",
+      answer: "A − B is the event that A occurs but B does not — the outcomes in A with anything shared with B removed. In set terms it is A ∩ Bᶜ. It is not symmetric: A − B and B − A are different events, and both differ from the union and the intersection. Use it to require one condition while explicitly excluding another.",
+      sectionId: "types"
     },
     obj5: {
-      question: "How do events relate to set theory?",
-      answer: "Events behave exactly like sets - each event corresponds to a collection of outcomes. Set operations mirror event operations: union becomes 'or', intersection becomes 'and', complements describe what's outside the event, and relationships like subsets and overlap come directly from set structure. Venn diagrams visualize these relationships perfectly."
+      question: "What is an elementary event?",
+      answer: "An event containing exactly one outcome — the smallest event that is not empty. For a die roll, {4} is an elementary event while {2,4,6} is not. The braces matter: {4} is an event, a subset of the sample space, whereas 4 on its own is an outcome, an element of it.",
+      sectionId: "types"
     }
   }
 
@@ -828,19 +840,6 @@ export async function getStaticProps(){
           "item": "https://www.learnmathclass.com/probability/events"
         }
       ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
     }
   }
 
@@ -1180,6 +1179,22 @@ export default function EventsPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Events FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'',
     //     title:'',
@@ -1225,13 +1240,6 @@ export default function EventsPage({
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

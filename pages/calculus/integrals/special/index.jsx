@@ -7,6 +7,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -646,40 +647,41 @@ Memorizing these forms accelerates computation and provides reference points for
 
 
 
+// FAQ pass: formula-library page — category headings, so formula-shaped
+// queries survive as case B. Cut the two that named their own h2 ("Why
+// Memorize Special Integrals?" and "Inverse Trigonometric Forms") and
+// replaced the listy multi-formula questions with the single formulas
+// people actually search for, each carrying the reason its sign, factor,
+// or absolute value is there.
 const faqQuestions = {
   obj1: {
-    question: "Why should you memorize special integrals?",
-    answer: "Integration techniques transform unfamiliar integrals into standard forms. Memorizing these targets provides speed through instant recognition, building blocks for complex integrals, verification by differentiation, and pattern anchors that guide technique selection.",
-    sectionId: "1"
+    question: "What is the power rule for integration?",
+    answer: "∫xⁿ dx = xⁿ⁺¹/(n+1) + C, valid for every n except −1. Raise the exponent by one, then divide by the new exponent — the exact reverse of the derivative power rule, which lowers the exponent and multiplies by the old one. The exclusion of n = −1 is not a technicality: dividing by n + 1 would divide by zero.",
+    sectionId: "2"
   },
   obj2: {
-    question: "What is the power rule for integration?",
-    answer: "The power rule states ∫xⁿ dx = xⁿ⁺¹/(n+1) + C for n ≠ -1. The exponent increases by one and you divide by the new exponent. The exception n = -1 gives ∫1/x dx = ln|x| + C, with absolute value ensuring validity for negative x.",
+    question: "Why is ∫(1/x) dx = ln|x| instead of ln x?",
+    answer: "Because 1/x is defined for negative x but ln x is not. For x > 0 the antiderivative is ln x; for x < 0 it is ln(−x), whose derivative is also 1/x by the chain rule. The absolute value packs both branches into one formula. Strictly, each branch carries its own constant, since the domain splits at zero.",
     sectionId: "2"
   },
   obj3: {
-    question: "What are the exponential integral formulas?",
-    answer: "The exponential function is its own antiderivative: ∫eˣ dx = eˣ + C. For other bases: ∫aˣ dx = aˣ/ln(a) + C. With a linear argument: ∫eᵏˣ dx = eᵏˣ/k + C. The factor 1/ln(a) or 1/k compensates for the chain rule.",
+    question: "What is the integral of a^x?",
+    answer: "∫aˣ dx = aˣ/ln a + C, for a > 0 and a ≠ 1. The 1/ln a compensates for the chain rule: differentiating aˣ produces aˣ ln a, so the antiderivative has to divide that factor back out. When a = e the factor is ln e = 1, which is why ∫eˣ dx = eˣ + C carries no coefficient.",
     sectionId: "3"
   },
   obj4: {
-    question: "What are the basic trigonometric integrals?",
-    answer: "Key formulas: ∫sin x dx = -cos x + C; ∫cos x dx = sin x + C; ∫sec²x dx = tan x + C; ∫csc²x dx = -cot x + C; ∫sec x tan x dx = sec x + C; ∫csc x cot x dx = -csc x + C. Each reverses a standard derivative.",
+    question: "Why is ∫sin x dx = −cos x?",
+    answer: "Because the derivative that produces sin x carries a minus sign. Since (cos x)′ = −sin x, reversing it means the antiderivative of sin x is −cos x, not cos x. Check by differentiating: (−cos x)′ = sin x. The same inversion explains ∫csc²x dx = −cot x, since (cot x)′ = −csc²x.",
     sectionId: "4"
   },
   obj5: {
-    question: "What integrals produce inverse trig functions?",
-    answer: "∫1/(1+x²) dx = arctan x + C; ∫1/√(1-x²) dx = arcsin x + C; ∫1/(x√(x²-1)) dx = arcsec|x| + C. More generally: ∫1/(a²+x²) dx = (1/a)arctan(x/a) + C and ∫1/√(a²-x²) dx = arcsin(x/a) + C.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you integrate logarithms?",
-    answer: "The integral of ln x requires integration by parts: ∫ln x dx = x ln x - x + C. A key pattern is ∫f'(x)/f(x) dx = ln|f(x)| + C. For example, ∫tan x dx = ∫sin x/cos x dx = -ln|cos x| + C using this pattern.",
+    question: "How do you spot an integral that gives a logarithm?",
+    answer: "Look for the pattern f′(x)/f(x) — a function in the denominator with its own derivative on top. Any integrand of that shape integrates to ln|f(x)| + C. It shows up in disguise constantly: ∫tan x dx is ∫sin x / cos x dx, which is −f′/f with f = cos x, giving −ln|cos x| + C.",
     sectionId: "6"
   },
-  obj7: {
-    question: "What are the integrals of tan, cot, sec, and csc?",
-    answer: "∫tan x dx = -ln|cos x| + C = ln|sec x| + C; ∫cot x dx = ln|sin x| + C; ∫sec x dx = ln|sec x + tan x| + C; ∫csc x dx = -ln|csc x + cot x| + C. These use the f'/f pattern or clever multiplication by 1.",
+  obj6: {
+    question: "What is the integral of sec x?",
+    answer: "∫sec x dx = ln|sec x + tan x| + C. It is the least obvious of the standard trigonometric integrals, because you get there by multiplying by a clever form of 1: sec x · (sec x + tan x)/(sec x + tan x). The numerator then becomes the derivative of the denominator, turning it into the f′/f pattern.",
     sectionId: "7"
   }
 }
@@ -754,19 +756,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals/special"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -866,6 +855,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Special Integrals FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -900,13 +905,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

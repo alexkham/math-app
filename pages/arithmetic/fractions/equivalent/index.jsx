@@ -671,6 +671,7 @@ import React from 'react'
 import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1010,56 +1011,29 @@ The [least common multiple](!/arithmetic/divisibility/lcm) produces the least co
   content: `Equivalent fractions are different representations of the same value. The fractions $\\frac{1}{2}$, $\\frac{2}{4}$, and $\\frac{3}{6}$ all describe identical quantities despite having different numerators and denominators. Understanding equivalence is fundamental to comparing fractions, finding common denominators, and simplifying results.`
 }
 
+// FAQ pass: cut six case-A questions (equivalent fractions, creating them,
+// simplifying, simplest form, testing for equivalence, number line — each has
+// its own h2 with a defining first line), the GCF-method question (owned by
+// /arithmetic/divisibility/gcd, which already answers "How is GCD used to
+// simplify fractions?") and the why-common-denominators question (owned by
+// /arithmetic/fractions/adding-subtracting). Kept the specific-denominator
+// rewrite, reframed the LCD question to the choice people actually face
+// (the lcm page owns the plain LCD definition), and invented the n/n question.
 const faqQuestions = {
   obj1: {
-    question: "What are equivalent fractions?",
-    answer: "Equivalent fractions represent the same value using different numerators and denominators. For example, 1/2, 2/4, and 3/6 are all equivalent — they describe the same quantity and occupy the same point on the number line.",
-    sectionId: "1"
+    question: "Do you have to use the least common denominator?",
+    answer: "No. Any common multiple of the denominators works. For 1/3 and 1/4 you could use 12, 24, or 36 and still get a correct result. The least common denominator — the [least common multiple](!/arithmetic/divisibility/lcm) of the denominators — simply keeps the numbers smallest: 12 rather than 48. Larger choices give the right answer but usually leave a fraction that needs simplifying afterward.",
+    sectionId: "7"
   },
   obj2: {
-    question: "How do you find equivalent fractions?",
-    answer: "Multiply both the numerator and denominator by the same nonzero number. For example, 3/5 × 2/2 = 6/10. Since multiplying by n/n equals multiplying by 1, the value stays the same while the form changes.",
+    question: "How do you rewrite a fraction with a specific denominator?",
+    answer: "Work out what the original denominator must be multiplied by to reach the target, then apply that same factor to the numerator. To write 2/3 with denominator 12: since 3 × 4 = 12, multiply both parts by 4, giving 8/12. If the target is not a multiple of the original denominator, no whole-number rewrite exists.",
     sectionId: "2"
   },
   obj3: {
-    question: "How do you simplify a fraction?",
-    answer: "Divide both the numerator and denominator by a common factor. For fastest results, divide by the greatest common factor (GCF). Example: 12/18 ÷ 6/6 = 2/3, since the GCF of 12 and 18 is 6.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What does simplest form mean?",
-    answer: "A fraction is in simplest form (or lowest terms) when the numerator and denominator share no common factor other than 1. The fraction 2/3 is in simplest form; 4/6 is not because both are divisible by 2.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do you check if two fractions are equivalent?",
-    answer: "Use cross-multiplication: for a/b and c/d, compute a × d and b × c. If the products are equal, the fractions are equivalent. Example: 3/4 and 9/12 — since 3 × 12 = 36 and 4 × 9 = 36, they're equivalent.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the least common denominator?",
-    answer: "The least common denominator (LCD) is the smallest number that both denominators divide into evenly — it's the least common multiple (LCM) of the denominators. For 1/3 and 1/4, the LCD is 12.",
-    sectionId: "7"
-  },
-  obj7: {
-    question: "Why do we need common denominators?",
-    answer: "Adding and subtracting fractions requires common denominators so the pieces being combined are the same size. You can't directly add thirds and fourths — first convert both to twelfths.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you rewrite a fraction with a specific denominator?",
-    answer: "Determine what number multiplies the original denominator to get the target. Multiply both numerator and denominator by that number. Example: 2/3 with denominator 12 — since 3 × 4 = 12, compute 2 × 4 / 3 × 4 = 8/12.",
+    question: "Why can you multiply the numerator and denominator by the same number?",
+    answer: "Because doing so multiplies the fraction by 1. Multiplying 3/5 by 2/2 gives 6/10, and 2/2 equals 1, so the value cannot change — only the way it is written. The same reasoning runs backward when simplifying: dividing both parts by a common factor divides by a disguised 1. Multiplying the two parts by different numbers does change the value.",
     sectionId: "2"
-  },
-  obj9: {
-    question: "What is the GCF method for simplifying fractions?",
-    answer: "Find the greatest common factor of the numerator and denominator, then divide both by it. This reduces the fraction to simplest form in one step. For 24/36, the GCF is 12, so 24/36 = 2/3.",
-    sectionId: "3"
-  },
-  obj10: {
-    question: "Do equivalent fractions occupy the same point on a number line?",
-    answer: "Yes. All equivalent fractions mark exactly the same location. The point for 1/2 is identical to 2/4, 3/6, or 50/100. Different labels, same position — equivalence is about value, not appearance.",
-    sectionId: "6"
   }
 }
 
@@ -1133,19 +1107,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/arithmetic/fractions/equivalent"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1249,6 +1210,22 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Equivalent Fractions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -1369,12 +1346,6 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

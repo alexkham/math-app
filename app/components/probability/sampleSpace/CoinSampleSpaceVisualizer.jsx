@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
 
-function CoinSampleSpaceVisualizer() {
+function CoinSampleSpaceVisualizer({ explanations = null } = {}) {
   const [numCoins, setNumCoins] = useState(3);
   const [highlightCondition, setHighlightCondition] = useState('none');
   const [headsCondition, setHeadsCondition] = useState('atLeast');
@@ -75,6 +75,13 @@ function CoinSampleSpaceVisualizer() {
   };
 
   // Check if outcome matches highlight condition
+  // Line 1 anchor mesh: which documented state the explorer is showing. Only
+  // the conditions the page documents are keyed; anything else shows no note.
+  const line1Key = ['none', 'majority', 'allSame', 'alternating'].includes(highlightCondition)
+    ? highlightCondition
+    : null;
+  const line1Note = explanations && line1Key ? explanations[line1Key] : null;
+
   const shouldHighlight = (outcome) => {
     const headsCountInOutcome = outcome.filter(coin => coin === 'H').length;
     const tailsCount = numCoins - headsCountInOutcome;
@@ -257,6 +264,23 @@ function CoinSampleSpaceVisualizer() {
           Sample Space ({totalOutcomes} total outcomes)
         </h3>
         
+        {line1Note && (
+          <div
+            style={{
+              margin: '0 10px 14px',
+              padding: '10px 14px',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderLeft: '4px solid #4A90E2',
+              borderRadius: 6,
+              fontSize: '13px',
+              lineHeight: 1.6,
+              color: '#475569',
+            }}
+            dangerouslySetInnerHTML={{ __html: line1Note }}
+          />
+        )}
+
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', 

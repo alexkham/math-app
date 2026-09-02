@@ -10,6 +10,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -391,41 +392,37 @@ No single algorithm covers all cases—unlike differentiation, which follows sys
 
 
 
+// FAQ pass: all seven originals named their own h2 — why techniques exist,
+// substitution, parts, trigonometric integrals, trig substitution, partial
+// fractions, and choosing between them. That also settles the hub's
+// deferred "What are the main integration techniques?": every technique has
+// a heading, so no page needs the entry. Replaced with the execution traps,
+// which live almost entirely in the notation section.
 const faqQuestions = {
   obj1: {
-    question: "Why are integration techniques needed?",
-    answer: "Unlike differentiation, which follows mechanical rules, integration has no universal algorithm. Many functions have no elementary antiderivative or are difficult to find without insight. Techniques transform integrands into forms matching known formulas.",
-    sectionId: "1"
+    question: "Do you have to change the limits when you use u-substitution?",
+    answer: "You have two legal options, and the only mistake is mixing them. Either convert the bounds — when x = a, u = g(a) — and finish entirely in u, never returning to x; or keep the original x-bounds, back-substitute u = g(x) to get the answer in x, and only then evaluate. Evaluating u-bounds against an x-expression is the error.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How does u-substitution work?",
-    answer: "Substitution reverses the chain rule. Let u = g(x), so du = g'(x) dx. Replace all x-expressions with u-expressions and integrate. For definite integrals, convert the limits: when x = a, u = g(a). Look for a function paired with its derivative.",
+    question: "What does it mean if there's a leftover x after substituting?",
+    answer: "It means the substitution is incomplete, and the expression is meaningless as written. Something like ∫cos u dx mixes one variable in the integrand with another in the differential. Every x must convert, the integrand and the dx alike. A stray x usually signals that the chosen u does not have its derivative present.",
     sectionId: "2"
   },
   obj3: {
-    question: "What is integration by parts?",
-    answer: "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du. Identify factors u and dv, differentiate u to get du, integrate dv to get v, then apply the formula. The LIATE rule (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) guides choosing u.",
-    sectionId: "3"
+    question: "Is the u in integration by parts the same as the u in u-substitution?",
+    answer: "No — same letter, different job. In substitution, u renames the variable: everything converts and x disappears. In integration by parts, u labels one factor of the integrand and x remains the variable throughout; the ledger is u, du, dv, v. Reading a parts problem as a substitution, or the reverse, is a common source of stuck work.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "How do you integrate powers of sine and cosine?",
-    answer: "For odd power of sine: save one sin x, convert sin²x = 1 − cos²x, substitute u = cos x. For odd power of cosine: save one cos x, convert cos²x = 1 − sin²x, substitute u = sin x. For both even: use half-angle identities.",
-    sectionId: "4"
+    question: "Does LIATE always work?",
+    answer: "No. LIATE — logarithmic, inverse trig, algebraic, trigonometric, exponential — is a classroom mnemonic for choosing u in integration by parts, not a theorem. It picks well most of the time, but it fails often enough that judgment stays in the loop. If the resulting ∫v du is harder than what you started with, swap the roles.",
+    sectionId: "3"
   },
   obj5: {
-    question: "When do you use trigonometric substitution?",
-    answer: "Use trig substitution for square roots of quadratics. For √(a²−x²): let x = a sin θ. For √(a²+x²): let x = a tan θ. For √(x²−a²): let x = a sec θ. These substitutions eliminate the square root using Pythagorean identities.",
+    question: "Why is trigonometric substitution written x = a sin θ instead of u = g(x)?",
+    answer: "Because it runs backwards. Ordinary substitution names the new variable as a function of the old one; trigonometric substitution expresses the old variable through the new one, which is what lets a Pythagorean identity collapse the radical. The price is that returning to x needs an inverse trig function, a reference triangle, and a domain restriction on θ.",
     sectionId: "5"
-  },
-  obj6: {
-    question: "How does partial fractions work?",
-    answer: "Partial fractions decompose rational functions into simpler fractions. Factor the denominator, write the fraction as a sum of terms with linear or irreducible quadratic denominators, solve for coefficients, then integrate each term using basic formulas.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you choose the right integration technique?",
-    answer: "Pattern recognition guides selection. Substitution: function paired with its derivative. Parts: products of different function types. Trigonometric integrals: powers of sin and cos. Trig substitution: square roots of a²±x² or x²−a². Partial fractions: rational functions with factorable denominators.",
-    sectionId: "7"
   }
 }
 
@@ -500,19 +497,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/calculus/integrals/techniques"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -631,6 +615,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Integration Techniques FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -665,13 +665,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
