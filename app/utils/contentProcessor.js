@@ -4,6 +4,11 @@ import 'katex/dist/katex.min.css';
 import { renderAcademicBlockHTML } from './academicBlocks';
 import { renderMathBlock } from './renderMathBlock'; // ← NEW
 
+// The inline tokeniser. Shared by the top-level line splitter and by the bold
+// branch, so nested content is tokenised exactly the same way in both places.
+// Order matters: earlier alternatives win on collisions.
+const INLINE_TOKEN_PATTERN = /(__SVG_PLACEHOLDER_\d+__|__HTML_PLACEHOLDER_\d+__|__ACADEMIC_PLACEHOLDER_\d+__|@@(?:\[[^\]]*\])?[\s\S]+?@@|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@table:\[[\s\S]+?\]@|@span\[[^\]]+\]:[^@]+@)/;
+
 export const processContent = (content, styles = null) => {
   if (!content) return null;
   
@@ -187,8 +192,16 @@ const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/
     }
 
     // Bold text
+    // The inner text is re-tokenised with the same splitter and fed back through
+    // processPart, so $math$, links and @[code]@ inside ** ** render instead of
+    // printing raw. Before this, the inner text was inserted as a plain string.
     if (part.startsWith('**') && part.endsWith('**')) {
-      return <strong key={`strong-${index}`}>{part.slice(2, -2)}</strong>;
+      const boldInner = part.slice(2, -2);
+      const boldParts = boldInner
+        .split(INLINE_TOKEN_PATTERN)
+        .filter(Boolean)
+        .map((innerPart, innerIndex) => processPart(innerPart, `${index}-bold-${innerIndex}`));
+      return <strong key={`strong-${index}`}>{boldParts}</strong>;
     }
 
     // Links
@@ -257,7 +270,7 @@ const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/
   
     // ↓↓↓ ONE ADDITION TO THE SPLIT REGEX (the @@...@@ pattern, placed
     //     before $$...$$ and other patterns so it wins on collisions)
-    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|__HTML_PLACEHOLDER_\d+__|__ACADEMIC_PLACEHOLDER_\d+__|@@(?:\[[^\]]*\])?[\s\S]+?@@|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@table:\[[\s\S]+?\]@|@span\[[^\]]+\]:[^@]+@)/);
+    const parts = trimmedLine.split(INLINE_TOKEN_PATTERN);
     const processedParts = parts.filter(Boolean).map((part, partIndex) => processPart(part, `${lineIndex}-${partIndex}`));
   
     if (trimmedLine.startsWith('- ')) {
