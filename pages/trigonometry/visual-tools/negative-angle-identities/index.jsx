@@ -82,7 +82,7 @@ Sweep the slider to see that $\\sin(-\\theta)$ and $-\\sin\\theta$ track togethe
 • **Play** / **Pause** — advance automatically.
 • **Speed selector** — $0.5\\times$, $1\\times$, $1.5\\times$, $2\\times$.
 
-The three steps are: (1) [place $P$ at angle θ](!#sine-proof-step-1-place-p), (2) [reflect across the x-axis](!#sine-proof-step-2-mirror-p) to produce $P'$ at angle $-\\theta$, (3) [read off the identity](!#sine-proof-step-3-read-off-sin) from the coordinates of $P'$.`,
+The three steps are: (1) [place P at angle θ](!#sine-proof-step-1-place-p), (2) [reflect across the x-axis](!#sine-proof-step-2-mirror-p) to produce $P'$ at angle $-\\theta$, (3) [read off the identity](!#sine-proof-step-3-read-off-sin) from the coordinates of $P'$.`,
       before:``,
       after:``,
       link:'',

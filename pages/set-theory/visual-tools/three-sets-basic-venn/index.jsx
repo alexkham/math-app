@@ -206,13 +206,13 @@ For algebraic proofs, the general $n$-set form, and applications to propositiona
       title: `Counting Identities Unique to Three Sets`,
       content: `Three-set algebra is the smallest setting where "counting" identities become non-trivial. The Compound tab collects them:
 
-[Exactly one of $A, B, C$](!#exactly-one-of-the-three-sets) — elements in exactly one of the three sets. Shades the three "only" regions.
+[Exactly one of A, B, C](!#exactly-one-of-the-three-sets) — elements in exactly one of the three sets. Shades the three "only" regions.
 
-[Exactly two of $A, B, C$](!#exactly-two-of-the-three-sets) — elements in exactly two of the three sets. Shades the three pairwise-but-not-triple regions, excluding the central triple intersection.
+[Exactly two of A, B, C](!#exactly-two-of-the-three-sets) — elements in exactly two of the three sets. Shades the three pairwise-but-not-triple regions, excluding the central triple intersection.
 
-[At least two of $A, B, C$](!#at-least-two-of-the-three-sets) — elements in two or three sets. Combines "exactly two" with the triple intersection.
+[At least two of A, B, C](!#at-least-two-of-the-three-sets) — elements in two or three sets. Combines "exactly two" with the triple intersection.
 
-[At most one of $A, B, C$](!#at-most-one-of-the-three-sets) — elements in zero or one sets. Combines the outside region with the three "only" regions.
+[At most one of A, B, C](!#at-most-one-of-the-three-sets) — elements in zero or one sets. Combines the outside region with the three "only" regions.
 
 These identities are typical of how three-set Venn diagrams are applied in combinatorics, probability (inclusion-exclusion), and survey analysis. The two-set case collapses most of them — "exactly two of two" is just the intersection, "at least two of two" is also the intersection.
 
@@ -310,7 +310,7 @@ With the example $A = \\{1,2,3\\}$, the four pieces sort the elements by which n
       title: `The Set B on Its Own`,
       content: `The lower-left circle, fully shaded: B-only, the slivers shared with $A$ and with $C$, and the center.`,
       before: ``,
-      after: `Nothing distinguishes $B$'s frame from [$A$'s](!#the-set-a-on-its-own) except position — rotate the diagram $120°$ and they trade places. That rotational symmetry is the three-set face of commutativity: any identity indifferent to the naming of sets must produce rotation-symmetric families of frames.
+      after: `Nothing distinguishes $B$'s frame from [A's](!#the-set-a-on-its-own) except position — rotate the diagram $120°$ and they trade places. That rotational symmetry is the three-set face of commutativity: any identity indifferent to the naming of sets must produce rotation-symmetric families of frames.
 
 The decomposition reads the same way: $B$ splits into its private region plus three shared pieces, and the explorer's tooltips name each one on hover.`,
       link: '',

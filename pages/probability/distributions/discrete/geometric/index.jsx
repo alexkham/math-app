@@ -1324,7 +1324,7 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
           id:'pmf-pair',
           tex:`$P(X{=}k) = q^{k-1}p$ vs $q^k p$`,
           read:`k-minus-one failures then a success — or k failures then a success`,
-          means:`The exponent carries the convention: $q^{k-1}p$ spells "the $k$-th trial succeeds after $k{-}1$ failures", $q^k p$ spells "$k$ failures, then success" — the [failure abbreviation $q$](!/probability/distributions/discrete/binomial#15) doing the compression in both. Read the exponent before the formula: it is the convention's signature inside the pmf itself.`,
+          means:`The exponent carries the convention: $q^{k-1}p$ spells "the $k$-th trial succeeds after $k{-}1$ failures", $q^k p$ spells "$k$ failures, then success" — the [failure abbreviation q](!/probability/distributions/discrete/binomial#15) doing the compression in both. Read the exponent before the formula: it is the convention's signature inside the pmf itself.`,
           cases:`The tail closes in one mark: $P(X > k) = q^k$ under the trials convention — surviving $k$ trials means $k$ straight failures — the cleanest [tail-probability](!/probability/inequalities/markov#notation) formula any distribution owns, and the engine behind the memoryless property below.`,
           confusedWith:`A typo. The two pmfs differ only in an exponent's $-1$ — easy to "correct" in either direction when copying between sources; the support clause beside the formula is the arbiter of which exponent is right.`,
         },

@@ -377,7 +377,7 @@ This works because [exponential functions](!/algebra/powers/exponential-function
 
 For $2^x = 8$, recognize that $8 = 2^3$. The equation becomes $2^x = 2^3$, so $x = 3$.
 
-The method extends to cases where the connection between bases is less obvious. The equation $4^x = 8$ involves different bases, but both are [powers of $2$](!/algebra/powers/natural-exponents): $4 = 2^2$ and $8 = 2^3$. Rewriting gives $(2^2)^x = 2^3$, which by the [power of a power rule](!/algebra/powers/exponent-rules/) becomes $2^{2x} = 2^3$. Matching exponents: $2x = 3$, so $x = \\frac{3}{2}$.
+The method extends to cases where the connection between bases is less obvious. The equation $4^x = 8$ involves different bases, but both are [powers of 2](!/algebra/powers/natural-exponents): $4 = 2^2$ and $8 = 2^3$. Rewriting gives $(2^2)^x = 2^3$, which by the [power of a power rule](!/algebra/powers/exponent-rules/) becomes $2^{2x} = 2^3$. Matching exponents: $2x = 3$, so $x = \\frac{3}{2}$.
 
 The equation $9^{x+1} = 27$ works the same way. Both bases are powers of $3$: $9 = 3^2$ and $27 = 3^3$. Rewriting: $(3^2)^{x+1} = 3^3$, giving $3^{2(x+1)} = 3^3$. So $2(x+1) = 3$, and $x = \\frac{1}{2}$.
 
@@ -431,7 +431,7 @@ $$t^2 - 3t + 2 = 0$$
 
 This [factors](!/algebra/polynomials/factoring) as $(t - 1)(t - 2) = 0$, giving $t = 1$ or $t = 2$.
 
-Substituting back: $2^x = 1$ gives $x = 0$ (since [any positive base raised to zero equals $1$](!/algebra/powers/zero-powers)), and $2^x = 2$ gives $x = 1$. Both solutions are valid.
+Substituting back: $2^x = 1$ gives $x = 0$ (since [any positive base raised to zero equals 1](!/algebra/powers/zero-powers)), and $2^x = 2$ gives $x = 1$. Both solutions are valid.
 
 The substitution works whenever the equation involves two exponential terms where one exponent is double the other — $a^{2x}$ and $a^x$, or $a^{4x}$ and $a^{2x}$. The doubled exponent creates a perfect square under substitution, converting the exponential equation into a polynomial one.
 

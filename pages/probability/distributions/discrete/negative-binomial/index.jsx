@@ -1310,7 +1310,7 @@ Note: The geometric distribution is a special case of the negative binomial dist
           id:'shifted-coefficient',
           tex:`$P(X{=}k) = \\dbinom{k-1}{r-1} p^r q^{k-r}$`,
           read:`arrange the first k-minus-one trials; the last one is pinned as the r-th success`,
-          means:`The coefficient's double shift is the formula's signature: the final trial **must** be the $r$-th success, so only the first $k{-}1$ trials are free to arrange, and only $r{-}1$ successes go among them — $\\binom{k-1}{r-1}$, not $\\binom{k}{r}$. The [failure abbreviation $q$](!/probability/distributions/discrete/binomial#15) compresses the tail as usual.`,
+          means:`The coefficient's double shift is the formula's signature: the final trial **must** be the $r$-th success, so only the first $k{-}1$ trials are free to arrange, and only $r{-}1$ successes go among them — $\\binom{k-1}{r-1}$, not $\\binom{k}{r}$. The [failure abbreviation q](!/probability/distributions/discrete/binomial#15) compresses the tail as usual.`,
           cases:`The failures-counting convention wears a different coat: $\\binom{k+r-1}{k} p^r q^k$ — same pinned-last-trial logic, re-indexed so $k$ counts failures alone; the coefficient's shape (shifted top-and-bottom vs summed top) is itself a fingerprint of which convention is in force.`,
           confusedWith:`The binomial's unshifted $\\binom{n}{k}$. Restoring the "missing" ones — writing $\\binom{k}{r}$ — counts arrangements where the last trial is a failure, sequences that never stop at $k$; the shift is the mathematics, not a typo.`,
         },

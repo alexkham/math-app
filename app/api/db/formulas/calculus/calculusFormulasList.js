@@ -2202,7 +2202,7 @@ $|x| > 1$.`,
     link: { label: 'Hyperbolic Functions: Sinh, Cosh, Tanh', url: '/calculus/derivatives/special#4' },
     fields: {
       explanation: `
-Follows directly from the definition $\\sinh x = \\frac{e^x - e^{-x}}{2}$ together with the [derivative of $e^x$](!/calculus/formulas#derivative_of_natural_exponential): differentiating gives $\\frac{e^x + e^{-x}}{2} = \\cosh x$. Hyperbolic derivatives mirror trigonometric derivatives but with no sign flip between $\\sinh$ and $\\cosh$ — both differentiate to each other without a negative.`,
+Follows directly from the definition $\\sinh x = \\frac{e^x - e^{-x}}{2}$ together with the [derivative of e^x](!/calculus/formulas#derivative_of_natural_exponential): differentiating gives $\\frac{e^x + e^{-x}}{2} = \\cosh x$. Hyperbolic derivatives mirror trigonometric derivatives but with no sign flip between $\\sinh$ and $\\cosh$ — both differentiate to each other without a negative.`,
       related_formulas: `
 - [Derivative of Hyperbolic Cosine](!/calculus/formulas#derivative_of_hyperbolic_cosine)
 - [Derivative of Natural Exponential](!/calculus/formulas#derivative_of_natural_exponential)`,
@@ -2610,7 +2610,7 @@ $x \\neq 0$.`,
 //     link: { label: 'Hyperbolic Functions: Sinh, Cosh, Tanh', url: '/calculus/derivatives/special#4' },
 //     fields: {
 //       explanation: `
-// Follows directly from the definition $\\sinh x = \\frac{e^x - e^{-x}}{2}$ together with the [derivative of $e^x$](!/calculus/formulas#derivative_of_natural_exponential): differentiating gives $\\frac{e^x + e^{-x}}{2} = \\cosh x$. Hyperbolic derivatives mirror trigonometric derivatives but with no sign flip between $\\sinh$ and $\\cosh$ — both differentiate to each other without a negative.`,
+// Follows directly from the definition $\\sinh x = \\frac{e^x - e^{-x}}{2}$ together with the [derivative of e^x](!/calculus/formulas#derivative_of_natural_exponential): differentiating gives $\\frac{e^x + e^{-x}}{2} = \\cosh x$. Hyperbolic derivatives mirror trigonometric derivatives but with no sign flip between $\\sinh$ and $\\cosh$ — both differentiate to each other without a negative.`,
 //       related_definitions: `
 // - [Derivative](!/calculus/definitions#derivative)`,
 //       related_formulas: `
