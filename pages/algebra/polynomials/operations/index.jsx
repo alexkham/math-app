@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -622,56 +623,19 @@ Some of these operations are simple: adding polynomials amounts to collecting li
 
 const faqQuestions = {
   obj1: {
-    question: "How do you add polynomials?",
-    answer: "To add polynomials, combine like terms — terms with the same variable raised to the same exponent. For (2x² + 3x - 1) + (x² - 5x + 4), group the x² terms, the x terms, and the constants: (2x² + x²) + (3x - 5x) + (-1 + 4) = 3x² - 2x + 3."
+    question: "Why isn't $(5x^2 + 2x - 3) - (x^2 - 4x + 1)$ equal to $4x^2 - 2x - 2$?",
+    answer: "Because the minus sign has to reach every term in the second bracket, not just the first. Negating fully gives $-x^2 + 4x - 1$, so the sum is $4x^2 + 6x - 4$. Terms that were already negative flip too: the $-4x$ becomes $+4x$. Negating only the leading term is the single most common error in polynomial subtraction.",
+    sectionId: "2"
   },
   obj2: {
-    question: "How do you subtract polynomials?",
-    answer: "Distribute the negative sign across every term of the polynomial being subtracted, then combine like terms. For (2x² + 3x - 1) - (x² - 5x + 4), negate to get -x² + 5x - 4, then add: 2x² - x² + 3x + 5x - 1 - 4 = x² + 8x - 5."
+    question: "Can adding two cubics produce a quadratic?",
+    answer: "Yes, when the leading terms cancel. Adding $2x^3 + x$ to $-2x^3 + 5x^2$ gives $5x^2 + x$, a degree-two result from two degree-three inputs. That is why the rule for sums says the degree is at most the larger input degree. Multiplication never behaves this way: degrees add exactly, since neither leading coefficient is zero.",
+    sectionId: "8"
   },
   obj3: {
-    question: "How do you multiply polynomials?",
-    answer: "Multiply every term of one polynomial by every term of the other, then combine like terms. For each pair, multiply coefficients and add exponents on matching variables. The degree of the product equals the sum of the degrees of the factors."
-  },
-  obj4: {
-    question: "What is the FOIL method?",
-    answer: "FOIL is a mnemonic for multiplying two binomials: First, Outer, Inner, Last. For (2x + 3)(x - 4): First 2x·x = 2x², Outer 2x·(-4) = -8x, Inner 3·x = 3x, Last 3·(-4) = -12. Combine to get 2x² - 5x - 12. FOIL only works for two binomials."
-  },
-  obj5: {
-    question: "What are the special product formulas?",
-    answer: "(a + b)² = a² + 2ab + b² and (a - b)² = a² - 2ab + b² for squaring binomials. (a + b)(a - b) = a² - b² for conjugates. For cubes: (a + b)(a² - ab + b²) = a³ + b³ and (a - b)(a² + ab + b²) = a³ - b³."
-  },
-  obj6: {
-    question: "How does polynomial long division work?",
-    answer: "Divide the leading term of the dividend by the leading term of the divisor to get the first term of the quotient. Multiply this by the divisor and subtract from the dividend. Repeat with the remainder until its degree is less than the divisor's degree."
-  },
-  obj7: {
-    question: "What is synthetic division?",
-    answer: "Synthetic division is a shortcut for dividing by (x - c) using only coefficients. Write the dividend's coefficients, place c to the left, then repeatedly multiply and add. The final row gives the quotient coefficients and remainder. It's faster than long division but only works for linear divisors."
-  },
-  obj8: {
-    question: "When can you use synthetic division?",
-    answer: "Synthetic division works only when the divisor is a linear binomial of the form (x - c). For divisors like x² + 1, 2x - 3, or any polynomial of degree two or higher, you must use polynomial long division instead."
-  },
-  obj9: {
-    question: "What is the degree of a polynomial product?",
-    answer: "The degree of a product equals the sum of the degrees of the factors. A degree-2 polynomial times a degree-3 polynomial always produces a degree-5 polynomial. This rule has no exceptions because leading terms multiply but never cancel."
-  },
-  obj10: {
-    question: "What is the degree of a polynomial sum?",
-    answer: "The degree of a sum is at most the maximum of the two input degrees. It can be less if the leading terms cancel — adding 2x³ + x and -2x³ + 5x² produces 5x² + x, a degree-2 result from two degree-3 polynomials."
-  },
-  obj11: {
-    question: "What does it mean when polynomial division has no remainder?",
-    answer: "When the remainder is zero, the divisor divides the dividend evenly, meaning the divisor is a factor of the dividend. For example, if dividing P(x) by (x - 2) gives remainder 0, then (x - 2) is a factor and x = 2 is a root of P(x)."
-  },
-  obj12: {
-    question: "What is the most common mistake in polynomial subtraction?",
-    answer: "The most common error is negating only the first term instead of every term. For (5x² + 2x - 3) - (x² - 4x + 1), you must change all signs: -x² + 4x - 1. Negating only x² gives the wrong answer. Always distribute the negative across all terms."
-  },
-  obj13: {
-    question: "How do you handle missing terms in polynomial division?",
-    answer: "Insert placeholder terms with zero coefficients. To divide x³ + 4 by x + 1, rewrite the dividend as x³ + 0x² + 0x + 4. This keeps terms aligned during subtraction steps and prevents errors in the quotient."
+    question: "How do you handle missing terms in polynomial long division?",
+    answer: "Write them in with zero coefficients so the columns line up. Dividing $x^3 + 4$ by $x + 1$ means treating the dividend as $x^3 + 0x^2 + 0x + 4$. A missing power is a zero coefficient rather than an absent slot, and leaving the gap open causes terms to misalign during the subtraction steps and corrupts the quotient.",
+    sectionId: "6"
   }
 }
 
@@ -746,19 +710,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -892,6 +843,22 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Polynomial Operations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -1003,12 +970,6 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -9,6 +9,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -561,39 +562,19 @@ These geometric readings do not replace the algebraic method, but they provide a
 
 const faqQuestions = {
   obj1: {
-    question: "What is absolute value?",
-    answer: "Absolute value |x| returns the distance from x to zero on the number line. It equals x when x ≥ 0 and -x when x < 0. The result is always non-negative, so |x| ≥ 0 for all real x.",
-    sectionId: "1"
+    question: "Does $|a + b|$ equal $|a| + |b|$?",
+    answer: "Not in general. The bars are a bracket pair, not a factor that distributes across a sum, so the inside is evaluated first: $|3 + (-5)| = 2$, while $|3| + |-5| = 8$. What always holds is the weaker triangle inequality $|a + b| \\leq |a| + |b|$, with equality only when $a$ and $b$ share a sign.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you solve |A| = B?",
-    answer: "If B > 0: split into A = B or A = -B and solve both. If B = 0: solve A = 0 only. If B < 0: no solution exists — absolute value is never negative. Always check the sign of B first.",
-    sectionId: "2"
+    question: "Why do vertical bars mean different things in different places?",
+    answer: "They are the most overloaded bracket in mathematics. Some uses keep this meaning: $|z|$ for a [complex number](!/complex-numbers/basics) is still distance to the origin, and $\\|v\\|$ doubles the bars for vector length. Others do not: $|A|$ on a set is [cardinality](!/set-theory/basics), a count, and $|M|$ on a matrix is the [determinant](!/linear-algebra/determinants), which can be negative.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you solve |f(x)| = k?",
-    answer: "For k > 0, split into two equations: f(x) = k and f(x) = -k. Solve each independently using appropriate methods (linear, quadratic, etc.). The union of solutions is the complete answer.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you solve |f(x)| = |g(x)|?",
-    answer: "Split into two cases: f(x) = g(x) or f(x) = -g(x). Alternatively, square both sides to get f(x)² = g(x)², but verify all candidates since squaring can introduce extraneous solutions.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do you solve equations with multiple absolute value terms?",
-    answer: "Identify critical points where each expression inside |...| equals zero. Divide the number line into intervals, solve on each interval using the piecewise definition, and verify each solution lies in its interval.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Why do extraneous solutions appear in absolute value equations?",
-    answer: "Extraneous solutions enter through squaring, which treats |A| = B and |A| = -B identically. If B is negative at a candidate solution, that candidate is extraneous. Case-splitting avoids this when done correctly.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the geometric meaning of absolute value equations?",
-    answer: "|x - a| = d asks which points are exactly d units from a (answer: x = a ± d). |x - a| = |x - b| asks which point is equidistant from a and b (answer: the midpoint (a+b)/2).",
-    sectionId: "7"
+    question: "Can you get rid of absolute value bars by squaring?",
+    answer: "Yes, when both sides carry bars. Because $|x| = \\sqrt{x^2}$, the equation $|A| = |B|$ is equivalent to $A^2 = B^2$, which turns a case analysis into one polynomial equation. It does not work for $|A| = k$ with a bare constant, where squaring introduces the spurious branch $A = -k$ unless $k \\geq 0$ is checked first.",
+    sectionId: "notation"
   }
 }
 
@@ -669,19 +650,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 return {
@@ -834,6 +802,22 @@ export default function AbsoluteValueEquationsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Absolute Value Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -871,12 +855,6 @@ export default function AbsoluteValueEquationsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

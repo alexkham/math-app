@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -482,56 +483,19 @@ Translating between the equation and the picture is a skill that runs both ways.
 
 const faqQuestions = {
   obj1: {
-    question: "What determines the end behavior of a polynomial graph?",
-    answer: "End behavior is determined by the degree and leading coefficient. Even degree: both ends go the same direction (up if leading coefficient positive, down if negative). Odd degree: ends go opposite directions (right up/left down if positive, right down/left up if negative)."
+    question: "Why are polynomial graphs always smooth?",
+    answer: "Because a polynomial is differentiable at every point, which rules out corners, cusps and sharp points entirely. Every change of direction happens as a curve rather than an angle, and the graph has no breaks or gaps either, since a polynomial is defined for every real input. A sketch with a sharp bend is not the graph of any polynomial.",
+    sectionId: "12"
   },
   obj2: {
-    question: "How do you find the y-intercept of a polynomial?",
-    answer: "Evaluate P(0) — substitute x = 0 into the polynomial. Since every power of x vanishes at zero, P(0) equals the constant term. For P(x) = 3x⁴ - 2x² + 7, the y-intercept is (0, 7)."
+    question: "Do two polynomials with the same roots have the same graph?",
+    answer: "No, because the leading coefficient decides the orientation. The polynomials $x^4 - 3x^2 + 1$ and $-x^4 + 3x^2 - 1$ share every root and every turning point, yet one rises at both extremes while the other falls. Flipping the sign of the leading coefficient reflects the whole curve without moving a single intercept.",
+    sectionId: "12"
   },
   obj3: {
-    question: "How do you find the x-intercepts of a polynomial?",
-    answer: "Solve P(x) = 0 to find the real roots. These are the x-values where the graph crosses or touches the x-axis. Methods include factoring, the Rational Root Theorem, quadratic formula, or synthetic division depending on the polynomial's complexity."
-  },
-  obj4: {
-    question: "How many turning points can a polynomial have?",
-    answer: "A polynomial of degree n has at most n - 1 turning points. A quadratic (degree 2) has exactly 1 turning point (the vertex). A cubic (degree 3) has at most 2. A quartic (degree 4) has at most 3. The actual number may be less than the maximum."
-  },
-  obj5: {
-    question: "How does multiplicity affect the graph at a root?",
-    answer: "Odd multiplicity: the graph crosses the x-axis (multiplicity 1 crosses at an angle; multiplicity 3+ crosses with flattening). Even multiplicity: the graph touches the x-axis and turns back without crossing, like a parabola tangent to the axis."
-  },
-  obj6: {
-    question: "What is the difference between crossing and touching the x-axis?",
-    answer: "Crossing means the graph passes through the axis, changing from positive to negative values (or vice versa) — this happens at roots with odd multiplicity. Touching means the graph meets the axis and bounces back, staying on the same side — this happens at roots with even multiplicity."
-  },
-  obj7: {
-    question: "How do you graph a quadratic polynomial?",
-    answer: "Find the vertex at x = -b/(2a), determine if it opens up (a > 0) or down (a < 0), find the y-intercept at (0, c), and use the discriminant b² - 4ac to determine if there are 0, 1, or 2 x-intercepts. The axis of symmetry is x = -b/(2a)."
-  },
-  obj8: {
-    question: "What is special about cubic polynomial graphs?",
-    answer: "Cubic graphs always have opposite end behavior (one end up, one down) and must cross the x-axis at least once. They have at most 2 turning points and always have an inflection point where concavity changes, located at x = -b/(3a)."
-  },
-  obj9: {
-    question: "What is an even function in terms of polynomials?",
-    answer: "An even function satisfies P(-x) = P(x), making its graph symmetric about the y-axis. A polynomial is even when it contains only even powers of x (including the constant term x⁰). Example: P(x) = x⁴ - 3x² + 2."
-  },
-  obj10: {
-    question: "What is an odd function in terms of polynomials?",
-    answer: "An odd function satisfies P(-x) = -P(x), making its graph symmetric about the origin. A polynomial is odd when it contains only odd powers of x — no constant term, no even powers. Example: P(x) = x³ - 5x."
-  },
-  obj11: {
-    question: "What are the steps to sketch a polynomial graph?",
-    answer: "1) Determine end behavior from degree and leading coefficient. 2) Find y-intercept: P(0). 3) Find x-intercepts by solving P(x) = 0. 4) Note multiplicity behavior at each root. 5) Find turning points if possible. 6) Connect with a smooth curve respecting all constraints."
-  },
-  obj12: {
-    question: "Why are polynomial graphs always smooth?",
-    answer: "Polynomials are differentiable everywhere, meaning they have no breaks, jumps, holes, or sharp corners. The curve flows continuously, bending and turning but never creating angles or cusps. This distinguishes them from piecewise or absolute value functions."
-  },
-  obj13: {
-    question: "How many x-intercepts can a polynomial have?",
-    answer: "A polynomial of degree n has at most n x-intercepts (real roots). It may have fewer if some roots are complex or repeated. A polynomial may have no x-intercepts at all if all its roots are complex, like x² + 1."
+    question: "Does a cubic always have two turning points?",
+    answer: "No. The bound of $n - 1$ is a maximum, not a promise. A cubic has at most two turning points, and $x^3 - 3x$ achieves that, but $x^3$ has none at all: it rises steadily with an inflection at the origin and never reverses direction. Drawing more than $n - 1$ turns is impossible; drawing fewer is common.",
+    sectionId: "4"
   }
 }
 
@@ -606,19 +570,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -792,6 +743,22 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Graphing Polynomials FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'14',
     //     title:sectionsContent.obj14.title,
@@ -870,12 +837,6 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -407,54 +408,19 @@ The expressions $\\log(7)/\\log(3)$ and $\\ln(7)/\\ln(3)$ compute to identical d
 
 const faqQuestions = {
   obj1: {
-    question: "How do you solve log(x) = k?",
-    answer: "Convert to exponential form using the definition: log_a(x) = k means x = a^k. For example, log₂(x) = 5 gives x = 2⁵ = 32. For ln(x) = 4, x = e⁴ ≈ 54.6.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How do you solve equations with log on both sides?",
-    answer: "Use the one-to-one property: if log_a(M) = log_a(N), then M = N. For log₄(3x+2) = log₄(x+10), set 3x+2 = x+10 and solve to get x = 4.",
+    question: "Do you always reject negative solutions in logarithmic equations?",
+    answer: "No. What has to be positive is each argument, not the value of $x$ itself. Solving $\\ln(x^2) = \\ln(9)$ gives $x = \\pm 3$, and both are valid because $(-3)^2 = 9$ is positive. Contrast $\\log(x) + \\log(x - 3) = 1$, where $x = -2$ fails only because it makes $\\log(-2)$ undefined.",
     sectionId: "2"
   },
+  obj2: {
+    question: "Where do extraneous solutions in logarithmic equations come from?",
+    answer: "Condensing widens the domain. In $\\log_3(x - 5) + \\log_3(x + 1) = 2$ the original requires $x > 5$, but the condensed form $\\log_3((x-5)(x+1)) = 2$ only requires the product to be positive, which also permits $x < -1$. The algebra invents nothing; the extra root genuinely solves the condensed equation, and the original domain is what rules it out.",
+    sectionId: "5"
+  },
   obj3: {
-    question: "How do you combine logarithms to solve an equation?",
-    answer: "Use logarithm rules to condense multiple logs into one. For log₂(x) + log₂(x-2) = 3, combine to log₂(x(x-2)) = 3, then convert: x² - 2x = 8.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are domain restrictions in logarithmic equations?",
-    answer: "Every argument of every logarithm must be positive. For log(x-5) + log(x+1), you need x-5 > 0 AND x+1 > 0, so x > 5. Check all solutions against these restrictions.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are extraneous solutions in log equations?",
-    answer: "Extraneous solutions are algebraic solutions that violate domain restrictions. For log(x) + log(x-3) = 1, solving gives x = 5 or x = -2, but x = -2 makes log(-2) undefined, so reject it.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you solve (log x)² - 5log(x) + 6 = 0?",
-    answer: "Use substitution: let u = log(x). Solve u² - 5u + 6 = 0 to get u = 2 or u = 3. Back-substitute: log(x) = 2 gives x = 100, log(x) = 3 gives x = 1000.",
+    question: "Do substitution problems like $(\\log_2 x)^2 - 5\\log_2 x + 6 = 0$ need a domain check?",
+    answer: "Rarely, because back-substitution takes care of it. Solving $\\log_2 x = u$ gives $x = 2^u$, which is positive for every real $u$, so the domain condition holds automatically and nothing is rejected. Substitution does not widen the domain the way condensing does. The exception is a substitution that divides, as in $\\ln x + \\frac{6}{\\ln x} = 5$, which needs $\\ln x \\neq 0$.",
     sectionId: "6"
-  },
-  obj7: {
-    question: "How do you solve exponential equations like 3^x = 7?",
-    answer: "Take logarithms of both sides: log(3^x) = log(7), so x·log(3) = log(7). Divide: x = log(7)/log(3) ≈ 1.771. Either log or ln gives the same answer.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you solve 2^(x+3) = 5^(x-1)?",
-    answer: "Take ln of both sides: (x+3)ln(2) = (x-1)ln(5). Expand, collect x terms on one side, and solve. This gives x = (ln5 + 3ln2)/(ln5 - ln2) ≈ 4.03.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Does it matter if I use log or ln to solve equations?",
-    answer: "No. For 3^x = 7, both log(7)/log(3) and ln(7)/ln(3) give the same decimal answer. Use ln when the base is e, log when base is 10, otherwise either works.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "Why must you always check solutions in log equations?",
-    answer: "Algebraic manipulation can produce values that make original logarithms undefined. Substituting back into the original equation catches these extraneous solutions before reporting the final answer.",
-    sectionId: "5"
   }
 }
 
@@ -529,19 +495,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/logarithms/equations"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -684,6 +637,22 @@ export default function EquationsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Logarithmic Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -723,12 +692,6 @@ export default function EquationsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

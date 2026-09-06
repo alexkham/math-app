@@ -7,6 +7,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -366,44 +367,19 @@ Equations involving rates, reciprocals of linear expressions, or differences of 
 
 const faqQuestions = {
   obj1: {
-    question: "What is a rational equation?",
-    answer: "A rational equation contains at least one fraction where the variable appears in the denominator. Unlike equations with constant denominators (which are just linear equations), variable denominators create forbidden values and require special solving techniques.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What are domain restrictions in rational equations?",
-    answer: "Domain restrictions are values that make any denominator equal zero. These values must be identified before solving and excluded from the solution set. Any value that zeros a denominator is never a valid solution.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you solve rational equations by clearing denominators?",
-    answer: "Multiply every term on both sides by the least common denominator (LCD) of all fractions. This eliminates all fractions, converting the rational equation into a polynomial equation that can be solved with standard techniques.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are extraneous solutions?",
-    answer: "Extraneous solutions are values that emerge from the algebra but don't satisfy the original equation — typically because they violate domain restrictions. Every candidate solution must be checked against the original equation to filter out extraneous results.",
+    question: "Can a rational equation have infinitely many solutions?",
+    answer: "Yes, but usually with a hole in them. Clearing denominators in $\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$ leaves $x - 3 = x - 3$, an identity, so every real number appears to work. The excluded value survives that check though: $x = 3$ zeroes a denominator, so the solution set is every real number except $3$.",
     sectionId: "4"
   },
-  obj5: {
-    question: "How do you solve equations with monomial denominators?",
-    answer: "When denominators are single terms like x or x², the LCD is the highest power present. Multiply through by the LCD to clear all fractions, solve the resulting polynomial, and verify solutions against domain restrictions.",
-    sectionId: "5"
+  obj2: {
+    question: "Does it have to be the least common denominator, or will any common denominator do?",
+    answer: "Any common multiple clears the fractions, but the least one keeps the resulting polynomial smallest. Choose something too small and some fractions survive the multiplication; choose something needlessly large and you carry extra factors into a messier polynomial for no gain. The LCD takes every distinct factor at the highest power it appears.",
+    sectionId: "3"
   },
-  obj6: {
-    question: "How do you handle polynomial denominators?",
-    answer: "Factor all polynomial denominators completely first. Factoring reveals domain restrictions (excluded values) and identifies the LCD. Only after factoring can you accurately clear denominators and solve.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "When can you use cross-multiplication?",
-    answer: "Cross-multiplication applies when the equation has exactly one fraction on each side: A/B = C/D becomes AD = BC. This is a special case of clearing denominators where the LCD is BD. Domain restrictions still apply.",
+  obj3: {
+    question: "How do you spot that an equation is really a proportion?",
+    answer: "Combine terms and count the fractions: if exactly one fraction sits on each side, cross-multiplication applies and $\\frac{A}{B} = \\frac{C}{D}$ becomes $AD = BC$. With three or more fractions, or with fractions being added on one side, fall back to the general LCD method. Either way the domain restrictions still have to be checked.",
     sectionId: "7"
-  },
-  obj8: {
-    question: "What equations reduce to rational form?",
-    answer: "Equations with negative exponents (x⁻¹ = 1/x), symmetric expressions (x + 1/x), and reciprocal relationships all reduce to rational equations. Rewrite them with fraction notation, then apply standard clearing-denominator techniques.",
-    sectionId: "8"
   }
 }
 
@@ -479,19 +455,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -625,6 +588,22 @@ export default function RationalEquationsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Rational Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -662,12 +641,6 @@ export default function RationalEquationsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

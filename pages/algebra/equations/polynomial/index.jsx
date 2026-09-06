@@ -7,6 +7,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -595,49 +596,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a polynomial equation?",
-    answer: "A polynomial equation has the form aₙxⁿ + aₙ₋₁xⁿ⁻¹ + ... + a₁x + a₀ = 0 where aₙ ≠ 0. The degree n determines the maximum number of roots. Linear (n=1) and quadratic (n=2) are special cases with complete solution formulas.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What does the Fundamental Theorem of Algebra say?",
-    answer: "Every polynomial of degree n ≥ 1 with complex coefficients has exactly n roots in ℂ (counted with multiplicity). This means every polynomial factors completely into linear factors over the complex numbers.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the Factor Theorem?",
-    answer: "If P(r) = 0, then (x - r) divides P(x) evenly. Finding roots and finding factors are equivalent. Once a root r is found, divide by (x - r) to reduce the degree by one and continue solving.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How does the Rational Root Theorem work?",
-    answer: "For a polynomial with integer coefficients, any rational root p/q in lowest terms has p dividing the constant term and q dividing the leading coefficient. This creates a finite list of candidates to test.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "Can cubic equations be solved exactly?",
-    answer: "Yes, Cardano's formula provides exact solutions using radicals. However, the formula is complex and may require passing through complex numbers even when all roots are real. The rational root theorem often provides a simpler approach.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Can quartic equations be solved exactly?",
-    answer: "Yes, Ferrari's method reduces a quartic to a resolvent cubic, then to two quadratics. This is the highest degree with a general formula in radicals. In practice, special structures (bi-quadratic, factorable) often allow simpler methods.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "Why can't degree 5+ equations be solved by radicals?",
-    answer: "The Abel-Ruffini theorem proves no formula using arithmetic and radicals can solve every polynomial of degree 5 or higher. Specific quintics may still factor or have rational roots, but no universal formula exists.",
+    question: "Does Abel–Ruffini mean fifth-degree equations cannot be solved?",
+    answer: "No, and this is the usual misreading. Plenty of quintics are solvable: many factor, many have rational roots, many yield to substitution. What the theorem rules out is a single formula in arithmetic and radicals that takes five arbitrary coefficients and returns the roots. Individual equations are fine; a universal formula is what does not exist.",
     sectionId: "7"
   },
-  obj8: {
-    question: "What is root multiplicity?",
-    answer: "A root r has multiplicity k if (x-r)^k divides P(x) but (x-r)^(k+1) does not. Odd multiplicity means the graph crosses the x-axis; even multiplicity means it touches and turns back. Higher multiplicity means greater flattening.",
+  obj2: {
+    question: "How does root multiplicity show up on the graph?",
+    answer: "Parity decides. At odd multiplicity the graph crosses the axis; at even multiplicity it touches and turns back without crossing, making the root a local extremum. Higher multiplicity flattens the curve near the root either way, so a triple root crosses but flattens into an inflection point sitting on the axis.",
     sectionId: "8"
   },
-  obj9: {
-    question: "What are Vieta's formulas for polynomials?",
-    answer: "Vieta's formulas express coefficients as symmetric functions of roots: the sum of roots equals -aₙ₋₁/aₙ, the sum of pairwise products equals aₙ₋₂/aₙ, and so on. The product of all roots equals (-1)ⁿa₀/aₙ.",
-    sectionId: "9"
+  obj3: {
+    question: "If there is no formula for high degrees, how are these equations actually solved?",
+    answer: "By reduction, then approximation. The rational root theorem finds any rational roots, synthetic division factors them out and drops the degree, and the quadratic formula finishes whatever quadratic remains. When no rational root exists and nothing factors, numerical methods take over: Newton's method and bisection approximate the real roots to any precision required.",
+    sectionId: "7"
   }
 }
 
@@ -713,19 +684,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -873,6 +831,22 @@ export default function PolynomialEquationsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Polynomial Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -910,12 +884,6 @@ export default function PolynomialEquationsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

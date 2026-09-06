@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -385,44 +386,19 @@ Each step is a reversible operation that preserves equivalence, applied to lette
 
 const faqQuestions = {
   obj1: {
-    question: "What is a linear equation?",
-    answer: "A linear equation in one variable has the form ax + b = 0 where a ≠ 0. The variable appears only to the first power with no products or compositions. It always has exactly one solution: x = -b/a.",
-    sectionId: "1"
+    question: "What does it mean when the variable disappears while solving?",
+    answer: "The constants left behind decide. If they agree, as when $2(x + 3) = 2x + 6$ reduces to $6 = 6$, the equation was an identity and every real number solves it. If they clash, as when $3(x + 1) = 3x + 8$ reduces to $3 = 8$, it is a contradiction and nothing solves it. Cancelling variables is not an error.",
+    sectionId: "7"
   },
   obj2: {
-    question: "What are the properties of equality for solving equations?",
-    answer: "The addition property: adding or subtracting the same quantity on both sides preserves the solution. The multiplication property: multiplying or dividing by any nonzero constant preserves the solution. These two properties generate every valid solving step.",
+    question: "Why can't you multiply both sides by zero?",
+    answer: "Because it destroys the information you are trying to extract. Multiplying by zero turns any equation into $0 = 0$, which is true for every value of the variable, so the original solution vanishes rather than being preserved. The multiplication property of equality holds for any nonzero constant precisely to rule this out.",
     sectionId: "2"
   },
   obj3: {
-    question: "How do you solve multi-step linear equations?",
-    answer: "Gather variable terms on one side and constant terms on the other using addition/subtraction, then isolate the variable by dividing. Each step must preserve equivalence. The order is flexible but the logic is rigid.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you solve equations with parentheses?",
-    answer: "Use the distributive property to clear parentheses first, then solve as a standard multi-step equation. Watch for negative signs before parentheses — they distribute to every term inside, a common error source.",
+    question: "Why is $-(x + 4)$ equal to $-x - 4$ rather than $-x + 4$?",
+    answer: "Because the minus sign is a factor of $-1$ distributed across the whole bracket, reaching every term inside rather than only the first. So $-(x + 4) = -x - 4$, and likewise $-(x - 4) = -x + 4$. Getting the second term's sign wrong changes the solution outright, which makes this one of the most common algebra errors.",
     sectionId: "4"
-  },
-  obj5: {
-    question: "How do you solve linear equations with fractions?",
-    answer: "Multiply every term on both sides by the least common denominator to clear all fractions at once. This works because the LCD is a nonzero constant. The result is an equivalent equation with integer coefficients.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you solve equations with decimals?",
-    answer: "Multiply both sides by the appropriate power of 10 (10 for tenths, 100 for hundredths) to convert all coefficients to integers. This is equivalent to clearing fractional denominators in one step.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What are identity and contradiction equations?",
-    answer: "An identity occurs when variable terms cancel leaving a true statement (like 6 = 6) — every real number is a solution. A contradiction occurs when they leave a false statement (like 3 = 8) — no solution exists.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you solve literal equations for a specific variable?",
-    answer: "Apply the same properties of equality, treating other variables as constants. Isolate the target variable using addition/subtraction and multiplication/division. The logic is identical to numerical equations — only the symbols differ.",
-    sectionId: "8"
   }
 }
 
@@ -498,19 +474,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -652,6 +615,22 @@ export default function LinearEquationsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Linear Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -689,12 +668,6 @@ export default function LinearEquationsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

@@ -539,44 +539,6 @@ const introContent = {
 
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What are the two forms of absolute value inequalities?",
-    answer: "The less-than form |f(x)| < k converts to a conjunction -k < f(x) < k (bounded interval). The greater-than form |f(x)| > k converts to a disjunction f(x) < -k or f(x) > k (two rays). These two conversions are the entire method.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How do you solve |f(x)| < k?",
-    answer: "Convert to -k < f(x) < k and solve as a compound inequality. If k > 0, the solution is a bounded interval. If k ≤ 0, the solution is empty (absolute value is never negative). For linear f(x), solve as a three-part chain.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you solve |f(x)| > k?",
-    answer: "Convert to f(x) < -k OR f(x) > k and solve each part separately. The solution is the union of two sets. If k > 0, you get two rays. If k ≤ 0, the solution is all real numbers (absolute value is always ≥ 0).",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is an example of solving an absolute value inequality?",
-    answer: "For |2x - 3| < 5: convert to -5 < 2x - 3 < 5, add 3 to get -2 < 2x < 8, divide by 2 to get -1 < x < 4. Solution: (-1, 4). Less-than always produces a bounded interval.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do you solve absolute value inequalities with quadratics inside?",
-    answer: "Convert using the same rules, then solve the resulting quadratic inequalities. For |x² - 4| < 5: solve -5 < x² - 4 < 5, which splits into x² > -1 (always true) and x² < 9 (giving -3 < x < 3). Solution: (-3, 3).",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you solve |f(x)| < |g(x)|?",
-    answer: "Use the squaring method: |f(x)| < |g(x)| becomes f(x)² < g(x)², which rearranges to (g-f)(g+f) > 0. Solve this polynomial inequality with a sign chart. Alternatively, use case-splitting by signs of f and g.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the geometric meaning of absolute value inequalities?",
-    answer: "|x - a| < d means points within distance d of a: the interval (a-d, a+d). |x - a| > d means points farther than d from a: two rays (-∞, a-d) ∪ (a+d, ∞). This distance interpretation provides instant geometric answers.",
-    sectionId: "7"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -648,19 +610,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -670,7 +619,6 @@ const schemas = {
     obj3Table,
     obj6Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Absolute Value Inequalities: Less-Than & Greater-Than | Learn Math Class",
@@ -690,7 +638,6 @@ export default function AbsoluteValueInequalitiesPage({
   obj3Table,
   obj6Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -919,12 +866,6 @@ export default function AbsoluteValueInequalitiesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -357,53 +358,18 @@ Graphing both functions on the same axes with the line $y = x$ demonstrates this
 
 const faqQuestions = {
   obj1: {
-    question: "What is the basic shape of a logarithmic graph?",
-    answer: "For base > 1, the graph rises slowly from left to right, passing through (1, 0) and (a, 1), with a vertical asymptote at x = 0. The curve is concave down throughout. For base between 0 and 1, the graph descends instead.",
-    sectionId: "1"
+    question: "Is $-\\log_2(x)$ the same as $\\log_{1/2}(x)$?",
+    answer: "Yes, they are the same function. Reflecting a logarithm across the $x$-axis is identical to inverting its base: $-\\log_a(x) = \\log_{1/a}(x)$. Both pass through $(1, 0)$ and send $(2, 1)$ to $(2, -1)$. This is why every base between $0$ and $1$ produces a decreasing curve, since such a graph is the mirror image of the increasing one with the reciprocal base.",
+    sectionId: "9"
   },
   obj2: {
-    question: "What is the domain and range of a logarithmic function?",
-    answer: "Domain is (0, ∞) — only positive x-values. Range is (-∞, ∞) — all real y-values. The graph exists only to the right of the y-axis and extends infinitely up and down.",
-    sectionId: "2"
+    question: "Is stretching a logarithmic graph the same as changing its base?",
+    answer: "Yes. A vertical stretch by a factor $c$ is exactly a change of base, since $c\\log_a(x) = \\log_{a^{1/c}}(x)$, so $2\\log_2(x)$ is the same function as $\\log_{\\sqrt{2}}(x)$. Steepness has a single source: every logarithm is a constant multiple of $\\ln(x)$. Different bases are not different shapes, only one curve at different vertical scales.",
+    sectionId: "8"
   },
   obj3: {
-    question: "What is the vertical asymptote of log(x)?",
-    answer: "The line x = 0 (the y-axis) is the vertical asymptote. As x approaches 0 from the right, log(x) approaches negative infinity for bases > 1. The graph never touches or crosses x = 0.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are the key points on any logarithmic graph?",
-    answer: "Three key points: (1, 0) since log_a(1) = 0 always; (a, 1) since log_a(a) = 1; and (1/a, -1) since log_a(1/a) = -1. Plot these first when sketching.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How does the base affect the logarithmic graph?",
-    answer: "Larger bases produce flatter curves that rise more slowly. For base > 1, the function increases. For 0 < base < 1, the function decreases (equivalent to reflecting across the x-axis).",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you shift a logarithmic graph horizontally?",
-    answer: "y = log_a(x - h) shifts the graph h units right if h > 0, or |h| units left if h < 0. The vertical asymptote moves from x = 0 to x = h. Domain becomes x > h.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you shift a logarithmic graph vertically?",
-    answer: "y = log_a(x) + k shifts the graph k units up if k > 0, or |k| units down if k < 0. The vertical asymptote stays at x = 0. The point (1, 0) moves to (1, k).",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you find the equation of a logarithmic graph?",
-    answer: "Identify the vertical asymptote (gives the horizontal shift h), find where the curve passes through to determine the base, and check for vertical stretches or shifts by comparing key points.",
-    sectionId: "10"
-  },
-  obj9: {
-    question: "How are logarithmic and exponential graphs related?",
-    answer: "They are reflections of each other across the line y = x. Every point (p, q) on y = log_a(x) corresponds to (q, p) on y = a^x. Their domains and ranges are swapped.",
-    sectionId: "11"
-  },
-  obj10: {
-    question: "What does y = -log(x) look like?",
-    answer: "Reflection across the x-axis. The graph still passes through (1, 0) but now descends instead of rising. The point (a, 1) becomes (a, -1). Equivalent to log_{1/a}(x).",
+    question: "Why does $\\log_2(-x)$ have a graph at all?",
+    answer: "Because $-x$ is positive whenever $x$ is negative, and it is the argument that must be positive, not the variable. The domain becomes $x < 0$, so the curve lies entirely left of the $y$-axis, passing through $(-1, 0)$ and $(-2, 1)$. The asymptote is still the $y$-axis, now approached from the left.",
     sectionId: "9"
   }
 }
@@ -481,19 +447,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/logarithms/graphs"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -655,6 +608,22 @@ export default function GraphsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Logarithmic Graphs FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -694,12 +663,6 @@ export default function GraphsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

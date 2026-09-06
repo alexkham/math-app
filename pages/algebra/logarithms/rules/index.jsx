@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -550,28 +551,23 @@ Raising a logarithm to a power is not the same as multiplying by that power. The
 
 const faqQuestions = {
   obj1: {
-    question: "What are the main logarithm rules?",
-    answer: "The main rules are the product rule log(xy) = log(x) + log(y), the quotient rule log(x/y) = log(x) - log(y), the power rule log(x^n) = n·log(x), and the change of base formula log_a(x) = log_b(x) / log_b(a). Each derives directly from corresponding exponent laws.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How do you expand a logarithmic expression?",
-    answer: "To expand, apply the product rule to split multiplication into addition, the quotient rule to split division into subtraction, and the power rule to bring exponents out as coefficients. Work from the outermost operation inward until each term contains a single logarithm.",
-    sectionId: "5"
-  },
-  obj3: {
-    question: "How do you condense logarithmic expressions?",
-    answer: "To condense, reverse the expansion process. Convert coefficients into exponents using the power rule, combine sums into products using the product rule, and combine differences into quotients using the quotient rule. The result is a single logarithm.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "Can you split the logarithm of a sum?",
-    answer: "No. log(x + y) does not equal log(x) + log(y). The product, quotient, and power rules apply only to multiplication, division, and exponentiation inside the argument. There is no rule for sums or differences inside a logarithm.",
+    question: "Can you split $\\log(x + y)$ into $\\log(x) + \\log(y)$?",
+    answer: "No. The product rule turns a product inside the argument into a sum outside it, which is the reverse of what this asks. There is no rule for a sum or a difference inside a logarithm, so $\\log_a(x + y)$ and $\\log_a(x - y)$ do not simplify at all. Check it: $\\log_{10}(1 + 99) = 2$, while $\\log_{10}(1) + \\log_{10}(99) \\approx 1.996$.",
     sectionId: "7"
   },
-  obj5: {
-    question: "What is the change of base formula used for?",
-    answer: "The change of base formula log_a(x) = log_b(x) / log_b(a) converts a logarithm to any other base. It is commonly used to evaluate logarithms on a calculator by converting to base 10 or base e, since most calculators only have log and ln keys.",
+  obj2: {
+    question: "What is $\\frac{\\log_a(x)}{\\log_a(y)}$ if it isn't $\\log_a\\left(\\frac{x}{y}\\right)$?",
+    answer: "It is $\\log_y(x)$, which is the change of base formula read backwards. Dividing two logarithms changes the base rather than dividing the arguments; the quotient rule needs the division to sit inside a single logarithm. Multiplying fares no better: $\\log_a(x) \\cdot \\log_a(y)$ is not $\\log_a(xy)$ and has no tidy form.",
+    sectionId: "7"
+  },
+  obj3: {
+    question: "Why doesn't the power rule apply to $(\\log_a x)^n$?",
+    answer: "Because the power rule moves an exponent sitting inside the argument, not one applied to the finished logarithm. $\\log_a(x^n) = n\\log_a(x)$, but $(\\log_a x)^n$ raises the output and stays where it is. Take $\\log_{10}(100) = 2$: then $\\log_{10}(100^3) = 6$, while $(\\log_{10} 100)^3 = 8$. The position of the exponent decides everything.",
+    sectionId: "7"
+  },
+  obj4: {
+    question: "Is $\\log_a(b)$ related to $\\log_b(a)$?",
+    answer: "They are reciprocals: $\\log_a(b) = \\frac{1}{\\log_b(a)}$. Swapping the base and the argument inverts the value. It falls out of change of base with $x = b$, since $\\log_a(b) = \\frac{\\log_b(b)}{\\log_b(a)}$ and $\\log_b(b) = 1$. So $\\log_2(8) = 3$ forces $\\log_8(2) = \\frac{1}{3}$, which is right because $8^{1/3} = 2$.",
     sectionId: "4"
   }
 }
@@ -645,19 +641,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/logarithms/rules"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -782,6 +765,22 @@ const schemas = {
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Logarithm Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -819,12 +818,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

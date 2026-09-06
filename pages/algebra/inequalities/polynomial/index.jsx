@@ -373,44 +373,6 @@ A polynomial with an irrational root: solve $x^3 - 3x + 1 > 0$. The rational roo
 };
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a polynomial inequality?",
-    answer: "A polynomial inequality has the form P(x) > 0 (or <, ≤, ≥) where P(x) is a polynomial of degree 3 or higher. It asks where the polynomial is positive or negative. The sign chart method handles all polynomial inequalities systematically.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How do you solve polynomial inequalities with sign charts?",
-    answer: "Find all real roots, order them on a number line creating intervals, determine the sign in each interval using test points or factor signs, select intervals matching the inequality, then include or exclude roots based on strict vs non-strict inequality.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you find signs in a factored polynomial inequality?",
-    answer: "Track each factor's sign separately: a factor (x - r) is negative left of r and positive right of r. Multiply all factor signs together. This avoids numerical evaluation entirely — just count negatives to determine the product's sign.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How does root multiplicity affect polynomial inequality solutions?",
-    answer: "At odd multiplicity roots, the sign changes (graph crosses axis). At even multiplicity roots, the sign stays the same (graph touches but doesn't cross). This determines whether adjacent intervals have the same or opposite signs.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How does end behavior help solve polynomial inequalities?",
-    answer: "The leading term aₙxⁿ determines signs at ±∞. For odd degree: opposite signs at ends. For even degree: same sign at both ends (sign of aₙ). Start from the known outer interval sign and flip/preserve inward using multiplicity.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Can you solve polynomial inequalities with irrational roots?",
-    answer: "Yes. The sign chart works with any real roots — rational, irrational, or approximate. If exact roots aren't available, numerical approximations serve as boundary points. The method requires knowing where roots are, not their exact form.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you handle polynomial inequalities with repeated roots?",
-    answer: "Repeated roots with even multiplicity don't change the sign — the polynomial touches zero but doesn't cross. Only odd multiplicity roots flip the sign. This means adjacent intervals can have identical signs when separated by an even-multiplicity root.",
-    sectionId: "7"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -482,19 +444,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -505,7 +454,6 @@ const schemas = {
     obj4Table,
     obj5Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Polynomial Inequalities: Sign Charts & Multiplicity | Learn Math Class",
@@ -528,7 +476,6 @@ const schemas = {
   obj4Table,
   obj5Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -762,12 +709,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

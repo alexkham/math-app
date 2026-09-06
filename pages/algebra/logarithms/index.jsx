@@ -1126,33 +1126,6 @@ The expression $\\log_a(b) = c$ states that $a^c = b$. The logarithm extracts th
 };
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a logarithm?",
-    answer: "A logarithm answers the question: to what power must a base be raised to produce a given number? The expression log base a of b equals c means a raised to the power c equals b. Logarithms extract exponents from exponential relationships.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "Why must the argument of a logarithm be positive?",
-    answer: "A positive base raised to any real exponent always produces a positive result. Since no real exponent can make a positive base yield zero or a negative number, logarithms of zero or negative arguments have no real solution.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the difference between common and natural logarithms?",
-    answer: "Common logarithms use base 10 and are written log(x). Natural logarithms use base e (approximately 2.71828) and are written ln(x). Base 10 aligns with the decimal system, while base e arises naturally in calculus and continuous growth models.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "How are logarithms and exponentials related?",
-    answer: "They are inverse operations. The identity log_a(a^x) = x shows logarithms undo exponentiation, and a^(log_a(x)) = x shows exponentiation undoes logarithms. Each operation reverses the other when the bases match.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are the basic logarithm rules?",
-    answer: "The product rule converts log(xy) into log(x) + log(y). The quotient rule converts log(x/y) into log(x) - log(y). The power rule converts log(x^n) into n times log(x). Each rule corresponds to an exponent law applied in reverse.",
-    sectionId: "7"
-  }
-}
 
 
 const schemas = {
@@ -1218,19 +1191,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/logarithms"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1242,7 +1202,6 @@ const schemas = {
     obj6Table,
     obj7Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Logarithms: Definition, Rules & Properties | Learn Math Class",
@@ -1263,7 +1222,6 @@ export default function LogarithmsPage({
   obj6Table,
   obj7Table,
   summaryTable,
-  faqQuestions,
   schemas
 }) {
 
@@ -1422,12 +1380,6 @@ export default function LogarithmsPage({
       __html: JSON.stringify(schemas.breadcrumb)
     }}
   />
-
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
   />
 </Head>
    {/* <GenericNavbar/> */}

@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -263,54 +264,24 @@ This inverse relationship provides the foundation for converting between logarit
 
 const faqQuestions = {
   obj1: {
-    question: "What is the domain of a logarithmic function?",
-    answer: "The domain is (0, ∞) — all positive real numbers. Logarithms are undefined for zero and negative numbers because no real exponent makes a positive base equal zero or a negative number.",
+    question: "Why is the logarithm of a negative number undefined?",
+    answer: "Because $\\log_a(x) = y$ means $a^y = x$, and a positive base raised to any real power is positive. No exponent $y$ satisfies $2^y = -5$, so $\\log_2(-5)$ has no answer. The same reasoning rules out zero, since nothing satisfies $a^y = 0$. Negative and zero inputs are excluded by the definition, not by convention.",
     sectionId: "1"
   },
   obj2: {
-    question: "What is the range of a logarithmic function?",
-    answer: "The range is (-∞, ∞) — all real numbers. As x approaches 0 from the right, log(x) goes to negative infinity. As x grows large, log(x) increases without bound.",
-    sectionId: "2"
+    question: "How do you find the domain of something like $\\log_2(x - 3)$?",
+    answer: "Set whatever sits inside the logarithm greater than zero and solve. Here $x - 3 > 0$ gives domain $x > 3$. The rule applies to the whole argument, not just to $x$, so $\\log_5(x^2 + 1)$ has domain all real numbers because $x^2 + 1$ is positive for every $x$. Strictly greater than zero, never equal to it.",
+    sectionId: "1"
   },
   obj3: {
-    question: "Why is log of a negative number undefined?",
-    answer: "Because a^y > 0 for any positive base a and any real exponent y. No real power of a positive number can produce a negative result, so log_a(-5) has no solution.",
-    sectionId: "1"
-  },
-  obj4: {
-    question: "When is a logarithmic function increasing or decreasing?",
-    answer: "For base > 1 (like log₂, log₁₀, ln), the function is strictly increasing. For base between 0 and 1 (like log_{1/2}), the function is strictly decreasing.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "What is the one-to-one property of logarithms?",
-    answer: "If log_a(x) = log_a(y), then x = y. Each output corresponds to exactly one input. This property lets you set arguments equal when logs with the same base are equal.",
-    sectionId: "4"
-  },
-  obj6: {
-    question: "What is the vertical asymptote of log(x)?",
-    answer: "The line x = 0 (y-axis) is a vertical asymptote. As x approaches 0 from the right, log(x) approaches negative infinity (for base > 1). The graph never touches x = 0.",
+    question: "Why does a logarithm grow so slowly?",
+    answer: "Because each fixed step in the output demands a multiplicative jump in the input. With $\\log_2$, moving the output from $10$ to $11$ requires doubling the input, and doubling again adds only one more. Put the other way round, multiplying the input by a constant adds a constant to the output. The curve rises without bound, but at an ever-decelerating rate.",
     sectionId: "6"
   },
-  obj7: {
-    question: "How are logarithmic and exponential functions related?",
-    answer: "They are inverses. log_a(a^x) = x for all real x, and a^(log_a(x)) = x for x > 0. Their graphs are reflections across y = x, and their domains/ranges are swapped.",
+  obj4: {
+    question: "Why does $\\log_a(a^x) = x$ hold for every $x$, but $a^{\\log_a(x)} = x$ only for $x > 0$?",
+    answer: "Because the two compositions begin in different places. In $\\log_a(a^x)$ the exponential runs first and accepts any real $x$, handing the logarithm a positive number, so nothing is excluded. In $a^{\\log_a(x)}$ the logarithm runs first and demands a positive input, so $x \\leq 0$ never gets in. The restriction belongs to whichever function goes first.",
     sectionId: "7"
-  },
-  obj8: {
-    question: "Is log(x) continuous?",
-    answer: "Yes, log_a(x) is continuous on its entire domain (0, ∞). There are no jumps, breaks, or holes. Small changes in x produce small changes in log(x).",
-    sectionId: "5"
-  },
-  obj9: {
-    question: "Why does monotonicity matter for solving inequalities?",
-    answer: "Monotonicity determines if inequality direction is preserved or reversed. For base > 1 (increasing), direction is preserved. For base between 0 and 1 (decreasing), direction reverses.",
-    sectionId: "3"
-  },
-  obj10: {
-    question: "What is log(0)?",
-    answer: "Undefined. There is no real number y such that a^y = 0 for any positive base a. The logarithm approaches negative infinity as the argument approaches zero from the right.",
-    sectionId: "1"
   }
 }
 
@@ -385,19 +356,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/logarithms/properties"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -519,6 +477,22 @@ export default function PropertiesPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Properties of Logarithms FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -557,12 +531,6 @@ export default function PropertiesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

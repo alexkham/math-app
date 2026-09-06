@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -798,56 +799,19 @@ These results connect seemingly separate tasks. Evaluating a polynomial at a poi
 
 const faqQuestions = {
   obj1: {
-    question: "What is the Remainder Theorem?",
-    answer: "The Remainder Theorem states that when a polynomial P(x) is divided by (x - c), the remainder equals P(c). This means you can find the remainder by simple evaluation instead of performing division. For P(x) = x³ - 4x + 2 divided by (x - 3), the remainder is P(3) = 27 - 12 + 2 = 17."
+    question: "What is the difference between the Remainder Theorem and the Factor Theorem?",
+    answer: "One is general, the other is a special case. The Remainder Theorem says dividing $P(x)$ by $(x - c)$ always leaves the remainder $P(c)$, whatever that value is. The Factor Theorem adds a condition: only when that remainder is zero is $(x - c)$ a factor. A nonzero remainder gives you information, not a partial factor.",
+    sectionId: "13"
   },
   obj2: {
-    question: "What is the Factor Theorem?",
-    answer: "The Factor Theorem states that (x - c) is a factor of P(x) if and only if P(c) = 0. It connects roots and factors directly: c is a root precisely when (x - c) is a factor. To test if (x - 2) divides a polynomial, evaluate P(2) — if the result is zero, it's a factor."
+    question: "Which candidates does the Rational Root Theorem actually list?",
+    answer: "Every ratio of a divisor of the constant term to a divisor of the leading coefficient, taken with both signs. Two omissions are common: dropping the negative candidates, and forgetting fractions when the leading coefficient is not $1$. For $2x^3 + x - 6$ the list includes $\\pm\\frac{1}{2}$ and $\\pm\\frac{3}{2}$, not just whole numbers.",
+    sectionId: "13"
   },
   obj3: {
-    question: "What is the Rational Root Theorem?",
-    answer: "For a polynomial with integer coefficients, any rational root p/q (in lowest terms) has p dividing the constant term and q dividing the leading coefficient. This generates a finite list of candidates. For 2x³ + x² - 13x + 6, candidates are ±1, ±2, ±3, ±6, ±1/2, ±3/2."
-  },
-  obj4: {
-    question: "How do you use the Rational Root Theorem?",
-    answer: "List divisors of the constant term (possible p values) and divisors of the leading coefficient (possible q values). Form all fractions ±p/q. Test each candidate by substitution or synthetic division. When you find a root, divide it out and repeat on the quotient."
-  },
-  obj5: {
-    question: "What is the Integer Root Theorem?",
-    answer: "When the leading coefficient is 1 (monic polynomial), all rational roots must be integers that divide the constant term. For x³ - 6x² + 11x - 6, candidates are only ±1, ±2, ±3, ±6 — no fractions needed. This simplifies the search considerably."
-  },
-  obj6: {
-    question: "What is Descartes' Rule of Signs?",
-    answer: "Descartes' Rule counts sign changes in coefficients to estimate real roots. The number of positive roots equals the sign changes or less by an even number. For negative roots, apply the rule to P(-x). It gives bounds but not exact counts."
-  },
-  obj7: {
-    question: "What is the Fundamental Theorem of Algebra?",
-    answer: "Every polynomial of degree n ≥ 1 has exactly n roots in the complex numbers, counted with multiplicity. A cubic always has 3 roots, a quartic has 4. For real coefficients, complex roots come in conjugate pairs, so odd-degree polynomials always have at least one real root."
-  },
-  obj8: {
-    question: "What are Vieta's formulas?",
-    answer: "Vieta's formulas relate roots to coefficients. For x² + bx + c with roots r₁, r₂: sum r₁ + r₂ = -b and product r₁·r₂ = c. For cubics: sum of roots = -b, sum of pairwise products = c, product of all roots = -d. Useful for verifying answers and solving without finding individual roots."
-  },
-  obj9: {
-    question: "How do you find upper and lower bounds for polynomial roots?",
-    answer: "Use synthetic division. For upper bound: divide by (x - c) with c > 0; if all entries in the bottom row are non-negative, c is an upper bound. For lower bound: divide by (x - c) with c < 0; if entries alternate in sign, c is a lower bound."
-  },
-  obj10: {
-    question: "Why doesn't the Rational Root Theorem find all roots?",
-    answer: "The theorem only identifies rational roots. Irrational roots like √2 and complex roots like 2 + 3i are invisible to it. The polynomial x² - 2 has candidates ±1, ±2, but its actual roots ±√2 are irrational. The theorem is a first filter, not a complete solution."
-  },
-  obj11: {
-    question: "How does the Factor Theorem help build polynomials from roots?",
-    answer: "If a polynomial has roots r₁, r₂, r₃, then (x - r₁)(x - r₂)(x - r₃) is a factor. For roots 1, -2, and 4, the polynomial is (x - 1)(x + 2)(x - 4) = x³ - 3x² - 6x + 8. Any scalar multiple shares the same roots."
-  },
-  obj12: {
-    question: "What is the relationship between the Remainder Theorem and Factor Theorem?",
-    answer: "The Factor Theorem is a special case of the Remainder Theorem. The Remainder Theorem says dividing P(x) by (x - c) gives remainder P(c). The Factor Theorem adds: when that remainder is zero, (x - c) is a factor. One determines remainders; the other identifies factors."
-  },
-  obj13: {
-    question: "How do you apply Descartes' Rule of Signs to find negative roots?",
-    answer: "Replace x with -x in P(x) and count sign changes in P(-x). Odd-powered terms change sign; even-powered terms stay the same. The sign changes in P(-x) give the possible number of negative real roots, following the same 'or less by an even number' rule."
+    question: "Why do Vieta's formulas alternate signs?",
+    answer: "Because expanding $(x - r_1)(x - r_2)\\cdots$ introduces a factor of $-1$ with each root, giving the pattern $(-1)^k$. So for $x^2 + bx + c$ the sum of roots is $-b$ rather than $b$, and for a cubic $x^3 + bx^2 + cx + d$ the product is $-d$ rather than $d$. Losing track of that alternation is the usual source of error at higher degrees.",
+    sectionId: "13"
   }
 }
 
@@ -922,19 +886,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1115,6 +1066,22 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Polynomial Rules FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'15',
     //     title:sectionsContent.obj15.title,
@@ -1228,12 +1195,6 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -522,54 +523,24 @@ Square root functions and cube root functions are the most common, but the patte
 
 const faqQuestions = {
   obj1: {
-    question: "What is the domain of the square root function?",
-    answer: "The domain of f(x) = √x is [0, ∞) — only non-negative inputs are allowed. The radicand must be non-negative for real outputs. The range is also [0, ∞).",
-    sectionId: "1"
+    question: "Why does the square root graph flatten out as $x$ grows?",
+    answer: "Because the output grows far more slowly than the input. Going from $x = 0$ to $x = 1$ raises the output by $1$; earning the next $1$ takes you all the way out to $x = 4$, and the one after that to $x = 9$. Put sharply, $\\sqrt{100} = 10$ but $\\sqrt{10000} = 100$, so multiplying the input by $100$ only multiplies the output by $10$.",
+    sectionId: "2"
   },
   obj2: {
-    question: "What does the square root function graph look like?",
-    answer: "The graph starts at the origin (0,0), curves upward to the right, and is concave down. It's the upper half of a sideways parabola. Key points: (0,0), (1,1), (4,2), (9,3).",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the domain of the cube root function?",
-    answer: "The cube root function f(x) = ∛x has domain (-∞, ∞) — all real numbers. Odd-index roots accept any real input, including negative numbers. The range is also all real numbers.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What does the cube root function graph look like?",
-    answer: "The graph has an S-like shape passing through the origin. It extends in both directions, with negative inputs giving negative outputs. It has odd symmetry: f(-x) = -f(x).",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do you find the domain of a radical function?",
-    answer: "For even-index radicals (square root, fourth root), set the radicand ≥ 0 and solve. For √(x-3), require x-3 ≥ 0, so x ≥ 3. Odd-index radicals have no restrictions.",
-    sectionId: "6"
-  },
-  obj6: {
-    question: "How do transformations affect radical functions?",
-    answer: "Vertical shift: √x + k shifts up/down. Horizontal shift: √(x-h) shifts right/left. Vertical stretch: a√x. Reflection: -√x flips over x-axis, √(-x) flips over y-axis.",
+    question: "Why does $\\sqrt{x - h}$ shift the graph right rather than left?",
+    answer: "Because the endpoint sits where the radicand is zero, and $x - h = 0$ means $x = h$. Subtracting $h$ moves the starting point out to $h$, so a minus sign shifts right. The vertical case only looks opposite because $+k$ acts on the output directly, lifting the whole curve. Inputs and outputs are adjusted on different sides of the function.",
     sectionId: "7"
   },
-  obj7: {
-    question: "What is the inverse of the square root function?",
-    answer: "The inverse of f(x) = √x is g(x) = x² (restricted to x ≥ 0). They reflect across y = x. Composing gives f(g(x)) = √(x²) = x for x ≥ 0.",
+  obj3: {
+    question: "Why isn't $\\sqrt{-x}$ undefined?",
+    answer: "Because $-x$ is positive whenever $x$ is negative. The requirement is that the radicand be non-negative, not that the expression under the bar look positive. Solving $-x \\geq 0$ gives $x \\leq 0$, so the domain is $(-\\infty, 0]$ and the graph is the square root curve reflected across the $y$-axis.",
+    sectionId: "7"
+  },
+  obj4: {
+    question: "Why does the inverse of $\\sqrt{x}$ need the restriction $x \\geq 0$?",
+    answer: "Because $x^2$ on its own is not one-to-one: $3$ and $-3$ both square to $9$, so there is no single value to send $9$ back to. Restricting the squaring function to $x \\geq 0$ makes it one-to-one and gives $\\sqrt{x}$ something to invert. Cube roots need no such restriction, since $x^3$ is already one-to-one over all reals.",
     sectionId: "8"
-  },
-  obj8: {
-    question: "How do even and odd index radical functions differ?",
-    answer: "Even-index functions (√x, ⁴√x) have domain [0,∞), start at a point, and curve upward. Odd-index functions (∛x, ⁵√x) have domain (-∞,∞), pass through the origin with S-shape symmetry.",
-    sectionId: "5"
-  },
-  obj9: {
-    question: "How do you find the inverse of a radical function?",
-    answer: "Swap x and y, then solve for y. For f(x) = √(x-5): swap to get x = √(y-5), square both sides to get x² = y-5, so f⁻¹(x) = x² + 5 with domain x ≥ 0.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "Why does the square root graph curve downward (concave down)?",
-    answer: "Each additional unit of input produces less additional output. From 0 to 1, output increases by 1. From 1 to 4, only another 1. The rate of increase slows, creating concave-down curvature.",
-    sectionId: "2"
   }
 }
 
@@ -646,19 +617,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots/functions"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -801,6 +759,22 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Radical Functions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -894,12 +868,6 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

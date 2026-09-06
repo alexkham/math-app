@@ -324,58 +324,6 @@ The vertical asymptote at $x = 0$ visually enforces the domain restriction. No p
   content: `Solving [logarithmic](!/algebra/logarithms) inequalities follows similar algebraic steps as [equations](!/algebra/logarithms/equations), with one critical addition: the base determines whether inequality direction is preserved or reversed. This behavior stems from the [monotonicity property](!/algebra/logarithms/properties) — logarithms with base greater than one are increasing functions, while those with base between zero and one are decreasing.`,
 };
 
-const faqQuestions = {
-  obj1: {
-    question: "How do you solve log inequalities when base > 1?",
-    answer: "Direction is preserved. For log_a(x) > k with a > 1, convert to x > a^k. For log_a(x) < k, convert to x < a^k. Always intersect with domain x > 0.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How do you solve log inequalities when base is between 0 and 1?",
-    answer: "Direction reverses. For log_a(x) > k with 0 < a < 1, convert to x < a^k. For log_a(x) < k, convert to x > a^k. The decreasing function flips the inequality.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "When do you flip the inequality sign in logarithmic inequalities?",
-    answer: "Flip when the base is between 0 and 1 (like log_{1/2} or log_{0.1}). These logarithms are decreasing functions, so larger inputs give smaller outputs, reversing the inequality direction.",
-    sectionId: "2"
-  },
-  obj4: {
-    question: "How do you compare two logarithms in an inequality?",
-    answer: "For same base > 1: log_a(M) > log_a(N) means M > N. For same base between 0 and 1: log_a(M) > log_a(N) means M < N. Always check domain restrictions.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "Why is domain important in log inequalities?",
-    answer: "Every log argument must be positive. The algebraic solution must be intersected with domain restrictions. For log(x-3) > 1, you need x > 5 AND x > 3, giving x > 5.",
-    sectionId: "4"
-  },
-  obj6: {
-    question: "How do you solve compound log inequalities?",
-    answer: "Split into two inequalities, solve each, then find intersection. For 1 < log₂(x) < 4: solve log₂(x) > 1 giving x > 2, and log₂(x) < 4 giving x < 16. Combined: 2 < x < 16.",
-    sectionId: "5"
-  },
-  obj7: {
-    question: "How do you solve log inequalities with multiple logs?",
-    answer: "Use log rules to combine into single logarithm first. For log(x) + log(x-2) > 3, combine to log(x(x-2)) > 3, then solve the resulting inequality and check domain.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "Why does the base determine inequality direction?",
-    answer: "Logarithms with base > 1 are increasing (larger x gives larger output), preserving direction. Base between 0 and 1 creates decreasing functions, reversing direction.",
-    sectionId: "7"
-  },
-  obj9: {
-    question: "What is the solution to log₂(x) > 3?",
-    answer: "Since base 2 > 1, direction is preserved: x > 2³ = 8. With domain x > 0, the solution is x > 8.",
-    sectionId: "1"
-  },
-  obj10: {
-    question: "What is the solution to log_{1/2}(x) > 3?",
-    answer: "Since base 1/2 < 1, direction reverses: x < (1/2)³ = 1/8. With domain x > 0, the solution is 0 < x < 1/8.",
-    sectionId: "2"
-  }
-}
 
 const schemas = {
   learningResource: {
@@ -447,19 +395,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/logarithms/inequalities"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -471,7 +406,6 @@ return {
     introContent,
     directionTable,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Logarithmic Inequalities: Solving by Base Type | Learn Math Class",
@@ -493,7 +427,6 @@ export default function InequalitiesPage({
   introContent,
   directionTable,
   summaryTable,
-  faqQuestions,
   schemas
 }) {
 
@@ -621,12 +554,6 @@ export default function InequalitiesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

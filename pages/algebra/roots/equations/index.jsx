@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -509,54 +510,24 @@ Solving radical equations requires both algebraic manipulation and verification.
 
 const faqQuestions = {
   obj1: {
-    question: "What is a radical equation?",
-    answer: "A radical equation contains a variable under a radical sign, such as √x = 5 or √(x+3) = x−1. The variable appears inside the radicand, making the radical an obstacle that must be eliminated to solve for x.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How do you solve a radical equation?",
-    answer: "Follow four steps: (1) Isolate the radical on one side, (2) Raise both sides to the power matching the index (square for square roots, cube for cube roots), (3) Solve the resulting equation, (4) Check all solutions in the original equation.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "Why must you isolate the radical before squaring?",
-    answer: "Squaring before isolating creates complications. For √x + 3 = 7, squaring directly gives x + 6√x + 9 = 49 — the radical survives. Isolating first (√x = 4) then squaring gives x = 16 directly.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is an extraneous solution?",
-    answer: "An extraneous solution satisfies the squared equation but not the original. For √x = −3, squaring gives x = 9, but √9 = 3 ≠ −3. The original has no solution; x = 9 is extraneous.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "Why do extraneous solutions appear in radical equations?",
-    answer: "Squaring is not reversible — both 5 and −5 square to 25. When you square an equation, sign information is lost. Squaring can hide impossibilities like a principal root equaling a negative value.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you solve equations with two radicals?",
-    answer: "Isolate one radical and square. If a radical remains, isolate it and square again. For √(x+5) − √x = 1: rearrange to √(x+5) = √x + 1, square, simplify, then square again if needed.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you solve cube root equations?",
-    answer: "Follow the same process but cube both sides instead of squaring. For ∛(x−2) = 4: cube both sides to get x−2 = 64, so x = 66. Extraneous solutions are rare with odd roots since cubing preserves sign.",
-    sectionId: "8"
-  },
-  obj8: {
-    question: "Do you always need to check solutions for radical equations?",
-    answer: "Yes, checking is mandatory for equations involving even roots (square, fourth, etc.). Squaring can introduce extraneous solutions. For odd roots, checking is less critical but still good practice.",
+    question: "When can you skip checking for extraneous solutions?",
+    answer: "In two configurations. Odd-index equations are safe, since cubing preserves sign and no principal root convention restricts the output: $\\sqrt[3]{2x + 1} = \\sqrt[3]{x - 3}$ gives $x = -4$, which holds. A single radical equal to a single radical of the same even index is also safe, because both sides are principal roots. Everything else with an even index must be verified.",
     sectionId: "10"
   },
-  obj9: {
-    question: "How do you solve radical inequalities?",
-    answer: "Square the isolated radical and solve the inequality, but also apply domain restrictions. For √(x−2) ≤ 4: squaring gives x ≤ 18, but domain requires x ≥ 2. The solution is 2 ≤ x ≤ 18.",
+  obj2: {
+    question: "How do you know whether you will have to square twice?",
+    answer: "Look at what sits beside each radical. If both sides hold a single radical and nothing else, one squaring clears them, so $\\sqrt{2x + 3} = \\sqrt{x + 7}$ becomes $2x + 3 = x + 7$. But when a radical stands next to a constant or a second radical, squaring produces a cross term that still contains a root, so you isolate the survivor and square again.",
+    sectionId: "6"
+  },
+  obj3: {
+    question: "Why does a radical inequality need a domain check as well as squaring?",
+    answer: "Because squaring and the radicand each impose a condition, and the answer is their intersection. For $\\sqrt{x - 2} \\leq 4$, squaring gives $x \\leq 18$, while the radicand requires $x - 2 \\geq 0$, so $x \\geq 2$. The solution is $2 \\leq x \\leq 18$. Skipping the domain half admits values where the radical has no real value.",
     sectionId: "9"
   },
-  obj10: {
-    question: "What happens when √x equals a negative number?",
-    answer: "The equation has no solution. The principal square root is always non-negative, so √x = −3 is impossible. Squaring would give x = 9, but this is extraneous since √9 = 3 ≠ −3.",
-    sectionId: "4"
+  obj4: {
+    question: "Does squaring an inequality flip its direction?",
+    answer: "Only if you square something negative, and an isolated principal root never is. Because square roots return non-negative values, squaring an inequality with the radical alone on one side preserves the direction: $\\sqrt{x} > 3$ becomes $x > 9$. The flip rule you remember comes from multiplying by a negative number, which is a different situation.",
+    sectionId: "9"
   }
 }
 
@@ -633,19 +604,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots/equations"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -789,6 +747,22 @@ export default function RootEquationsPage({seoData, sectionsContent, introConten
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Radical Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -883,12 +857,6 @@ export default function RootEquationsPage({seoData, sectionsContent, introConten
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

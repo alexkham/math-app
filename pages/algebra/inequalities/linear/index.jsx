@@ -8,6 +8,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -429,44 +430,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a linear inequality?",
-    answer: "A linear inequality has the form ax + b < 0 (or >, ≤, ≥) where x appears only to the first power. The solution is always a ray — a half-line from the boundary point x = -b/a extending toward positive or negative infinity.",
-    sectionId: "1"
+    question: "Is $5 > x < 8$ a valid way to write an inequality?",
+    answer: "No, it is malformed. A three-part chain compresses a single AND, so both signs must point the same way: $-3 < 2x + 1 \\leq 7$ is legal, a mixed chain is not. An OR cannot be chained at all, whatever the direction, and has to be written as two separate statements joined by the word or.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "When do you flip the inequality sign?",
-    answer: "Flip the inequality direction when multiplying or dividing both sides by a negative number. Adding/subtracting any number or multiplying/dividing by a positive number preserves the direction. Missing the flip is the most common error.",
-    sectionId: "2"
+    question: "Does $(4, 7)$ mean an interval or a point?",
+    answer: "Context alone decides, since the glyphs are identical. On a number line $(4, 7)$ is the open interval between $4$ and $7$; in the plane it is a single coordinate pair. Note that $\\infty$ always takes a round bracket, as in $(4, \\infty)$, because an endpoint you can never reach cannot belong to the set.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you solve a multi-step linear inequality?",
-    answer: "Use the same steps as linear equations: distribute, collect like terms, isolate the variable. The only difference is flipping the sign when dividing by a negative. For -2x + 5 > 13: subtract 5 to get -2x > 8, then divide by -2 and flip: x < -4.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you graph a linear inequality solution?",
-    answer: "Mark the boundary point (from solving the corresponding equation). Use an open dot for < or > (excluded), solid dot for ≤ or ≥ (included). Shade toward +∞ for x > c or toward -∞ for x < c.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do you solve compound linear inequalities?",
-    answer: "For AND (chains like -3 < 2x + 1 ≤ 7): apply operations to all three parts simultaneously. For OR (x < -4 or x > 2): solve each part separately and take the union. AND gives an intersection; OR gives a union.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you solve linear inequalities with fractions?",
-    answer: "Multiply every term by the LCD to clear all fractions. Since the LCD of numerical denominators is always positive, the inequality direction is preserved. Then solve as usual.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What if the variable cancels in a linear inequality?",
-    answer: "If terms cancel leaving a true statement like 8 > 3, the solution is all real numbers (-∞, ∞). If it leaves a false statement like -5 ≤ -9, the solution is empty — no value works.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you solve literal inequalities?",
-    answer: "Isolate the target variable as with equations, but when dividing by a parameter, its sign may be unknown. State both cases: if a > 0, x > (c-b)/a; if a < 0, x < (c-b)/a. Both cases must be given.",
-    sectionId: "8"
+    question: "Is $\\neq$ an inequality?",
+    answer: "Not in this family. The four order marks $<$, $\\leq$, $>$, $\\geq$ each rank two quantities, and the bar underneath is a one-stroke \"or equal\". By contrast $\\neq$ only refuses equality and says nothing about which side is larger, so it has no direction to solve for and cannot be graphed as a ray.",
+    sectionId: "notation"
   }
 }
 
@@ -543,19 +519,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -727,6 +690,22 @@ const schemas = {
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Linear Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -844,12 +823,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

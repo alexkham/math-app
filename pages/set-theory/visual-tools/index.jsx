@@ -19,43 +19,43 @@ export async function getStaticProps(){
   }
 
   const keyWords = [
-    'free linear algebra visual tools',
-    'linear algebra calculator',
-    'matrix calculator',
-    'matrix visualizer',
-    'matrix multiplication visualizer',
-    'gaussian elimination calculator',
-    'row echelon form calculator',
-    'reduced row echelon form',
-    'vector calculator',
-    'dot product visualizer',
-    'linear systems solver',
-    'determinant calculator',
-    'eigenvalue calculator',
-    'interactive linear algebra',
-    'free linear algebra tools'
+    'free set theory visual tools',
+    'venn diagram generator',
+    'venn diagram maker',
+    'set operations visualizer',
+    'union and intersection calculator',
+    'set identities explorer',
+    'de morgans laws venn diagram',
+    'power set calculator',
+    'subset lattice',
+    'set builder notation tool',
+    'inclusion exclusion calculator',
+    'three set venn diagram',
+    'set theory truth table',
+    'interactive set theory',
+    'free set theory tools'
   ]
 
   const faqQuestions = {
     obj1: {
-      question: "What linear algebra visual tools are available?",
-      answer: "The collection includes matrix multiplication visualizers, Gaussian elimination calculators for REF and RREF, vector operation tools, linear systems solvers, determinant calculators, and eigenvalue visualizers. Each tool focuses on one specific topic with step-by-step animation and editable inputs."
+      question: "What set theory visual tools are available?",
+      answer: "The collection covers Venn diagram explorers for two and three sets, a generator that shades any expression on 2 to 5 sets, a power set drawn as a subset lattice, a set-builder notation builder, an inclusion-exclusion walk-through, indexed unions and intersections, and an explorer that shows one expression as both shaded regions and a truth table. Each tool focuses on one idea and updates as you change it."
     },
     obj2: {
-      question: "Which tool should I use to learn matrix multiplication?",
-      answer: "Start with the Matrix Multiplication Visualizer and Calculator. It animates each dot product element by element, highlights the active row and column, and lets you step forward and back through every multiplication and addition that builds the result matrix."
+      question: "Which tool should I use to learn set operations?",
+      answer: "Start with the Two-Set Venn Diagram Basic Identities Explorer. Pick union, intersection, complement or any of the three differences and the matching regions shade immediately, with an explanation panel giving the set-builder form of whatever is highlighted."
     },
     obj3: {
-      question: "How do the Gaussian elimination tools work?",
-      answer: "Enter any matrix from 2 by 3 up to 5 by 6, choose REF or RREF as the target form, and the calculator performs one row operation per step. Each step shows the operation type, highlights the affected rows, and displays the matrix state before and after, with manual stepping or auto-play available."
+      question: "How does the Venn Diagram Generator work?",
+      answer: "Choose 2, 3, 4 or 5 sets, then type a set expression with keyboard shortcuts, build it from symbol buttons, or load a preset. A region strip lists every region and whether it is shaded, a compare box tests two expressions for equivalence, and finished diagrams export to SVG or PNG."
     },
     obj4: {
-      question: "Are these linear algebra tools free to use?",
-      answer: "Yes, every visualizer and calculator in the collection is completely free with no registration required. The tools run directly in the browser, include step-by-step explanations, and work for both learning and homework verification."
+      question: "Are these set theory tools free to use?",
+      answer: "Yes, every visualizer in the collection is completely free with no registration required. The tools run directly in the browser, include step-by-step explanations, and work for both learning and checking your own work."
     },
     obj5: {
       question: "Which tool should I pick first?",
-      answer: "If matrix arithmetic still feels mechanical, the Matrix Multiplication Visualizer makes the row-by-column structure visible. For solving systems and understanding pivots, the Gaussian Elimination Calculator is the natural next step. Vector and determinant tools work well alongside both."
+      answer: "If set operations still feel like symbols rather than pictures, the Two-Set Venn Diagram Basic Identities Explorer is the natural entry point. From there the three-set explorers cover De Morgan's laws and counting identities, the Power Set Explorer shows how subsets are ordered by containment, and the Venn Diagram and Truth Table Explorer connects set algebra to logic."
     }
   }
 
@@ -63,13 +63,13 @@ export async function getStaticProps(){
     collectionPage: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      "name": "Linear Algebra Visual Tools",
-      "description": "Free linear algebra visualizers and calculators: matrix multiplication, Gaussian elimination, vector operations, and linear systems. Step-by-step and free.",
-      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools",
+      "name": "Set Theory Visual Tools",
+      "description": "Free set theory visualizers: Venn diagram generator, two and three set identity explorers, power set lattice, set-builder notation, and inclusion-exclusion. Step-by-step and free.",
+      "url": "https://www.learnmathclass.com/set-theory/visual-tools",
       "inLanguage": "en-US",
       "about": {
         "@type": "Thing",
-        "name": "Linear Algebra"
+        "name": "Set Theory"
       },
       "keywords": keyWords.join(", "),
       "author": {
@@ -85,15 +85,21 @@ export async function getStaticProps(){
       "hasPart": [
         {
           "@type": "WebPage",
-          "name": "Matrix Multiplication Visualizer and Calculator",
-          "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-multiplication",
-          "description": "Step-by-step animated matrix multiplication showing each dot product as it builds the result element by element."
+          "name": "Venn Diagram Generator",
+          "url": "https://www.learnmathclass.com/set-theory/visual-tools/venn-generator",
+          "description": "Shades any set expression on a 2, 3, 4 or 5 set Venn diagram, compares two expressions for equivalence, and exports to SVG or PNG."
         },
         {
           "@type": "WebPage",
-          "name": "Gaussian Elimination Calculator",
-          "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/gauss-elimination",
-          "description": "Transforms matrices to row echelon form or reduced row echelon form one row operation at a time."
+          "name": "Two-Set Venn Diagram Basic Identities Explorer",
+          "url": "https://www.learnmathclass.com/set-theory/visual-tools/two-sets-basic-venn",
+          "description": "Shades the Venn diagram for union, intersection, complement, the three differences, De Morgan's laws and set relations."
+        },
+        {
+          "@type": "WebPage",
+          "name": "Power Set Explorer",
+          "url": "https://www.learnmathclass.com/set-theory/visual-tools/power-set",
+          "description": "Draws the power set of a small set as a Hasse diagram of the subset lattice, with containment readable as direction on the page."
         }
         // NOTE: Add other tools auto-pulled from filesystem here as they come online.
       ]
@@ -102,17 +108,17 @@ export async function getStaticProps(){
     itemList: {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "name": "Linear Algebra Visual Tools",
+      "name": "Set Theory Visual Tools",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "item": {
             "@type": "SoftwareApplication",
-            "name": "Matrix Multiplication Visualizer and Calculator",
-            "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-multiplication",
+            "name": "Venn Diagram Generator",
+            "url": "https://www.learnmathclass.com/set-theory/visual-tools/venn-generator",
             "applicationCategory": "EducationalApplication",
-            "description": "Animated step-by-step matrix multiplication with editable matrices and play controls."
+            "description": "Shades any set expression on a 2, 3, 4 or 5 set Venn diagram, with equivalence checking and SVG or PNG export."
           }
         },
         {
@@ -120,10 +126,21 @@ export async function getStaticProps(){
           "position": 2,
           "item": {
             "@type": "SoftwareApplication",
-            "name": "Gaussian Elimination Calculator",
-            "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/gauss-elimination",
+            "name": "Two-Set Venn Diagram Basic Identities Explorer",
+            "url": "https://www.learnmathclass.com/set-theory/visual-tools/two-sets-basic-venn",
             "applicationCategory": "EducationalApplication",
-            "description": "Reduces matrices to REF or RREF with one row operation per step."
+            "description": "Shades the Venn diagram for union, intersection, complement, the three differences and De Morgan's laws."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Power Set Explorer",
+            "url": "https://www.learnmathclass.com/set-theory/visual-tools/power-set",
+            "applicationCategory": "EducationalApplication",
+            "description": "Draws the power set of a small set as a Hasse diagram of the subset lattice."
           }
         }
         // NOTE: Mirror additions to collectionPage.hasPart here.
@@ -143,14 +160,14 @@ export async function getStaticProps(){
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Linear Algebra",
-          "item": "https://www.learnmathclass.com/linear-algebra"
+          "name": "Set Theory",
+          "item": "https://www.learnmathclass.com/set-theory"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Visual Tools",
-          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools"
+          "item": "https://www.learnmathclass.com/set-theory/visual-tools"
         }
       ]
     },
@@ -175,31 +192,17 @@ export async function getStaticProps(){
   const toolsData = await buildToolIndexData('set-theory/visual-tools')
 
   const intro = {
-    title: "Free interactive tools for learning linear algebra",
-    description: "Each tool turns a piece of linear algebra into something you can manipulate, watch, and step through — matrix operations, row reduction, vector geometry, systems of equations, and more.",
-    tip: "Start with the Matrix Multiplication Visualizer to see how dot products build the result one element at a time."
+    title: "Free interactive tools for learning set theory",
+    description: "Shade any region of a Venn diagram and watch a set identity prove itself. Build a set from a domain and a condition and see every candidate tested one at a time. Draw a power set as a subset lattice, step through inclusion-exclusion one term at a time, and read the same expression as both shaded regions and a truth table.",
+    tip: "Start with the Two-Set Venn Diagram Basic Identities Explorer to see how each region maps to a set expression."
   }
 
-  const comingSoonItems = [
-    {
-      at: 'end',
-      title: 'Matrix Multiplication Visualizer',
-      description: 'Step-by-step animated matrix multiplication with full control over the calculation. Watch each dot product form element-by-element, with red highlighting on the specific pair of values currently being multiplied and yellow on the full row-and-column being combined. Step forward and back, pause, resume, or let it auto-play. Resize either matrix from 1×1 up to 10×10, generate random values within any range, or edit cells by hand — the result matrix dimensions update automatically, and incompatible dimensions are caught before computation starts. A running commentary below the grids spells out every multiplication and the accumulating sum, so the formula C[i][j] = Σ A[i][k]·B[k][j] becomes concrete arithmetic you can verify by hand.',
-      href: '/visual-tools/matrix-multiplication',
-      category: 'Matrices',
-      subCategory:'Matrix Operations',
-      icon: '',
-    },
-    {
-      at: 'end',
-      title: 'Gaussian Elimination Calculator',
-      description: 'Transform any matrix to row echelon form (REF) or reduced row echelon form (RREF) one row operation at a time. Choose a size from 2×3 up to 5×6, fill the cells by hand or generate random values, then pick which form to reduce to. Each stage shows the operation performed — row swap, scaling, or elimination — with the affected rows highlighted in the matrix and the row state before and after spelled out in textbook notation. Step manually with Previous and Next, or hit Play for automatic 1-second advance. RREF makes solutions immediately readable; REF stops earlier and leaves back-substitution to you.',
-      href: '/visual-tools/gauss-elimination',
-      category: 'Matrices',
-      subCategory:'Matrix Operations',
-      icon: '',
-    },
-  ]
+  // Empty by design. This array was copy-pasted from the linear-algebra hub and
+  // listed Matrix Multiplication and Gaussian Elimination, which do not belong on
+  // a set theory page. It renders nothing today (customItems is commented out on
+  // VisualToolsPage below); cleared so it stays correct if that prop is enabled.
+  const comingSoonItems = []
+
 
   return {
     props:{
@@ -209,11 +212,11 @@ export async function getStaticProps(){
       faqQuestions,
       schemas,
       seoData: {
-        title: "Free Linear Algebra Visual Tools | Learn Math Class",
-        description: "Free linear algebra visualizers and calculators: matrix multiplication, Gaussian elimination, vector operations, and linear systems. Step-by-step and free.",
+        title: "Free Set Theory Visual Tools | Learn Math Class",
+        description: "Free set theory visualizers: Venn diagram generator, two and three set identity explorers, power set lattice, set-builder notation, and inclusion-exclusion. Step-by-step and free.",
         keywords: keyWords.join(", "),
         url: "/set-theory/visual-tools",
-        name: "Linear Algebra Visual Tools"
+        name: "Set Theory Visual Tools"
       },
     }
   }

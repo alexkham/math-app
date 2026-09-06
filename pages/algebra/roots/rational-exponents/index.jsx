@@ -7,6 +7,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -774,54 +775,19 @@ This equivalence is not merely notational convenience. Exponent form often simpl
 
 const faqQuestions = {
   obj1: {
-    question: "What does a^(1/n) mean?",
-    answer: "A unit fraction exponent denotes a root: a^(1/n) = ⁿ√a. The denominator becomes the index. For example, 25^(1/2) = √25 = 5 and 8^(1/3) = ∛8 = 2.",
+    question: "Why does $a^{1/n}$ mean the $n$th root?",
+    answer: "Because the exponent laws force it. If $(a^m)^n = a^{mn}$ is to keep holding, then $(a^{1/2})^2 = a^{(1/2) \\cdot 2} = a^1 = a$. The only non-negative number whose square is $a$ is $\\sqrt{a}$, so $a^{1/2}$ must be $\\sqrt{a}$. The same argument gives $(a^{1/n})^n = a$, making $a^{1/n}$ the $n$th root.",
     sectionId: "1"
   },
   obj2: {
-    question: "What does a^(m/n) mean?",
-    answer: "A rational exponent combines root and power: a^(m/n) = ⁿ√(aᵐ) = (ⁿ√a)ᵐ. Either interpretation works. For 8^(2/3): either ∛(8²) = ∛64 = 4, or (∛8)² = 2² = 4.",
+    question: "Should you take the root or the power first in $a^{m/n}$?",
+    answer: "Either order gives the same answer, but taking the root first keeps the numbers small. For $27^{4/3}$ that means $(\\sqrt[3]{27})^4 = 3^4 = 81$. Going the other way requires computing $27^4 = 531441$ and then extracting its cube root: same result, far worse arithmetic. Reach for the root first unless the power is trivial.",
     sectionId: "2"
   },
   obj3: {
-    question: "Should you take the root or power first?",
-    answer: "Taking the root first usually produces smaller numbers. For 27^(4/3): (∛27)⁴ = 3⁴ = 81 is easier than computing 27⁴ = 531441 first, then taking ∛531441.",
-    sectionId: "2"
-  },
-  obj4: {
-    question: "What does a negative rational exponent mean?",
-    answer: "A negative exponent indicates a reciprocal: a^(-m/n) = 1/a^(m/n). For 8^(-2/3) = 1/8^(2/3) = 1/4. For 16^(-3/4) = 1/(⁴√16)³ = 1/8.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "How do you convert a radical to exponent form?",
-    answer: "Use ⁿ√(aᵐ) = a^(m/n). Examples: √x = x^(1/2), ∛(y²) = y^(2/3), 1/√x = x^(-1/2).",
-    sectionId: "4"
-  },
-  obj6: {
-    question: "When is a^(1/n) undefined for real numbers?",
-    answer: "When n is even and a is negative. For example, (-4)^(1/2) has no real value since no real number squares to -4. Odd roots like (-8)^(1/3) = -2 are defined.",
+    question: "What restricts the base in $a^{-1/2}$?",
+    answer: "Two conditions stack, and together they force $a > 0$. The even denominator requires a non-negative base, since no real number squares to a negative. The negative exponent separately requires $a \\neq 0$, because it produces a reciprocal and zero cannot sit in a denominator. Neither restriction alone is enough; combined they rule out zero as well as negatives.",
     sectionId: "5"
-  },
-  obj7: {
-    question: "Do exponent laws work with rational exponents?",
-    answer: "Yes, all laws extend: a^(m/n) · a^(p/q) = a^(m/n + p/q), (a^(m/n))/(a^(p/q)) = a^(m/n - p/q), and (a^(m/n))^(p/q) = a^(mp/nq). Use fraction arithmetic.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "How do you multiply √x · ∛x?",
-    answer: "Convert to exponents and add: x^(1/2) · x^(1/3) = x^(3/6 + 2/6) = x^(5/6). This equals ⁶√(x⁵) in radical form.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "When should you use exponent form vs radical form?",
-    answer: "Use exponent form for algebraic manipulation and combining different indices. Use radical form for numerical evaluation and expressing final answers. Both are equally valid.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "How do you simplify x^(1/2) + x^(3/2)?",
-    answer: "Factor out the smallest exponent: x^(1/2)(1 + x). This follows the same pattern as factoring with integer exponents — the smallest power factors out.",
-    sectionId: "7"
   }
 }
 
@@ -898,19 +864,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots/rational-exponents"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -1047,6 +1000,22 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Rational Exponents FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1150,12 +1119,6 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

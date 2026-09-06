@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -336,54 +337,24 @@ The ratio between them is constant: $\\ln(x) = \\ln(10) \\cdot \\log(x) \\approx
 
 const faqQuestions = {
   obj1: {
-    question: "What is the common logarithm?",
-    answer: "The common logarithm is log base 10, written as log(x) without a subscript. It measures how many powers of 10 a number contains. For example, log(100) = 2 because 10² = 100.",
-    sectionId: "1"
+    question: "What base does a bare $\\log$ mean?",
+    answer: "It depends on the field, and the three readings disagree. School texts and engineering read base $10$; analysis and number theory read base $e$; computer science reads base $2$. Within one document the convention is fixed and usually left unstated. The hazard is crossing documents, where a formula lifted from an analysis text into an engineering context silently shifts by a factor of $\\ln 10$.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the natural logarithm?",
-    answer: "The natural logarithm is log base e (≈ 2.71828), written as ln(x). It appears naturally in calculus and continuous growth/decay problems. The derivative of ln(x) is 1/x.",
-    sectionId: "2"
+    question: "Does $\\log_b x + 1$ mean $\\log_b(x + 1)$?",
+    answer: "No. Like $\\sin x$, the logarithm binds only to what immediately follows it, so $\\log_b x + 1$ reads as $(\\log_b x) + 1$. At $x = 9$ in base $10$ that is about $1.954$, while $\\log_{10}(9 + 1)$ is exactly $1$. Once the argument is a sum the parentheses are obligatory.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the number e?",
-    answer: "The number e ≈ 2.71828 is an irrational constant that emerges from continuous compound interest: e = lim(1 + 1/n)^n as n→∞. It's the base of natural logarithms and appears throughout mathematics.",
-    sectionId: "3"
+    question: "What does $\\ln^2 x$ mean?",
+    answer: "It means $(\\ln x)^2$, the output squared. The superscript attaches to the operator, borrowing the [squared-function convention](!/trigonometry/identities) from trigonometry, where $\\sin^2 x$ behaves the same way. Repeated application gets spelled out instead, as $\\ln \\ln x$. Note that $\\ln^2 x$ and $\\ln(x^2)$ are different quantities: the second doubles rather than squares.",
+    sectionId: "notation"
   },
   obj4: {
-    question: "What is the difference between log and ln?",
-    answer: "Log typically means base 10 (common logarithm), while ln means base e (natural logarithm). On calculators, LOG is base 10 and LN is base e. Some programming languages use log for natural log — always check conventions.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "When should I use log vs ln?",
-    answer: "Use log (base 10) for orders of magnitude, decibels, pH, and Richter scales. Use ln (base e) for calculus, continuous growth/decay, and theoretical work. For solving equations, either works with change of base.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you convert between log and ln?",
-    answer: "Use ln(x) = log(x) × ln(10) ≈ 2.303 × log(x), or log(x) = ln(x) / ln(10) ≈ ln(x) / 2.303. This follows from the change of base formula.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "Why is e important in mathematics?",
-    answer: "The function e^x is its own derivative — no other base has this property. This makes e natural for calculus, differential equations, compound interest, and exponential growth/decay modeling.",
-    sectionId: "3"
-  },
-  obj8: {
-    question: "What is ln(1) and ln(e)?",
-    answer: "ln(1) = 0 because e⁰ = 1. ln(e) = 1 because e¹ = e. These are the two fundamental reference points for the natural logarithm function.",
-    sectionId: "2"
-  },
-  obj9: {
-    question: "How do ln(x) and log(x) graphs compare?",
-    answer: "Both pass through (1, 0) and have vertical asymptotes at x = 0. Since e < 10, ln(x) is steeper and ln(x) > log(x) for all x > 1. They differ by a constant factor: ln(x) ≈ 2.303 × log(x).",
-    sectionId: "7"
-  },
-  obj10: {
-    question: "How do you compute log base 2 on a calculator?",
-    answer: "Use the change of base formula: log₂(x) = log(x)/log(2) or ln(x)/ln(2). For example, log₂(8) = log(8)/log(2) = 0.903/0.301 = 3.",
-    sectionId: "6"
+    question: "Why is the natural logarithm written ln and not nl?",
+    answer: "Because the letters are Latin rather than English: **logarithmus naturalis**, so the $l$ leads. The mark is credited to Irving Stringham in 1893. Unlike a bare $\\log$, it carries no dialect at all, meaning base $e$ in every field, which makes it the one logarithm symbol you can move between documents without checking first.",
+    sectionId: "notation"
   }
 }
 
@@ -458,19 +429,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/logarithms/common-natural"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -616,6 +574,22 @@ export default function PageTemplate({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Common and Natural Logarithms FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -655,12 +629,6 @@ export default function PageTemplate({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

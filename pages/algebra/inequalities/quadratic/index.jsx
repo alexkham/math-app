@@ -7,6 +7,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -333,44 +334,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a quadratic inequality?",
-    answer: "A quadratic inequality has the form ax² + bx + c > 0 (or <, ≤, ≥) where a ≠ 0. It asks where the quadratic expression is positive or negative. Solutions depend on the roots of the corresponding equation and the sign of the leading coefficient a.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How does the discriminant affect quadratic inequality solutions?",
-    answer: "The discriminant Δ = b² - 4ac determines structure. If Δ > 0: two roots create three intervals. If Δ = 0: one repeated root creates two regions with the same sign. If Δ < 0: no real roots means one sign everywhere (determined by a).",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you solve a quadratic inequality with two roots?",
-    answer: "Find the roots r₁ < r₂. If a > 0: positive outside roots (union of outer intervals), negative between them. If a < 0: positive between roots, negative outside. Select intervals matching the inequality direction.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you solve a quadratic inequality with one repeated root?",
-    answer: "The quadratic factors as a(x - r)². Since (x - r)² ≥ 0 always, the expression has the sign of a everywhere except at x = r where it's zero. For a > 0 and > 0: solution is all x ≠ r. For ≥ 0: all real numbers.",
+    question: "Why is the solution to $x^2 - 6x + 9 > 0$ everything except one point?",
+    answer: "Because the expression factors as $(x - 3)^2$, which is positive everywhere except at $x = 3$, where it equals zero. Zero fails a strict inequality, so that single point drops out and the answer is $(-\\infty, 3) \\cup (3, \\infty)$. Switch to $\\geq 0$ and the point returns, making the solution every real number.",
     sectionId: "4"
   },
-  obj5: {
-    question: "What if a quadratic inequality has no real roots?",
-    answer: "When Δ < 0, the quadratic never equals zero and maintains one sign everywhere — the sign of a. If a > 0: expression is always positive, so > 0 holds for all x. If a < 0: always negative, so < 0 holds for all x.",
+  obj2: {
+    question: "Can a quadratic inequality have no solution at all?",
+    answer: "Yes, whenever the direction contradicts the sign the expression always has. With $\\Delta < 0$ and $a > 0$ the expression is positive everywhere, so $ax^2 + bx + c < 0$ is satisfied by nothing. The same happens at a double root: with $a < 0$, the expression is never positive, so $> 0$ has no solution.",
     sectionId: "5"
   },
-  obj6: {
-    question: "How does the sign chart method work for quadratic inequalities?",
-    answer: "Factor the quadratic, mark roots on a number line creating intervals. Track each factor's sign in each interval (negative left of its root, positive right). Multiply signs to get the product's sign. Select intervals matching the inequality.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How does the parabola help solve quadratic inequalities?",
-    answer: "The inequality ax² + bx + c > 0 asks where the parabola y = ax² + bx + c is above the x-axis; < 0 asks where it's below. If a > 0 (opens up): above axis outside roots. If a < 0 (opens down): above axis between roots.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What are reducible quadratic inequalities?",
-    answer: "Higher-degree inequalities like x⁴ - 5x² + 4 > 0 become quadratic with substitution u = x². Solve for u, then back-substitute. Each positive u gives two x values (±√u), and u ≥ 0 is required since u = x².",
-    sectionId: "8"
+  obj3: {
+    question: "If a quadratic has no real roots, do you still need a sign chart?",
+    answer: "No. Real roots are what carve the number line into intervals, so without them there is a single interval, the whole line, and one sign to determine. That sign is the sign of the leading coefficient $a$. Evaluate the discriminant, check $a$, and the answer is either all reals or nothing at all.",
+    sectionId: "5"
   }
 }
 
@@ -445,19 +421,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -597,6 +560,22 @@ const schemas = {
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Quadratic Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -714,12 +693,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

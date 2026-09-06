@@ -8,6 +8,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -642,44 +643,19 @@ The sign of $a$ determines the parabola's orientation — opening upward when $a
 
 const faqQuestions = {
   obj1: {
-    question: "What is a quadratic equation?",
-    answer: "A quadratic equation has the form ax² + bx + c = 0 where a ≠ 0. The variable appears to the second power as its highest degree. Every quadratic can be brought into standard form by rearranging terms.",
-    sectionId: "1"
+    question: "In $x^2 = 5x - 6$, is $b$ equal to $5$ or $-5$?",
+    answer: "It is $-5$. The letters $a$, $b$ and $c$ mean nothing until the equation sits in standard form, so rearrange first: $x^2 - 5x + 6 = 0$. The sign travels with the term as it crosses, giving $a = 1$, $b = -5$, $c = 6$. Reading coefficients off an unrearranged equation makes every sign in the formula suspect.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you solve quadratic equations by factoring?",
-    answer: "Factor the quadratic into two binomials: (px + q)(rx + s) = 0. By the zero-product property, set each factor to zero and solve the resulting linear equations. This works when the quadratic factors neatly over rationals.",
-    sectionId: "2"
+    question: "Is the discriminant written $\\Delta$ or $D$?",
+    answer: "Both, and they mean the same thing. International and university texts favour $\\Delta$, while Russian, German and much school-level writing use capital $D$; the definition $b^2 - 4ac$ and the verdicts are identical. Pick whichever your course uses and stay consistent. Note that this $\\Delta$ is unrelated to $\\Delta x$, which means a change in $x$.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is completing the square?",
-    answer: "Completing the square transforms ax² + bx + c = 0 into (x + k)² = d form. Add (b/2a)² to both sides to create a perfect square trinomial, then take the square root. This method works universally for all quadratics.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is the quadratic formula?",
-    answer: "The quadratic formula x = (-b ± √(b²-4ac))/2a gives both solutions directly from the coefficients. It's derived from completing the square on the general equation and works for any quadratic regardless of factorability.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What does the discriminant tell you?",
-    answer: "The discriminant Δ = b² - 4ac determines the nature of solutions. If Δ > 0: two distinct real roots. If Δ = 0: one repeated (double) root. If Δ < 0: no real roots, but two complex conjugate roots.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What are Vieta's formulas for quadratics?",
-    answer: "For ax² + bx + c = 0 with roots x₁ and x₂: the sum x₁ + x₂ = -b/a and the product x₁·x₂ = c/a. They verify solutions, construct equations from known roots, and can solve simple quadratics by inspection — find two numbers with the right sum and product.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What are reducible equations?",
-    answer: "Equations like ax⁴ + bx² + c = 0 (bi-quadratic) can be reduced to quadratics by substituting u = x². Solve for u, then back-substitute to find x = ±√u for each positive u value.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do quadratic equations relate to parabolas?",
-    answer: "Solutions of ax² + bx + c = 0 are the x-intercepts of y = ax² + bx + c. The discriminant determines whether the parabola crosses the axis twice (Δ > 0), touches once (Δ = 0), or never touches (Δ < 0).",
-    sectionId: "8"
+    question: "What is the difference between $x_2$ and $x^2$?",
+    answer: "Position decides: a lowered index enumerates, a raised one operates. So $x_2$ is the second root, a number in its own right, while $x^2$ is $x$ multiplied by itself. A double root is written $x_1 = x_2$, meaning two labels pointing at one value, which is why the subscripts never have to say which root is which.",
+    sectionId: "notation"
   }
 }
 
@@ -754,19 +730,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -935,6 +898,22 @@ export default function QuadraticEquationsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Quadratic Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -972,12 +951,6 @@ export default function QuadraticEquationsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

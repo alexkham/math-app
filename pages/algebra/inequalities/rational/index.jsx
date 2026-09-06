@@ -7,6 +7,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -382,44 +383,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a rational inequality?",
-    answer: "A rational inequality involves a fraction with the variable in the denominator, like (x-2)/(x+1) > 0. It asks where the rational expression is positive, negative, or zero — requiring sign analysis across the entire number line, not just finding roots.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What are critical points in rational inequalities?",
-    answer: "There are two types: numerator zeros (where the expression equals zero) and denominator zeros (where it's undefined). Both create interval boundaries on the sign chart, but denominator zeros are always excluded from the solution.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you solve rational inequalities with sign charts?",
-    answer: "Factor numerator and denominator, identify all critical points (zeros of both), create a sign chart with one row per factor, determine the sign in each interval by multiplying factor signs, select intervals matching the inequality, then handle endpoint inclusion.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "Which critical points are included in rational inequality solutions?",
-    answer: "For ≤ or ≥: numerator zeros are included (expression equals zero there), denominator zeros are always excluded (expression undefined). For < or >: both types are excluded. Denominator zeros are never included regardless of inequality type.",
+    question: "Why can a numerator zero be included but a denominator zero never?",
+    answer: "Because they fail for different reasons. At a numerator zero the expression equals zero, which satisfies $\\leq$ or $\\geq$ but not a strict sign, so it is included under non-strict inequalities only. At a denominator zero the expression has no value at all, so it is neither less than, equal to, nor greater than anything, and it is excluded under every inequality sign.",
     sectionId: "4"
   },
-  obj5: {
-    question: "Why can't you cross-multiply rational inequalities?",
-    answer: "The denominator changes sign across the number line. Multiplying both sides requires flipping the inequality in some intervals but not others — impossible with a single multiplication. Always use sign charts instead of cross-multiplying.",
+  obj2: {
+    question: "Why does cross-multiplying work for rational equations but not inequalities?",
+    answer: "Because an equation has no direction to lose. Multiplying by the denominator $Q(x)$ preserves an equality regardless of sign, but for an inequality it preserves the direction where $Q(x) > 0$ and reverses it where $Q(x) < 0$. One multiplication cannot cover both regions, so a single cross-multiplication silently mixes two contradictory cases.",
     sectionId: "5"
   },
-  obj6: {
-    question: "How do you put rational inequalities in standard form?",
-    answer: "Move everything to one side to get P(x)/Q(x) > 0 (or <, ≤, ≥). For inequalities like 1/(x-3) ≤ 2/(x+1), subtract the right side and combine into a single fraction over a common denominator, then apply the sign chart.",
+  obj3: {
+    question: "What goes wrong if you leave fractions on both sides?",
+    answer: "The sign chart has nothing to read. It needs one rational expression compared to zero, so $\\frac{1}{x-3} \\leq \\frac{2}{x+1}$ must first become $\\frac{-x+7}{(x-3)(x+1)} \\leq 0$ by subtracting and combining over a common denominator. Working across two separate fractions leads straight back into the cross-multiplication trap.",
     sectionId: "6"
-  },
-  obj7: {
-    question: "How do repeated factors affect rational inequalities?",
-    answer: "A factor with even multiplicity (like (x-1)²) doesn't change the overall sign when crossing that critical point — it's always non-negative. Only odd-multiplicity factors flip the sign. Track multiplicity separately for each factor.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do rational inequalities differ from rational equations?",
-    answer: "Rational equations ask where P(x)/Q(x) = 0, requiring only numerator zeros (with domain restrictions). Inequalities ask where it's positive or negative, requiring sign analysis of both numerator and denominator across all intervals.",
-    sectionId: "8"
   }
 }
 
@@ -495,19 +471,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
    
    
@@ -659,6 +622,22 @@ export default function RationalInequalitiesPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Rational Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -776,12 +755,6 @@ export default function RationalInequalitiesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -493,33 +493,6 @@ Powers and roots are inverse operations. If raising 3 to the second power gives 
 }
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a root in math?",
-    answer: "A root reverses exponentiation. The nth root of b asks what number, raised to the nth power, produces b. For example, the square root of 25 is 5 because 5 squared equals 25, and the cube root of 8 is 2 because 2 cubed equals 8.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the difference between even and odd roots?",
-    answer: "Even-index roots (square root, fourth root) require non-negative radicands in real numbers and always return a non-negative principal root. Odd-index roots (cube root, fifth root) accept any real input, including negative numbers, and return one unique real value.",
-    sectionId: "3"
-  },
-  obj3: {
-    question: "How are roots related to exponents?",
-    answer: "Roots and fractional exponents are equivalent notations. The nth root of a equals a raised to the power 1/n. More generally, the nth root of a to the m equals a to the power m/n. All exponent laws apply to both forms.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "What is a principal root?",
-    answer: "The principal root is the value returned by the radical symbol. For even-index roots, it is the non-negative root. For odd-index roots, it is the unique real root. This convention ensures the radical produces exactly one output for each valid input.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "Can you take an even root of a negative number?",
-    answer: "Not in the real number system. No real number squared gives a negative result. However, using the imaginary unit i where i squared equals negative one, even roots of negative numbers become expressible as complex numbers. For example, the square root of negative 4 equals 2i.",
-    sectionId: "9"
-  }
-}
 
 
 const schemas = {
@@ -585,19 +558,6 @@ const schemas = {
         "item": "https://www.learnmathclass.com/algebra/roots"
       }
     ]
-  },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
   }
 }
 
@@ -612,7 +572,6 @@ const schemas = {
     obj5Table,
     obj9Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Roots & Radicals: Square, Cube & Nth Roots | Learn Math Class",
@@ -635,7 +594,6 @@ export default function RootsAndRadicalsPage({
   obj5Table,
   obj9Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -839,12 +797,6 @@ export default function RootsAndRadicalsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>
