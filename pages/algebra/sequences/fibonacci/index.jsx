@@ -11,6 +11,7 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -338,25 +339,20 @@ Where Fibonacci's formula subtracts powers of the two roots and divides by $\\sq
 
 const faqQuestions = {
   obj1: {
-    question: "What is the Fibonacci sequence?",
-    answer: "The Fibonacci sequence is defined by the recurrence F_n = F_(n-1) + F_(n-2) with initial values F_1 = 1 and F_2 = 1. Each term after the second is the sum of its two immediate predecessors, producing 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, and so on."
+    question: "Can every whole number be written as a sum of Fibonacci numbers?",
+    answer: "Yes, and in exactly one way if you forbid consecutive ones. That is Zeckendorf's theorem: every positive integer has a unique representation as a sum of non-consecutive Fibonacci numbers. For instance $30 = 21 + 8 + 1$, which is $F_8 + F_6 + F_1$. Allowing consecutive terms would destroy the uniqueness.",
+    sectionId: "4"
   },
   obj2: {
-    question: "What is the relationship between Fibonacci numbers and the golden ratio?",
-    answer: "The ratio of consecutive Fibonacci numbers F_(n+1) divided by F_n converges to the golden ratio phi, approximately 1.618. The golden ratio satisfies the equation phi squared equals phi plus 1. The Fibonacci sequence grows exponentially at rate phi, roughly 61.8 percent per step."
+    question: "Is the greatest common divisor of two Fibonacci numbers also a Fibonacci number?",
+    answer: "Always, and its index is the GCD of the original indices: $\\gcd(F_m, F_n) = F_{\\gcd(m,n)}$. So the GCD of $F_{12}$ and $F_{18}$ is $F_6$, because $\\gcd(12, 18) = 6$. The identity ties the divisibility structure of the sequence directly to ordinary integer arithmetic on the positions.",
+    sectionId: "4"
   },
   obj3: {
-    question: "What is Binet's formula?",
-    answer: "Binet's formula gives an explicit closed-form expression for Fibonacci numbers: F_n equals (phi to the n minus psi to the n) divided by the square root of 5, where phi and psi are the two roots of the characteristic equation x squared equals x plus 1. Although the formula involves irrational numbers, it always produces an integer."
-  },
-  obj4: {
     question: "What is Cassini's identity?",
-    answer: "Cassini's identity states that F_(n-1) times F_(n+1) minus F_n squared equals negative 1 to the power n. The product of the two Fibonacci neighbors minus the square of the middle term alternates between plus 1 and minus 1 as n changes parity."
-  },
-  obj5: {
-    question: "What are Lucas numbers?",
-    answer: "Lucas numbers follow the same recurrence as Fibonacci but start from L_1 = 1 and L_2 = 3, producing 1, 3, 4, 7, 11, 18, 29, 47, and so on. The ratio of consecutive Lucas numbers also converges to the golden ratio. They are linked to Fibonacci by the identity L_n = F_(n-1) + F_(n+1)."
-  },
+    answer: "It says that multiplying a Fibonacci number's two neighbours and subtracting the square of the number itself always gives $\\pm 1$: $F_{n-1}F_{n+1} - F_n^2 = (-1)^n$. Taking $n = 6$ gives $5 \\cdot 13 - 8^2 = 65 - 64 = 1$. The result alternates in sign with $n$ and never drifts further from zero.",
+    sectionId: "4"
+  }
 }
 
 const schemas = {
@@ -429,19 +425,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -526,6 +509,22 @@ export default function FibonacciSequencePage({seoData, sectionsContent, introCo
           sectionsContent.obj6.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Fibonacci Sequence FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -662,12 +661,6 @@ export default function FibonacciSequencePage({seoData, sectionsContent, introCo
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -244,25 +245,20 @@ This extends the figurate number idea from two dimensions (triangles) to three (
 
 const faqQuestions = {
   obj1: {
-    question: "What are triangular numbers?",
-    answer: "Triangular numbers count objects arranged in successively larger equilateral triangles, with one dot in the first row, two in the second, three in the third, and so on. The n-th triangular number T_n equals the sum of the first n positive integers. The first triangular numbers are 1, 3, 6, 10, 15, 21, 28, 36, 45, and 55."
+    question: "How do you test whether a number is triangular?",
+    answer: "Check whether $8m + 1$ is a perfect square. Solving $m = \\frac{n(n+1)}{2}$ for $n$ gives $n = \\frac{-1 + \\sqrt{1 + 8m}}{2}$, which lands on a positive integer exactly when $8m + 1$ is a square. Take $m = 15$: then $8(15) + 1 = 121 = 11^2$, so $15$ is triangular, and indeed $T_5 = 15$.",
+    sectionId: "3"
   },
   obj2: {
-    question: "What is the formula for the nth triangular number?",
-    answer: "The closed-form formula for the n-th triangular number is T_n = n times (n + 1) divided by 2. This follows directly from the arithmetic series formula applied to the sum 1 + 2 + 3 + ... + n. The same value equals the binomial coefficient (n+1) choose 2."
+    question: "Are triangular numbers odd or even?",
+    answer: "They alternate in pairs rather than one by one. $T_n$ is odd when $n$ leaves remainder $1$ or $2$ on division by $4$, and even when the remainder is $0$ or $3$. The parity therefore runs odd, odd, even, even, odd, odd, even, even, and repeats with period four rather than switching every term.",
+    sectionId: "3"
   },
   obj3: {
-    question: "How do you check whether a number is triangular?",
-    answer: "A positive integer m is triangular if and only if 8m + 1 is a perfect square. Solving the equation m = n(n+1)/2 for n gives n = (-1 + square root of (1 + 8m)) divided by 2, which is a positive integer precisely when 8m + 1 is a perfect square."
-  },
-  obj4: {
-    question: "What is the relationship between triangular numbers and square numbers?",
-    answer: "The sum of two consecutive triangular numbers is always a perfect square: T_n + T_(n-1) = n squared. Geometrically, two triangles of consecutive sizes fit together to form a square of side n. This identity links the two simplest figurate number sequences."
-  },
-  obj5: {
-    question: "How are triangular numbers connected to combinatorics?",
-    answer: "The n-th triangular number equals the binomial coefficient (n+1) choose 2, the number of ways to select 2 items from a set of n+1. For example, T_4 = 10 equals the number of distinct handshakes possible among 5 people. This connection places triangular numbers at the heart of basic counting problems."
-  },
+    question: "What do you get by adding up triangular numbers?",
+    answer: "The tetrahedral numbers, given by $\\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$. Where a triangular number counts dots in a flat triangle, stacking those triangles gives a tetrahedron, so the sum extends the figurate idea from two dimensions into three. The formula mirrors the triangular one with an extra factor.",
+    sectionId: "3"
+  }
 }
 
 const schemas = {
@@ -335,19 +331,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -408,6 +391,22 @@ export default function TriangularNumbersPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Triangular Numbers FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -560,12 +559,6 @@ export default function TriangularNumbersPage({seoData, sectionsContent, introCo
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

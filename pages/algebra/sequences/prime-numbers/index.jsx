@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -313,25 +314,20 @@ The prime number theorem was conjectured by Gauss and Legendre in the late 18th 
 
 const faqQuestions = {
   obj1: {
-    question: "What is a prime number?",
-    answer: "A prime number is an integer greater than 1 whose only positive divisors are 1 and itself. A composite number is an integer greater than 1 that has at least one divisor other than 1 and itself. The number 2 is the only even prime, and the number 1 is neither prime nor composite. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29."
+    question: "Is $2^p - 1$ prime whenever $p$ is prime?",
+    answer: "No, and this is the standard trap with Mersenne numbers. A prime exponent is necessary but not sufficient: $p = 2, 3, 5, 7$ give the primes $3, 7, 31, 127$, but $p = 11$ gives $2^{11} - 1 = 2047$, which factors as $23 \\times 89$. Mersenne primes still supply the largest primes known, found by dedicated search.",
+    sectionId: "6"
   },
   obj2: {
-    question: "How do you know there are infinitely many primes?",
-    answer: "Euclid's classical proof shows that no finite list can contain all primes. Assume only finitely many primes exist, multiply them all together, and add 1. The resulting number is not divisible by any prime on the list, so either it is itself a new prime or it has a prime factor missing from the list. Either way, the original list is incomplete."
+    question: "Was Fermat right that every $2^{2^n} + 1$ is prime?",
+    answer: "No. Fermat conjectured it after checking $n = 0$ through $4$, which give $3, 5, 17, 257$ and $65537$. Euler then factored the next one: $2^{2^5} + 1 = 4294967297 = 641 \\times 6700417$. Those five remain the only Fermat primes anyone has found, so the conjecture failed at the first case beyond hand computation.",
+    sectionId: "6"
   },
   obj3: {
-    question: "How does the sieve of Eratosthenes find primes?",
-    answer: "The sieve of Eratosthenes finds all primes up to a limit n. List the integers from 2 to n. Take the smallest unmarked number, mark it prime, and cross out all its multiples. Repeat with the next unmarked number. The process stops once the current prime exceeds the square root of n. The surviving unmarked numbers are exactly the primes up to n."
-  },
-  obj4: {
-    question: "How do you check whether a number is prime?",
-    answer: "The most direct method is trial division: test whether n is divisible by any integer from 2 up to the square root of n. The square root suffices because any composite number has a factor at or below its square root. Efficiency improves by skipping even numbers and checking only 2, 3, and integers of the form 6k plus or minus 1."
-  },
-  obj5: {
-    question: "What does the prime number theorem say?",
-    answer: "The prime number theorem states that the number of primes less than or equal to n, written pi(n), is approximately n divided by the natural logarithm of n. The approximation becomes more accurate in relative terms as n grows. Practically, near a large number n, roughly one in every ln(n) integers is prime, so primes spread further apart on average but never disappear."
-  },
+    question: "Are there infinitely many twin primes?",
+    answer: "Nobody knows, and it is one of the oldest open problems in mathematics. Twin primes are pairs differing by $2$, such as $(11, 13)$ and $(29, 31)$, and they keep appearing as far as anyone has searched. That contrasts sharply with primes themselves, where infinitude was proved in antiquity. The twin prime conjecture is widely believed but unproven.",
+    sectionId: "6"
+  }
 }
 
 const schemas = {
@@ -404,19 +400,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -502,6 +485,22 @@ export default function PrimeNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Prime Numbers FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -630,12 +629,6 @@ export default function PrimeNumbersPage({seoData, sectionsContent, introContent
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

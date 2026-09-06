@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -273,25 +274,20 @@ The triple $(3, 4, 5)$ comes from $m = 2, n = 1$; the triple $(5, 12, 13)$ from 
 
   const faqQuestions = {
     obj1: {
-      question: "What are square numbers?",
-      answer: "The n-th square number is S_n = n squared, the product of an integer with itself. Geometrically, n squared dots can be arranged in a square grid with n rows and n columns. The first square numbers are 1, 4, 9, 16, 25, 36, 49, 64, 81, and 100. A positive integer is called a perfect square if it equals n squared for some integer n."
+      question: "How can you tell at a glance that a number is not a perfect square?",
+      answer: "Check its last digit. Perfect squares can only end in $0, 1, 4, 5, 6$ or $9$, so anything ending in $2, 3, 7$ or $8$ is ruled out immediately without computing a root. A stronger test uses remainders: a perfect square is always $0$ or $1$ modulo $4$, and never $2$ or $3$.",
+      sectionId: "3"
     },
     obj2: {
-      question: "What is the sum of the first n square numbers?",
-      answer: "The sum of the first n square numbers is given by the formula n times (n + 1) times (2n + 1) divided by 6. This expression is cubic in n, in contrast to the quadratic formula for the sum of natural numbers. The result can be derived using the telescoping identity for cubes."
+      question: "How rare are perfect squares among the integers?",
+      answer: "They thin out steadily, because the gap between $n^2$ and $(n+1)^2$ is $2n + 1$ and grows without limit. The count up to $N$ is $\\lfloor \\sqrt{N} \\rfloor$, so ten of the first hundred integers are perfect squares, but only a hundred of the first ten thousand. The proportion keeps falling.",
+      sectionId: "3"
     },
     obj3: {
-      question: "Why is every perfect square a sum of consecutive odd numbers?",
-      answer: "Each square number is built from the previous one by adding an L-shaped border, called a gnomon, containing 2n minus 1 dots. The increments are the odd numbers 1, 3, 5, 7, and so on, so n squared equals the sum 1 + 3 + 5 + ... + (2n - 1). This identity can also be verified directly with the arithmetic series formula."
-    },
-    obj4: {
-      question: "How can you quickly tell whether a number is not a perfect square?",
-      answer: "The last digit of a perfect square can only be 0, 1, 4, 5, 6, or 9. Any integer ending in 2, 3, 7, or 8 is automatically not a perfect square. Modular tests also help: a perfect square modulo 4 is always 0 or 1, and modulo 3 is always 0 or 1, never 2."
-    },
-    obj5: {
-      question: "How are square numbers related to triangular numbers?",
-      answer: "Every perfect square is the sum of two consecutive triangular numbers: n squared equals T_n plus T_(n-1). Geometrically, a square grid of n squared dots can be cut along a diagonal staircase, splitting it into two triangles of consecutive sizes. This identity directly links the two simplest figurate number sequences."
-    },
+      question: "Can two consecutive perfect squares share a common factor?",
+      answer: "Never, other than $1$. Consecutive squares are always coprime: $\\gcd(n^2, (n+1)^2) = 1$. It follows from the fact that $n$ and $n + 1$ are themselves coprime, since consecutive integers share no factor, and squaring preserves that because the GCD of squares is the square of the GCD.",
+      sectionId: "3"
+    }
   }
 
   const schemas = {
@@ -364,19 +360,6 @@ The triple $(3, 4, 5)$ comes from $m = 2, n = 1$; the triple $(5, 12, 13)$ from 
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -448,6 +431,22 @@ export default function SquareNumbersPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Square Numbers FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -592,12 +591,6 @@ export default function SquareNumbersPage({seoData, sectionsContent, introConten
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

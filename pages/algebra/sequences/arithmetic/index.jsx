@@ -9,6 +9,7 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -498,25 +499,20 @@ For example, inserting $3$ arithmetic means between $5$ and $25$ requires $d = \
 
 const faqQuestions = {
   obj1: {
-    question: "What is an arithmetic sequence?",
-    answer: "An arithmetic sequence is a sequence in which consecutive terms differ by a constant value called the common difference, denoted d. Starting from a first term a_1, each subsequent term is obtained by adding d to the previous one, producing the pattern a_1, a_1 + d, a_1 + 2d, and so on."
+    question: "Should a sequence start at $a_1$ or $a_0$?",
+    answer: "Both conventions are in use, and the choice changes every formula. This page and most school texts begin at $a_1$, giving the general term $a_1 + (n-1)d$. Computer science and many analysis texts begin at $a_0$, where the same sequence has general term $a_0 + nd$. Neither is wrong, but mixing them shifts your answer by one full step.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the formula for the nth term of an arithmetic sequence?",
-    answer: "The general term of an arithmetic sequence is given by a_n = a_1 + (n - 1)d, where a_1 is the first term, d is the common difference, and n is the position of the term. This explicit formula allows direct computation of any term without needing to know the previous ones."
+    question: "Is $\\{a_n\\}$ a set?",
+    answer: "No, despite the braces. A sequence is ordered and repeats freely, so $\\{1, 1, 2, 1\\}$ is a perfectly good sequence. A set is unordered and erases duplicates, so the same braces there would collapse to $\\{1, 2\\}$. The glyphs collide but the objects are incompatible, which is why analysis texts often write $(a_n)$ instead.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you find the sum of an arithmetic sequence?",
-    answer: "The sum of the first n terms of an arithmetic sequence, called an arithmetic series, is S_n = n/2 times (a_1 + a_n). An equivalent form using only the first term and common difference is S_n = n/2 times (2a_1 + (n - 1)d). The formula is derived by pairing terms from opposite ends of the sum."
-  },
-  obj4: {
-    question: "How do you identify whether a sequence is arithmetic?",
-    answer: "Compute the differences between consecutive terms. If every difference equals the same value, the sequence is arithmetic and that value is the common difference d. A single pair of unequal differences is enough to disqualify the sequence from being arithmetic."
-  },
-  obj5: {
-    question: "What is the arithmetic mean in an arithmetic sequence?",
-    answer: "The arithmetic mean of two numbers a and b is (a + b)/2. In an arithmetic sequence, every interior term equals the arithmetic mean of its two neighbors: a_n = (a_(n-1) + a_(n+1))/2. This property follows directly from the constant-difference structure."
-  },
+    question: "Why isn't $a_n = a_{n-1} + d$ enough to define a sequence?",
+    answer: "Because a recurrence without an anchor describes infinitely many sequences at once. The rule says each term exceeds the previous one by $d$, but says nothing about where to begin, so every choice of first term satisfies it equally. Pairing it with an initial value such as $a_1 = 3$ is what pins down one particular sequence.",
+    sectionId: "notation"
+  }
 }
 
 const schemas = {
@@ -589,19 +585,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -712,6 +695,22 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
           sectionsContent.obj7.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Arithmetic Sequences FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -840,12 +839,6 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

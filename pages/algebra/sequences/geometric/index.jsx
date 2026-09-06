@@ -8,6 +8,7 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -568,25 +569,20 @@ Equality holds only when all values are identical. This inequality extends to in
 
 const faqQuestions = {
   obj1: {
-    question: "What is a geometric sequence?",
-    answer: "A geometric sequence is a sequence in which consecutive terms have a constant ratio called the common ratio, denoted r. Starting from a nonzero first term a_1, each subsequent term is obtained by multiplying the previous one by r, producing the pattern a_1, a_1 r, a_1 r squared, and so on."
+    question: "Why does $0.333\\ldots$ equal exactly $\\frac{1}{3}$?",
+    answer: "Because the decimal is an infinite geometric series in disguise. Writing it out gives $\\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots$, with first term $\\frac{3}{10}$ and ratio $\\frac{1}{10}$. Since the ratio is under $1$, the series converges to $\\frac{3/10}{9/10} = \\frac{1}{3}$ exactly. It is not an approximation that falls slightly short.",
+    sectionId: "6"
   },
   obj2: {
-    question: "What is the formula for the nth term of a geometric sequence?",
-    answer: "The general term of a geometric sequence is a_n = a_1 times r raised to the power n minus 1, where a_1 is the first term, r is the common ratio, and n is the position. This explicit formula gives any term directly without computing the ones before it."
+    question: "Why is the condition $|r| < 1$ rather than $r < 1$?",
+    answer: "Because what matters is whether the terms shrink in size, not whether the ratio is small. A ratio of $-\\frac{1}{2}$ converges perfectly well, since the magnitudes halve each step even as the signs alternate. A ratio of $-2$ satisfies $r < 1$ yet the terms grow without bound. Absolute value is what captures shrinking.",
+    sectionId: "6"
   },
   obj3: {
-    question: "What is the sum of a geometric series?",
-    answer: "The sum of the first n terms of a geometric sequence is S_n = a_1 times (1 minus r to the power n) divided by (1 minus r), valid when r is not equal to 1. When r equals 1, every term is a_1 and the sum is simply n times a_1. The formula is derived using a telescoping subtraction trick."
-  },
-  obj4: {
-    question: "When does an infinite geometric series converge?",
-    answer: "An infinite geometric series converges when the absolute value of the common ratio r is less than 1. In that case, the sum equals a_1 divided by (1 minus r). When the absolute value of r is greater than or equal to 1, the terms do not diminish and the series diverges with no finite sum."
-  },
-  obj5: {
-    question: "What is the geometric mean in a geometric sequence?",
-    answer: "The geometric mean of two positive numbers a and b is the square root of their product. In a geometric sequence with positive terms, every interior term equals the geometric mean of its two neighbors. The AM-GM inequality states that the geometric mean never exceeds the arithmetic mean, with equality only when all values are identical."
-  },
+    question: "What happens to a geometric series when $r = -1$?",
+    answer: "It diverges, though not by growing. The terms are $a_1, -a_1, a_1, -a_1, \\ldots$, so the partial sums oscillate between $a_1$ and $0$ forever without approaching any single value. Divergence means the partial sums fail to settle, which covers oscillation as well as unbounded growth. No finite sum exists.",
+    sectionId: "6"
+  }
 }
 
 
@@ -660,19 +656,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -776,6 +759,22 @@ export default function GeometricSequencesPage({seoData, sectionsContent, introC
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Geometric Sequences FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -896,12 +895,6 @@ export default function GeometricSequencesPage({seoData, sectionsContent, introC
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

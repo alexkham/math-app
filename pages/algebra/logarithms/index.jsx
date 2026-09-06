@@ -1380,7 +1380,6 @@ export default function LogarithmsPage({
       __html: JSON.stringify(schemas.breadcrumb)
     }}
   />
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

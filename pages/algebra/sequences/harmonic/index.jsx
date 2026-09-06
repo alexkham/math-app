@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -267,25 +268,20 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a harmonic sequence?",
-    answer: "A harmonic sequence is a sequence whose terms are the reciprocals of an arithmetic sequence. If the underlying arithmetic sequence has first term b_1 and common difference d, the harmonic sequence has general term a_n = 1 divided by (b_1 + (n-1)d). The simplest example is 1, 1/2, 1/3, 1/4, and so on."
+    question: "How can the harmonic series diverge when its terms shrink to zero?",
+    answer: "Because terms shrinking to zero is necessary for convergence but not sufficient. The terms $\\frac{1}{n}$ do approach zero, yet they do so slowly enough that the running total still grows without bound. A geometric series with $|r| < 1$ shrinks fast enough to converge; the harmonic series sits just on the wrong side of that threshold.",
+    sectionId: "3"
   },
   obj2: {
-    question: "Does the harmonic series converge or diverge?",
-    answer: "The harmonic series, the infinite sum of 1/n for n from 1 to infinity, diverges. Although the individual terms shrink to zero, they do so too slowly for the partial sums to remain bounded. Oresme's classical proof groups the terms into doubling blocks, each contributing at least 1/2 to the total."
+    question: "Is there a formula for $1 + \\frac{1}{2} + \\frac{1}{3} + \\cdots + \\frac{1}{n}$?",
+    answer: "No elementary one exists, and that is a genuine mathematical fact rather than a gap in technique. Unlike arithmetic and geometric sequences, harmonic partial sums have no closed form in $n$. They are called harmonic numbers, written $H_n$, and they grow roughly like $\\ln n$, but no simple algebraic expression captures them exactly.",
+    sectionId: "2"
   },
   obj3: {
-    question: "What is the harmonic mean?",
-    answer: "The harmonic mean of n positive numbers is n divided by the sum of their reciprocals. For two numbers a and b, this simplifies to 2ab divided by (a + b). In a harmonic sequence, every interior term equals the harmonic mean of its two neighbors, mirroring the arithmetic mean property of arithmetic sequences."
-  },
-  obj4: {
-    question: "How do the arithmetic, geometric, and harmonic means compare?",
-    answer: "For any set of positive numbers, the harmonic mean is never greater than the geometric mean, which is never greater than the arithmetic mean: H is less than or equal to G is less than or equal to A. Equality throughout holds only when all the numbers are identical. This chain links the three families of sequences through their associated means."
-  },
-  obj5: {
-    question: "Why does the harmonic series diverge while the geometric series converges?",
-    answer: "Both series have terms approaching zero, but the rate matters. Geometric terms shrink by a constant factor at each step, fast enough to keep the total finite when the absolute value of the ratio is less than 1. Harmonic terms shrink too slowly: terms approaching zero is necessary for convergence but not sufficient."
-  },
+    question: "Which of the three means should you use?",
+    answer: "It depends on what the quantities do. Arithmetic mean suits additive processes, geometric mean suits multiplicative ones such as growth rates, and harmonic mean suits rates and reciprocals, like averaging speeds over equal distances. They are ordered $H \\leq G \\leq A$ for positive numbers, with all three equal only when every number is identical.",
+    sectionId: "5"
+  }
 }
 
 const schemas = {
@@ -358,19 +354,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -439,6 +422,22 @@ export default function HarmonicSequencesPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Harmonic Sequences FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -583,12 +582,6 @@ export default function HarmonicSequencesPage({seoData, sectionsContent, introCo
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>
