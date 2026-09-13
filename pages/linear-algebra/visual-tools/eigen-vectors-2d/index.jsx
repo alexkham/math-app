@@ -527,17 +527,17 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Eigenvector** &mdash; A nonzero vector $v$ such that $Av = \\lambda v$ for some scalar $\\lambda$. Matrix $A$ leaves the direction of $v$ unchanged and only scales it.
+      content:`**Eigenvector** &mdash; A nonzero vector $v$ such that $Av = \\lambda v$ for some scalar $\\lambda$. [Matrix](!/linear-algebra/matrix#1) $A$ leaves the direction of $v$ unchanged and only scales it.
 
 **Eigenvalue** &mdash; The scalar $\\lambda$ in $Av = \\lambda v$. It is the stretch factor along the eigenvector direction. A negative eigenvalue means the vector flips.
 
 **Eigendirection** &mdash; The line through the origin spanned by an eigenvector. Every vector on this line is also an eigenvector with the same eigenvalue.
 
-**Characteristic Polynomial** &mdash; The quadratic $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ whose roots are the eigenvalues of a $2 \\times 2$ matrix $A$.
+**Characteristic Polynomial** &mdash; The quadratic $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ whose roots are the [eigenvalues](!/linear-algebra/eigen#2) of a $2 \\times 2$ matrix $A$.
 
-**Defective Matrix** &mdash; A matrix with a repeated eigenvalue but fewer eigenvectors than the algebraic multiplicity. Cannot be diagonalized.
+**Defective Matrix** &mdash; A matrix with a repeated eigenvalue but fewer [eigenvectors](!/linear-algebra/eigen#2) than the [algebraic multiplicity](!/linear-algebra/eigen/characteristic-equation#6). Cannot be diagonalized.
 
-**Spectral Theorem** &mdash; Every symmetric matrix has perpendicular eigenvectors and real eigenvalues.`,
+**Spectral Theorem** &mdash; Every [symmetric matrix](!/linear-algebra/matrix/types#5) has perpendicular eigenvectors and real eigenvalues.`,
       before:``,
       after:``,
       link:'',
@@ -563,7 +563,7 @@ The green dashed lines are cheat sheets. The whole canvas is a search for the mo
       title:`Dragging v and Watching Av`,
       content:`Only the orange $v$ handle is draggable. Everything else &mdash; $Av$, the angle arc, the alignment color &mdash; updates instantly.
 
-&bull; **Drag $v$ in a circle** &mdash; watch $Av$ trace its own loop. The two curves agree only at the eigendirections.
+&bull; **Drag $v$ in a circle** &mdash; watch $Av$ [trace](!/linear-algebra/matrix/trace#1) its own loop. The two curves agree only at the eigendirections.
 &bull; **Speed of $Av$ relative to $v$** &mdash; in stretchy directions $Av$ runs ahead; in shrinking directions it lags behind. The eigenvalue magnitude is exactly that speed ratio.
 &bull; **Drag $v$ near the origin** &mdash; both vectors shrink. The ratio $|Av|/|v|$ stays defined as long as $v$ is nonzero.
 
@@ -593,11 +593,11 @@ When alignment is detected, the status strip turns amber and reads <strong>v is 
 Four possible appearances:
 
 &bull; **Two distinct real** &mdash; rows $\\lambda_1$ and $\\lambda_2$ in green, each with its unit eigenvector $(x, y)$. Two green dashed lines on the canvas.
-&bull; **Defective** &mdash; one row in pink with the repeated $\\lambda$ and a single eigenvector, plus a note that a generalized eigenvector is required for a full basis.
+&bull; **Defective** &mdash; one row in pink with the repeated $\\lambda$ and a single eigenvector, plus a note that a generalized eigenvector is required for a full [basis](!/linear-algebra/vector-spaces#2).
 &bull; **Isotropic** &mdash; one row in green: $\\lambda$ with the message "every direction is eigen". On the canvas, concentric green rings replace the lines.
 &bull; **Complex** &mdash; one row in purple: $\\lambda = a \\pm bi$ with the note "no real eigenvector".
 
-The bottom line shows $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ with the actual trace and determinant filled in, plus the discriminant $\\Delta$.`,
+The bottom line shows $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ with the actual trace and [determinant](!/linear-algebra/determinants#1) filled in, plus the discriminant $\\Delta$.`,
       before:``,
       after:``,
       link:'',
@@ -647,13 +647,13 @@ Useful pairing: turn off eigenlines and try to find them yourself, then turn the
     },
     obj8:{
       title:`What Is an Eigenvector?`,
-      content:`Given a square matrix $A$, an eigenvector is a nonzero vector $v$ that is mapped to a scalar multiple of itself:
+      content:`Given a [square matrix](!/linear-algebra/matrix/types#1) $A$, an eigenvector is a nonzero vector $v$ that is mapped to a scalar multiple of itself:
 
 $$A v = \\lambda v$$
 
 The scalar $\\lambda$ is the eigenvalue. Geometrically, $A$ does many things to most vectors &mdash; rotates them, shears them, mixes their components &mdash; but along an eigenvector it does only one thing: stretch or shrink. The direction is invariant.
 
-This is why eigenvectors matter: they reveal the natural axes of a linear transformation. In coordinates aligned with the eigenvectors, $A$ becomes a diagonal matrix, which is the simplest description possible.
+This is why eigenvectors matter: they reveal the natural axes of a [linear transformation](!/linear-algebra/transformations#1). In coordinates aligned with the eigenvectors, $A$ becomes a diagonal matrix, which is the simplest description possible.
 
 For deeper coverage of definitions, properties, and applications, see **eigenvectors theory page**, **eigenvalues definition**, and **matrix diagonalization**.`,
       before:``,
@@ -704,7 +704,7 @@ For full treatment see **characteristic polynomial**, **defective matrices**, an
     },
     obj12:{
       title:`Distinct Real Eigenvalues: Two Fixed Directions`,
-      content:`Four of the eleven presets have two different real eigenvalues. The frozen picture below is the diagonal matrix $\begin{pmatrix} 2 & 0 \\ 0 & 0.5 \end{pmatrix}$, whose eigenvalues are $2$ and $0.5$.
+      content:`Four of the eleven presets have two different real eigenvalues. The frozen picture below is the [diagonal matrix](!/linear-algebra/matrix/types#3) $\begin{pmatrix} 2 & 0 \\ 0 & 0.5 \end{pmatrix}$, whose eigenvalues are $2$ and $0.5$.
 
 Two dashed eigenlines are drawn, one per eigenvalue. Any vector lying along one of them is mapped to a multiple of itself: the transformation stretches it or shrinks it but never turns it.`,
       before:``,
@@ -728,7 +728,7 @@ The important point is that a repeated eigenvalue is not by itself a problem. Wh
     },
     obj14:{
       title:`Defective: a Repeated Eigenvalue Short of Directions`,
-      content:`Two presets are defective. The frozen picture shows one: a repeated eigenvalue whose eigenspace is only one-dimensional, so a single eigenline appears where the previous category had a whole plane.
+      content:`Two presets are defective. The frozen picture shows one: a repeated eigenvalue whose [eigenspace](!/linear-algebra/eigen#4) is only one-dimensional, so a single eigenline appears where the previous category had a whole plane.
 
 Drag $v$ anywhere off that one line and $Av$ refuses to align, no matter where you put it.`,
       before:``,

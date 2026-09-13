@@ -35,13 +35,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**LU decomposition** — the factorization $A = LU$ of a square matrix into a lower triangular $L$ and an upper triangular $U$.
+      content: `**LU decomposition** — the factorization $A = LU$ of a [square matrix](!/linear-algebra/matrix/types#1) into a lower triangular $L$ and an upper triangular $U$.
 
 **Unit lower triangular** — ones on the diagonal and zeros above it; the Doolittle convention used here, which makes $L$ unique.
 
-**Upper triangular** — zeros below the diagonal; $U$ is the row echelon form that Gaussian elimination produces.
+**Upper triangular** — zeros below the diagonal; $U$ is the [row echelon form](!/linear-algebra/linear-systems/echelon-form#1) that Gaussian elimination produces.
 
-**Multiplier** — $\\ell_{i,k} = u_{i,k} / u_{k,k}$, the multiple of the pivot row subtracted from row $i$ to clear its entry in column $k$; it is stored at position $(i, k)$ of $L$.
+**Multiplier** — $\\ell_{i,k} = u_{i,k} / u_{k,k}$, the multiple of the [pivot](!/linear-algebra/linear-systems/echelon-form#4) row subtracted from row $i$ to clear its entry in column $k$; it is stored at position $(i, k)$ of $L$.
 
 **Pivot** — the diagonal entry $u_{k,k}$ used to clear column $k$; it must be non-zero.
 
@@ -56,9 +56,9 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix, then watch $L$ and $U$ fill in as the elimination runs.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1), then watch $L$ and $U$ fill in as the elimination runs.
 
-• Use the **Preset** pills for six matrices chosen to show different outcomes: a classic integer case, negative pivots, a forced row swap, a $2 \\times 2$, a $4 \\times 4$ Pascal matrix, and a singular matrix
+• Use the **Preset** pills for six matrices chosen to show different outcomes: a classic integer case, negative pivots, a forced row swap, a $2 \\times 2$, a $4 \\times 4$ Pascal matrix, and a [singular matrix](!/linear-algebra/determinants#5)
 • Use the **Size** stepper for $2 \\times 2$ up to $4 \\times 4$; resizing keeps the existing entries and pads with the identity
 • Edit any **entry** directly in the grid, or press **Shuffle** for random small integers, with a zero planted in the corner three times in ten so the swap branch turns up
 • Hover the **?** icon for a reminder of what the factorization is and why it is the standard way to solve linear systems
@@ -262,7 +262,7 @@ The permutation is harmless for solving systems, since $A\\mathbf{x} = \\mathbf{
       title: `The Completed Factorization`,
       content: `The final scene shows $U$ upper triangular with its diagonal marked, $L$ with every multiplier in place, and the identity $A = LU$, or $PA = LU$ if a swap occurred, holding on screen.
 
-The frozen picture below is the classic preset finished: multipliers $2$, $4$ and $3$ in $L$, diagonal $2$, $1$ and $2$ in $U$, determinant $4$.`,
+The frozen picture below is the classic preset finished: multipliers $2$, $4$ and $3$ in $L$, diagonal $2$, $1$ and $2$ in $U$, [determinant](!/linear-algebra/determinants#1) $4$.`,
       before: ``,
       after: `From here every use of the factorization is a triangular solve. To solve $A\\mathbf{x} = \\mathbf{b}$, first solve $L\\mathbf{y} = \\mathbf{b}$ from the top down, which is trivial because $L$ is unit lower triangular, then $U\\mathbf{x} = \\mathbf{y}$ from the bottom up. Two passes, each about $n^2$ operations, against the $n^3$ of the factorization itself, which is done once.
 

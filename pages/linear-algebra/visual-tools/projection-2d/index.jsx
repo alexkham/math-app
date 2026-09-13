@@ -42,7 +42,7 @@ export async function getStaticProps(){
 
 **Image** &mdash; the set of all outputs $P\\mathbf{v}$; for a projection onto a line it is the line itself.
 
-**Kernel** &mdash; the set of vectors sent to $\\mathbf{0}$; here the line perpendicular to the projection line.
+**Kernel** &mdash; the set of [vectors](!/linear-algebra/vectors#1) sent to $\\mathbf{0}$; here the line perpendicular to the projection line.
 
 **Idempotent** &mdash; $P^2 = P$; projecting a second time changes nothing.
 
@@ -66,7 +66,7 @@ Try this sequence to build intuition:
 &bull; Press **play** in the animation panel. The grid and unit square morph from the identity to $P$, flattening the whole plane onto the line, which is what a rank-$1$ map does to space.
 &bull; Move the **$\\theta$ slider** in the matrix card and watch the four entries of $P$ change while $\\det P$ stays $0$ and $\\operatorname{tr} P$ stays $1$.
 
-The point: a projection is a linear transformation like any other, with a matrix, an image and a kernel, but one that throws away a dimension and then leaves what remains alone.`,
+The point: a projection is a [linear transformation](!/linear-algebra/transformations#1) like any other, with a matrix, an image and a kernel, but one that throws away a [dimension](!/linear-algebra/vector-spaces/dimension#1) and then leaves what remains alone.`,
       before: ``,
       after: ``,
       link: '',
@@ -151,9 +151,9 @@ Because the formula is linear in $\\mathbf{v}$, projection is a linear transform
 
 $$P = \\mathbf{u}\\mathbf{u}^T = \\begin{pmatrix} \\cos^2\\theta & \\cos\\theta\\sin\\theta \\\\ \\cos\\theta\\sin\\theta & \\sin^2\\theta \\end{pmatrix}$$
 
-an outer product of a unit vector with itself. That form explains every property on the live card: rank $1$ because it is an outer product, symmetric because $\\mathbf{u}\\mathbf{u}^T$ is, idempotent because $\\mathbf{u}\\mathbf{u}^T\\mathbf{u}\\mathbf{u}^T = \\mathbf{u}(\\mathbf{u}^T\\mathbf{u})\\mathbf{u}^T = \\mathbf{u}\\mathbf{u}^T$, and trace $1$ because $\\operatorname{tr}(\\mathbf{u}\\mathbf{u}^T) = \\mathbf{u} \\cdot \\mathbf{u} = 1$.
+an outer product of a [unit vector](!/linear-algebra/vectors/magnitude#5) with itself. That form explains every property on the live card: rank $1$ because it is an outer product, symmetric because $\\mathbf{u}\\mathbf{u}^T$ is, idempotent because $\\mathbf{u}\\mathbf{u}^T\\mathbf{u}\\mathbf{u}^T = \\mathbf{u}(\\mathbf{u}^T\\mathbf{u})\\mathbf{u}^T = \\mathbf{u}\\mathbf{u}^T$, and [trace](!/linear-algebra/matrix/trace#1) $1$ because $\\operatorname{tr}(\\mathbf{u}\\mathbf{u}^T) = \\mathbf{u} \\cdot \\mathbf{u} = 1$.
 
-For the component-by-component computation of a single projection, see the [vector projection visualizer](!/linear-algebra/visual-tools/vector-projection); for projections onto subspaces of any dimension and the general projection matrix, see the [projections theory page](!/linear-algebra/orthogonality/projections).`,
+For the component-by-component computation of a single projection, see the [vector projection visualizer](!/linear-algebra/visual-tools/vector-projection); for projections onto [subspaces](!/linear-algebra/vector-spaces/subspaces#1) of any dimension and the general projection matrix, see the [projections theory page](!/linear-algebra/orthogonality/projections).`,
       before: ``,
       after: ``,
       link: '',
@@ -165,7 +165,7 @@ For the component-by-component computation of a single projection, see the [vect
 &bull; **Image** &mdash; the line itself. Every output lies on it, and every point of it is an output (it is its own projection), so $\\operatorname{im} P$ is exactly the line and $\\operatorname{rank} P = 1$
 &bull; **Kernel** &mdash; the perpendicular line. A vector perpendicular to $\\mathbf{u}$ has $\\mathbf{v} \\cdot \\mathbf{u} = 0$ and projects to the origin, and nothing else does
 &bull; **Rank-nullity** &mdash; $1 + 1 = 2$, the dimension of the plane
-&bull; **Orthogonal complement** &mdash; kernel and image are perpendicular to each other, which is the defining feature of an orthogonal projection; an oblique projection has a kernel that is not perpendicular to its image, and a non-symmetric matrix
+&bull; **Orthogonal complement** &mdash; kernel and image are perpendicular to each other, which is the defining feature of an orthogonal projection; an oblique projection has a kernel that is not perpendicular to its image, and a non-[symmetric matrix](!/linear-algebra/matrix/types#5)
 
 The morph animation shows the kernel at work: as $t$ reaches $1$, every grid line parallel to the kernel is squeezed to a single point on the image line. For the general theory, see the [image and kernel theory page](!/linear-algebra/transformations/image-kernel).`,
       before: ``,
@@ -244,7 +244,7 @@ The $120°$ preset is instructive for a different reason: it is the same line as
     },
     obj14: {
       title: `A Vector on the Kernel`,
-      content: `The frozen picture below places $\\mathbf{v} = (1.5, -1.5)$ on the kernel of the $y = x$ projection. It is perpendicular to the line, its dot product with the direction $(1, 1)$ is zero, and $P\\mathbf{v}$ is the origin, drawn as a dashed ring.
+      content: `The frozen picture below places $\\mathbf{v} = (1.5, -1.5)$ on the kernel of the $y = x$ projection. It is perpendicular to the line, its [dot product](!/linear-algebra/vectors/dot-product#1) with the direction $(1, 1)$ is zero, and $P\\mathbf{v}$ is the origin, drawn as a dashed ring.
 
 The residual is all of $\\mathbf{v}$: nothing of it survives the projection.`,
       before: ``,

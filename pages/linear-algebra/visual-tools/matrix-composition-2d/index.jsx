@@ -38,7 +38,7 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `**Composition** &mdash; applying one transformation after another. Applying $B$ and then $A$ sends $\\mathbf{v}$ to $A(B\\mathbf{v})$.
 
-**Matrix product** &mdash; the single matrix $AB$ with $(AB)\\mathbf{v} = A(B\\mathbf{v})$ for every $\\mathbf{v}$. Matrix multiplication is defined so that this works.
+**Matrix product** &mdash; the single matrix $AB$ with $(AB)\\mathbf{v} = A(B\\mathbf{v})$ for every $\\mathbf{v}$. [Matrix multiplication](!/linear-algebra/matrix/operations#5) is defined so that this works.
 
 **Order of application** &mdash; in $AB\\mathbf{v}$ the matrix nearest $\\mathbf{v}$ acts first: $B$, then $A$. Products read right to left.
 
@@ -46,7 +46,7 @@ export async function getStaticProps(){
 
 **Commuting pair** &mdash; matrices with $AB = BA$, such as two rotations, two diagonal matrices, or anything paired with a multiple of the identity.
 
-**Trail** &mdash; the two-segment path $\\mathbf{v}_0 \\to B\\mathbf{v} \\to AB\\mathbf{v}$ that a vector follows through the pipeline.
+**Trail** &mdash; the two-segment path $\\mathbf{v}_0 \\to B\\mathbf{v} \\to AB\\mathbf{v}$ that a [vector](!/linear-algebra/vectors#1) follows through the pipeline.
 
 **Stages** &mdash; the same pipeline shown as three canvases: the input, the intermediate, and the final state.
 
@@ -143,11 +143,11 @@ The four sections that follow freeze one representative of each situation, with 
     },
     obj7: {
       title: `What Composition Is`,
-      content: `If $B$ sends $\\mathbf{v}$ to $B\\mathbf{v}$ and $A$ then sends that to $A(B\\mathbf{v})$, the overall effect is a single linear transformation, and its matrix is the product $AB$:
+      content: `If $B$ sends $\\mathbf{v}$ to $B\\mathbf{v}$ and $A$ then sends that to $A(B\\mathbf{v})$, the overall effect is a single [linear transformation](!/linear-algebra/transformations#1), and its matrix is the product $AB$:
 
 $$A(B\\mathbf{v}) = (AB)\\,\\mathbf{v} \\quad \\text{for every } \\mathbf{v}$$
 
-This is not a coincidence about matrices; it is the reason matrix multiplication is defined the way it is. The column $j$ of $AB$ is $A$ applied to column $j$ of $B$, which is where the row-times-column rule comes from: the entry $(AB)_{ij} = \\sum_k A_{ik} B_{kj}$ is exactly what falls out of applying $A$ to the image of the $j$-th basis vector under $B$.
+This is not a coincidence about matrices; it is the reason matrix multiplication is defined the way it is. The column $j$ of $AB$ is $A$ applied to column $j$ of $B$, which is where the row-times-column rule comes from: the entry $(AB)_{ij} = \\sum_k A_{ik} B_{kj}$ is exactly what falls out of applying $A$ to the image of the $j$-th [basis](!/linear-algebra/vector-spaces#2) vector under $B$.
 
 Two consequences follow immediately. Products read right to left, since the matrix nearest the vector acts first. And products need not commute, because doing two things in different orders need not give the same result: shearing a picture and then rotating it is not the same as rotating and then shearing.
 
@@ -164,7 +164,7 @@ For the arithmetic of the product itself, see the [matrix multiplication visuali
 &bull; **Diagonal matrices** &mdash; they scale the axes independently, so the order of two independent scalings does not matter
 &bull; **Multiples of the identity** &mdash; $kI$ commutes with every matrix, since $kI \\cdot M = kM = M \\cdot kI$
 &bull; **Powers of one matrix** &mdash; $M^a$ and $M^b$ always commute
-&bull; **Simultaneously diagonalizable matrices** &mdash; matrices that share a full set of eigenvectors commute, and this is the general criterion
+&bull; **Simultaneously diagonalizable matrices** &mdash; matrices that share a full set of [eigenvectors](!/linear-algebra/eigen#2) commute, and this is the general criterion
 
 The test in the tool is direct: compute $AB$ and $BA$ and compare. When they agree, the dashed alternative path lands on the solid one and the live card says so. Note that $\\det(AB) = \\det(BA)$ always, so the determinant cannot tell the two orders apart; only the matrices themselves can.`,
       before: ``,
@@ -176,12 +176,12 @@ The test in the tool is direct: compute $AB$ and $BA$ and compare. When they agr
       content: `Composition obeys a few rules that hold regardless of order.
 
 &bull; **Associativity**: $(AB)C = A(BC)$; three transformations in sequence compose the same way however the pairs are grouped
-&bull; **Identity**: $AI = IA = A$; the identity matrix is the do-nothing transformation
+&bull; **Identity**: $AI = IA = A$; the [identity matrix](!/linear-algebra/matrix/types#2) is the do-nothing transformation
 &bull; **Inverse**: $AA^{-1} = A^{-1}A = I$; a transformation followed by its undoing is the identity, in either order
 &bull; **Determinant**: $\\det(AB) = \\det A \\cdot \\det B$
 &bull; **Inverse of a product**: $(AB)^{-1} = B^{-1}A^{-1}$; to undo $B$-then-$A$, undo $A$ first, then $B$
 &bull; **Transpose of a product**: $(AB)^T = B^T A^T$
-&bull; **Rank**: $\\operatorname{rank}(AB) \\leq \\min(\\operatorname{rank} A, \\operatorname{rank} B)$; composing with a rank-$1$ projection can never restore a lost dimension
+&bull; **Rank**: $\\operatorname{rank}(AB) \\leq \\min(\\operatorname{rank} A, \\operatorname{rank} B)$; composing with a [rank](!/linear-algebra/matrix/rank#1)-$1$ projection can never restore a lost [dimension](!/linear-algebra/vector-spaces/dimension#1)
 &bull; **Not commutative**: $AB \\neq BA$ in general, and $AB = BA$ is a special property of the pair`,
       before: ``,
       after: ``,

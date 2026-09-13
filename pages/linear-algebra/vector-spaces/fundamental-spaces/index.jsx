@@ -3025,6 +3025,8 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
 export async function getStaticProps(){
@@ -3774,8 +3776,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    colspace: demoUnitFrame({
+      svg: subspacesDiagrams.colspace,
+      caption: 'Pivot columns marked as a basis for the column space',
+      text: 'The pivot columns have been picked out of the original matrix &#8212; the original, not the reduced one, since elimination changes the columns while preserving which of them are independent. Those columns are a basis for everything the matrix can output. Cycle through the other three spaces on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+    nullspace: demoUnitFrame({
+      svg: subspacesDiagrams.nullspace,
+      caption: 'One special solution per free column',
+      text: 'Each free variable has been set to one in turn, with the others at zero, and the pivot variables solved to match. The resulting vectors are independent by construction and span everything the matrix sends to zero. Generate them for your own matrix on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+    orth: demoUnitFrame({
+      svg: subspacesDiagrams.orth,
+      caption: 'The two orthogonality pairings, side by side',
+      text: 'Row space against null space, column space against left null space &#8212; each pair meets at right angles and each pair accounts for a whole space between them. Every vector splits uniquely into a part in one and a part in the other, which is what makes these complements rather than merely perpendicular. Check the dot products yourself on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj7Table,
@@ -3794,7 +3826,7 @@ return {
 }
    }
 
-export default function FundamentalSubspacesPage({seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas}) {
+export default function FundamentalSubspacesPage({seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3832,6 +3864,8 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-colspace'} dangerouslySetInnerHTML={{ __html: demoUnits.colspace }} />,
+          `Taking the pivot columns from the reduced matrix instead is the single most common error here, and it produces the right count with the wrong vectors.`,
         ]
     },
     {
@@ -3848,6 +3882,8 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-nullspace'} dangerouslySetInnerHTML={{ __html: demoUnits.nullspace }} />,
+          `A matrix with no free columns has only the zero vector in its null space, which is the invertible case seen from this side.`,
         ]
     },
     {
@@ -3877,6 +3913,8 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+                  <div key={'unit-orth'} dangerouslySetInnerHTML={{ __html: demoUnits.orth }} />,
+          `These two right angles are what later let any vector be decomposed into a solvable part and an unreachable one.`,
         ]
     },
     {

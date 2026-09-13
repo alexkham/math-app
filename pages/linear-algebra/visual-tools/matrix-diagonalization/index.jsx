@@ -37,17 +37,17 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `**Diagonalization** — writing $A = PDP^{-1}$ with $D$ diagonal.
 
-**$P$** — the matrix whose columns are $n$ independent eigenvectors of $A$; invertible because they are independent.
+**$P$** — the [matrix](!/linear-algebra/matrix#1) whose columns are $n$ independent eigenvectors of $A$; invertible because they are independent.
 
-**$D$** — the diagonal matrix of eigenvalues, in the same order as the columns of $P$.
+**$D$** — the [diagonal matrix](!/linear-algebra/matrix/types#3) of eigenvalues, in the same order as the columns of $P$.
 
-**Diagonalizable** — a matrix that has $n$ independent eigenvectors; equivalently, one whose geometric multiplicities all equal the algebraic ones.
+**Diagonalizable** — a matrix that has $n$ independent eigenvectors; equivalently, one whose [geometric multiplicities](!/linear-algebra/eigen/properties#3) all equal the algebraic ones.
 
 **Defective** — a matrix with too few eigenvectors; it has no diagonal form, only a Jordan form.
 
-**Similar matrices** — $A$ and $P^{-1}AP$; they share eigenvalues, trace and determinant. Diagonalization is similarity to a diagonal matrix.
+**Similar matrices** — $A$ and $P^{-1}AP$; they share eigenvalues, trace and [determinant](!/linear-algebra/determinants#1). Diagonalization is similarity to a diagonal matrix.
 
-**Eigenvector basis** — the columns of $P$; in this basis the map is a pure scaling.
+**Eigenvector basis** — the columns of $P$; in this [basis](!/linear-algebra/vector-spaces#2) the map is a pure scaling.
 
 **Spectral decomposition** — the symmetric case $A = QDQ^T$, where $Q$ is orthogonal, so the inverse is the transpose.
 
@@ -75,7 +75,7 @@ The eigenvalues and eigenvectors are reported, not derived, since the eigenvalue
       title: `The Scenes in Order`,
       content: `The visualizer follows the textbook procedure exactly.
 
-• **Eigenvalues** — the characteristic polynomial and its roots, with the trace as a check
+• **Eigenvalues** — the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2) and its roots, with the trace as a check
 • **Eigenvectors** — one per free column of $A - \\lambda I$ for each eigenvalue, shown as columns above their eigenvalues; if there are fewer than $n$, the run stops with a defective verdict
 • **Assemble** — $P$ from the eigenvectors, $D$ from the eigenvalues, in matching order
 • **Invert** — $P^{-1}$ by row reducing $[P \\mid I]$, with the determinant of $P$ noted
@@ -131,7 +131,7 @@ column by column, because each column of $AP$ is $A\\mathbf{v}_j = \\lambda_j\\m
 
 $$A = PDP^{-1}, \\qquad D = P^{-1}AP$$
 
-Read right to left, $A$ becomes three simple moves: $P^{-1}$ expresses a vector in eigenvector coordinates, $D$ scales each coordinate by its eigenvalue, and $P$ converts back. In the eigenvector basis the transformation is a pure scaling; that is what "diagonal" means geometrically.
+Read right to left, $A$ becomes three simple moves: $P^{-1}$ expresses a [vector](!/linear-algebra/vectors#1) in eigenvector coordinates, $D$ scales each coordinate by its eigenvalue, and $P$ converts back. In the eigenvector basis the transformation is a pure scaling; that is what "diagonal" means geometrically.
 
 The condition is exactly $n$ independent eigenvectors. Distinct eigenvalues guarantee it. A repeated eigenvalue is fine as long as its eigenspace is as large as its multiplicity; when it is smaller the matrix is defective and no $P$ exists. Complex eigenvalues of a real matrix give a complex $P$ and $D$, which is a diagonalization over $\\mathbb{C}$ but not over $\\mathbb{R}$.
 
@@ -150,7 +150,7 @@ The payoff is functions of $A$. Because $A^k = PD^kP^{-1}$ and $D^k$ is just the
 • **Distinct eigenvalues** always give a diagonalizable matrix
 • **Symmetric matrices** are always diagonalizable, with an orthogonal $P$: $A = QDQ^T$
 • **Non-uniqueness**: scaling or reordering the columns of $P$, with the same reordering of $D$, gives another valid factorization
-• **Similarity**: $A$ and $D$ are similar, so they share rank, eigenvalues, characteristic polynomial and minimal polynomial
+• **Similarity**: $A$ and $D$ are similar, so they share [rank](!/linear-algebra/matrix/rank#1), eigenvalues, characteristic polynomial and minimal polynomial
 • **Long-run behaviour**: $A^k$ is dominated by the eigenvalue of largest modulus; it grows if that modulus exceeds $1$, settles if it equals $1$, and dies out if it is below $1$
 • **Defective matrices** have no diagonal form; the Jordan form is the nearest replacement`,
       before: ``,
@@ -163,7 +163,7 @@ The payoff is functions of $A$. Because $A^k = PD^kP^{-1}$ and $D^k$ is just the
 
 • **Recurrences**: the Fibonacci matrix diagonalized is Binet's closed formula, and the same works for any linear recurrence
 • **Markov chains**: $A^k$ converges to the steady state because the eigenvalue $1$ survives while the others decay; the rate is the second-largest modulus
-• **Systems of differential equations**: $\\dot{\\mathbf{x}} = A\\mathbf{x}$ decouples into $n$ scalar equations in the eigenvector basis, with solutions $e^{\\lambda_i t}$
+• **Systems of differential equations**: $\\dot{\\mathbf{x}} = A\\mathbf{x}$ decouples into $n$ [scalar](!/linear-algebra/vectors#1) equations in the eigenvector basis, with solutions $e^{\\lambda_i t}$
 • **Matrix exponentials**: $e^{At} = Pe^{Dt}P^{-1}$, the workhorse of linear dynamics and control
 • **Quadratic forms**: for symmetric $A$, $\\mathbf{x}^TA\\mathbf{x}$ becomes a sum of $\\lambda_i y_i^2$ in the eigenvector coordinates, which classifies conics and tests definiteness
 • **Principal component analysis**: diagonalizing a covariance matrix rotates the data onto its axes of greatest variance
@@ -204,7 +204,7 @@ Direct multiplication agrees: $A^2 = \\begin{pmatrix} 18 & 7 \\\\ 14 & 11 \\end{
 • **Transposing instead of inverting** — $P^{-1} = P^T$ only when $P$ is orthogonal, which requires orthonormal eigenvectors, guaranteed only for symmetric $A$ and only after normalizing
 • **Reading a repeated root as defective** — a repeated eigenvalue is only a problem if its eigenspace is too small; the repeated preset diagonalizes fine
 • **Assuming every matrix diagonalizes** — shears and other defective matrices do not, and real rotations do not over the reals
-• **Powering $A$ entry by entry** — $A^k$ is a matrix power; only $D^k$ can be computed entry by entry, and that is the point of the factorization
+• **Powering $A$ entry by entry** — $A^k$ is a [matrix power](!/linear-algebra/matrix/operations#9); only $D^k$ can be computed entry by entry, and that is the point of the factorization
 • **Forgetting the check** — $P^{-1}AP$ must come out diagonal; any off-diagonal entry means a column of $P$ is wrong`,
       before: ``,
       after: ``,

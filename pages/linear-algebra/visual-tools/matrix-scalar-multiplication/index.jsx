@@ -37,13 +37,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Scalar** — a single number, not a vector or matrix.
+      content: `**Scalar** — a single number, not a [vector](!/linear-algebra/vectors#1) or [matrix](!/linear-algebra/matrix#1).
 
-**Scalar multiplication** — the operation $kA$ that multiplies every entry of a matrix $A$ by the scalar $k$.
+**Scalar multiplication** — the operation $kA$ that multiplies every entry of a matrix $A$ by the [scalar](!/linear-algebra/vectors#1) $k$.
 
 **Element-wise operation** — applied independently to each entry; the result at $(i,j)$ depends only on $k$ and $a_{i,j}$.
 
-**Shape preservation** — $kA$ has the same dimensions as $A$. Scalar multiplication never changes the shape.
+**Shape preservation** — $kA$ has the same [dimensions](!/linear-algebra/vector-spaces/dimension#1) as $A$. Scalar multiplication never changes the shape.
 
 **Scaling factor** — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or flips sign ($k < 0$) every entry uniformly.
 
@@ -100,7 +100,7 @@ $$(kA)_{i,j} = k \\cdot a_{i,j}$$
 
 It's the simplest non-trivial matrix operation. There are no shape restrictions — any matrix can be scaled. The result is the same shape as $A$, and every cell depends only on $k$ and its own value in $A$.
 
-Scalar multiplication is the multiplicative companion to matrix addition: both are element-wise, both preserve shape, and together they make matrices into a vector space.
+Scalar multiplication is the multiplicative companion to matrix addition: both are element-wise, both preserve shape, and together they make matrices into a [vector space](!/linear-algebra/vector-spaces#1).
 
 For comprehensive theory, see **matrix operations**.`,
       before: ``,
@@ -130,7 +130,7 @@ These properties are exactly the eight vector-space axioms for scalar multiplica
       content: `Scalar multiplication is the operation that lets matrices form a vector space, and it appears everywhere combinations of matrices appear.
 
 • **Linear combinations**: any expression $c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$ uses scalar multiplication
-• **Normalization**: dividing $A$ by a norm or a trace is scalar multiplication by $1/\\|A\\|$ or $1/\\text{tr}(A)$
+• **Normalization**: dividing $A$ by a norm or a [trace](!/linear-algebra/matrix/trace#1) is scalar multiplication by $1/\\|A\\|$ or $1/\\text{tr}(A)$
 • **Sign changes**: $-A$ is just scalar multiplication by $-1$
 • **Scaling transformations**: in geometry, $kA$ applied to a vector scales the result uniformly
 • **Differential equations and physics**: scaling the coefficient matrix of a system rescales the solution

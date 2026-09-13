@@ -811,6 +811,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magnitudeDiagrams'
 
 
 export async function getStaticProps(){
@@ -1377,8 +1379,31 @@ const schemas = {
   },
 }
 
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    norm: demoUnitFrame({
+      svg: magnitudeDiagrams.root,
+      caption: 'Squares summed, root about to be taken',
+      text: 'The squares of the components have been accumulated into a single number and the square root is the last step left. Every component contributes its square and nothing else, which is why the sign of a component cannot affect the length, and why the formula reads the same in two dimensions as in twenty. Run it on your own vector on the',
+      href: '/linear-algebra/visual-tools/vector-magnitude',
+      linkText: 'magnitude visualizer',
+    }),
+    normalize: demoUnitFrame({
+      svg: magnitudeDiagrams.normalize,
+      caption: 'Dividing through by the norm',
+      text: 'Each component is being divided by the length just computed, so the direction survives untouched while the size collapses to exactly one. This is why normalisation fails for the zero vector alone &#8212; it is the single case with no length to divide by and no direction to preserve. Normalise a vector of your choosing on the',
+      href: '/linear-algebra/visual-tools/vector-magnitude',
+      linkText: 'magnitude visualizer',
+    }),
+  };
+
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     normProperties,
@@ -1395,7 +1420,7 @@ const schemas = {
   }
 }
    }
-export default function VectorMagnitudePage({seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas}) {
+export default function VectorMagnitudePage({seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1406,6 +1431,8 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-norm'} dangerouslySetInnerHTML={{ __html: demoUnits.norm }} />,
+          `The same sum-of-squares pattern is what the next section generalises to any number of dimensions.`,
         ]
     },
     {
@@ -1473,6 +1500,8 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-normalize'} dangerouslySetInnerHTML={{ __html: demoUnits.normalize }} />,
+          `A normalised vector is therefore a pure direction, which is what makes it the natural building block for bases and projections later on.`,
         ]
     },
     {

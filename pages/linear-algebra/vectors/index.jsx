@@ -619,6 +619,8 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vectorAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
 
 
 export async function getStaticProps(){
@@ -1022,8 +1024,26 @@ const schemas = {
   },
 }
 
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Hub page: one unit only. The operations section is the single
+    // place a live demo adds more than the summary prose does.
+    operations: demoUnitFrame({
+      svg: vectorAdditionDiagrams.done,
+      caption: 'Addition finished, component by component',
+      text: 'Addition, subtraction and scaling all share this shape: the operation is applied to each slot on its own and the slots never talk to each other. That is why all three demand vectors of the same length and why all three return a vector of that same length. See the same run for subtraction on the',
+      href: '/linear-algebra/visual-tools/vector-addition',
+      linkText: 'vector addition visualizer',
+    }),
+  };
+
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1039,7 +1059,7 @@ const schemas = {
   }
 }
    }
-export default function VectorsPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas}) {
+export default function VectorsPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1087,6 +1107,8 @@ export default function VectorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-operations'} dangerouslySetInnerHTML={{ __html: demoUnits.operations }} />,
+          `The products that follow break this pattern deliberately — both of them mix components together rather than keeping them apart.`,
         ]
     },
     {

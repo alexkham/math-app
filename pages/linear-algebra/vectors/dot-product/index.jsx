@@ -1109,6 +1109,9 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '../../../../app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
+import projectionDiagrams from '@/app/components/linear-algebra copy/matrix/projectionDiagrams'
 
 
 export async function getStaticProps(){
@@ -1928,9 +1931,34 @@ const schemas = {
   },
 }
 
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    dot: demoUnitFrame({
+      svg: innerProductDiagrams.done,
+      caption: 'Products formed, then summed to one number',
+      text: 'Each pair of matching components was multiplied and the products were then collapsed into a single running total. The output is a scalar, not a vector, and that one fact is what separates this product from every other operation on this page. Follow the accumulation term by term on the',
+      href: '/linear-algebra/visual-tools/vectors-inner-product',
+      linkText: 'inner product visualizer',
+    }),
+    // Section 9 is about projecting one vector onto another, which is
+    // the projection tool's subject rather than the dot product tool's.
+    projection: demoUnitFrame({
+      svg: projectionDiagrams.scale,
+      caption: 'The coefficient applied to the direction vector',
+      text: 'The scalar computed from the two dot products is being multiplied back onto the direction vector, which is what turns a bare ratio into an actual vector lying along it. The projection is always a multiple of the vector projected onto, never of the one being projected &#8212; the picture makes the asymmetry hard to miss. Watch the remainder appear as well on the',
+      href: '/linear-algebra/visual-tools/vector-projection',
+      linkText: 'vector projection visualizer',
+    }),
+  };
+
+
 
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1950,7 +1978,7 @@ const schemas = {
   }
 }
    }
-export default function DotProductPage({seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function DotProductPage({seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1961,6 +1989,8 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-dot'} dangerouslySetInnerHTML={{ __html: demoUnits.dot }} />,
+          `Everything later on this page — angles, orthogonality, projections — is read off that single number.`,
         ]
     },
     {
@@ -2067,6 +2097,8 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+                  <div key={'unit-projection'} dangerouslySetInnerHTML={{ __html: demoUnits.projection }} />,
+          `Splitting a vector into a part along another and a part perpendicular to it is the move that least squares and Gram–Schmidt both rest on.`,
         ]
     },
     {

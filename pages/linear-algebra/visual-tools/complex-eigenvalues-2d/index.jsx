@@ -36,7 +36,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Complex eigenvalues** &mdash; for a real $2 \\times 2$ matrix, a conjugate pair $\\lambda = a \\pm bi$ with $b \\neq 0$, occurring when $\\operatorname{tr}^2 A < 4\\det A$.
+      content: `**Complex eigenvalues** &mdash; for a real $2 \\times 2$ [matrix](!/linear-algebra/matrix#1), a conjugate pair $\\lambda = a \\pm bi$ with $b \\neq 0$, occurring when $\\operatorname{tr}^2 A < 4\\det A$.
 
 **Modulus** &mdash; $r = |\\lambda| = \\sqrt{a^2 + b^2} = \\sqrt{\\det A}$, the scale factor per step.
 
@@ -57,7 +57,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started`,
-      content: `The canvas shows a draggable start vector $\\mathbf{x}_0$ in orange, the orbit $A^k\\mathbf{x}_0$ as blue dots numbered by step, a grey spiral tracing the continuous path between them, the purple invariant ellipse through $\\mathbf{x}_0$, and two green dashed lines along the columns of $P$, the real and imaginary parts of a complex eigenvector. The cyan arrow is the current point $A^k\\mathbf{x}_0$ of the animation.
+      content: `The canvas shows a draggable start [vector](!/linear-algebra/vectors#1) $\\mathbf{x}_0$ in orange, the orbit $A^k\\mathbf{x}_0$ as blue dots numbered by step, a grey spiral tracing the continuous path between them, the purple invariant ellipse through $\\mathbf{x}_0$, and two green dashed lines along the columns of $P$, the real and imaginary parts of a complex eigenvector. The cyan arrow is the current point $A^k\\mathbf{x}_0$ of the animation.
 
 Try this sequence to build intuition:
 
@@ -65,7 +65,7 @@ Try this sequence to build intuition:
 • Switch to **Skewed rotation**: the same 60° turn per step, but the circle has become an ellipse and the green axes are no longer perpendicular
 • Press **Play** and watch the cyan arrow sweep the spiral continuously; the dots are where it lands at whole steps
 • Choose **Spiral in** and **Spiral out**, then drag $\\mathbf{x}_0$ around: the shape of the spiral never depends on where you start
-• Edit an entry of $A$ in the matrix card until the determinant drops below $\\operatorname{tr}^2/4$; the eigenvalues turn real and the rotation disappears
+• Edit an entry of $A$ in the matrix card until the [determinant](!/linear-algebra/determinants#1) drops below $\\operatorname{tr}^2/4$; the eigenvalues turn real and the rotation disappears
 • Move the **steps** slider to see more or fewer laps`,
       before: ``,
       after: ``,
@@ -90,7 +90,7 @@ Things to notice while dragging:
       title: `The Orbit Animation`,
       content: `The animation moves the cyan arrow along the continuous curve $\\mathbf{x}(k) = A^k\\mathbf{x}_0$ for real $k$ from $0$ to the chosen number of steps.
 
-The fractional powers are meaningful because of the rotation-scaling form: $A^k = P\\,r^k R(k\\theta)\\,P^{-1}$ makes sense for any real $k$, and the curve it traces is a logarithmic spiral seen through $P$. The whole-number points on it are the orbit.
+The fractional powers are meaningful because of the rotation-scaling form: $A^k = P\\,r^k R(k\\theta)\\,P^{-1}$ makes sense for any real $k$, and the curve it [traces](!/linear-algebra/matrix/trace#1) is a logarithmic spiral seen through $P$. The whole-number points on it are the orbit.
 
 • **Play** sweeps from $k = 0$ to the end; **Pause** freezes it
 • The step buttons jump one whole step at a time, landing exactly on the dots
@@ -133,7 +133,7 @@ The presets are all matrices with complex eigenvalues. Shuffling entries by hand
       title: `Preset Scenarios`,
       content: `Seven matrices in three groups.
 
-**On an ellipse ($r = 1$)** &mdash; Rotate 90° and Rotate 45° are plain rotations, four and eight steps to a lap; Skewed rotation is a 60° rotation in a sheared basis, whose orbit is an ellipse.
+**On an ellipse ($r = 1$)** &mdash; Rotate 90° and Rotate 45° are plain rotations, four and eight steps to a lap; Skewed rotation is a 60° rotation in a sheared [basis](!/linear-algebra/vector-spaces#2), whose orbit is an ellipse.
 
 **Spiral in ($r < 1$)** &mdash; Spiral in is $0.9$ times a rotation by $36.9°$; Skewed spiral in has $r = 0.866$ and a tilted ellipse.
 
@@ -146,7 +146,7 @@ Selecting a preset loads its matrix, keeps your $\\mathbf{x}_0$, and replays the
     },
     obj7: {
       title: `What Complex Eigenvalues Mean`,
-      content: `A real $2 \\times 2$ matrix has complex eigenvalues when its characteristic polynomial $\\lambda^2 - (\\operatorname{tr} A)\\lambda + \\det A$ has negative discriminant, that is when $\\operatorname{tr}^2 A < 4\\det A$. The roots are then a conjugate pair $a \\pm bi$, and there is no real vector that $A$ merely scales: every direction is turned.
+      content: `A real $2 \\times 2$ matrix has complex eigenvalues when its [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2) $\\lambda^2 - (\\operatorname{tr} A)\\lambda + \\det A$ has negative discriminant, that is when $\\operatorname{tr}^2 A < 4\\det A$. The roots are then a conjugate pair $a \\pm bi$, and there is no real vector that $A$ merely scales: every direction is turned.
 
 What $A$ does instead is rotate and scale in a skewed coordinate system. Take a complex eigenvector $\\mathbf{v}$ for $\\lambda = a - bi$ and split it into real and imaginary parts, $\\mathbf{v} = \\operatorname{Re}\\mathbf{v} + i\\operatorname{Im}\\mathbf{v}$. Expanding $A\\mathbf{v} = \\lambda\\mathbf{v}$ into real and imaginary parts gives
 

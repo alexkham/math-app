@@ -113,11 +113,11 @@ The layout changes between phases because the inputs change: the dot product and
 
 $$\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v} = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}\\,\\mathbf{v}$$
 
-It is the scalar multiple of $\\mathbf{v}$ closest to $\\mathbf{u}$. Its signed length is the scalar projection,
+It is the [scalar](!/linear-algebra/vectors#1) multiple of $\\mathbf{v}$ closest to $\\mathbf{u}$. Its signed length is the scalar projection,
 
 $$\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u} = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|} = \\|\\mathbf{u}\\| \\cos\\theta$$
 
-where $\\theta$ is the angle between the vectors. The projection and the scalar projection are related by $\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = (\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u})\\,\\hat{\\mathbf{v}}$, a signed length times the unit vector along $\\mathbf{v}$.
+where $\\theta$ is the angle between the vectors. The projection and the scalar projection are related by $\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = (\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u})\\,\\hat{\\mathbf{v}}$, a signed length times the [unit vector](!/linear-algebra/vectors/magnitude#5) along $\\mathbf{v}$.
 
 What is left after removing the projection,
 
@@ -125,7 +125,7 @@ $$\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u}$$
 
 is perpendicular to $\\mathbf{v}$: dotting it with $\\mathbf{v}$ gives $\\mathbf{u} \\cdot \\mathbf{v} - c\\,(\\mathbf{v} \\cdot \\mathbf{v}) = \\mathbf{u} \\cdot \\mathbf{v} - \\mathbf{u} \\cdot \\mathbf{v} = 0$. So every vector splits uniquely into a part along $\\mathbf{v}$ and a part orthogonal to it.
 
-For projections onto subspaces, projection matrices and least squares, see the [projections theory page](!/linear-algebra/orthogonality/projections).`,
+For projections onto [subspaces](!/linear-algebra/vector-spaces/subspaces#1), projection matrices and [least squares](!/linear-algebra/orthogonality/least-squares#3), see the [projections theory page](!/linear-algebra/orthogonality/projections).`,
       before: ``,
       after: ``,
       link: '',
@@ -154,8 +154,8 @@ For projections onto subspaces, projection matrices and least squares, see the [
 • **Components of forces and velocities**: the part of a force along a ramp, or of a velocity along a direction of travel, is a projection
 • **Distance from a point to a line**: the length of the remainder $\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u}$
 • **Gram-Schmidt**: each new vector is made orthogonal to the previous ones by subtracting its projections onto them
-• **Least squares**: fitting a line or a model is projecting the data vector onto the column space of the design matrix
-• **Coordinates in an orthogonal basis**: the coefficient $c$ is exactly the coordinate of $\\mathbf{u}$ along $\\mathbf{v}$ when the basis is orthogonal
+• **Least squares**: fitting a line or a model is projecting the data vector onto the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of the design [matrix](!/linear-algebra/matrix#1)
+• **Coordinates in an orthogonal basis**: the coefficient $c$ is exactly the coordinate of $\\mathbf{u}$ along $\\mathbf{v}$ when the [basis](!/linear-algebra/vector-spaces#2) is orthogonal
 • **Signal processing and statistics**: Fourier coefficients and regression coefficients are projection coefficients`,
       before: ``,
       after: ``,
@@ -227,7 +227,7 @@ A planar example: $\\mathbf{u} = (3, 1)$, $\\mathbf{v} = (2, 2)$ gives $\\mathbf
       title: `The Opening Scene: Two Vectors and a Dot Product to Come`,
       content: `The player opens with $\\mathbf{u}$ and $\\mathbf{v}$ as rows of components and an empty slot for $\\mathbf{u} \\cdot \\mathbf{v}$. At the default length both have three components.
 
-Nothing is computed yet. What the scene fixes is the plan: the projection is built from two dot products and one division, and only then does any vector get scaled.`,
+Nothing is computed yet. What the scene fixes is the plan: the projection is built from two dot products and one division, and only then does any [vector](!/linear-algebra/vectors#1) get scaled.`,
       before: ``,
       after: `The precondition is the same as for the dot product, because the dot product is where the computation starts: $\\mathbf{u}$ and $\\mathbf{v}$ must have the same number of components. There is one more, specific to projection: $\\mathbf{v}$ must be non-zero, since its squared length is about to be a divisor.
 

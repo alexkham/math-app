@@ -828,6 +828,9 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import changeBasisDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/change-basis/changeBasisDiagrams'
 
 
 export async function getStaticProps(){
@@ -1398,8 +1401,33 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    definition: demoUnitFrame({
+      svg: spanIndependenceDiagrams.independent,
+      caption: 'Two independent vectors spanning R&#178;',
+      text: 'These two arrows do both jobs a basis has to do at once: they are independent, so neither is wasted, and they span, so nothing is missing. Adding a third vector would keep the spanning but destroy the independence; removing one would keep the independence but lose the spanning. A basis is exactly the balance point. Test that by adding and removing directions on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+    // Coordinates relative to a chosen basis is the change-of-basis
+    // tool's subject; the span tool cannot show the grid re-drawn.
+    coordinates: demoUnitFrame({
+      svg: changeBasisDiagrams.nonorth,
+      caption: 'The same point, read against a skewed basis',
+      text: 'The grid has been redrawn along the two basis vectors, and the point\'s coordinates are read by counting steps along that grid rather than along the axes. The point never moved; only the ruler changed. This is why coordinates belong to a basis and not to a vector, and why the same arrow carries different numbers in different bases. Swap bases and watch the numbers change on the',
+      href: '/linear-algebra/visual-tools/change-basis-2d',
+      linkText: 'change of basis explorer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -1471,7 +1499,7 @@ const standardBases = {
 }
 
 
-export default function BasisVectorSpacePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function BasisVectorSpacePage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
     {
@@ -1488,6 +1516,8 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Independence and spanning are therefore not two separate requirements to check but two ways the same set can fail.`,
         ]
     },
     {
@@ -1523,6 +1553,8 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-coordinates'} dangerouslySetInnerHTML={{ __html: demoUnits.coordinates }} />,
+          `Because the representation is unique, these coordinates are a genuine address for the vector rather than one description among many.`,
         ]
     },
     {

@@ -536,7 +536,7 @@ export async function getStaticProps(){
 
 **Element-wise (pointwise) operation** — an operation applied independently to each pair of corresponding entries; the result at $(i,j)$ depends only on the inputs at $(i,j)$.
 
-**Same-shape requirement** — both operands must have identical dimensions. A $2 \\times 3$ matrix cannot be Hadamard-multiplied with a $3 \\times 2$.
+**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/vector-spaces/dimension#1). A $2 \\times 3$ [matrix](!/linear-algebra/matrix#1) cannot be Hadamard-multiplied with a $3 \\times 2$.
 
 **Standard matrix product** — the row-by-column product $A \\times B$, a different operation with different shape rules and a different result.
 
@@ -628,7 +628,7 @@ For the standard product, see **matrix multiplication**. The two are confused of
 • **Scalar pull-out**: $(kA) \\odot B = k(A \\odot B)$
 • **Transpose**: $(A \\odot B)^T = A^T \\odot B^T$
 
-These properties mirror ordinary scalar multiplication exactly — which is unsurprising, since the operation is just scalar multiplication applied entry by entry.`,
+These properties mirror ordinary [scalar](!/linear-algebra/vectors#1) multiplication exactly — which is unsurprising, since the operation is just scalar multiplication applied entry by entry.`,
       before: ``,
       after: ``,
       link: '',

@@ -683,13 +683,13 @@ export async function getStaticProps() {
   const sectionsContent = {
     obj0: {
       title: `Key Terms`,
-      content: `**Gaussian elimination** — the algorithm that reduces a matrix to echelon form using elementary row operations, so a linear system can be solved by substitution.
+      content: `**Gaussian elimination** — the algorithm that reduces a [matrix](!/linear-algebra/matrix#1) to echelon form using [elementary row operations](!/linear-algebra/linear-systems/gaussian-elimination#2), so a linear system can be solved by substitution.
 
 **Augmented matrix** — the coefficient matrix with the right-hand side appended as a final column, written $[A \\mid b]$. In the tool the constants are the amber column; row operations act on the whole row at once, constants included.
 
 **Pivot** — the first non-zero entry of a row once the rows above it have been cleared. Its column is a pivot column, and the variable of that column is a leading variable.
 
-**Row echelon form (REF)** — zero rows at the bottom, each pivot strictly to the right of the pivot above it, and zeros below every pivot. Note what is **not** required: the pivots need not be $1$.
+**Row echelon form (REF)** — zero rows at the bottom, each pivot strictly to the right of the pivot above it, and zeros below every pivot. Note what is **not** required: the [pivots](!/linear-algebra/linear-systems/echelon-form#4) need not be $1$.
 
 **Reduced row echelon form (RREF)** — echelon form with every pivot equal to $1$ and zeros above each pivot as well as below. Also called Gauss-Jordan form. Unlike echelon form, it is unique for a given matrix.
 
@@ -699,7 +699,7 @@ export async function getStaticProps() {
 
 **Free variable** — a variable whose column has no pivot. Each one contributes a parameter to an infinite solution set.
 
-**Rank** — the number of pivots. It is the count the tool reports at the end, and it decides everything: rank equal to the number of unknowns means one solution, fewer means free variables.`,
+**Rank** — the number of pivots. It is the count the tool reports at the end, and it decides everything: [rank](!/linear-algebra/matrix/rank#1) equal to the number of unknowns means one solution, fewer means free variables.`,
       before: ``,
       after: ``,
       link: '',
@@ -733,7 +733,7 @@ That matrix is the default for a reason. Its top-left entry is $0$, so the run c
 
 On the default preset the difference is exact and countable: the echelon run takes 8 steps, the reduced run takes 14. The six extra steps are three scalings and three clearings above a pivot.
 
-**Which to use**: echelon form is cheaper and enough to solve a system, because back-substitution finishes the job. Reduced echelon form costs more but ends with the answer written out, and it is what you want when the matrix is standing in for something else — an inverse, a null space basis, a rank computation.`,
+**Which to use**: echelon form is cheaper and enough to solve a system, because back-substitution finishes the job. Reduced echelon form costs more but ends with the answer written out, and it is what you want when the matrix is standing in for something else — an inverse, a null space [basis](!/linear-algebra/vector-spaces#2), a rank computation.`,
       before: ``,
       after: `The first still is where the plain run stops. Every entry below a pivot is $0$ and the leading entries — $2$, $2$, $3$ — step to the right as you go down. The pivots are not $1$, and the entries above them are still whatever they were, because echelon form does not ask for either.
 
@@ -853,7 +853,7 @@ If a row reduces to all zeros on the left with a non-zero constant on the right,
 
 The contradiction was in the original equations the whole time. Elimination did not create it — it brought it into view by combining the equations until the conflict was written in one row.
 
-Geometrically it means $b$ is not in the column space of $A$: the right-hand side is not reachable by any combination of the columns, so no amount of further reduction can help.
+Geometrically it means $b$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of $A$: the right-hand side is not reachable by any combination of the columns, so no amount of further reduction can help.
 
 The tool highlights the offending row in the final step and names the equation it has become.`,
       before: ``,
@@ -921,7 +921,7 @@ Named after Carl Friedrich Gauss, though versions of it appear in Chinese mathem
 
 The method never fails to reach an answer. It solves any consistent system, identifies any inconsistent one by producing a row that reads $0 = c$, and identifies infinitely many solutions by leaving columns without pivots. There is no case it cannot classify, which is unusual for an algorithm this simple, and it is why every linear algebra course starts here.
 
-It is also the computational backbone of the subject. Rank, inverses, determinants, null spaces and column spaces are all read off the echelon form of a matrix, so a great many later constructions are elimination wearing a different name.`,
+It is also the computational backbone of the subject. Rank, inverses, [determinants](!/linear-algebra/determinants#1), null spaces and column spaces are all read off the echelon form of a matrix, so a great many later constructions are elimination wearing a different name.`,
       before: ``,
       after: ``,
       link: '',
@@ -941,7 +941,7 @@ It is also the computational backbone of the subject. Rank, inverses, determinan
 
 **Circuit analysis** — Kirchhoff's laws produce a linear system for every non-trivial circuit, solved by elimination.
 
-**Least squares** — the normal equations of a regression or curve fit are a linear system, solved the same way.
+**Least squares** — the [normal equations](!/linear-algebra/orthogonality/least-squares#3) of a regression or curve fit are a linear system, solved the same way.
 
 **Computer graphics** — transformations, projections and the intersection problems behind rendering all reduce to solving matrix equations.`,
       before: ``,

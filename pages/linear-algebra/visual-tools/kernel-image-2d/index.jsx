@@ -527,11 +527,11 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Kernel (Null Space)** &mdash; The set of all vectors $v$ in the domain such that $Av = 0$. The directions the matrix collapses to the origin.
+      content:`**Kernel (Null Space)** &mdash; The set of all [vectors](!/linear-algebra/vectors#1) $v$ in the domain such that $Av = 0$. The directions the [matrix](!/linear-algebra/matrix#1) collapses to the origin.
 
-**Image (Column Space)** &mdash; The set of all outputs $Av$ as $v$ ranges over the domain. The reachable region in the codomain, equal to the span of the columns of $A$.
+**Image (Column Space)** &mdash; The set of all outputs $Av$ as $v$ ranges over the domain. The reachable region in the codomain, equal to the [span](!/linear-algebra/vector-spaces/span#1) of the columns of $A$.
 
-**Rank** &mdash; The dimension of the image. For a $2 \\times 2$ matrix, rank is 0, 1, or 2.
+**Rank** &mdash; The [dimension](!/linear-algebra/vector-spaces/dimension#1) of the image. For a $2 \\times 2$ matrix, [rank](!/linear-algebra/matrix/rank#1) is 0, 1, or 2.
 
 **Nullity** &mdash; The dimension of the kernel. For a $2 \\times 2$ matrix, nullity is 0, 1, or 2.
 
@@ -548,7 +548,7 @@ export async function getStaticProps(){
 
 &bull; **Left canvas** &mdash; drag the orange handle to place vector $v$. A red dashed line marks the kernel of $A$.
 &bull; **Right canvas** &mdash; shows $Av$ in cyan. A green line marks the image of $A$.
-&bull; **Center** &mdash; the four-cell matrix $A$, an explanation of the current preset, a properties card with rank and determinant, and a sweep playback panel.
+&bull; **Center** &mdash; the four-cell matrix $A$, an explanation of the current preset, a properties card with rank and [determinant](!/linear-algebra/determinants#1), and a sweep playback panel.
 
 The fundamental relationship: every vector you place on the left has a counterpart on the right computed by $Av$. The kernel is the set of inputs that get sent to the origin; the image is the set of all reachable outputs.`,
       before:``,
@@ -585,7 +585,7 @@ The green image line spans the same direction as the columns of $A$. That is the
       title:`Editing the Matrix A Directly`,
       content:`Card 01 (Multiplication) shows the equation $Av = A \\cdot v$ with the four entries of $A$ as editable input fields. Type a new value or use the arrow keys to step by 0.1.
 
-&bull; **Change a top-row entry** &mdash; the first component of $Av$ updates. The expansion in the middle column shows the dot product explicitly: $a_{11} \\cdot v_1 + a_{12} \\cdot v_2$.
+&bull; **Change a top-row entry** &mdash; the first component of $Av$ updates. The expansion in the middle column shows the [dot product](!/linear-algebra/vectors/dot-product#1) explicitly: $a_{11} \\cdot v_1 + a_{12} \\cdot v_2$.
 &bull; **Set both columns parallel** &mdash; rank drops to 1, the kernel line appears, the image collapses to a line. Watch the properties card switch from rank 2 to rank 1.
 &bull; **Set all four entries to zero** &mdash; rank is 0, the entire canvas becomes the kernel.
 
@@ -639,7 +639,7 @@ Combination tip: turn on swarm and turn off grid &mdash; the deformation of the 
     },
     obj8:{
       title:`Defining the Kernel and Image`,
-      content:`For a linear map $A: \\mathbb{R}^n \\to \\mathbb{R}^m$, two natural subspaces emerge.
+      content:`For a linear map $A: \\mathbb{R}^n \\to \\mathbb{R}^m$, two natural [subspaces](!/linear-algebra/vector-spaces/subspaces#1) emerge.
 
 The **kernel** (or null space) is everything $A$ sends to zero:
 

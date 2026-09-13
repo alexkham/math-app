@@ -525,11 +525,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Trace** — the sum of the main-diagonal entries of a square matrix: $\\text{tr}(A) = a_{1,1} + a_{2,2} + \\cdots + a_{n,n}$.
+      content: `**Trace** — the sum of the main-diagonal entries of a [square matrix](!/linear-algebra/matrix/types#1): $\\text{tr}(A) = a_{1,1} + a_{2,2} + \\cdots + a_{n,n}$.
 
 **Main diagonal** — the entries $a_{i,i}$ where the row index equals the column index.
 
-**Square matrix** — a matrix with the same number of rows and columns ($n \\times n$). Trace is defined only for square matrices.
+**Square matrix** — a matrix with the same number of rows and columns ($n \\times n$). [Trace](!/linear-algebra/matrix/trace#1) is defined only for square matrices.
 
 **Off-diagonal entries** — entries $a_{i,j}$ with $i \\neq j$. They are completely ignored by the trace.
 
@@ -544,7 +544,7 @@ export async function getStaticProps(){
       title: `Getting Started with the Visualizer`,
       content: `Set the size of $A$ and watch the trace build one diagonal entry at a time.
 
-• Use the **Dimension** steppers to set the size of $A$ from $2 \\times 2$ up to $10 \\times 10$ — both dimensions move together because $A$ must be square
+• Use the **Dimension** steppers to set the size of $A$ from $2 \\times 2$ up to $10 \\times 10$ — both [dimensions](!/linear-algebra/vector-spaces/dimension#1) move together because $A$ must be square
 • Hover the **?** icon for a reminder that trace requires a square matrix
 • The scene player starts by posing the question with no highlights, then reveals the main diagonal, then sweeps the diagonal entry by entry
 • Use the speed selector and step log to control the pace and review prior steps`,
@@ -581,7 +581,7 @@ export async function getStaticProps(){
       title: `Scene Order`,
       content: `The animation follows a deliberate three-stage order.
 
-• **Pose** — the matrix appears with no highlights; the question "what is the trace?" is asked first
+• **Pose** — the [matrix](!/linear-algebra/matrix#1) appears with no highlights; the question "what is the trace?" is asked first
 • **Reveal** — the entire main diagonal is highlighted in blue, separating the entries that contribute from those that do not
 • **Sweep** — one scene per diagonal entry, adding $a_{k,k}$ to the running sum
 • **Outro** — every diagonal entry is green and the complete formula is shown along with the $\\Sigma$ notation
@@ -597,7 +597,7 @@ This order separates "what is the trace looking at?" from "what does the trace c
 
 $$\\text{tr}(A) = a_{1,1} + a_{2,2} + \\cdots + a_{n,n} = \\sum_{i=1}^{n} a_{i,i}$$
 
-Trace is defined only for square matrices. Off-diagonal entries play no role at all — the trace ignores them completely. The result is a single scalar that summarizes one piece of information about $A$, complementary to the determinant.
+Trace is defined only for square matrices. Off-diagonal entries play no role at all — the trace ignores them completely. The result is a single scalar that summarizes one piece of information about $A$, complementary to the [determinant](!/linear-algebra/determinants#1).
 
 For comprehensive theory, see **matrix operations**.`,
       before: ``,
@@ -611,8 +611,8 @@ For comprehensive theory, see **matrix operations**.`,
 • **Linearity**: $\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$ and $\\text{tr}(kA) = k \\cdot \\text{tr}(A)$
 • **Transpose invariance**: $\\text{tr}(A^T) = \\text{tr}(A)$ — the diagonal stays put under transposition
 • **Cyclic property**: $\\text{tr}(AB) = \\text{tr}(BA)$, and more generally $\\text{tr}(ABC) = \\text{tr}(BCA) = \\text{tr}(CAB)$
-• **Similarity invariance**: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$ — trace doesn't change under change of basis
-• **Sum of eigenvalues**: for any square $A$, $\\text{tr}(A) = \\sum_i \\lambda_i$ where $\\lambda_i$ are the eigenvalues counted with multiplicity
+• **Similarity invariance**: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$ — trace doesn't change under change of [basis](!/linear-algebra/vector-spaces#2)
+• **Sum of eigenvalues**: for any square $A$, $\\text{tr}(A) = \\sum_i \\lambda_i$ where $\\lambda_i$ are the [eigenvalues](!/linear-algebra/eigen#2) counted with multiplicity
 
 The cyclic property is the workhorse — it's behind nearly every nontrivial trace identity.`,
       before: ``,
@@ -626,7 +626,7 @@ The cyclic property is the workhorse — it's behind nearly every nontrivial tra
 • **Linear algebra**: $\\text{tr}(A) = \\sum \\lambda_i$ — read off the eigenvalue sum without diagonalizing
 • **Differential geometry and physics**: the trace of a stress or strain tensor measures volume change; the trace of a Hamiltonian relates to partition functions
 • **Machine learning**: trace appears in covariance summaries, Frobenius norms ($\\|A\\|_F^2 = \\text{tr}(A^T A)$), and many regularization terms
-• **Inner product**: the Frobenius inner product is $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$
+• **Inner product**: the Frobenius [inner product](!/linear-algebra/orthogonality/inner-product#8) is $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$
 • **Statistics**: trace of a projection matrix counts the degrees of freedom of the projection
 
 Anywhere a "total" or "sum of intrinsic quantities" of a square matrix is needed, the trace is the right tool.`,

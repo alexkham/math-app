@@ -48,7 +48,7 @@ export async function getStaticProps(){
 
 **Result shape** — the output matrix $C$ inherits the shape of the operands. If $A$ and $B$ are $m \\times n$, then $C$ is $m \\times n$.
 
-**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching dimensions.`,
+**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching [dimensions](!/linear-algebra/vector-spaces/dimension#1).`,
       before: ``,
       after: ``,
       link: '',
@@ -140,7 +140,7 @@ Matrix addition satisfies the same algebraic properties as ordinary addition:
 • **Identity**: $A + 0 = A$, where $0$ is the zero matrix of the same shape
 • **Inverse**: $A + (-A) = 0$
 
-Subtraction is neither commutative nor associative, just like with scalars.`,
+Subtraction is neither commutative nor associative, just like with [scalars](!/linear-algebra/vectors#1).`,
       before: ``,
       after: ``,
       link: '',
@@ -164,7 +164,7 @@ For comparison with matrix multiplication and other operations, see **matrix mul
 
 • **Trying to add matrices of different shapes** — a $2 \\times 3$ and a $3 \\times 2$ cannot be added even though both have six entries
 • **Adding a scalar to a matrix as if it were a matrix** — adding a scalar $k$ to $A$ means adding $k$ to every entry, which is technically scalar shifting, not matrix addition
-• **Confusing element-wise multiplication with matrix multiplication** — element-wise (Hadamard) product also requires matching shapes, but standard matrix multiplication does not
+• **Confusing element-wise multiplication with matrix multiplication** — element-wise (Hadamard) product also requires matching shapes, but [standard matrix](!/linear-algebra/transformations/matrix-representation#2) multiplication does not
 • **Forgetting that subtraction is not commutative** — $A - B \\neq B - A$ in general
 • **Mixing row vectors and column vectors** — a $1 \\times n$ row vector cannot be added to an $n \\times 1$ column vector even when they have the same number of entries`,
       before: ``,

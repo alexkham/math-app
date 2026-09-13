@@ -1961,6 +1961,8 @@ import PropertyLawCard from '@/app/components/infographics/linear-algebra/Proper
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
 
 
 export async function getStaticProps(){
@@ -2740,9 +2742,25 @@ const schemas = {
   },
 }
 
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    determinant: demoUnitFrame({
+      svg: crossProductDiagrams.determinant,
+      caption: 'The symbolic determinant laid out',
+      text: 'The three components of the result are being read off a determinant whose first row carries the basis vectors and whose other two rows are the operands. The middle component picks up its minus sign from the checkerboard pattern, not from anything geometric &#8212; a detail far easier to trust once seen laid out. Expand it row by row on the',
+      href: '/linear-algebra/visual-tools/vector-cross-product',
+      linkText: 'cross product visualizer',
+    }),
+  };
+
+
 
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -2771,7 +2789,7 @@ export default function CrossProductPage({
   summaryTable,
   faqQuestions,
   schemas,
-}) {
+demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2782,6 +2800,8 @@ export default function CrossProductPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-determinant'} dangerouslySetInnerHTML={{ __html: demoUnits.determinant }} />,
+          `That determinant layout is also the quickest way to see why swapping the two vectors flips the sign of the whole product.`,
         ]
     },
     {

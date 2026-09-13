@@ -39,17 +39,17 @@ export async function getStaticProps(){
 
 **Eigenvalue** — the scale factor $\\lambda$ in $A\\mathbf{v} = \\lambda\\mathbf{v}$.
 
-**Characteristic polynomial** — $p(\\lambda) = \\det(A - \\lambda I)$, whose roots are the eigenvalues; shown monic in the tool.
+**Characteristic polynomial** — $p(\\lambda) = \\det(A - \\lambda I)$, whose roots are the [eigenvalues](!/linear-algebra/eigen#2); shown monic in the tool.
 
 **Characteristic equation** — $\\det(A - \\lambda I) = 0$.
 
-**Eigenspace** — the null space of $A - \\lambda I$, all eigenvectors for $\\lambda$ together with $\\mathbf{0}$.
+**Eigenspace** — the null space of $A - \\lambda I$, all [eigenvectors](!/linear-algebra/eigen#2) for $\\lambda$ together with $\\mathbf{0}$.
 
 **Algebraic multiplicity** — how many times $\\lambda$ is a root of $p$.
 
-**Geometric multiplicity** — the dimension of the eigenspace, the number of free columns of $A - \\lambda I$; never exceeds the algebraic multiplicity.
+**Geometric multiplicity** — the [dimension](!/linear-algebra/vector-spaces/dimension#1) of the [eigenspace](!/linear-algebra/eigen#4), the number of free columns of $A - \\lambda I$; never exceeds the algebraic multiplicity.
 
-**Defective** — a matrix with some eigenvalue whose geometric multiplicity is smaller than its algebraic one; such a matrix cannot be diagonalized.
+**Defective** — a [matrix](!/linear-algebra/matrix#1) with some eigenvalue whose geometric multiplicity is smaller than its algebraic one; such a matrix cannot be diagonalized.
 
 **Trace and determinant** — the eigenvalues sum to $\\operatorname{tr} A$ and multiply to $\\det A$, counting multiplicity.`,
       before: ``,
@@ -107,7 +107,7 @@ When an eigenvalue is repeated, the eigenvector scene reports both multiplicitie
 • **Symmetric $2 \\times 2$** — eigenvalues $1$ and $3$ with perpendicular eigenvectors $(1, -1)$ and $(1, 1)$; symmetric matrices always have real eigenvalues and orthogonal eigenvectors
 • **Repeated eigenvalue** — $\\lambda = 1$ twice and $\\lambda = 4$; the reduced form of $A - I$ has two free columns, so the eigenspace is a plane and the matrix is still diagonalizable
 • **Defective** — the shear with $\\lambda = 1$ twice but a single eigenvector; algebraic multiplicity $2$, geometric multiplicity $1$, not diagonalizable
-• **Triangular** — the eigenvalues are the diagonal entries, because $\\det(A - \\lambda I)$ of a triangular matrix is the product of the diagonal
+• **Triangular** — the eigenvalues are the diagonal entries, because $\\det(A - \\lambda I)$ of a [triangular matrix](!/linear-algebra/decompositions/lower-upper#1) is the product of the diagonal
 • **Rotation** — the quarter turn, with characteristic polynomial $\\lambda^2 + 1$ and eigenvalues $\\pm i$; no real vector keeps its direction
 
 Shuffle builds its matrices as $PDP^{-1}$ with an integer unimodular $P$, so the eigenvalues are small integers and the entries stay integers too.`,
@@ -127,7 +127,7 @@ $$p(\\lambda) = \\det(A - \\lambda I) = 0$$
 
 This is the characteristic equation, and $p$ is a polynomial of degree $n$ whose roots are the eigenvalues. For a $2 \\times 2$ matrix it is $\\lambda^2 - (\\operatorname{tr} A)\\lambda + \\det A$; in general the coefficient of $\\lambda^{n-1}$ is $\\pm\\operatorname{tr} A$ and the constant is $\\pm\\det A$, which gives the two standard checks: the eigenvalues sum to the trace and multiply to the determinant.
 
-Each eigenvalue then has an eigenspace, the null space of $A - \\lambda I$, found by row reduction. Its dimension, the geometric multiplicity, is at least $1$ and at most the algebraic multiplicity. When every eigenvalue has a full set, the eigenvectors form a basis and $A$ is diagonalizable: $A = PDP^{-1}$ with the eigenvectors as the columns of $P$.
+Each eigenvalue then has an eigenspace, the null space of $A - \\lambda I$, found by row reduction. Its dimension, the geometric multiplicity, is at least $1$ and at most the algebraic multiplicity. When every eigenvalue has a full set, the eigenvectors form a [basis](!/linear-algebra/vector-spaces#2) and $A$ is diagonalizable: $A = PDP^{-1}$ with the eigenvectors as the columns of $P$.
 
 Real matrices can have complex eigenvalues, in conjugate pairs; a $2 \\times 2$ rotation is the standard example. Symmetric matrices never do: their eigenvalues are real and their eigenvectors can be chosen orthogonal. For the full theory, see the [characteristic equation theory page](!/linear-algebra/eigen/characteristic-equation) and the [eigenvalue properties page](!/linear-algebra/eigen/properties).`,
       before: ``,
@@ -136,7 +136,7 @@ Real matrices can have complex eigenvalues, in conjugate pairs; a $2 \\times 2$ 
     },
     obj6: {
       title: `Key Properties`,
-      content: `Facts that hold for every square matrix.
+      content: `Facts that hold for every [square matrix](!/linear-algebra/matrix/types#1).
 
 • **Trace and determinant**: $\\sum \\lambda_i = \\operatorname{tr} A$ and $\\prod \\lambda_i = \\det A$, with multiplicity
 • **Singular matrices**: $\\lambda = 0$ is an eigenvalue exactly when $\\det A = 0$
@@ -259,7 +259,7 @@ The two checks are worth applying every time: the roots must sum to the trace an
     },
     obj14: {
       title: `Reading an Eigenvector`,
-      content: `For each real eigenvalue, the tool substitutes it into $A - \\lambda I$, row reduces, and reads a null-space vector by setting the free variable to $1$. The frozen picture below is the default preset's $\\lambda = 11$: the shifted matrix, its reduced form with two pivots and one free column, and the eigenvector $(0, 1, 2)$.
+      content: `For each real eigenvalue, the tool substitutes it into $A - \\lambda I$, row reduces, and reads a null-space vector by setting the free variable to $1$. The frozen picture below is the default preset's $\\lambda = 11$: the shifted matrix, its reduced form with two [pivots](!/linear-algebra/linear-systems/echelon-form#4) and one free column, and the eigenvector $(0, 1, 2)$.
 
 The reduced form must have at least one free column; that is what being singular means, and it is the source of the eigenvector.`,
       before: ``,

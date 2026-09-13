@@ -39,13 +39,13 @@ export async function getStaticProps(){
 
 **Normal equations** — $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$; always consistent, uniquely solvable when the columns of $A$ are independent.
 
-**Projection** — $\\mathbf{p} = A\\hat{\\mathbf{x}}$, the point of the column space closest to $\\mathbf{b}$.
+**Projection** — $\\mathbf{p} = A\\hat{\\mathbf{x}}$, the point of the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) closest to $\\mathbf{b}$.
 
 **Residual** — $\\mathbf{e} = \\mathbf{b} - \\mathbf{p}$, perpendicular to every column of $A$: $A^T\\mathbf{e} = \\mathbf{0}$.
 
 **Projection matrix** — $P = A(A^TA)^{-1}A^T$, with $P\\mathbf{b} = \\mathbf{p}$; symmetric and idempotent, $P^2 = P$.
 
-**Design matrix** — for fitting $b = C + Dt$, the matrix with a column of ones and a column of $t$ values, one row per data point.
+**Design matrix** — for fitting $b = C + Dt$, the [matrix](!/linear-algebra/matrix#1) with a column of ones and a column of $t$ values, one row per data point.
 
 **Overdetermined system** — more equations than unknowns; generally inconsistent, and the setting for least squares.
 
@@ -75,13 +75,13 @@ When $A$ is a design matrix the captions translate everything into the fit: the 
       title: `The Scenes in Order`,
       content: `The visualizer follows the textbook procedure exactly.
 
-• **Consistency** — $[A \\mid \\mathbf{b}]$ row reduced; a pivot in the last column means no exact solution
-• **Normal equations** — $A^TA$ and $A^T\\mathbf{b}$ formed as products, with their meaning as dot products
+• **Consistency** — $[A \\mid \\mathbf{b}]$ row reduced; a [pivot](!/linear-algebra/linear-systems/echelon-form#4) in the last column means no exact solution
+• **Normal equations** — $A^TA$ and $A^T\\mathbf{b}$ formed as products, with their meaning as [dot products](!/linear-algebra/vectors/dot-product#1)
 • **Dependent columns** — if $A^TA$ is singular the run stops with an explanation
 • **Solve** — $[A^TA \\mid A^T\\mathbf{b}]$ row reduced to $\\hat{\\mathbf{x}}$; for a single column this is $\\mathbf{a}^T\\mathbf{b} / \\mathbf{a}^T\\mathbf{a}$
 • **Project** — $\\mathbf{p} = A\\hat{\\mathbf{x}}$ as a combination of the columns, compared with $\\mathbf{b}$
 • **Residual** — $\\mathbf{e} = \\mathbf{b} - \\mathbf{p}$, its length, $A^T\\mathbf{e} = \\mathbf{0}$, and the Pythagorean split of $\\|\\mathbf{b}\\|^2$
-• **Projection matrix** — $P = A(A^TA)^{-1}A^T$ with $P\\mathbf{b} = \\mathbf{p}$, $P^2 = P$ and trace equal to the rank
+• **Projection matrix** — $P = A(A^TA)^{-1}A^T$ with $P\\mathbf{b} = \\mathbf{p}$, $P^2 = P$ and [trace](!/linear-algebra/matrix/trace#1) equal to the [rank](!/linear-algebra/matrix/rank#1)
 • **Done** — the fitted curve when there is one, and the sum of squared errors`,
       before: ``,
       after: ``,
@@ -122,7 +122,7 @@ Shuffle keeps the design-matrix structure and randomizes the data, so the fitted
       title: `What Least Squares Is`,
       content: `A system $A\\mathbf{x} = \\mathbf{b}$ with more equations than unknowns is usually inconsistent: $\\mathbf{b}$ is not in the column space of $A$, so no $\\mathbf{x}$ makes $A\\mathbf{x}$ equal to $\\mathbf{b}$. Least squares replaces the impossible demand with a possible one: choose $\\hat{\\mathbf{x}}$ to make the error $\\mathbf{e} = \\mathbf{b} - A\\hat{\\mathbf{x}}$ as short as possible.
 
-The shortest error is geometric. The set of all $A\\mathbf{x}$ is the column space, and the point of a subspace closest to $\\mathbf{b}$ is the orthogonal projection $\\mathbf{p}$ of $\\mathbf{b}$ onto it. So $A\\hat{\\mathbf{x}} = \\mathbf{p}$, and the error $\\mathbf{e} = \\mathbf{b} - \\mathbf{p}$ is perpendicular to the whole column space, in particular to each column:
+The shortest error is geometric. The set of all $A\\mathbf{x}$ is the column space, and the point of a [subspace](!/linear-algebra/vector-spaces/subspaces#1) closest to $\\mathbf{b}$ is the orthogonal projection $\\mathbf{p}$ of $\\mathbf{b}$ onto it. So $A\\hat{\\mathbf{x}} = \\mathbf{p}$, and the error $\\mathbf{e} = \\mathbf{b} - \\mathbf{p}$ is perpendicular to the whole column space, in particular to each column:
 
 $$A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0} \\qquad\\Longleftrightarrow\\qquad A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$$
 
@@ -130,7 +130,7 @@ These are the normal equations. They are always consistent, because $A^T\\mathbf
 
 $$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}, \\qquad \\mathbf{p} = A(A^TA)^{-1}A^T\\mathbf{b} = P\\mathbf{b}$$
 
-The matrix $P$ projects every vector of $\\mathbb{R}^m$ onto the column space. It is symmetric, satisfies $P^2 = P$, and $I - P$ projects onto the orthogonal complement, the left null space, where the residual lives.
+The matrix $P$ projects every vector of $\\mathbb{R}^m$ onto the column space. It is symmetric, satisfies $P^2 = P$, and $I - P$ projects onto the [orthogonal complement](!/linear-algebra/orthogonality#3), the [left null space](!/linear-algebra/vector-spaces/fundamental-spaces#5), where the residual lives.
 
 Fitting a line $b = C + Dt$ to data points $(t_i, b_i)$ is exactly this problem with $A$ having a column of ones and a column of the $t_i$: each data point is one equation $C + Dt_i = b_i$, the column space is the set of all lines evaluated at the $t_i$, and the least-squares line minimizes the sum of squared vertical errors. Polynomial fits use more columns; the picture is the same. For the theory, see the [least squares page](!/linear-algebra/orthogonality/least-squares) and the [projections page](!/linear-algebra/orthogonality/projections).`,
       before: ``,
@@ -149,7 +149,7 @@ Fitting a line $b = C + Dt$ to data points $(t_i, b_i)$ is exactly this problem 
 • **Single column**: $\\hat{x} = \\mathbf{a}^T\\mathbf{b} / \\mathbf{a}^T\\mathbf{a}$ and $P = \\mathbf{a}\\mathbf{a}^T / \\mathbf{a}^T\\mathbf{a}$
 • **Orthonormal columns**: if $A^TA = I$ then $\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ and $P = AA^T$, with no inverse to compute
 • **Line fits**: with a column of ones, the errors sum to zero and the fitted line passes through the mean point $(\\bar t, \\bar b)$
-• **Conditioning**: $A^TA$ squares the condition number of $A$; QR or the SVD solve the same problem more stably
+• **Conditioning**: $A^TA$ squares the [condition number](!/linear-algebra/decompositions/svd#9) of $A$; QR or the SVD solve the same problem more stably
 • **Dependent columns**: $\\mathbf{p}$ is still unique, but $\\hat{\\mathbf{x}}$ is not; the pseudoinverse picks the shortest`,
       before: ``,
       after: ``,
@@ -159,7 +159,7 @@ Fitting a line $b = C + Dt$ to data points $(t_i, b_i)$ is exactly this problem 
       title: `Why It Matters`,
       content: `Least squares is the most used computation in applied mathematics.
 
-• **Regression**: every linear regression is a least-squares projection of the response onto the span of the predictors
+• **Regression**: every linear regression is a least-squares projection of the response onto the [span](!/linear-algebra/vector-spaces/span#1) of the predictors
 • **Curve fitting and calibration**: polynomial, exponential (after a log) and trigonometric fits are all design-matrix problems
 • **Measurement and surveying**: more measurements than unknowns, reconciled by minimizing squared discrepancies; Gauss invented the method for exactly this
 • **Signal processing**: filters and predictors are chosen by least squares; the projection theorem is the orthogonality principle
@@ -231,7 +231,7 @@ The three equations are inconsistent: no line passes through all three points.
     },
     obj11: {
       title: `No Exact Solution`,
-      content: `The frozen picture below shows the default preset's augmented matrix $[A \\mid \\mathbf{b}]$ reduced, with a pivot in the last column: one row reads $0 = 1$, so no line passes through the three points.
+      content: `The frozen picture below shows the default preset's [augmented matrix](!/linear-algebra/linear-systems#3) $[A \\mid \\mathbf{b}]$ reduced, with a pivot in the last column: one row reads $0 = 1$, so no line passes through the three points.
 
 That failure is what least squares is for.`,
       before: ``,
@@ -277,7 +277,7 @@ The residual lives in the left null space of $A$, the orthogonal complement of t
       title: `The Projection Matrix`,
       content: `The frozen picture below shows $P = A(A^TA)^{-1}A^T$ for the default preset, a $3 \\times 3$ matrix of sixths, applied to $\\mathbf{b}$ to give $\\mathbf{p} = (5, 2, -1)$ directly.
 
-$P$ projects every vector of $\\mathbb{R}^3$ onto the plane spanned by the columns of $A$.`,
+$P$ projects every [vector](!/linear-algebra/vectors#1) of $\\mathbb{R}^3$ onto the plane spanned by the columns of $A$.`,
       before: ``,
       after: `$P$ is symmetric, because projection is its own transpose, and idempotent, $P^2 = P$, because projecting a vector already in the plane leaves it alone. Its eigenvalues are $1$ on the column space and $0$ on the left null space, so its trace, the sum of the eigenvalues, is the dimension of the column space, $2$.
 
@@ -286,7 +286,7 @@ $I - P$ is the other projection, onto the left null space, and $(I - P)\\mathbf{
     },
     obj16: {
       title: `Projection onto a Line`,
-      content: `With a single column $\\mathbf{a}$ the normal equation is the scalar $\\mathbf{a}^T\\mathbf{a}\\,\\hat{x} = \\mathbf{a}^T\\mathbf{b}$. The frozen picture below shows the one-column preset, $\\mathbf{a} = (1, 2, 2)$ and $\\mathbf{b} = (3, 3, 3)$: $9\\hat{x} = 15$, so $\\hat{x} = 5/3$.
+      content: `With a single column $\\mathbf{a}$ the normal equation is the [scalar](!/linear-algebra/vectors#1) $\\mathbf{a}^T\\mathbf{a}\\,\\hat{x} = \\mathbf{a}^T\\mathbf{b}$. The frozen picture below shows the one-column preset, $\\mathbf{a} = (1, 2, 2)$ and $\\mathbf{b} = (3, 3, 3)$: $9\\hat{x} = 15$, so $\\hat{x} = 5/3$.
 
 The projection is $\\mathbf{p} = \\frac{5}{3}\\mathbf{a}$ and the residual $(4/3, -1/3, -1/3)$ is perpendicular to $\\mathbf{a}$.`,
       before: ``,

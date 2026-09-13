@@ -35,19 +35,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Rank** — the number of linearly independent rows of a matrix, which always equals the number of linearly independent columns. Written $\\operatorname{rank} A$.
+      content: `**Rank** — the number of linearly independent rows of a [matrix](!/linear-algebra/matrix#1), which always equals the number of linearly independent columns. Written $\\operatorname{rank} A$.
 
-**Pivot** — the first non-zero entry of a row in echelon form. The rank is the number of pivots.
+**Pivot** — the first non-zero entry of a row in echelon form. The rank is the number of [pivots](!/linear-algebra/linear-systems/echelon-form#4).
 
-**Pivot column** — a column of $A$ containing a pivot after reduction; the pivot columns of $A$ form a basis of its column space.
+**Pivot column** — a column of $A$ containing a pivot after reduction; the pivot columns of $A$ form a basis of its [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2).
 
-**Free column** — a column with no pivot; it is a linear combination of the pivot columns to its left.
+**Free column** — a column with no pivot; it is a [linear combination](!/linear-algebra/vectors/linear-combinations#1) of the pivot columns to its left.
 
 **Row echelon form** — a matrix in which each pivot lies strictly to the right of the pivot in the row above, and zero rows sit at the bottom.
 
 **Row operations** — swapping two rows, scaling a row, and adding a multiple of one row to another. None of them changes the rank.
 
-**Nullity** — the dimension of the null space, equal to the number of free columns: $n - \\operatorname{rank} A$.
+**Nullity** — the [dimension](!/linear-algebra/vector-spaces/dimension#1) of the null space, equal to the number of free columns: $n - \\operatorname{rank} A$.
 
 **Rank-nullity theorem** — $\\operatorname{rank} A + \\operatorname{nullity} A = n$, the number of columns.
 
@@ -120,7 +120,7 @@ Editing entries by hand is the best way to see how fragile rank is: change one e
     },
     obj5: {
       title: `What Rank Is`,
-      content: `The rank of an $m \\times n$ matrix $A$ is the dimension of its column space, the number of linearly independent columns. A fundamental theorem says this equals the dimension of the row space, the number of linearly independent rows, so rank can be found from either side.
+      content: `The rank of an $m \\times n$ matrix $A$ is the dimension of its column space, the number of linearly independent columns. A fundamental theorem says this equals the dimension of the [row space](!/linear-algebra/vector-spaces/fundamental-spaces#3), the number of linearly independent rows, so rank can be found from either side.
 
 Row reduction finds it. Row operations replace the rows of $A$ by combinations of the same rows, so the row space never changes, and neither does the rank. In echelon form the non-zero rows are visibly independent, one per pivot, so
 
@@ -136,7 +136,7 @@ and the rank-nullity theorem accounts for the rest of the columns:
 
 $$\\operatorname{rank} A + \\operatorname{nullity} A = n$$
 
-where the nullity, the dimension of the null space, is the number of free columns. For the full treatment, including rank and the four fundamental subspaces, see the [matrix rank theory page](!/linear-algebra/matrix/rank).`,
+where the nullity, the dimension of the null space, is the number of free columns. For the full treatment, including rank and the four fundamental [subspaces](!/linear-algebra/vector-spaces/subspaces#1), see the [matrix rank theory page](!/linear-algebra/matrix/rank).`,
       before: ``,
       after: ``,
       link: '',
@@ -163,9 +163,9 @@ where the nullity, the dimension of the null space, is the number of free column
       content: `Rank is the single number that says how much of the available space a matrix actually uses.
 
 • **Solvability**: $A\\mathbf{x} = \\mathbf{b}$ is consistent exactly when $\\operatorname{rank} A = \\operatorname{rank} [A \\mid \\mathbf{b}]$; the solution is unique when the rank equals the number of unknowns
-• **Linear independence**: the columns of $A$ are independent exactly when the rank equals the number of columns, which is how a set of vectors is tested for independence in practice
+• **Linear independence**: the columns of $A$ are independent exactly when the rank equals the number of columns, which is how a set of [vectors](!/linear-algebra/vectors#1) is tested for independence in practice
 • **Dimension of the image**: the rank is the dimension of the set of all outputs $A\\mathbf{x}$; a rank-deficient transformation flattens space
-• **Invertibility**: full rank is the condition for a square matrix to have an inverse
+• **Invertibility**: full rank is the condition for a [square matrix](!/linear-algebra/matrix/types#1) to have an inverse
 • **Data**: the rank of a data matrix is the number of independent features, and low-rank approximation is the basis of compression and dimensionality reduction
 • **Networks and systems**: the rank of an incidence or controllability matrix decides whether a network is connected or a system can be steered`,
       before: ``,
@@ -202,7 +202,7 @@ Two pivots, so $\\operatorname{rank} A = 2$. The pivot columns are $1$ and $2$, 
 • **Reading the pivot columns from $R$ instead of $A$** — the pivot positions are found in $R$, but the basis of the column space is the columns of the original $A$ in those positions; row operations change the column space
 • **Forgetting that a swap may be needed** — a $0$ in the current position does not mean the column is free; a non-zero entry lower down still gives a pivot
 • **Expecting rank to exceed the smaller dimension** — a $2 \\times 4$ matrix has rank at most $2$, however its entries are chosen
-• **Confusing rank with determinant** — the determinant is a number defined only for square matrices; rank is defined for every matrix, and a zero determinant just says the rank is less than $n$
+• **Confusing rank with determinant** — the [determinant](!/linear-algebra/determinants#1) is a number defined only for square matrices; rank is defined for every matrix, and a zero determinant just says the rank is less than $n$
 • **Trusting floating point** — with decimal entries, a value that should be $0$ may come out as $10^{-16}$; this tool treats anything below $10^{-9}$ as zero`,
       before: ``,
       after: ``,

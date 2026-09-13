@@ -822,6 +822,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
 export async function getStaticProps(){
@@ -1455,8 +1458,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    geometry: demoUnitFrame({
+      svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
+      caption: 'The two non-trivial subspaces of R&#178;',
+      text: 'A plane through the origin above, a line through the origin below &#8212; in two dimensions these are the only shapes a subspace can take besides the origin itself and the whole space. Both pass through the origin, because a subspace must contain the zero vector, and both are closed: adding or scaling anything inside keeps you inside. Move the arrows and watch one become the other on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+    nullspace: demoUnitFrame({
+      svg: subspacesDiagrams.nullspace,
+      caption: 'The null space read off the reduced form',
+      text: 'Each free column has produced one special solution, and together they form a basis for everything the matrix sends to zero. The null space is a subspace for a reason visible right here: any combination of these solutions is still killed by the matrix, so the set is closed under exactly the two operations a subspace has to survive. Step through all four spaces on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj7Table,
@@ -1476,7 +1502,7 @@ return {
 
    }
 
-export default function SubspacesPage({seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas}) {
+export default function SubspacesPage({seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1530,6 +1556,8 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
+          `Anything that misses the origin — a line offset from it, a shifted plane — fails the test before any closure question is asked.`,
         ]
     },
     {
@@ -1538,6 +1566,8 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-nullspace'} dangerouslySetInnerHTML={{ __html: demoUnits.nullspace }} />,
+          `The column space in the next section is built the same way, from the pivot columns rather than the free ones.`,
         ]
     },
     {

@@ -39,7 +39,7 @@ export async function getStaticProps(){
 
 **Symmetric** — $A^T = A$; every entry equals its mirror image across the diagonal.
 
-**Positive definite** — $\\mathbf{x}^T A \\mathbf{x} > 0$ for every non-zero $\\mathbf{x}$; equivalently all eigenvalues positive, equivalently all leading principal minors positive, equivalently Cholesky succeeds.
+**Positive definite** — $\\mathbf{x}^T A \\mathbf{x} > 0$ for every non-zero $\\mathbf{x}$; equivalently all [eigenvalues](!/linear-algebra/eigen#2) positive, equivalently all leading principal [minors](!/linear-algebra/determinants/cofactors#1) positive, equivalently Cholesky succeeds.
 
 **Diagonal entry** — $\\ell_{j,j} = \\sqrt{a_{j,j} - \\sum_{k<j} \\ell_{j,k}^2}$, a square root of what is left of $a_{j,j}$ after the earlier columns are accounted for.
 
@@ -78,7 +78,7 @@ Two presets stop early on purpose. The not-symmetric one stops before any arithm
 • **Diagonal** — $\\ell_{j,j}$ is the square root of $a_{j,j}$ minus the squares of the entries already in row $j$ of $L$; if that radicand is not positive the run stops, because $A$ is not positive definite
 • **Below the diagonal** — each $\\ell_{i,j}$ is $a_{i,j}$ minus the products of the entries already in rows $i$ and $j$, divided by $\\ell_{j,j}$
 • **Mirror** — every entry of $L$ appears at once in $L^T$, drawn on the right
-• **Done** — $LL^T = A$, the determinant is the product of the squared diagonal, and the run reports that positive definiteness has been proved
+• **Done** — $LL^T = A$, the [determinant](!/linear-algebra/determinants#1) is the product of the squared diagonal, and the run reports that positive definiteness has been proved
 
 The formulas come from writing out $LL^T = A$ entry by entry. Entry $(i, j)$ of $LL^T$ is $\\sum_k \\ell_{i,k}\\ell_{j,k}$, and since $L$ is lower triangular the sum stops at $k = \\min(i, j)$; solving that equation for the last term gives the two rules.`,
       before: ``,
@@ -128,7 +128,7 @@ $$\\ell_{j,j} = \\sqrt{a_{j,j} - \\sum_{k<j} \\ell_{j,k}^2}, \\qquad \\ell_{i,j}
 
 Computed column by column, every quantity on the right is already known when it is needed, which is the order the tool follows.
 
-The connection to LU is direct. For a symmetric matrix, Gaussian elimination without pivoting gives $A = LU$ with $U = DL^T$, where $D$ is the diagonal of pivots; positive definiteness makes every pivot positive, so $D = D^{1/2}D^{1/2}$ and $A = (LD^{1/2})(LD^{1/2})^T$. Cholesky's $L$ is $LD^{1/2}$, and the pivots of elimination are the squared diagonal entries of the factor. That is also why no pivoting is ever needed: positive definiteness guarantees every pivot is positive before it is reached.
+The connection to LU is direct. For a [symmetric matrix](!/linear-algebra/matrix/types#5), Gaussian elimination without pivoting gives $A = LU$ with $U = DL^T$, where $D$ is the diagonal of [pivots](!/linear-algebra/linear-systems/echelon-form#4); positive definiteness makes every pivot positive, so $D = D^{1/2}D^{1/2}$ and $A = (LD^{1/2})(LD^{1/2})^T$. Cholesky's $L$ is $LD^{1/2}$, and the pivots of elimination are the squared diagonal entries of the factor. That is also why no pivoting is ever needed: positive definiteness guarantees every pivot is positive before it is reached.
 
 For the full treatment, including the $LDL^T$ variant and the equivalent characterizations of positive definiteness, see the [Cholesky decomposition theory page](!/linear-algebra/decompositions/cholesky).`,
       before: ``,
@@ -161,7 +161,7 @@ For the full treatment, including the $LDL^T$ variant and the equivalent charact
 • **Optimization**: Hessians at a minimum, Newton steps, and interior-point methods all factor SPD matrices at every iteration
 • **Physics and engineering**: stiffness, mass and conductance matrices are SPD, and finite-element solvers rely on Cholesky or its sparse variants
 • **Gaussian processes and Kalman filters**: kernel matrices and covariance updates are factored this way for both speed and stability
-• **The definiteness test**: asking whether a quadratic form is positive, or a critical point is a minimum, comes down to whether Cholesky succeeds`,
+• **The definiteness test**: asking whether a [quadratic form](!/linear-algebra/decompositions/spectral#6) is positive, or a critical point is a minimum, comes down to whether Cholesky succeeds`,
       before: ``,
       after: ``,
       link: '',

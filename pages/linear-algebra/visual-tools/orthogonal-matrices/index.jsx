@@ -35,13 +35,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Orthogonal matrix** — a square matrix $Q$ with $Q^TQ = I$; equivalently, its columns are orthonormal.
+      content: `**Orthogonal matrix** — a [square matrix](!/linear-algebra/matrix/types#1) $Q$ with $Q^TQ = I$; equivalently, its columns are orthonormal.
 
 **Orthonormal** — unit length and mutually perpendicular.
 
 **Inverse equals transpose** — $Q^{-1} = Q^T$, so $QQ^T = I$ too and the rows are orthonormal as well.
 
-**Isometry** — a map preserving lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$; orthogonal matrices also preserve dot products and angles.
+**Isometry** — a map preserving lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$; orthogonal matrices also preserve [dot products](!/linear-algebra/vectors/dot-product#1) and angles.
 
 **Determinant $\\pm 1$** — $+1$ for a rotation (orientation preserved), $-1$ for a reflection (orientation reversed).
 
@@ -58,12 +58,12 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix and test it.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) and test it.
 
 • Use the **Preset** pills for eight matrices: a $30°$ rotation, a reflection, a permutation, a Householder reflection, a rotation about the $z$-axis, a matrix with perpendicular but non-unit columns, a scaled rotation, and a shear
 • Use the **Size** stepper for $2 \\times 2$ or $3 \\times 3$, and **Shuffle** for a random rotation or reflection
 • Edit any entry directly; the entries are shown to four decimals, and the test tolerates that rounding
-• Change the **test vector** $\\mathbf{x}$ to see lengths and dot products preserved for your own vector
+• Change the **test vector** $\\mathbf{x}$ to see lengths and dot products preserved for your own [vector](!/linear-algebra/vectors#1)
 • Hover the **?** icon for a reminder of what orthogonality means and implies
 • Press play or step manually; the step log on the right keeps every stage
 
@@ -81,7 +81,7 @@ A matrix that fails the test stops early, with the diagnosis: perpendicular colu
 • **Determinant** — $\\pm 1$, with the rotation-or-reflection verdict
 • **Lengths and angles** — $Q\\mathbf{x}$ and $Q\\mathbf{y}$ for two test vectors, with $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ and $(Q\\mathbf{x})\\cdot(Q\\mathbf{y}) = \\mathbf{x}\\cdot\\mathbf{y}$
 • **Inverse** — $QQ^T = I$, so $Q^{-1} = Q^T$ and the rows are orthonormal too
-• **Classify** — in 2D, the rotation angle or the mirror line; in 3D, the axis from the null space of $Q - I$ and the angle from the trace
+• **Classify** — in 2D, the rotation angle or the mirror line; in 3D, the axis from the null space of $Q - I$ and the angle from the [trace](!/linear-algebra/matrix/trace#1)
 • **Done** — the summary and the group properties`,
       before: ``,
       after: ``,
@@ -130,7 +130,7 @@ The geometric content is that $Q$ preserves the dot product: $(Q\\mathbf{x})\\cd
 
 In the plane there are two kinds. Determinant $+1$ gives a rotation $\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$; determinant $-1$ gives a reflection $\\begin{pmatrix} \\cos 2\\varphi & \\sin 2\\varphi \\\\ \\sin 2\\varphi & -\\cos 2\\varphi \\end{pmatrix}$ across the line at angle $\\varphi$. In space, determinant $+1$ is a rotation about an axis, the direction $\\mathbf{u}$ with $Q\\mathbf{u} = \\mathbf{u}$, by an angle with $\\operatorname{tr} Q = 1 + 2\\cos\\theta$; determinant $-1$ is a reflection across a plane, possibly combined with a rotation about the plane's normal.
 
-Orthogonal matrices are closed under multiplication and inversion, forming the orthogonal group, and they are the reason so much of linear algebra is numerically safe: a change of basis by an orthogonal matrix amplifies no error. The spectral decomposition, QR and the SVD are all built from them. For the theory, see the [orthogonal sets page](!/linear-algebra/orthogonality/orthogonal-sets) and the [geometric transformations page](!/linear-algebra/transformations/geometric).`,
+Orthogonal matrices are closed under multiplication and inversion, forming the orthogonal group, and they are the reason so much of linear algebra is numerically safe: a change of [basis](!/linear-algebra/vector-spaces#2) by an orthogonal matrix amplifies no error. The [spectral decomposition](!/linear-algebra/eigen/diagonalization#7), QR and the SVD are all built from them. For the theory, see the [orthogonal sets page](!/linear-algebra/orthogonality/orthogonal-sets) and the [geometric transformations page](!/linear-algebra/transformations/geometric).`,
       before: ``,
       after: ``,
       link: '',
@@ -146,7 +146,7 @@ Orthogonal matrices are closed under multiplication and inversion, forming the o
 • **Group**: products and inverses of orthogonal matrices are orthogonal; $Q^T$ and $Q^{-1}$ are orthogonal
 • **Condition number $1$**: the best possible; solving $Q\\mathbf{x} = \\mathbf{b}$ is a transpose
 • **Every orthonormal basis** is the column set of an orthogonal matrix, and changing to it is a rigid motion
-• **Symmetric orthogonal** matrices are reflections: $Q^2 = I$, eigenvalues $\\pm 1$
+• **Symmetric orthogonal** matrices are reflections: $Q^2 = I$, [eigenvalues](!/linear-algebra/eigen#2) $\\pm 1$
 • **Permutation matrices** and $\\pm 1$ diagonal matrices are orthogonal
 • **Unitary matrices** are the complex counterpart, with $Q^*Q = I$`,
       before: ``,
@@ -158,9 +158,9 @@ Orthogonal matrices are closed under multiplication and inversion, forming the o
       content: `Orthogonal matrices are the rigid motions, and the tools of numerical linear algebra.
 
 • **Geometry and graphics**: rotations of objects, cameras and coordinate frames are orthogonal matrices, composed by multiplication and undone by transposition
-• **Numerical stability**: QR factorization, Householder and Givens methods, the QR algorithm for eigenvalues and the SVD all work by orthogonal transformations because they never amplify rounding error
-• **Spectral decomposition**: a symmetric matrix is $Q\\Lambda Q^T$; the change to its eigenvector basis is orthogonal
-• **Least squares**: with orthonormal columns the normal equations reduce to $\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$
+• **Numerical stability**: QR factorization, Householder and Givens methods, the [QR algorithm for eigenvalues](!/linear-algebra/decompositions/qr#7) and the SVD all work by orthogonal transformations because they never amplify rounding error
+• **Spectral decomposition**: a [symmetric matrix](!/linear-algebra/matrix/types#5) is $Q\\Lambda Q^T$; the change to its [eigenvector](!/linear-algebra/eigen#2) basis is orthogonal
+• **Least squares**: with orthonormal columns the [normal equations](!/linear-algebra/orthogonality/least-squares#3) reduce to $\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$
 • **Signal processing**: the discrete Fourier, cosine and wavelet transforms are orthogonal (or unitary), which is why they preserve energy and invert by transposition
 • **Statistics**: orthogonal rotations of factor loadings, and orthogonal designs
 • **Physics and robotics**: rotation groups $SO(2)$ and $SO(3)$, Euler angles, and the axis–angle form read from the trace`,

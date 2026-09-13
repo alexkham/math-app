@@ -35,7 +35,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**QR decomposition** — the factorization $A = QR$ of a matrix with linearly independent columns, where $Q$ has orthonormal columns and $R$ is upper triangular.
+      content: `**QR decomposition** — the factorization $A = QR$ of a [matrix](!/linear-algebra/matrix#1) with linearly independent columns, where $Q$ has orthonormal columns and $R$ is upper triangular.
 
 **Orthonormal columns** — $\\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$ for $i \\neq j$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_i = 1$; equivalently $Q^T Q = I$.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Above the diagonal** — $r_{j,k} = \\mathbf{q}_j \\cdot \\mathbf{a}_k$, the coefficient of $\\mathbf{q}_j$ in column $k$ of $A$.
 
-**Reduced versus full** — this tool shows the reduced form, with $Q$ the same shape as $A$; the full form pads $Q$ to a square orthogonal matrix and $R$ with zero rows.`,
+**Reduced versus full** — this tool shows the reduced form, with $Q$ the same shape as $A$; the full form pads $Q$ to a square [orthogonal matrix](!/linear-algebra/matrix/types#7) and $R$ with zero rows.`,
       before: ``,
       after: ``,
       link: '',
@@ -59,7 +59,7 @@ export async function getStaticProps(){
       content: `Set the shape of $A$, then watch $Q$ and $R$ fill in together.
 
 • Use the **Shape** steppers for $2$ to $4$ rows and $2$ or $3$ columns; $Q$ takes the shape of $A$ and $R$ is square with one row per column
-• Hover the **?** icon for a reminder of what the factorization is and where least squares and eigenvalue algorithms use it
+• Hover the **?** icon for a reminder of what the factorization is and where [least squares](!/linear-algebra/orthogonality/least-squares#3) and [eigenvalue](!/linear-algebra/eigen#2) algorithms use it
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 • The layout reads $A = Q \\cdot R$ throughout: $A$ on the left stays fixed, $Q$ fills column by column, and $R$ fills entry by entry as each coefficient and length is produced
 • Everything is symbolic: the coefficients are named $r_{j,k}$ and the working columns $\\mathbf{u}_k$, so the cells show the structure of the formula rather than numbers
@@ -74,7 +74,7 @@ Choosing more columns than rows is allowed and instructive: the columns then can
       content: `The visualizer processes the columns of $A$ from left to right, and each column goes through the same short cycle.
 
 • **Start** — column $k$ of $A$ is copied into column $k$ of $Q$ as the working column $\\mathbf{u}_k$
-• **Coefficient** — for each finished column $\\mathbf{q}_j$ with $j < k$, the dot product $r_{j,k} = \\mathbf{q}_j \\cdot \\mathbf{a}_k$ is written into $R$ above the diagonal
+• **Coefficient** — for each finished column $\\mathbf{q}_j$ with $j < k$, the [dot product](!/linear-algebra/vectors/dot-product#1) $r_{j,k} = \\mathbf{q}_j \\cdot \\mathbf{a}_k$ is written into $R$ above the diagonal
 • **Subtract** — $r_{j,k} \\mathbf{q}_j$ is subtracted from the working column, and its cells grow a term
 • **Normalize** — the length $r_{k,k} = \\|\\mathbf{u}_k\\|$ goes onto the diagonal of $R$, and the working column divided by it becomes $\\mathbf{q}_k$
 • **Done** — $A = QR$
@@ -124,9 +124,9 @@ $$\\mathbf{a}_k = r_{1,k} \\mathbf{q}_1 + r_{2,k} \\mathbf{q}_2 + \\cdots + r_{k
 
 Collect those coefficients as column $k$ of a matrix $R$, and the $k$ equations together say exactly $A = QR$. Because $\\mathbf{a}_k$ never involves $\\mathbf{q}_j$ for $j > k$, column $k$ of $R$ has zeros below row $k$: $R$ is upper triangular.
 
-The entries have direct meaning. Above the diagonal, $r_{j,k} = \\mathbf{q}_j \\cdot \\mathbf{a}_k$ is the projection coefficient, with no division because $\\mathbf{q}_j$ is a unit vector. On the diagonal, $r_{k,k} = \\|\\mathbf{u}_k\\|$ is the length of the working column, the part of $\\mathbf{a}_k$ that was genuinely new. And since $Q^T Q = I$, the whole of $R$ can be recovered at once as $R = Q^T A$.
+The entries have direct meaning. Above the diagonal, $r_{j,k} = \\mathbf{q}_j \\cdot \\mathbf{a}_k$ is the projection coefficient, with no division because $\\mathbf{q}_j$ is a [unit vector](!/linear-algebra/vectors/magnitude#5). On the diagonal, $r_{k,k} = \\|\\mathbf{u}_k\\|$ is the length of the working column, the part of $\\mathbf{a}_k$ that was genuinely new. And since $Q^T Q = I$, the whole of $R$ can be recovered at once as $R = Q^T A$.
 
-For the full treatment, including the full versus reduced forms and Householder reflections as an alternative construction, see the [QR decomposition theory page](!/linear-algebra/decompositions/qr).`,
+For the full treatment, including the full versus reduced forms and [Householder reflections](!/linear-algebra/transformations/geometric#6) as an alternative construction, see the [QR decomposition theory page](!/linear-algebra/decompositions/qr).`,
       before: ``,
       after: ``,
       link: '',
@@ -140,7 +140,7 @@ For the full treatment, including the full versus reduced forms and Householder 
 • **Orthonormality**: $Q^T Q = I$, so $R = Q^T A$
 • **Nested spans**: the first $m$ columns of $Q$ span the same space as the first $m$ columns of $A$, for every $m$
 • **Determinant** (square case): $|\\det A| = |\\det R| = r_{1,1} r_{2,2} \\cdots r_{k,k}$, since $|\\det Q| = 1$
-• **Column space**: the columns of $Q$ are an orthonormal basis of the column space of $A$
+• **Column space**: the columns of $Q$ are an orthonormal [basis](!/linear-algebra/vector-spaces#2) of the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of $A$
 • **Diagonal as independence test**: $r_{k,k} = 0$ exactly when $\\mathbf{a}_k$ is a combination of the earlier columns
 • **Order matters**: permuting the columns of $A$ changes both $Q$ and $R$
 • **Numerical note**: the classical Gram-Schmidt shown here loses orthogonality in floating point; production code uses modified Gram-Schmidt or Householder reflections, which produce the same $Q$ and $R$`,
@@ -153,7 +153,7 @@ For the full treatment, including the full versus reduced forms and Householder 
       content: `QR is the factorization behind most of numerical linear algebra's daily work.
 
 • **Least squares**: with $A = QR$, the normal equations $A^T A \\mathbf{x} = A^T \\mathbf{b}$ collapse to $R\\mathbf{x} = Q^T \\mathbf{b}$, a triangular system solved by back substitution, without ever forming the ill-conditioned $A^T A$
-• **Eigenvalues**: the QR algorithm factors $A = QR$, forms $RQ$, and repeats; the iterates converge to a triangular matrix with the eigenvalues on the diagonal
+• **Eigenvalues**: the QR algorithm factors $A = QR$, forms $RQ$, and repeats; the iterates converge to a [triangular matrix](!/linear-algebra/decompositions/lower-upper#1) with the eigenvalues on the diagonal
 • **Orthonormal bases**: $Q$ is an orthonormal basis of the column space of $A$, ready for projections and coordinates
 • **Solving square systems**: $A\\mathbf{x} = \\mathbf{b}$ becomes $R\\mathbf{x} = Q^T\\mathbf{b}$, as stable as any direct method
 • **Rank and independence**: a tiny diagonal entry of $R$ flags a nearly dependent column

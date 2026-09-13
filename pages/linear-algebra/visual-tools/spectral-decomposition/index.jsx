@@ -35,7 +35,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Spectral theorem** — every real symmetric matrix has real eigenvalues and an orthonormal basis of eigenvectors.
+      content: `**Spectral theorem** — every real [symmetric matrix](!/linear-algebra/matrix/types#5) has real eigenvalues and an orthonormal [basis](!/linear-algebra/vector-spaces#2) of eigenvectors.
 
 **Spectral decomposition** — $A = Q\\Lambda Q^T$ with $Q$ orthogonal and $\\Lambda$ diagonal; the diagonalization of a symmetric matrix by an orthogonal change of basis.
 
@@ -75,9 +75,9 @@ The eigenvalues are reported rather than derived, since the eigenvalue visualize
 
 • **Symmetry check** — if $A \\neq A^T$ the run stops, with the offending entries marked
 • **Eigenvalues** — the roots of $\\det(A - \\lambda I)$, all real
-• **Eigenvectors** — for each eigenvalue, $A - \\lambda I$ row reduced and one vector per free column, scaled to integers
+• **Eigenvectors** — for each eigenvalue, $A - \\lambda I$ row reduced and one [vector](!/linear-algebra/vectors#1) per free column, scaled to integers
 • **Gram–Schmidt** — only for a repeated eigenvalue: the second basis vector of its eigenspace is replaced by its component perpendicular to the first
-• **Normalize** — each eigenvector divided by its length; the unit vectors become the columns of $Q$, the eigenvalues the diagonal of $\\Lambda$
+• **Normalize** — each eigenvector divided by its length; the [unit vectors](!/linear-algebra/vectors/magnitude#5) become the columns of $Q$, the eigenvalues the diagonal of $\\Lambda$
 • **Check** — $Q^TQ = I$
 • **Factor** — $A = Q \\cdot \\Lambda \\cdot Q^T$ multiplied out and compared with $A$
 • **Rank-one sum** — $A = \\lambda_1\\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2\\mathbf{q}_2\\mathbf{q}_2^T + \\cdots$, with zero-eigenvalue terms dropped
@@ -122,7 +122,7 @@ Shuffle produces small-integer symmetric matrices; their eigenvalues are usually
 
 $$A = Q\\Lambda Q^T$$
 
-Why the eigenvectors are perpendicular is a two-line argument. If $A\\mathbf{u} = \\lambda\\mathbf{u}$ and $A\\mathbf{v} = \\mu\\mathbf{v}$, then $\\lambda\\,\\mathbf{u}\\cdot\\mathbf{v} = (A\\mathbf{u})\\cdot\\mathbf{v} = \\mathbf{u}\\cdot(A^T\\mathbf{v}) = \\mathbf{u}\\cdot(A\\mathbf{v}) = \\mu\\,\\mathbf{u}\\cdot\\mathbf{v}$, so $(\\lambda - \\mu)\\,\\mathbf{u}\\cdot\\mathbf{v} = 0$, and for $\\lambda \\neq \\mu$ the dot product must vanish. For a repeated eigenvalue the eigenspace has full dimension, and any orthonormal basis of it will do; Gram–Schmidt supplies one.
+Why the eigenvectors are perpendicular is a two-line argument. If $A\\mathbf{u} = \\lambda\\mathbf{u}$ and $A\\mathbf{v} = \\mu\\mathbf{v}$, then $\\lambda\\,\\mathbf{u}\\cdot\\mathbf{v} = (A\\mathbf{u})\\cdot\\mathbf{v} = \\mathbf{u}\\cdot(A^T\\mathbf{v}) = \\mathbf{u}\\cdot(A\\mathbf{v}) = \\mu\\,\\mathbf{u}\\cdot\\mathbf{v}$, so $(\\lambda - \\mu)\\,\\mathbf{u}\\cdot\\mathbf{v} = 0$, and for $\\lambda \\neq \\mu$ the [dot product](!/linear-algebra/vectors/dot-product#1) must vanish. For a repeated eigenvalue the eigenspace has full [dimension](!/linear-algebra/vector-spaces/dimension#1), and any orthonormal basis of it will do; Gram–Schmidt supplies one.
 
 Expanding the product column by column gives the other form of the theorem,
 
@@ -140,12 +140,12 @@ For the theory, see the [spectral decomposition theory page](!/linear-algebra/de
       content: `Facts that follow from $A = Q\\Lambda Q^T$.
 
 • **Real eigenvalues**, always; complex eigenvalues cannot occur for a symmetric matrix
-• **Always diagonalizable**; a symmetric matrix is never defective, and its geometric multiplicities equal its algebraic ones
+• **Always diagonalizable**; a symmetric matrix is never defective, and its [geometric multiplicities](!/linear-algebra/eigen/properties#3) equal its algebraic ones
 • **Orthogonal $Q$**: $Q^TQ = QQ^T = I$, so the change to eigen-coordinates preserves lengths and angles
 • **Quadratic form**: $\\mathbf{x}^TA\\mathbf{x} = \\sum \\lambda_i y_i^2$ with $\\mathbf{y} = Q^T\\mathbf{x}$; the principal axes are the columns of $Q$
 • **Definiteness** is read from the signs: all positive means positive definite, none negative means semidefinite, mixed means indefinite
 • **Rank** equals the number of non-zero eigenvalues
-• **Powers and functions**: $A^k = Q\\Lambda^kQ^T$ and $f(A) = Qf(\\Lambda)Q^T$; a positive definite matrix has a symmetric positive definite square root
+• **Powers and functions**: $A^k = Q\\Lambda^kQ^T$ and $f(A) = Qf(\\Lambda)Q^T$; a [positive definite matrix](!/linear-algebra/decompositions/cholesky#2) has a symmetric positive definite square root
 • **Extremes**: the largest eigenvalue is the maximum of $\\mathbf{x}^TA\\mathbf{x}$ over unit vectors, attained at $\\mathbf{q}_1$; the smallest is the minimum
 • **Norm**: $\\|A\\|_2 = \\max|\\lambda_i|$ for symmetric $A$`,
       before: ``,
@@ -161,7 +161,7 @@ For the theory, see the [spectral decomposition theory page](!/linear-algebra/de
 • **Optimization**: the Hessian at a critical point is symmetric, and its definiteness decides minimum, maximum or saddle
 • **Mechanics**: the inertia tensor, the stress tensor and the stiffness matrix are symmetric; their eigenvectors are principal axes, principal stresses, normal modes
 • **Graphs**: the adjacency and Laplacian matrices are symmetric, and spectral clustering uses their eigenvectors
-• **Singular value decomposition**: $A^TA$ is symmetric positive semidefinite, and its spectral decomposition is where the singular values come from
+• **Singular value decomposition**: $A^TA$ is symmetric positive semidefinite, and its spectral decomposition is where the [singular values](!/linear-algebra/decompositions/svd#3) come from
 • **Numerical stability**: orthogonal $Q$ means no error amplification in the change of basis`,
       before: ``,
       after: ``,
@@ -198,7 +198,7 @@ $$Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}, \\q
 • **Assuming perpendicularity inside a repeated eigenspace** — the two vectors row reduction hands you for a repeated eigenvalue are usually not perpendicular; Gram–Schmidt is needed
 • **Applying the theorem to a non-symmetric matrix** — the eigenvectors of a non-symmetric matrix are not perpendicular in general, and its eigenvalues need not be real
 • **Mismatching the order** — column $i$ of $Q$ must carry the eigenvalue in position $i$ of $\\Lambda$
-• **Reading definiteness from the entries** — positive entries do not make a matrix positive definite; only the eigenvalues, or equivalently the leading principal minors, decide it
+• **Reading definiteness from the entries** — positive entries do not make a matrix positive definite; only the eigenvalues, or equivalently the leading principal [minors](!/linear-algebra/determinants/cofactors#1), decide it
 • **Dropping the factor $\\lambda$ in the rank-one sum** — $A = \\sum \\lambda_i\\mathbf{q}_i\\mathbf{q}_i^T$; without the weights the sum is $QQ^T = I$
 • **Confusing $Q\\Lambda Q^T$ with $Q^T\\Lambda Q$** — both are symmetric, but only the first is $A$; the second is $A$ in the rotated frame`,
       before: ``,
@@ -261,7 +261,7 @@ Contrast a general matrix, whose image of the unit circle is also an ellipse but
     },
     obj14: {
       title: `The Rank-One Expansion`,
-      content: `The frozen picture below shows the default preset written as $3\\mathbf{q}_1\\mathbf{q}_1^T + 1\\mathbf{q}_2\\mathbf{q}_2^T$: the matrix of halves $\\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$ weighted by $3$, plus $\\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix}$ weighted by $1$.
+      content: `The frozen picture below shows the default preset written as $3\\mathbf{q}_1\\mathbf{q}_1^T + 1\\mathbf{q}_2\\mathbf{q}_2^T$: the [matrix](!/linear-algebra/matrix#1) of halves $\\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$ weighted by $3$, plus $\\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix}$ weighted by $1$.
 
 Each piece is the orthogonal projection onto an eigen-direction; the pieces add to $I$ without the weights and to $A$ with them.`,
       before: ``,

@@ -35,11 +35,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Outer product** — the matrix $\\mathbf{u}\\mathbf{v}^T$ built from a column $\\mathbf{u}$ with $m$ entries and a row $\\mathbf{v}^T$ with $n$ entries; its entry at row $i$, column $j$ is $u_i v_j$.
+      content: `**Outer product** — the [matrix](!/linear-algebra/matrix#1) $\\mathbf{u}\\mathbf{v}^T$ built from a column $\\mathbf{u}$ with $m$ entries and a row $\\mathbf{v}^T$ with $n$ entries; its entry at row $i$, column $j$ is $u_i v_j$.
 
 **Result shape** — $m \\times n$: one row for each entry of $\\mathbf{u}$, one column for each entry of $\\mathbf{v}$. The two lengths need not match.
 
-**Rank-1 matrix** — a matrix all of whose rows are multiples of one row vector, equivalently all of whose columns are multiples of one column vector. Every outer product of non-zero vectors is rank 1, and every rank-1 matrix is an outer product.
+**Rank-1 matrix** — a matrix all of whose rows are multiples of one row vector, equivalently all of whose columns are multiples of one column vector. Every outer product of non-zero [vectors](!/linear-algebra/vectors#1) is rank 1, and every rank-1 matrix is an outer product.
 
 **Inner product** — the same pairing of entries summed into a single number, $\\mathbf{v}^T\\mathbf{u} = \\sum_i u_i v_i$; requires matching lengths.
 
@@ -47,7 +47,7 @@ export async function getStaticProps(){
 
 **Tensor product** — the general construction of which the outer product of two vectors is the simplest case, written $\\mathbf{u} \\otimes \\mathbf{v}$.
 
-**Column times row** — the matrix-multiplication reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner dimension $1$.`,
+**Column times row** — the matrix-multiplication reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner [dimension](!/linear-algebra/vector-spaces/dimension#1) $1$.`,
       before: ``,
       after: ``,
       link: '',
@@ -96,7 +96,7 @@ The row and column views make the same point from two sides. Every row is a mult
       content: `The two steppers are independent, and that independence is the first thing to notice.
 
 • Set $\\mathbf{u}$ to length $3$ and $\\mathbf{v}$ to length $2$ for a $3 \\times 2$ result, or the reverse for $2 \\times 3$; nothing requires the lengths to agree
-• Equal lengths give a square matrix, whose trace $u_1 v_1 + \\cdots + u_n v_n$ is the inner product of the same two vectors
+• Equal lengths give a [square matrix](!/linear-algebra/matrix/types#1), whose [trace](!/linear-algebra/matrix/trace#1) $u_1 v_1 + \\cdots + u_n v_n$ is the inner product of the same two vectors
 • Length $1$ on either side collapses the matrix to a single row or a single column, a scaled copy of the other vector
 • Larger shapes make the rank-1 pattern more striking: at $5 \\times 5$ there are $25$ entries but only $10$ independent numbers behind them`,
       before: ``,
@@ -113,7 +113,7 @@ It is ordinary matrix multiplication of an $m \\times 1$ matrix by a $1 \\times 
 
 The inner product is the same two vectors multiplied in the other order: $\\mathbf{v}^T\\mathbf{u}$ is $1 \\times n$ times $n \\times 1$, a $1 \\times 1$ matrix, a number. Outer and inner are the two ways a column and a row can meet.
 
-Because every column of $\\mathbf{u}\\mathbf{v}^T$ is a multiple of $\\mathbf{u}$, the column space is the line through $\\mathbf{u}$ and the rank is $1$ whenever both vectors are non-zero. For the general theory of rank, see the [matrix rank theory page](!/linear-algebra/matrix/rank).`,
+Because every column of $\\mathbf{u}\\mathbf{v}^T$ is a multiple of $\\mathbf{u}$, the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) is the line through $\\mathbf{u}$ and the rank is $1$ whenever both vectors are non-zero. For the general theory of rank, see the [matrix rank theory page](!/linear-algebra/matrix/rank).`,
       before: ``,
       after: ``,
       link: '',
@@ -130,7 +130,7 @@ Because every column of $\\mathbf{u}\\mathbf{v}^T$ is a multiple of $\\mathbf{u}
 • **Trace** (square case): $\\operatorname{tr}(\\mathbf{u}\\mathbf{v}^T) = \\mathbf{u} \\cdot \\mathbf{v}$
 • **Symmetry**: $\\mathbf{u}\\mathbf{u}^T$ is symmetric and positive semidefinite
 • **Projection matrix**: $\\dfrac{\\mathbf{u}\\mathbf{u}^T}{\\mathbf{u}^T\\mathbf{u}}$ projects any vector onto the line through $\\mathbf{u}$
-• **Eigenvalues** (square case): $\\mathbf{u} \\cdot \\mathbf{v}$ with eigenvector $\\mathbf{u}$, and $0$ with multiplicity $n - 1$`,
+• **Eigenvalues** (square case): $\\mathbf{u} \\cdot \\mathbf{v}$ with [eigenvector](!/linear-algebra/eigen#2) $\\mathbf{u}$, and $0$ with multiplicity $n - 1$`,
       before: ``,
       after: ``,
       link: '',

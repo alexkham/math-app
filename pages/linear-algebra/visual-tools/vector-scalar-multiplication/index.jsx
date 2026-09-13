@@ -626,13 +626,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Scalar** — a single number, not a vector or matrix.
+      content: `**Scalar** — a single number, not a [vector](!/linear-algebra/vectors#1) or [matrix](!/linear-algebra/matrix#1).
 
-**Scalar multiplication** — the operation $kv$ that multiplies every component of a vector $v$ by the scalar $k$.
+**Scalar multiplication** — the operation $kv$ that multiplies every component of a vector $v$ by the [scalar](!/linear-algebra/vectors#1) $k$.
 
 **Component-wise operation** — applied independently to each component; the result at position $i$ depends only on $k$ and $v_i$.
 
-**Length preservation** — $kv$ has the same number of components as $v$. Scalar multiplication never changes the dimension.
+**Length preservation** — $kv$ has the same number of components as $v$. Scalar multiplication never changes the [dimension](!/linear-algebra/vector-spaces/dimension#1).
 
 **Scaling factor** — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or reverses direction ($k < 0$) the vector uniformly.
 
@@ -691,7 +691,7 @@ $$(kv)_i = k \\cdot v_i$$
 
 It's the simplest non-trivial vector operation. There are no length restrictions — any vector can be scaled. The result has the same length as $v$, and every component depends only on $k$ and its own value in $v$.
 
-Geometrically, scalar multiplication stretches or shrinks a vector along its direction (and flips it when $k$ is negative). Together with vector addition, scalar multiplication is what makes $\\mathbb{R}^n$ a vector space.
+Geometrically, scalar multiplication stretches or shrinks a vector along its direction (and flips it when $k$ is negative). Together with vector addition, scalar multiplication is what makes $\\mathbb{R}^n$ a [vector space](!/linear-algebra/vector-spaces#1).
 
 For comprehensive theory, see **vector operations**.`,
       before: ``,
@@ -721,7 +721,7 @@ These properties are exactly the eight vector-space axioms for scalar multiplica
       content: `Scalar multiplication is the operation that lets vectors form a vector space, and it appears everywhere combinations of vectors appear.
 
 • **Linear combinations**: any expression $c_1 v_1 + c_2 v_2 + \\cdots + c_n v_n$ uses scalar multiplication
-• **Normalization**: dividing $v$ by its norm produces a unit vector $v / \\|v\\|$
+• **Normalization**: dividing $v$ by its norm produces a [unit vector](!/linear-algebra/vectors/magnitude#5) $v / \\|v\\|$
 • **Sign changes**: $-v$ is just scalar multiplication by $-1$, pointing in the opposite direction
 • **Geometric transformations**: scaling by $k$ stretches or shrinks length while preserving direction
 • **Physics**: force, velocity, and momentum vectors are routinely rescaled by dimensionless constants

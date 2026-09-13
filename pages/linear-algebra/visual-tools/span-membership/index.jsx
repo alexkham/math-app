@@ -35,13 +35,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Span** — the set of all linear combinations $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k$; the smallest subspace containing the vectors.
+      content: `**Span** — the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k$; the smallest [subspace](!/linear-algebra/vector-spaces/subspaces#1) containing the [vectors](!/linear-algebra/vectors#1).
 
 **Membership** — $\\mathbf{w} \\in \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ exactly when $V\\mathbf{c} = \\mathbf{w}$ has a solution, where $V$ has the $\\mathbf{v}_i$ as columns.
 
-**Coordinates** — the solution $\\mathbf{c}$; unique when the $\\mathbf{v}_i$ are independent, in which case $\\mathbf{c}$ is the coordinate vector of $\\mathbf{w}$ in the basis $\\{\\mathbf{v}_i\\}$.
+**Coordinates** — the solution $\\mathbf{c}$; unique when the $\\mathbf{v}_i$ are independent, in which case $\\mathbf{c}$ is the [coordinate vector](!/linear-algebra/vector-spaces#4) of $\\mathbf{w}$ in the basis $\\{\\mathbf{v}_i\\}$.
 
-**Dimension of the span** — the rank of $V$; the number of pivot columns.
+**Dimension of the span** — the rank of $V$; the number of [pivot](!/linear-algebra/linear-systems/echelon-form#4) columns.
 
 **Linear independence** — rank equal to $k$; no vector is a combination of the others.
 
@@ -120,7 +120,7 @@ Shuffle picks random small-integer vectors and, most of the time, a $\\mathbf{w}
 
 $$\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} = \\{c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k\\}$$
 
-It is a subspace, a line, a plane, or more, through the origin, and it is the column space of the matrix $V$ whose columns are the $\\mathbf{v}_i$, because $V\\mathbf{c}$ is exactly the combination with coefficients $\\mathbf{c}$.
+It is a subspace, a line, a plane, or more, through the origin, and it is the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of the [matrix](!/linear-algebra/matrix#1) $V$ whose columns are the $\\mathbf{v}_i$, because $V\\mathbf{c}$ is exactly the combination with coefficients $\\mathbf{c}$.
 
 That identification turns every question about the span into a question about a linear system. A vector $\\mathbf{w}$ is in the span if and only if $V\\mathbf{c} = \\mathbf{w}$ has a solution, which row reduction of $[V \\mid \\mathbf{w}]$ decides: consistent means in, a pivot in the last column means out. When it is in, the solution $\\mathbf{c}$ lists the coefficients, and if the $\\mathbf{v}_i$ are independent there is exactly one such $\\mathbf{c}$, the coordinate vector of $\\mathbf{w}$ relative to the basis $\\{\\mathbf{v}_i\\}$.
 

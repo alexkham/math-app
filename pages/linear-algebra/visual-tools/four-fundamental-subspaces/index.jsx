@@ -35,7 +35,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Column space $C(A)$** — all combinations of the columns of $A$; the set of $\\mathbf{b}$ for which $A\\mathbf{x} = \\mathbf{b}$ is solvable. A subspace of $\\mathbb{R}^m$ of dimension $r$.
+      content: `**Column space $C(A)$** — all combinations of the columns of $A$; the set of $\\mathbf{b}$ for which $A\\mathbf{x} = \\mathbf{b}$ is solvable. A [subspace](!/linear-algebra/vector-spaces/subspaces#1) of $\\mathbb{R}^m$ of [dimension](!/linear-algebra/vector-spaces/dimension#1) $r$.
 
 **Null space $N(A)$** — all solutions of $A\\mathbf{x} = \\mathbf{0}$. A subspace of $\\mathbb{R}^n$ of dimension $n - r$.
 
@@ -43,11 +43,11 @@ export async function getStaticProps(){
 
 **Left null space $N(A^T)$** — all solutions of $A^T\\mathbf{y} = \\mathbf{0}$, equivalently $\\mathbf{y}^TA = \\mathbf{0}$. A subspace of $\\mathbb{R}^m$ of dimension $m - r$.
 
-**Rank $r$** — the number of pivots of $A$; the common dimension of the column and row spaces.
+**Rank $r$** — the number of [pivots](!/linear-algebra/linear-systems/echelon-form#4) of $A$; the common dimension of the column and row spaces.
 
-**Pivot columns** — the columns of $A$ (not of $R$) at pivot positions; a basis of the column space.
+**Pivot columns** — the columns of $A$ (not of $R$) at pivot positions; a [basis](!/linear-algebra/vector-spaces#2) of the column space.
 
-**Special solutions** — one null-space vector per free column, with that free variable $1$ and the others $0$.
+**Special solutions** — one null-space [vector](!/linear-algebra/vectors#1) per free column, with that free variable $1$ and the others $0$.
 
 **Rank–nullity** — $r + \\dim N(A) = n$; applied to $A^T$, $r + \\dim N(A^T) = m$.
 
@@ -58,7 +58,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix and watch one row reduction produce a basis for each of its four subspaces.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) and watch one row reduction produce a basis for each of its four subspaces.
 
 • Use the **Preset** pills for seven matrices: a $3 \\times 3$ of rank $2$ with every subspace non-trivial, a rank-one matrix, wide and tall matrices of full rank, an invertible matrix, a $4 \\times 3$ of rank $2$, and the zero matrix
 • Use the two **Size** steppers for any shape from $2 \\times 2$ to $4 \\times 4$, and **Shuffle** for a random matrix that usually carries a planted dependency
@@ -199,7 +199,7 @@ $$A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 2 & 4 & 3 \\\\ 3 & 6 & 4 \\end{pmatrix}$$
 • **Taking the rows of $A$ as the reduced basis** — they span the row space, but the non-zero rows of $R$ are the clean basis; using rows of $A$ risks including a dependent one
 • **Reading the null space from $A$ rather than $R$** — the special solutions come from the reduced form, where each pivot variable is expressed in the free ones
 • **Forgetting the left null space** — it is the null space of $A^T$, and it needs its own reduction (or the record of row operations)
-• **Miscounting dimensions** — the null space has dimension $n - r$ and the left null space $m - r$; for a non-square matrix these differ
+• **Miscounting dimensions** — the null space has dimension $n - r$ and the left null space $m - r$; for a non-[square matrix](!/linear-algebra/matrix/types#1) these differ
 • **Confusing "perpendicular to the rows" with "perpendicular to the columns"** — the null space is perpendicular to the row space, in $\\mathbb{R}^n$; the left null space to the column space, in $\\mathbb{R}^m$
 • **Assuming a wide matrix has a null space and a tall one does not** — it depends on the rank, not the shape, though a wide matrix always has a non-trivial null space and a tall one always has a non-trivial left null space`,
       before: ``,
@@ -229,7 +229,7 @@ $$A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 2 & 4 & 3 \\\\ 3 & 6 & 4 \\end{pmatrix}$$
     },
     obj11: {
       title: `Row Reduction First`,
-      content: `Everything starts with the reduced row echelon form. The frozen picture below shows the default preset reduced to $R$ with two pivots, in columns $1$ and $3$, and column $2$ free.
+      content: `Everything starts with the [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form#2). The frozen picture below shows the default preset reduced to $R$ with two pivots, in columns $1$ and $3$, and column $2$ free.
 
 The rank $2$ is now known, and with it the dimensions of all four subspaces: $2$, $1$, $2$, $1$.`,
       before: ``,
@@ -253,7 +253,7 @@ Because $A\\mathbf{x}$ is the combination of the columns with coefficients $x_1,
       title: `The Row Space`,
       content: `The frozen picture below shows the row-space basis of the default preset: the non-zero rows of $R$, $(1, 2, 0)$ and $(0, 0, 1)$, with the zero row greyed.
 
-The rows of $A$ span the same plane; $R$ just presents it in its simplest basis.`,
+The rows of $A$ [span](!/linear-algebra/vector-spaces/span#1) the same plane; $R$ just presents it in its simplest basis.`,
       before: ``,
       after: `The row space has the same dimension as the column space, always. That is not obvious from the definitions, since one lives in $\\mathbb{R}^n$ and the other in $\\mathbb{R}^m$, but row reduction proves it: both dimensions equal the number of pivots. Row rank equals column rank.
 

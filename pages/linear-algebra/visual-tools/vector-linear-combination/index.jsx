@@ -641,7 +641,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Linear combination** — an expression $\\alpha u + \\beta v$ that scales each vector by a scalar and adds the results. More generally, $c_1 v_1 + c_2 v_2 + \\cdots + c_n v_n$.
+      content: `**Linear combination** — an expression $\\alpha u + \\beta v$ that scales each vector by a [scalar](!/linear-algebra/vectors#1) and adds the results. More generally, $c_1 v_1 + c_2 v_2 + \\cdots + c_n v_n$.
 
 **Scalar coefficient** — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each vector in the combination.
 
@@ -649,11 +649,11 @@ export async function getStaticProps(){
 
 **Result length** — the linear combination has the same length as the operands.
 
-**Span** — the set of all linear combinations of a fixed collection of vectors; geometrically, a line, plane, or higher-dimensional subspace through the origin.
+**Span** — the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) of a fixed collection of vectors; geometrically, a line, plane, or higher-dimensional [subspace](!/linear-algebra/vector-spaces/subspaces#1) through the origin.
 
 **Linear independence** — a property of a collection: no vector in it can be written as a linear combination of the others.
 
-**Vector space** — the set of all vectors of a given length forms a vector space under vector addition and scalar multiplication; linear combinations are its native operation.`,
+**Vector space** — the set of all vectors of a given length forms a [vector space](!/linear-algebra/vector-spaces#1) under [vector addition](!/linear-algebra/vectors/basic-operations#1) and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
       link: '',
@@ -746,7 +746,7 @@ The structural fact behind all of this is that $\\mathbb{R}^n$ is a vector space
       title: `Why It Matters`,
       content: `Linear combinations are the foundation on which most of linear algebra is built.
 
-• **Span and basis**: the span of a set of vectors is the set of all their linear combinations; a basis is a linearly independent set whose span is the whole space
+• **Span and basis**: the span of a set of vectors is the set of all their linear combinations; a [basis](!/linear-algebra/vector-spaces#2) is a linearly independent set whose span is the whole space
 • **Linear independence**: testing whether $c_1 v_1 + \\cdots + c_n v_n = 0$ forces all $c_i = 0$
 • **Solving linear systems**: a system $Ax = b$ asks whether $b$ is a linear combination of the columns of $A$
 • **Subspaces**: a subspace is a set closed under linear combinations — lines and planes through the origin are the simplest examples
@@ -785,7 +785,7 @@ Set the visualizer to length $3$ and step through to see the three phases animat
 
 • **Mixing lengths** — every vector in the combination must have the same length; no padding with zeros
 • **Distributing scalars unevenly** — $\\alpha(u + v) \\neq \\alpha u + v$; the scalar applies to every vector it multiplies
-• **Confusing linear combination with dot product** — a linear combination returns a vector; the dot product returns a scalar
+• **Confusing linear combination with dot product** — a linear combination returns a vector; the [dot product](!/linear-algebra/vectors/dot-product#1) returns a scalar
 • **Treating a single scalar multiple as a linear combination of one vector** — technically valid but trivial; the interesting case has at least two vectors
 • **Forgetting that the zero vector is a trivial linear combination** — choosing all coefficients zero produces the zero vector regardless of the operands, which is exactly the test for linear independence`,
       before: ``,

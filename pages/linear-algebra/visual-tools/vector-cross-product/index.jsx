@@ -35,11 +35,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Cross product** — the vector $\\mathbf{u} \\times \\mathbf{v}$ built from two vectors in $\\mathbb{R}^3$. It is perpendicular to both, and its length is the area of the parallelogram the two vectors span.
+      content: `**Cross product** — the vector $\\mathbf{u} \\times \\mathbf{v}$ built from two [vectors](!/linear-algebra/vectors#1) in $\\mathbb{R}^3$. It is perpendicular to both, and its length is the area of the parallelogram the two vectors [span](!/linear-algebra/vector-spaces/span#1).
 
 **Component formula** — $w_1 = u_2 v_3 - u_3 v_2$, $w_2 = u_3 v_1 - u_1 v_3$, $w_3 = u_1 v_2 - u_2 v_1$. Each component skips its own row and cross-multiplies the other two.
 
-**Determinant mnemonic** — the symbolic $3 \\times 3$ determinant with $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in the first row, $\\mathbf{u}$ in the second and $\\mathbf{v}$ in the third. Expanding along the first row reproduces the component formula.
+**Determinant mnemonic** — the symbolic $3 \\times 3$ [determinant](!/linear-algebra/determinants#1) with $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in the first row, $\\mathbf{u}$ in the second and $\\mathbf{v}$ in the third. Expanding along the first row reproduces the component formula.
 
 **Cyclic order** — the index pattern $1 \\to 2 \\to 3 \\to 1$ that decides which product carries the plus sign in each component.
 
@@ -82,7 +82,7 @@ The component formula is faster by hand. The determinant is easier to remember, 
       content: `Each scene combines highlights, arrows, and a caption.
 
 • In the component method, the two active entries of $\\mathbf{u}$ are highlighted primary, the two active entries of $\\mathbf{v}$ secondary, and the skipped row of each vector is muted; four curved arrows flow into the destination component of $\\mathbf{w}$, highlighted accent
-• In the determinant method, the pivot basis vector is highlighted primary, the struck row and column are greyed and lined through, the $2 \\times 2$ minor is secondary, and one arrow flows from the pivot into the destination component
+• In the determinant method, the [pivot](!/linear-algebra/linear-systems/echelon-form#4) [basis](!/linear-algebra/vector-spaces#2) vector is highlighted primary, the struck row and column are greyed and lined through, the $2 \\times 2$ minor is secondary, and one arrow flows from the pivot into the destination component
 • Filled components of $\\mathbf{w}$ show their symbolic content, $u_a v_b - u_b v_a$, in a wider cell so the two-term expression stays readable
 • The step log on the right keeps a record of every completed component, and clicking any entry jumps back to that scene`,
       before: ``,
@@ -94,11 +94,11 @@ The component formula is faster by hand. The determinant is easier to remember, 
       content: `Every other vector tool in this section has a length stepper. This one does not, and the reason is mathematical rather than a design choice.
 
 • In $\\mathbb{R}^3$ there is exactly one direction perpendicular to two independent vectors (up to sign), so a vector-valued product makes sense
-• In $\\mathbb{R}^2$ there is no room: the only thing left of the formula is the single number $u_1 v_2 - u_2 v_1$, the signed area, which is a scalar
+• In $\\mathbb{R}^2$ there is no room: the only thing left of the formula is the single number $u_1 v_2 - u_2 v_1$, the signed area, which is a [scalar](!/linear-algebra/vectors#1)
 • In $\\mathbb{R}^n$ for $n \\geq 4$ the space perpendicular to two vectors has dimension $n - 2$, so there is no single perpendicular direction to pick
 • The generalization that does work in every dimension is the wedge product, which returns an oriented area rather than a vector; the cross product is the special case where that area can be encoded as a normal vector
 
-A bilinear, anticommutative, vector-valued product of two vectors with the cross product's properties exists only in dimensions three and seven.`,
+A bilinear, anticommutative, vector-valued product of two vectors with the cross product's properties exists only in [dimensions](!/linear-algebra/vector-spaces/dimension#1) three and seven.`,
       before: ``,
       after: ``,
       link: '',
@@ -174,7 +174,7 @@ So
 
 $$\\mathbf{u} \\times \\mathbf{v} = \\begin{pmatrix} -3 \\\\ 6 \\\\ -3 \\end{pmatrix}$$
 
-Check perpendicularity with the dot product: $\\mathbf{u} \\cdot \\mathbf{w} = -3 + 12 - 9 = 0$ and $\\mathbf{v} \\cdot \\mathbf{w} = -12 + 30 - 18 = 0$. The area of the parallelogram spanned by $\\mathbf{u}$ and $\\mathbf{v}$ is $\\|\\mathbf{w}\\| = \\sqrt{9 + 36 + 9} = \\sqrt{54} = 3\\sqrt{6}$.
+Check perpendicularity with the [dot product](!/linear-algebra/vectors/dot-product#1): $\\mathbf{u} \\cdot \\mathbf{w} = -3 + 12 - 9 = 0$ and $\\mathbf{v} \\cdot \\mathbf{w} = -12 + 30 - 18 = 0$. The area of the parallelogram spanned by $\\mathbf{u}$ and $\\mathbf{v}$ is $\\|\\mathbf{w}\\| = \\sqrt{9 + 36 + 9} = \\sqrt{54} = 3\\sqrt{6}$.
 
 Step through the visualizer with either method to see the same three expressions assembled symbolically.`,
       before: ``,
@@ -190,7 +190,7 @@ Step through the visualizer with either method to see the same three expressions
 • **Confusing it with the dot product** — the dot product returns a scalar and measures alignment; the cross product returns a vector and measures perpendicularity and area
 • **Assuming associativity** — $(\\mathbf{u} \\times \\mathbf{v}) \\times \\mathbf{w}$ and $\\mathbf{u} \\times (\\mathbf{v} \\times \\mathbf{w})$ are different vectors in general
 • **Applying it outside $\\mathbb{R}^3$** — there is no vector cross product of two vectors in $\\mathbb{R}^2$ or $\\mathbb{R}^4$; in the plane the formula collapses to the scalar $u_1 v_2 - u_2 v_1$
-• **Reading the determinant literally** — the top row holds vectors, so it is a mnemonic for the expansion, not a determinant of a numerical matrix
+• **Reading the determinant literally** — the top row holds vectors, so it is a mnemonic for the expansion, not a determinant of a numerical [matrix](!/linear-algebra/matrix#1)
 • **Skipping the check** — a cross product is easy to verify: dot the result with each input, and both must come out zero`,
       before: ``,
       after: ``,

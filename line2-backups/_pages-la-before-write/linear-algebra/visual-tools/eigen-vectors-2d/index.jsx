@@ -1,0 +1,1114 @@
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import Head from 'next/head'
+// import '@/pages/pages.css'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import EigenVectors from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/EigenVectors'
+
+
+// export async function getStaticProps(){
+
+//   const keyWords=['','','','','']
+
+//   // •
+
+// //   \u2022 First item
+// // \u2022 Second item
+
+  
+// // <hr style="border-width:1px;"></hr>
+
+// // <hr style="color:blue;" />
+
+// // <hr style="border-color:#3498db; border-width:1px;" />
+
+
+
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+//         //     {processContent(sectionsContent.normal.notation)}
+//         // </div>,
+
+
+// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+// //     {processContent(sectionsContent.normal.parameters)}
+// // </div>,
+        
+// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+// //                   {processContent(sectionsContent.obj4.content)}
+// //                   </div>,
+
+
+// //  <div key={'dist'} style={{
+// //                     textAlign: 'center',
+// //                     transform: 'scale(0.98)',
+// //                     transformOrigin: 'center',
+// //                     marginTop:'50px',
+// //                     marginLeft:'-150px'
+// //                   }} dangerouslySetInnerHTML={{ 
+// //                     __html:   sectionContent.distributions.svg,
+// //                   }} />
+
+//     const sectionsContent={
+
+//     obj0:{
+//       title:`Key Terms`,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+  
+//     },
+//     obj1:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+  
+//     },
+//     obj2:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+  
+//     obj3:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj4:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj5:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj6:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj7:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj8:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj9:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj10:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj11:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj12:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj13:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+//     obj14:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+
+
+//     obj15:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//   id: "intro",
+//   title: "",
+//   content: ``
+// }
+
+
+
+
+//    return {
+//       props:{
+//          sectionsContent,
+//          introContent,
+//           seoData: {
+//         title: "Title | Learn Math Class",
+//         description: "Metadescription",
+//         keywords: keyWords.join(", "),
+//         url: "/linear-algebra/visual-tools/eigen-vectors-2d",
+//          name: "name"
+//       },
+        
+//        }
+//     }
+//    }
+
+// export default function PageTemplate({seoData,sectionsContent , introContent, relatedTools }) {
+
+    
+//   const genericSections=[
+//     {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//         ]
+//     },
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//         ]
+//     },
+//     {
+//         id:'10',
+//         title:sectionsContent.obj10.title,
+//         link:sectionsContent.obj10.link,
+//         content:[
+//           sectionsContent.obj10.content,
+//         ]
+//     },
+//     {
+//         id:'11',
+//         title:sectionsContent.obj11.title,
+//         link:sectionsContent.obj11.link,
+//         content:[
+//           sectionsContent.obj11.content,
+//         ]
+//     },
+//     {
+//         id:'12',
+//         title:sectionsContent.obj12.title,
+//         link:sectionsContent.obj12.link,
+//         content:[
+//           sectionsContent.obj12.content,
+//         ]
+//     },
+//     {
+//         id:'13',
+//         title:sectionsContent.obj13.title,
+//         link:sectionsContent.obj13.link,
+//         content:[
+//           sectionsContent.obj13.content,
+//         ]
+//     },
+//     {
+//         id:'14',
+//         title:sectionsContent.obj14.title,
+//         link:sectionsContent.obj14.link,
+//         content:[
+//           sectionsContent.obj14.content,
+//         ]
+//     },
+//     {
+//         id:'15',
+//         title:sectionsContent.obj15.title,
+//         link:sectionsContent.obj15.link,
+//         content:[
+//           sectionsContent.obj15.content,
+//         ]
+//     },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+    
+// ]
+
+//   return (
+//    <>
+//    <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <meta name="viewport" content="width=device-width, initial-scale=1" />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify({
+//         "@context": "https://schema.org",
+//         "@type": "WebPage",
+//         "name": seoData.name,
+//         "description": seoData.description,
+//         "keywords": seoData.keywords,
+//         "url": `https://www.learnmathclass.com${seoData.url}`,
+//         "dateModified": new Date().toISOString(),
+//         "inLanguage": "en-US",
+//         "mainEntity": {
+//           "@type": "Article",
+//           "name": seoData.name,
+//           "dateModified": new Date().toISOString(),
+//           "author": {
+//             "@type": "Organization",
+//             "name": "Learn Math Class"
+//           }
+//         }
+//       })
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Eigen Vectors</h1>
+//    <br/>
+//    <div style={{transform:'scale(0.9)'}}>
+//    <EigenVectors/>
+//    </div>
+//    <br/>
+//    {/* <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "children"
+//          secondaryNavTitle="More in this Section"
+   
+//    /> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//     {/* <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         /> */}
+//    <br/>
+//     {/* <KeyTermsCard
+//      id="0"
+//      title={sectionsContent.obj0.title}
+//      content={sectionsContent.obj0.content}
+//      after={sectionsContent.obj0.after}
+//      variant="light"
+//    /> */}
+//    <br/>
+//    {/* <Sections sections={genericSections}/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import Head from 'next/head'
+import '@/pages/pages.css'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import EigenVectors from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/EigenVectors'
+import { SCENARIOS as EV_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/EigenVectors'
+import eigenVectorsDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
+
+
+export async function getStaticProps(){
+
+  const keyWords=[
+    'eigenvectors',
+    'eigenvectors calculator',
+    'eigenvectors 2D',
+    'eigenvalue eigenvector',
+    'eigenvector visualizer',
+    'interactive eigenvectors',
+    'find eigenvectors',
+    'characteristic polynomial',
+    'eigenvalues of 2x2 matrix',
+    'eigendirection',
+    'defective matrix',
+    'complex eigenvalues',
+    'real eigenvalues',
+    'linear algebra eigenvector',
+    'eigenvalue calculator'
+  ]
+
+
+    const sectionsContent={
+
+    obj0:{
+      title:`Key Terms`,
+      content:`**Eigenvector** &mdash; A nonzero vector $v$ such that $Av = \\lambda v$ for some scalar $\\lambda$. Matrix $A$ leaves the direction of $v$ unchanged and only scales it.
+
+**Eigenvalue** &mdash; The scalar $\\lambda$ in $Av = \\lambda v$. It is the stretch factor along the eigenvector direction. A negative eigenvalue means the vector flips.
+
+**Eigendirection** &mdash; The line through the origin spanned by an eigenvector. Every vector on this line is also an eigenvector with the same eigenvalue.
+
+**Characteristic Polynomial** &mdash; The quadratic $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ whose roots are the eigenvalues of a $2 \\times 2$ matrix $A$.
+
+**Defective Matrix** &mdash; A matrix with a repeated eigenvalue but fewer eigenvectors than the algebraic multiplicity. Cannot be diagonalized.
+
+**Spectral Theorem** &mdash; Every symmetric matrix has perpendicular eigenvectors and real eigenvalues.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj1:{
+      title:`Getting Started`,
+      content:`The canvas shows the standard grid in gray, dashed green lines marking the eigendirections of $A$, the test vector $v$ in orange, and its image $Av$ in cyan. You control $v$; the matrix $A$ comes from the scenarios panel on the left.
+
+The mission is simple: drag $v$ around until it lines up with $Av$. When that happens, $v$ is an eigenvector and the ratio $|Av|/|v|$ is its eigenvalue $\\lambda$.
+
+Three quick experiments:
+
+&bull; **Drag $v$ off the green dashed line** &mdash; $Av$ swings to a different direction. They do not match.
+&bull; **Drag $v$ onto the green dashed line** &mdash; the two vectors snap to amber and the status strip announces the eigenvalue.
+&bull; **Drag $v$ to the perpendicular eigendirection** (in the diagonal preset) &mdash; same alignment, different $\\lambda$.
+
+The green dashed lines are cheat sheets. The whole canvas is a search for the moments when $v$ and $Av$ are collinear.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj2:{
+      title:`Dragging v and Watching Av`,
+      content:`Only the orange $v$ handle is draggable. Everything else &mdash; $Av$, the angle arc, the alignment color &mdash; updates instantly.
+
+&bull; **Drag $v$ in a circle** &mdash; watch $Av$ trace its own loop. The two curves agree only at the eigendirections.
+&bull; **Speed of $Av$ relative to $v$** &mdash; in stretchy directions $Av$ runs ahead; in shrinking directions it lags behind. The eigenvalue magnitude is exactly that speed ratio.
+&bull; **Drag $v$ near the origin** &mdash; both vectors shrink. The ratio $|Av|/|v|$ stays defined as long as $v$ is nonzero.
+
+A faster diagnostic than chasing alignment by eye: watch the angle readout. As you approach an eigendirection, $\\text{angle}(v, Av)$ heads to $0\\deg$ or $180\\deg$. The status strip flips when the alignment is within roughly four degrees.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj3:{
+      title:`The Alignment Signal and Eigenvalue Readout`,
+      content:`Card 01 (Live) shows four numbers updating in real time.
+
+&bull; **$|v|$** &mdash; length of your test vector.
+&bull; **$|Av|$** &mdash; length of its image. Larger when $A$ stretches in this direction, smaller when it shrinks.
+&bull; **$|Av|/|v|$** &mdash; the candidate eigenvalue magnitude. Only equals $|\\lambda|$ exactly when $v$ is an eigenvector.
+&bull; **angle$(v, Av)$** &mdash; the smoking gun. At zero or 180 degrees, $v$ is parallel to $Av$, so you have an eigenvector.
+
+When alignment is detected, the status strip turns amber and reads <strong>v is an eigenvector &middot; &lambda; &asymp; (value)</strong>. The sign of $\\lambda$ comes from $\\text{dot}(v, Av)$: positive when they point the same way, negative when opposite (reflection-type eigendirection).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj4:{
+      title:`The Eigen Structure Card`,
+      content:`Card 02 (Eigen structure of A) shows all eigenvalues of the current matrix, plus a unit eigenvector beside each, and the characteristic polynomial at the bottom.
+
+Four possible appearances:
+
+&bull; **Two distinct real** &mdash; rows $\\lambda_1$ and $\\lambda_2$ in green, each with its unit eigenvector $(x, y)$. Two green dashed lines on the canvas.
+&bull; **Defective** &mdash; one row in pink with the repeated $\\lambda$ and a single eigenvector, plus a note that a generalized eigenvector is required for a full basis.
+&bull; **Isotropic** &mdash; one row in green: $\\lambda$ with the message "every direction is eigen". On the canvas, concentric green rings replace the lines.
+&bull; **Complex** &mdash; one row in purple: $\\lambda = a \\pm bi$ with the note "no real eigenvector".
+
+The bottom line shows $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ with the actual trace and determinant filled in, plus the discriminant $\\Delta$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj5:{
+      title:`Using the Snap Button`,
+      content:`The green button at the bottom of the eigen structure card jumps $v$ directly to the nearest eigendirection.
+
+&bull; **Distinct case** &mdash; snaps to whichever of the two eigenlines is closer to $v$, preserving the current length of $v$.
+&bull; **Defective case** &mdash; snaps to the single eigendirection that exists.
+&bull; **Isotropic case** &mdash; leaves $v$ unchanged (any direction already qualifies).
+&bull; **Complex case** &mdash; button is disabled and reads "No real eigenvectors" because no direction satisfies $Av = \\lambda v$ in real two-dimensional space.
+
+This is the fastest way to confirm what the eigen structure card claims: hit snap, watch $v$ lock to a dashed green line, see the alignment indicator turn amber, and read $\\lambda$ in the live card.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj6:{
+      title:`Preset Scenarios &mdash; Four Categories`,
+      content:`The scenarios panel on the left jumps the matrix $A$ to eleven canonical examples grouped by eigen structure.
+
+&bull; **Two distinct real** &mdash; diagonal $(\\lambda = 2, 0.5)$, symmetric $(\\lambda = 3, 1)$ with perpendicular eigenvectors, reflection across $y=x$ $(\\lambda = 1, -1)$, upper-triangular $(\\lambda = 3, 2)$ with non-orthogonal eigenvectors.
+&bull; **Isotropic** &mdash; identity (every direction, $\\lambda = 1$) and uniform scaling by 2 (every direction, $\\lambda = 2$).
+&bull; **Defective** &mdash; shear $\\lambda = 1$ doubled, and defective $\\lambda = 2$ doubled. Only one eigendirection in each.
+&bull; **Complex** &mdash; rotation by $30\\deg$, quarter turn $(\\lambda = \\pm i)$, and rotating spiral. No real eigendirection in any of them.
+
+The explanation card at the top of the right column updates with a brief description of the structural feature for each preset.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj7:{
+      title:`Display Layer Toggles`,
+      content:`The chip strip toggles which visual elements appear on the canvas.
+
+&bull; **grid** &mdash; gray standard grid. Off for a cleaner background.
+&bull; **eigenlines** &mdash; the dashed green lines marking all real eigendirections. Turn off to hunt for them by alignment alone.
+&bull; **v / Av lines** &mdash; thin dashed extensions of $v$ and $Av$ through the origin. Helps eyeball alignment when the vectors are short.
+&bull; **angle arc** &mdash; the small arc between $v$ and $Av$. Visual companion to the angle readout in the live card.
+&bull; **labels** &mdash; the $v$, $Av$, and $\\lambda$ name tags. Off for screenshots or clean exploration.
+
+Useful pairing: turn off eigenlines and try to find them yourself, then turn them back on to check your guesses.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj8:{
+      title:`What Is an Eigenvector?`,
+      content:`Given a square matrix $A$, an eigenvector is a nonzero vector $v$ that is mapped to a scalar multiple of itself:
+
+$$A v = \\lambda v$$
+
+The scalar $\\lambda$ is the eigenvalue. Geometrically, $A$ does many things to most vectors &mdash; rotates them, shears them, mixes their components &mdash; but along an eigenvector it does only one thing: stretch or shrink. The direction is invariant.
+
+This is why eigenvectors matter: they reveal the natural axes of a linear transformation. In coordinates aligned with the eigenvectors, $A$ becomes a diagonal matrix, which is the simplest description possible.
+
+For deeper coverage of definitions, properties, and applications, see **eigenvectors theory page**, **eigenvalues definition**, and **matrix diagonalization**.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj9:{
+      title:`Four Cases: Distinct, Isotropic, Defective, Complex`,
+      content:`Every $2 \\times 2$ matrix falls into one of four structural categories.
+
+&bull; **Two distinct real eigenvalues** &mdash; the generic case. Two independent eigendirections. $A$ is diagonalizable. Symmetric matrices always land here and additionally have perpendicular eigenvectors.
+&bull; **Isotropic (repeated, diagonalizable)** &mdash; $A$ is a scalar multiple of the identity. Every direction is an eigendirection with the same $\\lambda$.
+&bull; **Defective (repeated, not diagonalizable)** &mdash; the eigenvalue repeats but only one eigenvector exists. Classic example: a shear. Diagonalization fails; Jordan form is needed.
+&bull; **Complex conjugate pair** &mdash; eigenvalues are $a \\pm bi$ with $b \\neq 0$. $A$ has a rotational component. No real direction is preserved.
+
+The discriminant $\\Delta = \\text{tr}(A)^2 - 4\\det(A)$ in the characteristic polynomial diagnoses the case: positive means distinct real, zero means repeated, negative means complex.
+
+For full treatment see **characteristic polynomial**, **defective matrices**, and **complex eigenvalues**.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj10:{
+      title:`Related Concepts`,
+      content:`[Eigenvalues](!/linear-algebra/visual-tools/eigenvalues-eigenvectors) &mdash; the scalar stretch factors that pair with each eigenvector.
+
+**Characteristic Polynomial** &mdash; the source equation $\\det(A - \\lambda I) = 0$ whose roots are the eigenvalues.
+
+[Diagonalization](!/linear-algebra/visual-tools/matrix-diagonalization) &mdash; rewriting $A$ as $PDP^{-1}$ where $D$ is diagonal and $P$ has eigenvectors as columns.
+
+[Spectral Theorem](!/linear-algebra/visual-tools/spectral-decomposition) &mdash; guarantees perpendicular eigenvectors and real eigenvalues for symmetric matrices.
+
+[Singular Value Decomposition](!/linear-algebra/visual-tools/singular-value-decomposition) &mdash; a generalization of eigendecomposition that works for any matrix, not just square diagonalizable ones.
+
+[Change of Basis](!/linear-algebra/visual-tools/change-basis-2d) &mdash; expressing $A$ in the eigenbasis turns it into a diagonal matrix.
+
+[Matrix Trace and Determinant](!/linear-algebra/visual-tools/matrix-trace) &mdash; the two invariants that appear in the characteristic polynomial.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj11:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj12:{
+      title:`Distinct Real Eigenvalues: Two Fixed Directions`,
+      content:`Four of the eleven presets have two different real eigenvalues. The frozen picture below is the diagonal matrix $\begin{pmatrix} 2 & 0 \\ 0 & 0.5 \end{pmatrix}$, whose eigenvalues are $2$ and $0.5$.
+
+Two dashed eigenlines are drawn, one per eigenvalue. Any vector lying along one of them is mapped to a multiple of itself: the transformation stretches it or shrinks it but never turns it.`,
+      before:``,
+      after:`This is the case the whole tool is calibrated around, and it is the easiest to read. Drag $v$ onto an eigenline and the alignment signal fires — $Av$ becomes parallel to $v$, the angle arc collapses to zero, and the eigenvalue readout shows the factor.
+
+Two independent eigendirections mean the matrix is **diagonalisable**: written in the basis of its own eigenvectors, it becomes diagonal, and applying it repeatedly just raises each eigenvalue to a power. That is why distinct real eigenvalues are the comfortable case in almost every application.
+
+Note that "distinct" refers to the eigenvalues, not the directions. The reflection preset has eigenvalues $1$ and $-1$ — still distinct, still two clean eigenlines, but one direction is flipped rather than stretched.`,
+      link:'',
+    },
+    obj13:{
+      title:`Repeated Eigenvalue With a Full Set of Directions`,
+      content:`Two presets have a single repeated eigenvalue and still behave perfectly well: the identity, and the $2\times$ scaling shown below.
+
+For $A = 2I$ the only eigenvalue is $2$, but **every** direction is an eigendirection. Drag $v$ anywhere at all and $Av$ stays parallel to it — the alignment signal never switches off.`,
+      before:``,
+      after:`These are the isotropic maps: they scale the whole plane by one factor, treating every direction identically. The tool draws no distinguished eigenlines here because there is nothing to distinguish — the eigenspace is the entire plane rather than a line.
+
+The important point is that a repeated eigenvalue is not by itself a problem. What matters is whether the eigenspace is big enough: here the eigenvalue $2$ repeats twice and comes with a two-dimensional eigenspace, so the matrix is still diagonalisable. The next category is what happens when that fails.`,
+      link:'',
+    },
+    obj14:{
+      title:`Defective: a Repeated Eigenvalue Short of Directions`,
+      content:`Two presets are defective. The frozen picture shows one: a repeated eigenvalue whose eigenspace is only one-dimensional, so a single eigenline appears where the previous category had a whole plane.
+
+Drag $v$ anywhere off that one line and $Av$ refuses to align, no matter where you put it.`,
+      before:``,
+      after:`This is the case that breaks diagonalisation. An $n \times n$ matrix needs $n$ independent eigenvectors to be written in a basis of its own eigenvectors, and a defective matrix simply does not have them — the algebraic multiplicity of the eigenvalue exceeds its geometric multiplicity.
+
+The shear is the classic example. Every vector along the shear axis is fixed, but nothing else keeps its direction, so there is one eigenline where there ought to be two. Such matrices are handled with the Jordan form instead of a diagonal one, and they are the reason "every matrix is diagonalisable" is false.`,
+      link:'',
+    },
+    obj15:{
+      title:`Complex Eigenvalues: No Real Direction Survives`,
+      content:`Three presets have complex eigenvalues, and the tool draws **no eigenlines at all** for them. The frozen picture is a 30° rotation.
+
+Drag $v$ anywhere on the plane and $Av$ never lines up with it. The angle arc between the two arrows never closes, because a rotation genuinely turns every direction.`,
+      before:``,
+      after:`That is the honest geometric content of a complex eigenvalue: no real line through the origin is preserved. The eigenvalues still exist — they come as a conjugate pair $a \pm bi$ — but their eigenvectors live in $\mathbb{C}^2$ and have no real representative to draw.
+
+The pair still carries the geometry. Its modulus is the scaling factor per application, so $|\lambda| = 1$ means a rigid rotation while $|\lambda| > 1$ produces the outward spiral of the third preset; its argument is the rotation angle. Reading a rotation as "complex eigenvalues" rather than "no eigenvalues" is what keeps the theory uniform: over $\mathbb{C}$, every $2 \times 2$ matrix has two eigenvalues counted with multiplicity.`,
+      link:'',
+    }
+  }
+
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     The component renders its canvas from pure SVG string builders, so these
+     stills are its own output, frozen with the probe vector at its initial
+     v = [2, 1]. See eigenVectorsDiagrams.js. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: eigenVectorsDiagrams[key], caption, text })
+
+  const stateUnits = {
+    distinct: unit('distinct', 'Distinct real eigenvalues, frozen',
+      'The diagonal matrix, eigenvalues 2 and 0.5. Two dashed eigenlines - the coordinate axes here - ' +
+      'and a probe vector v whose image Av is turned away from it because v sits on neither line.'),
+    repeated: unit('repeated', 'Repeated eigenvalue, full eigenspace, frozen',
+      'The 2x scaling. One eigenvalue, but every direction is an eigendirection, so v and Av are ' +
+      'parallel wherever v is placed and no eigenline is singled out.'),
+    defective: unit('defective', 'Defective matrix, frozen',
+      'A repeated eigenvalue with only a one-dimensional eigenspace: a single eigenline where the ' +
+      'previous case had the whole plane. Off that line, Av never aligns with v.'),
+    complex: unit('complex', 'Complex eigenvalues, frozen',
+      'A 30 degree rotation. No eigenlines are drawn at all, and the angle arc between v and Av never ' +
+      'closes - no real direction is preserved.'),
+  }
+
+
+  /* ---- per-scenario panel notes (Line 1) ----
+     Case A: EigenVectors already accepts explanationOverride with a byPreset
+     map. ExplanationCard REPLACES the entry rather than merging it, so each
+     override spreads the tool's own SCENARIOS entry and appends the anchor to
+     `body`. All eleven scenarios are covered; each points at the section for its
+     eigen category. The card renders with dangerouslySetInnerHTML, so the
+     anchors are raw HTML. */
+  const SECTION_FOR_GROUP = {
+    distinct: 'distinct-real-eigenvalues',
+    repeated: 'repeated-eigenvalue',
+    defective: 'defective-matrices',
+    complex: 'complex-eigenvalues',
+  }
+  const LABEL_FOR_GROUP = {
+    distinct: 'distinct real eigenvalues',
+    repeated: 'a repeated eigenvalue with a full eigenspace',
+    defective: 'defective matrices',
+    complex: 'complex eigenvalues',
+  }
+
+  const explanationOverride = {
+    byPreset: Object.fromEntries(
+      Object.entries(EV_SCENARIOS).map(([key, sc]) => {
+        const slug = SECTION_FOR_GROUP[groupOf[key]]
+        const label = LABEL_FOR_GROUP[groupOf[key]]
+        return [key, {
+          ...sc,
+          body: `${sc.body}<br/><a href="#${slug}" style="color:#1d4ed8;font-weight:600">Learn more about ${label}</a>` +
+            ` &middot; <a href="#preset-scenarios" style="color:#1d4ed8;font-weight:600">all four categories</a>`,
+        }]
+      })
+    ),
+  }
+
+
+  const faqQuestions = {
+    obj1: {
+      question: "What is an eigenvector?",
+      answer: "An eigenvector of a matrix A is a nonzero vector v such that Av is a scalar multiple of v. The scalar is called the eigenvalue, often written lambda. Geometrically, A leaves the direction of v unchanged and only stretches or flips it."
+    },
+    obj2: {
+      question: "How do you find eigenvectors of a 2x2 matrix?",
+      answer: "First find the eigenvalues by solving the characteristic equation: lambda squared minus the trace times lambda plus the determinant equals zero. Then for each eigenvalue, solve the system A minus lambda times the identity, times v, equals zero. Each nonzero solution is an eigenvector."
+    },
+    obj3: {
+      question: "What does it mean when a matrix has complex eigenvalues?",
+      answer: "Complex eigenvalues come in conjugate pairs and indicate that the matrix has a rotational component. No real direction is preserved, since every vector gets rotated to a new direction. Eigenvectors exist in the complex plane but not in real two-dimensional space."
+    },
+    obj4: {
+      question: "What is a defective matrix?",
+      answer: "A defective matrix has a repeated eigenvalue but only one independent eigenvector for that eigenvalue. The matrix cannot be diagonalized using only its eigenvectors. A shear is the classic example: it has eigenvalue one with multiplicity two, but only the x-axis as an eigenvector."
+    },
+    obj5: {
+      question: "How do you read eigenvalues from the characteristic polynomial?",
+      answer: "For a 2 by 2 matrix, the characteristic polynomial is lambda squared minus the trace times lambda plus the determinant. Solving this quadratic gives the eigenvalues. The discriminant tells you the case: positive means two distinct real, zero means repeated, negative means complex conjugate pair."
+    }
+  }
+
+
+  const schemas = {
+    webApplication: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Eigenvectors 2D Visualizer",
+      "description": "Drag a vector and watch when it aligns with its image under matrix A to find eigenvectors. See eigenvalues, characteristic polynomial, and eigenlines.",
+      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/eigen-vectors-2d",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Drag test vector v and watch its image Av update in real time",
+        "Visual alignment indicator that flags eigenvectors when v and Av become collinear",
+        "Live eigenvalue readout from the ratio of Av magnitude to v magnitude",
+        "Eleven preset scenarios spanning distinct real, isotropic, defective, and complex cases",
+        "Eigen structure card showing eigenvalues, eigenvectors, and characteristic polynomial",
+        "One-click snap to nearest eigendirection",
+        "Toggle layers: standard grid, eigenlines, direction lines, angle arc, labels"
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "datePublished": "2024-01-15",
+      "dateModified": "2026-06-09",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "learningResourceType": "Interactive Tool",
+      "educationalLevel": "High School, College",
+      "keywords": "eigenvectors, eigenvectors calculator, eigenvectors 2D, eigenvalue eigenvector, eigenvector visualizer, interactive eigenvectors, find eigenvectors, characteristic polynomial, eigenvalues of 2x2 matrix, eigendirection, defective matrix, complex eigenvalues, real eigenvalues, linear algebra eigenvector, eigenvalue calculator"
+    },
+
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.learnmathclass.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Linear Algebra",
+          "item": "https://www.learnmathclass.com/linear-algebra"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Eigenvectors 2D Visualizer",
+          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools/eigen-vectors-2d"
+        }
+      ]
+    },
+
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is an eigenvector?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An eigenvector of a matrix A is a nonzero vector v such that Av is a scalar multiple of v. The scalar is called the eigenvalue, often written lambda. Geometrically, A leaves the direction of v unchanged and only stretches or flips it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you find eigenvectors of a 2x2 matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "First find the eigenvalues by solving the characteristic equation: lambda squared minus the trace times lambda plus the determinant equals zero. Then for each eigenvalue, solve the system A minus lambda times the identity, times v, equals zero. Each nonzero solution is an eigenvector."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does it mean when a matrix has complex eigenvalues?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Complex eigenvalues come in conjugate pairs and indicate that the matrix has a rotational component. No real direction is preserved, since every vector gets rotated to a new direction. Eigenvectors exist in the complex plane but not in real two-dimensional space."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a defective matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A defective matrix has a repeated eigenvalue but only one independent eigenvector for that eigenvalue. The matrix cannot be diagonalized using only its eigenvectors. A shear is the classic example: it has eigenvalue one with multiplicity two, but only the x-axis as an eigenvector."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you read eigenvalues from the characteristic polynomial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a 2 by 2 matrix, the characteristic polynomial is lambda squared minus the trace times lambda plus the determinant. Solving this quadratic gives the eigenvalues. The discriminant tells you the case: positive means two distinct real, zero means repeated, negative means complex conjugate pair."
+          }
+        }
+      ]
+    }
+  }
+
+
+  const introContent = {
+    id: "intro",
+    title: "",
+    content: ``
+  }
+
+
+
+
+   return {
+      props:{
+        relatedTools: getRelatedTools('linear-algebra-eigen-vectors-2d'),
+         sectionsContent,
+         stateUnits,
+         explanationOverride,
+         introContent,
+         faqQuestions,
+         schemas,
+          seoData: {
+        title: "Eigenvectors 2D Visualizer | Learn Math Class",
+        description: "Drag a vector and watch when it aligns with its image under matrix A to find eigenvectors. See eigenvalues, characteristic polynomial, and eigenlines.",
+        keywords: keyWords.join(", "),
+        url: "/linear-algebra/visual-tools/eigen-vectors-2d",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="42" x2="72" y2="42" stroke="#B5D4F4" stroke-width="0.9"/><line x1="40" y1="12" x2="40" y2="68" stroke="#B5D4F4" stroke-width="0.9"/><line x1="16" y1="59" x2="74" y2="18" stroke="#FAC775" stroke-width="1" stroke-dasharray="3,2.5"/><line x1="40" y1="42" x2="54" y2="32" stroke="#FAC775" stroke-width="2.4"/><path d="M 56 30.6 L 51.5 31 L 53.5 34.5 Z" fill="#FAC775"/><line x1="40" y1="42" x2="68" y2="22" stroke="#EF9F27" stroke-width="1.6"/><path d="M 70 20.6 L 65.5 21 L 67.5 24.5 Z" fill="#EF9F27"/><line x1="40" y1="42" x2="26" y2="26" stroke="#85B7EB" stroke-width="1.9"/><path d="M 24 24 L 25 29 L 29 26 Z" fill="#85B7EB"/><line x1="40" y1="42" x2="20" y2="36" stroke="#B5D4F4" stroke-width="1.5" stroke-dasharray="2.5,2"/><path d="M 30 30 A 14 14 0 0 0 24.5 34.5" fill="none" stroke="#B5D4F4" stroke-width="1"/><text x="62" y="34" font-family="Georgia,serif" font-size="7.5" fill="#FAC775" text-anchor="middle" font-style="italic">&#955;v</text><text x="40" y="74" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">Av = &#955;v</text></svg>`,
+        name: "Eigenvectors 2D Visualizer",
+        hubDescription: "Drag a test vector around the plane and watch when it aligns with its image Av to spot real eigendirections. Live computation of eigenvalues, characteristic polynomial, and structural classification across eleven scenarios spanning distinct real, isotropic, defective, and complex cases.",
+        category: "Linear Algebra",
+        subCategory: "Eigenvalues"
+      },
+        
+       }
+    }
+   }
+
+export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
+  const genericSections=[
+    plain('obj0', 'key-terms'),
+    plain('obj1', 'getting-started'),
+    plain('obj2', 'dragging-v-and-watching-av'),
+    plain('obj6', 'preset-scenarios'),
+    stateRow('obj12', 'distinct-real-eigenvalues', 'distinct'),
+    stateRow('obj13', 'repeated-eigenvalue', 'repeated'),
+    stateRow('obj14', 'defective-matrices', 'defective'),
+    stateRow('obj15', 'complex-eigenvalues', 'complex'),
+    plain('obj3', 'the-alignment-signal'),
+    plain('obj4', 'the-eigen-structure-card'),
+    plain('obj5', 'the-snap-button'),
+    plain('obj7', 'display-layer-toggles'),
+    plain('obj8', 'what-is-an-eigenvector'),
+    plain('obj9', 'the-four-cases'),
+    plain('obj10', 'related-concepts'),
+  ]
+
+
+    
+  return (
+   <>
+   <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.webApplication) }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
+  />
+</Head>
+   {/* <GenericNavbar/> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           // topOffset='65px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <br/>
+   <br/>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Eigen Vectors</h1>
+   <br/>
+   <div style={{transform:'scale(0.9)'}}>
+   <EigenVectors explanationOverride={explanationOverride}/>
+   </div>
+   <br/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"
+         secondaryNavTitle="More in this Section"
+   
+   />
+   <br/>
+   <br/>
+   <br/>
+    {/* <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
+        /> */}
+   <br/>
+    {/* <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
+   <br/>
+   <Sections sections={genericSections}/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
+   </>
+  )
+}

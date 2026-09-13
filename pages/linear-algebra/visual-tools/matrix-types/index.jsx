@@ -78,9 +78,9 @@ export async function getStaticProps() {
 
     obj1: {
       title: `Getting Started with the Generator`,
-      content: `The generator builds a matrix of the type you choose at the size you choose, and explains what makes it that type.
+      content: `The generator builds a [matrix](!/linear-algebra/matrix#1) of the type you choose at the size you choose, and explains what makes it that type.
 
-• Pick a **Matrix Size** from the first dropdown; every type is square, so one number fixes both dimensions
+• Pick a **Matrix Size** from the first dropdown; every type is square, so one number fixes both [dimensions](!/linear-algebra/vector-spaces/dimension#1)
 • Pick a **Matrix Type** from the second dropdown: random, identity, zero, scalar, diagonal, upper triangular, lower triangular, symmetric, or skew-symmetric
 • The matrix appears with its defining pattern coloured, so the forced entries and the free entries can be told apart at a glance
 • Below it, a short explanation states the rule in words and in symbols, lists the properties that follow from it, and links to a fuller reference
@@ -110,11 +110,11 @@ Counting the free entries is a good exercise. At $n \\times n$: identity and zer
 
     obj3: {
       title: `Identity and Zero`,
-      content: `The identity matrix $I_n$ has $1$ on every diagonal entry and $0$ everywhere else. It is the multiplicative unit: $IA = AI = A$ for every matrix $A$ of compatible size, just as $1 \\cdot x = x$ for numbers. Its determinant is $1$, every eigenvalue is $1$, and it is its own inverse and its own transpose.
+      content: `The identity matrix $I_n$ has $1$ on every diagonal entry and $0$ everywhere else. It is the multiplicative unit: $IA = AI = A$ for every matrix $A$ of compatible size, just as $1 \\cdot x = x$ for numbers. Its [determinant](!/linear-algebra/determinants#1) is $1$, every [eigenvalue](!/linear-algebra/eigen#2) is $1$, and it is its own inverse and its own transpose.
 
-The zero matrix $0$ has every entry equal to $0$. It is the additive unit: $A + 0 = A$. Its determinant is $0$, every eigenvalue is $0$, its rank is $0$, and multiplying anything by it gives the zero matrix again.
+The zero matrix $0$ has every entry equal to $0$. It is the additive unit: $A + 0 = A$. Its determinant is $0$, every eigenvalue is $0$, its [rank](!/linear-algebra/matrix/rank#1) is $0$, and multiplying anything by it gives the zero matrix again.
 
-Between them these two matrices play the roles of $1$ and $0$ in ordinary arithmetic, and most identities about matrices are checked first on them. The identity is also the matrix of the transformation that leaves every vector where it is, and the zero matrix is the transformation that sends every vector to the origin.
+Between them these two matrices play the roles of $1$ and $0$ in ordinary arithmetic, and most identities about matrices are checked first on them. The identity is also the matrix of the transformation that leaves every [vector](!/linear-algebra/vectors#1) where it is, and the zero matrix is the transformation that sends every vector to the origin.
 
 Both are special cases of the [scalar matrix](!#scalar-and-diagonal): the identity with $\\lambda = 1$, the zero matrix with $\\lambda = 0$.`,
       before: ``,
@@ -128,13 +128,13 @@ Neither matrix has any free value: change one entry of either and it stops being
       title: `Scalar and Diagonal`,
       content: `A scalar matrix is $\\lambda I$: the same number $\\lambda$ on every diagonal entry, zeros elsewhere. Multiplying by it scales every vector by $\\lambda$ in every direction, and it commutes with every other matrix of the same size, $(\\lambda I) A = A (\\lambda I) = \\lambda A$. Its determinant is $\\lambda^n$ and its only eigenvalue is $\\lambda$.
 
-A diagonal matrix drops the requirement that the diagonal entries agree: any numbers $d_1, \\ldots, d_n$ on the diagonal, zeros elsewhere. It scales each coordinate axis by its own factor, which is the simplest non-trivial linear transformation there is.
+A diagonal matrix drops the requirement that the diagonal entries agree: any numbers $d_1, \\ldots, d_n$ on the diagonal, zeros elsewhere. It scales each coordinate axis by its own factor, which is the simplest non-trivial [linear transformation](!/linear-algebra/transformations#1) there is.
 
 Diagonal matrices are the ones every computation is easiest for:
 
 • The product of two diagonal matrices is diagonal, with the diagonal entries multiplied
 • The determinant is the product $d_1 d_2 \\cdots d_n$
-• The eigenvalues are the diagonal entries themselves, with the standard basis vectors as eigenvectors
+• The eigenvalues are the diagonal entries themselves, with the standard [basis](!/linear-algebra/vector-spaces#2) vectors as [eigenvectors](!/linear-algebra/eigen#2)
 • The inverse exists exactly when no $d_i$ is zero, and is the diagonal matrix of the reciprocals
 • Powers are computed entry by entry, $D^k$ has diagonal $d_i^k$
 
@@ -157,7 +157,7 @@ Triangular matrices are where determinants and eigenvalues become readable:
 • The matrix is invertible exactly when no diagonal entry is zero
 • Products and inverses of upper triangular matrices are upper triangular, and likewise for lower
 
-This is why so many algorithms aim for triangular form. Gaussian elimination reduces a matrix to upper triangular form so a system can be solved by back-substitution. The LU decomposition writes $A = LU$ with $L$ lower and $U$ upper triangular, so that $\\det A$ is the product of the diagonal of $U$ and each new right-hand side costs two triangular solves. The QR and Cholesky decompositions have a triangular factor for the same reason.
+This is why so many algorithms aim for triangular form. Gaussian elimination reduces a matrix to upper triangular form so a system can be solved by back-substitution. The LU decomposition writes $A = LU$ with $L$ lower and $U$ upper triangular, so that $\\det A$ is the product of the diagonal of $U$ and each new right-hand side costs two triangular solves. The QR and [Cholesky decompositions](!/linear-algebra/decompositions/cholesky#1) have a triangular factor for the same reason.
 
 A matrix that is both upper and lower triangular has zeros on both sides, so it is [diagonal](!#scalar-and-diagonal).`,
       before: ``,
@@ -177,7 +177,7 @@ Symmetric matrices have the best-behaved spectral theory of any class:
 • Eigenvectors for different eigenvalues are perpendicular
 • The matrix can be diagonalised by an orthogonal change of basis, $A = Q D Q^T$
 
-They arise wherever a quantity depends symmetrically on two indices: covariance matrices, the Hessian of a function, the matrix of a quadratic form, adjacency matrices of undirected graphs.
+They arise wherever a quantity depends symmetrically on two indices: covariance matrices, the Hessian of a function, the matrix of a [quadratic form](!/linear-algebra/decompositions/spectral#6), adjacency matrices of undirected graphs.
 
 A skew-symmetric matrix is the negative of its transpose, $A^T = -A$, so $a_{i,j} = -a_{j,i}$. Setting $i = j$ gives $a_{i,i} = -a_{i,i}$, which forces every diagonal entry to $0$. The eigenvalues are purely imaginary or zero, and an odd-sized skew-symmetric matrix always has determinant $0$. In three dimensions the skew-symmetric matrices are exactly the cross-product maps $v \\mapsto \\omega \\times v$, which is why they describe angular velocity and infinitesimal rotations.
 
@@ -234,7 +234,7 @@ The counts of free entries from the [overview](!#the-nine-types-at-a-glance) tra
 • **Skew-symmetric**: eigenvalues purely imaginary or zero; determinant $0$ when $n$ is odd, and a perfect square when $n$ is even
 • **Random**: nothing can be said in advance, which is the point of the type
 
-The triangular case is the one to remember. It is why row reduction computes determinants, and why the eigenvalues of a matrix are found by bringing it to triangular form rather than by expanding a characteristic polynomial.`,
+The triangular case is the one to remember. It is why row reduction computes determinants, and why the eigenvalues of a matrix are found by bringing it to triangular form rather than by expanding a [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2).`,
       before: ``,
       after: ``,
       link: '',
@@ -252,7 +252,7 @@ The triangular case is the one to remember. It is why row reduction computes det
 
 **Symmetric** — covariance and correlation matrices in statistics, Hessians in optimisation, stiffness and mass matrices in mechanics, adjacency matrices of undirected graphs. Positive definiteness is a property only symmetric matrices have.
 
-**Skew-symmetric** — angular velocity and the generators of rotations in physics, and the matrices of cross products in three dimensions.
+**Skew-symmetric** — angular velocity and the generators of rotations in physics, and the matrices of [cross products](!/linear-algebra/vectors/cross-product#1) in three dimensions.
 
 **Scalar** — uniform scaling, and the centre of the matrix algebra: the only matrices that commute with everything.
 

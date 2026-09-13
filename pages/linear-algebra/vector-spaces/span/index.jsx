@@ -967,6 +967,9 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 
 
 export async function getStaticProps(){
@@ -1611,8 +1614,33 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    geometry: demoUnitFrame({
+      svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
+      caption: 'A span filling the plane, then collapsing to a line',
+      text: 'Above, the shaded region reaches every point because the two arrows supply two genuinely different directions. Below, the second arrow lies along the first, and the span has shrunk to the line they share &#8212; two vectors, but only one direction between them. What a span can reach is fixed by directions, never by how many vectors are listed. Drag the arrows and watch the region change on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+    // Section 4 is the algebraic test, not the geometry, so the
+    // symbolic membership tool is the right picture here.
+    membership: demoUnitFrame({
+      svg: spanMembershipDiagrams.membership,
+      caption: 'Solving for the weights that reach b',
+      text: 'The candidate vector has been placed as the right-hand side and the spanning vectors as the columns, turning "is b in the span" into a system to solve. A consistent system means a set of weights exists and b is reachable; an inconsistent one means no combination lands on it. Try a vector that misses, and watch the contradiction row appear, on the',
+      href: '/linear-algebra/visual-tools/span-membership',
+      linkText: 'span membership tester',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1633,7 +1661,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function SpanPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas}) {
+export default function SpanPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1676,6 +1704,8 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+                  <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
+          `Line, plane or the whole space — the span is always one of these, and it always contains the origin.`,
         ]
     },
     {
@@ -1692,6 +1722,8 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-membership'} dangerouslySetInnerHTML={{ __html: demoUnits.membership }} />,
+          `Every later question about spanning sets reduces to running this same test on a different right-hand side.`,
         ]
     },
     {

@@ -35,11 +35,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Orthogonal set** — vectors that are pairwise perpendicular: $\\mathbf{u}_i \\cdot \\mathbf{u}_j = 0$ whenever $i \\neq j$.
+      content: `**Orthogonal set** — [vectors](!/linear-algebra/vectors#1) that are pairwise perpendicular: $\\mathbf{u}_i \\cdot \\mathbf{u}_j = 0$ whenever $i \\neq j$.
 
-**Orthonormal set** — an orthogonal set in which every vector has length $1$.
+**Orthonormal set** — an [orthogonal set](!/linear-algebra/orthogonality/orthogonal-sets#1) in which every vector has length $1$.
 
-**Gram-Schmidt process** — the procedure that turns any list of independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ into an orthogonal list $\\mathbf{u}_1, \\ldots, \\mathbf{u}_k$ with the same span, and then into an orthonormal list $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$.
+**Gram-Schmidt process** — the procedure that turns any list of independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ into an orthogonal list $\\mathbf{u}_1, \\ldots, \\mathbf{u}_k$ with the same [span](!/linear-algebra/vector-spaces/span#1), and then into an orthonormal list $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$.
 
 **Projection coefficient** — $c_{k,j} = \\dfrac{\\mathbf{v}_k \\cdot \\mathbf{u}_j}{\\mathbf{u}_j \\cdot \\mathbf{u}_j}$, the multiple of $\\mathbf{u}_j$ that is subtracted from $\\mathbf{v}_k$.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Span preservation** — at every stage $\\operatorname{span}\\{\\mathbf{u}_1, \\ldots, \\mathbf{u}_k\\} = \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$.
 
-**QR decomposition** — the matrix form of the process: with the $\\mathbf{v}_k$ as the columns of $A$ and the $\\mathbf{e}_k$ as the columns of $Q$, $A = QR$ with $R$ upper triangular.`,
+**QR decomposition** — the [matrix](!/linear-algebra/matrix#1) form of the process: with the $\\mathbf{v}_k$ as the columns of $A$ and the $\\mathbf{e}_k$ as the columns of $Q$, $A = QR$ with $R$ upper triangular.`,
       before: ``,
       after: ``,
       link: '',
@@ -111,7 +111,7 @@ The layout changes once, between the two passes: $V \\to U$ while the vectors ar
     },
     obj5: {
       title: `What the Gram-Schmidt Process Is`,
-      content: `Given linearly independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$, the process produces orthogonal vectors
+      content: `Given linearly independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$, the process produces [orthogonal vectors](!/linear-algebra/orthogonality#1)
 
 $$\\mathbf{u}_1 = \\mathbf{v}_1, \\qquad \\mathbf{u}_k = \\mathbf{v}_k - \\sum_{j=1}^{k-1} \\frac{\\mathbf{v}_k \\cdot \\mathbf{u}_j}{\\mathbf{u}_j \\cdot \\mathbf{u}_j}\\,\\mathbf{u}_j$$
 
@@ -119,7 +119,7 @@ and then orthonormal vectors
 
 $$\\mathbf{e}_k = \\frac{\\mathbf{u}_k}{\\|\\mathbf{u}_k\\|}$$
 
-Each $\\mathbf{u}_k$ is $\\mathbf{v}_k$ with its projections onto all the earlier $\\mathbf{u}_j$ removed, so it is perpendicular to every one of them; and since it differs from $\\mathbf{v}_k$ only by a combination of earlier vectors, the span is unchanged at every step. The result is an orthonormal basis of $\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ with the extra property that the first $m$ output vectors span the same space as the first $m$ inputs, for every $m$.
+Each $\\mathbf{u}_k$ is $\\mathbf{v}_k$ with its projections onto all the earlier $\\mathbf{u}_j$ removed, so it is perpendicular to every one of them; and since it differs from $\\mathbf{v}_k$ only by a combination of earlier vectors, the span is unchanged at every step. The result is an orthonormal [basis](!/linear-algebra/vector-spaces#2) of $\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ with the extra property that the first $m$ output vectors span the same space as the first $m$ inputs, for every $m$.
 
 Why the subtraction works: dot $\\mathbf{u}_k$ with any earlier $\\mathbf{u}_j$. The projections onto the other $\\mathbf{u}_i$ contribute nothing, since they are already perpendicular to $\\mathbf{u}_j$, and the projection onto $\\mathbf{u}_j$ contributes exactly $-\\mathbf{v}_k \\cdot \\mathbf{u}_j$, cancelling the $\\mathbf{v}_k \\cdot \\mathbf{u}_j$ from the first term.
 
@@ -138,7 +138,7 @@ Independence is required. If $\\mathbf{v}_k$ lies in the span of the earlier vec
 • **Order matters**: reordering the inputs gives a different orthonormal basis of the same space
 • **Coefficients are inner products**: with the orthonormal vectors, $\\mathbf{v}_k = \\sum_{j \\leq k} (\\mathbf{v}_k \\cdot \\mathbf{e}_j)\\,\\mathbf{e}_j$, which is the $k$-th column of $R$ in $A = QR$
 • **Independence test**: a zero $\\mathbf{u}_k$ means $\\mathbf{v}_k$ was dependent on its predecessors
-• **Coordinates for free**: in an orthonormal basis the coordinates of any vector are its dot products with the basis vectors, no system to solve
+• **Coordinates for free**: in an orthonormal basis the coordinates of any vector are its [dot products](!/linear-algebra/vectors/dot-product#1) with the basis vectors, no system to solve
 • **Numerical caveat**: in floating point, subtracting all projections from the original $\\mathbf{v}_k$ loses orthogonality gradually; the modified variant subtracts each projection from the running remainder instead and is more stable`,
       before: ``,
       after: ``,
@@ -148,9 +148,9 @@ Independence is required. If $\\mathbf{v}_k$ lies in the span of the earlier vec
       title: `Why It Matters`,
       content: `Orthonormal bases make almost every computation in linear algebra simpler, and Gram-Schmidt is how they are made.
 
-• **QR decomposition**: the process on the columns of $A$ gives $A = QR$, the workhorse of least squares and of eigenvalue algorithms
-• **Least squares**: solving $Ax \\approx b$ with an orthonormal basis of the column space reduces to dot products, avoiding the ill-conditioned normal equations
-• **Orthogonal projection onto a subspace**: with an orthonormal basis $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$ of the subspace, the projection of any $\\mathbf{w}$ is $\\sum (\\mathbf{w} \\cdot \\mathbf{e}_j)\\,\\mathbf{e}_j$
+• **QR decomposition**: the process on the columns of $A$ gives $A = QR$, the workhorse of least squares and of [eigenvalue](!/linear-algebra/eigen#2) algorithms
+• **Least squares**: solving $Ax \\approx b$ with an orthonormal basis of the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) reduces to dot products, avoiding the ill-conditioned [normal equations](!/linear-algebra/orthogonality/least-squares#3)
+• **Orthogonal projection onto a subspace**: with an orthonormal basis $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$ of the [subspace](!/linear-algebra/vector-spaces/subspaces#1), the projection of any $\\mathbf{w}$ is $\\sum (\\mathbf{w} \\cdot \\mathbf{e}_j)\\,\\mathbf{e}_j$
 • **Change of basis**: an orthonormal basis matrix $Q$ has $Q^{-1} = Q^T$, so converting coordinates costs a transpose rather than an inversion
 • **Function spaces**: applied to $1, x, x^2, \\ldots$ with an integral inner product, the same process produces the Legendre polynomials and their relatives
 • **Signal processing and statistics**: orthogonalizing regressors or basis signals removes redundancy so that each contribution can be read off independently`,
@@ -270,7 +270,7 @@ Doing the two passes separately is a teaching device. In practice each $\\mathbf
       title: `The Completed Orthonormal Set`,
       content: `The final scene shows every row of $E$ filled: an orthonormal set spanning exactly the space the rows of $V$ span.
 
-The frozen picture below is the default run complete, three unit vectors, pairwise perpendicular.`,
+The frozen picture below is the default run complete, three [unit vectors](!/linear-algebra/vectors/magnitude#5), pairwise perpendicular.`,
       before: ``,
       after: `Two things are true of the finished set beyond orthonormality. The first $m$ rows of $E$ span the same space as the first $m$ rows of $V$, for every $m$, because the process never looks ahead. And the numbers it discarded along the way, the coefficients $c_{k,j}$ and the lengths $\\|\\mathbf{u}_k\\|$, are not waste: rescaled by the lengths, they are the entries of the upper triangular $R$ in $A = QR$, with the rows of $E$ as the columns of $Q$.
 

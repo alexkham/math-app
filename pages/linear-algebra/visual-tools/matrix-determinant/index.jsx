@@ -56,7 +56,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Determinant** — the number $\\det A$, also written $|A|$, attached to every square matrix; the signed factor by which $A$ scales area or volume, and zero exactly when $A$ is singular.
+      content: `**Determinant** — the number $\\det A$, also written $|A|$, attached to every [square matrix](!/linear-algebra/matrix/types#1); the signed factor by which $A$ scales area or volume, and zero exactly when $A$ is singular.
 
 **Main diagonal** — the entries $a_{i,i}$ running from the top-left corner to the bottom-right. The anti-diagonal runs from top-right to bottom-left.
 
@@ -88,7 +88,7 @@ export async function getStaticProps(){
 • The **Strategy** tab holds four cards for the [four strategies](!#the-four-strategies). Each card states which sizes it supports; a card that does not fit the current size is greyed out with a size badge, and changing the size snaps you to a strategy that fits
 • The two cofactor cards carry their own **pill row** for choosing which row or column to expand along
 • The summary strip at the right of the tab bar always shows the size and the active strategy
-• Below the panel, the scene player animates the recipe. Play, step back and forward, reset, and choose a speed. The caption above the matrix states the general formula for the strategy, and the **Step explanations** log on the right keeps every step you have passed, with the running formula growing one term at a time
+• Below the panel, the scene player animates the recipe. Play, step back and forward, reset, and choose a speed. The caption above the [matrix](!/linear-algebra/matrix#1) states the general formula for the strategy, and the **Step explanations** log on the right keeps every step you have passed, with the running formula growing one term at a time
 • Everything is symbolic: the entries of $A$ stay as $a_{i,j}$ and each term is written out, so what you see is the formula, not a numerical example
 
 Every strategy produces the same number. They differ only in how the terms are grouped and what is highlighted while they are collected. For the theory behind the tool, see the [determinants theory page](!/linear-algebra/determinants); for minors and cofactors in depth, the [cofactors theory page](!/linear-algebra/determinants/cofactors).`,
@@ -99,7 +99,7 @@ Every strategy produces the same number. They differ only in how the terms are g
 
     obj2: {
       title: `The Four Strategies`,
-      content: `The **Strategy** tab offers four recipes for the same scalar. Two are shortcuts tied to a single size; two work for any size the tool allows.
+      content: `The **Strategy** tab offers four recipes for the same [scalar](!/linear-algebra/vectors#1). Two are shortcuts tied to a single size; two work for any size the tool allows.
 
 • [Diagonal product](!#diagonal-product) — $2 \\times 2$ only. Main diagonal product minus anti-diagonal product: two terms
 • [Sarrus's rule](!#sarrus-rule) — $3 \\times 3$ only. Six diagonal products on an augmented $3 \\times 5$ layout, three added and three subtracted
@@ -152,7 +152,7 @@ The dimmed duplicate columns are the same entries as columns $1$ and $2$; they a
       title: `Cofactor Expansion Along a Row`,
       content: `The third strategy is the general method. Choose a row $i$. For each entry $a_{i,j}$ in it, strike out its row and column, take the determinant of what is left, the minor $\\det(M_{i,j})$, attach the checkerboard sign $(-1)^{i+j}$, and multiply by the entry. Add the $n$ signed products.
 
-The frozen scene is term $2$ of the expansion along row $1$ of a $3 \\times 3$ matrix. The pivot $a_{1,2}$ is highlighted, the rest of its row and column are struck through and dimmed, and the $2 \\times 2$ minor $M_{1,2}$ stands beside $A$ with its entries keeping their original indices.`,
+The frozen scene is term $2$ of the expansion along row $1$ of a $3 \\times 3$ matrix. The [pivot](!/linear-algebra/linear-systems/echelon-form#4) $a_{1,2}$ is highlighted, the rest of its row and column are struck through and dimmed, and the $2 \\times 2$ minor $M_{1,2}$ stands beside $A$ with its entries keeping their original indices.`,
       before: ``,
       after: `Each entry of the chosen row produces three scenes in the player: the strike, the minor appearing, and the term joining the running formula. The tool expands one level only. The minor's determinant is left as the symbol $\\det(M_{i,j})$ rather than expanded again, because a $3 \\times 3$ minor of a $4 \\times 4$ matrix would need its own three-term expansion and the picture would not fit. At $3 \\times 3$ the minor is a $2 \\times 2$ determinant, so the term $-a_{1,2}\\,\\det(M_{1,2})$ in the frozen scene stands for $-a_{1,2}(a_{2,1}a_{3,3} - a_{2,3}a_{3,1})$. To see a minor evaluated, run the tool at the smaller size.
 
@@ -218,7 +218,7 @@ The caption above the matrix states the general formula for the active strategy 
 • At $4 \\times 4$ each cofactor would be a $3 \\times 3$ determinant with six terms, twenty-four products in total; the tool shows the four minors but leaves their determinants as symbols, since the expressions no longer fit in a cell, and by hand the method is already impractical
 • At $5 \\times 5$ there are five minors of size $4 \\times 4$ and one hundred and twenty products behind them; the point of running the tool here is to see that the recipe does not change, only the cost
 
-Beyond that, determinants are computed by row reduction, since the determinant of a triangular matrix is the product of its diagonal; the [LU decomposition visualizer](!/linear-algebra/visual-tools/lu-decomposition) shows that route.`,
+Beyond that, determinants are computed by row reduction, since the determinant of a [triangular matrix](!/linear-algebra/decompositions/lower-upper#1) is the product of its diagonal; the [LU decomposition visualizer](!/linear-algebra/visual-tools/lu-decomposition) shows that route.`,
       before: ``,
       after: ``,
       link: '',
@@ -228,9 +228,9 @@ Beyond that, determinants are computed by row reduction, since the determinant o
       title: `What the Determinant Is`,
       content: `The determinant of a square matrix is a single number with two faces, one geometric and one algebraic.
 
-Geometrically, $|\\det A|$ is the factor by which the transformation $A$ scales area in the plane or volume in space: the unit square maps to a parallelogram of area $|\\det A|$, the unit cube to a parallelepiped of volume $|\\det A|$. The sign records orientation, negative when $A$ turns a right-handed frame into a left-handed one. And $\\det A = 0$ means the image is flattened to something of lower dimension, so $A$ has no inverse.
+Geometrically, $|\\det A|$ is the factor by which the transformation $A$ scales area in the plane or volume in space: the unit square maps to a parallelogram of area $|\\det A|$, the unit cube to a parallelepiped of volume $|\\det A|$. The sign records orientation, negative when $A$ turns a right-handed frame into a left-handed one. And $\\det A = 0$ means the image is flattened to something of lower [dimension](!/linear-algebra/vector-spaces/dimension#1), so $A$ has no inverse.
 
-Algebraically, the determinant is pinned down by three properties: it is linear in each row separately, it changes sign when two rows are swapped, and it takes the value $1$ on the identity matrix. Any function with those three properties is the determinant, and every recipe on this page is a way of computing the one function they define. The general formula that falls out is a signed sum over all $n!$ ways of choosing one entry from each row and each column,
+Algebraically, the determinant is pinned down by three properties: it is linear in each row separately, it changes sign when two rows are swapped, and it takes the value $1$ on the [identity matrix](!/linear-algebra/matrix/types#2). Any function with those three properties is the determinant, and every recipe on this page is a way of computing the one function they define. The general formula that falls out is a signed sum over all $n!$ ways of choosing one entry from each row and each column,
 
 $$\\det A = \\sum_{\\sigma} \\operatorname{sgn}(\\sigma)\\, a_{1,\\sigma(1)}\\, a_{2,\\sigma(2)} \\cdots a_{n,\\sigma(n)}$$
 
@@ -271,8 +271,8 @@ The row-addition rule is the reason row reduction computes determinants: reduce 
 • **Linear systems**: a square system has a unique solution exactly when its coefficient determinant is non-zero, and Cramer's rule writes that solution as ratios of determinants
 • **Area and volume**: the area of a parallelogram, the volume of a parallelepiped, and the Jacobian factor in a change of variables are all determinants
 • **Orientation**: the sign tells whether a transformation is a rotation-like motion or includes a reflection
-• **Eigenvalues**: the characteristic polynomial is $\\det(A - \\lambda I)$, its degree is $n$ because the determinant is a sum of products of $n$ entries, and the determinant itself is the product of the eigenvalues
-• **Cross product and independence**: the cross product is a symbolic $3 \\times 3$ determinant expanded along its first row, and the determinant of a set of vectors is zero exactly when they are dependent
+• **Eigenvalues**: the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2) is $\\det(A - \\lambda I)$, its degree is $n$ because the determinant is a sum of products of $n$ entries, and the determinant itself is the product of the [eigenvalues](!/linear-algebra/eigen#2)
+• **Cross product and independence**: the [cross product](!/linear-algebra/vectors/cross-product#1) is a symbolic $3 \\times 3$ determinant expanded along its first row, and the determinant of a set of [vectors](!/linear-algebra/vectors#1) is zero exactly when they are dependent
 • **Numerical work**: a determinant close to zero warns that the system it describes is ill-conditioned`,
       before: ``,
       after: ``,
@@ -303,7 +303,7 @@ Conversely, $\\det A \\neq 0$ guarantees an inverse, a unique solution to every 
 
 The sign carries orientation. A positive determinant means the transformation can be reached from the identity by a continuous motion; a negative one means a reflection is involved, and the ordering of the column vectors has been reversed.
 
-The $2 \\times 2$ formula makes the area claim concrete. For columns $(a, c)$ and $(b, d)$, the parallelogram they span has area $|ad - bc|$: the enclosing rectangle minus the four triangles and two rectangles around the edges, which is exactly the [diagonal product](!#diagonal-product) computation.
+The $2 \\times 2$ formula makes the area claim concrete. For columns $(a, c)$ and $(b, d)$, the parallelogram they [span](!/linear-algebra/vector-spaces/span#1) has area $|ad - bc|$: the enclosing rectangle minus the four triangles and two rectangles around the edges, which is exactly the [diagonal product](!#diagonal-product) computation.
 
 This is the reason determinants appear in change of variables for integrals. The Jacobian determinant is the local volume scaling of a coordinate change, and an integral over the new coordinates must be corrected by it.`,
       before: ``,
@@ -345,8 +345,8 @@ The determinant is nonzero, so $A$ is invertible, and its negative sign says the
 • **Forgetting the sign change on a row swap** — every exchange of two rows flips the sign; two swaps cancel
 • **Scaling**: $\\det(2A) = 2^n \\det A$, not $2 \\det A$; doubling a $3 \\times 3$ matrix multiplies its determinant by eight
 • **Adding determinants**: $\\det(A + B) \\neq \\det A + \\det B$ in general; the determinant is multiplicative, not additive
-• **Confusing the determinant with the trace** — the trace is the sum of the diagonal, the determinant the product of the eigenvalues; a matrix with zero trace can be invertible, and one with zero determinant usually has non-zero trace
-• **Expecting a determinant for a non-square matrix** — there is none; rank and singular values take its place
+• **Confusing the determinant with the trace** — the [trace](!/linear-algebra/matrix/trace#1) is the sum of the diagonal, the determinant the product of the eigenvalues; a matrix with zero trace can be invertible, and one with zero determinant usually has non-zero trace
+• **Expecting a determinant for a non-square matrix** — there is none; [rank](!/linear-algebra/matrix/rank#1) and [singular values](!/linear-algebra/decompositions/svd#3) take its place
 • **Expanding when reduction is cheaper** — for anything larger than $3 \\times 3$, row reduce to triangular form and multiply the diagonal
 
 The visualizer sizes every strategy card to the sizes it is valid for, which rules out the Sarrus mistake by construction, and its [sign pattern](!#the-sign-pattern) scene is there to prevent the first one.`,

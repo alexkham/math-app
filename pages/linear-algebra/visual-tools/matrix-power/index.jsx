@@ -35,7 +35,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Matrix power** — $A^n = A \\cdot A \\cdots A$, the product of $n$ copies of a square matrix $A$.
+      content: `**Matrix power** — $A^n = A \\cdot A \\cdots A$, the product of $n$ copies of a [square matrix](!/linear-algebra/matrix/types#1) $A$.
 
 **Square requirement** — only a square matrix can be multiplied by itself; an $m \\times n$ matrix with $m \\neq n$ has no powers.
 
@@ -58,9 +58,9 @@ export async function getStaticProps(){
       title: `Getting Started with the Visualizer`,
       content: `Set the size of $A$ and the exponent, then watch the copies collapse into a single power.
 
-• Use the **Matrix size** stepper for $2 \\times 2$ up to $4 \\times 4$; both dimensions move together because $A$ must be square
+• Use the **Matrix size** stepper for $2 \\times 2$ up to $4 \\times 4$; both [dimensions](!/linear-algebra/vector-spaces/dimension#1) move together because $A$ must be square
 • Use the **Exponent** stepper for $n$ from $1$ to $5$; the run has $2(n - 1) + 1$ scenes, two per collapse plus the definition
-• Hover the **?** icon for a reminder of what a matrix power is and why the matrix must be square
+• Hover the **?** icon for a reminder of what a [matrix](!/linear-algebra/matrix#1) power is and why the matrix must be square
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 • From $A^3$ upward the cells switch to a $\\Sigma$ summary; **hover any cell** to see its full expansion as a tooltip, with the number of terms in its header
 
@@ -142,7 +142,7 @@ The path reading is literal for adjacency matrices: if $a_{i,j}$ is $1$ when the
 • **Determinant**: $\\det(A^n) = (\\det A)^n$
 • **Transpose and inverse**: $(A^n)^T = (A^T)^n$, and $(A^n)^{-1} = (A^{-1})^n = A^{-n}$ when $A$ is invertible
 • **Diagonal matrices**: $D^n$ raises each diagonal entry to the $n$-th power
-• **Diagonalizable matrices**: $A = PDP^{-1}$ gives $A^n = PD^nP^{-1}$, so the eigenvalues are raised to the power and the eigenvectors are untouched
+• **Diagonalizable matrices**: $A = PDP^{-1}$ gives $A^n = PD^nP^{-1}$, so the [eigenvalues](!/linear-algebra/eigen#2) are raised to the power and the [eigenvectors](!/linear-algebra/eigen#2) are untouched
 • **Idempotent**: $A^2 = A$ means every power equals $A$; projections are the standard example
 • **Nilpotent**: $A^k = 0$ for some $k$; strictly triangular matrices are the standard example
 • **Growth**: for large $n$, $A^n$ is dominated by the eigenvalue of largest absolute value`,
@@ -159,7 +159,7 @@ The path reading is literal for adjacency matrices: if $a_{i,j}$ is $1$ when the
 • **Linear recurrences**: the Fibonacci numbers, and every sequence defined by a fixed linear rule, are read off the powers of a companion matrix
 • **Discrete dynamical systems**: population models, coupled oscillators sampled in time, and any system with $\\mathbf{x}_{t+1} = A\\mathbf{x}_t$ have $\\mathbf{x}_t = A^t \\mathbf{x}_0$
 • **The matrix exponential**: $e^{At} = \\sum A^n t^n / n!$ solves linear differential equations, and every term is a matrix power
-• **Eigenvalues by iteration**: power iteration multiplies a vector by $A$ repeatedly, and the vector turns toward the dominant eigenvector`,
+• **Eigenvalues by iteration**: power iteration multiplies a [vector](!/linear-algebra/vectors#1) by $A$ repeatedly, and the vector turns toward the dominant eigenvector`,
       before: ``,
       after: ``,
       link: '',

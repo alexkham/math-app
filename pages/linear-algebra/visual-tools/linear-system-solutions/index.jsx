@@ -119,7 +119,7 @@ The shape of the system does not decide the outcome. Overdetermined systems can 
       title: `The Three Outcomes`,
       content: `A system $A\\mathbf{x} = \\mathbf{b}$ of $m$ equations in $n$ unknowns has exactly one of three solution sets, and the reduced row echelon form of $[A \\mid \\mathbf{b}]$ displays which.
 
-**No solution.** Some row of the reduced matrix is $(0, \\ldots, 0 \\mid c)$ with $c \\neq 0$, the equation $0 = c$. The system is inconsistent: $\\mathbf{b}$ is not a combination of the columns of $A$. In rank terms, $\\operatorname{rank}[A \\mid \\mathbf{b}] = \\operatorname{rank} A + 1$.
+**No solution.** Some row of the reduced matrix is $(0, \\ldots, 0 \\mid c)$ with $c \\neq 0$, the equation $0 = c$. The system is inconsistent: $\\mathbf{b}$ is not a combination of the columns of $A$. In [rank](!/linear-algebra/matrix/rank#1) terms, $\\operatorname{rank}[A \\mid \\mathbf{b}] = \\operatorname{rank} A + 1$.
 
 **Exactly one solution.** The system is consistent and every column of $A$ has a pivot, so $\\operatorname{rank} A = n$. Each row of the reduced matrix reads $x_j = c_j$, and the solution is the right-hand column. This needs at least as many equations as unknowns, $m \\geq n$, but is not guaranteed by it.
 
@@ -127,7 +127,7 @@ The shape of the system does not decide the outcome. Overdetermined systems can 
 
 $$\\mathbf{x} = \\mathbf{p} + t_1 \\mathbf{v}_1 + \\cdots + t_k \\mathbf{v}_k, \\qquad k = n - \\operatorname{rank} A$$
 
-Here $\\mathbf{p}$ is the solution with all parameters zero, and each $\\mathbf{v}_j$ is the direction obtained by setting one parameter to $1$. The $\\mathbf{v}_j$ span the null space of $A$, and the solution set is that null space shifted to pass through $\\mathbf{p}$.
+Here $\\mathbf{p}$ is the solution with all parameters zero, and each $\\mathbf{v}_j$ is the direction obtained by setting one parameter to $1$. The $\\mathbf{v}_j$ [span](!/linear-algebra/vector-spaces/span#1) the null space of $A$, and the solution set is that null space shifted to pass through $\\mathbf{p}$.
 
 The tool reduces all the way to reduced form because that is where the three cases separate cleanly. For echelon forms and the reduction algorithm in detail, see the [echelon form theory page](!/linear-algebra/linear-systems/echelon-form); for the rank conditions behind the three cases, see the [solvability theory page](!/linear-algebra/linear-systems/solvability); for the homogeneous case, see the [homogeneous systems page](!/linear-algebra/linear-systems/homogeneous).`,
       before: ``,
@@ -156,10 +156,10 @@ The tool reduces all the way to reduced form because that is where the three cas
 
 • **Modelling**: whether a set of conditions can be met at all, met in exactly one way, or leaves freedom, is the inconsistent, unique and infinite case respectively
 • **Circuits, structures, balances**: node and loop equations, force balances and chemical balances are linear systems, and free variables correspond to undetermined currents, redundant members or adjustable proportions
-• **Least squares**: when a system is inconsistent, as measured data usually makes it, the next question is the closest consistent system, which is what least squares answers
-• **Null spaces and eigenvectors**: eigenvectors are the non-trivial solutions of the homogeneous system $(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$, read off exactly as in the homogeneous preset
+• **Least squares**: when a system is inconsistent, as measured data usually makes it, the next question is the closest consistent system, which is what [least squares](!/linear-algebra/orthogonality/least-squares#3) answers
+• **Null spaces and eigenvectors**: [eigenvectors](!/linear-algebra/eigen#2) are the non-trivial solutions of the homogeneous system $(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$, read off exactly as in the homogeneous preset
 • **Rank in practice**: the reduction is the practical way to find rank, and the free-variable count is the nullity
-• **Algorithms**: Gauss-Jordan elimination is the basis of every direct linear solver, with pivoting added for numerical stability`,
+• **Algorithms**: Gauss-Jordan elimination is the [basis](!/linear-algebra/vector-spaces#2) of every direct linear solver, with pivoting added for numerical stability`,
       before: ``,
       after: ``,
       link: '',
@@ -226,7 +226,7 @@ For contrast, the **infinitely many** preset reduces to rows $(1, 2, 0 \\mid 4)$
       title: `The Opening Scene: The Augmented Matrix`,
       content: `The player opens with $[A \\mid \\mathbf{b}]$, the coefficients on the left and the constants in amber on the right, one row per equation. At the default preset it is $3 \\times 4$.
 
-Nothing has been reduced yet. What the scene establishes is that the system and the matrix are the same object written two ways, and that operations on rows are operations on equations.`,
+Nothing has been reduced yet. What the scene establishes is that the system and the [matrix](!/linear-algebra/matrix#1) are the same object written two ways, and that operations on rows are operations on equations.`,
       before: ``,
       after: `The augmented matrix drops the variable names because they carry no information the column position does not. Column $j$ is $x_j$ wherever it sits, and the bar, or here the colour, marks the constants.
 
@@ -259,7 +259,7 @@ The reduced form is unique: however the operations are sequenced, the same matri
       title: `One Solution`,
       content: `When the system is consistent and every column of $A$ has a pivot, the reduced matrix is the identity next to the solution.
 
-The frozen picture below is the default preset finished: pivots down the diagonal, the right-hand column reading $5, 3, -2$, and the solution vector beside it.`,
+The frozen picture below is the default preset finished: pivots down the diagonal, the right-hand column reading $5, 3, -2$, and the solution [vector](!/linear-algebra/vectors#1) beside it.`,
       before: ``,
       after: `Three pivots for three unknowns is the condition. It says the columns of $A$ are independent, so $\\mathbf{b}$ is reached by exactly one combination of them, and each row of the reduced matrix names one coordinate of that combination.
 

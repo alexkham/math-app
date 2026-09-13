@@ -37,17 +37,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Inner product** — an operation that takes two objects of the same shape, multiplies their entries pairwise, and sums the products into a single scalar.
+      content: `**Inner product** — an operation that takes two objects of the same shape, multiplies their entries pairwise, and sums the products into a single [scalar](!/linear-algebra/vectors#1).
 
-**Dot product** — the classical inner product of two vectors of equal length: $\\langle u, v \\rangle = \\sum_k u_k v_k$.
+**Dot product** — the classical [inner product](!/linear-algebra/orthogonality/inner-product#8) of two [vectors](!/linear-algebra/vectors#1) of equal length: $\\langle u, v \\rangle = \\sum_k u_k v_k$.
 
 **Frobenius inner product** — the inner product of two matrices of the same shape: $\\langle A, B \\rangle_F = \\sum_{i,j} a_{i,j} b_{i,j}$.
 
-**Same-shape requirement** — both operands must have identical dimensions so every entry of one has a partner in the other.
+**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/vector-spaces/dimension#1) so every entry of one has a partner in the other.
 
 **Scalar result** — the output of an inner product is always a single number, regardless of how large the operands are.
 
-**Inner product space** — a vector space equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
+**Inner product space** — a [vector space](!/linear-algebra/vector-spaces#1) equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
       before: ``,
       after: ``,
       link: '',
@@ -133,7 +133,7 @@ For comprehensive theory, see **inner product spaces**.`,
 • **Symmetry**: $\\langle u, v \\rangle = \\langle v, u \\rangle$
 • **Linearity in the first argument**: $\\langle \\alpha u + \\beta w, v \\rangle = \\alpha \\langle u, v \\rangle + \\beta \\langle w, v \\rangle$
 • **Positive definiteness**: $\\langle u, u \\rangle \\geq 0$, with equality only when $u = 0$
-• **Scalar output**: the result is always a single number, never a vector or matrix
+• **Scalar output**: the result is always a single number, never a vector or [matrix](!/linear-algebra/matrix#1)
 
 From these four properties everything else follows — norms ($\\|u\\| = \\sqrt{\\langle u, u \\rangle}$), angles ($\\cos\\theta = \\langle u, v \\rangle / (\\|u\\| \\|v\\|)$), orthogonality ($\\langle u, v \\rangle = 0$), and projections.`,
       before: ``,
@@ -150,7 +150,7 @@ From these four properties everything else follows — norms ($\\|u\\| = \\sqrt{
 • **Projection** of $u$ onto $v$: $\\text{proj}_v u = \\frac{\\langle u, v \\rangle}{\\langle v, v \\rangle} v$
 • **Gram-Schmidt orthogonalization**, **least squares**, and **Fourier expansions** all run on inner products
 
-The Frobenius inner product extends all of this to matrices — matrix norms, matrix angles, orthogonal matrix decompositions, and the trace formula $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$.`,
+The Frobenius inner product extends all of this to matrices — matrix norms, matrix angles, [orthogonal matrix](!/linear-algebra/matrix/types#7) decompositions, and the trace formula $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$.`,
       before: ``,
       after: ``,
       link: '',
@@ -174,7 +174,7 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
       title: `Common Mistakes`,
       content: `A handful of recurring mistakes appear when learning inner products.
 
-• **Confusing inner product with matrix multiplication** — the inner product returns a scalar; matrix multiplication returns a matrix. $u^T v$ is a scalar (essentially the inner product), while $u v^T$ is a rank-1 outer product matrix
+• **Confusing inner product with matrix multiplication** — the inner product returns a scalar; matrix multiplication returns a matrix. $u^T v$ is a scalar (essentially the inner product), while $u v^T$ is a [rank](!/linear-algebra/matrix/rank#1)-1 outer product matrix
 • **Forgetting the same-shape requirement** — you cannot take the inner product of a 3-vector and a 4-vector, or of a $2 \\times 3$ and a $3 \\times 2$ matrix
 • **Conjugation in the complex case** — for complex vectors, the inner product is $\\langle u, v \\rangle = \\sum \\overline{u_k} v_k$ with conjugation on one argument. The visualizer covers the real case
 • **Treating Frobenius as something exotic** — it is just the dot product of the matrices read as long vectors

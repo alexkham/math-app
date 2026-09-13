@@ -803,6 +803,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vectorLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/vectorLinCombDiagrams'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1309,6 +1312,31 @@ const schemas = {
 
 
 
+  // Operation A demonstration units: a frozen tool state, an explanation panel
+  // reading that state, and the contextual link, in one frame. Built here and
+  // rendered as content-array items - never interpolated into sectionsContent.
+  const demoUnits = {
+    // Section 1 is the algebraic definition, so the symbolic tool is the right
+    // one: it builds the combination entry by entry.
+    definition: demoUnitFrame({
+      svg: vectorLinCombDiagrams.add,
+      caption: '&#945;u + &#946;v, third phase frozen',
+      text: 'The two scaled copies have already been formed and are being added slot by slot &#8212; the filled entries are settled, the highlighted one is the component being written now, and the pale ones are still to come. Nothing here is a new rule: it is scalar multiplication and addition running in sequence, which is what the definition says a combination is. Choose your own coefficients and step through all three phases on the',
+      href: '/linear-algebra/visual-tools/vector-linear-combination',
+      linkText: 'vector linear combination visualizer',
+    }),
+    // Section 2 is about lines, planes and what the coefficients sweep out, so
+    // the symbolic tool would be the wrong picture. The 2D span tool is the one
+    // that actually draws the region.
+    geometry: demoUnitFrame({
+      svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
+      caption: 'Two vectors spanning a plane, then collapsing to a line',
+      text: 'Above, the two arrows point in genuinely different directions and their combinations reach every point of the plane. Below, one is a multiple of the other, so every combination lands back on the same line no matter how the coefficients are dialled &#8212; the second vector adds nothing the first did not already reach. Drag the arrows and watch the shaded region fall from a plane to a line on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+  };
+
   return {
   props: {
     sectionsContent,
@@ -1317,6 +1345,7 @@ const schemas = {
     combinationForms,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Linear Combinations: Span & Spanning Sets | Learn Math Class",
       description: "Learn linear combinations of vectors: definition, geometric interpretation, span, spanning sets, trivial vs non-trivial combinations, and connection to systems of equations.",
@@ -1327,7 +1356,7 @@ const schemas = {
   }
 }
    }
-export default function LinearCombinationsPage({seoData, sectionsContent, introContent, obj5Table, combinationForms, faqQuestions, schemas}) {
+export default function LinearCombinationsPage({seoData, sectionsContent, introContent, obj5Table, combinationForms, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1338,6 +1367,8 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Scaling and adding are the only two operations at work, which is why every rule that follows on this page is really a rule about those two.`,
         ]
     },
     {
@@ -1346,6 +1377,8 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
+          `Whether the coefficients sweep out a line or a plane is decided entirely by the directions of the vectors, not by how many of them there are — the idea the next section names as span.`,
         ]
     },
     {

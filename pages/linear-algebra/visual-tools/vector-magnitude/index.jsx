@@ -45,7 +45,7 @@ export async function getStaticProps(){
 
 **Normalization** — dividing a non-zero vector by its magnitude to produce the unit vector in the same direction: $\\hat{\\mathbf{v}} = \\mathbf{v} / \\|\\mathbf{v}\\|$.
 
-**Direction** — what normalization preserves; two vectors have the same direction when one is a positive multiple of the other.
+**Direction** — what normalization preserves; two [vectors](!/linear-algebra/vectors#1) have the same direction when one is a positive multiple of the other.
 
 **Zero vector** — the only vector with magnitude $0$, and the only one that cannot be normalized.`,
       before: ``,
@@ -95,7 +95,7 @@ The layout changes between phases 2 and 3. The first two phases read $\\mathbf{v
       title: `Choosing Vector Length`,
       content: `The dimension stepper controls the length of $\\mathbf{v}$, and the squares row and unit vector follow automatically.
 
-• Length $2$ is the Pythagorean theorem itself: $\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$ is the hypotenuse of a right triangle with legs $v_1$ and $v_2$
+• Length $2$ is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product#10) itself: $\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$ is the hypotenuse of a right triangle with legs $v_1$ and $v_2$
 • Length $3$ is the same theorem applied twice, giving the diagonal of a box with sides $v_1, v_2, v_3$
 • Longer vectors show that the rule does not change: one square per component, one sum, one root, and one division per component to normalize
 • Length $1$ is a useful edge case: $\\|\\mathbf{v}\\| = \\sqrt{v_1^2} = |v_1|$, the absolute value, which is why the magnitude generalizes absolute value`,

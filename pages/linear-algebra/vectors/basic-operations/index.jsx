@@ -776,6 +776,9 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vectorAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
+import vectorScalarDiagrams from '@/app/components/linear-algebra copy/matrix/vectorScalarDiagrams'
 
 
 export async function getStaticProps(){
@@ -1425,8 +1428,33 @@ const schemas = {
   },
 }
 
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Section 1 defines addition componentwise, so the symbolic
+    // tool is the match: it fills one slot at a time.
+    addition: demoUnitFrame({
+      svg: vectorAdditionDiagrams.done,
+      caption: 'u + v, every component settled',
+      text: 'Each slot of the result was filled from the matching pair above it and nothing else &#8212; the third entry never consulted the first. That independence is the whole reason addition needs both vectors to have the same length, and the reason it costs one addition per component. Step through it slot by slot, or switch to subtraction, on the',
+      href: '/linear-algebra/visual-tools/vector-addition',
+      linkText: 'vector addition visualizer',
+    }),
+    scalar: demoUnitFrame({
+      svg: vectorScalarDiagrams.done,
+      caption: 'cv, every component scaled',
+      text: 'One number has reached every entry: each component of the result is the matching component multiplied by the same scalar. Nothing has been mixed between slots, which is why scaling changes a vector\'s length and possibly its direction but never tilts it off its own line. Try a negative scalar and watch the arrow flip on the',
+      href: '/linear-algebra/visual-tools/vector-scalar-multiplication',
+      linkText: 'scalar multiplication visualizer',
+    }),
+  };
+
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1457,7 +1485,7 @@ export default function BasicVectorOperationsPage({
   operationLaws,
   faqQuestions,
   schemas,
-}) {
+demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1468,6 +1496,8 @@ export default function BasicVectorOperationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-addition'} dangerouslySetInnerHTML={{ __html: demoUnits.addition }} />,
+          `Because the components never interact, everything else about addition — its commutativity, its associativity, the zero vector — follows from the arithmetic of a single slot.`,
         ]
     },
     {
@@ -1514,6 +1544,8 @@ export default function BasicVectorOperationsPage({
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+                  <div key={'unit-scalar'} dangerouslySetInnerHTML={{ __html: demoUnits.scalar }} />,
+          `Scaling and adding are the only two operations in play here, and the rest of this page is a catalogue of how they behave together.`,
         ]
     },
     {

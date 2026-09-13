@@ -2298,6 +2298,9 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
 export async function getStaticProps(){
@@ -3153,8 +3156,31 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    definition: demoUnitFrame({
+      svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
+      caption: 'Dimension two, then dimension one',
+      text: 'The count of vectors is the same in both pictures; the dimension is not. Above, two independent directions give a two-dimensional span. Below, the second vector repeats the first, the span is a line, and the dimension has dropped to one. Dimension counts directions that survive independence, which is why it cannot be read off the size of a list. Collapse and restore it on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+    ranknullity: demoUnitFrame({
+      svg: [subspacesDiagrams.colspace, subspacesDiagrams.nullspace],
+      caption: 'Pivot columns above, free-column solutions below',
+      text: 'Every column of the matrix is either a pivot column, contributing a dimension to the column space, or a free column, contributing a dimension to the null space. No column can be both and none is left out, which is the whole content of the rank-nullity theorem: the two dimensions are partitioning the same finite supply. See the accounting for all four spaces on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     standardDimensions,
@@ -3176,7 +3202,7 @@ return {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
 
-export default function DimensionPage({seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas}) {
+export default function DimensionPage({seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3187,6 +3213,8 @@ export default function DimensionPage({seoData, sectionsContent, introContent, s
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Every result later on this page is a consequence of that one distinction between counting vectors and counting directions.`,
         ]
     },
     {
@@ -3287,6 +3315,8 @@ export default function DimensionPage({seoData, sectionsContent, introContent, s
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-ranknullity'} dangerouslySetInnerHTML={{ __html: demoUnits.ranknullity }} />,
+          `Read this way the theorem is bookkeeping rather than a surprise: the columns were always going to be divided between the two spaces.`,
         ]
     },
     {

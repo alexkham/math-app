@@ -36,7 +36,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Reflection across a line** &mdash; the linear map sending each vector $\\mathbf{v}$ to its mirror image on the other side of the line, the same distance away.
+      content: `**Reflection across a line** &mdash; the linear map sending each [vector](!/linear-algebra/vectors#1) $\\mathbf{v}$ to its mirror image on the other side of the line, the same distance away.
 
 **Reflection matrix** &mdash; for the mirror at angle $\\theta$, $R = \\begin{pmatrix} \\cos 2\\theta & \\sin 2\\theta \\\\ \\sin 2\\theta & -\\cos 2\\theta \\end{pmatrix}$, equivalently $R = 2P - I$ with $P$ the projection onto the same line.
 
@@ -88,7 +88,7 @@ The mirror is not dragged. It is set by the presets or the $\\theta$ slider in t
       title: `The Morph Animation`,
       content: `The animation panel blends the identity into the reflection: $M(t) = (1 - t)I + tR$ for $t$ from $0$ to $1$, applied to the grid and the unit square.
 
-&bull; At $t = 0$ the grid is the ordinary grid and the unit square is a square, filled blue for positive determinant
+&bull; At $t = 0$ the grid is the ordinary grid and the unit square is a square, filled blue for positive [determinant](!/linear-algebra/determinants#1)
 &bull; At $t = 0.5$ the map is $\\tfrac{1}{2}(I + R) = P$, the projection onto the mirror: the grid and square are flattened onto the line, and the fill turns grey for determinant $0$
 &bull; At $t = 1$ the grid has passed through the mirror and come out on the other side, and the unit square is filled purple for negative determinant: the same shape, flipped over
 
@@ -101,7 +101,7 @@ $\\mathbf{v}$ and $R\\mathbf{v}$ are drawn independently of $t$, so the mirror-i
       title: `The Matrix Card and the Angle Slider`,
       content: `The matrix card shows the four entries of $R$ for the current mirror and a slider for the angle $\\theta$ in degrees.
 
-&bull; The entries are $\\cos 2\\theta$, $\\sin 2\\theta$, $\\sin 2\\theta$ and $-\\cos 2\\theta$; the matrix is symmetric and its diagonal entries are negatives of each other, so the trace is always $0$
+&bull; The entries are $\\cos 2\\theta$, $\\sin 2\\theta$, $\\sin 2\\theta$ and $-\\cos 2\\theta$; the matrix is symmetric and its diagonal entries are negatives of each other, so the [trace](!/linear-algebra/matrix/trace#1) is always $0$
 &bull; The doubled angle is the reason the x-axis ($\\theta = 0°$) gives $\\operatorname{diag}(1, -1)$ while the diagonal ($\\theta = 45°$) gives the coordinate swap $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$
 &bull; The slider runs from $0°$ to $180°$, because a line has no orientation: $\\theta$ and $\\theta + 180°$ are the same mirror and the same matrix
 

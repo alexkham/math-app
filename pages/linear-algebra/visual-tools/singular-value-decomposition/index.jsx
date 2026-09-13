@@ -35,23 +35,23 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Singular value decomposition (SVD)** — $A = U\\Sigma V^T$ for any $m \\times n$ matrix, with $U$ ($m \\times m$) and $V$ ($n \\times n$) orthogonal and $\\Sigma$ ($m \\times n$) diagonal.
+      content: `**Singular value decomposition (SVD)** — $A = U\\Sigma V^T$ for any $m \\times n$ [matrix](!/linear-algebra/matrix#1), with $U$ ($m \\times m$) and $V$ ($n \\times n$) orthogonal and $\\Sigma$ ($m \\times n$) diagonal.
 
-**Singular values** — the diagonal entries $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$ of $\\Sigma$; the square roots of the eigenvalues of $A^TA$.
+**Singular values** — the diagonal entries $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$ of $\\Sigma$; the square roots of the [eigenvalues](!/linear-algebra/eigen#2) of $A^TA$.
 
-**Right singular vectors** — the columns $\\mathbf{v}_i$ of $V$, orthonormal eigenvectors of $A^TA$; the input directions.
+**Right singular vectors** — the columns $\\mathbf{v}_i$ of $V$, orthonormal [eigenvectors](!/linear-algebra/eigen#2) of $A^TA$; the input directions.
 
 **Left singular vectors** — the columns $\\mathbf{u}_i$ of $U$, with $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for $\\sigma_i > 0$; the output directions.
 
 **Rank** — the number of non-zero singular values.
 
-**Rank-one form** — $A = \\sum \\sigma_i\\mathbf{u}_i\\mathbf{v}_i^T$; truncating it gives the best low-rank approximation.
+**Rank-one form** — $A = \\sum \\sigma_i\\mathbf{u}_i\\mathbf{v}_i^T$; truncating it gives the best low-[rank](!/linear-algebra/matrix/rank#1) approximation.
 
 **Spectral norm** — $\\|A\\|_2 = \\sigma_1$, the largest stretch; **Frobenius norm** — $\\sqrt{\\sum\\sigma_i^2}$.
 
 **Condition number** — $\\sigma_1 / \\sigma_r$, the ratio of largest to smallest non-zero singular value.
 
-**Pseudoinverse** — $A^+ = V\\Sigma^+U^T$, inverting the non-zero singular values; gives least-squares solutions.`,
+**Pseudoinverse** — $A^+ = V\\Sigma^+U^T$, inverting the non-zero singular values; gives [least-squares solutions](!/linear-algebra/orthogonality/least-squares#3).`,
       before: ``,
       after: ``,
       link: '',
@@ -77,13 +77,13 @@ The computation is the hand method: eigenvalues and eigenvectors of $A^TA$, squa
 
 • **Form $A^TA$** — an $n \\times n$ symmetric positive semidefinite matrix
 • **Eigenvalues and singular values** — $\\lambda_i \\geq 0$ of $A^TA$ in decreasing order and $\\sigma_i = \\sqrt{\\lambda_i}$, with the rank read off and $\\sum\\sigma_i^2$ checked against the sum of squared entries
-• **Right singular vectors** — for each eigenvalue, $A^TA - \\lambda I$ row reduced and one integer vector per free column, orthogonalized inside a repeated eigenspace, then normalized
+• **Right singular vectors** — for each eigenvalue, $A^TA - \\lambda I$ row reduced and one integer vector per free column, orthogonalized inside a repeated [eigenspace](!/linear-algebra/eigen#4), then normalized
 • **Left singular vectors** — $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for each $\\sigma_i > 0$, with the length of $A\\mathbf{v}_i$ confirmed as $\\sigma_i$
-• **Complete $U$** — only when there are fewer non-zero singular values than rows: Gram–Schmidt on standard basis vectors fills the remaining orthonormal columns
+• **Complete $U$** — only when there are fewer non-zero singular values than rows: Gram–Schmidt on standard [basis](!/linear-algebra/vector-spaces#2) vectors fills the remaining orthonormal columns
 • **Assemble** — $U$, the rectangular $\\Sigma$, and $V^T$
 • **Factor** — $A = U \\cdot \\Sigma \\cdot V^T$ multiplied out
 • **Rank-one sum** — $A = \\sigma_1\\mathbf{u}_1\\mathbf{v}_1^T + \\sigma_2\\mathbf{u}_2\\mathbf{v}_2^T + \\cdots$
-• **Done** — rank, norms, condition number, the ellipse picture, and the four fundamental subspaces`,
+• **Done** — rank, norms, condition number, the ellipse picture, and the four fundamental [subspaces](!/linear-algebra/vector-spaces/subspaces#1)`,
       before: ``,
       after: ``,
       link: '',
@@ -107,7 +107,7 @@ The computation is the hand method: eigenvalues and eigenvectors of $A^TA$, squa
 
 • **$2 \\times 2$ classic** — $\\begin{pmatrix} 3 & 0 \\\\ 4 & 5 \\end{pmatrix}$ with $\\sigma = \\sqrt{45}, \\sqrt{5}$; $V$ is the $45°$ rotation and $U$ has columns $(1, 3)/\\sqrt{10}$ and $(3, -1)/\\sqrt{10}$
 • **Rank one** — $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ with $\\sigma = 5, 0$; one term, and $U$ needs completing
-• **Symmetric** — $\\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$; the singular values are the eigenvalues $3, 1$ and $U = V$, so the SVD is the spectral decomposition
+• **Symmetric** — $\\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$; the singular values are the eigenvalues $3, 1$ and $U = V$, so the SVD is the [spectral decomposition](!/linear-algebra/eigen/diagonalization#7)
 • **Rotation** — $\\sigma = 1, 1$; a repeated singular value, $V = I$ and $U$ is the rotation itself
 • **Wide $2 \\times 3$** — $\\sigma = \\sqrt{3}, 1$ and a third $\\mathbf{v}_3$ with $\\lambda = 0$ spanning the null space
 • **Tall $3 \\times 2$** — $\\sigma = \\sqrt{3}, 1$ and a third column of $U$ from Gram–Schmidt
@@ -124,13 +124,13 @@ Shuffle produces small-integer matrices whose singular values are usually irrati
 
 $$A = U\\Sigma V^T$$
 
-with $U$ an $m \\times m$ orthogonal matrix, $V$ an $n \\times n$ orthogonal matrix, and $\\Sigma$ an $m \\times n$ matrix whose only non-zero entries are $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq \\sigma_r > 0$ on the diagonal, where $r$ is the rank. Column by column the equation says
+with $U$ an $m \\times m$ [orthogonal matrix](!/linear-algebra/matrix/types#7), $V$ an $n \\times n$ orthogonal matrix, and $\\Sigma$ an $m \\times n$ matrix whose only non-zero entries are $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq \\sigma_r > 0$ on the diagonal, where $r$ is the rank. Column by column the equation says
 
 $$A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$$
 
-An orthonormal set of input directions is sent to an orthogonal set of output directions, each scaled by its singular value. The unit sphere in $\\mathbb{R}^n$ becomes an ellipsoid in $\\mathbb{R}^m$ with semi-axes $\\sigma_i$ along $\\mathbf{u}_i$; directions with $\\sigma_i = 0$ are flattened away.
+An [orthonormal set](!/linear-algebra/orthogonality/orthogonal-sets#3) of input directions is sent to an [orthogonal set](!/linear-algebra/orthogonality/orthogonal-sets#1) of output directions, each scaled by its singular value. The unit sphere in $\\mathbb{R}^n$ becomes an ellipsoid in $\\mathbb{R}^m$ with semi-axes $\\sigma_i$ along $\\mathbf{u}_i$; directions with $\\sigma_i = 0$ are flattened away.
 
-The hand computation goes through $A^TA$. Substituting the factorization, $A^TA = V\\Sigma^T\\Sigma V^T$, which is the spectral decomposition of the symmetric matrix $A^TA$ with eigenvalues $\\sigma_i^2$ and eigenvectors $\\mathbf{v}_i$. So the $\\mathbf{v}_i$ and $\\sigma_i$ come from a symmetric eigenvalue problem, and then $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for each positive $\\sigma_i$. These $\\mathbf{u}_i$ are automatically orthonormal, because $A\\mathbf{v}_i \\cdot A\\mathbf{v}_j = \\mathbf{v}_i^TA^TA\\mathbf{v}_j = \\sigma_j^2\\,\\mathbf{v}_i\\cdot\\mathbf{v}_j$. If $r < m$, the remaining columns of $U$ are any orthonormal completion.
+The hand computation goes through $A^TA$. Substituting the factorization, $A^TA = V\\Sigma^T\\Sigma V^T$, which is the spectral decomposition of the [symmetric matrix](!/linear-algebra/matrix/types#5) $A^TA$ with eigenvalues $\\sigma_i^2$ and eigenvectors $\\mathbf{v}_i$. So the $\\mathbf{v}_i$ and $\\sigma_i$ come from a symmetric eigenvalue problem, and then $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for each positive $\\sigma_i$. These $\\mathbf{u}_i$ are automatically orthonormal, because $A\\mathbf{v}_i \\cdot A\\mathbf{v}_j = \\mathbf{v}_i^TA^TA\\mathbf{v}_j = \\sigma_j^2\\,\\mathbf{v}_i\\cdot\\mathbf{v}_j$. If $r < m$, the remaining columns of $U$ are any orthonormal completion.
 
 Expanding the product gives the other form,
 
@@ -150,7 +150,7 @@ a sum of $r$ rank-one matrices in decreasing order of importance. Keeping the fi
 • **Rank** is the number of non-zero singular values, and the SVD is the numerically reliable way to compute it
 • **Norms**: $\\|A\\|_2 = \\sigma_1$ and $\\|A\\|_F^2 = \\sum\\sigma_i^2 = $ the sum of the squares of all entries
 • **Condition number** $\\sigma_1 / \\sigma_r$ measures how much $A$ amplifies relative errors when solving $A\\mathbf{x} = \\mathbf{b}$
-• **Four subspaces**: $\\mathbf{u}_1, \\ldots, \\mathbf{u}_r$ span the column space, $\\mathbf{u}_{r+1}, \\ldots$ the left null space, $\\mathbf{v}_1, \\ldots, \\mathbf{v}_r$ the row space, $\\mathbf{v}_{r+1}, \\ldots$ the null space, all orthonormal
+• **Four subspaces**: $\\mathbf{u}_1, \\ldots, \\mathbf{u}_r$ span the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2), $\\mathbf{u}_{r+1}, \\ldots$ the [left null space](!/linear-algebra/vector-spaces/fundamental-spaces#5), $\\mathbf{v}_1, \\ldots, \\mathbf{v}_r$ the [row space](!/linear-algebra/vector-spaces/fundamental-spaces#3), $\\mathbf{v}_{r+1}, \\ldots$ the null space, all orthonormal
 • **Pseudoinverse**: $A^+ = V\\Sigma^+U^T$, with $\\Sigma^+$ inverting the non-zero singular values; $A^+\\mathbf{b}$ is the least-squares solution of minimum length
 • **Inverse**: for square invertible $A$, $A^{-1} = V\\Sigma^{-1}U^T$ and the singular values of $A^{-1}$ are $1/\\sigma_i$
 • **Symmetric positive semidefinite $A$**: the SVD is the spectral decomposition, $U = V$ and $\\sigma_i = \\lambda_i$; for symmetric $A$ in general, $\\sigma_i = |\\lambda_i|$
@@ -168,7 +168,7 @@ a sum of $r$ rank-one matrices in decreasing order of importance. Keeping the fi
 • **Least squares**: the pseudoinverse solves overdetermined and rank-deficient systems, and the singular values show which directions are poorly determined
 • **Numerical rank and conditioning**: tiny singular values reveal near-dependence among columns that Gaussian elimination cannot see reliably
 • **Recommender systems and latent semantic analysis**: users-by-items and documents-by-terms matrices are factored into a few dominant rank-one patterns
-• **Geometry of a map**: the singular vectors and values give the exact stretching, in any dimension, for matrices that are not square and have no eigenvectors
+• **Geometry of a map**: the singular vectors and values give the exact stretching, in any [dimension](!/linear-algebra/vector-spaces/dimension#1), for matrices that are not square and have no eigenvectors
 • **Polar decomposition and Procrustes**: $A = (UV^T)(V\\Sigma V^T)$ splits any map into a rotation and a symmetric stretch, and $UV^T$ is the nearest orthogonal matrix to $A$`,
       before: ``,
       after: ``,
@@ -240,7 +240,7 @@ $$U = \\frac{1}{\\sqrt{10}}\\begin{pmatrix} 1 & 3 \\\\ 3 & -1 \\end{pmatrix}, \\
     },
     obj11: {
       title: `Forming A Transpose A`,
-      content: `The first move is to multiply $A^T$ by $A$. The frozen picture below shows it for the default preset: $A^TA = \\begin{pmatrix} 25 & 20 \\\\ 20 & 25 \\end{pmatrix}$, symmetric, with the squared column lengths on the diagonal and the dot product of the columns off it.
+      content: `The first move is to multiply $A^T$ by $A$. The frozen picture below shows it for the default preset: $A^TA = \\begin{pmatrix} 25 & 20 \\\\ 20 & 25 \\end{pmatrix}$, symmetric, with the squared column lengths on the diagonal and the [dot product](!/linear-algebra/vectors/dot-product#1) of the columns off it.
 
 Everything about the singular values and $V$ is in this matrix.`,
       before: ``,
@@ -262,7 +262,7 @@ The identity $\\sum\\sigma_i^2 = \\sum a_{ij}^2$ is the quickest check on the ar
     },
     obj13: {
       title: `From v to u`,
-      content: `The frozen picture below shows the first left singular vector: $A$ applied to $\\mathbf{v}_1 = (1, 1)/\\sqrt{2}$ gives $(3, 9)/\\sqrt{2}$, of length $\\sqrt{45}$ exactly, and dividing by $\\sigma_1$ leaves the unit vector $\\mathbf{u}_1 = (1, 3)/\\sqrt{10}$.
+      content: `The frozen picture below shows the first left singular vector: $A$ applied to $\\mathbf{v}_1 = (1, 1)/\\sqrt{2}$ gives $(3, 9)/\\sqrt{2}$, of length $\\sqrt{45}$ exactly, and dividing by $\\sigma_1$ leaves the [unit vector](!/linear-algebra/vectors/magnitude#5) $\\mathbf{u}_1 = (1, 3)/\\sqrt{10}$.
 
 The length of $A\\mathbf{v}_1$ coming out as $\\sigma_1$ is not luck: $|A\\mathbf{v}|^2 = \\mathbf{v}^TA^TA\\mathbf{v} = \\lambda$.`,
       before: ``,
@@ -308,7 +308,7 @@ Many texts avoid the completion by using the reduced SVD, with $U$ of size $m \\
       title: `A Rank-One Matrix`,
       content: `The rank-one preset $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ has singular values $5$ and $0$. The frozen picture below shows its expansion: a single term, $5\\,\\mathbf{u}_1\\mathbf{v}_1^T$ with $\\mathbf{u}_1 = \\mathbf{v}_1 = (1, 2)/\\sqrt{5}$, which is the matrix itself.
 
-The zero singular value contributes nothing, and $\\mathbf{v}_2 = (2, -1)/\\sqrt{5}$ spans the null space.`,
+The zero singular value contributes nothing, and $\\mathbf{v}_2 = (2, -1)/\\sqrt{5}$ [spans](!/linear-algebra/vector-spaces/span#1) the null space.`,
       before: ``,
       after: `A rank-one matrix is an outer product $\\sigma\\mathbf{u}\\mathbf{v}^T$, and the SVD recognizes it as such: one term and nothing else. The second column of $V$ is the direction $A$ collapses, and the second column of $U$, obtained by completion, the direction $A$ never reaches.
 

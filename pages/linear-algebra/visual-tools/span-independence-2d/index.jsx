@@ -36,9 +36,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Linear combination** &mdash; any vector of the form $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for scalars $c, d$.
+      content: `**Linear combination** &mdash; any vector of the form $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for [scalars](!/linear-algebra/vectors#1) $c, d$.
 
-**Span** &mdash; the set of all linear combinations of a collection of vectors. For two vectors in the plane it is either the whole plane, a line through the origin, or just the origin.
+**Span** &mdash; the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) of a collection of [vectors](!/linear-algebra/vectors#1). For two vectors in the plane it is either the whole plane, a line through the origin, or just the origin.
 
 **Linearly independent** &mdash; neither vector is a scalar multiple of the other; equivalently, the only way to write $c\\,\\mathbf{a} + d\\,\\mathbf{b} = \\mathbf{0}$ is $c = d = 0$.
 
@@ -61,7 +61,7 @@ Try this sequence to build intuition:
 
 &bull; Start on the **Orthogonal** preset. The parallelogram is filled, the lattice covers the plane, and the label reads span $= \\mathbb{R}^2$.
 &bull; Drag the tip of $\\mathbf{b}$ toward the line through $\\mathbf{a}$. The parallelogram thins, its area in the live card shrinks, and the moment $\\mathbf{b}$ lands on that line the fill vanishes, a dashed red span line appears, and the label switches to span $=$ line.
-&bull; Press **play** in the animation panel. $\\mathbf{b}$ orbits the origin at fixed length while the determinant traces a sine wave below; watch it cross zero exactly when $\\mathbf{b}$ is parallel or anti-parallel to $\\mathbf{a}$.
+&bull; Press **play** in the animation panel. $\\mathbf{b}$ orbits the origin at fixed length while the determinant [traces](!/linear-algebra/matrix/trace#1) a sine wave below; watch it cross zero exactly when $\\mathbf{b}$ is parallel or anti-parallel to $\\mathbf{a}$.
 
 The point: independence is not about the vectors being perpendicular or long. It is about whether they point in genuinely different directions.`,
       before: ``,
@@ -149,7 +149,7 @@ In the plane there are only three possibilities. If the two vectors point in dif
 
 The lattice layer is a finite sample of the span, the combinations with $c$ and $d$ between $-2$ and $2$. When the vectors are independent the dots fill out a slanted grid that would cover the plane if extended; when they are dependent the dots line up.
 
-For span in general dimension and its role in defining subspaces, see the [span theory page](!/linear-algebra/vector-spaces/span).`,
+For span in general [dimension](!/linear-algebra/vector-spaces/dimension#1) and its role in defining [subspaces](!/linear-algebra/vector-spaces/subspaces#1), see the [span theory page](!/linear-algebra/vector-spaces/span).`,
       before: ``,
       after: ``,
       link: '',

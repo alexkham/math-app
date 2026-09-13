@@ -1124,6 +1124,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 
 
 export async function getStaticProps(){
@@ -1947,8 +1950,31 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    geometry: demoUnitFrame({
+      svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.nearDependent],
+      caption: 'Independent, then very nearly dependent',
+      text: 'The lower pair still spans the plane, but only barely: the arrows have swung close together and the region they reach is stretched thin. Independence is not a yes-or-no fact about a picture, it is a fact about whether any direction is genuinely new, and the near case shows how little room can be left. Push the arrows together until the span collapses on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+    homogeneous: demoUnitFrame({
+      svg: spanMembershipDiagrams.dependent,
+      caption: 'A dependence relation found among the columns',
+      text: 'The elimination has produced a free column, and with it a set of weights, not all zero, that combine the vectors to give zero. That is precisely the definition failing: independence asks that the only such combination be the trivial one. Feed in your own vectors and see whether a relation appears on the',
+      href: '/linear-algebra/visual-tools/span-membership',
+      linkText: 'span membership tester',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     independenceProperties,
@@ -1969,7 +1995,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function LinearIndependencePage({seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function LinearIndependencePage({seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2007,6 +2033,8 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
+          `The algebraic tests in the next two sections are simply ways of detecting this same collapse without having to draw it.`,
         ]
     },
     {
@@ -2015,6 +2043,8 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-homogeneous'} dangerouslySetInnerHTML={{ __html: demoUnits.homogeneous }} />,
+          `A non-trivial solution is therefore not just evidence of dependence — it is the dependence relation itself, written out.`,
         ]
     },
     {

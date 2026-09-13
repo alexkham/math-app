@@ -797,6 +797,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1338,8 +1340,26 @@ const schemas = {
   },
 }
 
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Parallelism IS dependence, and the 2D span tool is the one that
+    // draws the collapse. The symbolic vector tools cannot show it.
+    parallel: demoUnitFrame({
+      svg: spanIndependenceDiagrams.dependent,
+      caption: 'One vector a multiple of the other',
+      text: 'Both arrows lie along the same line, and the region their combinations can reach has collapsed onto that line with them. Parallel is the geometric word and linearly dependent is the algebraic one, but the picture is the same picture: a second vector that adds no direction the first did not already have. Drag one arrow off the line and watch the plane come back on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+  };
+
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj6Table,
@@ -1356,7 +1376,7 @@ const schemas = {
   }
 }
    }
-export default function VectorPropertiesPage({seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas}) {
+export default function VectorPropertiesPage({seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1418,6 +1438,8 @@ export default function VectorPropertiesPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-parallel'} dangerouslySetInnerHTML={{ __html: demoUnits.parallel }} />,
+          `This is the first appearance of an idea the vector-spaces pages return to constantly: what matters is not how many vectors you have but how many directions they supply.`,
         ]
     },
     {

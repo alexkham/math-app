@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Homogeneous system** — $\\mathbf{b} = \\mathbf{0}$; every $\\det A_i$ is then $0$, and the unique solution is $\\mathbf{x} = \\mathbf{0}$.
 
-**Cost** — $n + 1$ determinants of size $n$, which grows far faster than the cost of elimination.`,
+**Cost** — $n + 1$ [determinants](!/linear-algebra/determinants#1) of size $n$, which grows far faster than the cost of elimination.`,
       before: ``,
       after: ``,
       link: '',
@@ -76,9 +76,9 @@ The first scene after the system is always $\\det A$, because everything depends
 • **System** — $A\\mathbf{x} = \\mathbf{b}$ with the unknowns still symbolic
 • **Determinant** — $\\det A$ is evaluated; a non-zero value licenses the rest
 • **Replace** — for each $i$, the matrix $A_i$ is shown with $\\mathbf{b}$ in column $i$, its determinant is evaluated, and $x_i = \\det A_i / \\det A$
-• **Done** — the solution vector fills, and $A\\mathbf{x}$ is recomputed to confirm it equals $\\mathbf{b}$
+• **Done** — the solution [vector](!/linear-algebra/vectors#1) fills, and $A\\mathbf{x}$ is recomputed to confirm it equals $\\mathbf{b}$
 
-If $\\det A = 0$ the run stops after the determinant scene. The tool does not decide between no solution and infinitely many, because Cramer's rule cannot; that question belongs to row reduction of the augmented matrix.`,
+If $\\det A = 0$ the run stops after the determinant scene. The tool does not decide between no solution and infinitely many, because Cramer's rule cannot; that question belongs to row reduction of the [augmented matrix](!/linear-algebra/linear-systems#3).`,
       before: ``,
       after: ``,
       link: '',
@@ -149,7 +149,7 @@ Cramer's rule is a theorem about the solution, not a recommended way to compute 
 • **Symbolic solutions**: when the entries are parameters rather than numbers, the rule gives each unknown as an explicit rational function of them
 • **Sensitivity**: because each $x_i$ is a ratio of determinants, the effect of perturbing one coefficient can be read off directly
 • **Theory**: it is the shortest proof that a square system with non-zero determinant has exactly one solution, and it underlies the adjugate formula for the inverse
-• **Geometry**: in the plane, $x_1$ and $x_2$ are ratios of parallelogram areas, which is where the rule came from historically
+• **Geometry**: in the plane, $x_1$ and $x_2$ are ratios of [parallelogram areas](!/linear-algebra/vectors/cross-product#3), which is where the rule came from historically
 • **The negative lesson**: it is the standard example of a correct formula that is the wrong algorithm; solvers use elimination, and the rule explains why the answer exists`,
       before: ``,
       after: ``,
@@ -226,7 +226,7 @@ The colour of $\\mathbf{b}$ is carried through the run: whenever it appears insi
     },
     obj12: {
       title: `The Determinant of A`,
-      content: `The first computation is $\\det A$, evaluated by cofactor expansion and written into its slot. Everything else divides by this number.
+      content: `The first computation is $\\det A$, evaluated by [cofactor](!/linear-algebra/determinants/cofactors#2) expansion and written into its slot. Everything else divides by this number.
 
 The frozen picture below shows the default preset's $\\det A = 7$, highlighted.`,
       before: ``,

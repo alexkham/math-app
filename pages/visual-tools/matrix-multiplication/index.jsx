@@ -548,11 +548,11 @@ export async function getStaticProps() {
 
 **Outer dimensions** — the number of rows of the left factor and the number of columns of the right factor. They are the shape of the product.
 
-**Dot product** — the sum of paired products of a row and a column of the same length. Every entry of $C$ is one dot product.
+**Dot product** — the sum of paired products of a row and a column of the same length. Every entry of $C$ is one [dot product](!/linear-algebra/vectors/dot-product#1).
 
-**Linear combination** — a weighted sum of vectors. Each column of $C$ is a linear combination of the columns of $A$, and each row of $C$ is a linear combination of the rows of $B$.
+**Linear combination** — a weighted sum of [vectors](!/linear-algebra/vectors#1). Each column of $C$ is a [linear combination](!/linear-algebra/vectors/linear-combinations#1) of the columns of $A$, and each row of $C$ is a linear combination of the rows of $B$.
 
-**Outer product** — a column times a row: an $m \\times p$ matrix of rank at most one. The product $AB$ is the sum of $n$ of them.
+**Outer product** — a column times a row: an $m \\times p$ matrix of [rank](!/linear-algebra/matrix/rank#1) at most one. The product $AB$ is the sum of $n$ of them.
 
 **Non-commutative** — $AB \\neq BA$ in general. The two products can differ in value, differ in shape, or one of them may not exist at all.`,
       before: ``,
@@ -842,7 +842,7 @@ The tool guards against the first two by construction: the rows of $B$ are linke
 
 **Graph theory**: if $M$ is the adjacency matrix of a graph, the entry $(i,j)$ of $M^k$ counts walks of length $k$ from vertex $i$ to vertex $j$.
 
-**Data analysis**: covariance matrices, projections, and the singular value decomposition are all products, and the [sum of outer products](!#sum-of-outer-products) is the form in which low-rank approximations are written.`,
+**Data analysis**: covariance matrices, projections, and the [singular value decomposition](!/linear-algebra/decompositions/svd#1) are all products, and the [sum of outer products](!#sum-of-outer-products) is the form in which low-rank approximations are written.`,
       before: ``,
       after: ``,
       link: '',

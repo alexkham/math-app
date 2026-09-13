@@ -527,15 +527,15 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Basis** &mdash; A set of two linearly independent vectors in 2D that span the entire plane. Any vector can be written uniquely as a combination of basis vectors.
+      content:`**Basis** &mdash; A set of two linearly independent [vectors](!/linear-algebra/vectors#1) in 2D that span the entire plane. Any vector can be written uniquely as a combination of [basis](!/linear-algebra/vector-spaces#2) vectors.
 
 **Change of Basis** &mdash; The process of re-expressing a vector&apos;s coordinates relative to a new basis while the vector itself remains fixed in space.
 
-**Basis Matrix B** &mdash; A $2 \\times 2$ matrix whose columns are the new basis vectors $b_1$ and $b_2$ written in standard coordinates.
+**Basis Matrix B** &mdash; A $2 \\times 2$ [matrix](!/linear-algebra/matrix#1) whose columns are the new basis vectors $b_1$ and $b_2$ written in standard coordinates.
 
 **Inverse Matrix B⁻¹** &mdash; The matrix that converts standard coordinates into coordinates relative to the new basis: $v_B = B^{-1} v_{std}$.
 
-**Determinant** &mdash; A scalar value $\\det(B)$ indicating area scaling and orientation. Zero determinant means the basis is degenerate.
+**Determinant** &mdash; A [scalar](!/linear-algebra/vectors#1) value $\\det(B)$ indicating area scaling and orientation. Zero [determinant](!/linear-algebra/determinants#1) means the basis is degenerate.
 
 **Orthonormal Basis** &mdash; A basis whose vectors are perpendicular and have unit length. For orthonormal bases, $B^{-1} = B^T$.`,
       before:``,
@@ -589,7 +589,7 @@ The decomposition equation under the coordinates reads $v = c_1 \\cdot b_1 + c_2
 
 &bull; **$v_{std}$** &mdash; coordinates in the standard basis, the raw $(x, y)$ position. These never change when you only change the basis.
 &bull; **$v_B$** &mdash; coordinates in the current basis $B$. Numbers shift whenever you drag $b_1$ or $b_2$.
-&bull; **Decomposition line** &mdash; the explicit linear combination $v = c_1 \\cdot b_1 + c_2 \\cdot b_2$, color-matched to each basis vector.
+&bull; **Decomposition line** &mdash; the explicit [linear combination](!/linear-algebra/vectors/linear-combinations#1) $v = c_1 \\cdot b_1 + c_2 \\cdot b_2$, color-matched to each basis vector.
 
 When the basis is singular, the new-basis cells show dashes and a red warning strip explains that $b_1$ and $b_2$ are linearly dependent. This is the visual cue that coordinates do not exist for this basis.`,
       before:``,
@@ -664,7 +664,7 @@ Going the other direction requires the inverse:
 
 $$v_B = B^{-1} \\, v_{std}$$
 
-For an orthonormal basis (perpendicular unit vectors), the inverse equals the transpose: $B^{-1} = B^T$. This is why rotations are so efficient computationally.
+For an orthonormal basis (perpendicular [unit vectors](!/linear-algebra/vectors/magnitude#5)), the inverse equals the transpose: $B^{-1} = B^T$. This is why rotations are so efficient computationally.
 
 The basis is valid as long as $\\det(B) \\neq 0$. If the determinant is zero, $b_1$ and $b_2$ are linearly dependent and fail to span the plane.
 

@@ -990,6 +990,8 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1453,8 +1455,26 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Hub page: one unit, on the section where the two ideas the rest
+    // of the cluster depends on are finally put together.
+    indspan: demoUnitFrame({
+      svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
+      caption: 'Enough directions, then not enough',
+      text: 'Spanning asks whether the set reaches everything; independence asks whether any of it is redundant. Above, both hold at once and the set is a basis. Below, the second arrow repeats the first: still no redundancy in what is reached, but the reach has shrunk. Pull the two conditions apart yourself on the',
+      href: '/linear-algebra/visual-tools/span-independence-2d',
+      linkText: 'span and independence explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj7Table,
@@ -1473,7 +1493,7 @@ return {
 }
    }
 
-export default function VectorSpacesPage({seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas}) {
+export default function VectorSpacesPage({seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1568,6 +1588,8 @@ export default function VectorSpacesPage({seoData, sectionsContent, introContent
           sectionsContent.obj11.content,
           <div key={'obj11-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+                  <div key={'unit-indspan'} dangerouslySetInnerHTML={{ __html: demoUnits.indspan }} />,
+          `Holding both conditions at once is rare and rigid, and that rigidity is exactly what makes a basis useful.`,
         ]
     },
     {

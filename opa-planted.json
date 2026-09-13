@@ -1,0 +1,101 @@
+{
+  "done": [
+    "vectors",
+    "vectors/basic-operations",
+    "vectors/cross-product",
+    "vectors/dot-product",
+    "vectors/linear-combinations",
+    "vectors/magnitude",
+    "vectors/properties"
+  ],
+  "units": [
+    {
+      "page": "vectors/linear-combinations",
+      "entity": "linear_combination",
+      "tool": "vector-linear-combination",
+      "fromSection": "1",
+      "diagrams": ["vectorLinCombDiagrams.add"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/linear-combinations",
+      "entity": "linear_independence",
+      "tool": "span-independence-2d",
+      "fromSection": "2",
+      "diagrams": ["spanIndependenceDiagrams.independent", "spanIndependenceDiagrams.dependent"],
+      "arrangement": "sequence"
+    },
+    {
+      "page": "vectors",
+      "entity": "vector",
+      "tool": "vector-addition",
+      "fromSection": "5",
+      "diagrams": ["vectorAdditionDiagrams.done"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/basic-operations",
+      "entity": "vector",
+      "tool": "vector-addition",
+      "fromSection": "1",
+      "diagrams": ["vectorAdditionDiagrams.done"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/basic-operations",
+      "entity": "scalar",
+      "tool": "vector-scalar-multiplication",
+      "fromSection": "4",
+      "diagrams": ["vectorScalarDiagrams.done"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/magnitude",
+      "entity": "magnitude",
+      "tool": "vector-magnitude",
+      "fromSection": "1",
+      "diagrams": ["magnitudeDiagrams.root"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/magnitude",
+      "entity": "unit_vector",
+      "tool": "vector-magnitude",
+      "fromSection": "6",
+      "diagrams": ["magnitudeDiagrams.normalize"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/dot-product",
+      "entity": "dot_product",
+      "tool": "vectors-inner-product",
+      "fromSection": "1",
+      "diagrams": ["innerProductDiagrams.done"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/dot-product",
+      "entity": "orthogonal_complement",
+      "tool": "vector-projection",
+      "fromSection": "9",
+      "diagrams": ["projectionDiagrams.scale"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/cross-product",
+      "entity": "cross_product",
+      "tool": "vector-cross-product",
+      "fromSection": "1",
+      "diagrams": ["crossProductDiagrams.determinant"],
+      "arrangement": "single"
+    },
+    {
+      "page": "vectors/properties",
+      "entity": "vector_space",
+      "tool": "span-independence-2d",
+      "fromSection": "5",
+      "diagrams": ["spanIndependenceDiagrams.dependent"],
+      "arrangement": "single"
+    }
+  ]
+}

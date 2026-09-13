@@ -41,7 +41,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Transpose** — the operation that turns an $m \\times n$ matrix $A$ into an $n \\times m$ matrix $A^T$ by swapping rows and columns: $(A^T)_{i,j} = a_{j,i}$.
+      content: `**Transpose** — the operation that turns an $m \\times n$ [matrix](!/linear-algebra/matrix#1) $A$ into an $n \\times m$ matrix $A^T$ by swapping rows and columns: $(A^T)_{i,j} = a_{j,i}$.
 
 **Main diagonal** — the entries $a_{i,i}$ where row index equals column index. Defined fully only for square matrices.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Diagonal reflection** — the geometric view of transposition as a mirror across the main diagonal of $A$. For non-square $A$, this becomes an abstract reflection axis.
 
-**Symmetric matrix** — a square matrix that equals its own transpose: $A = A^T$. Equivalently, $a_{i,j} = a_{j,i}$ for all $i, j$.
+**Symmetric matrix** — a [square matrix](!/linear-algebra/matrix/types#1) that equals its own transpose: $A = A^T$. Equivalently, $a_{i,j} = a_{j,i}$ for all $i, j$.
 
 **Involution** — an operation that undoes itself. Transpose is involutive: $(A^T)^T = A$.`,
       before: ``,
@@ -117,9 +117,9 @@ Try a $3 \\times 4$ matrix with the diagonal reflection method to see the abstra
 
 $$\\left(A^T\\right)_{i,j} = a_{j,i}$$
 
-Geometrically, transposition is reflection across the main diagonal. Algebraically, it converts row vectors into column vectors and vice versa. The shape always flips: if $A$ is wide, $A^T$ is tall, and vice versa.
+Geometrically, transposition is reflection across the main diagonal. Algebraically, it converts row [vectors](!/linear-algebra/vectors#1) into column vectors and vice versa. The shape always flips: if $A$ is wide, $A^T$ is tall, and vice versa.
 
-Transpose has no shape restrictions — any matrix can be transposed, unlike addition (which requires matched shapes) or multiplication (which requires compatible inner dimensions).
+Transpose has no shape restrictions — any matrix can be transposed, unlike addition (which requires matched shapes) or multiplication (which requires compatible inner [dimensions](!/linear-algebra/vector-spaces/dimension#1)).
 
 For comprehensive coverage of matrix operations theory, see **matrix operations**.`,
       before: ``,
@@ -132,7 +132,7 @@ For comprehensive coverage of matrix operations theory, see **matrix operations*
 
 • **Involution**: $(A^T)^T = A$ — transposing twice returns the original
 • **Sum**: $(A + B)^T = A^T + B^T$ — transpose distributes over addition
-• **Scalar multiplication**: $(kA)^T = k A^T$ — scalars pass through
+• **Scalar multiplication**: $(kA)^T = k A^T$ — [scalars](!/linear-algebra/vectors#1) pass through
 • **Product (order reverses)**: $(AB)^T = B^T A^T$ — note the swap, which mirrors how shape compatibility flips
 • **Inverse and transpose commute**: $(A^{-1})^T = (A^T)^{-1}$ for invertible $A$
 • **Determinant invariance**: $\\det(A^T) = \\det(A)$ for square $A$
@@ -146,7 +146,7 @@ The product rule is the trickiest: $(AB)^T \\neq A^T B^T$ in general. The order 
       title: `Symmetric and Skew-Symmetric Matrices`,
       content: `Two important classes of square matrices are defined entirely through the transpose.
 
-A matrix is **symmetric** if $A = A^T$, meaning $a_{i,j} = a_{j,i}$ for all $i, j$. Symmetric matrices have all the properties one would expect from "matrices that look the same after a mirror reflection": real eigenvalues, orthogonal eigenvectors, and a guaranteed orthogonal diagonalization.
+A matrix is **symmetric** if $A = A^T$, meaning $a_{i,j} = a_{j,i}$ for all $i, j$. Symmetric matrices have all the properties one would expect from "matrices that look the same after a mirror reflection": real [eigenvalues](!/linear-algebra/eigen#2), orthogonal [eigenvectors](!/linear-algebra/eigen#2), and a guaranteed orthogonal diagonalization.
 
 A matrix is **skew-symmetric** (or antisymmetric) if $A^T = -A$, meaning $a_{i,j} = -a_{j,i}$. Skew-symmetric matrices have zeros on the main diagonal, since $a_{i,i} = -a_{i,i}$ forces $a_{i,i} = 0$.
 

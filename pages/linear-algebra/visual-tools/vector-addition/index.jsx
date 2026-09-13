@@ -611,7 +611,7 @@ export async function getStaticProps(){
 • Set the shared length of $u$ and $v$ with the **Dimensions** stepper — the number of components ranges from 1 to 5
 • Click play on the scene player to step through each component of $w$, or use the speed selector to slow down or speed up the animation
 
-The hover **?** icon next to the dimensions label explains why $u$ and $v$ must have the same length. Because the operation is component-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and length alone.`,
+The hover **?** icon next to the [dimensions](!/linear-algebra/vector-spaces/dimension#1) label explains why $u$ and $v$ must have the same length. Because the operation is component-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and length alone.`,
       before: ``,
       after: ``,
       link: '',
@@ -690,7 +690,7 @@ Vector addition satisfies the same algebraic properties as ordinary addition:
 • **Identity**: $u + 0 = u$, where $0$ is the zero vector of the same length
 • **Inverse**: $u + (-u) = 0$
 
-These four properties are part of what makes $\\mathbb{R}^n$ a vector space. Subtraction is neither commutative nor associative, just like with scalars.`,
+These four properties are part of what makes $\\mathbb{R}^n$ a [vector space](!/linear-algebra/vector-spaces#1). Subtraction is neither commutative nor associative, just like with [scalars](!/linear-algebra/vectors#1).`,
       before: ``,
       after: ``,
       link: '',
@@ -713,7 +713,7 @@ For comparison with operations between vectors and matrices, see **matrix-vector
       content: `Even though vector addition is among the simplest vector operations, a few mistakes appear regularly.
 
 • **Trying to add vectors of different lengths** — a vector in $\\mathbb{R}^2$ cannot be added to a vector in $\\mathbb{R}^3$ even if you "pad with zeros" informally
-• **Confusing vector addition with the dot product** — vector addition returns a vector; the dot product returns a scalar
+• **Confusing vector addition with the dot product** — vector addition returns a vector; the [dot product](!/linear-algebra/vectors/dot-product#1) returns a scalar
 • **Mixing row and column orientations carelessly** — although the component-wise rule is the same, in matrix-vector contexts a row vector and a column vector are not interchangeable
 • **Forgetting that subtraction is not commutative** — $u - v \\neq v - u$ in general; in fact $u - v = -(v - u)$
 • **Treating the zero vector as a scalar** — adding the scalar $0$ to a vector is meaningless; you must add the zero vector of matching length`,

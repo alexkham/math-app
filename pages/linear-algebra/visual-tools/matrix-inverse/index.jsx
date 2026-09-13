@@ -35,9 +35,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Inverse** — the matrix $A^{-1}$ with $A A^{-1} = A^{-1} A = I$. It exists exactly when $\\det A \\neq 0$, and then it is unique.
+      content: `**Inverse** — the [matrix](!/linear-algebra/matrix#1) $A^{-1}$ with $A A^{-1} = A^{-1} A = I$. It exists exactly when $\\det A \\neq 0$, and then it is unique.
 
-**Minor** — $M_{i,j}$, the determinant of the submatrix left after striking row $i$ and column $j$ of $A$.
+**Minor** — $M_{i,j}$, the [determinant](!/linear-algebra/determinants#1) of the submatrix left after striking row $i$ and column $j$ of $A$.
 
 **Cofactor** — $C_{i,j} = (-1)^{i+j} M_{i,j}$, the minor with the checkerboard sign attached.
 
@@ -47,7 +47,7 @@ export async function getStaticProps(){
 
 **Adjugate formula** — $A^{-1} = \\dfrac{\\operatorname{adj} A}{\\det A}$.
 
-**Singular matrix** — a square matrix with $\\det A = 0$; it has no inverse.
+**Singular matrix** — a [square matrix](!/linear-algebra/matrix/types#1) with $\\det A = 0$; it has no inverse.
 
 **Row reduction** — the other standard route: reduce $[A \\mid I]$ to $[I \\mid A^{-1}]$ by row operations. It scales to any size; the adjugate formula shows the structure.`,
       before: ``,
@@ -85,7 +85,7 @@ At $3 \\times 3$ that is $9 + 1 + 1 + 9$ steps plus the intro and outro; at $2 \
       title: `Reading the Scene Player`,
       content: `Each scene combines highlights, arrows, and a caption.
 
-• In phase 1, the pivot entry $a_{i,j}$ is highlighted primary, the rest of its row and column are greyed and lined through, the surviving block is secondary, and the destination cofactor is accent; one arrow runs from the pivot to its cofactor
+• In phase 1, the [pivot](!/linear-algebra/linear-systems/echelon-form#4) entry $a_{i,j}$ is highlighted primary, the rest of its row and column are greyed and lined through, the surviving block is secondary, and the destination cofactor is accent; one arrow runs from the pivot to its cofactor
 • In phase 2, every cofactor is secondary and every entry of the adjugate accent, with the caption describing the mirror swap
 • In phase 3, the first row of $A$ is primary, the first row of the cofactor matrix secondary, and the $\\det A$ slot accent
 • In phase 4, the active adjugate entry is primary, the $\\det A$ slot secondary, and the destination entry of $A^{-1}$ accent, with arrows from both
@@ -149,15 +149,15 @@ For the full treatment, including properties of inverses and the row reduction m
     },
     obj7: {
       title: `Why It Matters`,
-      content: `The inverse is the matrix that undoes a linear transformation, and that idea appears everywhere.
+      content: `The inverse is the matrix that undoes a [linear transformation](!/linear-algebra/transformations#1), and that idea appears everywhere.
 
 • **Solving linear systems**: $A\\mathbf{x} = \\mathbf{b}$ becomes $\\mathbf{x} = A^{-1}\\mathbf{b}$; in practice the system is solved directly, but the inverse is the concept behind it
-• **Change of basis**: converting coordinates back requires the inverse of the change-of-basis matrix
+• **Change of basis**: converting coordinates back requires the inverse of the change-of-[basis](!/linear-algebra/vector-spaces#2) matrix
 • **Undoing transformations**: in graphics and robotics, the inverse of a rotation, scaling or shear returns an object to where it started
 • **Diagonalization**: $A = P D P^{-1}$ needs $P^{-1}$ to move between the standard basis and the eigenbasis
 • **Cramer's rule**: the adjugate formula, applied to $\\mathbf{x} = A^{-1}\\mathbf{b}$, gives each unknown as a ratio of determinants
-• **Statistics and least squares**: the normal equations involve $(A^T A)^{-1}$, and covariance matrices are inverted to form precision matrices
-• **Invertibility as a test**: whether $\\det A$ is zero decides whether a system has a unique solution, whether a transformation is reversible, and whether a set of vectors is a basis`,
+• **Statistics and least squares**: the [normal equations](!/linear-algebra/orthogonality/least-squares#3) involve $(A^T A)^{-1}$, and covariance matrices are inverted to form precision matrices
+• **Invertibility as a test**: whether $\\det A$ is zero decides whether a system has a unique solution, whether a transformation is reversible, and whether a set of [vectors](!/linear-algebra/vectors#1) is a basis`,
       before: ``,
       after: ``,
       link: '',

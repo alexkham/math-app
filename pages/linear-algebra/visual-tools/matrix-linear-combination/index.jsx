@@ -37,19 +37,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Linear combination** — an expression $\\alpha A + \\beta B$ that scales each matrix by a scalar and adds the results. More generally, $c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$.
+      content: `**Linear combination** — an expression $\\alpha A + \\beta B$ that scales each matrix by a [scalar](!/linear-algebra/vectors#1) and adds the results. More generally, $c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$.
 
 **Scalar coefficient** — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each matrix in the combination.
 
-**Same-shape requirement** — all matrices in a linear combination must share identical dimensions so the additions are defined.
+**Same-shape requirement** — all matrices in a linear combination must share identical [dimensions](!/linear-algebra/vector-spaces/dimension#1) so the additions are defined.
 
 **Result shape** — the linear combination has the same shape as the operands.
 
-**Span** — the set of all linear combinations of a fixed collection of matrices.
+**Span** — the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) of a fixed collection of matrices.
 
 **Linear independence** — a property of a collection: no matrix in it can be written as a linear combination of the others.
 
-**Vector space of matrices** — the set of all $m \\times n$ matrices forms a vector space under matrix addition and scalar multiplication; linear combinations are its native operation.`,
+**Vector space of matrices** — the set of all $m \\times n$ matrices forms a [vector space](!/linear-algebra/vector-spaces#1) under [matrix addition](!/linear-algebra/matrix/operations#1) and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
       link: '',
@@ -117,7 +117,7 @@ $$C = c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$$
 
 All matrices must share the same shape, and the result inherits that shape. The operation is built from two simpler ones: scale each matrix by its coefficient, then add the scaled matrices entry by entry.
 
-Linear combinations are the native operation of any vector space — matrices, vectors, polynomials, and functions all support them. For comprehensive theory, see **matrix operations**.`,
+Linear combinations are the native operation of any vector space — matrices, [vectors](!/linear-algebra/vectors#1), polynomials, and functions all support them. For comprehensive theory, see **matrix operations**.`,
       before: ``,
       after: ``,
       link: '',
@@ -142,7 +142,7 @@ The structural fact behind all of this is that the set of $m \\times n$ matrices
       title: `Why It Matters`,
       content: `Linear combinations are the foundation on which most of linear algebra is built.
 
-• **Span and basis**: the span of a set of matrices is the set of all their linear combinations; a basis is a linearly independent set whose span is the whole space
+• **Span and basis**: the span of a set of matrices is the set of all their linear combinations; a [basis](!/linear-algebra/vector-spaces#2) is a linearly independent set whose span is the whole space
 • **Linear independence**: testing whether $c_1 A_1 + \\cdots + c_n A_n = 0$ forces all $c_i = 0$
 • **Solving linear systems**: a system $Ax = b$ asks whether $b$ is a linear combination of the columns of $A$
 • **Subspaces**: a subspace is a set closed under linear combinations

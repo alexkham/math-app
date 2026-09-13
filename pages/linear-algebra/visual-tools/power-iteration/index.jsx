@@ -56,7 +56,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix and a starting vector, then watch the estimates converge, or fail to.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) and a starting [vector](!/linear-algebra/vectors#1), then watch the estimates converge, or fail to.
 
 • Use the **Preset** pills for seven matrices: a classic fast case, a faster one, a slow one, a negative dominant eigenvalue, a $3 \\times 3$, a tie between $1$ and $-1$, and a rotation with complex eigenvalues
 • Use the **Size** stepper for $2 \\times 2$ or $3 \\times 3$, and the **steps** stepper for how many iterations to run, from one to fifteen
@@ -64,7 +64,7 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of why repeated multiplication finds the dominant eigenvector
 • Press play or step manually; the step log on the right keeps every estimate
 
-The final scene compares the last estimate with the exact dominant eigenvalue from the characteristic polynomial, reports the error, and gives the convergence ratio $|\\lambda_2 / \\lambda_1|$ that explains how fast the estimates moved.`,
+The final scene compares the last estimate with the exact dominant eigenvalue from the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2), reports the error, and gives the convergence ratio $|\\lambda_2 / \\lambda_1|$ that explains how fast the estimates moved.`,
       before: ``,
       after: ``,
       link: '',
@@ -117,7 +117,7 @@ Shuffle produces integer matrices with small integer eigenvalues; some will have
     },
     obj5: {
       title: `Why It Works`,
-      content: `Suppose $A$ has eigenvalues $|\\lambda_1| > |\\lambda_2| \\geq \\cdots \\geq |\\lambda_n|$ with eigenvectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_n$, and expand the start vector in that basis:
+      content: `Suppose $A$ has eigenvalues $|\\lambda_1| > |\\lambda_2| \\geq \\cdots \\geq |\\lambda_n|$ with eigenvectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_n$, and expand the start vector in that [basis](!/linear-algebra/vector-spaces#2):
 
 $$\\mathbf{x}_0 = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$$
 
@@ -145,7 +145,7 @@ Two things can go wrong. If $c_1 = 0$, the start has no $\\mathbf{v}_1$ componen
 • **Symmetric matrices** converge in the eigenvalue estimate twice as fast if the Rayleigh quotient is used, with error $|\\lambda_2 / \\lambda_1|^{2k}$
 • **Cost per step** is one matrix-vector product, which is why it scales to enormous sparse matrices
 • **Inverse iteration** on $(A - sI)^{-1}$ finds the eigenvalue nearest $s$, and converges fast when $s$ is a good guess
-• **Does not need** the characteristic polynomial, a determinant, or any factorization of $A$`,
+• **Does not need** the characteristic polynomial, a [determinant](!/linear-algebra/determinants#1), or any factorization of $A$`,
       before: ``,
       after: ``,
       link: '',
