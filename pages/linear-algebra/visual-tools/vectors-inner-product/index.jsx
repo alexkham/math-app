@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import InnerProductWrapper from '../../../../app/components/linear-algebra copy/matrix/InnerProductWrapper'
 import innerProductDiagrams from '../../../../app/components/linear-algebra copy/matrix/innerProductDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -48,7 +50,7 @@ export async function getStaticProps(){
 **Inner product space** — a vector space equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -63,7 +65,7 @@ export async function getStaticProps(){
 The point of having one tool for both scenarios is to make the unity explicit: same operation, different operands.`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `The Vectors Scenario`,
@@ -77,7 +79,7 @@ The point of having one tool for both scenarios is to make the unity explicit: s
 This is the textbook dot product, broken into its $n$ pairwise products.`,
       before: ``,
       after: ``,
-      link: '#vectors-scenario',
+      link: '',
     },
     obj3: {
       title: `The Matrices Scenario`,
@@ -91,7 +93,7 @@ This is the textbook dot product, broken into its $n$ pairwise products.`,
 The Frobenius inner product is exactly the dot product of the matrices "flattened" into long vectors of length $m \\times n$.`,
       before: ``,
       after: ``,
-      link: '#matrices-scenario',
+      link: '',
     },
     obj4: {
       title: `Reading the Running Sum`,
@@ -105,7 +107,7 @@ The Frobenius inner product is exactly the dot product of the matrices "flattene
 This running sum is the bridge between the visual pairing (highlights and arrows on the canvas) and the algebraic formula. By the end of the animation, you have seen every term in the sum named, paired, and counted.`,
       before: ``,
       after: ``,
-      link: '#reading-the-running-sum',
+      link: '',
     },
     obj5: {
       title: `What an Inner Product Is`,
@@ -122,7 +124,7 @@ Both formulas implement the same idea: walk through every pair of corresponding 
 For comprehensive theory, see **inner product spaces**.`,
       before: ``,
       after: ``,
-      link: '#what-an-inner-product-is',
+      link: '',
     },
     obj6: {
       title: `Key Properties`,
@@ -136,7 +138,7 @@ For comprehensive theory, see **inner product spaces**.`,
 From these four properties everything else follows — norms ($\\|u\\| = \\sqrt{\\langle u, u \\rangle}$), angles ($\\cos\\theta = \\langle u, v \\rangle / (\\|u\\| \\|v\\|)$), orthogonality ($\\langle u, v \\rangle = 0$), and projections.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj7: {
       title: `Why It Matters`,
@@ -151,7 +153,7 @@ From these four properties everything else follows — norms ($\\|u\\| = \\sqrt{
 The Frobenius inner product extends all of this to matrices — matrix norms, matrix angles, orthogonal matrix decompositions, and the trace formula $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$.`,
       before: ``,
       after: ``,
-      link: '#why-it-matters',
+      link: '',
     },
     obj8: {
       title: `Worked Example`,
@@ -166,7 +168,7 @@ $$\\langle A, B \\rangle_F = (1)(0) + (2)(1) + (3)(-1) + (4)(2) = 0 + 2 - 3 + 8 
 In both cases, the calculation is "pair, multiply, sum" — no row-column gymnastics, no transposition. Set the visualizer to length 3 for the vector case or to $2 \\times 2$ for the matrix case and step through to see the same arithmetic animated.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj9: {
       title: `Common Mistakes`,
@@ -179,7 +181,7 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
 • **Mixing up "inner" and "outer"** — outer product takes two vectors and returns a matrix; inner product takes two vectors and returns a scalar`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
@@ -187,20 +189,20 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
 
 **Frobenius inner product** — the matrix version; the matrices scenario of this tool.
 
-**Outer product** — the dual operation that takes two vectors and returns a matrix.
+[Outer product](!/linear-algebra/visual-tools/vector-outer-product) — the dual operation that takes two vectors and returns a matrix.
 
-**Norm** — the length of a vector or matrix, defined through the inner product as $\\|x\\| = \\sqrt{\\langle x, x \\rangle}$.
+[Norm](!/linear-algebra/visual-tools/vector-magnitude) — the length of a vector or matrix, defined through the inner product as $\\|x\\| = \\sqrt{\\langle x, x \\rangle}$.
 
 **Orthogonality** — the condition $\\langle u, v \\rangle = 0$, central to Gram-Schmidt and orthogonal decompositions.
 
-**Projection** — the component of one vector along another, computed with the inner product.
+[Projection](!/linear-algebra/visual-tools/vector-projection) — the component of one vector along another, computed with the inner product.
 
 **Cauchy-Schwarz inequality** — $|\\langle u, v \\rangle| \\leq \\|u\\| \\|v\\|$, a universal bound on inner products.
 
-**Matrix multiplication** — uses inner products of rows and columns as its building block.`,
+[Matrix multiplication](!/visual-tools/matrix-multiplication) — uses inner products of rows and columns as its building block.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `The Opening Scene: Two Vectors, One Number`,
@@ -395,6 +397,7 @@ The operation is symmetric, $\langle \mathbf{u}, \mathbf{v} \rangle = \langle \m
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-vectors-inner-product'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -416,7 +419,7 @@ The operation is symmetric, $\langle \mathbf{u}, \mathbf{v} \rangle = \langle \m
   }
 }
 
-export default function InnerProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
+export default function InnerProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -540,6 +543,9 @@ export default function InnerProductVisualizer({ seoData, sectionsContent, state
      variant="light"
    /> */}
       <br />
+      <RelatedTools tools={relatedTools}/>
+      <br/>
+      <br/>
       <Sections sections={genericSections}/>
       <br />
       <br />

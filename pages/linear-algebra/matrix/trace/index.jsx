@@ -939,6 +939,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1572,29 +1573,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the trace of a matrix?",
-    answer: "The trace of an n × n matrix is the sum of its main diagonal entries: tr(A) = a₁₁ + a₂₂ + ⋯ + aₙₙ. It is defined only for square matrices. The trace of the identity matrix is n, and the trace of the zero matrix is 0.",
-    sectionId: "1"
+    question: "Is $\\operatorname{tr}(ABC)$ the same as $\\operatorname{tr}(BAC)$?",
+    answer: "No, and this is the most over-applied rule on the topic. The cyclic property permits rotation only, moving the front factor to the back: $\\operatorname{tr}(ABC) = \\operatorname{tr}(BCA) = \\operatorname{tr}(CAB)$. Swapping two adjacent factors, as $BAC$ does, is a different move and generally changes the value. The two forms look almost identical written down.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How is the trace related to eigenvalues?",
-    answer: "The trace of a matrix equals the sum of all its eigenvalues, counted with algebraic multiplicity. This connects a trivially computable quantity — adding diagonal entries — to spectral information that normally requires solving the characteristic polynomial. The determinant similarly equals the product of the eigenvalues.",
-    sectionId: "5"
+    question: "Is $\\operatorname{tr}(A^{T}B)$ a number or a matrix?",
+    answer: "A number. The product $A^{T}B$ is itself a matrix, and the trace is exactly what collapses it to a single scalar by summing the diagonal. Dropping the operator turns a scalar quantity into an array with nothing visibly wrong on the page, which makes it an easy error to carry through a derivation unnoticed.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the cyclic property of the trace?",
-    answer: "The trace is invariant under cyclic permutations of a matrix product: tr(AB) = tr(BA), and more generally tr(ABC) = tr(BCA) = tr(CAB). Only cyclic reorderings are valid — swapping two adjacent factors changes the trace in general. This property also implies the trace is unchanged by similarity transformations.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "What is the Frobenius inner product?",
-    answer: "The Frobenius inner product of two n × n matrices A and B is tr(AᵀB), which equals the sum of all entry-by-entry products. It is the dot product of the matrices viewed as vectors of n² entries. The associated Frobenius norm is the square root of tr(AᵀA).",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "Why is the trace a similarity invariant?",
-    answer: "For any invertible matrix P, tr(P⁻¹AP) = tr(A). This follows directly from the cyclic property. Since similar matrices represent the same linear transformation in different bases, the trace is a property of the transformation itself, independent of the chosen coordinate system.",
-    sectionId: "6"
+    question: "Why is $\\operatorname{tr}$ set in upright type rather than italics?",
+    answer: "The roman type marks it as an operator name rather than a product of two variables $t$ and $r$, the same convention that sets $\\det$ and $\\operatorname{rank}$ upright. Spellings vary by field: physics capitalises it as $\\operatorname{Tr}$, while German and older Russian texts write $\\operatorname{sp}$, from the word Spur.",
+    sectionId: "notation"
   }
 }
 
@@ -1669,19 +1660,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -1829,6 +1807,22 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
           </DiagramFrame>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrix Trace FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -1898,12 +1892,6 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

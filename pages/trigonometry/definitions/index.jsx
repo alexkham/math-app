@@ -42,29 +42,6 @@ export async function getStaticProps() {
 Each definition includes an intuitive explanation, key properties, worked examples where applicable, and links to the detailed lesson page where the concept is developed further. Use the search bar to filter terms or the category pills above to jump to a specific section.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are the basic trigonometry terms I need to know?",
-      answer: "The foundational trigonometry terms include angle, degree, radian, sine, cosine, tangent, and their reciprocals (cosecant, secant, cotangent). You also need to understand right triangle sides (hypotenuse, opposite, adjacent) and the unit circle, which connects angle measurement to function values."
-    },
-    obj2: {
-      question: "What is the difference between a degree and a radian?",
-      answer: "A degree divides a full rotation into 360 equal parts, while a radian is the angle formed when the arc length equals the radius. A full rotation is 360 degrees or 2pi radians. Radians are required for calculus formulas and the arc length equation s = r times theta."
-    },
-    obj3: {
-      question: "What are the six trigonometric functions?",
-      answer: "The six trigonometric functions are sine, cosine, tangent, cosecant, secant, and cotangent. Sine, cosine, and tangent are defined as ratios of sides in a right triangle (SOH-CAH-TOA), and cosecant, secant, and cotangent are their respective reciprocals."
-    },
-    obj4: {
-      question: "What do amplitude, period, and phase shift mean?",
-      answer: "Amplitude is the maximum vertical distance from the midline of a sinusoidal graph. Period is the horizontal length of one complete cycle. Phase shift is the horizontal displacement from the standard starting position. Together they describe the shape and position of a trigonometric graph."
-    },
-    obj5: {
-      question: "What is a reference angle in trigonometry?",
-      answer: "A reference angle is the acute angle between the terminal side of a given angle and the x-axis, always between 0 and 90 degrees. It simplifies evaluation of trigonometric functions by reducing any angle to its first-quadrant equivalent, then applying the appropriate sign based on the quadrant."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -129,25 +106,11 @@ Each definition includes an intuitive explanation, key properties, worked exampl
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       trigonometryTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -165,7 +128,6 @@ Each definition includes an intuitive explanation, key properties, worked exampl
 
 export default function TrigonometryDefinitionsPage({ 
   trigonometryTermsList, 
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -201,10 +163,6 @@ export default function TrigonometryDefinitionsPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
 
       {/* <GenericNavbar /> */}

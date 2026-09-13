@@ -796,6 +796,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1247,39 +1248,19 @@ These ten properties are not specific to vectors in $\\mathbb{R}^n$ — they are
 
 const faqQuestions = {
   obj1: {
-    question: "What is the magnitude of a vector?",
-    answer: "Magnitude is the length of a vector: ‖v‖ = √(v₁² + v₂² + ... + vₙ²). It's always non-negative, zero only for the zero vector. Under scalar multiplication: ‖cv‖ = |c|‖v‖. Under addition: ‖a + b‖ ≤ ‖a‖ + ‖b‖ (triangle inequality).",
-    sectionId: "1"
+    question: "Is the zero vector parallel or orthogonal to other vectors?",
+    answer: "Both, by convention. Neither is forced by geometry, since $\\mathbf{0}$ has no direction to align or oppose, but each has a computation behind it: $\\mathbf{0} = 0\\mathbf{v}$ satisfies the definition of parallel, and $\\mathbf{0} \\cdot \\mathbf{v} = 0$ satisfies orthogonal. The definitions were written to admit it so that theorems need no exclusion clause.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the direction of a vector?",
-    answer: "Direction is which way a vector points—its orientation in space. It's captured by the unit vector v/‖v‖. In ℝ² it can be an angle; in higher dimensions, use the unit vector. The zero vector has no direction since ‖0‖ = 0 makes normalization undefined.",
-    sectionId: "2"
+    question: "Does $\\mathbf{a} \\parallel \\mathbf{b}$ include vectors pointing opposite ways?",
+    answer: "Yes. The definition allows any scalar multiple, negative ones included, so a vector and its reverse are parallel. The symbol records no distinction between the two cases, which is why the opposite-pointing case needs the separate word anti-parallel. Some texts do reserve $\\parallel$ for the positive case, so check the convention in use.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the dimension of a vector?",
-    answer: "Dimension is the number of components n in a vector from ℝⁿ. Vectors in ℝ² have 2 components, in ℝ³ have 3, etc. Vectors from different dimensions cannot be added or compared—their component counts don't match.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "When are two vectors equal?",
-    answer: "Vectors a and b are equal when every corresponding component matches: aᵢ = bᵢ for all i. There's no partial equality—if even one component differs, the vectors are unequal. Equal vectors have the same magnitude and direction.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What does it mean for vectors to be parallel?",
-    answer: "Vectors a and b are parallel when a = cb for some scalar c. If c > 0, same direction; if c < 0, opposite directions (anti-parallel). In ℝ³, a × b = 0 iff a ∥ b. The zero vector is parallel to everything by convention.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What does it mean for vectors to be orthogonal?",
-    answer: "Vectors are orthogonal (perpendicular) when their dot product equals zero: a · b = 0. This means 90° angle in ℝ² and ℝ³. The zero vector is orthogonal to every vector. Orthogonality means zero projection—no alignment.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What are the algebraic properties of vectors?",
-    answer: "Addition: commutative, associative, identity (0), inverses (-v). Scalar multiplication: associative, identity (1), two distributive laws. These ten properties are the vector space axioms—any structure satisfying them is a vector space.",
-    sectionId: "7"
+    question: "When does the ratio test for parallel vectors break down?",
+    answer: "Whenever a component is zero, because the test divides by it. Comparing $\\frac{a_1}{b_1} = \\frac{a_2}{b_2}$ works only when no denominator vanishes, yet $(0, 3)$ and $(0, 6)$ are plainly parallel while the first ratio cannot even be written. Fall back on the definition and look for a scalar $c$ with $\\mathbf{a} = c\\mathbf{b}$.",
+    sectionId: "notation"
   }
 }
 
@@ -1355,19 +1336,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -1489,6 +1457,22 @@ export default function VectorPropertiesPage({seoData, sectionsContent, introCon
           </DiagramFrame>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Vector Properties FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
@@ -1606,12 +1590,6 @@ export default function VectorPropertiesPage({seoData, sectionsContent, introCon
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

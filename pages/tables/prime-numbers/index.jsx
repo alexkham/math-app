@@ -664,29 +664,6 @@ export async function getStaticProps(){
 }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a prime number?",
-      answer: "A prime number is a positive integer greater than 1 whose only positive divisors are 1 and itself. The first ten primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by convention because it has only one divisor."
-    },
-    obj2: {
-      question: "How can you tell if a number is prime?",
-      answer: "Try dividing the number by every integer from 2 up to its square root. If any divides evenly, the number is composite. Otherwise it is prime. Faster shortcuts: every prime greater than 5 ends in 1, 3, 7, or 9, and every prime greater than 3 is congruent to 1 or 5 modulo 6."
-    },
-    obj3: {
-      question: "How many prime numbers are there?",
-      answer: "There are infinitely many primes, but they thin out as numbers grow. There are 25 primes under 100, 168 primes under 1,000 (the range covered by this table), 1,229 primes under 10,000, and 9,592 primes under 100,000. The prime counting function pi(n) grows roughly like n divided by the natural log of n."
-    },
-    obj4: {
-      question: "What are twin primes?",
-      answer: "Twin primes are pairs of primes that differ by 2, such as (3, 5), (11, 13), (17, 19), and (29, 31). Whether there are infinitely many twin prime pairs is one of the most famous open problems in number theory. The twin prime conjecture is widely believed but unproven."
-    },
-    obj5: {
-      question: "Are there infinitely many primes?",
-      answer: "Yes. Euclid proved it around 300 BC: suppose only finitely many primes existed. Their product plus 1 would not be divisible by any of them (it leaves remainder 1), so either that number is itself a new prime or has a prime factor outside the original list. Either way, the assumption of finitely many primes leads to a contradiction."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -748,19 +725,6 @@ export async function getStaticProps(){
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -768,7 +732,6 @@ export async function getStaticProps(){
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
           seoData: {
         title: "Prime Numbers Table 1-1000 & Tool | Learn Math Class",
@@ -785,7 +748,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, schemas}) {
 
     
   const genericSections=[
@@ -979,12 +942,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

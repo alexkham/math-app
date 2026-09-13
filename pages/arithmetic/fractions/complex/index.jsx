@@ -696,6 +696,7 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1058,53 +1059,23 @@ Mixing up which fraction to flip leads to inverted answers. In $\\frac{a}{b} \\d
 
 const faqQuestions = {
   obj1: {
-    question: "What is a complex fraction?",
-    answer: "A complex fraction has a fraction in its numerator, denominator, or both. Examples: (1/2)/3, 4/(2/5), or (3/4)/(5/6). The main fraction bar separates the overall numerator from the overall denominator.",
-    sectionId: "1"
+    question: "Which method is better, division or the LCD?",
+    answer: "It depends on the shape of the fraction. Division is quickest when the numerator and denominator are each a single fraction, since it is one flip and multiply. The LCD method wins when either part contains a sum or difference, because clearing every internal denominator at once avoids combining those terms first and then dividing.",
+    sectionId: "3"
   },
   obj2: {
-    question: "How do you simplify a complex fraction using division?",
-    answer: "Treat the main fraction bar as division. For (3/4)/(5/6), rewrite as 3/4 ÷ 5/6, then multiply by the reciprocal: 3/4 × 6/5 = 18/20 = 9/10.",
-    sectionId: "2"
+    question: "Which fraction gets flipped when you divide?",
+    answer: "Only the divisor, never the dividend. In $\\frac{a}{b} \\div \\frac{c}{d}$ the second fraction turns over, so $\\frac{2}{3} \\div \\frac{4}{5}$ becomes $\\frac{2}{3} \\times \\frac{5}{4}$. Flipping the wrong one, or flipping both, gives an inverted answer that still looks plausible, which is what makes the error easy to miss.",
+    sectionId: "7"
   },
   obj3: {
-    question: "How do you simplify a complex fraction using LCD?",
-    answer: "Find the LCD of all internal denominators, then multiply both the overall numerator and denominator by this LCD. For (1/2)/(3/4): LCD is 4, so multiply to get (1/2 × 4)/(3/4 × 4) = 2/3.",
+    question: "Does the LCD multiply only the inner fractions?",
+    answer: "No, it must multiply the entire overall numerator and the entire overall denominator. The method works because multiplying by a form of $1$ leaves the value unchanged while clearing internal denominators, and that only holds if both halves are treated alike. Applying it to some terms and not others changes the fraction itself.",
     sectionId: "3"
   },
   obj4: {
-    question: "Which method is better for complex fractions?",
-    answer: "The division method is usually simpler for basic complex fractions. The LCD method is more efficient when the numerator or denominator contains sums or differences of fractions.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "How do you simplify complex fractions with addition or subtraction?",
-    answer: "First combine the fractions in the numerator or denominator using common denominators. Then simplify the resulting complex fraction. For (1/2 + 1/3)/(1/4): first get 5/6 in the numerator, then compute (5/6)/(1/4) = 10/3.",
-    sectionId: "4"
-  },
-  obj6: {
-    question: "How do you handle mixed numbers in complex fractions?",
-    answer: "Convert mixed numbers to improper fractions first. For (2½)/(1¼): convert to (5/2)/(5/4), then simplify: 5/2 × 4/5 = 20/10 = 2.",
-    sectionId: "5"
-  },
-  obj7: {
-    question: "What is a nested complex fraction?",
-    answer: "A nested complex fraction has a complex fraction within another complex fraction. Simplify from the innermost fraction outward. For 1/(1/(1/2)): first simplify 1/(1/2) = 2, then 1/2.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "What is the most common mistake with complex fractions?",
-    answer: "Forgetting to flip when dividing. In (2/3)/(4/5), you must multiply by 5/4 (the reciprocal of 4/5), not by 4/5. Only the divisor gets flipped.",
-    sectionId: "7"
-  },
-  obj9: {
-    question: "Can any fraction division be written as a complex fraction?",
-    answer: "Yes. The expression 2/3 ÷ 4/5 can be written as (2/3)/(4/5). Complex fractions and fraction division are two notations for the same operation.",
-    sectionId: "1"
-  },
-  obj10: {
-    question: "Do you simplify the final answer of a complex fraction?",
-    answer: "Yes, always reduce to simplest form. After clearing the complex structure, check if the result can be simplified further by finding the GCF of numerator and denominator.",
+    question: "Is the answer finished once the stacked fractions are gone?",
+    answer: "Usually not. Clearing the complex structure and reducing to simplest form are separate steps, and the first often leaves something that still reduces. Working $\\frac{3}{4} \\times \\frac{6}{5}$ gives $\\frac{18}{20}$, which looks done but is really $\\frac{9}{10}$. Always check the result for a common factor.",
     sectionId: "7"
   }
 }
@@ -1283,6 +1254,22 @@ export default function ComplexFractionsPage({seoData, sectionsContent, introCon
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Complex Fractions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

@@ -289,29 +289,6 @@ export async function getStaticProps() {
 Each definition includes an intuitive explanation, key properties, notation conventions, and links to detailed lesson pages. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a complex number?",
-      answer: "A complex number has the form z = a + bi, where a and b are real numbers and i is the imaginary unit defined by i squared equals negative one. The value a is the real part and b is the imaginary part. Every real number is a complex number with b = 0."
-    },
-    obj2: {
-      question: "What is the difference between imaginary and complex numbers?",
-      answer: "An imaginary number has the form bi with no real part (like 3i or -7i). A complex number has both a real and imaginary part (like 2 + 3i). Every imaginary number is complex, but not every complex number is imaginary -- for example, 2 + 3i has a nonzero real part."
-    },
-    obj3: {
-      question: "What are the different forms of a complex number?",
-      answer: "Complex numbers can be written in algebraic form (a + bi), trigonometric form (r times cos theta plus i sin theta), or exponential form (r times e to the i theta). Algebraic form is best for addition and subtraction. Trigonometric and exponential forms simplify multiplication, division, and powers."
-    },
-    obj4: {
-      question: "What is the modulus of a complex number?",
-      answer: "The modulus of z = a + bi is the distance from the origin to the point (a, b) in the complex plane, calculated as the square root of a squared plus b squared. It generalizes the absolute value of real numbers to two dimensions and is always non-negative."
-    },
-    obj5: {
-      question: "What is a complex conjugate and why is it useful?",
-      answer: "The complex conjugate of z = a + bi is a - bi, obtained by negating the imaginary part. Multiplying a complex number by its conjugate gives a real number equal to the modulus squared. This property is essential for dividing complex numbers and finding multiplicative inverses."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -376,25 +353,11 @@ Each definition includes an intuitive explanation, key properties, notation conv
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       complexNumbersTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -410,7 +373,6 @@ Each definition includes an intuitive explanation, key properties, notation conv
 
 export default function ComplexNumbersDefinitionsPage({
   complexNumbersTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -451,12 +413,6 @@ export default function ComplexNumbersDefinitionsPage({
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br />

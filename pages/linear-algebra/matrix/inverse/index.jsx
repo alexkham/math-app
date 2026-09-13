@@ -3026,6 +3026,7 @@ import EquivalenceRing from '@/app/components/infographics/linear-algebra/Equiva
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -3793,29 +3794,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the inverse of a matrix?",
-    answer: "The inverse of a square matrix A is the unique matrix A⁻¹ satisfying AA⁻¹ = A⁻¹A = I. It effectively undoes the action of A. Not every square matrix has an inverse — a matrix is invertible if and only if its determinant is nonzero.",
-    sectionId: "1"
+    question: "Can you write $\\frac{B}{A}$ for matrices?",
+    answer: "No, because a fraction bar cannot record which side the inverse acts on, and the two sides give different answers. From $AX = B$ you premultiply to get $X = A^{-1}B$; from $XA = B$ you postmultiply to get $X = BA^{-1}$. Since $A^{-1}B \\neq BA^{-1}$ in general, no textbook defines matrix division.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you find the inverse of a 2×2 matrix?",
-    answer: "For a 2×2 matrix with entries a, b, c, d, swap the diagonal entries, negate the off-diagonal entries, and divide by the determinant ad − bc. The formula is A⁻¹ = (1/(ad−bc)) times the matrix [d, −b; −c, a]. The inverse exists only when ad − bc is nonzero.",
-    sectionId: "2"
+    question: "Why is $(AB)^{-1}$ equal to $B^{-1}A^{-1}$ rather than $A^{-1}B^{-1}$?",
+    answer: "Because undoing a sequence means undoing the last step first, the way you remove a coat before a shirt. Multiplying by $A$ then $B$ is reversed by undoing $B$ then $A$. The scalar habit, where order never mattered, produces the wrong version here. The transpose reverses for the same reason: $(AB)^{T} = B^{T}A^{T}$.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you compute the inverse using row reduction?",
-    answer: "Form the augmented matrix [A | I] and apply row operations to reduce the left half to the identity matrix. If the reduction succeeds, the right half becomes A⁻¹. If a row of zeros appears in the left half during reduction, the matrix is singular and has no inverse.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "What conditions make a matrix invertible?",
-    answer: "A square matrix is invertible if and only if its determinant is nonzero, its rank equals its order, its columns are linearly independent, the homogeneous system Ax = 0 has only the trivial solution, and zero is not an eigenvalue. All of these conditions are equivalent.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "Why is computing the inverse often avoided in practice?",
-    answer: "Computing A⁻¹ requires roughly three times the work of solving Ax = b by row reduction and introduces more rounding error. For solving linear systems, LU decomposition is faster and more stable. The inverse is best reserved for theoretical work, symbolic formulas, and small matrices computed by hand.",
-    sectionId: "10"
+    question: "What does $A^{-T}$ mean?",
+    answer: "It is a compact spelling for the inverse and the transpose together, and the order does not matter: $(A^{-1})^{T} = (A^{T})^{-1}$, so one mark covers both readings. It appears frequently in optimization, statistics and numerical writing, where the combination is common enough to deserve its own abbreviation.",
+    sectionId: "notation"
   }
 }
 
@@ -3890,19 +3881,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -4072,6 +4050,22 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrix Inverse FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -4141,12 +4135,6 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

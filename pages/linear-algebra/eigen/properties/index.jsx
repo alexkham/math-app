@@ -914,6 +914,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1513,54 +1514,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "How is the trace related to eigenvalues?",
-    answer: "The trace equals the sum of all eigenvalues (with algebraic multiplicity): tr(A) = λ₁ + λ₂ + ... + λₙ. This follows from the characteristic polynomial coefficients and provides a quick consistency check when computing eigenvalues.",
-    sectionId: "1"
+    question: "Do the eigenvalue rules extend to $A + B$ and $AB$?",
+    answer: "No, and this is the boundary worth memorising. Every rule of this kind acts on a single matrix: inverses, powers, polynomials, shifts and scalings all preserve the eigenvector while transforming the eigenvalue. Sums and products of two matrices do not, because $A$ and $B$ need not share any eigenvector at all.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How is the determinant related to eigenvalues?",
-    answer: "The determinant equals the product of all eigenvalues: det(A) = λ₁·λ₂·...·λₙ. This means A is invertible iff no eigenvalue is zero. A single zero eigenvalue makes the determinant zero and the matrix singular.",
-    sectionId: "2"
+    question: "Is $q(A)$ the same as applying $q$ to each entry of $A$?",
+    answer: "No. In $q(A)$ the powers mean repeated matrix multiplication, which mixes entries throughout, whereas applying $q$ entrywise leaves each entry isolated. The two happen to agree on diagonal matrices apart from the constant term, which is unfortunate: the mistake survives exactly the simple examples used to introduce the idea.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the difference between algebraic and geometric multiplicity?",
-    answer: "Algebraic multiplicity is how many times λ appears as a root of the characteristic polynomial. Geometric multiplicity is the dimension of the eigenspace. Always: 1 ≤ geometric ≤ algebraic. When they differ, the matrix is not diagonalizable.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are the eigenvalues of the inverse matrix?",
-    answer: "If λ is an eigenvalue of invertible A with eigenvector v, then 1/λ is an eigenvalue of A⁻¹ with the same eigenvector. The eigenvalues of A⁻¹ are the reciprocals of those of A.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are the eigenvalues of A^k?",
-    answer: "If Av = λv, then Aᵏv = λᵏv. The eigenvalues of Aᵏ are the k-th powers of the eigenvalues of A, with the same eigenvectors. More generally, for polynomial q(A), the eigenvalues are q(λᵢ).",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What happens to eigenvalues when you add cI to a matrix?",
-    answer: "Adding cI shifts every eigenvalue by c: eigenvalues of A + cI are λ₁ + c, λ₂ + c, ..., λₙ + c. The eigenvectors remain unchanged. Similarly, cA has eigenvalues cλ₁, cλ₂, ..., cλₙ.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "Do A and A^T have the same eigenvalues?",
-    answer: "Yes. det(Aᵀ - λI) = det(A - λI) because determinant is transpose-invariant. The characteristic polynomials are identical, so eigenvalues match. However, the eigenvectors are generally different—eigenvectors of Aᵀ are left eigenvectors of A.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What eigenvalues do special matrices have?",
-    answer: "Symmetric: all real. Orthogonal: |λ| = 1. Idempotent (A² = A): λ = 0 or 1. Nilpotent (Aᵏ = 0): all λ = 0. Involutory (A² = I): λ = ±1. Positive definite symmetric: all λ > 0. Triangular/diagonal: eigenvalues on diagonal.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Are eigenvectors of distinct eigenvalues independent?",
-    answer: "Yes, always. Eigenvectors corresponding to distinct eigenvalues are linearly independent. A matrix with n distinct eigenvalues automatically has n independent eigenvectors and is diagonalizable.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "Do similar matrices have the same eigenvalues?",
-    answer: "Yes. If B = P⁻¹AP, then A and B share eigenvalues, algebraic multiplicities, geometric multiplicities, and characteristic polynomial. Eigenvalues are properties of the transformation, not the matrix representation. Eigenvectors transform by P⁻¹.",
-    sectionId: "10"
+    question: "Do $A$ and $A^{T}$ have the same eigenvectors?",
+    answer: "They share every eigenvalue but generally not the eigenvectors. Transposing preserves the characteristic polynomial, so the spectrum is identical, yet the directions differ. The eigenvectors of $A^{T}$ are known as the left eigenvectors of $A$, and the transpose is the one operation here that changes the vector rather than the value.",
+    sectionId: "notation"
   }
 }
 
@@ -1637,19 +1603,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1813,6 +1766,22 @@ export default function EigenvaluePropertiesPage({
           </DiagramFrame>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Eigenvalue Properties FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1849,12 +1818,6 @@ export default function EigenvaluePropertiesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

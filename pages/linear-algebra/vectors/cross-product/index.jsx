@@ -1960,6 +1960,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2648,44 +2649,19 @@ Taken together, the two products partition the angular information between a pai
 
 const faqQuestions = {
   obj1: {
-    question: "What is the cross product formula?",
-    answer: "For a = (a₁, a₂, a₃) and b = (b₁, b₂, b₃): a × b = (a₂b₃ - a₃b₂, a₃b₁ - a₁b₃, a₁b₂ - a₂b₁). This can be computed using a 3×3 determinant with i, j, k in the first row and the two vectors in the remaining rows.",
-    sectionId: "1"
+    question: "Is $\\times$ between vectors the same as $\\times$ between numbers?",
+    answer: "No, and carrying the arithmetic habit across is a genuine error. Between numbers $\\times$ and $\\cdot$ are interchangeable, but between vectors they name two different operations returning different kinds of object: the dot gives a scalar, the cross gives a vector. The cross product also exists only in three dimensions.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What are the cross products of i, j, and k?",
-    answer: "Following cyclic order: i × j = k, j × k = i, k × i = j. Reversing order negates the result: j × i = -k, etc. Any basis vector crossed with itself gives zero. These nine cases form the foundation for all cross product computations.",
-    sectionId: "2"
+    question: "Does $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$ really need its parentheses?",
+    answer: "They are a courtesy rather than a necessity, because only one grouping makes sense. The alternative reading would cross a scalar with a vector, which is not a defined operation. So the expression parses uniquely: the cross builds a vector, then the dot collapses it, and the result is a number.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the geometric meaning of the cross product?",
-    answer: "The magnitude ‖a × b‖ = ‖a‖‖b‖sinθ equals the area of the parallelogram spanned by a and b. The direction is perpendicular to both input vectors, exiting the plane they span. Both a·(a × b) and b·(a × b) equal zero.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is the right-hand rule?",
-    answer: "Align right-hand fingers along a, curl them toward b through the shorter arc—the extended thumb points in the direction of a × b. Switching operands reverses the thumb direction. This convention defines orientation in 3D space.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are the properties of the cross product?",
-    answer: "Anti-commutative: a × b = -(b × a). Distributive over addition. Scalars factor out freely. NOT associative: a × (b × c) ≠ (a × b) × c generally. Self-cross product is zero: a × a = 0.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "When is the cross product zero?",
-    answer: "a × b = 0 if and only if a and b are parallel (or one is zero). Parallel vectors have angle 0 or π, so sinθ = 0 and the magnitude vanishes. This complements the dot product test: zero dot product means perpendicular, zero cross product means parallel.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the scalar triple product?",
-    answer: "a · (b × c) equals the signed volume of the parallelepiped with edges a, b, c. It can be computed as a 3×3 determinant. Zero means the three vectors are coplanar. The sign indicates handedness (positive = right-handed orientation).",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is the difference between dot product and cross product?",
-    answer: "Dot product: returns scalar, works in any ℝⁿ, commutative, zero means perpendicular, isolates cosθ. Cross product: returns vector, only in ℝ³, anti-commutative, zero means parallel, isolates sinθ. Together they capture all angular information.",
-    sectionId: "8"
+    question: "Why do $i$, $j$, $k$ mean basis vectors here but $\\sqrt{-1}$ elsewhere?",
+    answer: "The collision is historical rather than coincidental: Hamilton's quaternions $i, j, k$ are the common ancestor of both this basis and the cross product itself. Boldface separates them in print. Note also that $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ scales to any dimension, while $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ runs out of letters past three.",
+    sectionId: "notation"
   }
 }
 
@@ -2762,19 +2738,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -2925,6 +2888,22 @@ export default function CrossProductPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Cross Product FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2961,12 +2940,6 @@ export default function CrossProductPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

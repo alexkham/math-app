@@ -76,29 +76,6 @@ export async function getStaticProps() {
     'learn algebra online'
   ];
 
-  const faqQuestions = {
-    obj1: {
-      question: "What topics are covered in this algebra section?",
-      answer: "The section covers equations, polynomials, logarithms, roots and radicals, powers and exponents, inequalities, binomial identities, and algebraic formulas. Each topic includes theory pages, a glossary of definitions, and interactive visual tools."
-    },
-    obj2: {
-      question: "What algebra tools and calculators are available?",
-      answer: "The section includes interactive visual tools for exploring algebraic concepts graphically, along with links to calculators for equations, polynomials, and logarithms. Each tool provides step-by-step solutions and dynamic visualizations."
-    },
-    obj3: {
-      question: "How is the algebra content organized?",
-      answer: "Content is organized into subsections by topic, plus two cross-cutting resources: a formulas reference with categorized equations and identities, and a definitions glossary covering all key algebra terms with examples."
-    },
-    obj4: {
-      question: "Is this algebra section suitable for beginners?",
-      answer: "Yes. Each topic starts with foundational definitions and builds toward more advanced material. The glossary, worked examples, and visual tools make the content accessible to high school students, college students, and self-learners at any level."
-    },
-    obj5: {
-      question: "What is the difference between the formulas and definitions pages?",
-      answer: "The formulas page collects key algebraic equations and identities organized by category, designed for quick reference. The definitions page provides precise explanations of algebra terminology with properties and worked examples for deeper understanding."
-    }
-  };
-
   const schemas = {
     collectionPage: {
       "@context": "https://schema.org",
@@ -209,16 +186,6 @@ export async function getStaticProps() {
         { "@type": "ListItem", "position": 2, "name": "Algebra", "item": "https://www.learnmathclass.com/algebra" }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": { "@type": "Answer", "text": faqQuestions[key].answer }
-      }))
-    }
   };
 
   return {
@@ -226,7 +193,6 @@ export async function getStaticProps() {
       pageMeta,
       sections,
       sectionData,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Algebra: Formulas, Definitions & Tools | Learn Math Class",
@@ -240,7 +206,7 @@ export async function getStaticProps() {
 }
 
 
-export default function AlgebraPage({ pageMeta, sections, sectionData, faqQuestions, schemas, seoData }) {
+export default function AlgebraPage({ pageMeta, sections, sectionData, schemas, seoData }) {
   return (
     <>
       <Head>
@@ -264,7 +230,6 @@ export default function AlgebraPage({ pageMeta, sections, sectionData, faqQuesti
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.collectionPage) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.itemList) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }} />
       </Head>
 
       <OperaSidebar

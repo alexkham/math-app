@@ -196,7 +196,7 @@
 //     }
 //    }
 
-// export default function CommonDerivativesTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+// export default function CommonDerivativesTablePage({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
     
 //   const genericSections=[
@@ -517,29 +517,6 @@ export async function getStaticProps(){
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are common derivatives?",
-      answer: "Common derivatives are the derivative identities that come up most often in calculus: derivatives of constants, polynomials, linear functions, exponentials, logarithms, the six trigonometric functions, and the six inverse trigonometric functions. Together they cover the building blocks needed for almost any differentiation problem when combined with the linearity, product, quotient, and chain rules."
-    },
-    obj2: {
-      question: "What is the derivative of sin x and cos x?",
-      answer: "The derivative of sin(x) is cos(x). The derivative of cos(x) is negative sin(x). The sign change on cosine reflects the 90-degree phase shift between the two functions. Repeatedly differentiating cycles through sin, cos, negative sin, negative cos, and back to sin every four steps."
-    },
-    obj3: {
-      question: "What is the power rule?",
-      answer: "The power rule says that the derivative of x to the n is n times x to the (n minus 1) for any real exponent n. To use it, multiply by the exponent and then subtract one from the exponent. The rule covers polynomials, roots like the square root of x, and reciprocals like 1 over x."
-    },
-    obj4: {
-      question: "What is the difference between the product rule and the chain rule?",
-      answer: "The product rule differentiates a product of two functions: the derivative of f times g is f-prime times g plus f times g-prime. The chain rule differentiates a composition: the derivative of f of g(x) is f-prime evaluated at g(x), times g-prime of x. Products combine functions side by side; compositions nest one function inside another."
-    },
-    obj5: {
-      question: "How do I memorize derivative rules?",
-      answer: "Group the identities by category: polynomial, linear, exponential, logarithmic, trigonometric, and inverse trigonometric. Notice the patterns: cosine differentiates to negative sine; tangent and cotangent share a sign-flip with secant squared and cosecant squared; arcsin and arccos have opposite signs because they sum to a constant. Drill with the drag puzzle on this page to lock the pairings in."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -601,19 +578,6 @@ export async function getStaticProps(){
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -621,7 +585,6 @@ export async function getStaticProps(){
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
          staticDataset,
          seoData: {
@@ -638,7 +601,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function CommonDerivativesTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+export default function CommonDerivativesTablePage({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
     
   const genericSections=[
@@ -816,12 +779,6 @@ export default function CommonDerivativesTablePage({seoData, sectionsContent, in
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

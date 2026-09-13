@@ -222,7 +222,7 @@
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent, relatedTools }) {
 
     
 //   const genericSections=[
@@ -498,6 +498,8 @@ import EigenVectors from '../../../../app/components/linear-algebra copy/r2-visu
 import { SCENARIOS as EV_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/EigenVectors'
 import eigenVectorsDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -676,19 +678,19 @@ For full treatment see **characteristic polynomial**, **defective matrices**, an
     },
     obj10:{
       title:`Related Concepts`,
-      content:`**Eigenvalues** &mdash; the scalar stretch factors that pair with each eigenvector.
+      content:`[Eigenvalues](!/linear-algebra/visual-tools/eigenvalues-eigenvectors) &mdash; the scalar stretch factors that pair with each eigenvector.
 
 **Characteristic Polynomial** &mdash; the source equation $\\det(A - \\lambda I) = 0$ whose roots are the eigenvalues.
 
-**Diagonalization** &mdash; rewriting $A$ as $PDP^{-1}$ where $D$ is diagonal and $P$ has eigenvectors as columns.
+[Diagonalization](!/linear-algebra/visual-tools/matrix-diagonalization) &mdash; rewriting $A$ as $PDP^{-1}$ where $D$ is diagonal and $P$ has eigenvectors as columns.
 
-**Spectral Theorem** &mdash; guarantees perpendicular eigenvectors and real eigenvalues for symmetric matrices.
+[Spectral Theorem](!/linear-algebra/visual-tools/spectral-decomposition) &mdash; guarantees perpendicular eigenvectors and real eigenvalues for symmetric matrices.
 
-**Singular Value Decomposition** &mdash; a generalization of eigendecomposition that works for any matrix, not just square diagonalizable ones.
+[Singular Value Decomposition](!/linear-algebra/visual-tools/singular-value-decomposition) &mdash; a generalization of eigendecomposition that works for any matrix, not just square diagonalizable ones.
 
-**Change of Basis** &mdash; expressing $A$ in the eigenbasis turns it into a diagonal matrix.
+[Change of Basis](!/linear-algebra/visual-tools/change-basis-2d) &mdash; expressing $A$ in the eigenbasis turns it into a diagonal matrix.
 
-**Matrix Trace and Determinant** &mdash; the two invariants that appear in the characteristic polynomial.`,
+[Matrix Trace and Determinant](!/linear-algebra/visual-tools/matrix-trace) &mdash; the two invariants that appear in the characteristic polynomial.`,
       before:``,
       after:``,
       link:'',
@@ -952,6 +954,7 @@ The pair still carries the geometry. Its modulus is the scaling factor per appli
 
    return {
       props:{
+        relatedTools: getRelatedTools('linear-algebra-eigen-vectors-2d'),
          sectionsContent,
          stateUnits,
          explanationOverride,
@@ -974,7 +977,7 @@ The pair still carries the geometry. Its modulus is the scaling factor per appli
     }
    }
 
-export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas}) {
+export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1097,6 +1100,9 @@ export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

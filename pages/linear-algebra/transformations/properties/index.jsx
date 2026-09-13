@@ -815,6 +815,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1366,29 +1367,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What are the two conditions for a linear transformation?",
-    answer: "A function T is linear if it satisfies additivity (T(u + v) = T(u) + T(v)) and homogeneity (T(cv) = cT(v)) for all vectors u, v and all scalars c. Equivalently, T(cu + dv) = cT(u) + dT(v) for all vectors and scalars — the one-step test.",
-    sectionId: "1"
+    question: "Does $T(\\mathbf{0}) = \\mathbf{0}$ prove that a map is linear?",
+    answer: "No, the implication runs one way only. Every linear map sends zero to zero, so failing the test disproves linearity outright, but passing it proves nothing. The map $T(x) = x|x|$ sends $0$ to $0$ and is not linear. Use it to rule maps out quickly, never to rule them in.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you prove a transformation is linear?",
-    answer: "Take arbitrary vectors u, v and scalars c, d. Compute T(cu + dv) using T's formula, then simplify and show the result equals cT(u) + dT(v). The key is that every component must be a linear expression in the input coordinates — no constants, products, powers, or nonlinear functions.",
-    sectionId: "3"
+    question: "Is the single-line linearity condition shorthand for the two separate ones?",
+    answer: "It is genuinely equivalent rather than an abbreviation. Setting $c = d = 1$ recovers additivity and setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity, so the one line implies both and both imply it. Read it as a hypothesis to be tested about a particular $T$, not an identity to be simplified.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you disprove linearity?",
-    answer: "Find a single counterexample. The fastest first check is T(0) = 0 — every linear map sends zero to zero, so T(0) ≠ 0 immediately disqualifies. If that passes, test additivity or homogeneity with specific inputs. One failure is enough.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "Is the composition of two linear transformations linear?",
-    answer: "Yes. If T and S are both linear, the composition S ∘ T is linear: (S ∘ T)(cu + dv) = S(cT(u) + dT(v)) = cS(T(u)) + dS(T(v)). When represented by matrices, composition corresponds to matrix multiplication.",
-    sectionId: "6"
-  },
-  obj5: {
-    question: "When is a linear transformation invertible?",
-    answer: "A linear transformation is invertible if and only if it is bijective — injective (trivial kernel) and surjective (image equals the codomain). When domain and codomain have equal dimension, checking either condition establishes both. The inverse is itself linear.",
-    sectionId: "7"
+    question: "Is $\\mathcal{L}(V, W)$ a set of matrices?",
+    answer: "No, its elements are maps, and a matrix appears only after a basis has been chosen at each end. The space is itself a vector space, with dimension $\\dim(V) \\cdot \\dim(W)$, which is exactly the number of entries a representing matrix would have. Its zero element is the map sending everything to $\\mathbf{0}_W$.",
+    sectionId: "notation"
   }
 }
 
@@ -1465,19 +1456,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1617,6 +1595,22 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
           </DiagramFrame>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Linearity Properties FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1654,12 +1648,6 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

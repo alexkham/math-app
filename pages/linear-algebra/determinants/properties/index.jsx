@@ -1907,6 +1907,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import EquivalenceRing from '@/app/components/infographics/linear-algebra/EquivalenceRing'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2529,49 +2530,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "How does swapping rows affect the determinant?",
-    answer: "Swapping two rows multiplies the determinant by -1. If a matrix has two identical rows, its determinant is zero (swapping them changes the sign but leaves the matrix unchanged, so det = -det implies det = 0).",
-    sectionId: "1"
+    question: "Why can $|A|$ be negative when $|x|$ and $\\|\\mathbf{v}\\|$ cannot?",
+    answer: "Because the bars mean something different here. On a scalar they take absolute value and on a vector they take length, both non-negative by construction, but on a matrix the same glyph denotes the determinant, which carries a sign. A single row swap flips it. That is also why $|\\det(A)|$ is a legitimate stack of two bar pairs.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How does scaling a row affect the determinant?",
-    answer: "Multiplying one row by scalar k multiplies det by k. For the entire matrix: det(kA) = k^n·det(A) for n×n. A row of zeros makes det = 0. Common factors can be extracted from rows to simplify computation.",
-    sectionId: "2"
+    question: "Does $\\det(A + B)$ equal $\\det(A) + \\det(B)$?",
+    answer: "No, and nothing simpler replaces it: a determinant of a sum does not decompose at all. The asymmetry is worth noticing, since $\\det(AB) = \\det(A)\\det(B)$ splits perfectly for products. The operator is multiplicative but not additive, so borrowing the additive habit from ordinary algebra fails here.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "Does row addition change the determinant?",
-    answer: "No. Adding a scalar multiple of one row to a different row leaves the determinant unchanged. This is the most-used operation in Gaussian elimination and costs nothing in terms of the determinant.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you compute a determinant using row reduction?",
-    answer: "Reduce to upper triangular form, tracking swaps and scalings. The determinant equals the product of diagonal entries times (-1)^(number of swaps) divided by any scaling factors used. This is O(n³) vs O(n!) for cofactor expansion.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the multiplicative property of determinants?",
-    answer: "det(AB) = det(A)·det(B) for any n×n matrices. Consequences: det(A⁻¹) = 1/det(A), det(A^k) = det(A)^k, and det(AB) = det(BA) even though AB ≠ BA generally. Note: det is NOT additive.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Does transposing a matrix change its determinant?",
-    answer: "No. det(Aᵀ) = det(A). This means every row property automatically applies to columns: swapping columns flips sign, scaling a column scales det, adding column multiples preserves det. Column expansion works for this reason.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the determinant of a triangular matrix?",
-    answer: "For upper triangular, lower triangular, or diagonal matrices: det = product of diagonal entries. det(I) = 1 as a special case. This is why row reduction works: reduce to triangular, multiply the diagonal.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is the determinant of a block triangular matrix?",
-    answer: "For block triangular matrices: det(A) = det(A₁₁)·det(A₂₂)·...·det(A_kk), the product of determinants of diagonal blocks. Off-diagonal blocks can be anything; only the triangular placement of zero blocks matters.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "How does the determinant test invertibility?",
-    answer: "A is invertible iff det(A) ≠ 0. This is equivalent to: rank = n, columns independent, columns span ℝⁿ, Ax = b has unique solution for all b, null space = {0}, all eigenvalues nonzero, RREF is identity.",
-    sectionId: "9"
+    question: "In Cramer's rule, does $\\Delta_x$ mean \"change in $x$\"?",
+    answer: "No. Despite the shared letter, nothing is changing: $\\Delta_x$ is a fixed determinant of the matrix with the $x$ column replaced by the constants. The symbol holds three unrelated jobs across mathematics, as an increment in calculus, a discriminant in quadratics, and a determinant here. Only context separates them.",
+    sectionId: "notation"
   }
 }
 
@@ -2647,19 +2618,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -2818,6 +2776,22 @@ const schemas = {
           </DiagramFrame>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Determinant Properties FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2854,12 +2828,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

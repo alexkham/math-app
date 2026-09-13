@@ -856,6 +856,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1371,29 +1372,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is an orthogonal set of vectors?",
-    answer: "An orthogonal set is a collection of nonzero vectors that are pairwise perpendicular — every pair has dot product zero. Orthogonal sets are automatically linearly independent, so no separate independence check is needed.",
-    sectionId: "1"
+    question: "Does an \"orthogonal matrix\" just have orthogonal columns?",
+    answer: "No, they must be orthonormal, so unit length is part of the definition despite the name. A matrix whose columns are merely perpendicular satisfies no identity of this kind. The terminology is a historical accident that the notation refuses to repeat, which is why the condition is always written $Q^{T}Q = I$ rather than described in words.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the difference between orthogonal and orthonormal?",
-    answer: "An orthogonal set requires all pairs to have dot product zero. An orthonormal set additionally requires each vector to have unit length. Any orthogonal set can be made orthonormal by dividing each vector by its length.",
-    sectionId: "3"
+    question: "What is $\\delta_{ij}$?",
+    answer: "The Kronecker delta, a function of two indices returning $1$ when they agree and $0$ otherwise. It is the identity matrix written entrywise, $I = [\\delta_{ij}]$. Do not read it as the $\\delta$ of calculus: nothing here is small or an increment, and this symbol takes two subscripts rather than measuring a magnitude.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you find coordinates with an orthonormal basis?",
-    answer: "For an orthonormal basis, the coordinate of x along basis vector qᵢ is simply the dot product x · qᵢ. No system of equations or matrix inversion is needed — each coordinate is computed independently by a single dot product.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "What is an orthogonal matrix?",
-    answer: "An orthogonal matrix Q has orthonormal columns, satisfying QᵀQ = I and Q⁻¹ = Qᵀ. It preserves dot products, lengths, angles, and distances. Its determinant is ±1, representing a rotation (det +1) or a rotation with reflection (det −1).",
-    sectionId: "6"
-  },
-  obj5: {
-    question: "What is Parseval's identity?",
-    answer: "Parseval's identity states that for an orthonormal basis, the squared length of any vector equals the sum of the squares of its coordinates: ‖x‖² = Σ(x · qᵢ)². It is the Pythagorean theorem applied to the orthonormal decomposition.",
-    sectionId: "8"
+    question: "If $Q^{T}Q = I$, does $QQ^{T} = I$ as well?",
+    answer: "Yes, for square $Q$, and this is one of the few places where such a swap is safe. The equation is a statement about the columns being orthonormal, and it forces the rows to be orthonormal too. Most matrix identities are not symmetric in that way, so the fact is worth noting rather than assuming.",
+    sectionId: "notation"
   }
 }
 
@@ -1469,19 +1460,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 //    return {
@@ -1647,6 +1625,22 @@ export default function OrthogonalSetsPage({
           `The projection row is where this pays off most visibly. The general formula requires $(A^{\\mathsf{T}}A)^{-1}$, a matrix inverse computed before anything can be projected. When the columns are orthonormal, $A^{\\mathsf{T}}A$ is the identity, the inverse disappears, and the projection is a sum of independent terms — which is precisely why [Gram–Schmidt](!/linear-algebra/orthogonality/gram-schmidt) is worth running before a projection-heavy computation rather than after.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Orthogonal Sets FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1727,12 +1721,6 @@ export default function OrthogonalSetsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

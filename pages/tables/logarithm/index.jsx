@@ -192,29 +192,6 @@ The mantissa stays the same when you shift the decimal point — only the charac
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a logarithm table?",
-      answer: "A logarithm table lists the common (base-10) logarithm values of numbers within a given range, typically printed to four decimal places. This table covers every value from 10 to 99.99, organized so each row gives 19 lookup values for one integer base: 10 main mantissa columns plus 9 mean-difference corrections."
-    },
-    obj2: {
-      question: "How do I read a logarithm table?",
-      answer: "Find the row matching the integer part of your number, read the column matching the first decimal digit, then add the mean-difference value from the column matching the second decimal digit. For log of 23.47, you use row 23, column 4 for the main mantissa, and Mean Diff 7 for the second-decimal correction, summing the two."
-    },
-    obj3: {
-      question: "What is the mean difference in a log table?",
-      answer: "Mean differences are small corrections that extend the table from one-decimal precision to two-decimal precision. Without them, the table would only handle values like 25.4 or 25.5; the mean differences let you read log(25.43) by adding the Mean Diff 3 entry on row 25 to the column-4 value on the same row."
-    },
-    obj4: {
-      question: "What is the difference between common log and natural log?",
-      answer: "The common logarithm uses base 10 and is often written as log. The natural logarithm uses base e (about 2.71828) and is written as ln. To convert a common log to a natural log, multiply by ln(10), which is approximately 2.302585."
-    },
-    obj5: {
-      question: "What are the characteristic and mantissa?",
-      answer: "Every common logarithm splits into an integer characteristic and a fractional mantissa. The mantissa is what you read from the table. The characteristic is the integer part, determined by the magnitude of the number: a number with d digits before the decimal point has characteristic d minus 1. So 347, 34.7, and 3.47 all share the same mantissa but have characteristics 2, 1, and 0."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -276,26 +253,12 @@ The mantissa stays the same when you shift the decimal point — only the charac
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
    return {
       props:{
          sectionsContent,
-         faqQuestions,
          schemas,
            seoData: {
       title: "Logarithm Table - Base 10 Log Values | Learn Math Class",
@@ -316,7 +279,7 @@ The mantissa stays the same when you shift the decimal point — only the charac
 
 
 
-export default function LogarithmTablePage({sectionsContent, faqQuestions, schemas, seoData, keyWords}) {
+export default function LogarithmTablePage({sectionsContent, schemas, seoData, keyWords}) {
 
   const genericSections = Object.keys(sectionsContent).map((key, index) => ({
     id: `${index + 1}`,
@@ -359,12 +322,6 @@ export default function LogarithmTablePage({sectionsContent, faqQuestions, schem
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
       {/* <GenericNavbar/> */}
       <br />

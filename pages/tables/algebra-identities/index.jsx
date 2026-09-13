@@ -276,29 +276,6 @@ Useful when only the sum or product is needed — no need to solve the equation.
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are algebra identities?",
-      answer: "Algebra identities are equalities between two expressions that hold for all values of their variables. The core set includes the difference of squares, the perfect square trinomials, the sum and difference of cubes, and the cube of a binomial. They are the algebraic building blocks for factoring, simplifying, and expanding polynomial expressions."
-    },
-    obj2: {
-      question: "What is the difference of squares identity?",
-      answer: "The difference of squares says a squared minus b squared equals (a plus b) times (a minus b). It applies whenever a polynomial can be written as one square subtracted from another, even when a and b are themselves compound expressions. The identity is one of the fastest factoring shortcuts in algebra."
-    },
-    obj3: {
-      question: "What is the perfect square trinomial identity?",
-      answer: "The perfect square trinomial identities are (a plus b) squared equals a squared plus 2ab plus b squared, and (a minus b) squared equals a squared minus 2ab plus b squared. The middle term is always twice the product of the two parts. Recognizing this pattern lets you factor a trinomial back into a binomial squared at sight."
-    },
-    obj4: {
-      question: "What is the difference between the sum and difference of cubes?",
-      answer: "Sum of cubes: a cubed plus b cubed equals (a plus b) times (a squared minus ab plus b squared). Difference of cubes: a cubed minus b cubed equals (a minus b) times (a squared plus ab plus b squared). The SOAP mnemonic helps: Same sign on the binomial, Opposite sign in the middle of the trinomial, Always Positive on the last term."
-    },
-    obj5: {
-      question: "How do I memorize algebra identities?",
-      answer: "Group them by family: difference-of-powers (squares and cubes), perfect-power expansions (square and cube of a binomial), and multi-term expansions like (a plus b plus c) squared. Notice the structural patterns: the middle term in a perfect square is always twice the product of the parts; cubes split into a binomial times a trinomial. Drill the drag puzzle on this page to lock the pairings in."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -361,19 +338,6 @@ Useful when only the sum or product is needed — no need to solve the equation.
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -381,7 +345,6 @@ Useful when only the sum or product is needed — no need to solve the equation.
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
          staticDataset,
          seoData: {
@@ -398,7 +361,7 @@ Useful when only the sum or product is needed — no need to solve the equation.
     }
    }
 
-export default function AlgebraicIdentitiesTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+export default function AlgebraicIdentitiesTablePage({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
   const genericSections=[
     { id:'0',  title:sectionsContent.obj0.title,  link:sectionsContent.obj0.link,  content:[sectionsContent.obj0.content]  },
@@ -460,12 +423,6 @@ export default function AlgebraicIdentitiesTablePage({seoData, sectionsContent, 
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

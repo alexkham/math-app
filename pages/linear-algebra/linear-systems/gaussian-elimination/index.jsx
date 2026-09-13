@@ -939,6 +939,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1501,29 +1502,19 @@ Every serious numerical implementation of Gaussian elimination uses partial pivo
 
 const faqQuestions = {
   obj1: {
-    question: "What is Gaussian elimination?",
-    answer: "Gaussian elimination transforms a linear system into row echelon form using three elementary row operations: row swaps, row scaling, and adding multiples of one row to another. Forward elimination creates zeros below each pivot, then back substitution solves from the bottom up.",
-    sectionId: "1"
+    question: "What is the bar doing in $[A \\mid \\mathbf{b}]$?",
+    answer: "Separating, nothing more. It marks the array as a record of a system rather than a plain matrix, and erasing it changes the object's species into an ordinary $m \\times (n{+}1)$ matrix. The same device stacks more columns behind the bar for multiple right-hand sides, which is how $[A \\mid I]$ computes an inverse.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the difference between REF and RREF?",
-    answer: "Row echelon form (REF) has a staircase of pivots with zeros below each one — the solution requires back substitution. Reduced row echelon form (RREF) additionally has each pivot equal to 1 and zeros above each pivot, so the solution is visible by direct inspection.",
-    sectionId: "6"
+    question: "Can you overwrite a row with a multiple of a different row?",
+    answer: "No, and no notation makes it legal. The valid replacement keeps the target row in the expression, as in $R_i \\to R_i + cR_j$, so the operation is reversible. Writing $cR_j \\to R_i$ discards whatever $R_i$ contained, destroying information the system needed and producing a matrix that is not row-equivalent to the original.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you know if a system has no solution?",
-    answer: "A system is inconsistent when row reduction produces a row of the form [0 0 ⋯ 0 | d] with d ≠ 0, representing the impossible equation 0 = d. This means rank([A | b]) > rank(A), and no solution exists.",
-    sectionId: "9"
-  },
-  obj4: {
-    question: "What are pivot and free variables?",
-    answer: "Pivot variables correspond to columns containing a pivot in the echelon form — their values are determined by back substitution. Free variables correspond to non-pivot columns and can take any real value. If there are free variables and the system is consistent, infinitely many solutions exist.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is partial pivoting?",
-    answer: "Partial pivoting selects the largest absolute value in the current pivot column and swaps it into the pivot position. This keeps multipliers small and limits rounding error accumulation in floating-point arithmetic. Every serious numerical implementation uses partial pivoting by default.",
-    sectionId: "11"
+    question: "Does the tilde in $A \\sim B$ mean approximately equal?",
+    answer: "Not here, where it means row-equivalent: one matrix reaches the other through elementary row operations, so both describe the same solution set. The squiggle leads several lives across mathematics, marking equivalent sets in set theory and \"is distributed as\" in statistics, besides its single-stroke role as a cousin of the approximation sign.",
+    sectionId: "notation"
   }
 }
 
@@ -1600,19 +1591,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1802,6 +1780,22 @@ export default function GaussianEliminationPage({
           `Between the two readings, back substitution wins on arithmetic and Gauss–Jordan wins on form. Continuing to the reduced row echelon form costs roughly half again as much for the same answer, which is a poor trade if solving is the goal. It is the right trade when the **form** is the goal — the RREF is unique where the REF is not, so it is what a null space basis, a matrix inverse, or a comparison between two matrices has to be read from.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Gaussian Elimination FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1882,12 +1876,6 @@ export default function GaussianEliminationPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -484,12 +484,6 @@ export default function MathSymbolsCalculusPage({ symbolsData, meta, menuItems, 
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
       {/* <GenericNavbar /> */}
       <br />
@@ -657,29 +651,6 @@ const menuItems = [
     pageHeading: 'Calculus Symbols',
   };
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are the main calculus notation systems?",
-      answer: "Calculus uses three primary notation systems for derivatives: Lagrange notation (f'(x), f''(x)), Leibniz notation (dy/dx, d2y/dx2), and operator notation (Df, D2f). Lagrange is compact for single-variable functions, Leibniz emphasizes the variable of differentiation and works well with the chain rule, and operator notation is concise for higher-order derivatives."
-    },
-    obj2: {
-      question: "What is the difference between d and the partial symbol in calculus?",
-      answer: "The straight d in df/dx indicates ordinary differentiation of a function that depends on one variable. The curled partial symbol in the partial derivative df/dx indicates partial differentiation of a function that depends on multiple variables, with all other variables held constant. Using the wrong symbol is a notational error."
-    },
-    obj3: {
-      question: "What does the nabla symbol mean in calculus?",
-      answer: "The nabla symbol (an inverted triangle) represents the gradient operator. Applied to a scalar field f, the gradient nabla f produces a vector of all partial derivatives pointing in the direction of steepest ascent. Combined with dot product it gives divergence, and with cross product it gives curl."
-    },
-    obj4: {
-      question: "What is the difference between definite and indefinite integrals?",
-      answer: "An indefinite integral (integral sign without limits) finds the family of antiderivatives and always includes + C. A definite integral (integral sign with upper and lower limits) computes a specific number representing the signed area under the curve between those bounds."
-    },
-    obj5: {
-      question: "How do you write calculus symbols in LaTeX?",
-      answer: "Common LaTeX commands include \\frac{dy}{dx} for derivatives, \\partial for partial derivatives, \\int for integrals, \\lim for limits, \\sum for series, \\nabla for gradient, and \\infty for infinity. Double and triple integrals use \\iint and \\iiint respectively."
-    }
-  };
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -744,19 +715,6 @@ const menuItems = [
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   };
 
   const symbolsData = {
@@ -914,7 +872,6 @@ In [integration by parts](!/calculus/integrals/techniques#3), choosing $u$ and $
       menuItems,
       introBarData,
       pitfallSections,
-      faqQuestions,
       schemas,
     },
   };

@@ -1763,6 +1763,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2308,29 +2309,19 @@ The particular solution $\\mathbf{x}_p$ captures the effect of the right-hand si
 
 const faqQuestions = {
   obj1: {
-    question: "When does a linear system have a solution?",
-    answer: "The system Ax = b has a solution if and only if rank(A) = rank([A | b]), meaning b lies in the column space of A. If appending b as a column increases the rank, the system is inconsistent and no solution exists.",
-    sectionId: "2"
+    question: "Does having more equations than unknowns mean there is no solution?",
+    answer: "No, and the converse fails too. An overdetermined system can be perfectly consistent, and an underdetermined one can be inconsistent. The shape of a system suggests an outcome without deciding it; comparing the rank of the coefficient matrix with the rank of the augmented matrix is what actually settles the question.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "When is the solution unique?",
-    answer: "When a solution exists, it is unique if and only if rank(A) = n (the number of unknowns). Full column rank means no free variables and a trivial null space. When rank(A) < n, there are n − rank(A) free parameters and infinitely many solutions.",
-    sectionId: "3"
+    question: "Is $\\operatorname{rank}([A \\mid \\mathbf{b}])$ the rank of two things?",
+    answer: "No, it is the rank of one matrix that happens to have been assembled from a coefficient block and an extra column. The bar is punctuation rather than an operation, so nothing is being combined or compared inside the brackets. The comparison happens outside, between this number and $\\operatorname{rank}(A)$.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the Rouché-Capelli theorem?",
-    answer: "The Rouché-Capelli theorem states that Ax = b is consistent if and only if the coefficient matrix and the augmented matrix have the same rank. When consistent, the solution set has dimension n − rank(A). It unifies existence and dimension into a single rank comparison.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "What happens with overdetermined systems?",
-    answer: "When there are more equations than unknowns (m > n), no exact solution usually exists because most vectors b lie outside the column space. When no exact solution exists, the least-squares approach finds the x that minimizes ‖Ax − b‖² by solving the normal equations AᵀAx = Aᵀb.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "What is the structure of the solution set?",
-    answer: "When consistent, the solution set is {xₚ + xₕ : xₕ ∈ Null(A)} — the null space translated by a particular solution. Its dimension equals n − rank(A). When this is 0, the solution is a single point. When positive, it is a line, plane, or higher-dimensional flat.",
-    sectionId: "10"
+    question: "What does \"inconsistent\" mean exactly?",
+    answer: "That the solution set is empty, which is a precise verdict rather than a loose remark about the equations disagreeing. A system can look entirely reasonable and still be inconsistent. The visual tell during elimination is a row reading all zeros to the left of the bar with a nonzero entry to its right, asserting $0 = d$.",
+    sectionId: "notation"
   }
 }
 
@@ -2408,19 +2399,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 //    return {
@@ -2605,6 +2583,22 @@ export default function SolvabilityPage({
           `The last two rows are worth reading as a change of question rather than a failure. An overdetermined system usually has no solution, so least squares asks for the closest approximation instead and answers with a projection. An underdetermined system has too many, so a selection criterion is imposed from outside the algebra — minimum norm, sparsity, or whatever the model requires. In both cases the linear algebra is finished; what remains is deciding what you wanted.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Solvability FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2685,12 +2679,6 @@ export default function SolvabilityPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

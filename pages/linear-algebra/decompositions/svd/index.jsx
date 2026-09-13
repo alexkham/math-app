@@ -8334,6 +8334,7 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import ConceptIntro from '@/app/components/page-components/content-components/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -8944,34 +8945,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the singular value decomposition?",
-    answer: "The SVD factors any m×n matrix A as A = UΣVᵀ, where U and V are orthogonal matrices of left and right singular vectors, and Σ is diagonal with non-negative singular values. It exists for every matrix regardless of shape, rank, or symmetry.",
-    sectionId: "1"
+    question: "Is the $U$ in the SVD the same kind of matrix as the $U$ in $LU$?",
+    answer: "No, and the collision is worth watching. In $LU$ the letter means upper triangular; in the SVD it means orthogonal. The same character signs two different contracts a couple of pages apart, and only the name of the decomposition says which is in force. Nothing about the symbol itself distinguishes them.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What do singular values represent geometrically?",
-    answer: "Singular values measure how much a matrix stretches vectors along each orthogonal direction. The largest singular value σ₁ is the maximum stretching factor, and the transformation A decomposes geometrically into a rotation (Vᵀ), a coordinate-axis scaling (Σ), and another rotation (U).",
-    sectionId: "2"
+    question: "Is the $\\Sigma$ in $U\\Sigma V^{T}$ a summation sign?",
+    answer: "No, it is a matrix. A summation sign carries bounds above and below and is followed by a summand, none of which appear here. A bare capital sigma sitting between two matrix letters is a factor in a product, and in the SVD it is the rectangular diagonal matrix holding the singular values with zero padding.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How does SVD give the best low-rank approximation?",
-    answer: "The Eckart-Young-Mirsky theorem states that truncating the SVD at k terms gives the closest rank-k matrix to A in both operator and Frobenius norms. The approximation error equals σₖ₊₁ in operator norm. This is the basis of image compression and noise reduction.",
-    sectionId: "8"
-  },
-  obj4: {
-    question: "How is the pseudoinverse computed from the SVD?",
-    answer: "The Moore-Penrose pseudoinverse is A⁺ = VΣ⁺Uᵀ, where Σ⁺ reciprocates each nonzero singular value and transposes the shape. For overdetermined systems A⁺b gives the least-squares solution; for rank-deficient systems it gives the minimum-norm least-squares solution.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "How does SVD reveal the four fundamental subspaces?",
-    answer: "The first r columns of V span the row space, the remaining n−r columns span the null space. The first r columns of U span the column space, the remaining m−r columns span the left null space. No other factorization provides orthonormal bases for all four subspaces simultaneously.",
-    sectionId: "6"
-  },
-  obj6: {
-    question: "What is the condition number of a matrix?",
-    answer: "The condition number κ(A) = σ₁/σᵣ is the ratio of the largest to smallest nonzero singular value. It measures sensitivity to perturbation: a matrix with κ = 10ᵏ loses roughly k digits of accuracy in floating-point computation. Orthogonal matrices have κ = 1; singular matrices have κ = ∞.",
-    sectionId: "9"
+    question: "What is the difference between $\\sigma_i$ and $\\sigma(A)$?",
+    answer: "The subscript changes the species entirely. A subscripted $\\sigma_i$ is one singular value, a single non-negative number, while a bare $\\sigma(A)$ is the spectrum, meaning the set of eigenvalues. Since singular values and eigenvalues agree only for special matrices, the two notations rarely even hold the same numbers.",
+    sectionId: "notation"
   }
 }
 
@@ -9050,19 +9036,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -9331,6 +9304,22 @@ export default function SVDPage({
           `The reason all of this comes from one factorization is that the SVD asks nothing of the matrix. It need not be square, invertible, symmetric or full rank — the factorization exists regardless, which is what separates it from every other decomposition in this section and why it is the one to reach for when the matrix is unknown.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Singular Value Decomposition FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -9369,12 +9358,6 @@ export default function SVDPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

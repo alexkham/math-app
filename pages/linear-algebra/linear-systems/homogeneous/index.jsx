@@ -857,6 +857,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1355,29 +1356,19 @@ This rewriting connects homogeneous systems directly to spectral theory. Every e
 
 const faqQuestions = {
   obj1: {
-    question: "What is a homogeneous linear system?",
-    answer: "A homogeneous system has the form Ax = 0, where every equation has zero on the right-hand side. It is always consistent because x = 0 (the trivial solution) always works. The key question is whether nontrivial (nonzero) solutions exist.",
-    sectionId: "1"
+    question: "Does \"trivial solution\" mean the easy one?",
+    answer: "No, it is a technical label for one specific vector, the all-zeros solution that every homogeneous system has. Nothing about difficulty is implied, and a system whose only solution is the trivial one is the more constrained case. Similarly, nontrivial claims that a second solution exists, not that it is complicated: $(1, 0, 0)$ qualifies.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "When does a homogeneous system have nontrivial solutions?",
-    answer: "Nontrivial solutions exist if and only if rank(A) < n (the number of unknowns). For square matrices, this is equivalent to det(A) = 0. If there are more unknowns than equations (n > m), nontrivial solutions are guaranteed because the rank cannot reach n.",
-    sectionId: "2"
+    question: "Is the solution set of $A\\mathbf{x} = \\mathbf{b}$ a subspace?",
+    answer: "Only when $\\mathbf{b} = \\mathbf{0}$. A homogeneous solution set is the null space and is closed under addition and scaling, which is why the general solution can be written as a span. A non-homogeneous set is a translate of that null space: it has the same shape but misses the origin, so it fails the first subspace test.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the superposition principle?",
-    answer: "If x₁ and x₂ are solutions to Ax = 0, then any linear combination c₁x₁ + c₂x₂ is also a solution. This means the solution set is a subspace — the null space. Superposition holds only for homogeneous systems; for Ax = b with b ≠ 0, the sum of two solutions is generally not a solution.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "How are homogeneous and non-homogeneous systems related?",
-    answer: "Every solution to Ax = b has the form x = xₚ + xₕ, where xₚ is one particular solution and xₕ is any solution to Ax = 0. The homogeneous system determines the shape and dimension of the solution set; the particular solution determines its position.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "How do homogeneous systems connect to eigenvalues?",
-    answer: "The eigenvalue equation Ax = λx rewrites as (A − λI)x = 0, a homogeneous system. Eigenvectors are its nontrivial solutions. Eigenvalues are the values of λ for which det(A − λI) = 0, making the system have nontrivial solutions. The eigenspace is the null space of A − λI.",
-    sectionId: "9"
+    question: "What is the difference between $\\mathbf{0}$ and $O$?",
+    answer: "Shape. Bold $\\mathbf{0}$ is the zero vector, a single column, while $O$ is the zero matrix, a rectangular array. The two letters are reserved separately precisely so an equation can hold both without ambiguity, and the bold face is what distinguishes the vector from the plain scalar zero as well.",
+    sectionId: "notation"
   }
 }
 
@@ -1455,19 +1446,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 //    return {
@@ -1641,6 +1619,22 @@ export default function HomogeneousSystemsPage({
           `The eigenvector row is where the ordering matters. $(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$ is only worth solving once $\\lambda$ is known, and $\\lambda$ is chosen precisely so that this system has a nontrivial solution — which is what $\\det(A - \\lambda I) = 0$ asserts. The characteristic equation exists to make the homogeneous system interesting; the eigenvector calculation that follows is ordinary null space work.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Homogeneous Systems FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1721,12 +1715,6 @@ export default function HomogeneousSystemsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

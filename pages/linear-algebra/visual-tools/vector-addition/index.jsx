@@ -346,7 +346,7 @@
 //   }
 // }
 
-// export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
+// export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
 //   const genericSections = [
 //     {
@@ -560,6 +560,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
 import vectorAdditionDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -599,7 +601,7 @@ export async function getStaticProps(){
 **Conformability** — the condition under which an operation is defined. For vector addition and subtraction, conformability means matching length.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -612,7 +614,7 @@ export async function getStaticProps(){
 The hover **?** icon next to the dimensions label explains why $u$ and $v$ must have the same length. Because the operation is component-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and length alone.`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `Reading the Scene Player`,
@@ -626,7 +628,7 @@ The hover **?** icon next to the dimensions label explains why $u$ and $v$ must 
 By the final scene, every component of $w$ holds its symbolic sum or difference and the vectors visualize the complete operation.`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj3: {
       title: `Switching Between Addition and Subtraction`,
@@ -640,7 +642,7 @@ By the final scene, every component of $w$ holds its symbolic sum or difference 
 Toggling the operation rebuilds the full sequence of scenes, so you can compare how vector addition and vector subtraction differ purely in operator while sharing the exact same component-wise structure.`,
       before: ``,
       after: ``,
-      link: '#switching-operations',
+      link: '',
     },
     obj4: {
       title: `Choosing Vector Length`,
@@ -654,7 +656,7 @@ Toggling the operation rebuilds the full sequence of scenes, so you can compare 
 There is no separate control for $w$ because its length is forced by the operation.`,
       before: ``,
       after: ``,
-      link: '#choosing-length',
+      link: '',
     },
     obj5: {
       title: `What Vector Addition Is`,
@@ -669,7 +671,7 @@ Geometrically, vector addition corresponds to placing the tail of $v$ at the hea
 For a comprehensive treatment of vectors and their operations, see **vector operations theory**.`,
       before: ``,
       after: ``,
-      link: '#what-vector-addition-is',
+      link: '',
     },
     obj6: {
       title: `Key Formulas`,
@@ -691,7 +693,7 @@ Vector addition satisfies the same algebraic properties as ordinary addition:
 These four properties are part of what makes $\\mathbb{R}^n$ a vector space. Subtraction is neither commutative nor associative, just like with scalars.`,
       before: ``,
       after: ``,
-      link: '#key-formulas',
+      link: '',
     },
     obj7: {
       title: `Why the Same-Length Rule Matters`,
@@ -704,7 +706,7 @@ This reflects a deeper geometric truth: vectors of different lengths live in dif
 For comparison with operations between vectors and matrices, see **matrix-vector multiplication**.`,
       before: ``,
       after: ``,
-      link: '#same-length-rule',
+      link: '',
     },
     obj8: {
       title: `Common Mistakes`,
@@ -717,7 +719,7 @@ For comparison with operations between vectors and matrices, see **matrix-vector
 • **Treating the zero vector as a scalar** — adding the scalar $0$ to a vector is meaningless; you must add the zero vector of matching length`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj9: {
       title: `Worked Example`,
@@ -736,26 +738,26 @@ $$d = \\begin{pmatrix} 1-7 \\\\ 2-8 \\\\ 3-9 \\end{pmatrix} = \\begin{pmatrix} -
 Geometrically, $u + v$ is the diagonal of the parallelogram spanned by $u$ and $v$, while $u - v$ points from the head of $v$ to the head of $u$. The visualizer above mirrors this process symbolically — set the length to $3$ and step through to see each pairing in turn.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
       content: `**Vector operations** — the broader family that includes addition, subtraction, scalar multiplication, dot product, and cross product.
 
-**Scalar multiplication of vectors** — multiplying every component of a vector by a number; like addition, it is component-wise and preserves length.
+[Scalar multiplication of vectors](!/linear-algebra/visual-tools/vector-scalar-multiplication) — multiplying every component of a vector by a number; like addition, it is component-wise and preserves length.
 
-**Dot product** — a bilinear operation that takes two vectors of the same length and returns a scalar, not a vector.
+[Dot product](!/linear-algebra/visual-tools/vectors-inner-product) — a bilinear operation that takes two vectors of the same length and returns a scalar, not a vector.
 
-**Cross product** — a special operation defined only for vectors in $\\mathbb{R}^3$ that returns a vector perpendicular to both inputs.
+[Cross product](!/linear-algebra/visual-tools/vector-cross-product) — a special operation defined only for vectors in $\\mathbb{R}^3$ that returns a vector perpendicular to both inputs.
 
-**Linear combination** — sums of the form $a u + b v$ that generalize vector addition by combining it with scalar multiplication.
+[Linear combination](!/linear-algebra/visual-tools/vector-linear-combination) — sums of the form $a u + b v$ that generalize vector addition by combining it with scalar multiplication.
 
 **Zero vector** — the additive identity, with every component equal to zero.
 
 **Vector space** — the abstract structure built on vector addition and scalar multiplication; $\\mathbb{R}^n$ is the prototypical example.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `The Opening Scene: Two Vectors of the Same Length`,
@@ -960,6 +962,7 @@ Geometrically the difference is the vector *from* the tip of $\mathbf{v}$ *to* t
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-vector-addition'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -981,7 +984,7 @@ Geometrically the difference is the vector *from* the tip of $\mathbf{v}$ *to* t
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
+export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1111,6 +1114,9 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, sta
      variant="light"
    /> */}
       <br />
+      <RelatedTools tools={relatedTools}/>
+      <br/>
+      <br/>
       <Sections sections={genericSections}/>
       <br />
       <br />

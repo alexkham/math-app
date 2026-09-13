@@ -362,7 +362,7 @@
 //    }
 
 // // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function LinearSystemsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function LinearSystemsPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -948,34 +948,6 @@ const introContent = {
 }
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What are the possible outcomes of a linear system?",
-    answer: "A linear system has exactly one of three outcomes: no solution (inconsistent, contradictory equations), exactly one solution (full column rank, no free variables), or infinitely many solutions (consistent with free variables). A system can never have exactly two or any other finite number greater than one.",
-    sectionId: "4"
-  },
-  obj2: {
-    question: "What is the augmented matrix?",
-    answer: "The augmented matrix [A | b] combines the coefficient matrix A and right-hand side b into a single m×(n+1) matrix. Row operations on the augmented matrix correspond to legal algebraic manipulations of the equations. Comparing the rank of A to the rank of [A | b] determines whether the system is consistent.",
-    sectionId: "3"
-  },
-  obj3: {
-    question: "When does a linear system have a solution?",
-    answer: "A solution exists if and only if rank(A) = rank([A | b]), meaning b lies in the column space of A. If a solution exists, it is unique when rank(A) = n (no free variables). When A is square and invertible, a unique solution exists for every b.",
-    sectionId: "9"
-  },
-  obj4: {
-    question: "What is a homogeneous linear system?",
-    answer: "A homogeneous system Ax = 0 always has the trivial solution x = 0. Nontrivial solutions exist if and only if rank(A) < n. The solution set is the null space of A — a subspace of Rⁿ with dimension n − rank(A). If there are more unknowns than equations, nontrivial solutions are guaranteed.",
-    sectionId: "8"
-  },
-  obj5: {
-    question: "What are the three elementary row operations?",
-    answer: "The three operations are: swapping two rows, multiplying a row by a nonzero scalar, and adding a multiple of one row to another. Each is reversible, so none changes the solution set. They reduce the augmented matrix to echelon form, from which the solution is read by back substitution.",
-    sectionId: "6"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -1044,19 +1016,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 //    return {
@@ -1081,7 +1040,6 @@ return {
     obj4Table,
     obj10Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Linear Systems: Solving Ax = b | Learn Math Class",
@@ -1102,7 +1060,6 @@ export default function LinearSystemsPage({
   obj4Table,
   obj10Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -1292,12 +1249,6 @@ export default function LinearSystemsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

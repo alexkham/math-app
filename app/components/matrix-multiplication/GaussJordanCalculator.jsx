@@ -2,8 +2,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './GaussJordanCalculator.module.css';
 
-const GaussJordanCalculator = () => {
+// `notes` (Line 1, added 2026-09-13) is optional and additive: an object keyed
+// by stage kind - initial, swap, scale, eliminate, eliminateAbove, zeroError -
+// whose value is rendered as raw HTML under the current stage's explanation.
+// When it is null the component behaves exactly as before.
+const GaussJordanCalculator = ({ notes = null }) => {
   const [matrixSize, setMatrixSize] = useState(3);
+  const [stageKinds, setStageKinds] = useState([]);
   const [matrix, setMatrix] = useState(Array(3).fill().map(() => Array(4).fill(0)));
   const [stages, setStages] = useState([]);
   const [currentStage, setCurrentStage] = useState(0);
@@ -99,6 +104,7 @@ const GaussJordanCalculator = () => {
     let m = matrix.map(row => [...row]);
     let stages = [{ matrix: JSON.parse(JSON.stringify(m)), highlight: [] }];
     let explanations = ["Initial matrix"];
+    let kinds = ["initial"];
   
     const rows = m.length;
     const cols = m[0].length;
@@ -117,6 +123,7 @@ const GaussJordanCalculator = () => {
           if (cols === lead) {
             setStages(stages);
             setExplanations(explanations);
+            setStageKinds(kinds);
             setCurrentStage(0);
             return;
           }
@@ -125,6 +132,7 @@ const GaussJordanCalculator = () => {
       if (i !== r) {
         [m[i], m[r]] = [m[r], m[i]];
         explanations.push(`Swap row ${r + 1} with row ${i + 1}`);
+        kinds.push("swap");
         stages.push({ 
           matrix: JSON.parse(JSON.stringify(m)), 
           highlight: [[r, 'all'], [i, 'all']]
@@ -146,6 +154,7 @@ const GaussJordanCalculator = () => {
                 <span class="new-row">[${m[r].map(x => x.toFixed(2)).join(', ')}]</span>
             </div>
             </div>`);
+        kinds.push("scale");
         stages.push({ 
           matrix: JSON.parse(JSON.stringify(m)), 
           highlight: [[r, 'all']]
@@ -169,6 +178,7 @@ const GaussJordanCalculator = () => {
                     <span class="new-row">[${m[i].map(x => x.toFixed(2)).join(', ')}]</span>
                 </div>
                 </div>`);
+            kinds.push(i < r ? "eliminateAbove" : "eliminate");
             stages.push({ 
               matrix: JSON.parse(JSON.stringify(m)), 
               highlight: [[i, 'all'], [r, 'all']]
@@ -181,6 +191,7 @@ const GaussJordanCalculator = () => {
   
     setStages(stages);
     setExplanations(explanations);
+    setStageKinds(kinds);
     setCurrentStage(0);
     setError('');
   };
@@ -306,18 +317,26 @@ const GaussJordanCalculator = () => {
             {error ? (
               <p className={styles.error}>{error}</p>
             ) : (
-              <div 
-                className={styles.stepExplanation}
-                dangerouslySetInnerHTML={{ __html: explanations[currentStage] }} 
-              />
+              <>
+                <div
+                  className={styles.stepExplanation}
+                  dangerouslySetInnerHTML={{ __html: explanations[currentStage] }}
+                />
+                {notes && stageKinds[currentStage] && notes[stageKinds[currentStage]] && (
+                  <div dangerouslySetInnerHTML={{ __html: notes[stageKinds[currentStage]] }} />
+                )}
+              </>
             )}
-           
+
           </div>
           
           )}
         {error && (
           <div className={styles.explanationSection}>
             <p className={styles.error}>{error}</p>
+            {notes && notes.zeroError && (
+              <div dangerouslySetInnerHTML={{ __html: notes.zeroError }} />
+            )}
           </div>
         )}
       </div>

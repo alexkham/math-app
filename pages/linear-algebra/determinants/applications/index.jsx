@@ -1005,6 +1005,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1744,34 +1745,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is Cramer's rule?",
-    answer: "Cramer's rule solves Ax = b by expressing each solution component as xᵢ = det(Aᵢ)/det(A), where Aᵢ replaces column i with b. It requires n+1 determinants, so it's slower than elimination for large systems but useful for symbolic work.",
-    sectionId: "1"
+    question: "In Cramer's rule, is $A_i$ a smaller matrix?",
+    answer: "No, it is exactly the same size as $A$. The subscript marks a substitution rather than a deletion: column $i$ has been replaced by the constant vector, and everything else is untouched. That distinguishes it from a minor, where a row and a column really are removed and the result genuinely shrinks.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you find the inverse using the adjugate?",
-    answer: "A⁻¹ = adj(A)/det(A), where adj(A) is the transpose of the cofactor matrix. For 2×2: swap diagonal, negate off-diagonal, divide by det. This gives explicit formulas showing how each inverse entry depends on matrix entries.",
-    sectionId: "2"
+    question: "Does a Wronskian of zero prove that functions are dependent?",
+    answer: "No, and this is the usual overstatement. The implication runs one way only: a single nonzero value proves independence. Vanishing everywhere proves nothing on its own, and only becomes conclusive when the functions are already known to solve one linear differential equation. Testing one convenient point settles nothing either way.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How is the cross product computed using a determinant?",
-    answer: "a × b = det([î, ĵ, k̂; a₁, a₂, a₃; b₁, b₂, b₃]). Expand along row 1: each component is a 2×2 minor. This is a formal determinant (first row has vectors, not numbers) but cofactor expansion works mechanically.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is the characteristic polynomial?",
-    answer: "p(λ) = det(A - λI) is a degree-n polynomial whose roots are the eigenvalues. Key facts: det(A) = product of eigenvalues (set λ=0); trace(A) = sum of eigenvalues (from the λⁿ⁻¹ coefficient).",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the Wronskian?",
-    answer: "The Wronskian W(f₁,...,fₙ) is a determinant with functions in row 1, first derivatives in row 2, etc. If W ≠ 0 at some point, the functions are linearly independent. It's essential for testing solution sets of differential equations.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the Vandermonde determinant?",
-    answer: "For nodes x₁,...,xₙ, the Vandermonde matrix has entry xᵢʲ⁻¹. Its determinant is ∏(xⱼ - xᵢ) over i < j — nonzero iff all nodes are distinct. This guarantees unique polynomial interpolation through n points.",
-    sectionId: "6"
+    question: "How many factors does a Vandermonde determinant have?",
+    answer: "One for every pair of nodes, so $\\binom{n}{2}$ rather than $n$. Four nodes give six factors, not four, and miscounting is the first thing to check when a hand computation disagrees. The ordering matters too: each difference is written with the larger index first, since swapping one factor flips the sign of the whole product.",
+    sectionId: "notation"
   }
 }
 
@@ -1846,19 +1832,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -1992,6 +1965,22 @@ const schemas = {
           `The second group has no such competitor. The characteristic polynomial exists because the determinant turns a statement about nontrivial solutions into a polynomial equation, and without that step there is nothing to solve for. The Wronskian tests something no elimination can reach, since its entries are functions rather than numbers. These are the applications that justify the determinant rather than merely using it.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Determinant Applications FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2028,12 +2017,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

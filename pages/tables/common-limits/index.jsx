@@ -1198,29 +1198,6 @@ export async function getStaticProps(){
 }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are common limits?",
-      answer: "Common limits are the limit identities used most often in calculus: limits of constants and powers, the foundational sin(x)/x limit and its trigonometric relatives, the limits that define e, the behavior of polynomials, exponentials, and logarithms at infinity, and one-sided limits where the two-sided limit fails to exist."
-    },
-    obj2: {
-      question: "What is the limit of sin x over x as x approaches 0?",
-      answer: "The limit of sin(x)/x as x approaches 0 equals 1. This is the foundational trigonometric limit, proven by the squeeze theorem using a geometric argument with the unit circle. Every standard derivative of a trigonometric function reduces to this identity."
-    },
-    obj3: {
-      question: "What is the definition of e as a limit?",
-      answer: "The constant e can be defined as a limit in two equivalent forms: e equals the limit of (1 + 1/x) to the power x as x approaches infinity, and e equals the limit of (1 + x) to the power 1/x as x approaches 0. Substituting u equal to 1 over x converts one form into the other."
-    },
-    obj4: {
-      question: "What is L Hopital's rule?",
-      answer: "L Hopital's rule resolves indeterminate forms of type 0 over 0 or infinity over infinity by differentiating the numerator and denominator separately. If the resulting limit of f-prime(x) over g-prime(x) exists, then the original limit equals it. The rule can be applied repeatedly when the result is still indeterminate."
-    },
-    obj5: {
-      question: "What is the squeeze theorem?",
-      answer: "The squeeze theorem says that if f(x) is less than or equal to g(x), which is less than or equal to h(x) near a point a, and the outer functions f and h both have the same limit L at a, then g must also have the limit L at a. It is the standard way to evaluate limits of bounded oscillating expressions, including sin(x)/x at 0 and at infinity."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -1282,19 +1259,6 @@ export async function getStaticProps(){
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -1302,7 +1266,6 @@ export async function getStaticProps(){
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
          staticDataset,
           seoData: {
@@ -1320,7 +1283,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
     
   const genericSections=[
@@ -1522,12 +1485,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

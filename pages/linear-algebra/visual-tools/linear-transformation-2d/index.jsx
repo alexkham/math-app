@@ -222,7 +222,7 @@
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent, relatedTools }) {
 
     
 //   const genericSections=[
@@ -498,6 +498,8 @@ import LinearTransformation from '../../../../app/components/linear-algebra copy
 import { SCENARIOS as LT_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/linear-transformations/LinearTransformations'
 import linearTransformationDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -705,21 +707,21 @@ For comprehensive treatment see **eigenvalues and eigenvectors**, **matrix rank*
     },
     obj11:{
       title:`Related Concepts`,
-      content:`**Matrix Multiplication** &mdash; the operation that realizes any linear transformation: $T(v) = Av$.
+      content:`[Matrix Multiplication](!/visual-tools/matrix-multiplication) &mdash; the operation that realizes any linear transformation: $T(v) = Av$.
 
-**Determinant** &mdash; signed area scaling factor and orientation indicator.
+[Determinant](!/linear-algebra/visual-tools/matrix-determinant) &mdash; signed area scaling factor and orientation indicator.
 
-**Eigenvalues and Eigenvectors** &mdash; the invariant directions and scaling factors of $A$.
+[Eigenvalues and Eigenvectors](!/linear-algebra/visual-tools/eigenvalues-eigenvectors) &mdash; the invariant directions and scaling factors of $A$.
 
 **Kernel and Image** &mdash; what gets collapsed and what gets reached, especially visible for singular matrices.
 
 **Rank-Nullity Theorem** &mdash; $\\text{rank}(A) + \\text{nullity}(A) = 2$ for any $2 \\times 2$ matrix.
 
-**Change of Basis** &mdash; expressing $A$ in a different basis. In the eigenbasis, $A$ becomes diagonal.
+[Change of Basis](!/linear-algebra/visual-tools/change-basis-2d) &mdash; expressing $A$ in a different basis. In the eigenbasis, $A$ becomes diagonal.
 
-**Singular Value Decomposition** &mdash; the unit circle morphs into an ellipse; the singular values are the lengths of the ellipse axes.
+[Singular Value Decomposition](!/linear-algebra/visual-tools/singular-value-decomposition) &mdash; the unit circle morphs into an ellipse; the singular values are the lengths of the ellipse axes.
 
-**Rotation Matrices** &mdash; the special case $A^T A = I$ with $\\det A = 1$. Length-preserving rigid motions.`,
+[Rotation Matrices](!/linear-algebra/visual-tools/orthogonal-matrices) &mdash; the special case $A^T A = I$ with $\\det A = 1$. Length-preserving rigid motions.`,
       before:``,
       after:``,
       link:'',
@@ -969,6 +971,7 @@ This preset is the reason "rank" is a more informative measure than "invertible 
 
    return {
       props:{
+        relatedTools: getRelatedTools('linear-algebra-linear-transformation-2d'),
          sectionsContent,
          stateUnits,
          explanationOverride,
@@ -991,7 +994,7 @@ This preset is the reason "rank" is a more informative measure than "invertible 
     }
    }
 
-export default function LinearTransformation2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas}) {
+export default function LinearTransformation2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1115,6 +1118,9 @@ export default function LinearTransformation2DPage({seoData, sectionsContent, st
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

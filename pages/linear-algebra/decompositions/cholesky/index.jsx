@@ -1786,6 +1786,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2329,29 +2330,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the Cholesky decomposition?",
-    answer: "The Cholesky decomposition writes a symmetric positive definite matrix A as A = LLᵀ, where L is lower triangular with strictly positive diagonal entries. It is the unique matrix square root in this form and is the fastest direct solver for symmetric positive definite systems.",
-    sectionId: "1"
+    question: "Does positive definite mean all the entries are positive?",
+    answer: "No, the two properties are unrelated. Positive definiteness is a statement about the quadratic form $\\mathbf{x}^{T}A\\mathbf{x}$ being positive for every nonzero $\\mathbf{x}$, not about the numbers in the array. A positive definite matrix can contain negative entries, and a matrix of entirely positive entries need not be positive definite.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "When does the Cholesky decomposition exist?",
-    answer: "The Cholesky factorization exists if and only if the matrix is symmetric and positive definite — meaning xᵀAx > 0 for every nonzero vector x. Equivalently, all eigenvalues must be strictly positive. If the matrix is only positive semi-definite or indefinite, the standard algorithm breaks down.",
-    sectionId: "2"
+    question: "Is the Cholesky factor the same as the matrix square root?",
+    answer: "No, though both reproduce $A$ through a product. A genuine square root exists as the unique symmetric positive definite $S$ with $SS = A$, built from the eigenvalues, whereas the Cholesky factor $L$ is triangular. Writing $A^{1/2}$ for $L$ silently changes any result that depends on symmetry, and $S$ costs far more to compute.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How is Cholesky different from LU decomposition?",
-    answer: "Cholesky exploits symmetry and positive definiteness to achieve half the cost of LU (n³/3 vs 2n³/3 operations), requires no pivoting, and stores only one triangular factor since the other is its transpose. Cholesky is the symmetric-positive-definite specialization of LU.",
-    sectionId: "9"
-  },
-  obj4: {
-    question: "Why does Cholesky not require pivoting?",
-    answer: "Positive definiteness guarantees that every quantity under the square root during the algorithm is strictly positive. No zero or negative pivots can occur, so row swaps are never needed. If the algorithm encounters a non-positive value, the matrix is not positive definite.",
-    sectionId: "6"
-  },
-  obj5: {
-    question: "Where is Cholesky decomposition used?",
-    answer: "Cholesky appears in solving normal equations for least squares, sampling from multivariate normal distributions using covariance matrices, finite element stiffness matrices, and Newton's method in optimization. It is the default solver whenever the matrix is symmetric positive definite.",
-    sectionId: "8"
+    question: "Why is the pivoting written $PAP^{T}$ here rather than $PA$?",
+    answer: "Because symmetry has to survive. The one-sided form used for LU swaps rows only, which destroys the symmetry Cholesky depends on and can leave a matrix with no factorisation at all. Applying the permutation on both sides reorders rows and columns together, and since $P^{T} = P^{-1}$ the result is similar to $A$, preserving eigenvalues and definiteness.",
+    sectionId: "notation"
   }
 }
 
@@ -2428,19 +2419,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -2606,6 +2584,22 @@ export default function PageTemplate({
           `One case deserves separate attention because it does not announce itself. A matrix that is positive definite but nearly singular runs to completion — no error, no halt — while the small pivots quietly amplify rounding error through $L$. The result looks like a successful factorization and is not a reliable one, which is why the smallest diagonal entry of $L$ is worth reading rather than assuming.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Cholesky Decomposition FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -2743,12 +2737,6 @@ export default function PageTemplate({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

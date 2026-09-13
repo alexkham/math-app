@@ -222,7 +222,7 @@
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent, relatedTools }) {
 
     
 //   const genericSections=[
@@ -498,6 +498,8 @@ import ChangeBasis from '../../../../app/components/linear-algebra copy/r2-visua
 import { SCENARIOS as CB_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/change-basis/ChangeBasis'
 import changeBasisDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/change-basis/changeBasisDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -675,17 +677,17 @@ For a full treatment see **matrix inverse**, **determinant**, and **matrix multi
       title:`Related Concepts`,
       content:`**Basis of a Vector Space** &mdash; the underlying definition of what makes a valid coordinate system.
 
-**Linear Independence** &mdash; the condition $b_1$ and $b_2$ must satisfy for $B$ to be invertible.
+[Linear Independence](!/linear-algebra/visual-tools/span-independence-2d) &mdash; the condition $b_1$ and $b_2$ must satisfy for $B$ to be invertible.
 
-**Matrix Inverse** &mdash; the operation that takes you from standard coordinates back to new-basis coordinates.
+[Matrix Inverse](!/linear-algebra/visual-tools/matrix-inverse) &mdash; the operation that takes you from standard coordinates back to new-basis coordinates.
 
-**Determinant** &mdash; tells you whether $B$ is invertible, by how much it scales area, and whether it preserves or reverses orientation.
+[Determinant](!/linear-algebra/visual-tools/matrix-determinant) &mdash; tells you whether $B$ is invertible, by how much it scales area, and whether it preserves or reverses orientation.
 
-**Eigenvalues and Eigenvectors** &mdash; a change of basis to eigenvectors diagonalizes a transformation, the foundation of many decompositions.
+[Eigenvalues and Eigenvectors](!/linear-algebra/visual-tools/eigenvalues-eigenvectors) &mdash; a change of basis to eigenvectors diagonalizes a transformation, the foundation of many decompositions.
 
-**Orthogonal Matrices** &mdash; the special case where $B^{-1} = B^T$ and the change of basis is a pure rotation or reflection.
+[Orthogonal Matrices](!/linear-algebra/visual-tools/orthogonal-matrices) &mdash; the special case where $B^{-1} = B^T$ and the change of basis is a pure rotation or reflection.
 
-**Linear Transformations** &mdash; a change of basis is one viewpoint; a true transformation moves the vector. The same matrix can play either role depending on interpretation.`,
+[Linear Transformations](!/linear-algebra/visual-tools/linear-transformation-2d) &mdash; a change of basis is one viewpoint; a true transformation moves the vector. The same matrix can play either role depending on interpretation.`,
       before:``,
       after:``,
       link:'',
@@ -948,6 +950,7 @@ That is why $\det B \neq 0$ is the precondition for everything else on this page
 
    return {
       props:{
+        relatedTools: getRelatedTools('linear-algebra-change-basis-2d'),
          sectionsContent,
          stateUnits,
          explanationOverride,
@@ -970,7 +973,7 @@ That is why $\det B \neq 0$ is the precondition for everything else on this page
     }
    }
 
-export default function ChangeBasis2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas}) {
+export default function ChangeBasis2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1093,6 +1096,9 @@ export default function ChangeBasis2DPage({seoData, sectionsContent, stateUnits,
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

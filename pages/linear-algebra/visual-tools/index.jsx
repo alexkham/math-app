@@ -86,6 +86,12 @@ export async function getStaticProps(){
           "name": "Gaussian Elimination Calculator",
           "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/gauss-elimination",
           "description": "Transforms matrices to row echelon form or reduced row echelon form one row operation at a time."
+        },
+        {
+          "@type": "WebPage",
+          "name": "Square Matrix Types Generator",
+          "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-types",
+          "description": "Generates identity, zero, scalar, diagonal, triangular, symmetric and skew-symmetric matrices with their defining patterns and properties."
         }
         // NOTE: Add other tools auto-pulled from filesystem here as they come online.
       ]
@@ -172,28 +178,51 @@ export async function getStaticProps(){
     tip: "Start with the Matrix Multiplication Visualizer to see how dot products build the result one element at a time."
   }
 
+  // Cross-listed tools that live at top-level /visual-tools/* routes on
+  // purpose: Search Console (90 days to 2026-09-12) puts matrix-multiplication
+  // at 325 clicks, 4th page on the whole site, so its URL is not moved.
+  // Gaussian elimination and matrix types were relocated into this folder
+  // the same day and are now auto-discovered like every other tool here.
   const comingSoonItems = [
     {
       at: 'end',
       title: 'Matrix Multiplication Visualizer',
-      description: 'Step-by-step animated matrix multiplication with full control over the calculation. Watch each dot product form element-by-element, with red highlighting on the specific pair of values currently being multiplied and yellow on the full row-and-column being combined. Step forward and back, pause, resume, or let it auto-play. Resize either matrix from 1×1 up to 10×10, generate random values within any range, or edit cells by hand — the result matrix dimensions update automatically, and incompatible dimensions are caught before computation starts. A running commentary below the grids spells out every multiplication and the accumulating sum, so the formula C[i][j] = Σ A[i][k]·B[k][j] becomes concrete arithmetic you can verify by hand.',
+      description: 'Symbolic, step-by-step animation of A × B = C. Pick a scenario — general A × B, matrix × vector, or vector × matrix — set the shapes with linked steppers, and toggle the order to see when B × A exists and when it does not. Four strategies show the same product four ways: row · column builds one cell at a time as a dot product, column by column and row by row build C as weighted sums of the columns of A or the rows of B, and the sum of outer products accumulates C from rank-one pieces. Highlights on A and B, arrows into C, a running formula, and a step log with a permanent lead note make every term traceable, and each strategy links to a full explanation on the page.',
       href: '/visual-tools/matrix-multiplication',
       svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="26" width="10" height="10" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><rect x="14" y="26" width="10" height="10" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><rect x="4" y="36" width="10" height="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><rect x="14" y="36" width="10" height="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><text x="28" y="42" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle">&#215;</text><rect x="33" y="26" width="10" height="10" fill="#97C459" stroke="#27500A" stroke-width="1"/><rect x="43" y="26" width="10" height="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><rect x="33" y="36" width="10" height="10" fill="#97C459" stroke="#27500A" stroke-width="1"/><rect x="43" y="36" width="10" height="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><text x="57" y="42" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle">=</text><rect x="62" y="26" width="10" height="10" fill="#EF9F27" stroke="#854F0B" stroke-width="1.3"/><rect x="72" y="26" width="7" height="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><rect x="62" y="36" width="10" height="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><rect x="72" y="36" width="7" height="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><path d="M 14 22 Q 40 12 66 22" fill="none" stroke="#B5D4F4" stroke-width="0.9" stroke-dasharray="2.5,2"/><path d="M 66 22 L 62.5 20.5 L 63.5 24.5 Z" fill="#B5D4F4"/><text x="40" y="62" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">row &#215; column</text></svg>`,
       category: 'Matrices',
       subCategory:'Matrix Operations',
       icon: '',
     },
-    {
-      at: 'end',
-      title: 'Gaussian Elimination Calculator',
-      description: 'Transform any matrix to row echelon form (REF) or reduced row echelon form (RREF) one row operation at a time. Choose a size from 2×3 up to 5×6, fill the cells by hand or generate random values, then pick which form to reduce to. Each stage shows the operation performed — row swap, scaling, or elimination — with the affected rows highlighted in the matrix and the row state before and after spelled out in textbook notation. Step manually with Previous and Next, or hit Play for automatic 1-second advance. RREF makes solutions immediately readable; REF stops earlier and leaves back-substitution to you.',
-      href: '/visual-tools/gauss-elimination',
-      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="14" height="14" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><rect x="24" y="18" width="14" height="14" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><rect x="38" y="18" width="14" height="14" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><rect x="54" y="18" width="14" height="14" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.9"/><rect x="10" y="32" width="14" height="14" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.8"/><rect x="24" y="32" width="14" height="14" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><rect x="38" y="32" width="14" height="14" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/><rect x="54" y="32" width="14" height="14" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.9"/><rect x="10" y="46" width="14" height="14" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.8"/><rect x="24" y="46" width="14" height="14" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.8"/><rect x="38" y="46" width="14" height="14" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><rect x="54" y="46" width="14" height="14" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.9"/><line x1="52" y1="16" x2="52" y2="62" stroke="#185FA5" stroke-width="1.2" stroke-dasharray="3,2"/><text x="17" y="28" font-family="Georgia,serif" font-size="8" fill="#412402" text-anchor="middle">1</text><text x="31" y="42" font-family="Georgia,serif" font-size="8" fill="#412402" text-anchor="middle">1</text><text x="45" y="56" font-family="Georgia,serif" font-size="8" fill="#412402" text-anchor="middle">1</text><text x="17" y="42" font-family="Georgia,serif" font-size="8" fill="#888780" text-anchor="middle">0</text><text x="17" y="56" font-family="Georgia,serif" font-size="8" fill="#888780" text-anchor="middle">0</text><text x="31" y="56" font-family="Georgia,serif" font-size="8" fill="#888780" text-anchor="middle">0</text><text x="40" y="72" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">row echelon</text></svg>`,
-      category: 'Matrices',
-      subCategory:'Matrix Operations',
-      icon: '',
-    },
   ]
+
+  // Keep the structured data in step with the cards the page actually renders:
+  // the auto-discovered tools in this folder PLUS the cross-listed ones above.
+  // Written here rather than by hand inside `schemas` because the hand-written
+  // list had drifted - it pointed matrix multiplication at
+  // /linear-algebra/visual-tools/matrix-multiplication, which does not exist
+  // (the tool stays at the top-level /visual-tools route by owner decision),
+  // and it never gained the tools added since.
+  const schemaTools = [...toolsData.items, ...comingSoonItems]
+
+  schemas.collectionPage.hasPart = schemaTools.map((tool) => ({
+    "@type": "WebPage",
+    "name": tool.title,
+    "url": `https://www.learnmathclass.com${tool.href}`,
+    "description": tool.shortDescription || tool.description || ''
+  }))
+
+  schemas.itemList.itemListElement = schemaTools.map((tool, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "SoftwareApplication",
+      "name": tool.title,
+      "url": `https://www.learnmathclass.com${tool.href}`,
+      "applicationCategory": "EducationalApplication",
+      "description": tool.shortDescription || tool.description || ''
+    }
+  }))
 
   return {
     props:{

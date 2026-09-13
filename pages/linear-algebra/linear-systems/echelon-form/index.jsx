@@ -961,6 +961,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1567,29 +1568,19 @@ The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for th
 
 const faqQuestions = {
   obj1: {
-    question: "What is row echelon form?",
-    answer: "A matrix is in row echelon form (REF) when zero rows are at the bottom, each pivot is to the right of the pivot above, and all entries below each pivot are zero. This creates a staircase pattern. The solution is obtained by back substitution from the bottom row upward.",
-    sectionId: "1"
+    question: "Can you speak of \"the\" echelon form of a matrix?",
+    answer: "Only for the reduced form, which is unique. Plain row echelon form is not: different elimination paths produce different entries, so the definite article quietly asserts a uniqueness that only RREF has. What every echelon form of a matrix does share is the set of pivot positions, and those are what determine the rank.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is reduced row echelon form?",
-    answer: "Reduced row echelon form (RREF) adds two conditions to REF: each pivot equals 1 and is the only nonzero entry in its column. RREF is unique for every matrix, and solutions can be read directly without back substitution.",
-    sectionId: "2"
+    question: "Does a pivot have to equal $1$?",
+    answer: "In reduced row echelon form yes, where each pivot is forced to $1$ and earns the name leading one. In plain echelon form a pivot can be any nonzero value, which is exactly why it needs marking there and not in RREF. Note that the phrase \"the pivots of $A$\" refers to positions rather than values.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the difference between pivot and free variables?",
-    answer: "Pivot variables correspond to columns containing a pivot — their values are determined by the system. Free variables correspond to non-pivot columns and can take any real value. Free variables parametrize the solution set: each one adds a dimension to the solution space.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "How do you detect an inconsistent system from echelon form?",
-    answer: "A system is inconsistent if the echelon form contains a row [0 0 ⋯ 0 | d] with d ≠ 0, representing the impossible equation 0 = d. This means rank([A | b]) > rank(A) and the right-hand side b is not in the column space of A.",
-    sectionId: "8"
-  },
-  obj5: {
-    question: "How does echelon form determine the rank?",
-    answer: "The rank of a matrix equals the number of pivots in any echelon form. From the rank r, everything follows: column space dimension r, null space dimension n − r, consistency when rank(A) = rank([A | b]), and uniqueness when r = n.",
-    sectionId: "10"
+    question: "Are the free parameters unknowns still waiting to be solved for?",
+    answer: "No, they range over all scalars, and the expression containing them is the entire solution set written at once rather than an equation left unfinished. Their number is forced even though their names are not: there are $n - \\operatorname{rank}(A)$ of them, and a unique solution is simply the case where that count reaches zero.",
+    sectionId: "notation"
   }
 }
 const schemas = {
@@ -1664,19 +1655,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1858,6 +1836,22 @@ export default function EchelonFormPage({
           `The last three entries are the same question asked with increasing strictness: does a solution exist, is it unique, and does the matrix invert. Each adds a condition to the one before, and a square matrix satisfying all three reduces to the identity — which is the point at which reduction stops being a technique for solving systems and becomes a test of the matrix itself.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Echelon Form FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1938,12 +1932,6 @@ export default function EchelonFormPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -424,7 +424,7 @@
 //   }
 // }
 //    }
-// export default function DeterminantsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function DeterminantsPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -1017,59 +1017,6 @@ const introContent = {
   content: `Every square matrix maps to a single scalar called its determinant. This value captures whether the matrix is invertible, how it scales geometric regions, and whether it preserves or reverses orientation. The determinant appears throughout linear algebra — in eigenvalue equations, system-solving formulas, and volume computations — making it one of the most information-dense quantities attached to a matrix.`,
 }
 
-const faqQuestions = {
-  obj1: {
-    question: "What is the determinant of a matrix?",
-    answer: "The determinant is a single scalar assigned to every square matrix. It determines invertibility (det ≠ 0 means invertible), measures how the matrix scales volume, and indicates whether orientation is preserved or reversed. Only square matrices have determinants.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the formula for a 2×2 determinant?",
-    answer: "For A = [[a,b],[c,d]], det(A) = ad - bc. This equals the signed area of the parallelogram spanned by the column vectors. Zero means the columns are parallel; positive means counterclockwise arrangement; negative means clockwise.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you calculate a 3×3 determinant?",
-    answer: "Expand along the first row: det(A) = a₁₁(a₂₂a₃₃ - a₂₃a₃₂) - a₁₂(a₂₁a₃₃ - a₂₃a₃₁) + a₁₃(a₂₁a₃₂ - a₂₂a₃₁). Alternatively, use the Sarrus rule: sum downward diagonals minus upward diagonals. Sarrus only works for 3×3.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you compute an n×n determinant?",
-    answer: "Use cofactor expansion: det(A) = Σ(-1)^(1+j) a₁ⱼ M₁ⱼ where M₁ⱼ is the (n-1)×(n-1) minor. This is recursive and costs O(n!) operations. For large matrices, row reduction to triangular form (O(n³)) is practical.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What does det(A) = 0 mean?",
-    answer: "A zero determinant means the matrix is singular (not invertible). The columns are linearly dependent, the system Ax = 0 has nontrivial solutions, the rank is less than n, and the transformation collapses at least one dimension to zero volume.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the best way to compute determinants by hand?",
-    answer: "For 2×2, use ad - bc. For 3×3, use first-row expansion or Sarrus rule. For 4×4+, use cofactor expansion along a row/column with the most zeros to minimize sub-determinants. Scan for zeros before expanding.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What are minors and cofactors?",
-    answer: "The (i,j) minor Mᵢⱼ is the determinant after deleting row i and column j. The cofactor Cᵢⱼ = (-1)^(i+j)Mᵢⱼ includes the checkerboard sign. Expansion along any row or column using cofactors gives the same determinant.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do row operations affect the determinant?",
-    answer: "Swapping rows multiplies det by -1. Scaling a row by k multiplies det by k. Adding a multiple of one row to another leaves det unchanged. These rules enable O(n³) computation via row reduction to triangular form.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "What is the geometric meaning of the determinant?",
-    answer: "|det(A)| equals the scaling factor for n-dimensional volume: area in 2D, volume in 3D. The sign indicates orientation: positive preserves (counterclockwise/right-handed), negative reverses. Zero means collapse to lower dimension.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "What formulas use the determinant?",
-    answer: "Cramer's rule: xᵢ = det(Aᵢ)/det(A). Inverse: A⁻¹ = adj(A)/det(A). Cross product via 3×3 determinant with unit vectors. Characteristic polynomial det(A - λI) for eigenvalues. Wronskian for function independence.",
-    sectionId: "10"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -1138,19 +1085,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -1160,7 +1094,6 @@ const schemas = {
     obj8Table,
     obj10Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Determinants: Formula, Properties & Applications | Learn Math Class",
@@ -1179,7 +1112,6 @@ export default function DeterminantsPage({
   obj8Table,
   obj10Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -1318,12 +1250,6 @@ export default function DeterminantsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

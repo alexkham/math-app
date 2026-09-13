@@ -944,6 +944,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1439,28 +1440,18 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a symmetric matrix?",
-    answer: "A symmetric matrix equals its own transpose, meaning the entry in row i, column j is the same as the entry in row j, column i. Every eigenvalue of a real symmetric matrix is real, and its eigenvectors can be chosen to be mutually orthogonal. Symmetric matrices can always be diagonalized by an orthogonal matrix.",
-    sectionId: "5"
+    question: "Why must the diagonal of a skew-symmetric matrix be zero?",
+    answer: "Because the defining condition applies to the diagonal too. Setting $i = j$ in $a_{ij} = -a_{ji}$ gives $a_{ii} = -a_{ii}$, and the only number equal to its own negative is zero. So every diagonal entry vanishes automatically, without being imposed as a separate requirement.",
+    sectionId: "6"
   },
   obj2: {
-    question: "What is a diagonal matrix?",
-    answer: "A diagonal matrix has nonzero entries only on the main diagonal, with all off-diagonal entries equal to zero. Its powers, products, and inverse reduce to operations on the diagonal entries alone. The determinant is the product of the diagonal entries, and the eigenvalues are the diagonal entries themselves.",
-    sectionId: "3"
+    question: "Can any square matrix be split into symmetric and skew-symmetric parts?",
+    answer: "Yes, and the split is unique. Writing $A = \\frac{1}{2}(A + A^{T}) + \\frac{1}{2}(A - A^{T})$ gives a symmetric first term and a skew-symmetric second term. No other decomposition into those two kinds exists, which makes the pairing a genuine structural fact rather than one construction among several.",
+    sectionId: "6"
   },
   obj3: {
-    question: "What makes a matrix orthogonal?",
-    answer: "A square matrix is orthogonal when its transpose equals its inverse, meaning its columns form an orthonormal set. Orthogonal matrices preserve lengths and angles, making them the algebraic representation of rotations and reflections. Their determinant is always +1 or −1.",
-    sectionId: "7"
-  },
-  obj4: {
-    question: "What is the difference between singular and nonsingular matrices?",
-    answer: "A singular matrix has determinant zero, linearly dependent columns, and rank less than its order — the system Ax = b does not have a unique solution for every b. A nonsingular matrix has nonzero determinant, full rank, and a unique inverse, guaranteeing exactly one solution for every right-hand side.",
-    sectionId: "10"
-  },
-  obj5: {
-    question: "What are nilpotent and idempotent matrices?",
-    answer: "A nilpotent matrix satisfies Aᵏ = O for some positive integer k, meaning all its eigenvalues are zero. An idempotent matrix satisfies A² = A, so applying the transformation twice is the same as applying it once. Idempotent matrices act as projections, and their rank always equals their trace.",
+    question: "Why does rank equal trace for an idempotent matrix?",
+    answer: "Because $A^2 = A$ forces every eigenvalue to satisfy $\\lambda^2 = \\lambda$, leaving only $0$ and $1$ as possibilities. The trace sums the eigenvalues, so it simply counts how many equal $1$, and that count is the dimension of the image. Two quantities defined quite differently coincide for this one family.",
     sectionId: "8"
   }
 }
@@ -1536,19 +1527,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 return {
@@ -1678,6 +1656,22 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
           `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it **is** diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrix Types FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
    
 
 ]
@@ -1716,12 +1710,6 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

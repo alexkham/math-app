@@ -222,7 +222,7 @@
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent, relatedTools }) {
 
     
 //   const genericSections=[
@@ -498,6 +498,8 @@ import KernelImage from '../../../../app/components/linear-algebra copy/r2-visua
 import { SCENARIOS as KI_SCENARIOS } from '../../../../app/components/linear-algebra copy/r2-visualizers/kernel-image/KernelImage'
 import kernelImageDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -692,17 +694,17 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
     },
     obj11:{
       title:`Related Concepts`,
-      content:`**Column Space** &mdash; same as the image; spanned by the columns of $A$.
+      content:`[Column Space](!/linear-algebra/visual-tools/four-fundamental-subspaces) &mdash; same as the image; spanned by the columns of $A$.
 
 **Null Space** &mdash; same as the kernel; solutions to $Av = 0$.
 
-**Rank of a Matrix** &mdash; the dimension of the image, equal to the number of linearly independent columns.
+[Rank of a Matrix](!/linear-algebra/visual-tools/matrix-rank) &mdash; the dimension of the image, equal to the number of linearly independent columns.
 
-**Determinant** &mdash; for a $2 \\times 2$ matrix, $\\det(A) = 0$ exactly when the matrix has nontrivial kernel.
+[Determinant](!/linear-algebra/visual-tools/matrix-determinant) &mdash; for a $2 \\times 2$ matrix, $\\det(A) = 0$ exactly when the matrix has nontrivial kernel.
 
-**Linear Independence** &mdash; the columns of $A$ are linearly independent if and only if $A$ has rank 2.
+[Linear Independence](!/linear-algebra/visual-tools/span-independence-2d) &mdash; the columns of $A$ are linearly independent if and only if $A$ has rank 2.
 
-**Invertible Matrices** &mdash; the case where kernel is trivial and image is the full codomain.
+[Invertible Matrices](!/linear-algebra/visual-tools/matrix-inverse) &mdash; the case where kernel is trivial and image is the full codomain.
 
 **Row Space and Four Fundamental Subspaces** &mdash; kernel and image of $A$ together with kernel and image of $A^T$ form the four fundamental subspaces of linear algebra.
 
@@ -926,6 +928,7 @@ Comparing this against the rank-1 case is the point of having it. Both are singu
 
    return {
       props:{
+        relatedTools: getRelatedTools('linear-algebra-kernel-image-2d'),
          sectionsContent,
          stateUnits,
          introContent,
@@ -947,7 +950,7 @@ Comparing this against the rank-1 case is the point of having it. Both are singu
     }
    }
 
-export default function KernelImage2DPage({seoData, sectionsContent, stateUnits, introContent, faqQuestions, schemas}) {
+export default function KernelImage2DPage({seoData, sectionsContent, stateUnits, introContent, faqQuestions, schemas, relatedTools }) {
 
   /* ---- per-scenario panel notes (Line 1) ----
      Built here rather than in getStaticProps: SCENARIOS entries carry A, and
@@ -1103,6 +1106,9 @@ export default function KernelImage2DPage({seoData, sectionsContent, stateUnits,
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

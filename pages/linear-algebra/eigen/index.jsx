@@ -334,7 +334,7 @@
 //    }
 
 
-//    export default function EigenvaluesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+//    export default function EigenvaluesPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -851,49 +851,6 @@ const introContent = {
 }
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What is the core idea of eigenvalues and eigenvectors?",
-    answer: "When a matrix multiplies most vectors, the result points in a different direction. Eigenvectors are special vectors that remain in the same direction after multiplication—they're only scaled. The scaling factor is the eigenvalue. These are the 'natural axes' of the transformation.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the definition of eigenvalue and eigenvector?",
-    answer: "For an n×n matrix A, a nonzero vector v is an eigenvector if Av = λv for some scalar λ (the eigenvalue). The vector v ≠ 0 is required—the zero vector trivially satisfies the equation for all λ. Only square matrices have eigenvalues.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How do you find eigenvalues?",
-    answer: "Rewrite Av = λv as (A - λI)v = 0. This homogeneous system has nontrivial solutions only when det(A - λI) = 0. This determinant equation (the characteristic equation) is a polynomial whose roots are the eigenvalues.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is an eigenspace?",
-    answer: "The eigenspace E_λ = Null(A - λI) is the set of all eigenvectors for eigenvalue λ, plus the zero vector. It's a subspace of ℝⁿ. Its dimension is the geometric multiplicity of λ. Find a basis by row reducing A - λI and extracting the null space.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the geometric meaning of eigenvalues?",
-    answer: "The eigenvalue determines what happens along the eigenvector direction: λ > 1 stretches, 0 < λ < 1 compresses, λ < 0 reverses direction, λ = 1 fixes the vector, λ = 0 collapses to origin. Eigenvectors are directions the transformation preserves.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you find eigenvectors with an example?",
-    answer: "For A = [[4,2],[1,3]]: characteristic equation (4-λ)(3-λ)-2 = 0 gives λ = 2, 5. For λ = 2: solve (A-2I)v = 0, get v₁ = (-1,1)ᵀ. For λ = 5: solve (A-5I)v = 0, get v₂ = (2,1)ᵀ. Verify: Av₁ = 2v₁, Av₂ = 5v₂.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How are trace and determinant related to eigenvalues?",
-    answer: "Trace equals the sum of eigenvalues: tr(A) = λ₁ + λ₂ + ... + λₙ. Determinant equals the product: det(A) = λ₁λ₂...λₙ. A matrix is invertible iff no eigenvalue is zero; singular iff at least one eigenvalue vanishes.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "Why do eigenvalues matter?",
-    answer: "Eigenvalues enable diagonalization (A = PDP⁻¹), making Aᵏ easy to compute. In dynamical systems, eigenvalues determine growth/decay/oscillation. In statistics, eigenvectors of covariance matrices give principal components. They're central to spectral methods across applied mathematics.",
-    sectionId: "8"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -960,19 +917,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -982,7 +926,6 @@ const schemas = {
     obj5Table,
     obj6Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Eigenvalues & Eigenvectors: Definition & Examples | Learn Math Class",
@@ -1003,7 +946,6 @@ const schemas = {
      obj5Table,
      obj6Table,
      summaryTable,
-     faqQuestions,
      schemas,
    }) {
 
@@ -1133,12 +1075,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

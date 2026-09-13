@@ -1123,6 +1123,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1839,29 +1840,19 @@ In abstract spaces where vectors are not columns of numbers, the row-reduction s
 
 const faqQuestions = {
   obj1: {
-    question: "What does linearly independent mean?",
-    answer: "A set of vectors is linearly independent if the only linear combination that produces the zero vector is the trivial one where all coefficients are zero. Equivalently, no vector in the set can be written as a combination of the others. Every vector contributes a direction that the rest cannot replicate.",
-    sectionId: "1"
+    question: "Why is independence stated as an implication rather than an equation?",
+    answer: "Because the equation alone proves nothing. Setting every coefficient to zero always satisfies $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$, whatever the vectors are, so finding that solution is no evidence. Independence is the stronger claim that no other solution exists, and only an implication can say that.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you test if vectors are linearly independent?",
-    answer: "Arrange the vectors as columns of a matrix and row reduce. The vectors are independent if and only if every column contains a pivot (no free variables). For exactly n vectors in Rⁿ, the determinant test also works: independent if and only if the determinant is nonzero.",
-    sectionId: "3"
+    question: "Does a dependent set mean every vector in it is redundant?",
+    answer: "No. Dependence is a property of the set, and it only requires that some non-trivial relation exists. In $\\{\\mathbf{v}, \\mathbf{v}, \\mathbf{w}\\}$ the repetition creates dependence while $\\mathbf{w}$ may be entirely unrelated to the others. A dependence relation identifies which vectors take part, and the rest are untouched by it.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is a dependence relation?",
-    answer: "A dependence relation is a nontrivial linear combination c₁v₁ + ⋯ + cₖvₖ = 0 where not all coefficients are zero. It identifies which vectors are redundant: any vector with a nonzero coefficient can be expressed as a combination of the others by rearranging the equation.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "How many vectors can be independent in Rⁿ?",
-    answer: "At most n vectors can be independent in Rⁿ. Any set of n+1 or more vectors is automatically dependent, regardless of the specific vectors. An independent set of exactly n vectors in Rⁿ is automatically a basis — it spans the entire space.",
-    sectionId: "2"
-  },
-  obj5: {
-    question: "What is the Wronskian test for functions?",
-    answer: "The Wronskian is the determinant of the matrix whose rows are successive derivatives of the functions. If the Wronskian is nonzero at any single point, the functions are linearly independent. A vanishing Wronskian implies dependence only when the functions are solutions of the same linear ODE.",
-    sectionId: "7"
+    question: "Is the Wronskian a number or a function?",
+    answer: "A function of $x$, which is easy to miss because it is written as a determinant. Asking whether the Wronskian is zero therefore has no meaning until you attach a point or an interval. That differs from the determinant test for vectors in $\\mathbb{R}^n$, where the entries are constants and the answer is a single number.",
+    sectionId: "notation"
   }
 }
 
@@ -1939,19 +1930,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 //    return {
@@ -2103,6 +2081,22 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Linear Independence FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -2258,12 +2252,6 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

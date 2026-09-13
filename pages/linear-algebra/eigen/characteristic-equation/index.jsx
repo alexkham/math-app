@@ -845,6 +845,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1385,49 +1386,19 @@ The [trace](!/linear-algebra/matrix/trace) and [determinant](!/linear-algebra/de
 
 const faqQuestions = {
   obj1: {
-    question: "What is the characteristic equation?",
-    answer: "The characteristic equation is det(A - λI) = 0. It arises from the eigenvector equation Av = λv rewritten as (A - λI)v = 0. Nontrivial solutions exist only when A - λI is singular, which happens when its determinant is zero.",
-    sectionId: "1"
+    question: "Why is it $\\det(A - \\lambda I)$ rather than $\\det(A - \\lambda)$?",
+    answer: "Because $\\lambda$ is a scalar and $A$ is a matrix, so $A - \\lambda$ subtracts incompatible objects and is simply not defined. Multiplying by the identity turns the scalar into a matrix of the right shape, $\\lambda I$, which subtracts $\\lambda$ from each diagonal entry and leaves everything else alone. The $I$ is doing real work.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the characteristic polynomial?",
-    answer: "The characteristic polynomial is p(λ) = det(A - λI), a degree-n polynomial for an n×n matrix. Its roots are the eigenvalues. The constant term is det(A), and the coefficient of λⁿ⁻¹ involves the trace.",
-    sectionId: "2"
+    question: "Is it $\\det(A - \\lambda I)$ or $\\det(\\lambda I - A)$?",
+    answer: "Both conventions circulate and neither is wrong. They differ by a factor of $(-1)^n$, so the polynomials are not identical, but their roots are the same and the roots are what you are after. The second form has the advantage of coming out monic. Pick one and stay with it inside a single calculation.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you find the characteristic polynomial of a 2×2 matrix?",
-    answer: "For A = [[a,b],[c,d]]: p(λ) = λ² - tr(A)λ + det(A) = λ² - (a+d)λ + (ad-bc). Use the quadratic formula: λ = (tr(A) ± √(tr(A)² - 4det(A)))/2.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you find eigenvalues of a 3×3 matrix?",
-    answer: "Expand det(A - λI) using cofactors to get a cubic polynomial. For triangular matrices, eigenvalues are the diagonal entries. Otherwise, factor the cubic by finding rational roots or using the cubic formula.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How are eigenvalues found for large matrices?",
-    answer: "For n ≥ 5, no closed-form root formula exists (Abel-Ruffini). Large matrices use iterative algorithms like QR iteration, which converge to eigenvalues without forming the characteristic polynomial—direct polynomial root-finding is numerically unstable.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is algebraic multiplicity?",
-    answer: "Algebraic multiplicity is the power k such that (λ - λ₀)ᵏ divides the characteristic polynomial—the multiplicity of λ₀ as a root. It's an upper bound for geometric multiplicity. All algebraic multiplicities sum to n.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you find eigenvectors after finding eigenvalues?",
-    answer: "For each eigenvalue λᵢ, solve the homogeneous system (A - λᵢI)v = 0. Row reduce A - λᵢI and express the solution in parametric form. Free variables give basis vectors for the eigenspace.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is the Cayley-Hamilton theorem?",
-    answer: "Every matrix satisfies its own characteristic polynomial: p(A) = 0 (zero matrix). This lets you express A⁻¹ as a polynomial in A and reduce high powers Aᵏ to polynomials of degree at most n-1.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Do similar matrices have the same characteristic polynomial?",
-    answer: "Yes. det(P⁻¹AP - λI) = det(A - λI) because det(P⁻¹)det(P) = 1. The characteristic polynomial is an invariant of the linear transformation, not the specific matrix representation. Similar matrices share eigenvalues with same multiplicities.",
-    sectionId: "9"
+    question: "What is the difference between $\\mathbf{e}_i$, $E_{ij}$ and $E_{\\lambda}$?",
+    answer: "Three different objects sharing one letter, separated only by their decoration. Bold $\\mathbf{e}_i$ is a standard basis vector, $E_{ij}$ with two subscripts is a matrix unit, and $E_{\\lambda}$ with a Greek subscript is an eigenspace, a whole subspace rather than a single vector or array.",
+    sectionId: "notation"
   }
 }
 
@@ -1502,19 +1473,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1672,6 +1630,22 @@ export default function CharacteristicEquationPage({
           `The one thing the polynomial cannot report is how many independent eigenvectors an eigenvalue has. Algebraic multiplicity counts root repetition; geometric multiplicity counts eigenvectors, and it can be strictly smaller. That gap is invisible in $p(\\lambda)$ and only appears when the null space of $A - \\lambda I$ is actually computed — which is why [diagonalizability](!/linear-algebra/eigen/diagonalization) is a separate question from finding the eigenvalues.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Characteristic Equation FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1708,12 +1682,6 @@ export default function CharacteristicEquationPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -181,29 +181,6 @@ The interface maintains consistent spacing and alignment across all categories. 
       link: '',
     },
   }
-  
-  const faqQuestions = {
-    obj1: {
-      question: "How do I type subscripts and superscripts?",
-      answer: "Click one of the three mode buttons above the text area: Regular, Subscript, or Superscript. Once you select a mode, all characters you click or type will appear in that format. Switch back to Regular mode when you want normal text again."
-    },
-    obj2: {
-      question: "Can I use my physical keyboard instead of clicking symbols?",
-      answer: "Yes. Click inside the text area to focus it, then type normally using your keyboard. The current mode (Regular, Subscript, Superscript) applies to your typed characters just like clicked symbols. You can mix keyboard typing with symbol clicking freely."
-    },
-    obj3: {
-      question: "What's the difference between the symbol categories?",
-      answer: "Each category contains symbols for a specific mathematical domain. Arithmetic has basic operations, Greek Letters has α β γ, Set Theory has ∈ ∪ ∩, and so on. Click any category button to load that keyboard and see what symbols it includes."
-    },
-    obj4: {
-      question: "Does my text save between sessions?",
-      answer: "No, the text area clears when you refresh or close the page. Use the Copy to Clipboard button to save your work before leaving. Paste the copied text into a document or note-taking app for permanent storage."
-    },
-    obj5: {
-      question: "How do I find a specific mathematical symbol?",
-      answer: "Hover over category buttons to see tooltips describing their contents. Click categories to browse their symbols. Many symbols show explanatory tooltips when you hover over them. If you're unsure which category contains a symbol, check related math notation references."
-    }
-  }
 
   const schemas = {
     webApplication: {
@@ -259,19 +236,6 @@ The interface maintains consistent spacing and alignment across all categories. 
         }
       ]
     },
-    
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   // Outbound links rendered inside the keyboard tool itself. Built here (not
@@ -311,7 +275,6 @@ The interface combines click-based symbol insertion with direct keyboard typing.
     props: {
       sectionsContent,
       introContent,
-      faqQuestions,
       schemas,
       toolLinks,
       seoData: {
@@ -325,7 +288,7 @@ The interface combines click-based symbol insertion with direct keyboard typing.
   }
 }
 
-export default function KeyboardPage({ seoData, sectionsContent, introContent, faqQuestions, schemas, toolLinks }) {
+export default function KeyboardPage({ seoData, sectionsContent, introContent, schemas, toolLinks }) {
   
   const genericSections = Object.keys(sectionsContent).map((key, index) => ({
     id: `${index + 1}`,
@@ -367,10 +330,6 @@ export default function KeyboardPage({ seoData, sectionsContent, introContent, f
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
         
-        <script 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
 
       <br/>

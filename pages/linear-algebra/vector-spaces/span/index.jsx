@@ -966,6 +966,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1503,29 +1504,19 @@ In abstract spaces, the column-matrix approach is unavailable. Testing whether a
 
 const faqQuestions = {
   obj1: {
-    question: "What is the span of a set of vectors?",
-    answer: "The span is the set of all linear combinations of the given vectors — every vector reachable by adding scaled copies of them. It is always a subspace, and it is the smallest subspace containing all the original vectors. Its dimension equals the number of independent vectors in the set.",
-    sectionId: "1"
+    question: "Is $\\text{Span}\\{\\mathbf{v}_1, \\mathbf{v}_2\\}$ the same as $\\{\\mathbf{v}_1, \\mathbf{v}_2\\}$?",
+    answer: "Not remotely. The braces alone name a set with exactly two elements; wrapping them in the span operator produces a subspace with infinitely many. Dropping the word collapses an entire plane down to two points, which is why the operator has to be written even though the braces beside it look like the whole story.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you test if a vector is in a span?",
-    answer: "Arrange the spanning vectors as columns of a matrix A, then check if the system Ac = b is consistent by row reducing the augmented matrix [A | b]. If no contradiction row appears (no [0 ⋯ 0 | d] with d ≠ 0), the vector is in the span and the solution gives the coefficients.",
-    sectionId: "4"
+    question: "Does $\\langle \\mathbf{u}, \\mathbf{v} \\rangle$ mean a span or an inner product?",
+    answer: "With two vectors inside, genuinely either, which is why linear algebra texts mostly avoid angle brackets for span. The same pair of glyphs carries three jobs across mathematics: components in some calculus texts, span in some algebra texts, and the inner product almost everywhere else. Only surrounding context resolves it.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you test if a set spans Rⁿ?",
-    answer: "Arrange the vectors as columns and row reduce. The set spans Rⁿ if and only if every row contains a pivot. For exactly n vectors in Rⁿ, this is equivalent to the determinant being nonzero. Fewer than n vectors can never span Rⁿ.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "What is the relationship between span and column space?",
-    answer: "The column space of a matrix A is exactly the span of its columns. The system Ax = b has a solution if and only if b is in the column space. The rank of A equals the dimension of the span, and pivot columns identify a basis for it.",
-    sectionId: "6"
-  },
-  obj5: {
-    question: "How do you remove redundant vectors from a spanning set?",
-    answer: "Arrange the vectors as columns and row reduce to identify pivot columns. The original vectors corresponding to pivot positions form a basis for the span — a minimal spanning set with no redundancy. Non-pivot columns are the redundant vectors that lie in the span of the pivot columns.",
-    sectionId: "7"
+    question: "What is $\\mathbb{F}$ in these definitions?",
+    answer: "A placeholder for whichever field the scalars come from, usually $\\mathbb{R}$ or $\\mathbb{C}$. It joins the blackboard-bold family in appearance but differs in kind: $\\mathbb{R}$ and $\\mathbb{Z}$ name fixed sets, whereas $\\mathbb{F}$ names none. Writing definitions over $\\mathbb{F}$ states the real and complex cases in a single line.",
+    sectionId: "notation"
   }
 }
 
@@ -1602,19 +1593,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1772,6 +1750,22 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
           `A set passing both is a basis, and for $n$ vectors in $\\mathbb{R}^n$ the square determinant test collapses the two checks into one. Where the count is wrong no determinant exists and the conditions must be checked separately — fewer than $n$ vectors cannot span, more than $n$ cannot be [independent](!/linear-algebra/vector-spaces/linear-independence), and the reduction says which failure has occurred.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Span FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -1925,12 +1919,6 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

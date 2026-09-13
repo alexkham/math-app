@@ -93,7 +93,7 @@ import ExplanationDetails from '@/app/components/ExplanationDetails';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
-export default function PowersTablePage({seoData, instructions, faqQuestions, schemas}) {
+export default function PowersTablePage({seoData, instructions, schemas}) {
   
   return (
     <>
@@ -130,12 +130,6 @@ export default function PowersTablePage({seoData, instructions, faqQuestions, sc
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
     {/* <GenericNavbar/> */}
     <br/>
@@ -206,29 +200,6 @@ export async function getStaticProps() {
     ]
 
 
-    const faqQuestions = {
-      obj1: {
-        question: "What is a power of an integer?",
-        answer: "A power of an integer is the result of multiplying an integer by itself a fixed number of times. The integer being multiplied is called the base, and the number of times it is multiplied is called the exponent. For example, 2 to the 5th power means 2 multiplied by itself 5 times, which equals 32. Powers are written as base^exponent, and they grow very fast as the exponent increases."
-      },
-      obj2: {
-        question: "How do you read the notation base^exponent?",
-        answer: "Read base^exponent as the base raised to the exponent. For instance, 3^4 is read as three to the fourth power and equals 3 times 3 times 3 times 3, which is 81. Special names: an exponent of 2 is called squaring (3^2 is three squared) and an exponent of 3 is called cubing (3^3 is three cubed). Any nonzero integer raised to the 0 power equals 1 by convention."
-      },
-      obj3: {
-        question: "What range of powers does this table cover?",
-        answer: "The table covers all 100 powers from 1 to the first power up to 10 to the tenth power. Values range from 1 (which is 1 to any power) up to 10 billion (10 to the tenth power). Each of the 10 bases from 1 through 10 has its own stack showing all 10 of its first powers in order. The full range of values spans ten orders of magnitude."
-      },
-      obj4: {
-        question: "How can I tell if a number is a power of an integer?",
-        answer: "Type the number into the search bar and click Search. If it appears in the table as some base^exponent, the table scrolls to its stack and highlights the matching cell in yellow. If it does not appear, a not-found message confirms that the number is not equal to any of the 100 powers in the table. Note that very small numbers may appear in multiple stacks: 1 is 1 to any power, and 64 is both 2^6, 4^3, and 8^2."
-      },
-      obj5: {
-        question: "What are some common powers worth memorizing?",
-        answer: "Powers of 2 dominate in computing: 2^10 equals 1024 (one kibibyte), 2^16 is 65536, and 2^20 is roughly one million. Powers of 10 are the basis of scientific notation: 10^3 is one thousand, 10^6 is one million, and 10^9 is one billion. Squares from 1 to 12 (1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144) and cubes from 1 to 10 (1, 8, 27, 64, 125, 216, 343, 512, 729, 1000) are standard knowledge for arithmetic and algebra."
-      }
-    }
-
 
     const schemas = {
       webApplication: {
@@ -296,19 +267,6 @@ export async function getStaticProps() {
           }
         ]
       },
-
-      faq: {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": Object.keys(faqQuestions).map(key => ({
-          "@type": "Question",
-          "name": faqQuestions[key].question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faqQuestions[key].answer
-          }
-        }))
-      }
     }
    
   
@@ -316,7 +274,6 @@ export async function getStaticProps() {
     return {
       props: {
         instructions,
-        faqQuestions,
         schemas,
         seoData: {
           title: "Powers Table 1-10 (Exponents 1 to 10) | Learn Math Class",

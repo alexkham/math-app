@@ -30,29 +30,6 @@ export async function getStaticProps() {
     'trig formulas reference sheet'
   ]
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are the Pythagorean identities?",
-      answer: "The three Pythagorean identities are sin^2(theta) + cos^2(theta) = 1, 1 + tan^2(theta) = sec^2(theta), and 1 + cot^2(theta) = csc^2(theta). The last two are derived by dividing the first identity by cos^2(theta) and sin^2(theta) respectively."
-    },
-    obj2: {
-      question: "What are the double angle formulas?",
-      answer: "The double angle formulas express sin(2A), cos(2A), and tan(2A) in terms of single-angle functions. sin(2A) = 2sin(A)cos(A), cos(2A) = cos^2(A) - sin^2(A) with two alternate forms, and tan(2A) = 2tan(A)/(1 - tan^2(A))."
-    },
-    obj3: {
-      question: "What is the difference between the law of sines and the law of cosines?",
-      answer: "The law of sines relates each side to the sine of its opposite angle as equal ratios a/sin(A) = b/sin(B) = c/sin(C). The law of cosines relates all three sides to the cosine of one angle as c^2 = a^2 + b^2 - 2ab*cos(C) and generalizes the Pythagorean theorem."
-    },
-    obj4: {
-      question: "What are the sum and difference formulas in trigonometry?",
-      answer: "The sum and difference formulas express sin(A +/- B), cos(A +/- B), and tan(A +/- B) in terms of functions of A and B separately. For example sin(A + B) = sin(A)cos(B) + cos(A)sin(B). They are the basis for deriving double angle, half-angle, and product-to-sum identities."
-    },
-    obj5: {
-      question: "What are the general solutions for trigonometric equations?",
-      answer: "The general solutions capture all angles satisfying a trig equation. For sin(theta) = k, theta = (-1)^n arcsin(k) + n*pi. For cos(theta) = k, theta = +/- arccos(k) + 2n*pi. For tan(theta) = k, theta = arctan(k) + n*pi, where n is any integer."
-    }
-  }
-
   const seoData = {
     title: "Trigonometry Formulas & Identities | Learn Math Class",
     description: "Complete trigonometry formulas reference with 50+ identities. Covers Pythagorean, double angle, half-angle, sum and difference, law of sines and cosines.",
@@ -127,25 +104,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       trigonometryFormulaList,
-      faqQuestions,
       schemas,
       seoData,
     }
@@ -154,7 +117,6 @@ export async function getStaticProps() {
 
 export default function TrigonometryFormulasPage({
   trigonometryFormulaList,
-  faqQuestions,
   schemas,
   seoData
 }) {
@@ -189,10 +151,6 @@ export default function TrigonometryFormulasPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
 
       {/* <GenericNavbar/> */}

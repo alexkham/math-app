@@ -3179,6 +3179,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -3949,29 +3950,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "How do you add two matrices?",
-    answer: "Two matrices can be added only if they share the same dimensions. The sum is computed entry by entry: the (i,j) entry of A + B equals the sum of the (i,j) entries of A and B. Matrix addition is commutative and associative, with the zero matrix serving as the additive identity.",
-    sectionId: "1"
+    question: "Does $a_{23}$ mean row 2 column 3, or row 3 column 2?",
+    answer: "Row first, column second, always: $a_{23}$ sits in row $2$, column $3$. The size $m \\times n$ follows the same order, rows then columns. Reversing the pair names a different entry, since $a_{ij}$ and $a_{ji}$ agree only when the matrix is symmetric, and swapping them is precisely what the transpose does.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How does matrix multiplication work?",
-    answer: "To multiply an m × n matrix A by an n × p matrix B, the number of columns of A must equal the number of rows of B. Each entry of the product AB is the dot product of a row of A with a column of B, producing an m × p result. Matrix multiplication is associative and distributive but not commutative.",
-    sectionId: "5"
+    question: "Is $(A + B)^2$ equal to $A^2 + 2AB + B^2$?",
+    answer: "No. Expanding gives four terms, $A^2 + AB + BA + B^2$, and they cannot be merged because $AB$ and $BA$ are generally different matrices. The same warning applies to cancellation: from $AB = AC$ nothing follows about $B$ and $C$. The notation borrows the look of ordinary algebra without the behaviour.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "Why is matrix multiplication not commutative?",
-    answer: "Matrix multiplication is not commutative because each entry depends on the order of row-column pairings. Even for two square matrices of the same size, AB and BA generally produce different results. Additionally, the product of nonzero matrices can be zero, and cancellation does not hold unless the left factor is invertible.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "What does transposing a matrix do?",
-    answer: "Transposing a matrix converts its rows into columns and vice versa, turning an m × n matrix into an n × m matrix. The transpose reverses the order of products: (AB)ᵀ = BᵀAᵀ. A matrix equal to its own transpose is called symmetric.",
-    sectionId: "8"
-  },
-  obj5: {
-    question: "What are elementary matrices used for?",
-    answer: "An elementary matrix results from performing a single row operation on the identity matrix. Left-multiplying any matrix by an elementary matrix performs that same row operation. Every invertible matrix can be expressed as a product of elementary matrices, connecting row reduction to matrix factorization.",
-    sectionId: "10"
+    question: "Why is matrix multiplication written with no symbol at all?",
+    answer: "Juxtaposition is the convention: $AB$, with no dot and no cross. The bare notation hides a shape contract, since an $m \\times n$ times an $n \\times p$ works only because the inner dimensions agree, producing $m \\times p$. Note that the $\\times$ in $m \\times n$ is a dimension separator and multiplies nothing.",
+    sectionId: "notation"
   }
 }
 
@@ -4046,19 +4037,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -4225,6 +4203,22 @@ const schemas = {
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrix Operations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,
@@ -4286,12 +4280,6 @@ const schemas = {
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

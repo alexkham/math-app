@@ -810,6 +810,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1287,34 +1288,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "How do you find the magnitude of a vector in 2D and 3D?",
-    answer: "In ℝ²: ‖v‖ = √(v₁² + v₂²). In ℝ³: ‖v‖ = √(v₁² + v₂² + v₃²). Both come from the Pythagorean theorem—the magnitude is the straight-line distance from the tail to the tip of the vector.",
-    sectionId: "1"
+    question: "Why does the norm use double bars instead of single ones?",
+    answer: "The bar count marks what is being measured. One pair takes the absolute value of a scalar, two pairs take the length of a vector. The scaling law puts both in a single line: $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$. Physics texts often write single bars for magnitude, which is fine until determinants arrive and claim the same glyph.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the Euclidean norm formula?",
-    answer: "For v = (v₁, v₂, ..., vₙ) in ℝⁿ: ‖v‖ = √(v₁² + v₂² + ... + vₙ²). This is the Euclidean or ℓ² norm. The double-bar notation ‖v‖ distinguishes it from absolute value |x| used for scalars.",
-    sectionId: "2"
+    question: "What does the subscript in $\\|\\mathbf{v}\\|_2$ refer to?",
+    answer: "The measuring rule, not a component. The $1$-norm sums absolute values, the $2$-norm is the familiar Euclidean length, and the $\\infty$-norm takes the largest component. An unsubscripted $\\|\\mathbf{v}\\|$ means the $2$-norm by default. Reading it as the norm of the second component is a common misparse.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What are the properties of the vector norm?",
-    answer: "Non-negativity: ‖v‖ ≥ 0 with equality iff v = 0. Scaling: ‖cv‖ = |c|‖v‖. Triangle inequality: ‖a + b‖ ≤ ‖a‖ + ‖b‖. These properties make the norm a reliable measure of vector size.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you find the distance between two vectors?",
-    answer: "d(a, b) = ‖a - b‖ = √((a₁-b₁)² + (a₂-b₂)² + ... + (aₙ-bₙ)²). This is the Euclidean distance—the straight-line distance between the endpoints when vectors represent positions.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is a unit vector?",
-    answer: "A unit vector has magnitude exactly 1: ‖û‖ = 1. It carries direction without scale. The standard basis vectors e₁, e₂, e₃ are unit vectors along coordinate axes. All unit vectors in ℝ² form the unit circle; in ℝ³, the unit sphere.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you normalize a vector?",
-    answer: "Divide by its magnitude: v̂ = v/‖v‖. This scales every component by 1/‖v‖, producing a unit vector pointing in the same direction. The zero vector cannot be normalized since ‖0‖ = 0 and division by zero is undefined.",
-    sectionId: "6"
+    question: "What does the hat in $\\hat{\\mathbf{u}}$ promise?",
+    answer: "That the vector has length exactly $1$. Writing $\\hat{\\mathbf{u}}$ asserts $\\|\\hat{\\mathbf{u}}\\| = 1$ without further comment, which is why normalizing a vector is described as putting a hat on it. Watch the field, though: in statistics the same hat means \"estimate of\" and says nothing about length.",
+    sectionId: "notation"
   }
 }
 
@@ -1389,19 +1375,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -1513,6 +1486,22 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Vector Magnitude FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -1640,12 +1629,6 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

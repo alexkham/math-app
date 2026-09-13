@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import LinearCombinationWrapper from '../../../../app/components/linear-algebra copy/matrix/LinearCombinationWrapper'
 import matrixLinCombDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixLinCombDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -50,7 +52,7 @@ export async function getStaticProps(){
 **Vector space of matrices** — the set of all $m \\times n$ matrices forms a vector space under matrix addition and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -63,7 +65,7 @@ export async function getStaticProps(){
 • The scalars $\\alpha$ and $\\beta$ are shown symbolically — the visualizer focuses on structure, not specific numeric values`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `The Three Phases`,
@@ -76,7 +78,7 @@ export async function getStaticProps(){
 This phase order makes the decomposition of a linear combination into scalar multiplication and matrix addition explicit. Both operations are visible on the screen at the same time when phase 3 begins.`,
       before: ``,
       after: ``,
-      link: '#three-phases',
+      link: '',
     },
     obj3: {
       title: `Reading the Scene Player`,
@@ -89,7 +91,7 @@ This phase order makes the decomposition of a linear combination into scalar mul
 • The step log on the right keeps a record of every completed cell across all phases`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj4: {
       title: `Choosing Dimensions`,
@@ -101,7 +103,7 @@ This phase order makes the decomposition of a linear combination into scalar mul
 • Square and rectangular shapes follow identical rules — linear combinations require only matching shapes between operands`,
       before: ``,
       after: ``,
-      link: '#choosing-dimensions',
+      link: '',
     },
     obj5: {
       title: `What a Linear Combination Is`,
@@ -118,7 +120,7 @@ All matrices must share the same shape, and the result inherits that shape. The 
 Linear combinations are the native operation of any vector space — matrices, vectors, polynomials, and functions all support them. For comprehensive theory, see **matrix operations**.`,
       before: ``,
       after: ``,
-      link: '#what-a-linear-combination-is',
+      link: '',
     },
     obj6: {
       title: `Key Properties`,
@@ -134,7 +136,7 @@ Linear combinations are the native operation of any vector space — matrices, v
 The structural fact behind all of this is that the set of $m \\times n$ matrices forms a vector space, and linear combinations are exactly the operation that vector spaces are designed to support.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj7: {
       title: `Why It Matters`,
@@ -148,7 +150,7 @@ The structural fact behind all of this is that the set of $m \\times n$ matrices
 • **Differential equations, optimization, machine learning**: every linear model, every superposition principle, every gradient update is a linear combination`,
       before: ``,
       after: ``,
-      link: '#why-it-matters',
+      link: '',
     },
     obj8: {
       title: `Worked Example`,
@@ -171,7 +173,7 @@ $$2A - B = \\begin{pmatrix} -3 & 4 \\\\ -1 & 8 \\end{pmatrix}$$
 Set the visualizer to $2 \\times 2$ and step through to see the three phases animated symbolically.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj9: {
       title: `Common Mistakes`,
@@ -184,17 +186,17 @@ Set the visualizer to $2 \\times 2$ and step through to see the three phases ani
 • **Forgetting that the zero matrix is a trivial linear combination** — choosing all coefficients zero produces the zero matrix regardless of the operands`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Matrix addition** — the additive piece of any linear combination.
+      content: `[Matrix addition](!/linear-algebra/visual-tools/matrix-addition) — the additive piece of any linear combination.
 
-**Scalar multiplication** — the scaling piece of any linear combination.
+[Scalar multiplication](!/linear-algebra/visual-tools/matrix-scalar-multiplication) — the scaling piece of any linear combination.
 
-**Span** — the set of all linear combinations of a fixed collection.
+[Span](!/linear-algebra/visual-tools/span-membership) — the set of all linear combinations of a fixed collection.
 
-**Linear independence** — the property that no matrix in a set is a linear combination of the others.
+[Linear independence](!/linear-algebra/visual-tools/span-independence-2d) — the property that no matrix in a set is a linear combination of the others.
 
 **Basis** — a linearly independent set whose linear combinations produce every matrix in the space.
 
@@ -205,7 +207,7 @@ Set the visualizer to $2 \\times 2$ and step through to see the three phases ani
 **Affine combination** — a linear combination whose coefficients sum to 1; closely related but distinct.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `The Opening Scene: Two Matrices and Two Scalars`,
@@ -411,6 +413,7 @@ It is also worth noticing what the entrywise formula licenses. Because each cell
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-linear-combination'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -432,7 +435,7 @@ It is also worth noticing what the entrywise formula licenses. Because each cell
   }
 }
 
-export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -559,6 +562,9 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, s
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

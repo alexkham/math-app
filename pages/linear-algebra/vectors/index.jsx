@@ -368,7 +368,7 @@
 //   }
 // }
 //    }
-// export default function VectorsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function VectorsPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -954,54 +954,6 @@ Linear combinations also set the stage for two concepts developed in the [vector
   content: `A vector captures two pieces of information in a single mathematical object: how far and which way. This dual nature — part algebraic, part geometric — makes vectors the natural language for describing anything that requires both a size and an orientation. In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, vectors are arrows that can be drawn, measured, and rotated. In $\\mathbb{R}^n$, they generalize beyond visual intuition into ordered lists of numbers that still obey the same algebraic rules. This section develops vectors from the ground up: what they are, how they behave, and the operations that give them structure.`,
 };
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a vector?",
-    answer: "A vector is a mathematical object with two attributes: magnitude (size) and direction. Geometrically, it's a directed line segment (arrow). Algebraically, it's an ordered n-tuple of real numbers v = (v₁, v₂, ..., vₙ) where each entry is a component.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How are vectors notated?",
-    answer: "Vectors use boldface letters (v, u, w) in print or arrows above letters (v⃗) when handwritten. Components can be written as rows (v₁, v₂) or columns. Standard basis vectors in ℝ³ are i, j, k. Any vector decomposes as a sum of scaled basis vectors.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What are the different types of vectors?",
-    answer: "Key types include: the zero vector (all components zero, no direction), unit vectors (magnitude 1, pure direction), position vectors (tail at origin), and free vectors (defined by magnitude and direction only, not location). Two vectors are equal when all components match.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What properties do vectors have?",
-    answer: "Vectors have intrinsic properties (magnitude, direction, dimensionality) and relational properties. Two vectors are parallel if one is a scalar multiple of the other. They are orthogonal if their dot product equals zero, meaning they meet at a right angle.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are the basic vector operations?",
-    answer: "The three fundamental operations are: addition (sum corresponding components, tip-to-tail construction), subtraction (add the negation), and scalar multiplication (scale each component by a real number). These operations satisfy commutativity, associativity, and distributivity.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the magnitude of a vector?",
-    answer: "Magnitude (or norm) is the vector's length: ‖v‖ = √(v₁² + v₂² + ... + vₙ²). It's always non-negative, scales predictably under scalar multiplication (‖cv‖ = |c|‖v‖), and obeys the triangle inequality. Distance between vectors is ‖a - b‖.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the dot product?",
-    answer: "The dot product takes two vectors and returns a scalar: a·b = a₁b₁ + a₂b₂ + ... + aₙbₙ. Geometrically, a·b = ‖a‖‖b‖cosθ. It measures alignment: positive means similar direction, negative means opposite, zero means orthogonal (perpendicular).",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is the cross product?",
-    answer: "The cross product (ℝ³ only) returns a vector perpendicular to both inputs. Its magnitude ‖a × b‖ = ‖a‖‖b‖sinθ equals the parallelogram area. Direction follows the right-hand rule. Unlike dot product, cross product is anti-commutative: a × b = -(b × a).",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "What is a linear combination?",
-    answer: "A linear combination c₁v₁ + c₂v₂ + ... + cₖvₖ scales and adds vectors. The span of a set is all possible linear combinations: one vector spans a line, two non-parallel vectors span a plane. This connects to linear independence and basis in vector spaces.",
-    sectionId: "9"
-  }
-}
-
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
@@ -1068,19 +1020,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -1089,7 +1028,6 @@ const schemas = {
     introContent,
     obj3Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Vectors: Definition, Operations & Products | Learn Math Class",
@@ -1101,7 +1039,7 @@ const schemas = {
   }
 }
    }
-export default function VectorsPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, faqQuestions, schemas}) {
+export default function VectorsPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1297,12 +1235,6 @@ export default function VectorsPage({seoData, sectionsContent, introContent, obj
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

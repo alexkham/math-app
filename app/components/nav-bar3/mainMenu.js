@@ -662,7 +662,7 @@ export const mainMenuStructure = [
         "items": [
           {
             "label": "Base Converter",
-            "href": "/visual-tools/base-converter"
+            "href": "/arithmetic/visual-tools/base-converter"
           },
           {
             "label": "Binomial",
@@ -714,7 +714,7 @@ export const mainMenuStructure = [
           },
           {
             "label": "Determinant Calculator",
-            "href": "/visual-tools/determinant-calculator"
+            "href": "/linear-algebra/visual-tools/matrix-determinant"
           },
           {
             "label": "Dice Roll",
@@ -754,7 +754,7 @@ export const mainMenuStructure = [
           },
           {
             "label": "Gauss Elimination",
-            "href": "/visual-tools/gauss-elimination"
+            "href": "/linear-algebra/visual-tools/gauss-elimination"
           },
           {
             "label": "Geometric",
@@ -778,7 +778,7 @@ export const mainMenuStructure = [
           },
           {
             "label": "Matrix Types",
-            "href": "/visual-tools/matrix-types"
+            "href": "/linear-algebra/visual-tools/matrix-types"
           },
           {
             "label": "Negative Binomial",

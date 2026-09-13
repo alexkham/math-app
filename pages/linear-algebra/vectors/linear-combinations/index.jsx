@@ -802,6 +802,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1215,39 +1216,19 @@ Both concepts — [linear independence](!/linear-algebra/vector-spaces/linear-in
 
 const faqQuestions = {
   obj1: {
-    question: "What is a linear combination of vectors?",
-    answer: "A linear combination is c₁v₁ + c₂v₂ + ... + cₖvₖ where v₁,...,vₖ are vectors and c₁,...,cₖ are scalar coefficients. Each term scales a vector, then all terms are added. Vector addition and scalar multiplication are special cases of this construction.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the geometric meaning of a linear combination?",
-    answer: "One vector spans a line through the origin. Two non-parallel vectors span a plane through the origin. Three non-coplanar vectors in ℝ³ span all of 3D space. The coefficients act as continuous dials moving the result anywhere within the span.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the span of a set of vectors?",
-    answer: "The span is the set of all vectors that can be formed as linear combinations of the given vectors. It always contains the zero vector (all coefficients zero) and forms a subspace through the origin—a line, plane, or higher-dimensional flat.",
+    question: "Does the span of a set always contain the zero vector?",
+    answer: "Always, whatever the vectors are. Setting every coefficient to zero is a legal linear combination and it produces $\\mathbf{0}$, so the zero vector belongs to every span without exception. This is one reason a span is always a flat subspace passing through the origin rather than an arbitrary region of the space.",
     sectionId: "3"
   },
-  obj4: {
-    question: "What is a spanning set?",
-    answer: "A spanning set for a space is a collection of vectors whose span equals that entire space—every vector in the space can be written as a linear combination of the set. Spanning sets may contain redundant vectors; removing redundancy leads to a basis.",
+  obj2: {
+    question: "Is the span of two vectors always a plane?",
+    answer: "Only if they point in genuinely different directions. Two non-parallel vectors span a plane, but two parallel ones span merely a line, since the second contributes no direction the first did not already cover. A new vector enlarges the span by a dimension only when it reaches outside what the existing vectors can already build.",
+    sectionId: "3"
+  },
+  obj3: {
+    question: "Can a spanning set contain unnecessary vectors?",
+    answer: "Yes, spanning and efficiency are separate questions. The set $\\{(1,0), (0,1), (1,1)\\}$ spans $\\mathbb{R}^2$ even though the third vector is already a combination of the first two: every point is still reachable, just with a redundant option. A spanning set carrying no redundancy at all is what gets called a basis.",
     sectionId: "4"
-  },
-  obj5: {
-    question: "What is a trivial linear combination?",
-    answer: "The trivial combination sets all coefficients to zero: 0v₁ + 0v₂ + ... + 0vₖ = 0. It always produces the zero vector regardless of the input vectors. A non-trivial combination has at least one nonzero coefficient—its existence reveals redundancy in the set.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do linear combinations relate to systems of equations?",
-    answer: "Asking 'Is b a linear combination of v₁,...,vₖ?' is equivalent to asking 'Does Ax = b have a solution?' where A has v₁,...,vₖ as columns. The combination exists if and only if the system is consistent. Solving finds the coefficients.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the connection between linear combinations and linear independence?",
-    answer: "Vectors are linearly independent if the only combination producing zero is the trivial one (all coefficients zero). If a non-trivial combination yields zero, the vectors are dependent—at least one is redundant. An independent spanning set is called a basis.",
-    sectionId: "7"
   }
 }
 
@@ -1324,19 +1305,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1442,6 +1410,22 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
           </DiagramFrame>,
           `Reading it this way changes what the basic operations are. Addition is not an operation that linear combinations later generalise — it is the combination with both coefficients equal to one, and subtraction is the same with one of them negated. Nothing is added to the vocabulary between the first row and the last; only the freedom in the coefficients changes.`,
           `The trivial combination is the row that matters most later, and it is easy to pass over. Every set of vectors admits it, so exhibiting **a** combination equal to $\\mathbf{0}$ establishes nothing at all. [Independence](!/linear-algebra/vector-spaces/linear-independence) is the statement that it is the only one, and that single word — only — is what the rest of the subject is built on.`,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Linear Combinations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {
@@ -1561,12 +1545,6 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

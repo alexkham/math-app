@@ -207,29 +207,6 @@ export async function getStaticProps() {
 Each definition includes intuitive explanations, key properties, common errors, and links to detailed lesson pages. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a function in math?",
-      answer: "A function is a rule that assigns exactly one output to each input. If you put the same value in, you always get the same value out. The vertical line test checks this graphically: if any vertical line crosses the graph more than once, the relation is not a function."
-    },
-    obj2: {
-      question: "What is the difference between domain and range?",
-      answer: "The domain is the set of all valid inputs a function can accept. The range is the set of all outputs the function actually produces. For example, f(x) = x squared has domain all real numbers but range only zero and above, since squaring never produces a negative result."
-    },
-    obj3: {
-      question: "What does one-to-one mean for a function?",
-      answer: "A one-to-one function never repeats an output value -- distinct inputs always produce distinct outputs. This property is required for an inverse function to exist. Graphically, a function is one-to-one if every horizontal line crosses its graph at most once."
-    },
-    obj4: {
-      question: "What are even and odd functions?",
-      answer: "An even function satisfies f(-x) = f(x) and is symmetric about the y-axis. Examples include x squared and cosine. An odd function satisfies f(-x) = -f(x) and has rotational symmetry about the origin. Examples include x cubed and sine."
-    },
-    obj5: {
-      question: "What are function transformations?",
-      answer: "Transformations modify a parent function's graph by shifting it (translation), flipping it (reflection), or stretching and compressing it (dilation). The general form g(x) = a times f(b(x - h)) + k captures all four types, where h and k control position and a and b control shape."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -294,25 +271,11 @@ Each definition includes intuitive explanations, key properties, common errors, 
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       functionsTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -328,7 +291,6 @@ Each definition includes intuitive explanations, key properties, common errors, 
 
 export default function FunctionsDefinitionsPage({
   functionsTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -364,10 +326,6 @@ export default function FunctionsDefinitionsPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
 
       {/* <GenericNavbar /> */}

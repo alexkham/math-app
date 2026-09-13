@@ -712,29 +712,6 @@ export async function getStaticProps(){
 }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are common integrals?",
-      answer: "Common integrals are the indefinite integral identities used most often in calculus: integrals of polynomials, exponentials, logarithms, the six trigonometric functions, key inverse trigonometric integrands, and hyperbolic functions. Every indefinite integral is determined only up to an additive constant of integration, written as plus C."
-    },
-    obj2: {
-      question: "What is the integral of sin x and cos x?",
-      answer: "The integral of sin(x) is negative cos(x) plus C. The integral of cos(x) is sin(x) plus C. The sign flip on sine reflects the derivative relationship: the derivative of cos(x) is negative sin(x), so reversing the differentiation introduces the negative sign."
-    },
-    obj3: {
-      question: "Why does 1 over x integrate to ln of x?",
-      answer: "The integral of 1/x is ln|x| plus C. This is the one exception to the power rule, which fails when the exponent equals negative one because dividing by n plus one would divide by zero. The absolute value extends the formula to negative x, since ln is only defined for positive arguments."
-    },
-    obj4: {
-      question: "What is the constant of integration?",
-      answer: "An indefinite integral is determined only up to an additive constant because the derivative of any constant is zero. If F(x) is one antiderivative of f(x), then F(x) plus C is also an antiderivative for every real constant C. This is why every entry in an indefinite integrals table ends with plus C."
-    },
-    obj5: {
-      question: "How do I memorize common integrals?",
-      answer: "Group the entries by category: polynomial via the power rule, exponential, logarithmic, trigonometric, inverse trigonometric, and hyperbolic. Most integrals are derivatives read backwards, so memorizing the derivatives table cuts the work in half. Drill with the drag-and-drop puzzle on this page to lock the pairings in."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -796,19 +773,6 @@ export async function getStaticProps(){
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -816,7 +780,6 @@ export async function getStaticProps(){
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
          staticDataset,
           seoData: {
@@ -834,7 +797,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
     
   const genericSections=[
@@ -1036,12 +999,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

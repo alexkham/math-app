@@ -248,34 +248,6 @@ const introContent = {
   content: `A matrix decomposition writes a matrix as a product of simpler matrices — triangular, diagonal, orthogonal, or some combination — whose structure makes subsequent computation cheap. The upfront cost of factoring is repaid every time the factors are used to solve a system, compute eigenvalues, approximate data, or analyze stability. Decompositions are the computational backbone of applied linear algebra.`,
 }
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a matrix decomposition?",
-    answer: "A matrix decomposition expresses a matrix as a product of simpler matrices — typically triangular, diagonal, or orthogonal — whose structure makes solving systems, computing eigenvalues, and approximating data dramatically cheaper. The factors reproduce the original matrix exactly.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What are the main matrix decompositions?",
-    answer: "The five core decompositions are LU (triangular factors from Gaussian elimination), QR (orthogonal times triangular from Gram-Schmidt), Cholesky (symmetric positive definite square root), spectral (orthogonal eigendecomposition for symmetric matrices), and SVD (universal factorization for any matrix).",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "Which matrix decomposition should I use?",
-    answer: "Use LU for general square systems, Cholesky for symmetric positive definite systems (twice as fast), QR for least squares and overdetermined systems, spectral decomposition for symmetric eigenvalue problems, and SVD for rank determination, pseudoinverse, low-rank approximation, or any rectangular or rank-deficient matrix.",
-    sectionId: "8"
-  },
-  obj4: {
-    question: "How are the decompositions related to each other?",
-    answer: "Cholesky is the symmetric positive definite specialization of LU. QR is Gram-Schmidt in matrix form. The spectral decomposition is eigendecomposition restricted to symmetric matrices with orthogonal eigenvectors. The SVD generalizes the spectral decomposition to all matrices regardless of shape or symmetry.",
-    sectionId: "9"
-  },
-  obj5: {
-    question: "Why are matrix decompositions important?",
-    answer: "Decompositions convert hard problems into sequences of easy ones. They enable efficient system solving, numerically stable least squares, eigenvalue computation without characteristic polynomials, dimensionality reduction, and low-rank approximation. They are the computational backbone of applied linear algebra.",
-    sectionId: "2"
-  }
-}
-
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
@@ -342,19 +314,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -363,7 +322,6 @@ const schemas = {
     introContent,
     obj8Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Matrix Decompositions: LU, QR, SVD & More | Learn Math Class",
@@ -383,7 +341,6 @@ export default function DecompositionsPage({
   introContent,
   obj8Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -620,12 +577,6 @@ export default function DecompositionsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

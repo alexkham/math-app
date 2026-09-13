@@ -436,29 +436,6 @@ For these and similar problems the table answers a single lookup faster than rec
 
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What does the binomial distribution table show?",
-      answer: "The table shows binomial probabilities for every combination of n from 1 to 50, x from 0 to n, and 28 standard p values from 0.01 to 0.99. Three buttons switch the displayed probability between P(X = x), P(X less than or equal to x), and P(X greater than or equal to x)."
-    },
-    obj2: {
-      question: "How do I find a specific binomial probability in the table?",
-      answer: "Enter the number of trials n, the number of successes x, and the success probability p into the search form, then click Find Probability. The matching cell is highlighted and the page scrolls to center it. If p does not match a tabulated column, the table snaps to the closest available p."
-    },
-    obj3: {
-      question: "What is the difference between P(X = x) and P(X less than or equal to x)?",
-      answer: "P(X = x) is the probability of exactly x successes in n trials. P(X less than or equal to x) is the left-cumulative probability of at most x successes, equal to the sum of P(X = 0) through P(X = x). The table switches between these modes with the buttons above it."
-    },
-    obj4: {
-      question: "When should I use the binomial distribution?",
-      answer: "Use the binomial distribution when an experiment has a fixed number of independent trials, each with only two outcomes (success or failure) and the same success probability p. Quality control, clinical trials, A/B testing, and Bernoulli sequences all fit this pattern."
-    },
-    obj5: {
-      question: "What if my p value is not in the table?",
-      answer: "The search form snaps to the nearest tabulated p among the 28 standard values and displays a notice with the value used. For an exact result at an arbitrary p, use the binomial distribution calculator instead of the table."
-    }
-  }
-
   const schemas = {
     webApplication: {
       "@context": "https://schema.org",
@@ -525,25 +502,11 @@ For these and similar problems the table answers a single lookup faster than rec
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props:{
       sectionsContent,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Binomial Distribution Table - Cumulative & Exact | Learn Math Class",
@@ -559,7 +522,7 @@ For these and similar problems the table answers a single lookup faster than rec
   }
 }
 
-export default function BinomialDistributionTablePage({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function BinomialDistributionTablePage({seoData, sectionsContent, schemas}) {
 
   const genericSections = Object.keys(sectionsContent).map((key, index) => ({
     id: `${index + 1}`,
@@ -602,12 +565,6 @@ export default function BinomialDistributionTablePage({seoData, sectionsContent,
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

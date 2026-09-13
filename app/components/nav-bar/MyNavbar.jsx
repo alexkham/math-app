@@ -60,10 +60,10 @@ function MyNavbar() {
               {isVisualToolsExpanded && (
                 <ul className='ul'>
                   <li><Link href="/visual-tools/matrix-multiplication">Matrix Multiplication</Link></li>
-                  <li><Link href="/visual-tools/gauss-elimination">Gaussian Elimination</Link></li>
-                  <li><Link href="/visual-tools/determinant-calculator">Determinant Calculator</Link></li>
+                  <li><Link href="/linear-algebra/visual-tools/gauss-elimination">Gaussian Elimination</Link></li>
+                  <li><Link href="/linear-algebra/visual-tools/matrix-determinant">Determinant Calculator</Link></li>
                   <li><Link href="/linear-algebra/visual-tools/matrix-transpose">Matrix Transposition Calculator</Link></li>
-                  <li><Link href="/visual-tools/base-converter">Base Converter Visualizer</Link></li>
+                  <li><Link href="/arithmetic/visual-tools/base-converter">Base Converter Visualizer</Link></li>
                   <li><Link href="/combinatorics/permutations/permutations-visualizer">Permutations Visualizer</Link></li>
                 </ul>
               )}

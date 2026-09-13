@@ -916,6 +916,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1472,29 +1473,19 @@ All cross terms vanish because every pair has dot product zero. This is not a sp
 
 const faqQuestions = {
   obj1: {
-    question: "What is the dot product of two vectors?",
-    answer: "The dot product of u and v in Rⁿ is u·v = u₁v₁ + u₂v₂ + ⋯ + uₙvₙ, producing a scalar. It can also be written as the matrix product uᵀv. The dot product defines lengths, angles, distances, and perpendicularity in finite-dimensional linear algebra.",
-    sectionId: "1"
+    question: "Is $\\langle u \\mid v \\rangle$ the same as $\\langle u, v \\rangle$?",
+    answer: "Same idea, different dialect. A comma marks the mathematician's inner product; a vertical bar marks Dirac's bra-ket from quantum mechanics. The bar version is built to split into freestanding halves that carry meaning on their own, which the comma form never does. Comma means mathematics, bar means physics.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you find the angle between two vectors?",
-    answer: "The angle θ between nonzero vectors u and v satisfies cos θ = (u·v)/(‖u‖‖v‖). The Cauchy-Schwarz inequality guarantees this ratio lies between −1 and 1. When the dot product is zero, the angle is 90° and the vectors are orthogonal.",
-    sectionId: "5"
+    question: "What do the dots mean in $\\langle \\cdot, \\cdot \\rangle$?",
+    answer: "They are empty slots, marking where arguments would go when you want to name the operation without applying it. The same device gives $\\|\\cdot\\|$ for a norm and $d(\\cdot, \\cdot)$ for a distance. Note the glyph is identical to the multiplication dot but plays the opposite role: one is a verb, the other an empty chair.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the Cauchy-Schwarz inequality?",
-    answer: "The Cauchy-Schwarz inequality states |u·v| ≤ ‖u‖‖v‖ for all vectors u and v. Equality holds if and only if the vectors are parallel. It ensures the angle formula always produces a valid cosine value and is fundamental to proving the triangle inequality.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "What is an inner product space?",
-    answer: "An inner product space is a vector space equipped with an inner product — a function satisfying symmetry, linearity, and positive definiteness. Every inner product induces a norm, a distance, and a notion of orthogonality. The standard dot product on Rⁿ is one example; integrals on function spaces and weighted products are others.",
-    sectionId: "8"
-  },
-  obj5: {
-    question: "What is the Pythagorean theorem for vectors?",
-    answer: "If vectors u and v are orthogonal (u·v = 0), then ‖u + v‖² = ‖u‖² + ‖v‖². This extends to any number of mutually orthogonal vectors — all cross terms vanish. It holds in any inner product space and is why orthogonal decompositions produce cleanly additive length contributions.",
-    sectionId: "10"
+    question: "Is the $\\perp$ in $W^{\\perp}$ an exponent?",
+    answer: "No, it is a label, joining $A^{T}$ and $A^{-1}$ in the crowded superscript corner where none of the marks raise anything to a power. The symbol also scales across species: $\\mathbf{u} \\perp \\mathbf{v}$ relates two vectors, $\\mathbf{v} \\perp W$ a vector to a subspace, and $W^{\\perp}$ names a whole subspace.",
+    sectionId: "notation"
   }
 }
 
@@ -1570,19 +1561,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1763,6 +1741,22 @@ export default function InnerProductPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Inner Product FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1843,12 +1837,6 @@ export default function InnerProductPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

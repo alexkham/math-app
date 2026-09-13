@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
 import matrixAdditionDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixAdditionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -49,7 +51,7 @@ export async function getStaticProps(){
 **Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching dimensions.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -62,7 +64,7 @@ export async function getStaticProps(){
 The hover **?** icon next to the dimensions label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `Reading the Scene Player`,
@@ -76,7 +78,7 @@ The hover **?** icon next to the dimensions label explains why $A$ and $B$ must 
 By the final scene, every cell of $C$ holds its symbolic sum or difference and the matrices visualize the complete operation.`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj3: {
       title: `Switching Between Addition and Subtraction`,
@@ -90,7 +92,7 @@ By the final scene, every cell of $C$ holds its symbolic sum or difference and t
 Toggling the operation rebuilds the full sequence of scenes, so you can compare how addition and subtraction differ purely in operator while sharing the exact same element-wise structure.`,
       before: ``,
       after: ``,
-      link: '#switching-operations',
+      link: '',
     },
     obj4: {
       title: `Choosing Dimensions`,
@@ -104,7 +106,7 @@ Toggling the operation rebuilds the full sequence of scenes, so you can compare 
 There is no separate control for $C$ because its shape is forced by the operation.`,
       before: ``,
       after: ``,
-      link: '#choosing-dimensions',
+      link: '',
     },
     obj5: {
       title: `What Matrix Addition Is`,
@@ -119,7 +121,7 @@ Matrix subtraction works identically, with subtraction replacing addition. The s
 For a comprehensive treatment of matrix operations and properties, see **matrix operations theory**.`,
       before: ``,
       after: ``,
-      link: '#what-matrix-addition-is',
+      link: '',
     },
     obj6: {
       title: `Key Formulas`,
@@ -141,7 +143,7 @@ Matrix addition satisfies the same algebraic properties as ordinary addition:
 Subtraction is neither commutative nor associative, just like with scalars.`,
       before: ``,
       after: ``,
-      link: '#key-formulas',
+      link: '',
     },
     obj7: {
       title: `Why the Same-Shape Rule Matters`,
@@ -154,7 +156,7 @@ This is fundamentally different from **matrix multiplication**, where the inner 
 For comparison with matrix multiplication and other operations, see **matrix multiplication**.`,
       before: ``,
       after: ``,
-      link: '#same-shape-rule',
+      link: '',
     },
     obj8: {
       title: `Common Mistakes`,
@@ -167,7 +169,7 @@ For comparison with matrix multiplication and other operations, see **matrix mul
 • **Mixing row vectors and column vectors** — a $1 \\times n$ row vector cannot be added to an $n \\times 1$ column vector even when they have the same number of entries`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj9: {
       title: `Worked Example`,
@@ -186,26 +188,26 @@ $$D = \\begin{pmatrix} 1-7 & 2-8 & 3-9 \\\\ 4-0 & 5-1 & 6-2 \\end{pmatrix} = \\b
 The visualizer above mirrors this process symbolically — set the dimensions to $2 \\times 3$ and step through to see each pairing in turn.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
       content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transposition, and inversion.
 
-**Scalar multiplication** — multiplying every entry of a matrix by a number; like addition, it is element-wise and preserves shape.
+[Scalar multiplication](!/linear-algebra/visual-tools/matrix-scalar-multiplication) — multiplying every entry of a matrix by a number; like addition, it is element-wise and preserves shape.
 
-**Matrix multiplication** — a non-element-wise operation with different conformability rules and very different geometric meaning.
+[Matrix multiplication](!/visual-tools/matrix-multiplication) — a non-element-wise operation with different conformability rules and very different geometric meaning.
 
-**Hadamard product** — element-wise multiplication of two matrices of the same shape, the multiplicative analogue of matrix addition.
+[Hadamard product](!/linear-algebra/visual-tools/hadamard-product) — element-wise multiplication of two matrices of the same shape, the multiplicative analogue of matrix addition.
 
-**Vector addition** — the special case where both matrices are row or column vectors; the same element-wise rule applies.
+[Vector addition](!/linear-algebra/visual-tools/vector-addition) — the special case where both matrices are row or column vectors; the same element-wise rule applies.
 
 **Zero matrix** — the additive identity, with every entry equal to zero.
 
-**Transpose** — reflecting a matrix across its main diagonal; useful when combining matrices of incompatible shapes through related operations.`,
+[Transpose](!/linear-algebra/visual-tools/matrix-transpose) — reflecting a matrix across its main diagonal; useful when combining matrices of incompatible shapes through related operations.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `The Opening Scene: Two Matrices of the Same Shape`,
@@ -411,6 +413,7 @@ That framing explains which properties survive and which do not. Subtraction is 
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-addition'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -432,7 +435,7 @@ That framing explains which properties survive and which do not. Subtraction is 
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
+export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -564,6 +567,9 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, sta
      variant="light"
    /> */}
       <br />
+      <RelatedTools tools={relatedTools}/>
+      <br/>
+      <br/>
       <Sections sections={genericSections}/>
       <br />
       <br />

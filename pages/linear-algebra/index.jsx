@@ -87,13 +87,13 @@ const customSections = {
         .lmc-tool-open { display: inline-block; font-size: 13px; font-weight: 700; color: #2563eb; margin-top: 12px; }
       </style>
       <div class="lmc-tools-grid">
-        <a class="lmc-tool-card" href="/visual-tools/determinant-calculator">
+        <a class="lmc-tool-card" href="/linear-algebra/visual-tools/matrix-determinant">
           <span class="lmc-tool-badge">Calculator</span>
           <div class="lmc-tool-title">Determinant Visual Calculator with Steps</div>
           <div class="lmc-tool-desc">Visual, interactive determinant calculator with step-by-step explanations.</div>
           <span class="lmc-tool-open">Open tool &rarr;</span>
         </a>
-        <a class="lmc-tool-card" href="/visual-tools/gauss-elimination">
+        <a class="lmc-tool-card" href="/linear-algebra/visual-tools/gauss-elimination">
           <span class="lmc-tool-badge">Visual Tool</span>
           <div class="lmc-tool-title">Gaussian Elimination Visualizer</div>
           <div class="lmc-tool-desc">Learn the principles of Gaussian elimination with our interactive visual tool.</div>
@@ -111,7 +111,7 @@ const customSections = {
           <div class="lmc-tool-desc">Learn the principles of matrix transposition using this interactive visual tool.</div>
           <span class="lmc-tool-open">Open tool &rarr;</span>
         </a>
-        <a class="lmc-tool-card" href="/visual-tools/matrix-types">
+        <a class="lmc-tool-card" href="/linear-algebra/visual-tools/matrix-types">
           <span class="lmc-tool-badge">Visual Tool</span>
           <div class="lmc-tool-title">Matrix Types Generator</div>
           <div class="lmc-tool-desc">Learn different types of square matrices and their special features with this interactive visual tool.</div>

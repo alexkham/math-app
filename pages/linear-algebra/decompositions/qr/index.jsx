@@ -1726,6 +1726,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2225,29 +2226,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the QR decomposition?",
-    answer: "The QR decomposition factors an m×n matrix A (with independent columns) as A = QR, where Q has orthonormal columns and R is upper triangular with positive diagonal entries. Q spans the column space of A, and R stores the coefficients expressing A's columns in terms of Q's columns.",
-    sectionId: "1"
+    question: "Is a thin $Q$ an orthogonal matrix?",
+    answer: "No, that name requires a square matrix, and a thin $Q$ has none of the properties it implies, including an inverse. The practical form of the error is cancelling $QQ^{T}$ inside a longer expression as though it were the identity. For a thin $Q$ only $Q^{T}Q = I$ holds, while $QQ^{T}$ is a projection matrix.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How is QR computed?",
-    answer: "QR can be computed via Gram-Schmidt orthogonalization, Householder reflections, or Givens rotations. Householder is the default for dense matrices due to its backward stability. Modified Gram-Schmidt is used when Q is needed explicitly. Givens rotations are preferred for sparse matrices.",
-    sectionId: "9"
+    question: "Is the QR factorisation unique?",
+    answer: "Only once a sign convention is fixed, usually requiring the diagonal of $R$ to be positive. Gram-Schmidt satisfies that automatically since each diagonal entry is a norm, but Householder reflections do not, and numerical libraries rarely enforce it. Two correct factorisations of one matrix can therefore differ by a column of sign flips.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "Why is QR better than normal equations for least squares?",
-    answer: "Forming AᵀA squares the condition number of A, amplifying rounding errors. QR reduces least squares to the triangular system Rx̂ = Qᵀb, preserving the original condition number. If A has condition number 10⁶, QR works at 10⁶ while normal equations work at 10¹².",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "What is the difference between thin QR and full QR?",
-    answer: "Thin (reduced) QR has Q of size m×n with orthonormal columns and R of size n×n. Full QR extends Q to a square m×m orthogonal matrix by adding columns spanning the orthogonal complement of Col(A). Thin QR suffices for system solving and least squares; full QR is needed when the left null space basis is required.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How does the QR algorithm compute eigenvalues?",
-    answer: "The QR algorithm iterates: factor Aₖ = QₖRₖ, then form Aₖ₊₁ = RₖQₖ. Each step is a similarity transformation preserving eigenvalues while driving sub-diagonal entries toward zero. With shifts, convergence is cubic for symmetric matrices. It avoids the numerical instability of finding roots of the characteristic polynomial.",
-    sectionId: "7"
+    question: "In the QR algorithm, is $R_kQ_k$ a second factorisation?",
+    answer: "No, it is a deliberate reversal of the factors just computed, and reversing them changes the matrix rather than undoing anything. Repeating that swap is exactly what drives the sequence toward upper triangular form with the eigenvalues along the diagonal. The subscript $k$ counts iterations rather than rows or columns.",
+    sectionId: "notation"
   }
 }
 
@@ -2324,19 +2315,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -2500,6 +2478,22 @@ export default function QRDecompositionPage({
           `In practice the choice is narrow. Householder is the default for dense matrices and is what [least squares](#6) routines call. Givens is chosen when the matrix is sparse or when entries arrive one at a time, since a rotation acts on two rows and leaves the rest untouched. Modified Gram–Schmidt survives where the columns of $Q$ are wanted explicitly and progressively — and classical Gram–Schmidt survives as an explanation.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`QR Decomposition FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -2638,12 +2632,6 @@ export default function QRDecompositionPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

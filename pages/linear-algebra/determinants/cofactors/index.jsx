@@ -934,6 +934,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1574,39 +1575,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a minor of a matrix?",
-    answer: "The (i,j) minor Mᵢⱼ is the determinant of the (n-1)×(n-1) submatrix remaining after deleting row i and column j. It's a number, not a matrix. A 3×3 matrix has nine minors; a 4×4 has sixteen.",
-    sectionId: "1"
+    question: "Is the minor $M_{ij}$ a matrix or a number?",
+    answer: "A number. Deleting row $i$ and column $j$ produces a smaller matrix, but $M_{ij}$ names that matrix's determinant rather than the matrix itself. The submatrix needs its own notation if you want to refer to it. Treating $M_{ij}$ as an array is a species error that surfaces as soon as you try to add or multiply with it.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is a cofactor?",
-    answer: "The cofactor Cᵢⱼ = (-1)^(i+j) Mᵢⱼ is the minor with a sign attached. The sign follows a checkerboard pattern: + at (1,1), alternating from there. When i+j is even, cofactor equals minor; when odd, it's negated.",
-    sectionId: "2"
+    question: "Why is the superscript in $A^{(i,j)}$ written inside parentheses?",
+    answer: "The parentheses are armour against misreading it as a power. Unfenced, $A^{ij}$ would collide with exponents and with tensor index conventions at once. The same device appears in the $n$-th derivative $f^{(n)}$. Three decorations then do three jobs on one letter: $a_{ij}$ selects an entry, $A^n$ multiplies, $A^{(i,j)}$ deletes.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is Laplace expansion along a row?",
-    answer: "Laplace expansion computes det(A) by summing each entry in a chosen row times its cofactor: det(A) = Σ aᵢⱼ·Cᵢⱼ. Every row gives the same result. Choose the row with the most zeros to minimize work.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "Can you expand a determinant along a column?",
-    answer: "Yes. Column expansion works identically: det(A) = Σ aᵢⱼ·Cᵢⱼ summing over rows i for fixed column j. This equals row expansion because det(Aᵀ) = det(A). Always scan for the row or column with the most zeros first.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the cofactor matrix?",
-    answer: "The cofactor matrix cof(A) has the cofactor Cᵢⱼ at position (i,j). It encodes all possible cofactor expansions: row i of cof(A) contains cofactors for expanding along row i of A. Note: signs are already incorporated.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the adjugate matrix?",
-    answer: "The adjugate adj(A) = cof(A)ᵀ is the transpose of the cofactor matrix. It satisfies A·adj(A) = det(A)·I. When det(A) ≠ 0, this gives the inverse formula: A⁻¹ = adj(A)/det(A).",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How expensive is cofactor expansion?",
-    answer: "Cofactor expansion costs O(n!) operations — impractical for n > 10. Row reduction computes the same determinant in O(n³). Cofactor expansion remains useful for small matrices, symbolic computation, and deriving the adjugate formula.",
-    sectionId: "7"
+    question: "Is the adjugate the same thing as the adjoint?",
+    answer: "Not in modern usage. In advanced linear algebra the adjoint means the conjugate transpose $A^{*}$, an unrelated operation. The word adjugate exists precisely to escape that collision, since older texts did use adjoint for this cofactor construction. When reading an older source, check which meaning is intended before applying anything.",
+    sectionId: "notation"
   }
 }
 
@@ -1681,19 +1662,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -1834,6 +1802,22 @@ const schemas = {
           `None of this is how anything is computed. A minor is a determinant, so every level of the recursion multiplies the work by another factor of $n$ — the adjugate of a $5 \\times 5$ matrix means twenty-five $4 \\times 4$ determinants, each of which means four $3 \\times 3$ determinants. Reduction computes a determinant in $\\tfrac{2}{3}n^3$ operations and factorization inverts in $2n^3$. What the chain provides instead is a closed form, and closed forms are what proofs and symbolic work need.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Cofactors and Minors FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1870,12 +1854,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

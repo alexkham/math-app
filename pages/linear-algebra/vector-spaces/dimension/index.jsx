@@ -2297,6 +2297,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -3045,29 +3046,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the dimension of a vector space?",
-    answer: "The dimension is the number of vectors in any basis. The basis size theorem guarantees all bases have the same number of elements, making dimension well-defined. The zero space has dimension 0. Rⁿ has dimension n, P_n has dimension n+1, and R^(m×n) has dimension mn.",
-    sectionId: "1"
+    question: "Does $\\mathbb{C}$ have dimension $1$ or $2$?",
+    answer: "Both, depending on the field of scalars, and neither answer is wrong. Over $\\mathbb{C}$ a single basis vector suffices, so the dimension is $1$; over $\\mathbb{R}$ you need two, giving $\\dim_{\\mathbb{R}}(\\mathbb{C}) = 2$. The space has not changed, only what counts as a scalar. Dimension belongs to a space together with its field.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "Why do all bases have the same size?",
-    answer: "If basis B has n elements and basis C has m elements, then since B spans and C is independent, m ≤ n. Since C spans and B is independent, n ≤ m. Therefore m = n. This is the basis size theorem, and it is what makes dimension a property of the space rather than a property of a particular basis.",
-    sectionId: "2"
+    question: "Can you do arithmetic with $\\dim(V) = \\infty$?",
+    answer: "No, and this is where the standard formulas quietly fail. Results like the subspace dimension formula and rank-nullity all carry an unstated finiteness assumption, so subtracting infinities produces nonsense. Where the size genuinely matters, a cardinal replaces the symbol: a countably infinite basis gives dimension $\\aleph_0$, not $\\infty$.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How does dimension constrain independence and spanning?",
-    answer: "In an n-dimensional space, more than n vectors are always dependent, and fewer than n vectors cannot span. Exactly n independent vectors automatically form a basis (spanning is free), and exactly n spanning vectors automatically form a basis (independence is free).",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "What is the dimension of a subspace?",
-    answer: "A subspace W of an n-dimensional space V satisfies dim(W) ≤ n, with equality only when W = V. For two subspaces, dim(W₁ + W₂) = dim(W₁) + dim(W₂) − dim(W₁ ∩ W₂). When their intersection is trivial, the sum is direct and dimensions simply add.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "When are two vector spaces isomorphic?",
-    answer: "Two finite-dimensional vector spaces over the same field are isomorphic if and only if they have the same dimension. Dimension is the single complete invariant: R³, P₂, and the solution space of a third-order linear ODE are all three-dimensional and therefore structurally identical as vector spaces.",
-    sectionId: "10"
+    question: "Why can any $n$-dimensional space be treated as $\\mathbb{R}^n$?",
+    answer: "Because every $n$-dimensional space over $\\mathbb{F}$ is isomorphic to $\\mathbb{F}^n$, so once a basis is fixed the two are interchangeable for computation. Choosing the basis is what supplies the translation, and coordinate vectors are that isomorphism written down. Without a chosen basis the correspondence exists but has no concrete form.",
+    sectionId: "notation"
   }
 }
 
@@ -3145,19 +3136,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 //    return {
@@ -3332,6 +3310,22 @@ export default function DimensionPage({seoData, sectionsContent, introContent, s
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Dimension FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -3469,12 +3463,6 @@ export default function DimensionPage({seoData, sectionsContent, introContent, s
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

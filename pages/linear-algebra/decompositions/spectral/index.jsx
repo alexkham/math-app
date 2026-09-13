@@ -1767,6 +1767,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2302,29 +2303,19 @@ The [SVD](!/linear-algebra/decompositions/svd) generalizes the spectral decompos
 
 const faqQuestions = {
   obj1: {
-    question: "What is the spectral decomposition?",
-    answer: "The spectral decomposition factors a real symmetric matrix A as A = QDQᵀ, where Q is orthogonal (columns are orthonormal eigenvectors) and D is diagonal (eigenvalues on the diagonal). In outer product form, A is a sum of rank-one projections weighted by eigenvalues.",
-    sectionId: "1"
+    question: "Why is it written $QDQ^{T}$ rather than $QDQ^{-1}$?",
+    answer: "Because for an orthogonal $Q$ the two are the same matrix, and the transpose announces that no inversion is needed. Writing $A = QDQ^{-1}$ is equally correct and essentially never seen, since it hides the saving. The letter $Q$ rather than $P$ is itself the signal that the change of basis is orthogonal.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What does the spectral theorem guarantee?",
-    answer: "The spectral theorem guarantees three things for real symmetric matrices: all eigenvalues are real, eigenvectors from distinct eigenvalues are automatically orthogonal, and the matrix is always orthogonally diagonalizable — even when eigenvalues are repeated.",
-    sectionId: "2"
+    question: "Is the outer product sum an approximation?",
+    answer: "Not with all its terms present, where the equality is exact. The instinct comes from truncated series, but nothing is being discarded here: each term $\\lambda_i\\mathbf{q}_i\\mathbf{q}_i^{T}$ is a rank-one piece and together they reconstruct $A$ perfectly. Dropping terms is a separate decision, and that is precisely what turns the same line into low-rank approximation.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How does the spectral decomposition classify quadratic forms?",
-    answer: "A quadratic form xᵀAx diagonalizes to λ₁y₁² + λ₂y₂² + ⋯ + λₙyₙ² in eigenvector coordinates. All positive eigenvalues mean positive definite (ellipsoid), all non-negative mean positive semi-definite, and mixed signs mean indefinite (hyperboloid). Classification reduces to checking eigenvalue signs.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "How is the spectral decomposition used in PCA?",
-    answer: "PCA applies the spectral decomposition to a covariance matrix. The eigenvectors are the principal component directions (axes of maximum variance), and the eigenvalues measure the variance along each direction. Projecting data onto the top k eigenvectors achieves optimal dimensionality reduction.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "What is the difference between spectral decomposition and SVD?",
-    answer: "The spectral decomposition A = QDQᵀ applies only to symmetric matrices and uses a single orthogonal matrix Q. The SVD A = UΣVᵀ applies to any matrix and uses two orthogonal matrices. For symmetric positive semi-definite matrices, the two coincide with U = V = Q and singular values equal to eigenvalues.",
-    sectionId: "9"
+    question: "Are singular values the same as eigenvalues?",
+    answer: "They coincide only for symmetric positive semi-definite matrices and for nothing else. Singular values are never negative, so where an eigenvalue is negative you get $\\sigma_i = |\\lambda_i|$ and the discarded sign is stored by negating the matching column elsewhere in the factorisation. The absolute value is doing bookkeeping, not measurement.",
+    sectionId: "notation"
   }
 }
 
@@ -2401,19 +2392,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -2571,6 +2549,22 @@ export default function SpectralDecompositionPage({
           `This works because $A$ is symmetric. A general matrix may fail to diagonalize at all, and even when it does the eigenvector matrix need not be orthogonal, so $P^{-1}$ must be computed rather than transposed. The [spectral theorem](#2) is what guarantees both the orthogonality and the existence — which is why this page can state everything unconditionally where the general case cannot.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Spectral Decomposition FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -2716,12 +2710,6 @@ export default function SpectralDecompositionPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

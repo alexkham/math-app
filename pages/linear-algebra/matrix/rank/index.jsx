@@ -1996,6 +1996,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2742,29 +2743,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the rank of a matrix?",
-    answer: "The rank of a matrix is the number of linearly independent rows, which always equals the number of linearly independent columns. It measures the effective dimensionality of the matrix and satisfies 0 ≤ rank(A) ≤ min(m, n) for an m × n matrix. A matrix with rank equal to min(m, n) is said to have full rank.",
-    sectionId: "1"
+    question: "Does \"full rank\" mean the matrix is square?",
+    answer: "No. Full rank means the rank has reached its ceiling of $\\min(m, n)$, the shorter side of the matrix, so a $5 \\times 3$ matrix of rank $3$ is at full rank while being nowhere near square. Falling short of that ceiling is called rank-deficient. The term measures attainment, not shape.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you find the rank of a matrix?",
-    answer: "Reduce the matrix to row echelon form using elementary row operations and count the number of pivot positions. Each pivot corresponds to one independent row and one independent column. The number of pivots is the rank.",
-    sectionId: "3"
+    question: "Why can you say \"the rank\" without specifying row or column rank?",
+    answer: "Because a theorem licenses it. The columns live in $\\mathbb{R}^m$ and the rows in $\\mathbb{R}^n$, genuinely different spaces, yet the two counts always coincide. Only that equality makes the unqualified word safe. It is a result rather than a definition, and something had to be proved before the bare term could exist.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the rank-nullity theorem?",
-    answer: "For an m × n matrix A, the rank plus the nullity equals n, the number of columns. The rank counts the pivot columns (dimensions in the column space) and the nullity counts the free columns (dimensions in the null space). Every column contributes to exactly one of these two counts.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "How does rank determine the solutions of a linear system?",
-    answer: "A system Ax = b has a solution if and only if rank(A) equals rank([A|b]). When solutions exist, the system has a unique solution if rank(A) equals the number of unknowns, and infinitely many solutions if the rank is less. A linear system can never have exactly two or any other finite number greater than one.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "What are the four fundamental subspaces of a matrix?",
-    answer: "Every m × n matrix defines four subspaces: the column space and left null space in Rᵐ, and the row space and null space in Rⁿ. The rank determines all four dimensions — the column space and row space both have dimension equal to the rank, while the null space has dimension n − rank and the left null space has dimension m − rank.",
-    sectionId: "9"
+    question: "What does $\\rho(A)$ mean when you meet it?",
+    answer: "It depends entirely on the source, so read the surrounding claim. Older and some engineering texts use $\\rho(A)$ for rank, but numerical analysis uses it for the spectral radius and statistics for correlation, and those are unrelated numbers. The unambiguous spellings are $\\operatorname{rank}(A)$ and its short form $\\operatorname{rk}(A)$.",
+    sectionId: "notation"
   }
 }
 
@@ -2839,19 +2830,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -3004,6 +2982,22 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrix Rank FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -3081,12 +3075,6 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

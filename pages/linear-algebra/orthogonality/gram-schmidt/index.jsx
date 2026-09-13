@@ -1842,6 +1842,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2396,29 +2397,19 @@ On the function space $C[0, 2\\pi]$ with $\\langle f, g \\rangle = \\int_0^{2\\p
 
 const faqQuestions = {
   obj1: {
-    question: "What does the Gram-Schmidt process do?",
-    answer: "The Gram-Schmidt process converts a set of linearly independent vectors into an orthogonal (or orthonormal) set spanning the same subspace. It works by sequentially subtracting from each vector its projections onto all previously computed orthogonal directions, leaving only the perpendicular remainder.",
-    sectionId: "1"
+    question: "Why does the sum stop at $j-1$ rather than running over all the vectors?",
+    answer: "Because the later vectors have not been produced yet. At step $j$ only $\\mathbf{u}_1$ through $\\mathbf{u}_{j-1}$ exist, so a fixed upper limit would ask the formula to use things that do not exist. The moving limit is also why the construction terminates, and at $j = 1$ the empty sum makes $\\mathbf{u}_1 = \\mathbf{v}_1$ automatic.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the Gram-Schmidt formula?",
-    answer: "For each vector vⱼ, compute uⱼ = vⱼ − Σ(uᵢ·vⱼ / uᵢ·uᵢ)uᵢ, summing over all previously computed orthogonal vectors u₁ through uⱼ₋₁. Each term subtracts the projection of vⱼ onto one orthogonal direction. Optionally normalize each uⱼ to unit length.",
-    sectionId: "3"
+    question: "Are the $\\mathbf{e}_j$ here the standard basis vectors?",
+    answer: "No, they are the unit vectors this process produced, not the coordinate axes. The letter is borrowed for its association with unit length, and only the surrounding construction says which unit vector is meant. Watch the projections too: they must be onto the $\\mathbf{u}_i$, never the original $\\mathbf{v}_i$, which is the substitution that silently breaks the algorithm.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the QR decomposition?",
-    answer: "The QR decomposition A = QR results from applying Gram-Schmidt to the columns of A. The matrix Q has orthonormal columns (the normalized output of Gram-Schmidt), and R is upper triangular with entries recording the dot products computed during the process.",
-    sectionId: "7"
-  },
-  obj4: {
-    question: "Why is QR better than normal equations for least squares?",
-    answer: "Forming AᵀA squares the condition number of A, amplifying rounding errors. The QR decomposition reduces least squares to the triangular system Rx̂ = Qᵀb, which preserves the original conditioning. This makes QR the standard algorithm in numerical software.",
-    sectionId: "8"
-  },
-  obj5: {
-    question: "What is the difference between classical and modified Gram-Schmidt?",
-    answer: "Classical Gram-Schmidt computes all projections using the original vector vⱼ. Modified Gram-Schmidt updates vⱼ in place after each projection subtraction. The results are identical in exact arithmetic, but modified Gram-Schmidt is significantly more stable in floating-point computation.",
-    sectionId: "9"
+    question: "Why does $R$ come out upper triangular?",
+    answer: "Because of what the algorithm builds. Each $\\mathbf{v}_j$ is assembled from only the first $j$ orthogonal vectors, so any coefficient below the diagonal would refer to a vector that never contributed. Those entries are zero not by construction but by absence. Note that italic $R$ here is one triangular matrix, unrelated to blackboard $\\mathbb{R}$.",
+    sectionId: "notation"
   }
 }
 
@@ -2493,19 +2484,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   //  return {
@@ -2690,6 +2668,22 @@ export default function GramSchmidtsPage({
           `That last observation is why a Fourier coefficient is a single integral rather than the solution of a linear system: the basis was orthogonal before anyone asked. The algorithm never inspects what a vector is — it calls the inner product and scalar multiplication and nothing else — which is what lets the same procedure serve tuples, polynomials and functions, and what makes it a constructive proof that every finite-dimensional inner product space has an orthonormal basis.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Gram-Schmidt FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2771,12 +2765,6 @@ export default function GramSchmidtsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

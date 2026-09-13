@@ -261,29 +261,6 @@ These six patterns plus a handful of operators cover the vast majority of practi
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is the LaTeX Editor?",
-      answer: "The LaTeX Editor is a visual tool for building LaTeX math expressions by clicking symbol buttons. Each line is an independent equation, rendered live in a math field. The combined LaTeX source updates in real time and copies to the clipboard with one click."
-    },
-    obj2: {
-      question: "How do you insert a LaTeX symbol?",
-      answer: "Click anywhere in the active equation line to set focus, then click any symbol in the palette. Plain symbols drop a single character or command. Templates like fractions and square roots insert a structure with empty slots that you fill by typing, pressing Tab to move between slots."
-    },
-    obj3: {
-      question: "How do you build multi-line equations?",
-      answer: "Click +Add line in the footer to append a new line, or click the curly-return button in the action bar to insert a line right after the current one. Each line is independently editable. The up and down arrows on each row reorder lines, and the combined source joins all lines with the standard double-backslash line break."
-    },
-    obj4: {
-      question: "How do you copy the LaTeX source?",
-      answer: "Click the blue Copy button at the top-right of the LaTeX Source panel. The button briefly turns green and reads Copied to confirm. The clipboard receives the canonical LaTeX text for all lines, ready to paste into Overleaf, MathJax, KaTeX, or any LaTeX document inside an align or equation environment."
-    },
-    obj5: {
-      question: "What categories of symbols does the editor support?",
-      answer: "The palette is grouped into categories including basic operators, Greek letters, calculus (integrals, derivatives, limits), sets and logic, matrices, relations, and arrows. Click any category to swap the visible button grid. Hover any button to see its name and a short description in a tooltip."
-    }
-  }
-
 
   const schemas = {
 
@@ -347,26 +324,12 @@ These six patterns plus a handful of operators cover the vast majority of practi
       ]
     },
 
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
-
   }
 
 
    return {
       props:{
          sectionsContent,
-         faqQuestions,
          schemas,
           seoData: {
         title: "LaTeX Editor: Build Formulas Visually | Learn Math Class",
@@ -383,7 +346,7 @@ These six patterns plus a handful of operators cover the vast majority of practi
     }
    }
 
-export default function LatexEditorPage({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function LatexEditorPage({seoData, sectionsContent, schemas}) {
 
 
   const genericSections=[
@@ -549,10 +512,6 @@ export default function LatexEditorPage({seoData, sectionsContent, faqQuestions,
     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -415,7 +415,7 @@
 
 
 
-//    export default function MatricesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+//    export default function MatricesPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -1004,34 +1004,6 @@ const introContent = {
   content: `A matrix is one of the most versatile objects in mathematics. It encodes systems of equations, represents linear transformations, stores data in structured form, and serves as the computational backbone of nearly every topic in linear algebra. Understanding what matrices are, how to read them, and how their parts relate to one another is the starting point for everything that follows.`,
 }
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a matrix in linear algebra?",
-    answer: "A matrix is a rectangular array of numbers arranged in rows and columns. It is denoted by a capital letter such as A, with individual entries identified by two subscripts indicating the row and column position. Matrices can contain real numbers, complex numbers, or elements of any algebraic field.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What do the dimensions of a matrix mean?",
-    answer: "The dimensions of a matrix describe its size as m × n, where m is the number of rows and n is the number of columns. A 3 × 5 matrix has 3 rows and 5 columns and contains 15 entries total. Order matters — a 3 × 5 matrix and a 5 × 3 matrix have different shapes and are never equal.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How does matrix multiplication work?",
-    answer: "To multiply matrices A (m × n) and B (n × p), the number of columns of A must equal the number of rows of B. Each entry of the product AB is computed as the dot product of a row of A with a column of B. The resulting matrix has dimensions m × p. Unlike ordinary multiplication, matrix multiplication is not commutative — AB does not generally equal BA.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "When is a matrix invertible?",
-    answer: "A square matrix A is invertible when there exists a matrix A⁻¹ such that AA⁻¹ = A⁻¹A = I. This happens if and only if the determinant of A is nonzero. For a 2 × 2 matrix, the inverse has an explicit formula involving the entries and the determinant ad − bc.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "How do matrices represent linear transformations?",
-    answer: "Every m × n matrix defines a linear transformation from Rⁿ to Rᵐ by the rule x ↦ Ax. The columns of the matrix are the images of the standard basis vectors, and the image of any other vector follows by linearity. The rank of the matrix equals the dimension of the image of the transformation.",
-    sectionId: "10"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -1098,19 +1070,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1123,7 +1082,6 @@ const schemas = {
     obj6Table,
     obj8Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Matrices: Definition, Types & Operations | Learn Math Class",
@@ -1138,7 +1096,7 @@ const schemas = {
 
 
 
-   export default function MatricesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+   export default function MatricesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1308,12 +1266,6 @@ const schemas = {
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

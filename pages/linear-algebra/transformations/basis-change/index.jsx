@@ -821,6 +821,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1358,29 +1359,19 @@ Choosing the right basis is often the key insight that converts a hard problem i
 
 const faqQuestions = {
   obj1: {
-    question: "What is a change-of-basis matrix?",
-    answer: "The change-of-basis matrix P converts coordinates from one basis to another. Column j of P is the coordinate vector of the j-th basis vector of the source basis expressed in the target basis. The inverse P⁻¹ converts in the reverse direction.",
-    sectionId: "2"
+    question: "Does similarity preserve symmetry, zeros or sparsity?",
+    answer: "None of them in general. The expression $P^{-1}AP$ looks symmetric because the same letter appears on both sides, but that visual balance promises nothing about the matrix. A symmetric $A$ usually comes out non-symmetric unless $P$ is orthogonal, and entries, zero patterns and sparsity are lost as a matter of course.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What does it mean for two matrices to be similar?",
-    answer: "Two matrices A and A' are similar if A' = P⁻¹AP for some invertible matrix P. Similar matrices represent the same linear transformation in different bases. They share the same determinant, trace, eigenvalues, characteristic polynomial, and rank.",
-    sectionId: "3"
+    question: "Is \"similar\" the same as \"row-equivalent\"?",
+    answer: "No, and the two disagree on exactly the properties this topic cares about. Row-equivalent matrices generally have different eigenvalues and different determinants, while similar matrices always share both. Since a tilde is sometimes used for either relation, reading it with the wrong meaning turns a true statement false without a symbol changing.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What properties are preserved by similarity?",
-    answer: "Similar matrices share every property intrinsic to the transformation: determinant, trace, eigenvalues with multiplicities, characteristic polynomial, and rank. Individual entries, symmetry, and sparsity are generally not preserved unless the change-of-basis matrix has special structure.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "How is diagonalization a change of basis?",
-    answer: "Diagonalization uses eigenvectors as the new basis. In this basis, the transformation acts by scaling each basis vector by its eigenvalue, so the matrix becomes diagonal: D = P⁻¹AP where P has eigenvectors as columns. This reduces powers to A^k = PD^kP⁻¹.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "What is orthogonal similarity?",
-    answer: "Orthogonal similarity uses an orthogonal change-of-basis matrix P (where P⁻¹ = Pᵀ), giving A' = PᵀAP. It preserves symmetry and is the basis of the spectral theorem: every real symmetric matrix is orthogonally similar to a diagonal matrix of its eigenvalues.",
-    sectionId: "7"
+    question: "Does similarity apply to maps between two different spaces?",
+    answer: "No. A map $T : V \\to W$ needs an independent basis choice at each end, giving $A' = Q^{-1}AP$ with two unrelated matrices. Similarity is the special case where domain and codomain coincide so the two collapse into one. If the spaces differ, $A$ and $A'$ need not even be the same size.",
+    sectionId: "notation"
   }
 }
 
@@ -1456,19 +1447,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1611,6 +1589,22 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
           `The last two rows answer that differently and it is worth knowing which is used. The Jordan form is the more informative — the ones on its superdiagonal count precisely how many eigenvectors each eigenvalue is missing — but it is numerically unusable, since an arbitrarily small perturbation can change the block structure entirely. The Schur form gives up on diagonal blocks and settles for triangular, in exchange for a unitary $P$ and stability. Libraries compute Schur; textbooks prove Jordan.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Change of Basis FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1647,12 +1641,6 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

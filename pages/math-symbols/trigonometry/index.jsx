@@ -486,12 +486,6 @@ const pitfallGenericSections = [
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
       {/* <GenericNavbar /> */}
       <br />
@@ -649,29 +643,6 @@ export async function getStaticProps() {
     pageHeading: 'Trigonometry Symbols',
   };
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are the basic trigonometry symbols?",
-      answer: "The six basic trigonometry symbols are sin, cos, tan, cot, sec, and csc. They represent the sine, cosine, tangent, cotangent, secant, and cosecant functions respectively, each defined as a ratio of sides in a right triangle or as coordinates on the unit circle."
-    },
-    obj2: {
-      question: "What is the difference between sin inverse and 1 over sin?",
-      answer: "The notation sin^(-1)(x) or arcsin(x) is the inverse sine function, which returns an angle whose sine equals x. The expression 1/sin(x) is the reciprocal of sine, which equals csc(x). Despite the similar-looking exponent, they have completely different meanings."
-    },
-    obj3: {
-      question: "What are the Pythagorean trigonometric identities?",
-      answer: "The three Pythagorean identities are sin^2(t) + cos^2(t) = 1, 1 + tan^2(t) = sec^2(t), and 1 + cot^2(t) = csc^2(t). They all derive from the unit circle equation x^2 + y^2 = 1 by dividing through by cos^2 or sin^2."
-    },
-    obj4: {
-      question: "What are hyperbolic trig functions?",
-      answer: "Hyperbolic functions sinh, cosh, tanh, coth, sech, and csch are analogs of trigonometric functions defined using the exponential function rather than the unit circle. For example, sinh(x) = (e^x - e^(-x))/2. They satisfy their own set of identities similar to circular trig identities."
-    },
-    obj5: {
-      question: "How do you write trigonometry symbols in LaTeX?",
-      answer: "In LaTeX, use backslash commands such as \\sin, \\cos, \\tan, \\cot, \\sec, and \\csc. For inverse functions use \\sin^{-1} or \\arcsin. Greek letters for angles use \\theta, \\alpha, and \\beta. Squared functions are written as \\sin^2(\\theta)."
-    }
-  };
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -736,19 +707,6 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   };
 
   const symbolsData = {
@@ -894,7 +852,6 @@ Parentheses in trigonometric notation are optional for single variables \u2014 $
       menuItems,
       pitfallSections,
       introBarData,
-      faqQuestions,
       schemas,
     },
   };

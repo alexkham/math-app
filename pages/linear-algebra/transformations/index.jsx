@@ -444,7 +444,7 @@
 //    }
 
 // // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function LinearTransformationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function LinearTransformationsPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -1096,34 +1096,6 @@ const introContent = {
   content: `A linear transformation is a function between vector spaces that respects addition and scalar multiplication. Every matrix defines one, and every linear transformation between finite-dimensional spaces can be encoded as a matrix. This correspondence is the bridge between abstract maps and concrete computation — it turns geometric questions into algebraic ones and algebraic results into geometric insight.`,
 }
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a linear transformation?",
-    answer: "A linear transformation is a function T: V → W between vector spaces satisfying T(cu + dv) = cT(u) + dT(v) for all vectors u, v and scalars c, d. It preserves addition and scalar multiplication. Every matrix multiplication T(x) = Ax is linear, and every linear map between finite-dimensional spaces can be represented by a matrix.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What are examples of linear transformations?",
-    answer: "Matrix multiplication, rotation, reflection, projection, and scaling in Rⁿ are all linear. Beyond Rⁿ, differentiation on polynomial spaces, integration on function spaces, the transpose map on matrices, and the trace function are all linear transformations.",
-    sectionId: "4"
-  },
-  obj3: {
-    question: "Why is translation not a linear transformation?",
-    answer: "Translation T(v) = v + b with b ≠ 0 fails because T(0) = b ≠ 0, but every linear transformation must send the zero vector to zero. More generally, any function with a constant term — including all affine maps with nonzero offset — is not linear.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "Why is a linear transformation determined by its action on a basis?",
-    answer: "Every vector v has a unique expression as a linear combination of basis vectors: v = c₁v₁ + ⋯ + cₙvₙ. Linearity forces T(v) = c₁T(v₁) + ⋯ + cₙT(vₙ). So once the images of the basis vectors are specified, T is determined on every vector. Any choice of basis images defines a valid linear transformation.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "How are linear transformations related to matrices?",
-    answer: "Every linear map Rⁿ → Rᵐ equals T(x) = Ax for a unique m×n matrix A whose columns are the images of the standard basis vectors. For abstract spaces, the matrix depends on the basis choice. Changing bases changes the matrix via similarity but not the transformation itself.",
-    sectionId: "7"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -1190,19 +1162,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 return {
@@ -1213,7 +1172,6 @@ return {
     obj4Table,
     obj8Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Linear Transformations: Definition & Examples | Learn Math Class",
@@ -1226,7 +1184,7 @@ return {
 }
    }
 
-export default function LinearTransformationsPage({seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function LinearTransformationsPage({seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1348,12 +1306,6 @@ export default function LinearTransformationsPage({seoData, sectionsContent, int
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

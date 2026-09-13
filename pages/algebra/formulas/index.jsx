@@ -25,29 +25,6 @@ export async function getStaticProps() {
     'algebra equations and identities'
   ]
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is the quadratic formula?",
-      answer: "The quadratic formula x = (-b plus or minus the square root of b squared minus 4ac) divided by 2a gives the two solutions of any quadratic equation ax squared + bx + c = 0 directly from its coefficients. The discriminant b squared minus 4ac determines whether the roots are real and distinct, repeated, or complex."
-    },
-    obj2: {
-      question: "What are the main exponent rules?",
-      answer: "The main exponent rules are: product rule (same base, add exponents), quotient rule (same base, subtract exponents), power of a power (multiply exponents), power of a product (distribute to each factor), power of a quotient (distribute to numerator and denominator), zero exponent (any nonzero base to the zero equals 1), and negative exponent (reciprocal of the positive power)."
-    },
-    obj3: {
-      question: "What are the logarithm rules?",
-      answer: "The key logarithm rules are: product rule (log of a product equals sum of logs), quotient rule (log of a quotient equals difference of logs), power rule (exponent moves out front as a multiplier), and change of base formula (converts between bases). Additionally, log base a of a equals 1 and log base a of 1 equals 0."
-    },
-    obj4: {
-      question: "What is the difference of squares formula?",
-      answer: "The difference of squares formula states that a squared minus b squared equals (a + b)(a - b). It factors a subtraction of two perfect squares into the product of a sum and a difference. A sum of squares does not factor over the real numbers."
-    },
-    obj5: {
-      question: "What are the remainder and factor theorems?",
-      answer: "The remainder theorem states that dividing a polynomial P(x) by (x - c) gives a remainder equal to P(c). The factor theorem is a special case: (x - c) is a factor of P(x) if and only if P(c) = 0, meaning c is a root of the polynomial."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -112,25 +89,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       algebraFormulasList,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Algebra Formulas & Identities | Learn Math Class",
@@ -146,7 +109,6 @@ export async function getStaticProps() {
 
 export default function AlgebraFormulasPage({
   algebraFormulasList,
-  faqQuestions,
   schemas,
   seoData
 }) {
@@ -182,10 +144,6 @@ export default function AlgebraFormulasPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br />

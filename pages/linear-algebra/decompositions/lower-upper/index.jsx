@@ -2830,6 +2830,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -3408,29 +3409,19 @@ These options can be set side by side on cost per system, cost amortized over ma
 
 const faqQuestions = {
   obj1: {
-    question: "What is LU decomposition?",
-    answer: "LU decomposition writes a square matrix A as A = LU, where L is unit lower triangular (ones on the diagonal, multipliers below) and U is upper triangular (the row echelon form). It captures the entire Gaussian elimination process in reusable matrix form.",
-    sectionId: "1"
+    question: "Do both $L$ and $U$ have ones on the diagonal?",
+    answer: "Only $L$ does. The unit diagonal is a normalisation chosen to make the factorisation unique, and $U$ instead carries the pivots along its diagonal, whose product gives the determinant. Note that unit here means the entries equal one, with no claim about unit length or orthonormal columns.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "When does LU decomposition exist without pivoting?",
-    answer: "The factorization A = LU without row swaps exists if and only if every leading principal submatrix of A is nonsingular. When a zero pivot appears, row swaps are needed, giving the pivoted form PA = LU which exists for every invertible matrix.",
-    sectionId: "4"
+    question: "Can you drop the permutation $P$ once you have $L$ and $U$?",
+    answer: "No, because $P$ recorded the row swaps and those swaps must reach the right-hand side too. Solving $A\\mathbf{x} = \\mathbf{b}$ from $PA = LU$ means running forward substitution on $P\\mathbf{b}$, not on $\\mathbf{b}$. Using the untouched vector silently solves a system whose rows are in the wrong order.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you solve a linear system using LU?",
-    answer: "Given PA = LU, solve Ax = b in two steps: forward substitution to solve Ly = Pb, then back substitution to solve Ux = y. The factorization costs about 2n³/3 operations, but each subsequent solve costs only O(n²), making LU efficient for multiple right-hand sides.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "What is partial pivoting in LU decomposition?",
-    answer: "Partial pivoting selects the largest entry in the current pivot column (at or below the pivot row) and swaps it into the pivot position. This keeps all multipliers in L bounded by 1 in absolute value, limiting rounding error accumulation. The result is PA = LU with P recording the row swaps.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "How does LU compute the determinant?",
-    answer: "The determinant of A equals the product of the diagonal entries of U, times (−1)^s where s is the number of row swaps. Since det(L) = 1 for unit lower triangular L, det(A) = (−1)^s · u₁₁u₂₂···uₙₙ. This is essentially free once LU is available.",
-    sectionId: "7"
+    question: "Is $UL$ the same as $LU$?",
+    answer: "No, they are different products describing different matrices, and the order in $A = LU$ is fixed by the elimination that produced it: the lower factor records what was done, the upper factor what was left. The pair is also meant to be kept and reused, so multiplying back to $A$ is only ever a check.",
+    sectionId: "notation"
   }
 }
 
@@ -3505,19 +3496,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
  
@@ -3687,6 +3665,22 @@ export default function LUDecompositionPage({
           `The last row is the one to read as a warning. Computing $A^{-1}$ through LU is perfectly possible and rarely the right thing to do: it costs three times a single solve, and using the inverse afterwards is both slower and less accurate than the two triangular solves it replaced. The inverse is worth forming when it is the answer, not when it is a step toward one.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`LU Decomposition FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -3824,12 +3818,6 @@ export default function LUDecompositionPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

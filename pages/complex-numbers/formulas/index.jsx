@@ -175,29 +175,6 @@ export async function getStaticProps() {
     'complex numbers reference sheet'
   ]
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are the basic complex number formulas?",
-      answer: "The basic complex number formulas cover addition, subtraction, multiplication, and division of numbers in the form a + bi. Addition and subtraction combine real and imaginary parts separately. Multiplication uses the distributive property with i squared equal to negative one. Division multiplies numerator and denominator by the conjugate."
-    },
-    obj2: {
-      question: "How do you find the modulus of a complex number?",
-      answer: "The modulus (absolute value) of a complex number z = a + bi is found using the formula |z| = sqrt(a squared + b squared). It represents the distance from the origin to the point (a, b) in the complex plane."
-    },
-    obj3: {
-      question: "What is the polar form of a complex number?",
-      answer: "The polar form expresses a complex number as z = r(cos(theta) + i sin(theta)), where r is the modulus and theta is the argument (angle). This form simplifies multiplication, division, and exponentiation of complex numbers."
-    },
-    obj4: {
-      question: "What is De Moivre's theorem?",
-      answer: "De Moivre's theorem states that for a complex number in polar form, raising it to the nth power gives r^n(cos(n*theta) + i sin(n*theta)). It is used to compute powers and roots of complex numbers efficiently."
-    },
-    obj5: {
-      question: "How do you divide two complex numbers?",
-      answer: "To divide complex numbers, multiply both the numerator and denominator by the conjugate of the denominator. This eliminates the imaginary part from the denominator, producing a real denominator that allows separation into real and imaginary components."
-    }
-  }
-
   const seoData = {
     title: "Complex Numbers Formulas & Examples | Learn Math Class",
     description: "Complete collection of complex numbers formulas with step-by-step examples. Covers polar form, modulus, conjugate, De Moivre's theorem, and operations.",
@@ -270,25 +247,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       complexNumbersFormulasList,
-      faqQuestions,
       schemas,
       seoData,
     }
@@ -297,7 +260,6 @@ export async function getStaticProps() {
 
 export default function ComplexNumbersFormulasPage({ 
   complexNumbersFormulasList, 
-  faqQuestions,
   schemas,
   seoData
 }) {
@@ -340,10 +302,6 @@ export default function ComplexNumbersFormulasPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br/>

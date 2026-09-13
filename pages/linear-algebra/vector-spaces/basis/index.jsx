@@ -827,6 +827,7 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1311,25 +1312,20 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is a basis of a vector space?",
-    answer: "A basis of a vector space V is a set of vectors that is both linearly independent and spans V. Independence means no vector in the set is a linear combination of the others; spanning means every vector in V is expressible as a linear combination of the basis vectors. A basis is simultaneously a minimal spanning set and a maximal independent set."
+    question: "Is $[\\mathbf{v}]_{\\mathcal{B}}$ the same thing as $\\mathbf{v}$?",
+    answer: "No, they live in different places. The vector $\\mathbf{v}$ belongs to the space $V$, while its coordinate vector belongs to $\\mathbb{R}^n$ and is a description of $\\mathbf{v}$ relative to one chosen basis. The two coincide only in the standard basis, which is exactly why the subscript is usually dropped there and nowhere else.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "Why are coordinates relative to a basis unique?",
-    answer: "If a basis B = {v_1, ..., v_n} spans V, every vector in V can be written as a linear combination of the basis vectors. Independence guarantees that this combination is unique: if two different sets of scalars produced the same vector, their difference would give a nontrivial combination equal to zero, contradicting linear independence."
+    question: "Which way does $P_{\\mathcal{D} \\leftarrow \\mathcal{C}}$ convert?",
+    answer: "It takes coordinates in $\\mathcal{C}$ and returns coordinates in $\\mathcal{D}$, so the arrow's tail names the input. Reading it left to right applies the matrix backwards, and the error hides itself because the product still has compatible shapes and computes without complaint. The payoff is that chains cancel like dominoes.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is the standard basis for R^n?",
-    answer: "The standard basis for R^n is the set {e_1, e_2, ..., e_n}, where e_i has a 1 in position i and zeros elsewhere. Its key property is that the coordinates of any vector relative to the standard basis are simply the components of the vector itself, so no system of equations needs to be solved."
-  },
-  obj4: {
-    question: "How do you find a basis for the column space, row space, and null space of a matrix?",
-    answer: "Row reduce the matrix A. The original columns of A corresponding to pivot positions form a basis for the column space. The nonzero rows of the echelon form give a basis for the row space. Solving Ax = 0 with free variables produces basis vectors for the null space, one per free variable."
-  },
-  obj5: {
-    question: "What is a change-of-basis matrix?",
-    answer: "If B and C are two bases for V, the change-of-basis matrix P from B to C converts B-coordinates into C-coordinates: [v]_C = P times [v]_B. Its columns are the C-coordinate vectors of each B-basis vector. The reverse conversion uses the inverse of P. Change of basis is the foundation of similarity transforms and diagonalization."
-  },
+    question: "Why is a basis written in script as $\\mathcal{B}$?",
+    answer: "The typeface separates the set from the matrix built out of it. Script $\\mathcal{B}$ is a collection with members, while a plain $B$ is an array with columns, and the two carry the same data in different species. Conflating them produces expressions like $\\mathcal{B}\\mathbf{c}$, which multiplies a set by a vector and means nothing.",
+    sectionId: "notation"
+  }
 }
 
 
@@ -1398,19 +1394,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1617,6 +1600,22 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
           sectionsContent.obj12.content,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Basis and Coordinates FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,
@@ -1703,12 +1702,6 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -936,6 +936,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1494,34 +1495,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the least-squares solution?",
-    answer: "The least-squares solution x̂ minimizes the sum of squared residuals ‖Ax − b‖² when the system Ax = b has no exact solution. It produces the point in the column space of A closest to b, which is the orthogonal projection of b onto Col(A).",
-    sectionId: "1"
+    question: "Does $\\hat{\\mathbf{x}}$ satisfy $A\\hat{\\mathbf{x}} = \\mathbf{b}$?",
+    answer: "Generally no, and that failure is the whole premise. Least squares exists precisely because the system has no exact solution, so $\\hat{\\mathbf{x}}$ is the vector making the residual as small as possible rather than zero. Dropping the hat and writing $A\\mathbf{x} = \\mathbf{b}$ quietly asserts the very thing the setup denies.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What are the normal equations?",
-    answer: "The normal equations are AᵀAx̂ = Aᵀb. They arise from requiring the residual b − Ax̂ to be orthogonal to every column of A. When A has full column rank, AᵀA is invertible and the unique solution is x̂ = (AᵀA)⁻¹Aᵀb.",
-    sectionId: "3"
+    question: "Why minimise the squared norm instead of the norm itself?",
+    answer: "Convenience, not a change of problem. Squaring is increasing on non-negative numbers, so $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ and $\\|A\\mathbf{x} - \\mathbf{b}\\|$ are minimised by the same $\\hat{\\mathbf{x}}$. What the square buys is a tractable derivative, since the square root would otherwise sit in the way. It also supplies the method's name.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you find the least-squares line through data points?",
-    answer: "Set up the design matrix A with a column of ones and a column of x-values. The vector b contains the y-values. Solve the normal equations AᵀAĉ = Aᵀb to get the intercept and slope that minimize the sum of squared vertical distances from the data to the line.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "Why is QR decomposition preferred for least squares?",
-    answer: "Forming AᵀA explicitly squares the condition number of A, amplifying rounding errors. The QR decomposition A = QR reduces least squares to the triangular system Rx̂ = Qᵀb, which preserves the original conditioning and is the standard algorithm in numerical software.",
-    sectionId: "8"
-  },
-  obj5: {
-    question: "What is the pseudoinverse?",
-    answer: "The pseudoinverse A⁺ = (AᵀA)⁻¹Aᵀ gives the least-squares solution as x̂ = A⁺b when A has full column rank. When A is rank-deficient, the Moore-Penrose pseudoinverse from the SVD selects the minimum-norm least-squares solution.",
-    sectionId: "7"
-  },
-  obj6: {
-    question: "How is least squares related to linear regression?",
-    answer: "Linear regression is least squares in matrix form. The design matrix X holds predictor values, and the normal equations XᵀXβ̂ = Xᵀy produce the regression coefficients. The hat matrix P = X(XᵀX)⁻¹Xᵀ projects y onto the column space of X, and R² measures how much of y the projection captures.",
-    sectionId: "9"
+    question: "Why are they called the \"normal\" equations?",
+    answer: "Because normal here means perpendicular, pointing at the right angle in the geometry: the residual is orthogonal to the column space at the minimiser. It has nothing to do with ordinary in the everyday sense, and nothing to do with the normal distribution. That second collision is pure accident of vocabulary.",
+    sectionId: "notation"
   }
 }
 
@@ -1597,19 +1583,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1791,6 +1764,22 @@ export default function LeastSquaresPage({
           `QR avoids this because $Q$ is orthogonal: multiplying by it preserves lengths, so it cannot amplify error, and the triangular system inherits $A$'s conditioning rather than its square. The SVD goes further and drops the rank requirement entirely, which is the case where the other three have no unique answer to compute — among infinitely many minimisers it returns the one of least norm. That is a deliberate choice, not a default, and it is why the [pseudoinverse](#7) is the right tool when the rank is uncertain.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Least Squares FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1871,12 +1860,6 @@ export default function LeastSquaresPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

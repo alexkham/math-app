@@ -1102,6 +1102,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1828,29 +1829,19 @@ The ten axioms are not arbitrary — they are the minimal set of conditions that
 
 const faqQuestions = {
   obj1: {
-    question: "What are the ten axioms of a vector space?",
-    answer: "The ten axioms split into five for addition (closure, commutativity, associativity, zero vector, additive inverse) and five for scalar multiplication (closure, scalar associativity, two distributive laws, multiplicative identity 1·v = v). Any set satisfying all ten with two operations is a vector space.",
-    sectionId: "2"
+    question: "Is $0\\mathbf{v} = \\mathbf{0}$ one of the axioms?",
+    answer: "No, it is a theorem proved from the ten. The proof hinges on the two zeros being different objects: the scalar zero on the left and the zero vector on the right. Writing $(0 + 0)\\mathbf{v} = 0\\mathbf{v} + 0\\mathbf{v}$ uses field addition inside the bracket and space addition outside it, and without that distinction the argument says nothing.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What are examples of vector spaces besides Rⁿ?",
-    answer: "Polynomials of degree at most n (dimension n+1), the set of all m×n matrices (dimension mn), continuous functions on an interval (infinite-dimensional), and solution sets of homogeneous linear ODEs are all vector spaces. Each satisfies the ten axioms under its natural addition and scaling.",
-    sectionId: "5"
+    question: "Why do the distributive axioms bother with parentheses?",
+    answer: "Because the two plus signs are different operations. In $(c + d)\\mathbf{v} = c\\mathbf{v} + d\\mathbf{v}$, the left one adds scalars in the field and the right one adds vectors in the space. The parentheses record which runs first, and the axiom exists precisely to assert that the two operations line up rather than assuming it.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What are common non-examples of vector spaces?",
-    answer: "Polynomials of degree exactly n fail closure under addition (leading terms can cancel). Positive reals with ordinary addition lack a zero element. A line not through the origin in R² fails to contain the zero vector. Affine maps T(v) = Av + b with b ≠ 0 break the axioms.",
-    sectionId: "8"
-  },
-  obj4: {
-    question: "What follows automatically from the axioms?",
-    answer: "Several facts are provable from the axioms alone: 0·v = 0, c·0 = 0, (−1)·v = −v, and if c·v = 0 then c = 0 or v = 0. The zero vector and each additive inverse are unique. These are theorems, not additional assumptions.",
-    sectionId: "9"
-  },
-  obj5: {
-    question: "Why do vector space axioms matter?",
-    answer: "Working from axioms means every theorem proved abstractly — about independence, span, basis, dimension — applies simultaneously to Rⁿ, polynomial spaces, matrix spaces, and function spaces. The axioms are the minimal conditions supporting the entire framework of linear algebra.",
-    sectionId: "10"
+    question: "Does defining addition and scaling on a set make it a vector space?",
+    answer: "Not on its own. Supplying the operations is only the first step, since closure still has to be verified: the result of adding or scaling must land back inside the set. That is why continuity is a genuine hypothesis for $C[a,b]$ rather than decoration, and why the non-examples fail despite having perfectly sensible operations.",
+    sectionId: "notation"
   }
 }
 
@@ -1926,19 +1917,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -2099,6 +2077,22 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Vector Space Axioms FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'12',
     //     title:sectionsContent.obj12.title,
@@ -2235,12 +2229,6 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
 
    {/* <GenericNavbar/> */}

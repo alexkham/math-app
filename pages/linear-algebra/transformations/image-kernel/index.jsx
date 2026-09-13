@@ -831,6 +831,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1377,29 +1378,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the image of a linear transformation?",
-    answer: "The image (or range) of T is the set of all outputs: Im(T) = {T(v) : v ∈ V}. It is a subspace of the codomain. For matrix transformations, the image is the column space of A. Its dimension equals the rank of A, and a vector w is in the image if and only if Ax = w has a solution.",
-    sectionId: "1"
+    question: "Does the kernel live in the domain or the codomain?",
+    answer: "The kernel sits in the domain, since it collects inputs that get sent to zero, while the image sits in the codomain, collecting outputs actually reached. Swapping their homes is the commonest conceptual slip in the topic. The notation guards against it: $\\ker(T) \\subseteq V$ and $\\text{Im}(T) \\subseteq W$.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the kernel of a linear transformation?",
-    answer: "The kernel of T is the set of all inputs that map to zero: ker(T) = {v ∈ V : T(v) = 0}. It is a subspace of the domain. For matrix transformations, the kernel is the null space of A. Its dimension (the nullity) equals n minus the rank.",
-    sectionId: "2"
+    question: "Why is $\\text{Im}$ capitalised?",
+    answer: "Partly self-defence. Lowercase $\\operatorname{im}$ does exist, but $\\text{Im}$ leads a double life as the imaginary part of a complex number, and in a complex vector space both meanings can appear within a paragraph. The capital keeps them visually apart where confusing them would be easy and costly.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you determine if a linear transformation is injective?",
-    answer: "A linear transformation is injective (one-to-one) if and only if its kernel is trivial: ker(T) = {0}. For matrix transformations, this is equivalent to full column rank, linearly independent columns, no free variables, and (for square matrices) nonzero determinant.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is the rank-nullity theorem?",
-    answer: "The rank-nullity theorem states that dim(Im(T)) + dim(ker(T)) = dim(V) for any linear transformation T: V → W. The domain dimensions split between what the map preserves (the image) and what it destroys (the kernel). For matrices, rank + nullity = n.",
-    sectionId: "6"
-  },
-  obj5: {
-    question: "When is a linear transformation an isomorphism?",
-    answer: "A linear transformation is an isomorphism when it is both injective and surjective (bijective). For maps between spaces of equal dimension, any one of the three conditions implies the other two. For matrix transformations, this is equivalent to the matrix being square and invertible.",
-    sectionId: "5"
+    question: "Why can you write $T\\mathbf{v}$ without parentheses?",
+    answer: "Linearity licenses it. Because $T$ behaves exactly like the matrix product it secretly is, the juxtaposition of $A\\mathbf{x}$ carries over. General functions keep their parentheses. Watch the colon too, which does two jobs on adjacent lines: in $T : V \\to W$ it binds a name, while in $\\{\\mathbf{v} : T(\\mathbf{v}) = \\mathbf{0}\\}$ it means \"such that\".",
+    sectionId: "notation"
   }
 }
 
@@ -1476,19 +1467,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1631,6 +1609,22 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
           `What ties them together is dimension rather than structure. Rank-nullity says the two dimensions sum to $\\dim V$, so neither can be chosen independently of the other — every direction in the domain is accounted for exactly once, surviving into the image or collapsing into the kernel. Note the sum is over the domain: the codomain plays no part, which is why a map can have a small image without having a large kernel.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Image and Kernel FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1668,12 +1662,6 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

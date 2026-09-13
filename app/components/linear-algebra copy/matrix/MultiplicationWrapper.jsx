@@ -37,6 +37,40 @@ const SCENARIOS = {
 
 const SCENARIO_ORDER = ['general', 'matrix-vector', 'vector-matrix'];
 
+// Scoped styles for tab hover/tooltip and hover states — pseudo-elements
+// and :hover can't be expressed inline.
+const SCOPED_CSS = `
+  .mw-tab { position: relative; }
+  .mw-tab:hover { color: #334155; }
+  .mw-tab .mw-tip {
+    visibility: hidden; opacity: 0;
+    position: absolute; top: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b; color: #f1f5f9;
+    font-size: 12px; line-height: 1.4; font-weight: 400;
+    padding: 7px 11px; border-radius: 6px;
+    width: 210px; text-align: center;
+    pointer-events: none;
+    transition: opacity 0.12s ease, visibility 0.12s;
+    z-index: 10;
+  }
+  .mw-tab .mw-tip::before {
+    content: ''; position: absolute;
+    bottom: 100%; left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-bottom-color: #1e293b;
+  }
+  .mw-tab:hover .mw-tip, .mw-tab:focus .mw-tip {
+    visibility: visible; opacity: 1;
+  }
+  .mw-pill:hover { border-color: #94a3b8; }
+  .mw-pill-active:hover { border-color: #2563eb; }
+  .mw-strategy:hover { border-color: #94a3b8; }
+  .mw-strategy-active:hover { border-color: #2563eb; }
+  .mw-strategy-disabled { opacity: 0.55; cursor: not-allowed; }
+  .mw-strategy-disabled:hover { border-color: #cbd5e1; }
+  .mw-stepper-btn:hover { color: #1e40af; }
+`;
+
 // ---- helpers ----
 
 // Compute the displayed product given chosen order. Returns
@@ -69,6 +103,8 @@ export default function MultiplicationWrapper({
   defaultARows = 2,
   defaultACols = 3,
   defaultBCols = 2,
+  defaultStrategy = 'row-column',
+  explanations = null,
   dimensionRange = [1, 2, 3, 4, 5],
   title = 'Matrix Multiplication',
   subtitle = 'Symbolic visualization of A × B = C, step by step.',
@@ -78,7 +114,7 @@ export default function MultiplicationWrapper({
   const [activeTab, setActiveTab] = useState('scenario');
   const [scenario, setScenario] = useState('general');
   const [order, setOrder] = useState('AB');
-  const [strategy, setStrategy] = useState('row-column');
+  const [strategy, setStrategy] = useState(defaultStrategy);
 
   const [aRows, setARows] = useState(defaultARows);
   const [aCols, setACols] = useState(defaultACols);
@@ -99,13 +135,24 @@ export default function MultiplicationWrapper({
   const scenes = useMemo(() => {
     if (resolved.isUndefined) return [];
     if (!activeStrategy.enabled || !activeStrategy.build) return [];
-    return activeStrategy.build(
+    const built = activeStrategy.build(
       resolved.displayARows,
       resolved.displayACols,
       resolved.displayBCols,
       order
     );
-  }, [resolved, activeStrategy, order]);
+    // Line 1 anchor mesh: the page's notes for the active strategy and the
+    // active scenario, appended to the INTRO scene only. The step log renders
+    // scene 0 as a permanent lead block (introAsHeader), so the notes stay in
+    // view for the whole run without repeating on every step. Keys:
+    //   strategy  'row-column' | 'column-by-column' | 'row-by-row' | 'sum-of-outer-products'
+    //   scenario  'general' | 'matrix-vector' | 'vector-matrix'
+    //   (the undefined-product note is rendered by UndefinedBanner instead)
+    const extra = [explanations?.[activeStrategy.id], explanations?.[scenario]]
+      .filter(Boolean).join('');
+    if (!extra || built.length === 0) return built;
+    return built.map((sc, i) => (i === 0 ? { ...sc, formula: `${sc.formula || ''}${extra}` } : sc));
+  }, [resolved, activeStrategy, order, scenario, explanations]);
 
   // Whether BA is undefined for the current (constrained) sizes.
   const baWouldBeUndefined = constrained.bCols !== constrained.aRows;
@@ -135,38 +182,11 @@ export default function MultiplicationWrapper({
       padding: '22px',
       fontFamily: 'Arial, sans-serif'
     }}>
-      {/* Inline scoped styles for tab hover/tooltip — pseudo-elements can't be inline */}
-      <style>{`
-        .mw-tab { position: relative; }
-        .mw-tab:hover { color: #334155; }
-        .mw-tab .mw-tip {
-          visibility: hidden; opacity: 0;
-          position: absolute; top: calc(100% + 8px); left: 50%;
-          transform: translateX(-50%);
-          background: #1e293b; color: #f1f5f9;
-          font-size: 12px; line-height: 1.4; font-weight: 400;
-          padding: 7px 11px; border-radius: 6px;
-          width: 210px; text-align: center;
-          pointer-events: none;
-          transition: opacity 0.12s ease, visibility 0.12s;
-          z-index: 10;
-        }
-        .mw-tab .mw-tip::before {
-          content: ''; position: absolute;
-          bottom: 100%; left: 50%; transform: translateX(-50%);
-          border: 5px solid transparent; border-bottom-color: #1e293b;
-        }
-        .mw-tab:hover .mw-tip, .mw-tab:focus .mw-tip {
-          visibility: visible; opacity: 1;
-        }
-        .mw-pill:hover { border-color: #94a3b8; }
-        .mw-pill-active:hover { border-color: #2563eb; }
-        .mw-strategy:hover { border-color: #94a3b8; }
-        .mw-strategy-active:hover { border-color: #2563eb; }
-        .mw-strategy-disabled { opacity: 0.55; cursor: not-allowed; }
-        .mw-strategy-disabled:hover { border-color: #cbd5e1; }
-        .mw-stepper-btn:hover { color: #1e40af; }
-      `}</style>
+      {/* Scoped pseudo-class styles — injected via dangerouslySetInnerHTML
+          so React doesn't re-encode the quotes in the CSS `content` property
+          (a plain <style>{`...`}</style> caused a server/client hydration
+          mismatch; same fix as AdditionWrapper). */}
+      <style dangerouslySetInnerHTML={{ __html: SCOPED_CSS }} />
 
       {(title || subtitle) && (
         <div style={{ marginBottom: '18px' }}>
@@ -220,6 +240,7 @@ export default function MultiplicationWrapper({
             aCols={constrained.aCols}
             bCols={constrained.bCols}
             compatibilityToolHref={compatibilityToolHref}
+            note={explanations?.undefined || null}
           />
         ) : (
           <ScenePlayer
@@ -229,6 +250,8 @@ export default function MultiplicationWrapper({
             showStepIndicator={true}
             showStepLog={true}
             stepLogTitle="Step explanations"
+            introAsHeader={true}
+            sceneCanvasProps={{ showCaption: false }}
           />
         )}
       </div>
@@ -385,10 +408,18 @@ function ScenarioTab({
   setARows, setACols, setBCols,
   dimensionRange
 }) {
+  // Single row: Scenario | Order | Dimensions. Groups wrap onto a second
+  // line only when the panel is too narrow to hold all three.
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      columnGap: '32px',
+      rowGap: '14px'
+    }}>
       {/* Scenario pills */}
-      <div style={{ marginBottom: '18px' }}>
+      <div>
         <FieldLabel>Scenario</FieldLabel>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           {SCENARIO_ORDER.map((id) => (
@@ -403,50 +434,42 @@ function ScenarioTab({
         </div>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'auto 1fr',
-        gap: '36px',
-        alignItems: 'start',
-        rowGap: '14px'
-      }}>
-        {/* Order */}
-        <div>
-          <FieldLabel>Order</FieldLabel>
-          <Segmented
-            options={[
-              { value: 'AB', label: 'A × B' },
-              { value: 'BA', label: 'B × A', warning: baWouldBeUndefined }
-            ]}
-            value={order}
-            onChange={onOrderChange}
-          />
-          {baWouldBeUndefined && order === 'BA' && (
-            <p style={{
-              fontSize: '11px',
-              color: '#b91c1c',
-              margin: '6px 0 0',
-              fontStyle: 'italic'
-            }}>
-              undefined for these sizes
-            </p>
-          )}
-        </div>
+      {/* Order */}
+      <div>
+        <FieldLabel>Order</FieldLabel>
+        <Segmented
+          options={[
+            { value: 'AB', label: 'A × B' },
+            { value: 'BA', label: 'B × A', warning: baWouldBeUndefined }
+          ]}
+          value={order}
+          onChange={onOrderChange}
+        />
+        {baWouldBeUndefined && order === 'BA' && (
+          <p style={{
+            fontSize: '11px',
+            color: '#b91c1c',
+            margin: '6px 0 0',
+            fontStyle: 'italic'
+          }}>
+            undefined for these sizes
+          </p>
+        )}
+      </div>
 
-        {/* Dimensions */}
-        <div>
-          <FieldLabel>Dimensions</FieldLabel>
-          <DimensionControls
-            scenario={scenario}
-            aRows={aRows}
-            aCols={aCols}
-            bCols={bCols}
-            setARows={setARows}
-            setACols={setACols}
-            setBCols={setBCols}
-            dimensionRange={dimensionRange}
-          />
-        </div>
+      {/* Dimensions */}
+      <div>
+        <FieldLabel>Dimensions</FieldLabel>
+        <DimensionControls
+          scenario={scenario}
+          aRows={aRows}
+          aCols={aCols}
+          bCols={bCols}
+          setARows={setARows}
+          setACols={setACols}
+          setBCols={setBCols}
+          dimensionRange={dimensionRange}
+        />
       </div>
     </div>
   );
@@ -700,7 +723,7 @@ function StrategyCard({ meta, active, disabled, onClick }) {
 // Undefined banner — shown when current scenario+order+sizes
 // produce an undefined product. Replaces the scene player.
 // ===========================================================
-function UndefinedBanner({ scenario, order, aRows, aCols, bCols, compatibilityToolHref }) {
+function UndefinedBanner({ scenario, order, aRows, aCols, bCols, compatibilityToolHref, note = null }) {
   const leftDims = order === 'AB' ? `${aRows}×${aCols}` : `${aCols}×${bCols}`;
   const rightDims = order === 'AB' ? `${aCols}×${bCols}` : `${aRows}×${aCols}`;
   const leftInner = order === 'AB' ? aCols : bCols;
@@ -759,6 +782,8 @@ function UndefinedBanner({ scenario, order, aRows, aCols, bCols, compatibilityTo
         >
           See which size combinations multiply →
         </a>
+        {/* Line 1 anchor mesh: the page's note for the undefined state (raw HTML) */}
+        {note && <div dangerouslySetInnerHTML={{ __html: note }} />}
       </div>
     </div>
   );

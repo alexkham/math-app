@@ -504,64 +504,6 @@ This case-splitting approach extends to more complex configurations. The equatio
 
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What is an equation?",
-    answer: "An equation consists of two expressions joined by an equality sign, asserting that both sides have the same value. Unlike expressions, equations make claims that can be true, false, or true only for certain values of the unknown.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is a solution set?",
-    answer: "The solution set is the collection of all values that satisfy an equation. It may contain one value, multiple values, infinitely many values, or no values at all depending on the equation type.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What are conditional equations, identities, and contradictions?",
-    answer: "A conditional equation is true for specific values (like 2x = 10). An identity is true for all values (like 2(x+1) = 2x+2). A contradiction is true for no values (like x+1 = x+3). Most equations to solve are conditional.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What are equivalent equations and extraneous solutions?",
-    answer: "Equivalent equations share the same solution set. Reversible operations (adding, multiplying by nonzero constants) preserve equivalence. Non-reversible operations (squaring, clearing denominators) may introduce extraneous solutions that must be verified.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the degree of an algebraic equation?",
-    answer: "The degree is the highest power of the unknown after simplification. Degree 1 is linear, degree 2 is quadratic, degree 3 is cubic, degree 4 is quartic. Degree determines complexity and maximum number of solutions.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do you solve linear equations?",
-    answer: "Linear equations ax + b = 0 have exactly one solution: x = -b/a. Isolate the variable by undoing operations in reverse order using reversible steps. The structure is the foundation for all equation-solving methods.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What methods solve quadratic equations?",
-    answer: "Three methods: factoring (when possible), completing the square (always works), and the quadratic formula x = (-b ± √(b²-4ac))/2a. The discriminant b²-4ac determines whether there are two, one, or no real solutions.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How do you solve polynomial equations of degree 3 or higher?",
-    answer: "Use the rational root theorem to find candidates, test them, and reduce degree through polynomial division. No general formula exists for degree 5+. Once reduced to degree 2, the quadratic formula finishes the solution.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "Why do rational equations produce extraneous solutions?",
-    answer: "Clearing denominators by multiplying both sides is not reversible when the LCD equals zero at some x value. Such values may emerge as solutions but were never in the domain. Always verify candidates against domain restrictions.",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "How do you solve absolute value equations?",
-    answer: "For |f(x)| = k with k > 0, split into two cases: f(x) = k and f(x) = -k. For k = 0, solve f(x) = 0. For k < 0, no solution exists. Absolute value represents distance from zero on the number line.",
-    sectionId: "10"
-  },
-  obj11: {
-    question: "What equation types go beyond algebra?",
-    answer: "Exponential equations (unknown in exponent), logarithmic equations (unknown in log), radical equations (unknown under root), systems of equations (multiple unknowns), trigonometric equations, and differential equations each require specialized methods.",
-    sectionId: "11"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -628,19 +570,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -657,7 +586,6 @@ const schemas = {
     obj10Table,
     obj11Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Equations: Types, Solutions & Solving Methods | Learn Math Class",
@@ -682,7 +610,6 @@ export default function EquationsPage({
   obj10Table,
   obj11Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -865,12 +792,6 @@ export default function EquationsPage({
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    <br/>
    <br/>

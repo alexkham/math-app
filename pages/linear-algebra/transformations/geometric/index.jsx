@@ -1881,6 +1881,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2551,29 +2552,19 @@ $|\\det(A)| = 1$: the transformation preserves area or volume. Rotations ($\\det
 
 const faqQuestions = {
   obj1: {
-    question: "What is the rotation matrix in R²?",
-    answer: "The matrix for counterclockwise rotation by angle θ about the origin is [[cos θ, −sin θ], [sin θ, cos θ]]. It is orthogonal with determinant 1, preserving lengths, angles, and orientation. Rotations compose by adding angles: R_α · R_β = R_(α+β).",
-    sectionId: "3"
+    question: "In $R_{\\theta}S_k$, does the rotation or the scaling happen first?",
+    answer: "The scaling, because the rightmost factor acts first. Reading the product left to right as \"rotate, then scale\" reverses the actual sequence, and the mistake stays invisible until the two operations fail to commute. Here $AB \\neq BA$ carries real geometric weight: rotating then reflecting is a different motion from reflecting then rotating.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is a reflection matrix?",
-    answer: "A reflection matrix mirrors vectors across a line (in R²) or plane (in R³). Reflection across a line at angle α has matrix [[cos 2α, sin 2α], [sin 2α, −cos 2α]]. All reflection matrices are orthogonal, have determinant −1, and satisfy H² = I — reflecting twice returns to the original.",
-    sectionId: "5"
+    question: "How do you invert a rotation matrix?",
+    answer: "You do not need to compute anything: $R_{\\theta}^{-1} = R_{-\\theta} = R_{\\theta}^{T}$. Because a rotation is orthogonal, its transpose already is its inverse, so running elimination on one is wasted effort. Negating the angle and transposing the matrix are two descriptions of the same operation.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What is a shear transformation?",
-    answer: "A shear displaces each point proportionally to its distance from a fixed line or plane. A horizontal shear in R² has matrix [[1, k], [0, 1]], shifting x-coordinates by k times the y-coordinate. Shears have determinant 1, so they preserve area despite distorting angles.",
-    sectionId: "8"
-  },
-  obj4: {
-    question: "How does the determinant classify geometric transformations?",
-    answer: "The absolute value |det(A)| gives the area or volume scaling factor. Positive determinant means orientation is preserved, negative means reversed. Determinant ±1 means area/volume is preserved (rotations, reflections, shears). Determinant 0 means the transformation collapses at least one dimension.",
-    sectionId: "10"
-  },
-  obj5: {
-    question: "How do you combine geometric transformations?",
-    answer: "Composing transformations corresponds to multiplying their matrices, applied right-to-left. Order matters: rotating then shearing differs from shearing then rotating. The SVD reveals that every linear transformation decomposes into a rotation, a coordinate-axis scaling, and another rotation.",
-    sectionId: "9"
+    question: "Why does $P$ mean different things in different places?",
+    answer: "It has three unrelated tenants in linear algebra: a projection matrix here, a change-of-basis matrix in coordinate work, and a permutation matrix in factorisations such as $PA = LU$. Only the subscript and the surrounding claim distinguish them, so the letter alone never settles which object is meant.",
+    sectionId: "notation"
   }
 }
 
@@ -2650,19 +2641,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 return {
@@ -2823,6 +2801,22 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
           `Notice which pairs are hard to tell apart. Rotation and shear both have $\\det = 1$, so area alone will not separate them — the eigenvalues do, a complex pair against a defective repeated root. Reflection and projection are both symmetric, and there the determinant separates them: $-1$ against $0$, orientation reversed against information destroyed. No single test identifies a family; the identity and the spectrum together do.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Geometric Transformations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2860,12 +2854,6 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -122,7 +122,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import '../../pages.css';
 import PerfectSquaresPage from '../../../app/components/tables/PerfectSquaresPage';
 
-export default function PerfectSquaresTablePage({ seoData, combinedInstructions, faqQuestions, schemas }) {
+export default function PerfectSquaresTablePage({ seoData, combinedInstructions, schemas }) {
   return (
     <>
       <Head>
@@ -158,12 +158,6 @@ export default function PerfectSquaresTablePage({ seoData, combinedInstructions,
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
 
       {/* <GenericNavbar/> */}
@@ -243,29 +237,6 @@ export async function getStaticProps() {
     'The built-in quiz at the bottom lets you test your recall, with score persisting for the visit'
   ];
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a perfect square?",
-      answer: "A perfect square is a non-negative integer that can be written as the product of an integer with itself. The first ten perfect squares are 1, 4, 9, 16, 25, 36, 49, 64, 81, and 100, formed by squaring the integers 1 through 10. Every perfect square has an integer square root."
-    },
-    obj2: {
-      question: "How can you tell if a number is a perfect square?",
-      answer: "Three quick checks rule out most non-squares. First, the last digit of a perfect square is always 0, 1, 4, 5, 6, or 9, so numbers ending in 2, 3, 7, or 8 are immediately disqualified. Second, every perfect square is congruent to 0 or 1 modulo 4. If both tests pass, take the square root and verify that the result is an integer."
-    },
-    obj3: {
-      question: "How many perfect squares are there between 1 and 10000?",
-      answer: "There are exactly 100 perfect squares from 1 to 10000, corresponding to the squares of the integers from 1 through 100. The first is 1, equal to 1 squared, and the last is 10000, equal to 100 squared."
-    },
-    obj4: {
-      question: "What pattern do consecutive perfect squares follow?",
-      answer: "The gap between two consecutive perfect squares n squared and (n+1) squared is always 2n+1, the next odd number. The gap from 1 to 4 is 3, from 4 to 9 is 5, from 9 to 16 is 7, and so on. Equivalently, the n-th perfect square equals the sum of the first n odd numbers: 1, 1 plus 3 equals 4, 1 plus 3 plus 5 equals 9."
-    },
-    obj5: {
-      question: "Why do perfect squares have an odd number of divisors?",
-      answer: "Divisors of any positive integer pair up as d and n divided by d. For non-squares these are always distinct, so divisors come in pairs and the total count is even. For a perfect square, the pairing collapses at the square root, which is its own partner, leaving exactly one unpaired divisor. That is why perfect squares are the only positive integers with an odd divisor count."
-    }
-  };
-
   const schemas = {
     webApplication: {
       "@context": "https://schema.org",
@@ -332,25 +303,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   };
 
   return {
     props: {
       combinedInstructions,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Perfect Squares 1-10000 Table & Tool | Learn Math Class",

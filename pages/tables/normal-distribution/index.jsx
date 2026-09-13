@@ -211,29 +211,6 @@ Wherever a continuous variable is well-approximated by a normal distribution and
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a z-table?",
-      answer: "A z-table lists probabilities for the standard normal distribution at tabulated z-values. This page provides four such tables: cumulative for positive z, cumulative for negative z, complementary cumulative for positive z, and complementary cumulative for negative z, each accurate to four decimal places."
-    },
-    obj2: {
-      question: "How do I look up a probability in a z-table?",
-      answer: "Locate the row matching the first decimal of your z-score, then move across to the column matching the second decimal. The cell value is the probability. For z = 1.96 in the cumulative-positive table, row 1.9 and the column for the second decimal 6 give about 0.9750."
-    },
-    obj3: {
-      question: "What is the difference between cumulative and complementary cumulative?",
-      answer: "Cumulative tables give P(Z less than or equal to z), the area to the left of z. Complementary cumulative tables give P(Z greater than z), the area to the right. The two are exact complements: P(Z greater than z) equals 1 minus P(Z less than or equal to z)."
-    },
-    obj4: {
-      question: "How do I find P(Z greater than z) without a complementary table?",
-      answer: "Use the relationship P(Z greater than z) equals 1 minus P(Z less than or equal to z). Look up P(Z less than or equal to z) in the cumulative-positive table and subtract from 1. The complementary cumulative tables on this page do that subtraction for you."
-    },
-    obj5: {
-      question: "What is the standard normal distribution?",
-      answer: "The standard normal distribution is the normal distribution with mean 0 and standard deviation 1. Its density is symmetric around 0 with the classic bell shape, and the total area under the curve is 1. Any normal distribution can be converted to standard normal using the z-score formula z equals (x minus mu) over sigma."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -294,19 +271,6 @@ Wherever a continuous variable is well-approximated by a normal distribution and
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -314,7 +278,6 @@ Wherever a continuous variable is well-approximated by a normal distribution and
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
           seoData: {
         title: "Normal Distribution Z-Score Table | Learn Math Class",
@@ -331,7 +294,7 @@ Wherever a continuous variable is well-approximated by a normal distribution and
     }
    }
 
-export default function NormalDistributionTable({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function NormalDistributionTable({seoData, sectionsContent, introContent, schemas}) {
 
   const genericSections = Object.keys(sectionsContent).map((key, index) => ({
     id: `${index + 1}`,
@@ -374,12 +337,6 @@ export default function NormalDistributionTable({seoData, sectionsContent, intro
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

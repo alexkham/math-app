@@ -295,29 +295,6 @@ export async function getStaticProps() {
 Each definition includes intuitive explanations, key properties, examples, and links to detailed lesson pages. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a set in mathematics?",
-      answer: "A set is an unordered collection of distinct objects called elements. Sets are denoted by capital letters and their elements are listed inside curly braces, like A = {1, 2, 3}. Two sets are equal if and only if they contain exactly the same elements, regardless of order or repetition in the listing."
-    },
-    obj2: {
-      question: "What is the difference between a subset and a proper subset?",
-      answer: "A subset A of B means every element of A also belongs to B, allowing A to equal B. A proper subset means A is contained in B but is not equal to B -- at least one element of B is missing from A. Every set is a subset of itself, but no set is a proper subset of itself."
-    },
-    obj3: {
-      question: "What are union, intersection, and complement?",
-      answer: "Union (A union B) collects all elements in either set. Intersection (A intersect B) collects only elements in both sets. Complement (A complement) collects everything in the universal set that is not in A. These three operations are the core tools for combining and separating sets."
-    },
-    obj4: {
-      question: "What is the difference between finite, countable, and uncountable sets?",
-      answer: "A finite set has a bounded number of elements. A countably infinite set has elements that can be listed in a sequence matching the natural numbers, like the integers or rationals. An uncountable set is too large to list -- no sequence can cover all its elements. The real numbers are the standard example of an uncountable set."
-    },
-    obj5: {
-      question: "What is a power set?",
-      answer: "The power set of A is the set of all possible subsets of A, including the empty set and A itself. If A has n elements, its power set has 2 to the n elements. For example, the power set of {a, b} is {empty set, {a}, {b}, {a, b}}, which has 4 elements."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -382,25 +359,11 @@ Each definition includes intuitive explanations, key properties, examples, and l
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       setTheoryTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -416,7 +379,6 @@ Each definition includes intuitive explanations, key properties, examples, and l
 
 export default function SetTheoryDefinitionsPage({
   setTheoryTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -457,12 +419,6 @@ export default function SetTheoryDefinitionsPage({
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br />

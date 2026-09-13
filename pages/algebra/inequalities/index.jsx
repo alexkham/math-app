@@ -589,54 +589,6 @@ const introContent = {
 
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What is an inequality?",
-    answer: "An inequality compares two expressions using <, >, ≤, or ≥. Unlike equations that ask where expressions are equal, inequalities ask where one dominates the other. Solutions are typically intervals rather than isolated points.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is a solution set for an inequality?",
-    answer: "A solution set contains all values that make the inequality true. For x > 3, it's every real number greater than 3 — infinitely many values forming a continuous region on the number line, written in interval notation as (3, ∞).",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "How does interval notation work?",
-    answer: "Parentheses ( ) exclude endpoints, brackets [ ] include them. (a, b) means a < x < b; [a, b] means a ≤ x ≤ b. Infinity always uses parentheses since it can't be reached. Union ∪ joins disconnected pieces.",
-    sectionId: "3"
-  },
-  obj5: {
-    question: "Why do you flip the inequality when multiplying by a negative?",
-    answer: "Negation mirrors the number line, reversing positions. Since 3 < 5, but -3 > -5, multiplying both sides by a negative reverses the order. This is the key rule distinguishing inequality manipulation from equation manipulation.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is a compound inequality?",
-    answer: "A compound inequality combines two conditions. AND (conjunction) requires both: -3 < x < 5 is an intersection. OR (disjunction) requires at least one: x < -1 or x > 4 is a union. AND narrows solutions; OR expands them.",
-    sectionId: "6"
-  },
-  obj8: {
-    question: "What is sign analysis for inequalities?",
-    answer: "Sign analysis finds where an expression is positive or negative. Mark critical points (zeros and undefined values), test one value per interval, record signs in a chart. The solution consists of intervals matching the required sign.",
-    sectionId: "8"
-  },
-  obj10: {
-    question: "How do you solve a quadratic inequality?",
-    answer: "Find roots of the corresponding equation ax² + bx + c = 0 to locate critical points. The discriminant determines structure. Use sign analysis or visualize the parabola: above x-axis where > 0, below where < 0.",
-    sectionId: "10"
-  },
-  obj12: {
-    question: "Why can't you cross-multiply rational inequalities?",
-    answer: "The denominator changes sign across intervals. Cross-multiplying would require flipping the inequality in some regions but not others. Sign analysis avoids this by analyzing the factored form directly without clearing denominators.",
-    sectionId: "12"
-  },
-  obj13: {
-    question: "How do you solve absolute value inequalities?",
-    answer: "|f(x)| < k becomes -k < f(x) < k (conjunction, one interval). |f(x)| > k becomes f(x) < -k or f(x) > k (disjunction, two rays). Geometrically: < k means within distance k of zero; > k means farther than k from zero.",
-    sectionId: "13"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -702,19 +654,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -728,7 +667,6 @@ const schemas = {
     obj8Table,
     obj13Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Inequalities: Solving, Graphing & Interval Notation | Learn Math Class",
@@ -752,7 +690,6 @@ export default function InequalitiesPage({
   obj8Table,
   obj13Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -1006,12 +943,6 @@ export default function InequalitiesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

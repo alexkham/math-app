@@ -193,7 +193,7 @@
 // //     }
 // //    }
 
-// // export default function TrigIdentitiesTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+// // export default function TrigIdentitiesTablePage({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
     
 // //   const genericSections=[
@@ -666,7 +666,7 @@
 //     }
 //    }
 
-// export default function TrigIdentitiesTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+// export default function TrigIdentitiesTablePage({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
     
 //   const genericSections=[
@@ -1015,33 +1015,6 @@ export async function getStaticProps(){
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are trigonometric identities?",
-      answer: "Trigonometric identities are equations involving trig functions that hold for every valid value of the variable. They cover Pythagorean relations such as sin squared plus cos squared equals one, reciprocal and quotient definitions, even and odd behavior, cofunction relations, sum-angle and double-angle formulas, half-angle and power-reduction forms, product-to-sum conversions, reference-angle reduction, and inverse-function relationships. Together they form the working toolkit for simplifying, integrating, and solving trig expressions, covering all six functions: sine, cosine, tangent, cotangent, secant, and cosecant."
-    },
-    obj2: {
-      question: "What is the Pythagorean identity?",
-      answer: "The fundamental Pythagorean identity is sin squared of x plus cos squared of x equals one, true for every x. It follows from the unit circle: any point on it has coordinates (cos theta, sin theta) and satisfies x squared plus y squared equals one. Two derived forms follow by dividing through by cos squared or sin squared: one plus tan squared equals sec squared, and one plus cot squared equals csc squared."
-    },
-    obj3: {
-      question: "What are the trigonometric reduction formulas?",
-      answer: "Reduction formulas, also called reference-angle reduction, let you rewrite any trig function evaluated at any angle as the same function (or its cofunction) evaluated at a first-quadrant angle, up to a sign. The standard transformations are pi over two plus x, pi plus x, three pi over two plus or minus x, and two pi plus or minus x. For example, sin(pi + x) equals minus sin(x), and cos(three pi over two minus x) equals minus sin(x). They cover all six functions and are essential for evaluating trig at any angle in terms of acute-angle values."
-    },
-    obj4: {
-      question: "What is the difference between sum-angle and double-angle identities?",
-      answer: "Sum-angle identities give sin(a + b), cos(a + b), and tan(a + b) in terms of trig functions of a and b separately. Double-angle identities are the special case where a equals b equals x, producing sin(2x) equals 2 sin x cos x, cos(2x) equals cos squared minus sin squared, and so on. Sum-angle is the general form; double-angle is the most commonly used specialization, and triple-angle, half-angle, and power-reduction all descend from it by substitution or algebraic rearrangement. All six functions (sine, cosine, tangent, cotangent, secant, cosecant) have versions of each."
-    },
-    obj5: {
-      question: "How do half-angle and power-reduction formulas relate?",
-      answer: "They are two sides of the same algebraic move. Power-reduction starts from the double-angle form cos(2x) equals one minus two sin squared x, solved for sin squared x to give one half of (one minus cos 2x). Half-angle takes the square root of the power-reduction form, giving sin(x over two) equals plus-or-minus the square root of (one minus cos x) over two. Power-reduction reduces a squared power to a multiple-angle expression; half-angle reduces a half angle to a full-angle expression."
-    },
-    obj6: {
-      question: "How do I memorize trig identities?",
-      answer: "Group them by family rather than memorizing in isolation. Start from the unit circle (Pythagorean), then reciprocal and quotient definitions. Master sum-angle for sine and cosine — everything else (difference, double, triple, half, product-to-sum, sum-to-product) follows by substitution. Note the parities: cosine and secant are even, while sine, tangent, cotangent, and cosecant are odd. Learn the reference-angle reduction transforms to reduce any angle to a first-quadrant equivalent. Drill the family relationships with the drag puzzle on this page, and use the search-by-LHS feature to verify forms quickly."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -1105,19 +1078,6 @@ export async function getStaticProps(){
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -1125,7 +1085,6 @@ export async function getStaticProps(){
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
          staticDataset,
          seoData: {
@@ -1142,7 +1101,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function TrigIdentitiesTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, staticDataset}) {
+export default function TrigIdentitiesTablePage({seoData, sectionsContent, introContent, schemas, staticDataset}) {
 
     
   const genericSections=[
@@ -1320,12 +1279,6 @@ export default function TrigIdentitiesTablePage({seoData, sectionsContent, intro
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

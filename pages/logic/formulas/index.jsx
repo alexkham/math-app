@@ -127,28 +127,6 @@ export async function getStaticProps() {
     'logic laws cheat sheet'
   ]
 
-  const faqQuestions = {
-    obj1: {
-      question: "What does this logic formulas reference cover?",
-      answer: "This reference collects 32 logical equivalences and inference patterns organized into 15 categories: idempotent, commutative, associative, distributive, identity, domination, negation, double negation, De Morgan, absorption, redundancy, monotonicity, conditional equivalences, biconditional equivalences, and the duality between tautology and contradiction."
-    },
-    obj2: {
-      question: "What are De Morgan's laws in propositional logic?",
-      answer: "De Morgan's laws describe how negation distributes across conjunction and disjunction. Negating an AND yields the OR of the negated parts, and negating an OR yields the AND of the negated parts. Each direction is verified by truth table in the corresponding entry."
-    },
-    obj3: {
-      question: "How can a conditional be rewritten without the implication arrow?",
-      answer: "Material Implication rewrites if P then Q as the disjunction not-P or Q. The Contrapositive equivalence rewrites it as if not-Q then not-P, which is the basis for proof by contraposition. Both forms have identical truth tables to the original conditional."
-    },
-    obj4: {
-      question: "How is the negation of a conditional expressed?",
-      answer: "The negation of if P then Q is the conjunction P and not-Q, the single case in which the implication fails. This follows from Material Implication combined with De Morgan's law and Double Negation."
-    },
-    obj5: {
-      question: "What is the difference between the law of excluded middle and the law of non-contradiction?",
-      answer: "Excluded middle states that any proposition or its negation must be true, making P or not-P a tautology. Non-contradiction states that a proposition and its negation cannot both hold simultaneously, making P and not-P a contradiction. Both are foundational principles of classical logic."
-    }
-  }
 
   const schemas = {
     learningResource: {
@@ -219,7 +197,6 @@ export async function getStaticProps() {
   return {
     props: {
       logicFormulasList,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Logic Formulas: Laws & Equivalences | Learn Math Class",
@@ -237,7 +214,7 @@ Each entry shows the formula in LaTeX, an explanation of what the law captures, 
   }
 }
 
-export default function LogicFormulasPage({ logicFormulasList, faqQuestions, schemas, seoData }) {
+export default function LogicFormulasPage({ logicFormulasList,  schemas, seoData }) {
 
   return (
     <>

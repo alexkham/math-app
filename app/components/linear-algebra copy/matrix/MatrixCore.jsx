@@ -759,6 +759,10 @@ export function ScenePlayer({
   showStepLog = false,
   stepLogTitle = 'Steps',
   stepLogMaxHeight = '30rem',
+  // When true, scene 0 (the intro) is shown as an unnumbered lead block at
+  // the head of the step log instead of as "step 1"; numbering then starts
+  // at the first real step and the indicator counts scene 0 as step 0.
+  introAsHeader = false,
   sceneCanvasProps = {}
 }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -911,7 +915,7 @@ export function ScenePlayer({
           marginLeft: '8px',
           fontVariantNumeric: 'tabular-nums'
         }}>
-          Step {currentStep + 1} / {totalSteps}
+          Step {introAsHeader ? currentStep : currentStep + 1} / {introAsHeader ? totalSteps - 1 : totalSteps}
         </span>
       )}
     </div>
@@ -969,8 +973,53 @@ export function ScenePlayer({
           msOverflowStyle: 'none'
         }}
       >
+        {introAsHeader && scenes[0] && (() => {
+          const s = scenes[0];
+          const isCurrent = currentStep === 0;
+          return (
+            <div
+              onClick={() => handleJumpTo(0)}
+              style={{
+                padding: '10px 12px',
+                marginBottom: '8px',
+                borderRadius: '6px',
+                background: isCurrent ? '#dbeafe' : '#f1f5f9',
+                border: `2px solid ${isCurrent ? '#3b82f6' : 'transparent'}`,
+                borderLeft: `4px solid ${isCurrent ? '#3b82f6' : '#94a3b8'}`,
+                cursor: 'pointer',
+                transition: 'background 0.2s ease, border-color 0.2s ease'
+              }}
+            >
+              {s.title && (
+                <div
+                  style={{
+                    fontFamily: '\'Cambria Math\', Georgia, serif',
+                    fontSize: '15px',
+                    fontWeight: 700,
+                    color: '#1e40af',
+                    marginBottom: s.formula ? '4px' : 0
+                  }}
+                  dangerouslySetInnerHTML={{ __html: s.title }}
+                />
+              )}
+              {s.formula && (
+                <div
+                  style={{
+                    fontFamily: '\'Cambria Math\', Georgia, serif',
+                    fontSize: '14px',
+                    color: '#374151',
+                    lineHeight: 1.5
+                  }}
+                  dangerouslySetInnerHTML={{ __html: s.formula }}
+                />
+              )}
+            </div>
+          );
+        })()}
         {scenes.slice(0, currentStep + 1).map((s, idx) => {
+          if (introAsHeader && idx === 0) return null;
           const isCurrent = idx === currentStep;
+          const stepNumber = introAsHeader ? idx : idx + 1;
           return (
             <div
               key={idx}
@@ -1001,7 +1050,7 @@ export function ScenePlayer({
                   flexShrink: 0,
                   fontVariantNumeric: 'tabular-nums'
                 }}>
-                  {idx + 1}
+                  {stepNumber}
                 </span>
                 {s.title && (
                   <span

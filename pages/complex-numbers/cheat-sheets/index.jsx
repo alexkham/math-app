@@ -891,29 +891,6 @@ const complexNumbersCheatSheetData = {
 //   content: ``
 // }
 
-const faqQuestions = {
-  obj1: {
-    question: "What topics does the complex numbers cheat sheet cover?",
-    answer: "The cheat sheet covers the imaginary unit and powers of i, algebraic form and components, complex conjugate properties, arithmetic operations, modulus, geometric representation, trigonometric form, exponential form and Euler's formula, De Moivre's theorem and roots, equations and polynomials, and field properties of the complex numbers."
-  },
-  obj2: {
-    question: "What is Euler's formula?",
-    answer: "Euler's formula states that e^(iθ) = cos θ + i sin θ. It connects the exponential function to trigonometry and allows any complex number to be written in exponential form as z = re^(iθ), where r is the modulus and θ is the argument."
-  },
-  obj3: {
-    question: "What is De Moivre's theorem?",
-    answer: "De Moivre's theorem states that (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ). It provides a formula for computing powers of complex numbers in trigonometric form: raise the modulus to the power and multiply the argument by n."
-  },
-  obj4: {
-    question: "How many nth roots does a complex number have?",
-    answer: "Every nonzero complex number has exactly n distinct nth roots. These roots all share the same modulus (r^(1/n)) and are equally spaced around a circle, separated by 360°/n, forming the vertices of a regular n-gon."
-  },
-  obj5: {
-    question: "What are the three forms of a complex number?",
-    answer: "A complex number can be written in algebraic form (a + bi), trigonometric form (r(cos θ + i sin θ)), or exponential form (re^(iθ)). All three are equivalent. Trigonometric and exponential forms are most efficient for multiplication, division, and powers."
-  }
-}
-
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
@@ -979,19 +956,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1016,7 +980,6 @@ const schemas = {
     sectionsContent,
     // introContent,
     complexNumbersCheatSheetData,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Complex Numbers Cheat Sheet | Learn Math Class",
@@ -1033,7 +996,7 @@ const schemas = {
 //     complexNumbersCheatSheetData,
 // }) {
 
-export default function PageTemplate({seoData, sectionsContent,  complexNumbersCheatSheetData, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent,  complexNumbersCheatSheetData, schemas}) {
 
     
   const genericSections=[
@@ -1218,12 +1181,6 @@ export default function PageTemplate({seoData, sectionsContent,  complexNumbersC
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

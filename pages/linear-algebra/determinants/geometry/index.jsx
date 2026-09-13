@@ -808,6 +808,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1321,39 +1322,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the geometric meaning of a 2×2 determinant?",
-    answer: "The determinant of a 2×2 matrix equals the signed area of the parallelogram spanned by its column vectors. Positive means counterclockwise orientation, negative means clockwise, zero means the vectors are parallel (collapsed to a line).",
-    sectionId: "1"
+    question: "Should you drop the minus sign from a negative determinant?",
+    answer: "Not straight away, because the sign is carrying orientation. A rotation has determinant $+1$, a reflection $-1$, and $0$ marks the degenerate case where the image collapses into a lower dimension. Taking the absolute value is the right move only once you genuinely want a size, and doing it earlier discards information.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the geometric meaning of a 3×3 determinant?",
-    answer: "The determinant of a 3×3 matrix equals the signed volume of the parallelepiped spanned by its three column vectors. This equals the scalar triple product a·(b×c). Positive means right-handed, negative means left-handed, zero means coplanar.",
-    sectionId: "2"
+    question: "Is $|\\det(A)|$ the same as the matrix norm $\\|A\\|$?",
+    answer: "No, they are different numbers measuring different things. The norm measures how far the matrix moves vectors, while $|\\det(A)|$ measures how much it inflates volume. Both get described loosely as the size of a matrix, which is why keeping the determinant's own word visible avoids confusing two bar notations.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How does a matrix scale n-dimensional volume?",
-    answer: "For an n×n matrix A, |det(A)| is the factor by which the linear map x ↦ Ax scales all n-dimensional volumes. If |det| > 1, volumes expand; if |det| < 1, volumes compress; if |det| = 1, volumes are preserved. If det = 0, all volumes collapse to zero.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What does the sign of the determinant mean geometrically?",
-    answer: "The sign indicates orientation. Positive preserves orientation (counterclockwise stays counterclockwise in 2D, right-handed stays right-handed in 3D). Negative reverses orientation. Rotations have det = +1; reflections have det = -1.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How do determinants relate to linear transformations?",
-    answer: "An invertible matrix defines a bijective linear transformation. Its determinant captures two facts: |det| is the volume scaling factor, and sign(det) indicates whether orientation is preserved or reversed. det(AB) = det(A)det(B) means scaling factors multiply.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "What is the Jacobian determinant in integration?",
-    answer: "In the change-of-variables formula ∫f(y)dy = ∫f(T(x))|det(J)|dx, the Jacobian determinant |det(J)| measures local volume distortion at each point. For polar coordinates it's r; for spherical coordinates it's r²sin(φ).",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "How do you calculate triangle and tetrahedron volume with determinants?",
-    answer: "Triangle area = ½|det([edge vectors])|. Parallelogram area = |det|. Tetrahedron volume = ⅙|det([edge vectors])|. Parallelepiped volume = |det|. The fractions (½, ⅙) arise because triangles and tetrahedra are fractions of their enclosing parallelogram/parallelepiped.",
-    sectionId: "7"
+    question: "Does \"the Jacobian\" mean the matrix or the determinant?",
+    answer: "Both, depending on the text, which is a genuine source of confusion. Some authors use the word for the matrix of partial derivatives and others for its determinant. The practical rule: an integral asking for the Jacobian always wants the number, since it is the volume scaling factor that the change of variables requires.",
+    sectionId: "notation"
   }
 }
 
@@ -1428,19 +1409,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1583,6 +1551,22 @@ const schemas = {
           `The zero case deserves separate attention because it is the one that loses information. A determinant of zero says the image fits inside a proper subspace, but says nothing about which subspace or how far the collapse went — a matrix squashing $\\mathbb{R}^3$ onto a plane and one squashing it onto a point both report zero. The determinant detects collapse; [rank](!/linear-algebra/matrix/rank) measures it.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Determinant Geometry FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1619,12 +1603,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -196,7 +196,7 @@
 //     }
 //    }
 
-// export default function MultiplicationTablesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function MultiplicationTablesPage({seoData, sectionsContent, introContent, schemas}) {
 
     
 //   const genericSections=[
@@ -379,29 +379,6 @@ export async function getStaticProps(){
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a multiplication table?",
-      answer: "A multiplication table, also called a times table, is a grid that shows the product of two numbers. The cell at row a, column b contains the value of a times b. Standard charts cover 1 through 10 or 12, while extended grids reach 20 by 20 and beyond."
-    },
-    obj2: {
-      question: "How do you read a multiplication chart?",
-      answer: "To find the product of a and b, locate row a and move across to column b. The number in that cell is the answer. Because multiplication is commutative, the cell at row b, column a holds the same value, so the chart can be read either way."
-    },
-    obj3: {
-      question: "What are the easiest times tables to memorize?",
-      answer: "The 1s, 10s, 2s, and 5s are usually learned first because they follow simple patterns: any number unchanged, append a zero, doubling, and an alternation of 5 and 0 in the last digit. The 11s from 11 times 1 to 11 times 9 also follow a memorable digit-repeating pattern. The 7s and 8s tend to be the last to stick."
-    },
-    obj4: {
-      question: "Why is the multiplication grid symmetric?",
-      answer: "The multiplication grid is symmetric across its main diagonal because multiplication is commutative: a times b equals b times a for any two numbers. Every off-diagonal cell has a mirror twin on the other side of the diagonal with the same product."
-    },
-    obj5: {
-      question: "What is a factor pair?",
-      answer: "A factor pair of a number N is a pair of positive integers (a, b) such that a times b equals N. Every divisor of N pairs uniquely with another divisor. Factor pairs come in pairs except when N is a perfect square, where the square root pairs with itself."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -469,19 +446,6 @@ export async function getStaticProps(){
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -489,7 +453,6 @@ export async function getStaticProps(){
       props:{
          sectionsContent,
          introContent,
-         faqQuestions,
          schemas,
          seoData: {
            title: "Multiplication Tables & Times Table Tool | Learn Math Class",
@@ -505,7 +468,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function MultiplicationTablesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function MultiplicationTablesPage({seoData, sectionsContent, introContent, schemas}) {
 
     
   const genericSections=[
@@ -564,12 +527,6 @@ export default function MultiplicationTablesPage({seoData, sectionsContent, intr
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

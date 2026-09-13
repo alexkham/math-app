@@ -1854,6 +1854,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2348,29 +2349,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What is the formula for projecting a vector onto another vector?",
-    answer: "The projection of b onto a nonzero vector a is proj_a(b) = (a·b / a·a) · a. The scalar a·b / a·a gives the component of b in the direction of a, and the residual b minus the projection is orthogonal to a.",
-    sectionId: "1"
+    question: "Is a projection matrix invertible?",
+    answer: "Not unless it projects onto the whole space. The defining relation $P^2 = P$ forces $P$ to be singular whenever the target subspace is smaller, and the reason is geometric rather than algebraic: projecting discards the component perpendicular to the subspace, and discarded information is exactly what no inverse can recover.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What is the orthogonal decomposition of a vector?",
-    answer: "Every vector b in Rⁿ decomposes uniquely as b = b̂ + z, where b̂ is the orthogonal projection onto a subspace W and z is the perpendicular residual in W⊥. The projection b̂ is the closest point in W to b.",
-    sectionId: "2"
+    question: "In $\\text{proj}_{\\mathbf{a}}$, what is the subscript doing?",
+    answer: "Naming the destination, not counting anything. It is not the $\\mathbf{a}$-th projection of some sequence. The subscript's species also sets the target's size: $\\text{proj}_{\\mathbf{a}}$ lands on a line, while $\\text{proj}_{W}$ lands on a subspace of any dimension, using the same operator with a wider aim.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you project onto a subspace with a non-orthogonal basis?",
-    answer: "If the columns of matrix A form a basis for W, the projection of b onto W is b̂ = A(AᵀA)⁻¹Aᵀb. This formula comes from requiring the residual b − Ab̂ to be orthogonal to every column of A, which yields the normal equations AᵀAx̂ = Aᵀb.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "What are the properties of a projection matrix?",
-    answer: "An orthogonal projection matrix P satisfies two conditions: it is symmetric (Pᵀ = P) and idempotent (P² = P). Symmetry ensures the projection is orthogonal rather than oblique. Idempotence means projecting twice gives the same result as projecting once.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "How is projection related to least squares?",
-    answer: "When Ax = b has no exact solution, the least-squares solution x̂ produces the projection of b onto the column space of A. The residual b − Ax̂ is orthogonal to the column space, and x̂ satisfies the normal equations AᵀAx̂ = Aᵀb.",
-    sectionId: "7"
+    question: "Does the hat in $\\hat{\\mathbf{b}}$ mean the vector has length $1$?",
+    answer: "Not here. Two hat conventions coexist in linear algebra: on a vector like $\\hat{\\mathbf{u}}$ it usually promises unit length, but in projection and least squares it marks an approximation or estimate instead. Statistics uses the same hat for estimators, which is where this second meaning comes from rather than a coincidence.",
+    sectionId: "notation"
   }
 }
 
@@ -2444,19 +2435,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -2615,6 +2593,22 @@ export default function ProjectionsPage({
           />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Projections FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2653,12 +2647,6 @@ export default function ProjectionsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

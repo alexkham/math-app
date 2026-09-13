@@ -75,7 +75,7 @@ export function buildRowColumnScenes(aRows, aCols, bCols, order = 'AB') {
     highlights: { C: { cells: allCPending() } },
     overlays: [],
     title: `Matrix multiplication: ${aLabel} × ${bLabel} = C`,
-    formula: `Each <span style="font-style:italic">${cSymbol}</span><sub>i,j</sub> = (row i of ${aLabel}) · (column j of ${bLabel}). ${aRows * bCols} cells to compute.`
+    formula: `Each <span style="font-style:italic">${cSymbol}</span><sub>i,j</sub> = (row i of ${aLabel}) · (column j of ${bLabel}). ${aRows * bCols} ${aRows * bCols === 1 ? 'cell' : 'cells'} to compute.`
   });
 
   for (let ci = 0; ci < aRows; ci++) {

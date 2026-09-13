@@ -821,6 +821,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1370,29 +1371,19 @@ This decomposition separates the particular and homogeneous contributions. The p
 
 const faqQuestions = {
   obj1: {
-    question: "What is a subspace?",
-    answer: "A subspace is a nonempty subset of a vector space that is itself a vector space under the same operations. It must be closed under addition and scalar multiplication. Every subspace contains the zero vector, and these two closure conditions are the only things that need checking.",
-    sectionId: "1"
+    question: "Is every subset of a vector space a subspace?",
+    answer: "No, and the containment symbol is silent on the matter. The unit circle in $\\mathbb{R}^2$ is a perfectly good subset and fails closure immediately, since adding two points on it lands off it. Writing $W \\subseteq V$ asserts membership only; subspacehood is a structural claim that has to be tested.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you test if a subset is a subspace?",
-    answer: "Check two conditions: for all u, v in the subset, u + v is also in the subset (closure under addition), and for all scalars c and vectors v in the subset, cv is also in the subset (closure under scalar multiplication). If the zero vector is not in the subset, it fails immediately.",
-    sectionId: "2"
+    question: "Is the empty set a subspace?",
+    answer: "No. Every subspace must contain the zero vector, so the smallest possible subspace is $\\{\\mathbf{0}\\}$ rather than $\\emptyset$. This is the one place where set-theoretic instinct points at the wrong smallest object, since in ordinary set theory the empty set sits below everything.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What are the subspaces of R³?",
-    answer: "The subspaces of R³ are: the zero vector alone (dimension 0), lines through the origin (dimension 1), planes through the origin (dimension 2), and R³ itself (dimension 3). A line or plane not passing through the origin is not a subspace.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "Why is the null space a subspace?",
-    answer: "The null space of A is the set of all x satisfying Ax = 0. It contains the zero vector (A·0 = 0), and if Au = 0 and Av = 0, then A(u + v) = 0 and A(cv) = 0. Both closure conditions hold, so the null space is a subspace of Rⁿ.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "Is the solution set of Ax = b a subspace?",
-    answer: "Only when b = 0 (the homogeneous case), giving the null space. When b ≠ 0, the solution set does not contain the zero vector and is not a subspace. It is an affine subspace — the null space translated by any particular solution xₚ, so every solution has the form x = xₚ + xₕ where xₕ is in the null space.",
-    sectionId: "9"
+    question: "What does writing $V = W_1 \\oplus W_2$ claim?",
+    answer: "More than that the pieces combine to give $V$. The circled plus asserts independence as well as spanning: every vector decomposes in exactly one way, and the two subspaces meet only at $\\mathbf{0}$. That extra content is what licenses adding dimensions directly, with no correction term for overlap.",
+    sectionId: "notation"
   }
 }
 
@@ -1461,19 +1452,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1617,6 +1595,22 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
           `The first quadrant is the case worth dwelling on, because it passes two clauses out of three. It contains the origin, and the sum of two vectors with non-negative components has non-negative components — everything looks right until scaling by $-1$ leaves the set entirely. Passing most of the test is not passing it, and the clauses fail independently: nothing about closure under addition implies closure under scaling.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Subspaces FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1654,12 +1648,6 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

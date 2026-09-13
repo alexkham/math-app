@@ -222,7 +222,7 @@
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent, relatedTools }) {
 
     
 //   const genericSections=[
@@ -502,6 +502,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import HadamardWrapper from '../../../../app/components/linear-algebra copy/matrix/HadamardWrapper'
 import hadamardDiagrams from '../../../../app/components/linear-algebra copy/matrix/hadamardDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -541,7 +543,7 @@ export async function getStaticProps(){
 **$\\odot$ symbol** — the circle-dot operator, the standard notation distinguishing the Hadamard product from $A \\times B$ or $AB$.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -555,7 +557,7 @@ export async function getStaticProps(){
 There is no operation toggle — the Hadamard product is a single operation, fully determined by the shape of the operands.`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `Reading the Scene Player`,
@@ -569,7 +571,7 @@ There is no operation toggle — the Hadamard product is a single operation, ful
 By the final scene, every cell of $C$ contains its symbolic product and the operation is complete.`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj3: {
       title: `Choosing Dimensions`,
@@ -583,7 +585,7 @@ By the final scene, every cell of $C$ contains its symbolic product and the oper
 The shape of $C$ is forced to match the shared shape of $A$ and $B$ — no separate control needed.`,
       before: ``,
       after: ``,
-      link: '#choosing-dimensions',
+      link: '',
     },
     obj4: {
       title: `What the Hadamard Product Is`,
@@ -598,7 +600,7 @@ The Hadamard product is the multiplicative analogue of matrix addition: both are
 For comprehensive theory, see **matrix operations**.`,
       before: ``,
       after: ``,
-      link: '#what-the-hadamard-product-is',
+      link: '',
     },
     obj5: {
       title: `Hadamard vs Standard Matrix Multiplication`,
@@ -613,7 +615,7 @@ For comprehensive theory, see **matrix operations**.`,
 For the standard product, see **matrix multiplication**. The two are confused often enough that the Hadamard product is sometimes spelled out as "element-wise product" to avoid ambiguity.`,
       before: ``,
       after: ``,
-      link: '#hadamard-vs-standard',
+      link: '',
     },
     obj6: {
       title: `Key Properties`,
@@ -629,7 +631,7 @@ For the standard product, see **matrix multiplication**. The two are confused of
 These properties mirror ordinary scalar multiplication exactly — which is unsurprising, since the operation is just scalar multiplication applied entry by entry.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj7: {
       title: `Where the Hadamard Product Appears`,
@@ -644,7 +646,7 @@ These properties mirror ordinary scalar multiplication exactly — which is unsu
 The common thread: the matrix shape carries spatial or indexing structure, but the operation itself should not mix rows or columns.`,
       before: ``,
       after: ``,
-      link: '#where-it-appears',
+      link: '',
     },
     obj8: {
       title: `Worked Example`,
@@ -659,7 +661,7 @@ $$C = \\begin{pmatrix} 1 \\cdot 7 & 2 \\cdot 8 & 3 \\cdot 9 \\\\ 4 \\cdot 0 & 5 
 Compare with the standard product $A \\times B$: it is undefined here because $A$ is $2 \\times 3$ and $B$ is also $2 \\times 3$ — the inner dimensions ($3$ and $2$) do not match. The Hadamard product has no such restriction beyond matching shapes.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj9: {
       title: `Common Mistakes`,
@@ -672,26 +674,26 @@ Compare with the standard product $A \\times B$: it is undefined here because $A
 • **Forgetting the operation is commutative** — unlike standard matrix multiplication, $A \\odot B = B \\odot A$ always holds`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Matrix multiplication** — the standard non-element-wise product $A \\times B$, with different shape rules and very different geometric meaning.
+      content: `[Matrix multiplication](!/visual-tools/matrix-multiplication) — the standard non-element-wise product $A \\times B$, with different shape rules and very different geometric meaning.
 
-**Matrix addition** — the additive element-wise operation; same shape requirement, same result-shape behavior as Hadamard.
+[Matrix addition](!/linear-algebra/visual-tools/matrix-addition) — the additive element-wise operation; same shape requirement, same result-shape behavior as Hadamard.
 
 **Kronecker product** — a different "tensor" product of two matrices producing a much larger result; sometimes confused with Hadamard but unrelated.
 
-**Outer product** — the vector-vector product producing a rank-1 matrix; another distinct operation.
+[Outer product](!/linear-algebra/visual-tools/vector-outer-product) — the vector-vector product producing a rank-1 matrix; another distinct operation.
 
-**Inner product (Frobenius)** — the sum of all entries of $A \\odot B$ equals $\\langle A, B \\rangle_F$, the Frobenius inner product.
+[Inner product (Frobenius)](!/linear-algebra/visual-tools/vectors-inner-product) — the sum of all entries of $A \\odot B$ equals $\\langle A, B \\rangle_F$, the Frobenius inner product.
 
-**Scalar multiplication** — element-wise multiplication by a number; the Hadamard product is its matrix-by-matrix analogue.
+[Scalar multiplication](!/linear-algebra/visual-tools/matrix-scalar-multiplication) — element-wise multiplication by a number; the Hadamard product is its matrix-by-matrix analogue.
 
 **Element-wise functions** — applying $f$ to every entry, often combined with Hadamard products in machine learning.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `The Opening Scene: Two Matrices, Same Shape`,
@@ -881,6 +883,7 @@ That last point is the cleanest illustration that the two products are genuinely
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-hadamard-product'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -902,7 +905,7 @@ That last point is the cleanest illustration that the two products are genuinely
   }
 }
 
-export default function HadamardProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
+export default function HadamardProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1034,6 +1037,9 @@ export default function HadamardProductVisualizer({ seoData, sectionsContent, st
         variant="light"
       /> */}
       <br />
+      <RelatedTools tools={relatedTools}/>
+      <br/>
+      <br/>
       <Sections sections={genericSections} />
       <br />
       <br />

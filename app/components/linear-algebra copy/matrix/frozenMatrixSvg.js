@@ -123,13 +123,21 @@ function cellText(m, i, j, cx, cy, fontPx) {
   }
   if (ov && ov.display !== undefined) {
     const italic = ov.fontStyle === undefined ? true : ov.fontStyle !== 'normal';
+    const st = ov.style || {};
     // the wrappers set a smaller font on composite cells (e.g. "a1,1 + b1,1")
-    const fs = parseFloat((ov.style || {}).fontSize) || fontPx;
+    const fs = parseFloat(st.fontSize) || fontPx;
+    // the determinant strategies also colour cells (sign pattern), dim them
+    // (Sarrus duplicate columns, opacity) and strike them through (cofactor
+    // pivot row/column) - honour those three so the stills match the tool
+    const fill = st.color || '#0f172a';
+    const extra =
+      (st.opacity !== undefined ? ` opacity="${st.opacity}"` : '') +
+      (st.textDecoration === 'line-through' ? ' text-decoration="line-through"' : '');
     const body = (typeof ov.display === 'object' && ov.display !== null)
       ? displayToTspans(ov.display, fs, italic)
       : `<tspan font-style="${italic ? 'italic' : 'normal'}">${esc(ov.display)}</tspan>`;
     return `<text x="${r2(cx)}" y="${r2(cy)}" text-anchor="middle" dominant-baseline="central" ` +
-      `fill="#0f172a" font-size="${r2(fs)}" font-family="${MATH}">${body}</text>`;
+      `fill="${fill}" font-size="${r2(fs)}" font-family="${MATH}"${extra}>${body}</text>`;
   }
   const start = m.dimStartAt === undefined ? 1 : m.dimStartAt;
   const sub = `${origI + start},${origJ + start}`;
@@ -156,7 +164,13 @@ function renderMatrix(m, hl, ox, oy) {
     // one line: label, superscript T when transposed, then the dimensions
     const parts = [];
     if (m.label != null) {
-      parts.push(`<tspan font-style="italic" font-family="${MATH}" fill="#374151" font-weight="600">${esc(m.label)}</tspan>`);
+      if (typeof m.label === 'object') {
+        // JSX label (e.g. the determinant strategies' minor "M" with a
+        // subscript span) - walk the element tree like a cell display
+        parts.push(`<tspan font-family="${MATH}" fill="#374151" font-weight="600">${displayToTspans(m.label, 15, true)}</tspan>`);
+      } else {
+        parts.push(`<tspan font-style="italic" font-family="${MATH}" fill="#374151" font-weight="600">${esc(m.label)}</tspan>`);
+      }
       if (m.transpose) parts.push(`<tspan font-size="10" baseline-shift="super" font-style="normal">T</tspan>`);
     }
     if (m.showDimensions !== false) {

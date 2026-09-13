@@ -224,29 +224,6 @@ Although primes never run out, they do thin out. The prime number theorem descri
   content: `A sequence is an ordered list of numbers where each element occupies a definite position. The position is the index, the element at that position is the term, and the rule connecting indices to terms — whether a formula, a recurrence, or an observed pattern — is the sequence's defining characteristic. Some sequences arise from repeated addition, others from repeated multiplication, and others from rules that resist any simple algebraic description. This page introduces the common language and notation, then maps out the principal families: progressions, figurate numbers, recursive sequences, and primes.`,
 }
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a sequence in mathematics?",
-    answer: "A sequence is an ordered list of numbers where each element occupies a definite position. Formally, it is a function from the natural numbers to the real numbers, mapping each index n to a term a_n. Sequences can be finite or infinite, and the rule connecting indices to terms defines the sequence."
-  },
-  obj2: {
-    question: "What is the difference between explicit and recursive definitions?",
-    answer: "An explicit definition gives a closed-form formula that computes any term directly from its index, allowing instant access to any position. A recursive definition computes each term from one or more previous terms, together with initial values. Some sequences admit both forms; others, like the prime numbers, have no known closed form."
-  },
-  obj3: {
-    question: "What is the formula for the general term of an arithmetic sequence?",
-    answer: "The general term of an arithmetic sequence is a_n = a_1 + (n - 1)d, where a_1 is the first term and d is the common difference. Each term is obtained by adding d to the previous one. The sum of the first n terms is given by S_n = n/2 times (a_1 + a_n)."
-  },
-  obj4: {
-    question: "How are arithmetic and geometric sequences different?",
-    answer: "Arithmetic sequences grow or shrink by a constant additive step, the common difference d, while geometric sequences grow or shrink by a constant multiplicative factor, the common ratio r. The general term of a geometric sequence is a_n = a_1 times r raised to the power n-1, in contrast to the linear formula for arithmetic sequences."
-  },
-  obj5: {
-    question: "What are the main types of sequences?",
-    answer: "The main families include progressions (arithmetic, geometric, harmonic), figurate numbers (triangular, square), recursive sequences such as the Fibonacci numbers, and the prime numbers. Progressions follow algebraic patterns, figurate numbers arise from geometric arrangements, and primes follow no closed-form rule despite being infinite."
-  },
-}
-
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
@@ -311,26 +288,12 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
   props:{
      sectionsContent,
      introContent,
-     faqQuestions,
      schemas,
      seoData: {
        title: "Sequences: Arithmetic, Geometric & More | Learn Math Class",
@@ -343,7 +306,7 @@ const schemas = {
 }
    }
 
-export default function SequencesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function SequencesPage({seoData, sectionsContent, introContent, schemas}) {
     
   const genericSections=[
     // {
@@ -536,12 +499,6 @@ export default function SequencesPage({seoData, sectionsContent, introContent, f
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

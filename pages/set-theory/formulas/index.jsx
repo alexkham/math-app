@@ -30,29 +30,6 @@ export async function getStaticProps() {
     'set theory reference sheet'
   ]
 
-  const faqQuestions = {
-    obj1: {
-      question: "What are the main set theory formulas?",
-      answer: "The main set theory formulas include the commutative, associative, and distributive laws for union and intersection, the identity and domination laws involving the empty set and universal set, complement laws, De Morgan's laws, absorption laws, and cardinality formulas such as the inclusion-exclusion principle."
-    },
-    obj2: {
-      question: "What are De Morgan's laws in set theory?",
-      answer: "De Morgan's laws state that the complement of a union equals the intersection of the complements, and the complement of an intersection equals the union of the complements. Both laws generalize to arbitrary collections of sets."
-    },
-    obj3: {
-      question: "How does the inclusion-exclusion principle work for two sets?",
-      answer: "For two finite sets A and B, the cardinality of their union is |A| + |B| - |A intersection B|. Subtracting the intersection size corrects for elements that would otherwise be counted twice. When A and B are disjoint the formula simplifies to |A| + |B|."
-    },
-    obj4: {
-      question: "What is the cardinality of a power set?",
-      answer: "The power set of a set A with n elements contains exactly 2^n subsets. Each element is either included or excluded from a given subset, producing two independent choices per element and 2^n total subsets."
-    },
-    obj5: {
-      question: "What is the difference between set difference and symmetric difference?",
-      answer: "Set difference A minus B contains elements in A but not in B. Symmetric difference A triangle B contains elements in exactly one of the two sets, equivalent to the union minus the intersection. Set difference is not commutative while symmetric difference is."
-    }
-  }
-
   const seoData = {
     title: "Set Theory Formulas & Examples | Learn Math Class",
     description: "Complete set theory formulas with examples. Covers De Morgan's laws, inclusion-exclusion, complement laws, cardinality, distributive and absorption laws.",
@@ -125,25 +102,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       setTheoryFormulasList,
-      faqQuestions,
       schemas,
       seoData,
     }
@@ -152,7 +115,6 @@ export async function getStaticProps() {
 
 export default function SetTheoryFormulasPage({
   setTheoryFormulasList,
-  faqQuestions,
   schemas,
   seoData
 }) {
@@ -187,10 +149,6 @@ export default function SetTheoryFormulasPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br/>

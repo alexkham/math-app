@@ -1440,29 +1440,6 @@ const navigationGroups = [
 ]
 
 
-    const faqQuestions = {
-      obj1: {
-        question: "What are special angles in trigonometry?",
-        answer: "Special angles are the standard angles whose trig values can be expressed exactly as fractions or surds rather than as irrational decimals. In the first quadrant the special angles are 0, 30, 45, 60, and 90 degrees (or 0, pi over 6, pi over 4, pi over 3, and pi over 2 radians). Extending around the full unit circle adds their reflections in the other three quadrants, giving 17 standard angles in total from 0 to 360 degrees."
-      },
-      obj2: {
-        question: "Why do special angles have exact values?",
-        answer: "These angles correspond to symmetric points on the unit circle that come from elementary right triangles: the 45-45-90 isosceles right triangle gives the values at 45 degrees, and the 30-60-90 triangle (half of an equilateral) gives the values at 30 and 60 degrees. The angles 0, 90, 180, 270, and 360 degrees give 0 and 1 directly from the coordinate axes. Every other angle in this table is a reflection of these base cases across the x-axis, y-axis, or origin."
-      },
-      obj3: {
-        question: "How do I read the table?",
-        answer: "Each row corresponds to one angle, given in both degrees and radians. The remaining six columns give the exact value of each of the six trig functions: sine, cosine, tangent, cosecant, secant, and cotangent. Values appear as fractions and surds (such as 1/2, root 2 over 2, root 3 over 2, and 2 root 3 over 3) rather than decimal approximations. Cells marked Undefined indicate where the function diverges to infinity."
-      },
-      obj4: {
-        question: "Why is tangent undefined at 90 degrees?",
-        answer: "Tangent equals sine divided by cosine. At 90 degrees, cosine equals 0, so the ratio sin(90 degrees) divided by cos(90 degrees) is 1 divided by 0, which is undefined. The same logic applies to secant at 90 degrees (also 1 over cos), and to cosecant and cotangent at 0 and 180 degrees (each involves a division by sin, which is 0 there)."
-      },
-      obj5: {
-        question: "How do degrees and radians relate?",
-        answer: "Radians measure angles by arc length on the unit circle: a full revolution is 2 pi radians, which equals 360 degrees. So pi radians equals 180 degrees, and pi over 2 radians equals 90 degrees. The conversion factors are: degrees equal radians times 180 over pi, and radians equal degrees times pi over 180. The table shows both columns so you can read off values directly in either convention."
-      }
-    }
-
 
     const schemas = {
       webApplication: {
@@ -1524,19 +1501,6 @@ const navigationGroups = [
           }
         ]
       },
-
-      faq: {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": Object.keys(faqQuestions).map(key => ({
-          "@type": "Question",
-          "name": faqQuestions[key].question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faqQuestions[key].answer
-          }
-        }))
-      }
     }
 
 
@@ -1545,7 +1509,6 @@ const navigationGroups = [
          sectionsContent,
          introContent,
          trigoTableData,
-         faqQuestions,
          schemas,
          seoData: {
       title: "Special Angles Trig Table - Exact Values | Learn Math Class",
@@ -1649,12 +1612,6 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

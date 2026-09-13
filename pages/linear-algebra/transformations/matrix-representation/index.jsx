@@ -768,6 +768,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1260,29 +1261,19 @@ This is why matrices dominate computational linear algebra. Abstract transformat
 
 const faqQuestions = {
   obj1: {
-    question: "How do you find the matrix of a linear transformation?",
-    answer: "Apply the transformation to each standard basis vector e₁, e₂, …, eₙ and arrange the results as columns. For abstract vector spaces, apply T to each basis vector of V and express the results as coordinate vectors in the basis of W. The resulting matrix satisfies T(x) = Ax for all x.",
-    sectionId: "2"
+    question: "Is $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ the same thing as $T$?",
+    answer: "No. The map $T$ is basis-free, while the bracketed object is one of infinitely many arrays that represent it, each attached to a particular choice of basis at both ends. Texts that write $T$ for both are leaning on a fixed basis the reader is expected to remember, and the gap reappears the moment the basis changes.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "Why does every linear transformation have a matrix?",
-    answer: "Linearity forces T(x) = x₁T(e₁) + ⋯ + xₙT(eₙ) for any vector x. This is exactly the matrix-vector product Ax where column j of A is T(eⱼ). The correspondence is one-to-one: different matrices define different transformations, and vice versa.",
-    sectionId: "1"
+    question: "Why do the images of the basis vectors go in columns rather than rows?",
+    answer: "Because the matrix multiplies a column vector sitting on its right, so the arithmetic only works out if the images are stacked down columns. Reading them across rows instead produces the transpose and breaks $T(\\mathbf{x}) = A\\mathbf{x}$ entirely. The convention is fixed by the multiplication rule, not by preference.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How does matrix multiplication relate to composition?",
-    answer: "If T has matrix A and S has matrix B, then the composition S ∘ T has matrix BA. The left-to-right order of matrix multiplication matches the outer-to-inner order of composition. This is why matrix multiplication is defined by the row-times-column rule.",
-    sectionId: "6"
-  },
-  obj4: {
-    question: "What does the matrix of the differentiation operator look like?",
-    answer: "For differentiation T: P₂ → P₁ with monomial bases, the matrix is [[0, 1, 0], [0, 0, 2]]. Column j records the coefficients of T applied to the j-th basis polynomial. The rank is 2 (differentiation maps onto all of P₁) and the kernel is the constant polynomials.",
-    sectionId: "5"
-  },
-  obj5: {
-    question: "Does the matrix of a transformation depend on the basis?",
-    answer: "Yes. Different bases produce different matrices for the same transformation. The standard matrix uses the standard basis for both domain and codomain. For abstract spaces like polynomial spaces, every basis choice gives a different but equally valid matrix representation.",
-    sectionId: "4"
+    question: "When can you drop the basis subscripts and just write $[T]$?",
+    answer: "Only when both spaces carry the standard basis, which makes it the standard matrix, the one case where a map has a single uncontested array. An operator mapping a space to itself uses one basis twice and is written $[T]_{\\mathcal{B}}$ rather than repeating the label on both sides of the arrow.",
+    sectionId: "notation"
   }
 }
 
@@ -1358,19 +1349,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1505,6 +1483,22 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
           `The dictionary is exact, and it is also basis-dependent. Fix a basis and the correspondence is one-to-one; change the basis and the same transformation acquires a different matrix. That is the whole reason [similarity](!/linear-algebra/transformations/basis-change) exists as a notion — two matrices related by $P^{-1}AP$ are the same map seen from two places, which is why the properties worth naming are the ones that survive the change.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrix Representation FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1542,12 +1536,6 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

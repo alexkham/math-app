@@ -222,7 +222,7 @@
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent, relatedTools }) {
 
     
 //   const genericSections=[
@@ -497,6 +497,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TraceWrapper from '../../../../app/components/linear-algebra copy/matrix/TraceWrapper'
 import traceDiagrams from '../../../../app/components/linear-algebra copy/matrix/traceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -536,7 +538,7 @@ export async function getStaticProps(){
 **$\\Sigma$ notation** — the trace can be written compactly as $\\text{tr}(A) = \\sum_{i=1}^{n} a_{i,i}$.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -548,7 +550,7 @@ export async function getStaticProps(){
 • Use the speed selector and step log to control the pace and review prior steps`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `Reading the Scene Player`,
@@ -561,7 +563,7 @@ export async function getStaticProps(){
 • The running formula $\\text{tr}(A) = a_{1,1} + a_{2,2} + \\cdots$ updates above with the same color coding`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj3: {
       title: `Choosing the Dimension`,
@@ -573,7 +575,7 @@ export async function getStaticProps(){
 • Both row and column steppers are linked since trace only applies to square matrices`,
       before: ``,
       after: ``,
-      link: '#choosing-the-dimension',
+      link: '',
     },
     obj4: {
       title: `Scene Order`,
@@ -587,7 +589,7 @@ export async function getStaticProps(){
 This order separates "what is the trace looking at?" from "what does the trace compute?" — two questions that are easy to conflate.`,
       before: ``,
       after: ``,
-      link: '#scene-order',
+      link: '',
     },
     obj5: {
       title: `What the Trace Is`,
@@ -600,7 +602,7 @@ Trace is defined only for square matrices. Off-diagonal entries play no role at 
 For comprehensive theory, see **matrix operations**.`,
       before: ``,
       after: ``,
-      link: '#what-the-trace-is',
+      link: '',
     },
     obj6: {
       title: `Key Properties`,
@@ -615,7 +617,7 @@ For comprehensive theory, see **matrix operations**.`,
 The cyclic property is the workhorse — it's behind nearly every nontrivial trace identity.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj7: {
       title: `Why It Matters`,
@@ -630,7 +632,7 @@ The cyclic property is the workhorse — it's behind nearly every nontrivial tra
 Anywhere a "total" or "sum of intrinsic quantities" of a square matrix is needed, the trace is the right tool.`,
       before: ``,
       after: ``,
-      link: '#why-it-matters',
+      link: '',
     },
     obj8: {
       title: `Worked Example`,
@@ -647,7 +649,7 @@ The other six entries (7, $-1$, 0, 4, 3, 1) are ignored entirely. Notice that fo
 Set the visualizer to $3 \\times 3$ and step through to see this picking-out process animated.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj9: {
       title: `Common Mistakes`,
@@ -660,28 +662,28 @@ Set the visualizer to $3 \\times 3$ and step through to see this picking-out pro
 • **Mixing up "diagonal" with "anti-diagonal"** — trace uses entries where $i = j$, not where $i + j = n + 1$`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Determinant** — another scalar invariant of a square matrix, equal to the product of eigenvalues.
+      content: `[Determinant](!/linear-algebra/visual-tools/matrix-determinant) — another scalar invariant of a square matrix, equal to the product of eigenvalues.
 
-**Eigenvalues** — the trace equals their sum, the determinant equals their product.
+[Eigenvalues](!/linear-algebra/visual-tools/eigenvalues-eigenvectors) — the trace equals their sum, the determinant equals their product.
 
 **Frobenius norm** — defined as $\\|A\\|_F = \\sqrt{\\text{tr}(A^T A)}$.
 
-**Frobenius inner product** — $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$.
+[Frobenius inner product](!/linear-algebra/visual-tools/vectors-inner-product) — $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$.
 
-**Transpose** — leaves the trace unchanged: $\\text{tr}(A^T) = \\text{tr}(A)$.
+[Transpose](!/linear-algebra/visual-tools/matrix-transpose) — leaves the trace unchanged: $\\text{tr}(A^T) = \\text{tr}(A)$.
 
 **Similarity transformation** — leaves the trace invariant.
 
-**Identity matrix** — $\\text{tr}(I_n) = n$, since every diagonal entry equals 1.
+[Identity matrix](!/linear-algebra/visual-tools/matrix-types) — $\\text{tr}(I_n) = n$, since every diagonal entry equals 1.
 
-**Matrix multiplication** — the cyclic property of trace ($\\text{tr}(AB) = \\text{tr}(BA)$) is one of the most used trace identities.`,
+[Matrix multiplication](!/visual-tools/matrix-multiplication) — the cyclic property of trace ($\\text{tr}(AB) = \\text{tr}(BA)$) is one of the most used trace identities.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `Scene 0: the Question, Before Anything Is Highlighted`,
@@ -893,6 +895,7 @@ The compact form is also what makes the algebraic properties easy to check. Line
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-trace'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -914,7 +917,7 @@ The compact form is also what makes the algebraic properties easy to check. Line
   }
 }
 
-export default function MatrixTraceVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
+export default function MatrixTraceVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1039,6 +1042,9 @@ export default function MatrixTraceVisualizer({ seoData, sectionsContent, stateU
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

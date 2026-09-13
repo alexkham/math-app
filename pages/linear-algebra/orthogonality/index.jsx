@@ -471,7 +471,7 @@
 //    }
 
 // // export default function OrthogonalityPage({seoData,sectionsContent , introContent}) {
-// export default function OrthogonalityPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function OrthogonalityPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -1039,34 +1039,6 @@ const introContent = {
   content: `Orthogonality — the condition that two vectors are perpendicular — is the geometric idea that makes linear algebra computationally clean. Orthogonal bases turn coordinate-finding into dot products. Projections onto subspaces become explicit formulas. Least-squares approximation reduces to a single matrix equation. Every simplification traces back to the same root: when vectors are perpendicular, their interactions vanish and problems decouple.`,
 }
 
-const faqQuestions = {
-  obj1: {
-    question: "What does orthogonal mean in linear algebra?",
-    answer: "Two vectors are orthogonal if their dot product is zero, meaning the angle between them is 90°. The zero vector is orthogonal to every vector by convention. Orthogonality generalizes perpendicularity to any number of dimensions and to abstract inner product spaces.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is an orthogonal complement?",
-    answer: "The orthogonal complement W⊥ of a subspace W is the set of all vectors perpendicular to everything in W. Its dimension satisfies dim(W) + dim(W⊥) = n, and every vector in Rⁿ decomposes uniquely into a component in W and a component in W⊥.",
-    sectionId: "3"
-  },
-  obj3: {
-    question: "Why is orthogonality important in linear algebra?",
-    answer: "Orthogonality simplifies nearly every computation. Orthogonal bases turn coordinate-finding into dot products, projections have explicit formulas, and least-squares approximation reduces to a single matrix equation. Orthogonal matrices are also numerically stable in computation.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "What is the difference between orthogonal and orthonormal?",
-    answer: "An orthogonal set has pairwise perpendicular vectors (all dot products zero). An orthonormal set adds the requirement that each vector has unit length. Orthonormal bases make coordinates especially simple: each coefficient is just the dot product of the vector with the corresponding basis vector.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "How does orthogonal projection work?",
-    answer: "The orthogonal projection of b onto a subspace W is the closest point in W to b. For a single vector a, it is (a·b / a·a)a. For a subspace with basis matrix A, the projection is A(AᵀA)⁻¹Aᵀb. The residual b minus the projection is perpendicular to W.",
-    sectionId: "8"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -1133,19 +1105,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 //    return {
@@ -1170,7 +1129,6 @@ return {
     obj4Table,
     obj6Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Orthogonality: Vectors, Projections & Bases | Learn Math Class",
@@ -1191,7 +1149,6 @@ export default function OrthogonalityPage({
   obj4Table,
   obj6Table,
   summaryTable,
-  faqQuestions,
   schemas,
 }) {
 
@@ -1373,12 +1330,6 @@ export default function OrthogonalityPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -170,29 +170,6 @@ export async function getStaticProps() {
     'functions reference'
   ]
 
-  const faqQuestions = {
-    obj1: {
-      question: "What does this functions formulas reference cover?",
-      answer: "This reference collects 38 formulas organized into 9 categories: function arithmetic with combined-function domain rules, composition, inverse functions, symmetry tests for even and odd functions, transformations, linear function forms, quadratic function forms, asymptotes of rational functions, and rates of change."
-    },
-    obj2: {
-      question: "How do you find the domain of a quotient of two functions?",
-      answer: "Take the intersection of the domains of f and g, then remove every input where g(x) equals zero. Even when algebraic simplification appears to cancel the restriction, the original exclusion remains as a hole rather than a valid point."
-    },
-    obj3: {
-      question: "What is the inverse of a composition of two functions?",
-      answer: "The inverse of f composed with g equals g-inverse composed with f-inverse - the order reverses. To undo first g then f, undo f first and then undo g. Both functions must be one-to-one for this to apply."
-    },
-    obj4: {
-      question: "How do you find the vertex of a quadratic from standard form?",
-      answer: "For f(x) = ax squared plus bx plus c, the vertex x-coordinate is minus b over 2a, and the y-coordinate is the function evaluated at that x. The same expression gives the axis of symmetry. The result is derived by completing the square to convert to vertex form."
-    },
-    obj5: {
-      question: "What are the algebraic tests for even and odd functions?",
-      answer: "A function is even when f of minus x equals f of x, giving a graph symmetric about the y-axis. It is odd when f of minus x equals minus f of x, giving rotational symmetry about the origin. Both tests require a domain that is symmetric about the origin."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -257,25 +234,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       functionsFormulasList,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Functions Formulas: Operations & Forms | Learn Math Class",
@@ -293,7 +256,7 @@ Each entry shows the formula in LaTeX, an explanation of what the formula captur
   }
 }
 
-export default function FunctionsFormulasPage({ functionsFormulasList, faqQuestions, schemas, seoData }) {
+export default function FunctionsFormulasPage({ functionsFormulasList, schemas, seoData }) {
 
   return (
     <>
@@ -330,12 +293,6 @@ export default function FunctionsFormulasPage({ functionsFormulasList, faqQuesti
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br />

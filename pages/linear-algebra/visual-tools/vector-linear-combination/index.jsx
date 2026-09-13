@@ -346,7 +346,7 @@
 //   }
 // }
 
-// export default function LinearCombinationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function LinearCombinationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, relatedTools }) {
 
     
 //   const genericSections=[
@@ -613,6 +613,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import LinearCombinationWrapper from '../../../../app/components/linear-algebra copy/matrix/LinearCombinationWrapper'
 import vectorLinCombDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorLinCombDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -654,7 +656,7 @@ export async function getStaticProps(){
 **Vector space** — the set of all vectors of a given length forms a vector space under vector addition and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -667,7 +669,7 @@ export async function getStaticProps(){
 • The scalars $\\alpha$ and $\\beta$ are shown symbolically — the visualizer focuses on structure, not specific numeric values`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `The Three Phases`,
@@ -680,7 +682,7 @@ export async function getStaticProps(){
 This phase order makes the decomposition of a linear combination into scalar multiplication and vector addition explicit. Both operations are visible on the screen at the same time when phase 3 begins.`,
       before: ``,
       after: ``,
-      link: '#three-phases',
+      link: '',
     },
     obj3: {
       title: `Reading the Scene Player`,
@@ -693,7 +695,7 @@ This phase order makes the decomposition of a linear combination into scalar mul
 • The step log on the right keeps a record of every completed component across all phases`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj4: {
       title: `Choosing Vector Length`,
@@ -705,7 +707,7 @@ This phase order makes the decomposition of a linear combination into scalar mul
 • Both row and column orientations follow identical rules — linear combinations require only matching length between operands`,
       before: ``,
       after: ``,
-      link: '#choosing-length',
+      link: '',
     },
     obj5: {
       title: `What a Linear Combination Is`,
@@ -722,7 +724,7 @@ All vectors must share the same length, and the result inherits that length. The
 Geometrically, scaling stretches or reverses a vector along its direction, and addition follows the parallelogram rule — a linear combination is just both operations together. For comprehensive theory, see **vector operations**.`,
       before: ``,
       after: ``,
-      link: '#what-a-linear-combination-is',
+      link: '',
     },
     obj6: {
       title: `Key Properties`,
@@ -738,7 +740,7 @@ Geometrically, scaling stretches or reverses a vector along its direction, and a
 The structural fact behind all of this is that $\\mathbb{R}^n$ is a vector space, and linear combinations are exactly the operation that vector spaces are designed to support.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj7: {
       title: `Why It Matters`,
@@ -752,7 +754,7 @@ The structural fact behind all of this is that $\\mathbb{R}^n$ is a vector space
 • **Physics, optimization, machine learning**: superposition of forces, gradient updates, and linear regression all reduce to linear combinations`,
       before: ``,
       after: ``,
-      link: '#why-it-matters',
+      link: '',
     },
     obj8: {
       title: `Worked Example`,
@@ -775,7 +777,7 @@ $$2u - v = \\begin{pmatrix} -3 \\\\ 4 \\\\ -1 \\end{pmatrix}$$
 Set the visualizer to length $3$ and step through to see the three phases animated symbolically.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj9: {
       title: `Common Mistakes`,
@@ -788,17 +790,17 @@ Set the visualizer to length $3$ and step through to see the three phases animat
 • **Forgetting that the zero vector is a trivial linear combination** — choosing all coefficients zero produces the zero vector regardless of the operands, which is exactly the test for linear independence`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Vector addition** — the additive piece of any linear combination.
+      content: `[Vector addition](!/linear-algebra/visual-tools/vector-addition) — the additive piece of any linear combination.
 
-**Scalar multiplication** — the scaling piece of any linear combination.
+[Scalar multiplication](!/linear-algebra/visual-tools/vector-scalar-multiplication) — the scaling piece of any linear combination.
 
-**Span** — the set of all linear combinations of a fixed collection; a line, plane, or higher-dimensional subspace through the origin.
+[Span](!/linear-algebra/visual-tools/span-membership) — the set of all linear combinations of a fixed collection; a line, plane, or higher-dimensional subspace through the origin.
 
-**Linear independence** — the property that no vector in a set is a linear combination of the others.
+[Linear independence](!/linear-algebra/visual-tools/span-independence-2d) — the property that no vector in a set is a linear combination of the others.
 
 **Basis** — a linearly independent set whose linear combinations produce every vector in the space.
 
@@ -809,7 +811,7 @@ Set the visualizer to length $3$ and step through to see the three phases animat
 **Affine combination** — a linear combination whose coefficients sum to 1; produces lines and planes that need not pass through the origin.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `The Opening Scene: Two Vectors and Two Scalars`,
@@ -1015,6 +1017,7 @@ Geometrically the final phase is the parallelogram rule applied to the two scale
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-vector-linear-combination'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -1036,7 +1039,7 @@ Geometrically the final phase is the parallelogram rule applied to the two scale
   }
 }
 
-export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1163,6 +1166,9 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, s
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

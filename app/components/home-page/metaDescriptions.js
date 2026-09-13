@@ -48,9 +48,9 @@ const metaDescriptions= {
     `
     ,
       'https://www.learnmathclass.com/logic/truth-tables': 'Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators, Boolean algebra, and propositional logic.',
-    'https://www.learnmathclass.com/visual-tools/base-converter': 'Visualize number base conversions with our interactive tool.', 
-    'https://www.learnmathclass.com/visual-tools/determinant-calculator': 'Use our free determinant calculator with step-by-step solutions. Easily calculate matrix determinants for 2x2, 3x3, and larger matrices.',
-    'https://www.learnmathclass.com/visual-tools/gauss-elimination': 'Use our free Gaussian elimination calculator to solve matrix equations, systems of linear equations, and perform Gauss-Jordan elimination. Step-by-step solutions provided.',
+    'https://www.learnmathclass.com/arithmetic/visual-tools/base-converter': 'Visualize number base conversions with our interactive tool.',
+    'https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-determinant': 'Use our free determinant calculator with step-by-step solutions. Easily calculate matrix determinants for 2x2, 3x3, and larger matrices.',
+    'https://www.learnmathclass.com/linear-algebra/visual-tools/gauss-elimination': 'Use our free Gaussian elimination calculator to solve matrix equations, systems of linear equations, and perform Gauss-Jordan elimination. Step-by-step solutions provided.',
     'https://www.learnmathclass.com/visual-tools/matrix-multiplication': 'Interactive matrix multiplication animation tool. Visualize and understand matrix multiplication step by step.',
     'https://www.learnmathclass.com/calculators/statistics-calculator':'Master statistics with our free online calculator at Learn Math Class. Ideal for students and educators. Covers descriptive stats, probability, hypothesis testing, and more. Enhance your math skills today.',
     'https://www.learnmathclass.com/combinatorics/permutations':'Learn about what Permutations are, different kinds of Permutations, ways to distinguish between them. Understand Permutations formulas and ways to calculate outcomes in every case. ',

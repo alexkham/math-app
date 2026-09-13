@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ScalarMultiplicationWrapper from '../../../../app/components/linear-algebra copy/matrix/ScalarMultiplicationWrapper'
 import matrixScalarDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixScalarDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -48,7 +50,7 @@ export async function getStaticProps(){
 **Zero scalar** — multiplying by $k = 0$ produces the zero matrix of the same shape as $A$.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -62,7 +64,7 @@ export async function getStaticProps(){
 The scalar $k$ is shown symbolically in front of $A$. The visualizer focuses on the structural rule — every cell of $A$ gets multiplied by the same $k$ — not on any specific numerical value of $k$.`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `Reading the Scene Player`,
@@ -76,7 +78,7 @@ The scalar $k$ is shown symbolically in front of $A$. The visualizer focuses on 
 By the final scene, every cell of $C$ holds its symbolic product and the operation is complete.`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj3: {
       title: `Choosing Dimensions`,
@@ -88,7 +90,7 @@ By the final scene, every cell of $C$ holds its symbolic product and the operati
 • Square and rectangular shapes follow identical rules — scalar multiplication has no shape restriction`,
       before: ``,
       after: ``,
-      link: '#choosing-dimensions',
+      link: '',
     },
     obj4: {
       title: `What Scalar Multiplication Is`,
@@ -103,7 +105,7 @@ Scalar multiplication is the multiplicative companion to matrix addition: both a
 For comprehensive theory, see **matrix operations**.`,
       before: ``,
       after: ``,
-      link: '#what-it-is',
+      link: '',
     },
     obj5: {
       title: `Key Properties`,
@@ -121,7 +123,7 @@ For comprehensive theory, see **matrix operations**.`,
 These properties are exactly the eight vector-space axioms for scalar multiplication.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj6: {
       title: `Why It Matters`,
@@ -135,7 +137,7 @@ These properties are exactly the eight vector-space axioms for scalar multiplica
 • **Gradient descent and optimization**: the step $\\theta \\leftarrow \\theta - \\eta \\nabla L$ uses scalar multiplication of the gradient by the learning rate $\\eta$`,
       before: ``,
       after: ``,
-      link: '#why-it-matters',
+      link: '',
     },
     obj7: {
       title: `Worked Example`,
@@ -156,7 +158,7 @@ And with $k = 0$, the result is the $2 \\times 3$ zero matrix.
 Set the visualizer to $2 \\times 3$ and step through to see this animated symbolically.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj8: {
       title: `Common Mistakes`,
@@ -169,26 +171,26 @@ Set the visualizer to $2 \\times 3$ and step through to see this animated symbol
 • **Forgetting sign flips count as scalar multiplication** — $-A$ is $(-1) \\cdot A$`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj9: {
       title: `Related Concepts`,
-      content: `**Matrix addition** — the element-wise additive operation; pairs with scalar multiplication to make matrices a vector space.
+      content: `[Matrix addition](!/linear-algebra/visual-tools/matrix-addition) — the element-wise additive operation; pairs with scalar multiplication to make matrices a vector space.
 
-**Hadamard product** — element-wise multiplication of two matrices; the matrix-by-matrix analogue of scalar multiplication.
+[Hadamard product](!/linear-algebra/visual-tools/hadamard-product) — element-wise multiplication of two matrices; the matrix-by-matrix analogue of scalar multiplication.
 
-**Matrix multiplication** — the standard non-element-wise product; very different from scalar multiplication.
+[Matrix multiplication](!/visual-tools/matrix-multiplication) — the standard non-element-wise product; very different from scalar multiplication.
 
-**Linear combination** — $c_1 A_1 + \\cdots + c_n A_n$, the central object built from scalar multiplication and addition.
+[Linear combination](!/linear-algebra/visual-tools/matrix-linear-combination) — $c_1 A_1 + \\cdots + c_n A_n$, the central object built from scalar multiplication and addition.
 
 **Vector space** — the abstract structure matrices form under addition and scalar multiplication.
 
-**Norm** — multiplying $A$ by $1/\\|A\\|$ produces a unit-norm matrix.
+[Norm](!/linear-algebra/visual-tools/vector-magnitude) — multiplying $A$ by $1/\\|A\\|$ produces a unit-norm matrix.
 
 **Zero matrix** — the result of multiplying any matrix by the scalar 0.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj10: {
       title: `The Opening Scene: One Number and One Matrix`,
@@ -379,6 +381,7 @@ Two consequences are worth knowing because they are easy to get wrong. The trace
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-scalar-multiplication'),
       sectionsContent,
          stateUnits,
          explanations,
@@ -400,7 +403,7 @@ Two consequences are worth knowing because they are easy to get wrong. The trace
   }
 }
 
-export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -528,6 +531,9 @@ export default function ScalarMultiplicationVisualizer({seoData, sectionsContent
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>

@@ -3024,6 +3024,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -3680,29 +3681,19 @@ For the zero matrix ($r = 0$): the column space and row space are both $\\{\\mat
 
 const faqQuestions = {
   obj1: {
-    question: "What are the four fundamental subspaces of a matrix?",
-    answer: "Every m×n matrix A defines four subspaces: the column space (dimension r, in Rᵐ), the row space (dimension r, in Rⁿ), the null space (dimension n−r, in Rⁿ), and the left null space (dimension m−r, in Rᵐ). The rank r controls all four dimensions.",
-    sectionId: "1"
+    question: "Is $\\ker A$ different from the null space?",
+    answer: "They are the same subspace under two names. Kernel and image belong to the vocabulary of maps, null space and column space to the vocabulary of matrices, and $\\ker A = \\text{Null}(A)$ exactly, as does $\\operatorname{im} A = \\text{Col}(A)$. Which pair you meet depends on whether the author is thinking of $A$ as a transformation or as an array.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you find a basis for the column space?",
-    answer: "Row reduce A and identify the pivot columns. The corresponding columns of the original matrix A (not the echelon form) form a basis for the column space. The number of pivot columns equals the rank.",
-    sectionId: "2"
+    question: "Is the left null space a new kind of operation?",
+    answer: "No, nothing new happens. It is the ordinary null space of the ordinary transpose, and the compound name is bookkeeping rather than machinery. In practice the transpose spelling wins, since it lets you reuse the null-space algorithm unchanged on $A^{T}$, while the left-multiplication spelling is what explains where the name came from.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you find a basis for the null space?",
-    answer: "Reduce A to RREF and identify the free variables. Set each free variable to 1 (others to 0) and solve for the pivot variables. Each free variable produces one basis vector for the null space. The null space dimension is n minus the rank.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "How are the four subspaces related by orthogonality?",
-    answer: "The row space and null space are orthogonal complements in Rⁿ — every null space vector is perpendicular to every row. The column space and left null space are orthogonal complements in Rᵐ. Every vector in either ambient space decomposes uniquely into components from each complementary pair.",
-    sectionId: "7"
-  },
-  obj5: {
-    question: "What is the big picture of the four fundamental subspaces?",
-    answer: "The matrix maps the row space bijectively onto the column space (the useful part) and sends the entire null space to zero (the destroyed part). On the codomain side, the column space is reachable and the left null space is unreachable. This decomposition completely describes the geometry of any linear map.",
-    sectionId: "8"
+    question: "What is the difference between $\\mapsto$ and $\\to$?",
+    answer: "The barred arrow acts on elements and the plain arrow on spaces, so $A : \\mathbb{R}^n \\to \\mathbb{R}^m$ declares the map while $\\mathbf{x} \\mapsto A\\mathbf{x}$ says what it does to each vector. Writing $\\mathbf{x} \\to A\\mathbf{x}$ misuses the space-level arrow, and also collides with the arrow used for limits.",
+    sectionId: "notation"
   }
 }
 
@@ -3780,19 +3771,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -3942,6 +3920,22 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
           </DiagramFrame>,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Four Fundamental Subspaces FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -4045,12 +4039,6 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -292,28 +292,6 @@ The definitions are written in words, but the lessons they link to are written i
 Each definition includes an intuitive explanation, key properties, examples, and links to the detailed lesson page. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is the difference between a divisor and a multiple?",
-      answer: "A divisor (or factor) of an integer b is a nonzero integer a that divides b exactly, meaning b = a times k for some integer k. A multiple is the reverse relationship: b is a multiple of a. For example, 3 is a divisor of 12, and 12 is a multiple of 3."
-    },
-    obj2: {
-      question: "What is the difference between a prime and composite number?",
-      answer: "A prime number is an integer greater than 1 whose only positive divisors are 1 and itself. A composite number is an integer greater than 1 that has at least one additional positive divisor. The number 1 is neither prime nor composite. Every composite number can be expressed as a unique product of primes."
-    },
-    obj3: {
-      question: "What is the difference between GCD and LCM?",
-      answer: "The greatest common divisor (GCD) of two integers is the largest positive integer that divides both. The least common multiple (LCM) is the smallest positive integer that both divide into evenly. They are related by the identity GCD(a, b) times LCM(a, b) equals the absolute value of a times b."
-    },
-    obj4: {
-      question: "What is the difference between proper and improper fractions?",
-      answer: "A proper fraction has a numerator smaller than the denominator, so its value is between 0 and 1. An improper fraction has a numerator equal to or greater than the denominator, so its value is 1 or more. Every improper fraction can be rewritten as a mixed number combining a whole part and a proper fraction."
-    },
-    obj5: {
-      question: "What does congruence mean in modular arithmetic?",
-      answer: "Two integers a and b are congruent modulo m if their difference is divisible by m, written a is congruent to b mod m. Equivalently, they have the same remainder when divided by m. The modulus m partitions all integers into exactly m residue classes based on their remainders."
-    }
-  }
 
   const schemas = {
     learningResource: {
@@ -384,7 +362,6 @@ Each definition includes an intuitive explanation, key properties, examples, and
   return {
     props: {
       arithmeticTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -400,7 +377,6 @@ Each definition includes an intuitive explanation, key properties, examples, and
 
 export default function ArithmeticDefinitionsPage({
   arithmeticTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData

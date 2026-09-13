@@ -532,60 +532,6 @@ Together, these theorems provide a strategy: use the Rational Root Theorem to ge
   title: "Expressions Built from Powers",
   content: `A polynomial is an algebraic expression constructed from variables, coefficients, and non-negative integer exponents, combined through addition, subtraction, and multiplication. These expressions appear throughout mathematics — from simple linear equations to complex models in physics and engineering. Understanding polynomials means understanding the building blocks of algebra itself.`
 }
-const faqQuestions = {
-  obj1: {
-    question: "What is a polynomial?",
-    answer: "A polynomial is an algebraic expression of the form aₙxⁿ + aₙ₋₁xⁿ⁻¹ + ... + a₁x + a₀, where the coefficients are numbers and the exponents are non-negative integers. Examples include 3x² - 2x + 5 and x⁴ - 1. Expressions with negative or fractional exponents are not polynomials."
-  },
-  obj2: {
-    question: "What is the degree of a polynomial?",
-    answer: "The degree of a polynomial is the highest exponent that appears on the variable. For 4x³ - 2x + 7, the degree is 3. For x⁵ - x² + x, the degree is 5. A nonzero constant has degree 0. The degree determines much of the polynomial's behavior, including maximum number of roots."
-  },
-  obj3: {
-    question: "What is the leading coefficient?",
-    answer: "The leading coefficient is the coefficient of the term with the highest degree. In 4x³ - 2x + 7, the leading term is 4x³ and the leading coefficient is 4. The leading coefficient determines the polynomial's end behavior and appears first when written in standard form."
-  },
-  obj4: {
-    question: "What is the difference between monomial, binomial, and trinomial?",
-    answer: "A monomial has one term (like 5x²), a binomial has two terms (like x + 3), and a trinomial has three terms (like x² - 4x + 4). These names classify polynomials by their number of terms. Beyond three terms, we simply say 'polynomial with n terms.'"
-  },
-  obj5: {
-    question: "What is standard form for a polynomial?",
-    answer: "Standard form arranges terms in descending order of degree, from highest to lowest. The polynomial 3 + 2x² - x becomes 2x² - x + 3 in standard form. This makes the degree and leading coefficient immediately visible and simplifies comparison between polynomials."
-  },
-  obj6: {
-    question: "How do you evaluate a polynomial?",
-    answer: "To evaluate P(x) at x = a, substitute a for every x and compute. For P(x) = 2x² - 3x + 1, evaluating P(4) gives 2(16) - 12 + 1 = 21. Evaluation finds points on the graph and tests whether a value is a root (where P(a) = 0)."
-  },
-  obj7: {
-    question: "What is a root or zero of a polynomial?",
-    answer: "A root (or zero) of polynomial P(x) is a value r where P(r) = 0. For x² - 4, the roots are 2 and -2. Roots correspond to x-intercepts on the graph. If r is a root, then (x - r) is a factor. A degree n polynomial has at most n roots."
-  },
-  obj8: {
-    question: "What operations can you perform on polynomials?",
-    answer: "Polynomials can be added, subtracted, multiplied, and divided. Addition and subtraction combine like terms. Multiplication uses the distributive property. Division may produce a quotient and remainder. Polynomials are closed under addition, subtraction, and multiplication."
-  },
-  obj9: {
-    question: "What is the constant term of a polynomial?",
-    answer: "The constant term is the term with no variable — the coefficient of x⁰. In 4x³ - 2x + 7, the constant term is 7. Some polynomials like x² - 3x have no constant term (equivalently, a constant term of zero). The constant term equals P(0)."
-  },
-  obj10: {
-    question: "Why is x⁻² + 3 not a polynomial?",
-    answer: "The expression x⁻² + 3 contains a negative exponent, which violates the definition requiring non-negative integer exponents. Similarly, √x + 1 (fractional exponent), 1/x + 4 (variable in denominator), and 2ˣ (variable in exponent) are not polynomials."
-  },
-  obj11: {
-    question: "What are linear, quadratic, cubic, and quartic polynomials?",
-    answer: "These names indicate degree. Linear polynomials have degree 1 (ax + b). Quadratic polynomials have degree 2 (ax² + bx + c). Cubic polynomials have degree 3. Quartic polynomials have degree 4, and quintic have degree 5. Beyond degree 5, we typically say 'degree n polynomial.'"
-  },
-  obj12: {
-    question: "What is the Remainder Theorem?",
-    answer: "The Remainder Theorem states that when P(x) is divided by (x - a), the remainder equals P(a). No long division needed — just evaluate. If P(3) = 25, then dividing P(x) by (x - 3) leaves remainder 25. When the remainder is 0, (x - a) is a factor."
-  },
-  obj13: {
-    question: "What is the Factor Theorem?",
-    answer: "The Factor Theorem says (x - a) is a factor of P(x) if and only if P(a) = 0. This connects roots and factors directly: finding a root immediately gives a factor, and each factor reveals a root. It follows from the Remainder Theorem when the remainder is zero."
-  }
-}
 
 const schemas = {
   learningResource: {
@@ -652,19 +598,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -677,7 +610,6 @@ const schemas = {
     obj2Table,
     obj11Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Polynomials: Definition, Degree & Operations | Learn Math Class",
@@ -692,7 +624,7 @@ const schemas = {
 
 
 
-export default function PolynomialsPage({seoData, sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, faqQuestions, schemas}) {
+export default function PolynomialsPage({seoData, sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -916,12 +848,6 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

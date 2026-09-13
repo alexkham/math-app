@@ -694,7 +694,7 @@
 //    }
 
 // // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function VectorSpacesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function VectorSpacesPage({seoData, sectionsContent, introContent, schemas}) {
     
 //   const genericSections=[
 //     {
@@ -1383,34 +1383,6 @@ These four subspaces split into two pairs of [orthogonal](!/linear-algebra/ortho
 }
 
 
-const faqQuestions = {
-  obj1: {
-    question: "What is a vector space?",
-    answer: "A vector space is a set V with two operations — addition and scalar multiplication — satisfying ten axioms: closure, commutativity, associativity, zero vector, additive inverse, scalar closure, scalar associativity, two distributive laws, and multiplicative identity. Any set satisfying all ten is a vector space.",
-    sectionId: "2"
-  },
-  obj2: {
-    question: "What are examples of vector spaces besides Rⁿ?",
-    answer: "The set of m×n matrices with entry-by-entry operations, polynomials of degree at most n, continuous functions on an interval, and solution sets of homogeneous differential equations are all vector spaces. Any collection where addition and scaling satisfy the ten axioms qualifies.",
-    sectionId: "5"
-  },
-  obj3: {
-    question: "What is a subspace?",
-    answer: "A subspace is a subset of a vector space that is itself a vector space under the same operations. The only conditions to check are closure under addition and scalar multiplication. In R³, the subspaces are the zero vector, lines through the origin, planes through the origin, and R³ itself.",
-    sectionId: "8"
-  },
-  obj4: {
-    question: "What is a basis and what is dimension?",
-    answer: "A basis is a linearly independent set that spans the entire space. Every vector has a unique representation as a linear combination of basis vectors. Every basis for a given space has the same number of elements — this number is the dimension. Two spaces with the same dimension over the same field are isomorphic.",
-    sectionId: "10"
-  },
-  obj5: {
-    question: "What are the four fundamental subspaces of a matrix?",
-    answer: "Every m×n matrix A defines four subspaces: the column space (dimension r) and left null space (dimension m−r) in Rᵐ, and the row space (dimension r) and null space (dimension n−r) in Rⁿ. The row space and null space are orthogonal complements, as are the column space and left null space.",
-    sectionId: "11"
-  }
-}
-
 
 const schemas = {
   learningResource: {
@@ -1478,19 +1450,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -1502,7 +1461,6 @@ return {
     obj11Table,
     obj12Table,
     summaryTable,
-    faqQuestions,
     schemas,
     seoData: {
       title: "Vector Spaces: Axioms, Basis & Dimension | Learn Math Class",
@@ -1515,7 +1473,7 @@ return {
 }
    }
 
-export default function VectorSpacesPage({seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, faqQuestions, schemas}) {
+export default function VectorSpacesPage({seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1669,12 +1627,6 @@ export default function VectorSpacesPage({seoData, sectionsContent, introContent
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

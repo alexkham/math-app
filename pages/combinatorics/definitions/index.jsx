@@ -299,29 +299,6 @@ export async function getStaticProps() {
 Each definition includes a precise formal statement, notation conventions, key properties, worked examples, and links to detailed lesson pages. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is combinatorics?",
-      answer: "Combinatorics is the branch of mathematics that studies counting, arrangement, and selection of objects. It answers questions of the form 'in how many ways can this be done?' through a small set of logical principles -- the addition and multiplication rules, complementary counting, double counting, the pigeonhole principle, and inclusion-exclusion -- and a family of standard scenarios for permutations and combinations."
-    },
-    obj2: {
-      question: "What is the difference between a permutation and a combination?",
-      answer: "A permutation is an arrangement where order matters: ABC and CBA count as different permutations. A combination is a selection where order does not matter: the set {A, B, C} is the same combination regardless of how the items were chosen. Each combination of r items corresponds to exactly r! permutations, so C(n,r) = P(n,r) / r!."
-    },
-    obj3: {
-      question: "What are the basic counting principles?",
-      answer: "The basic counting principles are the addition rule (mutually exclusive cases sum), the multiplication rule (independent steps multiply), complementary counting (count what fails and subtract), double counting (count the same set two ways to produce an identity), the pigeonhole principle (more items than containers forces a repeat), and the inclusion-exclusion principle (systematic correction for overlapping sets)."
-    },
-    obj4: {
-      question: "What is the binomial coefficient?",
-      answer: "The binomial coefficient C(n,k), read 'n choose k', counts the number of k-element subsets of an n-element set. Its formula is n! divided by k! times (n-k)!. The same coefficient also organizes polynomial expansions through the binomial theorem and governs the binomial probability distribution."
-    },
-    obj5: {
-      question: "What is the inclusion-exclusion principle?",
-      answer: "The inclusion-exclusion principle computes the size of a union of overlapping sets by alternately adding and subtracting the sizes of k-fold intersections. For two sets, |A union B| = |A| + |B| - |A intersect B|. The general n-set formula has 2^n - 1 terms with alternating signs, and produces the derangement count and the surjective function count in its complementary form."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -387,25 +364,11 @@ Each definition includes a precise formal statement, notation conventions, key p
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       combinatoricsTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -421,7 +384,6 @@ Each definition includes a precise formal statement, notation conventions, key p
 
 export default function CombinatoricsDefinitionsPage({
   combinatoricsTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -462,12 +424,6 @@ export default function CombinatoricsDefinitionsPage({
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br />

@@ -40,6 +40,32 @@ export async function getStaticProps(){
 
   const toolsData = await buildToolIndexData('/arithmetic/visual-tools')
 
+  // Cross-listed tools that live at top-level /visual-tools/* routes on
+  // purpose: Search Console (90 days to 2026-09-12) puts fractions-visualizer
+  // at 287 clicks (5th page on the site) and square-root at 83 (15th), so
+  // their URLs are not moved. The base converter was relocated into this
+  // folder the same day and is auto-discovered like the other tools here.
+  // Declared here, above the schemas, because the structured data below is
+  // built from the auto-discovered tools PLUS these.
+  const comingSoonItems = [
+    {
+      at: 'end',
+      title: 'Fractions Visualizer',
+      description: 'Interactive fractions visualizer built on circle diagrams. Set a numerator and denominator and watch the circle divide and shade to match, then read the same value as a decimal and a percentage. Compare two fractions side by side, find equivalent fractions by changing the number of slices without changing the shaded area, and see why a larger denominator means smaller pieces. A clear first picture of what a fraction is before any rule about adding or multiplying them.',
+      href: '/visual-tools/fractions-visualizer',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="26" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/><path d="M 40 40 L 40 14 A 26 26 0 0 1 66 40 Z" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><path d="M 40 40 L 66 40 A 26 26 0 0 1 40 66 Z" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><path d="M 40 40 L 40 66 A 26 26 0 0 1 14 40 Z" fill="#FAC775" stroke="#854F0B" stroke-width="1"/><line x1="40" y1="40" x2="14" y2="40" stroke="#185FA5" stroke-width="1"/><line x1="40" y1="40" x2="40" y2="14" stroke="#185FA5" stroke-width="1"/><text x="40" y="76" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">3/4</text></svg>`,
+      icon: '',
+    },
+    {
+      at: 'end',
+      title: 'Square Root Visualizer',
+      description: 'A grid-based picture of square roots. Enter any number from 0 to 100 or drag the slider, and a red frame grows to the side length whose square is that number. Perfect squares fill the grid exactly and light up in blue; every other number lands between two of them, which is what makes its root irrational. Read the root off the frame, see how close it sits to the neighbouring perfect squares, and watch the estimate sharpen as the number changes.',
+      href: '/visual-tools/square-root',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="12" width="56" height="56" fill="none" stroke="#B5D4F4" stroke-width="0.8"/><line x1="26" y1="12" x2="26" y2="68" stroke="#B5D4F4" stroke-width="0.6"/><line x1="40" y1="12" x2="40" y2="68" stroke="#B5D4F4" stroke-width="0.6"/><line x1="54" y1="12" x2="54" y2="68" stroke="#B5D4F4" stroke-width="0.6"/><line x1="12" y1="26" x2="68" y2="26" stroke="#B5D4F4" stroke-width="0.6"/><line x1="12" y1="40" x2="68" y2="40" stroke="#B5D4F4" stroke-width="0.6"/><line x1="12" y1="54" x2="68" y2="54" stroke="#B5D4F4" stroke-width="0.6"/><rect x="12" y="26" width="42" height="42" fill="#E6F1FB" fill-opacity="0.55" stroke="#185FA5" stroke-width="1"/><rect x="12" y="20" width="48" height="48" fill="none" stroke="#FAC775" stroke-width="2"/><text x="36" y="47" font-family="Georgia,serif" font-size="10" fill="#412402" text-anchor="middle" font-weight="600">&#8730;12</text><text x="40" y="76" font-family="Georgia,serif" font-size="7.5" fill="#E6F1FB" text-anchor="middle" font-style="italic">3 &lt; &#8730;12 &lt; 4</text></svg>`,
+      icon: '',
+    },
+  ]
+
   const faqQuestions = {
     obj1: {
       question: "What arithmetic visualization tools are available?",
@@ -64,8 +90,13 @@ export async function getStaticProps(){
   }
 
   // hasPart / itemList are generated from the auto-discovered tools so the
-  // schemas always match what the page actually shows.
-  const toolSchemaParts = toolsData.items.map((tool) => ({
+  // schemas always match what the page actually shows. `comingSoonItems`,
+  // declared above, holds the cross-listed tools that live at top-level
+  // /visual-tools routes; they render as cards here, so they belong in the
+  // structured data too.
+  const schemaTools = [...toolsData.items, ...comingSoonItems]
+
+  const toolSchemaParts = schemaTools.map((tool) => ({
     "@type": "WebPage",
     "name": tool.title,
     "url": `https://www.learnmathclass.com${tool.href}`,
@@ -101,7 +132,7 @@ export async function getStaticProps(){
     itemList: {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "itemListElement": toolsData.items.map((tool, index) => ({
+      "itemListElement": schemaTools.map((tool, index) => ({
         "@type": "ListItem",
         "position": index + 1,
         "item": {
@@ -172,6 +203,7 @@ Each tool runs directly in your browser with no downloads or registration requir
   return {
     props: {
       toolsData,
+      comingSoonItems,
       faqQuestions,
       schemas,
       pageArticle,
@@ -186,7 +218,7 @@ Each tool runs directly in your browser with no downloads or registration requir
   }
 }
 
-export default function ArithmeticVisualToolsPage({seoData, toolsData, faqQuestions, schemas, pageArticle}) {
+export default function ArithmeticVisualToolsPage({seoData, toolsData, comingSoonItems, faqQuestions, schemas, pageArticle}) {
 
   return (
     <>
@@ -253,6 +285,7 @@ export default function ArithmeticVisualToolsPage({seoData, toolsData, faqQuesti
       <br/>
       <VisualToolsPage
         tools={toolsData}
+        customItems={comingSoonItems}
         pageTitle="Arithmetic Visual Tools"
         intro={{
           title: "Explore Interactive Arithmetic Tools",

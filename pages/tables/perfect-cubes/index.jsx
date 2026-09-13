@@ -121,7 +121,7 @@
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 // import PerfectCubesPage from '../../../app/components/tables/PerfectCubesPage';
 
-// export default function PerfectCubesTablePage({ seoData, combinedInstructions, faqQuestions, schemas }) {
+// export default function PerfectCubesTablePage({ seoData, combinedInstructions, schemas }) {
 //   return (
 //     <>
 //       <Head>
@@ -374,7 +374,7 @@ import CubeRootsTable from '@/app/components/tables/CubeRootsTable';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PerfectCubesPage from '../../../app/components/tables/PerfectCubesPage';
 
-export default function PerfectCubesTablePage({ seoData, combinedInstructions, faqQuestions, schemas }) {
+export default function PerfectCubesTablePage({ seoData, combinedInstructions, schemas }) {
   return (
     <>
       <Head>
@@ -410,12 +410,6 @@ export default function PerfectCubesTablePage({ seoData, combinedInstructions, f
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
 
       {/* <GenericNavbar/> */}
@@ -493,29 +487,6 @@ export async function getStaticProps() {
     'The built-in quiz at the bottom lets you test your recall, with score persisting for the visit'
   ];
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a perfect cube?",
-      answer: "A perfect cube is a non-negative integer that can be written as the product of an integer with itself three times. The first ten perfect cubes are 1, 8, 27, 64, 125, 216, 343, 512, 729, and 1000, formed by cubing the integers 1 through 10. Every perfect cube has an integer cube root."
-    },
-    obj2: {
-      question: "How can you tell if a number is a perfect cube?",
-      answer: "Two quick checks rule out most non-cubes. First, every perfect cube is congruent to 0, 1, or 8 modulo 9, so any number that is 2, 3, 4, 5, 6, or 7 mod 9 is immediately disqualified. Second, the last digit of a cube is fully determined by the last digit of its root, so an inconsistent last-digit pattern can also rule it out. If both tests pass, take the cube root and verify that the result is an integer."
-    },
-    obj3: {
-      question: "How many perfect cubes are there between 1 and 1,000,000?",
-      answer: "There are exactly 100 perfect cubes from 1 to 1,000,000, corresponding to the cubes of the integers from 1 through 100. The first is 1, equal to 1 cubed, and the last is 1,000,000, equal to 100 cubed."
-    },
-    obj4: {
-      question: "What is the gap between two consecutive perfect cubes?",
-      answer: "The difference between (n+1) cubed and n cubed is always 3n^2 + 3n + 1. For example, the gap between 10 cubed (1000) and 11 cubed (1331) is 331, which equals 3 times 100 plus 3 times 10 plus 1. As a corollary, n cubed equals the sum of n consecutive odd numbers: 1 cubed is 1, 2 cubed is 3 plus 5, 3 cubed is 7 plus 9 plus 11."
-    },
-    obj5: {
-      question: "How does cubing affect a number's last digit?",
-      answer: "Cubing acts as an involution on the last digit. The digits 0, 1, 4, 5, 6, and 9 are fixed: the cube ends in the same digit as the root. The digits 2 and 8 swap with each other, as do 3 and 7. So the last digit of a perfect cube uniquely determines the last digit of its cube root, which makes mental cube-root extraction much easier."
-    }
-  };
-
   const schemas = {
     webApplication: {
       "@context": "https://schema.org",
@@ -582,25 +553,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   };
 
   return {
     props: {
       combinedInstructions,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Perfect Cubes 1-1000000 Table & Tool | Learn Math Class",

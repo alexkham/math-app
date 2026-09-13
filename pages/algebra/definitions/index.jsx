@@ -46,29 +46,6 @@ export async function getStaticProps() {
 Each definition includes key properties, worked examples, and links to the detailed lesson page. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What topics does this algebra glossary cover?",
-      answer: "The glossary covers six major algebra categories: Equations (variables, solutions, identities, discriminant), Roots and Radicals (square roots, cube roots, rationalizing, surds), Logarithms (natural log, common log, log identities, change of base), Polynomials (degree, factoring, Vieta's formulas, remainder theorem), Exponents (laws of exponents, exponential growth, scientific notation), and Inequalities (interval notation, sign analysis, compound inequalities)."
-    },
-    obj2: {
-      question: "What is the difference between an expression and an equation?",
-      answer: "An expression is a mathematical phrase like 3x + 2 that represents a quantity but makes no claim about equality. An equation uses the equals sign to assert that two expressions have the same value, such as 3x + 2 = 8. Expressions are simplified or evaluated; equations are solved."
-    },
-    obj3: {
-      question: "What are the main types of equations in algebra?",
-      answer: "Algebra classifies equations by degree: linear (degree 1), quadratic (degree 2), cubic (degree 3), and higher. Equations can also be conditional (true for specific values), identities (true for all values), or contradictions (true for no values). Each type requires different solving techniques."
-    },
-    obj4: {
-      question: "How are logarithms related to exponents?",
-      answer: "Logarithms are the inverse of exponentiation. The statement log base b of x equals y means b raised to the power y equals x. For example, log base 2 of 8 equals 3 because 2 cubed is 8. This inverse relationship is used to solve exponential equations."
-    },
-    obj5: {
-      question: "What is a polynomial and how is it classified?",
-      answer: "A polynomial is an expression built from variables and coefficients using addition, subtraction, multiplication, and non-negative integer exponents. Polynomials are classified by degree: degree 1 is linear, degree 2 is quadratic, degree 3 is cubic. The degree determines the maximum number of roots and which solving methods apply."
-    }
-  }
-
   const schemas = {
     learningResource: {
       "@context": "https://schema.org",
@@ -133,25 +110,11 @@ Each definition includes key properties, worked examples, and links to the detai
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       algebraTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -168,7 +131,6 @@ Each definition includes key properties, worked examples, and links to the detai
 
 export default function AlgebraDefinitionsPage({
   algebraTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData
@@ -208,12 +170,6 @@ export default function AlgebraDefinitionsPage({
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br />

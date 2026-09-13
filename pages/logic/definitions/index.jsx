@@ -202,28 +202,6 @@ export async function getStaticProps() {
 Each definition includes an intuitive explanation, formal properties, worked examples, and links to detailed lesson pages. Use the search bar or category filters above to navigate.`
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a proposition in logic?",
-      answer: "A proposition is a declarative statement that is either true or false, but not both. Examples include '2 + 3 = 5' (true) and 'The moon is made of cheese' (false). Questions, commands, and statements with free variables are not propositions because they lack a definite truth value."
-    },
-    obj2: {
-      question: "What is the difference between a tautology, contradiction, and contingency?",
-      answer: "A tautology is true under every possible truth assignment, such as P or not P. A contradiction is false under every assignment, such as P and not P. A contingency is true under some assignments and false under others -- most everyday propositions are contingencies."
-    },
-    obj3: {
-      question: "What are the main logical connectives?",
-      answer: "The five standard connectives are negation (not), conjunction (and), disjunction (or), conditional (if-then), and biconditional (if and only if). Each defines a truth function that determines the compound statement's truth value from the truth values of its components."
-    },
-    obj4: {
-      question: "What is the difference between a conditional and its contrapositive?",
-      answer: "A conditional P implies Q asserts that whenever P is true, Q must also be true. Its contrapositive, not Q implies not P, negates both parts and swaps their positions. The contrapositive is always logically equivalent to the original conditional, unlike the converse or inverse."
-    },
-    obj5: {
-      question: "What are CNF and DNF in propositional logic?",
-      answer: "CNF (Conjunctive Normal Form) expresses a formula as an AND of OR-clauses. DNF (Disjunctive Normal Form) expresses it as an OR of AND-clauses. Every propositional formula can be converted to both forms. CNF is widely used in automated theorem proving and SAT solvers."
-    }
-  }
 
   const schemas = {
     learningResource: {
@@ -294,7 +272,6 @@ Each definition includes an intuitive explanation, formal properties, worked exa
   return {
     props: {
       logicTermsList,
-      faqQuestions,
       schemas,
       introArticle,
       seoData: {
@@ -310,7 +287,6 @@ Each definition includes an intuitive explanation, formal properties, worked exa
 
 export default function LogicDefinitionsPage({
   logicTermsList,
-  faqQuestions,
   schemas,
   introArticle,
   seoData

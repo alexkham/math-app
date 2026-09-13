@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 export async function getStaticProps() {
 
@@ -394,42 +395,22 @@ The identities below are grouped by shape: squares first, then cubes, then highe
 
 
   const faqQuestions = {
-  obj1: {
-    question: "What is the formula for squaring a binomial?",
-    answer: "(a + b)² = a² + 2ab + b² and (a - b)² = a² - 2ab + b². The middle term 2ab comes from the cross-product in distribution. Conjugate binomials (a+b)(a-b) give a² - b², the difference of squares.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is the formula for cubing a binomial?",
-    answer: "(a + b)³ = a³ + 3a²b + 3ab² + b³ and (a - b)³ = a³ - 3a²b + 3ab² - b³. The coefficients 1, 3, 3, 1 follow the pattern that generalizes to all powers via the binomial theorem.",
-    sectionId: "2"
-  },
-  obj3: {
-    question: "What is the binomial theorem?",
-    answer: "The binomial theorem expands (a+b)ⁿ as the sum of terms C(n,k)·aⁿ⁻ᵏ·bᵏ for k from 0 to n. The coefficients C(n,k) are binomial coefficients found in Pascal's triangle. For (a-b)ⁿ, signs alternate.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you expand the square of a trinomial?",
-    answer: "(a + b + c)² = a² + b² + c² + 2ab + 2ac + 2bc. Each variable is squared once, and every pair of variables produces a doubled cross-product. The pattern extends to any number of terms.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are the sum and difference of cubes formulas?",
-    answer: "a³ - b³ = (a - b)(a² + ab + b²) and a³ + b³ = (a + b)(a² - ab + b²). The quadratic factors are irreducible over real numbers. For any n, aⁿ - bⁿ always factors with (a - b); aⁿ + bⁿ factors only when n is odd.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Does the sum of squares factor?",
-    answer: "Over real numbers, a² + b² is irreducible and cannot be factored. Over complex numbers, it factors as (a + bi)(a - bi) using the imaginary unit. This is why conjugate pairs appear in complex factorization.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the Sophie Germain identity?",
-    answer: "a⁴ + 4b⁴ = (a² + 2ab + 2b²)(a² - 2ab + 2b²). This identity factors an expression that appears irreducible at first glance. It surfaces in number theory and competition problems.",
-    sectionId: "6"
+    obj1: {
+      question: "What is the Sophie Germain identity?",
+      answer: "It factors $a^4 + 4b^4$, an expression that looks stubbornly irreducible, into $(a^2 + 2ab + 2b^2)(a^2 - 2ab + 2b^2)$. Nothing in the standard patterns suggests it, since the expression is a sum rather than a difference and neither term is a perfect square of a binomial. It turns up in number theory and in contest problems.",
+      sectionId: "6"
+    },
+    obj2: {
+      question: "When does $a^n + b^n$ factor?",
+      answer: "Only when $n$ is odd, and then $(a + b)$ is always a divisor. For even $n$ the expression is irreducible over the reals. Differences behave better: $a^n - b^n$ factors for every positive $n$, with $(a - b)$ as a divisor. Some cases factor repeatedly, as $a^4 - b^4$ becomes $(a - b)(a + b)(a^2 + b^2)$.",
+      sectionId: "5"
+    },
+    obj3: {
+      question: "How do you pull $ab$ out of $a + b$ and $a - b$?",
+      answer: "Square both and subtract: $(a+b)^2 - (a-b)^2 = 4ab$, so the product falls out as a quarter of the difference. Adding instead gives the companion identity $(a+b)^2 + (a-b)^2 = 2(a^2 + b^2)$, which strips the cross term entirely. The pair is worth recognising whenever a sum and a difference appear together.",
+      sectionId: "6"
+    }
   }
-}
 
 
 const schemas = {
@@ -497,19 +478,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -630,6 +598,22 @@ export default function AlgebraicIdentitiesPage({
         />,
       ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+      id: 'faq',
+      title: `Algebraic Identities FAQ`,
+      link: ``,
+      content: [
+        <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+          <FAQSection
+            faqQuestions={faqQuestions}
+            theme={'leftBorder'}
+            width={'100%'}
+            openFirst={false}
+          />
+        </div>,
+      ]
+    },
   ]
 
   return (
@@ -667,12 +651,6 @@ export default function AlgebraicIdentitiesPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
       <br />
       <br />

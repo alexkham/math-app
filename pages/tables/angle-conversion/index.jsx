@@ -223,29 +223,6 @@ The sidebar to the left of the table holds direct links to the related tools.`,
   }
 
 
-  const faqQuestions = {
-    obj1: {
-      question: "How do you convert degrees to radians?",
-      answer: "Multiply the angle in degrees by pi divided by 180. The conversion factor follows from the fact that a full circle equals 360 degrees or 2 pi radians, so 180 degrees equals pi radians. For example, 60 degrees times pi over 180 equals pi over 3 radians."
-    },
-    obj2: {
-      question: "How do you convert radians to degrees?",
-      answer: "Multiply the angle in radians by 180 divided by pi. This is the inverse of the degree-to-radian conversion. For example, pi over 4 radians times 180 over pi equals 45 degrees."
-    },
-    obj3: {
-      question: "What is 360 degrees in radians?",
-      answer: "360 degrees equals 2 pi radians, which is approximately 6.2832 radians. This represents one full revolution. Half a revolution, 180 degrees, equals pi radians, which is the defining relationship between the two units."
-    },
-    obj4: {
-      question: "What are the most common angles in degrees and radians?",
-      answer: "The common reference angles are 0, 30, 45, 60, 90, 180, 270, and 360 degrees, which correspond to 0, pi over 6, pi over 4, pi over 3, pi over 2, pi, 3 pi over 2, and 2 pi radians. These appear constantly in trigonometry and on the unit circle."
-    },
-    obj5: {
-      question: "Why use radians instead of degrees?",
-      answer: "Radians are the natural unit for angle measurement in calculus and higher mathematics. Derivatives and integrals of trigonometric functions take their simplest form when the input is in radians. Degrees remain standard in everyday applications like navigation and engineering."
-    }
-  }
-
 
   const schemas = {
     webApplication: {
@@ -307,19 +284,6 @@ The sidebar to the left of the table holds direct links to the related tools.`,
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
 
@@ -327,7 +291,6 @@ The sidebar to the left of the table holds direct links to the related tools.`,
       props:{
          sectionsContent,
          navigationGroup,
-         faqQuestions,
          schemas,
          seoData: {
            title: "Degrees to Radians Table: 0\u00B0 to 360\u00B0 | Learn Math Class",
@@ -343,7 +306,7 @@ The sidebar to the left of the table holds direct links to the related tools.`,
     }
    }
 
-export default function AngleConversionTable({seoData, sectionsContent, navigationGroup, faqQuestions, schemas}) {
+export default function AngleConversionTable({seoData, sectionsContent, navigationGroup, schemas}) {
 
   const genericSections=[
     { id:'0', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
@@ -399,12 +362,6 @@ export default function AngleConversionTable({seoData, sectionsContent, navigati
         }}
       />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.faq)
-        }}
-      />
     </Head>
     {/* <GenericNavbar/> */}
     <br/>

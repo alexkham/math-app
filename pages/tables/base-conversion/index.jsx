@@ -20,7 +20,7 @@
 //         title:'Related Tools',
 //         items:[
 //             {title:'Base Converter',link:'/converters/base-converter'},
-//             {title:'Base Convertion Visualizer',link:'/visual-tools/base-converter'},
+//             {title:'Base Convertion Visualizer',link:'/arithmetic/visual-tools/base-converter'},
 //         ]
 //     }
 //   ]
@@ -252,7 +252,7 @@ export async function getStaticProps(){
         title:'Related Tools',
         items:[
             {title:'Base Converter',link:'/converters/base-converter'},
-            {title:'Base Convertion Visualizer',link:'/visual-tools/base-converter'},
+            {title:'Base Convertion Visualizer',link:'/arithmetic/visual-tools/base-converter'},
         ]
     }
   ]
@@ -415,29 +415,6 @@ For step-by-step conversion with worked examples, see the **base conversion theo
 
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a base conversion table?",
-      answer: "A base conversion table lists numbers in multiple numeral systems side by side so each row shows the same value expressed in different bases. This table covers every integer from 0 to 1000 in decimal, binary, octal, hexadecimal, and a configurable custom base."
-    },
-    obj2: {
-      question: "How do I convert decimal to binary using this table?",
-      answer: "Find the decimal value in the leftmost column using the search box or pagination, then read across to the Binary column. The number 25 in decimal, for example, appears as 11001 in binary on the same row."
-    },
-    obj3: {
-      question: "What bases does the custom base input support?",
-      answer: "The custom base input accepts any integer from 2 to 36. Bases above 10 use letters A through Z as digits beyond 9, the same convention hexadecimal uses to extend digits 0-9 with A-F."
-    },
-    obj4: {
-      question: "Why are binary, octal, and hexadecimal used in computing?",
-      answer: "Binary is the native form of digital circuits. Octal and hexadecimal group binary digits in threes and fours respectively, giving compact representations: one hex digit replaces four binary digits, making memory addresses and bit patterns easier to read."
-    },
-    obj5: {
-      question: "Can I search for a specific number in the table?",
-      answer: "Yes. Type a decimal number from 0 to 1000 in the Search Number field for an exact match, or type a partial digit sequence to find every number containing those digits. Pagination resets to page 1 with each new search."
-    }
-  }
-
   const schemas = {
     webApplication: {
       "@context": "https://schema.org",
@@ -498,25 +475,11 @@ For step-by-step conversion with worked examples, see the **base conversion theo
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props:{
       sectionsContent,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Base Conversion Table - Binary, Octal, Hex 0-1000 | Learn Math Class",
@@ -533,7 +496,7 @@ For step-by-step conversion with worked examples, see the **base conversion theo
   }
 }
 
-export default function BaseConversionTablePage({seoData, sectionsContent, faqQuestions, schemas, navigationGroup}) {
+export default function BaseConversionTablePage({seoData, sectionsContent, schemas, navigationGroup}) {
 
   const genericSections = Object.keys(sectionsContent).map((key, index) => ({
     id: `${index + 1}`,
@@ -576,12 +539,6 @@ export default function BaseConversionTablePage({seoData, sectionsContent, faqQu
     }}
   />
 
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -313,7 +313,13 @@ export default function DeterminantWrapper({
   sizeRange = [2, 3, 4, 5],
   title = 'Matrix Determinant',
   subtitle = 'Symbolic visualization of det(A): same scalar, several recipes.',
-  defaultSpeed = 1200
+  defaultSpeed = 1200,
+  // Line 1 anchor mesh (additive, default null so nothing changes when the
+  // page passes nothing). Keys: the strategy ids 'diagonal' | 'sarrus' |
+  // 'cofactor-row' | 'cofactor-col', appended to the static caption of every
+  // scene the strategy produces; plus 'sign-pattern', appended to the step
+  // text of the cofactor strategies' sign-pattern scene. Raw HTML.
+  explanations = null
 }) {
   const [activeTab, setActiveTab] = useState('scenario');
   const [size, setSize] = useState(defaultSize);
@@ -384,9 +390,20 @@ export default function DeterminantWrapper({
     const s = STRATEGIES[strategy];
     if (!s || !s.enabled || !s.build) return [];
     if (!s.sizes.includes(size)) return [];
-    return s.build(size, getOptionsFor(strategy));
+    const built = s.build(size, getOptionsFor(strategy));
+    if (!explanations) return built;
+    const strategyNote = explanations[strategy];
+    const signNote = explanations['sign-pattern'];
+    return built.map((sc) => {
+      let out = sc;
+      if (strategyNote) out = { ...out, formula: `${out.formula || ''}${strategyNote}` };
+      if (signNote && typeof sc.stepTitle === 'string' && sc.stepTitle.startsWith('Sign pattern')) {
+        out = { ...out, stepFormula: `${out.stepFormula || ''}${signNote}` };
+      }
+      return out;
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [strategy, size, strategyOptions]);
+  }, [strategy, size, strategyOptions, explanations]);
 
   const handleStrategyChange = (id) => {
     const s = STRATEGIES[id];

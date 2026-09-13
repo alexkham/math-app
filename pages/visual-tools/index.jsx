@@ -1,191 +1,173 @@
-
-
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import React from 'react'
-import '../pages.css'
-import CardsGroup from '@/app/components/cards/CardsGroup'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
+import React from 'react'
+import '@/pages/pages.css'
+import VisualToolsPage from '@/app/components/page-components/visual-tools-page/VisualToolsPage'
+import { buildAllToolsData } from '@/app/components/page-components/visual-tools-page/buildAllToolsData'
 
-const CustomBase = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-binary"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/></svg>
-)
 
-const CustomMatrix = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M16 3h3v18h-3" fill="none" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M8 21H5V3h3" fill="none" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-        <text x="8" y="9" fontFamily="monospace" fontSize="6" fill="black">a</text>
-        <text x="13" y="9" fontFamily="monospace" fontSize="6" fill="black">b</text>
-        <text x="8" y="16" fontFamily="monospace" fontSize="6" fill="black">c</text>
-        <text x="13" y="16" fontFamily="monospace" fontSize="6" fill="black">d</text>
-    </svg>
-)
+export async function getStaticProps() {
 
-const CustomDices = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-dices"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>
-)
+  const { items, total } = await buildAllToolsData()
 
-const CustomTrigo = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-square-pi"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M10 7v10"/><path d="M16 17a2 2 0 0 1-2-2V7"/></svg>
-)
+  const keyWords = [
+    'math visual tools',
+    'interactive math tools',
+    'math visualizers',
+    'math animations',
+    'visual math calculator',
+    'interactive math learning',
+    'math concept visualization',
+    'free math tools'
+  ]
 
-const CustomAlgebra = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-variable"><path d="M8 21s-4-3-4-9 4-9 4-9"/><path d="M16 3s4 3 4 9-4 9-4 9"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
-)
+  const intro = {
+    title: 'Every visual tool on the site',
+    description: `${total} interactive visualizers across ten branches of mathematics. Each one animates a single idea step by step, with editable inputs and a written explanation beside the picture.`,
+    tip: 'Pick a subject tab to see its tools grouped by topic.',
+  }
 
-const CustomProbability = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="12" height="12" x="2" y="10" rx="2" ry="2"/>
-        <circle cx="8" cy="16" r="1" fill="currentColor"/>
-        <path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/>
-        <circle cx="15" r="1" fill="currentColor"/>
-        <circle cx="18" cy="9" r="1" fill="currentColor"/>
-    </svg>
-)
+  const toolSchemaParts = items.map((tool) => ({
+    "@type": "WebPage",
+    "name": tool.title,
+    "url": `https://www.learnmathclass.com${tool.href}`,
+    "description": tool.shortDescription || tool.description || ''
+  }))
 
-const CustomProbabilityAlt = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
-        <circle cx="8" cy="9" r="1" fill="currentColor"/>
-        <circle cx="16" cy="15" r="1" fill="currentColor"/>
-    </svg>
-)
-
-export default function VisualToolsPage() {
-    const cardItems = [
+  const schemas = {
+    collectionPage: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Math Visual Tools",
+      "description": `${total} free interactive math visualizers covering arithmetic, algebra, functions, trigonometry, calculus, linear algebra, probability, combinatorics, set theory and complex numbers.`,
+      "url": "https://www.learnmathclass.com/visual-tools",
+      "inLanguage": "en-US",
+      "keywords": keyWords.join(", "),
+      "author": { "@type": "Organization", "name": "Learn Math Class" },
+      "publisher": { "@type": "Organization", "name": "Learn Math Class" },
+      "dateModified": new Date().toISOString(),
+      "hasPart": toolSchemaParts
+    },
+    itemList: {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Math Visual Tools",
+      "itemListElement": items.map((tool, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": tool.title,
+          "url": `https://www.learnmathclass.com${tool.href}`,
+          "applicationCategory": "EducationalApplication",
+          "description": tool.shortDescription || tool.description || ''
+        }
+      }))
+    },
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
         {
-            category: 'Visual Base Converter',
-            icon: CustomBase,
-            href: '/visual-tools/base-converter',
-            content: "Explore the concept of base and convert numbers from one base to another "
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.learnmathclass.com"
         },
         {
-            category: 'Algebra Visualizers',
-            icon: CustomAlgebra,
-            href: '/visual-tools/base-converter',
-            content: "Explore Different Concepts of Algebra Visually",
-            subcategories: [
-                { name: 'Square Root Visualizer', href: '/visual-tools/square-root' },
-                { name: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' },
-            ]
-        },
-        {
-            category: 'Linear Algebra Visualizers',
-            icon: CustomMatrix,
-            content: "Explore Different Concepts of Linear Algebra Visually",
-            subcategories: [
-                { name: 'Matrix Multiplication Visualizer', href: '/visual-tools/matrix-multiplication' },
-                { name: 'Gauss Elimination Visual Calculator', href: '/visual-tools/gauss-elimination' },
-                { name: 'Determinat Visual Calculator', href: '/visual-tools/determinant-calculator' },
-                // { name: 'Matrix Transposition Visualizer', href: '/linear-algebra/visual-tools/matrix-transpose' },
-                { name: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
-            ]
-        },
-        {
-            category: 'Combinatorics Visualizers',
-            icon: CustomDices,
-            content: "Visual tools transform abstract combinatorics into intuitive, hands-on discoveries.",
-            subcategories: [
-                { name: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' },
-            ]
-        },
-        {
-            category: 'Trigonometry Visualizers',
-            icon: CustomTrigo,
-            content: "See How Main Concepts of Trigonometry Visualized",
-            subcategories: [
-                { name: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
-                // { name: 'Angle Quadrants', href: '/trigonometry/visual-tools/functions-signs' },
-            ]
-        },
-        {
-            category: 'Probability Visualizers',
-            icon: CustomProbabilityAlt,
-            content: "Learn Probability in Interactive Way Visualized",
-            href:'/probability/visual-tools',
-           subcategories: [
-  { name: 'Probability Distributions Explorer', href: '/probability/visual-tools/distributions' },
-  { name: 'Coin Toss Visualizers', href: '/probability/visual-tools/coin-toss' },
-  { name: 'Dice Roll Visualizers', href: '/probability/visual-tools/dice-roll' },
-  { name: 'Venn Diagrams Visualizers', href: '/probability/visual-tools/venn-diagrams' },
-  { name: 'Conditional Probability Visualizers', href: '/probability/visual-tools/conditional-probability' },
-  { name: 'Expected Value Visualizers', href: '/probability/visual-tools/expected-value' },
-  { name: 'Variance Visualizer', href: '/probability/visual-tools/variance' },
-  { name: 'Probability Inequalities Visualizers', href: '/probability/visual-tools/inequalities' },
-  { name: 'Probability Function Visualizers', href: '/probability/visual-tools/probability-function' },
-  { name: 'CDF Visualizers', href: '/probability/visual-tools/cdf' }
-]
-        },
-    ]
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Visual Tools",
+          "item": "https://www.learnmathclass.com/visual-tools"
+        }
+      ]
+    }
+  }
 
-    const keyWords = [
-        'visual tools',
-        'math visualizer',
-        'math illustrations',
-        'interactive math tools',
-        'math concept visualization',
-        'math learning tools',
-        'visual math calculator',
-        'math animations'
-    ]
+  return {
+    props: {
+      toolsData: { items },
+      total,
+      intro,
+      schemas,
+      seoData: {
+        title: "Math Visual Tools | Interactive Visualizers | Learn Math Class",
+        description: `${total} free interactive math visualizers across ten branches of mathematics. Animated, step-by-step, and free to use.`,
+        keywords: keyWords.join(", "),
+        url: "/visual-tools",
+        name: "Math Visual Tools"
+      }
+    }
+  }
+}
 
-    return (
-        <>
-            <Head>
-                <title>Math Visual Tools & Interactive Visualizers | Learn Math Class</title>
-                <meta name="description" content="Interactive mathematical visualization tools covering algebra, linear algebra, combinatorics, trigonometry and more. Transform abstract concepts into visual understanding." />
-                <meta name="keywords" content={keyWords.join(", ")} />
-                <link rel="canonical" href="https://www.learnmathclass.com/visual-tools" />
-            </Head>
 
-            {/* <GenericNavbar/> */}
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            
-            <Breadcrumb/>
-            <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Visual Tools</h1>
-            <br/>
-            <OperaSidebar 
-                side='right'
-                topOffset='55px' 
-                sidebarWidth='45px'
-                panelWidth='300px'
-                iconColor='white'
-                panelBackgroundColor='#f2f2f2'
-            /> 
-            <br/>
-            <br/>
-            <div style={{transform:'scale(0.9)'}}>
-                <CardsGroup items={cardItems}/>
-            </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+export default function VisualToolsHub({ seoData, toolsData, intro, schemas }) {
+  return (
+    <>
+      <Head>
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        <meta name="keywords" content={seoData.keywords} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
 
-            {/* <ScrollUpButton/> */}
-        </>
-    )
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content={seoData.description} />
+        <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Learn Math Class" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoData.title} />
+        <meta name="twitter:description" content={seoData.description} />
+
+        <meta name="robots" content="index, follow" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.collectionPage) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.itemList) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
+        />
+      </Head>
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <OperaSidebar
+        side='right'
+        sidebarWidth='45px'
+        panelWidth='200px'
+        iconColor='white'
+        panelBackgroundColor='#f2f2f2'
+      />
+      <Breadcrumb />
+      <br />
+
+      <VisualToolsPage
+        tools={toolsData}
+        pageTitle="Math Visual Tools"
+        intro={intro}
+        icon="📐"
+        theme="deepBlue"
+        sidebar={true}
+        sidebarBrandName="Visual Tools"
+        sidebarBrandSub="All sections"
+      />
+
+      <br />
+      <br />
+      <br />
+    </>
+  )
 }

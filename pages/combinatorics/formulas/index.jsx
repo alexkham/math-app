@@ -58,7 +58,6 @@ import FormulasTOC from '@/app/components/examples/FormulaTOC'
 
 export default function CombinatoricsFormulasPage({
   combinatoricsFormulaList,
-  faqQuestions,
   schemas,
   seoData
 }) {
@@ -98,12 +97,6 @@ export default function CombinatoricsFormulasPage({
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faq)
-          }}
-        />
       </Head>
      {/* <GenericNavbar/> */}
       <br/>
@@ -141,29 +134,6 @@ export async function getStaticProps() {
     'combinatorics formulas list',
     'combinatorial identities'
   ]
-
-  const faqQuestions = {
-    obj1: {
-      question: "What is the formula for permutations?",
-      answer: "The number of permutations of r items chosen from n distinct items, where order matters, is P(n, r) = n! divided by (n minus r) factorial. When all n items are arranged, P(n, n) = n factorial. For permutations with repetition allowed, the count is n to the r."
-    },
-    obj2: {
-      question: "What is the formula for combinations?",
-      answer: "The number of combinations of r items chosen from n distinct items, where order does not matter, is C(n, r) = n! divided by r! times (n minus r)!. This is the binomial coefficient, also written as n choose r. For combinations with repetition allowed, the count is C(n plus r minus 1, r)."
-    },
-    obj3: {
-      question: "What is the difference between P(n, r) and C(n, r)?",
-      answer: "P(n, r) counts ordered arrangements of r items chosen from n; C(n, r) counts unordered selections of r items chosen from n. Their relationship is C(n, r) = P(n, r) divided by r factorial, because each combination corresponds to r! different permutations of the same r items."
-    },
-    obj4: {
-      question: "What is the stars and bars formula?",
-      answer: "Stars and bars counts the number of ways to distribute n identical items into k distinct bins. With empty bins allowed (weak compositions) the count is C(n plus k minus 1, k minus 1). With every bin nonempty (strong compositions) the count is C(n minus 1, k minus 1)."
-    },
-    obj5: {
-      question: "What is the binomial theorem formula?",
-      answer: "The binomial theorem states that (a plus b) to the n equals the sum from r = 0 to n of C(n, r) times a to the (n minus r) times b to the r. The coefficients C(n, r) are the binomial coefficients and form row n of Pascal's triangle."
-    }
-  }
 
   const schemas = {
     learningResource: {
@@ -230,25 +200,11 @@ export async function getStaticProps() {
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       combinatoricsFormulaList: combinatoricsFormulaList.default,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Combinatorics Formulas Cheat Sheet | Learn Math Class",

@@ -1579,6 +1579,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -2092,44 +2093,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "When does a real matrix have complex eigenvalues?",
-    answer: "A real matrix has complex eigenvalues when its characteristic polynomial has no real roots. For 2×2 matrices, this occurs when the discriminant tr(A)² - 4det(A) < 0. Geometrically, this means no real direction is mapped to a scalar multiple of itself—the transformation involves rotation.",
-    sectionId: "1"
+    question: "Does $\\bar{\\lambda}$ pair with $\\mathbf{v}$ or with $\\bar{\\mathbf{v}}$?",
+    answer: "With $\\bar{\\mathbf{v}}$. Conjugating the whole eigenvalue equation conjugates the vector as well, so the conjugate eigenvalue belongs to the conjugate eigenvector. The original $\\mathbf{v}$ does not satisfy the equation for $\\bar{\\lambda}$, and writing it that way produces a statement that is simply false rather than merely imprecise.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "Why do complex eigenvalues come in conjugate pairs?",
-    answer: "For real matrices, the characteristic polynomial has real coefficients. If λ = a + bi is a root, then so is its conjugate λ̄ = a - bi, because complex conjugation passes through polynomials with real coefficients. The eigenvectors are also conjugates of each other.",
-    sectionId: "2"
+    question: "Is the $\\pm$ in $a \\pm bi$ like the one in the quadratic formula?",
+    answer: "It looks identical but does a different job. In the quadratic formula the two signs offer two candidate roots and you pick whichever the problem needs. Here selecting one is not an option: both eigenvalues genuinely belong to the matrix at the same time, and the mark is recording a pair rather than a choice.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "What do complex eigenvalues a ± bi represent geometrically?",
-    answer: "Complex eigenvalues represent rotation combined with scaling. The modulus r = √(a² + b²) gives the scaling factor, and θ = arctan(b/a) gives the rotation angle. When r = 1, it's pure rotation; r > 1 spirals outward; r < 1 spirals inward.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How do you find complex eigenvectors?",
-    answer: "Solve (A - λI)v = 0 using complex arithmetic. The eigenvector will have complex entries. Split it into real and imaginary parts: v = u + iw. These real vectors u and w span the 2D subspace where rotation-scaling occurs.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What is the real canonical form for complex eigenvalues?",
-    answer: "A 2×2 real matrix with eigenvalues a ± bi is similar to [[a, -b], [b, a]] = r[[cos θ, -sin θ], [sin θ, cos θ]]. This is the simplest real form—a rotation by θ scaled by r. It's the real alternative to complex diagonalization.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How do complex eigenvalues appear in larger matrices?",
-    answer: "Each conjugate pair contributes a 2×2 rotation-scaling block to the real canonical form. Real eigenvalues contribute 1×1 blocks. A 4×4 matrix with eigenvalues 2±3i and -1±i has two 2×2 blocks in its canonical form.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What role do complex eigenvalues play in dynamical systems?",
-    answer: "Complex eigenvalues produce oscillatory behavior. The modulus determines stability: |λ| > 1 (discrete) or Re(λ) > 0 (continuous) means unstable spiraling outward; |λ| < 1 or Re(λ) < 0 means stable spiraling inward. The imaginary part determines oscillation frequency.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "How does the Fundamental Theorem of Algebra relate to eigenvalues?",
-    answer: "Over ℂ, every n×n matrix has exactly n eigenvalues (with multiplicity) because degree-n polynomials factor completely. Over ℝ, complex eigenvalues appear as irreducible quadratic factors. Working over ℂ simplifies theory—every matrix is triangularizable.",
-    sectionId: "8"
+    question: "Is the real canonical block just a diagonal matrix?",
+    answer: "No, and that is exactly why it exists. A real matrix with complex eigenvalues cannot be diagonalised over the reals at all, so the block is the closest real substitute. Written out, it is a scaled rotation, with the eigenvalue's modulus setting the scale and its argument the angle. Treating it as diagonal discards the rotation.",
+    sectionId: "notation"
   }
 }
 
@@ -2205,19 +2181,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
   return {
@@ -2372,6 +2335,22 @@ const schemas = {
           `The two stability criteria are worth separating carefully, because they look alike and are not. A discrete system $\\mathbf{x}_{k+1} = A\\mathbf{x}_k$ is stable when every $|\\lambda| < 1$ — the modulus decides, since each step multiplies by it. A continuous system $\\mathbf{x}' = A\\mathbf{x}$ is stable when every $\\operatorname{Re}(\\lambda) < 0$ — the real part decides, since the solution behaves as $e^{\\lambda t}$. Applying the wrong test gives a confidently wrong answer.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Complex Eigenvalues FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -2408,12 +2387,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

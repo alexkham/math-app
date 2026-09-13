@@ -322,29 +322,6 @@ When an error appears, read the message carefully. It usually points to the exac
 
   }
 
-  const faqQuestions = {
-    obj1: {
-      question: "What is a proposition syntax tree?",
-      answer: "A proposition syntax tree is a hierarchical diagram that breaks a logical expression into its component parts. The root node represents the main connective, branches lead to sub-expressions, and leaf nodes are individual propositional variables. It reveals parsing order and operator precedence visually."
-    },
-    obj2: {
-      question: "What logical operators does the proposition analyzer support?",
-      answer: "The analyzer supports six operators: AND (conjunction), OR (disjunction), NOT (negation), IMPLIES (material conditional), EQUIVALENT (biconditional), and XOR (exclusive or). Each can be inserted via the on-screen keyboard, which includes tooltips explaining every operator."
-    },
-    obj3: {
-      question: "How does the truth table generator work?",
-      answer: "The generator identifies all propositional variables in your expression, creates every possible true-false combination, and evaluates the expression for each row. It then classifies the overall result as a tautology, contradiction, or contingent proposition based on the pattern of results."
-    },
-    obj4: {
-      question: "What is a tautology in propositional logic?",
-      answer: "A tautology is a proposition that evaluates to true under every possible assignment of truth values to its variables. The analyzer detects tautologies automatically by checking all rows of the truth table. If every row produces a true result, the expression receives a tautology badge."
-    },
-    obj5: {
-      question: "How do I enter complex logical expressions?",
-      answer: "Use the on-screen keyboard to insert variables A through Z and logical operator symbols. Group sub-expressions with parentheses to control evaluation order. The analyzer parses input in real time and displays error messages if the syntax is invalid, identifying the position of the problem."
-    }
-  }
-
   const schemas = {
     webApplication: {
       "@context": "https://schema.org",
@@ -410,25 +387,11 @@ When an error appears, read the message carefully. It usually points to the exac
         }
       ]
     },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
   }
 
   return {
     props: {
       sectionsContent,
-      faqQuestions,
       schemas,
       seoData: {
         title: "Proposition Analyzer & Tree Builder | Learn Math Class",
@@ -444,7 +407,6 @@ When an error appears, read the message carefully. It usually points to the exac
 export default function PropositionTreeBuilderPage({
   seoData,
   sectionsContent,
-  faqQuestions,
   schemas
 }) {
 
@@ -486,10 +448,6 @@ export default function PropositionTreeBuilderPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-        />
       </Head>
       {/* <GenericNavbar/> */}
       <br/>

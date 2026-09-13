@@ -6788,7 +6788,57 @@
         "note": "States are scene PHASES, not scene indices: pose (0), diagonal reveal (1), sweep (frozen at k=1, the first step showing counted/current/pending together) and complete (last). Scene count depends on n; defaultN = 4 gives 7 scenes.",
         "sharedHelper": "app/components/linear-algebra copy/matrix/frozenMatrixSvg.js - SVG port of MatrixCore's HTML/CSS MatrixRenderer (same auto cell sizing 58/51/44, 3px gaps, DEFAULT_HIGHLIGHTS palette incl. dashed targetPending and 1.06 pairA scale, 8px square brackets, italic i,j subscripts). Reusable by the other 7 MatrixCore tools. Does NOT reproduce overlays (arrows/braces) or hover - freeze states whose meaning the cells alone can carry.",
         "defectFixed": "obj0 Key Terms was defined but rendered nowhere: its genericSections entry AND the KeyTermsCard were both commented out, so the content was invisible. Restored as the key-terms section. Same class as the triangle-explorer .slice(1) bug - worth checking on every remaining linear-algebra page."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Frobenius inner product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-types",
+          "fromSection": "related-concepts",
+          "surface": "Identity matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-matrix-transpose": {
       "slug": "matrix-transpose",
@@ -6875,7 +6925,57 @@
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and a node exercise of frozenMatrixSvg confirming 24 cells, the superscript T, the arrow glyph and the 3x4 -> 4x3 dimension pair.",
         "wiring": "C - TransposeWrapper had no explanations prop; added additively as `explanations = null`, keyed by strategy id and appended to every scene caption that strategy produces. STRATEGIES was additionally exported (unchanged) so the diagrams module calls the same builders.",
         "note": "States are the four STRATEGIES, not scene indices: cell-by-cell (frozen step 6 of 12), row-as-column (2 of 3), column-as-row (2 of 4), diagonal-reflection (scene 1 of 3). Defaults 3x4. Overlays - the curved cell-to-cell arrows and the dashed diagonal axis - are NOT reproduced by frozenMatrixSvg; each frozen scene was chosen so the cell colouring carries the meaning alone."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-addition",
+          "fromSection": "related-concepts",
+          "surface": "Matrix addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-types",
+          "fromSection": "related-concepts",
+          "surface": "Symmetric matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Inverse matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "power-set": {
       "slug": "power-set",
@@ -7064,7 +7164,49 @@
         "wiring": "C - AdditionWrapper had no explanations prop; added additively as `explanations = null`. buildMatrixScenes and buildVectorScenes were also exported (unchanged).",
         "note": "SHARED COMPONENT: AdditionWrapper serves both matrix-addition (mode='matrices') and vector-addition (mode='vectors'). The explanations hook is deliberately generic - keyed by scene phase intro/step/done plus one 'subtract' key that applies whenever the operation toggle is on subtraction - so the vector page can reuse the same shape with its own text. Each page passes its own object, so there is no collision.",
         "rendererWork": "frozenMatrixSvg gained React-element support: several wrappers build filled cells as JSX (a1,1 + b1,1 with real subscript spans) rather than strings. The element tree is now walked and re-emitted as tspans, honouring verticalAlign:'sub' and fontStyle:'normal'. Without this the cells rendered as [object Object]."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-hadamard-product",
+          "fromSection": "related-concepts",
+          "surface": "Hadamard product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-addition",
+          "fromSection": "related-concepts",
+          "surface": "Vector addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-vector-addition": {
       "slug": "vector-addition",
@@ -7151,7 +7293,41 @@
         "verification": "STATIC ONLY - eslint parse and line1-static-check.py.",
         "wiring": "C - reuses the explanations hook added to AdditionWrapper for matrix-addition; NO further component change was needed. Keys: intro / step / done / subtract.",
         "note": "SHARED COMPONENT with linear-algebra-matrix-addition (same AdditionWrapper, mode='vectors' vs 'matrices'). Each page passes its own explanations object, so there is no collision. Scenes come from buildVectorScenes(4, op): 1 intro + 4 component steps + 1 done; step frozen at component 3 of 4, subtraction frozen at the same position for direct comparison."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vector-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication of vectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Dot product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-cross-product",
+          "fromSection": "related-concepts",
+          "surface": "Cross product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-linear-combination",
+          "fromSection": "related-concepts",
+          "surface": "Linear combination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-matrix-scalar-multiplication": {
       "slug": "matrix-scalar-multiplication",
@@ -7238,7 +7414,49 @@
         "wiring": "C - ScalarMultiplicationWrapper had no explanations prop; added additively as `explanations = null`, keyed by scene phase (intro/step/done). buildMatrixScenes and buildVectorScenes exported (unchanged). Written generically so vector-scalar-multiplication can reuse it.",
         "note": "This page numbers its content objects obj0-obj9 with obj10-obj15 as spare slots, unlike the other linear-algebra pages which run to obj10 with obj11-obj15 spare - the state sections therefore live in obj10-obj12 here. Defaults 2x3, so 8 scenes; step frozen at cell 4 of 6.",
         "defectFixed": "obj0 Key Terms was defined but rendered nowhere: its genericSections entry AND the KeyTermsCard were both commented out. Restored as the key-terms section. Third occurrence of this defect (after matrix-trace and trigonometry's triangle-explorer); vector-scalar-multiplication has it too and is not yet fixed."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-addition",
+          "fromSection": "related-concepts",
+          "surface": "Matrix addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-hadamard-product",
+          "fromSection": "related-concepts",
+          "surface": "Hadamard product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-linear-combination",
+          "fromSection": "related-concepts",
+          "surface": "Linear combination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-magnitude",
+          "fromSection": "related-concepts",
+          "surface": "Norm",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-vector-scalar-multiplication": {
       "slug": "vector-scalar-multiplication",
@@ -7325,7 +7543,49 @@
         "wiring": "C - reuses the explanations hook added to ScalarMultiplicationWrapper for the matrix page; NO further component change needed. Keys: intro / step / done.",
         "note": "SHARED COMPONENT with linear-algebra-matrix-scalar-multiplication (mode='vectors' vs 'matrices'). Same obj0-obj9 numbering as its twin, so state sections live in obj10-obj12. Scenes from buildVectorScenes(4): 1 intro + 4 steps + 1 done; step frozen at component 3 of 4.",
         "defectFixed": "obj0 Key Terms restored - section entry and KeyTermsCard were both commented out. Fourth occurrence of this defect."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vector-addition",
+          "fromSection": "related-concepts",
+          "surface": "Vector addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Dot product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-hadamard-product",
+          "fromSection": "related-concepts",
+          "surface": "Hadamard product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-linear-combination",
+          "fromSection": "related-concepts",
+          "surface": "Linear combination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-magnitude",
+          "fromSection": "related-concepts",
+          "surface": "Magnitude (norm)",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-matrix-linear-combination": {
       "slug": "matrix-linear-combination",
@@ -7412,7 +7672,41 @@
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and greps confirming the prop reached both getStaticProps and the component tag.",
         "wiring": "C - LinearCombinationWrapper had no explanations prop; added additively as `explanations = null`, keyed by animation PHASE (intro / scaleA / scaleB / add / done). The phase is derived from the scene index: the run is 1 intro + 3 sweeps of `cells` + 1 done, so cells = (len - 2) / 3 works for both scenarios. Both builders exported unchanged.",
         "note": "Defaults 2x3 -> 6 cells -> 20 scenes. Each phase frozen at its 4th step. The 'done' explanation key is wired but has no section of its own; it points at the phase-3 section, since the completed state is that phase finishing."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-addition",
+          "fromSection": "related-concepts",
+          "surface": "Matrix addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-membership",
+          "fromSection": "related-concepts",
+          "surface": "Span",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-vector-linear-combination": {
       "slug": "vector-linear-combination",
@@ -7499,7 +7793,41 @@
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and greps confirming the prop reached both getStaticProps and the component tag.",
         "wiring": "C - reuses the phase-keyed hook added to LinearCombinationWrapper for the matrix page; NO further component change needed.",
         "note": "SHARED COMPONENT with linear-algebra-matrix-linear-combination. Scenes from buildVectorScenes(4): 1 intro + 3 sweeps of 4 + 1 done = 14; each phase frozen at its 3rd step. CAUTION: this page carries a FULL COMMENTED COPY of the matrix page in its first ~600 lines, so `export default function LinearCombinationVisualizer(` appears TWICE - anchor edits on a newline immediately followed by `export`, or they hit the dead copy."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vector-addition",
+          "fromSection": "related-concepts",
+          "surface": "Vector addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-membership",
+          "fromSection": "related-concepts",
+          "surface": "Span",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-vectors-inner-product": {
       "slug": "vectors-inner-product",
@@ -7586,7 +7914,41 @@
         "wiring": "C - InnerProductWrapper had no explanations prop; added additively as `explanations = null`, keyed by scene phase (intro/step/done) and written scenario-agnostically so the Frobenius/matrices side would work too. Both builders exported unchanged.",
         "note": "The page renders mode='vectors' only, though the component also supports a matrices (Frobenius) scenario - obj3 documents it but there is no separate page for it. Scenes from buildVectorScenes(4): 6 total; step frozen at pair 3 of 4. The running-sum line lives in the scene CAPTION rather than the layout, so it is absent from the frozen stills; the page prose carries that information instead.",
         "defectFixed": "obj0 Key Terms was commented out of the genericSections array - restored. Fifth occurrence in this project."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vector-outer-product",
+          "fromSection": "related-concepts",
+          "surface": "Outer product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-magnitude",
+          "fromSection": "related-concepts",
+          "surface": "Norm",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-projection",
+          "fromSection": "related-concepts",
+          "surface": "Projection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-hadamard-product": {
       "slug": "hadamard-product",
@@ -7672,7 +8034,49 @@
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and greps confirming the prop reached both getStaticProps and the component tag.",
         "wiring": "C - HadamardWrapper had no explanations prop; added additively as `explanations = null`, keyed by scene phase and written scenario-agnostically (the component also supports a vectors scenario with no page of its own). Both builders exported unchanged.",
         "note": "Defaults 2x3 -> 8 scenes; step frozen at cell 4 of 6. Last of the eight MatrixCore-based linear-algebra tools - frozenMatrixSvg covered all of them without further extension after the JSX-display support added during matrix-addition."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-addition",
+          "fromSection": "related-concepts",
+          "surface": "Matrix addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-outer-product",
+          "fromSection": "related-concepts",
+          "surface": "Outer product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Inner product (Frobenius)",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "venn-truth-table": {
       "slug": "venn-truth-table",
@@ -7898,7 +8302,57 @@
         "note": "FIRST r2-visualizers tool. These four components do NOT use 2DCore - each is self-contained with its own SVGRender string builders, scoped CSS and geometry. That means NO renderer port is needed: a frozen still is the tool's own SVG output, wrapped with class=lt5-root, the stylesheet inlined in a <style>, and the two arrow <marker> defs reproduced. All states frozen at t = 1 with the component's DEFAULT_LAYERS.",
         "stateChoice": "The tool has 12 scenarios in 3 rank groups (full x8, rank1 x3, zero x1). Sections follow the groups - which is how the page's own 'Preset Scenarios - Three Rank Categories' section already frames them - plus an identity section for the t=0 baseline. All 12 scenarios still get a panel note; each points at its group's section.",
         "lesson": "Two traps on these r2 components. (1) They already have a trailing `export { ... }` list - adding `export const` prefixes causes 'Duplicate export'. Check that list first. (2) eslint with a bare config does NOT resolve imports, so importing a name the component does not export passes the parse check and fails silently at runtime - here SVG_STYLE_CSS would have injected the literal text 'undefined' into the frozen <style>. Verify every imported name against the component's export set explicitly."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix Multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and Eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Change of Basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular Value Decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Rotation Matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "set-builder": {
       "slug": "set-builder",
@@ -8130,7 +8584,57 @@
         "wiring": "A for the explanations - EigenVectors already accepts explanationOverride={byPreset:{...}}, and ExplanationCard REPLACES rather than merges, so each override spreads the tool's own SCENARIOS entry and appends the anchor to `body`. The ONLY component change is one name (COMPONENT_CSS) appended to the export list that already existed at the bottom of the file.",
         "note": "States are the tool's four eigen categories (distinct x4, repeated x2, defective x2, complex x3), matching the page's own 'Preset Scenarios - Four Categories' framing. All 11 scenarios get a panel note pointing at their category's section. Frozen with the probe vector at the component's initial v = [2, 1], using the tool's own Math2D.alignment so the alignment state matches the live canvas.",
         "cssHandling": "Unlike LinearTransformations (small SVG-only stylesheet), this component has one 16 kB COMPONENT_CSS for the whole UI. The diagrams module's svgCssFor() keeps only rules whose selectors mention a class the generated markup actually contains, plus the .ev-root block that declares the CSS custom properties those rules use. Class list is read off the markup, so it survives renderer changes."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-diagonalization",
+          "fromSection": "related-concepts",
+          "surface": "Diagonalization",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-spectral-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Spectral Theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular Value Decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Change of Basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-trace",
+          "fromSection": "related-concepts",
+          "surface": "Matrix Trace and Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "linear-algebra-kernel-image-2d": {
       "slug": "kernel-image-2d",
@@ -8216,7 +8720,49 @@
         "verification": "STATIC ONLY - eslint parse; computed anchors resolved separately and checked against the section ids (0 orphans); every imported name verified against the component's export set.",
         "wiring": "A for the explanations - explanationOverride={byPreset:{...}} already existed and REPLACES rather than merges, so each override spreads the tool's own SCENARIOS entry and appends the anchor to `body`. Only component change: COMPONENT_CSS appended to the pre-existing export list.",
         "note": "DUAL CANVAS. This tool draws a domain canvas (kernel + v) and a codomain canvas (image + Av) side by side, so each frozen state composes BOTH into one SVG with a divider and per-side captions - a still of one canvas alone would miss the point. States are the three rank categories (full x4, rank1 x5, zero x1), matching the page's own framing. Frozen at the canvases' default v = [1.5, 1]; the trail and swarm layers are off in the stills since they depend on drag history."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-four-fundamental-subspaces",
+          "fromSection": "related-concepts",
+          "surface": "Column Space",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank of a Matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear Independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Invertible Matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "inclusion-exclusion": {
       "slug": "inclusion-exclusion",
@@ -8423,7 +8969,57 @@
         "wiring": "A for the explanations - 2DCore's ExplanationCard already takes an override with a byPreset map and REPLACES, so each override spreads the tool's own SCENARIOS entry and appends the anchor to `body`. Only component change: `export` added to the LIVE TOOL_CSS declaration.",
         "note": "The ONLY r2 tool that actually builds on 2DCore - the other three are self-contained. Its live copy imports Math2D/SVGRender/projection/DEFAULT_GEOM from there and already exports SCENARIOS, CB_GEOM and DEFAULT_LAYERS. Its two local builders (decompositionSVG, arrowSVG) are NOT exported and are duplicated across five commented-out earlier copies, so they were ported verbatim into the diagrams module rather than surgically exported. States are the four basis categories (natural x4, nonorth x3, special x2, degenerate x1); coordinates quoted in the prose come from Math2D.coordsInBasis at the canvas default v = [2.5, 1.5].",
         "hazard": "ChangeBasis.jsx is 3914 lines and contains FIVE commented-out earlier copies of the whole component. Every declaration name appears six times. All edits must be anchored on live code and asserted unique - the TOOL_CSS export was applied by locating the single line starting with `const TOOL_CSS = ` at column 0."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear Independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix Inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and Eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal Matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-transformation-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     },
     "probability-variance": {
       "slug": "variance",
@@ -10124,6 +10720,4394 @@
         "wiring": "Pre-existing (earlier trigonometry pass). No changes made during the backfill.",
         "note": "The 24 combos are the 6 trig functions across the 4 quadrants, plus one overview per quadrant. Unit keys are built in loops (stateUnits['q'+q] and stateUnits['q'+q+'-'+f]) rather than written out, so a grep for explicit keys finds none - all 28 referenced keys are produced by those two loops."
       }
+    },
+    "linear-algebra-matrix-multiplication": {
+      "slug": "matrix-multiplication",
+      "name": "Matrix Multiplication Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/visual-tools/matrix-multiplication/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/MultiplicationWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "matrix multiplication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "dot product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inner dimensions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linear combination",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "outer product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "non-commutative",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "transpose",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "identity matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Hadamard product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "system of linear equations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Markov chain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/multiplicationDiagrams.js",
+      "diagramStates": [
+        "row-column",
+        "column-by-column",
+        "row-by-row",
+        "sum-of-outer-products",
+        "general",
+        "matrix-vector",
+        "vector-matrix",
+        "undefined"
+      ],
+      "line1": {
+        "done": "2026-09-11",
+        "states": 8,
+        "sections": 20,
+        "units": 8,
+        "anchors": 11,
+        "orphans": 0,
+        "verification": "STATIC ONLY at time of writing - anchors checked by inspection against the live genericSections (the permission classifier blocked shell access for most of the session); rendered check against the owner's dev server on port 3000 pending.",
+        "wiring": "C - MultiplicationWrapper had no explanations prop; added additively as `explanations = null`. Keys are the four strategy ids, the three scenario ids and 'undefined'. Strategy and scenario notes are appended to the INTRO scene only (scene 0), which the step log renders as a permanent unnumbered lead block via a new opt-in ScenePlayer prop `introAsHeader` (MatrixCore.jsx, default false, no effect on other tools); the undefined note renders inside UndefinedBanner through a new `note` prop. The page also passes compatibilityToolHref='#the-compatibility-rule' so the banner's link resolves on-page instead of to a route that does not exist.",
+        "note": "ROUTE IS TOP-LEVEL: /visual-tools/matrix-multiplication, not /linear-algebra/visual-tools/. The page was rewritten the same day from a legacy numeric tool (app/components/matrix-multiplication/MatrixMultiplication.jsx, untouched) onto MultiplicationWrapper; the original page source is preserved verbatim in a block comment at the head of the file. States are the four STRATEGIES plus the three SCENARIOS plus the undefined B x A case. Defaults 2x3 · 3x2. Frozen scenes: row-column 8 of 22, column-by-column 8 of 12, row-by-row 8 of 12, sum-of-outer-products 5 of 11, general = intro scene, matrix-vector 3 of 12 (B 3x1), vector-matrix 3 of 12 (A 1x3). The undefined still is hand-assembled in the scene vocabulary (B 3x3 x A 2x3, every column of B and every row of A highlighted) since the tool shows a banner rather than a scene there. Arrow overlays are not reproduced by frozenMatrixSvg.",
+        "sceneChanges": "Earlier the same day, before Line 1: hydration fix (scoped CSS moved to dangerouslySetInnerHTML), Scenario tab flattened to one row, showCaption false, and the intro-as-header log mode; rowColumn.js intro line pluralises 'cell/cells'."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-addition",
+          "fromSection": "related-concepts",
+          "surface": "Matrix addition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-types",
+          "fromSection": "related-concepts",
+          "surface": "Identity matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Inverse matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-hadamard-product",
+          "fromSection": "related-concepts",
+          "surface": "Hadamard product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-matrix-determinant": {
+      "slug": "matrix-determinant",
+      "name": "Determinant Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-determinant/index.jsx",
+      "component": "app/components/linear-algebra copy/determinants/DeterminantWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "minor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cofactor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cofactor expansion",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Sarrus rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "singular matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "main diagonal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "adjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "eigenvalue",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Cramer's rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Jacobian",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "permutation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row reduction",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/determinants/determinantDiagrams.js",
+      "diagramStates": [
+        "diagonal",
+        "sarrus",
+        "cofactor-row",
+        "cofactor-col",
+        "sign-pattern"
+      ],
+      "line1": {
+        "done": "2026-09-13",
+        "states": 5,
+        "sections": 18,
+        "units": 5,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "STATIC ONLY at time of writing - anchors checked by inspection against the live genericSections (the permission classifier blocked shell access for most of the session); rendered check against the owner's dev server pending.",
+        "merge": "2026-09-13: two determinant pages existed - this tool's page at the top-level route /visual-tools/determinant-calculator (Line 1 done 2026-09-11 on determinants/DeterminantWrapper) and a section-local page at /linear-algebra/visual-tools/matrix-determinant (registry key linear-algebra-determinant-expansion, built 2026-09-12 on matrix/DeterminantWrapper: 2x2 and 3x3, cofactor along row 1, Sarrus). Owner decision: keep the section URL, absorb the other. The section page now runs THIS engine and diagrams module with the merged content (18 sections, the earlier page's theory links to /linear-algebra/determinants and /linear-algebra/determinants/cofactors and the LU tool carried over). The top-level route is permanently redirected in next.config.js; the earlier page file is snapshotted at line1-backups/linear-algebra-matrix-determinant/index.pre-merge-2026-09-13.jsx; its engine matrix/DeterminantWrapper.jsx and matrix/determinantDiagrams.js are now unused but untouched. The one feature not carried over: the earlier engine wrote each cofactor term with its minor expanded; this engine leaves the minor as det(M) so it scales to 5x5. The linear-algebra-determinant-expansion registry entry was removed.",
+        "wiring": "C - DeterminantWrapper had no explanations prop; added additively as `explanations = null`. Keys are the four strategy ids plus 'sign-pattern'. Strategy notes are appended to the static caption (`formula`) of every scene the strategy produces - the caption is the general formula for the strategy and does not change during a run, so the note reads once, not per step; the sign-pattern note is appended to the `stepFormula` of the cofactor strategies' sign-pattern scene (matched by stepTitle prefix). The wrapper uses MatrixCoreEnhanced (stepTitle/stepFormula scenes, group-bracket overlay), not MatrixCore.",
+        "note": "ROUTE IS TOP-LEVEL: /visual-tools/determinant-calculator, not /linear-algebra/visual-tools/. The page was rewritten the same day from a legacy numeric calculator (app/components/matrix-multiplication/DeterminantCalculator.jsx, untouched) onto DeterminantWrapper, which existed but was imported only by pages/test8; the original page source is preserved in a block comment at the head of the file (two JSX comment closers de-fanged as '* /'). States are the four STRATEGIES plus the standalone sign-pattern scene that both cofactor strategies open with. Frozen scenes: diagonal 1 of 6 (2x2, main diagonal), sarrus 3 of 9 (3x3, positive diagonal 2 on the 3x5 form), cofactor-row 7 of 12 (3x3 along row 1, term 2, pivot a_{1,2} with minor M_{1,2}), cofactor-col 7 of 12 (along column 1, term 2, pivot a_{2,1} with M_{2,1}), sign-pattern 1 of 15 (4x4 checkerboard). Overlays not reproduced: dashed diagonal axis, diagonal arrows, the det(A) group bracket.",
+        "rendererWork": "frozenMatrixSvg extended additively: (1) a matrix label that is a React element (the minor's 'M' with a subscript span) is walked into tspans instead of printing [object Object]; (2) cellOverrides styles now carry through - color (sign pattern +/- in green/red), opacity (Sarrus duplicate columns dimmed to 0.55) and textDecoration line-through (cofactor struck row/column). Existing modules render byte-identically since none of them set those three keys."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-cross-product",
+          "fromSection": "related-concepts",
+          "surface": "Cross product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-lu-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "LU decomposition and row reduction",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-transformation-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-trace",
+          "fromSection": "related-concepts",
+          "surface": "Trace",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-cramers-rule",
+          "fromSection": "related-concepts",
+          "surface": "Cramer's rule",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Span and independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-vector-cross-product": {
+      "slug": "vector-cross-product",
+      "name": "Cross Product of Vectors Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/vector-cross-product/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/CrossProductWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "cross product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "minor and cofactor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "right-hand rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "anticommutativity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "scalar triple product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "normal vector",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonality",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/crossProductDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "components",
+        "determinant",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 4,
+        "sections": 15,
+        "units": 4,
+        "anchors": 5,
+        "orphans": 0,
+        "verification": "STATIC ONLY - written during a permission-classifier outage; never parsed, linted or rendered. Anchors and unit keys checked by inspection.",
+        "wiring": "NEW TOOL - wrapper written with the explanations prop from the start (keys intro/components/determinant/done, appended to the matching scene caption). buildScenes exported for the diagrams module.",
+        "note": "Two methods: componentwise formula and the 3x3 determinant mnemonic. Stills use frozenMatrixSvgFixed (subscript-baseline fix over frozenMatrixSvg)."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Dot product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-magnitude",
+          "fromSection": "related-concepts",
+          "surface": "Magnitude",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Span and independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-vector-magnitude": {
+      "slug": "vector-magnitude",
+      "name": "Vector Magnitude and Unit Vector Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/vector-magnitude/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/MagnitudeWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "Euclidean norm",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit vector",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "normalization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "zero vector",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "distance",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "angle between vectors",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthonormal basis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Pythagorean theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inner product space",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/magnitudeDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "square",
+        "root",
+        "normalize",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 15,
+        "units": 4,
+        "anchors": 6,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - explanations prop keyed intro/square/root/normalize/done; scenarios 'magnitude' and 'unit'.",
+        "note": "Phase keys derived by phaseKeyFor(i, n, scenario) since scene count depends on the vector length."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Dot product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-projection",
+          "fromSection": "related-concepts",
+          "surface": "Vector projection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram-Schmidt",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-vector-projection": {
+      "slug": "vector-projection",
+      "name": "Vector Projection Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/vector-projection/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/ProjectionWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "scalar projection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "projection coefficient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonal decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "foot of the perpendicular",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonality",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Gram-Schmidt process",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "projection matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/projectionDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "pair",
+        "coeff",
+        "scale",
+        "remainder"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 9,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - explanations keyed intro/pair/dot/normsq/coeff/scale/remainder/done; scenarios 'projection' and 'decomposition'.",
+        "note": "NAME COLLISION: this module is matrix/projectionDiagrams.js; the 2D projection tool has r2-visualizers/projection/projectionDiagrams.js. Different directories, same basename."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Dot product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-magnitude",
+          "fromSection": "related-concepts",
+          "surface": "Magnitude and unit vector",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-scalar-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Scalar multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-addition",
+          "fromSection": "related-concepts",
+          "surface": "Vector subtraction",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram-Schmidt process",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-projection-2d",
+          "fromSection": "related-concepts",
+          "surface": "Projection matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-vector-outer-product": {
+      "slug": "vector-outer-product",
+      "name": "Outer Product of Vectors Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/vector-outer-product/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/OuterProductWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "outer product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank-1 matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inner product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "dyadic product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "tensor product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix multiplication",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "transpose",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "singular value decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trace",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/outerProductDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "cell",
+        "row",
+        "column",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 6,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - buildScenes(m, n, method) with methods cell/row/column; explanations keyed by phase.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Inner product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-projection",
+          "fromSection": "related-concepts",
+          "surface": "Projection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular value decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-trace",
+          "fromSection": "related-concepts",
+          "surface": "Trace",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-matrix-inverse": {
+      "slug": "matrix-inverse",
+      "name": "Matrix Inverse Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-inverse/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/InverseWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "matrix inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "minor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cofactor",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cofactor matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "adjugate",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "singular matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row reduction",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Gaussian elimination",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Cramer's rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "identity matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/inverseDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "cofactor",
+        "transpose",
+        "det",
+        "divide",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 6,
+        "sections": 16,
+        "units": 5,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - adjugate method for n = 2, 3; explanations keyed intro/cofactor/transpose/det/divide/done.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gauss-elimination",
+          "fromSection": "related-concepts",
+          "surface": "Gaussian elimination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-cramers-rule",
+          "fromSection": "related-concepts",
+          "surface": "Cramer's rule",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-types",
+          "fromSection": "related-concepts",
+          "surface": "Identity matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-matrix-rank": {
+      "slug": "matrix-rank",
+      "name": "Matrix Rank Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-rank/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/RankWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pivot",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pivot column",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "free column",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row echelon form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row operations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "nullity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank-nullity theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "full rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linear independence",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/rankDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "pivot",
+        "eliminate",
+        "swap",
+        "skip",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 6,
+        "sections": 16,
+        "units": 5,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - numeric elimination engine; scenes carry a `phase` field (intro/pivot/swap/eliminate/skip/done) and explanations key on it.",
+        "note": "Inputs are text with a drafts state so '-' and empty do not snap to 0. The same engine pattern is reused by lu-decomposition and linear-system-solutions."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-gauss-elimination",
+          "fromSection": "related-concepts",
+          "surface": "Gaussian elimination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-four-fundamental-subspaces",
+          "fromSection": "related-concepts",
+          "surface": "Column space and row space",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-outer-product",
+          "fromSection": "related-concepts",
+          "surface": "Outer product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-gram-schmidt": {
+      "slug": "gram-schmidt",
+      "name": "Gram-Schmidt Process Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/gram-schmidt/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/GramSchmidtWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "Gram-Schmidt process",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthonormal set",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "projection coefficient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonalization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "normalization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "span",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "QR decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "dot product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linear independence",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/gramSchmidtDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "keep",
+        "subtract",
+        "normalize",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - k = 2 or 3 vectors in R^2..R^4; phases intro/keep/start/subtract/normalize/done.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vector-projection",
+          "fromSection": "related-concepts",
+          "surface": "Vector projection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vectors-inner-product",
+          "fromSection": "related-concepts",
+          "surface": "Dot product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-magnitude",
+          "fromSection": "related-concepts",
+          "surface": "Magnitude and unit vector",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal and orthonormal sets",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-qr-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "QR decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Change of basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-qr-decomposition": {
+      "slug": "qr-decomposition",
+      "name": "QR Decomposition Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/qr-decomposition/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/QRWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "QR decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthonormal columns",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "upper triangular",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Gram-Schmidt process",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonal matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "LU decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Householder reflections",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "QR algorithm",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/qrDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "coef",
+        "subtract",
+        "norm",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - layout A = Q · R throughout; phases intro/start/coef/subtract/norm/done.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram-Schmidt process",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-projection",
+          "fromSection": "related-concepts",
+          "surface": "Vector projection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-lu-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "LU decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-lu-decomposition": {
+      "slug": "lu-decomposition",
+      "name": "LU Decomposition Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/lu-decomposition/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/LUWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "LU decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unit lower triangular",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "upper triangular",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "multiplier",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pivot",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "partial pivoting",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "forward substitution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "back substitution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "elementary matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "permutation matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/luDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "pivot",
+        "eliminate",
+        "swap",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 6,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/pivot/swap/eliminate/done; PA = LU when a swap occurs.",
+        "note": "The 'pivoting' preset was changed from [[0,1,2],[1,2,3],[2,5,8]] (singular) to [[0,1,2],[1,2,3],[2,5,9]] during authoring."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-gauss-elimination",
+          "fromSection": "related-concepts",
+          "surface": "Gaussian elimination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Matrix rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-qr-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "QR decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-cholesky-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Cholesky decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-types",
+          "fromSection": "related-concepts",
+          "surface": "Permutation matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-matrix-power": {
+      "slug": "matrix-power",
+      "name": "Matrix Power Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-power/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/PowerWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "matrix power",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponent rules",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "associativity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "diagonalization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "nilpotent and idempotent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix composition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "eigenvalues",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "adjacency matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix exponential",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/powerDiagrams.js",
+      "diagramStates": [
+        "chain",
+        "square",
+        "cube",
+        "final"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 4,
+        "sections": 15,
+        "units": 4,
+        "anchors": 0,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NONE - PowerWrapper pre-existed (used with title=\"\") and was NOT modified; it has no explanations prop, so this page has no per-state scene notes. Only the page and the diagrams module are new.",
+        "note": "PowerWrapper's scene builder is private, so the four stills (chain, square, cube, final) are composed by hand in the scene vocabulary inside powerDiagrams.js. Candidate for a Line 1 wiring pass if an additive explanations prop is ever added to PowerWrapper."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-composition-2d",
+          "fromSection": "related-concepts",
+          "surface": "Matrix composition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-diagonalization",
+          "fromSection": "related-concepts",
+          "surface": "Diagonalization",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-cramers-rule": {
+      "slug": "cramers-rule",
+      "name": "Cramer's Rule Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/cramers-rule/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/CramerWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "Cramer's rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "coefficient matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "replaced matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "unique solution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "singular system",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "homogeneous system",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Gaussian elimination",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/cramerDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "det",
+        "replace",
+        "singular",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 6,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/det/singular/replace/done; exports det().",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gauss-elimination",
+          "fromSection": "related-concepts",
+          "surface": "Gaussian elimination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-system-solutions",
+          "fromSection": "related-concepts",
+          "surface": "Homogeneous systems",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-linear-system-solutions": {
+      "slug": "linear-system-solutions",
+      "name": "Linear System Solutions Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/linear-system-solutions/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/LinearSystemWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "row operations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row echelon form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reduced row echelon form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pivot column",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "free variable",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "consistent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "particular solution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "null space",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "column space",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/linearSystemDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "eliminate",
+        "backelim",
+        "unique",
+        "none",
+        "infinite"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 6,
+        "sections": 17,
+        "units": 6,
+        "anchors": 11,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - RREF of [A|b]; phases intro/pivot/swap/eliminate/skip/inconsistent/normalize/backelim/unique/infinite.",
+        "note": "Page sections run obj0..obj16 (one more than the usual template)."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-gauss-elimination",
+          "fromSection": "related-concepts",
+          "surface": "Gaussian elimination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Matrix rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-cramers-rule",
+          "fromSection": "related-concepts",
+          "surface": "Cramer's rule",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-lu-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "LU decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-four-fundamental-subspaces",
+          "fromSection": "related-concepts",
+          "surface": "Null space",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-cholesky-decomposition": {
+      "slug": "cholesky-decomposition",
+      "name": "Cholesky Decomposition Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/cholesky-decomposition/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/CholeskyWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "Cholesky decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "positive definite",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "radicand",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix square root",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "LDL^T form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "QR decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/choleskyDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "diag",
+        "offdiag",
+        "notpd",
+        "done"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/notsym/diag/notpd/offdiag/done; mirrored edits keep the input symmetric; randomSPD for shuffle.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-lu-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "LU decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-types",
+          "fromSection": "related-concepts",
+          "surface": "Symmetric matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-qr-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "QR decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-span-independence-2d": {
+      "slug": "span-independence-2d",
+      "name": "Span and Linear Independence 2D Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/span-independence-2d/index.jsx",
+      "component": "app/components/linear-algebra copy/r2-visualizers/span-independence/SpanIndependence.jsx",
+      "relatedTerms": [
+        {
+          "term": "span",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linearly independent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linearly dependent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "basis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "change of basis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "subspace",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "dimension",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams.js",
+      "diagramStates": [
+        "independent",
+        "nearDependent",
+        "dependent",
+        "edge"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 4,
+        "sections": 15,
+        "units": 4,
+        "anchors": 5,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "A - the pre-existing component's explanationOverride={byPreset} REPLACES entries, so each override spreads the tool's SCENARIOS entry and appends the anchor to `body`. Component NOT modified.",
+        "note": "PAGE FOR AN ORPHANED COMPONENT: SpanIndependence.jsx existed without a page. COMPONENT_CSS is not exported, so the diagrams module carries a resolved copy of the SVG rules."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-linear-combination",
+          "fromSection": "related-concepts",
+          "surface": "Linear combination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Change of basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-cross-product",
+          "fromSection": "related-concepts",
+          "surface": "Cross product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-projection-2d": {
+      "slug": "projection-2d",
+      "name": "Projection 2D Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/projection-2d/index.jsx",
+      "component": "app/components/linear-algebra copy/r2-visualizers/projection/Projection.jsx",
+      "relatedTerms": [
+        {
+          "term": "projection matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "image",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "kernel",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "idempotent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "residual",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "outer product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "least squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/r2-visualizers/projection/projectionDiagrams.js",
+      "diagramStates": [
+        "axes",
+        "diagonals",
+        "custom",
+        "kernel"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 4,
+        "sections": 15,
+        "units": 4,
+        "anchors": 4,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "A - explanationOverride={byPreset}, as for span-independence-2d. Component NOT modified.",
+        "note": "PAGE FOR AN ORPHANED COMPONENT. Basename collides with matrix/projectionDiagrams.js (vector-projection); different directories."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vector-projection",
+          "fromSection": "related-concepts",
+          "surface": "Vector projection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-outer-product",
+          "fromSection": "related-concepts",
+          "surface": "Outer product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-transformation-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-kernel-image-2d",
+          "fromSection": "related-concepts",
+          "surface": "Image and kernel",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-reflection-2d",
+          "fromSection": "related-concepts",
+          "surface": "Reflection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigen-vectors-2d",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram-Schmidt",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-reflection-2d": {
+      "slug": "reflection-2d",
+      "name": "Reflection 2D Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/reflection-2d/index.jsx",
+      "component": "app/components/linear-algebra copy/r2-visualizers/reflection/Reflection.jsx",
+      "relatedTerms": [
+        {
+          "term": "reflection matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "mirror",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "involution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orientation reversing",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "isometry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "eigenvectors",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonal matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Householder reflections",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams.js",
+      "diagramStates": [
+        "axes",
+        "diagonals",
+        "custom",
+        "halfway"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 4,
+        "sections": 15,
+        "units": 4,
+        "anchors": 4,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "A - explanationOverride={byPreset}. Component NOT modified.",
+        "note": "PAGE FOR AN ORPHANED COMPONENT. The 'halfway' still is the I -> R morph frozen at t = 0.5, where the map equals the projection P."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-projection-2d",
+          "fromSection": "related-concepts",
+          "surface": "Projection onto a line",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-transformation-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigen-vectors-2d",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Change of basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-matrix-composition-2d": {
+      "slug": "matrix-composition-2d",
+      "name": "Matrix Composition 2D Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-composition-2d/index.jsx",
+      "component": "app/components/linear-algebra copy/r2-visualizers/matrix-composition/MatrixComposition.jsx",
+      "relatedTerms": [
+        {
+          "term": "matrix product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "order of application",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "non-commutativity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commuting pair",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "determinant of a product",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linear transformations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "change of basis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams.js",
+      "diagramStates": [
+        "commute",
+        "noncommute",
+        "revealRotation",
+        "revealInverse"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 4,
+        "sections": 15,
+        "units": 4,
+        "anchors": 5,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "A - explanationOverride={byPreset}. Component NOT modified.",
+        "note": "PAGE FOR AN ORPHANED COMPONENT."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-transformation-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-reflection-2d",
+          "fromSection": "related-concepts",
+          "surface": "Reflection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigen-vectors-2d",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Change of basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-eigenvalues-eigenvectors": {
+      "slug": "eigenvalues-eigenvectors",
+      "name": "Eigenvalues and Eigenvectors Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/eigenvalues-eigenvectors/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/EigenWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "eigenvector",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "eigenvalue",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "characteristic polynomial",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "characteristic equation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "eigenspace",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "algebraic multiplicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "geometric multiplicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "defective",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "trace and determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "diagonalization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/eigenDiagrams.js",
+      "diagramStates": [
+        "shift",
+        "expand",
+        "roots",
+        "eigvec",
+        "complex",
+        "repeated"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 6,
+        "sections": 17,
+        "units": 6,
+        "anchors": 8,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/shift/expand/roots/complex/eigvec/done. EigenWrapper is also the NUMERIC ENGINE for the rest of the eigenvalue group: it exports charPoly, polyRoots, rref, nullSpace, tidy and randomEigenMatrix, imported by DiagonalizationWrapper, PowerIterationWrapper, SpectralWrapper, SVDWrapper, SubspacesWrapper, LeastSquaresWrapper, OrthogonalWrapper and SpanMembershipWrapper.",
+        "note": "Root finding: quadratic formula for 2x2, Cardano/trigonometric for 3x3, Newton polish, snap to simple values."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-system-solutions",
+          "fromSection": "related-concepts",
+          "surface": "Null space and solution sets",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-diagonalization",
+          "fromSection": "related-concepts",
+          "surface": "Diagonalization",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-power",
+          "fromSection": "related-concepts",
+          "surface": "Matrix powers",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-spectral-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Symmetric matrices and the spectral theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigen-vectors-2d",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvectors in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-trace",
+          "fromSection": "related-concepts",
+          "surface": "Trace and determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-matrix-diagonalization": {
+      "slug": "matrix-diagonalization",
+      "name": "Matrix Diagonalization Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-diagonalization/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/DiagonalizationWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "diagonalization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "diagonalizable",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "defective",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "similar matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "eigenvector basis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "spectral decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix powers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix inverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Jordan form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Markov chains",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/diagonalizationDiagrams.js",
+      "diagramStates": [
+        "eigvecs",
+        "assemble",
+        "inverse",
+        "factor",
+        "power",
+        "defective",
+        "markov"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 7,
+        "sections": 18,
+        "units": 7,
+        "anchors": 12,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/eigen/complex/eigvecs/defective/assemble/inverse/factor/verify/power/done; buildScenes(values, power) with a k stepper.",
+        "note": "The 'markov' still is the Markov preset at power 8 (near the steady state). Matrix labels are plain text, so powers use Unicode superscripts."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-power",
+          "fromSection": "related-concepts",
+          "surface": "Matrix powers",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Similar matrices and change of basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-spectral-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Spectral theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular value decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-power-iteration": {
+      "slug": "power-iteration",
+      "name": "Power Iteration Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/power-iteration/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/PowerIterationWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "power iteration",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "dominant eigenvalue",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "normalization",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "convergence ratio",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Rayleigh quotient",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inverse iteration",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Markov chains",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "QR algorithm",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "spectral radius",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/powerIterationDiagrams.js",
+      "diagramStates": [
+        "intro",
+        "step1",
+        "step3",
+        "done",
+        "slow",
+        "tie"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 6,
+        "sections": 17,
+        "units": 6,
+        "anchors": 4,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/iterate/done (one 'iterate' scene per step, so the explanations object has three keys).",
+        "note": "buildScenes(values, startVec, iterations); editable start vector; the done scene compares against the exact dominant eigenvalue from charPoly/polyRoots and reports |lambda2/lambda1|."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-diagonalization",
+          "fromSection": "related-concepts",
+          "surface": "Diagonalization",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-power",
+          "fromSection": "related-concepts",
+          "surface": "Matrix powers",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-complex-eigenvalues-2d": {
+      "slug": "complex-eigenvalues-2d",
+      "name": "Complex Eigenvalues 2D Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/complex-eigenvalues-2d/index.jsx",
+      "component": "app/components/linear-algebra copy/r2-visualizers/complex-eigen/ComplexEigen.jsx",
+      "relatedTerms": [
+        {
+          "term": "complex eigenvalues",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "modulus",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "argument",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation-scaling matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orbit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "invariant ellipse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "spiral point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "discrete dynamical systems",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "complex numbers",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/r2-visualizers/complex-eigen/complexEigenDiagrams.js",
+      "diagramStates": [
+        "rotation",
+        "ellipse",
+        "axes",
+        "inward",
+        "outward",
+        "skew"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 6,
+        "sections": 17,
+        "units": 6,
+        "anchors": 4,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product. This is NEW 2D component code (own animation loop, drag handling) and is the least verified file of the batch.",
+        "wiring": "NEW 2D COMPONENT, self-contained (own Math2D, SVGRender, hooks, ce- CSS) in the r2-visualizers convention; explanationOverride={byPreset} as on the other 2D pages; exports composeScene so the diagrams module reuses the canvas composition exactly.",
+        "note": "A = P C P^-1 with C = r R(theta), P = [Re v | Im v] for lambda = a - bi. The continuous spiral is A^k x0 for real k via P r^k R(k theta) P^-1."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-eigen-vectors-2d",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvectors in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-diagonalization",
+          "fromSection": "related-concepts",
+          "surface": "Diagonalization",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Rotation matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-transformation-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear transformations in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-power-iteration",
+          "fromSection": "related-concepts",
+          "surface": "Power iteration",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-spectral-decomposition": {
+      "slug": "spectral-decomposition",
+      "name": "Spectral Decomposition Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/spectral-decomposition/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/SpectralWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "spectral theorem",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "spectral decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonal matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthonormal eigenvectors",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank-one form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadratic form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "definiteness",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Gram-Schmidt",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "positive definite matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "projection matrices",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/spectralDiagrams.js",
+      "diagramStates": [
+        "normalize",
+        "orthocheck",
+        "factor",
+        "rankone",
+        "gram",
+        "projection",
+        "notsym"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 7,
+        "sections": 18,
+        "units": 7,
+        "anchors": 11,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/notsym/eigen/eigvec/orthogonalize/normalize/orthocheck/factor/rankone/done; mirrored edits with an opt-out checkbox.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-diagonalization",
+          "fromSection": "related-concepts",
+          "surface": "Diagonalization",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram–Schmidt",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-cholesky-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Positive definite matrices and Cholesky",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular value decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-projection-2d",
+          "fromSection": "related-concepts",
+          "surface": "Projection matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-singular-value-decomposition": {
+      "slug": "singular-value-decomposition",
+      "name": "Singular Value Decomposition Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/singular-value-decomposition/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/SVDWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "singular value decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "singular values",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "right singular vectors",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "left singular vectors",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank-one form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "spectral norm",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "condition number",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pseudoinverse",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "principal component analysis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/svdDiagrams.js",
+      "diagramStates": [
+        "gram",
+        "eigen",
+        "uvec",
+        "factor",
+        "rankone",
+        "complete",
+        "single"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 7,
+        "sections": 18,
+        "units": 7,
+        "anchors": 11,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - m, n in {2, 3}; phases intro/gram/eigen/vvec/uvec/complete/assemble/factor/rankone/done.",
+        "note": "Symmetric eigen-decomposition of A^T A via the EigenWrapper engine with Gram-Schmidt inside repeated eigenspaces; U completed by Gram-Schmidt on standard basis vectors when rank < m."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-spectral-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Spectral decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram–Schmidt",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Matrix rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-four-fundamental-subspaces",
+          "fromSection": "related-concepts",
+          "surface": "Four fundamental subspaces",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares and the pseudoinverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-transformation-2d",
+          "fromSection": "related-concepts",
+          "surface": "Linear transformations in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-four-fundamental-subspaces": {
+      "slug": "four-fundamental-subspaces",
+      "name": "Four Fundamental Subspaces Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/four-fundamental-subspaces/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/SubspacesWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "column space",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "null space",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row space",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "left null space",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "pivot columns",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "special solutions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank-nullity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonal complement",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "fundamental theorem of linear algebra",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/subspacesDiagrams.js",
+      "diagramStates": [
+        "rref",
+        "colspace",
+        "rowspace",
+        "nullspace",
+        "leftnull",
+        "orth",
+        "trivial"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 7,
+        "sections": 18,
+        "units": 7,
+        "anchors": 9,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - m, n in 2..4; phases intro/rref/colspace/rowspace/nullspace/leftnull/orth/done; exports nullOf() for non-square null spaces.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Matrix rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-system-solutions",
+          "fromSection": "related-concepts",
+          "surface": "Linear system solutions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Span and linear independence",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal complements and projections",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-kernel-image-2d",
+          "fromSection": "related-concepts",
+          "surface": "Kernel and image in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular value decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-least-squares": {
+      "slug": "least-squares",
+      "name": "Least Squares Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/least-squares/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/LeastSquaresWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "least squares",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "normal equations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "projection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "residual",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "projection matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "design matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "overdetermined system",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonal decomposition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "regression",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/leastSquaresDiagrams.js",
+      "diagramStates": [
+        "consistency",
+        "normal",
+        "solve",
+        "residual",
+        "projmatrix",
+        "line",
+        "singular"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 7,
+        "sections": 18,
+        "units": 7,
+        "anchors": 10,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - buildScenes(values, b, fit); phases intro/consistency/normal/singular/solve/project/residual/projmatrix/done; presets carry a design-matrix `fit` descriptor so captions read off the fitted line or parabola.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-vector-projection",
+          "fromSection": "related-concepts",
+          "surface": "Vector projection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-four-fundamental-subspaces",
+          "fromSection": "related-concepts",
+          "surface": "Four fundamental subspaces",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-system-solutions",
+          "fromSection": "related-concepts",
+          "surface": "Linear system solutions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram–Schmidt and QR",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular value decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-projection-2d",
+          "fromSection": "related-concepts",
+          "surface": "Symmetric and projection matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-orthogonal-matrices": {
+      "slug": "orthogonal-matrices",
+      "name": "Orthogonal Matrices Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/orthogonal-matrices/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/OrthogonalWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "orthogonal matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthonormal",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "isometry",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rotation",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "permutation matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "orthogonal group",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "Householder reflection",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "determinant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/orthogonalDiagrams.js",
+      "diagramStates": [
+        "gram",
+        "det",
+        "lengths",
+        "inverse",
+        "reflect",
+        "axis",
+        "fix"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 7,
+        "sections": 18,
+        "units": 7,
+        "anchors": 9,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - phases intro/gram/notortho/det/lengths/inverse/classify/done; editable test vector.",
+        "note": "Orthogonality test tolerance is 1e-3 so typed decimals such as 0.866 still pass. frozenMatrixSvg does not reproduce bracketType 'bars', so the det still shows square brackets."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram–Schmidt",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-qr-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "QR decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-spectral-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Spectral decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-singular-value-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Singular value decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-reflection-2d",
+          "fromSection": "related-concepts",
+          "surface": "Reflection and rotation in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-complex-eigenvalues-2d",
+          "fromSection": "related-concepts",
+          "surface": "Complex eigenvalues in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-span-membership": {
+      "slug": "span-membership",
+      "name": "Span and Membership Visualizer",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/span-membership/index.jsx",
+      "component": "app/components/linear-algebra copy/matrix/SpanMembershipWrapper.jsx",
+      "relatedTerms": [
+        {
+          "term": "span",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "membership",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "coordinates",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "dimension of the span",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linear independence",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "dependency",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "basis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "augmented matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "change of basis",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/linear-algebra copy/matrix/spanMembershipDiagrams.js",
+      "diagramStates": [
+        "rank",
+        "membership",
+        "coords",
+        "notin",
+        "dependent"
+      ],
+      "line1": {
+        "done": "2026-09-12",
+        "states": 5,
+        "sections": 16,
+        "units": 5,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "STATIC ONLY - see vector-cross-product.",
+        "wiring": "NEW TOOL - buildScenes(vectors, w); phases intro/rank/membership/notin/coords/done.",
+        "note": ""
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-span-independence-2d",
+          "fromSection": "related-concepts",
+          "surface": "Span and independence in 2D",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-linear-system-solutions",
+          "fromSection": "related-concepts",
+          "surface": "Linear system solutions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-four-fundamental-subspaces",
+          "fromSection": "related-concepts",
+          "surface": "Four fundamental subspaces",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Matrix rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-vector-linear-combination",
+          "fromSection": "related-concepts",
+          "surface": "Vector linear combination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-change-basis-2d",
+          "fromSection": "related-concepts",
+          "surface": "Basis and change of basis",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-least-squares",
+          "fromSection": "related-concepts",
+          "surface": "Least squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gram-schmidt",
+          "fromSection": "related-concepts",
+          "surface": "Gram–Schmidt",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-gauss-elimination": {
+      "slug": "gauss-elimination",
+      "name": "Gaussian Elimination Calculator",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/gauss-elimination/index.jsx",
+      "component": "app/components/matrix-multiplication/GaussJordanCalculator.jsx",
+      "relatedTerms": [
+        {
+          "term": "Gaussian elimination",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row echelon form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "reduced row echelon form",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row operations",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row swapping",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "row scaling",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "back-substitution",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "matrix inversion",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rank determination",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/matrix-multiplication/gaussEliminationDiagrams.js",
+      "diagramStates": [
+        "initial",
+        "swap",
+        "scale",
+        "eliminate",
+        "refDone",
+        "eliminateAbove",
+        "rrefDone",
+        "zeroError"
+      ],
+      "line1": {
+        "done": "2026-09-13",
+        "states": 6,
+        "sections": 11,
+        "units": 8,
+        "anchors": 6,
+        "orphans": 0,
+        "verification": "RENDERED against the owner's dev server on port 3000: page compiles and serves, no error overlay, all 11 section ids present, all 8 stills in the DOM, and the live tool driven through a run - Generate Random Matrix, Transform to Echelon Form, then Next - confirming the note changes with the stage kind (stage 1 showed the initial note linking #getting-started, stage 3 an eliminate note linking #row-echelon-form) and that both anchors in each note are real links. Static check clean: 0 orphan anchors, 0 duplicate ids, 8 units defined and 8 rendered.",
+        "wiring": "C - GaussJordanCalculator took no props at all. Added additively: a `notes = null` prop, a `stageKinds` state array built alongside the existing `explanations` array in performElimination, and two render branches that emit notes[kind] under the current stage's explanation and notes.zeroError under the error. With notes null the component behaves exactly as before.",
+        "note": "States are stage KINDS, not stage indices: initial, swap, scale, eliminate, eliminateAbove, zeroError. `eliminateAbove` only occurs on the Reduced Echelon run (performElimination's isReduced branch starts the inner loop at 0 instead of r + 1), which is the one operation that distinguishes the two buttons. Six kinds map onto five existing sections; no new sections were created and the ids were already slugs. Two extra stills beyond the six kinds - refDone and rrefDone - show the terminal state of each run. The worked matrix [[0,2,1,4],[2,4,1,9],[1,1,3,8]] was chosen because its first pivot is 0 (forcing a swap) and no pivot is 1 (forcing a scale each time), so one matrix exercises every kind; its RREF is the identity beside (1.417, 1.083, 1.833), verified against all three original equations.",
+        "rendererWork": "gaussEliminationDiagrams.js is an SVG port of the component's HTML <table> of number inputs, with the geometry (100px input, 5px paddings, 1px #ddd borders, #FFFF99 highlight) read off GaussJordanCalculator.module.css and resolved as literals. performElimination is replicated exactly - same pivot search, swap, scale, subtraction order and isReduced branch - so the frozen stages and their highlight rows are the tool's own rather than hand-drawn approximations. An augmented-column bar is drawn that the HTML table does not have; it is the one deliberate addition, since a still has no column headers to orient the reader."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-lu-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "LU Decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-rank",
+          "fromSection": "related-concepts",
+          "surface": "Matrix Rank",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-four-fundamental-subspaces",
+          "fromSection": "related-concepts",
+          "surface": "Null Space",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix Inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
+    },
+    "linear-algebra-matrix-types": {
+      "slug": "matrix-types",
+      "name": "Square Matrix Types Generator",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-types/index.jsx",
+      "component": "app/components/matrices/MatrixGenerator.jsx",
+      "relatedTerms": [
+        {
+          "term": "identity matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "zero matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "scalar matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "diagonal matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "upper triangular",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "lower triangular",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "symmetric matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "skew-symmetric matrix",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ],
+      "diagramsModule": "app/components/matrices/matrixTypesDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "zero",
+        "scalar",
+        "diagonal",
+        "upperTriangular",
+        "lowerTriangular",
+        "symmetric",
+        "skewSymmetric",
+        "random"
+      ],
+      "line1": {
+        "done": "2026-09-13",
+        "states": 9,
+        "sections": 13,
+        "units": 9,
+        "anchors": 7,
+        "orphans": 0,
+        "verification": "RENDERED against the owner's dev server on port 3000: page 200, no console errors, all 13 section ids present, all 9 stills in the DOM, both panel anchors resolving (href #random-matrices and #the-nine-types-at-a-glance read off the accessibility tree), and the symmetric still compared side by side with the live generator - diagonal yellow, pairs green/orange/blue in the same positions. Static check also clean: 0 orphan anchors, 0 duplicate ids, 9 units defined and 9 rendered, no italics, no '**[' pattern.",
+        "wiring": "A - MatrixGenerator already accepted an `explanations` prop and this page already passed matrixTypesExplanations, so the COMPONENT IS UNTOUCHED. Each state's anchor is appended to its own `description`, which the component renders through processContent; both links come out as real anchors in the explanation panel.",
+        "note": "States are the nine entries of the type selector. They map onto five existing sections that already treat them in pairs (identity-and-zero, scalar-and-diagonal, triangular-matrices, symmetric-and-skew-symmetric) plus random-matrices, so no new sections were created; the four paired sections carry two stills each and each gained an authored `after` paragraph, since a unit never closes a section. Section ids were already slugs - no numeric migration needed. MOVED 2026-09-13 from the top-level route with a permanent redirect (Search Console 90 days to 2026-09-12: 5 clicks, 192 impressions); a content page on the same topic, /linear-algebra/matrix/types (3,417 impressions), remains a consolidation candidate.",
+        "rendererWork": "matrixTypesDiagrams.js is an SVG port of the component's HTML/CSS matrix display, not a re-use of its render path: MatrixGenerator draws divs and spans, so the geometry (32px cells, 2.4/1.6px gaps, 4px radius, 32px padding) and the highlight colours were read off MatrixGenerator.module.css and resolved as literals, and MatrixBracket's quadratic path was copied verbatim. getHighlightClass and getPairKey are replicated exactly, so the pair colours land on the same cells as the live tool. The live tool fills matrices with Math.random(), which a still cannot reproduce, so each state uses a fixed representative matrix; the `random` still reuses the very matrix the explanation panel prints.",
+        "openQuestion": "Each state's `link` field still points at Wikipedia, so the panel now shows the on-page 'Learn more about X' anchors AND a separate outbound 'Learn more →'. Left untouched as pre-existing behaviour; whether to repoint or drop those nine external links is an owner decision."
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-determinant",
+          "fromSection": "related-concepts",
+          "surface": "Determinant",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-eigenvalues-eigenvectors",
+          "fromSection": "related-concepts",
+          "surface": "Eigenvalues and eigenvectors",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-diagonalization",
+          "fromSection": "related-concepts",
+          "surface": "Diagonalisation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Matrix inverse",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-gauss-elimination",
+          "fromSection": "related-concepts",
+          "surface": "Gaussian elimination and LU decomposition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-orthogonal-matrices",
+          "fromSection": "related-concepts",
+          "surface": "Orthogonal matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        },
+        {
+          "key": "linear-algebra-cholesky-decomposition",
+          "fromSection": "related-concepts",
+          "surface": "Positive definite matrices",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-13"
+        }
+      ]
     }
   },
   "$stubTemplate": {

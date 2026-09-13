@@ -13,6 +13,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TransposeWrapper from '../../../../app/components/linear-algebra copy/matrix/TransposeWrapper'
 import transposeDiagrams from '../../../../app/components/linear-algebra copy/matrix/transposeDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -52,7 +54,7 @@ export async function getStaticProps(){
 **Involution** — an operation that undoes itself. Transpose is involutive: $(A^T)^T = A$.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -66,7 +68,7 @@ export async function getStaticProps(){
 Every method produces the identical $A^T$ — they differ only in how the operation is broken into steps and what is highlighted at each step.`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `The Four Methods`,
@@ -80,7 +82,7 @@ Every method produces the identical $A^T$ — they differ only in how the operat
 The diagonal reflection card is marked **geometric** because it is the only purely visual method — no per-cell mechanics, just one reflection.`,
       before: ``,
       after: ``,
-      link: '#the-four-methods',
+      link: '',
     },
     obj3: {
       title: `Reading the Scene Player`,
@@ -95,7 +97,7 @@ The diagonal reflection card is marked **geometric** because it is the only pure
 In the diagonal reflection method, no arrows appear. Instead, a dashed diagonal axis is drawn through $A$ and $A^T$, with cells above and below the axis colored differently so you can see the reflection at a glance.`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj4: {
       title: `Square vs Rectangular Matrices`,
@@ -107,7 +109,7 @@ In the diagonal reflection method, no arrows appear. Instead, a dashed diagonal 
 Try a $3 \\times 4$ matrix with the diagonal reflection method to see the abstract axis, then switch to $3 \\times 3$ to see the true diagonal.`,
       before: ``,
       after: ``,
-      link: '#square-vs-rectangular',
+      link: '',
     },
     obj5: {
       title: `What the Transpose Is`,
@@ -122,7 +124,7 @@ Transpose has no shape restrictions — any matrix can be transposed, unlike add
 For comprehensive coverage of matrix operations theory, see **matrix operations**.`,
       before: ``,
       after: ``,
-      link: '#what-the-transpose-is',
+      link: '',
     },
     obj6: {
       title: `Key Properties`,
@@ -138,7 +140,7 @@ For comprehensive coverage of matrix operations theory, see **matrix operations*
 The product rule is the trickiest: $(AB)^T \\neq A^T B^T$ in general. The order must reverse.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj7: {
       title: `Symmetric and Skew-Symmetric Matrices`,
@@ -151,7 +153,7 @@ A matrix is **skew-symmetric** (or antisymmetric) if $A^T = -A$, meaning $a_{i,j
 Every square matrix decomposes uniquely into a symmetric and skew-symmetric part: $A = \\frac{1}{2}(A + A^T) + \\frac{1}{2}(A - A^T)$.`,
       before: ``,
       after: ``,
-      link: '#symmetric-skew-symmetric',
+      link: '',
     },
     obj8: {
       title: `Worked Example`,
@@ -168,7 +170,7 @@ Reading off the rule: $a_{1,1} = 1$ stays at position $(1,1)$ — it sits on the
 Set the visualizer to a $2 \\times 3$ shape and try each method to see this transformation animated four different ways.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj9: {
       title: `Common Mistakes`,
@@ -181,28 +183,28 @@ Set the visualizer to a $2 \\times 3$ shape and try each method to see this tran
 • **Writing $A^T$ when the matrix isn't named $A$** — the notation $M^T$, $X^T$, etc., uses whatever symbol names the matrix`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj10: {
       title: `Related Concepts`,
       content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transpose, and inversion.
 
-**Matrix addition** — element-wise combination of two matrices of the same shape.
+[Matrix addition](!/linear-algebra/visual-tools/matrix-addition) — element-wise combination of two matrices of the same shape.
 
-**Matrix multiplication** — non-element-wise operation where transpose plays a role in the product rule $(AB)^T = B^T A^T$.
+[Matrix multiplication](!/visual-tools/matrix-multiplication) — non-element-wise operation where transpose plays a role in the product rule $(AB)^T = B^T A^T$.
 
-**Symmetric matrices** — square matrices satisfying $A = A^T$, fundamental in spectral theory and optimization.
+[Symmetric matrices](!/linear-algebra/visual-tools/matrix-types) — square matrices satisfying $A = A^T$, fundamental in spectral theory and optimization.
 
-**Orthogonal matrices** — square matrices satisfying $A^T A = I$, equivalent to $A^T = A^{-1}$.
+[Orthogonal matrices](!/linear-algebra/visual-tools/orthogonal-matrices) — square matrices satisfying $A^T A = I$, equivalent to $A^T = A^{-1}$.
 
-**Inverse matrix** — the operation $A^{-1}$ such that $A A^{-1} = I$; commutes with transpose.
+[Inverse matrix](!/linear-algebra/visual-tools/matrix-inverse) — the operation $A^{-1}$ such that $A A^{-1} = I$; commutes with transpose.
 
 **Conjugate transpose** — the complex analogue of transpose, combining transposition with element-wise conjugation.
 
-**Determinant** — invariant under transpose: $\\det(A^T) = \\det(A)$.`,
+[Determinant](!/linear-algebra/visual-tools/matrix-determinant) — invariant under transpose: $\\det(A^T) = \\det(A)$.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj11: {
       title: `Cell-by-Cell: the Definition, One Entry at a Time`,
@@ -412,6 +414,7 @@ For a rectangular $A$ the axis is an abstraction rather than a line you could dr
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-transpose'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -433,7 +436,7 @@ For a rectangular $A$ the axis is an abstraction rather than a line you could dr
   }
 }
 
-export default function MatrixTransposeVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas }) {
+export default function MatrixTransposeVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -562,6 +565,9 @@ export default function MatrixTransposeVisualizer({ seoData, sectionsContent, st
      variant="light"
    /> */}
       <br />
+      <RelatedTools tools={relatedTools}/>
+      <br/>
+      <br/>
       <Sections sections={genericSections}/>
       <br />
       <br />

@@ -2808,6 +2808,7 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -3298,54 +3299,19 @@ const introContent = {
 
 const faqQuestions = {
   obj1: {
-    question: "What does it mean for a matrix to be diagonalizable?",
-    answer: "A matrix A is diagonalizable if A = PDP⁻¹ where D is diagonal (eigenvalues on diagonal) and P has eigenvectors as columns. This means there exists a basis of eigenvectors, and in that basis the transformation acts by pure scaling along each axis.",
-    sectionId: "1"
+    question: "Is $PDP^{-1}$ the same as $P^{-1}DP$?",
+    answer: "No, they are different matrices, and swapping them inverts the change of basis. The error is easy to miss because both read as \"$P$ and its inverse wrapped around a diagonal\", so the shape looks right at a glance. Keep the roles straight: $A = PDP^{-1}$ builds $A$, while $P^{-1}AP = D$ simplifies it.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "How do you diagonalize a matrix?",
-    answer: "Find all eigenvalues from det(A - λI) = 0. For each eigenvalue, find eigenvectors by solving (A - λI)v = 0. Place eigenvectors as columns of P and corresponding eigenvalues on diagonal of D. Verify AP = PD.",
-    sectionId: "2"
+    question: "Do the eigenvalues in $D$ have to be in order?",
+    answer: "No convention forces any ordering. Permuting the eigenvalues along the diagonal is fine so long as the columns of $P$ are permuted to match, which is why the factorisation is not unique and \"the\" diagonalisation is a loose phrase. Singular values in an SVD do carry a built-in ordering, but eigenvalues here do not.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "When is a matrix diagonalizable?",
-    answer: "A matrix is diagonalizable iff geometric multiplicity equals algebraic multiplicity for every eigenvalue. A sufficient (not necessary) condition: n distinct eigenvalues guarantees diagonalizability. Symmetric matrices are always diagonalizable.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "How does diagonalization simplify matrix powers?",
-    answer: "A^k = PD^kP⁻¹ = P·diag(λ₁^k, λ₂^k, ..., λₙ^k)·P⁻¹. Raising D to any power just raises each diagonal entry. Computing A^1000 costs the same as A² — one inversion and two multiplications.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "How does diagonalization solve differential equations?",
-    answer: "For x' = Ax, diagonalization decouples the system into n independent equations yᵢ' = λᵢyᵢ with solutions e^(λᵢt). The general solution is x(t) = c₁e^(λ₁t)v₁ + c₂e^(λ₂t)v₂ + ... + cₙe^(λₙt)vₙ.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "How does diagonalization solve recurrence relations?",
-    answer: "For xₙ₊₁ = Axₙ, diagonalization gives xₙ = c₁λ₁ⁿv₁ + c₂λ₂ⁿv₂ + ... The Fibonacci sequence uses this: the matrix [[1,1],[1,0]] diagonalizes to give Binet's formula Fₙ = (φⁿ - φ̂ⁿ)/√5.",
-    sectionId: "6"
-  },
-  obj7: {
-    question: "What is the spectral theorem for symmetric matrices?",
-    answer: "Every real symmetric matrix is diagonalizable with an orthogonal matrix: A = QDQᵀ where Q is orthogonal (Q⁻¹ = Qᵀ) with orthonormal eigenvector columns. All eigenvalues are real. This is the most powerful diagonalization result.",
-    sectionId: "7"
-  },
-  obj8: {
-    question: "What is the matrix exponential for diagonalizable matrices?",
-    answer: "e^(At) = Pe^(Dt)P⁻¹ = P·diag(e^(λ₁t), e^(λ₂t), ..., e^(λₙt))·P⁻¹. The exponential of a diagonal matrix is the diagonal matrix of exponentials. This solves x' = Ax via x(t) = e^(At)x₀.",
-    sectionId: "8"
-  },
-  obj9: {
-    question: "What happens when a matrix is not diagonalizable?",
-    answer: "Non-diagonalizable (defective) matrices have Jordan normal form instead — block diagonal with Jordan blocks containing 1s on the superdiagonal. Powers and exponentials still compute but with polynomial correction terms (t^k·e^(λt) instead of just e^(λt)).",
-    sectionId: "9"
-  },
-  obj10: {
-    question: "What are quick tests for diagonalizability?",
-    answer: "n distinct eigenvalues → always diagonalizable. Real symmetric → always diagonalizable (orthogonally). For each eigenvalue: geometric = algebraic multiplicity → diagonalizable. Any eigenvalue with geometric < algebraic → not diagonalizable.",
-    sectionId: "10"
+    question: "Does a repeated eigenvalue make a matrix defective?",
+    answer: "Not by itself. Repetition is necessary but nowhere near sufficient: the identity matrix repeats an eigenvalue $n$ times and is already diagonal. What defeats the construction is a gap between algebraic and geometric multiplicity, meaning too few independent eigenvectors. Note that defective never means singular or ill-conditioned; such a matrix can be perfectly invertible.",
+    sectionId: "notation"
   }
 }
 
@@ -3422,19 +3388,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
 
@@ -3610,6 +3563,22 @@ const schemas = {
           `When the test fails there is nothing to compute a way around, because the eigenvectors genuinely are not there. The Jordan form is what replaces diagonalization in that case: block diagonal rather than diagonal, with ones on the superdiagonal counting precisely how many eigenvectors each eigenvalue is missing. A nonzero [nilpotent matrix](#9) is the extreme case — every eigenvalue is zero, so diagonalizing it would force the matrix itself to be zero.`,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Diagonalization FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -3646,12 +3615,6 @@ const schemas = {
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

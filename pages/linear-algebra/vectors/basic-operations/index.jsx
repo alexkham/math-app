@@ -775,6 +775,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1335,34 +1336,19 @@ The ten properties listed on this page — four for addition, four for scalar mu
 
 const faqQuestions = {
   obj1: {
-    question: "How do you add two vectors?",
-    answer: "Add corresponding components: a + b = (a₁ + b₁, a₂ + b₂, ..., aₙ + bₙ). Both vectors must be in the same ℝⁿ. Geometrically, use tip-to-tail (place b's tail at a's head) or parallelogram method (sum is the diagonal).",
-    sectionId: "1"
+    question: "Does $(3, 4)$ mean a point or a vector?",
+    answer: "Both, and only context decides. The same pair of glyphs names the location $(3,4)$ in the plane and the displacement from the origin to it. Nothing in the notation distinguishes a position from an arrow, which is why the surrounding sentence has to say which reading is intended.",
+    sectionId: "notation"
   },
   obj2: {
-    question: "What are the properties of vector addition?",
-    answer: "Vector addition is commutative (a + b = b + a), associative ((a + b) + c = a + (b + c)), has an identity (a + 0 = a), and every vector has an inverse (a + (-a) = 0). These mirror real number addition.",
-    sectionId: "2"
+    question: "Can you divide one vector by another?",
+    answer: "No. There is no such operation, so $\\frac{\\mathbf{a}}{\\mathbf{b}}$ is meaningless rather than merely difficult. This is also why the bold marking matters: $v$ and $\\mathbf{v}$ obey different algebra, and dropping the mark partway through a computation is the most common writing error in the subject.",
+    sectionId: "notation"
   },
   obj3: {
-    question: "How do you subtract vectors?",
-    answer: "Subtraction is addition plus negation: a - b = a + (-b) = (a₁ - b₁, a₂ - b₂, ...). Geometrically, a - b points from the tip of b to the tip of a when both share a common tail. Its length gives the distance between the vectors.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "What is scalar multiplication of a vector?",
-    answer: "Multiply each component by the scalar c: ca = (ca₁, ca₂, ..., caₙ). When c > 0, the vector stretches or compresses in the same direction. When c < 0, it also reverses direction. When c = 0, the result is the zero vector.",
-    sectionId: "4"
-  },
-  obj5: {
-    question: "What are the properties of scalar multiplication?",
-    answer: "Scalar multiplication is associative with scalars (c(da) = (cd)a), distributes over vector addition (c(a + b) = ca + cb) and scalar addition ((c + d)a = ca + da), and has identity 1a = a. Setting c = 0 gives 0a = 0; c = -1 gives the additive inverse.",
-    sectionId: "5"
-  },
-  obj6: {
-    question: "Why are addition and scalar multiplication fundamental?",
-    answer: "All other vector operations build from these two. The dot product uses component multiplication and addition. Linear combinations are repeated scalar multiplication and addition. The ten properties (4 for addition, 4 for scalar multiplication, 2 distributive) define vector spaces.",
-    sectionId: "6"
+    question: "Is $\\mathbb{R}^3$ the real numbers raised to a power?",
+    answer: "No. The superscript counts coordinates rather than repeated multiplication: $\\mathbb{R}^3$ is the set of all triples of real numbers, formed by gluing three copies of $\\mathbb{R}$ together. Nothing is being multiplied, since there is no product of a number system by itself in the ordinary sense.",
+    sectionId: "notation"
   }
 }
 
@@ -1437,19 +1423,6 @@ const schemas = {
       }
     ]
   },
-
-  faq: {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": Object.keys(faqQuestions).map(key => ({
-      "@type": "Question",
-      "name": faqQuestions[key].question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faqQuestions[key].answer
-      }
-    }))
-  }
 }
 
    return {
@@ -1579,6 +1552,22 @@ export default function BasicVectorOperationsPage({
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Vector Operations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 ]
 
   return (
@@ -1615,12 +1604,6 @@ export default function BasicVectorOperationsPage({
     }}
   />
 
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify(schemas.faq)
-    }}
-  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>

@@ -330,7 +330,7 @@
 //   }
 // }
 
-// export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+// export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
 //   const genericSections=[
 //     // {
@@ -598,6 +598,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ScalarMultiplicationWrapper from '../../../../app/components/linear-algebra copy/matrix/ScalarMultiplicationWrapper'
 import vectorScalarDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorScalarDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -639,7 +641,7 @@ export async function getStaticProps(){
 **Geometric scaling** — multiplying a vector by $k$ stretches its magnitude by $|k|$ and preserves direction if $k > 0$ or reverses it if $k < 0$.`,
       before: ``,
       after: ``,
-      link: '#key-terms',
+      link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
@@ -653,7 +655,7 @@ export async function getStaticProps(){
 The scalar $k$ is shown symbolically in front of $v$. The visualizer focuses on the structural rule — every component of $v$ gets multiplied by the same $k$ — not on any specific numerical value of $k$.`,
       before: ``,
       after: ``,
-      link: '#getting-started',
+      link: '',
     },
     obj2: {
       title: `Reading the Scene Player`,
@@ -667,7 +669,7 @@ The scalar $k$ is shown symbolically in front of $v$. The visualizer focuses on 
 By the final scene, every component of $w$ holds its symbolic product and the operation is complete.`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '',
     },
     obj3: {
       title: `Choosing Vector Length`,
@@ -679,7 +681,7 @@ By the final scene, every component of $w$ holds its symbolic product and the op
 • Both row and column orientations follow identical rules — scalar multiplication has no length restriction`,
       before: ``,
       after: ``,
-      link: '#choosing-length',
+      link: '',
     },
     obj4: {
       title: `What Scalar Multiplication Is`,
@@ -694,7 +696,7 @@ Geometrically, scalar multiplication stretches or shrinks a vector along its dir
 For comprehensive theory, see **vector operations**.`,
       before: ``,
       after: ``,
-      link: '#what-it-is',
+      link: '',
     },
     obj5: {
       title: `Key Properties`,
@@ -712,7 +714,7 @@ For comprehensive theory, see **vector operations**.`,
 These properties are exactly the eight vector-space axioms for scalar multiplication.`,
       before: ``,
       after: ``,
-      link: '#key-properties',
+      link: '',
     },
     obj6: {
       title: `Why It Matters`,
@@ -726,7 +728,7 @@ These properties are exactly the eight vector-space axioms for scalar multiplica
 • **Gradient descent and optimization**: the step $\\theta \\leftarrow \\theta - \\eta \\nabla L$ uses scalar multiplication of the gradient vector by the learning rate $\\eta$`,
       before: ``,
       after: ``,
-      link: '#why-it-matters',
+      link: '',
     },
     obj7: {
       title: `Worked Example`,
@@ -747,7 +749,7 @@ And with $k = 0$, the result is the zero vector in $\\mathbb{R}^3$.
 Geometrically, $3v$ points the same direction as $v$ but is three times as long, while $-v$ has the same length but points the opposite way. Set the visualizer to length $3$ and step through to see this animated symbolically.`,
       before: ``,
       after: ``,
-      link: '#worked-example',
+      link: '',
     },
     obj8: {
       title: `Common Mistakes`,
@@ -761,17 +763,17 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
 • **Confusing magnitude with components** — multiplying by $k$ scales the magnitude by $|k|$, but each component is scaled by $k$ itself, sign and all`,
       before: ``,
       after: ``,
-      link: '#common-mistakes',
+      link: '',
     },
     obj9: {
       title: `Related Concepts`,
-      content: `**Vector addition** — the component-wise additive operation; pairs with scalar multiplication to make vectors a vector space.
+      content: `[Vector addition](!/linear-algebra/visual-tools/vector-addition) — the component-wise additive operation; pairs with scalar multiplication to make vectors a vector space.
 
-**Dot product** — the bilinear operation that takes two vectors and returns a scalar.
+[Dot product](!/linear-algebra/visual-tools/vectors-inner-product) — the bilinear operation that takes two vectors and returns a scalar.
 
-**Hadamard product** — component-wise multiplication of two vectors; the vector-by-vector analogue of scalar multiplication.
+[Hadamard product](!/linear-algebra/visual-tools/hadamard-product) — component-wise multiplication of two vectors; the vector-by-vector analogue of scalar multiplication.
 
-**Linear combination** — $c_1 v_1 + \\cdots + c_n v_n$, the central object built from scalar multiplication and addition.
+[Linear combination](!/linear-algebra/visual-tools/vector-linear-combination) — $c_1 v_1 + \\cdots + c_n v_n$, the central object built from scalar multiplication and addition.
 
 **Vector space** — the abstract structure vectors form under addition and scalar multiplication.
 
@@ -779,10 +781,10 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
 
 **Zero vector** — the result of multiplying any vector by the scalar $0$.
 
-**Magnitude (norm)** — $\\|kv\\| = |k| \\cdot \\|v\\|$ links scalar multiplication directly to length.`,
+[Magnitude (norm)](!/linear-algebra/visual-tools/vector-magnitude) — $\\|kv\\| = |k| \\cdot \\|v\\|$ links scalar multiplication directly to length.`,
       before: ``,
       after: ``,
-      link: '#related-concepts',
+      link: '',
     },
     obj10: {
       title: `The Opening Scene: One Number and One Vector`,
@@ -977,6 +979,7 @@ One consequence worth naming: the set of all scalar multiples of a single non-ze
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-vector-scalar-multiplication'),
       sectionsContent,
          stateUnits,
          explanations,
@@ -998,7 +1001,7 @@ One consequence worth naming: the set of all scalar multiples of a single non-ze
   }
 }
 
-export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
 
   const plain = (obj, id) => ({
     id,
@@ -1124,6 +1127,9 @@ export default function ScalarMultiplicationVisualizer({seoData, sectionsContent
      after={sectionsContent.obj0.after}
      variant="light"
    /> */}
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <br/>
    <br/>
    <Sections sections={genericSections}/>
    <br/>
