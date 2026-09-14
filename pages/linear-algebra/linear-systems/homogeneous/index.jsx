@@ -858,6 +858,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
+import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
 export async function getStaticProps(){
@@ -1463,8 +1466,31 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    nontrivial: demoUnitFrame({
+      svg: linearSystemDiagrams.infinite,
+      caption: 'A free column, and with it a family of solutions',
+      text: 'The elimination has left a column without a pivot, so one unknown can be chosen freely and the others follow. For a homogeneous system that guarantees solutions beyond the zero one, which is why more unknowns than equations always produces them &#8212; there are not enough pivots to go round. Vary the shape and watch the free columns appear on the',
+      href: '/linear-algebra/visual-tools/linear-system-solutions',
+      linkText: 'linear system solutions visualizer',
+    }),
+    nullspace: demoUnitFrame({
+      svg: subspacesDiagrams.nullspace,
+      caption: 'Special solutions, one per free column',
+      text: 'Each free variable is set to one in turn while the others are held at zero, and the pivot variables are solved to match. The vectors produced are independent and they span every solution of the system, which is what it means to call the solution set the null space rather than merely to say it resembles one. Generate them for your own matrix on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1493,7 +1519,7 @@ export default function HomogeneousSystemsPage({
   obj7Table,
   homogeneousAppearances,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1537,6 +1563,8 @@ export default function HomogeneousSystemsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+                  <div key={'unit-nontrivial'} dangerouslySetInnerHTML={{ __html: demoUnits.nontrivial }} />,
+          `Counting pivots against unknowns therefore answers the question before any solution is written down.`,
         ]
     },
     {
@@ -1545,6 +1573,8 @@ export default function HomogeneousSystemsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-nullspace'} dangerouslySetInnerHTML={{ __html: demoUnits.nullspace }} />,
+          `Because the set is closed under addition and scaling, it is a subspace, and that is what makes a basis for it worth having.`,
         ]
     },
     {

@@ -2809,6 +2809,8 @@ import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/Obje
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import diagonalizationDiagrams from '@/app/components/linear-algebra copy/matrix/diagonalizationDiagrams'
 
 
 export async function getStaticProps(){
@@ -3392,8 +3394,38 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    assemble: demoUnitFrame({
+      svg: diagonalizationDiagrams.assemble,
+      caption: 'Eigenvectors into P, eigenvalues into D',
+      text: 'The eigenvectors are being loaded in as the columns of P and their eigenvalues placed on the diagonal of D in the matching order. The order is a free choice, but it must be the same choice in both &#8212; column three of P has to belong to the third diagonal entry of D. Assemble it yourself on the',
+      href: '/linear-algebra/visual-tools/matrix-diagonalization',
+      linkText: 'diagonalization visualizer',
+    }),
+    power: demoUnitFrame({
+      svg: diagonalizationDiagrams.power,
+      caption: 'A power collapsing to a diagonal power',
+      text: 'Every interior pair of P and its inverse has cancelled, leaving one P, the diagonal raised to the power, and one inverse. Raising a diagonal matrix to a power is entrywise, so an expensive repeated multiplication has become a handful of scalar powers. Push the exponent higher and watch the cost stay flat on the',
+      href: '/linear-algebra/visual-tools/matrix-diagonalization',
+      linkText: 'diagonalization visualizer',
+    }),
+    fails: demoUnitFrame({
+      svg: diagonalizationDiagrams.defective,
+      caption: 'Too few independent eigenvectors to fill P',
+      text: 'There are not enough independent eigenvectors to make up the columns of P, so P cannot be inverted and the factorisation never forms. Diagonalisation fails for this reason alone &#8212; never because the eigenvalues were awkward, only because the directions ran out. See which matrices hit this wall on the',
+      href: '/linear-algebra/visual-tools/matrix-diagonalization',
+      linkText: 'diagonalization visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     diagonalizationKinds,
@@ -3423,7 +3455,7 @@ const schemas = {
      diagonalizabilityCases,
      matrixPowersByHand,
      faqQuestions,
-     schemas,
+     schemas, demoUnits
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -3462,6 +3494,8 @@ const schemas = {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-assemble'} dangerouslySetInnerHTML={{ __html: demoUnits.assemble }} />,
+          `Mismatching the order is the most common error here, and it produces a factorisation that silently fails to reconstruct the original.`,
         ]
     },
     {
@@ -3488,6 +3522,8 @@ const schemas = {
           </DiagramFrame>,
           `The diagram is the route the formula replaces, and it is worth seeing once because the cost is invisible in the formula. Each state above costs a full matrix multiplication and each depends on the one before it, so reaching $A^{20}$ means nineteen of them, while $PD^{20}P^{-1}$ costs exactly what $A^4$ did \u2014 one inversion and two products, whatever the exponent.`,
           `The invariant columns are the sharper point. The determinant runs $-5, 25, -125, 625$ and the trace runs $4, 26, 124, 626$ \u2014 these are $(-5)^k$ and $5^k + (-1)^k$, computed from the eigenvalues alone. The entries of $A^k$ grow unpredictably; the two numbers that describe the matrix do not. Diagonalization is what moves that regularity out of the invariants and into the matrix itself.`,
+                  <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
+          `This is the reason diagonalisation is worth the trouble: it turns repeated matrix multiplication into arithmetic on a diagonal.`,
         ]
     },
     {
@@ -3542,6 +3578,8 @@ const schemas = {
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-fails'} dangerouslySetInnerHTML={{ __html: demoUnits.fails }} />,
+          `The Jordan form exists precisely to give these matrices a canonical shape when a diagonal one is out of reach.`,
         ]
     },
     {

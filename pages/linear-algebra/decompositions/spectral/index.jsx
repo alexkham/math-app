@@ -1768,6 +1768,8 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import spectralDiagrams from '@/app/components/linear-algebra copy/matrix/spectralDiagrams'
 
 
 export async function getStaticProps(){
@@ -2394,8 +2396,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    outer: demoUnitFrame({
+      svg: spectralDiagrams.rankone,
+      caption: 'One eigenvalue times one rank-one piece',
+      text: 'Each eigenvector has been multiplied by its own transpose to give a rank-one matrix, and each of those is weighted by its eigenvalue. The sum of these pieces reconstructs the original exactly. Dropping the pieces with the smallest weights is how the decomposition turns into an approximation. Add the pieces back one at a time on the',
+      href: '/linear-algebra/visual-tools/spectral-decomposition',
+      linkText: 'spectral decomposition visualizer',
+    }),
+    compute: demoUnitFrame({
+      svg: spectralDiagrams.factor,
+      caption: 'Q orthogonal, &#923; diagonal, Q transposed',
+      text: 'Because the eigenvectors of a symmetric matrix can be chosen orthonormal, the matrix of them is orthogonal &#8212; and the inverse of an orthogonal matrix is simply its transpose. That is the whole economy of the spectral form: no inverse ever has to be computed. Check the orthogonality yourself on the',
+      href: '/linear-algebra/visual-tools/spectral-decomposition',
+      linkText: 'spectral decomposition visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     definitenessClasses,
@@ -2423,7 +2448,7 @@ export default function SpectralDecompositionPage({
   definitenessClasses,
   spectralReadings,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2470,6 +2495,8 @@ export default function SpectralDecompositionPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-outer'} dangerouslySetInnerHTML={{ __html: demoUnits.outer }} />,
+          `This is the form principal component analysis uses, where the weights are variances and the pieces are the components.`,
         ]
     },
     {
@@ -2478,6 +2505,8 @@ export default function SpectralDecompositionPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-compute'} dangerouslySetInnerHTML={{ __html: demoUnits.compute }} />,
+          `Symmetry is doing all the work here; without it the eigenvector matrix need not be orthogonal and the transpose shortcut disappears.`,
         ]
     },
     {

@@ -693,7 +693,7 @@ export async function getStaticProps() {
 
 **Reduced row echelon form (RREF)** — echelon form with every pivot equal to $1$ and zeros above each pivot as well as below. Also called Gauss-Jordan form. Unlike echelon form, it is unique for a given matrix.
 
-**Elementary row operation** — one of three moves that preserve the solution set: swapping two rows, scaling a row by a non-zero constant, or adding a multiple of one row to another.
+**Elementary row operation** — one of three moves that preserve the [solution set](!/algebra/equations): swapping two rows, scaling a row by a non-zero constant, or adding a multiple of one row to another.
 
 **Back-substitution** — solving for the variables from the bottom row upward once the matrix is in echelon form.
 

@@ -1727,6 +1727,9 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
+import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
 
 
 export async function getStaticProps(){
@@ -2317,8 +2320,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    viagram: demoUnitFrame({
+      svg: qrDiagrams.subtract,
+      caption: 'The projection removed from a column',
+      text: 'The part of this column lying along the directions already fixed is being subtracted away, leaving only what is genuinely new. The coefficients removed are not discarded &#8212; they are exactly the entries of R, which is why R comes out upper triangular without anyone arranging it. Watch both factors emerge on the',
+      href: '/linear-algebra/visual-tools/qr-decomposition',
+      linkText: 'QR decomposition visualizer',
+    }),
+    connection: demoUnitFrame({
+      svg: gramSchmidtDiagrams.normalize,
+      caption: 'The leftover normalised to length one',
+      text: 'What remained after the projections was a direction with an arbitrary length; dividing by that length makes it a unit vector and the next column of Q. Gram-Schmidt and QR are not two procedures but one, read as a geometric construction or as a factorisation. Step through the orthogonalisation on the',
+      href: '/linear-algebra/visual-tools/gram-schmidt',
+      linkText: 'Gram-Schmidt visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     qrForms,
@@ -2344,7 +2370,7 @@ export default function QRDecompositionPage({
   qrForms,
   qrRoutes,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2383,6 +2409,8 @@ export default function QRDecompositionPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-viagram'} dangerouslySetInnerHTML={{ __html: demoUnits.viagram }} />,
+          `Classical Gram-Schmidt is the clearest route to QR and the least stable one, which is why Householder reflections follow in the next section.`,
         ]
     },
     {
@@ -2456,6 +2484,8 @@ export default function QRDecompositionPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-connection'} dangerouslySetInnerHTML={{ __html: demoUnits.connection }} />,
+          `Seeing them as one procedure explains why improving the stability of Gram-Schmidt improves QR at the same time.`,
         ]
     },
     // NEW capstone section: obj11

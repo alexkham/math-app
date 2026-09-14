@@ -1580,6 +1580,8 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import complexEigenDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/complex-eigen/complexEigenDiagrams'
 
 
 export async function getStaticProps(){
@@ -2183,8 +2185,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    rotation: demoUnitFrame({
+      svg: complexEigenDiagrams.rotation,
+      caption: 'Every direction turned, none left fixed',
+      text: 'No arrow survives this matrix pointing where it started: every direction is rotated. That is what a complex eigenvalue looks like from the real plane &#8212; not an exotic number but the absence of any invariant line. The rotation angle is the argument of the eigenvalue. Turn the matrix and watch the fixed directions vanish on the',
+      href: '/linear-algebra/visual-tools/complex-eigenvalues-2d',
+      linkText: 'complex eigenvalue explorer',
+    }),
+    dynamics: demoUnitFrame({
+      svg: [complexEigenDiagrams.inward, complexEigenDiagrams.outward],
+      caption: 'Spiralling in, then spiralling out',
+      text: 'The rotation is the same in both; what differs is the modulus of the eigenvalue. Below one, repeated application pulls everything towards the origin; above one, it throws everything outward. The argument sets how fast it turns and the modulus sets whether it survives, which is the whole stability story for a discrete system. Tune both on the',
+      href: '/linear-algebra/visual-tools/complex-eigenvalues-2d',
+      linkText: 'complex eigenvalue explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     spiralRegimes,
@@ -2213,7 +2238,7 @@ const schemas = {
     obj7Table,
     complexEigenvalues,
     faqQuestions,
-    schemas,
+    schemas, demoUnits
   }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2269,6 +2294,8 @@ const schemas = {
             <ObjectTypeProfile data={spiralRegimes} theme="navy" variant="stack" />
           </DiagramFrame>,
           `The three cases exhaust the possibilities because $r$ is a positive real and can only be less than, equal to, or greater than one. The argument $\\theta$ plays no part in the classification — it sets the speed of rotation and nothing else, which is why two systems can spiral at completely different rates and be equally stable.`,
+                  <div key={'unit-rotation'} dangerouslySetInnerHTML={{ __html: demoUnits.rotation }} />,
+          `The conjugate partner of this eigenvalue describes the same rotation turning the other way, which is why the pair always arrives together.`,
         ]
     },
     {
@@ -2306,6 +2333,8 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+                  <div key={'unit-dynamics'} dangerouslySetInnerHTML={{ __html: demoUnits.dynamics }} />,
+          `Whether a system settles, oscillates forever or blows up is therefore read off a single number: the modulus.`,
         ]
     },
     {

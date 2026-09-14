@@ -769,6 +769,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
+import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
 
 
 export async function getStaticProps(){
@@ -1352,8 +1355,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    standard: demoUnitFrame({
+      svg: linearTransformationDiagrams.fullRank,
+      caption: 'The basis vectors, and where they land',
+      text: 'The images of the two basis vectors are the two columns of the matrix &#8212; that is the entire construction. Because a linear map is determined by what it does to a basis, knowing those two arrows is knowing the map, and everything else on the grid follows from them. Move the basis images and watch the matrix update on the',
+      href: '/linear-algebra/visual-tools/linear-transformation-2d',
+      linkText: 'linear transformation explorer',
+    }),
+    composition: demoUnitFrame({
+      svg: [matrixCompositionDiagrams.commute, matrixCompositionDiagrams.noncommute],
+      caption: 'Two maps applied in each order',
+      text: 'Above, the order makes no difference. Below, it plainly does: the same two transformations applied the other way round leave the grid somewhere else. Matrix multiplication is non-commutative for this reason and no other &#8212; doing things in a different order genuinely ends up somewhere different. Swap the order yourself on the',
+      href: '/linear-algebra/visual-tools/matrix-composition-2d',
+      linkText: '2D composition explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1372,7 +1398,7 @@ return {
 }
    }
 
-export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas}) {
+export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1410,6 +1436,8 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-standard'} dangerouslySetInnerHTML={{ __html: demoUnits.standard }} />,
+          `This is why the standard matrix is built by feeding the basis vectors through the map rather than by solving anything.`,
         ]
     },
     {
@@ -1444,6 +1472,8 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-composition'} dangerouslySetInnerHTML={{ __html: demoUnits.composition }} />,
+          `Composition of maps and multiplication of matrices are therefore the same operation described in two vocabularies.`,
         ]
     },
     {

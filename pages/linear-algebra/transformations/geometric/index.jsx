@@ -1882,6 +1882,10 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import reflectionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
+import projection2dDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/projection/projectionDiagrams'
+import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 
 
 export async function getStaticProps(){
@@ -2643,8 +2647,38 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    reflection: demoUnitFrame({
+      svg: [reflectionDiagrams.axes, reflectionDiagrams.diagonals],
+      caption: 'Reflection in an axis, then in a diagonal',
+      text: 'Points on the mirror line stay exactly where they are while everything else swaps to the far side at equal distance. Changing the line changes the matrix but not the behaviour, and applying either matrix twice returns every point to its start. Rotate the mirror line and watch the entries change on the',
+      href: '/linear-algebra/visual-tools/reflection-2d',
+      linkText: 'reflection explorer',
+    }),
+    projection: demoUnitFrame({
+      svg: projection2dDiagrams.axes,
+      caption: 'The plane dropped onto a line',
+      text: 'Unlike a reflection, this one destroys information: two different points can land on the same place and there is no way back. The determinant is zero and the matrix is idempotent, which are the algebraic signatures of exactly that loss. Compare it against the reflection above on the',
+      href: '/linear-algebra/visual-tools/projection-2d',
+      linkText: '2D projection explorer',
+    }),
+    determinant: demoUnitFrame({
+      svg: [linearTransformationDiagrams.fullRank, linearTransformationDiagrams.rankOne],
+      caption: 'Area scaled, then area destroyed',
+      text: 'The determinant reports what the transformation does to area: above, the unit square has become a parallelogram of some definite size; below, it has been flattened to nothing. A negative value would mean the square had been turned over as well. One number, carrying both the scaling and the orientation. Change the matrix and watch it respond on the',
+      href: '/linear-algebra/visual-tools/linear-transformation-2d',
+      linkText: 'linear transformation explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -2666,7 +2700,7 @@ return {
 }
 
 
-export default function GeometricTransformationsPage({seoData, sectionsContent, introContent, obj4Table, reflectionCases, obj10Table, transformationSignatures, faqQuestions, schemas}) {
+export default function GeometricTransformationsPage({seoData, sectionsContent, introContent, obj4Table, reflectionCases, obj10Table, transformationSignatures, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2739,6 +2773,8 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
             <ObjectTypeProfile data={reflectionCases} theme="navy" variant="stack" />
           </DiagramFrame>,
           `The doubled angle in the general matrix is the detail worth pausing on. Rotating the mirror by $\\alpha$ moves the image by $2\\alpha$, because the incoming ray and the outgoing ray each make angle $\\alpha$ with the line — so the total turn is twice the tilt. It also explains why composing two reflections gives a rotation by twice the angle between their mirrors, which is the fastest route to that result.`,
+                  <div key={'unit-reflection'} dangerouslySetInnerHTML={{ __html: demoUnits.reflection }} />,
+          `Any matrix that is its own inverse and has determinant −1 in two dimensions is a reflection of this kind.`,
         ]
     },
     {
@@ -2755,6 +2791,8 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-projection'} dangerouslySetInnerHTML={{ __html: demoUnits.projection }} />,
+          `Reflections and rotations preserve information; projections and their relatives are where it starts being lost.`,
         ]
     },
     {
@@ -2781,6 +2819,8 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
           sectionsContent.obj10.content,
           <div key={'obj10-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+                  <div key={'unit-determinant'} dangerouslySetInnerHTML={{ __html: demoUnits.determinant }} />,
+          `This is why the determinant can classify a transformation family before any of its entries are examined individually.`,
         ]
     },
     {

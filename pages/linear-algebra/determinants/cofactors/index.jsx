@@ -935,6 +935,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
 
 
 export async function getStaticProps(){
@@ -1664,8 +1666,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    signs: demoUnitFrame({
+      svg: determinantDiagrams["sign-pattern"],
+      caption: 'The alternating sign board',
+      text: 'Signs alternate from the top-left corner outward, so a position\'s sign depends only on whether its row and column indices sum to an even or an odd number. The board is fixed, independent of the matrix\'s contents, and it is the only thing separating a minor from a cofactor. Generate it at other sizes on the',
+      href: '/linear-algebra/visual-tools/matrix-determinant',
+      linkText: 'determinant visualizer',
+    }),
+    laplace: demoUnitFrame({
+      svg: determinantDiagrams["cofactor-row"],
+      caption: 'One row expanded, term by term',
+      text: 'Each entry of the row is multiplied by the determinant of the matrix left when its own row and column are removed, and the sign board decides whether the term is added or subtracted. The recursion is visible: every minor is itself a determinant awaiting the same treatment. Expand along a column instead and check the answer matches on the',
+      href: '/linear-algebra/visual-tools/matrix-determinant',
+      linkText: 'determinant visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1692,7 +1717,7 @@ const schemas = {
      obj7Table,
      cofactorChain,
      faqQuestions,
-     schemas,
+     schemas, demoUnits
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1736,6 +1761,8 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+                  <div key={'unit-signs'} dangerouslySetInnerHTML={{ __html: demoUnits.signs }} />,
+          `Because the board never changes, the sign of a cofactor can always be read off its position without any computation.`,
         ]
     },
     {
@@ -1744,6 +1771,8 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-laplace'} dangerouslySetInnerHTML={{ __html: demoUnits.laplace }} />,
+          `Expanding along a row with zeros in it kills those terms before their minors are ever computed, which is the only real economy available here.`,
         ]
     },
     {

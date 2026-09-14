@@ -9,6 +9,8 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
 
 
 export async function getStaticProps(){
@@ -316,8 +318,26 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Hub page: one unit, on the decomposition that applies to every
+    // matrix and therefore anchors the comparison the page is making.
+    svd: demoUnitFrame({
+      svg: svdDiagrams.factor,
+      caption: 'The one factorisation every matrix has',
+      text: 'Two orthogonal factors with a rectangular diagonal between them. Of the five decompositions catalogued on this page, this is the only one that demands nothing of its input &#8212; no squareness, no symmetry, no positive definiteness, no full set of eigenvectors. Compare its cost against the others on the',
+      href: '/linear-algebra/visual-tools/singular-value-decomposition',
+      linkText: 'SVD visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj8Table,
@@ -341,7 +361,7 @@ export default function DecompositionsPage({
   introContent,
   obj8Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -401,6 +421,8 @@ export default function DecompositionsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-svd'} dangerouslySetInnerHTML={{ __html: demoUnits.svd }} />,
+          `The cheaper factorisations above are worth using precisely when their conditions happen to hold; this one is the fallback when they do not.`,
         ]
     },
     {

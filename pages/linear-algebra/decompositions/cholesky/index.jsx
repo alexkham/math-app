@@ -1787,6 +1787,8 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import choleskyDiagrams from '@/app/components/linear-algebra copy/matrix/choleskyDiagrams'
 
 
 export async function getStaticProps(){
@@ -2423,8 +2425,31 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    algorithm: demoUnitFrame({
+      svg: choleskyDiagrams.diag,
+      caption: 'A diagonal entry taken as a square root',
+      text: 'Each diagonal entry of the factor is the square root of what is left after the entries already computed in that row have been subtracted off. The whole algorithm alternates between these roots and simple divisions, and it touches only half the matrix because symmetry makes the other half redundant. Run it entry by entry on the',
+      href: '/linear-algebra/visual-tools/cholesky-decomposition',
+      linkText: 'Cholesky decomposition visualizer',
+    }),
+    test: demoUnitFrame({
+      svg: choleskyDiagrams.notpd,
+      caption: 'A negative value under the square root',
+      text: 'The quantity about to be square-rooted has come out negative, and the algorithm stops. That failure is not a numerical accident: it happens precisely when the matrix is not positive definite, which makes attempting the decomposition the standard test for the property. Feed in a matrix that fails on the',
+      href: '/linear-algebra/visual-tools/cholesky-decomposition',
+      linkText: 'Cholesky decomposition visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     definitenessTests,
@@ -2448,7 +2473,7 @@ export default function PageTemplate({
   definitenessTests,
   choleskyOutcomes,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2504,6 +2529,8 @@ export default function PageTemplate({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-algorithm'} dangerouslySetInnerHTML={{ __html: demoUnits.algorithm }} />,
+          `Working on half the matrix is what makes this roughly twice as fast as the LU factorisation it specialises.`,
         ]
     },
     {
@@ -2536,6 +2563,8 @@ export default function PageTemplate({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-test'} dangerouslySetInnerHTML={{ __html: demoUnits.test }} />,
+          `Testing by attempting the factorisation is cheaper than computing eigenvalues and gives a definite answer either way.`,
         ]
     },
     {

@@ -740,6 +740,8 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1164,8 +1166,26 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Hub page: one unit, on the geometry section, where the grid
+    // makes the definition concrete rather than restating it.
+    geometry: demoUnitFrame({
+      svg: linearTransformationDiagrams.fullRank,
+      caption: 'What survives the transformation',
+      text: 'Lines are still lines, parallel families are still parallel, spacing along each family is still even, and the origin has not moved. Those four survivals are the geometric content of the two algebraic conditions, and a map that breaks any of them is not linear. Break them deliberately and watch which condition fails on the',
+      href: '/linear-algebra/visual-tools/linear-transformation-2d',
+      linkText: 'linear transformation explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1184,7 +1204,7 @@ return {
 }
    }
 
-export default function LinearTransformationsPage({seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas}) {
+export default function LinearTransformationsPage({seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1257,6 +1277,8 @@ export default function LinearTransformationsPage({seoData, sectionsContent, int
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+                  <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
+          `The non-examples earlier on this page all fail one of these four in a way that is easier to see than to calculate.`,
         ]
     },
     {

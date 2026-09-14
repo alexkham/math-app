@@ -857,6 +857,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
+import orthogonalDiagrams from '@/app/components/linear-algebra copy/matrix/orthogonalDiagrams'
 
 
 export async function getStaticProps(){
@@ -1477,8 +1480,31 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    orthset: demoUnitFrame({
+      svg: gramSchmidtDiagrams.done,
+      caption: 'A set with every pair at right angles',
+      text: 'Every pair in this set has a dot product of zero. That single condition forces independence &#8212; no vector can be a combination of the others without picking up a non-zero dot product with one of them. Independence therefore comes free with orthogonality rather than needing a separate check. Build such a set from arbitrary vectors on the',
+      href: '/linear-algebra/visual-tools/gram-schmidt',
+      linkText: 'Gram-Schmidt visualizer',
+    }),
+    orthmatrix: demoUnitFrame({
+      svg: orthogonalDiagrams.lengths,
+      caption: 'Columns of length one, pairwise orthogonal',
+      text: 'Each column has unit length and every pair is orthogonal, which is exactly the condition that makes the transpose an inverse. Nothing stronger is being asked of the matrix, and nothing weaker would do. Check the transpose-times-itself product on the',
+      href: '/linear-algebra/visual-tools/orthogonal-matrices',
+      linkText: 'orthogonal matrices visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1507,7 +1533,7 @@ export default function OrthogonalSetsPage({
   obj7Table,
   orthonormalOperations,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1519,6 +1545,8 @@ export default function OrthogonalSetsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-orthset'} dangerouslySetInnerHTML={{ __html: demoUnits.orthset }} />,
+          `The zero vector has to be excluded by hand, since it is orthogonal to everything and would wreck the independence it otherwise guarantees.`,
         ]
     },
     {
@@ -1583,6 +1611,8 @@ export default function OrthogonalSetsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-orthmatrix'} dangerouslySetInnerHTML={{ __html: demoUnits.orthmatrix }} />,
+          `Because the inverse is free, orthogonal matrices are the ones numerical work prefers wherever a choice exists.`,
         ]
     },
     {

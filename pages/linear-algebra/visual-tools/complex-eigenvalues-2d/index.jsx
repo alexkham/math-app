@@ -57,7 +57,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started`,
-      content: `The canvas shows a draggable start [vector](!/linear-algebra/vectors#1) $\\mathbf{x}_0$ in orange, the orbit $A^k\\mathbf{x}_0$ as blue dots numbered by step, a grey spiral tracing the continuous path between them, the purple invariant ellipse through $\\mathbf{x}_0$, and two green dashed lines along the columns of $P$, the real and imaginary parts of a complex eigenvector. The cyan arrow is the current point $A^k\\mathbf{x}_0$ of the animation.
+      content: `The canvas shows a draggable start [vector](!/linear-algebra/vectors#1) $\\mathbf{x}_0$ in orange, the orbit $A^k\\mathbf{x}_0$ as blue dots numbered by step, a grey spiral tracing the continuous path between them, the purple invariant ellipse through $\\mathbf{x}_0$, and two green dashed lines along the columns of $P$, the [real and imaginary parts](!/complex-numbers/algebraic-form#21) of a complex eigenvector. The cyan arrow is the current point $A^k\\mathbf{x}_0$ of the animation.
 
 Try this sequence to build intuition:
 
@@ -182,7 +182,7 @@ The dynamical reading is the important one. For $\\mathbf{x}_{k+1} = A\\mathbf{x
       title: `Key Properties`,
       content: `Facts that hold for every real $2 \\times 2$ matrix with complex eigenvalues.
 
-• **Conjugate pair**: the eigenvalues are $a \\pm bi$, never a lone complex number
+• **Conjugate pair**: the eigenvalues are $a \\pm bi$, never a lone [complex number](!/complex-numbers/algebraic-form#1)
 • **No real eigenvector**: no line through the origin is mapped to itself
 • **$A = PCP^{-1}$** with $C$ a rotation-scaling and $P$ real and invertible
 • **$r = \\sqrt{\\det A}$**, always positive; $\\det A > 0$ is necessary for complex eigenvalues

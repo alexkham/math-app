@@ -1997,6 +1997,9 @@ import PropertyLawCard from '@/app/components/infographics/linear-algebra/Proper
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import rankDiagrams from '@/app/components/linear-algebra copy/matrix/rankDiagrams'
+import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
 export async function getStaticProps(){
@@ -2833,8 +2836,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    reduction: demoUnitFrame({
+      svg: rankDiagrams.done,
+      caption: 'Elimination finished, pivots counted',
+      text: 'The pivots have been marked and counted, and that count is the rank. Row operations were applied throughout without changing the answer, because none of them can create or destroy an independent direction &#8212; they only make the existing ones easy to see. Run the elimination on a matrix of your own on the',
+      href: '/linear-algebra/visual-tools/matrix-rank',
+      linkText: 'rank visualizer',
+    }),
+    foursubspaces: demoUnitFrame({
+      svg: subspacesDiagrams.rref,
+      caption: 'The reduced form all four spaces are read from',
+      text: 'Pivot columns and free columns are both visible here, and between them they fix every one of the four spaces: the pivots give the dimensions of the row and column spaces, the free columns give the dimensions of the null spaces. One number, the rank, is doing all of that work at once. See each space extracted in turn on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -2855,7 +2881,7 @@ const schemas = {
 }
    }
 
-export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas}) {
+export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2901,6 +2927,8 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-reduction'} dangerouslySetInnerHTML={{ __html: demoUnits.reduction }} />,
+          `Counting pivots is therefore not an approximation to the rank but a direct measurement of it.`,
         ]
     },
     {
@@ -2970,6 +2998,8 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+                  <div key={'unit-foursubspaces'} dangerouslySetInnerHTML={{ __html: demoUnits.foursubspaces }} />,
+          `Rank is best thought of as the single number the four spaces are all sized against.`,
         ]
     },
     {

@@ -585,6 +585,9 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
+import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 
 
 export async function getStaticProps(){
@@ -919,8 +922,33 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    homogeneous: demoUnitFrame({
+      svg: eigenDiagrams.shift,
+      caption: 'Subtracting &#955; from the diagonal',
+      text: 'The eigenvalue has been taken off every diagonal entry, turning the eigenvector equation into a homogeneous system. That system needs a solution other than zero, which is possible only when the shifted matrix is singular &#8212; and that requirement is where the characteristic equation comes from. Watch the shift and the determinant condition together on the',
+      href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
+      linkText: 'eigenvalues and eigenvectors visualizer',
+    }),
+    // Invariant directions are a geometric claim, so the 2D tool
+    // carries this one rather than the symbolic eigen tool.
+    geometry: demoUnitFrame({
+      svg: eigenVectorsDiagrams.distinct,
+      caption: 'Two directions the matrix leaves in place',
+      text: 'Almost every arrow is rotated by the matrix, but the two marked directions are not: they are stretched along their own line and nothing more. The eigenvalue is the stretch factor, and a negative one would flip the arrow without leaving the line. Drag a vector around and watch it snap into alignment on the',
+      href: '/linear-algebra/visual-tools/eigen-vectors-2d',
+      linkText: 'eigenvector explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -946,7 +974,7 @@ const schemas = {
      obj5Table,
      obj6Table,
      summaryTable,
-     schemas,
+     schemas, demoUnits
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -974,6 +1002,8 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-homogeneous'} dangerouslySetInnerHTML={{ __html: demoUnits.homogeneous }} />,
+          `Every computational route on this page begins from that singularity requirement rather than from the original equation.`,
         ]
     },
     {
@@ -995,6 +1025,8 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+                  <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
+          `A matrix with no real eigenvectors is one that rotates every direction, which is exactly the complex case dealt with later in the section.`,
         ]
     },
     {

@@ -962,6 +962,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1675,8 +1677,38 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    ref: demoUnitFrame({
+      svg: gaussEliminationDiagrams.refDone,
+      caption: 'Echelon form: a staircase of pivots',
+      text: 'Each pivot sits strictly to the right of the one above it and every entry below a pivot is zero, which is what makes the shape a staircase. Rows of all zeros, if any, have sunk to the bottom. The form reached depends on the route taken through the elimination. Try a different pivot order and compare on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination visualizer',
+    }),
+    rref: demoUnitFrame({
+      svg: gaussEliminationDiagrams.rrefDone,
+      caption: 'Reduced form: pivots alone in their columns',
+      text: 'Every pivot is one and is the only non-zero entry in its column. Unlike the echelon form above, this one does not depend on how the elimination was carried out &#8212; every route ends at the same matrix, which is what makes uniqueness claims about it possible. Verify that by taking a different route on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination visualizer',
+    }),
+    inconsistent: demoUnitFrame({
+      svg: gaussEliminationDiagrams.zeroError,
+      caption: 'The contradiction row',
+      text: 'All coefficients gone, constant still present: the row claims zero equals a non-zero number. Detecting inconsistency needs no separate test, because reduction surfaces this row on its own if the system has no solution. Force one to appear on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1702,7 +1734,7 @@ export default function EchelonFormPage({
   obj9Table,
   rrefReadings,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1714,6 +1746,8 @@ export default function EchelonFormPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-ref'} dangerouslySetInnerHTML={{ __html: demoUnits.ref }} />,
+          `This is as far as plain Gaussian elimination goes; everything below this section is about what the extra reduction buys.`,
         ]
     },
     {
@@ -1741,6 +1775,8 @@ export default function EchelonFormPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-rref'} dangerouslySetInnerHTML={{ __html: demoUnits.rref }} />,
+          `Uniqueness is what lets the reduced form be used as a canonical description of the matrix rather than merely a convenient one.`,
         ]
     },
     {
@@ -1794,6 +1830,8 @@ export default function EchelonFormPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-inconsistent'} dangerouslySetInnerHTML={{ __html: demoUnits.inconsistent }} />,
+          `Spotting this row early saves the rest of the reduction, since no later step can repair it.`,
         ]
     },
     {

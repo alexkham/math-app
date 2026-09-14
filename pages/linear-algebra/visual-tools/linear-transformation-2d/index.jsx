@@ -611,7 +611,7 @@ When you edit, the active scenario indicator clears and the explanation card swi
 &bull; **$\\det M(t)$** &mdash; the determinant of the currently displayed matrix. Watch it deform from 1 (identity) toward $\\det A$.
 &bull; **$\\det A$** &mdash; the determinant of the target matrix. Fixed.
 &bull; **trace $A$** &mdash; sum of diagonal entries. Equals the sum of eigenvalues.
-&bull; **eigenvalues** &mdash; the roots of the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2). Listed as real pairs or as $a \\pm bi$ for complex conjugates.
+&bull; **eigenvalues** &mdash; the roots of the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2). Listed as real pairs or as $a \\pm bi$ for [complex conjugates](!/complex-numbers/complex-conjugate#1).
 &bull; **rank $A$** &mdash; the dimension of the image: 0, 1, or 2.
 
 The combination of $\\det A$, trace, and eigenvalues uniquely characterizes the structural type of the transformation up to similarity.`,
@@ -741,7 +741,7 @@ Two properties fall out immediately. Every non-zero vector is an eigenvector wit
       title:`Full Rank: Reshaping Without Losing Anything`,
       content:`Eight of the twelve presets are full-rank maps — rotations, scalings, shears, reflections and the general twist. Their common property is $\det A \neq 0$, which means the transformed grid stays a genuine grid: two independent directions in, two independent directions out.
 
-The frozen picture below shows the 45° rotation at $t = 1$. The unit circle is still a circle, the unit square has become a tilted square of equal area, and no direction has been flattened.`,
+The frozen picture below shows the 45° rotation at $t = 1$. The [unit circle](!/trigonometry/unit-circle#1) is still a circle, the unit square has become a tilted square of equal area, and no direction has been flattened.`,
       before:``,
       after:`Within this group the determinant separates the sub-cases. Rotations and shears have $\det = 1$ and preserve area exactly; the $2\times$ scaling has $\det = 4$ and quadruples it; the reflections have $\det = -1$, preserving area but reversing orientation — watch $\hat{i}$ and $\hat{j}$ swap handedness.
 

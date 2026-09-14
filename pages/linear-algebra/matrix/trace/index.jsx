@@ -940,6 +940,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import traceDiagrams from '@/app/components/linear-algebra copy/matrix/traceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1662,8 +1664,24 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    definition: demoUnitFrame({
+      svg: traceDiagrams.sweep,
+      caption: 'Sweeping the main diagonal',
+      text: 'Only the entries on the main diagonal are picked up; everything off it is passed over untouched. That is the entire definition, and it is why the trace is defined for square matrices alone &#8212; a non-square matrix has no full diagonal to sweep. Run the sweep on your own matrix on the',
+      href: '/linear-algebra/visual-tools/matrix-trace',
+      linkText: 'trace visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1683,7 +1701,7 @@ const schemas = {
    }
 
 
-export default function MatrixTracePage({seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas}) {
+export default function MatrixTracePage({seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1694,6 +1712,8 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Everything that follows — linearity, the cyclic property, the link to eigenvalues — is a consequence of the trace being this simple a sum.`,
         ]
     },
     {

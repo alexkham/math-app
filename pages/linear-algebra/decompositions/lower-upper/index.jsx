@@ -2831,6 +2831,8 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import luDiagrams from '@/app/components/linear-algebra copy/matrix/luDiagrams'
 
 
 export async function getStaticProps(){
@@ -3500,8 +3502,31 @@ const schemas = {
 
  
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    construction: demoUnitFrame({
+      svg: luDiagrams.eliminate,
+      caption: 'The multiplier stored, not discarded',
+      text: 'Ordinary elimination throws away the multiplier once the zero is in place. Here it is kept and written into the lower factor, so L records the elimination and U records the result of it. Nothing extra is computed; the same arithmetic is simply being saved. Follow both factors filling in on the',
+      href: '/linear-algebra/visual-tools/lu-decomposition',
+      linkText: 'LU decomposition visualizer',
+    }),
+    pivoting: demoUnitFrame({
+      svg: luDiagrams.swap,
+      caption: 'A row swap recorded in the permutation',
+      text: 'A zero, or an uncomfortably small number, has appeared where a pivot was needed, so rows have been exchanged and the exchange logged in P. This is why the honest statement of the factorisation is PA = LU: without the permutation there are perfectly ordinary matrices that have no LU at all. Trigger a swap on the',
+      href: '/linear-algebra/visual-tools/lu-decomposition',
+      linkText: 'LU decomposition visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     luFactors,
@@ -3529,7 +3554,7 @@ export default function LUDecompositionPage({
   obj10Table,
   luReadings,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -3568,6 +3593,8 @@ export default function LUDecompositionPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-construction'} dangerouslySetInnerHTML={{ __html: demoUnits.construction }} />,
+          `The factorisation is therefore a by-product of elimination rather than a separate algorithm with its own cost.`,
         ]
     },
     {
@@ -3601,6 +3628,8 @@ export default function LUDecompositionPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-pivoting'} dangerouslySetInnerHTML={{ __html: demoUnits.pivoting }} />,
+          `In practice pivoting is used even when it is not strictly required, because small pivots damage accuracy long before they reach zero.`,
         ]
     },
     {

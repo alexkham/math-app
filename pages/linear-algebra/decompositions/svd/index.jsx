@@ -8335,6 +8335,8 @@ import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/Obje
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import ConceptIntro from '@/app/components/page-components/content-components/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
 
 
 export async function getStaticProps(){
@@ -9039,8 +9041,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    values: demoUnitFrame({
+      svg: svdDiagrams.eigen,
+      caption: 'Singular values as roots of eigenvalues',
+      text: 'The eigenvalues of the symmetric product have been found and their square roots taken. They are never negative, because that product cannot have negative eigenvalues, and they are listed largest first by convention. This is why every matrix has singular values even when it has no eigenvalues of its own. Compute them for a rectangular matrix on the',
+      href: '/linear-algebra/visual-tools/singular-value-decomposition',
+      linkText: 'SVD visualizer',
+    }),
+    factor: demoUnitFrame({
+      svg: svdDiagrams.factor,
+      caption: 'The three factors assembled',
+      text: 'Two orthogonal matrices with a rectangular diagonal between them, and the whole product reconstructs the original. Unlike diagonalisation this asks nothing of the matrix &#8212; not squareness, not symmetry, not a full set of eigenvectors. Every matrix without exception has this factorisation. Build it for a matrix of your own on the',
+      href: '/linear-algebra/visual-tools/singular-value-decomposition',
+      linkText: 'SVD visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Blocks,
@@ -9071,7 +9096,7 @@ export default function SVDPage({
   obj9Table,
   svdReadings,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -9206,6 +9231,8 @@ export default function SVDPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-values'} dangerouslySetInnerHTML={{ __html: demoUnits.values }} />,
+          `Their ordering is what makes truncation meaningful: cutting the list short always discards the least important part first.`,
         ]
     },
     {
@@ -9214,6 +9241,8 @@ export default function SVDPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-factor'} dangerouslySetInnerHTML={{ __html: demoUnits.factor }} />,
+          `That universality is why the SVD, rather than the eigendecomposition, is the factorisation numerical work reaches for by default.`,
         ]
     },
     {

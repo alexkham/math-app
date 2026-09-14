@@ -1006,6 +1006,10 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import cramerDiagrams from '@/app/components/linear-algebra copy/matrix/cramerDiagrams'
+import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverseDiagrams'
+import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
 
 
 export async function getStaticProps(){
@@ -1834,8 +1838,38 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    cramer: demoUnitFrame({
+      svg: cramerDiagrams.replace,
+      caption: 'One column swapped for the right-hand side',
+      text: 'The column belonging to the unknown being solved for has been replaced by the constants, and the determinant of that altered matrix divided by the original gives the value. Each unknown costs its own determinant, which is why the rule is elegant for two or three and unusable beyond. Solve a full system with it on the',
+      href: '/linear-algebra/visual-tools/cramers-rule',
+      linkText: 'Cramer\'s rule visualizer',
+    }),
+    adjugate: demoUnitFrame({
+      svg: inverseDiagrams.cofactor,
+      caption: 'The cofactor array, before transposing',
+      text: 'Transposing this array and dividing by the determinant produces the inverse, which puts the invertibility condition in plain view: every step works until the division, and the division fails precisely when the determinant is zero. Follow it through to the finished inverse on the',
+      href: '/linear-algebra/visual-tools/matrix-inverse',
+      linkText: 'matrix inverse visualizer',
+    }),
+    cross: demoUnitFrame({
+      svg: crossProductDiagrams.determinant,
+      caption: 'The cross product written as a determinant',
+      text: 'Basis vectors occupy the first row and the two operands fill the other two, so the cross product is a cofactor expansion wearing different clothes. The alternating sign board is what puts the minus on the middle component, and the whole thing vanishing means the two rows were proportional &#8212; that is, the vectors were parallel. Expand it yourself on the',
+      href: '/linear-algebra/visual-tools/vector-cross-product',
+      linkText: 'cross product visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -1863,7 +1897,7 @@ const schemas = {
      obj6Table,
      determinantApplications,
      faqQuestions,
-     schemas,
+     schemas, demoUnits
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1880,6 +1914,8 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
           />,
+                  <div key={'unit-cramer'} dangerouslySetInnerHTML={{ __html: demoUnits.cramer }} />,
+          `The rule is a statement about structure rather than a practical method; elimination beats it for anything you would actually solve.`,
         ]
     },
     {
@@ -1907,6 +1943,8 @@ const schemas = {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-adjugate'} dangerouslySetInnerHTML={{ __html: demoUnits.adjugate }} />,
+          `The same warning applies here: exact, illuminating, and far too expensive to use beyond small matrices.`,
         ]
     },
     {
@@ -1915,6 +1953,8 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-cross'} dangerouslySetInnerHTML={{ __html: demoUnits.cross }} />,
+          `Seen this way the cross product is not a new operation at all but a determinant with a basis row bolted on.`,
         ]
     },
     {

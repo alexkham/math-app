@@ -822,6 +822,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import changeBasisDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/change-basis/changeBasisDiagrams'
 
 
 export async function getStaticProps(){
@@ -1450,8 +1452,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    matrix: demoUnitFrame({
+      svg: changeBasisDiagrams.nonorth,
+      caption: 'The same point, two sets of coordinates',
+      text: 'The grid has been redrawn along the new basis vectors and the point read off against it instead of against the axes. The point has not moved; only the description has. The change-of-basis matrix is simply the dictionary between the two readings. Swap between bases and watch the numbers change on the',
+      href: '/linear-algebra/visual-tools/change-basis-2d',
+      linkText: 'change of basis explorer',
+    }),
+    diagonal: demoUnitFrame({
+      svg: changeBasisDiagrams.special,
+      caption: 'A basis in which the map acts along the axes',
+      text: 'In this basis the transformation stretches along each grid direction independently, with no mixing between them &#8212; which is exactly what a diagonal matrix does. Diagonalisation is therefore not a computation performed on a matrix but a search for the basis in which the matrix was always going to look simple. Hunt for it yourself on the',
+      href: '/linear-algebra/visual-tools/change-basis-2d',
+      linkText: 'change of basis explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1470,7 +1495,7 @@ return {
 }
    }
 
-export default function BasisChangePage({seoData, sectionsContent, introContent, obj4Table, obj9Table, canonicalForms, faqQuestions, schemas}) {
+export default function BasisChangePage({seoData, sectionsContent, introContent, obj4Table, obj9Table, canonicalForms, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1489,6 +1514,8 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-matrix'} dangerouslySetInnerHTML={{ __html: demoUnits.matrix }} />,
+          `Its inverse is the dictionary read the other way, which is why change of basis always comes as a conjugating pair.`,
         ]
     },
     {
@@ -1534,6 +1561,8 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-diagonal'} dangerouslySetInnerHTML={{ __html: demoUnits.diagonal }} />,
+          `When no such basis exists the matrix is defective, and the next section is about what can be done instead.`,
         ]
     },
     {

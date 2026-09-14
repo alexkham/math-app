@@ -846,6 +846,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
 
 
 export async function getStaticProps(){
@@ -1477,8 +1479,38 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    polynomial: demoUnitFrame({
+      svg: eigenDiagrams.expand,
+      caption: 'The determinant expanded into a polynomial',
+      text: 'Taking the determinant of the shifted matrix has produced a polynomial in &#955; whose degree equals the size of the matrix. Its roots are the eigenvalues, so the question has been converted from a matrix problem into a root-finding problem. Expand it for a matrix of your own on the',
+      href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
+      linkText: 'eigenvalues and eigenvectors visualizer',
+    }),
+    roots: demoUnitFrame({
+      svg: eigenDiagrams.roots,
+      caption: 'Roots extracted from the characteristic polynomial',
+      text: 'The polynomial has been solved and its roots listed &#8212; these are the eigenvalues, and a repeated root is recorded with its multiplicity rather than collapsed into one. That bookkeeping matters later, because algebraic multiplicity and the number of independent eigenvectors need not agree. See the repeated and complex cases on the',
+      href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
+      linkText: 'eigenvalues and eigenvectors visualizer',
+    }),
+    eigvec: demoUnitFrame({
+      svg: eigenDiagrams.eigvec,
+      caption: 'Solving the shifted system for one eigenvalue',
+      text: 'With a specific eigenvalue substituted, the shifted matrix is being reduced and its null space read off. Any non-zero vector in that space is an eigenvector, and the whole space is the eigenspace &#8212; which is why eigenvectors are never unique and are usually quoted normalised. Run the solve for each eigenvalue in turn on the',
+      href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
+      linkText: 'eigenvalues and eigenvectors visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1504,7 +1536,7 @@ export default function CharacteristicEquationPage({
   obj5Table,
   characteristicPolynomial,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1543,6 +1575,8 @@ export default function CharacteristicEquationPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-polynomial'} dangerouslySetInnerHTML={{ __html: demoUnits.polynomial }} />,
+          `Because the degree matches the size, an n×n matrix has exactly n eigenvalues once multiplicity and complex roots are counted.`,
         ]
     },
     {
@@ -1556,6 +1590,8 @@ export default function CharacteristicEquationPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+                  <div key={'unit-roots'} dangerouslySetInnerHTML={{ __html: demoUnits.roots }} />,
+          `Beyond 4×4 no formula exists for these roots, which is why large eigenvalue problems are solved iteratively rather than algebraically.`,
         ]
     },
     {
@@ -1593,6 +1629,8 @@ export default function CharacteristicEquationPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-eigvec'} dangerouslySetInnerHTML={{ __html: demoUnits.eigvec }} />,
+          `Finding the eigenvalues is therefore only half the work; each one still has its own null space to compute.`,
         ]
     },
     {

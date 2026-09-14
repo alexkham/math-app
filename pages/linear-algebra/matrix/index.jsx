@@ -666,6 +666,8 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1074,8 +1076,26 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Hub page: one unit, on the section that reframes a matrix as an
+    // action rather than a table. That view needs the geometric tool.
+    transformation: demoUnitFrame({
+      svg: linearTransformationDiagrams.fullRank,
+      caption: 'The unit grid after the matrix has acted',
+      text: 'The grid has been stretched and sheared, but the lines are still straight, still evenly spaced, and still parallel in each family, and the origin has not moved. Those survivals are what the word linear is protecting. Seen this way a matrix is not a table of numbers but an instruction for moving the whole plane at once. Change the entries and watch the grid answer on the',
+      href: '/linear-algebra/visual-tools/linear-transformation-2d',
+      linkText: 'linear transformation explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -1096,7 +1116,7 @@ const schemas = {
 
 
 
-   export default function MatricesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas}) {
+   export default function MatricesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1185,6 +1205,8 @@ const schemas = {
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-transformation'} dangerouslySetInnerHTML={{ __html: demoUnits.transformation }} />,
+          `The other three views on this page — table, column collection, system of equations — are all recoverable from this one.`,
         ]
     },
     {

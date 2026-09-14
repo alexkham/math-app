@@ -915,6 +915,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 
 
 export async function getStaticProps(){
@@ -1606,8 +1608,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    defective: demoUnitFrame({
+      svg: [eigenVectorsDiagrams.repeated, eigenVectorsDiagrams.defective],
+      caption: 'A repeated eigenvalue with two directions, then with one',
+      text: 'Both matrices have a repeated eigenvalue. The upper one still supplies two independent directions, so geometric multiplicity matches algebraic. The lower one supplies only one: the second direction has been lost and cannot be recovered. That shortfall is the whole meaning of the word defective. Compare the two side by side on the',
+      href: '/linear-algebra/visual-tools/eigen-vectors-2d',
+      linkText: 'eigenvector explorer',
+    }),
+    independence: demoUnitFrame({
+      svg: eigenVectorsDiagrams.distinct,
+      caption: 'Distinct eigenvalues, independent directions',
+      text: 'The two eigenvectors point along genuinely different lines, and that is guaranteed whenever the eigenvalues differ &#8212; no amount of tuning can make eigenvectors from distinct eigenvalues line up. It is this guarantee that makes a matrix with all-distinct eigenvalues automatically diagonalisable. Test it by moving the eigenvalues together on the',
+      href: '/linear-algebra/visual-tools/eigen-vectors-2d',
+      linkText: 'eigenvector explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1635,7 +1660,7 @@ export default function EigenvaluePropertiesPage({
   obj8Table,
   spectralProperties,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1668,6 +1693,8 @@ export default function EigenvaluePropertiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+                  <div key={'unit-defective'} dangerouslySetInnerHTML={{ __html: demoUnits.defective }} />,
+          `A defective matrix is precisely one that cannot be diagonalised, which is why this gap is worth naming rather than treating as a curiosity.`,
         ]
     },
     {
@@ -1740,6 +1767,8 @@ export default function EigenvaluePropertiesPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-independence'} dangerouslySetInnerHTML={{ __html: demoUnits.independence }} />,
+          `Distinct eigenvalues are therefore a sufficient condition for diagonalisability, though not a necessary one.`,
         ]
     },
     {

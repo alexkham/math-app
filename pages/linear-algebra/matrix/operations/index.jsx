@@ -3180,6 +3180,10 @@ import PropertyLawCard from '@/app/components/infographics/linear-algebra/Proper
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import matrixAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/matrixAdditionDiagrams'
+import multiplicationDiagrams from '@/app/components/linear-algebra copy/matrix/multiplicationDiagrams'
+import transposeDiagrams from '@/app/components/linear-algebra copy/matrix/transposeDiagrams'
 
 
 export async function getStaticProps(){
@@ -4040,8 +4044,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    addition: demoUnitFrame({
+      svg: matrixAdditionDiagrams.done,
+      caption: 'A + B, every entry settled',
+      text: 'Each entry of the result came from the one pair sitting in the same position, and from nothing else. That is why the two matrices must have identical shapes and why the sum keeps that shape &#8212; there is no mechanism here for a row to reach a different row. Run it entry by entry, or switch to subtraction, on the',
+      href: '/linear-algebra/visual-tools/matrix-addition',
+      linkText: 'matrix addition visualizer',
+    }),
+    multiplication: demoUnitFrame({
+      svg: multiplicationDiagrams["row-column"],
+      caption: 'One entry of AB, from a row and a column',
+      text: 'The highlighted entry is being built by pairing the marked row of A with the marked column of B, multiplying term by term and summing. Every entry of the product costs one such pass, which is where the shape rule comes from: the row and the column have to be the same length or the pairing runs out. Switch between the row-column, column, and outer-product readings on the',
+      href: '/visual-tools/matrix-multiplication',
+      linkText: 'matrix multiplication visualizer',
+    }),
+    transpose: demoUnitFrame({
+      svg: transposeDiagrams["diagonal-reflection"],
+      caption: 'Reflection across the main diagonal',
+      text: 'Every entry has swapped places with its mirror image across the diagonal, and the entries sitting on the diagonal have not moved at all. Read that way the transpose is one reflection rather than a rule about indices, and it explains at a glance why transposing twice returns the original. Watch it run cell by cell instead on the',
+      href: '/linear-algebra/visual-tools/matrix-transpose',
+      linkText: 'transpose visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     multiplicationLaws,
@@ -4062,7 +4096,7 @@ const schemas = {
    }
 
 
-   export default function MatrixOperationsPage({seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas}) {
+   export default function MatrixOperationsPage({seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4073,6 +4107,8 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-addition'} dangerouslySetInnerHTML={{ __html: demoUnits.addition }} />,
+          `Subtraction and scaling in the next two sections work the same way, one position at a time, which is why they share addition's shape rules.`,
         ]
     },
     {
@@ -4124,6 +4160,8 @@ const schemas = {
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-multiplication'} dangerouslySetInnerHTML={{ __html: demoUnits.multiplication }} />,
+          `This single-entry view is the definition; the column and row readings later on the page are the same arithmetic grouped differently.`,
         ]
     },
     {
@@ -4165,6 +4203,8 @@ const schemas = {
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-transpose'} dangerouslySetInnerHTML={{ __html: demoUnits.transpose }} />,
+          `Because the diagonal is fixed, a matrix equal to its own transpose is exactly one that is symmetric about that line.`,
         ]
     },
     {

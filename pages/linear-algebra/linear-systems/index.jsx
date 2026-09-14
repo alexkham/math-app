@@ -657,6 +657,9 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
+import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1033,8 +1036,31 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    outcomes: demoUnitFrame({
+      svg: [linearSystemDiagrams.unique, linearSystemDiagrams.none, linearSystemDiagrams.infinite],
+      caption: 'Unique, none, infinitely many',
+      text: 'Three finished eliminations, three different endings: a pivot in every column and one answer; a contradiction row and no answer; a free column and a whole family of answers. There is no fourth ending available to a linear system, and which one you get is settled by the pivots rather than by the arithmetic. Build systems that land in each case on the',
+      href: '/linear-algebra/visual-tools/linear-system-solutions',
+      linkText: 'linear system solutions visualizer',
+    }),
+    echelon: demoUnitFrame({
+      svg: [gaussEliminationDiagrams.refDone, gaussEliminationDiagrams.rrefDone],
+      caption: 'Row echelon form, then reduced',
+      text: 'The upper form has zeros below every pivot and is enough to back-substitute from. The lower one goes further, clearing above the pivots and scaling them to one, so the solution can simply be read off. The extra work buys legibility, not correctness. Run both passes on a system of your own on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1060,7 +1086,7 @@ export default function LinearSystemsPage({
   obj4Table,
   obj10Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1101,6 +1127,8 @@ export default function LinearSystemsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-outcomes'} dangerouslySetInnerHTML={{ __html: demoUnits.outcomes }} />,
+          `Everything else on this page is machinery for finding out which of these three you are in.`,
         ]
     },
     {
@@ -1125,6 +1153,8 @@ export default function LinearSystemsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-echelon'} dangerouslySetInnerHTML={{ __html: demoUnits.echelon }} />,
+          `Reduced form is unique to the matrix, while the echelon form reached along the way depends on the route taken.`,
         ]
     },
     {

@@ -832,6 +832,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import kernelImageDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
 
 
 export async function getStaticProps(){
@@ -1470,8 +1472,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    image: demoUnitFrame({
+      svg: kernelImageDiagrams.full,
+      caption: 'A map reaching the whole plane',
+      text: 'The output fills the plane, so the image is everything and the map is onto. The image is spanned by where the basis vectors land, which is why it is the column space of the matrix by another name. Shrink the image by making the columns dependent on the',
+      href: '/linear-algebra/visual-tools/kernel-image-2d',
+      linkText: 'kernel and image explorer',
+    }),
+    kernel: demoUnitFrame({
+      svg: kernelImageDiagrams.rankOne,
+      caption: 'A line crushed to the origin',
+      text: 'The image has collapsed to a line, and a whole line of inputs is now being sent to the origin &#8212; that line is the kernel. The two losses are the same loss counted twice: one dimension gone from the image is one dimension gained by the kernel, which is rank-nullity in its shortest form. Watch both change together on the',
+      href: '/linear-algebra/visual-tools/kernel-image-2d',
+      linkText: 'kernel and image explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1490,7 +1515,7 @@ return {
 }
    }
 
-export default function ImageKernelPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas}) {
+export default function ImageKernelPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1501,6 +1526,8 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-image'} dangerouslySetInnerHTML={{ __html: demoUnits.image }} />,
+          `Whether the image fills the codomain is precisely the question of surjectivity dealt with below.`,
         ]
     },
     {
@@ -1509,6 +1536,8 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-kernel'} dangerouslySetInnerHTML={{ __html: demoUnits.kernel }} />,
+          `A kernel containing only the origin is what injectivity means, which is why the two properties are so often checked together.`,
         ]
     },
     {

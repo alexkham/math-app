@@ -1908,6 +1908,8 @@ import EquivalenceRing from '@/app/components/infographics/linear-algebra/Equiva
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
 
 
 export async function getStaticProps(){
@@ -2621,8 +2623,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    triangular: demoUnitFrame({
+      svg: determinantDiagrams.diagonal,
+      caption: 'Only the diagonal product survives',
+      text: 'Every term in the full expansion that strays off the diagonal picks up a zero somewhere and dies, leaving a single surviving product. This is why reducing a matrix to triangular form before taking its determinant is worth the effort: the elimination is cheap and the answer is then one multiplication chain. See the same shortcut applied on the',
+      href: '/linear-algebra/visual-tools/matrix-determinant',
+      linkText: 'determinant visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -2649,7 +2667,7 @@ const schemas = {
      invertibilityRing,
      determinantProperties,
      faqQuestions,
-     schemas,
+     schemas, demoUnits
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2733,6 +2751,8 @@ const schemas = {
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-triangular'} dangerouslySetInnerHTML={{ __html: demoUnits.triangular }} />,
+          `Row reduction and the determinant therefore work together rather than against each other, provided the swaps and scalings are tracked.`,
         ]
     },
     {

@@ -78,7 +78,7 @@ The run has a forward pass, a consistency check, and a backward pass, and it end
 • **Backward pass** — from the last pivot up: divide the pivot row so the pivot is $1$, then clear every entry above the pivot
 • **Classification** — with a pivot in every column of $A$, the right-hand column is the solution; otherwise the solution is written as a particular solution plus one direction per free variable
 
-The row operations act on the whole augmented row, constants included. That is what makes them legal: each one replaces an equation by an equivalent equation, so the solution set never changes from the first scene to the last.`,
+The row operations act on the whole augmented row, constants included. That is what makes them legal: each one replaces an equation by an [equivalent equation](!/algebra/equations), so the solution set never changes from the first scene to the last.`,
       before: ``,
       after: ``,
       link: '',

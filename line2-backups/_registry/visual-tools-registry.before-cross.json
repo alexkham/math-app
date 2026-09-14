@@ -18,8 +18,7 @@
         "No MIN_CHARS skip and no CAP_PER_SECTION at ledger stage - those are linking limits. 40 pending links across 21 sections exceed v3's cap of 5 per section and must be trimmed by the write pass.",
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
-      "linearAlgebraLinksWritten": "2026-09-13",
-      "crossSubjectClosed": "2026-09-13"
+      "linearAlgebraLinksWritten": "2026-09-13"
     }
   },
   "tools": {
@@ -10452,25 +10451,20 @@
           "sections": [
             "the-live-card"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-live-card",
+            "target": {
+              "path": "/complex-numbers/complex-conjugate",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "complex-numbers"
+          },
           "definitionTarget": {
             "path": "/complex-numbers/definitions",
             "section": "complex_conjugate"
-          },
-          "links": [
-            {
-              "fromSection": "the-live-card",
-              "surface": "complex conjugates",
-              "target": {
-                "path": "/complex-numbers/complex-conjugate",
-                "section": "1"
-              },
-              "method": "repository-link",
-              "crossSubject": "complex-numbers",
-              "rationale": "Eigenvalues are listed as a +/- bi pairs here, so the reader needs the conjugate concept at that moment.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "determinant",
@@ -10696,12 +10690,20 @@
             "determinant-area-and-orientation",
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/calculus/integrals/definite",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
           "definitionTarget": {
             "path": "/calculus/definitions",
             "section": "signed_area"
-          },
-          "reason": "False match: in linear algebra this phrase means something other than the calculus concept at /calculus/integrals/definite#3. Linking it would send the reader somewhere unrelated."
+          }
         },
         {
           "term": "singular values",
@@ -10753,25 +10755,20 @@
             "eigenvalues-rank-and-matrix-types",
             "related-concepts"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "full-rank",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
           "definitionTarget": {
             "path": "/trigonometry/definitions",
             "section": "unit_circle"
-          },
-          "links": [
-            {
-              "fromSection": "full-rank",
-              "surface": "unit circle",
-              "target": {
-                "path": "/trigonometry/unit-circle",
-                "section": "1"
-              },
-              "method": "repository-link",
-              "crossSubject": "trigonometry",
-              "rationale": "The section reads the transformed unit circle directly.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "vector spaces",
@@ -14915,12 +14912,20 @@
             "key-properties",
             "when-the-determinant-is-zero"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-properties",
+            "target": {
+              "path": "/combinatorics/counting-principles",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "combinatorics"
+          },
           "definitionTarget": {
             "path": "/combinatorics/definitions",
             "section": "addition_rule"
-          },
-          "reason": "False match: in linear algebra this phrase means something other than the combinatorics concept at /combinatorics/counting-principles#1. Linking it would send the reader somewhere unrelated."
+          }
         },
         {
           "term": "characteristic polynomial",
@@ -15690,12 +15695,20 @@
           "sections": [
             "why-three-dimensions"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "why-three-dimensions",
+            "target": {
+              "path": "/calculus/integrals/definite",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
           "definitionTarget": {
             "path": "/calculus/definitions",
             "section": "signed_area"
-          },
-          "reason": "False match: in linear algebra this phrase means something other than the calculus concept at /calculus/integrals/definite#3. Linking it would send the reader somewhere unrelated."
+          }
         },
         {
           "term": "span",
@@ -15995,12 +16008,20 @@
             "common-mistakes",
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "choosing-vector-length",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "absolute_value"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "basis",
@@ -16106,12 +16127,20 @@
             "common-mistakes",
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-three-phases",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "square_root"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "vectors",
@@ -19256,12 +19285,20 @@
           "sections": [
             "choosing-a-matrix"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "choosing-a-matrix",
+            "target": {
+              "path": "/combinatorics/binomial-coefficient",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "combinatorics"
+          },
           "definitionTarget": {
             "path": "/combinatorics/definitions",
             "section": "binomial_coefficient"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the combinatorics page for it."
+          }
         },
         {
           "term": "determinant",
@@ -19641,12 +19678,20 @@
           "sections": [
             "key-properties"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-properties",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "absolute_value"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "determinant",
@@ -19746,12 +19791,20 @@
             "key-properties",
             "worked-example"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/algebra/roots/rational-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "rational_exponent"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "matrix",
@@ -20162,12 +20215,20 @@
           "sections": [
             "key-properties"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-properties",
+            "target": {
+              "path": "/functions/families",
+              "section": "4"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
           "definitionTarget": {
             "path": "/functions/definitions",
             "section": "linear_function"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the functions page for it."
+          }
         },
         {
           "term": "matrix",
@@ -20228,12 +20289,20 @@
           "sections": [
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "solution_set"
-          },
-          "reason": "Related Concepts is a structural section reserved for the Line 3 tool-to-tool mesh and takes no Line 2 links."
+          }
         },
         {
           "term": "square matrix",
@@ -20667,25 +20736,20 @@
           "sections": [
             "how-the-reduction-runs"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "how-the-reduction-runs",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "equivalent_equations"
-          },
-          "links": [
-            {
-              "fromSection": "how-the-reduction-runs",
-              "surface": "equivalent equation",
-              "target": {
-                "path": "/algebra/equations",
-                "section": null
-              },
-              "method": "repository-link",
-              "crossSubject": "algebra",
-              "rationale": "The section turns on each operation replacing an equation by an equivalent one - the exact idea the algebra page teaches.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "least squares",
@@ -20775,12 +20839,20 @@
             "the-three-outcomes",
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "how-the-reduction-runs",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "solution_set"
-          },
-          "reason": "The same destination is already linked from this section via a more specific term; one link per destination per section."
+          }
         },
         {
           "term": "span",
@@ -21028,12 +21100,20 @@
           "sections": [
             "why-it-matters"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "why-it-matters",
+            "target": {
+              "path": "/algebra/inequalities/rational",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "critical_point"
-          },
-          "reason": "False match: in linear algebra this phrase means something other than the algebra concept at /algebra/inequalities/rational#2. Linking it would send the reader somewhere unrelated."
+          }
         },
         {
           "term": "determinant",
@@ -21206,12 +21286,20 @@
             "common-mistakes",
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "square_root"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "symmetric matrix",
@@ -21421,12 +21509,20 @@
             "the-live-card",
             "the-determinant-test"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "absolute_value"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "basis",
@@ -21566,12 +21662,20 @@
           "sections": [
             "the-live-card"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-live-card",
+            "target": {
+              "path": "/calculus/integrals/definite",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
           "definitionTarget": {
             "path": "/calculus/definitions",
             "section": "signed_area"
-          },
-          "reason": "False match: in linear algebra this phrase means something other than the calculus concept at /calculus/integrals/definite#3. Linking it would send the reader somewhere unrelated."
+          }
         },
         {
           "term": "subspaces",
@@ -23236,12 +23340,20 @@
           "sections": [
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/complex-numbers/algebraic-form",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "complex-numbers"
+          },
           "definitionTarget": {
             "path": "/complex-numbers/definitions",
             "section": "complex_number"
-          },
-          "reason": "Related Concepts is a structural section reserved for the Line 3 tool-to-tool mesh and takes no Line 2 links."
+          }
         },
         {
           "term": "determinant",
@@ -23459,25 +23571,20 @@
             "the-four-moves",
             "finding-the-roots"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-four-moves",
+            "target": {
+              "path": "/algebra/equations/quadratic",
+              "section": "4"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/formulas",
             "section": "quadratic_formula"
-          },
-          "links": [
-            {
-              "fromSection": "the-four-moves",
-              "surface": "quadratic formula",
-              "target": {
-                "path": "/algebra/equations/quadratic",
-                "section": "4"
-              },
-              "method": "repository-link",
-              "crossSubject": "algebra",
-              "rationale": "The 2x2 characteristic polynomial is solved with it in this section.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "real part",
@@ -23485,12 +23592,20 @@
           "sections": [
             "why-it-matters"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "why-it-matters",
+            "target": {
+              "path": "/complex-numbers/algebraic-form",
+              "section": "21"
+            },
+            "method": "repository-link",
+            "crossSection": "complex-numbers"
+          },
           "definitionTarget": {
             "path": "/complex-numbers/definitions",
             "section": "real_part"
-          },
-          "reason": "Cross-subject candidate judged to add no value at this point in the prose."
+          }
         },
         {
           "term": "similar matrices",
@@ -24464,12 +24579,20 @@
             "key-terms",
             "common-mistakes"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "absolute_value"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "basis",
@@ -24593,12 +24716,20 @@
           "sections": [
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "square_root"
-          },
-          "reason": "Related Concepts is a structural section reserved for the Line 3 tool-to-tool mesh and takes no Line 2 links."
+          }
         },
         {
           "term": "vector",
@@ -24912,25 +25043,20 @@
             "key-properties",
             "related-concepts"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-properties",
+            "target": {
+              "path": "/complex-numbers/algebraic-form",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "complex-numbers"
+          },
           "definitionTarget": {
             "path": "/complex-numbers/definitions",
             "section": "complex_number"
-          },
-          "links": [
-            {
-              "fromSection": "key-properties",
-              "surface": "complex number",
-              "target": {
-                "path": "/complex-numbers/algebraic-form",
-                "section": "1"
-              },
-              "method": "repository-link",
-              "crossSubject": "complex-numbers",
-              "rationale": "The tool exists because the eigenvalues are complex; the term is load-bearing.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "determinant",
@@ -25001,25 +25127,20 @@
             "the-matrix-card",
             "what-complex-eigenvalues-mean"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started",
+            "target": {
+              "path": "/complex-numbers/algebraic-form",
+              "section": "21"
+            },
+            "method": "repository-link",
+            "crossSection": "complex-numbers"
+          },
           "definitionTarget": {
             "path": "/complex-numbers/formulas",
             "section": "real_part"
-          },
-          "links": [
-            {
-              "fromSection": "getting-started",
-              "surface": "real and imaginary parts",
-              "target": {
-                "path": "/complex-numbers/algebraic-form",
-                "section": "21"
-              },
-              "method": "repository-link",
-              "crossSubject": "complex-numbers",
-              "rationale": "The controls are described in terms of real and imaginary parts.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "traces",
@@ -25376,12 +25497,20 @@
           "sections": [
             "why-it-matters"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "why-it-matters",
+            "target": {
+              "path": "/algebra/inequalities/rational",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "critical_point"
-          },
-          "reason": "False match: in linear algebra this phrase means something other than the algebra concept at /algebra/inequalities/rational#2. Linking it would send the reader somewhere unrelated."
+          }
         },
         {
           "term": "dimension",
@@ -25633,12 +25762,20 @@
             "the-scene-player",
             "key-properties"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-scene-player",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "square_root"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "symmetric matrix",
@@ -26391,12 +26528,20 @@
             "the-scene-player",
             "common-mistakes"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "square_root"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the algebra page for it."
+          }
         },
         {
           "term": "subspaces",
@@ -26455,25 +26600,20 @@
             "worked-example",
             "related-concepts"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "worked-example",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
           "definitionTarget": {
             "path": "/trigonometry/definitions",
             "section": "unit_circle"
-          },
-          "links": [
-            {
-              "fromSection": "worked-example",
-              "surface": "unit circle",
-              "target": {
-                "path": "/trigonometry/unit-circle",
-                "section": "1"
-              },
-              "method": "repository-link",
-              "crossSubject": "trigonometry",
-              "rationale": "The worked example maps the unit circle to an ellipse.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "unit vector",
@@ -27020,12 +27160,20 @@
             "why-it-matters",
             "related-concepts"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "why-it-matters",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "solution_set"
-          },
-          "reason": "The same destination is already linked from this section via a more specific term; one link per destination per section."
+          }
         },
         {
           "term": "span",
@@ -28738,12 +28886,20 @@
           "sections": [
             "key-properties"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-properties",
+            "target": {
+              "path": "/set-theory/cardinality",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "set-theory"
+          },
           "definitionTarget": {
             "path": "/set-theory/definitions",
             "section": "finite_set"
-          },
-          "reason": "Prerequisite vocabulary used in passing; a reader at this point in linear algebra does not need the set-theory page for it."
+          }
         },
         {
           "term": "linear combinations",
@@ -29444,25 +29600,20 @@
             "the-scene-player",
             "row-operations"
           ],
-          "status": "linked",
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "solution_set"
-          },
-          "links": [
-            {
-              "fromSection": "key-terms",
-              "surface": "solution set",
-              "target": {
-                "path": "/algebra/equations",
-                "section": null
-              },
-              "method": "repository-link",
-              "crossSubject": "algebra",
-              "rationale": "Row operations are defined here as the moves that preserve the solution set; the destination is where that term is defined.",
-              "added": "2026-09-13"
-            }
-          ]
+          }
         },
         {
           "term": "subspaces",
@@ -30013,12 +30164,20 @@
           "sections": [
             "determinants-and-eigenvalues-by-type"
           ],
-          "status": "dropped",
+          "status": "pending",
+          "plan": {
+            "fromSection": "determinants-and-eigenvalues-by-type",
+            "target": {
+              "path": "/algebra/roots/simplifying",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
           "definitionTarget": {
             "path": "/algebra/definitions",
             "section": "perfect_square"
-          },
-          "reason": "False match: in linear algebra this phrase means something other than the algebra concept at /algebra/roots/simplifying. Linking it would send the reader somewhere unrelated."
+          }
         },
         {
           "term": "quadratic form",

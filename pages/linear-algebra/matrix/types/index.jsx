@@ -945,6 +945,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import matrixTypesDiagrams from '@/app/components/matrices/matrixTypesDiagrams'
 
 
 export async function getStaticProps(){
@@ -1529,8 +1531,38 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    identity: demoUnitFrame({
+      svg: matrixTypesDiagrams.identity,
+      caption: 'The identity, generated at this size',
+      text: 'Ones the whole length of the diagonal, zeros everywhere else. Multiplying by this matrix leaves any compatible matrix untouched, and the picture shows why: each row of the identity selects exactly one row of whatever it meets and ignores the rest. Generate it at other sizes, alongside every other type on this page, on the',
+      href: '/linear-algebra/visual-tools/matrix-types',
+      linkText: 'matrix type generator',
+    }),
+    triangular: demoUnitFrame({
+      svg: matrixTypesDiagrams.upperTriangular,
+      caption: 'Upper triangular: everything below the diagonal is zero',
+      text: 'The zeros form a solid block beneath the diagonal, which is what makes this shape so cheap to work with: the determinant is just the diagonal product, and a system in this form can be solved by substituting upwards with no elimination left to do. Flip to the lower form and compare on the',
+      href: '/linear-algebra/visual-tools/matrix-types',
+      linkText: 'matrix type generator',
+    }),
+    symmetric: demoUnitFrame({
+      svg: matrixTypesDiagrams.symmetric,
+      caption: 'Symmetric: entries mirrored across the diagonal',
+      text: 'Each entry above the diagonal is matched by an equal entry below it, so the matrix is unchanged by reflection in that line &#8212; it equals its own transpose. This is the shape that guarantees real eigenvalues and an orthogonal set of eigenvectors later on. Compare it with the skew-symmetric case, where the mirrored entries carry opposite signs, on the',
+      href: '/linear-algebra/visual-tools/matrix-types',
+      linkText: 'matrix type generator',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj8Table,
@@ -1550,7 +1582,7 @@ return {
 }
 
 
-export default function MatrixTypesPage({seoData, sectionsContent, introContent, obj8Table, matrixTypeProfiles, faqQuestions, schemas}) {
+export default function MatrixTypesPage({seoData, sectionsContent, introContent, obj8Table, matrixTypeProfiles, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1569,6 +1601,8 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-identity'} dangerouslySetInnerHTML={{ __html: demoUnits.identity }} />,
+          `Every notion of an inverse on this site is stated against this matrix: to invert something is to get back here.`,
         ]
     },
     {
@@ -1585,6 +1619,8 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-triangular'} dangerouslySetInnerHTML={{ __html: demoUnits.triangular }} />,
+          `Elimination is, in these terms, the business of turning an arbitrary matrix into this shape.`,
         ]
     },
     {
@@ -1593,6 +1629,8 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-symmetric'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetric }} />,
+          `Symmetry is the strongest structural gift a square matrix can have, and the spectral results later in the section are its payoff.`,
         ]
     },
     {

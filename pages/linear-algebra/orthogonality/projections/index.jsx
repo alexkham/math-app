@@ -1855,6 +1855,9 @@ import PropertyLawCard from '@/app/components/infographics/linear-algebra/Proper
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import projectionDiagrams from '@/app/components/linear-algebra copy/matrix/projectionDiagrams'
+import projection2dDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/projection/projectionDiagrams'
 
 
 export async function getStaticProps(){
@@ -2438,8 +2441,40 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    ontovector: demoUnitFrame({
+      svg: projectionDiagrams.scale,
+      caption: 'The coefficient applied to the direction',
+      text: 'The scalar built from the two dot products is being multiplied onto the direction vector, turning a ratio into an actual vector on that line. The projection is always a multiple of the vector being projected onto, never of the one being projected &#8212; an asymmetry the formula hides and the picture does not. Follow the whole computation on the',
+      href: '/linear-algebra/visual-tools/vector-projection',
+      linkText: 'vector projection visualizer',
+    }),
+    decomposition: demoUnitFrame({
+      svg: projectionDiagrams.remainder,
+      caption: 'What is left after the projection is removed',
+      text: 'Subtracting the projection leaves a remainder orthogonal to the direction projected onto. Every vector splits this way, into a part along a subspace and a part perpendicular to it, and the split is unique. That uniqueness is what makes least squares well posed later. Check the remainder\'s dot product on the',
+      href: '/linear-algebra/visual-tools/vector-projection',
+      linkText: 'vector projection visualizer',
+    }),
+    // The projection MATRIX acting on the plane is geometric, so the
+    // 2D projection tool carries this one, not the symbolic vector tool.
+    matrix: demoUnitFrame({
+      svg: projection2dDiagrams.axes,
+      caption: 'The whole plane collapsed onto a line',
+      text: 'Every point has been dropped perpendicularly onto the line, and points already on it have not moved at all. That is why applying the matrix twice changes nothing the second time: idempotence is a geometric fact here, not an algebraic coincidence. Move the line and watch the whole plane follow on the',
+      href: '/linear-algebra/visual-tools/projection-2d',
+      linkText: '2D projection explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     projectionFormulas,
@@ -2469,7 +2504,7 @@ export default function ProjectionsPage({
   summaryTable,
   projectionProperties,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2481,6 +2516,8 @@ export default function ProjectionsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-ontovector'} dangerouslySetInnerHTML={{ __html: demoUnits.ontovector }} />,
+          `Projecting onto a subspace rather than a single vector is this same step repeated once per basis direction, provided the basis is orthogonal.`,
         ]
     },
     {
@@ -2508,6 +2545,8 @@ export default function ProjectionsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-decomposition'} dangerouslySetInnerHTML={{ __html: demoUnits.decomposition }} />,
+          `The perpendicular part is the error, and minimising it is what the whole of least squares is about.`,
         ]
     },
     {
@@ -2546,6 +2585,8 @@ export default function ProjectionsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+                  <div key={'unit-matrix'} dangerouslySetInnerHTML={{ __html: demoUnits.matrix }} />,
+          `A projection matrix is therefore recognisable by squaring to itself, without any need to know which subspace it projects onto.`,
         ]
     },
     {

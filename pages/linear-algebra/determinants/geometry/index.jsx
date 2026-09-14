@@ -809,6 +809,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1413,8 +1415,31 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    signedarea: demoUnitFrame({
+      svg: linearTransformationDiagrams.fullRank,
+      caption: 'The unit square after the matrix has acted',
+      text: 'The square has become a parallelogram, and the factor by which its area changed is the determinant. Every other region on the plane is scaled by that same factor, however it is shaped, which is what lets one number describe the whole map. Change the matrix and watch the parallelogram follow on the',
+      href: '/linear-algebra/visual-tools/linear-transformation-2d',
+      linkText: 'linear transformation explorer',
+    }),
+    collapse: demoUnitFrame({
+      svg: linearTransformationDiagrams.rankOne,
+      caption: 'The plane flattened onto a line',
+      text: 'The two columns now point along the same line, the grid has collapsed, and every region on the plane has been crushed to zero area. A zero determinant is exactly this: not a small scaling but a loss of a dimension, which is why nothing can be recovered and no inverse exists. Push a matrix into and out of this state on the',
+      href: '/linear-algebra/visual-tools/linear-transformation-2d',
+      linkText: 'linear transformation explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1441,7 +1466,7 @@ const schemas = {
    obj7Table,
    determinantGeometry,
    faqQuestions,
-   schemas,
+   schemas, demoUnits
  }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1453,6 +1478,8 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-signedarea'} dangerouslySetInnerHTML={{ __html: demoUnits.signedarea }} />,
+          `The sign of that number, set aside for now, is what the orientation section below is about.`,
         ]
     },
     {
@@ -1509,6 +1536,8 @@ const schemas = {
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-collapse'} dangerouslySetInnerHTML={{ __html: demoUnits.collapse }} />,
+          `Invertibility, independence of the columns and a non-zero determinant are three descriptions of this single picture not collapsing.`,
         ]
     },
     {

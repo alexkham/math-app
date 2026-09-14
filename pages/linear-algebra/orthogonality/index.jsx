@@ -767,6 +767,8 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
 export async function getStaticProps(){
@@ -1122,8 +1124,26 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    // Hub page: one unit, on the section where orthogonality stops
+    // being a property of pairs and becomes a property of whole spaces.
+    foursubspaces: demoUnitFrame({
+      svg: subspacesDiagrams.orth,
+      caption: 'Two orthogonal pairings of whole subspaces',
+      text: 'Row space against null space, column space against left null space. Every vector in one is orthogonal to every vector in its partner, and each pair fills the space between them, so any vector splits uniquely across the pair. Orthogonality has stopped being a relation between two arrows and become the architecture of the space. Check both pairings on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1149,7 +1169,7 @@ export default function OrthogonalityPage({
   obj4Table,
   obj6Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1190,6 +1210,8 @@ export default function OrthogonalityPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-foursubspaces'} dangerouslySetInnerHTML={{ __html: demoUnits.foursubspaces }} />,
+          `Projections, Gram-Schmidt and least squares in the sections below are all built on this decomposition.`,
         ]
     },
     {

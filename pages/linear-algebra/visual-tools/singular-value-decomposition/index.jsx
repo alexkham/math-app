@@ -194,7 +194,7 @@ $$U = \\frac{1}{\\sqrt{10}}\\begin{pmatrix} 1 & 3 \\\\ 3 & -1 \\end{pmatrix}, \\
 
 **Check.** $\\Sigma V^T = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} \\sqrt{45} & \\sqrt{45} \\\\ \\sqrt{5} & -\\sqrt{5} \\end{pmatrix}$, and $U\\Sigma V^T = \\frac{1}{\\sqrt{20}}\\begin{pmatrix} \\sqrt{45} + 3\\sqrt{5} & \\sqrt{45} - 3\\sqrt{5} \\\\ 3\\sqrt{45} - \\sqrt{5} & 3\\sqrt{45} + \\sqrt{5} \\end{pmatrix}$. With $\\sqrt{45} = 3\\sqrt{5}$ and $\\sqrt{20} = 2\\sqrt{5}$ this is $\\frac{1}{2}\\begin{pmatrix} 6 & 0 \\\\ 8 & 10 \\end{pmatrix} = A$.
 
-**Numbers.** Rank $2$, $\\|A\\|_2 = \\sqrt{45} \\approx 6.71$, $\\|A\\|_F = \\sqrt{50}$, condition number $\\sqrt{45}/\\sqrt{5} = 3$, and $|\\det A| = 15 = \\sqrt{45}\\sqrt{5}$. The unit circle maps to an ellipse with semi-axes $\\sqrt{45}$ along $(1, 3)$ and $\\sqrt{5}$ along $(3, -1)$.`,
+**Numbers.** Rank $2$, $\\|A\\|_2 = \\sqrt{45} \\approx 6.71$, $\\|A\\|_F = \\sqrt{50}$, condition number $\\sqrt{45}/\\sqrt{5} = 3$, and $|\\det A| = 15 = \\sqrt{45}\\sqrt{5}$. The [unit circle](!/trigonometry/unit-circle#1) maps to an ellipse with semi-axes $\\sqrt{45}$ along $(1, 3)$ and $\\sqrt{5}$ along $(3, -1)$.`,
       before: ``,
       after: ``,
       link: '',

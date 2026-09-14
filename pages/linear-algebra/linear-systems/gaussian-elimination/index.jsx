@@ -940,6 +940,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1609,8 +1611,38 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    forward: demoUnitFrame({
+      svg: gaussEliminationDiagrams.eliminate,
+      caption: 'Clearing one entry beneath a pivot',
+      text: 'A multiple of the pivot row is being subtracted from the row below to put a zero under the pivot. Nothing about the solution set changes, because the operation is reversible &#8212; the same multiple added back restores the original. That reversibility is the licence for the whole algorithm. Step through a full elimination on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination visualizer',
+    }),
+    jordan: demoUnitFrame({
+      svg: gaussEliminationDiagrams.rrefDone,
+      caption: 'Reduced row echelon form reached',
+      text: 'Pivots have been scaled to one and cleared above as well as below, so each pivot column now holds a single one and nothing else. At this point no back substitution is left: the values are sitting in the final column. Compare the effort against stopping at echelon form on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination visualizer',
+    }),
+    nosolution: demoUnitFrame({
+      svg: gaussEliminationDiagrams.zeroError,
+      caption: 'A row of zeros against a non-zero constant',
+      text: 'The coefficients in this row have all been eliminated while the constant has not, so the row now asserts that zero equals something non-zero. One such row is enough to make the entire system inconsistent, regardless of how well the other rows behaved. Construct one deliberately on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1638,7 +1670,7 @@ export default function GaussianEliminationPage({
   obj10Table,
   eliminationStages,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1690,6 +1722,8 @@ export default function GaussianEliminationPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-forward'} dangerouslySetInnerHTML={{ __html: demoUnits.forward }} />,
+          `Every step of forward elimination is one instance of this move, applied downward and then leftward across the matrix.`,
         ]
     },
     {
@@ -1714,6 +1748,8 @@ export default function GaussianEliminationPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-jordan'} dangerouslySetInnerHTML={{ __html: demoUnits.jordan }} />,
+          `Whether the extra clearing is worth it depends entirely on whether you want the answer or the structure.`,
         ]
     },
     {
@@ -1738,6 +1774,8 @@ export default function GaussianEliminationPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-nosolution'} dangerouslySetInnerHTML={{ __html: demoUnits.nosolution }} />,
+          `Inconsistency is therefore detected, not decided — it announces itself as a row rather than having to be tested for.`,
         ]
     },
     {

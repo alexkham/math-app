@@ -917,6 +917,9 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
+import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magnitudeDiagrams'
 
 
 export async function getStaticProps(){
@@ -1581,8 +1584,31 @@ const schemas = {
   //      }
   //   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    dot: demoUnitFrame({
+      svg: innerProductDiagrams.done,
+      caption: 'Paired products collapsed to one number',
+      text: 'Matching components were multiplied and the results summed into a single scalar. Everything else on this page &#8212; length, distance, angle, orthogonality &#8212; is extracted from that one number, which is why the dot product is treated as the primitive and the rest as consequences. Follow the accumulation on the',
+      href: '/linear-algebra/visual-tools/vectors-inner-product',
+      linkText: 'inner product visualizer',
+    }),
+    length: demoUnitFrame({
+      svg: magnitudeDiagrams.root,
+      caption: 'A vector dotted with itself, then rooted',
+      text: 'Taking the dot product of a vector with itself gives the sum of its squared components, and the square root of that is its length. Length is therefore not an extra definition bolted on: it is the inner product applied to a single vector. Run it on your own vector on the',
+      href: '/linear-algebra/visual-tools/vector-magnitude',
+      linkText: 'magnitude visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     innerProductAxioms,
@@ -1610,7 +1636,7 @@ export default function InnerProductPage({
   obj10Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1622,6 +1648,8 @@ export default function InnerProductPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-dot'} dangerouslySetInnerHTML={{ __html: demoUnits.dot }} />,
+          `The properties listed next — symmetry, linearity, positivity — are exactly what a general inner product is required to keep.`,
         ]
     },
     {
@@ -1638,6 +1666,8 @@ export default function InnerProductPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-length'} dangerouslySetInnerHTML={{ __html: demoUnits.length }} />,
+          `Distance in the following section is this same length applied to the difference of two vectors.`,
         ]
     },
     {

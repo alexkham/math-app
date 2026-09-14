@@ -1764,6 +1764,8 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 
 
 export async function getStaticProps(){
@@ -2416,8 +2418,24 @@ const schemas = {
 //        }
 //     }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    cases: demoUnitFrame({
+      svg: [linearSystemDiagrams.unique, linearSystemDiagrams.none, linearSystemDiagrams.infinite],
+      caption: 'The three endings, side by side',
+      text: 'Existence fails only in the middle case, where a contradiction row appears. Uniqueness fails only in the last, where a free column leaves an unknown unpinned. The two questions are independent of each other, and between them they exhaust what can happen. Build a system for each ending on the',
+      href: '/linear-algebra/visual-tools/linear-system-solutions',
+      linkText: 'linear system solutions visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     systemShapes,
@@ -2445,7 +2463,7 @@ export default function SolvabilityPage({
   obj10Table,
   solvabilityQuestions,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2500,6 +2518,8 @@ export default function SolvabilityPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-cases'} dangerouslySetInnerHTML={{ __html: demoUnits.cases }} />,
+          `The rank conditions in the next section are these three pictures restated as arithmetic on two numbers.`,
         ]
     },
     {

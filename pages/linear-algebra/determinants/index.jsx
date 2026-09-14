@@ -674,6 +674,9 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
+import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1087,8 +1090,40 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    sarrus: demoUnitFrame({
+      svg: determinantDiagrams.sarrus,
+      caption: 'The six signed products of a 3&#215;3',
+      text: 'Three diagonals running one way are added and three running the other are subtracted &#8212; six products in total, each using one entry from every row and every column. The pattern is a convenience for this size only: it does not extend to 4&#215;4, where the count jumps to twenty-four. Watch the diagonals traced out on the',
+      href: '/linear-algebra/visual-tools/matrix-determinant',
+      linkText: 'determinant visualizer',
+    }),
+    cofactor: demoUnitFrame({
+      svg: determinantDiagrams["cofactor-row"],
+      caption: 'Expansion along a row, minors highlighted',
+      text: 'For each entry of the chosen row, its own row and column are struck out and the determinant of what remains is taken, then signed and weighted. Any row or column gives the same answer, so the one with the most zeros is always the cheapest to pick. Choose a different row or column and compare on the',
+      href: '/linear-algebra/visual-tools/matrix-determinant',
+      linkText: 'determinant visualizer',
+    }),
+    // Area and orientation are geometric claims; the determinant tool
+    // is symbolic, so the transformation explorer carries this one.
+    area: demoUnitFrame({
+      svg: [linearTransformationDiagrams.fullRank, linearTransformationDiagrams.rankOne],
+      caption: 'A grid stretched, then flattened',
+      text: 'Above, the unit square has become a parallelogram and its area is exactly the determinant. Below, the matrix has flattened the plane onto a line: the parallelogram has no area left and the determinant is zero. Singularity and zero area are the same event seen from two sides. Change the entries and watch the area respond on the',
+      href: '/linear-algebra/visual-tools/linear-transformation-2d',
+      linkText: 'linear transformation explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj8Table,
@@ -1112,7 +1147,7 @@ export default function DeterminantsPage({
   obj8Table,
   obj10Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1140,6 +1175,8 @@ export default function DeterminantsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-sarrus'} dangerouslySetInnerHTML={{ __html: demoUnits.sarrus }} />,
+          `The general definition in the next section is what these six products are a special case of.`,
         ]
     },
     {
@@ -1172,6 +1209,8 @@ export default function DeterminantsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-cofactor'} dangerouslySetInnerHTML={{ __html: demoUnits.cofactor }} />,
+          `This is the definition that actually generalises, at the price of a cost that grows faster than almost anything else in the subject.`,
         ]
     },
     {
@@ -1190,6 +1229,8 @@ export default function DeterminantsPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-area'} dangerouslySetInnerHTML={{ __html: demoUnits.area }} />,
+          `Every geometric use of the determinant — volume, orientation, change of variables — is this one fact applied in more dimensions.`,
         ]
     },
     {

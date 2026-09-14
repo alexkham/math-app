@@ -3027,6 +3027,8 @@ import PropertyLawCard from '@/app/components/infographics/linear-algebra/Proper
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverseDiagrams'
 
 
 export async function getStaticProps(){
@@ -3885,8 +3887,31 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    rowreduce: demoUnitFrame({
+      svg: inverseDiagrams.done,
+      caption: 'The identity reached on the left, the inverse on the right',
+      text: 'The same row operations were applied to both halves throughout. By the time the left block has become the identity, the right block has recorded everything that was done to get there &#8212; and that record is the inverse. A matrix that cannot reach the identity has no inverse to record. Step through the operations on the',
+      href: '/linear-algebra/visual-tools/matrix-inverse',
+      linkText: 'matrix inverse visualizer',
+    }),
+    adjugate: demoUnitFrame({
+      svg: inverseDiagrams.cofactor,
+      caption: 'Cofactors assembled before transposing and dividing',
+      text: 'Each position is being filled with the signed determinant of the matrix left when its row and column are deleted. Transposing this array and dividing by the determinant gives the inverse, which shows plainly where the failure lives: a zero determinant makes the final division impossible no matter how well the cofactors came out. Follow the full route on the',
+      href: '/linear-algebra/visual-tools/matrix-inverse',
+      linkText: 'matrix inverse visualizer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     invertibilityRing,
@@ -3908,7 +3933,7 @@ const schemas = {
    }
 
 
-export default function MatrixInversePage({seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function MatrixInversePage({seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3971,6 +3996,8 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-rowreduce'} dangerouslySetInnerHTML={{ __html: demoUnits.rowreduce }} />,
+          `For anything larger than 3×3 this is the method that is actually used; the adjugate route below is for understanding rather than for computing.`,
         ]
     },
     {
@@ -3979,6 +4006,8 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-adjugate'} dangerouslySetInnerHTML={{ __html: demoUnits.adjugate }} />,
+          `The formula is exact and completely impractical beyond small matrices, since the number of cofactors grows faster than any gain in clarity.`,
         ]
     },
     {

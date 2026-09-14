@@ -816,6 +816,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
 
 
 export async function getStaticProps(){
@@ -1459,8 +1461,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    composition: demoUnitFrame({
+      svg: [matrixCompositionDiagrams.commute, matrixCompositionDiagrams.noncommute],
+      caption: 'Order irrelevant, then decisive',
+      text: 'Two linear maps composed in both orders. Above they agree; below they do not, and the grid ends up somewhere visibly different. Composing linear maps always gives a linear map, but it almost never gives the same one when the order is reversed. Try your own pair on the',
+      href: '/linear-algebra/visual-tools/matrix-composition-2d',
+      linkText: '2D composition explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1479,7 +1497,7 @@ return {
 }
    }
 
-export default function TransformationPropertiesPage({seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas}) {
+export default function TransformationPropertiesPage({seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1553,6 +1571,8 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-composition'} dangerouslySetInnerHTML={{ __html: demoUnits.composition }} />,
+          `Linearity survives composition, which is what allows complicated maps to be assembled from simple ones without leaving the category.`,
         ]
     },
     {

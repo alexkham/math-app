@@ -77,7 +77,7 @@ The run is always the same four moves: form $A - \\lambda I$, expand its determi
 
 • **Shift** — $A - \\lambda I$ is written with $\\lambda$ subtracted from each diagonal entry; the eigenvalues are the $\\lambda$ that make it singular
 • **Expand** — $\\det(A - \\lambda I)$ is expanded into the characteristic polynomial and its coefficients are laid out in a row; for a $2 \\times 2$ they are $1$, $-\\operatorname{tr} A$, $\\det A$; for a $3 \\times 3$, the tool multiplies by $-1$ so the polynomial is monic
-• **Roots** — the eigenvalues, found by the quadratic formula or, for a cubic, by spotting a rational root or numerically; the caption shows the factored form and checks the trace and determinant
+• **Roots** — the eigenvalues, found by the [quadratic formula](!/algebra/equations/quadratic#4) or, for a cubic, by spotting a rational root or numerically; the caption shows the factored form and checks the trace and determinant
 • **Eigenvectors** — for each real eigenvalue, $A - \\lambda I$ is row reduced, the free columns are counted, and one eigenvector per free column is read off with the free variable set to $1$, then scaled to small integers
 • **Done** — the eigenvalues and eigenvectors side by side, each checked by multiplying, and a verdict on whether $A$ is diagonalizable
 

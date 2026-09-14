@@ -937,6 +937,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import leastSquaresDiagrams from '@/app/components/linear-algebra copy/matrix/leastSquaresDiagrams'
 
 
 export async function getStaticProps(){
@@ -1601,8 +1603,38 @@ const schemas = {
   //      }
   //   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    geometry: demoUnitFrame({
+      svg: leastSquaresDiagrams.residual,
+      caption: 'The residual, perpendicular to the column space',
+      text: 'The target lies off the column space, so no exact solution exists. The best available answer is its projection, and what is left over is the residual &#8212; which comes out perpendicular to the column space rather than merely small. Minimising the error and making it perpendicular are the same requirement. See it for an inconsistent system on the',
+      href: '/linear-algebra/visual-tools/least-squares',
+      linkText: 'least squares visualizer',
+    }),
+    normal: demoUnitFrame({
+      svg: leastSquaresDiagrams.normal,
+      caption: 'The normal equations assembled',
+      text: 'Multiplying through by the transpose turns an unsolvable system into a solvable one, and the reason is the perpendicularity above: demanding that the residual be orthogonal to every column is exactly what these equations say. Form them for your own data on the',
+      href: '/linear-algebra/visual-tools/least-squares',
+      linkText: 'least squares visualizer',
+    }),
+    line: demoUnitFrame({
+      svg: leastSquaresDiagrams.line,
+      caption: 'A best-fit line through scattered points',
+      text: 'The points do not lie on any line, so the system was never going to be consistent. What the fit returns is the line whose vertical errors have the smallest total square &#8212; and fitting a line is nothing more than least squares with two unknowns. Move the points and watch the fit respond on the',
+      href: '/linear-algebra/visual-tools/least-squares',
+      linkText: 'least squares visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -1630,7 +1662,7 @@ export default function LeastSquaresPage({
   obj9Table,
   leastSquaresMethods,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1669,6 +1701,8 @@ export default function LeastSquaresPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
+          `Everything algebraic that follows is a way of computing this projection without having to draw it.`,
         ]
     },
     {
@@ -1677,6 +1711,8 @@ export default function LeastSquaresPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-normal'} dangerouslySetInnerHTML={{ __html: demoUnits.normal }} />,
+          `These equations are the classical route and the least numerically stable one, which is why QR is preferred in practice.`,
         ]
     },
     {
@@ -1685,6 +1721,8 @@ export default function LeastSquaresPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-line'} dangerouslySetInnerHTML={{ __html: demoUnits.line }} />,
+          `Fitting a parabola in the next section changes only the columns, never the method.`,
         ]
     },
     {

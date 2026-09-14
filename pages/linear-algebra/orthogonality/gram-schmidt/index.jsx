@@ -1843,6 +1843,9 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
+import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
 
 
 export async function getStaticProps(){
@@ -2501,8 +2504,38 @@ const schemas = {
   //      }
   //   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    subtract: demoUnitFrame({
+      svg: gramSchmidtDiagrams.subtract,
+      caption: 'The overlap removed from the second vector',
+      text: 'The projection of this vector onto the direction already fixed is being subtracted away. What survives is orthogonal to that direction by construction, not by luck &#8212; the subtraction removes precisely the component that would have made the dot product non-zero. Watch the next vector go through the same treatment on the',
+      href: '/linear-algebra/visual-tools/gram-schmidt',
+      linkText: 'Gram-Schmidt visualizer',
+    }),
+    normalize: demoUnitFrame({
+      svg: gramSchmidtDiagrams.normalize,
+      caption: 'Scaling the survivor to unit length',
+      text: 'Orthogonality was settled by the subtraction; this step only fixes the length. Splitting the two concerns is why the algorithm can be stated for an orthogonal basis and then upgraded to an orthonormal one without changing its structure. Toggle normalisation on and off on the',
+      href: '/linear-algebra/visual-tools/gram-schmidt',
+      linkText: 'Gram-Schmidt visualizer',
+    }),
+    qr: demoUnitFrame({
+      svg: qrDiagrams.done,
+      caption: 'The same run, recorded as two factors',
+      text: 'The orthonormal vectors produced have become the columns of Q, and the coefficients subtracted along the way have become the entries of R. The triangularity of R is not imposed: it reflects the fact that each vector was only ever corrected against the ones before it. Compare the two views on the',
+      href: '/linear-algebra/visual-tools/qr-decomposition',
+      linkText: 'QR decomposition visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     qrFromGramSchmidt,
@@ -2530,7 +2563,7 @@ export default function GramSchmidtsPage({
   obj9Table,
   gramSchmidtSettings,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2550,6 +2583,8 @@ export default function GramSchmidtsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-subtract'} dangerouslySetInnerHTML={{ __html: demoUnits.subtract }} />,
+          `The general case below repeats this step once per vector already fixed, which is the only way the algorithm grows.`,
         ]
     },
     {
@@ -2585,6 +2620,8 @@ export default function GramSchmidtsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-normalize'} dangerouslySetInnerHTML={{ __html: demoUnits.normalize }} />,
+          `Dividing by a very small length is where the classical algorithm loses accuracy, which is the subject of the stability section later.`,
         ]
     },
     {
@@ -2618,6 +2655,8 @@ export default function GramSchmidtsPage({
             <ObjectTypeProfile data={qrFromGramSchmidt} theme="navy" variant="grid" />
           </DiagramFrame>,
           `The triangularity of $R$ is worth seeing as a consequence rather than a condition. At step $j$ the algorithm projects $\\mathbf{v}_j$ onto $\\mathbf{q}_1, \\ldots, \\mathbf{q}_{j-1}$ and no others, so every coefficient with $i > j$ is zero because that projection was never computed. Nothing was imposed on the shape — it fell out of processing the columns in order.`,
+                  <div key={'unit-qr'} dangerouslySetInnerHTML={{ __html: demoUnits.qr }} />,
+          `Gram-Schmidt and QR are therefore one computation with two names, depending on whether the vectors or the factors are what you are after.`,
         ]
     },
     {
