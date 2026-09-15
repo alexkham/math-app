@@ -947,7 +947,7 @@ const linearAlgebraTermsList = [
    
 
   // ═══════════════════════════════════════════
-  // CATEGORY: Vectors (7 terms)
+  // CATEGORY: Vectors (18 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -1086,8 +1086,175 @@ $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$`,
     },
   },
 
+  {
+    id: 'zero_vector',
+    name: 'Zero Vector',
+    category: 'Vectors',
+    formula: `The [vector](!/linear-algebra/definitions#vector) $\\mathbf{0} = (0, 0, \\ldots, 0)$ whose every component is zero`,
+    link: { url: '/linear-algebra/vectors#3', label: 'Types of Vectors' },
+    fields: {
+      intuition: `The "nothing" vector: no length and no direction. It is the additive identity, so $\\mathbf{v} + \\mathbf{0} = \\mathbf{v}$ for every $\\mathbf{v}$, and it is the one vector that cannot be normalized.`,
+      properties: `• $c\\,\\mathbf{0} = \\mathbf{0}$ for every scalar $c$
+• $0\\,\\mathbf{v} = \\mathbf{0}$ for every vector $\\mathbf{v}$
+• Any set containing $\\mathbf{0}$ is linearly dependent`,
+      'related concepts': `• [Vector](!/linear-algebra/definitions#vector)
+• [Vector Space](!/linear-algebra/definitions#vector_space)
+• [Linear Independence](!/linear-algebra/definitions#linear_independence)`,
+    },
+  },
+
+  {
+    id: 'direction',
+    name: 'Direction',
+    category: 'Vectors',
+    formula: `The orientation of a non-zero [vector](!/linear-algebra/definitions#vector), captured by its [unit vector](!/linear-algebra/definitions#unit_vector) $\\mathbf{v} / \\|\\mathbf{v}\\|$`,
+    link: { url: '/linear-algebra/vectors/properties#2', label: 'Direction' },
+    fields: {
+      intuition: `What is left of a vector once its length is stripped away. Two vectors share a direction exactly when one is a positive multiple of the other; a negative multiple reverses it.`,
+      'related concepts': `• [Unit Vector](!/linear-algebra/definitions#unit_vector)
+• [Magnitude](!/linear-algebra/definitions#magnitude)
+• [Scalar](!/linear-algebra/definitions#scalar)`,
+    },
+  },
+
+  {
+    id: 'vector_projection',
+    name: 'Vector Projection',
+    category: 'Vectors',
+    formula: `The component of $\\mathbf{u}$ lying along $\\mathbf{v}$:
+$$\\text{proj}_{\\mathbf{v}}\\mathbf{u} = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v}$$`,
+    link: { url: '/linear-algebra/vectors/dot-product#9', label: 'Orthogonal Projection' },
+    fields: {
+      intuition: `The shadow $\\mathbf{u}$ casts onto the line through $\\mathbf{v}$. It is always a multiple of $\\mathbf{v}$, never of $\\mathbf{u}$ — the formula hides that asymmetry and the picture does not. The signed length of the shadow, $(\\mathbf{u} \\cdot \\mathbf{v}) / \\|\\mathbf{v}\\|$, is the scalar projection.`,
+      properties: `• $\\mathbf{u} - \\text{proj}_{\\mathbf{v}}\\mathbf{u}$ is orthogonal to $\\mathbf{v}$
+• Projecting twice changes nothing after the first time
+• $\\text{proj}_{\\mathbf{v}}\\mathbf{u} = \\mathbf{0}$ exactly when $\\mathbf{u} \\perp \\mathbf{v}$`,
+      'related concepts': `• [Dot Product](!/linear-algebra/definitions#dot_product)
+• [Orthogonal Decomposition](!/linear-algebra/definitions#orthogonal_decomposition)
+• [Projection Matrix](!/linear-algebra/definitions#projection_matrix)`,
+      'related formulas': `• [Scalar Projection](!/linear-algebra/formulas#scalar_projection)`,
+    },
+  },
+
+  {
+    id: 'orthogonal_decomposition',
+    name: 'Orthogonal Decomposition',
+    category: 'Vectors',
+    formula: `The unique splitting of a vector into a part inside a [subspace](!/linear-algebra/definitions#subspace) $W$ and a part in its [orthogonal complement](!/linear-algebra/definitions#orthogonal_complement):
+$$\\mathbf{u} = \\text{proj}_W\\mathbf{u} + (\\mathbf{u} - \\text{proj}_W\\mathbf{u})$$`,
+    link: { url: '/linear-algebra/orthogonality/projections#2', label: 'The Orthogonal Decomposition' },
+    fields: {
+      intuition: `Every vector is "some of $W$ plus something perpendicular to $W$", and there is only one way to do the split. The perpendicular part is the error a projection leaves behind, which is why least squares rests on this decomposition.`,
+      'related concepts': `• [Vector Projection](!/linear-algebra/definitions#vector_projection)
+• [Orthogonal Complement](!/linear-algebra/definitions#orthogonal_complement)
+• [Residual](!/linear-algebra/definitions#residual)`,
+    },
+  },
+
+  {
+    id: 'outer_product',
+    name: 'Outer Product',
+    category: 'Vectors',
+    formula: `The [matrix](!/linear-algebra/definitions#matrix) $\\mathbf{u}\\mathbf{v}^T$ with entries $(\\mathbf{u}\\mathbf{v}^T)_{ij} = u_i v_j$`,
+    link: { url: '/linear-algebra/matrix/rank#8', label: 'Rank of Special Matrices' },
+    fields: {
+      intuition: `Where the dot product collapses two vectors into a number, the outer product spreads them into a table. Every column is a multiple of $\\mathbf{u}$ and every row a multiple of $\\mathbf{v}^T$, so the result has [rank](!/linear-algebra/definitions#rank) one. Also called the dyadic or tensor product.`,
+      properties: `• $\\text{rank}(\\mathbf{u}\\mathbf{v}^T) = 1$ whenever both vectors are non-zero
+• $(\\mathbf{u}\\mathbf{v}^T)^T = \\mathbf{v}\\mathbf{u}^T$
+• $\\text{tr}(\\mathbf{u}\\mathbf{v}^T) = \\mathbf{u} \\cdot \\mathbf{v}$`,
+      'related concepts': `• [Dot Product](!/linear-algebra/definitions#dot_product)
+• [Rank](!/linear-algebra/definitions#rank)
+• [Spectral Decomposition](!/linear-algebra/definitions#spectral_decomposition)`,
+    },
+  },
+
+  {
+    id: 'hadamard_product',
+    name: 'Hadamard Product',
+    category: 'Vectors',
+    formula: `The entry-wise product of two same-shaped matrices: $(A \\circ B)_{ij} = a_{ij}\\,b_{ij}$`,
+    link: { url: '/linear-algebra/matrix/operations', label: 'Matrix Operations' },
+    fields: {
+      intuition: `Multiply each entry by the entry in the same position and nothing else. Unlike ordinary matrix multiplication it is commutative, needs identical shapes, and never mixes positions. Also called the Schur product.`,
+      'related concepts': `• [Element-wise Operation](!/linear-algebra/definitions#element_wise_operation)
+• [Matrix](!/linear-algebra/definitions#matrix)`,
+    },
+  },
+
+  {
+    id: 'frobenius_inner_product',
+    name: 'Frobenius Inner Product',
+    category: 'Vectors',
+    formula: `The [inner product](!/linear-algebra/definitions#inner_product) of two same-shaped matrices obtained by treating them as long vectors:
+$$\\langle A, B \\rangle_F = \\sum_{i,j} a_{ij}\\,b_{ij} = \\text{tr}(A^T B)$$`,
+    link: { url: '/linear-algebra/matrix/trace#7', label: 'The Frobenius Inner Product' },
+    fields: {
+      intuition: `Flatten both matrices into vectors and take the ordinary dot product. The trace form $\\text{tr}(A^T B)$ is the same number written without flattening, which is what makes it useful in proofs.`,
+      'related concepts': `• [Inner Product](!/linear-algebra/definitions#inner_product)
+• [Trace](!/linear-algebra/definitions#trace)
+• [Frobenius Norm](!/linear-algebra/definitions#frobenius_norm)`,
+      'related formulas': `• [Frobenius Inner Product](!/linear-algebra/formulas#frobenius_inner_product)`,
+    },
+  },
+
+  {
+    id: 'frobenius_norm',
+    name: 'Frobenius Norm',
+    category: 'Vectors',
+    formula: `The length of a matrix measured as if its entries were one long vector:
+$$\\|A\\|_F = \\sqrt{\\sum_{i,j} a_{ij}^2} = \\sqrt{\\text{tr}(A^T A)}$$`,
+    link: { url: '/linear-algebra/matrix/trace#7', label: 'The Frobenius Inner Product' },
+    fields: {
+      intuition: `The most literal way to say how "big" a matrix is: square every entry, add, take the root. It equals the square root of the sum of the squared [singular values](!/linear-algebra/definitions#singular_value), which ties it to the geometry of the matrix rather than only its entries.`,
+      'related concepts': `• [Frobenius Inner Product](!/linear-algebra/definitions#frobenius_inner_product)
+• [Magnitude](!/linear-algebra/definitions#magnitude)
+• [Spectral Norm](!/linear-algebra/definitions#spectral_norm)`,
+    },
+  },
+
+  {
+    id: 'inner_product_space',
+    name: 'Inner Product Space',
+    category: 'Vectors',
+    formula: `A [vector space](!/linear-algebra/definitions#vector_space) equipped with an [inner product](!/linear-algebra/definitions#inner_product) $\\langle \\cdot, \\cdot \\rangle$ that is symmetric, linear in each argument, and positive definite`,
+    link: { url: '/linear-algebra/orthogonality/inner-product#8', label: 'General Inner Products' },
+    fields: {
+      intuition: `A vector space in which length, distance, angle and perpendicularity all make sense, because a single pairing supplies them: $\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$ and orthogonality means $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 0$. $\\mathbb{R}^n$ with the dot product is the standard example.`,
+      'related concepts': `• [Inner Product](!/linear-algebra/definitions#inner_product)
+• [Vector Space](!/linear-algebra/definitions#vector_space)
+• [Orthogonal Vectors](!/linear-algebra/definitions#orthogonal_vectors)`,
+    },
+  },
+
+  {
+    id: 'right_hand_rule',
+    name: 'Right-Hand Rule',
+    category: 'Vectors',
+    formula: `The convention fixing the direction of a [cross product](!/linear-algebra/definitions#cross_product) $\\mathbf{u} \\times \\mathbf{v}$`,
+    link: { url: '/linear-algebra/vectors/cross-product#4', label: 'Direction and the Right-Hand Rule' },
+    fields: {
+      intuition: `Curl the fingers of your right hand from $\\mathbf{u}$ toward $\\mathbf{v}$; your thumb points along $\\mathbf{u} \\times \\mathbf{v}$. Swapping the two vectors curls the other way, which is why the cross product changes sign when its arguments are swapped.`,
+      'related concepts': `• [Cross Product](!/linear-algebra/definitions#cross_product)
+• [Orientation](!/linear-algebra/definitions#orientation)`,
+    },
+  },
+
+  {
+    id: 'isometry',
+    name: 'Isometry',
+    category: 'Vectors',
+    formula: `A [linear transformation](!/linear-algebra/definitions#linear_transformation) that preserves lengths: $\\|T\\mathbf{v}\\| = \\|\\mathbf{v}\\|$ for every $\\mathbf{v}$`,
+    link: { url: '/linear-algebra/orthogonality/orthogonal-sets#6', label: 'Orthogonal Matrices' },
+    fields: {
+      intuition: `A rigid motion of space about the origin: nothing is stretched, squashed or sheared, so distances and angles survive too. In $\\mathbb{R}^n$ the isometries are exactly the [orthogonal matrices](!/linear-algebra/definitions#orthogonal_matrix) — rotations and reflections.`,
+      'related concepts': `• [Orthogonal Matrix](!/linear-algebra/definitions#orthogonal_matrix)
+• [Rotation](!/linear-algebra/definitions#rotation)
+• [Reflection](!/linear-algebra/definitions#reflection)`,
+    },
+  },
+
   // ═══════════════════════════════════════════
-  // CATEGORY: Vector Spaces (10 terms)
+  // CATEGORY: Vector Spaces (17 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -1319,8 +1486,109 @@ $$\\text{Nul}(A^T) = \\{\\mathbf{y} \\in \\mathbb{R}^m \\mid A^T\\mathbf{y} = \\
     },
   },
 
+  {
+    id: 'coordinates',
+    name: 'Coordinates',
+    category: 'Vector Spaces',
+    formula: `The unique scalars $c_1, \\ldots, c_n$ expressing a vector in a chosen [basis](!/linear-algebra/definitions#basis):
+$$\\mathbf{v} = c_1\\mathbf{b}_1 + c_2\\mathbf{b}_2 + \\cdots + c_n\\mathbf{b}_n$$`,
+    link: { url: '/linear-algebra/vector-spaces/basis#4', label: 'Coordinates' },
+    fields: {
+      intuition: `An address for a vector, read against a particular ruler. Change the basis and the same vector gets different numbers — the coordinates belong to the basis, not to the vector. Uniqueness is what makes them an address rather than one description among many.`,
+      'related concepts': `• [Basis](!/linear-algebra/definitions#basis)
+• [Change of Basis Matrix](!/linear-algebra/definitions#change_of_basis_matrix)
+• [Linear Combination](!/linear-algebra/definitions#linear_combination)`,
+      'related formulas': `• [Coordinate Vector](!/linear-algebra/formulas#coordinate_vector)`,
+    },
+  },
+
+  {
+    id: 'pivot_column',
+    name: 'Pivot Column',
+    category: 'Vector Spaces',
+    formula: `A column of a matrix that contains a [pivot](!/linear-algebra/definitions#pivot) after row reduction`,
+    link: { url: '/linear-algebra/linear-systems/echelon-form#4', label: 'Pivot Columns and Free Columns' },
+    fields: {
+      intuition: `The columns that carry genuinely new directions. Their variables are the leading variables of the system, and the pivot columns of the original matrix — not of the reduced one — form a basis for the [column space](!/linear-algebra/definitions#column_space).`,
+      'common errors': `Taking the pivot columns from the reduced matrix. Row reduction changes the columns while preserving which of them are independent, so the count is right but the vectors are wrong.`,
+      'related concepts': `• [Pivot](!/linear-algebra/definitions#pivot)
+• [Free Variable](!/linear-algebra/definitions#free_variable)
+• [Column Space](!/linear-algebra/definitions#column_space)`,
+    },
+  },
+
+  {
+    id: 'free_variable',
+    name: 'Free Variable',
+    category: 'Vector Spaces',
+    formula: `A variable whose column carries no [pivot](!/linear-algebra/definitions#pivot) after row reduction`,
+    link: { url: '/linear-algebra/linear-systems/echelon-form#4', label: 'Pivot Columns and Free Columns' },
+    fields: {
+      intuition: `A variable the equations do not pin down: it may take any value, and the leading variables then follow. Each free variable adds one parameter to the solution set and one dimension to the [null space](!/linear-algebra/definitions#null_space).`,
+      'related concepts': `• [Pivot Column](!/linear-algebra/definitions#pivot_column)
+• [Null Space](!/linear-algebra/definitions#null_space)
+• [Special Solutions](!/linear-algebra/definitions#special_solutions)`,
+    },
+  },
+
+  {
+    id: 'special_solutions',
+    name: 'Special Solutions',
+    category: 'Vector Spaces',
+    formula: `The solutions of $A\\mathbf{x} = \\mathbf{0}$ obtained by setting one [free variable](!/linear-algebra/definitions#free_variable) to $1$ and the others to $0$`,
+    link: { url: '/linear-algebra/linear-systems/homogeneous#4', label: 'Finding the Null Space' },
+    fields: {
+      intuition: `One solution per free variable, each switching on a single free variable and solving for the rest. They are independent by construction and every solution of the homogeneous system is a combination of them, so together they form a basis for the [null space](!/linear-algebra/definitions#null_space).`,
+      'related concepts': `• [Null Space](!/linear-algebra/definitions#null_space)
+• [Free Variable](!/linear-algebra/definitions#free_variable)
+• [Homogeneous System](!/linear-algebra/definitions#homogeneous_system)`,
+    },
+  },
+
+  {
+    id: 'nullity',
+    name: 'Nullity',
+    category: 'Vector Spaces',
+    formula: `The [dimension](!/linear-algebra/definitions#dimension) of the [null space](!/linear-algebra/definitions#null_space): $\\text{nullity}(A) = n - \\text{rank}(A)$`,
+    link: { url: '/linear-algebra/matrix/rank#6', label: 'The Rank-Nullity Theorem' },
+    fields: {
+      intuition: `How many independent directions the matrix crushes to zero — equivalently, how many free variables the system has. Rank counts what survives, nullity counts what is lost, and the two always add up to the number of columns.`,
+      'related concepts': `• [Rank](!/linear-algebra/definitions#rank)
+• [Null Space](!/linear-algebra/definitions#null_space)
+• [Rank-Nullity Theorem](!/linear-algebra/definitions#rank_nullity_theorem)`,
+    },
+  },
+
+  {
+    id: 'rank_nullity_theorem',
+    name: 'Rank-Nullity Theorem',
+    category: 'Vector Spaces',
+    formula: `For an $m \\times n$ matrix: $\\text{rank}(A) + \\text{nullity}(A) = n$`,
+    link: { url: '/linear-algebra/vector-spaces/dimension#9', label: 'The Rank-Nullity Theorem as a Dimension Statement' },
+    fields: {
+      intuition: `Bookkeeping rather than a surprise: every column is either a [pivot column](!/linear-algebra/definitions#pivot_column), contributing a dimension to the column space, or a free column, contributing a dimension to the null space. No column is both and none is left out.`,
+      'related concepts': `• [Rank](!/linear-algebra/definitions#rank)
+• [Nullity](!/linear-algebra/definitions#nullity)
+• [Dimension](!/linear-algebra/definitions#dimension)`,
+    },
+  },
+
+  {
+    id: 'full_rank',
+    name: 'Full Rank',
+    category: 'Vector Spaces',
+    formula: `A matrix whose [rank](!/linear-algebra/definitions#rank) is as large as its shape allows: $\\text{rank}(A) = \\min(m, n)$`,
+    link: { url: '/linear-algebra/matrix/rank#7', label: 'Properties of Rank' },
+    fields: {
+      intuition: `Nothing is wasted. A square matrix of full rank is invertible; a tall one has independent columns and a wide one has independent rows. Losing full rank is the same event as the columns becoming dependent.`,
+      'related concepts': `• [Rank](!/linear-algebra/definitions#rank)
+• [Inverse Matrix](!/linear-algebra/definitions#inverse_matrix)
+• [Linear Independence](!/linear-algebra/definitions#linear_independence)`,
+    },
+  },
+
   // ═══════════════════════════════════════════
-  // CATEGORY: Matrices (10 terms)
+  // CATEGORY: Matrices (25 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -1526,8 +1794,230 @@ $$\\text{tr}(A) = a_{11} + a_{22} + \\cdots + a_{nn} = \\sum_{i=1}^{n} a_{ii}$$`
     },
   },
 
+  {
+    id: 'transpose',
+    name: 'Transpose',
+    category: 'Matrices',
+    formula: `The matrix $A^T$ obtained by swapping rows and columns: $(A^T)_{ij} = a_{ji}$`,
+    link: { url: '/linear-algebra/matrix/operations#8', label: 'The Transpose' },
+    fields: {
+      intuition: `A reflection of the matrix across its [main diagonal](!/linear-algebra/definitions#main_diagonal). The diagonal itself does not move, which is why transposing twice returns the original and why a matrix equal to its own transpose is symmetric about that line.`,
+      properties: `• $(A^T)^T = A$
+• $(AB)^T = B^T A^T$ — the order reverses
+• $(A + B)^T = A^T + B^T$
+• $\\det(A^T) = \\det(A)$`,
+      'related concepts': `• [Symmetric Matrix](!/linear-algebra/definitions#symmetric_matrix)
+• [Main Diagonal](!/linear-algebra/definitions#main_diagonal)
+• [Orthogonal Matrix](!/linear-algebra/definitions#orthogonal_matrix)`,
+    },
+  },
+
+  {
+    id: 'main_diagonal',
+    name: 'Main Diagonal',
+    category: 'Matrices',
+    formula: `The entries $a_{11}, a_{22}, a_{33}, \\ldots$ whose row index equals their column index`,
+    link: { url: '/linear-algebra/matrix/types#1', label: 'Square Matrices' },
+    fields: {
+      intuition: `The line running from the top-left corner downward. Everything else is off-diagonal, either above it or below it, and a great many matrix types are defined by what sits where relative to this line: diagonal, triangular, symmetric.`,
+      'related concepts': `• [Trace](!/linear-algebra/definitions#trace)
+• [Diagonal Matrix](!/linear-algebra/definitions#diagonal_matrix)
+• [Triangular Matrix](!/linear-algebra/definitions#triangular_matrix)`,
+    },
+  },
+
+  {
+    id: 'zero_matrix',
+    name: 'Zero Matrix',
+    category: 'Matrices',
+    formula: `The matrix $0$ with every entry equal to zero`,
+    link: { url: '/linear-algebra/matrix#3', label: 'Matrix Equality and the Zero Matrix' },
+    fields: {
+      intuition: `The additive identity for matrices of its shape: $A + 0 = A$. Multiplying by it wipes everything out, so its determinant, rank and every eigenvalue are all $0$.`,
+      'related concepts': `• [Identity Matrix](!/linear-algebra/definitions#identity_matrix)
+• [Zero Vector](!/linear-algebra/definitions#zero_vector)
+• [Matrix](!/linear-algebra/definitions#matrix)`,
+    },
+  },
+
+  {
+    id: 'scalar_matrix',
+    name: 'Scalar Matrix',
+    category: 'Matrices',
+    formula: `A [diagonal matrix](!/linear-algebra/definitions#diagonal_matrix) whose diagonal entries are all the same number: $cI$`,
+    link: { url: '/linear-algebra/matrix/types#3', label: 'Diagonal Matrices' },
+    fields: {
+      intuition: `A matrix that does nothing but scale: multiplying by $cI$ stretches every vector by $c$ without turning it. The identity matrix is the case $c = 1$.`,
+      'related concepts': `• [Diagonal Matrix](!/linear-algebra/definitions#diagonal_matrix)
+• [Identity Matrix](!/linear-algebra/definitions#identity_matrix)
+• [Scalar](!/linear-algebra/definitions#scalar)`,
+    },
+  },
+
+  {
+    id: 'skew_symmetric_matrix',
+    name: 'Skew-Symmetric Matrix',
+    category: 'Matrices',
+    formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) equal to the negative of its [transpose](!/linear-algebra/definitions#transpose): $A^T = -A$`,
+    link: { url: '/linear-algebra/matrix/types#6', label: 'Skew-Symmetric Matrices' },
+    fields: {
+      intuition: `Mirrored entries carry opposite signs, $a_{ij} = -a_{ji}$. The diagonal is forced to be zero, since each diagonal entry must equal its own negative.`,
+      properties: `• Every diagonal entry is $0$
+• Every real eigenvalue is $0$; the others come in imaginary pairs
+• Any square matrix splits as symmetric plus skew-symmetric: $A = \\tfrac{1}{2}(A + A^T) + \\tfrac{1}{2}(A - A^T)$`,
+      'related concepts': `• [Symmetric Matrix](!/linear-algebra/definitions#symmetric_matrix)
+• [Transpose](!/linear-algebra/definitions#transpose)`,
+    },
+  },
+
+  {
+    id: 'triangular_matrix',
+    name: 'Triangular Matrix',
+    category: 'Matrices',
+    formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) with zeros on one side of the [main diagonal](!/linear-algebra/definitions#main_diagonal)`,
+    link: { url: '/linear-algebra/matrix/types#4', label: 'Triangular Matrices' },
+    fields: {
+      intuition: `Upper triangular when everything below the diagonal is zero, lower triangular when everything above is, and unit triangular when the diagonal is all ones. Elimination is the business of turning an arbitrary matrix into this shape, because a triangular system can be solved by substitution alone.`,
+      properties: `• $\\det(A)$ is the product of the diagonal entries
+• The eigenvalues are the diagonal entries
+• Products and inverses of upper (or lower) triangular matrices stay upper (or lower) triangular`,
+      'related concepts': `• [Main Diagonal](!/linear-algebra/definitions#main_diagonal)
+• [LU Decomposition](!/linear-algebra/definitions#lu_decomposition)
+• [Back-Substitution](!/linear-algebra/definitions#back_substitution)`,
+      'related formulas': `• [Block Triangular Determinant](!/linear-algebra/formulas#block_triangular_determinant)`,
+    },
+  },
+
+  {
+    id: 'permutation_matrix',
+    name: 'Permutation Matrix',
+    category: 'Matrices',
+    formula: `An [identity matrix](!/linear-algebra/definitions#identity_matrix) with its rows reordered — exactly one $1$ in each row and each column`,
+    link: { url: '/linear-algebra/matrix/types#9', label: 'Involutory and Permutation Matrices' },
+    fields: {
+      intuition: `Multiplying by it shuffles rows (from the left) or columns (from the right) without changing any value. It is orthogonal, so its inverse is its [transpose](!/linear-algebra/definitions#transpose), and it is how the row swaps of [partial pivoting](!/linear-algebra/definitions#partial_pivoting) get recorded in $PA = LU$.`,
+      'related concepts': `• [Identity Matrix](!/linear-algebra/definitions#identity_matrix)
+• [Orthogonal Matrix](!/linear-algebra/definitions#orthogonal_matrix)
+• [Partial Pivoting](!/linear-algebra/definitions#partial_pivoting)`,
+    },
+  },
+
+  {
+    id: 'nilpotent_matrix',
+    name: 'Nilpotent Matrix',
+    category: 'Matrices',
+    formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) some power of which is the [zero matrix](!/linear-algebra/definitions#zero_matrix): $N^k = 0$`,
+    link: { url: '/linear-algebra/matrix/types#8', label: 'Nilpotent and Idempotent Matrices' },
+    fields: {
+      intuition: `A matrix that destroys everything if applied often enough. A strictly upper triangular matrix is the standard example — each multiplication pushes the non-zero band one step further from the diagonal until nothing is left. Every eigenvalue of a nilpotent matrix is $0$.`,
+      'related concepts': `• [Idempotent Matrix](!/linear-algebra/definitions#idempotent_matrix)
+• [Zero Matrix](!/linear-algebra/definitions#zero_matrix)
+• [Eigenvalue](!/linear-algebra/definitions#eigenvalue)`,
+    },
+  },
+
+  {
+    id: 'idempotent_matrix',
+    name: 'Idempotent Matrix',
+    category: 'Matrices',
+    formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) that equals its own square: $P^2 = P$`,
+    link: { url: '/linear-algebra/matrix/types#8', label: 'Nilpotent and Idempotent Matrices' },
+    fields: {
+      intuition: `Applying it twice changes nothing after the first time. Every [projection matrix](!/linear-algebra/definitions#projection_matrix) is idempotent — once a vector has been dropped onto a subspace, dropping it again leaves it where it is. The eigenvalues can only be $0$ or $1$.`,
+      'related concepts': `• [Projection Matrix](!/linear-algebra/definitions#projection_matrix)
+• [Nilpotent Matrix](!/linear-algebra/definitions#nilpotent_matrix)`,
+    },
+  },
+
+  {
+    id: 'involutory_matrix',
+    name: 'Involutory Matrix',
+    category: 'Matrices',
+    formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) that is its own inverse: $A^2 = I$`,
+    link: { url: '/linear-algebra/matrix/types#9', label: 'Involutory and Permutation Matrices' },
+    fields: {
+      intuition: `Applying it twice returns every vector to where it started, as a [reflection](!/linear-algebra/definitions#reflection) does. Its eigenvalues can only be $\\pm 1$.`,
+      'related concepts': `• [Reflection](!/linear-algebra/definitions#reflection)
+• [Inverse Matrix](!/linear-algebra/definitions#inverse_matrix)
+• [Identity Matrix](!/linear-algebra/definitions#identity_matrix)`,
+    },
+  },
+
+  {
+    id: 'conformability',
+    name: 'Conformability',
+    category: 'Matrices',
+    formula: `The shape condition under which a matrix operation is defined`,
+    link: { url: '/linear-algebra/matrix/operations#5', label: 'Matrix Multiplication — Definition' },
+    fields: {
+      intuition: `Addition and subtraction need identical shapes. The product $AB$ needs the inner dimensions to agree — $A$ is $m \\times n$ and $B$ is $n \\times p$ — and the result takes the outer dimensions, $m \\times p$. Where the requirement fails the operation simply does not exist.`,
+      'related concepts': `• [Matrix](!/linear-algebra/definitions#matrix)
+• [Element-wise Operation](!/linear-algebra/definitions#element_wise_operation)`,
+      'related formulas': `• [Matrix Multiplication](!/linear-algebra/formulas#matrix_multiplication)
+• [Matrix Addition](!/linear-algebra/formulas#matrix_addition)`,
+    },
+  },
+
+  {
+    id: 'element_wise_operation',
+    name: 'Element-wise Operation',
+    category: 'Matrices',
+    formula: `An operation applied independently at each position, so the entry at $(i, j)$ of the result depends only on the entries at $(i, j)$ of the inputs`,
+    link: { url: '/linear-algebra/matrix/operations#1', label: 'Matrix Addition' },
+    fields: {
+      intuition: `The positions never talk to each other. Addition, subtraction, scalar multiplication and the [Hadamard product](!/linear-algebra/definitions#hadamard_product) are all element-wise; ordinary matrix multiplication is the important operation that is not.`,
+      'related concepts': `• [Hadamard Product](!/linear-algebra/definitions#hadamard_product)
+• [Conformability](!/linear-algebra/definitions#conformability)`,
+      'related formulas': `• [Matrix Addition](!/linear-algebra/formulas#matrix_addition)
+• [Vector Addition](!/linear-algebra/formulas#vector_addition)`,
+    },
+  },
+
+  {
+    id: 'matrix_square_root',
+    name: 'Matrix Square Root',
+    category: 'Matrices',
+    formula: `A matrix $B$ with $B^2 = A$, or more loosely $BB^T = A$`,
+    link: { url: '/linear-algebra/decompositions/cholesky#1', label: 'What Cholesky Decomposition Is' },
+    fields: {
+      intuition: `A [positive definite matrix](!/linear-algebra/definitions#positive_definite_matrix) has exactly one positive definite square root, and its [Cholesky factor](!/linear-algebra/definitions#cholesky_factorization) $L$, with $LL^T = A$, is a lower-triangular one. Most matrices have no square root at all.`,
+      'related concepts': `• [Cholesky Factorization](!/linear-algebra/definitions#cholesky_factorization)
+• [Positive Definite Matrix](!/linear-algebra/definitions#positive_definite_matrix)`,
+    },
+  },
+
+  {
+    id: 'spectral_norm',
+    name: 'Spectral Norm',
+    category: 'Matrices',
+    formula: `The largest factor by which a matrix can stretch any vector:
+$$\\|A\\|_2 = \\max_{\\mathbf{x} \\neq \\mathbf{0}} \\frac{\\|A\\mathbf{x}\\|}{\\|\\mathbf{x}\\|}$$`,
+    link: { url: '/linear-algebra/decompositions/svd#3', label: 'Singular Values' },
+    fields: {
+      intuition: `Feed the matrix every possible direction and record the worst-case stretch. That maximum is the largest [singular value](!/linear-algebra/definitions#singular_value), which is why the SVD is the natural way to compute it.`,
+      'related concepts': `• [Singular Value](!/linear-algebra/definitions#singular_value)
+• [Condition Number](!/linear-algebra/definitions#condition_number)
+• [Frobenius Norm](!/linear-algebra/definitions#frobenius_norm)`,
+    },
+  },
+
+  {
+    id: 'condition_number',
+    name: 'Condition Number',
+    category: 'Matrices',
+    formula: `The ratio of the largest to the smallest [singular value](!/linear-algebra/definitions#singular_value): $\\kappa(A) = \\sigma_{\\max} / \\sigma_{\\min}$`,
+    link: { url: '/linear-algebra/decompositions/svd#3', label: 'Singular Values' },
+    fields: {
+      intuition: `How much a small change in the data of $A\\mathbf{x} = \\mathbf{b}$ can be amplified in the answer. A condition number near $1$ means a well-behaved system; a huge one means tiny rounding errors become large errors; an infinite one means the matrix is singular.`,
+      'related concepts': `• [Singular Value](!/linear-algebra/definitions#singular_value)
+• [Spectral Norm](!/linear-algebra/definitions#spectral_norm)
+• [Singular Matrix](!/linear-algebra/definitions#singular_matrix)`,
+      'related formulas': `• [Condition Number](!/linear-algebra/formulas#condition_number)`,
+    },
+  },
+
   // ═══════════════════════════════════════════
-  // CATEGORY: Determinants (4 terms)
+  // CATEGORY: Determinants (9 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -1614,8 +2104,80 @@ $$\\text{adj}(A) = C^T$$`,
     },
   },
 
+  {
+    id: 'cofactor_expansion',
+    name: 'Cofactor Expansion',
+    category: 'Determinants',
+    formula: `Computing a [determinant](!/linear-algebra/definitions#determinant) by expanding along any row or column:
+$$\\det A = \\sum_{j} a_{ij}\\,C_{ij}$$`,
+    link: { url: '/linear-algebra/determinants/cofactors#3', label: 'Laplace Expansion Along a Row' },
+    fields: {
+      intuition: `Each entry of the chosen row is multiplied by its [cofactor](!/linear-algebra/definitions#cofactor) — the signed determinant of what is left when its row and column are struck out — and the products are summed. The signs follow the checkerboard $(-1)^{i+j}$. Any row or column gives the same answer, so pick the one with the most zeros. Also called Laplace expansion.`,
+      'related concepts': `• [Cofactor](!/linear-algebra/definitions#cofactor)
+• [Minor](!/linear-algebra/definitions#minor)
+• [Determinant](!/linear-algebra/definitions#determinant)`,
+    },
+  },
+
+  {
+    id: 'sarrus_rule',
+    name: "Sarrus's Rule",
+    category: 'Determinants',
+    formula: `A shortcut for $3 \\times 3$ [determinants](!/linear-algebra/definitions#determinant): add the three products along the down-right diagonals, subtract the three along the down-left diagonals`,
+    link: { url: '/linear-algebra/determinants#3', label: 'The 3×3 Formula' },
+    fields: {
+      intuition: `Copy the first two columns to the right of the matrix and trace six diagonals. It is a mnemonic, not a method — it works for $3 \\times 3$ only and does not extend to larger matrices, where the number of terms jumps to $24$ and beyond.`,
+      'related concepts': `• [Determinant](!/linear-algebra/definitions#determinant)
+• [Cofactor Expansion](!/linear-algebra/definitions#cofactor_expansion)`,
+    },
+  },
+
+  {
+    id: 'adjugate',
+    name: 'Adjugate',
+    category: 'Determinants',
+    formula: `The [transpose](!/linear-algebra/definitions#transpose) of the [cofactor matrix](!/linear-algebra/definitions#cofactor_matrix): $\\text{adj}(A) = C^T$`,
+    link: { url: '/linear-algebra/determinants/cofactors#6', label: 'The Adjugate' },
+    fields: {
+      intuition: `The matrix that almost inverts $A$: $A\\,\\text{adj}(A) = (\\det A)\\,I$. Dividing by the determinant finishes the job, which puts the invertibility condition in plain view — the division fails precisely when $\\det A = 0$.`,
+      'related concepts': `• [Cofactor Matrix](!/linear-algebra/definitions#cofactor_matrix)
+• [Inverse Matrix](!/linear-algebra/definitions#inverse_matrix)
+• [Determinant](!/linear-algebra/definitions#determinant)`,
+      'related formulas': `• [Adjugate Definition](!/linear-algebra/formulas#adjugate_definition)
+• [Adjugate Identity](!/linear-algebra/formulas#adjugate_identity)`,
+    },
+  },
+
+  {
+    id: 'cramers_rule',
+    name: "Cramer's Rule",
+    category: 'Determinants',
+    formula: `For a square system $A\\mathbf{x} = \\mathbf{b}$ with $\\det A \\neq 0$: $x_i = \\dfrac{\\det(A_i)}{\\det A}$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$`,
+    link: { url: '/linear-algebra/determinants/applications#1', label: 'Cramer' },
+    fields: {
+      intuition: `Each unknown is a ratio of two determinants. It is exact and elegant for two or three unknowns and hopeless beyond that, since every unknown costs a full determinant — elimination beats it for anything you would actually solve.`,
+      'related concepts': `• [Determinant](!/linear-algebra/definitions#determinant)
+• [System of Linear Equations](!/linear-algebra/definitions#system_of_linear_equations)
+• [Consistent System](!/linear-algebra/definitions#consistent_system)`,
+    },
+  },
+
+  {
+    id: 'orientation',
+    name: 'Orientation',
+    category: 'Determinants',
+    formula: `The handedness of an ordered set of vectors, read off the sign of the [determinant](!/linear-algebra/definitions#determinant)`,
+    link: { url: '/linear-algebra/determinants/geometry#4', label: 'Orientation' },
+    fields: {
+      intuition: `A positive determinant keeps the standard orientation; a negative one turns space over, as a [reflection](!/linear-algebra/definitions#reflection) does. The absolute value says how much area or volume is scaled, the sign says whether it was flipped.`,
+      'related concepts': `• [Determinant](!/linear-algebra/definitions#determinant)
+• [Reflection](!/linear-algebra/definitions#reflection)
+• [Right-Hand Rule](!/linear-algebra/definitions#right_hand_rule)`,
+    },
+  },
+
   // ═══════════════════════════════════════════
-  // CATEGORY: Linear Systems (6 terms)
+  // CATEGORY: Linear Systems (19 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -1722,8 +2284,189 @@ $$\\text{adj}(A) = C^T$$`,
     },
   },
 
+  {
+    id: 'coefficient_matrix',
+    name: 'Coefficient Matrix',
+    category: 'Linear Systems',
+    formula: `The matrix $A$ of coefficients of the unknowns when a [system of linear equations](!/linear-algebra/definitions#system_of_linear_equations) is written as $A\\mathbf{x} = \\mathbf{b}$`,
+    link: { url: '/linear-algebra/linear-systems#2', label: 'Writing a System in Matrix Form' },
+    fields: {
+      intuition: `The numbers multiplying the unknowns, one row per equation and one column per unknown. The vector $\\mathbf{b}$ of constants is the right-hand side, and appending it as a final column gives the [augmented matrix](!/linear-algebra/definitions#augmented_matrix).`,
+      'related concepts': `• [Augmented Matrix](!/linear-algebra/definitions#augmented_matrix)
+• [System of Linear Equations](!/linear-algebra/definitions#system_of_linear_equations)`,
+      'related formulas': `• [Augmented Matrix Construction](!/linear-algebra/formulas#augmented_matrix_construction)`,
+    },
+  },
+
+  {
+    id: 'elementary_row_operation',
+    name: 'Elementary Row Operation',
+    category: 'Linear Systems',
+    formula: `One of three moves that leave a system's solution set unchanged: swap two rows, multiply a row by a non-zero constant, or add a multiple of one row to another`,
+    link: { url: '/linear-algebra/linear-systems/gaussian-elimination#2', label: 'The Three Elementary Row Operations' },
+    fields: {
+      intuition: `Each move is reversible — the same multiple can be subtracted back, the same rows swapped again — and that reversibility is the licence for the whole of elimination: nothing about the solutions can change if every step can be undone.`,
+      'related concepts': `• [Gaussian Elimination](!/linear-algebra/definitions#gaussian_elimination)
+• [Row Echelon Form](!/linear-algebra/definitions#row_echelon_form)`,
+      'related formulas': `• [Elementary Row Operations](!/linear-algebra/formulas#elementary_row_operations)`,
+    },
+  },
+
+  {
+    id: 'gaussian_elimination',
+    name: 'Gaussian Elimination',
+    category: 'Linear Systems',
+    formula: `The algorithm that reduces a matrix to [row echelon form](!/linear-algebra/definitions#row_echelon_form) using [elementary row operations](!/linear-algebra/definitions#elementary_row_operation)`,
+    link: { url: '/linear-algebra/linear-systems/gaussian-elimination#1', label: 'The Goal' },
+    fields: {
+      intuition: `Work column by column, clearing every entry below each [pivot](!/linear-algebra/definitions#pivot) by subtracting multiples of the pivot row. What remains is a staircase that can be finished by [back-substitution](!/linear-algebra/definitions#back_substitution). Continuing to clear above the pivots as well is Gauss-Jordan elimination. Also called row reduction.`,
+      'related concepts': `• [Elementary Row Operation](!/linear-algebra/definitions#elementary_row_operation)
+• [Row Echelon Form](!/linear-algebra/definitions#row_echelon_form)
+• [Back-Substitution](!/linear-algebra/definitions#back_substitution)
+• [Partial Pivoting](!/linear-algebra/definitions#partial_pivoting)`,
+    },
+  },
+
+  {
+    id: 'back_substitution',
+    name: 'Back-Substitution',
+    category: 'Linear Systems',
+    formula: `Solving an upper-[triangular](!/linear-algebra/definitions#triangular_matrix) system from the bottom row upward`,
+    link: { url: '/linear-algebra/linear-systems/gaussian-elimination#5', label: 'Back Substitution' },
+    fields: {
+      intuition: `The last equation involves one unknown, so it is solved directly. That value is substituted into the row above, which now involves one unknown, and so on up the staircase. It is the second half of Gaussian elimination.`,
+      'related concepts': `• [Gaussian Elimination](!/linear-algebra/definitions#gaussian_elimination)
+• [Forward Substitution](!/linear-algebra/definitions#forward_substitution)
+• [Triangular Matrix](!/linear-algebra/definitions#triangular_matrix)`,
+    },
+  },
+
+  {
+    id: 'forward_substitution',
+    name: 'Forward Substitution',
+    category: 'Linear Systems',
+    formula: `Solving a lower-[triangular](!/linear-algebra/definitions#triangular_matrix) system from the top row downward`,
+    link: { url: '/linear-algebra/decompositions/lower-upper#6', label: 'Solving Systems with LU' },
+    fields: {
+      intuition: `The mirror image of [back-substitution](!/linear-algebra/definitions#back_substitution): the first equation has one unknown, its value feeds the second, and so on downward. It is the first of the two triangular solves when a system is attacked through its [LU decomposition](!/linear-algebra/definitions#lu_decomposition).`,
+      'related concepts': `• [Back-Substitution](!/linear-algebra/definitions#back_substitution)
+• [LU Decomposition](!/linear-algebra/definitions#lu_decomposition)`,
+    },
+  },
+
+  {
+    id: 'partial_pivoting',
+    name: 'Partial Pivoting',
+    category: 'Linear Systems',
+    formula: `Swapping rows during elimination so that the largest available entry in the current column becomes the [pivot](!/linear-algebra/definitions#pivot)`,
+    link: { url: '/linear-algebra/linear-systems/gaussian-elimination#11', label: 'Partial Pivoting' },
+    fields: {
+      intuition: `Dividing by a zero pivot is impossible and dividing by a tiny one wrecks accuracy, so the row with the biggest entry is moved up first. The swaps are recorded in a [permutation matrix](!/linear-algebra/definitions#permutation_matrix), which is why the honest form of LU is $PA = LU$.`,
+      'related concepts': `• [Pivot](!/linear-algebra/definitions#pivot)
+• [Permutation Matrix](!/linear-algebra/definitions#permutation_matrix)
+• [LU Decomposition](!/linear-algebra/definitions#lu_decomposition)`,
+    },
+  },
+
+  {
+    id: 'consistent_system',
+    name: 'Consistent System',
+    category: 'Linear Systems',
+    formula: `A [system of linear equations](!/linear-algebra/definitions#system_of_linear_equations) that has at least one solution`,
+    link: { url: '/linear-algebra/linear-systems/solvability#2', label: 'The Existence Condition' },
+    fields: {
+      intuition: `Exactly one solution when every column has a pivot, infinitely many when some column is free. An inconsistent system has none, and reduction announces it with a row reading $0 = c$ for some $c \\neq 0$ — inconsistency is detected, not tested for.`,
+      'related concepts': `• [System of Linear Equations](!/linear-algebra/definitions#system_of_linear_equations)
+• [Free Variable](!/linear-algebra/definitions#free_variable)
+• [Rank](!/linear-algebra/definitions#rank)`,
+    },
+  },
+
+  {
+    id: 'overdetermined_system',
+    name: 'Overdetermined System',
+    category: 'Linear Systems',
+    formula: `A system with more equations than unknowns`,
+    link: { url: '/linear-algebra/linear-systems/solvability#7', label: 'Overdetermined Systems' },
+    fields: {
+      intuition: `Too many constraints for the unknowns to satisfy all at once, so the system is usually inconsistent. It is then solved in the [least-squares](!/linear-algebra/definitions#least_squares_solution) sense — the answer that misses every equation by as little as possible overall — which is exactly the situation in fitting a line to data.`,
+      'related concepts': `• [Least-Squares Solution](!/linear-algebra/definitions#least_squares_solution)
+• [Consistent System](!/linear-algebra/definitions#consistent_system)`,
+    },
+  },
+
+  {
+    id: 'lu_decomposition',
+    name: 'LU Decomposition',
+    category: 'Linear Systems',
+    formula: `Writing a matrix as $A = LU$, with $L$ lower [triangular](!/linear-algebra/definitions#triangular_matrix) and $U$ upper triangular; with row swaps, $PA = LU$`,
+    link: { url: '/linear-algebra/decompositions/lower-upper#1', label: 'What LU Decomposition Is' },
+    fields: {
+      intuition: `Gaussian elimination with the multipliers kept instead of thrown away: $U$ is the result of the elimination and $L$ is its record. Once factored, $A\\mathbf{x} = \\mathbf{b}$ is two cheap triangular solves — [forward](!/linear-algebra/definitions#forward_substitution) then [back](!/linear-algebra/definitions#back_substitution) — for as many right-hand sides as you like.`,
+      'related concepts': `• [Gaussian Elimination](!/linear-algebra/definitions#gaussian_elimination)
+• [Triangular Matrix](!/linear-algebra/definitions#triangular_matrix)
+• [Partial Pivoting](!/linear-algebra/definitions#partial_pivoting)
+• [Cholesky Factorization](!/linear-algebra/definitions#cholesky_factorization)`,
+    },
+  },
+
+  {
+    id: 'least_squares_solution',
+    name: 'Least-Squares Solution',
+    category: 'Linear Systems',
+    formula: `For an inconsistent system $A\\mathbf{x} = \\mathbf{b}$, the $\\hat{\\mathbf{x}}$ that minimizes $\\|\\mathbf{b} - A\\hat{\\mathbf{x}}\\|$; it satisfies the normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$`,
+    link: { url: '/linear-algebra/orthogonality/least-squares#1', label: 'The Problem' },
+    fields: {
+      intuition: `When $\\mathbf{b}$ cannot be reached, aim for the nearest point that can: its projection onto the [column space](!/linear-algebra/definitions#column_space). Minimizing the error and making it perpendicular to the column space turn out to be the same requirement, and that perpendicularity is what the normal equations say.`,
+      'related concepts': `• [Residual](!/linear-algebra/definitions#residual)
+• [Column Space](!/linear-algebra/definitions#column_space)
+• [Pseudoinverse](!/linear-algebra/definitions#pseudoinverse)
+• [Design Matrix](!/linear-algebra/definitions#design_matrix)`,
+    },
+  },
+
+  {
+    id: 'residual',
+    name: 'Residual',
+    category: 'Linear Systems',
+    formula: `The error vector left by an approximate solution: $\\mathbf{r} = \\mathbf{b} - A\\hat{\\mathbf{x}}$`,
+    link: { url: '/linear-algebra/orthogonality/least-squares#2', label: 'The Geometric Interpretation' },
+    fields: {
+      intuition: `What the fit fails to explain. At the [least-squares solution](!/linear-algebra/definitions#least_squares_solution) the residual is not merely small — it is orthogonal to the column space, which is the geometric fact everything else follows from. Its squared length is the sum of squared errors.`,
+      'related concepts': `• [Least-Squares Solution](!/linear-algebra/definitions#least_squares_solution)
+• [Orthogonal Decomposition](!/linear-algebra/definitions#orthogonal_decomposition)`,
+    },
+  },
+
+  {
+    id: 'design_matrix',
+    name: 'Design Matrix',
+    category: 'Linear Systems',
+    formula: `The matrix $A$ built from the data in a fitting problem: one row per observation, one column per unknown coefficient`,
+    link: { url: '/linear-algebra/orthogonality/least-squares#4', label: 'Worked Example: Fitting a Line' },
+    fields: {
+      intuition: `Fitting a line $y = c_0 + c_1 x$ to points $(x_i, y_i)$ gives rows $(1, x_i)$; fitting a parabola adds a column of $x_i^2$. The fit is the [least-squares solution](!/linear-algebra/definitions#least_squares_solution) of $A\\mathbf{c} = \\mathbf{y}$, and changing the model changes only the columns, never the method.`,
+      'related concepts': `• [Least-Squares Solution](!/linear-algebra/definitions#least_squares_solution)
+• [Overdetermined System](!/linear-algebra/definitions#overdetermined_system)`,
+    },
+  },
+
+  {
+    id: 'pseudoinverse',
+    name: 'Pseudoinverse',
+    category: 'Linear Systems',
+    formula: `The matrix $A^+$ that plays the role of an inverse for a matrix that has none; for independent columns, $A^+ = (A^TA)^{-1}A^T$`,
+    link: { url: '/linear-algebra/orthogonality/least-squares#7', label: 'The Pseudoinverse' },
+    fields: {
+      intuition: `It sends $\\mathbf{b}$ to the [least-squares solution](!/linear-algebra/definitions#least_squares_solution) of smallest length, and reduces to the ordinary inverse when one exists. In general it is built from the [SVD](!/linear-algebra/definitions#singular_value_decomposition) by inverting the non-zero singular values and leaving the zero ones alone.`,
+      'related concepts': `• [Least-Squares Solution](!/linear-algebra/definitions#least_squares_solution)
+• [Singular Value Decomposition](!/linear-algebra/definitions#singular_value_decomposition)
+• [Inverse Matrix](!/linear-algebra/definitions#inverse_matrix)`,
+    },
+  },
+
   // ═══════════════════════════════════════════
-  // CATEGORY: Transformations (5 terms)
+  // CATEGORY: Transformations (8 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -1815,8 +2558,52 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) \\mid \\mathbf{v} \\in V\\}$$`,
     },
   },
 
+  {
+    id: 'rotation',
+    name: 'Rotation',
+    category: 'Transformations',
+    formula: `A [linear transformation](!/linear-algebra/definitions#linear_transformation) that turns every vector through the same angle about the origin; in $\\mathbb{R}^2$:
+$$R_\\theta = \\begin{bmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{bmatrix}$$`,
+    link: { url: '/linear-algebra/transformations/geometric#3', label: 'Rotations in R²' },
+    fields: {
+      intuition: `Lengths and angles survive, only headings change. The matrix is [orthogonal](!/linear-algebra/definitions#orthogonal_matrix) with determinant $+1$, and a rotation by a non-trivial angle has no real eigenvectors — no direction is left pointing where it started.`,
+      'related concepts': `• [Orthogonal Matrix](!/linear-algebra/definitions#orthogonal_matrix)
+• [Isometry](!/linear-algebra/definitions#isometry)
+• [Reflection](!/linear-algebra/definitions#reflection)`,
+    },
+  },
+
+  {
+    id: 'reflection',
+    name: 'Reflection',
+    category: 'Transformations',
+    formula: `A [linear transformation](!/linear-algebra/definitions#linear_transformation) that mirrors every vector across a line through the origin — or a plane, in three dimensions`,
+    link: { url: '/linear-algebra/transformations/geometric#5', label: 'Reflections in R²' },
+    fields: {
+      intuition: `Points on the mirror stay put while everything else swaps to the far side at equal distance. The matrix is [orthogonal](!/linear-algebra/definitions#orthogonal_matrix) with determinant $-1$ and is its own inverse: reflecting twice restores everything.`,
+      'related concepts': `• [Rotation](!/linear-algebra/definitions#rotation)
+• [Involutory Matrix](!/linear-algebra/definitions#involutory_matrix)
+• [Orientation](!/linear-algebra/definitions#orientation)`,
+    },
+  },
+
+  {
+    id: 'projection_matrix',
+    name: 'Projection Matrix',
+    category: 'Transformations',
+    formula: `The matrix $P$ sending every vector to its [orthogonal projection](!/linear-algebra/definitions#vector_projection) onto a [subspace](!/linear-algebra/definitions#subspace); for a subspace with basis matrix $A$:
+$$P = A(A^TA)^{-1}A^T$$`,
+    link: { url: '/linear-algebra/orthogonality/projections#5', label: 'The Projection Matrix' },
+    fields: {
+      intuition: `Drop every point perpendicularly onto the subspace. Points already there do not move, so applying $P$ twice changes nothing after the first time — it is [idempotent](!/linear-algebra/definitions#idempotent_matrix), $P^2 = P$, and symmetric. Its determinant is $0$ whenever the subspace is smaller than the whole space, because information has been lost.`,
+      'related concepts': `• [Vector Projection](!/linear-algebra/definitions#vector_projection)
+• [Idempotent Matrix](!/linear-algebra/definitions#idempotent_matrix)
+• [Least-Squares Solution](!/linear-algebra/definitions#least_squares_solution)`,
+    },
+  },
+
   // ═══════════════════════════════════════════
-  // CATEGORY: Eigen (7 terms)
+  // CATEGORY: Eigen (15 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -1952,8 +2739,125 @@ $$\\sigma_i = \\sqrt{\\lambda_i(A^TA)}$$`,
     },
   },
 
+  {
+    id: 'diagonalizable_matrix',
+    name: 'Diagonalizable Matrix',
+    category: 'Eigen',
+    formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) with a full set of $n$ linearly independent [eigenvectors](!/linear-algebra/definitions#eigenvector) — equivalently, one that can be written as $A = PDP^{-1}$ with $D$ diagonal`,
+    link: { url: '/linear-algebra/eigen/diagonalization#3', label: 'When Is a Matrix Diagonalizable?' },
+    fields: {
+      intuition: `A matrix that is secretly just a stretch along some set of directions. Every matrix with $n$ distinct eigenvalues qualifies, and every symmetric matrix does; what disqualifies a matrix is never awkward eigenvalues, only running out of independent eigenvectors.`,
+      'related concepts': `• [Diagonalization](!/linear-algebra/definitions#diagonalization)
+• [Defective Matrix](!/linear-algebra/definitions#defective_matrix)
+• [Eigenvector](!/linear-algebra/definitions#eigenvector)`,
+    },
+  },
+
+  {
+    id: 'diagonalization',
+    name: 'Diagonalization',
+    category: 'Eigen',
+    formula: `Factoring a matrix as $A = PDP^{-1}$, where the columns of $P$ are [eigenvectors](!/linear-algebra/definitions#eigenvector) and $D$ carries the matching [eigenvalues](!/linear-algebra/definitions#eigenvalue) on its diagonal`,
+    link: { url: '/linear-algebra/eigen/diagonalization#1', label: 'What Diagonalization Means' },
+    fields: {
+      intuition: `A change to the basis in which the matrix acts as a plain stretch. The payoff is powers: $A^k = PD^kP^{-1}$, and raising a diagonal matrix to a power is entrywise, so repeated multiplication becomes a handful of scalar powers.`,
+      'common errors': `Mismatching the order: column $i$ of $P$ must belong to the $i$-th diagonal entry of $D$. Any order works, but it must be the same order in both.`,
+      'related concepts': `• [Diagonalizable Matrix](!/linear-algebra/definitions#diagonalizable_matrix)
+• [Similar Matrices](!/linear-algebra/definitions#similar_matrices)
+• [Spectral Decomposition](!/linear-algebra/definitions#spectral_decomposition)`,
+    },
+  },
+
+  {
+    id: 'defective_matrix',
+    name: 'Defective Matrix',
+    category: 'Eigen',
+    formula: `A matrix with too few independent [eigenvectors](!/linear-algebra/definitions#eigenvector) to be diagonalized: for some eigenvalue the [geometric multiplicity](!/linear-algebra/definitions#geometric_multiplicity) is smaller than the [algebraic multiplicity](!/linear-algebra/definitions#algebraic_multiplicity)`,
+    link: { url: '/linear-algebra/eigen/diagonalization#9', label: 'When Diagonalization Fails' },
+    fields: {
+      intuition: `A repeated eigenvalue that failed to bring a full set of directions with it. There are not enough independent eigenvectors to fill the columns of $P$, so $P$ cannot be inverted and the factorization never forms. The Jordan form exists to give these matrices a canonical shape instead.`,
+      'related concepts': `• [Diagonalizable Matrix](!/linear-algebra/definitions#diagonalizable_matrix)
+• [Algebraic Multiplicity](!/linear-algebra/definitions#algebraic_multiplicity)
+• [Geometric Multiplicity](!/linear-algebra/definitions#geometric_multiplicity)`,
+    },
+  },
+
+  {
+    id: 'dominant_eigenvalue',
+    name: 'Dominant Eigenvalue',
+    category: 'Eigen',
+    formula: `The [eigenvalue](!/linear-algebra/definitions#eigenvalue) of largest absolute value`,
+    link: { url: '/linear-algebra/eigen#8', label: 'Why Eigenvalues Matter' },
+    fields: {
+      intuition: `Multiply a vector by the matrix again and again and it swings toward the dominant eigenvector, because that component grows fastest. The rate is set by the ratio $|\\lambda_2 / \\lambda_1|$ — close to $1$ means slow convergence — and this is exactly what power iteration exploits.`,
+      'related concepts': `• [Eigenvalue](!/linear-algebra/definitions#eigenvalue)
+• [Rayleigh Quotient](!/linear-algebra/definitions#rayleigh_quotient)`,
+    },
+  },
+
+  {
+    id: 'rayleigh_quotient',
+    name: 'Rayleigh Quotient',
+    category: 'Eigen',
+    formula: `The scalar
+$$R(\\mathbf{x}) = \\frac{\\mathbf{x}^T A\\,\\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$$`,
+    link: { url: '/linear-algebra/eigen#8', label: 'Why Eigenvalues Matter' },
+    fields: {
+      intuition: `The best estimate of an eigenvalue from a vector that is only approximately an eigenvector. It equals the [eigenvalue](!/linear-algebra/definitions#eigenvalue) exactly when $\\mathbf{x}$ is an eigenvector, and for a symmetric matrix it is always trapped between the smallest and largest eigenvalues.`,
+      'related concepts': `• [Eigenvalue](!/linear-algebra/definitions#eigenvalue)
+• [Dominant Eigenvalue](!/linear-algebra/definitions#dominant_eigenvalue)
+• [Quadratic Form](!/linear-algebra/definitions#quadratic_form)`,
+    },
+  },
+
+  {
+    id: 'quadratic_form',
+    name: 'Quadratic Form',
+    category: 'Eigen',
+    formula: `A function $q(\\mathbf{x}) = \\mathbf{x}^T A\\,\\mathbf{x}$ built from a [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix)`,
+    link: { url: '/linear-algebra/decompositions/spectral#6', label: 'Quadratic Forms' },
+    fields: {
+      intuition: `Every term is a product of two coordinates — $x_1^2$, $x_1 x_2$ and so on — with the matrix holding the coefficients. Its sign behaviour is read off the eigenvalues of $A$: all positive means positive definite, all negative means negative definite, mixed means indefinite.`,
+      'related concepts': `• [Symmetric Matrix](!/linear-algebra/definitions#symmetric_matrix)
+• [Positive Definite Matrix](!/linear-algebra/definitions#positive_definite_matrix)
+• [Spectral Decomposition](!/linear-algebra/definitions#spectral_decomposition)`,
+    },
+  },
+
+  {
+    id: 'spectral_decomposition',
+    name: 'Spectral Decomposition',
+    category: 'Eigen',
+    formula: `The [diagonalization](!/linear-algebra/definitions#diagonalization) of a [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) by an [orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix):
+$$A = Q\\Lambda Q^T = \\sum_{i} \\lambda_i\\,\\mathbf{q}_i \\mathbf{q}_i^T$$`,
+    link: { url: '/linear-algebra/decompositions/spectral#1', label: 'What the Spectral Decomposition Is' },
+    fields: {
+      intuition: `Because the eigenvectors of a symmetric matrix can be chosen orthonormal, the matrix of them is orthogonal and its inverse is just its transpose — no inverse ever has to be computed. The sum form shows the matrix as rank-one pieces weighted by eigenvalues, and dropping the smallest weights is how it becomes an approximation.`,
+      'related concepts': `• [Diagonalization](!/linear-algebra/definitions#diagonalization)
+• [Symmetric Matrix](!/linear-algebra/definitions#symmetric_matrix)
+• [Outer Product](!/linear-algebra/definitions#outer_product)
+• [Singular Value Decomposition](!/linear-algebra/definitions#singular_value_decomposition)`,
+    },
+  },
+
+  {
+    id: 'singular_value_decomposition',
+    name: 'Singular Value Decomposition',
+    category: 'Eigen',
+    formula: `The factorization $A = U\\Sigma V^T$ with $U$ and $V$ [orthogonal](!/linear-algebra/definitions#orthogonal_matrix) and $\\Sigma$ a rectangular diagonal matrix of [singular values](!/linear-algebra/definitions#singular_value) in decreasing order`,
+    link: { url: '/linear-algebra/decompositions/svd#1', label: 'What the Singular Value Decomposition Is' },
+    fields: {
+      intuition: `The one factorization every matrix has — square or not, symmetric or not, with or without eigenvectors. The columns of $V$ are the right singular vectors, the columns of $U$ the left ones, and $\\Sigma$ says how much each direction is stretched. Truncating it keeps the most important part first.`,
+      'related concepts': `• [Singular Value](!/linear-algebra/definitions#singular_value)
+• [Spectral Decomposition](!/linear-algebra/definitions#spectral_decomposition)
+• [Pseudoinverse](!/linear-algebra/definitions#pseudoinverse)
+• [Condition Number](!/linear-algebra/definitions#condition_number)`,
+      'related formulas': `• [SVD](!/linear-algebra/formulas#svd)`,
+    },
+  },
+
   // ═══════════════════════════════════════════
-  // CATEGORY: Orthogonality (6 terms)
+  // CATEGORY: Orthogonality (9 terms)
   // ═══════════════════════════════════════════
 
   {
@@ -2071,6 +2975,50 @@ $$W^\\perp = \\{\\mathbf{v} \\in V \\mid \\langle \\mathbf{v}, \\mathbf{w} \\ran
   },
 
 
+
+  {
+    id: 'gram_schmidt_process',
+    name: 'Gram-Schmidt Process',
+    category: 'Orthogonality',
+    formula: `The procedure that turns any linearly independent set into an [orthonormal set](!/linear-algebra/definitions#orthonormal_set) spanning the same space`,
+    link: { url: '/linear-algebra/orthogonality/gram-schmidt#1', label: 'The Goal' },
+    fields: {
+      intuition: `Take each vector in turn, subtract its [projections](!/linear-algebra/definitions#vector_projection) onto the directions already fixed, and normalize what is left. The subtraction guarantees orthogonality by construction; the normalization only fixes the length, which is why the two concerns can be separated.`,
+      'common errors': `Dividing by a very small length after the subtraction. The classical algorithm loses accuracy exactly there, which is why numerical work prefers the modified version or Householder reflections.`,
+      'related concepts': `• [Orthonormal Set](!/linear-algebra/definitions#orthonormal_set)
+• [Vector Projection](!/linear-algebra/definitions#vector_projection)
+• [QR Decomposition](!/linear-algebra/definitions#qr_decomposition)`,
+    },
+  },
+
+  {
+    id: 'qr_decomposition',
+    name: 'QR Decomposition',
+    category: 'Orthogonality',
+    formula: `Writing a matrix with independent columns as $A = QR$, with $Q$ [orthogonal](!/linear-algebra/definitions#orthogonal_matrix) and $R$ upper [triangular](!/linear-algebra/definitions#triangular_matrix)`,
+    link: { url: '/linear-algebra/decompositions/qr#1', label: 'What QR Decomposition Is' },
+    fields: {
+      intuition: `[Gram-Schmidt](!/linear-algebra/definitions#gram_schmidt_process) written as a factorization: the orthonormal vectors it produces become the columns of $Q$, and the coefficients it subtracted along the way become the entries of $R$. The triangularity of $R$ is not imposed — each column was only ever corrected against the ones before it.`,
+      'related concepts': `• [Gram-Schmidt Process](!/linear-algebra/definitions#gram_schmidt_process)
+• [Orthogonal Matrix](!/linear-algebra/definitions#orthogonal_matrix)
+• [Least-Squares Solution](!/linear-algebra/definitions#least_squares_solution)`,
+      'related formulas': `• [QR Decomposition](!/linear-algebra/formulas#qr_decomposition)`,
+    },
+  },
+
+  {
+    id: 'cholesky_factorization',
+    name: 'Cholesky Factorization',
+    category: 'Orthogonality',
+    formula: `Writing a [positive definite matrix](!/linear-algebra/definitions#positive_definite_matrix) as $A = LL^T$ with $L$ lower [triangular](!/linear-algebra/definitions#triangular_matrix) and positive diagonal`,
+    link: { url: '/linear-algebra/decompositions/cholesky#1', label: 'What Cholesky Decomposition Is' },
+    fields: {
+      intuition: `A [square root](!/linear-algebra/definitions#matrix_square_root) of the matrix, computed by alternating square roots on the diagonal with simple divisions below it. It exists exactly when $A$ is positive definite, so attempting it doubles as the standard test for that property, and it works on only half the matrix — about twice as fast as [LU](!/linear-algebra/definitions#lu_decomposition).`,
+      'related concepts': `• [Positive Definite Matrix](!/linear-algebra/definitions#positive_definite_matrix)
+• [LU Decomposition](!/linear-algebra/definitions#lu_decomposition)
+• [Matrix Square Root](!/linear-algebra/definitions#matrix_square_root)`,
+    },
+  },
 
 ];
  export default linearAlgebraTermsList;

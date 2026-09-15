@@ -535,7 +535,7 @@ export async function getStaticProps(){
 
 **Scalar invariant** — the trace returns a single number that is invariant under similarity transformations: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$.
 
-$\\Sigma$ [notation](!/linear-algebra/vectors#2) — the trace can be written compactly as $\\text{tr}(A) = \\sum_{i=1}^{n} a_{i,i}$.`,
+**$\\Sigma$ notation** — the trace can be written compactly as $\\text{tr}(A) = \\sum_{i=1}^{n} a_{i,i}$.`,
       before: ``,
       after: ``,
       link: '',

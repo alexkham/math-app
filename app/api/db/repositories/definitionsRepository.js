@@ -13072,6 +13072,239 @@ const definitionsRepository = [
   // ------------------------------------------------------------------------
 
   {
+    "name": "Zero Vector",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "zero_vector",
+    "definitionUrl": "/linear-algebra/definitions#zero_vector",
+    "formula": "The [vector](!/linear-algebra/definitions#vector) $\\mathbf{0} = (0, 0, \\ldots, 0)$ whose every component is zero; the additive identity, so $\\mathbf{v} + \\mathbf{0} = \\mathbf{v}$ for every $\\mathbf{v}$",
+    "link": { "label": "Types of Vectors", "url": "/linear-algebra/vectors#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Vector", "url": "/linear-algebra/definitions#vector" },
+      { "name": "Vector Space", "url": "/linear-algebra/definitions#vector_space" },
+      { "name": "Linear Independence", "url": "/linear-algebra/definitions#linear_independence" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Direction",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "direction",
+    "definitionUrl": "/linear-algebra/definitions#direction",
+    "formula": "The orientation of a non-zero [vector](!/linear-algebra/definitions#vector) in space, captured by its [unit vector](!/linear-algebra/definitions#unit_vector) $\\mathbf{v} / \\|\\mathbf{v}\\|$; two vectors share a direction exactly when one is a positive multiple of the other",
+    "link": { "label": "Direction", "url": "/linear-algebra/vectors/properties#2" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Unit Vector", "url": "/linear-algebra/definitions#unit_vector" },
+      { "name": "Magnitude", "url": "/linear-algebra/definitions#magnitude" },
+      { "name": "Scalar", "url": "/linear-algebra/definitions#scalar" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Vector Projection",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "vector_projection",
+    "definitionUrl": "/linear-algebra/definitions#vector_projection",
+    "formula": "The component of $\\mathbf{u}$ lying along $\\mathbf{v}$: $\\text{proj}_{\\mathbf{v}}\\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v}$, a multiple of $\\mathbf{v}$; its signed length $\\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|}$ is the scalar projection",
+    "link": { "label": "Orthogonal Projection", "url": "/linear-algebra/vectors/dot-product#9" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Dot Product", "url": "/linear-algebra/definitions#dot_product" },
+      { "name": "Orthogonal Decomposition", "url": "/linear-algebra/definitions#orthogonal_decomposition" },
+      { "name": "Projection Matrix", "url": "/linear-algebra/definitions#projection_matrix" }
+    ],
+    "relatedFormulas": [
+      { "name": "Scalar Projection", "url": "/linear-algebra/formulas#scalar_projection" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Orthogonal Decomposition",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "orthogonal_decomposition",
+    "definitionUrl": "/linear-algebra/definitions#orthogonal_decomposition",
+    "formula": "The unique splitting of a vector into a part inside a [subspace](!/linear-algebra/definitions#subspace) $W$ and a part in its [orthogonal complement](!/linear-algebra/definitions#orthogonal_complement): $\\mathbf{u} = \\text{proj}_W\\mathbf{u} + (\\mathbf{u} - \\text{proj}_W\\mathbf{u})$",
+    "link": { "label": "The Orthogonal Decomposition", "url": "/linear-algebra/orthogonality/projections#2" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Vector Projection", "url": "/linear-algebra/definitions#vector_projection" },
+      { "name": "Orthogonal Complement", "url": "/linear-algebra/definitions#orthogonal_complement" },
+      { "name": "Residual", "url": "/linear-algebra/definitions#residual" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Outer Product",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "outer_product",
+    "definitionUrl": "/linear-algebra/definitions#outer_product",
+    "formula": "The [matrix](!/linear-algebra/definitions#matrix) $\\mathbf{u}\\mathbf{v}^T$ with entries $u_i v_j$; every column is a multiple of $\\mathbf{u}$, so the result has [rank](!/linear-algebra/definitions#rank) one. Also called the dyadic or tensor product",
+    "link": { "label": "Rank of Special Matrices", "url": "/linear-algebra/matrix/rank#8" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Dot Product", "url": "/linear-algebra/definitions#dot_product" },
+      { "name": "Rank", "url": "/linear-algebra/definitions#rank" },
+      { "name": "Spectral Decomposition", "url": "/linear-algebra/definitions#spectral_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Hadamard Product",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "hadamard_product",
+    "definitionUrl": "/linear-algebra/definitions#hadamard_product",
+    "formula": "The entry-wise product of two same-shaped matrices, $(A \\circ B)_{ij} = a_{ij}\\,b_{ij}$; unlike matrix multiplication it is commutative and never mixes positions. Also called the Schur product",
+    "link": { "label": "Matrix Operations", "url": "/linear-algebra/matrix/operations" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Element-wise Operation", "url": "/linear-algebra/definitions#element_wise_operation" },
+      { "name": "Matrix", "url": "/linear-algebra/definitions#matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Frobenius Inner Product",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "frobenius_inner_product",
+    "definitionUrl": "/linear-algebra/definitions#frobenius_inner_product",
+    "formula": "The [inner product](!/linear-algebra/definitions#inner_product) of two same-shaped matrices obtained by treating them as long vectors: $\\langle A, B \\rangle_F = \\sum_{i,j} a_{ij}\\,b_{ij} = \\text{tr}(A^T B)$",
+    "link": { "label": "The Frobenius Inner Product", "url": "/linear-algebra/matrix/trace#7" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Inner Product", "url": "/linear-algebra/definitions#inner_product" },
+      { "name": "Trace", "url": "/linear-algebra/definitions#trace" },
+      { "name": "Frobenius Norm", "url": "/linear-algebra/definitions#frobenius_norm" }
+    ],
+    "relatedFormulas": [
+      { "name": "Frobenius Inner Product", "url": "/linear-algebra/formulas#frobenius_inner_product" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Frobenius Norm",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "frobenius_norm",
+    "definitionUrl": "/linear-algebra/definitions#frobenius_norm",
+    "formula": "The length of a matrix measured as if its entries were one long vector: $\\|A\\|_F = \\sqrt{\\sum_{i,j} a_{ij}^2} = \\sqrt{\\text{tr}(A^T A)}$",
+    "link": { "label": "The Frobenius Inner Product", "url": "/linear-algebra/matrix/trace#7" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Frobenius Inner Product", "url": "/linear-algebra/definitions#frobenius_inner_product" },
+      { "name": "Magnitude", "url": "/linear-algebra/definitions#magnitude" },
+      { "name": "Spectral Norm", "url": "/linear-algebra/definitions#spectral_norm" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Inner Product Space",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "inner_product_space",
+    "definitionUrl": "/linear-algebra/definitions#inner_product_space",
+    "formula": "A [vector space](!/linear-algebra/definitions#vector_space) equipped with an [inner product](!/linear-algebra/definitions#inner_product) — a symmetric, bilinear, positive-definite pairing — which in turn supplies length, distance, angle and orthogonality",
+    "link": { "label": "General Inner Products", "url": "/linear-algebra/orthogonality/inner-product#8" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Inner Product", "url": "/linear-algebra/definitions#inner_product" },
+      { "name": "Vector Space", "url": "/linear-algebra/definitions#vector_space" },
+      { "name": "Orthogonal Vectors", "url": "/linear-algebra/definitions#orthogonal_vectors" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Right-Hand Rule",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "right_hand_rule",
+    "definitionUrl": "/linear-algebra/definitions#right_hand_rule",
+    "formula": "The convention fixing the direction of a [cross product](!/linear-algebra/definitions#cross_product): curl the fingers of the right hand from $\\mathbf{u}$ toward $\\mathbf{v}$ and the thumb points along $\\mathbf{u} \\times \\mathbf{v}$",
+    "link": { "label": "Direction and the Right-Hand Rule", "url": "/linear-algebra/vectors/cross-product#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Cross Product", "url": "/linear-algebra/definitions#cross_product" },
+      { "name": "Orientation", "url": "/linear-algebra/definitions#orientation" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Isometry",
+    "section": "linear-algebra",
+    "category": "Vectors",
+    "entity": "isometry",
+    "definitionUrl": "/linear-algebra/definitions#isometry",
+    "formula": "A [linear transformation](!/linear-algebra/definitions#linear_transformation) that preserves lengths, $\\|T\\mathbf{v}\\| = \\|\\mathbf{v}\\|$, and therefore distances and angles; in $\\mathbb{R}^n$ these are exactly the maps given by [orthogonal matrices](!/linear-algebra/definitions#orthogonal_matrix)",
+    "link": { "label": "Orthogonal Matrices", "url": "/linear-algebra/orthogonality/orthogonal-sets#6" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Orthogonal Matrix", "url": "/linear-algebra/definitions#orthogonal_matrix" },
+      { "name": "Rotation", "url": "/linear-algebra/definitions#rotation" },
+      { "name": "Reflection", "url": "/linear-algebra/definitions#reflection" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
     "name": "Vector Space",
     "section": "linear-algebra",
     "category": "Vector Spaces",
@@ -13792,6 +14025,155 @@ const definitionsRepository = [
   // ------------------------------------------------------------------------
 
   {
+    "name": "Coordinates",
+    "section": "linear-algebra",
+    "category": "Vector Spaces",
+    "entity": "coordinates",
+    "definitionUrl": "/linear-algebra/definitions#coordinates",
+    "formula": "The unique scalars $c_1, \\ldots, c_n$ expressing a vector as a [linear combination](!/linear-algebra/definitions#linear_combination) of a chosen [basis](!/linear-algebra/definitions#basis): $\\mathbf{v} = c_1\\mathbf{b}_1 + \\cdots + c_n\\mathbf{b}_n$. They belong to the basis, not to the vector",
+    "link": { "label": "Coordinates", "url": "/linear-algebra/vector-spaces/basis#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Basis", "url": "/linear-algebra/definitions#basis" },
+      { "name": "Change of Basis Matrix", "url": "/linear-algebra/definitions#change_of_basis_matrix" },
+      { "name": "Linear Combination", "url": "/linear-algebra/definitions#linear_combination" }
+    ],
+    "relatedFormulas": [
+      { "name": "Coordinate Vector", "url": "/linear-algebra/formulas#coordinate_vector" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Pivot Column",
+    "section": "linear-algebra",
+    "category": "Vector Spaces",
+    "entity": "pivot_column",
+    "definitionUrl": "/linear-algebra/definitions#pivot_column",
+    "formula": "A column of a matrix that contains a [pivot](!/linear-algebra/definitions#pivot) after row reduction; the variable it belongs to is a leading variable, and the pivot columns of the original matrix form a basis for its [column space](!/linear-algebra/definitions#column_space)",
+    "link": { "label": "Pivot Columns and Free Columns", "url": "/linear-algebra/linear-systems/echelon-form#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Pivot", "url": "/linear-algebra/definitions#pivot" },
+      { "name": "Free Variable", "url": "/linear-algebra/definitions#free_variable" },
+      { "name": "Column Space", "url": "/linear-algebra/definitions#column_space" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Free Variable",
+    "section": "linear-algebra",
+    "category": "Vector Spaces",
+    "entity": "free_variable",
+    "definitionUrl": "/linear-algebra/definitions#free_variable",
+    "formula": "A variable whose column carries no [pivot](!/linear-algebra/definitions#pivot) after row reduction; it may take any value, and each free variable contributes one parameter to the solution set and one dimension to the [null space](!/linear-algebra/definitions#null_space)",
+    "link": { "label": "Pivot Columns and Free Columns", "url": "/linear-algebra/linear-systems/echelon-form#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Pivot Column", "url": "/linear-algebra/definitions#pivot_column" },
+      { "name": "Null Space", "url": "/linear-algebra/definitions#null_space" },
+      { "name": "Special Solutions", "url": "/linear-algebra/definitions#special_solutions" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Special Solutions",
+    "section": "linear-algebra",
+    "category": "Vector Spaces",
+    "entity": "special_solutions",
+    "definitionUrl": "/linear-algebra/definitions#special_solutions",
+    "formula": "The solutions of $A\\mathbf{x} = \\mathbf{0}$ obtained by setting one [free variable](!/linear-algebra/definitions#free_variable) to $1$ and the others to $0$; they are linearly independent and form a basis for the [null space](!/linear-algebra/definitions#null_space)",
+    "link": { "label": "Finding the Null Space", "url": "/linear-algebra/linear-systems/homogeneous#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Null Space", "url": "/linear-algebra/definitions#null_space" },
+      { "name": "Free Variable", "url": "/linear-algebra/definitions#free_variable" },
+      { "name": "Homogeneous System", "url": "/linear-algebra/definitions#homogeneous_system" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Nullity",
+    "section": "linear-algebra",
+    "category": "Vector Spaces",
+    "entity": "nullity",
+    "definitionUrl": "/linear-algebra/definitions#nullity",
+    "formula": "The [dimension](!/linear-algebra/definitions#dimension) of the [null space](!/linear-algebra/definitions#null_space) of a matrix, equal to the number of [free variables](!/linear-algebra/definitions#free_variable): $\\text{nullity}(A) = n - \\text{rank}(A)$",
+    "link": { "label": "The Rank-Nullity Theorem", "url": "/linear-algebra/matrix/rank#6" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Rank", "url": "/linear-algebra/definitions#rank" },
+      { "name": "Null Space", "url": "/linear-algebra/definitions#null_space" },
+      { "name": "Rank-Nullity Theorem", "url": "/linear-algebra/definitions#rank_nullity_theorem" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Rank-Nullity Theorem",
+    "section": "linear-algebra",
+    "category": "Vector Spaces",
+    "entity": "rank_nullity_theorem",
+    "definitionUrl": "/linear-algebra/definitions#rank_nullity_theorem",
+    "formula": "For an $m \\times n$ matrix, $\\text{rank}(A) + \\text{nullity}(A) = n$: every column is either a [pivot column](!/linear-algebra/definitions#pivot_column) contributing to the rank or a free column contributing to the nullity",
+    "link": { "label": "The Rank-Nullity Theorem as a Dimension Statement", "url": "/linear-algebra/vector-spaces/dimension#9" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Rank", "url": "/linear-algebra/definitions#rank" },
+      { "name": "Nullity", "url": "/linear-algebra/definitions#nullity" },
+      { "name": "Dimension", "url": "/linear-algebra/definitions#dimension" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Full Rank",
+    "section": "linear-algebra",
+    "category": "Vector Spaces",
+    "entity": "full_rank",
+    "definitionUrl": "/linear-algebra/definitions#full_rank",
+    "formula": "A matrix whose [rank](!/linear-algebra/definitions#rank) is as large as its shape allows, $\\text{rank}(A) = \\min(m, n)$; a square matrix of full rank is invertible, and a tall one has independent columns",
+    "link": { "label": "Properties of Rank", "url": "/linear-algebra/matrix/rank#7" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Rank", "url": "/linear-algebra/definitions#rank" },
+      { "name": "Inverse Matrix", "url": "/linear-algebra/definitions#inverse_matrix" },
+      { "name": "Linear Independence", "url": "/linear-algebra/definitions#linear_independence" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
     "name": "Matrix",
     "section": "linear-algebra",
     "category": "Matrices",
@@ -14416,6 +14798,326 @@ const definitionsRepository = [
   // ------------------------------------------------------------------------
 
   {
+    "name": "Transpose",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "transpose",
+    "definitionUrl": "/linear-algebra/definitions#transpose",
+    "formula": "The matrix $A^T$ obtained by swapping rows and columns, $(A^T)_{ij} = a_{ji}$ — a reflection across the [main diagonal](!/linear-algebra/definitions#main_diagonal), which itself stays fixed",
+    "link": { "label": "The Transpose", "url": "/linear-algebra/matrix/operations#8" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Symmetric Matrix", "url": "/linear-algebra/definitions#symmetric_matrix" },
+      { "name": "Main Diagonal", "url": "/linear-algebra/definitions#main_diagonal" },
+      { "name": "Orthogonal Matrix", "url": "/linear-algebra/definitions#orthogonal_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Main Diagonal",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "main_diagonal",
+    "definitionUrl": "/linear-algebra/definitions#main_diagonal",
+    "formula": "The entries $a_{11}, a_{22}, \\ldots$ running from the top-left corner downward, where row index equals column index; everything else is off-diagonal, above it or below it",
+    "link": { "label": "Square Matrices", "url": "/linear-algebra/matrix/types#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Trace", "url": "/linear-algebra/definitions#trace" },
+      { "name": "Diagonal Matrix", "url": "/linear-algebra/definitions#diagonal_matrix" },
+      { "name": "Triangular Matrix", "url": "/linear-algebra/definitions#triangular_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Zero Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "zero_matrix",
+    "definitionUrl": "/linear-algebra/definitions#zero_matrix",
+    "formula": "The matrix $0$ with every entry equal to zero; the additive identity for matrices of its shape, $A + 0 = A$, with determinant $0$, rank $0$ and every eigenvalue $0$",
+    "link": { "label": "Matrix Equality and the Zero Matrix", "url": "/linear-algebra/matrix#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Identity Matrix", "url": "/linear-algebra/definitions#identity_matrix" },
+      { "name": "Zero Vector", "url": "/linear-algebra/definitions#zero_vector" },
+      { "name": "Matrix", "url": "/linear-algebra/definitions#matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Scalar Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "scalar_matrix",
+    "definitionUrl": "/linear-algebra/definitions#scalar_matrix",
+    "formula": "A [diagonal matrix](!/linear-algebra/definitions#diagonal_matrix) whose diagonal entries are all the same number $c$, so it equals $cI$ and multiplying by it scales every vector by $c$",
+    "link": { "label": "Diagonal Matrices", "url": "/linear-algebra/matrix/types#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Diagonal Matrix", "url": "/linear-algebra/definitions#diagonal_matrix" },
+      { "name": "Identity Matrix", "url": "/linear-algebra/definitions#identity_matrix" },
+      { "name": "Scalar", "url": "/linear-algebra/definitions#scalar" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Skew-Symmetric Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "skew_symmetric_matrix",
+    "definitionUrl": "/linear-algebra/definitions#skew_symmetric_matrix",
+    "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) equal to the negative of its [transpose](!/linear-algebra/definitions#transpose), $A^T = -A$; mirrored entries carry opposite signs and the diagonal is forced to be zero",
+    "link": { "label": "Skew-Symmetric Matrices", "url": "/linear-algebra/matrix/types#6" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Symmetric Matrix", "url": "/linear-algebra/definitions#symmetric_matrix" },
+      { "name": "Transpose", "url": "/linear-algebra/definitions#transpose" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Triangular Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "triangular_matrix",
+    "definitionUrl": "/linear-algebra/definitions#triangular_matrix",
+    "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) with zeros on one side of the [main diagonal](!/linear-algebra/definitions#main_diagonal): upper triangular when everything below is zero, lower triangular when everything above is; unit triangular when the diagonal is all ones. Its determinant is the product of the diagonal",
+    "link": { "label": "Triangular Matrices", "url": "/linear-algebra/matrix/types#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Main Diagonal", "url": "/linear-algebra/definitions#main_diagonal" },
+      { "name": "LU Decomposition", "url": "/linear-algebra/definitions#lu_decomposition" },
+      { "name": "Determinant", "url": "/linear-algebra/definitions#determinant" }
+    ],
+    "relatedFormulas": [
+      { "name": "Block Triangular Determinant", "url": "/linear-algebra/formulas#block_triangular_determinant" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Permutation Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "permutation_matrix",
+    "definitionUrl": "/linear-algebra/definitions#permutation_matrix",
+    "formula": "An [identity matrix](!/linear-algebra/definitions#identity_matrix) with its rows reordered — exactly one $1$ in each row and column; multiplying by it permutes rows or columns, and its inverse is its [transpose](!/linear-algebra/definitions#transpose)",
+    "link": { "label": "Involutory and Permutation Matrices", "url": "/linear-algebra/matrix/types#9" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Identity Matrix", "url": "/linear-algebra/definitions#identity_matrix" },
+      { "name": "Orthogonal Matrix", "url": "/linear-algebra/definitions#orthogonal_matrix" },
+      { "name": "Partial Pivoting", "url": "/linear-algebra/definitions#partial_pivoting" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Nilpotent Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "nilpotent_matrix",
+    "definitionUrl": "/linear-algebra/definitions#nilpotent_matrix",
+    "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) some power of which is the [zero matrix](!/linear-algebra/definitions#zero_matrix), $N^k = 0$; every eigenvalue of a nilpotent matrix is $0$",
+    "link": { "label": "Nilpotent and Idempotent Matrices", "url": "/linear-algebra/matrix/types#8" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Idempotent Matrix", "url": "/linear-algebra/definitions#idempotent_matrix" },
+      { "name": "Zero Matrix", "url": "/linear-algebra/definitions#zero_matrix" },
+      { "name": "Eigenvalue", "url": "/linear-algebra/definitions#eigenvalue" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Idempotent Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "idempotent_matrix",
+    "definitionUrl": "/linear-algebra/definitions#idempotent_matrix",
+    "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) that equals its own square, $P^2 = P$, so applying it twice changes nothing after the first time; every [projection matrix](!/linear-algebra/definitions#projection_matrix) is idempotent",
+    "link": { "label": "Nilpotent and Idempotent Matrices", "url": "/linear-algebra/matrix/types#8" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Projection Matrix", "url": "/linear-algebra/definitions#projection_matrix" },
+      { "name": "Nilpotent Matrix", "url": "/linear-algebra/definitions#nilpotent_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Involutory Matrix",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "involutory_matrix",
+    "definitionUrl": "/linear-algebra/definitions#involutory_matrix",
+    "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) that is its own inverse, $A^2 = I$; applying it twice returns every vector to where it started, as a [reflection](!/linear-algebra/definitions#reflection) does",
+    "link": { "label": "Involutory and Permutation Matrices", "url": "/linear-algebra/matrix/types#9" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Reflection", "url": "/linear-algebra/definitions#reflection" },
+      { "name": "Inverse Matrix", "url": "/linear-algebra/definitions#inverse_matrix" },
+      { "name": "Identity Matrix", "url": "/linear-algebra/definitions#identity_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Conformability",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "conformability",
+    "definitionUrl": "/linear-algebra/definitions#conformability",
+    "formula": "The shape condition under which a matrix operation is defined: addition needs identical shapes, and the product $AB$ needs the inner dimensions to agree — $A$ is $m \\times n$, $B$ is $n \\times p$, and the result takes the outer dimensions $m \\times p$",
+    "link": { "label": "Matrix Multiplication — Definition", "url": "/linear-algebra/matrix/operations#5" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Matrix", "url": "/linear-algebra/definitions#matrix" },
+      { "name": "Element-wise Operation", "url": "/linear-algebra/definitions#element_wise_operation" }
+    ],
+    "relatedFormulas": [
+      { "name": "Matrix Multiplication", "url": "/linear-algebra/formulas#matrix_multiplication" },
+      { "name": "Matrix Addition", "url": "/linear-algebra/formulas#matrix_addition" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Element-wise Operation",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "element_wise_operation",
+    "definitionUrl": "/linear-algebra/definitions#element_wise_operation",
+    "formula": "An operation applied independently at each position, so the entry at $(i, j)$ of the result depends only on the entries at $(i, j)$ of the inputs; addition, subtraction, scalar multiplication and the [Hadamard product](!/linear-algebra/definitions#hadamard_product) are all element-wise, matrix multiplication is not",
+    "link": { "label": "Matrix Addition", "url": "/linear-algebra/matrix/operations#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Hadamard Product", "url": "/linear-algebra/definitions#hadamard_product" },
+      { "name": "Conformability", "url": "/linear-algebra/definitions#conformability" }
+    ],
+    "relatedFormulas": [
+      { "name": "Matrix Addition", "url": "/linear-algebra/formulas#matrix_addition" },
+      { "name": "Vector Addition", "url": "/linear-algebra/formulas#vector_addition" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Matrix Square Root",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "matrix_square_root",
+    "definitionUrl": "/linear-algebra/definitions#matrix_square_root",
+    "formula": "A matrix $B$ with $B^2 = A$, or more loosely $B B^T = A$; a [positive definite matrix](!/linear-algebra/definitions#positive_definite_matrix) has a unique positive definite square root, and its [Cholesky factor](!/linear-algebra/definitions#cholesky_factorization) is a lower-triangular one",
+    "link": { "label": "What Cholesky Decomposition Is", "url": "/linear-algebra/decompositions/cholesky#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Cholesky Factorization", "url": "/linear-algebra/definitions#cholesky_factorization" },
+      { "name": "Positive Definite Matrix", "url": "/linear-algebra/definitions#positive_definite_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Spectral Norm",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "spectral_norm",
+    "definitionUrl": "/linear-algebra/definitions#spectral_norm",
+    "formula": "The largest factor by which a matrix can stretch any vector, $\\|A\\|_2 = \\max_{\\mathbf{x} \\neq 0} \\dfrac{\\|A\\mathbf{x}\\|}{\\|\\mathbf{x}\\|}$, which equals its largest [singular value](!/linear-algebra/definitions#singular_value)",
+    "link": { "label": "Singular Values", "url": "/linear-algebra/decompositions/svd#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Singular Value", "url": "/linear-algebra/definitions#singular_value" },
+      { "name": "Condition Number", "url": "/linear-algebra/definitions#condition_number" },
+      { "name": "Frobenius Norm", "url": "/linear-algebra/definitions#frobenius_norm" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Condition Number",
+    "section": "linear-algebra",
+    "category": "Matrices",
+    "entity": "condition_number",
+    "definitionUrl": "/linear-algebra/definitions#condition_number",
+    "formula": "The ratio of the largest to the smallest [singular value](!/linear-algebra/definitions#singular_value), $\\kappa(A) = \\sigma_{\\max} / \\sigma_{\\min}$; it measures how much a small change in the input of $A\\mathbf{x} = \\mathbf{b}$ can be amplified in the output, and is infinite for a singular matrix",
+    "link": { "label": "Singular Values", "url": "/linear-algebra/decompositions/svd#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Singular Value", "url": "/linear-algebra/definitions#singular_value" },
+      { "name": "Spectral Norm", "url": "/linear-algebra/definitions#spectral_norm" },
+      { "name": "Singular Matrix", "url": "/linear-algebra/definitions#singular_matrix" }
+    ],
+    "relatedFormulas": [
+      { "name": "Condition Number", "url": "/linear-algebra/formulas#condition_number" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
     "name": "Determinant",
     "section": "linear-algebra",
     "category": "Determinants",
@@ -14698,6 +15400,113 @@ const definitionsRepository = [
   // ------------------------------------------------------------------------
   // Linear Systems
   // ------------------------------------------------------------------------
+
+  {
+    "name": "Cofactor Expansion",
+    "section": "linear-algebra",
+    "category": "Determinants",
+    "entity": "cofactor_expansion",
+    "definitionUrl": "/linear-algebra/definitions#cofactor_expansion",
+    "formula": "Computing a [determinant](!/linear-algebra/definitions#determinant) by expanding along any row or column: each entry is multiplied by its [cofactor](!/linear-algebra/definitions#cofactor) and the products are summed, $\\det A = \\sum_j a_{ij} C_{ij}$. The signs follow the checkerboard pattern $(-1)^{i+j}$. Also called Laplace expansion",
+    "link": { "label": "Laplace Expansion Along a Row", "url": "/linear-algebra/determinants/cofactors#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Cofactor", "url": "/linear-algebra/definitions#cofactor" },
+      { "name": "Minor", "url": "/linear-algebra/definitions#minor" },
+      { "name": "Determinant", "url": "/linear-algebra/definitions#determinant" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Sarrus's Rule",
+    "section": "linear-algebra",
+    "category": "Determinants",
+    "entity": "sarrus_rule",
+    "definitionUrl": "/linear-algebra/definitions#sarrus_rule",
+    "formula": "A shortcut for $3 \\times 3$ [determinants](!/linear-algebra/definitions#determinant) only: add the three products along the down-right diagonals and subtract the three along the down-left diagonals. It does not extend to larger matrices",
+    "link": { "label": "The 3×3 Formula", "url": "/linear-algebra/determinants#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Determinant", "url": "/linear-algebra/definitions#determinant" },
+      { "name": "Cofactor Expansion", "url": "/linear-algebra/definitions#cofactor_expansion" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Adjugate",
+    "section": "linear-algebra",
+    "category": "Determinants",
+    "entity": "adjugate",
+    "definitionUrl": "/linear-algebra/definitions#adjugate",
+    "formula": "The [transpose](!/linear-algebra/definitions#transpose) of the [cofactor matrix](!/linear-algebra/definitions#cofactor_matrix), $\\text{adj}(A) = C^T$; it satisfies $A\\,\\text{adj}(A) = (\\det A)\\,I$, which gives the inverse as $A^{-1} = \\text{adj}(A) / \\det A$ whenever $\\det A \\neq 0$",
+    "link": { "label": "The Adjugate", "url": "/linear-algebra/determinants/cofactors#6" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Cofactor Matrix", "url": "/linear-algebra/definitions#cofactor_matrix" },
+      { "name": "Inverse Matrix", "url": "/linear-algebra/definitions#inverse_matrix" },
+      { "name": "Determinant", "url": "/linear-algebra/definitions#determinant" }
+    ],
+    "relatedFormulas": [
+      { "name": "Adjugate Definition", "url": "/linear-algebra/formulas#adjugate_definition" },
+      { "name": "Adjugate Identity", "url": "/linear-algebra/formulas#adjugate_identity" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Cramer's Rule",
+    "section": "linear-algebra",
+    "category": "Determinants",
+    "entity": "cramers_rule",
+    "definitionUrl": "/linear-algebra/definitions#cramers_rule",
+    "formula": "A formula for the unique solution of a square system $A\\mathbf{x} = \\mathbf{b}$ with $\\det A \\neq 0$: $x_i = \\det(A_i) / \\det A$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$. Exact, but far too costly beyond small systems",
+    "link": { "label": "Cramer", "url": "/linear-algebra/determinants/applications#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Determinant", "url": "/linear-algebra/definitions#determinant" },
+      { "name": "System of Linear Equations", "url": "/linear-algebra/definitions#system_of_linear_equations" },
+      { "name": "Consistent System", "url": "/linear-algebra/definitions#consistent_system" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Orientation",
+    "section": "linear-algebra",
+    "category": "Determinants",
+    "entity": "orientation",
+    "definitionUrl": "/linear-algebra/definitions#orientation",
+    "formula": "The handedness of an ordered set of vectors, read off the sign of the [determinant](!/linear-algebra/definitions#determinant): positive keeps the standard orientation, negative flips it, as a [reflection](!/linear-algebra/definitions#reflection) does",
+    "link": { "label": "Orientation", "url": "/linear-algebra/determinants/geometry#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Determinant", "url": "/linear-algebra/definitions#determinant" },
+      { "name": "Reflection", "url": "/linear-algebra/definitions#reflection" },
+      { "name": "Right-Hand Rule", "url": "/linear-algebra/definitions#right_hand_rule" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
 
   {
     "name": "System of Linear Equations",
@@ -15052,6 +15861,280 @@ const definitionsRepository = [
   // ------------------------------------------------------------------------
 
   {
+    "name": "Coefficient Matrix",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "coefficient_matrix",
+    "definitionUrl": "/linear-algebra/definitions#coefficient_matrix",
+    "formula": "The matrix $A$ of coefficients of the unknowns in a [system of linear equations](!/linear-algebra/definitions#system_of_linear_equations) written as $A\\mathbf{x} = \\mathbf{b}$; the vector $\\mathbf{b}$ of constants is the right-hand side, and appending it gives the [augmented matrix](!/linear-algebra/definitions#augmented_matrix)",
+    "link": { "label": "Writing a System in Matrix Form", "url": "/linear-algebra/linear-systems#2" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Augmented Matrix", "url": "/linear-algebra/definitions#augmented_matrix" },
+      { "name": "System of Linear Equations", "url": "/linear-algebra/definitions#system_of_linear_equations" }
+    ],
+    "relatedFormulas": [
+      { "name": "Augmented Matrix Construction", "url": "/linear-algebra/formulas#augmented_matrix_construction" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Elementary Row Operation",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "elementary_row_operation",
+    "definitionUrl": "/linear-algebra/definitions#elementary_row_operation",
+    "formula": "One of the three reversible moves that leave a system's solution set unchanged: swap two rows, multiply a row by a non-zero constant, or add a multiple of one row to another",
+    "link": { "label": "The Three Elementary Row Operations", "url": "/linear-algebra/linear-systems/gaussian-elimination#2" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Gaussian Elimination", "url": "/linear-algebra/definitions#gaussian_elimination" },
+      { "name": "Row Echelon Form", "url": "/linear-algebra/definitions#row_echelon_form" }
+    ],
+    "relatedFormulas": [
+      { "name": "Elementary Row Operations", "url": "/linear-algebra/formulas#elementary_row_operations" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Gaussian Elimination",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "gaussian_elimination",
+    "definitionUrl": "/linear-algebra/definitions#gaussian_elimination",
+    "formula": "The algorithm that reduces a matrix to [row echelon form](!/linear-algebra/definitions#row_echelon_form) using [elementary row operations](!/linear-algebra/definitions#elementary_row_operation), clearing entries below each [pivot](!/linear-algebra/definitions#pivot) column by column; the system is then finished by [back-substitution](!/linear-algebra/definitions#back_substitution). Also called row reduction",
+    "link": { "label": "The Goal", "url": "/linear-algebra/linear-systems/gaussian-elimination#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Elementary Row Operation", "url": "/linear-algebra/definitions#elementary_row_operation" },
+      { "name": "Row Echelon Form", "url": "/linear-algebra/definitions#row_echelon_form" },
+      { "name": "Back-Substitution", "url": "/linear-algebra/definitions#back_substitution" },
+      { "name": "Partial Pivoting", "url": "/linear-algebra/definitions#partial_pivoting" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Back-Substitution",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "back_substitution",
+    "definitionUrl": "/linear-algebra/definitions#back_substitution",
+    "formula": "Solving an upper-[triangular](!/linear-algebra/definitions#triangular_matrix) system from the bottom row upward: the last equation fixes the last unknown, which is substituted into the row above, and so on",
+    "link": { "label": "Back Substitution", "url": "/linear-algebra/linear-systems/gaussian-elimination#5" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Gaussian Elimination", "url": "/linear-algebra/definitions#gaussian_elimination" },
+      { "name": "Forward Substitution", "url": "/linear-algebra/definitions#forward_substitution" },
+      { "name": "Triangular Matrix", "url": "/linear-algebra/definitions#triangular_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Forward Substitution",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "forward_substitution",
+    "definitionUrl": "/linear-algebra/definitions#forward_substitution",
+    "formula": "Solving a lower-[triangular](!/linear-algebra/definitions#triangular_matrix) system from the top row downward — the mirror image of [back-substitution](!/linear-algebra/definitions#back_substitution), and the first of the two solves when a system is attacked through its [LU decomposition](!/linear-algebra/definitions#lu_decomposition)",
+    "link": { "label": "Solving Systems with LU", "url": "/linear-algebra/decompositions/lower-upper#6" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Back-Substitution", "url": "/linear-algebra/definitions#back_substitution" },
+      { "name": "LU Decomposition", "url": "/linear-algebra/definitions#lu_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Partial Pivoting",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "partial_pivoting",
+    "definitionUrl": "/linear-algebra/definitions#partial_pivoting",
+    "formula": "Swapping rows during elimination so that the largest available entry in the current column becomes the [pivot](!/linear-algebra/definitions#pivot); it avoids dividing by zero or by a tiny number, and the swaps are recorded in a [permutation matrix](!/linear-algebra/definitions#permutation_matrix)",
+    "link": { "label": "Partial Pivoting", "url": "/linear-algebra/linear-systems/gaussian-elimination#11" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Pivot", "url": "/linear-algebra/definitions#pivot" },
+      { "name": "Permutation Matrix", "url": "/linear-algebra/definitions#permutation_matrix" },
+      { "name": "LU Decomposition", "url": "/linear-algebra/definitions#lu_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Consistent System",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "consistent_system",
+    "definitionUrl": "/linear-algebra/definitions#consistent_system",
+    "formula": "A [system of linear equations](!/linear-algebra/definitions#system_of_linear_equations) that has at least one solution — exactly one when every column has a pivot, infinitely many when some column is free. An inconsistent system has none, signalled by a row reading $0 = c$ with $c \\neq 0$",
+    "link": { "label": "The Existence Condition", "url": "/linear-algebra/linear-systems/solvability#2" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "System of Linear Equations", "url": "/linear-algebra/definitions#system_of_linear_equations" },
+      { "name": "Free Variable", "url": "/linear-algebra/definitions#free_variable" },
+      { "name": "Rank", "url": "/linear-algebra/definitions#rank" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Overdetermined System",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "overdetermined_system",
+    "definitionUrl": "/linear-algebra/definitions#overdetermined_system",
+    "formula": "A system with more equations than unknowns; it is usually inconsistent, and is then solved in the [least-squares](!/linear-algebra/definitions#least_squares_solution) sense rather than exactly",
+    "link": { "label": "Overdetermined Systems", "url": "/linear-algebra/linear-systems/solvability#7" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Least-Squares Solution", "url": "/linear-algebra/definitions#least_squares_solution" },
+      { "name": "Consistent System", "url": "/linear-algebra/definitions#consistent_system" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "LU Decomposition",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "lu_decomposition",
+    "definitionUrl": "/linear-algebra/definitions#lu_decomposition",
+    "formula": "Writing a matrix as a product $A = LU$ of a lower [triangular](!/linear-algebra/definitions#triangular_matrix) $L$, which records the multipliers of [Gaussian elimination](!/linear-algebra/definitions#gaussian_elimination), and an upper triangular $U$, the result of it; with row swaps it becomes $PA = LU$",
+    "link": { "label": "What LU Decomposition Is", "url": "/linear-algebra/decompositions/lower-upper#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Gaussian Elimination", "url": "/linear-algebra/definitions#gaussian_elimination" },
+      { "name": "Triangular Matrix", "url": "/linear-algebra/definitions#triangular_matrix" },
+      { "name": "Partial Pivoting", "url": "/linear-algebra/definitions#partial_pivoting" },
+      { "name": "Cholesky Factorization", "url": "/linear-algebra/definitions#cholesky_factorization" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Least-Squares Solution",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "least_squares_solution",
+    "definitionUrl": "/linear-algebra/definitions#least_squares_solution",
+    "formula": "For an inconsistent system $A\\mathbf{x} = \\mathbf{b}$, the vector $\\hat{\\mathbf{x}}$ making the [residual](!/linear-algebra/definitions#residual) $\\|\\mathbf{b} - A\\hat{\\mathbf{x}}\\|$ as small as possible; it is found by projecting $\\mathbf{b}$ onto the [column space](!/linear-algebra/definitions#column_space) and satisfies the normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$",
+    "link": { "label": "The Problem", "url": "/linear-algebra/orthogonality/least-squares#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Residual", "url": "/linear-algebra/definitions#residual" },
+      { "name": "Column Space", "url": "/linear-algebra/definitions#column_space" },
+      { "name": "Pseudoinverse", "url": "/linear-algebra/definitions#pseudoinverse" },
+      { "name": "Design Matrix", "url": "/linear-algebra/definitions#design_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Residual",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "residual",
+    "definitionUrl": "/linear-algebra/definitions#residual",
+    "formula": "The error vector $\\mathbf{r} = \\mathbf{b} - A\\hat{\\mathbf{x}}$ left over by an approximate solution; at the [least-squares solution](!/linear-algebra/definitions#least_squares_solution) it is orthogonal to the [column space](!/linear-algebra/definitions#column_space), and its squared length is the sum of squared errors",
+    "link": { "label": "The Geometric Interpretation", "url": "/linear-algebra/orthogonality/least-squares#2" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Least-Squares Solution", "url": "/linear-algebra/definitions#least_squares_solution" },
+      { "name": "Orthogonal Decomposition", "url": "/linear-algebra/definitions#orthogonal_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Design Matrix",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "design_matrix",
+    "definitionUrl": "/linear-algebra/definitions#design_matrix",
+    "formula": "The matrix $A$ built from the data in a fitting problem, one row per observation and one column per unknown coefficient; fitting a line $y = c_0 + c_1 x$ gives rows $(1, x_i)$, and the fit is the [least-squares solution](!/linear-algebra/definitions#least_squares_solution) of $A\\mathbf{c} = \\mathbf{y}$",
+    "link": { "label": "Worked Example: Fitting a Line", "url": "/linear-algebra/orthogonality/least-squares#4" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Least-Squares Solution", "url": "/linear-algebra/definitions#least_squares_solution" },
+      { "name": "Overdetermined System", "url": "/linear-algebra/definitions#overdetermined_system" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Pseudoinverse",
+    "section": "linear-algebra",
+    "category": "Linear Systems",
+    "entity": "pseudoinverse",
+    "definitionUrl": "/linear-algebra/definitions#pseudoinverse",
+    "formula": "The matrix $A^+$ that plays the role of an inverse for a matrix that has none, sending $\\mathbf{b}$ to the [least-squares solution](!/linear-algebra/definitions#least_squares_solution) of smallest length; for independent columns $A^+ = (A^TA)^{-1}A^T$, and in general it is built from the [SVD](!/linear-algebra/definitions#singular_value_decomposition) by inverting the non-zero singular values",
+    "link": { "label": "The Pseudoinverse", "url": "/linear-algebra/orthogonality/least-squares#7" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Least-Squares Solution", "url": "/linear-algebra/definitions#least_squares_solution" },
+      { "name": "Singular Value Decomposition", "url": "/linear-algebra/definitions#singular_value_decomposition" },
+      { "name": "Inverse Matrix", "url": "/linear-algebra/definitions#inverse_matrix" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
     "name": "Linear Transformation",
     "section": "linear-algebra",
     "category": "Transformations",
@@ -15330,6 +16413,69 @@ const definitionsRepository = [
   // ------------------------------------------------------------------------
   // Eigen
   // ------------------------------------------------------------------------
+
+  {
+    "name": "Rotation",
+    "section": "linear-algebra",
+    "category": "Transformations",
+    "entity": "rotation",
+    "definitionUrl": "/linear-algebra/definitions#rotation",
+    "formula": "A [linear transformation](!/linear-algebra/definitions#linear_transformation) that turns every vector through the same angle about the origin, keeping lengths and angles; in $\\mathbb{R}^2$ its matrix is $\\begin{bmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{bmatrix}$, an [orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) with determinant $+1$",
+    "link": { "label": "Rotations in R²", "url": "/linear-algebra/transformations/geometric#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Orthogonal Matrix", "url": "/linear-algebra/definitions#orthogonal_matrix" },
+      { "name": "Isometry", "url": "/linear-algebra/definitions#isometry" },
+      { "name": "Reflection", "url": "/linear-algebra/definitions#reflection" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Reflection",
+    "section": "linear-algebra",
+    "category": "Transformations",
+    "entity": "reflection",
+    "definitionUrl": "/linear-algebra/definitions#reflection",
+    "formula": "A [linear transformation](!/linear-algebra/definitions#linear_transformation) that mirrors every vector across a line through the origin (or a plane, in three dimensions), fixing the mirror itself; it is an [orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) with determinant $-1$ and is its own inverse",
+    "link": { "label": "Reflections in R²", "url": "/linear-algebra/transformations/geometric#5" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Rotation", "url": "/linear-algebra/definitions#rotation" },
+      { "name": "Involutory Matrix", "url": "/linear-algebra/definitions#involutory_matrix" },
+      { "name": "Orientation", "url": "/linear-algebra/definitions#orientation" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Projection Matrix",
+    "section": "linear-algebra",
+    "category": "Transformations",
+    "entity": "projection_matrix",
+    "definitionUrl": "/linear-algebra/definitions#projection_matrix",
+    "formula": "The matrix $P$ that sends every vector to its [orthogonal projection](!/linear-algebra/definitions#vector_projection) onto a [subspace](!/linear-algebra/definitions#subspace); for a subspace with basis matrix $A$, $P = A(A^TA)^{-1}A^T$. It is symmetric and [idempotent](!/linear-algebra/definitions#idempotent_matrix), $P^2 = P$",
+    "link": { "label": "The Projection Matrix", "url": "/linear-algebra/orthogonality/projections#5" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Vector Projection", "url": "/linear-algebra/definitions#vector_projection" },
+      { "name": "Idempotent Matrix", "url": "/linear-algebra/definitions#idempotent_matrix" },
+      { "name": "Least-Squares Solution", "url": "/linear-algebra/definitions#least_squares_solution" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
 
   {
     "name": "Eigenvalue",
@@ -15754,6 +16900,177 @@ const definitionsRepository = [
   // ------------------------------------------------------------------------
 
   {
+    "name": "Diagonalizable Matrix",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "diagonalizable_matrix",
+    "definitionUrl": "/linear-algebra/definitions#diagonalizable_matrix",
+    "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) with a full set of $n$ linearly independent [eigenvectors](!/linear-algebra/definitions#eigenvector), equivalently one that can be written as $A = PDP^{-1}$ with $D$ diagonal; every matrix with $n$ distinct eigenvalues qualifies, and every symmetric matrix does",
+    "link": { "label": "When Is a Matrix Diagonalizable?", "url": "/linear-algebra/eigen/diagonalization#3" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Diagonalization", "url": "/linear-algebra/definitions#diagonalization" },
+      { "name": "Defective Matrix", "url": "/linear-algebra/definitions#defective_matrix" },
+      { "name": "Eigenvector", "url": "/linear-algebra/definitions#eigenvector" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Diagonalization",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "diagonalization",
+    "definitionUrl": "/linear-algebra/definitions#diagonalization",
+    "formula": "Factoring a matrix as $A = PDP^{-1}$, where the columns of $P$ are [eigenvectors](!/linear-algebra/definitions#eigenvector) and $D$ carries the matching [eigenvalues](!/linear-algebra/definitions#eigenvalue) on its diagonal; it makes powers cheap, $A^k = PD^kP^{-1}$, and reveals the matrix as a stretch along its eigenvector directions",
+    "link": { "label": "What Diagonalization Means", "url": "/linear-algebra/eigen/diagonalization#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Diagonalizable Matrix", "url": "/linear-algebra/definitions#diagonalizable_matrix" },
+      { "name": "Similar Matrices", "url": "/linear-algebra/definitions#similar_matrices" },
+      { "name": "Spectral Decomposition", "url": "/linear-algebra/definitions#spectral_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Defective Matrix",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "defective_matrix",
+    "definitionUrl": "/linear-algebra/definitions#defective_matrix",
+    "formula": "A matrix with too few independent [eigenvectors](!/linear-algebra/definitions#eigenvector) to be diagonalized: for some eigenvalue the [geometric multiplicity](!/linear-algebra/definitions#geometric_multiplicity) falls short of the [algebraic multiplicity](!/linear-algebra/definitions#algebraic_multiplicity)",
+    "link": { "label": "When Diagonalization Fails", "url": "/linear-algebra/eigen/diagonalization#9" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Diagonalizable Matrix", "url": "/linear-algebra/definitions#diagonalizable_matrix" },
+      { "name": "Algebraic Multiplicity", "url": "/linear-algebra/definitions#algebraic_multiplicity" },
+      { "name": "Geometric Multiplicity", "url": "/linear-algebra/definitions#geometric_multiplicity" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Dominant Eigenvalue",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "dominant_eigenvalue",
+    "definitionUrl": "/linear-algebra/definitions#dominant_eigenvalue",
+    "formula": "The [eigenvalue](!/linear-algebra/definitions#eigenvalue) of largest absolute value; repeatedly multiplying a vector by the matrix pulls it toward the corresponding eigenvector, at a rate set by the ratio $|\\lambda_2 / \\lambda_1|$, which is what power iteration exploits",
+    "link": { "label": "Why Eigenvalues Matter", "url": "/linear-algebra/eigen#8" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Eigenvalue", "url": "/linear-algebra/definitions#eigenvalue" },
+      { "name": "Rayleigh Quotient", "url": "/linear-algebra/definitions#rayleigh_quotient" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Rayleigh Quotient",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "rayleigh_quotient",
+    "definitionUrl": "/linear-algebra/definitions#rayleigh_quotient",
+    "formula": "The scalar $R(\\mathbf{x}) = \\dfrac{\\mathbf{x}^T A \\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$; it equals the [eigenvalue](!/linear-algebra/definitions#eigenvalue) when $\\mathbf{x}$ is an eigenvector, and for a symmetric matrix it is always trapped between the smallest and largest eigenvalues",
+    "link": { "label": "Why Eigenvalues Matter", "url": "/linear-algebra/eigen#8" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Eigenvalue", "url": "/linear-algebra/definitions#eigenvalue" },
+      { "name": "Dominant Eigenvalue", "url": "/linear-algebra/definitions#dominant_eigenvalue" },
+      { "name": "Quadratic Form", "url": "/linear-algebra/definitions#quadratic_form" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Quadratic Form",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "quadratic_form",
+    "definitionUrl": "/linear-algebra/definitions#quadratic_form",
+    "formula": "A function $q(\\mathbf{x}) = \\mathbf{x}^T A \\mathbf{x}$ built from a [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix); its sign behaviour — positive definite, negative definite or indefinite — is read off the signs of the eigenvalues of $A$",
+    "link": { "label": "Quadratic Forms", "url": "/linear-algebra/decompositions/spectral#6" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Symmetric Matrix", "url": "/linear-algebra/definitions#symmetric_matrix" },
+      { "name": "Positive Definite Matrix", "url": "/linear-algebra/definitions#positive_definite_matrix" },
+      { "name": "Spectral Decomposition", "url": "/linear-algebra/definitions#spectral_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Spectral Decomposition",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "spectral_decomposition",
+    "definitionUrl": "/linear-algebra/definitions#spectral_decomposition",
+    "formula": "The [diagonalization](!/linear-algebra/definitions#diagonalization) of a [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) by an [orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix), $A = Q\\Lambda Q^T$, equivalently the sum of rank-one pieces $\\sum_i \\lambda_i \\mathbf{q}_i \\mathbf{q}_i^T$; no inverse is needed because $Q^{-1} = Q^T$",
+    "link": { "label": "What the Spectral Decomposition Is", "url": "/linear-algebra/decompositions/spectral#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Diagonalization", "url": "/linear-algebra/definitions#diagonalization" },
+      { "name": "Symmetric Matrix", "url": "/linear-algebra/definitions#symmetric_matrix" },
+      { "name": "Outer Product", "url": "/linear-algebra/definitions#outer_product" },
+      { "name": "Singular Value Decomposition", "url": "/linear-algebra/definitions#singular_value_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Singular Value Decomposition",
+    "section": "linear-algebra",
+    "category": "Eigen",
+    "entity": "singular_value_decomposition",
+    "definitionUrl": "/linear-algebra/definitions#singular_value_decomposition",
+    "formula": "The factorization $A = U\\Sigma V^T$ that every matrix has, square or not: $U$ and $V$ are [orthogonal](!/linear-algebra/definitions#orthogonal_matrix), holding the left and right singular vectors, and $\\Sigma$ is a rectangular diagonal matrix of [singular values](!/linear-algebra/definitions#singular_value) in decreasing order",
+    "link": { "label": "What the Singular Value Decomposition Is", "url": "/linear-algebra/decompositions/svd#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Singular Value", "url": "/linear-algebra/definitions#singular_value" },
+      { "name": "Spectral Decomposition", "url": "/linear-algebra/definitions#spectral_decomposition" },
+      { "name": "Pseudoinverse", "url": "/linear-algebra/definitions#pseudoinverse" },
+      { "name": "Condition Number", "url": "/linear-algebra/definitions#condition_number" }
+    ],
+    "relatedFormulas": [
+      { "name": "SVD", "url": "/linear-algebra/formulas#svd" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
     "name": "Inner Product",
     "section": "linear-algebra",
     "category": "Orthogonality",
@@ -16115,6 +17432,72 @@ const definitionsRepository = [
     "relatedExamples": [
       "TBD"
     ]
+  },
+
+
+  {
+    "name": "Gram-Schmidt Process",
+    "section": "linear-algebra",
+    "category": "Orthogonality",
+    "entity": "gram_schmidt_process",
+    "definitionUrl": "/linear-algebra/definitions#gram_schmidt_process",
+    "formula": "The procedure that turns any independent set into an [orthonormal set](!/linear-algebra/definitions#orthonormal_set) spanning the same space: take each vector in turn, subtract its [projections](!/linear-algebra/definitions#vector_projection) onto the directions already fixed, and normalize what is left",
+    "link": { "label": "The Goal", "url": "/linear-algebra/orthogonality/gram-schmidt#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Orthonormal Set", "url": "/linear-algebra/definitions#orthonormal_set" },
+      { "name": "Vector Projection", "url": "/linear-algebra/definitions#vector_projection" },
+      { "name": "QR Decomposition", "url": "/linear-algebra/definitions#qr_decomposition" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "QR Decomposition",
+    "section": "linear-algebra",
+    "category": "Orthogonality",
+    "entity": "qr_decomposition",
+    "definitionUrl": "/linear-algebra/definitions#qr_decomposition",
+    "formula": "Writing a matrix with independent columns as $A = QR$, with $Q$ [orthogonal](!/linear-algebra/definitions#orthogonal_matrix) and $R$ upper [triangular](!/linear-algebra/definitions#triangular_matrix); the columns of $Q$ come from applying [Gram-Schmidt](!/linear-algebra/definitions#gram_schmidt_process) to the columns of $A$, and $R$ records the coefficients removed along the way",
+    "link": { "label": "What QR Decomposition Is", "url": "/linear-algebra/decompositions/qr#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Gram-Schmidt Process", "url": "/linear-algebra/definitions#gram_schmidt_process" },
+      { "name": "Orthogonal Matrix", "url": "/linear-algebra/definitions#orthogonal_matrix" },
+      { "name": "Least-Squares Solution", "url": "/linear-algebra/definitions#least_squares_solution" }
+    ],
+    "relatedFormulas": [
+      { "name": "QR Decomposition", "url": "/linear-algebra/formulas#qr_decomposition" }
+    ],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
+  },
+
+  {
+    "name": "Cholesky Factorization",
+    "section": "linear-algebra",
+    "category": "Orthogonality",
+    "entity": "cholesky_factorization",
+    "definitionUrl": "/linear-algebra/definitions#cholesky_factorization",
+    "formula": "Writing a [positive definite matrix](!/linear-algebra/definitions#positive_definite_matrix) as $A = LL^T$ with $L$ lower [triangular](!/linear-algebra/definitions#triangular_matrix) and positive diagonal; it exists exactly when $A$ is positive definite, so attempting it doubles as a test, and it costs about half of an [LU decomposition](!/linear-algebra/definitions#lu_decomposition)",
+    "link": { "label": "What Cholesky Decomposition Is", "url": "/linear-algebra/decompositions/cholesky#1" },
+    "relatedTools": [ { "name": "TBD", "url": null } ],
+    "usedOnPages": [ { "label": "TBD", "url": null } ],
+    "relatedDefinitions": [
+      { "name": "Positive Definite Matrix", "url": "/linear-algebra/definitions#positive_definite_matrix" },
+      { "name": "LU Decomposition", "url": "/linear-algebra/definitions#lu_decomposition" },
+      { "name": "Matrix Square Root", "url": "/linear-algebra/definitions#matrix_square_root" }
+    ],
+    "relatedFormulas": [],
+    "relatedTheorems": [ "TBD" ],
+    "relatedMethods": [ "TBD" ],
+    "relatedExamples": [ "TBD" ]
   },
 
 

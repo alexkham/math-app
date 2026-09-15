@@ -730,7 +730,11 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { processContent } from '../../../utils/contentProcessor';
 
-const toId = (name) => name.toLowerCase().replace(/\s+/g, '_');
+// The entry's own id wins; the name-slug is only the fallback for entries that
+// have none. Must agree with DefinitionsGlossary, which sets the card ids -
+// slugging the name turned "Magnitude (Norm)" into #magnitude_(norm) and left
+// every #magnitude link on the site pointing at nothing.
+const toId = (item) => item.id || item.name.toLowerCase().replace(/\s+/g, '_');
 
 const ALL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
@@ -1046,11 +1050,11 @@ function TermItem({ item, onNavigate }) {
 
   return (
     <a
-      href={`#${toId(item.name)}`}
+      href={`#${toId(item)}`}
       style={style}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={(e) => { e.preventDefault(); onNavigate(toId(item.name)); }}
+      onClick={(e) => { e.preventDefault(); onNavigate(toId(item)); }}
     >
       <span style={{ fontSize: '14px', fontWeight: '600', color: ACCENT, width: '14px', flexShrink: 0 }}>
         {item.name[0]}
@@ -1087,11 +1091,11 @@ function SidebarLink({ item, active, onNavigate }) {
 
   return (
     <a
-      href={`#${toId(item.name)}`}
+      href={`#${toId(item)}`}
       style={style}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={(e) => { e.preventDefault(); onNavigate(toId(item.name)); }}
+      onClick={(e) => { e.preventDefault(); onNavigate(toId(item)); }}
     >
       {processContent(item.name)}
     </a>
@@ -1349,7 +1353,7 @@ const CategoriesList = ({
           if (entry.isIntersecting) {
             const id = entry.target.id;
             setActiveItemId(id);
-            const item = data.find((d) => toId(d.name) === id);
+            const item = data.find((d) => toId(d) === id);
             if (item) setActiveSidebarCat(item.category);
           }
         });
@@ -1358,7 +1362,7 @@ const CategoriesList = ({
     );
 
     data.forEach((item) => {
-      const el = document.getElementById(toId(item.name));
+      const el = document.getElementById(toId(item));
       if (el) observer.observe(el);
     });
 
@@ -1442,7 +1446,7 @@ const CategoriesList = ({
                 <SidebarLink
                   key={item.name}
                   item={item}
-                  active={activeItemId === toId(item.name)}
+                  active={activeItemId === toId(item)}
                   onNavigate={navigateToItem}
                 />
               ))}

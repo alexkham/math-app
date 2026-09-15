@@ -268,7 +268,10 @@ function DefinitionCard({ item, isHighlighted, onToggle, isOpen }) {
   const [activeTab, setActiveTab] = useState(0);
   const [hovered, setHovered] = useState(false);
   const fieldEntries = hasFields ? Object.entries(item.fields) : [];
-  const itemId = item.name.toLowerCase().replace(/\s+/g, '_');
+  // Prefer the entry's own id. Slugging the name breaks every anchor whose
+  // name carries a parenthetical or an apostrophe - "Magnitude (Norm)" became
+  // #magnitude_(norm) while every link on the site targets #magnitude.
+  const itemId = item.id || item.name.toLowerCase().replace(/\s+/g, '_');
 
   const s = {
     card: {
@@ -480,7 +483,7 @@ function DefinitionGroup({
         <span style={s.count}>({itemCount} items)</span>
       </div>
       {items.map((item) => {
-        const itemId = item.name.toLowerCase().replace(/\s+/g, '_');
+        const itemId = item.id || item.name.toLowerCase().replace(/\s+/g, '_');
         return (
           <DefinitionCard
             key={itemId}
@@ -509,7 +512,9 @@ export default function DefinitionGlossary({
   const searchRef = useRef(null);
   const highlightTimer = useRef(null);
 
-  const toItemId = (name) => name.toLowerCase().replace(/\s+/g, '_');
+  // Same rule as the cards: the entry's own id wins, the name-slug is the
+  // fallback for entries that have none.
+  const toItemId = (item) => item.id || item.name.toLowerCase().replace(/\s+/g, '_');
 
   const onToggle = useCallback((id) => {
     setOpenIds((prev) => {
@@ -537,7 +542,7 @@ export default function DefinitionGlossary({
       setSearchTerm('');
 
       const hasFields = data.some((item) => {
-        const id = toItemId(item.name);
+        const id = toItemId(item);
         return (
           id === hash &&
           item.fields &&

@@ -7118,28 +7118,6 @@
               "added": "2026-09-14"
             }
           ]
-        },
-        {
-          "term": "$\\\\sigma$ notation",
-          "entity": null,
-          "sections": [
-            "key-terms"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "key-terms",
-              "surface": "notation",
-              "target": {
-                "path": "/linear-algebra/vectors",
-                "section": "2"
-              },
-              "method": "section-title-prefix",
-              "role": "lesson",
-              "added": "2026-09-14",
-              "labelRepaired": "inline maths moved outside the link label"
-            }
-          ]
         }
       ],
       "diagramsModule": "app/components/linear-algebra copy/matrix/traceDiagrams.js",

@@ -683,23 +683,23 @@ export async function getStaticProps() {
   const sectionsContent = {
     obj0: {
       title: `Key Terms`,
-      content: `[Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) — the algorithm that reduces a [matrix](!/linear-algebra/definitions#matrix) to echelon form using [elementary row operations](!/linear-algebra/formulas#elementary_row_operations), so a linear system can be solved by substitution.
+      content: `[Gaussian elimination](!/linear-algebra/definitions#gaussian_elimination) — the algorithm that reduces a [matrix](!/linear-algebra/definitions#matrix) to echelon form using [elementary row operations](!/linear-algebra/formulas#elementary_row_operations), so a linear system can be solved by substitution.
 
 [Augmented matrix](!/linear-algebra/definitions#augmented_matrix) — the coefficient matrix with the right-hand side appended as a final column, written $[A \\mid b]$. In the tool the constants are the amber column; row operations act on the whole row at once, constants included.
 
-[Pivot](!/linear-algebra/linear-systems/echelon-form#4) — the first non-zero entry of a row once the rows above it have been cleared. Its column is a [pivot](!/linear-algebra/definitions#pivot) column, and the variable of that column is a leading variable.
+[Pivot](!/linear-algebra/definitions#pivot) — the first non-zero entry of a row once the rows above it have been cleared. Its column is a pivot column, and the variable of that column is a leading variable.
 
 [Row echelon form (REF)](!/linear-algebra/definitions#row_echelon_form) — zero rows at the bottom, each pivot strictly to the right of the pivot above it, and zeros below every pivot. Note what is **not** required: the [pivots](!/linear-algebra/definitions#pivot) need not be $1$.
 
 [Reduced row echelon form (RREF)](!/linear-algebra/definitions#reduced_row_echelon_form) — echelon form with every pivot equal to $1$ and zeros above each pivot as well as below. Also called Gauss-Jordan form. Unlike echelon form, it is unique for a given matrix.
 
-[Elementary row operation](!/linear-algebra/formulas#elementary_row_operations) — one of three moves that preserve the [solution set](!/algebra/definitions#solution_set): swapping two rows, scaling a row by a non-zero constant, or adding a multiple of one row to another.
+[Elementary row operation](!/linear-algebra/definitions#elementary_row_operation) — one of three moves that preserve the [solution set](!/algebra/definitions#solution_set): swapping two rows, scaling a row by a non-zero constant, or adding a multiple of one row to another.
 
-[Back-substitution](!/linear-algebra/linear-systems/gaussian-elimination#5) — solving for the variables from the bottom row upward once the matrix is in echelon form.
+[Back-substitution](!/linear-algebra/definitions#back_substitution) — solving for the variables from the bottom row upward once the matrix is in echelon form.
 
-**Free variable** — a variable whose column has no pivot. Each one contributes a parameter to an infinite solution set.
+[Free variable](!/linear-algebra/definitions#free_variable) — a variable whose column has no pivot. Each one contributes a parameter to an infinite solution set.
 
-[Rank](!/linear-algebra/matrix/rank#1) — the number of pivots. It is the count the tool reports at the end, and it decides everything: [rank](!/linear-algebra/definitions#rank) equal to the number of unknowns means one solution, fewer means free variables.`,
+[Rank](!/linear-algebra/definitions#rank) — the number of pivots. It is the count the tool reports at the end, and it decides everything: rank equal to the number of unknowns means one solution, fewer means free variables.`,
       before: ``,
       after: ``,
       link: '',
