@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Orthogonal matrix** — a [square matrix](!/linear-algebra/matrix/types#1) $Q$ with $Q^TQ = I$; equivalently, its columns are orthonormal.
+      content: `[Orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) — a [square matrix](!/linear-algebra/definitions#square_matrix) $Q$ with $Q^TQ = I$; equivalently, its columns are orthonormal.
 
-**Orthonormal** — unit length and mutually perpendicular.
+[Orthonormal](!/linear-algebra/orthogonality/orthogonal-sets#3) — unit length and mutually perpendicular.
 
 **Inverse equals transpose** — $Q^{-1} = Q^T$, so $QQ^T = I$ too and the rows are orthonormal as well.
 
-**Isometry** — a map preserving lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$; orthogonal matrices also preserve [dot products](!/linear-algebra/vectors/dot-product#1) and angles.
+**Isometry** — a map preserving lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$; orthogonal matrices also preserve [dot products](!/linear-algebra/definitions#dot_product) and angles.
 
-**Determinant $\\pm 1$** — $+1$ for a rotation (orientation preserved), $-1$ for a reflection (orientation reversed).
+[Determinant](!/linear-algebra/determinants#1) $\\pm 1$ — $+1$ for a rotation (orientation preserved), $-1$ for a reflection (orientation reversed).
 
-**Rotation** — in the plane, $R(\\theta)$; in space, a turn by $\\theta$ about an axis, the fixed direction with $Q\\mathbf{u} = \\mathbf{u}$.
+[Rotation](!/linear-algebra/transformations/geometric#3) — in the plane, $R(\\theta)$; in space, a turn by $\\theta$ about an axis, the fixed direction with $Q\\mathbf{u} = \\mathbf{u}$.
 
-**Reflection** — in the plane, across a line; in space, across a plane; a Householder matrix $I - 2\\mathbf{u}\\mathbf{u}^T/\\mathbf{u}^T\\mathbf{u}$ reflects across the plane perpendicular to $\\mathbf{u}$.
+[Reflection](!/linear-algebra/transformations/geometric#5) — in the plane, across a line; in space, across a plane; a Householder matrix $I - 2\\mathbf{u}\\mathbf{u}^T/\\mathbf{u}^T\\mathbf{u}$ reflects across the plane perpendicular to $\\mathbf{u}$.
 
-**Permutation matrix** — reorders coordinates; always orthogonal.
+[Permutation matrix](!/linear-algebra/decompositions/lower-upper#5) — reorders coordinates; always orthogonal.
 
 **Orthogonal group $O(n)$** — all $n \\times n$ orthogonal matrices; closed under products and inverses.`,
       before: ``,
@@ -63,7 +63,7 @@ export async function getStaticProps(){
 • Use the **Preset** pills for eight matrices: a $30°$ rotation, a reflection, a permutation, a Householder reflection, a rotation about the $z$-axis, a matrix with perpendicular but non-unit columns, a scaled rotation, and a shear
 • Use the **Size** stepper for $2 \\times 2$ or $3 \\times 3$, and **Shuffle** for a random rotation or reflection
 • Edit any entry directly; the entries are shown to four decimals, and the test tolerates that rounding
-• Change the **test vector** $\\mathbf{x}$ to see lengths and dot products preserved for your own [vector](!/linear-algebra/vectors#1)
+• Change the **test vector** $\\mathbf{x}$ to see lengths and [dot products](!/linear-algebra/vectors/dot-product#1) preserved for your own [vector](!/linear-algebra/vectors#1)
 • Hover the **?** icon for a reminder of what orthogonality means and implies
 • Press play or step manually; the step log on the right keeps every stage
 
@@ -120,7 +120,7 @@ Shuffle produces a random rotation or reflection by multiples of $30°$, combine
     },
     obj5: {
       title: `What an Orthogonal Matrix Is`,
-      content: `A square matrix $Q$ is orthogonal when its columns $\\mathbf{q}_1, \\ldots, \\mathbf{q}_n$ are orthonormal: $\\mathbf{q}_i\\cdot\\mathbf{q}_j = 1$ if $i = j$ and $0$ otherwise. Since entry $(i, j)$ of $Q^TQ$ is exactly $\\mathbf{q}_i\\cdot\\mathbf{q}_j$, the condition is the single equation
+      content: `A [square matrix](!/linear-algebra/matrix/types#1) $Q$ is orthogonal when its columns $\\mathbf{q}_1, \\ldots, \\mathbf{q}_n$ are orthonormal: $\\mathbf{q}_i\\cdot\\mathbf{q}_j = 1$ if $i = j$ and $0$ otherwise. Since entry $(i, j)$ of $Q^TQ$ is exactly $\\mathbf{q}_i\\cdot\\mathbf{q}_j$, the condition is the single equation
 
 $$Q^TQ = I$$
 
@@ -130,7 +130,7 @@ The geometric content is that $Q$ preserves the dot product: $(Q\\mathbf{x})\\cd
 
 In the plane there are two kinds. Determinant $+1$ gives a rotation $\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$; determinant $-1$ gives a reflection $\\begin{pmatrix} \\cos 2\\varphi & \\sin 2\\varphi \\\\ \\sin 2\\varphi & -\\cos 2\\varphi \\end{pmatrix}$ across the line at angle $\\varphi$. In space, determinant $+1$ is a rotation about an axis, the direction $\\mathbf{u}$ with $Q\\mathbf{u} = \\mathbf{u}$, by an angle with $\\operatorname{tr} Q = 1 + 2\\cos\\theta$; determinant $-1$ is a reflection across a plane, possibly combined with a rotation about the plane's normal.
 
-Orthogonal matrices are closed under multiplication and inversion, forming the orthogonal group, and they are the reason so much of linear algebra is numerically safe: a change of [basis](!/linear-algebra/vector-spaces#2) by an orthogonal matrix amplifies no error. The [spectral decomposition](!/linear-algebra/eigen/diagonalization#7), QR and the SVD are all built from them. For the theory, see the [orthogonal sets page](!/linear-algebra/orthogonality/orthogonal-sets) and the [geometric transformations page](!/linear-algebra/transformations/geometric).`,
+Orthogonal matrices are closed under multiplication and inversion, forming the orthogonal group, and they are the reason so much of linear algebra is numerically safe: a change of [basis](!/linear-algebra/vector-spaces#2) by an orthogonal matrix amplifies no error. The [spectral decomposition](!/linear-algebra/eigen/diagonalization#7), QR and the [SVD](!/linear-algebra/formulas#svd) are all built from them. For the theory, see the [orthogonal sets page](!/linear-algebra/orthogonality/orthogonal-sets) and the [geometric transformations page](!/linear-algebra/transformations/geometric).`,
       before: ``,
       after: ``,
       link: '',

@@ -35,30 +35,30 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Orthogonal set** — [vectors](!/linear-algebra/vectors#1) that are pairwise perpendicular: $\\mathbf{u}_i \\cdot \\mathbf{u}_j = 0$ whenever $i \\neq j$.
+      content: `[Orthogonal set](!/linear-algebra/definitions#orthogonal_set) — [vectors](!/linear-algebra/definitions#vector) that are pairwise perpendicular: $\\mathbf{u}_i \\cdot \\mathbf{u}_j = 0$ whenever $i \\neq j$.
 
-**Orthonormal set** — an [orthogonal set](!/linear-algebra/orthogonality/orthogonal-sets#1) in which every vector has length $1$.
+[Orthonormal set](!/linear-algebra/definitions#orthonormal_set) — an [orthogonal set](!/linear-algebra/definitions#orthogonal_set) in which every vector has length $1$.
 
-**Gram-Schmidt process** — the procedure that turns any list of independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ into an orthogonal list $\\mathbf{u}_1, \\ldots, \\mathbf{u}_k$ with the same [span](!/linear-algebra/vector-spaces/span#1), and then into an orthonormal list $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$.
+[Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt#3) — the procedure that turns any list of independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ into an orthogonal list $\\mathbf{u}_1, \\ldots, \\mathbf{u}_k$ with the same [span](!/linear-algebra/definitions#span), and then into an orthonormal list $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$.
 
 **Projection coefficient** — $c_{k,j} = \\dfrac{\\mathbf{v}_k \\cdot \\mathbf{u}_j}{\\mathbf{u}_j \\cdot \\mathbf{u}_j}$, the multiple of $\\mathbf{u}_j$ that is subtracted from $\\mathbf{v}_k$.
 
 **Orthogonalization** — the first pass, $\\mathbf{u}_k = \\mathbf{v}_k - \\sum_{j < k} c_{k,j} \\mathbf{u}_j$.
 
-**Normalization** — the second pass, $\\mathbf{e}_k = \\mathbf{u}_k / \\|\\mathbf{u}_k\\|$.
+[Normalization](!/linear-algebra/orthogonality/gram-schmidt#4) — the second pass, $\\mathbf{e}_k = \\mathbf{u}_k / \\|\\mathbf{u}_k\\|$.
 
 **Span preservation** — at every stage $\\operatorname{span}\\{\\mathbf{u}_1, \\ldots, \\mathbf{u}_k\\} = \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$.
 
-**QR decomposition** — the [matrix](!/linear-algebra/matrix#1) form of the process: with the $\\mathbf{v}_k$ as the columns of $A$ and the $\\mathbf{e}_k$ as the columns of $Q$, $A = QR$ with $R$ upper triangular.`,
+[QR decomposition](!/linear-algebra/formulas#qr_decomposition) — the [matrix](!/linear-algebra/definitions#matrix) form of the process: with the $\\mathbf{v}_k$ as the columns of $A$ and the $\\mathbf{e}_k$ as the columns of $Q$, $A = QR$ with $R$ upper triangular.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Set how many vectors and how long they are, then watch the process run.
+      content: `Set how many [vectors](!/linear-algebra/vectors#1) and how long they are, then watch the process run.
 
-• Use the **Number of vectors** stepper for $2$ or $3$ input vectors; they are the rows of the matrix $V$
+• Use the **Number of vectors** stepper for $2$ or $3$ input vectors; they are the rows of the [matrix](!/linear-algebra/matrix#1) $V$
 • Use the **Vector length** stepper for $2$, $3$ or $4$ components
 • Hover the **?** icon for a reminder of what the process does and why the inputs must be independent
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
@@ -77,7 +77,7 @@ Choosing $3$ vectors of length $2$ is allowed and instructive: three vectors in 
 • **Start** — $\\mathbf{u}_k$ begins as a copy of $\\mathbf{v}_k$, not yet perpendicular to anything
 • **Subtract** — one scene for each earlier $\\mathbf{u}_j$: the projection of $\\mathbf{v}_k$ onto $\\mathbf{u}_j$ is subtracted, and row $k$ of $U$ grows one term, $- c_{k,j} \\mathbf{u}_j$
 • **Normalize** — one scene per vector: $\\mathbf{e}_k = \\mathbf{u}_k / \\|\\mathbf{u}_k\\|$, filling the rows of $E$
-• **Done** — the rows of $E$ are orthonormal and span the same space as the rows of $V$
+• **Done** — the rows of $E$ are orthonormal and [span](!/linear-algebra/vector-spaces/span#1) the same space as the rows of $V$
 
 The layout changes once, between the two passes: $V \\to U$ while the vectors are being made perpendicular, then $U \\to E$ while they are being scaled to length one.`,
       before: ``,
@@ -119,7 +119,7 @@ and then orthonormal vectors
 
 $$\\mathbf{e}_k = \\frac{\\mathbf{u}_k}{\\|\\mathbf{u}_k\\|}$$
 
-Each $\\mathbf{u}_k$ is $\\mathbf{v}_k$ with its projections onto all the earlier $\\mathbf{u}_j$ removed, so it is perpendicular to every one of them; and since it differs from $\\mathbf{v}_k$ only by a combination of earlier vectors, the span is unchanged at every step. The result is an orthonormal [basis](!/linear-algebra/vector-spaces#2) of $\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ with the extra property that the first $m$ output vectors span the same space as the first $m$ inputs, for every $m$.
+Each $\\mathbf{u}_k$ is $\\mathbf{v}_k$ with its projections onto all the earlier $\\mathbf{u}_j$ removed, so it is perpendicular to every one of them; and since it differs from $\\mathbf{v}_k$ only by a combination of earlier vectors, the [span](!/linear-algebra/formulas#span) is unchanged at every step. The result is an orthonormal [basis](!/linear-algebra/vector-spaces#2) of $\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ with the extra property that the first $m$ output vectors span the same space as the first $m$ inputs, for every $m$.
 
 Why the subtraction works: dot $\\mathbf{u}_k$ with any earlier $\\mathbf{u}_j$. The projections onto the other $\\mathbf{u}_i$ contribute nothing, since they are already perpendicular to $\\mathbf{u}_j$, and the projection onto $\\mathbf{u}_j$ contributes exactly $-\\mathbf{v}_k \\cdot \\mathbf{u}_j$, cancelling the $\\mathbf{v}_k \\cdot \\mathbf{u}_j$ from the first term.
 

@@ -527,15 +527,15 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Linear Transformation** &mdash; A function $T$ such that $T(u + v) = T(u) + T(v)$ and $T(c \\cdot v) = c \\cdot T(v)$. Every [linear transformation](!/linear-algebra/transformations#1) on $\\mathbb{R}^2$ is represented by a $2 \\times 2$ [matrix](!/linear-algebra/matrix#1).
+      content:`**Linear Transformation** &mdash; A function $T$ such that $T(u + v) = T(u) + T(v)$ and $T(c \\cdot v) = c \\cdot T(v)$. Every [linear transformation](!/linear-algebra/definitions#linear_transformation) on $\\mathbb{R}^2$ is represented by a $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix).
 
-**Matrix $A$** &mdash; The $2 \\times 2$ array whose columns are $T(\\hat{i})$ and $T(\\hat{j})$, where $\\hat{i}$ and $\\hat{j}$ are the standard basis [vectors](!/linear-algebra/vectors#1).
+**Matrix $A$** &mdash; The $2 \\times 2$ array whose columns are $T(\\hat{i})$ and $T(\\hat{j})$, where $\\hat{i}$ and $\\hat{j}$ are the standard basis [vectors](!/linear-algebra/definitions#vector).
 
 **Determinant** &mdash; The signed area of the parallelogram spanned by the columns of $A$. Positive: orientation preserved. Negative: orientation reversed. Zero: singular.
 
-**Trace** &mdash; The sum of the diagonal entries, $a_{11} + a_{22}$. Equals the sum of the [eigenvalues](!/linear-algebra/eigen#2).
+**Trace** &mdash; The sum of the diagonal entries, $a_{11} + a_{22}$. Equals the sum of the [eigenvalues](!/linear-algebra/definitions#eigenvalue).
 
-**Rank** &mdash; The [dimension](!/linear-algebra/vector-spaces/dimension#1) of the image. Either 2 (full rank, invertible), 1 (singular, collapses to a line), or 0 (zero matrix).
+**Rank** &mdash; The [dimension](!/linear-algebra/definitions#dimension) of the image. Either 2 (full rank, invertible), 1 (singular, collapses to a line), or 0 (zero matrix).
 
 **Eigenvalue** &mdash; A scalar $\\lambda$ such that $Av = \\lambda v$ for some nonzero $v$. The directions preserved by $A$ up to scaling.
 
@@ -546,7 +546,7 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Getting Started`,
-      content:`The visualizer shows a single square canvas with three columns surrounding it. The left sidebar groups twelve preset transformations by rank. The center column holds the canvas and animation controls. The right column shows an explanation of the current preset, layer toggles, the editable matrix $A$, and a live readout.
+      content:`The visualizer shows a single square canvas with three columns surrounding it. The left sidebar groups twelve preset transformations by rank. The center column holds the canvas and animation controls. The right column shows an explanation of the current preset, layer toggles, the editable [matrix](!/linear-algebra/matrix#1) $A$, and a live readout.
 
 The fundamental workflow:
 
@@ -592,7 +592,7 @@ When you edit, the active scenario indicator clears and the explanation card swi
       content:`The chip strip toggles eight independent visual layers.
 
 &bull; **grid** &mdash; the transformed integer grid. The deformation of the gridlines is the most direct picture of what $M(t)$ does.
-&bull; **basis** &mdash; the two basis vectors $\\hat{i}$ (orange) and $\\hat{j}$ (cyan) drawn from origin to their images. The columns of $M(t)$ are these tips.
+&bull; **basis** &mdash; the two basis [vectors](!/linear-algebra/vectors#1) $\\hat{i}$ (orange) and $\\hat{j}$ (cyan) drawn from origin to their images. The columns of $M(t)$ are these tips.
 &bull; **unit sq** &mdash; the unit square fill. Purple when $\\det > 0$, pink when $\\det < 0$ (orientation reversed), gray when singular.
 &bull; **unit circle** &mdash; the unit circle morphs into an ellipse for invertible $A$. Ellipse axes correspond to [singular values](!/linear-algebra/decompositions/svd#3).
 &bull; **eigen** &mdash; magenta dashed lines along eigendirections (when eigenvalues are real). Tips show how [eigenvectors](!/linear-algebra/eigen#2) scale.
@@ -612,7 +612,7 @@ When you edit, the active scenario indicator clears and the explanation card swi
 &bull; **$\\det A$** &mdash; the determinant of the target matrix. Fixed.
 &bull; **trace $A$** &mdash; sum of diagonal entries. Equals the sum of eigenvalues.
 &bull; **eigenvalues** &mdash; the roots of the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2). Listed as real pairs or as $a \\pm bi$ for [complex conjugates](!/complex-numbers/complex-conjugate#1).
-&bull; **rank $A$** &mdash; the dimension of the image: 0, 1, or 2.
+&bull; **rank $A$** &mdash; the [dimension](!/linear-algebra/vector-spaces/dimension#1) of the image: 0, 1, or 2.
 
 The combination of $\\det A$, trace, and eigenvalues uniquely characterizes the structural type of the transformation up to similarity.`,
       before:``,
@@ -646,21 +646,21 @@ Edit the matrix and watch the classification update. Tiny perturbations break sp
 &bull; **Singular (rank 1)** &mdash; project to x-axis, project to y = x (orthogonal projection), and outer product $[[1,2],[2,4]]$. Each collapses the plane to a line; kernel and image become visible.
 &bull; **Degenerate (rank 0)** &mdash; the zero map. Everything goes to the origin.
 
-Selecting a scenario auto-plays the morph from identity to that matrix. The explanation card on the right shows three blocks: a brief description, an **Insight** about structural properties (eigenvalues, symmetries), and **What to watch** &mdash; the specific visual feature that makes this scenario distinctive.`,
+Selecting a scenario auto-plays the morph from identity to that matrix. The explanation card on the right shows three blocks: a brief description, an **Insight** about structural properties ([eigenvalues](!/linear-algebra/eigen#2), symmetries), and **What to watch** &mdash; the specific visual feature that makes this scenario distinctive.`,
       before:``,
       after:``,
       link:'',
     },
     obj8:{
       title:`What Is a Linear Transformation?`,
-      content:`A linear transformation is a function $T: V \\to W$ between [vector spaces](!/linear-algebra/vector-spaces#1) satisfying two rules:
+      content:`A [linear transformation](!/linear-algebra/transformations#1) is a function $T: V \\to W$ between [vector spaces](!/linear-algebra/vector-spaces#1) satisfying two rules:
 
 $$T(u + v) = T(u) + T(v)$$
 $$T(c \\cdot v) = c \\cdot T(v)$$
 
 These two properties together say $T$ respects the [linear combinations](!/linear-algebra/vectors/linear-combinations#1) of vectors. Equivalently, $T$ maps lines through the origin to lines through the origin, and grids of parallelograms to grids of parallelograms.
 
-For finite-dimensional spaces, every linear transformation is given by matrix multiplication. In $\\mathbb{R}^2$, the matrix has the images $T(\\hat{i})$ and $T(\\hat{j})$ as its columns. That is the entire content of "linear": fix where the basis vectors go, and everything else is determined.
+For finite-dimensional spaces, every linear transformation is given by [matrix multiplication](!/linear-algebra/formulas#matrix_multiplication). In $\\mathbb{R}^2$, the matrix has the images $T(\\hat{i})$ and $T(\\hat{j})$ as its columns. That is the entire content of "linear": fix where the basis vectors go, and everything else is determined.
 
 For deeper coverage of definitions and properties, see **linear transformation theory**, **linear maps**, and **vector spaces**.`,
       before:``,
@@ -728,31 +728,31 @@ For comprehensive treatment see **eigenvalues and eigenvectors**, **matrix rank*
     },
     obj12:{
       title:`The Identity: the Transformation That Does Nothing`,
-      content:`The Identity preset sets $A = I$, and the canvas shows a plane that has not moved. The transformed grid sits exactly on the original, $\hat{i}$ still points to $(1, 0)$ and $\hat{j}$ still points to $(0, 1)$.
+      content:`The Identity preset sets $A = I$, and the canvas shows a plane that has not moved. The transformed grid sits exactly on the original, $\\hat{i}$ still points to $(1, 0)$ and $\\hat{j}$ still points to $(0, 1)$.
 
-It is worth starting here because it establishes what every later picture is a deviation *from*. Whatever a preset does, it does it to this.`,
+It is worth starting here because it establishes what every later picture is a deviation **from**. Whatever a preset does, it does it to this.`,
       before:``,
       after:`The identity is also the left end of the scrub slider. The displayed matrix is $M(t) = (1-t)I + tA$, so at $t = 0$ every preset shows this same picture, and the animation is a straight-line morph from here to $A$.
 
-Two properties fall out immediately. Every non-zero vector is an eigenvector with eigenvalue 1, since $Iv = 1 \cdot v$ holds for all $v$. And $\det I = 1$, so areas and orientation are untouched — which is the baseline the determinant readout measures against.`,
+Two properties fall out immediately. Every non-zero vector is an eigenvector with eigenvalue 1, since $Iv = 1 \\cdot v$ holds for all $v$. And $\\det I = 1$, so areas and orientation are untouched — which is the baseline the determinant readout measures against.`,
       link:'',
     },
     obj13:{
       title:`Full Rank: Reshaping Without Losing Anything`,
-      content:`Eight of the twelve presets are full-rank maps — rotations, scalings, shears, reflections and the general twist. Their common property is $\det A \neq 0$, which means the transformed grid stays a genuine grid: two independent directions in, two independent directions out.
+      content:`Eight of the twelve presets are full-rank maps — rotations, scalings, shears, reflections and the general twist. Their common property is $\\det A \\neq 0$, which means the transformed grid stays a genuine grid: two independent directions in, two independent directions out.
 
 The frozen picture below shows the 45° rotation at $t = 1$. The [unit circle](!/trigonometry/unit-circle#1) is still a circle, the unit square has become a tilted square of equal area, and no direction has been flattened.`,
       before:``,
-      after:`Within this group the determinant separates the sub-cases. Rotations and shears have $\det = 1$ and preserve area exactly; the $2\times$ scaling has $\det = 4$ and quadruples it; the reflections have $\det = -1$, preserving area but reversing orientation — watch $\hat{i}$ and $\hat{j}$ swap handedness.
+      after:`Within this group the determinant separates the sub-cases. Rotations and shears have $\\det = 1$ and preserve area exactly; the $2\\times$ scaling has $\\det = 4$ and quadruples it; the reflections have $\\det = -1$, preserving area but reversing orientation — watch $\\hat{i}$ and $\\hat{j}$ swap handedness.
 
 The essential point is invertibility. A full-rank map can be undone, because no two distinct vectors are sent to the same place. The kernel contains only the origin, and the image is the entire plane — which is why the kernel and image layers have nothing interesting to draw on any of these eight presets.`,
       link:'',
     },
     obj14:{
       title:`Rank 1: Collapsing the Plane Onto a Line`,
-      content:`Three presets are singular with rank 1: projection onto the x-axis, projection onto the line $y = x$, and the outer-product matrix $\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$, whose second column is twice its first.
+      content:`Three presets are singular with rank 1: projection onto the x-axis, projection onto the line $y = x$, and the outer-product matrix $\\begin{pmatrix} 1 & 2 \\ 2 & 4 \\end{pmatrix}$, whose second column is twice its first.
 
-Here $\det A = 0$ and the whole plane is flattened onto a single line through the origin. The frozen picture shows the projection onto the x-axis: the transformed grid has become one line, and the unit circle has become a segment.`,
+Here $\\det A = 0$ and the whole plane is flattened onto a single line through the origin. The frozen picture shows the projection onto the x-axis: the transformed grid has become one line, and the unit circle has become a segment.`,
       before:``,
       after:`This is where the kernel and image layers earn their place. The **image** is the line everything lands on — drawn in green. The **kernel** is the line of vectors sent to the origin — drawn in red. Both are one-dimensional, and the rank-nullity theorem says their dimensions must sum to 2, which is exactly what the picture shows.
 

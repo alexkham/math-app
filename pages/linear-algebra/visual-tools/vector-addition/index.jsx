@@ -588,9 +588,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Vector addition** — combining two vectors of the same length into a third vector by adding paired components: $w_i = u_i + v_i$.
+      content: `[Vector addition](!/linear-algebra/formulas#vector_addition) — combining two vectors of the same length into a third vector by adding paired components: $w_i = u_i + v_i$.
 
-**Vector subtraction** — combining two vectors of the same length by subtracting paired components: $w_i = u_i - v_i$.
+[Vector subtraction](!/linear-algebra/formulas#vector_subtraction) — combining two vectors of the same length by subtracting paired components: $w_i = u_i - v_i$.
 
 **Component-wise operation** — an operation applied independently to each component; the result at position $i$ depends only on the inputs at position $i$.
 
@@ -666,7 +666,7 @@ $$w_i = u_i + v_i$$
 
 This makes vector addition a **component-wise** operation: each component of the result depends only on the matching components in $u$ and $v$, not on anything else in either vector.
 
-Geometrically, vector addition corresponds to placing the tail of $v$ at the head of $u$ — the sum $u + v$ runs from the tail of $u$ to the head of $v$ (the "tip-to-tail" or parallelogram rule). Vector subtraction works identically with subtraction replacing addition.
+Geometrically, vector addition corresponds to placing the tail of $v$ at the head of $u$ — the sum $u + v$ runs from the tail of $u$ to the head of $v$ (the "tip-to-tail" or parallelogram rule). [Vector subtraction](!/linear-algebra/formulas#vector_subtraction) works identically with subtraction replacing addition.
 
 For a comprehensive treatment of vectors and their operations, see **vector operations theory**.`,
       before: ``,
@@ -675,7 +675,7 @@ For a comprehensive treatment of vectors and their operations, see **vector oper
     },
     obj6: {
       title: `Key Formulas`,
-      content: `The full definition of vector addition for vectors $u, v \\in \\mathbb{R}^n$:
+      content: `The full definition of [vector addition](!/linear-algebra/formulas#vector_addition) for vectors $u, v \\in \\mathbb{R}^n$:
 
 $$u + v = w, \\quad w_i = u_i + v_i \\text{ for all } 1 \\leq i \\leq n$$
 
@@ -761,20 +761,20 @@ Geometrically, $u + v$ is the diagonal of the parallelogram spanned by $u$ and $
     },
     obj11: {
       title: `The Opening Scene: Two Vectors of the Same Length`,
-      content: `The player opens with $\mathbf{u}$ and $\mathbf{v}$ drawn as rows of components and $\mathbf{w}$ waiting empty beneath them. At the default length both inputs have four components, so $\mathbf{w}$ will have four as well.
+      content: `The player opens with $\\mathbf{u}$ and $\\mathbf{v}$ drawn as rows of components and $\\mathbf{w}$ waiting empty beneath them. At the default length both inputs have four components, so $\\mathbf{w}$ will have four as well.
 
-Nothing has been added yet. What the scene fixes is the precondition: $\mathbf{u}$ and $\mathbf{v}$ have the same number of components, so every $u_j$ has a $v_j$ sitting opposite it.`,
+Nothing has been added yet. What the scene fixes is the precondition: $\\mathbf{u}$ and $\\mathbf{v}$ have the same number of components, so every $u_j$ has a $v_j$ sitting opposite it.`,
       before: ``,
-      after: `The same-length rule is the vector form of the same-shape rule for matrices, and it exists for the same reason: addition is defined component by component, so it needs a partner for each component. A vector in $\mathbb{R}^4$ and one in $\mathbb{R}^3$ have nothing to pair the fourth component with.
+      after: `The same-length rule is the vector form of the same-shape rule for matrices, and it exists for the same reason: addition is defined component by component, so it needs a partner for each component. A vector in $\\mathbb{R}^4$ and one in $\\mathbb{R}^3$ have nothing to pair the fourth component with.
 
-Put another way, addition is an operation *within* a single vector space. $\mathbb{R}^4$ is closed under it — add two of its members and you get another member of $\mathbb{R}^4$, never something of a different length.`,
+Put another way, addition is an operation **within** a single vector space. $\\mathbb{R}^4$ is closed under it — add two of its members and you get another member of $\\mathbb{R}^4$, never something of a different length.`,
       link: '',
     },
     obj12: {
       title: `One Component at a Time`,
       content: `Each step highlights $u_j$, the matching $v_j$, and the destination slot $w_j$, then writes $u_j + v_j$ into it.
 
-The frozen picture below is a step partway through the run: earlier components of $\mathbf{w}$ already hold their sums, one pair is being combined, and the rest are still placeholders.`,
+The frozen picture below is a step partway through the run: earlier components of $\\mathbf{w}$ already hold their sums, one pair is being combined, and the rest are still placeholders.`,
       before: ``,
       after: `No component ever meets a component in a different position. $u_1$ can only be added to $v_1$, which is why the sweep can be read as four completely independent one-number additions rather than a single four-dimensional operation.
 
@@ -783,13 +783,13 @@ That independence is what makes vector addition componentwise in the technical s
     },
     obj13: {
       title: `The Completed Sum`,
-      content: `The final scene fills every slot, so $\mathbf{w}$ reads $w_j = u_j + v_j$ across all four positions and has the same length it started with.
+      content: `The final scene fills every slot, so $\\mathbf{w}$ reads $w_j = u_j + v_j$ across all four positions and has the same length it started with.
 
-Geometrically this is the tip-to-tail rule: place $\mathbf{v}$ at the end of $\mathbf{u}$ and $\mathbf{w}$ runs from the start of $\mathbf{u}$ to the tip of $\mathbf{v}$. The component arithmetic on screen is that picture written out coordinate by coordinate.`,
+Geometrically this is the tip-to-tail rule: place $\\mathbf{v}$ at the end of $\\mathbf{u}$ and $\\mathbf{w}$ runs from the start of $\\mathbf{u}$ to the tip of $\\mathbf{v}$. The component arithmetic on screen is that picture written out coordinate by coordinate.`,
       before: ``,
-      after: `The algebraic properties follow from the components. Addition is **commutative** and **associative** because ordinary addition is; the zero vector is an identity; $-\mathbf{u}$ is an additive inverse. Those four facts are part of what makes $\mathbb{R}^n$ a vector space at all.
+      after: `The algebraic properties follow from the components. Addition is **commutative** and **associative** because ordinary addition is; the zero vector is an identity; $-\\mathbf{u}$ is an additive inverse. Those four facts are part of what makes $\\mathbb{R}^n$ a vector space at all.
 
-The tip-to-tail reading also explains commutativity without any algebra: laying $\mathbf{v}$ after $\mathbf{u}$ or $\mathbf{u}$ after $\mathbf{v}$ traces the two sides of the same parallelogram and lands on the same corner.`,
+The tip-to-tail reading also explains commutativity without any algebra: laying $\\mathbf{v}$ after $\\mathbf{u}$ or $\\mathbf{u}$ after $\\mathbf{v}$ traces the two sides of the same parallelogram and lands on the same corner.`,
       link: '',
     },
     obj14: {
@@ -798,9 +798,9 @@ The tip-to-tail reading also explains commutativity without any algebra: laying 
 
 The still below is the subtraction run at the same point in the sweep, for direct comparison with the addition step above.`,
       before: ``,
-      after: `As with matrices, subtraction is not a new operation: $\mathbf{u} - \mathbf{v}$ means $\mathbf{u} + (-\mathbf{v})$, so the toggle negates one input and reuses addition.
+      after: `As with matrices, subtraction is not a new operation: $\\mathbf{u} - \\mathbf{v}$ means $\\mathbf{u} + (-\\mathbf{v})$, so the toggle negates one input and reuses addition.
 
-Geometrically the difference is the vector *from* the tip of $\mathbf{v}$ *to* the tip of $\mathbf{u}$ when both start at the origin. That direction is why order matters: $\mathbf{u} - \mathbf{v}$ and $\mathbf{v} - \mathbf{u}$ are the same arrow pointing opposite ways, and subtraction is therefore not commutative.`,
+Geometrically the difference is the vector **from** the tip of $\\mathbf{v}$ **to** the tip of $\\mathbf{u}$ when both start at the origin. That direction is why order matters: $\\mathbf{u} - \\mathbf{v}$ and $\\mathbf{v} - \\mathbf{u}$ are the same arrow pointing opposite ways, and subtraction is therefore not commutative.`,
       link: '',
     },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }

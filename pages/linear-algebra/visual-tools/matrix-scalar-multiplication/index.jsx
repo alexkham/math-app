@@ -37,13 +37,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Scalar** — a single number, not a [vector](!/linear-algebra/vectors#1) or [matrix](!/linear-algebra/matrix#1).
+      content: `[Scalar](!/linear-algebra/definitions#scalar) — a single number, not a [vector](!/linear-algebra/definitions#vector) or [matrix](!/linear-algebra/definitions#matrix).
 
-**Scalar multiplication** — the operation $kA$ that multiplies every entry of a matrix $A$ by the [scalar](!/linear-algebra/vectors#1) $k$.
+[Scalar multiplication](!/linear-algebra/matrix/operations#3) — the operation $kA$ that multiplies every entry of a matrix $A$ by the [scalar](!/linear-algebra/definitions#scalar) $k$.
 
 **Element-wise operation** — applied independently to each entry; the result at $(i,j)$ depends only on $k$ and $a_{i,j}$.
 
-**Shape preservation** — $kA$ has the same [dimensions](!/linear-algebra/vector-spaces/dimension#1) as $A$. Scalar multiplication never changes the shape.
+**Shape preservation** — $kA$ has the same [dimensions](!/linear-algebra/definitions#dimension) as $A$. Scalar multiplication never changes the shape.
 
 **Scaling factor** — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or flips sign ($k < 0$) every entry uniformly.
 
@@ -58,7 +58,7 @@ export async function getStaticProps(){
 
 • Use the **Dimensions** steppers to set the shape of $A$ (1 to 5 in each direction)
 • $C$ inherits the same shape automatically
-• Hover the **?** icon for a reminder of what a scalar is and why the shape is preserved
+• Hover the **?** icon for a reminder of what a [scalar](!/linear-algebra/vectors#1) is and why the shape is preserved
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 
 The scalar $k$ is shown symbolically in front of $A$. The visualizer focuses on the structural rule — every cell of $A$ gets multiplied by the same $k$ — not on any specific numerical value of $k$.`,
@@ -100,7 +100,7 @@ $$(kA)_{i,j} = k \\cdot a_{i,j}$$
 
 It's the simplest non-trivial matrix operation. There are no shape restrictions — any matrix can be scaled. The result is the same shape as $A$, and every cell depends only on $k$ and its own value in $A$.
 
-Scalar multiplication is the multiplicative companion to matrix addition: both are element-wise, both preserve shape, and together they make matrices into a [vector space](!/linear-algebra/vector-spaces#1).
+Scalar multiplication is the multiplicative companion to [matrix addition](!/linear-algebra/formulas#matrix_addition): both are element-wise, both preserve shape, and together they make matrices into a [vector space](!/linear-algebra/vector-spaces#1).
 
 For comprehensive theory, see **matrix operations**.`,
       before: ``,
@@ -120,7 +120,7 @@ For comprehensive theory, see **matrix operations**.`,
 • **Compatibility with transpose**: $(kA)^T = k A^T$
 • **Compatibility with matrix multiplication**: $k(AB) = (kA)B = A(kB)$
 
-These properties are exactly the eight vector-space axioms for scalar multiplication.`,
+These properties are exactly the eight [vector](!/linear-algebra/vectors#1)-space axioms for scalar multiplication.`,
       before: ``,
       after: ``,
       link: '',
@@ -194,9 +194,9 @@ Set the visualizer to $2 \\times 3$ and step through to see this animated symbol
     },
     obj10: {
       title: `The Opening Scene: One Number and One Matrix`,
-      content: `The player starts with the scalar $k$, the matrix $A$, and an empty $C$ waiting for the result. At the default dimensions $A$ is $2 \times 3$, so $C$ will be $2 \times 3$ as well.
+      content: `The player starts with the scalar $k$, the [matrix](!/linear-algebra/matrix#1) $A$, and an empty $C$ waiting for the result. At the default [dimensions](!/linear-algebra/vector-spaces/dimension#1) $A$ is $2 \\times 3$, so $C$ will be $2 \\times 3$ as well.
 
-Only the setup is on screen: a single number on one side, six entries on the other, and the statement that $C = k \cdot A$ is about to be built cell by cell.`,
+Only the setup is on screen: a single number on one side, six entries on the other, and the statement that $C = k \\cdot A$ is about to be built cell by cell.`,
       before: ``,
       after: `Unlike addition, this operation has no matching-shape precondition — there is nothing to match. A scalar can multiply a matrix of any dimensions, because it meets every entry individually rather than pairing off against a second grid.
 
@@ -205,9 +205,9 @@ That also fixes the output shape immediately. $C$ has exactly the dimensions of 
     },
     obj11: {
       title: `One Cell at a Time`,
-      content: `Each step highlights a single entry of $A$ together with its destination in $C$, and writes $k \cdot a_{i,j}$ into that slot.
+      content: `Each step highlights a single entry of $A$ together with its destination in $C$, and writes $k \\cdot a_{i,j}$ into that slot.
 
-The frozen picture below is a step partway through the $2 \times 3$ run: some cells of $C$ already hold their scaled value, one is being computed, and the rest are still placeholders.`,
+The frozen picture below is a step partway through the $2 \\times 3$ run: some cells of $C$ already hold their scaled value, one is being computed, and the rest are still placeholders.`,
       before: ``,
       after: `The same $k$ is used at every step. That is the entire content of the operation — six multiplications that share one factor — and it is why scalar multiplication is so much simpler than the matrix product, where each output entry consumes a whole row and a whole column.
 
@@ -216,13 +216,13 @@ Because each cell is independent, the order of the sweep is again a presentation
     },
     obj12: {
       title: `The Completed Product`,
-      content: `The final scene fills every cell, so $C$ reads $c_{i,j} = k \cdot a_{i,j}$ throughout, at the same $2 \times 3$ shape it started with.
+      content: `The final scene fills every cell, so $C$ reads $c_{i,j} = k \\cdot a_{i,j}$ throughout, at the same $2 \\times 3$ shape it started with.
 
 Written that way the defining property is visible at a glance: **one factor, applied everywhere**.`,
       before: ``,
-      after: `The algebraic rules all follow from that. Scalar multiplication distributes over matrix addition, $k(A + B) = kA + kB$, and over scalar addition, $(k + m)A = kA + mA$; it is associative with scalars, $(km)A = k(mA)$; and $1 \cdot A = A$ while $0 \cdot A$ is the zero matrix. Those are precisely the axioms that make the set of $2 \times 3$ matrices a vector space.
+      after: `The algebraic rules all follow from that. Scalar multiplication distributes over matrix addition, $k(A + B) = kA + kB$, and over scalar addition, $(k + m)A = kA + mA$; it is associative with scalars, $(km)A = k(mA)$; and $1 \\cdot A = A$ while $0 \\cdot A$ is the zero matrix. Those are precisely the axioms that make the set of $2 \\times 3$ matrices a vector space.
 
-Two consequences are worth knowing because they are easy to get wrong. The trace scales linearly, $\operatorname{tr}(kA) = k \operatorname{tr}(A)$, since every diagonal entry picks up one factor of $k$. The determinant does **not**: for an $n \times n$ matrix, $\det(kA) = k^n \det(A)$, because the determinant collects one factor of $k$ from each of the $n$ rows. Doubling a $3 \times 3$ matrix multiplies its determinant by eight, not by two.`,
+Two consequences are worth knowing because they are easy to get wrong. The trace scales linearly, $\\operatorname{tr}(kA) = k \\operatorname{tr}(A)$, since every diagonal entry picks up one factor of $k$. The determinant does **not**: for an $n \\times n$ matrix, $\\det(kA) = k^n \\det(A)$, because the determinant collects one factor of $k$ from each of the $n$ rows. Doubling a $3 \\times 3$ matrix multiplies its determinant by eight, not by two.`,
       link: '',
     },
     obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },

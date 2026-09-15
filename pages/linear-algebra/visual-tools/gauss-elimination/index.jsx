@@ -683,23 +683,23 @@ export async function getStaticProps() {
   const sectionsContent = {
     obj0: {
       title: `Key Terms`,
-      content: `**Gaussian elimination** — the algorithm that reduces a [matrix](!/linear-algebra/matrix#1) to echelon form using [elementary row operations](!/linear-algebra/linear-systems/gaussian-elimination#2), so a linear system can be solved by substitution.
+      content: `[Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) — the algorithm that reduces a [matrix](!/linear-algebra/definitions#matrix) to echelon form using [elementary row operations](!/linear-algebra/formulas#elementary_row_operations), so a linear system can be solved by substitution.
 
-**Augmented matrix** — the coefficient matrix with the right-hand side appended as a final column, written $[A \\mid b]$. In the tool the constants are the amber column; row operations act on the whole row at once, constants included.
+[Augmented matrix](!/linear-algebra/definitions#augmented_matrix) — the coefficient matrix with the right-hand side appended as a final column, written $[A \\mid b]$. In the tool the constants are the amber column; row operations act on the whole row at once, constants included.
 
-**Pivot** — the first non-zero entry of a row once the rows above it have been cleared. Its column is a pivot column, and the variable of that column is a leading variable.
+[Pivot](!/linear-algebra/linear-systems/echelon-form#4) — the first non-zero entry of a row once the rows above it have been cleared. Its column is a [pivot](!/linear-algebra/definitions#pivot) column, and the variable of that column is a leading variable.
 
-**Row echelon form (REF)** — zero rows at the bottom, each pivot strictly to the right of the pivot above it, and zeros below every pivot. Note what is **not** required: the [pivots](!/linear-algebra/linear-systems/echelon-form#4) need not be $1$.
+[Row echelon form (REF)](!/linear-algebra/definitions#row_echelon_form) — zero rows at the bottom, each pivot strictly to the right of the pivot above it, and zeros below every pivot. Note what is **not** required: the [pivots](!/linear-algebra/definitions#pivot) need not be $1$.
 
-**Reduced row echelon form (RREF)** — echelon form with every pivot equal to $1$ and zeros above each pivot as well as below. Also called Gauss-Jordan form. Unlike echelon form, it is unique for a given matrix.
+[Reduced row echelon form (RREF)](!/linear-algebra/definitions#reduced_row_echelon_form) — echelon form with every pivot equal to $1$ and zeros above each pivot as well as below. Also called Gauss-Jordan form. Unlike echelon form, it is unique for a given matrix.
 
-**Elementary row operation** — one of three moves that preserve the [solution set](!/algebra/equations): swapping two rows, scaling a row by a non-zero constant, or adding a multiple of one row to another.
+[Elementary row operation](!/linear-algebra/formulas#elementary_row_operations) — one of three moves that preserve the [solution set](!/algebra/definitions#solution_set): swapping two rows, scaling a row by a non-zero constant, or adding a multiple of one row to another.
 
-**Back-substitution** — solving for the variables from the bottom row upward once the matrix is in echelon form.
+[Back-substitution](!/linear-algebra/linear-systems/gaussian-elimination#5) — solving for the variables from the bottom row upward once the matrix is in echelon form.
 
 **Free variable** — a variable whose column has no pivot. Each one contributes a parameter to an infinite solution set.
 
-**Rank** — the number of pivots. It is the count the tool reports at the end, and it decides everything: [rank](!/linear-algebra/matrix/rank#1) equal to the number of unknowns means one solution, fewer means free variables.`,
+[Rank](!/linear-algebra/matrix/rank#1) — the number of pivots. It is the count the tool reports at the end, and it decides everything: [rank](!/linear-algebra/definitions#rank) equal to the number of unknowns means one solution, fewer means free variables.`,
       before: ``,
       after: ``,
       link: '',
@@ -709,7 +709,7 @@ export async function getStaticProps() {
       title: `Using the Calculator`,
       content: `The calculator runs elimination on an augmented matrix $[A \\mid b]$ and shows one elementary row operation per step.
 
-**Pick a target form**: the two pills at the top left choose where the run stops — **Echelon form** clears below the pivots and stops there, **Reduced echelon form** goes all the way to Gauss-Jordan. Switching pills rebuilds the run on the same matrix, which is the fastest way to see what the extra work actually is.
+**Pick a target form**: the two pills at the top left choose where the run stops — **Echelon form** clears below the [pivots](!/linear-algebra/linear-systems/echelon-form#4) and stops there, **Reduced echelon form** goes all the way to Gauss-Jordan. Switching pills rebuilds the run on the same matrix, which is the fastest way to see what the extra work actually is.
 
 **Pick a matrix**: the presets cover the cases worth seeing — a matrix that needs a swap, one whose first pivot is already $1$, one with a free variable, an inconsistent system, a longer four-unknown run, and the zero matrix. Or set the shape with the steppers, type your own entries, or press **Shuffle** for a random system.
 
@@ -733,7 +733,7 @@ That matrix is the default for a reason. Its top-left entry is $0$, so the run c
 
 On the default preset the difference is exact and countable: the echelon run takes 8 steps, the reduced run takes 14. The six extra steps are three scalings and three clearings above a pivot.
 
-**Which to use**: echelon form is cheaper and enough to solve a system, because back-substitution finishes the job. Reduced echelon form costs more but ends with the answer written out, and it is what you want when the matrix is standing in for something else — an inverse, a null space [basis](!/linear-algebra/vector-spaces#2), a rank computation.`,
+**Which to use**: echelon form is cheaper and enough to solve a system, because back-substitution finishes the job. Reduced echelon form costs more but ends with the answer written out, and it is what you want when the [matrix](!/linear-algebra/matrix#1) is standing in for something else — an inverse, a null space [basis](!/linear-algebra/vector-spaces#2), a [rank](!/linear-algebra/matrix/rank#1) computation.`,
       before: ``,
       after: `The first still is where the plain run stops. Every entry below a pivot is $0$ and the leading entries — $2$, $2$, $3$ — step to the right as you go down. The pivots are not $1$, and the entries above them are still whatever they were, because echelon form does not ask for either.
 
@@ -833,7 +833,7 @@ From here the column containing that pivot is $0$ everywhere except the pivot it
 
 The important detail is that the **current row does not advance**. The next pivot will be found further to the right, on the same row. That is how a staircase ends up with a step wider than one column.
 
-A skipped column marks a **free variable**: no equation from that point on pins it down. If the system is consistent, each free variable can take any value, so the solution set is infinite — a line for one free variable, a plane for two.
+A skipped column marks a **free variable**: no equation from that point on pins it down. If the system is consistent, each free variable can take any value, so the [solution set](!/algebra/equations) is infinite — a line for one free variable, a plane for two.
 
 Counting them is the rank-nullity theorem in miniature: pivots plus free columns equals the number of unknowns. The tool reports both at the end.
 

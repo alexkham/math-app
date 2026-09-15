@@ -38,9 +38,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Matrix addition** — combining two matrices of the same shape into a third matrix by adding paired entries: $c_{i,j} = a_{i,j} + b_{i,j}$.
+      content: `[Matrix addition](!/linear-algebra/formulas#matrix_addition) — combining two matrices of the same shape into a third matrix by adding paired entries: $c_{i,j} = a_{i,j} + b_{i,j}$.
 
-**Matrix subtraction** — combining two matrices of the same shape by subtracting paired entries: $c_{i,j} = a_{i,j} - b_{i,j}$.
+[Matrix subtraction](!/linear-algebra/formulas#matrix_subtraction) — combining two matrices of the same shape by subtracting paired entries: $c_{i,j} = a_{i,j} - b_{i,j}$.
 
 **Element-wise operation** — an operation applied independently to each entry; the result at position $(i,j)$ depends only on the inputs at position $(i,j)$.
 
@@ -48,7 +48,7 @@ export async function getStaticProps(){
 
 **Result shape** — the output matrix $C$ inherits the shape of the operands. If $A$ and $B$ are $m \\times n$, then $C$ is $m \\times n$.
 
-**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching [dimensions](!/linear-algebra/vector-spaces/dimension#1).`,
+**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching [dimensions](!/linear-algebra/definitions#dimension).`,
       before: ``,
       after: ``,
       link: '',
@@ -61,7 +61,7 @@ export async function getStaticProps(){
 • Set the shared shape of $A$ and $B$ with the **Dimensions** steppers — rows and columns each range from 1 to 5
 • Click play on the scene player to step through each cell of $C$, or use the speed selector to slow down or speed up the animation
 
-The hover **?** icon next to the dimensions label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.`,
+The hover **?** icon next to the [dimensions](!/linear-algebra/vector-spaces/dimension#1) label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.`,
       before: ``,
       after: ``,
       link: '',
@@ -116,7 +116,7 @@ $$c_{i,j} = a_{i,j} + b_{i,j}$$
 
 This makes matrix addition an **element-wise** operation: each entry of the result depends only on the matching entries in $A$ and $B$, not on anything else in either matrix.
 
-Matrix subtraction works identically, with subtraction replacing addition. The same-shape requirement is what makes the operation well-defined — without matched dimensions, there is no notion of "corresponding entry."
+[Matrix subtraction](!/linear-algebra/formulas#matrix_subtraction) works identically, with subtraction replacing addition. The same-shape requirement is what makes the operation well-defined — without matched dimensions, there is no notion of "corresponding entry."
 
 For a comprehensive treatment of matrix operations and properties, see **matrix operations theory**.`,
       before: ``,
@@ -125,7 +125,7 @@ For a comprehensive treatment of matrix operations and properties, see **matrix 
     },
     obj6: {
       title: `Key Formulas`,
-      content: `The full definition of matrix addition for $m \\times n$ matrices $A$ and $B$:
+      content: `The full definition of [matrix addition](!/linear-algebra/formulas#matrix_addition) for $m \\times n$ matrices $A$ and $B$:
 
 $$A + B = C, \\quad c_{i,j} = a_{i,j} + b_{i,j} \\text{ for all } 1 \\leq i \\leq m, \\, 1 \\leq j \\leq n$$
 
@@ -211,20 +211,20 @@ The visualizer above mirrors this process symbolically — set the dimensions to
     },
     obj11: {
       title: `The Opening Scene: Two Matrices of the Same Shape`,
-      content: `The player starts with $A$ and $B$ side by side and $C$ waiting empty on the right. At the default dimensions all three are $2 \times 3$, and every cell of $C$ shows a placeholder rather than a value.
+      content: `The player starts with $A$ and $B$ side by side and $C$ waiting empty on the right. At the default dimensions all three are $2 \\times 3$, and every cell of $C$ shows a placeholder rather than a value.
 
 Nothing has been computed yet. What the scene establishes is the precondition: $A$ and $B$ have identical dimensions, so there is a cell of $B$ sitting opposite every cell of $A$.`,
       before: ``,
-      after: `That pairing is the whole reason the same-shape rule exists. Addition is defined entry by entry, so it needs a partner for each entry — and a $2 \times 3$ matrix simply has no entry to pair with the $[3,1]$ entry of a $3 \times 3$ one.
+      after: `That pairing is the whole reason the same-shape rule exists. Addition is defined entry by entry, so it needs a partner for each entry — and a $2 \\times 3$ matrix simply has no entry to pair with the $[3,1]$ entry of a $3 \\times 3$ one.
 
-The result $C$ is created at the same shape as its inputs, which is worth stating explicitly: addition never changes dimensions. That is unlike multiplication, where a $2 \times 3$ times a $3 \times 4$ produces a $2 \times 4$.`,
+The result $C$ is created at the same shape as its inputs, which is worth stating explicitly: addition never changes dimensions. That is unlike multiplication, where a $2 \\times 3$ times a $3 \\times 4$ produces a $2 \\times 4$.`,
       link: '',
     },
     obj12: {
       title: `One Cell at a Time`,
       content: `Each step highlights one cell of $A$, the cell directly opposite it in $B$, and the destination cell in $C$, then writes $a_{i,j} + b_{i,j}$ into that destination.
 
-The frozen picture below is a step partway through the $2 \times 3$ run: some cells of $C$ already hold their sum, one pair is being combined now, and the rest are still placeholders.`,
+The frozen picture below is a step partway through the $2 \\times 3$ run: some cells of $C$ already hold their sum, one pair is being combined now, and the rest are still placeholders.`,
       before: ``,
       after: `Notice what the sweep never does: it never looks at a cell of $B$ that sits somewhere else. The entry $b_{2,3}$ can only ever meet $a_{2,3}$. There is no mixing across positions, no row-times-column pairing, nothing resembling the machinery of matrix multiplication.
 
@@ -235,7 +235,7 @@ That independence has a practical consequence. Because no cell's result depends 
       title: `The Completed Sum`,
       content: `The final scene fills every cell of $C$, so the whole matrix reads $c_{i,j} = a_{i,j} + b_{i,j}$ across all six positions.
 
-$C$ has exactly the shape it started with, $2 \times 3$, and each of its entries depends on precisely two numbers.`,
+$C$ has exactly the shape it started with, $2 \\times 3$, and each of its entries depends on precisely two numbers.`,
       before: ``,
       after: `From the completed picture the algebraic properties are easy to believe. Addition is **commutative**, $A + B = B + A$, because each cell reduces to an ordinary sum of two numbers and those commute. It is **associative** for the same reason. The zero matrix acts as an identity, and $-A$ — negate every entry — is an additive inverse.
 

@@ -37,19 +37,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Linear combination** — an expression $\\alpha A + \\beta B$ that scales each matrix by a [scalar](!/linear-algebra/vectors#1) and adds the results. More generally, $c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$.
+      content: `[Linear combination](!/linear-algebra/definitions#linear_combination) — an expression $\\alpha A + \\beta B$ that scales each matrix by a [scalar](!/linear-algebra/definitions#scalar) and adds the results. More generally, $c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$.
 
 **Scalar coefficient** — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each matrix in the combination.
 
-**Same-shape requirement** — all matrices in a linear combination must share identical [dimensions](!/linear-algebra/vector-spaces/dimension#1) so the additions are defined.
+**Same-shape requirement** — all matrices in a linear combination must share identical [dimensions](!/linear-algebra/definitions#dimension) so the additions are defined.
 
 **Result shape** — the linear combination has the same shape as the operands.
 
-**Span** — the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) of a fixed collection of matrices.
+[Span](!/linear-algebra/definitions#span) — the set of all [linear combinations](!/linear-algebra/definitions#linear_combination) of a fixed collection of matrices.
 
-**Linear independence** — a property of a collection: no matrix in it can be written as a linear combination of the others.
+[Linear independence](!/linear-algebra/definitions#linear_independence) — a property of a collection: no matrix in it can be written as a linear combination of the others.
 
-**Vector space of matrices** — the set of all $m \\times n$ matrices forms a [vector space](!/linear-algebra/vector-spaces#1) under [matrix addition](!/linear-algebra/matrix/operations#1) and scalar multiplication; linear combinations are its native operation.`,
+**Vector space of matrices** — the set of all $m \\times n$ matrices forms a [vector space](!/linear-algebra/definitions#vector_space) under [matrix addition](!/linear-algebra/formulas#matrix_addition) and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
       link: '',
@@ -59,7 +59,7 @@ export async function getStaticProps(){
       content: `Set the shared shape of $A$ and $B$, then watch $\\alpha A + \\beta B = C$ build in three phases.
 
 • Use the **Dimensions** steppers to set the shape of $A$ and $B$ (1 to 5 in each direction). $C$ inherits the shape automatically
-• Hover the **?** icon for a reminder that linear combinations are built from scalar multiplication plus matrix addition
+• Hover the **?** icon for a reminder that [linear combinations](!/linear-algebra/vectors/linear-combinations#1) are built from [scalar](!/linear-algebra/vectors#1) multiplication plus [matrix addition](!/linear-algebra/matrix/operations#1)
 • Press play or step manually through the scene player
 • The animation walks three phases in order: scale $A$ by $\\alpha$, scale $B$ by $\\beta$, then add the scaled matrices into $C$
 • The scalars $\\alpha$ and $\\beta$ are shown symbolically — the visualizer focuses on structure, not specific numeric values`,
@@ -107,7 +107,7 @@ This phase order makes the decomposition of a linear combination into scalar mul
     },
     obj5: {
       title: `What a Linear Combination Is`,
-      content: `A linear combination of two matrices $A$ and $B$ of the same shape is
+      content: `A [linear combination](!/linear-algebra/formulas#linear_combination) of two matrices $A$ and $B$ of the same shape is
 
 $$C = \\alpha A + \\beta B, \\quad c_{i,j} = \\alpha \\cdot a_{i,j} + \\beta \\cdot b_{i,j}$$
 
@@ -117,7 +117,7 @@ $$C = c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$$
 
 All matrices must share the same shape, and the result inherits that shape. The operation is built from two simpler ones: scale each matrix by its coefficient, then add the scaled matrices entry by entry.
 
-Linear combinations are the native operation of any vector space — matrices, [vectors](!/linear-algebra/vectors#1), polynomials, and functions all support them. For comprehensive theory, see **matrix operations**.`,
+Linear combinations are the native operation of any [vector space](!/linear-algebra/vector-spaces#1) — matrices, [vectors](!/linear-algebra/vectors#1), polynomials, and functions all support them. For comprehensive theory, see **matrix operations**.`,
       before: ``,
       after: ``,
       link: '',
@@ -211,9 +211,9 @@ Set the visualizer to $2 \\times 2$ and step through to see the three phases ani
     },
     obj11: {
       title: `The Opening Scene: Two Matrices and Two Scalars`,
-      content: `The player starts with everything named and nothing computed: the matrices $A$ and $B$, the scalars $\alpha$ and $\beta$, and an empty $C$ waiting to hold $\alpha A + \beta B$.
+      content: `The player starts with everything named and nothing computed: the matrices $A$ and $B$, the scalars $\\alpha$ and $\\beta$, and an empty $C$ waiting to hold $\\alpha A + \\beta B$.
 
-At the default dimensions $A$ and $B$ are both $2 \times 3$, and so is $C$. The caption states the plan up front — the combination will be built in three phases rather than in one pass.`,
+At the default [dimensions](!/linear-algebra/vector-spaces/dimension#1) $A$ and $B$ are both $2 \\times 3$, and so is $C$. The caption states the plan up front — the combination will be built in three phases rather than in one pass.`,
       before: ``,
       after: `Two preconditions are quietly in force here, one from each operation being combined. The scalars can be anything, because scalar multiplication imposes no shape rule. But $A$ and $B$ must have identical dimensions, because the final phase adds them, and addition does.
 
@@ -222,33 +222,33 @@ That is the general shape of a linear combination: scalar multiplication is perm
     },
     obj12: {
       title: `Phase 1: Scaling A by α`,
-      content: `The first sweep multiplies every entry of $A$ by $\alpha$, one cell at a time, exactly as the scalar-multiplication tool does on its own.
+      content: `The first sweep multiplies every entry of $A$ by $\\alpha$, one cell at a time, exactly as the scalar-multiplication tool does on its own.
 
-Six steps at the default size. $B$ is untouched throughout, and $C$ is still empty — this phase produces $\alpha A$ as an intermediate result, not part of the answer yet.`,
+Six steps at the default size. $B$ is untouched throughout, and $C$ is still empty — this phase produces $\\alpha A$ as an intermediate result, not part of the answer yet.`,
       before: ``,
       after: `Isolating this phase is the pedagogical point of the three-phase structure. A linear combination is not a new primitive operation; it is scalar multiplication and addition applied in sequence, and the tool refuses to blur them together.
 
-The frozen picture below is a step partway through this sweep: some entries of $A$ already carry their $\alpha$ factor, one is being scaled, and the rest are untouched.`,
+The frozen picture below is a step partway through this sweep: some entries of $A$ already carry their $\\alpha$ factor, one is being scaled, and the rest are untouched.`,
       link: '',
     },
     obj13: {
       title: `Phase 2: Scaling B by β`,
-      content: `The second sweep repeats the operation on $B$ with the other scalar, producing $\beta B$. Another six steps, and $A$ is now left alone — the caption notes it is already fully scaled from phase 1.
+      content: `The second sweep repeats the operation on $B$ with the other scalar, producing $\\beta B$. Another six steps, and $A$ is now left alone — the caption notes it is already fully scaled from phase 1.
 
 $C$ remains empty. Both inputs have now been scaled, but nothing has been combined.`,
       before: ``,
-      after: `The two scalars are independent. Nothing requires $\alpha$ and $\beta$ to be related, equal, or even non-zero, and setting one of them to zero collapses the combination to a plain scalar multiple of the other matrix.
+      after: `The two scalars are independent. Nothing requires $\\alpha$ and $\\beta$ to be related, equal, or even non-zero, and setting one of them to zero collapses the combination to a plain scalar multiple of the other matrix.
 
-That independence is what gives linear combinations their reach. Varying $\alpha$ and $\beta$ over all real numbers sweeps out every matrix expressible from $A$ and $B$ this way — the span of the pair, which for two independent matrices is a two-dimensional subspace of the $2 \times 3$ matrices.`,
+That independence is what gives linear combinations their reach. Varying $\\alpha$ and $\\beta$ over all real numbers sweeps out every matrix expressible from $A$ and $B$ this way — the span of the pair, which for two independent matrices is a two-dimensional subspace of the $2 \\times 3$ matrices.`,
       link: '',
     },
     obj14: {
       title: `Phase 3: Adding the Two Scaled Matrices`,
-      content: `The third sweep finally fills $C$, adding the two intermediates entry by entry: $c_{i,j} = \alpha a_{i,j} + \beta b_{i,j}$.
+      content: `The third sweep finally fills $C$, adding the two intermediates entry by entry: $c_{i,j} = \\alpha a_{i,j} + \\beta b_{i,j}$.
 
 This phase is ordinary matrix addition, and it is where the same-shape requirement is actually consumed. Six more steps, and the combination is complete.`,
       before: ``,
-      after: `Read across the three phases and the definition assembles itself: scale, scale, add. That is all a linear combination is, and extending it to more terms changes nothing structurally — $\alpha A + \beta B + \gamma D$ is one more scaling phase and one more addition.
+      after: `Read across the three phases and the definition assembles itself: scale, scale, add. That is all a linear combination is, and extending it to more terms changes nothing structurally — $\\alpha A + \\beta B + \\gamma D$ is one more scaling phase and one more addition.
 
 It is also worth noticing what the entrywise formula licenses. Because each cell of $C$ depends only on the matching cells of $A$ and $B$, the whole operation could be done in any order, or in parallel. The three-phase sequence is a teaching device; the arithmetic has no dependencies to respect.`,
       link: '',

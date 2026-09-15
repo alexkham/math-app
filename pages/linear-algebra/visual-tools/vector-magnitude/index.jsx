@@ -35,17 +35,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Magnitude** — the length of a vector, written $\\|\\mathbf{v}\\|$ (sometimes $|\\mathbf{v}|$), computed as $\\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$.
+      content: `[Magnitude](!/linear-algebra/vectors/magnitude) — the length of a vector, written $\\|\\mathbf{v}\\|$ (sometimes $|\\mathbf{v}|$), computed as $\\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$.
 
-**Euclidean norm** — the formal name for the magnitude; also called the $\\ell^2$ norm or $2$-norm.
+[Euclidean norm](!/linear-algebra/formulas#euclidean_norm) — the formal name for the magnitude; also called the $\\ell^2$ norm or $2$-norm.
 
 **Squared norm** — $\\|\\mathbf{v}\\|^2 = v_1^2 + \\cdots + v_n^2 = \\mathbf{v} \\cdot \\mathbf{v}$, the sum of squares before the root is taken.
 
-**Unit vector** — a vector of magnitude exactly $1$.
+[Unit vector](!/linear-algebra/definitions#unit_vector) — a vector of magnitude exactly $1$.
 
-**Normalization** — dividing a non-zero vector by its magnitude to produce the unit vector in the same direction: $\\hat{\\mathbf{v}} = \\mathbf{v} / \\|\\mathbf{v}\\|$.
+[Normalization](!/linear-algebra/orthogonality/gram-schmidt#4) — dividing a non-zero vector by its magnitude to produce the unit vector in the same direction: $\\hat{\\mathbf{v}} = \\mathbf{v} / \\|\\mathbf{v}\\|$.
 
-**Direction** — what normalization preserves; two [vectors](!/linear-algebra/vectors#1) have the same direction when one is a positive multiple of the other.
+[Direction](!/linear-algebra/vectors/properties#2) — what normalization preserves; two [vectors](!/linear-algebra/definitions#vector) have the same direction when one is a positive multiple of the other.
 
 **Zero vector** — the only vector with magnitude $0$, and the only one that cannot be normalized.`,
       before: ``,
@@ -97,7 +97,7 @@ The layout changes between phases 2 and 3. The first two phases read $\\mathbf{v
 
 • Length $2$ is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product#10) itself: $\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$ is the hypotenuse of a right triangle with legs $v_1$ and $v_2$
 • Length $3$ is the same theorem applied twice, giving the diagonal of a box with sides $v_1, v_2, v_3$
-• Longer vectors show that the rule does not change: one square per component, one sum, one root, and one division per component to normalize
+• Longer [vectors](!/linear-algebra/vectors#1) show that the rule does not change: one square per component, one sum, one root, and one division per component to normalize
 • Length $1$ is a useful edge case: $\\|\\mathbf{v}\\| = \\sqrt{v_1^2} = |v_1|$, the absolute value, which is why the magnitude generalizes absolute value`,
       before: ``,
       after: ``,
@@ -117,7 +117,7 @@ $$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}, \\qquad \\hat{v}_
 
 Every component is divided by the same positive number, so the direction is unchanged and the new length is $\\|\\mathbf{v}\\| / \\|\\mathbf{v}\\| = 1$. Any non-zero vector therefore splits into a length and a direction: $\\mathbf{v} = \\|\\mathbf{v}\\| \\, \\hat{\\mathbf{v}}$.
 
-For the full treatment, including other norms and the triangle inequality, see the [vector magnitude theory page](!/linear-algebra/vectors/magnitude).`,
+For the full treatment, including other norms and the [triangle inequality](!/linear-algebra/formulas#triangle_inequality), see the [vector magnitude theory page](!/linear-algebra/vectors/magnitude).`,
       before: ``,
       after: ``,
       link: '',

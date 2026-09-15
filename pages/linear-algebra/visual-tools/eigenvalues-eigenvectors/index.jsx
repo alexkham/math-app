@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Eigenvector** — a non-zero vector $\\mathbf{v}$ with $A\\mathbf{v} = \\lambda\\mathbf{v}$: a direction that $A$ scales but does not turn.
+      content: `[Eigenvector](!/linear-algebra/definitions#eigenvector) — a non-zero vector $\\mathbf{v}$ with $A\\mathbf{v} = \\lambda\\mathbf{v}$: a direction that $A$ scales but does not turn.
 
-**Eigenvalue** — the scale factor $\\lambda$ in $A\\mathbf{v} = \\lambda\\mathbf{v}$.
+[Eigenvalue](!/linear-algebra/definitions#eigenvalue) — the scale factor $\\lambda$ in $A\\mathbf{v} = \\lambda\\mathbf{v}$.
 
-**Characteristic polynomial** — $p(\\lambda) = \\det(A - \\lambda I)$, whose roots are the [eigenvalues](!/linear-algebra/eigen#2); shown monic in the tool.
+[Characteristic polynomial](!/linear-algebra/definitions#characteristic_polynomial) — $p(\\lambda) = \\det(A - \\lambda I)$, whose roots are the [eigenvalues](!/linear-algebra/definitions#eigenvalue); shown monic in the tool.
 
-**Characteristic equation** — $\\det(A - \\lambda I) = 0$.
+[Characteristic equation](!/linear-algebra/formulas#characteristic_equation) — $\\det(A - \\lambda I) = 0$.
 
-**Eigenspace** — the null space of $A - \\lambda I$, all [eigenvectors](!/linear-algebra/eigen#2) for $\\lambda$ together with $\\mathbf{0}$.
+[Eigenspace](!/linear-algebra/definitions#eigenspace) — the null space of $A - \\lambda I$, all [eigenvectors](!/linear-algebra/definitions#eigenvector) for $\\lambda$ together with $\\mathbf{0}$.
 
-**Algebraic multiplicity** — how many times $\\lambda$ is a root of $p$.
+[Algebraic multiplicity](!/linear-algebra/definitions#algebraic_multiplicity) — how many times $\\lambda$ is a root of $p$.
 
-**Geometric multiplicity** — the [dimension](!/linear-algebra/vector-spaces/dimension#1) of the [eigenspace](!/linear-algebra/eigen#4), the number of free columns of $A - \\lambda I$; never exceeds the algebraic multiplicity.
+[Geometric multiplicity](!/linear-algebra/definitions#geometric_multiplicity) — the [dimension](!/linear-algebra/definitions#dimension) of the [eigenspace](!/linear-algebra/definitions#eigenspace), the number of free columns of $A - \\lambda I$; never exceeds the algebraic multiplicity.
 
-**Defective** — a [matrix](!/linear-algebra/matrix#1) with some eigenvalue whose geometric multiplicity is smaller than its algebraic one; such a matrix cannot be diagonalized.
+**Defective** — a [matrix](!/linear-algebra/definitions#matrix) with some eigenvalue whose geometric multiplicity is smaller than its algebraic one; such a matrix cannot be diagonalized.
 
 **Trace and determinant** — the eigenvalues sum to $\\operatorname{tr} A$ and multiply to $\\det A$, counting multiplicity.`,
       before: ``,
@@ -58,7 +58,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix, then watch its eigenvalues and eigenvectors emerge the way they are found by hand.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1), then watch its [eigenvalues](!/linear-algebra/eigen#2) and [eigenvectors](!/linear-algebra/eigen#2) emerge the way they are found by hand.
 
 • Use the **Preset** pills for six matrices: three distinct eigenvalues, a symmetric $2 \\times 2$, a repeated eigenvalue with a plane of eigenvectors, a defective matrix, a triangular one, and a rotation with complex eigenvalues
 • Use the **Size** stepper for $2 \\times 2$ or $3 \\times 3$
@@ -127,7 +127,7 @@ $$p(\\lambda) = \\det(A - \\lambda I) = 0$$
 
 This is the characteristic equation, and $p$ is a polynomial of degree $n$ whose roots are the eigenvalues. For a $2 \\times 2$ matrix it is $\\lambda^2 - (\\operatorname{tr} A)\\lambda + \\det A$; in general the coefficient of $\\lambda^{n-1}$ is $\\pm\\operatorname{tr} A$ and the constant is $\\pm\\det A$, which gives the two standard checks: the eigenvalues sum to the trace and multiply to the determinant.
 
-Each eigenvalue then has an eigenspace, the null space of $A - \\lambda I$, found by row reduction. Its dimension, the geometric multiplicity, is at least $1$ and at most the algebraic multiplicity. When every eigenvalue has a full set, the eigenvectors form a [basis](!/linear-algebra/vector-spaces#2) and $A$ is diagonalizable: $A = PDP^{-1}$ with the eigenvectors as the columns of $P$.
+Each eigenvalue then has an eigenspace, the null space of $A - \\lambda I$, found by row reduction. Its [dimension](!/linear-algebra/vector-spaces/dimension#1), the geometric multiplicity, is at least $1$ and at most the algebraic multiplicity. When every eigenvalue has a full set, the eigenvectors form a [basis](!/linear-algebra/vector-spaces#2) and $A$ is diagonalizable: $A = PDP^{-1}$ with the eigenvectors as the columns of $P$.
 
 Real matrices can have complex eigenvalues, in conjugate pairs; a $2 \\times 2$ rotation is the standard example. Symmetric matrices never do: their eigenvalues are real and their eigenvectors can be chosen orthogonal. For the full theory, see the [characteristic equation theory page](!/linear-algebra/eigen/characteristic-equation) and the [eigenvalue properties page](!/linear-algebra/eigen/properties).`,
       before: ``,
@@ -270,7 +270,7 @@ When the reduced form has more than one free column, the eigenspace is a plane o
     },
     obj15: {
       title: `A Repeated Eigenvalue with a Plane of Eigenvectors`,
-      content: `On the repeated preset, $\\lambda = 1$ is a double root, and $A - I$ is the all-ones matrix, which reduces to a single non-zero row. Two free columns, so two independent eigenvectors: the eigenspace is a plane.
+      content: `On the repeated preset, $\\lambda = 1$ is a double root, and $A - I$ is the all-ones matrix, which reduces to a single non-zero row. Two free columns, so two independent eigenvectors: the [eigenspace](!/linear-algebra/eigen#4) is a plane.
 
 The frozen picture below shows that scene: one pivot, two free columns, and both eigenvectors read off.`,
       before: ``,

@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Diagonalization** — writing $A = PDP^{-1}$ with $D$ diagonal.
+      content: `[Diagonalization](!/linear-algebra/eigen/diagonalization) — writing $A = PDP^{-1}$ with $D$ diagonal.
 
-**$P$** — the [matrix](!/linear-algebra/matrix#1) whose columns are $n$ independent eigenvectors of $A$; invertible because they are independent.
+**$P$** — the [matrix](!/linear-algebra/definitions#matrix) whose columns are $n$ independent eigenvectors of $A$; invertible because they are independent.
 
-**$D$** — the [diagonal matrix](!/linear-algebra/matrix/types#3) of eigenvalues, in the same order as the columns of $P$.
+**$D$** — the [diagonal matrix](!/linear-algebra/definitions#diagonal_matrix) of eigenvalues, in the same order as the columns of $P$.
 
-**Diagonalizable** — a matrix that has $n$ independent eigenvectors; equivalently, one whose [geometric multiplicities](!/linear-algebra/eigen/properties#3) all equal the algebraic ones.
+[Diagonalizable](!/linear-algebra/eigen/diagonalization#3) — a matrix that has $n$ independent eigenvectors; equivalently, one whose [geometric multiplicities](!/linear-algebra/definitions#geometric_multiplicity) all equal the algebraic ones.
 
 **Defective** — a matrix with too few eigenvectors; it has no diagonal form, only a Jordan form.
 
-**Similar matrices** — $A$ and $P^{-1}AP$; they share eigenvalues, trace and [determinant](!/linear-algebra/determinants#1). Diagonalization is similarity to a diagonal matrix.
+[Similar matrices](!/linear-algebra/definitions#similar_matrices) — $A$ and $P^{-1}AP$; they share eigenvalues, trace and [determinant](!/linear-algebra/definitions#determinant). Diagonalization is similarity to a diagonal matrix.
 
-**Eigenvector basis** — the columns of $P$; in this [basis](!/linear-algebra/vector-spaces#2) the map is a pure scaling.
+**Eigenvector basis** — the columns of $P$; in this [basis](!/linear-algebra/definitions#basis) the map is a pure scaling.
 
-**Spectral decomposition** — the symmetric case $A = QDQ^T$, where $Q$ is orthogonal, so the inverse is the transpose.
+[Spectral decomposition](!/linear-algebra/formulas#spectral_decomposition) — the symmetric case $A = QDQ^T$, where $Q$ is orthogonal, so the inverse is the transpose.
 
 **Power formula** — $A^k = PD^kP^{-1}$, with $D^k$ obtained by powering the diagonal entries.`,
       before: ``,
@@ -58,7 +58,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix and a power, then watch it factor into $PDP^{-1}$.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) and a power, then watch it factor into $PDP^{-1}$.
 
 • Use the **Preset** pills for eight matrices: a classic $2 \\times 2$, a symmetric one, a Markov chain, the Fibonacci matrix, a $3 \\times 3$ with distinct eigenvalues, a repeated eigenvalue that still diagonalizes, a defective matrix, and a rotation
 • Use the **Size** stepper for $2 \\times 2$ or $3 \\times 3$, and the **k** stepper to choose which power $A^k$ the last scene computes
@@ -78,7 +78,7 @@ The eigenvalues and eigenvectors are reported, not derived, since the eigenvalue
 • **Eigenvalues** — the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2) and its roots, with the trace as a check
 • **Eigenvectors** — one per free column of $A - \\lambda I$ for each eigenvalue, shown as columns above their eigenvalues; if there are fewer than $n$, the run stops with a defective verdict
 • **Assemble** — $P$ from the eigenvectors, $D$ from the eigenvalues, in matching order
-• **Invert** — $P^{-1}$ by row reducing $[P \\mid I]$, with the determinant of $P$ noted
+• **Invert** — $P^{-1}$ by row reducing $[P \\mid I]$, with the [determinant](!/linear-algebra/determinants#1) of $P$ noted
 • **Factor** — $A = P \\cdot D \\cdot P^{-1}$ multiplied out and compared with $A$
 • **Verify** — $P^{-1} A P = D$, the same identity from the other side
 • **Power** — $A^k = P D^k P^{-1}$ for the chosen $k$, with $D^k$ obtained by powering the diagonal
@@ -163,7 +163,7 @@ The payoff is functions of $A$. Because $A^k = PD^kP^{-1}$ and $D^k$ is just the
 
 • **Recurrences**: the Fibonacci matrix diagonalized is Binet's closed formula, and the same works for any linear recurrence
 • **Markov chains**: $A^k$ converges to the steady state because the eigenvalue $1$ survives while the others decay; the rate is the second-largest modulus
-• **Systems of differential equations**: $\\dot{\\mathbf{x}} = A\\mathbf{x}$ decouples into $n$ [scalar](!/linear-algebra/vectors#1) equations in the eigenvector basis, with solutions $e^{\\lambda_i t}$
+• **Systems of differential equations**: $\\dot{\\mathbf{x}} = A\\mathbf{x}$ decouples into $n$ [scalar](!/linear-algebra/vectors#1) equations in the eigenvector [basis](!/linear-algebra/vector-spaces#2), with solutions $e^{\\lambda_i t}$
 • **Matrix exponentials**: $e^{At} = Pe^{Dt}P^{-1}$, the workhorse of linear dynamics and control
 • **Quadratic forms**: for symmetric $A$, $\\mathbf{x}^TA\\mathbf{x}$ becomes a sum of $\\lambda_i y_i^2$ in the eigenvector coordinates, which classifies conics and tests definiteness
 • **Principal component analysis**: diagonalizing a covariance matrix rotates the data onto its axes of greatest variance

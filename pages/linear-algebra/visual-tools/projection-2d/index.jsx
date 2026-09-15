@@ -42,7 +42,7 @@ export async function getStaticProps(){
 
 **Image** &mdash; the set of all outputs $P\\mathbf{v}$; for a projection onto a line it is the line itself.
 
-**Kernel** &mdash; the set of [vectors](!/linear-algebra/vectors#1) sent to $\\mathbf{0}$; here the line perpendicular to the projection line.
+**Kernel** &mdash; the set of [vectors](!/linear-algebra/definitions#vector) sent to $\\mathbf{0}$; here the line perpendicular to the projection line.
 
 **Idempotent** &mdash; $P^2 = P$; projecting a second time changes nothing.
 

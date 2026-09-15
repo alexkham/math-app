@@ -525,27 +525,27 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Trace** — the sum of the main-diagonal entries of a [square matrix](!/linear-algebra/matrix/types#1): $\\text{tr}(A) = a_{1,1} + a_{2,2} + \\cdots + a_{n,n}$.
+      content: `[Trace](!/linear-algebra/definitions#trace) — the sum of the main-diagonal entries of a [square matrix](!/linear-algebra/definitions#square_matrix): $\\text{tr}(A) = a_{1,1} + a_{2,2} + \\cdots + a_{n,n}$.
 
 **Main diagonal** — the entries $a_{i,i}$ where the row index equals the column index.
 
-**Square matrix** — a matrix with the same number of rows and columns ($n \\times n$). [Trace](!/linear-algebra/matrix/trace#1) is defined only for square matrices.
+[Square matrix](!/linear-algebra/definitions#square_matrix) — a matrix with the same number of rows and columns ($n \\times n$). [Trace](!/linear-algebra/definitions#trace) is defined only for square matrices.
 
 **Off-diagonal entries** — entries $a_{i,j}$ with $i \\neq j$. They are completely ignored by the trace.
 
 **Scalar invariant** — the trace returns a single number that is invariant under similarity transformations: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$.
 
-**$\\Sigma$ notation** — the trace can be written compactly as $\\text{tr}(A) = \\sum_{i=1}^{n} a_{i,i}$.`,
+$\\Sigma$ [notation](!/linear-algebra/vectors#2) — the trace can be written compactly as $\\text{tr}(A) = \\sum_{i=1}^{n} a_{i,i}$.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Set the size of $A$ and watch the trace build one diagonal entry at a time.
+      content: `Set the size of $A$ and watch the [trace](!/linear-algebra/matrix/trace#1) build one diagonal entry at a time.
 
 • Use the **Dimension** steppers to set the size of $A$ from $2 \\times 2$ up to $10 \\times 10$ — both [dimensions](!/linear-algebra/vector-spaces/dimension#1) move together because $A$ must be square
-• Hover the **?** icon for a reminder that trace requires a square matrix
+• Hover the **?** icon for a reminder that trace requires a [square matrix](!/linear-algebra/matrix/types#1)
 • The scene player starts by posing the question with no highlights, then reveals the main diagonal, then sweeps the diagonal entry by entry
 • Use the speed selector and step log to control the pace and review prior steps`,
       before: ``,
@@ -689,9 +689,9 @@ Set the visualizer to $3 \\times 3$ and step through to see this picking-out pro
       title: `Scene 0: the Question, Before Anything Is Highlighted`,
       content: `The player opens on a deliberately blank slate. The matrix $A$ is drawn with every cell in its neutral grey, no diagonal marked, no running sum on screen — just the question of what the trace of this matrix is.
 
-That restraint is the point. Before any procedure runs, the only thing established is that $A$ is square, $4 \times 4$ at the default dimension, and that a single number is about to be extracted from it.`,
+That restraint is the point. Before any procedure runs, the only thing established is that $A$ is square, $4 \\times 4$ at the default dimension, and that a single number is about to be extracted from it.`,
       before: ``,
-      after: `Squareness is the one precondition worth dwelling on. The trace is defined only for square matrices, because it needs entries where the row index and the column index agree — and in a $3 \times 5$ matrix there is no $a_{4,4}$ to reach for.
+      after: `Squareness is the one precondition worth dwelling on. The trace is defined only for square matrices, because it needs entries where the row index and the column index agree — and in a $3 \\times 5$ matrix there is no $a_{4,4}$ to reach for.
 
 That is also why the dimension control offers a single number rather than a pair. Changing it from 4 to 7 rebuilds the scene list with three more sweep steps, but it can never produce a non-square matrix to take the trace of.`,
       link: '',
@@ -702,7 +702,7 @@ That is also why the dimension control offers a single number rather than a pair
 
 Those four are the **main diagonal**: the cells whose row index equals their column index. Everything the trace does happens on them, and the twelve grey cells play no part in the calculation at all.`,
       before: ``,
-      after: `A $4 \times 4$ matrix holds sixteen numbers and the trace consults four of them, so it throws away three quarters of the matrix. That is a severe compression, and it is fair to ask what survives it.
+      after: `A $4 \\times 4$ matrix holds sixteen numbers and the trace consults four of them, so it throws away three quarters of the matrix. That is a severe compression, and it is fair to ask what survives it.
 
 Quite a lot, as it turns out. The trace is unchanged by transposing, since transposing swaps $a_{i,j}$ with $a_{j,i}$ and leaves $a_{i,i}$ exactly where it was. It also equals the sum of the eigenvalues — so this fixed handful of cells encodes something about the matrix as a transformation, not merely about its bookkeeping. The [key properties](!#key-properties) section takes that further.`,
       link: '',
@@ -726,13 +726,13 @@ Nothing here depends on the order. Addition is commutative, so sweeping bottom-r
       title: `The Completed Trace`,
       content: `The final scene turns all four diagonal cells solid green and states the result in closed form:
 
-$\operatorname{tr}(A) = \sum_i a_{i,i}$
+$\\operatorname{tr}(A) = \\sum_i a_{i,i}$
 
 with every off-diagonal entry of $A$ formally ignored.`,
       before: ``,
-      after: `Written as a sum over $i$, the definition is size-independent: it reads identically whether the matrix is $2 \times 2$ or $10 \times 10$, which is exactly what the dimension control demonstrates when you change $n$ and replay.
+      after: `Written as a sum over $i$, the definition is size-independent: it reads identically whether the matrix is $2 \\times 2$ or $10 \\times 10$, which is exactly what the dimension control demonstrates when you change $n$ and replay.
 
-The compact form is also what makes the algebraic properties easy to check. Linearity, $\operatorname{tr}(A + B) = \operatorname{tr}(A) + \operatorname{tr}(B)$, follows immediately because addition is entrywise and the diagonal of a sum is the sum of the diagonals. The cyclic property $\operatorname{tr}(AB) = \operatorname{tr}(BA)$ takes a little more work but comes from the same summation, and it is the reason the trace is invariant under a change of basis.`,
+The compact form is also what makes the algebraic properties easy to check. Linearity, $\\operatorname{tr}(A + B) = \\operatorname{tr}(A) + \\operatorname{tr}(B)$, follows immediately because addition is entrywise and the diagonal of a sum is the sum of the diagonals. The cyclic property $\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$ takes a little more work but comes from the same summation, and it is the reason the trace is invariant under a change of basis.`,
       link: '',
     },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }

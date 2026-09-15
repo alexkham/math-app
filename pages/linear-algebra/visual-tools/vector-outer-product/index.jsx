@@ -35,19 +35,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Outer product** — the [matrix](!/linear-algebra/matrix#1) $\\mathbf{u}\\mathbf{v}^T$ built from a column $\\mathbf{u}$ with $m$ entries and a row $\\mathbf{v}^T$ with $n$ entries; its entry at row $i$, column $j$ is $u_i v_j$.
+      content: `[Outer product](!/linear-algebra/decompositions/spectral#3) — the [matrix](!/linear-algebra/definitions#matrix) $\\mathbf{u}\\mathbf{v}^T$ built from a column $\\mathbf{u}$ with $m$ entries and a row $\\mathbf{v}^T$ with $n$ entries; its entry at row $i$, column $j$ is $u_i v_j$.
 
 **Result shape** — $m \\times n$: one row for each entry of $\\mathbf{u}$, one column for each entry of $\\mathbf{v}$. The two lengths need not match.
 
-**Rank-1 matrix** — a matrix all of whose rows are multiples of one row vector, equivalently all of whose columns are multiples of one column vector. Every outer product of non-zero [vectors](!/linear-algebra/vectors#1) is rank 1, and every rank-1 matrix is an outer product.
+**Rank-1 matrix** — a matrix all of whose rows are multiples of one row vector, equivalently all of whose columns are multiples of one column vector. Every outer product of non-zero [vectors](!/linear-algebra/definitions#vector) is rank 1, and every rank-1 matrix is an outer product.
 
-**Inner product** — the same pairing of entries summed into a single number, $\\mathbf{v}^T\\mathbf{u} = \\sum_i u_i v_i$; requires matching lengths.
+[Inner product](!/linear-algebra/definitions#inner_product) — the same pairing of entries summed into a single number, $\\mathbf{v}^T\\mathbf{u} = \\sum_i u_i v_i$; requires matching lengths.
 
 **Dyadic product** — an older name for the outer product, still used in physics.
 
 **Tensor product** — the general construction of which the outer product of two vectors is the simplest case, written $\\mathbf{u} \\otimes \\mathbf{v}$.
 
-**Column times row** — the matrix-multiplication reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner [dimension](!/linear-algebra/vector-spaces/dimension#1) $1$.`,
+**Column times row** — the matrix-multiplication reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner [dimension](!/linear-algebra/definitions#dimension) $1$.`,
       before: ``,
       after: ``,
       link: '',
@@ -56,7 +56,7 @@ export async function getStaticProps(){
       title: `Getting Started with the Visualizer`,
       content: `Set the two lengths, pick a method, then watch $\\mathbf{u}\\mathbf{v}^T$ fill.
 
-• Use the **Method** pills to build the matrix **cell by cell**, **row by row**, or **column by column**
+• Use the **Method** pills to build the [matrix](!/linear-algebra/matrix#1) **cell by cell**, **row by row**, or **column by column**
 • Use the two **length** steppers independently: $\\mathbf{u}$ sets the number of rows and $\\mathbf{v}$ the number of columns of the result (1 to 5 each)
 • Hover the **?** icon for a reminder of what the outer product is and why it has rank 1
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
@@ -85,7 +85,7 @@ The row and column views make the same point from two sides. Every row is a mult
 • In the cell method, the active entry of $\\mathbf{u}$ is highlighted primary, the active entry of $\\mathbf{v}$ secondary, and the destination cell accent; two arrows flow into it, one from each vector
 • In the row method, one entry of $\\mathbf{u}$ is primary, all of $\\mathbf{v}^T$ is secondary, and the whole destination row is accent, with an arrow from each entry of $\\mathbf{v}^T$ into its cell
 • In the column method, the roles swap: all of $\\mathbf{u}$ is primary, one entry of $\\mathbf{v}$ secondary, and the whole destination column accent
-• Filled cells show their symbolic content $u_i \\cdot v_j$ at a font size that scales with the larger dimension
+• Filled cells show their symbolic content $u_i \\cdot v_j$ at a font size that scales with the larger [dimension](!/linear-algebra/vector-spaces/dimension#1)
 • The step log on the right keeps a record of every completed cell, row or column`,
       before: ``,
       after: ``,
@@ -109,7 +109,7 @@ The row and column views make the same point from two sides. Every row is a mult
 
 $$\\mathbf{u}\\mathbf{v}^T = \\begin{pmatrix} u_1 v_1 & u_1 v_2 & \\cdots & u_1 v_n \\\\ u_2 v_1 & u_2 v_2 & \\cdots & u_2 v_n \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ u_m v_1 & u_m v_2 & \\cdots & u_m v_n \\end{pmatrix}, \\qquad (\\mathbf{u}\\mathbf{v}^T)_{i,j} = u_i v_j$$
 
-It is ordinary matrix multiplication of an $m \\times 1$ matrix by a $1 \\times n$ matrix, with inner dimension $1$, so each entry is a single product rather than a sum. Reading the product by rows, row $i$ is $u_i \\mathbf{v}^T$; reading it by columns, column $j$ is $v_j \\mathbf{u}$.
+It is ordinary [matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) of an $m \\times 1$ matrix by a $1 \\times n$ matrix, with inner dimension $1$, so each entry is a single product rather than a sum. Reading the product by rows, row $i$ is $u_i \\mathbf{v}^T$; reading it by columns, column $j$ is $v_j \\mathbf{u}$.
 
 The inner product is the same two vectors multiplied in the other order: $\\mathbf{v}^T\\mathbf{u}$ is $1 \\times n$ times $n \\times 1$, a $1 \\times 1$ matrix, a number. Outer and inner are the two ways a column and a row can meet.
 
@@ -204,7 +204,7 @@ The inner product is not defined for this pair, since the lengths differ. With $
     },
     obj11: {
       title: `The Opening Scene: A Column, a Row, and a Grid`,
-      content: `The player opens with $\\mathbf{u}$ standing as a column, $\\mathbf{v}^T$ lying as a row, and an empty $m \\times n$ grid waiting for the result. At the default lengths both vectors have three entries and the grid is $3 \\times 3$.
+      content: `The player opens with $\\mathbf{u}$ standing as a column, $\\mathbf{v}^T$ lying as a row, and an empty $m \\times n$ grid waiting for the result. At the default lengths both [vectors](!/linear-algebra/vectors#1) have three entries and the grid is $3 \\times 3$.
 
 Nothing is computed yet. What the scene establishes is the shape of the answer: a **matrix**, with as many rows as $\\mathbf{u}$ has entries and as many columns as $\\mathbf{v}$.`,
       before: ``,

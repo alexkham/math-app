@@ -35,15 +35,15 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Vector projection** — the part of $\\mathbf{u}$ that points along $\\mathbf{v}$: $\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}\\,\\mathbf{v}$.
+      content: `[Vector projection](!/linear-algebra/formulas#vector_projection) — the part of $\\mathbf{u}$ that points along $\\mathbf{v}$: $\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}\\,\\mathbf{v}$.
 
-**Scalar projection** — the signed length of that part: $\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|}$.
+[Scalar projection](!/linear-algebra/formulas#scalar_projection) — the signed length of that part: $\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|}$.
 
 **Projection coefficient** — the scalar $c = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}$ that multiplies $\\mathbf{v}$; it counts how many copies of $\\mathbf{v}$ reach the foot of the perpendicular.
 
 **Remainder** — $\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u}$, the part of $\\mathbf{u}$ perpendicular to $\\mathbf{v}$; also called the orthogonal component or rejection.
 
-**Orthogonal decomposition** — the split $\\mathbf{u} = \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} + (\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u})$ into a piece along $\\mathbf{v}$ and a piece at right angles to it.
+[Orthogonal decomposition](!/linear-algebra/formulas#orthogonal_decomposition) — the split $\\mathbf{u} = \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} + (\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u})$ into a piece along $\\mathbf{v}$ and a piece at right angles to it.
 
 **Foot of the perpendicular** — the point on the line through $\\mathbf{v}$ closest to the tip of $\\mathbf{u}$; the projection is the vector from the origin to that point.
 
@@ -113,7 +113,7 @@ The layout changes between phases because the inputs change: the dot product and
 
 $$\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v} = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}\\,\\mathbf{v}$$
 
-It is the [scalar](!/linear-algebra/vectors#1) multiple of $\\mathbf{v}$ closest to $\\mathbf{u}$. Its signed length is the scalar projection,
+It is the [scalar](!/linear-algebra/vectors#1) multiple of $\\mathbf{v}$ closest to $\\mathbf{u}$. Its signed length is the [scalar projection](!/linear-algebra/formulas#scalar_projection),
 
 $$\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u} = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|} = \\|\\mathbf{u}\\| \\cos\\theta$$
 

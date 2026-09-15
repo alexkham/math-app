@@ -35,7 +35,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Cramer's rule** — for a square system $A\\mathbf{x} = \\mathbf{b}$ with $\\det A \\neq 0$, $x_i = \\dfrac{\\det A_i}{\\det A}$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$.
+      content: `[Cramer's rule](!/linear-algebra/determinants/applications#1) — for a square system $A\\mathbf{x} = \\mathbf{b}$ with $\\det A \\neq 0$, $x_i = \\dfrac{\\det A_i}{\\det A}$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$.
 
 **Coefficient matrix** — $A$, holding the coefficients of the unknowns, one row per equation.
 
@@ -47,16 +47,16 @@ export async function getStaticProps(){
 
 **Singular system** — $\\det A = 0$; the system has no solution or infinitely many, and Cramer's rule does not apply.
 
-**Homogeneous system** — $\\mathbf{b} = \\mathbf{0}$; every $\\det A_i$ is then $0$, and the unique solution is $\\mathbf{x} = \\mathbf{0}$.
+[Homogeneous system](!/linear-algebra/definitions#homogeneous_system) — $\\mathbf{b} = \\mathbf{0}$; every $\\det A_i$ is then $0$, and the unique solution is $\\mathbf{x} = \\mathbf{0}$.
 
-**Cost** — $n + 1$ [determinants](!/linear-algebra/determinants#1) of size $n$, which grows far faster than the cost of elimination.`,
+**Cost** — $n + 1$ [determinants](!/linear-algebra/definitions#determinant) of size $n$, which grows far faster than the cost of elimination.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a system, then watch each unknown emerge as a ratio of two determinants.
+      content: `Choose a system, then watch each unknown emerge as a ratio of two [determinants](!/linear-algebra/determinants#1).
 
 • Use the **Preset** pills for five systems: a $2 \\times 2$ and a $3 \\times 3$ with integer solutions, one with fractional answers, a homogeneous one, and a singular one where the rule stops
 • Use the **Size** stepper for $2$ or $3$ equations; resizing keeps the existing entries and pads with the identity

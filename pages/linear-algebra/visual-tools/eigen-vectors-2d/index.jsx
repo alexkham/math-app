@@ -527,24 +527,24 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Eigenvector** &mdash; A nonzero vector $v$ such that $Av = \\lambda v$ for some scalar $\\lambda$. [Matrix](!/linear-algebra/matrix#1) $A$ leaves the direction of $v$ unchanged and only scales it.
+      content:`**Eigenvector** &mdash; A nonzero vector $v$ such that $Av = \\lambda v$ for some scalar $\\lambda$. [Matrix](!/linear-algebra/definitions#matrix) $A$ leaves the direction of $v$ unchanged and only scales it.
 
 **Eigenvalue** &mdash; The scalar $\\lambda$ in $Av = \\lambda v$. It is the stretch factor along the eigenvector direction. A negative eigenvalue means the vector flips.
 
 **Eigendirection** &mdash; The line through the origin spanned by an eigenvector. Every vector on this line is also an eigenvector with the same eigenvalue.
 
-**Characteristic Polynomial** &mdash; The quadratic $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ whose roots are the [eigenvalues](!/linear-algebra/eigen#2) of a $2 \\times 2$ matrix $A$.
+**Characteristic Polynomial** &mdash; The quadratic $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ whose roots are the [eigenvalues](!/linear-algebra/definitions#eigenvalue) of a $2 \\times 2$ matrix $A$.
 
-**Defective Matrix** &mdash; A matrix with a repeated eigenvalue but fewer [eigenvectors](!/linear-algebra/eigen#2) than the [algebraic multiplicity](!/linear-algebra/eigen/characteristic-equation#6). Cannot be diagonalized.
+**Defective Matrix** &mdash; A matrix with a repeated eigenvalue but fewer [eigenvectors](!/linear-algebra/definitions#eigenvector) than the [algebraic multiplicity](!/linear-algebra/definitions#algebraic_multiplicity). Cannot be diagonalized.
 
-**Spectral Theorem** &mdash; Every [symmetric matrix](!/linear-algebra/matrix/types#5) has perpendicular eigenvectors and real eigenvalues.`,
+**Spectral Theorem** &mdash; Every [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) has perpendicular eigenvectors and real eigenvalues.`,
       before:``,
       after:``,
       link:'',
     },
     obj1:{
       title:`Getting Started`,
-      content:`The canvas shows the standard grid in gray, dashed green lines marking the eigendirections of $A$, the test vector $v$ in orange, and its image $Av$ in cyan. You control $v$; the matrix $A$ comes from the scenarios panel on the left.
+      content:`The canvas shows the standard grid in gray, dashed green lines marking the eigendirections of $A$, the test vector $v$ in orange, and its image $Av$ in cyan. You control $v$; the [matrix](!/linear-algebra/matrix#1) $A$ comes from the scenarios panel on the left.
 
 The mission is simple: drag $v$ around until it lines up with $Av$. When that happens, $v$ is an eigenvector and the ratio $|Av|/|v|$ is its eigenvalue $\\lambda$.
 
@@ -620,7 +620,7 @@ This is the fastest way to confirm what the eigen structure card claims: hit sna
       title:`Preset Scenarios &mdash; Four Categories`,
       content:`The scenarios panel on the left jumps the matrix $A$ to eleven canonical examples grouped by eigen structure.
 
-&bull; **Two distinct real** &mdash; diagonal $(\\lambda = 2, 0.5)$, symmetric $(\\lambda = 3, 1)$ with perpendicular eigenvectors, reflection across $y=x$ $(\\lambda = 1, -1)$, upper-triangular $(\\lambda = 3, 2)$ with non-orthogonal eigenvectors.
+&bull; **Two distinct real** &mdash; diagonal $(\\lambda = 2, 0.5)$, symmetric $(\\lambda = 3, 1)$ with perpendicular [eigenvectors](!/linear-algebra/eigen#2), reflection across $y=x$ $(\\lambda = 1, -1)$, upper-triangular $(\\lambda = 3, 2)$ with non-orthogonal eigenvectors.
 &bull; **Isotropic** &mdash; identity (every direction, $\\lambda = 1$) and uniform scaling by 2 (every direction, $\\lambda = 2$).
 &bull; **Defective** &mdash; shear $\\lambda = 1$ doubled, and defective $\\lambda = 2$ doubled. Only one eigendirection in each.
 &bull; **Complex** &mdash; rotation by $30\\deg$, quarter turn $(\\lambda = \\pm i)$, and rotating spiral. No real eigendirection in any of them.
@@ -704,7 +704,7 @@ For full treatment see **characteristic polynomial**, **defective matrices**, an
     },
     obj12:{
       title:`Distinct Real Eigenvalues: Two Fixed Directions`,
-      content:`Four of the eleven presets have two different real eigenvalues. The frozen picture below is the [diagonal matrix](!/linear-algebra/matrix/types#3) $\begin{pmatrix} 2 & 0 \\ 0 & 0.5 \end{pmatrix}$, whose eigenvalues are $2$ and $0.5$.
+      content:`Four of the eleven presets have two different real [eigenvalues](!/linear-algebra/eigen#2). The frozen picture below is the [diagonal matrix](!/linear-algebra/matrix/types#3) $\\begin{pmatrix} 2 & 0 \\ 0 & 0.5 \\end{pmatrix}$, whose eigenvalues are $2$ and $0.5$.
 
 Two dashed eigenlines are drawn, one per eigenvalue. Any vector lying along one of them is mapped to a multiple of itself: the transformation stretches it or shrinks it but never turns it.`,
       before:``,
@@ -717,7 +717,7 @@ Note that "distinct" refers to the eigenvalues, not the directions. The reflecti
     },
     obj13:{
       title:`Repeated Eigenvalue With a Full Set of Directions`,
-      content:`Two presets have a single repeated eigenvalue and still behave perfectly well: the identity, and the $2\times$ scaling shown below.
+      content:`Two presets have a single repeated eigenvalue and still behave perfectly well: the identity, and the $2\\times$ scaling shown below.
 
 For $A = 2I$ the only eigenvalue is $2$, but **every** direction is an eigendirection. Drag $v$ anywhere at all and $Av$ stays parallel to it — the alignment signal never switches off.`,
       before:``,
@@ -732,7 +732,7 @@ The important point is that a repeated eigenvalue is not by itself a problem. Wh
 
 Drag $v$ anywhere off that one line and $Av$ refuses to align, no matter where you put it.`,
       before:``,
-      after:`This is the case that breaks diagonalisation. An $n \times n$ matrix needs $n$ independent eigenvectors to be written in a basis of its own eigenvectors, and a defective matrix simply does not have them — the algebraic multiplicity of the eigenvalue exceeds its geometric multiplicity.
+      after:`This is the case that breaks diagonalisation. An $n \\times n$ matrix needs $n$ independent eigenvectors to be written in a basis of its own eigenvectors, and a defective matrix simply does not have them — the algebraic multiplicity of the eigenvalue exceeds its geometric multiplicity.
 
 The shear is the classic example. Every vector along the shear axis is fixed, but nothing else keeps its direction, so there is one eigenline where there ought to be two. Such matrices are handled with the Jordan form instead of a diagonal one, and they are the reason "every matrix is diagonalisable" is false.`,
       link:'',
@@ -743,9 +743,9 @@ The shear is the classic example. Every vector along the shear axis is fixed, bu
 
 Drag $v$ anywhere on the plane and $Av$ never lines up with it. The angle arc between the two arrows never closes, because a rotation genuinely turns every direction.`,
       before:``,
-      after:`That is the honest geometric content of a complex eigenvalue: no real line through the origin is preserved. The eigenvalues still exist — they come as a conjugate pair $a \pm bi$ — but their eigenvectors live in $\mathbb{C}^2$ and have no real representative to draw.
+      after:`That is the honest geometric content of a complex eigenvalue: no real line through the origin is preserved. The eigenvalues still exist — they come as a conjugate pair $a \\pm bi$ — but their eigenvectors live in $\\mathbb{C}^2$ and have no real representative to draw.
 
-The pair still carries the geometry. Its modulus is the scaling factor per application, so $|\lambda| = 1$ means a rigid rotation while $|\lambda| > 1$ produces the outward spiral of the third preset; its argument is the rotation angle. Reading a rotation as "complex eigenvalues" rather than "no eigenvalues" is what keeps the theory uniform: over $\mathbb{C}$, every $2 \times 2$ matrix has two eigenvalues counted with multiplicity.`,
+The pair still carries the geometry. Its modulus is the scaling factor per application, so $|\\lambda| = 1$ means a rigid rotation while $|\\lambda| > 1$ produces the outward spiral of the third preset; its argument is the rotation angle. Reading a rotation as "complex eigenvalues" rather than "no eigenvalues" is what keeps the theory uniform: over $\\mathbb{C}$, every $2 \\times 2$ matrix has two eigenvalues counted with multiplicity.`,
       link:'',
     }
   }

@@ -536,7 +536,7 @@ export async function getStaticProps(){
 
 **Element-wise (pointwise) operation** — an operation applied independently to each pair of corresponding entries; the result at $(i,j)$ depends only on the inputs at $(i,j)$.
 
-**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/vector-spaces/dimension#1). A $2 \\times 3$ [matrix](!/linear-algebra/matrix#1) cannot be Hadamard-multiplied with a $3 \\times 2$.
+**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/definitions#dimension). A $2 \\times 3$ [matrix](!/linear-algebra/definitions#matrix) cannot be Hadamard-multiplied with a $3 \\times 2$.
 
 **Standard matrix product** — the row-by-column product $A \\times B$, a different operation with different shape rules and a different result.
 
@@ -595,7 +595,7 @@ $$C = A \\odot B, \\quad c_{i,j} = a_{i,j} \\cdot b_{i,j}$$
 
 Each entry of $C$ depends only on the matching pair of entries in $A$ and $B$ — no row or column interaction. The result $C$ has the same $m \\times n$ shape as the operands.
 
-The Hadamard product is the multiplicative analogue of matrix addition: both are element-wise, both require matched shapes, both preserve dimensions. It contrasts sharply with the standard matrix product $A \\times B$, which mixes rows with columns and changes shape.
+The Hadamard product is the multiplicative analogue of [matrix addition](!/linear-algebra/formulas#matrix_addition): both are element-wise, both require matched shapes, both preserve dimensions. It contrasts sharply with the standard matrix product $A \\times B$, which mixes rows with columns and changes shape.
 
 For comprehensive theory, see **matrix operations**.`,
       before: ``,
@@ -697,20 +697,20 @@ Compare with the standard product $A \\times B$: it is undefined here because $A
     },
     obj11: {
       title: `The Opening Scene: Two Matrices, Same Shape`,
-      content: `The player starts with $A$ and $B$ side by side and $C$ empty on the right, all three $2 \times 3$ at the default dimensions.
+      content: `The player starts with $A$ and $B$ side by side and $C$ empty on the right, all three $2 \\times 3$ at the default [dimensions](!/linear-algebra/vector-spaces/dimension#1).
 
 The setup looks exactly like the addition tool's, and that is not a coincidence: the Hadamard product has the same precondition and the same output shape. Only the operation applied to each pair differs.`,
       before: ``,
-      after: `Getting the precondition right matters more here than anywhere else in this section, because the operation shares a name with something that requires the opposite. **Standard matrix multiplication** needs the inner dimensions to agree — an $m \times n$ times an $n \times p$ — and produces an $m \times p$ result. The Hadamard product needs the shapes to be *identical* and returns that same shape.
+      after: `Getting the precondition right matters more here than anywhere else in this section, because the operation shares a name with something that requires the opposite. **Standard matrix multiplication** needs the inner dimensions to agree — an $m \\times n$ times an $n \\times p$ — and produces an $m \\times p$ result. The Hadamard product needs the shapes to be **identical** and returns that same shape.
 
-So $A \odot B$ is defined here where $AB$ is not: two $2 \times 3$ matrices cannot be multiplied in the standard sense at all, since $3 \neq 2$.`,
+So $A \\odot B$ is defined here where $AB$ is not: two $2 \\times 3$ matrices cannot be multiplied in the standard sense at all, since $3 \\neq 2$.`,
       link: '',
     },
     obj12: {
       title: `One Cell at a Time`,
-      content: `Each step highlights a cell of $A$, the cell in the same position of $B$, and the destination in $C$, then writes the plain product $a_{i,j} \cdot b_{i,j}$ into it.
+      content: `Each step highlights a cell of $A$, the cell in the same position of $B$, and the destination in $C$, then writes the plain product $a_{i,j} \\cdot b_{i,j}$ into it.
 
-The frozen picture below is a step partway through the $2 \times 3$ run: some cells of $C$ already hold their product, one pair is being multiplied, and the rest are placeholders.`,
+The frozen picture below is a step partway through the $2 \\times 3$ run: some cells of $C$ already hold their product, one pair is being multiplied, and the rest are placeholders.`,
       before: ``,
       after: `Compare this sweep against standard matrix multiplication and the difference is stark. There, a single output entry consumes an entire row of $A$ and an entire column of $B$, and is a sum of products. Here, an output entry consumes exactly two numbers and is a single product.
 
@@ -719,11 +719,11 @@ That is why the Hadamard product is cheap — $mn$ multiplications against the r
     },
     obj13: {
       title: `The Completed Element-wise Product`,
-      content: `The final scene fills every cell, so $C$ reads $c_{i,j} = a_{i,j} \, b_{i,j}$ throughout, at the same $2 \times 3$ shape it started with.
+      content: `The final scene fills every cell, so $C$ reads $c_{i,j} = a_{i,j} \\, b_{i,j}$ throughout, at the same $2 \\times 3$ shape it started with.
 
-Written that way, the Hadamard product is to multiplication what matrix addition is to addition: the underlying arithmetic applied entry by entry, with no mixing across positions.`,
+Written that way, the Hadamard product is to multiplication what [matrix](!/linear-algebra/matrix#1) addition is to addition: the underlying arithmetic applied entry by entry, with no mixing across positions.`,
       before: ``,
-      after: `The properties follow from the entries, as they did for addition. It is **commutative**, $A \odot B = B \odot A$ — which standard matrix multiplication emphatically is not — and associative, and it distributes over matrix addition. Its identity is the all-ones matrix, not the identity matrix $I$: multiplying element-wise by $I$ would zero out everything off the diagonal.
+      after: `The properties follow from the entries, as they did for addition. It is **commutative**, $A \\odot B = B \\odot A$ — which standard matrix multiplication emphatically is not — and associative, and it distributes over matrix addition. Its identity is the all-ones matrix, not the identity matrix $I$: multiplying element-wise by $I$ would zero out everything off the diagonal.
 
 That last point is the cleanest illustration that the two products are genuinely different operations wearing similar notation. An element-wise inverse exists only when every entry of $A$ is non-zero, and is found by reciprocating each entry — nothing like a matrix inverse, which needs a non-zero determinant and mixes every entry into every other.`,
       link: '',

@@ -36,7 +36,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Complex eigenvalues** &mdash; for a real $2 \\times 2$ [matrix](!/linear-algebra/matrix#1), a conjugate pair $\\lambda = a \\pm bi$ with $b \\neq 0$, occurring when $\\operatorname{tr}^2 A < 4\\det A$.
+      content: `**Complex eigenvalues** &mdash; for a real $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix), a conjugate pair $\\lambda = a \\pm bi$ with $b \\neq 0$, occurring when $\\operatorname{tr}^2 A < 4\\det A$.
 
 **Modulus** &mdash; $r = |\\lambda| = \\sqrt{a^2 + b^2} = \\sqrt{\\det A}$, the scale factor per step.
 
@@ -65,7 +65,7 @@ Try this sequence to build intuition:
 • Switch to **Skewed rotation**: the same 60° turn per step, but the circle has become an ellipse and the green axes are no longer perpendicular
 • Press **Play** and watch the cyan arrow sweep the spiral continuously; the dots are where it lands at whole steps
 • Choose **Spiral in** and **Spiral out**, then drag $\\mathbf{x}_0$ around: the shape of the spiral never depends on where you start
-• Edit an entry of $A$ in the matrix card until the [determinant](!/linear-algebra/determinants#1) drops below $\\operatorname{tr}^2/4$; the eigenvalues turn real and the rotation disappears
+• Edit an entry of $A$ in the [matrix](!/linear-algebra/matrix#1) card until the [determinant](!/linear-algebra/determinants#1) drops below $\\operatorname{tr}^2/4$; the eigenvalues turn real and the rotation disappears
 • Move the **steps** slider to see more or fewer laps`,
       before: ``,
       after: ``,

@@ -38,7 +38,7 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `**Composition** &mdash; applying one transformation after another. Applying $B$ and then $A$ sends $\\mathbf{v}$ to $A(B\\mathbf{v})$.
 
-**Matrix product** &mdash; the single matrix $AB$ with $(AB)\\mathbf{v} = A(B\\mathbf{v})$ for every $\\mathbf{v}$. [Matrix multiplication](!/linear-algebra/matrix/operations#5) is defined so that this works.
+**Matrix product** &mdash; the single matrix $AB$ with $(AB)\\mathbf{v} = A(B\\mathbf{v})$ for every $\\mathbf{v}$. [Matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) is defined so that this works.
 
 **Order of application** &mdash; in $AB\\mathbf{v}$ the matrix nearest $\\mathbf{v}$ acts first: $B$, then $A$. Products read right to left.
 
@@ -46,7 +46,7 @@ export async function getStaticProps(){
 
 **Commuting pair** &mdash; matrices with $AB = BA$, such as two rotations, two diagonal matrices, or anything paired with a multiple of the identity.
 
-**Trail** &mdash; the two-segment path $\\mathbf{v}_0 \\to B\\mathbf{v} \\to AB\\mathbf{v}$ that a [vector](!/linear-algebra/vectors#1) follows through the pipeline.
+**Trail** &mdash; the two-segment path $\\mathbf{v}_0 \\to B\\mathbf{v} \\to AB\\mathbf{v}$ that a [vector](!/linear-algebra/definitions#vector) follows through the pipeline.
 
 **Stages** &mdash; the same pipeline shown as three canvases: the input, the intermediate, and the final state.
 
@@ -57,7 +57,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started`,
-      content: `The tool shows a vector $\\mathbf{v}$ travelling through two matrices. In **Trail** view a single canvas draws the path $\\mathbf{v}_0 \\to B\\mathbf{v} \\to AB\\mathbf{v}$ in two colours, teal for the first matrix and purple for the second, with the alternative order $BA$ drawn dashed for comparison. In **Stages** view the same pipeline is laid out as three canvases with chevrons between them.
+      content: `The tool shows a [vector](!/linear-algebra/vectors#1) $\\mathbf{v}$ travelling through two matrices. In **Trail** view a single canvas draws the path $\\mathbf{v}_0 \\to B\\mathbf{v} \\to AB\\mathbf{v}$ in two colours, teal for the first matrix and purple for the second, with the alternative order $BA$ drawn dashed for comparison. In **Stages** view the same pipeline is laid out as three canvases with chevrons between them.
 
 Try this sequence to build intuition:
 
@@ -66,7 +66,7 @@ Try this sequence to build intuition:
 &bull; Switch to **Two rotations** and flip the toggle again. Now both orders land in the same place: rotations commute.
 &bull; Drag $\\mathbf{v}$ in either view. The trail and both endpoints follow it.
 
-The point: matrix multiplication is composition of transformations, and composition depends on order.`,
+The point: [matrix multiplication](!/linear-algebra/matrix/operations#5) is composition of transformations, and composition depends on order.`,
       before: ``,
       after: ``,
       link: '',
@@ -147,7 +147,7 @@ The four sections that follow freeze one representative of each situation, with 
 
 $$A(B\\mathbf{v}) = (AB)\\,\\mathbf{v} \\quad \\text{for every } \\mathbf{v}$$
 
-This is not a coincidence about matrices; it is the reason matrix multiplication is defined the way it is. The column $j$ of $AB$ is $A$ applied to column $j$ of $B$, which is where the row-times-column rule comes from: the entry $(AB)_{ij} = \\sum_k A_{ik} B_{kj}$ is exactly what falls out of applying $A$ to the image of the $j$-th [basis](!/linear-algebra/vector-spaces#2) vector under $B$.
+This is not a coincidence about matrices; it is the reason [matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) is defined the way it is. The column $j$ of $AB$ is $A$ applied to column $j$ of $B$, which is where the row-times-column rule comes from: the entry $(AB)_{ij} = \\sum_k A_{ik} B_{kj}$ is exactly what falls out of applying $A$ to the image of the $j$-th [basis](!/linear-algebra/vector-spaces#2) vector under $B$.
 
 Two consequences follow immediately. Products read right to left, since the matrix nearest the vector acts first. And products need not commute, because doing two things in different orders need not give the same result: shearing a picture and then rotating it is not the same as rotating and then shearing.
 

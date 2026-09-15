@@ -35,13 +35,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**QR decomposition** — the factorization $A = QR$ of a [matrix](!/linear-algebra/matrix#1) with linearly independent columns, where $Q$ has orthonormal columns and $R$ is upper triangular.
+      content: `[QR decomposition](!/linear-algebra/formulas#qr_decomposition) — the factorization $A = QR$ of a [matrix](!/linear-algebra/definitions#matrix) with linearly independent columns, where $Q$ has orthonormal columns and $R$ is upper triangular.
 
 **Orthonormal columns** — $\\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$ for $i \\neq j$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_i = 1$; equivalently $Q^T Q = I$.
 
 **Upper triangular** — all entries below the main diagonal are zero: $r_{j,k} = 0$ for $j > k$.
 
-**Gram-Schmidt process** — the procedure that builds $Q$ column by column, and whose coefficients and lengths are the entries of $R$.
+[Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt#3) — the procedure that builds $Q$ column by column, and whose coefficients and lengths are the entries of $R$.
 
 **Working column** — $\\mathbf{u}_k = \\mathbf{a}_k - \\sum_{j<k} r_{j,k} \\mathbf{q}_j$, column $k$ of $A$ with its projections onto the finished columns removed.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Above the diagonal** — $r_{j,k} = \\mathbf{q}_j \\cdot \\mathbf{a}_k$, the coefficient of $\\mathbf{q}_j$ in column $k$ of $A$.
 
-**Reduced versus full** — this tool shows the reduced form, with $Q$ the same shape as $A$; the full form pads $Q$ to a square [orthogonal matrix](!/linear-algebra/matrix/types#7) and $R$ with zero rows.`,
+**Reduced versus full** — this tool shows the reduced form, with $Q$ the same shape as $A$; the full form pads $Q$ to a square [orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) and $R$ with zero rows.`,
       before: ``,
       after: ``,
       link: '',
@@ -105,7 +105,7 @@ The first column skips the coefficient and subtract steps, since there is nothin
 • With $2$ columns, $R$ is $2 \\times 2$ with one coefficient above the diagonal: $\\mathbf{a}_2 = r_{1,2} \\mathbf{q}_1 + r_{2,2} \\mathbf{q}_2$
 • With $3$ columns, $R$ is $3 \\times 3$ with three coefficients, and the third column shows the essential point: it is projected onto $\\mathbf{q}_1$ and $\\mathbf{q}_2$, the finished unit columns, never onto the original $\\mathbf{a}_2$
 • A tall $A$ ($4 \\times 2$ or $4 \\times 3$) is the least-squares shape: more equations than unknowns, and $Q$ is tall with $R$ small
-• A square $A$ gives a square $Q$, which is then an orthogonal matrix with $Q^{-1} = Q^T$
+• A square $A$ gives a square $Q$, which is then an [orthogonal matrix](!/linear-algebra/matrix/types#7) with $Q^{-1} = Q^T$
 
 Beyond three columns the cycle simply repeats with more coefficients per column; the tool stops there because the working-column expressions are already three terms long.`,
       before: ``,
@@ -114,7 +114,7 @@ Beyond three columns the cycle simply repeats with more coefficients per column;
     },
     obj5: {
       title: `What the QR Decomposition Is`,
-      content: `For an $n \\times k$ matrix $A$ with linearly independent columns $\\mathbf{a}_1, \\ldots, \\mathbf{a}_k$, the QR decomposition is
+      content: `For an $n \\times k$ [matrix](!/linear-algebra/matrix#1) $A$ with linearly independent columns $\\mathbf{a}_1, \\ldots, \\mathbf{a}_k$, the [QR decomposition](!/linear-algebra/formulas#qr_decomposition) is
 
 $$A = QR, \\qquad Q = \\begin{pmatrix} \\mathbf{q}_1 & \\cdots & \\mathbf{q}_k \\end{pmatrix}, \\quad Q^T Q = I, \\quad R \\text{ upper triangular}$$
 

@@ -641,7 +641,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Linear combination** — an expression $\\alpha u + \\beta v$ that scales each vector by a [scalar](!/linear-algebra/vectors#1) and adds the results. More generally, $c_1 v_1 + c_2 v_2 + \\cdots + c_n v_n$.
+      content: `[Linear combination](!/linear-algebra/definitions#linear_combination) — an expression $\\alpha u + \\beta v$ that scales each vector by a [scalar](!/linear-algebra/definitions#scalar) and adds the results. More generally, $c_1 v_1 + c_2 v_2 + \\cdots + c_n v_n$.
 
 **Scalar coefficient** — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each vector in the combination.
 
@@ -649,11 +649,11 @@ export async function getStaticProps(){
 
 **Result length** — the linear combination has the same length as the operands.
 
-**Span** — the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) of a fixed collection of vectors; geometrically, a line, plane, or higher-dimensional [subspace](!/linear-algebra/vector-spaces/subspaces#1) through the origin.
+[Span](!/linear-algebra/definitions#span) — the set of all [linear combinations](!/linear-algebra/definitions#linear_combination) of a fixed collection of vectors; geometrically, a line, plane, or higher-dimensional [subspace](!/linear-algebra/definitions#subspace) through the origin.
 
-**Linear independence** — a property of a collection: no vector in it can be written as a linear combination of the others.
+[Linear independence](!/linear-algebra/definitions#linear_independence) — a property of a collection: no vector in it can be written as a linear combination of the others.
 
-**Vector space** — the set of all vectors of a given length forms a [vector space](!/linear-algebra/vector-spaces#1) under [vector addition](!/linear-algebra/vectors/basic-operations#1) and scalar multiplication; linear combinations are its native operation.`,
+[Vector space](!/linear-algebra/vector-spaces#1) — the set of all vectors of a given length forms a [vector space](!/linear-algebra/definitions#vector_space) under [vector addition](!/linear-algebra/formulas#vector_addition) and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
       link: '',
@@ -663,7 +663,7 @@ export async function getStaticProps(){
       content: `Set the shared length of $u$ and $v$, then watch $\\alpha u + \\beta v = w$ build in three phases.
 
 • Use the **Dimensions** stepper to set the length of $u$ and $v$ (1 to 5 components). $w$ inherits the length automatically
-• Hover the **?** icon for a reminder that linear combinations are built from scalar multiplication plus vector addition
+• Hover the **?** icon for a reminder that [linear combinations](!/linear-algebra/vectors/linear-combinations#1) are built from [scalar](!/linear-algebra/vectors#1) multiplication plus [vector addition](!/linear-algebra/vectors/basic-operations#1)
 • Press play or step manually through the scene player
 • The animation walks three phases in order: scale $u$ by $\\alpha$, scale $v$ by $\\beta$, then add the scaled vectors into $w$
 • The scalars $\\alpha$ and $\\beta$ are shown symbolically — the visualizer focuses on structure, not specific numeric values`,
@@ -711,7 +711,7 @@ This phase order makes the decomposition of a linear combination into scalar mul
     },
     obj5: {
       title: `What a Linear Combination Is`,
-      content: `A linear combination of two vectors $u$ and $v$ of the same length is
+      content: `A [linear combination](!/linear-algebra/formulas#linear_combination) of two vectors $u$ and $v$ of the same length is
 
 $$w = \\alpha u + \\beta v, \\quad w_i = \\alpha \\cdot u_i + \\beta \\cdot v_i$$
 
@@ -737,7 +737,7 @@ Geometrically, scaling stretches or reverses a vector along its direction, and a
 • **Scaling a linear combination**: $k(\\alpha u + \\beta v) = (k\\alpha) u + (k\\beta) v$
 • **Distributivity**: $\\alpha(u + v) = \\alpha u + \\alpha v$
 
-The structural fact behind all of this is that $\\mathbb{R}^n$ is a vector space, and linear combinations are exactly the operation that vector spaces are designed to support.`,
+The structural fact behind all of this is that $\\mathbb{R}^n$ is a [vector space](!/linear-algebra/vector-spaces#1), and linear combinations are exactly the operation that vector spaces are designed to support.`,
       before: ``,
       after: ``,
       link: '',
@@ -749,7 +749,7 @@ The structural fact behind all of this is that $\\mathbb{R}^n$ is a vector space
 • **Span and basis**: the span of a set of vectors is the set of all their linear combinations; a [basis](!/linear-algebra/vector-spaces#2) is a linearly independent set whose span is the whole space
 • **Linear independence**: testing whether $c_1 v_1 + \\cdots + c_n v_n = 0$ forces all $c_i = 0$
 • **Solving linear systems**: a system $Ax = b$ asks whether $b$ is a linear combination of the columns of $A$
-• **Subspaces**: a subspace is a set closed under linear combinations — lines and planes through the origin are the simplest examples
+• **Subspaces**: a [subspace](!/linear-algebra/vector-spaces/subspaces#1) is a set closed under linear combinations — lines and planes through the origin are the simplest examples
 • **Coordinates**: writing a vector as a linear combination of basis vectors gives its coordinates in that basis
 • **Physics, optimization, machine learning**: superposition of forces, gradient updates, and linear regression all reduce to linear combinations`,
       before: ``,
@@ -815,46 +815,46 @@ Set the visualizer to length $3$ and step through to see the three phases animat
     },
     obj11: {
       title: `The Opening Scene: Two Vectors and Two Scalars`,
-      content: `The player starts with the vectors $\mathbf{u}$ and $\mathbf{v}$, the scalars $\alpha$ and $\beta$, and an empty $\mathbf{w}$ waiting to hold $\alpha\mathbf{u} + \beta\mathbf{v}$.
+      content: `The player starts with the vectors $\\mathbf{u}$ and $\\mathbf{v}$, the scalars $\\alpha$ and $\\beta$, and an empty $\\mathbf{w}$ waiting to hold $\\alpha\\mathbf{u} + \\beta\\mathbf{v}$.
 
 At the default length all three have four components. The caption states the plan before anything runs: the combination is built in three phases rather than in one pass.`,
       before: ``,
-      after: `Two preconditions apply, one from each operation involved. The scalars are unrestricted, because scaling imposes no length rule. But $\mathbf{u}$ and $\mathbf{v}$ must have the same number of components, because the final phase adds them.
+      after: `Two preconditions apply, one from each operation involved. The scalars are unrestricted, because scaling imposes no length rule. But $\\mathbf{u}$ and $\\mathbf{v}$ must have the same number of components, because the final phase adds them.
 
 This single expression is the central construction of linear algebra. Spans, linear independence, bases and dimension are all defined in terms of which vectors can or cannot be written as a linear combination of others — so the four scenes that follow are worth watching closely.`,
       link: '',
     },
     obj12: {
       title: `Phase 1: Scaling u by α`,
-      content: `The first sweep multiplies every component of $\mathbf{u}$ by $\alpha$, one slot at a time — scalar multiplication on its own, exactly as its own tool performs it.
+      content: `The first sweep multiplies every component of $\\mathbf{u}$ by $\\alpha$, one slot at a time — scalar multiplication on its own, exactly as its own tool performs it.
 
-Four steps at the default length. $\mathbf{v}$ is untouched and $\mathbf{w}$ is still empty: this phase produces the intermediate $\alpha\mathbf{u}$, not part of the answer yet.`,
+Four steps at the default length. $\\mathbf{v}$ is untouched and $\\mathbf{w}$ is still empty: this phase produces the intermediate $\\alpha\\mathbf{u}$, not part of the answer yet.`,
       before: ``,
-      after: `Geometrically this phase stretches or flips $\mathbf{u}$ without turning it. Whatever $\alpha$ is, $\alpha\mathbf{u}$ stays on the line through the origin that $\mathbf{u}$ defines.
+      after: `Geometrically this phase stretches or flips $\\mathbf{u}$ without turning it. Whatever $\\alpha$ is, $\\alpha\\mathbf{u}$ stays on the line through the origin that $\\mathbf{u}$ defines.
 
 That is why the sweep alone can never produce a genuinely new direction. Reaching anywhere off that line requires the second vector, which is precisely what the next two phases bring in.`,
       link: '',
     },
     obj13: {
       title: `Phase 2: Scaling v by β`,
-      content: `The second sweep repeats the operation on $\mathbf{v}$ with the other scalar, producing $\beta\mathbf{v}$. Another four steps, with $\mathbf{u}$ now left alone — already fully scaled from phase 1.
+      content: `The second sweep repeats the operation on $\\mathbf{v}$ with the other scalar, producing $\\beta\\mathbf{v}$. Another four steps, with $\\mathbf{u}$ now left alone — already fully scaled from phase 1.
 
-$\mathbf{w}$ remains empty. Both inputs have been scaled; nothing has been combined.`,
+$\\mathbf{w}$ remains empty. Both inputs have been scaled; nothing has been combined.`,
       before: ``,
-      after: `The two scalars are independent, and sweeping them over all real numbers is what generates the **span** of $\mathbf{u}$ and $\mathbf{v}$ — every vector reachable from the pair.
+      after: `The two scalars are independent, and sweeping them over all real numbers is what generates the **span** of $\\mathbf{u}$ and $\\mathbf{v}$ — every vector reachable from the pair.
 
-How large that span is depends entirely on the two vectors. If $\mathbf{v}$ happens to be a multiple of $\mathbf{u}$, both lie on one line and every combination stays on it, however the scalars are chosen. If they point in genuinely different directions, the combinations fill a whole plane. That distinction is **linear independence**, and it is a statement about the vectors, not about the scalars.`,
+How large that span is depends entirely on the two vectors. If $\\mathbf{v}$ happens to be a multiple of $\\mathbf{u}$, both lie on one line and every combination stays on it, however the scalars are chosen. If they point in genuinely different directions, the combinations fill a whole plane. That distinction is **linear independence**, and it is a statement about the vectors, not about the scalars.`,
       link: '',
     },
     obj14: {
       title: `Phase 3: Adding the Two Scaled Vectors`,
-      content: `The third sweep fills $\mathbf{w}$, adding the two intermediates component by component: $w_j = \alpha u_j + \beta v_j$.
+      content: `The third sweep fills $\\mathbf{w}$, adding the two intermediates component by component: $w_j = \\alpha u_j + \\beta v_j$.
 
 This phase is ordinary vector addition, and it is where the same-length requirement is actually consumed. Four more steps, and the combination is complete.`,
       before: ``,
-      after: `Read across the phases and the definition assembles itself: scale, scale, add. Adding more terms changes nothing structurally — $\alpha\mathbf{u} + \beta\mathbf{v} + \gamma\mathbf{x}$ is one more scaling phase and one more addition.
+      after: `Read across the phases and the definition assembles itself: scale, scale, add. Adding more terms changes nothing structurally — $\\alpha\\mathbf{u} + \\beta\\mathbf{v} + \\gamma\\mathbf{x}$ is one more scaling phase and one more addition.
 
-Geometrically the final phase is the parallelogram rule applied to the two scaled arrows rather than the originals. That is the picture behind the whole construction: pick how far to travel along each direction, then follow one after the other. Choosing coordinates for a vector in a given basis is exactly the reverse question — which $\alpha$ and $\beta$ land you on a particular $\mathbf{w}$.`,
+Geometrically the final phase is the parallelogram rule applied to the two scaled arrows rather than the originals. That is the picture behind the whole construction: pick how far to travel along each direction, then follow one after the other. Choosing coordinates for a vector in a given basis is exactly the reverse question — which $\\alpha$ and $\\beta$ land you on a particular $\\mathbf{w}$.`,
       link: '',
     },
     obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }

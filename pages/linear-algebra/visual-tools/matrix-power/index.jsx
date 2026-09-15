@@ -35,7 +35,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Matrix power** — $A^n = A \\cdot A \\cdots A$, the product of $n$ copies of a [square matrix](!/linear-algebra/matrix/types#1) $A$.
+      content: `[Matrix power](!/linear-algebra/formulas#matrix_power) — $A^n = A \\cdot A \\cdots A$, the product of $n$ copies of a [square matrix](!/linear-algebra/definitions#square_matrix) $A$.
 
 **Square requirement** — only a square matrix can be multiplied by itself; an $m \\times n$ matrix with $m \\neq n$ has no powers.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Diagonalization shortcut** — if $A = PDP^{-1}$ then $A^n = PD^nP^{-1}$, and only the diagonal entries are raised to the power.
 
-**Nilpotent and idempotent** — matrices with $A^k = 0$ for some $k$, or with $A^2 = A$; two cases where the powers stop changing.`,
+[Nilpotent and idempotent](!/linear-algebra/matrix/types#8) — matrices with $A^k = 0$ for some $k$, or with $A^2 = A$; two cases where the powers stop changing.`,
       before: ``,
       after: ``,
       link: '',
@@ -115,11 +115,11 @@ The term count is $s^{n-1}$ for an $s \\times s$ matrix, one term for every chai
     },
     obj5: {
       title: `What a Matrix Power Is`,
-      content: `For a square matrix $A$ and a positive integer $n$,
+      content: `For a [square matrix](!/linear-algebra/matrix/types#1) $A$ and a positive integer $n$,
 
 $$A^n = \\underbrace{A \\cdot A \\cdots A}_{n \\text{ factors}}, \\qquad A^0 = I$$
 
-Because matrix multiplication is associative, the product does not depend on how the factors are grouped, and the familiar exponent rules follow: $A^m A^n = A^{m+n}$ and $(A^m)^n = A^{mn}$. What does not follow is anything involving two different matrices: $(AB)^n$ is not $A^n B^n$ unless $A$ and $B$ commute.
+Because [matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) is associative, the product does not depend on how the factors are grouped, and the familiar exponent rules follow: $A^m A^n = A^{m+n}$ and $(A^m)^n = A^{mn}$. What does not follow is anything involving two different matrices: $(AB)^n$ is not $A^n B^n$ unless $A$ and $B$ commute.
 
 Entry by entry, the power is a sum over chains of indices. Applying the row-times-column rule $n - 1$ times gives
 

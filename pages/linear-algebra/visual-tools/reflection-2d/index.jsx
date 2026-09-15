@@ -36,7 +36,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Reflection across a line** &mdash; the linear map sending each [vector](!/linear-algebra/vectors#1) $\\mathbf{v}$ to its mirror image on the other side of the line, the same distance away.
+      content: `**Reflection across a line** &mdash; the linear map sending each [vector](!/linear-algebra/definitions#vector) $\\mathbf{v}$ to its mirror image on the other side of the line, the same distance away.
 
 **Reflection matrix** &mdash; for the mirror at angle $\\theta$, $R = \\begin{pmatrix} \\cos 2\\theta & \\sin 2\\theta \\\\ \\sin 2\\theta & -\\cos 2\\theta \\end{pmatrix}$, equivalently $R = 2P - I$ with $P$ the projection onto the same line.
 
@@ -57,7 +57,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started`,
-      content: `The canvas shows a mirror line through the origin in blue, a draggable vector $\\mathbf{v}$ in orange, its reflection $R\\mathbf{v}$ in cyan, a dashed perpendicular joining the two with a right-angle mark where it crosses the mirror, and a purple dot at the midpoint, labelled $P\\mathbf{v}$.
+      content: `The canvas shows a mirror line through the origin in blue, a draggable [vector](!/linear-algebra/vectors#1) $\\mathbf{v}$ in orange, its reflection $R\\mathbf{v}$ in cyan, a dashed perpendicular joining the two with a right-angle mark where it crosses the mirror, and a purple dot at the midpoint, labelled $P\\mathbf{v}$.
 
 Try this sequence to build intuition:
 

@@ -41,7 +41,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Transpose** — the operation that turns an $m \\times n$ [matrix](!/linear-algebra/matrix#1) $A$ into an $n \\times m$ matrix $A^T$ by swapping rows and columns: $(A^T)_{i,j} = a_{j,i}$.
+      content: `[Transpose](!/linear-algebra/matrix/operations#8) — the operation that turns an $m \\times n$ [matrix](!/linear-algebra/definitions#matrix) $A$ into an $n \\times m$ matrix $A^T$ by swapping rows and columns: $(A^T)_{i,j} = a_{j,i}$.
 
 **Main diagonal** — the entries $a_{i,i}$ where row index equals column index. Defined fully only for square matrices.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Diagonal reflection** — the geometric view of transposition as a mirror across the main diagonal of $A$. For non-square $A$, this becomes an abstract reflection axis.
 
-**Symmetric matrix** — a [square matrix](!/linear-algebra/matrix/types#1) that equals its own transpose: $A = A^T$. Equivalently, $a_{i,j} = a_{j,i}$ for all $i, j$.
+[Symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) — a [square matrix](!/linear-algebra/definitions#square_matrix) that equals its own transpose: $A = A^T$. Equivalently, $a_{i,j} = a_{j,i}$ for all $i, j$.
 
 **Involution** — an operation that undoes itself. Transpose is involutive: $(A^T)^T = A$.`,
       before: ``,
@@ -103,7 +103,7 @@ In the diagonal reflection method, no arrows appear. Instead, a dashed diagonal 
       title: `Square vs Rectangular Matrices`,
       content: `The diagonal reflection method behaves differently for square and non-square $A$, and the visualizer makes this explicit.
 
-• For a **square** matrix ($m = n$), the main diagonal is a real geometric line. Reflection across it swaps $a_{i,j}$ with $a_{j,i}$ and fixes the diagonal entries in place
+• For a **square** [matrix](!/linear-algebra/matrix#1) ($m = n$), the main diagonal is a real geometric line. Reflection across it swaps $a_{i,j}$ with $a_{j,i}$ and fixes the diagonal entries in place
 • For a **rectangular** matrix ($m \\neq n$), a strict main diagonal only extends through the $\\min(m,n) \\times \\min(m,n)$ subregion. The visualizer draws a **diagonal-like** reflection axis through that subregion and explains that the swap rule still applies to every cell, including those in the overhang
 
 Try a $3 \\times 4$ matrix with the diagonal reflection method to see the abstract axis, then switch to $3 \\times 3$ to see the true diagonal.`,
@@ -150,7 +150,7 @@ A matrix is **symmetric** if $A = A^T$, meaning $a_{i,j} = a_{j,i}$ for all $i, 
 
 A matrix is **skew-symmetric** (or antisymmetric) if $A^T = -A$, meaning $a_{i,j} = -a_{j,i}$. Skew-symmetric matrices have zeros on the main diagonal, since $a_{i,i} = -a_{i,i}$ forces $a_{i,i} = 0$.
 
-Every square matrix decomposes uniquely into a symmetric and skew-symmetric part: $A = \\frac{1}{2}(A + A^T) + \\frac{1}{2}(A - A^T)$.`,
+Every [square matrix](!/linear-algebra/matrix/types#1) decomposes uniquely into a symmetric and skew-symmetric part: $A = \\frac{1}{2}(A + A^T) + \\frac{1}{2}(A - A^T)$.`,
       before: ``,
       after: ``,
       link: '',
@@ -210,11 +210,11 @@ Set the visualizer to a $2 \\times 3$ shape and try each method to see this tran
       title: `Cell-by-Cell: the Definition, One Entry at a Time`,
       content: `The first strategy is the definition made literal. It sweeps $A$ in row-major order and, at each step, places the single entry $a_{i,j}$ into position $[j, i]$ of $A^T$.
 
-At the default size that is $3 \times 4 = 12$ steps, one per entry. The frozen picture below is step 6: five entries have already landed in $A^T$, one is in flight, and the remaining cells of $A^T$ are still empty placeholders.`,
+At the default size that is $3 \\times 4 = 12$ steps, one per entry. The frozen picture below is step 6: five entries have already landed in $A^T$, one is in flight, and the remaining cells of $A^T$ are still empty placeholders.`,
       before: ``,
-      after: `The index swap is the whole operation. Everything else the transpose does — the shape change, the symmetry test, the reversal in $(AB)^T = B^T A^T$ — follows from $a_{i,j} \mapsto a_{j,i}$ and nothing more.
+      after: `The index swap is the whole operation. Everything else the transpose does — the shape change, the symmetry test, the reversal in $(AB)^T = B^T A^T$ — follows from $a_{i,j} \\mapsto a_{j,i}$ and nothing more.
 
-Watch the shape while it fills. $A$ is $3 \times 4$ and $A^T$ is $4 \times 3$: the entry at row 2, column 4 of $A$ has nowhere to go in a $3 \times 4$ target, which is why the destination has to be a different shape rather than the same grid rearranged.
+Watch the shape while it fills. $A$ is $3 \\times 4$ and $A^T$ is $4 \\times 3$: the entry at row 2, column 4 of $A$ has nowhere to go in a $3 \\times 4$ target, which is why the destination has to be a different shape rather than the same grid rearranged.
 
 This method is the slowest of the four and the one worth running first, because the other three are shortcuts that assume you already believe this one.`,
       link: '',
@@ -225,7 +225,7 @@ This method is the slowest of the four and the one worth running first, because 
 
 That is $3$ steps at the default size instead of $12$ — one per row of $A$. The still below is step 2, with the first row already standing as a column and the second in progress.`,
       before: ``,
-      after: `The step count is the useful observation. Cell-by-cell needs $m \times n$ moves; this needs $m$. Both perform the same relabelling, but grouping the work by row makes the structure visible: a transpose is not twelve unrelated moves, it is three rows being re-oriented.
+      after: `The step count is the useful observation. Cell-by-cell needs $m \\times n$ moves; this needs $m$. Both perform the same relabelling, but grouping the work by row makes the structure visible: a transpose is not twelve unrelated moves, it is three rows being re-oriented.
 
 This is also the reading that makes $A^T$ easy to write out by hand. Take the rows of $A$ in order, write each one down a column, and stop — no index arithmetic required.`,
       link: '',
@@ -236,9 +236,9 @@ This is also the reading that makes $A^T$ easy to write out by hand. Take the ro
 
 At the default size that is $4$ steps, one per column of $A$. The still is step 2 of 4.`,
       before: ``,
-      after: `Row-as-column and column-as-row produce identical results, and the difference in step count — $3$ against $4$ — is purely a matter of which dimension you group by. On a $3 \times 4$ matrix, grouping by rows takes three moves and grouping by columns takes four; on a square matrix the two counts coincide.
+      after: `Row-as-column and column-as-row produce identical results, and the difference in step count — $3$ against $4$ — is purely a matter of which dimension you group by. On a $3 \\times 4$ matrix, grouping by rows takes three moves and grouping by columns takes four; on a square matrix the two counts coincide.
 
-Holding both readings at once is what makes the transpose easy to think about: rows of $A$ *are* columns of $A^T$, and columns of $A$ *are* rows of $A^T$. Those are two descriptions of one fact, not two separate rules to remember.`,
+Holding both readings at once is what makes the transpose easy to think about: rows of $A$ **are** columns of $A^T$, and columns of $A$ **are** rows of $A^T$. Those are two descriptions of one fact, not two separate rules to remember.`,
       link: '',
     },
     obj14: {
@@ -247,7 +247,7 @@ Holding both readings at once is what makes the transpose easy to think about: r
 
 The colouring carries the argument: cells on the diagonal are marked separately from those above it and those below it. Reflecting swaps the above-group with the below-group and leaves the diagonal fixed.`,
       before: ``,
-      after: `Two consequences fall straight out of that picture. First, $(A^T)^T = A$ — reflect twice about the same axis and every entry returns home. Second, the diagonal entries never move, which is why $\operatorname{tr}(A^T) = \operatorname{tr}(A)$ and why a symmetric matrix — one satisfying $A = A^T$ — is exactly a matrix whose above-diagonal half mirrors its below-diagonal half. The [symmetric and skew-symmetric](!#symmetric-and-skew-symmetric) section develops that.
+      after: `Two consequences fall straight out of that picture. First, $(A^T)^T = A$ — reflect twice about the same axis and every entry returns home. Second, the diagonal entries never move, which is why $\\operatorname{tr}(A^T) = \\operatorname{tr}(A)$ and why a symmetric matrix — one satisfying $A = A^T$ — is exactly a matrix whose above-diagonal half mirrors its below-diagonal half. The [symmetric and skew-symmetric](!#symmetric-and-skew-symmetric) section develops that.
 
 For a rectangular $A$ the axis is an abstraction rather than a line you could draw through the grid, since the source and target have different shapes. The tool labels it as such. The index swap still holds; only the tidy geometric picture needs the matrix to be square.`,
       link: '',

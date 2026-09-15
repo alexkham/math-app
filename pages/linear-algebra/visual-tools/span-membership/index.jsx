@@ -35,28 +35,28 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Span** — the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k$; the smallest [subspace](!/linear-algebra/vector-spaces/subspaces#1) containing the [vectors](!/linear-algebra/vectors#1).
+      content: `[Span](!/linear-algebra/definitions#span) — the set of all [linear combinations](!/linear-algebra/definitions#linear_combination) $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k$; the smallest [subspace](!/linear-algebra/definitions#subspace) containing the [vectors](!/linear-algebra/definitions#vector).
 
 **Membership** — $\\mathbf{w} \\in \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ exactly when $V\\mathbf{c} = \\mathbf{w}$ has a solution, where $V$ has the $\\mathbf{v}_i$ as columns.
 
-**Coordinates** — the solution $\\mathbf{c}$; unique when the $\\mathbf{v}_i$ are independent, in which case $\\mathbf{c}$ is the [coordinate vector](!/linear-algebra/vector-spaces#4) of $\\mathbf{w}$ in the basis $\\{\\mathbf{v}_i\\}$.
+[Coordinates](!/linear-algebra/vector-spaces#4) — the solution $\\mathbf{c}$; unique when the $\\mathbf{v}_i$ are independent, in which case $\\mathbf{c}$ is the [coordinate vector](!/linear-algebra/formulas#coordinate_vector) of $\\mathbf{w}$ in the basis $\\{\\mathbf{v}_i\\}$.
 
-**Dimension of the span** — the rank of $V$; the number of [pivot](!/linear-algebra/linear-systems/echelon-form#4) columns.
+**Dimension of the span** — the rank of $V$; the number of [pivot](!/linear-algebra/definitions#pivot) columns.
 
-**Linear independence** — rank equal to $k$; no vector is a combination of the others.
+[Linear independence](!/linear-algebra/definitions#linear_independence) — rank equal to $k$; no vector is a combination of the others.
 
 **Dependency** — a relation $\\mathbf{v}_f = \\sum c_i\\mathbf{v}_i$ read from a free column of the reduced form.
 
 **Basis of the span** — the pivot vectors; the dependent ones can be dropped without shrinking the span.
 
-**Augmented matrix** — $[V \\mid \\mathbf{w}]$, whose reduction decides consistency.`,
+[Augmented matrix](!/linear-algebra/definitions#augmented_matrix) — $[V \\mid \\mathbf{w}]$, whose reduction decides consistency.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Enter spanning vectors and a test vector, then watch two row reductions answer three questions.
+      content: `Enter spanning [vectors](!/linear-algebra/vectors#1) and a test vector, then watch two row reductions answer three questions.
 
 • Use the **Preset** pills for seven problems: a vector in a plane, a vector off that plane, a vector on a line, a dependent spanning set, a basis of $\\mathbb{R}^3$, a plane in $\\mathbb{R}^4$, and the zero vector
 • Use the **space** stepper for $\\mathbb{R}^2$ to $\\mathbb{R}^4$ and the **vectors** stepper for one to four spanning vectors; **Shuffle** gives random vectors with $\\mathbf{w}$ usually in the span
@@ -75,7 +75,7 @@ The three questions are: how big is the span, is $\\mathbf{w}$ in it, and if so 
 
 • **Setup** — the vectors as the columns of $V$ and the test vector $\\mathbf{w}$; the question $V\\mathbf{c} = \\mathbf{w}$
 • **Rank** — $V$ row reduced; the rank is the dimension of the span, and each free column gives a dependency $\\mathbf{v}_f = \\sum c_i\\mathbf{v}_i$ read from the reduced form
-• **Membership** — $[V \\mid \\mathbf{w}]$ row reduced; a pivot in the last column means $\\mathbf{w}$ is not in the span, and the rank of the enlarged set has gone up by one
+• **Membership** — $[V \\mid \\mathbf{w}]$ row reduced; a [pivot](!/linear-algebra/linear-systems/echelon-form#4) in the last column means $\\mathbf{w}$ is not in the span, and the rank of the enlarged set has gone up by one
 • **Not in the span** — the run stops with the enlarged rank and a pointer to the projection
 • **Coordinates** — the coefficients read from the reduced form, free ones set to zero, checked by multiplying $V\\mathbf{c}$; the dependency vectors are listed when the coordinates are not unique
 • **Done** — the summary: dimension, basis, membership and coordinates`,
@@ -122,7 +122,7 @@ $$\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} = \\{c_1\\math
 
 It is a subspace, a line, a plane, or more, through the origin, and it is the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of the [matrix](!/linear-algebra/matrix#1) $V$ whose columns are the $\\mathbf{v}_i$, because $V\\mathbf{c}$ is exactly the combination with coefficients $\\mathbf{c}$.
 
-That identification turns every question about the span into a question about a linear system. A vector $\\mathbf{w}$ is in the span if and only if $V\\mathbf{c} = \\mathbf{w}$ has a solution, which row reduction of $[V \\mid \\mathbf{w}]$ decides: consistent means in, a pivot in the last column means out. When it is in, the solution $\\mathbf{c}$ lists the coefficients, and if the $\\mathbf{v}_i$ are independent there is exactly one such $\\mathbf{c}$, the coordinate vector of $\\mathbf{w}$ relative to the basis $\\{\\mathbf{v}_i\\}$.
+That identification turns every question about the span into a question about a linear system. A vector $\\mathbf{w}$ is in the span if and only if $V\\mathbf{c} = \\mathbf{w}$ has a solution, which row reduction of $[V \\mid \\mathbf{w}]$ decides: consistent means in, a pivot in the last column means out. When it is in, the solution $\\mathbf{c}$ lists the coefficients, and if the $\\mathbf{v}_i$ are independent there is exactly one such $\\mathbf{c}$, the [coordinate vector](!/linear-algebra/vector-spaces#4) of $\\mathbf{w}$ relative to the basis $\\{\\mathbf{v}_i\\}$.
 
 The size of the span is the rank of $V$. If the rank is $k$, the vectors are independent and form a basis of their span. If the rank is less, some columns are free, and the reduced form shows each free vector as a combination of the pivot vectors; those pivot vectors alone are a basis, and the coordinates of any $\\mathbf{w}$ are unique only after the dependent vectors are dropped.
 
@@ -158,7 +158,7 @@ The whole subject of bases, dimension and coordinates is contained in this one c
 • **Signal representation**: whether a signal can be built from a dictionary of basis functions, and with what coefficients
 • **Dimension counting**: the rank test tells how many of a set of measurements, features or constraints are genuinely different
 • **Geometry**: a point lies on a plane through the origin exactly when its position vector is in the plane's span
-• **Foundations**: the definitions of basis, dimension, subspace and linear map all rest on span and independence`,
+• **Foundations**: the definitions of basis, dimension, [subspace](!/linear-algebra/vector-spaces/subspaces#1) and linear map all rest on span and independence`,
       before: ``,
       after: ``,
       link: '',

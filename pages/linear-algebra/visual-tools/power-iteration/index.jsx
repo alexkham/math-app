@@ -41,7 +41,7 @@ export async function getStaticProps(){
 
 **Scale factor** — the number $s_k$ divided out at each step; here the entry of $A\\mathbf{x}_k$ with the largest magnitude, which tends to $\\lambda_1$.
 
-**Normalization** — rescaling so the largest entry is $1$, keeping the numbers from overflowing or vanishing.
+[Normalization](!/linear-algebra/orthogonality/gram-schmidt#4) — rescaling so the largest entry is $1$, keeping the numbers from overflowing or vanishing.
 
 **Convergence ratio** — $|\\lambda_2 / \\lambda_1|$, the factor by which the error shrinks per step.
 

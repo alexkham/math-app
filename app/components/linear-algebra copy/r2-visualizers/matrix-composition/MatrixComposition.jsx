@@ -1430,7 +1430,7 @@ export default function MatrixComposition({
                   <section className="mc-canvas-col">
                     {slotCanvas}
                     <div className="mc-readouts-3">
-                      <CanvasReadout kind="v-r" label="v\u2080" value={Math2D.fmtPair(state.v)} stageTag="start" />
+                      <CanvasReadout kind="v-r" label={'v\u2080'} value={Math2D.fmtPair(state.v)} stageTag="start" />
                       <CanvasReadout kind="bv-r" label={milestoneLabel} value={Math2D.fmtPair(vMid)} stageTag={'after ' + firstLabel} altMode={state.mode === 'BA'} />
                       <CanvasReadout kind="abv-r" label={endLabel} value={Math2D.fmtPair(vEnd)} stageTag={'after ' + secondLabel + firstLabel} />
                     </div>

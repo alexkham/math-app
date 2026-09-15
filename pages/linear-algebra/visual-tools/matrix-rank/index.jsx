@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Rank** — the number of linearly independent rows of a [matrix](!/linear-algebra/matrix#1), which always equals the number of linearly independent columns. Written $\\operatorname{rank} A$.
+      content: `[Rank](!/linear-algebra/definitions#rank) — the number of linearly independent rows of a [matrix](!/linear-algebra/definitions#matrix), which always equals the number of linearly independent columns. Written $\\operatorname{rank} A$.
 
-**Pivot** — the first non-zero entry of a row in echelon form. The rank is the number of [pivots](!/linear-algebra/linear-systems/echelon-form#4).
+[Pivot](!/linear-algebra/linear-systems/echelon-form#4) — the first non-zero entry of a row in echelon form. The rank is the number of [pivots](!/linear-algebra/definitions#pivot).
 
-**Pivot column** — a column of $A$ containing a pivot after reduction; the pivot columns of $A$ form a basis of its [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2).
+[Pivot column](!/linear-algebra/linear-systems/echelon-form#4) — a column of $A$ containing a pivot after reduction; the pivot columns of $A$ form a basis of its [column space](!/linear-algebra/definitions#column_space).
 
-**Free column** — a column with no pivot; it is a [linear combination](!/linear-algebra/vectors/linear-combinations#1) of the pivot columns to its left.
+**Free column** — a column with no pivot; it is a [linear combination](!/linear-algebra/definitions#linear_combination) of the pivot columns to its left.
 
-**Row echelon form** — a matrix in which each pivot lies strictly to the right of the pivot in the row above, and zero rows sit at the bottom.
+[Row echelon form](!/linear-algebra/definitions#row_echelon_form) — a matrix in which each pivot lies strictly to the right of the pivot in the row above, and zero rows sit at the bottom.
 
 **Row operations** — swapping two rows, scaling a row, and adding a multiple of one row to another. None of them changes the rank.
 
-**Nullity** — the [dimension](!/linear-algebra/vector-spaces/dimension#1) of the null space, equal to the number of free columns: $n - \\operatorname{rank} A$.
+**Nullity** — the [dimension](!/linear-algebra/definitions#dimension) of the null space, equal to the number of free columns: $n - \\operatorname{rank} A$.
 
-**Rank-nullity theorem** — $\\operatorname{rank} A + \\operatorname{nullity} A = n$, the number of columns.
+[Rank-nullity theorem](!/linear-algebra/matrix/rank#6) — $\\operatorname{rank} A + \\operatorname{nullity} A = n$, the number of columns.
 
 **Full rank** — $\\operatorname{rank} A = \\min(m, n)$, the largest value an $m \\times n$ matrix can have.`,
       before: ``,
@@ -58,7 +58,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix, then watch it reduce to echelon form one row operation at a time until the pivots can be counted.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1), then watch it reduce to echelon form one row operation at a time until the [pivots](!/linear-algebra/linear-systems/echelon-form#4) can be counted.
 
 • Use the **Preset** pills for six matrices chosen to show different outcomes: rank-deficient, full rank, rank 1, wide, tall, and zero
 • Use the **Size** steppers to set rows and columns independently (1 to 5 each); resizing keeps the existing entries and pads with zeros
@@ -120,7 +120,7 @@ Editing entries by hand is the best way to see how fragile rank is: change one e
     },
     obj5: {
       title: `What Rank Is`,
-      content: `The rank of an $m \\times n$ matrix $A$ is the dimension of its column space, the number of linearly independent columns. A fundamental theorem says this equals the dimension of the [row space](!/linear-algebra/vector-spaces/fundamental-spaces#3), the number of linearly independent rows, so rank can be found from either side.
+      content: `The rank of an $m \\times n$ matrix $A$ is the [dimension](!/linear-algebra/vector-spaces/dimension#1) of its [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2), the number of linearly independent columns. A fundamental theorem says this equals the dimension of the [row space](!/linear-algebra/vector-spaces/fundamental-spaces#3), the number of linearly independent rows, so rank can be found from either side.
 
 Row reduction finds it. Row operations replace the rows of $A$ by combinations of the same rows, so the row space never changes, and neither does the rank. In echelon form the non-zero rows are visibly independent, one per pivot, so
 

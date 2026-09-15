@@ -542,17 +542,17 @@ export async function getStaticProps() {
 
     obj0: {
       title: `Key Terms`,
-      content: `**Matrix multiplication** — the product $C = AB$ of an $m \\times n$ matrix $A$ and an $n \\times p$ matrix $B$: an $m \\times p$ matrix with entries $c_{i,j} = \\sum_{k=1}^{n} a_{i,k}\\, b_{k,j}$.
+      content: `[Matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) — the product $C = AB$ of an $m \\times n$ matrix $A$ and an $n \\times p$ matrix $B$: an $m \\times p$ matrix with entries $c_{i,j} = \\sum_{k=1}^{n} a_{i,k}\\, b_{k,j}$.
 
 **Inner dimensions** — the number of columns of the left factor and the number of rows of the right factor. They must be equal, or the product is undefined.
 
 **Outer dimensions** — the number of rows of the left factor and the number of columns of the right factor. They are the shape of the product.
 
-**Dot product** — the sum of paired products of a row and a column of the same length. Every entry of $C$ is one [dot product](!/linear-algebra/vectors/dot-product#1).
+[Dot product](!/linear-algebra/vectors/dot-product#1) — the sum of paired products of a row and a column of the same length. Every entry of $C$ is one [dot product](!/linear-algebra/definitions#dot_product).
 
-**Linear combination** — a weighted sum of [vectors](!/linear-algebra/vectors#1). Each column of $C$ is a [linear combination](!/linear-algebra/vectors/linear-combinations#1) of the columns of $A$, and each row of $C$ is a linear combination of the rows of $B$.
+[Linear combination](!/linear-algebra/vectors/linear-combinations#1) — a weighted sum of [vectors](!/linear-algebra/definitions#vector). Each column of $C$ is a [linear combination](!/linear-algebra/definitions#linear_combination) of the columns of $A$, and each row of $C$ is a linear combination of the rows of $B$.
 
-**Outer product** — a column times a row: an $m \\times p$ matrix of [rank](!/linear-algebra/matrix/rank#1) at most one. The product $AB$ is the sum of $n$ of them.
+[Outer product](!/linear-algebra/decompositions/spectral#3) — a column times a row: an $m \\times p$ matrix of [rank](!/linear-algebra/definitions#rank) at most one. The product $AB$ is the sum of $n$ of them.
 
 **Non-commutative** — $AB \\neq BA$ in general. The two products can differ in value, differ in shape, or one of them may not exist at all.`,
       before: ``,
@@ -649,10 +649,10 @@ Whether a given order exists is decided by the [compatibility rule](!#the-compat
       title: `The Four Strategies`,
       content: `The **Strategy** tab offers four ways to build the same product. Each is a valid definition on its own, and each brings a different structure to the front.
 
-• [Row · column](!#row-column) — one cell of $C$ at a time, each a dot product. The textbook definition, and the slowest: $m \\times p$ cells with $n$ terms each
+• [Row · column](!#row-column) — one cell of $C$ at a time, each a [dot product](!/linear-algebra/vectors/dot-product#1). The textbook definition, and the slowest: $m \\times p$ cells with $n$ terms each
 • [Column by column](!#column-by-column) — one column of $C$ at a time, each a weighted sum of the columns of $A$. $p$ columns, $n$ terms each
 • [Row by row](!#row-by-row) — one row of $C$ at a time, each a weighted sum of the rows of $B$. $m$ rows, $n$ terms each
-• [Sum of outer products](!#sum-of-outer-products) — all of $C$ at once, accumulated from $n$ rank-one matrices. Marked **advanced** because it is the least familiar
+• [Sum of outer products](!#sum-of-outer-products) — all of $C$ at once, accumulated from $n$ [rank](!/linear-algebra/matrix/rank#1)-one matrices. Marked **advanced** because it is the least familiar
 
 The step counter changes with the strategy. At the defaults the row · column strategy takes $22$ scenes, column by column and row by row take $12$, and the sum of outer products takes $11$. The result is identical every time.`,
       before: ``,

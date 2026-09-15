@@ -36,9 +36,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Linear combination** &mdash; any vector of the form $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for [scalars](!/linear-algebra/vectors#1) $c, d$.
+      content: `**Linear combination** &mdash; any vector of the form $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for [scalars](!/linear-algebra/definitions#scalar) $c, d$.
 
-**Span** &mdash; the set of all [linear combinations](!/linear-algebra/vectors/linear-combinations#1) of a collection of [vectors](!/linear-algebra/vectors#1). For two vectors in the plane it is either the whole plane, a line through the origin, or just the origin.
+**Span** &mdash; the set of all [linear combinations](!/linear-algebra/definitions#linear_combination) of a collection of [vectors](!/linear-algebra/definitions#vector). For two vectors in the plane it is either the whole plane, a line through the origin, or just the origin.
 
 **Linearly independent** &mdash; neither vector is a scalar multiple of the other; equivalently, the only way to write $c\\,\\mathbf{a} + d\\,\\mathbf{b} = \\mathbf{0}$ is $c = d = 0$.
 
@@ -55,7 +55,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started`,
-      content: `The canvas shows two draggable vectors, $\\mathbf{a}$ in orange and $\\mathbf{b}$ in cyan, the parallelogram they span, and a lattice of dots at the combinations $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for small integer $c$ and $d$. A label in the corner reports whether the span is the plane, a line, or just the origin.
+      content: `The canvas shows two draggable [vectors](!/linear-algebra/vectors#1), $\\mathbf{a}$ in orange and $\\mathbf{b}$ in cyan, the parallelogram they span, and a lattice of dots at the combinations $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for small integer $c$ and $d$. A label in the corner reports whether the span is the plane, a line, or just the origin.
 
 Try this sequence to build intuition:
 
@@ -141,7 +141,7 @@ The four sections that follow take one representative from each situation and fr
     },
     obj7: {
       title: `What Span Is`,
-      content: `The span of $\\mathbf{a}$ and $\\mathbf{b}$ is the set of every vector that can be built from them by scaling and adding:
+      content: `The [span](!/linear-algebra/formulas#span) of $\\mathbf{a}$ and $\\mathbf{b}$ is the set of every vector that can be built from them by scaling and adding:
 
 $$\\operatorname{span}\\{\\mathbf{a}, \\mathbf{b}\\} = \\{\\, c\\,\\mathbf{a} + d\\,\\mathbf{b} : c, d \\in \\mathbb{R} \\,\\}$$
 

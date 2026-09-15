@@ -527,11 +527,11 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Kernel (Null Space)** &mdash; The set of all [vectors](!/linear-algebra/vectors#1) $v$ in the domain such that $Av = 0$. The directions the [matrix](!/linear-algebra/matrix#1) collapses to the origin.
+      content:`**Kernel (Null Space)** &mdash; The set of all [vectors](!/linear-algebra/definitions#vector) $v$ in the domain such that $Av = 0$. The directions the [matrix](!/linear-algebra/definitions#matrix) collapses to the origin.
 
-**Image (Column Space)** &mdash; The set of all outputs $Av$ as $v$ ranges over the domain. The reachable region in the codomain, equal to the [span](!/linear-algebra/vector-spaces/span#1) of the columns of $A$.
+**Image (Column Space)** &mdash; The set of all outputs $Av$ as $v$ ranges over the domain. The reachable region in the codomain, equal to the [span](!/linear-algebra/definitions#span) of the columns of $A$.
 
-**Rank** &mdash; The [dimension](!/linear-algebra/vector-spaces/dimension#1) of the image. For a $2 \\times 2$ matrix, [rank](!/linear-algebra/matrix/rank#1) is 0, 1, or 2.
+**Rank** &mdash; The [dimension](!/linear-algebra/definitions#dimension) of the image. For a $2 \\times 2$ matrix, [rank](!/linear-algebra/definitions#rank) is 0, 1, or 2.
 
 **Nullity** &mdash; The dimension of the kernel. For a $2 \\times 2$ matrix, nullity is 0, 1, or 2.
 
@@ -544,11 +544,11 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Getting Started &mdash; Dual Canvas Layout`,
-      content:`The visualizer has two side-by-side canvases. The left is the domain (input space); the right is the codomain (output space). The matrix $A$ lives between them in the center column.
+      content:`The visualizer has two side-by-side canvases. The left is the domain (input space); the right is the codomain (output space). The [matrix](!/linear-algebra/matrix#1) $A$ lives between them in the center column.
 
 &bull; **Left canvas** &mdash; drag the orange handle to place vector $v$. A red dashed line marks the kernel of $A$.
 &bull; **Right canvas** &mdash; shows $Av$ in cyan. A green line marks the image of $A$.
-&bull; **Center** &mdash; the four-cell matrix $A$, an explanation of the current preset, a properties card with rank and [determinant](!/linear-algebra/determinants#1), and a sweep playback panel.
+&bull; **Center** &mdash; the four-cell matrix $A$, an explanation of the current preset, a properties card with [rank](!/linear-algebra/matrix/rank#1) and [determinant](!/linear-algebra/determinants#1), and a sweep playback panel.
 
 The fundamental relationship: every vector you place on the left has a counterpart on the right computed by $Av$. The kernel is the set of inputs that get sent to the origin; the image is the set of all reachable outputs.`,
       before:``,
@@ -560,7 +560,7 @@ The fundamental relationship: every vector you place on the left has a counterpa
       content:`Click and drag anywhere on the left canvas to set the position of $v$. The right canvas updates instantly.
 
 &bull; **Drag $v$ onto the red dashed line** (when rank is 1) &mdash; $Av$ collapses to the origin and a red dashed ring appears in the codomain. The properties card flips "v in ker A?" to "yes &mdash; collapses".
-&bull; **Drag $v$ along the kernel line** &mdash; $Av$ stays at zero the whole way. The kernel is a whole line of vectors, not a single point.
+&bull; **Drag $v$ along the kernel line** &mdash; $Av$ stays at zero the whole way. The kernel is a whole line of [vectors](!/linear-algebra/vectors#1), not a single point.
 &bull; **Drag $v$ off the kernel** &mdash; $Av$ jumps back to the image line, scaled by how far $v$ sits from the kernel.
 
 When $A$ has rank 2, the kernel shows as a small ring around the origin labeled $\\ker A = \\{0\\}$ &mdash; only the zero vector is annihilated. When $A$ is the zero map, the kernel fills the entire canvas in concentric rings: every direction is annihilated.`,
@@ -576,7 +576,7 @@ When $A$ has rank 2, the kernel shows as a small ring around the origin labeled 
 &bull; **Rank 1** &mdash; $Av$ is confined to a single line through the origin. Drag $v$ in any direction; $Av$ slides along that one green line.
 &bull; **Rank 0** &mdash; $Av$ is permanently at the origin no matter where $v$ is. A small green disk marks $\\text{im } A = \\{0\\}$.
 
-The green image line spans the same direction as the columns of $A$. That is the geometric meaning of "column space": stack the columns side by side, and they span the image.`,
+The green image line spans the same direction as the columns of $A$. That is the geometric meaning of "column space": stack the columns side by side, and they [span](!/linear-algebra/vector-spaces/span#1) the image.`,
       before:``,
       after:``,
       link:'',
@@ -698,7 +698,7 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
 
 **Null Space** &mdash; same as the kernel; solutions to $Av = 0$.
 
-[Rank of a Matrix](!/linear-algebra/visual-tools/matrix-rank) &mdash; the dimension of the image, equal to the number of linearly independent columns.
+[Rank of a Matrix](!/linear-algebra/visual-tools/matrix-rank) &mdash; the [dimension](!/linear-algebra/vector-spaces/dimension#1) of the image, equal to the number of linearly independent columns.
 
 [Determinant](!/linear-algebra/visual-tools/matrix-determinant) &mdash; for a $2 \\times 2$ matrix, $\\det(A) = 0$ exactly when the matrix has nontrivial kernel.
 
@@ -719,9 +719,9 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
 
 Neither highlight has anything to draw. The kernel is just the origin — no non-zero vector is sent to zero — and the image is the entire codomain plane rather than a line. Every $v$ you drag produces an $Av$ of the same length, turned but never flattened.`,
       before:``,
-      after:`This is the case where the two canvases carry the least information, and that absence is itself the lesson: kernel and image only become *visible objects* when the map loses something.
+      after:`This is the case where the two canvases carry the least information, and that absence is itself the lesson: kernel and image only become **visible objects** when the map loses something.
 
-In rank-nullity terms, $\operatorname{rank} + \operatorname{nullity} = 2$ is satisfied by $2 + 0$. The image uses both available dimensions, so the kernel gets none. That accounting is what makes the map invertible — no two vectors share an image, so $A^{-1}$ exists and can undo it.`,
+In rank-nullity terms, $\\operatorname{rank} + \\operatorname{nullity} = 2$ is satisfied by $2 + 0$. The image uses both available dimensions, so the kernel gets none. That accounting is what makes the map invertible — no two vectors share an image, so $A^{-1}$ exists and can undo it.`,
       link:'',
     },
     obj13:{
@@ -743,7 +743,7 @@ On the left the kernel is not a line but the **whole plane** — shading everyth
       before:``,
       after:`Rank-nullity still balances, at the extreme: $0 + 2 = 2$. The image has dimension 0 and the kernel dimension 2.
 
-Comparing this against the rank-1 case is the point of having it. Both are singular and both have $\det = 0$, but the projection keeps one dimension of information while the zero map keeps none. Rank distinguishes them; the determinant cannot. That is the practical argument for rank as the finer measure of what a matrix does.`,
+Comparing this against the rank-1 case is the point of having it. Both are singular and both have $\\det = 0$, but the projection keeps one dimension of information while the zero map keeps none. Rank distinguishes them; the determinant cannot. That is the practical argument for rank as the finer measure of what a matrix does.`,
       link:'',
     },
     obj15:{

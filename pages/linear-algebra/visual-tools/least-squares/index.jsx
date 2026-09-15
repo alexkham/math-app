@@ -35,30 +35,30 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Least-squares solution** — the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|$ when $A\\mathbf{x} = \\mathbf{b}$ has no exact solution.
+      content: `[Least-squares solution](!/linear-algebra/orthogonality/least-squares#3) — the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|$ when $A\\mathbf{x} = \\mathbf{b}$ has no exact solution.
 
-**Normal equations** — $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$; always consistent, uniquely solvable when the columns of $A$ are independent.
+[Normal equations](!/linear-algebra/formulas#normal_equations) — $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$; always consistent, uniquely solvable when the columns of $A$ are independent.
 
-**Projection** — $\\mathbf{p} = A\\hat{\\mathbf{x}}$, the point of the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) closest to $\\mathbf{b}$.
+[Projection](!/linear-algebra/orthogonality/projections) — $\\mathbf{p} = A\\hat{\\mathbf{x}}$, the point of the [column space](!/linear-algebra/definitions#column_space) closest to $\\mathbf{b}$.
 
-**Residual** — $\\mathbf{e} = \\mathbf{b} - \\mathbf{p}$, perpendicular to every column of $A$: $A^T\\mathbf{e} = \\mathbf{0}$.
+[Residual](!/linear-algebra/orthogonality/least-squares#3) — $\\mathbf{e} = \\mathbf{b} - \\mathbf{p}$, perpendicular to every column of $A$: $A^T\\mathbf{e} = \\mathbf{0}$.
 
-**Projection matrix** — $P = A(A^TA)^{-1}A^T$, with $P\\mathbf{b} = \\mathbf{p}$; symmetric and idempotent, $P^2 = P$.
+[Projection matrix](!/linear-algebra/orthogonality/least-squares#6) — $P = A(A^TA)^{-1}A^T$, with $P\\mathbf{b} = \\mathbf{p}$; symmetric and idempotent, $P^2 = P$.
 
-**Design matrix** — for fitting $b = C + Dt$, the [matrix](!/linear-algebra/matrix#1) with a column of ones and a column of $t$ values, one row per data point.
+**Design matrix** — for fitting $b = C + Dt$, the [matrix](!/linear-algebra/definitions#matrix) with a column of ones and a column of $t$ values, one row per data point.
 
-**Overdetermined system** — more equations than unknowns; generally inconsistent, and the setting for least squares.
+[Overdetermined system](!/linear-algebra/linear-systems/solvability#7) — more equations than unknowns; generally inconsistent, and the setting for least squares.
 
 **Sum of squared errors** — $\\|\\mathbf{e}\\|^2$, the quantity least squares minimizes.
 
-**Orthogonal decomposition** — $\\mathbf{b} = \\mathbf{p} + \\mathbf{e}$ with $\\mathbf{p} \\in C(A)$ and $\\mathbf{e} \\in N(A^T)$, so $\\|\\mathbf{b}\\|^2 = \\|\\mathbf{p}\\|^2 + \\|\\mathbf{e}\\|^2$.`,
+[Orthogonal decomposition](!/linear-algebra/formulas#orthogonal_decomposition) — $\\mathbf{b} = \\mathbf{p} + \\mathbf{e}$ with $\\mathbf{p} \\in C(A)$ and $\\mathbf{e} \\in N(A^T)$, so $\\|\\mathbf{b}\\|^2 = \\|\\mathbf{p}\\|^2 + \\|\\mathbf{e}\\|^2$.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix and a right-hand side, then watch $\\mathbf{b}$ get projected onto the column space.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) and a right-hand side, then watch $\\mathbf{b}$ get projected onto the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2).
 
 • Use the **Preset** pills for seven problems: a line through three points, a line through four, a parabola through four, projection onto a single line, projection onto a coordinate plane, a consistent system with zero residual, and a matrix with dependent columns
 • Use the two **Size** steppers for two to four equations and one to three unknowns; **Shuffle data** builds a polynomial design matrix with random data

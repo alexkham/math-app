@@ -37,27 +37,27 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Inner product** — an operation that takes two objects of the same shape, multiplies their entries pairwise, and sums the products into a single [scalar](!/linear-algebra/vectors#1).
+      content: `[Inner product](!/linear-algebra/definitions#inner_product) — an operation that takes two objects of the same shape, multiplies their entries pairwise, and sums the products into a single [scalar](!/linear-algebra/definitions#scalar).
 
-**Dot product** — the classical [inner product](!/linear-algebra/orthogonality/inner-product#8) of two [vectors](!/linear-algebra/vectors#1) of equal length: $\\langle u, v \\rangle = \\sum_k u_k v_k$.
+[Dot product](!/linear-algebra/definitions#dot_product) — the classical [inner product](!/linear-algebra/definitions#inner_product) of two [vectors](!/linear-algebra/definitions#vector) of equal length: $\\langle u, v \\rangle = \\sum_k u_k v_k$.
 
-**Frobenius inner product** — the inner product of two matrices of the same shape: $\\langle A, B \\rangle_F = \\sum_{i,j} a_{i,j} b_{i,j}$.
+[Frobenius inner product](!/linear-algebra/formulas#frobenius_inner_product) — the inner product of two matrices of the same shape: $\\langle A, B \\rangle_F = \\sum_{i,j} a_{i,j} b_{i,j}$.
 
-**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/vector-spaces/dimension#1) so every entry of one has a partner in the other.
+**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/definitions#dimension) so every entry of one has a partner in the other.
 
 **Scalar result** — the output of an inner product is always a single number, regardless of how large the operands are.
 
-**Inner product space** — a [vector space](!/linear-algebra/vector-spaces#1) equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
+**Inner product space** — a [vector space](!/linear-algebra/definitions#vector_space) equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Pick a scenario and a shape, then watch the inner product build up term by term.
+      content: `Pick a scenario and a shape, then watch the [inner product](!/linear-algebra/orthogonality/inner-product#8) build up term by term.
 
 • Use the **Scenario** pills to switch between **Vectors** $\\langle u, v \\rangle$ and **Matrices** $\\langle A, B \\rangle_F$
-• In the vectors scenario, set the shared **length** of $u$ and $v$ (2 to 10)
+• In the [vectors](!/linear-algebra/vectors#1) scenario, set the shared **length** of $u$ and $v$ (2 to 10)
 • In the matrices scenario, set the shared **dimensions** of $A$ and $B$ (2×2 to 5×5)
 • Hover the **?** icons for explanations of the inner product itself and the same-shape requirement
 • Use the scene player below to step, play, pause, change speed, and scroll the step log
@@ -69,7 +69,7 @@ The point of having one tool for both scenarios is to make the unity explicit: s
     },
     obj2: {
       title: `The Vectors Scenario`,
-      content: `In the vectors scenario, $u$ and $v$ are shown as row vectors of length $n$, and the result $\\langle u, v \\rangle$ appears as a single boxed scalar.
+      content: `In the vectors scenario, $u$ and $v$ are shown as row vectors of length $n$, and the result $\\langle u, v \\rangle$ appears as a single boxed [scalar](!/linear-algebra/vectors#1).
 
 • Each scene pairs one entry $u_k$ with $v_k$, highlighting both and drawing two arrows into the result box
 • The running sum above the canvas updates term by term — counted terms turn green, the current term is blue and bold, pending terms stay grey
@@ -116,7 +116,7 @@ This running sum is the bridge between the visual pairing (highlights and arrows
 For vectors of length $n$:
 $$\\langle u, v \\rangle = \\sum_{k=1}^{n} u_k v_k$$
 
-For $m \\times n$ matrices (the Frobenius inner product):
+For $m \\times n$ matrices (the [Frobenius inner product](!/linear-algebra/formulas#frobenius_inner_product)):
 $$\\langle A, B \\rangle_F = \\sum_{i=1}^{m} \\sum_{j=1}^{n} a_{i,j} b_{i,j}$$
 
 Both formulas implement the same idea: walk through every pair of corresponding entries, multiply them, sum the products. The Frobenius version is the dot product applied to the matrices read as $mn$-long vectors.
@@ -206,7 +206,7 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
     },
     obj11: {
       title: `The Opening Scene: Two Vectors, One Number`,
-      content: `The player starts with $\mathbf{u}$ and $\mathbf{v}$ side by side and the result slot $\langle \mathbf{u}, \mathbf{v} \rangle$ waiting empty. At the default length both vectors have four components.
+      content: `The player starts with $\\mathbf{u}$ and $\\mathbf{v}$ side by side and the result slot $\\langle \\mathbf{u}, \\mathbf{v} \\rangle$ waiting empty. At the default length both vectors have four components.
 
 The running-sum line beneath the vectors is already laid out with all four terms, greyed until each is earned. What the scene announces is the shape of the answer: two vectors go in, **one number** comes out.`,
       before: ``,
@@ -230,15 +230,15 @@ Because the products are summed rather than kept, information is lost on purpose
       title: `The Completed Inner Product`,
       content: `The final scene fills the result slot with the total, so the sum line reads
 
-$\langle \mathbf{u}, \mathbf{v} \rangle = u_1v_1 + u_2v_2 + u_3v_3 + u_4v_4$
+$\\langle \\mathbf{u}, \\mathbf{v} \\rangle = u_1v_1 + u_2v_2 + u_3v_3 + u_4v_4$
 
 a single scalar standing where four products were.`,
       before: ``,
-      after: `That number carries a great deal. Taking the inner product of a vector with itself gives $\sum u_j^2$, which is the squared length — so $\|\mathbf{u}\| = \sqrt{\langle \mathbf{u}, \mathbf{u} \rangle}$, and the whole notion of distance in $\mathbb{R}^n$ is built from this operation.
+      after: `That number carries a great deal. Taking the inner product of a vector with itself gives $\\sum u_j^2$, which is the squared length — so $\\|\\mathbf{u}\\| = \\sqrt{\\langle \\mathbf{u}, \\mathbf{u} \\rangle}$, and the whole notion of distance in $\\mathbb{R}^n$ is built from this operation.
 
-Between two different vectors it measures alignment, through $\langle \mathbf{u}, \mathbf{v} \rangle = \|\mathbf{u}\|\,\|\mathbf{v}\|\cos\theta$. The sign alone is informative: positive means the vectors lean the same way, negative means they oppose, and **zero means they are orthogonal**. That last case is the reason the inner product underpins projections, least squares and orthogonal bases.
+Between two different vectors it measures alignment, through $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\|\\mathbf{u}\\|\\,\\|\\mathbf{v}\\|\\cos\\theta$. The sign alone is informative: positive means the vectors lean the same way, negative means they oppose, and **zero means they are orthogonal**. That last case is the reason the inner product underpins projections, least squares and orthogonal bases.
 
-The operation is symmetric, $\langle \mathbf{u}, \mathbf{v} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle$, and linear in each argument — properties that follow directly from the componentwise products being summed.`,
+The operation is symmetric, $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\langle \\mathbf{v}, \\mathbf{u} \\rangle$, and linear in each argument — properties that follow directly from the componentwise products being summed.`,
       link: '',
     },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },

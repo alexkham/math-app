@@ -56,13 +56,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Determinant** — the number $\\det A$, also written $|A|$, attached to every [square matrix](!/linear-algebra/matrix/types#1); the signed factor by which $A$ scales area or volume, and zero exactly when $A$ is singular.
+      content: `[Determinant](!/linear-algebra/definitions#determinant) — the number $\\det A$, also written $|A|$, attached to every [square matrix](!/linear-algebra/definitions#square_matrix); the signed factor by which $A$ scales area or volume, and zero exactly when $A$ is singular.
 
 **Main diagonal** — the entries $a_{i,i}$ running from the top-left corner to the bottom-right. The anti-diagonal runs from top-right to bottom-left.
 
-**Minor** — $M_{i,j}$, the determinant of the submatrix left after striking row $i$ and column $j$.
+[Minor](!/linear-algebra/definitions#minor) — $M_{i,j}$, the determinant of the submatrix left after striking row $i$ and column $j$.
 
-**Cofactor** — $C_{i,j} = (-1)^{i+j} M_{i,j}$, the minor with the checkerboard sign attached.
+[Cofactor](!/linear-algebra/definitions#cofactor) — $C_{i,j} = (-1)^{i+j} M_{i,j}$, the minor with the checkerboard sign attached.
 
 **Cofactor expansion** — $\\det A = \\sum_j a_{i,j}\\, C_{i,j}$ along any row $i$, or the same sum down any column; also called Laplace expansion.
 
@@ -70,9 +70,9 @@ export async function getStaticProps(){
 
 **Sign pattern** — the checkerboard of $(-1)^{i+j}$: plus where the row and column numbers have the same parity, minus where they differ.
 
-**Singular** — $\\det A = 0$; the matrix has no inverse and collapses space onto something lower-dimensional.
+[Singular](!/linear-algebra/determinants#5) — $\\det A = 0$; the matrix has no inverse and collapses space onto something lower-dimensional.
 
-**Orientation** — the sign of the determinant: positive when $A$ preserves handedness, negative when it reverses it.
+[Orientation](!/linear-algebra/determinants/geometry#4) — the sign of the determinant: positive when $A$ preserves handedness, negative when it reverses it.
 
 **Term count** — $n!$ products for an $n \\times n$ matrix: $2$, $6$, $24$, $120$, which is why expansion is a small-matrix method.`,
       before: ``,
@@ -226,7 +226,7 @@ Beyond that, determinants are computed by row reduction, since the determinant o
 
     obj10: {
       title: `What the Determinant Is`,
-      content: `The determinant of a square matrix is a single number with two faces, one geometric and one algebraic.
+      content: `The determinant of a [square matrix](!/linear-algebra/matrix/types#1) is a single number with two faces, one geometric and one algebraic.
 
 Geometrically, $|\\det A|$ is the factor by which the transformation $A$ scales area in the plane or volume in space: the unit square maps to a parallelogram of area $|\\det A|$, the unit cube to a parallelepiped of volume $|\\det A|$. The sign records orientation, negative when $A$ turns a right-handed frame into a left-handed one. And $\\det A = 0$ means the image is flattened to something of lower [dimension](!/linear-algebra/vector-spaces/dimension#1), so $A$ has no inverse.
 

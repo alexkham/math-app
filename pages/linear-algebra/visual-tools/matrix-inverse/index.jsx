@@ -35,19 +35,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Inverse** — the [matrix](!/linear-algebra/matrix#1) $A^{-1}$ with $A A^{-1} = A^{-1} A = I$. It exists exactly when $\\det A \\neq 0$, and then it is unique.
+      content: `[Inverse](!/linear-algebra/matrix/inverse#1) — the [matrix](!/linear-algebra/definitions#matrix) $A^{-1}$ with $A A^{-1} = A^{-1} A = I$. It exists exactly when $\\det A \\neq 0$, and then it is unique.
 
-**Minor** — $M_{i,j}$, the [determinant](!/linear-algebra/determinants#1) of the submatrix left after striking row $i$ and column $j$ of $A$.
+[Minor](!/linear-algebra/definitions#minor) — $M_{i,j}$, the [determinant](!/linear-algebra/definitions#determinant) of the submatrix left after striking row $i$ and column $j$ of $A$.
 
-**Cofactor** — $C_{i,j} = (-1)^{i+j} M_{i,j}$, the minor with the checkerboard sign attached.
+[Cofactor](!/linear-algebra/definitions#cofactor) — $C_{i,j} = (-1)^{i+j} M_{i,j}$, the minor with the checkerboard sign attached.
 
-**Cofactor matrix** — the matrix $C$ whose $(i,j)$ entry is $C_{i,j}$.
+[Cofactor matrix](!/linear-algebra/determinants/cofactors#5) — the matrix $C$ whose $(i,j)$ entry is $C_{i,j}$.
 
-**Adjugate** — $\\operatorname{adj} A = C^T$, the transpose of the cofactor matrix; also called the classical adjoint.
+[Adjugate](!/linear-algebra/determinants/cofactors#6) — $\\operatorname{adj} A = C^T$, the transpose of the cofactor matrix; also called the classical adjoint.
 
 **Adjugate formula** — $A^{-1} = \\dfrac{\\operatorname{adj} A}{\\det A}$.
 
-**Singular matrix** — a [square matrix](!/linear-algebra/matrix/types#1) with $\\det A = 0$; it has no inverse.
+[Singular matrix](!/linear-algebra/definitions#singular_matrix) — a [square matrix](!/linear-algebra/definitions#square_matrix) with $\\det A = 0$; it has no inverse.
 
 **Row reduction** — the other standard route: reduce $[A \\mid I]$ to $[I \\mid A^{-1}]$ by row operations. It scales to any size; the adjugate formula shows the structure.`,
       before: ``,
@@ -61,7 +61,7 @@ export async function getStaticProps(){
 • Use the **Size** stepper to choose $2 \\times 2$ or $3 \\times 3$; the cofactors are written out in full, which is why larger sizes are not offered
 • Hover the **?** icon for a reminder of what the inverse is and how the adjugate formula relates to row reduction
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
-• The run computes every cofactor, transposes them into the adjugate, expands the determinant along the first row, and divides — the same four moves at either size
+• The run computes every cofactor, transposes them into the adjugate, expands the [determinant](!/linear-algebra/determinants#1) along the first row, and divides — the same four moves at either size
 • Everything is symbolic: the entries of $A$ stay as $a_{i,j}$, so what you see is the formula, not a numerical example`,
       before: ``,
       after: ``,
@@ -71,7 +71,7 @@ export async function getStaticProps(){
       title: `The Four Phases`,
       content: `The visualizer separates the adjugate formula into four phases.
 
-• **Phase 1 — cofactors**: one scene per entry in row-major order. Row $i$ and column $j$ of $A$ are struck, the minor $M_{i,j}$ is read from what remains, and the cofactor $C_{i,j} = (-1)^{i+j} M_{i,j}$ is written into the cofactor matrix
+• **Phase 1 — cofactors**: one scene per entry in row-major order. Row $i$ and column $j$ of $A$ are struck, the minor $M_{i,j}$ is read from what remains, and the cofactor $C_{i,j} = (-1)^{i+j} M_{i,j}$ is written into the cofactor [matrix](!/linear-algebra/matrix#1)
 • **Phase 2 — transpose**: the cofactor matrix is transposed in one scene, producing $\\operatorname{adj} A$
 • **Phase 3 — determinant**: $\\det A = a_{1,1} C_{1,1} + a_{1,2} C_{1,2} + \\cdots$, the expansion along the first row using the cofactors already in hand, in one scene
 • **Phase 4 — divide**: one scene per entry; $(A^{-1})_{i,j} = (\\operatorname{adj} A)_{i,j} / \\det A$
@@ -109,7 +109,7 @@ At $3 \\times 3$ that is $9 + 1 + 1 + 9$ steps plus the intro and outro; at $2 \
     },
     obj5: {
       title: `What the Inverse Is`,
-      content: `The inverse of a square matrix $A$ is the matrix $A^{-1}$ satisfying
+      content: `The inverse of a [square matrix](!/linear-algebra/matrix/types#1) $A$ is the matrix $A^{-1}$ satisfying
 
 $$A A^{-1} = A^{-1} A = I$$
 

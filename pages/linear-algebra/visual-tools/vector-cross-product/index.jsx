@@ -35,11 +35,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Cross product** — the vector $\\mathbf{u} \\times \\mathbf{v}$ built from two [vectors](!/linear-algebra/vectors#1) in $\\mathbb{R}^3$. It is perpendicular to both, and its length is the area of the parallelogram the two vectors [span](!/linear-algebra/vector-spaces/span#1).
+      content: `[Cross product](!/linear-algebra/definitions#cross_product) — the vector $\\mathbf{u} \\times \\mathbf{v}$ built from two [vectors](!/linear-algebra/definitions#vector) in $\\mathbb{R}^3$. It is perpendicular to both, and its length is the area of the parallelogram the two vectors [span](!/linear-algebra/definitions#span).
 
 **Component formula** — $w_1 = u_2 v_3 - u_3 v_2$, $w_2 = u_3 v_1 - u_1 v_3$, $w_3 = u_1 v_2 - u_2 v_1$. Each component skips its own row and cross-multiplies the other two.
 
-**Determinant mnemonic** — the symbolic $3 \\times 3$ [determinant](!/linear-algebra/determinants#1) with $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in the first row, $\\mathbf{u}$ in the second and $\\mathbf{v}$ in the third. Expanding along the first row reproduces the component formula.
+**Determinant mnemonic** — the symbolic $3 \\times 3$ [determinant](!/linear-algebra/definitions#determinant) with $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in the first row, $\\mathbf{u}$ in the second and $\\mathbf{v}$ in the third. Expanding along the first row reproduces the component formula.
 
 **Cyclic order** — the index pattern $1 \\to 2 \\to 3 \\to 1$ that decides which product carries the plus sign in each component.
 
@@ -57,7 +57,7 @@ export async function getStaticProps(){
       content: `Pick a method, then watch $\\mathbf{u} \\times \\mathbf{v} = \\mathbf{w}$ fill one component at a time.
 
 • Use the **Method** pills to switch between the **component formula** and the **determinant expansion**
-• There is no length control: the cross product is defined only for vectors in $\\mathbb{R}^3$, so $\\mathbf{u}$, $\\mathbf{v}$ and $\\mathbf{w}$ always have three components
+• There is no length control: the cross product is defined only for [vectors](!/linear-algebra/vectors#1) in $\\mathbb{R}^3$, so $\\mathbf{u}$, $\\mathbf{v}$ and $\\mathbf{w}$ always have three components
 • Hover the **?** icon for a reminder of what the cross product is and how the two methods relate
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 • Both methods produce the same three expressions — switch between them at the same step to compare`,
@@ -70,7 +70,7 @@ export async function getStaticProps(){
       content: `The visualizer offers two routes to the same three numbers.
 
 • **Component formula** — for component $k$, skip row $k$ of both vectors and cross-multiply the remaining two rows: $w_k = u_a v_b - u_b v_a$, where $a$ and $b$ are the rows after $k$ in cyclic order. Three scenes, one per component
-• **Determinant expansion** — write $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ above $\\mathbf{u}$ and $\\mathbf{v}$ as a symbolic determinant and expand along the first row. Each scene strikes a row and a column, highlights the $2 \\times 2$ minor that remains, applies the cofactor sign, and writes the result into $\\mathbf{w}$
+• **Determinant expansion** — write $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ above $\\mathbf{u}$ and $\\mathbf{v}$ as a symbolic [determinant](!/linear-algebra/determinants#1) and expand along the first row. Each scene strikes a row and a column, highlights the $2 \\times 2$ minor that remains, applies the cofactor sign, and writes the result into $\\mathbf{w}$
 
 The component formula is faster by hand. The determinant is easier to remember, and it explains where the minus sign in the middle component comes from: it is the cofactor sign of the second column.`,
       before: ``,
@@ -119,7 +119,7 @@ $$\\|\\mathbf{u} \\times \\mathbf{v}\\| = \\|\\mathbf{u}\\|\\,\\|\\mathbf{v}\\| 
 
 the area of the parallelogram spanned by the two vectors, and its direction is given by the right-hand rule: curl the fingers of the right hand from $\\mathbf{u}$ toward $\\mathbf{v}$ and the thumb points along $\\mathbf{u} \\times \\mathbf{v}$.
 
-For the full treatment, including the geometric proof of the length formula and the scalar triple product, see the [cross product theory page](!/linear-algebra/vectors/cross-product).`,
+For the full treatment, including the geometric proof of the length formula and the [scalar triple product](!/linear-algebra/formulas#scalar_triple_product), see the [cross product theory page](!/linear-algebra/vectors/cross-product).`,
       before: ``,
       after: ``,
       link: '',
@@ -214,7 +214,7 @@ Step through the visualizer with either method to see the same three expressions
 
 **Levi-Civita symbol** — the index notation $w_i = \\varepsilon_{ijk} u_j v_k$ that encodes the cyclic sign rule.
 
-[Magnitude](!/linear-algebra/visual-tools/vector-magnitude) — $\\|\\mathbf{u} \\times \\mathbf{v}\\|$ is the area of the parallelogram the two vectors span, so the length of the result carries geometric information the components alone do not.
+[Magnitude](!/linear-algebra/visual-tools/vector-magnitude) — $\\|\\mathbf{u} \\times \\mathbf{v}\\|$ is the area of the parallelogram the two vectors [span](!/linear-algebra/vector-spaces/span#1), so the length of the result carries geometric information the components alone do not.
 
 [Span and independence](!/linear-algebra/visual-tools/span-independence-2d) — two vectors in $\\mathbb{R}^3$ are linearly dependent exactly when their cross product is the zero vector, which makes it the $\\mathbb{R}^3$ analogue of the determinant test in the plane.`,
       before: ``,

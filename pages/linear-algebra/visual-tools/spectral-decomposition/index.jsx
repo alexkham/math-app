@@ -35,11 +35,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Spectral theorem** — every real [symmetric matrix](!/linear-algebra/matrix/types#5) has real eigenvalues and an orthonormal [basis](!/linear-algebra/vector-spaces#2) of eigenvectors.
+      content: `[Spectral theorem](!/linear-algebra/formulas#spectral_theorem) — every real [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) has real eigenvalues and an orthonormal [basis](!/linear-algebra/definitions#basis) of eigenvectors.
 
-**Spectral decomposition** — $A = Q\\Lambda Q^T$ with $Q$ orthogonal and $\\Lambda$ diagonal; the diagonalization of a symmetric matrix by an orthogonal change of basis.
+[Spectral decomposition](!/linear-algebra/formulas#spectral_decomposition) — $A = Q\\Lambda Q^T$ with $Q$ orthogonal and $\\Lambda$ diagonal; the diagonalization of a symmetric matrix by an orthogonal change of basis.
 
-**Orthogonal matrix** — $Q^TQ = I$, so $Q^{-1} = Q^T$; its columns are orthonormal.
+[Orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) — $Q^TQ = I$, so $Q^{-1} = Q^T$; its columns are orthonormal.
 
 **Orthonormal eigenvectors** — unit-length eigenvectors, mutually perpendicular; eigenvectors for different eigenvalues of a symmetric matrix are perpendicular automatically.
 
@@ -47,7 +47,7 @@ export async function getStaticProps(){
 
 **Gram–Schmidt inside an eigenspace** — the step needed when an eigenvalue is repeated, to make the basis of its eigenspace orthogonal.
 
-**Quadratic form** — $\\mathbf{x}^TA\\mathbf{x}$, which becomes $\\sum \\lambda_i y_i^2$ in the eigen-coordinates $\\mathbf{y} = Q^T\\mathbf{x}$.
+[Quadratic form](!/linear-algebra/decompositions/spectral#6) — $\\mathbf{x}^TA\\mathbf{x}$, which becomes $\\sum \\lambda_i y_i^2$ in the eigen-coordinates $\\mathbf{y} = Q^T\\mathbf{x}$.
 
 **Definiteness** — positive definite when all eigenvalues are positive, semidefinite when none is negative, indefinite when the signs mix.`,
       before: ``,
@@ -56,7 +56,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a symmetric matrix and watch it split into an orthogonal $Q$ and a diagonal $\\Lambda$.
+      content: `Choose a [symmetric matrix](!/linear-algebra/matrix/types#5) and watch it split into an orthogonal $Q$ and a diagonal $\\Lambda$.
 
 • Use the **Preset** pills for seven matrices: a classic $2 \\times 2$, an indefinite one, a projection, a $3 \\times 3$ with distinct eigenvalues, a repeated eigenvalue needing Gram–Schmidt, a positive semidefinite matrix, and a non-symmetric shear that stops the run
 • Use the **Size** stepper for $2 \\times 2$ or $3 \\times 3$, and **Shuffle** for a random symmetric matrix
@@ -76,7 +76,7 @@ The eigenvalues are reported rather than derived, since the eigenvalue visualize
 • **Symmetry check** — if $A \\neq A^T$ the run stops, with the offending entries marked
 • **Eigenvalues** — the roots of $\\det(A - \\lambda I)$, all real
 • **Eigenvectors** — for each eigenvalue, $A - \\lambda I$ row reduced and one [vector](!/linear-algebra/vectors#1) per free column, scaled to integers
-• **Gram–Schmidt** — only for a repeated eigenvalue: the second basis vector of its eigenspace is replaced by its component perpendicular to the first
+• **Gram–Schmidt** — only for a repeated eigenvalue: the second [basis](!/linear-algebra/vector-spaces#2) vector of its eigenspace is replaced by its component perpendicular to the first
 • **Normalize** — each eigenvector divided by its length; the [unit vectors](!/linear-algebra/vectors/magnitude#5) become the columns of $Q$, the eigenvalues the diagonal of $\\Lambda$
 • **Check** — $Q^TQ = I$
 • **Factor** — $A = Q \\cdot \\Lambda \\cdot Q^T$ multiplied out and compared with $A$

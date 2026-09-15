@@ -527,15 +527,15 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Basis** &mdash; A set of two linearly independent [vectors](!/linear-algebra/vectors#1) in 2D that span the entire plane. Any vector can be written uniquely as a combination of [basis](!/linear-algebra/vector-spaces#2) vectors.
+      content:`**Basis** &mdash; A set of two linearly independent [vectors](!/linear-algebra/definitions#vector) in 2D that span the entire plane. Any vector can be written uniquely as a combination of [basis](!/linear-algebra/definitions#basis) vectors.
 
 **Change of Basis** &mdash; The process of re-expressing a vector&apos;s coordinates relative to a new basis while the vector itself remains fixed in space.
 
-**Basis Matrix B** &mdash; A $2 \\times 2$ [matrix](!/linear-algebra/matrix#1) whose columns are the new basis vectors $b_1$ and $b_2$ written in standard coordinates.
+**Basis Matrix B** &mdash; A $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix) whose columns are the new basis vectors $b_1$ and $b_2$ written in standard coordinates.
 
 **Inverse Matrix B⁻¹** &mdash; The matrix that converts standard coordinates into coordinates relative to the new basis: $v_B = B^{-1} v_{std}$.
 
-**Determinant** &mdash; A [scalar](!/linear-algebra/vectors#1) value $\\det(B)$ indicating area scaling and orientation. Zero [determinant](!/linear-algebra/determinants#1) means the basis is degenerate.
+**Determinant** &mdash; A [scalar](!/linear-algebra/definitions#scalar) value $\\det(B)$ indicating area scaling and orientation. Zero [determinant](!/linear-algebra/definitions#determinant) means the basis is degenerate.
 
 **Orthonormal Basis** &mdash; A basis whose vectors are perpendicular and have unit length. For orthonormal bases, $B^{-1} = B^T$.`,
       before:``,
@@ -544,7 +544,7 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Getting Started`,
-      content:`The canvas shows three draggable handles, the standard grid in gray, and a dashed basis grid in the colors of $b_1$ (teal) and $b_2$ (purple). The vector $v$ in amber stays in the same place in space no matter how you reshape the basis.
+      content:`The canvas shows three draggable handles, the standard grid in gray, and a dashed [basis](!/linear-algebra/vector-spaces#2) grid in the colors of $b_1$ (teal) and $b_2$ (purple). The vector $v$ in amber stays in the same place in space no matter how you reshape the basis.
 
 Try this sequence to build intuition:
 
@@ -563,9 +563,9 @@ The point: $v$ is a fixed geometric object. Only its numerical address changes w
 
 &bull; **Drag $b_1$** &mdash; tilts the first axis. The dashed teal lines of the basis grid rotate and stretch.
 &bull; **Drag $b_2$** &mdash; tilts the second axis. The dashed purple lines follow.
-&bull; **Drag both close to each other** &mdash; the basis becomes oblique, and the parallelogram cells flatten. Once they line up exactly, the determinant hits zero and a warning appears on the canvas.
+&bull; **Drag both close to each other** &mdash; the basis becomes oblique, and the parallelogram cells flatten. Once they line up exactly, the [determinant](!/linear-algebra/determinants#1) hits zero and a warning appears on the canvas.
 
-The classification line under the basis matrix updates live: orthonormal when both are unit and perpendicular, orthogonal when perpendicular but scaled, oblique otherwise, or singular when collinear. Watch how the inverse matrix $B^{-1}$ also changes in real time, or shows dashes when the basis fails.`,
+The classification line under the basis [matrix](!/linear-algebra/matrix#1) updates live: orthonormal when both are unit and perpendicular, orthogonal when perpendicular but scaled, oblique otherwise, or singular when collinear. Watch how the inverse matrix $B^{-1}$ also changes in real time, or shows dashes when the basis fails.`,
       before:``,
       after:``,
       link:'',
@@ -585,7 +585,7 @@ The decomposition equation under the coordinates reads $v = c_1 \\cdot b_1 + c_2
     },
     obj4:{
       title:`Reading the Coordinates Card`,
-      content:`The coordinates card (01) shows two column vectors stacked side by side.
+      content:`The coordinates card (01) shows two column [vectors](!/linear-algebra/vectors#1) stacked side by side.
 
 &bull; **$v_{std}$** &mdash; coordinates in the standard basis, the raw $(x, y)$ position. These never change when you only change the basis.
 &bull; **$v_B$** &mdash; coordinates in the current basis $B$. Numbers shift whenever you drag $b_1$ or $b_2$.
@@ -666,7 +666,7 @@ $$v_B = B^{-1} \\, v_{std}$$
 
 For an orthonormal basis (perpendicular [unit vectors](!/linear-algebra/vectors/magnitude#5)), the inverse equals the transpose: $B^{-1} = B^T$. This is why rotations are so efficient computationally.
 
-The basis is valid as long as $\\det(B) \\neq 0$. If the determinant is zero, $b_1$ and $b_2$ are linearly dependent and fail to span the plane.
+The basis is valid as long as $\\det(B) \\neq 0$. If the determinant is zero, $b_1$ and $b_2$ are linearly dependent and fail to [span](!/linear-algebra/formulas#span) the plane.
 
 For a full treatment see **matrix inverse**, **determinant**, and **matrix multiplication**.`,
       before:``,
@@ -703,46 +703,46 @@ For a full treatment see **matrix inverse**, **determinant**, and **matrix multi
       title:`Natural Bases: Rotated and Stretched Axes`,
       content:`Four presets keep the axes perpendicular. Two are rotations of the standard basis, one stretches the axes to unequal lengths, and one is the standard basis itself.
 
-The frozen picture is the 30° rotation. The vector $\mathbf{v}$ has not moved — it sits exactly where it always sat — but the dashed basis grid has turned beneath it, and the decomposition legs now run along the new axes. Its coordinates read $(2.915, 0.049)$ instead of $(2.5, 1.5)$.`,
+The frozen picture is the 30° rotation. The vector $\\mathbf{v}$ has not moved — it sits exactly where it always sat — but the dashed basis grid has turned beneath it, and the decomposition legs now run along the new axes. Its coordinates read $(2.915, 0.049)$ instead of $(2.5, 1.5)$.`,
       before:``,
       after:`That is the whole idea the tool exists to convey: **a change of basis moves the description, not the vector**. The arrow is fixed in the plane; only the numbers used to name it change.
 
-Rotations are the friendliest case because they are orthonormal — perpendicular axes of unit length. For those, the inverse of the basis matrix is simply its transpose, $B^{-1} = B^{\mathsf{T}}$, which is why converting coordinates costs nothing more than a transpose.
+Rotations are the friendliest case because they are orthonormal — perpendicular axes of unit length. For those, the inverse of the basis matrix is simply its transpose, $B^{-1} = B^{\\mathsf{T}}$, which is why converting coordinates costs nothing more than a transpose.
 
-The stretched-axes preset breaks the "unit length" half while keeping perpendicularity. One step along $\mathbf{b_1}$ then covers two standard units, so the coordinate along it *shrinks* while the other grows — a useful reminder that coordinates are counts of basis steps, not distances.`,
+The stretched-axes preset breaks the "unit length" half while keeping perpendicularity. One step along $\\mathbf{b_1}$ then covers two standard units, so the coordinate along it **shrinks** while the other grows — a useful reminder that coordinates are counts of basis steps, not distances.`,
       link:'',
     },
     obj13:{
       title:`Non-Orthogonal Bases: Parallelograms Instead of Squares`,
-      content:`Three presets drop the right angle. The frozen picture is the skewed basis, $\mathbf{b_1} = (1, 0.4)$ and $\mathbf{b_2} = (-0.3, 1)$, where the dashed basis grid is made of parallelograms rather than squares.
+      content:`Three presets drop the right angle. The frozen picture is the skewed basis, $\\mathbf{b_1} = (1, 0.4)$ and $\\mathbf{b_2} = (-0.3, 1)$, where the dashed basis grid is made of parallelograms rather than squares.
 
-The same $\mathbf{v}$ now reads $(2.634, 0.446)$, and the two decomposition legs meet at an oblique angle.`,
+The same $\\mathbf{v}$ now reads $(2.634, 0.446)$, and the two decomposition legs meet at an oblique angle.`,
       before:``,
-      after:`Nothing here is invalid. The only requirement for a basis is that the two vectors be **linearly independent** — equivalently $\det B \neq 0$ — and perpendicularity is a convenience, not a condition. Every vector still has exactly one pair of coordinates in this basis.
+      after:`Nothing here is invalid. The only requirement for a basis is that the two vectors be **linearly independent** — equivalently $\\det B \\neq 0$ — and perpendicularity is a convenience, not a condition. Every vector still has exactly one pair of coordinates in this basis.
 
-What is lost is the convenience. Without orthogonality, $B^{-1} \neq B^{\mathsf{T}}$ and the inverse must be computed properly; the Pythagorean formula for length no longer applies to the coordinates; and projecting onto one axis is no longer independent of the other. Non-orthogonal bases are common in practice — crystal lattices and eigenbases are rarely perpendicular — which is why the tool insists they are legitimate.`,
+What is lost is the convenience. Without orthogonality, $B^{-1} \\neq B^{\\mathsf{T}}$ and the inverse must be computed properly; the Pythagorean formula for length no longer applies to the coordinates; and projecting onto one axis is no longer independent of the other. Non-orthogonal bases are common in practice — crystal lattices and eigenbases are rarely perpendicular — which is why the tool insists they are legitimate.`,
       link:'',
     },
     obj14:{
       title:`Orientation Reversed: a Negative Determinant`,
-      content:`Two presets have $\det B = -1$: one flips the $y$-axis, and one swaps the two axes outright. The frozen picture is the $y$-flip, where $\mathbf{b_2}$ points down instead of up.
+      content:`Two presets have $\\det B = -1$: one flips the $y$-axis, and one swaps the two axes outright. The frozen picture is the $y$-flip, where $\\mathbf{b_2}$ points down instead of up.
 
 The coordinates come out $(2.5, -1.5)$ — the same numbers as the standard basis, with the second sign reversed.`,
       before:``,
-      after:`These bases are perfectly valid — a negative determinant is still a non-zero one — but they are **left-handed**. Rotating $\mathbf{b_1}$ to $\mathbf{b_2}$ now turns clockwise rather than counterclockwise, and the sign of the determinant is exactly what records that.
+      after:`These bases are perfectly valid — a negative determinant is still a non-zero one — but they are **left-handed**. Rotating $\\mathbf{b_1}$ to $\\mathbf{b_2}$ now turns clockwise rather than counterclockwise, and the sign of the determinant is exactly what records that.
 
-The magnitude and the sign of $\det B$ say different things. Its absolute value is the area of the parallelogram the basis spans, so it measures how much a coordinate step covers; its sign records handedness. Both matter, and the tool's readout shows the signed value rather than the area alone.`,
+The magnitude and the sign of $\\det B$ say different things. Its absolute value is the area of the parallelogram the basis spans, so it measures how much a coordinate step covers; its sign records handedness. Both matter, and the tool's readout shows the signed value rather than the area alone.`,
       link:'',
     },
     obj15:{
       title:`Degenerate: When the Pair Is Not a Basis`,
-      content:`One preset is deliberately broken: $\mathbf{b_1} = (1, 0)$ and $\mathbf{b_2} = (2, 0)$ are collinear, so $\det B = 0$.
+      content:`One preset is deliberately broken: $\\mathbf{b_1} = (1, 0)$ and $\\mathbf{b_2} = (2, 0)$ are collinear, so $\\det B = 0$.
 
-The frozen picture shows the failure directly. The basis grid collapses — every "cell" flattens onto the $x$-axis — and no decomposition legs are drawn, because $\mathbf{v}$ has no coordinates in this pair at all.`,
+The frozen picture shows the failure directly. The basis grid collapses — every "cell" flattens onto the $x$-axis — and no decomposition legs are drawn, because $\\mathbf{v}$ has no coordinates in this pair at all.`,
       before:``,
-      after:`Two vectors on one line cannot reach anything off that line, so most of the plane is unreachable; and any point *on* the line can be written in infinitely many ways, since $\mathbf{b_2} = 2\mathbf{b_1}$ lets you trade one for the other freely. Existence fails for most vectors, uniqueness fails for the rest — and a basis needs both.
+      after:`Two vectors on one line cannot reach anything off that line, so most of the plane is unreachable; and any point **on** the line can be written in infinitely many ways, since $\\mathbf{b_2} = 2\\mathbf{b_1}$ lets you trade one for the other freely. Existence fails for most vectors, uniqueness fails for the rest — and a basis needs both.
 
-That is why $\det B \neq 0$ is the precondition for everything else on this page. The change-of-basis formula requires $B^{-1}$, and a singular $B$ has no inverse. Including one broken case is what makes the other nine legible: it shows what the condition is actually protecting against.`,
+That is why $\\det B \\neq 0$ is the precondition for everything else on this page. The change-of-basis formula requires $B^{-1}$, and a singular $B$ has no inverse. Including one broken case is what makes the other nine legible: it shows what the condition is actually protecting against.`,
       link:'',
     }
   }

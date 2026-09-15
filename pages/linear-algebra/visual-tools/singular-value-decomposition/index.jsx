@@ -35,38 +35,38 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Singular value decomposition (SVD)** — $A = U\\Sigma V^T$ for any $m \\times n$ [matrix](!/linear-algebra/matrix#1), with $U$ ($m \\times m$) and $V$ ($n \\times n$) orthogonal and $\\Sigma$ ($m \\times n$) diagonal.
+      content: `[Singular value decomposition (SVD)](!/linear-algebra/decompositions/svd#1) — $A = U\\Sigma V^T$ for any $m \\times n$ [matrix](!/linear-algebra/definitions#matrix), with $U$ ($m \\times m$) and $V$ ($n \\times n$) orthogonal and $\\Sigma$ ($m \\times n$) diagonal.
 
-**Singular values** — the diagonal entries $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$ of $\\Sigma$; the square roots of the [eigenvalues](!/linear-algebra/eigen#2) of $A^TA$.
+[Singular values](!/linear-algebra/formulas#singular_values) — the diagonal entries $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$ of $\\Sigma$; the square roots of the [eigenvalues](!/linear-algebra/definitions#eigenvalue) of $A^TA$.
 
-**Right singular vectors** — the columns $\\mathbf{v}_i$ of $V$, orthonormal [eigenvectors](!/linear-algebra/eigen#2) of $A^TA$; the input directions.
+**Right singular vectors** — the columns $\\mathbf{v}_i$ of $V$, orthonormal [eigenvectors](!/linear-algebra/definitions#eigenvector) of $A^TA$; the input directions.
 
 **Left singular vectors** — the columns $\\mathbf{u}_i$ of $U$, with $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for $\\sigma_i > 0$; the output directions.
 
-**Rank** — the number of non-zero singular values.
+[Rank](!/linear-algebra/definitions#rank) — the number of non-zero singular values.
 
-**Rank-one form** — $A = \\sum \\sigma_i\\mathbf{u}_i\\mathbf{v}_i^T$; truncating it gives the best low-[rank](!/linear-algebra/matrix/rank#1) approximation.
+**Rank-one form** — $A = \\sum \\sigma_i\\mathbf{u}_i\\mathbf{v}_i^T$; truncating it gives the best low-[rank](!/linear-algebra/definitions#rank) approximation.
 
-**Spectral norm** — $\\|A\\|_2 = \\sigma_1$, the largest stretch; **Frobenius norm** — $\\sqrt{\\sum\\sigma_i^2}$.
+**Spectral norm** — $\\|A\\|_2 = \\sigma_1$, the largest stretch; [Frobenius norm](!/linear-algebra/formulas#frobenius_norm) — $\\sqrt{\\sum\\sigma_i^2}$.
 
-**Condition number** — $\\sigma_1 / \\sigma_r$, the ratio of largest to smallest non-zero singular value.
+[Condition number](!/linear-algebra/formulas#condition_number) — $\\sigma_1 / \\sigma_r$, the ratio of largest to smallest non-zero singular value.
 
-**Pseudoinverse** — $A^+ = V\\Sigma^+U^T$, inverting the non-zero singular values; gives [least-squares solutions](!/linear-algebra/orthogonality/least-squares#3).`,
+[Pseudoinverse](!/linear-algebra/decompositions/svd#7) — $A^+ = V\\Sigma^+U^T$, inverting the non-zero singular values; gives [least-squares solutions](!/linear-algebra/orthogonality/least-squares).`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a matrix of any shape from $2 \\times 2$ to $3 \\times 3$ and watch it factor into $U\\Sigma V^T$.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) of any shape from $2 \\times 2$ to $3 \\times 3$ and watch it factor into $U\\Sigma V^T$.
 
-• Use the **Preset** pills for seven matrices: a classic $2 \\times 2$, a rank-one matrix, a symmetric one, a rotation, a wide $2 \\times 3$, a tall $3 \\times 2$, and a $3 \\times 3$ with a repeated singular value
+• Use the **Preset** pills for seven matrices: a classic $2 \\times 2$, a [rank](!/linear-algebra/matrix/rank#1)-one matrix, a symmetric one, a rotation, a wide $2 \\times 3$, a tall $3 \\times 2$, and a $3 \\times 3$ with a repeated singular value
 • Use the two **Size** steppers for rows and columns independently, and **Shuffle** for a random small-integer matrix
 • Edit any entry directly
 • Hover the **?** icon for a reminder of what the pieces mean geometrically
 • Press play or step manually; the step log on the right keeps every stage
 
-The computation is the hand method: eigenvalues and eigenvectors of $A^TA$, square roots for the singular values, $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$, and completion of $U$ when the rank is less than $m$. The eigenvalues of $A^TA$ are reported rather than derived, since the eigenvalue visualizer shows that derivation.`,
+The computation is the hand method: [eigenvalues](!/linear-algebra/eigen#2) and [eigenvectors](!/linear-algebra/eigen#2) of $A^TA$, square roots for the singular values, $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$, and completion of $U$ when the rank is less than $m$. The eigenvalues of $A^TA$ are reported rather than derived, since the eigenvalue visualizer shows that derivation.`,
       before: ``,
       after: ``,
       link: '',
@@ -194,7 +194,7 @@ $$U = \\frac{1}{\\sqrt{10}}\\begin{pmatrix} 1 & 3 \\\\ 3 & -1 \\end{pmatrix}, \\
 
 **Check.** $\\Sigma V^T = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} \\sqrt{45} & \\sqrt{45} \\\\ \\sqrt{5} & -\\sqrt{5} \\end{pmatrix}$, and $U\\Sigma V^T = \\frac{1}{\\sqrt{20}}\\begin{pmatrix} \\sqrt{45} + 3\\sqrt{5} & \\sqrt{45} - 3\\sqrt{5} \\\\ 3\\sqrt{45} - \\sqrt{5} & 3\\sqrt{45} + \\sqrt{5} \\end{pmatrix}$. With $\\sqrt{45} = 3\\sqrt{5}$ and $\\sqrt{20} = 2\\sqrt{5}$ this is $\\frac{1}{2}\\begin{pmatrix} 6 & 0 \\\\ 8 & 10 \\end{pmatrix} = A$.
 
-**Numbers.** Rank $2$, $\\|A\\|_2 = \\sqrt{45} \\approx 6.71$, $\\|A\\|_F = \\sqrt{50}$, condition number $\\sqrt{45}/\\sqrt{5} = 3$, and $|\\det A| = 15 = \\sqrt{45}\\sqrt{5}$. The [unit circle](!/trigonometry/unit-circle#1) maps to an ellipse with semi-axes $\\sqrt{45}$ along $(1, 3)$ and $\\sqrt{5}$ along $(3, -1)$.`,
+**Numbers.** Rank $2$, $\\|A\\|_2 = \\sqrt{45} \\approx 6.71$, $\\|A\\|_F = \\sqrt{50}$, [condition number](!/linear-algebra/formulas#condition_number) $\\sqrt{45}/\\sqrt{5} = 3$, and $|\\det A| = 15 = \\sqrt{45}\\sqrt{5}$. The [unit circle](!/trigonometry/unit-circle#1) maps to an ellipse with semi-axes $\\sqrt{45}$ along $(1, 3)$ and $\\sqrt{5}$ along $(3, -1)$.`,
       before: ``,
       after: ``,
       link: '',

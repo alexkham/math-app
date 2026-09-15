@@ -626,13 +626,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Scalar** — a single number, not a [vector](!/linear-algebra/vectors#1) or [matrix](!/linear-algebra/matrix#1).
+      content: `[Scalar](!/linear-algebra/definitions#scalar) — a single number, not a [vector](!/linear-algebra/definitions#vector) or [matrix](!/linear-algebra/definitions#matrix).
 
-**Scalar multiplication** — the operation $kv$ that multiplies every component of a vector $v$ by the [scalar](!/linear-algebra/vectors#1) $k$.
+[Scalar multiplication](!/linear-algebra/matrix/operations#3) — the operation $kv$ that multiplies every component of a vector $v$ by the [scalar](!/linear-algebra/definitions#scalar) $k$.
 
 **Component-wise operation** — applied independently to each component; the result at position $i$ depends only on $k$ and $v_i$.
 
-**Length preservation** — $kv$ has the same number of components as $v$. Scalar multiplication never changes the [dimension](!/linear-algebra/vector-spaces/dimension#1).
+**Length preservation** — $kv$ has the same number of components as $v$. Scalar multiplication never changes the [dimension](!/linear-algebra/definitions#dimension).
 
 **Scaling factor** — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or reverses direction ($k < 0$) the vector uniformly.
 
@@ -649,7 +649,7 @@ export async function getStaticProps(){
 
 • Use the **Dimensions** stepper to set the length of $v$ (1 to 5 components)
 • $w$ inherits the same length automatically
-• Hover the **?** icon for a reminder of what a scalar is and why the length is preserved
+• Hover the **?** icon for a reminder of what a [scalar](!/linear-algebra/vectors#1) is and why the length is preserved
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 
 The scalar $k$ is shown symbolically in front of $v$. The visualizer focuses on the structural rule — every component of $v$ gets multiplied by the same $k$ — not on any specific numerical value of $k$.`,
@@ -673,7 +673,7 @@ By the final scene, every component of $w$ holds its symbolic product and the op
     },
     obj3: {
       title: `Choosing Vector Length`,
-      content: `The dimension stepper controls the length of $v$, and $w$ follows automatically.
+      content: `The [dimension](!/linear-algebra/vector-spaces/dimension#1) stepper controls the length of $v$, and $w$ follows automatically.
 
 • Start with length $2$ or $3$ to see the per-component flow clearly — these match vectors in the plane and in 3D space
 • Increase to $4$ or $5$ to see how the same rule scales to higher dimensions; total scenes equal the length $n$
@@ -691,7 +691,7 @@ $$(kv)_i = k \\cdot v_i$$
 
 It's the simplest non-trivial vector operation. There are no length restrictions — any vector can be scaled. The result has the same length as $v$, and every component depends only on $k$ and its own value in $v$.
 
-Geometrically, scalar multiplication stretches or shrinks a vector along its direction (and flips it when $k$ is negative). Together with vector addition, scalar multiplication is what makes $\\mathbb{R}^n$ a [vector space](!/linear-algebra/vector-spaces#1).
+Geometrically, scalar multiplication stretches or shrinks a vector along its direction (and flips it when $k$ is negative). Together with [vector addition](!/linear-algebra/formulas#vector_addition), scalar multiplication is what makes $\\mathbb{R}^n$ a [vector space](!/linear-algebra/vector-spaces#1).
 
 For comprehensive theory, see **vector operations**.`,
       before: ``,
@@ -788,37 +788,37 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
     },
     obj10: {
       title: `The Opening Scene: One Number and One Vector`,
-      content: `The player opens with the scalar $k$, the vector $\mathbf{u}$ laid out as a row of components, and an empty $\mathbf{w}$ below it. At the default length $\mathbf{u}$ has four components, so $\mathbf{w}$ will have four as well.
+      content: `The player opens with the scalar $k$, the [vector](!/linear-algebra/vectors#1) $\\mathbf{u}$ laid out as a row of components, and an empty $\\mathbf{w}$ below it. At the default length $\\mathbf{u}$ has four components, so $\\mathbf{w}$ will have four as well.
 
-Only the setup is on screen: a single number on one side, four components on the other, and the statement that $\mathbf{w} = k \cdot \mathbf{u}$ is about to be built one slot at a time.`,
+Only the setup is on screen: a single number on one side, four components on the other, and the statement that $\\mathbf{w} = k \\cdot \\mathbf{u}$ is about to be built one slot at a time.`,
       before: ``,
       after: `There is no matching-length precondition here, unlike addition. A scalar multiplies a vector of any length, because it meets each component individually rather than pairing off against a second vector.
 
-The result stays in the same space it started in: scale a vector of $\mathbb{R}^4$ by any real number and you get another vector of $\mathbb{R}^4$. That closure under scaling is one of the two operations a vector space is required to support, the other being the addition on its own page.`,
+The result stays in the same space it started in: scale a vector of $\\mathbb{R}^4$ by any real number and you get another vector of $\\mathbb{R}^4$. That closure under scaling is one of the two operations a vector space is required to support, the other being the addition on its own page.`,
       link: '',
     },
     obj11: {
       title: `One Component at a Time`,
-      content: `Each step highlights one component $u_j$ together with its destination $w_j$, and writes $k \cdot u_j$ into that slot.
+      content: `Each step highlights one component $u_j$ together with its destination $w_j$, and writes $k \\cdot u_j$ into that slot.
 
 The frozen picture below is a step partway through the run: earlier slots already hold their scaled value, one is being computed, and the rest are still placeholders.`,
       before: ``,
-      after: `Every step uses the same $k$. That single shared factor is what makes the operation *uniform* — it stretches all components by an identical amount, which is precisely why the direction of the vector is preserved.
+      after: `Every step uses the same $k$. That single shared factor is what makes the operation **uniform** — it stretches all components by an identical amount, which is precisely why the direction of the vector is preserved.
 
-Compare that with multiplying each component by a *different* number. That is a perfectly good operation too, but it is not scalar multiplication; it distorts the vector rather than scaling it, and it corresponds to applying a diagonal matrix instead of a scalar.`,
+Compare that with multiplying each component by a **different** number. That is a perfectly good operation too, but it is not scalar multiplication; it distorts the vector rather than scaling it, and it corresponds to applying a diagonal matrix instead of a scalar.`,
       link: '',
     },
     obj12: {
       title: `The Completed Product`,
-      content: `The final scene fills every slot, so $\mathbf{w}$ reads $w_j = k \cdot u_j$ across all four components, at the same length it started with.
+      content: `The final scene fills every slot, so $\\mathbf{w}$ reads $w_j = k \\cdot u_j$ across all four components, at the same length it started with.
 
-Geometrically, $\mathbf{w}$ points along the same line as $\mathbf{u}$ and its length is scaled by $|k|$: $\|k\mathbf{u}\| = |k| \, \|\mathbf{u}\|$.`,
+Geometrically, $\\mathbf{w}$ points along the same line as $\\mathbf{u}$ and its length is scaled by $|k|$: $\\|k\\mathbf{u}\\| = |k| \\, \\|\\mathbf{u}\\|$.`,
       before: ``,
       after: `The sign of $k$ decides the direction. For $k > 1$ the vector stretches, for $0 < k < 1$ it shrinks, at $k = 0$ it collapses to the zero vector, and for $k < 0$ it flips to point the opposite way while scaling by $|k|$. The absolute value in the length formula is doing real work: a length can never come out negative.
 
-The algebraic rules follow from the components, exactly as for matrices: $k(\mathbf{u} + \mathbf{v}) = k\mathbf{u} + k\mathbf{v}$, $(k + m)\mathbf{u} = k\mathbf{u} + m\mathbf{u}$, $(km)\mathbf{u} = k(m\mathbf{u})$, and $1 \cdot \mathbf{u} = \mathbf{u}$. Together with the addition axioms these are what make $\mathbb{R}^n$ a vector space.
+The algebraic rules follow from the components, exactly as for matrices: $k(\\mathbf{u} + \\mathbf{v}) = k\\mathbf{u} + k\\mathbf{v}$, $(k + m)\\mathbf{u} = k\\mathbf{u} + m\\mathbf{u}$, $(km)\\mathbf{u} = k(m\\mathbf{u})$, and $1 \\cdot \\mathbf{u} = \\mathbf{u}$. Together with the addition axioms these are what make $\\mathbb{R}^n$ a vector space.
 
-One consequence worth naming: the set of all scalar multiples of a single non-zero $\mathbf{u}$ is a line through the origin. That set is the span of $\mathbf{u}$, and it is the simplest example of a subspace.`,
+One consequence worth naming: the set of all scalar multiples of a single non-zero $\\mathbf{u}$ is a line through the origin. That set is the span of $\\mathbf{u}$, and it is the simplest example of a subspace.`,
       link: '',
     },
     obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },

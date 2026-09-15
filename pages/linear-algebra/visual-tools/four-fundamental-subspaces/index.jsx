@@ -35,38 +35,38 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Column space $C(A)$** — all combinations of the columns of $A$; the set of $\\mathbf{b}$ for which $A\\mathbf{x} = \\mathbf{b}$ is solvable. A [subspace](!/linear-algebra/vector-spaces/subspaces#1) of $\\mathbb{R}^m$ of [dimension](!/linear-algebra/vector-spaces/dimension#1) $r$.
+      content: `[Column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) $C(A)$ — all combinations of the columns of $A$; the set of $\\mathbf{b}$ for which $A\\mathbf{x} = \\mathbf{b}$ is solvable. A [subspace](!/linear-algebra/definitions#subspace) of $\\mathbb{R}^m$ of [dimension](!/linear-algebra/definitions#dimension) $r$.
 
-**Null space $N(A)$** — all solutions of $A\\mathbf{x} = \\mathbf{0}$. A subspace of $\\mathbb{R}^n$ of dimension $n - r$.
+[Null space](!/linear-algebra/vector-spaces/fundamental-spaces#4) $N(A)$ — all solutions of $A\\mathbf{x} = \\mathbf{0}$. A subspace of $\\mathbb{R}^n$ of dimension $n - r$.
 
-**Row space $C(A^T)$** — all combinations of the rows of $A$. A subspace of $\\mathbb{R}^n$ of dimension $r$.
+[Row space](!/linear-algebra/vector-spaces/fundamental-spaces#3) $C(A^T)$ — all combinations of the rows of $A$. A subspace of $\\mathbb{R}^n$ of dimension $r$.
 
-**Left null space $N(A^T)$** — all solutions of $A^T\\mathbf{y} = \\mathbf{0}$, equivalently $\\mathbf{y}^TA = \\mathbf{0}$. A subspace of $\\mathbb{R}^m$ of dimension $m - r$.
+[Left null space](!/linear-algebra/vector-spaces/fundamental-spaces#5) $N(A^T)$ — all solutions of $A^T\\mathbf{y} = \\mathbf{0}$, equivalently $\\mathbf{y}^TA = \\mathbf{0}$. A subspace of $\\mathbb{R}^m$ of dimension $m - r$.
 
-**Rank $r$** — the number of [pivots](!/linear-algebra/linear-systems/echelon-form#4) of $A$; the common dimension of the column and row spaces.
+[Rank](!/linear-algebra/matrix/rank#1) $r$ — the number of [pivots](!/linear-algebra/definitions#pivot) of $A$; the common dimension of the column and row spaces.
 
-**Pivot columns** — the columns of $A$ (not of $R$) at pivot positions; a [basis](!/linear-algebra/vector-spaces#2) of the column space.
+[Pivot columns](!/linear-algebra/linear-systems/echelon-form#4) — the columns of $A$ (not of $R$) at pivot positions; a [basis](!/linear-algebra/definitions#basis) of the column space.
 
-**Special solutions** — one null-space [vector](!/linear-algebra/vectors#1) per free column, with that free variable $1$ and the others $0$.
+**Special solutions** — one null-space [vector](!/linear-algebra/definitions#vector) per free column, with that free variable $1$ and the others $0$.
 
-**Rank–nullity** — $r + \\dim N(A) = n$; applied to $A^T$, $r + \\dim N(A^T) = m$.
+[Rank–nullity](!/linear-algebra/matrix/rank#6) — $r + \\dim N(A) = n$; applied to $A^T$, $r + \\dim N(A^T) = m$.
 
-**Orthogonal complement** — $N(A) = C(A^T)^\\perp$ in $\\mathbb{R}^n$ and $N(A^T) = C(A)^\\perp$ in $\\mathbb{R}^m$.`,
+[Orthogonal complement](!/linear-algebra/definitions#orthogonal_complement) — $N(A) = C(A^T)^\\perp$ in $\\mathbb{R}^n$ and $N(A^T) = C(A)^\\perp$ in $\\mathbb{R}^m$.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a [matrix](!/linear-algebra/matrix#1) and watch one row reduction produce a basis for each of its four subspaces.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) and watch one row reduction produce a [basis](!/linear-algebra/vector-spaces#2) for each of its four subspaces.
 
-• Use the **Preset** pills for seven matrices: a $3 \\times 3$ of rank $2$ with every subspace non-trivial, a rank-one matrix, wide and tall matrices of full rank, an invertible matrix, a $4 \\times 3$ of rank $2$, and the zero matrix
+• Use the **Preset** pills for seven matrices: a $3 \\times 3$ of rank $2$ with every [subspace](!/linear-algebra/vector-spaces/subspaces#1) non-trivial, a rank-one matrix, wide and tall matrices of full rank, an invertible matrix, a $4 \\times 3$ of rank $2$, and the zero matrix
 • Use the two **Size** steppers for any shape from $2 \\times 2$ to $4 \\times 4$, and **Shuffle** for a random matrix that usually carries a planted dependency
 • Edit any entry directly
 • Hover the **?** icon for a reminder of the four spaces and their dimensions
 • Press play or step manually; the step log on the right keeps every stage
 
-Each subspace scene shows a basis and, for the two null spaces, the product that proves the basis vectors are in the space. The last two scenes show the orthogonality between the pairs and the dimension count.`,
+Each subspace scene shows a basis and, for the two null spaces, the product that proves the basis vectors are in the space. The last two scenes show the orthogonality between the pairs and the [dimension](!/linear-algebra/vector-spaces/dimension#1) count.`,
       before: ``,
       after: ``,
       link: '',
@@ -75,7 +75,7 @@ Each subspace scene shows a basis and, for the two null spaces, the product that
       title: `The Scenes in Order`,
       content: `The visualizer follows the textbook procedure exactly.
 
-• **Row reduce** — $A \\to R$ with the pivots and free columns marked; the rank $r$ is the number of pivots
+• **Row reduce** — $A \\to R$ with the [pivots](!/linear-algebra/linear-systems/echelon-form#4) and free columns marked; the rank $r$ is the number of pivots
 • **Column space** — the pivot columns of the original $A$, with each free column expressed as a combination of them using the entries of $R$
 • **Row space** — the non-zero rows of $R$
 • **Null space** — one special solution per free column, scaled to integers, with $AN = 0$ shown as a matrix product
@@ -262,7 +262,7 @@ The row space is the orthogonal complement of the null space, and the rows of $R
     },
     obj14: {
       title: `The Null Space`,
-      content: `The frozen picture below shows the default preset's null space: from $R$, the free variable $x_2$ set to $1$ gives the special solution $(-2, 1, 0)$, scaled to $(2, -1, 0)$, and the product $AN$ on the right is the zero vector.
+      content: `The frozen picture below shows the default preset's null space: from $R$, the free variable $x_2$ set to $1$ gives the special solution $(-2, 1, 0)$, scaled to $(2, -1, 0)$, and the product $AN$ on the right is the zero [vector](!/linear-algebra/vectors#1).
 
 One free column, one basis vector, dimension $1$.`,
       before: ``,

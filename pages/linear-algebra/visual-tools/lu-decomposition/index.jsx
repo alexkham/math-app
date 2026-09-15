@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**LU decomposition** — the factorization $A = LU$ of a [square matrix](!/linear-algebra/matrix/types#1) into a lower triangular $L$ and an upper triangular $U$.
+      content: `[LU decomposition](!/linear-algebra/formulas#lu_decomposition) — the factorization $A = LU$ of a [square matrix](!/linear-algebra/definitions#square_matrix) into a lower triangular $L$ and an upper triangular $U$.
 
 **Unit lower triangular** — ones on the diagonal and zeros above it; the Doolittle convention used here, which makes $L$ unique.
 
-**Upper triangular** — zeros below the diagonal; $U$ is the [row echelon form](!/linear-algebra/linear-systems/echelon-form#1) that Gaussian elimination produces.
+**Upper triangular** — zeros below the diagonal; $U$ is the [row echelon form](!/linear-algebra/definitions#row_echelon_form) that Gaussian elimination produces.
 
-**Multiplier** — $\\ell_{i,k} = u_{i,k} / u_{k,k}$, the multiple of the [pivot](!/linear-algebra/linear-systems/echelon-form#4) row subtracted from row $i$ to clear its entry in column $k$; it is stored at position $(i, k)$ of $L$.
+**Multiplier** — $\\ell_{i,k} = u_{i,k} / u_{k,k}$, the multiple of the [pivot](!/linear-algebra/definitions#pivot) row subtracted from row $i$ to clear its entry in column $k$; it is stored at position $(i, k)$ of $L$.
 
-**Pivot** — the diagonal entry $u_{k,k}$ used to clear column $k$; it must be non-zero.
+[Pivot](!/linear-algebra/definitions#pivot) — the diagonal entry $u_{k,k}$ used to clear column $k$; it must be non-zero.
 
-**Partial pivoting** — swapping rows to bring a non-zero (or the largest) entry into the pivot position; the factorization then reads $PA = LU$ with $P$ a permutation matrix.
+[Partial pivoting](!/linear-algebra/linear-systems/gaussian-elimination#11) — swapping rows to bring a non-zero (or the largest) entry into the pivot position; the factorization then reads $PA = LU$ with $P$ a permutation matrix.
 
 **Forward substitution** — solving $L\\mathbf{y} = \\mathbf{b}$ from the top row down.
 
-**Back substitution** — solving $U\\mathbf{x} = \\mathbf{y}$ from the bottom row up.`,
+[Back substitution](!/linear-algebra/linear-systems/gaussian-elimination#5) — solving $U\\mathbf{x} = \\mathbf{y}$ from the bottom row up.`,
       before: ``,
       after: ``,
       link: '',
@@ -71,7 +71,7 @@ The layout reads $A = L \\cdot U$ throughout. $L$ starts with its ones and zeros
     },
     obj2: {
       title: `How the Elimination Runs`,
-      content: `The visualizer processes the columns from left to right, clearing everything below each pivot.
+      content: `The visualizer processes the columns from left to right, clearing everything below each [pivot](!/linear-algebra/linear-systems/echelon-form#4).
 
 • **Pivot** — the diagonal entry $u_{k,k}$ of the working matrix is marked; if it is zero and a non-zero entry sits below, a **swap** scene exchanges the two rows first
 • **Eliminate** — for each row $i$ below the pivot, the multiplier $\\ell_{i,k} = u_{i,k} / u_{k,k}$ is written into $L$ and $\\ell_{i,k}$ times the pivot row is subtracted from row $i$, one scene per row
@@ -113,7 +113,7 @@ Editing entries by hand is the quickest way to see how the multipliers respond: 
     },
     obj5: {
       title: `What the LU Decomposition Is`,
-      content: `Gaussian elimination turns a square matrix $A$ into an upper triangular $U$ by subtracting multiples of rows from the rows below them. Each such operation is itself a matrix: subtracting $\\ell$ times row $k$ from row $i$ is left-multiplication by an elementary matrix $E$ with $-\\ell$ at position $(i, k)$. Collecting them, $E_m \\cdots E_1 A = U$, so
+      content: `Gaussian elimination turns a [square matrix](!/linear-algebra/matrix/types#1) $A$ into an upper triangular $U$ by subtracting multiples of rows from the rows below them. Each such operation is itself a matrix: subtracting $\\ell$ times row $k$ from row $i$ is left-multiplication by an elementary matrix $E$ with $-\\ell$ at position $(i, k)$. Collecting them, $E_m \\cdots E_1 A = U$, so
 
 $$A = (E_m \\cdots E_1)^{-1} U = LU$$
 
