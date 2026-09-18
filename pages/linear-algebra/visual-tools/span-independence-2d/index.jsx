@@ -36,19 +36,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Linear combination** &mdash; any vector of the form $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for [scalars](!/linear-algebra/definitions#scalar) $c, d$.
+      content: `[Linear combination](!/linear-algebra/definitions#linear_combination) &mdash; any vector of the form $c\\,\\mathbf{a} + d\\,\\mathbf{b}$ for [scalars](!/linear-algebra/definitions#scalar) $c, d$.
 
-**Span** &mdash; the set of all [linear combinations](!/linear-algebra/definitions#linear_combination) of a collection of [vectors](!/linear-algebra/definitions#vector). For two vectors in the plane it is either the whole plane, a line through the origin, or just the origin.
+[Span](!/linear-algebra/definitions#span) &mdash; the set of all [linear combinations](!/linear-algebra/definitions#linear_combination) of a collection of [vectors](!/linear-algebra/definitions#vector). For two vectors in the plane it is either the whole plane, a line through the origin, or just the origin.
 
-**Linearly independent** &mdash; neither vector is a scalar multiple of the other; equivalently, the only way to write $c\\,\\mathbf{a} + d\\,\\mathbf{b} = \\mathbf{0}$ is $c = d = 0$.
+[Linearly independent](!/linear-algebra/definitions#linear_independence) &mdash; neither vector is a scalar multiple of the other; equivalently, the only way to write $c\\,\\mathbf{a} + d\\,\\mathbf{b} = \\mathbf{0}$ is $c = d = 0$.
 
-**Linearly dependent** &mdash; one vector is a multiple of the other (or one of them is zero), so the pair carries only one direction.
+[Linearly dependent](!/linear-algebra/vector-spaces/linear-independence#6) &mdash; one vector is a multiple of the other (or one of them is zero), so the pair carries only one direction.
 
-**Determinant** &mdash; $\\det[\\mathbf{a}\\;\\mathbf{b}] = a_1 b_2 - a_2 b_1$; its absolute value is the area of the parallelogram spanned by $\\mathbf{a}$ and $\\mathbf{b}$, and it is zero exactly when the pair is dependent.
+[Determinant](!/linear-algebra/definitions#determinant) &mdash; $\\det[\\mathbf{a}\\;\\mathbf{b}] = a_1 b_2 - a_2 b_1$; its absolute value is the area of the parallelogram spanned by $\\mathbf{a}$ and $\\mathbf{b}$, and it is zero exactly when the pair is dependent.
 
-**Rank** &mdash; the number of independent directions in the pair: $2$ if the span is the plane, $1$ if it is a line, $0$ if both vectors are zero.
+[Rank](!/linear-algebra/definitions#rank) &mdash; the number of independent directions in the pair: $2$ if the span is the plane, $1$ if it is a line, $0$ if both vectors are zero.
 
-**Basis of $\\mathbb{R}^2$** &mdash; any two independent vectors; every vector in the plane is then a unique combination of them.`,
+[Basis](!/linear-algebra/definitions#basis) of $\\mathbb{R}^2$ &mdash; any two independent vectors; every vector in the plane is then a unique combination of them.`,
       before: ``,
       after: ``,
       link: '',

@@ -2259,7 +2259,7 @@ For large symmetric positive definite systems, Cholesky is the fastest direct so
     title: `No Pivoting Needed`,
     content: `Unlike LU, the Cholesky algorithm never requires row swaps. Positive definiteness guarantees that the quantity under the square root is strictly positive at every step — no zero or negative pivots can occur.
 
-This makes the algorithm simpler (no permutation matrix to track), more stable (no near-zero pivots to amplify errors), and more predictable (the algorithm either runs to completion or breaks down, with no ambiguity).
+This makes the algorithm simpler (no [permutation matrix](!/linear-algebra/matrix/types#12) to track), more stable (no near-zero pivots to amplify errors), and more predictable (the algorithm either runs to completion or breaks down, with no ambiguity).
 
 If the algorithm encounters a non-positive value under the square root, the matrix is not positive definite. The breakdown happens at the first index $j$ where the leading $j \\times j$ principal submatrix fails to be positive definite. This makes Cholesky an efficient positive definiteness test: attempt the factorization and check whether it succeeds.`,
     before: ``,

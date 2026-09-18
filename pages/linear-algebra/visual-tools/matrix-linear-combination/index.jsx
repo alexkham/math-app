@@ -39,9 +39,9 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Linear combination](!/linear-algebra/definitions#linear_combination) — an expression $\\alpha A + \\beta B$ that scales each matrix by a [scalar](!/linear-algebra/definitions#scalar) and adds the results. More generally, $c_1 A_1 + c_2 A_2 + \\cdots + c_n A_n$.
 
-**Scalar coefficient** — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each matrix in the combination.
+[Scalar coefficient](!/linear-algebra/matrix/operations#4) — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each matrix in the combination.
 
-**Same-shape requirement** — all matrices in a linear combination must share identical [dimensions](!/linear-algebra/definitions#dimension) so the additions are defined.
+[Same-shape requirement](!/linear-algebra/definitions#conformability) — all matrices in a linear combination must share identical [dimensions](!/linear-algebra/definitions#dimension) so the additions are defined.
 
 **Result shape** — the linear combination has the same shape as the operands.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 [Linear independence](!/linear-algebra/definitions#linear_independence) — a property of a collection: no matrix in it can be written as a linear combination of the others.
 
-**Vector space of matrices** — the set of all $m \\times n$ matrices forms a [vector space](!/linear-algebra/definitions#vector_space) under [matrix addition](!/linear-algebra/formulas#matrix_addition) and scalar multiplication; linear combinations are its native operation.`,
+[Vector space of matrices](!/linear-algebra/vector-spaces/axioms#6) — the set of all $m \\times n$ matrices forms a [vector space](!/linear-algebra/definitions#vector_space) under [matrix addition](!/linear-algebra/formulas#matrix_addition) and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
       link: '',

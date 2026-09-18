@@ -37,21 +37,21 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Rank](!/linear-algebra/definitions#rank) — the number of linearly independent rows of a [matrix](!/linear-algebra/definitions#matrix), which always equals the number of linearly independent columns. Written $\\operatorname{rank} A$.
 
-[Pivot](!/linear-algebra/linear-systems/echelon-form#4) — the first non-zero entry of a row in echelon form. The rank is the number of [pivots](!/linear-algebra/definitions#pivot).
+[Pivot](!/linear-algebra/definitions#pivot) — the first non-zero entry of a row in echelon form. The rank is the number of pivots.
 
-[Pivot column](!/linear-algebra/linear-systems/echelon-form#4) — a column of $A$ containing a pivot after reduction; the pivot columns of $A$ form a basis of its [column space](!/linear-algebra/definitions#column_space).
+[Pivot column](!/linear-algebra/definitions#pivot_column) — a column of $A$ containing a pivot after reduction; the pivot columns of $A$ form a basis of its [column space](!/linear-algebra/definitions#column_space).
 
-**Free column** — a column with no pivot; it is a [linear combination](!/linear-algebra/definitions#linear_combination) of the pivot columns to its left.
+[Free column](!/linear-algebra/definitions#free_variable) — a column with no pivot; it is a [linear combination](!/linear-algebra/definitions#linear_combination) of the pivot columns to its left.
 
 [Row echelon form](!/linear-algebra/definitions#row_echelon_form) — a matrix in which each pivot lies strictly to the right of the pivot in the row above, and zero rows sit at the bottom.
 
-**Row operations** — swapping two rows, scaling a row, and adding a multiple of one row to another. None of them changes the rank.
+[Row operations](!/linear-algebra/definitions#elementary_row_operation) — swapping two rows, scaling a row, and adding a multiple of one row to another. None of them changes the rank.
 
-**Nullity** — the [dimension](!/linear-algebra/definitions#dimension) of the null space, equal to the number of free columns: $n - \\operatorname{rank} A$.
+[Nullity](!/linear-algebra/definitions#nullity) — the [dimension](!/linear-algebra/definitions#dimension) of the null space, equal to the number of free columns: $n - \\operatorname{rank} A$.
 
-[Rank-nullity theorem](!/linear-algebra/matrix/rank#6) — $\\operatorname{rank} A + \\operatorname{nullity} A = n$, the number of columns.
+[Rank-nullity theorem](!/linear-algebra/definitions#rank_nullity_theorem) — $\\operatorname{rank} A + \\operatorname{nullity} A = n$, the number of columns.
 
-**Full rank** — $\\operatorname{rank} A = \\min(m, n)$, the largest value an $m \\times n$ matrix can have.`,
+[Full rank](!/linear-algebra/definitions#full_rank) — $\\operatorname{rank} A = \\min(m, n)$, the largest value an $m \\times n$ matrix can have.`,
       before: ``,
       after: ``,
       link: '',

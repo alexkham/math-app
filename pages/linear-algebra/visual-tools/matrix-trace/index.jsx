@@ -527,13 +527,13 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Trace](!/linear-algebra/definitions#trace) — the sum of the main-diagonal entries of a [square matrix](!/linear-algebra/definitions#square_matrix): $\\text{tr}(A) = a_{1,1} + a_{2,2} + \\cdots + a_{n,n}$.
 
-**Main diagonal** — the entries $a_{i,i}$ where the row index equals the column index.
+[Main diagonal](!/linear-algebra/definitions#main_diagonal) — the entries $a_{i,i}$ where the row index equals the column index.
 
 [Square matrix](!/linear-algebra/definitions#square_matrix) — a matrix with the same number of rows and columns ($n \\times n$). [Trace](!/linear-algebra/definitions#trace) is defined only for square matrices.
 
-**Off-diagonal entries** — entries $a_{i,j}$ with $i \\neq j$. They are completely ignored by the trace.
+[Off-diagonal entries](!/linear-algebra/definitions#main_diagonal) — entries $a_{i,j}$ with $i \\neq j$. They are completely ignored by the trace.
 
-**Scalar invariant** — the trace returns a single number that is invariant under similarity transformations: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$.
+[Scalar invariant](!/linear-algebra/matrix/trace#6) — the trace returns a single number that is invariant under similarity transformations: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$.
 
 **$\\Sigma$ notation** — the trace can be written compactly as $\\text{tr}(A) = \\sum_{i=1}^{n} a_{i,i}$.`,
       before: ``,

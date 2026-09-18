@@ -588,17 +588,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Vector addition](!/linear-algebra/formulas#vector_addition) — combining two vectors of the same length into a third vector by adding paired components: $w_i = u_i + v_i$.
+      content: `[Vector addition](!/linear-algebra/vectors/basic-operations#1) — combining two vectors of the same length into a third vector by adding paired components: $w_i = u_i + v_i$.
 
-[Vector subtraction](!/linear-algebra/formulas#vector_subtraction) — combining two vectors of the same length by subtracting paired components: $w_i = u_i - v_i$.
+[Vector subtraction](!/linear-algebra/vectors/basic-operations#3) — combining two vectors of the same length by subtracting paired components: $w_i = u_i - v_i$.
 
-**Component-wise operation** — an operation applied independently to each component; the result at position $i$ depends only on the inputs at position $i$.
+[Component-wise operation](!/linear-algebra/definitions#element_wise_operation) — an operation applied independently to each component; the result at position $i$ depends only on the inputs at position $i$.
 
-**Same-length requirement** — both operand vectors must have the same number of components. A vector in $\\mathbb{R}^2$ cannot be added to a vector in $\\mathbb{R}^3$.
+[Same-length requirement](!/linear-algebra/definitions#conformability) — both operand vectors must have the same number of components. A vector in $\\mathbb{R}^2$ cannot be added to a vector in $\\mathbb{R}^3$.
 
 **Result length** — the output vector $w$ inherits the length of the operands. If $u$ and $v$ live in $\\mathbb{R}^n$, then $w$ lives in $\\mathbb{R}^n$.
 
-**Conformability** — the condition under which an operation is defined. For vector addition and subtraction, conformability means matching length.`,
+[Conformability](!/linear-algebra/definitions#conformability) — the condition under which an operation is defined. For vector addition and subtraction, conformability means matching length.`,
       before: ``,
       after: ``,
       link: '',

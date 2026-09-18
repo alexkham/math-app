@@ -39,17 +39,17 @@ export async function getStaticProps(){
 
 [Orthonormal set](!/linear-algebra/definitions#orthonormal_set) — an [orthogonal set](!/linear-algebra/definitions#orthogonal_set) in which every vector has length $1$.
 
-[Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt#3) — the procedure that turns any list of independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ into an orthogonal list $\\mathbf{u}_1, \\ldots, \\mathbf{u}_k$ with the same [span](!/linear-algebra/definitions#span), and then into an orthonormal list $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$.
+[Gram-Schmidt process](!/linear-algebra/definitions#gram_schmidt_process) — the procedure that turns any list of independent vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ into an orthogonal list $\\mathbf{u}_1, \\ldots, \\mathbf{u}_k$ with the same [span](!/linear-algebra/definitions#span), and then into an orthonormal list $\\mathbf{e}_1, \\ldots, \\mathbf{e}_k$.
 
-**Projection coefficient** — $c_{k,j} = \\dfrac{\\mathbf{v}_k \\cdot \\mathbf{u}_j}{\\mathbf{u}_j \\cdot \\mathbf{u}_j}$, the multiple of $\\mathbf{u}_j$ that is subtracted from $\\mathbf{v}_k$.
+[Projection coefficient](!/linear-algebra/orthogonality/gram-schmidt#2) — $c_{k,j} = \\dfrac{\\mathbf{v}_k \\cdot \\mathbf{u}_j}{\\mathbf{u}_j \\cdot \\mathbf{u}_j}$, the multiple of $\\mathbf{u}_j$ that is subtracted from $\\mathbf{v}_k$.
 
-**Orthogonalization** — the first pass, $\\mathbf{u}_k = \\mathbf{v}_k - \\sum_{j < k} c_{k,j} \\mathbf{u}_j$.
+[Orthogonalization](!/linear-algebra/orthogonality/gram-schmidt#3) — the first pass, $\\mathbf{u}_k = \\mathbf{v}_k - \\sum_{j < k} c_{k,j} \\mathbf{u}_j$.
 
 [Normalization](!/linear-algebra/orthogonality/gram-schmidt#4) — the second pass, $\\mathbf{e}_k = \\mathbf{u}_k / \\|\\mathbf{u}_k\\|$.
 
-**Span preservation** — at every stage $\\operatorname{span}\\{\\mathbf{u}_1, \\ldots, \\mathbf{u}_k\\} = \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$.
+[Span preservation](!/linear-algebra/orthogonality/gram-schmidt#6) — at every stage $\\operatorname{span}\\{\\mathbf{u}_1, \\ldots, \\mathbf{u}_k\\} = \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$.
 
-[QR decomposition](!/linear-algebra/formulas#qr_decomposition) — the [matrix](!/linear-algebra/definitions#matrix) form of the process: with the $\\mathbf{v}_k$ as the columns of $A$ and the $\\mathbf{e}_k$ as the columns of $Q$, $A = QR$ with $R$ upper triangular.`,
+[QR decomposition](!/linear-algebra/definitions#qr_decomposition) — the [matrix](!/linear-algebra/definitions#matrix) form of the process: with the $\\mathbf{v}_k$ as the columns of $A$ and the $\\mathbf{e}_k$ as the columns of $Q$, $A = QR$ with $R$ upper triangular.`,
       before: ``,
       after: ``,
       link: '',

@@ -37,17 +37,17 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Cross product](!/linear-algebra/definitions#cross_product) — the vector $\\mathbf{u} \\times \\mathbf{v}$ built from two [vectors](!/linear-algebra/definitions#vector) in $\\mathbb{R}^3$. It is perpendicular to both, and its length is the area of the parallelogram the two vectors [span](!/linear-algebra/definitions#span).
 
-**Component formula** — $w_1 = u_2 v_3 - u_3 v_2$, $w_2 = u_3 v_1 - u_1 v_3$, $w_3 = u_1 v_2 - u_2 v_1$. Each component skips its own row and cross-multiplies the other two.
+[Component formula](!/linear-algebra/vectors/cross-product#1) — $w_1 = u_2 v_3 - u_3 v_2$, $w_2 = u_3 v_1 - u_1 v_3$, $w_3 = u_1 v_2 - u_2 v_1$. Each component skips its own row and cross-multiplies the other two.
 
-**Determinant mnemonic** — the symbolic $3 \\times 3$ [determinant](!/linear-algebra/definitions#determinant) with $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in the first row, $\\mathbf{u}$ in the second and $\\mathbf{v}$ in the third. Expanding along the first row reproduces the component formula.
+[Determinant mnemonic](!/linear-algebra/determinants/applications#3) — the symbolic $3 \\times 3$ [determinant](!/linear-algebra/definitions#determinant) with $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in the first row, $\\mathbf{u}$ in the second and $\\mathbf{v}$ in the third. Expanding along the first row reproduces the component formula.
 
 **Cyclic order** — the index pattern $1 \\to 2 \\to 3 \\to 1$ that decides which product carries the plus sign in each component.
 
-**Minor and cofactor** — the $2 \\times 2$ determinant left after striking a row and a column, and that determinant with its position sign $(+, -, +)$ attached.
+[Minor and cofactor](!/linear-algebra/definitions#cofactor) — the $2 \\times 2$ determinant left after striking a row and a column, and that determinant with its position sign $(+, -, +)$ attached.
 
-**Right-hand rule** — the convention that fixes which of the two perpendicular directions $\\mathbf{u} \\times \\mathbf{v}$ points along.
+[Right-hand rule](!/linear-algebra/definitions#right_hand_rule) — the convention that fixes which of the two perpendicular directions $\\mathbf{u} \\times \\mathbf{v}$ points along.
 
-**Anticommutativity** — $\\mathbf{v} \\times \\mathbf{u} = -(\\mathbf{u} \\times \\mathbf{v})$. Swapping the operands reverses every component.`,
+[Anticommutativity](!/linear-algebra/vectors/cross-product#5) — $\\mathbf{v} \\times \\mathbf{u} = -(\\mathbf{u} \\times \\mathbf{v})$. Swapping the operands reverses every component.`,
       before: ``,
       after: ``,
       link: '',

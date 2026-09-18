@@ -643,9 +643,9 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Linear combination](!/linear-algebra/definitions#linear_combination) — an expression $\\alpha u + \\beta v$ that scales each vector by a [scalar](!/linear-algebra/definitions#scalar) and adds the results. More generally, $c_1 v_1 + c_2 v_2 + \\cdots + c_n v_n$.
 
-**Scalar coefficient** — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each vector in the combination.
+[Scalar coefficient](!/linear-algebra/vectors/linear-combinations#1) — the numbers $\\alpha, \\beta$ (or $c_i$) that multiply each vector in the combination.
 
-**Same-length requirement** — all vectors in a linear combination must have the same number of components so the additions are defined.
+[Same-length requirement](!/linear-algebra/definitions#conformability) — all vectors in a linear combination must have the same number of components so the additions are defined.
 
 **Result length** — the linear combination has the same length as the operands.
 
@@ -653,7 +653,7 @@ export async function getStaticProps(){
 
 [Linear independence](!/linear-algebra/definitions#linear_independence) — a property of a collection: no vector in it can be written as a linear combination of the others.
 
-[Vector space](!/linear-algebra/vector-spaces#1) — the set of all vectors of a given length forms a [vector space](!/linear-algebra/definitions#vector_space) under [vector addition](!/linear-algebra/formulas#vector_addition) and scalar multiplication; linear combinations are its native operation.`,
+[Vector space](!/linear-algebra/definitions#vector_space) — the set of all vectors of a given length forms a vector space under [vector addition](!/linear-algebra/formulas#vector_addition) and scalar multiplication; linear combinations are its native operation.`,
       before: ``,
       after: ``,
       link: '',

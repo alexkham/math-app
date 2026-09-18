@@ -35,13 +35,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[QR decomposition](!/linear-algebra/formulas#qr_decomposition) — the factorization $A = QR$ of a [matrix](!/linear-algebra/definitions#matrix) with linearly independent columns, where $Q$ has orthonormal columns and $R$ is upper triangular.
+      content: `[QR decomposition](!/linear-algebra/definitions#qr_decomposition) — the factorization $A = QR$ of a [matrix](!/linear-algebra/definitions#matrix) with linearly independent columns, where $Q$ has orthonormal columns and $R$ is upper triangular.
 
-**Orthonormal columns** — $\\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$ for $i \\neq j$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_i = 1$; equivalently $Q^T Q = I$.
+[Orthonormal columns](!/linear-algebra/definitions#orthogonal_matrix) — $\\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$ for $i \\neq j$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_i = 1$; equivalently $Q^T Q = I$.
 
-**Upper triangular** — all entries below the main diagonal are zero: $r_{j,k} = 0$ for $j > k$.
+[Upper triangular](!/linear-algebra/definitions#triangular_matrix) — all entries below the main diagonal are zero: $r_{j,k} = 0$ for $j > k$.
 
-[Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt#3) — the procedure that builds $Q$ column by column, and whose coefficients and lengths are the entries of $R$.
+[Gram-Schmidt process](!/linear-algebra/definitions#gram_schmidt_process) — the procedure that builds $Q$ column by column, and whose coefficients and lengths are the entries of $R$.
 
 **Working column** — $\\mathbf{u}_k = \\mathbf{a}_k - \\sum_{j<k} r_{j,k} \\mathbf{q}_j$, column $k$ of $A$ with its projections onto the finished columns removed.
 
@@ -49,7 +49,7 @@ export async function getStaticProps(){
 
 **Above the diagonal** — $r_{j,k} = \\mathbf{q}_j \\cdot \\mathbf{a}_k$, the coefficient of $\\mathbf{q}_j$ in column $k$ of $A$.
 
-**Reduced versus full** — this tool shows the reduced form, with $Q$ the same shape as $A$; the full form pads $Q$ to a square [orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) and $R$ with zero rows.`,
+[Reduced versus full](!/linear-algebra/decompositions/qr#4) — this tool shows the reduced form, with $Q$ the same shape as $A$; the full form pads $Q$ to a square [orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) and $R$ with zero rows.`,
       before: ``,
       after: ``,
       link: '',

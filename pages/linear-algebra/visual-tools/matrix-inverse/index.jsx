@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Inverse](!/linear-algebra/matrix/inverse#1) — the [matrix](!/linear-algebra/definitions#matrix) $A^{-1}$ with $A A^{-1} = A^{-1} A = I$. It exists exactly when $\\det A \\neq 0$, and then it is unique.
+      content: `[Inverse](!/linear-algebra/definitions#inverse_matrix) — the [matrix](!/linear-algebra/definitions#matrix) $A^{-1}$ with $A A^{-1} = A^{-1} A = I$. It exists exactly when $\\det A \\neq 0$, and then it is unique.
 
 [Minor](!/linear-algebra/definitions#minor) — $M_{i,j}$, the [determinant](!/linear-algebra/definitions#determinant) of the submatrix left after striking row $i$ and column $j$ of $A$.
 
 [Cofactor](!/linear-algebra/definitions#cofactor) — $C_{i,j} = (-1)^{i+j} M_{i,j}$, the minor with the checkerboard sign attached.
 
-[Cofactor matrix](!/linear-algebra/determinants/cofactors#5) — the matrix $C$ whose $(i,j)$ entry is $C_{i,j}$.
+[Cofactor matrix](!/linear-algebra/definitions#cofactor_matrix) — the matrix $C$ whose $(i,j)$ entry is $C_{i,j}$.
 
-[Adjugate](!/linear-algebra/determinants/cofactors#6) — $\\operatorname{adj} A = C^T$, the transpose of the cofactor matrix; also called the classical adjoint.
+[Adjugate](!/linear-algebra/definitions#adjugate) — $\\operatorname{adj} A = C^T$, the transpose of the cofactor matrix; also called the classical adjoint.
 
-**Adjugate formula** — $A^{-1} = \\dfrac{\\operatorname{adj} A}{\\det A}$.
+[Adjugate formula](!/linear-algebra/matrix/inverse#5) — $A^{-1} = \\dfrac{\\operatorname{adj} A}{\\det A}$.
 
 [Singular matrix](!/linear-algebra/definitions#singular_matrix) — a [square matrix](!/linear-algebra/definitions#square_matrix) with $\\det A = 0$; it has no inverse.
 
-**Row reduction** — the other standard route: reduce $[A \\mid I]$ to $[I \\mid A^{-1}]$ by row operations. It scales to any size; the adjugate formula shows the structure.`,
+[Row reduction](!/linear-algebra/matrix/inverse#4) — the other standard route: reduce $[A \\mid I]$ to $[I \\mid A^{-1}]$ by row operations. It scales to any size; the adjugate formula shows the structure.`,
       before: ``,
       after: ``,
       link: '',

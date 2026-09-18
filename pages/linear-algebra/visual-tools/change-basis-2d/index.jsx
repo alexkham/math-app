@@ -527,17 +527,17 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Basis** &mdash; A set of two linearly independent [vectors](!/linear-algebra/definitions#vector) in 2D that span the entire plane. Any vector can be written uniquely as a combination of [basis](!/linear-algebra/definitions#basis) vectors.
+      content:`[Basis](!/linear-algebra/definitions#basis) &mdash; A set of two linearly independent [vectors](!/linear-algebra/definitions#vector) in 2D that span the entire plane. Any vector can be written uniquely as a combination of basis vectors.
 
-**Change of Basis** &mdash; The process of re-expressing a vector&apos;s coordinates relative to a new basis while the vector itself remains fixed in space.
+[Change of Basis](!/linear-algebra/vector-spaces/basis#9) &mdash; The process of re-expressing a vector&apos;s coordinates relative to a new basis while the vector itself remains fixed in space.
 
-**Basis Matrix B** &mdash; A $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix) whose columns are the new basis vectors $b_1$ and $b_2$ written in standard coordinates.
+[Basis Matrix B](!/linear-algebra/definitions#change_of_basis_matrix) &mdash; A $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix) whose columns are the new basis vectors $b_1$ and $b_2$ written in standard coordinates.
 
-**Inverse Matrix B⁻¹** &mdash; The matrix that converts standard coordinates into coordinates relative to the new basis: $v_B = B^{-1} v_{std}$.
+[Inverse Matrix B⁻¹](!/linear-algebra/definitions#inverse_matrix) &mdash; The matrix that converts standard coordinates into coordinates relative to the new basis: $v_B = B^{-1} v_{std}$.
 
-**Determinant** &mdash; A [scalar](!/linear-algebra/definitions#scalar) value $\\det(B)$ indicating area scaling and orientation. Zero [determinant](!/linear-algebra/definitions#determinant) means the basis is degenerate.
+[Determinant](!/linear-algebra/definitions#determinant) &mdash; A [scalar](!/linear-algebra/definitions#scalar) value $\\det(B)$ indicating area scaling and orientation. Zero determinant means the basis is degenerate.
 
-**Orthonormal Basis** &mdash; A basis whose vectors are perpendicular and have unit length. For orthonormal bases, $B^{-1} = B^T$.`,
+[Orthonormal Basis](!/linear-algebra/definitions#orthonormal_set) &mdash; A basis whose vectors are perpendicular and have unit length. For orthonormal bases, $B^{-1} = B^T$.`,
       before:``,
       after:``,
       link:'',

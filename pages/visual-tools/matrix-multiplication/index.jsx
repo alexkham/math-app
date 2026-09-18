@@ -542,19 +542,19 @@ export async function getStaticProps() {
 
     obj0: {
       title: `Key Terms`,
-      content: `[Matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) — the product $C = AB$ of an $m \\times n$ matrix $A$ and an $n \\times p$ matrix $B$: an $m \\times p$ matrix with entries $c_{i,j} = \\sum_{k=1}^{n} a_{i,k}\\, b_{k,j}$.
+      content: `[Matrix multiplication](!/linear-algebra/matrix/operations#5) — the product $C = AB$ of an $m \\times n$ matrix $A$ and an $n \\times p$ matrix $B$: an $m \\times p$ matrix with entries $c_{i,j} = \\sum_{k=1}^{n} a_{i,k}\\, b_{k,j}$.
 
-**Inner dimensions** — the number of columns of the left factor and the number of rows of the right factor. They must be equal, or the product is undefined.
+[Inner dimensions](!/linear-algebra/definitions#conformability) — the number of columns of the left factor and the number of rows of the right factor. They must be equal, or the product is undefined.
 
-**Outer dimensions** — the number of rows of the left factor and the number of columns of the right factor. They are the shape of the product.
+[Outer dimensions](!/linear-algebra/definitions#conformability) — the number of rows of the left factor and the number of columns of the right factor. They are the shape of the product.
 
-[Dot product](!/linear-algebra/vectors/dot-product#1) — the sum of paired products of a row and a column of the same length. Every entry of $C$ is one [dot product](!/linear-algebra/definitions#dot_product).
+[Dot product](!/linear-algebra/definitions#dot_product) — the sum of paired products of a row and a column of the same length. Every entry of $C$ is one dot product.
 
-[Linear combination](!/linear-algebra/vectors/linear-combinations#1) — a weighted sum of [vectors](!/linear-algebra/definitions#vector). Each column of $C$ is a [linear combination](!/linear-algebra/definitions#linear_combination) of the columns of $A$, and each row of $C$ is a linear combination of the rows of $B$.
+[Linear combination](!/linear-algebra/definitions#linear_combination) — a weighted sum of [vectors](!/linear-algebra/definitions#vector). Each column of $C$ is a linear combination of the columns of $A$, and each row of $C$ is a linear combination of the rows of $B$.
 
-[Outer product](!/linear-algebra/decompositions/spectral#3) — a column times a row: an $m \\times p$ matrix of [rank](!/linear-algebra/definitions#rank) at most one. The product $AB$ is the sum of $n$ of them.
+[Outer product](!/linear-algebra/definitions#outer_product) — a column times a row: an $m \\times p$ matrix of [rank](!/linear-algebra/definitions#rank) at most one. The product $AB$ is the sum of $n$ of them.
 
-**Non-commutative** — $AB \\neq BA$ in general. The two products can differ in value, differ in shape, or one of them may not exist at all.`,
+[Non-commutative](!/linear-algebra/matrix/operations#6) — $AB \\neq BA$ in general. The two products can differ in value, differ in shape, or one of them may not exist at all.`,
       before: ``,
       after: ``,
       link: '',

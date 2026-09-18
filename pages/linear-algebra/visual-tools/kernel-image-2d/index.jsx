@@ -527,17 +527,17 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Kernel (Null Space)** &mdash; The set of all [vectors](!/linear-algebra/definitions#vector) $v$ in the domain such that $Av = 0$. The directions the [matrix](!/linear-algebra/definitions#matrix) collapses to the origin.
+      content:`[Kernel (Null Space)](!/linear-algebra/definitions#null_space) &mdash; The set of all [vectors](!/linear-algebra/definitions#vector) $v$ in the domain such that $Av = 0$. The directions the [matrix](!/linear-algebra/definitions#matrix) collapses to the origin.
 
-**Image (Column Space)** &mdash; The set of all outputs $Av$ as $v$ ranges over the domain. The reachable region in the codomain, equal to the [span](!/linear-algebra/definitions#span) of the columns of $A$.
+[Image (Column Space)](!/linear-algebra/definitions#image) &mdash; The set of all outputs $Av$ as $v$ ranges over the domain. The reachable region in the codomain, equal to the [span](!/linear-algebra/definitions#span) of the columns of $A$.
 
-**Rank** &mdash; The [dimension](!/linear-algebra/definitions#dimension) of the image. For a $2 \\times 2$ matrix, [rank](!/linear-algebra/definitions#rank) is 0, 1, or 2.
+[Rank](!/linear-algebra/definitions#rank) &mdash; The [dimension](!/linear-algebra/definitions#dimension) of the image. For a $2 \\times 2$ matrix, rank is 0, 1, or 2.
 
-**Nullity** &mdash; The dimension of the kernel. For a $2 \\times 2$ matrix, nullity is 0, 1, or 2.
+[Nullity](!/linear-algebra/definitions#nullity) &mdash; The dimension of the kernel. For a $2 \\times 2$ matrix, nullity is 0, 1, or 2.
 
-**Rank-Nullity Theorem** &mdash; For any $2 \\times 2$ matrix $A$, $\\dim(\\ker A) + \\dim(\\text{im } A) = 2$. What gets collapsed plus what gets reached always equals the input dimension.
+[Rank-Nullity Theorem](!/linear-algebra/definitions#rank_nullity_theorem) &mdash; For any $2 \\times 2$ matrix $A$, $\\dim(\\ker A) + \\dim(\\text{im } A) = 2$. What gets collapsed plus what gets reached always equals the input dimension.
 
-**Nilpotent** &mdash; A matrix with $A^2 = 0$. In rank-1 cases the kernel and image are the same line.`,
+[Nilpotent](!/linear-algebra/definitions#nilpotent_matrix) &mdash; A matrix with $A^2 = 0$. In rank-1 cases the kernel and image are the same line.`,
       before:``,
       after:``,
       link:'',

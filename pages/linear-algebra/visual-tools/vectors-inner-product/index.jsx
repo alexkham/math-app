@@ -41,13 +41,13 @@ export async function getStaticProps(){
 
 [Dot product](!/linear-algebra/definitions#dot_product) — the classical [inner product](!/linear-algebra/definitions#inner_product) of two [vectors](!/linear-algebra/definitions#vector) of equal length: $\\langle u, v \\rangle = \\sum_k u_k v_k$.
 
-[Frobenius inner product](!/linear-algebra/formulas#frobenius_inner_product) — the inner product of two matrices of the same shape: $\\langle A, B \\rangle_F = \\sum_{i,j} a_{i,j} b_{i,j}$.
+[Frobenius inner product](!/linear-algebra/definitions#frobenius_inner_product) — the inner product of two matrices of the same shape: $\\langle A, B \\rangle_F = \\sum_{i,j} a_{i,j} b_{i,j}$.
 
-**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/definitions#dimension) so every entry of one has a partner in the other.
+[Same-shape requirement](!/linear-algebra/definitions#conformability) — both operands must have identical [dimensions](!/linear-algebra/definitions#dimension) so every entry of one has a partner in the other.
 
 **Scalar result** — the output of an inner product is always a single number, regardless of how large the operands are.
 
-**Inner product space** — a [vector space](!/linear-algebra/definitions#vector_space) equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
+[Inner product space](!/linear-algebra/definitions#inner_product_space) — a [vector space](!/linear-algebra/definitions#vector_space) equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
       before: ``,
       after: ``,
       link: '',

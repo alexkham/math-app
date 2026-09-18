@@ -41,7 +41,7 @@ export async function getStaticProps(){
 
 [Characteristic polynomial](!/linear-algebra/definitions#characteristic_polynomial) — $p(\\lambda) = \\det(A - \\lambda I)$, whose roots are the [eigenvalues](!/linear-algebra/definitions#eigenvalue); shown monic in the tool.
 
-[Characteristic equation](!/linear-algebra/formulas#characteristic_equation) — $\\det(A - \\lambda I) = 0$.
+[Characteristic equation](!/linear-algebra/eigen/characteristic-equation#1) — $\\det(A - \\lambda I) = 0$.
 
 [Eigenspace](!/linear-algebra/definitions#eigenspace) — the null space of $A - \\lambda I$, all [eigenvectors](!/linear-algebra/definitions#eigenvector) for $\\lambda$ together with $\\mathbf{0}$.
 
@@ -49,9 +49,9 @@ export async function getStaticProps(){
 
 [Geometric multiplicity](!/linear-algebra/definitions#geometric_multiplicity) — the [dimension](!/linear-algebra/definitions#dimension) of the [eigenspace](!/linear-algebra/definitions#eigenspace), the number of free columns of $A - \\lambda I$; never exceeds the algebraic multiplicity.
 
-**Defective** — a [matrix](!/linear-algebra/definitions#matrix) with some eigenvalue whose geometric multiplicity is smaller than its algebraic one; such a matrix cannot be diagonalized.
+[Defective](!/linear-algebra/definitions#defective_matrix) — a [matrix](!/linear-algebra/definitions#matrix) with some eigenvalue whose geometric multiplicity is smaller than its algebraic one; such a matrix cannot be diagonalized.
 
-**Trace and determinant** — the eigenvalues sum to $\\operatorname{tr} A$ and multiply to $\\det A$, counting multiplicity.`,
+[Trace and determinant](!/linear-algebra/eigen/properties#1) — the eigenvalues sum to $\\operatorname{tr} A$ and multiply to $\\det A$, counting multiplicity.`,
       before: ``,
       after: ``,
       link: '',

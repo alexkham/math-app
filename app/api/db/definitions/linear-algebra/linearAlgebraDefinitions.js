@@ -1892,13 +1892,22 @@ $$\\text{tr}(A) = a_{11} + a_{22} + \\cdots + a_{nn} = \\sum_{i=1}^{n} a_{ii}$$`
     id: 'permutation_matrix',
     name: 'Permutation Matrix',
     category: 'Matrices',
-    formula: `An [identity matrix](!/linear-algebra/definitions#identity_matrix) with its rows reordered — exactly one $1$ in each row and each column`,
-    link: { url: '/linear-algebra/matrix/types#9', label: 'Involutory and Permutation Matrices' },
+    formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) with exactly one entry equal to $1$ in each row and each column, and $0$ everywhere else — the [identity matrix](!/linear-algebra/definitions#identity_matrix) with its rows rearranged:
+$$P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$$`,
+    link: { url: '/linear-algebra/matrix/types#12', label: 'Permutation Matrices' },
     fields: {
-      intuition: `Multiplying by it shuffles rows (from the left) or columns (from the right) without changing any value. It is orthogonal, so its inverse is its [transpose](!/linear-algebra/definitions#transpose), and it is how the row swaps of [partial pivoting](!/linear-algebra/definitions#partial_pivoting) get recorded in $PA = LU$.`,
+      intuition: `It moves entries without changing them. $PA$ reorders the rows of $A$ and $AP$ reorders the columns, but nothing is scaled and nothing is combined. There are $n!$ permutation matrices of order $n$, one for each permutation of the indices. It is orthogonal, so its inverse is its [transpose](!/linear-algebra/definitions#transpose), and it is how the row swaps of [partial pivoting](!/linear-algebra/definitions#partial_pivoting) get recorded in $PA = LU$.`,
+      properties: `• Orthogonal, so $P^{-1} = P^{\\mathsf{T}}$
+• $\\det(P) = \\pm 1$, the sign of the permutation
+• $\\operatorname{tr}(P)$ counts the fixed points of the permutation
+• The eigenvalues are roots of unity, determined by the cycle type
+• Products and inverses of permutation matrices are permutation matrices`,
       'related concepts': `• [Identity Matrix](!/linear-algebra/definitions#identity_matrix)
 • [Orthogonal Matrix](!/linear-algebra/definitions#orthogonal_matrix)
+• [Square Matrix](!/linear-algebra/definitions#square_matrix)
 • [Partial Pivoting](!/linear-algebra/definitions#partial_pivoting)`,
+      'related formulas': `• [Permutation Matrix Inverse](!/linear-algebra/formulas#permutation_matrix_inverse)
+• [Permutation Matrix Determinant](!/linear-algebra/formulas#permutation_matrix_determinant)`,
     },
   },
 
@@ -1934,7 +1943,7 @@ $$\\text{tr}(A) = a_{11} + a_{22} + \\cdots + a_{nn} = \\sum_{i=1}^{n} a_{ii}$$`
     name: 'Involutory Matrix',
     category: 'Matrices',
     formula: `A [square matrix](!/linear-algebra/definitions#square_matrix) that is its own inverse: $A^2 = I$`,
-    link: { url: '/linear-algebra/matrix/types#9', label: 'Involutory and Permutation Matrices' },
+    link: { url: '/linear-algebra/matrix/types#9', label: 'Involutory Matrices' },
     fields: {
       intuition: `Applying it twice returns every vector to where it started, as a [reflection](!/linear-algebra/definitions#reflection) does. Its eigenvalues can only be $\\pm 1$.`,
       'related concepts': `• [Reflection](!/linear-algebra/definitions#reflection)

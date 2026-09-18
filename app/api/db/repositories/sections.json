@@ -24894,11 +24894,21 @@
       "status": "seeded"
     },
     {
+      "id": "/linear-algebra/matrix/types#12",
+      "page": "/linear-algebra/matrix/types",
+      "slug": "12",
+      "title": "Permutation Matrices",
+      "order": 4,
+      "contentKey": "obj12",
+      "isNumeric": true,
+      "status": "seeded"
+    },
+    {
       "id": "/linear-algebra/matrix/types#5",
       "page": "/linear-algebra/matrix/types",
       "slug": "5",
       "title": "Symmetric Matrices",
-      "order": 4,
+      "order": 5,
       "contentKey": "obj5",
       "isNumeric": true,
       "status": "seeded"
@@ -24908,7 +24918,7 @@
       "page": "/linear-algebra/matrix/types",
       "slug": "6",
       "title": "Skew-Symmetric Matrices",
-      "order": 5,
+      "order": 6,
       "contentKey": "obj6",
       "isNumeric": true,
       "status": "seeded"
@@ -24918,7 +24928,7 @@
       "page": "/linear-algebra/matrix/types",
       "slug": "7",
       "title": "Orthogonal Matrices",
-      "order": 6,
+      "order": 7,
       "contentKey": "obj7",
       "isNumeric": true,
       "status": "seeded"
@@ -24928,7 +24938,7 @@
       "page": "/linear-algebra/matrix/types",
       "slug": "8",
       "title": "Nilpotent and Idempotent Matrices",
-      "order": 7,
+      "order": 8,
       "contentKey": "obj8",
       "isNumeric": true,
       "status": "seeded"
@@ -24937,8 +24947,8 @@
       "id": "/linear-algebra/matrix/types#9",
       "page": "/linear-algebra/matrix/types",
       "slug": "9",
-      "title": "Involutory and Permutation Matrices",
-      "order": 8,
+      "title": "Involutory Matrices",
+      "order": 9,
       "contentKey": "obj9",
       "isNumeric": true,
       "status": "seeded"
@@ -24948,7 +24958,7 @@
       "page": "/linear-algebra/matrix/types",
       "slug": "10",
       "title": "Singular and Nonsingular Matrices",
-      "order": 9,
+      "order": 10,
       "contentKey": "obj10",
       "isNumeric": true,
       "status": "seeded"
@@ -24958,7 +24968,7 @@
       "page": "/linear-algebra/matrix/types",
       "slug": "11",
       "title": "Summary of Matrix Types",
-      "order": 10,
+      "order": 11,
       "contentKey": "obj11",
       "isNumeric": true,
       "status": "seeded"

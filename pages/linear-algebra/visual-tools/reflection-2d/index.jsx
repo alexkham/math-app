@@ -36,21 +36,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Reflection across a line** &mdash; the linear map sending each [vector](!/linear-algebra/definitions#vector) $\\mathbf{v}$ to its mirror image on the other side of the line, the same distance away.
+      content: `[Reflection across a line](!/linear-algebra/definitions#reflection) &mdash; the linear map sending each [vector](!/linear-algebra/definitions#vector) $\\mathbf{v}$ to its mirror image on the other side of the line, the same distance away.
 
-**Reflection matrix** &mdash; for the mirror at angle $\\theta$, $R = \\begin{pmatrix} \\cos 2\\theta & \\sin 2\\theta \\\\ \\sin 2\\theta & -\\cos 2\\theta \\end{pmatrix}$, equivalently $R = 2P - I$ with $P$ the projection onto the same line.
+[Reflection matrix](!/linear-algebra/transformations/geometric#5) &mdash; for the mirror at angle $\\theta$, $R = \\begin{pmatrix} \\cos 2\\theta & \\sin 2\\theta \\\\ \\sin 2\\theta & -\\cos 2\\theta \\end{pmatrix}$, equivalently $R = 2P - I$ with $P$ the projection onto the same line.
 
 **Mirror** &mdash; the line of fixed points; every vector on it is its own reflection.
 
-**Involution** &mdash; $R^2 = I$; reflecting twice returns every vector to where it started, so $R^{-1} = R$.
+[Involution](!/linear-algebra/definitions#involutory_matrix) &mdash; $R^2 = I$; reflecting twice returns every vector to where it started, so $R^{-1} = R$.
 
-**Orientation reversing** &mdash; $\\det R = -1$; the unit square comes back the same shape but flipped over.
+[Orientation reversing](!/linear-algebra/definitions#orientation) &mdash; $\\det R = -1$; the unit square comes back the same shape but flipped over.
 
-**Eigenvalues $\\pm 1$** &mdash; $+1$ along the mirror, $-1$ along the perpendicular; the two eigendirections are perpendicular.
+[Eigenvalues](!/linear-algebra/definitions#eigenvalue) $\\pm 1$ &mdash; $+1$ along the mirror, $-1$ along the perpendicular; the two eigendirections are perpendicular.
 
 **Midpoint property** &mdash; the midpoint of $\\mathbf{v}$ and $R\\mathbf{v}$ is the projection $P\\mathbf{v}$, the foot of the perpendicular on the mirror.
 
-**Isometry** &mdash; $\\|R\\mathbf{v}\\| = \\|\\mathbf{v}\\|$; reflections preserve lengths and angles.`,
+[Isometry](!/linear-algebra/definitions#isometry) &mdash; $\\|R\\mathbf{v}\\| = \\|\\mathbf{v}\\|$; reflections preserve lengths and angles.`,
       before: ``,
       after: ``,
       link: '',

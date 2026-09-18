@@ -37,17 +37,17 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Span](!/linear-algebra/definitions#span) — the set of all [linear combinations](!/linear-algebra/definitions#linear_combination) $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k$; the smallest [subspace](!/linear-algebra/definitions#subspace) containing the [vectors](!/linear-algebra/definitions#vector).
 
-**Membership** — $\\mathbf{w} \\in \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ exactly when $V\\mathbf{c} = \\mathbf{w}$ has a solution, where $V$ has the $\\mathbf{v}_i$ as columns.
+[Membership](!/linear-algebra/vector-spaces/span#4) — $\\mathbf{w} \\in \\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ exactly when $V\\mathbf{c} = \\mathbf{w}$ has a solution, where $V$ has the $\\mathbf{v}_i$ as columns.
 
-[Coordinates](!/linear-algebra/vector-spaces#4) — the solution $\\mathbf{c}$; unique when the $\\mathbf{v}_i$ are independent, in which case $\\mathbf{c}$ is the [coordinate vector](!/linear-algebra/formulas#coordinate_vector) of $\\mathbf{w}$ in the basis $\\{\\mathbf{v}_i\\}$.
+[Coordinates](!/linear-algebra/definitions#coordinates) — the solution $\\mathbf{c}$; unique when the $\\mathbf{v}_i$ are independent, in which case $\\mathbf{c}$ is the [coordinate vector](!/linear-algebra/formulas#coordinate_vector) of $\\mathbf{w}$ in the basis $\\{\\mathbf{v}_i\\}$.
 
-**Dimension of the span** — the rank of $V$; the number of [pivot](!/linear-algebra/definitions#pivot) columns.
+[Dimension of the span](!/linear-algebra/definitions#dimension) — the rank of $V$; the number of [pivot](!/linear-algebra/definitions#pivot) columns.
 
 [Linear independence](!/linear-algebra/definitions#linear_independence) — rank equal to $k$; no vector is a combination of the others.
 
-**Dependency** — a relation $\\mathbf{v}_f = \\sum c_i\\mathbf{v}_i$ read from a free column of the reduced form.
+[Dependency](!/linear-algebra/vector-spaces/linear-independence#6) — a relation $\\mathbf{v}_f = \\sum c_i\\mathbf{v}_i$ read from a free column of the reduced form.
 
-**Basis of the span** — the pivot vectors; the dependent ones can be dropped without shrinking the span.
+[Basis of the span](!/linear-algebra/definitions#basis) — the pivot vectors; the dependent ones can be dropped without shrinking the span.
 
 [Augmented matrix](!/linear-algebra/definitions#augmented_matrix) — $[V \\mid \\mathbf{w}]$, whose reduction decides consistency.`,
       before: ``,

@@ -35,23 +35,23 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Singular value decomposition (SVD)](!/linear-algebra/decompositions/svd#1) — $A = U\\Sigma V^T$ for any $m \\times n$ [matrix](!/linear-algebra/definitions#matrix), with $U$ ($m \\times m$) and $V$ ($n \\times n$) orthogonal and $\\Sigma$ ($m \\times n$) diagonal.
+      content: `[Singular value decomposition (SVD)](!/linear-algebra/definitions#singular_value_decomposition) — $A = U\\Sigma V^T$ for any $m \\times n$ [matrix](!/linear-algebra/definitions#matrix), with $U$ ($m \\times m$) and $V$ ($n \\times n$) orthogonal and $\\Sigma$ ($m \\times n$) diagonal.
 
-[Singular values](!/linear-algebra/formulas#singular_values) — the diagonal entries $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$ of $\\Sigma$; the square roots of the [eigenvalues](!/linear-algebra/definitions#eigenvalue) of $A^TA$.
+[Singular values](!/linear-algebra/definitions#singular_value) — the diagonal entries $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$ of $\\Sigma$; the square roots of the [eigenvalues](!/linear-algebra/definitions#eigenvalue) of $A^TA$.
 
-**Right singular vectors** — the columns $\\mathbf{v}_i$ of $V$, orthonormal [eigenvectors](!/linear-algebra/definitions#eigenvector) of $A^TA$; the input directions.
+[Right singular vectors](!/linear-algebra/decompositions/svd#4) — the columns $\\mathbf{v}_i$ of $V$, orthonormal [eigenvectors](!/linear-algebra/definitions#eigenvector) of $A^TA$; the input directions.
 
-**Left singular vectors** — the columns $\\mathbf{u}_i$ of $U$, with $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for $\\sigma_i > 0$; the output directions.
+[Left singular vectors](!/linear-algebra/decompositions/svd#4) — the columns $\\mathbf{u}_i$ of $U$, with $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for $\\sigma_i > 0$; the output directions.
 
 [Rank](!/linear-algebra/definitions#rank) — the number of non-zero singular values.
 
 **Rank-one form** — $A = \\sum \\sigma_i\\mathbf{u}_i\\mathbf{v}_i^T$; truncating it gives the best low-[rank](!/linear-algebra/definitions#rank) approximation.
 
-**Spectral norm** — $\\|A\\|_2 = \\sigma_1$, the largest stretch; [Frobenius norm](!/linear-algebra/formulas#frobenius_norm) — $\\sqrt{\\sum\\sigma_i^2}$.
+[Spectral norm](!/linear-algebra/definitions#spectral_norm) — $\\|A\\|_2 = \\sigma_1$, the largest stretch; [Frobenius norm](!/linear-algebra/formulas#frobenius_norm) — $\\sqrt{\\sum\\sigma_i^2}$.
 
-[Condition number](!/linear-algebra/formulas#condition_number) — $\\sigma_1 / \\sigma_r$, the ratio of largest to smallest non-zero singular value.
+[Condition number](!/linear-algebra/definitions#condition_number) — $\\sigma_1 / \\sigma_r$, the ratio of largest to smallest non-zero singular value.
 
-[Pseudoinverse](!/linear-algebra/decompositions/svd#7) — $A^+ = V\\Sigma^+U^T$, inverting the non-zero singular values; gives [least-squares solutions](!/linear-algebra/orthogonality/least-squares).`,
+[Pseudoinverse](!/linear-algebra/definitions#pseudoinverse) — $A^+ = V\\Sigma^+U^T$, inverting the non-zero singular values; gives [least-squares solutions](!/linear-algebra/orthogonality/least-squares).`,
       before: ``,
       after: ``,
       link: '',

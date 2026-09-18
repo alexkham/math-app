@@ -38,17 +38,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Matrix addition](!/linear-algebra/formulas#matrix_addition) — combining two matrices of the same shape into a third matrix by adding paired entries: $c_{i,j} = a_{i,j} + b_{i,j}$.
+      content: `[Matrix addition](!/linear-algebra/matrix/operations#1) — combining two matrices of the same shape into a third matrix by adding paired entries: $c_{i,j} = a_{i,j} + b_{i,j}$.
 
-[Matrix subtraction](!/linear-algebra/formulas#matrix_subtraction) — combining two matrices of the same shape by subtracting paired entries: $c_{i,j} = a_{i,j} - b_{i,j}$.
+[Matrix subtraction](!/linear-algebra/matrix/operations#2) — combining two matrices of the same shape by subtracting paired entries: $c_{i,j} = a_{i,j} - b_{i,j}$.
 
-**Element-wise operation** — an operation applied independently to each entry; the result at position $(i,j)$ depends only on the inputs at position $(i,j)$.
+[Element-wise operation](!/linear-algebra/definitions#element_wise_operation) — an operation applied independently to each entry; the result at position $(i,j)$ depends only on the inputs at position $(i,j)$.
 
-**Same-shape requirement** — both operand matrices must have identical row and column counts. A $2 \\times 3$ matrix cannot be added to a $3 \\times 2$ matrix.
+[Same-shape requirement](!/linear-algebra/definitions#conformability) — both operand matrices must have identical row and column counts. A $2 \\times 3$ matrix cannot be added to a $3 \\times 2$ matrix.
 
 **Result shape** — the output matrix $C$ inherits the shape of the operands. If $A$ and $B$ are $m \\times n$, then $C$ is $m \\times n$.
 
-**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching [dimensions](!/linear-algebra/definitions#dimension).`,
+[Conformability](!/linear-algebra/definitions#conformability) — the condition under which an operation is defined. For addition and subtraction, conformability means matching [dimensions](!/linear-algebra/definitions#dimension).`,
       before: ``,
       after: ``,
       link: '',

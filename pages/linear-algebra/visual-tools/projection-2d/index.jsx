@@ -36,21 +36,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Orthogonal projection onto a line** &mdash; the linear map sending each vector $\\mathbf{v}$ to the point on the line closest to it, the foot of the perpendicular dropped from $\\mathbf{v}$.
+      content: `[Orthogonal projection onto a line](!/linear-algebra/definitions#vector_projection) &mdash; the linear map sending each vector $\\mathbf{v}$ to the point on the line closest to it, the foot of the perpendicular dropped from $\\mathbf{v}$.
 
-**Projection matrix** &mdash; for the line at angle $\\theta$ with unit direction $\\mathbf{u} = (\\cos\\theta, \\sin\\theta)$, $P = \\mathbf{u}\\mathbf{u}^T = \\begin{pmatrix} \\cos^2\\theta & \\cos\\theta\\sin\\theta \\\\ \\cos\\theta\\sin\\theta & \\sin^2\\theta \\end{pmatrix}$.
+[Projection matrix](!/linear-algebra/definitions#projection_matrix) &mdash; for the line at angle $\\theta$ with unit direction $\\mathbf{u} = (\\cos\\theta, \\sin\\theta)$, $P = \\mathbf{u}\\mathbf{u}^T = \\begin{pmatrix} \\cos^2\\theta & \\cos\\theta\\sin\\theta \\\\ \\cos\\theta\\sin\\theta & \\sin^2\\theta \\end{pmatrix}$.
 
-**Image** &mdash; the set of all outputs $P\\mathbf{v}$; for a projection onto a line it is the line itself.
+[Image](!/linear-algebra/definitions#image) &mdash; the set of all outputs $P\\mathbf{v}$; for a projection onto a line it is the line itself.
 
-**Kernel** &mdash; the set of [vectors](!/linear-algebra/definitions#vector) sent to $\\mathbf{0}$; here the line perpendicular to the projection line.
+[Kernel](!/linear-algebra/definitions#null_space) &mdash; the set of [vectors](!/linear-algebra/definitions#vector) sent to $\\mathbf{0}$; here the line perpendicular to the projection line.
 
-**Idempotent** &mdash; $P^2 = P$; projecting a second time changes nothing.
+[Idempotent](!/linear-algebra/definitions#idempotent_matrix) &mdash; $P^2 = P$; projecting a second time changes nothing.
 
-**Symmetric** &mdash; $P^T = P$, the mark of an orthogonal (as opposed to oblique) projection.
+[Symmetric](!/linear-algebra/definitions#symmetric_matrix) &mdash; $P^T = P$, the mark of an orthogonal (as opposed to oblique) projection.
 
-**Rank $1$** &mdash; the image is one-dimensional; $\\det P = 0$ and $\\operatorname{tr} P = 1$ for every line.
+[Rank](!/linear-algebra/definitions#rank) $1$ &mdash; the image is one-dimensional; $\\det P = 0$ and $\\operatorname{tr} P = 1$ for every line.
 
-**Residual** &mdash; $\\mathbf{v} - P\\mathbf{v}$, the perpendicular part, which lies in the kernel.`,
+[Residual](!/linear-algebra/definitions#residual) &mdash; $\\mathbf{v} - P\\mathbf{v}$, the perpendicular part, which lies in the kernel.`,
       before: ``,
       after: ``,
       link: '',

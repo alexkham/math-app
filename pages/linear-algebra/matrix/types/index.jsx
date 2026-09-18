@@ -1,5 +1,4 @@
 
-
 // // tables-optimized: v4 | 2026-05-20 | 2 tables (obj8 comparison, obj11 summary capstone)
 
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
@@ -11,6 +10,11 @@
 // import Head from 'next/head'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 // import { tableHeaders } from '@/app/styles/theme'
+// import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
+// import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+// import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+// import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+// import matrixTypesDiagrams from '@/app/components/matrices/matrixTypesDiagrams'
 
 
 // export async function getStaticProps(){
@@ -83,254 +87,183 @@
 // `
 
 //   // obj11 — summary capstone: all matrix types at a glance
-//   const summaryTable = `
-// <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-//   <thead>
-//     <tr>
-//       <th style="${tableHeaders.summary}">Type</th>
-//       <th style="${tableHeaders.summary}">Defining condition</th>
-//       <th style="${tableHeaders.summary}">Eigenvalue signature</th>
-//       <th style="${tableHeaders.summary}">Key consequence</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity (I)</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Iᵢⱼ = 1 if i = j, else 0</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all equal to 1</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">AI = IA = A; multiplicative identity</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero entries only on the main diagonal</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the diagonal entries dᵢ</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">products, powers, and inverse act on the diagonal alone</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Upper triangular</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all entries below the diagonal equal 0</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the diagonal entries</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">det = product of diagonal; closed under products</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Lower triangular</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all entries above the diagonal equal 0</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the diagonal entries</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">det = product of diagonal; closed under products</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A = Aᵀ</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">orthogonally diagonalizable: A = QDQᵀ</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Skew-symmetric</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Aᵀ = −A (forces zero diagonal)</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 or purely imaginary, conjugate pairs ±bi</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">det = 0 when order n is odd</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Orthogonal</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">QᵀQ = I &nbsp;(columns orthonormal)</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|λ| = 1 (lie on the unit circle)</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves lengths and angles; Q⁻¹ = Qᵀ</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Nilpotent</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Aᵏ = O for some k ≥ 1</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all equal to 0</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(I − A)⁻¹ = I + A + ⋯ + A^(k−1)</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Idempotent</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A² = A</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only 0 or 1</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">projection; rank(A) = tr(A)</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Involutory</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A² = I</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only +1 or −1</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is its own inverse: A⁻¹ = A</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Permutation</td>
-//       <td style="padding: 12px 15px; color: #34495e;">exactly one 1 per row and column, all others 0</td>
-//       <td style="padding: 12px 15px; color: #34495e;">roots of unity, |λ| = 1</td>
-//       <td style="padding: 12px 15px; color: #34495e;">reorders coordinates; orthogonal: P⁻¹ = Pᵀ</td>
-//     </tr>
-//   </tbody>
-// </table>
-// `
+//   // obj11 — eleven types, grouped by what defines them
+//   const matrixTypeProfiles = {
+//     kicker: 'Matrix \u00B7 types',
+//     title: 'Eleven types and what each one forces',
+//     tallyLabel: 'types',
+//     intro: 'Each type is a condition on the entries, and the condition determines everything beside it. Grouped by what the condition constrains \u2014 the pattern of zeros, the transpose, or a power of the matrix.',
+//     footnote: 'Read down a column rather than across a row and the families appear. Every type in the orthogonal group has $|\\det| = \\pm 1$; every type defined by a power condition has integer eigenvalues; only the diagonal family has an inverse computed entrywise. The groupings are not filing \u2014 they predict the columns.',
+//     slots: [
+//       { key: 'det',         label: 'det' },
+//       { key: 'eigenvalues', label: 'eigenvalues' },
+//       { key: 'inverse',     label: 'inverse' },
+//       { key: 'consequence', label: 'key consequence' },
+//     ],
+//     groups: [
+//       {
+//         heading: 'Defined by a pattern of zeros',
+//         types: [
+//           {
+//             name: 'Identity',
+//             anchor: '#2',
+//             shape: 'identity',
+//             condition: '$I_{ij} = 1$ if $i = j$, else $0$',
+//             properties: {
+//               det: '$1$',
+//               eigenvalues: 'all $1$',
+//               inverse: '$I$',
+//               consequence: '$AI = IA = A$',
+//             },
+//             note: 'The multiplicative identity, and the one matrix that commutes with everything of its size. Every type below is a generalisation of it in some direction.',
+//           },
+//           {
+//             name: 'Diagonal',
+//             anchor: '#3',
+//             shape: 'diagonal',
+//             condition: 'nonzero entries only on the main diagonal',
+//             properties: {
+//               det: '$\\prod d_i$',
+//               eigenvalues: 'the $d_i$',
+//               inverse: '$1/d_i$ entrywise',
+//               consequence: 'products and powers act entrywise',
+//             },
+//             note: 'Everything is entrywise \u2014 which is the whole reason [diagonalization](!/linear-algebra/eigen/diagonalization) is worth the effort of computing eigenvectors.',
+//           },
+//           {
+//             name: 'Upper triangular',
+//             anchor: '#4',
+//             shape: 'upper',
+//             condition: 'all entries below the diagonal are $0$',
+//             properties: {
+//               det: '$\\prod a_{ii}$',
+//               eigenvalues: 'the $a_{ii}$',
+//               inverse: 'upper triangular',
+//               consequence: 'closed under products',
+//             },
+//             note: 'The determinant and the spectrum are both read straight off the diagonal, which is what makes [LU](!/linear-algebra/decompositions/lower-upper) worth computing.',
+//           },
+//           {
+//             name: 'Lower triangular',
+//             anchor: '#4',
+//             shape: 'lower',
+//             condition: 'all entries above the diagonal are $0$',
+//             properties: {
+//               det: '$\\prod a_{ii}$',
+//               eigenvalues: 'the $a_{ii}$',
+//               inverse: 'lower triangular',
+//               consequence: 'closed under products',
+//             },
+//             note: 'The mirror image, and the $L$ of an LU factorization. The transpose of one is the other.',
+//           },
+//         ],
+//       },
+//       {
+//         heading: 'Defined by a transpose condition',
+//         types: [
+//           {
+//             name: 'Symmetric',
+//             anchor: '#5',
+//             shape: 'symmetric',
+//             condition: '$A = A^{\\mathsf{T}}$',
+//             properties: {
+//               det: '\u2014',
+//               eigenvalues: 'all real',
+//               inverse: 'symmetric',
+//               consequence: '$A = QDQ^{\\mathsf{T}}$, $Q$ orthogonal',
+//             },
+//             note: 'The [spectral theorem](!/linear-algebra/decompositions/spectral) case: not merely diagonalizable but orthogonally so, which means $P^{-1}$ is a transpose and nothing has to be inverted.',
+//           },
+//           {
+//             name: 'Skew-symmetric',
+//             anchor: '#6',
+//             shape: 'skew',
+//             condition: '$A^{\\mathsf{T}} = -A$ \u2014 forces a zero diagonal',
+//             properties: {
+//               det: '$0$ when $n$ is odd',
+//               eigenvalues: '$0$ or $\\pm bi$ in pairs',
+//               inverse: 'skew-symmetric',
+//               consequence: 'rank is always even',
+//             },
+//             note: 'Setting $i = j$ in the condition gives $a_{ii} = -a_{ii}$, so the diagonal vanishes. Odd order then forces $\\det = 0$, since the eigenvalues pair off and one is left over at zero.',
+//           },
+//           {
+//             name: 'Orthogonal',
+//             anchor: '#7',
+//             shape: 'orthogonal',
+//             condition: '$Q^{\\mathsf{T}}Q = I$ \u2014 orthonormal columns',
+//             properties: {
+//               det: '$\\pm 1$',
+//               eigenvalues: '$|\\lambda| = 1$',
+//               inverse: '$Q^{\\mathsf{T}}$',
+//               consequence: 'preserves lengths and angles',
+//             },
+//             note: 'The inverse is free \u2014 it is the transpose. This is what makes orthogonal factors numerically valuable: they cannot amplify error, since they change no lengths.',
+//           },
+//         ],
+//       },
+//       {
+//         heading: 'Defined by a power condition',
+//         types: [
+//           {
+//             name: 'Nilpotent',
+//             anchor: '#8',
+//             shape: 'strictUpper',
+//             condition: '$A^k = O$ for some $k \\geq 1$',
+//             properties: {
+//               det: '$0$',
+//               eigenvalues: 'all $0$',
+//               inverse: 'none exists',
+//               consequence: '$(I - A)^{-1} = I + A + \\cdots + A^{k-1}$',
+//             },
+//             note: 'Never [diagonalizable](!/linear-algebra/eigen/diagonalization) unless $A = O$: every eigenvalue is zero, so a diagonal form would be the zero matrix and hence so would $A$.',
+//           },
+//           {
+//             name: 'Idempotent',
+//             anchor: '#8',
+//             shape: 'block',
+//             condition: '$A^2 = A$',
+//             properties: {
+//               det: '$0$ or $1$',
+//               eigenvalues: '$0$ or $1$ only',
+//               inverse: 'only when $A = I$',
+//               consequence: '$\\operatorname{rank}(A) = \\operatorname{tr}(A)$',
+//             },
+//             note: 'A [projection](!/linear-algebra/orthogonality/projections). Rank equals trace because the trace sums the eigenvalues and they are all zero or one \u2014 so it counts the ones.',
+//           },
+//           {
+//             name: 'Involutory',
+//             anchor: '#9',
+//             shape: 'antidiagonal',
+//             condition: '$A^2 = I$',
+//             properties: {
+//               det: '$\\pm 1$',
+//               eigenvalues: '$+1$ or $-1$ only',
+//               inverse: 'itself',
+//               consequence: '$A^{-1} = A$',
+//             },
+//             note: 'Its own inverse. Reflections are the geometric case, and the eigenvalue $-1$ is the direction being reflected across.',
+//           },
+//           {
+//             name: 'Permutation',
+//             anchor: '#9',
+//             shape: 'permutation',
+//             condition: 'exactly one $1$ per row and column',
+//             properties: {
+//               det: '$\\pm 1$',
+//               eigenvalues: 'roots of unity',
+//               inverse: '$P^{\\mathsf{T}}$',
+//               consequence: 'reorders coordinates',
+//             },
+//             note: 'Orthogonal, so the inverse is the transpose \u2014 and it is the $P$ of $PA = LU$, where it records the row swaps made during pivoting.',
+//           },
+//         ],
+//       },
+//     ],
+//   }
 
 //   // ---------- SECTIONS (original prose preserved verbatim) ----------
 
-// // const sectionsContent = {
-// //   obj1: {
-// //     title: `Square Matrices`,
-// //     content: `A matrix with equal numbers of rows and columns — $n$ rows and $n$ columns — is called square, and is said to have order $n$. Square matrices occupy a privileged position in linear algebra because several fundamental concepts are defined exclusively for them.
-
-// // Only square matrices have a [determinant](!/linear-algebra/determinants). Only square matrices can be [invertible](!/linear-algebra/matrix/inverse). Only square matrices have [eigenvalues](!/linear-algebra/eigen) and a [trace](!/linear-algebra/matrix/trace). Powers $A^k$ are defined only when $A$ is square, since the product $A \\cdot A$ requires the number of columns to equal the number of rows. Every type discussed on this page is a square matrix with additional structure imposed on top.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj2: {
-// //     title: `The Identity Matrix`,
-// //     content: `The $n \\times n$ identity matrix $I_n$ has ones on the main diagonal and zeros elsewhere:
-
-// // $$I_3 = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$
-
-// // It is the multiplicative identity: $AI = IA = A$ for any matrix $A$ with compatible dimensions. As a [linear transformation](!/linear-algebra/transformations), $I$ is the map that sends every vector to itself.
-
-// // The identity is simultaneously diagonal, symmetric, orthogonal, upper triangular, and lower triangular. Its determinant is $1$, its inverse is itself, every eigenvalue is $1$, its trace equals $n$, and $I^k = I$ for every non-negative integer $k$. The subscript $n$ is dropped when the size is clear from context.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj3: {
-// //     title: `Diagonal Matrices`,
-// //     content: `A diagonal matrix has nonzero entries only on the main diagonal:
-
-// // $$D = \\text{diag}(d_1, d_2, \\dots, d_n) = \\begin{pmatrix} d_1 & 0 & \\cdots & 0 \\\\ 0 & d_2 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & d_n \\end{pmatrix}$$
-
-// // Diagonal matrices are the easiest matrices to work with. Their arithmetic reduces to operations on the diagonal entries alone:
-
-// // $$\\text{diag}(d_1, \\dots, d_n) \\cdot \\text{diag}(e_1, \\dots, e_n) = \\text{diag}(d_1 e_1, \\dots, d_n e_n)$$
-
-// // $$D^k = \\text{diag}(d_1^k, \\dots, d_n^k)$$
-
-// // $$D^{-1} = \\text{diag}(1/d_1, \\dots, 1/d_n)$$
-
-// // The inverse exists if and only if every diagonal entry is nonzero. The determinant is $\\det(D) = d_1 d_2 \\cdots d_n$, and the eigenvalues are the diagonal entries themselves. As a transformation, a diagonal matrix scales each coordinate axis independently — stretching along axes where $|d_i| > 1$ and compressing where $|d_i| < 1$.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj4: {
-// //     title: `Triangular Matrices`,
-// //     content: `An upper triangular matrix has all entries below the main diagonal equal to zero:
-
-// // $$U = \\begin{pmatrix} u_{11} & u_{12} & u_{13} \\\\ 0 & u_{22} & u_{23} \\\\ 0 & 0 & u_{33} \\end{pmatrix}$$
-
-// // A lower triangular matrix has all entries above the main diagonal equal to zero:
-
-// // $$L = \\begin{pmatrix} l_{11} & 0 & 0 \\\\ l_{21} & l_{22} & 0 \\\\ l_{31} & l_{32} & l_{33} \\end{pmatrix}$$
-
-// // Triangular matrices share several convenient properties with diagonal matrices. The [determinant](!/linear-algebra/determinants) is the product of the diagonal entries. The eigenvalues are the diagonal entries. The product of two upper triangular matrices is upper triangular, and the same holds for lower triangular matrices. The inverse of an invertible upper triangular matrix is also upper triangular.
-
-// // These properties make triangular matrices the natural endpoint of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Row reduction converts a general matrix into upper triangular form, and the LU [decomposition](!/linear-algebra/decompositions/lower-upper) factors a matrix into lower and upper triangular components, reducing system-solving to two simple back-substitution passes.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj5: {
-// //     title: `Symmetric Matrices`,
-// //     content: `A square matrix is symmetric if it equals its own [transpose](!/linear-algebra/matrix/operations): $A = A^T$, meaning $a_{ij} = a_{ji}$ for every pair of indices. The matrix is determined by its entries on and above the diagonal — everything below is a mirror image.
-
-// // Symmetric matrices arise constantly in practice. Covariance matrices, Hessians in optimization, adjacency matrices of undirected graphs, and distance matrices are all symmetric. Any product of the form $A^T A$ or $AA^T$ is symmetric regardless of the shape of $A$, since $(A^T A)^T = A^T (A^T)^T = A^T A$.
-
-// // The spectral properties of real symmetric matrices are exceptionally clean. Every eigenvalue is real — no complex eigenvalues can appear. Eigenvectors corresponding to distinct eigenvalues are automatically orthogonal. And the spectral theorem guarantees that every real symmetric matrix can be diagonalized by an orthogonal matrix: $A = Q D Q^T$ where $Q$ is orthogonal and $D$ is diagonal. This is a much stronger conclusion than ordinary diagonalizability, which requires only an invertible change-of-basis matrix.
-
-// // A symmetric matrix is called positive definite if $\\mathbf{x}^T A \\mathbf{x} > 0$ for every nonzero vector $\\mathbf{x}$. Positive definiteness is equivalent to all eigenvalues being strictly positive, and it guarantees the existence of the [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) $A = LL^T$.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj6: {
-// //     title: `Skew-Symmetric Matrices`,
-// //     content: `A square matrix is skew-symmetric if $A^T = -A$, meaning $a_{ij} = -a_{ji}$ for all $i, j$. Setting $i = j$ forces $a_{ii} = -a_{ii}$, so every diagonal entry must be zero.
-
-// // Every square matrix admits a unique decomposition into a symmetric part and a skew-symmetric part:
-
-// // $$A = \\frac{1}{2}(A + A^T) + \\frac{1}{2}(A - A^T)$$
-
-// // The first term is symmetric, the second is skew-symmetric, and this splitting is unique.
-
-// // The eigenvalues of a real skew-symmetric matrix are either zero or purely imaginary — they come in conjugate pairs $\\pm bi$ with real eigenvalues restricted to zero. For matrices of odd order, the determinant is always zero: $\\det(A) = \\det(A^T) = \\det(-A) = (-1)^n \\det(A)$, and when $n$ is odd, this forces $\\det(A) = 0$. For even order, the determinant can be nonzero.
-
-// // In $\\mathbb{R}^3$, the [cross product](!/linear-algebra/vectors/cross-product) $\\mathbf{a} \\times \\mathbf{b}$ can be written as $[\\mathbf{a}]_\\times \\mathbf{b}$, where $[\\mathbf{a}]_\\times$ is the $3 \\times 3$ skew-symmetric matrix
-
-// // $$[\\mathbf{a}]_\\times = \\begin{pmatrix} 0 & -a_3 & a_2 \\\\ a_3 & 0 & -a_1 \\\\ -a_2 & a_1 & 0 \\end{pmatrix}$$
-
-// // This reformulates the cross product as a matrix-vector multiplication.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj7: {
-// //     title: `Orthogonal Matrices`,
-// //     content: `A square matrix $Q$ is orthogonal if its transpose equals its inverse:
-
-// // $$Q^T Q = QQ^T = I \\qquad \\text{equivalently,} \\quad Q^{-1} = Q^T$$
-
-// // This means the columns of $Q$ form an [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) set: each column has unit length, and distinct columns are perpendicular. The same is true of the rows.
-
-// // The determinant of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^T Q) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix is a rotation. When $\\det(Q) = -1$, it involves a reflection.
-
-// // The defining geometric property is that orthogonal matrices preserve lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every vector $\\mathbf{x}$. They also preserve dot products ($Q\\mathbf{x} \\cdot Q\\mathbf{y} = \\mathbf{x} \\cdot \\mathbf{y}$) and therefore angles between vectors. A transformation that preserves all distances and angles is called an isometry, and the orthogonal matrices are precisely the linear isometries.
-
-// // Common examples include rotation matrices in $\\mathbb{R}^2$ and $\\mathbb{R}^3$, reflection matrices across any line or plane through the origin, and permutation matrices that reorder coordinates. The inverse of an orthogonal matrix is its transpose — making it the cheapest matrix inverse to compute.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj8: {
-// //     title: `Nilpotent and Idempotent Matrices`,
-// //     content: `A square matrix $A$ is nilpotent if some positive power of it equals the zero matrix: $A^k = O$ for some integer $k \\geq 1$. The smallest such $k$ is called the index of nilpotency. Every eigenvalue of a nilpotent matrix is zero, which forces both the determinant and the trace to vanish.
-
-// // Nilpotent matrices have a useful algebraic consequence: the matrix $I - A$ is always invertible, with inverse given by the finite geometric series
-
-// // $$(I - A)^{-1} = I + A + A^2 + \\cdots + A^{k-1}$$
-
-// // The series terminates because $A^k = O$, so there is no convergence issue.
-
-// // A square matrix $A$ is idempotent if $A^2 = A$ — applying the transformation twice is the same as applying it once. The eigenvalues of an idempotent matrix can only be $0$ or $1$, since $\\lambda^2 = \\lambda$ implies $\\lambda = 0$ or $\\lambda = 1$. A striking identity links the rank and the trace: $\\text{rank}(A) = \\text{tr}(A)$, because the trace counts the eigenvalues equal to $1$, which is the dimension of the image.
-
-// // Geometrically, idempotent matrices are [projections](!/linear-algebra/orthogonality/projections). They project $\\mathbb{R}^n$ onto the column space of $A$ along the null space. If $A$ is also symmetric, the projection is orthogonal.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj9: {
-// //     title: `Involutory and Permutation Matrices`,
-// //     content: `A square matrix is involutory if $A^2 = I$ — it is its own inverse. The eigenvalues of an involutory matrix must satisfy $\\lambda^2 = 1$, so they are restricted to $+1$ and $-1$. Reflections are the prototypical example: reflecting twice across the same line or plane returns every vector to its starting point.
-
-// // The matrix $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ is involutory — it swaps the two coordinates and swapping twice restores the original. More generally, any matrix of the form $2P - I$, where $P$ is idempotent, is involutory.
-
-// // A permutation matrix is a square matrix with exactly one entry equal to $1$ in each row and each column, and all other entries zero. Left-multiplying a matrix $A$ by a permutation matrix $P$ reorders the rows of $A$ according to the permutation. Right-multiplying reorders the columns.
-
-// // Permutation matrices are orthogonal ($P^{-1} = P^T$), their determinant is $+1$ or $-1$ depending on whether the permutation is even or odd, and the product of two permutation matrices is another permutation matrix. They appear in the LU decomposition with partial pivoting, where row swaps are tracked by a permutation matrix: $PA = LU$.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj10: {
-// //     title: `Singular and Nonsingular Matrices`,
-// //     content: `The classification of a square matrix as singular or nonsingular is not a structural pattern like symmetry or triangularity — it is a behavioral property that depends on the values of the entries.
-
-// // A singular matrix has [determinant](!/linear-algebra/determinants) zero. Its columns are [linearly dependent](!/linear-algebra/vector-spaces/linear-independence), its [rank](!/linear-algebra/matrix/rank) is less than $n$, and the system $Ax = \\mathbf{b}$ fails to have a unique solution for every $\\mathbf{b}$. As a transformation, a singular matrix collapses at least one dimension — its image is a proper subspace of $\\mathbb{R}^n$.
-
-// // A nonsingular (invertible) matrix has nonzero determinant, full rank, and linearly independent columns and rows. The system $Ax = \\mathbf{b}$ has exactly one solution for every right-hand side, and the [inverse](!/linear-algebra/matrix/inverse) $A^{-1}$ exists.
-
-// // Any matrix type can be singular or nonsingular depending on its entries. A diagonal matrix is singular if any diagonal entry is zero. A triangular matrix is singular if any diagonal entry is zero. An orthogonal matrix is never singular, since its determinant is $\\pm 1$. A nilpotent matrix (other than the zero matrix of order $1$) is always singular, since all its eigenvalues are zero.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// //   obj11: {
-// //     title: `Summary of Matrix Types`,
-// //     content: `The defining property of each type, together with its most important consequence, can be collected for quick reference.
-
-// // The identity matrix ($I_{ij} = \\delta_{ij}$) is the multiplicative identity. Diagonal matrices (off-diagonal entries all zero) have trivially simple powers, products, and inverses. Upper and lower triangular matrices (zeros below or above the diagonal) have eigenvalues visible on the diagonal. Symmetric matrices ($A = A^T$) have real eigenvalues and orthogonal eigenvectors. Skew-symmetric matrices ($A = -A^T$) have zero diagonal and purely imaginary eigenvalues. Orthogonal matrices ($Q^T = Q^{-1}$) preserve lengths and angles. Nilpotent matrices ($A^k = O$) have all eigenvalues zero. Idempotent matrices ($A^2 = A$) are projections with $\\text{rank} = \\text{tr}$. Involutory matrices ($A^2 = I$) are their own inverse. Permutation matrices (one $1$ per row and column) reorder coordinates and are always orthogonal.
-
-// // These categories are not mutually exclusive. The identity matrix is diagonal, symmetric, orthogonal, triangular, idempotent, and involutory simultaneously. A $1 \\times 1$ zero matrix is diagonal, symmetric, skew-symmetric, triangular, nilpotent, and singular. Recognizing which types a given matrix belongs to is often the fastest route to understanding its behavior.`,
-// //     before: ``,
-// //     after: ``,
-// //     link: ``,
-// //   },
-// // }
 
 // // formulas-injected: v1 | 2026-06-16 | 18 callouts (obj2 identity_matrix_definition prose-insert + identity_matrix_property inline-promote, obj3 diagonal_matrix_definition + diagonal_matrix_power direct + diagonal_matrix_determinant inline-promote, obj4 triangular_matrix_determinant prose-insert, obj5 symmetric_matrix_definition inline-promote, obj6 skew_symmetric_matrix_definition inline-promote + symmetric_skew_decomposition + cross_product_skew_matrix direct, obj7 orthogonal_matrix_definition direct + orthogonal_matrix_determinant inline-promote, obj8 nilpotent_matrix_definition inline-promote + neumann_series_nilpotent direct + idempotent_matrix_definition + idempotent_rank_trace inline-promote, obj9 involutory_matrix_definition inline-promote, obj10 singular_matrix_definition prose-insert)
 
@@ -577,28 +510,18 @@
 
 // const faqQuestions = {
 //   obj1: {
-//     question: "What is a symmetric matrix?",
-//     answer: "A symmetric matrix equals its own transpose, meaning the entry in row i, column j is the same as the entry in row j, column i. Every eigenvalue of a real symmetric matrix is real, and its eigenvectors can be chosen to be mutually orthogonal. Symmetric matrices can always be diagonalized by an orthogonal matrix.",
-//     sectionId: "5"
+//     question: "Why must the diagonal of a skew-symmetric matrix be zero?",
+//     answer: "Because the defining condition applies to the diagonal too. Setting $i = j$ in $a_{ij} = -a_{ji}$ gives $a_{ii} = -a_{ii}$, and the only number equal to its own negative is zero. So every diagonal entry vanishes automatically, without being imposed as a separate requirement.",
+//     sectionId: "6"
 //   },
 //   obj2: {
-//     question: "What is a diagonal matrix?",
-//     answer: "A diagonal matrix has nonzero entries only on the main diagonal, with all off-diagonal entries equal to zero. Its powers, products, and inverse reduce to operations on the diagonal entries alone. The determinant is the product of the diagonal entries, and the eigenvalues are the diagonal entries themselves.",
-//     sectionId: "3"
+//     question: "Can any square matrix be split into symmetric and skew-symmetric parts?",
+//     answer: "Yes, and the split is unique. Writing $A = \\frac{1}{2}(A + A^{T}) + \\frac{1}{2}(A - A^{T})$ gives a symmetric first term and a skew-symmetric second term. No other decomposition into those two kinds exists, which makes the pairing a genuine structural fact rather than one construction among several.",
+//     sectionId: "6"
 //   },
 //   obj3: {
-//     question: "What makes a matrix orthogonal?",
-//     answer: "A square matrix is orthogonal when its transpose equals its inverse, meaning its columns form an orthonormal set. Orthogonal matrices preserve lengths and angles, making them the algebraic representation of rotations and reflections. Their determinant is always +1 or −1.",
-//     sectionId: "7"
-//   },
-//   obj4: {
-//     question: "What is the difference between singular and nonsingular matrices?",
-//     answer: "A singular matrix has determinant zero, linearly dependent columns, and rank less than its order — the system Ax = b does not have a unique solution for every b. A nonsingular matrix has nonzero determinant, full rank, and a unique inverse, guaranteeing exactly one solution for every right-hand side.",
-//     sectionId: "10"
-//   },
-//   obj5: {
-//     question: "What are nilpotent and idempotent matrices?",
-//     answer: "A nilpotent matrix satisfies Aᵏ = O for some positive integer k, meaning all its eigenvalues are zero. An idempotent matrix satisfies A² = A, so applying the transformation twice is the same as applying it once. Idempotent matrices act as projections, and their rank always equals their trace.",
+//     question: "Why does rank equal trace for an idempotent matrix?",
+//     answer: "Because $A^2 = A$ forces every eigenvalue to satisfy $\\lambda^2 = \\lambda$, leaving only $0$ and $1$ as possibilities. The trace sums the eigenvalues, so it simply counts how many equal $1$, and that count is the dimension of the image. Two quantities defined quite differently coincide for this one family.",
 //     sectionId: "8"
 //   }
 // }
@@ -674,27 +597,44 @@
 //       }
 //     ]
 //   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
 // }
+
+
+//   // Operation A demonstration units: a frozen tool state, an explanation
+//   // panel reading that state, and the contextual link, in one frame. Built
+//   // here and rendered as content-array items - never interpolated into
+//   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+//   const demoUnits = {
+//     identity: demoUnitFrame({
+//       svg: matrixTypesDiagrams.identity,
+//       caption: 'The identity, generated at this size',
+//       text: 'Ones the whole length of the diagonal, zeros everywhere else. Multiplying by this matrix leaves any compatible matrix untouched, and the picture shows why: each row of the identity selects exactly one row of whatever it meets and ignores the rest. Generate it at other sizes, alongside every other type on this page, on the',
+//       href: '/linear-algebra/visual-tools/matrix-types',
+//       linkText: 'matrix type generator',
+//     }),
+//     triangular: demoUnitFrame({
+//       svg: matrixTypesDiagrams.upperTriangular,
+//       caption: 'Upper triangular: everything below the diagonal is zero',
+//       text: 'The zeros form a solid block beneath the diagonal, which is what makes this shape so cheap to work with: the determinant is just the diagonal product, and a system in this form can be solved by substituting upwards with no elimination left to do. Flip to the lower form and compare on the',
+//       href: '/linear-algebra/visual-tools/matrix-types',
+//       linkText: 'matrix type generator',
+//     }),
+//     symmetric: demoUnitFrame({
+//       svg: matrixTypesDiagrams.symmetric,
+//       caption: 'Symmetric: entries mirrored across the diagonal',
+//       text: 'Each entry above the diagonal is matched by an equal entry below it, so the matrix is unchanged by reflection in that line &#8212; it equals its own transpose. This is the shape that guarantees real eigenvalues and an orthogonal set of eigenvectors later on. Compare it with the skew-symmetric case, where the mirrored entries carry opposite signs, on the',
+//       href: '/linear-algebra/visual-tools/matrix-types',
+//       linkText: 'matrix type generator',
+//     }),
+//   };
 
 // return {
 //   props: {
+//     demoUnits,
 //     sectionsContent,
 //     introContent,
 //     obj8Table,
-//     summaryTable,
+//     matrixTypeProfiles,
 //     faqQuestions,
 //     schemas,
 //     seoData: {
@@ -710,7 +650,7 @@
 // }
 
 
-// export default function MatrixTypesPage({seoData, sectionsContent, introContent, obj8Table, summaryTable, faqQuestions, schemas}) {
+// export default function MatrixTypesPage({seoData, sectionsContent, introContent, obj8Table, matrixTypeProfiles, faqQuestions, schemas, demoUnits}) {
 
 //   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -729,6 +669,8 @@
 //         link:sectionsContent.obj2.link,
 //         content:[
 //           sectionsContent.obj2.content,
+//                   <div key={'unit-identity'} dangerouslySetInnerHTML={{ __html: demoUnits.identity }} />,
+//           `Every notion of an inverse on this site is stated against this matrix: to invert something is to get back here.`,
 //         ]
 //     },
 //     {
@@ -745,6 +687,8 @@
 //         link:sectionsContent.obj4.link,
 //         content:[
 //           sectionsContent.obj4.content,
+//                   <div key={'unit-triangular'} dangerouslySetInnerHTML={{ __html: demoUnits.triangular }} />,
+//           `Elimination is, in these terms, the business of turning an arbitrary matrix into this shape.`,
 //         ]
 //     },
 //     {
@@ -753,6 +697,8 @@
 //         link:sectionsContent.obj5.link,
 //         content:[
 //           sectionsContent.obj5.content,
+//                   <div key={'unit-symmetric'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetric }} />,
+//           `Symmetry is the strongest structural gift a square matrix can have, and the spectral results later in the section are its payoff.`,
 //         ]
 //     },
 //     {
@@ -803,42 +749,36 @@
 //         link:sectionsContent.obj11.link,
 //         content:[
 //           sectionsContent.obj11.content,
-//           <div key={'summary-table'} style={tableWrapStyle}
-//                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+//           `The eleven types below are grouped by what their defining condition constrains: a pattern of zeros, a relation to the transpose, or a power of the matrix. That grouping is not filing — it predicts the columns. Every type defined by a transpose condition has something to say about its eigenvalues being real or imaginary; every type defined by a power condition has integer eigenvalues, because the condition is a polynomial equation the eigenvalues must satisfy.`,
+//           <DiagramFrame
+//             key={'obj11-diagram'}
+//             id="matrix-type-profiles"
+//             title="Eleven types and what each one forces"
+//             source="/linear-algebra/matrix/types"
+//           >
+//             <ObjectTypeProfile data={matrixTypeProfiles} theme="navy" variant="stack" />
+//           </DiagramFrame>,
+//           `The power conditions are worth reading as polynomial equations. $A^2 = A$ says every eigenvalue satisfies $\\lambda^2 = \\lambda$, so $\\lambda \\in \\{0, 1\\}$; $A^2 = I$ says $\\lambda^2 = 1$, so $\\lambda = \\pm 1$; $A^k = O$ says $\\lambda^k = 0$, so every eigenvalue is zero. Three types, three constraints, and all of them fall out of substituting an eigenvector into the defining equation.`,
+//           `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it **is** diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
 //         ]
 //     },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
+//     // faq: rendered component — must be built here, not in getStaticProps
+//     {
+//         id:'faq',
+//         title:`Matrix Types FAQ`,
+//         link:``,
+//         content:[
+//           <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+//             <FAQSection
+//               faqQuestions={faqQuestions}
+//               theme={'leftBorder'}
+//               width={'100%'}
+//               openFirst={false}
+//             />
+//           </div>,
+//         ]
+//     },
+   
 
 // ]
 
@@ -876,12 +816,6 @@
 //     }}
 //   />
 
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
 // </Head>
 //    {/* <GenericNavbar/> */}
 //    <br/>
@@ -925,6 +859,7 @@
 //    <br/>
 //    <br/>
 //    <br/>
+//    <br/>
 //    {/* <ScrollUpButton/> */}
 //    </>
 //   )
@@ -932,6 +867,11 @@
 
 
 // tables-optimized: v4 | 2026-05-20 | 2 tables (obj8 comparison, obj11 summary capstone)
+// types-regroup: v5 | permutation moved from the power-condition group to the zero-pattern group;
+//   obj9 split into Involutory (obj9, anchor #9) and Permutation (obj12, anchor #12).
+//   Anchors #1-#11 are unchanged so external links from the definitions and formulas
+//   repositories keep resolving. New section uses anchor #12 but renders 5th in the TOC,
+//   since SectionTableOfContents numbers by array index, not by id.
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -944,9 +884,6 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
-import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
-import matrixTypesDiagrams from '@/app/components/matrices/matrixTypesDiagrams'
 
 
 export async function getStaticProps(){
@@ -966,7 +903,10 @@ export async function getStaticProps(){
   'singular matrix',
   'square matrix types',
   'matrix classification linear algebra',
-  'special matrices properties'
+  'special matrices properties',
+  'permutation matrix determinant',
+  'permutation matrix inverse transpose',
+  'permutation matrix PA = LU'
 ]
 
   const linkStyle = 'color: inherit; text-decoration: underline;'
@@ -1018,6 +958,65 @@ export async function getStaticProps(){
 </table>
 `
 
+  // obj12 — the six permutation matrices of order 3, by cycle type
+  const obj12Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 85%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Permutation of (1,2,3)</th>
+      <th style="${tableHeaders.comparison}">Cycle structure</th>
+      <th style="${tableHeaders.comparison}">Transpositions</th>
+      <th style="${tableHeaders.comparison}">det</th>
+      <th style="${tableHeaders.comparison}">trace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">(1,2,3) &rarr; (1,2,3)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">identity, three fixed points</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">+1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">3</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">(1,2,3) &rarr; (2,1,3)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one swap, one fixed point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&minus;1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">(1,2,3) &rarr; (1,3,2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one swap, one fixed point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&minus;1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">(1,2,3) &rarr; (3,2,1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one swap, one fixed point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&minus;1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">(1,2,3) &rarr; (2,3,1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">3-cycle, no fixed point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">+1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">(1,2,3) &rarr; (3,1,2)</td>
+      <td style="padding: 12px 15px; color: #34495e;">3-cycle, no fixed point</td>
+      <td style="padding: 12px 15px; color: #34495e;">2</td>
+      <td style="padding: 12px 15px; color: #34495e;">+1</td>
+      <td style="padding: 12px 15px; color: #34495e;">0</td>
+    </tr>
+  </tbody>
+</table>
+`
+
   // obj11 — summary capstone: all matrix types at a glance
   // obj11 — eleven types, grouped by what defines them
   const matrixTypeProfiles = {
@@ -1025,7 +1024,7 @@ export async function getStaticProps(){
     title: 'Eleven types and what each one forces',
     tallyLabel: 'types',
     intro: 'Each type is a condition on the entries, and the condition determines everything beside it. Grouped by what the condition constrains \u2014 the pattern of zeros, the transpose, or a power of the matrix.',
-    footnote: 'Read down a column rather than across a row and the families appear. Every type in the orthogonal group has $|\\det| = \\pm 1$; every type defined by a power condition has integer eigenvalues; only the diagonal family has an inverse computed entrywise. The groupings are not filing \u2014 they predict the columns.',
+    footnote: 'Read down a column rather than across a row and the families appear. Every type defined by a power condition has eigenvalues confined to the roots of its own defining polynomial \u2014 $\\{0\\}$, $\\{0,1\\}$, $\\{\\pm 1\\}$ \u2014 because the condition is an equation the eigenvalues must satisfy. Every type in the zero-pattern group can be recognised by sight alone. The groupings are not filing \u2014 they predict the columns.',
     slots: [
       { key: 'det',         label: 'det' },
       { key: 'eigenvalues', label: 'eigenvalues' },
@@ -1061,6 +1060,19 @@ export async function getStaticProps(){
               consequence: 'products and powers act entrywise',
             },
             note: 'Everything is entrywise \u2014 which is the whole reason [diagonalization](!/linear-algebra/eigen/diagonalization) is worth the effort of computing eigenvectors.',
+          },
+          {
+            name: 'Permutation',
+            anchor: '#12',
+            shape: 'permutation',
+            condition: 'exactly one $1$ per row and column',
+            properties: {
+              det: '$\\pm 1$ \u2014 the sign of the permutation',
+              eigenvalues: 'roots of unity',
+              inverse: '$P^{\\mathsf{T}}$',
+              consequence: 'reorders coordinates',
+            },
+            note: 'A zero pattern, not a power condition \u2014 you recognise one by looking at it. Orthogonal, so the inverse is the transpose, and it is the $P$ of $PA = LU$, where it records the row swaps made during pivoting.',
           },
           {
             name: 'Upper triangular',
@@ -1176,19 +1188,6 @@ export async function getStaticProps(){
             },
             note: 'Its own inverse. Reflections are the geometric case, and the eigenvalue $-1$ is the direction being reflected across.',
           },
-          {
-            name: 'Permutation',
-            anchor: '#9',
-            shape: 'permutation',
-            condition: 'exactly one $1$ per row and column',
-            properties: {
-              det: '$\\pm 1$',
-              eigenvalues: 'roots of unity',
-              inverse: '$P^{\\mathsf{T}}$',
-              consequence: 'reorders coordinates',
-            },
-            note: 'Orthogonal, so the inverse is the transpose \u2014 and it is the $P$ of $PA = LU$, where it records the row swaps made during pivoting.',
-          },
         ],
       },
     ],
@@ -1282,9 +1281,52 @@ These properties make triangular matrices the natural endpoint of [Gaussian elim
     after: ``,
     link: ``,
   },
+  obj12: {
+    title: `Permutation Matrices`,
+    content: `A permutation matrix is a square matrix with exactly one entry equal to $1$ in each row and each column, and zeros everywhere else. Equivalently, it is the [identity matrix](!/linear-algebra/matrix/types#2) with its rows rearranged:
+
+$$P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$$
+
+The condition is a pattern of zeros, like the diagonal and triangular conditions above — a permutation matrix can be recognised by sight, without computing anything. What separates it from those two is that the nonzero positions are not tied to the diagonal.
+
+Every [permutation](!/combinatorics/permutations) $\\sigma$ of $\\{1, \\dots, n\\}$ gives exactly one such matrix, and every such matrix comes from exactly one permutation. Writing $\\mathbf{e}_i$ for the standard basis vectors, $P_\\sigma$ is the matrix whose $j$-th column is $\\mathbf{e}_{\\sigma(j)}$. There are therefore $n!$ permutation matrices of order $n$.
+
+**What multiplication does.** Left-multiplication reorders rows, right-multiplication reorders columns:
+
+$$P A \\;=\\; \\text{rows of } A \\text{ permuted}, \\qquad A P \\;=\\; \\text{columns of } A \\text{ permuted}$$
+
+Nothing is scaled and nothing is combined — entries are only moved. This is why permutation matrices cost no arithmetic in practice: a library applies one by reindexing, never by multiplying.
+
+**Properties.** Permutation matrices are [orthogonal](!/linear-algebra/matrix/types#7), since the columns are distinct standard basis vectors and are therefore orthonormal:
+
+@academic[formula_callout:permutation_matrix_inverse|Permutation Matrix Inverse|$$P^{-1} = P^{\\mathsf{T}}$$]@
+@academic[formulas_link:/linear-algebra/formulas#permutation_matrix_inverse]@
+
+The [determinant](!/linear-algebra/determinants) is the sign of the permutation — $+1$ when $\\sigma$ is even, $-1$ when it is odd — which is the same fact as the rule that each row swap flips the sign of a determinant.
+
+@academic[formula_callout:permutation_matrix_determinant|Permutation Matrix Determinant|$$\\det(P_\\sigma) = \\operatorname{sgn}(\\sigma)$$]@
+@academic[formulas_link:/linear-algebra/formulas#permutation_matrix_determinant]@
+
+The [trace](!/linear-algebra/matrix/trace) counts the fixed points of $\\sigma$, since a $1$ lands on the diagonal exactly where $\\sigma(i) = i$. The eigenvalues are roots of unity: a cycle of length $k$ contributes the $k$-th roots of unity, so the whole spectrum is read off the cycle type.
+
+**Closure and the connection to row swaps.** The product of two permutation matrices is a permutation matrix, the inverse of one is one, and the identity is one — so the $n \\times n$ permutation matrices form a group under multiplication, a copy of the symmetric group $S_n$ sitting inside the invertible matrices.
+
+Inside that group, the matrices that swap exactly two rows are the row-swap [elementary matrices](!/linear-algebra/linear-systems/gaussian-elimination) of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Every permutation matrix is a product of them, because every permutation is a product of transpositions. The relationship runs one way only: row-swap elementary matrices are permutation matrices, but a permutation matrix is elementary only when it swaps a single pair. The other two kinds of elementary matrix — scaling a row, adding a multiple of one row to another — are not permutation matrices at all, since they change values rather than only positions.
+
+**Where it shows up.** [LU decomposition](!/linear-algebra/decompositions/lower-upper) with partial pivoting cannot always factor $A$ directly, because a zero may sit where a pivot is needed. Recording the row swaps in a permutation matrix repairs this, and the factorisation is stated as
+
+$$PA = LU$$
+
+The $P$ is exactly the bookkeeping of which rows were exchanged on the way to upper triangular form.
+
+**Nearby families.** Relaxing the definition in different directions gives the matrices a permutation is usually compared against. A signed permutation matrix allows $\\pm 1$ in place of $1$, which permutes the axes and may flip their direction — these are the symmetries of the cube. A monomial matrix allows any nonzero value, and factors as a permutation times a [diagonal](!/linear-algebra/matrix/types#3) matrix. A doubly stochastic matrix keeps the row and column sums equal to $1$ but drops the requirement that the entries be $0$ or $1$; Birkhoff's theorem says every such matrix is an average of permutation matrices, which makes the permutation matrices the corners of that set.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
   obj5: {
     title: `Symmetric Matrices`,
-    content: `A square matrix is symmetric if it equals its own [transpose](!/linear-algebra/matrix/operations), meaning $a_{ij} = a_{ji}$ for every pair of indices. Defining a whole matrix type by a single equation is itself a notational habit — [transpose notation](!/linear-algebra/matrix/operations#notation) collects the family: $A = A^T$ for symmetry, $A^T = -A$ for skew-symmetry, $Q^TQ = I$ for orthogonality:
+    content: `A square matrix is symmetric if it equals its own [transpose](!/linear-algebra/matrix/operations), meaning $a_{ij} = a_{ji}$ for every pair of indices:
 
 @academic[formula_callout:symmetric_matrix_definition|Symmetric Matrix Definition|$$A = A^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#symmetric_matrix_definition]@
@@ -1385,19 +1427,17 @@ Geometrically, idempotent matrices are [projections](!/linear-algebra/orthogonal
     link: ``,
   },
   obj9: {
-    title: `Involutory and Permutation Matrices`,
+    title: `Involutory Matrices`,
     content: `A square matrix is involutory if applying it twice yields the identity — it is its own inverse:
 
 @academic[formula_callout:involutory_matrix_definition|Involutory Matrix Definition|$$A^2 = I$$]@
 @academic[formulas_link:/linear-algebra/formulas#involutory_matrix_definition]@
 
-The eigenvalues of an involutory matrix must satisfy $\\lambda^2 = 1$, so they are restricted to $+1$ and $-1$. Reflections are the prototypical example: reflecting twice across the same line or plane returns every vector to its starting point.
+The eigenvalues of an involutory matrix must satisfy $\\lambda^2 = 1$, so they are restricted to $+1$ and $-1$. Reflections are the prototypical example: reflecting twice across the same line or plane returns every vector to its starting point. This is the third of the power conditions, and it constrains the spectrum the same way the other two do — by handing the eigenvalues a polynomial equation they cannot escape.
 
-The matrix $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ is involutory — it swaps the two coordinates and swapping twice restores the original. More generally, any matrix of the form $2P - I$, where $P$ is idempotent, is involutory.
+The matrix $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ is involutory — it swaps the two coordinates and swapping twice restores the original. It is also a [permutation matrix](!/linear-algebra/matrix/types#12), which is worth noting because the two conditions are independent: this matrix satisfies both, but most permutation matrices are not involutory and most involutory matrices are not permutations.
 
-A permutation matrix is a square matrix with exactly one entry equal to $1$ in each row and each column, and all other entries zero. Left-multiplying a matrix $A$ by a permutation matrix $P$ reorders the rows of $A$ according to the permutation. Right-multiplying reorders the columns.
-
-Permutation matrices are orthogonal ($P^{-1} = P^T$), their determinant is $+1$ or $-1$ depending on whether the permutation is even or odd, and the product of two permutation matrices is another permutation matrix. They appear in the LU decomposition with partial pivoting, where row swaps are tracked by a permutation matrix: $PA = LU$.`,
+More generally, any matrix of the form $2P - I$, where $P$ is idempotent, is involutory. Expanding gives $(2P - I)^2 = 4P^2 - 4P + I = 4P - 4P + I = I$, using $P^2 = P$. Geometrically this converts a projection into the reflection across the same subspace: instead of landing on the subspace, the vector travels the same distance again and comes out the other side.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1424,9 +1464,13 @@ Any matrix type can be singular or nonsingular depending on its entries. A diago
     title: `Summary of Matrix Types`,
     content: `The defining property of each type, together with its most important consequence, can be collected for quick reference.
 
-The identity matrix ($I_{ij} = \\delta_{ij}$) is the multiplicative identity. Diagonal matrices (off-diagonal entries all zero) have trivially simple powers, products, and inverses. Upper and lower triangular matrices (zeros below or above the diagonal) have eigenvalues visible on the diagonal. Symmetric matrices ($A = A^T$) have real eigenvalues and orthogonal eigenvectors. Skew-symmetric matrices ($A = -A^T$) have zero diagonal and purely imaginary eigenvalues. Orthogonal matrices ($Q^T = Q^{-1}$) preserve lengths and angles. Nilpotent matrices ($A^k = O$) have all eigenvalues zero. Idempotent matrices ($A^2 = A$) are projections with $\\text{rank} = \\text{tr}$. Involutory matrices ($A^2 = I$) are their own inverse. Permutation matrices (one $1$ per row and column) reorder coordinates and are always orthogonal.
+Four types are defined by where the zeros sit. The identity matrix ($I_{ij} = \\delta_{ij}$) is the multiplicative identity. Diagonal matrices (off-diagonal entries all zero) have trivially simple powers, products, and inverses. Permutation matrices (one $1$ per row and column) reorder coordinates and are always orthogonal. Upper and lower triangular matrices (zeros below or above the diagonal) have eigenvalues visible on the diagonal.
 
-These categories are not mutually exclusive. The identity matrix is diagonal, symmetric, orthogonal, triangular, idempotent, and involutory simultaneously. A $1 \\times 1$ zero matrix is diagonal, symmetric, skew-symmetric, triangular, nilpotent, and singular. Recognizing which types a given matrix belongs to is often the fastest route to understanding its behavior.`,
+Three are defined by a relation to the transpose. Symmetric matrices ($A = A^T$) have real eigenvalues and orthogonal eigenvectors. Skew-symmetric matrices ($A = -A^T$) have zero diagonal and purely imaginary eigenvalues. Orthogonal matrices ($Q^T = Q^{-1}$) preserve lengths and angles.
+
+Three are defined by a power condition. Nilpotent matrices ($A^k = O$) have all eigenvalues zero. Idempotent matrices ($A^2 = A$) are projections with $\\text{rank} = \\text{tr}$. Involutory matrices ($A^2 = I$) are their own inverse.
+
+These categories are not mutually exclusive, and the three axes cut across each other freely. The identity matrix is diagonal, symmetric, orthogonal, triangular, idempotent, involutory, and a permutation simultaneously. A $1 \\times 1$ zero matrix is diagonal, symmetric, skew-symmetric, triangular, nilpotent, and singular. Permutation matrices are all orthogonal, but only the ones built from disjoint swaps are involutory. Recognizing which types a given matrix belongs to is often the fastest route to understanding its behavior.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1437,24 +1481,44 @@ These categories are not mutually exclusive. The identity matrix is diagonal, sy
 const introContent = {
     id: "intro",
   title: `Special Forms and Their Properties`,
-  content: `Certain matrices have structural patterns — zeros in prescribed positions, symmetry across the diagonal, orthonormal columns — that guarantee specific algebraic and geometric behaviors. Recognizing these patterns often transforms a difficult computation into a straightforward one and determines which theorems apply.`,
+  content: `Certain matrices satisfy a condition strong enough to determine their behavior in advance. The conditions fall into three kinds: a prescribed pattern of zeros, a relation to the transpose, or an equation in the powers of the matrix. Which kind a type belongs to predicts what can be said about its determinant, its eigenvalues, and its inverse — so the grouping is a tool rather than a filing scheme. Recognizing the pattern often turns a difficult computation into a straightforward one and settles which theorems apply.`,
 }
 
 const faqQuestions = {
   obj1: {
-    question: "Why must the diagonal of a skew-symmetric matrix be zero?",
-    answer: "Because the defining condition applies to the diagonal too. Setting $i = j$ in $a_{ij} = -a_{ji}$ gives $a_{ii} = -a_{ii}$, and the only number equal to its own negative is zero. So every diagonal entry vanishes automatically, without being imposed as a separate requirement.",
-    sectionId: "6"
+    question: "What is a symmetric matrix?",
+    answer: "A symmetric matrix equals its own transpose, meaning the entry in row i, column j is the same as the entry in row j, column i. Every eigenvalue of a real symmetric matrix is real, and its eigenvectors can be chosen to be mutually orthogonal. Symmetric matrices can always be diagonalized by an orthogonal matrix.",
+    sectionId: "5"
   },
   obj2: {
-    question: "Can any square matrix be split into symmetric and skew-symmetric parts?",
-    answer: "Yes, and the split is unique. Writing $A = \\frac{1}{2}(A + A^{T}) + \\frac{1}{2}(A - A^{T})$ gives a symmetric first term and a skew-symmetric second term. No other decomposition into those two kinds exists, which makes the pairing a genuine structural fact rather than one construction among several.",
-    sectionId: "6"
+    question: "What is a diagonal matrix?",
+    answer: "A diagonal matrix has nonzero entries only on the main diagonal, with all off-diagonal entries equal to zero. Its powers, products, and inverse reduce to operations on the diagonal entries alone. The determinant is the product of the diagonal entries, and the eigenvalues are the diagonal entries themselves.",
+    sectionId: "3"
   },
   obj3: {
-    question: "Why does rank equal trace for an idempotent matrix?",
-    answer: "Because $A^2 = A$ forces every eigenvalue to satisfy $\\lambda^2 = \\lambda$, leaving only $0$ and $1$ as possibilities. The trace sums the eigenvalues, so it simply counts how many equal $1$, and that count is the dimension of the image. Two quantities defined quite differently coincide for this one family.",
+    question: "What makes a matrix orthogonal?",
+    answer: "A square matrix is orthogonal when its transpose equals its inverse, meaning its columns form an orthonormal set. Orthogonal matrices preserve lengths and angles, making them the algebraic representation of rotations and reflections. Their determinant is always +1 or −1.",
+    sectionId: "7"
+  },
+  obj4: {
+    question: "What is the difference between singular and nonsingular matrices?",
+    answer: "A singular matrix has determinant zero, linearly dependent columns, and rank less than its order — the system Ax = b does not have a unique solution for every b. A nonsingular matrix has nonzero determinant, full rank, and a unique inverse, guaranteeing exactly one solution for every right-hand side.",
+    sectionId: "10"
+  },
+  obj5: {
+    question: "What are nilpotent and idempotent matrices?",
+    answer: "A nilpotent matrix satisfies Aᵏ = O for some positive integer k, meaning all its eigenvalues are zero. An idempotent matrix satisfies A² = A, so applying the transformation twice is the same as applying it once. Idempotent matrices act as projections, and their rank always equals their trace.",
     sectionId: "8"
+  },
+  obj6: {
+    question: "What is a permutation matrix?",
+    answer: "A permutation matrix is a square matrix with exactly one entry equal to 1 in each row and each column, and zeros elsewhere — the identity matrix with its rows rearranged. Multiplying on the left reorders the rows of a matrix and multiplying on the right reorders its columns. Permutation matrices are orthogonal, so the inverse is the transpose, and the determinant is +1 or −1 according to whether the permutation is even or odd.",
+    sectionId: "12"
+  },
+  obj7: {
+    question: "Is a permutation matrix an elementary matrix?",
+    answer: "Only when it swaps exactly two rows. Row-swap elementary matrices are permutation matrices, but a general permutation matrix is a product of several of them rather than a single elementary matrix. The other two kinds of elementary matrix — scaling a row and adding a multiple of one row to another — are not permutation matrices, because they change entry values instead of only moving entries.",
+    sectionId: "12"
   }
 }
 
@@ -1464,7 +1528,7 @@ const schemas = {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     "name": "Types of Matrices",
-    "description": "Learn about matrix types — diagonal, symmetric, orthogonal, triangular, nilpotent, idempotent, and permutation matrices. Defining properties, eigenvalue behavior, and key theorems.",
+    "description": "Learn about matrix types — diagonal, permutation, symmetric, orthogonal, triangular, nilpotent, idempotent, and involutory matrices, grouped by what defines them: a pattern of zeros, a transpose condition, or a power condition.",
     "url": "https://www.learnmathclass.com/linear-algebra/matrix/types",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
@@ -1479,11 +1543,12 @@ const schemas = {
       "name": "Types of Matrices"
     },
     "teaches": [
-      "Diagonal, identity, and triangular matrix structures",
+      "Diagonal, identity, permutation, and triangular matrix structures",
+      "Permutation matrices, their determinant sign, and PA = LU pivoting",
       "Symmetric and skew-symmetric matrix properties",
       "Orthogonal matrices and length preservation",
       "Nilpotent and idempotent matrices as algebraic types",
-      "Involutory and permutation matrices",
+      "Involutory matrices and their relation to projections",
       "Singular versus nonsingular classification"
     ],
     "keywords": keyWords.join(", "),
@@ -1529,49 +1594,33 @@ const schemas = {
       }
     ]
   },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
 }
-
-
-  // Operation A demonstration units: a frozen tool state, an explanation
-  // panel reading that state, and the contextual link, in one frame. Built
-  // here and rendered as content-array items - never interpolated into
-  // sectionsContent, which cannot carry a wrapper div around an <svg>.
-  const demoUnits = {
-    identity: demoUnitFrame({
-      svg: matrixTypesDiagrams.identity,
-      caption: 'The identity, generated at this size',
-      text: 'Ones the whole length of the diagonal, zeros everywhere else. Multiplying by this matrix leaves any compatible matrix untouched, and the picture shows why: each row of the identity selects exactly one row of whatever it meets and ignores the rest. Generate it at other sizes, alongside every other type on this page, on the',
-      href: '/linear-algebra/visual-tools/matrix-types',
-      linkText: 'matrix type generator',
-    }),
-    triangular: demoUnitFrame({
-      svg: matrixTypesDiagrams.upperTriangular,
-      caption: 'Upper triangular: everything below the diagonal is zero',
-      text: 'The zeros form a solid block beneath the diagonal, which is what makes this shape so cheap to work with: the determinant is just the diagonal product, and a system in this form can be solved by substituting upwards with no elimination left to do. Flip to the lower form and compare on the',
-      href: '/linear-algebra/visual-tools/matrix-types',
-      linkText: 'matrix type generator',
-    }),
-    symmetric: demoUnitFrame({
-      svg: matrixTypesDiagrams.symmetric,
-      caption: 'Symmetric: entries mirrored across the diagonal',
-      text: 'Each entry above the diagonal is matched by an equal entry below it, so the matrix is unchanged by reflection in that line &#8212; it equals its own transpose. This is the shape that guarantees real eigenvalues and an orthogonal set of eigenvectors later on. Compare it with the skew-symmetric case, where the mirrored entries carry opposite signs, on the',
-      href: '/linear-algebra/visual-tools/matrix-types',
-      linkText: 'matrix type generator',
-    }),
-  };
 
 return {
   props: {
-    demoUnits,
     sectionsContent,
     introContent,
     obj8Table,
+    obj12Table,
     matrixTypeProfiles,
     faqQuestions,
     schemas,
     seoData: {
       title: "Types of Matrices: Properties & Examples | Learn Math Class",
-      description: "Learn about matrix types — diagonal, symmetric, orthogonal, triangular, nilpotent, idempotent, and permutation matrices. Defining properties, eigenvalue behavior, and key theorems.",
+      description: "Learn about matrix types — diagonal, permutation, symmetric, orthogonal, triangular, nilpotent, idempotent, and involutory matrices, grouped by what defines them: a pattern of zeros, a transpose condition, or a power condition.",
       keywords: keyWords.join(", "),
       url: "/linear-algebra/matrix/types",
       name: "Types of Matrices"
@@ -1582,7 +1631,7 @@ return {
 }
 
 
-export default function MatrixTypesPage({seoData, sectionsContent, introContent, obj8Table, matrixTypeProfiles, faqQuestions, schemas, demoUnits}) {
+export default function MatrixTypesPage({seoData, sectionsContent, introContent, obj8Table, obj12Table, matrixTypeProfiles, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1601,8 +1650,6 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-                  <div key={'unit-identity'} dangerouslySetInnerHTML={{ __html: demoUnits.identity }} />,
-          `Every notion of an inverse on this site is stated against this matrix: to invert something is to get back here.`,
         ]
     },
     {
@@ -1619,8 +1666,17 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-                  <div key={'unit-triangular'} dangerouslySetInnerHTML={{ __html: demoUnits.triangular }} />,
-          `Elimination is, in these terms, the business of turning an arbitrary matrix into this shape.`,
+        ]
+    },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key={'obj12-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj12Table }} />,
+          `Reading the table downward shows why the determinant is called the sign of the permutation rather than a separate quantity to compute. Each transposition is one row swap, one row swap flips the sign, and the parity of the swap count is the same however the permutation is decomposed.`,
         ]
     },
     {
@@ -1629,8 +1685,6 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-                  <div key={'unit-symmetric'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetric }} />,
-          `Symmetry is the strongest structural gift a square matrix can have, and the spectral results later in the section are its payoff.`,
         ]
     },
     {
@@ -1691,23 +1745,7 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
             <ObjectTypeProfile data={matrixTypeProfiles} theme="navy" variant="stack" />
           </DiagramFrame>,
           `The power conditions are worth reading as polynomial equations. $A^2 = A$ says every eigenvalue satisfies $\\lambda^2 = \\lambda$, so $\\lambda \\in \\{0, 1\\}$; $A^2 = I$ says $\\lambda^2 = 1$, so $\\lambda = \\pm 1$; $A^k = O$ says $\\lambda^k = 0$, so every eigenvalue is zero. Three types, three constraints, and all of them fall out of substituting an eigenvector into the defining equation.`,
-          `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it **is** diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
-        ]
-    },
-    // faq: rendered component — must be built here, not in getStaticProps
-    {
-        id:'faq',
-        title:`Matrix Types FAQ`,
-        link:``,
-        content:[
-          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
-            <FAQSection
-              faqQuestions={faqQuestions}
-              theme={'leftBorder'}
-              width={'100%'}
-              openFirst={false}
-            />
-          </div>,
+          `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it *is* diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
         ]
     },
    
@@ -1748,6 +1786,12 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
     }}
   />
 
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>
@@ -1791,6 +1835,7 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
    <br/>
    <br/>
    <br/>
+   
    <br/>
    {/* <ScrollUpButton/> */}
    </>

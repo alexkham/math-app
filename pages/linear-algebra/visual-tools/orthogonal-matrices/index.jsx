@@ -37,19 +37,19 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) — a [square matrix](!/linear-algebra/definitions#square_matrix) $Q$ with $Q^TQ = I$; equivalently, its columns are orthonormal.
 
-[Orthonormal](!/linear-algebra/orthogonality/orthogonal-sets#3) — unit length and mutually perpendicular.
+[Orthonormal](!/linear-algebra/definitions#orthonormal_set) — unit length and mutually perpendicular.
 
-**Inverse equals transpose** — $Q^{-1} = Q^T$, so $QQ^T = I$ too and the rows are orthonormal as well.
+[Inverse equals transpose](!/linear-algebra/orthogonality/orthogonal-sets#6) — $Q^{-1} = Q^T$, so $QQ^T = I$ too and the rows are orthonormal as well.
 
-**Isometry** — a map preserving lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$; orthogonal matrices also preserve [dot products](!/linear-algebra/definitions#dot_product) and angles.
+[Isometry](!/linear-algebra/definitions#isometry) — a map preserving lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$; orthogonal matrices also preserve [dot products](!/linear-algebra/definitions#dot_product) and angles.
 
-[Determinant](!/linear-algebra/determinants#1) $\\pm 1$ — $+1$ for a rotation (orientation preserved), $-1$ for a reflection (orientation reversed).
+[Determinant](!/linear-algebra/definitions#determinant) $\\pm 1$ — $+1$ for a rotation (orientation preserved), $-1$ for a reflection (orientation reversed).
 
-[Rotation](!/linear-algebra/transformations/geometric#3) — in the plane, $R(\\theta)$; in space, a turn by $\\theta$ about an axis, the fixed direction with $Q\\mathbf{u} = \\mathbf{u}$.
+[Rotation](!/linear-algebra/definitions#rotation) — in the plane, $R(\\theta)$; in space, a turn by $\\theta$ about an axis, the fixed direction with $Q\\mathbf{u} = \\mathbf{u}$.
 
-[Reflection](!/linear-algebra/transformations/geometric#5) — in the plane, across a line; in space, across a plane; a Householder matrix $I - 2\\mathbf{u}\\mathbf{u}^T/\\mathbf{u}^T\\mathbf{u}$ reflects across the plane perpendicular to $\\mathbf{u}$.
+[Reflection](!/linear-algebra/definitions#reflection) — in the plane, across a line; in space, across a plane; a Householder matrix $I - 2\\mathbf{u}\\mathbf{u}^T/\\mathbf{u}^T\\mathbf{u}$ reflects across the plane perpendicular to $\\mathbf{u}$.
 
-[Permutation matrix](!/linear-algebra/decompositions/lower-upper#5) — reorders coordinates; always orthogonal.
+[Permutation matrix](!/linear-algebra/definitions#permutation_matrix) — reorders coordinates; always orthogonal.
 
 **Orthogonal group $O(n)$** — all $n \\times n$ orthogonal matrices; closed under products and inverses.`,
       before: ``,

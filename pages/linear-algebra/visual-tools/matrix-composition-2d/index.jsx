@@ -36,13 +36,13 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Composition** &mdash; applying one transformation after another. Applying $B$ and then $A$ sends $\\mathbf{v}$ to $A(B\\mathbf{v})$.
+      content: `[Composition](!/linear-algebra/transformations/properties#6) &mdash; applying one transformation after another. Applying $B$ and then $A$ sends $\\mathbf{v}$ to $A(B\\mathbf{v})$.
 
-**Matrix product** &mdash; the single matrix $AB$ with $(AB)\\mathbf{v} = A(B\\mathbf{v})$ for every $\\mathbf{v}$. [Matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) is defined so that this works.
+[Matrix product](!/linear-algebra/transformations/matrix-representation#6) &mdash; the single matrix $AB$ with $(AB)\\mathbf{v} = A(B\\mathbf{v})$ for every $\\mathbf{v}$. [Matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) is defined so that this works.
 
 **Order of application** &mdash; in $AB\\mathbf{v}$ the matrix nearest $\\mathbf{v}$ acts first: $B$, then $A$. Products read right to left.
 
-**Non-commutativity** &mdash; $AB \\neq BA$ in general; the two orders are different transformations with different matrices.
+[Non-commutativity](!/linear-algebra/matrix/operations#6) &mdash; $AB \\neq BA$ in general; the two orders are different transformations with different matrices.
 
 **Commuting pair** &mdash; matrices with $AB = BA$, such as two rotations, two diagonal matrices, or anything paired with a multiple of the identity.
 
@@ -50,7 +50,7 @@ export async function getStaticProps(){
 
 **Stages** &mdash; the same pipeline shown as three canvases: the input, the intermediate, and the final state.
 
-**Determinant of a product** &mdash; $\\det(AB) = \\det A \\cdot \\det B$, the same in either order even when the matrices differ.`,
+[Determinant of a product](!/linear-algebra/determinants/properties#5) &mdash; $\\det(AB) = \\det A \\cdot \\det B$, the same in either order even when the matrices differ.`,
       before: ``,
       after: ``,
       link: '',

@@ -35,19 +35,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Matrix power](!/linear-algebra/formulas#matrix_power) — $A^n = A \\cdot A \\cdots A$, the product of $n$ copies of a [square matrix](!/linear-algebra/definitions#square_matrix) $A$.
+      content: `[Matrix power](!/linear-algebra/matrix/operations#9) — $A^n = A \\cdot A \\cdots A$, the product of $n$ copies of a [square matrix](!/linear-algebra/definitions#square_matrix) $A$.
 
-**Square requirement** — only a square matrix can be multiplied by itself; an $m \\times n$ matrix with $m \\neq n$ has no powers.
+[Square requirement](!/linear-algebra/definitions#conformability) — only a square matrix can be multiplied by itself; an $m \\times n$ matrix with $m \\neq n$ has no powers.
 
-**Exponent rules** — $A^m A^n = A^{m+n}$ and $(A^m)^n = A^{mn}$, exactly as for numbers; $A^0 = I$ and $A^1 = A$.
+[Exponent rules](!/linear-algebra/matrix/operations#9) — $A^m A^n = A^{m+n}$ and $(A^m)^n = A^{mn}$, exactly as for numbers; $A^0 = I$ and $A^1 = A$.
 
-**Associativity** — $(AB)C = A(BC)$, which is why the copies of $A$ can be grouped in any order and the power is well defined.
+[Associativity](!/linear-algebra/matrix/operations#6) — $(AB)C = A(BC)$, which is why the copies of $A$ can be grouped in any order and the power is well defined.
 
 **Path expansion** — the entry $(A^n)_{i,j}$ is the sum over all index chains $i \\to k_1 \\to \\cdots \\to k_{n-1} \\to j$ of the products $a_{i,k_1} a_{k_1,k_2} \\cdots a_{k_{n-1},j}$; there are $s^{n-1}$ of them for an $s \\times s$ matrix.
 
 **Bracket and collapse** — the tool's choreography: group the next pair of factors, then replace the pair by the higher power.
 
-**Diagonalization shortcut** — if $A = PDP^{-1}$ then $A^n = PD^nP^{-1}$, and only the diagonal entries are raised to the power.
+[Diagonalization shortcut](!/linear-algebra/definitions#diagonalization) — if $A = PDP^{-1}$ then $A^n = PD^nP^{-1}$, and only the diagonal entries are raised to the power.
 
 [Nilpotent and idempotent](!/linear-algebra/matrix/types#8) — matrices with $A^k = 0$ for some $k$, or with $A^2 = A$; two cases where the powers stop changing.`,
       before: ``,

@@ -3310,7 +3310,7 @@ The factorization becomes:
 @academic[formula_callout:pa_lu_partial_pivoting|PA LU Partial Pivoting|$$PA = LU$$]@
 @academic[formulas_link:/linear-algebra/formulas#pa_lu_partial_pivoting]@
 
-where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra/matrix/types). This factorization exists for every [invertible](!/linear-algebra/matrix/inverse) matrix — partial pivoting eliminates the restriction on leading principal submatrices.
+where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra/matrix/types#12). This factorization exists for every [invertible](!/linear-algebra/matrix/inverse) matrix — partial pivoting eliminates the restriction on leading principal submatrices.
 
 Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and selecting the largest available pivot keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
 

@@ -36,21 +36,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Complex eigenvalues** &mdash; for a real $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix), a conjugate pair $\\lambda = a \\pm bi$ with $b \\neq 0$, occurring when $\\operatorname{tr}^2 A < 4\\det A$.
+      content: `[Complex eigenvalues](!/linear-algebra/eigen/complex#1) &mdash; for a real $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix), a conjugate pair $\\lambda = a \\pm bi$ with $b \\neq 0$, occurring when $\\operatorname{tr}^2 A < 4\\det A$.
 
-**Modulus** &mdash; $r = |\\lambda| = \\sqrt{a^2 + b^2} = \\sqrt{\\det A}$, the scale factor per step.
+[Modulus](!/complex-numbers/definitions#modulus) &mdash; $r = |\\lambda| = \\sqrt{a^2 + b^2} = \\sqrt{\\det A}$, the scale factor per step.
 
-**Argument** &mdash; $\\theta = \\arg\\lambda$, the angle of rotation per step, with $\\operatorname{tr} A = 2r\\cos\\theta$.
+[Argument](!/complex-numbers/definitions#argument) &mdash; $\\theta = \\arg\\lambda$, the angle of rotation per step, with $\\operatorname{tr} A = 2r\\cos\\theta$.
 
-**Rotation-scaling matrix** &mdash; $C = \\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix} = r\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$.
+[Rotation-scaling matrix](!/linear-algebra/eigen/complex#3) &mdash; $C = \\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix} = r\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$.
 
-**Rotation-scaling form** &mdash; $A = PCP^{-1}$ with $P = \\begin{pmatrix} \\operatorname{Re}\\mathbf{v} & \\operatorname{Im}\\mathbf{v} \\end{pmatrix}$, where $\\mathbf{v}$ is a complex eigenvector for $\\lambda = a - bi$.
+[Rotation-scaling form](!/linear-algebra/eigen/complex#5) &mdash; $A = PCP^{-1}$ with $P = \\begin{pmatrix} \\operatorname{Re}\\mathbf{v} & \\operatorname{Im}\\mathbf{v} \\end{pmatrix}$, where $\\mathbf{v}$ is a complex eigenvector for $\\lambda = a - bi$.
 
-**Orbit** &mdash; the sequence $\\mathbf{x}_0, A\\mathbf{x}_0, A^2\\mathbf{x}_0, \\ldots$; it spirals in for $r < 1$, out for $r > 1$, and runs round an ellipse for $r = 1$.
+[Orbit](!/linear-algebra/eigen/complex#7) &mdash; the sequence $\\mathbf{x}_0, A\\mathbf{x}_0, A^2\\mathbf{x}_0, \\ldots$; it spirals in for $r < 1$, out for $r > 1$, and runs round an ellipse for $r = 1$.
 
 **Invariant ellipse** &mdash; the image under $P$ of a circle; $A$ maps each such ellipse to the one $r$ times as large.
 
-**Spiral point** &mdash; the origin, called a stable spiral for $r < 1$, an unstable spiral for $r > 1$, and a centre for $r = 1$.`,
+[Spiral point](!/linear-algebra/eigen/complex#7) &mdash; the origin, called a stable spiral for $r < 1$, an unstable spiral for $r > 1$, and a centre for $r = 1$.`,
       before: ``,
       after: ``,
       link: '',

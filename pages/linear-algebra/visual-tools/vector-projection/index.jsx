@@ -35,19 +35,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Vector projection](!/linear-algebra/formulas#vector_projection) — the part of $\\mathbf{u}$ that points along $\\mathbf{v}$: $\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}\\,\\mathbf{v}$.
+      content: `[Vector projection](!/linear-algebra/definitions#vector_projection) — the part of $\\mathbf{u}$ that points along $\\mathbf{v}$: $\\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}\\,\\mathbf{v}$.
 
-[Scalar projection](!/linear-algebra/formulas#scalar_projection) — the signed length of that part: $\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|}$.
+[Scalar projection](!/linear-algebra/vectors/dot-product#9) — the signed length of that part: $\\operatorname{comp}_{\\mathbf{v}} \\mathbf{u} = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|}$.
 
-**Projection coefficient** — the scalar $c = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}$ that multiplies $\\mathbf{v}$; it counts how many copies of $\\mathbf{v}$ reach the foot of the perpendicular.
+[Projection coefficient](!/linear-algebra/vectors/dot-product#9) — the scalar $c = \\dfrac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{v}\\|^2}$ that multiplies $\\mathbf{v}$; it counts how many copies of $\\mathbf{v}$ reach the foot of the perpendicular.
 
-**Remainder** — $\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u}$, the part of $\\mathbf{u}$ perpendicular to $\\mathbf{v}$; also called the orthogonal component or rejection.
+[Remainder](!/linear-algebra/orthogonality/projections#2) — $\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u}$, the part of $\\mathbf{u}$ perpendicular to $\\mathbf{v}$; also called the orthogonal component or rejection.
 
-[Orthogonal decomposition](!/linear-algebra/formulas#orthogonal_decomposition) — the split $\\mathbf{u} = \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} + (\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u})$ into a piece along $\\mathbf{v}$ and a piece at right angles to it.
+[Orthogonal decomposition](!/linear-algebra/definitions#orthogonal_decomposition) — the split $\\mathbf{u} = \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u} + (\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u})$ into a piece along $\\mathbf{v}$ and a piece at right angles to it.
 
-**Foot of the perpendicular** — the point on the line through $\\mathbf{v}$ closest to the tip of $\\mathbf{u}$; the projection is the vector from the origin to that point.
+[Foot of the perpendicular](!/linear-algebra/orthogonality/projections#1) — the point on the line through $\\mathbf{v}$ closest to the tip of $\\mathbf{u}$; the projection is the vector from the origin to that point.
 
-**Same-length requirement** — $\\mathbf{u}$ and $\\mathbf{v}$ must have the same number of components, and $\\mathbf{v}$ must be non-zero.`,
+[Same-length requirement](!/linear-algebra/definitions#conformability) — $\\mathbf{u}$ and $\\mathbf{v}$ must have the same number of components, and $\\mathbf{v}$ must be non-zero.`,
       before: ``,
       after: ``,
       link: '',

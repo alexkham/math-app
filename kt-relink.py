@@ -87,7 +87,9 @@ ALIASES = {
     'sum of squared errors': 'residual', 'right hand side': 'coefficient_matrix',
     'coordinate vector': 'coordinates', 'eigenvector basis': 'diagonalization',
     'orthonormal eigenvectors': 'spectral_decomposition', 'orthonormal columns': 'orthogonal_matrix',
-    'inverse equals transpose': 'orthogonal_matrix', 'length preservation': 'isometry',
+    'inverse equals transpose': 'orthogonal_matrix',
+    # NOT 'length preservation' -> isometry: on the vector pages that head means
+    # "the result has the same number of components", nothing to do with isometry.
     'null space': 'null_space', 'column space': 'column_space', 'row space': 'row_space',
     'left null space': 'left_null_space', 'kernel': 'null_space', 'image': 'image',
     'range': 'image', 'magnitude': 'magnitude', 'cofactor matrix': 'cofactor_matrix',
@@ -95,9 +97,83 @@ ALIASES = {
 }
 
 CONTENT = re.compile(r"\n\s*(\w+)\s*:\s*\{[\s\S]*?content\s*:\s*`((?:[^`\\]|\\.)*)`")
+
+# ---------------------------------------------------------------------------
+# Second tier: a head with NO definitions entry goes to a lesson section, if one
+# exists (Alex, 2026-09-15: "Scalar multiplication" is not worth a definition -
+# send it to the lesson). Resolution: concept index -> lesson page title ->
+# lesson section title. Same logic as kt-lessons.py, so results agree.
+# ---------------------------------------------------------------------------
+CREG = json.load(io.open('app/api/db/repositories/content-pages-registry.json', encoding='utf-8'))
+INDEX = json.load(io.open('line2-concept-index.json', encoding='utf-8'))
+PAGE_BY_NAME, SECTION_TITLES = {}, {}
+for _k, _v in CREG['pages'].items():
+    if not _k.startswith('linear-algebra/'):
+        continue
+    _url = '/' + _v['pagePath'][len('pages/'):-len('/index.jsx')]
+    PAGE_BY_NAME[_v['slug'].split('/')[-1].replace('-', ' ').lower()] = _url
+    try:
+        _src = io.open(_v['pagePath'], encoding='utf-8').read()
+    except Exception:
+        continue
+    _lv = '\n'.join('' if l.lstrip().startswith('//') else l for l in _src.split('\n'))
+    _lv = re.sub(r'/\*.*?\*/', '', _lv, flags=re.S)
+    _titles = dict(re.findall(r'\n\s{2,6}(obj\d+)\s*:\s*\{\s*\n?\s*title\s*:\s*`([^`]*)`', _lv))
+    for _m in re.finditer(r"id\s*:\s*[`'\"]([^`'\"]+)[`'\"]", _lv):
+        _kk = re.search(r'sectionsContent[.\[\']+(\w+)', _lv[_m.end():_m.end() + 300])
+        _t = _titles.get(_kk.group(1)) if _kk else None
+        if not _t:
+            continue
+        _n = re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9 ]', ' ', _t.lower())).strip()
+        SECTION_TITLES.setdefault(_n, '%s#%s' % (_url, _m.group(1)))
+        _s = re.sub(r'^(the|a|an)\s+', '', _n)
+        if _s != _n:
+            SECTION_TITLES.setdefault(_s, '%s#%s' % (_url, _m.group(1)))
+
+
+def lesson_for(term):
+    t = clean(term).lower()
+    if not t:
+        return None
+    cands = [t, t.replace('-', ' ')]
+    for a, b in (('factorization', 'decomposition'), ('factorisation', 'decomposition')):
+        if a in t:
+            cands.append(t.replace(a, b))
+    for c in list(cands):
+        cands.append(c[:-1] if c.endswith('s') else c + 's')
+        for q in (' matrix', ' form', ' space', ' product'):
+            cands.append(c + q)
+    seen = set()
+    cands = [c for c in cands if not (c in seen or seen.add(c))]
+    for c in cands:
+        e = INDEX.get(c)
+        if e:
+            by = (e.get('bySection') or {}).get('linear-algebra') or e
+            u = by.get('contentUrl')
+            if u and '/visual-tools/' not in u and u.startswith('/linear-algebra'):
+                return u
+    for c in cands:
+        if c in PAGE_BY_NAME:
+            return PAGE_BY_NAME[c]
+    for c in cands:
+        n = re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9 ]', ' ', c)).strip()
+        if n in SECTION_TITLES:
+            return SECTION_TITLES[n]
+    for c in cands:
+        n = re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9 ]', ' ', c)).strip()
+        if len(n) < 5:
+            continue
+        for title, u in SECTION_TITLES.items():
+            if title == n or title.startswith(n + ' '):
+                return u
+    return None
+
+
 # a head: bold, or an existing link, optionally followed by maths, then a dash
+# The 2D tool pages write the dash as the entity &mdash; rather than the
+# character, so both forms must count as a head separator.
 HEAD = re.compile(r'(?:\*\*([^*\n]+)\*\*|\[([^\]\n]+)\]\(!([^)\n]+)\))'
-                  r'((?:\s*\$[^$\n]*\$)*)(?=\s*(?:—|–|-)\s)')
+                  r'((?:\s*\$[^$\n]*\$)*)(?=\s*(?:—|–|-|&mdash;)\s)')
 
 
 def mask_comments(src):
@@ -183,8 +259,30 @@ for key in sorted(LA):
 
         ident = resolve(term)
         if not ident:
-            stats['unresolved'] += 1
-            unresolved.append((slugname, term))
+            # Tier 2: no definition - a lesson section, if there is one.
+            lesson = lesson_for(term)
+            if not lesson:
+                stats['unresolved (stays bold)'] += 1
+                unresolved.append((slugname, term))
+                continue
+            if old_url and '/definitions' not in old_url:
+                stats['already on a lesson'] += 1
+                continue
+            label2 = re.sub(r'\$[^$]*\$', '', term).strip(' -–—')
+            edits.append((ks + h.start(), ks + h.end(),
+                          '[%s](!%s)%s' % (label2, lesson, maths)))
+            stats['bold -> lesson (no definition)'] += 1
+            page_changes.append((term, 'bold -> lesson', lesson.rsplit('/', 1)[-1]))
+            if apply:
+                tool['relatedTerms'].append({
+                    'term': term.lower(), 'entity': None, 'sections': ['key-terms'],
+                    'status': 'linked',
+                    'links': [{'fromSection': 'key-terms', 'surface': label2,
+                               'target': {'path': lesson.split('#')[0],
+                                          'section': lesson.split('#')[1] if '#' in lesson else None},
+                               'method': 'key-terms-head-lesson', 'role': 'lesson',
+                               'added': TODAY}],
+                })
             continue
         url = '%s#%s' % (DEFS, ident)
 

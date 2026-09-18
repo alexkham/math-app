@@ -41,11 +41,11 @@ export async function getStaticProps(){
 
 [Scalar multiplication](!/linear-algebra/matrix/operations#3) — the operation $kA$ that multiplies every entry of a matrix $A$ by the [scalar](!/linear-algebra/definitions#scalar) $k$.
 
-**Element-wise operation** — applied independently to each entry; the result at $(i,j)$ depends only on $k$ and $a_{i,j}$.
+[Element-wise operation](!/linear-algebra/definitions#element_wise_operation) — applied independently to each entry; the result at $(i,j)$ depends only on $k$ and $a_{i,j}$.
 
 **Shape preservation** — $kA$ has the same [dimensions](!/linear-algebra/definitions#dimension) as $A$. Scalar multiplication never changes the shape.
 
-**Scaling factor** — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or flips sign ($k < 0$) every entry uniformly.
+[Scaling factor](!/linear-algebra/matrix/operations#3) — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or flips sign ($k < 0$) every entry uniformly.
 
 **Zero scalar** — multiplying by $k = 0$ produces the zero matrix of the same shape as $A$.`,
       before: ``,

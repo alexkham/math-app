@@ -58,21 +58,21 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Determinant](!/linear-algebra/definitions#determinant) — the number $\\det A$, also written $|A|$, attached to every [square matrix](!/linear-algebra/definitions#square_matrix); the signed factor by which $A$ scales area or volume, and zero exactly when $A$ is singular.
 
-**Main diagonal** — the entries $a_{i,i}$ running from the top-left corner to the bottom-right. The anti-diagonal runs from top-right to bottom-left.
+[Main diagonal](!/linear-algebra/definitions#main_diagonal) — the entries $a_{i,i}$ running from the top-left corner to the bottom-right. The anti-diagonal runs from top-right to bottom-left.
 
 [Minor](!/linear-algebra/definitions#minor) — $M_{i,j}$, the determinant of the submatrix left after striking row $i$ and column $j$.
 
 [Cofactor](!/linear-algebra/definitions#cofactor) — $C_{i,j} = (-1)^{i+j} M_{i,j}$, the minor with the checkerboard sign attached.
 
-**Cofactor expansion** — $\\det A = \\sum_j a_{i,j}\\, C_{i,j}$ along any row $i$, or the same sum down any column; also called Laplace expansion.
+[Cofactor expansion](!/linear-algebra/definitions#cofactor_expansion) — $\\det A = \\sum_j a_{i,j}\\, C_{i,j}$ along any row $i$, or the same sum down any column; also called Laplace expansion.
 
-**Sarrus's rule** — for $3 \\times 3$ only: repeat the first two columns, add the three downward diagonal products, subtract the three upward ones.
+[Sarrus's rule](!/linear-algebra/definitions#sarrus_rule) — for $3 \\times 3$ only: repeat the first two columns, add the three downward diagonal products, subtract the three upward ones.
 
-**Sign pattern** — the checkerboard of $(-1)^{i+j}$: plus where the row and column numbers have the same parity, minus where they differ.
+[Sign pattern](!/linear-algebra/determinants/cofactors#2) — the checkerboard of $(-1)^{i+j}$: plus where the row and column numbers have the same parity, minus where they differ.
 
-[Singular](!/linear-algebra/determinants#5) — $\\det A = 0$; the matrix has no inverse and collapses space onto something lower-dimensional.
+[Singular](!/linear-algebra/definitions#singular_matrix) — $\\det A = 0$; the matrix has no inverse and collapses space onto something lower-dimensional.
 
-[Orientation](!/linear-algebra/determinants/geometry#4) — the sign of the determinant: positive when $A$ preserves handedness, negative when it reverses it.
+[Orientation](!/linear-algebra/definitions#orientation) — the sign of the determinant: positive when $A$ preserves handedness, negative when it reverses it.
 
 **Term count** — $n!$ products for an $n \\times n$ matrix: $2$, $6$, $24$, $120$, which is why expansion is a small-matrix method.`,
       before: ``,

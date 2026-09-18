@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Spectral theorem](!/linear-algebra/formulas#spectral_theorem) — every real [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) has real eigenvalues and an orthonormal [basis](!/linear-algebra/definitions#basis) of eigenvectors.
+      content: `[Spectral theorem](!/linear-algebra/decompositions/spectral#2) — every real [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) has real eigenvalues and an orthonormal [basis](!/linear-algebra/definitions#basis) of eigenvectors.
 
-[Spectral decomposition](!/linear-algebra/formulas#spectral_decomposition) — $A = Q\\Lambda Q^T$ with $Q$ orthogonal and $\\Lambda$ diagonal; the diagonalization of a symmetric matrix by an orthogonal change of basis.
+[Spectral decomposition](!/linear-algebra/definitions#spectral_decomposition) — $A = Q\\Lambda Q^T$ with $Q$ orthogonal and $\\Lambda$ diagonal; the diagonalization of a symmetric matrix by an orthogonal change of basis.
 
 [Orthogonal matrix](!/linear-algebra/definitions#orthogonal_matrix) — $Q^TQ = I$, so $Q^{-1} = Q^T$; its columns are orthonormal.
 
-**Orthonormal eigenvectors** — unit-length eigenvectors, mutually perpendicular; eigenvectors for different eigenvalues of a symmetric matrix are perpendicular automatically.
+[Orthonormal eigenvectors](!/linear-algebra/decompositions/spectral#5) — unit-length eigenvectors, mutually perpendicular; eigenvectors for different eigenvalues of a symmetric matrix are perpendicular automatically.
 
-**Rank-one form** — $A = \\sum \\lambda_i\\mathbf{q}_i\\mathbf{q}_i^T$; each $\\mathbf{q}_i\\mathbf{q}_i^T$ projects onto an eigen-direction.
+[Rank-one form](!/linear-algebra/decompositions/spectral#3) — $A = \\sum \\lambda_i\\mathbf{q}_i\\mathbf{q}_i^T$; each $\\mathbf{q}_i\\mathbf{q}_i^T$ projects onto an eigen-direction.
 
-**Gram–Schmidt inside an eigenspace** — the step needed when an eigenvalue is repeated, to make the basis of its eigenspace orthogonal.
+[Gram–Schmidt inside an eigenspace](!/linear-algebra/decompositions/spectral#4) — the step needed when an eigenvalue is repeated, to make the basis of its eigenspace orthogonal.
 
-[Quadratic form](!/linear-algebra/decompositions/spectral#6) — $\\mathbf{x}^TA\\mathbf{x}$, which becomes $\\sum \\lambda_i y_i^2$ in the eigen-coordinates $\\mathbf{y} = Q^T\\mathbf{x}$.
+[Quadratic form](!/linear-algebra/definitions#quadratic_form) — $\\mathbf{x}^TA\\mathbf{x}$, which becomes $\\sum \\lambda_i y_i^2$ in the eigen-coordinates $\\mathbf{y} = Q^T\\mathbf{x}$.
 
-**Definiteness** — positive definite when all eigenvalues are positive, semidefinite when none is negative, indefinite when the signs mix.`,
+[Definiteness](!/linear-algebra/definitions#positive_definite_matrix) — positive definite when all eigenvalues are positive, semidefinite when none is negative, indefinite when the signs mix.`,
       before: ``,
       after: ``,
       link: '',

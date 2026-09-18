@@ -14930,16 +14930,20 @@ const definitionsRepository = [
     "category": "Matrices",
     "entity": "permutation_matrix",
     "definitionUrl": "/linear-algebra/definitions#permutation_matrix",
-    "formula": "An [identity matrix](!/linear-algebra/definitions#identity_matrix) with its rows reordered — exactly one $1$ in each row and column; multiplying by it permutes rows or columns, and its inverse is its [transpose](!/linear-algebra/definitions#transpose)",
-    "link": { "label": "Involutory and Permutation Matrices", "url": "/linear-algebra/matrix/types#9" },
+    "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) with exactly one entry equal to $1$ in each row and each column, and $0$ everywhere else — the [identity matrix](!/linear-algebra/definitions#identity_matrix) with its rows rearranged; multiplying by it permutes rows or columns, and its inverse is its [transpose](!/linear-algebra/definitions#transpose)",
+    "link": { "label": "Permutation Matrices", "url": "/linear-algebra/matrix/types#12" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [
       { "name": "Identity Matrix", "url": "/linear-algebra/definitions#identity_matrix" },
       { "name": "Orthogonal Matrix", "url": "/linear-algebra/definitions#orthogonal_matrix" },
+      { "name": "Square Matrix", "url": "/linear-algebra/definitions#square_matrix" },
       { "name": "Partial Pivoting", "url": "/linear-algebra/definitions#partial_pivoting" }
     ],
-    "relatedFormulas": [],
+    "relatedFormulas": [
+      { "name": "Permutation Matrix Inverse", "url": "/linear-algebra/formulas#permutation_matrix_inverse" },
+      { "name": "Permutation Matrix Determinant", "url": "/linear-algebra/formulas#permutation_matrix_determinant" }
+    ],
     "relatedTheorems": [ "TBD" ],
     "relatedMethods": [ "TBD" ],
     "relatedExamples": [ "TBD" ]
@@ -14993,7 +14997,7 @@ const definitionsRepository = [
     "entity": "involutory_matrix",
     "definitionUrl": "/linear-algebra/definitions#involutory_matrix",
     "formula": "A [square matrix](!/linear-algebra/definitions#square_matrix) that is its own inverse, $A^2 = I$; applying it twice returns every vector to where it started, as a [reflection](!/linear-algebra/definitions#reflection) does",
-    "link": { "label": "Involutory and Permutation Matrices", "url": "/linear-algebra/matrix/types#9" },
+    "link": { "label": "Involutory Matrices", "url": "/linear-algebra/matrix/types#9" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [

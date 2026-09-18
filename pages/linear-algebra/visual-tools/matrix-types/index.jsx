@@ -56,21 +56,21 @@ export async function getStaticProps() {
       title: `Key Terms`,
       content: `[Square matrix](!/linear-algebra/definitions#square_matrix) — a matrix with as many rows as columns, $n \\times n$. Every type on this page is square; the main diagonal only makes sense when it is.
 
-**Main diagonal** — the entries $a_{i,i}$ from the top-left corner to the bottom-right. Most special types are defined by what sits on it and what sits off it.
+[Main diagonal](!/linear-algebra/definitions#main_diagonal) — the entries $a_{i,i}$ from the top-left corner to the bottom-right. Most special types are defined by what sits on it and what sits off it.
 
 [Identity matrix](!/linear-algebra/definitions#identity_matrix) — $I_n$, ones on the diagonal and zeros elsewhere; the matrix that changes nothing under multiplication.
 
-**Zero matrix** — every entry $0$; the matrix that changes nothing under addition.
+[Zero matrix](!/linear-algebra/definitions#zero_matrix) — every entry $0$; the matrix that changes nothing under addition.
 
-**Scalar matrix** — $\\lambda I$, a single number $\\lambda$ repeated down the diagonal.
+[Scalar matrix](!/linear-algebra/definitions#scalar_matrix) — $\\lambda I$, a single number $\\lambda$ repeated down the diagonal.
 
 [Diagonal matrix](!/linear-algebra/definitions#diagonal_matrix) — any entries on the diagonal, zeros everywhere else.
 
-[Triangular matrix](!/linear-algebra/decompositions/lower-upper#1) — zeros below the diagonal (upper) or above it (lower); the diagonal and one side are free.
+[Triangular matrix](!/linear-algebra/definitions#triangular_matrix) — zeros below the diagonal (upper) or above it (lower); the diagonal and one side are free.
 
 [Symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) — equal to its transpose, $a_{i,j} = a_{j,i}$; a mirror across the diagonal.
 
-**Skew-symmetric matrix** — the negative of its transpose, $a_{i,j} = -a_{j,i}$, which forces every diagonal entry to $0$.`,
+[Skew-symmetric matrix](!/linear-algebra/definitions#skew_symmetric_matrix) — the negative of its transpose, $a_{i,j} = -a_{j,i}$, which forces every diagonal entry to $0$.`,
       before: ``,
       after: ``,
       link: '',

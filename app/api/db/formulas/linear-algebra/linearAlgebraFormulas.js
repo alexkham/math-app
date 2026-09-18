@@ -1472,7 +1472,7 @@ $$\\dim(\\text{Row}\\,A) + \\dim(\\text{Null}\\,A) = n$$`,
     entity: 'square_matrix',
     category: `Special Matrix Types`,
     formula: `$$A^2 = I$$`,
-    link: { label: `Involutory and Permutation Matrices`, url: '/linear-algebra/matrix/types#9' },
+    link: { label: `Involutory Matrices`, url: '/linear-algebra/matrix/types#9' },
     fields: {
       explanation: `An involutory matrix is its own inverse. Applying it twice returns every vector to its starting point. The eigenvalues are restricted to $\\pm 1$. Reflections are the prototypical examples: reflecting twice across the same line or plane returns the identity.`,
       conditions: `$A$ must be square. Equivalently, $A^{-1} = A$.`,
@@ -1481,6 +1481,37 @@ $$\\dim(\\text{Row}\\,A) + \\dim(\\text{Null}\\,A) = n$$`,
 - [Idempotent Matrix Definition](!/linear-algebra/formulas#idempotent_matrix_definition)`,
       related_definitions: `- [Square Matrix](!/linear-algebra/definitions#square_matrix)
 - [Inverse Matrix](!/linear-algebra/definitions#inverse_matrix)`,
+    },
+  },
+  {
+    name: `Permutation Matrix Inverse`,
+    entity: 'square_matrix',
+    category: `Special Matrix Types`,
+    formula: `$$P^{-1} = P^{\\mathsf{T}}$$`,
+    link: { label: `Permutation Matrices`, url: '/linear-algebra/matrix/types#12' },
+    fields: {
+      explanation: `The columns of a permutation matrix are distinct standard basis vectors, so they are orthonormal and the matrix is orthogonal. Inverting one therefore costs nothing beyond a transpose.`,
+      conditions: `$P$ has exactly one entry equal to $1$ in each row and each column, and $0$ elsewhere.`,
+      related_formulas: `- [Orthogonal Matrix Definition](!/linear-algebra/formulas#orthogonal_matrix_definition)
+- [Permutation Matrix Determinant](!/linear-algebra/formulas#permutation_matrix_determinant)`,
+      related_definitions: `- [Permutation Matrix](!/linear-algebra/definitions#permutation_matrix)
+- [Square Matrix](!/linear-algebra/definitions#square_matrix)`,
+    },
+  },
+  {
+    name: `Permutation Matrix Determinant`,
+    entity: 'square_matrix',
+    category: `Special Matrix Types`,
+    formula: `$$\\det(P_\\sigma) = \\operatorname{sgn}(\\sigma) = (-1)^{t}$$`,
+    link: { label: `Permutation Matrices`, url: '/linear-algebra/matrix/types#12' },
+    fields: {
+      explanation: `Here $t$ is the number of transpositions in any decomposition of $\\sigma$. The count itself varies between decompositions but its parity does not, which is what makes the sign well defined. This is the same fact as the rule that a single row swap flips the sign of a determinant.`,
+      conditions: `$P_\\sigma$ is the permutation matrix of the permutation $\\sigma$.`,
+      variants: `**Even permutation:** $\\det(P) = +1$. **Odd permutation:** $\\det(P) = -1$.`,
+      related_formulas: `- [Permutation Matrix Inverse](!/linear-algebra/formulas#permutation_matrix_inverse)
+- [Orthogonal Matrix Determinant](!/linear-algebra/formulas#orthogonal_matrix_determinant)`,
+      related_definitions: `- [Permutation Matrix](!/linear-algebra/definitions#permutation_matrix)
+- [Determinant](!/linear-algebra/definitions#determinant)`,
     },
   },
   {

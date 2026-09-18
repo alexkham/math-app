@@ -530,15 +530,15 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Hadamard product** — the element-wise product of two matrices of the same shape, denoted $A \\odot B$. Each entry of the result is the product of the corresponding entries: $c_{i,j} = a_{i,j} \\cdot b_{i,j}$.
+      content: `[Hadamard product](!/linear-algebra/definitions#hadamard_product) — the element-wise product of two matrices of the same shape, denoted $A \\odot B$. Each entry of the result is the product of the corresponding entries: $c_{i,j} = a_{i,j} \\cdot b_{i,j}$.
 
-**Schur product** — alternative name for the Hadamard product.
+[Schur product](!/linear-algebra/definitions#hadamard_product) — alternative name for the Hadamard product.
 
-**Element-wise (pointwise) operation** — an operation applied independently to each pair of corresponding entries; the result at $(i,j)$ depends only on the inputs at $(i,j)$.
+[Element-wise (pointwise) operation](!/linear-algebra/definitions#element_wise_operation) — an operation applied independently to each pair of corresponding entries; the result at $(i,j)$ depends only on the inputs at $(i,j)$.
 
-**Same-shape requirement** — both operands must have identical [dimensions](!/linear-algebra/definitions#dimension). A $2 \\times 3$ [matrix](!/linear-algebra/definitions#matrix) cannot be Hadamard-multiplied with a $3 \\times 2$.
+[Same-shape requirement](!/linear-algebra/definitions#conformability) — both operands must have identical [dimensions](!/linear-algebra/definitions#dimension). A $2 \\times 3$ [matrix](!/linear-algebra/definitions#matrix) cannot be Hadamard-multiplied with a $3 \\times 2$.
 
-**Standard matrix product** — the row-by-column product $A \\times B$, a different operation with different shape rules and a different result.
+[Standard matrix product](!/linear-algebra/matrix/operations#5) — the row-by-column product $A \\times B$, a different operation with different shape rules and a different result.
 
 **$\\odot$ symbol** — the circle-dot operator, the standard notation distinguishing the Hadamard product from $A \\times B$ or $AB$.`,
       before: ``,

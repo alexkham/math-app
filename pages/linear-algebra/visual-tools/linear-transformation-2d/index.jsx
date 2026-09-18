@@ -527,17 +527,17 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Linear Transformation** &mdash; A function $T$ such that $T(u + v) = T(u) + T(v)$ and $T(c \\cdot v) = c \\cdot T(v)$. Every [linear transformation](!/linear-algebra/definitions#linear_transformation) on $\\mathbb{R}^2$ is represented by a $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix).
+      content:`[Linear Transformation](!/linear-algebra/definitions#linear_transformation) &mdash; A function $T$ such that $T(u + v) = T(u) + T(v)$ and $T(c \\cdot v) = c \\cdot T(v)$. Every linear transformation on $\\mathbb{R}^2$ is represented by a $2 \\times 2$ [matrix](!/linear-algebra/definitions#matrix).
 
-**Matrix $A$** &mdash; The $2 \\times 2$ array whose columns are $T(\\hat{i})$ and $T(\\hat{j})$, where $\\hat{i}$ and $\\hat{j}$ are the standard basis [vectors](!/linear-algebra/definitions#vector).
+[Matrix](!/linear-algebra/definitions#matrix_representation) $A$ &mdash; The $2 \\times 2$ array whose columns are $T(\\hat{i})$ and $T(\\hat{j})$, where $\\hat{i}$ and $\\hat{j}$ are the standard basis [vectors](!/linear-algebra/definitions#vector).
 
-**Determinant** &mdash; The signed area of the parallelogram spanned by the columns of $A$. Positive: orientation preserved. Negative: orientation reversed. Zero: singular.
+[Determinant](!/linear-algebra/definitions#determinant) &mdash; The signed area of the parallelogram spanned by the columns of $A$. Positive: orientation preserved. Negative: orientation reversed. Zero: singular.
 
-**Trace** &mdash; The sum of the diagonal entries, $a_{11} + a_{22}$. Equals the sum of the [eigenvalues](!/linear-algebra/definitions#eigenvalue).
+[Trace](!/linear-algebra/definitions#trace) &mdash; The sum of the diagonal entries, $a_{11} + a_{22}$. Equals the sum of the [eigenvalues](!/linear-algebra/definitions#eigenvalue).
 
-**Rank** &mdash; The [dimension](!/linear-algebra/definitions#dimension) of the image. Either 2 (full rank, invertible), 1 (singular, collapses to a line), or 0 (zero matrix).
+[Rank](!/linear-algebra/definitions#rank) &mdash; The [dimension](!/linear-algebra/definitions#dimension) of the image. Either 2 (full rank, invertible), 1 (singular, collapses to a line), or 0 (zero matrix).
 
-**Eigenvalue** &mdash; A scalar $\\lambda$ such that $Av = \\lambda v$ for some nonzero $v$. The directions preserved by $A$ up to scaling.
+[Eigenvalue](!/linear-algebra/definitions#eigenvalue) &mdash; A scalar $\\lambda$ such that $Av = \\lambda v$ for some nonzero $v$. The directions preserved by $A$ up to scaling.
 
 **Interpolation Parameter $t$** &mdash; A scrub variable from 0 to 1. The displayed matrix is $M(t) = (1 - t) I + t A$, morphing the identity into $A$.`,
       before:``,

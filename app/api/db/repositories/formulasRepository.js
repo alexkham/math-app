@@ -15914,7 +15914,7 @@ const formulasRepository = [
     formulaUrl: "/linear-algebra/formulas#square_matrix",
     formula: "$$A^2 = I$$",
     link: {
-          "label": "Involutory and Permutation Matrices",
+          "label": "Involutory Matrices",
           "url": "/linear-algebra/matrix/types#9"
         },
     relatedTools: [],
@@ -15937,6 +15937,82 @@ const formulasRepository = [
           {
             "name": "Idempotent Matrix Definition",
             "url": "/linear-algebra/formulas#idempotent_matrix_definition"
+          }
+        ],
+    relatedTheorems: [],
+    relatedMethods: [],
+    relatedExamples: [],
+  },
+
+  {
+    name: "Permutation Matrix Inverse",
+    section: "linear-algebra",
+    category: "Special Matrix Types",
+    entity: "square_matrix",
+    formulaUrl: "/linear-algebra/formulas#square_matrix",
+    formula: "$$P^{-1} = P^{\\mathsf{T}}$$",
+    link: {
+          "label": "Permutation Matrices",
+          "url": "/linear-algebra/matrix/types#12"
+        },
+    relatedTools: [],
+    usedOnPages: [],
+    relatedDefinitions: [
+          {
+            "name": "Permutation Matrix",
+            "url": "/linear-algebra/definitions#permutation_matrix"
+          },
+          {
+            "name": "Square Matrix",
+            "url": "/linear-algebra/definitions#square_matrix"
+          }
+        ],
+    relatedFormulas: [
+          {
+            "name": "Orthogonal Matrix Definition",
+            "url": "/linear-algebra/formulas#orthogonal_matrix_definition"
+          },
+          {
+            "name": "Permutation Matrix Determinant",
+            "url": "/linear-algebra/formulas#permutation_matrix_determinant"
+          }
+        ],
+    relatedTheorems: [],
+    relatedMethods: [],
+    relatedExamples: [],
+  },
+
+  {
+    name: "Permutation Matrix Determinant",
+    section: "linear-algebra",
+    category: "Special Matrix Types",
+    entity: "square_matrix",
+    formulaUrl: "/linear-algebra/formulas#square_matrix",
+    formula: "$$\\det(P_\\sigma) = \\operatorname{sgn}(\\sigma) = (-1)^{t}$$",
+    link: {
+          "label": "Permutation Matrices",
+          "url": "/linear-algebra/matrix/types#12"
+        },
+    relatedTools: [],
+    usedOnPages: [],
+    relatedDefinitions: [
+          {
+            "name": "Permutation Matrix",
+            "url": "/linear-algebra/definitions#permutation_matrix"
+          },
+          {
+            "name": "Determinant",
+            "url": "/linear-algebra/definitions#determinant"
+          }
+        ],
+    relatedFormulas: [
+          {
+            "name": "Permutation Matrix Inverse",
+            "url": "/linear-algebra/formulas#permutation_matrix_inverse"
+          },
+          {
+            "name": "Orthogonal Matrix Determinant",
+            "url": "/linear-algebra/formulas#orthogonal_matrix_determinant"
           }
         ],
     relatedTheorems: [],

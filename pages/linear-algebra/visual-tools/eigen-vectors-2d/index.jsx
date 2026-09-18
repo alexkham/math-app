@@ -527,17 +527,17 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`**Eigenvector** &mdash; A nonzero vector $v$ such that $Av = \\lambda v$ for some scalar $\\lambda$. [Matrix](!/linear-algebra/definitions#matrix) $A$ leaves the direction of $v$ unchanged and only scales it.
+      content:`[Eigenvector](!/linear-algebra/definitions#eigenvector) &mdash; A nonzero vector $v$ such that $Av = \\lambda v$ for some scalar $\\lambda$. [Matrix](!/linear-algebra/definitions#matrix) $A$ leaves the direction of $v$ unchanged and only scales it.
 
-**Eigenvalue** &mdash; The scalar $\\lambda$ in $Av = \\lambda v$. It is the stretch factor along the eigenvector direction. A negative eigenvalue means the vector flips.
+[Eigenvalue](!/linear-algebra/definitions#eigenvalue) &mdash; The scalar $\\lambda$ in $Av = \\lambda v$. It is the stretch factor along the eigenvector direction. A negative eigenvalue means the vector flips.
 
-**Eigendirection** &mdash; The line through the origin spanned by an eigenvector. Every vector on this line is also an eigenvector with the same eigenvalue.
+[Eigendirection](!/linear-algebra/definitions#eigenspace) &mdash; The line through the origin spanned by an eigenvector. Every vector on this line is also an eigenvector with the same eigenvalue.
 
-**Characteristic Polynomial** &mdash; The quadratic $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ whose roots are the [eigenvalues](!/linear-algebra/definitions#eigenvalue) of a $2 \\times 2$ matrix $A$.
+[Characteristic Polynomial](!/linear-algebra/definitions#characteristic_polynomial) &mdash; The quadratic $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = 0$ whose roots are the [eigenvalues](!/linear-algebra/definitions#eigenvalue) of a $2 \\times 2$ matrix $A$.
 
-**Defective Matrix** &mdash; A matrix with a repeated eigenvalue but fewer [eigenvectors](!/linear-algebra/definitions#eigenvector) than the [algebraic multiplicity](!/linear-algebra/definitions#algebraic_multiplicity). Cannot be diagonalized.
+[Defective Matrix](!/linear-algebra/definitions#defective_matrix) &mdash; A matrix with a repeated eigenvalue but fewer [eigenvectors](!/linear-algebra/definitions#eigenvector) than the [algebraic multiplicity](!/linear-algebra/definitions#algebraic_multiplicity). Cannot be diagonalized.
 
-**Spectral Theorem** &mdash; Every [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) has perpendicular eigenvectors and real eigenvalues.`,
+[Spectral Theorem](!/linear-algebra/decompositions/spectral#2) &mdash; Every [symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) has perpendicular eigenvectors and real eigenvalues.`,
       before:``,
       after:``,
       link:'',

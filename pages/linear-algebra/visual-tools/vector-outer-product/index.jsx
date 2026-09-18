@@ -35,19 +35,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Outer product](!/linear-algebra/decompositions/spectral#3) — the [matrix](!/linear-algebra/definitions#matrix) $\\mathbf{u}\\mathbf{v}^T$ built from a column $\\mathbf{u}$ with $m$ entries and a row $\\mathbf{v}^T$ with $n$ entries; its entry at row $i$, column $j$ is $u_i v_j$.
+      content: `[Outer product](!/linear-algebra/definitions#outer_product) — the [matrix](!/linear-algebra/definitions#matrix) $\\mathbf{u}\\mathbf{v}^T$ built from a column $\\mathbf{u}$ with $m$ entries and a row $\\mathbf{v}^T$ with $n$ entries; its entry at row $i$, column $j$ is $u_i v_j$.
 
-**Result shape** — $m \\times n$: one row for each entry of $\\mathbf{u}$, one column for each entry of $\\mathbf{v}$. The two lengths need not match.
+[Result shape](!/linear-algebra/definitions#conformability) — $m \\times n$: one row for each entry of $\\mathbf{u}$, one column for each entry of $\\mathbf{v}$. The two lengths need not match.
 
-**Rank-1 matrix** — a matrix all of whose rows are multiples of one row vector, equivalently all of whose columns are multiples of one column vector. Every outer product of non-zero [vectors](!/linear-algebra/definitions#vector) is rank 1, and every rank-1 matrix is an outer product.
+[Rank-1 matrix](!/linear-algebra/matrix/rank#8) — a matrix all of whose rows are multiples of one row vector, equivalently all of whose columns are multiples of one column vector. Every outer product of non-zero [vectors](!/linear-algebra/definitions#vector) is rank 1, and every rank-1 matrix is an outer product.
 
 [Inner product](!/linear-algebra/definitions#inner_product) — the same pairing of entries summed into a single number, $\\mathbf{v}^T\\mathbf{u} = \\sum_i u_i v_i$; requires matching lengths.
 
-**Dyadic product** — an older name for the outer product, still used in physics.
+[Dyadic product](!/linear-algebra/definitions#outer_product) — an older name for the outer product, still used in physics.
 
-**Tensor product** — the general construction of which the outer product of two vectors is the simplest case, written $\\mathbf{u} \\otimes \\mathbf{v}$.
+[Tensor product](!/linear-algebra/definitions#outer_product) — the general construction of which the outer product of two vectors is the simplest case, written $\\mathbf{u} \\otimes \\mathbf{v}$.
 
-**Column times row** — the matrix-multiplication reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner [dimension](!/linear-algebra/definitions#dimension) $1$.`,
+[Column times row](!/linear-algebra/matrix/operations#7) — the matrix-multiplication reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner [dimension](!/linear-algebra/definitions#dimension) $1$.`,
       before: ``,
       after: ``,
       link: '',

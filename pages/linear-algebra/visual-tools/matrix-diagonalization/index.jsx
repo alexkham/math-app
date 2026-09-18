@@ -35,23 +35,23 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Diagonalization](!/linear-algebra/eigen/diagonalization) — writing $A = PDP^{-1}$ with $D$ diagonal.
+      content: `[Diagonalization](!/linear-algebra/definitions#diagonalization) — writing $A = PDP^{-1}$ with $D$ diagonal.
 
 **$P$** — the [matrix](!/linear-algebra/definitions#matrix) whose columns are $n$ independent eigenvectors of $A$; invertible because they are independent.
 
 **$D$** — the [diagonal matrix](!/linear-algebra/definitions#diagonal_matrix) of eigenvalues, in the same order as the columns of $P$.
 
-[Diagonalizable](!/linear-algebra/eigen/diagonalization#3) — a matrix that has $n$ independent eigenvectors; equivalently, one whose [geometric multiplicities](!/linear-algebra/definitions#geometric_multiplicity) all equal the algebraic ones.
+[Diagonalizable](!/linear-algebra/definitions#diagonalizable_matrix) — a matrix that has $n$ independent eigenvectors; equivalently, one whose [geometric multiplicities](!/linear-algebra/definitions#geometric_multiplicity) all equal the algebraic ones.
 
-**Defective** — a matrix with too few eigenvectors; it has no diagonal form, only a Jordan form.
+[Defective](!/linear-algebra/definitions#defective_matrix) — a matrix with too few eigenvectors; it has no diagonal form, only a Jordan form.
 
 [Similar matrices](!/linear-algebra/definitions#similar_matrices) — $A$ and $P^{-1}AP$; they share eigenvalues, trace and [determinant](!/linear-algebra/definitions#determinant). Diagonalization is similarity to a diagonal matrix.
 
-**Eigenvector basis** — the columns of $P$; in this [basis](!/linear-algebra/definitions#basis) the map is a pure scaling.
+[Eigenvector basis](!/linear-algebra/eigen/diagonalization#2) — the columns of $P$; in this [basis](!/linear-algebra/definitions#basis) the map is a pure scaling.
 
-[Spectral decomposition](!/linear-algebra/formulas#spectral_decomposition) — the symmetric case $A = QDQ^T$, where $Q$ is orthogonal, so the inverse is the transpose.
+[Spectral decomposition](!/linear-algebra/definitions#spectral_decomposition) — the symmetric case $A = QDQ^T$, where $Q$ is orthogonal, so the inverse is the transpose.
 
-**Power formula** — $A^k = PD^kP^{-1}$, with $D^k$ obtained by powering the diagonal entries.`,
+[Power formula](!/linear-algebra/eigen/diagonalization#4) — $A^k = PD^kP^{-1}$, with $D^k$ obtained by powering the diagonal entries.`,
       before: ``,
       after: ``,
       link: '',

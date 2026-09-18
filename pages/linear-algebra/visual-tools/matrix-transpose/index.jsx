@@ -41,9 +41,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Transpose](!/linear-algebra/matrix/operations#8) — the operation that turns an $m \\times n$ [matrix](!/linear-algebra/definitions#matrix) $A$ into an $n \\times m$ matrix $A^T$ by swapping rows and columns: $(A^T)_{i,j} = a_{j,i}$.
+      content: `[Transpose](!/linear-algebra/definitions#transpose) — the operation that turns an $m \\times n$ [matrix](!/linear-algebra/definitions#matrix) $A$ into an $n \\times m$ matrix $A^T$ by swapping rows and columns: $(A^T)_{i,j} = a_{j,i}$.
 
-**Main diagonal** — the entries $a_{i,i}$ where row index equals column index. Defined fully only for square matrices.
+[Main diagonal](!/linear-algebra/definitions#main_diagonal) — the entries $a_{i,i}$ where row index equals column index. Defined fully only for square matrices.
 
 **Row-column swap** — the defining rule of transposition: the entry at row $i$, column $j$ of $A$ moves to row $j$, column $i$ of $A^T$.
 
@@ -51,7 +51,7 @@ export async function getStaticProps(){
 
 [Symmetric matrix](!/linear-algebra/definitions#symmetric_matrix) — a [square matrix](!/linear-algebra/definitions#square_matrix) that equals its own transpose: $A = A^T$. Equivalently, $a_{i,j} = a_{j,i}$ for all $i, j$.
 
-**Involution** — an operation that undoes itself. Transpose is involutive: $(A^T)^T = A$.`,
+[Involution](!/linear-algebra/definitions#involutory_matrix) — an operation that undoes itself. Transpose is involutive: $(A^T)^T = A$.`,
       before: ``,
       after: ``,
       link: '',

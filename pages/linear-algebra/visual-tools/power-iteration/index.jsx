@@ -37,15 +37,15 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `**Power iteration** (power method) — the loop $\\mathbf{x}_{k+1} = A\\mathbf{x}_k / s_k$, which converges to the eigenvector of the eigenvalue of largest modulus.
 
-**Dominant eigenvalue** — the eigenvalue $\\lambda_1$ with the largest absolute value; it must be strictly larger in modulus than every other for the method to converge.
+[Dominant eigenvalue](!/linear-algebra/definitions#dominant_eigenvalue) — the eigenvalue $\\lambda_1$ with the largest absolute value; it must be strictly larger in modulus than every other for the method to converge.
 
 **Scale factor** — the number $s_k$ divided out at each step; here the entry of $A\\mathbf{x}_k$ with the largest magnitude, which tends to $\\lambda_1$.
 
-[Normalization](!/linear-algebra/orthogonality/gram-schmidt#4) — rescaling so the largest entry is $1$, keeping the numbers from overflowing or vanishing.
+[Normalization](!/linear-algebra/vectors/magnitude#6) — rescaling so the largest entry is $1$, keeping the numbers from overflowing or vanishing.
 
 **Convergence ratio** — $|\\lambda_2 / \\lambda_1|$, the factor by which the error shrinks per step.
 
-**Rayleigh quotient** — $\\mathbf{x}^TA\\mathbf{x} / \\mathbf{x}^T\\mathbf{x}$, a more accurate eigenvalue estimate for symmetric matrices, not used by the tool.
+[Rayleigh quotient](!/linear-algebra/definitions#rayleigh_quotient) — $\\mathbf{x}^TA\\mathbf{x} / \\mathbf{x}^T\\mathbf{x}$, a more accurate eigenvalue estimate for symmetric matrices, not used by the tool.
 
 **Tie** — two eigenvalues of equal largest modulus, such as $\\pm 1$ or a complex pair; the iteration then oscillates instead of converging.
 

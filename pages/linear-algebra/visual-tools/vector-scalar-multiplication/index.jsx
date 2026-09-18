@@ -628,17 +628,17 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Scalar](!/linear-algebra/definitions#scalar) — a single number, not a [vector](!/linear-algebra/definitions#vector) or [matrix](!/linear-algebra/definitions#matrix).
 
-[Scalar multiplication](!/linear-algebra/matrix/operations#3) — the operation $kv$ that multiplies every component of a vector $v$ by the [scalar](!/linear-algebra/definitions#scalar) $k$.
+[Scalar multiplication](!/linear-algebra/vectors/basic-operations#4) — the operation $kv$ that multiplies every component of a vector $v$ by the [scalar](!/linear-algebra/definitions#scalar) $k$.
 
-**Component-wise operation** — applied independently to each component; the result at position $i$ depends only on $k$ and $v_i$.
+[Component-wise operation](!/linear-algebra/definitions#element_wise_operation) — applied independently to each component; the result at position $i$ depends only on $k$ and $v_i$.
 
 **Length preservation** — $kv$ has the same number of components as $v$. Scalar multiplication never changes the [dimension](!/linear-algebra/definitions#dimension).
 
-**Scaling factor** — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or reverses direction ($k < 0$) the vector uniformly.
+[Scaling factor](!/linear-algebra/vectors/basic-operations#4) — the role $k$ plays: it stretches ($|k| > 1$), shrinks ($|k| < 1$), or reverses direction ($k < 0$) the vector uniformly.
 
-**Zero scalar** — multiplying by $k = 0$ produces the zero vector of the same length as $v$.
+[Zero scalar](!/linear-algebra/vectors/basic-operations#5) — multiplying by $k = 0$ produces the zero vector of the same length as $v$.
 
-**Geometric scaling** — multiplying a vector by $k$ stretches its magnitude by $|k|$ and preserves direction if $k > 0$ or reverses it if $k < 0$.`,
+[Geometric scaling](!/linear-algebra/transformations/geometric#2) — multiplying a vector by $k$ stretches its magnitude by $|k|$ and preserves direction if $k > 0$ or reverses it if $k < 0$.`,
       before: ``,
       after: ``,
       link: '',

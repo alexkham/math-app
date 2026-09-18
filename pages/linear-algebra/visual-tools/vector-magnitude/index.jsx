@@ -35,19 +35,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Magnitude](!/linear-algebra/vectors/magnitude) — the length of a vector, written $\\|\\mathbf{v}\\|$ (sometimes $|\\mathbf{v}|$), computed as $\\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$.
+      content: `[Magnitude](!/linear-algebra/definitions#magnitude) — the length of a vector, written $\\|\\mathbf{v}\\|$ (sometimes $|\\mathbf{v}|$), computed as $\\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$.
 
-[Euclidean norm](!/linear-algebra/formulas#euclidean_norm) — the formal name for the magnitude; also called the $\\ell^2$ norm or $2$-norm.
+[Euclidean norm](!/linear-algebra/definitions#magnitude) — the formal name for the magnitude; also called the $\\ell^2$ norm or $2$-norm.
 
 **Squared norm** — $\\|\\mathbf{v}\\|^2 = v_1^2 + \\cdots + v_n^2 = \\mathbf{v} \\cdot \\mathbf{v}$, the sum of squares before the root is taken.
 
 [Unit vector](!/linear-algebra/definitions#unit_vector) — a vector of magnitude exactly $1$.
 
-[Normalization](!/linear-algebra/orthogonality/gram-schmidt#4) — dividing a non-zero vector by its magnitude to produce the unit vector in the same direction: $\\hat{\\mathbf{v}} = \\mathbf{v} / \\|\\mathbf{v}\\|$.
+[Normalization](!/linear-algebra/vectors/magnitude#6) — dividing a non-zero vector by its magnitude to produce the unit vector in the same direction: $\\hat{\\mathbf{v}} = \\mathbf{v} / \\|\\mathbf{v}\\|$.
 
-[Direction](!/linear-algebra/vectors/properties#2) — what normalization preserves; two [vectors](!/linear-algebra/definitions#vector) have the same direction when one is a positive multiple of the other.
+[Direction](!/linear-algebra/definitions#direction) — what normalization preserves; two [vectors](!/linear-algebra/definitions#vector) have the same direction when one is a positive multiple of the other.
 
-**Zero vector** — the only vector with magnitude $0$, and the only one that cannot be normalized.`,
+[Zero vector](!/linear-algebra/definitions#zero_vector) — the only vector with magnitude $0$, and the only one that cannot be normalized.`,
       before: ``,
       after: ``,
       link: '',
