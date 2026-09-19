@@ -35,21 +35,21 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) $C(A)$ — all combinations of the columns of $A$; the set of $\\mathbf{b}$ for which $A\\mathbf{x} = \\mathbf{b}$ is solvable. A [subspace](!/linear-algebra/definitions#subspace) of $\\mathbb{R}^m$ of [dimension](!/linear-algebra/definitions#dimension) $r$.
+      content: `[Column space](!/linear-algebra/definitions#column_space) $C(A)$ — all combinations of the columns of $A$; the set of $\\mathbf{b}$ for which $A\\mathbf{x} = \\mathbf{b}$ is solvable. A [subspace](!/linear-algebra/definitions#subspace) of $\\mathbb{R}^m$ of [dimension](!/linear-algebra/definitions#dimension) $r$.
 
-[Null space](!/linear-algebra/vector-spaces/fundamental-spaces#4) $N(A)$ — all solutions of $A\\mathbf{x} = \\mathbf{0}$. A subspace of $\\mathbb{R}^n$ of dimension $n - r$.
+[Null space](!/linear-algebra/definitions#null_space) $N(A)$ — all solutions of $A\\mathbf{x} = \\mathbf{0}$. A subspace of $\\mathbb{R}^n$ of dimension $n - r$.
 
-[Row space](!/linear-algebra/vector-spaces/fundamental-spaces#3) $C(A^T)$ — all combinations of the rows of $A$. A subspace of $\\mathbb{R}^n$ of dimension $r$.
+[Row space](!/linear-algebra/definitions#row_space) $C(A^T)$ — all combinations of the rows of $A$. A subspace of $\\mathbb{R}^n$ of dimension $r$.
 
-[Left null space](!/linear-algebra/vector-spaces/fundamental-spaces#5) $N(A^T)$ — all solutions of $A^T\\mathbf{y} = \\mathbf{0}$, equivalently $\\mathbf{y}^TA = \\mathbf{0}$. A subspace of $\\mathbb{R}^m$ of dimension $m - r$.
+[Left null space](!/linear-algebra/definitions#left_null_space) $N(A^T)$ — all solutions of $A^T\\mathbf{y} = \\mathbf{0}$, equivalently $\\mathbf{y}^TA = \\mathbf{0}$. A subspace of $\\mathbb{R}^m$ of dimension $m - r$.
 
-[Rank](!/linear-algebra/matrix/rank#1) $r$ — the number of [pivots](!/linear-algebra/definitions#pivot) of $A$; the common dimension of the column and row spaces.
+[Rank](!/linear-algebra/definitions#rank) $r$ — the number of [pivots](!/linear-algebra/definitions#pivot) of $A$; the common dimension of the column and row spaces.
 
-[Pivot columns](!/linear-algebra/linear-systems/echelon-form#4) — the columns of $A$ (not of $R$) at pivot positions; a [basis](!/linear-algebra/definitions#basis) of the column space.
+[Pivot columns](!/linear-algebra/definitions#pivot_column) — the columns of $A$ (not of $R$) at pivot positions; a [basis](!/linear-algebra/definitions#basis) of the column space.
 
-**Special solutions** — one null-space [vector](!/linear-algebra/definitions#vector) per free column, with that free variable $1$ and the others $0$.
+[Special solutions](!/linear-algebra/definitions#special_solutions) — one null-space [vector](!/linear-algebra/definitions#vector) per free column, with that free variable $1$ and the others $0$.
 
-[Rank–nullity](!/linear-algebra/matrix/rank#6) — $r + \\dim N(A) = n$; applied to $A^T$, $r + \\dim N(A^T) = m$.
+[Rank–nullity](!/linear-algebra/definitions#rank_nullity_theorem) — $r + \\dim N(A) = n$; applied to $A^T$, $r + \\dim N(A^T) = m$.
 
 [Orthogonal complement](!/linear-algebra/definitions#orthogonal_complement) — $N(A) = C(A^T)^\\perp$ in $\\mathbb{R}^n$ and $N(A^T) = C(A)^\\perp$ in $\\mathbb{R}^m$.`,
       before: ``,

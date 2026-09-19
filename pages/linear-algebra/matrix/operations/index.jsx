@@ -3940,6 +3940,23 @@ A common source of confusion is the product rule. The product of two $n \\times 
     after: ``,
     link: ``,
   },
+  obj13: {
+    title: `Two More Products: Hadamard and Outer`,
+    content: `Two products sit outside the main family but appear often enough to deserve their own rules.
+
+The [Hadamard product](!/linear-algebra/definitions#hadamard_product) $A \\circ B$, also written $A \\odot B$, multiplies entry by entry: $(A \\circ B)_{ij} = a_{ij}\\,b_{ij}$. Both matrices must share the same $m \\times n$ shape, and the result has that shape too. Because positions never mix, it inherits the arithmetic of ordinary numbers: it is commutative, associative, and distributes over addition. It has nothing to do with $AB$. For a $2 \\times 2$ matrix, $A \\circ I$ keeps only the diagonal of $A$, while $AI = A$.
+
+The [outer product](!/linear-algebra/definitions#outer_product) $\\mathbf{u}\\mathbf{v}^T$ is ordinary matrix multiplication applied to a column with $m$ entries and a row with $n$ entries. The inner dimensions are both $1$, so the product exists for any two lengths and gives an $m \\times n$ matrix with entries $u_i v_j$:
+
+$$\\mathbf{u}\\mathbf{v}^T = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\begin{pmatrix} 3 & 4 & 5 \\end{pmatrix} = \\begin{pmatrix} 3 & 4 & 5 \\\\ 6 & 8 & 10 \\end{pmatrix}$$
+
+Every column is a multiple of $\\mathbf{u}$ and every row a multiple of $\\mathbf{v}^T$, so the result has [rank](!/linear-algebra/matrix/rank) one whenever both vectors are non-zero. The [dot product](!/linear-algebra/vectors/dot-product) is the same two vectors multiplied in the other order, $\\mathbf{v}^T\\mathbf{u}$, which collapses to a single number; the outer product spreads them into a table instead.
+
+Both products have their own visual tools: the [Hadamard product](!/linear-algebra/visual-tools/hadamard-product) and the [outer product](!/linear-algebra/visual-tools/vector-outer-product).`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
 }
 
 
@@ -4231,6 +4248,14 @@ const schemas = {
           sectionsContent.obj11.content,
           <div key={'obj11-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+        ]
+    },
+    {
+        id:'13',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
     {

@@ -13164,7 +13164,7 @@ const definitionsRepository = [
     "entity": "outer_product",
     "definitionUrl": "/linear-algebra/definitions#outer_product",
     "formula": "The [matrix](!/linear-algebra/definitions#matrix) $\\mathbf{u}\\mathbf{v}^T$ with entries $u_i v_j$; every column is a multiple of $\\mathbf{u}$, so the result has [rank](!/linear-algebra/definitions#rank) one. Also called the dyadic or tensor product",
-    "link": { "label": "Rank of Special Matrices", "url": "/linear-algebra/matrix/rank#8" },
+    "link": { "label": "Two More Products: Hadamard and Outer", "url": "/linear-algebra/matrix/operations#13" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [
@@ -13185,7 +13185,7 @@ const definitionsRepository = [
     "entity": "hadamard_product",
     "definitionUrl": "/linear-algebra/definitions#hadamard_product",
     "formula": "The entry-wise product of two same-shaped matrices, $(A \\circ B)_{ij} = a_{ij}\\,b_{ij}$; unlike matrix multiplication it is commutative and never mixes positions. Also called the Schur product",
-    "link": { "label": "Matrix Operations", "url": "/linear-algebra/matrix/operations" },
+    "link": { "label": "Two More Products: Hadamard and Outer", "url": "/linear-algebra/matrix/operations#13" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [
@@ -13290,7 +13290,7 @@ const definitionsRepository = [
     "entity": "isometry",
     "definitionUrl": "/linear-algebra/definitions#isometry",
     "formula": "A [linear transformation](!/linear-algebra/definitions#linear_transformation) that preserves lengths, $\\|T\\mathbf{v}\\| = \\|\\mathbf{v}\\|$, and therefore distances and angles; in $\\mathbb{R}^n$ these are exactly the maps given by [orthogonal matrices](!/linear-algebra/definitions#orthogonal_matrix)",
-    "link": { "label": "Orthogonal Matrices", "url": "/linear-algebra/orthogonality/orthogonal-sets#6" },
+    "link": { "label": "Isometries: Maps That Preserve Length", "url": "/linear-algebra/orthogonality/orthogonal-sets#10" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [
@@ -15084,7 +15084,7 @@ const definitionsRepository = [
     "entity": "spectral_norm",
     "definitionUrl": "/linear-algebra/definitions#spectral_norm",
     "formula": "The largest factor by which a matrix can stretch any vector, $\\|A\\|_2 = \\max_{\\mathbf{x} \\neq 0} \\dfrac{\\|A\\mathbf{x}\\|}{\\|\\mathbf{x}\\|}$, which equals its largest [singular value](!/linear-algebra/definitions#singular_value)",
-    "link": { "label": "Singular Values", "url": "/linear-algebra/decompositions/svd#3" },
+    "link": { "label": "Spectral Norm and Condition Number", "url": "/linear-algebra/decompositions/svd#13" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [
@@ -15105,7 +15105,7 @@ const definitionsRepository = [
     "entity": "condition_number",
     "definitionUrl": "/linear-algebra/definitions#condition_number",
     "formula": "The ratio of the largest to the smallest [singular value](!/linear-algebra/definitions#singular_value), $\\kappa(A) = \\sigma_{\\max} / \\sigma_{\\min}$; it measures how much a small change in the input of $A\\mathbf{x} = \\mathbf{b}$ can be amplified in the output, and is infinite for a singular matrix",
-    "link": { "label": "Singular Values", "url": "/linear-algebra/decompositions/svd#3" },
+    "link": { "label": "Spectral Norm and Condition Number", "url": "/linear-algebra/decompositions/svd#13" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [
@@ -16973,7 +16973,7 @@ const definitionsRepository = [
     "entity": "dominant_eigenvalue",
     "definitionUrl": "/linear-algebra/definitions#dominant_eigenvalue",
     "formula": "The [eigenvalue](!/linear-algebra/definitions#eigenvalue) of largest absolute value; repeatedly multiplying a vector by the matrix pulls it toward the corresponding eigenvector, at a rate set by the ratio $|\\lambda_2 / \\lambda_1|$, which is what power iteration exploits",
-    "link": { "label": "Why Eigenvalues Matter", "url": "/linear-algebra/eigen#8" },
+    "link": { "label": "The Dominant Eigenvalue and Power Iteration", "url": "/linear-algebra/eigen/properties#12" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [
@@ -16993,7 +16993,7 @@ const definitionsRepository = [
     "entity": "rayleigh_quotient",
     "definitionUrl": "/linear-algebra/definitions#rayleigh_quotient",
     "formula": "The scalar $R(\\mathbf{x}) = \\dfrac{\\mathbf{x}^T A \\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$; it equals the [eigenvalue](!/linear-algebra/definitions#eigenvalue) when $\\mathbf{x}$ is an eigenvector, and for a symmetric matrix it is always trapped between the smallest and largest eigenvalues",
-    "link": { "label": "Why Eigenvalues Matter", "url": "/linear-algebra/eigen#8" },
+    "link": { "label": "The Dominant Eigenvalue and Power Iteration", "url": "/linear-algebra/eigen/properties#12" },
     "relatedTools": [ { "name": "TBD", "url": null } ],
     "usedOnPages": [ { "label": "TBD", "url": null } ],
     "relatedDefinitions": [

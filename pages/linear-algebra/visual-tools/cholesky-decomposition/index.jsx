@@ -35,11 +35,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Cholesky factorization](!/linear-algebra/decompositions/cholesky#1) — $A = LL^T$ with $L$ lower triangular and a positive diagonal; exists exactly for symmetric positive definite $A$.
+      content: `[Cholesky factorization](!/linear-algebra/definitions#cholesky_factorization) — $A = LL^T$ with $L$ lower triangular and a positive diagonal; exists exactly for symmetric positive definite $A$.
 
-[Symmetric](!/linear-algebra/matrix/types#5) — $A^T = A$; every entry equals its mirror image across the diagonal.
+[Symmetric](!/linear-algebra/definitions#symmetric_matrix) — $A^T = A$; every entry equals its mirror image across the diagonal.
 
-[Positive definite](!/linear-algebra/decompositions/cholesky#2) — $\\mathbf{x}^T A \\mathbf{x} > 0$ for every non-zero $\\mathbf{x}$; equivalently all [eigenvalues](!/linear-algebra/definitions#eigenvalue) positive, equivalently all leading principal [minors](!/linear-algebra/definitions#minor) positive, equivalently Cholesky succeeds.
+[Positive definite](!/linear-algebra/definitions#positive_definite_matrix) — $\\mathbf{x}^T A \\mathbf{x} > 0$ for every non-zero $\\mathbf{x}$; equivalently all [eigenvalues](!/linear-algebra/definitions#eigenvalue) positive, equivalently all leading principal [minors](!/linear-algebra/definitions#minor) positive, equivalently Cholesky succeeds.
 
 **Diagonal entry** — $\\ell_{j,j} = \\sqrt{a_{j,j} - \\sum_{k<j} \\ell_{j,k}^2}$, a square root of what is left of $a_{j,j}$ after the earlier columns are accounted for.
 
@@ -47,7 +47,7 @@ export async function getStaticProps(){
 
 [Radicand](!/algebra/definitions#radicand) — the number under each square root; the factorization exists exactly when all of them are positive.
 
-**Matrix square root** — the sense in which $L$ is one: $A = LL^T$ as a number is $a = \\ell \\cdot \\ell$.
+[Matrix square root](!/linear-algebra/definitions#matrix_square_root) — the sense in which $L$ is one: $A = LL^T$ as a number is $a = \\ell \\cdot \\ell$.
 
 **$LDL^T$ form** — the variant with unit diagonal $L$ and a diagonal $D$, which avoids square roots.`,
       before: ``,

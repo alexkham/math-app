@@ -35,17 +35,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `[Cramer's rule](!/linear-algebra/determinants/applications#1) — for a square system $A\\mathbf{x} = \\mathbf{b}$ with $\\det A \\neq 0$, $x_i = \\dfrac{\\det A_i}{\\det A}$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$.
+      content: `[Cramer's rule](!/linear-algebra/definitions#cramers_rule) — for a square system $A\\mathbf{x} = \\mathbf{b}$ with $\\det A \\neq 0$, $x_i = \\dfrac{\\det A_i}{\\det A}$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$.
 
-**Coefficient matrix** — $A$, holding the coefficients of the unknowns, one row per equation.
+[Coefficient matrix](!/linear-algebra/definitions#coefficient_matrix) — $A$, holding the coefficients of the unknowns, one row per equation.
 
-**Right-hand side** — $\\mathbf{b}$, the constants; shown in amber throughout the tool.
+[Right-hand side](!/linear-algebra/definitions#coefficient_matrix) — $\\mathbf{b}$, the constants; shown in amber throughout the tool.
 
 **Replaced matrix** — $A_i$, formed by swapping $\\mathbf{b}$ into column $i$ of $A$.
 
-**Unique solution** — exactly one $\\mathbf{x}$; for a square system this happens exactly when $\\det A \\neq 0$.
+[Unique solution](!/linear-algebra/definitions#consistent_system) — exactly one $\\mathbf{x}$; for a square system this happens exactly when $\\det A \\neq 0$.
 
-**Singular system** — $\\det A = 0$; the system has no solution or infinitely many, and Cramer's rule does not apply.
+[Singular system](!/linear-algebra/definitions#singular_matrix) — $\\det A = 0$; the system has no solution or infinitely many, and Cramer's rule does not apply.
 
 [Homogeneous system](!/linear-algebra/definitions#homogeneous_system) — $\\mathbf{b} = \\mathbf{0}$; every $\\det A_i$ is then $0$, and the unique solution is $\\mathbf{x} = \\mathbf{0}$.
 

@@ -1156,7 +1156,7 @@ $$\\mathbf{u} = \\text{proj}_W\\mathbf{u} + (\\mathbf{u} - \\text{proj}_W\\mathb
     name: 'Outer Product',
     category: 'Vectors',
     formula: `The [matrix](!/linear-algebra/definitions#matrix) $\\mathbf{u}\\mathbf{v}^T$ with entries $(\\mathbf{u}\\mathbf{v}^T)_{ij} = u_i v_j$`,
-    link: { url: '/linear-algebra/matrix/rank#8', label: 'Rank of Special Matrices' },
+    link: { url: '/linear-algebra/matrix/operations#13', label: 'Two More Products: Hadamard and Outer' },
     fields: {
       intuition: `Where the dot product collapses two vectors into a number, the outer product spreads them into a table. Every column is a multiple of $\\mathbf{u}$ and every row a multiple of $\\mathbf{v}^T$, so the result has [rank](!/linear-algebra/definitions#rank) one. Also called the dyadic or tensor product.`,
       properties: `• $\\text{rank}(\\mathbf{u}\\mathbf{v}^T) = 1$ whenever both vectors are non-zero
@@ -1173,7 +1173,7 @@ $$\\mathbf{u} = \\text{proj}_W\\mathbf{u} + (\\mathbf{u} - \\text{proj}_W\\mathb
     name: 'Hadamard Product',
     category: 'Vectors',
     formula: `The entry-wise product of two same-shaped matrices: $(A \\circ B)_{ij} = a_{ij}\\,b_{ij}$`,
-    link: { url: '/linear-algebra/matrix/operations', label: 'Matrix Operations' },
+    link: { url: '/linear-algebra/matrix/operations#13', label: 'Two More Products: Hadamard and Outer' },
     fields: {
       intuition: `Multiply each entry by the entry in the same position and nothing else. Unlike ordinary matrix multiplication it is commutative, needs identical shapes, and never mixes positions. Also called the Schur product.`,
       'related concepts': `• [Element-wise Operation](!/linear-algebra/definitions#element_wise_operation)
@@ -1244,7 +1244,7 @@ $$\\|A\\|_F = \\sqrt{\\sum_{i,j} a_{ij}^2} = \\sqrt{\\text{tr}(A^T A)}$$`,
     name: 'Isometry',
     category: 'Vectors',
     formula: `A [linear transformation](!/linear-algebra/definitions#linear_transformation) that preserves lengths: $\\|T\\mathbf{v}\\| = \\|\\mathbf{v}\\|$ for every $\\mathbf{v}$`,
-    link: { url: '/linear-algebra/orthogonality/orthogonal-sets#6', label: 'Orthogonal Matrices' },
+    link: { url: '/linear-algebra/orthogonality/orthogonal-sets#10', label: 'Isometries: Maps That Preserve Length' },
     fields: {
       intuition: `A rigid motion of space about the origin: nothing is stretched, squashed or sheared, so distances and angles survive too. In $\\mathbb{R}^n$ the isometries are exactly the [orthogonal matrices](!/linear-algebra/definitions#orthogonal_matrix) — rotations and reflections.`,
       'related concepts': `• [Orthogonal Matrix](!/linear-algebra/definitions#orthogonal_matrix)
@@ -2001,7 +2001,7 @@ $$P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$$`
     category: 'Matrices',
     formula: `The largest factor by which a matrix can stretch any vector:
 $$\\|A\\|_2 = \\max_{\\mathbf{x} \\neq \\mathbf{0}} \\frac{\\|A\\mathbf{x}\\|}{\\|\\mathbf{x}\\|}$$`,
-    link: { url: '/linear-algebra/decompositions/svd#3', label: 'Singular Values' },
+    link: { url: '/linear-algebra/decompositions/svd#13', label: 'Spectral Norm and Condition Number' },
     fields: {
       intuition: `Feed the matrix every possible direction and record the worst-case stretch. That maximum is the largest [singular value](!/linear-algebra/definitions#singular_value), which is why the SVD is the natural way to compute it.`,
       'related concepts': `• [Singular Value](!/linear-algebra/definitions#singular_value)
@@ -2015,7 +2015,7 @@ $$\\|A\\|_2 = \\max_{\\mathbf{x} \\neq \\mathbf{0}} \\frac{\\|A\\mathbf{x}\\|}{\
     name: 'Condition Number',
     category: 'Matrices',
     formula: `The ratio of the largest to the smallest [singular value](!/linear-algebra/definitions#singular_value): $\\kappa(A) = \\sigma_{\\max} / \\sigma_{\\min}$`,
-    link: { url: '/linear-algebra/decompositions/svd#3', label: 'Singular Values' },
+    link: { url: '/linear-algebra/decompositions/svd#13', label: 'Spectral Norm and Condition Number' },
     fields: {
       intuition: `How much a small change in the data of $A\\mathbf{x} = \\mathbf{b}$ can be amplified in the answer. A condition number near $1$ means a well-behaved system; a huge one means tiny rounding errors become large errors; an infinite one means the matrix is singular.`,
       'related concepts': `• [Singular Value](!/linear-algebra/definitions#singular_value)
@@ -2796,7 +2796,7 @@ $$\\sigma_i = \\sqrt{\\lambda_i(A^TA)}$$`,
     name: 'Dominant Eigenvalue',
     category: 'Eigen',
     formula: `The [eigenvalue](!/linear-algebra/definitions#eigenvalue) of largest absolute value`,
-    link: { url: '/linear-algebra/eigen#8', label: 'Why Eigenvalues Matter' },
+    link: { url: '/linear-algebra/eigen/properties#12', label: 'The Dominant Eigenvalue and Power Iteration' },
     fields: {
       intuition: `Multiply a vector by the matrix again and again and it swings toward the dominant eigenvector, because that component grows fastest. The rate is set by the ratio $|\\lambda_2 / \\lambda_1|$ — close to $1$ means slow convergence — and this is exactly what power iteration exploits.`,
       'related concepts': `• [Eigenvalue](!/linear-algebra/definitions#eigenvalue)
@@ -2810,7 +2810,7 @@ $$\\sigma_i = \\sqrt{\\lambda_i(A^TA)}$$`,
     category: 'Eigen',
     formula: `The scalar
 $$R(\\mathbf{x}) = \\frac{\\mathbf{x}^T A\\,\\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$$`,
-    link: { url: '/linear-algebra/eigen#8', label: 'Why Eigenvalues Matter' },
+    link: { url: '/linear-algebra/eigen/properties#12', label: 'The Dominant Eigenvalue and Power Iteration' },
     fields: {
       intuition: `The best estimate of an eigenvalue from a vector that is only approximately an eigenvector. It equals the [eigenvalue](!/linear-algebra/definitions#eigenvalue) exactly when $\\mathbf{x}$ is an eigenvector, and for a symmetric matrix it is always trapped between the smallest and largest eigenvalues.`,
       'related concepts': `• [Eigenvalue](!/linear-algebra/definitions#eigenvalue)

@@ -255,7 +255,7 @@ The other product, $AA^T$, has the same non-zero eigenvalues and gives $U$ direc
 
 Both are non-zero, so the rank is $2$, and $45 + 5 = 50$ equals the sum of the squared entries of $A$.`,
       before: ``,
-      after: `The singular values are the lengths of the semi-axes of the ellipse that $A$ makes from the unit circle. The largest, $\\sqrt{45} \\approx 6.7$, is the most any unit vector is stretched, the spectral norm; the smallest non-zero, $\\sqrt{5} \\approx 2.2$, is the least, and their ratio $3$ is the condition number.
+      after: `The singular values are the lengths of the semi-axes of the ellipse that $A$ makes from the unit circle. The largest, $\\sqrt{45} \\approx 6.7$, is the most any unit vector is stretched, the [spectral norm](!/linear-algebra/decompositions/svd#13); the smallest non-zero, $\\sqrt{5} \\approx 2.2$, is the least, and their ratio $3$ is the condition number.
 
 The identity $\\sum\\sigma_i^2 = \\sum a_{ij}^2$ is the quickest check on the arithmetic. It holds because both sides equal the trace of $A^TA$: the left as the sum of its eigenvalues, the right as the sum of its diagonal entries.`,
       link: '',
@@ -312,7 +312,7 @@ The zero singular value contributes nothing, and $\\mathbf{v}_2 = (2, -1)/\\sqrt
       before: ``,
       after: `A rank-one matrix is an outer product $\\sigma\\mathbf{u}\\mathbf{v}^T$, and the SVD recognizes it as such: one term and nothing else. The second column of $V$ is the direction $A$ collapses, and the second column of $U$, obtained by completion, the direction $A$ never reaches.
 
-The condition number of a singular matrix is infinite, and the tool says so. Near-singular matrices, with a small but non-zero $\\sigma_2$, are the practical concern: their condition number is large, and solving with them amplifies errors by that factor.`,
+The [condition number](!/linear-algebra/decompositions/svd#13) of a singular matrix is infinite, and the tool says so. Near-singular matrices, with a small but non-zero $\\sigma_2$, are the practical concern: their condition number is large, and solving with them amplifies errors by that factor.`,
       link: '',
     }
   }

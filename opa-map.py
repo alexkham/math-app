@@ -31,7 +31,8 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 CONTENT_REG = 'app/api/db/repositories/content-pages-registry.json'
 TOOLS_REG = 'app/api/db/repositories/visual-tools-registry.json'
 INDEX_PATH = 'line2-concept-index.json'
-SECTION = 'linear-algebra'
+# Section is a flag: python opa-map.py --section=probability [--apply]
+SECTION = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--section=')), 'linear-algebra')
 TODAY = datetime.date.today().isoformat()
 
 EXCLUDE = {'definitions', 'formulas', ''}

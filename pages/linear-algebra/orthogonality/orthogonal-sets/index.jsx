@@ -1366,6 +1366,23 @@ This is Bessel&apos;s inequality. The left side is the squared length of the pro
     after: ``,
     link: ``,
   },
+  obj10: {
+    title: `Isometries: Maps That Preserve Length`,
+    content: `An [isometry](!/linear-algebra/definitions#isometry) is a linear map that preserves length: $\\|T\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every $\\mathbf{x}$. Because the dot product can be recovered from lengths alone through the polarization identity
+
+$$\\mathbf{x} \\cdot \\mathbf{y} = \\tfrac{1}{2}\\left(\\|\\mathbf{x} + \\mathbf{y}\\|^2 - \\|\\mathbf{x}\\|^2 - \\|\\mathbf{y}\\|^2\\right)$$
+
+preserving every length forces $T$ to preserve every dot product, and with it every angle and every distance between points. Nothing is stretched, squashed or sheared.
+
+For a matrix $Q$ this is exactly the orthogonality condition of the earlier sections. If $Q^TQ = I$ then $\\|Q\\mathbf{x}\\|^2 = \\mathbf{x}^TQ^TQ\\mathbf{x} = \\|\\mathbf{x}\\|^2$. Conversely, a $Q$ that preserves all dot products satisfies $(Q\\mathbf{e}_i) \\cdot (Q\\mathbf{e}_j) = \\mathbf{e}_i \\cdot \\mathbf{e}_j$, so its columns are orthonormal and $Q^TQ = I$. The linear isometries of $\\mathbb{R}^n$ are precisely the orthogonal matrices.
+
+They split into two families by the determinant. Those with $\\det Q = 1$ are [rotations](!/linear-algebra/transformations/geometric), which preserve orientation; those with $\\det Q = -1$ reverse it, and in the plane these are exactly the reflections in a line through the origin. In space an isometry is a rotation about an axis, a reflection in a plane, or a rotation combined with a reflection. Translations also preserve distance but move the origin, so they are not linear and fall outside this classification.
+
+The [reflection tool](!/linear-algebra/visual-tools/reflection-2d) shows the orientation-reversing family in the plane, and the [orthogonal matrices tool](!/linear-algebra/visual-tools/orthogonal-matrices) shows the length-preservation check $Q^TQ = I$ directly.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
 }
 
 const introContent = {
@@ -1634,6 +1651,14 @@ export default function OrthogonalSetsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'10',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     {

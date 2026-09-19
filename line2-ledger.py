@@ -43,7 +43,9 @@ import io, json, re, sys, datetime
 
 REG_PATH = 'app/api/db/repositories/visual-tools-registry.json'
 INDEX_PATH = 'line2-concept-index.json'
-SECTION = 'linear-algebra'
+# Section is a flag now, so the next subject runs the same pass unchanged:
+#   python line2-ledger.py --section=probability [--apply]
+SECTION = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--section=')), 'linear-algebra')
 TODAY = datetime.date.today().isoformat()
 
 INDEX = json.load(io.open(INDEX_PATH, encoding='utf-8'))

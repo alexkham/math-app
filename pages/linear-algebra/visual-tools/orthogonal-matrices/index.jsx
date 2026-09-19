@@ -126,7 +126,7 @@ $$Q^TQ = I$$
 
 For a square matrix a one-sided inverse is the inverse, so $Q^{-1} = Q^T$ and also $QQ^T = I$, which says the rows are orthonormal too. Taking determinants, $(\\det Q)^2 = 1$, so $\\det Q = \\pm 1$.
 
-The geometric content is that $Q$ preserves the dot product: $(Q\\mathbf{x})\\cdot(Q\\mathbf{y}) = \\mathbf{x}^TQ^TQ\\mathbf{y} = \\mathbf{x}\\cdot\\mathbf{y}$. Lengths and angles are dot products, so $Q$ moves every figure rigidly, without stretching or distorting; it is an isometry fixing the origin. Conversely every linear isometry is orthogonal.
+The geometric content is that $Q$ preserves the dot product: $(Q\\mathbf{x})\\cdot(Q\\mathbf{y}) = \\mathbf{x}^TQ^TQ\\mathbf{y} = \\mathbf{x}\\cdot\\mathbf{y}$. Lengths and angles are dot products, so $Q$ moves every figure rigidly, without stretching or distorting; it is an [isometry](!/linear-algebra/orthogonality/orthogonal-sets#10) fixing the origin. Conversely every linear isometry is orthogonal.
 
 In the plane there are two kinds. Determinant $+1$ gives a rotation $\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$; determinant $-1$ gives a reflection $\\begin{pmatrix} \\cos 2\\varphi & \\sin 2\\varphi \\\\ \\sin 2\\varphi & -\\cos 2\\varphi \\end{pmatrix}$ across the line at angle $\\varphi$. In space, determinant $+1$ is a rotation about an axis, the direction $\\mathbf{u}$ with $Q\\mathbf{u} = \\mathbf{u}$, by an angle with $\\operatorname{tr} Q = 1 + 2\\cos\\theta$; determinant $-1$ is a reflection across a plane, possibly combined with a rotation about the plane's normal.
 

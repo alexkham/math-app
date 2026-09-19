@@ -589,7 +589,7 @@ The shape of $C$ is forced to match the shared shape of $A$ and $B$ — no separ
     },
     obj4: {
       title: `What the Hadamard Product Is`,
-      content: `The Hadamard product is the element-wise product of two matrices of the same shape. For $m \\times n$ matrices $A$ and $B$:
+      content: `The [Hadamard product](!/linear-algebra/matrix/operations#13) is the element-wise product of two matrices of the same shape. For $m \\times n$ matrices $A$ and $B$:
 
 $$C = A \\odot B, \\quad c_{i,j} = a_{i,j} \\cdot b_{i,j}$$
 

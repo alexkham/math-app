@@ -105,7 +105,7 @@ The row and column views make the same point from two sides. Every row is a mult
     },
     obj5: {
       title: `What the Outer Product Is`,
-      content: `The outer product of a column vector $\\mathbf{u} \\in \\mathbb{R}^m$ and a row vector $\\mathbf{v}^T$ with $\\mathbf{v} \\in \\mathbb{R}^n$ is the $m \\times n$ matrix
+      content: `The [outer product](!/linear-algebra/matrix/operations#13) of a column vector $\\mathbf{u} \\in \\mathbb{R}^m$ and a row vector $\\mathbf{v}^T$ with $\\mathbf{v} \\in \\mathbb{R}^n$ is the $m \\times n$ matrix
 
 $$\\mathbf{u}\\mathbf{v}^T = \\begin{pmatrix} u_1 v_1 & u_1 v_2 & \\cdots & u_1 v_n \\\\ u_2 v_1 & u_2 v_2 & \\cdots & u_2 v_n \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ u_m v_1 & u_m v_2 & \\cdots & u_m v_n \\end{pmatrix}, \\qquad (\\mathbf{u}\\mathbf{v}^T)_{i,j} = u_i v_j$$
 

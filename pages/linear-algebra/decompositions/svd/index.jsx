@@ -8938,6 +8938,33 @@ The six structural quantities the SVD exposes — rank, the four fundamental sub
     after: ``,
     link: ``,
   },
+  obj13: {
+    title: `Spectral Norm and Condition Number`,
+    content: `The singular values answer two numerical questions that the eigenvalues cannot: how much can $A$ stretch a vector at most, and how sensitive is $A\\mathbf{x} = \\mathbf{b}$ to errors in the data.
+
+The [spectral norm](!/linear-algebra/definitions#spectral_norm) is the worst-case stretch factor:
+
+$$\\|A\\|_2 = \\max_{\\mathbf{x} \\neq \\mathbf{0}} \\frac{\\|A\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} = \\sigma_1$$
+
+Write $\\mathbf{x}$ in the orthonormal basis $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$ of right singular vectors; $A$ scales the $i$-th coefficient by $\\sigma_i$ and hands it to $\\mathbf{u}_i$, so the ratio is largest when $\\mathbf{x} = \\mathbf{v}_1$ and equals $\\sigma_1$. Geometrically, $\\sigma_1$ is the longest semi-axis of the ellipse that the unit circle is mapped to. This differs from the [Frobenius norm](!/linear-algebra/definitions#frobenius_norm) $\\sqrt{\\sigma_1^2 + \\cdots + \\sigma_r^2}$, which adds up every stretch rather than reporting the largest.
+
+The [condition number](!/linear-algebra/definitions#condition_number) is the ratio of the largest stretch to the smallest:
+
+$$\\kappa(A) = \\frac{\\sigma_1}{\\sigma_n} = \\|A\\|_2\\,\\|A^{-1}\\|_2$$
+
+for an invertible square matrix, since the largest singular value of $A^{-1}$ is $1 / \\sigma_n$. It bounds how a relative error in $\\mathbf{b}$ propagates to the solution of $A\\mathbf{x} = \\mathbf{b}$:
+
+$$\\frac{\\|\\delta\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} \\leq \\kappa(A)\\,\\frac{\\|\\delta\\mathbf{b}\\|}{\\|\\mathbf{b}\\|}$$
+
+A condition number near $1$ means errors pass through unamplified, and [orthogonal matrices](!/linear-algebra/orthogonality/orthogonal-sets) achieve exactly $1$. A condition number of $10^k$ means roughly $k$ decimal digits of accuracy can be lost in solving the system. An infinite condition number means $\\sigma_n = 0$: the matrix is singular.
+
+The determinant says nothing about conditioning. The diagonal matrix with entries $10^{6}$ and $10^{-6}$ has $\\det = 1$ and $\\kappa = 10^{12}$. Ill-conditioning is about the ratio of the stretches, not their product, and only the singular values expose it.
+
+The [SVD tool](!/linear-algebra/visual-tools/singular-value-decomposition) reports both numbers for any $2 \\times 2$ matrix alongside the ellipse whose axes they measure.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
 }
 
 const introContent = {
@@ -9312,6 +9339,14 @@ export default function SVDPage({
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'13',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
     {

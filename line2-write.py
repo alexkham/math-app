@@ -25,7 +25,8 @@
 import io, json, re, sys, datetime, collections
 
 REG_PATH = 'app/api/db/repositories/visual-tools-registry.json'
-SECTION = 'linear-algebra'
+# Section is a flag: python line2-write.py --section=probability [--apply]
+SECTION = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--section=')), 'linear-algebra')
 CAP_PER_SECTION = 5
 TODAY = datetime.date.today().isoformat()
 

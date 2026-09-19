@@ -35,7 +35,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Power iteration** (power method) — the loop $\\mathbf{x}_{k+1} = A\\mathbf{x}_k / s_k$, which converges to the eigenvector of the eigenvalue of largest modulus.
+      content: `[Power iteration](!/linear-algebra/eigen/properties#12) (power method) — the loop $\\mathbf{x}_{k+1} = A\\mathbf{x}_k / s_k$, which converges to the eigenvector of the eigenvalue of largest modulus.
 
 [Dominant eigenvalue](!/linear-algebra/definitions#dominant_eigenvalue) — the eigenvalue $\\lambda_1$ with the largest absolute value; it must be strictly larger in modulus than every other for the method to converge.
 
@@ -43,13 +43,13 @@ export async function getStaticProps(){
 
 [Normalization](!/linear-algebra/vectors/magnitude#6) — rescaling so the largest entry is $1$, keeping the numbers from overflowing or vanishing.
 
-**Convergence ratio** — $|\\lambda_2 / \\lambda_1|$, the factor by which the error shrinks per step.
+[Convergence ratio](!/linear-algebra/eigen/properties#12) — $|\\lambda_2 / \\lambda_1|$, the factor by which the error shrinks per step.
 
 [Rayleigh quotient](!/linear-algebra/definitions#rayleigh_quotient) — $\\mathbf{x}^TA\\mathbf{x} / \\mathbf{x}^T\\mathbf{x}$, a more accurate eigenvalue estimate for symmetric matrices, not used by the tool.
 
-**Tie** — two eigenvalues of equal largest modulus, such as $\\pm 1$ or a complex pair; the iteration then oscillates instead of converging.
+[Tie](!/linear-algebra/eigen/properties#12) — two eigenvalues of equal largest modulus, such as $\\pm 1$ or a complex pair; the iteration then oscillates instead of converging.
 
-**Inverse and shifted iteration** — applying the same loop to $A^{-1}$ or $(A - sI)^{-1}$ to find the smallest eigenvalue or one near $s$.`,
+[Inverse and shifted iteration](!/linear-algebra/eigen/properties#12) — applying the same loop to $A^{-1}$ or $(A - sI)^{-1}$ to find the smallest eigenvalue or one near $s$.`,
       before: ``,
       after: ``,
       link: '',

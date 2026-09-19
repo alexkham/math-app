@@ -37,19 +37,19 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `[Augmented matrix](!/linear-algebra/definitions#augmented_matrix) — $[A \\mid \\mathbf{b}]$, the coefficients and the constants side by side, one row per equation.
 
-**Row operations** — swapping two rows, scaling a row by a non-zero constant, and adding a multiple of one row to another; each rewrites the system without changing its solutions.
+[Row operations](!/linear-algebra/definitions#elementary_row_operation) — swapping two rows, scaling a row by a non-zero constant, and adding a multiple of one row to another; each rewrites the system without changing its solutions.
 
 [Row echelon form](!/linear-algebra/definitions#row_echelon_form) — pivots step to the right down the rows, with zeros below each pivot; the result of the forward pass.
 
 [Reduced row echelon form](!/linear-algebra/definitions#reduced_row_echelon_form) — echelon form with every pivot equal to $1$ and zeros above each pivot as well; the result of the backward pass, and unique for a given matrix.
 
-**Pivot column, leading variable** — a column of $A$ containing a pivot; its variable is determined by the others.
+[Pivot column, leading variable](!/linear-algebra/definitions#pivot_column) — a column of $A$ containing a pivot; its variable is determined by the others.
 
-**Free column, free variable** — a column of $A$ with no pivot; its variable can be chosen at will.
+[Free column, free variable](!/linear-algebra/definitions#free_variable) — a column of $A$ with no pivot; its variable can be chosen at will.
 
-**Consistent** — the system has at least one solution; inconsistent if a row reduces to $0 = c$ with $c \\neq 0$.
+[Consistent](!/linear-algebra/definitions#consistent_system) — the system has at least one solution; inconsistent if a row reduces to $0 = c$ with $c \\neq 0$.
 
-**Particular solution and directions** — for infinitely many solutions, $\\mathbf{x} = \\mathbf{p} + t_1 \\mathbf{v}_1 + \\cdots$: one solution plus one direction per free variable.`,
+[Particular solution and directions](!/linear-algebra/linear-systems/echelon-form#7) — for infinitely many solutions, $\\mathbf{x} = \\mathbf{p} + t_1 \\mathbf{v}_1 + \\cdots$: one solution plus one direction per free variable.`,
       before: ``,
       after: ``,
       link: '',

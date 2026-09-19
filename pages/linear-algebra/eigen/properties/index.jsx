@@ -1503,6 +1503,27 @@ The [trace](!/linear-algebra/matrix/trace), [determinant](!/linear-algebra/deter
     after: ``,
     link: ``,
   },
+  obj12: {
+    title: `The Dominant Eigenvalue and Power Iteration`,
+    content: `Among the eigenvalues of $A$, the one of largest absolute value is the [dominant eigenvalue](!/linear-algebra/definitions#dominant_eigenvalue) $\\lambda_1$, with $|\\lambda_1| > |\\lambda_2| \\geq \\cdots \\geq |\\lambda_n|$. It controls the long-run behaviour of the powers $A^k$. Expand a starting vector in the eigenbasis, $\\mathbf{x}_0 = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$; then
+
+$$A^k\\mathbf{x}_0 = \\lambda_1^k\\left(c_1\\mathbf{v}_1 + c_2\\left(\\tfrac{\\lambda_2}{\\lambda_1}\\right)^k\\mathbf{v}_2 + \\cdots + c_n\\left(\\tfrac{\\lambda_n}{\\lambda_1}\\right)^k\\mathbf{v}_n\\right)$$
+
+Every ratio $|\\lambda_i / \\lambda_1|$ is below $1$, so all the other components die away and the direction of $A^k\\mathbf{x}_0$ swings toward $\\mathbf{v}_1$.
+
+Power iteration turns this into an algorithm. Start with any vector having $c_1 \\neq 0$, multiply by $A$, rescale to unit length, and repeat: $\\mathbf{x}_{k+1} = A\\mathbf{x}_k / \\|A\\mathbf{x}_k\\|$. The iterates converge to the dominant eigenvector, and the eigenvalue is read off from the [Rayleigh quotient](!/linear-algebra/definitions#rayleigh_quotient)
+
+$$R(\\mathbf{x}) = \\frac{\\mathbf{x}^T A\\,\\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$$
+
+which equals $\\lambda$ exactly when $\\mathbf{x}$ is an eigenvector for $\\lambda$, and for a [symmetric matrix](!/linear-algebra/decompositions/spectral) always lies between the smallest and largest eigenvalues. Convergence is geometric with ratio $|\\lambda_2 / \\lambda_1|$: a wide gap between the top two eigenvalues means fast convergence, a narrow one means slow.
+
+Two things break the method. If $|\\lambda_1| = |\\lambda_2|$, as with a real matrix whose top eigenvalues form a complex conjugate pair, or with eigenvalues $\\lambda$ and $-\\lambda$, the iterates never settle. And if the starting vector has no $\\mathbf{v}_1$ component, the theory sends the iterates to the next eigenvector instead, though rounding error usually reintroduces a small $\\mathbf{v}_1$ component and rescues the method. Applying the same idea to $A^{-1}$ finds the eigenvalue of smallest modulus, and applying it to $(A - \\mu I)^{-1}$ finds the eigenvalue nearest a chosen shift $\\mu$, using the inverse and shift rules from earlier on this page.
+
+The [power iteration tool](!/linear-algebra/visual-tools/power-iteration) runs the iteration step by step and shows the direction locking on to the dominant eigenvector.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
 }
 
 
@@ -1777,6 +1798,14 @@ export default function EigenvaluePropertiesPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     {
