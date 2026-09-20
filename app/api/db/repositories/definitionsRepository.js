@@ -11138,7 +11138,7 @@ const definitionsRepository = [
     "formula": "A rule that assigns exactly one output to each input. Formally, a function $f$ from set $A$ to set $B$ is a mapping $f: A \to B$ such that every element of $A$ is associated with precisely one element of $B$.",
     "link": {
       "label": "What is a Function",
-      "url": "/functions#1"
+      "url": "/functions/basics#1"
     },
     "relatedTools": [
       {
@@ -11216,7 +11216,7 @@ const definitionsRepository = [
     "formula": "Any set of ordered pairs — a collection of input-output associations with no restriction on how many outputs an input may have.",
     "link": {
       "label": "Functions vs Relations",
-      "url": "/functions#2"
+      "url": "/functions/basics#2"
     },
     "relatedTools": [
       {
@@ -11397,7 +11397,7 @@ const definitionsRepository = [
     "formula": "The input variable of a function, whose value is chosen freely from the domain.",
     "link": {
       "label": "Input, Output, and Variables",
-      "url": "/functions#7"
+      "url": "/functions/basics#7"
     },
     "relatedTools": [
       {
@@ -11438,7 +11438,7 @@ const definitionsRepository = [
     "formula": "The output variable of a function, whose value is determined by the input through the function rule.",
     "link": {
       "label": "Input, Output, and Variables",
-      "url": "/functions#7"
+      "url": "/functions/basics#7"
     },
     "relatedTools": [
       {

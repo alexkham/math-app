@@ -13,6 +13,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionAsymptotes from '../../../../app/components/functions/asymptotes/FunctionAsymptotes'
 import asymDiagrams from '../../../../app/components/functions/asymptotes/functionAsymptotesDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -39,7 +41,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with eleven functions grouped by the type of asymptote they have — vertical only, horizontal only, both, or oblique. In the center is the **plot panel** with the function curve in blue and its asymptotes drawn as dashed lines:
+      content: `Open the page and three panels appear. On the left is the **function picker** with eleven [functions](!/functions/basics#1) grouped by the type of asymptote they have — vertical only, horizontal only, both, or oblique. In the center is the **plot panel** with the function curve in blue and its [asymptotes](!/functions/properties#13) drawn as dashed lines:
 
 • **Red dashed verticals** mark vertical asymptotes
 • **Green dashed horizontals** mark horizontal asymptotes
@@ -64,7 +66,7 @@ The page launches with the [reciprocal function](!#the-reciprocal-function) $1/x
 
 The grouping is a teaching tool. **Arctan** is the classic two-different-HA example — $\\pi/2$ on the right, $-\\pi/2$ on the left. **Exponential decay** is the classic one-sided HA — converges on the right, blows up on the left. **$x/(x^2-1)$** has two VAs ($x = \\pm 1$) and one HA ($y = 0$). **$(x^2-1)/x$** simplifies to $x - 1/x$, so its oblique asymptote is $y = x$.
 
-Clicking any entry switches the function and resets transformation parameters to defaults.`,
+Clicking any entry switches the function and resets [transformation](!/functions/visual-tools/transformations) parameters to defaults.`,
       before: ``,
       after: ``,
       link: '',
@@ -123,7 +125,7 @@ Watching the symbols ($+\\infty$ vs $-\\infty$, present vs absent) gives you the
 
     obj6: {
       title: `Transforming and Tracking Asymptotes`,
-      content: `Four sliders apply the affine transformation $g(x) = a \\cdot f(b(x - h)) + k$:
+      content: `Four sliders apply the affine [transformation](!/functions/transformations#2) $g(x) = a \\cdot f(b(x - h)) + k$:
 
 • $a$ — **vertical scale** rescales the output. Horizontal asymptotes move with $a$: a HA at $y = L$ becomes $y = aL + k$.
 • $k$ — **vertical shift** lifts the whole curve. HAs shift by $k$; verticals are unaffected.
@@ -159,7 +161,7 @@ Oblique asymptotes appear most commonly in rational functions where the numerato
       title: `What Is an Asymptote?`,
       content: `An **asymptote** is a line (or curve) that the graph of a function approaches arbitrarily closely as a variable approaches some value. Three kinds matter for elementary functions:
 
-• **Vertical** — $x = c$ is a VA if $f(x) \\to \\pm\\infty$ as $x \\to c$ from at least one side. Typical sources: division by zero in rational functions, domain boundaries where a function diverges, periodic singularities like tan and cot.
+• **Vertical** — $x = c$ is a VA if $f(x) \\to \\pm\\infty$ as $x \\to c$ from at least one side. Typical sources: division by zero in rational functions, [domain](!/functions/domain#1) boundaries where a function diverges, periodic singularities like tan and cot.
 
 • **Horizontal** — $y = L$ is an HA if $f(x) \\to L$ as $x \\to +\\infty$ or $x \\to -\\infty$. Common in rational functions with degree denominator $\\geq$ numerator, in $\\arctan$ and logistic curves, in exponential decay.
 
@@ -195,13 +197,19 @@ The visualizer lets you build intuition by watching the dashed lines emerge from
 
 **Rational Functions** — the natural home of asymptotes. Polynomial-division and degree comparisons let you find HAs and OAs algebraically; setting the denominator to zero gives VA candidates.
 
-**Domain of a Function** — VAs always sit at points where the function is undefined, but not every undefined point is a VA (removable singularities exist). The Domain visualizer complements this one.
+[Domain of a Function](!/functions/visual-tools/domain) — VAs always sit at points where the function is undefined, but not every undefined point is a VA (removable singularities exist). The Domain visualizer complements this one.
 
-**Function Symmetry** — another structural property in the Function Properties group. Combined with asymptotes, symmetry pins down a function's gross shape.
+[Function Symmetry](!/functions/visual-tools/symmetry) — another structural property in the Function Properties group. Combined with asymptotes, symmetry pins down a function's gross shape.
 
 **Logarithmic Functions**, **Tangent Function**, **Exponential Functions** — the elementary functions whose asymptotic behavior is foundational for everything else.
 
-**Continuity and Discontinuity** — VAs are a specific type of essential discontinuity; the theory connects directly to limit theory.`,
+**Continuity and Discontinuity** — VAs are a specific type of essential discontinuity; the theory connects directly to limit theory.
+
+[Function Composition](!/functions/visual-tools/composition) — composing with a rational function can create new vertical asymptotes where the inner function hits an excluded value.
+
+[Range of a Function](!/functions/visual-tools/range) — a horizontal asymptote is usually the value the [range](!/functions/range#1) approaches without reaching, so the two readings of a graph answer each other.
+
+[Functions Families Gallery](!/functions/visual-tools/types) — which families carry asymptotes at all: rational, exponential, logarithmic and tangent, and which never do.`,
       before: ``,
       after: ``,
       link: '',
@@ -554,6 +562,7 @@ Zeros at $x = \\pm 1$ anchor the two branches to the axis on their way between w
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-asymptotes'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -576,7 +585,7 @@ Zeros at $x = \\pm 1$ anchor the two branches to the axis on their way between w
 }
 
 
-export default function FunctionAsymptotesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionAsymptotesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -687,6 +696,7 @@ export default function FunctionAsymptotesPage({seoData, sectionsContent, introC
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

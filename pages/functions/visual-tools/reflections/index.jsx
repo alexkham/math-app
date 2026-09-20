@@ -498,6 +498,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionReflections from '../../../../app/components/functions/reflections/FunctionReflections'
 import reflectionsDiagrams from '../../../../app/components/functions/reflections/functionReflectionsDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -525,17 +527,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Reflection** — A geometric transformation that produces the mirror image of a curve across a chosen axis or line.
+      content: `[Reflection](!/functions/definitions#reflection) — A geometric [transformation](!/functions/transformations#2) that produces the mirror image of a curve across a chosen axis or line.
 
 **Axis of reflection** — The line that acts as the mirror. Every point of the original is mapped to a partner the same perpendicular distance on the opposite side.
 
-**Even function** — A function satisfying $f(-x) = f(x)$. Its graph is unchanged by the y-axis reflection.
+[Even function](!/functions/definitions#even_function) — A function satisfying $f(-x) = f(x)$. Its graph is unchanged by the y-axis [reflection](!/functions/transformations#5).
 
-**Odd function** — A function satisfying $f(-x) = -f(x)$. Its graph is unchanged by a $180°$ rotation about the origin.
+[Odd function](!/functions/definitions#odd_function) — A function satisfying $f(-x) = -f(x)$. Its graph is unchanged by a $180°$ rotation about the origin.
 
-**One-to-one** — A function where every output corresponds to exactly one input. Only one-to-one functions have inverses that are themselves functions.
+[One-to-one](!/functions/inverse#8) — A function where every output corresponds to exactly one input. Only [one-to-one functions](!/functions/properties#3) have inverses that are themselves functions.
 
-**Inverse function** — The reflection of $f$ across the line $y = x$. Written $f^{-1}$, it satisfies $f^{-1}(f(x)) = x$.
+[Inverse function](!/functions/definitions#inverse_function) — The reflection of $f$ across the line $y = x$. Written $f^{-1}$, it satisfies $f^{-1}(f(x)) = x$.
 
 **Fixed point** — A point that does not move under a transformation. For reflection across an axis, fixed points are those already sitting on the axis.`,
       before: ``,
@@ -557,11 +559,11 @@ To explore, click a different base in the left column or pick a different reflec
 
     obj2: {
       title: `Choosing a Base Function`,
-      content: `The left column lists ten common function families, with sine and cosine grouped under Trigonometric. Each entry shows a small glyph of the family&apos;s characteristic shape next to its name.
+      content: `The left column lists ten common [function families](!/functions/visual-tools/types), with sine and cosine grouped under Trigonometric. Each entry shows a small glyph of the family&apos;s characteristic shape next to its name.
 
 Click any family to load it as the new $f$. The plot redraws with the original curve and the reflected curve, the equation badges update, and the explanation panel rewrites its "Applied to" section to describe what the current reflection does to this specific family.
 
-Some families have **symmetry properties** that make certain reflections trivial — reflecting an even function across the y-axis leaves it unchanged, for example, and the explanation panel calls this out explicitly. Other families have **restricted domains** — the square root and the logarithm only exist for positive inputs — and reflections that flip the input swap the domain to the other side of the y-axis.`,
+Some families have **symmetry properties** that make certain reflections trivial — reflecting an even function across the y-axis leaves it unchanged, for example, and the explanation panel calls this out explicitly. Other families have **restricted domains** — the square root and the logarithm only exist for positive inputs — and reflections that flip the input swap the [domain](!/functions/visual-tools/domain) to the other side of the y-axis.`,
       before: ``,
       after: ``,
       link: '',
@@ -587,7 +589,7 @@ Hover any tab to see its formula and a one-line description in a tooltip.`,
 
     obj4: {
       title: `The Parameter Tabs: y = c and x = c`,
-      content: `The y = c and x = c tabs each expose a slider controlling the line offset $c$. Values range from $-6$ to $6$ in steps of $0.1$, with a default of $c = 1$.
+      content: `The y = c and x = c tabs each expose a slider controlling the line offset $c$. Values [range](!/functions/visual-tools/range) from $-6$ to $6$ in steps of $0.1$, with a default of $c = 1$.
 
 For **y = c**, the axis of reflection is the horizontal line $y = c$, drawn in orange on the plot. Each point $(x, y)$ of $f$ maps to $(x, 2c - y)$, the same vertical distance from the line but on the opposite side. When $c = 0$, the result coincides with the x-axis reflection.
 
@@ -607,7 +609,7 @@ In **Manual** mode (default), drag the slider yourself. Each drag updates the re
 
 In **Auto** mode, the slider becomes a playback target. A play/pause button starts the animation: $c$ sweeps from minimum to maximum and back, ping-ponging indefinitely. Step backward and step forward buttons let you advance one increment at a time.
 
-Below the play controls, a **Speed selector** offers four presets: $0.5\\times$, $1\\times$, $2\\times$, and $4\\times$. Slower speeds are best for inspecting how the reflected curve aligns with the axis at specific values of $c$; faster speeds let you sweep through the full range quickly to see the global pattern.
+Below the play controls, a **Speed selector** offers four presets: $0.5\\times$, $1\\times$, $2\\times$, and $4\\times$. Slower speeds are best for inspecting how the reflected curve aligns with the axis at specific values of $c$; faster speeds let you sweep through the full [range](!/functions/range#1) quickly to see the global pattern.
 
 Auto mode is the fastest way to watch the line of reflection slide and see exactly how the reflected curve tracks the change.`,
       before: ``,
@@ -656,7 +658,7 @@ The standard reflections fall into three groups:
 
 - **Axis reflections** — across the x-axis ($g(x) = -f(x)$) or the y-axis ($g(x) = f(-x)$)
 - **Line reflections** — across any horizontal line $y = c$, vertical line $x = c$, or the diagonal $y = x$
-- **Partial or piecewise reflections** — $|f(x)|$ and $f(|x|)$, which only affect part of the graph
+- [Partial or piecewise reflections](!/functions/visual-tools/piecewise) — $|f(x)|$ and $f(|x|)$, which only affect part of the graph
 
 All reflections are **isometries** in the plane: they preserve distances, so the shape of $f$ is preserved and only its orientation changes. For a deeper treatment of reflections as rigid motions, see the **geometric transformations page**.`,
       before: ``,
@@ -682,13 +684,13 @@ These symmetries are encoded in the visualizer&apos;s explanation panel, which r
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Function Transformations** — the companion visualizer for shifts and scales: $g(x) = a \\cdot f(b(x - h)) + k$. Reflections are the special case where $a = -1$ or $b = -1$.
+      content: `[Function Transformations](!/functions/visual-tools/transformations) — the companion visualizer for shifts and scales: $g(x) = a \\cdot f(b(x - h)) + k$. Reflections are the special case where $a = -1$ or $b = -1$.
 
-**Inverse Functions** — the formal theory of $f^{-1}$, when it exists, and how to compute it analytically.
+[Inverse Functions](!/functions/visual-tools/inverse-function) — the formal theory of $f^{-1}$, when it exists, and how to compute it analytically.
 
-**Even and Odd Functions** — full treatment of the two main symmetry types and their consequences for integration and Fourier series.
+**Even and Odd Functions** — full treatment of the two main [symmetry](!/functions/visual-tools/symmetry) types and their consequences for integration and Fourier series.
 
-**Composition of Functions** — how multiple reflections can be chained (two reflections in a row give a rotation or translation).
+[Composition of Functions](!/functions/visual-tools/composition) — how multiple reflections can be chained (two reflections in a row give a rotation or [translation](!/functions/transformations#3)).
 
 **Parent Functions** — the canonical untransformed members of each family used as the base here.
 
@@ -961,6 +963,7 @@ Together with [|f(x)|](!#output-reflection-fx), it completes the partial-reflect
 
    return {
       props:{
+      relatedTools: getRelatedTools('functions-reflections'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -982,7 +985,7 @@ Together with [|f(x)|](!#output-reflection-fx), it completes the partial-reflect
     }
    }
 
-export default function FunctionReflectionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionReflectionsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
@@ -1097,6 +1100,7 @@ export default function FunctionReflectionsPage({seoData, sectionsContent, intro
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

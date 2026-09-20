@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TangentLine from '../../../../app/components/functions/tangent/TangentLine'
 import tangentDiagrams from '../../../../app/components/functions/tangent/tangentLineDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -36,7 +38,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with ten base function families. In the center sits the **plot panel**, with the chosen function $f(x)$ drawn in blue and its **tangent line** at the chosen point drawn in amber. On the right is the **info panel** with two tabs — a live explanation of the current state and a general theory tab about tangents.
+      content: `Open the page and three panels appear. On the left is the **function picker** with ten base [function](!/functions/basics#1) families. In the center sits the **plot panel**, with the chosen function $f(x)$ drawn in blue and its **tangent line** at the chosen point drawn in amber. On the right is the **info panel** with two tabs — a live explanation of the current state and a general theory tab about tangents.
 
 Below the plot, the centerpiece of the tool is the **tangent point card**: an amber-bordered block containing the $x_0$ slider, the current values of $x_0$, $y_0$, and slope $m$, and the tangent equation written in both point-slope and slope-intercept forms.
 
@@ -55,7 +57,7 @@ The page launches with the quadratic family and $x_0 = 1$. Drag the $x_0$ slider
 • Transcendental: [Exponential](!#tangent-to-the-exponential) ($e^x$), [Logarithmic](!#tangent-to-the-logarithm) ($\\ln x$)
 • Trigonometric: [Sine](!#tangent-to-sine), [Cosine](!#tangent-to-cosine)
 
-Click any entry to switch. The transformation parameters $a$, $k$, $b$, $h$ reset to defaults and $x_0$ returns to its default value, so you always start each family from a clean slate. The picker covers the most pedagogically important functions for studying derivatives — including deliberately tricky ones (absolute value's corner, square root's vertical tangent) that demonstrate when the tangent fails to exist.`,
+Click any entry to switch. The [transformation](!/functions/transformations#2) parameters $a$, $k$, $b$, $h$ reset to defaults and $x_0$ returns to its default value, so you always start each family from a clean slate. The picker covers the most pedagogically important functions for studying derivatives — including deliberately tricky ones (absolute value's corner, square root's vertical tangent) that demonstrate when the tangent fails to exist.`,
       before: ``,
       after: ``,
       link: '',
@@ -89,7 +91,7 @@ As you drag, four things change at once in real time:
 • The tangent equations rewrite themselves with the new $x_0$, $y_0$, and $m$
 • The info panel's "Explanation" tab updates with the new numerical values
 
-A green "**critical point**" badge appears next to the function name whenever the slope $m$ is effectively zero — flagging local extrema as you sweep across them. A red "**tangent undefined**" badge appears whenever $x_0$ lands at a corner, vertical tangent, or outside the function's domain.`,
+A green "**critical point**" badge appears next to the function name whenever the slope $m$ is effectively zero — flagging local extrema as you sweep across them. A red "**tangent undefined**" badge appears whenever $x_0$ lands at a corner, vertical tangent, or outside the function's [domain](!/functions/domain#1).`,
       before: ``,
       after: ``,
       link: '',
@@ -159,7 +161,7 @@ This is the definition of the derivative. Every tangent line you see in the visu
       title: `When the Tangent Fails to Exist`,
       content: `Not every point on every curve has a tangent. The visualizer flags three failure modes with a red "tangent undefined" badge:
 
-• **Corners** — the absolute value function $|x|$ at $x = 0$ has a sharp V; the slope jumps from $-1$ to $+1$ with no single line that fits both sides. The left and right derivatives exist but disagree.
+• **Corners** — the [absolute value function](!/functions/families#12) $|x|$ at $x = 0$ has a sharp V; the slope jumps from $-1$ to $+1$ with no single line that fits both sides. The left and right derivatives exist but disagree.
 • **Vertical tangents** — the square root function $\\sqrt{x}$ at $x = 0$ has a tangent whose slope is infinite. A vertical line cannot be written in the form $y = mx + b$, so the equation forms break down even though the geometric line exists.
 • **Outside the domain** — the logarithm $\\ln x$ has no values at $x \\leq 0$, so there is no curve there to be tangent to. The reciprocal $1/x$ similarly has no value at $x = 0$.
 
@@ -181,11 +183,13 @@ In all three cases the derivative does not exist at the affected point. Sliding 
 
 **Linear Approximation** — using the tangent line as a substitute for the function near $x_0$, the basis of Newton's method and Taylor series.
 
-**Function Transformations** — the companion visualizer for $a$, $k$, $b$, $h$ alone, without the tangent overlay.
+[Function Transformations](!/functions/visual-tools/transformations) — the companion visualizer for $a$, $k$, $b$, $h$ alone, without the tangent overlay.
 
-**Functions Families Gallery** — companion gallery of the same base functions seen here, useful as a prerequisite for understanding what each family looks like before studying its tangents.
+[Functions Families Gallery](!/functions/visual-tools/types) — companion gallery of the same base functions seen here, useful as a prerequisite for understanding what each family looks like before studying its tangents.
 
-**Inverse Functions** — reflecting a graph across $y = x$; tangent lines of inverse functions are related by reciprocal slopes.`,
+[Inverse Functions](!/functions/visual-tools/inverse-function) — reflecting a graph across $y = x$; tangent lines of [inverse functions](!/functions/inverse#1) are related by reciprocal slopes.
+
+[Domain of a Function](!/functions/visual-tools/domain) — the tangent point can only be dragged where the function is defined, so the domain fixes the usable interval.`,
       before: ``,
       after: ``,
       link: '',
@@ -490,6 +494,7 @@ Together with [sine](!#tangent-to-sine), this pair is the reason simple harmonic
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-tangent-line'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -512,7 +517,7 @@ Together with [sine](!#tangent-to-sine), this pair is the reason simple harmonic
 }
 
 
-export default function TangentLineVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function TangentLineVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -620,6 +625,7 @@ export default function TangentLineVisualizerPage({seoData, sectionsContent, int
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

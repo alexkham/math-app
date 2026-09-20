@@ -12,6 +12,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionDomain from '../../../../app/components/functions/domain/FunctionDomain'
 import domainDiagrams from '../../../../app/components/functions/domain/functionDomainDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -38,7 +40,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base functions grouped by domain shape — those that accept every real number, and those with built-in domain restrictions. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the x-axis** showing the domain. On the right is the **info panel** with two tabs.
+      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1) grouped by [domain](!/functions/domain#1) shape — those that accept every real number, and those with built-in domain restrictions. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the x-axis** showing the domain. On the right is the **info panel** with two tabs.
 
 Below the plot sits the **domain card** — a colored block displaying the domain in interval notation, the same domain drawn on a horizontal 1D number line, and a draggable **test point slider** that lets you check whether a specific x-value is in the domain and, if so, see the value $g(x)$ that the function produces there.
 
@@ -55,7 +57,7 @@ The page launches with the logarithmic family. Its domain is $x > 0$ — the fun
 • [Unrestricted](!#functions-defined-on-all-of-the-reals) ($\\mathbb{R}$) — [Identity](!#the-identity-function), [Linear (2x)](!#the-scaled-linear-function), [Quadratic](!#the-quadratic-function), [Cubic](!#the-cubic-function), [Exponential](!#the-exponential-function), [Sine](!#the-sine-function), [Cosine](!#the-cosine-function), [Absolute](!#the-absolute-value-function). All accept every real number as input.
 • [Restricted](!#the-restricted-families) — [Logarithmic](!#the-logarithm-and-its-open-boundary) (domain $x > 0$), [Square root](!#the-square-root-and-its-closed-boundary) (domain $x \\geq 0$), [Reciprocal](!#the-reciprocal-and-its-excluded-point) (domain $x \\neq 0$). Each has a built-in restriction baked into its definition.
 
-The grouping is the pedagogical point. Most functions you encounter in pre-calculus accept any input; the three families that don't are the canonical cases worth studying — and the ones where transformations actually move the domain boundary around. Picking an unrestricted family is useful for contrast: the colored band on the x-axis just extends from $-\\infty$ to $+\\infty$, and changing parameters doesn't move it.
+The grouping is the pedagogical point. Most functions you encounter in pre-calculus accept any input; the three families that don't are the canonical cases worth studying — and the ones where [transformations](!/functions/transformations#2) actually move the domain boundary around. Picking an unrestricted family is useful for contrast: the colored band on the x-axis just extends from $-\\infty$ to $+\\infty$, and changing parameters doesn't move it.
 
 Click any entry to switch. Transformation parameters reset to defaults on every switch.`,
       before: ``,
@@ -72,7 +74,7 @@ Click any entry to switch. Transformation parameters reset to defaults on every 
 • $b$ — **horizontal scale**. Multiplies the input by $b$.
 • $h$ — **horizontal shift**. Subtracts $h$ from the input.
 
-A small "**affects domain**" badge appears on the labels for $b$ and $h$ but not on $a$ or $k$. The reason is structural and the mirror image of the range case. The transformed function is $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces a value, $a$ and $k$ scale and shift it, but by then the legality of the input has already been decided.
+A small "**affects domain**" badge appears on the labels for $b$ and $h$ but not on $a$ or $k$. The reason is structural and the mirror image of the [range](!/functions/range#1) case. The transformed function is $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces a value, $a$ and $k$ scale and shift it, but by then the legality of the input has already been decided.
 
 Drag $a$ or $k$ as wildly as you want — the x-axis band does not move. Drag $b$ or $h$ and the band immediately rescales and shifts. The visualizer makes this asymmetry visible in real time.`,
       before: ``,
@@ -166,7 +168,7 @@ Domain is independent of range. A function can have a tiny domain and reach ever
 
 • **Open endpoint (hollow circle)** — the boundary value is **excluded** from the domain. Logarithm has domain $x > 0$ with an open endpoint at $0$, because $\\ln(0)$ is undefined (the limit is $-\\infty$). The bar shows a hollow dot.
 
-• **Excluded value (red ×)** — the function is defined everywhere except one value. Reciprocal has domain $x \\neq 0$ — every nonzero real number is a legal input, but $0$ is the vertical asymptote and forbidden. The bar shows a full fill broken by a small red × at the excluded point.
+• **Excluded value (red ×)** — the function is defined everywhere except one value. Reciprocal has domain $x \\neq 0$ — every nonzero real number is a legal input, but $0$ is the vertical [asymptote](!/functions/properties#13) and forbidden. The bar shows a full fill broken by a small red × at the excluded point.
 
 The distinction between open and closed endpoints matters for continuity, limits, and whether a function attains its extreme values. The visualizer makes the boundary type visible by eye, so the difference reads at a glance rather than as an abstract notation.`,
       before: ``,
@@ -176,19 +178,29 @@ The distinction between open and closed endpoints matters for continuity, limits
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Range of a Function** — the partner concept showing which outputs the function can produce. Use the companion range visualizer to see how the mirror rule works — only $a$ and $k$ (not $b$ and $h$) affect the range.
+      content: `[Range of a Function](!/functions/visual-tools/range) — the partner concept showing which outputs the function can produce. Use the companion range visualizer to see how the mirror rule works — only $a$ and $k$ (not $b$ and $h$) affect the range.
 
 **Functions** — general theory of functions, including formal definitions of domain, range, and image.
 
-**Function Transformations** — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before adding the domain analysis on top.
+[Function Transformations](!/functions/visual-tools/transformations) — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before adding the domain analysis on top.
 
-**Functions Families Gallery** — gallery of the same eleven base functions plotted side by side, useful as a prerequisite for understanding what each curve looks like.
+[Functions Families Gallery](!/functions/visual-tools/types) — gallery of the same eleven base functions plotted side by side, useful as a prerequisite for understanding what each curve looks like.
 
-**Inverse Functions** — visualizer for reflecting a function across $y = x$. The domain of $f$ becomes the range of $f^{-1}$, a fundamental duality made concrete by the domain and inverse tools together.
+[Inverse Functions](!/functions/visual-tools/inverse-function) — visualizer for reflecting a function across $y = x$. The domain of $f$ becomes the range of $f^{-1}$, a fundamental duality made concrete by the domain and inverse tools together.
 
-**Asymptotes** — vertical asymptotes correspond to excluded values in the domain (like $x = 0$ for the reciprocal). The visualizer's red × marker is one geometric expression of this idea.
+[Asymptotes](!/functions/visual-tools/asymptotes) — vertical asymptotes correspond to excluded values in the domain (like $x = 0$ for the reciprocal). The visualizer's red × marker is one geometric expression of this idea.
 
-**Limits and Continuity** — the open/closed endpoint distinction shown in the visualizer is foundational for continuity at boundary points and for one-sided limits.`,
+**Limits and Continuity** — the open/closed endpoint distinction shown in the visualizer is foundational for continuity at boundary points and for one-sided limits.
+
+[Function Composition](!/functions/visual-tools/composition) — the domain of $f \\circ g$ is narrower than the domain of $g$ whenever $g$ can produce a value $f$ rejects.
+
+[Piecewise Function Builder](!/functions/visual-tools/piecewise) — the domain of a [piecewise function](!/functions/piecewise#1) is the union of its branch domains, which the builder shows as you add pieces.
+
+[Function Reflections](!/functions/visual-tools/reflections) — a [horizontal reflection](!/functions/transformations#6) mirrors the domain about the origin, while a [vertical reflection](!/functions/transformations#5) leaves it untouched.
+
+**Function Symmetry** — [even and odd symmetry](!/functions/visual-tools/symmetry) can only be tested on a domain that is itself symmetric about the origin.
+
+[Tangent Line Visualizer](!/functions/visual-tools/tangent-line) — a tangent line exists only where the function is defined and smooth, so the domain bounds where you can drag the point.`,
       before: ``,
       after: ``,
       link: '',
@@ -495,6 +507,7 @@ Shift $h$ and the puncture follows to $x = h$. Every rational function's domain 
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-domain'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -517,7 +530,7 @@ Shift $h$ and the puncture follows to $x = h$. Every rational function's domain 
 }
 
 
-export default function DomainOfFunctionPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DomainOfFunctionPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -627,6 +640,7 @@ export default function DomainOfFunctionPage({seoData, sectionsContent, introCon
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

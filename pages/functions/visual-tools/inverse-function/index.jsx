@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionInverse from '../../../../app/components/functions/inverse/FunctionInverse'
 import inverseDiagrams from '../../../../app/components/functions/inverse/functionInverseDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -37,11 +39,11 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base functions. In the center is the **plot panel** with three curves: the function $g(x)$ in blue, its inverse $g^{-1}(x)$ in amber, and a dashed gray line $y = x$ that acts as the mirror across which $g$ and $g^{-1}$ reflect. On the right is the **info panel** with three tabs.
+      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1). In the center is the **plot panel** with three curves: the function $g(x)$ in blue, its inverse $g^{-1}(x)$ in amber, and a dashed gray line $y = x$ that acts as the mirror across which $g$ and $g^{-1}$ reflect. On the right is the **info panel** with three tabs.
 
-Below the picker sit four parameter sliders ($a$, $k$, $b$, $h$) that transform the base function. The page launches on the quadratic family — a classic example of a function that requires a restricted domain to be invertible.
+Below the picker sit four parameter sliders ($a$, $k$, $b$, $h$) that transform the base function. The page launches on the quadratic family — a classic example of a function that requires a restricted [domain](!/functions/domain#1) to be invertible.
 
-Two header badges flag the current state. A yellow "**domain restricted**" badge appears for functions like quadratic, absolute value, sine, and cosine. A green "**self-inverse (at defaults)**" badge appears for functions like identity and reciprocal, which equal their own inverses when no transformation is applied.`,
+Two header badges flag the current state. A yellow "**domain restricted**" badge appears for functions like quadratic, absolute value, sine, and cosine. A green "**self-inverse (at defaults)**" badge appears for functions like identity and reciprocal, which equal their own inverses when no [transformation](!/functions/transformations#2) is applied.`,
       before: ``,
       after: ``,
       link: '',
@@ -106,7 +108,7 @@ The **Applied** strip shows four chips, one per transformation parameter. Active
 
 The **Show** strip below has one toggle button per curve in the plot. Click a button to hide that curve. Hiding $y = x$ removes visual clutter; hiding $g^{-1}$ lets you focus on the function alone; hiding the full faded curve focuses you on just the invertible branch. The buttons preview the curve's color and line style (solid versus dashed) and show the curve's equation in monospace.
 
-For self-inverse functions at default parameters, $g$ and $g^{-1}$ are the same curve and overlap exactly. Toggling either off shows that they were on top of each other.`,
+For self-[inverse functions](!/functions/inverse#1) at default parameters, $g$ and $g^{-1}$ are the same curve and overlap exactly. Toggling either off shows that they were on top of each other.`,
       before: ``,
       after: ``,
       link: '',
@@ -180,11 +182,11 @@ This is the same as the geometric fact that reflecting across $y = x$ swaps hori
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Functions Families Gallery** — companion gallery showing the same base functions used here, useful as a prerequisite for understanding what each family looks like before studying its inverse.
+      content: `[Functions Families Gallery](!/functions/visual-tools/types) — companion gallery showing the same base functions used here, useful as a prerequisite for understanding what each family looks like before studying its inverse.
 
-**Function Transformations** — visualizer for the four affine transformations alone, without the inverse overlay. Helpful for building intuition before adding the inverse layer here.
+[Function Transformations](!/functions/visual-tools/transformations) — visualizer for the four affine transformations alone, without the inverse overlay. Helpful for building intuition before adding the inverse layer here.
 
-**Composition of Functions** — the operation behind the inverse identity $g \\circ g^{-1} = \\text{id}$. Inverses are defined precisely as compositional partners.
+[Composition of Functions](!/functions/visual-tools/composition) — the operation behind the inverse identity $g \\circ g^{-1} = \\text{id}$. Inverses are defined precisely as compositional partners.
 
 **One-to-One Functions** — the formal property a function must have to be invertible. Equivalent to passing the horizontal line test.
 
@@ -192,7 +194,13 @@ This is the same as the geometric fact that reflecting across $y = x$ swaps hori
 
 **Logarithm and Exponential** — paired study of the canonical example of inverse functions, with $\\ln$ and $e^x$ as exact inverses.
 
-**Derivative of an Inverse Function** — the rule $\\left(f^{-1}\\right)'(x) = 1 / f'(f^{-1}(x))$; a calculus follow-up to the geometric reflection studied here.`,
+**Derivative of an Inverse Function** — the rule $\\left(f^{-1}\\right)'(x) = 1 / f'(f^{-1}(x))$; a calculus follow-up to the geometric [reflection](!/functions/visual-tools/reflections) studied here.
+
+[Range of a Function](!/functions/visual-tools/range) — the [range](!/functions/range#1) of $f$ is the [domain](!/functions/visual-tools/domain) of $f^{-1}$, which is why restricting one forces a restriction on the other.
+
+[Function Symmetry](!/functions/visual-tools/symmetry) — an [odd function](!/functions/properties#1) that is one-to-one has an odd inverse, and symmetry about $y = x$ is the defining picture of inversion.
+
+[Tangent Line Visualizer](!/functions/visual-tools/tangent-line) — the tangent to $f^{-1}$ at a point is the mirror of the tangent to $f$, so its slope is the reciprocal.`,
       before: ``,
       after: ``,
       link: '',
@@ -493,6 +501,7 @@ Together with [sine](!#sine-and-the-arcsine), this closes the picker's tour of r
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-inverse'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -515,7 +524,7 @@ Together with [sine](!#sine-and-the-arcsine), this closes the picker's tour of r
 }
 
 
-export default function InverseFunctionVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function InverseFunctionVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -624,6 +633,7 @@ export default function InverseFunctionVisualizerPage({seoData, sectionsContent,
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

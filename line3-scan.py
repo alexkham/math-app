@@ -57,6 +57,26 @@ ALIASES = {
                                          'signs of trigonometric functions', 'signs of the trigonometric functions',
                                          'signs by quadrant', 'astc', 'quadrant signs', 'sign chart'],
     },
+    'functions': {
+        'functions-asymptotes': ['asymptote', 'asymptotes', 'function asymptotes',
+                                 'vertical asymptote', 'horizontal asymptote', 'oblique asymptote'],
+        'functions-composition': ['composition', 'function composition', 'composite function',
+                                  'composing functions'],
+        'functions-domain': ['domain', 'function domain', 'domain of a function'],
+        'functions-inverse': ['inverse function', 'inverse functions', 'inverse of a function',
+                              'inverse function visualizer'],
+        'functions-piecewise': ['piecewise function', 'piecewise functions', 'piecewise',
+                                'piecewise function builder'],
+        'functions-range': ['range', 'function range', 'range of a function'],
+        'functions-reflections': ['reflection', 'reflections', 'function reflections'],
+        'functions-symmetry': ['symmetry', 'function symmetry', 'even and odd symmetry',
+                               'even odd symmetry'],
+        'functions-tangent-line': ['tangent line', 'tangent lines', 'tangent line visualizer'],
+        'functions-transformations': ['transformation', 'transformations', 'function transformations',
+                                      'graph transformations'],
+        'functions-types': ['function family', 'function families', 'families gallery',
+                            'functions families gallery', 'function types', 'families of functions'],
+    },
 }
 
 SKIP = [

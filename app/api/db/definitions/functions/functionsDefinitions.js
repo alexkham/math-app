@@ -425,7 +425,7 @@ const functionsTermsList = [
     name: 'Function',
     category: 'Core Concepts',
     formula: `A rule that assigns exactly one output to each input. Formally, a function $f$ from set $A$ to set $B$ is a mapping $f: A \to B$ such that every element of $A$ is associated with precisely one element of $B$.`,
-    link: { url: '/functions#1', text: 'What is a Function' },
+    link: { url: '/functions/basics#1', text: 'What is a Function' },
     fields: {
       intuition: `A machine with one slot in and one slot out. Drop in a number, get back exactly one number — never two, never none. The same input always produces the same output.`,
       notation: `$f(x)$ denotes the output of $f$ at input $x$. The letter $f$ names the rule; $f(x)$ names the result. Parentheses indicate evaluation, not multiplication.`,
@@ -448,7 +448,7 @@ const functionsTermsList = [
     name: 'Relation',
     category: 'Core Concepts',
     formula: `Any set of ordered pairs — a collection of input-output associations with no restriction on how many outputs an input may have.`,
-    link: { url: '/functions#2', text: 'Functions vs Relations' },
+    link: { url: '/functions/basics#2', text: 'Functions vs Relations' },
     fields: {
       intuition: `A relation is the broader category: any pairing of inputs with outputs, no rules about uniqueness. Every function is a relation, but a relation that assigns two outputs to one input is not a function.`,
       examples: `The set $\\{(1, 2), (1, 3), (2, 5)\\}$ is a relation but not a function — input $1$ maps to both $2$ and $3$. The equation $x^2 + y^2 = 1$ defines a relation (the unit circle) that fails the vertical line test.`,
@@ -503,7 +503,7 @@ const functionsTermsList = [
     name: 'Independent Variable',
     category: 'Core Concepts',
     formula: `The input variable of a function, whose value is chosen freely from the domain.`,
-    link: { url: '/functions#7', text: 'Input, Output, and Variables' },
+    link: { url: '/functions/basics#7', text: 'Input, Output, and Variables' },
     fields: {
       intuition: `The quantity you control. You pick its value; the function responds with an output. In $y = f(x)$, the variable $x$ is independent — you decide what goes in.`,
       notation: `Conventionally $x$, but any letter serves: $t$ for time, $n$ for a counting index, $\\theta$ for an angle. The choice often reflects context.`,
@@ -516,7 +516,7 @@ const functionsTermsList = [
     name: 'Dependent Variable',
     category: 'Core Concepts',
     formula: `The output variable of a function, whose value is determined by the input through the function rule.`,
-    link: { url: '/functions#7', text: 'Input, Output, and Variables' },
+    link: { url: '/functions/basics#7', text: 'Input, Output, and Variables' },
     fields: {
       intuition: `The quantity that responds. Its value depends entirely on what was fed in. In $y = f(x)$, the variable $y$ is dependent — it has no choice; it is whatever $f$ makes it.`,
       notation: `Conventionally $y$, or $f(x)$ to emphasize the function producing it. Context may use $s$ for position, $C$ for cost, $P$ for population.`,

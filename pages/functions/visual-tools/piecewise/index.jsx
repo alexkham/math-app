@@ -497,6 +497,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionPiecewise from '../../../../app/components/functions/piecewise/FunctionPiecewise'
 import piecewiseDiagrams from '../../../../app/components/functions/piecewise/functionPiecewiseDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -523,7 +525,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Piecewise function** — a single function defined by several formulas, each applied on its own interval of the domain.
+      content: `[Piecewise function](!/functions/definitions#piecewise_function) — a single function defined by several formulas, each applied on its own interval of the [domain](!/functions/domain#1).
 
 **Piece** — one formula together with the interval on which it acts. Each piece is a function from a small catalog (linear, quadratic, $|x|$, $\\sqrt{x}$, $1/x$, $\\sin x$, $\\cos x$, $e^x$, etc.) restricted to $[a, b]$.
 
@@ -551,7 +553,7 @@ To explore quickly:
 
 • The **Reset** button next to the Pieces label reloads whichever preset was active when the page opened.
 
-The graph viewport is fixed at $x \\in [-5, 5]$; the vertical range adjusts automatically to fit the pieces currently in use.`,
+The graph viewport is fixed at $x \\in [-5, 5]$; the vertical [range](!/functions/range#1) adjusts automatically to fit the pieces currently in use.`,
       before: ``,
       after: ``,
       link: '',
@@ -697,7 +699,7 @@ For the full theory of limits and continuity, see the **continuity** page.`,
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Functions** — the general theory of functions, domain, range, and notation. The foundation behind piecewise definitions.
+      content: `**Functions** — the general theory of functions, [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), and notation. The foundation behind piecewise definitions.
 
 **Continuity** — the formal definition of continuous functions and the classification of discontinuities (jump, removable, essential).
 
@@ -709,7 +711,9 @@ For the full theory of limits and continuity, see the **continuity** page.`,
 
 **Step functions** — piecewise constants used to model on/off behavior, indicator functions, and quantized signals.
 
-**Visual tools for functions** — other interactive visualizers covering composition, transformations, inverses, and graphing.`,
+**Visual tools for functions** — other interactive visualizers covering [composition](!/functions/visual-tools/composition), [transformations](!/functions/visual-tools/transformations), inverses, and graphing.
+
+[Function Reflections](!/functions/visual-tools/reflections) — reflecting a piecewise function reflects every branch and swaps which side of a boundary each piece occupies.`,
       before: ``,
       after: ``,
       link: '',
@@ -934,6 +938,7 @@ Together with the [hole](!#the-removable-hole), this preset completes the discon
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-piecewise'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -954,7 +959,7 @@ Together with the [hole](!#the-removable-hole), this preset completes the discon
   }
 }
 
-export default function PiecewiseFunctionBuilder({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PiecewiseFunctionBuilder({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
@@ -1059,6 +1064,7 @@ export default function PiecewiseFunctionBuilder({seoData, sectionsContent, intr
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

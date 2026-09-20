@@ -13,6 +13,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionRange from '../../../../app/components/functions/range/FunctionRange'
 import rangeDiagrams from '../../../../app/components/functions/range/functionRangeDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -39,7 +41,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base functions grouped by the shape of their range — all real numbers, bounded below, bounded between $-1$ and $1$, or all reals with one excluded value. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the y-axis** showing the range. On the right is the **info panel** with two tabs.
+      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1) grouped by the shape of their [range](!/functions/range#1) — all real numbers, bounded below, bounded between $-1$ and $1$, or all reals with one excluded value. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the y-axis** showing the range. On the right is the **info panel** with two tabs.
 
 Below the plot sits the **range card** — a colored block displaying the range in interval notation, the same range drawn on a horizontal 1D number line, and a draggable **test point slider** that lets you check whether a specific y-value is achievable as an output of $g$.
 
@@ -56,11 +58,11 @@ The page launches with the quadratic family. Its range is $y \\geq 0$ — the pa
 • [Unrestricted](!#ranges-covering-all-of-the-reals) ($\\mathbb{R}$) — [Identity](!#the-identity-function), [Linear (2x)](!#the-scaled-linear-function), [Cubic](!#the-cubic-function), [Logarithmic](!#the-logarithmic-function). All reach every real number as an output.
 • [Bounded below](!#ranges-bounded-below) — [Quadratic](!#the-quadratic-function), [Absolute](!#the-absolute-value-function), [Square root](!#the-square-root-function) (range $[0, \\infty)$), [Exponential](!#the-exponential-function) (range $(0, \\infty)$). Their outputs have a floor.
 • [Bounded](!#ranges-bounded-on-both-sides) $[-1, 1]$ — [Sine](!#the-sine-function), [Cosine](!#the-cosine-function). Periodic functions with a hard ceiling and floor.
-• **Excluded point** — [Reciprocal](!#the-reciprocal-and-its-missing-output). Reaches every real number except $0$ — its horizontal asymptote.
+• **Excluded point** — [Reciprocal](!#the-reciprocal-and-its-missing-output). Reaches every real number except $0$ — its horizontal [asymptote](!/functions/properties#13).
 
-Notice that logarithmic appears here under "Unrestricted" even though its **domain** is restricted to positive numbers. Domain and range are independent: a function can have a restricted domain and still produce every real number as output.
+Notice that logarithmic appears here under "Unrestricted" even though its **domain** is restricted to positive numbers. [Domain](!/functions/domain#1) and range are independent: a function can have a restricted domain and still produce every real number as output.
 
-Click any entry to switch. Transformation parameters reset to defaults on every switch.`,
+Click any entry to switch. [Transformation](!/functions/transformations#2) parameters reset to defaults on every switch.`,
       before: ``,
       after: ``,
       link: '',
@@ -181,19 +183,25 @@ The distinction between open and closed endpoints is genuinely important in calc
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Domain of a Function** — the partner concept showing which inputs are allowed. Use the companion domain visualizer to see how domain transformations work and why $b$ and $h$ (not $a$ and $k$) affect it — the mirror image of the rule shown here.
+      content: `[Domain of a Function](!/functions/visual-tools/domain) — the partner concept showing which inputs are allowed. Use the companion domain visualizer to see how domain transformations work and why $b$ and $h$ (not $a$ and $k$) affect it — the mirror image of the rule shown here.
 
 **Functions** — general theory of functions, including formal definitions of domain, range, and image.
 
-**Function Transformations** — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before bringing range analysis on top.
+[Function Transformations](!/functions/visual-tools/transformations) — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before bringing range analysis on top.
 
-**Functions Families Gallery** — gallery of the same eleven base functions plotted side by side, useful as a prerequisite for understanding what each curve looks like.
+[Functions Families Gallery](!/functions/visual-tools/types) — gallery of the same eleven base functions plotted side by side, useful as a prerequisite for understanding what each curve looks like.
 
-**Inverse Functions** — visualizer for reflecting a function across $y = x$. The range of $f$ becomes the domain of $f^{-1}$ — a fundamental duality that the inverse and domain/range tools together make concrete.
+[Inverse Functions](!/functions/visual-tools/inverse-function) — visualizer for reflecting a function across $y = x$. The range of $f$ becomes the domain of $f^{-1}$ — a fundamental duality that the inverse and domain/range tools together make concrete.
 
 **Bounded Functions** — functions whose range fits inside an interval; the trigonometric examples in this visualizer are the canonical examples.
 
-**Asymptotes** — horizontal asymptotes are values the function approaches but never reaches, and they are exactly the open endpoints and excluded values of the range. The reciprocal's $y = 0$ asymptote is a worked example.`,
+[Asymptotes](!/functions/visual-tools/asymptotes) — horizontal asymptotes are values the function approaches but never reaches, and they are exactly the open endpoints and excluded values of the range. The reciprocal's $y = 0$ asymptote is a worked example.
+
+[Piecewise Function Builder](!/functions/visual-tools/piecewise) — the range of a [piecewise function](!/functions/piecewise#1) is the union of the ranges of its branches, boundary values included.
+
+[Function Reflections](!/functions/visual-tools/reflections) — a [vertical reflection](!/functions/transformations#5) flips the range about the $x$-axis, while a [horizontal reflection](!/functions/transformations#6) leaves it unchanged.
+
+[Function Symmetry](!/functions/visual-tools/symmetry) — an [even function](!/functions/properties#1) reaches the same outputs on both sides of the axis, so its range is decided by half the graph.`,
       before: ``,
       after: ``,
       link: '',
@@ -509,6 +517,7 @@ Shift $k$ and the puncture rides to $y = k$: every transformed reciprocal misses
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-range'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -531,7 +540,7 @@ Shift $k$ and the puncture rides to $y = k$: every transformed reciprocal misses
 }
 
 
-export default function RangeOfFunctionPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function RangeOfFunctionPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -642,6 +651,7 @@ export default function RangeOfFunctionPage({seoData, sectionsContent, introCont
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

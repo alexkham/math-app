@@ -12,6 +12,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionGallery from '../../../../app/components/functions/types/FunctionGallery'
 import functionTypesDiagrams from '../../../../app/components/functions/types/functionTypesDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -38,7 +40,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Gallery`,
-      content: `Open the page and three panels appear side by side. On the left is the **family picker** — a vertical list of every function family the gallery covers. In the center is the **plot panel**, with the family name in the header, the current symbolic equation displayed as a badge, and an interactive graph of $y = f(x)$. On the right is the **info panel**, with tabs for an explanation of the active family and external resources.
+      content: `Open the page and three panels appear side by side. On the left is the **family picker** — a vertical list of every [function](!/functions/basics#1) family the gallery covers. In the center is the **plot panel**, with the family name in the header, the current symbolic equation displayed as a badge, and an interactive graph of $y = f(x)$. On the right is the **info panel**, with tabs for an explanation of the active family and external resources.
 
 The gallery launches on the [linear family](!#the-linear-family) with default parameters $a = 1$, $b = 0$ — the line $y = x$. Click any family in the sidebar to switch to it. The plot, equation, sliders, and explanation all update at once. Parameters reset to their family-specific defaults on every switch, so you always start from a representative example.
 
@@ -56,7 +58,7 @@ The plot supports zoom, crosshair readout, and curve tooltips by default. Mouse 
 • [Quadratic](!#the-quadratic-family) — parabolas
 • [Cubic](!#the-cubic-family) — odd-degree polynomials with an inflection point
 • [Power](!#the-power-family) — $ax^n$ for adjustable exponent $n$
-• [Rational](!#the-rational-family) — reciprocal curves with vertical asymptotes
+• [Rational](!#the-rational-family) — reciprocal curves with vertical [asymptotes](!/functions/properties#13)
 • [Exponential](!#the-exponential-family) — multiplicative growth or decay
 • [Logarithmic](!#the-logarithmic-family) — the inverse of exponential
 • [Trigonometric](!#the-trigonometric-group) — [sine](!#the-sine-family), [cosine](!#the-cosine-family), and [tangent](!#the-tangent-family) (grouped together)
@@ -105,7 +107,7 @@ Each slider shows the parameter name on the left and its current numeric value o
       title: `Reading the Plot and Equation Badge`,
       content: `The plot panel header has two elements. On the left, the **family name** identifies what is being graphed. On the right, the **equation badge** — in monospaced blue type — shows the current symbolic form with parameter values substituted. As you drag a slider, the equation rewrites character by character to match.
 
-The plot itself is a coordinate system with axis labels, gridlines, and the curve $y = f(x)$ drawn in accent blue. A crosshair follows the mouse, and a small tooltip near the curve shows the value $f(x)$ at the cursor's $x$-coordinate. Functions with restricted domains — square root undefined for negative inputs, logarithm undefined at and below zero, tangent and rational families undefined at asymptotes — are simply not drawn outside their domains, leaving gaps in the curve that make the domain visible.
+The plot itself is a coordinate system with axis labels, gridlines, and the curve $y = f(x)$ drawn in accent blue. A crosshair follows the mouse, and a small tooltip near the curve shows the value $f(x)$ at the cursor's $x$-coordinate. Functions with restricted [domains](!/functions/domain#1) — square root undefined for negative inputs, logarithm undefined at and below zero, tangent and rational families undefined at asymptotes — are simply not drawn outside their domains, leaving gaps in the curve that make the domain visible.
 
 The plot starts zoomed to roughly $[-10, 10]$ on both axes. You can pan and zoom for closer inspection.`,
       before: ``,
@@ -130,7 +132,7 @@ The explanation is intentionally brief — it complements the visual rather than
       title: `What is a Function Family?`,
       content: `A **function family** is a parametrized class of functions sharing the same algebraic structure. The [linear family](!#the-linear-family) $f(x) = ax + b$ contains every straight line; the [quadratic family](!#the-quadratic-family) $f(x) = ax^2 + bx + c$ contains every parabola; the [sine family](!#the-sine-family) $f(x) = A \\sin(Bx + C) + D$ contains every shifted, scaled sinusoid.
 
-Each member of a family is determined by a small set of numerical parameters, and members of the same family share qualitative features — number of roots, end behavior, symmetry, domain — regardless of specific parameter values. Two parabolas can look very different numerically, but both have a single vertex, both open in one direction, and both come from a degree-two polynomial.
+Each member of a family is determined by a small set of numerical parameters, and members of the same family share qualitative features — number of roots, end behavior, [symmetry](!/functions/visual-tools/symmetry), domain — regardless of specific parameter values. Two parabolas can look very different numerically, but both have a single vertex, both open in one direction, and both come from a degree-two polynomial.
 
 Recognizing a function family at sight is one of the foundational skills of algebra and pre-calculus. The gallery is built to support that pattern recognition: see the same family across many parameter choices, and the invariant shape settles into memory.
 
@@ -160,7 +162,7 @@ For deeper theory on function classification, see **functions theory**.`,
       content: `The gallery is designed to support side-by-side comparison even though only one family is plotted at a time. A few suggested workflows:
 
 • **Match the parameters when possible.** Setting amplitude $A = 1$, frequency $B = 1$, phase $C = 0$, offset $D = 0$ on [sine](!#the-sine-family), [cosine](!#the-cosine-family), and [tangent](!#the-tangent-family) shows the canonical curves directly comparable to each other.
-• **Sweep a single parameter.** Hold all but one slider fixed and drag the remaining one across its range — the family's response to that single parameter becomes obvious without competing changes confusing the picture.
+• **Sweep a single parameter.** Hold all but one slider fixed and drag the remaining one across its [range](!/functions/range#1) — the family's response to that single parameter becomes obvious without competing changes confusing the picture.
 • **Compare growth rates.** Switch between [power](!#the-power-family) ($n = 2$, then $n = 3$), [exponential](!#the-exponential-family) (base $2$), and [logarithmic](!#the-logarithmic-family) to see how quickly each family blows up or flattens for large $x$.
 • **Find an inverse pair.** Exponential and logarithmic are inverses of each other; setting matching parameters and mentally reflecting one across $y = x$ should yield the other.
 
@@ -172,21 +174,23 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Functions** — the general theory of functions: domain, range, composition, inverses, and classification.
+      content: `**Functions** — the general theory of functions: [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), [composition](!/functions/visual-tools/composition), inverses, and classification.
 
-**Function Transformations** — visualizers for vertical and horizontal shifts, stretches, and reflections applied to any base function.
+[Function Transformations](!/functions/visual-tools/transformations) — visualizers for vertical and horizontal shifts, stretches, and [reflections](!/functions/visual-tools/reflections) applied to any base function.
 
 **Polynomial Functions** — focused theory and tools for the polynomial subfamilies covered here (linear, quadratic, cubic, and higher).
 
-**Exponential and Logarithmic Functions** — paired study of inverse function families, growth and decay models, and natural log.
+**Exponential and Logarithmic Functions** — paired study of [inverse function](!/functions/visual-tools/inverse-function) families, growth and decay models, and natural log.
 
 **Trigonometric Functions** — full coverage of sine, cosine, tangent, and their reciprocals beyond the gallery's brief introduction.
 
-**Rational Functions** — asymptote analysis, partial fractions, and behavior near poles.
+**Rational Functions** — [asymptote](!/functions/visual-tools/asymptotes) analysis, partial fractions, and behavior near poles.
 
 **Equations and Inequalities Visualizer** — companion tools for solving $f(x) = n$ and $f(x) > 0$ across all the same function families.
 
-**Function Graphs Reference** — printable reference sheets of canonical curves from each family.`,
+**Function Graphs Reference** — printable reference sheets of canonical curves from each family.
+
+[Tangent Line Visualizer](!/functions/visual-tools/tangent-line) — the tangent line to each base family in the gallery, showing how sharply the slope varies from one family to the next.`,
       before: ``,
       after: ``,
       link: '',
@@ -562,6 +566,7 @@ Its combination of a hard domain edge and gentle growth makes it the standard fi
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-types'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -584,7 +589,7 @@ Its combination of a hard domain edge and gentle growth makes it the standard fi
 }
 
 
-export default function FunctionFamiliesGalleryPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionFamiliesGalleryPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const genericSections = [
     { id:'getting-started-with-the-gallery',      title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
@@ -691,6 +696,7 @@ export default function FunctionFamiliesGalleryPage({seoData, sectionsContent, i
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

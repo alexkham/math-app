@@ -2159,11 +2159,11 @@
     },
     "functions/basics": {
       "slug": "basics",
-      "name": "Functions Basics",
+      "name": "Functions Basics: Definition, Notation & Tests",
       "section": "functions",
       "pagePath": "pages/functions/basics/index.jsx",
       "template": "titled",
-      "templateNote": "Created 2026-08-05 verbatim from the old /functions hub (hub migration). Numeric section ids '0'-'11'. Operation A related-terms mapping not yet performed.",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
       "sections": [
         "0",
         "1",
@@ -2171,28 +2171,136 @@
         "3",
         "4",
         "5",
-        "6",
         "7",
         "8",
         "9",
         "10",
         "11"
       ],
-      "sectionTitles": [
-        "Key Terms",
-        "What is a Function",
-        "Functions vs Relations",
-        "The Vertical Line Test",
-        "Representing Functions",
-        "Function Notation",
-        "Evaluating Functions",
-        "Input, Output, and Variables",
-        "Determining Whether a Relationship is a Function",
-        "Special Values",
-        "Functions in Context",
-        "The Landscape of Function Topics"
-      ],
-      "relatedTerms": []
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "dependent variable",
+          "entity": "dependent_variable",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "independent variable",
+          "entity": "independent_variable",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "relations",
+          "entity": "relation",
+          "sections": [
+            "2",
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "4",
+            "7",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "0"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations"
+          ]
+        }
+      ]
     },
     "linear-algebra/decompositions": {
       "slug": "decompositions",
@@ -15860,6 +15968,2234 @@
             "trigonometry-angle-types",
             "trigonometry-functions-signs",
             "trigonometry-unit-circle"
+          ]
+        }
+      ]
+    },
+    "functions/analyzing": {
+      "slug": "analyzing",
+      "name": "Analyzing Functions: Behavior & Intervals",
+      "section": "functions",
+      "pagePath": "pages/functions/analyzing/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "linear functions",
+          "entity": "linear_function",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "local maximum",
+          "entity": "local_maximum",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "local minimum",
+          "entity": "local_minimum",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "2",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "even functions",
+          "entity": "even_function",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "odd functions",
+          "entity": "odd_function",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "1",
+            "2",
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        }
+      ]
+    },
+    "functions/arithmetic": {
+      "slug": "arithmetic",
+      "name": "Function Arithmetic: Operations on Functions",
+      "section": "functions",
+      "pagePath": "pages/functions/arithmetic/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "difference of functions",
+          "entity": "difference_of_functions",
+          "sections": [
+            "3"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "domain of a combined function",
+          "entity": "domain_of_a_combined_function",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "domain of a quotient",
+          "entity": "domain_of_a_quotient",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "linear functions",
+          "entity": "linear_function",
+          "sections": [
+            "4",
+            "11"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "product of functions",
+          "entity": "product_of_functions",
+          "sections": [
+            "4"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "quotient of functions",
+          "entity": "quotient_of_functions",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "sum of functions",
+          "entity": "sum_of_functions",
+          "sections": [
+            "2"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "domains",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "7",
+            "8",
+            "10",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        }
+      ]
+    },
+    "functions/composition": {
+      "slug": "composition",
+      "name": "Function Composition",
+      "section": "functions",
+      "pagePath": "pages/functions/composition/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "composition associativity",
+          "entity": "composition_associativity",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "domain of a composition",
+          "entity": "domain_of_a_composition",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "composition of functions",
+          "entity": "composition_of_functions",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "5",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        }
+      ]
+    },
+    "functions/domain": {
+      "slug": "domain",
+      "name": "Domain of a Function - How to Find It",
+      "section": "functions",
+      "pagePath": "pages/functions/domain/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "0",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        }
+      ]
+    },
+    "functions/families": {
+      "slug": "families",
+      "name": "Function Families: Types, Graphs & Properties",
+      "section": "functions",
+      "pagePath": "pages/functions/families/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "constant functions",
+          "entity": "constant_function",
+          "sections": [
+            "3",
+            "4"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "horizontal asymptote equal degree",
+          "entity": "horizontal_asymptote_equal_degree",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "horizontal asymptote numerator lower",
+          "entity": "horizontal_asymptote_numerator_lower",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "linear functions",
+          "entity": "linear_function",
+          "sections": [
+            "1",
+            "4"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "local maximum",
+          "entity": "local_maximum",
+          "sections": [
+            "6"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "quadratic function",
+          "entity": "quadratic_function",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "slope intercept form",
+          "entity": "slope_intercept_form",
+          "sections": [
+            "4"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "standard form quadratic",
+          "entity": "standard_form_quadratic",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "vertex form quadratic",
+          "entity": "vertex_form_quadratic",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "vertex from coefficients",
+          "entity": "vertex_from_coefficients",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "vertical asymptote rational",
+          "entity": "vertical_asymptote_rational",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "absolute value function",
+          "entity": "absolute_value_function",
+          "sections": [
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-piecewise",
+            "functions-reflections",
+            "functions-tangent-line"
+          ]
+        },
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "7",
+            "8",
+            "14",
+            "15",
+            "16"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "axis of symmetry",
+          "entity": "axis_of_symmetry",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "5",
+            "9",
+            "10",
+            "11",
+            "15",
+            "16",
+            "17",
+            "18"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "even function",
+          "entity": "even_function",
+          "sections": [
+            "16"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "odd function",
+          "entity": "odd_function",
+          "sections": [
+            "16"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "parent function",
+          "entity": "parent_function",
+          "sections": [
+            "1",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-reflections",
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "10",
+            "11",
+            "16"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "0",
+            "5",
+            "9",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations"
+          ]
+        }
+      ]
+    },
+    "functions/graphs": {
+      "slug": "graphs",
+      "name": "Graphs of Functions",
+      "section": "functions",
+      "pagePath": "pages/functions/graphs/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "increasing function",
+          "entity": "increasing_function",
+          "sections": [
+            "10"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "linear functions",
+          "entity": "linear_function",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "quadratic functions",
+          "entity": "quadratic_function",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "7",
+            "8",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "6",
+            "7",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "odd function",
+          "entity": "odd_function",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        }
+      ]
+    },
+    "functions/inverse": {
+      "slug": "inverse",
+      "name": "Inverse Functions",
+      "section": "functions",
+      "pagePath": "pages/functions/inverse/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "domain range swap of inverse",
+          "entity": "domain_range_swap_of_inverse",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "inverse composition property",
+          "entity": "inverse_composition_property",
+          "sections": [
+            "6"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "inverse function definition",
+          "entity": "inverse_function_definition",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "linear functions",
+          "entity": "linear_function",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "2",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "5",
+            "6",
+            "7",
+            "9",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "11",
+            "12",
+            "13",
+            "14"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "inverse function",
+          "entity": "inverse_function",
+          "sections": [
+            "1",
+            "2",
+            "11",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-tangent-line"
+          ]
+        },
+        {
+          "term": "one-to-one functions",
+          "entity": "one_to_one_function",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-inverse",
+            "functions-reflections"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "0",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "2",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-transformations"
+          ]
+        }
+      ]
+    },
+    "functions/piecewise": {
+      "slug": "piecewise",
+      "name": "Piecewise Functions - Definition, Graphing & Examples",
+      "section": "functions",
+      "pagePath": "pages/functions/piecewise/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "absolute value functions",
+          "entity": "absolute_value_function",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-piecewise",
+            "functions-reflections",
+            "functions-tangent-line"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "5",
+            "6",
+            "12",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "9",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-domain",
+            "functions-piecewise",
+            "functions-range",
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "ranges",
+          "entity": "range",
+          "sections": [
+            "6",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        }
+      ]
+    },
+    "functions/properties": {
+      "slug": "properties",
+      "name": "Properties of Functions",
+      "section": "functions",
+      "pagePath": "pages/functions/properties/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "average rate of change",
+          "entity": "average_rate_of_change",
+          "sections": [
+            "17"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "decreasing function",
+          "entity": "decreasing_function",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "even function test",
+          "entity": "even_function_test",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "increasing function",
+          "entity": "increasing_function",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "local maximum",
+          "entity": "local_maximum",
+          "sections": [
+            "9"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "local minimum",
+          "entity": "local_minimum",
+          "sections": [
+            "9"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "odd function test",
+          "entity": "odd_function_test",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "zero of a function",
+          "entity": "zero_of_a_function",
+          "sections": [
+            "16"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "12",
+            "13",
+            "14"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "axis of symmetry",
+          "entity": "axis_of_symmetry",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "1",
+            "3",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "15",
+            "16"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "even functions",
+          "entity": "even_function",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "17",
+            "18",
+            "19"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "odd functions",
+          "entity": "odd_function",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "one-to-one functions",
+          "entity": "one_to_one_function",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-inverse",
+            "functions-reflections"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "4",
+            "8",
+            "15"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-transformations"
+          ]
+        }
+      ]
+    },
+    "functions/range": {
+      "slug": "range",
+      "name": "Range of a Function",
+      "section": "functions",
+      "pagePath": "pages/functions/range/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "constant functions",
+          "entity": "constant_function",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "decreasing function",
+          "entity": "decreasing_function",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "increasing function",
+          "entity": "increasing_function",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "linear function",
+          "entity": "linear_function",
+          "sections": [
+            "1",
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "quadratic functions",
+          "entity": "quadratic_function",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "vertical translation",
+          "entity": "vertical_translation",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "absolute value functions",
+          "entity": "absolute_value_function",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-piecewise",
+            "functions-reflections",
+            "functions-tangent-line"
+          ]
+        },
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "inverse functions",
+          "entity": "inverse_function",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-tangent-line"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "reflections",
+          "entity": "reflection",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "0",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "vertical reflection",
+          "entity": "vertical_reflection",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-domain",
+            "functions-range"
+          ]
+        }
+      ]
+    },
+    "functions/transformations": {
+      "slug": "transformations",
+      "name": "Function Transformations: Shifts, Reflections & Stretches",
+      "section": "functions",
+      "pagePath": "pages/functions/transformations/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "notation",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "general transformation",
+          "entity": "general_transformation",
+          "sections": [
+            "2"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "horizontal dilation",
+          "entity": "horizontal_dilation",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "horizontal translation",
+          "entity": "horizontal_translation",
+          "sections": [
+            "4",
+            "12"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "vertical dilation",
+          "entity": "vertical_dilation",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "vertical translation",
+          "entity": "vertical_translation",
+          "sections": [
+            "notation",
+            "12"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-range",
+            "functions-symmetry",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "0",
+            "1",
+            "4",
+            "6",
+            "8",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "even function",
+          "entity": "even_function",
+          "sections": [
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "2",
+            "notation",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "horizontal reflection",
+          "entity": "horizontal_reflection",
+          "sections": [
+            "6",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-domain",
+            "functions-range"
+          ]
+        },
+        {
+          "term": "odd function",
+          "entity": "odd_function",
+          "sections": [
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry"
+          ]
+        },
+        {
+          "term": "parent functions",
+          "entity": "parent_function",
+          "sections": [
+            "1",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-reflections",
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "0",
+            "1",
+            "notation",
+            "5",
+            "7",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-domain",
+            "functions-inverse",
+            "functions-piecewise",
+            "functions-range",
+            "functions-reflections",
+            "functions-transformations",
+            "functions-types"
+          ]
+        },
+        {
+          "term": "reflections",
+          "entity": "reflection",
+          "sections": [
+            "1",
+            "2",
+            "7",
+            "8",
+            "9",
+            "11",
+            "14"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-composition",
+            "functions-inverse",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "notation",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-asymptotes",
+            "functions-composition",
+            "functions-domain",
+            "functions-inverse",
+            "functions-range",
+            "functions-reflections",
+            "functions-symmetry",
+            "functions-tangent-line",
+            "functions-transformations"
+          ]
+        },
+        {
+          "term": "translation",
+          "entity": "translation",
+          "sections": [
+            "2",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-reflections"
+          ]
+        },
+        {
+          "term": "vertical reflection",
+          "entity": "vertical_reflection",
+          "sections": [
+            "5",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-domain",
+            "functions-range"
           ]
         }
       ]

@@ -12,6 +12,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionSymmetry from '../../../../app/components/functions/symmetry/FunctionSymmetry'
 import symmetryDiagrams from '../../../../app/components/functions/symmetry/functionSymmetryDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -38,7 +40,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base functions grouped by their natural symmetry — even, odd, or neither. In the center is the **plot panel** with three curves drawn on top of each other:
+      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1) grouped by their natural symmetry — even, odd, or neither. In the center is the **plot panel** with three curves drawn on top of each other:
 
 • $f(x)$ in **solid blue**
 • $f(-x)$ in **dashed amber** (the function reflected across the y-axis)
@@ -62,7 +64,7 @@ The page launches with quadratic. Blue and amber overlap exactly: the dashes pun
 
 The Neither group is instructive on its own. Square root and logarithm fail the comparison because they are not defined for negative inputs; exponential because $e^{-x} = 1/e^x$ is neither equal to $e^x$ nor to $-e^x$; and $x^2 + x$ is the classic example of a polynomial with mixed-parity terms.
 
-Click any entry to switch. Transformation parameters reset to defaults on every switch. The current verdict can differ from the group label once sliders are moved — that is the central point of the tool.`,
+Click any entry to switch. [Transformation](!/functions/transformations#2) parameters reset to defaults on every switch. The current verdict can differ from the group label once sliders are moved — that is the central point of the tool.`,
       before: ``,
       after: ``,
       link: '',
@@ -124,7 +126,7 @@ When you transform the function with sliders and the verdict changes from the ba
 • **Odd** — $f(x) = f(-x)$ together with $f(-x) = -f(x)$ forces $f(x) = 0$ wherever the two curves cross. The purple dots therefore mark the **zeros** of $f$ — a beautiful, non-obvious consequence of odd symmetry.
 • **Neither** — the dots simply mark wherever the function and its y-mirror happen to meet, without any deeper structural meaning.
 
-Below the verdict card, a small strip lists the intersection points with their coordinates. For odd functions like $x^3$ or $\\sin x$, this strip becomes a list of zeros — a useful by-product of the symmetry visualization.`,
+Below the verdict card, a small strip lists the intersection points with their coordinates. For [odd functions](!/functions/properties#1) like $x^3$ or $\\sin x$, this strip becomes a list of zeros — a useful by-product of the symmetry visualization.`,
       before: ``,
       after: ``,
       link: '',
@@ -139,7 +141,7 @@ Below the verdict card, a small strip lists the intersection points with their c
 • $b$ — **horizontal scale** (preserves both)
 • $h$ — **horizontal shift** (breaks even symmetry; preserves odd only if it didn't have any)
 
-Watch what happens. Start on the even quadratic with default parameters — blue and amber overlap, verdict reads Even. Drag $h$ to $+1$ — the parabola shifts right, the mirror axis of symmetry slides off the y-axis to $x = 1$, but $f(-x)$ still mirrors across $x = 0$. The two curves no longer coincide. The verdict immediately flips to Neither.
+Watch what happens. Start on the even quadratic with default parameters — blue and amber overlap, verdict reads Even. Drag $h$ to $+1$ — the parabola shifts right, the mirror [axis of symmetry](!/functions/families#5) slides off the y-axis to $x = 1$, but $f(-x)$ still mirrors across $x = 0$. The two curves no longer coincide. The verdict immediately flips to Neither.
 
 Now switch to the odd cubic. Drag $k$ to $+2$ — the curve lifts vertically. The 180° rotation now centers on $(0, 2)$ instead of the origin, so it no longer matches the origin-centered $-f(-x)$. Verdict flips to Neither. Set $k = 0$, then drag $a$ to $-1$ — odd symmetry is preserved because flipping odd produces another odd function. The verdict stays Odd.`,
       before: ``,
@@ -149,11 +151,11 @@ Now switch to the odd cubic. Drag $k$ to $+2$ — the curve lifts vertically. Th
 
     obj8: {
       title: `What Even and Odd Mean`,
-      content: `An **even** function satisfies $f(-x) = f(x)$ for every $x$ in its domain. Geometrically, folding the graph along the y-axis lands it exactly on itself. The y-axis is a mirror.
+      content: `An **even** function satisfies $f(-x) = f(x)$ for every $x$ in its [domain](!/functions/domain#1). Geometrically, folding the graph along the y-axis lands it exactly on itself. The y-axis is a mirror.
 
 Classic examples: $x^2$, $x^4$, $|x|$, $\\cos x$, and more generally any polynomial whose terms all have even exponents.
 
-An **odd** function satisfies $f(-x) = -f(x)$. Geometrically, rotating the graph 180° about the origin lands it on itself. Equivalently, the graph is symmetric under combined reflection across both the x- and y-axes.
+An **odd** function satisfies $f(-x) = -f(x)$. Geometrically, rotating the graph 180° about the origin lands it on itself. Equivalently, the graph is symmetric under combined [reflection](!/functions/transformations#5) across both the x- and y-axes.
 
 Classic examples: $x$, $x^3$, $\\sin x$, $\\tan x$, $1/x$, and any polynomial with only odd-exponent terms. Note that every odd function defined at $x = 0$ must satisfy $f(0) = -f(0)$, forcing $f(0) = 0$. Odd graphs always pass through the origin.
 
@@ -173,7 +175,7 @@ Concretely, for $g(x) = a \\cdot f(b(x - h)) + k$:
 
 • $k \\ne 0$ shifts every output. For an odd base function whose rotation center was the origin, the new rotation center is $(0, k)$. The graph is still 180°-symmetric, but about a point that is not the origin, so $g(-x) \\ne -g(x)$ in general.
 
-• $a$ and $b$ rescale but do not move the axes. An even function flipped or rescaled vertically remains even (multiplying outputs preserves $f(-x) = f(x)$); an odd function rescaled or reflected remains odd.
+• $a$ and $b$ rescale but do not move the axes. An [even function](!/functions/properties#1) flipped or rescaled vertically remains even (multiplying outputs preserves $f(-x) = f(x)$); an odd function rescaled or reflected remains odd.
 
 The runtime verdict captures all of this automatically. You can use the sliders as a quick exploration of which transformations preserve which symmetries.`,
       before: ``,
@@ -185,17 +187,23 @@ The runtime verdict captures all of this automatically. You can use the sliders 
       title: `Related Concepts and Tools`,
       content: `**Even and Odd Functions** — formal theory page covering definitions, proofs, sum and product rules for even and odd functions, and Fourier-series connections.
 
-**Function Transformations** — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before bringing symmetry on top.
+[Function Transformations](!/functions/visual-tools/transformations) — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before bringing symmetry on top.
 
-**Domain of a Function** and **Range of a Function** — companion visualizers in the same Function Properties group; together they characterize a function's structural features.
+[Domain of a Function](!/functions/visual-tools/domain) and [Range of a Function](!/functions/visual-tools/range) — companion visualizers in the same Function Properties group; together they characterize a function's structural features.
 
-**Reflections** — geometric operations on graphs; even and odd are the two special cases where a reflection or rotation lands the graph on itself.
+[Reflections](!/functions/visual-tools/reflections) — geometric operations on graphs; even and odd are the two special cases where a reflection or rotation lands the graph on itself.
 
 **Periodic Functions** — a different kind of symmetry: $f(x + T) = f(x)$ for some period $T$. Sine and cosine are both periodic **and** have parity symmetry; most periodic functions only have one or the other.
 
-**Inverse Functions** — graph reflection across the line $y = x$; another kind of symmetric relationship between two functions, though strictly speaking not a symmetry of one graph alone.
+[Inverse Functions](!/functions/visual-tools/inverse-function) — graph reflection across the line $y = x$; another kind of symmetric relationship between two functions, though strictly speaking not a symmetry of one graph alone.
 
-**Trigonometric Identities** — the identities $\\sin(-x) = -\\sin(x)$ and $\\cos(-x) = \\cos(x)$ are exactly the parity statements visualized here, written algebraically.`,
+**Trigonometric Identities** — the identities $\\sin(-x) = -\\sin(x)$ and $\\cos(-x) = \\cos(x)$ are exactly the parity statements visualized here, written algebraically.
+
+[Function Asymptotes](!/functions/visual-tools/asymptotes) — symmetry carries over to the [asymptotes](!/functions/properties#13): an odd function's vertical asymptotes come in $\\pm c$ pairs.
+
+[Function Composition](!/functions/visual-tools/composition) — composing two odd functions gives an odd function, and any composition involving an even function is even.
+
+[Functions Families Gallery](!/functions/visual-tools/types) — which families are even, which are odd, and which are neither, compared side by side.`,
       before: ``,
       after: ``,
       link: '',
@@ -521,6 +529,7 @@ The example generalizes into the decomposition theorem: every function splits un
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-symmetry'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -543,7 +552,7 @@ The example generalizes into the decomposition theorem: every function splits un
 }
 
 
-export default function FunctionSymmetryPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionSymmetryPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -654,6 +663,7 @@ export default function FunctionSymmetryPage({seoData, sectionsContent, introCon
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

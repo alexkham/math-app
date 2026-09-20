@@ -19,10 +19,11 @@
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
       "linearAlgebraLinksWritten": "2026-09-20",
-      "trigonometryKeyTerms": "2026-09-20"
+      "functionsKeyTerms": "2026-09-20"
     },
     "lineThree": {
-      "trigonometryWritten": "2026-09-20"
+      "trigonometryWritten": "2026-09-20",
+      "functionsWritten": "2026-09-20"
     }
   },
   "tools": {
@@ -3334,124 +3335,649 @@
       },
       "relatedTerms": [
         {
-          "term": "function family",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "the-trigonometric-group",
+            "adjusting-parameters-with-the-sliders",
+            "how-to-compare-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "linear function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coefficients",
+          "entity": "coefficient",
+          "sections": [
+            "adjusting-parameters-with-the-sliders"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "quadratic function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complements",
+          "entity": "complement",
+          "sections": [
+            "exploring-the-info-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "cubic function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "power function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "rational function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "exponential function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "logarithmic function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "sine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "defining-features-across-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "cosine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosine",
+          "sections": [
+            "the-trigonometric-group",
+            "adjusting-parameters-with-the-sliders",
+            "defining-features-across-families",
+            "the-cosine-family",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "browsing-the-family-picker",
+            "what-is-a-function-family",
+            "defining-features-across-families",
+            "the-cubic-family"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "the-trigonometric-group"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "elements",
+          "entity": "element",
+          "sections": [
+            "reading-the-plot-and-equation-badge"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "getting-started-with-the-gallery",
+            "adjusting-parameters-with-the-sliders",
+            "reading-the-plot-and-equation-badge",
+            "exploring-the-info-panel",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "exponent",
+          "entity": "exponent",
+          "sections": [
+            "browsing-the-family-picker",
+            "adjusting-parameters-with-the-sliders",
+            "the-power-family"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "fractions",
+          "entity": "fraction",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "frequency",
+          "entity": "frequency",
+          "sections": [
+            "adjusting-parameters-with-the-sliders",
+            "how-to-compare-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "inequalities",
+          "entity": "inequality",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "intercept",
+          "entity": "constant_term",
+          "sections": [
+            "adjusting-parameters-with-the-sliders",
+            "the-linear-family"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "defining-features-across-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "reading-the-plot-and-equation-badge",
+            "defining-features-across-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "numerator",
+          "entity": "numerator",
+          "sections": [
+            "adjusting-parameters-with-the-sliders"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "the-trigonometric-group"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomials",
+          "entity": "polynomial",
+          "sections": [
+            "browsing-the-family-picker",
+            "what-is-a-function-family",
+            "defining-features-across-families",
+            "the-cubic-family",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "adjusting-parameters-with-the-sliders",
+            "the-power-family"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "browsing-the-family-picker",
+            "the-rational-family",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "roots",
+          "entity": "root",
+          "sections": [
+            "what-is-a-function-family",
+            "defining-features-across-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "the-trigonometric-group",
+            "adjusting-parameters-with-the-sliders",
+            "defining-features-across-families",
+            "the-sine-family",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "tangent",
+          "sections": [
+            "the-trigonometric-group",
+            "adjusting-parameters-with-the-sliders",
+            "reading-the-plot-and-equation-badge",
+            "the-tangent-family",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "absolute value function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "the-absolute-value-family"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-absolute-value-family",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
         },
         {
-          "term": "square root function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "browsing-the-family-picker",
+            "the-trigonometric-group",
+            "reading-the-plot-and-equation-badge",
+            "exploring-the-info-panel",
+            "defining-features-across-families"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "browsing-the-family-picker",
+              "surface": "asymptotes",
+              "target": {
+                "path": "/functions/properties",
+                "section": "13"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "vertical asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "domain restrictions",
+          "entity": "domain_restriction",
+          "sections": [
+            "exploring-the-info-panel",
+            "defining-features-across-families"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "exploring-the-info-panel",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "domain_restriction"
+          }
         },
         {
-          "term": "horizontal asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "domains",
+          "entity": "domain",
+          "sections": [
+            "reading-the-plot-and-equation-badge",
+            "what-is-a-function-family"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-plot-and-equation-badge",
+              "surface": "domains",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "periodicity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "end behavior",
+          "entity": "end_behavior",
+          "sections": [
+            "what-is-a-function-family",
+            "defining-features-across-families"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-is-a-function-family",
+            "target": {
+              "path": "/algebra/polynomials/graphing",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "end_behavior"
+          }
         },
         {
-          "term": "domain",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-gallery",
+            "reading-the-plot-and-equation-badge",
+            "what-is-a-function-family",
+            "defining-features-across-families",
+            "the-linear-family",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-gallery",
+              "surface": "function",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "inflection point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "inflection_point",
+          "sections": [
+            "browsing-the-family-picker",
+            "exploring-the-info-panel"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "browsing-the-family-picker",
+            "target": {
+              "path": "/calculus/derivatives/graph-analysis",
+              "section": "8"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "inflection_point"
+          }
         },
         {
-          "term": "vertex",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "leading coefficient",
+          "entity": "leading_coefficient",
+          "sections": [
+            "adjusting-parameters-with-the-sliders"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "adjusting-parameters-with-the-sliders",
+            "target": {
+              "path": "/algebra/polynomials",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "leading_coefficient"
+          }
         },
         {
-          "term": "discriminant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "logarithmic functions",
+          "entity": "logarithmic_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/algebra/logarithms/graphs",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "logarithmic_function"
+          }
+        },
+        {
+          "term": "phase shifts",
+          "entity": "phase_shift",
+          "sections": [
+            "the-trigonometric-group"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-trigonometric-group",
+            "target": {
+              "path": "/trigonometry/graphs",
+              "section": "8"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "phase_shift"
+          }
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "how-to-compare-families"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "how-to-compare-families",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "adjusting-parameters-with-the-sliders",
+            "reading-the-plot-and-equation-badge",
+            "the-square-root-family"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "adjusting-parameters-with-the-sliders",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/calculus/derivatives/graph-analysis",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          }
+        },
+        {
+          "term": "the natural logarithm",
+          "entity": "natural_logarithm",
+          "sections": [
+            "the-logarithmic-family"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-logarithmic-family",
+            "target": {
+              "path": "/algebra/logarithms/common-natural",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "natural_logarithm"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-asymptotes",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "asymptote",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "composition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "domain",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "inverse function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "range",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "reflections",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-tangent-line",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Tangent Line Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "what-is-a-function-family",
+          "surface": "symmetry",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -3483,88 +4009,486 @@
       },
       "relatedTerms": [
         {
-          "term": "asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complements",
+          "entity": "complement",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "vertical asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "horizontal asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "oblique-asymptotes",
+            "what-is-an-asymptote",
+            "families-with-both-asymptote-types",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "oblique asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "oblique-asymptotes",
+            "what-is-an-asymptote",
+            "families-with-both-asymptote-types",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "one-sided limit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "discontinuity",
+          "entity": "discontinuity",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "limit at infinity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "division",
+          "entity": "complex_number",
+          "sections": [
+            "what-is-an-asymptote",
+            "families-with-vertical-asymptotes-only",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "rational function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "reading-the-plot"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "logarithmic function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "reading-the-plot",
+            "the-detected-asymptotes-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "one-sided-limits-at-vertical-asymptotes",
+            "oblique-asymptotes",
+            "why-asymptotes-matter",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "families-with-vertical-asymptotes-only"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "numerator",
+          "entity": "numerator",
+          "sections": [
+            "oblique-asymptotes",
+            "what-is-an-asymptote"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "families-with-vertical-asymptotes-only"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "oblique-asymptotes",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "the-detected-asymptotes-panel",
+            "transforming-and-tracking-asymptotes",
+            "the-reciprocal-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "tangent",
+          "sections": [
+            "transforming-and-tracking-asymptotes",
+            "families-with-vertical-asymptotes-only",
+            "the-tangent-family",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "arctangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "variable",
+          "entity": "variable",
+          "sections": [
+            "what-is-an-asymptote"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "logistic function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "exponential decay",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "end behavior",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-function",
+            "reading-the-plot",
+            "the-detected-asymptotes-panel",
+            "one-sided-limits-at-vertical-asymptotes",
+            "transforming-and-tracking-asymptotes",
+            "oblique-asymptotes",
+            "what-is-an-asymptote",
+            "why-asymptotes-matter",
+            "families-with-vertical-asymptotes-only",
+            "the-logarithmic-family",
+            "the-tangent-family",
+            "families-with-horizontal-asymptotes-only",
+            "exponential-decay",
+            "the-bell-curve",
+            "the-arctangent-function",
+            "the-logistic-curve",
+            "families-with-both-asymptote-types",
+            "the-reciprocal-function",
+            "the-shifted-rational-function",
+            "the-three-branch-rational-function",
+            "the-classic-oblique-function",
+            "the-oblique-rational-function",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "asymptotes",
+              "target": {
+                "path": "/functions/properties",
+                "section": "13"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "domain",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "domain",
+          "sections": [
+            "what-is-an-asymptote",
+            "families-with-vertical-asymptotes-only",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-an-asymptote",
+              "surface": "domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "end behavior",
+          "entity": "end_behavior",
+          "sections": [
+            "what-is-an-asymptote"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-is-an-asymptote",
+            "target": {
+              "path": "/algebra/polynomials/graphing",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "end_behavior"
+          }
+        },
+        {
+          "term": "exponential functions",
+          "entity": "exponential_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/algebra/powers/exponential-functions",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "exponential_function"
+          }
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-function",
+            "reading-the-plot",
+            "one-sided-limits-at-vertical-asymptotes",
+            "oblique-asymptotes",
+            "what-is-an-asymptote",
+            "why-asymptotes-matter",
+            "families-with-vertical-asymptotes-only",
+            "families-with-horizontal-asymptotes-only",
+            "the-bell-curve",
+            "the-arctangent-function",
+            "the-logistic-curve",
+            "families-with-both-asymptote-types",
+            "the-three-branch-rational-function",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "functions",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "logarithmic functions",
+          "entity": "logarithmic_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/algebra/logarithms/graphs",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "logarithmic_function"
+          }
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "the-detected-asymptotes-panel",
+            "one-sided-limits-at-vertical-asymptotes",
+            "why-asymptotes-matter",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/calculus/limits/one-sided",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "one_sided_limit"
+          }
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "the natural logarithm",
+          "entity": "natural_logarithm",
+          "sections": [
+            "the-logarithmic-family"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-logarithmic-family",
+            "target": {
+              "path": "/algebra/logarithms/common-natural",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "natural_logarithm"
+          }
+        },
+        {
+          "term": "transformation",
+          "entity": "transformation",
+          "sections": [
+            "transforming-and-tracking-asymptotes"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "transforming-and-tracking-asymptotes",
+              "surface": "transformation",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Domain of a Function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Range of a Function",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Symmetry",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Functions Families Gallery",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "picking-a-function",
+          "surface": "transformation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -3598,64 +4522,487 @@
       },
       "relatedTerms": [
         {
-          "term": "function composition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "composition operator",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "special-cases-the-tool-highlights"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "inverse functions",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "composing-with-cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "identity function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "why-composition-matters"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "chain rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "special-cases-the-tool-highlights",
+            "composing-with-the-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "the-legend-chips"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "expressions",
+          "entity": "expression",
+          "sections": [
+            "the-legend-chips",
+            "composition-notation"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "special-cases-the-tool-highlights",
+            "why-composition-matters",
+            "composing-with-the-identity",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "composing-with-the-logarithm"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomials",
+          "entity": "polynomial",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "domain-restrictions-in-composition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "domain-restrictions-in-composition",
+            "composing-with-the-reciprocal"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "what-is-function-composition",
+            "composing-with-sine",
+            "composing-with-cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "variables",
+          "entity": "variable",
+          "sections": [
+            "what-is-function-composition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "composing-with-the-absolute-value"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "composing-with-the-absolute-value",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
         },
         {
           "term": "domain",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "domain",
+          "sections": [
+            "what-is-function-composition",
+            "composing-with-the-square-root",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-function-composition",
+              "surface": "domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "commutativity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "domain restrictions",
+          "entity": "domain_restriction",
+          "sections": [
+            "domain-restrictions-in-composition"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "domain-restrictions-in-composition",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "domain_restriction"
+          }
         },
         {
-          "term": "iteration",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "even functions",
+          "entity": "even_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "even_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "even functions",
+              "target": {
+                "path": "/functions/properties",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "even function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-outer-and-inner-functions",
+            "the-legend-chips",
+            "why-order-matters",
+            "special-cases-the-tool-highlights",
+            "domain-restrictions-in-composition",
+            "composition-notation",
+            "what-is-function-composition",
+            "why-composition-matters",
+            "composing-with-the-identity",
+            "composing-with-the-quadratic",
+            "composing-with-the-exponential",
+            "composing-with-the-logarithm",
+            "composing-with-the-square-root",
+            "composing-a-function-with-itself",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "functions",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "odd function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "inverse functions",
+          "entity": "inverse_function",
+          "sections": [
+            "what-is-function-composition",
+            "why-composition-matters"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "inverse_function"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-function-composition",
+              "surface": "inverse functions",
+              "target": {
+                "path": "/functions/inverse",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "odd functions",
+          "entity": "odd_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "odd_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "odd functions",
+              "target": {
+                "path": "/functions/properties",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "piecewise_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "piecewise function",
+              "target": {
+                "path": "/functions/piecewise",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "reflection"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "reflection",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "composing-with-the-square-root"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "composing-with-the-square-root",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "what-is-function-composition",
+            "why-composition-matters"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-function-composition",
+              "surface": "transformations",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Domain of a Function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Inverse Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-piecewise",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Piecewise Function Builder",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Reflections",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Symmetry",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "function families",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-asymptotes",
+          "fromSection": "domain-restrictions-in-composition",
+          "surface": "vertical asymptote",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -3687,70 +5034,595 @@
       },
       "relatedTerms": [
         {
-          "term": "domain",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "the-sine-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "range",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "open-vs-closed-endpoints-and-excluded-values",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "open interval",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "what-is-the-domain-of-a-function",
+            "the-cosine-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "closed interval",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "division",
+          "entity": "complex_number",
+          "sections": [
+            "what-is-the-domain-of-a-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "excluded value",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "elements",
+          "entity": "element",
+          "sections": [
+            "customizing-the-highlight-color"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "interval notation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "exponent",
+          "entity": "exponent",
+          "sections": [
+            "the-exponential-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "logarithmic function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "expression",
+          "entity": "expression",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "square root function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "the-identity-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "open-vs-closed-endpoints-and-excluded-values",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "what-is-the-domain-of-a-function",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "the-logarithm-and-its-open-boundary"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "the-cosine-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomials",
+          "entity": "polynomial",
+          "sections": [
+            "what-is-the-domain-of-a-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "reciprocal",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reciprocal",
+          "sections": [
+            "reading-the-x-axis-highlight-and-domain-bar",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "the-reciprocal-and-its-excluded-point",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "vertical asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "what-is-the-domain-of-a-function",
+            "the-sine-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "one-sided limit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "reading-the-x-axis-highlight-and-domain-bar"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "union",
+          "entity": "union",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "the-absolute-value-function"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-absolute-value-function",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
+        },
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "open-vs-closed-endpoints-and-excluded-values",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "open-vs-closed-endpoints-and-excluded-values",
+              "surface": "asymptote",
+              "target": {
+                "path": "/functions/properties",
+                "section": "13"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-function",
+            "why-only-b-and-h-change-the-domain",
+            "reading-the-x-axis-highlight-and-domain-bar",
+            "probing-with-the-test-point-slider",
+            "the-domain-card-and-applied-chips",
+            "customizing-the-highlight-color",
+            "what-is-the-domain-of-a-function",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "functions-defined-on-all-of-the-reals",
+            "the-identity-function",
+            "the-quadratic-function",
+            "the-exponential-function",
+            "the-sine-function",
+            "the-absolute-value-function",
+            "the-restricted-families",
+            "the-logarithm-and-its-open-boundary",
+            "the-square-root-and-its-closed-boundary",
+            "the-reciprocal-and-its-excluded-point",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "domain restrictions",
+          "entity": "domain_restriction",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "what-is-the-domain-of-a-function"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "domain_restriction"
+          }
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-function",
+            "why-only-b-and-h-change-the-domain",
+            "reading-the-x-axis-highlight-and-domain-bar",
+            "probing-with-the-test-point-slider",
+            "what-is-the-domain-of-a-function",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "functions-defined-on-all-of-the-reals",
+            "the-restricted-families",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "functions",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "horizontal reflection",
+          "entity": "horizontal_reflection",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/formulas",
+            "section": "horizontal_reflection"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "horizontal reflection",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "interval notation",
+          "entity": "interval_notation",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "the-domain-card-and-applied-chips"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/algebra/inequalities",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "interval_notation"
+          }
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/calculus/limits/one-sided",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "one_sided_limit"
+          }
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "piecewise_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "piecewise function",
+              "target": {
+                "path": "/functions/piecewise",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "why-only-b-and-h-change-the-domain",
+            "probing-with-the-test-point-slider",
+            "what-is-the-domain-of-a-function",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "why-only-b-and-h-change-the-domain",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "what-is-the-domain-of-a-function",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "the-square-root-and-its-closed-boundary"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-is-the-domain-of-a-function",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/calculus/derivatives/graph-analysis",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          }
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "picking-a-function",
+            "why-only-b-and-h-change-the-domain",
+            "the-domain-card-and-applied-chips"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-function",
+              "surface": "transformations",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "vertical reflection",
+          "entity": "vertical_reflection",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/formulas",
+            "section": "vertical_reflection"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "vertical reflection",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-asymptotes",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Asymptotes",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Inverse Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-piecewise",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Piecewise Function Builder",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Range of a Function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Reflections",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "even and odd symmetry",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-tangent-line",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Tangent Line Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Functions Families Gallery",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -3782,70 +5654,541 @@
       },
       "relatedTerms": [
         {
-          "term": "range",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "ranges-bounded-on-both-sides"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "open-vs-closed-endpoints-and-excluded-values"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "the-absolute-value-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "the-cosine-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "reading-the-y-axis-highlight-and-range-bar"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "elements",
+          "entity": "element",
+          "sections": [
+            "customizing-the-highlight-color"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "what-is-the-range-of-a-function",
+            "the-identity-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "ranges-covering-all-of-the-reals",
+            "the-logarithmic-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "the-cubic-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "reading-the-y-axis-highlight-and-range-bar",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "the-reciprocal-and-its-missing-output",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "the-sine-function",
+            "the-cosine-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solution",
+          "entity": "solution",
+          "sections": [
+            "the-reciprocal-and-its-missing-output"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "reading-the-y-axis-highlight-and-range-bar"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "union",
+          "entity": "union",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "picking-a-function",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-function",
+              "surface": "asymptote",
+              "target": {
+                "path": "/functions/properties",
+                "section": "13"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "domain",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "domain",
+          "sections": [
+            "picking-a-function",
+            "what-is-the-range-of-a-function",
+            "ranges-covering-all-of-the-reals",
+            "the-logarithmic-function",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-function",
+              "surface": "Domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "bounded function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "even function",
+          "entity": "even_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "even_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "even function",
+              "target": {
+                "path": "/functions/properties",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "amplitude",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-function",
+            "why-only-a-and-k-change-the-range",
+            "reading-the-y-axis-highlight-and-range-bar",
+            "what-is-the-range-of-a-function",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "ranges-covering-all-of-the-reals",
+            "ranges-bounded-below",
+            "ranges-bounded-on-both-sides",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "functions",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "horizontal asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "horizontal reflection",
+          "entity": "horizontal_reflection",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/formulas",
+            "section": "horizontal_reflection"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "horizontal reflection",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "onto function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "interval notation",
+          "entity": "interval_notation",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "the-range-card-and-applied-chips"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/algebra/inequalities",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "interval_notation"
+          }
         },
         {
-          "term": "attained value",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "periodic functions",
+          "entity": "periodic_function",
+          "sections": [
+            "picking-a-function"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "picking-a-function",
+            "target": {
+              "path": "/trigonometry/properties",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "periodic_function"
+          }
         },
         {
-          "term": "open interval",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "piecewise_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "piecewise function",
+              "target": {
+                "path": "/functions/piecewise",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "closed interval",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-function",
+            "why-only-a-and-k-change-the-range",
+            "reading-the-y-axis-highlight-and-range-bar",
+            "probing-with-the-test-point-slider",
+            "the-range-card-and-applied-chips",
+            "customizing-the-highlight-color",
+            "what-is-the-range-of-a-function",
+            "open-vs-closed-endpoints-and-excluded-values",
+            "ranges-covering-all-of-the-reals",
+            "the-identity-function",
+            "the-scaled-linear-function",
+            "the-logarithmic-function",
+            "the-absolute-value-function",
+            "the-square-root-function",
+            "the-exponential-function",
+            "ranges-bounded-on-both-sides",
+            "the-cosine-function",
+            "the-reciprocal-and-its-missing-output",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "excluded value",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "open-vs-closed-endpoints-and-excluded-values",
+            "the-square-root-function"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "open-vs-closed-endpoints-and-excluded-values",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
         },
         {
-          "term": "vertex",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "the natural logarithm",
+          "entity": "natural_logarithm",
+          "sections": [
+            "what-is-the-range-of-a-function"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-is-the-range-of-a-function",
+            "target": {
+              "path": "/algebra/logarithms/common-natural",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "natural_logarithm"
+          }
+        },
+        {
+          "term": "transformation",
+          "entity": "transformation",
+          "sections": [
+            "picking-a-function",
+            "why-only-a-and-k-change-the-range",
+            "the-range-card-and-applied-chips",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-function",
+              "surface": "Transformation",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "vertical reflection",
+          "entity": "vertical_reflection",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/formulas",
+            "section": "vertical_reflection"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "vertical reflection",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-asymptotes",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Asymptotes",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Domain of a Function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Inverse Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-piecewise",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Piecewise Function Builder",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Reflections",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Symmetry",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Functions Families Gallery",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -3877,76 +6220,449 @@
       },
       "relatedTerms": [
         {
-          "term": "inverse function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "the-horizontal-line-test-and-restricted-branches",
+            "cosine-and-the-arccosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "horizontal line test",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "one-to-one function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "transforming-the-function",
+            "the-applied-chip-strip-and-show-toggles",
+            "the-info-panel-three-tabs",
+            "how-transformations-of-f-become-transformations-of-f-1"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "restricted branch",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "the-info-panel-three-tabs",
+            "what-is-an-inverse-function",
+            "the-horizontal-line-test-and-restricted-branches",
+            "functions-that-are-their-own-inverse",
+            "the-identity-and-its-inverse",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "principal value",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "the-logarithm-and-the-exponential",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "arcsine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "picking-a-base-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "arccosine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "functions-that-are-their-own-inverse",
+            "the-reciprocal-and-its-inverse",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "self-inverse",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "the-horizontal-line-test-and-restricted-branches",
+            "sine-and-the-arcsine",
+            "cosine-and-the-arccosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "mirror line",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "the-horizontal-line-test-and-restricted-branches"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
+        },
+        {
+          "term": "cube root",
+          "entity": "cube_root",
+          "sections": [
+            "the-cubic-and-the-cube-root"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-cubic-and-the-cube-root",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "cube_root"
+          }
         },
         {
           "term": "domain",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "domain",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "what-is-an-inverse-function"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "transforming-the-function",
+            "reading-the-plot",
+            "the-applied-chip-strip-and-show-toggles",
+            "the-info-panel-three-tabs",
+            "what-is-an-inverse-function",
+            "the-horizontal-line-test-and-restricted-branches",
+            "the-cubic-and-the-cube-root",
+            "the-reciprocal-and-its-inverse",
+            "the-logarithm-and-the-exponential",
+            "the-absolute-value-and-its-inverse",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "functions",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "inverse functions",
+          "entity": "inverse_function",
+          "sections": [
+            "the-applied-chip-strip-and-show-toggles",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "inverse_function"
+          },
+          "links": [
+            {
+              "fromSection": "the-applied-chip-strip-and-show-toggles",
+              "surface": "inverse functions",
+              "target": {
+                "path": "/functions/inverse",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "inverse trigonometric functions",
+          "entity": "inverse_trigonometric_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/trigonometry/inverse-functions",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "inverse_trigonometric_function"
+          }
+        },
+        {
+          "term": "odd function",
+          "entity": "odd_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "odd_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "odd function",
+              "target": {
+                "path": "/functions/properties",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "one-to-one functions",
+          "entity": "one_to_one_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "one_to_one_function"
+          },
+          "reason": "Not planted in \"related-concepts-and-tools\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
           "term": "range",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "range",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "monotonic function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "transforming-the-function",
+            "reading-the-plot",
+            "the-info-panel-three-tabs",
+            "what-is-an-inverse-function"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "reflection"
+          },
+          "reason": "Not planted in \"transforming-the-function\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "the natural logarithm",
+          "entity": "natural_logarithm",
+          "sections": [
+            "the-exponential-and-the-logarithm"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-exponential-and-the-logarithm",
+            "target": {
+              "path": "/algebra/logarithms/common-natural",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "natural_logarithm"
+          }
+        },
+        {
+          "term": "transformation",
+          "entity": "transformation",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "transforming-the-function",
+            "the-applied-chip-strip-and-show-toggles",
+            "the-info-panel-three-tabs",
+            "how-transformations-of-f-become-transformations-of-f-1",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "transformation",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Composition of Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "domain",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Range of a Function",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "reflection",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Symmetry",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-tangent-line",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Tangent Line Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Functions Families Gallery",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -3973,70 +6689,257 @@
       },
       "relatedTerms": [
         {
-          "term": "piecewise function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "jump discontinuity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "removable discontinuity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
           "term": "continuity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "continuity",
+          "sections": [
+            "continuity-at-a-boundary",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "one-sided limit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "discontinuity",
+          "entity": "discontinuity",
+          "sections": [
+            "getting-started",
+            "reading-the-boundary-report",
+            "continuity-at-a-boundary",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "open interval",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "adding-new-pieces",
+            "the-verdict-panel",
+            "reading-the-boundary-report",
+            "continuity-at-a-boundary",
+            "common-piecewise-patterns",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "closed interval",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "partition",
+          "entity": "partition",
+          "sections": [
+            "what-is-a-piecewise-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "Heaviside step",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "union",
+          "entity": "union",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "sign function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "getting-started"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
         },
         {
           "term": "absolute value function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "absolute_value_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "absolute_value_function"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "sawtooth",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "getting-started",
+            "editing-individual-pieces",
+            "adding-new-pieces",
+            "the-verdict-panel",
+            "reading-the-boundary-report",
+            "continuity-at-a-boundary",
+            "common-piecewise-patterns",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "reason": "Not planted in \"getting-started\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "interval notation",
+          "entity": "interval_notation",
+          "sections": [
+            "open-vs-closed-endpoints"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "open-vs-closed-endpoints",
+            "target": {
+              "path": "/algebra/inequalities",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "interval_notation"
+          }
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "continuity-at-a-boundary"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "continuity-at-a-boundary",
+            "target": {
+              "path": "/calculus/limits/one-sided",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "one_sided_limit"
+          }
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "key-terms",
+            "what-is-a-piecewise-function",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "piecewise_function"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "getting-started",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Piecewise function",
+              "target": {
+                "path": "/functions/definitions",
+                "section": "piecewise_function"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts",
+          "surface": "composition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts",
+          "surface": "domain",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "related-concepts",
+          "surface": "range",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "related-concepts",
+          "surface": "Function Reflections",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts",
+          "surface": "transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -4064,64 +6967,476 @@
       },
       "relatedTerms": [
         {
-          "term": "reflection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "input-reflection-fx"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "axis of symmetry",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corners",
+          "entity": "differentiability",
+          "sections": [
+            "partial-reflections-fx-and-fx2"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "even function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "choosing-a-base-function",
+            "the-y-x-reflection-and-multivalued-inverses"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "odd function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "getting-started",
+            "choosing-a-base-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "inverse function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "choosing-a-base-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "mirror line",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "the-y-x-reflection-and-multivalued-inverses",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "the-y-x-reflection-and-multivalued-inverses"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "roots",
+          "entity": "root",
+          "sections": [
+            "partial-reflections-fx-and-fx2"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "choosing-a-base-function",
+            "the-y-x-reflection-and-multivalued-inverses",
+            "partial-reflections-fx-and-fx2"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "absolute value",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "absolute_value",
+          "sections": [
+            "the-y-x-reflection-and-multivalued-inverses",
+            "partial-reflections-fx-and-fx2"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-y-x-reflection-and-multivalued-inverses",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
         },
         {
-          "term": "multivalued",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "absolute value function",
+          "entity": "absolute_value_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "absolute_value_function"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "fixed point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "domains",
+          "entity": "domain",
+          "sections": [
+            "choosing-a-base-function"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "reason": "Not planted in \"choosing-a-base-function\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "horizontal line test",
+          "term": "even function",
+          "entity": "even_function",
+          "sections": [
+            "key-terms",
+            "choosing-a-base-function",
+            "reflections-symmetry-and-function-types"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "even_function"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "getting-started",
+            "the-y-x-reflection-and-multivalued-inverses",
+            "what-is-a-reflection",
+            "reflections-symmetry-and-function-types"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "reason": "Not planted in \"getting-started\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "inverse function",
+          "entity": "inverse_function",
+          "sections": [
+            "key-terms",
+            "the-seven-reflection-tabs",
+            "reflection-across-the-line-y-x"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "inverse_function"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "odd function",
+          "entity": "odd_function",
+          "sections": [
+            "key-terms",
+            "reflections-symmetry-and-function-types",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "odd_function"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "key-terms",
+            "the-parameter-tabs-y-c-and-x-c",
+            "what-is-a-reflection"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/trigonometry/right-triangle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          }
+        },
+        {
+          "term": "parent functions",
+          "entity": "parent_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "parent_function"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "manual-vs-auto-mode"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "manual-vs-auto-mode",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "choosing-a-base-function",
+            "the-y-x-reflection-and-multivalued-inverses"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "choosing-a-base-function",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "translation",
+          "entity": "translation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "translation"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "translation",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Reflection",
+              "target": {
+                "path": "/functions/definitions",
+                "section": "reflection"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "even function",
+          "entity": "even_function",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Even function",
+              "target": {
+                "path": "/functions/definitions",
+                "section": "even_function"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "odd function",
+          "entity": "odd_function",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Odd function",
+              "target": {
+                "path": "/functions/definitions",
+                "section": "odd_function"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "one-to-one",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "One-to-one",
+              "target": {
+                "path": "/functions/inverse",
+                "section": "8"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "inverse function",
+          "entity": "inverse_function",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Inverse function",
+              "target": {
+                "path": "/functions/definitions",
+                "section": "inverse_function"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts",
+          "surface": "Composition of Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Inverse Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "related-concepts",
+          "surface": "symmetry",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "choosing-a-base-function",
+          "surface": "domain",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-piecewise",
+          "fromSection": "what-is-a-reflection",
+          "surface": "Partial or piecewise reflections",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "the-parameter-tabs-y-c-and-x-c",
+          "surface": "range",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "choosing-a-base-function",
+          "surface": "function families",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -4153,64 +7468,482 @@
       },
       "relatedTerms": [
         {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "symmetry-of-cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "symmetry-of-cosine",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "exponents",
+          "entity": "exponent",
+          "sections": [
+            "what-even-and-odd-mean"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identities",
+          "entity": "identity",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "intersection",
+          "entity": "intersection",
+          "sections": [
+            "intersection-markers"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "picking-a-function",
+            "functions-with-neither-symmetry",
+            "symmetry-of-the-logarithm"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "picking-a-function",
+            "what-even-and-odd-mean",
+            "functions-with-neither-symmetry"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "symmetry-of-the-cubic"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "root",
+          "entity": "root",
+          "sections": [
+            "functions-with-neither-symmetry"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "symmetry-of-sine",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "the-derivation-block"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "symmetry-of-the-absolute-value"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "symmetry-of-the-absolute-value",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
+        },
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "asymptotes",
+              "target": {
+                "path": "/functions/properties",
+                "section": "13"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "axis of symmetry",
+          "entity": "axis_of_symmetry",
+          "sections": [
+            "transforming-and-breaking-symmetry"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/formulas",
+            "section": "axis_of_symmetry"
+          },
+          "links": [
+            {
+              "fromSection": "transforming-and-breaking-symmetry",
+              "surface": "axis of symmetry",
+              "target": {
+                "path": "/functions/families",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "what-even-and-odd-mean",
+            "functions-with-neither-symmetry",
+            "symmetry-of-the-exponential"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "what-even-and-odd-mean",
+              "surface": "domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
           "term": "even function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "even_function",
+          "sections": [
+            "why-transformations-break-symmetry",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "even_function"
+          },
+          "links": [
+            {
+              "fromSection": "why-transformations-break-symmetry",
+              "surface": "even function",
+              "target": {
+                "path": "/functions/properties",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "odd function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-function",
+            "the-three-curves-and-what-overlaps-mean",
+            "the-verdict-card",
+            "the-derivation-block",
+            "intersection-markers",
+            "what-even-and-odd-mean",
+            "why-transformations-break-symmetry",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "functions",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "symmetry",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "odd functions",
+          "entity": "odd_function",
+          "sections": [
+            "intersection-markers",
+            "transforming-and-breaking-symmetry",
+            "what-even-and-odd-mean",
+            "why-transformations-break-symmetry",
+            "symmetry-of-the-identity",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "odd_function"
+          },
+          "links": [
+            {
+              "fromSection": "intersection-markers",
+              "surface": "odd functions",
+              "target": {
+                "path": "/functions/properties",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "y-axis symmetry",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "origin symmetry",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "parity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "even-odd decomposition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "hyperbolic functions",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "periodic functions",
+          "entity": "periodic_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/trigonometry/properties",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "periodic_function"
+          }
         },
         {
           "term": "reflection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reflection",
+          "sections": [
+            "what-even-and-odd-mean",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "reflection"
+          },
+          "links": [
+            {
+              "fromSection": "what-even-and-odd-mean",
+              "surface": "reflection",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "point symmetry",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "picking-a-function",
+            "symmetry-of-the-square-root",
+            "symmetry-of-the-logarithm"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "picking-a-function",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "transformation",
+          "entity": "transformation",
+          "sections": [
+            "picking-a-function",
+            "the-derivation-block",
+            "transforming-and-breaking-symmetry",
+            "why-transformations-break-symmetry"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-function",
+              "surface": "Transformation",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "symmetry-of-cosine"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "symmetry-of-cosine",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-asymptotes",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Asymptotes",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Domain of a Function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Inverse Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Range of a Function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Reflections",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Functions Families Gallery",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -4242,70 +7975,531 @@
       },
       "relatedTerms": [
         {
-          "term": "tangent line",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "derivative",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "slope",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "instantaneous rate of change",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "point-slope form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "critical point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "vertical tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "basis",
+          "entity": "basis",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "corner",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "differentiability",
+          "sections": [
+            "picking-a-base-function",
+            "dragging-x0-the-tangent-point",
+            "the-info-panel",
+            "when-the-tangent-fails-to-exist",
+            "tangent-to-the-absolute-value",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "differentiability",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "picking-a-base-function",
+            "tangent-to-cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "small-angle approximation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "derivatives",
+          "entity": "derivative",
+          "sections": [
+            "picking-a-base-function",
+            "transforming-the-base-function",
+            "reading-the-tangent-equation-card",
+            "the-info-panel",
+            "what-the-tangent-line-is",
+            "when-the-tangent-fails-to-exist",
+            "tangent-to-the-scaled-linear",
+            "tangent-to-the-cubic",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "chain rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "dragging-x0-the-tangent-point",
+            "the-applied-chip-strip-and-visibility-toggles",
+            "the-info-panel",
+            "when-the-tangent-fails-to-exist"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "intercept",
+          "entity": "constant_term",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "reading-the-tangent-equation-card",
+            "the-info-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "the-info-panel",
+            "what-the-tangent-line-is",
+            "tangent-to-the-scaled-linear",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "when-the-tangent-fails-to-exist",
+            "tangent-to-the-logarithm"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "tangent-to-cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "pivots",
+          "entity": "pivot",
+          "sections": [
+            "dragging-x0-the-tangent-point"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "picking-a-base-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "when-the-tangent-fails-to-exist",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-info-panel",
+            "what-the-tangent-line-is",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "picking-a-base-function",
+            "tangent-to-sine",
+            "tangent-to-cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangents",
+          "entity": "tangent",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "transforming-the-base-function",
+            "dragging-x0-the-tangent-point",
+            "reading-the-tangent-equation-card",
+            "the-applied-chip-strip-and-visibility-toggles",
+            "the-info-panel",
+            "when-the-tangent-fails-to-exist",
+            "tangent-to-the-identity",
+            "tangent-to-the-quadratic",
+            "tangent-to-the-cubic",
+            "tangent-to-the-reciprocal",
+            "tangent-to-the-exponential",
+            "tangent-to-the-logarithm",
+            "tangent-to-the-square-root",
+            "tangent-to-the-absolute-value",
+            "tangent-to-sine",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "picking-a-base-function"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "picking-a-base-function",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
+        },
+        {
+          "term": "absolute value function",
+          "entity": "absolute_value_function",
+          "sections": [
+            "when-the-tangent-fails-to-exist"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "absolute_value_function"
+          },
+          "links": [
+            {
+              "fromSection": "when-the-tangent-fails-to-exist",
+              "surface": "absolute value function",
+              "target": {
+                "path": "/functions/families",
+                "section": "12"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "critical point",
+          "entity": "critical_point",
+          "sections": [
+            "dragging-x0-the-tangent-point",
+            "reading-the-tangent-equation-card",
+            "the-info-panel",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "dragging-x0-the-tangent-point",
+            "target": {
+              "path": "/algebra/inequalities/rational",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "critical_point"
+          }
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "dragging-x0-the-tangent-point",
+            "the-info-panel",
+            "when-the-tangent-fails-to-exist",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "dragging-x0-the-tangent-point",
+              "surface": "domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "transforming-the-base-function",
+            "dragging-x0-the-tangent-point",
+            "the-applied-chip-strip-and-visibility-toggles",
+            "what-the-tangent-line-is",
+            "tangent-to-the-identity",
+            "tangent-to-the-scaled-linear",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "function",
+              "target": {
+                "path": "/functions/basics",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "instantaneous rate of change",
+          "entity": "instantaneous_rate_of_change",
+          "sections": [
+            "what-the-tangent-line-is"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-the-tangent-line-is",
+            "target": {
+              "path": "/calculus/derivatives/function",
+              "section": "6"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "instantaneous_rate_of_change"
+          }
+        },
+        {
+          "term": "inverse functions",
+          "entity": "inverse_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "inverse_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "inverse functions",
+              "target": {
+                "path": "/functions/inverse",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "linear approximation",
+          "entity": "differential",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/calculus/derivatives/differentials",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "differential"
+          }
+        },
+        {
+          "term": "local extremum",
+          "entity": "local_extremum",
+          "sections": [
+            "the-info-panel"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-info-panel",
+            "target": {
+              "path": "/calculus/derivatives/graph-analysis",
+              "section": "5"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "local_extremum"
+          }
+        },
+        {
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "picking-a-base-function",
+            "when-the-tangent-fails-to-exist",
+            "tangent-to-the-square-root"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "picking-a-base-function",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "dragging-x0-the-tangent-point",
+            "reading-the-tangent-equation-card",
+            "the-applied-chip-strip-and-visibility-toggles",
+            "the-info-panel",
+            "what-the-tangent-line-is",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/calculus/derivatives/graph-analysis",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          }
+        },
+        {
+          "term": "taylor series",
+          "entity": "higher_order_derivative",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/calculus/derivatives/higher-order",
+              "section": "8"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "higher_order_derivative"
+          }
+        },
+        {
+          "term": "transformation",
+          "entity": "transformation",
+          "sections": [
+            "picking-a-base-function",
+            "transforming-the-base-function",
+            "the-applied-chip-strip-and-visibility-toggles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-base-function",
+              "surface": "transformation",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Domain of a Function",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Inverse Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-transformations",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Transformations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Functions Families Gallery",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },
@@ -4331,70 +8525,450 @@
       },
       "relatedTerms": [
         {
-          "term": "function transformation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "the-side-info-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "vertical scale",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "vertical shift",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "manual-vs-auto-mode",
+            "reading-the-two-curves",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "horizontal scale",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "inequality",
+          "entity": "inequality",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "horizontal shift",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "intercepts",
+          "entity": "constant_term",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "stretch",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "the-four-tabs-and-the-custom-tab",
+            "the-applied-chip-strip"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "compression",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "the-side-info-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "the-side-info-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "why-horizontal-transformations-are-backwards"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value",
+          "entity": "absolute_value",
+          "sections": [
+            "getting-started-with-the-visualizer"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
+        },
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "picking-a-base-function",
+            "the-side-info-panel"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-base-function",
+              "surface": "asymptote",
+              "target": {
+                "path": "/functions/properties",
+                "section": "13"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "composition of functions",
+          "entity": "composition_of_functions",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "composition_of_functions"
+          },
+          "reason": "Not planted in \"related-concepts-and-tools\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "picking-a-base-function"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "domain"
+          },
+          "links": [
+            {
+              "fromSection": "picking-a-base-function",
+              "surface": "domain",
+              "target": {
+                "path": "/functions/domain",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "end behavior",
+          "entity": "end_behavior",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/algebra/polynomials/graphing",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "end_behavior"
+          }
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "reading-the-two-curves",
+            "the-side-info-panel",
+            "the-four-transformations-mathematically",
+            "why-horizontal-transformations-are-backwards",
+            "the-horizontal-scale",
+            "combining-all-four-transformations",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "function"
+          },
+          "reason": "Not planted in \"getting-started-with-the-visualizer\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "parent functions",
+          "entity": "parent_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "parent_function"
+          },
+          "reason": "Not planted in \"related-concepts-and-tools\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "piecewise_function"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "piecewise function",
+              "target": {
+                "path": "/functions/piecewise",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "manual-vs-auto-mode"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "range"
+          },
+          "links": [
+            {
+              "fromSection": "manual-vs-auto-mode",
+              "surface": "range",
+              "target": {
+                "path": "/functions/range",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "reflection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reflection",
+          "sections": [
+            "the-four-transformations-mathematically"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "reflection"
+          },
+          "reason": "Not planted in \"the-four-transformations-mathematically\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "rigid motion",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-visualizer",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
         },
         {
-          "term": "parent function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/calculus/derivatives/graph-analysis",
+              "section": "2"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          }
         },
         {
-          "term": "composition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "transformation",
+          "entity": "transformation",
+          "sections": [
+            "getting-started-with-the-visualizer",
+            "picking-a-base-function",
+            "the-four-tabs-and-the-custom-tab",
+            "manual-vs-auto-mode",
+            "reading-the-two-curves",
+            "the-applied-chip-strip",
+            "the-side-info-panel",
+            "the-four-transformations-mathematically",
+            "why-horizontal-transformations-are-backwards",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "transformation"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-visualizer",
+              "surface": "transformation",
+              "target": {
+                "path": "/functions/transformations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-asymptotes",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "asymptotes",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-composition",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "function composition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-domain",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "domain",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-inverse",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Inverse Functions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-piecewise",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Piecewise Function Builder",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-range",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "range",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-symmetry",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Function Symmetry",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-tangent-line",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Tangent Line Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-types",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Functions Families Gallery",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
+        },
+        {
+          "key": "functions-reflections",
+          "fromSection": "the-side-info-panel",
+          "surface": "reflections",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-20"
         }
       ]
     },

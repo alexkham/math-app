@@ -14,6 +14,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionComposition from '../../../../app/components/functions/compositions/FunctionCompositions'
 import compDiagrams from '../../../../app/components/functions/compositions/functionCompositionDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -40,7 +42,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left, the **picker** is split into two halves: **Outer ($f$)** at the top and **Inner ($g$)** below. Each lists ten base functions. In the center, the **plot panel** shows up to four curves:
+      content: `Open the page and three panels appear. On the left, the **picker** is split into two halves: **Outer ($f$)** at the top and **Inner ($g$)** below. Each lists ten base [functions](!/functions/basics#1). In the center, the **plot panel** shows up to four curves:
 
 • $f \\circ g$ in solid blue — the composition $f(g(x))$
 • $g \\circ f$ in solid amber — the composition $g(f(x))$
@@ -134,7 +136,7 @@ Patterns to watch for:
 
 • **Outer expands the visible domain via even powers** — $\\sqrt{x^2}$ is defined for all $x$ because $x^2 \\geq 0$ always, even though $\\sqrt{x}$ alone needs $x \\geq 0$. The composed domain is broader than the outer function's natural domain.
 
-• **Reciprocal in the inner** — $1/x$ has a singularity at $0$; any composition with $1/x$ as inner has a vertical asymptote at $x = 0$, no matter what the outer function is.
+• **Reciprocal in the inner** — $1/x$ has a singularity at $0$; any composition with $1/x$ as inner has a [vertical asymptote](!/functions/visual-tools/asymptotes) at $x = 0$, no matter what the outer function is.
 
 These domain effects often determine whether the two composition orders look anywhere near each other.`,
       before: ``,
@@ -159,7 +161,7 @@ In the chip strip, both forms appear: the chip label uses circle notation ($f \\
 
     obj8: {
       title: `What Is Function Composition?`,
-      content: `**Composition** takes two functions $f$ and $g$ and builds a new function by chaining them: the output of one becomes the input of the other. Formally, $(f \\circ g)(x) = f(g(x))$ for every $x$ in the domain of $g$ for which $g(x)$ lies in the domain of $f$.
+      content: `**Composition** takes two functions $f$ and $g$ and builds a new function by chaining them: the output of one becomes the input of the other. Formally, $(f \\circ g)(x) = f(g(x))$ for every $x$ in the [domain](!/functions/domain#1) of $g$ for which $g(x)$ lies in the domain of $f$.
 
 Geometrically, composition is a **two-step pipeline**:
 1. Feed $x$ into $g$, producing the intermediate value $g(x)$.
@@ -167,7 +169,7 @@ Geometrically, composition is a **two-step pipeline**:
 
 The result is itself a function — call it $h(x) = f(g(x))$ — that you can graph, differentiate, integrate, or further compose. Most "complicated" functions you meet in calculus are compositions of simpler ones: $\\sin(x^2)$ is sine composed with squaring; $e^{-x^2/2}$ is exponential composed with negative-half-square.
 
-Composition is the natural way to **build up** functions from a small library of primitives, which is why it appears in nearly every later topic: chain rule, inverse functions, change of variables, transformations, and more.`,
+Composition is the natural way to **build up** functions from a small library of primitives, which is why it appears in nearly every later topic: chain rule, [inverse functions](!/functions/inverse#1), change of variables, [transformations](!/functions/transformations#2), and more.`,
       before: ``,
       after: ``,
       link: '',
@@ -191,21 +193,25 @@ Beyond these, composition is the algebraic backbone of category theory, group th
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Inverse Functions** — the special case of composition where $f \\circ g = g \\circ f = \\text{id}$. The companion visualizer plots $f$ and $f^{-1}$ together with the $y = x$ mirror line.
+      content: `[Inverse Functions](!/functions/visual-tools/inverse-function) — the special case of composition where $f \\circ g = g \\circ f = \\text{id}$. The companion visualizer plots $f$ and $f^{-1}$ together with the $y = x$ mirror line.
 
-**Function Transformations** — visualizer for the affine composition pattern $a \\cdot f(b(x-h)) + k$. Composition with $bx - bh$ on the inside and $ay + k$ on the outside.
+[Function Transformations](!/functions/visual-tools/transformations) — visualizer for the affine composition pattern $a \\cdot f(b(x-h)) + k$. Composition with $bx - bh$ on the inside and $ay + k$ on the outside.
 
 **Chain Rule** — calculus theory for differentiating compositions. Reads directly from the inner-outer structure the picker exposes.
 
-**Function Types** — the catalog of base function families used as building blocks. Every entry in the picker comes from this catalog.
+**Function Types** — the catalog of base [function families](!/functions/visual-tools/types) used as building blocks. Every entry in the picker comes from this catalog.
 
-**Domain of a Function** — composed functions often have restricted domains that neither original function had. The Domain visualizer helps reason about these restrictions.
+[Domain of a Function](!/functions/visual-tools/domain) — composed functions often have restricted domains that neither original function had. The Domain visualizer helps reason about these restrictions.
 
-**Function Symmetry** — composing two even functions stays even; composing two odd functions stays odd; mixed compositions may break both. A nice cross-cutting exercise.
+[Function Symmetry](!/functions/visual-tools/symmetry) — composing two [even functions](!/functions/properties#1) stays even; composing two [odd functions](!/functions/properties#1) stays odd; mixed compositions may break both. A nice cross-cutting exercise.
 
 **Trigonometric Identities** — many trig identities are statements about specific compositions: $\\sin^2 + \\cos^2 = 1$, double-angle formulas involve compositions of trig with doubling.
 
-**Polynomial Functions** — the closure of polynomials under composition is the foundation of polynomial algebra.`,
+**Polynomial Functions** — the closure of polynomials under composition is the foundation of polynomial algebra.
+
+[Piecewise Function Builder](!/functions/visual-tools/piecewise) — composing with a [piecewise function](!/functions/piecewise#1) means tracking which branch each input lands in, one piece at a time.
+
+[Function Reflections](!/functions/visual-tools/reflections) — a [reflection](!/functions/transformations#5) is composition with $-x$ or multiplication by $-1$, the simplest non-trivial composition there is.`,
       before: ``,
       after: ``,
       link: '',
@@ -537,6 +543,7 @@ Note the coinciding curves in the scene: the blue and amber graphs are identical
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-composition'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -559,7 +566,7 @@ Note the coinciding curves in the scene: the blue and amber graphs are identical
 }
 
 
-export default function FunctionCompositionPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionCompositionPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -669,6 +676,7 @@ export default function FunctionCompositionPage({seoData, sectionsContent, intro
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

@@ -14,6 +14,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionTransformations from '../../../../app/components/functions/transformations/FunctionsTransformations'
 import transformDiagrams from '../../../../app/components/functions/transformations/functionTransformationsDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -40,7 +42,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **base function picker** — every family the visualizer supports (linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, square root). In the center is the **plot panel** with two curves: a dashed gray line showing the untransformed base $f(x)$, and a solid blue curve showing the transformed $g(x)$. On the right is the **info panel** with a contextual explanation of whatever transformation you are currently studying.
+      content: `Open the page and three panels appear. On the left is the **base function picker** — every family the visualizer supports (linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, square root). In the center is the **plot panel** with two curves: a dashed gray line showing the untransformed base $f(x)$, and a solid blue curve showing the transformed $g(x)$. On the right is the **info panel** with a contextual explanation of whatever [transformation](!/functions/transformations#2) you are currently studying.
 
 Below the plot sit two interactive strips. The **applied chip strip** shows the current values of all four transformation parameters ($a$, $k$, $b$, $h$), with active (non-default) parameters highlighted in blue. Below it, a **tab bar** lets you isolate one transformation at a time or jump to a Custom tab where all four work simultaneously.
 
@@ -54,7 +56,7 @@ The page launches with quadratic as the base and all parameters at defaults — 
       title: `Picking a Base Function`,
       content: `The picker on the left lists ten base function families, with sine and cosine grouped together under "Trigonometric". Each entry shows a small glyph of the family's characteristic shape. Click to switch — the plot resets the transformed curve to match the base, and all four transformation parameters return to their defaults ($a = 1$, $b = 1$, $h = 0$, $k = 0$).
 
-The base function controls only the **starting shape**. The four transformations work the same way for every family: $a$ scales vertically, $k$ shifts vertically, $b$ scales horizontally, $h$ shifts horizontally. What changes between families is how those transformations affect family-specific features — moving the vertex of a parabola, the asymptote of a reciprocal, the midline of a sinusoid, or the domain start of a square root.
+The base function controls only the **starting shape**. The four transformations work the same way for every family: $a$ scales vertically, $k$ shifts vertically, $b$ scales horizontally, $h$ shifts horizontally. What changes between families is how those transformations affect family-specific features — moving the vertex of a parabola, the [asymptote](!/functions/properties#13) of a reciprocal, the midline of a sinusoid, or the [domain](!/functions/domain#1) start of a square root.
 
 Switching base functions resets parameters but preserves the active tab, so you can compare the same transformation across different bases without losing your place.`,
       before: ``,
@@ -85,7 +87,7 @@ The Reset button inside each tab resets only that tab's parameter; the Custom ta
       content: `Each single-parameter tab (everything except Custom) has a **Manual / Auto** toggle at the top.
 
 • **Manual** — the default. Drag the slider yourself. Every drag updates the plot, the equation, and the info panel.
-• **Auto** — the slider becomes a playback control. Three buttons appear: step backward, play/pause, and step forward. Pressing play animates the parameter back and forth across its full range, ping-ponging between min and max indefinitely. The plot updates frame by frame, so you see exactly what the transformation does as the parameter sweeps.
+• **Auto** — the slider becomes a playback control. Three buttons appear: step backward, play/pause, and step forward. Pressing play animates the parameter back and forth across its full [range](!/functions/range#1), ping-ponging between min and max indefinitely. The plot updates frame by frame, so you see exactly what the transformation does as the parameter sweeps.
 
 Auto mode is the fastest way to build intuition for a single transformation. Set $a$ to auto and watch the parabola stretch, compress, and flip across the $x$-axis without your hands leaving the keyboard. Custom tab does not support Auto — combined transformations are designed for manual exploration.`,
       before: ``,
@@ -124,7 +126,7 @@ The chip strip is especially useful in Custom mode, where multiple transformatio
       title: `The Side Info Panel`,
       content: `The info panel on the right reads the current tab and the current base function and assembles a contextual explanation in two parts:
 
-• **General** — what this transformation does, independent of the base function. The formula, the qualitative effects of positive and negative parameter values, the conditions for stretches versus compressions, and reflections
+• **General** — what this transformation does, independent of the base function. The formula, the qualitative effects of positive and negative parameter values, the conditions for stretches versus compressions, and [reflections](!/functions/visual-tools/reflections)
 • **Applied to [base]** — what this specific parameter value does to **this** specific function family. The vertex of the parabola moves to $(h, k)$, the amplitude of the sine becomes $|a|$, the vertical asymptote of the reciprocal moves to $x = h$, and so on
 
 When the parameter is at its default, the applied section reminds you that no transformation has been applied yet and prompts you to move the slider. Switch to the Custom tab and the info panel lists every non-default transformation in one place, each with its general formula and family-specific consequence.`,
@@ -169,19 +171,25 @@ The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide r
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Functions Families Gallery** — companion tool plotting twelve standard function families with parameter sliders; the natural prerequisite for this visualizer.
+      content: `[Functions Families Gallery](!/functions/visual-tools/types) — companion tool plotting twelve standard function families with parameter sliders; the natural prerequisite for this visualizer.
 
-**Functions** — general theory of functions: domain, range, composition, inverses.
+**Functions** — general theory of functions: [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), composition, inverses.
 
-**Graphing Functions** — broader treatment of graph features (intercepts, asymptotes, end behavior) that transformations preserve or change.
+**Graphing Functions** — broader treatment of graph features (intercepts, [asymptotes](!/functions/visual-tools/asymptotes), end behavior) that transformations preserve or change.
 
 **Parent Functions** — the canonical untransformed members of each family used as the starting point here.
 
-**Composition of Functions** — how function composition relates to and generalizes the four affine transformations.
+**Composition of Functions** — how [function composition](!/functions/visual-tools/composition) relates to and generalizes the four affine transformations.
 
-**Inverse Functions** — reflecting a graph across the line $y = x$, a transformation not covered here but built from the same conceptual toolkit.
+[Inverse Functions](!/functions/visual-tools/inverse-function) — reflecting a graph across the line $y = x$, a transformation not covered here but built from the same conceptual toolkit.
 
-**Equation and Inequality Visualizers** — companion tools for solving $f(x) = n$ and $f(x) > 0$ across all the same function families.`,
+**Equation and Inequality Visualizers** — companion tools for solving $f(x) = n$ and $f(x) > 0$ across all the same function families.
+
+[Piecewise Function Builder](!/functions/visual-tools/piecewise) — transforming a [piecewise function](!/functions/piecewise#1) applies the same $a$, $b$, $h$, $k$ to every branch and moves the boundaries with it.
+
+[Function Symmetry](!/functions/visual-tools/symmetry) — a horizontal shift destroys symmetry about the $y$-axis unless the shift is zero, which is why symmetry is tested before transforming.
+
+[Tangent Line Visualizer](!/functions/visual-tools/tangent-line) — each transformation acts on the tangent line in a predictable way: a vertical stretch by $a$ multiplies every slope by $a$.`,
       before: ``,
       after: ``,
       link: '',
@@ -395,6 +403,7 @@ Reading a transformed formula backwards into its four moves is the skill this ta
 
   return {
     props: {
+      relatedTools: getRelatedTools('functions-transformations'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -417,7 +426,7 @@ Reading a transformed formula backwards into its four moves is the skill this ta
 }
 
 
-export default function FunctionTransformationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionTransformationsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
@@ -521,6 +530,7 @@ export default function FunctionTransformationsPage({seoData, sectionsContent, i
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>
