@@ -497,6 +497,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import SupplementaryAngleExplorer from '../../../../app/components/trigonometry/identities/supplementary-angle/SupplementaryAngleExplorer'
 import supplementaryAngleDiagrams from '../../../../app/components/trigonometry/identities/supplementary-angle/supplementaryAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -801,17 +803,21 @@ For the partner family, see the **complementary angle identities visualizer**.`,
 
 **Complementary Angle Identities** — Partner identity family covering the case $\\pi/2 - \\theta$.
 
-**Opposite Angle Identities** — Behavior of trig functions at $-\\theta$ (reflection across the x-axis).
+[Opposite Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — Behavior of trig functions at $-\\theta$ (reflection across the x-axis).
 
-**Double Angle Identities** — Identities for $2\\theta$ that build on the supplementary and complementary results.
+[Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — Identities for $2\\theta$ that build on the supplementary and complementary results.
 
-**Half Angle Identities** — Identities for $\\theta/2$, completing the elementary identity family.
+[Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — Identities for $\\theta/2$, completing the elementary identity family.
 
-**Unit Circle Visualizer** — The geometric foundation behind every reflection identity.
+[Unit Circle Visualizer](!/visual-tools/unit-circle) — The geometric foundation behind every reflection identity.
 
-**Trigonometric Function Graphs** — Plots that show the symmetries underlying these identities visually.
+[Trigonometric Function Graphs](!/trigonometry/visual-tools/functions-graphs) — Plots that show the symmetries underlying these identities visually.
 
-**Trig Identities Reference** — Comprehensive collection of all major identity families with proofs.`,
+**Trig Identities Reference** — Comprehensive collection of all major identity families with proofs.
+
+[Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — Relations between $\\sin^2$ and $\\cos^2$ that reflection across the $y$-axis leaves intact.
+
+**Basic Trigonometric Identities** — The [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used to extend the sine and cosine results to the other four functions.`,
       before: ``,
       after: ``,
       link: '',
@@ -991,6 +997,7 @@ Both geometric identities fall out of this single comparison, which is why the t
 
   return {
     props: {
+      relatedTools: getRelatedTools('supplementary-angle-identities'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1013,7 +1020,7 @@ Both geometric identities fall out of this single comparison, which is why the t
 }
 
 export default function SupplementaryAngleIdentitiesPage({
-  seoData,
+  relatedTools, seoData,
   sectionsContent,
   introContent,
   faqQuestions,
@@ -1255,6 +1262,7 @@ export default function SupplementaryAngleIdentitiesPage({
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

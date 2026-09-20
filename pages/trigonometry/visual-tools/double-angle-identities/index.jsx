@@ -509,6 +509,8 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 import doubleAngleDiagrams from '../../../../app/components/trigonometry/identities/double-angle/doubleAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 
@@ -700,12 +702,15 @@ For applications and worked examples, see the **trigonometric identities applica
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Pythagorean Identities** — $\\sin^2\\theta + \\cos^2\\theta = 1$ and its companions.
+• [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — $\\sin^2\\theta + \\cos^2\\theta = 1$ and its companions.
 • **Sum and Difference Identities** — $\\sin(\\alpha \\pm \\beta)$ and $\\cos(\\alpha \\pm \\beta)$, from which double-angle identities follow as the case $\\alpha = \\beta$.
-• **Half-Angle Identities** — solve the double-angle formulas backward to express $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$.
-• **Unit Circle** — geometric setup for every identity in this tool.
-• **Trigonometric Functions Graphs** — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
-• **Triangle Explorer** — interactive triangles with built-in law of sines and law of cosines.`,
+• [Half-Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — solve the double-angle formulas backward to express $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$.
+• [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every identity in this tool.
+• [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in law of sines and law of cosines.
+• [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — the parity rules that fix the sign of each formula at $-\\theta$.
+• [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — how $\\pi - \\theta$ interacts with the double-angle results.
+• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used in the derived tan, csc, sec and cot forms.`,
       before:``,
       after:``,
       link:'',
@@ -1052,6 +1057,7 @@ As with sine, the verification cards keep both sides in numerical agreement acro
 
    return {
       props:{
+      relatedTools: getRelatedTools('double-angle-identities'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -1073,7 +1079,7 @@ As with sine, the verification cards keep both sides in numerical agreement acro
     }
    }
 
-export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DoubleAngleIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -1474,6 +1480,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

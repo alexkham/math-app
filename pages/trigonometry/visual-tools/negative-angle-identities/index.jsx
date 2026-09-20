@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NegativeAngleExplorer from '../../../../app/components/trigonometry/identities/negative-angle/NegativeAngleExplorer'
 import negativeAngleDiagrams from '../../../../app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -202,12 +204,14 @@ For applications and examples, see the **trigonometric identities applications p
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Pythagorean Identities** — companion identities relating $\\sin^2$ and $\\cos^2$.
-• **Double Angle Identities** — formulas for $\\sin(2\\theta)$, $\\cos(2\\theta)$ that combine with parity rules.
-• **Half Angle Identities** — formulas for $\\sin(\\alpha/2)$ and friends.
+• [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — companion identities relating $\\sin^2$ and $\\cos^2$.
+• [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — formulas for $\\sin(2\\theta)$, $\\cos(2\\theta)$ that combine with parity rules.
+• [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — formulas for $\\sin(\\alpha/2)$ and friends.
 • **Sum and Difference Identities** — additive companions; combine with parity for full flexibility.
-• **Unit Circle** — geometric setup for the reflection used in this tool.
-• **Trigonometric Functions Graphs** — see the parity visually in each function's graph.`,
+• [Unit Circle](!/visual-tools/unit-circle) — geometric setup for the reflection used in this tool.
+• [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see the parity visually in each function's graph.
+• [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — the other reflection, across the $y$-axis, and how it combines with parity.
+• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) that carry parity from sine and cosine to the other four functions.`,
       before:``,
       after:``,
       link:'',
@@ -492,6 +496,7 @@ Only [secant](!#the-secant-negative-angle-identity) inherits this evenness; the 
 
    return {
       props:{
+      relatedTools: getRelatedTools('negative-angle-identities'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -513,7 +518,7 @@ Only [secant](!#the-secant-negative-angle-identity) inherits this evenness; the 
     }
    }
 
-export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function NegativeAngleIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -816,6 +821,7 @@ export default function NegativeAngleIdentitiesPage({seoData, sectionsContent, i
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
   
    <br/>

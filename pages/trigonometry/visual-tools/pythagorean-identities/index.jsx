@@ -510,6 +510,8 @@ import PythagoreanExplorer from '../../../../app/components/trigonometry/identit
 import SiblingsNavStandalone  from '../../../../app/components/SiblingsNavStandalone'
 import pythagoreanDiagrams from '../../../../app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -704,12 +706,15 @@ For applications and worked examples, see the **trigonometric identities applica
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Double Angle Identities** — formulas for $\\sin(2\\theta)$, $\\cos(2\\theta)$, $\\tan(2\\theta)$ built on Pythagoras.
-• **Half Angle Identities** — formulas for $\\sin(\\alpha/2)$ and friends, derived using $\\sin^2 + \\cos^2 = 1$.
+• [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — formulas for $\\sin(2\\theta)$, $\\cos(2\\theta)$, $\\tan(2\\theta)$ built on Pythagoras.
+• [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — formulas for $\\sin(\\alpha/2)$ and friends, derived using $\\sin^2 + \\cos^2 = 1$.
 • **Sum and Difference Identities** — additive companions to Pythagoras.
-• **Unit Circle** — geometric setup for every identity in this tool.
-• **Trigonometric Functions Graphs** — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
-• **Triangle Explorer** — interactive triangles with built-in Pythagoras verification.`,
+• [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every identity in this tool.
+• [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in Pythagoras verification.
+• [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — parity does not disturb $\\sin^2 + \\cos^2 = 1$, and this tool shows why.
+• [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — reflection across the $y$-axis leaves every Pythagorean relation intact.
+• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) that turn one Pythagorean identity into three.`,
       before:``,
       after:``,
       link:'',
@@ -1078,6 +1083,7 @@ At $35°$ both verification cards settle on $0.819$.`,
 
    return {
       props:{
+      relatedTools: getRelatedTools('pythagorean-identities'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -1099,7 +1105,7 @@ At $35°$ both verification cards settle on $0.819$.`,
     }
    }
 
-export default function PythagoreanIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PythagoreanIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -1484,6 +1490,7 @@ export default function PythagoreanIdentitiesPage({seoData, sectionsContent, int
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

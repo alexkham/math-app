@@ -14,6 +14,8 @@ import angleTypesDiagrams from '../../../../app/components/trigonometry/angle/ty
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -203,12 +205,12 @@ For applications and worked examples, see the **trigonometry foundations page**.
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Angle Explorer** — single-angle visualizer focused on type, quadrant, and reference angle.
-• **Trigonometric Functions Graphs** — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
-• **Functions Signs by Quadrants** — the ASTC rule explained interactively.
-• **Triangle Explorer** — angles inside triangles, with built-in law of sines and law of cosines.
-• **Unit Circle** — geometric setup for every special angle in this tool.
-• **Double Angle Identities** — formulas that combine angles into $2\\theta$ relationships.`,
+• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — single-angle visualizer focused on type, quadrant, and reference angle.
+• [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
+• [Functions Signs by Quadrants](!/trigonometry/visual-tools/functions-signs) — the ASTC rule explained interactively.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — angles inside triangles, with built-in law of sines and law of cosines.
+• [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every special angle in this tool.
+• [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — formulas that combine angles into $2\\theta$ relationships.`,
       before:``,
       after:``,
       link:'',
@@ -850,6 +852,7 @@ Drag above the x-axis for positive, below for negative.`,
 
    return {
       props:{
+      relatedTools: getRelatedTools('trigonometry-angle-types'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -871,7 +874,7 @@ Drag above the x-axis for positive, below for negative.`,
     }
    }
 
-export default function AngleTypesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function AngleTypesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -1514,6 +1517,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

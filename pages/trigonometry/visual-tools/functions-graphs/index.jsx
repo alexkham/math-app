@@ -12,6 +12,8 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 import graphDiagrams from '../../../../app/components/trigonometry/trigFunctionsGraphDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 
@@ -183,12 +185,15 @@ The explorer reports "undefined" at these inputs and the curve appears to break 
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Unit Circle** — the geometric source of every trig function value.
-• **Angle Explorer** — visualize angles, quadrants, reference angles, and related-angle relationships.
+• [Unit Circle](!/visual-tools/unit-circle) — the geometric source of every trig function value.
+• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize angles, quadrants, reference angles, and related-angle relationships.
 • **Trigonometric Identities** — Pythagorean, reciprocal, quotient, and angle-sum formulas.
 • **Inverse Trigonometric Functions** — arcsin, arccos, arctan and their restricted domains.
 • **Trig Equations Solver** — practice solving equations involving sine, cosine, and tangent.
-• **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.`,
+• **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
+• [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — why each curve sits above or below the axis in each quadrant.
+• [Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities) — the six functions defined on the unit circle, then traced onto these graphs.
+• **Identity explorers** — the [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities), [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities), [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities), [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) and [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) tools, each of which can be read off these curves.`,
       before:``,
       after:``,
       link:'',
@@ -398,6 +403,7 @@ Cotangent's asymptotes stand at [tangent's](!#the-graph-of-tangent) zeros and vi
 
    return {
       props:{
+      relatedTools: getRelatedTools('functions-graphs'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -419,7 +425,7 @@ Cotangent's asymptotes stand at [tangent's](!#the-graph-of-tangent) zeros and vi
     }
    }
 
-export default function TrigFunctionsGraphsPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function TrigFunctionsGraphsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -681,6 +687,7 @@ export default function TrigFunctionsGraphsPage({seoData, sectionsContent, intro
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>

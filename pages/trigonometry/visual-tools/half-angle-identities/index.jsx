@@ -12,6 +12,8 @@ import SiblingsNavStandalone  from '../../../../app/components/SiblingsNavStanda
 import HalfAngleExplorer from '../../../../app/components/trigonometry/identities/half-angle/HalfAngleExplorer'
 import halfDiagrams from '../../../../app/components/trigonometry/identities/half-angle/halfAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -203,12 +205,15 @@ For applications and worked examples, see the **trigonometric identities applica
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Double Angle Identities** — companion formulas for $\\sin(2\\theta)$, $\\cos(2\\theta)$, and beyond.
-• **Pythagorean Identities** — $\\sin^2\\theta + \\cos^2\\theta = 1$ and its companions, used in the cos half-angle proof.
+• [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — companion formulas for $\\sin(2\\theta)$, $\\cos(2\\theta)$, and beyond.
+• [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — $\\sin^2\\theta + \\cos^2\\theta = 1$ and its companions, used in the cos half-angle proof.
 • **Sum and Difference Identities** — base relations from which double- and half-angle identities are derived.
-• **Unit Circle** — geometric setup for every identity in this tool.
-• **Trigonometric Functions Graphs** — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as the angle varies.
-• **Triangle Explorer** — interactive triangles with built-in law of sines and law of cosines.`,
+• [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every identity in this tool.
+• [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as the angle varies.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in law of sines and law of cosines.
+• [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — the parity rules that fix the sign of each half-angle formula at $-\\theta$.
+• [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — how $\\pi - \\theta$ interacts with the half-angle results.
+• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used in the derived tan, csc, sec and cot forms.`,
       before:``,
       after:``,
       link:'',
@@ -555,6 +560,7 @@ Both verification cards agree at every slider position — the numerical seal on
 
    return {
       props:{
+      relatedTools: getRelatedTools('half-angle-identities'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -576,7 +582,7 @@ Both verification cards agree at every slider position — the numerical seal on
     }
    }
 
-export default function HalfAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function HalfAngleIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -962,6 +968,7 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

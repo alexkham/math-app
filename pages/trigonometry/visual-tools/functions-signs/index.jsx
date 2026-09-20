@@ -11,6 +11,8 @@ import Quadrants from '../../../../app/components/trigonometry/Quadrants'
 import signsDiagrams from '../../../../app/components/trigonometry/quadrantSignsDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 
@@ -183,12 +185,14 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Unit Circle** — the geometric setup behind every quadrant rule.
-• **Angle Explorer** — visualize any angle, its quadrant, and its reference angle.
-• **Trigonometric Functions Graphs** — see how signs translate into the shapes of $\\sin$, $\\cos$, and $\\tan$ curves.
+• [Unit Circle](!/visual-tools/unit-circle) — the geometric setup behind every quadrant rule.
+• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize any angle, its quadrant, and its reference angle.
+• [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how signs translate into the shapes of $\\sin$, $\\cos$, and $\\tan$ curves.
 • **Reference Angle Calculator** — reduce any angle to a first-quadrant equivalent.
 • **Trigonometric Identities** — Pythagorean, reciprocal, and quotient identities that interact with these signs.
-• **Special Angles Table** — exact values across all four quadrants.`,
+• **Special Angles Table** — exact values across all four quadrants.
+• [Angle Types Explorer](!/trigonometry/visual-tools/angle-types) — how an angle's classification decides the quadrant it lands in.
+• [Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities) — reciprocal pairs share a sign; the identities explain why.`,
       before:``,
       after:``,
       link:'',
@@ -587,6 +591,7 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
 
    return {
       props:{
+      relatedTools: getRelatedTools('trigonometry-functions-signs'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -608,7 +613,7 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
     }
    }
 
-export default function FunctionsSignsPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionsSignsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -1081,6 +1086,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>

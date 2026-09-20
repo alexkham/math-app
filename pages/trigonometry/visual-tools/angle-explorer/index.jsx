@@ -13,6 +13,8 @@ import angleDiagrams from '../../../../app/components/trigonometry/angle/angleEx
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 
@@ -191,12 +193,16 @@ For full definitions, see [complementary angles](!/trigonometry/definitions#comp
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Unit Circle** — visualize how angle position determines $\\sin$, $\\cos$, and $\\tan$ on a circle of radius $1$.
+• [Unit Circle](!/visual-tools/unit-circle) — visualize how angle position determines $\\sin$, $\\cos$, and $\\tan$ on a circle of radius $1$.
 • **Degrees and Radians Converter** — quick numeric conversion without the diagram.
 • **Trigonometric Functions** — full theory of sine, cosine, tangent, and their reciprocals.
 • **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
 • **Coterminal Angles** — practice problems and proofs for angles sharing a terminal side.
-• **Reference Angle Calculator** — focused tool for the reduction rules across quadrants.`,
+• **Reference Angle Calculator** — focused tool for the reduction rules across quadrants.
+• [Angle Types Explorer](!/trigonometry/visual-tools/angle-types) — acute, right, obtuse, straight and reflex angles, with complementary and supplementary pairs side by side.
+• [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — which of the six functions are positive in the quadrant an angle lands in.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — the same angles inside a triangle, with the law of sines and law of cosines built in.
+• [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — follow an angle along the sine, cosine and tangent curves.`,
       before:``,
       after:``,
       link:'',
@@ -843,6 +849,7 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
 
    return {
       props:{
+      relatedTools: getRelatedTools('angle-explorer'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -864,7 +871,7 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
     }
    }
 
-export default function AngleExplorerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function AngleExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -1375,6 +1382,7 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         /> */}
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

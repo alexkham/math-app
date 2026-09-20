@@ -11,6 +11,8 @@ import TriangleExplorer from '../../../../app/components/trigonometry/triangle/T
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import triangleDiagrams from '../../../../app/components/trigonometry/triangle/triangleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 
@@ -212,11 +214,13 @@ Use it when you know two sides and the included angle, or all three sides. When 
       content:`Continue exploring with these connected resources:
 
 • **Trigonometric Functions** — $\\sin$, $\\cos$, $\\tan$ and their reciprocals.
-• **Angle Explorer** — visualize any angle, its quadrant, and its reference angle.
+• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize any angle, its quadrant, and its reference angle.
 • **Special Right Triangles** — exact ratios for $45$-$45$-$90$ and $30$-$60$-$90$.
 • **SOH CAH TOA** — mnemonic for trig ratios in right triangles.
 • **Triangle Solver** — compute missing sides and angles given partial information.
-• **Trigonometric Identities** — Pythagorean, sum, and double-angle formulas built on these triangles.`,
+• **Trigonometric Identities** — Pythagorean, sum, and [double-angle formulas](!/trigonometry/visual-tools/double-angle-identities) built on these triangles.
+• [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — $\\sin^2\\theta + \\cos^2\\theta = 1$ is the Pythagorean theorem on a hypotenuse of length $1$.
+• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) behind the ratios in the stats bar.`,
       before:``,
       after:``,
       link:'',
@@ -521,6 +525,7 @@ It is the scenario to reach for after the fixed ones, once the question stops be
 
    return {
       props:{
+      relatedTools: getRelatedTools('triangle-explorer'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -542,7 +547,7 @@ It is the scenario to reach for after the fixed ones, once the question stops be
     }
    }
 
-export default function TriangleExplorerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function TriangleExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
 
   const genericSections=[
@@ -861,6 +866,7 @@ export default function TriangleExplorerPage({seoData, sectionsContent, introCon
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

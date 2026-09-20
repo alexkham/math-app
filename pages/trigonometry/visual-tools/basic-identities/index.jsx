@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import BasicTrigIdentitiesExplorer from '../../../../app/components/trigonometry/identities/basic-identities/BasicTrigoIdentities'
 import identityDiagrams from '../../../../app/components/trigonometry/identities/basic-identities/basicIdentitiesDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -186,15 +188,25 @@ For deeper coverage, see **periodicity** and **reference angles**.`,
       title:`Related Concepts and Tools`,
       content:`Explore connected topics:
 
-**Trigonometric functions graphs** — adjustable amplitude, period, and phase shift for each function
+[Trigonometric functions graphs](!/trigonometry/visual-tools/functions-graphs) — adjustable amplitude, period, and phase shift for each function
 
-**Functions signs by quadrant** — focused view of the four quadrant sign patterns
+[Functions signs by quadrant](!/trigonometry/visual-tools/functions-signs) — focused view of the four quadrant sign patterns
 
-**Angle types explorer** — acute, obtuse, reflex, and coterminal classification
+[Angle types explorer](!/trigonometry/visual-tools/angle-types) — acute, obtuse, reflex, and coterminal classification
 
-**Pythagorean identity** — the $\\sin^2\\theta + \\cos^2\\theta = 1$ relationship from the unit circle
+[Pythagorean identity](!/trigonometry/visual-tools/pythagorean-identities) — the $\\sin^2\\theta + \\cos^2\\theta = 1$ relationship from the [unit circle](!/visual-tools/unit-circle)
 
-**Double angle identities** — geometric derivations for $\\sin 2\\theta$ and $\\cos 2\\theta$`,
+[Double angle identities](!/trigonometry/visual-tools/double-angle-identities) — geometric derivations for $\\sin 2\\theta$ and $\\cos 2\\theta$
+
+**Unit circle** — the geometric setup every identity here is read from
+
+[Angle explorer](!/trigonometry/visual-tools/angle-explorer) — quadrants, reference angles and coterminal angles for any input angle
+
+[Half angle identities](!/trigonometry/visual-tools/half-angle-identities) — geometric derivations for $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$
+
+[Negative angle identities](!/trigonometry/visual-tools/negative-angle-identities) — parity of the six functions under $\\theta \\to -\\theta$
+
+[Supplementary angle identities](!/trigonometry/visual-tools/supplementary-angle-identities) — behaviour of the six functions under $\\theta \\to \\pi - \\theta$`,
       before:``,
       after:``,
       link:'',
@@ -676,6 +688,7 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
 
    return {
       props:{
+      relatedTools: getRelatedTools('basic-identities'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -697,7 +710,7 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
     }
    }
 
-export default function BasicTrigIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function BasicTrigIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -1241,6 +1254,7 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

@@ -1,0 +1,88 @@
+{
+  "_note": "Line 3 symmetry-closure sentences (doc step 3, method added-sentence). Each is appended to the page's related-concepts-and-tools content in that page's own bullet style. Applied by line3-bullets.py; linked by line3-write.py.",
+  "angle-explorer": {
+    "style": "bullet",
+    "add": [
+      "**Angle Types Explorer** — acute, right, obtuse, straight and reflex angles, with complementary and supplementary pairs side by side.",
+      "**Function Signs by Quadrant** — which of the six functions are positive in the quadrant an angle lands in.",
+      "**Triangle Explorer** — the same angles inside a triangle, with the law of sines and law of cosines built in.",
+      "**Trigonometric Functions Graphs** — follow an angle along the sine, cosine and tangent curves."
+    ]
+  },
+  "functions-graphs": {
+    "style": "bullet",
+    "add": [
+      "**Function Signs by Quadrant** — why each curve sits above or below the axis in each quadrant.",
+      "**Basic Trigonometric Identities** — the six functions defined on the unit circle, then traced onto these graphs.",
+      "**Identity explorers** — the Pythagorean Identities, Double Angle Identities, Half Angle Identities, Negative Angle Identities and Supplementary Angle Identities tools, each of which can be read off these curves."
+    ]
+  },
+  "triangle-explorer": {
+    "style": "bullet",
+    "add": [
+      "**Pythagorean Identities** — $\\\\sin^2\\\\theta + \\\\cos^2\\\\theta = 1$ is the Pythagorean theorem on a hypotenuse of length $1$.",
+      "**Basic Trigonometric Identities** — the reciprocal and quotient identities behind the ratios in the stats bar."
+    ]
+  },
+  "trigonometry-functions-signs": {
+    "style": "bullet",
+    "add": [
+      "**Angle Types Explorer** — how an angle's classification decides the quadrant it lands in.",
+      "**Basic Trigonometric Identities** — reciprocal pairs share a sign; the identities explain why."
+    ]
+  },
+  "double-angle-identities": {
+    "style": "bullet",
+    "add": [
+      "**Negative Angle Identities** — the parity rules that fix the sign of each formula at $-\\\\theta$.",
+      "**Supplementary Angle Identities** — how $\\\\pi - \\\\theta$ interacts with the double-angle results.",
+      "**Basic Trigonometric Identities** — the reciprocal and quotient identities used in the derived tan, csc, sec and cot forms."
+    ]
+  },
+  "half-angle-identities": {
+    "style": "bullet",
+    "add": [
+      "**Negative Angle Identities** — the parity rules that fix the sign of each half-angle formula at $-\\\\theta$.",
+      "**Supplementary Angle Identities** — how $\\\\pi - \\\\theta$ interacts with the half-angle results.",
+      "**Basic Trigonometric Identities** — the reciprocal and quotient identities used in the derived tan, csc, sec and cot forms."
+    ]
+  },
+  "pythagorean-identities": {
+    "style": "bullet",
+    "add": [
+      "**Negative Angle Identities** — parity does not disturb $\\\\sin^2 + \\\\cos^2 = 1$, and this tool shows why.",
+      "**Supplementary Angle Identities** — reflection across the $y$-axis leaves every Pythagorean relation intact.",
+      "**Basic Trigonometric Identities** — the reciprocal and quotient identities that turn one Pythagorean identity into three."
+    ]
+  },
+  "negative-angle-identities": {
+    "style": "bullet",
+    "add": [
+      "**Supplementary Angle Identities** — the other reflection, across the $y$-axis, and how it combines with parity.",
+      "**Basic Trigonometric Identities** — the reciprocal and quotient identities that carry parity from sine and cosine to the other four functions."
+    ]
+  },
+  "supplementary-angle-identities": {
+    "style": "para-title",
+    "add": [
+      "**Pythagorean Identities** — Relations between $\\\\sin^2$ and $\\\\cos^2$ that reflection across the $y$-axis leaves intact.",
+      "**Basic Trigonometric Identities** — The reciprocal and quotient identities used to extend the sine and cosine results to the other four functions."
+    ]
+  },
+  "basic-identities": {
+    "style": "para",
+    "add": [
+      "**Unit circle** — the geometric setup every identity here is read from",
+      "**Angle explorer** — quadrants, reference angles and coterminal angles for any input angle",
+      "**Half angle identities** — geometric derivations for $\\\\sin(\\\\theta/2)$ and $\\\\cos(\\\\theta/2)$",
+      "**Negative angle identities** — parity of the six functions under $\\\\theta \\\\to -\\\\theta$",
+      "**Supplementary angle identities** — behaviour of the six functions under $\\\\theta \\\\to \\\\pi - \\\\theta$"
+    ]
+  },
+  "trigonometry-unit-circle": {
+    "style": "legacy-special",
+    "add": [
+      "The trigonometry section has dedicated explorers for what this circle shows: the Angle Explorer and Angle Types Explorer for angles and quadrants, Function Signs by Quadrant for the sign pattern, the Triangle Explorer for the right triangles behind the special values, the Trigonometric Functions Graphs for the curves, and the Basic Identities, Pythagorean Identities, Double Angle Identities, Half Angle Identities, Negative Angle Identities and Supplementary Angle Identities explorers for the relations between the functions."
+    ]
+  }
+}

@@ -10,6 +10,8 @@ import Head from 'next/head'
 import SvgDiagram from '@/app/components/diagrams/svg-diagram/SvgDiagram'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps() {
@@ -269,7 +271,9 @@ The unit circle extends these basic angles to all four quadrants:
 - **210° (7π/6)**, **225° (5π/4)**, **240° (4π/3)** in Quadrant III  
 - **300° (5π/3)**, **315° (7π/4)**, **330° (11π/6)** in Quadrant IV
 
-Try entering these angles in the interactive tool above. You'll notice that the absolute values of sine and cosine remain the same as their first-quadrant counterparts, but the signs change according to the quadrant rules we discussed earlier.`,
+Try entering these angles in the interactive tool above. You'll notice that the absolute values of sine and cosine remain the same as their first-quadrant counterparts, but the signs change according to the quadrant rules we discussed earlier.
+
+The trigonometry section has dedicated explorers for what this circle shows: the [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) and [Angle Types Explorer](!/trigonometry/visual-tools/angle-types) for angles and quadrants, [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) for the sign pattern, the [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) for the right triangles behind the special values, the [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) for the curves, and the [Basic Identities](!/trigonometry/visual-tools/basic-identities), [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities), [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities), [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities), [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) and [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) explorers for the relations between the functions.`,
       before:``,
       after:`
       
@@ -451,6 +455,7 @@ const pageIntroData = {
 
    return {
        props: {
+      relatedTools: getRelatedTools('trigonometry-unit-circle'),
            title: 'Unit Circle Visualizer and Calculator | Learn Math Class',
            description: 'Interactive unit circle visualization tool. Calculate and visualize sine, cosine, tangent and other trigonometric functions in real-time.',
            keywords: keyWords,
@@ -463,7 +468,7 @@ const pageIntroData = {
    }
 }
 
-export default function UnitCirclePage({ title, description, keywords, canonicalUrl ,
+export default function UnitCirclePage({ relatedTools, title, description, keywords, canonicalUrl ,
   unitCircleSVG , sectionsContent ,pageIntroData}) {
 
 
@@ -584,6 +589,7 @@ const baseConverterIcon = (
            <br/>
            <br/>
            <br/>
+           <RelatedTools tools={relatedTools}/>
            <Sections sections={unitCircleSections}/>
            <br/>
           {/* <SvgDiagram data={{ svg: unitCircleSVG }}
