@@ -49,6 +49,14 @@ SKIP = [
 
 CONTENT = re.compile(r"\n\s*(obj\d+)\s*:\s*\{[\s\S]*?content\s*:\s*`((?:[^`\\]|\\.)*)`")
 
+# Legacy pages key sections by word and keep the prose in before/after/between.
+# Each such field is its own span, so a link is planted into the right literal.
+CONTENT_ANY = re.compile(
+    r"\n\s{2,8}(\w+)\s*:\s*\{"
+    r"((?:[^{}`]|`(?:[^`\\]|\\.)*`|\{[^{}]*\})*?)"
+    r"\n\s{2,8}\},")
+FIELD = re.compile(r"\b(?:content|before|after|between)\s*:\s*`((?:[^`\\]|\\.)*)`")
+
 
 def mask_comments(src):
     """Blank comments to \\x00 WITHOUT changing length, so offsets still index
@@ -76,8 +84,12 @@ def mask_regions(text):
 
 
 def content_spans(masked):
-    """objN -> (start, end) offsets of the section's content template literal,
-    scoped to sectionsContent so faqQuestions' identical obj keys cannot win."""
+    """key -> [(start, end), ...] offsets of that section's prose template
+    literals, scoped to sectionsContent so faqQuestions' identical obj keys
+    cannot win. Newer pages have one literal per section (`content`); legacy
+    word-keyed pages split the prose across before/content/between/after, so
+    those sections carry several spans and a link is planted in whichever one
+    actually holds the term."""
     spans = {}
     for m in re.finditer(r"sectionsContent\s*[:=]\s*\{", masked):
         tail_start = m.end()
@@ -85,7 +97,15 @@ def content_spans(masked):
                          masked[tail_start:])
         region_end = tail_start + (stop.start() if stop else len(masked) - tail_start)
         for c in CONTENT.finditer(masked, tail_start, region_end):
-            spans.setdefault(c.group(1), (c.start(2), c.end(2)))
+            spans.setdefault(c.group(1), [(c.start(2), c.end(2))])
+        for c in CONTENT_ANY.finditer(masked, tail_start, region_end):
+            if c.group(1) in spans:
+                continue
+            got = [(c.start(2) + f.start(1), c.start(2) + f.end(1))
+                   for f in FIELD.finditer(c.group(2))
+                   if f.group(1).strip()]
+            if got:
+                spans[c.group(1)] = got
     return spans
 
 
@@ -105,9 +125,15 @@ def url_of(plan):
     return t['path'] + ('#' + t['section'] if t.get('section') else '')
 
 
+def page_file(entry):
+    """pagePath is a file path in newer sections and a URL in older ones."""
+    p = entry['pagePath']
+    return p if p.endswith('.jsx') else 'pages' + p + '/index.jsx'
+
+
 def process(tool_key):
     entry = REG['tools'][tool_key]
-    page = entry['pagePath']
+    page = page_file(entry)
     raw = io.open(page, encoding='utf-8', newline='').read()
     masked = mask_comments(raw)
     spans = content_spans(masked)
@@ -133,9 +159,8 @@ def process(tool_key):
         recs = by_section.get(slug)
         if not recs or obj not in spans:
             continue
-        s, e = spans[obj]
-        body = raw[s:e]
-        guard = mask_regions(body).lower()
+        # one literal on modern pages, several (before/content/…/after) on legacy
+        bodies = [(s, e, raw[s:e], mask_regions(raw[s:e]).lower()) for s, e in spans[obj]]
 
         # longest surface form first: "linear independence" must beat "independence"
         recs = sorted(recs, key=lambda r: -len(r['term']))
@@ -146,27 +171,33 @@ def process(tool_key):
                 overflow.append((rec, slug))
                 continue
             pat = r'(?<![a-z0-9])' + re.escape(rec['term']) + r'(?![a-z0-9])'
-            m = re.search(pat, guard)
-            if not m:
+            hit = None
+            for s, e, body, guard in bodies:
+                m = re.search(pat, guard)
+                if m:
+                    hit = (s, e, body, m)
+                    break
+            if not hit:
                 # Distinguish "the word is not on the page" from "the word is
                 # here but every occurrence is bold, inside math, inside code or
                 # already linked". The second is common in Key Terms sections and
                 # is a real editorial finding, not an absence - recording it as
                 # "not found" would be false.
-                blocked = re.search(pat, body.lower()) is not None
+                blocked = any(re.search(pat, b.lower()) for _, _, b, _ in bodies)
                 unmatched.append((rec, slug,
                                   'every occurrence sits inside bold, math, code or an '
                                   'existing link; linking would require rewriting prose'
                                   if blocked else
                                   'surface form does not occur in the live prose'))
                 continue
-            if any(a < m.end() and m.start() < b for a, b in taken):
+            s, e, body, m = hit
+            if any(a < s + m.end() and s + m.start() < b for a, b in taken):
                 unmatched.append((rec, slug, 'overlaps a link already planted here'))
                 continue
             surface = body[m.start():m.end()]          # preserve original case
             url = url_of(rec['plan'])
             edits.append((s + m.start(), s + m.end(), '[%s](!%s)' % (surface, url)))
-            taken.append((m.start(), m.end()))
+            taken.append((s + m.start(), s + m.end()))
             planted.append((rec, surface, url, slug))
             kept += 1
 

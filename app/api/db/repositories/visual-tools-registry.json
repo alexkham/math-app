@@ -10,7 +10,7 @@
       "populationRule": "Universal registry rule: ANY pass touching a tool page (any operation/tier) updates this registry as a by-product - at minimum identity + scanned terms as pending. Line 2 passes write the full dispositioned list. Existing Line 2 dispositions are only altered by Line 2 itself."
     },
     "lineTwo": {
-      "linearAlgebraLedgerFilled": "2026-09-13",
+      "linearAlgebraLedgerFilled": "2026-09-20",
       "note": "Ledger-only pass: relatedTerms rebuilt from a full re-scan and dispositioned. No page prose was edited. Pending entries carry a `plan` holding the link record a Line 2 write pass would emit.",
       "destinationPolicy": "v3 destination priorities 1 and 2 are unreachable: siteReferences / isRecommendedResource exist on 0 of 1218 repository entries. Owner decision 2026-09-13: link lesson (theory) pages first, via the entry's link.url; definitions pages are a second pass. Each linked and pending term therefore also carries `definitionTarget`, the definitions or formulas anchor, so that pass needs no re-derivation.",
       "knownDeviations": [
@@ -18,13 +18,7 @@
         "No MIN_CHARS skip and no CAP_PER_SECTION at ledger stage - those are linking limits. 40 pending links across 21 sections exceed v3's cap of 5 per section and must be trimmed by the write pass.",
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
-      "linearAlgebraLinksWritten": "2026-09-13",
-      "crossSubjectClosed": "2026-09-13",
-      "definitionsLayer": "2026-09-14",
-      "formulasLayer": "2026-09-14",
-      "keyTermsDefinitions": "2026-09-14",
-      "keyTermsLessons": "2026-09-14",
-      "keyTermsRecorded": "2026-09-20"
+      "linearAlgebraLinksWritten": "2026-09-20"
     },
     "lineThree": {
       "trigonometryWritten": "2026-09-20"
@@ -38,175 +32,99 @@
       "pagePath": "/trigonometry/visual-tools/angle-explorer",
       "relatedTerms": [
         {
-          "term": "angle",
-          "entity": "angle",
+          "term": "complement",
+          "entity": "complement",
           "sections": [
-            "what-is-an-angle"
+            "complementary-angles"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "what-is-an-angle",
-              "target": {
-                "path": "/trigonometry/definitions",
-                "section": "angle"
-              },
-              "method": "repository",
-              "added": "2026-07-28"
-            }
-          ]
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "degree",
-          "entity": "degree",
+          "term": "expressions",
+          "entity": "expression",
           "sections": [
-            "what-is-an-angle",
-            "choosing-degrees-or-radians"
+            "reading-the-trigonometric-values-table"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "what-is-an-angle",
-              "target": {
-                "path": "/trigonometry/degrees-radians",
-                "section": null
-              },
-              "method": "scan",
-              "added": "2026-07-28"
-            }
-          ]
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "radian",
-          "entity": "radian",
+          "term": "fractions",
+          "entity": "fraction",
           "sections": [
-            "choosing-degrees-or-radians",
-            "what-is-an-angle"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "choosing-degrees-or-radians",
-              "target": {
-                "path": "/trigonometry/degrees-radians",
-                "section": null
-              },
-              "method": "scan",
-              "added": "2026-07-28"
-            }
-          ]
-        },
-        {
-          "term": "unit circle",
-          "entity": "unit_circle",
-          "sections": [
-            "choosing-degrees-or-radians",
             "reading-the-trigonometric-values-table",
             "special-angles-and-their-exact-values"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "choosing-degrees-or-radians",
-              "target": {
-                "path": "/trigonometry/unit-circle",
-                "section": null
-              },
-              "method": "scan",
-              "added": "2026-07-28"
-            },
-            {
-              "fromSection": "reading-the-trigonometric-values-table",
-              "target": {
-                "path": "/trigonometry/unit-circle",
-                "section": null
-              },
-              "method": "scan",
-              "added": "2026-07-28"
-            },
-            {
-              "fromSection": "special-angles-and-their-exact-values",
-              "target": {
-                "path": "/trigonometry/unit-circle",
-                "section": null
-              },
-              "method": "scan",
-              "added": "2026-07-28"
-            }
-          ]
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "reference angle",
-          "entity": "reference_angle",
+          "term": "functions",
+          "entity": "function",
           "sections": [
             "complementary-supplementary-and-reference-angles",
-            "reference-angles"
+            "related-concepts-and-tools",
+            "quadrants-and-trigonometric-signs",
+            "quadrant-iii"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "complementary-supplementary-and-reference-angles",
-              "target": {
-                "path": "/trigonometry/definitions",
-                "section": "reference_angle"
-              },
-              "method": "repository",
-              "added": "2026-07-28"
-            },
-            {
-              "fromSection": "reference-angles",
-              "target": {
-                "path": "/trigonometry/definitions",
-                "section": "reference_angle"
-              },
-              "method": "repository",
-              "added": "2026-07-28"
-            }
-          ]
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "complementary angles",
-          "entity": "complementary_angles",
+          "term": "identities",
+          "entity": "identity",
           "sections": [
-            "complementary-supplementary-and-reference-angles",
-            "complementary-angles"
+            "complementary-supplementary-and-reference-angles"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "complementary-supplementary-and-reference-angles",
-              "target": {
-                "path": "/trigonometry/definitions",
-                "section": "complementary_angles"
-              },
-              "method": "repository",
-              "added": "2026-07-28"
-            }
-          ]
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "supplementary angles",
-          "entity": "supplementary_angles",
+          "term": "multiples",
+          "entity": "multiple",
           "sections": [
-            "complementary-supplementary-and-reference-angles",
-            "supplementary-angles"
+            "special-angles-and-their-exact-values"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "complementary-supplementary-and-reference-angles",
-              "target": {
-                "path": "/trigonometry/definitions",
-                "section": "supplementary_angles"
-              },
-              "method": "repository",
-              "added": "2026-07-28"
-            }
-          ]
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "quadrantal angles",
-          "entity": "quadrantal_angles",
+          "term": "radical",
+          "entity": "radical",
+          "sections": [
+            "reading-the-trigonometric-values-table"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "reading-the-trigonometric-values-table",
+            "related-concepts-and-tools",
+            "quadrant-i",
+            "quadrant-ii"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "spans",
+          "entity": "span",
+          "sections": [
+            "quadrant-i",
+            "quadrant-ii",
+            "quadrant-iii",
+            "quadrant-iv"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angle in standard position",
+          "entity": "angle_in_standard_position",
           "sections": [
             "quadrants-and-trigonometric-signs"
           ],
@@ -215,144 +133,17 @@
             {
               "fromSection": "quadrants-and-trigonometric-signs",
               "target": {
-                "path": "/trigonometry/definitions",
-                "section": "quadrantal_angles"
+                "path": "/trigonometry/degrees-radians",
+                "section": "6"
               },
-              "method": "repository",
-              "added": "2026-07-28"
+              "method": "pre-existing",
+              "added": "2026-09-20"
             }
-          ]
-        },
-        {
-          "term": "coterminal angles",
-          "entity": "coterminal_angles",
-          "sections": [
-            "working-with-related-and-coterminal-angles",
-            "coterminal-angles"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "coterminal-angles",
-              "target": {
-                "path": "/trigonometry/definitions",
-                "section": "coterminal_angles"
-              },
-              "method": "repository",
-              "added": "2026-07-28"
-            }
-          ]
-        },
-        {
-          "term": "trigonometric identities",
-          "entity": null,
-          "sections": [
-            "reading-the-trigonometric-values-table"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "reading-the-trigonometric-values-table",
-              "target": {
-                "path": "/trigonometry/identities",
-                "section": null
-              },
-              "method": "scan",
-              "added": "2026-07-28"
-            }
-          ]
-        },
-        {
-          "term": "six trigonometric functions",
-          "entity": null,
-          "sections": [
-            "the-six-trigonometric-functions",
-            "reading-the-trigonometric-values-table"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "the-six-trigonometric-functions",
-              "target": {
-                "path": "/trigonometry/functions",
-                "section": null
-              },
-              "method": "scan",
-              "added": "2026-07-28"
-            }
-          ]
-        },
-        {
-          "term": "angle types",
-          "entity": null,
-          "sections": [
-            "angle-types-and-classifications"
-          ],
-          "status": "dropped",
-          "reason": "No theory page treats angle types; the only rich treatment is the angle-types visual-tool page (tool-to-tool, future tier). Backlog: angle-types theory page."
-        },
-        {
-          "term": "sine",
-          "entity": "sine",
-          "sections": [
-            "multiple"
-          ],
-          "status": "dropped",
-          "reason": "Symbol-level mentions throughout; the concept is linked once via the six-functions link. Per-function on-page treatment is Line 1 material."
-        },
-        {
-          "term": "cosine",
-          "entity": "cosine",
-          "sections": [
-            "multiple"
-          ],
-          "status": "dropped",
-          "reason": "Same as sine."
-        },
-        {
-          "term": "tangent",
-          "entity": "tangent",
-          "sections": [
-            "multiple"
-          ],
-          "status": "dropped",
-          "reason": "Same as sine."
-        },
-        {
-          "term": "cosecant",
-          "entity": "cosecant",
-          "sections": [
-            "the-six-trigonometric-functions"
-          ],
-          "status": "dropped",
-          "reason": "Same as sine."
-        },
-        {
-          "term": "secant",
-          "entity": "secant",
-          "sections": [
-            "the-six-trigonometric-functions"
-          ],
-          "status": "dropped",
-          "reason": "Same as sine."
-        },
-        {
-          "term": "cotangent",
-          "entity": "cotangent",
-          "sections": [
-            "the-six-trigonometric-functions"
-          ],
-          "status": "dropped",
-          "reason": "Same as sine."
-        },
-        {
-          "term": "terminal side",
-          "entity": "terminal_side",
-          "sections": [
-            "setting-an-angle"
-          ],
-          "status": "dropped",
-          "reason": "Page uses \"terminal ray\" phrasing; passing definitional mention inside other treatments."
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle_in_standard_position"
+          }
         },
         {
           "term": "arc length",
@@ -360,46 +151,515 @@
           "sections": [
             "what-is-an-angle"
           ],
-          "status": "dropped",
-          "reason": "Single passing mention in the radian-definition context."
-        },
-        {
-          "term": "angle in standard position",
-          "entity": "angle_in_standard_position",
-          "sections": [
-            "what-is-an-angle"
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "what-is-an-angle",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "4"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
           ],
-          "status": "dropped",
-          "reason": "Single mention; the standard-position treatment lives on the angle-types visual-tool page (tool-to-tool, future tier)."
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "arc_length"
+          }
         },
         {
-          "term": "hypotenuse",
-          "entity": "hypotenuse",
+          "term": "complementary angle",
+          "entity": "complementary_angles",
           "sections": [
+            "display-toggle-options"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "display-toggle-options",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "8"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "complementary_angles"
+          }
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "quadrant-ii"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "quadrant-ii",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          }
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "quadrant-iii"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "quadrant-iii",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          }
+        },
+        {
+          "term": "coterminal angles",
+          "entity": "coterminal_angles",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "7"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "coterminal_angles"
+          }
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "choosing-degrees-or-radians",
+            "reading-the-properties-panel",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-degrees-or-radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "quadrantal angle",
+          "entity": "quadrantal_angles",
+          "sections": [
+            "special-angle-0",
+            "special-angle-90",
+            "special-angle-180",
+            "special-angle-270"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "special-angle-0",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "3"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "quadrantal_angles"
+          }
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "choosing-degrees-or-radians",
+            "using-quick-preset-angles",
+            "reading-the-properties-panel",
+            "what-is-an-angle",
+            "related-concepts-and-tools",
+            "special-angle-30",
             "special-angle-45",
-            "special-angle-30"
+            "special-angle-60",
+            "special-angle-90",
+            "special-angle-120",
+            "special-angle-135",
+            "special-angle-150",
+            "special-angle-180",
+            "special-angle-210",
+            "special-angle-225",
+            "special-angle-240",
+            "special-angle-270",
+            "special-angle-300",
+            "special-angle-315",
+            "special-angle-330",
+            "special-angle-360"
           ],
-          "status": "dropped",
-          "reason": "Right-triangle side mentions inside special-angle derivations; not the subject of those sections."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-degrees-or-radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "2"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "radian"
+          }
+        },
+        {
+          "term": "reference angles",
+          "entity": "reference_angle",
+          "sections": [
+            "choosing-degrees-or-radians",
+            "using-quick-preset-angles",
+            "reading-the-properties-panel",
+            "related-concepts-and-tools",
+            "quadrants-and-trigonometric-signs",
+            "special-angles-and-their-exact-values"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-degrees-or-radians",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "5"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "reference_angle"
+          }
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "quadrant-iv"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "quadrant-iv",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          }
+        },
+        {
+          "term": "supplementary angle",
+          "entity": "supplementary_angles",
+          "sections": [
+            "display-toggle-options"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "display-toggle-options",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "8"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "supplementary_angles"
+          }
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "related-concepts-and-tools",
+            "obtuse-angles",
+            "quadrant-i",
+            "quadrant-ii",
+            "quadrant-iii",
+            "quadrant-iv",
+            "the-six-trigonometric-functions"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          }
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "6"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "terminal_side"
+          }
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "using-quick-preset-angles",
+            "display-toggle-options",
+            "what-is-an-angle",
+            "quadrants-and-trigonometric-signs",
+            "the-six-trigonometric-functions"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "using-quick-preset-angles",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "setting-an-angle",
+            "using-quick-preset-angles",
+            "display-toggle-options",
+            "reading-the-properties-panel",
+            "working-with-related-and-coterminal-angles",
+            "reading-the-trigonometric-values-table",
+            "what-is-an-angle",
+            "angle-types-and-classifications",
+            "complementary-supplementary-and-reference-angles",
+            "related-concepts-and-tools",
+            "quadrants-and-trigonometric-signs",
+            "special-angles-and-their-exact-values",
+            "acute-angles",
+            "right-angles",
+            "obtuse-angles",
+            "straight-angles",
+            "reflex-angles",
+            "quadrant-i",
+            "special-angle-30",
+            "special-angle-60",
+            "complementary-angles",
+            "supplementary-angles",
+            "reference-angles",
+            "the-six-trigonometric-functions"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "setting-an-angle",
+              "surface": "angles",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "law of cosines",
+          "entity": "cosine",
+          "sections": [
+            "related-concepts-and-tools",
+            "obtuse-angles",
+            "quadrant-i",
+            "quadrant-ii",
+            "quadrant-iii",
+            "quadrant-iv",
+            "special-angle-45",
+            "the-six-trigonometric-functions"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "law of cosines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "law of sines",
+          "entity": "sine",
+          "sections": [
+            "related-concepts-and-tools",
+            "obtuse-angles",
+            "quadrant-i",
+            "quadrant-ii",
+            "quadrant-iii",
+            "quadrant-iv",
+            "special-angle-45",
+            "the-six-trigonometric-functions"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "law of sines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "opposite side",
           "entity": "opposite_side",
           "sections": [
-            "special-angle-30"
+            "working-with-related-and-coterminal-angles"
           ],
-          "status": "dropped",
-          "reason": "Same as hypotenuse."
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          },
+          "links": [
+            {
+              "fromSection": "working-with-related-and-coterminal-angles",
+              "surface": "opposite side",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "period",
-          "entity": "period",
+          "term": "square roots",
+          "entity": "square_root",
           "sections": [
-            "coterminal-angles",
-            "quadrant-iii"
+            "special-angles-and-their-exact-values"
           ],
-          "status": "dropped",
-          "reason": "Passing mentions inside periodicity remarks; periodicity is served by the coterminal and six-functions links."
+          "status": "pending",
+          "plan": {
+            "fromSection": "special-angles-and-their-exact-values",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
         }
       ],
       "relatedTools": [
@@ -569,70 +829,432 @@
       "pagePath": "pages/trigonometry/visual-tools/basic-identities/index.jsx",
       "relatedTerms": [
         {
-          "term": "reciprocal identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "reading-the-graph"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "quotient identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "what-are-the-basic-trigonometric-identities"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "elements",
+          "entity": "element",
+          "sections": [
+            "reading-the-unit-circle-display"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "periodicity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "getting-started",
+            "switching-between-the-six-functions",
+            "stepping-through-the-derivation",
+            "reading-the-unit-circle-display",
+            "reading-the-graph",
+            "exploring-periodicity",
+            "the-live-formula-table",
+            "what-are-the-basic-trigonometric-identities",
+            "defining-trig-functions-on-the-unit-circle",
+            "periodicity-and-reference-angles",
+            "related-concepts-and-tools",
+            "cosine-step-1-place-the-angle"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "reference angle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identities",
+          "entity": "identity",
+          "sections": [
+            "what-are-the-basic-trigonometric-identities",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "sine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "reading-the-graph"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "cosine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "stepping-through-the-derivation",
+            "reading-the-graph"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "stepping-through-the-derivation",
+            "the-live-formula-table",
+            "what-are-the-basic-trigonometric-identities",
+            "defining-trig-functions-on-the-unit-circle",
+            "cosecant-on-the-unit-circle",
+            "secant-on-the-unit-circle",
+            "cosecant-step-4-range-and-sign",
+            "secant-step-4-range-and-sign"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "getting-started"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "amplitude"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "amplitude",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "getting-started",
+            "stepping-through-the-derivation",
+            "reading-the-unit-circle-display",
+            "defining-trig-functions-on-the-unit-circle",
+            "periodicity-and-reference-angles",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "cosecant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosecant",
+          "sections": [
+            "cosecant-on-the-unit-circle",
+            "cosecant-step-3-take-the-reciprocal",
+            "cosecant-step-5-periodicity"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "reason": "Not planted in \"cosecant-on-the-unit-circle\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "secant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "stepping-through-the-derivation",
+            "cosine-on-the-unit-circle",
+            "secant-on-the-unit-circle",
+            "cosine-step-4-reference-angle",
+            "tangent-step-5-periodicity",
+            "secant-step-2-identify-the-horizontal-leg",
+            "secant-step-3-take-the-reciprocal",
+            "secant-step-5-periodicity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "stepping-through-the-derivation",
+              "surface": "cosine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "cotangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cotangent",
+          "sections": [
+            "cotangent-on-the-unit-circle",
+            "cotangent-step-4-sign-by-quadrant",
+            "cotangent-step-5-periodicity"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "reason": "Not planted in \"cotangent-on-the-unit-circle\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "coterminal angles",
+          "entity": "coterminal_angles",
+          "sections": [
+            "reading-the-graph",
+            "exploring-periodicity",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "coterminal_angles"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-graph",
+              "surface": "coterminal angles",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "7"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "periods",
+          "entity": "period",
+          "sections": [
+            "reading-the-graph",
+            "exploring-periodicity",
+            "periodicity-and-reference-angles",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "period"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-graph",
+              "surface": "periods",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "7"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "phase shift",
+          "entity": "phase_shift",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "phase_shift"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "phase shift",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "8"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "stepping-through-the-derivation",
+            "reading-the-unit-circle-display",
+            "periodicity-and-reference-angles",
+            "related-concepts-and-tools",
+            "sine-step-4-reference-angle",
+            "cosine-step-4-reference-angle"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "reference_angle"
+          },
+          "links": [
+            {
+              "fromSection": "stepping-through-the-derivation",
+              "surface": "reference angle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "secant-on-the-unit-circle",
+            "secant-step-5-periodicity"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "reason": "Not planted in \"secant-on-the-unit-circle\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "stepping-through-the-derivation",
+            "sine-on-the-unit-circle",
+            "cosecant-on-the-unit-circle",
+            "sine-step-4-reference-angle",
+            "tangent-step-5-periodicity",
+            "cosecant-step-2-identify-the-vertical-leg",
+            "cosecant-step-3-take-the-reciprocal",
+            "cosecant-step-5-periodicity",
+            "cotangent-step-3-form-the-ratio"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "stepping-through-the-derivation",
+              "surface": "sine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "stepping-through-the-derivation",
+            "tangent-on-the-unit-circle",
+            "tangent-step-2-read-both-legs",
+            "tangent-step-4-sign-by-quadrant",
+            "tangent-step-5-periodicity",
+            "cotangent-step-4-sign-by-quadrant",
+            "cotangent-step-5-periodicity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "stepping-through-the-derivation",
+              "surface": "tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "getting-started",
+            "stepping-through-the-derivation",
+            "reading-the-unit-circle-display",
+            "defining-trig-functions-on-the-unit-circle",
+            "related-concepts-and-tools",
+            "sine-step-1-place-the-angle",
+            "cosine-step-1-place-the-angle",
+            "cosecant-step-1-place-the-angle"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "relatedTools": [
@@ -725,28 +1347,401 @@
       "pagePath": "pages/trigonometry/visual-tools/double-angle-identities/index.jsx",
       "relatedTerms": [
         {
-          "term": "double angle identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "reading-the-formula-table"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "playing-through-a-geometric-proof",
+            "reading-the-geometric-scene"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "working-with-derived-identities",
+            "why-double-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "expressions",
+          "entity": "expression",
+          "sections": [
+            "cosine-proof-step-6-equate"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "switching-between-functions",
+            "working-with-derived-identities",
+            "reading-the-formula-table",
+            "verifying-identities-numerically"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "working-with-derived-identities",
+            "reading-the-formula-table",
+            "verifying-identities-numerically",
+            "geometric-proofs-sin2-and-cos2",
+            "derived-identities-tan2-csc2-sec2-cot2",
+            "why-double-angle-identities-matter",
+            "related-concepts-and-tools",
+            "the-sine-double-angle-identity",
+            "the-cosine-double-angle-identity",
+            "the-tangent-double-angle-identity",
+            "the-secant-double-angle-identity",
+            "the-cotangent-double-angle-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "metrics",
+          "entity": "inner_product",
+          "sections": [
+            "playing-through-a-geometric-proof",
+            "verifying-identities-numerically"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "derived-identities-tan2-csc2-sec2-cot2",
+            "related-concepts-and-tools",
+            "the-cosecant-double-angle-identity",
+            "the-cotangent-double-angle-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "why-double-angle-identities-matter",
+            "the-cosecant-double-angle-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "playing-through-a-geometric-proof",
+            "reading-the-geometric-scene",
+            "verifying-identities-numerically",
+            "geometric-proofs-sin2-and-cos2",
+            "why-double-angle-identities-matter",
+            "related-concepts-and-tools",
+            "the-tangent-double-angle-identity",
+            "the-cosecant-double-angle-identity",
+            "the-secant-double-angle-identity",
+            "sine-proof-step-1-setup",
+            "sine-proof-step-2-area-first-way",
+            "sine-proof-step-3-bisect",
+            "sine-proof-step-4-read-off-the-legs",
+            "cosine-proof-step-1-setup",
+            "cosine-proof-step-2-law-of-cosines-on-triangle-oab",
+            "cosine-proof-step-3-bisect",
+            "cosine-proof-step-4-read-off-the-half-chord"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-functions",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-cosecant-double-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "links": [
+            {
+              "fromSection": "the-cosecant-double-angle-identity",
+              "surface": "Cosecant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-cotangent-double-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-cotangent-double-angle-identity",
+              "surface": "Cotangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "adjusting-the-angle"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-the-angle",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "frequency",
+          "entity": "frequency",
+          "sections": [
+            "why-double-angle-identities-matter"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "frequency"
+          },
+          "links": [
+            {
+              "fromSection": "why-double-angle-identities-matter",
+              "surface": "frequency",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "7"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "sine-proof-step-4-read-off-the-legs",
+            "cosine-proof-step-4-read-off-the-half-chord"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "hypotenuse"
+          },
+          "links": [
+            {
+              "fromSection": "sine-proof-step-4-read-off-the-legs",
+              "surface": "hypotenuse",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "law of cosines",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosine",
+          "sections": [
+            "geometric-proofs-sin2-and-cos2",
+            "related-concepts-and-tools",
+            "the-cosine-double-angle-identity",
+            "the-tangent-double-angle-identity",
+            "the-secant-double-angle-identity",
+            "cosine-proof-step-2-law-of-cosines-on-triangle-oab"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "geometric-proofs-sin2-and-cos2",
+              "surface": "law of cosines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "law of sines",
+          "entity": "sine",
+          "sections": [
+            "related-concepts-and-tools",
+            "the-tangent-double-angle-identity",
+            "the-cosecant-double-angle-identity",
+            "sine-proof-step-2-area-first-way",
+            "cosine-proof-step-1-setup"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "law of sines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-secant-double-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "links": [
+            {
+              "fromSection": "the-secant-double-angle-identity",
+              "surface": "Secant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "the-tangent-double-angle-identity",
+            "the-cotangent-double-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-tangent-double-angle-identity",
+              "surface": "Tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "geometric proof",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "unit_circle",
+          "sections": [
+            "reading-the-geometric-scene"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-geometric-scene",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "relatedTools": [
@@ -823,28 +1818,410 @@
       "pagePath": "pages/trigonometry/visual-tools/half-angle-identities/index.jsx",
       "relatedTerms": [
         {
-          "term": "half angle identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "reading-the-formula-table",
+            "why-half-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "playing-through-a-geometric-proof",
+            "reading-the-geometric-scene"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "working-with-derived-identities",
+            "why-half-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "expression",
+          "entity": "expression",
+          "sections": [
+            "sine-half-step-5-square-the-chord"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "switching-between-functions",
+            "working-with-derived-identities",
+            "reading-the-formula-table",
+            "verifying-identities-numerically",
+            "why-half-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "working-with-derived-identities",
+            "reading-the-formula-table",
+            "verifying-identities-numerically",
+            "geometric-proofs-sin2-and-cos2",
+            "derived-identities-tan2-csc2-sec2-cot2",
+            "why-half-angle-identities-matter",
+            "related-concepts-and-tools",
+            "the-sine-half-angle-identity",
+            "the-cosine-half-angle-identity",
+            "cosine-half-step-4-apply-pythagoras"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "metrics",
+          "entity": "inner_product",
+          "sections": [
+            "playing-through-a-geometric-proof",
+            "verifying-identities-numerically"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "cosine-half-step-6-take-the-root"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "derived-identities-tan2-csc2-sec2-cot2",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "relations",
+          "entity": "relation",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "why-half-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "playing-through-a-geometric-proof",
+            "reading-the-geometric-scene",
+            "geometric-proofs-sin2-and-cos2",
+            "derived-identities-tan2-csc2-sec2-cot2",
+            "why-half-angle-identities-matter",
+            "related-concepts-and-tools",
+            "the-sine-half-angle-identity",
+            "the-tangent-half-angle-identity",
+            "sine-half-step-1-setup",
+            "sine-half-step-2-law-of-cosines-on-triangle-oab",
+            "sine-half-step-4-read-off-the-half-chord",
+            "sine-half-step-6-equate-and-solve",
+            "cosine-half-step-2-bisect",
+            "cosine-half-step-3-identify-the-legs",
+            "cosine-half-step-6-take-the-root"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-functions",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-cosecant-half-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "links": [
+            {
+              "fromSection": "the-cosecant-half-angle-identity",
+              "surface": "Cosecant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-cotangent-half-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-cotangent-half-angle-identity",
+              "surface": "Cotangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "adjusting-the-angle"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-the-angle",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "sine-half-step-4-read-off-the-half-chord",
+            "cosine-half-step-3-identify-the-legs",
+            "cosine-half-step-4-apply-pythagoras"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "hypotenuse"
+          },
+          "links": [
+            {
+              "fromSection": "sine-half-step-4-read-off-the-half-chord",
+              "surface": "hypotenuse",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "law of cosines",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosine",
+          "sections": [
+            "geometric-proofs-sin2-and-cos2",
+            "related-concepts-and-tools",
+            "the-secant-half-angle-identity",
+            "sine-half-step-2-law-of-cosines-on-triangle-oab",
+            "sine-half-step-5-square-the-chord"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "geometric-proofs-sin2-and-cos2",
+              "surface": "law of cosines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "law of sines",
+          "entity": "sine",
+          "sections": [
+            "related-concepts-and-tools",
+            "the-cosecant-half-angle-identity",
+            "sine-half-step-6-equate-and-solve"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "law of sines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-secant-half-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "links": [
+            {
+              "fromSection": "the-secant-half-angle-identity",
+              "surface": "Secant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "cosine-half-step-6-take-the-root"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "cosine-half-step-6-take-the-root",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "the-tangent-half-angle-identity",
+            "the-cotangent-half-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-tangent-half-angle-identity",
+              "surface": "Tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "geometric proof",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "unit_circle",
+          "sections": [
+            "reading-the-geometric-scene",
+            "why-half-angle-identities-matter"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-geometric-scene",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "relatedTools": [
@@ -921,58 +2298,463 @@
       "pagePath": "pages/trigonometry/visual-tools/functions-graphs/index.jsx",
       "relatedTerms": [
         {
-          "term": "periodicity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "key-terms",
+            "asymptotes-and-undefined-points",
+            "the-graph-of-sine",
+            "the-graph-of-tangent"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "key-terms",
+            "reading-the-graph"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "domains",
+          "entity": "domain",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "expression",
+          "entity": "expression",
+          "sections": [
+            "selecting-a-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "fractions",
+          "entity": "fraction",
+          "sections": [
+            "reading-the-result-display"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "selecting-a-function",
+            "setting-the-angle",
+            "reading-the-result-display",
+            "reading-the-graph",
+            "comparing-functions-side-by-side",
+            "what-are-trigonometric-functions",
+            "period-amplitude-and-range",
+            "asymptotes-and-undefined-points",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identities",
+          "entity": "identity",
+          "sections": [
+            "comparing-functions-side-by-side",
+            "asymptotes-and-undefined-points",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "intercepts",
+          "entity": "constant_term",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "key-terms",
+            "reading-the-graph",
+            "period-amplitude-and-range"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "what-are-trigonometric-functions",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "trace",
+          "entity": "trace",
+          "sections": [
+            "reading-the-graph",
+            "the-graph-of-sine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "period-amplitude-and-range"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "amplitude",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "amplitude",
+          "sections": [
+            "key-terms",
+            "period-amplitude-and-range"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "amplitude"
+          },
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "amplitude",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "period",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "switching-between-degrees-and-radians",
+            "setting-the-angle",
+            "reading-the-result-display",
+            "reading-the-graph",
+            "comparing-functions-side-by-side",
+            "what-are-trigonometric-functions",
+            "related-concepts-and-tools",
+            "the-graph-of-sine"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-degrees-and-radians",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "asymptote",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "radian",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "degree",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "sine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-graph-of-cosecant",
+            "the-graph-of-secant"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "reason": "Not planted in \"the-graph-of-cosecant\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
           "term": "cosine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosine",
+          "sections": [
+            "related-concepts-and-tools",
+            "the-graph-of-cosine",
+            "the-graph-of-secant"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "cosine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-graph-of-cotangent"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "reason": "Not planted in \"the-graph-of-cotangent\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "switching-between-degrees-and-radians"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-degrees-and-radians",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "inverse trigonometric functions",
+          "entity": "inverse_trigonometric_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "inverse_trigonometric_function"
+          },
+          "reason": "Not planted in \"related-concepts-and-tools\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "key-terms",
+            "setting-the-angle",
+            "period-amplitude-and-range"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "period"
+          },
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "period",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "7"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "switching-between-degrees-and-radians",
+            "reading-the-result-display"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "radian"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-degrees-and-radians",
+              "surface": "radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reference angles",
+          "entity": "reference_angle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "reference_angle"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "reference angles",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-graph-of-secant"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "reason": "Not planted in \"the-graph-of-secant\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "related-concepts-and-tools",
+            "the-graph-of-sine",
+            "the-graph-of-cosine",
+            "the-graph-of-cosecant"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "sine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "tangent",
+          "sections": [
+            "related-concepts-and-tools",
+            "the-graph-of-tangent",
+            "the-graph-of-cotangent"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "the problem",
+          "entity": "irrational_exponent",
+          "sections": [
+            "switching-between-degrees-and-radians"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "switching-between-degrees-and-radians",
+            "target": {
+              "path": "/algebra/powers/irrational-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "irrational_exponent"
+          }
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "switching-between-degrees-and-radians",
+            "what-are-trigonometric-functions",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "reason": "Not planted in \"switching-between-degrees-and-radians\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         }
       ],
       "relatedTools": [
@@ -4198,64 +5980,430 @@
       "pagePath": "pages/trigonometry/visual-tools/pythagorean-identities/index.jsx",
       "relatedTerms": [
         {
-          "term": "pythagorean identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "cosine-proof-step-6-take-the-positive-root"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "division",
+          "entity": "complex_number",
+          "sections": [
+            "the-cosecant-pythagorean-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "right triangle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "playing-through-a-geometric-proof",
+            "reading-the-geometric-scene"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "reciprocal identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "working-with-derived-identities",
+            "why-pythagorean-identities-matter",
+            "cosine-proof-step-4-pythagoras"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "geometric proof",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "expressions",
+          "entity": "expression",
+          "sections": [
+            "why-pythagorean-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "perpendicular bisector",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "reading-the-formula-table",
+            "verifying-identities-numerically"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "isosceles triangle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "reading-the-geometric-scene",
+            "working-with-derived-identities",
+            "reading-the-formula-table",
+            "verifying-identities-numerically",
+            "geometric-proof-sin2-cos2-1",
+            "derived-identities-tan-sec-csc-cot",
+            "why-pythagorean-identities-matter",
+            "related-concepts-and-tools",
+            "the-sine-pythagorean-identity",
+            "the-cosine-pythagorean-identity",
+            "the-tangent-pythagorean-identity",
+            "the-cosecant-pythagorean-identity",
+            "sine-proof-step-4-pythagoras",
+            "sine-proof-step-6-take-the-positive-root",
+            "cosine-proof-step-4-pythagoras"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "first quadrant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "metrics",
+          "entity": "inner_product",
+          "sections": [
+            "playing-through-a-geometric-proof",
+            "verifying-identities-numerically",
+            "sine-proof-step-4-pythagoras"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "trigonometric substitution",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "derived-identities-tan-sec-csc-cot",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "relations",
+          "entity": "relation",
+          "sections": [
+            "why-pythagorean-identities-matter",
+            "related-concepts-and-tools",
+            "the-secant-pythagorean-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "root",
+          "entity": "root",
+          "sections": [
+            "geometric-proof-sin2-cos2-1"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "why-pythagorean-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "adjusting-the-angle",
+            "playing-through-a-geometric-proof",
+            "reading-the-geometric-scene",
+            "why-pythagorean-identities-matter",
+            "sine-proof-step-2-bisect",
+            "sine-proof-step-3-identify-the-legs",
+            "cosine-proof-step-2-bisect",
+            "cosine-proof-step-3-identify-the-legs"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-the-angle",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-cosecant-pythagorean-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "links": [
+            {
+              "fromSection": "the-cosecant-pythagorean-identity",
+              "surface": "Cosecant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "cosine-proof-step-5-solve-for-cos2"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "cosine-proof-step-5-solve-for-cos2",
+              "surface": "cosine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-cosecant-pythagorean-identity",
+            "the-cotangent-pythagorean-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-cosecant-pythagorean-identity",
+              "surface": "cotangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "adjusting-the-angle"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-the-angle",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "reading-the-geometric-scene",
+            "geometric-proof-sin2-cos2-1",
+            "the-sine-pythagorean-identity",
+            "sine-proof-step-3-identify-the-legs",
+            "sine-proof-step-4-pythagoras",
+            "cosine-proof-step-3-identify-the-legs"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "hypotenuse"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-geometric-scene",
+              "surface": "hypotenuse",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-tangent-pythagorean-identity",
+            "the-secant-pythagorean-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "links": [
+            {
+              "fromSection": "the-tangent-pythagorean-identity",
+              "surface": "secant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "sine-proof-step-5-solve-for-sin2"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "sine-proof-step-5-solve-for-sin2",
+              "surface": "sine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "square root",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "square_root",
+          "sections": [
+            "reading-the-formula-table",
+            "sine-proof-step-6-take-the-positive-root",
+            "cosine-proof-step-6-take-the-positive-root"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "reading-the-formula-table",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "the-tangent-pythagorean-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-tangent-pythagorean-identity",
+              "surface": "Tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "reading-the-geometric-scene",
+            "geometric-proof-sin2-cos2-1",
+            "the-sine-pythagorean-identity",
+            "sine-proof-step-1-setup"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-functions",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams.js",
@@ -4352,52 +6500,443 @@
       "pagePath": "pages/trigonometry/visual-tools/supplementary-angle-identities/index.jsx",
       "relatedTerms": [
         {
-          "term": "supplementary angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "switching-between-geometric-and-derived-views",
+            "reading-the-identity-bar-and-derivation-steps",
+            "using-the-formula-comparison-table"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "reading-the-identity-bar-and-derivation-steps",
+            "using-the-formula-comparison-table"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "getting-started-with-the-explorer",
+            "switching-between-geometric-and-derived-views",
+            "reading-the-identity-bar-and-derivation-steps",
+            "tracing-identities-back-to-their-source",
+            "using-the-formula-comparison-table",
+            "what-are-supplementary-angle-identities",
+            "the-six-identities-at-a-glance",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "getting-started-with-the-explorer",
+            "switching-between-geometric-and-derived-views",
+            "reading-the-identity-bar-and-derivation-steps",
+            "tracing-identities-back-to-their-source",
+            "using-the-formula-comparison-table",
+            "verifying-identities-numerically",
+            "what-are-supplementary-angle-identities",
+            "why-reflection-across-the-y-axis",
+            "the-six-identities-at-a-glance",
+            "supplementary-vs-complementary-identities",
+            "related-concepts-and-tools",
+            "the-sine-supplementary-identity",
+            "the-cosine-supplementary-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "metric",
+          "entity": "inner_product",
+          "sections": [
+            "switching-between-geometric-and-derived-views",
+            "verifying-identities-numerically"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "verifying-identities-numerically"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "the-six-identities-at-a-glance",
+            "the-cosecant-supplementary-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "reflection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reflection",
+          "sections": [
+            "getting-started-with-the-explorer",
+            "switching-between-geometric-and-derived-views",
+            "tracing-identities-back-to-their-source",
+            "what-are-supplementary-angle-identities",
+            "why-reflection-across-the-y-axis",
+            "supplementary-vs-complementary-identities",
+            "related-concepts-and-tools",
+            "the-sine-supplementary-identity",
+            "the-cosine-supplementary-identity",
+            "the-tangent-supplementary-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "parity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "relations",
+          "entity": "relation",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "root",
+          "entity": "root",
+          "sections": [
+            "reading-the-identity-bar-and-derivation-steps"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "supplementary-vs-complementary-identities"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "getting-started-with-the-explorer",
+            "what-are-supplementary-angle-identities",
+            "why-reflection-across-the-y-axis",
+            "supplementary-vs-complementary-identities",
+            "reflection-proof-step-1-setup",
+            "reflection-proof-step-2-introduce-the-mirror",
+            "reflection-proof-step-5-read-the-new-angle"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-with-the-explorer",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "complementary angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "complementary_angles",
+          "sections": [
+            "supplementary-vs-complementary-identities",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "complementary_angles"
+          },
+          "reason": "Not planted in \"supplementary-vs-complementary-identities\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "reciprocal identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-cosecant-supplementary-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "links": [
+            {
+              "fromSection": "the-cosecant-supplementary-identity",
+              "surface": "Cosecant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "terminal point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "related-concepts-and-tools",
+            "the-secant-supplementary-identity",
+            "the-cotangent-supplementary-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "cosine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "trigonometric identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-cotangent-supplementary-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-cotangent-supplementary-identity",
+              "surface": "Cotangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "reflection-proof-step-1-setup"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "hypotenuse"
+          },
+          "links": [
+            {
+              "fromSection": "reflection-proof-step-1-setup",
+              "surface": "hypotenuse",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "what-are-supplementary-angle-identities"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "radian"
+          },
+          "links": [
+            {
+              "fromSection": "what-are-supplementary-angle-identities",
+              "surface": "radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-secant-supplementary-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "links": [
+            {
+              "fromSection": "the-secant-supplementary-identity",
+              "surface": "Secant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "sign behavior",
+          "entity": "natural_exponent",
+          "sections": [
+            "getting-started-with-the-explorer",
+            "switching-between-geometric-and-derived-views",
+            "verifying-identities-numerically",
+            "why-reflection-across-the-y-axis",
+            "the-six-identities-at-a-glance"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-with-the-explorer",
+            "target": {
+              "path": "/algebra/powers/natural-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "natural_exponent"
+          }
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "related-concepts-and-tools",
+            "the-cosecant-supplementary-identity",
+            "the-cotangent-supplementary-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "sine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "what-are-supplementary-angle-identities",
+            "why-reflection-across-the-y-axis",
+            "the-six-identities-at-a-glance",
+            "supplementary-vs-complementary-identities"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "supplementary_angles"
+          },
+          "reason": "Not planted in \"what-are-supplementary-angle-identities\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "the-tangent-supplementary-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-tangent-supplementary-identity",
+              "surface": "Tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "what-are-supplementary-angle-identities",
+            "why-reflection-across-the-y-axis",
+            "reflection-proof-step-1-setup"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "what-are-supplementary-angle-identities",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/identities/supplementary-angle/supplementaryAngleDiagrams.js",
@@ -4485,52 +7024,406 @@
       "pagePath": "pages/trigonometry/visual-tools/negative-angle-identities/index.jsx",
       "relatedTerms": [
         {
-          "term": "negative angle identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "reading-the-formula-table"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "even function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "working-with-derived-identities",
+            "why-negative-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "odd function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "switching-between-functions",
+            "reading-the-formula-table",
+            "verifying-identities-numerically",
+            "why-negative-angle-identities-matter",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "parity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "switching-between-functions",
+            "working-with-derived-identities",
+            "reading-the-formula-table",
+            "geometric-proofs-sin-and-cos",
+            "derived-identities-tan-csc-sec-cot",
+            "why-negative-angle-identities-matter",
+            "related-concepts-and-tools",
+            "the-sine-negative-angle-identity",
+            "the-cosine-negative-angle-identity",
+            "the-secant-negative-angle-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "integrands",
+          "entity": "integrand",
+          "sections": [
+            "why-negative-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "metric",
+          "entity": "inner_product",
+          "sections": [
+            "verifying-identities-numerically"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "derived-identities-tan-csc-sec-cot",
+            "the-cosecant-negative-angle-identity",
+            "the-secant-negative-angle-identity",
+            "the-cotangent-negative-angle-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "reflection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reflection",
+          "sections": [
+            "switching-between-functions",
+            "reading-the-geometric-scene",
+            "geometric-proofs-sin-and-cos",
+            "related-concepts-and-tools",
+            "the-cosine-negative-angle-identity",
+            "cosine-proof-step-2-mirror-p"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "terminal point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "solutions",
+          "entity": "solution",
+          "sections": [
+            "why-negative-angle-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "reciprocal identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "playing-through-a-geometric-proof",
+            "reading-the-geometric-scene",
+            "reading-the-formula-table",
+            "sine-proof-step-1-place-p",
+            "sine-proof-step-2-mirror-p",
+            "sine-proof-step-3-read-off-sin",
+            "cosine-proof-step-1-place-p",
+            "cosine-proof-step-2-mirror-p"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-functions",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-cosecant-negative-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "links": [
+            {
+              "fromSection": "the-cosecant-negative-angle-identity",
+              "surface": "Cosecant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "geometric-proofs-sin-and-cos",
+            "why-negative-angle-identities-matter",
+            "related-concepts-and-tools",
+            "the-secant-negative-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "geometric-proofs-sin-and-cos",
+              "surface": "Cosine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-cotangent-negative-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "links": [
+            {
+              "fromSection": "the-cotangent-negative-angle-identity",
+              "surface": "Cotangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "adjusting-the-angle"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-the-angle",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "even functions",
+          "entity": "even_function",
+          "sections": [
+            "verifying-identities-numerically",
+            "derived-identities-tan-csc-sec-cot",
+            "why-negative-angle-identities-matter",
+            "the-tangent-negative-angle-identity"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "verifying-identities-numerically",
+            "target": {
+              "path": "/functions/properties",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "even_function"
+          }
+        },
+        {
+          "term": "negative angle",
+          "entity": "negative_angle",
+          "sections": [
+            "geometric-proofs-sin-and-cos"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "negative_angle"
+          },
+          "reason": "Not planted in \"geometric-proofs-sin-and-cos\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "odd functions",
+          "entity": "odd_function",
+          "sections": [
+            "verifying-identities-numerically",
+            "derived-identities-tan-csc-sec-cot",
+            "why-negative-angle-identities-matter",
+            "the-tangent-negative-angle-identity"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "verifying-identities-numerically",
+            "target": {
+              "path": "/functions/properties",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "odd_function"
+          }
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-secant-negative-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "links": [
+            {
+              "fromSection": "the-secant-negative-angle-identity",
+              "surface": "Secant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "geometric-proofs-sin-and-cos",
+            "why-negative-angle-identities-matter",
+            "related-concepts-and-tools",
+            "the-cosecant-negative-angle-identity",
+            "sine-proof-step-3-read-off-sin"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "geometric-proofs-sin-and-cos",
+              "surface": "Sine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "derived-identities-tan-csc-sec-cot",
+            "the-tangent-negative-angle-identity",
+            "the-cotangent-negative-angle-identity"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "derived-identities-tan-csc-sec-cot",
+              "surface": "tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "switching-between-functions",
+            "adjusting-the-angle",
+            "reading-the-geometric-scene",
+            "sine-proof-step-1-place-p",
+            "sine-proof-step-3-read-off-sin"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "switching-between-functions",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams.js",
@@ -4619,64 +7512,243 @@
       "pagePath": "pages/trigonometry/visual-tools/triangle-explorer/index.jsx",
       "relatedTerms": [
         {
-          "term": "triangle classification",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "pythagorean theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "the-law-of-cosines-scenario"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "pythagorean triples",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "law of sines",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identities",
+          "entity": "identity",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "law of cosines",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "locking-angles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "equilateral triangle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reciprocals",
+          "entity": "reciprocal",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "isosceles triangle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "relation",
+          "entity": "relation",
+          "sections": [
+            "pythagorean-theorem-and-triples"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "right triangle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "key-terms",
+            "dragging-vertices",
+            "locking-angles",
+            "adjusting-the-zoom",
+            "reading-the-diagram",
+            "reading-the-stats-bar",
+            "reading-the-explanation-panel",
+            "triangle-classifications",
+            "law-of-sines-and-law-of-cosines",
+            "related-concepts-and-tools",
+            "the-equilateral-scenario",
+            "the-isosceles-scenario",
+            "the-acute-scenario",
+            "the-obtuse-scenario",
+            "the-right-scalene-scenario",
+            "the-45-45-90-scenario",
+            "the-3-4-5-scenario",
+            "the-law-of-cosines-scenario"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "angles",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "interior angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "axis of symmetry",
+          "entity": "axis_of_symmetry",
+          "sections": [
+            "the-30-60-90-scenario"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-30-60-90-scenario",
+            "target": {
+              "path": "/functions/families",
+              "section": "5"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/formulas",
+            "section": "axis_of_symmetry"
+          }
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "locking-angles",
+            "reading-the-diagram",
+            "reading-the-stats-bar"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "locking-angles",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "hypotenuse",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "hypotenuse",
+          "sections": [
+            "key-terms",
+            "pythagorean-theorem-and-triples",
+            "related-concepts-and-tools",
+            "the-45-45-90-scenario"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "hypotenuse"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "law of cosines",
+          "entity": "cosine",
+          "sections": [
+            "law-of-sines-and-law-of-cosines"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "cosine"
+          },
+          "reason": "Not planted in \"law-of-sines-and-law-of-cosines\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "law of sines",
+          "entity": "sine",
+          "sections": [
+            "law-of-sines-and-law-of-cosines"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "sine"
+          },
+          "reason": "Not planted in \"law-of-sines-and-law-of-cosines\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "pythagorean theorem",
+          "entity": "inner_product",
+          "sections": [
+            "pythagorean-theorem-and-triples",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "pythagorean-theorem-and-triples",
+            "target": {
+              "path": "/linear-algebra/orthogonality/inner-product",
+              "section": "10"
+            },
+            "method": "repository-link",
+            "crossSection": "linear-algebra"
+          },
+          "definitionTarget": {
+            "path": "/linear-algebra/formulas",
+            "section": "inner_product"
+          }
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "reference_angle"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "reference angle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/triangle/triangleDiagrams.js",
@@ -16561,64 +19633,549 @@
       "component": "app/components/trigonometry/angle/types/TrigoAngleTypesExplorer.jsx",
       "relatedTerms": [
         {
-          "term": "angle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "addition",
+          "entity": "complex_number",
+          "sections": [
+            "angle-relationships",
+            "why-angle-classification-matters-in-trigonometry"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "standard position",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complement",
+          "entity": "complement",
+          "sections": [
+            "complementary-angles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "reference angle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "elements",
+          "entity": "element",
+          "sections": [
+            "reading-the-scene-diagrams"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "why-angle-classification-matters-in-trigonometry",
+            "quadrant-i-function-signs"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identities",
+          "entity": "identity",
+          "sections": [
+            "reading-the-explanation-panels",
+            "angle-relationships",
+            "why-angle-classification-matters-in-trigonometry"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "why-angle-classification-matters-in-trigonometry"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reciprocals",
+          "entity": "reciprocal",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "key-terms",
+            "choosing-a-concept",
+            "dragging-to-set-angles",
+            "using-preset-buttons-and-quick-angles",
+            "reading-the-scene-diagrams",
+            "reading-the-explanation-panels",
+            "angle-classifications",
+            "angle-relationships",
+            "trigonometry-specific-angle-concepts",
+            "why-angle-classification-matters-in-trigonometry",
+            "related-concepts-and-tools",
+            "complementary-and-supplementary-angles",
+            "vertical-angles",
+            "adjacent-angles",
+            "standard-position",
+            "directed-angles",
+            "zero-angles",
+            "acute-angles",
+            "right-angles",
+            "obtuse-angles",
+            "straight-angles",
+            "reflex-angles",
+            "full-angles",
+            "complementary-angles",
+            "supplementary-angles",
+            "quadrant-i-function-signs",
+            "quadrant-ii-function-signs",
+            "quadrant-iii-function-signs",
+            "quadrant-iv-function-signs",
+            "special-angle-0",
+            "special-angle-45",
+            "special-angle-60",
+            "special-angle-120",
+            "negative-angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "angles",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "quadrant-ii-function-signs"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "links": [
+            {
+              "fromSection": "quadrant-ii-function-signs",
+              "surface": "cosecant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "quadrant-iii-function-signs"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "links": [
+            {
+              "fromSection": "quadrant-iii-function-signs",
+              "surface": "cotangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "coterminal angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "coterminal_angles",
+          "sections": [
+            "using-preset-buttons-and-quick-angles",
+            "coterminal-angles"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "coterminal_angles"
+          },
+          "reason": "Not planted in \"using-preset-buttons-and-quick-angles\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "complementary angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "using-preset-buttons-and-quick-angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "using-preset-buttons-and-quick-angles",
+              "surface": "Degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "supplementary angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "initial side",
+          "entity": "initial_side",
+          "sections": [
+            "key-terms",
+            "trigonometry-specific-angle-concepts",
+            "standard-position",
+            "full-angles",
+            "positive-angles",
+            "negative-angles"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "initial_side"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "vertical angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "law of cosines",
+          "entity": "cosine",
+          "sections": [
+            "related-concepts-and-tools",
+            "quadrant-ii-function-signs",
+            "quadrant-iii-function-signs",
+            "quadrant-iv-function-signs",
+            "special-angle-45"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "law of cosines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "adjacent angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "law of sines",
+          "entity": "sine",
+          "sections": [
+            "related-concepts-and-tools",
+            "quadrant-ii-function-signs",
+            "quadrant-iii-function-signs",
+            "quadrant-iv-function-signs",
+            "special-angle-45"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/formulas",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "law of sines",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "quadrant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "negative angles",
+          "entity": "negative_angle",
+          "sections": [
+            "dragging-to-set-angles",
+            "negative-angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "negative_angle"
+          },
+          "links": [
+            {
+              "fromSection": "dragging-to-set-angles",
+              "surface": "negative angles",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "directed angle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "opposite sides",
+          "entity": "opposite_side",
+          "sections": [
+            "adjacent-angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          },
+          "links": [
+            {
+              "fromSection": "adjacent-angles",
+              "surface": "opposite sides",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "positive angle",
+          "entity": "positive_angle",
+          "sections": [
+            "positive-angles"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "positive_angle"
+          },
+          "reason": "Not planted in \"positive-angles\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "using-preset-buttons-and-quick-angles",
+            "special-angle-30",
+            "special-angle-45",
+            "special-angle-60",
+            "special-angle-90",
+            "special-angle-120",
+            "special-angle-135",
+            "special-angle-150",
+            "special-angle-180",
+            "special-angle-210",
+            "special-angle-225",
+            "special-angle-240",
+            "special-angle-270",
+            "special-angle-300",
+            "special-angle-315",
+            "special-angle-330"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "radian"
+          },
+          "links": [
+            {
+              "fromSection": "using-preset-buttons-and-quick-angles",
+              "surface": "Radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "related-concepts-and-tools",
+            "reference-angles",
+            "reference-angle-in-quadrant-i",
+            "reference-angle-in-quadrant-ii",
+            "reference-angle-in-quadrant-iii",
+            "reference-angle-in-quadrant-iv",
+            "special-angle-210"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "reference_angle"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "reference angle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "quadrant-iv-function-signs"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "links": [
+            {
+              "fromSection": "quadrant-iv-function-signs",
+              "surface": "secant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "sector",
+          "entity": "sector",
+          "sections": [
+            "complementary-and-supplementary-angles",
+            "complementary-angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sector"
+          },
+          "links": [
+            {
+              "fromSection": "complementary-and-supplementary-angles",
+              "surface": "sector",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "quadrant-ii-function-signs",
+            "quadrant-iii-function-signs",
+            "quadrant-iv-function-signs"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "quadrant-ii-function-signs",
+              "surface": "tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "key-terms",
+            "trigonometry-specific-angle-concepts",
+            "reference-angles",
+            "coterminal-angles",
+            "reference-angle-in-quadrant-i",
+            "reference-angle-in-quadrant-ii",
+            "reference-angle-in-quadrant-iii",
+            "reference-angle-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "terminal_side"
+          },
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "terminal side",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "using-preset-buttons-and-quick-angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "using-preset-buttons-and-quick-angles",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/angle/types/trigoAngleTypesDiagrams.js",
@@ -16705,64 +20262,367 @@
       "component": "quadrant signs tool (see the page's imports)",
       "relatedTerms": [
         {
-          "term": "quadrant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "selecting-a-quadrant",
+            "choosing-a-function",
+            "reading-the-unit-circle-diagram",
+            "reading-the-explanation-panel",
+            "using-the-function-summary-grid",
+            "why-function-signs-depend-on-quadrant",
+            "the-astc-mnemonic",
+            "reciprocal-functions-share-signs",
+            "coordinate-signs-in-quadrant-i",
+            "coordinate-signs-in-quadrant-ii",
+            "coordinate-signs-in-quadrant-iii",
+            "coordinate-signs-in-quadrant-iv"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "sine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identities",
+          "entity": "identity",
+          "sections": [
+            "reciprocal-functions-share-signs",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "cosine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "selecting-a-quadrant",
+            "reading-the-coordinate-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reciprocal",
+          "entity": "reciprocal",
+          "sections": [
+            "key-terms",
+            "using-the-function-summary-grid",
+            "the-astc-mnemonic",
+            "reciprocal-functions-share-signs",
+            "related-concepts-and-tools",
+            "coordinate-signs-in-quadrant-ii",
+            "coordinate-signs-in-quadrant-iii",
+            "coordinate-signs-in-quadrant-iv"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "spans",
+          "entity": "span",
+          "sections": [
+            "coordinate-signs-in-quadrant-i",
+            "coordinate-signs-in-quadrant-ii",
+            "coordinate-signs-in-quadrant-iii",
+            "coordinate-signs-in-quadrant-iv"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "selecting-a-quadrant",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          },
+          "links": [
+            {
+              "fromSection": "selecting-a-quadrant",
+              "surface": "angle",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "cosecant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosecant",
+          "sections": [
+            "cosecant-in-quadrant-i",
+            "cosecant-in-quadrant-ii",
+            "cosecant-in-quadrant-iii",
+            "cosecant-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosecant"
+          },
+          "links": [
+            {
+              "fromSection": "cosecant-in-quadrant-i",
+              "surface": "cosecant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "secant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "coordinate-signs-in-quadrant-iv",
+            "cosine-in-quadrant-i",
+            "secant-in-quadrant-i",
+            "cosine-in-quadrant-ii",
+            "secant-in-quadrant-ii",
+            "cosine-in-quadrant-iii",
+            "secant-in-quadrant-iii",
+            "cosine-in-quadrant-iv",
+            "secant-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "coordinate-signs-in-quadrant-iv",
+              "surface": "cosine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "cotangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cotangent",
+          "sections": [
+            "cotangent-in-quadrant-i",
+            "cotangent-in-quadrant-ii",
+            "cotangent-in-quadrant-iii",
+            "cotangent-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cotangent"
+          },
+          "links": [
+            {
+              "fromSection": "cotangent-in-quadrant-i",
+              "surface": "cotangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "selecting-a-quadrant",
+            "reading-the-coordinate-panel"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "selecting-a-quadrant",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "selecting-a-quadrant",
+            "reading-the-coordinate-panel",
+            "coordinate-signs-in-quadrant-i",
+            "coordinate-signs-in-quadrant-ii",
+            "coordinate-signs-in-quadrant-iii",
+            "coordinate-signs-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "radian"
+          },
+          "links": [
+            {
+              "fromSection": "selecting-a-quadrant",
+              "surface": "radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         },
         {
           "term": "reference angle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reference_angle",
+          "sections": [
+            "key-terms",
+            "reading-the-coordinate-panel",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "reference_angle"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "coordinate signs",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "secant-in-quadrant-i",
+            "secant-in-quadrant-ii",
+            "secant-in-quadrant-iii",
+            "secant-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "secant"
+          },
+          "links": [
+            {
+              "fromSection": "secant-in-quadrant-i",
+              "surface": "secant",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "coordinate-signs-in-quadrant-ii",
+            "sine-in-quadrant-i",
+            "cosecant-in-quadrant-i",
+            "sine-in-quadrant-ii",
+            "cosecant-in-quadrant-ii",
+            "sine-in-quadrant-iii",
+            "cosecant-in-quadrant-iii",
+            "sine-in-quadrant-iv",
+            "cosecant-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "coordinate-signs-in-quadrant-ii",
+              "surface": "sine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "coordinate-signs-in-quadrant-iii",
+            "tangent-in-quadrant-i",
+            "tangent-in-quadrant-ii",
+            "tangent-in-quadrant-iii",
+            "tangent-in-quadrant-iv"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "tangent"
+          },
+          "links": [
+            {
+              "fromSection": "coordinate-signs-in-quadrant-iii",
+              "surface": "tangent",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "selecting-a-quadrant",
+            "reading-the-unit-circle-diagram",
+            "reading-the-coordinate-panel",
+            "why-function-signs-depend-on-quadrant"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "selecting-a-quadrant",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/quadrantSignsDiagrams.js",
@@ -38512,7 +42372,371 @@
       "pagePath": "pages/visual-tools/unit-circle/index.jsx",
       "legacy": true,
       "note": "Legacy top-level tool; stays at /visual-tools/unit-circle (traffic rule). Registered 2026-09-20 for Line 3.",
-      "relatedTerms": [],
+      "relatedTerms": [
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "angles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "division",
+          "entity": "complex_number",
+          "sections": [
+            "why"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "fractions",
+          "entity": "fraction",
+          "sections": [
+            "special"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "definition",
+            "why",
+            "angles",
+            "special"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "definition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "relations",
+          "entity": "relation",
+          "sections": [
+            "special"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "span",
+          "entity": "span",
+          "sections": [
+            "angles",
+            "quadrants",
+            "special"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "definition",
+            "angles",
+            "quadrants",
+            "special"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "definition",
+              "target": {
+                "path": "/trigonometry",
+                "section": "angles"
+              },
+              "method": "pre-existing",
+              "added": "2026-09-20"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "angle"
+          }
+        },
+        {
+          "term": "absolute values",
+          "entity": "absolute_value",
+          "sections": [
+            "special"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "special",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
+        },
+        {
+          "term": "adjacent side",
+          "entity": "adjacent_side",
+          "sections": [
+            "why"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "adjacent_side"
+          },
+          "links": [
+            {
+              "fromSection": "why",
+              "surface": "adjacent side",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "arc length",
+          "entity": "arc_length",
+          "sections": [
+            "angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "arc_length"
+          },
+          "links": [
+            {
+              "fromSection": "angles",
+              "surface": "arc length",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "why",
+            "quadrants",
+            "special"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "cosine"
+          },
+          "links": [
+            {
+              "fromSection": "why",
+              "surface": "cosine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "angles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          },
+          "links": [
+            {
+              "fromSection": "angles",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "definition",
+            "why"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "hypotenuse"
+          },
+          "links": [
+            {
+              "fromSection": "definition",
+              "surface": "hypotenuse",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "why"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          },
+          "links": [
+            {
+              "fromSection": "why",
+              "surface": "opposite side",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "angles",
+            "quadrants",
+            "special"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "radian"
+          },
+          "links": [
+            {
+              "fromSection": "angles",
+              "surface": "radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "why",
+            "quadrants",
+            "special"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "sine"
+          },
+          "links": [
+            {
+              "fromSection": "why",
+              "surface": "sine",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "square roots",
+          "entity": "square_root",
+          "sections": [
+            "special"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "special",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "definition",
+            "why",
+            "angles",
+            "quadrants",
+            "special"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          },
+          "links": [
+            {
+              "fromSection": "definition",
+              "surface": "unit circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        }
+      ],
       "relatedTools": [
         {
           "key": "angle-explorer",

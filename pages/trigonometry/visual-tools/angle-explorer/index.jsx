@@ -45,7 +45,7 @@ export async function getStaticProps(){
       title:`Setting an Angle`,
       content:`Type any value into the **Angle Value** input to update the diagram, properties panel, and trigonometric values in real time. The explorer accepts positive numbers, negative numbers, and values beyond a single rotation, so $720°$ or $-45°$ are both valid inputs.
 
-Tips for entering angles:
+Tips for entering [angles](!/trigonometry#angles):
 • Use the up and down arrow keys for fine adjustments.
 • Type a decimal like $52.5$ to explore non-special positions.
 • Press **Reset** to return to $0°$ at any time.
@@ -119,7 +119,7 @@ Watching these values change as you sweep through angles is one of the fastest w
 **Related Angles** column:
 • **Complementary**: $90° - \\theta$, shown only when $\\theta$ is between $0°$ and $90°$.
 • **Supplementary**: $180° - \\theta$, shown only when $\\theta$ is between $0°$ and $180°$.
-• **Reflex**: $360° - \\theta$, the angle on the opposite side of the rotation.
+• **Reflex**: $360° - \\theta$, the angle on the [opposite side](!/trigonometry/right-triangle#1) of the rotation.
 
 [Coterminal Angles](!#coterminal-angles) column:
 • **Positive** adds $360°$ to the input.
@@ -201,7 +201,7 @@ For full definitions, see [complementary angles](!/trigonometry/definitions#comp
 • **Reference Angle Calculator** — focused tool for the reduction rules across quadrants.
 • [Angle Types Explorer](!/trigonometry/visual-tools/angle-types) — acute, right, obtuse, straight and reflex angles, with complementary and supplementary pairs side by side.
 • [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — which of the six functions are positive in the quadrant an angle lands in.
-• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — the same angles inside a triangle, with the law of sines and law of cosines built in.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — the same angles inside a triangle, with the [law of sines](!/trigonometry/sines-cosines-law#2) and [law of cosines](!/trigonometry/sines-cosines-law#5) built in.
 • [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — follow an angle along the sine, cosine and tangent curves.`,
       before:``,
       after:``,

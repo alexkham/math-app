@@ -48,10 +48,10 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Switching Between Functions`,
-      content:`Six tabs at the top let you select which negative-angle identity to study: $\\sin(-\\theta)$, $\\cos(-\\theta)$, $\\tan(-\\theta)$, $\\csc(-\\theta)$, $\\sec(-\\theta)$, $\\cot(-\\theta)$.
+      content:`Six tabs at the top let you select which negative-[angle](!/trigonometry#angles) identity to study: $\\sin(-\\theta)$, $\\cos(-\\theta)$, $\\tan(-\\theta)$, $\\csc(-\\theta)$, $\\sec(-\\theta)$, $\\cot(-\\theta)$.
 
 How selection changes the view:
-• $\\sin$ and $\\cos$ open the **geometric proof** scene showing the reflection $P \\to P'$ on the unit circle.
+• $\\sin$ and $\\cos$ open the **geometric proof** scene showing the reflection $P \\to P'$ on the [unit circle](!/trigonometry/unit-circle#1).
 • $\\tan$, $\\csc$, $\\sec$, and $\\cot$ open the **derived identity card** with the algebraic chain.
 • The active tab is highlighted in deep blue.
 • The URL updates with $?negFn=...$ so links you share preserve the selected function.
@@ -63,7 +63,7 @@ Clicking any row of the **formula table** at the bottom also jumps to that funct
     },
     obj2:{
       title:`Adjusting the Angle θ`,
-      content:`Each view exposes a slider for the angle $\\theta$ in degrees, between $15°$ and $75°$.
+      content:`Each view exposes a slider for the angle $\\theta$ in [degrees](!/trigonometry/degrees-radians#1), between $15°$ and $75°$.
 
 What changes as you slide:
 • On geometric scenes, $P$ moves along the upper unit circle and $P'$ follows below as its mirror image.
@@ -154,9 +154,9 @@ For odd functions, the two values are equal in magnitude and opposite in sign. F
 
 **sin(-θ) = -sin θ** — reflection flips the y-coordinate:
 $$P = (\\cos\\theta, \\sin\\theta) \\;\\to\\; P' = (\\cos\\theta, -\\sin\\theta)$$
-Since the y-coordinate of $P'$ is $\\sin(-\\theta)$ by definition, $\\sin(-\\theta) = -\\sin\\theta$. Sine is **odd**.
+Since the y-coordinate of $P'$ is $\\sin(-\\theta)$ by definition, $\\sin(-\\theta) = -\\sin\\theta$. [Sine](!/trigonometry/functions#1) is **odd**.
 
-**cos(-θ) = cos θ** — reflection preserves the x-coordinate. The x-coordinate of $P'$ equals the x-coordinate of $P$, which is $\\cos\\theta$. Therefore $\\cos(-\\theta) = \\cos\\theta$. Cosine is **even**.
+**cos(-θ) = cos θ** — reflection preserves the x-coordinate. The x-coordinate of $P'$ equals the x-coordinate of $P$, which is $\\cos\\theta$. Therefore $\\cos(-\\theta) = \\cos\\theta$. [Cosine](!/trigonometry/functions#2) is **even**.
 
 Each is treated stage by stage below: [the sine form](!#the-sine-negative-angle-identity) and [the cosine form](!#the-cosine-negative-angle-identity).
 
@@ -176,7 +176,7 @@ $$\\tan(-\\theta) = \\frac{\\sin(-\\theta)}{\\cos(-\\theta)} = \\frac{-\\sin\\th
 
 [sec(-θ) = sec θ](!#the-secant-negative-angle-identity) (even) — reciprocal of an even function is even: $\\sec(-\\theta) = 1/\\cos(-\\theta) = 1/\\cos\\theta = \\sec\\theta$.
 
-[cot(-θ) = -cot θ](!#the-cotangent-negative-angle-identity) (odd) — reciprocal of tangent: $\\cot(-\\theta) = 1/\\tan(-\\theta) = -1/\\tan\\theta = -\\cot\\theta$.
+[cot(-θ) = -cot θ](!#the-cotangent-negative-angle-identity) (odd) — reciprocal of [tangent](!/trigonometry/functions#3): $\\cot(-\\theta) = 1/\\tan(-\\theta) = -1/\\tan\\theta = -\\cot\\theta$.
 
 For full derivations, see the **trigonometric identities page** and the **reciprocal identities page**.`,
       before:``,
@@ -246,7 +246,7 @@ This is the general rule in miniature: odd divided by even is odd. Both ingredie
     },
     obj15:{
       title:`The Cosecant Negative-Angle Identity`,
-      content:`Cosecant is the reciprocal of sine, and a reciprocal keeps the parity of what it inverts.`,
+      content:`[Cosecant](!/trigonometry/functions#4) is the reciprocal of sine, and a reciprocal keeps the parity of what it inverts.`,
       before:``,
       after:`$$\\csc(-\\theta) = \\frac{1}{\\sin(-\\theta)} = \\frac{1}{-\\sin\\theta} = -\\csc\\theta$$
 
@@ -255,7 +255,7 @@ The minus sign moves out of the denominator untouched, so cosecant is odd for th
     },
     obj16:{
       title:`The Secant Negative-Angle Identity`,
-      content:`Secant is the reciprocal of cosine, so it is the one derived identity with no sign change at all.`,
+      content:`[Secant](!/trigonometry/functions#5) is the reciprocal of cosine, so it is the one derived identity with no sign change at all.`,
       before:``,
       after:`$$\\sec(-\\theta) = \\frac{1}{\\cos(-\\theta)} = \\frac{1}{\\cos\\theta} = \\sec\\theta$$
 
@@ -264,7 +264,7 @@ Nothing flips because nothing flipped in [the cosine identity](!#the-cosine-nega
     },
     obj17:{
       title:`The Cotangent Negative-Angle Identity`,
-      content:`Cotangent is the reciprocal of tangent, so it flips sign for the same reason tangent does — one step further removed from the geometry.`,
+      content:`[Cotangent](!/trigonometry/functions#6) is the reciprocal of tangent, so it flips sign for the same reason tangent does — one step further removed from the geometry.`,
       before:``,
       after:`$$\\cot(-\\theta) = \\frac{1}{\\tan(-\\theta)} = \\frac{1}{-\\tan\\theta} = -\\cot\\theta$$
 

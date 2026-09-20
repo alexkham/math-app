@@ -629,7 +629,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started With the Explorer`,
-      content: `Use the tabs at the top to switch between the six trig functions evaluated at $\\pi - \\theta$. Each tab loads either a **geometric reflection view** (for sin and cos) or a **derivation card** (for tan, csc, sec, and cot). The $\\theta$ slider below the visualization controls the angle from $15^\\circ$ to $75^\\circ$, and every number, formula, and visual updates in real time as you drag.
+      content: `Use the tabs at the top to switch between the six trig functions evaluated at $\\pi - \\theta$. Each tab loads either a **geometric reflection view** (for sin and cos) or a **derivation card** (for tan, csc, sec, and cot). The $\\theta$ slider below the visualization controls the [angle](!/trigonometry#angles) from $15^\\circ$ to $75^\\circ$, and every number, formula, and visual updates in real time as you drag.
 
 The **formula comparison table** at the bottom stays visible across all tabs. It shows every identity, its sign behavior, and the current numerical value side by side, so the relationships between the six functions are always in view.
 
@@ -725,13 +725,13 @@ Both panels display $-0.500$, confirming the identity. Try sweeping the slider a
 
     obj7: {
       title: `What Are Supplementary Angle Identities?`,
-      content: `**Supplementary angles** are two angles whose measures sum to $\\pi$ radians ($180^\\circ$). For any angle $\\theta$, its supplementary partner is $\\pi - \\theta$. The supplementary identities express how each of the six trig functions behaves when its input changes from $\\theta$ to $\\pi - \\theta$.
+      content: `**Supplementary angles** are two angles whose measures sum to $\\pi$ [radians](!/trigonometry/degrees-radians#2) ($180^\\circ$). For any angle $\\theta$, its supplementary partner is $\\pi - \\theta$. The supplementary identities express how each of the six trig functions behaves when its input changes from $\\theta$ to $\\pi - \\theta$.
 
 Two functions stay unchanged: **sin** and **csc**.
 
 Four functions flip sign: **cos**, **tan**, **sec**, and **cot**.
 
-The split is not arbitrary. It mirrors a reflection of the unit circle point across the vertical axis: the y-coordinate (which gives sin) is preserved; the x-coordinate (which gives cos) negates. Every other identity inherits its behavior from [this single geometric fact](!#reflection-proof-step-6-compare-coordinates).
+The split is not arbitrary. It mirrors a reflection of the [unit circle](!/trigonometry/unit-circle#1) point across the vertical axis: the y-coordinate (which gives sin) is preserved; the x-coordinate (which gives cos) negates. Every other identity inherits its behavior from [this single geometric fact](!#reflection-proof-step-6-compare-coordinates).
 
 For broader context, see the **trigonometric identities reference**.`,
       before: ``,
@@ -817,7 +817,7 @@ For the partner family, see the **complementary angle identities visualizer**.`,
 
 [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — Relations between $\\sin^2$ and $\\cos^2$ that reflection across the $y$-axis leaves intact.
 
-**Basic Trigonometric Identities** — The [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used to extend the sine and cosine results to the other four functions.`,
+**Basic Trigonometric Identities** — The [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used to extend the [sine](!/trigonometry/functions#1) and [cosine](!/trigonometry/functions#2) results to the other four functions.`,
       before: ``,
       after: ``,
       link: '',
@@ -843,7 +843,7 @@ In the frozen picture the two horizontal legs are drawn in different colours for
     },
     obj14: {
       title: `The Tangent Supplementary Identity`,
-      content: `Tangent divides a quantity that survives the reflection by one that flips, so the quotient flips.`,
+      content: `[Tangent](!/trigonometry/functions#3) divides a quantity that survives the reflection by one that flips, so the quotient flips.`,
       before: ``,
       after: `$$\\tan(\\pi - \\theta) = \\frac{\\sin(\\pi - \\theta)}{\\cos(\\pi - \\theta)} = \\frac{\\sin\\theta}{-\\cos\\theta} = -\\tan\\theta$$
 
@@ -852,7 +852,7 @@ Both ingredients are proved geometrically — [sine](!#the-sine-supplementary-id
     },
     obj15: {
       title: `The Cosecant Supplementary Identity`,
-      content: `Cosecant is the reciprocal of sine, and since sine is unchanged at $\\pi - \\theta$, cosecant is unchanged too.`,
+      content: `[Cosecant](!/trigonometry/functions#4) is the reciprocal of sine, and since sine is unchanged at $\\pi - \\theta$, cosecant is unchanged too.`,
       before: ``,
       after: `$$\\csc(\\pi - \\theta) = \\frac{1}{\\sin(\\pi - \\theta)} = \\frac{1}{\\sin\\theta} = \\csc\\theta$$
 
@@ -861,7 +861,7 @@ Together with [sine](!#the-sine-supplementary-identity) this is one of only two 
     },
     obj16: {
       title: `The Secant Supplementary Identity`,
-      content: `Secant inverts cosine, so it inherits cosine's sign flip exactly.`,
+      content: `[Secant](!/trigonometry/functions#5) inverts cosine, so it inherits cosine's sign flip exactly.`,
       before: ``,
       after: `$$\\sec(\\pi - \\theta) = \\frac{1}{\\cos(\\pi - \\theta)} = \\frac{1}{-\\cos\\theta} = -\\sec\\theta$$
 
@@ -870,7 +870,7 @@ Its single source is [the cosine identity](!#the-cosine-supplementary-identity),
     },
     obj17: {
       title: `The Cotangent Supplementary Identity`,
-      content: `Cotangent is cosine over sine — the flipped quantity over the unchanged one — so it flips as well.`,
+      content: `[Cotangent](!/trigonometry/functions#6) is cosine over sine — the flipped quantity over the unchanged one — so it flips as well.`,
       before: ``,
       after: `$$\\cot(\\pi - \\theta) = \\frac{\\cos(\\pi - \\theta)}{\\sin(\\pi - \\theta)} = \\frac{-\\cos\\theta}{\\sin\\theta} = -\\cot\\theta$$
 
@@ -879,7 +879,7 @@ Read as the reciprocal of [tangent](!#the-tangent-supplementary-identity) the an
     },
     obj18: {
       title: `Reflection Proof, Step 1: Setup`,
-      content: `The proof opens with a single point $P$ on the unit circle at angle $\\theta$ from the x-axis, with both legs of its right triangle drawn: the horizontal leg is $\\cos\\theta$, the vertical leg is $\\sin\\theta$, and the hypotenuse $OP$ has length $1$.`,
+      content: `The proof opens with a single point $P$ on the unit circle at angle $\\theta$ from the x-axis, with both legs of its right triangle drawn: the horizontal leg is $\\cos\\theta$, the vertical leg is $\\sin\\theta$, and the [hypotenuse](!/trigonometry/right-triangle#1) $OP$ has length $1$.`,
       before: ``,
       after: `The two legs are coloured differently throughout the tool — deep blue for the horizontal, brown for the vertical — because the whole argument turns on the two behaving differently under the mirror.
 

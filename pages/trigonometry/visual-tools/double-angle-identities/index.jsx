@@ -549,7 +549,7 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Switching Between Functions`,
-      content:`A row of six tabs at the top lets you select which double-angle identity to study: $\\sin(2\\theta)$, $\\cos(2\\theta)$, $\\tan(2\\theta)$, $\\csc(2\\theta)$, $\\sec(2\\theta)$, $\\cot(2\\theta)$.
+      content:`A row of six tabs at the top lets you select which double-[angle](!/trigonometry#angles) identity to study: $\\sin(2\\theta)$, $\\cos(2\\theta)$, $\\tan(2\\theta)$, $\\csc(2\\theta)$, $\\sec(2\\theta)$, $\\cot(2\\theta)$.
 
 How selection changes the view:
 • $\\sin$ and $\\cos$ open the [geometric proof](!#geometric-proofs-sin2-and-cos2) scene with a step-by-step animation.
@@ -564,7 +564,7 @@ You can also click any row of the **formula table** at the bottom to jump direct
     },
     obj2:{
       title:`Adjusting the Angle θ`,
-      content:`Each view exposes a slider for the base angle $\\theta$ in degrees, between $10°$ and $80°$.
+      content:`Each view exposes a slider for the base angle $\\theta$ in [degrees](!/trigonometry/degrees-radians#1), between $10°$ and $80°$.
 
 What changes as you slide:
 • On geometric scenes, the SVG triangle resizes and reshapes in real time.
@@ -592,7 +592,7 @@ Each step adds one geometric element (radii, triangle fill, bisector, half-angle
     },
     obj4:{
       title:`Reading the Geometric Scene`,
-      content:`The SVG shows the unit circle with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $2\\theta$ between them.
+      content:`The SVG shows the [unit circle](!/trigonometry/unit-circle#1) with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $2\\theta$ between them.
 
 Elements that appear across the steps:
 • **Red arc** at $O$ — the apex angle, labeled $C = 2\\theta$.
@@ -656,7 +656,7 @@ The two numbers always match (within rounding to three decimals). Sweeping the s
 $$\\text{area} = \\tfrac{1}{2}\\sin(2\\theta) = \\sin\\theta\\cos\\theta$$
 Multiplying by $2$ gives the identity.
 
-[cos(2θ) = 1 - 2 sin²θ](!#the-cosine-double-angle-identity) — the law of cosines gives $|AB|^2 = 2 - 2\\cos(2\\theta)$, while the half-chord computation gives $|AB|^2 = 4\\sin^2\\theta$. Equating the two yields the result.
+[cos(2θ) = 1 - 2 sin²θ](!#the-cosine-double-angle-identity) — the [law of cosines](!/trigonometry/sines-cosines-law#5) gives $|AB|^2 = 2 - 2\\cos(2\\theta)$, while the half-chord computation gives $|AB|^2 = 4\\sin^2\\theta$. Equating the two yields the result.
 
 For full coverage of these proofs and equivalent forms, see the **double angle identities theory page**.`,
       before:``,
@@ -690,7 +690,7 @@ For step-by-step derivations of each, see the **trigonometric identities page** 
 
 • **Integration** — $\\sin^2\\theta$ and $\\cos^2\\theta$ become integrable after substituting $\\cos(2\\theta) = 1 - 2\\sin^2\\theta$ or $2\\cos^2\\theta - 1$.
 • **Equation solving** — equations mixing $\\sin\\theta$ with $\\sin(2\\theta)$ collapse to single-angle equations after substitution.
-• **Wave physics and signal processing** — sums of sinusoids reduce via these formulas, separating frequency components.
+• **Wave physics and signal processing** — sums of sinusoids reduce via these formulas, separating [frequency](!/trigonometry/graphs#7) components.
 • **Geometry and circular motion** — relating arc, chord, and apothem in regular polygons uses $\\sin(2\\theta)$ and $\\cos(2\\theta)$ directly.
 
 For applications and worked examples, see the **trigonometric identities applications page**.`,
@@ -707,7 +707,7 @@ For applications and worked examples, see the **trigonometric identities applica
 • [Half-Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — solve the double-angle formulas backward to express $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$.
 • [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every identity in this tool.
 • [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
-• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in law of sines and law of cosines.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in [law of sines](!/trigonometry/sines-cosines-law#2) and law of cosines.
 • [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — the parity rules that fix the sign of each formula at $-\\theta$.
 • [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — how $\\pi - \\theta$ interacts with the double-angle results.
 • **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used in the derived tan, csc, sec and cot forms.`,
@@ -736,7 +736,7 @@ Substituting $\\sin^2\\theta = 1 - \\cos^2\\theta$ gives the equivalent forms $2
     },
     obj14:{
       title:`The Tangent Double-Angle Identity`,
-      content:`Tangent needs no new geometry: it is sine over cosine, so its double-angle formula follows algebraically from the two proved identities.`,
+      content:`[Tangent](!/trigonometry/functions#3) needs no new geometry: it is sine over cosine, so its double-angle formula follows algebraically from the two proved identities.`,
       before:``,
       after:`$$\\tan(2\\theta) = \\frac{\\sin(2\\theta)}{\\cos(2\\theta)} = \\frac{2\\sin\\theta\\cos\\theta}{\\cos^2\\theta - \\sin^2\\theta} = \\frac{2\\tan\\theta}{1 - \\tan^2\\theta}$$
 
@@ -745,7 +745,7 @@ The last step divides numerator and denominator by $\\cos^2\\theta$ — the move
     },
     obj15:{
       title:`The Cosecant Double-Angle Identity`,
-      content:`Cosecant is the reciprocal of sine, so its double-angle formula is one substitution away from the geometric result.`,
+      content:`[Cosecant](!/trigonometry/functions#4) is the reciprocal of sine, so its double-angle formula is one substitution away from the geometric result.`,
       before:``,
       after:`$$\\csc(2\\theta) = \\frac{1}{\\sin(2\\theta)} = \\frac{1}{2\\sin\\theta\\cos\\theta}$$
 
@@ -754,7 +754,7 @@ The formula is undefined wherever $\\sin(2\\theta) = 0$ — within the tool's $1
     },
     obj16:{
       title:`The Secant Double-Angle Identity`,
-      content:`Secant inverts cosine, so the double-angle version inverts the cosine identity.`,
+      content:`[Secant](!/trigonometry/functions#5) inverts cosine, so the double-angle version inverts the cosine identity.`,
       before:``,
       after:`$$\\sec(2\\theta) = \\frac{1}{\\cos(2\\theta)} = \\frac{1}{1 - 2\\sin^2\\theta}$$
 
@@ -763,7 +763,7 @@ It diverges where $\\cos(2\\theta) = 0$, i.e. at $\\theta = 45°$ — sweep the 
     },
     obj17:{
       title:`The Cotangent Double-Angle Identity`,
-      content:`Cotangent is the reciprocal of tangent, so its formula is the tangent identity flipped upside down.`,
+      content:`[Cotangent](!/trigonometry/functions#6) is the reciprocal of tangent, so its formula is the tangent identity flipped upside down.`,
       before:``,
       after:`$$\\cot(2\\theta) = \\frac{1}{\\tan(2\\theta)} = \\frac{1 - \\tan^2\\theta}{2\\tan\\theta}$$
 
@@ -795,7 +795,7 @@ This is the left-hand side of the identity in disguise — one honest measuremen
     },
     obj21:{
       title:`Sine Proof, Step 4: Read Off the Legs`,
-      content:`In right triangle $OMA$ the hypotenuse is $OA = 1$ and the angle at $O$ is $\\theta$. Its legs are therefore exactly the basic ratios:`,
+      content:`In right triangle $OMA$ the [hypotenuse](!/trigonometry/right-triangle#1) is $OA = 1$ and the angle at $O$ is $\\theta$. Its legs are therefore exactly the basic ratios:`,
       before:``,
       after:`$$MA = \\sin\\theta \\qquad OM = \\cos\\theta$$
 

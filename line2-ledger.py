@@ -39,7 +39,7 @@
 # links[] | reason). If line-2-agent-instructions-v3.md names this field
 # differently, rename it here - nothing else depends on the name.
 
-import io, json, re, sys, datetime
+import io, json, os, re, sys, datetime
 
 REG_PATH = 'app/api/db/repositories/visual-tools-registry.json'
 INDEX_PATH = 'line2-concept-index.json'
@@ -61,6 +61,15 @@ SKIP = [
 ]
 
 CONTENT = re.compile(r"\n\s*(obj\d+)\s*:\s*\{[\s\S]*?content\s*:\s*`((?:[^`\\]|\\.)*)`")
+
+# Legacy pages (e.g. /visual-tools/unit-circle) key sections by word rather than
+# objN and keep the prose in before/after/between instead of content, so the
+# objN+content pattern finds nothing there. This pair covers both shapes.
+CONTENT_ANY = re.compile(
+    r"\n\s{2,8}(\w+)\s*:\s*\{"
+    r"((?:[^{}`]|`(?:[^`\\]|\\.)*`|\{[^{}]*\})*?)"
+    r"\n\s{2,8}\},")
+FIELD = re.compile(r"\b(?:content|before|after|between)\s*:\s*`((?:[^`\\]|\\.)*)`")
 
 
 def strip_comments(src):
@@ -91,6 +100,14 @@ def section_prose(page_src):
     for region in regions:
         for c in CONTENT.finditer('\n' + region):
             blocks.setdefault(c.group(1), c.group(2))
+    # legacy shape: word-keyed sections whose prose lives in before/after/between.
+    # Merged, not used as a fallback: a page can carry both shapes at once (the
+    # unit-circle page has word-keyed sections AND an empty objN stub).
+    for region in regions:
+        for c in CONTENT_ANY.finditer('\n' + region):
+            text = '\n\n'.join(f.group(1) for f in FIELD.finditer(c.group(2)))
+            if text.strip() and not blocks.get(c.group(1)):
+                blocks[c.group(1)] = text
     return blocks
 
 
@@ -103,6 +120,12 @@ def wired_sections(page_src):
         return rows
     return [(m.group(2), m.group(1)) for m in
             re.finditer(r"id\s*:\s*'([a-z0-9\-]+)'[\s\S]{0,200}?sectionsContent(?:\.|\[')(\w+)", page_src)]
+
+
+def page_file(entry):
+    """pagePath is a file path in newer sections and a URL in older ones."""
+    p = entry['pagePath']
+    return p if p.endswith('.jsx') else 'pages' + p + '/index.jsx'
 
 
 def resolve(entry, tool_section):
@@ -142,9 +165,9 @@ def existing_links(page_src):
 
 def build(tool_key):
     entry = REG['tools'][tool_key]
-    page = entry['pagePath']
-    if not page.endswith('.jsx'):
-        return None, 'pagePath is a URL, not a file: %s' % page
+    page = page_file(entry)
+    if not os.path.exists(page):
+        return None, 'page file not found: %s' % page
 
     raw = io.open(page, encoding='utf-8').read()
     src = strip_comments(raw)

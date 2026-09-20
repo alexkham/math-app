@@ -51,14 +51,14 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Selecting a Quadrant`,
-      content:`Four large buttons at the top represent quadrants [I](!#coordinate-signs-in-quadrant-i), [II](!#coordinate-signs-in-quadrant-ii), [III](!#coordinate-signs-in-quadrant-iii), and [IV](!#coordinate-signs-in-quadrant-iv). Each button shows the angle range in both degrees and radians.
+      content:`Four large buttons at the top represent quadrants [I](!#coordinate-signs-in-quadrant-i), [II](!#coordinate-signs-in-quadrant-ii), [III](!#coordinate-signs-in-quadrant-iii), and [IV](!#coordinate-signs-in-quadrant-iv). Each button shows the [angle](!/trigonometry#angles) range in both [degrees](!/trigonometry/degrees-radians#1) and [radians](!/trigonometry/degrees-radians#2).
 
 Two ways to select:
 • Click any quadrant button.
 • Press the keys **1**, **2**, **3**, or **4** for the matching quadrant.
 
 When you select a quadrant:
-• Its color highlights both the button and the corresponding region of the unit circle.
+• Its color highlights both the button and the corresponding region of the [unit circle](!/trigonometry/unit-circle#1).
 • A point and radius appear inside that region of the circle.
 • The coordinate panel updates with the matching x-sign and y-sign.
 • The explanation panel and function summary refresh with values for the new quadrant.`,
@@ -207,21 +207,21 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
     },
     obj12:{
       title:`Coordinate Signs in Quadrant II`,
-      content:`**Quadrant II** spans $90°$–$180°$ ($\\pi/2$ to $\\pi$ in radians): the x-coordinate is **negative**, the y-coordinate is **positive**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **S** — only sine and its reciprocal positive.`,
+      content:`**Quadrant II** spans $90°$–$180°$ ($\\pi/2$ to $\\pi$ in radians): the x-coordinate is **negative**, the y-coordinate is **positive**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **S** — only [sine](!/trigonometry/functions#1) and its reciprocal positive.`,
       before:``,
       after:`Function by function here: [sine](!#sine-in-quadrant-ii) +, [cosine](!#cosine-in-quadrant-ii) −, [tangent](!#tangent-in-quadrant-ii) −, [cosecant](!#cosecant-in-quadrant-ii) +, [secant](!#secant-in-quadrant-ii) −, [cotangent](!#cotangent-in-quadrant-ii) −.`,
       link:'',
     },
     obj13:{
       title:`Coordinate Signs in Quadrant III`,
-      content:`**Quadrant III** spans $180°$–$270°$ ($\\pi$ to $3\\pi/2$ in radians): the x-coordinate is **negative**, the y-coordinate is **negative**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **T** — only tangent and its reciprocal positive.`,
+      content:`**Quadrant III** spans $180°$–$270°$ ($\\pi$ to $3\\pi/2$ in radians): the x-coordinate is **negative**, the y-coordinate is **negative**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **T** — only [tangent](!/trigonometry/functions#3) and its reciprocal positive.`,
       before:``,
       after:`Function by function here: [sine](!#sine-in-quadrant-iii) −, [cosine](!#cosine-in-quadrant-iii) −, [tangent](!#tangent-in-quadrant-iii) +, [cosecant](!#cosecant-in-quadrant-iii) −, [secant](!#secant-in-quadrant-iii) −, [cotangent](!#cotangent-in-quadrant-iii) +.`,
       link:'',
     },
     obj14:{
       title:`Coordinate Signs in Quadrant IV`,
-      content:`**Quadrant IV** spans $270°$–$360°$ ($3\\pi/2$ to $2\\pi$ in radians): the x-coordinate is **positive**, the y-coordinate is **negative**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **C** — only cosine and its reciprocal positive.`,
+      content:`**Quadrant IV** spans $270°$–$360°$ ($3\\pi/2$ to $2\\pi$ in radians): the x-coordinate is **positive**, the y-coordinate is **negative**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **C** — only [cosine](!/trigonometry/functions#2) and its reciprocal positive.`,
       before:``,
       after:`Function by function here: [sine](!#sine-in-quadrant-iv) −, [cosine](!#cosine-in-quadrant-iv) +, [tangent](!#tangent-in-quadrant-iv) −, [cosecant](!#cosecant-in-quadrant-iv) −, [secant](!#secant-in-quadrant-iv) +, [cotangent](!#cotangent-in-quadrant-iv) −.`,
       link:'',
@@ -249,21 +249,21 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
     },
     obj18:{
       title:`Cosecant in Quadrant I`,
-      content:`In **Quadrant I** ($0°$–$90°$), cosecant is **positive**: $\\csc\\theta = r/y$, and it inherits sine's sign — y is positive, $r$ positive.`,
+      content:`In **Quadrant I** ($0°$–$90°$), [cosecant](!/trigonometry/functions#4) is **positive**: $\\csc\\theta = r/y$, and it inherits sine's sign — y is positive, $r$ positive.`,
       before:``,
       after:`At the sample angle the diagram freezes, $\\csc 45° = \\sqrt{2}$ (\\approx 1.414). Its reciprocal partner, [sine](!#sine-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
       link:'',
     },
     obj19:{
       title:`Secant in Quadrant I`,
-      content:`In **Quadrant I** ($0°$–$90°$), secant is **positive**: $\\sec\\theta = r/x$, and it inherits cosine's sign — x is positive, $r$ positive.`,
+      content:`In **Quadrant I** ($0°$–$90°$), [secant](!/trigonometry/functions#5) is **positive**: $\\sec\\theta = r/x$, and it inherits cosine's sign — x is positive, $r$ positive.`,
       before:``,
       after:`At the sample angle the diagram freezes, $\\sec 45° = \\sqrt{2}$ (\\approx 1.414). Its reciprocal partner, [cosine](!#cosine-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
       link:'',
     },
     obj20:{
       title:`Cotangent in Quadrant I`,
-      content:`In **Quadrant I** ($0°$–$90°$), cotangent is **positive**: $\\cot\\theta = x/y$, and y is positive and x is positive, so their ratio is positive.`,
+      content:`In **Quadrant I** ($0°$–$90°$), [cotangent](!/trigonometry/functions#6) is **positive**: $\\cot\\theta = x/y$, and y is positive and x is positive, so their ratio is positive.`,
       before:``,
       after:`At the sample angle the diagram freezes, $\\cot 45° = 1$. Its reciprocal partner, [tangent](!#tangent-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
       link:'',

@@ -45,9 +45,9 @@ export async function getStaticProps(){
       content:`• **Vertex** — the common endpoint where the two rays of an angle meet.
 • **Initial side** — the ray from which rotation is measured. In [standard position](!#standard-position) it lies along the positive x-axis.
 • **Terminal side** — the ray reached after rotating by the angle.
-• **Quadrant** — one of four regions $I$, $II$, $III$, $IV$ where the terminal side may land.
+• **Quadrant** — one of four regions $I$, $II$, $III$, $IV$ where the [terminal side](!/trigonometry/degrees-radians#6) may land.
 • [Reference angle](!#reference-angles) — the acute angle between the terminal side and the nearest x-axis. Always between $0°$ and $90°$.
-• [Coterminal angles](!#coterminal-angles) — angles sharing the same terminal side, differing by full rotations ($360° n$).
+• [Coterminal angles](!#coterminal-angles) — [angles](!/trigonometry#angles) sharing the same terminal side, differing by full rotations ($360° n$).
 • [Special angles](!#special-angles-on-the-unit-circle) — the $16$ unit-circle angles with exact $\\sin$, $\\cos$, $\\tan$ values.
 • [Directed angle](!#directed-angles) — an angle carrying a sign indicating rotation direction: positive for counterclockwise, negative for clockwise.`,
       before:``,
@@ -90,7 +90,7 @@ How drag works:
 • The handle follows your pointer around the vertex.
 • The angle value updates continuously in the side panel.
 • Some scenes (Vertical, Adjacent) include two independent handles.
-• On **Standard Position** and **Directed Angles**, drag below the x-axis to produce negative angles.
+• On **Standard Position** and **Directed Angles**, drag below the x-axis to produce [negative angles](!/trigonometry/degrees-radians#6).
 
 Snap-to-special behavior makes it easy to land on common values: as you approach $0°$, $30°$, $45°$, $60°$, $90°$, etc., the handle locks onto the exact value.`,
       before:``,
@@ -105,7 +105,7 @@ Examples:
 • **Angle Types** — seven buttons (Zero, Acute, Right, Obtuse, Straight, Reflex, Full) jump to representative angles.
 • **Complementary & Supplementary** — a two-tab switch toggles the constraint between summing to $90°$ and $180°$.
 • **Coterminal Angles** — $+$ and $-$ buttons step through full-rotation offsets from $n = -3$ to $n = +3$.
-• **Special Angles** — clicking any of the $16$ ringed points on the unit circle selects it; a Degrees / Radians / Both toggle controls labels.
+• **Special Angles** — clicking any of the $16$ ringed points on the [unit circle](!/trigonometry/unit-circle#1) selects it; a [Degrees](!/trigonometry/degrees-radians#1) / [Radians](!/trigonometry/degrees-radians#2) / Both toggle controls labels.
 
 Presets are the fastest way to see the boundary cases of each concept.`,
       before:``,
@@ -205,10 +205,10 @@ For applications and worked examples, see the **trigonometry foundations page**.
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — single-angle visualizer focused on type, quadrant, and reference angle.
+• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — single-angle visualizer focused on type, quadrant, and [reference angle](!/trigonometry/unit-circle#5).
 • [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
 • [Functions Signs by Quadrants](!/trigonometry/visual-tools/functions-signs) — the ASTC rule explained interactively.
-• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — angles inside triangles, with built-in law of sines and law of cosines.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — angles inside triangles, with built-in [law of sines](!/trigonometry/sines-cosines-law#2) and [law of cosines](!/trigonometry/sines-cosines-law#5).
 • [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every special angle in this tool.
 • [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — formulas that combine angles into $2\\theta$ relationships.`,
       before:``,
@@ -218,7 +218,7 @@ For applications and worked examples, see the **trigonometry foundations page**.
 
     obj12:{
       title:`Complementary and Supplementary Angles`,
-      content:`Two angles are [complementary](!#complementary-angles) when their measures sum to $90°$ and [supplementary](!#supplementary-angles) when they sum to $180°$. The scene draws the pair as a blue sector $\\alpha$ and an amber sector $\\beta$ sharing one vertex, with a two-tab toggle switching the constraint.`,
+      content:`Two angles are [complementary](!#complementary-angles) when their measures sum to $90°$ and [supplementary](!#supplementary-angles) when they sum to $180°$. The scene draws the pair as a blue [sector](!/trigonometry/degrees-radians#5) $\\alpha$ and an amber sector $\\beta$ sharing one vertex, with a two-tab toggle switching the constraint.`,
       before:``,
       after:`The complementary constraint fills a [right angle](!#right-angles), the supplementary one a [straight angle](!#straight-angles). Dragging the blue handle reallocates the total between $\\alpha$ and $\\beta$ while their sum stays fixed — the live sum line under the diagram never changes.
 
@@ -236,7 +236,7 @@ Drag to $90°$ and all four angles become equal [right angles](!#right-angles): 
     },
     obj14:{
       title:`Adjacent Angles`,
-      content:`**Adjacent angles** share a vertex and one common arm — drawn dashed and purple in the scene — and lie on opposite sides of it without overlapping. Two independent handles set $\\alpha$ (blue) and $\\beta$ (amber) separately.`,
+      content:`**Adjacent angles** share a vertex and one common arm — drawn dashed and purple in the scene — and lie on [opposite sides](!/trigonometry/right-triangle#1) of it without overlapping. Two independent handles set $\\alpha$ (blue) and $\\beta$ (amber) separately.`,
       before:``,
       after:`Unlike [complementary](!#complementary-angles) or [supplementary](!#supplementary-angles) pairs, adjacent angles have no fixed total: the combined angle is simply $\\alpha + \\beta$, updated live under the diagram.
 
@@ -380,7 +380,7 @@ First-quadrant values are the reference data for the entire circle — the [refe
     },
     obj30:{
       title:`Quadrant II: Function Signs`,
-      content:`**Quadrant II** holds angles between $90°$ and $180°$: x negative, y positive. Only sine (and cosecant) stays positive; cosine and tangent go negative.`,
+      content:`**Quadrant II** holds angles between $90°$ and $180°$: x negative, y positive. Only sine (and [cosecant](!/trigonometry/functions#4)) stays positive; cosine and [tangent](!/trigonometry/functions#3) go negative.`,
       before:``,
       after:`The frozen state shows $140°$: the sign cards read $\\sin +$, $\\cos -$, $\\tan -$, and the sign-chart row for II is highlighted.
 
@@ -389,7 +389,7 @@ To evaluate here, combine the sign rule with the [reference angle in Quadrant II
     },
     obj31:{
       title:`Quadrant III: Function Signs`,
-      content:`**Quadrant III** holds angles between $180°$ and $270°$: both coordinates negative. Sine and cosine are both negative, so their ratio — tangent (and cotangent) — is the survivor that stays positive.`,
+      content:`**Quadrant III** holds angles between $180°$ and $270°$: both coordinates negative. Sine and cosine are both negative, so their ratio — tangent (and [cotangent](!/trigonometry/functions#6)) — is the survivor that stays positive.`,
       before:``,
       after:`The frozen state shows $230°$: sign cards read $\\sin -$, $\\cos -$, $\\tan +$.
 
@@ -398,7 +398,7 @@ Every Quadrant III angle is a Quadrant I angle shifted by $180°$ — see the [r
     },
     obj32:{
       title:`Quadrant IV: Function Signs`,
-      content:`**Quadrant IV** holds angles between $270°$ and $360°$: x positive again, y still negative. Cosine (and secant) are positive; sine and tangent are negative.`,
+      content:`**Quadrant IV** holds angles between $270°$ and $360°$: x positive again, y still negative. Cosine (and [secant](!/trigonometry/functions#5)) are positive; sine and tangent are negative.`,
       before:``,
       after:`The frozen state shows $320°$: sign cards read $\\sin -$, $\\cos +$, $\\tan -$.
 

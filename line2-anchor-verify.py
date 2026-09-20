@@ -11,7 +11,10 @@ import io, json, re, sys, collections, urllib.request
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 REG = json.load(io.open('app/api/db/repositories/visual-tools-registry.json', encoding='utf-8'))
-LA = {k: v for k, v in REG['tools'].items() if v.get('section') == 'linear-algebra'}
+# Section is a flag: python line2-anchor-verify.py [--section=trigonometry|all]
+SECTION = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--section=')), 'linear-algebra')
+LA = {k: v for k, v in REG['tools'].items()
+      if SECTION == 'all' or v.get('section') == SECTION}
 BASE = 'http://localhost:3000'
 
 links = []

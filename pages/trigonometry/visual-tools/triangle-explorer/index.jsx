@@ -42,7 +42,7 @@ export async function getStaticProps(){
       title:`Key Terms`,
       content:`• **Vertex** — a corner of the triangle. Labeled $A$, $B$, $C$.
 • **Side** — segment between two vertices. Side $a$ lies opposite vertex $A$, side $b$ opposite $B$, and side $c$ opposite $C$.
-• **Interior angle** — the angle at a vertex, between the two sides meeting there. The three interior angles always sum to $180°$.
+• **Interior angle** — the angle at a vertex, between the two sides meeting there. The three interior [angles](!/trigonometry#angles) always sum to $180°$.
 • **Hypotenuse** — in a right triangle, the side opposite the $90°$ angle and the longest side.
 • **Pythagorean triple** — three positive integers $(a, b, c)$ satisfying $a^2 + b^2 = c^2$, like $3$-$4$-$5$ or $5$-$12$-$13$.`,
       before:``,
@@ -83,7 +83,7 @@ How dragging works:
 
 Per-angle controls:
 • Click the **lock** button — the angle freezes at its current value.
-• A number input appears with the locked value in degrees.
+• A number input appears with the locked value in [degrees](!/trigonometry/degrees-radians#1).
 • A range slider lets you change the locked value continuously.
 
 You can lock up to two angles at once. With two locked, the third is computed automatically as $180° - \\angle_1 - \\angle_2$. Locked angles show a dashed circle and a small lock icon at the vertex on the diagram.`,
@@ -214,7 +214,7 @@ Use it when you know two sides and the included angle, or all three sides. When 
       content:`Continue exploring with these connected resources:
 
 • **Trigonometric Functions** — $\\sin$, $\\cos$, $\\tan$ and their reciprocals.
-• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize any angle, its quadrant, and its reference angle.
+• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize any angle, its quadrant, and its [reference angle](!/trigonometry/unit-circle#5).
 • **Special Right Triangles** — exact ratios for $45$-$45$-$90$ and $30$-$60$-$90$.
 • **SOH CAH TOA** — mnemonic for trig ratios in right triangles.
 • **Triangle Solver** — compute missing sides and angles given partial information.

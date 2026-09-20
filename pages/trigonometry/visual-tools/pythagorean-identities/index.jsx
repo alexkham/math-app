@@ -552,7 +552,7 @@ export async function getStaticProps(){
       content:`Six tabs at the top let you pick which Pythagorean form to study: $\\sin\\theta$, $\\cos\\theta$, $\\tan\\theta$, $\\csc\\theta$, $\\sec\\theta$, $\\cot\\theta$.
 
 How selection changes the view:
-• $\\sin$ and $\\cos$ open the **geometric proof** scene with a step-by-step animation built on a right triangle inside the unit circle.
+• $\\sin$ and $\\cos$ open the **geometric proof** scene with a step-by-step animation built on a right triangle inside the [unit circle](!/trigonometry/unit-circle#1).
 • $\\tan$, $\\csc$, $\\sec$, and $\\cot$ open the **derived identity card** with the algebraic chain.
 • The active tab is highlighted in deep blue.
 • The URL updates with $?fn=...$ so links you share preserve the selected function.
@@ -564,7 +564,7 @@ Any row of the **formula table** at the bottom also jumps to that function.`,
     },
     obj2:{
       title:`Adjusting the Angle θ`,
-      content:`Each view exposes a slider for the angle $\\theta$ in degrees, between $10°$ and $80°$ (first quadrant).
+      content:`Each view exposes a slider for the [angle](!/trigonometry#angles) $\\theta$ in [degrees](!/trigonometry/degrees-radians#1), between $10°$ and $80°$ (first quadrant).
 
 What changes as you slide:
 • On geometric scenes, the triangle inside the unit circle reshapes in real time.
@@ -600,7 +600,7 @@ Elements that appear across the steps:
 • **Half-chord labels** — $\\sin\\theta$ on segment $MA$.
 • **Right-angle mark** at $M$ — the key to [applying Pythagoras](!#sine-proof-step-4-pythagoras).
 
-Once the legs are labeled, the identity $\\sin^2\\theta + \\cos^2\\theta = 1$ follows from leg² + leg² = hypotenuse² with hypotenuse $1$.`,
+Once the legs are labeled, the identity $\\sin^2\\theta + \\cos^2\\theta = 1$ follows from leg² + leg² = [hypotenuse](!/trigonometry/right-triangle#1)² with hypotenuse $1$.`,
       before:``,
       after:``,
       link:'',
@@ -740,7 +740,7 @@ Because $\\sin^2\\theta + \\cos^2\\theta = 1$ treats its two terms alike, this p
     },
     obj14:{
       title:`The Tangent Pythagorean Identity`,
-      content:`Tangent needs no new geometry. Dividing the base identity by $\\cos^2\\theta$ converts it into a statement about tangent and secant.`,
+      content:`[Tangent](!/trigonometry/functions#3) needs no new geometry. Dividing the base identity by $\\cos^2\\theta$ converts it into a statement about tangent and [secant](!/trigonometry/functions#5).`,
       before:``,
       after:`$$\\frac{\\sin^2\\theta + \\cos^2\\theta}{\\cos^2\\theta} = \\frac{1}{\\cos^2\\theta} \\quad\\Longrightarrow\\quad \\tan^2\\theta + 1 = \\sec^2\\theta$$
 
@@ -752,7 +752,7 @@ The same three lines, stopped one step earlier and solved the other way, give [t
     },
     obj15:{
       title:`The Cosecant Pythagorean Identity`,
-      content:`Cosecant comes from the other division: dividing the base identity by $\\sin^2\\theta$ brings cotangent and cosecant into play.`,
+      content:`[Cosecant](!/trigonometry/functions#4) comes from the other division: dividing the base identity by $\\sin^2\\theta$ brings [cotangent](!/trigonometry/functions#6) and cosecant into play.`,
       before:``,
       after:`$$\\frac{\\sin^2\\theta + \\cos^2\\theta}{\\sin^2\\theta} = \\frac{1}{\\sin^2\\theta} \\quad\\Longrightarrow\\quad 1 + \\cot^2\\theta = \\csc^2\\theta$$
 
@@ -822,7 +822,7 @@ Note what the theorem is being applied to: not an abstract triangle, but one who
     },
     obj22:{
       title:`Sine Proof, Step 5: Solve for sin²θ`,
-      content:`Subtracting $\\cos^2\\theta$ from both sides isolates the squared sine.`,
+      content:`Subtracting $\\cos^2\\theta$ from both sides isolates the squared [sine](!/trigonometry/functions#1).`,
       before:``,
       after:`$$\\sin^2\\theta = 1 - \\cos^2\\theta$$
 
@@ -878,7 +878,7 @@ There is genuinely only one theorem here, appearing twice under two tabs. What m
     },
     obj28:{
       title:`Cosine Proof, Step 5: Solve for cos²θ`,
-      content:`Subtracting $\\sin^2\\theta$ from both sides isolates the squared cosine.`,
+      content:`Subtracting $\\sin^2\\theta$ from both sides isolates the squared [cosine](!/trigonometry/functions#2).`,
       before:``,
       after:`$$\\cos^2\\theta = 1 - \\sin^2\\theta$$
 

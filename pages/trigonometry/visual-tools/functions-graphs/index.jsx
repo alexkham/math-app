@@ -45,8 +45,8 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Period** — the smallest positive value $T$ such that $f(\\theta + T) = f(\\theta)$ for all $\\theta$. $\\sin$, $\\cos$, $\\sec$, $\\csc$ have period $2\\pi$; $\\tan$ and $\\cot$ have period $\\pi$.
-• **Amplitude** — half the distance between the maximum and minimum values. Defined for bounded functions only ($\\sin$ and $\\cos$ have amplitude $1$).
+      content:`• **Period** — the smallest positive value $T$ such that $f(\\theta + T) = f(\\theta)$ for all $\\theta$. $\\sin$, $\\cos$, $\\sec$, $\\csc$ have [period](!/trigonometry/graphs#7) $2\\pi$; $\\tan$ and $\\cot$ have period $\\pi$.
+• **Amplitude** — half the distance between the maximum and minimum values. Defined for bounded functions only ($\\sin$ and $\\cos$ have [amplitude](!/trigonometry/graphs#6) $1$).
 • **Range** — the set of output values. $\\sin$ and $\\cos$: $[-1, 1]$. $\\sec$ and $\\csc$: $(-\\infty, -1] \\cup [1, \\infty)$. $\\tan$ and $\\cot$: all real numbers.
 • **Asymptote** — a vertical line the graph approaches but never crosses. Occurs where the function is undefined (denominator equals zero).
 • **Zero** — input value where the function equals zero. The x-axis intercepts of the curve.`,
@@ -70,14 +70,14 @@ The selected function stays highlighted in dark blue, making it easy to track wh
     },
     obj2:{
       title:`Switching Between Degrees and Radians`,
-      content:`The **Unit** toggle switches the x-axis labeling and the angle input between **deg** and **rad**.
+      content:`The **Unit** toggle switches the x-axis labeling and the [angle](!/trigonometry#angles) input between **deg** and **rad**.
 
 How the conversion works:
 • The underlying angle is stored internally and does not change when you switch units.
 • In **deg** mode, presets show $0°$, $30°$, $45°$, $60°$, $90°$, $180°$, $270°$, $360°$.
 • In **rad** mode, presets show $0$, $\\pi/6$, $\\pi/4$, $\\pi/3$, $\\pi/2$, $\\pi$, $3\\pi/2$, $2\\pi$.
 
-Use radians when working with calculus, periodicity proofs, or the **unit circle**, and degrees when the problem comes from geometry or applied measurement.`,
+Use [radians](!/trigonometry/degrees-radians#2) when working with calculus, periodicity proofs, or the **unit circle**, and [degrees](!/trigonometry/degrees-radians#1) when the problem comes from geometry or applied measurement.`,
       before:``,
       after:``,
       link:'',
@@ -186,10 +186,10 @@ The explorer reports "undefined" at these inputs and the curve appears to break 
       content:`Continue exploring with these connected resources:
 
 • [Unit Circle](!/visual-tools/unit-circle) — the geometric source of every trig function value.
-• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize angles, quadrants, reference angles, and related-angle relationships.
+• [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize angles, quadrants, [reference angles](!/trigonometry/unit-circle#5), and related-angle relationships.
 • **Trigonometric Identities** — Pythagorean, reciprocal, quotient, and angle-sum formulas.
 • **Inverse Trigonometric Functions** — arcsin, arccos, arctan and their restricted domains.
-• **Trig Equations Solver** — practice solving equations involving sine, cosine, and tangent.
+• **Trig Equations Solver** — practice solving equations involving [sine](!/trigonometry/functions#1), [cosine](!/trigonometry/functions#2), and [tangent](!/trigonometry/functions#3).
 • **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
 • [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — why each curve sits above or below the axis in each quadrant.
 • [Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities) — the six functions defined on the unit circle, then traced onto these graphs.

@@ -50,9 +50,9 @@ export async function getStaticProps(){
 
 • Drag the blue dot on the circle to rotate θ
 • Use the slider below the circle for precise multi-turn rotation
-• Toggle **deg** / **rad** for angle units
+• Toggle **deg** / **rad** for [angle](!/trigonometry#angles) units
 
-The graph on the right plots the active function against θ in real time. As you move the dot, the terminal point P traces the unit circle and the dot on the graph tracks the function value.`,
+The graph on the right plots the active function against θ in real time. As you move the dot, the terminal point P traces the [unit circle](!/trigonometry/unit-circle#1) and the dot on the graph tracks the function value.`,
       before:``,
       after:``,
       link:'',
@@ -75,9 +75,9 @@ When you switch, the diagram redraws to show the correct leg or legs and the gra
       content:`Each function has a five-stage derivation accessed through the **Prev / Play / Next** controls:
 
 1. **Place the angle** — the ray rotates and P appears on the unit circle
-2. **Identify the leg or legs** — vertical for sine, horizontal for cosine, both for tangent
+2. **Identify the leg or legs** — vertical for [sine](!/trigonometry/functions#1), horizontal for [cosine](!/trigonometry/functions#2), both for [tangent](!/trigonometry/functions#3)
 3. **Read the value** — leg length for sin and cos, a ratio for tan and cot, a reciprocal for csc and sec
-4. **Sign and range** — the quadrant logic and the reference angle
+4. **Sign and range** — the quadrant logic and the [reference angle](!/trigonometry/unit-circle#5)
 5. **Periodicity** — drag past 360° to see the spiral arc and coterminal ghost dots
 
 Use Play to auto-advance or step manually with Prev and Next. The rule and description update at each stage.`,
@@ -101,11 +101,11 @@ Watch how each leg flips sign as P crosses an axis — the vertical leg is [sine
     },
     obj5:{
       title:`Reading the Graph`,
-      content:`The graph on the right plots the active function across multiple periods. Key features to watch:
+      content:`The graph on the right plots the active function across multiple [periods](!/trigonometry/graphs#7). Key features to watch:
 
 • A blue dot tracks the function value at the current θ
 • Vertical dashed lines mark **asymptotes** — at 90° and 270° for [tan](!#tangent-on-the-unit-circle) and [sec](!#secant-on-the-unit-circle), at 0°, 180°, and 360° for [cot](!#cotangent-on-the-unit-circle) and [csc](!#cosecant-on-the-unit-circle)
-• **Ghost dots** highlight coterminal angles where the function takes the same value
+• **Ghost dots** highlight [coterminal angles](!/trigonometry/degrees-radians#7) where the function takes the same value
 
 The curve&apos;s range is fixed per function: bounded between $-1$ and $1$ for $\\sin\\theta$ and $\\cos\\theta$, unbounded for the other four.`,
       before:``,
@@ -188,7 +188,7 @@ For deeper coverage, see **periodicity** and **reference angles**.`,
       title:`Related Concepts and Tools`,
       content:`Explore connected topics:
 
-[Trigonometric functions graphs](!/trigonometry/visual-tools/functions-graphs) — adjustable amplitude, period, and phase shift for each function
+[Trigonometric functions graphs](!/trigonometry/visual-tools/functions-graphs) — adjustable [amplitude](!/trigonometry/graphs#6), period, and [phase shift](!/trigonometry/graphs#8) for each function
 
 [Functions signs by quadrant](!/trigonometry/visual-tools/functions-signs) — focused view of the four quadrant sign patterns
 

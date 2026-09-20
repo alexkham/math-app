@@ -26,9 +26,9 @@ export async function getStaticProps() {
     definition:{
       title:`What is Unit Circle?`,
       content:``,
-      before:`The unit circle is a mathematical abstraction model invented to give us an intuitive understanding of how [trigonometric functions](!/trigonometry) behave in the coordinate system with respect to different [angles](!/visual-tools/unit-circle#angles). Rather than being just another geometric shape, it serves as a visual and computational tool that transforms abstract [trigonometric relationships](!/trigonometry) into concrete, observable patterns.
+      before:`The [unit circle](!/trigonometry/unit-circle#1) is a mathematical abstraction model invented to give us an intuitive understanding of how [trigonometric functions](!/trigonometry) behave in the coordinate system with respect to different [angles](!/visual-tools/unit-circle#angles). Rather than being just another geometric shape, it serves as a visual and computational tool that transforms abstract [trigonometric relationships](!/trigonometry) into concrete, observable patterns.
 
-We create this circle by placing its center at the origin (0,0) of the coordinate plane and setting the radius to exactly 1. This positioning is crucial because when we take any point on the circle and drop perpendicular lines to the x and y axes, we automatically create a right triangle. The hypotenuse of this triangle is always the radius (which equals 1), while the legs are the x and y coordinates of the point.
+We create this circle by placing its center at the origin (0,0) of the coordinate plane and setting the radius to exactly 1. This positioning is crucial because when we take any point on the circle and drop perpendicular lines to the x and y axes, we automatically create a right triangle. The [hypotenuse](!/trigonometry/right-triangle#1) of this triangle is always the radius (which equals 1), while the legs are the x and y coordinates of the point.
 
 `,
       after:`
@@ -105,7 +105,7 @@ $\\cos \\theta = \\frac{\\text{adjacent side}}{1} = \\text{adjacent side}$
 
 
 `,
-after:`This means sine becomes simply the opposite side, and cosine becomes simply the adjacent side. The unit circle allows us to visualize these values directly as coordinates, eliminating the need for division calculations.
+after:`This means [sine](!/trigonometry/functions#1) becomes simply the [opposite side](!/trigonometry/right-triangle#1), and [cosine](!/trigonometry/functions#2) becomes simply the [adjacent side](!/trigonometry/right-triangle#1). The unit circle allows us to visualize these values directly as coordinates, eliminating the need for division calculations.
 `,
       svg:`<svg viewBox="0 0 900 700" style="margin-left:400px;margin-top:-100px;margin-bottom:-300px;" xmlns="http://www.w3.org/2000/svg">
   <!-- Triangle -->
@@ -182,11 +182,11 @@ svg2:`
   
       title:`Angle Measurements in the Unit Circle`,
       content:``,
-      before:`The unit circle uses two primary systems for measuring angles: degrees and radians. Understanding both systems is essential because different applications favor different units.
+      before:`The unit circle uses two primary systems for measuring angles: [degrees](!/trigonometry/degrees-radians#1) and [radians](!/trigonometry/degrees-radians#2). Understanding both systems is essential because different applications favor different units.
 
 **Degrees**: The most familiar system, where a complete rotation around the circle equals 360°. This system divides the circle into 360 equal parts, making it intuitive for everyday use. In the unit circle, we start measuring from the positive x-axis (0°) and move counterclockwise.
 
-**Radians**: The mathematical standard, where a complete rotation equals 2π radians (approximately 6.28). One radian is defined as the angle created when the arc length equals the radius. Since our circle has radius 1, this means one radian corresponds to an arc length of 1 unit along the circle's circumference.
+**Radians**: The mathematical standard, where a complete rotation equals 2π radians (approximately 6.28). One radian is defined as the angle created when the [arc length](!/trigonometry/degrees-radians#4) equals the radius. Since our circle has radius 1, this means one radian corresponds to an arc length of 1 unit along the circle's circumference.
 
 The conversion between these systems is straightforward:
 

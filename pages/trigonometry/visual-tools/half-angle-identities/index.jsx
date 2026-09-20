@@ -51,7 +51,7 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Switching Between Functions`,
-      content:`Six tabs at the top let you pick which half-angle identity to study: $\\sin(\\alpha/2)$, $\\cos(\\alpha/2)$, $\\tan(\\alpha/2)$, $\\csc(\\alpha/2)$, $\\sec(\\alpha/2)$, $\\cot(\\alpha/2)$.
+      content:`Six tabs at the top let you pick which half-[angle](!/trigonometry#angles) identity to study: $\\sin(\\alpha/2)$, $\\cos(\\alpha/2)$, $\\tan(\\alpha/2)$, $\\csc(\\alpha/2)$, $\\sec(\\alpha/2)$, $\\cot(\\alpha/2)$.
 
 How selection changes the view:
 • $\\sin$ and $\\cos$ open the [geometric proof](!#geometric-proofs-sin2-and-cos2) scene with a step-by-step animation.
@@ -66,7 +66,7 @@ Clicking any row of the **formula table** at the bottom also jumps to that funct
     },
     obj2:{
       title:`Adjusting the Angle α`,
-      content:`Each view exposes a slider for the **base angle $\\alpha$** in degrees, between $20°$ and $160°$. The half angle is then $\\alpha/2$, ranging from $10°$ to $80°$.
+      content:`Each view exposes a slider for the **base angle $\\alpha$** in [degrees](!/trigonometry/degrees-radians#1), between $20°$ and $160°$. The half angle is then $\\alpha/2$, ranging from $10°$ to $80°$.
 
 What changes as you slide:
 • On geometric scenes, the SVG triangle resizes and the apex $\\alpha$ updates immediately.
@@ -94,7 +94,7 @@ Each step adds one geometric element (radii, triangle fill, bisector, half-angle
     },
     obj4:{
       title:`Reading the Geometric Scene`,
-      content:`The SVG shows the unit circle with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $\\alpha$ between them.
+      content:`The SVG shows the [unit circle](!/trigonometry/unit-circle#1) with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $\\alpha$ between them.
 
 Elements that appear across the steps:
 • **Red arc** at $O$ — the apex angle $\\alpha$.
@@ -154,7 +154,7 @@ The two numbers always match (within rounding to three decimals). Sweeping the s
       title:`Geometric Proofs: sin(α/2) and cos(α/2)`,
       content:`The two foundational identities are proved by drawing an isosceles triangle with two unit radii.
 
-[sin(α/2)](!#the-sine-half-angle-identity) — apply the law of cosines and equate with the squared chord:
+[sin(α/2)](!#the-sine-half-angle-identity) — apply the [law of cosines](!/trigonometry/sines-cosines-law#5) and equate with the squared chord:
 $$|AB|^2 = 2 - 2\\cos\\alpha = (2\\sin(\\alpha/2))^2$$
 Solving gives $\\sin(\\alpha/2) = \\sqrt{(1 - \\cos\\alpha)/2}$.
 
@@ -210,7 +210,7 @@ For applications and worked examples, see the **trigonometric identities applica
 • **Sum and Difference Identities** — base relations from which double- and half-angle identities are derived.
 • [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every identity in this tool.
 • [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as the angle varies.
-• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in law of sines and law of cosines.
+• [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in [law of sines](!/trigonometry/sines-cosines-law#2) and law of cosines.
 • [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — the parity rules that fix the sign of each half-angle formula at $-\\theta$.
 • [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — how $\\pi - \\theta$ interacts with the half-angle results.
 • **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used in the derived tan, csc, sec and cot forms.`,
@@ -239,7 +239,7 @@ The sign flip between the two formulas — $1 - \\cos\\alpha$ for sine, $1 + \\c
     },
     obj14:{
       title:`The Tangent Half-Angle Identity`,
-      content:`Tangent of the half angle divides the two geometric results:`,
+      content:`[Tangent](!/trigonometry/functions#3) of the half angle divides the two geometric results:`,
       before:``,
       after:`$$\\tan(\\alpha/2) = \\frac{\\sin(\\alpha/2)}{\\cos(\\alpha/2)} = \\sqrt{\\frac{1 - \\cos\\alpha}{1 + \\cos\\alpha}}$$
 
@@ -248,7 +248,7 @@ Combining the two square roots into one is legitimate because both radicands are
     },
     obj15:{
       title:`The Cosecant Half-Angle Identity`,
-      content:`Cosecant inverts the sine result:`,
+      content:`[Cosecant](!/trigonometry/functions#4) inverts the sine result:`,
       before:``,
       after:`$$\\csc(\\alpha/2) = \\frac{1}{\\sin(\\alpha/2)} = \\sqrt{\\frac{2}{1 - \\cos\\alpha}}$$
 
@@ -257,7 +257,7 @@ Inverting under the root flips the fraction — the $2$ moves to the numerator. 
     },
     obj16:{
       title:`The Secant Half-Angle Identity`,
-      content:`Secant inverts the cosine result:`,
+      content:`[Secant](!/trigonometry/functions#5) inverts the cosine result:`,
       before:``,
       after:`$$\\sec(\\alpha/2) = \\frac{1}{\\cos(\\alpha/2)} = \\sqrt{\\frac{2}{1 + \\cos\\alpha}}$$
 
@@ -266,7 +266,7 @@ Like its partner [cosecant](!#the-cosecant-half-angle-identity), it satisfies $|
     },
     obj17:{
       title:`The Cotangent Half-Angle Identity`,
-      content:`Cotangent flips the tangent result upside down:`,
+      content:`[Cotangent](!/trigonometry/functions#6) flips the tangent result upside down:`,
       before:``,
       after:`$$\\cot(\\alpha/2) = \\frac{1}{\\tan(\\alpha/2)} = \\sqrt{\\frac{1 + \\cos\\alpha}{1 - \\cos\\alpha}}$$
 
@@ -298,7 +298,7 @@ One expression for the squared chord, in terms of the full angle only.`,
     },
     obj21:{
       title:`Sine Half-Angle, Step 4: Read Off the Half-Chord`,
-      content:`Right triangle $OMA$ has hypotenuse $1$ and angle $\\alpha/2$ at $O$, so its opposite leg is exactly the half-chord:`,
+      content:`Right triangle $OMA$ has [hypotenuse](!/trigonometry/right-triangle#1) $1$ and angle $\\alpha/2$ at $O$, so its opposite leg is exactly the half-chord:`,
       before:``,
       after:`$$MA = \\sin(\\alpha/2) \\qquad AB = 2\\sin(\\alpha/2)$$
 
