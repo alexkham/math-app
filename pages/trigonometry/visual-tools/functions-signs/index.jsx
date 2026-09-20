@@ -40,11 +40,11 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Quadrant** — one of four regions the x-axis and y-axis divide the plane into. Numbered I, II, III, IV counterclockwise starting from the upper right.
-• **Reference angle** — the acute angle between the terminal ray and the x-axis. Always between $0°$ and $90°$.
-• **ASTC rule** — mnemonic identifying which functions are positive in each quadrant: **A**ll, **S**ine, **T**angent, **C**osine.
-• **Coordinate signs** — Q1 $(+,+)$, Q2 $(-,+)$, Q3 $(-,-)$, Q4 $(+,-)$. The radius $r$ is always positive.
-• **Reciprocal pair** — $\\sin/\\csc$, $\\cos/\\sec$, $\\tan/\\cot$. Each pair shares the same sign in every quadrant.`,
+      content:`• [Quadrant](!/trigonometry/unit-circle#4) — one of four regions the x-axis and y-axis divide the plane into. Numbered I, II, III, IV counterclockwise starting from the upper right.
+• [Reference angle](!/trigonometry/definitions#reference_angle) — the acute angle between the terminal ray and the x-axis. Always between $0°$ and $90°$.
+• [ASTC rule](!/trigonometry/unit-circle#4) — mnemonic identifying which functions are positive in each quadrant: **A**ll, **S**ine, **T**angent, **C**osine.
+• [Coordinate signs](!/trigonometry/unit-circle#4) — Q1 $(+,+)$, Q2 $(-,+)$, Q3 $(-,-)$, Q4 $(+,-)$. The radius $r$ is always positive.
+• [Reciprocal pair](!/trigonometry/functions#7) — $\\sin/\\csc$, $\\cos/\\sec$, $\\tan/\\cot$. Each pair shares the same sign in every quadrant.`,
       before:``,
       after:``,
       link:'',
@@ -1087,7 +1087,7 @@ export default function FunctionsSignsPage({relatedTools, seoData, sectionsConte
    /> */}
    <br/>
    <RelatedTools tools={relatedTools}/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

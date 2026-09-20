@@ -577,7 +577,7 @@
       }
     },
     "operationA": {
-      "linearAlgebraMapped": "2026-09-13",
+      "linearAlgebraMapped": "2026-09-20",
       "note": "Stage 1 mapping only: identity, section inventory and related-terms with candidate tools attached. No content page was edited, no link or demonstration unit planted, no $conceptToolMap decision recorded - those are Stage 2/3 and run one page per pass. /linear-algebra/definitions and /formulas are excluded as Operation B territory.",
       "linearAlgebraLinked": "2026-09-13"
     }
@@ -589,446 +589,118 @@
       "section": "trigonometry",
       "pagePath": "pages/trigonometry/identities/index.jsx",
       "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
       "sections": [
-        "0",
-        "definition",
-        "reciprocal",
-        "pythagorean",
-        "triangle",
-        "even-odd",
-        "co-function",
-        "periodicity",
-        "shift",
-        "sum",
-        "difference",
-        "half",
-        "double",
-        "triple",
-        "power-reducing",
-        "product-sum",
-        "sum-product",
-        "summary"
+        "0"
       ],
+      "mapped": "2026-09-20",
       "relatedTerms": [
         {
-          "term": "definition-based identities",
-          "entity": null,
-          "sections": [
-            "definition"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "definition",
-              "tool": "unit-circle",
-              "target": {
-                "path": "/visual-tools/unit-circle",
-                "section": null
-              },
-              "unit": null,
-              "added": "pre-2026-07-29",
-              "preExisting": true,
-              "note": "two pre-existing prose links (before+after) plus one in table data; flagged: violates one-link-per-term-per-section"
-            }
-          ]
-        },
-        {
-          "term": "reciprocal identities",
-          "entity": null,
-          "sections": [
-            "reciprocal"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "reciprocal",
-              "tool": "basic-identities",
-              "target": {
-                "path": "/trigonometry/visual-tools/basic-identities",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "basicIdentitiesDiagrams.csc.overview"
-                ],
-                "arrangement": "single",
-                "newStates": []
-              },
-              "added": "2026-07-29"
-            }
-          ]
-        },
-        {
-          "term": "pythagorean identities",
-          "entity": null,
-          "sections": [
-            "pythagorean"
-          ],
-          "status": "deferred",
-          "reason": "dedicated pythagorean-identities tool page exists but is not ready (no Line 1); section already carries a pre-existing unit-circle tool link"
-        },
-        {
-          "term": "triangle geometry identities",
-          "entity": null,
-          "sections": [
-            "triangle"
-          ],
-          "status": "deferred",
-          "reason": "triangle-explorer tool page not ready"
-        },
-        {
-          "term": "even-odd identities",
-          "entity": null,
-          "sections": [
-            "even-odd"
-          ],
-          "status": "deferred",
-          "reason": "negative-angle-identities tool page not ready"
-        },
-        {
-          "term": "co-function identities",
-          "entity": null,
-          "sections": [
-            "co-function"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates the identity itself; complementary-angles link-only planted instead; illustration via in-situ process later"
-        },
-        {
-          "term": "periodicity",
-          "entity": null,
-          "sections": [
-            "periodicity"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "periodicity",
-              "tool": "functions-graphs",
-              "target": {
-                "path": "/trigonometry/visual-tools/functions-graphs",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "trigFunctionsGraphDiagrams.sin",
-                  "trigFunctionsGraphDiagrams.tan"
-                ],
-                "arrangement": "sequence",
-                "newStates": []
-              },
-              "added": "2026-07-29"
-            }
-          ]
-        },
-        {
-          "term": "shift identities",
-          "entity": null,
-          "sections": [
-            "shift"
-          ],
-          "status": "deferred",
-          "reason": "supplementary-angle-identities tool not ready; functions-graphs shows curves but not the shift relation directly - doubt, skip"
-        },
-        {
-          "term": "angle sum identities",
-          "entity": null,
-          "sections": [
-            "sum"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates it"
-        },
-        {
-          "term": "angle difference identities",
-          "entity": null,
-          "sections": [
-            "difference"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates it"
-        },
-        {
-          "term": "double angle identities",
-          "entity": null,
-          "sections": [
-            "double"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "double",
-              "tool": "double-angle-identities",
-              "target": {
-                "path": "/trigonometry/visual-tools/double-angle-identities",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "doubleAngleDiagrams.sin.overview"
-                ],
-                "arrangement": "single",
-                "newStates": []
-              },
-              "added": "2026-07-29"
-            }
-          ]
-        },
-        {
-          "term": "half angle identities",
-          "entity": null,
-          "sections": [
-            "half"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "half",
-              "tool": "half-angle-identities",
-              "target": {
-                "path": "/trigonometry/visual-tools/half-angle-identities",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "halfAngleDiagrams.sin.overview"
-                ],
-                "arrangement": "single",
-                "newStates": []
-              },
-              "added": "2026-07-29"
-            }
-          ]
-        },
-        {
-          "term": "triple angle identities",
-          "entity": null,
-          "sections": [
-            "triple"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates it"
-        },
-        {
-          "term": "power-reducing identities",
-          "entity": null,
-          "sections": [
-            "power-reducing"
-          ],
-          "status": "dropped",
-          "reason": "double-angle tool touches derived identities but does not demonstrate power reduction; doubt - skip (in-situ illustration later)"
-        },
-        {
-          "term": "product-to-sum identities",
-          "entity": null,
-          "sections": [
-            "product-sum"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates it"
-        },
-        {
-          "term": "sum-to-product identities",
-          "entity": null,
-          "sections": [
-            "sum-product"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates it"
-        },
-        {
-          "term": "unit circle",
-          "entity": "unit_circle",
-          "sections": [
-            "definition",
-            "pythagorean"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "definition",
-              "tool": "unit-circle",
-              "target": {
-                "path": "/visual-tools/unit-circle",
-                "section": null
-              },
-              "unit": null,
-              "added": "pre-2026-07-29",
-              "preExisting": true
-            },
-            {
-              "fromSection": "pythagorean",
-              "tool": "unit-circle",
-              "target": {
-                "path": "/visual-tools/unit-circle",
-                "section": null
-              },
-              "unit": null,
-              "added": "pre-2026-07-29",
-              "preExisting": true
-            }
-          ]
-        },
-        {
-          "term": "complementary angles",
-          "entity": "complementary_angles",
-          "sections": [
-            "co-function"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "co-function",
-              "tool": "angle-explorer",
-              "target": {
-                "path": "/trigonometry/visual-tools/angle-explorer",
-                "section": null
-              },
-              "unit": null,
-              "added": "2026-07-29",
-              "note": "link-only: tool shows live complementary pairs; a frozen state would not illustrate the co-function identity itself"
-            }
-          ]
-        },
-        {
-          "term": "angle",
+          "term": "angles",
           "entity": "angle",
           "sections": [
-            "definition",
-            "reciprocal",
-            "pythagorean",
-            "triangle",
-            "even-odd",
-            "co-function",
-            "periodicity",
-            "shift",
-            "sum",
-            "difference",
-            "double",
-            "half",
-            "triple",
-            "power-reducing",
-            "product-sum",
-            "sum-product"
+            "0"
           ],
-          "status": "dropped",
-          "reason": "generic passing mentions throughout; definitional linking is not a demonstration candidate"
-        },
-        {
-          "term": "sine",
-          "entity": "sine",
-          "sections": [
-            "even-odd",
-            "co-function",
-            "shift",
-            "triple"
-          ],
-          "status": "dropped",
-          "reason": "symbol-level passing mentions"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
         },
         {
           "term": "cosine",
           "entity": "cosine",
           "sections": [
-            "even-odd",
-            "shift",
-            "triple"
+            "0"
           ],
-          "status": "dropped",
-          "reason": "symbol-level passing mentions"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "0"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
         },
         {
           "term": "tangent",
           "entity": "tangent",
           "sections": [
-            "even-odd",
-            "periodicity"
+            "0"
           ],
-          "status": "dropped",
-          "reason": "symbol-level passing mentions"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
         },
         {
-          "term": "cotangent",
-          "entity": "cotangent",
+          "term": "unit circle",
+          "entity": "unit_circle",
           "sections": [
-            "even-odd",
-            "periodicity"
+            "0"
           ],
-          "status": "dropped",
-          "reason": "symbol-level passing mentions"
-        },
-        {
-          "term": "cosecant",
-          "entity": "cosecant",
-          "sections": [
-            "even-odd"
-          ],
-          "status": "dropped",
-          "reason": "symbol-level passing mention"
-        },
-        {
-          "term": "secant",
-          "entity": "secant",
-          "sections": [
-            "even-odd"
-          ],
-          "status": "dropped",
-          "reason": "symbol-level passing mention"
-        },
-        {
-          "term": "frequency",
-          "entity": "frequency",
-          "sections": [
-            "double",
-            "product-sum"
-          ],
-          "status": "dropped",
-          "reason": "application-context mentions (physics)"
-        },
-        {
-          "term": "amplitude",
-          "entity": "amplitude",
-          "sections": [
-            "sum-product"
-          ],
-          "status": "dropped",
-          "reason": "application-context mention"
-        },
-        {
-          "term": "adjacent side",
-          "entity": "adjacent_side",
-          "sections": [
-            "co-function"
-          ],
-          "status": "dropped",
-          "reason": "passing mention inside explanation"
-        },
-        {
-          "term": "opposite side",
-          "entity": "opposite_side",
-          "sections": [
-            "co-function"
-          ],
-          "status": "dropped",
-          "reason": "passing mention inside explanation"
-        },
-        {
-          "term": "law of sines",
-          "entity": null,
-          "sections": [
-            "triangle"
-          ],
-          "status": "deferred",
-          "reason": "triangle-explorer tool page not ready"
-        },
-        {
-          "term": "law of cosines",
-          "entity": null,
-          "sections": [
-            "triangle"
-          ],
-          "status": "deferred",
-          "reason": "triangle-explorer tool page not ready"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
         }
       ]
     },
@@ -1038,56 +710,101 @@
       "section": "trigonometry",
       "pagePath": "pages/trigonometry/degrees-radians/index.jsx",
       "template": "titled",
-      "templateNote": "Reworked since the 'untitled template' flag (2026-07-28): sections now have real titles but NUMERIC ids ('0'-'9'). Slug migration pending - required only when something links INTO these sections. Large commented-out template head precedes the live sectionsContent block (live-code scoping needed).",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
       "sections": [
         "0",
         "1",
         "2",
-        "3",
+        "notation",
         "4",
         "5",
         "6",
         "7",
         "8",
-        "9"
+        "9",
+        "faq"
       ],
-      "sectionTitles": [
-        "Key Terms",
-        "Degree Measurement",
-        "Radian Measurement",
-        "Converting Between Degrees and Radians",
-        "Arc Length",
-        "Sector Area",
-        "Standard Position of an Angle",
-        "Coterminal Angles",
-        "Complementary and Supplementary Angles",
-        "Summary: The Page's Key Formulas"
-      ],
+      "mapped": "2026-09-20",
       "relatedTerms": [
         {
-          "term": "standard position",
-          "entity": "angle_in_standard_position",
+          "term": "central angle",
+          "entity": "central_angle",
           "sections": [
-            "6"
+            "2",
+            "4",
+            "5"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "6",
-              "tool": "angle-explorer",
-              "target": {
-                "path": "/trigonometry/visual-tools/angle-explorer",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "angleDiagrams.types.obtuse"
-                ],
-                "arrangement": "single",
-                "newStates": []
-              },
-              "added": "2026-07-29"
-            }
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "notation",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "arc length",
+          "entity": "arc_length",
+          "sections": [
+            "2",
+            "4",
+            "5",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
           ]
         },
         {
@@ -1097,162 +814,62 @@
             "6",
             "7"
           ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "7",
-              "tool": "angle-explorer",
-              "target": {
-                "path": "/trigonometry/visual-tools/angle-explorer",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "angleDiagrams.concepts.coterminal"
-                ],
-                "arrangement": "single",
-                "newStates": []
-              },
-              "added": "2026-07-29"
-            }
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "trigonometry-angle-types"
           ]
         },
         {
-          "term": "complementary angles",
-          "entity": "complementary_angles",
-          "sections": [
-            "8"
-          ],
-          "status": "dropped",
-          "reason": "angle-explorer states exist (concepts.complementary) but section 8 is saturated: 5 in-prose content links + 3 formula callouts + table; density - skip, flag for in-situ illustration"
-        },
-        {
-          "term": "supplementary angles",
-          "entity": "supplementary_angles",
-          "sections": [
-            "8"
-          ],
-          "status": "dropped",
-          "reason": "same as complementary angles: section 8 density; concepts.supplementary state available for in-situ later"
-        },
-        {
-          "term": "degree-radian conversion",
-          "entity": "radian",
-          "sections": [
-            "3"
-          ],
-          "status": "dropped",
-          "reason": "angle-explorer reports both units but section 3 already carries 4 in-prose links (density cap); doubt - skip"
-        },
-        {
-          "term": "radian",
-          "entity": "radian",
-          "sections": [
-            "2",
-            "3",
-            "4",
-            "5"
-          ],
-          "status": "dropped",
-          "reason": "page already carries two angle-explorer demonstration units; a third link to the same tool is saturation"
-        },
-        {
-          "term": "degree",
+          "term": "degrees",
           "entity": "degree",
           "sections": [
             "1",
             "2",
-            "3"
-          ],
-          "status": "dropped",
-          "reason": "same saturation rationale as radian; unit theory not directly demonstrated by any tool"
-        },
-        {
-          "term": "arc length",
-          "entity": "arc_length",
-          "sections": [
-            "2",
-            "4",
-            "5"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates arc length"
-        },
-        {
-          "term": "sector",
-          "entity": "sector",
-          "sections": [
-            "5"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates sector area"
-        },
-        {
-          "term": "sector area",
-          "entity": "sector",
-          "sections": [
-            "5",
-            "9"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates sector area"
-        },
-        {
-          "term": "central angle",
-          "entity": "central_angle",
-          "sections": [
-            "2",
-            "4"
-          ],
-          "status": "deferred",
-          "reason": "no tool demonstrates central angle"
-        },
-        {
-          "term": "unit circle",
-          "entity": "unit_circle",
-          "sections": [
-            "3",
-            "6",
-            "7",
-            "8"
-          ],
-          "status": "dropped",
-          "reason": "pre-existing content-to-content links to the /trigonometry/unit-circle theory page in 4 sections; a tool link on the same concept would duplicate destinations"
-        },
-        {
-          "term": "angle",
-          "entity": "angle",
-          "sections": [
-            "1",
-            "2",
-            "3",
+            "notation",
             "4",
             "5",
-            "6",
-            "7",
-            "8"
+            "faq"
           ],
-          "status": "dropped",
-          "reason": "generic passing mentions; covered by Key Terms block"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
         },
         {
           "term": "initial side",
           "entity": "initial_side",
           "sections": [
+            "0",
             "6"
           ],
-          "status": "dropped",
-          "reason": "passing mention; covered by Key Terms and the standard-position unit"
+          "status": "pending",
+          "candidateTools": [
+            "trigonometry-angle-types"
+          ]
         },
         {
-          "term": "terminal side",
-          "entity": "terminal_side",
+          "term": "negative angle",
+          "entity": "negative_angle",
           "sections": [
             "6",
             "7"
           ],
-          "status": "dropped",
-          "reason": "passing mention; covered by Key Terms and the planted units"
+          "status": "pending",
+          "candidateTools": [
+            "negative-angle-identities",
+            "trigonometry-angle-types"
+          ]
         },
         {
           "term": "positive angle",
@@ -1260,65 +877,108 @@
           "sections": [
             "6"
           ],
-          "status": "dropped",
-          "reason": "passing mention inside standard-position discussion"
+          "status": "pending",
+          "candidateTools": [
+            "trigonometry-angle-types"
+          ]
         },
         {
-          "term": "negative angle",
-          "entity": "negative_angle",
+          "term": "radians",
+          "entity": "radian",
           "sections": [
-            "6"
+            "1",
+            "2",
+            "notation",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9",
+            "faq"
           ],
-          "status": "dropped",
-          "reason": "passing mention inside standard-position discussion"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "functions-graphs",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "reference angles",
+          "entity": "reference_angle",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "functions-graphs",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sector area",
+          "entity": "sector",
+          "sections": [
+            "2",
+            "5",
+            "9",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "trigonometry-angle-types"
+          ]
         },
         {
           "term": "sine",
           "entity": "sine",
           "sections": [
-            "6",
             "7",
             "8"
           ],
-          "status": "dropped",
-          "reason": "symbol-level passing mentions"
-        },
-        {
-          "term": "cosine",
-          "entity": "cosine",
-          "sections": [
-            "7",
-            "8"
-          ],
-          "status": "dropped",
-          "reason": "symbol-level passing mentions"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
         },
         {
           "term": "tangent",
           "entity": "tangent",
           "sections": [
+            "7",
             "8"
           ],
-          "status": "dropped",
-          "reason": "symbol-level passing mention"
-        },
-        {
-          "term": "sine supplement identity",
-          "entity": "supplementary_angles",
-          "sections": [
-            "8"
-          ],
-          "status": "dropped",
-          "reason": "formula callouts already deep-link these to /trigonometry/formulas"
-        },
-        {
-          "term": "cosine supplement identity",
-          "entity": "supplementary_angles",
-          "sections": [
-            "8"
-          ],
-          "status": "dropped",
-          "reason": "formula callouts already deep-link these to /trigonometry/formulas"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
         },
         {
           "term": "tangent supplement identity",
@@ -1326,26 +986,25 @@
           "sections": [
             "8"
           ],
-          "status": "dropped",
-          "reason": "formula callouts already deep-link these to /trigonometry/formulas"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "supplementary-angle-identities"
+          ]
         },
         {
-          "term": "law of sines",
-          "entity": null,
+          "term": "terminal side",
+          "entity": "terminal_side",
           "sections": [
-            "8"
+            "0",
+            "6",
+            "7"
           ],
-          "status": "dropped",
-          "reason": "pre-existing content link to /trigonometry/sines-cosines-law in the same sentence"
-        },
-        {
-          "term": "complementary and supplementary angles",
-          "entity": null,
-          "sections": [
-            "8"
-          ],
-          "status": "dropped",
-          "reason": "section subject; see complementary/supplementary term records - density skip, in-situ later"
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types"
+          ]
         }
       ]
     },
@@ -13645,6 +13304,2562 @@
               },
               "added": "2026-09-13"
             }
+          ]
+        }
+      ]
+    },
+    "trigonometry/equations": {
+      "slug": "equations",
+      "name": "Trigonometric Equations",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/equations/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "notation",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "1",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "1",
+            "3",
+            "4",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "2",
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "functions-graphs",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "1",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        }
+      ]
+    },
+    "trigonometry/functions": {
+      "slug": "functions",
+      "name": "Trigonometric Functions",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/functions/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "notation",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "complementary angles",
+          "entity": "complementary_angles",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "supplementary-angle-identities"
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "4",
+            "5",
+            "6",
+            "notation",
+            "8",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "0",
+            "2",
+            "3",
+            "5",
+            "6",
+            "notation",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "6",
+            "notation",
+            "8",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "coterminal angle",
+          "entity": "coterminal_angles",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "double-angle-identities",
+            "half-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "phase shift",
+          "entity": "phase_shift",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities"
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "functions-graphs",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "5",
+            "notation",
+            "8",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "notation",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "0",
+            "3",
+            "5",
+            "6",
+            "notation",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "0",
+            "2",
+            "8",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        }
+      ]
+    },
+    "trigonometry/graphs": {
+      "slug": "graphs",
+      "name": "Trigonometric Graphs",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/graphs/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "notation",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "9",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "4",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "frequency",
+          "entity": "frequency",
+          "sections": [
+            "7",
+            "8",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "double-angle-identities"
+          ]
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "9",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "phase shift",
+          "entity": "phase_shift",
+          "sections": [
+            "5",
+            "8",
+            "9",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities"
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "4",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "0"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        }
+      ]
+    },
+    "trigonometry/inequalities": {
+      "slug": "inequalities",
+      "name": "Trigonometric Inequalities",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/inequalities/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "1",
+            "3",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "3",
+            "5",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "periods",
+          "entity": "period",
+          "sections": [
+            "0",
+            "2",
+            "4",
+            "5",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "phase shifts",
+          "entity": "phase_shift",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities"
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "3",
+            "5",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "3",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        }
+      ]
+    },
+    "trigonometry/inverse-functions": {
+      "slug": "inverse-functions",
+      "name": "Inverse Trigonometric Functions",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/inverse-functions/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "8",
+        "9",
+        "10"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "adjacent side",
+          "entity": "adjacent_side",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "2",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "arcsin of negative",
+          "entity": "inverse_trigonometric_function",
+          "sections": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "0",
+            "3",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "double-angle-identities",
+            "half-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "negative angles",
+          "entity": "negative_angle",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "negative-angle-identities",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "2",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "functions-graphs",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "0"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        }
+      ]
+    },
+    "trigonometry/properties": {
+      "slug": "properties",
+      "name": "Trigonometric Properties",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/properties/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "tangent periodicity",
+          "entity": "periodic_function",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "2",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "inverse trigonometric functions",
+          "entity": "inverse_trigonometric_function",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "negative angle",
+          "entity": "negative_angle",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "negative-angle-identities",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "0",
+            "1",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "phase shift",
+          "entity": "phase_shift",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities"
+          ]
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "functions-graphs",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "1",
+            "4",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        }
+      ]
+    },
+    "trigonometry/right-triangle": {
+      "slug": "right-triangle",
+      "name": "Right Triangle Trigonometry",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/right-triangle/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "notation",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "trigonometric ratios",
+          "entity": "trigonometric_ratio",
+          "sections": [
+            "notation"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "adjacent side",
+          "entity": "adjacent_side",
+          "sections": [
+            "notation",
+            "5",
+            "6",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "notation",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "3",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "2",
+            "3",
+            "notation",
+            "6",
+            "7",
+            "8",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "3",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "notation",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "double-angle-identities",
+            "half-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "2",
+            "notation",
+            "5",
+            "7",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "notation",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "functions-graphs",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "3",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "2",
+            "3",
+            "notation",
+            "6",
+            "7",
+            "8",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "2",
+            "3",
+            "notation",
+            "6",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "tangent-cotangent cofunction",
+          "entity": "complementary_angles",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "supplementary-angle-identities"
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "8",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        }
+      ]
+    },
+    "trigonometry/sines-cosines-law": {
+      "slug": "sines-cosines-law",
+      "name": "Law of Sines and Cosines",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/sines-cosines-law/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "1",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "law of cosines",
+          "entity": "cosine",
+          "sections": [
+            "0",
+            "3",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "law of sines",
+          "entity": "sine",
+          "sections": [
+            "1",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "opposite sides",
+          "entity": "opposite_side",
+          "sections": [
+            "1",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "supplementary angle",
+          "entity": "supplementary_angles",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "supplementary-angle-identities"
+          ]
+        }
+      ]
+    },
+    "trigonometry/unit-circle": {
+      "slug": "unit-circle",
+      "name": "Unit Circle: Coordinates and Exact Values",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/unit-circle/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "notation",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "mapped": "2026-09-20",
+      "relatedTerms": [
+        {
+          "term": "trigonometric ratios",
+          "entity": "trigonometric_ratio",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "adjacent sides",
+          "entity": "adjacent_side",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "3",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "notation",
+            "6",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "3",
+            "4",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "coterminal angles",
+          "entity": "coterminal_angles",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "notation",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "double-angle-identities",
+            "half-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "initial side",
+          "entity": "initial_side",
+          "sections": [
+            "0",
+            "2",
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "basic-identities",
+            "functions-graphs"
+          ]
+        },
+        {
+          "term": "quadrantal angles",
+          "entity": "quadrantal_angles",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer"
+          ]
+        },
+        {
+          "term": "radian",
+          "entity": "radian",
+          "sections": [
+            "notation",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "functions-graphs",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "4",
+            "notation",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "functions-graphs",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "3",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "notation",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "triangle-explorer",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
+          ]
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "3",
+            "4",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs"
+          ]
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "notation",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "trigonometry-angle-types"
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "notation",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "angle-explorer",
+            "basic-identities",
+            "double-angle-identities",
+            "functions-graphs",
+            "half-angle-identities",
+            "negative-angle-identities",
+            "pythagorean-identities",
+            "supplementary-angle-identities",
+            "trigonometry-angle-types",
+            "trigonometry-functions-signs",
+            "trigonometry-unit-circle"
           ]
         }
       ]

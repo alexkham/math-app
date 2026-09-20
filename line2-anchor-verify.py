@@ -23,6 +23,11 @@ for k, v in sorted(LA.items()):
         if t['status'] != 'linked':
             continue
         for L in t['links']:
+            # A record with no target path is a Line 1 same-page anchor
+            # ("!#slug"), which resolves on the tool page itself. Verifying it
+            # against a content page would report a false dead anchor.
+            if not (L.get('target') or {}).get('path'):
+                continue
             links.append((k.replace('linear-algebra-', ''), t['term'], L))
 
 pages = sorted({L['target']['path'] for _, _, L in links})

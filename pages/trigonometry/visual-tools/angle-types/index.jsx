@@ -42,10 +42,10 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Vertex** — the common endpoint where the two rays of an angle meet.
-• **Initial side** — the ray from which rotation is measured. In [standard position](!#standard-position) it lies along the positive x-axis.
-• **Terminal side** — the ray reached after rotating by the angle.
-• **Quadrant** — one of four regions $I$, $II$, $III$, $IV$ where the [terminal side](!/trigonometry/degrees-radians#6) may land.
+      content:`• [Vertex](!/trigonometry/degrees-radians#6) — the common endpoint where the two rays of an angle meet.
+• [Initial side](!/trigonometry/definitions#initial_side) — the ray from which rotation is measured. In [standard position](!#standard-position) it lies along the positive x-axis.
+• [Terminal side](!/trigonometry/definitions#terminal_side) — the ray reached after rotating by the angle.
+• [Quadrant](!/trigonometry/unit-circle#4) — one of four regions $I$, $II$, $III$, $IV$ where the [terminal side](!/trigonometry/degrees-radians#6) may land.
 • [Reference angle](!#reference-angles) — the acute angle between the terminal side and the nearest x-axis. Always between $0°$ and $90°$.
 • [Coterminal angles](!#coterminal-angles) — [angles](!/trigonometry#angles) sharing the same terminal side, differing by full rotations ($360° n$).
 • [Special angles](!#special-angles-on-the-unit-circle) — the $16$ unit-circle angles with exact $\\sin$, $\\cos$, $\\tan$ values.

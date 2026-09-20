@@ -40,10 +40,10 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Vertex** — a corner of the triangle. Labeled $A$, $B$, $C$.
-• **Side** — segment between two vertices. Side $a$ lies opposite vertex $A$, side $b$ opposite $B$, and side $c$ opposite $C$.
-• **Interior angle** — the angle at a vertex, between the two sides meeting there. The three interior [angles](!/trigonometry#angles) always sum to $180°$.
-• **Hypotenuse** — in a right triangle, the side opposite the $90°$ angle and the longest side.
+      content:`• [Vertex](!/trigonometry/sines-cosines-law#1) — a corner of the triangle. Labeled $A$, $B$, $C$.
+• [Side](!/trigonometry/right-triangle#1) — segment between two vertices. Side $a$ lies opposite vertex $A$, side $b$ opposite $B$, and side $c$ opposite $C$.
+• [Interior angle](!/trigonometry/sines-cosines-law#1) — the angle at a vertex, between the two sides meeting there. The three interior [angles](!/trigonometry#angles) always sum to $180°$.
+• [Hypotenuse](!/trigonometry/definitions#hypotenuse) — in a right triangle, the side opposite the $90°$ angle and the longest side.
 • **Pythagorean triple** — three positive integers $(a, b, c)$ satisfying $a^2 + b^2 = c^2$, like $3$-$4$-$5$ or $5$-$12$-$13$.`,
       before:``,
       after:``,

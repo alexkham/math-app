@@ -538,10 +538,10 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Pythagorean identity** — a trigonometric identity derived from $\\sin^2\\theta + \\cos^2\\theta = 1$, itself a consequence of Pythagoras' theorem on a right triangle with hypotenuse $1$.
-• **Base identity** — $\\sin^2\\theta + \\cos^2\\theta = 1$, the geometric foundation for all six function forms in this tool.
-• **Derived identity** — one obtained by dividing the base identity by $\\sin^2\\theta$ or $\\cos^2\\theta$, then rearranging.
-• **Reciprocal function** — $\\csc = 1/\\sin$, $\\sec = 1/\\cos$, $\\cot = 1/\\tan$.
+      content:`• [Pythagorean identity](!/trigonometry/unit-circle#7) — a trigonometric identity derived from $\\sin^2\\theta + \\cos^2\\theta = 1$, itself a consequence of Pythagoras' theorem on a right triangle with hypotenuse $1$.
+• [Base identity](!/trigonometry/identities#pythagorean) — $\\sin^2\\theta + \\cos^2\\theta = 1$, the geometric foundation for all six function forms in this tool.
+• [Derived identity](!/trigonometry/identities#summary) — one obtained by dividing the base identity by $\\sin^2\\theta$ or $\\cos^2\\theta$, then rearranging.
+• [Reciprocal function](!/trigonometry/functions#7) — $\\csc = 1/\\sin$, $\\sec = 1/\\cos$, $\\cot = 1/\\tan$.
 • **Positive root** — when solving $x^2 = y$ for $x$, the explorer assumes $\\theta$ is in the first quadrant so all six functions are positive.`,
       before:``,
       after:``,
@@ -1109,6 +1109,14 @@ export default function PythagoreanIdentitiesPage({relatedTools, seoData, sectio
 
 
   const genericSections=[
+    {
+        id:'key-terms',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     // {
     //     id:'0',
     //     title:sectionsContent.obj0.title,

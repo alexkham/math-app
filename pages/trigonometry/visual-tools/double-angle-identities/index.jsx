@@ -538,11 +538,11 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Double-angle identity** — a formula expressing a trig function of $2\\theta$ in terms of trig functions of $\\theta$.
+      content:`• [Double-angle identity](!/trigonometry/identities#double) — a formula expressing a trig function of $2\\theta$ in terms of trig functions of $\\theta$.
 • **Geometric proof** — a derivation that uses a drawing (an isosceles triangle, two radii, a bisector) rather than algebra.
 • **Bisector** — a line that splits an angle into two equal halves. In this tool, $OM$ bisects the apex angle $2\\theta$.
-• **Reciprocal identity** — a function written as $1/\\text{(another function)}$. $\\csc = 1/\\sin$, $\\sec = 1/\\cos$, $\\cot = 1/\\tan$.
-• **Derived identity** — one obtained by combining or rearranging others. $\\tan(2\\theta)$, $\\csc(2\\theta)$, $\\sec(2\\theta)$, $\\cot(2\\theta)$ all follow from the formulas for $\\sin(2\\theta)$ and $\\cos(2\\theta)$.`,
+• [Reciprocal identity](!/trigonometry/identities#reciprocal) — a function written as $1/\\text{(another function)}$. $\\csc = 1/\\sin$, $\\sec = 1/\\cos$, $\\cot = 1/\\tan$.
+• [Derived identity](!/trigonometry/identities#summary) — one obtained by combining or rearranging others. $\\tan(2\\theta)$, $\\csc(2\\theta)$, $\\sec(2\\theta)$, $\\cot(2\\theta)$ all follow from the formulas for $\\sin(2\\theta)$ and $\\cos(2\\theta)$.`,
       before:``,
       after:``,
       link:'',
@@ -1083,6 +1083,14 @@ export default function DoubleAngleIdentitiesPage({relatedTools, seoData, sectio
 
 
   const genericSections=[
+    {
+        id:'key-terms',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     // {
     //     id:'0',
     //     title:sectionsContent.obj0.title,

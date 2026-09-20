@@ -45,11 +45,11 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Period** — the smallest positive value $T$ such that $f(\\theta + T) = f(\\theta)$ for all $\\theta$. $\\sin$, $\\cos$, $\\sec$, $\\csc$ have [period](!/trigonometry/graphs#7) $2\\pi$; $\\tan$ and $\\cot$ have period $\\pi$.
-• **Amplitude** — half the distance between the maximum and minimum values. Defined for bounded functions only ($\\sin$ and $\\cos$ have [amplitude](!/trigonometry/graphs#6) $1$).
-• **Range** — the set of output values. $\\sin$ and $\\cos$: $[-1, 1]$. $\\sec$ and $\\csc$: $(-\\infty, -1] \\cup [1, \\infty)$. $\\tan$ and $\\cot$: all real numbers.
-• **Asymptote** — a vertical line the graph approaches but never crosses. Occurs where the function is undefined (denominator equals zero).
-• **Zero** — input value where the function equals zero. The x-axis intercepts of the curve.`,
+      content:`• [Period](!/trigonometry/definitions#period) — the smallest positive value $T$ such that $f(\\theta + T) = f(\\theta)$ for all $\\theta$. $\\sin$, $\\cos$, $\\sec$, $\\csc$ have [period](!/trigonometry/graphs#7) $2\\pi$; $\\tan$ and $\\cot$ have period $\\pi$.
+• [Amplitude](!/trigonometry/definitions#amplitude) — half the distance between the maximum and minimum values. Defined for bounded functions only ($\\sin$ and $\\cos$ have [amplitude](!/trigonometry/graphs#6) $1$).
+• [Range](!/trigonometry/functions#8) — the set of output values. $\\sin$ and $\\cos$: $[-1, 1]$. $\\sec$ and $\\csc$: $(-\\infty, -1] \\cup [1, \\infty)$. $\\tan$ and $\\cot$: all real numbers.
+• [Asymptote](!/trigonometry/properties#5) — a vertical line the graph approaches but never crosses. Occurs where the function is undefined (denominator equals zero).
+• [Zero](!/trigonometry/properties#4) — input value where the function equals zero. The x-axis intercepts of the curve.`,
       before:``,
       after:``,
       link:'',
@@ -688,7 +688,7 @@ export default function TrigFunctionsGraphsPage({relatedTools, seoData, sections
    /> */}
    <br/>
    <RelatedTools tools={relatedTools}/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

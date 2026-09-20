@@ -18,7 +18,8 @@
         "No MIN_CHARS skip and no CAP_PER_SECTION at ledger stage - those are linking limits. 40 pending links across 21 sections exceed v3's cap of 5 per section and must be trimmed by the write pass.",
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
-      "linearAlgebraLinksWritten": "2026-09-20"
+      "linearAlgebraLinksWritten": "2026-09-20",
+      "trigonometryKeyTerms": "2026-09-20"
     },
     "lineThree": {
       "trigonometryWritten": "2026-09-20"
@@ -1742,6 +1743,69 @@
               "added": "2026-09-20"
             }
           ]
+        },
+        {
+          "term": "double-angle identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Double-angle identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "double"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reciprocal identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Reciprocal identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "reciprocal"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "derived identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Derived identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "summary"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "relatedTools": [
@@ -2222,6 +2286,69 @@
               "added": "2026-09-20"
             }
           ]
+        },
+        {
+          "term": "half-angle identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Half-angle identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "half"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reciprocal identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Reciprocal identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "reciprocal"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "derived identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Derived identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "summary"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "relatedTools": [
@@ -2434,31 +2561,6 @@
           "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "amplitude",
-          "entity": "amplitude",
-          "sections": [
-            "key-terms",
-            "period-amplitude-and-range"
-          ],
-          "status": "linked",
-          "definitionTarget": {
-            "path": "/trigonometry/definitions",
-            "section": "amplitude"
-          },
-          "links": [
-            {
-              "fromSection": "key-terms",
-              "surface": "amplitude",
-              "target": {
-                "path": "/trigonometry/graphs",
-                "section": "6"
-              },
-              "method": "repository-link",
-              "added": "2026-09-20"
-            }
-          ]
-        },
-        {
           "term": "angle",
           "entity": "angle",
           "sections": [
@@ -2578,32 +2680,6 @@
             "section": "inverse_trigonometric_function"
           },
           "reason": "Not planted in \"related-concepts-and-tools\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
-        },
-        {
-          "term": "period",
-          "entity": "period",
-          "sections": [
-            "key-terms",
-            "setting-the-angle",
-            "period-amplitude-and-range"
-          ],
-          "status": "linked",
-          "definitionTarget": {
-            "path": "/trigonometry/definitions",
-            "section": "period"
-          },
-          "links": [
-            {
-              "fromSection": "key-terms",
-              "surface": "period",
-              "target": {
-                "path": "/trigonometry/graphs",
-                "section": "7"
-              },
-              "method": "repository-link",
-              "added": "2026-09-20"
-            }
-          ]
         },
         {
           "term": "radians",
@@ -2755,6 +2831,111 @@
             "section": "unit_circle"
           },
           "reason": "Not planted in \"switching-between-degrees-and-radians\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Period",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "period"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Amplitude",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "amplitude"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "range",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Range",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "8"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "asymptote",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Asymptote",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "5"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "zero",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Zero",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "4"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "relatedTools": [
@@ -6404,6 +6585,90 @@
               "added": "2026-09-20"
             }
           ]
+        },
+        {
+          "term": "pythagorean identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Pythagorean identity",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "7"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "base identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Base identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "pythagorean"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "derived identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Derived identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "summary"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reciprocal function",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Reciprocal function",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "7"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams.js",
@@ -7424,6 +7689,111 @@
               "added": "2026-09-20"
             }
           ]
+        },
+        {
+          "term": "negative angle identity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Negative angle identity",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "even-odd"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Even function",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Odd function",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reflection across the x-axis",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Reflection across the x-axis",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": "even-odd"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "parity",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Parity",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "8"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams.js",
@@ -7575,47 +7945,6 @@
           "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "angles",
-          "entity": "angle",
-          "sections": [
-            "key-terms",
-            "dragging-vertices",
-            "locking-angles",
-            "adjusting-the-zoom",
-            "reading-the-diagram",
-            "reading-the-stats-bar",
-            "reading-the-explanation-panel",
-            "triangle-classifications",
-            "law-of-sines-and-law-of-cosines",
-            "related-concepts-and-tools",
-            "the-equilateral-scenario",
-            "the-isosceles-scenario",
-            "the-acute-scenario",
-            "the-obtuse-scenario",
-            "the-right-scalene-scenario",
-            "the-45-45-90-scenario",
-            "the-3-4-5-scenario",
-            "the-law-of-cosines-scenario"
-          ],
-          "status": "linked",
-          "definitionTarget": {
-            "path": "/trigonometry/definitions",
-            "section": "angle"
-          },
-          "links": [
-            {
-              "fromSection": "key-terms",
-              "surface": "angles",
-              "target": {
-                "path": "/trigonometry",
-                "section": "angles"
-              },
-              "method": "repository-link",
-              "added": "2026-09-20"
-            }
-          ]
-        },
-        {
           "term": "axis of symmetry",
           "entity": "axis_of_symmetry",
           "sections": [
@@ -7746,6 +8075,90 @@
                 "section": "5"
               },
               "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "vertex",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Vertex",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "1"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "side",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Side",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "1"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "interior angle",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Interior angle",
+              "target": {
+                "path": "/trigonometry/sines-cosines-law",
+                "section": "1"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Hypotenuse",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "hypotenuse"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
               "added": "2026-09-20"
             }
           ]
@@ -19700,63 +20113,6 @@
           "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "angles",
-          "entity": "angle",
-          "sections": [
-            "key-terms",
-            "choosing-a-concept",
-            "dragging-to-set-angles",
-            "using-preset-buttons-and-quick-angles",
-            "reading-the-scene-diagrams",
-            "reading-the-explanation-panels",
-            "angle-classifications",
-            "angle-relationships",
-            "trigonometry-specific-angle-concepts",
-            "why-angle-classification-matters-in-trigonometry",
-            "related-concepts-and-tools",
-            "complementary-and-supplementary-angles",
-            "vertical-angles",
-            "adjacent-angles",
-            "standard-position",
-            "directed-angles",
-            "zero-angles",
-            "acute-angles",
-            "right-angles",
-            "obtuse-angles",
-            "straight-angles",
-            "reflex-angles",
-            "full-angles",
-            "complementary-angles",
-            "supplementary-angles",
-            "quadrant-i-function-signs",
-            "quadrant-ii-function-signs",
-            "quadrant-iii-function-signs",
-            "quadrant-iv-function-signs",
-            "special-angle-0",
-            "special-angle-45",
-            "special-angle-60",
-            "special-angle-120",
-            "negative-angles"
-          ],
-          "status": "linked",
-          "definitionTarget": {
-            "path": "/trigonometry/definitions",
-            "section": "angle"
-          },
-          "links": [
-            {
-              "fromSection": "key-terms",
-              "surface": "angles",
-              "target": {
-                "path": "/trigonometry",
-                "section": "angles"
-              },
-              "method": "repository-link",
-              "added": "2026-09-20"
-            }
-          ]
-        },
-        {
           "term": "cosecant",
           "entity": "cosecant",
           "sections": [
@@ -20123,37 +20479,6 @@
           ]
         },
         {
-          "term": "terminal side",
-          "entity": "terminal_side",
-          "sections": [
-            "key-terms",
-            "trigonometry-specific-angle-concepts",
-            "reference-angles",
-            "coterminal-angles",
-            "reference-angle-in-quadrant-i",
-            "reference-angle-in-quadrant-ii",
-            "reference-angle-in-quadrant-iii",
-            "reference-angle-in-quadrant-iv"
-          ],
-          "status": "linked",
-          "definitionTarget": {
-            "path": "/trigonometry/definitions",
-            "section": "terminal_side"
-          },
-          "links": [
-            {
-              "fromSection": "key-terms",
-              "surface": "terminal side",
-              "target": {
-                "path": "/trigonometry/degrees-radians",
-                "section": "6"
-              },
-              "method": "repository-link",
-              "added": "2026-09-20"
-            }
-          ]
-        },
-        {
           "term": "unit circle",
           "entity": "unit_circle",
           "sections": [
@@ -20173,6 +20498,90 @@
                 "section": "1"
               },
               "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "vertex",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Vertex",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "6"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "initial side",
+          "entity": "initial_side",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Initial side",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "initial_side"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Terminal side",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "terminal_side"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "quadrant",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Quadrant",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "4"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
               "added": "2026-09-20"
             }
           ]
@@ -20620,6 +21029,111 @@
                 "section": "1"
               },
               "method": "repository-link",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "quadrant",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Quadrant",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "4"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Reference angle",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "reference_angle"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "astc rule",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "ASTC rule",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "4"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "coordinate signs",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Coordinate signs",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": "4"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-20"
+            }
+          ]
+        },
+        {
+          "term": "reciprocal pair",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Reciprocal pair",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": "7"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
               "added": "2026-09-20"
             }
           ]

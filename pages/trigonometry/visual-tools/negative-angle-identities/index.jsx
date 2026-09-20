@@ -37,11 +37,11 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Negative angle identity** — a formula relating a trig function evaluated at $-\\theta$ to the same function at $\\theta$.
-• **Even function** — satisfies $f(-x) = f(x)$. Its graph is symmetric about the y-axis. $\\cos$ and $\\sec$ are even.
-• **Odd function** — satisfies $f(-x) = -f(x)$. Its graph is symmetric about the origin. $\\sin$, $\\tan$, $\\csc$, $\\cot$ are odd.
-• **Reflection across the x-axis** — the geometric operation taking the terminal point $P = (\\cos\\theta, \\sin\\theta)$ to $P' = (\\cos\\theta, -\\sin\\theta)$, which is the terminal point of $-\\theta$.
-• **Parity** — whether a function is even or odd, summarized in the **Parity** column of the formula table.`,
+      content:`• [Negative angle identity](!/trigonometry/identities#even-odd) — a formula relating a trig function evaluated at $-\\theta$ to the same function at $\\theta$.
+• [Even function](!/trigonometry/properties#2) — satisfies $f(-x) = f(x)$. Its graph is symmetric about the y-axis. $\\cos$ and $\\sec$ are even.
+• [Odd function](!/trigonometry/properties#2) — satisfies $f(-x) = -f(x)$. Its graph is symmetric about the origin. $\\sin$, $\\tan$, $\\csc$, $\\cot$ are odd.
+• [Reflection across the x-axis](!/trigonometry/identities#even-odd) — the geometric operation taking the terminal point $P = (\\cos\\theta, \\sin\\theta)$ to $P' = (\\cos\\theta, -\\sin\\theta)$, which is the terminal point of $-\\theta$.
+• [Parity](!/trigonometry/properties#8) — whether a function is even or odd, summarized in the **Parity** column of the formula table.`,
       before:``,
       after:``,
       link:'',
@@ -522,6 +522,14 @@ export default function NegativeAngleIdentitiesPage({relatedTools, seoData, sect
 
 
   const genericSections=[
+    {
+        id:'key-terms',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'switching-between-functions',
         title:sectionsContent.obj1.title,

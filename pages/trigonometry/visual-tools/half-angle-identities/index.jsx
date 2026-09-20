@@ -40,11 +40,11 @@ export async function getStaticProps(){
 
     obj0:{
       title:`Key Terms`,
-      content:`• **Half-angle identity** — a formula expressing a trig function of $\\alpha/2$ in terms of trig functions of $\\alpha$.
+      content:`• [Half-angle identity](!/trigonometry/identities#half) — a formula expressing a trig function of $\\alpha/2$ in terms of trig functions of $\\alpha$.
 • **Geometric proof** — a derivation that uses a drawing (an isosceles triangle, two radii, a perpendicular bisector) rather than algebra.
 • **Bisector** — a line that splits an angle into two equal halves. Here, $OM$ bisects the apex $\\alpha$ into two angles of $\\alpha/2$.
-• **Reciprocal identity** — a function written as $1/\\text{(another)}$. $\\csc = 1/\\sin$, $\\sec = 1/\\cos$, $\\cot = 1/\\tan$.
-• **Derived identity** — one obtained by combining or rearranging others. $\\tan(\\alpha/2)$, $\\csc(\\alpha/2)$, $\\sec(\\alpha/2)$, and $\\cot(\\alpha/2)$ all follow from the formulas for $\\sin(\\alpha/2)$ and $\\cos(\\alpha/2)$.`,
+• [Reciprocal identity](!/trigonometry/identities#reciprocal) — a function written as $1/\\text{(another)}$. $\\csc = 1/\\sin$, $\\sec = 1/\\cos$, $\\cot = 1/\\tan$.
+• [Derived identity](!/trigonometry/identities#summary) — one obtained by combining or rearranging others. $\\tan(\\alpha/2)$, $\\csc(\\alpha/2)$, $\\sec(\\alpha/2)$, and $\\cot(\\alpha/2)$ all follow from the formulas for $\\sin(\\alpha/2)$ and $\\cos(\\alpha/2)$.`,
       before:``,
       after:``,
       link:'',
@@ -586,6 +586,14 @@ export default function HalfAngleIdentitiesPage({relatedTools, seoData, sections
 
 
   const genericSections=[
+    {
+        id:'key-terms',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     // {
     //     id:'0',
     //     title:sectionsContent.obj0.title,
