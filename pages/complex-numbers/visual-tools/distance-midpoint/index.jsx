@@ -472,6 +472,8 @@ import ComplexDistanceMidpoint from '../../../../app/components/calculators/comp
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import distanceMidpointDiagrams from '../../../../app/components/calculators/complex-numbers/distanceMidpointDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -497,7 +499,7 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Drag Two Points`,
-      content:`Two draggable points sit on the complex plane: $z_1$ (navy) and $z_2$ (orange). Grab either one and move it to see the orange distance segment, the purple midpoint, and both step-by-step panels update in real time.
+      content:`Two draggable points sit on the [complex plane](!/complex-numbers/geometric-representation#1): $z_1$ (navy) and $z_2$ (orange). Grab either one and move it to see the orange distance segment, the purple midpoint, and both step-by-step panels update in real time.
 
 Type precise values into the input fields on the right — each point has separate real and imaginary inputs accepting $-5$ to $5$ in steps of $0.1$. Five presets are available: a [general pair](!#the-right-triangle-and-distance-segment) $(-2+i)$ & $(3+3i)$, an [origin-based pair](!#distance-from-the-origin-modulus-as-a-special-case) $0$ & $(3+4i)$, a [symmetric pair](!#symmetric-points-and-midpoint-at-the-origin), a [vertical pair](!#the-vertical-pair), and a [horizontal pair](!#the-horizontal-pair). Click **Random** to generate two arbitrary points.
 
@@ -508,7 +510,7 @@ The **Show circle** checkbox toggles a dashed blue circle centered at $z_1$ that
     },
     obj2:{
       title:`The Right Triangle and Distance Segment`,
-      content:`When both the horizontal and vertical differences between the two points are nonzero, a right triangle appears on the plane. The green horizontal leg shows $\\Delta a = |a_1 - a_2|$ (the difference in real parts), the red vertical leg shows $\\Delta b = |b_1 - b_2|$ (the difference in imaginary parts), and the orange segment connecting $z_1$ to $z_2$ is the hypotenuse — the distance.
+      content:`When both the horizontal and vertical differences between the two points are nonzero, a right triangle appears on the plane. The green horizontal leg shows $\\Delta a = |a_1 - a_2|$ (the difference in [real parts](!/complex-numbers/algebraic-form#21)), the red vertical leg shows $\\Delta b = |b_1 - b_2|$ (the difference in [imaginary parts](!/complex-numbers/algebraic-form#22)), and the orange segment connecting $z_1$ to $z_2$ is the hypotenuse — the distance.
 
 A small right-angle marker appears at the corner where the two legs meet. The triangle's orientation depends on the relative positions of $z_1$ and $z_2$: the corner can appear in any of four positions depending on which point is above, below, left, or right of the other.
 
@@ -556,7 +558,7 @@ Here $|3 + 4i| = \\sqrt{9 + 16} = 5$ — the famous 3-4-5 right triangle. The gr
 
 The midpoint is $M = (0 + 3 + 4i)/2 = 1.5 + 2i$, which lies halfway along the segment from the origin to $z_1$.
 
-This demonstrates that distance between complex numbers is a generalization of the modulus. The modulus $|z|$ measures distance from the origin; $|z_1 - z_2|$ measures distance between any two points. Every modulus calculation is a distance calculation with $z_2 = 0$.`,
+This demonstrates that [distance between complex numbers](!/complex-numbers/absolute-value#8) is a generalization of the modulus. The modulus $|z|$ measures distance from the origin; $|z_1 - z_2|$ measures distance between any two points. Every modulus calculation is a distance calculation with $z_2 = 0$.`,
       before:``,
       after:`In the frozen frame, $z_1$ sits directly on the origin — its navy point covers the gray origin dot, and the faint $z_1$ vector has nothing to draw. What remains is the picture every modulus definition uses: the 3-4-5 [right triangle](!#the-right-triangle-and-distance-segment) with one vertex pinned at zero.
 
@@ -568,7 +570,7 @@ The dashed locus circle in this state is special too: centered on the origin wit
       title:`The Dashed Circle and Locus Interpretation`,
       content:`When the **Show circle** checkbox is enabled (the default), a dashed blue circle appears centered at $z_1$ with radius equal to the distance $|z_1 - z_2|$. The circle passes exactly through $z_2$.
 
-This circle represents the **locus** of all complex numbers $z$ satisfying $|z - z_1| = |z_1 - z_2|$ — every point on the circle is the same distance from $z_1$ as $z_2$ is. Dragging $z_2$ farther away makes the circle grow; dragging it closer makes the circle shrink.
+This circle represents the **locus** of all [complex numbers](!/complex-numbers/algebraic-form#1) $z$ satisfying $|z - z_1| = |z_1 - z_2|$ — every point on the circle is the same distance from $z_1$ as $z_2$ is. Dragging $z_2$ farther away makes the circle grow; dragging it closer makes the circle shrink.
 
 Toggle the circle off to get a cleaner view focused on the triangle and midpoint alone. Toggle it back on to study the circle equation $|z - z_0| = r$, which describes a circle of radius $r$ centered at $z_0$ in the complex plane.
 
@@ -670,7 +672,7 @@ The [Complex Conjugate Explorer](!/complex-numbers/visual-tools/complex-conjugat
 
 If you want to go deeper on the circle equation $|z - z_1| = r$ that the dashed circle here represents, the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) shows how modulus and distance connect to polar form — the $r$ in $re^{i\\theta}$ is exactly the distance from the origin, which is the special case $z_2 = 0$ of what this tool computes.
 
-Finally, the [Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) is a good starting point if any of the ideas here feel unfamiliar — it focuses on a single point and builds up modulus, argument, and the right triangle from scratch before you work with two points.`,
+Finally, the [Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) is a good starting point if any of the ideas here feel unfamiliar — it focuses on a single point and builds up modulus, [argument](!/complex-numbers/trigonometric-form#3), and the right triangle from scratch before you work with two points.`,
   before:``,
   after:``,
   link:'',
@@ -839,6 +841,7 @@ Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so 
 
    return {
       props:{
+      relatedTools: getRelatedTools('distance-midpoint'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -860,7 +863,7 @@ Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so 
     }
    }
 
-export default function DistanceMidpointPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DistanceMidpointPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -1053,6 +1056,7 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

@@ -10,6 +10,8 @@ import ComplexExplorer from '@/app/components/calculators/complex-numbers/Comple
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexExplorerDiagrams from '../../../../app/components/calculators/complex-numbers/complexExplorerDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -58,9 +60,9 @@ export async function getStaticProps(){
 
     obj1: {
       title: `How to Use the Complex Explorer`,
-      content: `This interactive tool visualizes complex numbers on an Argand plane (complex plane). Click anywhere on the grid to place a point, or drag to move it around. The tool responds instantly, updating all calculations as you explore.
+      content: `This interactive tool visualizes [complex numbers](!/complex-numbers/algebraic-form#1) on an Argand plane ([complex plane](!/complex-numbers/geometric-representation#1)). Click anywhere on the grid to place a point, or drag to move it around. The tool responds instantly, updating all calculations as you explore.
 
-Alternatively, type exact values in the **a** and **b** input fields above the plane. The field labeled "a" controls the real part (horizontal position), while "b" controls the imaginary part (vertical position). Press Enter or click away to confirm your input.
+Alternatively, type exact values in the **a** and **b** input fields above the plane. The field labeled "a" controls the [real part](!/complex-numbers/algebraic-form#21) (horizontal position), while "b" controls the [imaginary part](!/complex-numbers/algebraic-form#22) (vertical position). Press Enter or click away to confirm your input.
 
 Use the **Range ±** buttons to adjust the visible area. Smaller ranges (±5) show more detail for numbers close to the origin, while larger ranges (±10) let you explore bigger values. The snap resolution adjusts automatically based on your zoom level.`,
       before: ``,
@@ -74,7 +76,7 @@ Use the **Range ±** buttons to adjust the visible area. Smaller ranges (±5) sh
 
 Three cards display the components: **Real Part** (a) in orange matches the horizontal distance from the origin, **Imaginary Part** (b) in navy matches the vertical distance, and **Modulus** (|z|) in blue shows the straight-line distance from the origin.
 
-Below these cards, the **Explanation Panel** provides context-aware descriptions. It identifies whether your point is purely real, purely imaginary, at the origin, or in one of the four quadrants. Each case includes specific calculations showing how the modulus formula applies to your values.`,
+Below these cards, the **Explanation Panel** provides context-aware descriptions. It identifies whether your point is purely real, purely imaginary, at the origin, or in one of the four quadrants. Each case includes specific calculations showing how the [modulus](!/complex-numbers/absolute-value#1) formula applies to your values.`,
       before: ``,
       after: ``,
       link: '',
@@ -98,7 +100,7 @@ Labels on each side show the exact values. The small square at the corner confir
 
 A dashed vertical line connects z and z̄, passing through their shared position on the real axis. This reflection symmetry means that a number and its conjugate are always equidistant from the real axis — one above, one below (unless b = 0).
 
-The **Conjugate** card at the bottom displays the exact value of z̄. Notice that purely real numbers equal their own conjugates (since reflecting across the real axis leaves them unchanged), while purely imaginary numbers have conjugates that are their negatives.`,
+The **Conjugate** card at the bottom displays the exact value of z̄. Notice that purely real numbers equal their own conjugates (since reflecting across the real axis leaves them unchanged), while purely [imaginary numbers](!/complex-numbers/imaginary-numbers#3) have conjugates that are their negatives.`,
       before: ``,
       after: ``,
       link: '',
@@ -177,7 +179,7 @@ Key properties of modulus include: $|z| \\geq 0$ always, with equality only when
 
 Conjugates have important algebraic properties. The product $z \\cdot \\bar{z} = a^2 + b^2 = |z|^2$ always yields a non-negative real number. This makes conjugates essential for division: to compute $\\frac{w}{z}$, multiply numerator and denominator by $\\bar{z}$ to get a real denominator.
 
-Other properties include: $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$ and $\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$. The conjugate of a conjugate returns the original: $\\overline{\\bar{z}} = z$.`,
+Other properties include: $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$ and $\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$. The [conjugate of a conjugate](!/complex-numbers/complex-conjugate#3) returns the original: $\\overline{\\bar{z}} = z$.`,
       before: ``,
       after: ``,
       link: '',
@@ -209,9 +211,17 @@ obj11:{
 
 [Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — move from one complex number to two. This tool places $z_1$ and $z_2$ on the same plane and shows the parallelogram rule for addition and the difference vector for subtraction.
 
-[Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — see what happens when two complex numbers are multiplied: moduli scale and arguments rotate. The single modulus circle you see in the explorer becomes a geometric transformation.
+[Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — see what happens when two complex numbers are multiplied: moduli scale and [arguments](!/complex-numbers/trigonometric-form#3) rotate. The single modulus circle you see in the explorer becomes a geometric transformation.
 
-[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — extends the modulus concept to two points. The distance $|z_1 - z_2|$ between any two complex numbers is computed and visualized directly on the plane.`,
+[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — extends the modulus concept to two points. The distance $|z_1 - z_2|$ between any two complex numbers is computed and visualized directly on the plane.
+
+[De Moivre's Theorem Visualizer](!/complex-numbers/visual-tools/demoivre-visualizer) — takes the modulus and argument shown here and raises them to a power, $r^n$ and $n\\theta$.
+
+[Division Visualizer](!/complex-numbers/visual-tools/division) — the inverse of the rotation-and-scaling this explorer displays for a single point.
+
+[Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) — explains why the right triangle in this explorer can be written as $re^{i\\theta}$ at all.
+
+[Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) — what happens when the point in this explorer is $i$ itself and you keep multiplying: a four-step cycle around the unit circle.`,
   before:``,
   after:``,
   link:'',
@@ -243,7 +253,7 @@ Try steering the point along the axis with the **a** input field while watching 
 
     obj14: {
       title: `Pure Imaginary Numbers`,
-      content: `When the real part is zero, $z = 0 + bi = bi$ is a pure imaginary number. These numbers occupy the vertical axis — the real line's perpendicular twin, scaled by the imaginary unit $i$.`,
+      content: `When the real part is zero, $z = 0 + bi = bi$ is a [pure imaginary number](!/complex-numbers/imaginary-numbers#3). These numbers occupy the vertical axis — the real line's perpendicular twin, scaled by the [imaginary unit](!/complex-numbers/imaginary-numbers#1) $i$.`,
       before: ``,
       after: `The modulus of $bi$ is $|b|$: the formula gives $\\sqrt{0^2 + b^2} = |b|$, the unsigned height above or below the origin. So $2i$ and $-2i$ share the same modulus, just as $3$ and $-3$ do on the real axis.
 
@@ -435,6 +445,7 @@ Sign-wise the quadrant mirrors [Quadrant II](!#quadrant-ii-upper-left): one part
 
   return {
     props: {
+      relatedTools: getRelatedTools('complex-explorer'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -447,7 +458,7 @@ Sign-wise the quadrant mirrors [Quadrant II](!#quadrant-ii-upper-left): one part
 }
 
 export default function ComplexExplorerPage({
-  seoData,
+  relatedTools, seoData,
   sectionsContent,
   introContent,
   faqQuestions,
@@ -639,6 +650,7 @@ export default function ComplexExplorerPage({
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

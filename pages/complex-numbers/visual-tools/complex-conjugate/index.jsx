@@ -11,6 +11,8 @@ import ConjugateModulusVisualizer from '../../../../app/components/calculators/c
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import conjugateModulusDiagrams from '../../../../app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -36,11 +38,11 @@ export async function getStaticProps(){
 
     obj1:{
       title:`How to Use the Visualizer`,
-      content:`This tool lets you explore the relationship between a complex number, its conjugate, and its modulus through direct manipulation on the Argand plane.
+      content:`This tool lets you explore the relationship between a [complex number](!/complex-numbers/visual-tools/complex-explorer), its conjugate, and its [modulus](!/complex-numbers/absolute-value#1) through direct manipulation on the Argand plane.
 
 **Getting started:**
 
-- Drag the navy blue point labeled **z** anywhere on the complex plane
+- Drag the navy blue point labeled **z** anywhere on the [complex plane](!/complex-numbers/geometric-representation#1)
 - Watch the orange point **z̄** (the conjugate) mirror your movements across the real axis
 - Observe how the dashed circle representing the modulus updates in real time
 
@@ -61,19 +63,19 @@ Click any preset button (like 3+2i, −1+4i, or 3i) to jump to interesting examp
 
 **Points and vectors:**
 
-- Navy blue point and vector: your complex number z
+- Navy blue point and vector: your [complex number](!/complex-numbers/algebraic-form#1) z
 - Orange point and dashed vector: the conjugate z̄
 - Small gray dot at center: the origin (0, 0)
 
 **Geometric elements:**
 
 - Dashed blue circle: shows all points with the same modulus as z — notice both z and z̄ lie on this circle
-- Light right triangles: connect origin → real part → z (and similarly for z̄), showing how modulus relates to the Pythagorean theorem
+- Light right triangles: connect origin → [real part](!/complex-numbers/algebraic-form#21) → z (and similarly for z̄), showing how modulus relates to the Pythagorean theorem
 - Purple dashed vertical line: connects z to z̄, emphasizing reflection symmetry across the real axis
 
 **Axis labels:**
 
-The horizontal axis shows the real part (Re), while the vertical axis shows the imaginary part (Im). Tick marks appear at every 2 units for readability.`,
+The horizontal axis shows the real part (Re), while the vertical axis shows the [imaginary part](!/complex-numbers/algebraic-form#22) (Im). Tick marks appear at every 2 units for readability.`,
       before:``,
       after:``,
       link:'',
@@ -126,7 +128,7 @@ Both calculations yield the same result, confirming z · z̄ = |z|². The checkm
 
 [−1+4i](!#negative-real-part-1-4i): Second quadrant example where the real part is negative. Notice z̄ appears in the third quadrant.
 
-[3i](!#purely-imaginary-3i): A purely imaginary number lying on the imaginary axis. Here z and z̄ are symmetric about the origin, and both have the same distance from it.
+[3i](!#purely-imaginary-3i): A purely [imaginary number](!/complex-numbers/imaginary-numbers#3) lying on the imaginary axis. Here z and z̄ are symmetric about the origin, and both have the same distance from it.
 
 [4](!#purely-real-4): A purely real number. The conjugate equals the original: $\\bar{4} = 4$. Both points overlap on the real axis.
 
@@ -176,7 +178,7 @@ Geometrically, the conjugate is the **reflection of z across the real axis**. Th
 
 - $\\overline{\\bar{z}} = z$ — conjugating twice returns the original
 - $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$ — conjugate of a sum is the sum of conjugates
-- $\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$ — conjugate of a product is the product of conjugates
+- $\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$ — [conjugate of a product](!/complex-numbers/complex-conjugate#3) is the product of conjugates
 - $z + \\bar{z} = 2a$ — sum gives twice the real part
 - $z - \\bar{z} = 2bi$ — difference gives twice the imaginary part
 
@@ -264,11 +266,13 @@ obj10:{
 
 [Division Visualizer](!/complex-numbers/visual-tools/division) — the conjugate is the engine of complex division. To compute $\\frac{z_1}{z_2}$, you multiply numerator and denominator by $\\bar{z_2}$, turning the denominator into the real number $|z_2|^2 = z_2 \\cdot \\bar{z_2}$. This tool makes that process geometric.
 
-[Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) — the modulus $|z|$ you see here is the $r$ in polar form $re^{i\\theta}$. Conjugates share the same modulus but opposite argument: if $z = re^{i\\theta}$, then $\\bar{z} = re^{-i\\theta}$. Convert any point here to see its polar counterpart.
+[Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) — the modulus $|z|$ you see here is the $r$ in polar form $re^{i\\theta}$. Conjugates share the same modulus but opposite [argument](!/complex-numbers/trigonometric-form#3): if $z = re^{i\\theta}$, then $\\bar{z} = re^{-i\\theta}$. Convert any point here to see its polar counterpart.
 
 [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — $z \\cdot \\bar{z} = |z|^2$ is a multiplication, and a special one: the imaginary parts cancel exactly. See how multiplying a number by its conjugate always lands on the positive real axis.
 
-[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — conjugate pairs $z$ and $\\bar{z}$ are always symmetric about the real axis. Their midpoint is always real, and their distance is always $2|\\text{Im}(z)|$ — pure geometry that this tool illustrates directly.`,
+[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — conjugate pairs $z$ and $\\bar{z}$ are always symmetric about the real axis. Their midpoint is always real, and their distance is always $2|\\text{Im}(z)|$ — pure geometry that this tool illustrates directly.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — conjugation distributes over both: $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$, so reflecting a sum is the same as summing the reflections.`,
   before:``,
   after:``,
   link:'',
@@ -487,6 +491,7 @@ The [special cases section](!#special-cases-to-investigate) lists the other boun
 
    return {
       props:{
+      relatedTools: getRelatedTools('complex-conjugate'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -509,7 +514,7 @@ The [special cases section](!#special-cases-to-investigate) lists the other boun
    }
 
 export default function ComplexConjugateVisualizerPage({
-  seoData,
+  relatedTools, seoData,
   sectionsContent,
   introContent,
   faqQuestions,
@@ -732,6 +737,7 @@ export default function ComplexConjugateVisualizerPage({
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

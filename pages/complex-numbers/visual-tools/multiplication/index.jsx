@@ -10,6 +10,8 @@ import ComplexMultiplicationVisualizer from '../../../../app/components/calculat
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexMultiplicationDiagrams from '../../../../app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -36,11 +38,11 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Drag and Multiply`,
-      content:`Two draggable points represent the factors $z_1$ (navy) and $z_2$ (orange) on the complex plane. Grab either point and move it to see the green product vector $z_1 \\cdot z_2$ update in real time, along with the three angle arcs and both step-by-step solution panels.
+      content:`Two draggable points represent the factors $z_1$ (navy) and $z_2$ (orange) on the [complex plane](!/complex-numbers/geometric-representation#1). Grab either point and move it to see the green product vector $z_1 \\cdot z_2$ update in real time, along with the three angle arcs and both step-by-step solution panels.
 
 You can also type values directly into the input fields on the right — each factor has separate real and imaginary inputs accepting values from $-10$ to $10$. Five preset configurations are available below the plane: $(2+i)(-1+2i)$, $(1+i)(1-i)$, $3 \\times 2i$, $i \\times i$, and $2(-3+4i)$. Click **Random** to generate two arbitrary factors. Each preset has a dedicated section below with the tool frozen on it: the [general case](!#reading-the-three-angle-arcs), [real scaling](!#multiplication-by-a-pure-real-number), [pure imaginary factors](!#multiplication-by-pure-imaginary-numbers), the [conjugate pair](!#conjugate-pair-multiplication), and [i × i](!#why-i-squared-equals-minus-one).
 
-Each input panel shows the complex number in rectangular form alongside its modulus and argument, so you can track both the algebraic and geometric perspectives simultaneously.`,
+Each input panel shows the [complex number](!/complex-numbers/visual-tools/complex-explorer) in rectangular form alongside its [modulus](!/complex-numbers/absolute-value#1) and [argument](!/complex-numbers/trigonometric-form#3), so you can track both the algebraic and geometric perspectives simultaneously.`,
       before:``,
       after:``,
       link:'',
@@ -79,9 +81,9 @@ Note also which arcs are missing: $z_1$ sits on the positive real axis, so there
       title:`Multiplication by Pure Imaginary Numbers`,
       content:`Click $3 \\times 2i$ to see a real number multiplied by a pure imaginary. Here $z_1 = 3$ (angle $0°$) and $z_2 = 2i$ (angle $90°$). The product is $6i$ — the result sits on the positive imaginary axis at angle $90°$. Multiplication by $i$ rotates any vector $90°$ counterclockwise.
 
-Now click $i \\times i$. Both factors are the imaginary unit with modulus $1$ and angle $90°$. The product has modulus $1 \\times 1 = 1$ and angle $90° + 90° = 180°$, landing at $-1$. This is the defining property $i^2 = -1$ demonstrated geometrically — two $90°$ rotations compose into a $180°$ rotation.
+Now click $i \\times i$. Both factors are the [imaginary unit](!/complex-numbers/imaginary-numbers#1) with modulus $1$ and angle $90°$. The product has modulus $1 \\times 1 = 1$ and angle $90° + 90° = 180°$, landing at $-1$. This is the defining property $i^2 = -1$ demonstrated geometrically — two $90°$ rotations compose into a $180°$ rotation.
 
-Try setting $z_1 = 0 + 2i$ and $z_2 = 0 + 3i$. Both are pure imaginary, so both angles are $90°$. The product angle is $180°$ and the modulus is $2 \\times 3 = 6$, giving $-6$. Two pure imaginary numbers always produce a negative real product because $90° + 90° = 180°$.`,
+Try setting $z_1 = 0 + 2i$ and $z_2 = 0 + 3i$. Both are pure imaginary, so both angles are $90°$. The product angle is $180°$ and the modulus is $2 \\times 3 = 6$, giving $-6$. Two [pure imaginary numbers](!/complex-numbers/imaginary-numbers#3) always produce a negative real product because $90° + 90° = 180°$.`,
       before:``,
       after:`The frozen frame captures the quarter-turn in its purest useful form: a real number, $3$, lifted off the axis by the factor $2i$. Length doubles ($3 \\times 2 = 6$), direction turns by exactly $90°$, and the product $6i$ stands vertically. One factor supplies all the length change, the other all the rotation.
 
@@ -125,7 +127,7 @@ These two features ensure every product is readable regardless of magnitude.`,
 
 $$ac + adi + bci + bdi^2$$
 
-Since $i^2 = -1$, the last term becomes $-bd$. Collecting real and imaginary parts gives:
+Since $i^2 = -1$, the last term becomes $-bd$. Collecting [real and imaginary parts](!/complex-numbers/algebraic-form#21) gives:
 
 $$(ac - bd) + (ad + bc)i$$
 
@@ -146,7 +148,7 @@ $$\\theta_1 + \\theta_2 = \\theta_{\\text{product}}$$
 
 Moduli multiply and arguments add. This is why polar form makes multiplication simple — instead of four FOIL terms and an $i^2$ substitution, you just do one multiplication and one addition.
 
-Using **Euler's formula**, $z_1 z_2 = r_1 e^{i\\theta_1} \\cdot r_2 e^{i\\theta_2} = r_1 r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$. The exponential form turns multiplication of complex numbers into multiplication of real magnitudes and addition of exponents.
+Using **Euler's formula**, $z_1 z_2 = r_1 e^{i\\theta_1} \\cdot r_2 e^{i\\theta_2} = r_1 r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$. The [exponential form](!/complex-numbers/visual-tools/euler-formula) turns multiplication of complex numbers into multiplication of real magnitudes and addition of exponents.
 
 The panel also provides a plain-English summary: "The product vector is [modulus] units long at [angle] from the real axis." This sentence combines both polar components into one geometric description. Compare this to the multi-line algebraic expansion above — for multiplication, the polar approach is dramatically simpler.`,
       before:``,
@@ -216,7 +218,11 @@ The geometric method here — angles and moduli — only makes sense in polar fo
 
 The "multiplying by $i$ rotates by 90°" idea in the $i \\times i$ preset is the seed of something bigger. The [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) follows that single observation through its full cycle — each multiplication by $i$ is another 90° rotation, producing the $i, -1, -i, 1$ pattern directly from the geometry you see here.
 
-And if you want to see what happens when you apply this operation repeatedly to the same number, [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer) is exactly that — multiplying $z$ by itself $n$ times, with the spiral trail showing each intermediate step.`,
+And if you want to see what happens when you apply this operation repeatedly to the same number, [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer) is exactly that — multiplying $z$ by itself $n$ times, with the spiral trail showing each intermediate step.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — the operation multiplication distributes over, and the reason $(a+bi)(c+di)$ expands the way it does.
+
+[Complex Conjugate Explorer](!/complex-numbers/visual-tools/complex-conjugate) — multiplying $z$ by its own conjugate collapses the rotation entirely and leaves the real number $|z|^2$.`,
   before:``,
   after:``,
   link:'',
@@ -363,6 +369,7 @@ And if you want to see what happens when you apply this operation repeatedly to 
 
    return {
       props:{
+      relatedTools: getRelatedTools('multiplication'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -384,7 +391,7 @@ And if you want to see what happens when you apply this operation repeatedly to 
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -559,6 +566,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

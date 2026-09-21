@@ -175,7 +175,7 @@ export async function getStaticProps(){
   const intro = {
     title: "Free interactive tools for learning linear algebra",
     description: "Each tool turns a piece of linear algebra into something you can manipulate, watch, and step through — matrix operations, row reduction, vector geometry, systems of equations, and more.",
-    tip: "Start with the Matrix Multiplication Visualizer to see how dot products build the result one element at a time."
+    tip: "Start with Matrix Multiplication by Columns to see what a product actually does to a vector, or with the Matrix Multiplication Visualizer if you want the row by column rule element by element."
   }
 
   // Cross-listed tools that live at top-level /visual-tools/* routes on

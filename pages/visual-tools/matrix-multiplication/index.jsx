@@ -670,7 +670,9 @@ The frozen scene below is the second cell, $c_{1,2}$, at its second of three ter
 
 This is the strategy to run first, because the other three are shortcuts that assume you already believe this one. It is also the one that exposes the cost. Every cell needs $n$ multiplications, and there are $m \\times p$ cells, so the product costs $m \\times n \\times p$ multiplications in all: twelve at the defaults, and one hundred and twenty five for a pair of $5 \\times 5$ matrices.
 
-The same dot products are grouped differently by [column by column](!#column-by-column) and [row by row](!#row-by-row), and dissolved entirely by the [sum of outer products](!#sum-of-outer-products).`,
+The same dot products are grouped differently by [column by column](!#column-by-column) and [row by row](!#row-by-row), and dissolved entirely by the [sum of outer products](!#sum-of-outer-products).
+
+The rule is correct, and it hides what the product does. Drawn in the plane rather than tabulated, the product moves [whole columns](!/linear-algebra/visual-tools/matrix-multiplication-columns) or [whole rows](!/linear-algebra/visual-tools/matrix-multiplication-rows), never single entries.`,
       link: '',
     },
 

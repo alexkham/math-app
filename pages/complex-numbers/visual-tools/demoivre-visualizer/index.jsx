@@ -10,6 +10,8 @@ import DeMoivreCalculator from '../../../../app/components/calculators/complex-n
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import deMoivreDiagrams from '../../../../app/components/calculators/complex-numbers/deMoivreDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -35,11 +37,11 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Set z and Choose n`,
-      content:`Drag the navy point $z$ anywhere on the complex plane, or type values into the Re and Im input fields (range $\\pm 10$). Then set the exponent $n$ using the slider ($-10$ to $10$), the input field ($-20$ to $20$), or one of seven presets: $(1+i)^2$, $(1+i)^4$, $i^3$, $(1+i)^8$, $(3+4i)^{-1}$, $2^{10}$, and $(0.5+0.5i)^6$. Each preset has a dedicated section below with the tool frozen on it: the [squaring baseline](!#the-squaring-baseline), the [outward spiral](!#the-outward-spiral-when-z-1), [escaping the window](!#escaping-the-window), the [inward spiral](!#the-inward-spiral-when-z-1), [unit circle rotation](!#unit-circle-rotation-when-z-1), [negative exponents](!#negative-exponents-reciprocals-and-reversal), and the [pure real base](!#pure-real-base-no-spiral-just-scaling).
+      content:`Drag the navy point $z$ anywhere on the [complex plane](!/complex-numbers/geometric-representation#1), or type values into the Re and Im input fields (range $\\pm 10$). Then set the exponent $n$ using the slider ($-10$ to $10$), the input field ($-20$ to $20$), or one of seven presets: $(1+i)^2$, $(1+i)^4$, $i^3$, $(1+i)^8$, $(3+4i)^{-1}$, $2^{10}$, and $(0.5+0.5i)^6$. Each preset has a dedicated section below with the tool frozen on it: the [squaring baseline](!#the-squaring-baseline), the [outward spiral](!#the-outward-spiral-when-z-1), [escaping the window](!#escaping-the-window), the [inward spiral](!#the-inward-spiral-when-z-1), [unit circle rotation](!#unit-circle-rotation-when-z-1), [negative exponents](!#negative-exponents-reciprocals-and-reversal), and the [pure real base](!#pure-real-base-no-spiral-just-scaling).
 
 The green result vector $z^n$ updates instantly along with the step-by-step panel, polar values, and the purple intermediate power trail. Click **Random** to generate a random base and exponent.
 
-The input summary on the right shows $z$ in rectangular form, its modulus $|z|$, its argument $\\theta$ in both degrees and radians, and the current exponent $n$. All values update in real time as you drag or type.`,
+The input summary on the right shows $z$ in rectangular form, its [modulus](!/complex-numbers/absolute-value#1) $|z|$, its [argument](!/complex-numbers/trigonometric-form#3) $\\theta$ in both degrees and radians, and the current exponent $n$. All values update in real time as you drag or type.`,
       before:``,
       after:``,
       link:'',
@@ -146,7 +148,7 @@ Two **angle arcs** appear near the origin. The navy arc labeled $\\theta$ shows 
 
 **Step 4** — multiply the angle by $n$: $n\\theta$. If the result exceeds $\\pm 180°$, a normalized angle also appears.
 
-**Step 5** — convert back to rectangular form using $\\cos(n\\theta)$ and $\\sin(n\\theta)$, showing the evaluation and the final complex number.
+**Step 5** — convert back to rectangular form using $\\cos(n\\theta)$ and $\\sin(n\\theta)$, showing the evaluation and the final [complex number](!/complex-numbers/visual-tools/complex-explorer).
 
 Every value in every step updates dynamically with each drag, keystroke, or slider change. This makes the panel a live worked example for any base-exponent combination you choose.`,
       before:``,
@@ -220,7 +222,11 @@ Right behind it is [Euler's Formula Explorer](!/complex-numbers/visual-tools/eul
 
 The [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) shows the single-step version of what this tool does repeatedly. Each intermediate power in the purple trail is one more multiplication — modulus scales by $|z|$, angle shifts by $\\theta$. The trail you see here is that operation applied $n$ times in sequence.
 
-Finally, for the unit circle behavior — where $|z| = 1$ and powers only rotate — the [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) is the cleanest special case. Setting $r = 1$ and $\\theta = 90°$ here reproduces exactly the $i, -1, -i, 1$ cycle that tool is built around.`,
+Finally, for the unit circle behavior — where $|z| = 1$ and powers only rotate — the [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) is the cleanest special case. Setting $r = 1$ and $\\theta = 90°$ here reproduces exactly the $i, -1, -i, 1$ cycle that tool is built around.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — the contrast worth seeing: powers are trivial in polar form and sums are trivial in rectangular form.
+
+[Division Visualizer](!/complex-numbers/visual-tools/division) — the negative-exponent case of this theorem, since $z^{-1}$ divides the modulus and negates the angle.`,
   before:``,
   after:``,
   link:'',
@@ -228,7 +234,7 @@ Finally, for the unit circle behavior — where $|z| = 1$ and powers only rotate
 
     obj12:{
       title:`The Squaring Baseline`,
-      content:`The preset $(1+i)^2$ is the smallest possible use of the theorem — one multiplication — and the cleanest place to check the machinery against plain algebra.`,
+      content:`The preset $(1+i)^2$ is the smallest possible use of the theorem — one [multiplication](!/complex-numbers/operations#3) — and the cleanest place to check the machinery against plain algebra.`,
       before:``,
       after:`FOIL gives the answer in one line: $(1+i)^2 = 1 + 2i + i^2 = 2i$. De Moivre's route agrees from the other direction: modulus $(\\sqrt{2})^2 = 2$, angle $2 \\times 45° = 90°$, which is $2i$ exactly. Two completely different computations, one point on the imaginary axis.
 
@@ -395,6 +401,7 @@ No teal $n\\theta$ arc appears in this frame — the normalized result angle is 
 
    return {
       props:{
+      relatedTools: getRelatedTools('demoivre-visualizer'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -416,7 +423,7 @@ No teal $n\\theta$ arc appears in this frame — the normalized result angle is 
     }
    }
 
-export default function DeMoivreVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DeMoivreVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -611,6 +618,7 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

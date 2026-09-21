@@ -577,7 +577,7 @@
       }
     },
     "operationA": {
-      "linearAlgebraMapped": "2026-09-20",
+      "linearAlgebraMapped": "2026-09-21",
       "note": "Stage 1 mapping only: identity, section inventory and related-terms with candidate tools attached. No content page was edited, no link or demonstration unit planted, no $conceptToolMap decision recorded - those are Stage 2/3 and run one page per pass. /linear-algebra/definitions and /formulas are excluded as Operation B territory.",
       "linearAlgebraLinked": "2026-09-13"
     }
@@ -2064,16 +2064,16 @@
     },
     "complex-numbers/basics": {
       "slug": "basics",
-      "name": "Complex Numbers Basics",
+      "name": "Complex Numbers Basics: Core Concepts and Forms",
       "section": "complex-numbers",
       "pagePath": "pages/complex-numbers/basics/index.jsx",
       "template": "titled",
-      "templateNote": "Created 2026-07-31 verbatim from the old /complex-numbers hub (hub migration prep). Numeric section ids '0'-'10'. Operation A related-terms mapping not yet performed.",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
       "sections": [
         "0",
         "1",
         "2",
-        "3",
+        "notation",
         "4",
         "5",
         "6",
@@ -2082,20 +2082,261 @@
         "9",
         "10"
       ],
-      "sectionTitles": [
-        "Key Terms",
-        "The Imaginary Unit (i) and Pure Imaginary Numbers",
-        "Algebraic Representation and the Complex Conjugate",
-        "Arithmetic Operations: Calculating in C",
-        "Geometric Representation: The Complex Plane",
-        "The Mathematical Theory: Complex Numbers as a Field",
-        "Trigonometric Representation: Radius and Argument",
-        "Exponential Form and Euler Formula",
-        "De Moivre Theorem and n-th Order Roots",
-        "Complex Equations and Polynomial Theory",
-        "The Three Forms at a Glance"
-      ],
-      "relatedTerms": []
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "additive inverse",
+          "entity": "additive_inverse",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "algebraic form",
+          "entity": "algebraic_form",
+          "sections": [
+            "6",
+            "10"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "fundamental theorem of algebra",
+          "entity": "fundamental_theorem_of_algebra",
+          "sections": [
+            "9"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "trigonometric form",
+          "entity": "trigonometric_form",
+          "sections": [
+            "6"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "0",
+            "2",
+            "notation",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "conjugate of a product",
+          "entity": "complex_conjugate",
+          "sections": [
+            "2",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer"
+          ]
+        },
+        {
+          "term": "imaginary numbers",
+          "entity": "imaginary_number",
+          "sections": [
+            "2",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "complex-conjugate",
+            "complex-explorer",
+            "division"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "2",
+            "notation",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "2",
+            "4",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "multiplicative inverse",
+          "entity": "multiplicative_inverse",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "i-powers"
+          ]
+        },
+        {
+          "term": "pure imaginary numbers",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "1",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "0",
+            "2",
+            "notation",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "roots of unity",
+          "entity": "roots_of_unity",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "demoivre-visualizer"
+          ]
+        }
+      ]
     },
     "probability/basics": {
       "slug": "basics",
@@ -18196,6 +18437,2267 @@
           "candidateTools": [
             "functions-domain",
             "functions-range"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/absolute-value": {
+      "slug": "absolute-value",
+      "name": "Modulus: Absolute Value & Triangle Inequality",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/absolute-value/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "notation",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "reverse triangle inequality",
+          "entity": "triangle_inequality",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "notation",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "notation",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "conjugate times number",
+          "entity": "complex_conjugate",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "0",
+            "1",
+            "notation",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/additive-inverse": {
+      "slug": "additive-inverse",
+      "name": "Additive Inverse: Negation of Complex Numbers",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/additive-inverse/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "additive inverse",
+          "entity": "additive_inverse",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "0",
+            "2",
+            "6",
+            "8",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "pure imaginary numbers",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "2",
+            "6",
+            "8",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/algebraic-form": {
+      "slug": "algebraic-form",
+      "name": "Algebraic Form: Standard Form a + bi",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/algebraic-form/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "21",
+        "22",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "algebraic form",
+          "entity": "algebraic_form",
+          "sections": [
+            "0",
+            "1",
+            "21",
+            "22",
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "2",
+            "21",
+            "22",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "conjugate of a product",
+          "entity": "complex_conjugate",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "22",
+            "4",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "pure imaginary number",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "1",
+            "2",
+            "21",
+            "22",
+            "4",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/cheat-sheets": {
+      "slug": "cheat-sheets",
+      "name": "Complex Numbers Cheat Sheet",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/cheat-sheets/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": []
+    },
+    "complex-numbers/complex-conjugate": {
+      "slug": "complex-conjugate",
+      "name": "Complex Conjugate: Definition & Properties",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/complex-conjugate/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "notation",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "complex conjugate",
+          "entity": "complex_conjugate",
+          "sections": [
+            "1",
+            "3",
+            "5",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "notation",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "4",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "pure imaginary numbers",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "notation",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "1",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/demoivre-theorem": {
+      "slug": "demoivre-theorem",
+      "name": "Demoivre Theorem",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/demoivre-theorem/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "notation",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "algebraic form",
+          "entity": "algebraic_form",
+          "sections": [
+            "4",
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "trigonometric form",
+          "entity": "trigonometric_form",
+          "sections": [
+            "2",
+            "3",
+            "4",
+            "10"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "7",
+            "8",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "2",
+            "4",
+            "6",
+            "7",
+            "8",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "nth roots formula",
+          "entity": "roots_of_unity",
+          "sections": [
+            "6",
+            "8",
+            "notation",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "demoivre-visualizer"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/equations-polynomials": {
+      "slug": "equations-polynomials",
+      "name": "Polynomial Equations & Fundamental Theorem",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/equations-polynomials/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "fundamental theorem of algebra",
+          "entity": "fundamental_theorem_of_algebra",
+          "sections": [
+            "2",
+            "5",
+            "10"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "trigonometric form",
+          "entity": "trigonometric_form",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "0",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "roots of unity",
+          "entity": "roots_of_unity",
+          "sections": [
+            "0",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "demoivre-visualizer"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/exponential-form": {
+      "slug": "exponential-form",
+      "name": "Exponential Form",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/exponential-form/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "notation",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "algebraic form",
+          "entity": "algebraic_form",
+          "sections": [
+            "4",
+            "notation",
+            "6"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "exponential form",
+          "entity": "exponential_form",
+          "sections": [
+            "0",
+            "1",
+            "4",
+            "notation",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "trigonometric form",
+          "entity": "trigonometric_form",
+          "sections": [
+            "4",
+            "notation"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "4",
+            "notation",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "3",
+            "4",
+            "notation",
+            "6",
+            "7",
+            "8",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "2",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "4",
+            "notation",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "2",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/geometric-representation": {
+      "slug": "geometric-representation",
+      "name": "Complex Plane & Argand Diagram: Visualize ℂ",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/geometric-representation/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "0",
+            "1",
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "4",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "pure imaginary numbers",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "2",
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/imaginary-numbers": {
+      "slug": "imaginary-numbers",
+      "name": "Imaginary Numbers: Definition, Powers of i",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/imaginary-numbers/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "notation",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "complex number",
+          "entity": "complex_number",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "notation",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary numbers",
+          "entity": "imaginary_number",
+          "sections": [
+            "0"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "complex-conjugate",
+            "complex-explorer",
+            "division"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "3",
+            "notation",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "pure imaginary numbers",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "3",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "0",
+            "3",
+            "notation",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "square root of negative",
+          "entity": "imaginary_unit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "notation",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/multiplicative-inverse": {
+      "slug": "multiplicative-inverse",
+      "name": "Multiplicative Inverse: Reciprocal of ℂ",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/multiplicative-inverse/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "additive inverse",
+          "entity": "additive_inverse",
+          "sections": [
+            "11"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "4",
+            "6",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "7",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "modulus squared",
+          "entity": "modulus",
+          "sections": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "multiplicative inverses",
+          "entity": "multiplicative_inverse",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "i-powers"
+          ]
+        },
+        {
+          "term": "pure imaginary number",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-explorer",
+            "division",
+            "multiplication"
+          ]
+        },
+        {
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "2",
+            "7",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/operations": {
+      "slug": "operations",
+      "name": "Operations on Complex Numbers: Add, Multiply, Divide",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/operations/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "additive inverse",
+          "entity": "additive_inverse",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "algebraic form",
+          "entity": "algebraic_form",
+          "sections": [
+            "6"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary parts",
+          "entity": "imaginary_part",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "modulus squared",
+          "entity": "modulus",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "multiplicative inverse",
+          "entity": "multiplicative_inverse",
+          "sections": [
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "i-powers"
+          ]
+        },
+        {
+          "term": "real parts",
+          "entity": "real_part",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "subtraction",
+          "entity": "complex_number",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/properties": {
+      "slug": "properties",
+      "name": "Properties of Complex Numbers: Field Axioms",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/properties/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "additive inverse",
+          "entity": "additive_inverse",
+          "sections": [
+            "3"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "fundamental theorem of algebra",
+          "entity": "fundamental_theorem_of_algebra",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "reverse triangle inequality",
+          "entity": "triangle_inequality",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "1",
+            "6",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "conjugate of a conjugate",
+          "entity": "complex_conjugate",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "1",
+            "5",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "multiplicative inverse",
+          "entity": "multiplicative_inverse",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "i-powers"
+          ]
+        },
+        {
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "subtraction",
+          "entity": "complex_number",
+          "sections": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "complex-numbers/trigonometric-form": {
+      "slug": "trigonometric-form",
+      "name": "Trigonometric Form of Complex Numbers",
+      "section": "complex-numbers",
+      "pagePath": "pages/complex-numbers/trigonometric-form/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "notation",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-21",
+      "relatedTerms": [
+        {
+          "term": "algebraic form",
+          "entity": "algebraic_form",
+          "sections": [
+            "1",
+            "9"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "exponential forms",
+          "entity": "exponential_form",
+          "sections": [
+            "7"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "trigonometric form",
+          "entity": "trigonometric_form",
+          "sections": [
+            "1",
+            "7",
+            "notation",
+            "10",
+            "11"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "notation",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "7",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "7",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "1",
+            "2",
+            "7",
+            "notation",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "demoivre-visualizer",
+            "distance-midpoint",
+            "division",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
+          ]
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "7",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "addition-subtraction",
+            "complex-conjugate",
+            "complex-explorer",
+            "distance-midpoint",
+            "euler-formula",
+            "i-powers",
+            "multiplication",
+            "polar-rectangular"
           ]
         }
       ]

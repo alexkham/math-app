@@ -77,6 +77,26 @@ ALIASES = {
         'functions-types': ['function family', 'function families', 'families gallery',
                             'functions families gallery', 'function types', 'families of functions'],
     },
+    'complex-numbers': {
+        'addition-subtraction': ['addition and subtraction', 'complex addition', 'complex subtraction',
+                                 'addition & subtraction', 'adding and subtracting complex numbers',
+                                 'complex addition & subtraction'],
+        'complex-conjugate': ['complex conjugate', 'conjugate and modulus', 'conjugates',
+                              'complex conjugate and modulus'],
+        'complex-explorer': ['complex explorer', 'complex number explorer', 'complex plane explorer'],
+        'demoivre-visualizer': ["de moivre's theorem", 'de moivre theorem', 'de moivre', "demoivre's theorem",
+                                "de moivre's formula"],
+        'distance-midpoint': ['distance and midpoint', 'distance & midpoint', 'complex distance',
+                              'distance between complex numbers', 'midpoint'],
+        'division': ['complex division', 'division of complex numbers', 'dividing complex numbers',
+                     'division visualizer'],
+        'euler-formula': ["euler's formula", 'euler formula', "euler's identity", 'exponential form'],
+        'i-powers': ['powers of i', 'powers of $i$', 'cyclic powers', 'i powers'],
+        'multiplication': ['complex multiplication', 'multiplication of complex numbers',
+                           'multiplying complex numbers'],
+        'polar-rectangular': ['polar-rectangular', 'polar and rectangular', 'polar rectangular converter',
+                              'polar form', 'rectangular form', 'polar-rectangular converter'],
+    },
 }
 
 SKIP = [

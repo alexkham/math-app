@@ -472,6 +472,8 @@ import PolarRectangularConverter from '../../../../app/components/calculators/co
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import polarRectangularDiagrams from '../../../../app/components/calculators/complex-numbers/polarRectangularDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -497,7 +499,7 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Drag, Type, or Pick a Preset`,
-      content:`There are three ways to set a complex number in this converter. Drag the blue point anywhere on the complex plane and both the rectangular and polar panels update instantly. Type values directly into the $a$ and $b$ fields (rectangular) or the $r$ and $\\theta$ fields (polar) — the other form recalculates automatically. Or click one of six preset buttons below the plane: $3 + 2i$, $-4 + 3i$, $5i$, $-6$, $5 - 5i$, and $-3 - 4i$.
+      content:`There are three ways to set a [complex number](!/complex-numbers/algebraic-form#1) in this converter. Drag the blue point anywhere on the [complex plane](!/complex-numbers/geometric-representation#1) and both the rectangular and polar panels update instantly. Type values directly into the $a$ and $b$ fields (rectangular) or the $r$ and $\\theta$ fields (polar) — the other form recalculates automatically. Or click one of six preset buttons below the plane: $3 + 2i$, $-4 + 3i$, $5i$, $-6$, $5 - 5i$, and $-3 - 4i$.
 
 Each preset places the point in a different region of the complex plane, producing a distinct triangle configuration, and each has a dedicated section below with the tool frozen on it: [3 + 2i](!#quadrant-i-baseline-3-2i), [−4 + 3i](!#quadrant-ii-4-3i), [5i](!#on-the-imaginary-axis-5i), [−6](!#on-the-negative-real-axis-6), [5 − 5i](!#equal-component-states-and-special-angles), and [−3 − 4i](!#quadrant-iii-3-4i). The **Random** button generates an arbitrary point within the $\\pm 10$ range. All inputs are clamped to $\\pm 10$ — if you type a value outside this range, a warning message appears briefly and the value snaps to the nearest limit.`,
       before:``,
@@ -508,7 +510,7 @@ Each preset places the point in a different region of the complex plane, produci
       title:`Points in All Four Quadrants`,
       content:`Each quadrant of the complex plane produces a different triangle orientation and a different sign combination for the rectangular components.
 
-**Quadrant I** ($a > 0$, $b > 0$): click $3 + 2i$. The green horizontal leg points right, the red vertical leg points up, and the angle $\\theta$ is positive between $0°$ and $90°$. Both the real and imaginary parts are positive — this is the [baseline configuration](!#quadrant-i-baseline-3-2i).
+**Quadrant I** ($a > 0$, $b > 0$): click $3 + 2i$. The green horizontal leg points right, the red vertical leg points up, and the angle $\\theta$ is positive between $0°$ and $90°$. Both the [real and imaginary parts](!/complex-numbers/algebraic-form#21) are positive — this is the [baseline configuration](!#quadrant-i-baseline-3-2i).
 
 **Quadrant II** ($a < 0$, $b > 0$): click $-4 + 3i$. The green leg extends left of the imaginary axis while the red leg still points up. The angle is [between 90° and 180°](!#quadrant-ii-4-3i).
 
@@ -526,7 +528,7 @@ Each configuration is a unique visual snapshot showing how the signs of $a$ and 
       title:`Degenerate Cases — Points on the Axes`,
       content:`When the point lies exactly on an axis, one component is zero and the triangle collapses into a line segment.
 
-Click [5i](!#on-the-imaginary-axis-5i) to place the point on the positive imaginary axis. Here $a = 0$ and $b = 5$, so the green horizontal leg vanishes entirely. Only the red vertical segment remains. The modulus equals the imaginary part ($r = 5$) and the angle is exactly $90°$. There is no right-angle marker because there is no triangle — just a vertical line from the origin.
+Click [5i](!#on-the-imaginary-axis-5i) to place the point on the positive imaginary axis. Here $a = 0$ and $b = 5$, so the green horizontal leg vanishes entirely. Only the red vertical segment remains. The modulus equals the [imaginary part](!/complex-numbers/algebraic-form#22) ($r = 5$) and the angle is exactly $90°$. There is no right-angle marker because there is no triangle — just a vertical line from the origin.
 
 Click [−6](!#on-the-negative-real-axis-6) to place the point on the negative real axis. Now $b = 0$, the red vertical leg disappears, and only the green horizontal segment remains. The modulus is $6$ and the angle is $180°$.
 
@@ -538,7 +540,7 @@ These axis-aligned states also demonstrate how the atan2 function handles specia
 
     obj4:{
       title:`Equal-Component States and Special Angles`,
-      content:`Click $5 - 5i$ to see a point where $|a| = |b|$. The right triangle becomes isosceles — both legs have the same length, and the angle is exactly $-45°$ (or equivalently $-\\frac{\\pi}{4}$ radians). The modulus is $r = \\sqrt{25 + 25} = \\sqrt{50} \\approx 7.07$.
+      content:`Click $5 - 5i$ to see a point where $|a| = |b|$. The right triangle becomes isosceles — both legs have the same length, and the angle is exactly $-45°$ (or equivalently $-\\frac{\\pi}{4}$ radians). The [modulus](!/complex-numbers/absolute-value#1) is $r = \\sqrt{25 + 25} = \\sqrt{50} \\approx 7.07$.
 
 This is one of the cleanest illustrations of a $45°$ reference angle. Try typing $a = 5$, $b = 5$ to get the mirror image in Quadrant I at $\\theta = 45°$.
 
@@ -558,7 +560,7 @@ Equal components are the boundary between "wide" and "tall" triangles: the momen
 
 Type a value into either field and the entire visualization updates: the point moves on the plane, the triangle redraws, and the polar panel recalculates $r$ and $\\theta$. Below the inputs, the result line displays the complex number in standard notation — for example, $3 + 2i$ or $-4 - 3i$.
 
-The rectangular form is most natural for addition and subtraction. If you want to add two complex numbers, you simply add their real parts and their imaginary parts separately. This panel makes it easy to set precise integer or decimal coordinates and see how they translate into polar terms.
+The rectangular form is most natural for [addition and subtraction](!/complex-numbers/visual-tools/addition-subtraction). If you want to add two complex numbers, you simply add their real parts and their imaginary parts separately. This panel makes it easy to set precise integer or decimal coordinates and see how they translate into polar terms.
 
 If you enter a value outside the $\\pm 10$ range, a red warning message appears: "Values are limited to ±10. Input was clamped." The message fades after a few seconds and the value is adjusted to the nearest boundary.`,
       before:``,
@@ -574,7 +576,7 @@ Type a new $r$ value and the point moves outward or inward along the current ang
 
 The result line shows $r$ and $\\theta$ in both degrees and radians. When the angle matches a well-known fraction of $\\pi$ — such as $30°$, $45°$, $60°$, $90°$, or $180°$ — the radian display uses the symbolic form (e.g., $\\frac{\\pi}{4}$) instead of a decimal approximation.
 
-The polar form is most natural for multiplication, division, and powers. Multiplying two complex numbers in polar form means multiplying their moduli and adding their arguments. This panel lets you experiment with different $r$ and $\\theta$ combinations and see the corresponding rectangular result.`,
+The polar form is most natural for multiplication, division, and powers. Multiplying two complex numbers in polar form means multiplying their moduli and adding their [arguments](!/complex-numbers/trigonometric-form#3). This panel lets you experiment with different $r$ and $\\theta$ combinations and see the corresponding rectangular result.`,
       before:``,
       after:``,
       link:'',
@@ -686,7 +688,13 @@ obj11:{
 
 [De Moivre's Theorem Visualizer](!/complex-numbers/visual-tools/demoivre-visualizer) — takes polar form one step further. $(re^{i\\theta})^n = r^n e^{in\\theta}$ raises the modulus to a power and multiplies the angle — a direct consequence of the polar representation you see in this converter.
 
-[Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) — a general-purpose tool for plotting and manipulating complex numbers. Useful for verifying that a polar conversion lands where you expect on the plane.`,
+[Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) — a general-purpose tool for plotting and manipulating complex numbers. Useful for verifying that a polar conversion lands where you expect on the plane.
+
+[Complex Conjugate Explorer](!/complex-numbers/visual-tools/complex-conjugate) — conjugation is the cleanest thing polar form does: same $r$, negated $\\theta$.
+
+[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — distance is the modulus of a difference, so converting to polar form reads it off directly as $r$.
+
+[Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) — $i$ is the point $r = 1$, $\\theta = 90°$, which is why its powers march around the circle in quarter turns.`,
   before:``,
   after:``,
   link:'',
@@ -892,6 +900,7 @@ Once again $r = 5$: this is the third preset on the radius-5 circle, with [−4 
 
    return {
       props:{
+      relatedTools: getRelatedTools('polar-rectangular'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -913,7 +922,7 @@ Once again $r = 5$: this is the third preset on the radius-5 circle, with [−4 
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -1130,6 +1139,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

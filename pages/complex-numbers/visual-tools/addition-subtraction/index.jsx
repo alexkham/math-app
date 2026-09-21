@@ -10,6 +10,8 @@ import ComplexAdditionSubtractionVisualizer from '@/app/components/calculators/c
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexAddSubDiagrams from '../../../../app/components/calculators/complex-numbers/complexAddSubDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 
@@ -40,7 +42,7 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Drag Two Points`,
-      content:`Two draggable points sit on the complex plane: $z_1$ (navy) and $z_2$ (orange). Grab either point and move it anywhere within the $\\pm 5$ grid to see the addition and subtraction results update instantly.
+      content:`Two draggable points sit on the [complex plane](!/complex-numbers/geometric-representation#1): $z_1$ (navy) and $z_2$ (orange). Grab either point and move it anywhere within the $\\pm 5$ grid to see the addition and [subtraction](!/complex-numbers/operations#2) results update instantly.
 
 Alternatively, type precise values into the input fields on the right panel — each point has separate real and imaginary inputs accepting values from $-5$ to $5$ in steps of $0.1$. Five preset configurations are available below the plane: $(3+i)$ & $(1+3i)$, $(2+2i)$ & $(-2+2i)$, $4$ & $3i$, a conjugate pair, and $(-1+3i)$ & $(2-i)$. Click **Random** to generate two arbitrary points. Each preset has a dedicated section below with the tool frozen on it: the [mirror pair](!#the-mirror-pair-preset), the [axis pair](!#the-axis-pair-preset), the [conjugate pair](!#conjugate-pairs-in-addition-and-subtraction), and the [mixed-signs pair](!#the-mixed-signs-preset).
 
@@ -67,7 +69,7 @@ Notice also what the picture does not show: the sum vector $4+4i$ has modulus $\
       title:`Subtraction and the Difference Vector`,
       content:`Switch to **Subtraction** mode to isolate the subtraction geometry. The purple vector from the origin represents $z_1 - z_2$, while a purple dashed line connects the tips of $z_2$ and $z_1$ directly.
 
-This dashed line has the same length and direction as the difference vector — it literally shows "the vector from $z_2$ to $z_1$." The modulus $|z_1 - z_2|$ equals the distance between the two points on the plane.
+This dashed line has the same length and direction as the difference vector — it literally shows "the vector from $z_2$ to $z_1$." The [modulus](!/complex-numbers/absolute-value#1) $|z_1 - z_2|$ equals the distance between the two points on the plane.
 
 A faint dashed vector labeled $-z_2$ appears opposite to $z_2$ (rotated 180°). This illustrates the key identity: $z_1 - z_2 = z_1 + (-z_2)$. Subtraction is addition of the negation.
 
@@ -105,7 +107,7 @@ This double-diagonal reading is worth internalizing before visiting the presets 
 
 **One vector zero:** set $z_2 = 0$. The sum equals $z_1$ itself, the difference also equals $z_1$, and the parallelogram disappears because one side has zero length.
 
-**Collinear vectors:** when $z_1$ and $z_2$ point in the same direction (same argument), the parallelogram degenerates to a line and the triangle inequality becomes an equality. Drag both points to, say, the positive real axis to see this.
+**Collinear vectors:** when $z_1$ and $z_2$ point in the same direction (same [argument](!/complex-numbers/trigonometric-form#3)), the parallelogram degenerates to a line and the triangle inequality becomes an equality. Drag both points to, say, the positive real axis to see this.
 
 **Off-screen result:** when the sum exceeds the $\\pm 5$ range, the green vector is replaced by a dashed ray pointing toward the edge with an arrow and the label "$z_1 + z_2 \\to$", indicating the result is beyond the visible area.`,
       before:``,
@@ -147,7 +149,7 @@ Now rotate $z_2$ perpendicular to $z_1$ and the gap widens. The farther apart th
 
     obj8:{
       title:`How Complex Addition Works`,
-      content:`Adding two complex numbers is straightforward — combine real parts and imaginary parts separately:
+      content:`Adding two complex numbers is straightforward — combine real parts and [imaginary parts](!/complex-numbers/algebraic-form#22) separately:
 
 $$(a + bi) + (c + di) = (a + c) + (b + d)i$$
 
@@ -179,11 +181,11 @@ Two important special cases: when $z_2$ is the **conjugate** of $z_1$ (same real
 
     obj10:{
       title:`Conjugate Pairs in Addition and Subtraction`,
-      content:`Click the **Conjugate pair** preset to load $z_1 = 3 + 2i$ and $z_2 = 3 - 2i$. These are complex conjugates — they share the same real part but have opposite imaginary parts.
+      content:`Click the **Conjugate pair** preset to load $z_1 = 3 + 2i$ and $z_2 = 3 - 2i$. These are [complex conjugates](!/complex-numbers/complex-conjugate#1) — they share the same real part but have opposite imaginary parts.
 
 Adding conjugates always cancels the imaginary components: $(3 + 2i) + (3 - 2i) = 6$. The sum is a pure real number lying on the real axis. In the visualizer, the green sum point sits exactly on the horizontal axis.
 
-Subtracting conjugates always cancels the real components: $(3 + 2i) - (3 - 2i) = 4i$. The difference is a pure imaginary number on the vertical axis. The purple vector points straight up.
+Subtracting conjugates always cancels the real components: $(3 + 2i) - (3 - 2i) = 4i$. The difference is a [pure imaginary number](!/complex-numbers/imaginary-numbers#3) on the vertical axis. The purple vector points straight up.
 
 The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always symmetric about the real axis. This pair produces one of the cleanest illustrations: real-axis sum, imaginary-axis difference, and a perfectly symmetric parallelogram.`,
       before:``,
@@ -197,7 +199,7 @@ The general rule behind the split: $z + \\bar{z} = 2\\,\\text{Re}(z)$ and $z - \
       title:`Related Concepts and Tools`,
       content:`Explore the full suite of complex number visual tools — each one targets a different operation or concept on the complex plane.
 
-[Complex Numbers](!/complex-numbers) — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, modulus, argument, and the structure of the complex plane. Start here if you are new to the topic.
+[Complex Numbers](!/complex-numbers) — foundational theory covering the [imaginary unit](!/complex-numbers/imaginary-numbers#1) $i$, rectangular form $a + bi$, modulus, argument, and the structure of the complex plane. Start here if you are new to the topic.
 
 [Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) — a general-purpose interactive tool for plotting complex numbers, adjusting their real and imaginary parts, and observing how they behave under basic operations.
 
@@ -223,7 +225,7 @@ The general rule behind the split: $z + \\bar{z} = 2\\,\\text{Re}(z)$ and $z - \
 
     obj12:{
       title:`The Mirror Pair Preset`,
-      content:`The preset $(2+2i)$ & $(-2+2i)$ loads two numbers that are reflections of each other across the imaginary axis: same height, opposite real parts.`,
+      content:`The preset $(2+2i)$ & $(-2+2i)$ loads two numbers that are reflections of each other across the imaginary axis: same height, opposite [real parts](!/complex-numbers/algebraic-form#21).`,
       before:``,
       after:`The cancellation is the reverse of the conjugate pair's: here the real parts cancel in the sum, $(2+2i) + (-2+2i) = 4i$, and the imaginary parts cancel in the difference, $(2+2i) - (-2+2i) = 4$. One diagonal lands on each axis — the same clean split as [conjugate pairs](!#conjugate-pairs-in-addition-and-subtraction), rotated a quarter turn.
 
@@ -404,6 +406,7 @@ The lesson of the preset: subtraction measures separation, not size. Two modest 
 
    return {
       props:{
+      relatedTools: getRelatedTools('addition-subtraction'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -425,7 +428,7 @@ The lesson of the preset: subtraction measures separation, not size. Two modest 
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -629,6 +632,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

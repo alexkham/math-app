@@ -1,11 +1,14 @@
-# Post-write verification for the Line 2 linear-algebra pass.
+# Post-write verification for a Line 2 pass.
+#
+#   python line2-verify.py --section=trigonometry   (default: linear-algebra)
 # Read-only: resolves every destination and greps for malformed link shapes.
 
 import io, json, re, sys, urllib.request
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 REG = json.load(io.open('app/api/db/repositories/visual-tools-registry.json', encoding='utf-8'))
-LA = [k for k, v in REG['tools'].items() if v.get('section') == 'linear-algebra']
+SECTION = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--section=')), 'linear-algebra')
+LA = [k for k, v in REG['tools'].items() if v.get('section') == SECTION]
 
 
 def live(src):
@@ -31,14 +34,34 @@ print('unique lesson destinations: %d   non-200: %d' % (len(targets), len(bad)))
 for b in bad:
     print('   BROKEN', b)
 
-BOLD_LINK = re.compile(r'\*\*\[[^\]]*\]\(![^)]*\)\*\*')
-MATH_LABEL = re.compile(r'\[[^\]]*\$[^\]]*\]\(![^)]*\)')
+BOLD_LINK = re.compile(r'\*\*\[[^\]\n]*\]\(![^)\n]*\)\*\*')
+# A label must not contain maths. Two traps this pattern avoids:
+#   * it is line-scoped ([^\]\n]) - the old cross-line version matched from a
+#     '[' many lines earlier all the way to a later link;
+#   * maths regions are BLANKED before the scan (see mask_math), because an
+#     interval such as $[0, 360)$ sitting just before a real link otherwise
+#     looks exactly like a label full of maths. Both false positives were the
+#     entire 'math inside label' count on three sections.
+MATH_LABEL = re.compile(r'\[[^\]\n]*\$[^\]\n]*\]\(![^)\n]*\)')
+
+
+def mask_math(text):
+    out = list(text)
+    for pat in (re.compile(r'\$\$.*?\$\$', re.S), re.compile(r'\$[^$\n]*\$'),
+                re.compile(r'`[^`\n]*`')):
+        for m in pat.finditer(text):
+            for i in range(m.start(), m.end()):
+                out[i] = '\x00'
+    return ''.join(out)
 NESTED = re.compile(r'\[[^\]]*\[[^\]]*\]\([^)]*\)\]')
-NO_BANG = re.compile(r'\]\((/linear-algebra/[a-z0-9\-/#]*)\)')
+NO_BANG = re.compile(r'\]\((/' + re.escape(SECTION) + r'/[a-z0-9\-/#]*)\)')
 
 bl = ml = ne = nb = 0
 for k in LA:
-    src = live(io.open(REG['tools'][k]['pagePath'], encoding='utf-8').read())
+    pp = REG['tools'][k]['pagePath']
+    pp = pp if pp.endswith('.jsx') else 'pages' + pp + '/index.jsx'
+    src = live(io.open(pp, encoding='utf-8').read())
+    src = mask_math(src)
     bl += len(BOLD_LINK.findall(src))
     ml += len(MATH_LABEL.findall(src))
     ne += len(NESTED.findall(src))

@@ -472,6 +472,8 @@ import ComplexDivisionVisualizer from '../../../../app/components/calculators/co
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexDivisionDiagrams from '../../../../app/components/calculators/complex-numbers/complexDivisionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -497,11 +499,11 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Set Numerator and Denominator`,
-      content:`Two draggable points represent $z_1$ (navy, the numerator) and $z_2$ (orange, the denominator). Drag either point on the complex plane and the green quotient vector $z_1 / z_2$ updates instantly, along with both step-by-step solution panels.
+      content:`Two draggable points represent $z_1$ (navy, the numerator) and $z_2$ (orange, the denominator). Drag either point on the [complex plane](!/complex-numbers/geometric-representation#1) and the green quotient vector $z_1 / z_2$ updates instantly, along with both step-by-step solution panels.
 
 You can also type values directly into the input fields — each has separate real and imaginary inputs accepting $-10$ to $10$. Six presets are available below the plane: $(4+2i)/(1-i)$, $6/3$, $4i/2i$, $1/i$, $(3+4i)/(3-4i)$, and $(-2+6i)/(1+2i)$. Click **Random** to generate a random pair (the denominator is guaranteed non-zero). Each preset has a dedicated section below with the tool frozen on it: the [general case](!#the-three-angle-arcs-subtraction-in-action), [real division](!#division-of-pure-real-numbers), [imaginary division](!#division-of-pure-imaginary-numbers), [1/i](!#dividing-by-i-the-90-rotation), the [conjugate quotient](!#conjugate-pair-division), and the [clean-division pair](!#the-clean-division-preset).
 
-Each input panel displays the complex number in rectangular form alongside its modulus and argument, so you can follow both the algebraic and geometric methods simultaneously.`,
+Each input panel displays the [complex number](!/complex-numbers/visual-tools/complex-explorer) in rectangular form alongside its [modulus](!/complex-numbers/absolute-value#1) and [argument](!/complex-numbers/trigonometric-form#3), so you can follow both the algebraic and geometric methods simultaneously.`,
       before:``,
       after:``,
       link:'',
@@ -510,7 +512,7 @@ Each input panel displays the complex number in rectangular form alongside its m
       title:`The Three Angle Arcs — Subtraction in Action`,
       content:`Three concentric arcs near the origin show the arguments of the numerator, denominator, and quotient. The inner navy arc is $\\theta_1$, the middle orange arc is $\\theta_2$, and the outer green arc is $\\theta_1 - \\theta_2$.
 
-Division **subtracts** angles — the opposite of multiplication, which adds them. Click $(4+2i)/(1-i)$ to see: $\\theta_1 \\approx 26.6°$, $\\theta_2 \\approx -45°$, and the quotient angle is $26.6° - (-45°) = 71.6°$. Subtracting a negative angle effectively adds, so dividing by a number with a negative argument rotates the result upward.
+Division **subtracts** angles — the opposite of [multiplication](!/complex-numbers/operations#3), which adds them. Click $(4+2i)/(1-i)$ to see: $\\theta_1 \\approx 26.6°$, $\\theta_2 \\approx -45°$, and the quotient angle is $26.6° - (-45°) = 71.6°$. Subtracting a negative angle effectively adds, so dividing by a number with a negative argument rotates the result upward.
 
 Click $1/i$ for the most striking case. The numerator $z_1 = 1$ has angle $0°$ and the denominator $z_2 = i$ has angle $90°$. The quotient angle is $0° - 90° = -90°$, placing the result at $-i$ on the negative imaginary axis. Dividing by $i$ rotates $90°$ clockwise — the reverse of multiplying by $i$.`,
       before:``,
@@ -538,11 +540,11 @@ That makes this preset the baseline for every other one on this page: each of th
 
     obj4:{
       title:`Division of Pure Imaginary Numbers`,
-      content:`Click $4i / 2i$ to divide two purely imaginary numbers. Both vectors point along the imaginary axis — $z_1 = 4i$ at $90°$ and $z_2 = 2i$ at $90°$. The quotient angle is $90° - 90° = 0°$, so the result lands on the positive real axis.
+      content:`Click $4i / 2i$ to divide two purely [imaginary numbers](!/complex-numbers/imaginary-numbers#3). Both vectors point along the imaginary axis — $z_1 = 4i$ at $90°$ and $z_2 = 2i$ at $90°$. The quotient angle is $90° - 90° = 0°$, so the result lands on the positive real axis.
 
-The result is $4i / 2i = 2$ — a real number. The imaginary units cancel, leaving a real quotient. The modulus is $4/2 = 2$. In the visualizer, both input vectors are vertical but the green quotient vector is horizontal.
+The result is $4i / 2i = 2$ — a real number. The [imaginary units](!/complex-numbers/imaginary-numbers#1) cancel, leaving a real quotient. The modulus is $4/2 = 2$. In the visualizer, both input vectors are vertical but the green quotient vector is horizontal.
 
-This is a general rule: dividing two pure imaginary numbers always yields a real result because both arguments are $\\pm 90°$ and their difference is $0°$ or $180°$. Try $4i / (-2i)$: the angles are $90°$ and $-90°$, giving a quotient angle of $180°$, so the result is $-2$ — a negative real number.`,
+This is a general rule: dividing two [pure imaginary numbers](!/complex-numbers/imaginary-numbers#3) always yields a real result because both arguments are $\\pm 90°$ and their difference is $0°$ or $180°$. Try $4i / (-2i)$: the angles are $90°$ and $-90°$, giving a quotient angle of $180°$, so the result is $-2$ — a negative real number.`,
       before:``,
       after:`The frozen frame is [real division](!#division-of-pure-real-numbers)'s picture rotated a quarter turn — and then un-rotated by the division itself. Both inputs stand on the imaginary axis, their $90°$ arcs coincide, and the cancellation drops the quotient back onto the real axis.
 
@@ -622,7 +624,7 @@ The denominator becomes real because $z_2 \\cdot \\overline{z_2} = |z_2|^2 = a^2
 
 The **Algebraic Method** panel shows this process with fraction notation. It displays the original fraction, the conjugate multiplier, the expanded denominator $|z_2|^2$, the expanded numerator, and the final simplified quotient.
 
-This technique is sometimes called **rationalizing the denominator** — it eliminates the imaginary part from the denominator, converting the problem from complex division to real division.`,
+This technique is sometimes called **rationalizing the denominator** — it eliminates the [imaginary part](!/complex-numbers/algebraic-form#22) from the denominator, converting the problem from complex division to real division.`,
       before:``,
       after:``,
       link:'',
@@ -638,7 +640,7 @@ Moduli divide and arguments subtract. The **Geometric Method** panel shows these
 
 This is dramatically simpler than the conjugate multiplication method. Where the algebraic approach requires expanding a product, computing $|z_2|^2$, and dividing two components, the polar approach is just one division and one subtraction.
 
-The trade-off is that you need the moduli and arguments first. If $z_1$ and $z_2$ are given in rectangular form, you must convert to polar — which involves square roots and arctangent. If they are already in polar or exponential form, division is trivial.
+The trade-off is that you need the moduli and arguments first. If $z_1$ and $z_2$ are given in rectangular form, you must convert to polar — which involves square roots and arctangent. If they are already in polar or [exponential form](!/complex-numbers/visual-tools/euler-formula), division is trivial.
 
 The three angle arcs on the plane make the subtraction visible: the green arc is always the angular difference between the navy and orange arcs.`,
       before:``,
@@ -676,7 +678,9 @@ The geometric side — divide the moduli, subtract the angles — is the mirror 
 
 Both geometric methods only make sense once you are comfortable with polar form, so the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) is worth having open alongside this one, especially when the angle arithmetic in the geometric panel is not obvious.
 
-Finally, the "dividing conjugates" preset here — $(3+4i)/(3-4i)$ — always lands on the unit circle because the moduli cancel exactly. That unit circle behavior is the core subject of [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer), which generalizes it to arbitrary powers.`,
+Finally, the "dividing conjugates" preset here — $(3+4i)/(3-4i)$ — always lands on the unit circle because the moduli cancel exactly. That unit circle behavior is the core subject of [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer), which generalizes it to arbitrary powers.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — the operation the conjugate trick converts the denominator into, one real number at a time.`,
   before:``,
   after:``,
   link:'',
@@ -841,6 +845,7 @@ Divisions this tidy are the exception, not the rule — nudge either input by $0
 
    return {
       props:{
+      relatedTools: getRelatedTools('division'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -862,7 +867,7 @@ Divisions this tidy are the exception, not the rule — nudge either input by $0
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -1049,6 +1054,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

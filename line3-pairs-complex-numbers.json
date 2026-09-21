@@ -1,0 +1,598 @@
+{
+  "addition-subtraction": [
+    {
+      "key": "complex-conjugate",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Conjugate Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Number Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "demoivre-visualizer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "De Moivre's Theorem Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "distance-midpoint",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Distance & Midpoint Tool",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "division",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Division Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "euler-formula",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Euler's Formula Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "i-powers",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Powers of i Calculator",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    }
+  ],
+  "complex-conjugate": [
+    {
+      "key": "distance-midpoint",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Distance & Midpoint Tool",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "division",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Division Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "how-to-use-the-visualizer",
+      "surface": "complex number",
+      "method": "scan",
+      "existing": false,
+      "priority": 2
+    }
+  ],
+  "complex-explorer": [
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "complex-conjugate",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Conjugate Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "distance-midpoint",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Distance & Midpoint Tool",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "demoivre-visualizer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "De Moivre's Theorem Visualizer",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "division",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Division Visualizer",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "euler-formula",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Euler's Formula Explorer",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "i-powers",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Powers of i Calculator",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    }
+  ],
+  "demoivre-visualizer": [
+    {
+      "key": "euler-formula",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Euler's Formula Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "i-powers",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Powers of i Calculator",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "division",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Division Visualizer",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "the-five-step-calculation",
+      "surface": "complex number",
+      "method": "scan",
+      "existing": false,
+      "priority": 3
+    }
+  ],
+  "distance-midpoint": [
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "complex-conjugate",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Conjugate Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Number Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    }
+  ],
+  "division": [
+    {
+      "key": "complex-conjugate",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Conjugate Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "demoivre-visualizer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "De Moivre's Theorem",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "getting-started-set-numerator-and-denominator",
+      "surface": "complex number",
+      "method": "scan",
+      "existing": false,
+      "priority": 3
+    },
+    {
+      "key": "euler-formula",
+      "fromSection": "the-polar-geometric-method",
+      "surface": "exponential form",
+      "method": "scan",
+      "existing": false,
+      "priority": 3
+    }
+  ],
+  "euler-formula": [
+    {
+      "key": "demoivre-visualizer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "De Moivre's Theorem",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "i-powers",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Powers of i Calculator",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "division",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Division Visualizer",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "getting-started-drag-the-point",
+      "surface": "complex number",
+      "method": "scan",
+      "existing": false,
+      "priority": 3
+    }
+  ],
+  "i-powers": [
+    {
+      "key": "demoivre-visualizer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "De Moivre's Theorem",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "euler-formula",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Euler's Formula Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "complex number",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    }
+  ],
+  "multiplication": [
+    {
+      "key": "demoivre-visualizer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "De Moivre's Theorem",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "division",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Division",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "i-powers",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Powers of i Calculator",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "polar-rectangular",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Polar & Rectangular Converter",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "addition-subtraction",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Addition & Subtraction",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "complex-conjugate",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Conjugate",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "complex-explorer",
+      "fromSection": "getting-started-drag-and-multiply",
+      "surface": "complex number",
+      "method": "scan",
+      "existing": false,
+      "priority": 3
+    },
+    {
+      "key": "euler-formula",
+      "fromSection": "the-geometric-polar-method",
+      "surface": "exponential form",
+      "method": "scan",
+      "existing": false,
+      "priority": 3
+    }
+  ],
+  "polar-rectangular": [
+    {
+      "key": "complex-explorer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Number Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "demoivre-visualizer",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "De Moivre's Theorem Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "division",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Division Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "euler-formula",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Euler's Formula Explorer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "multiplication",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Multiplication Visualizer",
+      "method": "scan",
+      "existing": true,
+      "priority": -1
+    },
+    {
+      "key": "complex-conjugate",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Complex Conjugate",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "distance-midpoint",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Distance & Midpoint",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "i-powers",
+      "fromSection": "related-concepts-and-tools",
+      "surface": "Powers of i Calculator",
+      "method": "scan",
+      "existing": false,
+      "priority": 0
+    },
+    {
+      "key": "addition-subtraction",
+      "fromSection": "using-the-rectangular-form-panel",
+      "surface": "addition and subtraction",
+      "method": "scan",
+      "existing": false,
+      "priority": 3
+    }
+  ]
+}

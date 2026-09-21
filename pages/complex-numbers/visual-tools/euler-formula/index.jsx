@@ -10,6 +10,8 @@ import EulerFormulaExplorer from '../../../../app/components/calculators/complex
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import eulerFormulaDiagrams from '../../../../app/components/calculators/complex-numbers/eulerFormulaDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -35,9 +37,9 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started — Drag the Point`,
-      content:`The blue draggable point on the complex plane represents the value of $re^{i\\theta}$. Grab it and move it anywhere within the plane to explore how **Euler's formula** connects angles, trigonometry, and complex numbers in real time.
+      content:`The blue draggable point on the [complex plane](!/complex-numbers/geometric-representation#1) represents the value of $re^{i\\theta}$. Grab it and move it anywhere within the plane to explore how **Euler's formula** connects angles, trigonometry, and [complex numbers](!/complex-numbers/algebraic-form#1) in real time.
 
-As you drag, the right panel updates instantly. You will see the current angle $\\theta$ in both degrees and radians, the cosine and sine values, and the resulting complex number in rectangular form. A colored right triangle appears connecting the origin to your point, with the horizontal leg showing the real part and the vertical leg showing the imaginary part.
+As you drag, the right panel updates instantly. You will see the current angle $\\theta$ in both degrees and radians, the cosine and sine values, and the resulting [complex number](!/complex-numbers/visual-tools/complex-explorer) in rectangular form. A colored right triangle appears connecting the origin to your point, with the horizontal leg showing the [real part](!/complex-numbers/algebraic-form#21) and the vertical leg showing the [imaginary part](!/complex-numbers/algebraic-form#22).
 
 Start by dragging the point slowly around the **unit circle**. Watch how the triangle changes shape, how the projections on both axes shift, and how the formula breakdown at the right walks through each substitution step. Every position you place the point produces a unique geometric snapshot of Euler's formula in action.`,
       before:``,
@@ -98,7 +100,7 @@ These four states correspond to the axis crossings of the unit circle. Each one 
 
     obj5:{
       title:`Adjusting the Radius`,
-      content:`The $r$ slider controls the modulus (distance from the origin) and ranges from $0.1$ to $2.4$. When $r = 1$, the point lies on the solid unit circle. When $r \\neq 1$, a dashed circle appears at radius $r$, and the triangle labels switch from "$\\cos\\theta$" / "$\\sin\\theta$" to "$r\\cos\\theta$" / "$r\\sin\\theta$".
+      content:`The $r$ slider controls the [modulus](!/complex-numbers/absolute-value#1) (distance from the origin) and ranges from $0.1$ to $2.4$. When $r = 1$, the point lies on the solid unit circle. When $r \\neq 1$, a dashed circle appears at radius $r$, and the triangle labels switch from "$\\cos\\theta$" / "$\\sin\\theta$" to "$r\\cos\\theta$" / "$r\\sin\\theta$".
 
 Try setting $\\theta = \\frac{\\pi}{4}$ and then slowly increasing $r$ from $1$ to $2$. The triangle grows proportionally — its shape stays the same because the angle has not changed, but every side length doubles. The live values panel reflects the scaled components: at $r = 2$, the real and imaginary parts are both $2 \\times 0.707 \\approx 1.414$.
 
@@ -208,7 +210,11 @@ The reason $e^{i\\theta}$ matters for arithmetic becomes concrete in the [Multip
 
 [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer) takes that one step further: $(re^{i\\theta})^n = r^n e^{in\\theta}$. It is Euler's formula combined with the exponent rule, applied $n$ times. Snap $\\theta$ to $\\pi/2$ here and then visit that tool — you will see exactly why the powers of $i$ cycle the way they do.
 
-Speaking of which, the [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) is the simplest special case of everything on this page. Setting $\\theta = \\pi/2$ places you at $i$ on the unit circle. Each power multiplies the angle by another $\\pi/2$, cycling through the four cardinal points. The mod 4 pattern that tool is built around is just the unit circle doing four 90° rotations.`,
+Speaking of which, the [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) is the simplest special case of everything on this page. Setting $\\theta = \\pi/2$ places you at $i$ on the unit circle. Each power multiplies the angle by another $\\pi/2$, cycling through the four cardinal points. The mod 4 pattern that tool is built around is just the unit circle doing four 90° rotations.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — the one operation Euler's formula does not simplify: sums stay rectangular while products go exponential.
+
+[Division Visualizer](!/complex-numbers/visual-tools/division) — division is subtraction of exponents once both numbers are written as $re^{i\\theta}$.`,
   before:``,
   after:``,
   link:'',
@@ -260,7 +266,7 @@ The scaled variant of this exact frame, with $r = 2$, opens [the radius section]
 
     obj15:{
       title:`The Quarter Turn to i`,
-      content:`The landmark $\\theta = \\frac{\\pi}{2}$ lands the exponential exactly on the imaginary unit: $e^{i\\pi/2} = i$.`,
+      content:`The landmark $\\theta = \\frac{\\pi}{2}$ lands the exponential exactly on the [imaginary unit](!/complex-numbers/imaginary-numbers#1): $e^{i\\pi/2} = i$.`,
       before:``,
       after:`The triangle has collapsed the other way from [the zero angle](!#the-zero-angle): all height, no base. $\\cos\\frac{\\pi}{2} = 0$ pins the point to the imaginary axis, and the red segment from the origin to $i$ is the entire picture.
 
@@ -431,6 +437,7 @@ Note also that $-i$ is the conjugate of $i$ from [the quarter turn](!#the-quarte
 
    return {
       props:{
+      relatedTools: getRelatedTools('euler-formula'),
          sectionsContent,
          introContent,
          faqQuestions,
@@ -452,7 +459,7 @@ Note also that $-i$ is the conjugate of $i$ from [the quarter turn](!#the-quarte
     }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
 
     
   const genericSections=[
@@ -673,6 +680,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

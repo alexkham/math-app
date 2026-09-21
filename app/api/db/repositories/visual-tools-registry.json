@@ -10,7 +10,7 @@
       "populationRule": "Universal registry rule: ANY pass touching a tool page (any operation/tier) updates this registry as a by-product - at minimum identity + scanned terms as pending. Line 2 passes write the full dispositioned list. Existing Line 2 dispositions are only altered by Line 2 itself."
     },
     "lineTwo": {
-      "linearAlgebraLedgerFilled": "2026-09-20",
+      "linearAlgebraLedgerFilled": "2026-09-21",
       "note": "Ledger-only pass: relatedTerms rebuilt from a full re-scan and dispositioned. No page prose was edited. Pending entries carry a `plan` holding the link record a Line 2 write pass would emit.",
       "destinationPolicy": "v3 destination priorities 1 and 2 are unreachable: siteReferences / isRecommendedResource exist on 0 of 1218 repository entries. Owner decision 2026-09-13: link lesson (theory) pages first, via the entry's link.url; definitions pages are a second pass. Each linked and pending term therefore also carries `definitionTarget`, the definitions or formulas anchor, so that pass needs no re-derivation.",
       "knownDeviations": [
@@ -18,12 +18,12 @@
         "No MIN_CHARS skip and no CAP_PER_SECTION at ledger stage - those are linking limits. 40 pending links across 21 sections exceed v3's cap of 5 per section and must be trimmed by the write pass.",
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
-      "linearAlgebraLinksWritten": "2026-09-20",
-      "functionsKeyTerms": "2026-09-20"
+      "linearAlgebraLinksWritten": "2026-09-21"
     },
     "lineThree": {
       "trigonometryWritten": "2026-09-20",
-      "functionsWritten": "2026-09-20"
+      "functionsWritten": "2026-09-20",
+      "complex-numbersWritten": "2026-09-21"
     }
   },
   "tools": {
@@ -8996,100 +8996,628 @@
       },
       "relatedTerms": [
         {
-          "term": "complex number",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "understanding-the-right-triangle",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "imaginary unit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "conjugates",
+          "entity": "conjugate",
+          "sections": [
+            "exploring-the-conjugate",
+            "special-cases-axes-and-origin",
+            "the-complex-plane-argand-diagram",
+            "complex-conjugates-and-their-properties",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "real part",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "the-complex-plane-argand-diagram"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "imaginary part",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "understanding-the-right-triangle"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "complex plane",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "complex-conjugates-and-their-properties"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "Argand diagram",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "directions",
+          "entity": "direction",
+          "sections": [
+            "the-complex-plane-argand-diagram"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equations",
+          "entity": "equation",
+          "sections": [
+            "what-is-a-complex-number"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "understanding-the-right-triangle",
+            "modulus-and-the-pythagorean-theorem"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "numerator",
+          "entity": "numerator",
+          "sections": [
+            "complex-conjugates-and-their-properties"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "orientation",
+          "entity": "orientation",
+          "sections": [
+            "the-four-quadrants"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "ranges",
+          "entity": "range",
+          "sections": [
+            "how-to-use-the-complex-explorer",
+            "the-complex-plane-argand-diagram"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "exploring-the-conjugate",
+            "the-complex-plane-argand-diagram"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "rotation",
+          "entity": "rotation",
+          "sections": [
+            "the-complex-plane-argand-diagram",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solutions",
+          "entity": "solution",
+          "sections": [
+            "what-is-a-complex-number"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "transformation",
+          "entity": "transformation",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "absolute value",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "absolute_value",
+          "sections": [
+            "special-cases-axes-and-origin",
+            "modulus-and-the-pythagorean-theorem"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "special-cases-axes-and-origin",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
         },
         {
-          "term": "complex conjugate",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "arguments",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "quadrant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "how-to-use-the-complex-explorer",
+            "reading-the-display-panel",
+            "understanding-the-right-triangle",
+            "exploring-the-conjugate",
+            "special-cases-axes-and-origin",
+            "the-origin",
+            "what-is-a-complex-number",
+            "the-complex-plane-argand-diagram",
+            "modulus-and-the-pythagorean-theorem",
+            "complex-conjugates-and-their-properties",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "how-to-use-the-complex-explorer",
+              "surface": "complex numbers",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "Pythagorean theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "how-to-use-the-complex-explorer",
+            "understanding-the-right-triangle",
+            "the-origin",
+            "purely-real-numbers",
+            "the-four-quadrants",
+            "what-is-a-complex-number",
+            "the-complex-plane-argand-diagram"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "how-to-use-the-complex-explorer",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "additive inverse",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "conjugate of a conjugate",
+          "entity": "complex_conjugate",
+          "sections": [
+            "complex-conjugates-and-their-properties"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "complex_conjugate"
+          },
+          "links": [
+            {
+              "fromSection": "complex-conjugates-and-their-properties",
+              "surface": "conjugate of a conjugate",
+              "target": {
+                "path": "/complex-numbers/complex-conjugate",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "additive identity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "imaginary numbers",
+          "entity": "imaginary_number",
+          "sections": [
+            "exploring-the-conjugate"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_number"
+          },
+          "links": [
+            {
+              "fromSection": "exploring-the-conjugate",
+              "surface": "imaginary numbers",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "polar form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "how-to-use-the-complex-explorer",
+            "reading-the-display-panel",
+            "understanding-the-right-triangle",
+            "exploring-the-conjugate",
+            "purely-real-numbers",
+            "quadrant-ii-upper-left",
+            "quadrant-iv-lower-right",
+            "what-is-a-complex-number",
+            "complex-conjugates-and-their-properties"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_part"
+          },
+          "links": [
+            {
+              "fromSection": "how-to-use-the-complex-explorer",
+              "surface": "imaginary part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "22"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "pure-imaginary-numbers",
+            "what-is-a-complex-number"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_unit"
+          },
+          "links": [
+            {
+              "fromSection": "pure-imaginary-numbers",
+              "surface": "imaginary unit",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "reading-the-display-panel",
+            "understanding-the-right-triangle",
+            "special-cases-axes-and-origin",
+            "the-four-quadrants",
+            "modulus-and-the-pythagorean-theorem",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-display-panel",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "special-cases-axes-and-origin"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "special-cases-axes-and-origin",
+            "target": {
+              "path": "/trigonometry/right-triangle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          }
         },
         {
           "term": "pure imaginary number",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "pure-imaginary-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "pure_imaginary_number"
+          },
+          "links": [
+            {
+              "fromSection": "pure-imaginary-numbers",
+              "surface": "pure imaginary number",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "real number",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "pythagorean theorem",
+          "entity": "inner_product",
+          "sections": [
+            "understanding-the-right-triangle",
+            "modulus-and-the-pythagorean-theorem"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "understanding-the-right-triangle",
+            "target": {
+              "path": "/linear-algebra/orthogonality/inner-product",
+              "section": "10"
+            },
+            "method": "repository-link",
+            "crossSection": "linear-algebra"
+          },
+          "definitionTarget": {
+            "path": "/linear-algebra/formulas",
+            "section": "inner_product"
+          }
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "how-to-use-the-complex-explorer",
+            "reading-the-display-panel",
+            "understanding-the-right-triangle",
+            "exploring-the-conjugate",
+            "pure-imaginary-numbers",
+            "the-four-quadrants",
+            "quadrant-i-upper-right",
+            "quadrant-ii-upper-left",
+            "quadrant-iv-lower-right",
+            "what-is-a-complex-number",
+            "complex-conjugates-and-their-properties"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "how-to-use-the-complex-explorer",
+              "surface": "real part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        },
+        {
+          "term": "vector addition",
+          "entity": "vector",
+          "sections": [
+            "the-complex-plane-argand-diagram",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-complex-plane-argand-diagram",
+            "target": {
+              "path": "/linear-algebra/vectors/basic-operations",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "linear-algebra"
+          },
+          "definitionTarget": {
+            "path": "/linear-algebra/formulas",
+            "section": "vector"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-conjugate",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Conjugate Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "distance-midpoint",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Distance & Midpoint Tool",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "demoivre-visualizer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "De Moivre's Theorem Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "division",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Division Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "euler-formula",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Euler's Formula Explorer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "i-powers",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Powers of i Calculator",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9116,100 +9644,488 @@
       },
       "relatedTerms": [
         {
-          "term": "complex conjugate",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "how-to-use-the-visualizer"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "conjugate",
+          "entity": "conjugate",
+          "sections": [
+            "how-to-use-the-visualizer",
+            "understanding-the-display",
+            "using-the-values-panel",
+            "exploring-presets-and-special-cases",
+            "third-quadrant-2-3i",
+            "special-cases-to-investigate",
+            "the-origin-z-0",
+            "what-is-a-complex-conjugate",
+            "the-modulus-of-a-complex-number",
+            "why-z-times-conjugate-equals-modulus-squared",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "denominators",
+          "entity": "denominator",
+          "sections": [
+            "why-z-times-conjugate-equals-modulus-squared",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "elements",
+          "entity": "element",
+          "sections": [
+            "understanding-the-display",
+            "the-starting-point-3-2i"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "the-modulus-of-a-complex-number"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "the-proof-box-explained",
+            "exploring-presets-and-special-cases",
+            "why-z-times-conjugate-equals-modulus-squared"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "numerator",
+          "entity": "numerator",
+          "sections": [
+            "why-z-times-conjugate-equals-modulus-squared",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "how-to-use-the-visualizer"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "understanding-the-display",
+            "what-is-a-complex-conjugate",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "vectors",
+          "entity": "vector",
+          "sections": [
+            "understanding-the-display"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "absolute value",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "absolute_value",
+          "sections": [
+            "the-modulus-of-a-complex-number"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-modulus-of-a-complex-number",
+            "target": {
+              "path": "/algebra/equations/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value"
+          }
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "argument",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
           "term": "complex number",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "complex_number",
+          "sections": [
+            "understanding-the-display",
+            "using-the-values-panel",
+            "exploring-presets-and-special-cases",
+            "what-is-a-complex-conjugate",
+            "the-modulus-of-a-complex-number",
+            "why-z-times-conjugate-equals-modulus-squared",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "understanding-the-display",
+              "surface": "complex number",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
           "term": "complex plane",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "complex_plane",
+          "sections": [
+            "how-to-use-the-visualizer",
+            "understanding-the-display",
+            "purely-real-4",
+            "the-modulus-of-a-complex-number"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "how-to-use-the-visualizer",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "Argand diagram",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "conjugate of a product",
+          "entity": "complex_conjugate",
+          "sections": [
+            "what-is-a-complex-conjugate"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "complex_conjugate"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-a-complex-conjugate",
+              "surface": "conjugate of a product",
+              "target": {
+                "path": "/complex-numbers/complex-conjugate",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "real part",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "imaginary number",
+          "entity": "imaginary_number",
+          "sections": [
+            "exploring-presets-and-special-cases",
+            "special-cases-to-investigate"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_number"
+          },
+          "links": [
+            {
+              "fromSection": "exploring-presets-and-special-cases",
+              "surface": "imaginary number",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
           "term": "imaginary part",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "imaginary_part",
+          "sections": [
+            "understanding-the-display",
+            "using-the-values-panel",
+            "negative-real-part-1-4i",
+            "purely-real-4",
+            "what-is-a-complex-conjugate",
+            "why-z-times-conjugate-equals-modulus-squared",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_part"
+          },
+          "links": [
+            {
+              "fromSection": "understanding-the-display",
+              "surface": "imaginary part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "22"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "imaginary unit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "how-to-use-the-visualizer",
+            "understanding-the-display",
+            "using-the-values-panel",
+            "the-proof-box-explained",
+            "special-cases-to-investigate",
+            "the-modulus-of-a-complex-number",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "how-to-use-the-visualizer",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "Pythagorean theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "opposite sides",
+          "entity": "opposite_side",
+          "sections": [
+            "special-cases-to-investigate"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "special-cases-to-investigate",
+            "target": {
+              "path": "/trigonometry/right-triangle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          }
         },
         {
-          "term": "rationalizing complex denominators",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "pythagorean theorem",
+          "entity": "inner_product",
+          "sections": [
+            "understanding-the-display",
+            "the-modulus-of-a-complex-number"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "understanding-the-display",
+            "target": {
+              "path": "/linear-algebra/orthogonality/inner-product",
+              "section": "10"
+            },
+            "method": "repository-link",
+            "crossSection": "linear-algebra"
+          },
+          "definitionTarget": {
+            "path": "/linear-algebra/formulas",
+            "section": "inner_product"
+          }
         },
         {
-          "term": "complex division",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "understanding-the-display",
+            "using-the-values-panel",
+            "the-proof-box-explained",
+            "exploring-presets-and-special-cases",
+            "negative-real-part-1-4i",
+            "purely-imaginary-3i",
+            "special-cases-to-investigate",
+            "what-is-a-complex-conjugate"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "understanding-the-display",
+              "surface": "real part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "purely imaginary number",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "real number",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "standard form",
+          "entity": "standard_form",
+          "sections": [
+            "using-the-values-panel"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "using-the-values-panel",
+            "target": {
+              "path": "/algebra/equations",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "standard_form"
+          }
         },
         {
           "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "unit_circle",
+          "sections": [
+            "special-cases-to-investigate"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "special-cases-to-investigate",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "distance-midpoint",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Distance & Midpoint Tool",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         },
         {
-          "term": "polar form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "key": "division",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Division Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-explorer",
+          "fromSection": "how-to-use-the-visualizer",
+          "surface": "complex number",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9237,88 +10153,519 @@
       },
       "relatedTerms": [
         {
-          "term": "complex number addition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "complex number subtraction",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "degenerate-and-axis-aligned-configurations"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "parallelogram rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "conjugate",
+          "entity": "conjugate",
+          "sections": [
+            "getting-started-drag-two-points",
+            "subtraction-and-the-difference-vector",
+            "how-complex-subtraction-works",
+            "conjugate-pairs-in-addition-and-subtraction",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "vector addition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "subtraction-and-the-difference-vector",
+            "both-mode-comparing-addition-and-subtraction",
+            "degenerate-and-axis-aligned-configurations",
+            "the-triangle-inequality"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "triangle inequality",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "expression",
+          "entity": "expression",
+          "sections": [
+            "reading-the-step-by-step-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "subtraction-and-the-difference-vector",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "complex conjugate",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "inequality",
+          "entity": "inequality",
+          "sections": [
+            "both-mode-comparing-addition-and-subtraction",
+            "degenerate-and-axis-aligned-configurations",
+            "the-triangle-inequality"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "additive inverse",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "negation",
+          "entity": "negation",
+          "sections": [
+            "subtraction-and-the-difference-vector",
+            "how-complex-subtraction-works"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the logic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "complex plane",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "reading-the-step-by-step-panel",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "real part",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "degenerate-and-axis-aligned-configurations"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "imaginary part",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "reflections",
+          "entity": "reflection",
+          "sections": [
+            "the-mirror-pair-preset",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "distance between complex numbers",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "vectors",
+          "entity": "vector",
+          "sections": [
+            "the-parallelogram-rule-for-addition",
+            "subtraction-and-the-difference-vector",
+            "both-mode-comparing-addition-and-subtraction",
+            "the-mixed-signs-preset",
+            "degenerate-and-axis-aligned-configurations",
+            "the-triangle-inequality",
+            "how-complex-addition-works",
+            "how-complex-subtraction-works",
+            "conjugate-pairs-in-addition-and-subtraction",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "argument",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "argument",
+          "sections": [
+            "degenerate-and-axis-aligned-configurations",
+            "the-triangle-inequality",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "degenerate-and-axis-aligned-configurations",
+              "surface": "argument",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "commutative property",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complex conjugates",
+          "entity": "complex_conjugate",
+          "sections": [
+            "conjugate-pairs-in-addition-and-subtraction"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_conjugate"
+          },
+          "links": [
+            {
+              "fromSection": "conjugate-pairs-in-addition-and-subtraction",
+              "surface": "complex conjugates",
+              "target": {
+                "path": "/complex-numbers/complex-conjugate",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "getting-started-drag-two-points",
+            "how-complex-addition-works",
+            "how-complex-subtraction-works",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-two-points",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "exponential function",
+          "entity": "exponential_function",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/algebra/powers/exponential-functions",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "exponential_function"
+          }
+        },
+        {
+          "term": "geometric interpretation",
+          "entity": "absolute_value_inequality",
+          "sections": [
+            "how-complex-addition-works"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "how-complex-addition-works",
+            "target": {
+              "path": "/algebra/inequalities/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value_inequality"
+          }
+        },
+        {
+          "term": "imaginary parts",
+          "entity": "imaginary_part",
+          "sections": [
+            "how-complex-addition-works",
+            "how-complex-subtraction-works",
+            "conjugate-pairs-in-addition-and-subtraction"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_part"
+          },
+          "links": [
+            {
+              "fromSection": "how-complex-addition-works",
+              "surface": "imaginary parts",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "22"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_unit"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "imaginary unit",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "subtraction-and-the-difference-vector",
+            "the-triangle-inequality",
+            "how-complex-subtraction-works",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "subtraction-and-the-difference-vector",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "pure imaginary number",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "conjugate-pairs-in-addition-and-subtraction"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "pure_imaginary_number"
+          },
+          "links": [
+            {
+              "fromSection": "conjugate-pairs-in-addition-and-subtraction",
+              "surface": "pure imaginary number",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "real parts",
+          "entity": "real_part",
+          "sections": [
+            "the-mirror-pair-preset",
+            "reading-the-step-by-step-panel",
+            "how-complex-addition-works",
+            "how-complex-subtraction-works",
+            "conjugate-pairs-in-addition-and-subtraction",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "the-mirror-pair-preset",
+              "surface": "real parts",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "subtraction",
+          "entity": "complex_number",
+          "sections": [
+            "getting-started-drag-two-points",
+            "the-parallelogram-rule-for-addition",
+            "subtraction-and-the-difference-vector",
+            "both-mode-comparing-addition-and-subtraction",
+            "reading-the-step-by-step-panel",
+            "the-triangle-inequality",
+            "how-complex-addition-works",
+            "how-complex-subtraction-works",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-two-points",
+              "surface": "subtraction",
+              "target": {
+                "path": "/complex-numbers/operations",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "complex-conjugate",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Conjugate Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-explorer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Number Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "demoivre-visualizer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "De Moivre's Theorem Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "distance-midpoint",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Distance & Midpoint Tool",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "division",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Division Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "euler-formula",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Euler's Formula Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "i-powers",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Powers of i Calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9344,100 +10691,418 @@
       },
       "relatedTerms": [
         {
-          "term": "complex multiplication",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "getting-started-drag-and-multiply",
+            "reading-the-three-angle-arcs",
+            "multiplication-by-a-pure-real-number",
+            "multiplication-by-pure-imaginary-numbers",
+            "conjugate-pair-multiplication",
+            "the-geometric-polar-method",
+            "complex-multiplication-as-rotation-and-scaling",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "FOIL",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "conjugate",
+          "entity": "conjugate",
+          "sections": [
+            "conjugate-pair-multiplication",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "distributive property",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "off-screen-products-and-the-zoom-inset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "off-screen-products-and-the-zoom-inset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "denominators",
+          "entity": "denominator",
+          "sections": [
+            "conjugate-pair-multiplication"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "multiplication-by-a-pure-real-number",
+            "off-screen-products-and-the-zoom-inset",
+            "complex-multiplication-as-rotation-and-scaling"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "exponents",
+          "entity": "exponent",
+          "sections": [
+            "the-geometric-polar-method"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "why-i-squared-equals-minus-one"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "off-screen-products-and-the-zoom-inset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "rotations",
+          "entity": "rotation",
+          "sections": [
+            "reading-the-three-angle-arcs",
+            "multiplication-by-a-pure-real-number",
+            "multiplication-by-pure-imaginary-numbers",
+            "complex-multiplication-as-rotation-and-scaling",
+            "why-i-squared-equals-minus-one",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solution",
+          "entity": "solution",
+          "sections": [
+            "getting-started-drag-and-multiply"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "spans",
+          "entity": "span",
+          "sections": [
+            "reading-the-three-angle-arcs"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "the-geometric-polar-method"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "complex-multiplication-as-rotation-and-scaling"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "vector",
+          "entity": "vector",
+          "sections": [
+            "getting-started-drag-and-multiply",
+            "multiplication-by-a-pure-real-number",
+            "multiplication-by-pure-imaginary-numbers",
+            "conjugate-pair-multiplication",
+            "off-screen-products-and-the-zoom-inset",
+            "the-geometric-polar-method"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "argument",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "argument",
+          "sections": [
+            "getting-started-drag-and-multiply",
+            "reading-the-three-angle-arcs",
+            "the-geometric-polar-method",
+            "why-i-squared-equals-minus-one"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-and-multiply",
+              "surface": "argument",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "polar form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "reading-the-three-angle-arcs",
+            "multiplication-by-pure-imaginary-numbers",
+            "conjugate-pair-multiplication",
+            "the-algebraic-foil-method",
+            "the-geometric-polar-method",
+            "complex-multiplication-as-rotation-and-scaling",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_number"
+          },
+          "reason": "Not planted in \"reading-the-three-angle-arcs\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "Euler's formula",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "getting-started-drag-and-multiply"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-and-multiply",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
           "term": "imaginary unit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "imaginary_unit",
+          "sections": [
+            "multiplication-by-pure-imaginary-numbers",
+            "why-i-squared-equals-minus-one"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_unit"
+          },
+          "links": [
+            {
+              "fromSection": "multiplication-by-pure-imaginary-numbers",
+              "surface": "imaginary unit",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "powers of i",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "getting-started-drag-and-multiply",
+            "multiplication-by-pure-imaginary-numbers",
+            "conjugate-pair-multiplication",
+            "off-screen-products-and-the-zoom-inset",
+            "the-geometric-polar-method",
+            "why-i-squared-equals-minus-one"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-and-multiply",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "complex conjugate",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "pure imaginary numbers",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "multiplication-by-pure-imaginary-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "pure_imaginary_number"
+          },
+          "links": [
+            {
+              "fromSection": "multiplication-by-pure-imaginary-numbers",
+              "surface": "pure imaginary numbers",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "rotation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "scaling",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "the-algebraic-foil-method"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "the-algebraic-foil-method",
+              "surface": "real and imaginary parts",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
           "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "unit_circle",
+          "sections": [
+            "complex-multiplication-as-rotation-and-scaling"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "complex-multiplication-as-rotation-and-scaling",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "demoivre-visualizer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "De Moivre's Theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         },
         {
-          "term": "De Moivre's theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "key": "division",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Division",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         },
         {
-          "term": "complex division",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "key": "i-powers",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Powers of i Calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         },
         {
-          "term": "rationalizing complex denominators",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-conjugate",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Conjugate Explorer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-explorer",
+          "fromSection": "getting-started-drag-and-multiply",
+          "surface": "complex number",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "euler-formula",
+          "fromSection": "the-geometric-polar-method",
+          "surface": "exponential form",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9465,88 +11130,527 @@
       },
       "relatedTerms": [
         {
-          "term": "complex division",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "the-three-angle-arcs-subtraction-in-action",
+            "division-of-pure-real-numbers",
+            "division-of-pure-imaginary-numbers",
+            "dividing-by-i-the-90-rotation",
+            "conjugate-pair-division",
+            "the-polar-geometric-method",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "complex conjugate",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "the-divide-by-zero-state"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "rationalizing complex denominators",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "conjugates",
+          "entity": "conjugate",
+          "sections": [
+            "conjugate-pair-division",
+            "the-conjugate-multiplication-method",
+            "the-polar-geometric-method",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "off-screen-quotients-and-the-zoom-inset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "argument",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "off-screen-quotients-and-the-zoom-inset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "polar form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "getting-started-set-numerator-and-denominator",
+            "the-three-angle-arcs-subtraction-in-action",
+            "division-of-pure-real-numbers",
+            "off-screen-quotients-and-the-zoom-inset",
+            "the-conjugate-multiplication-method",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "Euler's formula",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "division-of-pure-real-numbers"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "imaginary unit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "fraction",
+          "entity": "fraction",
+          "sections": [
+            "the-conjugate-multiplication-method"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "division by zero",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "numerator",
+          "entity": "numerator",
+          "sections": [
+            "getting-started-set-numerator-and-denominator",
+            "the-three-angle-arcs-subtraction-in-action",
+            "division-of-pure-real-numbers",
+            "dividing-by-i-the-90-rotation",
+            "conjugate-pair-division",
+            "off-screen-quotients-and-the-zoom-inset",
+            "the-conjugate-multiplication-method"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "off-screen-quotients-and-the-zoom-inset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "reciprocal",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reciprocal",
+          "sections": [
+            "dividing-by-i-the-90-rotation"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "rotation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "rotation",
+          "sections": [
+            "division-of-pure-real-numbers",
+            "conjugate-pair-division"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "Pythagorean triple",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "solution",
+          "entity": "solution",
+          "sections": [
+            "getting-started-set-numerator-and-denominator"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "complex multiplication",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "vector",
+          "entity": "vector",
+          "sections": [
+            "getting-started-set-numerator-and-denominator",
+            "division-of-pure-real-numbers",
+            "division-of-pure-imaginary-numbers",
+            "dividing-by-i-the-90-rotation",
+            "the-divide-by-zero-state",
+            "off-screen-quotients-and-the-zoom-inset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "getting-started-set-numerator-and-denominator",
+            "the-three-angle-arcs-subtraction-in-action",
+            "division-of-pure-imaginary-numbers",
+            "the-polar-geometric-method"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-set-numerator-and-denominator",
+              "surface": "argument",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "getting-started-set-numerator-and-denominator",
+            "division-of-pure-real-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-set-numerator-and-denominator",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary numbers",
+          "entity": "imaginary_number",
+          "sections": [
+            "division-of-pure-imaginary-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_number"
+          },
+          "links": [
+            {
+              "fromSection": "division-of-pure-imaginary-numbers",
+              "surface": "imaginary numbers",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "the-conjugate-multiplication-method"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_part"
+          },
+          "links": [
+            {
+              "fromSection": "the-conjugate-multiplication-method",
+              "surface": "imaginary part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "22"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary units",
+          "entity": "imaginary_unit",
+          "sections": [
+            "division-of-pure-imaginary-numbers",
+            "dividing-by-i-the-90-rotation"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_unit"
+          },
+          "links": [
+            {
+              "fromSection": "division-of-pure-imaginary-numbers",
+              "surface": "imaginary units",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "getting-started-set-numerator-and-denominator",
+            "division-of-pure-real-numbers",
+            "division-of-pure-imaginary-numbers",
+            "dividing-by-i-the-90-rotation",
+            "conjugate-pair-division",
+            "off-screen-quotients-and-the-zoom-inset",
+            "the-polar-geometric-method"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-set-numerator-and-denominator",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "the-three-angle-arcs-subtraction-in-action",
+            "division-of-pure-real-numbers",
+            "dividing-by-i-the-90-rotation",
+            "conjugate-pair-division",
+            "the-clean-division-preset",
+            "the-conjugate-multiplication-method",
+            "the-polar-geometric-method",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "the-three-angle-arcs-subtraction-in-action",
+              "surface": "multiplication",
+              "target": {
+                "path": "/complex-numbers/operations",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "negative angle",
+          "entity": "negative_angle",
+          "sections": [
+            "the-three-angle-arcs-subtraction-in-action"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-three-angle-arcs-subtraction-in-action",
+            "target": {
+              "path": "/trigonometry/degrees-radians",
+              "section": "6"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "negative_angle"
+          }
+        },
+        {
+          "term": "pure imaginary numbers",
+          "entity": "pure_imaginary_number",
+          "sections": [
+            "division-of-pure-imaginary-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "pure_imaginary_number"
+          },
+          "links": [
+            {
+              "fromSection": "division-of-pure-imaginary-numbers",
+              "surface": "pure imaginary numbers",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "square roots",
+          "entity": "square_root",
+          "sections": [
+            "the-polar-geometric-method"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-polar-geometric-method",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "the problem",
+          "entity": "irrational_exponent",
+          "sections": [
+            "the-conjugate-multiplication-method"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-conjugate-multiplication-method",
+            "target": {
+              "path": "/algebra/powers/irrational-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "irrational_exponent"
+          }
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "conjugate-pair-division",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "conjugate-pair-division",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "complex-conjugate",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Conjugate Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "demoivre-visualizer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "De Moivre's Theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-explorer",
+          "fromSection": "getting-started-set-numerator-and-denominator",
+          "surface": "complex number",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "euler-formula",
+          "fromSection": "the-polar-geometric-method",
+          "surface": "exponential form",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9573,94 +11677,507 @@
       },
       "relatedTerms": [
         {
-          "term": "polar form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "points-in-all-four-quadrants",
+            "quadrant-ii-4-3i",
+            "quadrant-iii-3-4i",
+            "equal-component-states-and-special-angles",
+            "degenerate-cases-points-on-the-axes",
+            "using-the-polar-form-panel",
+            "rectangular-to-polar-conversion",
+            "polar-to-rectangular-conversion",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "rectangular form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "points-in-all-four-quadrants",
+            "equal-component-states-and-special-angles",
+            "using-the-polar-form-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "argument",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "atan2",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "Pythagorean theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "Euler's formula",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "reference angle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "special angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "De Moivre's theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "using-the-rectangular-form-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "cosine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosine",
+          "sections": [
+            "polar-to-rectangular-conversion"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "using-the-polar-form-panel",
+            "live-conversion-formulas"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "directions",
+          "entity": "direction",
+          "sections": [
+            "points-in-all-four-quadrants",
+            "using-the-polar-form-panel",
+            "live-conversion-formulas"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "quadrant-i-baseline-3-2i"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "fraction",
+          "entity": "fraction",
+          "sections": [
+            "using-the-polar-form-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "degenerate-cases-points-on-the-axes",
+            "rectangular-to-polar-conversion",
+            "polar-to-rectangular-conversion"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "getting-started-drag-type-or-pick-a-preset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "orientation",
+          "entity": "orientation",
+          "sections": [
+            "points-in-all-four-quadrants"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "using-the-polar-form-panel",
+            "when-to-use-each-form",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "equal-component-states-and-special-angles",
+            "using-the-polar-form-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "getting-started-drag-type-or-pick-a-preset",
+            "using-the-rectangular-form-panel"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "sine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "sine",
+          "sections": [
+            "polar-to-rectangular-conversion"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "quadrant",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "live-conversion-formulas"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "radian",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "polar-to-rectangular-conversion"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "using-the-polar-form-panel",
+            "live-conversion-formulas",
+            "rectangular-to-polar-conversion",
+            "when-to-use-each-form"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "using-the-polar-form-panel",
+              "surface": "arguments",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex number",
+          "entity": "complex_number",
+          "sections": [
+            "getting-started-drag-type-or-pick-a-preset",
+            "using-the-rectangular-form-panel",
+            "using-the-polar-form-panel",
+            "when-to-use-each-form",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-type-or-pick-a-preset",
+              "surface": "complex number",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "getting-started-drag-type-or-pick-a-preset",
+            "points-in-all-four-quadrants"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-type-or-pick-a-preset",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "degenerate-cases-points-on-the-axes",
+            "using-the-rectangular-form-panel",
+            "polar-to-rectangular-conversion",
+            "when-to-use-each-form"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_part"
+          },
+          "links": [
+            {
+              "fromSection": "degenerate-cases-points-on-the-axes",
+              "surface": "imaginary part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "22"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "equal-component-states-and-special-angles",
+            "degenerate-cases-points-on-the-axes",
+            "on-the-negative-real-axis-6",
+            "using-the-polar-form-panel",
+            "rectangular-to-polar-conversion",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "equal-component-states-and-special-angles",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "negative angle",
+          "entity": "negative_angle",
+          "sections": [
+            "rectangular-to-polar-conversion"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "rectangular-to-polar-conversion",
+            "target": {
+              "path": "/trigonometry/degrees-radians",
+              "section": "6"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "negative_angle"
+          }
+        },
+        {
+          "term": "pythagorean theorem",
+          "entity": "inner_product",
+          "sections": [
+            "live-conversion-formulas"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "live-conversion-formulas",
+            "target": {
+              "path": "/linear-algebra/orthogonality/inner-product",
+              "section": "10"
+            },
+            "method": "repository-link",
+            "crossSection": "linear-algebra"
+          },
+          "definitionTarget": {
+            "path": "/linear-algebra/formulas",
+            "section": "inner_product"
+          }
+        },
+        {
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "points-in-all-four-quadrants",
+            "quadrant-ii-4-3i",
+            "using-the-rectangular-form-panel",
+            "polar-to-rectangular-conversion",
+            "when-to-use-each-form"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "points-in-all-four-quadrants",
+              "surface": "real and imaginary parts",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "equal-component-states-and-special-angles"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "equal-component-states-and-special-angles",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "5"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "reference_angle"
+          }
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "complex-explorer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Number Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "demoivre-visualizer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "De Moivre's Theorem Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "division",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Division Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "euler-formula",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Euler's Formula Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-conjugate",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Conjugate Explorer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "distance-midpoint",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Distance & Midpoint Tool",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "i-powers",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Powers of i Calculator",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "addition-subtraction",
+          "fromSection": "using-the-rectangular-form-panel",
+          "surface": "addition and subtraction",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9689,100 +12206,543 @@
       },
       "relatedTerms": [
         {
-          "term": "Euler's formula",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "getting-started-drag-the-point",
+            "navigating-all-four-quadrants",
+            "landmark-angle-presets",
+            "degenerate-states-when-the-triangle-collapses",
+            "adjusting-the-radius",
+            "reading-the-live-values-and-formula-breakdown",
+            "what-is-eulers-formula",
+            "the-right-triangle-trigonometry-and-polar-form",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "Euler's identity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "navigating-all-four-quadrants"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "polar form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "argument",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "reading-the-live-values-and-formula-breakdown"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "cosine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "cosine",
+          "sections": [
+            "getting-started-drag-the-point",
+            "navigating-all-four-quadrants",
+            "the-45-degree-landmark",
+            "reading-the-live-values-and-formula-breakdown",
+            "what-is-eulers-formula"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "sine",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "getting-started-drag-the-point",
+            "reading-the-live-values-and-formula-breakdown"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "radian",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "adjusting-the-radius"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "special angles",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "what-is-eulers-formula",
+            "eulers-identity-the-special-case-at-pi",
+            "the-right-triangle-trigonometry-and-polar-form"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "cofunction identity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "exponents",
+          "entity": "exponent",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "Taylor series",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "what-is-eulers-formula"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "imaginary unit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "the-right-triangle-trigonometry-and-polar-form"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "eulers-identity-the-special-case-at-pi"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "what-is-eulers-formula",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "getting-started-drag-the-point",
+            "reading-the-live-values-and-formula-breakdown",
+            "what-is-eulers-formula"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "ranges",
+          "entity": "range",
+          "sections": [
+            "adjusting-the-radius"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "relation",
+          "entity": "relation",
+          "sections": [
+            "eulers-identity-the-special-case-at-pi"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "rotation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "rotation",
+          "sections": [
+            "eulers-identity-the-special-case-at-pi",
+            "the-right-triangle-trigonometry-and-polar-form",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "De Moivre's theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "getting-started-drag-the-point",
+            "navigating-all-four-quadrants",
+            "the-45-degree-landmark",
+            "reading-the-live-values-and-formula-breakdown",
+            "what-is-eulers-formula"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "roots of unity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "getting-started-drag-the-point",
+            "reading-the-live-values-and-formula-breakdown"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "adjacent side",
+          "entity": "adjacent_side",
+          "sections": [
+            "the-right-triangle-trigonometry-and-polar-form"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-right-triangle-trigonometry-and-polar-form",
+            "target": {
+              "path": "/trigonometry/right-triangle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "adjacent_side"
+          }
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "getting-started-drag-the-point",
+            "navigating-all-four-quadrants",
+            "reading-the-live-values-and-formula-breakdown",
+            "what-is-eulers-formula",
+            "eulers-identity-the-special-case-at-pi",
+            "the-right-triangle-trigonometry-and-polar-form",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-the-point",
+              "surface": "complex numbers",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "getting-started-drag-the-point",
+            "navigating-all-four-quadrants",
+            "what-is-eulers-formula",
+            "eulers-identity-the-special-case-at-pi"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-the-point",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "exponent rule",
+          "entity": "rational_exponent",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/algebra/roots/rational-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "rational_exponent"
+          }
+        },
+        {
+          "term": "exponential function",
+          "entity": "exponential_function",
+          "sections": [
+            "what-is-eulers-formula",
+            "eulers-identity-the-special-case-at-pi"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-is-eulers-formula",
+            "target": {
+              "path": "/algebra/powers/exponential-functions",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "exponential_function"
+          }
+        },
+        {
+          "term": "imaginary part",
+          "entity": "imaginary_part",
+          "sections": [
+            "getting-started-drag-the-point",
+            "the-right-triangle-trigonometry-and-polar-form"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_part"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-the-point",
+              "surface": "imaginary part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "22"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "the-quarter-turn-to-i",
+            "what-is-eulers-formula"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_unit"
+          },
+          "links": [
+            {
+              "fromSection": "the-quarter-turn-to-i",
+              "surface": "imaginary unit",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "adjusting-the-radius",
+            "reading-the-live-values-and-formula-breakdown",
+            "the-right-triangle-trigonometry-and-polar-form"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-the-radius",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "the-right-triangle-trigonometry-and-polar-form"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-right-triangle-trigonometry-and-polar-form",
+            "target": {
+              "path": "/trigonometry/right-triangle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          }
+        },
+        {
+          "term": "real part",
+          "entity": "real_part",
+          "sections": [
+            "getting-started-drag-the-point",
+            "navigating-all-four-quadrants",
+            "landmark-angle-presets",
+            "adjusting-the-radius",
+            "reading-the-live-values-and-formula-breakdown",
+            "the-right-triangle-trigonometry-and-polar-form"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-the-point",
+              "surface": "real part",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "taylor series",
+          "entity": "higher_order_derivative",
+          "sections": [
+            "what-is-eulers-formula"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-is-eulers-formula",
+            "target": {
+              "path": "/calculus/derivatives/higher-order",
+              "section": "8"
+            },
+            "method": "repository-link",
+            "crossSection": "calculus"
+          },
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "higher_order_derivative"
+          }
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "getting-started-drag-the-point",
+            "landmark-angle-presets",
+            "degenerate-states-when-the-triangle-collapses",
+            "adjusting-the-radius",
+            "what-is-eulers-formula",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "getting-started-drag-the-point",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "demoivre-visualizer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "De Moivre's Theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "i-powers",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Powers of i Calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "division",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Division Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-explorer",
+          "fromSection": "getting-started-drag-the-point",
+          "surface": "complex number",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9807,76 +12767,419 @@
       },
       "relatedTerms": [
         {
-          "term": "imaginary unit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "connection-to-complex-numbers-and-eulers-formula",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "powers of i",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "negative-and-zero-exponents"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modular arithmetic",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "why-powers-of-i-cycle-every-4"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "exponent",
+          "entity": "exponent",
+          "sections": [
+            "getting-started-enter-any-exponent",
+            "the-four-remainder-states",
+            "remainder-0-full-cycles-vanish",
+            "remainder-1-the-cycle-restarts",
+            "remainder-3-the-opening-example",
+            "reading-the-cycle-diagram",
+            "step-by-step-calculation-walkthrough",
+            "explanation-panel-and-special-cases",
+            "why-powers-of-i-cycle-every-4"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "expression",
+          "entity": "expression",
+          "sections": [
+            "step-by-step-calculation-walkthrough"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "remainder-2-the-definition-itself"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "the-four-remainder-states",
+            "remainder-0-full-cycles-vanish",
+            "remainder-1-the-cycle-restarts",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "numerator",
+          "entity": "numerator",
+          "sections": [
+            "negative-and-zero-exponents"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "outcomes",
+          "entity": "random_experiment",
+          "sections": [
+            "getting-started-enter-any-exponent"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "the-four-remainder-states",
+            "reading-the-cycle-diagram",
+            "step-by-step-calculation-walkthrough",
+            "explanation-panel-and-special-cases",
+            "quick-reference-table",
+            "negative-and-zero-exponents",
+            "connection-to-complex-numbers-and-eulers-formula",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "remainder",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "remainder",
+          "sections": [
+            "getting-started-enter-any-exponent",
+            "the-four-remainder-states",
+            "remainder-3-the-opening-example",
+            "reading-the-cycle-diagram",
+            "step-by-step-calculation-walkthrough",
+            "explanation-panel-and-special-cases",
+            "why-powers-of-i-cycle-every-4",
+            "negative-and-zero-exponents"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "cyclic group",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "rotations",
+          "entity": "rotation",
+          "sections": [
+            "connection-to-complex-numbers-and-eulers-formula",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "multiplicative inverse",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "solution",
+          "entity": "solution",
+          "sections": [
+            "getting-started-enter-any-exponent"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "negative exponent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "zero exponent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "Euler's formula",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "rotation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "why-powers-of-i-cycle-every-4"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "complex plane",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "complex_plane",
+          "sections": [
+            "connection-to-complex-numbers-and-eulers-formula",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "connection-to-complex-numbers-and-eulers-formula",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "imaginary unit",
+          "entity": "imaginary_unit",
+          "sections": [
+            "explanation-panel-and-special-cases"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_unit"
+          },
+          "links": [
+            {
+              "fromSection": "explanation-panel-and-special-cases",
+              "surface": "imaginary unit",
+              "target": {
+                "path": "/complex-numbers/imaginary-numbers",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "remainder-0-full-cycles-vanish",
+            "remainder-1-the-cycle-restarts",
+            "why-powers-of-i-cycle-every-4",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "remainder-0-full-cycles-vanish",
+              "surface": "multiplication",
+              "target": {
+                "path": "/complex-numbers/operations",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "multiplicative inverse",
+          "entity": "multiplicative_inverse",
+          "sections": [
+            "negative-and-zero-exponents"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "multiplicative_inverse"
+          },
+          "links": [
+            {
+              "fromSection": "negative-and-zero-exponents",
+              "surface": "multiplicative inverse",
+              "target": {
+                "path": "/complex-numbers/multiplicative-inverse",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "negative exponents",
+          "entity": "negative_exponent",
+          "sections": [
+            "negative-and-zero-exponents"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "negative-and-zero-exponents",
+            "target": {
+              "path": "/algebra/powers/negative-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "negative_exponent"
+          }
+        },
+        {
+          "term": "real and imaginary parts",
+          "entity": "real_part",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "real and imaginary parts",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "connection-to-complex-numbers-and-eulers-formula",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "connection-to-complex-numbers-and-eulers-formula",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        },
+        {
+          "term": "zero exponent",
+          "entity": "zero_exponent",
+          "sections": [
+            "negative-and-zero-exponents"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "negative-and-zero-exponents",
+            "target": {
+              "path": "/algebra/powers/zero-powers",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "zero_exponent"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "demoivre-visualizer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "De Moivre's Theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "euler-formula",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Euler's Formula Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-explorer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "complex number",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -9904,88 +13207,449 @@
       },
       "relatedTerms": [
         {
-          "term": "De Moivre's theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "the-outward-spiral-when-z-1",
+            "the-inward-spiral-when-z-1",
+            "unit-circle-rotation-when-z-1",
+            "negative-exponents-reciprocals-and-reversal",
+            "pure-real-base-no-spiral-just-scaling",
+            "reading-the-purple-trail-and-modulus-circles",
+            "the-five-step-calculation",
+            "what-is-de-moivres-theorem",
+            "connection-to-roots-of-unity",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "polar form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "the-five-step-calculation",
+            "what-is-de-moivres-theorem"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "argument",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "the-inward-spiral-when-z-1"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "Euler's formula",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "getting-started-set-z-and-choose-n"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "unit circle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "negative-exponents-reciprocals-and-reversal"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "roots of unity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "exponent",
+          "entity": "exponent",
+          "sections": [
+            "getting-started-set-z-and-choose-n",
+            "the-inward-spiral-when-z-1",
+            "the-five-step-calculation",
+            "what-is-de-moivres-theorem"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "powers of i",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "factoring",
+          "entity": "factoring",
+          "sections": [
+            "connection-to-roots-of-unity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identities",
+          "entity": "identity",
+          "sections": [
+            "what-is-de-moivres-theorem"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "connection-to-roots-of-unity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "getting-started-set-z-and-choose-n",
+            "the-outward-spiral-when-z-1",
+            "the-inward-spiral-when-z-1",
+            "unit-circle-rotation-when-z-1",
+            "negative-exponents-reciprocals-and-reversal",
+            "pure-real-base-no-spiral-just-scaling",
+            "reading-the-purple-trail-and-modulus-circles",
+            "the-five-step-calculation",
+            "what-is-de-moivres-theorem",
+            "connection-to-roots-of-unity",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "radians",
+          "entity": "radian",
+          "sections": [
+            "getting-started-set-z-and-choose-n"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "getting-started-set-z-and-choose-n"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "reciprocal",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "reciprocal",
+          "sections": [
+            "negative-exponents-reciprocals-and-reversal"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "negative exponent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "exponential growth",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "exponential decay",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "roots",
+          "entity": "root",
+          "sections": [
+            "connection-to-roots-of-unity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "rotation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "rotation",
+          "sections": [
+            "unit-circle-rotation-when-z-1",
+            "pure-real-base-no-spiral-just-scaling"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "trigonometric identities",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "solutions",
+          "entity": "solution",
+          "sections": [
+            "connection-to-roots-of-unity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "connection-to-roots-of-unity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "vector",
+          "entity": "vector",
+          "sections": [
+            "getting-started-set-z-and-choose-n",
+            "negative-exponents-reciprocals-and-reversal"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "getting-started-set-z-and-choose-n",
+            "reading-the-purple-trail-and-modulus-circles",
+            "the-five-step-calculation"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-set-z-and-choose-n",
+              "surface": "argument",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "getting-started-set-z-and-choose-n"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-set-z-and-choose-n",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "exponent rules",
+          "entity": "rational_exponent",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts-and-tools",
+            "target": {
+              "path": "/algebra/roots/rational-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "rational_exponent"
+          }
+        },
+        {
+          "term": "modulus",
+          "entity": "modulus",
+          "sections": [
+            "getting-started-set-z-and-choose-n",
+            "the-outward-spiral-when-z-1",
+            "the-inward-spiral-when-z-1",
+            "unit-circle-rotation-when-z-1",
+            "negative-exponents-reciprocals-and-reversal",
+            "pure-real-base-no-spiral-just-scaling",
+            "reading-the-purple-trail-and-modulus-circles",
+            "the-five-step-calculation",
+            "what-is-de-moivres-theorem",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-set-z-and-choose-n",
+              "surface": "modulus",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "the-squaring-baseline",
+            "the-inward-spiral-when-z-1",
+            "what-is-de-moivres-theorem",
+            "connection-to-roots-of-unity",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "the-squaring-baseline",
+              "surface": "multiplication",
+              "target": {
+                "path": "/complex-numbers/operations",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "negative exponents",
+          "entity": "negative_exponent",
+          "sections": [
+            "negative-exponents-reciprocals-and-reversal"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "negative-exponents-reciprocals-and-reversal",
+            "target": {
+              "path": "/algebra/powers/negative-exponents",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "negative_exponent"
+          }
+        },
+        {
+          "term": "roots of unity",
+          "entity": "roots_of_unity",
+          "sections": [
+            "what-is-de-moivres-theorem",
+            "connection-to-roots-of-unity"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "roots_of_unity"
+          },
+          "reason": "Not planted in \"what-is-de-moivres-theorem\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "the-inward-spiral-when-z-1",
+            "unit-circle-rotation-when-z-1",
+            "connection-to-roots-of-unity",
+            "related-concepts-and-tools"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-inward-spiral-when-z-1",
+            "target": {
+              "path": "/trigonometry/unit-circle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "unit_circle"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "euler-formula",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Euler's Formula Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "i-powers",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Powers of i Calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "multiplication",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Multiplication Visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "division",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Division Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-21"
+        },
+        {
+          "key": "complex-explorer",
+          "fromSection": "the-five-step-calculation",
+          "surface": "complex number",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -10012,82 +13676,357 @@
       },
       "relatedTerms": [
         {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "the-right-triangle-and-distance-segment",
+            "vertical-and-horizontal-degenerate-cases"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "conjugate",
+          "entity": "conjugate",
+          "sections": [
+            "the-distance-formula-for-complex-numbers",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "coordinate",
+          "entity": "coordinates",
+          "sections": [
+            "the-distance-formula-for-complex-numbers",
+            "the-midpoint-formula-for-complex-numbers",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "the-right-triangle-and-distance-segment",
+            "vertical-and-horizontal-degenerate-cases"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "the-dashed-circle-and-locus-interpretation",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "the-right-triangle-and-distance-segment",
+            "distance-from-the-origin-modulus-as-a-special-case",
+            "the-distance-formula-for-complex-numbers"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "intersection",
+          "entity": "intersection",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "negation",
+          "entity": "negation",
+          "sections": [
+            "symmetric-points-and-midpoint-at-the-origin"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the logic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "orientation",
+          "entity": "orientation",
+          "sections": [
+            "the-right-triangle-and-distance-segment"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "vector",
+          "entity": "vector",
+          "sections": [
+            "reading-the-step-by-step-panels",
+            "related-concepts-and-tools"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "argument"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "argument",
+              "target": {
+                "path": "/complex-numbers/trigonometric-form",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex numbers",
+          "entity": "complex_number",
+          "sections": [
+            "the-dashed-circle-and-locus-interpretation",
+            "the-distance-formula-for-complex-numbers",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_number"
+          },
+          "links": [
+            {
+              "fromSection": "the-dashed-circle-and-locus-interpretation",
+              "surface": "complex numbers",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
+          "term": "complex plane",
+          "entity": "complex_plane",
+          "sections": [
+            "getting-started-drag-two-points",
+            "the-dashed-circle-and-locus-interpretation",
+            "the-distance-formula-for-complex-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "complex_plane"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started-drag-two-points",
+              "surface": "complex plane",
+              "target": {
+                "path": "/complex-numbers/geometric-representation",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
+        },
+        {
           "term": "distance between complex numbers",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "modulus",
+          "sections": [
+            "distance-from-the-origin-modulus-as-a-special-case",
+            "the-distance-formula-for-complex-numbers",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/formulas",
+            "section": "modulus"
+          },
+          "links": [
+            {
+              "fromSection": "distance-from-the-origin-modulus-as-a-special-case",
+              "surface": "distance between complex numbers",
+              "target": {
+                "path": "/complex-numbers/absolute-value",
+                "section": "8"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "midpoint",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "distance formula",
+          "entity": "magnitude",
+          "sections": [
+            "distance-from-the-origin-modulus-as-a-special-case",
+            "the-distance-formula-for-complex-numbers"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "distance-from-the-origin-modulus-as-a-special-case",
+            "target": {
+              "path": "/linear-algebra/vectors/magnitude",
+              "section": "4"
+            },
+            "method": "repository-link",
+            "crossSection": "linear-algebra"
+          },
+          "definitionTarget": {
+            "path": "/linear-algebra/formulas",
+            "section": "magnitude"
+          }
         },
         {
-          "term": "modulus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "imaginary parts",
+          "entity": "imaginary_part",
+          "sections": [
+            "the-right-triangle-and-distance-segment",
+            "vertical-and-horizontal-degenerate-cases",
+            "the-midpoint-formula-for-complex-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "imaginary_part"
+          },
+          "links": [
+            {
+              "fromSection": "the-right-triangle-and-distance-segment",
+              "surface": "imaginary parts",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "22"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "Euclidean distance",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "pythagorean theorem",
+          "entity": "inner_product",
+          "sections": [
+            "the-distance-formula-for-complex-numbers",
+            "coincident-points-distance-zero"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-distance-formula-for-complex-numbers",
+            "target": {
+              "path": "/linear-algebra/orthogonality/inner-product",
+              "section": "10"
+            },
+            "method": "repository-link",
+            "crossSection": "linear-algebra"
+          },
+          "definitionTarget": {
+            "path": "/linear-algebra/formulas",
+            "section": "inner_product"
+          }
         },
         {
-          "term": "Pythagorean theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "real parts",
+          "entity": "real_part",
+          "sections": [
+            "the-right-triangle-and-distance-segment",
+            "vertical-and-horizontal-degenerate-cases",
+            "the-vertical-pair",
+            "the-midpoint-formula-for-complex-numbers"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/complex-numbers/definitions",
+            "section": "real_part"
+          },
+          "links": [
+            {
+              "fromSection": "the-right-triangle-and-distance-segment",
+              "surface": "real parts",
+              "target": {
+                "path": "/complex-numbers/algebraic-form",
+                "section": "21"
+              },
+              "method": "repository-link",
+              "added": "2026-09-21"
+            }
+          ]
         },
         {
-          "term": "locus",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "reading-the-step-by-step-panels"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "reading-the-step-by-step-panels",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "addition-subtraction",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Addition & Subtraction",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         },
         {
-          "term": "circle equation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "key": "complex-conjugate",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Conjugate Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         },
         {
-          "term": "complex conjugate",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "key": "complex-explorer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Complex Number Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         },
         {
-          "term": "additive inverse",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "metric",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "complex subtraction",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "section formula",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "Argand plane",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "key": "polar-rectangular",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Polar & Rectangular Converter",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-21"
         }
       ]
     },
@@ -47915,6 +51854,56 @@
           "added": "2026-09-20"
         }
       ]
+    },
+    "linear-algebra-matrix-multiplication-columns": {
+      "slug": "matrix-multiplication-columns",
+      "name": "Matrix Multiplication by Columns",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-columns/index.jsx",
+      "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
+      "relatedTerms": [],
+      "note": "Created 2026-09-21 with the page shell and content pass. Tabs: ColumnPictureVisualizer (Av) now, MatrixProductVisualizer reading=columns to follow. Line 2 term scan and Line 3 pairs not run yet; relatedTerms is empty rather than pending because no scan has been performed."
+    },
+    "linear-algebra-matrix-multiplication-rows": {
+      "slug": "matrix-multiplication-rows",
+      "name": "Matrix Multiplication by Rows",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-rows/index.jsx",
+      "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
+      "relatedTerms": [],
+      "note": "Created 2026-09-21. Tabs: RowPictureVisualizer (v-transpose A) and MatrixProductVisualizer reading=rows. Line 2 term scan and Line 3 pairs not run yet."
+    },
+    "linear-algebra-matrix-multiplication-rows-columns": {
+      "slug": "matrix-multiplication-rows-columns",
+      "name": "Matrix Multiplication by Rows and Columns",
+      "section": "linear-algebra",
+      "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-rows-columns/index.jsx",
+      "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
+      "relatedTerms": [],
+      "note": "Created 2026-09-21. Three tabs, all MatrixProductVisualizer, readings both (default, m*n entry steps), columns, rows. Line 1 done 2026-09-21. Line 2 term scan NOT run - relatedTerms is still empty and is Line 2's queue; the canonical scanner (line2-scan.py) is not in the repo, and a hand scan without it would poison that queue. Line 3 pairs not run yet.",
+      "diagramsModule": "app/components/linear-algebra/multiplication/matrixProductDiagrams.js",
+      "diagramStates": [
+        "emptyPlane",
+        "entryPositive",
+        "entryNegative",
+        "columnFirstPiece",
+        "columnsComplete",
+        "rowFirstPiece",
+        "rowsComplete"
+      ],
+      "line1": {
+        "done": "2026-09-21",
+        "states": 9,
+        "sections": 17,
+        "units": 6,
+        "anchors": 41,
+        "orphans": 0,
+        "verification": "STATIC ONLY - esbuild parse, comment-masked anchor scan (41 on-page links, 14 distinct targets, 0 orphans, 0 duplicate ids, no math or bold in any link label, 3 cross-page links intact), and a node exercise of the diagrams module asserting element counts per state. Not rendered: the dev server was down at pass time.",
+        "wiring": "C - MatrixProductVisualizer had no explanations prop. Added additively as `explanations = null` plus a `stateKey` useMemo lifted out of the existing narration switch; the matched entry is appended to that step narration line, which already runs through processContent. Nothing passed, nothing appended - the other two pages that mount this component are unaffected.",
+        "note": "9 narration states but only 6 figures: the component routes `gen` and `done` to the same drawTrail branch, so the plane is identical and only the algebra board differs. genColumns/doneColumns therefore share the-finished-product-by-columns, and genRows/doneRows share the-finished-product-by-rows. idleBoth and idleSingle likewise share the-empty-bracket - one merged section rather than two near-identical ones.",
+        "structure": "Non-standard pass: this is an explanatory page, not a per-preset tool, so the original 9 sections keep their ids AND their relative order and 8 were inserted beside the material they belong to - 5 state sections plus 3 control sections (running-the-tool, steps-and-the-step-counter, generating-new-numbers) that exist so every How to use item has an anchor to land on. All 7 How-to-use items now end in an on-page link; 2 of the 7 already had a target, 5 did not.",
+        "contentFix": "obj5 claimed a 2x3 times 3x2 product costs eighteen multiplications; m*k*n = 12. Replaced with a 3x3 product at twenty-seven, which is the point the sentence was making."
+      }
     }
   },
   "$stubTemplate": {
