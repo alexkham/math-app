@@ -1,8 +1,11 @@
 # Read-only helper for Operation A Stage 2: print a content page's live section
 # prose so units can be authored against what the section actually says.
 #
-#   python opa-read.py <page-slug> [objKey ...]
-#   e.g. python opa-read.py vectors/linear-combinations obj2 obj3
+#   python opa-read.py <section>/<page-slug> [objKey ...]
+#   e.g. python opa-read.py linear-algebra/vectors/linear-combinations obj2 obj3
+#
+# The slug carries its own section now; it used to be hardcoded to
+# linear-algebra, which silently pointed every other section at a missing file.
 
 import io, re, sys
 
@@ -18,7 +21,7 @@ def live(src):
 
 slug = sys.argv[1]
 want = set(sys.argv[2:])
-path = 'pages/linear-algebra/%s/index.jsx' % slug
+path = 'pages/%s/index.jsx' % slug
 src = live(io.open(path, encoding='utf-8').read())
 
 for m in CONTENT.finditer(src):

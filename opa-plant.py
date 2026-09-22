@@ -13,10 +13,14 @@
 # Every edit is made against a LENGTH-PRESERVING comment mask, so a match can
 # never land in the archived page kept at the top of these files.
 #
-#   python opa-plant.py <page-slug> [--apply]
-#   python opa-plant.py --all [--apply]
+#   python opa-plant.py <page-slug> [--apply] [--specs=opa-specs-<section>.py]
+#   python opa-plant.py --all [--apply] [--specs=...]
+#
+# The specs file holds one section's judgement and prose, and the page slug now
+# carries its own section ("combinatorics/basics"); both used to be hardcoded to
+# linear algebra.
 
-import io, re, sys, importlib
+import io, os, re, sys, importlib
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 SPECS = importlib.import_module('opa-specs'.replace('-', '_')).SPECS \
@@ -24,7 +28,8 @@ SPECS = importlib.import_module('opa-specs'.replace('-', '_')).SPECS \
 
 # opa-specs.py has a hyphen, so import it by path
 import importlib.util
-_spec = importlib.util.spec_from_file_location('opa_specs', 'opa-specs.py')
+SPECS_FILE = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--specs=')), 'opa-specs.py')
+_spec = importlib.util.spec_from_file_location('opa_specs', SPECS_FILE)
 _mod = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_mod)
 SPECS = _mod.SPECS
@@ -73,7 +78,11 @@ def build_units_block(spec):
 
 def plant(slug, apply):
     spec = SPECS[slug]
-    path = 'pages/linear-algebra/%s/index.jsx' % slug
+    path = 'pages/%s/index.jsx' % slug
+    if not os.path.exists(path):
+        # opa-specs.py (linear algebra) keys pages without their section, e.g.
+        # 'vectors/magnitude'. Newer spec files carry the section in the key.
+        path = 'pages/linear-algebra/%s/index.jsx' % slug
     src = io.open(path, encoding='utf-8', newline='').read()
     orig = src
     steps = []

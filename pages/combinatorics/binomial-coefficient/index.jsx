@@ -1099,6 +1099,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 
 
 export async function getStaticProps(){
@@ -1864,8 +1866,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    symmetry: demoUnitFrame({
+      svg: pascalTriangleDiagrams.symmetry,
+      caption: 'C(7,2) = C(7,5) = 21',
+      text: 'The two highlighted entries sit at mirrored positions in the same row and hold the same value, which is the identity C(n,k) = C(n,n&#8722;k) drawn rather than proved. Choosing which 2 of 7 items to take is the same act as choosing which 5 to leave, and the array makes that restatement visible as a reflection. Move the focus along a row and watch its mirror move with it on the',
+      href: '/combinatorics/visual-tools/pascal-triangle',
+      linkText: 'Pascal&#8217;s triangle visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1885,7 +1903,7 @@ const schemas = {
     }
    }
 
-export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas}) {
+export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1943,6 +1961,8 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+                  <div key={'unit-symmetry'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetry }} />,
+          `The diagonals and the shallow-diagonal sums below are read off the same array, so each one is another identity that the arrangement makes obvious.`,
         ]
     },
     {

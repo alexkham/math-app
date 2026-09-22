@@ -1149,6 +1149,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 
 
 export async function getStaticProps(){
@@ -1964,8 +1966,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    rowsum: demoUnitFrame({
+      svg: pascalTriangleDiagrams.rowsum,
+      caption: 'Row 4 sums to 16 = 2&#8308;',
+      text: 'The whole of row 4 is highlighted and its entries total 16, which is the substitution a = b = 1 carried out in the array instead of in the algebra. Reading the same row as a count of subsets explains why the total is a power of two: each of the 4 items is independently either in or out. Highlight any row and watch its total double on the',
+      href: '/combinatorics/visual-tools/pascal-triangle',
+      linkText: 'Pascal&#8217;s triangle visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj3Table,
@@ -1985,7 +2003,7 @@ const schemas = {
     }
    }
 
-export default function BinomialTheoremPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, capstoneTable, faqQuestions, schemas}) {
+export default function BinomialTheoremPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2022,6 +2040,8 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+                  <div key={'unit-rowsum'} dangerouslySetInnerHTML={{ __html: demoUnits.rowsum }} />,
+          `The other substitutions work the same way: each one turns a free choice of a and b into a statement about the coefficients themselves.`,
         ]
     },
     {

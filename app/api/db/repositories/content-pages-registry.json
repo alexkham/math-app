@@ -574,12 +574,32 @@
           "vector-linear-combination"
         ],
         "why": "Closure under combination is what the span region shows."
+      },
+      "binomial_coefficient": {
+        "tool": "pascal-triangle",
+        "decided": "2026-09-22",
+        "runnersUp": [
+          "combination"
+        ]
+      },
+      "pascals_triangle": {
+        "tool": "pascal-triangle",
+        "decided": "2026-09-22",
+        "runnersUp": []
+      },
+      "pigeonhole_principle": {
+        "tool": "distribution",
+        "decided": "2026-09-22",
+        "runnersUp": [
+          "permutation-with-repetition"
+        ]
       }
     },
     "operationA": {
       "linearAlgebraMapped": "2026-09-22",
       "note": "Stage 1 mapping only: identity, section inventory and related-terms with candidate tools attached. No content page was edited, no link or demonstration unit planted, no $conceptToolMap decision recorded - those are Stage 2/3 and run one page per pass. /linear-algebra/definitions and /formulas are excluded as Operation B territory.",
-      "linearAlgebraLinked": "2026-09-13"
+      "linearAlgebraLinked": "2026-09-22",
+      "combinatorialStage2": "2026-09-22"
     }
   },
   "pages": {
@@ -2435,11 +2455,24 @@
             "5",
             "6"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "pascal-triangle",
-            "strong-composition",
-            "weak-composition"
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "pascal-triangle",
+              "target": {
+                "path": "/linear-algebra/visual-tools/pascal-triangle",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "pascalTriangleDiagrams.identity"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-22"
+            }
           ]
         },
         {
@@ -2448,11 +2481,8 @@
           "sections": [
             "6"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "pascal-triangle"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "combination",
@@ -2463,17 +2493,8 @@
             "5",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "distribution",
-            "full-permutation",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-repetition",
-            "strong-composition",
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "complementary counting",
@@ -2481,10 +2502,8 @@
           "sections": [
             "1"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "double counting",
@@ -2492,10 +2511,8 @@
           "sections": [
             "1"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "factorial",
@@ -2503,14 +2520,8 @@
           "sections": [
             "3"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation",
-            "full-permutation",
-            "full-permutation",
-            "partial-permutation",
-            "pascal-triangle"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "multinomial coefficient",
@@ -2520,18 +2531,8 @@
             "5",
             "6"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "distribution",
-            "partition",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-identical",
-            "permutation-with-identical",
-            "strong-composition",
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "multinomial theorem",
@@ -2539,11 +2540,8 @@
           "sections": [
             "6"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "partition",
-            "permutation-with-identical"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "pascal's triangle",
@@ -2551,10 +2549,8 @@
           "sections": [
             "5"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "pascal-triangle"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "permutations",
@@ -2566,17 +2562,8 @@
             "7",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation",
-            "distribution",
-            "full-permutation",
-            "partial-permutation",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-identical",
-            "permutation-with-repetition"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "pigeonhole principle",
@@ -2584,11 +2571,8 @@
           "sections": [
             "1"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "distribution",
-            "permutation-with-repetition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "strong compositions",
@@ -2596,11 +2580,8 @@
           "sections": [
             "3"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "strong-composition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         }
       ]
     },
@@ -24174,12 +24155,8 @@
             "5",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "pascal-triangle",
-            "strong-composition",
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 6 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "combination",
@@ -24187,17 +24164,8 @@
           "sections": [
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "distribution",
-            "full-permutation",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-repetition",
-            "strong-composition",
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "multinomial coefficient",
@@ -24206,18 +24174,8 @@
             "4",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "distribution",
-            "partition",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-identical",
-            "permutation-with-identical",
-            "strong-composition",
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "pascal's triangle",
@@ -24227,9 +24185,24 @@
             "3",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "pascal-triangle"
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "pascal-triangle",
+              "target": {
+                "path": "/linear-algebra/visual-tools/pascal-triangle",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "pascalTriangleDiagrams.symmetry"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-22"
+            }
           ]
         },
         {
@@ -24238,10 +24211,8 @@
           "sections": [
             "notation"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "pascal-triangle"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         }
       ]
     },
@@ -24309,12 +24280,8 @@
             "3",
             "notation"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "pascal-triangle",
-            "strong-composition",
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "binomial theorem",
@@ -24325,11 +24292,8 @@
             "6",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "pascal-triangle"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "multinomial theorem",
@@ -24337,11 +24301,8 @@
           "sections": [
             "notation"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "partition",
-            "permutation-with-identical"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "pascal's triangle",
@@ -24352,9 +24313,24 @@
             "3",
             "5"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "pascal-triangle"
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "pascal-triangle",
+              "target": {
+                "path": "/linear-algebra/visual-tools/pascal-triangle",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "pascalTriangleDiagrams.rowsum"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-22"
+            }
           ]
         }
       ]
@@ -24457,11 +24433,8 @@
           "sections": [
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "pascal-triangle"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "combinations",
@@ -24469,17 +24442,8 @@
           "sections": [
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "combination",
-            "distribution",
-            "full-permutation",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-repetition",
-            "strong-composition",
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "complementary counting",
@@ -24490,10 +24454,8 @@
             "8",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "weak-composition"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "double counting",
@@ -24504,10 +24466,8 @@
             "8",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation"
-          ]
+          "status": "dropped",
+          "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
         },
         {
           "term": "permutations",
@@ -24515,17 +24475,8 @@
           "sections": [
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation",
-            "distribution",
-            "full-permutation",
-            "partial-permutation",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-identical",
-            "permutation-with-repetition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "pigeonhole principle",
@@ -24537,10 +24488,24 @@
             "8",
             "faq"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "distribution",
-            "permutation-with-repetition"
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "distribution",
+              "target": {
+                "path": "/linear-algebra/visual-tools/distribution",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "distributionIntoCellsDiagrams.big43"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-22"
+            }
           ]
         }
       ]
@@ -24629,17 +24594,8 @@
           "sections": [
             "5"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation",
-            "distribution",
-            "full-permutation",
-            "partial-permutation",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-identical",
-            "permutation-with-repetition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         }
       ]
     },
@@ -24695,14 +24651,8 @@
           "sections": [
             "8"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation",
-            "full-permutation",
-            "full-permutation",
-            "partial-permutation",
-            "pascal-triangle"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         },
         {
           "term": "permutations",
@@ -24710,17 +24660,8 @@
           "sections": [
             "8"
           ],
-          "status": "pending",
-          "candidateTools": [
-            "circular-permutation",
-            "distribution",
-            "full-permutation",
-            "partial-permutation",
-            "partition",
-            "pascal-triangle",
-            "permutation-with-identical",
-            "permutation-with-repetition"
-          ]
+          "status": "dropped",
+          "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
         }
       ]
     },

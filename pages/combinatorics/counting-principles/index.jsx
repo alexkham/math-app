@@ -1010,6 +1010,8 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import distributionIntoCellsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/distributionIntoCellsDiagrams'
 
 
 export async function getStaticProps(){
@@ -1711,8 +1713,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    pigeonhole: demoUnitFrame({
+      svg: distributionIntoCellsDiagrams.big43,
+      caption: '4 items into 3 cells: 3&#8308; = 81 ways',
+      text: 'Every one of the 81 assignments of 4 items to 3 cells is enumerated here, and not one of them leaves all three cells with a single item &#8212; there are simply not enough cells to go round. That is the pigeonhole principle as an exhaustive check rather than an argument: the crowded cell is present in all 81 cases, which is why the conclusion needs no construction. Change the counts and watch the guarantee appear and disappear on the',
+      href: '/combinatorics/visual-tools/distribution',
+      linkText: 'distribution into cells visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1731,7 +1749,7 @@ const schemas = {
     }
    }
 
-export default function CountingPrinciplesPage({seoData, sectionsContent, introContent, obj2Table, capstoneTable, faqQuestions, schemas}) {
+export default function CountingPrinciplesPage({seoData, sectionsContent, introContent, obj2Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1784,6 +1802,8 @@ export default function CountingPrinciplesPage({seoData, sectionsContent, introC
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-pigeonhole'} dangerouslySetInnerHTML={{ __html: demoUnits.pigeonhole }} />,
+          `The generalized form below is the same argument with the threshold raised: push enough items in and some container must hold not just two but many.`,
         ]
     },
     {

@@ -1015,6 +1015,8 @@ import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import Head from 'next/head'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 
 
 
@@ -1650,8 +1652,24 @@ const schemas = {
 
 }
   
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    pascalRule: demoUnitFrame({
+      svg: pascalTriangleDiagrams.identity,
+      caption: 'C(4,2) = C(3,1) + C(3,2)',
+      text: 'The highlighted entry is the sum of the two directly above it, which is Pascal&#8217;s rule read off the array instead of out of the formula. Every interior entry is built the same way, so the whole triangle can be generated from its edges of 1s without evaluating a single factorial. Focus any entry and watch its two parents light up on the',
+      href: '/combinatorics/visual-tools/pascal-triangle',
+      linkText: 'Pascal&#8217;s triangle visualizer',
+    }),
+  };
+
     return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     combinatoricsScenariosData,
@@ -1674,7 +1692,7 @@ const schemas = {
    
 export default function CombinatoricsBasicsPage({sectionsContent, introContent,
   combinatoricsScenariosData, countingPrinciplesData, countingPrinciplesDiagram,
-  seoData, faqQuestions, schemas}) {
+  seoData, faqQuestions, schemas, demoUnits}) {
 
 
        
@@ -1725,6 +1743,8 @@ export default function CombinatoricsBasicsPage({sectionsContent, introContent,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-pascalRule'} dangerouslySetInnerHTML={{ __html: demoUnits.pascalRule }} />,
+          `Seen that way the binomial coefficient is not only an answer to a counting question but an entry in a structure, and the identities above are statements about where it sits in that structure.`,
         ]
     },
     {

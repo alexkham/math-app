@@ -20,7 +20,11 @@ import io, json, sys, datetime, collections
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 REG_PATH = 'app/api/db/repositories/content-pages-registry.json'
-PLANTED_PATH = 'opa-planted.json'
+# --planted=opa-planted-<section>.json selects the pass being recorded; the
+# linear-algebra file keys its pages without a section prefix, newer ones
+# carry the full key, so PREFIX is empty for those.
+PLANTED_PATH = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--planted=')),
+                   'opa-planted.json')
 TODAY = datetime.date.today().isoformat()
 
 def drop_reason(term):
@@ -42,6 +46,7 @@ def drop_reason(term):
 
 
 reg = json.load(io.open(REG_PATH, encoding='utf-8'))
+reg_sections = {k.split('/')[0] for k in reg['pages']}
 data = json.load(io.open(PLANTED_PATH, encoding='utf-8'))
 units = data['units']
 done_pages = set(data['done'])
@@ -54,7 +59,7 @@ apply = '--apply' in sys.argv
 tot_linked = tot_dropped = 0
 
 for page in sorted(done_pages):
-    key = 'linear-algebra/' + page
+    key = page if page.count('/') and page.split('/')[0] in reg_sections else 'linear-algebra/' + page
     entry = reg['pages'].get(key)
     if not entry:
         print('  MISSING registry entry:', key)
