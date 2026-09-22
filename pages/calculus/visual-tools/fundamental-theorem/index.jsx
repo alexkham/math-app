@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionFTC from '../../../../app/components/functions/ftc/FunctionFTC'
 import functionFTCDiagrams from '../../../../app/components/functions/ftc/functionFTCDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,17 +523,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Fundamental Theorem of Calculus (FTC)** — the statement that differentiation and integration are inverse operations. Has two parts: Part 1 says the derivative of an accumulator function equals the integrand; Part 2 gives a way to compute definite integrals using antiderivatives.
+      content: `[Fundamental Theorem of Calculus (FTC)](!/calculus/integrals/rules#5) — the statement that differentiation and integration are inverse operations. Has two parts: Part 1 says the [derivative](!/calculus/derivatives#1) of an accumulator function equals the [integrand](!/calculus/integrals#3); Part 2 gives a way to compute [definite integrals](!/calculus/integrals/definite#2) using [antiderivatives](!/calculus/integrals/indefinite#1).
 
-**Integrand** — the function $f(t)$ being integrated. The curve whose area you are accumulating.
+[Integrand](!/calculus/definitions#integrand) — the function $f(t)$ being integrated. The curve whose area you are accumulating.
 
-**Accumulator function** — the function $F(x) = \\int_a^x f(t)\\, dt$. It returns the signed area under $f$ from a fixed lower bound $a$ to the moving upper bound $x$.
+**Accumulator function** — the function $F(x) = \\int_a^x f(t)\\, dt$. It returns the [signed area](!/calculus/integrals/definite#3) under $f$ from a fixed lower bound $a$ to the moving upper bound $x$.
 
-**Antiderivative** — any function $G$ with $G'(x) = f(x)$. Antiderivatives differ by a constant; the accumulator is one specific antiderivative pinned by $F(a) = 0$.
+[Antiderivative](!/calculus/definitions#antiderivative) — any function $G$ with $G'(x) = f(x)$. Antiderivatives differ by a constant; the accumulator is one specific antiderivative pinned by $F(a) = 0$.
 
-**Definite integral** — the signed area $\\int_a^b f(t)\\, dt$. Computed via Part 2 as $G(b) - G(a)$ for any antiderivative $G$.
+[Definite integral](!/calculus/definitions#definite_integral) — the signed area $\\int_a^b f(t)\\, dt$. Computed via Part 2 as $G(b) - G(a)$ for any antiderivative $G$.
 
-**Signed area** — area counted positively where $f > 0$ and negatively where $f < 0$.`,
+[Signed area](!/calculus/definitions#signed_area) — area counted positively where $f > 0$ and negatively where $f < 0$.`,
       before: ``,
       after: ``,
       link: '',
@@ -681,7 +683,7 @@ For full coverage of proofs and applications, see the **fundamental theorem of c
 
 $$F'(x) = f(x).$$
 
-The intuition: push $x$ a little further right by $\\Delta x$. The shaded area grows by a thin strip of width $\\Delta x$ and height roughly $f(x)$. So $\\Delta F \\approx f(x) \\cdot \\Delta x$, which means $F'(x) = f(x)$ in the limit.
+The intuition: push $x$ a little further right by $\\Delta x$. The shaded area grows by a thin strip of width $\\Delta x$ and height roughly $f(x)$. So $\\Delta F \\approx f(x) \\cdot \\Delta x$, which means $F'(x) = f(x)$ in the [limit](!/calculus/limits#1).
 
 This is the reason the accumulator is sometimes called the **integral function** — it shows that integration produces a function whose derivative is the original integrand. Differentiation undoes integration, point by point.
 
@@ -719,7 +721,7 @@ For deeper coverage of integration techniques and antiderivative tables, see the
 
 **Indefinite integrals** — the family of antiderivatives, written $\\int f(x)\\, dx = G(x) + C$. The constant $C$ disappears in any definite integral.
 
-**Riemann sums** — the construction that defines the integral as a limit of rectangle-area sums. The FTC turns this limit into a finite computation. See the **Riemann sum visualizer**.
+**Riemann sums** — the construction that defines the integral as a limit of rectangle-area sums. The FTC turns this limit into a finite computation. See the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).
 
 **Antiderivative rules** — power rule, exponential rule, trig integrals. The reverse direction of the differentiation rules.
 
@@ -727,9 +729,9 @@ For deeper coverage of integration techniques and antiderivative tables, see the
 
 **Improper integrals** — integrals where the bounds are infinite or the integrand is unbounded. The FTC still applies after a limiting process.
 
-**Derivatives** — the inverse operation. The FTC is the explicit statement of that inverse relationship.
+[Derivatives](!/calculus/visual-tools/derivative) — the inverse operation. The FTC is the explicit statement of that inverse relationship.
 
-**Visual tools for calculus** — other interactive visualizers covering limits, continuity, derivatives, and Riemann sums.`,
+**Visual tools for calculus** — other interactive visualizers covering [limits](!/calculus/visual-tools/limit), [continuity](!/calculus/visual-tools/continuity), derivatives, and [Riemann sums](!/calculus/integrals/definite#1).`,
       before: ``,
       after: ``,
       link: '',
@@ -973,6 +975,7 @@ It follows directly from $f' = f$. The only functions whose accumulated area mat
 
   return {
     props: {
+      relatedTools: getRelatedTools('calculus-fundamental-theorem'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -995,7 +998,7 @@ It follows directly from $f' = f$. The only functions whose accumulated area mat
   }
 }
 
-export default function FTCVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function FTCVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1117,6 +1120,7 @@ export default function FTCVisualizer({seoData, sectionsContent, stateUnits, exp
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

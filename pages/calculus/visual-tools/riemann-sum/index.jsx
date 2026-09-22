@@ -493,6 +493,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionRiemann from '../../../../app/components/functions/riemann/FunctionRiemann'
 import functionRiemannDiagrams from '../../../../app/components/functions/riemann/functionRiemannDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -519,7 +521,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Riemann sum** — an approximation of the definite integral $\\int_a^b f(x)\\, dx$ formed by partitioning $[a, b]$ into $n$ equal strips and summing the areas of simple shapes built on each strip.
+      content: `[Riemann sum](!/calculus/definitions#riemann_sum) — an approximation of the [definite integral](!/calculus/integrals/definite#2) $\\int_a^b f(x)\\, dx$ formed by partitioning $[a, b]$ into $n$ equal strips and summing the areas of simple shapes built on each strip.
 
 **Partition** — the division of $[a, b]$ into $n$ subintervals of equal width $\\Delta x = (b - a)/n$.
 
@@ -579,7 +581,7 @@ Switching methods changes the picture immediately.`,
       title: `The Function Families`,
       content: `Eight families are organized into three groups in the left panel.
 
-**Polynomial** (closed-form antiderivative):
+**Polynomial** (closed-form [antiderivative](!/calculus/integrals/indefinite#1)):
 
 • **Identity** $f(x) = x$ — integrates to $x^2 / 2$.
 
@@ -671,7 +673,7 @@ The four classical rules differ only in where on each subinterval the sample poi
 
 $$\\lim_{n \\to \\infty} S_n = \\int_a^b f(x)\\, dx$$
 
-This limit is in fact the definition of the integral. The Fundamental Theorem of Calculus then provides the shortcut: evaluate an antiderivative at the endpoints instead of summing rectangles.
+This [limit](!/calculus/limits#1) is in fact the definition of the integral. The Fundamental Theorem of Calculus then provides the shortcut: evaluate an antiderivative at the endpoints instead of summing rectangles.
 
 For full theoretical coverage, see the **Riemann integral** page.`,
       before: ``,
@@ -699,7 +701,7 @@ The practical lesson: choose the rule before you crank up $n$.`,
 
     obj9: {
       title: `Signed Area`,
-      content: `When the integrand dips below the x-axis, the function values become negative and the corresponding rectangles count as **negative area**. The tool draws them on the appropriate side of the axis and the Riemann sum subtracts them naturally.
+      content: `When the [integrand](!/calculus/integrals#3) dips below the x-axis, the function values become negative and the corresponding rectangles count as **negative area**. The tool draws them on the appropriate side of the axis and the Riemann sum subtracts them naturally.
 
 This matches the standard convention for definite integrals: $\\int_a^b f(x)\\, dx$ is the **signed** area between the curve and the x-axis, counting area above the axis positively and area below negatively. A function that&apos;s symmetric about the x-axis (like $\\sin x$ over $[-\\pi, \\pi]$) has integral zero — positive and negative areas cancel.
 
@@ -717,17 +719,19 @@ Two other sign conventions are also handled correctly:
       title: `Related Concepts`,
       content: `**Definite integrals** — the limit of Riemann sums as $n \\to \\infty$. The exact area the approximations are converging to.
 
-**Fundamental Theorem of Calculus** — the shortcut for computing definite integrals: find an antiderivative, evaluate at the endpoints, subtract. See the **FTC visualizer**.
+[Fundamental Theorem of Calculus](!/calculus/visual-tools/fundamental-theorem) — the shortcut for computing definite integrals: find an antiderivative, evaluate at the endpoints, subtract. See the **FTC visualizer**.
 
 **Simpson&apos;s rule** — a higher-order rule that fits parabolas through groups of three points instead of rectangles or straight-line trapezoids. Convergence order $O(1/n^4)$.
 
 **Gaussian quadrature** — an even higher-order family of numerical integration methods using carefully chosen sample points and weights. Used in production numerical libraries.
 
-**Improper integrals** — integrals over unbounded intervals or with unbounded integrands. Defined as limits of ordinary integrals.
+**Improper integrals** — integrals over unbounded intervals or with unbounded integrands. Defined as [limits](!/calculus/visual-tools/limit) of ordinary integrals.
 
 **Average value of a function** — equal to $\\frac{1}{b-a} \\int_a^b f(x)\\, dx$. The mean of $f$ over the interval.
 
-**Visual tools for calculus** — limits, continuity, derivatives, FTC, MVT, optimization.`,
+**Visual tools for calculus** — limits, [continuity](!/calculus/visual-tools/continuity), [derivatives](!/calculus/visual-tools/derivative), FTC, MVT, [optimization](!/calculus/visual-tools/optimization).
+
+[Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — its integral form says some point in the interval attains the average value the sums converge to.`,
       before: ``,
       after: ``,
       link: '',
@@ -944,6 +948,7 @@ They also err in a fixed ratio — the trapezoid error runs about twice the midp
 
   return {
     props: {
+      relatedTools: getRelatedTools('calculus-riemann-sum'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -966,7 +971,7 @@ They also err in a fixed ratio — the trapezoid error runs about twice the midp
   }
 }
 
-export default function RiemannSumVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function RiemannSumVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1086,6 +1091,7 @@ export default function RiemannSumVisualizer({seoData, sectionsContent, stateUni
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

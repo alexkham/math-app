@@ -497,6 +497,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionDerivativeLocal from '../../../../app/components/calculus/visualizers/FunctionDerivativeLocal'
 import functionDerivativeLocalDiagrams from '../../../../app/components/calculus/visualizers/functionDerivativeLocalDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -523,15 +525,15 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Average rate of change** — the slope of the line through two points on a function's graph, measuring how much the output changes per unit of input across an interval.
+      content: `[Average rate of change](!/calculus/definitions#average_rate_of_change) — the slope of the line through two points on a function's graph, measuring how much the output changes per unit of input across an interval.
 
-**Secant line** — the straight line that passes through two distinct points on a curve. Its slope equals the average rate of change between those points.
+[Secant line](!/calculus/derivatives#1) — the straight line that passes through two distinct points on a curve. Its slope equals the [average rate of change](!/calculus/derivatives#1) between those points.
 
 **$\\Delta x$** — the change in the input, computed as $x_2 - x_1$.
 
 **$\\Delta y$** — the change in the output, computed as $f(x_2) - f(x_1)$.
 
-**Derivative** — the instantaneous rate of change at a single point, defined as the limit of the average rate of change as $\\Delta x \\to 0$.
+[Derivative](!/calculus/definitions#derivative) — the [instantaneous rate of change](!/calculus/derivatives/function#6) at a single point, defined as the [limit](!/calculus/limits#1) of the average rate of change as $\\Delta x \\to 0$.
 
 **Local maximum / minimum** — an interior point where the function reaches a peak or valley relative to nearby values.`,
       before: ``,
@@ -635,7 +637,7 @@ For deeper coverage of slopes, see the **slope theory page**, and for the move f
 
     obj7: {
       title: `From Secant Slope to Derivative`,
-      content: `Holding $P_1$ fixed at a point $c$ and sliding $P_2$ toward it makes the interval $\\Delta x$ shrink. The secant line connecting the two points rotates as it shrinks, and in the limit it becomes the **tangent line** at $c$. The slope of that tangent line is the value of the derivative $f'(c)$.
+      content: `Holding $P_1$ fixed at a point $c$ and sliding $P_2$ toward it makes the interval $\\Delta x$ shrink. The secant line connecting the two points rotates as it shrinks, and in the limit it becomes the **tangent line** at $c$. The slope of that [tangent line](!/calculus/derivatives/graph-analysis#2) is the value of the derivative $f'(c)$.
 
 The formal statement is the limit definition of the derivative:
 
@@ -670,7 +672,7 @@ This connection is the practical engine of curve sketching — the sign chart of
 
 The intuition matches what the Local max and Local min scenarios animate: just before a peak the function is rising, just after it the function is falling, and a continuous slope must pass through zero in between. The same argument with the signs reversed applies to a valley.
 
-A zero derivative on its own does not guarantee an extremum — it only certifies a horizontal tangent. To confirm a maximum or minimum, check that $f'$ actually changes sign at $c$ (the **first derivative test**) or that $f''(c)$ has the right sign (the **second derivative test**).
+A zero derivative on its own does not guarantee an extremum — it only certifies a horizontal tangent. To confirm a maximum or minimum, check that $f'$ actually changes sign at $c$ (the **first derivative test**) or that $f''(c)$ has the right sign (the [second derivative test](!/calculus/visual-tools/inflection-points)).
 
 For deeper coverage, see the **critical points page** and the **extrema classification page**.`,
       before: ``,
@@ -683,11 +685,11 @@ For deeper coverage, see the **critical points page** and the **extrema classifi
       content: `**Related concepts:**
 
 - **Slope formula** — the algebraic origin of the average rate of change.
-- **Derivative** — the limit of the average rate of change as the interval shrinks to a single point.
-- **Tangent line** — the limiting position of the secant line as the two points coincide.
+- [Derivative](!/calculus/visual-tools/derivative) — the [limit](!/calculus/visual-tools/limit) of the average rate of change as the interval shrinks to a single point.
+- [Tangent line](!/calculus/visual-tools/tangent-line) — the limiting position of the secant line as the two points coincide.
 - **Monotonicity** — the property of being increasing or decreasing, controlled by the sign of $f'$.
-- **Critical points** — points where the derivative is zero or undefined, the candidates for local extrema.
-- **Mean value theorem** — guarantees that on a closed interval the derivative somewhere equals the average rate of change.
+- [Critical points](!/calculus/visual-tools/optimization) — points where the derivative is zero or undefined, the candidates for local extrema.
+- [Mean value theorem](!/calculus/visual-tools/mean-value-theorem) — guarantees that on a closed interval the derivative somewhere equals the average rate of change.
 
 **Related tools:**
 
@@ -944,6 +946,7 @@ Both extrema also demonstrate the limitation of a single secant reading. A slope
 
    return {
       props:{
+      relatedTools: getRelatedTools('calculus-average-rate-of-change'),
          sectionsContent,
          stateUnits,
          explanations,
@@ -964,7 +967,7 @@ Both extrema also demonstrate the limitation of a single secant reading. A slope
     }
    }
 
-export default function AverageRateOfChangeVisualizer({seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+export default function AverageRateOfChangeVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1094,6 +1097,7 @@ export default function AverageRateOfChangeVisualizer({seoData, sectionsContent,
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
 import functionNewtonMethodDiagrams from '../../../../app/components/calculus/visualizers/functionNewtonMethodDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,17 +523,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Newton's method** (also called Newton-Raphson) — an iterative algorithm for approximating a root of a differentiable function by repeatedly following the tangent line down to the x-axis.
+      content: `**Newton's method** (also called Newton-Raphson) — an iterative algorithm for approximating a root of a differentiable function by repeatedly following the [tangent line](!/calculus/derivatives/graph-analysis#2) down to the x-axis.
 
 **Iterate** — one of the values $x_0, x_1, x_2, \\ldots$ produced by repeatedly applying the Newton step.
 
 **Newton step** — the update rule $x_{n+1} = x_n - f(x_n) / f'(x_n)$, the x-intercept of the tangent line at $(x_n, f(x_n))$.
 
-**Initial guess** — the starting value $x_0$ from which the iteration begins. Its position relative to the root and to any critical points determines whether the method succeeds.
+**Initial guess** — the starting value $x_0$ from which the iteration begins. Its position relative to the root and to any [critical points](!/calculus/visual-tools/optimization) determines whether the method succeeds.
 
-**Quadratic convergence** — near a simple root the error roughly squares at each step, so the number of correct digits roughly doubles per iteration.
+[Quadratic convergence](!/calculus/integrals/improper#4) — near a simple root the error roughly squares at each step, so the number of correct digits roughly doubles per iteration.
 
-**Critical point** — a point where $f'(x) = 0$. Starting near a critical point makes the tangent nearly horizontal and breaks Newton's method.`,
+[Critical point](!/calculus/definitions#critical_point) — a point where $f'(x) = 0$. Starting near a [critical point](!/calculus/derivatives/graph-analysis#4) makes the tangent nearly horizontal and breaks Newton's method.`,
       before: ``,
       after: ``,
       link: '',
@@ -622,7 +624,7 @@ The History table is where quadratic convergence becomes obvious: when the metho
 - **Converged** (blue) — the iteration reached the root. The card explains quadratic convergence and quotes the final error.
 - **Stalls** (red) — the iteration failed. The card identifies the value of $f'(x_0)$ as the culprit and shows where $x_1$ landed.
 
-A second card underneath gives the underlying reason — for success, the asymptotic error formula; for failure, why a small derivative makes the correction blow up.
+A second card underneath gives the underlying reason — for success, the asymptotic error formula; for failure, why a small [derivative](!/calculus/derivatives#1) makes the correction blow up.
 
 The **Theory** tab is always available and holds five reference blocks: the definition, the geometric derivation of the Newton step from the tangent equation, the quadratic-convergence statement near a simple root, three common failure modes (flat tangent, cycles, divergence), and a summary of what each statement looks like for the specific cubic on screen.`,
       before: ``,
@@ -676,8 +678,8 @@ Production root finders defend against these failures by bracketing the root wit
       title: `Related Concepts and Tools`,
       content: `**Related concepts:**
 
-- **Tangent line** — the geometric object Newton's method follows at each step.
-- **Derivative** — required to compute the Newton step; the method breaks down where $f'$ vanishes.
+- [Tangent line](!/calculus/visual-tools/tangent-line) — the geometric object Newton's method follows at each step.
+- [Derivative](!/calculus/visual-tools/derivative) — required to compute the Newton step; the method breaks down where $f'$ vanishes.
 - **Quadratic convergence** — the rate at which Newton refines a simple root.
 - **Bisection method** — a slower but more robust root finder that always converges when given a sign-changing bracket.
 - **Secant method** — a derivative-free cousin of Newton's that replaces $f'(x_n)$ with a finite-difference estimate.
@@ -926,6 +928,7 @@ The practical rule follows directly: **starting points near critical points of $
 
    return {
       props:{
+      relatedTools: getRelatedTools('calculus-newtons-method'),
          sectionsContent,
          stateUnits,
          explanations,
@@ -946,7 +949,7 @@ The practical rule follows directly: **starting points near critical points of $
     }
    }
 
-export default function NewtonsMethodVisualizer({seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+export default function NewtonsMethodVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1075,6 +1078,7 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, state
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

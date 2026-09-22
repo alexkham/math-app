@@ -754,7 +754,7 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
   variant="light"
 />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

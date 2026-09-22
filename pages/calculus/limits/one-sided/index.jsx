@@ -2899,7 +2899,7 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
   variant="light"
 />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

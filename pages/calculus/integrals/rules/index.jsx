@@ -875,7 +875,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
   variant="light"
 />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

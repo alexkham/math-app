@@ -49,7 +49,13 @@ for k, v in sorted((k, v) for k, v in REG['tools'].items() if v.get('section') =
     i = live.rfind('const genericSections')
     if i < 0:
         continue
-    has_entry = bool(re.search(r"id\s*:\s*'key-terms'", live[i:]))
+    # Three wiring idioms: an object literal with id:'key-terms', a helper call
+    # plain('obj0','key-terms'), or a tuple ['obj0','key-terms']. Reading only
+    # the first would prepend a DUPLICATE entry to every page using the others.
+    tail = live[i:]
+    has_entry = bool(re.search(r"id\s*:\s*['\"`]key-terms['\"`]", tail)
+                     or re.search(r"\b\w+\(\s*'obj\d+'\s*,\s*'key-terms'", live)
+                     or re.search(r"\[\s*'obj\d+'\s*,\s*'key-terms'", live))
     sl = re.search(r'(<Sections\s+sections=\{genericSections)\.slice\(1\)(\}\s*/>)', raw)
 
     if has_entry and sl:

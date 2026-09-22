@@ -494,6 +494,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionMVT from '../../../../app/components/functions/mvt/FunctionMVT'
 import functionMVTDiagrams from '../../../../app/components/functions/mvt/functionMVTDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -520,15 +522,15 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Mean Value Theorem (MVT)** — if $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists at least one $c \\in (a, b)$ where $f'(c) = (f(b) - f(a)) / (b - a)$.
+      content: `[Mean Value Theorem (MVT)](!/calculus/derivatives/rules#8) — if $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists at least one $c \\in (a, b)$ where $f'(c) = (f(b) - f(a)) / (b - a)$.
 
-**Secant line** — the straight line through the two interval endpoints $(a, f(a))$ and $(b, f(b))$. Its slope is the average rate of change of $f$ on $[a, b]$.
+[Secant line](!/calculus/derivatives#1) — the straight line through the two interval endpoints $(a, f(a))$ and $(b, f(b))$. Its slope is the [average rate of change](!/calculus/derivatives#1) of $f$ on $[a, b]$.
 
-**Tangent line at c** — the straight line touching the curve at $(c, f(c))$ with slope $f'(c)$. The MVT guarantees at least one such tangent is parallel to the secant.
+[Tangent line at c](!/calculus/visual-tools/tangent-line) — the straight line touching the curve at $(c, f(c))$ with slope $f'(c)$. The MVT guarantees at least one such tangent is parallel to the secant.
 
-**Average rate of change** — $(f(b) - f(a)) / (b - a)$, the change in output divided by the change in input on the interval.
+[Average rate of change](!/calculus/definitions#average_rate_of_change) — $(f(b) - f(a)) / (b - a)$, the change in output divided by the change in input on the interval.
 
-**Instantaneous rate of change** — $f'(c)$, the rate of change at a single point.
+[Instantaneous rate of change](!/calculus/definitions#instantaneous_rate_of_change) — $f'(c)$, the rate of change at a single point.
 
 **Rolle&apos;s theorem** — the special case of the MVT when $f(a) = f(b)$. The secant is horizontal, so the MVT promises an interior $c$ with $f'(c) = 0$.`,
       before: ``,
@@ -564,7 +566,7 @@ To explore, drag the **left endpoint a** and **right endpoint b** sliders to set
 
 • **Quadratic** $f(x) = x^2$ — exactly one $c$, always at the midpoint $(a + b)/2$.
 
-• **Cubic** $f(x) = x^3$ — up to two $c$ values, depending on whether the interval crosses the inflection point.
+• **Cubic** $f(x) = x^3$ — up to two $c$ values, depending on whether the interval crosses the [inflection point](!/calculus/visual-tools/inflection-points).
 
 **Transcendental:**
 
@@ -610,7 +612,7 @@ The **Reset** button next to **Parameters** returns the interval to the family&a
 
 • **f&apos;(c) at each c** — the derivative evaluated at each $c$. These numbers should all equal the secant slope above (modulo numerical rounding).
 
-The MVT guarantees the count is at least one. Depending on the function and interval, you may see exactly one (parabola, exponential) or several (sine on a wide interval, cubic crossing its inflection point). The cubic on a symmetric interval $[-2, 2]$ produces two $c$ values, mirrored around the origin.`,
+The MVT guarantees the count is at least one. Depending on the function and interval, you may see exactly one (parabola, exponential) or several (sine on a wide interval, cubic crossing its [inflection point](!/calculus/derivatives/graph-analysis#8)). The cubic on a symmetric interval $[-2, 2]$ produces two $c$ values, mirrored around the origin.`,
       before: ``,
       after: ``,
       link: '',
@@ -642,7 +644,7 @@ The reason these rows matter: the MVT only guarantees at least one $c$, but the 
 
 • **secant** — toggles the deep-blue secant line.
 
-• **tangent at c** — toggles every light-blue tangent line at each $c$. Useful when there are several and you want to focus on just the secant.
+• **tangent at c** — toggles every light-blue [tangent line](!/calculus/derivatives/graph-analysis#2) at each $c$. Useful when there are several and you want to focus on just the secant.
 
 • **a, b lines** — toggles the dashed vertical reference lines at the interval endpoints.
 
@@ -656,7 +658,7 @@ The **Accent color** picker at the bottom recolors the highlight throughout the 
 
     obj7: {
       title: `What Is the MVT`,
-      content: `The **Mean Value Theorem** is one of the central results of differential calculus. It connects the global behavior of a function (its average rate of change over an interval) with its local behavior (its instantaneous rate of change at a single point).
+      content: `The **Mean Value Theorem** is one of the central results of [differential](!/calculus/derivatives/differentials#2) calculus. It connects the global behavior of a function (its average rate of change over an interval) with its local behavior (its instantaneous rate of change at a single point).
 
 **Statement.** If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists at least one point $c$ in $(a, b)$ such that
 
@@ -702,21 +704,23 @@ For deeper coverage, see the **Rolle&apos;s theorem** page.`,
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Derivatives** — the slope of the tangent at $c$. The MVT relates this local quantity to a global quantity (the secant slope). See the **derivative visualizer**.
+      content: `[Derivatives](!/calculus/visual-tools/derivative) — the slope of the tangent at $c$. The MVT relates this local quantity to a global quantity (the [secant slope](!/calculus/visual-tools/average-rate-of-change)). See the **derivative visualizer**.
 
 **Rolle&apos;s theorem** — the special case of the MVT when the endpoint values agree.
 
 **Cauchy mean value theorem** — a generalization to two functions simultaneously. Used to prove L&apos;Hôpital&apos;s rule.
 
-**L&apos;Hôpital&apos;s rule** — for indeterminate limits of the form $0/0$ or $\\infty/\\infty$. A direct application of the Cauchy MVT.
+**L&apos;Hôpital&apos;s rule** — for indeterminate [limits](!/calculus/visual-tools/limit) of the form $0/0$ or $\\infty/\\infty$. A direct application of the Cauchy MVT.
 
 **Increasing and decreasing functions** — the MVT proves that $f' > 0$ on an interval implies $f$ is strictly increasing there. One of the most useful consequences.
 
 **Constant function theorem** — if $f' = 0$ everywhere on an interval, then $f$ is constant. Comes directly from the MVT.
 
-**Antiderivatives** — two antiderivatives of the same function differ by a constant. Proved by the constant function theorem above.
+**Antiderivatives** — two [antiderivatives](!/calculus/integrals/indefinite#1) of the same function differ by a constant. Proved by the constant function theorem above.
 
-**Visual tools for calculus** — limits, continuity, derivatives, FTC, Riemann sums.`,
+**Visual tools for calculus** — [limits](!/calculus/limits#1), [continuity](!/calculus/visual-tools/continuity), derivatives, FTC, [Riemann sums](!/calculus/visual-tools/riemann-sum).
+
+**Optimization** — the proof runs through Rolle's theorem, which locates an interior [critical point](!/calculus/visual-tools/optimization) exactly as optimization does.`,
       before: ``,
       after: ``,
       link: '',
@@ -962,6 +966,7 @@ The value $\ln(e - 1)$ also has a neat reading: it is the point where the height
 
   return {
     props: {
+      relatedTools: getRelatedTools('calculus-mean-value-theorem'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -984,7 +989,7 @@ The value $\ln(e - 1)$ also has a neat reading: it is the point where the height
   }
 }
 
-export default function MeanValueTheoremVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function MeanValueTheoremVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1106,6 +1111,7 @@ export default function MeanValueTheoremVisualizer({seoData, sectionsContent, st
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

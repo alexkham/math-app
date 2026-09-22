@@ -13,6 +13,7 @@
 # phrase from the first key term's gloss must appear outside __NEXT_DATA__.
 
 import io, json, re, sys, urllib.request
+from html import unescape
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 SECTION = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--section=')), 'trigonometry')
@@ -53,7 +54,12 @@ for k, v in sorted((k, v) for k, v in REG['tools'].items() if v.get('section') =
         continue
     cut = html.find('__NEXT_DATA__')
     visible = html[:cut] if cut > 0 else html
-    (rendered if probe in visible else hidden).append(k)
+    # The probe is raw source text; the rendered page carries HTML entities, so
+    # "a function's graph" arrives as "a function&#x27;s graph". Entities must be
+    # DECODED before punctuation is stripped - stripping first leaves the x of
+    # &#x27; behind as a letter and the comparison fails anyway.
+    flat = lambda s: re.sub(r'[^a-z]', '', unescape(s).lower())
+    (rendered if flat(probe) in flat(visible) else hidden).append(k)
 
 print('%s: %d tool pages have a Key Terms block' % (SECTION, len(rendered) + len(hidden) + len(noprobe)))
 print('  rendered      : %d' % len(rendered))

@@ -10,7 +10,7 @@
       "populationRule": "Universal registry rule: ANY pass touching a tool page (any operation/tier) updates this registry as a by-product - at minimum identity + scanned terms as pending. Line 2 passes write the full dispositioned list. Existing Line 2 dispositions are only altered by Line 2 itself."
     },
     "lineTwo": {
-      "linearAlgebraLedgerFilled": "2026-09-21",
+      "linearAlgebraLedgerFilled": "2026-09-22",
       "note": "Ledger-only pass: relatedTerms rebuilt from a full re-scan and dispositioned. No page prose was edited. Pending entries carry a `plan` holding the link record a Line 2 write pass would emit.",
       "destinationPolicy": "v3 destination priorities 1 and 2 are unreachable: siteReferences / isRecommendedResource exist on 0 of 1218 repository entries. Owner decision 2026-09-13: link lesson (theory) pages first, via the entry's link.url; definitions pages are a second pass. Each linked and pending term therefore also carries `definitionTarget`, the definitions or formulas anchor, so that pass needs no re-derivation.",
       "knownDeviations": [
@@ -18,12 +18,14 @@
         "No MIN_CHARS skip and no CAP_PER_SECTION at ledger stage - those are linking limits. 40 pending links across 21 sections exceed v3's cap of 5 per section and must be trimmed by the write pass.",
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
-      "linearAlgebraLinksWritten": "2026-09-21"
+      "linearAlgebraLinksWritten": "2026-09-22",
+      "calculusKeyTerms": "2026-09-22"
     },
     "lineThree": {
       "trigonometryWritten": "2026-09-20",
       "functionsWritten": "2026-09-20",
-      "complex-numbersWritten": "2026-09-21"
+      "complex-numbersWritten": "2026-09-21",
+      "calculusWritten": "2026-09-22"
     }
   },
   "tools": {
@@ -18305,64 +18307,397 @@
       "component": "app/components/calculus/visualizers/FunctionTangentLine.jsx",
       "relatedTerms": [
         {
-          "term": "tangent line",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "the-computation-tab"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "derivative",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "directions",
+          "entity": "direction",
+          "sections": [
+            "getting-started",
+            "the-meaning-and-theory-tabs",
+            "what-is-a-tangent-line",
+            "horizontal-tangents-and-critical-points"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "slope of tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "key-terms",
+            "the-six-step-animation",
+            "the-computation-tab",
+            "the-meaning-and-theory-tabs",
+            "what-is-a-tangent-line",
+            "derivative-as-slope"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "point-slope form",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "what-is-a-tangent-line",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "linearization",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "intercept",
+          "entity": "constant_term",
+          "sections": [
+            "the-computation-tab"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "pivots",
+          "entity": "pivot",
+          "sections": [
+            "drag-and-scenario-modes"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "drag-and-scenario-modes"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "root",
+          "entity": "root",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "secants",
+          "entity": "secant",
+          "sections": [
+            "derivative-as-slope",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "the-four-scenarios"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "the-six-step-animation"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangents",
+          "entity": "tangent",
+          "sections": [
+            "key-terms",
+            "local-minimum",
+            "the-six-step-animation",
+            "the-meaning-and-theory-tabs"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "critical point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "critical_point",
+          "sections": [
+            "key-terms",
+            "drag-and-scenario-modes",
+            "the-meaning-and-theory-tabs",
+            "horizontal-tangents-and-critical-points",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "critical_point"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "horizontal tangent",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "inflection point",
+          "entity": "inflection_point",
+          "sections": [
+            "horizontal-tangents-and-critical-points"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "inflection_point"
+          },
+          "links": [
+            {
+              "fromSection": "horizontal-tangents-and-critical-points",
+              "surface": "inflection point",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "8"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "fermat's theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "derivative-as-slope"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "limit"
+          },
+          "links": [
+            {
+              "fromSection": "derivative-as-slope",
+              "surface": "limit",
+              "target": {
+                "path": "/calculus/limits",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "local extremum",
+          "entity": "local_extremum",
+          "sections": [
+            "horizontal-tangents-and-critical-points"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "local_extremum"
+          },
+          "links": [
+            {
+              "fromSection": "horizontal-tangents-and-critical-points",
+              "surface": "local extremum",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "local maximum",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "local_maximum",
+          "sections": [
+            "the-four-scenarios",
+            "positive-slope",
+            "negative-slope",
+            "local-maximum",
+            "horizontal-tangents-and-critical-points"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-four-scenarios",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_maximum"
+          }
         },
         {
           "term": "local minimum",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "local_minimum",
+          "sections": [
+            "the-four-scenarios",
+            "negative-slope",
+            "local-minimum",
+            "horizontal-tangents-and-critical-points"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-four-scenarios",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_minimum"
+          }
+        },
+        {
+          "term": "second derivative test",
+          "entity": "second_derivative_test",
+          "sections": [
+            "horizontal-tangents-and-critical-points"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "second_derivative_test"
+          },
+          "links": [
+            {
+              "fromSection": "horizontal-tangents-and-critical-points",
+              "surface": "second derivative test",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "sign analysis",
+          "entity": "sign_analysis",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/algebra/inequalities",
+              "section": "8"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "sign_analysis"
+          }
+        },
+        {
+          "term": "taylor series",
+          "entity": "higher_order_derivative",
+          "sections": [
+            "derivative-as-slope",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "higher_order_derivative"
+          },
+          "links": [
+            {
+              "fromSection": "derivative-as-slope",
+              "surface": "Taylor series",
+              "target": {
+                "path": "/calculus/derivatives/higher-order",
+                "section": "8"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "turning point",
+          "entity": "turning_point",
+          "sections": [
+            "local-maximum"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "local-maximum",
+            "target": {
+              "path": "/algebra/polynomials/graphing",
+              "section": "4"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "turning_point"
+          }
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Tangent line",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "tangent_line"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "critical point",
+          "entity": "critical_point",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Critical point",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "critical_point"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/calculus/visualizers/functionTangentLineDiagrams.js",
@@ -18382,7 +18717,65 @@
         "orphans": 0,
         "wiring": "B - component already exposed an explanations prop (deep-merge override); page now supplies the per-state note text from getStaticProps, defaults preserved for every field not passed",
         "note": "This component renders panel text through dangerouslySetInnerHTML, not processContent, so the per-state links are raw <a href=\"#slug\"> anchors rather than markdown (!#slug). Section prose uses the normal markdown links."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-average-rate-of-change",
+          "fromSection": "related-concepts",
+          "surface": "Average rate of change",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "derivatives",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-inflection-points",
+          "fromSection": "related-concepts",
+          "surface": "Inflection points",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "limit",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean Value Theorem",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-newtons-method",
+          "fromSection": "related-concepts",
+          "surface": "Newton's Method",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "First derivative test",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-inflection-points": {
       "slug": "inflection-points",
@@ -18392,64 +18785,376 @@
       "component": "app/components/calculus/visualizers/FunctionConcavity.jsx",
       "relatedTerms": [
         {
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "the-info-panel-tabs",
+            "what-is-concavity",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "inequality",
+          "entity": "inequality",
+          "sections": [
+            "reading-the-concavity-gap"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "intercepts",
+          "entity": "constant_term",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "drag-and-scenario-modes"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "the-three-scenarios"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solutions",
+          "entity": "solution",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "the-info-panel-tabs"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "key-terms",
+            "concave-up",
+            "concave-down",
+            "inflection-point",
+            "the-seven-step-animation"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "translation",
+          "entity": "translation",
+          "sections": [
+            "concave-up"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "asymptotes",
+              "target": {
+                "path": "/calculus/limits/infinity",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "critical points",
+          "entity": "critical_point",
+          "sections": [
+            "the-second-derivative-test",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "critical_point"
+          },
+          "links": [
+            {
+              "fromSection": "the-second-derivative-test",
+              "surface": "critical points",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "first derivative test",
+          "entity": "first_derivative_test",
+          "sections": [
+            "the-second-derivative-test"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "first_derivative_test"
+          },
+          "links": [
+            {
+              "fromSection": "the-second-derivative-test",
+              "surface": "first derivative test",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "geometric interpretation",
+          "entity": "absolute_value_inequality",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/algebra/inequalities/absolute-value",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "absolute_value_inequality"
+          }
+        },
+        {
+          "term": "local maximum",
+          "entity": "local_maximum",
+          "sections": [
+            "the-second-derivative-test"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-second-derivative-test",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_maximum"
+          }
+        },
+        {
+          "term": "local minimum",
+          "entity": "local_minimum",
+          "sections": [
+            "the-second-derivative-test"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-second-derivative-test",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_minimum"
+          }
+        },
+        {
+          "term": "second derivative test",
+          "entity": "second_derivative_test",
+          "sections": [
+            "the-info-panel-tabs",
+            "the-second-derivative-test",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "second_derivative_test"
+          },
+          "links": [
+            {
+              "fromSection": "the-info-panel-tabs",
+              "surface": "second derivative test",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "6"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "sign analysis",
+          "entity": "sign_analysis",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/algebra/inequalities",
+              "section": "8"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "sign_analysis"
+          }
+        },
+        {
           "term": "concavity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "concave up",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "concave down",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "inflection point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "concavity",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Concavity",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "concavity"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "second derivative",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Second derivative",
+              "target": {
+                "path": "/calculus/derivatives/higher-order",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "second derivative test",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "inflection point",
+          "entity": "inflection_point",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Inflection point",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "inflection_point"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "tangent line",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "critical point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "curvature",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "local extremum",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Tangent line",
+              "target": {
+                "path": "/calculus/visual-tools/tangent-line",
+                "section": null
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/calculus/visualizers/functionConcavityDiagrams.js",
@@ -18468,7 +19173,49 @@
         "orphans": 0,
         "wiring": "B - component already exposed an explanations prop (deep-merge override); page supplies the per-state note text from getStaticProps, defaults preserved for every field not passed",
         "note": "Same family as calculus-tangent-line: panel text renders through dangerouslySetInnerHTML, so per-state links are raw <a href=\"#slug\"> anchors, not markdown."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-average-rate-of-change",
+          "fromSection": "related-concepts",
+          "surface": "Average Rate of Change",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Second derivative",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean Value Theorem",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "First derivative test",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-tangent-line",
+          "fromSection": "key-terms",
+          "surface": "Tangent line",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-newtons-method": {
       "slug": "newtons-method",
@@ -18478,64 +19225,167 @@
       "component": "app/components/calculus/visualizers/FunctionNewtonMethod.jsx",
       "relatedTerms": [
         {
-          "term": "newton's method",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "equation",
+          "entity": "equation",
+          "sections": [
+            "the-meaning-and-theory-tabs"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "newton-raphson",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "exponent",
+          "entity": "exponent",
+          "sections": [
+            "direct-hit"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "root finding",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "crosses-over",
+            "what-is-newtons-method",
+            "when-newtons-method-fails"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "tangent line",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "index",
+          "entity": "index",
+          "sections": [
+            "getting-started"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "intercept",
+          "entity": "constant_term",
+          "sections": [
+            "key-terms",
+            "manual-stepping",
+            "what-is-newtons-method"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "root",
+          "entity": "root",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "preset-scenarios",
+            "direct-hit",
+            "crosses-over",
+            "reading-the-animation",
+            "the-meaning-and-theory-tabs",
+            "what-is-newtons-method",
+            "quadratic-convergence",
+            "when-newtons-method-fails",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "preset-scenarios",
+            "crosses-over",
+            "stalls-near-a-critical-point",
+            "manual-stepping",
+            "reading-the-animation",
+            "the-meaning-and-theory-tabs",
+            "when-newtons-method-fails",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "the-meaning-and-theory-tabs",
+            "when-newtons-method-fails",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "derivative"
+          },
+          "links": [
+            {
+              "fromSection": "the-meaning-and-theory-tabs",
+              "surface": "derivative",
+              "target": {
+                "path": "/calculus/derivatives",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "quadratic convergence",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Quadratic convergence",
+              "target": {
+                "path": "/calculus/integrals/improper",
+                "section": "4"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "critical point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "iteration",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "initial guess",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "bisection method",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "numerical analysis",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "critical_point",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Critical point",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "critical_point"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/calculus/visualizers/functionNewtonMethodDiagrams.js",
@@ -18554,7 +19404,33 @@
         "orphans": 0,
         "wiring": "B - explanations prop already present (deep-merge override); page supplies both note strings from getStaticProps, defaults preserved elsewhere",
         "note": "The component keys its verdict by outcome (meaning.success | meaning.fail), not by scenario, so the two converging scenarios share one panel entry; its link line points at both the direct-hit and crosses-over sections. Panel text renders through dangerouslySetInnerHTML, so links are raw <a href=\"#slug\">. The flat/stall diagram is frozen one phase before the tool's resting frame, which drops the tangent."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Derivative",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-tangent-line",
+          "fromSection": "related-concepts",
+          "surface": "Tangent line",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "key-terms",
+          "surface": "critical points",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-average-rate-of-change": {
       "slug": "average-rate-of-change",
@@ -18564,64 +19440,289 @@
       "component": "app/components/calculus/visualizers/FunctionDerivativeLocal.jsx",
       "relatedTerms": [
         {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "extrema-and-fermats-theorem"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "ascending-interval",
+            "the-computation-tab"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-meaning-and-theory-tabs",
+            "what-is-average-rate-of-change",
+            "extrema-and-fermats-theorem",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "monotonicity",
+          "entity": "monotonicity",
+          "sections": [
+            "the-meaning-and-theory-tabs",
+            "sign-and-monotonicity",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-four-scenarios",
+            "closing-in-on-a-maximum",
+            "the-computation-tab",
+            "what-is-average-rate-of-change",
+            "from-secant-to-derivative",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "extrema-and-fermats-theorem"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "critical points",
+          "entity": "critical_point",
+          "sections": [
+            "extrema-and-fermats-theorem"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "critical_point"
+          },
+          "reason": "Not planted in \"extrema-and-fermats-theorem\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "key-terms",
+            "the-meaning-and-theory-tabs",
+            "what-is-average-rate-of-change",
+            "from-secant-to-derivative",
+            "extrema-and-fermats-theorem",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "derivative"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "first derivative test",
+          "entity": "first_derivative_test",
+          "sections": [
+            "extrema-and-fermats-theorem"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "first_derivative_test"
+          },
+          "reason": "Not planted in \"extrema-and-fermats-theorem\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "local maximum",
+          "entity": "local_maximum",
+          "sections": [
+            "key-terms",
+            "the-meaning-and-theory-tabs",
+            "extrema-and-fermats-theorem"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_maximum"
+          }
+        },
+        {
+          "term": "local minimum",
+          "entity": "local_minimum",
+          "sections": [
+            "the-meaning-and-theory-tabs",
+            "extrema-and-fermats-theorem"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-meaning-and-theory-tabs",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_minimum"
+          }
+        },
+        {
+          "term": "odd function",
+          "entity": "odd_function",
+          "sections": [
+            "descending-interval"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "descending-interval",
+            "target": {
+              "path": "/functions/properties",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "odd_function"
+          }
+        },
+        {
+          "term": "slope formula",
+          "entity": "slope_formula",
+          "sections": [
+            "what-is-average-rate-of-change",
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "what-is-average-rate-of-change",
+            "target": {
+              "path": "/functions/formulas",
+              "section": "slope_formula"
+            },
+            "method": "repository",
+            "crossSection": "functions"
+          }
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "from-secant-to-derivative",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          },
+          "links": [
+            {
+              "fromSection": "from-secant-to-derivative",
+              "surface": "tangent line",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
           "term": "average rate of change",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "average_rate_of_change",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Average rate of change",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "average_rate_of_change"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "secant line",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "difference quotient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Secant line",
+              "target": {
+                "path": "/calculus/derivatives",
+                "section": "1"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "derivative",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "slope",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "monotonicity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "local maximum",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "local minimum",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "fermat's theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "mean value theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "derivative",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Derivative",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "derivative"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/calculus/visualizers/functionDerivativeLocalDiagrams.js",
@@ -18642,7 +19743,57 @@
         "wiring": "B - explanations prop already present (deep-merge override); page supplies all four note strings from getStaticProps, defaults preserved elsewhere",
         "note": "meaning has no idle key - during free drag the component classifies the live slope into asc/desc/max via classifyBySlope, so the free-drag section carries a unit but no panel entry of its own. The max/min diagrams are frozen at the tightest pair of the two tighten steps, which is where the run ends. Panel text renders through dangerouslySetInnerHTML, so links are raw <a href=\"#slug\">.",
         "prosefix": "obj5 claimed a symmetric interval about x = 0 gives a slope of exactly -1 and called it the most negative attainable; the true value over [-a, a] is a^2/3 - 1, which approaches -1 only as a shrinks. Corrected in place."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Derivative",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "limit",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean value theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "Critical points",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-tangent-line",
+          "fromSection": "related-concepts",
+          "surface": "Tangent line",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-inflection-points",
+          "fromSection": "extrema-and-fermats-theorem",
+          "surface": "second derivative test",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-continuity": {
       "slug": "continuity",
@@ -18652,64 +19803,340 @@
       "component": "app/components/functions/continuity/FunctionContinuity.jsx",
       "relatedTerms": [
         {
-          "term": "continuity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "the-three-condition-checklist"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "continuous function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "what-is-continuity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "elements",
+          "entity": "element",
+          "sections": [
+            "display-toggles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "expression",
+          "entity": "expression",
+          "sections": [
+            "removable-hole"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "factoring",
+          "entity": "factoring",
+          "sections": [
+            "removable-hole"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-function-families",
+            "removable-hole",
+            "the-staircase",
+            "the-c-slider",
+            "the-three-condition-checklist",
+            "display-toggles",
+            "what-is-continuity",
+            "types-of-discontinuities",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "the-function-families",
+            "continuous-everywhere",
+            "the-three-condition-checklist",
+            "what-is-continuity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value function",
+          "entity": "absolute_value_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/functions/families",
+              "section": "12"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "absolute_value_function"
+          }
+        },
+        {
+          "term": "continuity at a point",
+          "entity": "continuity",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-function-families",
+            "the-three-condition-checklist",
+            "what-is-continuity",
+            "continuity-and-limits",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "continuity"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "differentiability",
+          "entity": "differentiability",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "differentiability"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "differentiability",
+              "target": {
+                "path": "/calculus/derivatives/differentiability",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "discontinuity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "discontinuity",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "removable-hole",
+            "the-staircase",
+            "jump-to-buttons",
+            "the-three-condition-checklist",
+            "types-of-discontinuities",
+            "continuity-and-limits",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "discontinuity"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "end behavior",
+          "entity": "end_behavior",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/algebra/polynomials/graphing",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "end_behavior"
+          }
+        },
+        {
+          "term": "extreme value theorem",
+          "entity": "extreme_value_theorem",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "extreme_value_theorem"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "Extreme Value Theorem",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "10"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "integrand",
+          "entity": "integrand",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "integrand"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "integrand",
+              "target": {
+                "path": "/calculus/integrals",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "the-function-families",
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-function-families",
+            "target": {
+              "path": "/functions/piecewise",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "piecewise_function"
+          }
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "One-sided limits",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "one_sided_limit"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "removable discontinuity",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Removable discontinuity",
+              "target": {
+                "path": "/calculus/limits/continuity",
+                "section": "5"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "jump discontinuity",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Jump discontinuity",
+              "target": {
+                "path": "/calculus/limits/continuity",
+                "section": "6"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "infinite discontinuity",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "one-sided limit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "limit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "piecewise function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "floor function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Infinite discontinuity",
+              "target": {
+                "path": "/calculus/limits/continuity",
+                "section": "7"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/functions/continuity/functionContinuityDiagrams.js",
@@ -18733,7 +20160,57 @@
         "sharedHelper": "app/components/functions/frozenSvg.js - wraps generateSVG with the core defaults; reusable by the six remaining functions/* tools",
         "coreChange": "app/components/functions/FunctionVisualizerCorePro.jsx: added `export` to generateSVG, DEFAULT_STYLES and mergeStyles. Purely additive - no existing caller is affected.",
         "assetWeight": "frozenSvg now samples curves at 240 (core uses 500 live) and rounds geometry attributes to 2dp; label text is left untouched. Cut the four core-based pages' inline SVG from ~290-550 kB to ~215-300 kB. The limit tool's sin(1/x) family overrides samples to 1200, since the default understates its oscillation."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Derivative",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-fundamental-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Fundamental Theorem of Calculus",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "One-sided limits",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean Value Theorem",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "Optimization",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-riemann-sum",
+          "fromSection": "related-concepts",
+          "surface": "Riemann Sum",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-derivative": {
       "slug": "derivative",
@@ -18743,64 +20220,423 @@
       "component": "app/components/functions/derivative/FunctionDerivative.jsx",
       "relatedTerms": [
         {
-          "term": "derivative",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "basis",
+          "entity": "basis",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "display-toggles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "the-function-families",
+            "cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "degrees",
+          "entity": "degree",
+          "sections": [
+            "the-identity-function"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "the-tangent-line"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "fraction",
+          "entity": "fraction",
+          "sections": [
+            "what-is-a-derivative"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "the-function-families",
+            "the-at-the-point-card",
+            "display-toggles",
+            "what-is-a-derivative",
+            "from-f-to-f-prime",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "logarithm",
+          "entity": "logarithm",
+          "sections": [
+            "the-function-families",
+            "the-logarithm"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "jump-to-points-of-interest"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "roots",
+          "entity": "root",
+          "sections": [
+            "getting-started",
+            "jump-to-points-of-interest",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "what-is-a-derivative",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "the-function-families",
+            "sine",
+            "cosine"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "the-identity-function",
+            "the-quadratic",
+            "the-cubic",
+            "jump-to-points-of-interest",
+            "the-at-the-point-card",
+            "display-toggles",
+            "from-f-to-f-prime"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "variable",
+          "entity": "variable",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "absolute value function",
+          "entity": "absolute_value_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/functions/families",
+              "section": "12"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "absolute_value_function"
+          }
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "continuity"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "continuity",
+              "target": {
+                "path": "/calculus/limits/continuity",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "inflection point",
+          "entity": "inflection_point",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-function-families",
+            "from-f-to-f-prime"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "inflection_point"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "integrand",
+          "entity": "integrand",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "integrand"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "integrand",
+              "target": {
+                "path": "/calculus/integrals",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "what-is-a-derivative",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "limit"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-a-derivative",
+              "surface": "limit",
+              "target": {
+                "path": "/calculus/limits",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "linear approximation",
+          "entity": "differential",
+          "sections": [
+            "the-identity-function",
+            "the-tangent-line"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "differential"
+          },
+          "links": [
+            {
+              "fromSection": "the-identity-function",
+              "surface": "linear approximation",
+              "target": {
+                "path": "/calculus/derivatives/differentials",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "tangent line",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "tangent_line",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-x0-slider",
+            "the-at-the-point-card",
+            "display-toggles",
+            "what-is-a-derivative",
+            "the-tangent-line"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "slope",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Derivative",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "derivative"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "rate of change",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Tangent line",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "tangent_line"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "critical point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "critical_point",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Critical point",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "critical_point"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "power rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "trigonometric derivative",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "exponential function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "natural logarithm",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "inverse function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "inflection point",
+          "entity": "inflection_point",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Inflection point",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "inflection_point"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/functions/derivative/functionDerivativeDiagrams.js",
@@ -18822,7 +20658,89 @@
         "orphans": 0,
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, appended to the InfoPanel explanation tab only when supplied",
         "note": "Built on FunctionVisualizerCorePro; frozen SVGs come from the core's generateSVG via app/components/functions/frozenSvg.js. Every state is frozen at the component's initialX0 = 1, which is inside the domain of all seven families including ln. getTangentLine is not exported by the core, so the module ports its central-difference formula rather than substituting an analytic slope."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-continuity",
+          "fromSection": "related-concepts",
+          "surface": "Continuity",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-fundamental-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Fundamental Theorem of Calculus",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-inflection-points",
+          "fromSection": "related-concepts",
+          "surface": "concavity",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "Limits",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean Value Theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-newtons-method",
+          "fromSection": "related-concepts",
+          "surface": "Newton's Method",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "maxima and minima",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-riemann-sum",
+          "fromSection": "related-concepts",
+          "surface": "Riemann sums",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-tangent-line",
+          "fromSection": "key-terms",
+          "surface": "tangent line",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-average-rate-of-change",
+          "fromSection": "what-is-a-derivative",
+          "surface": "secant slope",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-limit": {
       "slug": "limit",
@@ -18832,64 +20750,364 @@
       "component": "app/components/functions/limit/FunctionLimit.jsx",
       "relatedTerms": [
         {
-          "term": "limit",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "oscillation-without-a-limit"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "one-sided limit",
+          "term": "expression",
+          "entity": "expression",
+          "sections": [
+            "the-hole"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "the-discontinuity-zoo",
+            "blowing-up-both-ways",
+            "oscillation-without-a-limit",
+            "the-two-verdict-rows",
+            "display-toggles",
+            "what-is-a-limit",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "oscillation-without-a-limit"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "key-terms",
+            "blowing-up-both-ways",
+            "infinite-in-opposite-directions",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "asymptote"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "definite integrals",
+          "entity": "definite_integral",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "definite_integral"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "derivative"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "derivative",
+              "target": {
+                "path": "/calculus/derivatives",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "discontinuity",
+          "entity": "discontinuity",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-three-limit-cards",
+            "the-two-verdict-rows",
+            "one-sided-vs-two-sided"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "discontinuity"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "indeterminate forms",
+          "entity": "indeterminate_form",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "indeterminate_form"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "piecewise function",
+          "entity": "piecewise_function",
+          "sections": [
+            "the-step"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-step",
+            "target": {
+              "path": "/functions/piecewise",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "piecewise_function"
+          }
+        },
+        {
+          "term": "riemann sums",
+          "entity": "riemann_sum",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "riemann_sum"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "Riemann sums",
+              "target": {
+                "path": "/calculus/integrals/definite",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "square root",
+          "entity": "square_root",
+          "sections": [
+            "the-discontinuity-zoo"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-discontinuity-zoo",
+            "target": {
+              "path": "/algebra/roots",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "square_root"
+          }
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "tangent line",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "limit at a point",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Limit at a point",
+              "target": {
+                "path": "/calculus/limits",
+                "section": "3"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "left limit",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Left limit",
+              "target": {
+                "path": "/calculus/limits/one-sided",
+                "section": "1"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "right limit",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Right limit",
+              "target": {
+                "path": "/calculus/limits/one-sided",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "two-sided limit",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "epsilon",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Two-sided limit",
+              "target": {
+                "path": "/calculus/limits",
+                "section": "3"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "removable discontinuity",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "jump discontinuity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Removable discontinuity",
+              "target": {
+                "path": "/calculus/limits/continuity",
+                "section": "5"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "vertical asymptote",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "oscillating function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "continuity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "squeeze theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Vertical asymptote",
+              "target": {
+                "path": "/calculus/limits/infinity",
+                "section": "8"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/functions/limit/functionLimitDiagrams.js",
@@ -18911,7 +21129,73 @@
         "orphans": 0,
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, appended to the InfoPanel explanation tab only when supplied",
         "note": "Built on FunctionVisualizerCorePro; frozen SVGs come from the core's generateSVG via app/components/functions/frozenSvg.js. Every state is frozen at the component's initialEps = 0.5 and its own family centre c. pickCurveAt/evalAt are not exported by the component, so the module ports them to evaluate the approach markers with the same domain rules the tool uses."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-average-rate-of-change",
+          "fromSection": "related-concepts",
+          "surface": "Average Rate of Change",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-continuity",
+          "fromSection": "related-concepts",
+          "surface": "continuity checker",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Derivatives",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-fundamental-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Fundamental Theorem of Calculus",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean Value Theorem",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "Optimization",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-riemann-sum",
+          "fromSection": "related-concepts",
+          "surface": "Riemann sum visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-tangent-line",
+          "fromSection": "related-concepts",
+          "surface": "Tangent Line at a Point",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-mean-value-theorem": {
       "slug": "mean-value-theorem",
@@ -18921,64 +21205,426 @@
       "component": "app/components/functions/mvt/FunctionMVT.jsx",
       "relatedTerms": [
         {
-          "term": "mean value theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "display-toggles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "rolle's theorem",
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "the-function-families",
+            "the-three-result-cards",
+            "the-per-c-detail-rows",
+            "display-toggles",
+            "what-is-the-mvt",
+            "rolles-theorem",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-function-families",
+            "every-point-is-a-c",
+            "rolles-theorem-in-disguise",
+            "a-full-period",
+            "a-secant-that-is-not-flat",
+            "the-a-and-b-sliders",
+            "the-three-result-cards",
+            "the-per-c-detail-rows",
+            "display-toggles",
+            "what-is-the-mvt",
+            "the-speedometer-intuition",
+            "rolles-theorem"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "the-function-families",
+            "the-three-result-cards",
+            "the-per-c-detail-rows"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solution",
+          "entity": "solution",
+          "sections": [
+            "the-function-families",
+            "rolles-theorem-in-disguise",
+            "two-solutions-at-once",
+            "a-secant-that-is-not-flat",
+            "where-the-average-rate-is-attained"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "two-solutions-at-once",
+            "the-a-and-b-sliders",
+            "the-three-result-cards",
+            "the-per-c-detail-rows",
+            "display-toggles",
+            "what-is-the-mvt",
+            "rolles-theorem",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "antiderivatives",
+          "entity": "antiderivative",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "antiderivative"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "antiderivatives",
+              "target": {
+                "path": "/calculus/integrals/indefinite",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "constant function",
+          "entity": "constant_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/functions/families",
+              "section": "3"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "constant_function"
+          }
+        },
+        {
+          "term": "decreasing functions",
+          "entity": "decreasing_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "related-concepts",
+            "target": {
+              "path": "/functions/properties",
+              "section": "6"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "decreasing_function"
+          }
+        },
+        {
+          "term": "differential",
+          "entity": "differential",
+          "sections": [
+            "what-is-the-mvt"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "differential"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-the-mvt",
+              "surface": "differential",
+              "target": {
+                "path": "/calculus/derivatives/differentials",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "inflection point",
+          "entity": "inflection_point",
+          "sections": [
+            "the-three-result-cards"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "inflection_point"
+          },
+          "links": [
+            {
+              "fromSection": "the-three-result-cards",
+              "surface": "inflection point",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "8"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "instantaneous rate of change",
+          "entity": "instantaneous_rate_of_change",
+          "sections": [
+            "key-terms",
+            "what-is-the-mvt"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "instantaneous_rate_of_change"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "limit"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "limits",
+              "target": {
+                "path": "/calculus/limits",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "mean value theorem",
+          "entity": "derivative",
+          "sections": [
+            "key-terms",
+            "the-three-result-cards",
+            "what-is-the-mvt",
+            "rolles-theorem",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "derivative"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "display-toggles"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "tangent_line"
+          },
+          "links": [
+            {
+              "fromSection": "display-toggles",
+              "surface": "tangent line",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "mean value theorem",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Mean Value Theorem (MVT)",
+              "target": {
+                "path": "/calculus/derivatives/rules",
+                "section": "8"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "secant line",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Secant line",
+              "target": {
+                "path": "/calculus/derivatives",
+                "section": "1"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "tangent line",
+          "term": "tangent line at c",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Tangent line at c",
+              "target": {
+                "path": "/calculus/visual-tools/tangent-line",
+                "section": null
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "average rate of change",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "average_rate_of_change",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Average rate of change",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "average_rate_of_change"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "instantaneous rate of change",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "differentiable",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "continuous on a closed interval",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "critical point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "lagrange mean value theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "instantaneous_rate_of_change",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Instantaneous rate of change",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "instantaneous_rate_of_change"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/functions/mvt/functionMVTDiagrams.js",
@@ -19000,7 +21646,73 @@
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, appended to the InfoPanel explanation tab only when supplied",
         "note": "Built on FunctionVisualizerCorePro; frozen SVGs come from the core's generateSVG via app/components/functions/frozenSvg.js. findCs and autoYBounds are ported verbatim, so the drawn c values are the tool's own solutions. Each state uses that family's defaultInterval.",
         "deviation": "Identity is degenerate: f' is constant and equals the secant slope everywhere, so findCs returns 345 solutions on [-2, 2]. The live tool draws all of them; the frozen scene keeps 4 evenly spaced ones, which is visually identical because every tangent is the same line. Capped via MAX_DRAWN_CS in the diagrams module."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-average-rate-of-change",
+          "fromSection": "related-concepts",
+          "surface": "secant slope",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-continuity",
+          "fromSection": "related-concepts",
+          "surface": "continuity",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Derivatives",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "limits",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "critical point",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-riemann-sum",
+          "fromSection": "related-concepts",
+          "surface": "Riemann sums",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-tangent-line",
+          "fromSection": "key-terms",
+          "surface": "Tangent line at c",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-inflection-points",
+          "fromSection": "the-function-families",
+          "surface": "inflection point",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-riemann-sum": {
       "slug": "riemann-sum",
@@ -19010,64 +21722,332 @@
       "component": "app/components/functions/riemann/FunctionRiemann.jsx",
       "relatedTerms": [
         {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "trapezoid-rule",
+            "the-error-tag"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "division",
+          "entity": "complex_number",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-four-methods",
+            "what-is-a-riemann-sum",
+            "signed-area"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "the-function-families",
+            "signed-area"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "monotonicity",
+          "entity": "monotonicity",
+          "sections": [
+            "the-error-tag"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "partition",
+          "entity": "partition",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-a-b-and-n-sliders"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "the-function-families",
+            "the-result-card"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "ranges",
+          "entity": "range",
+          "sections": [
+            "the-a-b-and-n-sliders"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "antiderivative",
+          "entity": "antiderivative",
+          "sections": [
+            "the-function-families",
+            "the-result-card",
+            "what-is-a-riemann-sum",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "antiderivative"
+          },
+          "links": [
+            {
+              "fromSection": "the-function-families",
+              "surface": "antiderivative",
+              "target": {
+                "path": "/calculus/integrals/indefinite",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "average value of a function",
+          "entity": "average_value_of_a_function",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "average_value_of_a_function"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "decreasing function",
+          "entity": "decreasing_function",
+          "sections": [
+            "the-four-methods",
+            "the-error-tag"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-four-methods",
+            "target": {
+              "path": "/functions/properties",
+              "section": "6"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "decreasing_function"
+          }
+        },
+        {
+          "term": "improper integrals",
+          "entity": "improper_integral",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "improper_integral"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "increasing function",
+          "entity": "increasing_function",
+          "sections": [
+            "the-four-methods",
+            "right-rule",
+            "the-error-tag"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-four-methods",
+            "target": {
+              "path": "/functions/properties",
+              "section": "6"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "increasing_function"
+          }
+        },
+        {
+          "term": "integrand",
+          "entity": "integrand",
+          "sections": [
+            "signed-area",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "integrand"
+          },
+          "links": [
+            {
+              "fromSection": "signed-area",
+              "surface": "integrand",
+              "target": {
+                "path": "/calculus/integrals",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "what-is-a-riemann-sum",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "limit"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-a-riemann-sum",
+              "surface": "limit",
+              "target": {
+                "path": "/calculus/limits",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "linear function",
+          "entity": "linear_function",
+          "sections": [
+            "the-error-tag"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-error-tag",
+            "target": {
+              "path": "/functions/families",
+              "section": "4"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "linear_function"
+          }
+        },
+        {
+          "term": "normal distribution",
+          "entity": "normal_distribution",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-function-families",
+            "target": {
+              "path": "/probability/distributions/continuous/normal",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "probability"
+          },
+          "definitionTarget": {
+            "path": "/probability/definitions",
+            "section": "normal_distribution"
+          }
+        },
+        {
           "term": "riemann sum",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "riemann_sum",
+          "sections": [
+            "key-terms",
+            "the-result-card",
+            "the-error-tag",
+            "what-is-a-riemann-sum",
+            "signed-area",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "riemann_sum"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "definite integral",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "left endpoint rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "right endpoint rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "midpoint rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "trapezoid rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "simpson's rule",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "numerical integration",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "convergence order",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "signed area",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "riemann sum",
+          "entity": "riemann_sum",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Riemann sum",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "riemann_sum"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/functions/riemann/functionRiemannDiagrams.js",
@@ -19085,7 +22065,57 @@
         "verification": "STATIC ONLY - eslint parse of page, component and diagrams module. Not yet rendered; pending the end-of-section next build.",
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, keyed by method, appended to the InfoPanel explanation tab only when supplied",
         "note": "States are the four sampling methods on the component's own defaults (quadratic, a=0, b=3, n=8). makeStripFn/riemannSum/trueIntegral/autoViewBounds ported verbatim, so the quoted sums are the tool's: left 7.3828, right 10.7578, mid 8.9648, trap 9.0703 against a true integral of 9. Strip function is a step function, so these diagrams override sampling to 600 to keep the risers square."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-continuity",
+          "fromSection": "related-concepts",
+          "surface": "continuity",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "derivatives",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-fundamental-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Fundamental Theorem of Calculus",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "limits",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean Value Theorem",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-optimization",
+          "fromSection": "related-concepts",
+          "surface": "optimization",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-fundamental-theorem": {
       "slug": "fundamental-theorem",
@@ -19095,64 +22125,331 @@
       "component": "app/components/functions/ftc/FunctionFTC.jsx",
       "relatedTerms": [
         {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "the-function-families",
+            "an-accumulator-that-turns-around",
+            "where-the-curves-swap-roles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "display-toggles",
+            "what-is-the-ftc",
+            "part-1-the-accumulator"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "orientation",
+          "entity": "orientation",
+          "sections": [
+            "the-shaded-area"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "power",
+          "entity": "power",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "the-a-and-x-sliders"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "the-function-families",
+            "where-the-curves-swap-roles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "substitution",
+          "entity": "exponential_equation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "improper integrals",
+          "entity": "improper_integral",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "improper_integral"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "integration by parts",
+          "entity": "indefinite_integral",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "indefinite_integral"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "part-1-the-accumulator",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "limit"
+          },
+          "links": [
+            {
+              "fromSection": "part-1-the-accumulator",
+              "surface": "limit",
+              "target": {
+                "path": "/calculus/limits",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "local maximum",
+          "entity": "local_maximum",
+          "sections": [
+            "the-shaded-area"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-shaded-area",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_maximum"
+          }
+        },
+        {
+          "term": "riemann sums",
+          "entity": "riemann_sum",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "riemann_sum"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "Riemann sums",
+              "target": {
+                "path": "/calculus/integrals/definite",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "the power rule",
+          "entity": "power_rule_(logarithms)",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "the-function-families",
+            "target": {
+              "path": "/algebra/logarithms/rules",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "algebra"
+          },
+          "definitionTarget": {
+            "path": "/algebra/definitions",
+            "section": "power_rule_(logarithms)"
+          }
+        },
+        {
           "term": "fundamental theorem of calculus",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "antiderivative",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "accumulation function",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "definite integral",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Fundamental Theorem of Calculus (FTC)",
+              "target": {
+                "path": "/calculus/integrals/rules",
+                "section": "5"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "integrand",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "integrand",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Integrand",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "integrand"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "antiderivative",
+          "entity": "antiderivative",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Antiderivative",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "antiderivative"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "definite integral",
+          "entity": "definite_integral",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Definite integral",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "definite_integral"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "signed area",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "indefinite integral",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "power rule for integration",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "net change theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "evaluation theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "signed_area",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Signed area",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "signed_area"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/functions/ftc/functionFTCDiagrams.js",
@@ -19174,7 +22471,41 @@
         "verification": "STATIC ONLY - eslint parse plus line1-static-check.py (section slugs vs every anchor target the page can emit). Not yet rendered; pending the end-of-section next build.",
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, appended to the InfoPanel explanation tab only when supplied",
         "note": "States are the six families on the component's defaults a = 0, x = 2. autoYBounds is ported verbatim and fits BOTH f and F, which is why the exponential state is framed much taller. Readings quoted in the prose come from the tool's own FAMILIES entries."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-continuity",
+          "fromSection": "related-concepts",
+          "surface": "continuity",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Derivatives",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "limits",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-riemann-sum",
+          "fromSection": "related-concepts",
+          "surface": "Riemann sum visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-optimization": {
       "slug": "optimization",
@@ -19184,64 +22515,395 @@
       "component": "app/components/functions/optimization/FunctionOptimization.jsx",
       "relatedTerms": [
         {
-          "term": "optimization",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "arguments",
+          "entity": "argument",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "display-toggles"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "coordinates",
+          "entity": "coordinates",
+          "sections": [
+            "getting-started"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "directions",
+          "entity": "direction",
+          "sections": [
+            "one-maximum-two-inflections"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "key-terms",
+            "what-is-optimization"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "one-maximum-two-inflections",
+            "the-critical-point-table",
+            "display-toggles",
+            "what-is-optimization",
+            "the-first-derivative-test"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "the-function-families"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "the-a-and-b-sliders"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "classification",
+            "the-first-derivative-test",
+            "the-second-derivative-test"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "variable",
+          "entity": "variable",
+          "sections": [
+            "what-is-optimization"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "concavity",
+          "entity": "concavity",
+          "sections": [
+            "the-second-derivative-test"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "concavity"
+          },
+          "links": [
+            {
+              "fromSection": "the-second-derivative-test",
+              "surface": "concavity",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "7"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "continuity"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "continuity",
+              "target": {
+                "path": "/calculus/limits/continuity",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-function-families",
+            "a-maximum-and-a-minimum",
+            "where-the-test-fails",
+            "the-critical-point-table",
+            "classification",
+            "display-toggles",
+            "what-is-optimization",
+            "the-first-derivative-test",
+            "the-second-derivative-test",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/definitions",
+            "section": "derivative"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "extreme value theorem",
+          "entity": "extreme_value_theorem",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/calculus/formulas",
+            "section": "extreme_value_theorem"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "local maximum",
+          "entity": "local_maximum",
+          "sections": [
+            "key-terms",
+            "the-function-families",
+            "one-maximum-two-inflections",
+            "classification",
+            "the-first-derivative-test",
+            "the-second-derivative-test"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_maximum"
+          }
+        },
+        {
+          "term": "local minimum",
+          "entity": "local_minimum",
+          "sections": [
+            "key-terms",
+            "the-function-families",
+            "one-critical-point",
+            "classification",
+            "the-first-derivative-test",
+            "the-second-derivative-test"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "key-terms",
+            "target": {
+              "path": "/functions/properties",
+              "section": "9"
+            },
+            "method": "repository-link",
+            "crossSection": "functions"
+          },
+          "definitionTarget": {
+            "path": "/functions/definitions",
+            "section": "local_minimum"
+          }
         },
         {
           "term": "critical point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "critical_point",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Critical point",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "critical_point"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "local maximum",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Local maximum",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "6"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "local minimum",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "global extremum",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "first derivative test",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "second derivative test",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Local minimum",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "6"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "inflection point",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "inflection_point",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Inflection point",
+              "target": {
+                "path": "/calculus/definitions",
+                "section": "inflection_point"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "concavity",
+          "term": "concave up",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Concave up",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "7"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "saddle point",
+          "term": "concave down",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Concave down",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "7"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "second-derivative test",
+          "entity": null,
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Second-derivative test",
+              "target": {
+                "path": "/calculus/derivatives/graph-analysis",
+                "section": "6"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/functions/optimization/functionOptimizationDiagrams.js",
@@ -19263,7 +22925,81 @@
         "verification": "STATIC ONLY - eslint parse plus line1-static-check.py. Not yet rendered; pending the end-of-section next build.",
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, appended to the InfoPanel explanation tab only when supplied",
         "note": "findCriticalPoints, classify and autoYBounds ported verbatim, so the markers and their labels are the tool's own - including the x^3 touch-zero case that the second-derivative test cannot classify and the finder detects via a separate |f'| minimum scan. Each state uses that family's defaultInterval."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "calculus-average-rate-of-change",
+          "fromSection": "related-concepts",
+          "surface": "Average Rate of Change",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-continuity",
+          "fromSection": "related-concepts",
+          "surface": "continuous function",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-derivative",
+          "fromSection": "related-concepts",
+          "surface": "Derivatives",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-inflection-points",
+          "fromSection": "related-concepts",
+          "surface": "Concavity and inflection points",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-limit",
+          "fromSection": "related-concepts",
+          "surface": "limits",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-mean-value-theorem",
+          "fromSection": "related-concepts",
+          "surface": "Mean Value Theorem",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-newtons-method",
+          "fromSection": "related-concepts",
+          "surface": "Newton's Method",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-riemann-sum",
+          "fromSection": "related-concepts",
+          "surface": "Riemann sums",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "calculus-tangent-line",
+          "fromSection": "what-is-optimization",
+          "surface": "tangent line",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "linear-algebra-matrix-trace": {
       "slug": "matrix-trace",
@@ -51862,7 +55598,27 @@
       "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-columns/index.jsx",
       "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
       "relatedTerms": [],
-      "note": "Created 2026-09-21 with the page shell and content pass. Tabs: ColumnPictureVisualizer (Av) now, MatrixProductVisualizer reading=columns to follow. Line 2 term scan and Line 3 pairs not run yet; relatedTerms is empty rather than pending because no scan has been performed."
+      "note": "Created 2026-09-21. Line 1 done 2026-09-21. Line 2 term scan NOT run - relatedTerms is still empty and is Line 2's queue; the canonical scanner (line2-scan.py) is not in the repo. Line 3 pairs not run yet.",
+      "diagramsModule": "app/components/linear-algebra/multiplication/vectorPictureDiagrams.js",
+      "diagramStates": [
+        "emptyPlane",
+        "oneCoordinate",
+        "bothCoordinates",
+        "firstScaledPiece",
+        "allPieces"
+      ],
+      "line1": {
+        "done": "2026-09-21",
+        "states": 10,
+        "sections": 14,
+        "units": 4,
+        "anchors": 29,
+        "orphans": 0,
+        "verification": "STATIC + RENDERED - esbuild parse; comment-masked anchor scan (29 on-page links, 0 orphans, 0 duplicate ids, no math or bold in any link label); dev server 200 with 14 <section id> in the DOM, 5 frozen SVGs, 0 orphan hrefs, KaTeX rendered, no error overlay; and a node exercise of vectorPictureDiagrams that recovers the plot transform from each SVG's own tick labels and inverts the drawn endpoints, asserting the walk [4,2] -> [3,4] -> [12,4] and the resultant at (12,4).",
+        "wiring": "C - ColumnPictureVisualizer had no explanations prop. Added additively as `explanations = null` plus a `stateKey` useMemo lifted out of the existing narration switch (setup / term / termComplete / regroup / summary / compute); the matched entry is appended to that step's narration line, which already runs through processContent.",
+        "note": "6 states on the vector tab plus 4 on the matrix-by-matrix tab (MatrixProductVisualizer, reading=columns), which are routed to the single existing building-ab-by-columns section rather than given sections of their own - that tab is a secondary reading on this page. 4 units for 5 figures: one-product-at-a-time carries the two dashed-line states (one coordinate known, then both) as a vertical pair, because they are one argument. summary and compute share a figure - the plane is complete at step 10 and step 11 only changes the algebra.",
+        "structure": "Original 9 sections keep their ids AND relative order; 5 inserted (the-empty-bracket, one-product-at-a-time, lifting-out-a-column, the-statement-and-the-arithmetic, running-the-tool). generating-new-numbers and reading-the-plane already existed and serve as control/theory targets, so only one new control section was needed. All 8 How-to-use items now end in an on-page link; none did before."
+      }
     },
     "linear-algebra-matrix-multiplication-rows": {
       "slug": "matrix-multiplication-rows",
@@ -51871,7 +55627,27 @@
       "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-rows/index.jsx",
       "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
       "relatedTerms": [],
-      "note": "Created 2026-09-21. Tabs: RowPictureVisualizer (v-transpose A) and MatrixProductVisualizer reading=rows. Line 2 term scan and Line 3 pairs not run yet."
+      "note": "Created 2026-09-21. Line 1 done 2026-09-21. Line 2 term scan NOT run - relatedTerms is still empty and is Line 2's queue; the canonical scanner (line2-scan.py) is not in the repo. Line 3 pairs not run yet.",
+      "diagramsModule": "app/components/linear-algebra/multiplication/vectorPictureDiagrams.js",
+      "diagramStates": [
+        "emptyPlane",
+        "oneCoordinate",
+        "bothCoordinates",
+        "firstScaledPiece",
+        "allPieces"
+      ],
+      "line1": {
+        "done": "2026-09-21",
+        "states": 10,
+        "sections": 14,
+        "units": 4,
+        "anchors": 32,
+        "orphans": 0,
+        "verification": "STATIC + RENDERED - esbuild parse; comment-masked anchor scan (32 on-page links, 0 orphans, 0 duplicate ids, no math or bold in any link label); dev server 200 with 14 <section id> in the DOM, 5 frozen SVGs, 0 orphan hrefs, KaTeX rendered, no error overlay; and a node exercise of vectorPictureDiagrams that recovers the plot transform from each SVG's own tick labels and inverts the drawn endpoints, asserting the walk [4,2] -> [3,4] -> [12,4] and the resultant at (12,4).",
+        "wiring": "C - RowPictureVisualizer had no explanations prop. Added additively as `explanations = null` plus a `stateKey` useMemo lifted out of the existing narration switch, identical in shape to the columns page (the two components are exact mirrors).",
+        "note": "6 states on the vector tab plus 4 on the matrix-by-matrix tab (reading=rows), routed to building-ab-by-rows. Same 4 units / 5 figures split as the columns page. Because this page uses the transpose of the columns page's matrix with the same weights, the frozen walk is numerically identical - [0,0] -> [4,2] -> [3,4] -> [12,4] - which the-statement-and-the-arithmetic now states explicitly instead of leaving it to look like a coincidence.",
+        "structure": "Original 9 sections keep their ids AND relative order; 5 inserted, mirroring the columns page section for section. All 9 How-to-use items now end in an on-page link; none did before."
+      }
     },
     "linear-algebra-matrix-multiplication-rows-columns": {
       "slug": "matrix-multiplication-rows-columns",

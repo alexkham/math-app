@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionLimit from '../../../../app/components/functions/limit/FunctionLimit'
 import functionLimitDiagrams from '../../../../app/components/functions/limit/functionLimitDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,19 +523,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Limit at a point** — the value $f(x)$ approaches as $x$ approaches $c$, written $\\lim_{x \\to c} f(x)$. The limit is about the **approach**, not the value $f(c)$ itself.
+      content: `[Limit at a point](!/calculus/limits#3) — the value $f(x)$ approaches as $x$ approaches $c$, written $\\lim_{x \\to c} f(x)$. The limit is about the **approach**, not the value $f(c)$ itself.
 
-**Left limit** — $L^{-} = \\lim_{x \\to c^{-}} f(x)$. The value approached from values smaller than $c$.
+[Left limit](!/calculus/limits/one-sided#1) — $L^{-} = \\lim_{x \\to c^{-}} f(x)$. The value approached from values smaller than $c$.
 
-**Right limit** — $L^{+} = \\lim_{x \\to c^{+}} f(x)$. The value approached from values larger than $c$.
+[Right limit](!/calculus/limits/one-sided#2) — $L^{+} = \\lim_{x \\to c^{+}} f(x)$. The value approached from values larger than $c$.
 
-**Two-sided limit** — exists exactly when $L^{-}$ and $L^{+}$ are both finite and equal. The common value is the limit.
+[Two-sided limit](!/calculus/limits#3) — exists exactly when $L^{-}$ and $L^{+}$ are both finite and equal. The common value is the limit.
 
-**DNE** — abbreviation for **does not exist**. Used for limits when the one-sided limits disagree, one is infinite, or the function oscillates.
+**DNE** — abbreviation for **does not exist**. Used for [limits](!/calculus/limits#1) when the [one-sided limits](!/calculus/limits/one-sided#1) disagree, one is infinite, or the function oscillates.
 
-**Removable discontinuity** — the two-sided limit exists but $f(c)$ is either undefined or different from the limit. Patching $f(c)$ would restore continuity.
+[Removable discontinuity](!/calculus/limits/continuity#5) — the two-sided limit exists but $f(c)$ is either undefined or different from the limit. Patching $f(c)$ would restore [continuity](!/calculus/limits/continuity#2).
 
-**Vertical asymptote** — a value of $c$ where at least one one-sided limit is $+\\infty$ or $-\\infty$.`,
+[Vertical asymptote](!/calculus/limits/infinity#8) — a value of $c$ where at least one one-sided limit is $+\\infty$ or $-\\infty$.`,
       before: ``,
       after: ``,
       link: '',
@@ -749,7 +751,7 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Continuity** — a function is continuous at $c$ exactly when the limit at $c$ exists, $f(c)$ is defined, and they agree. The limit is one of the three conditions in the continuity definition. See the **continuity checker**.
+      content: `**Continuity** — a function is continuous at $c$ exactly when the limit at $c$ exists, $f(c)$ is defined, and they agree. The limit is one of the three conditions in the continuity definition. See the [continuity checker](!/calculus/visual-tools/continuity).
 
 **Limit laws** — the algebraic rules for combining limits: limits of sums, products, quotients, compositions. Most limit computations reduce to applying the laws and evaluating at the point.
 
@@ -759,9 +761,19 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
 
 **Squeeze theorem** — if $g(x) \\le f(x) \\le h(x)$ near $c$ and $\\lim g = \\lim h = L$, then $\\lim f = L$. Useful for oscillating functions trapped between bounds.
 
-**Derivatives** — defined as a limit of secant slopes. See the **derivative visualizer**.
+[Derivatives](!/calculus/visual-tools/derivative) — defined as a limit of secant slopes. See the **derivative visualizer**.
 
-**Definite integrals** — defined as limits of Riemann sums. See the **Riemann sum visualizer**.`,
+**Definite integrals** — defined as limits of [Riemann sums](!/calculus/integrals/definite#1). See the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).
+
+[Average Rate of Change](!/calculus/visual-tools/average-rate-of-change) — shrinking the interval turns the average rate into a limit, which is how the [derivative](!/calculus/derivatives#1) is defined.
+
+[Fundamental Theorem of Calculus](!/calculus/visual-tools/fundamental-theorem) — the definite integral is itself a limit, of Riemann sums rather than of secant slopes.
+
+[Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — the theorem is stated for a derivative, and every derivative is a limit.
+
+[Optimization](!/calculus/visual-tools/optimization) — limits at infinity decide whether a function has a global extremum or merely a local one.
+
+[Tangent Line at a Point](!/calculus/visual-tools/tangent-line) — the [tangent line](!/calculus/derivatives/graph-analysis#2) is the limiting position of secant lines through the point.`,
       before: ``,
       after: ``,
       link: '',
@@ -1008,6 +1020,7 @@ That is why one-sided limits are worth having as their own notion. $\lim_{x \to 
 
   return {
     props: {
+      relatedTools: getRelatedTools('calculus-limit'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -1030,7 +1043,7 @@ That is why one-sided limits are worth having as their own notion. $\lim_{x \to 
   }
 }
 
-export default function LimitExplorer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function LimitExplorer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1153,6 +1166,7 @@ export default function LimitExplorer({seoData, sectionsContent, stateUnits, exp
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

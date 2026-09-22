@@ -97,6 +97,25 @@ ALIASES = {
         'polar-rectangular': ['polar-rectangular', 'polar and rectangular', 'polar rectangular converter',
                               'polar form', 'rectangular form', 'polar-rectangular converter'],
     },
+    'calculus': {
+        'calculus-average-rate-of-change': ['average rate of change', 'average rate', 'secant slope'],
+        'calculus-continuity': ['continuity', 'continuity checker', 'continuous function',
+                                'discontinuity', 'discontinuities'],
+        'calculus-derivative': ['derivative', 'derivatives', 'derivative explorer',
+                                'instantaneous rate of change'],
+        'calculus-fundamental-theorem': ['fundamental theorem of calculus', 'fundamental theorem',
+                                         'ftc'],
+        'calculus-inflection-points': ['inflection point', 'inflection points', 'concavity',
+                                       'concavity and inflection points', 'second derivative test'],
+        'calculus-limit': ['limit', 'limits', 'limit explorer', 'one-sided limit', 'one-sided limits'],
+        'calculus-mean-value-theorem': ['mean value theorem', 'mvt', "rolle's theorem"],
+        'calculus-newtons-method': ["newton's method", 'newton method', 'newton-raphson',
+                                    "newton's method visualizer"],
+        'calculus-optimization': ['optimization', 'critical point', 'critical points',
+                                  'first derivative test', 'maxima and minima', 'extrema'],
+        'calculus-riemann-sum': ['riemann sum', 'riemann sums', 'definite integral', 'area under the curve'],
+        'calculus-tangent-line': ['tangent line', 'tangent lines', 'tangent line at a point'],
+    },
 }
 
 SKIP = [

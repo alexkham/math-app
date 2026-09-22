@@ -1071,7 +1071,7 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
   variant="light"
 />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

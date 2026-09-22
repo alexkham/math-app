@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionDerivative from '../../../../app/components/functions/derivative/FunctionDerivative'
 import functionDerivativeDiagrams from '../../../../app/components/functions/derivative/functionDerivativeDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,15 +523,15 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Derivative** — the instantaneous rate of change of $f$ at a point, written $f'(x)$ or $\\frac{df}{dx}$. Equal to the slope of the tangent line to $f$ at that point.
+      content: `[Derivative](!/calculus/definitions#derivative) — the [instantaneous rate of change](!/calculus/derivatives/function#6) of $f$ at a point, written $f'(x)$ or $\\frac{df}{dx}$. Equal to the slope of the [tangent line](!/calculus/visual-tools/tangent-line) to $f$ at that point.
 
-**Tangent line** — the straight line that just touches the curve of $f$ at a single point, sharing the same slope as $f$ there. Its slope is $f'(x_0)$.
+[Tangent line](!/calculus/definitions#tangent_line) — the straight line that just touches the curve of $f$ at a single point, sharing the same slope as $f$ there. Its slope is $f'(x_0)$.
 
-**f prime as a function** — the derivative $f'$ is a function of $x$ in its own right. Its value at any $x$ is the slope of $f$ at that same $x$.
+**f prime as a function** — the [derivative](!/calculus/derivatives#1) $f'$ is a function of $x$ in its own right. Its value at any $x$ is the slope of $f$ at that same $x$.
 
-**Critical point** — a value of $x$ where $f'(x) = 0$ or $f'(x)$ is undefined. Local maxima and minima of $f$ live at critical points.
+[Critical point](!/calculus/definitions#critical_point) — a value of $x$ where $f'(x) = 0$ or $f'(x)$ is undefined. Local maxima and minima of $f$ live at [critical points](!/calculus/derivatives/graph-analysis#4).
 
-**Inflection point** — a value of $x$ where $f$ changes concavity. These are extrema of $f'$ (where $f''$ would be zero).
+[Inflection point](!/calculus/definitions#inflection_point) — a value of $x$ where $f$ changes [concavity](!/calculus/derivatives/graph-analysis#7). These are extrema of $f'$ (where $f''$ would be zero).
 
 **Closed-form derivative** — an exact symbolic formula for $f'$, like $\\frac{d}{dx}[x^2] = 2x$ or $\\frac{d}{dx}[\\sin x] = \\cos x$.`,
       before: ``,
@@ -659,7 +661,7 @@ The toggles are independent — any combination is valid. The legend below the g
 
 $$f'(x_0) = \\lim_{h \\to 0} \\frac{f(x_0 + h) - f(x_0)}{h}$$
 
-The fraction inside the limit is the **slope of the secant line** through the two nearby points $(x_0, f(x_0))$ and $(x_0 + h, f(x_0 + h))$. As $h$ shrinks to zero, the secant slope approaches the **slope of the tangent line** to $f$ at $x_0$ — the derivative.
+The fraction inside the [limit](!/calculus/limits#1) is the **slope of the secant line** through the two nearby points $(x_0, f(x_0))$ and $(x_0 + h, f(x_0 + h))$. As $h$ shrinks to zero, the [secant slope](!/calculus/visual-tools/average-rate-of-change) approaches the **slope of the tangent line** to $f$ at $x_0$ — the derivative.
 
 When the derivative exists at every $x$ in some interval, the collection of values $f'(x)$ forms a new function $f'$, called the **derivative function** of $f$.
 
@@ -717,21 +719,25 @@ Sliding $x_0$ through the tool with both curves visible makes this dictionary vi
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Limits** — the foundation derivatives are built on. The derivative is defined as a limit of secant slopes.
+      content: `[Limits](!/calculus/visual-tools/limit) — the foundation derivatives are built on. The derivative is defined as a limit of secant slopes.
 
-**Continuity** — every differentiable function is continuous, though not the other way around. The absolute value function is continuous at $0$ but not differentiable there.
+[Continuity](!/calculus/visual-tools/continuity) — every differentiable function is continuous, though not the other way around. The absolute value function is continuous at $0$ but not differentiable there.
 
 **Differentiation rules** — power rule, product rule, quotient rule, chain rule. The mechanical toolkit for computing derivatives without going back to the limit definition.
 
-**Second derivative** — the derivative of $f'$ itself, written $f''$. Measures concavity and acceleration.
+**Second derivative** — the derivative of $f'$ itself, written $f''$. Measures [concavity](!/calculus/visual-tools/inflection-points) and acceleration.
 
-**Critical points and optimization** — finding where $f'(x) = 0$ to locate maxima and minima. The basis of single-variable optimization.
+**Critical points and optimization** — finding where $f'(x) = 0$ to locate [maxima and minima](!/calculus/visual-tools/optimization). The basis of single-variable optimization.
 
-**Mean Value Theorem** — guarantees that on a smooth interval the average slope equals the instantaneous slope at some point.
+[Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — guarantees that on a smooth interval the average slope equals the instantaneous slope at some point.
 
 **Integrals** — the inverse operation. Integration recovers $f$ from $f'$ up to a constant.
 
-**Visual tools for calculus** — other interactive visualizers covering limits, continuity, Riemann sums, and integrals.`,
+**Visual tools for calculus** — other interactive visualizers covering limits, [continuity](!/calculus/limits/continuity#2), [Riemann sums](!/calculus/visual-tools/riemann-sum), and integrals.
+
+[Fundamental Theorem of Calculus](!/calculus/visual-tools/fundamental-theorem) — differentiating an accumulation function gives the [integrand](!/calculus/integrals#3) back, which is the theorem's first half.
+
+[Newton's Method](!/calculus/visual-tools/newtons-method) — each iteration divides by $f'(x_n)$, so the method is the derivative used as a root-finding engine.`,
       before: ``,
       after: ``,
       link: '',
@@ -741,7 +747,7 @@ Sliding $x_0$ through the tool with both curves visible makes this dictionary vi
       title: `Identity: a Constant Derivative`,
       content: `$f(x) = x$ is the straight line through the origin at 45 degrees, and its derivative is the constant $f'(x) = 1$. On the graph that shows up as a horizontal dashed line sitting at height 1 — the same value no matter where $x_0$ goes.
 
-At $x_0 = 1$ the readings are $f(x_0) = 1$ and $f'(x_0) = 1$. The tangent to $f$ is the line itself, because a straight line is its own best linear approximation everywhere.`,
+At $x_0 = 1$ the readings are $f(x_0) = 1$ and $f'(x_0) = 1$. The tangent to $f$ is the line itself, because a straight line is its own best [linear approximation](!/calculus/derivatives/differentials#3) everywhere.`,
       before: ``,
       after: `Drag $x_0$ anywhere and the tangent never tilts. That is what a constant derivative means: the rate of change does not depend on position.
 
@@ -978,6 +984,7 @@ That contrast is worth holding next to the [exponential](!#the-exponential), whi
 
   return {
     props: {
+      relatedTools: getRelatedTools('calculus-derivative'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -1000,7 +1007,7 @@ That contrast is worth holding next to the [exponential](!#the-exponential), whi
   }
 }
 
-export default function DerivativeVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function DerivativeVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1123,6 +1130,7 @@ export default function DerivativeVisualizer({seoData, sectionsContent, stateUni
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

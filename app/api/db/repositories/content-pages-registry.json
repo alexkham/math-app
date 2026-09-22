@@ -577,7 +577,7 @@
       }
     },
     "operationA": {
-      "linearAlgebraMapped": "2026-09-21",
+      "linearAlgebraMapped": "2026-09-22",
       "note": "Stage 1 mapping only: identity, section inventory and related-terms with candidate tools attached. No content page was edited, no link or demonstration unit planted, no $conceptToolMap decision recorded - those are Stage 2/3 and run one page per pass. /linear-algebra/definitions and /formulas are excluded as Operation B territory.",
       "linearAlgebraLinked": "2026-09-13"
     }
@@ -20698,6 +20698,3169 @@
             "i-powers",
             "multiplication",
             "polar-rectangular"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives": {
+      "slug": "derivatives",
+      "name": "Derivatives: Definition, Rules & Techniques",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "roadmap"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "average rate of change",
+          "entity": "average_rate_of_change",
+          "sections": [
+            "1",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "concavity",
+          "entity": "concavity",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "1",
+            "5",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "critical points",
+          "entity": "critical_point",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-inflection-points",
+            "calculus-newtons-method",
+            "calculus-optimization",
+            "calculus-tangent-line",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "roadmap"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "differential",
+          "entity": "differential",
+          "sections": [
+            "2",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "discontinuity",
+          "entity": "discontinuity",
+          "sections": [
+            "1",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "inflection points",
+          "entity": "inflection_point",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-inflection-points",
+            "calculus-mean-value-theorem",
+            "calculus-optimization",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "l'hôpital's rule",
+          "entity": "indeterminate_form",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "5",
+            "6",
+            "8",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "1",
+            "3",
+            "5",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "taylor series",
+          "entity": "higher_order_derivative",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/common": {
+      "slug": "derivatives/common",
+      "name": "Common Derivatives: Formulas & Examples",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/common/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/differentiability": {
+      "slug": "derivatives/differentiability",
+      "name": "Differentiability: Corners, Cusps & Continuity",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/differentiability/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "notation",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "notation",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "differentiability",
+          "entity": "differentiability",
+          "sections": [
+            "1",
+            "notation",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "discontinuities",
+          "entity": "discontinuity",
+          "sections": [
+            "6",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "3",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "1",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/differentials": {
+      "slug": "derivatives/differentials",
+      "name": "Differentials: Linear Approximation & Error",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/differentials/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "notation",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "partial derivatives",
+          "entity": "partial_derivative",
+          "sections": [
+            "6"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "notation",
+            "5",
+            "6",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "differentials",
+          "entity": "differential",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "notation",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "higher-order derivative",
+          "entity": "higher_order_derivative",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "substitution rule",
+          "entity": "indefinite_integral",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "2",
+            "3",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/function": {
+      "slug": "derivatives/function",
+      "name": "Derivatives as Functions: Graphing & Properties",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/function/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "notation",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "concavity",
+          "entity": "concavity",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "corners",
+          "entity": "differentiability",
+          "sections": [
+            "1",
+            "5",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "derivative limit definition",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "discontinuities",
+          "entity": "discontinuity",
+          "sections": [
+            "1",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "inflection points",
+          "entity": "inflection_point",
+          "sections": [
+            "notation",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-inflection-points",
+            "calculus-mean-value-theorem",
+            "calculus-optimization",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "local extremum",
+          "entity": "local_extremum",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/graph-analysis": {
+      "slug": "derivatives/graph-analysis",
+      "name": "Graph Analysis with Derivatives: Extrema & Curves",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/graph-analysis/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "notation",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "overview"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "concavity from second derivative",
+          "entity": "concavity",
+          "sections": [
+            "7",
+            "8",
+            "9",
+            "overview"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "corners",
+          "entity": "differentiability",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "critical point condition",
+          "entity": "critical_point",
+          "sections": [
+            "4",
+            "5",
+            "6",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-inflection-points",
+            "calculus-newtons-method",
+            "calculus-optimization",
+            "calculus-tangent-line",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "7",
+            "8",
+            "9",
+            "10",
+            "overview"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "discontinuities",
+          "entity": "discontinuity",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "extreme value theorem",
+          "entity": "extreme_value_theorem",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "inflection point",
+          "entity": "inflection_point",
+          "sections": [
+            "6",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-inflection-points",
+            "calculus-mean-value-theorem",
+            "calculus-optimization",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "instantaneous rate of change",
+          "entity": "instantaneous_rate_of_change",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-mean-value-theorem",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "linear approximation",
+          "entity": "differential",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "local extremum",
+          "entity": "local_extremum",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "second derivative test",
+          "entity": "second_derivative_test",
+          "sections": [
+            "4",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "sign of first derivative",
+          "entity": "first_derivative_test",
+          "sections": [
+            "notation",
+            "4",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-inflection-points"
+          ]
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "1",
+            "2",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/higher-order": {
+      "slug": "derivatives/higher-order",
+      "name": "Higher Order Derivatives: Second, Third & nth",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/higher-order/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "notation",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "overview"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "concavity",
+          "entity": "concavity",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "corners",
+          "entity": "differentiability",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "critical points",
+          "entity": "critical_point",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-inflection-points",
+            "calculus-newtons-method",
+            "calculus-optimization",
+            "calculus-tangent-line",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "notation",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9",
+            "overview"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "differential",
+          "entity": "differential",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "inflection points",
+          "entity": "inflection_point",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-inflection-points",
+            "calculus-mean-value-theorem",
+            "calculus-optimization",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "taylor series",
+          "entity": "higher_order_derivative",
+          "sections": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/rules": {
+      "slug": "derivatives/rules",
+      "name": "Derivative Rules: Formulas & Theorems",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/rules/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "overview"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivatives",
+          "entity": "antiderivative",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "average rate of change",
+          "entity": "average_rate_of_change",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "constant rule (derivatives)",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "definite integrals",
+          "entity": "definite_integral",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "differentiability",
+          "entity": "differentiability",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "indeterminate forms",
+          "entity": "indeterminate_form",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "instantaneous rate of change",
+          "entity": "instantaneous_rate_of_change",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-mean-value-theorem",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "tangent line",
+          "entity": "tangent_line",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/special": {
+      "slug": "derivatives/special",
+      "name": "Special Derivatives: Inverse Trig & Hyperbolic",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/special/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivative",
+          "entity": "antiderivative",
+          "sections": [
+            "4",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "asymptotes",
+          "entity": "asymptote",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "derivative of arccosine",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "one-sided derivatives",
+          "entity": "differentiability",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        }
+      ]
+    },
+    "calculus/derivatives/techniques": {
+      "slug": "derivatives/techniques",
+      "name": "Differentiation Techniques: Implicit & More",
+      "section": "calculus",
+      "pagePath": "pages/calculus/derivatives/techniques/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "notation",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "overview"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "concavity",
+          "entity": "concavity",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "notation",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "higher-order derivatives",
+          "entity": "higher_order_derivative",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "tangent lines",
+          "entity": "tangent_line",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals": {
+      "slug": "integrals",
+      "name": "Integrals: Definite, Indefinite & Techniques",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivatives",
+          "entity": "antiderivative",
+          "sections": [
+            "2",
+            "5",
+            "6",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "definite integrals",
+          "entity": "definite_integral",
+          "sections": [
+            "2",
+            "3",
+            "4",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "5",
+            "7",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "differential",
+          "entity": "differential",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-mean-value-theorem"
+          ]
+        },
+        {
+          "term": "improper integral",
+          "entity": "improper_integral",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "indefinite integrals",
+          "entity": "indefinite_integral",
+          "sections": [
+            "2",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        },
+        {
+          "term": "integrand",
+          "entity": "integrand",
+          "sections": [
+            "3",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "2",
+            "3",
+            "4",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "riemann sums",
+          "entity": "riemann_sum",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit",
+            "calculus-riemann-sum",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "signed area",
+          "entity": "signed_area",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals/definite": {
+      "slug": "integrals/definite",
+      "name": "Definite Integrals: Riemann Sums & Properties",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/definite/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivative",
+          "entity": "antiderivative",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "average value of a function",
+          "entity": "average_value_of_a_function",
+          "sections": [
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "definite integral",
+          "entity": "definite_integral",
+          "sections": [
+            "1",
+            "2",
+            "4",
+            "5",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "integrands",
+          "entity": "integrand",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "4",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "mean value theorem",
+          "entity": "derivative",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "riemann sums",
+          "entity": "riemann_sum",
+          "sections": [
+            "1",
+            "6",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit",
+            "calculus-riemann-sum",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "total unsigned area",
+          "entity": "signed_area",
+          "sections": [
+            "2",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals/evaluating": {
+      "slug": "integrals/evaluating",
+      "name": "Evaluating Integrals: Strategy & Examples",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/evaluating/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivative",
+          "entity": "antiderivative",
+          "sections": [
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "discontinuities",
+          "entity": "discontinuity",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "even function symmetry",
+          "entity": "definite_integral",
+          "sections": [
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "indefinite integrals",
+          "entity": "indefinite_integral",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        },
+        {
+          "term": "integrand",
+          "entity": "integrand",
+          "sections": [
+            "1",
+            "3",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals/improper": {
+      "slug": "integrals/improper",
+      "name": "Improper Integrals: Convergence & Tests",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/improper/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "notation",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "1",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "improper integral (infinite limits)",
+          "entity": "improper_integral",
+          "sections": [
+            "2",
+            "notation",
+            "4",
+            "5",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "integrand",
+          "entity": "integrand",
+          "sections": [
+            "1",
+            "4",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "notation",
+            "4",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals/indefinite": {
+      "slug": "integrals/indefinite",
+      "name": "Indefinite Integrals: Antiderivatives & Formulas",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/indefinite/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivatives",
+          "entity": "antiderivative",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "definite integrals",
+          "entity": "definite_integral",
+          "sections": [
+            "5",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "indefinite integrals",
+          "entity": "indefinite_integral",
+          "sections": [
+            "2",
+            "5",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        },
+        {
+          "term": "integrands",
+          "entity": "integrand",
+          "sections": [
+            "5",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals/rules": {
+      "slug": "integrals/rules",
+      "name": "Integration Rules & Fundamental Theorem",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/rules/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "additivity over intervals",
+          "entity": "definite_integral",
+          "sections": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "antiderivatives",
+          "entity": "antiderivative",
+          "sections": [
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "integrands",
+          "entity": "integrand",
+          "sections": [
+            "1",
+            "5",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "4",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "riemann sum",
+          "entity": "riemann_sum",
+          "sections": [
+            "4",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit",
+            "calculus-riemann-sum",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "sum and difference rule (integrals)",
+          "entity": "indefinite_integral",
+          "sections": [
+            "1",
+            "2",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals/special": {
+      "slug": "integrals/special",
+      "name": "Special Integrals: Essential Formulas",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/special/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivative",
+          "entity": "antiderivative",
+          "sections": [
+            "3",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "derivatives",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "integrands",
+          "entity": "integrand",
+          "sections": [
+            "6",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "reciprocal antiderivative",
+          "entity": "indefinite_integral",
+          "sections": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        }
+      ]
+    },
+    "calculus/integrals/techniques": {
+      "slug": "integrals/techniques",
+      "name": "Integration Techniques: Substitution, Parts & More",
+      "section": "calculus",
+      "pagePath": "pages/calculus/integrals/techniques/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "notation",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "antiderivatives",
+          "entity": "antiderivative",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "definite integrals",
+          "entity": "definite_integral",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "integrands",
+          "entity": "integrand",
+          "sections": [
+            "1",
+            "2",
+            "notation",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-riemann-sum"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "2"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "substitution rule",
+          "entity": "indefinite_integral",
+          "sections": [
+            "2",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem"
+          ]
+        }
+      ]
+    },
+    "calculus/limits": {
+      "slug": "limits",
+      "name": "Limits: Definition, Rules & Evaluation Techniques",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "1",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "definite integral",
+          "entity": "definite_integral",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "discontinuity",
+          "entity": "discontinuity",
+          "sections": [
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "indeterminate forms",
+          "entity": "indeterminate_form",
+          "sections": [
+            "5",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "3",
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "riemann sums",
+          "entity": "riemann_sum",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-fundamental-theorem",
+            "calculus-limit",
+            "calculus-riemann-sum",
+            "calculus-riemann-sum"
+          ]
+        }
+      ]
+    },
+    "calculus/limits/continuity": {
+      "slug": "limits/continuity",
+      "name": "Continuity: Definition, Types & IVT",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/continuity/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "notation",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "continuity at a point",
+          "entity": "continuity",
+          "sections": [
+            "2",
+            "10",
+            "11",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "discontinuities",
+          "entity": "discontinuity",
+          "sections": [
+            "1",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "2",
+            "4",
+            "5",
+            "8",
+            "10",
+            "11",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "4",
+            "6",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        }
+      ]
+    },
+    "calculus/limits/evaluating": {
+      "slug": "limits/evaluating",
+      "name": "Evaluating Limits: Techniques & Examples",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/evaluating/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "notation",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "indeterminate forms",
+          "entity": "indeterminate_form",
+          "sections": [
+            "3",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "notation",
+            "10",
+            "11",
+            "12",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        }
+      ]
+    },
+    "calculus/limits/infinity": {
+      "slug": "limits/infinity",
+      "name": "Limits and Infinity: Asymptotes & End Behavior",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/infinity/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "notation",
+        "12",
+        "13"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "horizontal asymptote condition",
+          "entity": "asymptote",
+          "sections": [
+            "3",
+            "8",
+            "notation",
+            "12",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "7",
+            "8",
+            "9",
+            "10",
+            "notation",
+            "12",
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/limits/one-sided": {
+      "slug": "limits/one-sided",
+      "name": "One-Sided Limits: Left & Right Approach",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/one-sided/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-inflection-points",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "discontinuities",
+          "entity": "discontinuity",
+          "sections": [
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "one-sided continuity",
+          "entity": "continuity",
+          "sections": [
+            "10"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "one-sided derivatives",
+          "entity": "differentiability",
+          "sections": [
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "3",
+            "4",
+            "6",
+            "7",
+            "11",
+            "12"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        }
+      ]
+    },
+    "calculus/limits/rules": {
+      "slug": "limits/rules",
+      "name": "Limit Rules: Laws & Theorems",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/rules/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "13"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "indeterminate form",
+          "entity": "indeterminate_form",
+          "sections": [
+            "4",
+            "6",
+            "7",
+            "15"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/limits/special": {
+      "slug": "limits/special",
+      "name": "Special Limits: sin(x)/x, e^x, and More",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/special/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "derivatives",
+          "entity": "derivative",
+          "sections": [
+            "1",
+            "2",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "indeterminate forms",
+          "entity": "indeterminate_form",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limits",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        }
+      ]
+    },
+    "calculus/limits/two-sided": {
+      "slug": "limits/two-sided",
+      "name": "Two-Sided Limits: Definition & Existence",
+      "section": "calculus",
+      "pagePath": "pages/calculus/limits/two-sided/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "notation",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "continuity",
+          "entity": "continuity",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-derivative",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "derivative",
+          "entity": "derivative",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-average-rate-of-change",
+            "calculus-average-rate-of-change",
+            "calculus-derivative",
+            "calculus-limit",
+            "calculus-mean-value-theorem",
+            "calculus-newtons-method",
+            "calculus-optimization"
+          ]
+        },
+        {
+          "term": "discontinuity",
+          "entity": "discontinuity",
+          "sections": [
+            "4"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity",
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "indeterminate form",
+          "entity": "indeterminate_form",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-limit"
+          ]
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "1",
+            "2",
+            "notation",
+            "4",
+            "5",
+            "7",
+            "8",
+            "9"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-derivative",
+            "calculus-fundamental-theorem",
+            "calculus-mean-value-theorem",
+            "calculus-riemann-sum",
+            "calculus-tangent-line"
+          ]
+        },
+        {
+          "term": "one-sided derivative",
+          "entity": "differentiability",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
+          ]
+        },
+        {
+          "term": "one-sided limits",
+          "entity": "one_sided_limit",
+          "sections": [
+            "2",
+            "4",
+            "7"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "calculus-continuity"
           ]
         }
       ]

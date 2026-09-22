@@ -1,0 +1,16 @@
+{
+  "_note": "Key Terms head -> target for calculus, where the head's wording matches neither a definitions entry name nor a lesson section title. A value starting with / is a lesson URL; anything else is a definitions entry id. '<registry key>:<term>' overrides the plain term for one tool. Terms deliberately absent stay bold: they are page-local scaffolding for a specific tool (iterate, Newton step, initial guess, concavity gap, DNE, f prime as a function, accumulator function, sample point, convergence order, closed-form derivative) and a definition would add nothing.",
+
+  "left limit": "/calculus/limits/one-sided#1",
+  "left-hand limit": "/calculus/limits/one-sided#1",
+  "right limit": "/calculus/limits/one-sided#2",
+  "right-hand limit": "/calculus/limits/one-sided#2",
+  "limit at a point": "/calculus/limits#3",
+  "secant line": "/calculus/derivatives#1",
+  "concave up": "/calculus/derivatives/graph-analysis#7",
+  "concave down": "/calculus/derivatives/graph-analysis#7",
+  "local maximum": "/calculus/derivatives/graph-analysis#6",
+  "local minimum": "/calculus/derivatives/graph-analysis#6",
+  "rolle's theorem": "/calculus/derivatives/rules#8",
+  "quadratic convergence": "/calculus/integrals/improper#4"
+}

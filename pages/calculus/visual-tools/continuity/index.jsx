@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionContinuity from '../../../../app/components/functions/continuity/FunctionContinuity'
 import functionContinuityDiagrams from '../../../../app/components/functions/continuity/functionContinuityDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -523,13 +525,13 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `**Continuity at a point** — the function $f$ is continuous at $c$ when three conditions all hold: $f(c)$ is defined, $\\lim_{x \\to c} f(x)$ exists, and the two are equal.
 
-**One-sided limits** — the left limit $f(c^{-}) = \\lim_{x \\to c^{-}} f(x)$ and the right limit $f(c^{+}) = \\lim_{x \\to c^{+}} f(x)$. The two-sided limit exists exactly when both one-sided limits exist and agree.
+[One-sided limits](!/calculus/definitions#one_sided_limit) — the left [limit](!/calculus/limits#1) $f(c^{-}) = \\lim_{x \\to c^{-}} f(x)$ and the right limit $f(c^{+}) = \\lim_{x \\to c^{+}} f(x)$. The two-sided limit exists exactly when both [one-sided limits](!/calculus/limits/one-sided#1) exist and agree.
 
-**Removable discontinuity** — a point where the two-sided limit exists but either $f(c)$ is undefined or $f(c)$ differs from the limit. Redefining $f(c)$ to the limit value repairs the function.
+[Removable discontinuity](!/calculus/limits/continuity#5) — a point where the two-sided limit exists but either $f(c)$ is undefined or $f(c)$ differs from the limit. Redefining $f(c)$ to the limit value repairs the function.
 
-**Jump discontinuity** — a point where both one-sided limits are finite but unequal. No single value of $f(c)$ can repair it.
+[Jump discontinuity](!/calculus/limits/continuity#6) — a point where both one-sided limits are finite but unequal. No single value of $f(c)$ can repair it.
 
-**Infinite discontinuity** — a point where at least one one-sided limit is $+\\infty$ or $-\\infty$. Typically a vertical asymptote.
+[Infinite discontinuity](!/calculus/limits/continuity#7) — a point where at least one one-sided limit is $+\\infty$ or $-\\infty$. Typically a vertical [asymptote](!/calculus/limits/infinity#3).
 
 **Continuous on an interval** — $f$ is continuous at every point in the interval.`,
       before: ``,
@@ -697,7 +699,7 @@ For a tool focused on the limit step alone — including an $\\varepsilon$ slide
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Limits** — the foundation continuity is built on. One-sided limits and two-sided limits, formal definitions, and limit laws.
+      content: `**Limits** — the foundation continuity is built on. [One-sided limits](!/calculus/visual-tools/limit) and two-sided limits, formal definitions, and limit laws.
 
 **Discontinuity** — full classification of removable, jump, infinite, and essential discontinuities, with examples of each.
 
@@ -709,7 +711,17 @@ For a tool focused on the limit step alone — including an $\\varepsilon$ slide
 
 **Piecewise functions** — the most common source of jump and removable discontinuities. See the **piecewise function builder** for an interactive view.
 
-**Asymptotes** — vertical asymptotes are infinite discontinuities; horizontal asymptotes describe end behavior.`,
+**Asymptotes** — vertical asymptotes are infinite discontinuities; horizontal asymptotes describe end behavior.
+
+[Derivative](!/calculus/visual-tools/derivative) — [differentiability](!/calculus/derivatives/differentiability#1) is the stronger condition: every differentiable function is continuous, and the explorer shows where that implication stops.
+
+[Fundamental Theorem of Calculus](!/calculus/visual-tools/fundamental-theorem) — the theorem needs a continuous [integrand](!/calculus/integrals#3), so the checker decides in advance whether it applies.
+
+[Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — continuity on the closed interval is the first of the theorem's two hypotheses.
+
+[Optimization](!/calculus/visual-tools/optimization) — the [Extreme Value Theorem](!/calculus/derivatives/graph-analysis#10) guarantees a maximum and a minimum only when the function is continuous on a closed interval.
+
+[Riemann Sum](!/calculus/visual-tools/riemann-sum) — a continuous function on a closed interval is always integrable, which is why the sums converge.`,
       before: ``,
       after: ``,
       link: '',
@@ -937,6 +949,7 @@ That combination is entirely ordinary. "Continuous" is a statement about a singl
 
   return {
     props: {
+      relatedTools: getRelatedTools('calculus-continuity'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -959,7 +972,7 @@ That combination is entirely ordinary. "Continuous" is a statement about a singl
   }
 }
 
-export default function ContinuityChecker({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function ContinuityChecker({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1081,6 +1094,7 @@ export default function ContinuityChecker({seoData, sectionsContent, stateUnits,
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

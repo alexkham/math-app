@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionConcavity from '../../../../app/components/calculus/visualizers/FunctionConcavity'
 import functionConcavityDiagrams from '../../../../app/components/calculus/visualizers/functionConcavityDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -522,17 +524,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Concavity** — How a curve bends. A curve is concave up if it cups upward like a smile; concave down if it caps downward like a frown.
+      content: `[Concavity](!/calculus/definitions#concavity) — How a curve bends. A curve is concave up if it cups upward like a smile; concave down if it caps downward like a frown.
 
-**Second derivative $f''(x)$** — The derivative of $f'$. Its sign measures concavity: positive means concave up, negative means concave down.
+[Second derivative](!/calculus/derivatives/higher-order#2) — The [derivative](!/calculus/derivatives#1) of $f'$. Its sign measures [concavity](!/calculus/derivatives/graph-analysis#7): positive means concave up, negative means concave down.
 
-**Inflection point** — A point where concavity changes — the sign of $f''$ flips as $x$ passes through the point.
+[Inflection point](!/calculus/definitions#inflection_point) — A point where concavity changes — the sign of $f''$ flips as $x$ passes through the point.
 
-**Tangent line** — The line through $P = (c, f(c))$ with slope $f'(c)$. For concave-up curves the tangent lies below the curve nearby; for concave-down, above.
+[Tangent line](!/calculus/visual-tools/tangent-line) — The line through $P = (c, f(c))$ with slope $f'(c)$. For concave-up curves the tangent lies below the curve nearby; for concave-down, above.
 
-**Concavity gap** — The region between the curve and the tangent line at $P$. Its width and direction visualize how strongly the curve bends.
+**Concavity gap** — The region between the curve and the [tangent line](!/calculus/derivatives/graph-analysis#2) at $P$. Its width and direction visualize how strongly the curve bends.
 
-This widget uses the cubic $f(x) = \\frac{1}{3}x^3 - x$, whose second derivative is $f''(x) = 2x$. The single inflection point sits exactly at $x = 0$.`,
+This widget uses the cubic $f(x) = \\frac{1}{3}x^3 - x$, whose second derivative is $f''(x) = 2x$. The single [inflection point](!/calculus/derivatives/graph-analysis#8) sits exactly at $x = 0$.`,
       before: ``,
       after: ``,
       link: '',
@@ -628,7 +630,7 @@ The size of the gap also indicates the strength of bending — wider gap, sharpe
 
 **Meaning** explains what the verdict means geometrically. A colored verdict card summarizes the result with a badge, headline, and explanation. A "why" note clarifies the connection between $f''$ and concavity in plain language. The Meaning tab opens automatically when a scenario animation finishes.
 
-**Theory** provides the formal background: the definition of concavity in terms of tangent lines, the second derivative test for concavity, the necessary-but-not-sufficient condition for inflection points, the second derivative test for extrema, and a worked breakdown of the specific function $f(x) = \\frac{1}{3}x^3 - x$.
+**Theory** provides the formal background: the definition of concavity in terms of tangent lines, the [second derivative test](!/calculus/derivatives/graph-analysis#6) for concavity, the necessary-but-not-sufficient condition for inflection points, the second derivative test for extrema, and a worked breakdown of the specific function $f(x) = \\frac{1}{3}x^3 - x$.
 
 Switch tabs at any time without interrupting the canvas.`,
       before: ``,
@@ -656,9 +658,9 @@ For a deeper treatment with proofs and worked examples, see the **concavity theo
 
 **For concavity:** On any interval where $f''$ is strictly positive, $f$ is concave up; where $f''$ is strictly negative, $f$ is concave down. The boundary case $f''(x) = 0$ is where concavity can potentially change.
 
-**For local extrema:** At a critical point $c$ where $f'(c) = 0$, the sign of $f''(c)$ classifies the critical point. Positive $f''(c)$ gives a local minimum (the curve cups up around $c$). Negative $f''(c)$ gives a local maximum (the curve caps down). When $f''(c) = 0$, the second derivative test is inconclusive and another method such as the first derivative test is needed.
+**For local extrema:** At a critical point $c$ where $f'(c) = 0$, the sign of $f''(c)$ classifies the critical point. Positive $f''(c)$ gives a local minimum (the curve cups up around $c$). Negative $f''(c)$ gives a local maximum (the curve caps down). When $f''(c) = 0$, the second derivative test is inconclusive and another method such as the [first derivative test](!/calculus/derivatives/graph-analysis#5) is needed.
 
-On this widget&apos;s example $f(x) = \\frac{1}{3}x^3 - x$, the critical points are at $x = \\pm 1$: $f''(-1) = -2$ marks a local maximum, $f''(1) = 2$ marks a local minimum.
+On this widget&apos;s example $f(x) = \\frac{1}{3}x^3 - x$, the [critical points](!/calculus/derivatives/graph-analysis#4) are at $x = \\pm 1$: $f''(-1) = -2$ marks a local maximum, $f''(1) = 2$ marks a local minimum.
 
 See the **first derivative test page** for an alternative classification method.`,
       before: ``,
@@ -686,17 +688,21 @@ This is exactly why the visualizer&apos;s Inflection scenario emphasizes the sig
       title: `Related Concepts`,
       content: `**Concavity** — General theory of how curves bend, with worked examples across multiple function families.
 
-**Second derivative** — Definition, computation rules, and geometric interpretation as the rate of change of slope.
+[Second derivative](!/calculus/visual-tools/derivative) — Definition, computation rules, and geometric interpretation as the rate of change of slope.
 
 **Critical points** — Points where $f'(x) = 0$ or is undefined; the starting set for finding maxima, minima, and inflection candidates.
 
-**First derivative test** — Sign analysis of $f'$ for classifying critical points as maxima, minima, or neither.
+[First derivative test](!/calculus/visual-tools/optimization) — Sign analysis of $f'$ for classifying critical points as maxima, minima, or neither.
 
 **Local extrema** — Local maxima and minima, the second derivative test, and the relationship to concavity.
 
-**Curve sketching** — Combining intervals of increase/decrease, concavity, asymptotes, and intercepts to draw an accurate graph of any function.
+**Curve sketching** — Combining intervals of increase/decrease, concavity, [asymptotes](!/calculus/limits/infinity#3), and intercepts to draw an accurate graph of any function.
 
-**Optimization problems** — Real-world applications where finding extrema and inflection points reveals optimal solutions.`,
+**Optimization problems** — Real-world applications where finding extrema and inflection points reveals optimal solutions.
+
+[Average Rate of Change](!/calculus/visual-tools/average-rate-of-change) — concavity is exactly what makes the average rate over an interval differ from the instantaneous rate at its midpoint.
+
+[Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — applying the theorem to $f'$ is what proves the sign of $f''$ controls concavity.`,
       before: ``,
       after: ``,
       link: '',
@@ -936,6 +942,7 @@ One more detail this scenario makes visible: the tangent at $c = 0$ is **not** h
 
    return {
       props:{
+      relatedTools: getRelatedTools('calculus-inflection-points'),
          sectionsContent,
          stateUnits,
          explanations,
@@ -957,7 +964,7 @@ One more detail this scenario makes visible: the tangent at $c = 0$ is **not** h
     }
    }
 
-export default function InflectionPointsVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function InflectionPointsVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1085,6 +1092,7 @@ export default function InflectionPointsVisualizer({seoData, sectionsContent, st
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

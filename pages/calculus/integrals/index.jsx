@@ -810,7 +810,7 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, o
      variant="light"
    />
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

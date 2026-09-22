@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionOptimization from '../../../../app/components/functions/optimization/FunctionOptimization'
 import functionOptimizationDiagrams from '../../../../app/components/functions/optimization/functionOptimizationDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,19 +523,19 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Critical point** — a value $c$ in the domain of $f$ where $f'(c) = 0$ or $f'(c)$ is undefined. Every local maximum or minimum of a smooth function is a critical point.
+      content: `[Critical point](!/calculus/definitions#critical_point) — a value $c$ in the domain of $f$ where $f'(c) = 0$ or $f'(c)$ is undefined. Every local maximum or minimum of a smooth function is a [critical point](!/calculus/derivatives/graph-analysis#4).
 
-**Local maximum** — a point $c$ where $f(c) \\ge f(x)$ for all $x$ near $c$. The function value is at least as large as everything nearby.
+[Local maximum](!/calculus/derivatives/graph-analysis#6) — a point $c$ where $f(c) \\ge f(x)$ for all $x$ near $c$. The function value is at least as large as everything nearby.
 
-**Local minimum** — a point $c$ where $f(c) \\le f(x)$ for all $x$ near $c$. The function value is at least as small as everything nearby.
+[Local minimum](!/calculus/derivatives/graph-analysis#6) — a point $c$ where $f(c) \\le f(x)$ for all $x$ near $c$. The function value is at least as small as everything nearby.
 
-**Inflection point** — a point where $f''$ changes sign. The curve switches from concave up to concave down or vice versa. An inflection point may or may not be a critical point.
+[Inflection point](!/calculus/definitions#inflection_point) — a point where $f''$ changes sign. The curve switches from concave up to concave down or vice versa. An [inflection point](!/calculus/derivatives/graph-analysis#8) may or may not be a critical point.
 
-**Concave up** — $f''(x) > 0$. The graph cups upward like a bowl.
+[Concave up](!/calculus/derivatives/graph-analysis#7) — $f''(x) > 0$. The graph cups upward like a bowl.
 
-**Concave down** — $f''(x) < 0$. The graph cups downward like a dome.
+[Concave down](!/calculus/derivatives/graph-analysis#7) — $f''(x) < 0$. The graph cups downward like a dome.
 
-**Second-derivative test** — at a critical point $c$: $f''(c) > 0$ gives a local min, $f''(c) < 0$ gives a local max, $f''(c) = 0$ is inconclusive.`,
+[Second-derivative test](!/calculus/derivatives/graph-analysis#6) — at a critical point $c$: $f''(c) > 0$ gives a local min, $f''(c) < 0$ gives a local max, $f''(c) = 0$ is inconclusive.`,
       before: ``,
       after: ``,
       link: '',
@@ -673,7 +675,7 @@ The **Accent color** picker at the bottom recolors the live highlight throughout
       title: `What Is Optimization`,
       content: `**Optimization** in single-variable calculus means finding the maximum or minimum value a function takes — either over its entire domain (a **global** extremum) or over a restricted interval (a **local** extremum).
 
-The basic idea: at a smooth extremum, the tangent line is horizontal, so the derivative is zero. Solving $f'(c) = 0$ finds the candidates; the second-derivative test (or the first-derivative test as backup) classifies each one.
+The basic idea: at a smooth extremum, the [tangent line](!/calculus/visual-tools/tangent-line) is horizontal, so the derivative is zero. Solving $f'(c) = 0$ finds the candidates; the second-derivative test (or the first-derivative test as backup) classifies each one.
 
 For an interval $[a, b]$, the absolute maximum and minimum live either at a critical point inside the interval or at one of the endpoints. The standard recipe: find every critical point in $(a, b)$, evaluate $f$ at each one and at the two endpoints, and pick the largest and smallest values.
 
@@ -711,7 +713,7 @@ The first-derivative test always works (as long as you can determine the sign of
 
 The intuition: concave-up means the curve cups like a bowl, so a horizontal tangent at the bottom of the bowl is a local minimum. Concave-down means it cups like a dome, so a horizontal tangent at the top is a local max.
 
-When $f''(c) = 0$ the test fails because the curve&apos;s concavity isn&apos;t pinned down at $c$ — it could be a max, a min, or an inflection. Higher derivatives can sometimes resolve it (the third or fourth derivative test), but the cleaner fallback is the first-derivative test described above.`,
+When $f''(c) = 0$ the test fails because the curve&apos;s [concavity](!/calculus/derivatives/graph-analysis#7) isn&apos;t pinned down at $c$ — it could be a max, a min, or an inflection. Higher derivatives can sometimes resolve it (the third or fourth derivative test), but the cleaner fallback is the first-derivative test described above.`,
       before: ``,
       after: ``,
       link: '',
@@ -719,19 +721,23 @@ When $f''(c) = 0$ the test fails because the curve&apos;s concavity isn&apos;t p
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Derivatives** — the foundation. The fact that $f'(c) = 0$ at a smooth extremum is what makes the whole technique work. See the **derivative visualizer**.
+      content: `[Derivatives](!/calculus/visual-tools/derivative) — the foundation. The fact that $f'(c) = 0$ at a smooth extremum is what makes the whole technique work. See the **derivative visualizer**.
 
 **Critical points** — full theory of critical points, including the case where $f'$ is undefined.
 
-**Concavity and inflection points** — the geometric companion to the second-derivative test. Where $f''$ changes sign you get an inflection point of $f$.
+[Concavity and inflection points](!/calculus/visual-tools/inflection-points) — the geometric companion to the second-derivative test. Where $f''$ changes sign you get an inflection point of $f$.
 
-**Mean Value Theorem** — guarantees that if $f' \\ne 0$ on an interval, $f$ is strictly monotonic. Justifies many of the increasing/decreasing arguments around critical points. See the **MVT visualizer**.
+[Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — guarantees that if $f' \\ne 0$ on an interval, $f$ is strictly monotonic. Justifies many of the increasing/decreasing arguments around critical points. See the **MVT visualizer**.
 
-**Extreme Value Theorem** — guarantees that a continuous function on a closed bounded interval attains its max and min. The reason endpoint checks are part of the optimization recipe.
+**Extreme Value Theorem** — guarantees that a [continuous function](!/calculus/visual-tools/continuity) on a closed bounded interval attains its max and min. The reason endpoint checks are part of the optimization recipe.
 
 **Applied optimization** — real-world setup of optimization problems: largest box from a given sheet, shortest path, cheapest cost. The calculus is always the same; the modeling step is the hard part.
 
-**Visual tools for calculus** — limits, continuity, derivatives, FTC, MVT, Riemann sums.`,
+**Visual tools for calculus** — [limits](!/calculus/visual-tools/limit), [continuity](!/calculus/limits/continuity#2), derivatives, FTC, MVT, [Riemann sums](!/calculus/visual-tools/riemann-sum).
+
+[Average Rate of Change](!/calculus/visual-tools/average-rate-of-change) — a critical point is where the instantaneous rate is zero, so averaging across it changes sign.
+
+[Newton's Method](!/calculus/visual-tools/newtons-method) — applying the method to $f'$ instead of $f$ finds critical points numerically when they have no closed form.`,
       before: ``,
       after: ``,
       link: '',
@@ -976,6 +982,7 @@ But neither is a critical point, and the tool marks neither, because $f'$ is now
 
   return {
     props: {
+      relatedTools: getRelatedTools('calculus-optimization'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -998,7 +1005,7 @@ But neither is a critical point, and the tool marks neither, because $f'$ is now
   }
 }
 
-export default function OptimizationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function OptimizationVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1120,6 +1127,7 @@ export default function OptimizationVisualizer({seoData, sectionsContent, stateU
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

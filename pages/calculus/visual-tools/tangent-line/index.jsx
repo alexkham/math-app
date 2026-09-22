@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FunctionTangentLine from '../../../../app/components/calculus/visualizers/FunctionTangentLine'
 import functionTangentLineDiagrams from '../../../../app/components/calculus/visualizers/functionTangentLineDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -522,15 +524,15 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Tangent line** — The straight line that touches $f$ at the single point $P = (c, f(c))$ with the same slope as the curve at that point: slope $= f'(c)$.
+      content: `[Tangent line](!/calculus/definitions#tangent_line) — The straight line that touches $f$ at the single point $P = (c, f(c))$ with the same slope as the curve at that point: slope $= f'(c)$.
 
-**Slope of the tangent** — Equal to the derivative $f'(c)$. This is the geometric meaning of the derivative.
+**Slope of the tangent** — Equal to the [derivative](!/calculus/derivatives#1) $f'(c)$. This is the geometric meaning of the derivative.
 
 **Point-slope form** — The standard equation: $y - f(c) = f'(c)(x - c)$, or equivalently $y = f(c) + f'(c)(x - c)$.
 
-**Linearization** — Another name for the tangent line equation written as a function: $L(x) = f(c) + f'(c)(x - c)$. It is the best linear approximation of $f$ near $c$.
+**Linearization** — Another name for the [tangent line equation](!/calculus/derivatives/graph-analysis#2) written as a function: $L(x) = f(c) + f'(c)(x - c)$. It is the best [linear approximation](!/calculus/derivatives/differentials#3) of $f$ near $c$.
 
-**Critical point** — A point where $f'(c) = 0$ (horizontal tangent) or where $f'$ is undefined. Candidates for local maxima and minima.
+[Critical point](!/calculus/definitions#critical_point) — A point where $f'(c) = 0$ (horizontal tangent) or where $f'$ is undefined. Candidates for local maxima and minima.
 
 This widget uses the cubic $f(x) = \\frac{1}{3}x^3 - x$, whose derivative is $f'(x) = x^2 - 1$. Horizontal tangents sit at $x = \\pm 1$.`,
       before: ``,
@@ -654,7 +656,7 @@ For a deeper treatment with proofs and worked examples, see the **tangent line t
 
     obj8: {
       title: `Derivative as Slope and the Point-Slope Form`,
-      content: `The derivative $f'(c)$ is **defined geometrically** as the slope of the tangent line at $c$. Algebraically, it is the limit of secant slopes:
+      content: `The derivative $f'(c)$ is **defined geometrically** as the slope of the tangent line at $c$. Algebraically, it is the [limit](!/calculus/limits#1) of secant slopes:
 
 $f'(c) = \\lim_{h \\to 0} \\frac{f(c+h) - f(c)}{h}$
 
@@ -664,7 +666,7 @@ To **write the tangent equation**, you only need two pieces of information: a po
 
 $y - f(c) = f'(c)(x - c)$
 
-The same line can also be written as the **linearization** $L(x) = f(c) + f'(c)(x - c)$ — a useful viewpoint for approximation and Taylor series.`,
+The same line can also be written as the **linearization** $L(x) = f(c) + f'(c)(x - c)$ — a useful viewpoint for approximation and [Taylor series](!/calculus/derivatives/higher-order#8).`,
       before: ``,
       after: ``,
       link: '',
@@ -674,15 +676,15 @@ The same line can also be written as the **linearization** $L(x) = f(c) + f'(c)(
       title: `Horizontal Tangents and Critical Points`,
       content: `When $f'(c) = 0$, the tangent line at $c$ is **horizontal**. Such a point is called a **critical point** of $f$.
 
-Critical points are candidates for local maxima and local minima. **Fermat&apos;s theorem** guarantees the connection in the other direction: if $f$ has a local extremum at an interior point $c$ where $f'$ exists, then $f'(c) = 0$. So every smooth interior extremum has a horizontal tangent.
+Critical points are candidates for local maxima and local minima. **Fermat&apos;s theorem** guarantees the connection in the other direction: if $f$ has a [local extremum](!/calculus/derivatives/graph-analysis#5) at an interior point $c$ where $f'$ exists, then $f'(c) = 0$. So every smooth interior extremum has a horizontal tangent.
 
-The reverse is not automatic. A horizontal tangent alone only says that the curve is momentarily flat at $c$. It might be a local maximum, a local minimum, or an inflection point with a flat tangent. Examples:
+The reverse is not automatic. A horizontal tangent alone only says that the curve is momentarily flat at $c$. It might be a local maximum, a local minimum, or an [inflection point](!/calculus/derivatives/graph-analysis#8) with a flat tangent. Examples:
 
 - $f(x) = -x^2$ has a horizontal tangent at $0$, and it is a local maximum
 - $f(x) = x^2$ has a horizontal tangent at $0$, and it is a local minimum
 - $f(x) = x^3$ has a horizontal tangent at $0$, but no extremum — $0$ is an inflection point with a flat tangent
 
-To classify a critical point, examine the sign change of $f'$ across $c$ or use the second derivative test. See the **critical points page** for the full procedure.`,
+To classify a critical point, examine the sign change of $f'$ across $c$ or use the [second derivative test](!/calculus/derivatives/graph-analysis#6). See the **critical points page** for the full procedure.`,
       before: ``,
       after: ``,
       link: '',
@@ -690,21 +692,25 @@ To classify a critical point, examine the sign change of $f'$ across $c$ or use 
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Derivative** — The fundamental operation: rate of change of $f$ at a point, defined as the limit of secant slopes.
+      content: `**Derivative** — The fundamental operation: rate of change of $f$ at a point, defined as the [limit](!/calculus/visual-tools/limit) of secant slopes.
 
-**Average rate of change** — The slope of a secant line over an interval; the discrete cousin of $f'(c)$.
+[Average rate of change](!/calculus/visual-tools/average-rate-of-change) — The slope of a secant line over an interval; the discrete cousin of $f'(c)$.
 
 **Linearization** — The tangent line viewed as a function $L(x) = f(c) + f'(c)(x - c)$, used for approximation.
 
 **Critical points** — Where $f'(c) = 0$ or is undefined; the starting set for finding extrema.
 
-**First derivative test** — Sign analysis of $f'$ to classify critical points as maxima, minima, or neither.
+[First derivative test](!/calculus/visual-tools/optimization) — Sign analysis of $f'$ to classify critical points as maxima, minima, or neither.
 
-**Inflection points** — Points where the second derivative changes sign and the tangent crosses the curve.
+[Inflection points](!/calculus/visual-tools/inflection-points) — Points where the second derivative changes sign and the tangent crosses the curve.
 
 **Newton&apos;s method** — Numerical root-finding algorithm that iteratively follows tangent lines back to the x-axis.
 
-**Taylor series** — Higher-order generalization of linearization, using all derivatives at $c$.`,
+**Taylor series** — Higher-order generalization of linearization, using all [derivatives](!/calculus/visual-tools/derivative) at $c$.
+
+[Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — the theorem guarantees a point where the tangent line is parallel to the secant across the interval.
+
+[Newton's Method](!/calculus/visual-tools/newtons-method) — each step follows the tangent line down to the axis and reads off the next estimate.`,
       before: ``,
       after: ``,
       link: '',
@@ -959,6 +965,7 @@ Comparing the two flat tangents side by side is the fastest way to see that zero
 
    return {
       props:{
+      relatedTools: getRelatedTools('calculus-tangent-line'),
          sectionsContent,
          stateUnits,
          explanations,
@@ -980,7 +987,7 @@ Comparing the two flat tangents side by side is the fastest way to see that zero
     }
    }
 
-export default function TangentLineVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function TangentLineVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -1107,6 +1114,7 @@ export default function TangentLineVisualizer({seoData, sectionsContent, stateUn
      variant="light"
    /> */}
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

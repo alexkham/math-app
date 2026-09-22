@@ -10,6 +10,8 @@ import ExplanationDetails from '@/app/components/ExplanationDetails'
 import MatrixProductWrapper from '@/app/components/linear-algebra/multiplication/MatrixProductWrapper'
 import RowPictureVisualizer from '@/app/components/linear-algebra/multiplication/RowPictureVisualizer'
 import MatrixProductVisualizer from '@/app/components/linear-algebra/multiplication/MatrixProductVisualizer'
+import vectorDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import '@/pages/pages.css'
 
@@ -20,6 +22,9 @@ const V = [2, 1, 3]
 export default function MatrixMultiplicationRows({
   instructions,
   rowCopy,
+  explanations,
+  matrixTabExplanations,
+  units,
   sectionsContent,
   schemas,
   seoData,
@@ -31,12 +36,36 @@ export default function MatrixMultiplicationRows({
     content: [sectionsContent[obj].content],
   })
 
+  /* A per-state section is [opening prose, framed unit, deeper treatment].
+     The unit is HTML built in getStaticProps and rendered as its own
+     content-array item — processContent cannot carry a wrapper div
+     around an <svg>. */
+  const withUnit = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`${id}-unit`} dangerouslySetInnerHTML={{ __html: units[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
   /* obj0 is the Key Terms slot. Tool pages do not carry one, so it is left
-     empty and kept out of genericSections. */
+     empty and kept out of genericSections.
+
+     The original nine keep their ids and their relative order; the state
+     sections and one control section are inserted beside the material
+     they belong to. Mirrors the columns page section for section. */
   const genericSections = [
     plain('obj1', 'what-the-tool-shows'),
     plain('obj2', 'stepping-through-vta'),
+    withUnit('obj10', 'the-empty-bracket', 'emptyPlane'),
+    withUnit('obj11', 'one-product-at-a-time', 'dashedPair'),
     plain('obj3', 'reading-the-plane'),
+    withUnit('obj12', 'lifting-out-a-row', 'firstScaledPiece'),
+    withUnit('obj13', 'the-statement-and-the-arithmetic', 'allPieces'),
+    plain('obj14', 'running-the-tool'),
     plain('obj4', 'generating-new-numbers'),
     plain('obj5', 'building-ab-by-rows'),
     plain('obj6', 'why-the-weight-comes-out-in-front'),
@@ -108,13 +137,13 @@ export default function MatrixMultiplicationRows({
               key: 'vector',
               label: 'Vector × matrix',
               component: RowPictureVisualizer,
-              props: { matrix: A, vector: V, content: rowCopy, layout: 'compact' },
+              props: { matrix: A, vector: V, content: rowCopy, layout: 'compact', explanations },
             },
             {
               key: 'matrix',
               label: 'Matrix × matrix',
               component: MatrixProductVisualizer,
-              props: { reading: 'rows', layout: 'compact' },
+              props: { reading: 'rows', layout: 'compact', explanations: matrixTabExplanations },
             },
           ]}
         />
@@ -159,17 +188,86 @@ export async function getStaticProps() {
     'row reduction linear combination',
   ]
 
+  /* Every item ends in an on-page anchor. ExplanationDetails runs each
+     string through processContent, so `[label](!#slug)` resolves here
+     exactly as it does in section prose. */
   const instructions = [
-    'The tab strip above the figure chooses what is on screen. **Vector $\\times$ matrix** builds $\\mathbf{v}^{T}A$ from the rows of $A$; the matrix-by-matrix tab repeats the argument with a matrix in place of the row vector.',
-    '**Run** plays the argument from wherever you are and turns into **Pause**. The twelve steps are one product each at the start, then one regrouping move at a time.',
-    '**Step** advances a single step and **Back** returns one. The regrouping steps are the ones worth holding still.',
-    'The **Steps** pips and the step counter mark the position in the run. A pip is a marker, not a control.',
-    '**Reset** returns to step $0$ with the same numbers on screen.',
-    '**Generate random numbers** rolls a fresh $A$ and $\\mathbf{v}$. No weight is zero and no row of $A$ is the zero vector, so every arrow keeps a direction to draw.',
-    'The right panel is the plane picture. Dashed from the origin is a row of $A$ on its own; the solid arrow is that row scaled by its weight and laid tail to head on the previous one.',
-    'The note under the figure is step-specific and says what the picture is claiming at that moment.',
-    'The matrix here is $3 \\times 2$, the transpose of the one on the columns page, so both pages land on the same point in the plane. Putting the vector on the right and putting it on the left are two different products that happen to agree here.',
+    'The tab strip above the figure chooses what is on screen. **Vector $\\times$ matrix** builds $\\mathbf{v}^{T}A$ from the rows of $A$; the matrix-by-matrix tab repeats the argument with a matrix in place of the row vector. [What the second tab does](!#building-ab-by-rows)',
+    '**Run** plays the argument from wherever you are and turns into **Pause**. The twelve steps are one product each at the start, then one regrouping move at a time. [More about the controls](!#running-the-tool)',
+    '**Step** advances a single step and **Back** returns one. The regrouping steps are the ones worth holding still — see [lifting out a row](!#lifting-out-a-row).',
+    'The **Steps** pips and the step counter mark the position in the run. A pip is a marker, not a control. [What the twelve steps are](!#stepping-through-vta)',
+    '**Reset** returns to step $0$, [the empty bracket](!#the-empty-bracket), with the same numbers on screen.',
+    '**Generate random numbers** rolls a fresh $A$ and $\\mathbf{v}$. No weight is zero and no row of $A$ is the zero vector, so every arrow keeps a direction to draw. [What the generator enforces](!#generating-new-numbers)',
+    'The right panel is the plane picture. Dashed from the origin is a row of $A$ on its own; the solid arrow is that row scaled by its weight and laid tail to head on the previous one. [How to read the plane](!#reading-the-plane)',
+    'The note under the figure is step-specific and says what the picture is claiming at that moment. [Where the argument lands](!#the-statement-and-the-arithmetic)',
+    'The matrix here is $3 \\times 2$, the transpose of the one on the columns page, so both pages land on the same point in the plane. Putting the vector on the right and putting it on the left are two different products that happen to agree here. [Why the shape is three by two](!#why-a-is-three-by-two)',
   ]
+
+  /* Line 1 — one entry per state RowPictureVisualizer can display.
+     Appended to that step's narration line; each ends in the anchor of
+     the section that treats the state in full. */
+  const explanations = {
+    setup:
+      'Nothing is computed yet, and the plane is empty to match. '
+      + '[Learn more about the empty bracket](!#the-empty-bracket)',
+
+    term:
+      'This entry is still incomplete, so the plane can only narrow the answer down to a line. '
+      + '[Learn more about one product at a time](!#one-product-at-a-time)',
+
+    termComplete:
+      'That entry is now fixed, which pins one coordinate and nothing else. '
+      + '[Learn more about one product at a time](!#one-product-at-a-time) · [Reading the plane](!#reading-the-plane)',
+
+    regroup:
+      'The weight has come out in front and a whole row has dropped below as one piece. '
+      + '[Learn more about lifting out a row](!#lifting-out-a-row)',
+
+    summary:
+      'This is the claim the whole run was built to make. '
+      + '[Learn more about the statement](!#the-statement-and-the-arithmetic)',
+
+    compute:
+      'The same point the columns page reaches, because this matrix is its transpose. '
+      + '[Learn more about the arithmetic](!#the-statement-and-the-arithmetic) · [Why three by two](!#why-a-is-three-by-two)',
+  }
+
+  /* The matrix-by-matrix tab is a different component with its own states;
+     they all belong to the one section that treats that tab. */
+  const matrixTabExplanations = {
+    idleSingle: 'Nothing built yet. [More about building AB by rows](!#building-ab-by-rows)',
+    buildRows: 'One row of $B$, scaled by one entry of a row of $A$. [More about building AB by rows](!#building-ab-by-rows)',
+    genRows: 'The same statement as the vector tab, one row of $A$ at a time. [More about building AB by rows](!#building-ab-by-rows)',
+    doneRows: 'Every row of $AB$ out of the same fixed directions. [More about building AB by rows](!#building-ab-by-rows)',
+  }
+
+  /* Framed units: the tool frozen in one state, picture on the left and a
+     short reading of that picture on the right. */
+  const units = {
+    emptyPlane: demoUnitFrame({
+      svg: vectorDiagrams.rows.emptyPlane,
+      caption: 'Step 0, frozen',
+      text: 'Axes and nothing else. The bracket for <em>v</em>&#7488;<em>A</em> already has two slots &mdash; one per column of <em>A</em> &mdash; but neither holds a number, so there is nothing at all to draw.',
+    }),
+
+    dashedPair: demoUnitFrame({
+      svg: [vectorDiagrams.rows.oneCoordinate, vectorDiagrams.rows.bothCoordinates],
+      caption: 'Entry 1 complete, then entry 2, frozen',
+      text: 'Above: the first entry is finished, so <em>x</em> is known and the answer lies somewhere on that dashed line. Below: the second entry lands, the two lines cross, and only now is there an arrow. Every step in between was a number, never a vector.',
+    }),
+
+    firstScaledPiece: demoUnitFrame({
+      svg: vectorDiagrams.rows.firstScaledPiece,
+      caption: 'First regrouping step, frozen',
+      text: 'Dashed from the origin is row 1 of <em>A</em> on its own. Solid is that same row stretched by <em>v</em><sub>1</sub>. The direction is fixed by <em>A</em>; the weight only decides how far along it you travel.',
+    }),
+
+    allPieces: demoUnitFrame({
+      svg: vectorDiagrams.rows.allPieces,
+      caption: 'Steps 10 and 11, frozen',
+      text: 'Three scaled rows laid tail to head, ending on <em>v</em>&#7488;<em>A</em> = (12, 4) &mdash; the same point the columns page reaches, because that page uses the transpose of this matrix with the same weights.',
+    }),
+  }
 
   /* Hoisted verbatim from the component so the copy is server-rendered and
      editable from the page. Braced tokens are resolved at runtime by
@@ -391,6 +489,79 @@ The particular matrix on this page is the transpose of the one on the columns pa
       link: '',
     },
 
+    obj10: {
+      title: `The empty bracket`,
+      content: `Step $0$ is worth a moment rather than a click past.
+
+The bracket for $\\mathbf{v}^{T}A$ already has its shape — two slots, one per **column** of $A$ — before a single number is known. That is the first difference from the columns page, where the slots count rows, and it is the reason the two products are not the same kind of object even when their numbers agree.`,
+      after: `The plane is empty for a stricter reason. An arrow needs both coordinates before it can exist, and at step $0$ neither does. This is the honest picture of the computation: not a small answer, but no answer.
+
+**Reset** returns here at any time with the same numbers on screen; **Generate random numbers** returns here with [a fresh pair](!#generating-new-numbers).
+
+Press **Step** once and the first product lands — and the plane still cannot show you a vector, which is the subject of [one product at a time](!#one-product-at-a-time).`,
+      link: '',
+    },
+
+    obj11: {
+      title: `One product at a time`,
+      content: `Steps $1$ to $6$ are the definition and nothing else. Each step multiplies one entry of $\\mathbf{v}$ by one entry of $A$ and drops the result into its slot.
+
+Six products, because a three-entry row vector against a $3 \\times 2$ matrix gives two entries of three terms each. Entry $1$ collects the terms from column $1$ of $A$, entry $2$ those from column $2$.`,
+      after: `What the plane does during these six steps is the honest part. A dashed vertical line means the first coordinate is known; every point on that line is still a candidate. A dashed horizontal line means the second is known. **One line on its own rules nothing in — it only rules things out.** Only when both are drawn do they cross at a single point, and only then is there a vector at all.
+
+So this route passes through no intermediate quantity that is itself a vector. It computes numbers, and the answer appears all at once when the last one lands. That is what [lifting out a row](!#lifting-out-a-row) repairs.
+
+[Reading the plane](!#reading-the-plane) treats the dashed-line stage and the arrow stage side by side.`,
+      link: '',
+    },
+
+    obj12: {
+      title: `Lifting out a row`,
+      content: `Steps $7$ to $9$ are the argument. Nothing new is multiplied — every product already exists, and only the grouping changes.
+
+Read the terms **across** rather than down. The terms in one horizontal band all carry the same entry of $\\mathbf{v}$, because the definition pairs that entry with every column of $A$ in turn. Lift it out in front and what remains is $(a_{i1}, a_{i2})$ — row $i$ of $A$, whole.`,
+      after: `The plane makes the claim visible. Dashed from the origin is the row on its own, a direction belonging to $A$. Solid is that same row stretched by its weight and moved so its tail sits on the head of the previous arrow.
+
+The dashed direction never changes. A negative weight walks backwards along the same line rather than opening a new one — the vector supplies amounts, never directions.
+
+This is also the step where the page earns its consequences. A row replaced by a weighted sum of rows is exactly an elementary row operation, which is why [row space and row equivalence](!#row-space-and-row-equivalence) follows from this picture and not from the definition.
+
+Work these three steps with **Step** and **Back**; [the controls](!#running-the-tool) exist for this.`,
+      link: '',
+    },
+
+    obj13: {
+      title: `The statement and the arithmetic`,
+      content: `The last two steps say the same thing twice, once in general and once in numbers.
+
+Step $10$ is the sentence
+
+$$\\mathbf{v}^{T}A = v_1r_1 + v_2r_2 + v_3r_3$$
+
+with $r_i$ the $i$-th row of $A$. Step $11$ carries out the arithmetic.`,
+      after: `Both steps share one figure, because the plane is already complete at step $10$: three scaled rows laid tail to head, ending on the answer. The last step changes the algebra above the picture, not the picture.
+
+The endpoint is $(12, 4)$ — the same point the columns page reaches. That is not a coincidence and not a proof that the two products are the same: this page uses the **transpose** of that page's matrix with the same weights, so the arithmetic is bound to agree. What differs is what the answer *is*: a row vector with one entry per column here, a column vector with one entry per row there. [Why the shape is three by two](!#why-a-is-three-by-two) makes that argument properly.
+
+Read the final figure against [the dashed-line stage](!#one-product-at-a-time) and the gain is clear: same endpoint, same six products, but here every corner along the path is a real vector.`,
+      link: '',
+    },
+
+    obj14: {
+      title: `Running the tool`,
+      content: `**Run** plays forward from wherever you are and becomes **Pause** while it is playing. It advances a little under twice a second — fast enough to show the shape of the argument, too fast to check a step.
+
+**Step** and **Back** move exactly one step. These are the ones that matter on steps $7$ to $9$: a regrouping is a claim, and a claim is easier to check held still.
+
+**Reset** returns to step $0$ — [the empty bracket](!#the-empty-bracket) — without touching the numbers. It restarts the route, not the example.`,
+      after: `The run does not loop. **Step** is disabled at step $11$ and **Back** at step $0$; pressing **Run** at the end starts over from the beginning.
+
+Switching tabs also restarts, because a step number means something different in the matrix-by-matrix tab — see [building AB by rows](!#building-ab-by-rows).
+
+The pips and the counter under the figure are position markers rather than controls: a pip is not clickable. [Stepping through vT times A](!#stepping-through-vta) lists what each of the twelve steps does.`,
+      link: '',
+    },
+
     obj9: {
       title: `Where this leads`,
       content: `The row reading is the entry point to elimination and everything built on it.
@@ -494,6 +665,9 @@ The mirror of this argument [puts the vector on the right](!/linear-algebra/visu
       keyWords,
       instructions,
       rowCopy,
+      explanations,
+      matrixTabExplanations,
+      units,
       sectionsContent,
       faqQuestions,
       schemas,

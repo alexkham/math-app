@@ -50,12 +50,26 @@ def block_span(masked, key):
 
 
 def related_key(masked):
-    live = masked[masked.rfind('const genericSections'):]
+    """sectionsContent key of the Related Concepts section.
+
+    Three wiring idioms are in use across the site and all three must be read,
+    or a whole section looks like it has no Related Concepts block:
+      1. an object literal   { id:'related-concepts', title:sectionsContent.objN...
+      2. a helper call       plain('objN', 'related-concepts')
+      3. a tuple list        ['objN', 'related-concepts']
+    """
+    live = masked[masked.rfind('const genericSections'):] if 'const genericSections' in masked else masked
     m = re.search(r"id\s*:\s*[`'\"]related-concepts[a-z\-]*[`'\"]", live)
-    if not m:
-        return None
-    k = re.search(r"sectionsContent(?:\.(\w+)|\[\s*'(\w+)'\s*\])", live[m.end():m.end() + 400])
-    return (k.group(1) or k.group(2)) if k else None
+    if m:
+        k = re.search(r"sectionsContent(?:\.(\w+)|\[\s*'(\w+)'\s*\])", live[m.end():m.end() + 400])
+        if k:
+            return k.group(1) or k.group(2)
+    for pat in (r"\b\w+\(\s*'(obj\d+)'\s*,\s*'(related-concepts[a-z\-]*)'",
+                r"\[\s*'(obj\d+)'\s*,\s*'(related-concepts[a-z\-]*)'"):
+        m = re.search(pat, masked)
+        if m:
+            return m.group(1)
+    return None
 
 
 total = 0
