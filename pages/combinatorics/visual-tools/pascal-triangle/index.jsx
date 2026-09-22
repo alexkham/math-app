@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PascalsTriangle from '../../../../app/components/combinatorics/new-visualizers/general/PascalTriangle'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,17 +523,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Pascal's triangle** — a triangular array of integers where row $n$ contains the binomial coefficients $\\binom{n}{0}, \\binom{n}{1}, \\dots, \\binom{n}{n}$. Each interior entry equals the sum of the two entries directly above it; the edges are all $1$.
+      content: `[Pascal's triangle](!/combinatorics/binomial-coefficient#3) — a triangular array of integers where row $n$ contains the [binomial coefficients](!/combinatorics/binomial-coefficient) $\\binom{n}{0}, \\binom{n}{1}, \\dots, \\binom{n}{n}$. Each interior entry equals the sum of the two entries directly above it; the edges are all $1$.
 
-**Binomial coefficient $\\binom{n}{r}$** — the number of ways to choose $r$ items from $n$ distinct items without order. Equivalently the coefficient of $a^{n-r} b^r$ in the expansion of $(a + b)^n$. Computed as $\\binom{n}{r} = n! / (r! \\cdot (n-r)!)$.
+[Binomial coefficient](!/combinatorics/definitions#binomial_coefficient) — the number of ways to choose $r$ items from $n$ distinct items without order. Equivalently the coefficient of $a^{n-r} b^r$ in the expansion of $(a + b)^n$. Computed as $\\binom{n}{r} = n! / (r! \\cdot (n-r)!)$.
 
-**Pascal's identity** — the [recurrence that builds the triangle](!#mode-1-pascals-identity): $\\binom{n}{r} = \\binom{n-1}{r-1} + \\binom{n-1}{r}$. Every interior cell is the sum of the two cells above it.
+[Pascal's identity](!/combinatorics/binomial-coefficient#2) — the [recurrence that builds the triangle](!#mode-1-pascals-identity): $\\binom{n}{r} = \\binom{n-1}{r-1} + \\binom{n-1}{r}$. Every interior cell is the sum of the two cells above it.
 
-**Hockey-stick identity** — a [diagonal sum](!#mode-2-hockey-stick): $\\sum_{i=r}^{n} \\binom{i}{r} = \\binom{n+1}{r+1}$. The starting diagonal cells form the **stick**; the cell below-and-across is the **puck**.
+[Hockey-stick identity](!/combinatorics/binomial-coefficient#2) — a [diagonal sum](!#mode-2-hockey-stick): $\\sum_{i=r}^{n} \\binom{i}{r} = \\binom{n+1}{r+1}$. The starting diagonal cells form the **stick**; the cell below-and-across is the **puck**.
 
-**Row sum** — the [cells in row n sum to 2ⁿ](!#mode-3-row-sum), counting the total number of subsets of an $n$-element set across all sizes.
+[Row sum](!/combinatorics/binomial-coefficient#2) — the [cells in row n sum to 2ⁿ](!#mode-3-row-sum), counting the total number of subsets of an $n$-element set across all sizes.
 
-**Symmetry** — [within each row](!#mode-4-symmetry), $\\binom{n}{r} = \\binom{n}{n-r}$. Choosing $r$ items to include is the same as choosing $n - r$ items to exclude.
+[Symmetry](!/combinatorics/binomial-coefficient#2) — [within each row](!#mode-4-symmetry), $\\binom{n}{r} = \\binom{n}{n-r}$. Choosing $r$ items to include is the same as choosing $n - r$ items to exclude.
 
 **Focus** — the [cell currently selected](!#clicking-cells-and-focus) by clicking. The four modes highlight different relatives of the focus cell.`,
       before: ``,
@@ -549,11 +551,11 @@ export async function getStaticProps(){
 
 • **A mode group** in the control bar with four buttons: [Pascal's identity](!#mode-1-pascals-identity), [Hockey stick](!#mode-2-hockey-stick), [Row sum](!#mode-3-row-sum), [Symmetry](!#mode-4-symmetry).
 
-• **A right info panel** showing the factorial breakdown $\\binom{n}{r} = n! / (r! \\cdot (n-r)!)$ for the focused cell, plus an identity-specific arithmetic block.
+• **A right info panel** showing the [factorial](!/combinatorics/visual-tools/full-permutation) breakdown $\\binom{n}{r} = n! / (r! \\cdot (n-r)!)$ for the focused cell, plus an identity-specific arithmetic block.
 
 To explore:
 
-• **Click any cell** to focus it. The triangle re-highlights and the right panel updates with the factorial breakdown and the active identity's specific arithmetic for that cell.
+• **Click any cell** to focus it. The triangle re-highlights and the right panel updates with the [factorial](!/combinatorics/permutations) breakdown and the active identity's specific arithmetic for that cell.
 
 • **Switch modes** to see the same focused cell through a different identity.
 
@@ -729,7 +731,7 @@ Examples:
 
 • $\\binom{10}{5} = 252$: middle term of $(a+b)^{10}$, and the maximum entry of row $10$.
 
-For deeper coverage including identities, generating functions, and applications, see the **binomial coefficients** section on the combinations theory page.`,
+For deeper coverage including identities, generating functions, and applications, see the **binomial coefficients** section on the [combinations](!/combinatorics/combinations#combinations) theory page.`,
       before: ``,
       after: ``,
       link: '',
@@ -741,7 +743,7 @@ For deeper coverage including identities, generating functions, and applications
 
 **Pascal's identity** is the recursive backbone. It lets you compute any $\\binom{n}{r}$ from smaller ones without ever multiplying or dividing factorials. It also gives a **combinatorial proof**: pick a specific element; either you include it (giving $\\binom{n-1}{r-1}$) or you don't (giving $\\binom{n-1}{r}$).
 
-**Hockey-stick** appears in counting problems where you fix the **maximum** element of a subset. The number of subsets of $\\{1, \\dots, n+1\\}$ with $r+1$ elements is $\\binom{n+1}{r+1}$, and grouping by the max element gives the diagonal sum.
+**Hockey-stick** appears in counting problems where you fix the **maximum** element of a subset. The number of subsets of $\\{1, \\dots, n+1\\}$ with $r+1$ elements is $\\binom{n+1}{r+1}$, and [grouping](!/combinatorics/visual-tools/partition) by the max element gives the diagonal sum.
 
 **Row sum $2^n$** is the source of countless probability results — it underlies binomial distribution normalization, the cardinality of power sets, and the fact that $n$-bit binary strings number $2^n$.
 
@@ -761,7 +763,7 @@ Together, these four are sufficient to derive most other binomial identities by 
 
 **Multinomial coefficient** — generalizes the binomial to more than two parts: $\\binom{n}{n_1, n_2, \\dots, n_k} = n! / (n_1! \\cdots n_k!)$. The binomial is the $k = 2$ case.
 
-**Combination with repetition** — counts multisets, $\\binom{n + r - 1}{r}$. Different formula, different position in the triangle.
+[Combination with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — counts multisets, $\\binom{n + r - 1}{r}$. Different formula, different position in the triangle.
 
 **Permutation** — ordered selections, $n!/(n-r)!$. Related but distinct from the unordered combinations shown here.
 
@@ -771,7 +773,7 @@ Together, these four are sufficient to derive most other binomial identities by 
 
 **Lucas's theorem** — for prime $p$, $\\binom{m}{n} \\bmod p$ is computable digit-by-digit in base $p$. Reveals fractal structures (Sierpiński patterns) when the triangle is reduced modulo a prime.
 
-**Binomial coefficient calculator** — to compute $\\binom{n}{r}$ for larger $n$, see the **n choose r calculator**.`,
+[Binomial coefficient calculator](!/combinatorics/visual-tools/combination) — to compute $\\binom{n}{r}$ for larger $n$, see the **n choose r calculator**.`,
       before: ``,
       after: ``,
       link: '',
@@ -927,6 +929,7 @@ Together, these four are sufficient to derive most other binomial identities by 
 
   return {
     props: {
+      relatedTools: getRelatedTools('pascal-triangle'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -949,7 +952,7 @@ Together, these four are sufficient to derive most other binomial identities by 
   }
 }
 
-export default function PascalTriangleVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PascalTriangleVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1072,6 +1075,7 @@ export default function PascalTriangleVisualizer({seoData, sectionsContent, intr
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

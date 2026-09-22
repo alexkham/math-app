@@ -19,13 +19,14 @@
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
       "linearAlgebraLinksWritten": "2026-09-22",
-      "calculusKeyTerms": "2026-09-22"
+      "combinatoricsKeyTerms": "2026-09-22"
     },
     "lineThree": {
       "trigonometryWritten": "2026-09-20",
       "functionsWritten": "2026-09-20",
       "complex-numbersWritten": "2026-09-21",
-      "calculusWritten": "2026-09-22"
+      "calculusWritten": "2026-09-22",
+      "combinatoricsWritten": "2026-09-22"
     }
   },
   "tools": {
@@ -17431,58 +17432,175 @@
       "pagePath": "pages/combinatorics/visual-tools/full-permutation/index.jsx",
       "relatedTerms": [
         {
-          "term": "permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "deriving-n-step-by-step",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "factorial",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "rotations",
+          "entity": "rotation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "multiplication principle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "deriving-n-step-by-step"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "partial permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "permutation with repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "circular permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-build-area"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "combinations",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "combination",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "combination"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "combinations",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "combinations"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "arrangement",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "factorial",
+          "entity": "factorial",
+          "sections": [
+            "key-terms",
+            "what-is-a-full-permutation",
+            "deriving-n-step-by-step",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "factorial"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "ordering",
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "getting-started",
+            "the-build-area",
+            "adjusting-n",
+            "grouping-by-first-item",
+            "transport-controls",
+            "mode-switch",
+            "right-panel-and-progress",
+            "deriving-n-step-by-step"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started",
+              "surface": "permutations",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "full permutation",
+          "entity": "full_permutation",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Full permutation",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "full_permutation"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "factorial",
+          "entity": "factorial",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Factorial",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "factorial"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "notation",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "notation",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "notation"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/fullPermutationDiagrams.js",
@@ -17501,7 +17619,57 @@
         "anchors": 30,
         "orphans": 0,
         "notes": "FIRST COMBINATORICS TOOL - section started 2026-08-25. All 11 combinatorics tools share the new-visualizers architecture: scenes/*.jsx built on shared.jsx (a 3-version file, v3 LIVE from ~line 1382: ALL_ITEMS 5 colored balls A-E, N 3-5, radial-gradient Ball, ControlBar/steppers/TransportButtons, RightPanel/InfoPanelHeader/StepRow, injected vt-* CSS). NO shared explanations infra -> whole section is Case C; this pass sets the pattern. IMPORTANT: these pages' commented heads are FULL PREVIOUS COPIES with real prose (not empty templates) - single-paragraph Edit anchors collide; use multi-paragraph anchors. Page shape = modular-wheel's (obj0 Key Terms as both KeyTermsCard and section 0, obj1-10 content, obj11-15 empty stubs). States = phases + completed enumerations: idle, building (frozen mid-flight with dotted guide + dimmed source), n3/n4/n5 (animState done keyed by n). ZERO new sections - all states map to existing prose (idle->getting-started, building->the-build-area, n3->grouping-by-first-item, n4->adjusting-n, n5->deriving-n-step-by-step); obj8 what-is-a-full-permutation is the group. Entry renders under the right panel's step rows. Diagrams port shared.jsx + scene verbatim (layout math incl. CARD_CFG per n, permsAll order, tint-0.08 group rows, avatar r13); balls mode only; n5 frame = all 120 cards (svgH ~1582). Rendered/landing verification PENDING (classifier outage; owner's server had stale-.next ENOENT - recovery still pending too). Backups pending: git show HEAD:<path>. Statics grep-verified (11 slugs, 30 anchors all in live region, 0 orphans, 5 units = 5 explanations = 5 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "circular-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Circular permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "Combinations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partial-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Partial permutation without repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "pascal-triangle",
+          "fromSection": "related-concepts",
+          "surface": "Pascal's triangle",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with identical items",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "permutation-with-identical": {
       "slug": "permutation-with-identical",
@@ -17510,58 +17678,247 @@
       "pagePath": "pages/combinatorics/visual-tools/permutation-with-identical/index.jsx",
       "relatedTerms": [
         {
-          "term": "multiset",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "aabbc-the-longest-run"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "multiset permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "division",
+          "entity": "complex_number",
+          "sections": [
+            "aab-the-smallest-multiset",
+            "what-is-a-permutation-with-identical-items"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "literal",
+          "entity": "literal",
+          "sections": [
+            "mode-switch"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the logic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiplicities",
+          "entity": "multiplicity",
+          "sections": [
+            "right-panel-and-progress"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "remainders",
+          "entity": "remainder",
+          "sections": [
+            "aaabb-two-letters-ten-arrangements",
+            "aabbc-the-longest-run"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "rotations",
+          "entity": "rotation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-build-area"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "full permutations",
+          "entity": "full_permutation",
+          "sections": [
+            "why-divide-by-k"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "full_permutation"
+          },
+          "links": [
+            {
+              "fromSection": "why-divide-by-k",
+              "surface": "full permutations",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": "full"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "multinomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "key-terms",
+            "what-is-a-permutation-with-identical-items",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "multinomial_coefficient"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "binomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multinomial theorem",
+          "entity": "multinomial_theorem",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/formulas",
+            "section": "multinomial_theorem"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "multinomial theorem",
+              "target": {
+                "path": "/combinatorics/binomial-theorem",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "factorial",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "permutation with identical items",
+          "entity": "permutation_with_identical_items",
+          "sections": [
+            "key-terms",
+            "what-is-a-permutation-with-identical-items"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation_with_identical_items"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "full permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "getting-started",
+            "the-build-area",
+            "the-multiset-stepper",
+            "aab-the-smallest-multiset",
+            "aaabb-two-letters-ten-arrangements",
+            "aabbc-the-longest-run",
+            "grouping-by-distinct-first-item",
+            "transport-controls",
+            "mode-switch",
+            "right-panel-and-progress",
+            "what-is-a-permutation-with-identical-items",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started",
+              "surface": "permutations",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "permutation with repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "weak composition",
+          "entity": "weak_composition",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "weak_composition"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "weak composition",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "weak"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "circular permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "permutation with identical items",
+          "entity": "permutation_with_identical_items",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Permutation with identical items",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "permutation_with_identical_items"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "distinguishable arrangements",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Multinomial coefficient",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "multinomial_coefficient"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/permutationWithIdenticalDiagrams.js",
@@ -17583,7 +17940,73 @@
         "anchors": 40,
         "orphans": 0,
         "notes": "Second combinatorics tool; same scene architecture as full-permutation, wired identically (Case C additive prop, entry under right-panel step rows). Preset pattern: multiset stepper cycles 6 curated multisets, so states = idle + building + one per preset keyed m<ID> off animState done + multiset.id. Counts verified by hand: AAB 3 (groups 2+1), AAAB 4 (3+1), AABB 6 (3+3), AABC 12 (6+3+3), AAABB 10 (6+4), AABBC 30 (12+12+6). The building frame freezes POSITIONAL DIMMING (the scene's signature: only the specific copy in use dims, its twin stays bright - outcome ABA with left A landed, B mid-flight). Four new sections in the obj11-14 stubs: aab-the-smallest-multiset, aaab-placing-the-single-b (positions-of-the-rare-letter view), aaabb-two-letters-ten-arrangements (two-letter multiset = binomial coefficient), aabbc-the-longest-run; mAABB -> why-divide-by-k (its own tagged-collapse example), mAABC -> grouping-by-distinct-first-item (its own unequal-rows example); obj3 the-multiset-stepper is the group with all six preset links. Diagrams port distinctPerms order + per-group row heights + positional dimming verbatim. Rendered/landing verification PENDING (section-wide). Backups pending: git show HEAD:<path>. Statics grep-verified (15 slugs, 40 anchors all live-region, 0 orphans, 8 units = 8 explanations = 8 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "circular-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Circular permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "binomial coefficient",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "full-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Full permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partial-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Partial permutation without repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partition",
+          "fromSection": "related-concepts",
+          "surface": "Partition into groups",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "strong-composition",
+          "fromSection": "related-concepts",
+          "surface": "Strong composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "weak-composition",
+          "fromSection": "related-concepts",
+          "surface": "Weak composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "partial-permutation": {
       "slug": "partial-permutation",
@@ -17592,52 +18015,176 @@
       "pagePath": "pages/combinatorics/visual-tools/partial-permutation/index.jsx",
       "relatedTerms": [
         {
-          "term": "partial permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "when-r-equals-n",
+            "deriving-p-n-r-step-by-step"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "permutation without repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "factoring",
+          "entity": "factoring",
+          "sections": [
+            "deriving-p-n-r-step-by-step"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "what-is-a-partial-permutation",
+            "deriving-p-n-r-step-by-step",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "outcome",
+          "entity": "random_experiment",
+          "sections": [
+            "right-panel-and-progress",
+            "what-is-a-partial-permutation"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "rotations",
+          "entity": "rotation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "adjusting-n-and-r"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-build-area"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "factorial",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "multiplication principle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "factorial",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "factorial"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "factorial",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "full permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "full_permutation",
+          "sections": [
+            "the-build-area",
+            "when-r-equals-n",
+            "what-is-a-partial-permutation"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "full_permutation"
+          },
+          "links": [
+            {
+              "fromSection": "the-build-area",
+              "surface": "full permutation",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": "full"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "combination",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "permutation",
+          "entity": "permutation",
+          "sections": [
+            "grouping-by-first-item",
+            "what-is-a-partial-permutation"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "links": [
+            {
+              "fromSection": "grouping-by-first-item",
+              "surface": "permutation",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "ordered selection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "zero factorial",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "partial permutation",
+          "entity": "partial_permutation",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Partial permutation",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "partial_permutation"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/partialPermutationDiagrams.js",
@@ -17657,7 +18204,49 @@
         "anchors": 33,
         "orphans": 0,
         "notes": "Third combinatorics tool; same scene architecture, wired identically. States: idle + building (frozen mid-build with C left bright and about to be excluded) + notable (n, r) DONE configs keyed with boundary precedence (r===n -> rEqualsN, r===1 -> rOne, then (3,2) default32, (5,3) big53); other done combos show nothing (preset precedent). Two new sections in obj11-12 stubs: when-r-equals-n (0! = 1 earning its keep, P(5,4)=P(5,5) plateau) and when-r-is-one (P(n,1)=n, coincidence with C(n,1), recursion base); default32 -> grouping-by-first-item, big53 -> deriving-p-n-r-step-by-step; obj3 adjusting-n-and-r is the group with combo links. Diagrams port permsR order + CARD_CFG_BY_R + COLS_OVERRIDE + the 'BUILD AREA (r = r)' label verbatim. Rendered/landing verification PENDING (section-wide). Backups pending: git show HEAD:<path>. Statics grep-verified (13 slugs, 33 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "circular-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Circular permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "Combination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "full-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Full permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with identical items",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "permutation-with-repetition": {
       "slug": "permutation-with-repetition",
@@ -17666,58 +18255,227 @@
       "pagePath": "pages/combinatorics/visual-tools/permutation-with-repetition/index.jsx",
       "relatedTerms": [
         {
-          "term": "permutation with repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "cartesian product",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "factoring",
+          "entity": "factoring",
+          "sections": [
+            "deriving-n-r"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "tuple",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "fraction",
+          "entity": "fraction",
+          "sections": [
+            "sequences-versus-permutations"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "multiplication principle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "function",
+          "entity": "function",
+          "sections": [
+            "what-is-a-permutation-with-repetition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "pigeonhole principle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "what-is-a-permutation-with-repetition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "birthday problem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "deriving-n-r",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "outcome",
+          "entity": "random_experiment",
+          "sections": [
+            "right-panel-and-progress",
+            "what-is-a-permutation-with-repetition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "powers",
+          "entity": "power",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "rotations",
+          "entity": "rotation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "adjusting-n-and-r"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-build-area"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "adjusting-n-and-r"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "combination"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-n-and-r",
+              "surface": "combinations",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "combinations"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "partial permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "partial_permutation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "partial_permutation"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "partial permutation",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": "without"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "combination with repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "permutation with repetition",
+          "entity": "permutation_with_repetition",
+          "sections": [
+            "key-terms",
+            "what-is-a-permutation-with-repetition",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation_with_repetition"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "binary strings",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "right-panel-and-progress",
+            "what-is-a-permutation-with-repetition"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "reason": "Not planted in \"right-panel-and-progress\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "pigeonhole principle",
+          "entity": "pigeonhole_principle",
+          "sections": [
+            "when-r-exceeds-n"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "pigeonhole_principle"
+          },
+          "links": [
+            {
+              "fromSection": "when-r-exceeds-n",
+              "surface": "pigeonhole principle",
+              "target": {
+                "path": "/combinatorics/counting-principles",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "permutation with repetition",
+          "entity": "permutation_with_repetition",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Permutation with repetition",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "permutation_with_repetition"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/permutationsWithRepetitionDiagrams.js",
@@ -17737,7 +18495,73 @@
         "anchors": 30,
         "orphans": 0,
         "notes": "Fourth combinatorics tool; standard wiring. States: idle + building (frozen on the FIRST arrangement AA - the same ball landing twice with the source row NEVER dimming, the scenario's signature) + notable done configs with r > n checked first (rExceedsN (3,4)=81), then default32 (3,2)=9, cube33 (3,3)=27, big53 (5,3)=125; other combos null. Two new sections in stubs: when-r-exceeds-n (pigeonhole: every card has a repeat; (n-r)! undefined for r>n) and sequences-versus-permutations (6-of-27 repeat-free subset, birthday-problem connection); default32 -> grouping-by-first-item, big53 -> deriving-n-r; obj3 adjusting-n-and-r is the group. NOTE: caught own drafting error mid-pass (claimed PINs have r > n; fixed to the binary-string example, r=8 > n=2). Diagrams port tuplesR cartesian order, per-(n,r) CARD_CFG, the UNLIMITED SUPPLY label, and no-dimming verbatim. Rendered/landing verification PENDING (section-wide). Backups from HEAD 8f318b9 (pre-pass for this page; verify wc 1154/737). Statics grep-verified (13 slugs, 30 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "circular-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Circular permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "Combination with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "distribution",
+          "fromSection": "related-concepts",
+          "surface": "Distribution into cells",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "full-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Full permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partial-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Partial permutation without repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "pascal-triangle",
+          "fromSection": "related-concepts",
+          "surface": "Pascal's triangle",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with identical items",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "weak-composition",
+          "fromSection": "related-concepts",
+          "surface": "Weak composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "circular-permutation": {
       "slug": "circular-permutation",
@@ -17746,52 +18570,229 @@
       "pagePath": "pages/combinatorics/visual-tools/circular-permutation/index.jsx",
       "relatedTerms": [
         {
-          "term": "circular permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "rotational symmetry",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "adjusting-n"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "mode-switch"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "reflections",
+          "entity": "reflection",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "rotations",
+          "entity": "rotation",
+          "sections": [
+            "key-terms",
+            "the-anchor",
+            "what-is-a-circular-permutation",
+            "why-n-1-instead-of-n",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "adjusting-n"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-build-ring"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "double counting",
+          "entity": "double_counting",
+          "sections": [
+            "why-n-1-instead-of-n"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "double_counting"
+          },
+          "links": [
+            {
+              "fromSection": "why-n-1-instead-of-n",
+              "surface": "double counting",
+              "target": {
+                "path": "/combinatorics/counting-principles",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "factorial",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "factorial",
+          "sections": [
+            "what-is-a-circular-permutation",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "factorial"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-a-circular-permutation",
+              "surface": "factorial",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "full permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "permutation",
+          "entity": "permutation",
+          "sections": [
+            "why-n-1-instead-of-n",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "links": [
+            {
+              "fromSection": "why-n-1-instead-of-n",
+              "surface": "permutation",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "cyclic groups",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "circular permutation",
+          "entity": "circular_permutation",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Circular permutation",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "circular_permutation"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "necklace counting",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "rotational symmetry",
+          "entity": "circular_permutation",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Rotational symmetry",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "circular_permutation"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "round table problem",
+          "term": "formula",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "(n-1)! formula",
+              "target": {
+                "path": "/combinatorics/inclusion-exclusion",
+                "section": "3"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "equivalence classes",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "linear permutation",
+          "entity": "full_permutation",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Linear permutation",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "full_permutation"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/circularPermutationsDiagrams.js",
@@ -17810,7 +18811,49 @@
         "anchors": 29,
         "orphans": 0,
         "notes": "Fifth combinatorics tool; standard wiring, entry under the single anchor StepRow. Unlike the linear scenes this one has ONE group (the anchor Red pinned at the ring top, always dimmed in the source) and ring-shaped result cards. States: idle (anchor already seated - symmetry spent before the first move), building (Green landed, Blue mid-flight, FIXED badge untouched), n3/n4/n5 done (2 / 6 / 24 ring cards). ZERO new sections: idle->getting-started, n3->the-anchor (the two-card representative argument), n4->adjusting-n (shifted factorial 2,6,24), building->the-build-ring (no left/right, only clockwise-from-anchor), n5->the-completed-grid (full round-table catalog); obj8 what-is-a-circular-permutation is the group. Diagrams port ringPos geometry, FIXED badge, solid-vs-dashed slots, radial #2..#n labels, and mini ring cards with per-n CARD_CFG verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1754/610. Statics grep-verified (11 slugs, 29 anchors all live-region, 0 orphans, 5 units = 5 explanations = 5 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "Combinations",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "full-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Full permutation",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partial-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Partial permutation without repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with identical items",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with repetition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "combination": {
       "slug": "combination",
@@ -17819,58 +18862,225 @@
       "pagePath": "pages/combinatorics/visual-tools/combination/index.jsx",
       "relatedTerms": [
         {
-          "term": "combination",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "binomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "coefficients",
+          "entity": "coefficient",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "subset",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "denominator",
+          "entity": "denominator",
+          "sections": [
+            "when-r-equals-n-one-subset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "pascal's triangle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "key-terms",
+            "grouping-by-smallest-item",
+            "deriving-c-n-r"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "pascal's identity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "grouping-by-smallest-item",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "index",
+          "entity": "index",
+          "sections": [
+            "key-terms",
+            "grouping-by-smallest-item",
+            "right-panel-and-progress",
+            "deriving-c-n-r"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "outcome",
+          "entity": "random_experiment",
+          "sections": [
+            "when-r-equals-n-one-subset"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "partition",
+          "entity": "partition",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "adjusting-n-and-r"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "subsets",
+          "entity": "subset",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "the-build-set",
+            "adjusting-n-and-r",
+            "grouping-by-smallest-item",
+            "when-r-equals-n-one-subset",
+            "transport-controls",
+            "mode-switch",
+            "right-panel-and-progress",
+            "what-is-a-combination",
+            "deriving-c-n-r"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-build-set"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "binomial theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "binomial_theorem",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/formulas",
+            "section": "binomial_theorem"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "partial permutation",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "combination with repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "empty set",
+          "entity": "empty_set",
+          "sections": [
+            "when-r-equals-n-one-subset"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "when-r-equals-n-one-subset",
+            "target": {
+              "path": "/set-theory",
+              "section": "cardinality_and_types_of_sets"
+            },
+            "method": "repository-link",
+            "crossSection": "set-theory"
+          },
+          "definitionTarget": {
+            "path": "/set-theory/definitions",
+            "section": "empty_set"
+          }
         },
         {
           "term": "multinomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "multinomial_coefficient"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "partial permutations",
+          "entity": "partial_permutation",
+          "sections": [
+            "right-panel-and-progress",
+            "deriving-c-n-r"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "partial_permutation"
+          },
+          "links": [
+            {
+              "fromSection": "right-panel-and-progress",
+              "surface": "partial permutations",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": "without"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "strong composition",
+          "entity": "strong_composition",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "strong_composition"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Combination",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "combination"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/simpleCombinationDiagrams.js",
@@ -17890,7 +19100,89 @@
         "anchors": 30,
         "orphans": 0,
         "notes": "Sixth combinatorics tool; standard wiring. The scene's signature is the UNLABELED build slots ('BUILD SET (size r = r)', no #position labels - order carries no meaning) and smallest-element grouping with varying sizes C(n-1-i, r-1). States: idle + building (canonical smallest-first landing) + done configs with r===n first (rEqualsN (5,5)=1), then default32 (3,2)=3, sym52 (5,2)=10, big53 (5,3)=10 (groups 6+3+1); other combos null. One new section in the obj11 stub: when-r-equals-n-one-subset (0!=1, symmetry framing both extremes, Pascal-row peak at n/2); sym52 -> adjusting-n-and-r (its own C(n,r)=C(n,n-r) paragraph), big53 -> grouping-by-smallest-item (its own 6+3+1 example), default32 -> deriving-c-n-r (the P/r! census-of-duplicates pairing vs the partial tool's 6); obj8 what-is-a-combination is the group. PROSE CORRECTION: obj4's displayed formula read 'group size at smallest = i = binom(...)' (mangled '= i ='); fixed to 'group size at smallest index i ='. Diagrams port combinations() canonical order, unlabeled slots, per-group row heights verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1146/705. Statics grep-verified (12 slugs, 30 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "circular-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Circular permutation",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "distribution",
+          "fromSection": "related-concepts",
+          "surface": "Distribution into cells",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "full-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Full permutation",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partial-permutation",
+          "fromSection": "related-concepts",
+          "surface": "Partial permutation without repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partition",
+          "fromSection": "related-concepts",
+          "surface": "Partition into groups",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "pascal-triangle",
+          "fromSection": "related-concepts",
+          "surface": "Pascal's triangle",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with identical items",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "Combination with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "strong-composition",
+          "fromSection": "related-concepts",
+          "surface": "strong compositions",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "weak-composition",
+          "fromSection": "related-concepts",
+          "surface": "Weak composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "partition": {
       "slug": "partition",
@@ -17899,58 +19191,240 @@
       "pagePath": "pages/combinatorics/visual-tools/partition/index.jsx",
       "relatedTerms": [
         {
-          "term": "partition into groups",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "binomial",
+          "entity": "binomial",
+          "sections": [
+            "three-plus-two-the-team-split"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "multinomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "grouping-by-item-1-destination",
+            "mode-switch"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "multinomial theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "monomial",
+          "entity": "monomial",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "binomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "partitions",
+          "entity": "partition",
+          "sections": [
+            "getting-started",
+            "the-build-boxes",
+            "the-partition-stepper",
+            "three-plus-one-a-combination-in-disguise",
+            "four-plus-one-choosing-who-stands-alone",
+            "three-plus-two-the-team-split",
+            "three-plus-one-plus-one-equal-boxes",
+            "two-plus-two-plus-one-the-largest-run",
+            "grouping-by-item-1-destination",
+            "transport-controls",
+            "mode-switch",
+            "right-panel-and-progress",
+            "what-is-a-partition-into-groups",
+            "deriving-the-multinomial-coefficient",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "stirling numbers",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "four-plus-one-choosing-who-stands-alone"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "labeled boxes",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "subsets",
+          "entity": "subset",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-build-boxes"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "combination",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "combination",
+          "sections": [
+            "three-plus-one-a-combination-in-disguise",
+            "three-plus-two-the-team-split",
+            "what-is-a-partition-into-groups",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "combination"
+          },
+          "links": [
+            {
+              "fromSection": "three-plus-one-a-combination-in-disguise",
+              "surface": "combination",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "combinations"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "distribution into cells",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "key-terms",
+            "what-is-a-partition-into-groups",
+            "deriving-the-multinomial-coefficient",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "multinomial_coefficient"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
-          "term": "team splitting problems",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "multinomial theorem",
+          "entity": "multinomial_theorem",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/formulas",
+            "section": "multinomial_theorem"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "partition into groups",
+          "entity": "partition_into_groups",
+          "sections": [
+            "key-terms",
+            "what-is-a-partition-into-groups",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "partition_into_groups"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "what-is-a-partition-into-groups"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "links": [
+            {
+              "fromSection": "what-is-a-partition-into-groups",
+              "surface": "permutations",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "partition into groups",
+          "entity": "partition_into_groups",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Partition into groups",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "partition_into_groups"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Multinomial coefficient",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "multinomial_coefficient"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "labeled boxes",
+          "entity": "partition_into_groups",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Labeled boxes",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "partition_into_groups"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/partitionIntoGroupsDiagrams.js",
@@ -17973,7 +19447,57 @@
         "anchors": 44,
         "orphans": 0,
         "notes": "Seventh combinatorics tool; standard wiring. Preset pattern: partition stepper cycles 7 shapes, states = idle + building + p<shape> keyed off preset.id with '+' stripped (p22..p221). Counts and destination-row splits verified by hand: 2+2=6, 3+1=4 (3+1), 2+1+1=12 (6+3+3), 4+1=5 (4+1), 3+2=10 (6+4), 3+1+1=20, 2+2+1=30 (12+12+6). ALL FIVE STUBS obj11-15 used - new sections: three-plus-one-a-combination-in-disguise (two-box multinomial = binomial), four-plus-one-choosing-who-stands-alone (singleton boxes, count = n), three-plus-two-the-team-split (the C(5,3) tie-in + named-teams caution for 5+5), three-plus-one-plus-one-equal-boxes (the labeled convention biting: each grouping twice, /m! for unlabeled), two-plus-two-plus-one-the-largest-run; p22 -> deriving-the-multinomial-coefficient (24/4 over-count with the labeled mirror-cards note), p211 -> grouping-by-item-1-destination (its own 6+3+3 example); obj3 the-partition-stepper is the group with all seven shape links. Diagrams port generatePartitions + sortByItemZeroBox, the labeled BUILD BOXES floor plan, box-separator cards, and '-> Box X' group avatars verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1082/886. Statics grep-verified (16 slugs, 44 anchors all live-region, 0 orphans, 9 units = 9 explanations = 9 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "binomial coefficient",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "distribution",
+          "fromSection": "related-concepts",
+          "surface": "Distribution into cells",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "pascal-triangle",
+          "fromSection": "related-concepts",
+          "surface": "Pascal's triangle",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with identical items",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "strong-composition",
+          "fromSection": "related-concepts",
+          "surface": "Strong composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "weak-composition",
+          "fromSection": "related-concepts",
+          "surface": "Weak composition",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "distribution": {
       "slug": "distribution",
@@ -17982,58 +19506,372 @@
       "pagePath": "pages/combinatorics/visual-tools/distribution/index.jsx",
       "relatedTerms": [
         {
-          "term": "distribution into cells",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "complement",
+          "entity": "complement",
+          "sections": [
+            "two-cells-binary-choices"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "functions between sets",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "domain",
+          "entity": "domain",
+          "sections": [
+            "more-cells-than-items"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "surjective functions",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "two-cells-binary-choices",
+            "more-cells-than-items",
+            "what-is-a-distribution-into-cells"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "pigeonhole principle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "exponent",
+          "entity": "exponent",
+          "sections": [
+            "deriving-k-n"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "key-terms",
+            "more-cells-than-items",
+            "what-is-a-distribution-into-cells",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "two-cells-binary-choices",
+            "mode-switch"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "key-terms",
+            "the-cells",
+            "more-cells-than-items"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "right-panel-and-progress"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "deriving-k-n"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "outcomes",
+          "entity": "random_experiment",
+          "sections": [
+            "key-terms",
+            "the-cells",
+            "right-panel-and-progress"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "partition",
+          "entity": "partition",
+          "sections": [
+            "more-cells-than-items"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "adjusting-n-and-k",
+            "more-cells-than-items"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "adjusting-n-and-k"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
           "term": "subsets",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "subset",
+          "sections": [
+            "two-cells-binary-choices"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "binomial theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "traces",
+          "entity": "trace",
+          "sections": [
+            "the-cells"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the linear-algebra section; ambiguous surface form, not a concept reference on this page."
         },
         {
-          "term": "permutation with repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "variable",
+          "entity": "variable",
+          "sections": [
+            "grouping-by-item-1s-destination"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "adjusting-n-and-k",
+            "what-is-a-distribution-into-cells"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "combination"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-n-and-k",
+              "surface": "combinations",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "combinations"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "distribution into cells",
+          "entity": "distribution_into_cells",
+          "sections": [
+            "key-terms",
+            "right-panel-and-progress",
+            "what-is-a-distribution-into-cells",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "distribution_into_cells"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "empty set",
+          "entity": "empty_set",
+          "sections": [
+            "two-cells-binary-choices"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "two-cells-binary-choices",
+            "target": {
+              "path": "/set-theory",
+              "section": "cardinality_and_types_of_sets"
+            },
+            "method": "repository-link",
+            "crossSection": "set-theory"
+          },
+          "definitionTarget": {
+            "path": "/set-theory/definitions",
+            "section": "empty_set"
+          }
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "multinomial_coefficient"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "multinomial coefficient",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "partition into groups",
+          "entity": "partition_into_groups",
+          "sections": [
+            "grouping-by-item-1s-destination"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "partition_into_groups"
+          },
+          "links": [
+            {
+              "fromSection": "grouping-by-item-1s-destination",
+              "surface": "partition into groups",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "partition"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "right-panel-and-progress"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "links": [
+            {
+              "fromSection": "right-panel-and-progress",
+              "surface": "permutations",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "pigeonhole principle",
+          "entity": "pigeonhole_principle",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "pigeonhole_principle"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         },
         {
           "term": "weak composition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "weak_composition",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "weak_composition"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "weak composition",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "weak"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "stirling numbers",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "term": "distribution into cells",
+          "entity": "distribution_into_cells",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Distribution into cells",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "distribution_into_cells"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "labeled cells",
+          "entity": "distribution_into_cells",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Labeled cells",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "distribution_into_cells"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/distributionIntoCellsDiagrams.js",
@@ -18053,7 +19891,49 @@
         "anchors": 29,
         "orphans": 0,
         "notes": "Eighth combinatorics tool; standard wiring. The scene's signature: items pick cells (functions viewpoint - mathematically identical to permutation-with-repetition but framed from the items' side), bottom-up stacking, live assignment tuple readout with ? placeholders, and UNIFORM group sizes k^(n-1) (independence's fingerprint vs the section's staircases). States: idle + building (frozen at (1,1,?) with two items sharing Cell 1) + done configs: default33 (3,3)=27 (9+9+9), twoCells (3,2)=8 (binary strings = subsets, 2^n bridge to the binomial theorem), manyCells (2,4)=16 (>=2 cells empty guaranteed, no surjections), big43 (4,3)=81 (pigeonhole in every card); other combos null. Two new sections in stubs: two-cells-binary-choices and more-cells-than-items (vacancy as pigeonhole's mirror, n=k bijections as the k!/k^k minority); default33 -> grouping-by-item-1s-destination (its own uniformity paragraph), big43 -> deriving-k-n; obj3 adjusting-n-and-k is the group. Diagrams port cells layout, stacking math (countItemsInCellBefore), readout/legend/formula card, and tuple-labeled mini cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1090/905. Statics grep-verified (13 slugs, 29 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "partition",
+          "fromSection": "related-concepts",
+          "surface": "Partition into groups",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "Permutation with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "strong-composition",
+          "fromSection": "related-concepts",
+          "surface": "Strong composition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "weak-composition",
+          "fromSection": "related-concepts",
+          "surface": "Weak composition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "combination",
+          "fromSection": "grouping-by-item-1s-destination",
+          "surface": "simple combination visualizer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "weak-composition": {
       "slug": "weak-composition",
@@ -18062,58 +19942,240 @@
       "pagePath": "pages/combinatorics/visual-tools/weak-composition/index.jsx",
       "relatedTerms": [
         {
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "limit",
+          "entity": "limit",
+          "sections": [
+            "what-is-a-weak-composition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "right-panel-and-progress"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "outcome",
+          "entity": "random_experiment",
+          "sections": [
+            "key-terms",
+            "three-bars-fifty-six-ways",
+            "right-panel-and-progress",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "partition",
+          "entity": "partition",
+          "sections": [
+            "the-stars-and-bars-argument"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "adjusting-n-and-k"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "remainder",
+          "entity": "remainder",
+          "sections": [
+            "three-bars-fifty-six-ways"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "adjusting-n-and-k"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solutions",
+          "entity": "solution",
+          "sections": [
+            "key-terms",
+            "right-panel-and-progress",
+            "what-is-a-weak-composition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "binomial coefficient",
+          "entity": "binomial_coefficient",
+          "sections": [
+            "the-stars-and-bars-argument"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "binomial_coefficient"
+          },
+          "links": [
+            {
+              "fromSection": "the-stars-and-bars-argument",
+              "surface": "binomial coefficient",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "adjusting-n-and-k",
+            "three-bars-fifty-six-ways",
+            "what-is-a-weak-composition",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "combination"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-n-and-k",
+              "surface": "combinations",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "combinations"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "complementary counting",
+          "entity": "complementary_counting",
+          "sections": [
+            "the-stars-and-bars-argument"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "complementary_counting"
+          },
+          "links": [
+            {
+              "fromSection": "the-stars-and-bars-argument",
+              "surface": "complementary counting",
+              "target": {
+                "path": "/combinatorics/counting-principles",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "multinomial_coefficient"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "Multinomial coefficient",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
           "term": "weak composition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "weak_composition",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Weak composition",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "weak_composition"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "stars and bars",
+          "term": "-group",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "combination with repetition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "multiset coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "hockey-stick identity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "triangular numbers",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "strong composition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "integer solutions",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "identical items",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "group",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "partition"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/weakCompositionDiagrams.js",
@@ -18132,7 +20194,57 @@
         "anchors": 28,
         "orphans": 0,
         "notes": "Ninth combinatorics tool; standard wiring. The scene INVERTS the section's casting: identical items sit still in the strip, the k-1 BARS animate in (stars-and-bars staged literally). States: idle (items seated, bars waiting - 'the choice belongs to the dividers'), building (frozen at (0,1,?) with an empty first bin's dashed bracket), default43 (C(6,2)=15, countdown rows 5+4+3+2+1 = hockey stick), twoBins (k===2 boundary, any n, frozen at (4,2): one bar, five pointable choices), big54 ((5,4): C(8,3)=56, triangular rows 21+15+10+6+3+1, vs 4^5=1024 for distinct items); other combos null. One new section in the obj11 stub: three-bars-fifty-six-ways; default43 -> grouping-by-first-bin-count (its own 5+4+3+2+1 example), twoBins -> the-stars-and-bars-argument; obj3 adjusting-n-and-k is the group. PROSE FIX: obj10's multiset-coefficient notation was the broken '\\\\binom{\\\\binom{k}{n}}{}' (empty bottom argument); rewritten as the doubled-parenthesis \\\\left( \\\\binom{k}{n} \\\\right) form. Diagrams port the holding row, numbered strip, cell-only alternating bin bands, progressive brackets (partKnown logic), dual composition<->bar-positions readouts, formula card, and x1-grouped strip cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1084/1138. Statics grep-verified (12 slugs, 28 anchors all live-region, 0 orphans, 5 units = 5 explanations = 5 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "Simple combination",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "distribution",
+          "fromSection": "related-concepts",
+          "surface": "Distribution into cells",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partition",
+          "fromSection": "related-concepts",
+          "surface": "Partition into groups",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "strong-composition",
+          "fromSection": "related-concepts",
+          "surface": "Strong composition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "key-terms",
+          "surface": "identical items",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "strong-composition": {
       "slug": "strong-composition",
@@ -18141,58 +20253,198 @@
       "pagePath": "pages/combinatorics/visual-tools/strong-composition/index.jsx",
       "relatedTerms": [
         {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "right-panel-and-progress"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "outcome",
+          "entity": "random_experiment",
+          "sections": [
+            "key-terms",
+            "right-panel-and-progress"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "partition",
+          "entity": "partition",
+          "sections": [
+            "the-gap-choice-argument"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "adjusting-n-and-k",
+            "grouping-by-first-bin-count"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "remainder",
+          "entity": "remainder",
+          "sections": [
+            "twenty-ways-the-largest-run"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "adjusting-n-and-k"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solutions",
+          "entity": "solution",
+          "sections": [
+            "key-terms",
+            "right-panel-and-progress",
+            "what-is-a-strong-composition"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "binomial coefficients",
+          "entity": "binomial_coefficient",
+          "sections": [
+            "adjusting-n-and-k",
+            "twenty-ways-the-largest-run",
+            "the-gap-choice-argument"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "binomial_coefficient"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-n-and-k",
+              "surface": "binomial coefficients",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "adjusting-n-and-k",
+            "what-is-a-strong-composition",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "combination"
+          },
+          "links": [
+            {
+              "fromSection": "adjusting-n-and-k",
+              "surface": "combinations",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "combinations"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "multinomial_coefficient"
+          },
+          "links": [
+            {
+              "fromSection": "related-concepts",
+              "surface": "Multinomial coefficient",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
           "term": "strong composition",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "strong_composition",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Strong composition",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "strong_composition"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "weak composition",
+          "term": "-group",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "stars and bars",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "binomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "hockey-stick identity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "positive integer solutions",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "compositions of an integer",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "bijection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "pascal's triangle",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "group",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "partition"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/scenes/strongCompositionDiagrams.js",
@@ -18212,7 +20464,49 @@
         "anchors": 37,
         "orphans": 0,
         "notes": "Tenth combinatorics tool; standard wiring. Sibling of weak-composition but the board differs: bars land in the n-1 GAPS BETWEEN items (dashed drop-zones), never at the ends and never two per gap - so x_i >= 1 is enforced by geometry, not arithmetic. States: idle, building (frozen at (1,2,?) with one gap sealed), and done configs with boundaries first (kEqualsN k===n -> single forced (1,1,...,1); twoBins k===2 -> one bar among n-1 gaps), then default53 (5,3)=C(4,2)=6 rows 3+2+1, big74 (7,4)=C(6,3)=20 rows 10+6+3+1 (centre of Pascal's 6th row); other combos null. Three new sections in stubs obj11-13: two-bins-one-divider, twenty-ways-the-largest-run, when-k-equals-n-the-forced-composition (incl. the C=0 case for k>n); default53 -> grouping-by-first-bin-count (its own 3+2+1 example); obj3 adjusting-n-and-k is the group. NOTE the-gap-choice-argument is a PLAIN section (its unit would have duplicated twoBins; its after was rewritten to link the two-bin section instead of referencing a frame). A stray CJK character ('已') slipped into one drafted paragraph and was corrected; final sweep confirms ASCII+math-symbol text only. Diagrams port the gap geometry, drop-zone indicators, bin bands over item ranges, progressive brackets, dual composition<->chosen-gaps readouts, and gap-based mini cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1084/1102. Statics grep-verified (14 slugs, 37 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "binomial coefficient",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "distribution",
+          "fromSection": "related-concepts",
+          "surface": "Distribution into cells",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partition",
+          "fromSection": "related-concepts",
+          "surface": "Partition into groups",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "weak-composition",
+          "fromSection": "related-concepts",
+          "surface": "weak compositions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-identical",
+          "fromSection": "key-terms",
+          "surface": "identical items",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "pascal-triangle": {
       "slug": "pascal-triangle",
@@ -18221,64 +20515,425 @@
       "pagePath": "pages/combinatorics/visual-tools/pascal-triangle/index.jsx",
       "relatedTerms": [
         {
+          "term": "addition",
+          "entity": "complex_number",
+          "sections": [
+            "mode-1-pascals-identity"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "coefficients",
+          "entity": "coefficient",
+          "sections": [
+            "getting-started",
+            "clicking-cells-and-focus",
+            "the-polynomial-banner"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "element",
+          "entity": "element",
+          "sections": [
+            "key-terms",
+            "mode-3-row-sum",
+            "the-polynomial-banner",
+            "what-are-binomial-coefficients",
+            "why-these-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "events",
+          "entity": "event",
+          "sections": [
+            "mode-4-symmetry"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "functions",
+          "entity": "function",
+          "sections": [
+            "what-are-binomial-coefficients"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "key-terms",
+            "getting-started",
+            "clicking-cells-and-focus",
+            "mode-1-pascals-identity",
+            "mode-2-hockey-stick",
+            "mode-3-row-sum",
+            "mode-4-symmetry",
+            "what-are-binomial-coefficients",
+            "why-these-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "polynomial",
+          "entity": "polynomial",
+          "sections": [
+            "getting-started",
+            "the-polynomial-banner",
+            "what-are-binomial-coefficients"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "probability",
+          "entity": "probability",
+          "sections": [
+            "why-these-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "sets",
+          "entity": "set",
+          "sections": [
+            "clicking-cells-and-focus"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "subsets",
+          "entity": "subset",
+          "sections": [
+            "key-terms",
+            "mode-3-row-sum",
+            "the-polynomial-banner",
+            "what-are-binomial-coefficients",
+            "why-these-identities-matter"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the set-theory section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "binomial distribution",
+          "entity": "binomial_distribution",
+          "sections": [
+            "why-these-identities-matter"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "why-these-identities-matter",
+            "target": {
+              "path": "/probability/distributions/discrete/binomial",
+              "section": null
+            },
+            "method": "repository-link",
+            "crossSection": "probability"
+          },
+          "definitionTarget": {
+            "path": "/probability/definitions",
+            "section": "binomial_distribution"
+          }
+        },
+        {
+          "term": "binomial theorem",
+          "entity": "binomial_theorem",
+          "sections": [
+            "what-are-binomial-coefficients",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/formulas",
+            "section": "binomial_theorem"
+          },
+          "reason": "Not planted in \"what-are-binomial-coefficients\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "cardinality of power sets",
+          "entity": "power_set",
+          "sections": [
+            "why-these-identities-matter"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "why-these-identities-matter",
+            "target": {
+              "path": "/set-theory/subsets",
+              "section": "5"
+            },
+            "method": "repository-link",
+            "crossSection": "set-theory"
+          },
+          "definitionTarget": {
+            "path": "/set-theory/formulas",
+            "section": "power_set"
+          }
+        },
+        {
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "what-are-binomial-coefficients",
+            "why-these-identities-matter",
+            "related-concepts"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "combination"
+          },
+          "links": [
+            {
+              "fromSection": "what-are-binomial-coefficients",
+              "surface": "combinations",
+              "target": {
+                "path": "/combinatorics/combinations",
+                "section": "combinations"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "factorial",
+          "entity": "factorial",
+          "sections": [
+            "getting-started",
+            "clicking-cells-and-focus",
+            "mode-1-pascals-identity",
+            "what-are-binomial-coefficients",
+            "why-these-identities-matter"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "factorial"
+          },
+          "links": [
+            {
+              "fromSection": "getting-started",
+              "surface": "factorial",
+              "target": {
+                "path": "/combinatorics/permutations",
+                "section": null
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "multinomial_coefficient"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "opposite sides",
+          "entity": "opposite_side",
+          "sections": [
+            "mode-4-symmetry"
+          ],
+          "status": "pending",
+          "plan": {
+            "fromSection": "mode-4-symmetry",
+            "target": {
+              "path": "/trigonometry/right-triangle",
+              "section": "1"
+            },
+            "method": "repository-link",
+            "crossSection": "trigonometry"
+          },
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "opposite_side"
+          }
+        },
+        {
+          "term": "pascal's triangle",
+          "entity": "pascals_triangle",
+          "sections": [
+            "key-terms",
+            "the-polynomial-banner",
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "pascals_triangle"
+          },
+          "reason": "Not planted in \"key-terms\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "permutation",
+          "entity": "permutation",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/definitions",
+            "section": "permutation"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "vandermonde's identity",
+          "entity": "vandermonde_s_identity",
+          "sections": [
+            "related-concepts"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/combinatorics/formulas",
+            "section": "vandermonde_s_identity"
+          },
+          "reason": "Not planted in \"related-concepts\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
           "term": "pascal's triangle",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Pascal's triangle",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "3"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "binomial coefficient",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "entity": "binomial_coefficient",
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Binomial coefficient",
+              "target": {
+                "path": "/combinatorics/definitions",
+                "section": "binomial_coefficient"
+              },
+              "method": "key-terms-head",
+              "role": "definition",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "pascal's identity",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Pascal's identity",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
           "term": "hockey-stick identity",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Hockey-stick identity",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "binomial theorem",
+          "term": "row sum",
           "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Row sum",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         },
         {
-          "term": "triangular numbers",
+          "term": "symmetry",
           "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "catalan numbers",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "vandermonde's identity",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "lucas's theorem",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "power set",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
+          "sections": [
+            "key-terms"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "key-terms",
+              "surface": "Symmetry",
+              "target": {
+                "path": "/combinatorics/binomial-coefficient",
+                "section": "2"
+              },
+              "method": "key-terms-head-lesson",
+              "role": "lesson",
+              "added": "2026-09-22"
+            }
+          ]
         }
       ],
       "diagramsModule": "app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams.js",
@@ -18297,7 +20952,41 @@
         "anchors": 36,
         "orphans": 0,
         "notes": "ELEVENTH AND LAST COMBINATORICS TOOL - section complete. Structurally unlike scenes #1-#10: NO ANIMATION (component lives in new-visualizers/general/, not scenes/). States are the four LENSES (identity / hockey / rowsum / symmetry) plus the unfocused view; stateKey = focusN===null ? 'unfocused' : mode. The page already had a dedicated section per mode (obj3-obj6), so mapping was one-to-one with ZERO new sections; obj2 clicking-cells-and-focus took the unfocused frame. Frozen states were TUNED TO MATCH each section's own worked example: identity C(4,2)=3+3, hockey C(5,2)=1+2+3+4, rowsum row 4 = 16 (moved off row 5), symmetry C(7,2)=C(7,5)=21 at N=7 (moved off N=6). obj1 getting-started keeps prose-only after via a new plainWithAfter() helper (no unit - its natural frame is the identity one, which obj3 owns). Diagrams port cell geometry, the four role fills (focus solid accent + C(n,r) caption, related amber-soft, secondary green-soft, default dashed), per-mode connectors (dashed parent lines / hockey polyline / symmetry arc), row labels, the rowsum right-edge label, and the (a+b)^n banner verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1090/739. Statics grep-verified (11 slugs, 36 anchors, 0 orphans, 5 units = 5 explanations = 5 stateRows). COMBINATORICS SECTION TOTALS (summed from this file, not by hand): 11 tools, 67 states, 141 sections, 366 anchors, 0 orphans. Registry parses clean; 52 of 57 entries now carry line1.done."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "combination",
+          "fromSection": "related-concepts",
+          "surface": "Binomial coefficient calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "permutation-with-repetition",
+          "fromSection": "related-concepts",
+          "surface": "Combination with repetition",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "full-permutation",
+          "fromSection": "getting-started",
+          "surface": "factorial",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "partition",
+          "fromSection": "why-these-identities-matter",
+          "surface": "grouping",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "calculus-tangent-line": {
       "slug": "tangent-line",

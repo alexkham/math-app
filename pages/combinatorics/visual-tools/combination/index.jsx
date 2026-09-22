@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import SimpleCombination from '../../../../app/components/combinatorics/new-visualizers/scenes/SimpleCombination'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import simpleCombinationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/simpleCombinationDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,11 +523,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Combination** — an unordered selection of $r$ items from a set of $n$ distinct items, with no item reused. The count is $C(n, r) = n! / (r! \\cdot (n - r)!)$.
+      content: `[Combination](!/combinatorics/definitions#combination) — an unordered selection of $r$ items from a set of $n$ distinct items, with no item reused. The count is $C(n, r) = n! / (r! \\cdot (n - r)!)$.
 
-**$C(n, r)$ / $\\binom{n}{r}$ / "$n$ choose $r$"** — three notations for the same value, the binomial coefficient. All count the number of size-$r$ subsets of an $n$-element set.
+**$C(n, r)$ / $\\binom{n}{r}$ / "$n$ choose $r$"** — three notations for the same value, the [binomial coefficient](!/combinatorics/binomial-coefficient). All count the number of size-$r$ subsets of an $n$-element set.
 
-**Order doesn't matter** — $\\{A, B, C\\}$ and $\\{C, A, B\\}$ are the same combination. This is what distinguishes combinations from permutations.
+**Order doesn't matter** — $\\{A, B, C\\}$ and $\\{C, A, B\\}$ are the same combination. This is what distinguishes [combinations](!/combinatorics/combinations#combinations) from [permutations](!/combinatorics/permutations).
 
 **Canonical order** — the visual convention for showing each subset: always smallest element first, then in increasing order. This keeps equivalent subsets from looking different on screen.
 
@@ -677,7 +679,7 @@ The encoding is consistent across the source row, the build set, the flying ball
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds, anchored by the header **Simple combinations** with the full formula $C(n, r) = n! / (r! \\cdot (n - r)!) = \\text{total}$ and a one-line reminder that each subset is counted $r!$ times among partial permutations, so $C(n, r) = P(n, r) / r!$.
+      content: `The right panel narrates the build as it unfolds, anchored by the header **Simple combinations** with the full formula $C(n, r) = n! / (r! \\cdot (n - r)!) = \\text{total}$ and a one-line reminder that each subset is counted $r!$ times among [partial permutations](!/combinatorics/permutations#without), so $C(n, r) = P(n, r) / r!$.
 
 A **StepRow** is added for each [smallest-item group](!#grouping-by-smallest-item) as soon as a subset in that group starts or completes. Each StepRow shows:
 
@@ -745,19 +747,33 @@ That two-to-one pairing **is** the formula. The division by $r!$ is not an algeb
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Partial permutation without repetition** — the ordered companion. Counts ordered selections of $r$ from $n$. Formula $P(n, r) = n! / (n - r)!$, related to $C(n, r)$ by $P(n, r) = C(n, r) \\cdot r!$.
+      content: `[Partial permutation without repetition](!/combinatorics/visual-tools/partial-permutation) — the ordered companion. Counts ordered selections of $r$ from $n$. Formula $P(n, r) = n! / (n - r)!$, related to $C(n, r)$ by $P(n, r) = C(n, r) \\cdot r!$.
 
-**Combination with repetition** — relaxes the no-reuse rule, counting multisets of size $r$ from $n$ types. Formula $\\binom{n + r - 1}{r}$.
+[Combination with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — relaxes the no-reuse rule, counting multisets of size $r$ from $n$ types. Formula $\\binom{n + r - 1}{r}$.
 
 **Binomial theorem** — the algebraic context for $\\binom{n}{r}$: the expansion of $(x + y)^n$ has coefficients $\\binom{n}{r}$ on $x^r y^{n - r}$.
 
-**Pascal's triangle** — every entry is a binomial coefficient $\\binom{n}{r}$. Adjacent rows satisfy $\\binom{n}{r} = \\binom{n - 1}{r - 1} + \\binom{n - 1}{r}$, the rule that builds the triangle.
+[Pascal's triangle](!/combinatorics/visual-tools/pascal-triangle) — every entry is a binomial coefficient $\\binom{n}{r}$. Adjacent rows satisfy $\\binom{n}{r} = \\binom{n - 1}{r - 1} + \\binom{n - 1}{r}$, the rule that builds the triangle.
 
 **Pascal's identity** — the [smallest-element grouping](!#grouping-by-smallest-item) in this tool gives a direct visual proof: $\\binom{n}{r} = \\sum_{i} \\binom{n - 1 - i}{r - 1}$ summed over valid smallest indices.
 
 **Multinomial coefficient** — generalizes $\\binom{n}{r}$ to more than two groups: $\\binom{n}{k_1, k_2, \\dots, k_m} = n! / (k_1! \\cdots k_m!)$.
 
-**Combinatorics calculator** — to compute $C(n, r)$ for arbitrary $n$ and $r$, see the **combination calculator**.`,
+**Combinatorics calculator** — to compute $C(n, r)$ for arbitrary $n$ and $r$, see the **combination calculator**.
+
+[Circular permutation](!/combinatorics/visual-tools/circular-permutation) — arranging the chosen items around a circle instead of leaving them unordered multiplies the count by $(r-1)!$.
+
+[Distribution into cells](!/combinatorics/visual-tools/distribution) — choosing which items go in one cell is a combination; repeating the choice cell by cell is the distribution count.
+
+[Full permutation](!/combinatorics/visual-tools/full-permutation) — ordering the chosen $r$ items afterwards is what turns $C(n, r)$ into $P(n, r)$.
+
+[Partition into groups](!/combinatorics/visual-tools/partition) — a partition into two groups is exactly one combination, and the general case is the multinomial extension.
+
+[Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — a multiset arrangement is a sequence of combinations, one per distinct item type.
+
+**Strong composition** — the number of [strong compositions](!/combinatorics/visual-tools/strong-composition) of $n$ into $k$ parts is the single binomial coefficient $\\binom{n-1}{k-1}$.
+
+[Weak composition](!/combinatorics/visual-tools/weak-composition) — the stars-and-bars argument turns the count into $\\binom{n+k-1}{k-1}$, another binomial coefficient.`,
       before: ``,
       after: ``,
       link: '',
@@ -954,6 +970,7 @@ The single-card run is also the fastest way to sanity-check the tool's grouping 
 
   return {
     props: {
+      relatedTools: getRelatedTools('combination'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -976,7 +993,7 @@ The single-card run is also the fastest way to sanity-check the tool's grouping 
   }
 }
 
-export default function SimpleCombinationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function SimpleCombinationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1133,6 +1150,7 @@ export default function SimpleCombinationVisualizer({seoData, sectionsContent, i
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PermutationWithIdenticalItems from '../../../../app/components/combinatorics/new-visualizers/scenes/PermutationWithIdentical'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import permutationWithIdenticalDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/permutationWithIdenticalDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -523,9 +525,9 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `**Multiset** — a collection of items where some may be identical. Unlike a set, a multiset records how many copies of each item are present. In this tool the multiset is encoded as a string like **AABBC**.
 
-**Permutation with identical items** — a distinct arrangement of a multiset in a line. Swapping two identical copies does not produce a new permutation. The count is $n! / (k_1! \\cdot k_2! \\cdots)$ where each $k_i$ is the size of an identical group.
+[Permutation with identical items](!/combinatorics/definitions#permutation_with_identical_items) — a distinct arrangement of a multiset in a line. Swapping two identical copies does not produce a new permutation. The count is $n! / (k_1! \\cdot k_2! \\cdots)$ where each $k_i$ is the size of an identical group.
 
-**Multinomial coefficient** — the formula $\\binom{n}{k_1, k_2, \\dots} = n! / (k_1! \\cdot k_2! \\cdots)$. The generalization of the binomial coefficient to more than two groups.
+[Multinomial coefficient](!/combinatorics/definitions#multinomial_coefficient) — the formula $\\binom{n}{k_1, k_2, \\dots} = n! / (k_1! \\cdot k_2! \\cdots)$. The generalization of the [binomial coefficient](!/combinatorics/binomial-coefficient) to more than two groups.
 
 **Distinct first item** — a unique item value in the multiset. The completed section groups arrangements by which distinct item appears in position $\\#1$, so there is one group per distinct item, not one per source position.
 
@@ -549,7 +551,7 @@ export async function getStaticProps(){
 
 To run the visualization:
 
-• Press **▶ Play** to auto-build all distinct permutations of the current multiset.
+• Press **▶ Play** to auto-build all distinct [permutations](!/combinatorics/permutations) of the current multiset.
 
 • Press **Step ▶** to advance one ball at a time.
 
@@ -709,7 +711,7 @@ For deeper coverage, see the **permutation with identical items** section on the
 
     obj9: {
       title: `Why Divide by k!`,
-      content: `Start with the multiset treated as if every item were distinct — say by tagging copies $A_1, A_2$ and $B_1, B_2$ for **AABB**. There are $n! = 4! = 24$ full permutations of the tagged set.
+      content: `Start with the multiset treated as if every item were distinct — say by tagging copies $A_1, A_2$ and $B_1, B_2$ for **AABB**. There are $n! = 4! = 24$ [full permutations](!/combinatorics/permutations#full) of the tagged set.
 
 But the tags are fake. When we remove them and look at the actual multiset, many of those $24$ permutations collapse into the same arrangement:
 
@@ -733,19 +735,25 @@ The collapse ratio is the same for every card, which is why plain division works
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Full permutation** — the case where every item is distinct, so all $k_i = 1$. The formula reduces to $n!$ because [every factorial in the denominator is 1](!#why-divide-by-k).
+      content: `[Full permutation](!/combinatorics/visual-tools/full-permutation) — the case where every item is distinct, so all $k_i = 1$. The formula reduces to $n!$ because [every factorial in the denominator is 1](!#why-divide-by-k).
 
-**Partial permutation without repetition** — pick and arrange only $r$ items from a distinct set of $n$. Formula $n! / (n - r)!$.
+[Partial permutation without repetition](!/combinatorics/visual-tools/partial-permutation) — pick and arrange only $r$ items from a distinct set of $n$. Formula $n! / (n - r)!$.
 
-**Permutation with repetition** — items can be reused, but a fixed pool of $n$ distinct options is used for $r$ positions. Formula $n^r$.
+[Permutation with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — items can be reused, but a fixed pool of $n$ distinct options is used for $r$ positions. Formula $n^r$.
 
-**Circular permutation** — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
+[Circular permutation](!/combinatorics/visual-tools/circular-permutation) — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
 
-**Multinomial coefficient** — the direct algebraic name for $n! / (k_1! \\cdot k_2! \\cdots)$. Generalizes the binomial coefficient and appears in the multinomial theorem.
+**Multinomial coefficient** — the direct algebraic name for $n! / (k_1! \\cdot k_2! \\cdots)$. Generalizes the [binomial coefficient](!/combinatorics/visual-tools/combination) and appears in the [multinomial theorem](!/combinatorics/binomial-theorem#4).
 
 **Binomial coefficient** — the special case with exactly two groups: $\\binom{n}{k} = n! / (k! \\cdot (n - k)!)$. Counts arrangements of a multiset with two distinct items.
 
-**Combinatorics calculator** — to compute $n! / (k_1! \\cdot k_2! \\cdots)$ for any multiset, see the **multiset permutation calculator**.`,
+**Combinatorics calculator** — to compute $n! / (k_1! \\cdot k_2! \\cdots)$ for any multiset, see the **multiset permutation calculator**.
+
+[Partition into groups](!/combinatorics/visual-tools/partition) — the same multinomial coefficient, read as box sizes rather than as repeat counts.
+
+[Strong composition](!/combinatorics/visual-tools/strong-composition) — the repeat counts $k_1, \\ldots, k_m$ of a multiset are themselves a composition of $n$ into positive parts.
+
+[Weak composition](!/combinatorics/visual-tools/weak-composition) — allowing an item type to appear zero times makes the repeat counts a [weak composition](!/combinatorics/combinations#weak) instead.`,
       before: ``,
       after: ``,
       link: '',
@@ -966,6 +974,7 @@ For genuinely large multisets the tool bows out and the formula alone remains: M
 
   return {
     props: {
+      relatedTools: getRelatedTools('permutation-with-identical'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -988,7 +997,7 @@ For genuinely large multisets the tool bows out and the formula alone remains: M
   }
 }
 
-export default function PermutationWithIdenticalItemsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PermutationWithIdenticalItemsVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1148,6 +1157,7 @@ export default function PermutationWithIdenticalItemsVisualizer({seoData, sectio
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

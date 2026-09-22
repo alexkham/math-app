@@ -116,6 +116,27 @@ ALIASES = {
         'calculus-riemann-sum': ['riemann sum', 'riemann sums', 'definite integral', 'area under the curve'],
         'calculus-tangent-line': ['tangent line', 'tangent lines', 'tangent line at a point'],
     },
+    'combinatorics': {
+        'circular-permutation': ['circular permutation', 'circular permutations', 'circular arrangement',
+                                 'circular arrangements', 'round table'],
+        'combination': ['combination', 'combinations', 'simple combination', 'binomial coefficient',
+                        'n choose k', 'choose'],
+        'distribution': ['distribution into cells', 'distributions into cells', 'distribution into boxes',
+                         'balls into boxes', 'balls and boxes', 'into cells'],
+        'full-permutation': ['full permutation', 'full permutations', 'permutation of all', 'factorial',
+                             'arrangements of all'],
+        'partial-permutation': ['partial permutation', 'partial permutations', 'k-permutation',
+                                'permutation of k', 'arrangements of k'],
+        'partition': ['partition into groups', 'partition', 'partitions', 'grouping', 'into groups'],
+        'pascal-triangle': ["pascal's triangle", 'pascal triangle', "pascal's rule"],
+        'permutation-with-identical': ['permutation with identical items', 'identical items',
+                                       'repeated letters', 'multiset permutation', 'multiset permutations',
+                                       'permutations with identical'],
+        'permutation-with-repetition': ['permutation with repetition', 'permutations with repetition',
+                                        'with repetition', 'with replacement'],
+        'strong-composition': ['strong composition', 'strong compositions', 'composition of an integer'],
+        'weak-composition': ['weak composition', 'weak compositions', 'stars and bars'],
+    },
 }
 
 SKIP = [

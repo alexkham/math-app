@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import StrongComposition from '../../../../app/components/combinatorics/new-visualizers/scenes/StrongComposition'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import strongCompositionDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/strongCompositionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,9 +523,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Strong composition** — a distribution of $n$ identical items into $k$ distinct bins where **every bin must hold at least one item**. Equivalently, the number of **positive** integer solutions to $x_1 + x_2 + \\dots + x_k = n$. The count is $\\binom{n - 1}{k - 1}$.
+      content: `[Strong composition](!/combinatorics/definitions#strong_composition) — a distribution of $n$ [identical items](!/combinatorics/visual-tools/permutation-with-identical) into $k$ distinct bins where **every bin must hold at least one item**. Equivalently, the number of **positive** integer solutions to $x_1 + x_2 + \\dots + x_k = n$. The count is $\\binom{n - 1}{k - 1}$.
 
-**Positive parts** — the requirement $x_i \\geq 1$ for every $i$, which distinguishes strong from weak compositions. Empty bins are not allowed.
+**Positive parts** — the requirement $x_i \\geq 1$ for every $i$, which distinguishes strong from [weak compositions](!/combinatorics/combinations#weak). Empty bins are not allowed.
 
 **Gap** — the space between two adjacent items in the row. With $n$ items, there are exactly $n - 1$ gaps available, and each gap can hold at most one divider.
 
@@ -531,7 +533,7 @@ export async function getStaticProps(){
 
 **Composition tuple $(x_1, x_2, \\dots, x_k)$** — the encoded outcome: $x_i$ is the run length in bin $i$, with $x_1 + x_2 + \\dots + x_k = n$ and each $x_i \\geq 1$.
 
-**$x_1$-group** — the family of strong compositions with the same first-bin count. Group sizes vary as $\\binom{n - j - 1}{k - 2}$ for $x_1 = j$, with $j$ ranging from $1$ to $n - k + 1$.`,
+[group](!/combinatorics/combinations#partition) — the family of [strong compositions](!/combinatorics/combinations#strong) with the same first-bin count. Group sizes vary as $\\binom{n - j - 1}{k - 2}$ for $x_1 = j$, with $j$ ranging from $1$ to $n - k + 1$.`,
       before: ``,
       after: ``,
       link: '',
@@ -597,7 +599,7 @@ Compare this to the weak tool's strip, where bars could land beside each other a
 
 • **k** sets the number of bins. Range $2$ to $4$, with the additional constraint $k \\leq n$ (you can't have more nonempty bins than items).
 
-Common combinations:
+Common [combinations](!/combinatorics/combinations#combinations):
 
 • $n = 3, k = 2$: $\\binom{2}{1} = 2$ compositions: $(2, 1)$ and $(1, 2)$.
 
@@ -613,7 +615,7 @@ Common combinations:
 
 Reducing $n$ below the current $k$ clamps $k$ down automatically. Changing either value resets the build, refreshes the formula in the header, and rebuilds the completed section into the new set of $x_1$-rows.
 
-Note the symmetry with binomial coefficients: $\\binom{n - 1}{k - 1} = \\binom{n - 1}{n - k}$. For example $\\binom{6}{2} = \\binom{6}{4} = 15$ — the same count interpreted as choosing gap positions or choosing non-divider positions.`,
+Note the symmetry with [binomial coefficients](!/combinatorics/binomial-coefficient): $\\binom{n - 1}{k - 1} = \\binom{n - 1}{n - k}$. For example $\\binom{6}{2} = \\binom{6}{4} = 15$ — the same count interpreted as choosing gap positions or choosing non-divider positions.`,
       before: ``,
       after: ``,
       link: '',
@@ -753,15 +755,15 @@ That translation is why the two scenarios share a formula shape while counting d
       title: `Related Concepts`,
       content: `**Weak composition** — same setup but empty bins allowed. Formula $\\binom{n + k - 1}{k - 1}$. Always at least as large as the strong count because zero parts are permitted.
 
-**Simple combination** — the no-repetition unordered selection. $\\binom{n}{r}$. The strong-composition formula is itself a binomial coefficient, $\\binom{n - 1}{k - 1}$ — choosing gap positions out of available gaps.
+**Simple combination** — the no-repetition unordered selection. $\\binom{n}{r}$. The strong-composition formula is itself a [binomial coefficient](!/combinatorics/visual-tools/combination), $\\binom{n - 1}{k - 1}$ — choosing gap positions out of available gaps.
 
-**Distribution into cells** — distributes $n$ **distinct** items (not identical) into $k$ labeled cells with no capacity rule. Formula $k^n$.
+[Distribution into cells](!/combinatorics/visual-tools/distribution) — distributes $n$ **distinct** items (not identical) into $k$ labeled cells with no capacity rule. Formula $k^n$.
 
-**Partition into groups** — distributes $n$ distinct items into $k$ labeled boxes of fixed sizes. Multinomial coefficient $n! / (n_1! \\cdots n_k!)$.
+[Partition into groups](!/combinatorics/visual-tools/partition) — distributes $n$ distinct items into $k$ labeled boxes of fixed sizes. [Multinomial coefficient](!/combinatorics/binomial-coefficient#4) $n! / (n_1! \\cdots n_k!)$.
 
 **Total number of compositions** — across all values of $k$ from $1$ to $n$, summing $\\sum_{k=1}^{n} \\binom{n - 1}{k - 1} = 2^{n-1}$. Each of the $n - 1$ gaps is independently a bar or not — the [all-gaps-filled extreme](!#when-k-equals-n-the-forced-composition) is one term of that sum.
 
-**Bijection $x_i \\mapsto x_i - 1$** — converts strong compositions of $n$ into $k$ parts into weak compositions of $n - k$ into $k$ parts. Both counted by $\\binom{n - 1}{k - 1}$, as the [gap-choice argument](!#the-gap-choice-argument) shows.
+**Bijection $x_i \\mapsto x_i - 1$** — converts strong compositions of $n$ into $k$ parts into [weak compositions](!/combinatorics/visual-tools/weak-composition) of $n - k$ into $k$ parts. Both counted by $\\binom{n - 1}{k - 1}$, as the [gap-choice argument](!#the-gap-choice-argument) shows.
 
 **Hockey-stick identity** — [grouping by x₁](!#grouping-by-first-bin-count) proves $\\sum_{j=1}^{n-k+1} \\binom{n - j - 1}{k - 2} = \\binom{n - 1}{k - 1}$.
 
@@ -964,6 +966,7 @@ The zero case beyond the boundary is worth stating because word problems produce
 
   return {
     props: {
+      relatedTools: getRelatedTools('strong-composition'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -986,7 +989,7 @@ The zero case beyond the boundary is worth stating because word problems produce
   }
 }
 
-export default function StrongCompositionVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function StrongCompositionVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1105,6 +1108,7 @@ export default function StrongCompositionVisualizer({seoData, sectionsContent, i
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

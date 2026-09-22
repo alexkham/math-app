@@ -2373,11 +2373,11 @@
     },
     "combinatorics/basics": {
       "slug": "basics",
-      "name": "Combinatorics Basics",
+      "name": "Combinatorics Basics: Counting Rules & Scenarios",
       "section": "combinatorics",
       "pagePath": "pages/combinatorics/basics/index.jsx",
       "template": "titled",
-      "templateNote": "Created 2026-08-05 verbatim from the old /combinatorics hub (hub migration). Numeric section ids '1'-'7'. Operation A related-terms mapping not yet performed.",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
       "sections": [
         "1",
         "2",
@@ -2385,18 +2385,224 @@
         "4",
         "5",
         "6",
-        "7"
+        "7",
+        "faq"
       ],
-      "sectionTitles": [
-        "Counting Principles",
-        "When Counts Overlap: Inclusion-Exclusion",
-        "Permutations and Combinations",
-        "Standard Scenarios",
-        "The Binomial Coefficient",
-        "The Binomial Theorem",
-        "Related Concepts"
-      ],
-      "relatedTerms": []
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "addition rule",
+          "entity": "addition_rule",
+          "sections": [
+            "1",
+            "2"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "derangement",
+          "entity": "derangement",
+          "sections": [
+            "2"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "multiplication rule",
+          "entity": "multiplication_rule",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "pascal's rule",
+          "entity": "pascal_s_rule",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "binomial coefficient",
+          "entity": "binomial_coefficient",
+          "sections": [
+            "3",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "pascal-triangle",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "binomial theorem",
+          "entity": "binomial_theorem",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "pascal-triangle"
+          ]
+        },
+        {
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "3",
+            "4",
+            "5",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "distribution",
+            "full-permutation",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-repetition",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "complementary counting",
+          "entity": "complementary_counting",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "double counting",
+          "entity": "double_counting",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation"
+          ]
+        },
+        {
+          "term": "factorial",
+          "entity": "factorial",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation",
+            "full-permutation",
+            "full-permutation",
+            "partial-permutation",
+            "pascal-triangle"
+          ]
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "4",
+            "5",
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "distribution",
+            "partition",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-identical",
+            "permutation-with-identical",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "multinomial theorem",
+          "entity": "multinomial_theorem",
+          "sections": [
+            "6"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "partition",
+            "permutation-with-identical"
+          ]
+        },
+        {
+          "term": "pascal's triangle",
+          "entity": "pascals_triangle",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "pascal-triangle"
+          ]
+        },
+        {
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "3",
+            "4",
+            "5",
+            "7",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation",
+            "distribution",
+            "full-permutation",
+            "partial-permutation",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-identical",
+            "permutation-with-repetition"
+          ]
+        },
+        {
+          "term": "pigeonhole principle",
+          "entity": "pigeonhole_principle",
+          "sections": [
+            "1"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "distribution",
+            "permutation-with-repetition"
+          ]
+        },
+        {
+          "term": "strong compositions",
+          "entity": "strong_composition",
+          "sections": [
+            "3"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "strong-composition"
+          ]
+        }
+      ]
     },
     "functions/basics": {
       "slug": "basics",
@@ -23864,6 +24070,670 @@
           ]
         }
       ]
+    },
+    "combinatorics/binomial-coefficient": {
+      "slug": "binomial-coefficient",
+      "name": "Binomial Coefficient Formula & Identities",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/binomial-coefficient/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "notation",
+        "3",
+        "4",
+        "5",
+        "6",
+        "faq"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "absorption identity",
+          "entity": "absorption_identity",
+          "sections": [
+            "notation",
+            "3"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "alternating binomial sum",
+          "entity": "alternating_binomial_sum",
+          "sections": [
+            "notation"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "binomial row sum",
+          "entity": "binomial_row_sum",
+          "sections": [
+            "notation"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "binomial symmetry identity",
+          "entity": "binomial_symmetry_identity",
+          "sections": [
+            "notation"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "generalized binomial coefficient",
+          "entity": "generalized_binomial_coefficient",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "hockey stick identity",
+          "entity": "hockey_stick_identity",
+          "sections": [
+            "notation"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "newton's generalized binomial theorem",
+          "entity": "newton_s_generalized_binomial_theorem",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "pascal's rule",
+          "entity": "pascal_s_rule",
+          "sections": [
+            "notation",
+            "3"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "binomial coefficient",
+          "entity": "binomial_coefficient",
+          "sections": [
+            "1",
+            "notation",
+            "3",
+            "4",
+            "5",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "pascal-triangle",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "distribution",
+            "full-permutation",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-repetition",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "4",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "distribution",
+            "partition",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-identical",
+            "permutation-with-identical",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "pascal's triangle",
+          "entity": "pascals_triangle",
+          "sections": [
+            "notation",
+            "3",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "pascal-triangle"
+          ]
+        },
+        {
+          "term": "vandermonde's identity",
+          "entity": "vandermonde_s_identity",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "pascal-triangle"
+          ]
+        }
+      ]
+    },
+    "combinatorics/binomial-theorem": {
+      "slug": "binomial-theorem",
+      "name": "Binomial Theorem Formula, Proof, Examples",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/binomial-theorem/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "notation",
+        "5",
+        "6",
+        "7",
+        "faq"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "general term in binomial expansion",
+          "entity": "general_term_in_binomial_expansion",
+          "sections": [
+            "2"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "middle term in binomial expansion",
+          "entity": "middle_term_in_binomial_expansion",
+          "sections": [
+            "2"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "pascal's rule",
+          "entity": "pascal_s_rule",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "weighted binomial sum",
+          "entity": "weighted_binomial_sum",
+          "sections": [
+            "3"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "binomial coefficients",
+          "entity": "binomial_coefficient",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "pascal-triangle",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "binomial theorem",
+          "entity": "binomial_theorem",
+          "sections": [
+            "1",
+            "notation",
+            "6",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "pascal-triangle"
+          ]
+        },
+        {
+          "term": "multinomial theorem",
+          "entity": "multinomial_theorem",
+          "sections": [
+            "notation"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "partition",
+            "permutation-with-identical"
+          ]
+        },
+        {
+          "term": "pascal's triangle",
+          "entity": "pascals_triangle",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "pascal-triangle"
+          ]
+        }
+      ]
+    },
+    "combinatorics/calculator": {
+      "slug": "calculator",
+      "name": "Combinatorics Calculator - Permutations & Combinations",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/calculator/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [],
+      "mapped": "2026-09-22",
+      "relatedTerms": []
+    },
+    "combinatorics/combinations": {
+      "slug": "combinations",
+      "name": "Combinations: Formula, Types & Examples",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/combinations/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "types",
+        "combinations",
+        "partition",
+        "weak",
+        "strong",
+        "distribution"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": []
+    },
+    "combinatorics/counting-principles": {
+      "slug": "counting-principles",
+      "name": "Counting Principles in Combinatorics",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/counting-principles/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "faq"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "addition rule",
+          "entity": "addition_rule",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "faq"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "hockey stick identity",
+          "entity": "hockey_stick_identity",
+          "sections": [
+            "4"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "multiplication rule",
+          "entity": "multiplication_rule",
+          "sections": [
+            "2",
+            "6",
+            "8",
+            "faq"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "pigeonhole principle (generalized)",
+          "entity": "pigeonhole_principle_generalized",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "binomial theorem",
+          "entity": "binomial_theorem",
+          "sections": [
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "pascal-triangle"
+          ]
+        },
+        {
+          "term": "combinations",
+          "entity": "combination",
+          "sections": [
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "combination",
+            "distribution",
+            "full-permutation",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-repetition",
+            "strong-composition",
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "complementary counting",
+          "entity": "complementary_counting",
+          "sections": [
+            "3",
+            "6",
+            "8",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "weak-composition"
+          ]
+        },
+        {
+          "term": "double counting",
+          "entity": "double_counting",
+          "sections": [
+            "4",
+            "6",
+            "8",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation"
+          ]
+        },
+        {
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation",
+            "distribution",
+            "full-permutation",
+            "partial-permutation",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-identical",
+            "permutation-with-repetition"
+          ]
+        },
+        {
+          "term": "pigeonhole principle",
+          "entity": "pigeonhole_principle",
+          "sections": [
+            "5",
+            "6",
+            "7",
+            "8",
+            "faq"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "distribution",
+            "permutation-with-repetition"
+          ]
+        }
+      ]
+    },
+    "combinatorics/inclusion-exclusion": {
+      "slug": "inclusion-exclusion",
+      "name": "Inclusion-Exclusion Formula & Examples",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/inclusion-exclusion/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "faq"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "derangements",
+          "entity": "derangement",
+          "sections": [
+            "4",
+            "5",
+            "6",
+            "8",
+            "faq"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "inclusion-exclusion complementary form",
+          "entity": "inclusion_exclusion_complementary_form",
+          "sections": [
+            "4"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "inclusion-exclusion principle (general)",
+          "entity": "inclusion_exclusion_principle_general",
+          "sections": [
+            "3"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "inclusion-exclusion principle (three sets)",
+          "entity": "inclusion_exclusion_principle_three_sets",
+          "sections": [
+            "2"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "inclusion-exclusion principle (two sets)",
+          "entity": "inclusion_exclusion_principle_two_sets",
+          "sections": [
+            "1"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "surjective functions count",
+          "entity": "surjective_functions_count",
+          "sections": [
+            "6"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "5"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation",
+            "distribution",
+            "full-permutation",
+            "partial-permutation",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-identical",
+            "permutation-with-repetition"
+          ]
+        }
+      ]
+    },
+    "combinatorics/permutations": {
+      "slug": "permutations",
+      "name": "Permutations: Types, Formulas, Examples",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/permutations/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [
+        "logic",
+        "types",
+        "full",
+        "identical",
+        "without",
+        "notation",
+        "with",
+        "8"
+      ],
+      "mapped": "2026-09-22",
+      "relatedTerms": [
+        {
+          "term": "derangement asymptotic limit",
+          "entity": "derangement_asymptotic_limit",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "derangement recurrence",
+          "entity": "derangement_recurrence",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "derangements",
+          "entity": "derangement",
+          "sections": [
+            "8"
+          ],
+          "status": "deferred",
+          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+        },
+        {
+          "term": "factorial",
+          "entity": "factorial",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation",
+            "full-permutation",
+            "full-permutation",
+            "partial-permutation",
+            "pascal-triangle"
+          ]
+        },
+        {
+          "term": "permutations",
+          "entity": "permutation",
+          "sections": [
+            "8"
+          ],
+          "status": "pending",
+          "candidateTools": [
+            "circular-permutation",
+            "distribution",
+            "full-permutation",
+            "partial-permutation",
+            "partition",
+            "pascal-triangle",
+            "permutation-with-identical",
+            "permutation-with-repetition"
+          ]
+        }
+      ]
+    },
+    "combinatorics/permutations/permutations-visualizer": {
+      "slug": "permutations/permutations-visualizer",
+      "name": "Permutations Visualizer",
+      "section": "combinatorics",
+      "pagePath": "pages/combinatorics/permutations/permutations-visualizer/index.jsx",
+      "template": "titled",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "sections": [],
+      "mapped": "2026-09-22",
+      "relatedTerms": []
     }
   },
   "$stubTemplate": {

@@ -494,6 +494,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PartialPermutation from '../../../../app/components/combinatorics/new-visualizers/scenes/PartialPermutation'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import partialPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partialPermutationDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -520,11 +522,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Partial permutation** — an ordered selection of $r$ items from a set of $n$ distinct items, with no item reused. The count is $P(n, r) = n! / (n - r)!$.
+      content: `[Partial permutation](!/combinatorics/definitions#partial_permutation) — an ordered selection of $r$ items from a set of $n$ distinct items, with no item reused. The count is $P(n, r) = n! / (n - r)!$.
 
-**$P(n, r)$** — standard notation for the number of partial permutations of size $r$ taken from $n$ items. Also written $_nP_r$ or $P^n_r$.
+**$P(n, r)$** — standard notation for the number of [partial permutations](!/combinatorics/permutations#without) of size $r$ taken from $n$ items. Also written $_nP_r$ or $P^n_r$.
 
-**Order matters** — two selections with the same items in different positions count as different partial permutations. This is what distinguishes partial permutations from combinations.
+**Order matters** — two selections with the same items in different positions count as different partial permutations. This is what distinguishes partial permutations from [combinations](!/combinatorics/combinations#combinations).
 
 **Position** — a slot in the arrangement, numbered $\\#1$ through $\\#r$ from left to right in the build area.
 
@@ -566,7 +568,7 @@ Every run therefore ends with someone left out. Which items are left out, and in
 
     obj2: {
       title: `The Build Area`,
-      content: `The build area is where one partial permutation at a time is constructed. Unlike a full permutation, only $r$ slots appear — not $n$. The label above the area reads *BUILD AREA (r = R)* with the current $r$.
+      content: `The build area is where one partial permutation at a time is constructed. Unlike a [full permutation](!/combinatorics/permutations#full), only $r$ slots appear — not $n$. The label above the area reads *BUILD AREA (r = R)* with the current $r$.
 
 What to watch:
 
@@ -630,7 +632,7 @@ Each group row in the completed area has:
 
 • A **left-side avatar** showing the first item — a colored circle with the item's number in balls mode, or the letter in letters mode.
 
-• Mini partial-permutation cards, each one a full arrangement of $r$ items starting with that first item.`,
+• Mini partial-[permutation](!/combinatorics/permutations) cards, each one a full arrangement of $r$ items starting with that first item.`,
       before: ``,
       after: `The frozen frame above is the default $P(3, 2)$ completed: six ordered pairs in three rows of two. Read any row and the factoring appears — first slot fixed, one slot to fill, two candidates for it.
 
@@ -742,15 +744,15 @@ Sixty is also where enumeration starts arguing for the formula: every card is on
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Full permutation** — the case [r = n](!#when-r-equals-n), where every item from the source set is used. Formula $P(n, n) = n!$.
+      content: `[Full permutation](!/combinatorics/visual-tools/full-permutation) — the case [r = n](!#when-r-equals-n), where every item from the source set is used. Formula $P(n, n) = n!$.
 
-**Permutation with repetition** — relaxes the no-reuse rule, allowing the same item in multiple positions. Formula $n^r$, which is larger than $P(n, r)$.
+[Permutation with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — relaxes the no-reuse rule, allowing the same item in multiple positions. Formula $n^r$, which is larger than $P(n, r)$.
 
-**Permutation with identical items** — handles a source set where some items are indistinguishable. Divides $n!$ by the factorial of each repeat group's size.
+[Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — handles a source set where some items are indistinguishable. Divides $n!$ by the [factorial](!/combinatorics/permutations) of each repeat group's size.
 
-**Circular permutation** — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
+[Circular permutation](!/combinatorics/visual-tools/circular-permutation) — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
 
-**Combination** — the unordered companion of the partial permutation. Drops the order requirement, so $C(n, r) = P(n, r) / r!$.
+[Combination](!/combinatorics/visual-tools/combination) — the unordered companion of the partial permutation. Drops the order requirement, so $C(n, r) = P(n, r) / r!$.
 
 **Multiplication principle** — the [foundational counting rule](!#deriving-p-n-r-step-by-step) that produces $P(n, r)$ as the product of choices at each successive position.
 
@@ -961,6 +963,7 @@ The agreement between permutations and combinations at $r = 1$ is worth remember
 
   return {
     props: {
+      relatedTools: getRelatedTools('partial-permutation'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -983,7 +986,7 @@ The agreement between permutations and combinations at $r = 1$ is worth remember
   }
 }
 
-export default function PartialPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PartialPermutationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1141,6 +1144,7 @@ export default function PartialPermutationVisualizer({seoData, sectionsContent, 
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

@@ -1,0 +1,52 @@
+{
+  "_note": "Line 3 symmetry-closure sentences for combinatorics (doc step 3, method added-sentence). Every tool page writes Related Concepts as blank-line-separated paragraphs led by a bold term, so style is 'para' throughout. One target tool per line keeps each link contextual.",
+
+  "combination": {
+    "style": "para",
+    "add": [
+      "**Circular permutation** — arranging the chosen items around a circle instead of leaving them unordered multiplies the count by $(r-1)!$.",
+      "**Distribution into cells** — choosing which items go in one cell is a combination; repeating the choice cell by cell is the distribution count.",
+      "**Full permutation** — ordering the chosen $r$ items afterwards is what turns $C(n, r)$ into $P(n, r)$.",
+      "**Partition into groups** — a partition into two groups is exactly one combination, and the general case is the multinomial extension.",
+      "**Permutation with identical items** — a multiset arrangement is a sequence of combinations, one per distinct item type.",
+      "**Strong composition** — the number of strong compositions of $n$ into $k$ parts is the single binomial coefficient $\\\\binom{n-1}{k-1}$.",
+      "**Weak composition** — the stars-and-bars argument turns the count into $\\\\binom{n+k-1}{k-1}$, another binomial coefficient."
+    ]
+  },
+  "permutation-with-repetition": {
+    "style": "para",
+    "add": [
+      "**Distribution into cells** — assigning each of $n$ distinct items to one of $k$ cells is $k^n$, the same $n^r$ counting read the other way round.",
+      "**Pascal's triangle** — the contrast worth seeing: repetition gives powers, while the triangle collects the no-repetition counts.",
+      "**Weak composition** — allowing a part to be zero plays the same role here as allowing an option to be reused."
+    ]
+  },
+  "partition": {
+    "style": "para",
+    "add": [
+      "**Pascal's triangle** — the two-group case of a partition is a binomial coefficient, so the triangle is the partition count in miniature.",
+      "**Strong composition** — an ordered partition of an integer with every part non-empty, the integer analogue of splitting a set into groups.",
+      "**Weak composition** — the same ordered split with empty parts allowed, which is what makes it a stars-and-bars count."
+    ]
+  },
+  "permutation-with-identical": {
+    "style": "para",
+    "add": [
+      "**Partition into groups** — the same multinomial coefficient, read as box sizes rather than as repeat counts.",
+      "**Strong composition** — the repeat counts $k_1, \\\\ldots, k_m$ of a multiset are themselves a composition of $n$ into positive parts.",
+      "**Weak composition** — allowing an item type to appear zero times makes the repeat counts a weak composition instead."
+    ]
+  },
+  "full-permutation": {
+    "style": "para",
+    "add": [
+      "**Pascal's triangle** — each row of the triangle sums to $2^n$, while ordering every item instead gives $n!$."
+    ]
+  },
+  "circular-permutation": {
+    "style": "para",
+    "add": [
+      "**Permutation with repetition** — reusing items around a circle breaks the rotation argument, because rotations of a repeated pattern can coincide."
+    ]
+  }
+}

@@ -1144,6 +1144,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FullPermutation from '../../../../app/components/combinatorics/new-visualizers/scenes/FullPermutation'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import fullPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/fullPermutationDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -1170,9 +1172,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Full permutation** — an arrangement of all $n$ distinct items in a line, where order matters and every item is used exactly once. The count is $n!$.
+      content: `[Full permutation](!/combinatorics/definitions#full_permutation) — an arrangement of all $n$ distinct items in a line, where order matters and every item is used exactly once. The count is $n!$.
 
-**Factorial $n!$** — the product $n \\times (n-1) \\times (n-2) \\times \\cdots \\times 2 \\times 1$. The number of full permutations of $n$ distinct items.
+[Factorial](!/combinatorics/definitions#factorial) — the product $n \\times (n-1) \\times (n-2) \\times \\cdots \\times 2 \\times 1$. The number of [full permutations](!/combinatorics/permutations#full) of $n$ distinct items.
 
 **Position** — a slot in the arrangement, numbered $\\#1$ through $\\#n$ from left to right in the build area.
 
@@ -1180,7 +1182,7 @@ export async function getStaticProps(){
 
 **Permutation prefix** — the part of the arrangement already filled at any moment during the build. A landed ball is part of the prefix; the source row dims items already used.
 
-**$P(n)$ notation** — alternative writing for the count of full permutations: $P(n) = n!$.`,
+[notation](!/combinatorics/binomial-coefficient#notation) — alternative writing for the count of full permutations: $P(n) = n!$.`,
       before: ``,
       after: ``,
       link: '',
@@ -1198,7 +1200,7 @@ export async function getStaticProps(){
 
 To run the visualization:
 
-• Press **▶ Play** to auto-build all $n!$ permutations.
+• Press **▶ Play** to auto-build all $n!$ [permutations](!/combinatorics/permutations).
 
 • Press **Step ▶** to advance one ball at a time.
 
@@ -1386,19 +1388,21 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Partial permutation without repetition** — select and arrange only $r$ of the $n$ items. Formula $\\frac{n!}{(n - r)!}$. Reduces to $n!$ when $r = n$.
+      content: `[Partial permutation without repetition](!/combinatorics/visual-tools/partial-permutation) — select and arrange only $r$ of the $n$ items. Formula $\\frac{n!}{(n - r)!}$. Reduces to $n!$ when $r = n$.
 
-**Permutation with identical items** — when some items in the collection are indistinguishable. Divides $n!$ by the factorial of each repeat group's size.
+[Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — when some items in the collection are indistinguishable. Divides $n!$ by the factorial of each repeat group's size.
 
-**Permutation with repetition** — items can be reused. Formula $n^r$ for $r$ positions filled from $n$ items.
+[Permutation with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — items can be reused. Formula $n^r$ for $r$ positions filled from $n$ items.
 
-**Circular permutation** — arrange $n$ items around a circle where rotations are identical. Formula $(n - 1)!$.
+[Circular permutation](!/combinatorics/visual-tools/circular-permutation) — arrange $n$ items around a circle where rotations are identical. Formula $(n - 1)!$.
 
-**Combinations** — selection where order doesn't matter. The companion concept; full permutations divide $n!$ by $1$ to keep all orderings, combinations divide further to remove ordering.
+[Combinations](!/combinatorics/visual-tools/combination) — selection where order doesn't matter. The companion concept; full permutations divide $n!$ by $1$ to keep all orderings, [combinations](!/combinatorics/combinations#combinations) divide further to remove ordering.
 
 **Multiplication principle** — the [foundational counting rule](!#deriving-n-step-by-step) behind $n!$. If choice $A$ has $a$ options and choice $B$ has $b$ options, the combined choice has $a \\times b$ options.
 
-**Combinatorics calculator** — to compute $n!$ for arbitrary $n$, see the **full permutation calculator**.`,
+**Combinatorics calculator** — to compute $n!$ for arbitrary $n$, see the **full permutation calculator**.
+
+[Pascal's triangle](!/combinatorics/visual-tools/pascal-triangle) — each row of the triangle sums to $2^n$, while ordering every item instead gives $n!$.`,
       before: ``,
       after: ``,
       link: '',
@@ -1584,6 +1588,7 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
 
   return {
     props: {
+      relatedTools: getRelatedTools('full-permutation'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1606,7 +1611,7 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
   }
 }
 
-export default function FullPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function FullPermutationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1762,6 +1767,7 @@ export default function FullPermutationVisualizer({seoData, sectionsContent, int
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

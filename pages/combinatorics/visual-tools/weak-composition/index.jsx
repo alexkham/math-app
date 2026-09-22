@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import WeakComposition from '../../../../app/components/combinatorics/new-visualizers/scenes/WeakComposition'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import weakCompositionDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/weakCompositionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,7 +523,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Weak composition** — a distribution of $n$ identical items into $k$ distinct bins where bins may be empty. Equivalently, the number of non-negative integer solutions to $x_1 + x_2 + \\dots + x_k = n$. The count is $\\binom{n + k - 1}{k - 1}$.
+      content: `[Weak composition](!/combinatorics/definitions#weak_composition) — a distribution of $n$ [identical items](!/combinatorics/visual-tools/permutation-with-identical) into $k$ distinct bins where bins may be empty. Equivalently, the number of non-negative integer solutions to $x_1 + x_2 + \\dots + x_k = n$. The count is $\\binom{n + k - 1}{k - 1}$.
 
 **Stars and bars** — the visual encoding of this problem. Draw $n$ stars in a row and insert $k - 1$ bars among them to split them into $k$ groups. The count of arrangements is $\\binom{n + k - 1}{k - 1}$ because there are $n + k - 1$ total symbols and we choose $k - 1$ positions for the bars.
 
@@ -531,7 +533,7 @@ export async function getStaticProps(){
 
 **Composition tuple $(x_1, x_2, \\dots, x_k)$** — the encoded outcome: $x_i$ is the count of items in bin $i$, with $x_1 + x_2 + \\dots + x_k = n$ and each $x_i \\geq 0$.
 
-**$x_1$-group** — the family of weak compositions with the same first-bin count. The completed section groups results by $x_1$; group sizes vary as $\\binom{n - j + k - 2}{k - 2}$ for $x_1 = j$.`,
+[group](!/combinatorics/combinations#partition) — the family of [weak compositions](!/combinatorics/combinations#weak) with the same first-bin count. The completed section groups results by $x_1$; group sizes vary as $\\binom{n - j + k - 2}{k - 2}$ for $x_1 = j$.`,
       before: ``,
       after: ``,
       link: '',
@@ -597,7 +599,7 @@ Watch what each landing **decides**: a bar fixes the bin to its left, forever. T
 
 • **k** sets the number of distinct bins. Range $2$ to $4$.
 
-Common combinations:
+Common [combinations](!/combinatorics/combinations#combinations):
 
 • $n = 3, k = 2$: $\\binom{4}{1} = 4$ compositions — [one bar, four doors](!#the-stars-and-bars-argument).
 
@@ -733,13 +735,13 @@ For deeper coverage of weak compositions and their connections, see the **weak c
 
 **Every weak composition is determined by where the bars sit.** The bars partition the row into $k$ groups; the $i$th group has $x_i$ stars. Different bar placements give different compositions, and every composition comes from a unique bar placement (including bars adjacent to each other, which encode $x_i = 0$).
 
-**Count the bar placements.** We're choosing $k - 1$ positions out of $n + k - 1$ total to be bars (the rest are stars). The count is the binomial coefficient:
+**Count the bar placements.** We're choosing $k - 1$ positions out of $n + k - 1$ total to be bars (the rest are stars). The count is the [binomial coefficient](!/combinatorics/binomial-coefficient):
 
 $$\\binom{n + k - 1}{k - 1}$$
 
 This is the visual setup the tool implements. Each completed strip has $n$ items in fixed (canonical) positions and $k - 1$ bars in specific cells; the cells without bars hold the items, and the brackets below convert the bar positions back into the tuple $(x_1, \\dots, x_k)$.
 
-The dual reading $\\binom{n + k - 1}{n}$ — choose the $n$ star positions instead of the bars — gives the same count by complementary counting.`,
+The dual reading $\\binom{n + k - 1}{n}$ — choose the $n$ star positions instead of the bars — gives the same count by [complementary counting](!/combinatorics/counting-principles#3).`,
       before: ``,
       after: `The frozen frame above shows the argument at its barest: $k = 2$ bins means a single bar, and the five completed cards are simply the five cells that one bar can occupy among $n + 1 = 5$. "Choose the bar positions" stops being a metaphor — you can point at each choice.
 
@@ -749,15 +751,15 @@ With one bar the binomial collapses to $\\binom{5}{1} = 5$, and the composition 
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Strong composition** — the same setup but every bin must hold at least one item. Formula $\\binom{n - 1}{k - 1}$. Smaller than the weak count because zero parts are forbidden.
+      content: `[Strong composition](!/combinatorics/visual-tools/strong-composition) — the same setup but every bin must hold at least one item. Formula $\\binom{n - 1}{k - 1}$. Smaller than the weak count because zero parts are forbidden.
 
-**Simple combination** — the no-repetition unordered selection. $\\binom{n}{r}$. Weak compositions can be seen as combinations with repetition allowed: choosing $n$ items from $k$ types with reuse equals weak compositions of $n$ into $k$ parts.
+[Simple combination](!/combinatorics/visual-tools/combination) — the no-repetition unordered selection. $\\binom{n}{r}$. Weak compositions can be seen as combinations [with repetition](!/combinatorics/visual-tools/permutation-with-repetition) allowed: choosing $n$ items from $k$ types with reuse equals weak compositions of $n$ into $k$ parts.
 
 **Combination with repetition** — exactly the weak composition count $\\binom{n + k - 1}{n}$ under a different name and framing.
 
-**Distribution into cells** — distributes $n$ **distinct** items (not identical) into $k$ labeled cells. Formula $k^n$, much larger than the weak composition count because items can be distinguished.
+[Distribution into cells](!/combinatorics/visual-tools/distribution) — distributes $n$ **distinct** items (not identical) into $k$ labeled cells. Formula $k^n$, much larger than the weak composition count because items can be distinguished.
 
-**Partition into groups** — distributes $n$ distinct items into $k$ labeled boxes of fixed sizes. Multinomial coefficient $n! / (n_1! \\cdots n_k!)$.
+[Partition into groups](!/combinatorics/visual-tools/partition) — distributes $n$ distinct items into $k$ labeled boxes of fixed sizes. [Multinomial coefficient](!/combinatorics/binomial-coefficient#4) $n! / (n_1! \\cdots n_k!)$.
 
 **Multiset coefficient** — the doubled-parenthesis notation $\\left(\\!\\!\\binom{k}{n}\\!\\!\\right)$ for the weak composition count, emphasizing that the outcome is a size-$n$ multiset over a $k$-element ground set.
 
@@ -931,6 +933,7 @@ Fifty-six is also where the identical-items assumption pays its dividend: the sa
 
   return {
     props: {
+      relatedTools: getRelatedTools('weak-composition'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -953,7 +956,7 @@ Fifty-six is also where the identical-items assumption pays its dividend: the sa
   }
 }
 
-export default function WeakCompositionVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function WeakCompositionVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1070,6 +1073,7 @@ export default function WeakCompositionVisualizer({seoData, sectionsContent, int
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

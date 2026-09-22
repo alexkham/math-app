@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PartitionIntoGroups from '../../../../app/components/combinatorics/new-visualizers/scenes/PartitionIntoGroups'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import partitionIntoGroupsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partitionIntoGroupsDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,11 +523,11 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Partition into groups** — a split of $n$ distinct items into $k$ labeled boxes of fixed sizes $(n_1, n_2, \\dots, n_k)$ with $n_1 + n_2 + \\dots + n_k = n$. The count is $n! / (n_1! \\cdot n_2! \\cdots n_k!)$.
+      content: `[Partition into groups](!/combinatorics/definitions#partition_into_groups) — a split of $n$ distinct items into $k$ labeled boxes of fixed sizes $(n_1, n_2, \\dots, n_k)$ with $n_1 + n_2 + \\dots + n_k = n$. The count is $n! / (n_1! \\cdot n_2! \\cdots n_k!)$.
 
-**Multinomial coefficient** — the formula above, written $\\binom{n}{n_1, n_2, \\dots, n_k}$. Generalizes the binomial coefficient $\\binom{n}{r}$ to more than two groups.
+[Multinomial coefficient](!/combinatorics/definitions#multinomial_coefficient) — the formula above, written $\\binom{n}{n_1, n_2, \\dots, n_k}$. Generalizes the [binomial coefficient](!/combinatorics/binomial-coefficient) $\\binom{n}{r}$ to more than two groups.
 
-**Labeled boxes** — the boxes are distinguishable, named *Box A, Box B, Box C, …* in the tool. Swapping the entire contents of two boxes produces a different partition even if both boxes have the same size.
+[Labeled boxes](!/combinatorics/definitions#partition_into_groups) — the boxes are distinguishable, named *Box A, Box B, Box C, …* in the tool. Swapping the entire contents of two boxes produces a different partition even if both boxes have the same size.
 
 **Within-box order does not matter** — what counts is which items end up together in each box, not the order they appear in. Each box is treated as a set.
 
@@ -709,7 +711,7 @@ Examples:
 
 • Sorting $9$ students into three labeled committees of sizes $4, 3, 2$: $9!/(4! \\cdot 3! \\cdot 2!) = 1260$ assignments.
 
-Note: if the boxes were **unlabeled** instead, you would divide by the number of permutations of equally-sized boxes, since those rearrangements no longer count separately. This tool covers the labeled case — the difference is drawn out under [equal boxes](!#three-plus-one-plus-one-equal-boxes).
+Note: if the boxes were **unlabeled** instead, you would divide by the number of [permutations](!/combinatorics/permutations) of equally-sized boxes, since those rearrangements no longer count separately. This tool covers the labeled case — the difference is drawn out under [equal boxes](!#three-plus-one-plus-one-equal-boxes).
 
 On this page the idea runs live: from the [opening floor plan](!#getting-started), the [build boxes](!#the-build-boxes) fill in canonical order, results group by the red ball's destination, and the [seven shapes of the stepper](!#the-partition-stepper) walk the formula from six partitions up to thirty.
 
@@ -753,15 +755,21 @@ Six is also small enough to expose the labeled-boxes convention: cards like $\\{
       title: `Related Concepts`,
       content: `**Simple combination** — the two-group special case. $C(n, r) = \\binom{n}{r, n - r} = n! / (r! (n - r)!)$.
 
-**Permutation with identical items** — algebraically the same formula $n! / (k_1! k_2! \\cdots)$, but a different scenario. There the $k_i$ are repeat counts of identical items, and the question is distinct multiset arrangements. Here the $n_i$ are box sizes, the items are all distinct, and the question is distinct box assignments.
+[Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — algebraically the same formula $n! / (k_1! k_2! \\cdots)$, but a different scenario. There the $k_i$ are repeat counts of identical items, and the question is distinct multiset arrangements. Here the $n_i$ are box sizes, the items are all distinct, and the question is distinct box assignments.
 
-**Distribution into cells** — relaxes the fixed-size constraint. $n$ distinct items go into $r$ labeled boxes of any size, each item picking a box independently. Formula $r^n$.
+[Distribution into cells](!/combinatorics/visual-tools/distribution) — relaxes the fixed-size constraint. $n$ distinct items go into $r$ labeled boxes of any size, each item picking a box independently. Formula $r^n$.
 
 **Stirling numbers of the second kind $S(n, k)$** — the **unlabeled** counterpart. Counts partitions of $n$ distinct items into $k$ unlabeled non-empty subsets. To convert: a labeled-box partition with all distinct sizes corresponds to $k!$ labeled versions of one unlabeled partition — the distinction explored under [equal boxes](!#three-plus-one-plus-one-equal-boxes).
 
 **Multinomial theorem** — the algebraic context: $(x_1 + x_2 + \\dots + x_k)^n$ expands with multinomial coefficients $\\binom{n}{n_1, \\dots, n_k}$ on each monomial $x_1^{n_1} \\cdots x_k^{n_k}$.
 
-**Combinatorics calculator** — to compute the multinomial coefficient $n!/(n_1! \\cdots n_k!)$ for any partition shape, see the **partition into groups calculator**.`,
+**Combinatorics calculator** — to compute the multinomial coefficient $n!/(n_1! \\cdots n_k!)$ for any partition shape, see the **partition into groups calculator**.
+
+[Pascal's triangle](!/combinatorics/visual-tools/pascal-triangle) — the two-group case of a partition is a [binomial coefficient](!/combinatorics/visual-tools/combination), so the triangle is the partition count in miniature.
+
+[Strong composition](!/combinatorics/visual-tools/strong-composition) — an ordered partition of an integer with every part non-empty, the integer analogue of splitting a set into groups.
+
+[Weak composition](!/combinatorics/visual-tools/weak-composition) — the same ordered split with empty parts allowed, which is what makes it a stars-and-bars count.`,
       before: ``,
       after: ``,
       link: '',
@@ -769,7 +777,7 @@ Six is also small enough to expose the labeled-boxes convention: cards like $\\{
 
     obj11: {
       title: `3+1: A Combination in Disguise`,
-      content: `Any two-box partition is secretly a combination: deciding who goes in Box A completely determines who goes in Box B. For shape $3+1$ on four items, $4!/(3! \\cdot 1!) = 4$ — which is just $\\binom{4}{3}$, choosing the trio (or equivalently $\\binom{4}{1}$, choosing the singleton).
+      content: `Any two-box partition is secretly a [combination](!/combinatorics/combinations#combinations): deciding who goes in Box A completely determines who goes in Box B. For shape $3+1$ on four items, $4!/(3! \\cdot 1!) = 4$ — which is just $\\binom{4}{3}$, choosing the trio (or equivalently $\\binom{4}{1}$, choosing the singleton).
 
 Run it and read the four cards that way: each card is named by the one item standing alone on the right of the divider.
 
@@ -989,6 +997,7 @@ The $12 + 12 + 6$ row split is also a neat self-check of the destination decompo
 
   return {
     props: {
+      relatedTools: getRelatedTools('partition'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1011,7 +1020,7 @@ The $12 + 12 + 6$ row split is also a neat self-check of the destination decompo
   }
 }
 
-export default function PartitionIntoGroupsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PartitionIntoGroupsVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1132,6 +1141,7 @@ export default function PartitionIntoGroupsVisualizer({seoData, sectionsContent,
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

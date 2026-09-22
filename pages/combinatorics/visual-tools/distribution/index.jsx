@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import DistributionIntoCells from '../../../../app/components/combinatorics/new-visualizers/scenes/DistributionIntoCells'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import distributionIntoCellsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/distributionIntoCellsDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,9 +523,9 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Distribution into cells** — an assignment of $n$ distinct items to $k$ labeled cells, where each item independently picks one cell. The count is $k^n$.
+      content: `[Distribution into cells](!/combinatorics/definitions#distribution_into_cells) — an assignment of $n$ distinct items to $k$ labeled cells, where each item independently picks one cell. The count is $k^n$.
 
-**Labeled cells** — the cells are distinguishable, named *Cell 1, Cell 2, …, Cell k*. The same set of items split between *Cell 1* and *Cell 2* differently from how they sit in *Cell 2* and *Cell 1* gives a different distribution.
+[Labeled cells](!/combinatorics/definitions#distribution_into_cells) — the cells are distinguishable, named *Cell 1, Cell 2, …, Cell k*. The same set of items split between *Cell 1* and *Cell 2* differently from how they sit in *Cell 2* and *Cell 1* gives a different distribution.
 
 **No capacity limit** — any cell may receive any number of items, including zero. Cells may end up empty, full, or anything in between.
 
@@ -603,7 +605,7 @@ The caps are:
 
 • $n = 4$: maximum $k = 3$, giving $3^4 = 81$ distributions — the [largest run on this page](!#deriving-k-n).
 
-Common combinations:
+Common [combinations](!/combinatorics/combinations#combinations):
 
 • $n = 3, k = 2$: $2^3 = 8$ distributions — [binary choices](!#two-cells-binary-choices).
 
@@ -629,7 +631,7 @@ This is because once item 1's destination is fixed, the remaining $n - 1$ items 
 
 $$k \\times k^{n - 1} = k^n$$
 
-This uniformity is the visual signature of independent choice. Compare it with the simple combination visualizer, where smallest-item groups shrink as the smallest gets larger, or with partition into groups, where group sizes depend on the box sizes. Here every group is identical in size.
+This uniformity is the visual signature of independent choice. Compare it with the [simple combination visualizer](!/combinatorics/visual-tools/combination), where smallest-item groups shrink as the smallest gets larger, or with [partition into groups](!/combinatorics/combinations#partition), where group sizes depend on the box sizes. Here every group is identical in size.
 
 Each row in the completed area has a *item 1 → Cell c* label on the left and a grid of mini cards. Each mini card shows the full assignment as $k$ small stacked cells plus the tuple $(c_1, c_2, \\dots, c_n)$ below it.`,
       before: ``,
@@ -673,7 +675,7 @@ The encoding is consistent across the items row, the cells, the flying ball, eve
 
     obj7: {
       title: `Right Panel and Progress`,
-      content: `The right panel narrates the build as it unfolds, anchored by the header *Distribution into cells ($k^n$)* with the formula displayed across multiple lines and a reminder that this is the same math as permutations with repetition, framed from the items' point of view rather than positions to fill.
+      content: `The right panel narrates the build as it unfolds, anchored by the header *Distribution into cells ($k^n$)* with the formula displayed across multiple lines and a reminder that this is the same math as [permutations](!/combinatorics/permutations) with repetition, framed from the items' point of view rather than positions to fill.
 
 A **StepRow** is added for each [item-1-destination group](!#grouping-by-item-1s-destination) as soon as a distribution in that group starts or completes. Each StepRow shows:
 
@@ -755,13 +757,13 @@ Eighty-one is also where this tool and its mirror meet: the permutation-with-rep
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Permutation with repetition** — the same formula $n^r$, but with the roles of $n$ and $r$ swapped semantically. There, $r$ positions independently pick from $n$ options; here, $n$ items independently pick from $k$ cells. Mathematically identical: $r$ positions ↔ $n$ items, $n$ options ↔ $k$ cells.
+      content: `[Permutation with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — the same formula $n^r$, but with the roles of $n$ and $r$ swapped semantically. There, $r$ positions independently pick from $n$ options; here, $n$ items independently pick from $k$ cells. Mathematically identical: $r$ positions ↔ $n$ items, $n$ options ↔ $k$ cells.
 
-**Weak composition** — distributes $n$ **identical** items into $k$ labeled cells, with empties allowed. Formula $\\binom{n + k - 1}{k - 1}$. Strictly smaller than $k^n$ because the items can no longer be told apart.
+[Weak composition](!/combinatorics/visual-tools/weak-composition) — distributes $n$ **identical** items into $k$ labeled cells, with empties allowed. Formula $\\binom{n + k - 1}{k - 1}$. Strictly smaller than $k^n$ because the items can no longer be told apart.
 
-**Strong composition** — like weak composition but every cell must receive at least one item. Formula $\\binom{n - 1}{k - 1}$.
+[Strong composition](!/combinatorics/visual-tools/strong-composition) — like [weak composition](!/combinatorics/combinations#weak) but every cell must receive at least one item. Formula $\\binom{n - 1}{k - 1}$.
 
-**Partition into groups** — distributes $n$ distinct items into $k$ labeled cells of **fixed sizes**. Adds a hard constraint that turns $k^n$ into the multinomial coefficient.
+[Partition into groups](!/combinatorics/visual-tools/partition) — distributes $n$ distinct items into $k$ labeled cells of **fixed sizes**. Adds a hard constraint that turns $k^n$ into the [multinomial coefficient](!/combinatorics/binomial-coefficient#4).
 
 **Functions from a set to a set** — the algebraic reading. Counting functions $f: A \\to B$ with $|A| = n$ and $|B| = k$ gives $k^n$, sometimes written $B^A$.
 
@@ -952,6 +954,7 @@ For counts that **require** every cell non-empty, the section offers the [strong
 
   return {
     props: {
+      relatedTools: getRelatedTools('distribution'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -974,7 +977,7 @@ For counts that **require** every cell non-empty, the section offers the [strong
   }
 }
 
-export default function DistributionIntoCellsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function DistributionIntoCellsVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1092,6 +1095,7 @@ export default function DistributionIntoCellsVisualizer({seoData, sectionsConten
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

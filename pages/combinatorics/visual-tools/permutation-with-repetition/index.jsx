@@ -493,6 +493,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PermutationWithRepetition from '../../../../app/components/combinatorics/new-visualizers/scenes/PermutationsWithRepetition'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import permutationsWithRepetitionDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/permutationsWithRepetitionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -519,7 +521,7 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Permutation with repetition** — an ordered arrangement of $r$ items chosen from a pool of $n$ distinct items, with each position filled independently and reuse allowed. The count is $n^r$.
+      content: `[Permutation with repetition](!/combinatorics/definitions#permutation_with_repetition) — an ordered arrangement of $r$ items chosen from a pool of $n$ distinct items, with each position filled independently and reuse allowed. The count is $n^r$.
 
 **$n^r$** — the number of arrangements: $n$ choices for each of $r$ positions, multiplied together. Equivalently, the number of length-$r$ sequences (tuples) over an alphabet of size $n$.
 
@@ -601,7 +603,7 @@ The $r$ caps are:
 
 • $n = 5$: maximum $r = 3$, giving $5^3 = 125$ arrangements — the [largest run on this page](!#deriving-n-r).
 
-Common combinations:
+Common [combinations](!/combinatorics/combinations#combinations):
 
 • $n = 3, r = 2$: $3^2 = 9$ arrangements — the [default configuration](!#grouping-by-first-item).
 
@@ -747,21 +749,27 @@ The exponent is what makes this the fastest-growing count in the permutation fam
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Partial permutation without repetition** — pick and arrange $r$ items from $n$ distinct items with no reuse. Formula $n! / (n - r)!$, always smaller than $n^r$ for $r > 1$ — the gap is [the repeated arrangements](!#sequences-versus-permutations).
+      content: `[Partial permutation without repetition](!/combinatorics/visual-tools/partial-permutation) — pick and arrange $r$ items from $n$ distinct items with no reuse. Formula $n! / (n - r)!$, always smaller than $n^r$ for $r > 1$ — the gap is [the repeated arrangements](!#sequences-versus-permutations).
 
-**Full permutation** — every item used exactly once. Special case of partial permutation with $r = n$, formula $n!$.
+[Full permutation](!/combinatorics/visual-tools/full-permutation) — every item used exactly once. Special case of [partial permutation](!/combinatorics/permutations#without) with $r = n$, formula $n!$.
 
-**Permutation with identical items** — distinct arrangements of a multiset where some items are indistinguishable. Formula $n! / (k_1! \\cdot k_2! \\cdots)$.
+[Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — distinct arrangements of a multiset where some items are indistinguishable. Formula $n! / (k_1! \\cdot k_2! \\cdots)$.
 
-**Circular permutation** — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
+[Circular permutation](!/combinatorics/visual-tools/circular-permutation) — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
 
-**Combination with repetition** — the unordered companion of the permutation with repetition. Counts multisets of size $r$ from $n$ types, formula $\\binom{n + r - 1}{r}$.
+[Combination with repetition](!/combinatorics/visual-tools/combination) — the unordered companion of the permutation with repetition. Counts multisets of size $r$ from $n$ types, formula $\\binom{n + r - 1}{r}$.
 
 **Multiplication principle** — the foundational counting rule behind $n^r$. With $r$ independent positions and $n$ options for each, the total is the product of all $r$ factors.
 
 **Cartesian product** — the set-theoretic name for the collection of $r$-tuples this tool enumerates: $\\{1, \\dots, n\\}^r$.
 
-**Combinatorics calculator** — to compute $n^r$ for arbitrary $n$ and $r$, see the **permutation with repetition calculator**.`,
+**Combinatorics calculator** — to compute $n^r$ for arbitrary $n$ and $r$, see the **permutation with repetition calculator**.
+
+[Distribution into cells](!/combinatorics/visual-tools/distribution) — assigning each of $n$ distinct items to one of $k$ cells is $k^n$, the same $n^r$ counting read the other way round.
+
+[Pascal's triangle](!/combinatorics/visual-tools/pascal-triangle) — the contrast worth seeing: repetition gives powers, while the triangle collects the no-repetition counts.
+
+[Weak composition](!/combinatorics/visual-tools/weak-composition) — allowing a part to be zero plays the same role here as allowing an option to be reused.`,
       before: ``,
       after: ``,
       link: '',
@@ -771,7 +779,7 @@ The exponent is what makes this the fastest-growing count in the permutation fam
       title: `When r Exceeds n: More Slots Than Items`,
       content: `Set $n = 3, r = 4$ and something quietly remarkable happens: the build area has **more slots than the source has items**. Without repetition this configuration is impossible — after three landings the pool would be empty with a slot still waiting. With unlimited supply it is routine: $3^4 = 81$ sequences.
 
-The pigeonhole principle adds a guarantee: with four slots and three items, **every one of the 81 arrangements contains at least one repeat**. There is no repeat-free card anywhere in this grid — the $P(3, 4)$ that would count them is $0$.
+The [pigeonhole principle](!/combinatorics/counting-principles#5) adds a guarantee: with four slots and three items, **every one of the 81 arrangements contains at least one repeat**. There is no repeat-free card anywhere in this grid — the $P(3, 4)$ that would count them is $0$.
 
 Run it and watch the scale, too: 81 completions is the longest animation the $n = 3$ setting allows, three rows of twenty-seven cards each.`,
       before: ``,
@@ -964,6 +972,7 @@ Spotting the six permutation cards inside the 27 is a good exercise with the mod
 
   return {
     props: {
+      relatedTools: getRelatedTools('permutation-with-repetition'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -986,7 +995,7 @@ Spotting the six permutation cards inside the 27 is a good exercise with the mod
   }
 }
 
-export default function PermutationWithRepetitionVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PermutationWithRepetitionVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1144,6 +1153,7 @@ export default function PermutationWithRepetitionVisualizer({seoData, sectionsCo
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

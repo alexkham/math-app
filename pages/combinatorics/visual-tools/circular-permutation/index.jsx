@@ -1127,6 +1127,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import CircularPermutation from '../../../../app/components/combinatorics/new-visualizers/scenes/CircularPermutations'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import circularPermutationsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/circularPermutationsDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -1153,15 +1155,15 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Circular permutation** — an arrangement of $n$ distinct items around a circle where arrangements that differ only by rotation are considered identical.
+      content: `[Circular permutation](!/combinatorics/definitions#circular_permutation) — an arrangement of $n$ distinct items around a circle where arrangements that differ only by rotation are considered identical.
 
 **Anchor** — the item [fixed at a reference position](!#the-anchor) to break the rotational symmetry. Once anchored, the other items are arranged relative to it.
 
-**Rotational symmetry** — the property that rotating a circular arrangement by any number of positions produces an arrangement that should be counted as the same one.
+[Rotational symmetry](!/combinatorics/definitions#circular_permutation) — the property that rotating a circular arrangement by any number of positions produces an arrangement that should be counted as the same one.
 
-**(n-1)! formula** — the count of distinct circular permutations of $n$ distinct items, equal to $n!$ [divided by the n rotations](!#why-n-1-instead-of-n) of each arrangement.
+[(n-1)! formula](!/combinatorics/inclusion-exclusion#3) — the count of distinct [circular permutations](!/combinatorics/permutations#circular) of $n$ distinct items, equal to $n!$ [divided by the n rotations](!#why-n-1-instead-of-n) of each arrangement.
 
-**Linear permutation** — for comparison: an arrangement of $n$ items in a line, counted by $n!$. The circular case factors out the $n$ rotations, giving $n!/n = (n - 1)!$.
+[Linear permutation](!/combinatorics/definitions#full_permutation) — for comparison: an arrangement of $n$ items in a line, counted by $n!$. The circular case factors out the $n$ rotations, giving $n!/n = (n - 1)!$.
 
 **Reference position** — the slot on the circle where the anchor is placed. In this tool, the top of the build ring.`,
       before: ``,
@@ -1327,7 +1329,7 @@ The classic setting is a round table with $n$ guests. If you labeled the seats $
 
 The formula applies to any cyclic arrangement where positions matter only relative to each other: people around a campfire, keys on a circular keyring, beads on a closed loop, or steps in a periodic schedule.
 
-On this page the idea runs live: from the [opening position](!#getting-started) the [build ring](!#the-build-ring) fills its free slots around [the anchor](!#the-anchor), [changing n](!#adjusting-n) rescales the count along the shifted factorial sequence 2, 6, 24, and the [completed grid](!#the-completed-grid) ends up holding one card per rotation class.
+On this page the idea runs live: from the [opening position](!#getting-started) the [build ring](!#the-build-ring) fills its free slots around [the anchor](!#the-anchor), [changing n](!#adjusting-n) rescales the count along the shifted [factorial](!/combinatorics/permutations) sequence 2, 6, 24, and the [completed grid](!#the-completed-grid) ends up holding one card per rotation class.
 
 For deeper coverage, see the **circular permutation** section on the permutations theory page.`,
       before: ``,
@@ -1343,7 +1345,7 @@ For deeper coverage, see the **circular permutation** section on the permutation
 
 $$\\frac{n!}{n} = (n - 1)!$$
 
-**By anchoring.** Fix one item at a reference position. The remaining $n - 1$ items occupy the other $n - 1$ positions, in any order. That's a linear permutation of $n - 1$ items, which is $(n - 1)!$. No double counting, because [the anchor](!#the-anchor) uniquely identifies each rotation class.
+**By anchoring.** Fix one item at a reference position. The remaining $n - 1$ items occupy the other $n - 1$ positions, in any order. That's a linear [permutation](!/combinatorics/permutations) of $n - 1$ items, which is $(n - 1)!$. No [double counting](!/combinatorics/counting-principles#4), because [the anchor](!#the-anchor) uniquely identifies each rotation class.
 
 The tool uses the anchoring approach because it produces unique arrangements directly. You never have to build $n!$ candidates and then collapse $n$-fold redundancy — every arrangement on screen is already a distinct circular permutation, as the [completed grid](!#the-completed-grid) shows card by card.`,
       before: ``,
@@ -1353,19 +1355,21 @@ The tool uses the anchoring approach because it produces unique arrangements dir
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Full permutation** — the linear case, $n!$ arrangements. The circular formula [divides out the n rotations](!#why-n-1-instead-of-n) of each linear one.
+      content: `[Full permutation](!/combinatorics/visual-tools/full-permutation) — the linear case, $n!$ arrangements. The circular formula [divides out the n rotations](!#why-n-1-instead-of-n) of each linear one.
 
-**Permutation with identical items** — when some of the $n$ items are indistinguishable. Reduces the count by the factorial of each repeat group's size.
+[Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — when some of the $n$ items are indistinguishable. Reduces the count by the factorial of each repeat group's size.
 
-**Partial permutation without repetition** — pick and arrange only $r$ items from a set of $n$. Formula $\\frac{n!}{(n - r)!}$.
+[Partial permutation without repetition](!/combinatorics/visual-tools/partial-permutation) — pick and arrange only $r$ items from a set of $n$. Formula $\\frac{n!}{(n - r)!}$.
 
-**Combinations** — selecting items where order doesn't matter. The companion concept to permutations.
+[Combinations](!/combinatorics/visual-tools/combination) — selecting items where order doesn't matter. The companion concept to permutations.
 
 **Necklace and bracelet counting** — generalizations where reflections (flips) are also factored out alongside rotations. The bracelet count for $n \\ge 3$ is $(n - 1)!/2$.
 
 **Cyclic groups** — the algebraic structure behind rotational symmetry. The group of rotations of a circle with $n$ marked positions is $\\mathbb{Z}/n\\mathbb{Z}$.
 
-**Combinatorics calculator** — to compute $(n - 1)!$ for arbitrary $n$ values beyond the visual cap, see the **circular permutation calculator**.`,
+**Combinatorics calculator** — to compute $(n - 1)!$ for arbitrary $n$ values beyond the visual cap, see the **circular permutation calculator**.
+
+[Permutation with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — reusing items around a circle breaks the rotation argument, because rotations of a repeated pattern can coincide.`,
       before: ``,
       after: ``,
       link: '',
@@ -1551,6 +1555,7 @@ The tool uses the anchoring approach because it produces unique arrangements dir
 
   return {
     props: {
+      relatedTools: getRelatedTools('circular-permutation'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1573,7 +1578,7 @@ The tool uses the anchoring approach because it produces unique arrangements dir
   }
 }
 
-export default function CircularPermutationVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function CircularPermutationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1729,6 +1734,7 @@ export default function CircularPermutationVisualizer({seoData, sectionsContent,
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>
