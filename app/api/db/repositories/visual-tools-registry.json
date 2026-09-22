@@ -18,15 +18,15 @@
         "No MIN_CHARS skip and no CAP_PER_SECTION at ledger stage - those are linking limits. 40 pending links across 21 sections exceed v3's cap of 5 per section and must be trimmed by the write pass.",
         "33 pending terms resolve outside linear-algebra and carry plan.crossSection; cross-subject linking is on hold, so they are excluded from the same-section write queue pending review."
       ],
-      "linearAlgebraLinksWritten": "2026-09-22",
-      "combinatoricsKeyTerms": "2026-09-22"
+      "linearAlgebraLinksWritten": "2026-09-22"
     },
     "lineThree": {
       "trigonometryWritten": "2026-09-20",
       "functionsWritten": "2026-09-20",
       "complex-numbersWritten": "2026-09-21",
       "calculusWritten": "2026-09-22",
-      "combinatoricsWritten": "2026-09-22"
+      "combinatoricsWritten": "2026-09-22",
+      "linear-algebraWritten": "2026-09-22"
     }
   },
   "tools": {
@@ -36584,44 +36584,20 @@
       },
       "relatedTools": [
         {
+          "key": "linear-algebra-hadamard-product",
+          "fromSection": "related-concepts",
+          "surface": "Hadamard product",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
           "key": "linear-algebra-matrix-addition",
           "fromSection": "related-concepts",
           "surface": "Matrix addition",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-13"
-        },
-        {
-          "key": "linear-algebra-matrix-scalar-multiplication",
-          "fromSection": "related-concepts",
-          "surface": "Scalar multiplication",
-          "method": "scan",
-          "status": "linked",
-          "added": "2026-09-13"
-        },
-        {
-          "key": "linear-algebra-matrix-transpose",
-          "fromSection": "related-concepts",
-          "surface": "Transpose",
-          "method": "scan",
-          "status": "linked",
-          "added": "2026-09-13"
-        },
-        {
-          "key": "linear-algebra-matrix-types",
-          "fromSection": "related-concepts",
-          "surface": "Identity matrix",
-          "method": "scan",
-          "status": "linked",
-          "added": "2026-09-13"
-        },
-        {
-          "key": "linear-algebra-matrix-inverse",
-          "fromSection": "related-concepts",
-          "surface": "Inverse matrix",
-          "method": "scan",
-          "status": "linked",
-          "added": "2026-09-13"
+          "added": "2026-09-22"
         },
         {
           "key": "linear-algebra-matrix-determinant",
@@ -36629,7 +36605,15 @@
           "surface": "Determinant",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-13"
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-inverse",
+          "fromSection": "related-concepts",
+          "surface": "Inverse matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
         },
         {
           "key": "linear-algebra-matrix-rank",
@@ -36637,15 +36621,55 @@
           "surface": "Rank",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-13"
+          "added": "2026-09-22"
         },
         {
-          "key": "linear-algebra-hadamard-product",
+          "key": "linear-algebra-matrix-scalar-multiplication",
           "fromSection": "related-concepts",
-          "surface": "Hadamard product",
+          "surface": "Scalar multiplication",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-13"
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-transpose",
+          "fromSection": "related-concepts",
+          "surface": "Transpose",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-types",
+          "fromSection": "related-concepts",
+          "surface": "Identity matrix",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-columns",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication by columns",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-rows",
+          "fromSection": "related-concepts",
+          "surface": "Matrix multiplication by rows",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-rows-columns",
+          "fromSection": "related-concepts",
+          "surface": "Rows and columns together",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-22"
         }
       ]
     },
@@ -58286,7 +58310,359 @@
       "section": "linear-algebra",
       "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-columns/index.jsx",
       "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
-      "relatedTerms": [],
+      "relatedTerms": [
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "stepping-through-av",
+            "lifting-out-a-column",
+            "running-the-tool",
+            "building-ab-by-columns",
+            "why-the-weight-comes-out-in-front",
+            "why-a-is-two-by-three",
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "generating-new-numbers",
+            "column-space-and-solvability"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "reading-the-plane",
+            "generating-new-numbers"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "generating-new-numbers"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "solutions",
+          "entity": "solution",
+          "sections": [
+            "column-space-and-solvability"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "basis",
+          "entity": "basis",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "basis"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "basis",
+              "target": {
+                "path": "/linear-algebra/vector-spaces",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "column space",
+          "entity": "column_space",
+          "sections": [
+            "column-space-and-solvability",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "column_space"
+          },
+          "links": [
+            {
+              "fromSection": "column-space-and-solvability",
+              "surface": "column space",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/fundamental-spaces",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "coordinate",
+          "entity": "coordinates",
+          "sections": [
+            "reading-the-plane"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "coordinates"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-plane",
+              "surface": "coordinate",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/basis",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "dimensions",
+          "entity": "dimension",
+          "sections": [
+            "why-a-is-two-by-three"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "dimension"
+          },
+          "links": [
+            {
+              "fromSection": "why-a-is-two-by-three",
+              "surface": "dimensions",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/dimension",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "reading-the-plane",
+            "generating-new-numbers",
+            "column-space-and-solvability",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "direction"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-plane",
+              "surface": "direction",
+              "target": {
+                "path": "/linear-algebra/vectors/properties",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "matrix",
+          "entity": "matrix",
+          "sections": [
+            "what-the-tool-shows",
+            "one-product-at-a-time",
+            "generating-new-numbers",
+            "building-ab-by-columns",
+            "column-space-and-solvability",
+            "why-a-is-two-by-three",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "matrix"
+          },
+          "links": [
+            {
+              "fromSection": "what-the-tool-shows",
+              "surface": "matrix",
+              "target": {
+                "path": "/linear-algebra/matrix",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "rank",
+          "entity": "rank",
+          "sections": [
+            "column-space-and-solvability",
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "rank"
+          },
+          "reason": "Not planted in \"column-space-and-solvability\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "reflection"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "reflection",
+              "target": {
+                "path": "/linear-algebra/transformations/geometric",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "rotation",
+          "entity": "rotation",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "rotation"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "rotation",
+              "target": {
+                "path": "/linear-algebra/transformations/geometric",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "span",
+          "entity": "span",
+          "sections": [
+            "column-space-and-solvability",
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "span"
+          },
+          "reason": "Not planted in \"column-space-and-solvability\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "square matrix",
+          "entity": "square_matrix",
+          "sections": [
+            "why-a-is-two-by-three"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "square_matrix"
+          },
+          "links": [
+            {
+              "fromSection": "why-a-is-two-by-three",
+              "surface": "square matrix",
+              "target": {
+                "path": "/linear-algebra/matrix/types",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "vector",
+          "entity": "vector",
+          "sections": [
+            "what-the-tool-shows",
+            "the-empty-bracket",
+            "one-product-at-a-time",
+            "reading-the-plane",
+            "building-ab-by-columns",
+            "column-space-and-solvability",
+            "why-a-is-two-by-three",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "vector"
+          },
+          "links": [
+            {
+              "fromSection": "what-the-tool-shows",
+              "surface": "vector",
+              "target": {
+                "path": "/linear-algebra/vectors",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "zero vector",
+          "entity": "zero_vector",
+          "sections": [
+            "generating-new-numbers"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "zero_vector"
+          },
+          "reason": "Not planted in \"generating-new-numbers\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        }
+      ],
       "note": "Created 2026-09-21. Line 1 done 2026-09-21. Line 2 term scan NOT run - relatedTerms is still empty and is Line 2's queue; the canonical scanner (line2-scan.py) is not in the repo. Line 3 pairs not run yet.",
       "diagramsModule": "app/components/linear-algebra/multiplication/vectorPictureDiagrams.js",
       "diagramStates": [
@@ -58307,7 +58683,33 @@
         "wiring": "C - ColumnPictureVisualizer had no explanations prop. Added additively as `explanations = null` plus a `stateKey` useMemo lifted out of the existing narration switch (setup / term / termComplete / regroup / summary / compute); the matched entry is appended to that step's narration line, which already runs through processContent.",
         "note": "6 states on the vector tab plus 4 on the matrix-by-matrix tab (MatrixProductVisualizer, reading=columns), which are routed to the single existing building-ab-by-columns section rather than given sections of their own - that tab is a secondary reading on this page. 4 units for 5 figures: one-product-at-a-time carries the two dashed-line states (one coordinate known, then both) as a vertical pair, because they are one argument. summary and compute share a figure - the plane is complete at step 10 and step 11 only changes the algebra.",
         "structure": "Original 9 sections keep their ids AND relative order; 5 inserted (the-empty-bracket, one-product-at-a-time, lifting-out-a-column, the-statement-and-the-arithmetic, running-the-tool). generating-new-numbers and reading-the-plane already existed and serve as control/theory targets, so only one new control section was needed. All 8 How-to-use items now end in an on-page link; none did before."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "what-the-tool-shows",
+          "surface": "matrix multiplication calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-rows",
+          "fromSection": "where-this-leads",
+          "surface": "puts the vector on the left",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-rows-columns",
+          "fromSection": "where-this-leads",
+          "surface": "both readings meet",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "linear-algebra-matrix-multiplication-rows": {
       "slug": "matrix-multiplication-rows",
@@ -58315,7 +58717,343 @@
       "section": "linear-algebra",
       "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-rows/index.jsx",
       "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
-      "relatedTerms": [],
+      "relatedTerms": [
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "stepping-through-vta",
+            "lifting-out-a-row",
+            "running-the-tool",
+            "building-ab-by-rows",
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "combination",
+          "entity": "combination",
+          "sections": [
+            "generating-new-numbers",
+            "row-space-and-row-equivalence"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the combinatorics section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "corner",
+          "entity": "differentiability",
+          "sections": [
+            "reading-the-plane"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the calculus section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "identity",
+          "entity": "identity",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiple",
+          "entity": "multiple",
+          "sections": [
+            "row-space-and-row-equivalence"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the arithmetic section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiplication",
+          "entity": "complex_number",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "range",
+          "entity": "range",
+          "sections": [
+            "generating-new-numbers"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "column space",
+          "entity": "column_space",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "column_space"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "column space",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/fundamental-spaces",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "coordinate",
+          "entity": "coordinates",
+          "sections": [
+            "reading-the-plane"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "coordinates"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-plane",
+              "surface": "coordinate",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/basis",
+                "section": "4"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "dimensions",
+          "entity": "dimension",
+          "sections": [
+            "why-a-is-three-by-two"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "dimension"
+          },
+          "links": [
+            {
+              "fromSection": "why-a-is-three-by-two",
+              "surface": "dimensions",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/dimension",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "direction",
+          "entity": "direction",
+          "sections": [
+            "reading-the-plane",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "direction"
+          },
+          "links": [
+            {
+              "fromSection": "reading-the-plane",
+              "surface": "direction",
+              "target": {
+                "path": "/linear-algebra/vectors/properties",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "gaussian elimination",
+          "entity": "gaussian_elimination",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "gaussian_elimination"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "Gaussian elimination",
+              "target": {
+                "path": "/linear-algebra/linear-systems/gaussian-elimination",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "matrix",
+          "entity": "matrix",
+          "sections": [
+            "what-the-tool-shows",
+            "one-product-at-a-time",
+            "reading-the-plane",
+            "building-ab-by-rows",
+            "row-space-and-row-equivalence",
+            "why-a-is-three-by-two",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "matrix"
+          },
+          "links": [
+            {
+              "fromSection": "what-the-tool-shows",
+              "surface": "matrix",
+              "target": {
+                "path": "/linear-algebra/matrix",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "rank",
+          "entity": "rank",
+          "sections": [
+            "row-space-and-row-equivalence"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "rank"
+          },
+          "reason": "Not planted in \"row-space-and-row-equivalence\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "row space",
+          "entity": "row_space",
+          "sections": [
+            "row-space-and-row-equivalence"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "row_space"
+          },
+          "links": [
+            {
+              "fromSection": "row-space-and-row-equivalence",
+              "surface": "row space",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/fundamental-spaces",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "span",
+          "entity": "span",
+          "sections": [
+            "row-space-and-row-equivalence",
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "span"
+          },
+          "reason": "Not planted in \"row-space-and-row-equivalence\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        },
+        {
+          "term": "transpose",
+          "entity": "transpose",
+          "sections": [
+            "why-a-is-three-by-two"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "transpose"
+          },
+          "links": [
+            {
+              "fromSection": "why-a-is-three-by-two",
+              "surface": "transpose",
+              "target": {
+                "path": "/linear-algebra/matrix/operations",
+                "section": "8"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "vector",
+          "entity": "vector",
+          "sections": [
+            "what-the-tool-shows",
+            "one-product-at-a-time",
+            "reading-the-plane",
+            "building-ab-by-rows",
+            "why-a-is-three-by-two"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "vector"
+          },
+          "links": [
+            {
+              "fromSection": "what-the-tool-shows",
+              "surface": "vector",
+              "target": {
+                "path": "/linear-algebra/vectors",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "zero vector",
+          "entity": "zero_vector",
+          "sections": [
+            "generating-new-numbers"
+          ],
+          "status": "dropped",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "zero_vector"
+          },
+          "reason": "Not planted in \"generating-new-numbers\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
+        }
+      ],
       "note": "Created 2026-09-21. Line 1 done 2026-09-21. Line 2 term scan NOT run - relatedTerms is still empty and is Line 2's queue; the canonical scanner (line2-scan.py) is not in the repo. Line 3 pairs not run yet.",
       "diagramsModule": "app/components/linear-algebra/multiplication/vectorPictureDiagrams.js",
       "diagramStates": [
@@ -58336,7 +59074,33 @@
         "wiring": "C - RowPictureVisualizer had no explanations prop. Added additively as `explanations = null` plus a `stateKey` useMemo lifted out of the existing narration switch, identical in shape to the columns page (the two components are exact mirrors).",
         "note": "6 states on the vector tab plus 4 on the matrix-by-matrix tab (reading=rows), routed to building-ab-by-rows. Same 4 units / 5 figures split as the columns page. Because this page uses the transpose of the columns page's matrix with the same weights, the frozen walk is numerically identical - [0,0] -> [4,2] -> [3,4] -> [12,4] - which the-statement-and-the-arithmetic now states explicitly instead of leaving it to look like a coincidence.",
         "structure": "Original 9 sections keep their ids AND relative order; 5 inserted, mirroring the columns page section for section. All 9 How-to-use items now end in an on-page link; none did before."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "what-the-tool-shows",
+          "surface": "matrix multiplication calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-columns",
+          "fromSection": "where-this-leads",
+          "surface": "puts the vector on the right",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-rows-columns",
+          "fromSection": "where-this-leads",
+          "surface": "the two readings meet",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     },
     "linear-algebra-matrix-multiplication-rows-columns": {
       "slug": "matrix-multiplication-rows-columns",
@@ -58344,7 +59108,396 @@
       "section": "linear-algebra",
       "pagePath": "pages/linear-algebra/visual-tools/matrix-multiplication-rows-columns/index.jsx",
       "component": "app/components/linear-algebra/multiplication/MatrixProductWrapper.jsx",
-      "relatedTerms": [],
+      "relatedTerms": [
+        {
+          "term": "angles",
+          "entity": "angle",
+          "sections": [
+            "the-invariant-in-four-products"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the trigonometry section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "argument",
+          "entity": "argument",
+          "sections": [
+            "why-two-by-two",
+            "running-the-tool"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "event",
+          "entity": "event",
+          "sections": [
+            "the-colour-swap"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the probability section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "expressions",
+          "entity": "expression",
+          "sections": [
+            "neither-reading-is-half"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the algebra section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "multiplications",
+          "entity": "complex_number",
+          "sections": [
+            "the-three-tabs",
+            "why-two-by-two",
+            "which-reading-answers-which-question"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the complex-numbers section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "transformations",
+          "entity": "transformation",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "dropped",
+          "reason": "Single-word match resolving to the functions section; ambiguous surface form, not a concept reference on this page."
+        },
+        {
+          "term": "basis",
+          "entity": "basis",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "basis"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "basis",
+              "target": {
+                "path": "/linear-algebra/vector-spaces",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "column space",
+          "entity": "column_space",
+          "sections": [
+            "which-reading-answers-which-question"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "column_space"
+          },
+          "links": [
+            {
+              "fromSection": "which-reading-answers-which-question",
+              "surface": "column space",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/fundamental-spaces",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "dimension",
+          "entity": "dimension",
+          "sections": [
+            "why-two-by-two",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "dimension"
+          },
+          "links": [
+            {
+              "fromSection": "why-two-by-two",
+              "surface": "dimension",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/dimension",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "directions",
+          "entity": "direction",
+          "sections": [
+            "the-three-tabs",
+            "the-colour-swap",
+            "why-two-by-two",
+            "generating-new-numbers",
+            "the-invariant-in-four-products",
+            "which-reading-answers-which-question",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "direction"
+          },
+          "links": [
+            {
+              "fromSection": "the-three-tabs",
+              "surface": "directions",
+              "target": {
+                "path": "/linear-algebra/vectors/properties",
+                "section": "2"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "dot product",
+          "entity": "dot_product",
+          "sections": [
+            "the-three-tabs",
+            "the-colour-swap"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "dot_product"
+          },
+          "links": [
+            {
+              "fromSection": "the-three-tabs",
+              "surface": "dot product",
+              "target": {
+                "path": "/linear-algebra/vectors/dot-product",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "gaussian elimination",
+          "entity": "gaussian_elimination",
+          "sections": [
+            "which-reading-answers-which-question"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "gaussian_elimination"
+          },
+          "links": [
+            {
+              "fromSection": "which-reading-answers-which-question",
+              "surface": "Gaussian elimination",
+              "target": {
+                "path": "/linear-algebra/linear-systems/gaussian-elimination",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "matrix",
+          "entity": "matrix",
+          "sections": [
+            "what-this-page-is-for",
+            "the-three-tabs",
+            "building-a-column-of-ab",
+            "why-two-by-two",
+            "neither-reading-is-half",
+            "the-invariant-in-four-products",
+            "which-reading-answers-which-question",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "matrix"
+          },
+          "links": [
+            {
+              "fromSection": "what-this-page-is-for",
+              "surface": "matrix",
+              "target": {
+                "path": "/linear-algebra/matrix",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "outer products",
+          "entity": "outer_product",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "outer_product"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "Outer products",
+              "target": {
+                "path": "/linear-algebra/matrix/operations",
+                "section": "13"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "rank",
+          "entity": "rank",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "rank"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "rank",
+              "target": {
+                "path": "/linear-algebra/matrix/rank",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "reflection"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "reflection",
+              "target": {
+                "path": "/linear-algebra/transformations/geometric",
+                "section": "5"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "rotation",
+          "entity": "rotation",
+          "sections": [
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "rotation"
+          },
+          "links": [
+            {
+              "fromSection": "where-this-leads",
+              "surface": "rotation",
+              "target": {
+                "path": "/linear-algebra/transformations/geometric",
+                "section": "3"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "span",
+          "entity": "span",
+          "sections": [
+            "which-reading-answers-which-question"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "span"
+          },
+          "links": [
+            {
+              "fromSection": "which-reading-answers-which-question",
+              "surface": "span",
+              "target": {
+                "path": "/linear-algebra/vector-spaces/span",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "term": "vector",
+          "entity": "vector",
+          "sections": [
+            "what-this-page-is-for",
+            "why-two-by-two",
+            "the-invariant-in-four-products",
+            "which-reading-answers-which-question",
+            "where-this-leads"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/linear-algebra/definitions",
+            "section": "vector"
+          },
+          "links": [
+            {
+              "fromSection": "what-this-page-is-for",
+              "surface": "vector",
+              "target": {
+                "path": "/linear-algebra/vectors",
+                "section": "1"
+              },
+              "method": "repository-link",
+              "added": "2026-09-22"
+            }
+          ]
+        }
+      ],
       "note": "Created 2026-09-21. Three tabs, all MatrixProductVisualizer, readings both (default, m*n entry steps), columns, rows. Line 1 done 2026-09-21. Line 2 term scan NOT run - relatedTerms is still empty and is Line 2's queue; the canonical scanner (line2-scan.py) is not in the repo, and a hand scan without it would poison that queue. Line 3 pairs not run yet.",
       "diagramsModule": "app/components/linear-algebra/multiplication/matrixProductDiagrams.js",
       "diagramStates": [
@@ -58368,7 +59521,33 @@
         "note": "9 narration states but only 6 figures: the component routes `gen` and `done` to the same drawTrail branch, so the plane is identical and only the algebra board differs. genColumns/doneColumns therefore share the-finished-product-by-columns, and genRows/doneRows share the-finished-product-by-rows. idleBoth and idleSingle likewise share the-empty-bracket - one merged section rather than two near-identical ones.",
         "structure": "Non-standard pass: this is an explanatory page, not a per-preset tool, so the original 9 sections keep their ids AND their relative order and 8 were inserted beside the material they belong to - 5 state sections plus 3 control sections (running-the-tool, steps-and-the-step-counter, generating-new-numbers) that exist so every How to use item has an anchor to land on. All 7 How-to-use items now end in an on-page link; 2 of the 7 already had a target, 5 did not.",
         "contentFix": "obj5 claimed a 2x3 times 3x2 product costs eighteen multiplications; m*k*n = 12. Replaced with a 3x3 product at twenty-seven, which is the point the sentence was making."
-      }
+      },
+      "relatedTools": [
+        {
+          "key": "linear-algebra-matrix-multiplication",
+          "fromSection": "which-reading-answers-which-question",
+          "surface": "definition itself",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-columns",
+          "fromSection": "which-reading-answers-which-question",
+          "surface": "by columns",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        },
+        {
+          "key": "linear-algebra-matrix-multiplication-rows",
+          "fromSection": "which-reading-answers-which-question",
+          "surface": "by rows",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-22"
+        }
+      ]
     }
   },
   "$stubTemplate": {

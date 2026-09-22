@@ -211,7 +211,10 @@ def process(tool_key):
 
 def main():
     apply = '--apply' in sys.argv
-    keys = sorted(k for k, v in REG['tools'].items() if v.get('section') == SECTION)
+    only = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--only=')), None)
+    only = set(only.split(',')) if only else None
+    keys = sorted(k for k, v in REG['tools'].items()
+                  if v.get('section') == SECTION and (only is None or k in only))
 
     tp = to = tu = tc = 0
     print('%-44s %8s %9s %10s' % ('tool', 'planted', 'over-cap', 'unmatched'))

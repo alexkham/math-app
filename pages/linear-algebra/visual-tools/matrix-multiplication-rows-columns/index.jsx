@@ -13,9 +13,11 @@ import diagrams from '@/app/components/linear-algebra/multiplication/matrixProdu
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import '@/pages/pages.css'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export default function MatrixMultiplicationRowsColumns({
-  instructions,
+  relatedTools, instructions,
   explanations,
   units,
   sectionsContent,
@@ -133,7 +135,7 @@ export default function MatrixMultiplicationRowsColumns({
               key: 'both',
               label: 'By both rows and columns',
               component: MatrixProductVisualizer,
-              props: { reading: 'both', layout: 'compact', explanations },
+              props: {reading: 'both', layout: 'compact', explanations },
             },
             {
               key: 'columns',
@@ -163,6 +165,7 @@ export default function MatrixMultiplicationRowsColumns({
       <br />
       <br />
 
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections} />
       <br />
       <br />
@@ -292,11 +295,11 @@ export async function getStaticProps() {
       title: `What this page is for`,
       content: `This page does not teach a way of multiplying. It shows how the two ways fit together.
 
-There is one product $AB$, and there are two honest decompositions of it. One builds it a column at a time out of the columns of $A$. The other builds it a row at a time out of the rows of $B$. Both compute every entry, both reach the same matrix, and neither is a shortcut or a special case of the other.
+There is one product $AB$, and there are two honest decompositions of it. One builds it a column at a time out of the columns of $A$. The other builds it a row at a time out of the rows of $B$. Both compute every entry, both reach the same [matrix](!/linear-algebra/matrix#1), and neither is a shortcut or a special case of the other.
 
 The reason there are exactly two is that a product has two sides and they play different parts. **The factor on the left gives up its columns. The factor on the right gives up its rows.** Whichever side you stand on, the other supplies the weights.
 
-A vector product shows only one half of this at a time, because one of its sides is a vector. With two matrices both halves are visible at once, and the figure here is arranged so you can watch the roles change hands rather than take the statement on trust.
+A [vector](!/linear-algebra/vectors#1) product shows only one half of this at a time, because one of its sides is a vector. With two matrices both halves are visible at once, and the figure here is arranged so you can watch the roles change hands rather than take the statement on trust.
 
 If the question is how to compute, either sibling page answers it. If the question is why the same numbers can be assembled two different ways, this is the page.`,
       after: ``,
@@ -307,9 +310,9 @@ If the question is how to compute, either sibling page answers it. If the questi
       title: `The three tabs`,
       content: `All three tabs run the same component on the same pair of matrices and differ only in the route.
 
-**By both rows and columns**, the tab that opens first, is the definition itself. Each step takes one whole row of $A$ and one whole column of $B$, pairs them term by term, adds, and lands one entry of $AB$. Two rows, two columns, four entries, four steps. Both readings are present in every step: the row belongs to $A$ and the column belongs to $B$, and neither is a piece or a weight — they are the two operands of one dot product.
+**By both rows and columns**, the tab that opens first, is the definition itself. Each step takes one whole row of $A$ and one whole column of $B$, pairs them term by term, adds, and lands one entry of $AB$. Two rows, two columns, four entries, four steps. Both readings are present in every step: the row belongs to $A$ and the column belongs to $B$, and neither is a piece or a weight — they are the two operands of one [dot product](!/linear-algebra/vectors/dot-product#1).
 
-**By columns of B** builds $AB$ [one column at a time](!#building-a-column-of-ab). Column $j$ is a weighted sum of the columns of $A$, with the weights taken from column $j$ of $B$. When the run ends, [every column of the product](!#the-finished-product-by-columns) has been assembled from the same fixed set of directions.
+**By columns of B** builds $AB$ [one column at a time](!#building-a-column-of-ab). Column $j$ is a weighted sum of the columns of $A$, with the weights taken from column $j$ of $B$. When the run ends, [every column of the product](!#the-finished-product-by-columns) has been assembled from the same fixed set of [directions](!/linear-algebra/vectors/properties#2).
 
 **By rows of A** builds $AB$ [one row at a time](!#building-a-row-of-ab). Row $i$ is a weighted sum of the rows of $B$, with the weights taken from row $i$ of $A$. Again the directions are fixed across the whole run; only the weights change from slice to slice, and [the finished rows](!#the-finished-product-by-rows) show it.
 
@@ -356,7 +359,7 @@ That makes it the right place to start and the wrong place to stop. It shows wha
 
 A product of an $m \\times k$ matrix with a $k \\times n$ matrix costs $m \\cdot k \\cdot n$ multiplications. At $2 \\times 2$ that is eight, which is enough to see structure and few enough to follow. A $3 \\times 3$ product is twenty-seven, and the figure stops being readable well before the argument lands.
 
-The shape also has to keep both readings drawable at once. With two rows and two columns in the product, every column of $AB$ is a plane vector and so is every row; and every row of $A$ and every column of $B$ is a plane vector too, which is what lets the both tab draw a row against a column and read the entry off as a projection. Change either outer dimension and one of the two families leaves the plane.
+The shape also has to keep both readings drawable at once. With two rows and two columns in the product, every column of $AB$ is a plane vector and so is every row; and every row of $A$ and every column of $B$ is a plane vector too, which is what lets the both tab draw a row against a column and read the entry off as a projection. Change either outer [dimension](!/linear-algebra/vector-spaces/dimension#1) and one of the two families leaves the plane.
 
 Random generation enforces the rest: no entry of $AB$ grows past a readable size, and no column or row of the product is allowed to be entirely zero, since a slice at the origin has no direction to draw. These are constraints on the picture. The algebra is indifferent to them.`,
       after: ``,
@@ -409,9 +412,9 @@ Nothing beyond the plain definition is used to reach any of the four.`,
       title: `Which reading answers which question`,
       content: `The two routes are equally valid and not equally useful. Which one to reach for depends on what is being asked.
 
-Read [by columns](!/linear-algebra/visual-tools/matrix-multiplication-columns) when the question is about reach. The set of all weighted sums of the columns of $A$ is its column space, so questions about which right-hand sides are attainable, whether $A\\mathbf{x} = \\mathbf{b}$ can be solved, what the span of a set of vectors covers and how many independent directions a matrix carries are all column questions.
+Read [by columns](!/linear-algebra/visual-tools/matrix-multiplication-columns) when the question is about reach. The set of all weighted sums of the columns of $A$ is its [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2), so questions about which right-hand sides are attainable, whether $A\\mathbf{x} = \\mathbf{b}$ can be solved, what the [span](!/linear-algebra/vector-spaces/span#1) of a set of vectors covers and how many independent directions a matrix carries are all column questions.
 
-Read [by rows](!/linear-algebra/visual-tools/matrix-multiplication-rows) when the question is about elimination. Row operations replace a row by a weighted sum of rows, so they are left multiplications, and elementary matrices, row equivalence and the factorisations that come out of Gaussian elimination all live on the row side.
+Read [by rows](!/linear-algebra/visual-tools/matrix-multiplication-rows) when the question is about elimination. Row operations replace a row by a weighted sum of rows, so they are left multiplications, and elementary matrices, row equivalence and the factorisations that come out of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination#1) all live on the row side.
 
 Read the [definition itself](!/visual-tools/matrix-multiplication), cell by cell, when the question is about cost or about a single entry. That route is the one that makes the price of a product visible.
 
@@ -530,9 +533,9 @@ The axes, the tick spacing and the plotted range are all recomputed from whateve
       title: `Where this leads`,
       content: `Two directions open from here, and they are the reason the series exists.
 
-The first is the decomposition that contains both readings. Write the product as a sum over the shared dimension, $AB = \\sum_p \\mathbf{a}_p \\mathbf{b}_p^{T}$, where $\\mathbf{a}_p$ is column $p$ of $A$ and $\\mathbf{b}_p^{T}$ is row $p$ of $B$. Each term is a rank-one matrix. Take a column of that sum and the column reading falls out; take a row and the row reading does. Outer products are where the two pictures are visibly the same object.
+The first is the decomposition that contains both readings. Write the product as a sum over the shared dimension, $AB = \\sum_p \\mathbf{a}_p \\mathbf{b}_p^{T}$, where $\\mathbf{a}_p$ is column $p$ of $A$ and $\\mathbf{b}_p^{T}$ is row $p$ of $B$. Each term is a [rank](!/linear-algebra/matrix/rank#1)-one matrix. Take a column of that sum and the column reading falls out; take a row and the row reading does. [Outer products](!/linear-algebra/matrix/operations#13) are where the two pictures are visibly the same object.
 
-The second is transformations. Feeding a standard basis vector into the column reading keeps exactly one column and discards the rest, so the columns of a matrix are the images of the basis vectors. Building a rotation, a reflection or a projection then becomes a question of deciding where the basis should land and writing those images down as columns, rather than recalling a formula.
+The second is transformations. Feeding a standard [basis](!/linear-algebra/vector-spaces#2) vector into the column reading keeps exactly one column and discards the rest, so the columns of a matrix are the images of the basis vectors. Building a [rotation](!/linear-algebra/transformations/geometric#3), a [reflection](!/linear-algebra/transformations/geometric#5) or a projection then becomes a question of deciding where the basis should land and writing those images down as columns, rather than recalling a formula.
 
 Both are natural next steps once the two readings are no longer competing for the same slot in your head.`,
       after: ``,
@@ -626,6 +629,7 @@ Both are natural next steps once the two readings are no longer competing for th
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-multiplication-rows-columns'),
       keyWords,
       instructions,
       explanations,

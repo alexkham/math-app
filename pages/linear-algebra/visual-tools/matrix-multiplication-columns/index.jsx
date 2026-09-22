@@ -14,12 +14,14 @@ import vectorDiagrams from '@/app/components/linear-algebra/multiplication/vecto
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import '@/pages/pages.css'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 const A = [[2, -1, 3], [1, 2, 0]]
 const V = [2, 1, 3]
 
 export default function MatrixMultiplicationColumns({
-  instructions,
+  relatedTools, instructions,
   avCopy,
   explanations,
   matrixTabExplanations,
@@ -136,7 +138,7 @@ export default function MatrixMultiplicationColumns({
               key: 'vector',
               label: 'Matrix × vector',
               component: ColumnPictureVisualizer,
-              props: { matrix: A, vector: V, content: avCopy, layout: 'compact', explanations },
+              props: {matrix: A, vector: V, content: avCopy, layout: 'compact', explanations },
             },
             {
               key: 'matrix',
@@ -160,6 +162,7 @@ export default function MatrixMultiplicationColumns({
       <br />
       <br />
 
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections} />
       <br />
       <br />
@@ -377,7 +380,7 @@ export async function getStaticProps() {
       title: `What the tool shows`,
       content: `The figure on this page never leaves the definition of the product. It computes $A\\mathbf{v}$ exactly as the definition says — entry $i$ is row $i$ of $A$ paired term by term with $\\mathbf{v}$ — and then regroups the same products a second way.
 
-Two things are on screen at once. On the left is the algebra: the six products of a $2 \\times 3$ matrix against a three-entry vector, landing one at a time in a bracket. On the right is the plane, where the answer is drawn as an arrow and every partial result is drawn with it.
+Two things are on screen at once. On the left is the algebra: the six products of a $2 \\times 3$ [matrix](!/linear-algebra/matrix#1) against a three-entry [vector](!/linear-algebra/vectors#1), landing one at a time in a bracket. On the right is the plane, where the answer is drawn as an arrow and every partial result is drawn with it.
 
 The colours carry one meaning each and never two. Blue is $A$ and anything built from $A$ — its columns, the scaled columns, the pieces of the answer. Amber is $\\mathbf{v}$ and the single numbers taken from it. Nothing in the figure is coloured because of where it sits; the colour says what role the quantity plays.
 
@@ -409,9 +412,9 @@ Use **Step** and **Back** on steps $7$ to $9$. They are the argument, and Run pa
       title: `Reading the plane`,
       content: `The right-hand panel is not decoration; it is the same computation drawn.
 
-During steps $1$ to $6$ the panel shows **dashed lines, not arrows**. A dashed vertical line means the first coordinate is known; a dashed horizontal line means the second is. One line on its own fixes nothing — every point along it is still possible. Only when both lines are drawn do they cross at a single point, and only then is there a vector to draw. That is the honest picture of the row-by-row route: **no intermediate step of it is a real quantity**.
+During steps $1$ to $6$ the panel shows **dashed lines, not arrows**. A dashed vertical line means the first [coordinate](!/linear-algebra/vector-spaces/basis#4) is known; a dashed horizontal line means the second is. One line on its own fixes nothing — every point along it is still possible. Only when both lines are drawn do they cross at a single point, and only then is there a vector to draw. That is the honest picture of the row-by-row route: **no intermediate step of it is a real quantity**.
 
-From step $7$ the panel changes character. Each regrouped column appears twice: dashed from the origin, which is the column of $A$ by itself, and solid, which is that same column stretched by its weight and laid tail to head on the previous arrow. The direction of the dashed arrow never changes. A negative weight sends the solid arrow backwards along the same line rather than into a new direction.
+From step $7$ the panel changes character. Each regrouped column appears twice: dashed from the origin, which is the column of $A$ by itself, and solid, which is that same column stretched by its weight and laid tail to head on the previous arrow. The [direction](!/linear-algebra/vectors/properties#2) of the dashed arrow never changes. A negative weight sends the solid arrow backwards along the same line rather than into a new direction.
 
 At the end three arrows run end to end from the origin to the answer. Every corner along that path is a genuine vector — a partial sum of columns — which is what the first route could not offer.`,
       after: ``,
@@ -469,7 +472,7 @@ Nothing was added to the definition. The same six products appear on both sides;
 
 Every possible $A\\mathbf{v}$ is a weighted sum of the columns of $A$, with the weights free to be anything. The set of all such sums is the **span** of the columns, called the **column space** of $A$. It is not a set of numbers you compute once; it is the entire reach of the matrix.
 
-That settles when $A\\mathbf{x} = \\mathbf{b}$ has a solution. A solution is a choice of weights that lands on $\\mathbf{b}$, so the system is solvable exactly when $\\mathbf{b}$ lies in the column space, and unsolvable otherwise no matter how the arithmetic is arranged. With the $2 \\times 3$ matrix on this page the three columns are plane vectors, so unless they all lie along one line, their combinations already cover the whole plane and every $\\mathbf{b}$ is reachable.
+That settles when $A\\mathbf{x} = \\mathbf{b}$ has a solution. A solution is a choice of weights that lands on $\\mathbf{b}$, so the system is solvable exactly when $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2), and unsolvable otherwise no matter how the arithmetic is arranged. With the $2 \\times 3$ matrix on this page the three columns are plane vectors, so unless they all lie along one line, their combinations already cover the whole plane and every $\\mathbf{b}$ is reachable.
 
 The number of genuinely independent directions among the columns is the **rank**. Three columns spanning a plane means one of them is redundant — there is more than one way to reach the same point, which is where extra solutions come from.
 
@@ -482,9 +485,9 @@ The number of genuinely independent directions among the columns is the **rank**
       title: `Why A is two by three`,
       content: `The shape on this page is chosen so the figure can be drawn, and the choice is worth explaining because it is easy to think it is arbitrary.
 
-Columns of $A$ have as many entries as $A$ has rows. Two rows means each column is a pair of numbers, which is a point in the plane and can be drawn. A matrix with three rows would have columns living in three dimensions, and the plane picture would be gone.
+Columns of $A$ have as many entries as $A$ has rows. Two rows means each column is a pair of numbers, which is a point in the plane and can be drawn. A matrix with three rows would have columns living in three [dimensions](!/linear-algebra/vector-spaces/dimension#1), and the plane picture would be gone.
 
-The three columns are deliberate too. A square matrix would let the eye slip into reading the picture as a grid of cells; a non-square one keeps the dimension argument visible. The vector must have one entry per column of $A$, because it supplies one weight per column — which is the real content of the rule that the inner dimensions must match. Hand the tool a vector of the wrong length and there is no weight for one of the columns, so the sum cannot be formed at all.
+The three columns are deliberate too. A [square matrix](!/linear-algebra/matrix/types#1) would let the eye slip into reading the picture as a grid of cells; a non-square one keeps the dimension argument visible. The vector must have one entry per column of $A$, because it supplies one weight per column — which is the real content of the rule that the inner dimensions must match. Hand the tool a vector of the wrong length and there is no weight for one of the columns, so the sum cannot be formed at all.
 
 The answer has two entries, one per row of $A$. **Weights count columns; the answer counts rows.** That single sentence is the dimension rule stated without reference to any procedure.`,
       after: ``,
@@ -568,7 +571,7 @@ The pips and the counter under the figure are position markers rather than contr
 
 The immediate destinations are **column space**, **span**, **rank** and the solvability of $A\\mathbf{x} = \\mathbf{b}$, all of which were stated above in terms of weights on fixed directions.
 
-Next is the fact that turns the reading into a tool. Take $\\mathbf{v}$ to be a standard basis vector — one entry equal to $1$ and the rest $0$. The weighted sum then keeps exactly one column and discards the others, so $A\\mathbf{e}_j$ is column $j$ of $A$. Read backwards, that says **the columns of a matrix are where the basis vectors land**. Building a rotation, a reflection or a projection stops being a formula to memorise and becomes a decision about where to send $\\mathbf{e}_1$ and $\\mathbf{e}_2$, written down as columns.
+Next is the fact that turns the reading into a tool. Take $\\mathbf{v}$ to be a standard [basis](!/linear-algebra/vector-spaces#2) vector — one entry equal to $1$ and the rest $0$. The weighted sum then keeps exactly one column and discards the others, so $A\\mathbf{e}_j$ is column $j$ of $A$. Read backwards, that says **the columns of a matrix are where the basis vectors land**. Building a [rotation](!/linear-algebra/transformations/geometric#3), a [reflection](!/linear-algebra/transformations/geometric#5) or a projection stops being a formula to memorise and becomes a decision about where to send $\\mathbf{e}_1$ and $\\mathbf{e}_2$, written down as columns.
 
 The mirror of this argument [puts the vector on the left](!/linear-algebra/visual-tools/matrix-multiplication-rows), where the matrix hands over its rows instead. That direction leads to elementary matrices, row equivalence and elimination rather than to spans and column spaces, and [both readings meet](!/linear-algebra/visual-tools/matrix-multiplication-rows-columns) once neither side is a vector.`,
       after: ``,
@@ -662,6 +665,7 @@ The mirror of this argument [puts the vector on the left](!/linear-algebra/visua
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-multiplication-columns'),
       keyWords,
       instructions,
       avCopy,

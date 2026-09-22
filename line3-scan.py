@@ -97,6 +97,15 @@ ALIASES = {
         'polar-rectangular': ['polar-rectangular', 'polar and rectangular', 'polar rectangular converter',
                               'polar form', 'rectangular form', 'polar-rectangular converter'],
     },
+    'linear-algebra': {
+        'linear-algebra-matrix-multiplication-columns': ['matrix multiplication by columns', 'by columns',
+                                                         'whole columns', 'column picture'],
+        'linear-algebra-matrix-multiplication-rows': ['matrix multiplication by rows', 'by rows',
+                                                      'whole rows', 'row picture'],
+        'linear-algebra-matrix-multiplication-rows-columns': ['rows and columns together',
+                                                              'both readings meet', 'the two readings meet',
+                                                              'rows and columns'],
+    },
     'calculus': {
         'calculus-average-rate-of-change': ['average rate of change', 'average rate', 'secant slope'],
         'calculus-continuity': ['continuity', 'continuity checker', 'continuous function',

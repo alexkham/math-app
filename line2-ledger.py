@@ -271,7 +271,14 @@ def build(tool_key):
 
 def main():
     apply = '--apply' in sys.argv
-    keys = sorted(k for k, v in REG['tools'].items() if v.get('section') == SECTION)
+    # --only=key1,key2 restricts the rebuild to named tools. Needed when a
+    # section is already done and a NEW tool is added later: a full re-run
+    # would regenerate relatedTerms for every tool and discard hand-made
+    # records (the Key Terms head records written by kt-record.py).
+    only = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--only=')), None)
+    only = set(only.split(',')) if only else None
+    keys = sorted(k for k, v in REG['tools'].items()
+                  if v.get('section') == SECTION and (only is None or k in only))
 
     tot = {'linked': 0, 'dropped': 0, 'pending': 0}
     before = 0

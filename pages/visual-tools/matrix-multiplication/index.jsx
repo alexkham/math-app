@@ -868,7 +868,13 @@ The tool guards against the first two by construction: the rows of $B$ are linke
 
 **Linear transformation** — the geometric meaning of a matrix; multiplication of matrices is composition of transformations.
 
-[Hadamard product](!/linear-algebra/visual-tools/hadamard-product) — the entrywise product $a_{i,j} b_{i,j}$, a different operation with a different symbol.`,
+[Hadamard product](!/linear-algebra/visual-tools/hadamard-product) — the entrywise product $a_{i,j} b_{i,j}$, a different operation with a different symbol.
+
+[Matrix multiplication by columns](!/linear-algebra/visual-tools/matrix-multiplication-columns) — the same product drawn in the plane, with each column of $A$ scaled by an entry of $\\mathbf{v}$ and laid tail to head.
+
+[Matrix multiplication by rows](!/linear-algebra/visual-tools/matrix-multiplication-rows) — the mirror reading, where each row of the result is a combination of the rows of $B$.
+
+[Rows and columns together](!/linear-algebra/visual-tools/matrix-multiplication-rows-columns) — the two readings side by side, showing which question each one answers.`,
       before: ``,
       after: ``,
       link: '',

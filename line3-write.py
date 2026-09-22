@@ -125,11 +125,21 @@ def wire_strip(raw, masked, key):
     edits.append((last_imp.end(), last_imp.end(),
                   "import RelatedTools from '@/app/components/related-tools/RelatedTools'" + nl +
                   "import { getRelatedTools } from '@/app/utils/getRelatedTools'" + nl))
-    # 2. first live props object
-    pm = re.search(r'props\s*:\s*\{', masked)
-    if not pm:
-        raise RuntimeError('no props object')
-    edits.append((pm.end(), pm.end(), nl + "      relatedTools: getRelatedTools('%s')," % key))
+    # 2. the props object getStaticProps RETURNS.
+    #
+    # Not simply the first `props: {` in the file: pages that build a tab strip
+    # in JSX declare `props: { ... }` for each child component, and the first
+    # one is then a CHILD's props. Injecting there puts getRelatedTools - which
+    # imports the 370 KB registry and is server-only - into the client render
+    # path, and the page never receives the prop at all.
+    gsp = re.search(r'export async function getStaticProps', masked)
+    if not gsp:
+        raise RuntimeError('no getStaticProps')
+    ret = re.search(r'return\s*\{\s*\n(\s*)props\s*:\s*\{', masked[gsp.end():])
+    if not ret:
+        raise RuntimeError('no return props inside getStaticProps')
+    at = gsp.end() + ret.end()
+    edits.append((at, at, nl + ret.group(1) + "  relatedTools: getRelatedTools('%s')," % key))
     # 3. component signature
     sm = re.search(r'export default function \w+\s*\(\s*\{\s*', masked)
     if not sm:
@@ -146,8 +156,15 @@ def wire_strip(raw, masked, key):
     return edits
 
 
+# --only=key1,key2 restricts the write to named tools. Needed when a section
+# is already meshed and NEW tools are added later: a full re-run would
+# rebuild relatedTools for every tool from the current scan and discard
+# curated records the scan no longer reproduces.
+ONLY = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--only=')), None)
+ONLY = set(ONLY.split(',')) if ONLY else None
+
 tot_links = tot_existing = tot_strips = 0
-for skey in sorted(TOOLS):
+for skey in sorted(k for k in TOOLS if ONLY is None or k in ONLY):
     tool = TOOLS[skey]
     recs = PAIRS.get(skey, [])
     path = file_of(tool)

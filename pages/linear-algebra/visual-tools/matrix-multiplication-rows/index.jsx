@@ -14,13 +14,15 @@ import vectorDiagrams from '@/app/components/linear-algebra/multiplication/vecto
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import '@/pages/pages.css'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 /* the transpose of the column page's matrix, so both pages land on (12, 4) */
 const A = [[2, 1], [-1, 2], [3, 0]]
 const V = [2, 1, 3]
 
 export default function MatrixMultiplicationRows({
-  instructions,
+  relatedTools, instructions,
   rowCopy,
   explanations,
   matrixTabExplanations,
@@ -137,7 +139,7 @@ export default function MatrixMultiplicationRows({
               key: 'vector',
               label: 'Vector × matrix',
               component: RowPictureVisualizer,
-              props: { matrix: A, vector: V, content: rowCopy, layout: 'compact', explanations },
+              props: {matrix: A, vector: V, content: rowCopy, layout: 'compact', explanations },
             },
             {
               key: 'matrix',
@@ -161,6 +163,7 @@ export default function MatrixMultiplicationRows({
       <br />
       <br />
 
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections} />
       <br />
       <br />
@@ -371,7 +374,7 @@ export async function getStaticProps() {
 
     obj1: {
       title: `What the tool shows`,
-      content: `This page puts the vector on the **left**. That single move changes which part of the matrix is handed over: $\\mathbf{v}^{T}A$ is assembled from the **rows** of $A$, with the entries of $\\mathbf{v}$ as the weights.
+      content: `This page puts the [vector](!/linear-algebra/vectors#1) on the **left**. That single move changes which part of the [matrix](!/linear-algebra/matrix#1) is handed over: $\\mathbf{v}^{T}A$ is assembled from the **rows** of $A$, with the entries of $\\mathbf{v}$ as the weights.
 
 The figure computes the product exactly as the definition says — entry $j$ is $\\mathbf{v}$ paired term by term with column $j$ of $A$ — and then regroups the same six products a second way. The left panel carries the algebra, the right panel draws the rows as arrows in the plane.
 
@@ -407,9 +410,9 @@ Work steps $7$ to $9$ with **Step** and **Back**. They contain the entire argume
       title: `Reading the plane`,
       content: `The panel on the right draws the same computation twice over, once badly and once well, and the contrast is the point.
 
-During steps $1$ to $6$ there are **dashed lines and no arrow**. A line fixes one coordinate of the answer and says nothing about the other; the answer is somewhere on it. When the second line appears the two cross at a point, and only then is there a vector. The route through the definition passes through nothing that is itself a vector.
+During steps $1$ to $6$ there are **dashed lines and no arrow**. A line fixes one [coordinate](!/linear-algebra/vector-spaces/basis#4) of the answer and says nothing about the other; the answer is somewhere on it. When the second line appears the two cross at a point, and only then is there a vector. The route through the definition passes through nothing that is itself a vector.
 
-From step $7$ the rows appear. Each row of $A$ is drawn dashed from the origin — the row as a direction in its own right — and then solid, stretched by its weight and moved so its tail sits at the head of the previous arrow. The dashed direction never moves. A negative weight walks backwards along the same line rather than opening a new one.
+From step $7$ the rows appear. Each row of $A$ is drawn dashed from the origin — the row as a [direction](!/linear-algebra/vectors/properties#2) in its own right — and then solid, stretched by its weight and moved so its tail sits at the head of the previous arrow. The dashed direction never moves. A negative weight walks backwards along the same line rather than opening a new one.
 
 The three solid arrows run end to end from the origin to the answer, and every corner is a partial sum of rows, a real vector at every stage.
 
@@ -467,7 +470,7 @@ Nothing has been added to the definition: the same six products stand on both si
       title: `Row space and row equivalence`,
       content: `Because every $\\mathbf{v}^{T}A$ is a weighted sum of the rows of $A$, the set of all of them is the **span** of those rows: the **row space** of $A$.
 
-That gives elimination its meaning. Adding a multiple of one row to another, scaling a row by a non-zero number, swapping two rows — each of these replaces a row with a weighted sum of rows, so the new matrix has rows that already lay inside the old row space, and the old rows can be recovered from the new ones. **Row operations do not change the row space.** Two matrices related by such operations are called **row equivalent**, and the row space is the thing they share.
+That gives elimination its meaning. Adding a multiple of one row to another, scaling a row by a non-zero number, swapping two rows — each of these replaces a row with a weighted sum of rows, so the new matrix has rows that already lay inside the old [row space](!/linear-algebra/vector-spaces/fundamental-spaces#3), and the old rows can be recovered from the new ones. **Row operations do not change the row space.** Two matrices related by such operations are called **row equivalent**, and the row space is the thing they share.
 
 This also explains what a row of zeros means at the end of elimination: the rows were not independent, and one of them was already a combination of the others. The count of rows that survive is the **rank**, and it is the same number the columns produce — but the reason it is the same is not obvious from this side, and is worth meeting separately.
 
@@ -480,11 +483,11 @@ Solving $A\\mathbf{x} = \\mathbf{b}$ by elimination is therefore a sequence of m
       title: `Why A is three by two`,
       content: `The shape here is not the shape on the columns page, and it cannot be.
 
-Rows of $A$ have as many entries as $A$ has columns. Two columns means every row is a pair of numbers, which is a point in the plane and can be drawn as an arrow. A matrix with three columns would have rows living in three dimensions and the plane figure would be gone — which is exactly what happens if the $2 \\times 3$ matrix from the columns page is used here unchanged.
+Rows of $A$ have as many entries as $A$ has columns. Two columns means every row is a pair of numbers, which is a point in the plane and can be drawn as an arrow. A matrix with three columns would have rows living in three [dimensions](!/linear-algebra/vector-spaces/dimension#1) and the plane figure would be gone — which is exactly what happens if the $2 \\times 3$ matrix from the columns page is used here unchanged.
 
 Three rows give three weights to spend, and the vector on the left must have one entry per row of $A$, since it supplies one weight per row. That is the dimension rule stated from the row side: **weights count rows; the answer counts columns**.
 
-The particular matrix on this page is the transpose of the one on the columns page, and the weights are the same, so both pages arrive at the same point $(12, 4)$. That coincidence is useful rather than accidental: it shows that the two readings are two decompositions of arithmetic that agrees, not two different answers.`,
+The particular matrix on this page is the [transpose](!/linear-algebra/matrix/operations#8) of the one on the columns page, and the weights are the same, so both pages arrive at the same point $(12, 4)$. That coincidence is useful rather than accidental: it shows that the two readings are two decompositions of arithmetic that agrees, not two different answers.`,
       after: ``,
       link: '',
     },
@@ -566,11 +569,11 @@ The pips and the counter under the figure are position markers rather than contr
       title: `Where this leads`,
       content: `The row reading is the entry point to elimination and everything built on it.
 
-An **elementary matrix** is the identity with one row operation already performed on it. Multiplying on the left, $EA$, applies that operation to $A$ — which is only possible because a left factor combines the rows of its partner, exactly as this page argues. Gaussian elimination is then a product of such matrices applied to $A$ in order, and the factorisations that come out of it, $A = LU$ among them, are bookkeeping for that product.
+An **elementary matrix** is the identity with one row operation already performed on it. Multiplying on the left, $EA$, applies that operation to $A$ — which is only possible because a left factor combines the rows of its partner, exactly as this page argues. [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination#1) is then a product of such matrices applied to $A$ in order, and the factorisations that come out of it, $A = LU$ among them, are bookkeeping for that product.
 
 The same reading explains why a row of zeros can appear during elimination and why a swap of rows is itself a multiplication rather than a side note.
 
-The mirror of this argument [puts the vector on the right](!/linear-algebra/visual-tools/matrix-multiplication-columns), where the matrix hands over its columns instead. That direction leads to span, column space and the question of which right-hand sides are reachable — a different set of questions from the ones elimination answers — and [the two readings meet](!/linear-algebra/visual-tools/matrix-multiplication-rows-columns) once both factors are matrices.`,
+The mirror of this argument [puts the vector on the right](!/linear-algebra/visual-tools/matrix-multiplication-columns), where the matrix hands over its columns instead. That direction leads to span, [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) and the question of which right-hand sides are reachable — a different set of questions from the ones elimination answers — and [the two readings meet](!/linear-algebra/visual-tools/matrix-multiplication-rows-columns) once both factors are matrices.`,
       after: ``,
       link: '',
     },
@@ -662,6 +665,7 @@ The mirror of this argument [puts the vector on the right](!/linear-algebra/visu
 
   return {
     props: {
+      relatedTools: getRelatedTools('linear-algebra-matrix-multiplication-rows'),
       keyWords,
       instructions,
       rowCopy,
