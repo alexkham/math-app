@@ -363,6 +363,28 @@
         ],
         "why": "The generator shows what a matrix is and what kinds exist."
       },
+      "matrix_multiplication_by_columns": {
+        "tool": "matrix-multiplication-columns",
+        "decided": "2026-09-22",
+        "runnersUp": [
+          "matrix-multiplication"
+        ]
+      },
+      "matrix_multiplication_by_rows": {
+        "tool": "matrix-multiplication-rows",
+        "decided": "2026-09-22",
+        "runnersUp": [
+          "matrix-multiplication"
+        ]
+      },
+      "matrix_multiplication_by_rows_and_columns": {
+        "tool": "matrix-multiplication-rows-columns",
+        "decided": "2026-09-22",
+        "runnersUp": [
+          "matrix-multiplication-columns",
+          "matrix-multiplication-rows"
+        ]
+      },
       "matrix_multiplication": {
         "tool": "matrix-multiplication",
         "decided": "2026-09-13",
@@ -6117,6 +6139,34 @@
       "mapped": "2026-09-13",
       "relatedTerms": [
         {
+          "term": "matrix multiplication by rows and columns",
+          "entity": "matrix_multiplication_by_rows_and_columns",
+          "sections": [
+            "2"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "matrix-multiplication-rows-columns",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-multiplication-rows-columns",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "matrixProductDiagrams.columnsComplete",
+                  "matrixProductDiagrams.rowsComplete"
+                ],
+                "arrangement": "sequence",
+                "newStates": []
+              },
+              "added": "2026-09-22",
+              "note": "Section 2 says each row of A is one equation and each column one unknown, then writes Ax as a combination of the columns - both readings of one product. Planted after the 2026-09-13 pass because the tool did not exist then."
+            }
+          ]
+        },
+        {
           "term": "augmented matrix",
           "entity": "augmented_matrix",
           "sections": [
@@ -7636,6 +7686,33 @@
       ],
       "mapped": "2026-09-13",
       "relatedTerms": [
+        {
+          "term": "matrix multiplication by rows",
+          "entity": "matrix_multiplication_by_rows",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "matrix-multiplication-rows",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-multiplication-rows",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "vectorPictureDiagrams.rows.allPieces"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-22",
+              "note": "Section 7 (Column and Row Interpretations) carries the row reading in its middle paragraph; the column reading is demonstrated on vectors/linear-combinations 6 and the both-readings view on linear-systems 2, so this section takes rows. Planted after the 2026-09-13 pass because the tool did not exist then."
+            }
+          ]
+        },
         {
           "term": "basis",
           "entity": "basis",
@@ -13393,6 +13470,33 @@
       ],
       "mapped": "2026-09-13",
       "relatedTerms": [
+        {
+          "term": "matrix multiplication by columns",
+          "entity": "matrix_multiplication_by_columns",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "matrix-multiplication-columns",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-multiplication-columns",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "vectorPictureDiagrams.columns.allPieces"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-22",
+              "note": "Section 6 asks whether b lies in the span of the columns and writes Ax = b for it - the column picture itself. Planted after the 2026-09-13 pass because the tool did not exist then."
+            }
+          ]
+        },
         {
           "term": "system of linear equations",
           "entity": "system_of_linear_equations",

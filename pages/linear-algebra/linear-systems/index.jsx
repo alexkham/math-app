@@ -660,6 +660,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
+import matrixProductDiagrams from '@/app/components/linear-algebra/multiplication/matrixProductDiagrams'
 
 
 export async function getStaticProps(){
@@ -1042,6 +1043,14 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   const demoUnits = {
+    bothReadings: demoUnitFrame({
+      svg: [matrixProductDiagrams.columnsComplete, matrixProductDiagrams.rowsComplete],
+      caption: 'The same product read down the columns, then across the rows',
+      text: 'The upper plane builds each column of the product as a combination of the columns on the left; the lower one builds each row as a combination of the rows on the right. Both walks end on the same matrix, which is why the sentence above can describe a row as an equation and a column as an unknown without contradiction &#8212; they are two readings of one product, not two products. Step through either reading on the',
+      href: '/linear-algebra/visual-tools/matrix-multiplication-rows-columns',
+      linkText: 'rows and columns visualizer',
+    }),
+  
     outcomes: demoUnitFrame({
       svg: [linearSystemDiagrams.unique, linearSystemDiagrams.none, linearSystemDiagrams.infinite],
       caption: 'Unique, none, infinitely many',
@@ -1106,6 +1115,8 @@ export default function LinearSystemsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-bothReadings'} dangerouslySetInnerHTML={{ __html: demoUnits.bothReadings }} />,
+          `The rest of this page works in the row reading, because elimination acts on equations; the column reading returns whenever the question is about span.`,
         ]
     },
     {

@@ -806,6 +806,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/vectorLinCombDiagrams'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
 
 
 export async function getStaticProps(){
@@ -1316,6 +1317,14 @@ const schemas = {
   // reading that state, and the contextual link, in one frame. Built here and
   // rendered as content-array items - never interpolated into sectionsContent.
   const demoUnits = {
+    columnPicture: demoUnitFrame({
+      svg: vectorPictureDiagrams.columns.allPieces,
+      caption: 'Av assembled from the columns of A',
+      text: 'Each column of A has been scaled by its entry of v and laid tail to head, and the last arrow lands on the answer. That walk is the picture behind the question this section asks: b is a linear combination of the columns exactly when some choice of weights ends the walk on b, and no choice of weights can leave the plane the columns span. Set your own weights and watch the walk change on the',
+      href: '/linear-algebra/visual-tools/matrix-multiplication-columns',
+      linkText: 'column picture visualizer',
+    }),
+  
     // Section 1 is the algebraic definition, so the symbolic tool is the right
     // one: it builds the combination entry by entry.
     definition: demoUnitFrame({
@@ -1416,6 +1425,8 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-columnPicture'} dangerouslySetInnerHTML={{ __html: demoUnits.columnPicture }} />,
+          `Row reduction, echelon forms and pivots are the machinery for deciding whether such a walk exists; the question they answer is the one stated here.`,
         ]
     },
     {

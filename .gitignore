@@ -74,3 +74,6 @@ scripts/
 
 # .gitignore
 .route-sync-profile
+
+#session-generated docs (handoffs, methodology, audits, demos)
+/session-docs/

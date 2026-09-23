@@ -3184,6 +3184,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/matrixAdditionDiagrams'
 import multiplicationDiagrams from '@/app/components/linear-algebra copy/matrix/multiplicationDiagrams'
 import transposeDiagrams from '@/app/components/linear-algebra copy/matrix/transposeDiagrams'
+import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
 
 
 export async function getStaticProps(){
@@ -4067,6 +4068,14 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   const demoUnits = {
+    rowPicture: demoUnitFrame({
+      svg: vectorPictureDiagrams.rows.allPieces,
+      caption: 'The product assembled from the rows',
+      text: 'Every piece drawn here is a row of the right-hand factor scaled by an entry of the left-hand row, laid tail to head until the row of the product is reached. Read this way the product never mentions a single entry: one whole row is consumed per step, which is what the row interpretation above claims and what makes the count of steps equal to the number of rows rather than to the number of entries. Follow one row at a time on the',
+      href: '/linear-algebra/visual-tools/matrix-multiplication-rows',
+      linkText: 'row picture visualizer',
+    }),
+  
     addition: demoUnitFrame({
       svg: matrixAdditionDiagrams.done,
       caption: 'A + B, every entry settled',
@@ -4212,6 +4221,8 @@ const schemas = {
             <ObjectTypeProfile data={productInterpretations} theme="navy" variant="stack" />
           </DiagramFrame>,
           `The two vector readings are worth holding together, because between them they explain the rank bound. Every column of $AB$ is a combination of the columns of $A$, so the column space of the product sits inside that of $A$; every row is a combination of the rows of $B$, so the row space sits inside that of $B$. Rank is the dimension of either, so $\\operatorname{rank}(AB)$ cannot exceed the smaller of the two — which is the inequality stated without proof on the [rank](!/linear-algebra/matrix/rank) page.`,
+                  <div key={'unit-rowPicture'} dangerouslySetInnerHTML={{ __html: demoUnits.rowPicture }} />,
+          `The outer-product form below is the third reading of the same product, assembling it from whole columns and rows at once rather than one at a time.`,
         ]
     },
     {
